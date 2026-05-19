@@ -22,7 +22,7 @@
 │   ├── core/                       # 配置读取与通用工具
 │   │   ├── config.py
 │   │   └── llm_json_utils.py
-│   ├── db/                         # Supabase 客户端与业务数据访问层
+│   ├── db/                         # 数据库与存储访问层；当前从 Supabase SDK 迁移到 PostgreSQL/OSS 抽象
 │   │   ├── supabase_client.py
 │   │   └── supabase_repo.py
 │   ├── parsing/                    # MinerU/OCR、招标文件解析和结构化解读
@@ -36,8 +36,10 @@
 │   └── export/                     # DOCX / Word 导出
 │       └── md_to_word.py
 ├── frontend/                       # Vite + React 前端
-├── sql/                            # 数据库 SQL
-├── rag_seed/water_resources/       # 水利行业 RAG 种子资料
+├── docker/                         # 本地 Docker 初始化脚本
+├── docker-compose.yml              # 本地 PostgreSQL + pgvector 基础设施
+├── sql/                            # 数据库 SQL；部分历史脚本仍含 Supabase 专属对象
+├── rag_seed/water_resources/       # 历史水利行业 RAG 种子资料，电力项目仅作迁移参考
 ├── parsed_outputs/                 # 文档解析产物，建议加入 .gitignore
 ├── uploads/                        # 上传文件，建议加入 .gitignore
 └── outputs/                        # 生成文件，建议加入 .gitignore

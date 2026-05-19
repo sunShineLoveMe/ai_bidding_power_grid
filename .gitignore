@@ -42,6 +42,7 @@ yarn-error.log*
 *.db
 *.sqlite3
 chroma_db/
+storage/
 
 # Project specific local directories (Large files, user uploads, generative outputs)
 outputs/

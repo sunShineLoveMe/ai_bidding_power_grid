@@ -7,7 +7,7 @@
 - CORS 不再默认开放所有来源，后端读取 `APP_CORS_ORIGINS` 作为白名单；生产环境禁止配置为 `*`。
 - `APP_LOCAL_ONLY=true` 时只允许本机或内网地址访问，适合单机试用和内网部署。
 - `APP_AUTH_ENABLED=true` 时接口要求 `X-App-Auth-Token` 或 `Authorization: Bearer <token>`，生产环境应配置足够长度的 `APP_AUTH_TOKEN`。
-- `APP_ENV=production` 或 `REQUIRE_STRICT_CONFIG=true` 时会启动严格配置校验，缺少 DeepSeek/DashScope、Supabase service role、OnlyOffice JWT 或使用弱占位值会直接拒绝启动。
+- `APP_ENV=production` 或 `REQUIRE_STRICT_CONFIG=true` 时会启动严格配置校验，缺少 DeepSeek/DashScope、数据库连接、对象存储、OnlyOffice JWT 或使用弱占位值会直接拒绝启动。
 - 500 错误默认返回通用提示，详细异常只写入后端日志；开发调试需要临时查看详细错误时，可在非生产环境设置 `APP_EXPOSE_DEBUG_ERRORS=true`。
 - 上传入口已增加扩展名和 MIME 校验，允许类型可通过 `ALLOWED_TENDER_EXTENSIONS`、`ALLOWED_KNOWLEDGE_EXTENSIONS`、`ALLOWED_ASSET_EXTENSIONS` 调整。
 
@@ -127,7 +127,7 @@ python main.py
 请不要提交以下内容：
 
 - `.env`
-- Supabase service role key
+- 数据库连接串、数据库密码、OSS AccessKey
 - LLM API key
 - MinerU token
 - ONLYOFFICE JWT secret

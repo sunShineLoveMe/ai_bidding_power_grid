@@ -2,14 +2,16 @@
 
 > 详细部署说明见 [deployment/quickstart.md](../deployment/quickstart.md)
 
+当前项目定位为电力/电网侧 AI 标书编制系统。默认交付路线是本地 Docker PostgreSQL + 本地文件存储，生产环境平移到阿里云 RDS PostgreSQL + OSS。Supabase 相关内容仅作为历史架构和迁移参考。
+
 ## 技术栈
 
 ### 后端
 
 - Python 3.9+
 - Flask / Flask-CORS
-- Supabase Python SDK
 - PostgreSQL / pgvector
+- 数据访问层迁移目标：标准 PostgreSQL 驱动或 ORM
 - ChromaDB 本地向量库兼容层
 - PyPDF2 / Mammoth / python-docx
 - Pillow 图片处理，用于企业资信库和产品库缩略图生成
@@ -32,9 +34,10 @@
 
 ### 存储与外部服务
 
-- Supabase PostgreSQL：业务数据、结构化解析结果、知识库元数据
-- Supabase Storage：招标文件、知识库文件、生成文档
-- Supabase pgvector：RAG 向量检索
+- 本地 Docker PostgreSQL：开发环境业务数据、结构化解析结果、知识库元数据
+- 阿里云 RDS PostgreSQL：生产环境数据库目标
+- 本地文件存储 / 阿里云 OSS：招标文件、知识库文件、生成文档
+- pgvector：RAG 向量检索
 - DashScope / OpenAI-compatible LLM：文本生成、Embedding
 - MinerU：复杂 PDF / OCR 解析
 - ONLYOFFICE Docs：终稿在线编辑，可选（需 Docker 部署）
@@ -46,8 +49,8 @@ flowchart LR
     U[用户浏览器] --> FE[Vite React 前端]
     FE --> API[Flask API]
 
-    API --> Storage[Supabase Storage]
-    API --> DB[(Supabase PostgreSQL)]
+    API --> Storage[本地 Storage / 阿里云 OSS]
+    API --> DB[(PostgreSQL / 阿里云 RDS)]
     DB --> Vec[(pgvector)]
 
     API --> Parser[文档解析层]

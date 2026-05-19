@@ -1,6 +1,6 @@
-# AI 标书系统
+# 电力 AI 标书系统
 
-> 面向水利工程建设企业的 AI 标书编制工作台，支持私有化部署。
+> 面向电力/电网企业的 AI 标书编制工作台，支持本地开发、私有化部署和阿里云交付。
 
 招标文件上传 → OCR 解析 → 结构化解读 → 分册大纲 → 章节正文 → 合规检查 → DOCX 导出，全流程 AI 辅助，企业知识库驱动，数据本地可控。
 
@@ -33,7 +33,7 @@
 → [详细说明](docs/features/compliance.md)
 
 ### 5. 企业私有 RAG 知识库
-pgvector 向量检索 + DashScope Rerank 重排 + 关键词兜底，支持图片资产内联、来源引用和模型追问建议。水利行业种子库 26 份 / 558 条向量分片开箱即用。
+pgvector 向量检索 + DashScope Rerank 重排 + 关键词兜底，支持图片资产内联、来源引用和模型追问建议。当前项目默认面向电力/电网场景建设企业知识库，历史水利种子库仅作为迁移参考。
 
 → [详细说明](docs/features/rag-knowledge-base.md)
 
@@ -56,8 +56,8 @@ flowchart LR
     U[用户浏览器] --> FE[Vite React 前端]
     FE --> API[Flask API]
 
-    API --> Storage[Supabase Storage]
-    API --> DB[(Supabase PostgreSQL)]
+    API --> Storage[本地 Storage / 阿里云 OSS]
+    API --> DB[(PostgreSQL / 阿里云 RDS)]
     DB --> Vec[(pgvector)]
 
     API --> Parser[文档解析层]
@@ -77,15 +77,15 @@ flowchart LR
     LLM --> API
 ```
 
-**技术栈**：Flask · React 18 · TypeScript · Ant Design 5 · Tiptap · Supabase (PostgreSQL + pgvector + Storage) · DeepSeek / DashScope · MinerU
+**技术栈**：Flask · React 18 · TypeScript · Ant Design 5 · Tiptap · PostgreSQL + pgvector · 本地 Storage / 阿里云 OSS · DeepSeek / DashScope · MinerU
 
-→ [完整架构说明](docs/architecture/overview.md)
+→ [文档中心](docs/README.md) · [完整架构说明](docs/architecture/overview.md)
 
 ---
 
 ## 快速开始
 
-> ⚠️ **首次启动前必做**：在 Supabase 里执行 [9 个必需的 SQL 脚本](docs/deployment/supabase-setup.md#必须执行否则功能异常) 并创建 [5 个 Storage Bucket](docs/deployment/supabase-setup.md#storage-buckets)。跳过任一步都会在对应功能触发时报错。
+> 当前默认路线：本地 Docker PostgreSQL + pgvector，后续生产平移到阿里云 RDS PostgreSQL + OSS。Supabase 文档仅作为历史环境和迁移参考。
 
 ```bash
 # 1. 安装后端依赖
@@ -97,20 +97,32 @@ cd frontend && npm install && npm run build && cd ..
 
 # 3. 配置环境变量
 cp .env.example .env
-# 编辑 .env，填写 DEEPSEEK_API_KEY、DASHSCOPE_API_KEY、SUPABASE_URL、SUPABASE_SERVICE_ROLE_KEY
+# 编辑 .env，填写 DEEPSEEK_API_KEY、DASHSCOPE_API_KEY，并确认 DATABASE_URL
 # 如需下载 DOCX 后目录页码直接准确，安装 LibreOffice 并确认 SOFFICE_BIN 路径
 
-# 4. 在 Supabase SQL Editor 执行 sql/ 目录下的脚本（详见 supabase-setup.md）
-# 已执行老库需补充执行：
-#   sql/20260510_seed_deepseek_v4_flash_pricing.sql
-#   sql/20260510_seed_deepseek_v4_pro_pricing.sql
+# 4. 启动本地 PostgreSQL
+docker compose up -d postgres
 
 # 5. 启动
 python main.py
 # 访问 http://127.0.0.1:3012
 ```
 
-→ [完整部署文档](docs/deployment/quickstart.md) · [安全配置](docs/deployment/security.md) · [Supabase 初始化](docs/deployment/supabase-setup.md)
+→ [完整部署文档](docs/deployment/quickstart.md) · [安全配置](docs/deployment/security.md) · [本地 Docker PostgreSQL](docs/deployment/local-postgres-docker.md) · [阿里云目标架构](docs/deployment/aliyun-target-architecture.md)
+
+### 本地 Docker PostgreSQL
+
+国内企业交付路线建议先在本机用 Docker PostgreSQL + pgvector 开发验证，后续平移到阿里云 RDS PostgreSQL + OSS。
+
+```bash
+docker compose up -d postgres
+```
+
+默认连接串：
+
+```env
+DATABASE_URL=postgresql://bidding:bidding_local_dev@127.0.0.1:15432/bidding
+```
 
 ### DeepSeek 写作模型
 
@@ -137,7 +149,7 @@ DASHSCOPE_API_KEY=your_dashscope_api_key
 
 系统设置 - 模型配置中会展示每个业务模块当前使用的模型；解读、大纲和语义复核等 Pro 推理阶段默认允许 300 秒服务端超时，前端对应请求允许 360 秒，避免大文件解读时前端先报 `timeout of 120000ms exceeded`。招标文件正文分片数量较多或正文超过约 8 万字时，系统会自动启用“大文件分段解读”：先用 `DEEPSEEK_INTERPRETATION_SEGMENT_MODEL` 对文档分段抽取资格、评分、风险和材料要点，再用 `DEEPSEEK_INTERPRETATION_MODEL` 做最终融合去重；分段大小和最大段数由 `INTERPRETATION_SEGMENT_MAX_CHARS`、`INTERPRETATION_SEGMENT_MAX_GROUPS` 控制。用量与成本中心会按 `provider`、`model`、`stage` 记录历史调用。DeepSeek V4 Flash 成本种子脚本按客户提供的价格口径写入：输入缓存命中 0.02 元 / 百万 tokens、输入缓存未命中 1 元 / 百万 tokens、输出 2 元 / 百万 tokens；DeepSeek V4 Pro 按输入缓存命中 0.025 元 / 百万 tokens、输入缓存未命中 3 元 / 百万 tokens、输出 6 元 / 百万 tokens 写入。当前系统按缓存未命中输入价保守估算，最终仍以 DeepSeek 账单为准。
 
-分册大纲落库采用“同项目串行锁 + 预生成章节 UUID + 批量写入 + Supabase 写入重试”的可靠性策略。规则版大纲、AI 精修大纲和前端重复流式请求都必须通过 `replace_bid_sections_from_outline()` 统一替换 `bid_sections`，避免网络抖动或并发 SSE 连接造成章节目录写入一半、被二次删除或 Word 导出目录错乱。详细机制见 [章节大纲生成](docs/features/outline-generation.md)。
+分册大纲落库采用“同项目串行锁 + 预生成章节 UUID + 批量写入 + 写入重试”的可靠性策略。规则版大纲、AI 精修大纲和前端重复流式请求都必须通过 `replace_bid_sections_from_outline()` 统一替换 `bid_sections`，避免网络抖动或并发 SSE 连接造成章节目录写入一半、被二次删除或 Word 导出目录错乱。当前实现仍处于从 Supabase SDK 向标准 PostgreSQL 数据访问层迁移的过程中，详细机制见 [章节大纲生成](docs/features/outline-generation.md)。
 
 ### DOCX 目录页码刷新
 
@@ -157,8 +169,9 @@ Mac M1/M2 使用 Homebrew 安装通常是 `/opt/homebrew/bin/soffice`；Linux �
 
 | 分类 | 文档 | 说明 |
 | --- | --- | --- |
+| 入口 | [文档中心](docs/README.md) | 新成员阅读顺序、文档分层、维护要求 |
 | 架构 | [系统架构总览](docs/architecture/overview.md) | 技术栈、架构图、业务流程 |
-| 架构 | [数据模型](docs/architecture/data-model.md) | 核心表、ER 图、Storage bucket |
+| 架构 | [数据模型](docs/architecture/data-model.md) | 核心表、ER 图、对象存储目录/Bucket |
 | 功能 | [章节大纲生成](docs/features/outline-generation.md) | 两阶段流式、知识库注入、章节数量规则 |
 | 功能 | [全文篇幅设置](docs/features/length-settings.md) | 字数分配、权重计算、补写机制 |
 | 功能 | [章节写作计划](docs/features/section-writing.md) | writing_plan 字段、生成时机 |
@@ -168,10 +181,13 @@ Mac M1/M2 使用 Homebrew 安装通常是 `/opt/homebrew/bin/soffice`；Linux �
 | 功能 | [成本统计](docs/features/cost-tracking.md) | Token 用量、多模型兼容 |
 | 功能 | [DOCX 导出](docs/features/docx-export.md) | 正式目录、页码域、章节快照、Word 标题层级 |
 | 部署 | [快速开始](docs/deployment/quickstart.md) | 安装、配置、启动 |
+| 部署 | [本地 Docker PostgreSQL](docs/deployment/local-postgres-docker.md) | 本地数据库、pgvector、Docker 资源建议 |
+| 部署 | [阿里云目标架构](docs/deployment/aliyun-target-architecture.md) | RDS PostgreSQL + OSS 生产部署路线 |
 | 部署 | [安全配置](docs/deployment/security.md) | CORS、认证、生产部署 |
-| 部署 | [Supabase 初始化](docs/deployment/supabase-setup.md) | SQL 脚本、补充表 |
+| 部署 | [Supabase 初始化](docs/deployment/supabase-setup.md) | 历史环境和迁移参考 |
 | 开发 | [API 接口参考](docs/development/api-reference.md) | 主要接口列表 |
 | 开发 | [项目目录结构](docs/development/project-structure.md) | 代码组织说明 |
+| 开发 | [文档制度](docs/development/documentation-standards.md) | 文档分层、维护时机、提交检查 |
 | 开发 | [路线图](docs/development/roadmap.md) | P0-P5 规划、已完成任务 |
 
 ---
@@ -179,8 +195,9 @@ Mac M1/M2 使用 Homebrew 安装通常是 `/opt/homebrew/bin/soffice`；Linux �
 ## 当前限制
 
 - PDF 解析质量取决于文件类型，扫描版建议走 MinerU/OCR
-- 水利行业种子库适合基础 RAG，不等同于完整行业知识库
-- 企业资质、人员、业绩、产品等私有资料需用户自行入库
+- 历史水利行业种子库只适合迁移参考，电力/电网知识库需要重新建设
+- 企业资质、人员、业绩、产品、设备、试验报告、运维案例等私有资料需用户自行入库
+- 数据访问层正在从 Supabase SDK 迁移到标准 PostgreSQL + 本地/OSS 存储抽象
 - 当前定位为单机版 / 私有化 MVP，尚未达到公网生产部署标准
 
 ---

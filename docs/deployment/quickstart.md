@@ -1,23 +1,27 @@
 # 快速开始
 
-> 安全配置详见 [security.md](./security.md)，Supabase 初始化详见 [supabase-setup.md](./supabase-setup.md)
+> 安全配置详见 [security.md](./security.md)，本地数据库详见 [local-postgres-docker.md](./local-postgres-docker.md)，阿里云目标架构详见 [aliyun-target-architecture.md](./aliyun-target-architecture.md)。
+
+当前项目默认面向电力/电网侧改造与国内企业交付。本地开发使用 Docker PostgreSQL + pgvector + 本地文件存储；生产目标为阿里云 RDS PostgreSQL + OSS。Supabase 相关文档仅作为历史环境和迁移参考。
 
 ## 前置检查清单
 
-在跑起来之前务必完成这 3 件事，否则首次启动必定报错：
+在跑起来之前务必完成这 4 件事：
 
-1. **准备好 Supabase 项目**（自建或 supabase.com 托管都可以），拿到 `SUPABASE_URL` 和 `SUPABASE_SERVICE_ROLE_KEY`。
-2. **执行必需的 SQL 脚本**（共 9 个），详见 [supabase-setup.md](./supabase-setup.md#必须执行否则功能异常)。跳过任何一个都会在对应功能触发时报错。
-3. **创建 5 个 Storage Buckets**，详见 [supabase-setup.md](./supabase-setup.md#storage-buckets)。
+1. **安装 Docker Desktop**，并按团队建议分配 6 CPU / 16 GB Memory / 4 GB Swap / 200 GB Disk。
+2. **启动本地 PostgreSQL**：执行 `docker compose up -d postgres`。
+3. **配置 `.env`**：至少确认 `DATABASE_URL`、`DB_PROVIDER`、`STORAGE_PROVIDER`、`LOCAL_STORAGE_ROOT`。
+4. **配置模型密钥**：填写 `DEEPSEEK_API_KEY` 和 `DASHSCOPE_API_KEY`。
 
 常见症状速查：
 
 | 现象 | 原因 | 解决 |
 | --- | --- | --- |
-| 日志反复打印 `Could not find the table 'public.app_users'` | 未执行 `20260429_app_users_and_onlyoffice_documents.sql` | 执行该 SQL 并 Reload schema |
-| 章节大纲保存 500 | 未执行 `20260426_create_bid_sections.sql` | 执行该 SQL |
-| 用量成本中心为空 | 未执行 `20260507_create_ai_usage_tracking.sql` | 执行该 SQL |
-| 上传招标文件 500，日志提示 Bucket 不存在 | Storage bucket 未创建 | 按 [supabase-setup.md](./supabase-setup.md#storage-buckets) 创建 |
+| `connection refused` 或连不上 `127.0.0.1:15432` | PostgreSQL 容器未启动 | `docker compose up -d postgres` |
+| Docker Desktop 容器列表为空 | Docker 重启后容器未恢复或数据被清理 | 在项目根目录重新执行 `docker compose up -d postgres` |
+| `extension "vector" is not available` | 没有使用 pgvector 镜像或初始化失败 | 确认镜像为 `pgvector/pgvector:pg16` |
+| 模型调用失败 | 未配置模型 API Key | 检查 `DEEPSEEK_API_KEY`、`DASHSCOPE_API_KEY` |
+| DOCX 目录页码不刷新 | 未配置 LibreOffice | 检查 `DOCX_REFRESH_FIELDS` 和 `SOFFICE_BIN` |
 
 ## 快速开始
 
@@ -46,6 +50,25 @@ npm run build
 cd ..
 ```
 
+### 2.1 启动本地 PostgreSQL
+
+```bash
+docker compose up -d postgres
+docker compose ps postgres
+```
+
+默认连接串：
+
+```env
+DATABASE_URL=postgresql://bidding:bidding_local_dev@127.0.0.1:15432/bidding
+```
+
+验证扩展：
+
+```bash
+docker compose exec postgres psql -U bidding -d bidding -c "select extname from pg_extension where extname in ('pgcrypto','vector') order by extname;"
+```
+
 前端开发模式：
 
 ```bash
@@ -53,7 +76,7 @@ cd frontend
 npm run dev
 ```
 
-### 2.1 运行后端 MVP 测试
+### 2.2 运行后端 MVP 测试
 
 项目已提供第一版后端 MVP 测试，覆盖健康检查、上传文件类型拦截、MinerU 解析失败状态透出、MinerU zip 导入、DOCX 导出格式回归、章节 API 参数校验和合规覆盖基础口径。测试不依赖真实 DashScope、MinerU 或 Supabase 调用，适合开发、实施和交付前快速检查主链路是否被破坏。
 
@@ -88,7 +111,7 @@ python -m unittest discover -s tests
 cp .env.example .env
 ```
 
-当前 `.env.example` 已覆盖模型、Supabase、MinerU、OnlyOffice、上传限制、安全开关、存储路径、企业画像和 Token 成本汇率。生产或客户环境至少需要重点确认以下配置：
+当前 `.env.example` 已覆盖模型、PostgreSQL、对象存储迁移目标、MinerU、OnlyOffice、上传限制、安全开关、存储路径、企业画像和 Token 成本汇率。生产或客户环境至少需要重点确认以下配置：
 
 ```ini
 # App / Security
@@ -128,16 +151,11 @@ DASHSCOPE_RETRY_MAX_DELAY_SECONDS=12
 DASHSCOPE_RETRY_STATUS_CODES=429,500,502,503,504
 AI_USAGE_USD_TO_CNY_RATE=7.2
 
-# Supabase
-SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_ANON_KEY=your_supabase_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
-
-SUPABASE_STORAGE_TENDER_BUCKET=tender-files
-SUPABASE_STORAGE_GENERATED_BUCKET=generated-docx
-SUPABASE_STORAGE_KNOWLEDGE_BUCKET=knowledge-files
-SUPABASE_STORAGE_QUALIFICATION_BUCKET=qualification-files
-SUPABASE_STORAGE_PRODUCT_BUCKET=product-files
+# PostgreSQL / Object Storage
+DB_PROVIDER=postgres
+DATABASE_URL=postgresql://bidding:bidding_local_dev@127.0.0.1:15432/bidding
+STORAGE_PROVIDER=local
+LOCAL_STORAGE_ROOT=storage
 
 # MinerU，可选
 MINERU_API_TOKEN=your_mineru_api_token
@@ -163,13 +181,13 @@ SOFFICE_BIN=/opt/homebrew/bin/soffice
 DOCX_REFRESH_TIMEOUT_SECONDS=180
 
 # 企业画像，可选；也可在系统设置页面维护
-ENTERPRISE_NAME=某水利工程建设企业
-ENTERPRISE_REGION=华中地区
-ENTERPRISE_INDUSTRY=水利水电工程建设与工程配套服务
-ENTERPRISE_BUSINESS_SCOPE=水利工程施工、金属结构件、机电设备配套、质量检验、交付保障和现场服务
-ENTERPRISE_ADVANTAGES=水利工程项目响应、质量安全管理、资料编制、供应链协同和现场履约能力
-ENTERPRISE_TARGET_CUSTOMERS=水利工程建设单位、总承包单位、监理单位和设备供应链配套单位
-ENTERPRISE_RESPONSE_STYLE=专业、严谨、合规、可落地；不得编造证书编号、人员姓名、合同金额、具体日期和未提供的企业业绩
+ENTERPRISE_NAME=某电力工程服务企业
+ENTERPRISE_REGION=华北地区
+ENTERPRISE_INDUSTRY=电力工程建设、设备供货、运维检修与技术服务
+ENTERPRISE_BUSINESS_SCOPE=输变电工程、配网工程、电力设备供货、安装调试、试验检测、运维检修、技术服务和项目交付保障
+ENTERPRISE_ADVANTAGES=具备电力项目响应、质量安全管理、设备供应链协同、现场施工组织、调试试验、运维服务和资料交付能力
+ENTERPRISE_TARGET_CUSTOMERS=国家电网、南方电网、发电集团、电力建设单位、工业园区和能源类企业
+ENTERPRISE_RESPONSE_STYLE=专业、严谨、合规、可落地；不得编造资质证书编号、人员姓名、业绩合同金额、具体日期和未提供的企业证明材料
 
 # ONLYOFFICE，可选
 ONLYOFFICE_DOCS_API_URL=http://127.0.0.1:8080/web-apps/apps/api/documents/api.js
@@ -177,7 +195,7 @@ ONLYOFFICE_JWT_SECRET=replace_with_a_strong_secret
 BACKEND_URL_FOR_DOCKER=host.docker.internal:3012
 ```
 
-模型、Embedding、超时时间、OnlyOffice 地址、存储目录和企业画像等非敏感配置也可以在「系统设置」页面调整。页面保存后会写入本地 `config/runtime_settings.json`，后端在下一次模型请求时读取该配置；该文件已加入 `.gitignore`，开源时只保留 `config/runtime_settings.example.json`。API Key、Supabase service role 等敏感项仍必须通过 `.env` 配置，不会保存在前端。
+模型、Embedding、超时时间、OnlyOffice 地址、存储目录和企业画像等非敏感配置也可以在「系统设置」页面调整。页面保存后会写入本地 `config/runtime_settings.json`，后端在下一次模型请求时读取该配置；该文件已加入 `.gitignore`，开源时只保留 `config/runtime_settings.example.json`。API Key、数据库连接串、对象存储密钥等敏感项仍必须通过 `.env` 配置，不会保存在前端。
 
 DeepSeek 写作模型通过 OpenAI-compatible 协议调用 `https://api.deepseek.com/chat/completions`，默认模型为 `deepseek-v4-flash`。知识库向量化和 Rerank 默认仍使用 DashScope，因此切换写作模型时不要删除 `DASHSCOPE_API_KEY`。DeepSeek/DashScope 文本调用共用基础重试与退避策略：普通文本生成和流式生成默认最多重试 2 次，遇到 `429,500,502,503,504`、连接异常或超时会按指数退避等待后重试；流式接口如果已经向前端输出了部分正文，则不会自动重试，避免重复拼接正文。相关参数可通过 `DASHSCOPE_MAX_RETRIES`、`DASHSCOPE_RETRY_BASE_DELAY_SECONDS`、`DASHSCOPE_RETRY_MAX_DELAY_SECONDS`、`DASHSCOPE_RETRY_STATUS_CODES` 和各类 timeout 配置调整。重试次数、是否最终成功、是否属于可重试错误会写入 AI 用量日志的 `metadata`，便于后续在「用量与成本」中审计单次标书生成的稳定性。
 

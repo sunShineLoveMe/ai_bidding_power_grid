@@ -1,6 +1,6 @@
 # 数据模型
 
-> Supabase 初始化 SQL 见 [deployment/supabase-setup.md](../deployment/supabase-setup.md)
+> 当前默认数据库为 PostgreSQL + pgvector。本地开发见 [local-postgres-docker.md](../deployment/local-postgres-docker.md)，生产目标见 [aliyun-target-architecture.md](../deployment/aliyun-target-architecture.md)。Supabase 初始化 SQL 仅作为历史环境和迁移参考。
 
 ## 数据模型
 
@@ -35,12 +35,14 @@ erDiagram
     KNOWLEDGE_DOCUMENTS ||--o{ DOCUMENT_CHUNKS : splits
 ```
 
-Storage bucket 建议：
+对象存储目录/Bucket 建议：
 
-| Bucket | 用途 | 建议权限 |
+| 本地目录 / OSS Bucket | 用途 | 建议权限 |
 | --- | --- | --- |
 | `tender-files` | 原始招标文件、补遗、答疑 | private |
 | `generated-docx` | 生成的 Word / Markdown / 导出归档 | private |
 | `knowledge-files` | 企业知识库资料、行业资料、历史标书 | private |
 | `qualification-files` | 资质、证书、人员、财务等资料 | private |
 | `product-files` | 产品手册、参数、图纸、案例材料 | private |
+
+本地开发阶段使用 `LOCAL_STORAGE_ROOT=storage` 模拟对象存储；阿里云生产阶段映射到 OSS 私有 Bucket。数据库中只保存 bucket/path、文件哈希、大小、类型和业务元数据，不直接保存大文件内容。
