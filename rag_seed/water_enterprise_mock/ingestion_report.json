@@ -1,0 +1,69 @@
+{
+  "generated_at": "2026-04-28T08:19:34.228604+00:00",
+  "total": 12,
+  "indexed": 12,
+  "skipped_existing": 0,
+  "total_chunks": 12,
+  "results": [
+    {
+      "title": "某水利工程建设企业画像",
+      "status": "indexed",
+      "chunks": 1
+    },
+    {
+      "title": "某水利设计咨询企业画像",
+      "status": "indexed",
+      "chunks": 1
+    },
+    {
+      "title": "施工企业资信资料清单",
+      "status": "indexed",
+      "chunks": 1
+    },
+    {
+      "title": "设计监理检测企业资信资料清单",
+      "status": "indexed",
+      "chunks": 1
+    },
+    {
+      "title": "水利项目人员配置模板",
+      "status": "indexed",
+      "chunks": 1
+    },
+    {
+      "title": "水利施工企业产品与服务目录",
+      "status": "indexed",
+      "chunks": 1
+    },
+    {
+      "title": "水利信息化产品目录",
+      "status": "indexed",
+      "chunks": 1
+    },
+    {
+      "title": "检测与试验能力目录",
+      "status": "indexed",
+      "chunks": 1
+    },
+    {
+      "title": "施工组织设计能力说明",
+      "status": "indexed",
+      "chunks": 1
+    },
+    {
+      "title": "质量安全环保水保能力说明",
+      "status": "indexed",
+      "chunks": 1
+    },
+    {
+      "title": "售后与缺陷责任期服务能力",
+      "status": "indexed",
+      "chunks": 1
+    },
+    {
+      "title": "模拟用户上传流程",
+      "status": "indexed",
+      "chunks": 1
+    }
+  ]
+}

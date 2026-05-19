@@ -1,0 +1,1242 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI标书系统</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --line: #e6ebf5;
+      --line-strong: #d8e1f2;
+      --text: #111a33;
+      --muted: #6b7890;
+      --primary: #3267ff;
+      --primary-dark: #244cf0;
+      --primary-soft: #edf3ff;
+      --purple: #6548ff;
+      --green: #16b36a;
+      --orange: #ff8a3d;
+      --red: #f35b5b;
+      --shadow: 0 14px 36px rgba(23, 42, 88, 0.08);
+      --shadow-soft: 0 8px 22px rgba(23, 42, 88, 0.06);
+      font-family: Inter, "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--bg);
+      min-width: 1180px;
+    }
+    button, input { font: inherit; }
+    button { border: 0; cursor: pointer; }
+    button:disabled { cursor: not-allowed; opacity: 0.52; }
+    a { color: var(--primary); text-decoration: none; }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 264px 1fr;
+      grid-template-rows: 80px 1fr;
+    }
+
+    .topbar {
+      grid-column: 1 / 3;
+      height: 80px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 2px 12px rgba(22, 35, 72, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px 0 34px;
+      z-index: 2;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #2f78ff, #4c63ff);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      box-shadow: 0 8px 18px rgba(50, 103, 255, 0.28);
+    }
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 16px;
+      color: #1f2942;
+    }
+    .settings-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: #1f2942;
+      padding: 10px 12px;
+      border-radius: 10px;
+    }
+    .settings-btn:hover { background: #f2f5fb; }
+    .version-badge {
+      padding: 10px 18px;
+      border: 1px solid #7ea3ff;
+      color: #1e63ff;
+      border-radius: 10px;
+      font-weight: 700;
+      background: #fff;
+    }
+
+    .sidebar {
+      grid-row: 2;
+      background: var(--panel);
+      border-right: 1px solid var(--line);
+      padding: 34px 20px;
+    }
+    .nav {
+      display: grid;
+      gap: 12px;
+    }
+    .nav-item {
+      width: 100%;
+      min-height: 70px;
+      border-radius: 12px;
+      background: transparent;
+      color: #3b4662;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 18px;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: left;
+    }
+    .nav-item:hover { background: #f2f5fb; }
+    .nav-item.active {
+      color: #1162ff;
+      background: #edf3ff;
+    }
+    .nav-icon {
+      width: 28px;
+      height: 28px;
+      border: 2px solid currentColor;
+      border-radius: 7px;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    .main {
+      grid-column: 2;
+      grid-row: 2;
+      padding: 24px 28px 42px;
+      overflow: auto;
+    }
+    .hero {
+      min-height: 238px;
+      border-radius: 16px;
+      border: 1px solid #d7e5ff;
+      background:
+        radial-gradient(circle at 88% 20%, rgba(50,103,255,0.10), transparent 26%),
+        linear-gradient(110deg, #f6fbff 0%, #eaf3ff 72%, #e4efff 100%);
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: 1fr 520px;
+      align-items: center;
+      padding: 34px 52px;
+      overflow: hidden;
+    }
+    .hero h1 {
+      margin: 0 0 24px;
+      font-size: 44px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+    .hero-tags {
+      color: #0f62ff;
+      font-size: 23px;
+      font-weight: 800;
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .hero p {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+      font-weight: 600;
+    }
+    .hero-art {
+      width: 520px;
+      max-width: 100%;
+      justify-self: end;
+      filter: drop-shadow(0 20px 34px rgba(50, 103, 255, 0.14));
+    }
+
+    .smart-card {
+      margin-top: 18px;
+      min-height: 138px;
+      border: 1px solid #e2e7f3;
+      border-radius: 14px;
+      background: linear-gradient(90deg, #fbfbff 0%, #ffffff 56%, #fbfdff 100%);
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      align-items: center;
+      gap: 24px;
+      padding: 24px 28px;
+    }
+    .smart-title {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .ai-cube {
+      width: 66px;
+      height: 66px;
+      border-radius: 15px;
+      background: linear-gradient(145deg, #8d61ff, #4c57ff);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 34px;
+      font-weight: 900;
+      box-shadow: 0 12px 24px rgba(101, 72, 255, 0.28);
+    }
+    .smart-title h2 {
+      margin: 0 0 8px;
+      color: #5944ff;
+      font-size: 26px;
+    }
+    .smart-title p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-weight: 600;
+    }
+    .smart-actions {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 18px;
+    }
+    .action-btn {
+      min-height: 56px;
+      border-radius: 10px;
+      border: 1px solid #7f86ff;
+      color: #5944ff;
+      background: #fff;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 18px;
+      white-space: nowrap;
+    }
+    .action-btn.primary {
+      background: linear-gradient(135deg, #5a47ff, #3267ff);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 12px 24px rgba(50, 103, 255, 0.22);
+    }
+    .action-btn:hover:not(:disabled) { transform: translateY(-1px); }
+
+    .content-grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: minmax(520px, 1fr) minmax(600px, 1.08fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow-soft);
+    }
+    .panel-header {
+      min-height: 58px;
+      padding: 18px 22px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .panel-title {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+    .panel-link {
+      color: #8a94a8;
+      font-size: 14px;
+      font-weight: 700;
+      background: transparent;
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      padding: 10px 14px 18px;
+    }
+    .tool-card {
+      min-height: 206px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      padding: 22px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+      box-shadow: 0 6px 14px rgba(23, 42, 88, 0.04);
+    }
+    .tool-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 22px;
+      font-weight: 900;
+    }
+    .tool-card strong { font-size: 16px; }
+    .tool-card span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+      font-weight: 600;
+    }
+
+    .recent-table {
+      width: calc(100% - 28px);
+      margin: 10px 14px 18px;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 12px;
+      font-size: 14px;
+    }
+    .recent-table th,
+    .recent-table td {
+      height: 42px;
+      border-bottom: 1px solid #eef2f8;
+      text-align: left;
+      padding: 0 12px;
+      color: #3f4a62;
+      white-space: nowrap;
+    }
+    .recent-table th {
+      background: #f8faff;
+      color: #7a8598;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .recent-table tr:last-child td { border-bottom: 0; }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      min-width: 62px;
+      justify-content: center;
+      height: 26px;
+      padding: 0 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .status.editing { color: #f08a28; background: #fff0df; }
+    .status.generating { color: #3267ff; background: #e8f0ff; }
+    .status.exported { color: #0e9f60; background: #e7f8ef; }
+    .status.parsed { color: #6548ff; background: #f0ecff; }
+
+    .stats-panel { margin-top: 18px; padding-bottom: 16px; }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      padding: 10px 18px 0;
+    }
+    .stat-card {
+      min-height: 112px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 16px 20px;
+      box-shadow: 0 6px 14px rgba(23, 42, 88, 0.035);
+    }
+    .stat-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      font-weight: 900;
+    }
+    .stat-card small {
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .stat-card strong {
+      display: block;
+      margin: 4px 0 3px;
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .workflow {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 18px;
+    }
+    .upload-zone {
+      margin: 12px 18px 18px;
+      border: 1px dashed #9ab7ff;
+      border-radius: 14px;
+      background: #f7faff;
+      min-height: 152px;
+      padding: 18px;
+      display: grid;
+      align-content: center;
+      gap: 10px;
+      text-align: center;
+    }
+    .upload-zone strong { color: #1a4fff; }
+    .upload-zone span {
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 13px;
+    }
+    .file-name {
+      display: none;
+      margin: 0 18px 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: #f4f7ff;
+      color: #355079;
+      font-size: 13px;
+      font-weight: 700;
+      word-break: break-all;
+    }
+    .step-list {
+      display: grid;
+      gap: 10px;
+      padding: 0 18px 18px;
+    }
+    .step-btn {
+      min-height: 48px;
+      border-radius: 10px;
+      background: #fff;
+      border: 1px solid var(--line-strong);
+      color: #33405c;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      text-align: left;
+    }
+    .step-btn.done {
+      color: #0e7d4b;
+      background: #effbf5;
+      border-color: #b9ecd2;
+    }
+    .step-btn.active {
+      color: #fff;
+      background: linear-gradient(135deg, #3267ff, #6548ff);
+      border-color: transparent;
+    }
+    .output-card {
+      padding: 18px;
+      min-height: 100%;
+    }
+    .result-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .tab-btn {
+      height: 34px;
+      padding: 0 13px;
+      border-radius: 9px;
+      background: #f2f5fb;
+      color: #66728a;
+      font-weight: 800;
+      font-size: 13px;
+    }
+    .tab-btn.active {
+      background: #e9f0ff;
+      color: #225fff;
+    }
+    .result-view {
+      min-height: 252px;
+      max-height: 520px;
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fbfcff;
+      padding: 16px;
+      color: #35425d;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      font-size: 14px;
+    }
+    .download-area {
+      margin-top: 12px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .download-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 38px;
+      padding: 0 14px;
+      border-radius: 10px;
+      background: #e9f0ff;
+      color: #225fff;
+      font-weight: 800;
+    }
+    #editor {
+      display: none;
+      margin-top: 14px;
+      height: 620px;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .assistant-button {
+      position: fixed;
+      right: 34px;
+      bottom: 28px;
+      z-index: 20;
+      height: 62px;
+      padding: 0 30px;
+      border-radius: 999px;
+      color: #fff;
+      background: linear-gradient(135deg, #3267ff, #6548ff);
+      box-shadow: 0 14px 30px rgba(72, 76, 255, 0.32);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 19px;
+      font-weight: 900;
+    }
+    .assistant-panel {
+      position: fixed;
+      right: 28px;
+      bottom: 104px;
+      width: 360px;
+      height: 540px;
+      z-index: 30;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: var(--shadow);
+      display: none;
+      grid-template-rows: auto 1fr auto;
+      overflow: hidden;
+    }
+    .assistant-panel.open { display: grid; }
+    .assistant-head {
+      min-height: 72px;
+      padding: 14px 16px;
+      border-bottom: 1px solid #eef2f8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .assistant-id {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .bot-face {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: #e9f0ff;
+      display: grid;
+      place-items: center;
+      color: #3267ff;
+      font-weight: 900;
+    }
+    .assistant-id strong { display: block; }
+    .assistant-id small {
+      color: var(--green);
+      font-weight: 800;
+    }
+    .assistant-close {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: transparent;
+      color: #7a8598;
+      font-size: 24px;
+    }
+    .messages {
+      padding: 16px;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: #fbfcff;
+    }
+    .message {
+      max-width: 86%;
+      border-radius: 14px;
+      padding: 11px 13px;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .message.ai {
+      align-self: flex-start;
+      background: #f1f4f9;
+      color: #35425d;
+    }
+    .message.user {
+      align-self: flex-end;
+      background: #dff0ff;
+      color: #244265;
+    }
+    .quick-questions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .quick-questions button {
+      min-height: 36px;
+      border-radius: 10px;
+      background: #eef3ff;
+      color: #3c6cff;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 6px 8px;
+    }
+    .assistant-input {
+      padding: 12px;
+      border-top: 1px solid #eef2f8;
+      display: grid;
+      grid-template-columns: 1fr 44px;
+      gap: 8px;
+      background: #fff;
+    }
+    .assistant-input input {
+      height: 44px;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      padding: 0 12px;
+      outline: none;
+    }
+    .assistant-input input:focus { border-color: #7ea3ff; }
+    .send-btn {
+      border-radius: 10px;
+      background: #3267ff;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      top: 92px;
+      transform: translateX(-50%) translateY(-16px);
+      min-width: 260px;
+      max-width: 560px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: #15213b;
+      color: #fff;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+      z-index: 50;
+      text-align: center;
+      font-weight: 700;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 1280px) {
+      body { min-width: 1060px; }
+      .hero { grid-template-columns: 1fr 380px; padding: 30px 36px; }
+      .hero-art { width: 380px; }
+      .smart-card { grid-template-columns: 1fr; }
+      .smart-actions { grid-template-columns: 1fr; }
+      .tool-grid { grid-template-columns: repeat(2, 1fr); }
+      .content-grid, .workflow { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">标</div>
+        <span>AI标书系统</span>
+      </div>
+      <div class="top-actions">
+        <button class="settings-btn" id="settingsBtn" type="button"><span>⚙</span><span>系统设置</span></button>
+        <span class="version-badge">v0.1 单机版</span>
+      </div>
+    </header>
+
+    <aside class="sidebar">
+      <nav class="nav" aria-label="主导航">
+        <button class="nav-item active" data-page="home" type="button"><span class="nav-icon">⌂</span><span>主页</span></button>
+        <button class="nav-item" data-page="knowledge" type="button"><span class="nav-icon">册</span><span>企业知识库</span></button>
+        <button class="nav-item" data-page="qualification" type="button"><span class="nav-icon">盾</span><span>企业资信库</span></button>
+        <button class="nav-item" data-page="products" type="button"><span class="nav-icon">箱</span><span>企业产品库</span></button>
+        <button class="nav-item" data-page="history" type="button"><span class="nav-icon">录</span><span>历史记录</span></button>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <section class="hero" aria-labelledby="heroTitle">
+        <div>
+          <h1 id="heroTitle">AI 标书工作台</h1>
+          <div class="hero-tags">
+            <span>企业单机部署版</span><span>·</span>
+            <span>本地知识库驱动</span><span>·</span>
+            <span>分章节生成</span><span>·</span>
+            <span>Word 导出</span>
+          </div>
+          <p>帮助企业快速完成资料入库、招标解析、标书生成与导出，适合非技术人员直接使用。</p>
+        </div>
+        <img class="hero-art" src="/assets/bid-workbench-hero.png" alt="标书工作台插图" />
+      </section>
+
+      <section class="smart-card" aria-labelledby="smartTitle">
+        <div class="smart-title">
+          <div class="ai-cube">AI</div>
+          <div>
+            <h2 id="smartTitle">智能标书</h2>
+            <p>上传招标文件，结合企业知识库、资信库、产品库，生成可编辑的标书初稿</p>
+          </div>
+        </div>
+        <div class="smart-actions">
+          <button class="action-btn primary" id="primaryUploadBtn" type="button">上传招标文件生成标书</button>
+          <button class="action-btn" id="catalogGenerateBtn" type="button">按目录生成技术标</button>
+          <button class="action-btn" id="businessMaterialBtn" type="button">生成商务响应材料</button>
+        </div>
+      </section>
+
+      <div class="content-grid">
+        <section class="panel" aria-labelledby="toolsTitle">
+          <div class="panel-header">
+            <h2 class="panel-title" id="toolsTitle">基础工具</h2>
+          </div>
+          <div class="tool-grid">
+            <article class="tool-card">
+              <div class="tool-icon" style="background:#3f86ff;">阅</div>
+              <strong>招标文件解读</strong>
+              <span>提取项目基础信息、技术要求、商务要求、评分标准</span>
+            </article>
+            <article class="tool-card">
+              <div class="tool-icon" style="background:#17bf67;">分</div>
+              <strong>评分项检查</strong>
+              <span>识别评分标准，检查内容覆盖情况</span>
+            </article>
+            <article class="tool-card">
+              <div class="tool-icon" style="background:#ff9148;">险</div>
+              <strong>废标项检查</strong>
+              <span>提示强制项与潜在废标风险</span>
+            </article>
+            <article class="tool-card">
+              <div class="tool-icon" style="background:#2f66d8;">W</div>
+              <strong>Word 导出</strong>
+              <span>按固定模板导出可编辑 Word 文档</span>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel" aria-labelledby="recentTitle">
+          <div class="panel-header">
+            <h2 class="panel-title" id="recentTitle">最近任务</h2>
+            <button class="panel-link" id="viewAllTasksBtn" type="button">查看全部 &gt;</button>
+          </div>
+          <table class="recent-table">
+            <thead>
+              <tr>
+                <th>项目名称</th>
+                <th>招标单位</th>
+                <th>创建时间</th>
+                <th>当前状态</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="recentTasksBody">
+              <tr>
+                <td>智慧园区管理平台建设项目</td>
+                <td>某某科技园</td>
+                <td>2026-04-21 14:32</td>
+                <td><span class="status editing">待编辑</span></td>
+                <td><a href="#workflow">查看</a></td>
+              </tr>
+              <tr>
+                <td>医疗信息化系统升级项目</td>
+                <td>某某医院</td>
+                <td>2026-04-20 09:18</td>
+                <td><span class="status generating">生成中</span></td>
+                <td><a href="#workflow">继续</a></td>
+              </tr>
+              <tr>
+                <td>智慧停车平台项目</td>
+                <td>某某城投公司</td>
+                <td>2026-04-19 16:45</td>
+                <td><span class="status exported">已导出</span></td>
+                <td><a href="#workflow">查看</a></td>
+              </tr>
+              <tr>
+                <td>能源管理系统采购项目</td>
+                <td>某某能源集团</td>
+                <td>2026-04-18 11:02</td>
+                <td><span class="status parsed">解析完成</span></td>
+                <td><a href="#workflow">生成</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+
+      <section class="panel stats-panel" aria-labelledby="statsTitle">
+        <div class="panel-header">
+          <h2 class="panel-title" id="statsTitle">知识库状态</h2>
+        </div>
+        <div class="stat-grid">
+          <article class="stat-card">
+            <div class="stat-icon" style="background:#e8f1ff;color:#2f73ff;">册</div>
+            <div><small>企业知识库文件数</small><strong>128</strong><small>文档、模板、制度等资料</small></div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon" style="background:#e8faef;color:#16a663;">盾</div>
+            <div><small>企业资信库文件数</small><strong>46</strong><small>资质证书、荣誉、业绩等</small></div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon" style="background:#fff0e4;color:#f0782e;">箱</div>
+            <div><small>企业产品库资料数</small><strong>32</strong><small>产品介绍、参数、案例等</small></div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon" style="background:#eeeaff;color:#6548ff;">时</div>
+            <div><small>历史任务数</small><strong>18</strong><small>已完成的标书任务总数</small></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="workflow" id="workflow" aria-labelledby="workflowTitle">
+        <div class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title" id="workflowTitle">标书生成流程</h2>
+          </div>
+          <input id="file" type="file" accept=".doc,.docx,.pdf,.txt" hidden />
+          <button class="upload-zone" id="selectFileBtn" type="button">
+            <strong>选择招标文件</strong>
+            <span>支持 Word、PDF、TXT。选择后点击第一步上传并纳入本地知识库处理流程。</span>
+          </button>
+          <div class="file-name" id="fileName"></div>
+          <div class="step-list">
+            <button class="step-btn active" id="uploadBtn" type="button"><span>1. 上传招标文件</span><span>开始</span></button>
+            <button class="step-btn" id="preBtn" type="button" disabled><span>2. AI 预分析</span><span>等待</span></button>
+            <button class="step-btn" id="chapterBtn" type="button" disabled><span>3. 提取章节格式</span><span>等待</span></button>
+            <button class="step-btn" id="designBtn" type="button" disabled><span>4. 生成章节设计</span><span>等待</span></button>
+            <button class="step-btn" id="generateBtn" type="button" disabled><span>5. 生成 Word 并在线编辑</span><span>等待</span></button>
+          </div>
+        </div>
+
+        <div class="panel output-card">
+          <div class="result-tabs">
+            <button class="tab-btn active" data-tab="log" type="button">运行结果</button>
+            <button class="tab-btn" data-tab="analysis" type="button">预分析</button>
+            <button class="tab-btn" data-tab="chapter" type="button">章节格式</button>
+            <button class="tab-btn" data-tab="design" type="button">章节设计</button>
+          </div>
+          <div class="result-view" id="resultView">等待选择并上传招标文件...</div>
+          <div class="download-area" id="download"></div>
+          <div id="editor">投标文件生成后将在这里加载内网在线编辑器。</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <button class="assistant-button" id="assistantToggle" type="button"><span>AI</span><span>AI 助手</span></button>
+  <section class="assistant-panel open" id="assistantPanel" aria-label="AI 标书助手">
+    <header class="assistant-head">
+      <div class="assistant-id">
+        <div class="bot-face">AI</div>
+        <div><strong>AI 标书助手</strong><small>● 在线</small></div>
+      </div>
+      <button class="assistant-close" id="assistantClose" type="button" aria-label="关闭">×</button>
+    </header>
+    <div class="messages" id="messages">
+      <div class="message ai">你好，我是 AI 标书助手。可解答系统使用、标书编写、资料入库等问题。</div>
+      <div class="quick-questions">
+        <button type="button" data-question="如何开始生成标书？">如何开始生成标书？</button>
+        <button type="button" data-question="企业知识库怎么用？">企业知识库怎么用？</button>
+        <button type="button" data-question="什么是评分项检查？">什么是评分项检查？</button>
+        <button type="button" data-question="如何导出 Word？">如何导出 Word？</button>
+      </div>
+      <div class="message user">我第一次使用，应该先做什么？</div>
+      <div class="message ai">建议先完善企业知识库、资信库和产品库，然后上传招标文件，系统会自动解析并生成标书目录。</div>
+    </div>
+    <form class="assistant-input" id="assistantForm">
+      <input id="assistantInput" placeholder="请输入问题..." autocomplete="off" />
+      <button class="send-btn" type="submit">➤</button>
+    </form>
+  </section>
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const state = {
+      userId: null,
+      biddingId: null,
+      analysis: null,
+      chapter: null,
+      design: null,
+      log: '等待选择并上传招标文件...',
+      activeTab: 'log',
+      currentFileName: ''
+    };
+    const onlyOfficeUrl = window.ONLYOFFICE_DOC_SERVER_URL || 'http://localhost:8080';
+    const resultView = document.getElementById('resultView');
+    const toastEl = document.getElementById('toast');
+
+    function showToast(message) {
+      toastEl.textContent = message;
+      toastEl.classList.add('show');
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(() => toastEl.classList.remove('show'), 2200);
+    }
+
+    function stringify(data) {
+      if (!data) return '暂无数据';
+      if (typeof data === 'string') return data;
+      return JSON.stringify(data, null, 2);
+    }
+
+    function setLog(title, data) {
+      state.log = `${title}\n\n${stringify(data)}`;
+      state.activeTab = 'log';
+      setActiveTab('log');
+      renderResult();
+    }
+
+    function setActiveTab(tab) {
+      state.activeTab = tab;
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tab === tab);
+      });
+      renderResult();
+    }
+
+    function renderResult() {
+      const map = {
+        log: state.log,
+        analysis: stringify(state.analysis),
+        chapter: stringify(state.chapter),
+        design: stringify(state.design)
+      };
+      resultView.textContent = map[state.activeTab] || '暂无数据';
+    }
+
+    function markStep(id, statusText, mode) {
+      const btn = document.getElementById(id);
+      if (!btn) return;
+      const badge = btn.querySelector('span:last-child');
+      if (badge) badge.textContent = statusText;
+      btn.classList.toggle('done', mode === 'done');
+      btn.classList.toggle('active', mode === 'active');
+    }
+
+    async function jsonFetch(url, options = {}) {
+      const res = await fetch(url, options);
+      const text = await res.text();
+      let data;
+      try { data = JSON.parse(text); } catch { data = text; }
+      if (!res.ok) throw new Error(typeof data === 'string' ? data : (data.error || JSON.stringify(data)));
+      return data;
+    }
+
+    async function ensureUser() {
+      if (state.userId) return state.userId;
+      const fingerprintId = localStorage.getItem('enshiBiddingFingerprint') || `enshi-bidding-${Date.now()}`;
+      localStorage.setItem('enshiBiddingFingerprint', fingerprintId);
+      const data = await jsonFetch('/api/users/identify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fingerprintId })
+      });
+      state.userId = data.userId;
+      return state.userId;
+    }
+
+    async function runStep(buttonId, runningText, fn) {
+      const button = document.getElementById(buttonId);
+      const oldDisabled = button.disabled;
+      button.disabled = true;
+      markStep(buttonId, runningText, 'active');
+      try {
+        const data = await fn();
+        markStep(buttonId, '完成', 'done');
+        return data;
+      } catch (error) {
+        markStep(buttonId, '失败', '');
+        showToast(error.message || '操作失败');
+        setLog('操作失败', error.message || String(error));
+        throw error;
+      } finally {
+        button.disabled = oldDisabled;
+      }
+    }
+
+    document.getElementById('selectFileBtn').onclick = () => document.getElementById('file').click();
+    document.getElementById('primaryUploadBtn').onclick = () => {
+      document.getElementById('workflow').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('file').click();
+    };
+    document.getElementById('catalogGenerateBtn').onclick = () => {
+      showToast('请先上传招标文件，再执行“AI 预分析”和“提取章节格式”。');
+      document.getElementById('workflow').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    document.getElementById('businessMaterialBtn').onclick = () => {
+      showToast('商务响应材料会在章节设计后随标书正文一起生成。');
+      document.getElementById('workflow').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    document.getElementById('file').onchange = event => {
+      const file = event.target.files[0];
+      const fileNameEl = document.getElementById('fileName');
+      if (!file) return;
+      state.currentFileName = file.name;
+      fileNameEl.style.display = 'block';
+      fileNameEl.textContent = `已选择：${file.name}`;
+      showToast('已选择招标文件，可以开始上传。');
+    };
+
+    document.getElementById('uploadBtn').onclick = async () => {
+      const file = document.getElementById('file').files[0];
+      if (!file) {
+        showToast('请先选择招标文件。');
+        return;
+      }
+      await runStep('uploadBtn', '上传中', async () => {
+        const userId = await ensureUser();
+        const form = new FormData();
+        form.append('file', file);
+        form.append('userId', userId);
+        const data = await jsonFetch('/api/bidding/upload', { method: 'POST', body: form });
+        state.biddingId = data.biddingId;
+        document.getElementById('preBtn').disabled = false;
+        markStep('preBtn', '可执行', 'active');
+        addCurrentTask(file.name, '已上传', '查看');
+        setLog('上传完成', data);
+        showToast('上传完成，下一步可执行 AI 预分析。');
+        return data;
+      });
+    };
+
+    document.getElementById('preBtn').onclick = async () => {
+      await runStep('preBtn', '分析中', async () => {
+        const data = await jsonFetch('/api/bidding/pre-analysis_bid', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ biddingId: state.biddingId })
+        });
+        state.analysis = data;
+        document.getElementById('chapterBtn').disabled = false;
+        markStep('chapterBtn', '可执行', 'active');
+        setLog('AI 预分析完成', data);
+        showToast('AI 预分析完成。');
+        return data;
+      });
+    };
+
+    document.getElementById('chapterBtn').onclick = async () => {
+      await runStep('chapterBtn', '提取中', async () => {
+        const data = await jsonFetch('/api/bidding/chapter-analysis_bid', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ biddingId: state.biddingId })
+        });
+        state.chapter = data;
+        document.getElementById('designBtn').disabled = false;
+        markStep('designBtn', '可执行', 'active');
+        setLog('章节格式提取完成', data);
+        showToast('章节格式提取完成。');
+        return data;
+      });
+    };
+
+    document.getElementById('designBtn').onclick = async () => {
+      await runStep('designBtn', '生成中', async () => {
+        const data = await jsonFetch('/api/bidding/chapter-design', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ biddingId: state.biddingId })
+        });
+        state.design = data;
+        document.getElementById('generateBtn').disabled = false;
+        markStep('generateBtn', '可执行', 'active');
+        setLog('章节设计完成', data);
+        showToast('章节设计完成，可以生成 Word。');
+        return data;
+      });
+    };
+
+    document.getElementById('generateBtn').onclick = async () => {
+      await runStep('generateBtn', '生成中', async () => {
+        const data = await jsonFetch('/api/bidding/generate-bid-document', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ biddingId: state.biddingId, chapterDesign: state.design })
+        });
+        setLog('Word 生成完成，正在加载在线编辑器', data);
+        document.getElementById('download').innerHTML = `<a class="download-link" href="${data.downloadUrl}" target="_blank">下载生成的 Word 文件</a>`;
+        addCurrentTask(state.currentFileName || '新建标书任务', '已导出', '查看');
+        try {
+          await loadOnlyOffice(data.editorConfig);
+        } catch (error) {
+          showToast('Word 已生成，OnlyOffice 未能加载，可直接下载文件。');
+        }
+        return data;
+      });
+    };
+
+    function loadScript(src) {
+      return new Promise((resolve, reject) => {
+        if (window.DocsAPI) return resolve();
+        const s = document.createElement('script');
+        s.src = src;
+        s.onload = resolve;
+        s.onerror = reject;
+        document.body.appendChild(s);
+      });
+    }
+
+    async function loadOnlyOffice(config) {
+      await loadScript(`${onlyOfficeUrl}/web-apps/apps/api/documents/api.js`);
+      const editor = document.getElementById('editor');
+      editor.style.display = 'block';
+      editor.innerHTML = '<div id="onlyoffice-editor" style="height:100%"></div>';
+      new DocsAPI.DocEditor('onlyoffice-editor', config);
+    }
+
+    function addCurrentTask(projectName, statusText, actionText) {
+      const body = document.getElementById('recentTasksBody');
+      const row = document.createElement('tr');
+      const statusClass = statusText === '已导出' ? 'exported' : statusText === '已上传' ? 'parsed' : 'editing';
+      const now = new Date();
+      const time = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+      row.innerHTML = `
+        <td>${projectName.replace(/\.[^.]+$/, '')}</td>
+        <td>本地上传</td>
+        <td>${time}</td>
+        <td><span class="status ${statusClass}">${statusText}</span></td>
+        <td><a href="#workflow">${actionText}</a></td>
+      `;
+      body.prepend(row);
+      while (body.children.length > 5) body.removeChild(body.lastElementChild);
+    }
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => setActiveTab(btn.dataset.tab));
+    });
+
+    document.querySelectorAll('.nav-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+        btn.classList.add('active');
+        if (btn.dataset.page !== 'home') {
+          showToast('该模块为单机版后续管理页面，当前首页先保留入口。');
+        }
+      });
+    });
+
+    document.getElementById('settingsBtn').onclick = () => {
+      showToast('系统设置页将在后续接入模型、路径和模板配置。');
+    };
+    document.getElementById('viewAllTasksBtn').onclick = () => {
+      showToast('历史记录完整列表将在后续页面中展示。');
+    };
+
+    const assistantPanel = document.getElementById('assistantPanel');
+    document.getElementById('assistantToggle').onclick = () => assistantPanel.classList.toggle('open');
+    document.getElementById('assistantClose').onclick = () => assistantPanel.classList.remove('open');
+
+    function appendMessage(role, text) {
+      const node = document.createElement('div');
+      node.className = `message ${role}`;
+      node.textContent = text;
+      document.getElementById('messages').appendChild(node);
+      node.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+
+    function assistantReply(question) {
+      const q = question.trim();
+      if (!q) return '';
+      if (q.includes('开始') || q.includes('生成')) {
+        return '先选择并上传招标文件，然后依次执行 AI 预分析、提取章节格式、生成章节设计，最后生成 Word。';
+      }
+      if (q.includes('知识库')) {
+        return '企业知识库用于保存公司介绍、历史标书、项目案例、制度模板和行业资料。生成正文时系统会检索相关内容作为参考。';
+      }
+      if (q.includes('评分')) {
+        return '评分项检查用于识别招标文件中的评分标准，并提醒投标正文是否覆盖关键得分点。当前首页保留入口，后续会扩展为独立检查能力。';
+      }
+      if (q.includes('Word') || q.includes('导出')) {
+        return '完成章节设计后点击“生成 Word 并在线编辑”，系统会生成可下载的 Word 文件；如果 OnlyOffice 可用，也会自动打开在线编辑区。';
+      }
+      return '第一版助手主要解答系统使用、资料入库和生成流程问题。建议先完善企业知识库、资信库、产品库，再上传招标文件生成标书。';
+    }
+
+    document.querySelectorAll('[data-question]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const question = btn.dataset.question;
+        appendMessage('user', question);
+        appendMessage('ai', assistantReply(question));
+      });
+    });
+
+    document.getElementById('assistantForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const input = document.getElementById('assistantInput');
+      const question = input.value.trim();
+      if (!question) return;
+      appendMessage('user', question);
+      input.value = '';
+      window.setTimeout(() => appendMessage('ai', assistantReply(question)), 180);
+    });
+  </script>
+</body>
+</html>

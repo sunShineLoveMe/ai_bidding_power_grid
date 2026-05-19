@@ -1,0 +1,166 @@
+{
+  "generated_at": "2026-04-28T06:40:36.905379+00:00",
+  "total": 26,
+  "indexed": 26,
+  "skipped_existing": 0,
+  "failed": [],
+  "total_chunks": 558,
+  "results": [
+    {
+      "title": "中华人民共和国招标投标法实施条例",
+      "status": "indexed",
+      "chunks": 8,
+      "error": ""
+    },
+    {
+      "title": "水利工程建设项目招标投标管理规定",
+      "status": "indexed",
+      "chunks": 6,
+      "error": ""
+    },
+    {
+      "title": "水利工程建设项目管理规定试行",
+      "status": "indexed",
+      "chunks": 4,
+      "error": ""
+    },
+    {
+      "title": "水利工程建设项目验收管理规定",
+      "status": "indexed",
+      "chunks": 4,
+      "error": ""
+    },
+    {
+      "title": "水利工程质量管理规定",
+      "status": "indexed",
+      "chunks": 7,
+      "error": ""
+    },
+    {
+      "title": "水利工程质量事故处理规定",
+      "status": "indexed",
+      "chunks": 4,
+      "error": ""
+    },
+    {
+      "title": "水利建设市场经营主体信用信息管理办法",
+      "status": "indexed",
+      "chunks": 6,
+      "error": ""
+    },
+    {
+      "title": "水利工程建设安全生产管理规定",
+      "status": "indexed",
+      "chunks": 5,
+      "error": ""
+    },
+    {
+      "title": "板芙镇蚙蜞塘水库除险加固工程招标文件提前公示",
+      "status": "indexed",
+      "chunks": 1,
+      "error": ""
+    },
+    {
+      "title": "桃江县花果山等19座小型水库除险加固工程项目五六标段",
+      "status": "indexed",
+      "chunks": 3,
+      "error": ""
+    },
+    {
+      "title": "汨罗市黄金水库等16座小型水库除险加固工程总承包EPC",
+      "status": "indexed",
+      "chunks": 1,
+      "error": ""
+    },
+    {
+      "title": "汨罗市2025年度青坑水库等10座小型水库除险加固工程总承包",
+      "status": "indexed",
+      "chunks": 1,
+      "error": ""
+    },
+    {
+      "title": "兰溪市双峰岭水库除险加固扩容工程勘察设计项目招标文件",
+      "status": "indexed",
+      "chunks": 27,
+      "error": ""
+    },
+    {
+      "title": "郏县老虎洞水库除险加固工程项目第一批监理招标文件",
+      "status": "indexed",
+      "chunks": 19,
+      "error": ""
+    },
+    {
+      "title": "喀什噶尔河灌区骨干工程节水改造灌区信息化建设项目I标招标文件",
+      "status": "indexed",
+      "chunks": 145,
+      "error": ""
+    },
+    {
+      "title": "塔里木河流域希尼尔水库除险加固工程施工监理I标二次招标文件",
+      "status": "indexed",
+      "chunks": 67,
+      "error": ""
+    },
+    {
+      "title": "塔里木河流域希尼尔水库除险加固工程坝基防渗处理施工标招标文件",
+      "status": "indexed",
+      "chunks": 151,
+      "error": ""
+    },
+    {
+      "title": "贵州省水利工程标准施工招标文件示范文本",
+      "status": "indexed",
+      "chunks": 91,
+      "error": ""
+    },
+    {
+      "title": "water_conservancy_standards_catalog",
+      "status": "indexed",
+      "chunks": 1,
+      "error": ""
+    },
+    {
+      "title": "water_conservancy_section_library",
+      "status": "indexed",
+      "chunks": 1,
+      "error": ""
+    },
+    {
+      "title": "water_conservancy_rag_ingestion_notes",
+      "status": "indexed",
+      "chunks": 1,
+      "error": ""
+    },
+    {
+      "title": "qualification_response_phrases",
+      "status": "indexed",
+      "chunks": 1,
+      "error": ""
+    },
+    {
+      "title": "business_response_phrases",
+      "status": "indexed",
+      "chunks": 1,
+      "error": ""
+    },
+    {
+      "title": "technical_construction_organization_phrases",
+      "status": "indexed",
+      "chunks": 1,
+      "error": ""
+    },
+    {
+      "title": "quality_safety_environment_phrases",
+      "status": "indexed",
+      "chunks": 1,
+      "error": ""
+    },
+    {
+      "title": "bid_document_checklist",
+      "status": "indexed",
+      "chunks": 1,
+      "error": ""
+    }
+  ]
+}
