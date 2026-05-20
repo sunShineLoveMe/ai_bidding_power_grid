@@ -101,6 +101,8 @@ def asset_file(filename):
     return send_from_directory('assets', filename)
 
 @app.route('/')
+@app.route('/login')
+@app.route('/register')
 @app.route('/bidding')
 @app.route('/interpretation')
 @app.route('/bid-editor')

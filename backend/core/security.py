@@ -4,6 +4,8 @@ import os
 from pathlib import Path
 from typing import Iterable
 
+import jwt
+from flask import g
 from flask import Request, current_app, jsonify, request
 from werkzeug.datastructures import FileStorage
 from werkzeug.exceptions import RequestEntityTooLarge
@@ -106,6 +108,10 @@ def validate_startup_security() -> None:
         token = os.getenv("APP_AUTH_TOKEN", "").strip()
         if token in PLACEHOLDER_VALUES or len(token) < 24:
             missing.append("APP_AUTH_TOKEN")
+    if env_bool("APP_LOGIN_ENABLED", False):
+        secret = session_secret()
+        if secret in PLACEHOLDER_VALUES or len(secret) < 24:
+            missing.append("APP_SESSION_SECRET")
 
     if missing:
         raise RuntimeError(f"生产环境缺少或使用弱配置: {', '.join(sorted(set(missing)))}")
@@ -116,13 +122,66 @@ def _client_is_local(req: Request) -> bool:
     return remote in {"127.0.0.1", "::1", "localhost"} or remote.startswith("192.168.") or remote.startswith("10.")
 
 
+def session_secret() -> str:
+    return (
+        os.getenv("APP_SESSION_SECRET", "").strip()
+        or os.getenv("ONLYOFFICE_JWT_SECRET", "").strip()
+        or os.getenv("APP_AUTH_TOKEN", "").strip()
+    )
+
+
+def create_session_token(user: dict, expires_hours: int | None = None) -> str:
+    from datetime import datetime, timedelta, timezone
+
+    ttl = expires_hours or int(os.getenv("APP_SESSION_EXPIRES_HOURS", "72") or 72)
+    now = datetime.now(timezone.utc)
+    payload = {
+        "sub": str(user.get("id")),
+        "username": user.get("username"),
+        "display_name": user.get("display_name") or user.get("username"),
+        "role": user.get("role") or "member",
+        "iat": int(now.timestamp()),
+        "exp": int((now + timedelta(hours=ttl)).timestamp()),
+    }
+    return jwt.encode(payload, session_secret(), algorithm="HS256")
+
+
+def decode_session_token(token: str) -> dict | None:
+    if not token:
+        return None
+    try:
+        return jwt.decode(token, session_secret(), algorithms=["HS256"])
+    except Exception:
+        return None
+
+
+def _request_session_payload() -> dict | None:
+    supplied = ""
+    auth = request.headers.get("Authorization", "").strip()
+    if auth.lower().startswith("bearer "):
+        supplied = auth[7:].strip()
+    if not supplied:
+        supplied = request.cookies.get("app_session", "").strip()
+    return decode_session_token(supplied)
+
+
 def enforce_request_guard() -> tuple[object, int] | None:
     if request.method == "OPTIONS":
         return None
     if request.path.startswith("/assets/") or request.path.startswith("/api/health"):
         return None
+    if not request.path.startswith("/api/"):
+        return None
     if env_bool("APP_LOCAL_ONLY", False) and not _client_is_local(request):
         return jsonify({"error": "当前服务仅允许本地或内网访问。"}), 403
+    if env_bool("APP_LOGIN_ENABLED", False):
+        if request.path in {"/api/users/login", "/api/users/register"}:
+            return None
+        payload = _request_session_payload()
+        if not payload:
+            return jsonify({"error": "请先登录后再访问。"}), 401
+        g.current_user = payload
+        return None
     if not env_bool("APP_AUTH_ENABLED", False):
         return None
 

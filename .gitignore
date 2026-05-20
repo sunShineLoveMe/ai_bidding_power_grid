@@ -54,3 +54,6 @@ tender_references/
 # Logs
 *.log
 .antigravitycli/
+
+#skills
+.agents/

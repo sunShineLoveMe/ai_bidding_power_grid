@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from 'react';
-import { BookOpen, Box, CircleDollarSign, FileClock, FileSearch, Home, Settings, ShieldCheck, Sparkles } from 'lucide-react';
+import { BookOpen, Box, CircleDollarSign, FileClock, FileSearch, Home, LogOut, Settings, ShieldCheck, Sparkles, UserRound } from 'lucide-react';
 import { Button, Tag } from 'antd';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -7,6 +7,8 @@ import { GlobalLoading } from '../common/GlobalLoading';
 import { BrandMark } from '../common/BrandMark';
 import { KnowledgeSearchDrawer } from '../../pages/KnowledgeBase/KnowledgeSearchDrawer';
 import { useLoadingStore } from '../../stores/loadingStore';
+import { useAuthStore } from '../../stores/authStore';
+import { logout } from '../../api/auth';
 
 const navItems = [
   { path: '/', label: '主页', icon: Home },
@@ -23,7 +25,18 @@ export function AppLayout({ children }: PropsWithChildren): JSX.Element {
   const navigate = useNavigate();
   const [knowledgeAssistantOpen, setKnowledgeAssistantOpen] = useState(false);
   const pendingCount = useLoadingStore(state => state.pendingCount);
+  const user = useAuthStore(state => state.user);
+  const clearSession = useAuthStore(state => state.clearSession);
   const loadingLocked = pendingCount > 0;
+
+  async function handleLogout() {
+    try {
+      await logout();
+    } finally {
+      clearSession();
+      navigate('/login', { replace: true });
+    }
+  }
 
   return (
     <div className="h-screen overflow-hidden bg-slate-50 text-slate-950">
@@ -33,8 +46,15 @@ export function AppLayout({ children }: PropsWithChildren): JSX.Element {
           <span>AI标书系统</span>
         </div>
         <div className="flex items-center gap-5">
+          <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-bold text-slate-600">
+            <UserRound size={16} />
+            <span>{user?.displayName || user?.username || '当前用户'}</span>
+          </div>
           <Button type="text" icon={<Settings size={18} />} onClick={() => navigate('/settings')}>
             系统设置
+          </Button>
+          <Button type="text" icon={<LogOut size={18} />} onClick={handleLogout}>
+            退出
           </Button>
           <Tag className="m-0 rounded-lg border-blue-300 px-4 py-1.5 text-base font-bold text-blue-600">v0.1 单机版</Tag>
         </div>
@@ -83,7 +103,7 @@ export function AppLayout({ children }: PropsWithChildren): JSX.Element {
 
       <footer className="fixed bottom-0 left-0 right-0 z-30 flex h-12 items-center justify-between border-t border-slate-200 bg-white px-7 text-sm font-semibold text-slate-500">
         <span>企业单机部署版 · 招标项目 · 知识库问答 · 标书编制</span>
-        <span>数据本地可控 · 支持内网部署 · 面向水利招投标场景</span>
+        <span>数据本地可控 · 支持内网部署 · 面向电网投标场景</span>
       </footer>
     </div>
   );

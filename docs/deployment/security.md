@@ -30,6 +30,10 @@
 | `REQUIRE_STRICT_CONFIG` | 生产建议 `true` | `false` / `true` | 即使 `APP_ENV` 不是 production，也强制检查关键密钥 | 设为 `true` 后，示例密钥或弱密钥会导致后端拒绝启动 |
 | `APP_CORS_ORIGINS` | 必填 | `http://客户前端域名,https://客户前端域名` | 允许哪些前端地址访问后端 API | 前端域名未加入时，浏览器会出现跨域请求失败 |
 | `APP_LOCAL_ONLY` | 可选 | 单机/内网填 `true`，公网填 `false` | 限制只允许本机或内网访问 | 公网部署误填 `true` 可能导致外部用户访问失败 |
+| `APP_LOGIN_ENABLED` | 一期建议 `true` | `true` | 开启登录/注册页和账号密码会话保护 | 开启后业务 API 需要登录，账号数据存入 PostgreSQL `app_users` |
+| `APP_SESSION_SECRET` | 开启登录时必填 | 至少 24 位随机字符串 | 登录 JWT 会话签名密钥 | 生产环境必须替换，泄露后需要全员重新登录 |
+| `APP_SESSION_EXPIRES_HOURS` | 可选 | `72` | 登录态有效小时数 | 过短影响使用体验，过长增加终端遗失风险 |
+| `APP_COOKIE_SECURE` | HTTPS 生产填 `true` | 本地 `false` / 生产 `true` | 登录 cookie 是否仅允许 HTTPS 发送 | 若生产 HTTPS 下误填 `false` 会降低 cookie 安全性 |
 | `APP_AUTH_ENABLED` | 可选 | 内网多人/公网建议 `true` | 开启简单访问令牌保护 | 开启后前端或调用方未带令牌会返回 401 |
 | `APP_AUTH_TOKEN` | 开启认证时必填 | 至少 24 位随机字符串 | API 访问令牌 | 为空、太短或使用示例值时，生产严格模式会拒绝启动 |
 | `APP_EXPOSE_DEBUG_ERRORS` | 本地临时可开 | 默认 `false` | 是否把详细后端异常返回给前端 | 生产不要开启，否则可能暴露路径、SQL 或外部服务响应 |

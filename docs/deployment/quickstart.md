@@ -118,6 +118,10 @@ cp .env.example .env
 APP_ENV=development
 APP_CORS_ORIGINS=http://127.0.0.1:3012,http://localhost:3012,http://127.0.0.1:5173,http://localhost:5173
 APP_LOCAL_ONLY=false
+APP_LOGIN_ENABLED=true
+APP_SESSION_SECRET=replace_with_a_random_session_secret_at_least_24_chars
+APP_SESSION_EXPIRES_HOURS=72
+APP_COOKIE_SECURE=false
 APP_AUTH_ENABLED=false
 APP_AUTH_TOKEN=replace_with_a_random_token_at_least_24_chars
 APP_EXPOSE_DEBUG_ERRORS=false
