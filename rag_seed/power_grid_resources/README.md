@@ -13,12 +13,12 @@
 ## 本次采集数量
 
 - `01_tender_documents`：7 条
-- `02_policy_regulations`：11 条
-- `03_standards_specs`：2 条
+- `02_policy_regulations`：19 条
+- `03_standards_specs`：23 条
 - `04_standard_phrases`：6 条
-- 下载成功：15 条
+- 下载成功：34 条
 - 自建生成：7 条
-- 下载失败但保留 URL：4 条
+- 下载失败但保留 URL：14 条
 
 ## 入库建议
 
