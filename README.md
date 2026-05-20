@@ -182,6 +182,7 @@ Mac M1/M2 使用 Homebrew 安装通常是 `/opt/homebrew/bin/soffice`；Linux �
 | 功能 | [DOCX 导出](docs/features/docx-export.md) | 正式目录、页码域、章节快照、Word 标题层级 |
 | 部署 | [快速开始](docs/deployment/quickstart.md) | 安装、配置、启动 |
 | 部署 | [本地 Docker PostgreSQL](docs/deployment/local-postgres-docker.md) | 本地数据库、pgvector、Docker 资源建议 |
+| 部署 | [Supabase 到 PostgreSQL 迁移](docs/deployment/supabase-to-postgres-migration.md) | 真实迁移流程、校验脚本、迁移记录 |
 | 部署 | [阿里云目标架构](docs/deployment/aliyun-target-architecture.md) | RDS PostgreSQL + OSS 生产部署路线 |
 | 部署 | [安全配置](docs/deployment/security.md) | CORS、认证、生产部署 |
 | 部署 | [Supabase 初始化](docs/deployment/supabase-setup.md) | 历史环境和迁移参考 |

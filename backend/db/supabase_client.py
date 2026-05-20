@@ -22,6 +22,11 @@ def get_supabase_client() -> Client:
     The service role key is preferred because this module runs only on the
     Flask backend and needs to write private Storage buckets and project tables.
     """
+    if (os.getenv("DB_PROVIDER") or "").lower() == "postgres":
+        from backend.db.postgres_compat import PostgresCompatClient
+
+        return PostgresCompatClient()
+
     url = os.getenv("SUPABASE_URL")
     key = os.getenv("SUPABASE_SERVICE_ROLE_KEY") or os.getenv("SUPABASE_ANON_KEY")
     if not url or not key:

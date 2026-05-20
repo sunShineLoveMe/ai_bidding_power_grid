@@ -43,6 +43,7 @@ Supabase 相关文档和代码属于历史架构与迁移参考，后续新开�
 
 - [快速开始](./deployment/quickstart.md)
 - [本地 Docker PostgreSQL](./deployment/local-postgres-docker.md)
+- [Supabase 到 PostgreSQL 迁移](./deployment/supabase-to-postgres-migration.md)
 - [阿里云目标架构](./deployment/aliyun-target-architecture.md)
 - [安全配置](./deployment/security.md)
 - [Supabase 初始化](./deployment/supabase-setup.md)：仅历史环境或迁移参考使用
@@ -54,4 +55,3 @@ Supabase 相关文档和代码属于历史架构与迁移参考，后续新开�
 - 任何新增功能入口、交互流程、导出规则、生成策略，必须同步更新对应 feature 文档。
 - 文档默认使用中文，命令、路径、环境变量、表名和字段名使用英文原文。
 - 历史路线可以保留，但必须明确标注“历史/迁移参考”，避免新成员误用。
-

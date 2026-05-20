@@ -43,6 +43,7 @@ yarn-error.log*
 *.sqlite3
 chroma_db/
 storage/
+migration_reports/
 
 # Project specific local directories (Large files, user uploads, generative outputs)
 outputs/
@@ -52,3 +53,4 @@ tender_references/
 
 # Logs
 *.log
+.antigravitycli/
