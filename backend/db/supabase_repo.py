@@ -1676,17 +1676,18 @@ def download_knowledge_asset_file_variant(asset_id: str, variant: str = "origina
 
 def get_knowledge_asset_signed_urls(asset_ids: list[str], expires_in: int = 3600) -> dict[str, str]:
     """
-    批量为知识资产生成 Supabase Storage 签名 URL。
+    批量为知识资产生成前端可访问 URL。
 
     返回 { asset_id: signed_url } 字典。
-    签名 URL 有效期默认 1 小时（expires_in 秒），前端可直接请求，无需经过后端中转。
-    无法生成签名 URL 的资产（本地路径、无 storage_path 等）不会出现在返回字典中。
+    云端对象存储会返回签名 URL；本地 storage 模式返回后端文件接口 URL。
+    无法生成可访问 URL 的资产（无 storage_path 等）不会出现在返回字典中。
     """
     if not asset_ids:
         return {}
 
     client = get_supabase_client()
     result: dict[str, str] = {}
+    storage_provider = (os.getenv("STORAGE_PROVIDER") or "").lower()
 
     # 按 bucket 分组，每组批量调用 create_signed_urls
     from collections import defaultdict
@@ -1701,9 +1702,12 @@ def get_knowledge_asset_signed_urls(asset_ids: list[str], expires_in: int = 3600
             object_path = asset.get("storage_path")
             if not bucket or not object_path:
                 continue
+            if storage_provider == "local":
+                result[asset_id] = f"/api/knowledge/assets/{asset_id}/file?variant=original"
+                continue
             bucket_groups[bucket].append((asset_id, object_path))
         except Exception:
-            logging.exception("获取资产元数据失败，跳过签名 URL 生成: %s", asset_id)
+            logging.exception("获取资产元数据失败，跳过可访问 URL 生成: %s", asset_id)
 
     for bucket, items in bucket_groups.items():
         paths = [item[1] for item in items]
@@ -1723,7 +1727,6 @@ def get_knowledge_asset_signed_urls(asset_ids: list[str], expires_in: int = 3600
             logging.exception("批量生成签名 URL 失败，bucket=%s", bucket)
 
     return result
-    return os.getenv("SUPABASE_STORAGE_KNOWLEDGE_ASSET_BUCKET") or os.getenv("SUPABASE_STORAGE_KNOWLEDGE_BUCKET") or "knowledge-assets"
 
 
 def _create_image_thumbnail(local_path: Path, max_size: int = 960) -> tuple[Path, str] | None:

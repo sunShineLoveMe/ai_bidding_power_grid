@@ -300,12 +300,12 @@ export function TiptapBidEditor({ content, onChange, placeholder }: TiptapBidEdi
     },
   });
 
-  // 签名 URL 缓存：key = asset_id，value = 签名 URL（有效期 1 小时）
+  // 资产 URL 缓存：key = asset_id，value = 云端签名 URL 或本地文件接口 URL。
   const signedUrlCache = useRef<Record<string, string>>({});
 
   /**
    * 从 markdown 内容中提取所有 /api/bidding/knowledge/assets/<id>/file 格式的图片 URL，
-   * 批量换成 Supabase Storage 签名 URL，让浏览器直连 CDN，不再经过后端中转。
+   * 批量换成后端返回的可访问 URL；云端存储直连对象存储，本地 storage 继续走后端文件接口。
    */
   const resolveSignedUrls = useCallback(async (markdown: string): Promise<string> => {
     const ASSET_URL_RE = /\/api\/(?:bidding\/)?knowledge\/assets\/([0-9a-f-]{36})\/file[^\s)"]*/gi;

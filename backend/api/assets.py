@@ -267,13 +267,12 @@ def get_knowledge_asset_file(asset_id):
 @bp.route('/knowledge/assets/signed-urls', methods=['POST'])
 def get_knowledge_asset_signed_urls_api():
     """
-    批量生成知识资产的 Supabase Storage 签名 URL。
+    批量生成知识资产的前端可访问 URL。
 
     请求体：{ "assetIds": ["uuid1", "uuid2", ...], "expiresIn": 3600 }
     返回：{ "urls": { "uuid1": "https://...", "uuid2": "https://..." } }
 
-    前端拿到签名 URL 后直接请求 Supabase CDN，无需经过后端中转，
-    彻底消除章节配图时的串行下载瓶颈。
+    云端对象存储返回签名 URL；本地 storage 模式返回后端文件接口 URL。
     """
     try:
         payload = request.get_json(silent=True) or {}

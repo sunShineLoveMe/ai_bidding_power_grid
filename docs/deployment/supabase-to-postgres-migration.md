@@ -162,6 +162,7 @@ LOCAL_STORAGE_ROOT=storage
 - 用量统计接口可从 PostgreSQL 返回迁移日志。
 - 知识资产列表接口可从 PostgreSQL 返回迁移资产。
 - 知识资产文件接口可从本地 `storage/` 返回图片文件。
+- 章节编辑器的知识资产图片在本地 `STORAGE_PROVIDER=local` 模式下会通过 `/api/knowledge/assets/<asset_id>/file?variant=original` 读取；云端对象存储模式再返回对应的签名 URL。
 - pgvector `match_knowledge_assets` / `match_knowledge_chunks` 函数可返回结果。
 - 后端测试 `venv/bin/python -m unittest discover -s tests` 通过。
 

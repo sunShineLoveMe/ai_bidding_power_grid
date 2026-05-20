@@ -824,8 +824,12 @@ def refresh_docx_fields_with_soffice(docx_path: str | Path) -> tuple[Path, dict]
         cmd = [
             soffice_bin,
             "--headless",
+            "--invisible",
             "--nologo",
+            "--nodefault",
+            "--nolockcheck",
             "--nofirststartwizard",
+            "--norestore",
             "-env:UserInstallation=" + profile_dir.as_uri(),
             "--convert-to",
             "docx",

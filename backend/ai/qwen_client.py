@@ -118,7 +118,12 @@ def _retry_delay_seconds(attempt: int, retry_after=None) -> float:
 def _is_retryable_error(exc: Exception) -> bool:
     if isinstance(exc, (DashScopeRetryableError, LLMRetryableError)):
         return True
-    if isinstance(exc, (requests.Timeout, requests.ConnectionError)):
+    if isinstance(exc, (
+        requests.Timeout,
+        requests.ConnectionError,
+        requests.exceptions.ChunkedEncodingError,
+        requests.exceptions.ContentDecodingError,
+    )):
         return True
     response = getattr(exc, "response", None)
     return bool(response is not None and response.status_code in _retry_status_codes())
