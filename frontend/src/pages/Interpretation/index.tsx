@@ -73,13 +73,43 @@ function formatDateTime(isoString?: string | null): string {
   return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
 }
 
-function TextList({ title, items }: { title: string; items?: string[] }): JSX.Element {
+function formatListItem(item: unknown): string {
+  if (item === null || item === undefined) return '';
+  if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean') {
+    return String(item);
+  }
+  if (Array.isArray(item)) {
+    return item.map(formatListItem).filter(Boolean).join('；');
+  }
+  if (typeof item === 'object') {
+    const record = item as Record<string, unknown>;
+    const preferred = [
+      record.action,
+      record.detail,
+      record.priority ? `优先级：${record.priority}` : '',
+      record.note,
+      record.reason,
+      record.content,
+      record.title,
+    ].map(formatListItem).filter(Boolean);
+    if (preferred.length) return preferred.join('；');
+    return Object.entries(record)
+      .map(([key, value]) => `${key}：${formatListItem(value)}`)
+      .filter(Boolean)
+      .join('；');
+  }
+  return String(item);
+}
+
+function TextList({ title, items }: { title: string; items?: unknown[] }): JSX.Element {
+  const normalizedItems = (items || []).map(formatListItem).filter(Boolean);
+
   return (
     <section className="report-section">
       <h3>{title}</h3>
-      {items?.length ? (
+      {normalizedItems.length ? (
         <ul>
-          {items.map((item, index) => (
+          {normalizedItems.map((item, index) => (
             <li key={`${title}-${index}`}>{item}</li>
           ))}
         </ul>
