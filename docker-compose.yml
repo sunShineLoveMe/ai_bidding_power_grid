@@ -4,9 +4,9 @@ services:
     container_name: ai-bidding-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_DB: bidding
-      POSTGRES_USER: bidding
-      POSTGRES_PASSWORD: bidding_local_dev
+      POSTGRES_DB: ${POSTGRES_DB:-bidding}
+      POSTGRES_USER: ${POSTGRES_USER:-bidding}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-bidding_local_dev}
       TZ: Asia/Shanghai
       PGTZ: Asia/Shanghai
     ports:
@@ -21,6 +21,84 @@ services:
       retries: 6
       start_period: 10s
 
+  redis:
+    image: redis:7-alpine
+    container_name: ai-bidding-redis
+    restart: unless-stopped
+    ports:
+      - "16379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 5s
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    image: ai-bidding-backend:local
+    container_name: ai-bidding-backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      APP_ENV: ${APP_ENV:-development}
+      APP_HOST: ${APP_HOST:-127.0.0.1:8080}
+      APP_PUBLIC_BASE_URL: ${APP_PUBLIC_BASE_URL:-http://127.0.0.1:8080}
+      APP_CORS_ORIGINS: ${APP_CORS_ORIGINS:-http://127.0.0.1:8080,http://localhost:8080,http://127.0.0.1:3012,http://localhost:3012}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-bidding}:${POSTGRES_PASSWORD:-bidding_local_dev}@postgres:5432/${POSTGRES_DB:-bidding}
+      DB_PROVIDER: ${DB_PROVIDER:-postgres}
+      STORAGE_PROVIDER: ${STORAGE_PROVIDER:-local}
+      LOCAL_STORAGE_ROOT: ${LOCAL_STORAGE_ROOT:-storage}
+      PORT: 8000
+      LOG_FORMAT: ${LOG_FORMAT:-json}
+      REDIS_URL: redis://redis:6379/0
+      SOFFICE_BIN: ${SOFFICE_BIN:-/usr/bin/soffice}
+    ports:
+      - "3012:8000"
+    volumes:
+      - app_uploads:/app/uploads
+      - app_outputs:/app/outputs
+      - app_storage:/app/storage
+      - app_chroma:/app/chroma_db
+      - app_backups:/app/backups
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:8000/api/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 6
+      start_period: 20s
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    image: ai-bidding-frontend:local
+    container_name: ai-bidding-frontend
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1/ >/dev/null || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 6
+      start_period: 10s
+
 volumes:
   postgres_data:
-
+  app_uploads:
+  app_outputs:
+  app_storage:
+  app_chroma:
+  app_backups:

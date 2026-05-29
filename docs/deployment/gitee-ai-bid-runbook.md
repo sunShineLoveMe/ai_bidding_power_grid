@@ -2,7 +2,7 @@
 
 > 适用场景：合作伙伴从 Gitee 仓库 `ai-bid` 拉取代码后，在本地或内网服务器快速搭建并跑通项目。
 >
-> 当前推荐路线：Docker PostgreSQL + pgvector + 本地文件存储 + DeepSeek 写作模型 + DashScope Embedding/Rerank。
+> 当前推荐路线：Docker Compose 一键启动 PostgreSQL + pgvector + Redis + gunicorn 后端 + Nginx 前端，本地文件存储 + DeepSeek 写作模型 + DashScope Embedding/Rerank。
 >
 > 注意：`sql/` 目录里有部分 Supabase 历史脚本，不要直接整目录执行。新环境初始化优先使用 `migrations/postgres/` 下的 PostgreSQL schema。
 
@@ -16,7 +16,7 @@
 | Python | 3.9+ | 运行 Flask 后端和入库脚本 |
 | Node.js | 18+ | 构建 React 前端 |
 | npm | 9+ | 安装前端依赖 |
-| Docker Desktop / Docker Engine | 最新稳定版 | 启动 PostgreSQL + pgvector |
+| Docker Desktop / Docker Engine | 最新稳定版 | 启动 PostgreSQL + pgvector、Redis、后端和前端 |
 | LibreOffice | 可选，建议安装 | 服务端刷新 DOCX 目录页码 |
 
 ### 1.2 Docker 资源建议
@@ -234,7 +234,66 @@ DOCX_REFRESH_TIMEOUT_SECONDS=180
 
 未安装 LibreOffice 时，DOCX 导出不会被阻断，但目录页码可能需要用户打开 Word 后手动刷新。
 
-## 6. 启动 PostgreSQL
+## 6. Docker Compose 一键启动
+
+当前项目已支持通过 Docker Compose 启动测试版基础栈：
+
+| 服务 | 容器 | 对外端口 | 说明 |
+| --- | --- | --- | --- |
+| `postgres` | `ai-bidding-postgres` | `15432 -> 5432` | PostgreSQL 16 + pgvector |
+| `redis` | `ai-bidding-redis` | `16379 -> 6379` | 为后续 Celery/API 限流准备 |
+| `backend` | `ai-bidding-backend` | `3012 -> 8000` | gunicorn + gevent 运行 Flask |
+| `frontend` | `ai-bidding-frontend` | `8080 -> 80` | Nginx 运行前端构建产物，并反代 `/api/` |
+
+启动前先确认 `.env` 已配置好模型 Key 和本地安全配置，然后执行：
+
+```bash
+docker compose build backend frontend
+docker compose up -d postgres redis backend frontend
+docker compose ps
+```
+
+验证后端直连：
+
+```bash
+curl -i http://127.0.0.1:3012/api/health
+```
+
+验证前端 Nginx 入口和 API 反代：
+
+```bash
+curl -I http://127.0.0.1:8080/
+curl -i http://127.0.0.1:8080/api/health
+```
+
+浏览器访问：
+
+```text
+http://127.0.0.1:8080
+```
+
+查看日志：
+
+```bash
+docker compose logs -f backend
+docker compose logs -f frontend
+```
+
+停止服务：
+
+```bash
+docker compose down
+```
+
+如需删除本地数据库、上传文件、导出文件等 Docker volume 数据，再执行：
+
+```bash
+docker compose down -v
+```
+
+注意：`docker compose down -v` 会删除本地 PostgreSQL 数据和文件卷，只能在确认不需要保留测试数据时使用。
+
+## 7. 单独启动 PostgreSQL
 
 启动容器：
 
@@ -267,7 +326,7 @@ pgcrypto
 vector
 ```
 
-## 7. 初始化 PostgreSQL 业务表
+## 8. 初始化 PostgreSQL 业务表
 
 > 重要：`docker compose up -d postgres` 只会创建数据库和扩展，不会自动创建全部业务表。
 
@@ -310,7 +369,7 @@ knowledge_documents
 
 如果表不存在，先不要启动后端，回到本节重新执行 schema。
 
-## 8. 导入水利基础数据
+## 9. 导入水利基础数据
 
 水利基础数据分三类：
 
@@ -393,7 +452,7 @@ rag_seed/water_asset_images/ingestion_report.json
 storage/knowledge-assets/
 ```
 
-### 8.4 验证入库结果
+### 9.4 验证入库结果
 
 查看知识文档、分片、图片资产数量：
 
@@ -415,7 +474,7 @@ docker compose exec -T postgres psql -U bidding -d bidding -At -c "select 'chunk
 
 如果 `embedding` 数量为 0，优先检查 `DASHSCOPE_API_KEY` 是否正确。
 
-## 9. 启动后端
+## 10. 启动后端
 
 确保虚拟环境已激活：
 
@@ -452,7 +511,7 @@ APP_CORS_ORIGINS=http://127.0.0.1:3013,http://localhost:3013,http://127.0.0.1:51
 python main.py
 ```
 
-## 10. 前端开发模式可选
+## 11. 前端开发模式可选
 
 如果只需要使用后端托管的构建产物，完成 `npm run build` 后直接访问 `http://127.0.0.1:3012` 即可。
 
@@ -475,7 +534,7 @@ http://127.0.0.1:5173
 python main.py
 ```
 
-## 11. 登录与账号
+## 12. 登录与账号
 
 当前 `.env.example` 默认：
 
@@ -495,7 +554,7 @@ public.app_users
 docker compose exec -T postgres psql -U bidding -d bidding < migrations/postgres/002_app_login.sql
 ```
 
-## 12. 跑通验收流程
+## 13. 跑通验收流程
 
 ### 12.1 基础健康检查
 
@@ -542,7 +601,7 @@ test_samples/water_tender_docs/
 
 如果水利 RAG 已入库，回答应能引用水利投标、法规或标准话术相关内容。
 
-## 13. 常用维护命令
+## 14. 常用维护命令
 
 ### 查看 PostgreSQL 状态
 
@@ -587,7 +646,7 @@ python -m unittest discover -s tests
 python -m py_compile main.py backend/api/routes.py backend/parsing/document_parser.py backend/export/md_to_word.py
 ```
 
-## 14. 重新初始化空库
+## 15. 重新初始化空库
 
 > 危险操作：会删除 PostgreSQL 容器 volume 中的全部数据。只适合本地测试环境。
 
@@ -612,7 +671,7 @@ python rag_seed/water_enterprise_mock/_scripts/ingest_enterprise_mock_seed.py
 python rag_seed/water_asset_images/_scripts/ingest_knowledge_assets.py
 ```
 
-## 15. 推送到 Gitee 的注意事项
+## 16. 推送到 Gitee 的注意事项
 
 不要提交以下内容：
 
@@ -665,9 +724,9 @@ git remote -v
 git push gitee main
 ```
 
-## 16. 常见问题
+## 17. 常见问题
 
-### 16.1 `connection refused` 或连不上 `127.0.0.1:15432`
+### 17.1 `connection refused` 或连不上 `127.0.0.1:15432`
 
 原因：PostgreSQL 容器未启动或端口被占用。
 
@@ -679,7 +738,7 @@ docker compose logs postgres
 docker compose up -d postgres
 ```
 
-### 16.2 `extension "vector" is not available`
+### 17.2 `extension "vector" is not available`
 
 原因：没有使用 `pgvector/pgvector:pg16` 镜像，或数据库初始化异常。
 
@@ -696,7 +755,7 @@ docker compose logs postgres
 image: pgvector/pgvector:pg16
 ```
 
-### 16.3 业务表不存在
+### 17.3 业务表不存在
 
 现象：后端报 `relation "bid_projects" does not exist`、`relation "knowledge_documents" does not exist` 等。
 
@@ -707,7 +766,7 @@ docker compose exec -T postgres psql -U bidding -d bidding < migrations/postgres
 docker compose exec -T postgres psql -U bidding -d bidding < migrations/postgres/002_app_login.sql
 ```
 
-### 16.4 水利知识库为空
+### 17.4 水利知识库为空
 
 原因：只初始化了表，没有跑种子入库脚本。
 
@@ -719,7 +778,7 @@ python rag_seed/water_enterprise_mock/_scripts/ingest_enterprise_mock_seed.py
 python rag_seed/water_asset_images/_scripts/ingest_knowledge_assets.py
 ```
 
-### 16.5 入库脚本提示 DashScope 相关错误
+### 17.5 入库脚本提示 DashScope 相关错误
 
 原因：`DASHSCOPE_API_KEY` 未配置、无权限、余额不足或网络无法访问 DashScope。
 
@@ -730,7 +789,7 @@ python rag_seed/water_asset_images/_scripts/ingest_knowledge_assets.py
 3. 确认虚拟环境已激活。
 4. 重新执行入库脚本。
 
-### 16.6 DeepSeek 生成失败
+### 17.6 DeepSeek 生成失败
 
 原因：`DEEPSEEK_API_KEY` 未配置、模型名错误、余额不足、网络异常或请求超时。
 
@@ -741,7 +800,7 @@ python rag_seed/water_asset_images/_scripts/ingest_knowledge_assets.py
 3. 确认模型名仍可用。
 4. 大文件解读时可适当调大 `REASONING_REQUEST_TIMEOUT_SECONDS`。
 
-### 16.7 DOCX 导出成功但目录页码不正确
+### 17.7 DOCX 导出成功但目录页码不正确
 
 原因：服务器未安装 LibreOffice，或 `SOFFICE_BIN` 路径错误。
 
@@ -771,14 +830,14 @@ SOFFICE_BIN=/实际/soffice/路径
 DOCX_REFRESH_TIMEOUT_SECONDS=180
 ```
 
-### 16.8 前端跨域失败
+### 17.8 前端跨域失败
 
 原因：前端访问地址没有加入 `APP_CORS_ORIGINS`。
 
 处理：
 
 ```ini
-APP_CORS_ORIGINS=http://127.0.0.1:3012,http://localhost:3012,http://127.0.0.1:5173,http://localhost:5173
+APP_CORS_ORIGINS=http://127.0.0.1:3012,http://localhost:3012,http://127.0.0.1:5173,http://localhost:5173,http://127.0.0.1:8080,http://localhost:8080
 ```
 
 如果部署到内网服务器，例如 `192.168.1.20`：
@@ -790,14 +849,16 @@ APP_PUBLIC_BASE_URL=http://192.168.1.20:3012
 
 修改 `.env` 后重启后端。
 
-## 17. 首次交付检查清单
+## 18. 首次交付检查清单
 
 交付前逐项确认：
 
 - [ ] Gitee 仓库已推送 `main` 分支。
 - [ ] `.env` 未提交到仓库。
 - [ ] 合作伙伴已拿到单独发送的 `.env` 配置或密钥填写说明。
-- [ ] Docker PostgreSQL 启动正常。
+- [ ] Docker Compose 可启动 PostgreSQL、Redis、backend、frontend。
+- [ ] backend 容器使用 gunicorn + gevent 启动。
+- [ ] frontend Nginx 可访问 `http://127.0.0.1:8080` 并正常反代 `/api/health`。
 - [ ] `pgcrypto` 和 `vector` 扩展存在。
 - [ ] `migrations/postgres/001_schema.sql` 已执行。
 - [ ] `migrations/postgres/002_app_login.sql` 已执行。
