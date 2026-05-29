@@ -57,3 +57,6 @@ tender_references/
 
 #skills
 .agents/
+
+# Local code intelligence index
+.codegraph/
