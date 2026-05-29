@@ -271,21 +271,17 @@ vector
 
 > 重要：`docker compose up -d postgres` 只会创建数据库和扩展，不会自动创建全部业务表。
 
-执行主 schema：
+推荐直接执行初始化脚本，脚本会按固定顺序执行主 schema、登录表扩展和 DeepSeek 成本价格种子，并在最后验证核心表：
+
+```bash
+scripts/init_postgres_schema.sh
+```
+
+如果需要手工排障，等价执行顺序如下：
 
 ```bash
 docker compose exec -T postgres psql -U bidding -d bidding < migrations/postgres/001_schema.sql
-```
-
-执行登录表扩展：
-
-```bash
 docker compose exec -T postgres psql -U bidding -d bidding < migrations/postgres/002_app_login.sql
-```
-
-导入 DeepSeek 成本价格种子：
-
-```bash
 docker compose exec -T postgres psql -U bidding -d bidding < sql/20260510_seed_deepseek_v4_flash_pricing.sql
 docker compose exec -T postgres psql -U bidding -d bidding < sql/20260510_seed_deepseek_v4_pro_pricing.sql
 ```
@@ -610,10 +606,7 @@ docker compose up -d postgres
 然后重新执行：
 
 ```bash
-docker compose exec -T postgres psql -U bidding -d bidding < migrations/postgres/001_schema.sql
-docker compose exec -T postgres psql -U bidding -d bidding < migrations/postgres/002_app_login.sql
-docker compose exec -T postgres psql -U bidding -d bidding < sql/20260510_seed_deepseek_v4_flash_pricing.sql
-docker compose exec -T postgres psql -U bidding -d bidding < sql/20260510_seed_deepseek_v4_pro_pricing.sql
+scripts/init_postgres_schema.sh
 python rag_seed/water_resources/_scripts/ingest_water_rag_seed.py
 python rag_seed/water_enterprise_mock/_scripts/ingest_enterprise_mock_seed.py
 python rag_seed/water_asset_images/_scripts/ingest_knowledge_assets.py
@@ -821,4 +814,3 @@ APP_PUBLIC_BASE_URL=http://192.168.1.20:3012
 - [ ] 可生成分册大纲。
 - [ ] 可生成章节正文。
 - [ ] 可导出 DOCX。
-

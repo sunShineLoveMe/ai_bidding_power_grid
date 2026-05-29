@@ -29,6 +29,23 @@ class BackendSmokeTest(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get_json(), {"status": "ok"})
+        self.assertRegex(response.headers.get("X-Request-Id", ""), r"^req_\d{14}_[a-f0-9]{10}$")
+
+    def test_security_sanitizer_redacts_common_secret_patterns(self):
+        from backend.core.security import sanitize_exception_message
+
+        raw = (
+            "Authorization: Bearer secret-token "
+            "postgresql://bidding:plain-password@db.example.com:5432/bidding "
+            "OSS_ACCESS_KEY_SECRET=abc123"
+        )
+
+        sanitized = sanitize_exception_message(raw)
+
+        self.assertNotIn("secret-token", sanitized)
+        self.assertNotIn("plain-password", sanitized)
+        self.assertNotIn("abc123", sanitized)
+        self.assertIn("***", sanitized)
 
     def test_upload_rejects_disallowed_extension_before_external_services(self):
         response = self.client.post(

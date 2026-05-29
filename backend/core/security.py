@@ -1,6 +1,7 @@
 import logging
 import mimetypes
 import os
+import re
 from pathlib import Path
 from typing import Iterable
 
@@ -197,10 +198,25 @@ def enforce_request_guard() -> tuple[object, int] | None:
 
 def sanitize_exception_message(message: str) -> str:
     text = str(message or "")
-    for key in ("DASHSCOPE_API_KEY", "DEEPSEEK_API_KEY", "SUPABASE_SERVICE_ROLE_KEY", "SUPABASE_ANON_KEY", "MINERU_API_TOKEN", "ONLYOFFICE_JWT_SECRET"):
+    for key in (
+        "DASHSCOPE_API_KEY",
+        "DEEPSEEK_API_KEY",
+        "SUPABASE_SERVICE_ROLE_KEY",
+        "SUPABASE_ANON_KEY",
+        "MINERU_API_TOKEN",
+        "ONLYOFFICE_JWT_SECRET",
+        "APP_AUTH_TOKEN",
+        "APP_SESSION_SECRET",
+        "OSS_ACCESS_KEY_ID",
+        "OSS_ACCESS_KEY_SECRET",
+    ):
         value = os.getenv(key)
         if value:
             text = text.replace(value, "***")
+    text = re.sub(r"(?i)(authorization|x-app-auth-token)\s*[:=]\s*(bearer\s+)?[^,\s;]+", r"\1=***", text)
+    text = re.sub(r"(?i)(cookie|set-cookie)\s*[:=]\s*[^,\n]+", r"\1=***", text)
+    text = re.sub(r"(?i)(api[_-]?key|access[_-]?key|secret|token|password|passwd|pwd)\s*[:=]\s*['\"]?[^'\"\s,;]+", r"\1=***", text)
+    text = re.sub(r"(?i)(postgresql|postgres|redis)://([^:\s/@]+):([^@\s]+)@", r"\1://\2:***@", text)
     if len(text) > 300:
         text = text[:300] + "..."
     return text

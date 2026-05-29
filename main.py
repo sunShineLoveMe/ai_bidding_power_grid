@@ -3,21 +3,19 @@ from flask_cors import CORS
 import os
 from dotenv import load_dotenv
 import sqlite3
-import logging
 
+from backend.core.logging_config import configure_logging, register_request_logging
 from backend.core.security import get_cors_origins, register_security_handlers, validate_startup_security
 
 # 加载环境变量
 load_dotenv()
+configure_logging()
 
 app = Flask(__name__)
 validate_startup_security()
 CORS(app, origins=get_cors_origins(), supports_credentials=True)
+register_request_logging(app)
 register_security_handlers(app)
-logging.basicConfig(
-    level=os.getenv("LOG_LEVEL", "INFO").upper(),
-    format="%(asctime)s %(levelname)s %(name)s %(message)s",
-)
 
 # 配置
 app.config['UPLOAD_FOLDER'] = 'uploads'
