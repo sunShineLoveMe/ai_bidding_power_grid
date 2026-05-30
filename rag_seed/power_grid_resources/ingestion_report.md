@@ -1,0 +1,68 @@
+# 电网 RAG 种子库入库报告
+
+- 生成时间：2026-05-30T07:58:28.474377+00:00
+- 待处理资料：41
+- 新入库资料：20
+- Dry run 资料：0
+- 已存在跳过：6
+- PDF 跳过：15
+- 新增/预计分片：273
+
+## 明细
+
+- `skipped_existing` | chunks=0 | bid_document_checklist
+- `skipped_existing` | chunks=0 | business_response_phrases
+- `skipped_existing` | chunks=0 | power_grid_rag_ingestion_notes
+- `skipped_existing` | chunks=0 | power_grid_section_library
+- `skipped_existing` | chunks=0 | qualification_response_phrases
+- `skipped_existing` | chunks=0 | quality_safety_environment_phrases
+- `indexed` | chunks=17 | 中华人民共和国招标投标法
+- `indexed` | chunks=8 | 中华人民共和国招标投标法实施条例
+- `skipped_pdf` | chunks=0 | 必须招标的工程项目规定
+  - error: PDF 需显式 --include-pdf 后入库
+- `indexed` | chunks=5 | 必须招标的基础基础设施和公用事业项目范围规定
+- `skipped_pdf` | chunks=0 | 中华人民共和国电力法
+  - error: PDF 需显式 --include-pdf 后入库
+- `indexed` | chunks=39 | 中华人民共和国能源法
+- `skipped_pdf` | chunks=0 | 电力建设工程施工安全监督管理办法
+  - error: PDF 需显式 --include-pdf 后入库
+- `indexed` | chunks=47 | 电力建设工程质量监督管理暂行规定
+- `indexed` | chunks=6 | 电力建设工程备案管理规定
+- `indexed` | chunks=51 | 关于全面推行电力工程施工监理招投标工作的通知
+- `indexed` | chunks=14 | 电力工程设计招标投标管理规定
+- `skipped_pdf` | chunks=0 | 建设工程质量管理条例
+  - error: PDF 需显式 --include-pdf 后入库
+- `skipped_pdf` | chunks=0 | 建设工程安全生产管理条例
+  - error: PDF 需显式 --include-pdf 后入库
+- `skipped_pdf` | chunks=0 | 新型电力系统发展蓝皮书
+  - error: PDF 需显式 --include-pdf 后入库
+- `skipped_pdf` | chunks=0 | 关于加快构建新型电力系统行动方案(2024-2027年)
+  - error: PDF 需显式 --include-pdf 后入库
+- `skipped_pdf` | chunks=0 | 关于新形势下配电网高质量发展的指导意见
+  - error: PDF 需显式 --include-pdf 后入库
+- `indexed` | chunks=15 | 国家电网有限公司招标活动管理办法
+- `indexed` | chunks=15 | 国家电网有限公司供应商管理办法
+- `indexed` | chunks=15 | 国家电网有限公司物资采购标准
+- `indexed` | chunks=13 | 国网江苏苏州供电分公司授权物资竞争性谈判采购公告示例一
+- `indexed` | chunks=12 | 国网江苏苏州供电分公司授权物资竞争性谈判采购公告示例二
+- `skipped_pdf` | chunks=0 | 电力建设工程现行管理文件及技术标准名录2019版
+  - error: PDF 需显式 --include-pdf 后入库
+- `skipped_pdf` | chunks=0 | GB/T 50430-2017 工程建设施工企业质量管理规范
+  - error: PDF 需显式 --include-pdf 后入库
+- `skipped_pdf` | chunks=0 | GB 50150-2016 电气装置安装工程电气设备交接试验标准
+  - error: PDF 需显式 --include-pdf 后入库
+- `skipped_pdf` | chunks=0 | GB 50168-2018 电气装置安装工程电缆线路施工及验收标准
+  - error: PDF 需显式 --include-pdf 后入库
+- `skipped_pdf` | chunks=0 | GB 50169-2016 电气装置安装工程接地装置施工及验收规范
+  - error: PDF 需显式 --include-pdf 后入库
+- `skipped_pdf` | chunks=0 | GB 50171-2016 电气装置安装工程盘、柜及二次回路接线施工及验收规范
+  - error: PDF 需显式 --include-pdf 后入库
+- `skipped_pdf` | chunks=0 | DL/T 5729-2016 配电网规划设计技术导则
+  - error: PDF 需显式 --include-pdf 后入库
+- `indexed` | chunks=1 | GB/T 50326-2017 建设工程项目管理规范
+- `indexed` | chunks=3 | GB/T 50319-2013 建设工程监理规范
+- `indexed` | chunks=3 | GB 50254-2014 电气装置安装工程低压电器施工及验收规范
+- `indexed` | chunks=4 | DL/T 596-2021 电力设备预防性试验规程
+- `indexed` | chunks=2 | Q/GDW 10370 配电网建设改造技术导则
+- `indexed` | chunks=2 | Q/GDW 10741 配电网施工工艺规范
+- `indexed` | chunks=1 | power_grid_standards_catalog

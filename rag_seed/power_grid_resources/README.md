@@ -36,3 +36,24 @@
 ```bash
 python rag_seed/power_grid_resources/_scripts/download_power_grid_rag_seed.py
 ```
+
+## 入库脚本
+
+```bash
+python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py
+```
+
+脚本默认导入 Markdown/网页型资料和自建标准话术，跳过 PDF。PDF 资料需要先确认抽取质量、摘要边界和版权边界，再通过 `--include-pdf` 显式导入。
+
+常用参数：
+
+```bash
+python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py --dry-run
+python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py --category 04_standard_phrases
+python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py --refresh
+```
+
+本地验证结果见：
+
+- `ingestion_report.md`
+- `ingestion_report.json`

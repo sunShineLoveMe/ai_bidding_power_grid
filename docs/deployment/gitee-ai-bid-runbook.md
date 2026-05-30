@@ -420,7 +420,40 @@ venv\Scripts\activate
 
 ### 9.1 电网 RAG 基础知识库
 
-P0-9 会补齐电网种子库入库脚本。脚本落地前，不建议把历史水利种子库导入当前电网测试环境。
+执行电网种子库入库：
+
+```bash
+python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py
+```
+
+脚本默认只导入 Markdown/网页型资料和自建标准话术，PDF 会跳过。原因是标准、法规、蓝皮书等 PDF 直接粗切会带来噪声和版权边界问题；如需补充 PDF，请先用 MinerU/OCR 抽取、人工确认摘要和引用边界，再显式执行：
+
+```bash
+python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py --include-pdf --category 02_policy_regulations
+```
+
+常用参数：
+
+```bash
+# 只检查分片，不写库、不消耗 embedding
+python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py --dry-run
+
+# 只导入自建标准话术
+python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py --category 04_standard_phrases
+
+# 已入库资料需要重建分片时使用
+python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py --refresh
+```
+
+本地已验证结果：
+
+```text
+候选资料：41 条
+已入库或已存在文档：26 条
+向量分片：279 条
+PDF 默认跳过：15 条
+分类：power_grid_policy_regulations、power_grid_standard_phrases、power_grid_standards_specs、power_grid_tender_documents
+```
 
 ### 9.2 历史水利种子库（仅迁移参考）
 
@@ -469,6 +502,18 @@ docker compose exec -T postgres psql -U bidding -d bidding -At -c "select 'chunk
 ```
 
 如果 `embedding` 数量为 0，优先检查 `DASHSCOPE_API_KEY` 是否正确。
+
+查看电网种子库入库结果：
+
+```bash
+docker compose exec -T postgres psql -U bidding -d bidding -At -c "select 'power_grid_docs=' || count(*) from public.knowledge_documents where metadata->>'seed_corpus'='power_grid_resources' union all select 'power_grid_chunks=' || count(*) from public.document_chunks where metadata->>'seed_corpus'='power_grid_resources' union all select 'power_grid_embeddings=' || count(*) from public.document_chunks where metadata->>'seed_corpus'='power_grid_resources' and embedding is not null;"
+```
+
+查看电网资料分类：
+
+```bash
+docker compose exec -T postgres psql -U bidding -d bidding -c "select category, count(*) from public.knowledge_documents where metadata->>'seed_corpus'='power_grid_resources' group by category order by category;"
+```
 
 ## 10. 启动后端
 

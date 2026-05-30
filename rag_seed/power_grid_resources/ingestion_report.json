@@ -1,0 +1,261 @@
+{
+  "generated_at": "2026-05-30T07:58:28.474377+00:00",
+  "include_pdf": false,
+  "refresh": false,
+  "dry_run": false,
+  "total": 41,
+  "indexed": 20,
+  "dry_run_items": 0,
+  "skipped_existing": 6,
+  "skipped_pdf": 15,
+  "failed": [],
+  "total_chunks": 273,
+  "results": [
+    {
+      "title": "bid_document_checklist",
+      "status": "skipped_existing",
+      "chunks": 0,
+      "error": ""
+    },
+    {
+      "title": "business_response_phrases",
+      "status": "skipped_existing",
+      "chunks": 0,
+      "error": ""
+    },
+    {
+      "title": "power_grid_rag_ingestion_notes",
+      "status": "skipped_existing",
+      "chunks": 0,
+      "error": ""
+    },
+    {
+      "title": "power_grid_section_library",
+      "status": "skipped_existing",
+      "chunks": 0,
+      "error": ""
+    },
+    {
+      "title": "qualification_response_phrases",
+      "status": "skipped_existing",
+      "chunks": 0,
+      "error": ""
+    },
+    {
+      "title": "quality_safety_environment_phrases",
+      "status": "skipped_existing",
+      "chunks": 0,
+      "error": ""
+    },
+    {
+      "title": "中华人民共和国招标投标法",
+      "status": "indexed",
+      "chunks": 17,
+      "error": ""
+    },
+    {
+      "title": "中华人民共和国招标投标法实施条例",
+      "status": "indexed",
+      "chunks": 8,
+      "error": ""
+    },
+    {
+      "title": "必须招标的工程项目规定",
+      "status": "skipped_pdf",
+      "chunks": 0,
+      "error": "PDF 需显式 --include-pdf 后入库"
+    },
+    {
+      "title": "必须招标的基础基础设施和公用事业项目范围规定",
+      "status": "indexed",
+      "chunks": 5,
+      "error": ""
+    },
+    {
+      "title": "中华人民共和国电力法",
+      "status": "skipped_pdf",
+      "chunks": 0,
+      "error": "PDF 需显式 --include-pdf 后入库"
+    },
+    {
+      "title": "中华人民共和国能源法",
+      "status": "indexed",
+      "chunks": 39,
+      "error": ""
+    },
+    {
+      "title": "电力建设工程施工安全监督管理办法",
+      "status": "skipped_pdf",
+      "chunks": 0,
+      "error": "PDF 需显式 --include-pdf 后入库"
+    },
+    {
+      "title": "电力建设工程质量监督管理暂行规定",
+      "status": "indexed",
+      "chunks": 47,
+      "error": ""
+    },
+    {
+      "title": "电力建设工程备案管理规定",
+      "status": "indexed",
+      "chunks": 6,
+      "error": ""
+    },
+    {
+      "title": "关于全面推行电力工程施工监理招投标工作的通知",
+      "status": "indexed",
+      "chunks": 51,
+      "error": ""
+    },
+    {
+      "title": "电力工程设计招标投标管理规定",
+      "status": "indexed",
+      "chunks": 14,
+      "error": ""
+    },
+    {
+      "title": "建设工程质量管理条例",
+      "status": "skipped_pdf",
+      "chunks": 0,
+      "error": "PDF 需显式 --include-pdf 后入库"
+    },
+    {
+      "title": "建设工程安全生产管理条例",
+      "status": "skipped_pdf",
+      "chunks": 0,
+      "error": "PDF 需显式 --include-pdf 后入库"
+    },
+    {
+      "title": "新型电力系统发展蓝皮书",
+      "status": "skipped_pdf",
+      "chunks": 0,
+      "error": "PDF 需显式 --include-pdf 后入库"
+    },
+    {
+      "title": "关于加快构建新型电力系统行动方案(2024-2027年)",
+      "status": "skipped_pdf",
+      "chunks": 0,
+      "error": "PDF 需显式 --include-pdf 后入库"
+    },
+    {
+      "title": "关于新形势下配电网高质量发展的指导意见",
+      "status": "skipped_pdf",
+      "chunks": 0,
+      "error": "PDF 需显式 --include-pdf 后入库"
+    },
+    {
+      "title": "国家电网有限公司招标活动管理办法",
+      "status": "indexed",
+      "chunks": 15,
+      "error": ""
+    },
+    {
+      "title": "国家电网有限公司供应商管理办法",
+      "status": "indexed",
+      "chunks": 15,
+      "error": ""
+    },
+    {
+      "title": "国家电网有限公司物资采购标准",
+      "status": "indexed",
+      "chunks": 15,
+      "error": ""
+    },
+    {
+      "title": "国网江苏苏州供电分公司授权物资竞争性谈判采购公告示例一",
+      "status": "indexed",
+      "chunks": 13,
+      "error": ""
+    },
+    {
+      "title": "国网江苏苏州供电分公司授权物资竞争性谈判采购公告示例二",
+      "status": "indexed",
+      "chunks": 12,
+      "error": ""
+    },
+    {
+      "title": "电力建设工程现行管理文件及技术标准名录2019版",
+      "status": "skipped_pdf",
+      "chunks": 0,
+      "error": "PDF 需显式 --include-pdf 后入库"
+    },
+    {
+      "title": "GB/T 50430-2017 工程建设施工企业质量管理规范",
+      "status": "skipped_pdf",
+      "chunks": 0,
+      "error": "PDF 需显式 --include-pdf 后入库"
+    },
+    {
+      "title": "GB 50150-2016 电气装置安装工程电气设备交接试验标准",
+      "status": "skipped_pdf",
+      "chunks": 0,
+      "error": "PDF 需显式 --include-pdf 后入库"
+    },
+    {
+      "title": "GB 50168-2018 电气装置安装工程电缆线路施工及验收标准",
+      "status": "skipped_pdf",
+      "chunks": 0,
+      "error": "PDF 需显式 --include-pdf 后入库"
+    },
+    {
+      "title": "GB 50169-2016 电气装置安装工程接地装置施工及验收规范",
+      "status": "skipped_pdf",
+      "chunks": 0,
+      "error": "PDF 需显式 --include-pdf 后入库"
+    },
+    {
+      "title": "GB 50171-2016 电气装置安装工程盘、柜及二次回路接线施工及验收规范",
+      "status": "skipped_pdf",
+      "chunks": 0,
+      "error": "PDF 需显式 --include-pdf 后入库"
+    },
+    {
+      "title": "DL/T 5729-2016 配电网规划设计技术导则",
+      "status": "skipped_pdf",
+      "chunks": 0,
+      "error": "PDF 需显式 --include-pdf 后入库"
+    },
+    {
+      "title": "GB/T 50326-2017 建设工程项目管理规范",
+      "status": "indexed",
+      "chunks": 1,
+      "error": ""
+    },
+    {
+      "title": "GB/T 50319-2013 建设工程监理规范",
+      "status": "indexed",
+      "chunks": 3,
+      "error": ""
+    },
+    {
+      "title": "GB 50254-2014 电气装置安装工程低压电器施工及验收规范",
+      "status": "indexed",
+      "chunks": 3,
+      "error": ""
+    },
+    {
+      "title": "DL/T 596-2021 电力设备预防性试验规程",
+      "status": "indexed",
+      "chunks": 4,
+      "error": ""
+    },
+    {
+      "title": "Q/GDW 10370 配电网建设改造技术导则",
+      "status": "indexed",
+      "chunks": 2,
+      "error": ""
+    },
+    {
+      "title": "Q/GDW 10741 配电网施工工艺规范",
+      "status": "indexed",
+      "chunks": 2,
+      "error": ""
+    },
+    {
+      "title": "power_grid_standards_catalog",
+      "status": "indexed",
+      "chunks": 1,
+      "error": ""
+    }
+  ]
+}
