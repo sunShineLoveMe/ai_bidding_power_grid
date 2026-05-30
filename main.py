@@ -27,11 +27,13 @@ os.makedirs(app.config['GENERATED_FOLDER'], exist_ok=True)
 
 from backend.api import routes
 from backend.api import users
+from backend.api import health
 
 # 注册蓝图
 app.register_blueprint(routes.bp, url_prefix='/api/bidding')
 app.register_blueprint(routes.knowledge_bp, url_prefix='/api/knowledge')
 app.register_blueprint(users.bp, url_prefix='/api/users')
+app.register_blueprint(health.bp, url_prefix='/api')
 
 @app.route('/api/outputs/<path:filename>')
 def output_file(filename):
@@ -69,11 +71,6 @@ def bidding_workbench():
     return jsonify({
         'error': '前端 Vite 构建产物不存在。请进入 frontend 执行 npm install && npm run build，或开发时运行 npm run dev。'
     }), 503
-
-@app.route('/api/health')
-def health():
-    return jsonify({'status': 'ok'})
-
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 3012))

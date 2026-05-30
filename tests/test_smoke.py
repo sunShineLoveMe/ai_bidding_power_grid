@@ -31,6 +31,48 @@ class BackendSmokeTest(unittest.TestCase):
         self.assertEqual(response.get_json(), {"status": "ok"})
         self.assertRegex(response.headers.get("X-Request-Id", ""), r"^req_\d{14}_[a-f0-9]{10}$")
 
+    def test_ready_reports_dependency_status(self):
+        with (
+            patch("backend.api.health._check_database", return_value={"status": "ok"}),
+            patch("backend.api.health._check_redis", return_value={"status": "ok"}),
+            patch("backend.api.health._check_storage", return_value={"status": "ok", "provider": "local"}),
+            patch("backend.api.health._check_model_config", return_value={"status": "warn", "required": {}, "optional": {}}),
+        ):
+            response = self.client.get("/api/ready")
+
+        payload = response.get_json()
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(payload["status"], "ok")
+        self.assertIn("database", payload["checks"])
+        self.assertIn("redis", payload["checks"])
+        self.assertIn("storage", payload["checks"])
+        self.assertIn("model_config", payload["checks"])
+
+    def test_ready_fails_when_required_dependency_fails(self):
+        with (
+            patch("backend.api.health._check_database", return_value={"status": "fail", "message": "db down"}),
+            patch("backend.api.health._check_redis", return_value={"status": "ok"}),
+            patch("backend.api.health._check_storage", return_value={"status": "ok", "provider": "local"}),
+            patch("backend.api.health._check_model_config", return_value={"status": "ok", "required": {}, "optional": {}}),
+        ):
+            response = self.client.get("/api/ready")
+
+        self.assertEqual(response.status_code, 503)
+        self.assertEqual(response.get_json()["status"], "fail")
+
+    def test_ready_bypasses_login_guard_for_deployment_probe(self):
+        with (
+            patch.dict(os.environ, {"APP_LOGIN_ENABLED": "true"}),
+            patch("backend.api.health._check_database", return_value={"status": "ok"}),
+            patch("backend.api.health._check_redis", return_value={"status": "ok"}),
+            patch("backend.api.health._check_storage", return_value={"status": "ok", "provider": "local"}),
+            patch("backend.api.health._check_model_config", return_value={"status": "warn", "required": {}, "optional": {}}),
+        ):
+            response = self.client.get("/api/ready")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json()["status"], "ok")
+
     def test_security_sanitizer_redacts_common_secret_patterns(self):
         from backend.core.security import sanitize_exception_message
 

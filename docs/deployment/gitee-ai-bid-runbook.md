@@ -447,6 +447,7 @@ docker compose ps
 
 ```bash
 curl -i http://127.0.0.1:3012/api/health
+curl -i http://127.0.0.1:3012/api/ready
 ```
 
 验证前端 Nginx 入口和 API 反代：
@@ -454,7 +455,15 @@ curl -i http://127.0.0.1:3012/api/health
 ```bash
 curl -I http://127.0.0.1:8080/
 curl -i http://127.0.0.1:8080/api/health
+curl -i http://127.0.0.1:8080/api/ready
 ```
+
+说明：
+
+- `/api/health` 是轻量存活检查，只确认后端进程可响应，适合 Docker `HEALTHCHECK`。
+- `/api/ready` 是启动就绪检查，会检查 PostgreSQL/pgvector/知识库匹配函数、Redis、存储 provider 和模型 Key 配置，适合部署完成后的接流量验收。
+- `/api/ready` 不需要登录态；即使 `APP_LOGIN_ENABLED=true`，Nginx、部署脚本和阿里云测试环境探针也可以直接调用。
+- 如果 `/api/ready` 返回 503，先看返回 JSON 中 `checks` 的失败项，再排查对应依赖。
 
 浏览器访问：
 
@@ -520,13 +529,33 @@ vector
 
 > 重要：`docker compose up -d postgres` 只会创建数据库和扩展，不会自动创建全部业务表。
 
-推荐直接执行初始化脚本，脚本会按固定顺序执行主 schema、登录表扩展和 DeepSeek 成本价格种子，并在最后验证核心表：
+推荐执行 Alembic 迁移入口。该命令会读取 `DATABASE_URL`，本地未配置时默认连接 `127.0.0.1:15432` 的 Docker PostgreSQL：
+
+```bash
+scripts/migrate_postgres.sh
+```
+
+当前 Alembic baseline revision 为 `20260530_0001`，会按固定顺序执行主 schema、登录表扩展和 DeepSeek 成本价格种子，并写入 `alembic_version`。
+
+验证 Alembic 当前版本：
+
+```bash
+DATABASE_URL=postgresql://bidding:bidding_local_dev@127.0.0.1:15432/bidding venv/bin/alembic current
+```
+
+期望看到：
+
+```text
+20260530_0001 (head)
+```
+
+当前本地验证状态：2026-05-30 已在本地 PostgreSQL + pgvector Docker 库中执行 `scripts/migrate_postgres.sh`，Alembic 当前版本为 `20260530_0001 (head)`。已确认核心表、`pgcrypto` / `vector` 扩展、`match_knowledge_chunks` / `match_knowledge_assets` RPC、DeepSeek v4 flash/pro 价格种子可用。阿里云 RDS 测试库需等账号到位后复验。
+
+如果只需要手工排障，也可以执行旧初始化脚本，脚本会按固定顺序执行主 schema、登录表扩展和 DeepSeek 成本价格种子，并在最后验证核心表：
 
 ```bash
 scripts/init_postgres_schema.sh
 ```
-
-当前本地验证状态：2026-05-30 已在临时全新 PostgreSQL + pgvector Docker 空库中完整执行 `001_schema.sql`、`002_app_login.sql`、`003_seed_deepseek_v4_flash_pricing.sql`、`004_seed_deepseek_v4_pro_pricing.sql`，首次执行和重复执行均通过。已确认核心表、`pgcrypto` / `vector` 扩展、`match_knowledge_chunks` / `match_knowledge_assets` RPC、DeepSeek v4 flash/pro 价格种子可用。阿里云 RDS 测试库需等账号到位后复验。
 
 如果需要手工排障，等价执行顺序如下：
 
@@ -787,7 +816,7 @@ docker compose exec -T postgres psql -U bidding -d bidding < migrations/postgres
 
 ## 13. 跑通验收流程
 
-### 12.1 基础健康检查
+### 13.1 基础健康检查
 
 访问：
 
@@ -797,7 +826,21 @@ http://127.0.0.1:3012
 
 确认页面正常打开，无 500 报错。
 
-### 12.2 数据库检查
+后端存活检查：
+
+```bash
+curl -fsS http://127.0.0.1:3012/api/health
+```
+
+后端就绪检查：
+
+```bash
+curl -fsS http://127.0.0.1:3012/api/ready | python3 -m json.tool
+```
+
+`/api/ready` 返回 200 表示 PostgreSQL、Redis、存储 provider 等关键依赖已达到可接流量状态；返回 503 时按 `checks` 中的失败项处理。
+
+### 13.2 数据库检查
 
 ```bash
 docker compose exec -T postgres psql -U bidding -d bidding -At -c "select 'bid_projects=' || count(*) from public.bid_projects union all select 'knowledge_documents=' || count(*) from public.knowledge_documents union all select 'document_chunks=' || count(*) from public.document_chunks union all select 'knowledge_assets=' || count(*) from public.knowledge_assets;"
@@ -805,7 +848,7 @@ docker compose exec -T postgres psql -U bidding -d bidding -At -c "select 'bid_p
 
 初始项目数可以为 0；电网种子库入库后 `knowledge_documents`、`document_chunks`、`knowledge_assets` 应大于 0。
 
-### 12.3 上传招标文件测试
+### 13.3 上传招标文件测试
 
 可使用测试样本：
 
@@ -822,7 +865,7 @@ test_samples/
 5. 运行合规检查，验证规则覆盖率和 LLM 语义复核。
 6. 导出 Word，验证 DOCX 下载。
 
-### 12.4 知识库问答测试
+### 13.4 知识库问答测试
 
 进入知识库问答或相关入口，提问：
 
@@ -905,10 +948,8 @@ docker compose up -d postgres
 然后重新执行：
 
 ```bash
-scripts/init_postgres_schema.sh
-python rag_seed/water_resources/_scripts/ingest_water_rag_seed.py
-python rag_seed/water_enterprise_mock/_scripts/ingest_enterprise_mock_seed.py
-python rag_seed/water_asset_images/_scripts/ingest_knowledge_assets.py
+scripts/migrate_postgres.sh
+python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py
 ```
 
 ## 16. 推送到 Gitee 的注意事项
@@ -1002,8 +1043,7 @@ image: pgvector/pgvector:pg16
 处理：
 
 ```bash
-docker compose exec -T postgres psql -U bidding -d bidding < migrations/postgres/001_schema.sql
-docker compose exec -T postgres psql -U bidding -d bidding < migrations/postgres/002_app_login.sql
+scripts/migrate_postgres.sh
 ```
 
 ### 17.4 行业知识库为空
@@ -1013,9 +1053,7 @@ docker compose exec -T postgres psql -U bidding -d bidding < migrations/postgres
 处理：
 
 ```bash
-python rag_seed/water_resources/_scripts/ingest_water_rag_seed.py
-python rag_seed/water_enterprise_mock/_scripts/ingest_enterprise_mock_seed.py
-python rag_seed/water_asset_images/_scripts/ingest_knowledge_assets.py
+python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py
 ```
 
 ### 17.5 入库脚本提示 DashScope 相关错误
@@ -1098,11 +1136,10 @@ APP_PUBLIC_BASE_URL=http://192.168.1.20:3012
 - [ ] 合作伙伴已拿到单独发送的 `.env` 配置或密钥填写说明。
 - [ ] Docker Compose 可启动 PostgreSQL、Redis、backend、frontend。
 - [ ] backend 容器使用 gunicorn + gevent 启动。
-- [ ] frontend Nginx 可访问 `http://127.0.0.1:8080` 并正常反代 `/api/health`。
+- [ ] frontend Nginx 可访问 `http://127.0.0.1:8080` 并正常反代 `/api/health`、`/api/ready`。
 - [ ] `pgcrypto` 和 `vector` 扩展存在。
-- [ ] `migrations/postgres/001_schema.sql` 已执行。
-- [ ] `migrations/postgres/002_app_login.sql` 已执行。
-- [ ] DeepSeek 价格种子 SQL 已执行。
+- [ ] `scripts/migrate_postgres.sh` 已执行，`alembic current` 为 `20260530_0001 (head)`。
+- [ ] DeepSeek 价格种子已存在。
 - [ ] 电网 RAG 文档已导入。
 - [ ] 电网脱敏企业资料已导入。
 - [ ] 电网图片资产已导入。

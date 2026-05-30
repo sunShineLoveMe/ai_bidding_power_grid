@@ -187,7 +187,7 @@ def _request_session_payload() -> dict | None:
 def enforce_request_guard() -> tuple[object, int] | None:
     if request.method == "OPTIONS":
         return None
-    if request.path.startswith("/assets/") or request.path.startswith("/api/health"):
+    if request.path.startswith("/assets/") or request.path in {"/api/health", "/api/ready"}:
         return None
     if not request.path.startswith("/api/"):
         return None
