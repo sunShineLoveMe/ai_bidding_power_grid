@@ -16,7 +16,7 @@
 | 向量检索 | pgvector | 在 PostgreSQL 内保存 embedding 向量并执行相似度检索 |
 | 对象存储 | Supabase Storage | 保存原始知识库文件、招标文件和生成文档 |
 | 向量模型 | 默认 DashScope `text-embedding-v4`，维度默认 1024，可在系统设置中调整 | 将用户问题、知识分片和图片资产描述转换为向量 |
-| Rerank 重排 | 默认 DashScope `qwen3-rerank`，可切换 `gte-rerank-v2`，系统设置可关闭 | 对 pgvector 初召回结果二次排序，提升水利术语、设备型号、资质名称匹配准确率 |
+| Rerank 重排 | 默认 DashScope `qwen3-rerank`，可切换 `gte-rerank-v2`，系统设置可关闭 | 对 pgvector 初召回结果二次排序，提升电网术语、设备型号、资质名称和评分条款匹配准确率 |
 | 问答模型 | 默认 `qwen-long`，可在系统设置中调整 | 基于召回片段和企业图片资产生成最终回答 |
 | 追问意图模型 | 默认读取 `knowledge_followup_model`，未配置时回退到系统文本模型 | 回答结束后识别用户下一步意图，生成 3 个业务追问 |
 | 流式输出 | DashScope SSE / Flask `text/event-stream` | 支持 RAG 回答逐段返回，降低首屏等待体感 |
