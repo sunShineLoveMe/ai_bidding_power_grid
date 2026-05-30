@@ -39,15 +39,30 @@ def reset_supabase_client() -> None:
 
 
 def get_bucket_name(kind: str) -> str:
-    env_key = {
+    env_map = {
         "tender": "SUPABASE_STORAGE_TENDER_BUCKET",
         "generated": "SUPABASE_STORAGE_GENERATED_BUCKET",
         "knowledge": "SUPABASE_STORAGE_KNOWLEDGE_BUCKET",
         "qualification": "SUPABASE_STORAGE_QUALIFICATION_BUCKET",
         "product": "SUPABASE_STORAGE_PRODUCT_BUCKET",
-    }.get(kind)
+    }
+    env_key = env_map.get(kind)
     if not env_key:
         raise SupabaseConfigError(f"Unsupported storage bucket kind: {kind}")
+
+    if (os.getenv("STORAGE_PROVIDER") or "").lower() == "oss":
+        oss_env_key = {
+            "tender": "OSS_TENDER_BUCKET",
+            "generated": "OSS_GENERATED_BUCKET",
+            "knowledge": "OSS_KNOWLEDGE_BUCKET",
+            "qualification": "OSS_QUALIFICATION_BUCKET",
+            "product": "OSS_PRODUCT_BUCKET",
+        }[kind]
+        bucket = os.getenv(oss_env_key) or os.getenv("OSS_BUCKET") or os.getenv(env_key)
+        if not bucket:
+            raise SupabaseConfigError(f"{oss_env_key} or OSS_BUCKET is required when STORAGE_PROVIDER=oss")
+        return bucket
+
     bucket = os.getenv(env_key)
     if not bucket:
         raise SupabaseConfigError(f"{env_key} is required")

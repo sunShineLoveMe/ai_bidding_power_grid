@@ -7,6 +7,7 @@ from decimal import Decimal
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
+from urllib.parse import quote
 
 import psycopg
 from psycopg.rows import dict_row
@@ -381,9 +382,75 @@ class LocalStorageClient:
         return LocalStorageBucket(self.root, bucket)
 
 
+class OSSStorageBucket:
+    def __init__(self, oss2_module: Any, bucket_name: str):
+        endpoint = os.getenv("OSS_ENDPOINT")
+        access_key_id = os.getenv("OSS_ACCESS_KEY_ID")
+        access_key_secret = os.getenv("OSS_ACCESS_KEY_SECRET")
+        if not endpoint or not access_key_id or not access_key_secret:
+            raise RuntimeError("OSS_ENDPOINT, OSS_ACCESS_KEY_ID and OSS_ACCESS_KEY_SECRET are required when STORAGE_PROVIDER=oss")
+        self.oss2 = oss2_module
+        self.bucket_name = bucket_name
+        self.endpoint = endpoint.rstrip("/")
+        self.public_endpoint = (os.getenv("OSS_PUBLIC_ENDPOINT") or self.endpoint).rstrip("/")
+        self.key_prefix = (os.getenv("OSS_KEY_PREFIX") or "").strip("/")
+        auth = self.oss2.Auth(access_key_id, access_key_secret)
+        self.bucket = self.oss2.Bucket(auth, self.endpoint, bucket_name)
+
+    def _key(self, object_path: str) -> str:
+        path = str(object_path or "").lstrip("/")
+        return f"{self.key_prefix}/{path}" if self.key_prefix else path
+
+    def upload(self, path: str, file: bytes | bytearray | str | Path, file_options: dict[str, Any] | None = None) -> dict[str, Any]:
+        key = self._key(path)
+        headers: dict[str, str] = {}
+        content_type = (file_options or {}).get("content-type") or (file_options or {}).get("Content-Type")
+        if content_type:
+            headers["Content-Type"] = str(content_type)
+        if isinstance(file, (str, Path)):
+            self.bucket.put_object_from_file(key, str(file), headers=headers or None)
+        else:
+            self.bucket.put_object(key, bytes(file), headers=headers or None)
+        return {"path": path, "fullPath": f"{self.bucket_name}/{key}"}
+
+    def download(self, path: str) -> bytes:
+        return self.bucket.get_object(self._key(path)).read()
+
+    def get_public_url(self, path: str) -> str:
+        key = self._key(path)
+        if (os.getenv("OSS_PUBLIC_READ") or "").lower() in {"true", "1", "yes"}:
+            endpoint = self.public_endpoint
+            if endpoint.startswith(("http://", "https://")):
+                return f"{endpoint}/{quote(key)}"
+            return f"https://{self.bucket_name}.{endpoint}/{quote(key)}"
+        return self.bucket.sign_url("GET", key, int(os.getenv("OSS_SIGNED_URL_EXPIRES", "3600")))
+
+    def create_signed_urls(self, paths: list[str], expires_in: int) -> list[dict[str, str]]:
+        signed: list[dict[str, str]] = []
+        for path in paths:
+            key = self._key(path)
+            signed.append({"path": path, "signedURL": self.bucket.sign_url("GET", key, int(expires_in))})
+        return signed
+
+
+class OSSStorageClient:
+    def __init__(self):
+        try:
+            import oss2
+        except ImportError as exc:
+            raise RuntimeError("oss2 package is required when STORAGE_PROVIDER=oss") from exc
+        self.oss2 = oss2
+
+    def from_(self, bucket: str) -> OSSStorageBucket:
+        return OSSStorageBucket(self.oss2, bucket)
+
+
 class PostgresCompatClient:
     def __init__(self):
-        self.storage = LocalStorageClient(Path(os.getenv("LOCAL_STORAGE_ROOT", "storage")))
+        if (os.getenv("STORAGE_PROVIDER") or "local").lower() == "oss":
+            self.storage = OSSStorageClient()
+        else:
+            self.storage = LocalStorageClient(Path(os.getenv("LOCAL_STORAGE_ROOT", "storage")))
 
     def connection(self):
         return psycopg.connect(_database_url(), row_factory=dict_row)
@@ -393,4 +460,3 @@ class PostgresCompatClient:
 
     def rpc(self, name: str, params: dict[str, Any]) -> PostgresRpcQuery:
         return PostgresRpcQuery(self, name, params)
-

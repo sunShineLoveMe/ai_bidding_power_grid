@@ -14,3 +14,4 @@ Markdown==3.7
 python-docx==1.1.2
 supabase==2.28.3
 psycopg[binary]==3.2.12
+oss2==2.19.1

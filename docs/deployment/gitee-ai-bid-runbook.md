@@ -181,7 +181,197 @@ LOCAL_STORAGE_ROOT=storage
 
 本地文件会写入 `storage/`、`uploads/`、`outputs/`、`parsed_outputs/` 等目录，这些目录已被 `.gitignore` 忽略。
 
-### 5.4 电网测试企业画像
+### 5.4 OSS 存储配置（阿里云测试环境）
+
+本地开发保持 `STORAGE_PROVIDER=local`。阿里云测试环境拿到 OSS Bucket 和 RAM AccessKey 后，再切换。
+
+实施前先确认以下信息：
+
+| 项目 | 要求 |
+| --- | --- |
+| Bucket 地域 | 建议与 ECS 同地域，便于使用内网 Endpoint |
+| Bucket ACL | `private`，不要开启公共读或公共读写 |
+| Endpoint | ECS 与 OSS 同地域时优先用内网 Endpoint；本地电脑或跨地域调试用外网 Endpoint |
+| RAM 凭证 | 使用测试环境专用 RAM 用户或 RAM 角色，不使用主账号 AccessKey |
+| 对象前缀 | 建议 `ai-bid/test`，便于测试环境隔离和后续清理 |
+
+阿里云官方参考：
+
+- OSS 访问域名与网络连接：<https://help.aliyun.com/zh/oss/user-guide/access-and-network-overview>
+- OSS 地域和 Endpoint：<https://help.aliyun.com/zh/oss/user-guide/regions-and-endpoints>
+- Bucket ACL：<https://help.aliyun.com/zh/oss/user-guide/oss-bucket-acl>
+- OSS Python SDK：<https://gosspublic.alicdn.com/sdks/python/apidocs/latest/zh-cn/index.html>
+
+```ini
+STORAGE_PROVIDER=oss
+OSS_ENDPOINT=https://oss-cn-hangzhou.aliyuncs.com
+OSS_PUBLIC_ENDPOINT=https://oss-cn-hangzhou.aliyuncs.com
+OSS_ACCESS_KEY_ID=真实 AccessKey ID
+OSS_ACCESS_KEY_SECRET=真实 AccessKey Secret
+OSS_BUCKET=测试环境私有 Bucket
+OSS_KEY_PREFIX=ai-bid/test
+OSS_SIGNED_URL_EXPIRES=3600
+```
+
+建议 OSS Bucket 使用私有读写，不开启公共读。系统会通过签名 URL 访问图片资产和下载对象。
+
+也可以按用途拆分 Bucket：
+
+```ini
+OSS_TENDER_BUCKET=...
+OSS_GENERATED_BUCKET=...
+OSS_KNOWLEDGE_BUCKET=...
+OSS_QUALIFICATION_BUCKET=...
+OSS_PRODUCT_BUCKET=...
+```
+
+未配置分用途 Bucket 时，统一回退到 `OSS_BUCKET`。
+
+#### 5.4.1 Endpoint 选择
+
+如果后端部署在阿里云 ECS，并且 ECS 与 OSS Bucket 在同一地域，`OSS_ENDPOINT` 建议填写内网 Endpoint，例如：
+
+```ini
+OSS_ENDPOINT=https://oss-cn-hangzhou-internal.aliyuncs.com
+OSS_PUBLIC_ENDPOINT=https://oss-cn-hangzhou.aliyuncs.com
+```
+
+如果在本地电脑调试，或者 ECS 与 OSS 不在同一地域，使用外网 Endpoint：
+
+```ini
+OSS_ENDPOINT=https://oss-cn-hangzhou.aliyuncs.com
+OSS_PUBLIC_ENDPOINT=https://oss-cn-hangzhou.aliyuncs.com
+```
+
+不要跨地域使用内网 Endpoint，否则可能出现连接失败。
+
+#### 5.4.2 RAM 权限建议
+
+测试环境最小权限建议只授权指定 Bucket 和指定前缀。将下面的 `YOUR_BUCKET`、`ai-bid/test` 替换为实际值：
+
+```json
+{
+  "Version": "1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "oss:PutObject",
+        "oss:GetObject",
+        "oss:DeleteObject",
+        "oss:ListObjects"
+      ],
+      "Resource": [
+        "acs:oss:*:*:YOUR_BUCKET",
+        "acs:oss:*:*:YOUR_BUCKET/ai-bid/test/*"
+      ]
+    }
+  ]
+}
+```
+
+说明：
+
+- `oss:PutObject`：上传招标文件、知识库文件、资信/产品图片、导出文件。
+- `oss:GetObject`：下载、预览、签名 URL 访问对象。
+- `oss:DeleteObject`：测试环境清理文件时使用；如客户安全要求更严格，可先不授予。
+- `oss:ListObjects`：联调排查时查看前缀下对象；如客户安全要求更严格，可先不授予。
+
+#### 5.4.3 本地联调步骤
+
+1. 安装后端依赖：
+
+```bash
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+2. 在 `.env` 或 `.env.production` 中切换 OSS：
+
+```ini
+STORAGE_PROVIDER=oss
+OSS_ENDPOINT=https://实际地域 Endpoint
+OSS_PUBLIC_ENDPOINT=https://实际地域外网 Endpoint
+OSS_ACCESS_KEY_ID=客户提供
+OSS_ACCESS_KEY_SECRET=客户提供
+OSS_BUCKET=客户提供
+OSS_KEY_PREFIX=ai-bid/test
+OSS_SIGNED_URL_EXPIRES=3600
+```
+
+3. 重启后端容器：
+
+```bash
+docker compose up -d --build backend
+docker compose logs -f backend
+```
+
+4. 执行 OSS smoke test：
+
+```bash
+python - <<'PY'
+from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv(".env")
+
+from backend.db.supabase_client import get_bucket_name, get_supabase_client, upload_file_to_storage
+
+bucket = get_bucket_name("knowledge")
+object_path = "smoke/oss-health-check.txt"
+local_file = Path("/tmp/oss-health-check.txt")
+local_file.write_text("oss ok", encoding="utf-8")
+
+upload_file_to_storage(bucket, object_path, local_file, "text/plain")
+client = get_supabase_client()
+data = client.storage.from_(bucket).download(object_path)
+url = client.storage.from_(bucket).create_signed_urls([object_path], 300)[0]["signedURL"]
+
+assert (data.decode("utf-8") if isinstance(data, bytes) else data.read().decode("utf-8")) == "oss ok"
+assert url.startswith("http")
+print("OSS smoke ok")
+print("bucket=", bucket)
+print("object=", object_path)
+print("signed_url_prefix=", url.split("?")[0])
+PY
+```
+
+5. 业务链路验证：
+
+- 上传 1 个小型 PDF/DOCX 招标文件，确认上传接口成功。
+- 上传 1 个知识库 Markdown 或图片资产，确认数据库中保存了 `bucket/object_path`。
+- 打开知识库图片预览或下载接口，确认返回文件。
+- 导出 1 个 DOCX，确认可下载。
+
+#### 5.4.4 回滚到本地存储
+
+如果 OSS AccessKey、Endpoint、Bucket 权限尚未准备好，先回滚到本地存储，保证测试演示不中断：
+
+```ini
+STORAGE_PROVIDER=local
+LOCAL_STORAGE_ROOT=storage
+```
+
+然后重启后端：
+
+```bash
+docker compose up -d --build backend
+```
+
+注意：回滚只影响新上传和新生成文件；已写入 OSS 的旧文件仍保留在 OSS，数据库中的旧记录仍指向原 Bucket/Object Path。
+
+#### 5.4.5 常见错误
+
+| 现象 | 常见原因 | 处理 |
+| --- | --- | --- |
+| `AccessDenied` / 403 | RAM 权限不足、Bucket Policy 限制、签名过期 | 检查 RAM Policy 是否覆盖 Bucket 和前缀，重新生成签名 URL |
+| `NoSuchBucket` | Bucket 名称或地域错误 | 核对 `OSS_BUCKET` 和 `OSS_ENDPOINT` 是否属于同一地域 |
+| `InvalidAccessKeyId` | AccessKey ID 错误或被禁用 | 让客户重新确认 RAM 用户状态和 AccessKey |
+| `SignatureDoesNotMatch` | AccessKey Secret 错误、系统时间偏差、Endpoint 不匹配 | 核对 Secret，校准服务器时间，确认 Endpoint |
+| 连接超时 | 本地网络不可达、ECS 跨地域使用内网 Endpoint | 本地调试改外网 Endpoint；ECS 与 OSS 同地域时再用内网 Endpoint |
+| 预览 403 | Bucket 私有且未使用签名 URL，或签名过期 | 确认后端返回的是 signed URL，适当调大 `OSS_SIGNED_URL_EXPIRES` |
+
+### 5.5 电网测试企业画像
 
 当前测试版本默认面向电网/电力项目，建议 `.env` 使用脱敏电力企业画像：
 
@@ -197,7 +387,7 @@ ENTERPRISE_RESPONSE_STYLE=专业、严谨、合规、可落地；不得编造资
 
 后续也可以在系统设置页面维护企业画像。
 
-### 5.5 MinerU OCR 可选配置
+### 5.6 MinerU OCR 可选配置
 
 如果需要处理扫描版 PDF 或复杂版式 PDF：
 
@@ -212,7 +402,7 @@ MINERU_DOWNLOAD_DOH_RESOLVE=true
 
 没有 MinerU 时，普通文本型 PDF / DOCX 仍可走本地解析能力，但扫描件质量会受影响。
 
-### 5.6 LibreOffice 可选配置
+### 5.7 LibreOffice 可选配置
 
 用于导出 DOCX 后刷新目录页码、页脚页码和总页数。
 
@@ -673,6 +863,15 @@ docker compose start postgres
 
 ```bash
 du -sh storage uploads outputs parsed_outputs logs 2>/dev/null
+```
+
+### OSS 依赖检查
+
+```bash
+python - <<'PY'
+import oss2
+print("oss2", oss2.__version__)
+PY
 ```
 
 ### 后端测试
