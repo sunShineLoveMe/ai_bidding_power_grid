@@ -107,6 +107,14 @@ cd ..
 
 构建成功后会生成 `frontend/dist/`。该目录是本地构建产物，不需要提交到 Git。
 
+构建时会自动生成 `frontend/public/build-info.json` 并复制到 `frontend/dist/build-info.json`。该文件记录 `buildId`、git commit、branch 和构建时间，用于部署后排查“页面是否还是旧版本”。`frontend/public/build-info.json` 是构建临时产物，不需要提交到 Git。
+
+本地查看构建版本：
+
+```bash
+cat frontend/dist/build-info.json
+```
+
 ## 5. 配置环境变量
 
 复制示例配置：
@@ -438,7 +446,8 @@ DOCX_REFRESH_TIMEOUT_SECONDS=180
 启动前先确认 `.env` 已配置好模型 Key 和本地安全配置，然后执行：
 
 ```bash
-docker compose build backend frontend
+docker compose build backend
+scripts/build_frontend_image.sh
 docker compose up -d postgres redis backend frontend
 docker compose ps
 ```
@@ -454,6 +463,8 @@ curl -i http://127.0.0.1:3012/api/ready
 
 ```bash
 curl -I http://127.0.0.1:8080/
+curl -I http://127.0.0.1:8080/build-info.json
+curl -s http://127.0.0.1:8080/build-info.json | python3 -m json.tool
 curl -i http://127.0.0.1:8080/api/health
 curl -i http://127.0.0.1:8080/api/ready
 ```
@@ -464,6 +475,9 @@ curl -i http://127.0.0.1:8080/api/ready
 - `/api/ready` 是启动就绪检查，会检查 PostgreSQL/pgvector/知识库匹配函数、Redis、存储 provider 和模型 Key 配置，适合部署完成后的接流量验收。
 - `/api/ready` 不需要登录态；即使 `APP_LOGIN_ENABLED=true`，Nginx、部署脚本和阿里云测试环境探针也可以直接调用。
 - 如果 `/api/ready` 返回 503，先看返回 JSON 中 `checks` 的失败项，再排查对应依赖。
+- `index.html` 返回 `Cache-Control: no-cache, no-store, must-revalidate`，避免发版后浏览器继续使用旧入口。
+- `/assets/` 下的 Vite hash JS/CSS 返回 1 年 immutable 缓存。
+- `/build-info.json` 返回 `Cache-Control: no-store`，可用于确认当前前端镜像版本；浏览器控制台也会输出同一份版本信息。
 
 浏览器访问：
 

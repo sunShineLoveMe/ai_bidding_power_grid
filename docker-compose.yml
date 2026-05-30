@@ -86,6 +86,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.frontend
+      args:
+        BUILD_ID: ${BUILD_ID:-}
+        BUILD_COMMIT: ${BUILD_COMMIT:-}
+        BUILD_BRANCH: ${BUILD_BRANCH:-}
+        BUILD_TIME: ${BUILD_TIME:-}
     image: ai-bidding-frontend:local
     container_name: ai-bidding-frontend
     restart: unless-stopped

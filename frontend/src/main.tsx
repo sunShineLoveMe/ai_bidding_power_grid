@@ -5,7 +5,10 @@ import zhCN from 'antd/locale/zh_CN';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter } from 'react-router-dom';
 import { App } from './App';
+import { logBuildInfo } from './utils/buildInfo';
 import './index.css';
+
+void logBuildInfo();
 
 const queryClient = new QueryClient({
   defaultOptions: {

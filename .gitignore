@@ -26,6 +26,7 @@ pip-delete-this-directory.txt
 
 # Node / Frontend
 node_modules/
+frontend/public/build-info.json
 dist/
 dist-ssr/
 npm-debug.log*
