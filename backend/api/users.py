@@ -1,5 +1,4 @@
 from flask import Blueprint, request, jsonify
-import sqlite3
 import json
 import logging
 import os
@@ -86,12 +85,6 @@ def _auth_response(user: dict):
     )
     return response
 
-def get_db():
-    """获取数据库连接"""
-    conn = sqlite3.connect('bidding.db')
-    conn.row_factory = sqlite3.Row
-    return conn
-
 
 @bp.route('/register', methods=['POST'])
 def register_user():
@@ -171,28 +164,7 @@ def identify_user():
     
     try:
         user_id, is_new = identify_app_user(fingerprint_id)
-        return jsonify({'userId': user_id, 'isNew': is_new, 'storage': 'supabase'})
-    except Exception:
-        logging.exception("Supabase 操作人员身份识别失败，回退 SQLite")
-
-    try:
-        conn = get_db()
-        cursor = conn.cursor()
-        
-        # 查找现有用户
-        cursor.execute('SELECT * FROM users WHERE fingerprint_id = ?', (fingerprint_id,))
-        user = cursor.fetchone()
-        
-        if user:
-            # 用户已存在
-            conn.close()
-            return jsonify({'userId': user['id'], 'isNew': False, 'storage': 'sqlite_fallback'})
-        cursor.execute('INSERT INTO users (fingerprint_id) VALUES (?)', (fingerprint_id,))
-        conn.commit()
-        user_id = cursor.lastrowid
-        conn.close()
-        return jsonify({'userId': user_id, 'isNew': True, 'storage': 'sqlite_fallback'})
-            
+        return jsonify({'userId': user_id, 'isNew': is_new, 'storage': 'postgres'})
     except Exception:
         logging.exception("操作人员身份识别失败")
         return jsonify({'error': '操作人员身份识别失败，请联系系统管理员。'}), 500

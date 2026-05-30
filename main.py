@@ -2,7 +2,6 @@ from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv
-import sqlite3
 
 from backend.core.logging_config import configure_logging, register_request_logging
 from backend.core.security import get_cors_origins, register_security_handlers, validate_startup_security
@@ -25,54 +24,6 @@ app.config['MAX_CONTENT_LENGTH'] = int(os.getenv('MAX_UPLOAD_MB', '200')) * 1024
 # 确保上传目录存在
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 os.makedirs(app.config['GENERATED_FOLDER'], exist_ok=True)
-
-# 数据库初始化
-def init_db():
-    conn = sqlite3.connect('bidding.db')
-    cursor = conn.cursor()
-    
-    # 创建用户表
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            fingerprint_id TEXT UNIQUE NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-    ''')
-    
-    # 创建招投标文件表
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS bidding (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
-            original_filename TEXT NOT NULL,
-            storage_path TEXT NOT NULL,
-            document_key TEXT UNIQUE NOT NULL,
-            status TEXT DEFAULT '已上传',
-            other_response_format TEXT,
-            bid_document TEXT,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (user_id) REFERENCES users (id)
-        )
-    ''')
-
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS onlyoffice_documents (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            document_key TEXT UNIQUE NOT NULL,
-            project_id TEXT,
-            title TEXT NOT NULL,
-            file_path TEXT NOT NULL,
-            download_url TEXT,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-    ''')
-    conn.commit()
-    conn.close()
-
-# 初始化数据库
-init_db()
 
 from backend.api import routes
 from backend.api import users

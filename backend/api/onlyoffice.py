@@ -36,7 +36,6 @@ from backend.api.routes import (
     _slug_filename,
     _output_url_for_path,
     _absolute_output_url_for_path,
-    get_db,
 )
 
 
@@ -163,18 +162,7 @@ def save_callback():
                 logging.warning(f'No download URL provided for key {document_key}')
                 return jsonify({'error': 0})
 
-            doc_row = None
-            try:
-                doc_row = get_onlyoffice_document(document_key)
-            except Exception:
-                logging.exception("Supabase onlyoffice_documents 查询失败，回退 SQLite: %s", document_key)
-                conn = get_db()
-                try:
-                    cursor = conn.cursor()
-                    cursor.execute('SELECT * FROM onlyoffice_documents WHERE document_key = ?', (document_key,))
-                    doc_row = cursor.fetchone()
-                finally:
-                    conn.close()
+            doc_row = get_onlyoffice_document(document_key)
 
             if doc_row:
                 target_path = doc_row['file_path']
@@ -188,33 +176,8 @@ def save_callback():
                 logging.info('ONLYOFFICE 文档已保存到 %s', target_path)
                 return jsonify({'error': 0})
 
-            conn = get_db()
-            try:
-                cursor = conn.cursor()
-                cursor.execute('SELECT * FROM bidding WHERE document_key = ?', (document_key,))
-                bidding = cursor.fetchone()
-
-                if not bidding:
-                    logging.error(f'Bidding with key {document_key} not found')
-                    return jsonify({'error': 0})
-
-                target_path = bidding['bid_document'] or bidding['storage_path']
-                Path(target_path).parent.mkdir(parents=True, exist_ok=True)
-
-                resp = requests.get(download_url, stream=True, timeout=60)
-                resp.raise_for_status()
-                with open(target_path, 'wb') as f:
-                    for chunk in resp.iter_content(chunk_size=8192):
-                        if chunk:
-                            f.write(chunk)
-
-                # 更新 DB 状态为已编辑，并保存 bid_document 路径
-                cursor.execute('UPDATE bidding SET status=?, bid_document=? WHERE id=?',
-                               ('已编辑', target_path, bidding['id']))
-                conn.commit()
-                logging.info(f'投标文件 {bidding["original_filename"]} 已保存至 {target_path}')
-            finally:
-                conn.close()
+            logging.error('未在 onlyoffice_documents 中找到文档映射: %s', document_key)
+            return jsonify({'error': 0})
 
         # OnlyOffice 要求返回 { "error": 0 }
         return jsonify({'error': 0})

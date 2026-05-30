@@ -88,27 +88,98 @@ flowchart LR
 > 当前默认路线：本地 Docker PostgreSQL + pgvector，后续生产平移到阿里云 RDS PostgreSQL + OSS。Supabase 文档仅作为历史环境和迁移参考。
 
 ```bash
-# 1. 安装后端依赖
-python -m venv venv && source venv/bin/activate
+# 1. 创建并激活项目专属虚拟环境（不要复用 marker/MinerU 等其他环境，避免依赖冲突）
+python3 -m venv .venv
+source .venv/bin/activate
+
+# 2. 安装后端依赖
 pip install -r requirements.txt
 
-# 2. 安装并构建前端
+# 3. 安装并构建前端
 cd frontend && npm install && npm run build && cd ..
 
-# 3. 配置环境变量
+# 4. 配置环境变量
 cp .env.example .env
 # 编辑 .env，填写 DEEPSEEK_API_KEY、DASHSCOPE_API_KEY，并确认 DATABASE_URL
 # 如需下载 DOCX 后目录页码直接准确，安装 LibreOffice 并确认 SOFFICE_BIN 路径
 
-# 4. 启动本地 PostgreSQL
+# 5. 启动本地 PostgreSQL
 docker compose up -d postgres
 
-# 5. 启动
-python main.py
-# 访问 http://127.0.0.1:3012
+# 6. 启动后端（统一使用 gunicorn，详见下方“后端启动方式”）
+gunicorn -c gunicorn.conf.py main:app
+# 默认监听 http://127.0.0.1:8000
 ```
 
 → [完整部署文档](docs/deployment/quickstart.md) · [安全配置](docs/deployment/security.md) · [本地 Docker PostgreSQL](docs/deployment/local-postgres-docker.md) · [阿里云目标架构](docs/deployment/aliyun-target-architecture.md)
+
+### 后端启动方式（团队统一规范）
+
+> 本项目为多人协作开发。为保证本地、测试、生产环境行为一致，**统一使用 gunicorn 启动后端**，不再推荐 `python main.py`（Flask 开发服务器）。
+> 原因：系统大量使用 SSE 流式响应（招标解读、大纲、正文、知识库问答都是长连接），Flask 自带的开发服务器是单进程、同步模型，多个流式连接会互相阻塞，且明确标注“不可用于生产”。gunicorn 的 gevent worker 才是和生产一致的运行模型。
+
+#### 1. 标准启动（推荐，所有人默认用这个）
+
+```bash
+source .venv/bin/activate
+gunicorn -c gunicorn.conf.py main:app
+```
+
+- 配置文件：`gunicorn.conf.py`
+- 默认监听：`http://0.0.0.0:8000`（本机访问用 `http://127.0.0.1:8000`）
+- 默认 worker：4 个 `gevent` worker，单请求超时 300 秒（适配长章节生成）
+- 启动成功会看到日志：`Starting gunicorn`、`Using worker: gevent`、`Booting worker ...`
+- 健康检查：`curl http://127.0.0.1:8000/api/health` 返回 `{"status": "ok"}`
+
+> 注意端口差异：gunicorn 默认走 **8000** 端口；旧的 `python main.py` 走的是 3012。改用 gunicorn 后，本地访问地址是 `http://127.0.0.1:8000`。如果前端 dev server 或调试脚本里写死了 3012，请同步改成 8000，或用下面的环境变量把 gunicorn 端口调成 3012。
+
+#### 2. 本地调试：开启热重载
+
+开发时希望改完代码自动重启，加 `--reload`：
+
+```bash
+source .venv/bin/activate
+gunicorn -c gunicorn.conf.py --reload main:app
+```
+
+`--reload` 仅用于本地开发，生产环境不要开启。
+
+#### 3. 通过环境变量调整启动参数
+
+`gunicorn.conf.py` 的关键参数都支持环境变量覆盖，无需改代码：
+
+| 环境变量 | 作用 | 默认值 |
+| --- | --- | --- |
+| `PORT` | 监听端口 | `8000` |
+| `WEB_CONCURRENCY` / `GUNICORN_WORKERS` | worker 数量 | `4` |
+| `GUNICORN_WORKER_CLASS` | worker 类型 | `gevent` |
+| `GUNICORN_TIMEOUT` | 单请求超时（秒） | `300` |
+| `GUNICORN_GRACEFUL_TIMEOUT` | 优雅退出超时（秒） | `30` |
+| `LOG_LEVEL` | 日志级别 | `info` |
+
+例如，想让本地 gunicorn 仍然监听 3012、只起 2 个 worker：
+
+```bash
+PORT=3012 WEB_CONCURRENCY=2 gunicorn -c gunicorn.conf.py main:app
+```
+
+#### 4. 容器 / 生产环境
+
+Docker 镜像（`Dockerfile.backend`）已默认用 gunicorn 启动，无需手动操作：
+
+```dockerfile
+CMD ["gunicorn", "-c", "gunicorn.conf.py", "main:app"]
+```
+
+容器内监听 8000，由 `docker-compose.yml` 映射到宿主机 `3012`（直连后端）或经 Nginx（前端入口 `8080`）反代。生产环境必须启用一种访问控制（登录 / 静态令牌 / 仅本地），否则后端会拒绝启动，详见 [安全配置](docs/deployment/security.md)。
+
+#### 关于 `python main.py`
+
+`main.py` 末尾仍保留 `app.run(...)`，仅用于个别需要 Flask 原生调试器的临时场景；**团队协作和提交代码时一律以 gunicorn 为准**。两种方式加载的是同一个 `main:app` 对象，业务逻辑完全一致，区别只是启动器和默认端口（dev server 3012 / gunicorn 8000）。
+
+#### 常见报错
+
+- `ModuleNotFoundError: No module named 'psycopg'`（或其他包）：说明当前 Python 环境没装本项目依赖，通常是误用了其它虚拟环境（如 marker/MinerU 环境）。请激活项目的 `.venv` 后重新 `pip install -r requirements.txt`。
 
 ### 本地 Docker PostgreSQL
 

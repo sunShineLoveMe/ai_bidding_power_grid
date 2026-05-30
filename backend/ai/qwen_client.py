@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify, current_app
 import os
-import sqlite3
 import requests
 from datetime import datetime
 from unidecode import unidecode

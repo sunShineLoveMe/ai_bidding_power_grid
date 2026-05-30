@@ -341,8 +341,8 @@ scripts/init_postgres_schema.sh
 ```bash
 docker compose exec -T postgres psql -U bidding -d bidding < migrations/postgres/001_schema.sql
 docker compose exec -T postgres psql -U bidding -d bidding < migrations/postgres/002_app_login.sql
-docker compose exec -T postgres psql -U bidding -d bidding < sql/20260510_seed_deepseek_v4_flash_pricing.sql
-docker compose exec -T postgres psql -U bidding -d bidding < sql/20260510_seed_deepseek_v4_pro_pricing.sql
+docker compose exec -T postgres psql -U bidding -d bidding < migrations/postgres/003_seed_deepseek_v4_flash_pricing.sql
+docker compose exec -T postgres psql -U bidding -d bidding < migrations/postgres/004_seed_deepseek_v4_pro_pricing.sql
 ```
 
 验证核心表是否存在：

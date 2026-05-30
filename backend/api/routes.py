@@ -1,7 +1,6 @@
 import logging
 from flask import Blueprint, request, jsonify, current_app, Response, stream_with_context
 import os
-import sqlite3
 import uuid
 import json
 import jwt
@@ -88,34 +87,23 @@ def get_backend_self_base_url():
     )
 
 def get_db():
-    """获取数据库连接"""
-    conn = sqlite3.connect('bidding.db')
-    conn.row_factory = sqlite3.Row
-    return conn
+    """SQLite 已下线，业务数据统一使用 PostgreSQL。
+
+    历史 legacy 路由仍引用本函数；保留显式报错以避免静默回退到本地 SQLite 文件，
+    同时提示调用方该路径已废弃。
+    """
+    raise RuntimeError("SQLite 数据通道已下线，请使用 PostgreSQL 数据访问层（backend.db.supabase_repo）。")
 
 
 # ---- settings / usage 路由已迁移至 backend/api/settings.py ----
 # 路由注册通过 routes.py 末尾的 import 触发，此处不再重复定义。
 
 def read_tender_file(bidding_id):
-    """读取招标文件"""
-    try:
-        conn = get_db()
-        cursor = conn.cursor()
-        cursor.execute('SELECT * FROM bidding WHERE id = ?', (bidding_id,))
-        bidding = cursor.fetchone()
-        conn.close()
-        if not bidding:
-            return jsonify({'error': '招标书不存在'}), 404
-        file_path = Path(bidding['storage_path'])
-        if file_path.suffix.lower() == '.pdf':
-            return _read_pdf(file_path)
-        else:
-            with open(bidding['storage_path'], 'rb') as f:
-                result = mammoth.extract_raw_text(f)
-            return result.value
-    except Exception as e:
-        return jsonify({'error': f'读取文件失败: {str(e)}'}), 500
+    """历史招标文件读取入口（基于已下线的 SQLite bidding 表）。
+
+    新流程统一通过 PostgreSQL 项目与文件记录处理，此函数仅为兼容旧 legacy 路由保留。
+    """
+    raise RuntimeError("read_tender_file 依赖的 SQLite bidding 表已下线，请使用新的 PostgreSQL 文件流程。")
 
 def _read_pdf(file_path):
     """读取PDF文件"""
@@ -750,37 +738,13 @@ def build_project_bid_markdown(
 
 
 def save_onlyoffice_document_mapping(*, document_key: str, project_id: str, title: str, file_path: str, download_url: str) -> None:
-    try:
-        save_onlyoffice_document(
-            document_key=document_key,
-            project_id=project_id,
-            title=title,
-            file_path=file_path,
-            download_url=download_url,
-        )
-        return
-    except Exception:
-        logging.exception("Supabase onlyoffice_documents 写入失败，回退 SQLite: %s", document_key)
-
-    conn = get_db()
-    try:
-        cur = conn.cursor()
-        cur.execute(
-            '''
-            INSERT INTO onlyoffice_documents (document_key, project_id, title, file_path, download_url)
-            VALUES (?, ?, ?, ?, ?)
-            ON CONFLICT(document_key) DO UPDATE SET
-              project_id=excluded.project_id,
-              title=excluded.title,
-              file_path=excluded.file_path,
-              download_url=excluded.download_url,
-              updated_at=CURRENT_TIMESTAMP
-            ''',
-            (document_key, project_id, title, file_path, download_url),
-        )
-        conn.commit()
-    finally:
-        conn.close()
+    save_onlyoffice_document(
+        document_key=document_key,
+        project_id=project_id,
+        title=title,
+        file_path=file_path,
+        download_url=download_url,
+    )
 
 def sync_and_parse_tender_in_background(file_path, original_filename, parse_id, supabase_sync=None):
     supabase_file_id = supabase_sync.get('file', {}).get('id') if supabase_sync else None

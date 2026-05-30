@@ -22,8 +22,8 @@ echo "initializing PostgreSQL schema: service=$DB_SERVICE db=$DB_NAME user=$DB_U
 
 run_sql_file "migrations/postgres/001_schema.sql"
 run_sql_file "migrations/postgres/002_app_login.sql"
-run_sql_file "sql/20260510_seed_deepseek_v4_flash_pricing.sql"
-run_sql_file "sql/20260510_seed_deepseek_v4_pro_pricing.sql"
+run_sql_file "migrations/postgres/003_seed_deepseek_v4_flash_pricing.sql"
+run_sql_file "migrations/postgres/004_seed_deepseek_v4_pro_pricing.sql"
 
 echo "verifying core tables"
 "${PSQL[@]}" -At -c "

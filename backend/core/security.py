@@ -88,7 +88,13 @@ def validate_startup_security() -> None:
 
     missing = []
     provider = os.getenv("AI_PROVIDER", "deepseek").strip().lower()
-    required_keys = ["SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY"]
+    db_provider = (os.getenv("DB_PROVIDER") or "postgres").strip().lower()
+    required_keys: list[str] = []
+    if db_provider == "postgres":
+        # PostgreSQL 部署使用 DATABASE_URL，不再依赖 Supabase 配置。
+        required_keys.append("DATABASE_URL")
+    else:
+        required_keys.extend(["SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY"])
     if provider == "deepseek":
         required_keys.append("DEEPSEEK_API_KEY")
     else:
@@ -105,11 +111,23 @@ def validate_startup_security() -> None:
     if onlyoffice_secret in PLACEHOLDER_VALUES or len(onlyoffice_secret) < 24:
         missing.append("ONLYOFFICE_JWT_SECRET")
 
-    if env_bool("APP_AUTH_ENABLED", False):
+    login_enabled = env_bool("APP_LOGIN_ENABLED", False)
+    auth_enabled = env_bool("APP_AUTH_ENABLED", False)
+    local_only = env_bool("APP_LOCAL_ONLY", False)
+
+    # 生产环境必须有访问控制：登录、静态令牌或显式仅本地/内网访问，三者至少其一。
+    # 否则服务会在公网上裸奔，所有 /api/ 请求被直接放行。
+    if not (login_enabled or auth_enabled or local_only):
+        raise RuntimeError(
+            "生产环境必须启用访问控制：请至少设置 APP_LOGIN_ENABLED=true（账号登录）、"
+            "APP_AUTH_ENABLED=true（静态访问令牌）或 APP_LOCAL_ONLY=true（仅本地/内网访问）之一。"
+        )
+
+    if auth_enabled:
         token = os.getenv("APP_AUTH_TOKEN", "").strip()
         if token in PLACEHOLDER_VALUES or len(token) < 24:
             missing.append("APP_AUTH_TOKEN")
-    if env_bool("APP_LOGIN_ENABLED", False):
+    if login_enabled:
         secret = session_secret()
         if secret in PLACEHOLDER_VALUES or len(secret) < 24:
             missing.append("APP_SESSION_SECRET")
