@@ -174,8 +174,6 @@ APP_HOST=127.0.0.1:3012
 APP_PUBLIC_BASE_URL=http://127.0.0.1:3012
 UPLOAD_DIR=uploads/
 OUTPUT_DIR=outputs/
-CHROMA_DIR=chroma_db/
-SQLITE_DB_PATH=bidding.db
 BACKUP_DIR=backups/
 WORD_TEMPLATE_PATH=templates/default_bid_template.docx
 

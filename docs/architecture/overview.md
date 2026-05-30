@@ -10,9 +10,8 @@
 
 - Python 3.9+
 - Flask / Flask-CORS
-- PostgreSQL / pgvector
+- PostgreSQL / pgvector（统一向量库，已移除 ChromaDB）
 - 数据访问层迁移目标：标准 PostgreSQL 驱动或 ORM
-- ChromaDB 本地向量库兼容层
 - PyPDF2 / Mammoth / python-docx
 - Pillow 图片处理，用于企业资信库和产品库缩略图生成
 - MinerU API

@@ -62,7 +62,6 @@ services:
       - app_uploads:/app/uploads
       - app_outputs:/app/outputs
       - app_storage:/app/storage
-      - app_chroma:/app/chroma_db
       - app_backups:/app/backups
     depends_on:
       postgres:
@@ -100,5 +99,4 @@ volumes:
   app_uploads:
   app_outputs:
   app_storage:
-  app_chroma:
   app_backups:

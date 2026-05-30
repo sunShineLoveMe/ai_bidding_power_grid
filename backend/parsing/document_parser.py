@@ -9,7 +9,7 @@ from PyPDF2 import PdfReader, PdfWriter
 
 from backend.parsing.bid_interpreter import ingest_mineru_artifacts_to_supabase
 from backend.db.supabase_repo import update_bid_file_parse_status
-from backend.rag.vector_store import EmptyDocumentContentError, file_to_chroma
+from backend.rag.vector_store import EmptyDocumentContentError, ensure_extractable_text
 from backend.parsing.mineru_client import (
     MinerUDownloadError,
     MinerUConfigError,
@@ -106,9 +106,14 @@ def _update_supabase_status(file_id: str | None, parse_status: str) -> None:
 
 
 def _vectorize_markdown(markdown_path: str | None, parse_id: str, supabase_file_id: str | None) -> None:
+    """MinerU 解析产物落库后推进状态为 indexed。
+
+    招标文件的语义入库由前置的 ingest_artifacts() → ingest_mineru_artifacts_to_supabase()
+    统一写入 pgvector（document_chunks）。向量库统一到 pgvector 后，这里不再二次写 ChromaDB，
+    仅校验 markdown 产物存在并推进解析状态。
+    """
     if not markdown_path:
         raise RuntimeError("MinerU result does not include full.md")
-    file_to_chroma(markdown_path)
     _update_supabase_status(supabase_file_id, "indexed")
     write_parse_status(parse_id, {"parse_status": "indexed", "indexed_source": markdown_path})
 
@@ -587,7 +592,7 @@ def parse_and_index_tender_file(
             )
 
     try:
-        file_to_chroma(file_path)
+        ensure_extractable_text(file_path)
         _update_supabase_status(supabase_file_id, "indexed")
         write_parse_status(
             parse_id,

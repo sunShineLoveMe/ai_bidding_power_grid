@@ -24,8 +24,6 @@
   "upload_dir": "uploads/",
   "output_dir": "outputs/",
   "vector_store": "postgres_pgvector",
-  "chroma_dir": "chroma_db/",
-  "sqlite_db": "bidding.db",
   "onlyoffice_url": "http://localhost:8080",
   "backend_public_url": "http://host.docker.internal:3012",
   "word_template": "templates/default_bid_template.docx",

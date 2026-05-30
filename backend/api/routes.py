@@ -35,8 +35,6 @@ from backend.core.security import UploadValidationError, safe_upload_filename, v
 # 操作向量数据库的函数
 from backend.parsing.document_parser import ingest_artifacts as ingest_mineru_artifacts_to_supabase, import_mineru_result_zip, parse_and_index_tender_file, read_parse_status, retry_mineru_result_download, write_parse_status
 
-from backend.rag.vector_store import query_chroma
-
 # 共享对象集中定义在 backend.api._shared，避免后续按业务域拆分子模块时出现多份副本。
 # 下列导入保持 routes 命名空间中原有的符号可见（main.py / 单元测试依赖 routes.bp、
 # routes.DOCX_VOLUME_IMAGE_LIMITS 等属性）。

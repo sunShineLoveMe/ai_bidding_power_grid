@@ -4,7 +4,7 @@
 
 ## RAG 知识库架构
 
-系统使用 Supabase PostgreSQL + pgvector 作为企业知识库主链路。ChromaDB 仍保留为本地兼容能力，便于早期测试和离线验证。
+系统使用 PostgreSQL + pgvector 作为企业知识库的唯一向量链路。早期遗留的 ChromaDB 已移除（见任务清单 P1-9），向量写入与检索统一在 PostgreSQL 内完成。
 
 ### RAG 技术框架与模型
 
@@ -23,7 +23,6 @@
 | 文本抽取 | PyPDF2 / Mammoth / Markdown 读取 | 处理普通 PDF、DOCX 和 Markdown 文档 |
 | OCR/版面解析 | MinerU，可选 | 处理扫描版 PDF、复杂表格、图片型招标文件 |
 | 图片预览与导出 | Pillow + Supabase Storage | 上传企业资信/产品图片时生成 WebP 缩略图，详情预览优先加载缩略图；DOCX 导出优先使用本地/存储原图，超大图片写入 Word 前按清晰压缩处理 |
-| 本地兼容向量库 | ChromaDB | 早期 MVP 兼容保留，主链路已转向 Supabase pgvector |
 
 当前核心代码：
 
@@ -32,7 +31,7 @@
 | `backend/rag/ingestion.py` | 上传知识库资料后的解析、图片上下文提取、embedding 和 `document_chunks` 写入 |
 | `backend/rag/retrieval.py` | 用户问题向量化、调用 Supabase RPC 检索、组装 Prompt、生成 RAG 回答 |
 | `rag_seed/water_resources/_scripts/ingest_water_rag_seed.py` | 水利行业种子资料批量入库脚本 |
-| `backend/rag/vector_store.py` | DashScope embedding 封装与 ChromaDB 兼容逻辑 |
+| `backend/rag/vector_store.py` | DashScope embedding 封装、文本抽取与分片工具（`ensure_extractable_text` 做扫描件检测） |
 | `backend/api/routes.py` | `/api/knowledge/search`、`/api/knowledge/search/stream` 和 `/api/knowledge/followups` API |
 
 RAG 检索链路：
