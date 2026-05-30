@@ -1,3 +1,4 @@
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -249,7 +250,7 @@ class DocxExportRegressionTest(unittest.TestCase):
                 return Result()
 
             with (
-                patch.dict("os.environ", {"DOCX_REFRESH_FIELDS": "true", "SOFFICE_BIN": "/usr/bin/soffice-test"}),
+                patch.dict("os.environ", {"DOCX_REFRESH_FIELDS": "true", "SOFFICE_BIN": "soffice-test"}),
                 patch("backend.export.md_to_word.subprocess.run", side_effect=fake_run),
             ):
                 refreshed_path, report = refresh_docx_fields_with_soffice(source)
@@ -257,6 +258,8 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertEqual(source, refreshed_path)
             self.assertEqual(b"refreshed", source.read_bytes())
             self.assertEqual("refreshed", report["status"])
+            self.assertFalse(report["manual_refresh_required"])
+            self.assertIn("自动刷新", report["user_message"])
 
     def test_soffice_refresh_can_be_disabled(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -269,6 +272,47 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertEqual(source, refreshed_path)
             self.assertEqual(b"original", source.read_bytes())
             self.assertEqual("skipped", report["status"])
+            self.assertTrue(report["manual_refresh_required"])
+            self.assertIn("关闭", report["user_message"])
+
+    def test_soffice_refresh_reports_missing_configured_binary_without_blocking_docx(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            source = Path(tmpdir) / "test.docx"
+            source.write_bytes(b"original")
+
+            with patch.dict("os.environ", {"DOCX_REFRESH_FIELDS": "true", "SOFFICE_BIN": "/not/exist/soffice"}):
+                refreshed_path, report = refresh_docx_fields_with_soffice(source)
+
+            self.assertEqual(source, refreshed_path)
+            self.assertEqual(b"original", source.read_bytes())
+            self.assertEqual("failed", report["status"])
+            self.assertTrue(report["manual_refresh_required"])
+            self.assertIn("does not exist", report["reason"])
+            self.assertIn("Word/WPS", report["user_message"])
+
+    def test_soffice_refresh_timeout_reports_manual_refresh_required(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            source = Path(tmpdir) / "test.docx"
+            source.write_bytes(b"original")
+
+            def fake_run(*args, **kwargs):
+                raise subprocess.TimeoutExpired(cmd=kwargs.get("args") or "soffice", timeout=3)
+
+            with (
+                patch.dict("os.environ", {
+                    "DOCX_REFRESH_FIELDS": "true",
+                    "SOFFICE_BIN": "soffice-test",
+                    "DOCX_REFRESH_TIMEOUT_SECONDS": "3",
+                }),
+                patch("backend.export.md_to_word.subprocess.run", side_effect=fake_run),
+            ):
+                refreshed_path, report = refresh_docx_fields_with_soffice(source)
+
+            self.assertEqual(source, refreshed_path)
+            self.assertEqual(b"original", source.read_bytes())
+            self.assertEqual("failed", report["status"])
+            self.assertTrue(report["manual_refresh_required"])
+            self.assertIn("timed out", report["reason"])
 
     def test_formal_docx_cleans_generation_notes_emoji_and_preserves_table(self):
         with tempfile.TemporaryDirectory() as tmpdir:

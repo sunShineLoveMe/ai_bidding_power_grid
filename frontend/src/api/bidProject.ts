@@ -302,6 +302,16 @@ export type BidExportTask = {
       failed?: number;
       events?: Array<Record<string, unknown>>;
     };
+    field_refresh?: {
+      status?: 'refreshed' | 'skipped' | 'failed';
+      user_message?: string;
+      manual_refresh_required?: boolean;
+      reason?: string;
+      soffice_bin?: string | null;
+      timeout_seconds?: number;
+      output_path?: string;
+      size?: number;
+    };
     [key: string]: unknown;
   };
   created_at?: string;

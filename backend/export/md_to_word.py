@@ -785,6 +785,27 @@ def _soffice_bin() -> str | None:
     )
 
 
+def _docx_refresh_user_message(status: str, reason: str | None = None) -> str:
+    if status == "refreshed":
+        return "DOCX 已完成自动刷新，目录页码、页脚页码和总页数字段已重新保存。"
+    if status == "skipped":
+        return "DOCX 已生成，但当前环境关闭了自动页码刷新；请在 Word/WPS 中打开后全选并刷新域。"
+    detail = f"（{reason}）" if reason else ""
+    return f"DOCX 已生成，但服务器未能自动刷新目录页码{detail}；请打开 Word/WPS 后全选并刷新域，或联系管理员检查 LibreOffice。"
+
+
+def _update_refresh_report(report: dict, *, status: str, reason: str | None = None, **extra) -> dict:
+    report.update({
+        "status": status,
+        "manual_refresh_required": status != "refreshed",
+        "user_message": _docx_refresh_user_message(status, reason),
+    })
+    if reason:
+        report["reason"] = reason
+    report.update(extra)
+    return report
+
+
 def refresh_docx_fields_with_soffice(docx_path: str | Path) -> tuple[Path, dict]:
     """Refresh DOCX fields with LibreOffice headless while keeping the output as DOCX."""
     source = Path(docx_path)
@@ -796,20 +817,23 @@ def refresh_docx_fields_with_soffice(docx_path: str | Path) -> tuple[Path, dict]
         "input_path": str(source),
     }
     if not report["enabled"]:
-        report["reason"] = "DOCX_REFRESH_FIELDS is disabled"
+        _update_refresh_report(report, status="skipped", reason="DOCX_REFRESH_FIELDS is disabled")
         return source, report
     if not source.exists():
-        report["status"] = "failed"
-        report["reason"] = "DOCX file does not exist"
+        _update_refresh_report(report, status="failed", reason="DOCX file does not exist")
         return source, report
 
     soffice_bin = _soffice_bin()
     report["soffice_bin"] = soffice_bin
     if not soffice_bin:
-        report["reason"] = "soffice executable not found"
+        _update_refresh_report(report, status="failed", reason="soffice executable not found")
+        return source, report
+    if os.path.sep in soffice_bin and not Path(soffice_bin).exists():
+        _update_refresh_report(report, status="failed", reason=f"soffice executable does not exist: {soffice_bin}")
         return source, report
 
     timeout = int(os.getenv("DOCX_REFRESH_TIMEOUT_SECONDS", "180"))
+    report["timeout_seconds"] = timeout
     with tempfile.TemporaryDirectory(prefix="docx-refresh-") as tmpdir:
         work_dir = Path(tmpdir)
         input_dir = work_dir / "input"
@@ -839,12 +863,13 @@ def refresh_docx_fields_with_soffice(docx_path: str | Path) -> tuple[Path, dict]
         ]
         try:
             completed = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, check=False)
+        except subprocess.TimeoutExpired:
+            logging.warning("LibreOffice 刷新 DOCX 字段超时: %s timeout=%s", source, timeout)
+            _update_refresh_report(report, status="failed", reason=f"LibreOffice refresh timed out after {timeout} seconds")
+            return source, report
         except Exception as exc:
             logging.exception("LibreOffice 刷新 DOCX 字段失败: %s", source)
-            report.update({
-                "status": "failed",
-                "reason": str(exc),
-            })
+            _update_refresh_report(report, status="failed", reason=str(exc))
             return source, report
 
         report.update({
@@ -854,21 +879,14 @@ def refresh_docx_fields_with_soffice(docx_path: str | Path) -> tuple[Path, dict]
         })
         refreshed = output_dir / source.name
         if completed.returncode != 0 or not refreshed.exists() or refreshed.stat().st_size == 0:
-            report.update({
-                "status": "failed",
-                "reason": "LibreOffice did not produce refreshed DOCX",
-            })
+            _update_refresh_report(report, status="failed", reason="LibreOffice did not produce refreshed DOCX")
             logging.warning("LibreOffice 未生成刷新后的 DOCX: %s report=%s", source, report)
             return source, report
 
         temp_refreshed = source.with_name(f".{source.stem}.refreshed-{uuid.uuid4().hex}.docx")
         shutil.copy2(refreshed, temp_refreshed)
         os.replace(str(temp_refreshed), str(source))
-        report.update({
-            "status": "refreshed",
-            "output_path": str(source),
-            "size": source.stat().st_size,
-        })
+        _update_refresh_report(report, status="refreshed", output_path=str(source), size=source.stat().st_size)
         logging.info("LibreOffice 已刷新 DOCX 字段: %s", source)
         return source, report
 

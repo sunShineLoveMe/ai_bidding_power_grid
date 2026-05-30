@@ -17,7 +17,7 @@
 | Node.js | 18+ | 构建 React 前端 |
 | npm | 9+ | 安装前端依赖 |
 | Docker Desktop / Docker Engine | 最新稳定版 | 启动 PostgreSQL + pgvector、Redis、后端和前端 |
-| LibreOffice | 可选，建议安装 | 服务端刷新 DOCX 目录页码 |
+| LibreOffice | 本地可选，backend 容器已内置 | 服务端刷新 DOCX 目录页码 |
 
 ### 1.2 Docker 资源建议
 
@@ -410,9 +410,17 @@ MINERU_DOWNLOAD_DOH_RESOLVE=true
 
 没有 MinerU 时，普通文本型 PDF / DOCX 仍可走本地解析能力，但扫描件质量会受影响。
 
-### 5.7 LibreOffice 可选配置
+### 5.7 LibreOffice / DOCX 页码刷新配置
 
 用于导出 DOCX 后刷新目录页码、页脚页码和总页数。
+
+Docker 测试环境中，backend 镜像已安装 LibreOffice Writer。镜像构建时使用阿里云 Debian 镜像源并配置 apt 重试，推荐保持以下运行配置：
+
+```ini
+DOCX_REFRESH_FIELDS=true
+SOFFICE_BIN=/usr/bin/soffice
+DOCX_REFRESH_TIMEOUT_SECONDS=180
+```
 
 macOS Apple Silicon 常见路径：
 
@@ -430,7 +438,13 @@ SOFFICE_BIN=/usr/bin/soffice
 DOCX_REFRESH_TIMEOUT_SECONDS=180
 ```
 
-未安装 LibreOffice 时，DOCX 导出不会被阻断，但目录页码可能需要用户打开 Word 后手动刷新。
+验证命令：
+
+```bash
+docker compose exec -T backend soffice --version
+```
+
+未安装 LibreOffice 或路径错误时，DOCX 导出不会被阻断。导出任务的 `metadata.field_refresh` 会记录 `status`、`reason`、`soffice_bin` 和 `user_message`，前端会提示用户在 Word/WPS 中手动刷新域。
 
 ## 6. Docker Compose 一键启动
 
@@ -1094,7 +1108,7 @@ python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py
 
 ### 17.7 DOCX 导出成功但目录页码不正确
 
-原因：服务器未安装 LibreOffice，或 `SOFFICE_BIN` 路径错误。
+原因：服务器未安装 LibreOffice、`SOFFICE_BIN` 路径错误，或 LibreOffice 执行超时。
 
 处理：
 
@@ -1121,6 +1135,29 @@ DOCX_REFRESH_FIELDS=true
 SOFFICE_BIN=/实际/soffice/路径
 DOCX_REFRESH_TIMEOUT_SECONDS=180
 ```
+
+Docker 测试环境优先检查 backend 容器：
+
+```bash
+docker compose exec -T backend soffice --version
+docker compose exec -T backend printenv SOFFICE_BIN
+```
+
+如果容器内没有 `soffice`，重新构建 backend 镜像：
+
+```bash
+docker compose build backend
+docker compose up -d backend
+```
+
+排查导出任务时，查看任务返回的 `metadata.field_refresh`：
+
+| 字段 | 说明 |
+| --- | --- |
+| `status` | `refreshed` 成功；`failed` 失败但不阻断下载；`skipped` 配置关闭 |
+| `manual_refresh_required` | `true` 表示用户需要打开 Word/WPS 后手动刷新域 |
+| `user_message` | 前端展示给用户的提示 |
+| `reason` | 具体失败原因 |
 
 ### 17.8 前端跨域失败
 

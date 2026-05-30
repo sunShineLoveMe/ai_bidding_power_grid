@@ -1712,11 +1712,16 @@ export function BidEditorPage(): JSX.Element {
         window.open(task.download_url, '_blank');
         const imageConversion = task.metadata?.image_conversion;
         const imageSelection = task.metadata?.image_selection;
+        const fieldRefresh = task.metadata?.field_refresh;
         const failedImages = Number(imageConversion?.failed || 0);
         const skippedImages = Number(imageConversion?.skipped || 0);
         const insertedImages = Number(imageConversion?.inserted || 0);
         const selectionWarnings = imageSelection?.warnings || [];
-        if (failedImages > 0 || skippedImages > 0 || selectionWarnings.length > 0) {
+        if (fieldRefresh?.manual_refresh_required) {
+          message.warning(fieldRefresh.user_message || 'DOCX 已生成，但目录页码可能需要打开 Word/WPS 后手动刷新。', 8);
+        } else if (fieldRefresh?.status === 'refreshed') {
+          message.success(fieldRefresh.user_message || (scope === 'section' ? '本章 DOCX 已生成，目录页码已刷新' : `${activeVolume === 'all' ? '全文' : volumeLabel(activeVolume)} DOCX 已生成，目录页码已刷新`), 5);
+        } else if (failedImages > 0 || skippedImages > 0 || selectionWarnings.length > 0) {
           message.warning(`DOCX 已生成，图片插入 ${insertedImages} 张，跳过 ${skippedImages} 张，失败 ${failedImages} 张，请下载后复核图文位置。`, 7);
         } else {
           message.success(scope === 'section' ? '本章 DOCX 已生成' : `${activeVolume === 'all' ? '全文' : volumeLabel(activeVolume)} DOCX 已生成`);

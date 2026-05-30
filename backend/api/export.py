@@ -128,7 +128,7 @@ def _run_bid_docx_export_task(
             update_bid_export_task(project_id, task_id, {
                 "status": "completed",
                 "progress": 100,
-                "message": "DOCX 已生成，目录页码已刷新。" if field_refresh_report.get("status") == "refreshed" else "DOCX 已生成，目录页码将在 Word 打开时刷新。",
+                "message": field_refresh_report.get("user_message") or ("DOCX 已生成，目录页码已刷新。" if field_refresh_report.get("status") == "refreshed" else "DOCX 已生成，目录页码将在 Word 打开时刷新。"),
                 "project_name": project_name,
                 "file_name": generated_docx_path.name,
                 "file_path": str(generated_docx_path),
