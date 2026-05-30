@@ -59,7 +59,7 @@ def _build_prompt(payload: dict[str, Any]) -> str:
     enterprise_context = build_enterprise_context()
 
     return f"""
-你是资深水利工程招投标顾问，熟悉国内水利工程招投标、资质审查、技术响应、商务响应和评分规则。
+你是资深电网/电力工程招投标顾问，熟悉电网工程、设备供货、安装调试、运维检修、资质审查、技术响应、商务响应和评分规则。
 企业画像：
 {enterprise_context}
 
@@ -194,7 +194,7 @@ def _build_segment_prompt(payload: dict[str, Any], group: list[dict[str, Any]], 
     project_meta = analysis.get("project_meta") or {}
     text = "\n\n---\n\n".join(_chunk_source_text(chunk) for chunk in group)
     return f"""
-你是资深水利工程招投标顾问。请只基于当前文档分段抽取结构化招标解读信息。
+你是资深电网/电力工程招投标顾问。请只基于当前文档分段抽取结构化招标解读信息。
 这是第 {index}/{total} 段。不得编造当前分段没有的信息；必须保留页码、章节和原文证据。
 
 企业画像：
@@ -249,7 +249,7 @@ def _build_merge_prompt(payload: dict[str, Any], segment_reports: list[dict[str,
         for idx, report in enumerate(segment_reports)
     ]
     return f"""
-你是资深水利工程招投标顾问。请把多个分段解读结果融合为一份最终招标解读报告。
+你是资深电网/电力工程招投标顾问。请把多个分段解读结果融合为一份最终招标解读报告。
 要求：
 1. 去重合并同类资格项、评分项、风险项和材料清单。
 2. 高风险、否决项、资格要求、评分项优先。

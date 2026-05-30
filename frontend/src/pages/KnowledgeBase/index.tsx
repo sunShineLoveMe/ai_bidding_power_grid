@@ -34,13 +34,13 @@ interface KnowledgeDetail {
 
 const categoryLabel: Record<string, string> = {
   general: '通用资料',
-  water_tender_documents: '水利招标文件',
-  water_policy_regulations: '水利政策法规',
-  water_standards_specs: '水利标准规范',
-  water_standard_phrases: '水利标准话术',
-  water_capability_library: '水利能力资料',
+  water_tender_documents: '电网招标文件',
+  water_policy_regulations: '电力政策法规',
+  water_standards_specs: '电网标准规范',
+  water_standard_phrases: '电网标准话术',
+  water_capability_library: '电网能力资料',
   water_company_profiles: '企业画像资料',
-  water_product_library: '水利产品资料',
+  water_product_library: '电力产品资料',
   water_qualification_library: '企业资信资料',
   water_upload_workflow: '上传流程样例',
 };
@@ -201,7 +201,7 @@ export function KnowledgeBasePage(): JSX.Element {
           </div>
           <div className="mb-3 grid gap-3 text-sm font-semibold text-slate-600 xl:grid-cols-2">
             <div className="rounded-xl bg-slate-50 p-3 leading-6">
-              Supabase PGVector 持久化存储，支持水利法规、招标文件、标准话术和企业资料检索。
+              PostgreSQL + pgvector 持久化存储，支持电网招标文件、技术规范书、标准话术和企业资料检索。
             </div>
             <div className="rounded-xl bg-blue-50 p-3 leading-6 text-blue-700">
               上传资质扫描件、产品图片或图文混排资料后，可继续扩展图片召回和标书自动配图能力。

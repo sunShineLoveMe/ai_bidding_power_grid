@@ -108,7 +108,7 @@ def _fetch_knowledge_context(payload: dict[str, Any]) -> dict[str, Any]:
         project_name = project_meta.get("project_name") or ""
 
         # 用项目摘要 + 关键词构造检索 query
-        query = f"水利工程投标 {project_name} {summary}"[:300]
+        query = f"电网工程投标 {project_name} {summary}"[:300]
 
         # 1. 检索知识库文档片段（标准话术、施工方案、政策法规等）
         try:
@@ -600,7 +600,7 @@ def _build_prompt(payload: dict[str, Any]) -> str:
         )
 
     prompt_parts = [
-        "你是资深水利工程投标文件编制负责人。请基于招标文件结构化解读和企业私有知识库，生成\"真实投标分册组成 + 各分册章节大纲\"。",
+        "你是资深电网/电力工程投标文件编制负责人。请基于招标文件结构化解读和企业私有知识库，生成\"真实投标分册组成 + 各分册章节大纲\"。",
         "",
         "核心要求：",
         "1. 面向后续自动生成标书正文，不要写完整正文。",

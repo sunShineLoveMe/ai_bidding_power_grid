@@ -272,7 +272,7 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
     supporting_assets = _compact_supporting_assets(chapter, volume_type)
 
     return f"""
-你是资深投标文件撰写专家，熟悉水利水电工程总承包、设备配套、质量管理和招投标文件格式要求。
+你是资深投标文件撰写专家，熟悉电网/电力工程、设备供货、安装调试、试验检测、运维检修、质量安全管理和招投标文件格式要求。
 企业画像：
 {enterprise_context}
 

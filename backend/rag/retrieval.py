@@ -254,7 +254,7 @@ def build_knowledge_prompt(
 
     context_str = "\n\n---\n\n".join(text_contexts)
     asset_context_str = "\n\n---\n\n".join(asset_contexts) or "无相关图片资产。"
-    prompt = f"""你是一个专业的企业私有知识库与水利招投标 RAG 问答助手。
+    prompt = f"""你是一个专业的企业私有知识库与电网/电力招投标 RAG 问答助手。
 你可以同时依据“企业知识库检索片段”和“相关图片/资质资产”回答用户问题。用户询问企业资信库、产品库、业绩材料、人员证书、社保缴纳证明、营业执照、产品图片等私有资产时，应优先基于相关图片/资质资产回答。
 不要编造未出现在资料中的证书编号、人员姓名、合同金额或具体日期。
 

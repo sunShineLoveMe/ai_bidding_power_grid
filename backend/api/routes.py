@@ -349,7 +349,8 @@ def _section_needs_image(section: dict) -> bool:
     text = _section_text(section)
     keywords = [
         "资质", "证书", "营业执照", "许可", "业绩", "产品", "设备", "材料", "施工",
-        "水库", "泵站", "闸门", "大坝", "渠道", "除险", "加固", "组织实施", "工程范围",
+        "输变电", "配网", "变电站", "线路", "电缆", "开关柜", "变压器", "箱变",
+        "继电保护", "自动化", "调试", "试验", "运维", "检修", "组织实施", "工程范围",
     ]
     return any(keyword in text for keyword in keywords)
 
@@ -375,7 +376,7 @@ def _score_asset_for_section(asset: dict, section: dict) -> int:
         library_type = str(specs.get("library_type") or "")
 
     if volume_type == "technical":
-        if library_type == "product" or any(keyword in asset_text for keyword in ["产品", "设备", "参数", "工艺", "水轮机", "泵", "闸门", "控制柜"]):
+        if library_type == "product" or any(keyword in asset_text for keyword in ["产品", "设备", "参数", "工艺", "变压器", "开关柜", "电缆", "保护装置", "自动化", "控制柜"]):
             score += 22
         if library_type == "qualification":
             score -= 10
@@ -398,10 +399,10 @@ def _score_asset_for_section(asset: dict, section: dict) -> int:
         if any(keyword in asset_text for keyword in ["资质", "证书", "营业执照", "许可", "脱敏"]):
             score += 18
     if any(keyword in section_text for keyword in ["产品", "设备", "材料", "报价", "清单"]):
-        if any(keyword in asset_text for keyword in ["产品", "设备", "材料", "参数", "水轮机", "螺母", "叶片"]):
+        if any(keyword in asset_text for keyword in ["产品", "设备", "材料", "参数", "变压器", "开关柜", "电缆", "保护装置"]):
             score += 14
-    if any(keyword in section_text for keyword in ["施工", "组织", "工程", "水库", "大坝", "渠道", "泵站", "除险", "加固"]):
-        if any(keyword in asset_text for keyword in ["施工", "工程", "水库", "泵站", "渠道", "现场", "项目"]):
+    if any(keyword in section_text for keyword in ["施工", "安装", "调试", "试验", "运维", "检修", "工程", "输变电", "配网", "变电站", "线路"]):
+        if any(keyword in asset_text for keyword in ["施工", "安装", "调试", "试验", "运维", "检修", "工程", "输变电", "配网", "现场", "项目"]):
             score += 12
     if category and category.lower() in section_text:
         score += 6
@@ -450,7 +451,7 @@ def _asset_library_label(asset: dict) -> str:
 
 def _asset_caption(asset: dict, match_reason: str | None = None) -> str:
     title = str(asset.get("title") or "知识库图片资产").strip()
-    category = str(asset.get("category") or "水利行业资料").strip()
+    category = str(asset.get("category") or "电网行业资料").strip()
     sensitive_note = "，脱敏示意图，不替代正式资质文件" if asset.get("is_sensitive") or asset.get("anonymized") else ""
     source_note = f"来源：{_asset_library_label(asset)}"
     reason_note = f"；匹配依据：{match_reason}" if match_reason else ""
@@ -532,7 +533,7 @@ def _build_section_image_markdown(
 
     if not candidates:
         section_text = _section_text(section)
-        fallback_keywords = ["产品", "设备", "施工", "工程", "水库", "泵站", "渠道", "现场", "资质", "证书", "营业执照"]
+        fallback_keywords = ["产品", "设备", "施工", "安装", "调试", "试验", "运维", "检修", "工程", "输变电", "配网", "现场", "资质", "证书", "营业执照"]
         for asset in assets:
             image_ref = _asset_image_ref(asset)
             if not image_ref:
@@ -557,7 +558,7 @@ def _build_section_image_markdown(
         image_ref = _asset_image_ref(asset)
         asset_id = str(asset.get("id") or image_ref)
         used_asset_ids.add(asset_id)
-        alt = re.sub(r"[\[\]\(\)]", "", str(asset.get("title") or "水利行业配图")).strip()
+        alt = re.sub(r"[\[\]\(\)]", "", str(asset.get("title") or "电网行业配图")).strip()
         match_reason = _asset_match_reason(asset, section, score)
         caption = _asset_caption(asset, match_reason)
         snippets.append(f"\n\n![{alt}]({image_ref})\n\n{caption}\n\n")

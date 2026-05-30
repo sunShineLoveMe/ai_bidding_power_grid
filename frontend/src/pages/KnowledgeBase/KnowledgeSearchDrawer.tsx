@@ -177,9 +177,9 @@ export function KnowledgeSearchDrawer({
   const [messages, setMessages] = useState<Message[]>([]);
 
   const guideQuestions = [
-    '水库除险加固工程投标文件需要重点准备哪些资格材料？',
-    '水利工程施工组织设计中安全度汛和质量安全措施应该怎么写？',
-    '根据现有知识库，水利投标最容易出现哪些废标或否决风险？',
+    '电网设备采购项目投标文件需要重点准备哪些资格材料？',
+    '技术规范书响应和技术偏差表应该如何组织？',
+    '根据现有知识库，电网投标最容易出现哪些废标或否决风险？',
   ];
 
   const handleSearch = async (presetQuery?: string) => {
@@ -358,8 +358,8 @@ export function KnowledgeSearchDrawer({
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-slate-400">
             <SearchOutlined style={{ fontSize: 48, marginBottom: 16 }} />
-            <Text type="secondary">试着问我关于水利招标文件、政策法规、标准话术和投标章节的问题</Text>
-            <Text type="secondary" className="mt-2 text-xs">可检索企业资料、产品图片、资质样张和水利行业知识</Text>
+            <Text type="secondary">试着问我关于电网招标文件、技术规范书、标准话术和投标章节的问题</Text>
+            <Text type="secondary" className="mt-2 text-xs">可检索企业资料、产品图片、资质样张和电网行业知识</Text>
             <div className="mt-6 w-full space-y-3">
               {guideQuestions.map((question) => (
                 <button

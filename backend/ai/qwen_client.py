@@ -671,7 +671,7 @@ def generate_bid_section(section_title, section_content, tender_content):
     """按小节生成投标文件内容"""
     enterprise_context = build_enterprise_context()
     prompt = f'''
-    你是专业投标书撰写专家，熟悉水利工程、设备配套、质量管理和供应链项目投标要求。
+    你是专业投标书撰写专家，熟悉电网/电力工程、设备供货、安装调试、质量管理、运维服务和供应链项目投标要求。
     企业画像：
     {enterprise_context}
     请结合企业能力、质量管理、内网资料库和招标文件要求，直接输出专业、严谨、可落地的正文内容。

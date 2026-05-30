@@ -118,7 +118,7 @@ export function SettingsPage(): JSX.Element {
       <MetricCards
         items={[
           { title: '模型服务', value: modelServiceLabel, desc: modelServiceDesc, icon: Bot, colorClass: 'bg-blue-50 text-blue-600' },
-          { title: '向量库', value: 'PGVector', desc: 'Supabase 持久化', icon: Database, colorClass: 'bg-emerald-50 text-emerald-600' },
+          { title: '向量库', value: 'PGVector', desc: 'PostgreSQL 持久化', icon: Database, colorClass: 'bg-emerald-50 text-emerald-600' },
           { title: '文档服务', value: 'Office', desc: 'OnlyOffice 预留', icon: FileText, colorClass: 'bg-violet-50 text-violet-600' },
           { title: '部署模式', value: '单机', desc: '内网部署', icon: HardDrive, colorClass: 'bg-orange-50 text-orange-500' },
         ]}
@@ -291,16 +291,16 @@ export function SettingsPage(): JSX.Element {
                 <div className="settings-grid">
                   <Form form={form} layout="vertical" size="middle" className="compact-form" disabled={loading}>
                     <Form.Item label="企业名称" name="enterprise_name" rules={[{ required: true, message: '请输入企业名称或脱敏名称' }]}>
-                      <Input placeholder="例如：某水利工程建设企业" />
+                      <Input placeholder="例如：某电力工程服务企业" />
                     </Form.Item>
                     <Form.Item label="所在区域" name="enterprise_region">
                       <Input placeholder="例如：华中地区" />
                     </Form.Item>
                     <Form.Item label="行业定位" name="enterprise_industry">
-                      <Input placeholder="例如：水利水电工程建设与工程配套服务" />
+                      <Input placeholder="例如：电力工程建设、设备供货、运维检修与技术服务" />
                     </Form.Item>
                     <Form.Item label="业务范围" name="enterprise_business_scope">
-                      <Input.TextArea rows={3} placeholder="例如：水利工程施工、机电设备配套、金属结构件、质量检验、现场服务" />
+                      <Input.TextArea rows={3} placeholder="例如：输变电工程、配网工程、设备供货、安装调试、试验检测、运维检修和资料交付" />
                     </Form.Item>
                     <Form.Item label="核心能力" name="enterprise_advantages">
                       <Input.TextArea rows={3} placeholder="例如：项目响应、质量安全管理、资料编制、供应链协同和现场履约能力" />
@@ -336,17 +336,11 @@ export function SettingsPage(): JSX.Element {
                     <Form.Item label="生成文件目录" name="output_dir">
                       <Input />
                     </Form.Item>
-                    <Form.Item label="兼容 ChromaDB 目录" name="chroma_dir">
-                      <Input />
-                    </Form.Item>
-                    <Form.Item label="SQLite 数据库" name="sqlite_db">
-                      <Input />
-                    </Form.Item>
                   </Form>
                   <div className="settings-note">
                     <Database size={22} />
                     <strong>单机版存储策略</strong>
-                    <p>上传文件、生成文件、向量库和关系数据库均存放在本机目录，便于内网部署、备份和迁移。</p>
+                    <p>关系数据库使用 PostgreSQL，向量检索使用 pgvector；本地文件存储用于上传、导出和资产文件，后续可切换 OSS。</p>
                   </div>
                 </div>
               ),
@@ -398,7 +392,7 @@ export function SettingsPage(): JSX.Element {
                   <div className="settings-note">
                     <HardDrive size={22} />
                     <strong>建议备份范围</strong>
-                    <p>建议同时备份 `bidding.db`、`uploads/`、`outputs/`、`chroma_db/` 和 `.env` 的脱敏配置说明。</p>
+                    <p>建议同时备份 PostgreSQL 数据库、`uploads/`、`outputs/`、`storage/` 和 `.env` 的脱敏配置说明。</p>
                   </div>
                 </div>
               ),

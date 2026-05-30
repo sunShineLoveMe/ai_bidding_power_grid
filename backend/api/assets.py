@@ -157,7 +157,7 @@ def _asset_payload_from_form(storage_info: dict | None = None, existing: dict | 
         "is_synthetic": bool(existing.get("is_synthetic", False)),
         "is_sensitive": is_sensitive,
         "anonymized": anonymized,
-        "industry": existing.get("industry") or "水利行业",
+        "industry": existing.get("industry") or "电网行业",
         "applicable_sections": applicable_sections,
         "applicable_volumes": applicable_volumes,
         "tags": tags,

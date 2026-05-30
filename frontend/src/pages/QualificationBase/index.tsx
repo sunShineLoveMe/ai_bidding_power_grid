@@ -298,7 +298,7 @@ export function QualificationBasePage(): JSX.Element {
         <Form form={form} layout="vertical" size="middle" className="compact-form">
           <div className="grid gap-x-5 md:grid-cols-2">
             <Form.Item label="资信名称" name="title" rules={[{ required: true, message: '请输入资信名称' }]}>
-              <Input placeholder="例如：水利水电施工总承包资质证书" />
+              <Input placeholder="例如：承装（修、试）电力设施许可证" />
             </Form.Item>
             <Form.Item label="资信分类" name="category" initialValue="资质证书" rules={[{ required: true, message: '请选择分类' }]}>
               <Select options={categories.slice(1).map(item => ({ label: item.name, value: item.name }))} />

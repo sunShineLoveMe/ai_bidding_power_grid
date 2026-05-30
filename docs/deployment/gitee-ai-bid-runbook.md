@@ -49,7 +49,7 @@ Disk: 200 GB+
 | `MINERU_API_TOKEN` | 可选 | 扫描版 PDF / 复杂 PDF OCR 解析 |
 | `ONLYOFFICE_JWT_SECRET` | 可选 | 使用 OnlyOffice 终稿编辑时需要 |
 
-没有 `DASHSCOPE_API_KEY` 时，后端可以启动，但水利基础知识库入库和向量检索会失败。
+没有 `DASHSCOPE_API_KEY` 时，后端可以启动，但行业基础知识库入库、向量检索和 Rerank 会失败。
 
 ## 2. 拉取代码
 
@@ -181,17 +181,17 @@ LOCAL_STORAGE_ROOT=storage
 
 本地文件会写入 `storage/`、`uploads/`、`outputs/`、`parsed_outputs/` 等目录，这些目录已被 `.gitignore` 忽略。
 
-### 5.4 水利演示企业画像
+### 5.4 电网测试企业画像
 
-如果本次要演示水利行业，建议把 `.env` 里的企业画像从电力示例改为水利示例：
+当前测试版本默认面向电网/电力项目，建议 `.env` 使用脱敏电力企业画像：
 
 ```ini
-ENTERPRISE_NAME=某水利工程建设企业
-ENTERPRISE_REGION=华中地区
-ENTERPRISE_INDUSTRY=水利水电工程施工、检测、信息化建设与运行维护
-ENTERPRISE_BUSINESS_SCOPE=水库除险加固、河道治理、泵站水闸工程、灌区节水改造、水利信息化、施工检测、运行维护和资料交付
-ENTERPRISE_ADVANTAGES=具备水利工程施工组织、质量安全管理、设备与材料供应、试验检测、现场协调、缺陷责任期服务和资料归档能力
-ENTERPRISE_TARGET_CUSTOMERS=水利厅局、水务局、流域管理机构、地方水利建设单位、公共资源交易项目招标人
+ENTERPRISE_NAME=某电力工程服务企业
+ENTERPRISE_REGION=华北地区
+ENTERPRISE_INDUSTRY=电力工程建设、设备供货、运维检修与技术服务
+ENTERPRISE_BUSINESS_SCOPE=输变电工程、配网工程、设备供货、安装调试、试验检测、运维检修和资料交付
+ENTERPRISE_ADVANTAGES=具备电力工程项目响应、质量安全管理、资料编制、供应链协同、现场履约和售后运维能力
+ENTERPRISE_TARGET_CUSTOMERS=国家电网、南方电网、地方电力公司、电力设计院、总承包单位和设备供应链客户
 ENTERPRISE_RESPONSE_STYLE=专业、严谨、合规、可落地；不得编造资质证书编号、人员姓名、业绩合同金额、具体日期和未提供的企业证明材料
 ```
 
@@ -336,6 +336,8 @@ vector
 scripts/init_postgres_schema.sh
 ```
 
+当前本地验证状态：2026-05-30 已在临时全新 PostgreSQL + pgvector Docker 空库中完整执行 `001_schema.sql`、`002_app_login.sql`、`003_seed_deepseek_v4_flash_pricing.sql`、`004_seed_deepseek_v4_pro_pricing.sql`，首次执行和重复执行均通过。已确认核心表、`pgcrypto` / `vector` 扩展、`match_knowledge_chunks` / `match_knowledge_assets` RPC、DeepSeek v4 flash/pro 价格种子可用。阿里云 RDS 测试库需等账号到位后复验。
+
 如果需要手工排障，等价执行顺序如下：
 
 ```bash
@@ -349,6 +351,19 @@ docker compose exec -T postgres psql -U bidding -d bidding < migrations/postgres
 
 ```bash
 docker compose exec -T postgres psql -U bidding -d bidding -At -c "select table_name from information_schema.tables where table_schema='public' and table_name in ('bid_projects','bid_files','bid_analysis','bid_sections','knowledge_documents','document_chunks','knowledge_assets','app_users','ai_usage_logs','bid_generation_tasks','bid_export_tasks') order by table_name;"
+```
+
+验证 pgvector 扩展和 RPC：
+
+```bash
+docker compose exec -T postgres psql -U bidding -d bidding -At -c "select extname from pg_extension where extname in ('pgcrypto','vector') order by extname;"
+docker compose exec -T postgres psql -U bidding -d bidding -At -c "select proname from pg_proc where proname in ('match_knowledge_chunks','match_knowledge_assets') order by proname;"
+```
+
+验证 DeepSeek 价格种子：
+
+```bash
+docker compose exec -T postgres psql -U bidding -d bidding -At -c "select provider || ':' || model || ':' || operation_type || ':' || currency from public.ai_model_prices where provider='deepseek' order by model;"
 ```
 
 期望至少看到：
@@ -369,15 +384,17 @@ knowledge_documents
 
 如果表不存在，先不要启动后端，回到本节重新执行 schema。
 
-## 9. 导入水利基础数据
+## 9. 导入行业基础数据
 
-水利基础数据分三类：
+当前项目默认面向电网/电力场景。历史 `rag_seed/water_*` 目录只作为迁移参考，不作为当前测试环境默认数据；电网 RAG 种子库入库脚本会在 P0-9 补齐。
+
+当前基础数据分三类：
 
 | 数据目录 | 内容 | 导入目标 |
 | --- | --- | --- |
-| `rag_seed/water_resources/` | 水利招投标公开资料、法规、标准话术 | `knowledge_documents` / `document_chunks` |
-| `rag_seed/water_enterprise_mock/` | 脱敏企业画像、资信、产品服务、能力说明 | `knowledge_documents` / `document_chunks` |
-| `rag_seed/water_asset_images/` | 水利产品图、资信样张、工程示意图 | `knowledge_assets` + 本地 `storage/` |
+| `rag_seed/power_grid_resources/` | 电网/电力招投标公开资料、技术规范书响应、政策法规、标准话术 | `knowledge_documents` / `document_chunks` |
+| 待补：电网脱敏企业资料 | 脱敏企业画像、资信、产品服务、能力说明 | `knowledge_documents` / `document_chunks` |
+| 待补：电网图片资产库 | 电力产品图、资信样张、工程/服务示意图 | `knowledge_assets` + 本地 `storage/` |
 
 导入前确认 `.env` 中：
 
@@ -401,48 +418,27 @@ Windows PowerShell：
 venv\Scripts\activate
 ```
 
-### 8.1 导入水利 RAG 基础知识库
+### 9.1 电网 RAG 基础知识库
+
+P0-9 会补齐电网种子库入库脚本。脚本落地前，不建议把历史水利种子库导入当前电网测试环境。
+
+### 9.2 历史水利种子库（仅迁移参考）
+
+如果需要回归旧水利演示链路，可在独立测试库执行历史脚本：
 
 ```bash
 python rag_seed/water_resources/_scripts/ingest_water_rag_seed.py
+python rag_seed/water_enterprise_mock/_scripts/ingest_enterprise_mock_seed.py
+python rag_seed/water_asset_images/_scripts/ingest_knowledge_assets.py
 ```
 
-成功后会生成或更新：
+历史脚本成功后会生成或更新各自目录下的入库报告，例如：
 
 ```text
 rag_seed/water_resources/ingestion_report.md
 rag_seed/water_resources/ingestion_report.json
-```
-
-参考历史规模：
-
-```text
-有效资料：26 份
-向量分片：约 558 条
-```
-
-### 8.2 导入水利脱敏企业资料
-
-```bash
-python rag_seed/water_enterprise_mock/_scripts/ingest_enterprise_mock_seed.py
-```
-
-成功后会生成或更新：
-
-```text
 rag_seed/water_enterprise_mock/ingestion_report.md
 rag_seed/water_enterprise_mock/ingestion_report.json
-```
-
-### 8.3 导入水利图片资产库
-
-```bash
-python rag_seed/water_asset_images/_scripts/ingest_knowledge_assets.py
-```
-
-成功后会生成或更新：
-
-```text
 rag_seed/water_asset_images/ingestion_report.json
 ```
 
@@ -452,7 +448,7 @@ rag_seed/water_asset_images/ingestion_report.json
 storage/knowledge-assets/
 ```
 
-### 9.4 验证入库结果
+### 9.3 验证入库结果
 
 查看知识文档、分片、图片资产数量：
 
@@ -460,7 +456,7 @@ storage/knowledge-assets/
 docker compose exec -T postgres psql -U bidding -d bidding -At -c "select 'knowledge_documents=' || count(*) from public.knowledge_documents union all select 'document_chunks=' || count(*) from public.document_chunks union all select 'knowledge_assets=' || count(*) from public.knowledge_assets;"
 ```
 
-查看水利数据分类：
+查看数据分类：
 
 ```bash
 docker compose exec -T postgres psql -U bidding -d bidding -c "select category, count(*) from public.knowledge_documents group by category order by category;"
@@ -572,14 +568,14 @@ http://127.0.0.1:3012
 docker compose exec -T postgres psql -U bidding -d bidding -At -c "select 'bid_projects=' || count(*) from public.bid_projects union all select 'knowledge_documents=' || count(*) from public.knowledge_documents union all select 'document_chunks=' || count(*) from public.document_chunks union all select 'knowledge_assets=' || count(*) from public.knowledge_assets;"
 ```
 
-初始项目数可以为 0，但水利种子导入后 `knowledge_documents`、`document_chunks`、`knowledge_assets` 应大于 0。
+初始项目数可以为 0；电网种子库入库后 `knowledge_documents`、`document_chunks`、`knowledge_assets` 应大于 0。
 
 ### 12.3 上传招标文件测试
 
 可使用测试样本：
 
 ```text
-test_samples/water_tender_docs/
+test_samples/
 ```
 
 建议测试顺序：
@@ -596,10 +592,10 @@ test_samples/water_tender_docs/
 进入知识库问答或相关入口，提问：
 
 ```text
-水库除险加固工程投标文件通常需要哪些资格审查材料？
+电网设备采购项目投标文件通常需要哪些资格审查材料？
 ```
 
-如果水利 RAG 已入库，回答应能引用水利投标、法规或标准话术相关内容。
+如果电网 RAG 已入库，回答应能引用电网招投标、技术规范书响应、政策法规或标准话术相关内容。
 
 ## 14. 常用维护命令
 
@@ -766,7 +762,7 @@ docker compose exec -T postgres psql -U bidding -d bidding < migrations/postgres
 docker compose exec -T postgres psql -U bidding -d bidding < migrations/postgres/002_app_login.sql
 ```
 
-### 17.4 水利知识库为空
+### 17.4 行业知识库为空
 
 原因：只初始化了表，没有跑种子入库脚本。
 
@@ -863,9 +859,9 @@ APP_PUBLIC_BASE_URL=http://192.168.1.20:3012
 - [ ] `migrations/postgres/001_schema.sql` 已执行。
 - [ ] `migrations/postgres/002_app_login.sql` 已执行。
 - [ ] DeepSeek 价格种子 SQL 已执行。
-- [ ] 水利 RAG 文档已导入。
-- [ ] 水利脱敏企业资料已导入。
-- [ ] 水利图片资产已导入。
+- [ ] 电网 RAG 文档已导入。
+- [ ] 电网脱敏企业资料已导入。
+- [ ] 电网图片资产已导入。
 - [ ] `knowledge_documents`、`document_chunks`、`knowledge_assets` 数量大于 0。
 - [ ] 后端 `python main.py` 可启动。
 - [ ] 前端页面可访问。
