@@ -70,6 +70,7 @@ services:
       - app_outputs:/app/outputs
       - app_storage:/app/storage
       - app_backups:/app/backups
+      - app_parsed_outputs:/app/parsed_outputs
     depends_on:
       postgres:
         condition: service_healthy
@@ -115,6 +116,7 @@ services:
       - app_outputs:/app/outputs
       - app_storage:/app/storage
       - app_backups:/app/backups
+      - app_parsed_outputs:/app/parsed_outputs
     depends_on:
       postgres:
         condition: service_healthy
@@ -157,3 +159,4 @@ volumes:
   app_outputs:
   app_storage:
   app_backups:
+  app_parsed_outputs:

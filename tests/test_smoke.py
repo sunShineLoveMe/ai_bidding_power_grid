@@ -12,6 +12,9 @@ os.environ.setdefault("APP_LOGIN_ENABLED", "false")
 os.environ.setdefault("APP_EXPOSE_DEBUG_ERRORS", "false")
 os.environ.setdefault("REQUIRE_STRICT_CONFIG", "false")
 os.environ.setdefault("APP_ENV", "testing")
+# 解析状态文件型测试依赖本地 mineru_status.json，固定走 file 后端，
+# 与生产默认的 db 后端隔离，保证这些测试语义不变。
+os.environ.setdefault("PARSE_STATUS_BACKEND", "file")
 
 
 class BackendSmokeTest(unittest.TestCase):
@@ -108,7 +111,7 @@ class BackendSmokeTest(unittest.TestCase):
         self.assertEqual(safe_upload_filename("招标文件.pdf", "tender"), "tender.pdf")
 
     @patch("backend.api.mineru.get_bid_file", return_value=None)
-    @patch("backend.api.mineru.retry_mineru_result_download")
+    @patch("backend.tasks.parse_tasks.retry_mineru_download.delay")
     def test_parse_status_exposes_retryable_mineru_failure(self, retry_mock, _file_mock):
         file_id = "smoke-parse-status"
         status_dir = Path("parsed_outputs") / file_id
@@ -197,9 +200,9 @@ class BackendSmokeTest(unittest.TestCase):
         self.assertIsNone(payload["userMessage"])
         self.assertFalse(payload["retryable"])
 
-    @patch("backend.api.mineru.threading.Thread")
+    @patch("backend.tasks.parse_tasks.ingest_artifacts.delay")
     @patch("backend.api.mineru.get_bid_file", return_value=None)
-    def test_parse_status_binds_project_and_triggers_ingest_for_orphan_artifacts(self, _file_mock, thread_mock):
+    def test_parse_status_binds_project_and_triggers_ingest_for_orphan_artifacts(self, _file_mock, ingest_delay_mock):
         file_id = "smoke-parse-orphan-artifacts"
         project_id = "11111111-1111-4111-8111-111111111111"
         status_dir = Path("parsed_outputs") / file_id
@@ -226,7 +229,7 @@ class BackendSmokeTest(unittest.TestCase):
         self.assertEqual(payload["parseStatus"], "mineru_done")
         self.assertFalse(payload["parseCompleted"])
         self.assertEqual(status["supabase_ingest_status"], "running")
-        thread_mock.assert_called()
+        ingest_delay_mock.assert_called()
 
 
 class DocxExportSmokeTest(unittest.TestCase):

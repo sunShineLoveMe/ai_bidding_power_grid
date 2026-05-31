@@ -10,6 +10,10 @@ from PyPDF2 import PdfReader, PdfWriter
 from backend.parsing.bid_interpreter import ingest_mineru_artifacts_to_supabase
 from backend.db.supabase_repo import update_bid_file_parse_status
 from backend.rag.vector_store import EmptyDocumentContentError, ensure_extractable_text
+from backend.parsing.parse_status_store import (
+    write_parse_status as _store_write,
+    read_parse_status as _store_read,
+)
 from backend.parsing.mineru_client import (
     MinerUDownloadError,
     MinerUConfigError,
@@ -75,25 +79,15 @@ def _status_file(file_id: str) -> Path:
     return PARSED_OUTPUT_ROOT / file_id / "mineru_status.json"
 
 
+# 解析状态读写已迁移到 backend.parsing.parse_status_store（P1-1 第二批）。
+# 这里保留同名函数作为薄委托，避免改动 ~20 处调用点；后端（file/db）由
+# PARSE_STATUS_BACKEND 环境变量选择，默认 db，保证 web 与 Celery worker 跨进程可见。
 def write_parse_status(file_id: str, payload: dict[str, Any]) -> None:
-    status_path = _status_file(file_id)
-    status_path.parent.mkdir(parents=True, exist_ok=True)
-    existing: dict[str, Any] = {}
-    if status_path.exists():
-        try:
-            existing = json.loads(status_path.read_text(encoding="utf-8"))
-        except json.JSONDecodeError:
-            existing = {}
-    existing.update(payload)
-    existing["updated_at"] = datetime.utcnow().isoformat(timespec="seconds") + "Z"
-    status_path.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding="utf-8")
+    _store_write(file_id, payload)
 
 
 def read_parse_status(file_id: str) -> dict[str, Any] | None:
-    status_path = _status_file(file_id)
-    if not status_path.exists():
-        return None
-    return json.loads(status_path.read_text(encoding="utf-8"))
+    return _store_read(file_id)
 
 
 def _update_supabase_status(file_id: str | None, parse_status: str) -> None:

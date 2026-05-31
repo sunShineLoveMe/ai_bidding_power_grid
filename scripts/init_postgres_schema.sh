@@ -24,6 +24,7 @@ run_sql_file "migrations/postgres/001_schema.sql"
 run_sql_file "migrations/postgres/002_app_login.sql"
 run_sql_file "migrations/postgres/003_seed_deepseek_v4_flash_pricing.sql"
 run_sql_file "migrations/postgres/004_seed_deepseek_v4_pro_pricing.sql"
+run_sql_file "migrations/postgres/005_bid_parse_tasks.sql"
 
 echo "verifying core tables"
 "${PSQL[@]}" -At -c "
@@ -41,7 +42,8 @@ where table_schema = 'public'
     'app_users',
     'ai_usage_logs',
     'bid_generation_tasks',
-    'bid_export_tasks'
+    'bid_export_tasks',
+    'bid_parse_tasks'
   )
 order by table_name;
 "

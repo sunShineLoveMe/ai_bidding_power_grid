@@ -18,10 +18,18 @@ from __future__ import annotations
 
 import logging
 import os
+import sys
+from pathlib import Path
 
 from celery import Celery, Task
 
 logger = logging.getLogger(__name__)
+
+# 确保项目根目录在 import 路径上：Celery worker 可能不以项目根为 CWD 启动，
+# 否则任务执行时 `from main import app` 会 ModuleNotFoundError。
+_PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
 
 _TRUE_VALUES = {"1", "true", "yes", "on"}
 
@@ -74,7 +82,10 @@ def _build_celery() -> Celery:
     )
 
     # 任务模块列表：每迁移一类任务，在此登记一个模块。
-    app.conf.imports = ("backend.tasks.export_tasks",)
+    app.conf.imports = (
+        "backend.tasks.export_tasks",
+        "backend.tasks.parse_tasks",
+    )
 
     return app
 
@@ -95,9 +106,21 @@ class FlaskTask(Task):
     @classmethod
     def _get_flask_app(cls):
         if cls._flask_app is None:
-            # 延迟导入，避免循环依赖（main 导入 routes，routes 不应反向依赖 worker）。
-            from main import app as flask_app
+            # 优先按常规导入；worker 若不以项目根为 CWD、且 main 不在 sys.path 时，
+            # 退回按绝对文件路径加载 main.py，保证跨 CWD/容器稳定可用。
+            try:
+                from main import app as flask_app
+            except ModuleNotFoundError:
+                import importlib.util
 
+                main_path = _PROJECT_ROOT / "main.py"
+                spec = importlib.util.spec_from_file_location("main", main_path)
+                if spec is None or spec.loader is None:
+                    raise
+                module = importlib.util.module_from_spec(spec)
+                sys.modules.setdefault("main", module)
+                spec.loader.exec_module(module)
+                flask_app = module.app
             cls._flask_app = flask_app
         return cls._flask_app
 

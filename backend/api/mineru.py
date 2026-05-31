@@ -13,7 +13,6 @@ from __future__ import annotations
 
 import logging
 import os
-import threading
 import uuid
 from datetime import datetime
 from pathlib import Path
@@ -24,13 +23,10 @@ from backend.api._shared import bp
 from backend.core.security import UploadValidationError, validate_uploaded_file
 from backend.db.supabase_repo import get_bid_file
 from backend.parsing.document_parser import (
-    ingest_artifacts as ingest_mineru_artifacts_to_supabase,
     import_mineru_result_zip,
     read_parse_status,
-    retry_mineru_result_download,
     write_parse_status,
 )
-from backend.api.projects import _find_local_parse_status_for_supabase_file, _sync_and_parse_tender_in_background
 
 
 def _uuid_or_none(value: str | None) -> str | None:
@@ -86,11 +82,14 @@ def get_parse_status(file_id):
                 "project": {"id": local_status.get("project_id")},
                 "file": {"id": local_status.get("supabase_file_id")},
             }
-            threading.Thread(
-                target=_sync_and_parse_tender_in_background,
-                args=(str(source_file), local_status.get("file_name") or Path(str(source_file)).name, file_id, supabase_sync),
-                daemon=True,
-            ).start()
+            from backend.tasks.parse_tasks import sync_and_parse_tender
+
+            sync_and_parse_tender.delay(
+                str(source_file),
+                local_status.get("file_name") or Path(str(source_file)).name,
+                file_id,
+                supabase_sync,
+            )
             local_status = read_parse_status(file_id) or local_status
 
         download_retry_count = int(local_status.get("download_retry_count") or 0)
@@ -121,7 +120,9 @@ def get_parse_status(file_id):
                 "user_message": "MinerU 结果下载失败，系统正在自动断点重试。",
                 "retryable": True,
             })
-            threading.Thread(target=retry_mineru_result_download, args=(file_id,), daemon=True).start()
+            from backend.tasks.parse_tasks import retry_mineru_download
+
+            retry_mineru_download.delay(file_id)
             local_status = read_parse_status(file_id) or local_status
 
         artifacts = local_status.get("artifacts")
@@ -137,11 +138,9 @@ def get_parse_status(file_id):
                 "user_message": "解析结果已下载，正在补充写入项目解读数据。",
                 "retryable": True,
             })
-            threading.Thread(
-                target=ingest_mineru_artifacts_to_supabase,
-                args=(file_id, artifacts),
-                daemon=True,
-            ).start()
+            from backend.tasks.parse_tasks import ingest_artifacts as ingest_artifacts_task
+
+            ingest_artifacts_task.delay(file_id, artifacts)
             local_status = read_parse_status(file_id) or local_status
 
         supabase_file = None
@@ -228,7 +227,9 @@ def ingest_mineru_artifacts(file_id):
         if bind_payload:
             write_parse_status(file_id, bind_payload)
 
-        threading.Thread(target=ingest_mineru_artifacts_to_supabase, args=(file_id, artifacts), daemon=True).start()
+        from backend.tasks.parse_tasks import ingest_artifacts as ingest_artifacts_task
+
+        ingest_artifacts_task.delay(file_id, artifacts)
         return jsonify({
             'message': 'MinerU 解析产物已进入 Supabase 落库任务。',
             'fileId': file_id,

@@ -13,10 +13,8 @@
 
 from __future__ import annotations
 
-import json
 import logging
 import os
-import threading
 import uuid
 from datetime import datetime
 from pathlib import Path
@@ -47,26 +45,14 @@ from backend.parsing.document_parser import (
 # ---------------------------------------------------------------------------
 
 def _find_local_parse_status_for_supabase_file(supabase_file_id):
-    if not supabase_file_id:
-        return None
-    status_root = Path("parsed_outputs")
-    if not status_root.exists():
-        return None
-    latest_status = None
-    latest_mtime = 0.0
-    for status_path in status_root.glob("*/mineru_status.json"):
-        try:
-            payload = json.loads(status_path.read_text(encoding="utf-8"))
-        except Exception:
-            continue
-        if payload.get("supabase_file_id") != supabase_file_id:
-            continue
-        mtime = status_path.stat().st_mtime
-        if mtime >= latest_mtime:
-            latest_mtime = mtime
-            payload["_parse_id"] = status_path.parent.name
-            latest_status = payload
-    return latest_status
+    """按 supabase_file_id 查找最近一次解析状态。
+
+    P1-1 第二批：解析状态默认存 DB（PARSE_STATUS_BACKEND=db），此时走 DB 查询；
+    file 后端时回退到原本的本地文件 glob 实现。函数名保留，避免改动调用点。
+    """
+    from backend.parsing.parse_status_store import find_parse_status_by_supabase_file
+
+    return find_parse_status_by_supabase_file(supabase_file_id)
 
 
 def _sync_and_parse_tender_in_background(file_path, original_filename, parse_id, supabase_sync=None):
@@ -155,11 +141,10 @@ def upload_bidding():
             "supabase_file_id": supabase_file_id,
         })
 
-        threading.Thread(
-            target=_sync_and_parse_tender_in_background,
-            args=(file_path, original_filename, parse_id, supabase_sync),
-            daemon=True,
-        ).start()
+        # 投递给 Celery worker：进程重启后任务由 broker 重投递，不再无痕丢失。
+        from backend.tasks.parse_tasks import sync_and_parse_tender
+
+        sync_and_parse_tender.delay(file_path, original_filename, parse_id, supabase_sync)
 
         return jsonify({
             'message': '招标文件已上传，正在后台解析并生成结构化数据。',
@@ -292,16 +277,14 @@ def retry_bid_history_parse(project_id):
             "supabase_file_id": file_record["id"],
             "retry_from": local_status.get("_parse_id"),
         })
-        threading.Thread(
-            target=parse_and_index_tender_file,
-            kwargs={
-                "file_path": str(local_path),
-                "original_filename": original_filename,
-                "parse_id": parse_id,
-                "supabase_file_id": file_record["id"],
-            },
-            daemon=True,
-        ).start()
+        from backend.tasks.parse_tasks import parse_and_index_tender
+
+        parse_and_index_tender.delay(
+            str(local_path),
+            original_filename,
+            parse_id,
+            file_record["id"],
+        )
         return jsonify({
             "message": "解析重试任务已启动",
             "projectId": project_id,

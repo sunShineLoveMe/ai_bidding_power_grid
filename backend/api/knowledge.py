@@ -17,7 +17,6 @@ from __future__ import annotations
 import json
 import logging
 import os
-import threading
 import uuid
 from pathlib import Path
 
@@ -123,12 +122,10 @@ def upload_knowledge():
         )
 
         parse_id = str(uuid.uuid4())
-        
-        threading.Thread(
-            target=sync_and_parse_knowledge_in_background,
-            args=(file_path, original_filename, parse_id, document_id),
-            daemon=True,
-        ).start()
+
+        from backend.tasks.parse_tasks import sync_and_parse_knowledge
+
+        sync_and_parse_knowledge.delay(file_path, original_filename, parse_id, document_id)
 
         return jsonify({
             'message': '知识文档已上传，正在后台提取图文特征',
