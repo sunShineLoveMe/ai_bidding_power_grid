@@ -16,3 +16,5 @@ supabase==2.28.3
 psycopg[binary]==3.2.12
 oss2==2.19.1
 alembic==1.16.1
+celery==5.4.0
+redis==5.0.8

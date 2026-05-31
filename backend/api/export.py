@@ -5,23 +5,20 @@ DOCX 导出路由模块。
   - POST /api/bidding/interpretations/<project_id>/download-docx          创建 DOCX 导出任务
   - GET  /api/bidding/interpretations/<project_id>/export-tasks/<task_id> 查询导出任务状态
 
-视图函数逻辑与原 routes.py 完全一致，仅做文件搬迁，不改任何业务逻辑。
+DOCX 导出任务已迁移到 Celery（P1-1 第一批）：路由只负责创建任务记录并把执行
+投递给 Celery worker，实际导出逻辑在 backend/tasks/export_tasks.py。前端轮询
+export-tasks 接口的契约保持不变。
 """
 
 from __future__ import annotations
 
 import logging
-import threading
 import uuid
-from datetime import datetime
-from pathlib import Path
 
-from flask import current_app, jsonify, request
+from flask import jsonify, request
 
 from backend.api._shared import bp
-from backend.db.supabase_repo import create_bid_export_task, get_bid_export_task, update_bid_export_task
-from backend.export.md_to_word import convert_md_to_word, refresh_docx_fields_with_soffice
-from backend.api.routes import build_project_bid_markdown, _output_url_for_path
+from backend.db.supabase_repo import create_bid_export_task, get_bid_export_task
 
 
 @bp.route('/interpretations/<project_id>/download-docx', methods=['POST'])
@@ -56,13 +53,17 @@ def download_bid_docx(project_id):
             metadata={"requested_from": "bid_editor"},
         )
 
-        app = current_app._get_current_object()
-        thread = threading.Thread(
-            target=_run_bid_docx_export_task,
-            args=(app, project_id, task["id"], section_id, with_images, volume_type, sections_snapshot),
-            daemon=True,
+        # 投递给 Celery worker 执行；进程重启后任务由 broker 重新投递，不再无痕丢失。
+        from backend.tasks.export_tasks import run_bid_docx_export
+
+        run_bid_docx_export.delay(
+            project_id,
+            task["id"],
+            section_id,
+            with_images,
+            volume_type,
+            sections_snapshot,
         )
-        thread.start()
 
         return jsonify({
             'message': 'DOCX 导出任务已创建。',
@@ -78,76 +79,14 @@ def download_bid_docx(project_id):
         return jsonify({'error': f'创建 DOCX 导出任务失败: {str(e)}'}), 500
 
 
-def _run_bid_docx_export_task(
-    app,
-    project_id: str,
-    task_id: str,
-    section_id: str | None,
-    with_images: bool,
-    volume_type: str | None,
-    sections_snapshot: list[dict] | None = None,
-) -> None:
-    with app.app_context():
-        try:
-            update_bid_export_task(project_id, task_id, {
-                "status": "running",
-                "progress": 10,
-                "message": "正在整理标书 Markdown 内容。",
-                "started_at": datetime.utcnow().isoformat(),
-            })
-            markdown_path, project_name, image_selection_report = build_project_bid_markdown(
-                project_id,
-                section_id,
-                with_images=with_images,
-                volume_type=None if section_id else volume_type,
-                sections_snapshot=sections_snapshot,
-            )
-            update_bid_export_task(project_id, task_id, {
-                "progress": 55,
-                "message": "正在转换 Word 文档。",
-                "project_name": project_name,
-            })
-            generated_docx_path, image_conversion_report = convert_md_to_word(markdown_path, return_report=True)
-            if not generated_docx_path or not Path(generated_docx_path).exists():
-                raise RuntimeError("DOCX 生成失败，未找到输出文件。")
-            generated_docx_path = Path(generated_docx_path)
-            update_bid_export_task(project_id, task_id, {
-                "progress": 75,
-                "message": "正在刷新 Word 目录页码和页脚页码。",
-            })
-            generated_docx_path, field_refresh_report = refresh_docx_fields_with_soffice(generated_docx_path)
-            export_metadata = {
-                "requested_from": "bid_editor",
-                "with_images": bool(with_images),
-                "used_editor_snapshot": bool(sections_snapshot),
-                "snapshot_section_count": len(sections_snapshot or []),
-                "image_selection": image_selection_report,
-                "image_conversion": image_conversion_report,
-                "field_refresh": field_refresh_report,
-            }
-            update_bid_export_task(project_id, task_id, {
-                "status": "completed",
-                "progress": 100,
-                "message": field_refresh_report.get("user_message") or ("DOCX 已生成，目录页码已刷新。" if field_refresh_report.get("status") == "refreshed" else "DOCX 已生成，目录页码将在 Word 打开时刷新。"),
-                "project_name": project_name,
-                "file_name": generated_docx_path.name,
-                "file_path": str(generated_docx_path),
-                "download_url": _output_url_for_path(generated_docx_path),
-                "metadata": export_metadata,
-                "finished_at": datetime.utcnow().isoformat(),
-            })
-        except Exception as exc:
-            logging.exception("后台 DOCX 导出任务失败: project_id=%s task_id=%s", project_id, task_id)
-            try:
-                update_bid_export_task(project_id, task_id, {
-                    "status": "failed",
-                    "progress": 100,
-                    "message": "DOCX 导出失败，请查看错误信息。",
-                    "error_message": str(exc)[:1000],
-                    "finished_at": datetime.utcnow().isoformat(),
-                })
-            except Exception:
-                logging.exception("写入 DOCX 导出任务失败状态失败: %s", task_id)
+def _run_bid_docx_export_task(*args, **kwargs):
+    """已迁移到 Celery：backend/tasks/export_tasks.py:run_bid_docx_export。
+
+    保留此占位以兼容历史引用；不应再被调用。
+    """
+    raise RuntimeError(
+        "_run_bid_docx_export_task 已迁移到 Celery 任务 run_bid_docx_export，请勿直接调用。"
+    )
 
 
 @bp.route('/interpretations/<project_id>/export-tasks/<task_id>', methods=['GET'])

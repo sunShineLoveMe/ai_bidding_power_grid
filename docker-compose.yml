@@ -82,6 +82,51 @@ services:
       retries: 6
       start_period: 20s
 
+  celery-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    image: ai-bidding-backend:local
+    container_name: ai-bidding-celery-worker
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      APP_ENV: ${APP_ENV:-development}
+      APP_PUBLIC_BASE_URL: ${APP_PUBLIC_BASE_URL:-http://127.0.0.1:8080}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-bidding}:${POSTGRES_PASSWORD:-bidding_local_dev}@postgres:5432/${POSTGRES_DB:-bidding}
+      DB_PROVIDER: ${DB_PROVIDER:-postgres}
+      STORAGE_PROVIDER: ${STORAGE_PROVIDER:-local}
+      LOCAL_STORAGE_ROOT: ${LOCAL_STORAGE_ROOT:-storage}
+      OSS_ENDPOINT: ${OSS_ENDPOINT:-}
+      OSS_PUBLIC_ENDPOINT: ${OSS_PUBLIC_ENDPOINT:-}
+      OSS_ACCESS_KEY_ID: ${OSS_ACCESS_KEY_ID:-}
+      OSS_ACCESS_KEY_SECRET: ${OSS_ACCESS_KEY_SECRET:-}
+      OSS_BUCKET: ${OSS_BUCKET:-}
+      OSS_KEY_PREFIX: ${OSS_KEY_PREFIX:-}
+      OSS_SIGNED_URL_EXPIRES: ${OSS_SIGNED_URL_EXPIRES:-3600}
+      LOG_FORMAT: ${LOG_FORMAT:-json}
+      REDIS_URL: redis://redis:6379/0
+      CELERY_WORKER_CONCURRENCY: ${CELERY_WORKER_CONCURRENCY:-4}
+      SOFFICE_BIN: ${CONTAINER_SOFFICE_BIN:-/usr/bin/soffice}
+    command: ["celery", "-A", "backend.tasks.celery_app:celery_app", "worker", "--loglevel=info", "--concurrency=${CELERY_WORKER_CONCURRENCY:-4}"]
+    volumes:
+      - app_uploads:/app/uploads
+      - app_outputs:/app/outputs
+      - app_storage:/app/storage
+      - app_backups:/app/backups
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "celery -A backend.tasks.celery_app:celery_app inspect ping -d celery@$$HOSTNAME || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
   frontend:
     build:
       context: .

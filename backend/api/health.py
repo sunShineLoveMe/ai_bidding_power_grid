@@ -56,6 +56,26 @@ def _check_redis() -> dict:
         return {"status": "fail", "message": f"{type(exc).__name__}: {exc}"}
 
 
+def _check_celery() -> dict:
+    """检查 Celery worker 是否可达。
+
+    通过 Celery control ping 探测在线 worker；REDIS_URL 未配置或 ping 无响应
+    都按 warn/fail 反映在 /ready 中，但不作为整体就绪的强阻塞项。
+    """
+    if not os.getenv("REDIS_URL"):
+        return {"status": "warn", "message": "REDIS_URL is not configured; Celery worker not probed"}
+    try:
+        from backend.tasks.celery_app import celery_app
+
+        replies = celery_app.control.ping(timeout=2)
+        worker_count = len(replies) if replies else 0
+        if worker_count > 0:
+            return {"status": "ok", "workers": worker_count}
+        return {"status": "warn", "message": "no Celery worker responded to ping"}
+    except Exception as exc:
+        return {"status": "warn", "message": f"{type(exc).__name__}: {exc}"}
+
+
 def _check_storage() -> dict:
     provider = (os.getenv("STORAGE_PROVIDER") or "local").lower()
     try:
@@ -98,6 +118,7 @@ def ready():
     checks = {
         "database": _check_database(),
         "redis": _check_redis(),
+        "celery": _check_celery(),
         "storage": _check_storage(),
         "model_config": _check_model_config(),
     }
