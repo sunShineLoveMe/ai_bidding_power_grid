@@ -85,6 +85,7 @@ def _build_celery() -> Celery:
     app.conf.imports = (
         "backend.tasks.export_tasks",
         "backend.tasks.parse_tasks",
+        "backend.tasks.outline_tasks",
     )
 
     return app

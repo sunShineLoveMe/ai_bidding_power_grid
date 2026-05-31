@@ -4,12 +4,11 @@ import logging
 import os
 from datetime import datetime, timezone
 
-import psycopg
-from psycopg.rows import dict_row
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from backend.core.security import create_session_token, decode_session_token, env_bool, is_production_mode
 from backend.db.postgres_compat import _database_url
+from backend.db.postgres_pool import pooled_connection
 from backend.db.supabase_repo import identify_app_user
 
 # 创建蓝图
@@ -32,7 +31,7 @@ def _public_user(user: dict) -> dict:
 
 
 def _find_login_user(username: str) -> dict | None:
-    with psycopg.connect(_database_url(), row_factory=dict_row) as conn:
+    with pooled_connection(_database_url()) as conn:
         return conn.execute(
             """
             select id, username, password_hash, display_name, company_name, role, status
@@ -45,7 +44,7 @@ def _find_login_user(username: str) -> dict | None:
 
 
 def _create_login_user(username: str, password: str, display_name: str, company_name: str) -> dict:
-    with psycopg.connect(_database_url(), row_factory=dict_row) as conn:
+    with pooled_connection(_database_url()) as conn:
         existing_count = conn.execute(
             "select count(*)::int as count from public.app_users where username is not null"
         ).fetchone()["count"]
@@ -63,7 +62,7 @@ def _create_login_user(username: str, password: str, display_name: str, company_
 
 
 def _touch_login(user_id: str) -> None:
-    with psycopg.connect(_database_url()) as conn:
+    with pooled_connection(_database_url()) as conn:
         conn.execute(
             "update public.app_users set last_login_at = %s where id = %s",
             (datetime.now(timezone.utc), user_id),

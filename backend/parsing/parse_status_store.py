@@ -76,14 +76,14 @@ def _file_read(parse_id: str) -> dict[str, Any] | None:
 # ---------------------------------------------------------------------------
 
 def _db_write(parse_id: str, payload: dict[str, Any]) -> None:
-    import psycopg
     from psycopg.types.json import Jsonb
+    from backend.db.postgres_pool import pooled_connection
 
     merged = dict(payload)
     merged["updated_at"] = _now_iso()
     url = os.environ["DATABASE_URL"]
     # JSONB `||` 浅合并：等价于原文件实现的 existing.update(payload)，但是原子 upsert。
-    with psycopg.connect(url) as conn:
+    with pooled_connection(url) as conn:
         conn.execute(
             """
             insert into public.bid_parse_tasks (parse_id, status_payload)
@@ -96,11 +96,10 @@ def _db_write(parse_id: str, payload: dict[str, Any]) -> None:
 
 
 def _db_read(parse_id: str) -> dict[str, Any] | None:
-    import psycopg
-    from psycopg.rows import dict_row
+    from backend.db.postgres_pool import pooled_connection
 
     url = os.environ["DATABASE_URL"]
-    with psycopg.connect(url, row_factory=dict_row) as conn:
+    with pooled_connection(url) as conn:
         row = conn.execute(
             "select status_payload from public.bid_parse_tasks where parse_id = %s",
             (parse_id,),
@@ -120,11 +119,10 @@ def find_parse_status_by_supabase_file(supabase_file_id: str) -> dict[str, Any] 
         return None
     if _backend() != "db":
         return _file_find_by_supabase_file(supabase_file_id)
-    import psycopg
-    from psycopg.rows import dict_row
+    from backend.db.postgres_pool import pooled_connection
 
     url = os.environ["DATABASE_URL"]
-    with psycopg.connect(url, row_factory=dict_row) as conn:
+    with pooled_connection(url) as conn:
         row = conn.execute(
             """
             select parse_id, status_payload

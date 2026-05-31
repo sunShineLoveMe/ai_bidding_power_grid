@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 
-from backend.ai.chapter_planner import _build_rule_outline
+from backend.ai.chapter_planner import _build_rule_outline, stream_bid_outline
 from backend.db.supabase_repo import replace_bid_sections_from_outline
 
 
@@ -131,6 +131,37 @@ class ChapterPlannerRegressionTest(unittest.TestCase):
 
         self.assertEqual(3, len({row["id"] for row in rows}))
         self.assertEqual(rows[0]["id"], rows[2]["parent_id"])
+
+    def test_stream_outline_dispatches_refinement_to_celery(self):
+        payload = {
+            "project": {"id": "project-1", "project_name": "测试项目"},
+            "analysis": {"project_meta": {"project_name": "测试项目"}},
+            "requirements": [],
+            "scoringItems": [],
+            "risks": [],
+        }
+        quick_outline = {
+            "chapters": [
+                {"order": "1", "title": "技术标", "level": 1},
+                {"order": "1.1", "title": "施工组织", "level": 2},
+            ]
+        }
+
+        with (
+            patch("backend.ai.chapter_planner.get_project_interpretation", return_value=payload),
+            patch("backend.ai.chapter_planner._build_rule_outline", return_value=quick_outline),
+            patch("backend.ai.chapter_planner.save_bid_outline"),
+            patch("backend.ai.chapter_planner.replace_bid_sections_from_outline"),
+            patch("backend.ai.chapter_planner.time.sleep"),
+            patch("backend.tasks.outline_tasks.refine_bid_outline.delay") as delay_mock,
+        ):
+            events = list(stream_bid_outline("project-1"))
+
+        self.assertTrue(any(event.get("type") == "done" for event in events))
+        delay_mock.assert_called_once()
+        args = delay_mock.call_args.args
+        self.assertEqual("project-1", args[0])
+        self.assertEqual(quick_outline, args[2]["project_meta"]["bid_outline"])
 
 
 if __name__ == "__main__":

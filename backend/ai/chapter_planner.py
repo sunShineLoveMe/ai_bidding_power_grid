@@ -1,6 +1,5 @@
 import json
 import logging
-import threading
 import time
 from datetime import datetime, timezone
 from typing import Any, Iterator
@@ -774,7 +773,7 @@ def _stream_ordered_chapters(chapters: list[dict[str, Any]]) -> Iterator[dict[st
 
 def _refine_bid_outline_in_background(project_id: str, payload: dict[str, Any], analysis: dict[str, Any]) -> None:
     """
-    后台线程：调用 AI 生成精细化大纲，完成后写回 Supabase。
+    后台任务：调用 AI 生成精细化大纲，完成后写回 Supabase/PostgreSQL。
     前端通过 reloadProject() 轮询最新章节来感知更新。
     """
     try:
@@ -869,8 +868,8 @@ def stream_bid_outline(project_id: str) -> Iterator[dict[str, Any]]:
         "message": "快速章节大纲已生成，AI 将在后台结合招标评分项和企业知识库继续优化，完成后自动刷新。",
     }
 
-    # ── 第二阶段：AI 精细化大纲（后台线程，不阻塞 SSE 连接）──────────────
-    # 把规则版章节数写入 analysis 供后台线程判断是否需要替换
+    # ── 第二阶段：AI 精细化大纲（Celery 后台任务，不阻塞 SSE 连接）────────
+    # 把规则版章节数写入 analysis 供后台任务判断是否需要替换
     analysis_with_quick = {
         **analysis,
         "project_meta": {
@@ -878,11 +877,9 @@ def stream_bid_outline(project_id: str) -> Iterator[dict[str, Any]]:
             "bid_outline": quick_outline,
         },
     }
-    threading.Thread(
-        target=_refine_bid_outline_in_background,
-        args=(project_id, payload, analysis_with_quick),
-        daemon=True,
-    ).start()
+    from backend.tasks.outline_tasks import refine_bid_outline
+
+    refine_bid_outline.delay(project_id, payload, analysis_with_quick)
 
     yield {
         "type": "done",

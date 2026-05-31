@@ -13,12 +13,12 @@ import os
 import unittest
 from unittest.mock import patch
 
-os.environ.setdefault("CELERY_TASK_ALWAYS_EAGER", "true")
-os.environ.setdefault("APP_AUTH_ENABLED", "false")
-os.environ.setdefault("APP_LOGIN_ENABLED", "false")
-os.environ.setdefault("APP_EXPOSE_DEBUG_ERRORS", "false")
-os.environ.setdefault("REQUIRE_STRICT_CONFIG", "false")
-os.environ.setdefault("APP_ENV", "testing")
+os.environ["CELERY_TASK_ALWAYS_EAGER"] = "true"
+os.environ["APP_AUTH_ENABLED"] = "false"
+os.environ["APP_LOGIN_ENABLED"] = "false"
+os.environ["APP_EXPOSE_DEBUG_ERRORS"] = "false"
+os.environ["REQUIRE_STRICT_CONFIG"] = "false"
+os.environ["APP_ENV"] = "testing"
 # 路由调度类用例与 DB 无关，固定 file 后端避免误连 DB；DB 语义用例内部单独切 db。
 os.environ.setdefault("PARSE_STATUS_BACKEND", "file")
 
@@ -38,6 +38,7 @@ class TenderParseDispatchTest(unittest.TestCase):
     def test_parse_task_modules_registered(self):
         from backend.tasks.celery_app import celery_app
 
+        celery_app.loader.import_default_modules()
         names = set(celery_app.tasks.keys())
         for expected in [
             "bid.parse.sync_and_parse_tender",
@@ -45,6 +46,7 @@ class TenderParseDispatchTest(unittest.TestCase):
             "bid.parse.retry_download",
             "bid.parse.ingest_artifacts",
             "bid.knowledge.sync_and_parse",
+            "bid.outline.refine",
         ]:
             self.assertIn(expected, names)
 

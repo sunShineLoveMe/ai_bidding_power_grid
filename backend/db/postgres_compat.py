@@ -9,9 +9,10 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import quote
 
-import psycopg
 from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
+
+from backend.db.postgres_pool import pooled_connection
 
 
 JSONB_COLUMNS = {
@@ -453,7 +454,7 @@ class PostgresCompatClient:
             self.storage = LocalStorageClient(Path(os.getenv("LOCAL_STORAGE_ROOT", "storage")))
 
     def connection(self):
-        return psycopg.connect(_database_url(), row_factory=dict_row)
+        return pooled_connection(_database_url(), row_factory=dict_row)
 
     def table(self, table: str) -> PostgresTableQuery:
         return PostgresTableQuery(self, table)
