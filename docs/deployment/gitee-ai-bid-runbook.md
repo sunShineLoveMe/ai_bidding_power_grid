@@ -418,7 +418,7 @@ Docker 测试环境中，backend 镜像已安装 LibreOffice Writer。镜像构�
 
 ```ini
 DOCX_REFRESH_FIELDS=true
-SOFFICE_BIN=/usr/bin/soffice
+CONTAINER_SOFFICE_BIN=/usr/bin/soffice
 DOCX_REFRESH_TIMEOUT_SECONDS=180
 ```
 
@@ -437,6 +437,8 @@ DOCX_REFRESH_FIELDS=true
 SOFFICE_BIN=/usr/bin/soffice
 DOCX_REFRESH_TIMEOUT_SECONDS=180
 ```
+
+注意：`SOFFICE_BIN` 是本机或直接运行后端时使用的路径；Docker Compose 中 backend 容器会读取 `CONTAINER_SOFFICE_BIN` 并映射为容器内的 `SOFFICE_BIN`，默认值是 `/usr/bin/soffice`。这样可以避免 macOS 的 `/opt/homebrew/bin/soffice` 覆盖容器路径。
 
 验证命令：
 

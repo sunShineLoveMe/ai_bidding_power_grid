@@ -62,7 +62,7 @@ services:
       PORT: 8000
       LOG_FORMAT: ${LOG_FORMAT:-json}
       REDIS_URL: redis://redis:6379/0
-      SOFFICE_BIN: ${SOFFICE_BIN:-/usr/bin/soffice}
+      SOFFICE_BIN: ${CONTAINER_SOFFICE_BIN:-/usr/bin/soffice}
     ports:
       - "3012:8000"
     volumes:
