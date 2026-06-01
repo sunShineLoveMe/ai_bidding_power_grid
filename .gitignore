@@ -61,3 +61,6 @@ tender_references/
 
 # Local code intelligence index
 .codegraph/
+
+# Feishu import temp files
+.agents/tmp/
