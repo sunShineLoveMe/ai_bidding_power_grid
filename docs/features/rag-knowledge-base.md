@@ -1,6 +1,6 @@
 # RAG 知识库架构
 
-> 相关代码：`backend/rag/`、`rag_seed/water_resources/`
+> 相关代码：`backend/rag/`、`rag_seed/power_grid_resources/`
 
 ## RAG 知识库架构
 
@@ -30,7 +30,7 @@
 | --- | --- |
 | `backend/rag/ingestion.py` | 上传知识库资料后的解析、图片上下文提取、embedding 和 `document_chunks` 写入 |
 | `backend/rag/retrieval.py` | 用户问题向量化、调用 Supabase RPC 检索、组装 Prompt、生成 RAG 回答 |
-| `rag_seed/water_resources/_scripts/ingest_water_rag_seed.py` | 水利行业种子资料批量入库脚本 |
+| `rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py` | 电网行业种子资料批量入库脚本 |
 | `backend/rag/vector_store.py` | DashScope embedding 封装、文本抽取与分片工具（`ensure_extractable_text` 做扫描件检测） |
 | `backend/api/routes.py` | `/api/knowledge/search`、`/api/knowledge/search/stream` 和 `/api/knowledge/followups` API |
 
@@ -65,7 +65,7 @@ RAG 回答完成
 
 分片与元数据策略：
 
-- 文本分片默认按段落和长度切分，水利种子库入库脚本使用约 `1800` 字符的 chunk，并保留少量上下文重叠。
+- 文本分片默认按段落和长度切分，电网种子库入库脚本使用约 `1800` 字符的 chunk，并保留少量上下文重叠。
 - 每个分片写入 `document_chunks.content`，向量写入 `document_chunks.embedding`。
 - `document_chunks.metadata` 保存资料分类、文档类型、来源单位、原始 URL、文件路径、标签和 hash。
 - 前端 RAG 回答完成后展示参考资料来源，帮助用户核对答案依据。
@@ -73,11 +73,14 @@ RAG 回答完成
 - RAG 回答若提到 `图片资产1`、`图片资产2、3、4` 等编号，前端会自动把对应图片以 Markdown 图片形式插入到相应段落后，避免只输出文字描述。
 - 图片预览优先加载缩略图，原图保留用于标书正文插图、附件查看和 DOCX 导出。
 
-当前已验证的水利种子库入库结果：
+当前已验证的电网种子库入库结果：
 
-- 有效资料：26 份
-- 向量分片：558 条
-- 分类：水利招标文件、水利政策法规、水利标准规范、水利标准话术
+- 待处理资料：41 份
+- 已入库资料：20 份
+- 已存在跳过：6 份
+- PDF 待人工确认后入库：15 份
+- 新增分片：273 条
+- 分类：电网招标文件、政策法规、标准规范、标准话术
 - 检索接口：`POST /api/knowledge/search`
 - 流式检索接口：`POST /api/knowledge/search/stream`
 - 追问建议接口：`POST /api/knowledge/followups`
@@ -100,34 +103,34 @@ flowchart TD
 
 ### RAG 资料分类
 
-当前水利行业种子库使用以下分类：
+当前电网行业种子库使用以下分类：
 
 | 分类 | 用途 |
 | --- | --- |
-| `water_tender_documents` | 公开招标公告、招标文件、施工/监理/设计类样本 |
-| `water_policy_regulations` | 招投标、水利建设、质量、安全、验收、信用等法规 |
-| `water_standards_specs` | 标准施工招标文件示范文本、标准规范目录 |
-| `water_standard_phrases` | 自建投标话术、章节库、检查清单、施工组织设计模板 |
+| `01_tender_documents` | 国网公开采购公告、客户提供招标文件包、ECP/ETP 流程和物资类招标样本 |
+| `02_policy_regulations` | 招投标、电力法、能源法、电力建设安全、质量监督、备案、国网采购管理制度 |
+| `03_standards_specs` | 电力建设标准目录、GB/DL/Q-GDW 标准引用说明、配网/接地/电缆/低压电器等规范 |
+| `04_standard_phrases` | 自建国网投标话术、章节库、资格/商务/技术/质量安全环保模板、检查清单 |
 
 ### RAG 入库脚本
 
-水利行业种子资料位于：
+电网行业种子资料位于：
 
 ```text
-rag_seed/water_resources/
+rag_seed/power_grid_resources/
 ```
 
 目录结构：
 
 ```text
-rag_seed/water_resources/
-├── 01_tender_documents/      # 公开招标文件与公告样本
+rag_seed/power_grid_resources/
+├── 01_tender_documents/      # 国网公开采购公告、客户招标文件包、流程样本
 ├── 02_policy_regulations/    # 政策法规
-├── 03_standards_specs/       # 标准规范目录与示范文本
-├── 04_standard_phrases/      # 自建标准话术与章节模板
+├── 03_standards_specs/       # 标准规范目录、GB/DL/Q-GDW 标准引用说明
+├── 04_standard_phrases/      # 自建国网投标话术与章节模板
 ├── _scripts/
-│   ├── download_water_rag_seed.py
-│   └── ingest_water_rag_seed.py
+│   ├── download_power_grid_rag_seed.py
+│   └── ingest_power_grid_rag_seed.py
 ├── index.csv
 ├── index.jsonl
 └── README.md
@@ -136,13 +139,13 @@ rag_seed/water_resources/
 重新下载公开资料：
 
 ```bash
-python rag_seed/water_resources/_scripts/download_water_rag_seed.py
+python rag_seed/power_grid_resources/_scripts/download_power_grid_rag_seed.py
 ```
 
 入库到 Supabase RAG 知识库：
 
 ```bash
-python rag_seed/water_resources/_scripts/ingest_water_rag_seed.py
+python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py
 ```
 
 入库逻辑：
@@ -159,6 +162,6 @@ python rag_seed/water_resources/_scripts/ingest_water_rag_seed.py
 
 当前种子库已验证可入库：
 
-- 有效资料：26 份
-- 向量分片：558 条
-- 检索链路：`search_knowledge_base()` 可正常召回水利行业资料
+- Markdown/网页型资料和自建标准话术可直接入库。
+- PDF 标准、法规和客户标书需先经过 MinerU/OCR 抽取、格式复核和版权边界确认，再显式纳入 RAG。
+- 检索链路：`search_knowledge_base()` 可正常召回电网行业资料。

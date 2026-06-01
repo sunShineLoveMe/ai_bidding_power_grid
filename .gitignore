@@ -65,7 +65,4 @@ tender_references/
 # Feishu import temp files
 .agents/tmp/
 
-# Customer private tender files
-rag_seed/power_grid_resources/01_tender_documents/20_国网江西电力2026年第一次配网省网协议库存物资类公开招标采购/
-rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/
 

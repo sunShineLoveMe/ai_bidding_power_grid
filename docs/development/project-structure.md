@@ -39,7 +39,7 @@
 ├── docker/                         # 本地 Docker 初始化脚本
 ├── docker-compose.yml              # 本地 PostgreSQL + pgvector 基础设施
 ├── sql/                            # 数据库 SQL；部分历史脚本仍含 Supabase 专属对象
-├── rag_seed/water_resources/       # 历史水利行业 RAG 种子资料，电力项目仅作迁移参考
+├── rag_seed/power_grid_resources/  # 电网/国网行业 RAG 种子资料
 ├── parsed_outputs/                 # 文档解析产物，建议加入 .gitignore
 ├── uploads/                        # 上传文件，建议加入 .gitignore
 └── outputs/                        # 生成文件，建议加入 .gitignore

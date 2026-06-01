@@ -228,7 +228,7 @@ DocumentParseResult
 
 - 保留当前 MinerU 在线 API。
 - 继续完善下载重试、手动导入 zip、解析状态展示。
-- 对当前水利样本、电网样本做解析质量记录。
+- 对当前电网样本和客户提供的国网标书包做解析质量记录。
 
 ### 阶段二：本地实验 PaddleOCR
 
@@ -343,4 +343,3 @@ MinerU 主解析
 - MinerU 官网：<https://mineru.net/>
 - MinerU Docker 部署文档：<https://opendatalab.github.io/MinerU/quick_start/docker_deployment/>
 - MinerU 扩展模块文档：<https://opendatalab.github.io/MinerU/quick_start/extension_modules/>
-

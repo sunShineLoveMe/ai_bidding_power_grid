@@ -635,7 +635,7 @@ knowledge_documents
 
 ## 9. 导入行业基础数据
 
-当前项目默认面向电网/电力场景。历史 `rag_seed/water_*` 目录只作为迁移参考，不作为当前测试环境默认数据；电网 RAG 种子库入库脚本会在 P0-9 补齐。
+当前项目默认面向电网/电力场景，测试环境只导入电网/国网资料，不再导入旧行业样本。
 
 当前基础数据分三类：
 
@@ -704,27 +704,9 @@ PDF 默认跳过：15 条
 分类：power_grid_policy_regulations、power_grid_standard_phrases、power_grid_standards_specs、power_grid_tender_documents
 ```
 
-### 9.2 历史水利种子库（仅迁移参考）
+### 9.2 电网图片资产库
 
-如果需要回归旧水利演示链路，可在独立测试库执行历史脚本：
-
-```bash
-python rag_seed/water_resources/_scripts/ingest_water_rag_seed.py
-python rag_seed/water_enterprise_mock/_scripts/ingest_enterprise_mock_seed.py
-python rag_seed/water_asset_images/_scripts/ingest_knowledge_assets.py
-```
-
-历史脚本成功后会生成或更新各自目录下的入库报告，例如：
-
-```text
-rag_seed/water_resources/ingestion_report.md
-rag_seed/water_resources/ingestion_report.json
-rag_seed/water_enterprise_mock/ingestion_report.md
-rag_seed/water_enterprise_mock/ingestion_report.json
-rag_seed/water_asset_images/ingestion_report.json
-```
-
-图片文件会复制到本地：
+企业资信、产品图片和工程服务示意图后续应按电力供应商场景重新准备，入库后图片文件会复制到本地：
 
 ```text
 storage/knowledge-assets/
