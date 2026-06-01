@@ -23,7 +23,7 @@ flowchart LR
 | ECS 或容器服务 | 运行后端、前端、任务进程、可选 OnlyOffice | 本机 Python/Node/Docker |
 | RDS PostgreSQL | 业务数据、解析结果、任务状态、AI 用量、pgvector 向量检索 | Docker PostgreSQL |
 | OSS | 招标文件、知识库文件、资质/产品资料、导出文件 | `storage/` 本地目录 |
-| 日志服务，可选 | 运行日志、审计日志、错误追踪 | `logs/` |
+| 日志服务 SLS | 运行日志、任务日志、错误追踪、告警 | stdout + [aliyun-sls.md](./aliyun-sls.md) |
 | VPC / 安全组 | 内网访问、端口隔离 | 本机回环地址 |
 
 ## 环境变量映射
@@ -44,8 +44,8 @@ flowchart LR
 - `.env` 由实施人员在目标环境维护，不提交到 Git。
 - 数据库迁移脚本必须可重复执行或具备明确执行顺序。
 - 备份、恢复、监控、日志和密钥轮换纳入正式交付清单。
+- 日志采集与告警按 [阿里云 SLS 日志采集与告警方案](./aliyun-sls.md) 执行，测试环境优先采集容器 stdout 的 JSON 日志。
 
 ## 当前迁移状态
 
 本仓库已具备本地 Docker PostgreSQL 基础设施配置。业务代码仍处于从 Supabase SDK 向标准 PostgreSQL + 本地/OSS 存储抽象迁移的过程中。迁移完成前，涉及数据库访问的改动应优先收敛到 `backend/db/`，避免在 API 或业务模块中继续散落供应商专属调用。
-

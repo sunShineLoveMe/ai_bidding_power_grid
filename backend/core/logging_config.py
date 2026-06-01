@@ -51,6 +51,8 @@ LOG_CONTEXT_KEYS = {
     "task_id",
     "section_id",
     "user_id",
+    "celery_task_id",
+    "celery_task_name",
 }
 
 SENSITIVE_HEADER_NAMES = {"authorization", "cookie", "x-app-auth-token", "set-cookie"}
@@ -111,7 +113,7 @@ class JsonLogFormatter(logging.Formatter):
             "message": message,
         }
 
-        for key in ("project_id", "file_id", "task_id", "section_id", "user_id"):
+        for key in ("project_id", "file_id", "task_id", "section_id", "user_id", "celery_task_id", "celery_task_name"):
             value = getattr(record, key, None)
             if value is not None:
                 payload[key] = value

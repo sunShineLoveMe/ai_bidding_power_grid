@@ -10,6 +10,7 @@ from __future__ import annotations
 import logging
 
 from backend.tasks.celery_app import celery_app
+from backend.core.logging_config import log_context
 
 logger = logging.getLogger(__name__)
 
@@ -18,6 +19,8 @@ logger = logging.getLogger(__name__)
 def refine_bid_outline(self, project_id: str, payload: dict, analysis: dict) -> dict:
     from backend.ai.chapter_planner import _refine_bid_outline_in_background
 
-    _refine_bid_outline_in_background(project_id, payload, analysis)
-    logger.info("AI 精细化大纲 Celery 任务完成: %s", project_id)
+    with log_context(project_id=project_id):
+        logger.info("outline_refine_task_started")
+        _refine_bid_outline_in_background(project_id, payload, analysis)
+        logger.info("outline_refine_task_completed")
     return {"project_id": project_id, "status": "completed"}

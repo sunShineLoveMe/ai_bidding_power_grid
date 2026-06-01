@@ -14,6 +14,7 @@ from __future__ import annotations
 import logging
 
 from backend.tasks.celery_app import celery_app
+from backend.core.logging_config import log_context
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +30,12 @@ def sync_and_parse_tender(
     """同步 Supabase 并触发 MinerU/OCR 解析（原 projects._sync_and_parse_tender_in_background）。"""
     from backend.api.projects import _sync_and_parse_tender_in_background
 
-    _sync_and_parse_tender_in_background(file_path, original_filename, parse_id, supabase_sync)
+    project_id = (supabase_sync or {}).get("project", {}).get("id")
+    supabase_file_id = (supabase_sync or {}).get("file", {}).get("id")
+    with log_context(project_id=project_id, file_id=parse_id):
+        logger.info("parse_task_started", extra={"parse_id": parse_id, "supabase_file_id": supabase_file_id})
+        _sync_and_parse_tender_in_background(file_path, original_filename, parse_id, supabase_sync)
+        logger.info("parse_task_dispatched", extra={"parse_id": parse_id, "supabase_file_id": supabase_file_id})
     return {"parse_id": parse_id, "status": "dispatched"}
 
 
@@ -44,12 +50,15 @@ def parse_and_index_tender(
     """直接解析并入库（原 retry-parse 线程目标 parse_and_index_tender_file）。"""
     from backend.parsing.document_parser import parse_and_index_tender_file
 
-    parse_and_index_tender_file(
-        file_path=file_path,
-        original_filename=original_filename,
-        parse_id=parse_id,
-        supabase_file_id=supabase_file_id,
-    )
+    with log_context(file_id=parse_id):
+        logger.info("parse_index_task_started", extra={"parse_id": parse_id, "supabase_file_id": supabase_file_id})
+        parse_and_index_tender_file(
+            file_path=file_path,
+            original_filename=original_filename,
+            parse_id=parse_id,
+            supabase_file_id=supabase_file_id,
+        )
+        logger.info("parse_index_task_dispatched", extra={"parse_id": parse_id, "supabase_file_id": supabase_file_id})
     return {"parse_id": parse_id, "status": "dispatched"}
 
 
@@ -58,7 +67,10 @@ def retry_mineru_download(self, parse_id: str) -> dict:
     """重试 MinerU 结果下载（原 get_parse_status 内的恢复线程）。"""
     from backend.parsing.document_parser import retry_mineru_result_download
 
-    retry_mineru_result_download(parse_id)
+    with log_context(file_id=parse_id):
+        logger.info("parse_retry_download_started", extra={"parse_id": parse_id})
+        retry_mineru_result_download(parse_id)
+        logger.info("parse_retry_download_dispatched", extra={"parse_id": parse_id})
     return {"parse_id": parse_id, "status": "dispatched"}
 
 
@@ -67,7 +79,10 @@ def ingest_artifacts(self, parse_id: str, artifacts: dict) -> dict:
     """将 MinerU 产物写入业务表（原 ingest 线程目标 ingest_artifacts）。"""
     from backend.parsing.document_parser import ingest_artifacts as _ingest
 
-    _ingest(parse_id, artifacts)
+    with log_context(file_id=parse_id):
+        logger.info("parse_ingest_artifacts_started", extra={"parse_id": parse_id})
+        _ingest(parse_id, artifacts)
+        logger.info("parse_ingest_artifacts_dispatched", extra={"parse_id": parse_id})
     return {"parse_id": parse_id, "status": "dispatched"}
 
 
@@ -82,5 +97,8 @@ def sync_and_parse_knowledge(
     """知识库文件解析入库（原 knowledge.sync_and_parse_knowledge_in_background）。"""
     from backend.api.knowledge import sync_and_parse_knowledge_in_background
 
-    sync_and_parse_knowledge_in_background(file_path, original_filename, parse_id, document_id)
+    with log_context(file_id=parse_id):
+        logger.info("knowledge_parse_task_started", extra={"parse_id": parse_id, "document_id": document_id})
+        sync_and_parse_knowledge_in_background(file_path, original_filename, parse_id, document_id)
+        logger.info("knowledge_parse_task_dispatched", extra={"parse_id": parse_id, "document_id": document_id})
     return {"document_id": document_id, "status": "dispatched"}

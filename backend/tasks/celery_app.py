@@ -19,6 +19,7 @@ from __future__ import annotations
 import logging
 import os
 import sys
+import time
 from pathlib import Path
 
 from celery import Celery, Task
@@ -126,8 +127,31 @@ class FlaskTask(Task):
         return cls._flask_app
 
     def __call__(self, *args, **kwargs):
+        from backend.core.logging_config import log_context
+
+        celery_task_id = getattr(getattr(self, "request", None), "id", None)
+        started_at = time.perf_counter()
         with self._get_flask_app().app_context():
-            return super().__call__(*args, **kwargs)
+            with log_context(
+                app_module="celery",
+                stage="task",
+                celery_task_id=celery_task_id,
+                celery_task_name=self.name,
+            ):
+                logger.info("celery_task_started")
+                try:
+                    result = super().__call__(*args, **kwargs)
+                except Exception:
+                    logger.exception(
+                        "celery_task_failed",
+                        extra={"duration_ms": int((time.perf_counter() - started_at) * 1000)},
+                    )
+                    raise
+                logger.info(
+                    "celery_task_completed",
+                    extra={"duration_ms": int((time.perf_counter() - started_at) * 1000)},
+                )
+                return result
 
 
 celery_app.Task = FlaskTask

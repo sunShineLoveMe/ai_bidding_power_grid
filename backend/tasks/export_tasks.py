@@ -16,6 +16,7 @@ from datetime import datetime
 from pathlib import Path
 
 from backend.tasks.celery_app import celery_app
+from backend.core.logging_config import log_context
 
 logger = logging.getLogger(__name__)
 
@@ -43,6 +44,49 @@ def run_bid_docx_export(
     from backend.db.supabase_repo import update_bid_export_task
     from backend.export.md_to_word import convert_md_to_word, refresh_docx_fields_with_soffice
 
+    with log_context(project_id=project_id, task_id=task_id):
+        try:
+            return _run_bid_docx_export(
+                project_id,
+                task_id,
+                section_id,
+                with_images,
+                volume_type,
+                sections_snapshot,
+                build_project_bid_markdown,
+                _output_url_for_path,
+                update_bid_export_task,
+                convert_md_to_word,
+                refresh_docx_fields_with_soffice,
+            )
+        except Exception as exc:
+            logger.exception("后台 DOCX 导出任务失败")
+            try:
+                update_bid_export_task(project_id, task_id, {
+                    "status": "failed",
+                    "progress": 100,
+                    "message": "DOCX 导出失败，请查看错误信息。",
+                    "error_message": str(exc)[:1000],
+                    "finished_at": datetime.utcnow().isoformat(),
+                })
+            except Exception:
+                logger.exception("写入 DOCX 导出任务失败状态失败")
+            return {"status": "failed", "task_id": task_id, "error": str(exc)[:200]}
+
+
+def _run_bid_docx_export(
+    project_id: str,
+    task_id: str,
+    section_id: str | None,
+    with_images: bool,
+    volume_type: str | None,
+    sections_snapshot: list[dict] | None,
+    build_project_bid_markdown,
+    _output_url_for_path,
+    update_bid_export_task,
+    convert_md_to_word,
+    refresh_docx_fields_with_soffice,
+) -> dict:
     try:
         update_bid_export_task(project_id, task_id, {
             "status": "running",
@@ -92,16 +136,5 @@ def run_bid_docx_export(
             "finished_at": datetime.utcnow().isoformat(),
         })
         return {"status": "completed", "task_id": task_id}
-    except Exception as exc:
-        logger.exception("后台 DOCX 导出任务失败: project_id=%s task_id=%s", project_id, task_id)
-        try:
-            update_bid_export_task(project_id, task_id, {
-                "status": "failed",
-                "progress": 100,
-                "message": "DOCX 导出失败，请查看错误信息。",
-                "error_message": str(exc)[:1000],
-                "finished_at": datetime.utcnow().isoformat(),
-            })
-        except Exception:
-            logger.exception("写入 DOCX 导出任务失败状态失败: %s", task_id)
-        return {"status": "failed", "task_id": task_id, "error": str(exc)[:200]}
+    except Exception:
+        raise

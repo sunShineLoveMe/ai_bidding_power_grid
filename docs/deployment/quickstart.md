@@ -1,6 +1,6 @@
 # 快速开始
 
-> 安全配置详见 [security.md](./security.md)，本地数据库详见 [local-postgres-docker.md](./local-postgres-docker.md)，阿里云目标架构详见 [aliyun-target-architecture.md](./aliyun-target-architecture.md)。
+> 安全配置详见 [security.md](./security.md)，本地数据库详见 [local-postgres-docker.md](./local-postgres-docker.md)，阿里云目标架构详见 [aliyun-target-architecture.md](./aliyun-target-architecture.md)，阿里云日志采集与告警详见 [aliyun-sls.md](./aliyun-sls.md)。
 
 当前项目默认面向电力/电网侧改造与国内企业交付。本地开发使用 Docker PostgreSQL + pgvector + 本地文件存储；生产目标为阿里云 RDS PostgreSQL + OSS。Supabase 相关文档仅作为历史环境和迁移参考。
 
