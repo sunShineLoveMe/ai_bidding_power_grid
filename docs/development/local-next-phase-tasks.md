@@ -98,10 +98,11 @@
 ### B1. 全链路 HTTP 冒烟补全 🔴
 
 - **现状**：`scripts/smoke_key_flow.py` 已有最小冒烟，但尚未覆盖合规检查，也缺少适合本地 mock LLM/MinerU 的稳定回归模式。
-- **2026-06-02 进展**：已把规则合规检查接入 `scripts/smoke_key_flow.py`，主链路现在覆盖上传 → 解析 → 解读 → 大纲 → 正文 → 合规 → DOCX 导出；新增 `--skip-compliance` 跳过开关和脚本单测。mock LLM/MinerU 稳定回归模式待补。
+- **2026-06-02 进展**：已把规则合规检查接入 `scripts/smoke_key_flow.py`，主链路现在覆盖上传 → 解析 → 解读 → 大纲 → 正文 → 合规 → DOCX 导出；新增 `--skip-compliance` 跳过开关和脚本单测。脚本已增加 `/api/ready` 前置探测、实时阶段输出、Markdown/JSON 报告落盘、`--require-mineru` PDF 解析强校验开关。
+- **2026-06-02 真实冒烟状态**：首次真实脚本因未登录被 401 拦截；注册本地 smoke 账号后重跑，因未启动 Celery worker 卡在 `wait_parse_completed`。已补充 README 启动说明并启动 worker，`/api/ready` 显示 DB/Redis/模型/存储/Celery 全部 ok。随后使用 PDF 样例 + `--require-mineru` 完成真实全链路冒烟：上传 → MinerU 解析/落库 → 解读 → AI 报告 → 大纲 → 章节正文 → 合规 → DOCX 导出全部通过。报告：`docs/development/runs/run_20260602_224815_http_smoke_passed.md`。
 - **任务**：
   - 扩展/维护上传 → 解析 → 解读 → 大纲 → 正文 → 合规 → DOCX 导出的完整 HTTP 级回归。
-  - 支持本地 mock LLM/MinerU，保证不依赖真实外部 API 也能跑。
+  - 真实全链路优先：后端、前端、Celery worker、LLM、MinerU 可用时直接跑真实冒烟；mock 模式仅作为 CI/无外部依赖时的后备。
   - 输出清晰的阶段耗时、失败阶段和关键 ID。
 - **验收**：一条命令跑通主链路，后续可挂 CI 或云上部署后直接复验。
 

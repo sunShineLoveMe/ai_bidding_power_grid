@@ -13,7 +13,7 @@
 ## 核心亮点
 
 ### 1. 两阶段 AI 章节大纲生成
-规则版骨架秒级展示，AI 精细化版在 SSE 流内同步完成后实时刷新。大纲生成前自动检索企业知识库，根据评分项数量动态计算最小章节数（`max(25, 评分项×2)`），确保每个评分项都有对应章节响应。
+规则版骨架秒级展示，AI 精细化版通过 Celery 后台任务异步刷新。大纲生成前自动检索企业知识库，根据评分项数量动态计算最小章节数（`max(25, 评分项×2)`），确保每个评分项都有对应章节响应。
 
 → [详细说明](docs/features/outline-generation.md)
 
@@ -54,30 +54,69 @@ pgvector（HNSW 索引）向量检索 + 父子双层分块 + metadata 定向过�
 ```mermaid
 flowchart LR
     U[用户浏览器] --> FE[Vite React 前端]
-    FE --> API[Flask API]
+    FE --> API[Flask / Gunicorn API]
 
     API --> Storage[本地 Storage / 阿里云 OSS]
     API --> DB[(PostgreSQL / 阿里云 RDS)]
-    DB --> Vec[(pgvector)]
+    DB --> Vec[(pgvector HNSW)]
 
-    API --> Parser[文档解析层]
+    API --> Redis[(Redis / Celery Broker)]
+    Redis --> Worker[Celery Worker]
+
+    Worker --> Parser[文档解析与落库]
     Parser --> Native[原生文本抽取]
     Parser --> MinerU[MinerU OCR/版面解析]
-
-    API --> LLM[大语言模型]
-    API --> Docx[python-docx 生成 DOCX]
-    Docx --> LO[LibreOffice 刷新目录页码]
-    FE --> Tiptap[Tiptap AI 章节编辑器]
-    FE --> Office[ONLYOFFICE / 终稿编辑，可选]
-
-    Storage --> Parser
     Parser --> DB
     Parser --> Vec
-    Vec --> LLM
+    Storage --> Parser
+
+    API --> LLM[DeepSeek / DashScope LLM]
+    Vec --> API
+    Worker --> Docx[python-docx 生成 DOCX]
+    Docx --> LO[LibreOffice 刷新目录页码]
+    Worker --> DB
     LLM --> API
+
+    FE --> Tiptap[Tiptap AI 章节编辑器]
+    FE --> Office[ONLYOFFICE / 终稿编辑，可选]
 ```
 
-**技术栈**：Flask · React 18 · TypeScript · Ant Design 5 · Tiptap · PostgreSQL + pgvector（HNSW）· 本地 Storage / 阿里云 OSS · DeepSeek（写作）/ DashScope · Ollama（可选本地 Embedding）· MinerU
+**技术栈**：Flask/Gunicorn · Celery · Redis · React 18 · TypeScript · Ant Design 5 · Tiptap · PostgreSQL + pgvector（HNSW）· 本地 Storage / 阿里云 OSS · DeepSeek（写作）/ DashScope · Ollama（可选本地 Embedding）· MinerU
+
+### 当前技术路径
+
+```mermaid
+sequenceDiagram
+    participant FE as 前端工作台
+    participant API as Flask/Gunicorn API
+    participant Q as Redis 队列
+    participant W as Celery Worker
+    participant M as MinerU / 原生解析
+    participant DB as PostgreSQL + pgvector
+    participant LLM as DeepSeek / DashScope
+    participant DOCX as DOCX 导出
+
+    FE->>API: 上传招标文件
+    API->>DB: 创建项目、文件和解析任务状态
+    API->>Q: 投递解析任务
+    API-->>FE: 返回 project_id / file_id
+    W->>Q: 消费解析任务
+    W->>M: PDF 走 MinerU，文本文件走原生抽取
+    M-->>W: Markdown / 结构块 / 页码与版面信息
+    W->>DB: 写入 bid_analysis / document_chunks / embedding
+    FE->>API: 轮询 parse-status
+    API-->>FE: indexed / hasAnalysis=true
+    FE->>API: 生成 AI 报告、大纲、章节正文、合规检查
+    API->>LLM: 解读 / 大纲 / 正文 / 语义复核
+    API->>DB: 保存章节、大纲、合规结果
+    FE->>API: 创建 DOCX 导出任务
+    API->>Q: 投递导出任务
+    W->>DOCX: 生成 Word 并刷新目录页码
+    W->>DB: 写回导出任务 completed
+    FE->>API: 轮询导出任务并下载 DOCX
+```
+
+生产与本地真实联调采用同一条主链路：**API 只负责接请求、校验、创建任务和查询状态；Celery worker 负责解析、MinerU 产物落库、DOCX 导出和大纲精炼等长任务**。因此 `/api/ready` 中 `checks.celery.status=ok` 是真实全链路冒烟的前置条件。
 
 → [文档中心](docs/README.md) · [完整架构说明](docs/architecture/overview.md)
 
@@ -103,12 +142,18 @@ cp .env.example .env
 # 编辑 .env，填写 DEEPSEEK_API_KEY、DASHSCOPE_API_KEY，并确认 DATABASE_URL
 # 如需下载 DOCX 后目录页码直接准确，安装 LibreOffice 并确认 SOFFICE_BIN 路径
 
-# 5. 启动本地 PostgreSQL
-docker compose up -d postgres
+# 5. 启动本地 PostgreSQL 和 Redis
+docker compose up -d postgres redis
 
 # 6. 启动后端（统一使用 gunicorn，详见下方“后端启动方式”）
-gunicorn -c gunicorn.conf.py main:app
-# 默认监听 http://127.0.0.1:8000
+PORT=3012 gunicorn -c gunicorn.conf.py main:app
+# 本地脚本默认访问 http://127.0.0.1:3012
+
+# 7. 另开一个终端启动 Celery worker
+./scripts/dev_worker.sh
+
+# 8. 另开一个终端启动前端开发服务
+cd frontend && npm run dev
 ```
 
 → [完整部署文档](docs/deployment/quickstart.md) · [安全配置](docs/deployment/security.md) · [本地 Docker PostgreSQL](docs/deployment/local-postgres-docker.md) · [阿里云目标架构](docs/deployment/aliyun-target-architecture.md)
@@ -117,6 +162,8 @@ gunicorn -c gunicorn.conf.py main:app
 
 > 本项目为多人协作开发。为保证本地、测试、生产环境行为一致，**统一使用 gunicorn 启动后端**，不再推荐 `python main.py`（Flask 开发服务器）。
 > 原因：系统大量使用 SSE 流式响应（招标解读、大纲、正文、知识库问答都是长连接），Flask 自带的开发服务器是单进程、同步模型，多个流式连接会互相阻塞，且明确标注“不可用于生产”。gunicorn 的 gevent worker 才是和生产一致的运行模型。
+
+> 重要：上传解析、MinerU 产物落库、DOCX 导出和大纲精炼依赖 Celery worker。只启动后端和前端时，HTTP 可以响应，但解析/导出任务不会推进。真实全链路冒烟或本地联调必须同时启动 Redis 和 Celery worker。
 
 #### 1. 标准启动（推荐，所有人默认用这个）
 
@@ -132,6 +179,38 @@ gunicorn -c gunicorn.conf.py main:app
 - 健康检查：`curl http://127.0.0.1:8000/api/health` 返回 `{"status": "ok"}`
 
 > 注意端口差异：gunicorn 默认走 **8000** 端口；旧的 `python main.py` 走的是 3012。改用 gunicorn 后，本地访问地址是 `http://127.0.0.1:8000`。如果前端 dev server 或调试脚本里写死了 3012，请同步改成 8000，或用下面的环境变量把 gunicorn 端口调成 3012。
+
+#### 1.1 本地异步任务 worker（真实联调必开）
+
+```bash
+docker compose up -d redis
+./scripts/dev_worker.sh
+```
+
+启动后检查：
+
+```bash
+curl http://127.0.0.1:3012/api/ready
+```
+
+`checks.celery.status` 应为 `ok`，并显示在线 worker 数量。若为 `warn: no Celery worker responded to ping`，上传后的解析状态会一直轮询，DOCX 导出任务也不会完成。
+
+#### 1.2 真实全链路冒烟
+
+真实冒烟应使用 PDF 样例并开启 MinerU 校验，确保覆盖“上传 → MinerU 解析/落库 → 结构化解读 → AI 报告 → 大纲 → 章节正文 → 合规检查 → DOCX 导出”完整链路。默认 Markdown 样例只适合脚本连通性检查，不足以验证 MinerU 和结构化解读落库。
+
+```bash
+.venv/bin/python scripts/smoke_key_flow.py \
+  --base-url http://127.0.0.1:3012 \
+  --timeout 900 \
+  --username <本地测试账号> \
+  --password <本地测试密码> \
+  --sample-file "rag_seed/power_grid_resources/02_policy_regulations/03_必须招标的工程项目规定_a8122eb9.pdf" \
+  --require-mineru \
+  --report docs/development/runs
+```
+
+最近一次通过记录：`docs/development/runs/run_20260602_224815_http_smoke_passed.md`。该记录显示 Celery worker 在线、PDF 通过 MinerU 解析并落库、AI 报告/大纲/正文/合规/DOCX 导出全部完成。
 
 #### 2. 本地调试：开启热重载
 

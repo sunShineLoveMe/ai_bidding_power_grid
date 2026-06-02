@@ -1,0 +1,61 @@
+{
+  "generated_at": "2026-06-02T14:30:31.008349+00:00",
+  "ok": false,
+  "base_url": "http://127.0.0.1:3012",
+  "timeout": 600,
+  "error": "HTTP 401: {\"error\": \"请先登录后再访问。\"}",
+  "artifacts": {
+    "ready": {
+      "checks": {
+        "celery": {
+          "message": "no Celery worker responded to ping",
+          "status": "warn"
+        },
+        "database": {
+          "checks": {
+            "match_knowledge_assets": true,
+            "match_knowledge_chunks": true,
+            "vector": true
+          },
+          "status": "ok"
+        },
+        "model_config": {
+          "optional": {
+            "mineru_api_token": true
+          },
+          "required": {
+            "dashscope_api_key": true,
+            "deepseek_api_key": true
+          },
+          "status": "ok"
+        },
+        "redis": {
+          "host": "127.0.0.1",
+          "port": 16379,
+          "status": "ok"
+        },
+        "storage": {
+          "provider": "local",
+          "root": "storage",
+          "status": "ok"
+        }
+      },
+      "duration_ms": 2260,
+      "status": "ok"
+    }
+  },
+  "steps": [
+    {
+      "name": "check_ready",
+      "ok": true,
+      "detail": "status=ok checks=5",
+      "elapsed_ms": 2272
+    },
+    {
+      "name": "identify_user",
+      "ok": true,
+      "detail": "fallback=smoke-user; status=401",
+      "elapsed_ms": 1
+    }
+  ]
+}

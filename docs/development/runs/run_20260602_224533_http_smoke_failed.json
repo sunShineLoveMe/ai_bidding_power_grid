@@ -1,0 +1,111 @@
+{
+  "generated_at": "2026-06-02T14:45:33.635699+00:00",
+  "ok": false,
+  "base_url": "http://127.0.0.1:3012",
+  "timeout": 600,
+  "error": "HTTP 500: {\"error\": \"服务器处理失败，请联系管理员查看后端日志。\"}",
+  "artifacts": {
+    "ready": {
+      "checks": {
+        "celery": {
+          "status": "ok",
+          "workers": 1
+        },
+        "database": {
+          "checks": {
+            "match_knowledge_assets": true,
+            "match_knowledge_chunks": true,
+            "vector": true
+          },
+          "status": "ok"
+        },
+        "model_config": {
+          "optional": {
+            "mineru_api_token": true
+          },
+          "required": {
+            "dashscope_api_key": true,
+            "deepseek_api_key": true
+          },
+          "status": "ok"
+        },
+        "redis": {
+          "host": "127.0.0.1",
+          "port": 16379,
+          "status": "ok"
+        },
+        "storage": {
+          "provider": "local",
+          "root": "storage",
+          "status": "ok"
+        }
+      },
+      "duration_ms": 2154,
+      "status": "ok"
+    },
+    "project_id": "49b9d507-5a39-4c84-b324-f13db2f263ce",
+    "file_id": "d6950bef-20f5-4e86-9430-576a47c5865c",
+    "supabase_file_id": "45299ba3-ffaf-49da-bc40-7faebef12446",
+    "parse_status": {
+      "downloadRetryCount": 0,
+      "error": null,
+      "errorType": null,
+      "failureStage": null,
+      "fileId": "d6950bef-20f5-4e86-9430-576a47c5865c",
+      "mineru": {
+        "file_name": "power-grid-smoke-tender.md",
+        "parse_recovery_started_at": "2026-06-02T14:39:01Z",
+        "parse_status": "indexed",
+        "parser": "native_text",
+        "project_id": "49b9d507-5a39-4c84-b324-f13db2f263ce",
+        "retryable": true,
+        "source_file": "uploads/1db67a4d-e0f7-4ae2-8ba5-3b00d78b7ab5-power-grid-smoke-tender.md",
+        "supabase_file_id": "45299ba3-ffaf-49da-bc40-7faebef12446",
+        "updated_at": "2026-06-02T14:42:23Z",
+        "user_message": "后台解析任务未继续推进，系统正在自动恢复解析。"
+      },
+      "parseCompleted": true,
+      "parseStatus": "indexed",
+      "retryable": false,
+      "supabaseFile": {
+        "bucket": "tender-files",
+        "created_at": "2026-06-02T22:30:58.435693+08:00",
+        "file_hash": "1358af2e6a183675c847f3c0199fd5bb7f79fad47a562d1d15b347faff01a4cd",
+        "file_name": "power-grid-smoke-tender.md",
+        "file_size": 440,
+        "file_type": "md",
+        "id": "45299ba3-ffaf-49da-bc40-7faebef12446",
+        "object_path": "49b9d507-5a39-4c84-b324-f13db2f263ce/2797b558ee254e71898fef3834858ee8.md",
+        "parse_status": "indexed",
+        "project_id": "49b9d507-5a39-4c84-b324-f13db2f263ce"
+      },
+      "userMessage": null
+    }
+  },
+  "steps": [
+    {
+      "name": "check_ready",
+      "ok": true,
+      "detail": "status=ok checks=5",
+      "elapsed_ms": 2163
+    },
+    {
+      "name": "login",
+      "ok": true,
+      "detail": "user=smoke-20260602-2230",
+      "elapsed_ms": 75
+    },
+    {
+      "name": "wait_parse_completed",
+      "ok": true,
+      "detail": "parseStatus=indexed parser=native_text",
+      "elapsed_ms": 7
+    },
+    {
+      "name": "query_interpretation",
+      "ok": true,
+      "detail": "hasAnalysis=False",
+      "elapsed_ms": 14
+    }
+  ]
+}

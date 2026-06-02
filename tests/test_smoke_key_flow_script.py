@@ -1,6 +1,8 @@
 import unittest
+import tempfile
+from pathlib import Path
 
-from scripts.smoke_key_flow import SmokeContext, _parse_sse, build_parser, run_compliance_check
+from scripts.smoke_key_flow import SmokeContext, SmokeFailure, _parse_sse, build_parser, check_ready, run_compliance_check, write_report
 
 
 class _FakeResponse:
@@ -48,6 +50,44 @@ class SmokeKeyFlowScriptTest(unittest.TestCase):
         args = build_parser().parse_args(["--skip-compliance"])
 
         self.assertTrue(args.skip_compliance)
+
+    def test_parser_supports_ready_mineru_and_report_options(self):
+        args = build_parser().parse_args(["--skip-ready", "--require-mineru", "--quiet", "--report", "out.md"])
+
+        self.assertTrue(args.skip_ready)
+        self.assertTrue(args.require_mineru)
+        self.assertTrue(args.quiet)
+        self.assertEqual("out.md", args.report)
+
+    def test_check_ready_records_success(self):
+        session = _FakeSession({"status": "ready", "checks": {"db": {"status": "ok"}}})
+        ctx = SmokeContext(base_url="http://backend", timeout=10, session=session)
+
+        payload = check_ready(ctx)
+
+        self.assertEqual("ready", payload["status"])
+        self.assertEqual("check_ready", ctx.results[0].name)
+        self.assertIn("/api/ready", session.requested[0][0])
+
+    def test_check_ready_fails_on_failed_dependency(self):
+        session = _FakeSession({"status": "not_ready", "checks": {"redis": {"status": "fail"}}})
+        ctx = SmokeContext(base_url="http://backend", timeout=10, session=session)
+
+        with self.assertRaises(SmokeFailure):
+            check_ready(ctx)
+
+    def test_write_report_writes_markdown_and_json(self):
+        ctx = SmokeContext(base_url="http://backend", timeout=10)
+        ctx.artifacts["project_id"] = "p1"
+        ctx.record("step_one", 0, "ok")
+        with tempfile.TemporaryDirectory() as tmp:
+            report = write_report(ctx, str(Path(tmp) / "smoke.md"), ok=True)
+
+            self.assertIsNotNone(report)
+            assert report is not None
+            self.assertTrue(report.exists())
+            self.assertTrue(report.with_suffix(".json").exists())
+            self.assertIn("HTTP 全链路冒烟报告", report.read_text(encoding="utf-8"))
 
     def test_run_compliance_check_records_rows(self):
         session = _FakeSession({"rows": [{"id": "r1"}], "summary": {"coverageRate": 0.5}})

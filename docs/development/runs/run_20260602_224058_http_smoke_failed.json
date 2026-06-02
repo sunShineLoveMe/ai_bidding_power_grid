@@ -1,0 +1,77 @@
+{
+  "generated_at": "2026-06-02T14:40:58.538912+00:00",
+  "ok": false,
+  "base_url": "http://127.0.0.1:3012",
+  "timeout": 600,
+  "error": "等待解析完成超时，最后状态: {\"downloadRetryCount\": 0, \"error\": null, \"errorType\": null, \"failureStage\": null, \"fileId\": \"d6950bef-20f5-4e86-9430-576a47c5865c\", \"mineru\": {\"file_name\": \"power-grid-smoke-tender.md\", \"parse_recovery_started_at\": \"2026-06-02T14:39:01Z\", \"parse_status\": \"supabase_synced\", \"parser\": \"mineru\", \"project_id\": \"49b9d507-5a39-4c84-b324-f13db2f263ce\", \"retryable\": true, \"source_file\": \"uploads/1db67a4d-e0f7-4ae2-8ba5-3b00d78b7ab5-power-grid-smoke-tender.md\", \"supabase_file_id\": \"45299ba3-ffaf-49da-bc4...",
+  "artifacts": {
+    "ready": {
+      "checks": {
+        "celery": {
+          "message": "no Celery worker responded to ping",
+          "status": "warn"
+        },
+        "database": {
+          "checks": {
+            "match_knowledge_assets": true,
+            "match_knowledge_chunks": true,
+            "vector": true
+          },
+          "status": "ok"
+        },
+        "model_config": {
+          "optional": {
+            "mineru_api_token": true
+          },
+          "required": {
+            "dashscope_api_key": true,
+            "deepseek_api_key": true
+          },
+          "status": "ok"
+        },
+        "redis": {
+          "host": "127.0.0.1",
+          "port": 16379,
+          "status": "ok"
+        },
+        "storage": {
+          "provider": "local",
+          "root": "storage",
+          "status": "ok"
+        }
+      },
+      "duration_ms": 2133,
+      "status": "ok"
+    },
+    "project_id": "49b9d507-5a39-4c84-b324-f13db2f263ce",
+    "file_id": "d6950bef-20f5-4e86-9430-576a47c5865c",
+    "supabase_file_id": "45299ba3-ffaf-49da-bc40-7faebef12446",
+    "sample_file": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/ai-bidding-smoke-0p8gase5/power-grid-smoke-tender.md"
+  },
+  "steps": [
+    {
+      "name": "check_ready",
+      "ok": true,
+      "detail": "status=ok checks=5",
+      "elapsed_ms": 2144
+    },
+    {
+      "name": "login",
+      "ok": true,
+      "detail": "user=smoke-20260602-2230",
+      "elapsed_ms": 95
+    },
+    {
+      "name": "identify_user",
+      "ok": true,
+      "detail": "userId=5637d875-55ac-4156-9023-3680b6a9c09e",
+      "elapsed_ms": 8
+    },
+    {
+      "name": "upload_tender",
+      "ok": true,
+      "detail": "projectId=49b9d507-5a39-4c84-b324-f13db2f263ce fileId=d6950bef-20f5-4e86-9430-576a47c5865c supabaseFileId=45299ba3-ffaf-49da-bc40-7faebef12446",
+      "elapsed_ms": 34
+    }
+  ]
+}

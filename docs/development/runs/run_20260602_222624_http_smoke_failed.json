@@ -1,0 +1,9 @@
+{
+  "generated_at": "2026-06-02T14:26:24.958047+00:00",
+  "ok": false,
+  "base_url": "http://127.0.0.1:3012",
+  "timeout": 600,
+  "error": "HTTPConnectionPool(host='127.0.0.1', port=3012): Max retries exceeded with url: /api/ready (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=3012): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
+  "artifacts": {},
+  "steps": []
+}
