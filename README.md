@@ -222,6 +222,46 @@ DASHSCOPE_API_KEY=your_dashscope_api_key
 
 分册大纲落库采用“同项目串行锁 + 预生成章节 UUID + 批量写入 + 写入重试”的可靠性策略。规则版大纲、AI 精修大纲和前端重复流式请求都必须通过 `replace_bid_sections_from_outline()` 统一替换 `bid_sections`，避免网络抖动或并发 SSE 连接造成章节目录写入一半、被二次删除或 Word 导出目录错乱。当前实现仍处于从 Supabase SDK 向标准 PostgreSQL 数据访问层迁移的过程中，详细机制见 [章节大纲生成](docs/features/outline-generation.md)。
 
+### Embedding 向量化服务（支持本地 Ollama 与百炼切换）
+
+> ⚠️ **环境差异提醒（开发人员必读）**：知识库向量化（Embedding）的服务地址现已可配置。**本地开发机**与**阿里云测试/生产环境**的 Embedding 后端可能不同，切换时务必同步配置并按需重嵌，否则会出现召回失真。
+
+Embedding 走 OpenAI 兼容协议，由 `EMBEDDING_BASE_URL` / `EMBEDDING_API_KEY` 控制后端，默认仍是百炼，不影响既有部署：
+
+| 场景 | `EMBEDDING_BASE_URL` | `DASHSCOPE_EMBEDDING_MODEL` | 说明 |
+| --- | --- | --- | --- |
+| 百炼（默认） | 留空 或 `https://dashscope.aliyuncs.com/compatible-mode/v1` | `text-embedding-v4` | 需 `DASHSCOPE_API_KEY`，按 token 计费 |
+| 本地 Ollama（开发省额度） | `http://localhost:11434/v1` | `qwen3-embedding:0.6b` | 无需联网/付费，输出 1024 维，与 pgvector schema 对齐 |
+| 容器内后端连宿主机 Ollama | `http://host.docker.internal:11434/v1` | `qwen3-embedding:0.6b` | Docker 内访问宿主机 Ollama |
+
+本地 Ollama 启用步骤：
+
+```bash
+# 1. 启动 Ollama 并拉取 embedding 模型（与百炼 v4 同源，输出 1024 维）
+ollama serve
+ollama pull qwen3-embedding:0.6b
+
+# 2. 在 .env 中切换 Embedding 后端
+EMBEDDING_BASE_URL=http://localhost:11434/v1
+EMBEDDING_API_KEY=                       # Ollama 不校验，可留空
+DASHSCOPE_EMBEDDING_MODEL=qwen3-embedding:0.6b
+DASHSCOPE_EMBEDDING_DIMENSIONS=1024
+
+# 3. 验证返回维度为 1024
+curl -s http://localhost:11434/v1/embeddings \
+  -H "Content-Type: application/json" \
+  -d '{"model":"qwen3-embedding:0.6b","input":"测试"}' \
+  | python3 -c "import sys,json;print('dim=',len(json.load(sys.stdin)['data'][0]['embedding']))"
+```
+
+关键约束：
+
+- **换模型或换维度必须全量重嵌**。百炼 `text-embedding-v4` 与 Ollama `qwen3-embedding` 生成的向量不在同一空间，混用会导致召回失真。切换后需重跑入库（如 `python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py --refresh`），把存量 chunk 用新模型重嵌。
+- **维度必须保持 1024**，与 `document_chunks.embedding vector(1024)` / `knowledge_assets.embedding vector(1024)` 一致；如要改维度需同步迁移向量列。
+- `dimensions` 参数仅对百炼下发；Ollama 按模型默认维度输出（`qwen3-embedding:0.6b` 即 1024），系统已自动处理，无需手动区分。
+- **生产/阿里云环境**默认仍用百炼（测试环境无开发机的 Ollama）。如需在阿里云上私有化向量化，应在 ECS 上用 vLLM/Ollama 自托管同款模型，并保证与开发期模型一致，避免再次重嵌。
+- Rerank（`qwen3-rerank`）仍走百炼；它是 fail-open 增强项，额度问题不影响主召回链路。
+
 ### DOCX 目录页码刷新
 
 `python-docx` 只能写入 Word 字段，不能计算真实页码。系统导出流程已集成 LibreOffice headless：`Markdown -> python-docx DOCX -> soffice DOCX 重新保存 -> 返回 DOCX`。开启后，目录 `PAGEREF`、页脚 `PAGE/NUMPAGES` 会在服务端刷新，避免下载后目录页码全部显示为 `1`。

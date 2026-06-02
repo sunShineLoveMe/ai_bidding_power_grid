@@ -20,6 +20,10 @@ DEFAULT_SETTINGS: dict[str, Any] = {
     "deepseek_base_url": "https://api.deepseek.com",
     "embedding_model": "text-embedding-v4",
     "embedding_dimensions": 1024,
+    # Embedding 服务地址与密钥。默认走百炼 OpenAI 兼容接口；
+    # 指向本地 Ollama 时设为 http://localhost:11434/v1（容器内用 host.docker.internal）。
+    "embedding_base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "embedding_api_key": "",
     "rerank_enabled": True,
     "rerank_model": "qwen3-rerank",
     "rerank_top_n": 6,
@@ -66,6 +70,8 @@ ENV_MAPPING = {
     "deepseek_base_url": "DEEPSEEK_BASE_URL",
     "embedding_model": "DASHSCOPE_EMBEDDING_MODEL",
     "embedding_dimensions": "DASHSCOPE_EMBEDDING_DIMENSIONS",
+    "embedding_base_url": "EMBEDDING_BASE_URL",
+    "embedding_api_key": "EMBEDDING_API_KEY",
     "rerank_enabled": "DASHSCOPE_RERANK_ENABLED",
     "rerank_model": "DASHSCOPE_RERANK_MODEL",
     "rerank_top_n": "DASHSCOPE_RERANK_TOP_N",

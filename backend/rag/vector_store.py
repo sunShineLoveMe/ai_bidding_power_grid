@@ -6,6 +6,7 @@ from backend.core.config import get_setting
 from backend.db.supabase_repo import record_ai_usage_log
 
 DASHSCOPE_API_KEY = os.getenv("DASHSCOPE_API_KEY")
+DASHSCOPE_COMPAT_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
 
 
 class EmptyDocumentContentError(Exception):
@@ -16,13 +17,26 @@ class EmptyDocumentContentError(Exception):
     """
 
 
-# 初始化阿里云百炼客户端
+# 初始化 Embedding 客户端（OpenAI 兼容协议）
 def init_ali_client():
-    """初始化阿里云百炼OpenAI兼容客户端"""
-    return OpenAI(
-        api_key=DASHSCOPE_API_KEY,
-        base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
-    )
+    """初始化 Embedding 客户端。
+
+    默认走阿里云百炼 OpenAI 兼容接口；可通过配置切换到本地 Ollama 或其它
+    OpenAI 兼容服务（例如百炼额度用尽时本地跑 qwen3-embedding）。
+
+    - base_url：`embedding_base_url`（环境变量 `EMBEDDING_BASE_URL`）。
+      本地 Ollama 用 `http://localhost:11434/v1`；后端跑在容器内时用
+      `http://host.docker.internal:11434/v1`。
+    - api_key：`embedding_api_key`（环境变量 `EMBEDDING_API_KEY`）。
+      百炼必填，回退到 `DASHSCOPE_API_KEY`；Ollama 不校验 key，留空时填占位符。
+    """
+    base_url = str(get_setting("embedding_base_url", DASHSCOPE_COMPAT_BASE_URL) or DASHSCOPE_COMPAT_BASE_URL).strip()
+    api_key = str(get_setting("embedding_api_key", "") or "").strip() or DASHSCOPE_API_KEY
+    is_dashscope = "dashscope.aliyuncs.com" in base_url
+    # 本地 Ollama 等服务不校验 api_key，但 OpenAI SDK 要求非空，填占位符即可。
+    if not api_key:
+        api_key = DASHSCOPE_API_KEY if is_dashscope else "ollama"
+    return OpenAI(api_key=api_key, base_url=base_url)
 
 # 读取文件内容
 def read_file_content(file_path):
@@ -125,6 +139,9 @@ def get_embeddings(client, texts, batch_size=10, usage_context=None):
     """
     all_embeddings = []
     context = usage_context or {}
+    base_url = str(get_setting("embedding_base_url", DASHSCOPE_COMPAT_BASE_URL) or DASHSCOPE_COMPAT_BASE_URL).strip()
+    is_dashscope = "dashscope.aliyuncs.com" in base_url
+    provider = "dashscope" if is_dashscope else "local_openai_compatible"
     # 按批次处理
     for i in range(0, len(texts), batch_size):
         batch_texts = texts[i:i+batch_size]
@@ -133,7 +150,9 @@ def get_embeddings(client, texts, batch_size=10, usage_context=None):
             "input": batch_texts,
         }
         dimensions = get_setting("embedding_dimensions", 1024)
-        if dimensions:
+        # 仅百炼支持 OpenAI 兼容的 dimensions 参数；本地 Ollama 等服务按模型默认维度输出，
+        # 传该参数可能报错，因此只对 DashScope 下发。
+        if dimensions and is_dashscope:
             kwargs["dimensions"] = int(dimensions)
         started_at = time.time()
         response = client.embeddings.create(**kwargs)
@@ -142,10 +161,10 @@ def get_embeddings(client, texts, batch_size=10, usage_context=None):
         all_embeddings.extend(batch_embeddings)
         model_name = getattr(response, "model", None) or kwargs["model"]
         record_ai_usage_log(
-            provider="dashscope",
-            region="cn-beijing",
+            provider=provider,
+            region="cn-beijing" if is_dashscope else "local",
             api_protocol="openai_compatible",
-            endpoint="/compatible-mode/v1/embeddings",
+            endpoint=f"{base_url.rstrip('/')}/embeddings",
             model=model_name,
             operation_type="embedding",
             stage=context.get("stage") or "embedding",

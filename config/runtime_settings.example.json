@@ -12,6 +12,8 @@
   "deepseek_base_url": "https://api.deepseek.com",
   "embedding_model": "text-embedding-v4",
   "embedding_dimensions": 1024,
+  "embedding_base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  "embedding_api_key": "",
   "rerank_enabled": true,
   "rerank_model": "qwen3-rerank",
   "rerank_top_n": 6,
