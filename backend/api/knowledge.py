@@ -140,14 +140,22 @@ def upload_knowledge():
 @knowledge_bp.route('/search', methods=['POST'])
 @bp.route('/knowledge/search', methods=['POST'])
 def search_knowledge():
-    data = request.get_json()
+    data = request.get_json() or {}
     query = data.get('query')
     if not query:
         return jsonify({'error': '缺少检索问题 query'}), 400
         
     try:
         # 1. 向量化并检索 Supabase
-        contexts = search_knowledge_base(query, match_threshold=0.3, match_count=8)
+        contexts = search_knowledge_base(
+            query,
+            match_threshold=0.3,
+            match_count=8,
+            scenario=data.get("scenario") or "qa",
+            metadata_filter=data.get("metadata_filter") or None,
+            project_id=data.get("project_id") or None,
+            return_parent=data.get("return_parent"),
+        )
         assets = search_knowledge_assets(query, match_count=8)
         
         # 2. RAG 生成回答
@@ -193,7 +201,15 @@ def stream_search_knowledge():
         yield emit({"type": "start"})
         try:
             yield emit({"type": "status", "message": "正在检索企业知识库和图片资产..."})
-            contexts = search_knowledge_base(query, match_threshold=0.3, match_count=8)
+            contexts = search_knowledge_base(
+                query,
+                match_threshold=0.3,
+                match_count=8,
+                scenario=data.get("scenario") or "qa",
+                metadata_filter=data.get("metadata_filter") or None,
+                project_id=data.get("project_id") or None,
+                return_parent=data.get("return_parent"),
+            )
             assets = search_knowledge_assets(query, match_count=8)
             if not contexts and not assets and not is_relevant_knowledge_query(query):
                 yield emit({

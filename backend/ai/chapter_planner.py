@@ -111,7 +111,13 @@ def _fetch_knowledge_context(payload: dict[str, Any]) -> dict[str, Any]:
 
         # 1. 检索知识库文档片段（标准话术、施工方案、政策法规等）
         try:
-            snippets = search_knowledge_base(query, match_threshold=0.3, match_count=12)
+            snippets = search_knowledge_base(
+                query,
+                match_threshold=0.3,
+                match_count=12,
+                scenario="writing",
+                return_parent=True,
+            )
             for snippet in snippets:
                 meta = snippet.get("metadata") or {}
                 result["rag_snippets"].append({

@@ -1,4 +1,3 @@
-import os
 import json
 import re
 from typing import Any, Iterator, List, Dict
@@ -11,9 +10,115 @@ from backend.core.config import get_stage_model
 from backend.ai.rerank_client import rerank_documents
 from backend.core.bid_volumes import asset_applicable_volumes, asset_matches_volume, normalize_volume_type
 
-def search_knowledge_base(query: str, match_threshold: float = 0.5, match_count: int = 5) -> List[Dict[str, Any]]:
+def _infer_doc_role_filter(query: str, scenario: str | None = None) -> str | None:
+    text = query or ""
+    lowered = text.lower()
+    if any(token in text for token in ["法律", "法规", "合规", "废标", "否决", "无效", "串通", "责任"]):
+        return "policy_regulation"
+    if any(token in text for token in ["国家电网", "国网", "供应商管理", "招标活动管理", "物资采购标准"]):
+        return "sgcc_rule"
+    if any(token in text for token in ["标准", "规范", "规程", "导则", "试验", "施工工艺", "技术参数"]):
+        return "standard_spec"
+    if any(token in text for token in ["公告", "采购范围", "资格要求", "递交", "开标", "报价"]):
+        return "tender_notice"
+    if any(token in text for token in ["怎么写", "响应", "承诺", "模板", "话术", "检查清单"]) or "template" in lowered:
+        return "self_phrase"
+    if scenario == "compliance":
+        return "policy_regulation"
+    return None
+
+
+def _build_filter_metadata(
+    query: str,
+    *,
+    scenario: str | None,
+    metadata_filter: dict[str, Any] | None,
+) -> dict[str, Any]:
+    filter_md = dict(metadata_filter or {})
+    filter_md.setdefault("chunk_layer", "child")
+    if "doc_role" not in filter_md:
+        inferred_role = _infer_doc_role_filter(query, scenario)
+        if inferred_role:
+            filter_md["doc_role"] = inferred_role
+    return filter_md
+
+
+def _rpc_search_chunks(
+    client,
+    *,
+    query_vector: list[float],
+    match_threshold: float,
+    match_count: int,
+    filter_metadata: dict[str, Any],
+    project_id: str | None,
+) -> list[dict[str, Any]]:
+    response = client.rpc(
+        "match_knowledge_chunks_filtered",
+        {
+            "query_embedding": query_vector,
+            "match_threshold": match_threshold,
+            "match_count": match_count,
+            "filter_metadata": filter_metadata,
+            "filter_project_id": project_id,
+        },
+    ).execute()
+    return response.data or []
+
+
+def _attach_parent_context(client, rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    enriched: list[dict[str, Any]] = []
+    seen: set[tuple[str, int]] = set()
+    for row in rows:
+        metadata = row.get("metadata") or {}
+        parent_index = metadata.get("parent_index")
+        document_id = row.get("document_id")
+        if document_id and isinstance(parent_index, int):
+            key = (str(document_id), parent_index)
+            if key in seen:
+                continue
+            seen.add(key)
+            try:
+                parent_resp = client.rpc(
+                    "get_parent_chunk",
+                    {"p_document_id": document_id, "p_parent_index": parent_index},
+                ).execute()
+                parent = (parent_resp.data or [None])[0]
+            except Exception:
+                parent = None
+            if parent:
+                parent_meta = parent.get("metadata") or {}
+                enriched.append({
+                    **parent,
+                    "similarity": row.get("similarity"),
+                    "metadata": {
+                        **parent_meta,
+                        "retrieved_by_child": {
+                            "id": row.get("id"),
+                            "source_section": row.get("source_section"),
+                            "metadata": metadata,
+                        },
+                    },
+                })
+                continue
+        enriched.append(row)
+    return enriched
+
+
+def search_knowledge_base(
+    query: str,
+    match_threshold: float = 0.5,
+    match_count: int = 5,
+    *,
+    scenario: str | None = "qa",
+    metadata_filter: dict[str, Any] | None = None,
+    project_id: str | None = None,
+    return_parent: bool | None = None,
+) -> List[Dict[str, Any]]:
     """
-    通过 Supabase RPC 检索图文混排的知识库内容
+    通过 pgvector RPC 检索知识库内容。
+
+    默认走带 metadata/project 过滤的 `match_knowledge_chunks_filtered`。调用方可按
+    qa / writing / compliance 场景传入 metadata_filter；写作场景可回溯父块返回更完整上下文。
     """
     ali_client = init_ali_client()
     client = get_supabase_client()
@@ -24,17 +129,34 @@ def search_knowledge_base(query: str, match_threshold: float = 0.5, match_count:
         return []
     query_vector = query_embeddings[0]
     
-    # 2. 调用 Supabase RPC
-    response = client.rpc(
-        "match_knowledge_chunks",
-        {
-            "query_embedding": query_vector,
-            "match_threshold": match_threshold,
-            "match_count": max(match_count * 3, match_count)
-        }
-    ).execute()
-    
-    rows = response.data or []
+    # 2. 调用带 metadata/project 过滤的 RPC。先按推断/显式过滤召回，不足时放宽 doc_role。
+    rpc_count = max(match_count * 3, match_count)
+    filter_md = _build_filter_metadata(query, scenario=scenario, metadata_filter=metadata_filter)
+    rows = _rpc_search_chunks(
+        client,
+        query_vector=query_vector,
+        match_threshold=match_threshold,
+        match_count=rpc_count,
+        filter_metadata=filter_md,
+        project_id=project_id,
+    )
+    if len(rows) < match_count and "doc_role" in filter_md and "doc_role" not in (metadata_filter or {}):
+        fallback_filter = {k: v for k, v in filter_md.items() if k != "doc_role"}
+        fallback_rows = _rpc_search_chunks(
+            client,
+            query_vector=query_vector,
+            match_threshold=match_threshold,
+            match_count=rpc_count,
+            filter_metadata=fallback_filter,
+            project_id=project_id,
+        )
+        seen_ids = {str(row.get("id")) for row in rows if row.get("id")}
+        rows.extend(row for row in fallback_rows if not row.get("id") or str(row.get("id")) not in seen_ids)
+
+    if return_parent is None:
+        return_parent = scenario == "writing"
+    if return_parent:
+        rows = _attach_parent_context(client, rows)
     return rerank_documents(query, rows, text_key="content", top_n=match_count)
 
 

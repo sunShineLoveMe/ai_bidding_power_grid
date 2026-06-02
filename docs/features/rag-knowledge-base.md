@@ -41,8 +41,8 @@ RAG 检索链路：
 ```text
 用户问题
 → 系统配置的 Embedding 模型生成 query embedding
-→ Supabase RPC: match_knowledge_chunks
-→ pgvector 相似度检索 document_chunks
+→ Supabase RPC: match_knowledge_chunks_filtered
+→ metadata/project 过滤 + pgvector 相似度检索 document_chunks
 → Supabase RPC: match_knowledge_assets 检索企业资信/产品图片资产
 → 图片资产关键词兜底召回，覆盖营业执照、社保、业绩、产品图片等短文本资产
 → 召回 top-k 文档分片
@@ -96,12 +96,16 @@ flowchart TD
     B --> C[上传 Supabase Storage]
     C --> D[创建 knowledge_documents]
     D --> E[文本抽取/OCR 解析]
-    E --> F[按段落和长度切片]
-    F --> G[Embedding 向量化]
-    G --> H[写入 document_chunks]
-    H --> I[pgvector 相似度检索]
-    I --> J[组装上下文]
-    J --> K[LLM 生成答案/标书内容]
+    E --> F[清洗网页噪声/采集头]
+    F --> G[按 doc_role 父子双层分块]
+    G --> H[child 生成 Embedding]
+    H --> I[写入 document_chunks metadata]
+    I --> J[filtered RPC + HNSW 召回]
+    J --> K{消费场景}
+    K -->|问答/合规| L[返回 child]
+    K -->|写作| M[回溯 parent]
+    L --> N[LLM 生成答案/标书内容]
+    M --> N
 ```
 
 ### RAG 资料分类
@@ -132,8 +136,7 @@ rag_seed/power_grid_resources/
 ├── 03_standards_specs/       # 标准规范目录、GB/DL/Q-GDW 标准引用说明
 ├── 04_standard_phrases/      # 自建国网投标话术与章节模板
 ├── _scripts/
-│   ├── download_power_grid_rag_seed.py
-│   └── ingest_power_grid_rag_seed.py
+│   └── download_power_grid_rag_seed.py
 ├── index.csv
 ├── index.jsonl
 └── README.md
@@ -148,7 +151,7 @@ python rag_seed/power_grid_resources/_scripts/download_power_grid_rag_seed.py
 入库到 Supabase RAG 知识库：
 
 ```bash
-python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py
+python scripts/rag/ingest_power_grid_v2.py
 ```
 
 入库逻辑：
@@ -158,13 +161,14 @@ python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py
 3. 跳过下载失败的 `.url.md` 占位文件。
 4. 将原始文件上传到 Supabase Storage。
 5. 写入 `knowledge_documents`。
-6. 抽取文本并按段落切片。
-7. 调用 Embedding 模型生成向量。
-8. 写入 `document_chunks`。
-9. 生成 `ingestion_report.md` 和 `ingestion_report.json`。
+6. 抽取文本并清洗网页导航噪声、采集头和多余空白。
+7. 按 `doc_role` 做父子双层分块，父块保留写作上下文，子块用于召回。
+8. 仅对子块调用 Embedding 模型生成向量，父块 `embedding` 置空。
+9. 写入 `document_chunks`，包含 `chunk_layer / parent_index / doc_role / authority_level / citation_policy / content_sha256` 等 metadata。
+10. 重跑 `scripts/rag/eval_recall.py`，确认 Recall@5、来源准确率、跨 doc_role 串扰未退化。
 
 当前种子库已验证可入库：
 
 - Markdown/网页型资料和自建标准话术可直接入库。
 - PDF 标准、法规和客户标书需先经过 MinerU/OCR 抽取、格式复核和版权边界确认，再显式纳入 RAG。
-- 检索链路：`search_knowledge_base()` 可正常召回电网行业资料。
+- 检索链路：`search_knowledge_base()` 默认调用 `match_knowledge_chunks_filtered`，支持 `metadata_filter / project_id / scenario`，写作场景可回溯 parent。

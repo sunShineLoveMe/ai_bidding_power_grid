@@ -32,13 +32,16 @@ class _TableQuery:
 
 
 class _RpcClient:
-    def __init__(self, rpc_rows=None, asset_rows=None):
+    def __init__(self, rpc_rows=None, asset_rows=None, parent_rows=None):
         self.rpc_rows = rpc_rows or []
         self.asset_rows = asset_rows or []
+        self.parent_rows = parent_rows or []
         self.rpc_calls = []
 
     def rpc(self, name, payload):
         self.rpc_calls.append((name, payload))
+        if name == "get_parent_chunk":
+            return _TableQuery(self.parent_rows)
         return _TableQuery(self.rpc_rows)
 
     def table(self, name):
@@ -51,23 +54,59 @@ class RagRetrievalQualityTest(unittest.TestCase):
     @patch("backend.rag.retrieval.rerank_documents")
     @patch("backend.rag.retrieval.get_embeddings", return_value=[[0.1, 0.2, 0.3]])
     @patch("backend.rag.retrieval.init_ali_client", return_value=object())
-    def test_text_recall_uses_vector_rpc_and_rerank(self, _ali, _embeddings, rerank_mock):
+    def test_text_recall_uses_filtered_vector_rpc_and_rerank(self, _ali, _embeddings, rerank_mock):
         from backend.rag import retrieval
 
         rows = [
-            {"content": "坝基防渗施工方案，包含高压旋喷桩工艺。", "similarity": 0.71},
+            {"content": "配网施工方案，包含接地装置施工工艺。", "similarity": 0.71},
             {"content": "商务承诺函模板。", "similarity": 0.42},
         ]
         client = _RpcClient(rpc_rows=rows)
         rerank_mock.return_value = [rows[0]]
 
         with patch("backend.rag.retrieval.get_supabase_client", return_value=client):
-            result = retrieval.search_knowledge_base("坝基防渗施工方案", match_threshold=0.3, match_count=1)
+            result = retrieval.search_knowledge_base("配网施工方案", match_threshold=0.3, match_count=1)
 
         self.assertEqual(result, [rows[0]])
-        self.assertEqual(client.rpc_calls[0][0], "match_knowledge_chunks")
+        self.assertEqual(client.rpc_calls[0][0], "match_knowledge_chunks_filtered")
         self.assertEqual(client.rpc_calls[0][1]["match_threshold"], 0.3)
+        self.assertEqual(client.rpc_calls[0][1]["filter_metadata"]["chunk_layer"], "child")
         rerank_mock.assert_called_once()
+
+    @patch("backend.rag.retrieval.rerank_documents")
+    @patch("backend.rag.retrieval.get_embeddings", return_value=[[0.1, 0.2, 0.3]])
+    @patch("backend.rag.retrieval.init_ali_client", return_value=object())
+    def test_writing_recall_can_return_parent_chunk(self, _ali, _embeddings, rerank_mock):
+        from backend.rag import retrieval
+
+        child = {
+            "id": "child-1",
+            "document_id": "00000000-0000-0000-0000-000000000001",
+            "content": "技术响应子块",
+            "similarity": 0.77,
+            "source_section": "技术响应",
+            "metadata": {"chunk_layer": "child", "parent_index": 3, "doc_role": "self_phrase"},
+        }
+        parent = {
+            "id": "parent-1",
+            "document_id": child["document_id"],
+            "content": "完整技术响应父块上下文",
+            "source_section": "技术响应",
+            "metadata": {"chunk_layer": "parent", "doc_role": "self_phrase"},
+        }
+        client = _RpcClient(rpc_rows=[child], parent_rows=[parent])
+
+        def passthrough(_query, rows, **_kwargs):
+            return rows
+
+        rerank_mock.side_effect = passthrough
+        with patch("backend.rag.retrieval.get_supabase_client", return_value=client):
+            result = retrieval.search_knowledge_base("技术响应怎么写", scenario="writing", match_count=1)
+
+        self.assertEqual(result[0]["id"], "parent-1")
+        self.assertEqual(client.rpc_calls[0][0], "match_knowledge_chunks_filtered")
+        self.assertEqual(client.rpc_calls[1][0], "get_parent_chunk")
+        self.assertEqual(result[0]["metadata"]["retrieved_by_child"]["id"], "child-1")
 
     @patch("backend.rag.retrieval.rerank_documents", return_value=[])
     @patch("backend.rag.retrieval.get_embeddings", return_value=[[0.4, 0.5]])

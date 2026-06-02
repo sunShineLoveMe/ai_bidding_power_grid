@@ -10,12 +10,14 @@
 | [water-data-cleanup.md](water-data-cleanup.md) | 水利历史数据清理记录（范围、备份、执行、校验） |
 | [base-testset.md](base-testset.md) | Base 测试集设计、标注规范与用例清单 |
 | [evaluation-records.md](evaluation-records.md) | 召回评测记录（基线 / 各次迭代对比） |
+| [todo.md](todo.md) | RAG 基座数据工程待办清单、优先级与完成度跟踪 |
 
 ## 相关代码
 
 | 路径 | 作用 |
 | --- | --- |
 | `backend/rag/chunking.py` | 父子分块器（按 doc_role 路由） |
+| `scripts/rag/ingest_power_grid_v2.py` | 电网种子库 v2 入库脚本（父子分块 + metadata） |
 | `scripts/rag/cleanup_water_data.py` | 水利数据清理脚本（带备份） |
 | `scripts/rag/eval_recall.py` | Base 测试集召回评测脚本 |
 | `tests/rag/base_testset.jsonl` | Base 测试集（JSONL 标注） |

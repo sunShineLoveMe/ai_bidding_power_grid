@@ -30,6 +30,7 @@ Supabase 相关文档和代码属于历史架构与迁移参考，后续新开�
 - [安全配置](./deployment/security.md)
 - [成本统计](./features/cost-tracking.md)
 - [RAG 知识库](./features/rag-knowledge-base.md)
+- [RAG 工程待办](./rag/todo.md)
 
 ### 前端开发
 

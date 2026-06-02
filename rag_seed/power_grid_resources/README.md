@@ -25,7 +25,7 @@
 1. 优先导入 `04_standard_phrases`，这些是可直接用于生成投标文件的自有知识。
 2. 再导入 `02_policy_regulations`，用于法规依据、资格条件、质量安全、必须招标范围、质量监督和备案要求问答。
 3. 最后导入 `01_tender_documents` 和 `03_standards_specs`，用于学习国网采购公告结构、ECP/ETP 平台流程、评标/应答风险、电力工程标准引用和输变电项目场景词汇。
-4. PDF 建议先走 MinerU/OCR，保留页码、表格和章节层级；HTML/Markdown 可以直接按标题层级切片。
+4. PDF 建议先走 MinerU/OCR，保留页码、表格和章节层级；HTML/Markdown 使用 v2 父子分块脚本按 `doc_role` 切分，不再走统一定长切片。
 
 ## 版权和使用边界
 
@@ -40,20 +40,22 @@ python rag_seed/power_grid_resources/_scripts/download_power_grid_rag_seed.py
 ## 入库脚本
 
 ```bash
-python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py
+python scripts/rag/ingest_power_grid_v2.py
 ```
 
-脚本默认导入 Markdown/网页型资料和自建标准话术，跳过 PDF。PDF 资料需要先确认抽取质量、摘要边界和版权边界，再通过 `--include-pdf` 显式导入。
+脚本默认读取 `index.csv` 中 `status=downloaded/generated` 的 Markdown/网页型资料和自建标准话术，跳过 PDF。入库时先清洗网页导航噪声，再按 `doc_role` 生成 parent/child 两层 chunk；仅 child 写入 embedding，parent 作为写作回溯上下文。
+
+PDF 资料需要先确认抽取质量、摘要边界和版权边界，经过 MinerU/OCR 转换并复核后，再显式纳入本索引。
 
 常用参数：
 
 ```bash
-python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py --dry-run
-python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py --category 04_standard_phrases
-python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py --refresh
+python scripts/rag/ingest_power_grid_v2.py --dry-run
+python scripts/rag/ingest_power_grid_v2.py --category 04_standard_phrases
 ```
 
 本地验证结果见：
 
-- `ingestion_report.md`
-- `ingestion_report.json`
+- `docs/rag/evaluation-records.md`
+- `docs/rag/_run_filtered.json`
+- `docs/rag/_run_nofilter.json`
