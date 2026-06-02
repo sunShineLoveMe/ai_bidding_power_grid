@@ -109,12 +109,47 @@ class LengthSettingsTest(unittest.TestCase):
 
         with patch("backend.ai.section_writer.get_project_interpretation", return_value=payload), patch(
             "backend.ai.section_writer.list_knowledge_assets", return_value=[]
-        ):
+        ), patch("backend.rag.retrieval.search_knowledge_base", return_value=[]):
             prompt = build_section_prompt("project-id", chapter)
 
         self.assertIn("目标字数：7000 字", prompt)
         self.assertIn("不得为了凑页数重复同义段落", prompt)
         self.assertIn("【待补充：...】", prompt)
+        self.assertIn("章节级 RAG 写作依据", prompt)
+
+    def test_section_prompt_includes_rag_writing_context(self):
+        from backend.ai.section_writer import build_section_prompt
+
+        chapter = {
+            "id": "technical-1",
+            "title": "接地装置施工方案",
+            "purpose": "响应技术规范书中接地施工要求",
+            "response_points": ["接地扁钢施工", "质量验收"],
+            "metadata": {"volume_type": "technical"},
+        }
+        payload = {
+            "project": {"project_name": "配网工程"},
+            "analysis": {"project_meta": {}, "summary": "接地铁物资采购"},
+        }
+        rag_rows = [
+            {
+                "content": "接地装置施工应按设计要求进行材料检验、焊接、防腐和接地电阻测试。",
+                "source_section": "接地施工",
+                "metadata": {"source_file": "配电网施工工艺规范.md", "doc_role": "standard_spec"},
+            }
+        ]
+
+        with patch("backend.ai.section_writer.get_project_interpretation", return_value=payload), patch(
+            "backend.ai.section_writer.list_knowledge_assets", return_value=[]
+        ), patch("backend.rag.retrieval.search_knowledge_base", return_value=rag_rows) as search_mock:
+            prompt = build_section_prompt("project-id", chapter)
+
+        self.assertIn("章节级 RAG 写作依据", prompt)
+        self.assertIn("配电网施工工艺规范.md", prompt)
+        self.assertIn("接地装置施工应按设计要求", prompt)
+        search_mock.assert_called_once()
+        self.assertEqual(search_mock.call_args.kwargs["scenario"], "writing")
+        self.assertTrue(search_mock.call_args.kwargs["return_parent"])
 
     def test_section_supplement_prompt_is_chapter_scoped(self):
         from backend.ai.section_writer import build_section_supplement_prompt, estimate_bid_content_words
@@ -141,7 +176,7 @@ class LengthSettingsTest(unittest.TestCase):
 
         with patch("backend.ai.section_writer.get_project_interpretation", return_value=payload), patch(
             "backend.ai.section_writer.list_knowledge_assets", return_value=[]
-        ):
+        ), patch("backend.rag.retrieval.search_knowledge_base", return_value=[]):
             prompt = build_section_supplement_prompt("project-id", chapter, "已有正文")
 
         self.assertIn("只输出“可直接追加到本章节末尾”的补写内容", prompt)

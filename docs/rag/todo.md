@@ -36,13 +36,13 @@
 
 | 优先级 | 状态 | 任务 | 交付物 | 验收口径 |
 | --- | --- | --- | --- | --- |
-| P1-1 | [ ] | 梳理江西/山西压缩包文件清单 | `docs/rag/customer-corpus-inventory.md` | 按省份、批次、包号、文件类型、是否铁构件/接地铁相关标注 |
+| P1-1 | [x] | 梳理江西/山西压缩包文件清单 | `docs/rag/customer-corpus-inventory.md` | 按省份、批次、包号、文件类型、是否铁构件/接地铁相关标注 |
 | P1-2 | [ ] | 解析 `.docx` 主招标文件 | `parsed_outputs/`、入库 manifest | 标题层级、条款、资格要求、评分办法可抽取 |
 | P1-3 | [ ] | 解析 `.doc` 老二进制文件 | 转换后的 `.docx/.md` 与解析报告 | LibreOffice/MinerU 至少一种路径可稳定处理，失败标 `needs_review` |
 | P1-4 | [ ] | 解析 `.xlsx` 货物清单/技术参数表 | 结构化 JSON/CSV、表格摘要 chunk | 保留 sheet、表头、行列、合并单元格语义和包号 |
 | P1-5 | [ ] | 客户资料 metadata 规范化 | 入库 manifest | 至少包含 `province/batch_no/package_no/material_category/doc_role/source_file` |
-| P1-6 | [ ] | 江西/山西批次负样本 | `tests/rag/base_testset.jsonl` 或独立扩展集 | 问山西不召回江西、问江西不召回山西 |
-| P1-7 | [ ] | 铁构件/接地铁首批真实用例 | 测试集 15-20 条 | 覆盖资格、技术参数、商务响应、否决项、货物清单 |
+| P1-6 | [~] | 江西/山西批次负样本 | `tests/rag/base_testset.jsonl` 或独立扩展集 | 已新增场景测试集；待客户资料入库后补跨省/跨批次负样本 |
+| P1-7 | [~] | 铁构件/接地铁首批真实用例 | 测试集 15-20 条 | 已建立铁构件/接地铁 inventory；待解析入库后补真实用例 |
 | P1-8 | [ ] | 入库后回归评测 | `docs/rag/evaluation-records.md` 新 run | Recall@5 不低于当前基线，跨批次串扰可解释且受控 |
 
 ## P2：持续客户模板治理

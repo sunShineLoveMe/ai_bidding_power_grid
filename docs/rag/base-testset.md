@@ -1,6 +1,6 @@
 # Base 测试集设计
 
-> 数据：`tests/rag/base_testset.jsonl`
+> 数据：`tests/rag/base_testset.jsonl`、`tests/rag/scenario_testset.jsonl`
 > 评测：`scripts/rag/eval_recall.py`
 > 方案依据：`feishu/docs/国家电网物资协议库存标书RAG技术路线评审稿.md` §12
 
@@ -20,14 +20,25 @@
 | writing | 11 | 标准/话术/技术响应覆盖 |
 | compliance | 4 | 否决项/资格/不良行为召回 |
 
+补充场景化测试集 `tests/rag/scenario_testset.jsonl` 12 条，用于单独跟踪项目关键能力：
+
+| metric | 条数 | 验证目标 |
+| --- | ---: | --- |
+| `qa_recall` | 3 | 知识库问答召回 |
+| `writing_parent_coverage` | 3 | 写作场景 child 命中后 parent 回溯覆盖 |
+| `compliance_recall` | 3 | 合规/否决项召回 |
+| `table_recall` | 3 | 标准目录/表格类资料基础召回 |
+
 ## 3. 标注格式（JSONL）
 
 ```json
 {
   "id": "T01",
   "scenario": "qa",
+  "metric": "qa_recall",
   "question": "招标投标法规定哪些工程建设项目必须进行招标？",
   "metadata_filter": {"doc_role": "policy_regulation"},
+  "return_parent": false,
   "must_include_keywords": ["必须进行招标", "工程建设项目"],
   "expected_doc_role": "policy_regulation"
 }
@@ -36,7 +47,9 @@
 字段说明：
 
 - `scenario`：qa / writing / compliance，用于分场景统计。
+- `metric`：可选；用于更细指标分组，如 `qa_recall`、`writing_parent_coverage`、`compliance_recall`、`table_recall`。
 - `metadata_filter`：召回时下发给 `match_knowledge_chunks_filtered` 的 jsonb 过滤条件。
+- `return_parent`：可选；为 `true` 时，评测脚本会用 child 命中的 `parent_index` 回溯 parent，并在 parent 内容上做关键词/role 判定，服务写作场景。
 - `must_include_keywords`：命中判定关键词（任一出现即算关键词命中）。
 - `expected_doc_role`：期望来源类别，用于来源准确率与串扰统计。
 

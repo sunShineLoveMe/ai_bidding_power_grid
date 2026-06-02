@@ -159,6 +159,67 @@ def _compact_supporting_assets(chapter: dict[str, Any], volume_type: str, limit:
     return "\n".join(rows)
 
 
+def _section_rag_query(project: dict[str, Any], analysis: dict[str, Any], chapter: dict[str, Any]) -> str:
+    project_meta = analysis.get("project_meta") or {}
+    parts: list[str] = [
+        "电网投标章节写作",
+        project_meta.get("project_name") or project.get("project_name") or "",
+        project_meta.get("tender_no") or project.get("project_no") or "",
+        analysis.get("summary") or "",
+        _text(chapter.get("title")),
+        _text(chapter.get("purpose")),
+        " ".join(str(item) for item in (chapter.get("response_points") or [])[:6]),
+        " ".join(str(item) for item in (chapter.get("mapped_requirements") or [])[:6]),
+        " ".join(str(item) for item in (chapter.get("mapped_scoring_items") or [])[:6]),
+        " ".join(str(item) for item in (chapter.get("mapped_risks") or [])[:4]),
+    ]
+    return " ".join(part.strip() for part in parts if str(part or "").strip())[:700]
+
+
+def _compact_section_rag_context(project: dict[str, Any], analysis: dict[str, Any], chapter: dict[str, Any], limit: int = 5) -> str:
+    query = _section_rag_query(project, analysis, chapter)
+    if not query:
+        return "- 未形成有效章节检索 query，本节按招标解读和人工占位生成。"
+    try:
+        from backend.rag.retrieval import search_knowledge_base
+
+        contexts = search_knowledge_base(
+            query,
+            match_threshold=0.25,
+            match_count=limit,
+            scenario="writing",
+            return_parent=True,
+        )
+    except Exception:
+        logging.warning("section_writer: 章节级 RAG 检索失败，跳过", exc_info=True)
+        return "- 章节级 RAG 检索失败，本节按招标解读和人工占位生成。"
+
+    if not contexts:
+        return "- 未召回高相关文本依据；缺失事实信息必须使用【待补充：...】。"
+
+    rows: list[str] = []
+    for index, ctx in enumerate(contexts[:limit], 1):
+        meta = ctx.get("metadata") or {}
+        retrieved_by_child = meta.get("retrieved_by_child") if isinstance(meta.get("retrieved_by_child"), dict) else {}
+        child_meta = retrieved_by_child.get("metadata") if isinstance(retrieved_by_child.get("metadata"), dict) else {}
+        source = (
+            meta.get("source_org")
+            or meta.get("source_file")
+            or child_meta.get("source_org")
+            or child_meta.get("source_file")
+            or "知识库资料"
+        )
+        doc_role = meta.get("doc_role") or child_meta.get("doc_role") or "unknown"
+        section = ctx.get("source_section") or retrieved_by_child.get("source_section") or "未标注章节"
+        content = str(ctx.get("content") or "").replace("\n", " ").strip()
+        if len(content) > 360:
+            content = content[:360] + "..."
+        rows.append(
+            f"- 资料{index}（来源：{source}；角色：{doc_role}；章节：{section}）：{content}"
+        )
+    return "\n".join(rows)
+
+
 def build_section_supplement_prompt(project_id: str, chapter: dict[str, Any], current_content: str) -> str:
     payload = get_project_interpretation(project_id)
     project = payload.get("project") or {}
@@ -175,6 +236,7 @@ def build_section_supplement_prompt(project_id: str, chapter: dict[str, Any], cu
     missing_words = max(0, target_words - actual_words)
     allow_auto_expand = _allow_auto_expand(chapter)
     supporting_assets = _compact_supporting_assets(chapter, volume_type)
+    rag_context = _compact_section_rag_context(project, analysis, chapter, limit=4)
     current_excerpt = (current_content or "").strip()
     if len(current_excerpt) > 4200:
         current_excerpt = current_excerpt[-4200:]
@@ -214,6 +276,9 @@ def build_section_supplement_prompt(project_id: str, chapter: dict[str, Any], cu
 
 当前命中的企业资料候选：
 {supporting_assets}
+
+章节级 RAG 写作依据：
+{rag_context}
 
 响应要点：
 {_compact_list(chapter.get("response_points") or [])}
@@ -270,6 +335,7 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
 
     enterprise_context = build_enterprise_context()
     supporting_assets = _compact_supporting_assets(chapter, volume_type)
+    rag_context = _compact_section_rag_context(project, analysis, chapter, limit=5)
 
     return f"""
 你是资深投标文件撰写专家，熟悉电网/电力工程、设备供货、安装调试、试验检测、运维检修、质量安全管理和招投标文件格式要求。
@@ -288,6 +354,7 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
 7. 必须遵守当前分册策略，尤其是金额、证书、人员、日期、签章、保证金和报价信息的禁编造约束。
 8. 正式标书正文不得使用 emoji、图标符号或装饰性提示符；“关键提醒”“风险提示”等内容必须使用纯文字标题。
 9. 不得为了凑页数重复同义段落、塞入无关内容或虚构资料；当证据不足以支撑目标篇幅时，用“【待补充：...】”标明所需材料和人工复核点。
+10. 必须优先依据“章节级 RAG 写作依据”和“关联要求/评分项/风险提醒”写作；RAG 未覆盖的企业事实不得编造。
 
 项目信息：
 - 项目名称：{context["project_name"] or "需人工复核"}
@@ -311,6 +378,9 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
 
 当前命中的企业资料候选：
 {supporting_assets}
+
+章节级 RAG 写作依据：
+{rag_context}
 
 图片/附件策略：
 - {context["volume_strategy"].get("image_policy") or "仅在章节明确需要时插入。"}

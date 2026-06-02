@@ -35,16 +35,54 @@ load_dotenv(PROJECT_ROOT / ".env")
 from backend.db.supabase_client import get_supabase_client  # noqa: E402
 from backend.rag.vector_store import init_ali_client, get_embeddings  # noqa: E402
 
-TESTSET = PROJECT_ROOT / "tests" / "rag" / "base_testset.jsonl"
+DEFAULT_TESTSET = PROJECT_ROOT / "tests" / "rag" / "base_testset.jsonl"
 
 
-def load_cases() -> list[dict]:
+def load_cases(testset: Path) -> list[dict]:
     cases = []
-    for line in TESTSET.read_text(encoding="utf-8").splitlines():
+    for line in testset.read_text(encoding="utf-8").splitlines():
         line = line.strip()
         if line:
             cases.append(json.loads(line))
     return cases
+
+
+def _role_of(row: dict) -> str | None:
+    return (row.get("metadata") or {}).get("doc_role")
+
+
+def _parent_rows_for(client, rows: list[dict]) -> list[dict]:
+    parents: list[dict] = []
+    seen: set[tuple[str, int]] = set()
+    for row in rows:
+        metadata = row.get("metadata") or {}
+        document_id = row.get("document_id")
+        parent_index = metadata.get("parent_index")
+        if not document_id or not isinstance(parent_index, int):
+            continue
+        key = (str(document_id), parent_index)
+        if key in seen:
+            continue
+        seen.add(key)
+        resp = client.rpc(
+            "get_parent_chunk",
+            {"p_document_id": document_id, "p_parent_index": parent_index},
+        ).execute()
+        for parent in resp.data or []:
+            parent_meta = parent.get("metadata") or {}
+            parents.append({
+                **parent,
+                "similarity": row.get("similarity"),
+                "metadata": {
+                    **parent_meta,
+                    "retrieved_by_child": {
+                        "id": row.get("id"),
+                        "metadata": metadata,
+                        "source_section": row.get("source_section"),
+                    },
+                },
+            })
+    return parents
 
 
 def recall_for_case(client, ali, case: dict, k: int, use_filter: bool) -> dict:
@@ -60,37 +98,38 @@ def recall_for_case(client, ali, case: dict, k: int, use_filter: bool) -> dict:
         },
     ).execute()
     rows = resp.data or []
+    evaluated_rows = _parent_rows_for(client, rows) if case.get("return_parent") else rows
 
     expected_role = case.get("expected_doc_role")
     keywords = case.get("must_include_keywords", [])
-
-    def role_of(r):
-        return (r.get("metadata") or {}).get("doc_role")
 
     def has_kw(r):
         text = r.get("content") or ""
         return any(kw in text for kw in keywords) if keywords else True
 
     # Recall@k：存在一条 doc_role 正确且含关键词的片段
-    hit = any((role_of(r) == expected_role) and has_kw(r) for r in rows)
+    hit = any((_role_of(r) == expected_role) and has_kw(r) for r in evaluated_rows)
     # 来源类别准确率：top-1 role 正确
-    top1_role_ok = bool(rows) and role_of(rows[0]) == expected_role
+    top1_role_ok = bool(evaluated_rows) and _role_of(evaluated_rows[0]) == expected_role
     # 关键词命中率：top-k 任一含关键词
-    kw_hit = any(has_kw(r) for r in rows) if keywords else None
+    kw_hit = any(has_kw(r) for r in evaluated_rows) if keywords else None
     # 串扰：非期望 role 的比例
-    off = sum(1 for r in rows if role_of(r) != expected_role)
-    cross = (off / len(rows)) if rows else 0.0
+    off = sum(1 for r in evaluated_rows if _role_of(r) != expected_role)
+    cross = (off / len(evaluated_rows)) if evaluated_rows else 0.0
 
     return {
         "id": case["id"],
         "scenario": case.get("scenario"),
+        "metric": case.get("metric") or case.get("scenario"),
         "returned": len(rows),
+        "evaluated_returned": len(evaluated_rows),
+        "return_parent": bool(case.get("return_parent")),
         "recall_hit": hit,
         "top1_role_ok": top1_role_ok,
         "kw_hit": kw_hit,
         "cross_role_ratio": round(cross, 3),
-        "top1_role": role_of(rows[0]) if rows else None,
-        "top1_preview": (rows[0].get("content") or "")[:60] if rows else "",
+        "top1_role": _role_of(evaluated_rows[0]) if evaluated_rows else None,
+        "top1_preview": (evaluated_rows[0].get("content") or "")[:60] if evaluated_rows else "",
     }
 
 
@@ -99,9 +138,13 @@ def main() -> int:
     parser.add_argument("--k", type=int, default=5)
     parser.add_argument("--no-filter", action="store_true", help="关闭 metadata 过滤做对比")
     parser.add_argument("--save", type=str, default="", help="保存 JSON 结果到指定路径")
+    parser.add_argument("--testset", type=str, default=str(DEFAULT_TESTSET), help="JSONL 测试集路径")
     args = parser.parse_args()
 
-    cases = load_cases()
+    testset_path = Path(args.testset)
+    if not testset_path.is_absolute():
+        testset_path = PROJECT_ROOT / testset_path
+    cases = load_cases(testset_path)
     client = get_supabase_client()
     ali = init_ali_client()
     use_filter = not args.no_filter
@@ -129,6 +172,12 @@ def main() -> int:
         sr = sum(1 for r in sub if r["recall_hit"]) / len(sub)
         print(f"  {sc:11s} cases={len(sub):2d}  Recall@{args.k}={sr:.0%}")
 
+    print("\n按指标：")
+    for metric in sorted({r["metric"] for r in results}):
+        sub = [r for r in results if r["metric"] == metric]
+        sr = sum(1 for r in sub if r["recall_hit"]) / len(sub)
+        print(f"  {metric:24s} cases={len(sub):2d}  Recall@{args.k}={sr:.0%}")
+
     # 失败用例
     fails = [r for r in results if not r["recall_hit"]]
     if fails:
@@ -140,6 +189,7 @@ def main() -> int:
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "k": args.k,
         "filter": use_filter,
+        "testset": str(testset_path.relative_to(PROJECT_ROOT)),
         "cases": n,
         f"recall_at_{args.k}": round(recall, 4),
         "role_accuracy_top1": round(role_acc, 4),

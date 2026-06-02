@@ -11,6 +11,8 @@
 | [base-testset.md](base-testset.md) | Base 测试集设计、标注规范与用例清单 |
 | [evaluation-records.md](evaluation-records.md) | 召回评测记录（基线 / 各次迭代对比） |
 | [todo.md](todo.md) | RAG 基座数据工程待办清单、优先级与完成度跟踪 |
+| [customer-corpus-inventory.md](customer-corpus-inventory.md) | 江西/山西客户真实标书资料清单与入库优先级 |
+| [runs/](runs/) | 每次召回评测的原始 JSON 与摘要 |
 
 ## 相关代码
 
@@ -21,6 +23,7 @@
 | `scripts/rag/cleanup_water_data.py` | 水利数据清理脚本（带备份） |
 | `scripts/rag/eval_recall.py` | Base 测试集召回评测脚本 |
 | `tests/rag/base_testset.jsonl` | Base 测试集（JSONL 标注） |
+| `tests/rag/scenario_testset.jsonl` | 场景化测试集（qa / writing_parent / compliance / table） |
 
 ## 战略文档
 
