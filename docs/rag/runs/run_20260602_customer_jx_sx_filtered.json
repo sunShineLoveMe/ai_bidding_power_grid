@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-02T08:30:35.670427+00:00",
+  "generated_at": "2026-06-02T08:51:47.049575+00:00",
   "k": 5,
   "filter": true,
   "testset": "tests/rag/customer_jx_sx_testset.jsonl",
@@ -165,7 +165,7 @@
       "scenario": "writing",
       "metric": "customer_writing_parent_coverage",
       "returned": 5,
-      "evaluated_returned": 5,
+      "evaluated_returned": 4,
       "return_parent": true,
       "recall_hit": true,
       "top1_role_ok": true,
@@ -173,7 +173,7 @@
       "forbidden_hit": false,
       "cross_role_ratio": 0.0,
       "top1_role": "main_tender_file",
-      "top1_preview": "第一章招标公告投标人业绩要求和第三章评标办法附表“评分标准”要求提供相关文件。\n\n3.5.5\n\n近年发生的诉讼及仲裁情况"
+      "top1_preview": "1.14合同协议终止事项 买方承诺在合同供货期限通过供货单向卖方采购并交货的合同货物价款为《已标价合同货物清单》列明合同"
     },
     {
       "id": "CWRITE-SX-001",

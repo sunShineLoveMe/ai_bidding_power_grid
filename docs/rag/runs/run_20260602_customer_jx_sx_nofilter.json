@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-06-02T08:30:49.772097+00:00",
+  "generated_at": "2026-06-02T08:51:46.981487+00:00",
   "k": 5,
   "filter": false,
   "testset": "tests/rag/customer_jx_sx_testset.jsonl",
   "cases": 17,
-  "recall_at_5": 0.7647,
-  "role_accuracy_top1": 0.6471,
+  "recall_at_5": 0.7059,
+  "role_accuracy_top1": 0.5882,
   "keyword_hit_rate": 0.8824,
-  "avg_cross_role_ratio": 0.4941,
+  "avg_cross_role_ratio": 0.5088,
   "forbidden_hit_rate": 0.0,
   "results": [
     {
@@ -17,13 +17,13 @@
       "returned": 5,
       "evaluated_returned": 5,
       "return_parent": false,
-      "recall_hit": true,
-      "top1_role_ok": true,
+      "recall_hit": false,
+      "top1_role_ok": false,
       "kw_hit": true,
       "forbidden_hit": false,
-      "cross_role_ratio": 0.4,
-      "top1_role": "main_tender_file",
-      "top1_preview": "第一章招标公告投标人业绩要求和第三章评标办法附表“评分标准”要求提供相关文件。"
+      "cross_role_ratio": 0.6,
+      "top1_role": "policy_regulation",
+      "top1_preview": "第十八条 资格预审应当按照资格预审文件载明的标准和方法进行。\n\n国有资金占控股或者主导地位的依法必须进行招标的项目，招标"
     },
     {
       "id": "CQA-JX-002",
@@ -141,7 +141,7 @@
       "top1_role_ok": true,
       "kw_hit": true,
       "forbidden_hit": false,
-      "cross_role_ratio": 0.6,
+      "cross_role_ratio": 0.4,
       "top1_role": "main_tender_file",
       "top1_preview": "3.9 同一投标人对同一分标下同一物料编码同一技术规范编码的采购申请行单价的投标报价应保持一致。否则将做否决处理。\n\n同"
     },
@@ -171,7 +171,7 @@
       "top1_role_ok": false,
       "kw_hit": true,
       "forbidden_hit": false,
-      "cross_role_ratio": 0.5,
+      "cross_role_ratio": 0.75,
       "top1_role": "policy_regulation",
       "top1_preview": "第二章 招 标\n\n第七条 按照国家有关规定需要履行项目审批、核准手续的依法必须进行招标的项目，其招标范围、招标方式、招标"
     },

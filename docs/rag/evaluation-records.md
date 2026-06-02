@@ -185,27 +185,28 @@ Run 2 与 Run 1 指标保持一致，删除误入库水利资料后没有造成�
 | 项 | 数量 |
 | --- | ---: |
 | `knowledge_documents` | 23 |
-| `document_chunks` | 4284 |
-| parent chunk | 235 |
-| child/table 检索块 | 4049 |
-| embedding | 4049 |
+| `document_chunks` | 4238 |
+| parent chunk | 223 |
+| child/table 检索块 | 4015 |
+| embedding | 4015 |
+| 结构化货物清单行 | 105 |
 | 仅归档文件 | 21 |
 
 ### A/B：metadata 过滤的价值
 
 | 指标 | 过滤 ON | 过滤 OFF | 差值 |
 | --- | ---: | ---: | ---: |
-| Recall@5 | **100.0%** | 76.5% | +23.5pp |
-| 来源类别准确率(top1) | **100.0%** | 64.7% | +35.3pp |
+| Recall@5 | **100.0%** | 70.6% | +29.4pp |
+| 来源类别准确率(top1) | **100.0%** | 58.8% | +41.2pp |
 | 关键词命中率 | **100.0%** | 88.2% | +11.8pp |
-| 跨 doc_role 串扰均值 | **0.0%** | 49.4% | -49.4pp |
+| 跨 doc_role 串扰均值 | **0.0%** | 50.9% | -50.9pp |
 | 禁用关键词命中率 | **0.0%** | 0.0% | 0.0pp |
 
 分场景 Recall@5：
 
 | scenario | 过滤 ON | 过滤 OFF |
 | --- | ---: | ---: |
-| qa | 100% | 57% |
+| qa | 100% | 43% |
 | compliance | 100% | 100% |
 | writing | 100% | 67% |
 | table | 100% | 100% |
@@ -219,4 +220,4 @@ Run 2 与 Run 1 指标保持一致，删除误入库水利资料后没有造成�
 1. 本地解析链路在本批客户样本上通过 QA，暂不需要强制切到 MinerU。
 2. 客户资料 staging 入库后，过滤 ON 的客户测试集 Recall@5 达到 100%。
 3. 过滤 OFF 明显退化，说明 `province/package_code/doc_role/ingestion_batch_id` 过滤必须作为上线门禁。
-4. 表格召回已可用，但目前仍是 row 文本 + metadata 方案，后续应补结构化表/JSONB 精确查询。
+4. 表格召回已可用，且本批已补 `power_grid_goods_list_rows` 结构化表/JSONB 精确查询层。

@@ -19,6 +19,9 @@
 | 分块脚本 | `scripts/rag/dry_run_customer_chunks.py` |
 | QA 脚本 | `scripts/rag/eval_parse_quality.py` |
 | 入库脚本 | `scripts/rag/ingest_customer_corpus.py` |
+| 货物清单结构化入库 | `parsed_outputs/power_grid_customer_corpus/customer_jx_sx_20260602_p1/ingest_customer_goods_tables_report.md` |
+| 批次回滚 dry-run | `docs/rag/runs/rollback_customer_jx_sx_20260602_p1_dry_run_20260602_165145.md` |
+| 写作 parent 抽查 | `docs/rag/runs/run_20260602_customer_parent_spotcheck.md` |
 
 ### 结果摘要
 
@@ -39,7 +42,7 @@
 | 表格可结构化文档 | 2 |
 | 需复核 | 0 |
 | parent chunk | 233 |
-| child chunk | 3942 |
+| child chunk | 3908 |
 | 表格 sheet | 2 |
 | 表格行 | 107 |
 
@@ -57,10 +60,44 @@
 | 指标 | 数量 |
 | --- | ---: |
 | `knowledge_documents` | 23 |
-| `document_chunks` | 4284 |
-| parent chunk | 235 |
-| child/table 检索块 | 4049 |
-| embedding | 4049 |
+| `document_chunks` | 4238 |
+| parent chunk | 223 |
+| child/table 检索块 | 4015 |
+| embedding | 4015 |
+
+### 货物清单结构化入库
+
+| 指标 | 数量 |
+| --- | ---: |
+| 结构化表 | `power_grid_goods_list_rows` |
+| 货物清单文件 | 2 |
+| 原始 sheet 行数（含表头） | 107 |
+| 可查询数据行 | 105 |
+| 江西 `1826AA` 数据行 | 7 |
+| 山西 `0526AB` 数据行 | 98 |
+| 缺失已入库文档 | 0 |
+
+验证命令：
+
+```bash
+.venv/bin/python scripts/rag/query_customer_goods_tables.py --batch-id customer_jx_sx_20260602_p1 --package-code 1826AA --keyword G00K-500118948-00001 --limit 5
+.venv/bin/python scripts/rag/query_customer_goods_tables.py --batch-id customer_jx_sx_20260602_p1 --package-code 0526AB --keyword 500074649 --limit 5
+```
+
+### 批次回滚 dry-run
+
+| 表 | dry-run 影响数量 |
+| --- | ---: |
+| `knowledge_documents` | 23 |
+| `document_chunks` | 4238 |
+| `power_grid_goods_list_rows` | 105 |
+
+回滚脚本默认不删除数据；正式执行必须显式加 `--execute`：
+
+```bash
+.venv/bin/python scripts/rag/rollback_customer_corpus.py --batch-id customer_jx_sx_20260602_p1
+.venv/bin/python scripts/rag/rollback_customer_corpus.py --batch-id customer_jx_sx_20260602_p1 --execute
+```
 
 ### 召回评测
 
@@ -97,4 +134,4 @@
 - 本批 23 个可解析文件已经完成父子分块 dry-run，长文档已按多个 parent 拆分，具备开发正式客户资料入库脚本的基础。
 - `.xlsx` 货物清单已经保留 sheet、行列、合并单元格和检索摘要，不应压成长文本直接向量化。
 - 当前 `needs_review=0`，但 Mammoth 对部分 Word 版式元素有 warning，正式入库前仍建议抽样检查主招标文件、公告和合同表格是否有关键字段丢失。
-- 本批已完成 staging 入库和客户召回评测；上线前仍需补批次回滚脚本、结构化表查询和写作 parent 人工抽查。
+- 本批已完成 staging 入库、客户召回评测、批次回滚 dry-run、货物清单结构化表查询和写作 parent 抽查；上线前仍需补更多客户批次回归样本。

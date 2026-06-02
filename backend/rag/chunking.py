@@ -49,6 +49,7 @@ _CHAPTER = re.compile(r"第[一二三四五六七八九十百零〇\d]+[章编]\
 _ARTICLE = re.compile(r"第[一二三四五六七八九十百千零〇\d]+条")
 # 编号业务段：1. / 1、/ （一） / 一、
 _NUM_SECTION = re.compile(r"(?:^|\n)\s*(?:\d{1,2}\s*[.、]|（[一二三四五六七八九十]+）|[一二三四五六七八九十]+、)")
+_MIN_USEFUL_PARENT_CHARS = 40
 
 
 def clean_text(raw: str) -> str:
@@ -69,6 +70,20 @@ def _strip_title(text: str) -> tuple[str, str]:
     if m:
         return m.group(1).strip(), text[m.end():]
     return "", text
+
+
+def _is_heading_only(text: str, section: str | None = None) -> bool:
+    """识别只包含章节标题、没有正文信息的片段。"""
+    raw = (text or "").strip()
+    normalized = re.sub(r"\s+", " ", raw).strip()
+    if not normalized:
+        return True
+    if "\n" in raw:
+        return False
+    section_normalized = re.sub(r"\s+", " ", (section or "")).strip()
+    if len(normalized) <= _MIN_USEFUL_PARENT_CHARS and normalized == section_normalized:
+        return True
+    return bool(len(normalized) <= _MIN_USEFUL_PARENT_CHARS and _CHAPTER.fullmatch(raw))
 
 
 # ---- 数据结构 ----------------------------------------------------------------
@@ -194,6 +209,8 @@ def _chunk_clause_doc(title: str, body: str, parent_max: int, child_max: int) ->
         chapter_body = body[start:end].strip()
         for parent_no, parent_body in enumerate(_length_split(chapter_body, parent_max), 1):
             section = chapter_title if parent_no == 1 else f"{chapter_title}（续 {parent_no}）"
+            if _is_heading_only(parent_body, section):
+                continue
             p_index = add_parent(section, parent_body)
             for child in _split_by_article(parent_body, child_max):
                 chunks.append(Chunk(layer="child", content=child, index=idx, parent_index=p_index,
@@ -216,6 +233,8 @@ def _chunk_section_doc(title: str, body: str, parent_max: int, child_max: int, r
             section_body = body[start:end].strip()
             for parent_no, parent_body in enumerate(_length_split(section_body, parent_max), 1):
                 section = section_title if parent_no == 1 else f"{section_title}（续 {parent_no}）"
+                if _is_heading_only(parent_body, section):
+                    continue
                 parent_sections.append((section, parent_body))
     else:
         for parent_no, parent_body in enumerate(_length_split(body, parent_max), 1):
@@ -225,6 +244,8 @@ def _chunk_section_doc(title: str, body: str, parent_max: int, child_max: int, r
     block_type = "rule" if role == "bid_instructions" else "clause"
 
     for section, parent_body in parent_sections:
+        if _is_heading_only(parent_body, section):
+            continue
         chunks.append(Chunk(layer="parent", content=parent_body.strip(), index=idx,
                             section=section, block_type="section"))
         p_index = idx
@@ -243,8 +264,12 @@ def _chunk_section_doc(title: str, body: str, parent_max: int, child_max: int, r
             seg = parent_body[cuts[i]:cuts[i + 1]].strip()
             if not seg:
                 continue
+            if _is_heading_only(seg, section):
+                continue
             if len(seg) > child_max:
                 for piece in _length_split(seg, child_max):
+                    if _is_heading_only(piece, section):
+                        continue
                     chunks.append(Chunk(layer="child", content=piece, index=idx, parent_index=p_index,
                                         section=section, block_type=block_type))
                     idx += 1

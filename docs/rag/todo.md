@@ -21,7 +21,7 @@
 | 状态 | 任务 | 交付物 | 验收口径 |
 | --- | --- | --- | --- |
 | [x] | 水利历史资料清理 | `docs/rag/water-data-cleanup.md` | `rag_seed` 下不再保留 water/水利干扰资料 |
-| [x] | 父子双层分块 v2 | `backend/rag/chunking.py` | 当前代码 dry-run 产出 323 parent / 2444 child；数据库基线仍为 298 parent / 2449 child，待重入库后更新 |
+| [x] | 父子双层分块 v2 | `backend/rag/chunking.py` | 支持按 `doc_role` 父子分块，并已补标题-only parent 过滤单测 |
 | [x] | 电网种子库 v2 入库脚本 | `scripts/rag/ingest_power_grid_v2.py` | 支持 `--dry-run`、按 `doc_role` 分块、仅 child embedding |
 | [x] | metadata 过滤 RPC 与 HNSW | `migrations/postgres/006_rag_p0_filtered_recall.sql` | 支持 `match_knowledge_chunks_filtered`、`get_parent_chunk` |
 | [x] | Base 测试集与基线记录 | `tests/rag/base_testset.jsonl`、`docs/rag/evaluation-records.md` | 30 条用例，Recall@5 86.7%，串扰 0% |
@@ -44,9 +44,9 @@
 | P1-6 | [x] | 江西/山西批次负样本 | `tests/rag/customer_jx_sx_testset.jsonl` | 已加入 `must_not_include_keywords`，覆盖江西 `1826AA` / 山西 `0526AB` 跨包隔离 |
 | P1-7 | [x] | 铁构件/接地铁首批真实用例 | `tests/rag/customer_jx_sx_testset.jsonl` | 17 条客户真实场景，覆盖 qa/writing/compliance/table |
 | P1-8 | [x] | 入库后回归评测 | `docs/rag/evaluation-records.md` Run 4 | 客户 filtered Recall@5 100%，Base filtered 保持 86.7%，跨 doc_role 串扰 0% |
-| P1-9 | [x] | 客户资料父子分块 dry-run | `chunk_dry_run_report.md` | 21 个文本资料产出 233 parent / 3942 child，2 个表格资料 107 行，`needs_review=0` |
+| P1-9 | [x] | 客户资料父子分块 dry-run | `chunk_dry_run_report.md` | 21 个文本资料产出 221 parent / 3908 child，2 个表格资料 107 行，`needs_review=0` |
 | P1-10 | [x] | 客户资料解析 QA 门禁 | `docs/rag/customer-parse-qa-checklist.md` | 12 条解析 QA 全部通过，命中率 100% |
-| P1-11 | [x] | 客户资料 staging 入库 | `scripts/rag/ingest_customer_corpus.py` | 23 文档 indexed，235 parent / 4049 检索块，按 `ingestion_batch_id` 隔离 |
+| P1-11 | [x] | 客户资料 staging 入库 | `scripts/rag/ingest_customer_corpus.py` | 23 文档 indexed，223 parent / 4015 检索块，按 `ingestion_batch_id` 隔离 |
 
 ## P2：持续客户模板治理
 
@@ -59,7 +59,7 @@
 | P2-3 | [ ] | 解析质量报告模板 | `docs/rag/parse-quality-report-template.md` | 能标记空文本、乱码、表格丢失、页码缺失、扫描件 |
 | P2-4 | [ ] | 版本与去重策略 | `content_sha256`、`doc_version`、`superseded_by` | 同一模板新旧版本不会同时污染召回 |
 | P2-5 | [ ] | 模板可引用边界 | `citation_policy` 规则 | 区分客户模板、公开法规、企业话术，避免把模板当强制条款 |
-| P2-6 | [ ] | 批次回滚机制 | 入库批次记录与删除脚本 | 某批资料质量差时可按批次撤回 |
+| P2-6 | [x] | 批次回滚机制 | `scripts/rag/rollback_customer_corpus.py`、`docs/rag/runs/rollback_customer_jx_sx_20260602_p1_dry_run_20260602_165145.md` | 支持按 `ingestion_batch_id` dry-run/execute 删除，当前 dry-run 覆盖 23 文档、4238 chunk、105 结构化行 |
 
 ## P3：召回质量增强
 
@@ -80,9 +80,9 @@
 
 | 优先级 | 状态 | 任务 | 交付物 | 验收口径 |
 | --- | --- | --- | --- | --- |
-| P4-1 | [~] | 表格三形态存储 | 原始结构 + 检索摘要 + 行级记录 | 货物清单已在 staging 中写入 table summary/table row；待补独立结构化表/JSONB 查询 |
+| P4-1 | [x] | 表格三形态存储 | 原始结构 + 检索摘要 + 行级记录 | 货物清单已保留 JSON 原始结构、staging table summary/table row，并写入 `power_grid_goods_list_rows` 结构化行表 |
 | P4-2 | [ ] | 技术参数表抽取 | JSON/CSV + summary chunk | 保证值、项目需求值、备注字段不丢失 |
-| P4-3 | [ ] | 货物清单解析 | 行级结构化数据 | 包号、物料名称、单位、数量可过滤 |
+| P4-3 | [x] | 货物清单解析 | `scripts/rag/ingest_customer_goods_tables.py`、`scripts/rag/query_customer_goods_tables.py` | 江西 7 行、山西 98 行已可按包号、物料名称、单位、数量、技术规范编码、物料编码过滤 |
 | P4-4 | [ ] | 技术偏差/商务偏差辅助 | 偏差表生成依据 | 能定位招标要求和响应模板来源 |
 
 ## 每批客户资料入库检查清单
@@ -101,6 +101,6 @@
 
 1. 建立江西/山西客户资料 inventory。
 2. 选择铁构件/接地铁作为首个真实物料场景。
-3. 补客户资料批次回滚脚本，支持按 `ingestion_batch_id` 删除本批 `knowledge_documents/document_chunks`。
-4. 为 `.xlsx` 货物清单补独立结构化表/JSONB 查询能力，不只依赖 row 文本向量。
-5. 抽查客户主招标文件和合同的 parent 内容，确认写作回溯上下文是否适合正式生成。
+3. 抽查客户主招标文件和合同的 parent 内容，确认写作回溯上下文是否适合正式生成。
+4. 补客户资料入库 SOP 和解析质量报告模板，沉淀为后续客户批次固定流程。
+5. 扩展客户评测集到 40-60 条，并加入更多包号/技术规范编码/合同条款负样本。

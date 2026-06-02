@@ -26,12 +26,16 @@
 | `scripts/rag/dry_run_customer_chunks.py` | 基于客户资料 manifest 跑父子分块 dry-run，输出 parent/child/table 统计 |
 | `scripts/rag/eval_parse_quality.py` | 基于解析产物和 QA 用例检查关键证据是否保留 |
 | `scripts/rag/ingest_customer_corpus.py` | 基于客户 manifest 做 staging 入库，按 `ingestion_batch_id` 隔离 |
+| `scripts/rag/ingest_customer_goods_tables.py` | 将客户 `.xlsx` 货物清单写入结构化行表 `power_grid_goods_list_rows` |
+| `scripts/rag/query_customer_goods_tables.py` | 按批次、省份、包号、关键词查询结构化货物清单 |
+| `scripts/rag/rollback_customer_corpus.py` | 按 `ingestion_batch_id` dry-run 或执行删除客户批次数据 |
 | `scripts/rag/cleanup_water_data.py` | 水利数据清理脚本（带备份） |
 | `scripts/rag/eval_recall.py` | Base 测试集召回评测脚本 |
 | `tests/rag/base_testset.jsonl` | Base 测试集（JSONL 标注） |
 | `tests/rag/scenario_testset.jsonl` | 场景化测试集（qa / writing_parent / compliance / table） |
 | `tests/rag/customer_parse_qa_cases.jsonl` | 客户资料解析 QA 用例 |
 | `tests/rag/customer_jx_sx_testset.jsonl` | 江西/山西客户资料召回评测用例 |
+| `migrations/postgres/007_power_grid_goods_list_rows.sql` | 货物清单结构化行表和索引 |
 
 ## 战略文档
 

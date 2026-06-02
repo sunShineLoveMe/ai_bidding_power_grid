@@ -1,0 +1,113 @@
+{
+  "generated_at": "2026-06-02T16:51:45",
+  "batch_id": "customer_jx_sx_20260602_p1",
+  "execute": false,
+  "before_counts": {
+    "knowledge_documents": 23,
+    "document_chunks": 4238,
+    "goods_list_rows": 105
+  },
+  "deleted_counts": null,
+  "role_counts": [
+    {
+      "doc_role": "technical_spec",
+      "count": 1755
+    },
+    {
+      "doc_role": "main_tender_file",
+      "count": 1258
+    },
+    {
+      "doc_role": "contract_general_terms",
+      "count": 822
+    },
+    {
+      "doc_role": "tender_notice",
+      "count": 221
+    },
+    {
+      "doc_role": "goods_list",
+      "count": 109
+    },
+    {
+      "doc_role": "contract_special_terms",
+      "count": 53
+    },
+    {
+      "doc_role": "bid_instructions",
+      "count": 20
+    }
+  ],
+  "sample_documents": [
+    {
+      "id": "d9ce7f12-f5b4-478d-b978-511cfb4b2750",
+      "title": "5.120 10kV及以下协议库存货物采购合同（材料类）（2024版）",
+      "province": "山西",
+      "package_code": "0526AB",
+      "doc_role": "contract_special_terms"
+    },
+    {
+      "id": "5398152a-e163-47b4-baf2-35c02f21f3fc",
+      "title": "5.120 10kV及以下协议库存货物采购合同（材料类）（2024版）",
+      "province": "江西",
+      "package_code": "1826AA",
+      "doc_role": "contract_special_terms"
+    },
+    {
+      "id": "d8ca64f1-55a0-48ef-862a-9f89da410612",
+      "title": "5.120 10kV及以下协议库存货物采购合同通用条款（材料类）（2024版）",
+      "province": "山西",
+      "package_code": "0526AB",
+      "doc_role": "contract_general_terms"
+    },
+    {
+      "id": "df57eb11-cfa0-43de-8a9c-e6a824e1d16c",
+      "title": "5.120 10kV及以下协议库存货物采购合同通用条款（材料类）（2024版）",
+      "province": "江西",
+      "package_code": "1826AA",
+      "doc_role": "contract_general_terms"
+    },
+    {
+      "id": "f027e7a9-97c4-492a-acda-a2b87a8a2863",
+      "title": "合同专用条款其他文件20250331100191",
+      "province": "山西",
+      "package_code": "0526AB",
+      "doc_role": "contract_special_terms"
+    },
+    {
+      "id": "8ced8475-0158-4a6f-9300-a5adf0bc1dfc",
+      "title": "合同专用条款其他文件202510290022128",
+      "province": "江西",
+      "package_code": "1826AA",
+      "doc_role": "contract_special_terms"
+    },
+    {
+      "id": "01dd8e0b-1fcf-461b-8108-981f4b3f0e2c",
+      "title": "国家电网江西公司物资固化技术规范书_铁附件",
+      "province": "江西",
+      "package_code": "1826AA",
+      "doc_role": "technical_spec"
+    },
+    {
+      "id": "192d37c5-6f83-4535-ac4b-75a53a88c881",
+      "title": "国网山西电力2026年第二次物资协议库存公开招标采购招标公告",
+      "province": "山西",
+      "package_code": "0526AB",
+      "doc_role": "tender_notice"
+    },
+    {
+      "id": "357482dc-9332-43b4-b29c-5cc57de5e23f",
+      "title": "国网山西电力2026年第二次物资协议库存公开招标采购招标文件",
+      "province": "山西",
+      "package_code": "0526AB",
+      "doc_role": "main_tender_file"
+    },
+    {
+      "id": "ba00ef0b-ed05-4238-8a9a-4e50f748dff0",
+      "title": "国网山西省电力公司_2022年山西公司物资类采购结构化固化ID编制（G00F-500118948-00004）",
+      "province": "山西",
+      "package_code": "0526AB",
+      "doc_role": "technical_spec"
+    }
+  ]
+}

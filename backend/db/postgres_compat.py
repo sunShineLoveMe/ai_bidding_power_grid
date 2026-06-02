@@ -33,6 +33,7 @@ JSONB_COLUMNS = {
     ("bid_sections", "metadata"),
     ("knowledge_documents", "metadata"),
     ("document_chunks", "metadata"),
+    ("power_grid_goods_list_rows", "row_data"),
     ("knowledge_assets", "specs"),
     ("knowledge_assets", "metadata"),
     ("ai_model_prices", "metadata"),

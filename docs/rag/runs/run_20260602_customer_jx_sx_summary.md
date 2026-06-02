@@ -15,10 +15,11 @@
 | --- | ---: |
 | 批次 ID | `customer_jx_sx_20260602_p1` |
 | `knowledge_documents` | 23 |
-| `document_chunks` | 4284 |
-| parent chunk | 235 |
-| child/table 检索块 | 4049 |
-| embedding | 4049 |
+| `document_chunks` | 4238 |
+| parent chunk | 223 |
+| child/table 检索块 | 4015 |
+| embedding | 4015 |
+| 结构化货物清单行 | 105 |
 | 归档文件 | 21 |
 
 入库报告：
@@ -44,17 +45,17 @@
 
 | 指标 | 过滤 ON | 过滤 OFF | 差值 |
 | --- | ---: | ---: | ---: |
-| Recall@5 | **100.0%** | 76.5% | +23.5pp |
-| 来源类别准确率(top1) | **100.0%** | 64.7% | +35.3pp |
+| Recall@5 | **100.0%** | 70.6% | +29.4pp |
+| 来源类别准确率(top1) | **100.0%** | 58.8% | +41.2pp |
 | 关键词命中率 | **100.0%** | 88.2% | +11.8pp |
-| 跨 doc_role 串扰均值 | **0.0%** | 49.4% | -49.4pp |
+| 跨 doc_role 串扰均值 | **0.0%** | 50.9% | -50.9pp |
 | 禁用关键词命中率 | **0.0%** | 0.0% | 0.0pp |
 
 分场景 Recall@5：
 
 | scenario | 过滤 ON | 过滤 OFF |
 | --- | ---: | ---: |
-| qa | 100% | 57% |
+| qa | 100% | 43% |
 | compliance | 100% | 100% |
 | writing | 100% | 67% |
 | table | 100% | 100% |
@@ -63,7 +64,7 @@
 
 | metric | 过滤 ON | 过滤 OFF |
 | --- | ---: | ---: |
-| `customer_qa_recall` | 100% | 50% |
+| `customer_qa_recall` | 100% | 25% |
 | `technical_spec_recall` | 100% | 67% |
 | `customer_compliance_recall` | 100% | 100% |
 | `customer_writing_parent_coverage` | 100% | 67% |
@@ -95,6 +96,6 @@
 
 1. 本地解析链路在本批客户样本上通过 QA，暂不需要强制切到 MinerU。
 2. 客户 staging 入库可用，过滤 ON 时客户测试集 Recall@5 达到 100%。
-3. metadata 过滤是必要门禁；过滤 OFF 后 Recall@5 降至 76.5%，跨 doc_role 串扰升至 49.4%。
-4. 表格召回在本轮测试集中表现稳定，但当前只是将表格行写入 `document_chunks.metadata.row` 和 row 文本，后续仍应补结构化表/JSONB 查询能力。
-5. 写作场景在测试集上通过 parent 回溯，但后续应继续抽查 parent 内容长度和章节完整性，避免大文档上下文过宽或过窄。
+3. metadata 过滤是必要门禁；过滤 OFF 后 Recall@5 降至 70.6%，跨 doc_role 串扰升至 50.9%。
+4. 表格召回在本轮测试集中表现稳定；本批已补 `power_grid_goods_list_rows` 结构化表，可按包号、物料、技术规范编码、物料编码等字段精确查询。
+5. 写作场景在测试集上通过 parent 回溯；本轮 spot-check 后已修复标题-only parent 噪声，刷新后本批 chunk 数从 4284 降为 4238。
