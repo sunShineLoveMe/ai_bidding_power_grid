@@ -2,7 +2,7 @@
 
 > 相关代码：`backend/rag/`、`rag_seed/power_grid_resources/`
 
-## RAG 知识库架构
+## 概述
 
 系统使用 PostgreSQL + pgvector 作为企业知识库的唯一向量链路。早期遗留的 ChromaDB 已移除（见任务清单 P1-9），向量写入与检索统一在 PostgreSQL 内完成。
 
@@ -15,9 +15,9 @@
 | 业务数据库 | Supabase PostgreSQL | 保存知识文档元数据、文档分片、解析状态和业务表 |
 | 向量检索 | pgvector | 在 PostgreSQL 内保存 embedding 向量并执行相似度检索 |
 | 对象存储 | Supabase Storage | 保存原始知识库文件、招标文件和生成文档 |
-| 向量模型 | 默认 DashScope `text-embedding-v4`，维度默认 1024，可在系统设置中调整 | 将用户问题、知识分片和图片资产描述转换为向量 |
-| Rerank 重排 | 默认 DashScope `qwen3-rerank`，可切换 `gte-rerank-v2`，系统设置可关闭 | 对 pgvector 初召回结果二次排序，提升电网术语、设备型号、资质名称和评分条款匹配准确率 |
-| 问答模型 | 默认 `qwen-long`，可在系统设置中调整 | 基于召回片段和企业图片资产生成最终回答 |
+| 向量模型 | 默认 DashScope `text-embedding-v4`（1024 维），可切换本地 Ollama `qwen3-embedding`，系统设置/环境变量可调 | 将用户问题、知识分片和图片资产描述转换为向量 |
+| Rerank 重排 | 默认 DashScope `qwen3-rerank`，可切换 `gte-rerank-v2`，系统设置可关闭（fail-open） | 对 pgvector 初召回结果二次排序，提升电网术语、设备型号、资质名称和评分条款匹配准确率 |
+| 问答模型 | 默认 `deepseek-v4-flash`（随 `knowledge_model` 配置），可在系统设置中调整 | 基于召回片段和企业图片资产生成最终回答 |
 | 追问意图模型 | 默认读取 `knowledge_followup_model`，未配置时回退到系统文本模型 | 回答结束后识别用户下一步意图，生成 3 个业务追问 |
 | 流式输出 | DashScope SSE / Flask `text/event-stream` | 支持 RAG 回答逐段返回，降低首屏等待体感 |
 | 文本抽取 | PyPDF2 / Mammoth / Markdown 读取 | 处理普通 PDF、DOCX 和 Markdown 文档 |
@@ -29,8 +29,10 @@
 | 文件 | 说明 |
 | --- | --- |
 | `backend/rag/ingestion.py` | 上传知识库资料后的解析、图片上下文提取、embedding 和 `document_chunks` 写入 |
-| `backend/rag/retrieval.py` | 用户问题向量化、调用 Supabase RPC 检索、组装 Prompt、生成 RAG 回答 |
-| `rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py` | 电网行业种子资料批量入库脚本 |
+| `backend/rag/chunking.py` | 父子双层分块器（按 doc_role 路由 + 网页噪声清洗） |
+| `backend/rag/retrieval.py` | 用户问题向量化、调用 RPC 检索、组装 Prompt、生成 RAG 回答 |
+| `scripts/rag/ingest_power_grid_v2.py` | 电网种子库父子分块 v2 入库（含丰富 metadata） |
+| `scripts/rag/eval_recall.py` | Base 测试集召回评测（Recall@k / 串扰 / A/B） |
 | `backend/rag/vector_store.py` | DashScope embedding 封装、文本抽取与分片工具（`ensure_extractable_text` 做扫描件检测） |
 | `backend/api/routes.py` | `/api/knowledge/search`、`/api/knowledge/search/stream` 和 `/api/knowledge/followups` API |
 
@@ -65,22 +67,23 @@ RAG 回答完成
 
 分片与元数据策略：
 
-- 文本分片默认按段落和长度切分，电网种子库入库脚本使用约 `1800` 字符的 chunk，并保留少量上下文重叠。
-- 每个分片写入 `document_chunks.content`，向量写入 `document_chunks.embedding`。
-- `document_chunks.metadata` 保存资料分类、文档类型、来源单位、原始 URL、文件路径、标签和 hash。
+- **当前推荐：父子双层分块（v2）**。按文件角色（法规/合同按“条”、标准按条文、招标公告按业务段、话术按段落）分化切分；子块（条/款级）参与向量召回，父块（章/节级）用于写作上下文回溯，子块经 `metadata.parent_index` 指向父块。实现见 `backend/rag/chunking.py`，入库见 `scripts/rag/ingest_power_grid_v2.py`。完整说明见 [docs/rag/chunking-strategy.md](../rag/chunking-strategy.md)。
+- 早期统一约 `1800` 字符的定长切分（`rag_seed/.../ingest_power_grid_rag_seed.py`）仅作历史兜底，新数据不再使用。
+- 每个分片写入 `document_chunks.content`，向量写入 `document_chunks.embedding`（父块 embedding 置空，不参与召回）。
+- `document_chunks.metadata` 保存 `chunk_layer / parent_index / doc_role / authority_level / citation_policy / block_type / content_sha256` 及资料分类、来源单位、文件路径、标签等。
+- 召回经 `match_knowledge_chunks_filtered` 做 metadata 定向过滤（doc_role/省份/批次）+ `project_id` 隔离；向量索引为 HNSW。
 - 前端 RAG 回答完成后展示参考资料来源，帮助用户核对答案依据。
 - 企业资信库、企业产品库上传的图片/附件写入 `knowledge_assets`，可通过向量召回和关键词兜底参与 RAG 问答。
 - RAG 回答若提到 `图片资产1`、`图片资产2、3、4` 等编号，前端会自动把对应图片以 Markdown 图片形式插入到相应段落后，避免只输出文字描述。
 - 图片预览优先加载缩略图，原图保留用于标书正文插图、附件查看和 DOCX 导出。
 
-当前已验证的电网种子库入库结果：
+当前已验证的电网种子库入库结果（父子分块 v2，2026-06）：
 
-- 待处理资料：41 份
-- 已入库资料：20 份
-- 已存在跳过：6 份
-- PDF 待人工确认后入库：15 份
-- 新增分片：273 条
+- 入库文档：26 份（Markdown 类；15 份 PDF 待 MinerU 解析后纳入）
+- 父块：298 个；子块（已嵌入）：2449 个
+- Embedding：Ollama `qwen3-embedding:0.6b` @ 1024 维（可切回百炼 `text-embedding-v4`）
 - 分类：电网招标文件、政策法规、标准规范、标准话术
+- Base 召回基线：Recall@5 86.7%、来源类别准确率 100%、跨类别串扰 0%（见 [docs/rag/evaluation-records.md](../rag/evaluation-records.md)）
 - 检索接口：`POST /api/knowledge/search`
 - 流式检索接口：`POST /api/knowledge/search/stream`
 - 追问建议接口：`POST /api/knowledge/followups`

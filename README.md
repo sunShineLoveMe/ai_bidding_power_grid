@@ -4,7 +4,7 @@
 
 招标文件上传 → OCR 解析 → 结构化解读 → 分册大纲 → 章节正文 → 合规检查 → DOCX 导出，全流程 AI 辅助，企业知识库驱动，数据本地可控。
 
-[![Python](https://img.shields.io/badge/Python-3.9+-blue)](https://python.org)
+[![Python](https://img.shields.io/badge/Python-3.12-blue)](https://python.org)
 [![React](https://img.shields.io/badge/React-18-blue)](https://react.dev)
 [![License](https://img.shields.io/badge/License-TBD-lightgrey)](#license)
 
@@ -32,10 +32,10 @@
 
 → [详细说明](docs/features/compliance.md)
 
-### 5. 企业私有 RAG 知识库
-pgvector 向量检索 + DashScope Rerank 重排 + 关键词兜底，支持图片资产内联、来源引用和模型追问建议。当前项目默认面向电力/电网场景建设企业知识库，种子资料以国网/电力行业为主。
+### 5. 企业私有 RAG 知识库（父子分块 + 场景化召回）
+pgvector（HNSW 索引）向量检索 + 父子双层分块 + metadata 定向过滤 + 关键词兜底，支持图片资产内联、来源引用和模型追问建议。按文件角色（法规/标准/招标公告/合同/话术）分化切分，子块服务问答与合规、父块服务正文写作；召回前先按 doc_role / 省份 / 批次过滤，避免跨类别、跨批次串扰。Embedding 默认百炼 `text-embedding-v4`，可切换本地 Ollama 开源模型。
 
-→ [详细说明](docs/features/rag-knowledge-base.md)
+→ [RAG 工程实现与评测](docs/rag/README.md) · [检索链路](docs/features/rag-knowledge-base.md)
 
 ### 6. AI 用量与成本透明
 每次 LLM / Embedding / Rerank / OCR 调用均记录 Token 和人民币费用，按项目/阶段/模型汇总，支持多模型厂商适配。
@@ -77,7 +77,7 @@ flowchart LR
     LLM --> API
 ```
 
-**技术栈**：Flask · React 18 · TypeScript · Ant Design 5 · Tiptap · PostgreSQL + pgvector · 本地 Storage / 阿里云 OSS · DeepSeek / DashScope · MinerU
+**技术栈**：Flask · React 18 · TypeScript · Ant Design 5 · Tiptap · PostgreSQL + pgvector（HNSW）· 本地 Storage / 阿里云 OSS · DeepSeek（写作）/ DashScope · Ollama（可选本地 Embedding）· MinerU
 
 → [文档中心](docs/README.md) · [完整架构说明](docs/architecture/overview.md)
 
@@ -256,11 +256,45 @@ curl -s http://localhost:11434/v1/embeddings \
 
 关键约束：
 
-- **换模型或换维度必须全量重嵌**。百炼 `text-embedding-v4` 与 Ollama `qwen3-embedding` 生成的向量不在同一空间，混用会导致召回失真。切换后需重跑入库（如 `python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py --refresh`），把存量 chunk 用新模型重嵌。
+- **换模型或换维度必须全量重嵌**。百炼 `text-embedding-v4` 与 Ollama `qwen3-embedding` 生成的向量不在同一空间，混用会导致召回失真。切换后需重跑入库（种子库父子分块 v2：`python scripts/rag/ingest_power_grid_v2.py`），把存量 chunk 用新模型重嵌，并重跑 `python scripts/rag/eval_recall.py` 确认召回未退化。
 - **维度必须保持 1024**，与 `document_chunks.embedding vector(1024)` / `knowledge_assets.embedding vector(1024)` 一致；如要改维度需同步迁移向量列。
 - `dimensions` 参数仅对百炼下发；Ollama 按模型默认维度输出（`qwen3-embedding:0.6b` 即 1024），系统已自动处理，无需手动区分。
 - **生产/阿里云环境**默认仍用百炼（测试环境无开发机的 Ollama）。如需在阿里云上私有化向量化，应在 ECS 上用 vLLM/Ollama 自托管同款模型，并保证与开发期模型一致，避免再次重嵌。
 - Rerank（`qwen3-rerank`）仍走百炼；它是 fail-open 增强项，额度问题不影响主召回链路。
+
+### RAG 基座数据工程（分块 / 召回 / 评测）
+
+知识库的召回质量不取决于“是否已向量化”，而取决于分块是否保留语义、召回是否定向过滤、是否有测试集持续验证。本项目据此落地了一套可复跑、可回归、可对外分享的 RAG 工程实践，完整记录见 [docs/rag/](docs/rag/README.md)。
+
+#### 父子双层分块（Small-to-Big）
+
+一份资料切一次，产出两层，解决“问答要小块、写作要大块”的矛盾：
+
+- 子块（child）：按 doc_role 切到条/款/业务段级，小而自洽，参与向量召回、问答、合规判定；
+- 父块（parent）：章/节级完整上下文，写作正文回溯用，`embedding` 置空、不参与召回因此不污染检索；
+- 子块通过 `metadata.parent_index` 回溯父块。
+
+切分按文件角色分化（法规/合同按“条”、标准按条文、招标公告按业务段、投标注意事项按风险条、话术按段落），不使用统一固定长度作主策略；入库前强制清洗网页导航噪声与采集元信息。实现见 `backend/rag/chunking.py`。
+
+#### 场景化召回（metadata 过滤先行）
+
+召回 RPC `match_knowledge_chunks_filtered` 支持 jsonb metadata 过滤 + `project_id` 隔离，按消费场景（问答 / 写作 / 合规）使用不同过滤条件与 top-k；向量索引为 HNSW（`m=16, ef_construction=64`），高频过滤字段建表达式索引。每个 chunk 携带 `doc_role / authority_level / citation_policy / chunk_layer / content_sha256` 等 metadata，支撑权威排序、引用边界控制与增量幂等。
+
+#### Base 测试集与回归
+
+`tests/rag/base_testset.jsonl` 按 qa / writing / compliance 三场景标注；`scripts/rag/eval_recall.py` 计算 Recall@k、来源类别准确率、关键词命中率与跨 doc_role 串扰，并支持有/无过滤 A/B 对比。**新批次资料入库后必须重跑回归，指标退化则阻断上线**，避免“越加资料、召回越差”。
+
+第一版基线（power_grid 种子库，298 父块 + 2449 子块，Ollama `qwen3-embedding:0.6b`）：
+
+| 指标 | 过滤 ON | 过滤 OFF |
+| --- | --- | --- |
+| Recall@5 | 86.7% | 80.0% |
+| 来源类别准确率(top1) | 100% | 83.3% |
+| 跨 doc_role 串扰均值 | 0% | 30% |
+
+metadata 过滤把跨类别串扰从 30% 降到 0%、来源准确率升到 100%，验证了“过滤先行”的核心判断。详细评测与失败用例分析见 [评测记录](docs/rag/evaluation-records.md)。
+
+> 切换 embedding 模型或维度后需用对应入库脚本全量重嵌（种子库 v2：`python scripts/rag/ingest_power_grid_v2.py`），再重跑 `eval_recall.py` 刷新基线。
 
 ### DOCX 目录页码刷新
 
@@ -288,6 +322,7 @@ Mac M1/M2 使用 Homebrew 安装通常是 `/opt/homebrew/bin/soffice`；Linux �
 | 功能 | [章节写作计划](docs/features/section-writing.md) | writing_plan 字段、生成时机 |
 | 功能 | [合规检查](docs/features/compliance.md) | 规则覆盖率、LLM 语义复核 |
 | 功能 | [RAG 知识库](docs/features/rag-knowledge-base.md) | 检索链路、分片策略、种子库 |
+| 功能 | [RAG 工程实现与评测](docs/rag/README.md) | 父子分块、场景化召回、Base 测试集、评测记录 |
 | 功能 | [分册设计](docs/features/volume-design.md) | 分册类型、正文生成策略 |
 | 功能 | [成本统计](docs/features/cost-tracking.md) | Token 用量、多模型兼容 |
 | 功能 | [DOCX 导出](docs/features/docx-export.md) | 正式目录、页码域、章节快照、Word 标题层级 |
@@ -306,11 +341,12 @@ Mac M1/M2 使用 Homebrew 安装通常是 `/opt/homebrew/bin/soffice`；Linux �
 
 ## 当前限制
 
-- PDF 解析质量取决于文件类型，扫描版建议走 MinerU/OCR
-- 电力/电网知识库应持续以国网招采文件、政策法规、技术规范、供应商资料和客户真实标书样本建设
-- 企业资质、人员、业绩、产品、设备、试验报告、运维案例等私有资料需用户自行入库
-- 数据访问层正在从 Supabase SDK 迁移到标准 PostgreSQL + 本地/OSS 存储抽象
-- 当前定位为单机版 / 私有化 MVP，尚未达到公网生产部署标准
+- PDF 解析质量取决于文件类型，扫描版建议走 MinerU/OCR；客户标书的 `.doc`（老二进制）和 `.xlsx`（货物清单）结构化解析尚在补齐（见 docs/rag 待办）。
+- 电力/电网知识库应持续以国网招采文件、政策法规、技术规范、供应商资料和客户真实标书样本建设；新批次入库后需重跑 `scripts/rag/eval_recall.py` 做召回回归。
+- 部分公开法规/规章种子文件存在来源页噪声或采集为占位页，需复核与重采，不应直接作为权威依据。
+- 企业资质、人员、业绩、产品、设备、试验报告、运维案例等私有资料需用户自行入库。
+- 数据访问层正在从 Supabase SDK 迁移到标准 PostgreSQL + 本地/OSS 存储抽象（通过 `DB_PROVIDER` / `STORAGE_PROVIDER` 切换）。
+- 当前定位为单机版 / 私有化 MVP，尚未达到公网生产部署标准。
 
 ---
 

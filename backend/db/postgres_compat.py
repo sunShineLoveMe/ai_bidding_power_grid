@@ -322,6 +322,24 @@ class PostgresRpcQuery:
                 self.params.get("match_threshold", 0.5),
                 self.params.get("match_count", 5),
             ]
+        elif self.name == "match_knowledge_chunks_filtered":
+            sql = (
+                "select * from public.match_knowledge_chunks_filtered("
+                "%s::vector, %s, %s, %s, %s::uuid)"
+            )
+            params = [
+                self._vector(self.params.get("query_embedding")),
+                self.params.get("match_threshold", 0.3),
+                self.params.get("match_count", 8),
+                Jsonb(self.params.get("filter_metadata") or {}),
+                self.params.get("filter_project_id"),
+            ]
+        elif self.name == "get_parent_chunk":
+            sql = "select * from public.get_parent_chunk(%s::uuid, %s)"
+            params = [
+                self.params.get("p_document_id"),
+                self.params.get("p_parent_index"),
+            ]
         elif self.name == "match_knowledge_assets":
             sql = "select * from public.match_knowledge_assets(%s::vector, %s, %s, %s, %s)"
             params = [

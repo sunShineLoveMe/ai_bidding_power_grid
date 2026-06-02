@@ -1,0 +1,30 @@
+{"id": "T01", "scenario": "qa", "question": "招标投标法规定哪些工程建设项目必须进行招标？", "metadata_filter": {"doc_role": "policy_regulation"}, "must_include_keywords": ["必须进行招标", "工程建设项目"], "expected_doc_role": "policy_regulation"}
+{"id": "T02", "scenario": "qa", "question": "投标人相互串通投标报价会有什么法律后果？", "metadata_filter": {"doc_role": "policy_regulation"}, "must_include_keywords": ["串通", "中标无效"], "expected_doc_role": "policy_regulation"}
+{"id": "T03", "scenario": "qa", "question": "评标委员会的人数和组成有什么要求？", "metadata_filter": {"doc_role": "policy_regulation"}, "must_include_keywords": ["评标委员会", "成员"], "expected_doc_role": "policy_regulation"}
+{"id": "T04", "scenario": "compliance", "question": "哪些情形属于投标无效或否决投标？", "metadata_filter": {"doc_role": "policy_regulation"}, "must_include_keywords": ["无效"], "expected_doc_role": "policy_regulation"}
+{"id": "T05", "scenario": "qa", "question": "中标通知书发出后改变中标结果有什么责任？", "metadata_filter": {"doc_role": "policy_regulation"}, "must_include_keywords": ["中标通知书"], "expected_doc_role": "policy_regulation"}
+{"id": "T06", "scenario": "qa", "question": "依法必须招标的项目自招标文件开始发出到投标截止最短多少天？", "metadata_filter": {"doc_role": "policy_regulation"}, "must_include_keywords": ["二十日", "投标"], "expected_doc_role": "policy_regulation"}
+{"id": "T07", "scenario": "qa", "question": "资格预审应当如何发布资格预审公告？", "metadata_filter": {"doc_role": "policy_regulation"}, "must_include_keywords": ["资格预审"], "expected_doc_role": "policy_regulation"}
+{"id": "T08", "scenario": "writing", "question": "电力建设工程质量监督的主要内容包括哪些？", "metadata_filter": {"doc_role": "policy_regulation"}, "must_include_keywords": ["质量监督"], "expected_doc_role": "policy_regulation"}
+{"id": "T09", "scenario": "writing", "question": "电力建设工程施工安全的安全生产费用如何管理？", "metadata_filter": {"doc_role": "policy_regulation"}, "must_include_keywords": ["安全"], "expected_doc_role": "policy_regulation"}
+{"id": "T10", "scenario": "qa", "question": "电力工程设计招标的资格条件有哪些？", "metadata_filter": {"doc_role": "policy_regulation"}, "must_include_keywords": ["设计", "资格"], "expected_doc_role": "policy_regulation"}
+{"id": "T11", "scenario": "qa", "question": "能源法对新型能源体系建设有哪些规定？", "metadata_filter": {"doc_role": "policy_regulation"}, "must_include_keywords": ["能源"], "expected_doc_role": "policy_regulation"}
+{"id": "T12", "scenario": "qa", "question": "必须招标的基础设施和公用事业项目范围包括哪些？", "metadata_filter": {"doc_role": "policy_regulation"}, "must_include_keywords": ["基础设施", "公用事业"], "expected_doc_role": "policy_regulation"}
+{"id": "T13", "scenario": "compliance", "question": "竞争性谈判采购对应答人的通用资格要求有哪些？", "metadata_filter": {"doc_role": "tender_notice"}, "must_include_keywords": ["资格要求"], "expected_doc_role": "tender_notice"}
+{"id": "T14", "scenario": "qa", "question": "国网竞争性谈判公告中采购条件部分说明了什么？", "metadata_filter": {"doc_role": "tender_notice"}, "must_include_keywords": ["采购"], "expected_doc_role": "tender_notice"}
+{"id": "T15", "scenario": "compliance", "question": "供应商存在不良行为记录会受到什么限制？", "metadata_filter": {"doc_role": "tender_notice"}, "must_include_keywords": ["不良行为"], "expected_doc_role": "tender_notice"}
+{"id": "T16", "scenario": "qa", "question": "竞争性谈判的二轮报价是怎么规定的？", "metadata_filter": {"doc_role": "tender_notice"}, "must_include_keywords": ["报价"], "expected_doc_role": "tender_notice"}
+{"id": "T17", "scenario": "qa", "question": "国家电网招标活动管理办法对招标方式有什么规定？", "metadata_filter": {"doc_role": "sgcc_rule"}, "must_include_keywords": ["招标"], "expected_doc_role": "sgcc_rule"}
+{"id": "T18", "scenario": "compliance", "question": "国家电网供应商管理对供应商不良行为如何处理？", "metadata_filter": {"doc_role": "sgcc_rule"}, "must_include_keywords": ["供应商"], "expected_doc_role": "sgcc_rule"}
+{"id": "T19", "scenario": "writing", "question": "配电网建设改造技术导则对配电网建设有哪些技术要求？", "metadata_filter": {"doc_role": "standard_spec"}, "must_include_keywords": ["配电网"], "expected_doc_role": "standard_spec"}
+{"id": "T20", "scenario": "writing", "question": "配电网施工工艺规范对施工有哪些要求？", "metadata_filter": {"doc_role": "standard_spec"}, "must_include_keywords": ["施工"], "expected_doc_role": "standard_spec"}
+{"id": "T21", "scenario": "writing", "question": "电力设备预防性试验的项目和周期是怎样的？", "metadata_filter": {"doc_role": "standard_spec"}, "must_include_keywords": ["试验"], "expected_doc_role": "standard_spec"}
+{"id": "T22", "scenario": "writing", "question": "建设工程监理规范对监理工作有哪些规定？", "metadata_filter": {"doc_role": "standard_spec"}, "must_include_keywords": ["监理"], "expected_doc_role": "standard_spec"}
+{"id": "T23", "scenario": "writing", "question": "技术标中资格响应应包含哪些企业资质？", "metadata_filter": {"doc_role": "self_phrase"}, "must_include_keywords": ["资质", "许可证"], "expected_doc_role": "self_phrase"}
+{"id": "T24", "scenario": "writing", "question": "变电电气安装的技术响应包括哪些内容？", "metadata_filter": {"doc_role": "self_phrase"}, "must_include_keywords": ["变压器", "电缆"], "expected_doc_role": "self_phrase"}
+{"id": "T25", "scenario": "writing", "question": "质量安全环保响应的质量目标和安全目标怎么写？", "metadata_filter": {"doc_role": "self_phrase"}, "must_include_keywords": ["质量目标", "安全目标"], "expected_doc_role": "self_phrase"}
+{"id": "T26", "scenario": "writing", "question": "输电线路施工的主要工序有哪些？", "metadata_filter": {"doc_role": "self_phrase"}, "must_include_keywords": ["杆塔", "架线"], "expected_doc_role": "self_phrase"}
+{"id": "T27", "scenario": "qa", "question": "投标文件检查清单包含哪些项？", "metadata_filter": {"doc_role": "self_phrase"}, "must_include_keywords": ["投标"], "expected_doc_role": "self_phrase"}
+{"id": "T28", "scenario": "writing", "question": "商务响应中投标有效期和履约担保如何响应？", "metadata_filter": {"doc_role": "self_phrase"}, "must_include_keywords": ["投标有效期", "履约"], "expected_doc_role": "self_phrase"}
+{"id": "T29", "scenario": "qa", "question": "电力建设工程备案需要提交什么材料和时间要求？", "metadata_filter": {"doc_role": "policy_regulation"}, "must_include_keywords": ["备案"], "expected_doc_role": "policy_regulation"}
+{"id": "T30", "scenario": "qa", "question": "全面推行电力工程施工监理招投标的招标文件应包含哪些内容？", "metadata_filter": {"doc_role": "policy_regulation"}, "must_include_keywords": ["监理", "招标文件"], "expected_doc_role": "policy_regulation"}

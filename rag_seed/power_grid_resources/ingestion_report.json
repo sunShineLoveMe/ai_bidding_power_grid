@@ -1,50 +1,50 @@
 {
-  "generated_at": "2026-05-30T07:58:28.474377+00:00",
+  "generated_at": "2026-06-02T06:08:34.933795+00:00",
   "include_pdf": false,
-  "refresh": false,
+  "refresh": true,
   "dry_run": false,
   "total": 41,
-  "indexed": 20,
+  "indexed": 26,
   "dry_run_items": 0,
-  "skipped_existing": 6,
+  "skipped_existing": 0,
   "skipped_pdf": 15,
   "failed": [],
-  "total_chunks": 273,
+  "total_chunks": 279,
   "results": [
     {
       "title": "bid_document_checklist",
-      "status": "skipped_existing",
-      "chunks": 0,
+      "status": "indexed",
+      "chunks": 1,
       "error": ""
     },
     {
       "title": "business_response_phrases",
-      "status": "skipped_existing",
-      "chunks": 0,
+      "status": "indexed",
+      "chunks": 1,
       "error": ""
     },
     {
       "title": "power_grid_rag_ingestion_notes",
-      "status": "skipped_existing",
-      "chunks": 0,
+      "status": "indexed",
+      "chunks": 1,
       "error": ""
     },
     {
       "title": "power_grid_section_library",
-      "status": "skipped_existing",
-      "chunks": 0,
+      "status": "indexed",
+      "chunks": 1,
       "error": ""
     },
     {
       "title": "qualification_response_phrases",
-      "status": "skipped_existing",
-      "chunks": 0,
+      "status": "indexed",
+      "chunks": 1,
       "error": ""
     },
     {
       "title": "quality_safety_environment_phrases",
-      "status": "skipped_existing",
-      "chunks": 0,
+      "status": "indexed",
+      "chunks": 1,
       "error": ""
     },
     {

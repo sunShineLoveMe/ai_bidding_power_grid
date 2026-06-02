@@ -1,21 +1,21 @@
 # 电网 RAG 种子库入库报告
 
-- 生成时间：2026-05-30T07:58:28.474377+00:00
+- 生成时间：2026-06-02T06:08:34.933795+00:00
 - 待处理资料：41
-- 新入库资料：20
+- 新入库资料：26
 - Dry run 资料：0
-- 已存在跳过：6
+- 已存在跳过：0
 - PDF 跳过：15
-- 新增/预计分片：273
+- 新增/预计分片：279
 
 ## 明细
 
-- `skipped_existing` | chunks=0 | bid_document_checklist
-- `skipped_existing` | chunks=0 | business_response_phrases
-- `skipped_existing` | chunks=0 | power_grid_rag_ingestion_notes
-- `skipped_existing` | chunks=0 | power_grid_section_library
-- `skipped_existing` | chunks=0 | qualification_response_phrases
-- `skipped_existing` | chunks=0 | quality_safety_environment_phrases
+- `indexed` | chunks=1 | bid_document_checklist
+- `indexed` | chunks=1 | business_response_phrases
+- `indexed` | chunks=1 | power_grid_rag_ingestion_notes
+- `indexed` | chunks=1 | power_grid_section_library
+- `indexed` | chunks=1 | qualification_response_phrases
+- `indexed` | chunks=1 | quality_safety_environment_phrases
 - `indexed` | chunks=17 | 中华人民共和国招标投标法
 - `indexed` | chunks=8 | 中华人民共和国招标投标法实施条例
 - `skipped_pdf` | chunks=0 | 必须招标的工程项目规定

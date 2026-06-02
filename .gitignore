@@ -65,4 +65,6 @@ tender_references/
 # Feishu import temp files
 .agents/tmp/
 
+# Backups and database exports
+backups/
 
