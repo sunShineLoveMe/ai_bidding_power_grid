@@ -11,7 +11,8 @@ before customer testing:
 4. interpretation query / AI report generation
 5. outline SSE generation
 6. one section SSE generation
-7. DOCX export task creation and polling
+7. compliance coverage check
+8. DOCX export task creation and polling
 """
 
 from __future__ import annotations
@@ -301,6 +302,22 @@ def generate_one_section(ctx: SmokeContext, project_id: str, section: dict[str, 
     ctx.record("generate_one_section", started, f"sectionId={chapter.get('id')} chunks={len(chunks)}")
 
 
+def run_compliance_check(ctx: SmokeContext, project_id: str) -> dict[str, Any]:
+    started = time.time()
+    response = ctx.session.get(ctx.url(f"/api/bidding/interpretations/{project_id}/compliance-check"), timeout=ctx.timeout)
+    payload = _response_json(response)
+    rows = payload.get("rows")
+    summary = payload.get("summary") or {}
+    if not isinstance(rows, list):
+        raise SmokeFailure(f"合规检查响应缺 rows: {_short_json(payload)}")
+    ctx.record(
+        "run_compliance_check",
+        started,
+        f"rows={len(rows)} coverage={summary.get('coverageRate') or summary.get('coverage_rate')}",
+    )
+    return payload
+
+
 def create_docx_export(ctx: SmokeContext, project_id: str) -> str:
     started = time.time()
     response = ctx.session.post(ctx.url(f"/api/bidding/interpretations/{project_id}/download-docx"), json={}, timeout=ctx.timeout)
@@ -356,6 +373,8 @@ def run_smoke(args: argparse.Namespace) -> SmokeContext:
         outline = generate_outline(ctx, project_id)
         sections = list_sections(ctx, project_id)
         generate_one_section(ctx, project_id, sections[0] if sections else (outline.get("chapters") or [{}])[0])
+        if not args.skip_compliance:
+            run_compliance_check(ctx, project_id)
         task_id = create_docx_export(ctx, project_id)
         wait_docx_export(ctx, project_id, task_id)
         return ctx
@@ -377,6 +396,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--supabase-file-id", default=os.getenv("SMOKE_SUPABASE_FILE_ID"))
     parser.add_argument("--skip-parse-wait", action="store_true")
     parser.add_argument("--skip-ai-report", action="store_true")
+    parser.add_argument("--skip-compliance", action="store_true")
     return parser
 
 

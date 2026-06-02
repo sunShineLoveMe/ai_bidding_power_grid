@@ -261,6 +261,8 @@ SOURCES = [
         "source_org": "中华人民共和国住房 and 城乡建设部",
         "doc_type": "国家标准PDF",
         "tags": "施工企业,质量管理,物资管理,过程控制",
+        "disabled": True,
+        "disabled_reason": "2026-06-02 审计发现原 URL 为《工程建设国家标准管理办法》，等待客户提供正确 PDF。",
     },
     {
         "category": "03_standards_specs",
@@ -269,6 +271,8 @@ SOURCES = [
         "source_org": "生态环境部政府网公开附件",
         "doc_type": "国家标准PDF",
         "tags": "电气安装,电气设备,交接试验,试验标准",
+        "disabled": True,
+        "disabled_reason": "2026-06-02 审计发现原 URL 为 HJ/T 351-2007，等待客户提供正确 PDF。",
     },
     {
         "category": "03_standards_specs",
@@ -277,6 +281,8 @@ SOURCES = [
         "source_org": "生态环境部政府网公开附件",
         "doc_type": "国家标准PDF",
         "tags": "电气安装,电缆敷设,电缆接头,施工验收",
+        "disabled": True,
+        "disabled_reason": "2026-06-02 审计发现原 URL 为 HJ 2057-2018，等待客户提供正确 PDF。",
     },
     {
         "category": "03_standards_specs",
@@ -285,6 +291,8 @@ SOURCES = [
         "source_org": "生态环境部政府网公开附件",
         "doc_type": "国家标准PDF",
         "tags": "电气安装,接地网,接地引下线,施工验收",
+        "disabled": True,
+        "disabled_reason": "2026-06-02 审计发现原 URL 为 HJ 2048-2015，等待客户提供正确 PDF。",
     },
     {
         "category": "03_standards_specs",
@@ -293,6 +301,8 @@ SOURCES = [
         "source_org": "生态环境部政府网公开附件",
         "doc_type": "国家标准PDF",
         "tags": "电气安装,控制柜,二次接线,施工验收",
+        "disabled": True,
+        "disabled_reason": "2026-06-02 审计发现原 URL 与标题不匹配，且该条年份需客户确认后提供正确 PDF。",
     },
     {
         "category": "03_standards_specs",
@@ -302,6 +312,8 @@ SOURCES = [
         "doc_type": "行业标准PDF",
         "tags": "配电网,规划设计,容载比,供电可靠性",
         "verify_ssl": False,
+        "disabled": True,
+        "disabled_reason": "2026-06-02 审计发现原 PDF 不是《配电网规划设计技术导则》正文，等待客户提供正确 PDF。",
     },
     {
         "category": "03_standards_specs",
@@ -677,6 +689,11 @@ def download_sources() -> list[dict[str, str]]:
             "status": "",
             "error": "",
         }
+        if source.get("disabled"):
+            row["status"] = "needs_customer_source"
+            row["error"] = source.get("disabled_reason", "Disabled pending customer-provided source file.")
+            rows.append(row)
+            continue
         try:
             raw, content_type = read_url(source["url"], source.get("verify_ssl", True))
             is_pdf = "pdf" in content_type.lower() or source["url"].lower().split("?")[0].endswith(".pdf")
