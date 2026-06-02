@@ -176,12 +176,15 @@ def _chunk_clause_doc(title: str, body: str, parent_max: int, child_max: int) ->
         return p_index
 
     if not chapters:
-        # 没有“章”，直接按“条”切，全文做一个 parent
-        p_index = add_parent(title, body)
-        for child in _split_by_article(body, child_max):
-            chunks.append(Chunk(layer="child", content=child, index=idx, parent_index=p_index,
-                                section=title, block_type="clause"))
-            idx += 1
+        # 没有“章”时不能把长文档塞进一个 parent；按 parent_max 拆成多个
+        # 父块，再在各父块内按“条”或句子边界生成 child。
+        for parent_no, parent_body in enumerate(_length_split(body, parent_max), 1):
+            section = title if parent_no == 1 else f"{title}（续 {parent_no}）"
+            p_index = add_parent(section, parent_body)
+            for child in _split_by_article(parent_body, child_max):
+                chunks.append(Chunk(layer="child", content=child, index=idx, parent_index=p_index,
+                                    section=section, block_type="clause"))
+                idx += 1
         return chunks
 
     for i, m in enumerate(chapters):
@@ -189,11 +192,13 @@ def _chunk_clause_doc(title: str, body: str, parent_max: int, child_max: int) ->
         end = chapters[i + 1].start() if i + 1 < len(chapters) else len(body)
         chapter_title = m.group(0).strip()
         chapter_body = body[start:end].strip()
-        p_index = add_parent(chapter_title, chapter_body[:parent_max])
-        for child in _split_by_article(chapter_body, child_max):
-            chunks.append(Chunk(layer="child", content=child, index=idx, parent_index=p_index,
-                                section=chapter_title, block_type="clause"))
-            idx += 1
+        for parent_no, parent_body in enumerate(_length_split(chapter_body, parent_max), 1):
+            section = chapter_title if parent_no == 1 else f"{chapter_title}（续 {parent_no}）"
+            p_index = add_parent(section, parent_body)
+            for child in _split_by_article(parent_body, child_max):
+                chunks.append(Chunk(layer="child", content=child, index=idx, parent_index=p_index,
+                                    section=section, block_type="clause"))
+                idx += 1
     return chunks
 
 
@@ -201,35 +206,52 @@ def _chunk_section_doc(title: str, body: str, parent_max: int, child_max: int, r
     """招标公告/招标文件/投标注意事项：编号业务段。"""
     chunks: list[Chunk] = []
     idx = 0
-    # 全文作为一个 parent（公告通常不长）
-    chunks.append(Chunk(layer="parent", content=body[:parent_max].strip(), index=idx,
-                        section=title, block_type="section"))
-    p_index = idx
-    idx += 1
+    chapters = list(_CHAPTER.finditer(body))
+    parent_sections: list[tuple[str, str]] = []
+    if chapters:
+        for i, m in enumerate(chapters):
+            start = m.start()
+            end = chapters[i + 1].start() if i + 1 < len(chapters) else len(body)
+            section_title = m.group(0).strip()
+            section_body = body[start:end].strip()
+            for parent_no, parent_body in enumerate(_length_split(section_body, parent_max), 1):
+                section = section_title if parent_no == 1 else f"{section_title}（续 {parent_no}）"
+                parent_sections.append((section, parent_body))
+    else:
+        for parent_no, parent_body in enumerate(_length_split(body, parent_max), 1):
+            section = title if parent_no == 1 else f"{title}（续 {parent_no}）"
+            parent_sections.append((section, parent_body))
 
-    # 按编号业务段切 child
-    cuts = [m.start() for m in _NUM_SECTION.finditer(body)]
     block_type = "rule" if role == "bid_instructions" else "clause"
-    if not cuts:
-        for child in _length_split(body, child_max):
-            chunks.append(Chunk(layer="child", content=child, index=idx, parent_index=p_index,
-                                section=title, block_type=block_type))
-            idx += 1
-        return chunks
-    cuts = [0] + cuts + [len(body)]
-    for i in range(len(cuts) - 1):
-        seg = body[cuts[i]:cuts[i + 1]].strip()
-        if not seg:
-            continue
-        if len(seg) > child_max:
-            for piece in _length_split(seg, child_max):
-                chunks.append(Chunk(layer="child", content=piece, index=idx, parent_index=p_index,
-                                    section=title, block_type=block_type))
+
+    for section, parent_body in parent_sections:
+        chunks.append(Chunk(layer="parent", content=parent_body.strip(), index=idx,
+                            section=section, block_type="section"))
+        p_index = idx
+        idx += 1
+
+        # 按编号业务段切 child；无编号时按句子边界兜底。
+        cuts = [m.start() for m in _NUM_SECTION.finditer(parent_body)]
+        if not cuts:
+            for child in _length_split(parent_body, child_max):
+                chunks.append(Chunk(layer="child", content=child, index=idx, parent_index=p_index,
+                                    section=section, block_type=block_type))
                 idx += 1
-        else:
-            chunks.append(Chunk(layer="child", content=seg, index=idx, parent_index=p_index,
-                                section=title, block_type=block_type))
-            idx += 1
+            continue
+        cuts = [0] + cuts + [len(parent_body)]
+        for i in range(len(cuts) - 1):
+            seg = parent_body[cuts[i]:cuts[i + 1]].strip()
+            if not seg:
+                continue
+            if len(seg) > child_max:
+                for piece in _length_split(seg, child_max):
+                    chunks.append(Chunk(layer="child", content=piece, index=idx, parent_index=p_index,
+                                        section=section, block_type=block_type))
+                    idx += 1
+            else:
+                chunks.append(Chunk(layer="child", content=seg, index=idx, parent_index=p_index,
+                                    section=section, block_type=block_type))
+                idx += 1
     return chunks
 
 
@@ -245,16 +267,18 @@ def _chunk_generic(title: str, body: str, parent_max: int, child_max: int) -> li
             continue
         m = re.match(r"#{1,3}\s*(.+)", sec)
         sec_title = m.group(1).strip() if m else (title or "正文")
-        chunks.append(Chunk(layer="parent", content=sec[:parent_max], index=idx,
-                            section=sec_title, block_type="section"))
-        p_index = idx
-        idx += 1
-        for para in re.split(r"\n\s*\n", sec):
-            para = para.strip()
-            if not para or para.startswith("#"):
-                continue
-            for piece in _length_split(para, child_max):
-                chunks.append(Chunk(layer="child", content=piece, index=idx, parent_index=p_index,
-                                    section=sec_title, block_type="paragraph"))
-                idx += 1
+        for parent_no, parent_body in enumerate(_length_split(sec, parent_max), 1):
+            section = sec_title if parent_no == 1 else f"{sec_title}（续 {parent_no}）"
+            chunks.append(Chunk(layer="parent", content=parent_body, index=idx,
+                                section=section, block_type="section"))
+            p_index = idx
+            idx += 1
+            for para in re.split(r"\n\s*\n", parent_body):
+                para = para.strip()
+                if not para or para.startswith("#"):
+                    continue
+                for piece in _length_split(para, child_max):
+                    chunks.append(Chunk(layer="child", content=piece, index=idx, parent_index=p_index,
+                                        section=section, block_type="paragraph"))
+                    idx += 1
     return chunks

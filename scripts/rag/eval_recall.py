@@ -102,13 +102,19 @@ def recall_for_case(client, ali, case: dict, k: int, use_filter: bool) -> dict:
 
     expected_role = case.get("expected_doc_role")
     keywords = case.get("must_include_keywords", [])
+    forbidden_keywords = case.get("must_not_include_keywords", [])
 
     def has_kw(r):
         text = r.get("content") or ""
         return any(kw in text for kw in keywords) if keywords else True
 
+    def has_forbidden_kw(r):
+        text = r.get("content") or ""
+        return any(kw in text for kw in forbidden_keywords) if forbidden_keywords else False
+
     # Recall@k：存在一条 doc_role 正确且含关键词的片段
-    hit = any((_role_of(r) == expected_role) and has_kw(r) for r in evaluated_rows)
+    forbidden_hit = any(has_forbidden_kw(r) for r in evaluated_rows)
+    hit = any((_role_of(r) == expected_role) and has_kw(r) for r in evaluated_rows) and not forbidden_hit
     # 来源类别准确率：top-1 role 正确
     top1_role_ok = bool(evaluated_rows) and _role_of(evaluated_rows[0]) == expected_role
     # 关键词命中率：top-k 任一含关键词
@@ -127,6 +133,7 @@ def recall_for_case(client, ali, case: dict, k: int, use_filter: bool) -> dict:
         "recall_hit": hit,
         "top1_role_ok": top1_role_ok,
         "kw_hit": kw_hit,
+        "forbidden_hit": forbidden_hit,
         "cross_role_ratio": round(cross, 3),
         "top1_role": _role_of(evaluated_rows[0]) if evaluated_rows else None,
         "top1_preview": (evaluated_rows[0].get("content") or "")[:60] if evaluated_rows else "",
@@ -157,6 +164,8 @@ def main() -> int:
     kw_cases = [r for r in results if r["kw_hit"] is not None]
     kw_rate = (sum(1 for r in kw_cases if r["kw_hit"]) / len(kw_cases)) if kw_cases else None
     avg_cross = sum(r["cross_role_ratio"] for r in results) / n
+    forbidden_cases = [r for r in results if "forbidden_hit" in r]
+    forbidden_rate = sum(1 for r in forbidden_cases if r["forbidden_hit"]) / len(forbidden_cases) if forbidden_cases else 0.0
 
     print(f"\n=== Base 召回评测  (k={args.k}, filter={'ON' if use_filter else 'OFF'}, cases={n}) ===")
     print(f"Recall@{args.k}          : {recall:.1%}")
@@ -164,6 +173,8 @@ def main() -> int:
     if kw_rate is not None:
         print(f"关键词命中率            : {kw_rate:.1%}")
     print(f"跨 doc_role 串扰均值    : {avg_cross:.1%}")
+    if any(c.get("must_not_include_keywords") for c in cases):
+        print(f"禁用关键词命中率        : {forbidden_rate:.1%}")
 
     # 按场景拆分
     print("\n按场景：")
@@ -195,6 +206,7 @@ def main() -> int:
         "role_accuracy_top1": round(role_acc, 4),
         "keyword_hit_rate": round(kw_rate, 4) if kw_rate is not None else None,
         "avg_cross_role_ratio": round(avg_cross, 4),
+        "forbidden_hit_rate": round(forbidden_rate, 4),
         "results": results,
     }
     if args.save:

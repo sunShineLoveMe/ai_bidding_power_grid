@@ -12,6 +12,8 @@
 | [evaluation-records.md](evaluation-records.md) | 召回评测记录（基线 / 各次迭代对比） |
 | [todo.md](todo.md) | RAG 基座数据工程待办清单、优先级与完成度跟踪 |
 | [customer-corpus-inventory.md](customer-corpus-inventory.md) | 江西/山西客户真实标书资料清单与入库优先级 |
+| [customer-corpus-parse-runs.md](customer-corpus-parse-runs.md) | 客户真实资料每批解析准备记录、manifest 与质量报告 |
+| [customer-parse-qa-checklist.md](customer-parse-qa-checklist.md) | 客户资料解析 QA 门禁、测试集与本批结果 |
 | [runs/](runs/) | 每次召回评测的原始 JSON 与摘要 |
 
 ## 相关代码
@@ -20,10 +22,16 @@
 | --- | --- |
 | `backend/rag/chunking.py` | 父子分块器（按 doc_role 路由） |
 | `scripts/rag/ingest_power_grid_v2.py` | 电网种子库 v2 入库脚本（父子分块 + metadata） |
+| `scripts/rag/prepare_customer_corpus.py` | 客户江西/山西标书资料入库前解析准备脚本（manifest + 质量报告） |
+| `scripts/rag/dry_run_customer_chunks.py` | 基于客户资料 manifest 跑父子分块 dry-run，输出 parent/child/table 统计 |
+| `scripts/rag/eval_parse_quality.py` | 基于解析产物和 QA 用例检查关键证据是否保留 |
+| `scripts/rag/ingest_customer_corpus.py` | 基于客户 manifest 做 staging 入库，按 `ingestion_batch_id` 隔离 |
 | `scripts/rag/cleanup_water_data.py` | 水利数据清理脚本（带备份） |
 | `scripts/rag/eval_recall.py` | Base 测试集召回评测脚本 |
 | `tests/rag/base_testset.jsonl` | Base 测试集（JSONL 标注） |
 | `tests/rag/scenario_testset.jsonl` | 场景化测试集（qa / writing_parent / compliance / table） |
+| `tests/rag/customer_parse_qa_cases.jsonl` | 客户资料解析 QA 用例 |
+| `tests/rag/customer_jx_sx_testset.jsonl` | 江西/山西客户资料召回评测用例 |
 
 ## 战略文档
 

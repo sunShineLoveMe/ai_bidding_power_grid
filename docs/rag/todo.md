@@ -21,7 +21,7 @@
 | 状态 | 任务 | 交付物 | 验收口径 |
 | --- | --- | --- | --- |
 | [x] | 水利历史资料清理 | `docs/rag/water-data-cleanup.md` | `rag_seed` 下不再保留 water/水利干扰资料 |
-| [x] | 父子双层分块 v2 | `backend/rag/chunking.py` | dry-run 产出 298 parent / 2449 child |
+| [x] | 父子双层分块 v2 | `backend/rag/chunking.py` | 当前代码 dry-run 产出 323 parent / 2444 child；数据库基线仍为 298 parent / 2449 child，待重入库后更新 |
 | [x] | 电网种子库 v2 入库脚本 | `scripts/rag/ingest_power_grid_v2.py` | 支持 `--dry-run`、按 `doc_role` 分块、仅 child embedding |
 | [x] | metadata 过滤 RPC 与 HNSW | `migrations/postgres/006_rag_p0_filtered_recall.sql` | 支持 `match_knowledge_chunks_filtered`、`get_parent_chunk` |
 | [x] | Base 测试集与基线记录 | `tests/rag/base_testset.jsonl`、`docs/rag/evaluation-records.md` | 30 条用例，Recall@5 86.7%，串扰 0% |
@@ -37,13 +37,16 @@
 | 优先级 | 状态 | 任务 | 交付物 | 验收口径 |
 | --- | --- | --- | --- | --- |
 | P1-1 | [x] | 梳理江西/山西压缩包文件清单 | `docs/rag/customer-corpus-inventory.md` | 按省份、批次、包号、文件类型、是否铁构件/接地铁相关标注 |
-| P1-2 | [ ] | 解析 `.docx` 主招标文件 | `parsed_outputs/`、入库 manifest | 标题层级、条款、资格要求、评分办法可抽取 |
-| P1-3 | [ ] | 解析 `.doc` 老二进制文件 | 转换后的 `.docx/.md` 与解析报告 | LibreOffice/MinerU 至少一种路径可稳定处理，失败标 `needs_review` |
-| P1-4 | [ ] | 解析 `.xlsx` 货物清单/技术参数表 | 结构化 JSON/CSV、表格摘要 chunk | 保留 sheet、表头、行列、合并单元格语义和包号 |
-| P1-5 | [ ] | 客户资料 metadata 规范化 | 入库 manifest | 至少包含 `province/batch_no/package_no/material_category/doc_role/source_file` |
-| P1-6 | [~] | 江西/山西批次负样本 | `tests/rag/base_testset.jsonl` 或独立扩展集 | 已新增场景测试集；待客户资料入库后补跨省/跨批次负样本 |
-| P1-7 | [~] | 铁构件/接地铁首批真实用例 | 测试集 15-20 条 | 已建立铁构件/接地铁 inventory；待解析入库后补真实用例 |
-| P1-8 | [ ] | 入库后回归评测 | `docs/rag/evaluation-records.md` 新 run | Recall@5 不低于当前基线，跨批次串扰可解释且受控 |
+| P1-2 | [x] | 解析 `.docx` 主招标文件 | `parsed_outputs/power_grid_customer_corpus/customer_jx_sx_20260602_p1/`、入库前 manifest | 20 个 `.docx` 已抽文本并统计段落/表格/标题，待正式分块入库 |
+| P1-3 | [x] | 解析 `.doc` 老二进制文件 | 转换后的 `.docx/.md` 与解析报告 | 3 个 `.doc` 已通过 LibreOffice 转 `.docx` 后解析，`needs_review=0` |
+| P1-4 | [x] | 解析 `.xlsx` 货物清单/技术参数表 | 结构化 JSON、表格摘要 | 2 个货物清单已用 openpyxl 解析，保留 sheet、行列、合并单元格和包号 |
+| P1-5 | [x] | 客户资料 metadata 规范化 | `manifest.json` | manifest 已包含 `province/batch_no/package_no/package_code/material_category/doc_role/source_file` 等字段 |
+| P1-6 | [x] | 江西/山西批次负样本 | `tests/rag/customer_jx_sx_testset.jsonl` | 已加入 `must_not_include_keywords`，覆盖江西 `1826AA` / 山西 `0526AB` 跨包隔离 |
+| P1-7 | [x] | 铁构件/接地铁首批真实用例 | `tests/rag/customer_jx_sx_testset.jsonl` | 17 条客户真实场景，覆盖 qa/writing/compliance/table |
+| P1-8 | [x] | 入库后回归评测 | `docs/rag/evaluation-records.md` Run 4 | 客户 filtered Recall@5 100%，Base filtered 保持 86.7%，跨 doc_role 串扰 0% |
+| P1-9 | [x] | 客户资料父子分块 dry-run | `chunk_dry_run_report.md` | 21 个文本资料产出 233 parent / 3942 child，2 个表格资料 107 行，`needs_review=0` |
+| P1-10 | [x] | 客户资料解析 QA 门禁 | `docs/rag/customer-parse-qa-checklist.md` | 12 条解析 QA 全部通过，命中率 100% |
+| P1-11 | [x] | 客户资料 staging 入库 | `scripts/rag/ingest_customer_corpus.py` | 23 文档 indexed，235 parent / 4049 检索块，按 `ingestion_batch_id` 隔离 |
 
 ## P2：持续客户模板治理
 
@@ -77,7 +80,7 @@
 
 | 优先级 | 状态 | 任务 | 交付物 | 验收口径 |
 | --- | --- | --- | --- | --- |
-| P4-1 | [ ] | 表格三形态存储 | 原始结构 + 检索摘要 + 行级记录 | 技术参数可按物料/字段精确查询 |
+| P4-1 | [~] | 表格三形态存储 | 原始结构 + 检索摘要 + 行级记录 | 货物清单已在 staging 中写入 table summary/table row；待补独立结构化表/JSONB 查询 |
 | P4-2 | [ ] | 技术参数表抽取 | JSON/CSV + summary chunk | 保证值、项目需求值、备注字段不丢失 |
 | P4-3 | [ ] | 货物清单解析 | 行级结构化数据 | 包号、物料名称、单位、数量可过滤 |
 | P4-4 | [ ] | 技术偏差/商务偏差辅助 | 偏差表生成依据 | 能定位招标要求和响应模板来源 |
@@ -98,6 +101,6 @@
 
 1. 建立江西/山西客户资料 inventory。
 2. 选择铁构件/接地铁作为首个真实物料场景。
-3. 跑 `.doc/.docx/.xlsx` 解析样例，确认 MinerU/LibreOffice/openpyxl 的组合路径。
-4. 补 15-20 条客户真实场景测试集，含跨省/跨批次负样本。
-5. 入库后追加 Run 2 评测记录。
+3. 补客户资料批次回滚脚本，支持按 `ingestion_batch_id` 删除本批 `knowledge_documents/document_chunks`。
+4. 为 `.xlsx` 货物清单补独立结构化表/JSONB 查询能力，不只依赖 row 文本向量。
+5. 抽查客户主招标文件和合同的 parent 内容，确认写作回溯上下文是否适合正式生成。

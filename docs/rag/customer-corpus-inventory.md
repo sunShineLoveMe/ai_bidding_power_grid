@@ -11,6 +11,12 @@
 | 江西 | 2026 年第一次配网（省网）协议库存物资类公开招标采购 | 铁构件 / 包 1 | `rag_seed/power_grid_resources/01_tender_documents/20_国网江西电力2026年第一次配网省网协议库存物资类公开招标采购/` | P1 |
 | 山西 | 2026 年第二次物资协议库存公开招标采购 | 铁构件 / 包 1 | `rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/` | P1 |
 
+解析准备批次：
+
+| 批次 ID | Manifest | 质量报告 | 状态 |
+| --- | --- | --- | --- |
+| `customer_jx_sx_20260602_p1` | `parsed_outputs/power_grid_customer_corpus/customer_jx_sx_20260602_p1/manifest.json` | `parsed_outputs/power_grid_customer_corpus/customer_jx_sx_20260602_p1/parse_quality_report.md` | 23 个 `.doc/.docx/.xlsx` 已解析，21 个归档文件已登记，`needs_review=0` |
+
 当前解压后发现的核心文件类型：
 
 | 类型 | 数量 | 处理策略 |

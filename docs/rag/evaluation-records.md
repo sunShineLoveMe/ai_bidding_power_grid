@@ -167,3 +167,56 @@ Run 2 与 Run 1 指标保持一致，删除误入库水利资料后没有造成�
 ### 结论
 
 场景化测试集进一步证明 metadata 过滤是必要条件。关闭过滤后，问答、合规和写作父块覆盖均退化，且跨 `doc_role` 串扰升至 41.7%。当前写作父块回溯在样例集上可用，但仍需加入江西/山西真实标书和 `.xlsx` 表格样本后再判断生产可用性。
+
+---
+
+## Run 4 — 江西/山西客户资料 staging 入库与召回评测（2026-06-02）
+
+> 摘要：`docs/rag/runs/run_20260602_customer_jx_sx_summary.md`
+> 测试集：`tests/rag/customer_jx_sx_testset.jsonl`（17 条）
+> 原始结果：`docs/rag/runs/run_20260602_customer_jx_sx_filtered.json`、`docs/rag/runs/run_20260602_customer_jx_sx_nofilter.json`
+
+### 触发原因
+
+客户江西/山西铁构件样本资料完成本地解析 QA 后，进行 staging 入库和客户真实场景召回评测，验证本地解析是否足以支撑 P1 样板库建设。
+
+### 入库数据
+
+| 项 | 数量 |
+| --- | ---: |
+| `knowledge_documents` | 23 |
+| `document_chunks` | 4284 |
+| parent chunk | 235 |
+| child/table 检索块 | 4049 |
+| embedding | 4049 |
+| 仅归档文件 | 21 |
+
+### A/B：metadata 过滤的价值
+
+| 指标 | 过滤 ON | 过滤 OFF | 差值 |
+| --- | ---: | ---: | ---: |
+| Recall@5 | **100.0%** | 76.5% | +23.5pp |
+| 来源类别准确率(top1) | **100.0%** | 64.7% | +35.3pp |
+| 关键词命中率 | **100.0%** | 88.2% | +11.8pp |
+| 跨 doc_role 串扰均值 | **0.0%** | 49.4% | -49.4pp |
+| 禁用关键词命中率 | **0.0%** | 0.0% | 0.0pp |
+
+分场景 Recall@5：
+
+| scenario | 过滤 ON | 过滤 OFF |
+| --- | ---: | ---: |
+| qa | 100% | 57% |
+| compliance | 100% | 100% |
+| writing | 100% | 67% |
+| table | 100% | 100% |
+
+### Base 回归
+
+新增客户资料后，原 Base filtered 复跑结果仍为 Recall@5 86.7%、来源类别准确率 100%、跨 `doc_role` 串扰 0%，与 Run 1/2 基线一致，未发现退化。
+
+### 结论
+
+1. 本地解析链路在本批客户样本上通过 QA，暂不需要强制切到 MinerU。
+2. 客户资料 staging 入库后，过滤 ON 的客户测试集 Recall@5 达到 100%。
+3. 过滤 OFF 明显退化，说明 `province/package_code/doc_role/ingestion_batch_id` 过滤必须作为上线门禁。
+4. 表格召回已可用，但目前仍是 row 文本 + metadata 方案，后续应补结构化表/JSONB 精确查询。
