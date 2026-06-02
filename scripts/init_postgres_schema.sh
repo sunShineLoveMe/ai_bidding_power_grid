@@ -26,7 +26,7 @@ run_sql_file "migrations/postgres/003_seed_deepseek_v4_flash_pricing.sql"
 run_sql_file "migrations/postgres/004_seed_deepseek_v4_pro_pricing.sql"
 run_sql_file "migrations/postgres/005_bid_parse_tasks.sql"
 
-echo "verifying core tables"
+echo "verifying core tables" 
 "${PSQL[@]}" -At -c "
 select table_name
 from information_schema.tables
