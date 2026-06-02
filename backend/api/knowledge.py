@@ -19,6 +19,7 @@ import logging
 import os
 import uuid
 from pathlib import Path
+from typing import Any
 
 from flask import Response, current_app, jsonify, request, stream_with_context
 
@@ -28,6 +29,7 @@ from backend.core.bid_volumes import asset_applicable_volumes
 from backend.core.config import get_stage_model
 from backend.core.llm_json_utils import strip_llm_json
 from backend.core.security import UploadValidationError, safe_upload_filename, validate_uploaded_file
+from backend.db.supabase_client import get_supabase_client
 from backend.db.supabase_repo import (
     get_knowledge_document_detail,
     list_knowledge_documents,
@@ -44,6 +46,151 @@ from backend.rag.retrieval import (
     search_knowledge_base,
     stream_knowledge_answer,
 )
+
+
+CUSTOMER_SEED_CORPUS = "power_grid_customer_corpus"
+CUSTOMER_SCOPE_TERMS = [
+    "货物清单", "技术规范编码", "物料编码", "交货方式", "交货地点", "主招标文件",
+    "招标编号", "资格预审", "评标办法", "专用资格", "包号", "包件", "分标编号",
+]
+DOC_ROLE_TERMS = {
+    "goods_list": ["货物清单", "物料编码", "技术规范编码", "交货方式", "交货地点", "数量"],
+    "technical_spec": ["技术规范", "技术参数", "镀锌层", "不锈钢", "电缆支架", "接地铁", "铁附件"],
+    "tender_notice": ["招标公告", "资格预审公告", "资格要求", "招标编号"],
+    "main_tender_file": ["主招标文件", "招标文件", "评标办法", "投标人须知", "专用资格"],
+    "contract_special_terms": ["专用条款", "履约保证金", "交货条款"],
+    "contract_general_terms": ["通用条款", "合同通用"],
+    "bid_instructions": ["投标注意事项", "否决事项", "常见问题"],
+}
+
+
+def _safe_meta(row: dict[str, Any]) -> dict[str, Any]:
+    metadata = row.get("metadata") or {}
+    return metadata if isinstance(metadata, dict) else {}
+
+
+def _customer_scopes() -> list[dict[str, Any]]:
+    try:
+        rows = (
+            get_supabase_client()
+            .table("knowledge_documents")
+            .select("id,title,metadata,status")
+            .eq("status", "indexed")
+            .limit(500)
+            .execute()
+        ).data or []
+    except Exception:
+        logging.exception("读取客户知识库范围失败")
+        return []
+
+    grouped: dict[tuple[str, str, str, str], dict[str, Any]] = {}
+    for row in rows:
+        meta = _safe_meta(row)
+        if meta.get("seed_corpus") != CUSTOMER_SEED_CORPUS:
+            continue
+        key = (
+            str(meta.get("ingestion_batch_id") or ""),
+            str(meta.get("province") or ""),
+            str(meta.get("batch_no") or ""),
+            str(meta.get("package_code") or ""),
+        )
+        scope = grouped.setdefault(
+            key,
+            {
+                "seed_corpus": CUSTOMER_SEED_CORPUS,
+                "ingestion_batch_id": key[0],
+                "province": key[1],
+                "batch_no": key[2],
+                "package_code": key[3],
+                "material_categories": set(),
+                "doc_roles": set(),
+                "documents": 0,
+            },
+        )
+        if meta.get("material_category"):
+            scope["material_categories"].add(str(meta.get("material_category")))
+        if meta.get("doc_role"):
+            scope["doc_roles"].add(str(meta.get("doc_role")))
+        scope["documents"] += 1
+
+    scopes = []
+    for scope in grouped.values():
+        material_categories = sorted(scope["material_categories"])
+        scopes.append({
+            **scope,
+            "doc_roles": sorted(scope["doc_roles"]),
+            "material_categories": material_categories,
+            "material_category": "、".join(material_categories),
+            "label": " / ".join(
+                part for part in [scope.get("province"), scope.get("batch_no"), scope.get("package_code"), "、".join(material_categories)] if part
+            ),
+        })
+    scopes.sort(key=lambda item: (item.get("province") or "", item.get("package_code") or "", item.get("material_category") or ""))
+    return scopes
+
+
+def _infer_doc_role_from_query(query: str) -> str | None:
+    for doc_role, terms in DOC_ROLE_TERMS.items():
+        if any(term in query for term in terms):
+            return doc_role
+    return None
+
+
+def _infer_customer_filter(query: str, explicit_filter: dict[str, Any] | None = None) -> tuple[dict[str, Any] | None, dict[str, Any] | None]:
+    explicit = {key: value for key, value in (explicit_filter or {}).items() if value not in (None, "", "all")}
+    if explicit:
+        return explicit, None
+
+    scopes = _customer_scopes()
+    if not scopes:
+        return None, None
+
+    query_text = query or ""
+    candidates = []
+    for scope in scopes:
+        score = 0
+        for key in ["province", "package_code", "material_category", "batch_no"]:
+            value = str(scope.get(key) or "")
+            if value and value in query_text:
+                score += 3 if key == "package_code" else 2
+        if any(role_term in query_text for role_terms in DOC_ROLE_TERMS.values() for role_term in role_terms):
+            score += 1
+        if score:
+            candidates.append((score, scope))
+
+    if candidates:
+        candidates.sort(key=lambda item: item[0], reverse=True)
+        best_score, best_scope = candidates[0]
+        tied = [scope for score, scope in candidates if score == best_score]
+        if len(tied) == 1:
+            inferred = {
+                "seed_corpus": CUSTOMER_SEED_CORPUS,
+                "ingestion_batch_id": best_scope.get("ingestion_batch_id"),
+                "province": best_scope.get("province"),
+                "package_code": best_scope.get("package_code"),
+            }
+            doc_role = _infer_doc_role_from_query(query_text)
+            if doc_role:
+                inferred["doc_role"] = doc_role
+            return {key: value for key, value in inferred.items() if value}, None
+
+    looks_customer_specific = any(term in query_text for term in CUSTOMER_SCOPE_TERMS)
+    looks_customer_specific = looks_customer_specific or any(str(scope.get("package_code") or "") in query_text for scope in scopes)
+    looks_customer_specific = looks_customer_specific or any(str(scope.get("material_category") or "") in query_text for scope in scopes)
+    if looks_customer_specific and len(scopes) > 1:
+        return None, {
+            "needs_clarification": True,
+            "reason": "客户资料范围不明确",
+            "message": "我检索到多个客户资料批次/包号。为避免把不同省份、包号或文件角色混在一起，请先选择要查询的范围，或在问题里补充省份、包号、物料类型。",
+            "scopes": scopes[:8],
+        }
+    return None, None
+
+
+@knowledge_bp.route('/scopes', methods=['GET'])
+@bp.route('/knowledge/scopes', methods=['GET'])
+def get_knowledge_scopes():
+    return jsonify({"customer_scopes": _customer_scopes()}), 200
 
 
 def sync_and_parse_knowledge_in_background(file_path, original_filename, parse_id, document_id):
@@ -146,13 +293,23 @@ def search_knowledge():
         return jsonify({'error': '缺少检索问题 query'}), 400
         
     try:
+        metadata_filter, clarification = _infer_customer_filter(query, data.get("metadata_filter") or None)
+        if clarification:
+            return jsonify({
+                "answer": clarification["message"],
+                "needs_clarification": True,
+                "clarification": clarification,
+                "images": [],
+                "assets": [],
+                "raw_contexts": [],
+            }), 200
         # 1. 向量化并检索 Supabase
         contexts = search_knowledge_base(
             query,
             match_threshold=0.3,
             match_count=8,
             scenario=data.get("scenario") or "qa",
-            metadata_filter=data.get("metadata_filter") or None,
+            metadata_filter=metadata_filter,
             project_id=data.get("project_id") or None,
             return_parent=data.get("return_parent"),
         )
@@ -200,13 +357,19 @@ def stream_search_knowledge():
     def generate():
         yield emit({"type": "start"})
         try:
+            metadata_filter, clarification = _infer_customer_filter(query, data.get("metadata_filter") or None)
+            if clarification:
+                yield emit({"type": "clarification", "clarification": clarification})
+                yield emit({"type": "chunk", "content": clarification["message"]})
+                yield emit({"type": "done"})
+                return
             yield emit({"type": "status", "message": "正在检索企业知识库和图片资产..."})
             contexts = search_knowledge_base(
                 query,
                 match_threshold=0.3,
                 match_count=8,
                 scenario=data.get("scenario") or "qa",
-                metadata_filter=data.get("metadata_filter") or None,
+                metadata_filter=metadata_filter,
                 project_id=data.get("project_id") or None,
                 return_parent=data.get("return_parent"),
             )
