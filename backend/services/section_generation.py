@@ -148,11 +148,38 @@ def stream_generate_bid_section_events(
     *,
     with_images: bool = False,
 ) -> Iterable[dict[str, Any]]:
-    """Legacy SSE adapter around the shared generation implementation."""
-    buffered: list[dict[str, Any]] = []
+    """SSE adapter that yields events in real time (true streaming).
 
-    def collect(event: dict[str, Any]) -> None:
-        buffered.append(dict(event))
+    生成在后台线程跑，事件经线程安全队列实时转交给 SSE 生成器，实现"打字机"逐字输出，
+    而不是先把所有 chunk 攒完再一次性吐出。
+    """
+    import queue
+    import threading
 
-    generate_and_save_bid_section(project_id, chapter, with_images=with_images, on_event=collect)
-    yield from buffered
+    event_queue: "queue.Queue[dict[str, Any] | object]" = queue.Queue()
+    _DONE = object()
+    error_holder: dict[str, BaseException] = {}
+
+    def on_event(event: dict[str, Any]) -> None:
+        event_queue.put(dict(event))
+
+    def worker() -> None:
+        try:
+            generate_and_save_bid_section(project_id, chapter, with_images=with_images, on_event=on_event)
+        except BaseException as exc:  # noqa: BLE001 - 转交给主线程统一处理
+            error_holder["error"] = exc
+        finally:
+            event_queue.put(_DONE)
+
+    thread = threading.Thread(target=worker, name="section-stream", daemon=True)
+    thread.start()
+
+    while True:
+        item = event_queue.get()
+        if item is _DONE:
+            break
+        yield item  # type: ignore[misc]
+
+    thread.join()
+    if "error" in error_holder:
+        raise error_holder["error"]

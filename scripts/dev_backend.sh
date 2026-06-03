@@ -10,6 +10,16 @@ fi
 
 source .venv/bin/activate
 
+# 单一事实来源：显式加载 .env，保证 web 与 worker 环境一致。
+# main.py 内也有 load_dotenv()，这里提前导出可让 gunicorn.conf.py 等
+# 在 app import 前读取的变量也生效。
+if [[ -f ".env" ]]; then
+  set -a
+  # shellcheck disable=SC1091
+  source .env
+  set +a
+fi
+
 export PORT="${PORT:-3012}"
 export WEB_CONCURRENCY="${WEB_CONCURRENCY:-2}"
 export REDIS_URL="${REDIS_URL:-redis://127.0.0.1:16379/0}"

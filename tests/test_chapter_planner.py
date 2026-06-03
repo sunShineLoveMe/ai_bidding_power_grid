@@ -83,7 +83,12 @@ class ChapterPlannerRegressionTest(unittest.TestCase):
         }
 
         with patch("backend.db.supabase_repo.get_supabase_client", return_value=FakeClient()):
-            rows = replace_bid_sections_from_outline("1651fd88-11de-4df9-8cbc-53ecb5eb30fd", outline)
+            rows = replace_bid_sections_from_outline(
+                "1651fd88-11de-4df9-8cbc-53ecb5eb30fd",
+                outline,
+                respect_lock=False,
+                reuse_existing_ids=False,
+            )
 
         insert_calls = [call for call in calls if call[1] == "insert"]
         self.assertEqual(1, len(insert_calls))
@@ -127,7 +132,12 @@ class ChapterPlannerRegressionTest(unittest.TestCase):
         }
 
         with patch("backend.db.supabase_repo.get_supabase_client", return_value=FakeClient()):
-            rows = replace_bid_sections_from_outline("1651fd88-11de-4df9-8cbc-53ecb5eb30fd", outline)
+            rows = replace_bid_sections_from_outline(
+                "1651fd88-11de-4df9-8cbc-53ecb5eb30fd",
+                outline,
+                respect_lock=False,
+                reuse_existing_ids=False,
+            )
 
         self.assertEqual(3, len({row["id"] for row in rows}))
         self.assertEqual(rows[0]["id"], rows[2]["parent_id"])
@@ -162,6 +172,76 @@ class ChapterPlannerRegressionTest(unittest.TestCase):
         args = delay_mock.call_args.args
         self.assertEqual("project-1", args[0])
         self.assertEqual(quick_outline, args[2]["project_meta"]["bid_outline"])
+
+
+class OutlineLockRegressionTest(unittest.TestCase):
+    def test_replace_outline_skipped_when_locked(self):
+        """大纲锁定时，replace 不得执行删建，直接返回现有章节。"""
+        existing = [{"id": "11111111-1111-4111-8111-111111111111", "title": "已固定章节", "order_index": 1}]
+
+        with (
+            patch("backend.db.supabase_repo.get_outline_lock", return_value=True),
+            patch("backend.db.supabase_repo.list_bid_sections", return_value=existing) as list_mock,
+            patch("backend.db.supabase_repo.get_supabase_client") as client_mock,
+        ):
+            rows = replace_bid_sections_from_outline(
+                "1651fd88-11de-4df9-8cbc-53ecb5eb30fd",
+                {"chapters": [{"order": "1", "title": "新章节", "level": 1}]},
+            )
+
+        self.assertEqual(existing, rows)
+        list_mock.assert_called()
+        # 锁定时不应触碰数据库写入
+        client_mock.assert_not_called()
+
+    def test_replace_outline_reuses_existing_ids_by_title(self):
+        """AI 精修复用既有章节 ID（按 title 匹配），避免 ID 漂移。"""
+        fixed_id = "aaaaaaaa-1111-4111-8111-111111111111"
+        existing = [
+            {"id": fixed_id, "title": "施工组织设计", "level": 1, "order_index": 1},
+        ]
+        inserted_holder: dict[str, list] = {}
+
+        class FakeResponse:
+            def __init__(self, data):
+                self.data = data
+
+        class FakeQuery:
+            def __init__(self, rows=None):
+                self.rows = rows
+
+            def eq(self, *_a):
+                return self
+
+            def execute(self):
+                return FakeResponse(self.rows or [])
+
+        class FakeTable:
+            def delete(self):
+                return FakeQuery()
+
+            def insert(self, rows):
+                inserted_holder["rows"] = rows
+                return FakeQuery(rows)
+
+        class FakeClient:
+            def table(self, _name):
+                return FakeTable()
+
+        outline = {"chapters": [{"order": "1", "title": "施工组织设计", "level": 1}]}
+
+        with (
+            patch("backend.db.supabase_repo.get_outline_lock", return_value=False),
+            patch("backend.db.supabase_repo.list_bid_sections", return_value=existing),
+            patch("backend.db.supabase_repo.get_supabase_client", return_value=FakeClient()),
+        ):
+            rows = replace_bid_sections_from_outline(
+                "1651fd88-11de-4df9-8cbc-53ecb5eb30fd",
+                outline,
+            )
+
+        # 复用既有 ID，而非生成新 UUID
+        self.assertEqual(fixed_id, rows[0]["id"])
 
 
 if __name__ == "__main__":

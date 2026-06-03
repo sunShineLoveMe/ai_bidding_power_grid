@@ -32,6 +32,16 @@ _PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
+# 防御性加载 .env：celery_app 在 import 期即读取 REDIS_URL 等变量。
+# 即使未经 dev_worker.sh（未提前 source .env）直接 `celery -A ...` 启动，
+# 也能从项目根 .env 读到 broker、模型、数据库等配置，避免"连不上 Redis/DB"。
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv(_PROJECT_ROOT / ".env")
+except Exception:  # pragma: no cover - dotenv 缺失时不阻断
+    pass
+
 _TRUE_VALUES = {"1", "true", "yes", "on"}
 
 

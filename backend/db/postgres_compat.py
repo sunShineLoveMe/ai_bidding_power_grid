@@ -341,6 +341,17 @@ class PostgresRpcQuery:
                 self.params.get("p_document_id"),
                 self.params.get("p_parent_index"),
             ]
+        elif self.name == "update_bid_generation_task_item_atomic":
+            sql = (
+                "select * from public.update_bid_generation_task_item_atomic("
+                "%s::uuid, %s::uuid, %s, %s)"
+            )
+            params = [
+                self.params.get("p_project_id"),
+                self.params.get("p_task_id"),
+                self.params.get("p_section_id"),
+                Jsonb(self.params.get("p_patch") or {}),
+            ]
         elif self.name == "match_knowledge_assets":
             sql = "select * from public.match_knowledge_assets(%s::vector, %s, %s, %s, %s)"
             params = [

@@ -25,7 +25,6 @@ from backend.db.supabase_repo import cancel_bid_generation_task, create_bid_expo
 from backend.core.llm_json_utils import strip_llm_json
 from backend.core.bid_volumes import asset_applicable_volumes, asset_matches_volume, delivery_volume_type, normalize_volume_list, section_volume_type, volume_name
 from backend.ai.length_settings import apply_length_allocations_to_sections, allocate_chapter_length_targets, evaluate_length_feasibility, normalize_length_settings
-from concurrent.futures import ThreadPoolExecutor, as_completed
 import threading
 import shutil
 from datetime import timedelta

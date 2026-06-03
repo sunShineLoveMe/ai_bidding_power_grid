@@ -447,7 +447,9 @@ export function BidEditorPage(): JSX.Element {
   }
 
   async function pollSectionGenerationTask(projectId: string, taskId: string): Promise<SectionGenerationTask> {
-    const maxAttempts = 450;
+    // 并行编写时多个章节同时产出，缩短轮询间隔（300ms）让正文增量更接近实时；
+    // 相应放大最大尝试次数，保证长任务仍有足够的轮询窗口。
+    const maxAttempts = 900;
     let latest: SectionGenerationTask | null = null;
     for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
       latest = await getSectionGenerationTask(projectId, taskId);
@@ -455,7 +457,7 @@ export function BidEditorPage(): JSX.Element {
       if (['completed', 'failed', 'partial_failed', 'cancelled'].includes(latest.status)) {
         return latest;
       }
-      await new Promise(resolve => window.setTimeout(resolve, 600));
+      await new Promise(resolve => window.setTimeout(resolve, 300));
     }
     throw new Error('章节正文后台任务仍在处理中，请稍后刷新任务状态。');
   }

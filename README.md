@@ -146,16 +146,17 @@ cp .env.example .env
 # 5. 启动本地 PostgreSQL 和 Redis
 docker compose up -d postgres redis
 
-# 6. 启动后端（统一使用 gunicorn，详见下方“后端启动方式”）
-PORT=3012 gunicorn -c gunicorn.conf.py main:app
-# 本地脚本默认访问 http://127.0.0.1:3012
+# 6. 启动后端 Web（gunicorn，端口 3012；脚本会自动 source .env）
+./scripts/dev_backend.sh
 
-# 7. 另开一个终端启动 Celery worker
+# 7. 另开一个终端启动 Celery worker（脚本会自动 source .env；默认并发 4、章节并行 3）
 ./scripts/dev_worker.sh
 
-# 8. 另开一个终端启动前端开发服务
+# 8. 另开一个终端启动前端开发服务（dev 代理已指向 127.0.0.1:3012）
 cd frontend && npm run dev
 ```
+
+> 三端缺一不可：只启 Web + 前端时 HTTP 能响应，但解析、章节正文生成、DOCX 导出等后台任务不会推进——它们都跑在 Celery worker 里。详见下方「本地三端启动」。
 
 → [完整部署文档](docs/deployment/quickstart.md) · [安全配置](docs/deployment/security.md) · [本地 Docker PostgreSQL](docs/deployment/local-postgres-docker.md) · [阿里云目标架构](docs/deployment/aliyun-target-architecture.md)
 
@@ -163,8 +164,39 @@ cd frontend && npm run dev
 
 > 本项目为多人协作开发。为保证本地、测试、生产环境行为一致，**统一使用 gunicorn 启动后端**，不再推荐 `python main.py`（Flask 开发服务器）。
 > 原因：系统大量使用 SSE 流式响应（招标解读、大纲、正文、知识库问答都是长连接），Flask 自带的开发服务器是单进程、同步模型，多个流式连接会互相阻塞，且明确标注“不可用于生产”。gunicorn 的 gevent worker 才是和生产一致的运行模型。
-
+>
 > 重要：上传解析、MinerU 产物落库、大纲精炼、章节正文生成和 DOCX 导出依赖 Celery worker。只启动后端和前端时，HTTP 可以响应，但解析、正文生成、导出等后台任务不会推进。真实全链路冒烟或本地联调必须同时启动 Redis 和 Celery worker。
+
+#### 本地三端启动（推荐，最佳实践）
+
+本地开发需要三个常驻进程，各开一个终端，均在项目根目录执行。两个脚本都会自动 `source .env`，保证 Web 与 worker 环境一致（单一事实来源）。
+
+```bash
+# 前置：本地 PostgreSQL + Redis
+docker compose up -d postgres redis
+
+# 终端 1 —— 后端 Web（gunicorn + gevent，端口 3012，带 --reload）
+./scripts/dev_backend.sh
+
+# 终端 2 —— Celery worker（默认 CELERY_WORKER_CONCURRENCY=4、SECTION_GEN_CONCURRENCY=3）
+./scripts/dev_worker.sh
+
+# 终端 3 —— 前端开发服务（Vite，端口 5173，/api 代理到 127.0.0.1:3012）
+cd frontend && npm run dev
+```
+
+要点与最佳实践：
+
+| 维度 | 说明 |
+| --- | --- |
+| 环境一致性 | `dev_backend.sh` / `dev_worker.sh` 均 `set -a; source .env; set +a`，避免 Web 与 worker 环境变量分叉。`celery_app.py` 也做了防御性 `load_dotenv`，直接 `celery -A ...` 启动也能读到 .env。 |
+| 改代码后是否需重启 | Web 带 `--reload`，改后端代码自动重载；**worker 无热重载，改 `backend/tasks/*` 或任务依赖的代码后必须重启 `dev_worker.sh`**。 |
+| 并发度 | worker 并行编写章节数 = min(`SECTION_GEN_CONCURRENCY`, `CELERY_WORKER_CONCURRENCY`)。提速可调高，但受 DeepSeek 并发配额限制（429）。 |
+| Worker 池（重要） | 默认 `CELERY_POOL=threads`。**不要在 macOS / 新版 Python 上用默认 prefork**：fork 已初始化线程的父进程会死锁，表现为"任务已 received 但永不执行、章节一直排队中"。任务以 IO 等待为主，threads 池最稳妥。 |
+| 避免双 worker | 重启 worker 前确认旧进程已退出，否则两个 worker 抢同一 Redis 队列，旧代码可能接走任务。 |
+| 验证 worker 代码已加载 | `.venv/bin/celery -A backend.tasks.celery_app:celery_app inspect registered \| grep generate_one`，看到 `bid.sections.generate_one` 即为最新代码。 |
+| 健康检查 | `curl http://127.0.0.1:3012/api/ready`，确认 `checks.celery.status=ok`（worker 在线）。 |
+| 故障排查：一直"排队中" | worker 日志只有 `Task ... received` 却无任务执行日志 = prefork fork 死锁。改用 threads 池（`dev_worker.sh` 已默认）后重启即可。 |
 
 #### 1. 标准启动（推荐，所有人默认用这个）
 

@@ -811,6 +811,13 @@ def stream_bid_outline(project_id: str) -> Iterator[dict[str, Any]]:
     if not analysis:
         raise RuntimeError("当前项目尚无结构化解读数据，请先完成招标文件解析和落库。")
 
+    # 用户显式重新生成大纲是"重建目录"的主动操作：先解锁，允许本次覆盖与后台精修。
+    try:
+        from backend.db.supabase_repo import set_outline_lock
+        set_outline_lock(project_id, False)
+    except Exception:
+        logging.exception("重置大纲锁定状态失败（不阻断生成）: %s", project_id)
+
     yield {
         "type": "start",
         "message": "AI 正在结合招标解读结果生成章节大纲。",

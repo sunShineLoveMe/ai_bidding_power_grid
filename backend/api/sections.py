@@ -32,9 +32,11 @@ from backend.db.supabase_repo import (
     delete_bid_section,
     get_bid_generation_task,
     get_latest_bid_generation_task,
+    get_outline_lock,
     list_bid_sections,
     reorder_bid_sections,
     reset_bid_sections_generation,
+    set_outline_lock,
     update_bid_generation_task_item,
     upsert_bid_section,
 )
@@ -145,6 +147,39 @@ def reset_bid_sections_generation_api(project_id):
         return jsonify({'error': f'重置标书章节生成状态失败: {str(e)}'}), 500
 
 
+@bp.route('/interpretations/<project_id>/outline-lock', methods=['GET'])
+def get_outline_lock_api(project_id):
+    """查询项目大纲锁定状态。锁定后 AI 精修/重生成不会覆盖目录。"""
+    try:
+        uuid.UUID(project_id)
+        return jsonify({"locked": get_outline_lock(project_id)})
+    except ValueError:
+        return jsonify({'error': 'project_id 不是合法 UUID。'}), 400
+    except Exception as e:
+        logging.exception("查询大纲锁定状态失败: %s", project_id)
+        return jsonify({'error': f'查询大纲锁定状态失败: {str(e)}'}), 500
+
+
+@bp.route('/interpretations/<project_id>/outline-lock', methods=['POST'])
+def set_outline_lock_api(project_id):
+    """设置项目大纲锁定状态。body: {"locked": true|false}
+
+    - locked=true：固定当前目录，禁止 AI 精修/重生成覆盖（用户确认大纲后调用）。
+    - locked=false：解锁，允许重新生成或 AI 精修（用户主动想重做大纲时调用）。
+    """
+    try:
+        uuid.UUID(project_id)
+        payload = request.get_json(silent=True) or {}
+        locked = bool(payload.get("locked", True))
+        result = set_outline_lock(project_id, locked)
+        return jsonify({"locked": result})
+    except ValueError:
+        return jsonify({'error': 'project_id 不是合法 UUID。'}), 400
+    except Exception as e:
+        logging.exception("设置大纲锁定状态失败: %s", project_id)
+        return jsonify({'error': f'设置大纲锁定状态失败: {str(e)}'}), 500
+
+
 @bp.route('/interpretations/<project_id>/section-generation-tasks/latest', methods=['GET'])
 def get_latest_section_generation_task_api(project_id):
     """查询最近一次批量章节生成任务。"""
@@ -192,6 +227,11 @@ def create_section_generation_task_api(project_id):
             with_images=bool(payload.get("withImages")),
             metadata=payload.get("metadata") if isinstance(payload.get("metadata"), dict) else {},
         )
+        # 进入全文编写即锁定大纲：之后任何 AI 精修/重生成都不得覆盖目录。
+        try:
+            set_outline_lock(project_id, True)
+        except Exception:
+            logging.exception("锁定项目大纲失败（不阻断生成）: %s", project_id)
         if payload.get("autoStart", True):
             dispatch_section_generation_task(project_id, task["id"])
         return jsonify({"task": task}), 201

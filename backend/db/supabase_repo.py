@@ -851,13 +851,96 @@ def _outline_flat_sections(outline: dict[str, Any]) -> list[dict[str, Any]]:
     return flat_sections
 
 
-def replace_bid_sections_from_outline(project_id: str, outline: dict[str, Any]) -> list[dict[str, Any]]:
+def get_outline_lock(project_id: str) -> bool:
+    """读取项目大纲是否已锁定。锁定后禁止任何整表覆盖（AI 精修、重生成）。
+
+    状态存于 bid_analysis.project_meta.outline_locked（jsonb），无需新增列。
+    """
+    client = get_supabase_client()
+    rows = (
+        client.table("bid_analysis")
+        .select("project_meta")
+        .eq("project_id", project_id)
+        .limit(1)
+        .execute()
+        .data
+        or []
+    )
+    if not rows:
+        return False
+    project_meta = rows[0].get("project_meta") or {}
+    return bool(project_meta.get("outline_locked"))
+
+
+def set_outline_lock(project_id: str, locked: bool) -> bool:
+    """设置/清除项目大纲锁定标志。返回最终锁定状态。"""
+    client = get_supabase_client()
+    rows = (
+        client.table("bid_analysis")
+        .select("id,project_meta")
+        .eq("project_id", project_id)
+        .limit(1)
+        .execute()
+        .data
+        or []
+    )
+    if not rows:
+        return False
+    analysis_id = rows[0]["id"]
+    project_meta = dict(rows[0].get("project_meta") or {})
+    project_meta["outline_locked"] = bool(locked)
+    client.table("bid_analysis").update({"project_meta": project_meta}).eq("id", analysis_id).execute()
+    return bool(locked)
+
+
+def _match_existing_section_id(
+    existing_rows: list[dict[str, Any]],
+    section: dict[str, Any],
+    used_ids: set[str],
+) -> str | None:
+    """为新大纲章节匹配一个尚未占用的既有 section ID（按 title + order_index 评分）。
+
+    用于 AI 精修复用规则版 ID，避免整表删建导致 ID 漂移、把用户正在编辑的章节冲掉。
+    """
+    candidates = [row for row in existing_rows if str(row.get("id")) not in used_ids]
+    if not candidates:
+        return None
+    best = max(candidates, key=lambda row: _section_match_score(row, section))
+    # 至少 title 命中（score>=10）才复用，避免错配
+    if _section_match_score(best, section) >= 10:
+        return str(best.get("id"))
+    return None
+
+
+def replace_bid_sections_from_outline(
+    project_id: str,
+    outline: dict[str, Any],
+    *,
+    respect_lock: bool = True,
+    reuse_existing_ids: bool = True,
+) -> list[dict[str, Any]]:
+    # 大纲锁定后禁止整表覆盖（防止 AI 精修/重生成把用户固定的目录冲掉）。
+    if respect_lock and get_outline_lock(project_id):
+        logging.info("项目大纲已锁定，跳过 replace_bid_sections_from_outline: %s", project_id)
+        return list_bid_sections(project_id)
+
     raw_sections = [section for section in _outline_flat_sections(outline) if isinstance(section, dict)]
+
+    # 复用既有章节 ID：按 title + order 匹配，让 AI 精修不改变已存在章节的 UUID，
+    # 避免整表删建导致用户正在编辑/已生成的章节 ID 漂移。
+    existing_rows = list_bid_sections(project_id) if reuse_existing_ids else []
+    used_ids: set[str] = set()
+
     section_ids: list[str] = []
     first_section_ids_by_order: dict[str, str] = {}
     for index, section in enumerate(raw_sections):
         section_order = str(section.get("order") or index + 1)
-        section_id = section.get("id") if _is_valid_uuid(section.get("id")) else str(uuid.uuid4())
+        section_id = section.get("id") if _is_valid_uuid(section.get("id")) else None
+        if not section_id and reuse_existing_ids:
+            section_id = _match_existing_section_id(existing_rows, section, used_ids)
+        if not section_id:
+            section_id = str(uuid.uuid4())
+        used_ids.add(section_id)
         section_ids.append(section_id)
         first_section_ids_by_order.setdefault(section_order, section_id)
 
@@ -1222,6 +1305,37 @@ def update_bid_generation_task_item(
     section_id: str,
     patch: dict[str, Any],
 ) -> dict[str, Any]:
+    # 并发安全路径：PostgreSQL 后端用单语句 + 行锁的原子 RPC 更新单个 item，
+    # 避免多个 Celery 子任务并发编写时读改写整段 items jsonb 造成丢更新。
+    if (os.getenv("DB_PROVIDER") or "").lower() == "postgres":
+        rpc_patch = {**patch}
+        response = _with_supabase_write_retry(
+            lambda client: client.rpc(
+                "update_bid_generation_task_item_atomic",
+                {
+                    "p_project_id": project_id,
+                    "p_task_id": task_id,
+                    "p_section_id": str(section_id),
+                    "p_patch": rpc_patch,
+                },
+            ).execute(),
+            label="原子更新批量章节生成任务状态",
+        )
+        rows = response.data or []
+        if not rows:
+            raise RuntimeError("批量章节生成任务不存在或更新失败")
+        return rows[0]
+
+    return _update_bid_generation_task_item_legacy(project_id, task_id, section_id, patch)
+
+
+def _update_bid_generation_task_item_legacy(
+    project_id: str,
+    task_id: str,
+    section_id: str,
+    patch: dict[str, Any],
+) -> dict[str, Any]:
+    """读-改-写实现（Supabase 后端兜底；非并发场景仍可用）。"""
     task = get_bid_generation_task(project_id, task_id)
     if not task:
         raise RuntimeError("批量章节生成任务不存在")
