@@ -1216,6 +1216,45 @@ def _normalize_generation_task_items(items: list[dict[str, Any]]) -> list[dict[s
     return normalized
 
 
+def _leaf_generation_section_ids(sections: list[dict[str, Any]]) -> set[str]:
+    parent_ids = {
+        str(section.get("parent_id"))
+        for section in sections
+        if section.get("parent_id")
+    }
+    leaf_ids: set[str] = set()
+    for section in sections:
+        section_id = str(section.get("id") or "")
+        if not section_id or section_id in parent_ids:
+            continue
+        metadata = section.get("metadata") if isinstance(section.get("metadata"), dict) else {}
+        if metadata.get("section_role") == "container" or metadata.get("leaf_generation") is False:
+            continue
+        leaf_ids.add(section_id)
+    return leaf_ids
+
+
+def _filter_generation_task_leaf_items(project_id: str, items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    if not items:
+        return []
+    try:
+        sections = list_bid_sections(project_id)
+    except Exception:
+        logging.exception("查询 bid_sections 失败，无法过滤叶子小节生成任务: %s", project_id)
+        return items
+    leaf_ids = _leaf_generation_section_ids(sections)
+    if not leaf_ids:
+        return items
+    filtered = [
+        item for item in items
+        if str(item.get("section_id") or item.get("sectionId") or item.get("id") or "") in leaf_ids
+    ]
+    skipped = len(items) - len(filtered)
+    if skipped:
+        logging.info("已过滤 %s 个非叶子章节生成 item: project_id=%s", skipped, project_id)
+    return filtered
+
+
 def _generation_task_payload(
     *,
     project_id: str,
@@ -1322,6 +1361,8 @@ def _event_type_for_generation_item_patch(patch: dict[str, Any]) -> str:
         return "cancelled"
     if status == "expired":
         return "lease_expired"
+    if status == "queued" and patch.get("_event_type"):
+        return str(patch.get("_event_type"))
     return "item_updated"
 
 
@@ -1498,6 +1539,120 @@ def expire_bid_generation_task_items(
     return rows
 
 
+def requeue_bid_generation_task_item(
+    project_id: str,
+    task_id: str,
+    section_id: str,
+    *,
+    reason: str = "manual_retry",
+    preserve_draft: bool = True,
+) -> dict[str, Any]:
+    """Requeue one generation item and invalidate any old worker lease."""
+    message = "已重新排队，等待重试生成。"
+    direct_patch = {
+        "status": "queued",
+        "percent": 0,
+        "chars": 0,
+        "message": message,
+        "error": None,
+        "attempt_id": None,
+        "worker_id": None,
+        "lease_expires_at": None,
+        "heartbeat_at": None,
+        "first_token_at": None,
+        "last_token_at": None,
+        "draft_saved_at": None,
+        "final_saved_at": None,
+        "finished_at": None,
+    }
+    if not preserve_draft:
+        direct_patch.update({
+            "generated_content": "",
+            "draft_content": "",
+            "chunk_seq": 0,
+            "chunk_events": [],
+        })
+    try:
+        _with_supabase_write_retry(
+            lambda client: client.table("bid_generation_task_items")
+            .update(direct_patch)
+            .eq("project_id", project_id)
+            .eq("task_id", task_id)
+            .eq("section_id", section_id)
+            .execute(),
+            label="重新排队章节生成任务 item",
+        )
+    except Exception:
+        logging.exception("直接重新排队 bid_generation_task_items 失败，继续尝试 JSON 快照: %s", task_id)
+
+    patch = {
+        "_event_type": "item_requeued",
+        "status": "queued",
+        "percent": 0,
+        "chars": 0,
+        "message": message,
+        "error": None,
+        "attempt_id": None,
+        "worker_id": None,
+        "lease_expires_at": None,
+        "heartbeat_at": None,
+        "first_token_at": None,
+        "last_token_at": None,
+        "draft_saved_at": None,
+        "final_saved_at": None,
+        "metadata": {"retry_reason": reason},
+    }
+    if not preserve_draft:
+        patch.update({
+            "generated_content": "",
+            "draft_content": "",
+            "chunk_seq": 0,
+            "chunk_events": [],
+        })
+    return update_bid_generation_task_item(project_id, task_id, section_id, patch)
+
+
+def resume_bid_generation_task(
+    project_id: str,
+    task_id: str,
+    *,
+    statuses: set[str] | None = None,
+    preserve_draft: bool = True,
+) -> dict[str, Any]:
+    task = get_bid_generation_task(project_id, task_id)
+    if not task:
+        raise RuntimeError("批量章节生成任务不存在")
+    retry_statuses = statuses or {"failed", "partial_generated", "stopped", "cancelled", "expired"}
+    target_ids = [
+        str(item.get("section_id"))
+        for item in (task.get("items") or [])
+        if str(item.get("section_id") or "") and str(item.get("status") or "") in retry_statuses
+    ]
+    latest = task
+    for section_id in target_ids:
+        latest = requeue_bid_generation_task_item(
+            project_id,
+            task_id,
+            section_id,
+            reason="resume_task",
+            preserve_draft=preserve_draft,
+        )
+    if not target_ids:
+        return latest
+    _record_generation_task_event(
+        project_id=project_id,
+        task_id=task_id,
+        section_id=None,
+        patch={
+            "_event_type": "task_resumed",
+            "status": latest.get("status"),
+            "message": f"已恢复 {len(target_ids)} 个章节生成 item",
+            "count": len(target_ids),
+        },
+    )
+    return latest
+
+
 def generation_task_item_owner_matches(
     project_id: str,
     task_id: str,
@@ -1538,13 +1693,21 @@ def create_bid_generation_task(
     with_images: bool = False,
     metadata: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
+    leaf_items = _filter_generation_task_leaf_items(project_id, items)
+    if items and not leaf_items:
+        raise RuntimeError("没有可生成正文的叶子小节。父级章节只作为结构容器，请选择下级小节生成。")
     payload = _generation_task_payload(
         project_id=project_id,
-        items=items,
+        items=leaf_items,
         volume_type=volume_type,
         with_images=with_images,
         status="queued",
-        metadata=metadata,
+        metadata={
+            **(metadata or {}),
+            "leaf_generation_only": True,
+            "requested_item_count": len(items),
+            "effective_item_count": len(leaf_items),
+        },
     )
     response = _with_supabase_write_retry(
         lambda client: client.table("bid_generation_tasks").insert(payload).execute(),

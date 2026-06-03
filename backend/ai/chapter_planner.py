@@ -191,7 +191,7 @@ def _normalize_outline_chapters(
             row = {key: value for key, value in item.items() if key not in {"children", "subsections"}}
             row["order"] = order
             row["order_index"] = item.get("order_index") or order_index
-            row["level"] = max(1, min(int(item.get("level") or level), 4))
+            row["level"] = max(1, min(int(item.get("level") or level), 5))
             row["title"] = row.get("title") or "未命名章节"
             row["priority"] = row.get("priority") or "medium"
             row["response_points"] = row.get("response_points") or []
@@ -223,10 +223,171 @@ def _normalize_outline_chapters(
             row = ensure_section_volume(row)
             normalized.append(row)
             if isinstance(children, list) and children:
-                visit(children, min(level + 1, 4), str(order))
+                visit(children, min(level + 1, 5), str(order))
 
     visit(chapters, 1)
     return normalized
+
+
+LEAF_SPLIT_TARGET_WORDS = 1200
+LEAF_SPLIT_THRESHOLD_WORDS = 1800
+LEAF_SPLIT_MAX_CHILDREN = 8
+
+
+def _writing_plan_target_words(chapter: dict[str, Any]) -> int:
+    metadata = chapter.get("metadata") if isinstance(chapter.get("metadata"), dict) else {}
+    plan = metadata.get("writing_plan") if isinstance(metadata.get("writing_plan"), dict) else {}
+    try:
+        return int(float(plan.get("target_words") or 0))
+    except (TypeError, ValueError):
+        return 0
+
+
+def _chapter_has_child(chapters: list[dict[str, Any]], order: str) -> bool:
+    prefix = f"{order}."
+    return any(str(item.get("order") or "").startswith(prefix) for item in chapters if str(item.get("order") or "") != order)
+
+
+def _leaf_split_topics(title: str, count: int) -> list[tuple[str, str]]:
+    normalized_title = title or "章节内容"
+    technical_bank = [
+        ("编制依据", "列明本节引用的招标文件、技术标准、规范规程和响应边界。"),
+        ("工程概况", "概述项目范围、建设条件、工作界面、关键约束和实施特点。"),
+        ("总体部署", "说明总体组织思路、阶段安排、资源投入和协同机制。"),
+        ("组织机构", "说明项目组织架构、岗位职责、沟通机制和管理闭环。"),
+        ("实施方法", "围绕关键工序、技术路线、施工流程和质量控制展开响应。"),
+        ("进度安排", "说明里程碑、工期控制、交叉作业协调和延误纠偏措施。"),
+        ("质量控制", "说明材料、过程、验收、资料归档和质量追溯措施。"),
+        ("安全环保", "说明安全生产、文明施工、环境保护、应急响应和风险管控。"),
+    ]
+    qualification_bank = [
+        ("响应要求", "概述本项资质、证书、人员或材料对招标资格条件的响应关系。"),
+        ("资料清单", "列出应提交的证明文件、复印件、签章和索引要求。"),
+        ("有效性说明", "说明证书有效期、主体一致性、业务范围和人工复核要点。"),
+        ("附件索引", "建立附件页码、文件名称、证明事项和待补充字段。"),
+    ]
+    commercial_bank = [
+        ("条款响应", "逐项响应合同、付款、履约、服务和偏离要求。"),
+        ("承诺事项", "整理工期、质量、服务、保密、廉政和合规承诺。"),
+        ("偏离说明", "说明无偏离或偏离事项、风险边界和人工复核点。"),
+        ("附件要求", "列明需配套提交的格式文件、签章文件和证明材料。"),
+    ]
+    title_text = normalized_title
+    if any(keyword in title_text for keyword in ["资格", "资质", "证书", "人员", "业绩"]):
+        bank = qualification_bank
+    elif any(keyword in title_text for keyword in ["商务", "合同", "付款", "承诺", "偏离"]):
+        bank = commercial_bank
+    else:
+        bank = technical_bank
+    topics: list[tuple[str, str]] = []
+    for index in range(count):
+        if index < len(bank):
+            topics.append(bank[index])
+        else:
+            topics.append((f"专项响应 {index + 1}", f"围绕「{normalized_title}」补充专项响应内容，避免大段一次性生成。"))
+    return topics
+
+
+def _mark_container_chapter(chapter: dict[str, Any], child_count: int) -> dict[str, Any]:
+    metadata = chapter.get("metadata") if isinstance(chapter.get("metadata"), dict) else {}
+    plan = metadata.get("writing_plan") if isinstance(metadata.get("writing_plan"), dict) else build_chapter_writing_plan(chapter)
+    container_plan = {
+        **plan,
+        "target_words": 0,
+        "min_words": 0,
+        "max_words": 0,
+        "suggested_pages": "结构汇总",
+        "generation_mode": "container",
+        "strategy": "本章节作为结构容器，不直接调用模型生成正文；正文由下级叶子小节分别生成后按目录合并导出。",
+    }
+    return {
+        **chapter,
+        "content": "",
+        "metadata": {
+            **metadata,
+            "section_role": "container",
+            "leaf_generation": False,
+            "leaf_split_child_count": child_count,
+            "writing_plan": container_plan,
+        },
+    }
+
+
+def _build_split_child(parent: dict[str, Any], child_index: int, child_count: int, topic: tuple[str, str]) -> dict[str, Any]:
+    title, purpose = topic
+    parent_title = parent.get("title") or "章节"
+    parent_order = str(parent.get("order") or "")
+    metadata = parent.get("metadata") if isinstance(parent.get("metadata"), dict) else {}
+    inherited_notes = list(parent.get("writing_notes") or [])
+    target_words = max(700, min(1400, int(round((_writing_plan_target_words(parent) or LEAF_SPLIT_TARGET_WORDS) / child_count / 50) * 50)))
+    child = {
+        "title": f"{parent_title} - {title}",
+        "purpose": purpose,
+        "priority": parent.get("priority") or "medium",
+        "order": f"{parent_order}.{child_index}",
+        "level": min(int(parent.get("level") or 1) + 1, 5),
+        "response_points": list(parent.get("response_points") or []),
+        "mapped_requirements": list(parent.get("mapped_requirements") or []),
+        "mapped_scoring_items": list(parent.get("mapped_scoring_items") or []),
+        "mapped_risks": list(parent.get("mapped_risks") or []),
+        "required_materials": list(parent.get("required_materials") or []),
+        "source_pages": list(parent.get("source_pages") or []),
+        "writing_notes": [
+            *inherited_notes[:3],
+            f"本小节由「{parent_title}」拆分生成，正文目标控制在 {target_words} 字以内，避免大章节长流卡死。",
+        ],
+        "metadata": {
+            **metadata,
+            "section_role": "leaf",
+            "leaf_generation": True,
+            "split_from_parent_title": parent_title,
+            "split_parent_order": parent_order,
+            "writing_plan": {
+                **(metadata.get("writing_plan") if isinstance(metadata.get("writing_plan"), dict) else {}),
+                "importance": parent.get("priority") or "medium",
+                "min_words": max(500, int(target_words * 0.7)),
+                "max_words": int(target_words * 1.25),
+                "target_words": target_words,
+                "suggested_pages": "1-2",
+                "generation_mode": "single_pass",
+                "strategy": f"围绕「{parent_title}」下的「{title}」独立成节生成，短段落、表格或清单优先，缺失事实信息使用【待补充】。",
+            },
+        },
+    }
+    return ensure_section_volume(child)
+
+
+def _expand_large_leaf_sections(chapters: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    expanded: list[dict[str, Any]] = []
+    order_set = {str(item.get("order") or "") for item in chapters}
+    for chapter in chapters:
+        order = str(chapter.get("order") or "")
+        if not order or _chapter_has_child(chapters, order):
+            expanded.append(chapter)
+            continue
+        target_words = _writing_plan_target_words(chapter)
+        if target_words < LEAF_SPLIT_THRESHOLD_WORDS:
+            metadata = chapter.get("metadata") if isinstance(chapter.get("metadata"), dict) else {}
+            expanded.append({
+                **chapter,
+                "metadata": {
+                    **metadata,
+                    "section_role": metadata.get("section_role") or "leaf",
+                    "leaf_generation": metadata.get("leaf_generation", True),
+                },
+            })
+            continue
+        child_count = max(2, min(LEAF_SPLIT_MAX_CHILDREN, (target_words + LEAF_SPLIT_TARGET_WORDS - 1) // LEAF_SPLIT_TARGET_WORDS))
+        expanded.append(_mark_container_chapter(chapter, child_count))
+        for child_index, topic in enumerate(_leaf_split_topics(str(chapter.get("title") or ""), child_count), start=1):
+            child_order = f"{order}.{child_index}"
+            if child_order in order_set:
+                continue
+            expanded.append(_build_split_child(chapter, child_index, child_count, topic))
+
+    for index, chapter in enumerate(expanded, start=1):
+        chapter["order_index"] = index
+    return expanded
 
 
 def _build_volume(
@@ -340,6 +501,8 @@ def _normalize_outline_structure(outline: dict[str, Any]) -> dict[str, Any]:
             for volume in normalized_volumes
         ]
         flat_chapters = _outline_chapters_from_volumes(normalized_volumes)
+
+    flat_chapters = _expand_large_leaf_sections(flat_chapters)
 
     for index, chapter in enumerate(flat_chapters, start=1):
         chapter["order_index"] = index
@@ -726,7 +889,8 @@ def generate_bid_outline(project_id: str) -> dict[str, Any]:
 
     ai_outline = _generate_outline_from_ai_or_rule(payload)
 
-    project_meta = analysis.get("project_meta") or {}
+    project_meta = _latest_project_meta(project_id, analysis)
+    project_meta["outline_locked"] = False
     project_meta["bid_outline"] = ai_outline
 
     updated = (
@@ -744,7 +908,7 @@ def generate_bid_outline(project_id: str) -> dict[str, Any]:
 
 
 def save_bid_outline(project_id: str, outline: dict[str, Any], analysis: dict[str, Any]) -> None:
-    project_meta = analysis.get("project_meta") or {}
+    project_meta = _latest_project_meta(project_id, analysis)
     project_meta["bid_outline"] = outline
 
     updated = (
@@ -756,6 +920,22 @@ def save_bid_outline(project_id: str, outline: dict[str, Any], analysis: dict[st
     )
     if not updated.data:
         raise RuntimeError("标书章节大纲写回 Supabase 失败")
+
+
+def _latest_project_meta(project_id: str, analysis: dict[str, Any]) -> dict[str, Any]:
+    rows = (
+        get_supabase_client()
+        .table("bid_analysis")
+        .select("project_meta")
+        .eq("project_id", project_id)
+        .limit(1)
+        .execute()
+        .data
+        or []
+    )
+    if rows:
+        return dict(rows[0].get("project_meta") or {})
+    return dict(analysis.get("project_meta") or {})
 
 
 def _stream_ordered_chapters(chapters: list[dict[str, Any]]) -> Iterator[dict[str, Any]]:

@@ -11,6 +11,8 @@
   - GET    /api/bidding/interpretations/<project_id>/section-generation-tasks/<task_id>                      查询指定批量生成任务
   - POST   /api/bidding/interpretations/<project_id>/section-generation-tasks                                创建批量生成任务
   - PATCH  /api/bidding/interpretations/<project_id>/section-generation-tasks/<task_id>/items/<section_id>   更新任务单章状态
+  - POST   /api/bidding/interpretations/<project_id>/section-generation-tasks/<task_id>/items/<section_id>/retry  重试单个章节
+  - POST   /api/bidding/interpretations/<project_id>/section-generation-tasks/<task_id>/resume              恢复失败/部分草稿章节
   - POST   /api/bidding/interpretations/<project_id>/section-generation-tasks/<task_id>/cancel               取消批量生成任务
   - DELETE /api/bidding/interpretations/<project_id>/sections/<section_id>                                   删除章节
 
@@ -35,7 +37,9 @@ from backend.db.supabase_repo import (
     get_outline_lock,
     list_bid_sections,
     reorder_bid_sections,
+    requeue_bid_generation_task_item,
     reset_bid_sections_generation,
+    resume_bid_generation_task,
     set_outline_lock,
     update_bid_generation_task_item,
     upsert_bid_section,
@@ -258,6 +262,60 @@ def update_section_generation_task_item_api(project_id, task_id, section_id):
     except Exception as e:
         logging.exception("更新批量章节生成任务失败: %s", project_id)
         return jsonify({'error': f'更新批量章节生成任务失败: {str(e)}'}), 500
+
+
+@bp.route('/interpretations/<project_id>/section-generation-tasks/<task_id>/items/<section_id>/retry', methods=['POST'])
+def retry_section_generation_task_item_api(project_id, task_id, section_id):
+    """重新排队并可立即调度单个章节 item。"""
+    try:
+        uuid.UUID(project_id)
+        uuid.UUID(task_id)
+        uuid.UUID(section_id)
+    except ValueError:
+        return jsonify({'error': 'project_id、task_id 或 section_id 不是合法 UUID。'}), 400
+
+    try:
+        payload = request.get_json(silent=True) or {}
+        task = requeue_bid_generation_task_item(
+            project_id,
+            task_id,
+            section_id,
+            reason=str(payload.get("reason") or "manual_retry"),
+            preserve_draft=bool(payload.get("preserveDraft", True)),
+        )
+        if payload.get("autoStart", True):
+            dispatch_section_generation_task(project_id, task_id)
+        return jsonify({"task": task})
+    except Exception as e:
+        logging.exception("重试章节生成任务失败: %s", project_id)
+        return jsonify({'error': f'重试章节生成任务失败: {str(e)}'}), 500
+
+
+@bp.route('/interpretations/<project_id>/section-generation-tasks/<task_id>/resume', methods=['POST'])
+def resume_section_generation_task_api(project_id, task_id):
+    """恢复失败、停止、过期或部分草稿的章节 item。"""
+    try:
+        uuid.UUID(project_id)
+        uuid.UUID(task_id)
+    except ValueError:
+        return jsonify({'error': 'project_id 或 task_id 不是合法 UUID。'}), 400
+
+    try:
+        payload = request.get_json(silent=True) or {}
+        raw_statuses = payload.get("statuses")
+        statuses = {str(item) for item in raw_statuses} if isinstance(raw_statuses, list) else None
+        task = resume_bid_generation_task(
+            project_id,
+            task_id,
+            statuses=statuses,
+            preserve_draft=bool(payload.get("preserveDraft", True)),
+        )
+        if payload.get("autoStart", True):
+            dispatch_section_generation_task(project_id, task_id)
+        return jsonify({"task": task})
+    except Exception as e:
+        logging.exception("恢复章节生成任务失败: %s", project_id)
+        return jsonify({'error': f'恢复章节生成任务失败: {str(e)}'}), 500
 
 
 @bp.route('/interpretations/<project_id>/section-generation-tasks/<task_id>/cancel', methods=['POST'])

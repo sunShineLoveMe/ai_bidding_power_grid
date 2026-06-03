@@ -41,6 +41,7 @@ import {
   getSectionGenerationTask,
   reorderBidSections,
   resetBidSectionsGeneration,
+  retrySectionGenerationTaskItem,
   runSemanticComplianceCheck,
   saveBidSection,
   saveBidLengthSettings,
@@ -89,6 +90,7 @@ type PersistedBatchTask = {
 
 const ACTIVE_BATCH_TASK_STATUSES = new Set<BatchTaskStatus>(['leased', 'running', 'generating', 'saving']);
 const TERMINAL_BATCH_TASK_STATUSES = new Set<BatchTaskStatus>(['done', 'failed', 'stopped', 'cancelled', 'expired', 'partial_generated']);
+const RETRIABLE_BATCH_TASK_STATUSES = new Set<BatchTaskStatus>(['failed', 'stopped', 'cancelled', 'expired', 'partial_generated']);
 
 const DEFAULT_LENGTH_SETTINGS: BidLengthSettings = {
   mode: 'pages',
@@ -762,13 +764,15 @@ export function BidEditorPage(): JSX.Element {
     [filteredChapters],
   );
   const scopedChapters = activeVolume === 'all' ? chapters : chapters.filter(chapter => matchesActiveVolume(chapter, activeVolume));
+  const scopedLeafChapters = scopedChapters.filter(chapter => isLeafChapter(chapter, chapters));
+  const allLeafChapters = chapters.filter(chapter => isLeafChapter(chapter, chapters));
   const matchText = keyword ? `${filteredChapters.length} / ${scopedChapters.length}` : `0 / ${scopedChapters.length}`;
-  const actualChars = scopedChapters.reduce((sum, chapter) => sum + (isChapterGenerated(chapter) ? chapterActualWords(chapter) : 0), 0);
-  const estimatedTotalChars = scopedChapters.reduce((sum, chapter) => (
+  const actualChars = scopedLeafChapters.reduce((sum, chapter) => sum + (isChapterGenerated(chapter) ? chapterActualWords(chapter) : 0), 0);
+  const estimatedTotalChars = scopedLeafChapters.reduce((sum, chapter) => (
     sum + (isChapterGenerated(chapter) ? chapterActualWords(chapter) : targetChapterWords(chapter))
   ), 0);
-  const technicalActualChars = chapters.filter(chapter => deliveryVolumeType(chapter) === 'technical').reduce((sum, chapter) => sum + (isChapterGenerated(chapter) ? chapterActualWords(chapter) : 0), 0);
-  const businessActualChars = chapters.filter(chapter => deliveryVolumeType(chapter) === 'business').reduce((sum, chapter) => sum + (isChapterGenerated(chapter) ? chapterActualWords(chapter) : 0), 0);
+  const technicalActualChars = allLeafChapters.filter(chapter => deliveryVolumeType(chapter) === 'technical').reduce((sum, chapter) => sum + (isChapterGenerated(chapter) ? chapterActualWords(chapter) : 0), 0);
+  const businessActualChars = allLeafChapters.filter(chapter => deliveryVolumeType(chapter) === 'business').reduce((sum, chapter) => sum + (isChapterGenerated(chapter) ? chapterActualWords(chapter) : 0), 0);
   const lengthGoalChars = activeVolume === 'technical'
     ? lengthSettings.technicalWords
     : activeVolume === 'business'
@@ -785,8 +789,8 @@ export function BidEditorPage(): JSX.Element {
       ? Math.max(0, Math.ceil(actualChars / WORDS_PER_PAGE.business))
       : Math.max(0, Math.ceil(technicalActualChars / WORDS_PER_PAGE.technical) + Math.ceil(businessActualChars / WORDS_PER_PAGE.business));
   const estimatedPages = Math.max(1, Math.ceil(estimatedTotalChars / 700));
-  const generatedCount = scopedChapters.filter(isChapterGenerated).length;
-  const generationProgress = scopedChapters.length ? Math.round((generatedCount / scopedChapters.length) * 10000) / 100 : 0;
+  const generatedCount = scopedLeafChapters.filter(isChapterGenerated).length;
+  const generationProgress = scopedLeafChapters.length ? Math.round((generatedCount / scopedLeafChapters.length) * 10000) / 100 : 0;
   const lengthProgress = lengthGoalChars ? Math.min(100, Math.round((actualChars / lengthGoalChars) * 10000) / 100) : 0;
   const complianceSummary = complianceReport?.summary || {
     metricName: '条款响应覆盖率',
@@ -1063,11 +1067,11 @@ export function BidEditorPage(): JSX.Element {
           </Space>
         </div>
         <div className="quality-dashboard-grid">
-          <Tooltip title="当前视图下已生成正文的章节数。章节状态为 generated、edited 或 completed，且正文非空时计入。">
+          <Tooltip title="当前视图下已生成正文的叶子小节数。父级结构容器不计入正文生成进度。">
             <article>
               <CheckCircle2 size={18} />
-              <span>已生成章节</span>
-              <strong>{generatedCount}/{scopedChapters.length}</strong>
+              <span>已生成小节</span>
+              <strong>{generatedCount}/{scopedLeafChapters.length}</strong>
             </article>
           </Tooltip>
           <Tooltip title="按当前视图下已生成章节正文去除空白后的字符数估算，用于判断标书厚度和扩写需求。">
@@ -1313,7 +1317,27 @@ export function BidEditorPage(): JSX.Element {
     return task?.status === 'failed' || task?.status === 'expired' || chapter.status === 'failed';
   }
 
+  function isChapterPartialGenerated(chapter: ChapterDraft): boolean {
+    return batchTasks[chapter.id]?.status === 'partial_generated';
+  }
+
   function chapterWordMeta(chapter: ChapterDraft): { label: string; tooltip: string; generated: boolean; failed: boolean } {
+    if (!isLeafChapter(chapter)) {
+      return {
+        label: '结构容器',
+        tooltip: '父级章节只负责目录结构和导出汇总，正文由下级叶子小节分别生成。',
+        generated: false,
+        failed: false,
+      };
+    }
+    if (isChapterPartialGenerated(chapter)) {
+      return {
+        label: '草稿待续写',
+        tooltip: '模型输出超时，系统已保存草稿。可点击“重试”继续生成。',
+        generated: false,
+        failed: false,
+      };
+    }
     if (isChapterFailed(chapter)) {
       return {
         label: '生成失败',
@@ -1387,7 +1411,7 @@ export function BidEditorPage(): JSX.Element {
   }
 
   function visibleBatchTask(chapter: ChapterDraft): BatchTask | undefined {
-    if (isChapterGenerated(chapter)) {
+    if (!isLeafChapter(chapter) || isChapterGenerated(chapter)) {
       return undefined;
     }
     return batchTasks[chapter.id];
@@ -1405,6 +1429,7 @@ export function BidEditorPage(): JSX.Element {
   }
 
   function isChapterGenerated(chapter: ChapterDraft): boolean {
+    if (!isLeafChapter(chapter)) return false;
     if (isChapterFailed(chapter)) return false;
     const status = chapter.status || '';
     if (!['generated', 'edited', 'completed'].includes(status)) return false;
@@ -1420,7 +1445,33 @@ export function BidEditorPage(): JSX.Element {
   }
 
   function needsBatchWriting(chapter: ChapterDraft): boolean {
-    return !isChapterGenerated(chapter) || isChapterUnderTarget(chapter);
+    return isLeafChapter(chapter) && (!isChapterGenerated(chapter) || isChapterUnderTarget(chapter));
+  }
+
+  function hasChildChapters(chapter: ChapterDraft, source = chapters): boolean {
+    return source.some(item => item.parent_id === chapter.id);
+  }
+
+  function isLeafChapter(chapter: ChapterDraft, source = chapters): boolean {
+    const metadata = chapter.metadata || {};
+    if (metadata.section_role === 'container' || metadata.leaf_generation === false) {
+      return false;
+    }
+    return !hasChildChapters(chapter, source);
+  }
+
+  function firstLeafDescendant(chapter: ChapterDraft, source = chapters): ChapterDraft | undefined {
+    const children = source.filter(item => item.parent_id === chapter.id);
+    for (const child of children) {
+      if (isLeafChapter(child, source)) {
+        return child;
+      }
+      const nested = firstLeafDescendant(child, source);
+      if (nested) {
+        return nested;
+      }
+    }
+    return undefined;
   }
 
   function downloadOutlineMarkdown(): void {
@@ -2157,6 +2208,17 @@ export function BidEditorPage(): JSX.Element {
       message.warning('请先选择需要生成正文的章节');
       return;
     }
+    if (!isLeafChapter(targetChapter)) {
+      const leaf = firstLeafDescendant(targetChapter);
+      if (!leaf) {
+        message.warning('当前章节是结构容器，且没有可生成的叶子小节');
+        return;
+      }
+      setSelectedId(leaf.id);
+      message.info('父级章节不直接生成正文，已切换到第一个叶子小节');
+      await generateCurrentSection(leaf, options);
+      return;
+    }
     if (batchGenerating) {
       message.warning('全文批量编写正在执行，请等待完成后再单章重写');
       return;
@@ -2462,6 +2524,54 @@ export function BidEditorPage(): JSX.Element {
     }
   }
 
+  async function retryBatchTaskItem(chapter: ChapterDraft): Promise<void> {
+    const taskId = persistedBatchTaskIdRef.current || persistedBatchTask?.id;
+    if (!data?.project?.id || !taskId) {
+      await generateCurrentSection(chapter);
+      return;
+    }
+    setMode('目录模式');
+    setBatchGenerating(true);
+    batchCancelRequestedRef.current = false;
+    updateBatchTask(chapter.id, {
+      status: 'queued',
+      percent: 0,
+      chars: 0,
+      targetWords: targetChapterWords(chapter),
+      message: '已重新排队',
+    });
+    try {
+      const task = await retrySectionGenerationTaskItem(data.project.id, taskId, chapter.id, {
+        autoStart: true,
+        preserveDraft: true,
+        reason: 'manual_retry_from_editor',
+      });
+      setPersistedBatchTask({ id: task.id, status: task.status });
+      persistedBatchTaskIdRef.current = task.id;
+      applyPersistedBatchTask(task);
+      const finalTask = await pollSectionGenerationTask(data.project.id, task.id);
+      await reloadProject(data.project.id);
+      applyPersistedBatchTask(finalTask);
+      if (finalTask.status === 'completed') {
+        message.success('章节重试生成已完成');
+      } else if (finalTask.status === 'partial_failed') {
+        message.warning('章节重试后仍保存为草稿，请复核或再次重试');
+      } else {
+        message.error('章节重试生成失败，已保留原正文或草稿');
+      }
+    } catch (error) {
+      const reason = error instanceof Error ? error.message : String(error);
+      updateBatchTask(chapter.id, {
+        status: 'failed',
+        percent: 100,
+        message: '重试失败',
+      });
+      message.error(`章节重试失败：${reason}`);
+    } finally {
+      setBatchGenerating(false);
+    }
+  }
+
   function stopCurrentSectionGeneration(): void {
     if (!sectionStreaming) {
       return;
@@ -2657,6 +2767,17 @@ export function BidEditorPage(): JSX.Element {
                       {plan.needs_case ? <Tag color="green">需业绩</Tag> : null}
                     </div>
                     <div className="outline-row-actions">
+                      {task?.status && RETRIABLE_BATCH_TASK_STATUSES.has(task.status) ? (
+                        <Button
+                          type="link"
+                          size="small"
+                          icon={<RefreshCw size={14} />}
+                          disabled={batchGenerating}
+                          onClick={() => void retryBatchTaskItem(chapter)}
+                        >
+                          重试
+                        </Button>
+                      ) : null}
                       <Button
                         type="link"
                         size="small"

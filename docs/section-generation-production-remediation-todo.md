@@ -15,8 +15,8 @@
 | P0 | 建立 worker lease 与 heartbeat | worker 重启或断线后可自动回收任务 | 后端，基础版已完成 |
 | P0 | 改造流式草稿保存与最终落盘边界 | 过程内容可恢复，最终正文必须有明确完成条件 | 后端 |
 | P0 | 加模型流墙钟超时和最后 token 超时 | 防止单章节无限占用 worker | 后端 / AI，基础版已完成 |
-| P0 | 补齐取消、恢复、重试语义 | 取消后旧 worker 不得继续覆盖状态 | 后端 |
-| P0 | 正文生成粒度改为叶子小节级 | 章/节作为结构容器，最小小节独立生成 | AI / 后端 / 前端 |
+| P0 | 补齐取消、恢复、重试语义 | 取消后旧 worker 不得继续覆盖状态 | 后端，基础版已完成 |
+| P0 | 正文生成粒度改为叶子小节级 | 章/节作为结构容器，最小小节独立生成 | AI / 后端 / 前端，基础版已完成 |
 | P1 | 前端改为任务事件/状态面板 | 用户能判断是真在跑、慢、失败还是卡死 | 前端 |
 | P1 | 增加可观测性与诊断日志 | 可定位每章耗时、首 token、末 token、保存点 | 后端 |
 | P1 | 清理服务层循环依赖 | Celery、API、脚本启动路径一致 | 后端 |
@@ -236,6 +236,24 @@ DeepSeek 流式调用出现过 10 分钟级延迟。只要连接持续有零星�
 
 ## P0-06 补齐取消、恢复、重试语义
 
+### 当前进展
+
+2026-06-03 已完成基础版整改：
+
+- 新增单章节 item 重试接口：`POST /api/bidding/interpretations/{project_id}/section-generation-tasks/{task_id}/items/{section_id}/retry`。
+- 新增批量任务恢复接口：`POST /api/bidding/interpretations/{project_id}/section-generation-tasks/{task_id}/resume`。
+- 重试时会把目标 item 重新置为 `queued`，清空旧 `attempt_id`、`worker_id`、`lease_expires_at`、`heartbeat_at`、保存时间与错误信息，从数据层使旧 worker/旧 attempt 失效。
+- 恢复任务时默认只恢复 `failed`、`partial_generated`、`stopped`、`cancelled`、`expired` 等可重试状态。
+- 前端目录行对 `failed`、`stopped`、`cancelled`、`expired`、`partial_generated` 增加“重试”入口；`partial_generated` 显示为“草稿待续写”，避免用户误判为已完成。
+- 真实环境已验证：对真实 `partial_generated` item 调用重试接口后，Celery 启动新 attempt，并通过真实 DeepSeek 流式调用生成完成，最终 item 进入 `done`。
+
+真实回归记录见：`docs/development/runs/run_20260603_retry_resume_cancel.md`。
+
+仍需后续加强：
+
+- Celery revoke 当前只做任务状态协议保护，尚未记录并强制撤销已投递的 Celery task id。
+- 前端还需要任务详情抽屉展示 `attempt_id`、`worker_id`、lease、heartbeat 和事件时间线。
+
 ### 现象
 
 取消任务后，如果旧 worker 还在流式输出，仍可能继续推进本地状态或尝试保存。当前取消更多是状态标记，不是严格的 worker 协议。
@@ -265,6 +283,19 @@ DeepSeek 流式调用出现过 10 分钟级延迟。只要连接持续有零星�
 - 取消、重试、恢复路径都有自动化测试。
 
 ## P0-07 正文生成粒度改为叶子小节级
+
+### 当前进展
+
+2026-06-03 已完成基础版整改：
+
+- 大纲规范化阶段会识别目标字数过大的叶子章节，前置拆成真实下级小节，而不是正文生成时临时隐藏拆分。
+- 被拆分的原章节标记为结构容器：`metadata.section_role=container`、`metadata.leaf_generation=false`，`writing_plan.generation_mode=container`，不再直接进入模型生成队列。
+- 新增下级小节标记为正文叶子：`metadata.section_role=leaf`、`metadata.leaf_generation=true`，目标字数控制在约 700-1400 字，`generation_mode=single_pass`。
+- 批量正文生成只选择叶子小节；父级结构容器不计入生成进度、不进入 Celery item 队列。
+- 单章生成如果点到父级容器，前端会自动切换到第一个叶子小节生成。
+- 后端 `create_bid_generation_task` 增加兜底过滤，即使旧前端或脚本传入父级章节，也不会把父级容器投递给 Celery。
+
+真实/本地回归记录见：`docs/development/runs/run_20260603_leaf_section_generation.md`。
 
 ### 现象
 

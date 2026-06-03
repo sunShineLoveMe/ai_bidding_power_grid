@@ -289,6 +289,33 @@ export async function cancelSectionGenerationTask(projectId: string, taskId: str
   return response.data.task;
 }
 
+export async function retrySectionGenerationTaskItem(
+  projectId: string,
+  taskId: string,
+  sectionId: string,
+  options?: { autoStart?: boolean; preserveDraft?: boolean; reason?: string },
+): Promise<SectionGenerationTask> {
+  const response = await apiClient.post(
+    `/api/bidding/interpretations/${projectId}/section-generation-tasks/${taskId}/items/${sectionId}/retry`,
+    options || undefined,
+    { skipGlobalLoading: true },
+  );
+  return response.data.task;
+}
+
+export async function resumeSectionGenerationTask(
+  projectId: string,
+  taskId: string,
+  options?: { autoStart?: boolean; preserveDraft?: boolean; statuses?: string[] },
+): Promise<SectionGenerationTask> {
+  const response = await apiClient.post(
+    `/api/bidding/interpretations/${projectId}/section-generation-tasks/${taskId}/resume`,
+    options || undefined,
+    { skipGlobalLoading: true },
+  );
+  return response.data.task;
+}
+
 export type BidExportTask = {
   id: string;
   project_id: string;
