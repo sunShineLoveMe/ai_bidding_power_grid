@@ -29,6 +29,12 @@ class LLMRetryableError(RuntimeError):
         self.retry_after = retry_after
 
 
+class LLMStreamTimeoutError(RuntimeError):
+    def __init__(self, code: str, message: str):
+        super().__init__(message)
+        self.code = code
+
+
 def _active_provider() -> str:
     return str(get_setting("ai_provider", os.getenv("AI_PROVIDER", "dashscope")) or "dashscope").lower()
 
@@ -82,6 +88,82 @@ def _stream_timeout():
         int(get_setting("stream_connect_timeout_seconds", 15)),
         int(get_setting("stream_read_timeout_seconds", 180)),
     )
+
+
+def _float_setting(name: str, default: float) -> float:
+    env_candidates = [
+        name.upper(),
+        f"BID_{name.upper()}",
+    ]
+    for env_name in env_candidates:
+        raw_env = os.getenv(env_name)
+        if raw_env is None:
+            continue
+        try:
+            return float(raw_env)
+        except (TypeError, ValueError):
+            logging.warning("忽略无效的超时配置 %s=%s", env_name, raw_env)
+    try:
+        return float(get_setting(name, default) or default)
+    except (TypeError, ValueError):
+        return default
+
+
+def _is_bid_section_stream(context: dict | None) -> bool:
+    stage = str((context or {}).get("stage") or "")
+    return stage.startswith("bid_section_")
+
+
+def _stream_wall_timeout_seconds(context: dict | None) -> float:
+    if not _is_bid_section_stream(context):
+        return 0.0
+    return max(5.0, _float_setting("section_stream_wall_timeout_seconds", 300.0))
+
+
+def _stream_idle_timeout_seconds(context: dict | None) -> float:
+    if not _is_bid_section_stream(context):
+        return 0.0
+    return max(3.0, _float_setting("section_stream_idle_timeout_seconds", 45.0))
+
+
+def _stream_request_timeout(context: dict | None = None) -> tuple[int, int]:
+    connect_timeout, read_timeout = _stream_timeout()
+    idle_timeout = _stream_idle_timeout_seconds(context)
+    if idle_timeout:
+        read_timeout = min(read_timeout, int(idle_timeout))
+    return connect_timeout, read_timeout
+
+
+def _raise_if_stream_budget_exceeded(context: dict | None, started_at: float, last_token_at: float) -> None:
+    now = time.time()
+    wall_timeout = _stream_wall_timeout_seconds(context)
+    if wall_timeout and now - started_at > wall_timeout:
+        raise LLMStreamTimeoutError(
+            "MODEL_STREAM_WALL_TIMEOUT",
+            f"模型流式输出超过单章节最大时长 {int(wall_timeout)} 秒，已停止继续等待。",
+        )
+    idle_timeout = _stream_idle_timeout_seconds(context)
+    if idle_timeout and now - last_token_at > idle_timeout:
+        raise LLMStreamTimeoutError(
+            "MODEL_STREAM_IDLE_TIMEOUT",
+            f"模型流式输出超过 {int(idle_timeout)} 秒没有新 token，已停止继续等待。",
+        )
+
+
+def _stream_timeout_error_from_exception(
+    exc: Exception,
+    context: dict | None,
+    last_token_at: float,
+) -> Exception:
+    if isinstance(exc, LLMStreamTimeoutError):
+        return exc
+    if _is_bid_section_stream(context) and isinstance(exc, (requests.exceptions.ReadTimeout, requests.exceptions.Timeout)):
+        idle_timeout = _stream_idle_timeout_seconds(context)
+        return LLMStreamTimeoutError(
+            "MODEL_STREAM_IDLE_TIMEOUT",
+            f"模型流式输出超过 {int(idle_timeout)} 秒没有新 token，已停止继续等待。",
+        )
+    return exc
 
 
 def _max_attempts() -> int:
@@ -159,6 +241,8 @@ def _raise_for_llm_status(response, provider_label: str):
 
 
 def _public_error(exc: Exception) -> Exception:
+    if isinstance(exc, LLMStreamTimeoutError):
+        return exc
     status_code = getattr(exc, "status_code", None)
     response = getattr(exc, "response", None)
     if response is not None:
@@ -371,14 +455,16 @@ def _stream_deepseek_api(messages, model=None, usage_context=None):
     last_usage = {}
     last_request_id = None
     started_at = time.time()
+    last_token_at = started_at
     attempts = _max_attempts()
 
     for attempt in range(1, attempts + 1):
         has_yielded = bool(output_parts)
         try:
-            with requests.post(url, headers=headers, json=data, stream=True, timeout=_stream_timeout()) as response:
+            with requests.post(url, headers=headers, json=data, stream=True, timeout=_stream_request_timeout(context)) as response:
                 _raise_for_llm_status(response, "DeepSeek")
                 for raw_line in response.iter_lines(decode_unicode=True):
+                    _raise_if_stream_budget_exceeded(context, started_at, last_token_at)
                     if not raw_line:
                         continue
                     line = raw_line.strip()
@@ -399,7 +485,9 @@ def _stream_deepseek_api(messages, model=None, usage_context=None):
                     if content:
                         output_parts.append(content)
                         has_yielded = True
+                        last_token_at = time.time()
                         yield content
+                _raise_if_stream_budget_exceeded(context, started_at, last_token_at)
             record_ai_usage_log(
                 provider="deepseek",
                 region="global",
@@ -425,6 +513,7 @@ def _stream_deepseek_api(messages, model=None, usage_context=None):
             )
             return
         except Exception as exc:
+            exc = _stream_timeout_error_from_exception(exc, context, last_token_at)
             retryable = _is_retryable_error(exc)
             can_retry = retryable and not has_yielded and attempt < attempts
             if can_retry:
@@ -451,6 +540,7 @@ def _stream_deepseek_api(messages, model=None, usage_context=None):
                 input_text=_messages_text(messages),
                 output_text="".join(output_parts),
                 success=False,
+                error_code=getattr(exc, "code", None),
                 error_message=str(exc),
                 metadata=_retry_metadata(context, attempt=attempt, retryable=retryable)
                 | {"provider": "deepseek", "base_url": _deepseek_base_url()},
@@ -580,14 +670,16 @@ def stream_dashscope_api(messages, model=None, usage_context=None):
     last_usage = {}
     last_request_id = None
     started_at = time.time()
+    last_token_at = started_at
     attempts = _max_attempts()
 
     for attempt in range(1, attempts + 1):
         has_yielded = bool(output_parts)
         try:
-            with requests.post(url, headers=headers, json=data, stream=True, timeout=_stream_timeout()) as response:
+            with requests.post(url, headers=headers, json=data, stream=True, timeout=_stream_request_timeout(context)) as response:
                 _raise_for_dashscope_status(response)
                 for raw_line in response.iter_lines(decode_unicode=True):
+                    _raise_if_stream_budget_exceeded(context, started_at, last_token_at)
                     if not raw_line:
                         continue
                     line = raw_line.strip()
@@ -611,7 +703,9 @@ def stream_dashscope_api(messages, model=None, usage_context=None):
                     if content:
                         output_parts.append(content)
                         has_yielded = True
+                        last_token_at = time.time()
                         yield content
+                _raise_if_stream_budget_exceeded(context, started_at, last_token_at)
             record_ai_usage_log(
                 provider="dashscope",
                 region="cn-beijing",
@@ -636,6 +730,7 @@ def stream_dashscope_api(messages, model=None, usage_context=None):
             )
             return
         except Exception as exc:
+            exc = _stream_timeout_error_from_exception(exc, context, last_token_at)
             retryable = _is_retryable_error(exc)
             can_retry = retryable and not has_yielded and attempt < attempts
             if can_retry:
@@ -662,6 +757,7 @@ def stream_dashscope_api(messages, model=None, usage_context=None):
                 input_text=_messages_text(messages),
                 output_text="".join(output_parts),
                 success=False,
+                error_code=getattr(exc, "code", None),
                 error_message=str(exc),
                 metadata=_retry_metadata(context, attempt=attempt, retryable=retryable),
             )

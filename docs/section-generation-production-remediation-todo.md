@@ -12,9 +12,9 @@
 | --- | --- | --- | --- |
 | P0 | 重构章节任务状态模型 | 彻底解决 running 卡死、幽灵任务、并发槽位被占用 | 后端 |
 | P0 | 拆分任务 item 独立表 | 支持章节级 lease、重试、恢复、审计 | 后端 / 数据库 |
-| P0 | 建立 worker lease 与 heartbeat | worker 重启或断线后可自动回收任务 | 后端 |
+| P0 | 建立 worker lease 与 heartbeat | worker 重启或断线后可自动回收任务 | 后端，基础版已完成 |
 | P0 | 改造流式草稿保存与最终落盘边界 | 过程内容可恢复，最终正文必须有明确完成条件 | 后端 |
-| P0 | 加模型流墙钟超时和最后 token 超时 | 防止单章节无限占用 worker | 后端 / AI |
+| P0 | 加模型流墙钟超时和最后 token 超时 | 防止单章节无限占用 worker | 后端 / AI，基础版已完成 |
 | P0 | 补齐取消、恢复、重试语义 | 取消后旧 worker 不得继续覆盖状态 | 后端 |
 | P0 | 正文生成粒度改为叶子小节级 | 章/节作为结构容器，最小小节独立生成 | AI / 后端 / 前端 |
 | P1 | 前端改为任务事件/状态面板 | 用户能判断是真在跑、慢、失败还是卡死 | 前端 |
@@ -110,6 +110,19 @@ JSON 数组不适合作为生产级队列 item 存储。它无法自然支持行
 
 ## P0-03 建立 worker lease、heartbeat 与过期回收
 
+### 当前进展
+
+2026-06-03 已完成基础版整改：
+
+- 新增 `bid_generation_task_items` 行级领取 RPC：`FOR UPDATE SKIP LOCKED` 领取 `queued` item，写入 `attempt`、`attempt_id`、`worker_id`、`lease_expires_at`、`heartbeat_at`。
+- Celery 调度器改为先领取 item，再投递单章任务，避免多个 worker 重复领取同一章节。
+- worker 生成期间按 `BID_SECTION_HEARTBEAT_INTERVAL_SECONDS` 刷新 heartbeat，默认 10 秒。
+- worker 在进度 flush、模型 chunk 回调、保存前、完成前均校验 lease owner，lease 失效后旧 worker 不再允许写入 `done` 或 `failed`。
+- 调度器每次补位前会回收过期 item，默认重入队。
+- 已写入 task event：`item_dispatched`、`heartbeat`、`lease_expired`、`final_saved` 等。
+
+真实回归记录见：`docs/development/runs/run_20260603_worker_lease_heartbeat.md`。
+
 ### 现象
 
 worker 重启、终端关闭、代码热重载后，前端仍可能看到章节“正在编写”。系统没有可靠机制判断该 worker 是否还活着。
@@ -174,6 +187,21 @@ worker 重启、终端关闭、代码热重载后，前端仍可能看到章节�
 - `draft_content` 不会被误展示为已完成的 `final_content`。
 
 ## P0-05 加模型流墙钟超时和最后 token 超时
+
+### 当前进展
+
+2026-06-03 已完成基础版整改：
+
+- 对 `bid_section_*` 流式模型调用增加单章节墙钟上限，默认 `section_stream_wall_timeout_seconds=300` 秒；也可用环境变量 `BID_SECTION_STREAM_WALL_TIMEOUT_SECONDS` 覆盖。
+- 对 `bid_section_*` 流式模型调用增加最后 token 空窗上限，默认 `section_stream_idle_timeout_seconds=45` 秒；也可用环境变量 `BID_SECTION_STREAM_IDLE_TIMEOUT_SECONDS` 覆盖。
+- 超时错误写入 `ai_usage_logs.error_code`，当前支持：
+  - `MODEL_STREAM_WALL_TIMEOUT`
+  - `MODEL_STREAM_IDLE_TIMEOUT`
+- 超时不再进入同步 fallback，避免“流式已超时，但 fallback 又继续占用 worker”。
+- Celery item 超时后进入 `partial_generated`，批量任务汇总为 `partial_failed`，并保留 `generated_content` / `draft_content`。
+- 章节表保留原正文，同时把 `metadata.generation_status`、`metadata.writing_status` 标记为 `partial_generated`，用于后续续写或人工复核。
+
+真实回归记录见：`docs/development/runs/run_20260603_model_stream_timeout.md`。
 
 ### 现象
 

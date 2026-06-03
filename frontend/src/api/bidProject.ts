@@ -197,7 +197,7 @@ export async function resetBidSectionsGeneration(projectId: string, clearContent
 export type SectionGenerationTaskItem = {
   section_id: string;
   title?: string;
-  status: 'queued' | 'leased' | 'running' | 'generating' | 'saving' | 'done' | 'failed' | 'stopped' | 'cancelled' | 'expired';
+  status: 'queued' | 'leased' | 'running' | 'generating' | 'saving' | 'done' | 'failed' | 'stopped' | 'cancelled' | 'expired' | 'partial_generated';
   percent?: number;
   chars?: number;
   target_words?: number;

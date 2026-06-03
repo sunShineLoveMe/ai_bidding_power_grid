@@ -1170,7 +1170,7 @@ def delete_bid_section(project_id: str, section_id: str) -> None:
 
 
 ACTIVE_GENERATION_ITEM_STATUSES = {"leased", "running", "generating", "saving"}
-TERMINAL_GENERATION_ITEM_STATUSES = {"done", "failed", "stopped", "cancelled", "expired"}
+TERMINAL_GENERATION_ITEM_STATUSES = {"done", "failed", "stopped", "cancelled", "expired", "partial_generated"}
 
 
 def _task_item_counts(items: list[dict[str, Any]]) -> dict[str, int]:
@@ -1181,6 +1181,8 @@ def _task_item_counts(items: list[dict[str, Any]]) -> dict[str, int]:
             counts["running"] += 1
         elif status in counts:
             counts[status] += 1
+        elif status == "partial_generated":
+            counts["failed"] += 1
         elif status in {"cancelled", "expired"}:
             counts["stopped"] += 1
         else:
@@ -1242,6 +1244,292 @@ def _generation_task_payload(
     }
 
 
+def _generation_task_item_row(project_id: str, task_id: str, item: dict[str, Any]) -> dict[str, Any]:
+    row = {
+        "task_id": task_id,
+        "project_id": project_id,
+        "section_id": item.get("section_id"),
+        "title": item.get("title"),
+        "order_index": _as_order_index(item.get("order_index"), 0) or None,
+        "volume_type": item.get("volume_type"),
+        "target_words": _as_order_index(item.get("target_words"), 0),
+        "status": item.get("status") or "queued",
+        "percent": _as_order_index(item.get("percent"), 0),
+        "chars": _as_order_index(item.get("chars"), 0),
+        "message": item.get("message"),
+        "error": item.get("error"),
+        "attempt": _as_order_index(item.get("attempt"), 0),
+        "attempt_id": item.get("attempt_id"),
+        "worker_id": item.get("worker_id"),
+        "lease_expires_at": item.get("lease_expires_at"),
+        "heartbeat_at": item.get("heartbeat_at"),
+        "first_token_at": item.get("first_token_at"),
+        "last_token_at": item.get("last_token_at"),
+        "draft_saved_at": item.get("draft_saved_at"),
+        "final_saved_at": item.get("final_saved_at"),
+        "saved_section_id": item.get("saved_section_id"),
+        "generated_content": item.get("generated_content") or "",
+        "draft_content": item.get("draft_content") or item.get("generated_content") or "",
+        "chunk_seq": _as_order_index(item.get("chunk_seq"), 0),
+        "chunk_events": item.get("chunk_events") if isinstance(item.get("chunk_events"), list) else [],
+        "started_at": item.get("started_at"),
+        "finished_at": item.get("finished_at"),
+    }
+    return {key: value for key, value in row.items() if value is not None}
+
+
+def _sync_generation_task_items_snapshot(task: dict[str, Any]) -> None:
+    items = task.get("items") if isinstance(task.get("items"), list) else []
+    if not items:
+        return
+    project_id = str(task.get("project_id") or "")
+    task_id = str(task.get("id") or "")
+    if not project_id or not task_id:
+        return
+    rows = [_generation_task_item_row(project_id, task_id, item) for item in items if item.get("section_id")]
+    if not rows:
+        return
+    try:
+        _with_supabase_write_retry(
+            lambda client: client.table("bid_generation_task_items").upsert(
+                rows,
+                on_conflict="task_id,section_id",
+            ).execute(),
+            label="同步章节生成任务 item 行",
+        )
+    except Exception:
+        logging.exception("同步 bid_generation_task_items 失败，保留 JSON 快照作为兼容回退: %s", task_id)
+
+
+def _event_type_for_generation_item_patch(patch: dict[str, Any]) -> str:
+    explicit = patch.get("_event_type")
+    if explicit:
+        return str(explicit)
+    status = str(patch.get("status") or "")
+    if status == "leased":
+        return "item_dispatched"
+    if status in {"running", "generating"}:
+        return "worker_started" if int(patch.get("percent") or 0) <= 2 else "progress_flushed"
+    if status == "saving":
+        return "saving"
+    if status == "done":
+        return "final_saved"
+    if status == "failed":
+        return "failed"
+    if status == "partial_generated":
+        return "partial_generated"
+    if status in {"stopped", "cancelled"}:
+        return "cancelled"
+    if status == "expired":
+        return "lease_expired"
+    return "item_updated"
+
+
+def _record_generation_task_event(
+    *,
+    project_id: str,
+    task_id: str,
+    section_id: str | None,
+    patch: dict[str, Any],
+) -> None:
+    event_type = _event_type_for_generation_item_patch(patch)
+    payload = {
+        key: value
+        for key, value in patch.items()
+        if key not in {"generated_content", "chunk_events", "_event_type"}
+    }
+    try:
+        item_rows = (
+            get_supabase_client()
+            .table("bid_generation_task_items")
+            .select("id")
+            .eq("task_id", task_id)
+            .eq("section_id", section_id)
+            .limit(1)
+            .execute()
+            .data
+            or []
+        ) if section_id else []
+        item_id = item_rows[0].get("id") if item_rows else None
+        event = {
+            "task_id": task_id,
+            "item_id": item_id,
+            "project_id": project_id,
+            "section_id": section_id,
+            "event_type": event_type,
+            "status": patch.get("status"),
+            "message": patch.get("message") or patch.get("error"),
+            "payload": payload,
+        }
+        get_supabase_client().table("bid_generation_task_events").insert(event).execute()
+    except Exception:
+        logging.exception("记录 bid_generation_task_events 失败，忽略事件写入: %s", task_id)
+
+
+def _sync_generation_task_item_after_update(
+    task: dict[str, Any],
+    section_id: str,
+    patch: dict[str, Any],
+) -> None:
+    try:
+        _sync_generation_task_items_snapshot(task)
+        _record_generation_task_event(
+            project_id=str(task.get("project_id") or ""),
+            task_id=str(task.get("id") or ""),
+            section_id=str(section_id) if section_id else None,
+            patch=patch,
+        )
+    except Exception:
+        logging.exception("同步章节生成任务 item/event 失败，保留主任务更新结果: %s", task.get("id"))
+
+
+def lease_bid_generation_task_items(
+    project_id: str,
+    task_id: str,
+    *,
+    limit: int,
+    worker_id: str,
+    lease_seconds: int = 900,
+) -> list[dict[str, Any]]:
+    response = _with_supabase_write_retry(
+        lambda client: client.rpc(
+            "lease_bid_generation_task_items",
+            {
+                "p_project_id": project_id,
+                "p_task_id": task_id,
+                "p_limit": int(limit),
+                "p_worker_id": worker_id,
+                "p_lease_seconds": int(lease_seconds),
+            },
+        ).execute(),
+        label="领取章节生成任务 item lease",
+    )
+    rows = response.data or []
+    for row in rows:
+        section_id = str(row.get("section_id") or "")
+        if not section_id:
+            continue
+        update_bid_generation_task_item(project_id, task_id, section_id, {
+            "status": "leased",
+            "percent": row.get("percent") or 1,
+            "message": row.get("message") or "已派发，等待 worker 开始编写",
+            "attempt": row.get("attempt"),
+            "attempt_id": row.get("attempt_id"),
+            "worker_id": row.get("worker_id"),
+            "lease_expires_at": row.get("lease_expires_at"),
+            "heartbeat_at": row.get("heartbeat_at"),
+        })
+    return rows
+
+
+def heartbeat_bid_generation_task_item(
+    project_id: str,
+    task_id: str,
+    section_id: str,
+    *,
+    attempt_id: str,
+    worker_id: str,
+    lease_seconds: int = 900,
+) -> dict[str, Any] | None:
+    response = _with_supabase_write_retry(
+        lambda client: client.rpc(
+            "heartbeat_bid_generation_task_item",
+            {
+                "p_project_id": project_id,
+                "p_task_id": task_id,
+                "p_section_id": section_id,
+                "p_attempt_id": attempt_id,
+                "p_worker_id": worker_id,
+                "p_lease_seconds": int(lease_seconds),
+            },
+        ).execute(),
+        label="刷新章节生成任务 item heartbeat",
+    )
+    rows = response.data or []
+    if not rows:
+        return None
+    row = rows[0]
+    update_bid_generation_task_item(project_id, task_id, section_id, {
+        "_event_type": "heartbeat",
+        "status": row.get("status"),
+        "message": row.get("message"),
+        "attempt": row.get("attempt"),
+        "attempt_id": row.get("attempt_id"),
+        "worker_id": row.get("worker_id"),
+        "lease_expires_at": row.get("lease_expires_at"),
+        "heartbeat_at": row.get("heartbeat_at"),
+    })
+    return row
+
+
+def expire_bid_generation_task_items(
+    project_id: str,
+    task_id: str,
+    *,
+    requeue: bool = True,
+) -> list[dict[str, Any]]:
+    response = _with_supabase_write_retry(
+        lambda client: client.rpc(
+            "expire_bid_generation_task_items",
+            {
+                "p_project_id": project_id,
+                "p_task_id": task_id,
+                "p_requeue": bool(requeue),
+            },
+        ).execute(),
+        label="回收过期章节生成任务 item lease",
+    )
+    rows = response.data or []
+    for row in rows:
+        section_id = str(row.get("section_id") or "")
+        if not section_id:
+            continue
+        update_bid_generation_task_item(project_id, task_id, section_id, {
+            "_event_type": "lease_expired",
+            "status": row.get("status"),
+            "percent": row.get("percent"),
+            "message": row.get("message"),
+            "attempt": row.get("attempt"),
+            "attempt_id": row.get("attempt_id"),
+            "worker_id": row.get("worker_id"),
+            "lease_expires_at": row.get("lease_expires_at"),
+            "heartbeat_at": row.get("heartbeat_at"),
+        })
+    return rows
+
+
+def generation_task_item_owner_matches(
+    project_id: str,
+    task_id: str,
+    section_id: str,
+    *,
+    attempt_id: str | None,
+    worker_id: str | None,
+) -> bool:
+    if not attempt_id or not worker_id:
+        return False
+    rows = (
+        get_supabase_client()
+        .table("bid_generation_task_items")
+        .select("attempt_id,worker_id,status")
+        .eq("project_id", project_id)
+        .eq("task_id", task_id)
+        .eq("section_id", section_id)
+        .limit(1)
+        .execute()
+        .data
+        or []
+    )
+    if not rows:
+        return False
+    row = rows[0]
+    return (
+        str(row.get("attempt_id") or "") == str(attempt_id)
+        and str(row.get("worker_id") or "") == str(worker_id)
+        and str(row.get("status") or "") in ACTIVE_GENERATION_ITEM_STATUSES
+    )
+
+
 def create_bid_generation_task(
     project_id: str,
     items: list[dict[str, Any]],
@@ -1264,7 +1552,15 @@ def create_bid_generation_task(
     )
     if not response.data:
         raise RuntimeError("Supabase bid_generation_tasks insert returned no data")
-    return response.data[0]
+    task = response.data[0]
+    _sync_generation_task_items_snapshot(task)
+    _record_generation_task_event(
+        project_id=str(task.get("project_id") or project_id),
+        task_id=str(task.get("id") or ""),
+        section_id=None,
+        patch={"_event_type": "task_created", "status": task.get("status"), "message": "批量章节生成任务已创建"},
+    )
+    return task
 
 
 def get_latest_bid_generation_task(project_id: str) -> dict[str, Any] | None:
@@ -1298,8 +1594,11 @@ def _derive_generation_task_status(items: list[dict[str, Any]], requested_status
     if requested_status in {"cancelled", "failed", "completed"}:
         return requested_status
     counts = _task_item_counts(items)
+    has_partial = any(str(item.get("status") or "") == "partial_generated" for item in items)
     if counts["running"] or counts["queued"]:
         return "running"
+    if has_partial:
+        return "partial_failed"
     if counts["failed"]:
         return "failed" if counts["done"] == 0 else "partial_failed"
     if counts["stopped"]:
@@ -1334,9 +1633,13 @@ def update_bid_generation_task_item(
         rows = response.data or []
         if not rows:
             raise RuntimeError("批量章节生成任务不存在或更新失败")
-        return rows[0]
+        task = rows[0]
+        _sync_generation_task_item_after_update(task, str(section_id), patch)
+        return task
 
-    return _update_bid_generation_task_item_legacy(project_id, task_id, section_id, patch)
+    task = _update_bid_generation_task_item_legacy(project_id, task_id, section_id, patch)
+    _sync_generation_task_item_after_update(task, str(section_id), patch)
+    return task
 
 
 def _update_bid_generation_task_item_legacy(
@@ -1373,6 +1676,16 @@ def _update_bid_generation_task_item_legacy(
                 "chunk_seq",
                 "chunk_events",
                 "last_chunk",
+                "attempt",
+                "attempt_id",
+                "worker_id",
+                "lease_expires_at",
+                "heartbeat_at",
+                "first_token_at",
+                "last_token_at",
+                "draft_saved_at",
+                "final_saved_at",
+                "draft_content",
             }
         })
         item["status"] = next_status
@@ -1447,7 +1760,15 @@ def cancel_bid_generation_task(project_id: str, task_id: str) -> dict[str, Any]:
     )
     if not response.data:
         raise RuntimeError("Supabase bid_generation_tasks cancel returned no data")
-    return response.data[0]
+    task = response.data[0]
+    _sync_generation_task_items_snapshot(task)
+    _record_generation_task_event(
+        project_id=project_id,
+        task_id=task_id,
+        section_id=None,
+        patch={"_event_type": "task_cancelled", "status": "cancelled", "message": "批量章节生成任务已取消"},
+    )
+    return task
 
 
 def create_bid_export_task(

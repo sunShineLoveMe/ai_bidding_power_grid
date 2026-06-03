@@ -17,8 +17,9 @@ from __future__ import annotations
 
 import logging
 import os
+import socket
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any
 
 from celery import group
@@ -29,7 +30,7 @@ from backend.tasks.celery_app import celery_app
 logger = logging.getLogger(__name__)
 
 ACTIVE_ITEM_STATUSES = {"leased", "running", "generating", "saving"}
-TERMINAL_ITEM_STATUSES = {"done", "failed", "stopped", "cancelled", "expired"}
+TERMINAL_ITEM_STATUSES = {"done", "failed", "stopped", "cancelled", "expired", "partial_generated"}
 
 
 class SectionGenerationSuperseded(Exception):
@@ -43,6 +44,26 @@ def _section_gen_concurrency() -> int:
     except (TypeError, ValueError):
         value = 3
     return max(1, value)
+
+
+def _section_lease_seconds() -> int:
+    try:
+        value = int(os.getenv("BID_SECTION_LEASE_SECONDS", "900"))
+    except (TypeError, ValueError):
+        value = 900
+    return max(30, value)
+
+
+def _section_heartbeat_interval() -> float:
+    try:
+        value = float(os.getenv("BID_SECTION_HEARTBEAT_INTERVAL_SECONDS", "10"))
+    except (TypeError, ValueError):
+        value = 10.0
+    return max(2.0, value)
+
+
+def _worker_id() -> str:
+    return f"celery:{socket.gethostname()}:{os.getpid()}"
 
 
 def _section_by_id(sections: list[dict], section_id: str) -> dict | None:
@@ -83,7 +104,7 @@ def _section_for_task_item(sections: list[dict], item: dict) -> dict | None:
 
 
 def _now_iso() -> str:
-    return datetime.utcnow().isoformat()
+    return datetime.now(timezone.utc).isoformat()
 
 
 def _task_metadata(task: dict[str, Any]) -> dict[str, Any]:
@@ -93,7 +114,7 @@ def _task_metadata(task: dict[str, Any]) -> dict[str, Any]:
 
 def _dispatch_next_sections(project_id: str, task_id: str) -> dict:
     """Top up a section-generation task to the configured concurrency window."""
-    from backend.db.supabase_repo import get_bid_generation_task, update_bid_generation_task_item
+    from backend.db.supabase_repo import expire_bid_generation_task_items, get_bid_generation_task, lease_bid_generation_task_items
 
     task = get_bid_generation_task(project_id, task_id)
     if not task:
@@ -101,46 +122,59 @@ def _dispatch_next_sections(project_id: str, task_id: str) -> dict:
     if task.get("status") == "cancelled":
         return {"task_id": task_id, "dispatched": 0, "reason": "cancelled"}
 
+    expired = expire_bid_generation_task_items(project_id, task_id, requeue=True)
+    if expired:
+        task = get_bid_generation_task(project_id, task_id) or task
+
     items = list(task.get("items") or [])
     running_count = sum(1 for item in items if item.get("status") in ACTIVE_ITEM_STATUSES)
     slots = max(0, _section_gen_concurrency() - running_count)
     if slots <= 0:
         return {"task_id": task_id, "dispatched": 0, "running": running_count}
 
-    queued_ids = [
-        str(item.get("section_id"))
-        for item in items
-        if str(item.get("section_id") or "") and item.get("status") == "queued"
-    ][:slots]
-    if not queued_ids:
+    leased_items = lease_bid_generation_task_items(
+        project_id,
+        task_id,
+        limit=slots,
+        worker_id=_worker_id(),
+        lease_seconds=_section_lease_seconds(),
+    )
+    if not leased_items:
         return {"task_id": task_id, "dispatched": 0, "running": running_count}
 
-    for section_id in queued_ids:
-        update_bid_generation_task_item(project_id, task_id, section_id, {
-            "status": "leased",
-            "percent": 1,
-            "message": "已派发，等待 worker 开始编写",
-        })
-
     job = group(
-        generate_one_section.s(project_id, task_id, section_id)
-        for section_id in queued_ids
+        generate_one_section.s(
+            project_id,
+            task_id,
+            str(item.get("section_id")),
+            str(item.get("attempt_id") or ""),
+            str(item.get("worker_id") or ""),
+        )
+        for item in leased_items
+        if item.get("section_id")
     )
     job.apply_async()
     logger.info(
         "section_generation_dispatched",
         extra={
             "task_id": task_id,
-            "dispatched": len(queued_ids),
+            "dispatched": len(leased_items),
             "running_before": running_count,
             "concurrency": _section_gen_concurrency(),
         },
     )
-    return {"task_id": task_id, "dispatched": len(queued_ids), "running": running_count + len(queued_ids)}
+    return {"task_id": task_id, "dispatched": len(leased_items), "running": running_count + len(leased_items)}
 
 
 @celery_app.task(name="bid.sections.generate_one", bind=True, max_retries=0)
-def generate_one_section(self, project_id: str, task_id: str, task_section_id: str) -> dict:
+def generate_one_section(
+    self,
+    project_id: str,
+    task_id: str,
+    task_section_id: str,
+    attempt_id: str | None = None,
+    worker_id: str | None = None,
+) -> dict:
     """生成单个章节正文。被协调任务以 group 形式并发派发。
 
     自身完整处理：重绑定章节、流式进度落库、保存、失败/取消状态。
@@ -148,10 +182,12 @@ def generate_one_section(self, project_id: str, task_id: str, task_section_id: s
     """
     from backend.db.supabase_repo import (
         get_bid_generation_task,
+        generation_task_item_owner_matches,
+        heartbeat_bid_generation_task_item,
         list_bid_sections,
         update_bid_generation_task_item,
     )
-    from backend.services.section_generation import SectionGenerationCancelled, generate_and_save_bid_section
+    from backend.services.section_generation import SectionGenerationCancelled, SectionGenerationTimeout, generate_and_save_bid_section
 
     with log_context(project_id=project_id, task_id=task_id):
         task = get_bid_generation_task(project_id, task_id)
@@ -168,6 +204,17 @@ def generate_one_section(self, project_id: str, task_id: str, task_section_id: s
             return {"section_id": task_section_id, "status": "skipped"}
         if item.get("status") in TERMINAL_ITEM_STATUSES:
             return {"section_id": task_section_id, "status": item.get("status")}
+        attempt_id = attempt_id or item.get("attempt_id")
+        worker_id = worker_id or item.get("worker_id")
+        if attempt_id or worker_id:
+            if not generation_task_item_owner_matches(
+                project_id,
+                task_id,
+                task_section_id,
+                attempt_id=str(attempt_id or ""),
+                worker_id=str(worker_id or ""),
+            ):
+                return {"section_id": task_section_id, "status": "superseded"}
 
         sections = list_bid_sections(project_id)
         chapter = _section_for_task_item(sections, item)
@@ -199,6 +246,8 @@ def generate_one_section(self, project_id: str, task_id: str, task_section_id: s
             "generated_content": "",
             "chunk_seq": 0,
             "chunk_events": [],
+            "attempt_id": attempt_id,
+            "worker_id": worker_id,
         })
 
         chapter_metadata = chapter.get("metadata") if isinstance(chapter.get("metadata"), dict) else {}
@@ -215,9 +264,43 @@ def generate_one_section(self, project_id: str, task_id: str, task_section_id: s
         chunk_seq = 0
         chunk_events: list[dict] = []
         last_flush_at = 0.0
+        last_heartbeat_at = 0.0
+        first_token_at: str | None = None
+
+        def assert_owner() -> None:
+            if not attempt_id or not worker_id:
+                return
+            if not generation_task_item_owner_matches(
+                project_id,
+                task_id,
+                section_id,
+                attempt_id=str(attempt_id),
+                worker_id=str(worker_id),
+            ):
+                raise SectionGenerationSuperseded("章节任务 lease owner 已变化")
+
+        def heartbeat(*, force: bool = False) -> None:
+            nonlocal last_heartbeat_at
+            if not attempt_id or not worker_id:
+                return
+            now = time.monotonic()
+            if not force and now - last_heartbeat_at < _section_heartbeat_interval():
+                return
+            row = heartbeat_bid_generation_task_item(
+                project_id,
+                task_id,
+                section_id,
+                attempt_id=str(attempt_id),
+                worker_id=str(worker_id),
+                lease_seconds=_section_lease_seconds(),
+            )
+            if not row:
+                raise SectionGenerationSuperseded("章节任务 lease 已失效")
+            last_heartbeat_at = now
 
         def flush_progress(*, force: bool = False, message: str = "正在编写") -> None:
             nonlocal pending_chunk, last_flush_at
+            heartbeat()
             if not force and not pending_chunk:
                 return
             now = time.monotonic()
@@ -231,6 +314,7 @@ def generate_one_section(self, project_id: str, task_id: str, task_section_id: s
             latest_item = next((it for it in latest_items if str(it.get("section_id")) == str(section_id)), None)
             if latest_item and latest_item.get("status") in TERMINAL_ITEM_STATUSES:
                 raise SectionGenerationSuperseded(f"章节任务已终态: {latest_item.get('status')}")
+            assert_owner()
             update_bid_generation_task_item(project_id, task_id, section_id, {
                 "status": "saving" if "保存" in message else "generating",
                 "percent": min(98, max(3, int((len(generated_content.replace("\n", "")) / max(int(item.get("target_words") or 800), 1)) * 100))),
@@ -240,12 +324,16 @@ def generate_one_section(self, project_id: str, task_id: str, task_section_id: s
                 "chunk_seq": chunk_seq,
                 "last_chunk": pending_chunk,
                 "chunk_events": chunk_events,
+                "first_token_at": first_token_at,
+                "last_token_at": _now_iso(),
+                "attempt_id": attempt_id,
+                "worker_id": worker_id,
             })
             pending_chunk = ""
             last_flush_at = now
 
         def on_event(event: dict) -> None:
-            nonlocal generated_content, pending_chunk, chunk_seq
+            nonlocal generated_content, pending_chunk, chunk_seq, first_token_at
             latest_task = get_bid_generation_task(project_id, task_id)
             if latest_task and latest_task.get("status") == "cancelled":
                 raise SectionGenerationCancelled("章节正文生成已取消")
@@ -253,11 +341,14 @@ def generate_one_section(self, project_id: str, task_id: str, task_section_id: s
             latest_item = next((it for it in latest_items if str(it.get("section_id")) == str(section_id)), None)
             if latest_item and latest_item.get("status") in TERMINAL_ITEM_STATUSES:
                 raise SectionGenerationSuperseded(f"章节任务已终态: {latest_item.get('status')}")
+            assert_owner()
             if event.get("type") != "chunk":
                 return
             content = str(event.get("content") or "")
             if not content:
                 return
+            if not first_token_at:
+                first_token_at = _now_iso()
             generated_content += content
             pending_chunk += content
             chunk_seq += 1
@@ -265,7 +356,9 @@ def generate_one_section(self, project_id: str, task_id: str, task_section_id: s
             flush_progress()
 
         try:
+            heartbeat(force=True)
             result = generate_and_save_bid_section(project_id, chapter, with_images=with_images, on_event=on_event)
+            assert_owner()
             update_bid_generation_task_item(project_id, task_id, section_id, {
                 "status": "saving",
                 "percent": 99,
@@ -273,8 +366,11 @@ def generate_one_section(self, project_id: str, task_id: str, task_section_id: s
                 "generated_content": generated_content,
                 "chunk_seq": chunk_seq,
                 "chunk_events": chunk_events,
+                "attempt_id": attempt_id,
+                "worker_id": worker_id,
             })
             flush_progress(force=True, message="正在保存")
+            assert_owner()
             update_bid_generation_task_item(project_id, task_id, section_id, {
                 "status": "done",
                 "percent": 100,
@@ -284,6 +380,11 @@ def generate_one_section(self, project_id: str, task_id: str, task_section_id: s
                 "generated_content": generated_content,
                 "chunk_seq": chunk_seq,
                 "chunk_events": chunk_events,
+                "first_token_at": first_token_at,
+                "last_token_at": _now_iso(),
+                "final_saved_at": _now_iso(),
+                "attempt_id": attempt_id,
+                "worker_id": worker_id,
             })
             _dispatch_next_sections(project_id, task_id)
             return {"section_id": section_id, "status": "done"}
@@ -301,13 +402,56 @@ def generate_one_section(self, project_id: str, task_id: str, task_section_id: s
             logger.info("章节正文后台生成已由其它任务完成，当前 worker 退出", extra={"section_id": section_id})
             _dispatch_next_sections(project_id, task_id)
             return {"section_id": section_id, "status": "superseded"}
+        except SectionGenerationTimeout as exc:
+            logger.warning("章节正文模型流超时，已保留草稿", extra={"section_id": section_id, "error_code": exc.code})
+            if attempt_id and worker_id and not generation_task_item_owner_matches(
+                project_id,
+                task_id,
+                section_id,
+                attempt_id=str(attempt_id),
+                worker_id=str(worker_id),
+            ):
+                logger.info("章节生成超时回写被跳过：lease owner 已变化", extra={"section_id": section_id})
+                _dispatch_next_sections(project_id, task_id)
+                return {"section_id": section_id, "status": "superseded"}
+            partial_content = exc.partial_content or generated_content
+            update_bid_generation_task_item(project_id, task_id, section_id, {
+                "status": "partial_generated",
+                "percent": 100,
+                "chars": len(partial_content.replace("\n", "")),
+                "message": "模型输出超时，已保存草稿，待续写或人工复核。",
+                "error": f"{exc.code}: {str(exc)}",
+                "generated_content": partial_content,
+                "draft_content": partial_content,
+                "chunk_seq": chunk_seq,
+                "chunk_events": chunk_events,
+                "first_token_at": first_token_at,
+                "last_token_at": _now_iso(),
+                "draft_saved_at": _now_iso(),
+                "attempt_id": attempt_id,
+                "worker_id": worker_id,
+            })
+            _dispatch_next_sections(project_id, task_id)
+            return {"section_id": section_id, "status": "partial_generated", "error_code": exc.code}
         except Exception as exc:
             logger.exception("章节正文后台生成失败", extra={"section_id": section_id})
+            if attempt_id and worker_id and not generation_task_item_owner_matches(
+                project_id,
+                task_id,
+                section_id,
+                attempt_id=str(attempt_id),
+                worker_id=str(worker_id),
+            ):
+                logger.info("章节生成失败回写被跳过：lease owner 已变化", extra={"section_id": section_id})
+                _dispatch_next_sections(project_id, task_id)
+                return {"section_id": section_id, "status": "superseded"}
             update_bid_generation_task_item(project_id, task_id, section_id, {
                 "status": "failed",
                 "percent": 100,
                 "message": "章节正文后台生成失败，已保留原正文。",
                 "error": str(exc)[:1000],
+                "attempt_id": attempt_id,
+                "worker_id": worker_id,
             })
             _dispatch_next_sections(project_id, task_id)
             return {"section_id": section_id, "status": "failed"}

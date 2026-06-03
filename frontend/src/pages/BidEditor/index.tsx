@@ -72,7 +72,7 @@ type StreamingChildPlaceholder = {
   title: string;
 };
 
-type BatchTaskStatus = 'queued' | 'leased' | 'running' | 'generating' | 'saving' | 'done' | 'failed' | 'stopped' | 'cancelled' | 'expired';
+type BatchTaskStatus = 'queued' | 'leased' | 'running' | 'generating' | 'saving' | 'done' | 'failed' | 'stopped' | 'cancelled' | 'expired' | 'partial_generated';
 
 type BatchTask = {
   status: BatchTaskStatus;
@@ -88,7 +88,7 @@ type PersistedBatchTask = {
 };
 
 const ACTIVE_BATCH_TASK_STATUSES = new Set<BatchTaskStatus>(['leased', 'running', 'generating', 'saving']);
-const TERMINAL_BATCH_TASK_STATUSES = new Set<BatchTaskStatus>(['done', 'failed', 'stopped', 'cancelled', 'expired']);
+const TERMINAL_BATCH_TASK_STATUSES = new Set<BatchTaskStatus>(['done', 'failed', 'stopped', 'cancelled', 'expired', 'partial_generated']);
 
 const DEFAULT_LENGTH_SETTINGS: BidLengthSettings = {
   mode: 'pages',
@@ -405,7 +405,7 @@ export function BidEditorPage(): JSX.Element {
       return {
         ...chapter,
         content: taskItem.generated_content,
-        status: taskItem.status === 'done' ? 'generated' : taskItem.status === 'failed' ? 'failed' : 'generating',
+        status: taskItem.status === 'done' ? 'generated' : taskItem.status === 'failed' ? 'failed' : taskItem.status === 'partial_generated' ? 'draft' : 'generating',
       };
     }));
   }
@@ -1372,6 +1372,7 @@ export function BidEditorPage(): JSX.Element {
     if (status === 'generating') return '正在编写';
     if (status === 'saving') return '正在保存';
     if (status === 'done') return '已完成';
+    if (status === 'partial_generated') return '草稿已保存';
     if (status === 'stopped' || status === 'cancelled') return '已停止';
     if (status === 'expired') return '已过期';
     return '失败';
@@ -1381,6 +1382,7 @@ export function BidEditorPage(): JSX.Element {
     if (ACTIVE_BATCH_TASK_STATUSES.has(status)) return 'processing';
     if (status === 'done') return 'success';
     if (status === 'failed' || status === 'expired') return 'error';
+    if (status === 'partial_generated') return 'default';
     return 'default';
   }
 

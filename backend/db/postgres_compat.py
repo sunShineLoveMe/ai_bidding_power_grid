@@ -43,6 +43,9 @@ JSONB_COLUMNS = {
     ("ai_usage_logs", "metadata"),
     ("bid_generation_tasks", "items"),
     ("bid_generation_tasks", "metadata"),
+    ("bid_generation_task_items", "chunk_events"),
+    ("bid_generation_task_items", "metadata"),
+    ("bid_generation_task_events", "payload"),
     ("bid_export_tasks", "metadata"),
 }
 
@@ -351,6 +354,41 @@ class PostgresRpcQuery:
                 self.params.get("p_task_id"),
                 self.params.get("p_section_id"),
                 Jsonb(self.params.get("p_patch") or {}),
+            ]
+        elif self.name == "lease_bid_generation_task_items":
+            sql = (
+                "select * from public.lease_bid_generation_task_items("
+                "%s::uuid, %s::uuid, %s, %s, %s)"
+            )
+            params = [
+                self.params.get("p_project_id"),
+                self.params.get("p_task_id"),
+                self.params.get("p_limit"),
+                self.params.get("p_worker_id"),
+                self.params.get("p_lease_seconds"),
+            ]
+        elif self.name == "heartbeat_bid_generation_task_item":
+            sql = (
+                "select * from public.heartbeat_bid_generation_task_item("
+                "%s::uuid, %s::uuid, %s::uuid, %s::uuid, %s, %s)"
+            )
+            params = [
+                self.params.get("p_project_id"),
+                self.params.get("p_task_id"),
+                self.params.get("p_section_id"),
+                self.params.get("p_attempt_id"),
+                self.params.get("p_worker_id"),
+                self.params.get("p_lease_seconds"),
+            ]
+        elif self.name == "expire_bid_generation_task_items":
+            sql = (
+                "select * from public.expire_bid_generation_task_items("
+                "%s::uuid, %s::uuid, %s)"
+            )
+            params = [
+                self.params.get("p_project_id"),
+                self.params.get("p_task_id"),
+                self.params.get("p_requeue"),
             ]
         elif self.name == "match_knowledge_assets":
             sql = "select * from public.match_knowledge_assets(%s::vector, %s, %s, %s, %s)"

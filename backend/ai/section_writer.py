@@ -7,7 +7,7 @@ from backend.core.config import build_enterprise_context
 from backend.core.bid_volumes import asset_applicable_volumes, asset_matches_volume, section_volume_type, volume_generation_strategy, volume_name
 from backend.ai.bid_writing_plan import ensure_chapter_writing_plan
 from backend.db.supabase_repo import get_project_interpretation, list_knowledge_assets
-from backend.ai.qwen_client import call_dashscope_api, stream_dashscope_api
+from backend.ai.qwen_client import LLMStreamTimeoutError, call_dashscope_api, stream_dashscope_api
 from backend.core.config import get_stage_model
 
 
@@ -43,6 +43,14 @@ def estimate_bid_content_words(content: str) -> int:
     cjk_chars = re.findall(r"[\u4e00-\u9fff]", text)
     latin_words = re.findall(r"[A-Za-z0-9]+", re.sub(r"[\u4e00-\u9fff]", " ", text))
     return len(cjk_chars) + len(latin_words)
+
+
+def _is_stream_timeout_error(exc: Exception) -> bool:
+    return (
+        isinstance(exc, LLMStreamTimeoutError)
+        or str(getattr(exc, "code", "")) in {"MODEL_STREAM_WALL_TIMEOUT", "MODEL_STREAM_IDLE_TIMEOUT"}
+        or "MODEL_STREAM_" in str(exc)
+    )
 
 
 def _target_words(chapter: dict[str, Any]) -> int:
@@ -147,6 +155,10 @@ def _supporting_asset_score(asset: dict[str, Any], chapter: dict[str, Any], volu
 def _compact_supporting_assets(chapter: dict[str, Any], volume_type: str, limit: int = 6) -> str:
     try:
         assets = list_knowledge_assets()
+    except LLMStreamTimeoutError:
+        raise
+    except LLMStreamTimeoutError:
+        raise
     except Exception:
         return "- 企业资料候选读取失败，本节按招标解读和人工占位生成。"
 
@@ -458,7 +470,9 @@ def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dic
                 "type": "chunk",
                 "content": chunk,
             }
-    except Exception:
+    except Exception as exc:
+        if _is_stream_timeout_error(exc):
+            raise
         response = call_dashscope_api(
             [{"role": "user", "content": prompt}],
             model=get_stage_model("section_writing"),
@@ -519,7 +533,9 @@ def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dic
                     "type": "chunk",
                     "content": chunk,
                 }
-        except Exception:
+        except Exception as exc:
+            if _is_stream_timeout_error(exc):
+                raise
             try:
                 response = call_dashscope_api(
                     [{"role": "user", "content": supplement_prompt}],

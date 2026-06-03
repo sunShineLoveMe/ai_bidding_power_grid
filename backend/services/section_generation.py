@@ -10,6 +10,7 @@ import logging
 from collections.abc import Callable, Iterable
 from typing import Any
 
+from backend.ai.qwen_client import LLMStreamTimeoutError
 from backend.ai.section_writer import estimate_bid_content_words, stream_bid_section
 from backend.db.supabase_repo import (
     list_knowledge_assets,
@@ -26,6 +27,15 @@ ProgressCallback = Callable[[dict[str, Any]], None]
 
 class SectionGenerationCancelled(Exception):
     """Raised when a persisted generation task is cancelled by the user."""
+
+
+class SectionGenerationTimeout(Exception):
+    """Raised when a section stream exceeds wall-clock or idle-token budget."""
+
+    def __init__(self, *, code: str, message: str, partial_content: str):
+        super().__init__(message)
+        self.code = code
+        self.partial_content = partial_content
 
 
 def append_section_images(full_content: str, chapter: dict[str, Any], *, with_images: bool) -> str:
@@ -95,6 +105,37 @@ def mark_section_generation_failed(project_id: str, chapter: dict[str, Any], mes
         logging.exception("写入章节失败状态失败: %s", chapter.get("id"))
 
 
+def mark_section_generation_partial(
+    project_id: str,
+    chapter: dict[str, Any],
+    *,
+    message: str,
+    code: str,
+    partial_content: str,
+) -> None:
+    if not chapter.get("id"):
+        return
+    try:
+        update_bid_section_content(
+            project_id,
+            chapter["id"],
+            "",
+            "partial_generated",
+            chapter,
+            preserve_existing_content=True,
+            metadata_patch={
+                "generation_status": "partial_generated",
+                "writing_status": "partial_generated",
+                "writing_error": message,
+                "writing_error_code": code,
+                "draft_words": estimate_bid_content_words(partial_content),
+                "draft_chars": len(partial_content.replace("\n", "")),
+            },
+        )
+    except Exception:
+        logging.exception("写入章节部分生成状态失败: %s", chapter.get("id"))
+
+
 def generate_and_save_bid_section(
     project_id: str,
     chapter: dict[str, Any],
@@ -131,6 +172,26 @@ def generate_and_save_bid_section(
             saved_section = save_generated_section(project_id, chapter, full_content)
     except SectionGenerationCancelled:
         raise
+    except LLMStreamTimeoutError as exc:
+        code = str(getattr(exc, "code", None) or "MODEL_STREAM_TIMEOUT")
+        message = str(exc)
+        if on_event:
+            on_event({
+                "type": "timeout",
+                "code": code,
+                "message": message,
+                "partial_content": full_content,
+                "chars": len(full_content.replace("\n", "")),
+                "words": estimate_bid_content_words(full_content),
+            })
+        mark_section_generation_partial(
+            project_id,
+            chapter,
+            message=message,
+            code=code,
+            partial_content=full_content,
+        )
+        raise SectionGenerationTimeout(code=code, message=message, partial_content=full_content) from exc
     except Exception:
         if saved_section is None:
             mark_section_generation_failed(project_id, chapter, "章节正文后台生成失败，已保留原正文。")

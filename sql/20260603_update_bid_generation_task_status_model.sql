@@ -30,10 +30,20 @@ declare
     'chunk_seq',
     'chunk_events',
     'last_chunk',
-    'title'
+    'title',
+    'attempt',
+    'attempt_id',
+    'worker_id',
+    'lease_expires_at',
+    'heartbeat_at',
+    'first_token_at',
+    'last_token_at',
+    'draft_saved_at',
+    'final_saved_at',
+    'draft_content'
   ];
   v_active_statuses text[] := array['leased', 'running', 'generating', 'saving'];
-  v_terminal_statuses text[] := array['done', 'failed', 'stopped', 'cancelled', 'expired'];
+  v_terminal_statuses text[] := array['done', 'failed', 'stopped', 'cancelled', 'expired', 'partial_generated'];
   v_key text;
   v_next_status text;
   v_prev_status text;
@@ -42,6 +52,7 @@ declare
   v_done int := 0;
   v_failed int := 0;
   v_stopped int := 0;
+  v_partial int := 0;
   v_status text;
   v_item_status text;
   v_task_status text := p_patch->>'task_status';
@@ -103,6 +114,9 @@ begin
       v_running := v_running + 1;
     elsif v_item_status = 'done' then
       v_done := v_done + 1;
+    elsif v_item_status = 'partial_generated' then
+      v_failed := v_failed + 1;
+      v_partial := v_partial + 1;
     elsif v_item_status = 'failed' then
       v_failed := v_failed + 1;
     elsif v_item_status in ('stopped', 'cancelled', 'expired') then
@@ -116,6 +130,8 @@ begin
     v_status := 'cancelled';
   elsif v_running > 0 or v_queued > 0 then
     v_status := 'running';
+  elsif v_partial > 0 then
+    v_status := 'partial_failed';
   elsif v_failed > 0 and v_done > 0 then
     v_status := 'partial_failed';
   elsif v_failed > 0 then
