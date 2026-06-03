@@ -1,0 +1,286 @@
+{
+  "generated_at": "2026-06-03T02:40:20.042110+00:00",
+  "ok": true,
+  "base_url": "http://127.0.0.1:3012",
+  "timeout": 900,
+  "error": null,
+  "artifacts": {
+    "ready": {
+      "checks": {
+        "celery": {
+          "status": "ok",
+          "workers": 1
+        },
+        "database": {
+          "checks": {
+            "match_knowledge_assets": true,
+            "match_knowledge_chunks": true,
+            "vector": true
+          },
+          "status": "ok"
+        },
+        "model_config": {
+          "optional": {
+            "mineru_api_token": true
+          },
+          "required": {
+            "dashscope_api_key": true,
+            "deepseek_api_key": true
+          },
+          "status": "ok"
+        },
+        "redis": {
+          "host": "127.0.0.1",
+          "port": 16379,
+          "status": "ok"
+        },
+        "storage": {
+          "provider": "local",
+          "root": "storage",
+          "status": "ok"
+        }
+      },
+      "duration_ms": 2161,
+      "status": "ok"
+    },
+    "project_id": "a85a9c3e-0ad3-49c9-a702-661bc15fe775",
+    "file_id": "df326316-e84d-469b-8355-eccc6a223a1e",
+    "supabase_file_id": "410f46cd-306b-46f2-8897-7e1276da1f8a",
+    "sample_file": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/rag_seed/power_grid_resources/02_policy_regulations/03_必须招标的工程项目规定_a8122eb9.pdf",
+    "parse_status": {
+      "downloadRetryCount": 0,
+      "error": null,
+      "errorType": null,
+      "failureStage": null,
+      "fileId": "df326316-e84d-469b-8355-eccc6a223a1e",
+      "mineru": {
+        "artifacts": {
+          "content_list_path": "parsed_outputs/df326316-e84d-469b-8355-eccc6a223a1e/extract/0476f7ff-100c-4f21-bd60-255266a78036_content_list.json",
+          "download_info": {
+            "downloaded_bytes": 0,
+            "resume_enabled": true,
+            "resumed_from_bytes": 0,
+            "url_host": "cdn-mineru.openxlab.org.cn",
+            "used_curl_fallback": true,
+            "zip_size": 133896
+          },
+          "extract_dir": "parsed_outputs/df326316-e84d-469b-8355-eccc6a223a1e/extract",
+          "markdown_path": "parsed_outputs/df326316-e84d-469b-8355-eccc6a223a1e/extract/full.md",
+          "middle_path": "parsed_outputs/df326316-e84d-469b-8355-eccc6a223a1e/extract/layout.json",
+          "model_path": "parsed_outputs/df326316-e84d-469b-8355-eccc6a223a1e/extract/0476f7ff-100c-4f21-bd60-255266a78036_model.json",
+          "zip_path": "parsed_outputs/df326316-e84d-469b-8355-eccc6a223a1e/mineru_result.zip"
+        },
+        "batch_id": "7326351d-e148-417b-8724-e17112bcff08",
+        "data_id": "df326316-e84d-469b-8355-eccc6a223a1e",
+        "download_finished_at": "2026-06-03T02:38:20Z",
+        "download_info": {
+          "downloaded_bytes": 0,
+          "resume_enabled": true,
+          "resumed_from_bytes": 0,
+          "url_host": "cdn-mineru.openxlab.org.cn",
+          "used_curl_fallback": true,
+          "zip_size": 133896
+        },
+        "download_started_at": "2026-06-03T02:38:18Z",
+        "err_msg": "",
+        "extract_progress": null,
+        "file_name": "03_必须招标的工程项目规定_a8122eb9.pdf",
+        "full_zip_url": "https://cdn-mineru.openxlab.org.cn/pdf/2026-06-02/7ba9ca2a-2f9d-4bfe-9f94-d85b31be8bde.zip",
+        "indexed_source": "parsed_outputs/df326316-e84d-469b-8355-eccc6a223a1e/extract/full.md",
+        "mineru_state": "done",
+        "parse_recovery_started_at": "2026-06-03T02:38:08Z",
+        "parse_status": "indexed",
+        "parser": "mineru",
+        "project_id": "a85a9c3e-0ad3-49c9-a702-661bc15fe775",
+        "retryable": true,
+        "source_file": "uploads/c609c8c3-11be-40d1-9442-3aec95225bf2-03__a8122eb9.pdf",
+        "supabase_file_id": "410f46cd-306b-46f2-8897-7e1276da1f8a",
+        "supabase_ingest_result": {
+          "bid_file_id": "410f46cd-306b-46f2-8897-7e1276da1f8a",
+          "chapter_suggestions": 0,
+          "chunks": 1,
+          "content_blocks": 13,
+          "markdown_chars": 660,
+          "project_id": "a85a9c3e-0ad3-49c9-a702-661bc15fe775",
+          "requirements": 3,
+          "risks": 0,
+          "scoring_items": 0
+        },
+        "supabase_ingest_status": "done",
+        "updated_at": "2026-06-03T02:38:20Z",
+        "user_message": "后台解析任务未继续推进，系统正在自动恢复解析。"
+      },
+      "parseCompleted": true,
+      "parseStatus": "indexed",
+      "retryable": false,
+      "supabaseFile": {
+        "bucket": "tender-files",
+        "created_at": "2026-06-03T10:38:08.486586+08:00",
+        "file_hash": "a7e9ba76e5179dfba76686808756664d23c490d0c8b796736e87704083a36628",
+        "file_name": "03_必须招标的工程项目规定_a8122eb9.pdf",
+        "file_size": 127870,
+        "file_type": "pdf",
+        "id": "410f46cd-306b-46f2-8897-7e1276da1f8a",
+        "object_path": "a85a9c3e-0ad3-49c9-a702-661bc15fe775/092d4057b28a43989fe3e2925f5557d7.pdf",
+        "parse_status": "indexed",
+        "project_id": "a85a9c3e-0ad3-49c9-a702-661bc15fe775"
+      },
+      "userMessage": null
+    },
+    "outline_chapters": 31,
+    "section_id": "40ed4896-f7ff-4dc2-9568-b4226450bed8",
+    "section_generation_task_id": "87b1bb81-9034-46f5-9667-63d3f996a60a",
+    "compliance_rows": 3,
+    "compliance_summary": {
+      "covered": 0,
+      "highRiskMissing": 2,
+      "metricName": "条款响应覆盖率",
+      "missing": 3,
+      "partial": 0,
+      "percent": 0,
+      "scopeNote": "当前按完整投标文件统计；基于招标条款、评分项、风险项与当前章节映射/正文片段的响应追踪结果，不等同于最终 Word 标书合规结论。",
+      "total": 3,
+      "volumeName": "完整投标文件",
+      "volumeType": "all"
+    },
+    "docx_task_id": "18dc9798-412f-4f1b-99de-820b74d5bee8",
+    "docx_export": {
+      "created_at": "2026-06-03T10:40:11.978721+08:00",
+      "download_url": "/api/outputs/03_Bi_Xu_Zhao_Biao_De_Gong_Cheng_Xiang_Mu_Gui_Ding__a8122eb9/03_%E5%BF%85%E9%A1%BB%E6%8B%9B%E6%A0%87%E7%9A%84%E5%B7%A5%E7%A8%8B%E9%A1%B9%E7%9B%AE%E8%A7%84%E5%AE%9A_a8122eb9.docx",
+      "error_message": null,
+      "export_type": "docx",
+      "file_name": "03_必须招标的工程项目规定_a8122eb9.docx",
+      "file_path": "outputs/03_Bi_Xu_Zhao_Biao_De_Gong_Cheng_Xiang_Mu_Gui_Ding__a8122eb9/03_必须招标的工程项目规定_a8122eb9.docx",
+      "finished_at": "2026-06-03T02:40:18.566076+08:00",
+      "id": "18dc9798-412f-4f1b-99de-820b74d5bee8",
+      "message": "DOCX 已完成自动刷新，目录页码、页脚页码和总页数字段已重新保存。",
+      "metadata": {
+        "field_refresh": {
+          "enabled": true,
+          "input_path": "outputs/03_Bi_Xu_Zhao_Biao_De_Gong_Cheng_Xiang_Mu_Gui_Ding__a8122eb9/03_必须招标的工程项目规定_a8122eb9.docx",
+          "manual_refresh_required": false,
+          "output_path": "outputs/03_Bi_Xu_Zhao_Biao_De_Gong_Cheng_Xiang_Mu_Gui_Ding__a8122eb9/03_必须招标的工程项目规定_a8122eb9.docx",
+          "returncode": 0,
+          "size": 35580,
+          "soffice_bin": "/opt/homebrew/bin/soffice",
+          "status": "refreshed",
+          "stderr": "2026-06-03 10:40:18.521 soffice[41819:12315777] Task policy set failed: 4 ((os/kern) invalid argument)\n",
+          "stdout": "convert /var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-v_r7q8il/input/03_必须招标的工程项目规定_a8122eb9.docx as a Writer document -> /private/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-v_r7q8il/output/03_必须招标的工程项目规定_a8122eb9.docx using filter : Office Open XML Text\n",
+          "timeout_seconds": 180,
+          "tool": "libreoffice",
+          "user_message": "DOCX 已完成自动刷新，目录页码、页脚页码和总页数字段已重新保存。"
+        },
+        "image_conversion": {
+          "events": [],
+          "failed": 0,
+          "found": 0,
+          "inserted": 0,
+          "max_images": 24,
+          "skipped": 0
+        },
+        "image_selection": {
+          "asset_candidates": 0,
+          "enabled": false,
+          "manifest": [],
+          "max_total": 36,
+          "selected": 0,
+          "warnings": []
+        },
+        "requested_from": "bid_editor",
+        "snapshot_section_count": 0,
+        "used_editor_snapshot": false,
+        "with_images": false
+      },
+      "progress": 100,
+      "project_id": "a85a9c3e-0ad3-49c9-a702-661bc15fe775",
+      "project_name": "03_必须招标的工程项目规定_a8122eb9",
+      "scope": "full",
+      "section_id": null,
+      "started_at": "2026-06-03T02:40:11.987174+08:00",
+      "status": "completed",
+      "updated_at": "2026-06-03T10:40:18.569379+08:00",
+      "volume_type": null,
+      "with_images": false
+    }
+  },
+  "steps": [
+    {
+      "name": "check_ready",
+      "ok": true,
+      "detail": "status=ok checks=5",
+      "elapsed_ms": 2171
+    },
+    {
+      "name": "login",
+      "ok": true,
+      "detail": "user=smoke-20260602-2230",
+      "elapsed_ms": 90
+    },
+    {
+      "name": "identify_user",
+      "ok": true,
+      "detail": "userId=674bb5eb-ef67-4e31-8230-f7102f9e29b5",
+      "elapsed_ms": 7
+    },
+    {
+      "name": "upload_tender",
+      "ok": true,
+      "detail": "projectId=a85a9c3e-0ad3-49c9-a702-661bc15fe775 fileId=df326316-e84d-469b-8355-eccc6a223a1e supabaseFileId=410f46cd-306b-46f2-8897-7e1276da1f8a",
+      "elapsed_ms": 35
+    },
+    {
+      "name": "wait_parse_completed",
+      "ok": true,
+      "detail": "parseStatus=indexed parser=mineru",
+      "elapsed_ms": 12091
+    },
+    {
+      "name": "query_interpretation",
+      "ok": true,
+      "detail": "hasAnalysis=True",
+      "elapsed_ms": 32
+    },
+    {
+      "name": "generate_ai_report",
+      "ok": true,
+      "detail": "ok",
+      "elapsed_ms": 61590
+    },
+    {
+      "name": "generate_outline",
+      "ok": true,
+      "detail": "chapters=31",
+      "elapsed_ms": 1350
+    },
+    {
+      "name": "list_sections",
+      "ok": true,
+      "detail": "sections=31",
+      "elapsed_ms": 8
+    },
+    {
+      "name": "generate_one_section",
+      "ok": true,
+      "detail": "sectionId=40ed4896-f7ff-4dc2-9568-b4226450bed8 taskId=87b1bb81-9034-46f5-9667-63d3f996a60a",
+      "elapsed_ms": 48351
+    },
+    {
+      "name": "run_compliance_check",
+      "ok": true,
+      "detail": "rows=3 coverage=None",
+      "elapsed_ms": 39
+    },
+    {
+      "name": "create_docx_export",
+      "ok": true,
+      "detail": "taskId=18dc9798-412f-4f1b-99de-820b74d5bee8",
+      "elapsed_ms": 15
+    },
+    {
+      "name": "wait_docx_export",
+      "ok": true,
+      "detail": "status=completed path=outputs/03_Bi_Xu_Zhao_Biao_De_Gong_Cheng_Xiang_Mu_Gui_Ding__a8122eb9/03_必须招标的工程项目规定_a8122eb9.docx",
+      "elapsed_ms": 8055
+    }
+  ]
+}

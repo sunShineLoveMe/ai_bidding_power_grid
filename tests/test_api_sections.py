@@ -59,6 +59,38 @@ class SectionApiTest(unittest.TestCase):
         self.assertEqual(response.get_json()["sections"][0]["order"], "1")
         reorder_mock.assert_called_once()
 
+    @patch("backend.api.sections.dispatch_section_generation_task")
+    @patch("backend.api.sections.create_bid_generation_task")
+    def test_create_section_generation_task_dispatches_celery(self, create_mock, dispatch_mock):
+        project_id = "11111111-1111-1111-1111-111111111111"
+        task_id = "22222222-2222-2222-2222-222222222222"
+        create_mock.return_value = {"id": task_id, "project_id": project_id, "status": "queued", "items": []}
+
+        response = self.client.post(
+            f"/api/bidding/interpretations/{project_id}/section-generation-tasks",
+            json={
+                "volumeType": "technical",
+                "withImages": False,
+                "items": [{"section_id": "33333333-3333-3333-3333-333333333333", "title": "施工组织设计"}],
+            },
+        )
+
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.get_json()["task"]["id"], task_id)
+        create_mock.assert_called_once()
+        dispatch_mock.assert_called_once_with(project_id, task_id)
+
+    @patch("backend.api.sections.get_bid_generation_task")
+    def test_get_section_generation_task_returns_task(self, get_mock):
+        project_id = "11111111-1111-1111-1111-111111111111"
+        task_id = "22222222-2222-2222-2222-222222222222"
+        get_mock.return_value = {"id": task_id, "project_id": project_id, "status": "running"}
+
+        response = self.client.get(f"/api/bidding/interpretations/{project_id}/section-generation-tasks/{task_id}")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json()["task"]["status"], "running")
+
     def test_download_docx_rejects_invalid_project_id(self):
         response = self.client.post("/api/bidding/interpretations/not-a-uuid/download-docx", json={})
 

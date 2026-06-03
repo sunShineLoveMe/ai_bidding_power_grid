@@ -1042,39 +1042,6 @@ def update_bid_section_content(
     if response.data:
         return response.data[0]
 
-    if section:
-        existing = _find_existing_section_for_generated_content(project_id, section)
-        if existing:
-            retry_payload = dict(payload)
-            if metadata_patch:
-                retry_payload["metadata"] = {**(existing.get("metadata") or {}), **metadata_patch}
-            retry = (
-                client.table("bid_sections")
-                .update(retry_payload)
-                .eq("id", existing["id"])
-                .eq("project_id", project_id)
-                .execute()
-            )
-            if retry.data:
-                return retry.data[0]
-
-        fallback_content = section.get("content") if preserve_existing_content else content
-        fallback_metadata = {**(section.get("metadata") or {}), **(metadata_patch or {})}
-        fallback = _section_payload(
-            project_id,
-            {**section, "id": None, "content": fallback_content or "", "status": status, "parent_id": None, "metadata": fallback_metadata},
-            _as_order_index(section.get("order_index") or section.get("order"), 1) - 1,
-        )
-        created = client.table("bid_sections").insert(fallback).execute()
-        if created.data:
-            logging.warning(
-                "章节 ID 失效，已按标题重建章节: project_id=%s old_section_id=%s title=%s",
-                project_id,
-                section_id,
-                section.get("title"),
-            )
-            return created.data[0]
-
     raise RuntimeError("章节不存在或保存失败")
 
 
@@ -1147,6 +1114,9 @@ def _normalize_generation_task_items(items: list[dict[str, Any]]) -> list[dict[s
             "error": item.get("error"),
             "started_at": item.get("started_at"),
             "finished_at": item.get("finished_at"),
+            "generated_content": item.get("generated_content") or "",
+            "chunk_seq": _as_order_index(item.get("chunk_seq"), 0),
+            "chunk_events": item.get("chunk_events") if isinstance(item.get("chunk_events"), list) else [],
         })
     return normalized
 
@@ -1266,7 +1236,20 @@ def update_bid_generation_task_item(
         item.update({
             key: value
             for key, value in patch.items()
-            if key in {"status", "percent", "chars", "message", "error", "target_words", "saved_section_id"}
+            if key in {
+                "section_id",
+                "status",
+                "percent",
+                "chars",
+                "message",
+                "error",
+                "target_words",
+                "saved_section_id",
+                "generated_content",
+                "chunk_seq",
+                "chunk_events",
+                "last_chunk",
+            }
         })
         item["status"] = next_status
         if next_status == "running" and not item.get("started_at"):
@@ -1283,6 +1266,9 @@ def update_bid_generation_task_item(
             "chars": _as_order_index(patch.get("chars"), 0),
             "message": patch.get("message"),
             "error": patch.get("error"),
+            "generated_content": patch.get("generated_content") or "",
+            "chunk_seq": _as_order_index(patch.get("chunk_seq"), 0),
+            "chunk_events": patch.get("chunk_events") if isinstance(patch.get("chunk_events"), list) else [],
         })
 
     counts = _task_item_counts(items)

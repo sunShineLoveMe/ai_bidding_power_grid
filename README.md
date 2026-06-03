@@ -19,6 +19,7 @@
 
 ### 2. 企业知识库驱动的正文生成
 章节正文生成时自动从企业资信库、产品库、历史标书中召回相关资料，注入企业画像（7 字段）和分册写作策略（技术标/商务标/资格/报价/附件各有不同约束），生成内容贴合企业实际。
+章节正文由 Celery worker 后台生成，并把微批 chunk 持久化到任务状态；前端轮询时实时回填编辑器，断线或刷新后可恢复中间已生成正文，取消生成时保留已展示内容。
 
 → [章节写作计划](docs/features/section-writing.md) · [分册设计](docs/features/volume-design.md)
 
@@ -116,7 +117,7 @@ sequenceDiagram
     FE->>API: 轮询导出任务并下载 DOCX
 ```
 
-生产与本地真实联调采用同一条主链路：**API 只负责接请求、校验、创建任务和查询状态；Celery worker 负责解析、MinerU 产物落库、DOCX 导出和大纲精炼等长任务**。因此 `/api/ready` 中 `checks.celery.status=ok` 是真实全链路冒烟的前置条件。
+生产与本地真实联调采用同一条主链路：**API 只负责接请求、校验、创建任务和查询状态；Celery worker 负责解析、MinerU 产物落库、大纲精炼、章节正文生成和 DOCX 导出等长任务**。因此 `/api/ready` 中 `checks.celery.status=ok` 是真实全链路冒烟的前置条件。
 
 → [文档中心](docs/README.md) · [完整架构说明](docs/architecture/overview.md)
 
@@ -163,7 +164,7 @@ cd frontend && npm run dev
 > 本项目为多人协作开发。为保证本地、测试、生产环境行为一致，**统一使用 gunicorn 启动后端**，不再推荐 `python main.py`（Flask 开发服务器）。
 > 原因：系统大量使用 SSE 流式响应（招标解读、大纲、正文、知识库问答都是长连接），Flask 自带的开发服务器是单进程、同步模型，多个流式连接会互相阻塞，且明确标注“不可用于生产”。gunicorn 的 gevent worker 才是和生产一致的运行模型。
 
-> 重要：上传解析、MinerU 产物落库、DOCX 导出和大纲精炼依赖 Celery worker。只启动后端和前端时，HTTP 可以响应，但解析/导出任务不会推进。真实全链路冒烟或本地联调必须同时启动 Redis 和 Celery worker。
+> 重要：上传解析、MinerU 产物落库、大纲精炼、章节正文生成和 DOCX 导出依赖 Celery worker。只启动后端和前端时，HTTP 可以响应，但解析、正文生成、导出等后台任务不会推进。真实全链路冒烟或本地联调必须同时启动 Redis 和 Celery worker。
 
 #### 1. 标准启动（推荐，所有人默认用这个）
 

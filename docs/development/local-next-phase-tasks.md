@@ -1,7 +1,7 @@
 # 本地下一阶段任务清单（云环境到位前）
 
 > 制定日期：2026-06-02  
-> 修订日期：2026-06-02  
+> 修订日期：2026-06-03  
 > 适用前提：**阿里云测试环境账号未到位；客户完整/正式私有资料未到位，但已有江西/山西样本资料完成本地 staging 解析、入库与召回评测。**  
 > 目标：在不依赖云资源的前提下，优先补齐技术标知识库、正文生成可靠性和回归保护，让后续客户资料与云资源到位后能高质量接入。  
 > 依据：`docs/development/maturity-assessment.md`、`docs/rag/customer-corpus-parse-runs.md`、`docs/rag/evaluation-records.md`、当前代码实际。
@@ -24,7 +24,7 @@
 | --- | --- | --- | --- |
 | P0 | PDF 国标/行标样板入库与批量方案 | 技术标知识库最大内容缺口，直接影响生成质量 | 客户提供正确标准 PDF 后，至少 3-5 份样板可召回正文条文；有 token 时批量完成 |
 | P0 | 全链路 HTTP 冒烟补全 | 为正文 Celery 化和后续改造建立回归护栏 | 一条命令覆盖上传、解析、解读、大纲、正文、合规、导出；支持 mock LLM/MinerU |
-| P0 | 章节正文生成迁入 Celery | 当前正文仍依赖 SSE 请求连接，浏览器关闭/网络抖动会丢进度 | 关闭浏览器后任务继续执行，重连/轮询可拿到结果，失败保稿不回归 |
+| P0 | 章节正文生成迁入 Celery | 已完成首版迁移，后续维护任务状态恢复和批量体验 | 关闭浏览器后任务继续执行，重连/轮询可拿到结果，失败保稿不回归 |
 | P1 | 重采污染的国网规章种子文件 | Base 评测 T17/T18 暴露源文件抓到网站导航/首页 | T17/T18 召回规章正文而非 gov.cn 导航页 |
 | P1 | `.doc/.xlsx` 解析链路通用化 | 客户样本脚本已跑通，但尚未成为通用上传/入库能力 | 新批次 `.doc/.xlsx` 可通过统一入口生成 manifest、文本/表格产物和结构化行 |
 | P1 | Base 测试集扩充 + 负样本 + MRR | 混合检索和 rerank 需要稳定评估基线 | 40-50 条测试集，含 `must_not_include`，输出 MRR/串扰率 |
@@ -100,21 +100,32 @@
 - **现状**：`scripts/smoke_key_flow.py` 已有最小冒烟，但尚未覆盖合规检查，也缺少适合本地 mock LLM/MinerU 的稳定回归模式。
 - **2026-06-02 进展**：已把规则合规检查接入 `scripts/smoke_key_flow.py`，主链路现在覆盖上传 → 解析 → 解读 → 大纲 → 正文 → 合规 → DOCX 导出；新增 `--skip-compliance` 跳过开关和脚本单测。脚本已增加 `/api/ready` 前置探测、实时阶段输出、Markdown/JSON 报告落盘、`--require-mineru` PDF 解析强校验开关。
 - **2026-06-02 真实冒烟状态**：首次真实脚本因未登录被 401 拦截；注册本地 smoke 账号后重跑，因未启动 Celery worker 卡在 `wait_parse_completed`。已补充 README 启动说明并启动 worker，`/api/ready` 显示 DB/Redis/模型/存储/Celery 全部 ok。随后使用 PDF 样例 + `--require-mineru` 完成真实全链路冒烟：上传 → MinerU 解析/落库 → 解读 → AI 报告 → 大纲 → 章节正文 → 合规 → DOCX 导出全部通过。报告：`docs/development/runs/run_20260602_224815_http_smoke_passed.md`。
+- **2026-06-03 真实冒烟状态**：B2 迁移后，使用 PDF 样例 + `--require-mineru` 再次完成真实全链路冒烟；章节正文阶段已改为创建后端任务并由 Celery worker 执行，状态从 `queued` → `running` → `completed`，最终合规检查和 DOCX 导出通过。报告：`docs/development/runs/run_20260603_104020_http_smoke_passed.md`。
 - **任务**：
   - 扩展/维护上传 → 解析 → 解读 → 大纲 → 正文 → 合规 → DOCX 导出的完整 HTTP 级回归。
   - 真实全链路优先：后端、前端、Celery worker、LLM、MinerU 可用时直接跑真实冒烟；mock 模式仅作为 CI/无外部依赖时的后备。
   - 输出清晰的阶段耗时、失败阶段和关键 ID。
 - **验收**：一条命令跑通主链路，后续可挂 CI 或云上部署后直接复验。
 
-### B2. 章节正文生成迁入 Celery 🔴
+### B2. 章节正文生成迁入 Celery ✅
 
-- **现状**：`backend/api/sections.py` 的 `/sections/stream` 仍在 SSE 请求内同步执行 `stream_bid_section(...)`。用户关闭浏览器或网络中断时，生成进度和结果存在丢失风险。DOCX、解析、知识库入库、大纲精炼已迁 Celery。
-- **任务**：
-  - 新增章节正文 Celery 任务，状态写入后端任务表或扩展现有 `bid_generation_tasks`。
-  - 前端从“请求内生成”改为“创建任务 + 轮询/订阅进度 + 恢复结果”。
-  - 保留当前失败保稿策略。
-- **验收**：关闭浏览器后任务继续执行；重连后可看到任务状态和最终正文；新增任务级测试和 HTTP 冒烟覆盖。
-- **风险**：SSE 与 Celery 结合需设计进度通道，建议先用轮询降低复杂度，再考虑 Redis pub/sub。
+- **2026-06-03 进展**：
+  - 新增 `backend.tasks.section_tasks.run_bid_section_generation`，任务名 `bid.sections.generate_task`，复用 `bid_generation_tasks` 记录章节任务状态。
+  - 新增 `backend/services/section_generation.py`，统一正文生成、图片拼接、落库和失败保稿逻辑，避免 HTTP 与 Celery 两套实现分叉。
+  - `POST /api/bidding/interpretations/<project_id>/section-generation-tasks` 默认自动投递 Celery；新增任务详情查询接口，前端单章/批量生成改为“创建任务 + 轮询状态 + 完成后刷新章节”。
+  - `scripts/smoke_key_flow.py` 的正文阶段已改为走章节任务接口，不再依赖浏览器 SSE 长连接。
+- **2026-06-03 实时体验修正**：
+  - 客户要求保留原先前端“生成中实时展示正文”的成交体验。当前方案调整为 Celery worker 在生成过程中按微批 chunk 回写 `generated_content`、`chunk_seq`、`chunk_events` 到 `bid_generation_tasks.items`。
+  - 前端轮询任务时不只更新状态，还会把 `generated_content` 实时写回当前章节编辑器；页面刷新或网络重连后，可通过 latest task 恢复中间已生成正文。
+  - 单章生成增加“停止生成”入口；取消任务会写入 `cancelled/stopped` 状态，worker 在 chunk/微批边界检查取消信号并停止后续生成，已生成内容保留在编辑器中。
+  - 当前采用 600ms HTTP 轮询 + 约 400ms/120 字符微批持久化，先满足可靠 catch-up 和实时可见；后续若要求逐字级体验，可在同一持久化基础上叠加 WebSocket/Redis PubSub 增量通道。
+- **验收结果**：
+  - 后端单测：`tests.test_api_sections` 已覆盖创建章节任务自动投递 Celery、任务详情查询。
+  - 全量后端测试：`python -m unittest discover -s tests -v`，109 条通过、2 条跳过。
+  - 前端构建：`npm run build` 通过。
+  - 真实 HTTP 冒烟：`docs/development/runs/run_20260603_104020_http_smoke_passed.md` 通过，章节正文任务 `87b1bb81-9034-46f5-9667-63d3f996a60a` 完成。
+  - 实时体验修正后已通过 `py_compile`、`tests.test_api_sections tests.test_smoke_key_flow_script` 和 `npm run build`；真实 LLM 联调需重启后端与 Celery worker 后补跑。
+- **后续维护**：当前首版采用轮询降低复杂度；如后续需要更细粒度 token 级进度，可在此基础上增加 Redis pub/sub 或任务事件流。
 
 ---
 

@@ -350,21 +350,57 @@ def generate_one_section(ctx: SmokeContext, project_id: str, section: dict[str, 
         "parent_id": section.get("parent_id"),
         "metadata": section.get("metadata") if isinstance(section.get("metadata"), dict) else {},
     }
-    events = _request_sse(
-        ctx,
-        "POST",
-        f"/api/bidding/interpretations/{project_id}/sections/stream",
-        json=chapter,
+    response = ctx.session.post(
+        ctx.url(f"/api/bidding/interpretations/{project_id}/section-generation-tasks"),
+        json={
+            "volumeType": "technical",
+            "withImages": False,
+            "metadata": {"source": "smoke_key_flow", "mode": "single_section"},
+            "items": [{
+                "section_id": chapter.get("id"),
+                "title": chapter.get("title"),
+                "order_index": section.get("order_index") or 1,
+                "volume_type": section.get("volume_type") or "technical",
+                "target_words": ((chapter.get("metadata") or {}).get("writing_plan") or {}).get("target_words") or 800,
+            }],
+        },
+        timeout=ctx.timeout,
     )
-    done = any(event == "done" for event, _data in events)
-    chunks = [data for event, data in events if event == "chunk" and data.get("content")]
-    if not done:
-        raise SmokeFailure("章节正文 SSE 没有 done 事件")
-    if not chunks:
-        raise SmokeFailure("章节正文 SSE 没有正文 chunk")
+    payload = _response_json(response)
+    task = payload.get("task") or {}
+    task_id = task.get("id")
+    if not task_id:
+        raise SmokeFailure(f"章节后台任务响应缺 task.id: {_short_json(payload)}")
+    task = wait_section_generation_task(ctx, project_id, str(task_id))
+    items = task.get("items") or []
+    item = next((row for row in items if str(row.get("section_id")) == str(chapter.get("id"))), None)
+    if task.get("status") not in {"completed", "partial_failed"} or (item and item.get("status") != "done"):
+        raise SmokeFailure(f"章节后台任务未完成: {_short_json(task)}")
     ctx.artifacts["section_id"] = chapter.get("id")
-    ctx.artifacts["section_chunks"] = len(chunks)
-    ctx.record("generate_one_section", started, f"sectionId={chapter.get('id')} chunks={len(chunks)}")
+    ctx.artifacts["section_generation_task_id"] = task_id
+    ctx.record("generate_one_section", started, f"sectionId={chapter.get('id')} taskId={task_id}")
+
+
+def wait_section_generation_task(ctx: SmokeContext, project_id: str, task_id: str) -> dict[str, Any]:
+    deadline = time.time() + ctx.timeout
+    last_task: dict[str, Any] = {}
+    last_status: str | None = None
+    while time.time() < deadline:
+        response = ctx.session.get(
+            ctx.url(f"/api/bidding/interpretations/{project_id}/section-generation-tasks/{task_id}"),
+            timeout=ctx.timeout,
+        )
+        payload = _response_json(response)
+        task = payload.get("task") or {}
+        last_task = task
+        current_status = str(task.get("status") or "unknown")
+        if current_status != last_status:
+            ctx.progress(f"wait_section_generation status={current_status}")
+            last_status = current_status
+        if current_status in {"completed", "failed", "partial_failed", "cancelled"}:
+            return task
+        time.sleep(2)
+    raise SmokeFailure(f"等待章节后台生成超时，最后状态: {_short_json(last_task)}")
 
 
 def run_compliance_check(ctx: SmokeContext, project_id: str) -> dict[str, Any]:

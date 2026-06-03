@@ -87,6 +87,7 @@ def _build_celery() -> Celery:
         "backend.tasks.export_tasks",
         "backend.tasks.parse_tasks",
         "backend.tasks.outline_tasks",
+        "backend.tasks.section_tasks",
     )
 
     return app

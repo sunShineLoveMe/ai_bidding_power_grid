@@ -204,6 +204,14 @@ export type SectionGenerationTaskItem = {
   message?: string;
   error?: string;
   saved_section_id?: string;
+  generated_content?: string;
+  chunk_seq?: number;
+  last_chunk?: string;
+  chunk_events?: Array<{
+    seq: number;
+    content: string;
+    created_at?: string;
+  }>;
 };
 
 export type SectionGenerationTask = {
@@ -231,11 +239,20 @@ export async function getLatestSectionGenerationTask(projectId: string): Promise
   return response.data.task || null;
 }
 
+export async function getSectionGenerationTask(projectId: string, taskId: string): Promise<SectionGenerationTask> {
+  const response = await apiClient.get(`/api/bidding/interpretations/${projectId}/section-generation-tasks/${taskId}`, {
+    skipGlobalLoading: true,
+  });
+  return response.data.task;
+}
+
 export async function createSectionGenerationTask(
   projectId: string,
   payload: {
     volumeType: string;
     withImages: boolean;
+    autoStart?: boolean;
+    metadata?: Record<string, unknown>;
     items: Array<{
       section_id: string;
       title?: string;

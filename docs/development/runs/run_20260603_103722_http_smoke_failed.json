@@ -1,0 +1,188 @@
+{
+  "generated_at": "2026-06-03T02:37:22.425663+00:00",
+  "ok": false,
+  "base_url": "http://127.0.0.1:3012",
+  "timeout": 900,
+  "error": "HTTPConnectionPool(host='127.0.0.1', port=3012): Max retries exceeded with url: /api/bidding/interpretations/6d54c1c3-b1c0-4f18-8fdd-6d8f9817500d/section-generation-tasks/956328e3-d033-4eaf-8394-6a712ed0baac (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=3012): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+  "artifacts": {
+    "ready": {
+      "checks": {
+        "celery": {
+          "status": "ok",
+          "workers": 1
+        },
+        "database": {
+          "checks": {
+            "match_knowledge_assets": true,
+            "match_knowledge_chunks": true,
+            "vector": true
+          },
+          "status": "ok"
+        },
+        "model_config": {
+          "optional": {
+            "mineru_api_token": true
+          },
+          "required": {
+            "dashscope_api_key": true,
+            "deepseek_api_key": true
+          },
+          "status": "ok"
+        },
+        "redis": {
+          "host": "127.0.0.1",
+          "port": 16379,
+          "status": "ok"
+        },
+        "storage": {
+          "provider": "local",
+          "root": "storage",
+          "status": "ok"
+        }
+      },
+      "duration_ms": 2276,
+      "status": "ok"
+    },
+    "project_id": "6d54c1c3-b1c0-4f18-8fdd-6d8f9817500d",
+    "file_id": "01830221-d5ea-4411-91c2-051706257eec",
+    "supabase_file_id": "3cbd995e-21ba-4885-abe3-aade5c27ab46",
+    "sample_file": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/rag_seed/power_grid_resources/02_policy_regulations/03_必须招标的工程项目规定_a8122eb9.pdf",
+    "parse_status": {
+      "downloadRetryCount": 0,
+      "error": null,
+      "errorType": null,
+      "failureStage": null,
+      "fileId": "01830221-d5ea-4411-91c2-051706257eec",
+      "mineru": {
+        "artifacts": {
+          "content_list_path": "parsed_outputs/01830221-d5ea-4411-91c2-051706257eec/extract/0476f7ff-100c-4f21-bd60-255266a78036_content_list.json",
+          "download_info": {
+            "downloaded_bytes": 0,
+            "resume_enabled": true,
+            "resumed_from_bytes": 0,
+            "url_host": "cdn-mineru.openxlab.org.cn",
+            "used_curl_fallback": true,
+            "zip_size": 133896
+          },
+          "extract_dir": "parsed_outputs/01830221-d5ea-4411-91c2-051706257eec/extract",
+          "markdown_path": "parsed_outputs/01830221-d5ea-4411-91c2-051706257eec/extract/full.md",
+          "middle_path": "parsed_outputs/01830221-d5ea-4411-91c2-051706257eec/extract/layout.json",
+          "model_path": "parsed_outputs/01830221-d5ea-4411-91c2-051706257eec/extract/0476f7ff-100c-4f21-bd60-255266a78036_model.json",
+          "zip_path": "parsed_outputs/01830221-d5ea-4411-91c2-051706257eec/mineru_result.zip"
+        },
+        "batch_id": "326ea819-f656-47f6-a747-6ad147ed3dc2",
+        "data_id": "01830221-d5ea-4411-91c2-051706257eec",
+        "download_finished_at": "2026-06-03T02:30:59Z",
+        "download_info": {
+          "downloaded_bytes": 0,
+          "resume_enabled": true,
+          "resumed_from_bytes": 0,
+          "url_host": "cdn-mineru.openxlab.org.cn",
+          "used_curl_fallback": true,
+          "zip_size": 133896
+        },
+        "download_started_at": "2026-06-03T02:30:57Z",
+        "err_msg": "",
+        "extract_progress": null,
+        "file_name": "03_必须招标的工程项目规定_a8122eb9.pdf",
+        "full_zip_url": "https://cdn-mineru.openxlab.org.cn/pdf/2026-06-02/7ba9ca2a-2f9d-4bfe-9f94-d85b31be8bde.zip",
+        "indexed_source": "parsed_outputs/01830221-d5ea-4411-91c2-051706257eec/extract/full.md",
+        "mineru_state": "done",
+        "parse_recovery_started_at": "2026-06-03T02:30:49Z",
+        "parse_status": "indexed",
+        "parser": "mineru",
+        "project_id": "6d54c1c3-b1c0-4f18-8fdd-6d8f9817500d",
+        "retryable": true,
+        "source_file": "uploads/5bd3b501-a610-40ae-a771-6cedbb5d30e9-03__a8122eb9.pdf",
+        "supabase_file_id": "3cbd995e-21ba-4885-abe3-aade5c27ab46",
+        "supabase_ingest_result": {
+          "bid_file_id": "3cbd995e-21ba-4885-abe3-aade5c27ab46",
+          "chapter_suggestions": 0,
+          "chunks": 1,
+          "content_blocks": 13,
+          "markdown_chars": 660,
+          "project_id": "6d54c1c3-b1c0-4f18-8fdd-6d8f9817500d",
+          "requirements": 3,
+          "risks": 0,
+          "scoring_items": 0
+        },
+        "supabase_ingest_status": "done",
+        "updated_at": "2026-06-03T02:30:59Z",
+        "user_message": "后台解析任务未继续推进，系统正在自动恢复解析。"
+      },
+      "parseCompleted": true,
+      "parseStatus": "indexed",
+      "retryable": false,
+      "supabaseFile": {
+        "bucket": "tender-files",
+        "created_at": "2026-06-03T10:30:49.394900+08:00",
+        "file_hash": "a7e9ba76e5179dfba76686808756664d23c490d0c8b796736e87704083a36628",
+        "file_name": "03_必须招标的工程项目规定_a8122eb9.pdf",
+        "file_size": 127870,
+        "file_type": "pdf",
+        "id": "3cbd995e-21ba-4885-abe3-aade5c27ab46",
+        "object_path": "6d54c1c3-b1c0-4f18-8fdd-6d8f9817500d/1afa202c07594b44b5561c782c5c076f.pdf",
+        "parse_status": "indexed",
+        "project_id": "6d54c1c3-b1c0-4f18-8fdd-6d8f9817500d"
+      },
+      "userMessage": null
+    },
+    "outline_chapters": 31
+  },
+  "steps": [
+    {
+      "name": "check_ready",
+      "ok": true,
+      "detail": "status=ok checks=5",
+      "elapsed_ms": 2288
+    },
+    {
+      "name": "login",
+      "ok": true,
+      "detail": "user=smoke-20260602-2230",
+      "elapsed_ms": 100
+    },
+    {
+      "name": "identify_user",
+      "ok": true,
+      "detail": "userId=0d7aebef-cca1-4b23-86a1-46ed89336d48",
+      "elapsed_ms": 8
+    },
+    {
+      "name": "upload_tender",
+      "ok": true,
+      "detail": "projectId=6d54c1c3-b1c0-4f18-8fdd-6d8f9817500d fileId=01830221-d5ea-4411-91c2-051706257eec supabaseFileId=3cbd995e-21ba-4885-abe3-aade5c27ab46",
+      "elapsed_ms": 32
+    },
+    {
+      "name": "wait_parse_completed",
+      "ok": true,
+      "detail": "parseStatus=indexed parser=mineru",
+      "elapsed_ms": 10110
+    },
+    {
+      "name": "query_interpretation",
+      "ok": true,
+      "detail": "hasAnalysis=True",
+      "elapsed_ms": 21
+    },
+    {
+      "name": "generate_ai_report",
+      "ok": true,
+      "detail": "ok",
+      "elapsed_ms": 53167
+    },
+    {
+      "name": "generate_outline",
+      "ok": true,
+      "detail": "chapters=31",
+      "elapsed_ms": 1328
+    },
+    {
+      "name": "list_sections",
+      "ok": true,
+      "detail": "sections=31",
+      "elapsed_ms": 6
+    }
+  ]
+}

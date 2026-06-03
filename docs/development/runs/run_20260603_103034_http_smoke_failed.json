@@ -1,0 +1,77 @@
+{
+  "generated_at": "2026-06-03T02:30:34.489835+00:00",
+  "ok": false,
+  "base_url": "http://127.0.0.1:3012",
+  "timeout": 900,
+  "error": "解析已完成但未确认走 MinerU: {\"downloadRetryCount\": 0, \"error\": \"Error -3 while decompressing data: invalid code lengths set\", \"errorType\": \"error\", \"failureStage\": null, \"fileId\": \"171ee504-d6f4-4e19-a7b0-51357bf6516c\", \"mineru\": {\"artifacts\": {\"content_list_path\": \"parsed_outputs/171ee504-d6f4-4e19-a7b0-51357bf6516c/extract/0476f7ff-100c-4f21-bd60-255266a78036_content_list.json\", \"download_info\": {\"downloaded_bytes\": 0, \"resume_enabled\": true, \"resumed_from_bytes\": 0, \"url_host\": \"cdn-mineru.openxlab.org.cn\", \"used_curl_f...",
+  "artifacts": {
+    "ready": {
+      "checks": {
+        "celery": {
+          "status": "ok",
+          "workers": 1
+        },
+        "database": {
+          "checks": {
+            "match_knowledge_assets": true,
+            "match_knowledge_chunks": true,
+            "vector": true
+          },
+          "status": "ok"
+        },
+        "model_config": {
+          "optional": {
+            "mineru_api_token": true
+          },
+          "required": {
+            "dashscope_api_key": true,
+            "deepseek_api_key": true
+          },
+          "status": "ok"
+        },
+        "redis": {
+          "host": "127.0.0.1",
+          "port": 16379,
+          "status": "ok"
+        },
+        "storage": {
+          "provider": "local",
+          "root": "storage",
+          "status": "ok"
+        }
+      },
+      "duration_ms": 2200,
+      "status": "ok"
+    },
+    "project_id": "61919c43-9a52-4afb-b054-749437c979df",
+    "file_id": "171ee504-d6f4-4e19-a7b0-51357bf6516c",
+    "supabase_file_id": "9dc3d35d-a1c7-438b-8842-cad01973807f",
+    "sample_file": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/rag_seed/power_grid_resources/02_policy_regulations/03_必须招标的工程项目规定_a8122eb9.pdf"
+  },
+  "steps": [
+    {
+      "name": "check_ready",
+      "ok": true,
+      "detail": "status=ok checks=5",
+      "elapsed_ms": 2209
+    },
+    {
+      "name": "login",
+      "ok": true,
+      "detail": "user=smoke-20260602-2230",
+      "elapsed_ms": 98
+    },
+    {
+      "name": "identify_user",
+      "ok": true,
+      "detail": "userId=e8800a37-d1c9-4d86-aaf0-82209ae71198",
+      "elapsed_ms": 6
+    },
+    {
+      "name": "upload_tender",
+      "ok": true,
+      "detail": "projectId=61919c43-9a52-4afb-b054-749437c979df fileId=171ee504-d6f4-4e19-a7b0-51357bf6516c supabaseFileId=9dc3d35d-a1c7-438b-8842-cad01973807f",
+      "elapsed_ms": 33
+    }
+  ]
+}

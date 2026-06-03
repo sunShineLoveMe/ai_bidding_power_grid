@@ -38,6 +38,7 @@ import {
   getInterpretation,
   getLatestInterpretation,
   getLatestSectionGenerationTask,
+  getSectionGenerationTask,
   reorderBidSections,
   resetBidSectionsGeneration,
   runSemanticComplianceCheck,
@@ -86,7 +87,6 @@ type PersistedBatchTask = {
   status: SectionGenerationTask['status'];
 };
 
-const BATCH_SECTION_CONCURRENCY = 3;
 const DEFAULT_LENGTH_SETTINGS: BidLengthSettings = {
   mode: 'pages',
   technicalPages: 80,
@@ -382,12 +382,38 @@ export function BidEditorPage(): JSX.Element {
   const persistedBatchTaskIdRef = useRef('');
   const batchTaskSyncAtRef = useRef<Map<string, number>>(new Map());
 
+  function applyTaskGeneratedContent(task: SectionGenerationTask | null): void {
+    if (!task?.items?.length) {
+      return;
+    }
+    const generatedBySection = new Map(
+      task.items
+        .filter(item => typeof item.generated_content === 'string' && item.generated_content.length > 0)
+        .map(item => [item.section_id, item]),
+    );
+    if (!generatedBySection.size) {
+      return;
+    }
+    setChapters(items => items.map(chapter => {
+      const taskItem = generatedBySection.get(chapter.id);
+      if (!taskItem?.generated_content) {
+        return chapter;
+      }
+      return {
+        ...chapter,
+        content: taskItem.generated_content,
+        status: taskItem.status === 'done' ? 'generated' : taskItem.status === 'failed' ? 'failed' : 'generating',
+      };
+    }));
+  }
+
   function applyPersistedBatchTask(task: SectionGenerationTask | null, sourceChapters: ChapterDraft[] = chapters): void {
     if (!task?.id || !Array.isArray(task.items) || !task.items.length) {
       setPersistedBatchTask(null);
       persistedBatchTaskIdRef.current = '';
       return;
     }
+    applyTaskGeneratedContent(task);
     const generatedIds = new Set(sourceChapters.filter(isChapterGenerated).map(chapter => chapter.id));
     const activeItems = task.items.filter(item => {
       if (generatedIds.has(item.section_id) && (item.status === 'queued' || item.status === 'running')) {
@@ -405,6 +431,10 @@ export function BidEditorPage(): JSX.Element {
     setPersistedBatchTask({ id: task.id, status: task.status });
     persistedBatchTaskIdRef.current = task.id;
     setBatchTasks(nextTasks);
+    const runningItem = task.items.find(item => item.status === 'running');
+    if (runningItem && (batchGenerating || sectionStreaming)) {
+      setSelectedId(runningItem.section_id);
+    }
   }
 
   async function refreshLatestBatchTask(projectId: string, sourceChapters?: ChapterDraft[]): Promise<void> {
@@ -414,6 +444,20 @@ export function BidEditorPage(): JSX.Element {
     } catch (error) {
       console.warn('恢复批量章节生成任务失败', error);
     }
+  }
+
+  async function pollSectionGenerationTask(projectId: string, taskId: string): Promise<SectionGenerationTask> {
+    const maxAttempts = 450;
+    let latest: SectionGenerationTask | null = null;
+    for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+      latest = await getSectionGenerationTask(projectId, taskId);
+      applyPersistedBatchTask(latest);
+      if (['completed', 'failed', 'partial_failed', 'cancelled'].includes(latest.status)) {
+        return latest;
+      }
+      await new Promise(resolve => window.setTimeout(resolve, 600));
+    }
+    throw new Error('章节正文后台任务仍在处理中，请稍后刷新任务状态。');
   }
 
   function complianceVolumeParam(volume: VolumeType = activeVolume): string | undefined {
@@ -2109,6 +2153,7 @@ export function BidEditorPage(): JSX.Element {
     if (!options?.preserveMode) {
       setMode('正文模式');
     }
+    batchCancelRequestedRef.current = false;
     setSelectedId(targetChapter.id);
     setBatchTasks(tasks => {
       const next = { ...tasks };
@@ -2119,21 +2164,47 @@ export function BidEditorPage(): JSX.Element {
     setStreamText(`正在生成章节正文：${targetChapter.title || '未命名章节'}`);
     const originalContent = targetChapter.content || '';
     setChapters(items => items.map(item => item.id === targetChapter.id ? { ...item, status: 'generating' } : item));
+    updateBatchTask(targetChapter.id, {
+      status: 'queued',
+      percent: 0,
+      chars: 0,
+      targetWords: targetChapterWords(targetChapter),
+      message: '后台任务排队中',
+    });
 
     try {
-      await streamSectionContent(targetChapter, {
-        onStart: title => {
-          setStreamText(`AI 正在撰写：${title || targetChapter.title || '当前章节'}`);
-        },
-        onDone: () => {
-          setStreamText('章节正文生成完成，可继续人工编辑。');
-          setChapters(items => items.map(item => item.id === targetChapter.id ? { ...item, status: 'generated' } : item));
-          setBatchTasks(tasks => {
-            const next = { ...tasks };
-            delete next[targetChapter.id];
-            return next;
-          });
-        },
+      const task = await createSectionGenerationTask(data.project.id, {
+        volumeType: deliveryVolumeType(targetChapter),
+        withImages,
+        metadata: { mode: 'single_section', source: 'bid_editor' },
+        items: [{
+          section_id: targetChapter.id,
+          title: targetChapter.title,
+          order_index: targetChapter.order_index || chapters.findIndex(item => item.id === targetChapter.id) + 1,
+          volume_type: deliveryVolumeType(targetChapter),
+          target_words: targetChapterWords(targetChapter),
+        }],
+      });
+      setPersistedBatchTask({ id: task.id, status: task.status });
+      persistedBatchTaskIdRef.current = task.id;
+      setStreamText('章节正文已提交后台生成，关闭页面也会继续执行。');
+      const finalTask = await pollSectionGenerationTask(data.project.id, task.id);
+      if (finalTask.status === 'cancelled') {
+        setStreamText('章节正文生成已停止，已生成内容保留在编辑器中。');
+        message.info('章节正文生成已停止');
+        return;
+      }
+      if (finalTask.status === 'failed' || finalTask.status === 'partial_failed') {
+        const failed = finalTask.items.find(item => item.section_id === targetChapter.id && item.status === 'failed');
+        throw new Error(failed?.error || failed?.message || '章节正文后台生成失败');
+      }
+      setStreamText('章节正文生成完成，可继续人工编辑。');
+      await reloadProject(data.project.id);
+      setChapters(items => items.map(item => item.id === targetChapter.id ? { ...item, status: 'generated' } : item));
+      setBatchTasks(tasks => {
+        const next = { ...tasks };
+        delete next[targetChapter.id];
+        return next;
       });
       message.success('章节正文已生成');
       setContentDirty(false);
@@ -2300,11 +2371,11 @@ export function BidEditorPage(): JSX.Element {
       message: '排队中',
     }])));
 
-    let cursor = 0;
     try {
       const task = await createSectionGenerationTask(data.project.id, {
         volumeType: activeVolume,
         withImages,
+        metadata: { mode: 'batch_sections', source: 'bid_editor' },
         items: targets.map((chapter, index) => ({
           section_id: chapter.id,
           title: chapter.title,
@@ -2322,16 +2393,8 @@ export function BidEditorPage(): JSX.Element {
       return;
     }
 
-    async function worker(): Promise<void> {
-      while (cursor < targets.length && !batchCancelRequestedRef.current) {
-        const current = targets[cursor];
-        cursor += 1;
-        await generateSectionForBatch(current);
-      }
-    }
-
     try {
-      await Promise.all(Array.from({ length: Math.min(BATCH_SECTION_CONCURRENCY, targets.length) }, () => worker()));
+      const finalTask = await pollSectionGenerationTask(data.project.id, persistedBatchTaskIdRef.current);
       if (batchCancelRequestedRef.current) {
         setBatchTasks(tasks => Object.fromEntries(Object.entries(tasks).map(([id, task]) => [
           id,
@@ -2349,10 +2412,15 @@ export function BidEditorPage(): JSX.Element {
         }
         message.info('全文批量编写已停止');
       } else {
-        if (data.project?.id) {
-          void refreshLatestBatchTask(data.project.id);
+        await reloadProject(data.project.id);
+        applyPersistedBatchTask(finalTask);
+        if (finalTask.status === 'failed') {
+          message.error('全文批量编写失败，已保留原正文');
+        } else if (finalTask.status === 'partial_failed') {
+          message.warning('全文批量编写部分失败，已保留失败章节原正文');
+        } else {
+          message.success('全文批量编写任务已完成');
         }
-        message.success('全文批量编写任务已完成');
         setContentDirty(false);
         void refreshComplianceReport(data.project.id, { silent: true });
       }
@@ -2381,6 +2449,29 @@ export function BidEditorPage(): JSX.Element {
         console.warn('取消批量章节生成任务同步失败', error);
       });
     }
+  }
+
+  function stopCurrentSectionGeneration(): void {
+    if (!sectionStreaming) {
+      return;
+    }
+    batchCancelRequestedRef.current = true;
+    if (selectedChapter) {
+      updateBatchTask(selectedChapter.id, {
+        status: 'stopped',
+        percent: 100,
+        message: '正在停止',
+      });
+    }
+    if (data?.project?.id && persistedBatchTaskIdRef.current) {
+      void cancelSectionGenerationTask(data.project.id, persistedBatchTaskIdRef.current).then(task => {
+        setPersistedBatchTask({ id: task.id, status: task.status });
+        applyPersistedBatchTask(task);
+      }).catch(error => {
+        console.warn('取消单章生成任务失败', error);
+      });
+    }
+    setStreamText('正在停止章节正文生成，已生成内容会保留在编辑器中。');
   }
 
   function handleActiveVolumeChange(value: VolumeType): void {
@@ -2466,7 +2557,7 @@ export function BidEditorPage(): JSX.Element {
               <span>章节计划：{estimatedTotalChars.toLocaleString()} 字（约{estimatedPages}页）</span>
               <span>篇幅进度：{lengthProgress}%</span>
               <span>进度：{generationProgress}%</span>
-              {batchGenerating ? <span>批量并发：{BATCH_SECTION_CONCURRENCY} 路</span> : null}
+              {batchGenerating ? <span>后台章节任务执行中</span> : null}
             </div>
           </section>
           <section className="outline-panel">
@@ -2805,6 +2896,9 @@ export function BidEditorPage(): JSX.Element {
             {selectedChapter ? <Tag color="default">{internalVolumeLabel(inferVolumeType(selectedChapter))}</Tag> : null}
             <Button icon={<Save size={16} />} disabled={!selectedChapter || !contentDirty} onClick={() => void saveDraft()}>保存章节</Button>
             <Button icon={<Sparkles size={16} />} loading={sectionStreaming} disabled={!selectedChapter || streaming} onClick={() => void generateCurrentSection()}>生成本章正文</Button>
+            {sectionStreaming ? (
+              <Button danger icon={<Square size={16} />} onClick={stopCurrentSectionGeneration}>停止生成</Button>
+            ) : null}
             <Button
               icon={<Download size={16} />}
               loading={downloadGenerating === 'section'}
