@@ -1,4 +1,5 @@
 import logging
+import os
 import re
 from typing import Any, Iterator
 
@@ -59,7 +60,18 @@ def _allow_auto_expand(chapter: dict[str, Any]) -> bool:
     return bool(plan.get("allow_auto_expand") or length_settings.get("allowAutoExpand"))
 
 
+def _length_supplement_enabled(chapter: dict[str, Any]) -> bool:
+    raw = str(os.getenv("BID_SECTION_LENGTH_SUPPLEMENT_ENABLED", "true") or "true").lower()
+    if raw in {"0", "false", "no", "off"}:
+        return False
+    metadata = chapter.get("metadata") if isinstance(chapter.get("metadata"), dict) else {}
+    options = metadata.get("generation_options") if isinstance(metadata.get("generation_options"), dict) else {}
+    return not bool(options.get("skipLengthSupplement") or options.get("skip_length_supplement"))
+
+
 def _needs_length_supplement(content: str, chapter: dict[str, Any], threshold: float = 0.75) -> bool:
+    if not _length_supplement_enabled(chapter):
+        return False
     target_words = _target_words(chapter)
     if target_words < 800:
         return False

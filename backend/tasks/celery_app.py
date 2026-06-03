@@ -86,6 +86,7 @@ def _build_celery() -> Celery:
         timezone=os.getenv("TZ", "Asia/Shanghai"),
         enable_utc=True,
         worker_concurrency=worker_concurrency,
+        worker_prefetch_multiplier=int(os.getenv("CELERY_WORKER_PREFETCH_MULTIPLIER", "1")),
         worker_max_tasks_per_child=int(os.getenv("CELERY_WORKER_MAX_TASKS_PER_CHILD", "100")),
         broker_connection_retry_on_startup=True,
         task_always_eager=_is_eager(),

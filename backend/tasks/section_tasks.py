@@ -19,6 +19,7 @@ import logging
 import os
 import time
 from datetime import datetime
+from typing import Any
 
 from celery import group
 
@@ -26,6 +27,13 @@ from backend.core.logging_config import log_context
 from backend.tasks.celery_app import celery_app
 
 logger = logging.getLogger(__name__)
+
+ACTIVE_ITEM_STATUSES = {"leased", "running", "generating", "saving"}
+TERMINAL_ITEM_STATUSES = {"done", "failed", "stopped", "cancelled", "expired"}
+
+
+class SectionGenerationSuperseded(Exception):
+    """Raised when another worker/manual recovery already finished this item."""
 
 
 def _section_gen_concurrency() -> int:
@@ -78,6 +86,59 @@ def _now_iso() -> str:
     return datetime.utcnow().isoformat()
 
 
+def _task_metadata(task: dict[str, Any]) -> dict[str, Any]:
+    metadata = task.get("metadata")
+    return metadata if isinstance(metadata, dict) else {}
+
+
+def _dispatch_next_sections(project_id: str, task_id: str) -> dict:
+    """Top up a section-generation task to the configured concurrency window."""
+    from backend.db.supabase_repo import get_bid_generation_task, update_bid_generation_task_item
+
+    task = get_bid_generation_task(project_id, task_id)
+    if not task:
+        raise RuntimeError("章节生成任务不存在")
+    if task.get("status") == "cancelled":
+        return {"task_id": task_id, "dispatched": 0, "reason": "cancelled"}
+
+    items = list(task.get("items") or [])
+    running_count = sum(1 for item in items if item.get("status") in ACTIVE_ITEM_STATUSES)
+    slots = max(0, _section_gen_concurrency() - running_count)
+    if slots <= 0:
+        return {"task_id": task_id, "dispatched": 0, "running": running_count}
+
+    queued_ids = [
+        str(item.get("section_id"))
+        for item in items
+        if str(item.get("section_id") or "") and item.get("status") == "queued"
+    ][:slots]
+    if not queued_ids:
+        return {"task_id": task_id, "dispatched": 0, "running": running_count}
+
+    for section_id in queued_ids:
+        update_bid_generation_task_item(project_id, task_id, section_id, {
+            "status": "leased",
+            "percent": 1,
+            "message": "已派发，等待 worker 开始编写",
+        })
+
+    job = group(
+        generate_one_section.s(project_id, task_id, section_id)
+        for section_id in queued_ids
+    )
+    job.apply_async()
+    logger.info(
+        "section_generation_dispatched",
+        extra={
+            "task_id": task_id,
+            "dispatched": len(queued_ids),
+            "running_before": running_count,
+            "concurrency": _section_gen_concurrency(),
+        },
+    )
+    return {"task_id": task_id, "dispatched": len(queued_ids), "running": running_count + len(queued_ids)}
+
+
 @celery_app.task(name="bid.sections.generate_one", bind=True, max_retries=0)
 def generate_one_section(self, project_id: str, task_id: str, task_section_id: str) -> dict:
     """生成单个章节正文。被协调任务以 group 形式并发派发。
@@ -100,11 +161,12 @@ def generate_one_section(self, project_id: str, task_id: str, task_section_id: s
             return {"section_id": task_section_id, "status": "cancelled"}
 
         with_images = bool(task.get("with_images"))
+        task_metadata = _task_metadata(task)
         items = list(task.get("items") or [])
         item = next((it for it in items if str(it.get("section_id")) == str(task_section_id)), None)
         if item is None:
             return {"section_id": task_section_id, "status": "skipped"}
-        if item.get("status") in {"done", "failed", "stopped"}:
+        if item.get("status") in TERMINAL_ITEM_STATUSES:
             return {"section_id": task_section_id, "status": item.get("status")}
 
         sections = list_bid_sections(project_id)
@@ -130,7 +192,7 @@ def generate_one_section(self, project_id: str, task_id: str, task_section_id: s
             })
 
         update_bid_generation_task_item(project_id, task_id, section_id, {
-            "status": "running",
+            "status": "generating",
             "percent": 2,
             "chars": 0,
             "message": "Celery worker 正在编写章节正文",
@@ -139,7 +201,15 @@ def generate_one_section(self, project_id: str, task_id: str, task_section_id: s
             "chunk_events": [],
         })
 
-        chapter = {**chapter, "withImages": with_images}
+        chapter_metadata = chapter.get("metadata") if isinstance(chapter.get("metadata"), dict) else {}
+        chapter = {
+            **chapter,
+            "withImages": with_images,
+            "metadata": {
+                **chapter_metadata,
+                "generation_options": task_metadata,
+            },
+        }
         generated_content = f"## {chapter.get('title') or '未命名章节'}\n\n"
         pending_chunk = ""
         chunk_seq = 0
@@ -157,8 +227,12 @@ def generate_one_section(self, project_id: str, task_id: str, task_section_id: s
             latest_task = get_bid_generation_task(project_id, task_id)
             if latest_task and latest_task.get("status") == "cancelled":
                 raise SectionGenerationCancelled("章节正文生成已取消")
+            latest_items = list((latest_task or {}).get("items") or [])
+            latest_item = next((it for it in latest_items if str(it.get("section_id")) == str(section_id)), None)
+            if latest_item and latest_item.get("status") in TERMINAL_ITEM_STATUSES:
+                raise SectionGenerationSuperseded(f"章节任务已终态: {latest_item.get('status')}")
             update_bid_generation_task_item(project_id, task_id, section_id, {
-                "status": "running",
+                "status": "saving" if "保存" in message else "generating",
                 "percent": min(98, max(3, int((len(generated_content.replace("\n", "")) / max(int(item.get("target_words") or 800), 1)) * 100))),
                 "chars": len(generated_content.replace("\n", "")),
                 "message": message,
@@ -175,6 +249,10 @@ def generate_one_section(self, project_id: str, task_id: str, task_section_id: s
             latest_task = get_bid_generation_task(project_id, task_id)
             if latest_task and latest_task.get("status") == "cancelled":
                 raise SectionGenerationCancelled("章节正文生成已取消")
+            latest_items = list((latest_task or {}).get("items") or [])
+            latest_item = next((it for it in latest_items if str(it.get("section_id")) == str(section_id)), None)
+            if latest_item and latest_item.get("status") in TERMINAL_ITEM_STATUSES:
+                raise SectionGenerationSuperseded(f"章节任务已终态: {latest_item.get('status')}")
             if event.get("type") != "chunk":
                 return
             content = str(event.get("content") or "")
@@ -188,6 +266,14 @@ def generate_one_section(self, project_id: str, task_id: str, task_section_id: s
 
         try:
             result = generate_and_save_bid_section(project_id, chapter, with_images=with_images, on_event=on_event)
+            update_bid_generation_task_item(project_id, task_id, section_id, {
+                "status": "saving",
+                "percent": 99,
+                "message": "正在保存章节正文",
+                "generated_content": generated_content,
+                "chunk_seq": chunk_seq,
+                "chunk_events": chunk_events,
+            })
             flush_progress(force=True, message="正在保存")
             update_bid_generation_task_item(project_id, task_id, section_id, {
                 "status": "done",
@@ -199,6 +285,7 @@ def generate_one_section(self, project_id: str, task_id: str, task_section_id: s
                 "chunk_seq": chunk_seq,
                 "chunk_events": chunk_events,
             })
+            _dispatch_next_sections(project_id, task_id)
             return {"section_id": section_id, "status": "done"}
         except SectionGenerationCancelled:
             logger.info("章节正文后台生成已取消", extra={"section_id": section_id})
@@ -208,7 +295,12 @@ def generate_one_section(self, project_id: str, task_id: str, task_section_id: s
                 "message": "已停止",
                 "task_status": "cancelled",
             })
+            _dispatch_next_sections(project_id, task_id)
             return {"section_id": section_id, "status": "stopped"}
+        except SectionGenerationSuperseded:
+            logger.info("章节正文后台生成已由其它任务完成，当前 worker 退出", extra={"section_id": section_id})
+            _dispatch_next_sections(project_id, task_id)
+            return {"section_id": section_id, "status": "superseded"}
         except Exception as exc:
             logger.exception("章节正文后台生成失败", extra={"section_id": section_id})
             update_bid_generation_task_item(project_id, task_id, section_id, {
@@ -217,6 +309,7 @@ def generate_one_section(self, project_id: str, task_id: str, task_section_id: s
                 "message": "章节正文后台生成失败，已保留原正文。",
                 "error": str(exc)[:1000],
             })
+            _dispatch_next_sections(project_id, task_id)
             return {"section_id": section_id, "status": "failed"}
 
 
@@ -235,26 +328,25 @@ def run_bid_section_generation(self, project_id: str, task_id: str) -> dict:
             raise RuntimeError("章节生成任务不存在")
 
         items = list(task.get("items") or [])
+        queued_count = sum(1 for item in items if item.get("status") == "queued")
+        running_count = sum(1 for item in items if item.get("status") in ACTIVE_ITEM_STATUSES)
         pending_ids = [
             str(item.get("section_id"))
             for item in items
             if str(item.get("section_id") or "")
-            and item.get("status") not in {"done", "failed", "stopped"}
+            and item.get("status") == "queued"
         ]
         logger.info(
             "section_generation_task_started",
-            extra={"task_id": task_id, "item_count": len(items), "pending": len(pending_ids),
-                   "concurrency": _section_gen_concurrency()},
+            extra={
+                "task_id": task_id,
+                "item_count": len(items),
+                "queued": queued_count,
+                "running": running_count,
+                "concurrency": _section_gen_concurrency(),
+            },
         )
         if not pending_ids:
             return {"task_id": task_id, "dispatched": 0}
 
-        # 用 group 并发派发每章子任务。worker_concurrency 与 SECTION_GEN_CONCURRENCY
-        # 决定真实并行数；group 自身天然并发，无需手动线程池。
-        job = group(
-            generate_one_section.s(project_id, task_id, section_id)
-            for section_id in pending_ids
-        )
-        job.apply_async()
-        logger.info("section_generation_dispatched", extra={"task_id": task_id, "dispatched": len(pending_ids)})
-        return {"task_id": task_id, "dispatched": len(pending_ids)}
+        return _dispatch_next_sections(project_id, task_id)

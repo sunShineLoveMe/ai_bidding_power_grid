@@ -72,7 +72,7 @@ type StreamingChildPlaceholder = {
   title: string;
 };
 
-type BatchTaskStatus = 'queued' | 'running' | 'done' | 'failed' | 'stopped';
+type BatchTaskStatus = 'queued' | 'leased' | 'running' | 'generating' | 'saving' | 'done' | 'failed' | 'stopped' | 'cancelled' | 'expired';
 
 type BatchTask = {
   status: BatchTaskStatus;
@@ -86,6 +86,9 @@ type PersistedBatchTask = {
   id: string;
   status: SectionGenerationTask['status'];
 };
+
+const ACTIVE_BATCH_TASK_STATUSES = new Set<BatchTaskStatus>(['leased', 'running', 'generating', 'saving']);
+const TERMINAL_BATCH_TASK_STATUSES = new Set<BatchTaskStatus>(['done', 'failed', 'stopped', 'cancelled', 'expired']);
 
 const DEFAULT_LENGTH_SETTINGS: BidLengthSettings = {
   mode: 'pages',
@@ -416,10 +419,10 @@ export function BidEditorPage(): JSX.Element {
     applyTaskGeneratedContent(task);
     const generatedIds = new Set(sourceChapters.filter(isChapterGenerated).map(chapter => chapter.id));
     const activeItems = task.items.filter(item => {
-      if (generatedIds.has(item.section_id) && (item.status === 'queued' || item.status === 'running')) {
+      if (generatedIds.has(item.section_id) && (item.status === 'queued' || ACTIVE_BATCH_TASK_STATUSES.has(item.status))) {
         return false;
       }
-      return item.status === 'queued' || item.status === 'running' || item.status === 'failed' || item.status === 'stopped';
+      return item.status === 'queued' || ACTIVE_BATCH_TASK_STATUSES.has(item.status) || TERMINAL_BATCH_TASK_STATUSES.has(item.status);
     });
     const nextTasks = Object.fromEntries(activeItems.map(item => [item.section_id, {
       status: generatedIds.has(item.section_id) && item.status !== 'failed' && item.status !== 'stopped' ? 'done' : item.status,
@@ -431,7 +434,7 @@ export function BidEditorPage(): JSX.Element {
     setPersistedBatchTask({ id: task.id, status: task.status });
     persistedBatchTaskIdRef.current = task.id;
     setBatchTasks(nextTasks);
-    const runningItem = task.items.find(item => item.status === 'running');
+    const runningItem = task.items.find(item => ACTIVE_BATCH_TASK_STATUSES.has(item.status));
     if (runningItem && (batchGenerating || sectionStreaming)) {
       setSelectedId(runningItem.section_id);
     }
@@ -1306,8 +1309,8 @@ export function BidEditorPage(): JSX.Element {
   function isChapterFailed(chapter: ChapterDraft): boolean {
     const task = batchTasks[chapter.id];
     if (['generated', 'edited', 'completed'].includes(chapter.status || '')) return false;
-    if (task?.status === 'queued' || task?.status === 'running' || task?.status === 'done') return false;
-    return task?.status === 'failed' || chapter.status === 'failed';
+    if (task?.status === 'queued' || task?.status === 'done' || (task?.status && ACTIVE_BATCH_TASK_STATUSES.has(task.status))) return false;
+    return task?.status === 'failed' || task?.status === 'expired' || chapter.status === 'failed';
   }
 
   function chapterWordMeta(chapter: ChapterDraft): { label: string; tooltip: string; generated: boolean; failed: boolean } {
@@ -1364,16 +1367,20 @@ export function BidEditorPage(): JSX.Element {
 
   function batchStatusLabel(status: BatchTaskStatus): string {
     if (status === 'queued') return '排队中';
+    if (status === 'leased') return '已派发';
     if (status === 'running') return '正在编写';
+    if (status === 'generating') return '正在编写';
+    if (status === 'saving') return '正在保存';
     if (status === 'done') return '已完成';
-    if (status === 'stopped') return '已停止';
+    if (status === 'stopped' || status === 'cancelled') return '已停止';
+    if (status === 'expired') return '已过期';
     return '失败';
   }
 
   function batchStatusColor(status: BatchTaskStatus): 'default' | 'processing' | 'success' | 'error' {
-    if (status === 'running') return 'processing';
+    if (ACTIVE_BATCH_TASK_STATUSES.has(status)) return 'processing';
     if (status === 'done') return 'success';
-    if (status === 'failed') return 'error';
+    if (status === 'failed' || status === 'expired') return 'error';
     return 'default';
   }
 
@@ -1388,7 +1395,7 @@ export function BidEditorPage(): JSX.Element {
     if (isChapterGenerated(chapter)) return 'done';
     const task = batchTasks[chapter.id];
     if (chapter.status === 'generating') return 'running';
-    if (task?.status === 'running') return 'running';
+    if (task?.status && ACTIVE_BATCH_TASK_STATUSES.has(task.status)) return 'running';
     if (isChapterFailed(chapter)) return 'failed';
     if (task?.status === 'done') return 'done';
     if (task?.status === 'stopped') return 'pending';
@@ -1837,7 +1844,7 @@ export function BidEditorPage(): JSX.Element {
     }
     const now = Date.now();
     const lastSyncAt = batchTaskSyncAtRef.current.get(chapterId) || 0;
-    if (patch.status === 'running' && now - lastSyncAt < 5000) {
+    if (patch.status && ACTIVE_BATCH_TASK_STATUSES.has(patch.status) && now - lastSyncAt < 5000) {
       return Promise.resolve();
     }
     batchTaskSyncAtRef.current.set(chapterId, now);
@@ -2377,7 +2384,7 @@ export function BidEditorPage(): JSX.Element {
       const task = await createSectionGenerationTask(data.project.id, {
         volumeType: activeVolume,
         withImages,
-        metadata: { mode: 'batch_sections', source: 'bid_editor' },
+        metadata: { mode: 'batch_sections', source: 'bid_editor', skipLengthSupplement: true },
         items: targets.map((chapter, index) => ({
           section_id: chapter.id,
           title: chapter.title,
@@ -2400,7 +2407,7 @@ export function BidEditorPage(): JSX.Element {
       if (batchCancelRequestedRef.current) {
         setBatchTasks(tasks => Object.fromEntries(Object.entries(tasks).map(([id, task]) => [
           id,
-          task.status === 'queued' || task.status === 'running'
+          task.status === 'queued' || ACTIVE_BATCH_TASK_STATUSES.has(task.status)
             ? { ...task, status: 'stopped' as BatchTaskStatus, message: '已停止' }
             : task,
         ])));
@@ -2439,7 +2446,7 @@ export function BidEditorPage(): JSX.Element {
     batchAbortControllersRef.current.forEach(controller => controller.abort());
     setBatchTasks(tasks => Object.fromEntries(Object.entries(tasks).map(([id, task]) => [
       id,
-      task.status === 'queued' || task.status === 'running'
+      task.status === 'queued' || ACTIVE_BATCH_TASK_STATUSES.has(task.status)
         ? { ...task, status: 'stopped' as BatchTaskStatus, message: '已停止' }
         : task,
     ])));
@@ -2652,7 +2659,7 @@ export function BidEditorPage(): JSX.Element {
                         type="link"
                         size="small"
                         icon={<Sparkles size={14} />}
-                        loading={(sectionStreaming && selectedId === chapter.id) || task?.status === 'running'}
+                        loading={(sectionStreaming && selectedId === chapter.id) || Boolean(task?.status && ACTIVE_BATCH_TASK_STATUSES.has(task.status))}
                         disabled={batchGenerating}
                         onClick={() => void generateCurrentSection(chapter)}
                       >

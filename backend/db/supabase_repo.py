@@ -1169,12 +1169,22 @@ def delete_bid_section(project_id: str, section_id: str) -> None:
     get_supabase_client().table("bid_sections").delete().eq("id", section_id).eq("project_id", project_id).execute()
 
 
+ACTIVE_GENERATION_ITEM_STATUSES = {"leased", "running", "generating", "saving"}
+TERMINAL_GENERATION_ITEM_STATUSES = {"done", "failed", "stopped", "cancelled", "expired"}
+
+
 def _task_item_counts(items: list[dict[str, Any]]) -> dict[str, int]:
     counts = {"queued": 0, "running": 0, "done": 0, "failed": 0, "stopped": 0}
     for item in items:
         status = str(item.get("status") or "queued")
-        if status in counts:
+        if status in ACTIVE_GENERATION_ITEM_STATUSES:
+            counts["running"] += 1
+        elif status in counts:
             counts[status] += 1
+        elif status in {"cancelled", "expired"}:
+            counts["stopped"] += 1
+        else:
+            counts["queued"] += 1
     return counts
 
 
@@ -1366,9 +1376,9 @@ def _update_bid_generation_task_item_legacy(
             }
         })
         item["status"] = next_status
-        if next_status == "running" and not item.get("started_at"):
+        if next_status in ACTIVE_GENERATION_ITEM_STATUSES and not item.get("started_at"):
             item["started_at"] = now_iso
-        if next_status in {"done", "failed", "stopped"}:
+        if next_status in TERMINAL_GENERATION_ITEM_STATUSES:
             item["finished_at"] = now_iso
         break
     if not matched:
@@ -1417,7 +1427,7 @@ def cancel_bid_generation_task(project_id: str, task_id: str) -> dict[str, Any]:
     now_iso = datetime.utcnow().isoformat()
     items = []
     for item in task.get("items") or []:
-        if item.get("status") in {"queued", "running"}:
+        if item.get("status") == "queued" or item.get("status") in ACTIVE_GENERATION_ITEM_STATUSES:
             item = {**item, "status": "stopped", "message": "已停止", "finished_at": now_iso}
         items.append(item)
     counts = _task_item_counts(items)

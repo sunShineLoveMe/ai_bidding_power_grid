@@ -66,6 +66,7 @@ def save_generated_section(project_id: str, chapter: dict[str, Any], full_conten
         metadata_patch={
             "generation_status": "generated",
             "writing_status": "generated",
+            "writing_error": None,
             "actual_words": actual_words,
             "target_words": target_words,
             "length_completion_ratio": round(actual_words / target_words, 3) if target_words else None,
@@ -126,10 +127,13 @@ def generate_and_save_bid_section(
                 saved_section = save_generated_section(project_id, chapter, full_content)
             if on_event:
                 on_event(event)
+        if chapter.get("id") and saved_section is None:
+            saved_section = save_generated_section(project_id, chapter, full_content)
     except SectionGenerationCancelled:
         raise
     except Exception:
-        mark_section_generation_failed(project_id, chapter, "章节正文后台生成失败，已保留原正文。")
+        if saved_section is None:
+            mark_section_generation_failed(project_id, chapter, "章节正文后台生成失败，已保留原正文。")
         raise
 
     return {
