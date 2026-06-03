@@ -10,10 +10,10 @@
 
 | 优先级 | 待办 | 目标 | 建议负责人 |
 | --- | --- | --- | --- |
-| P0 | 重构章节任务状态模型 | 彻底解决 running 卡死、幽灵任务、并发槽位被占用 | 后端 |
-| P0 | 拆分任务 item 独立表 | 支持章节级 lease、重试、恢复、审计 | 后端 / 数据库 |
+| P0 | 重构章节任务状态模型 | 彻底解决 running 卡死、幽灵任务、并发槽位被占用 | 后端，基础版已完成 |
+| P0 | 拆分任务 item 独立表 | 支持章节级 lease、重试、恢复、审计 | 后端 / 数据库，基础版已完成 |
 | P0 | 建立 worker lease 与 heartbeat | worker 重启或断线后可自动回收任务 | 后端，基础版已完成 |
-| P0 | 改造流式草稿保存与最终落盘边界 | 过程内容可恢复，最终正文必须有明确完成条件 | 后端 |
+| P0 | 改造流式草稿保存与最终落盘边界 | 过程内容可恢复，最终正文必须有明确完成条件 | 后端，基础版已完成 |
 | P0 | 加模型流墙钟超时和最后 token 超时 | 防止单章节无限占用 worker | 后端 / AI，基础版已完成 |
 | P0 | 补齐取消、恢复、重试语义 | 取消后旧 worker 不得继续覆盖状态 | 后端，基础版已完成 |
 | P0 | 正文生成粒度改为叶子小节级 | 章/节作为结构容器，最小小节独立生成 | AI / 后端 / 前端，基础版已完成 |
@@ -25,6 +25,16 @@
 | P2 | 完善演示模式与灰度开关 | 演示环境可控、可快速回退 | 全栈 |
 
 ## P0-01 重构章节任务状态模型
+
+### 当前进展
+
+2026-06-03 基础版已完成并通过真实 3 叶子小节验收：
+
+- 批量任务和 item 已使用 `queued`、`leased`、`generating`、`saving`、`done`、`failed`、`stopped`、`cancelled`、`expired`、`partial_generated` 等明确状态。
+- 协调任务不再把“已派发”和“真实生成”混在一个 `running` item 状态里；item 先进入 `leased`，worker 开始后进入 `generating`，保存时进入 `saving`，最终进入 `done`。
+- 真实验收任务 `15449164-3a97-429c-a2e0-51b9565b180c` 中，3 个叶子小节状态链路完整：`queued -> leased -> generating -> saving -> done`，任务汇总最终为 `completed`。
+
+P0 总体验收记录见：`docs/development/runs/run_20260603_p0_acceptance.md`。
 
 ### 现象
 
@@ -63,6 +73,16 @@
 - 任务列表能清楚区分“排队、已派发、真实生成、保存中、失败、取消”。
 
 ## P0-02 拆分任务 item 独立表
+
+### 当前进展
+
+2026-06-03 基础版已完成并通过真实 3 叶子小节验收：
+
+- 已落地 `bid_generation_task_items`，每个章节生成 item 独立记录 `attempt`、`attempt_id`、`worker_id`、`lease_expires_at`、`heartbeat_at`、`chars`、`final_saved_at`、`error` 等字段。
+- 已落地 `bid_generation_task_events`，真实验收任务记录了 `task_created`、`item_dispatched`、`worker_started`、`heartbeat`、`progress_flushed`、`saving`、`final_saved`。
+- 批量任务仍保留 JSON 快照作为前端兼容层，但生产执行证据和并发写入已落到 item/event 表。
+
+P0 总体验收记录见：`docs/development/runs/run_20260603_p0_acceptance.md`。
 
 ### 现象
 
@@ -152,6 +172,22 @@ worker 重启、终端关闭、代码热重载后，前端仍可能看到章节�
 - 同一任务可在 worker 重启后继续推进。
 
 ## P0-04 改造流式草稿保存与最终落盘边界
+
+### 当前进展
+
+2026-06-03 基础版已完成并通过真实验收：
+
+- 正常完成路径：模型流收到完成信号后进入 `saving`，调用章节保存逻辑，item 写入 `final_saved_at`，章节表 `bid_sections.status` 写为 `generated`，`metadata.generation_status` / `metadata.writing_status` 写为 `generated`。
+- 异常/超时路径：P0-05 已验证模型墙钟或 idle 超时后进入 `partial_generated`，保留 `generated_content` / `draft_content`，不把草稿误标成 `done`。
+- 前端已能展示 `partial_generated` 为“草稿待续写”，并提供重试入口。
+- 真实验收任务 `15449164-3a97-429c-a2e0-51b9565b180c` 中 3 个叶子小节全部完成最终落盘，正文表非空，AI 日志均成功。
+
+仍需后续增强：
+
+- 前端任务详情面板应进一步展示 `draft_saved_at`、`final_saved_at`、`attempt_id`、错误码和事件时间线。
+- 可考虑把 `saved_from_task_id`、`attempt_id` 写入章节 metadata，便于从正文反查生成任务。
+
+P0 总体验收记录见：`docs/development/runs/run_20260603_p0_acceptance.md`。
 
 ### 现象
 
