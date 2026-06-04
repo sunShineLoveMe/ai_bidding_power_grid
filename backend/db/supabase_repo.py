@@ -1753,6 +1753,82 @@ def get_bid_generation_task(project_id: str, task_id: str) -> dict[str, Any] | N
     return response.data[0] if response.data else None
 
 
+def fail_bid_generation_task(
+    project_id: str,
+    task_id: str,
+    *,
+    message: str,
+    error: str | None = None,
+) -> dict[str, Any]:
+    """Force a section generation task into a business terminal state.
+
+    Used when the coordinator itself fails before item workers can report
+    per-section failures. This keeps frontend polling from waiting forever on
+    Celery result-backend-only failures.
+    """
+    task = get_bid_generation_task(project_id, task_id)
+    if not task:
+        raise RuntimeError("批量章节生成任务不存在")
+
+    now_iso = datetime.utcnow().isoformat()
+    items: list[dict[str, Any]] = []
+    for item in list(task.get("items") or []):
+        status = str(item.get("status") or "queued")
+        if status == "done":
+            items.append(item)
+            continue
+        if status in {"failed", "stopped", "cancelled", "expired", "partial_generated"}:
+            items.append(item)
+            continue
+        items.append({
+            **item,
+            "status": "failed",
+            "percent": 100,
+            "message": message,
+            "error": error or message,
+            "finished_at": item.get("finished_at") or now_iso,
+        })
+
+    counts = _task_item_counts(items)
+    status = "partial_failed" if counts["done"] > 0 and counts["failed"] > 0 else "failed"
+    current_metadata = task.get("metadata") if isinstance(task.get("metadata"), dict) else {}
+    payload = {
+        "status": status,
+        "queued_count": counts["queued"],
+        "running_count": counts["running"],
+        "done_count": counts["done"],
+        "failed_count": counts["failed"],
+        "stopped_count": counts["stopped"],
+        "items": items,
+        "metadata": {
+            **current_metadata,
+            "coordinator_failed_at": now_iso,
+            "coordinator_error": (error or message)[:1000],
+        },
+        "finished_at": now_iso,
+    }
+    response = _with_supabase_write_retry(
+        lambda client: client.table("bid_generation_tasks").update(payload).eq("id", task_id).eq("project_id", project_id).execute(),
+        label="标记批量章节生成任务失败",
+    )
+    if not response.data:
+        raise RuntimeError("Supabase bid_generation_tasks failure update returned no data")
+    failed_task = response.data[0]
+    _sync_generation_task_items_snapshot(failed_task)
+    _record_generation_task_event(
+        project_id=project_id,
+        task_id=task_id,
+        section_id=None,
+        patch={
+            "_event_type": "coordinator_failed",
+            "status": status,
+            "message": message,
+            "error": (error or message)[:1000],
+        },
+    )
+    return failed_task
+
+
 def _derive_generation_task_status(items: list[dict[str, Any]], requested_status: str | None = None) -> str:
     if requested_status in {"cancelled", "failed", "completed"}:
         return requested_status

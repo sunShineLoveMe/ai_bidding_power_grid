@@ -25,6 +25,12 @@ run_sql_file "migrations/postgres/002_app_login.sql"
 run_sql_file "migrations/postgres/003_seed_deepseek_v4_flash_pricing.sql"
 run_sql_file "migrations/postgres/004_seed_deepseek_v4_pro_pricing.sql"
 run_sql_file "migrations/postgres/005_bid_parse_tasks.sql"
+run_sql_file "migrations/postgres/006_rag_p0_filtered_recall.sql"
+run_sql_file "migrations/postgres/007_power_grid_goods_list_rows.sql"
+run_sql_file "sql/20260603_create_bid_generation_task_items.sql"
+run_sql_file "sql/20260603_add_bid_generation_task_item_lease.sql"
+run_sql_file "migrations/postgres/007_atomic_section_task_item.sql"
+run_sql_file "sql/20260603_update_bid_generation_task_status_model.sql"
 
 echo "verifying core tables" 
 "${PSQL[@]}" -At -c "
@@ -42,10 +48,28 @@ where table_schema = 'public'
     'app_users',
     'ai_usage_logs',
     'bid_generation_tasks',
+    'bid_generation_task_items',
+    'bid_generation_task_events',
     'bid_export_tasks',
-    'bid_parse_tasks'
+    'bid_parse_tasks',
+    'power_grid_goods_list_rows'
   )
 order by table_name;
+"
+
+echo "verifying section generation RPC functions"
+"${PSQL[@]}" -At -c "
+select proname || '(' || oidvectortypes(proargtypes) || ')'
+from pg_proc
+where pronamespace = 'public'::regnamespace
+  and proname in (
+    'lease_bid_generation_task_items',
+    'heartbeat_bid_generation_task_item',
+    'expire_bid_generation_task_items',
+    'update_bid_generation_task_item_atomic',
+    'set_bid_generation_task_items_updated_at'
+  )
+order by proname;
 "
 
 echo "PostgreSQL schema initialization complete."

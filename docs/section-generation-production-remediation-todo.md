@@ -2,7 +2,7 @@
 
 日期：2026-06-03
 
-最近更新：2026-06-04，基于真实“一键生成全文”复测结果补充 `partial_failed`、草稿不可见、自动续写中断、字数统计偏差和模型过度输出长期占用 worker 问题。
+最近更新：2026-06-04，基于真实“一键生成全文”复测结果补充 `partial_failed`、草稿不可见、自动续写中断、字数统计偏差、模型过度输出长期占用 worker、长任务轮询窗口过短、数据库迁移链缺口和历史僵尸任务清理问题。
 
 范围：一键生成全文、按章节目录批量生成正文、Celery 章节子任务、DeepSeek 流式输出、章节正文落盘、前端任务进度展示。
 
@@ -23,6 +23,11 @@
 | P0 | 草稿正文可见、续写、采纳闭环 | “草稿已保存”必须能被用户看到、续写或采纳 | 后端 / 前端，新增 |
 | P0 | 目标字数硬约束与流式截流保存 | 避免章节持续超写并长期占用 worker | AI / 后端，基础版已完成 |
 | P0 | 流式消费与任务状态持久化解耦 | 避免每 chunk 查库/写库拖慢 DeepSeek 流 | 后端，基础版已完成 |
+| P0 | 前端轮询改成长任务友好模式 | 不再用固定 5 分钟/900 次判失败，支持刷新恢复后台任务 | 前端，基础版已完成 |
+| P0 | 补齐 PostgreSQL 正式迁移链 | 将 `20260603` 章节任务 DDL 纳入新库初始化，避免新环境缺表/RPC | 后端 / 数据库，基础版已完成 |
+| P0 | 协调任务异常失败回写 | `run_bid_section_generation()` 异常时写入业务终态，避免永久 `queued/running` | 后端，基础版已完成 |
+| P1 | 增加任务 reconciler | 将超过 lease/心跳窗口的历史 `running/queued` 任务转为可恢复或失败态 | 后端，新增 |
+| P1 | 补最小 E2E 长任务回归 | 覆盖上传、目录生成、30+ 章节全文生成、刷新恢复与导出 | 全栈，新增 |
 | P1 | 可见字数统计口径与压缩改写 | 修正误导性统计，并对 too_long 内容提供压缩重写 | AI / 后端 / 前端 |
 | P1 | 前端改为任务事件/状态面板 | 用户能判断是真在跑、慢、失败还是卡死 | 前端 |
 | P1 | 增加可观测性与诊断日志 | 可定位每章耗时、首 token、末 token、保存点 | 后端 |
@@ -30,6 +35,126 @@
 | P1 | 隔离 RAG/rerank 降级策略 | rerank 额度耗尽不应影响正文任务可用性 | 后端 / AI |
 | P2 | 优化 prompt 和篇幅补写策略 | 提升质量和稳定性，但不作为首要止血项 | AI |
 | P2 | 完善演示模式与灰度开关 | 演示环境可控、可快速回退 | 全栈 |
+
+## 2026-06-04 复盘新增 P0/P1
+
+### P0-新增 01 前端轮询改成长任务友好模式
+
+#### 当前进展
+
+2026-06-04 基础版已完成：
+
+- 前端轮询不再使用固定 `900` 次上限作为失败条件。
+- 轮询等待窗口改为按任务章节数和目标字数动态计算，长任务超过当前等待窗口时返回后台执行状态，不抛失败。
+- 单章生成、全文批量生成、章节重试均改为“后台继续执行，可刷新恢复”的用户提示。
+- 终态仍以服务端 `completed`、`failed`、`partial_failed`、`cancelled` 为准。
+
+验证记录见：`docs/development/runs/run_20260604_section_generation_p0_followup.md`。
+
+#### 现象
+
+真实任务 `3d7e3333-7414-4e36-aa3e-283c7d9dc18f` 一次生成 52 个叶子小节，后端实际在 `2026-06-04 16:39:18` 创建、`2026-06-04 16:45:15` 完成，耗时约 5 分 57 秒。前端当前固定 `900` 次、每次约 `300ms` 轮询，窗口约 5 分钟，导致后端仍在正常生成时，前端已经提示“章节正文后台任务仍在处理中”。
+
+#### 整改要求
+
+- 不得用固定 5 分钟或固定 900 次作为后台章节生成失败判断。
+- 按 `total_count`、剩余 item 数、章节目标字数和最近进度动态调整等待窗口。
+- 前端超出当前等待窗口时，不应把任务判为失败；应提示“后台继续生成，可稍后刷新恢复”。
+- 页面刷新或重新进入项目时，必须自动恢复 latest task，并展示真实进度。
+- `completed`、`partial_failed`、`failed`、`cancelled` 等终态由后端任务状态决定，前端只负责展示和恢复。
+
+#### 验收标准
+
+- 30+、50+、70+ 章节生成时，前端不会因为固定时间窗口提前报错。
+- 关闭页面再打开，可恢复 latest task 的进度和终态。
+- 后端完成后，前端能自动 reload 项目正文并清除“正在编写”视觉状态。
+
+### P0-新增 02 补齐 PostgreSQL 正式迁移链
+
+#### 当前进展
+
+2026-06-04 基础版已完成：
+
+- `scripts/init_postgres_schema.sh` 已纳入 `006`、`007` 和 `20260603` 章节任务 DDL。
+- 初始化脚本已验证 `bid_generation_task_items`、`bid_generation_task_events` 和章节生成 RPC。
+- 已在当前运行 PostgreSQL 上执行初始化脚本，确认幂等通过。
+
+验证记录见：`docs/development/runs/run_20260604_section_generation_p0_followup.md`。
+
+#### 现象
+
+当前运行库已经存在 `bid_generation_task_items`、`bid_generation_task_events`、`lease_bid_generation_task_items`、`heartbeat_bid_generation_task_item`、`expire_bid_generation_task_items` 和 `update_bid_generation_task_item_atomic`，但 `scripts/init_postgres_schema.sh` 仍只执行 `001-005` 迁移。新库初始化时仍可能缺少 2026-06-03 章节任务 DDL。
+
+#### 整改要求
+
+- 将 `sql/20260603_create_bid_generation_task_items.sql`、`sql/20260603_add_bid_generation_task_item_lease.sql`、`sql/20260603_update_bid_generation_task_status_model.sql` 纳入正式迁移链。
+- `migrations/postgres/006_rag_p0_filtered_recall.sql`、`migrations/postgres/007_atomic_section_task_item.sql` 和后续迁移必须被初始化脚本覆盖。
+- `sql/` 目录继续作为历史/补丁参考时，不能承载新环境必需 DDL。
+
+#### 验收标准
+
+- 空库执行初始化脚本后，章节生成所需表和 RPC 全部存在。
+- 不再依赖人工手动补跑 `sql/20260603_*`。
+- 初始化脚本失败时应 fail fast，不允许静默缺迁移继续启动。
+
+### P0-新增 03 协调任务异常失败回写
+
+#### 当前进展
+
+2026-06-04 基础版已完成：
+
+- 新增 `fail_bid_generation_task()`，用于协调任务失败时把业务任务写入 `failed` 或 `partial_failed`。
+- `run_bid_section_generation()` 已补外层异常捕获和业务失败回写。
+- 已补单元测试覆盖 `_dispatch_next_sections()` 抛异常时的失败回写路径。
+
+验证记录见：`docs/development/runs/run_20260604_section_generation_p0_followup.md`。
+
+#### 现象
+
+`run_bid_section_generation()` 调用 `_dispatch_next_sections()` 时没有外层异常回写。未来若数据库 RPC、Redis、Celery group 投递或任务读取异常，Celery 任务会失败，但业务表可能仍停留在 `queued` 或 `running`。
+
+#### 整改要求
+
+- `run_bid_section_generation()` 外层补 `try/except`。
+- 捕获异常后，将任务或可影响 item 写入 `failed` / `partial_failed` 等业务终态。
+- 错误信息写入任务 metadata 或 event 表，前端轮询必须能看到终态。
+- 不能只依赖 Celery result backend 表达失败。
+
+#### 验收标准
+
+- 故意移除或禁用 RPC 时，前端能看到明确失败，而不是永久排队。
+- Celery 投递失败时，业务任务表有终态和错误信息。
+
+### P1-新增 01 增加任务 reconciler
+
+#### 现象
+
+历史库曾存在 19 条非终态垃圾任务：17 条 `running`、2 条 `queued`。2026-06-04 已手动清理 `bid_generation_tasks` 19 条、`bid_generation_task_events` 1 条，`bid_generation_task_items` 无关联旧 item。人工清理不能作为生产策略。
+
+#### 整改要求
+
+- 增加周期性 reconciler，扫描超过 lease/心跳窗口的 `queued`、`leased`、`generating`、`saving`、`running`。
+- 对可恢复 item 自动重入队，对不可恢复任务写入 `failed` 或 `partial_failed`。
+- 记录清理事件和原因，避免静默删除生产证据。
+
+#### 验收标准
+
+- 历史 `running/queued` 不会长期残留。
+- worker 停止后，任务能自动恢复或进入明确终态。
+- latest task 恢复逻辑不会被旧垃圾任务污染。
+
+### P1-新增 02 补最小 E2E 长任务回归
+
+#### 整改要求
+
+- 覆盖上传招标文件、解析、目录生成、按章节批量生成正文、刷新恢复、导出。
+- 至少包含 30+ 章节长任务场景，后续再扩到 50+、70+。
+- fake LLM 场景覆盖慢流、断流、无 done、worker kill、重复投递、取消、重试。
+
+#### 验收标准
+
+- 新迁移缺失、前端固定轮询上限、业务失败不回写这三类问题能在合入前被测出。
+- 长任务完成时间超过 5 分钟时，前端仍能正确恢复并展示终态。
 
 ## P0-01 重构章节任务状态模型
 

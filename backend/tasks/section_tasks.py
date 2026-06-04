@@ -544,33 +544,51 @@ def run_bid_section_generation(self, project_id: str, task_id: str) -> dict:
     并行度由 worker 并发度与 SECTION_GEN_CONCURRENCY 共同决定，
     恢复历史"多路 DeepSeek 同时编写"的速度。
     """
-    from backend.db.supabase_repo import get_bid_generation_task
+    from backend.db.supabase_repo import fail_bid_generation_task, get_bid_generation_task
 
     with log_context(project_id=project_id, task_id=task_id):
-        task = get_bid_generation_task(project_id, task_id)
-        if not task:
-            raise RuntimeError("章节生成任务不存在")
+        try:
+            task = get_bid_generation_task(project_id, task_id)
+            if not task:
+                raise RuntimeError("章节生成任务不存在")
 
-        items = list(task.get("items") or [])
-        queued_count = sum(1 for item in items if item.get("status") == "queued")
-        running_count = sum(1 for item in items if item.get("status") in ACTIVE_ITEM_STATUSES)
-        pending_ids = [
-            str(item.get("section_id"))
-            for item in items
-            if str(item.get("section_id") or "")
-            and item.get("status") == "queued"
-        ]
-        logger.info(
-            "section_generation_task_started",
-            extra={
-                "task_id": task_id,
-                "item_count": len(items),
-                "queued": queued_count,
-                "running": running_count,
-                "concurrency": _section_gen_concurrency(),
-            },
-        )
-        if not pending_ids:
-            return {"task_id": task_id, "dispatched": 0}
+            items = list(task.get("items") or [])
+            queued_count = sum(1 for item in items if item.get("status") == "queued")
+            running_count = sum(1 for item in items if item.get("status") in ACTIVE_ITEM_STATUSES)
+            pending_ids = [
+                str(item.get("section_id"))
+                for item in items
+                if str(item.get("section_id") or "")
+                and item.get("status") == "queued"
+            ]
+            logger.info(
+                "section_generation_task_started",
+                extra={
+                    "task_id": task_id,
+                    "item_count": len(items),
+                    "queued": queued_count,
+                    "running": running_count,
+                    "concurrency": _section_gen_concurrency(),
+                },
+            )
+            if not pending_ids:
+                return {"task_id": task_id, "dispatched": 0}
 
-        return _dispatch_next_sections(project_id, task_id)
+            return _dispatch_next_sections(project_id, task_id)
+        except Exception as exc:
+            logger.exception("章节生成协调任务失败", extra={"task_id": task_id})
+            try:
+                failed_task = fail_bid_generation_task(
+                    project_id,
+                    task_id,
+                    message="章节正文后台调度失败，请稍后重试。",
+                    error=str(exc),
+                )
+                return {
+                    "task_id": task_id,
+                    "status": failed_task.get("status") or "failed",
+                    "error": str(exc),
+                }
+            except Exception:
+                logger.exception("章节生成协调任务失败回写也失败", extra={"task_id": task_id})
+                raise

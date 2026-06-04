@@ -88,8 +88,14 @@ type PersistedBatchTask = {
   status: SectionGenerationTask['status'];
 };
 
+type SectionGenerationPollResult = {
+  task: SectionGenerationTask;
+  background: boolean;
+};
+
 const ACTIVE_BATCH_TASK_STATUSES = new Set<BatchTaskStatus>(['leased', 'running', 'generating', 'saving']);
 const TERMINAL_BATCH_TASK_STATUSES = new Set<BatchTaskStatus>(['done', 'failed', 'stopped', 'cancelled', 'expired', 'partial_generated']);
+const TERMINAL_SECTION_TASK_STATUSES = new Set<SectionGenerationTask['status']>(['completed', 'failed', 'partial_failed', 'cancelled']);
 const RETRIABLE_BATCH_TASK_STATUSES = new Set<BatchTaskStatus>(['failed', 'stopped', 'cancelled', 'expired', 'partial_generated']);
 
 const DEFAULT_LENGTH_SETTINGS: BidLengthSettings = {
@@ -458,20 +464,37 @@ export function BidEditorPage(): JSX.Element {
     }
   }
 
-  async function pollSectionGenerationTask(projectId: string, taskId: string): Promise<SectionGenerationTask> {
-    // 并行编写时多个章节同时产出，缩短轮询间隔（300ms）让正文增量更接近实时；
-    // 相应放大最大尝试次数，保证长任务仍有足够的轮询窗口。
-    const maxAttempts = 900;
-    let latest: SectionGenerationTask | null = null;
-    for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
-      latest = await getSectionGenerationTask(projectId, taskId);
+  function sectionGenerationPollBudgetMs(task: SectionGenerationTask): number {
+    const itemCount = Math.max(task.total_count || task.items.length || 1, 1);
+    const totalTargetWords = task.items.reduce((sum, item) => sum + (item.target_words || 0), 0);
+    const itemBudgetMs = itemCount * 30_000;
+    const wordBudgetMs = Math.ceil(totalTargetWords / 1000) * 20_000;
+    return Math.max(10 * 60_000, itemBudgetMs, wordBudgetMs);
+  }
+
+  function sectionGenerationPollIntervalMs(task: SectionGenerationTask): number {
+    const itemCount = Math.max(task.total_count || task.items.length || 1, 1);
+    if (itemCount >= 30) return 1000;
+    if (itemCount >= 10) return 750;
+    return 500;
+  }
+
+  async function pollSectionGenerationTask(projectId: string, taskId: string): Promise<SectionGenerationPollResult> {
+    let deadlineAt = Number.POSITIVE_INFINITY;
+    while (true) {
+      const latest = await getSectionGenerationTask(projectId, taskId);
       applyPersistedBatchTask(latest);
-      if (['completed', 'failed', 'partial_failed', 'cancelled'].includes(latest.status)) {
-        return latest;
+      if (deadlineAt === Number.POSITIVE_INFINITY) {
+        deadlineAt = Date.now() + sectionGenerationPollBudgetMs(latest);
       }
-      await new Promise(resolve => window.setTimeout(resolve, 300));
+      if (TERMINAL_SECTION_TASK_STATUSES.has(latest.status)) {
+        return { task: latest, background: false };
+      }
+      if (Date.now() >= deadlineAt) {
+        return { task: latest, background: true };
+      }
+      await new Promise(resolve => window.setTimeout(resolve, sectionGenerationPollIntervalMs(latest)));
     }
-    throw new Error('章节正文后台任务仍在处理中，请稍后刷新任务状态。');
   }
 
   function complianceVolumeParam(volume: VolumeType = activeVolume): string | undefined {
@@ -2318,7 +2341,13 @@ export function BidEditorPage(): JSX.Element {
       setPersistedBatchTask({ id: task.id, status: task.status });
       persistedBatchTaskIdRef.current = task.id;
       setStreamText('章节正文已提交后台生成，关闭页面也会继续执行。');
-      const finalTask = await pollSectionGenerationTask(data.project.id, task.id);
+      const pollResult = await pollSectionGenerationTask(data.project.id, task.id);
+      const finalTask = pollResult.task;
+      if (pollResult.background) {
+        setStreamText('章节正文仍在后台生成，关闭页面后可刷新恢复进度。');
+        message.info('章节正文仍在后台生成，可稍后刷新恢复进度');
+        return;
+      }
       if (finalTask.status === 'cancelled') {
         setStreamText('章节正文生成已停止，已生成内容保留在编辑器中。');
         message.info('章节正文生成已停止');
@@ -2524,7 +2553,8 @@ export function BidEditorPage(): JSX.Element {
     }
 
     try {
-      const finalTask = await pollSectionGenerationTask(data.project.id, persistedBatchTaskIdRef.current);
+      const pollResult = await pollSectionGenerationTask(data.project.id, persistedBatchTaskIdRef.current);
+      const finalTask = pollResult.task;
       if (batchCancelRequestedRef.current) {
         setBatchTasks(tasks => Object.fromEntries(Object.entries(tasks).map(([id, task]) => [
           id,
@@ -2541,6 +2571,9 @@ export function BidEditorPage(): JSX.Element {
           });
         }
         message.info('全文批量编写已停止');
+      } else if (pollResult.background) {
+        applyPersistedBatchTask(finalTask);
+        message.info('全文批量编写仍在后台执行，可稍后刷新恢复进度');
       } else {
         await reloadProject(data.project.id);
         applyPersistedBatchTask(finalTask);
@@ -2606,7 +2639,13 @@ export function BidEditorPage(): JSX.Element {
       setPersistedBatchTask({ id: task.id, status: task.status });
       persistedBatchTaskIdRef.current = task.id;
       applyPersistedBatchTask(task);
-      const finalTask = await pollSectionGenerationTask(data.project.id, task.id);
+      const pollResult = await pollSectionGenerationTask(data.project.id, task.id);
+      const finalTask = pollResult.task;
+      if (pollResult.background) {
+        applyPersistedBatchTask(finalTask);
+        message.info('章节重试仍在后台执行，可稍后刷新恢复进度');
+        return;
+      }
       await reloadProject(data.project.id);
       applyPersistedBatchTask(finalTask);
       if (finalTask.status === 'completed') {

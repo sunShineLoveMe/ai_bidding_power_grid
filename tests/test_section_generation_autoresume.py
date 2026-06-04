@@ -64,6 +64,37 @@ class SectionGenerationAutoResumeTest(unittest.TestCase):
         apply_async.assert_called_once()
         self.assertEqual(result["dispatched"], 1)
 
+    def test_coordinator_failure_marks_business_task_failed(self):
+        from backend.tasks import section_tasks
+
+        project_id = "11111111-1111-1111-1111-111111111111"
+        task_id = "22222222-2222-2222-2222-222222222222"
+        task = {
+            "id": task_id,
+            "project_id": project_id,
+            "status": "queued",
+            "items": [
+                {
+                    "section_id": "33333333-3333-3333-3333-333333333333",
+                    "status": "queued",
+                }
+            ],
+        }
+
+        with (
+            patch("backend.db.supabase_repo.get_bid_generation_task", return_value=task),
+            patch("backend.tasks.section_tasks._dispatch_next_sections", side_effect=RuntimeError("missing rpc")),
+            patch("backend.db.supabase_repo.fail_bid_generation_task", return_value={**task, "status": "failed"}) as fail_mock,
+        ):
+            result = section_tasks.run_bid_section_generation.run(project_id, task_id)
+
+        fail_mock.assert_called_once()
+        args, kwargs = fail_mock.call_args
+        self.assertEqual(args[:2], (project_id, task_id))
+        self.assertIn("调度失败", kwargs["message"])
+        self.assertEqual(kwargs["error"], "missing rpc")
+        self.assertEqual(result["status"], "failed")
+
     def test_stream_bid_section_uses_continuation_prompt_when_draft_exists(self):
         from backend.ai import section_writer
 
