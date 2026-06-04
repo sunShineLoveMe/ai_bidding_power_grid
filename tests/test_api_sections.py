@@ -3,11 +3,11 @@ import unittest
 from unittest.mock import patch
 
 
-os.environ.setdefault("APP_AUTH_ENABLED", "false")
-os.environ.setdefault("APP_LOGIN_ENABLED", "false")
-os.environ.setdefault("APP_EXPOSE_DEBUG_ERRORS", "false")
-os.environ.setdefault("REQUIRE_STRICT_CONFIG", "false")
-os.environ.setdefault("APP_ENV", "testing")
+os.environ["APP_AUTH_ENABLED"] = "false"
+os.environ["APP_LOGIN_ENABLED"] = "false"
+os.environ["APP_EXPOSE_DEBUG_ERRORS"] = "false"
+os.environ["REQUIRE_STRICT_CONFIG"] = "false"
+os.environ["APP_ENV"] = "testing"
 
 
 class SectionApiTest(unittest.TestCase):

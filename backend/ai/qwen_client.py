@@ -512,6 +512,36 @@ def _stream_deepseek_api(messages, model=None, usage_context=None):
                 | {"provider": "deepseek", "base_url": _deepseek_base_url()},
             )
             return
+        except GeneratorExit:
+            record_ai_usage_log(
+                provider="deepseek",
+                region="global",
+                api_protocol="openai_compatible",
+                endpoint=url,
+                model=resolved_model,
+                operation_type=context.get("operation_type") or "text_generation",
+                stage=context.get("stage") or "stream_text_generation",
+                project_id=context.get("project_id"),
+                file_id=context.get("file_id"),
+                section_id=context.get("section_id"),
+                batch_id=context.get("batch_id"),
+                request_id=last_request_id,
+                is_stream=True,
+                include_usage=bool(last_usage),
+                status_code=response.status_code if response is not None else None,
+                latency_ms=int((time.time() - started_at) * 1000),
+                raw_usage=last_usage,
+                input_text=_messages_text(messages),
+                output_text="".join(output_parts),
+                metadata=_retry_metadata(context, attempt=attempt, success=True)
+                | {
+                    "provider": "deepseek",
+                    "base_url": _deepseek_base_url(),
+                    "stream_closed_by_consumer": True,
+                    "partial_output": True,
+                },
+            )
+            raise
         except Exception as exc:
             exc = _stream_timeout_error_from_exception(exc, context, last_token_at)
             retryable = _is_retryable_error(exc)
@@ -729,6 +759,31 @@ def stream_dashscope_api(messages, model=None, usage_context=None):
                 metadata=_retry_metadata(context, attempt=attempt, success=True),
             )
             return
+        except GeneratorExit:
+            record_ai_usage_log(
+                provider="dashscope",
+                region="cn-beijing",
+                api_protocol="dashscope",
+                endpoint=url,
+                model=resolved_model,
+                operation_type=context.get("operation_type") or "text_generation",
+                stage=context.get("stage") or "stream_text_generation",
+                project_id=context.get("project_id"),
+                file_id=context.get("file_id"),
+                section_id=context.get("section_id"),
+                batch_id=context.get("batch_id"),
+                request_id=last_request_id,
+                is_stream=True,
+                include_usage=bool(last_usage),
+                status_code=response.status_code if response is not None else None,
+                latency_ms=int((time.time() - started_at) * 1000),
+                raw_usage=last_usage,
+                input_text=_messages_text(messages),
+                output_text="".join(output_parts),
+                metadata=_retry_metadata(context, attempt=attempt, success=True)
+                | {"stream_closed_by_consumer": True, "partial_output": True},
+            )
+            raise
         except Exception as exc:
             exc = _stream_timeout_error_from_exception(exc, context, last_token_at)
             retryable = _is_retryable_error(exc)

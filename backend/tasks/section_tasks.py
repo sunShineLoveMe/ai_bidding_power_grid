@@ -62,6 +62,48 @@ def _section_heartbeat_interval() -> float:
     return max(2.0, value)
 
 
+def _section_progress_flush_interval() -> float:
+    try:
+        value = float(os.getenv("BID_SECTION_PROGRESS_FLUSH_INTERVAL_SECONDS", "1.0"))
+    except (TypeError, ValueError):
+        value = 1.0
+    return max(0.25, value)
+
+
+def _section_progress_flush_min_chars() -> int:
+    try:
+        value = int(float(os.getenv("BID_SECTION_PROGRESS_FLUSH_MIN_CHARS", "160")))
+    except (TypeError, ValueError):
+        value = 160
+    return max(40, value)
+
+
+def _section_chunk_event_limit() -> int:
+    try:
+        value = int(float(os.getenv("BID_SECTION_CHUNK_EVENT_LIMIT", "200")))
+    except (TypeError, ValueError):
+        value = 200
+    return max(20, value)
+
+
+def _auto_resume_partial_enabled(task: dict[str, Any]) -> bool:
+    metadata = _task_metadata(task)
+    raw = metadata.get("autoResumePartial", metadata.get("auto_resume_partial", True))
+    if isinstance(raw, str):
+        return raw.lower() not in {"0", "false", "no", "off"}
+    return bool(raw)
+
+
+def _max_auto_resume_attempts(task: dict[str, Any]) -> int:
+    metadata = _task_metadata(task)
+    raw = metadata.get("maxAutoResumeAttempts", metadata.get("max_auto_resume_attempts", os.getenv("BID_SECTION_MAX_AUTO_RESUME_ATTEMPTS", "3")))
+    try:
+        value = int(raw)
+    except (TypeError, ValueError):
+        value = 3
+    return max(1, min(value, 6))
+
+
 def _worker_id() -> str:
     return f"celery:{socket.gethostname()}:{os.getpid()}"
 
@@ -114,7 +156,12 @@ def _task_metadata(task: dict[str, Any]) -> dict[str, Any]:
 
 def _dispatch_next_sections(project_id: str, task_id: str) -> dict:
     """Top up a section-generation task to the configured concurrency window."""
-    from backend.db.supabase_repo import expire_bid_generation_task_items, get_bid_generation_task, lease_bid_generation_task_items
+    from backend.db.supabase_repo import (
+        expire_bid_generation_task_items,
+        get_bid_generation_task,
+        lease_bid_generation_task_items,
+        requeue_bid_generation_task_item,
+    )
 
     task = get_bid_generation_task(project_id, task_id)
     if not task:
@@ -128,6 +175,36 @@ def _dispatch_next_sections(project_id: str, task_id: str) -> dict:
 
     items = list(task.get("items") or [])
     running_count = sum(1 for item in items if item.get("status") in ACTIVE_ITEM_STATUSES)
+    queued_count = sum(1 for item in items if item.get("status") == "queued")
+
+    if (
+        queued_count == 0
+        and running_count == 0
+        and _auto_resume_partial_enabled(task)
+    ):
+        max_attempts = _max_auto_resume_attempts(task)
+        resumable = [
+            item
+            for item in items
+            if item.get("status") == "partial_generated"
+            and int(item.get("attempt") or 0) < max_attempts
+        ]
+        if resumable:
+            for item in resumable:
+                section_id = str(item.get("section_id") or "")
+                if not section_id:
+                    continue
+                requeue_bid_generation_task_item(
+                    project_id,
+                    task_id,
+                    section_id,
+                    reason="auto_resume_partial",
+                    preserve_draft=True,
+                )
+            task = get_bid_generation_task(project_id, task_id) or task
+            items = list(task.get("items") or [])
+            queued_count = sum(1 for item in items if item.get("status") == "queued")
+
     slots = max(0, _section_gen_concurrency() - running_count)
     if slots <= 0:
         return {"task_id": task_id, "dispatched": 0, "running": running_count}
@@ -256,10 +333,16 @@ def generate_one_section(
             "withImages": with_images,
             "metadata": {
                 **chapter_metadata,
-                "generation_options": task_metadata,
+                "generation_options": {
+                    **task_metadata,
+                    "continuationDraft": item.get("draft_content") or item.get("generated_content") or "",
+                    "continuationAttempt": item.get("attempt") or 0,
+                },
             },
         }
-        generated_content = f"## {chapter.get('title') or '未命名章节'}\n\n"
+        generated_content = str(item.get("draft_content") or item.get("generated_content") or "").strip()
+        if not generated_content:
+            generated_content = f"## {chapter.get('title') or '未命名章节'}\n\n"
         pending_chunk = ""
         chunk_seq = 0
         chunk_events: list[dict] = []
@@ -304,8 +387,11 @@ def generate_one_section(
             if not force and not pending_chunk:
                 return
             now = time.monotonic()
-            # 更低的节流阈值，让前端轮询能看到更接近"打字机"的增量更新。
-            if not force and len(pending_chunk) < 40 and now - last_flush_at < 0.15:
+            if (
+                not force
+                and len(pending_chunk) < _section_progress_flush_min_chars()
+                and now - last_flush_at < _section_progress_flush_interval()
+            ):
                 return
             latest_task = get_bid_generation_task(project_id, task_id)
             if latest_task and latest_task.get("status") == "cancelled":
@@ -334,14 +420,6 @@ def generate_one_section(
 
         def on_event(event: dict) -> None:
             nonlocal generated_content, pending_chunk, chunk_seq, first_token_at
-            latest_task = get_bid_generation_task(project_id, task_id)
-            if latest_task and latest_task.get("status") == "cancelled":
-                raise SectionGenerationCancelled("章节正文生成已取消")
-            latest_items = list((latest_task or {}).get("items") or [])
-            latest_item = next((it for it in latest_items if str(it.get("section_id")) == str(section_id)), None)
-            if latest_item and latest_item.get("status") in TERMINAL_ITEM_STATUSES:
-                raise SectionGenerationSuperseded(f"章节任务已终态: {latest_item.get('status')}")
-            assert_owner()
             if event.get("type") != "chunk":
                 return
             content = str(event.get("content") or "")
@@ -353,6 +431,8 @@ def generate_one_section(
             pending_chunk += content
             chunk_seq += 1
             chunk_events.append({"seq": chunk_seq, "content": content, "created_at": _now_iso()})
+            if len(chunk_events) > _section_chunk_event_limit():
+                del chunk_events[: len(chunk_events) - _section_chunk_event_limit()]
             flush_progress()
 
         try:

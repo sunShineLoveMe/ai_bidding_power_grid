@@ -1,0 +1,131 @@
+import os
+import unittest
+from unittest.mock import MagicMock, patch
+
+
+os.environ.setdefault("APP_AUTH_ENABLED", "false")
+os.environ.setdefault("APP_LOGIN_ENABLED", "false")
+os.environ.setdefault("APP_EXPOSE_DEBUG_ERRORS", "false")
+os.environ.setdefault("REQUIRE_STRICT_CONFIG", "false")
+os.environ.setdefault("APP_ENV", "testing")
+os.environ.setdefault("REDIS_URL", "redis://127.0.0.1:16379/0")
+
+
+class SectionGenerationAutoResumeTest(unittest.TestCase):
+    def test_dispatch_requeues_partial_items_before_final_partial_failed(self):
+        from backend.tasks import section_tasks
+
+        project_id = "11111111-1111-1111-1111-111111111111"
+        task_id = "22222222-2222-2222-2222-222222222222"
+        section_id = "33333333-3333-3333-3333-333333333333"
+        partial_task = {
+            "id": task_id,
+            "project_id": project_id,
+            "status": "partial_failed",
+            "metadata": {"autoResumePartial": True, "maxAutoResumeAttempts": 3},
+            "items": [
+                {
+                    "section_id": section_id,
+                    "status": "partial_generated",
+                    "attempt": 1,
+                    "draft_content": "## 章节\n\n已有草稿",
+                }
+            ],
+        }
+        queued_task = {
+            **partial_task,
+            "status": "running",
+            "items": [{**partial_task["items"][0], "status": "queued"}],
+        }
+        leased_item = {
+            "section_id": section_id,
+            "attempt_id": "attempt-2",
+            "worker_id": "worker-1",
+        }
+        apply_async = MagicMock()
+
+        with (
+            patch("backend.db.supabase_repo.get_bid_generation_task", side_effect=[partial_task, queued_task]),
+            patch("backend.db.supabase_repo.expire_bid_generation_task_items", return_value=[]),
+            patch("backend.db.supabase_repo.requeue_bid_generation_task_item", return_value=queued_task) as requeue_mock,
+            patch("backend.db.supabase_repo.lease_bid_generation_task_items", return_value=[leased_item]) as lease_mock,
+            patch("backend.tasks.section_tasks.group", return_value=MagicMock(apply_async=apply_async)),
+        ):
+            result = section_tasks._dispatch_next_sections(project_id, task_id)
+
+        requeue_mock.assert_called_once_with(
+            project_id,
+            task_id,
+            section_id,
+            reason="auto_resume_partial",
+            preserve_draft=True,
+        )
+        lease_mock.assert_called_once()
+        apply_async.assert_called_once()
+        self.assertEqual(result["dispatched"], 1)
+
+    def test_stream_bid_section_uses_continuation_prompt_when_draft_exists(self):
+        from backend.ai import section_writer
+
+        chapter = {
+            "id": "33333333-3333-3333-3333-333333333333",
+            "title": "施工组织设计",
+            "metadata": {
+                "generation_options": {
+                    "continuationDraft": "## 施工组织设计\n\n已有草稿",
+                }
+            },
+        }
+
+        with (
+            patch("backend.ai.section_writer.build_section_prompt", return_value="normal prompt") as normal_prompt,
+            patch("backend.ai.section_writer.build_section_continuation_prompt", return_value="continue prompt") as continuation_prompt,
+            patch("backend.ai.section_writer.stream_dashscope_api", return_value=iter(["续写内容"])),
+            patch("backend.ai.section_writer.get_stage_model", return_value="test-model"),
+            patch("backend.ai.section_writer._needs_length_supplement", return_value=False),
+        ):
+            events = list(section_writer.stream_bid_section("11111111-1111-1111-1111-111111111111", chapter))
+
+        normal_prompt.assert_not_called()
+        continuation_prompt.assert_called_once()
+        self.assertEqual(events[0]["type"], "start")
+        self.assertEqual(events[1]["content"], "续写内容")
+
+    def test_stream_bid_section_stops_when_hard_length_cap_is_reached(self):
+        from backend.ai import section_writer
+
+        chapter = {
+            "id": "33333333-3333-3333-3333-333333333333",
+            "title": "类似项目业绩 - 资料清单",
+            "metadata": {
+                "writing_plan": {
+                    "target_words": 10,
+                }
+            },
+        }
+
+        with (
+            patch.dict(
+                "os.environ",
+                {
+                    "BID_SECTION_HARD_LENGTH_CAP_ENABLED": "true",
+                    "BID_SECTION_HARD_LENGTH_CAP_RATIO": "1.0",
+                    "BID_SECTION_HARD_LENGTH_CAP_MIN_EXTRA_WORDS": "0",
+                },
+                clear=False,
+            ),
+            patch("backend.ai.section_writer.build_section_prompt", return_value="prompt"),
+            patch("backend.ai.section_writer.stream_dashscope_api", return_value=iter(["一二三四五", "六七八九十", "不应继续输出"])),
+            patch("backend.ai.section_writer.get_stage_model", return_value="test-model"),
+            patch("backend.ai.section_writer._needs_length_supplement", return_value=False),
+        ):
+            events = list(section_writer.stream_bid_section("11111111-1111-1111-1111-111111111111", chapter))
+
+        chunk_text = "".join(event.get("content", "") for event in events if event.get("type") == "chunk")
+        self.assertEqual(chunk_text, "一二三四五六七八九十")
+        self.assertTrue(any(event.get("type") == "length_cap_reached" for event in events))
+        self.assertEqual(events[-1]["type"], "done")
+
+
+if __name__ == "__main__":
+    unittest.main()

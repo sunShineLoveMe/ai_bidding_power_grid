@@ -61,6 +61,40 @@ def _target_words(chapter: dict[str, Any]) -> int:
         return 0
 
 
+def _float_env(name: str, default: float) -> float:
+    try:
+        return float(os.getenv(name, str(default)) or default)
+    except (TypeError, ValueError):
+        return default
+
+
+def _int_env(name: str, default: int) -> int:
+    try:
+        return int(float(os.getenv(name, str(default)) or default))
+    except (TypeError, ValueError):
+        return default
+
+
+def _hard_length_cap_words(chapter: dict[str, Any]) -> int:
+    raw = str(os.getenv("BID_SECTION_HARD_LENGTH_CAP_ENABLED", "true") or "true").lower()
+    if raw in {"0", "false", "no", "off"}:
+        return 0
+    target_words = _target_words(chapter)
+    if target_words <= 0:
+        return 0
+    ratio = max(1.0, _float_env("BID_SECTION_HARD_LENGTH_CAP_RATIO", 1.1))
+    min_extra_words = max(0, _int_env("BID_SECTION_HARD_LENGTH_CAP_MIN_EXTRA_WORDS", 120))
+    return max(int(target_words * ratio), target_words + min_extra_words)
+
+
+def _length_cap_reached(content: str, chapter: dict[str, Any]) -> tuple[bool, int, int]:
+    max_words = _hard_length_cap_words(chapter)
+    if max_words <= 0:
+        return False, 0, estimate_bid_content_words(content)
+    actual_words = estimate_bid_content_words(content)
+    return actual_words >= max_words, max_words, actual_words
+
+
 def _allow_auto_expand(chapter: dict[str, Any]) -> bool:
     metadata = chapter.get("metadata") if isinstance(chapter.get("metadata"), dict) else {}
     length_settings = metadata.get("length_settings") if isinstance(metadata.get("length_settings"), dict) else {}
@@ -327,6 +361,95 @@ def build_section_supplement_prompt(project_id: str, chapter: dict[str, Any], cu
 """.strip()
 
 
+def _generation_options(chapter: dict[str, Any]) -> dict[str, Any]:
+    metadata = chapter.get("metadata") if isinstance(chapter.get("metadata"), dict) else {}
+    options = metadata.get("generation_options") if isinstance(metadata.get("generation_options"), dict) else {}
+    return options
+
+
+def _continuation_draft(chapter: dict[str, Any]) -> str:
+    options = _generation_options(chapter)
+    draft = options.get("continuationDraft") or options.get("continuation_draft") or ""
+    return str(draft or "").strip()
+
+
+def build_section_continuation_prompt(project_id: str, chapter: dict[str, Any], draft_content: str) -> str:
+    payload = get_project_interpretation(project_id)
+    project = payload.get("project") or {}
+    analysis = payload.get("analysis") or {}
+    project_meta = analysis.get("project_meta") or {}
+
+    title = _text(chapter.get("title")) or "未命名章节"
+    purpose = _text(chapter.get("purpose"))
+    writing_plan = ensure_chapter_writing_plan(chapter)
+    volume_type = section_volume_type(chapter)
+    volume_strategy = volume_generation_strategy(volume_type)
+    target_words = _target_words(chapter)
+    draft_words = estimate_bid_content_words(draft_content)
+    supporting_assets = _compact_supporting_assets(chapter, volume_type)
+    rag_context = _compact_section_rag_context(project, analysis, chapter, limit=4)
+    draft_excerpt = (draft_content or "").strip()
+    if len(draft_excerpt) > 5200:
+        draft_excerpt = draft_excerpt[-5200:]
+
+    return f"""
+你是资深投标文件撰写专家。当前章节此前生成时模型超时，系统已保存草稿。请基于草稿继续补齐本章节，只输出“可直接追加到草稿末尾”的续写内容，不要重写标题，不要重复已有段落，不要解释。
+
+续写目标：
+- 章节标题：{title}
+- 编写目标：{purpose or "需人工复核"}
+- 所属分册：{volume_name(volume_type)}（{volume_type}）
+- 目标字数：{target_words or "需人工复核"} 字
+- 草稿估算字数：{draft_words} 字
+- 续写原则：优先补齐未完成的承诺、措施、表格、复核清单或待补充项；如果草稿已经基本完整，只补一个简短收束段。
+
+必须遵守：
+1. 只输出续写内容，不要输出章节标题，不要重复草稿中已有内容。
+2. 续写内容必须自然承接草稿末尾，避免“重新开始写本章节”的口吻。
+3. 不得编造企业没有提供的证书编号、人员姓名、合同金额、具体日期。
+4. 缺少企业事实时使用“【待补充：...】”占位，并说明需要补充的材料。
+5. 正式正文不得使用 emoji、图标符号或装饰性提示符。
+6. 如果草稿末尾是未完成句子，请先补全句子，再继续写后续段落。
+
+项目信息：
+- 项目名称：{project_meta.get("project_name") or project.get("project_name") or "需人工复核"}
+- 招标编号：{project_meta.get("tender_no") or project.get("project_no") or "需人工复核"}
+- 项目摘要：{analysis.get("summary") or "需人工复核"}
+
+分册写作策略：
+{_compact_list(volume_strategy.get("focus"), limit=8)}
+
+当前命中的企业资料候选：
+{supporting_assets}
+
+章节级 RAG 写作依据：
+{rag_context}
+
+响应要点：
+{_compact_list(chapter.get("response_points") or [])}
+
+关联要求：
+{_compact_list(chapter.get("mapped_requirements") or [])}
+
+关联评分项：
+{_compact_list(chapter.get("mapped_scoring_items") or [])}
+
+风险提醒：
+{_compact_list(chapter.get("mapped_risks") or [])}
+
+章节写作计划：
+- 建议篇幅：{writing_plan.get("suggested_pages") or "需人工复核"} 页
+- 是否需要表格：{"是" if writing_plan.get("needs_table") else "否"}
+- 是否需要图片/流程图：{"是" if writing_plan.get("needs_image") else "否"}
+- 是否需要资质材料：{"是" if writing_plan.get("needs_qualification") else "否"}
+- 是否需要业绩支撑：{"是" if writing_plan.get("needs_case") else "否"}
+- 写作策略：{writing_plan.get("strategy") or "需人工复核"}
+
+当前草稿末尾节选：
+{draft_excerpt or "暂无"}
+""".strip()
+
+
 def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
     payload = get_project_interpretation(project_id)
     project = payload.get("project") or {}
@@ -412,6 +535,7 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
 章节写作计划：
 - 重要性：{writing_plan.get("importance") or "medium"}
 - 目标字数：{writing_plan.get("target_words") or "需人工复核"} 字
+- 硬性篇幅上限：{_hard_length_cap_words(chapter) or "按目标字数合理控制"} 字，超过后系统会截流保存
 - 建议篇幅：{writing_plan.get("suggested_pages") or "需人工复核"} 页
 - 生成方式：{writing_plan.get("generation_mode") or "single_pass"}
 - 资料不足策略：{"允许围绕评分点和可验证措施扩写" if _allow_auto_expand(chapter) else "稳健生成，缺失处使用待补充占位"}
@@ -442,14 +566,19 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
 
 
 def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dict[str, Any]]:
-    prompt = build_section_prompt(project_id, chapter)
+    continuation_draft = _continuation_draft(chapter)
+    prompt = (
+        build_section_continuation_prompt(project_id, chapter, continuation_draft)
+        if continuation_draft
+        else build_section_prompt(project_id, chapter)
+    )
     yield {
         "type": "start",
         "title": chapter.get("title") or "未命名章节",
     }
 
     emitted = False
-    generated_content = ""
+    generated_content = continuation_draft
     try:
         for chunk in stream_dashscope_api(
             [{"role": "user", "content": prompt}],
@@ -470,6 +599,15 @@ def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dic
                 "type": "chunk",
                 "content": chunk,
             }
+            cap_reached, max_words, actual_words = _length_cap_reached(generated_content, chapter)
+            if cap_reached:
+                yield {
+                    "type": "length_cap_reached",
+                    "target_words": _target_words(chapter),
+                    "max_words": max_words,
+                    "actual_words": actual_words,
+                }
+                break
     except Exception as exc:
         if _is_stream_timeout_error(exc):
             raise
@@ -495,6 +633,15 @@ def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dic
                 "type": "chunk",
                 "content": chunk,
             }
+            cap_reached, max_words, actual_words = _length_cap_reached(generated_content, chapter)
+            if cap_reached:
+                yield {
+                    "type": "length_cap_reached",
+                    "target_words": _target_words(chapter),
+                    "max_words": max_words,
+                    "actual_words": actual_words,
+                }
+                break
 
     if not emitted:
         yield {
@@ -503,7 +650,8 @@ def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dic
         }
         generated_content = "【待补充：当前章节正文生成失败，请稍后重新生成。】"
 
-    if emitted and _needs_length_supplement(generated_content, chapter):
+    cap_reached, _, _ = _length_cap_reached(generated_content, chapter)
+    if emitted and not cap_reached and _needs_length_supplement(generated_content, chapter):
         supplement_prompt = build_section_supplement_prompt(project_id, chapter, generated_content)
         supplement_prefix = "\n\n"
         generated_content += supplement_prefix
@@ -533,6 +681,15 @@ def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dic
                     "type": "chunk",
                     "content": chunk,
                 }
+                cap_reached, max_words, actual_words = _length_cap_reached(generated_content, chapter)
+                if cap_reached:
+                    yield {
+                        "type": "length_cap_reached",
+                        "target_words": _target_words(chapter),
+                        "max_words": max_words,
+                        "actual_words": actual_words,
+                    }
+                    break
         except Exception as exc:
             if _is_stream_timeout_error(exc):
                 raise
@@ -561,6 +718,15 @@ def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dic
                         "type": "chunk",
                         "content": chunk,
                     }
+                    cap_reached, max_words, actual_words = _length_cap_reached(generated_content, chapter)
+                    if cap_reached:
+                        yield {
+                            "type": "length_cap_reached",
+                            "target_words": _target_words(chapter),
+                            "max_words": max_words,
+                            "actual_words": actual_words,
+                        }
+                        break
             except Exception:
                 logging.exception("章节篇幅补写失败，保留首轮生成内容: %s", chapter.get("id"))
 

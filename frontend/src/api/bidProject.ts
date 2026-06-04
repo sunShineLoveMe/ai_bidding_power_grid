@@ -205,6 +205,9 @@ export type SectionGenerationTaskItem = {
   error?: string;
   saved_section_id?: string;
   generated_content?: string;
+  draft_content?: string;
+  draft_saved_at?: string;
+  final_saved_at?: string;
   chunk_seq?: number;
   last_chunk?: string;
   chunk_events?: Array<{

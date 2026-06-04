@@ -11,6 +11,12 @@ returns setof public.bid_generation_task_items
 language plpgsql
 as $$
 begin
+  -- Serialize lease top-up for the same task. Multiple workers can finish at
+  -- nearly the same time and call the dispatcher concurrently; without a
+  -- task-level transaction lock, the last queued item can be leased twice in
+  -- a narrow race.
+  perform pg_advisory_xact_lock(hashtext(p_task_id::text));
+
   return query
   with picked as (
     select id

@@ -112,6 +112,57 @@ def _vectorize_markdown(markdown_path: str | None, parse_id: str, supabase_file_
     write_parse_status(parse_id, {"parse_status": "indexed", "indexed_source": markdown_path})
 
 
+def _native_text_artifacts(
+    *,
+    file_path: str,
+    original_filename: str,
+    parse_id: str,
+) -> dict[str, Any]:
+    """Build MinerU-like artifacts from extractable native text.
+
+    Native `.docx` / text-PDF parsing previously only verified that text could be
+    extracted and then marked the file as indexed. Downstream AI interpretation
+    expects `bid_analysis` and `document_chunks`, so native text must also pass
+    through the same business ingestion pipeline as MinerU artifacts.
+    """
+    chunks = ensure_extractable_text(file_path)
+    output_dir = PARSED_OUTPUT_ROOT / parse_id / "native_text"
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    markdown_parts: list[str] = [f"# {Path(original_filename).stem or original_filename}"]
+    content_list: list[dict[str, Any]] = []
+    for index, chunk in enumerate(chunks):
+        text = str(chunk or "").strip()
+        if not text:
+            continue
+        markdown_parts.append(text)
+        content_list.append({
+            "type": "text",
+            "text": text,
+            "page_idx": None,
+            "native_chunk_index": index,
+        })
+
+    if not content_list:
+        raise EmptyDocumentContentError("文件内容为空或无法分割，可能是扫描版 PDF，需要 OCR/MinerU 解析")
+
+    markdown_path = output_dir / "full.md"
+    content_list_path = output_dir / "native_content_list.json"
+    markdown_path.write_text("\n\n".join(markdown_parts).strip() + "\n", encoding="utf-8")
+    content_list_path.write_text(json.dumps(content_list, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    return {
+        "extract_dir": str(output_dir),
+        "markdown_path": str(markdown_path),
+        "content_list_path": str(content_list_path),
+        "model_path": None,
+        "middle_path": None,
+        "zip_path": None,
+        "parser": "native_text",
+        "source_file": file_path,
+    }
+
+
 def ingest_artifacts(parse_id: str, artifacts: dict[str, Any]) -> None:
     status = read_parse_status(parse_id) or {}
     project_id = status.get("project_id")
@@ -586,7 +637,30 @@ def parse_and_index_tender_file(
             )
 
     try:
-        ensure_extractable_text(file_path)
+        artifacts = _native_text_artifacts(
+            file_path=file_path,
+            original_filename=original_filename,
+            parse_id=parse_id,
+        )
+        status = read_parse_status(parse_id) or {}
+        project_id = status.get("project_id")
+        if project_id:
+            result = ingest_mineru_artifacts_to_supabase(
+                parse_id=parse_id,
+                project_id=project_id,
+                bid_file_id=supabase_file_id,
+                artifacts=artifacts,
+            )
+            write_parse_status(
+                parse_id,
+                {
+                    "supabase_ingest_status": "done",
+                    "supabase_ingest_result": result,
+                    "artifacts": artifacts,
+                },
+            )
+        else:
+            write_parse_status(parse_id, {"supabase_ingest_status": "skipped", "supabase_ingest_reason": "project_id is missing"})
         _update_supabase_status(supabase_file_id, "indexed")
         write_parse_status(
             parse_id,
@@ -596,6 +670,7 @@ def parse_and_index_tender_file(
                 "source_file": file_path,
                 "file_name": original_filename,
                 "supabase_file_id": supabase_file_id,
+                "indexed_source": artifacts.get("markdown_path"),
             },
         )
         return

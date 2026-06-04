@@ -393,7 +393,10 @@ export function BidEditorPage(): JSX.Element {
     }
     const generatedBySection = new Map(
       task.items
-        .filter(item => typeof item.generated_content === 'string' && item.generated_content.length > 0)
+        .filter(item => {
+          const draftContent = item.draft_content || item.generated_content || '';
+          return typeof draftContent === 'string' && draftContent.length > 0;
+        })
         .map(item => [item.section_id, item]),
     );
     if (!generatedBySection.size) {
@@ -401,12 +404,16 @@ export function BidEditorPage(): JSX.Element {
     }
     setChapters(items => items.map(chapter => {
       const taskItem = generatedBySection.get(chapter.id);
-      if (!taskItem?.generated_content) {
+      if (!taskItem) {
+        return chapter;
+      }
+      const draftContent = taskItem.draft_content || taskItem.generated_content || '';
+      if (!draftContent) {
         return chapter;
       }
       return {
         ...chapter,
-        content: taskItem.generated_content,
+        content: draftContent,
         status: taskItem.status === 'done' ? 'generated' : taskItem.status === 'failed' ? 'failed' : taskItem.status === 'partial_generated' ? 'draft' : 'generating',
       };
     }));
@@ -1720,6 +1727,49 @@ export function BidEditorPage(): JSX.Element {
     }
   }
 
+  async function acceptPartialDraft(chapter: ChapterDraft): Promise<void> {
+    if (!data?.project?.id) {
+      message.warning('当前项目不存在，无法采纳草稿');
+      return;
+    }
+    const content = (chapter.content || '').trim();
+    if (!content) {
+      message.warning('当前章节没有可采纳的草稿内容');
+      return;
+    }
+    try {
+      const saved = await saveBidSection(data.project.id, {
+        ...chapter,
+        content,
+        parent_id: safeParentIdForSave(chapter.parent_id, chapters),
+        level: chapter.level || 1,
+        order_index: chapters.findIndex(item => item.id === chapter.id) + 1,
+        status: 'edited',
+      });
+      setChapters(items => normalizeChapterHierarchy(items.map(item => item.id === chapter.id ? { ...item, ...saved, status: 'edited' } : item)));
+      updateBatchTask(chapter.id, {
+        status: 'done',
+        percent: 100,
+        chars: content.replace(/\s+/g, '').length,
+        targetWords: targetChapterWords(chapter),
+        message: '已采纳草稿为正文',
+      });
+      await syncBatchTaskItem(chapter.id, {
+        status: 'done',
+        percent: 100,
+        chars: content.replace(/\s+/g, '').length,
+        targetWords: targetChapterWords(chapter),
+        message: '已采纳草稿为正文',
+        saved_section_id: saved.id,
+      });
+      setSelectedId(saved.id || chapter.id);
+      setContentDirty(false);
+      message.success('已采纳草稿为正文');
+    } catch (error) {
+      message.error(error instanceof Error ? error.message : String(error));
+    }
+  }
+
   async function confirmDownloadWithCompliance(projectId: string, volumeType?: VolumeType): Promise<boolean> {
     let report: ComplianceReport;
     try {
@@ -2090,7 +2140,7 @@ export function BidEditorPage(): JSX.Element {
   }
 
   function outlineMoreMenuItems(chapter: ChapterDraft): MenuProps['items'] {
-    return [
+    const items: MenuProps['items'] = [
       { key: 'custom', label: '自定义编写' },
       { key: 'add', label: '新增子章节', icon: <Plus size={14} /> },
       { key: 'rename', label: '修改标题' },
@@ -2099,6 +2149,10 @@ export function BidEditorPage(): JSX.Element {
       { type: 'divider' },
       { key: 'delete', label: '删除章节', icon: <Trash2 size={14} />, danger: true },
     ];
+    if (isChapterPartialGenerated(chapter)) {
+      items.splice(1, 0, { key: 'accept-draft', label: '采纳草稿为正文', icon: <Save size={14} /> });
+    }
+    return items;
   }
 
   function handleChapterMenu(key: string, chapter: ChapterDraft): void {
@@ -2108,6 +2162,9 @@ export function BidEditorPage(): JSX.Element {
     }
     if (key === 'custom') {
       customWriteChapter(chapter);
+    }
+    if (key === 'accept-draft') {
+      void acceptPartialDraft(chapter);
     }
     if (key === 'add') {
       void addChapter({ parent: chapter });
@@ -2775,7 +2832,7 @@ export function BidEditorPage(): JSX.Element {
                           disabled={batchGenerating}
                           onClick={() => void retryBatchTaskItem(chapter)}
                         >
-                          重试
+                          {task.status === 'partial_generated' ? '续写' : '重试'}
                         </Button>
                       ) : null}
                       <Button

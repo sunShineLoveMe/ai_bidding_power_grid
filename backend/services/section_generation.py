@@ -147,7 +147,10 @@ def generate_and_save_bid_section(
 
     Returns a small summary used by Celery task status updates.
     """
-    full_content = f"## {chapter.get('title') or '未命名章节'}\n\n"
+    metadata = chapter.get("metadata") if isinstance(chapter.get("metadata"), dict) else {}
+    options = metadata.get("generation_options") if isinstance(metadata.get("generation_options"), dict) else {}
+    continuation_draft = str(options.get("continuationDraft") or options.get("continuation_draft") or "").strip()
+    full_content = continuation_draft or f"## {chapter.get('title') or '未命名章节'}\n\n"
     chunk_count = 0
     saved_section: dict[str, Any] | None = None
     try:
