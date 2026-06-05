@@ -165,8 +165,12 @@
 - 默认仍生成 1 个章节，保持原 smoke 成本和耗时不变。
 - 显式传入 `--section-count 30` 或更大值时，可对真实后端执行 30+ 章节长任务回归。
 - 脚本会优先选择叶子章节，创建一个批量章节任务并等待服务端终态。
+- 2026-06-05 已完成真实 30 章节长任务压测：测试项目 `e3d516b7-c2e0-4349-8ede-efab6241076b`，任务 `88dc10b6-81dd-4896-b893-413a9eff10d0`，30/30 完成，失败 0，总耗时约 367 秒，正文全部落盘。
 
-验证记录见：`docs/development/runs/run_20260604_section_generation_p1_followup.md`。
+验证记录见：
+
+- `docs/development/runs/run_20260604_section_generation_p1_followup.md`
+- `docs/development/runs/run_20260605_091856_section_longtask_30_real.md`
 
 #### 整改要求
 
