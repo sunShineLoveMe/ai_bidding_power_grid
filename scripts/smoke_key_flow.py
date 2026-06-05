@@ -340,29 +340,42 @@ def list_sections(ctx: SmokeContext, project_id: str) -> list[dict[str, Any]]:
     return sections
 
 
-def generate_one_section(ctx: SmokeContext, project_id: str, section: dict[str, Any]) -> None:
+def _select_generation_sections(sections: list[dict[str, Any]], count: int) -> list[dict[str, Any]]:
+    parent_ids = {str(section.get("parent_id")) for section in sections if section.get("parent_id")}
+    leaves = [
+        section
+        for section in sections
+        if str(section.get("id") or "") not in parent_ids
+        and ((section.get("metadata") if isinstance(section.get("metadata"), dict) else {}).get("section_role") != "container")
+    ]
+    candidates = leaves or sections
+    return candidates[: max(1, count)]
+
+
+def generate_sections(ctx: SmokeContext, project_id: str, sections: list[dict[str, Any]], *, count: int = 1) -> None:
     started = time.time()
-    chapter = {
-        "id": section.get("id"),
-        "title": section.get("title") or "施工组织设计",
-        "order": section.get("order") or "1",
-        "level": section.get("level") or 1,
-        "parent_id": section.get("parent_id"),
-        "metadata": section.get("metadata") if isinstance(section.get("metadata"), dict) else {},
-    }
+    selected = _select_generation_sections(sections, count)
+    items = []
+    for index, section in enumerate(selected):
+        metadata = section.get("metadata") if isinstance(section.get("metadata"), dict) else {}
+        items.append({
+            "section_id": section.get("id"),
+            "title": section.get("title") or "施工组织设计",
+            "order_index": section.get("order_index") or index + 1,
+            "volume_type": section.get("volume_type") or metadata.get("volume_type") or "technical",
+            "target_words": (metadata.get("writing_plan") or {}).get("target_words") or 800,
+        })
     response = ctx.session.post(
         ctx.url(f"/api/bidding/interpretations/{project_id}/section-generation-tasks"),
         json={
             "volumeType": "technical",
             "withImages": False,
-            "metadata": {"source": "smoke_key_flow", "mode": "single_section"},
-            "items": [{
-                "section_id": chapter.get("id"),
-                "title": chapter.get("title"),
-                "order_index": section.get("order_index") or 1,
-                "volume_type": section.get("volume_type") or "technical",
-                "target_words": ((chapter.get("metadata") or {}).get("writing_plan") or {}).get("target_words") or 800,
-            }],
+            "metadata": {
+                "source": "smoke_key_flow",
+                "mode": "single_section" if len(items) == 1 else "batch_sections",
+                "requested_section_count": len(items),
+            },
+            "items": items,
         },
         timeout=ctx.timeout,
     )
@@ -372,13 +385,21 @@ def generate_one_section(ctx: SmokeContext, project_id: str, section: dict[str, 
     if not task_id:
         raise SmokeFailure(f"章节后台任务响应缺 task.id: {_short_json(payload)}")
     task = wait_section_generation_task(ctx, project_id, str(task_id))
-    items = task.get("items") or []
-    item = next((row for row in items if str(row.get("section_id")) == str(chapter.get("id"))), None)
-    if task.get("status") not in {"completed", "partial_failed"} or (item and item.get("status") != "done"):
+    task_items = task.get("items") or []
+    selected_ids = {str(item.get("section_id")) for item in items if item.get("section_id")}
+    selected_task_items = [row for row in task_items if str(row.get("section_id")) in selected_ids]
+    done_count = sum(1 for row in selected_task_items if row.get("status") == "done")
+    if task.get("status") != "completed" or done_count != len(selected_ids):
         raise SmokeFailure(f"章节后台任务未完成: {_short_json(task)}")
-    ctx.artifacts["section_id"] = chapter.get("id")
+    if len(items) == 1:
+        ctx.artifacts["section_id"] = items[0].get("section_id")
+    ctx.artifacts["section_count"] = len(items)
     ctx.artifacts["section_generation_task_id"] = task_id
-    ctx.record("generate_one_section", started, f"sectionId={chapter.get('id')} taskId={task_id}")
+    ctx.record("generate_sections", started, f"sections={len(items)} done={done_count} taskId={task_id}")
+
+
+def generate_one_section(ctx: SmokeContext, project_id: str, section: dict[str, Any]) -> None:
+    generate_sections(ctx, project_id, [section], count=1)
 
 
 def wait_section_generation_task(ctx: SmokeContext, project_id: str, task_id: str) -> dict[str, Any]:
@@ -491,7 +512,8 @@ def run_smoke(args: argparse.Namespace) -> SmokeContext:
             generate_ai_report(ctx, project_id)
         outline = generate_outline(ctx, project_id)
         sections = list_sections(ctx, project_id)
-        generate_one_section(ctx, project_id, sections[0] if sections else (outline.get("chapters") or [{}])[0])
+        source_sections = sections if sections else (outline.get("chapters") or [{}])
+        generate_sections(ctx, project_id, source_sections, count=args.section_count)
         if not args.skip_compliance:
             run_compliance_check(ctx, project_id)
         task_id = create_docx_export(ctx, project_id)
@@ -584,6 +606,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--skip-ai-report", action="store_true")
     parser.add_argument("--skip-compliance", action="store_true")
     parser.add_argument("--skip-ready", action="store_true")
+    parser.add_argument(
+        "--section-count",
+        type=int,
+        default=int(os.getenv("SMOKE_SECTION_COUNT", "1")),
+        help="Number of leaf sections to generate in the section-generation smoke step. Use 30+ for controlled long-task regression.",
+    )
     parser.add_argument("--require-mineru", action="store_true", help="Require parse-status to confirm parser=mineru; use with a PDF sample file.")
     parser.add_argument("--quiet", action="store_true", help="Do not print per-step progress to stderr.")
     parser.add_argument(

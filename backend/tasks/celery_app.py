@@ -91,6 +91,16 @@ def _build_celery() -> Celery:
         broker_connection_retry_on_startup=True,
         task_always_eager=_is_eager(),
         task_eager_propagates=_is_eager(),
+        beat_schedule={
+            "reconcile-stale-section-generation-tasks": {
+                "task": "bid.sections.reconcile_stale_tasks",
+                "schedule": float(os.getenv("SECTION_GEN_RECONCILE_INTERVAL_SECONDS", "60")),
+                "kwargs": {
+                    "max_age_seconds": int(os.getenv("SECTION_GEN_RECONCILE_MAX_AGE_SECONDS", "1800")),
+                    "limit": int(os.getenv("SECTION_GEN_RECONCILE_LIMIT", "100")),
+                },
+            },
+        },
     )
 
     # 任务模块列表：每迁移一类任务，在此登记一个模块。

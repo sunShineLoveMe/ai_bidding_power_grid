@@ -5,7 +5,7 @@ import os
 import threading
 import time
 import uuid
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -1827,6 +1827,101 @@ def fail_bid_generation_task(
         },
     )
     return failed_task
+
+
+def list_stale_bid_generation_tasks(
+    *,
+    max_age_seconds: int = 1800,
+    limit: int = 100,
+) -> list[dict[str, Any]]:
+    cutoff = datetime.now(timezone.utc) - timedelta(seconds=max(60, int(max_age_seconds)))
+    response = (
+        get_supabase_client()
+        .table("bid_generation_tasks")
+        .select("*")
+        .in_("status", ["queued", "running"])
+        .lt("updated_at", cutoff.isoformat())
+        .order("updated_at")
+        .limit(max(1, min(int(limit), 500)))
+        .execute()
+    )
+    return response.data or []
+
+
+def _count_bid_generation_task_items(task_id: str) -> int:
+    response = (
+        get_supabase_client()
+        .table("bid_generation_task_items")
+        .select("id", count="exact")
+        .eq("task_id", task_id)
+        .limit(1)
+        .execute()
+    )
+    return int(response.count or 0)
+
+
+def reconcile_stale_bid_generation_tasks(
+    *,
+    max_age_seconds: int = 1800,
+    limit: int = 100,
+) -> dict[str, Any]:
+    """Recover stale section-generation tasks left active by old workers.
+
+    New-style tasks with item rows are recovered through the lease-expiry RPC,
+    preserving retry semantics. Legacy JSON-only tasks have no lease evidence,
+    so old queued/running rows are moved to a business terminal failure state.
+    """
+    tasks = list_stale_bid_generation_tasks(max_age_seconds=max_age_seconds, limit=limit)
+    summary: dict[str, Any] = {
+        "scanned": len(tasks),
+        "expired_items": 0,
+        "failed_legacy_tasks": 0,
+        "skipped": 0,
+        "tasks": [],
+    }
+    for task in tasks:
+        task_id = str(task.get("id") or "")
+        project_id = str(task.get("project_id") or "")
+        if not task_id or not project_id:
+            summary["skipped"] += 1
+            continue
+        try:
+            item_count = _count_bid_generation_task_items(task_id)
+            if item_count > 0:
+                expired = expire_bid_generation_task_items(project_id, task_id, requeue=True)
+                summary["expired_items"] += len(expired)
+                summary["tasks"].append({
+                    "task_id": task_id,
+                    "project_id": project_id,
+                    "action": "expired_items",
+                    "expired_items": len(expired),
+                    "item_count": item_count,
+                })
+                continue
+
+            failed = fail_bid_generation_task(
+                project_id,
+                task_id,
+                message="历史章节生成任务长时间未推进，已标记失败；请重新发起生成。",
+                error=f"stale task exceeded {max_age_seconds}s without item lease rows",
+            )
+            summary["failed_legacy_tasks"] += 1
+            summary["tasks"].append({
+                "task_id": task_id,
+                "project_id": project_id,
+                "action": "failed_legacy_task",
+                "status": failed.get("status"),
+            })
+        except Exception as exc:
+            logging.exception("章节生成任务 reconciler 处理失败: task_id=%s", task_id)
+            summary["skipped"] += 1
+            summary["tasks"].append({
+                "task_id": task_id,
+                "project_id": project_id,
+                "action": "error",
+                "error": str(exc)[:500],
+            })
+    return summary
 
 
 def _derive_generation_task_status(items: list[dict[str, Any]], requested_status: str | None = None) -> str:

@@ -26,8 +26,8 @@
 | P0 | 前端轮询改成长任务友好模式 | 不再用固定 5 分钟/900 次判失败，支持刷新恢复后台任务 | 前端，基础版已完成 |
 | P0 | 补齐 PostgreSQL 正式迁移链 | 将 `20260603` 章节任务 DDL 纳入新库初始化，避免新环境缺表/RPC | 后端 / 数据库，基础版已完成 |
 | P0 | 协调任务异常失败回写 | `run_bid_section_generation()` 异常时写入业务终态，避免永久 `queued/running` | 后端，基础版已完成 |
-| P1 | 增加任务 reconciler | 将超过 lease/心跳窗口的历史 `running/queued` 任务转为可恢复或失败态 | 后端，新增 |
-| P1 | 补最小 E2E 长任务回归 | 覆盖上传、目录生成、30+ 章节全文生成、刷新恢复与导出 | 全栈，新增 |
+| P1 | 增加任务 reconciler | 将超过 lease/心跳窗口的历史 `running/queued` 任务转为可恢复或失败态 | 后端，基础版已完成 |
+| P1 | 补最小 E2E 长任务回归 | 覆盖上传、目录生成、30+ 章节全文生成、刷新恢复与导出 | 全栈，基础版已完成 |
 | P1 | 可见字数统计口径与压缩改写 | 修正误导性统计，并对 too_long 内容提供压缩重写 | AI / 后端 / 前端 |
 | P1 | 前端改为任务事件/状态面板 | 用户能判断是真在跑、慢、失败还是卡死 | 前端 |
 | P1 | 增加可观测性与诊断日志 | 可定位每章耗时、首 token、末 token、保存点 | 后端 |
@@ -127,6 +127,18 @@
 
 ### P1-新增 01 增加任务 reconciler
 
+#### 当前进展
+
+2026-06-04 基础版已完成：
+
+- 新增 `reconcile_stale_bid_generation_tasks()`，扫描长时间未推进的 `queued/running` 任务。
+- 新式 item 表任务优先调用 lease 过期回收 RPC，保留可恢复语义。
+- 无 item 明细的历史 JSON-only 任务转为业务失败态，避免继续污染 latest task 恢复逻辑。
+- 新增 Celery 任务 `bid.sections.reconcile_stale_tasks`，并配置 beat schedule，默认 60 秒巡检一次；实际自动执行需要部署时启动 Celery beat 或等价 cron。
+- 已在当前真实 PostgreSQL 上执行一次 reconciler，结果 `scanned=0`，未误伤数据。
+
+验证记录见：`docs/development/runs/run_20260604_section_generation_p1_followup.md`。
+
 #### 现象
 
 历史库曾存在 19 条非终态垃圾任务：17 条 `running`、2 条 `queued`。2026-06-04 已手动清理 `bid_generation_tasks` 19 条、`bid_generation_task_events` 1 条，`bid_generation_task_items` 无关联旧 item。人工清理不能作为生产策略。
@@ -144,6 +156,17 @@
 - latest task 恢复逻辑不会被旧垃圾任务污染。
 
 ### P1-新增 02 补最小 E2E 长任务回归
+
+#### 当前进展
+
+2026-06-04 基础版已完成：
+
+- `scripts/smoke_key_flow.py` 增加 `--section-count` 参数。
+- 默认仍生成 1 个章节，保持原 smoke 成本和耗时不变。
+- 显式传入 `--section-count 30` 或更大值时，可对真实后端执行 30+ 章节长任务回归。
+- 脚本会优先选择叶子章节，创建一个批量章节任务并等待服务端终态。
+
+验证记录见：`docs/development/runs/run_20260604_section_generation_p1_followup.md`。
 
 #### 整改要求
 

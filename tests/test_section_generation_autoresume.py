@@ -95,6 +95,46 @@ class SectionGenerationAutoResumeTest(unittest.TestCase):
         self.assertEqual(kwargs["error"], "missing rpc")
         self.assertEqual(result["status"], "failed")
 
+    def test_reconciler_expires_new_style_items_and_fails_legacy_tasks(self):
+        from backend.db import supabase_repo
+
+        new_task = {
+            "id": "22222222-2222-2222-2222-222222222222",
+            "project_id": "11111111-1111-1111-1111-111111111111",
+            "status": "running",
+        }
+        legacy_task = {
+            "id": "44444444-4444-4444-4444-444444444444",
+            "project_id": "11111111-1111-1111-1111-111111111111",
+            "status": "queued",
+        }
+
+        with (
+            patch("backend.db.supabase_repo.list_stale_bid_generation_tasks", return_value=[new_task, legacy_task]),
+            patch("backend.db.supabase_repo._count_bid_generation_task_items", side_effect=[2, 0]),
+            patch("backend.db.supabase_repo.expire_bid_generation_task_items", return_value=[{"section_id": "s1"}]) as expire_mock,
+            patch("backend.db.supabase_repo.fail_bid_generation_task", return_value={**legacy_task, "status": "failed"}) as fail_mock,
+        ):
+            result = supabase_repo.reconcile_stale_bid_generation_tasks(max_age_seconds=600, limit=10)
+
+        expire_mock.assert_called_once_with(new_task["project_id"], new_task["id"], requeue=True)
+        fail_mock.assert_called_once()
+        self.assertEqual(result["scanned"], 2)
+        self.assertEqual(result["expired_items"], 1)
+        self.assertEqual(result["failed_legacy_tasks"], 1)
+
+    def test_reconciler_celery_task_delegates_to_repo(self):
+        from backend.tasks import section_tasks
+
+        with patch(
+            "backend.db.supabase_repo.reconcile_stale_bid_generation_tasks",
+            return_value={"scanned": 1, "expired_items": 0, "failed_legacy_tasks": 1, "skipped": 0, "tasks": []},
+        ) as reconcile_mock:
+            result = section_tasks.reconcile_stale_section_generation_tasks.run(max_age_seconds=600, limit=5)
+
+        reconcile_mock.assert_called_once_with(max_age_seconds=600, limit=5)
+        self.assertEqual(result["failed_legacy_tasks"], 1)
+
     def test_stream_bid_section_uses_continuation_prompt_when_draft_exists(self):
         from backend.ai import section_writer
 

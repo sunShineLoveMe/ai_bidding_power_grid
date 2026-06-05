@@ -2,7 +2,7 @@ import unittest
 import tempfile
 from pathlib import Path
 
-from scripts.smoke_key_flow import SmokeContext, SmokeFailure, _parse_sse, build_parser, check_ready, run_compliance_check, write_report
+from scripts.smoke_key_flow import SmokeContext, SmokeFailure, _parse_sse, _select_generation_sections, build_parser, check_ready, run_compliance_check, write_report
 
 
 class _FakeResponse:
@@ -58,6 +58,23 @@ class SmokeKeyFlowScriptTest(unittest.TestCase):
         self.assertTrue(args.require_mineru)
         self.assertTrue(args.quiet)
         self.assertEqual("out.md", args.report)
+
+    def test_parser_supports_section_count_for_long_task_smoke(self):
+        args = build_parser().parse_args(["--section-count", "30"])
+
+        self.assertEqual(30, args.section_count)
+
+    def test_select_generation_sections_prefers_leaf_sections(self):
+        sections = [
+            {"id": "parent", "title": "质量措施", "metadata": {"section_role": "container"}},
+            {"id": "leaf-1", "parent_id": "parent", "title": "质量控制"},
+            {"id": "leaf-2", "parent_id": "parent", "title": "安全生产"},
+            {"id": "leaf-3", "title": "商务响应"},
+        ]
+
+        selected = _select_generation_sections(sections, 2)
+
+        self.assertEqual(["leaf-1", "leaf-2"], [section["id"] for section in selected])
 
     def test_check_ready_records_success(self):
         session = _FakeSession({"status": "ready", "checks": {"db": {"status": "ok"}}})

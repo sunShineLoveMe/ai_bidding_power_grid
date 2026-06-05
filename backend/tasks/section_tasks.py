@@ -592,3 +592,30 @@ def run_bid_section_generation(self, project_id: str, task_id: str) -> dict:
             except Exception:
                 logger.exception("章节生成协调任务失败回写也失败", extra={"task_id": task_id})
                 raise
+
+
+@celery_app.task(name="bid.sections.reconcile_stale_tasks", bind=True, max_retries=0)
+def reconcile_stale_section_generation_tasks(
+    self,
+    max_age_seconds: int | None = None,
+    limit: int | None = None,
+) -> dict:
+    """Periodic guardrail for stale section-generation business tasks."""
+    from backend.db.supabase_repo import reconcile_stale_bid_generation_tasks
+
+    age_seconds = int(max_age_seconds or os.getenv("SECTION_GEN_RECONCILE_MAX_AGE_SECONDS", "1800"))
+    batch_limit = int(limit or os.getenv("SECTION_GEN_RECONCILE_LIMIT", "100"))
+    result = reconcile_stale_bid_generation_tasks(
+        max_age_seconds=age_seconds,
+        limit=batch_limit,
+    )
+    logger.info(
+        "section_generation_reconciled",
+        extra={
+            "scanned": result.get("scanned"),
+            "expired_items": result.get("expired_items"),
+            "failed_legacy_tasks": result.get("failed_legacy_tasks"),
+            "skipped": result.get("skipped"),
+        },
+    )
+    return result

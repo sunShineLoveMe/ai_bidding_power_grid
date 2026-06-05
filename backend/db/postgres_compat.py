@@ -158,6 +158,14 @@ class PostgresTableQuery:
         self._filters.append((column, ">=", value))
         return self
 
+    def lt(self, column: str, value: Any) -> "PostgresTableQuery":
+        self._filters.append((column, "<", value))
+        return self
+
+    def lte(self, column: str, value: Any) -> "PostgresTableQuery":
+        self._filters.append((column, "<=", value))
+        return self
+
     def in_(self, column: str, values: list[Any]) -> "PostgresTableQuery":
         self._filters.append((column, "in", values))
         return self
