@@ -219,6 +219,136 @@ OCR 抽取到的关键字段包括：
 - `asset_sha256`
 - `do_not_mix_with=河北豪乾参考稿`
 
+## 2026-06-06 泰昌 MVP 图片智能选图 P0
+
+### 边界修正
+
+本次按客户确认重新收口：
+
+- 泰昌是 MVP 试点企业，企业事实和图片资产主线固定为 `enterprise=泰昌`、`doc_owner=泰昌`、`source_domain=enterprise_fact`。
+- 辽宁资料只是客户提供的电缆保护管招标场景样本，用于招标要求、技术规范、货物清单和合同条款，不作为 MVP 企业主体事实。
+- 河北豪乾资料仅作格式、目录、章节组织、写法参考，`reference_only=true`，不得作为泰昌企业事实。
+
+### 已完成代码任务
+
+- `backend/rag/retrieval.py`：`search_knowledge_assets()` 增加 `metadata_filter`，并把 `metadata/specs` 写入资产检索文本；补 `evidence_type` 查询意图加权。
+- `backend/api/knowledge.py`：智能问答检索泰昌问题时自动把图片资产限定为泰昌企业事实，避免参考稿和其他企业资产混入。
+- `backend/api/routes.py`：标书导出“图文并茂”按章节推断 `evidence_type`，强约束生产制造、试验检测、绿色低碳、营业执照/证书、检验报告。
+- `tests/test_rag_asset_scoring.py`、`tests/test_rag_retrieval.py`：补泰昌生产/试验/绿色/资信图片选择与 metadata 隔离回归。
+
+### 验证记录
+
+真实库候选池：
+
+- `knowledge_assets` 图片候选：242 个。
+
+真实库章节选图模拟：
+
+| 章节 | 选中 evidence_type |
+| --- | --- |
+| 泰昌企业资信与营业执照 | `business_license`、`certification` |
+| 泰昌生产制造能力 | `production_capacity` |
+| 泰昌试验检测能力 | `testing_capacity` |
+| 泰昌绿色低碳与绿色供应链能力 | `green_low_carbon` |
+
+智能问答资产检索模拟：
+
+| 查询 | Top evidence_type |
+| --- | --- |
+| 泰昌营业执照图片 | `business_license` |
+| 泰昌 MPP 生产线图片 | `production_capacity` |
+| 泰昌电子天平和万能试验机图片 | `testing_capacity` |
+| 泰昌绿色供应链证书图片 | `green_low_carbon` |
+
+回归评测：
+
+- Base filtered：`docs/rag/runs/run_20260606_taichang_mvp_asset_p0_base_filtered.json`，Recall@5 86.7%。
+- 泰昌 MVP 专项 filtered：`docs/rag/runs/run_20260606_taichang_mvp_asset_p0_customer_filtered.json`，Recall@5 100%，禁用关键词命中率 0%。
+
+单测：
+
+- `PYTHONPATH=. .venv/bin/pytest tests/test_rag_asset_scoring.py tests/test_rag_retrieval.py -q`
+- 结果：16 passed。
+
+## 2026-06-06 泰昌 MVP 真实生产链路回归
+
+### 服务状态
+
+真实链路启动前确认：
+
+- 前端：`http://127.0.0.1:5173` 返回 200。
+- 后端：`http://127.0.0.1:8000/api/ready` 返回 `status=ok`。
+- Celery：`checks.celery.status=ok`，在线 worker 数 1。
+- PostgreSQL / Redis：均健康。
+- 模型配置：`deepseek_api_key`、`dashscope_api_key`、`mineru_api_token` 均存在。
+
+### 真实全链路 3 章节
+
+样本文件：
+
+- `rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包1_完整招标文件_53488484541066181/国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx`
+
+报告：
+
+- `docs/development/runs/run_20260606_taichang_mvp_real_flow_3_sections.md`
+
+结果：
+
+| 步骤 | 结果 |
+| --- | --- |
+| 上传解析 | indexed，parser=`native_text` |
+| AI 解读 | 真实 DeepSeek 调用通过，约 345 秒 |
+| 大纲 | 74 章节 |
+| 章节生成 | 3/3 done，约 34 秒 |
+| 合规检查 | 220 rows，覆盖率 27% |
+| DOCX 导出 | completed，LibreOffice 字段刷新成功 |
+
+### 真实全链路 30 章节长任务
+
+报告：
+
+- `docs/development/runs/run_20260606_taichang_mvp_real_flow_30_sections.md`
+
+结果：
+
+| 步骤 | 结果 |
+| --- | --- |
+| 章节生成任务 | `b6d7da7c-d49b-4cfb-8a39-bdea9b79ef50` |
+| 章节数 | 30 |
+| 完成情况 | 30/30 done |
+| 耗时 | 278151 ms |
+| 合规检查 | 220 rows，覆盖率 36% |
+| DOCX 导出 | `5653a7b6-384b-4a06-9509-6321e8208888` completed |
+| DOCX 文件 | `outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou_Zhao_Biao_Wen_Jian/国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx` |
+
+### 泰昌图片问答与图文并茂
+
+智能问答：
+
+- 查询：泰昌电子天平、万能试验机等试验检测能力。
+- 真实 LLM 返回答案，`assets=8`、`images=8`。
+- Top 资产均为 `enterprise=泰昌`、`reference_only=false`、`evidence_type=testing_capacity`。
+- 结果 JSON：`docs/development/runs/run_20260606_taichang_mvp_real_knowledge_qa_images.json`
+
+图文并茂章节：
+
+- 创建真实章节：`泰昌生产制造与试验检测能力`。
+- `withImages=true` 流式生成通过，章节保存为 `generated`。
+- 正文包含 2 个泰昌图片链接，均为 `/api/bidding/knowledge/assets/.../file?variant=original`。
+- SSE 记录：`docs/development/runs/run_20260606_taichang_mvp_real_image_section_sse_saved.txt`
+
+### 本轮发现并修复
+
+- 问题：图文并茂章节中，知识库图片资产原先优先输出本机 `parsed_outputs/...` 绝对路径，浏览器端无法稳定显示。
+- 修复：`backend/api/routes.py::_asset_image_ref()` 改为资产有 `id` 时优先输出 `/api/bidding/knowledge/assets/<id>/file?variant=original`，本地路径仅作无资产 id 的兜底。
+- 回归：`PYTHONPATH=. .venv/bin/pytest tests/test_rag_asset_scoring.py tests/test_rag_retrieval.py tests/test_docx_export.py -q`，31 passed。
+
+### 剩余风险
+
+- AI 解读阶段耗时约 345 秒，真实客户文件下可用，但需要后续考虑后台化或进度可视化。
+- 泰昌 CPVC/MPP 检验报告“内径250”与辽宁 φ50/100/150/175/200 需求的覆盖关系仍需业务确认。
+- 30 章节无图导出时发现模型偶发输出非资产图片占位，导出会跳过；正式图文并茂应继续依赖系统资产选择链路。
+
 ### 泰昌第二批 MinerU OCR
 
 产物：

@@ -187,6 +187,22 @@ def _infer_customer_filter(query: str, explicit_filter: dict[str, Any] | None = 
     return None, None
 
 
+def _asset_metadata_filter_from_query(query: str, metadata_filter: dict[str, Any] | None, explicit_asset_filter: dict[str, Any] | None = None) -> dict[str, Any] | None:
+    asset_filter = {key: value for key, value in (explicit_asset_filter or {}).items() if value not in (None, "", "all")}
+    if metadata_filter:
+        for key in ("enterprise", "doc_owner", "source_domain", "target_library", "evidence_type", "source_batch_id", "ingestion_batch_id"):
+            value = metadata_filter.get(key)
+            if value not in (None, "", "all"):
+                asset_filter.setdefault(key, value)
+
+    query_text = query or ""
+    if "泰昌" in query_text:
+        asset_filter.setdefault("enterprise", "泰昌")
+        asset_filter.setdefault("source_domain", "enterprise_fact")
+        asset_filter.setdefault("reference_only", False)
+    return asset_filter or None
+
+
 @knowledge_bp.route('/scopes', methods=['GET'])
 @bp.route('/knowledge/scopes', methods=['GET'])
 def get_knowledge_scopes():
@@ -313,7 +329,12 @@ def search_knowledge():
             project_id=data.get("project_id") or None,
             return_parent=data.get("return_parent"),
         )
-        assets = search_knowledge_assets(query, match_count=8)
+        asset_metadata_filter = _asset_metadata_filter_from_query(
+            query,
+            metadata_filter,
+            data.get("asset_metadata_filter") or None,
+        )
+        assets = search_knowledge_assets(query, match_count=8, metadata_filter=asset_metadata_filter)
         
         # 2. RAG 生成回答
         result = generate_knowledge_answer(query, contexts, assets)
@@ -373,7 +394,12 @@ def stream_search_knowledge():
                 project_id=data.get("project_id") or None,
                 return_parent=data.get("return_parent"),
             )
-            assets = search_knowledge_assets(query, match_count=8)
+            asset_metadata_filter = _asset_metadata_filter_from_query(
+                query,
+                metadata_filter,
+                data.get("asset_metadata_filter") or None,
+            )
+            assets = search_knowledge_assets(query, match_count=8, metadata_filter=asset_metadata_filter)
             if not contexts and not assets and not is_relevant_knowledge_query(query):
                 yield emit({
                     "type": "chunk",

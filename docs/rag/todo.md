@@ -54,27 +54,28 @@
 
 | 优先级 | 状态 | 任务 | 交付物 | 验收口径 |
 | --- | --- | --- | --- | --- |
-| P2-1 | [ ] | 客户资料入库 SOP | `docs/rag/customer-template-ingestion-sop.md` | 从收件、解压、杀毒/脱敏、解析、入库、评测到归档全流程可执行 |
-| P2-2 | [ ] | 每批资料 manifest 规范 | `manifest.json` 模板 | 每个文件都有来源、批次、角色、解析状态、质量评分 |
-| P2-3 | [ ] | 解析质量报告模板 | `docs/rag/parse-quality-report-template.md` | 能标记空文本、乱码、表格丢失、页码缺失、扫描件 |
+| P2-1 | [x] | 客户资料入库 SOP | `docs/rag/customer-template-ingestion-sop.md` | 已沉淀从收件、inventory、解析、图片 metadata、入库、回归到归档的全流程；固化泰昌企业事实、辽宁招标要求、河北豪乾参考稿隔离边界 |
+| P2-2 | [x] | 每批资料 manifest 规范 | `docs/rag/customer-batch-manifest-template.md` | 已定义批次级与文件级字段、取值约束、泰昌/辽宁/河北豪乾强校验和入库前检查命令 |
+| P2-3 | [x] | 解析质量报告模板 | `docs/rag/parse-quality-report-template.md` | 已覆盖空文本、乱码、表格丢失、页码缺失、扫描件、图片资产、metadata 完整性和真实链路回归记录 |
 | P2-4 | [ ] | 版本与去重策略 | `content_sha256`、`doc_version`、`superseded_by` | 同一模板新旧版本不会同时污染召回 |
 | P2-5 | [ ] | 模板可引用边界 | `citation_policy` 规则 | 区分客户模板、公开法规、企业话术，避免把模板当强制条款 |
 | P2-6 | [x] | 批次回滚机制 | `scripts/rag/rollback_customer_corpus.py`、`docs/rag/runs/rollback_customer_jx_sx_20260602_p1_dry_run_20260602_165145.md` | 支持按 `ingestion_batch_id` dry-run/execute 删除，当前 dry-run 覆盖 23 文档、4238 chunk、105 结构化行 |
 
-## P1A：辽宁 / 泰昌 MVP 试点资料入库准备
+## P1A：泰昌 MVP 试点资料入库与辽宁招标样本隔离
 
-目标：把客户指定的泰昌 MVP 试点企业资料与辽宁电缆保护管招标资料整理成可控、可评测、可隔离的入库批次。
+目标：以泰昌为 MVP 试点企业事实主线；辽宁资料仅作为客户提供的电缆保护管招标场景样本，不作为 MVP 企业主体事实来源。所有问答、写作、图片资产展示必须避免把泰昌事实、辽宁招标要求、河北豪乾参考稿混用。
 
 | 优先级 | 状态 | 任务 | 交付物 | 验收口径 |
 | --- | --- | --- | --- | --- |
 | P1A-1 | [x] | 解压并 inventory 辽宁/泰昌新增资料 | `docs/rag/liaoning-taichang-mvp-corpus-review.md`、`parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_inventory.json` | 已保留原始包，辽宁 185 个文件、泰昌 45 个文件已登记 |
-| P1A-2 | [~] | 判断资料完整性和可用边界 | `docs/rag/liaoning-taichang-mvp-corpus-review.md` | 已确认辽宁招标侧较完整；泰昌侧需 OCR、脱敏、型号覆盖确认 |
+| P1A-2 | [x] | 判断资料完整性和可用边界 | `docs/rag/liaoning-taichang-mvp-corpus-review.md`、`docs/development/runs/run_20260606_taichang_mvp_real_flow_30_sections.md` | 已确认泰昌为 MVP 企业事实主线、辽宁仅作招标样本、河北豪乾仅作参考稿；真实链路完成 30 章节生成与 DOCX 导出。剩余业务风险：CPVC/MPP 各规格检验报告覆盖仍需客户确认 |
 | P1A-3 | [x] | 辽宁货物清单结构化解析兼容 | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/goods_tables/` | 已兼容 `dimension ref=A1` 异常并输出 87 条去重需求行 |
 | P1A-4 | [x] | 泰昌扫描 PDF OCR 与图片资产 metadata | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/ocr_coverage_report.json`、`asset_index.json` | 泰昌 42 份 PDF 已全部 MinerU 完成，生成 242 个图片资产 metadata，其中 78 个 `taichang_internal_private` 资产可在泰昌租户内问答/写作/资产检索展示；覆盖率和资产语义校验通过 |
 | P1A-5 | [x] | 河北豪乾参考稿隔离入库 | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/reference_templates/` | 已抽取 2 份河北豪乾参考稿基础模板数据，均标记 `reference_only=true`，不得作为泰昌企业事实来源 |
 | P1A-6 | [x] | 辽宁/泰昌专项评测集 | `tests/rag/customer_liaoning_taichang_testset.jsonl`、`docs/rag/runs/run_20260606_taichang_mvp_customer_filtered.json` | 17 条用例已跑正式召回，Recall@5 100%，禁用关键词命中率 0%，覆盖 CPVC/MPP 型号、包号、技术规范编码、泰昌事实、图片资产、河北豪乾参考稿隔离和泰昌租户内图片展示策略 |
 | P1A-7 | [x] | 泰昌 OCR parse quality report | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/parse_quality_report.md` | 已汇总 42 份 PDF 的文本量、图片资产、敏感级别、人工复核项和可入库建议 |
 | P1A-8 | [x] | 辽宁/泰昌 MVP 正式入库与回归 | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/formal_ingestion_summary.md`、`docs/rag/runs/run_20260606_taichang_mvp_base_filtered.json` | 已写入 124 个 `knowledge_documents`、29683 个 `document_chunks`、87 条结构化货物清单、242 个图片资产；Base Recall@5 保持 86.7%，专项 Recall@5 100% |
+| P1A-9 | [x] | P0：泰昌 MVP 图片智能问答与图文并茂选图准确性 | `backend/rag/retrieval.py`、`backend/api/knowledge.py`、`backend/api/routes.py`、`tests/test_rag_asset_scoring.py`、`tests/test_rag_retrieval.py`、`docs/rag/runs/run_20260606_taichang_mvp_asset_p0_*` | 问答资产检索已按泰昌企业事实 metadata 过滤；标书配图已按 `evidence_type` 强约束生产制造、试验检测、绿色低碳、营业执照/证书、检验报告；真实库 242 个资产模拟通过，Base Recall@5 86.7%，泰昌专项 Recall@5 100% |
 
 ## P3：召回质量增强
 
@@ -114,8 +115,8 @@
 
 ## 当前最近任务
 
-1. 建立江西/山西客户资料 inventory。
-2. 选择铁构件/接地铁作为首个真实物料场景。
-3. 抽查客户主招标文件和合同的 parent 内容，确认写作回溯上下文是否适合正式生成。
-4. 补客户资料入库 SOP 和解析质量报告模板，沉淀为后续客户批次固定流程。
-5. 扩展客户评测集到 40-60 条，并加入更多包号/技术规范编码/合同条款负样本。
+1. 进入 P2-4/P2-5：补版本去重策略和模板可引用边界，避免旧模板、参考稿和企业事实污染召回。
+2. 进入 P3 Query Rewrite / 关键词补召回 / authority 排序，提升标准号、包号、物料编码精确召回。
+3. 向客户确认泰昌 CPVC/MPP 各规格检验报告覆盖关系，尤其是“内径250”报告能否覆盖辽宁 φ50/100/150/175/200 需求。
+4. 扩展泰昌 MVP 专项评测集到 40-60 条，并加入更多包号、技术规范编码、合同条款、图片问答和参考稿隔离负样本。
+5. 追加导出观感人工验收：打开 30 章节真实 DOCX，检查封面、目录、正文、表格、页眉页脚、页码和图片占位告警。

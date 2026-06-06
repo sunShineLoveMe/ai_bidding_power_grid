@@ -1,0 +1,234 @@
+{
+  "generated_at": "2026-06-06T11:00:24.242162+00:00",
+  "ok": true,
+  "base_url": "http://127.0.0.1:8000",
+  "timeout": 1800,
+  "error": null,
+  "artifacts": {
+    "ready": {
+      "checks": {
+        "celery": {
+          "status": "ok",
+          "workers": 1
+        },
+        "database": {
+          "checks": {
+            "match_knowledge_assets": true,
+            "match_knowledge_chunks": true,
+            "vector": true
+          },
+          "status": "ok"
+        },
+        "model_config": {
+          "optional": {
+            "mineru_api_token": true
+          },
+          "required": {
+            "dashscope_api_key": true,
+            "deepseek_api_key": true
+          },
+          "status": "ok"
+        },
+        "redis": {
+          "host": "127.0.0.1",
+          "port": 16379,
+          "status": "ok"
+        },
+        "storage": {
+          "provider": "local",
+          "root": "storage",
+          "status": "ok"
+        }
+      },
+      "duration_ms": 2244,
+      "status": "ok"
+    },
+    "project_id": "4bc3ee73-9ec5-4184-aafd-eaede9f90798",
+    "outline_chapters": 74,
+    "section_count": 30,
+    "section_generation_task_id": "b6d7da7c-d49b-4cfb-8a39-bdea9b79ef50",
+    "compliance_rows": 220,
+    "compliance_summary": {
+      "covered": 49,
+      "highRiskMissing": 57,
+      "metricName": "条款响应覆盖率",
+      "missing": 112,
+      "partial": 59,
+      "percent": 36,
+      "scopeNote": "当前按完整投标文件统计；基于招标条款、评分项、风险项与当前章节映射/正文片段的响应追踪结果，不等同于最终 Word 标书合规结论。",
+      "total": 220,
+      "volumeName": "完整投标文件",
+      "volumeType": "all"
+    },
+    "docx_task_id": "5653a7b6-384b-4a06-9509-6321e8208888",
+    "docx_export": {
+      "created_at": "2026-06-06T19:00:20.195215+08:00",
+      "download_url": "/api/outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou_Zhao_Biao_Wen_Jian/%E5%9B%BD%E7%BD%91%E8%BE%BD%E5%AE%81%E7%94%B5%E5%8A%9B2025%E5%B9%B4%E7%AC%AC%E4%B8%89%E6%AC%A1%E7%89%A9%E8%B5%84%E5%8D%8F%E8%AE%AE%E5%BA%93%E5%AD%98%E6%8B%9B%E6%A0%87%E9%87%87%E8%B4%AD%E6%8B%9B%E6%A0%87%E6%96%87%E4%BB%B6.docx",
+      "error_message": null,
+      "export_type": "docx",
+      "file_name": "国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx",
+      "file_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou_Zhao_Biao_Wen_Jian/国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx",
+      "finished_at": "2026-06-06T11:00:23.003342+08:00",
+      "id": "5653a7b6-384b-4a06-9509-6321e8208888",
+      "message": "DOCX 已完成自动刷新，目录页码、页脚页码和总页数字段已重新保存。",
+      "metadata": {
+        "docx_template": {
+          "body_font": "宋体",
+          "body_font_size_pt": 12.0,
+          "body_latin_font": "Times New Roman",
+          "body_line_spacing_pt": 28.0,
+          "header_footer": {
+            "footer_font": "宋体",
+            "footer_font_size_pt": 9,
+            "header_font": "宋体",
+            "header_font_size_pt": 9,
+            "header_max_chars": 42,
+            "page_number_format": "第 X 页，共 Y 页"
+          },
+          "margins_cm": {
+            "bottom": 2.54,
+            "left": 3.18,
+            "right": 3.18,
+            "top": 2.54
+          },
+          "page_size": "A4",
+          "table_font": "宋体",
+          "table_font_size_pt": 10.5,
+          "template_id": "sgcc_power_grid"
+        },
+        "field_refresh": {
+          "enabled": true,
+          "input_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou_Zhao_Biao_Wen_Jian/国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx",
+          "manual_refresh_required": false,
+          "output_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou_Zhao_Biao_Wen_Jian/国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx",
+          "returncode": 0,
+          "size": 103446,
+          "soffice_bin": "/opt/homebrew/bin/soffice",
+          "status": "refreshed",
+          "stderr": "2026-06-06 19:00:22.961 soffice[32216:16672253] Task policy set failed: 4 ((os/kern) invalid argument)\n",
+          "stdout": "convert /var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-xhheae1k/input/国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx as a Writer document -> /private/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-xhheae1k/output/国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx using filter : Office Open XML Text\n",
+          "timeout_seconds": 180,
+          "tool": "libreoffice",
+          "user_message": "DOCX 已完成自动刷新，目录页码、页脚页码和总页数字段已重新保存。"
+        },
+        "image_conversion": {
+          "events": [
+            {
+              "alt": "泰昌绿色低碳工艺流程图",
+              "reason": "图片路径不存在或无法解析",
+              "ref": "taichang_green_low_carbon_p1_006_cebd16b3.png \"碳足迹核算及绿色制造流程\"",
+              "status": "skipped"
+            }
+          ],
+          "failed": 0,
+          "found": 1,
+          "inserted": 0,
+          "max_images": 24,
+          "skipped": 1,
+          "template": {
+            "body_font": "宋体",
+            "body_font_size_pt": 12.0,
+            "body_latin_font": "Times New Roman",
+            "body_line_spacing_pt": 28.0,
+            "header_footer": {
+              "footer_font": "宋体",
+              "footer_font_size_pt": 9,
+              "header_font": "宋体",
+              "header_font_size_pt": 9,
+              "header_max_chars": 42,
+              "page_number_format": "第 X 页，共 Y 页"
+            },
+            "margins_cm": {
+              "bottom": 2.54,
+              "left": 3.18,
+              "right": 3.18,
+              "top": 2.54
+            },
+            "page_size": "A4",
+            "table_font": "宋体",
+            "table_font_size_pt": 10.5,
+            "template_id": "sgcc_power_grid"
+          }
+        },
+        "image_selection": {
+          "asset_candidates": 0,
+          "enabled": false,
+          "manifest": [],
+          "max_total": 36,
+          "selected": 0,
+          "warnings": []
+        },
+        "requested_from": "bid_editor",
+        "snapshot_section_count": 0,
+        "used_editor_snapshot": false,
+        "with_images": false
+      },
+      "progress": 100,
+      "project_id": "4bc3ee73-9ec5-4184-aafd-eaede9f90798",
+      "project_name": "国网辽宁电力2025年第三次物资协议库存招标采购招标文件",
+      "scope": "full",
+      "section_id": null,
+      "started_at": "2026-06-06T11:00:20.211004+08:00",
+      "status": "completed",
+      "updated_at": "2026-06-06T19:00:23.004188+08:00",
+      "volume_type": null,
+      "with_images": false
+    }
+  },
+  "steps": [
+    {
+      "name": "check_ready",
+      "ok": true,
+      "detail": "status=ok checks=5",
+      "elapsed_ms": 2255
+    },
+    {
+      "name": "login",
+      "ok": true,
+      "detail": "user=taichang-smoke-1780742625",
+      "elapsed_ms": 120
+    },
+    {
+      "name": "query_interpretation",
+      "ok": true,
+      "detail": "hasAnalysis=True",
+      "elapsed_ms": 53
+    },
+    {
+      "name": "generate_outline",
+      "ok": true,
+      "detail": "chapters=74",
+      "elapsed_ms": 4295
+    },
+    {
+      "name": "list_sections",
+      "ok": true,
+      "detail": "sections=74",
+      "elapsed_ms": 18
+    },
+    {
+      "name": "generate_sections",
+      "ok": true,
+      "detail": "sections=30 done=30 taskId=b6d7da7c-d49b-4cfb-8a39-bdea9b79ef50",
+      "elapsed_ms": 278151
+    },
+    {
+      "name": "run_compliance_check",
+      "ok": true,
+      "detail": "rows=220 coverage=None",
+      "elapsed_ms": 385
+    },
+    {
+      "name": "create_docx_export",
+      "ok": true,
+      "detail": "taskId=5653a7b6-384b-4a06-9509-6321e8208888",
+      "elapsed_ms": 15
+    },
+    {
+      "name": "wait_docx_export",
+      "ok": true,
+      "detail": "status=completed path=outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou_Zhao_Biao_Wen_Jian/国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx",
+      "elapsed_ms": 4036
+    }
+  ]
+}

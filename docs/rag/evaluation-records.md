@@ -325,3 +325,54 @@ PDF 标准入库前必须增加源文件审计门禁。当前错源 GB/DL 标准
 
 - Base 未命中 T04/T17/T18/T20 仍为既有问题：T04 关键词标注偏严，T17/T18 源数据质量差，T20 标准仅有摘要/目录。
 - 泰昌 CPVC/MPP 检验报告为“内径250”，与辽宁清单中的 φ50/100/150/175/200 覆盖关系仍需业务确认。
+
+---
+
+## Run 7 — 泰昌 MVP 图片智能问答与图文并茂选图 P0 回归（2026-06-06）
+
+> Base filtered：`docs/rag/runs/run_20260606_taichang_mvp_asset_p0_base_filtered.json`  
+> Customer filtered：`docs/rag/runs/run_20260606_taichang_mvp_asset_p0_customer_filtered.json`
+
+### 范围边界
+
+- 泰昌是 MVP 试点企业，`enterprise_fact/doc_owner=泰昌` 是企业事实主线。
+- 辽宁资料仅作为电缆保护管招标场景样本，用于招标要求、技术规范、货物清单、合同条款召回。
+- 河北豪乾资料仅作为格式/目录/写法参考，`reference_only=true`，不得作为泰昌企业事实或泰昌图片来源。
+
+### 修复内容
+
+- 智能问答图片资产检索支持 metadata 过滤；当查询或显式过滤指向泰昌时，仅召回泰昌企业事实资产，并排除参考稿。
+- 图片资产检索文本补入 `metadata/specs` 标量和列表值，使 `evidence_type/target_library/enterprise/source_domain` 可参与关键词补召回。
+- 标书导出“图文并茂”按章节语义推断 `evidence_type`，对生产制造、试验检测、绿色低碳、营业执照/证书、检验报告做强匹配，避免泛化的“设备/证书”关键词误选。
+
+### 真实库验证
+
+当前 `knowledge_assets` 候选池 242 个资产。真实库模拟结果：
+
+| 查询/章节 | 期望 evidence_type | 结果 |
+| --- | --- | --- |
+| 泰昌企业资信与营业执照 | `business_license`、`certification` | 命中泰昌营业执照与认证证书 |
+| 泰昌生产制造能力 | `production_capacity` | 命中泰昌生产线/生产制造资产 |
+| 泰昌试验检测能力 | `testing_capacity` | 命中电子天平、万能试验机等试验检测资产 |
+| 泰昌绿色低碳与绿色供应链能力 | `green_low_carbon` | 命中绿色低碳/绿色供应链资产 |
+
+智能问答资产检索验证：
+
+| 查询 | Top evidence_type |
+| --- | --- |
+| 泰昌营业执照图片 | `business_license` |
+| 泰昌 MPP 生产线图片 | `production_capacity` |
+| 泰昌电子天平和万能试验机图片 | `testing_capacity` |
+| 泰昌绿色供应链证书图片 | `green_low_carbon` |
+
+### 召回回归
+
+| 测试集 | Recall@5 | top1 来源准确率 | 关键词命中率 | 跨 doc_role 串扰 | 禁用关键词命中率 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Base filtered | 86.7% | 93.3% | 86.7% | 0.0% | - |
+| 泰昌 MVP 专项 filtered | 100.0% | 100.0% | 100.0% | 0.0% | 0.0% |
+
+### 单测
+
+- `PYTHONPATH=. .venv/bin/pytest tests/test_rag_asset_scoring.py tests/test_rag_retrieval.py -q`
+- 结果：16 passed，1 个 PyPDF2 deprecation warning。

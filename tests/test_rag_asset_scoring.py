@@ -63,6 +63,60 @@ BUSINESS_ASSET = {
     "specs": {"library_type": "qualification", "allowed_for_bid": True, "applicable_volumes": ["business"]},
 }
 
+TAICHANG_PRODUCTION_ASSET = {
+    "id": "taichang-production",
+    "title": "泰昌 MPP 管材生产线照片",
+    "category": "生产制造能力",
+    "asset_type": "product_image",
+    "description": "展示泰昌 MPP/CPVC 电缆保护管生产线、车间和制造能力。",
+    "tags": ["泰昌", "生产线", "制造能力"],
+    "applicable_sections": ["技术标", "生产制造能力"],
+    "applicable_volumes": ["technical"],
+    "metadata": {
+        "library_type": "product",
+        "target_library": "product_library",
+        "evidence_type": "production_capacity",
+        "enterprise": "泰昌",
+    },
+    "specs": {"library_type": "product", "allowed_for_bid": True, "applicable_volumes": ["technical"]},
+}
+
+TAICHANG_TESTING_ASSET = {
+    "id": "taichang-testing",
+    "title": "泰昌电子天平与万能试验机照片",
+    "category": "试验检测能力",
+    "asset_type": "product_image",
+    "description": "展示电子天平、万能试验机、维卡软化温度测定仪等试验检测设备。",
+    "tags": ["泰昌", "试验检测", "电子天平", "万能试验机"],
+    "applicable_sections": ["技术标", "试验检测能力"],
+    "applicable_volumes": ["technical"],
+    "metadata": {
+        "library_type": "product",
+        "target_library": "product_library",
+        "evidence_type": "testing_capacity",
+        "enterprise": "泰昌",
+    },
+    "specs": {"library_type": "product", "allowed_for_bid": True, "applicable_volumes": ["technical"]},
+}
+
+TAICHANG_GREEN_ASSET = {
+    "id": "taichang-green",
+    "title": "泰昌绿色供应链管理企业证书照片",
+    "category": "绿色低碳资料",
+    "asset_type": "qualification_image",
+    "description": "绿色供应链、低碳、废水废气检测相关证明材料。",
+    "tags": ["泰昌", "绿色供应链", "低碳"],
+    "applicable_sections": ["技术标", "绿色低碳"],
+    "applicable_volumes": ["technical", "qualification"],
+    "metadata": {
+        "library_type": "qualification",
+        "target_library": "qualification_library",
+        "evidence_type": "green_low_carbon",
+        "enterprise": "泰昌",
+    },
+    "specs": {"library_type": "qualification", "allowed_for_bid": True, "applicable_volumes": ["technical", "qualification"]},
+}
+
 
 class RagAssetScoringQualityTest(unittest.TestCase):
     def test_section_writer_scores_product_assets_higher_for_technical_volume(self):
@@ -207,6 +261,51 @@ class RagAssetScoringQualityTest(unittest.TestCase):
         )
 
         self.assertEqual(markdown, "")
+
+    def test_taichang_testing_section_rejects_green_asset(self):
+        from backend.api.routes import _build_section_image_markdown
+
+        technical = _section(
+            "泰昌试验检测能力",
+            "technical",
+            response_points=["电子天平", "万能试验机", "维卡软化温度测定仪"],
+        )
+        manifest = []
+
+        markdown = _build_section_image_markdown(
+            technical,
+            [TAICHANG_GREEN_ASSET, TAICHANG_TESTING_ASSET],
+            used_asset_ids=set(),
+            image_manifest=manifest,
+            remaining_limit=2,
+        )
+
+        self.assertIn("泰昌电子天平与万能试验机照片", markdown)
+        self.assertNotIn("绿色供应链", markdown)
+        self.assertEqual(manifest[0]["asset_id"], "taichang-testing")
+        self.assertIn("试验检测能力", manifest[0]["reason"])
+
+    def test_taichang_production_section_prefers_production_capacity(self):
+        from backend.api.routes import _build_section_image_markdown
+
+        technical = _section(
+            "泰昌生产制造能力",
+            "technical",
+            response_points=["MPP 管材生产线", "CPVC 电缆保护管车间", "生产设备"],
+        )
+        manifest = []
+
+        markdown = _build_section_image_markdown(
+            technical,
+            [TAICHANG_TESTING_ASSET, TAICHANG_PRODUCTION_ASSET],
+            used_asset_ids=set(),
+            image_manifest=manifest,
+            remaining_limit=2,
+        )
+
+        self.assertIn("泰昌 MPP 管材生产线照片", markdown)
+        self.assertNotIn("电子天平", markdown)
+        self.assertEqual(manifest[0]["asset_id"], "taichang-production")
 
 
 if __name__ == "__main__":

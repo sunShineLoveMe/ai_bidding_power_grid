@@ -188,6 +188,45 @@ class RagRetrievalQualityTest(unittest.TestCase):
         self.assertEqual([asset["id"] for asset in result], ["tech", "legacy"])
         self.assertEqual(client.rpc_calls[0][1]["filter_applicable_volume"], "technical")
 
+    @patch("backend.rag.retrieval.rerank_documents")
+    @patch("backend.rag.retrieval.get_embeddings", return_value=[[0.4, 0.5]])
+    @patch("backend.rag.retrieval.init_ali_client", return_value=object())
+    def test_asset_recall_honors_taichang_metadata_filter(self, _ali, _embeddings, rerank_mock):
+        from backend.rag import retrieval
+
+        def passthrough(_query, rows, **_kwargs):
+            return rows
+
+        rerank_mock.side_effect = passthrough
+        client = _RpcClient(
+            rpc_rows=[
+                {
+                    "id": "taichang",
+                    "title": "泰昌营业执照图片",
+                    "similarity": 0.8,
+                    "searchable_text": "营业执照 泰昌",
+                    "metadata": {"enterprise": "泰昌", "source_domain": "enterprise_fact", "reference_only": False},
+                },
+                {
+                    "id": "reference",
+                    "title": "河北豪乾营业执照参考图",
+                    "similarity": 0.9,
+                    "searchable_text": "营业执照 河北豪乾",
+                    "metadata": {"enterprise": "河北豪乾", "source_domain": "reference_template", "reference_only": True},
+                },
+            ],
+            asset_rows=[],
+        )
+
+        with patch("backend.rag.retrieval.get_supabase_client", return_value=client):
+            result = retrieval.search_knowledge_assets(
+                "泰昌营业执照图片",
+                match_count=2,
+                metadata_filter={"enterprise": "泰昌", "source_domain": "enterprise_fact", "reference_only": False},
+            )
+
+        self.assertEqual([asset["id"] for asset in result], ["taichang"])
+
     def test_knowledge_prompt_contains_sources_assets_and_image_urls(self):
         from backend.rag.retrieval import build_knowledge_prompt
 

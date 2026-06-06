@@ -1,0 +1,1132 @@
+{
+  "answer": "## 结论  \n根据泰昌企业提供的图片资产，泰昌公司具备电子天平称量及万能试验机力学性能等试验检测能力，相关设备均附有校准证书或收据，可作为企业试验检测能力的佐证材料。\n\n## 关键信息  \n- **电子天平**：  \n  - 型号：X402410（1台），收据日期为2015年10月23日，来自上海衡际科学仪器有限公司。  \n  - 对应图片资产1（收据存根）和图片资产2（收据正面），展示设备采购与交付记录。  \n- **万能试验机及其他力学检测设备**：  \n  - 包含多台试验机，如TC-12（承德衡通）、TC-13（济南艾德诺），以及来自济南辰达、济南思达、石家庄开发区中实等公司的设备。  \n  - 每台设备均附有校准证书，批准人均为张绍安，核验员为赵华聪，校准员包括刘浩、陈终有、刚等。  \n- **整体检测能力**：  \n  - 图片资产3、4、5、6、7、8分别展示了不同设备的校准证书页，涵盖设备编号、制造单位、人员签章等信息，表明泰昌对试验设备进行了规范化管理。\n\n## 操作建议  \n- 若需将上述检测能力用于标书或投标材料，可直接引用下方高相关度图片（建议放置于“试验检测能力”章节）。  \n- 注意电子天平收据日期较早（2015年），建议补充近期校准记录或设备台账，以增强时效性。  \n- 万能试验机等设备校准证书中的人员信息（如批准人张绍安）可作为企业技术团队资质的辅助说明。\n\n## 需要确认或补充  \n- 当前资料仅为设备收据和校准证书片段，未呈现设备实物照片、完整校准报告或设备参数（量程、精度等）。  \n- 电子天平收据为非经营性业务收支凭证，不能替代正规设备购置合同或固定资产证明。  \n- 建议补充：完整的设备清单、近三年校准报告、设备操作人员资质证书，以形成完整的试验检测能力证明。\n\n## 参考依据  \n- **知识库检索片段**：未包含泰昌企业资料，所有信息均来自下方图片资产。  \n- **图片资产**：  \n  - 图片资产1、2（电子天平收据）  \n  - 图片资产3、4、5、6、7、8（各试验机校准证书页）\n\n### 可插入的图片示例（最多3张）  \n\n![泰昌电子天平收据（正面）](/api/knowledge/assets/e250e2fc-07b8-41c4-9c5f-33404bfe9237/file)  \n*图1：电子天平收据（正面），显示设备型号X402410及交付日期2015年10月23日。仅作示意图，不可替代正式发票。*  \n\n![万能试验机校准证书页1](/api/knowledge/assets/17b86695-57c6-4e99-be74-7ba38592b95d/file)  \n*图2：万能试验机校准证书页（制造单位：上海衡际科学仪器有限公司），含批准人、核验员、校准员签章。仅作脱敏示意图。*  \n\n![万能试验机校准证书页2](/api/knowledge/assets/ce435272-95db-4ac9-9851-edf5d54c3335/file)  \n*图3：TC-12型万能试验机校准证书页（制造单位：承德衡通试验检测仪器有限公司），展示设备编号与人员信息。仅作脱敏示意图。*",
+  "assets": [
+    {
+      "ai_caption": "今收到电子天平：1台X402410 交来 人民币（大写） ￥410",
+      "anonymized": false,
+      "applicable_sections": [],
+      "applicable_volumes": [
+        "technical",
+        "product"
+      ],
+      "asset_type": "product_image",
+      "attribution": "河北泰昌电力器材科技有限公司",
+      "category": "泰昌产品能力图片",
+      "created_at": "2026-06-06T16:20:08.713481+08:00",
+      "description": "今收到电子天平：1台X402410 交来 人民币（大写） ￥410",
+      "file_ext": "jpg",
+      "file_name": "f0b3e62701a9a233aa5de3bcc8b8cb26cba05f7817d978dd6c122e65e59c6ad8.jpg",
+      "file_size": 11432,
+      "height": 267,
+      "id": "4712614d-92c8-4c8d-a55d-671154f1feb7",
+      "industry": "电力行业",
+      "is_sensitive": false,
+      "is_synthetic": false,
+      "knowledge_document_id": null,
+      "license": "customer_internal",
+      "metadata": {
+        "access_scope": "taichang_tenant_internal",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "asset_id": "taichang_testing_capacity_p1_006_9b7dd006",
+        "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/电子天平_96dba4/extract/images/f0b3e62701a9a233aa5de3bcc8b8cb26cba05f7817d978dd6c122e65e59c6ad8.jpg",
+        "asset_sha256": "f5900a7aeeb26e5c1ca5d1e509e63047d26105c03621e1cabfa977d031ca311a",
+        "bbox": [
+          419,
+          413,
+          573,
+          574
+        ],
+        "bbox_anchor": [
+          419,
+          413,
+          573,
+          574
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "doc_owner": "泰昌",
+        "enterprise": "泰昌",
+        "evidence_type": "testing_capacity",
+        "fact_source_allowed_for_enterprise": true,
+        "page_anchor": "page:1",
+        "page_no": 1,
+        "privacy_level": "private",
+        "reference_only": false,
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "source_domain": "enterprise_fact",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/3.电子天平/电子天平.pdf",
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "target_library": "product_library",
+        "tenant_visibility": "taichang_only",
+        "thumbnail_mime_type": "image/webp",
+        "thumbnail_size": 6812,
+        "thumbnail_storage_bucket": "knowledge-files",
+        "thumbnail_storage_path": "product/thumbnails/0bc840a8ea51466d8ac723eaf4b099b9.webp"
+      },
+      "mime_type": "image/jpeg",
+      "ocr_text": "今收到电子天平：1台X402410 交来 人民币（大写） ￥410",
+      "public_url": "/local-storage/knowledge-files/product/a00ce0b8361846fa94b6dc94431fd70e.jpg",
+      "rerank_score": 0.8869307643696362,
+      "searchable_text": "泰昌 testing_capacity 第1页图片。今收到电子天平：1台X402410 交来 人民币（大写） ￥410",
+      "similarity": 0.8153853856598643,
+      "source_type": "taichang_mvp_mineru_asset",
+      "source_url": null,
+      "specs": {
+        "bbox": [
+          419,
+          413,
+          573,
+          574
+        ],
+        "evidence_type": "testing_capacity",
+        "page_no": 1,
+        "target_library": "product_library"
+      },
+      "status": "indexed",
+      "storage_bucket": "knowledge-files",
+      "storage_path": "product/a00ce0b8361846fa94b6dc94431fd70e.jpg",
+      "tags": [
+        "泰昌",
+        "MVP试点企业",
+        "testing_capacity",
+        "图片资产"
+      ],
+      "title": "泰昌 testing_capacity 第1页图片 taichang_testing_capacity_p1_006_9b7dd006",
+      "updated_at": "2026-06-06T16:20:08.713481+08:00",
+      "width": 359
+    },
+    {
+      "ai_caption": "此收据不作为经营性业务收支结算凭证用 2015年10月23日字N0241729 今收到电子天平：1台X402410 交来",
+      "anonymized": false,
+      "applicable_sections": [],
+      "applicable_volumes": [
+        "technical",
+        "product"
+      ],
+      "asset_type": "product_image",
+      "attribution": "河北泰昌电力器材科技有限公司",
+      "category": "泰昌产品能力图片",
+      "created_at": "2026-06-06T16:20:08.671744+08:00",
+      "description": "此收据不作为经营性业务收支结算凭证用 2015年10月23日字N0241729 今收到电子天平：1台X402410 交来",
+      "file_ext": "jpg",
+      "file_name": "7f5d703ef6e00fb7567423491d0b960fca7a5eac023bb61309c537908807e562.jpg",
+      "file_size": 21116,
+      "height": 459,
+      "id": "e250e2fc-07b8-41c4-9c5f-33404bfe9237",
+      "industry": "电力行业",
+      "is_sensitive": false,
+      "is_synthetic": false,
+      "knowledge_document_id": null,
+      "license": "customer_internal",
+      "metadata": {
+        "access_scope": "taichang_tenant_internal",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "asset_id": "taichang_testing_capacity_p1_001_b7594832",
+        "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/电子天平_96dba4/extract/images/7f5d703ef6e00fb7567423491d0b960fca7a5eac023bb61309c537908807e562.jpg",
+        "asset_sha256": "36db4cc147ecee2dd01501ce84a88ef8ada52c8f9396bbe06b7a3f67029fcf06",
+        "bbox": [
+          253,
+          263,
+          338,
+          541
+        ],
+        "bbox_anchor": [
+          253,
+          263,
+          338,
+          541
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "doc_owner": "泰昌",
+        "enterprise": "泰昌",
+        "evidence_type": "testing_capacity",
+        "fact_source_allowed_for_enterprise": true,
+        "page_anchor": "page:1",
+        "page_no": 1,
+        "privacy_level": "private",
+        "reference_only": false,
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "source_domain": "enterprise_fact",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/3.电子天平/电子天平.pdf",
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "target_library": "product_library",
+        "tenant_visibility": "taichang_only",
+        "thumbnail_mime_type": "image/webp",
+        "thumbnail_size": 17756,
+        "thumbnail_storage_bucket": "knowledge-files",
+        "thumbnail_storage_path": "product/thumbnails/2d570de7c28e498b8caec0a6721964cd.webp"
+      },
+      "mime_type": "image/jpeg",
+      "ocr_text": "此收据不作为经营性业务收支结算凭证用 2015年10月23日字N0241729 今收到电子天平：1台X402410 交来",
+      "public_url": "/local-storage/knowledge-files/product/4067fe4ba7864a39a7197b881b9e977b.jpg",
+      "rerank_score": 0.9071669415810275,
+      "searchable_text": "泰昌 testing_capacity 第1页图片。此收据不作为经营性业务收支结算凭证用 2015年10月23日字N0241729 今收到电子天平：1台X402410 交来",
+      "similarity": 0.8087743761770245,
+      "source_type": "taichang_mvp_mineru_asset",
+      "source_url": null,
+      "specs": {
+        "bbox": [
+          253,
+          263,
+          338,
+          541
+        ],
+        "evidence_type": "testing_capacity",
+        "page_no": 1,
+        "target_library": "product_library"
+      },
+      "status": "indexed",
+      "storage_bucket": "knowledge-files",
+      "storage_path": "product/4067fe4ba7864a39a7197b881b9e977b.jpg",
+      "tags": [
+        "泰昌",
+        "MVP试点企业",
+        "testing_capacity",
+        "图片资产"
+      ],
+      "title": "泰昌 testing_capacity 第1页图片 taichang_testing_capacity_p1_001_b7594832",
+      "updated_at": "2026-06-06T16:20:08.671744+08:00",
+      "width": 201
+    },
+    {
+      "ai_caption": "Equipment No. 制造单位：上海衡际科学仪器有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "anonymized": false,
+      "applicable_sections": [],
+      "applicable_volumes": [
+        "technical",
+        "product"
+      ],
+      "asset_type": "product_image",
+      "attribution": "河北泰昌电力器材科技有限公司",
+      "category": "泰昌产品能力图片",
+      "created_at": "2026-06-06T16:20:08.960853+08:00",
+      "description": "Equipment No. 制造单位：上海衡际科学仪器有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "file_ext": "jpg",
+      "file_name": "0d2e3a45699201abb242cf4696bfcfeb96de3737a5179857023920d3f618a3e9.jpg",
+      "file_size": 21111,
+      "height": 328,
+      "id": "17b86695-57c6-4e99-be74-7ba38592b95d",
+      "industry": "电力行业",
+      "is_sensitive": false,
+      "is_synthetic": false,
+      "knowledge_document_id": null,
+      "license": "customer_internal",
+      "metadata": {
+        "access_scope": "taichang_tenant_internal",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "asset_id": "taichang_testing_capacity_p4_039_3dc19173",
+        "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/电子天平_96dba4/extract/images/0d2e3a45699201abb242cf4696bfcfeb96de3737a5179857023920d3f618a3e9.jpg",
+        "asset_sha256": "a8a87b5bf075b180249f702b47b2c4e2e43f674ff2a1bb60bd2a455e4ccceb3c",
+        "bbox": [
+          186,
+          604,
+          379,
+          744
+        ],
+        "bbox_anchor": [
+          186,
+          604,
+          379,
+          744
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "doc_owner": "泰昌",
+        "enterprise": "泰昌",
+        "evidence_type": "testing_capacity",
+        "fact_source_allowed_for_enterprise": true,
+        "page_anchor": "page:4",
+        "page_no": 4,
+        "privacy_level": "private",
+        "reference_only": false,
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "source_domain": "enterprise_fact",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/3.电子天平/电子天平.pdf",
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "target_library": "product_library",
+        "tenant_visibility": "taichang_only",
+        "thumbnail_mime_type": "image/webp",
+        "thumbnail_size": 15394,
+        "thumbnail_storage_bucket": "knowledge-files",
+        "thumbnail_storage_path": "product/thumbnails/711e5241d7714cd39671b1dd7c5ce688.webp"
+      },
+      "mime_type": "image/jpeg",
+      "ocr_text": "Equipment No. 制造单位：上海衡际科学仪器有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "public_url": "/local-storage/knowledge-files/product/dd10d933cfc5432f9eaf9ea417f24880.jpg",
+      "rerank_score": 0.8398728514352612,
+      "searchable_text": "泰昌 testing_capacity 第4页图片。Equipment No. 制造单位：上海衡际科学仪器有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "similarity": 0.7906877772770453,
+      "source_type": "taichang_mvp_mineru_asset",
+      "source_url": null,
+      "specs": {
+        "bbox": [
+          186,
+          604,
+          379,
+          744
+        ],
+        "evidence_type": "testing_capacity",
+        "page_no": 4,
+        "target_library": "product_library"
+      },
+      "status": "indexed",
+      "storage_bucket": "knowledge-files",
+      "storage_path": "product/dd10d933cfc5432f9eaf9ea417f24880.jpg",
+      "tags": [
+        "泰昌",
+        "MVP试点企业",
+        "testing_capacity",
+        "图片资产"
+      ],
+      "title": "泰昌 testing_capacity 第4页图片 taichang_testing_capacity_p4_039_3dc19173",
+      "updated_at": "2026-06-06T16:20:08.960853+08:00",
+      "width": 320
+    },
+    {
+      "ai_caption": "Equipment No. 制造单位： 济南辰达试验机制造有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 陈终有 Calibrated by",
+      "anonymized": false,
+      "applicable_sections": [],
+      "applicable_volumes": [
+        "technical",
+        "product"
+      ],
+      "asset_type": "product_image",
+      "attribution": "河北泰昌电力器材科技有限公司",
+      "category": "泰昌产品能力图片",
+      "created_at": "2026-06-06T16:20:11.119309+08:00",
+      "description": "Equipment No. 制造单位： 济南辰达试验机制造有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 陈终有 Calibrated by",
+      "file_ext": "jpg",
+      "file_name": "47ff13db4c0f391bb182defea56d14b6d7b34bb177a6709270898acb631cc9ec.jpg",
+      "file_size": 21111,
+      "height": 328,
+      "id": "b0eb881d-ff5d-4741-ad89-c12b2eda3ddf",
+      "industry": "电力行业",
+      "is_sensitive": false,
+      "is_synthetic": false,
+      "knowledge_document_id": null,
+      "license": "customer_internal",
+      "metadata": {
+        "access_scope": "taichang_tenant_internal",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "asset_id": "taichang_testing_capacity_p6_060_7fd9a0ff",
+        "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/锤击试验装置_058c93/extract/images/47ff13db4c0f391bb182defea56d14b6d7b34bb177a6709270898acb631cc9ec.jpg",
+        "asset_sha256": "a8a87b5bf075b180249f702b47b2c4e2e43f674ff2a1bb60bd2a455e4ccceb3c",
+        "bbox": [
+          186,
+          604,
+          379,
+          744
+        ],
+        "bbox_anchor": [
+          186,
+          604,
+          379,
+          744
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "doc_owner": "泰昌",
+        "enterprise": "泰昌",
+        "evidence_type": "testing_capacity",
+        "fact_source_allowed_for_enterprise": true,
+        "page_anchor": "page:6",
+        "page_no": 6,
+        "privacy_level": "private",
+        "reference_only": false,
+        "sensitive_handling": "normal_enterprise_evidence",
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "source_domain": "enterprise_fact",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/4.锤击试验装置/锤击试验装置.pdf",
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "target_library": "product_library",
+        "tenant_visibility": "taichang_only",
+        "thumbnail_mime_type": "image/webp",
+        "thumbnail_size": 15394,
+        "thumbnail_storage_bucket": "knowledge-files",
+        "thumbnail_storage_path": "product/thumbnails/81fdc69dd55441e6abb725517655224d.webp"
+      },
+      "mime_type": "image/jpeg",
+      "ocr_text": "Equipment No. 制造单位： 济南辰达试验机制造有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 陈终有 Calibrated by",
+      "public_url": "/local-storage/knowledge-files/product/0464be0ffdff4bc8a17d8cb1dbcb689f.jpg",
+      "rerank_score": 0.8350329515834478,
+      "searchable_text": "泰昌 testing_capacity 第6页图片。Equipment No. 制造单位： 济南辰达试验机制造有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 陈终有 Calibrated by",
+      "similarity": 0.7872354965262942,
+      "source_type": "taichang_mvp_mineru_asset",
+      "source_url": null,
+      "specs": {
+        "bbox": [
+          186,
+          604,
+          379,
+          744
+        ],
+        "evidence_type": "testing_capacity",
+        "page_no": 6,
+        "target_library": "product_library"
+      },
+      "status": "indexed",
+      "storage_bucket": "knowledge-files",
+      "storage_path": "product/0464be0ffdff4bc8a17d8cb1dbcb689f.jpg",
+      "tags": [
+        "泰昌",
+        "MVP试点企业",
+        "testing_capacity",
+        "图片资产"
+      ],
+      "title": "泰昌 testing_capacity 第6页图片 taichang_testing_capacity_p6_060_7fd9a0ff",
+      "updated_at": "2026-06-06T16:20:11.119309+08:00",
+      "width": 320
+    },
+    {
+      "ai_caption": "TC-12 制造单位： 承德衡通试验检测仪器有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 梁俊雄 Checked by 校准员： 刚 Calibrated by",
+      "anonymized": false,
+      "applicable_sections": [],
+      "applicable_volumes": [
+        "technical",
+        "product"
+      ],
+      "asset_type": "product_image",
+      "attribution": "河北泰昌电力器材科技有限公司",
+      "category": "泰昌产品能力图片",
+      "created_at": "2026-06-06T16:20:08.581162+08:00",
+      "description": "TC-12 制造单位： 承德衡通试验检测仪器有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 梁俊雄 Checked by 校准员： 刚 Calibrated by",
+      "file_ext": "jpg",
+      "file_name": "12e3ce794b6f52cbdc22d7fe84cf7ea4229207ef331cacf6bfde633f147b9ad6.jpg",
+      "file_size": 21111,
+      "height": 328,
+      "id": "ce435272-95db-4ac9-9851-edf5d54c3335",
+      "industry": "电力行业",
+      "is_sensitive": false,
+      "is_synthetic": false,
+      "knowledge_document_id": null,
+      "license": "customer_internal",
+      "metadata": {
+        "access_scope": "taichang_tenant_internal",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "asset_id": "taichang_testing_capacity_p5_065_fa544dfd",
+        "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/溶体流动速率仪_145192/extract/images/12e3ce794b6f52cbdc22d7fe84cf7ea4229207ef331cacf6bfde633f147b9ad6.jpg",
+        "asset_sha256": "a8a87b5bf075b180249f702b47b2c4e2e43f674ff2a1bb60bd2a455e4ccceb3c",
+        "bbox": [
+          186,
+          604,
+          379,
+          744
+        ],
+        "bbox_anchor": [
+          186,
+          604,
+          379,
+          744
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "doc_owner": "泰昌",
+        "enterprise": "泰昌",
+        "evidence_type": "testing_capacity",
+        "fact_source_allowed_for_enterprise": true,
+        "page_anchor": "page:5",
+        "page_no": 5,
+        "privacy_level": "private",
+        "reference_only": false,
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "source_domain": "enterprise_fact",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/5.溶体流动速率仪/溶体流动速率仪.pdf",
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "target_library": "product_library",
+        "tenant_visibility": "taichang_only",
+        "thumbnail_mime_type": "image/webp",
+        "thumbnail_size": 15394,
+        "thumbnail_storage_bucket": "knowledge-files",
+        "thumbnail_storage_path": "product/thumbnails/c538cc0c4cb745fd9c7d3012df1e5d04.webp"
+      },
+      "mime_type": "image/jpeg",
+      "ocr_text": "TC-12 制造单位： 承德衡通试验检测仪器有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 梁俊雄 Checked by 校准员： 刚 Calibrated by",
+      "public_url": "/local-storage/knowledge-files/product/d82546c5889547ef84dd0e63b9e373b2.jpg",
+      "rerank_score": 0.8759304849628395,
+      "searchable_text": "泰昌 testing_capacity 第5页图片。TC-12 制造单位： 承德衡通试验检测仪器有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 梁俊雄 Checked by 校准员： 刚 Calibrated by",
+      "similarity": 0.7769209678361714,
+      "source_type": "taichang_mvp_mineru_asset",
+      "source_url": null,
+      "specs": {
+        "bbox": [
+          186,
+          604,
+          379,
+          744
+        ],
+        "evidence_type": "testing_capacity",
+        "page_no": 5,
+        "target_library": "product_library"
+      },
+      "status": "indexed",
+      "storage_bucket": "knowledge-files",
+      "storage_path": "product/d82546c5889547ef84dd0e63b9e373b2.jpg",
+      "tags": [
+        "泰昌",
+        "MVP试点企业",
+        "testing_capacity",
+        "图片资产"
+      ],
+      "title": "泰昌 testing_capacity 第5页图片 taichang_testing_capacity_p5_065_fa544dfd",
+      "updated_at": "2026-06-06T16:20:08.581162+08:00",
+      "width": 320
+    },
+    {
+      "ai_caption": "Equipment No. 制造单位： 济南思达测试技术有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "anonymized": false,
+      "applicable_sections": [],
+      "applicable_volumes": [
+        "technical",
+        "product"
+      ],
+      "asset_type": "product_image",
+      "attribution": "河北泰昌电力器材科技有限公司",
+      "category": "泰昌产品能力图片",
+      "created_at": "2026-06-06T16:20:08.149088+08:00",
+      "description": "Equipment No. 制造单位： 济南思达测试技术有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "file_ext": "jpg",
+      "file_name": "28858e8a885f29ef81cfec36db30920489e5b6c87e00c06d7d1e51dba44abf03.jpg",
+      "file_size": 21111,
+      "height": 328,
+      "id": "28d0b265-2c35-4c75-9116-019230859bbd",
+      "industry": "电力行业",
+      "is_sensitive": false,
+      "is_synthetic": false,
+      "knowledge_document_id": null,
+      "license": "customer_internal",
+      "metadata": {
+        "access_scope": "taichang_tenant_internal",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "asset_id": "taichang_testing_capacity_p6_062_b7520cd8",
+        "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/微机控制电子万能试验机_74c9e1/extract/images/28858e8a885f29ef81cfec36db30920489e5b6c87e00c06d7d1e51dba44abf03.jpg",
+        "asset_sha256": "a8a87b5bf075b180249f702b47b2c4e2e43f674ff2a1bb60bd2a455e4ccceb3c",
+        "bbox": [
+          186,
+          604,
+          379,
+          744
+        ],
+        "bbox_anchor": [
+          186,
+          604,
+          379,
+          744
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "doc_owner": "泰昌",
+        "enterprise": "泰昌",
+        "evidence_type": "testing_capacity",
+        "fact_source_allowed_for_enterprise": true,
+        "page_anchor": "page:6",
+        "page_no": 6,
+        "privacy_level": "private",
+        "reference_only": false,
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "source_domain": "enterprise_fact",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/1.微机控制电子万能试验机/微机控制电子万能试验机.pdf",
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "target_library": "product_library",
+        "tenant_visibility": "taichang_only",
+        "thumbnail_mime_type": "image/webp",
+        "thumbnail_size": 15394,
+        "thumbnail_storage_bucket": "knowledge-files",
+        "thumbnail_storage_path": "product/thumbnails/cee256db40e64190b3833fab0a309171.webp"
+      },
+      "mime_type": "image/jpeg",
+      "ocr_text": "Equipment No. 制造单位： 济南思达测试技术有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "public_url": "/local-storage/knowledge-files/product/8746cdb365964406a749392df5502f56.jpg",
+      "rerank_score": 0.821536910194748,
+      "searchable_text": "泰昌 testing_capacity 第6页图片。Equipment No. 制造单位： 济南思达测试技术有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "similarity": 0.7693492082802423,
+      "source_type": "taichang_mvp_mineru_asset",
+      "source_url": null,
+      "specs": {
+        "bbox": [
+          186,
+          604,
+          379,
+          744
+        ],
+        "evidence_type": "testing_capacity",
+        "page_no": 6,
+        "target_library": "product_library"
+      },
+      "status": "indexed",
+      "storage_bucket": "knowledge-files",
+      "storage_path": "product/8746cdb365964406a749392df5502f56.jpg",
+      "tags": [
+        "泰昌",
+        "MVP试点企业",
+        "testing_capacity",
+        "图片资产"
+      ],
+      "title": "泰昌 testing_capacity 第6页图片 taichang_testing_capacity_p6_062_b7520cd8",
+      "updated_at": "2026-06-06T16:20:08.149088+08:00",
+      "width": 320
+    },
+    {
+      "ai_caption": "Equipment No. 制造单位： 石家庄开发区中实检测设备有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "anonymized": false,
+      "applicable_sections": [],
+      "applicable_volumes": [
+        "technical",
+        "product"
+      ],
+      "asset_type": "product_image",
+      "attribution": "河北泰昌电力器材科技有限公司",
+      "category": "泰昌产品能力图片",
+      "created_at": "2026-06-06T16:20:10.197922+08:00",
+      "description": "Equipment No. 制造单位： 石家庄开发区中实检测设备有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "file_ext": "jpg",
+      "file_name": "232e1fdeb774d8497fa2b44f5f81dad0f470169501f889bf6c8c678babe1436d.jpg",
+      "file_size": 21111,
+      "height": 328,
+      "id": "fbd4e46a-50cf-4a34-8016-e82b0b84e67d",
+      "industry": "电力行业",
+      "is_sensitive": false,
+      "is_synthetic": false,
+      "knowledge_document_id": null,
+      "license": "customer_internal",
+      "metadata": {
+        "access_scope": "taichang_tenant_internal",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "asset_id": "taichang_testing_capacity_p5_089_beeff89d",
+        "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81/extract/images/232e1fdeb774d8497fa2b44f5f81dad0f470169501f889bf6c8c678babe1436d.jpg",
+        "asset_sha256": "a8a87b5bf075b180249f702b47b2c4e2e43f674ff2a1bb60bd2a455e4ccceb3c",
+        "bbox": [
+          186,
+          604,
+          379,
+          744
+        ],
+        "bbox_anchor": [
+          186,
+          604,
+          379,
+          744
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "doc_owner": "泰昌",
+        "enterprise": "泰昌",
+        "evidence_type": "testing_capacity",
+        "fact_source_allowed_for_enterprise": true,
+        "page_anchor": "page:5",
+        "page_no": 5,
+        "privacy_level": "private",
+        "reference_only": false,
+        "sensitive_handling": "normal_enterprise_evidence",
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "source_domain": "enterprise_fact",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "target_library": "product_library",
+        "tenant_visibility": "taichang_only",
+        "thumbnail_mime_type": "image/webp",
+        "thumbnail_size": 15394,
+        "thumbnail_storage_bucket": "knowledge-files",
+        "thumbnail_storage_path": "product/thumbnails/520e456795a54d25848ecb24d0040414.webp"
+      },
+      "mime_type": "image/jpeg",
+      "ocr_text": "Equipment No. 制造单位： 石家庄开发区中实检测设备有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "public_url": "/local-storage/knowledge-files/product/eb6192f8b7654e43a30523bc26fee6a1.jpg",
+      "rerank_score": 0.8208912225248115,
+      "searchable_text": "泰昌 testing_capacity 第5页图片。Equipment No. 制造单位： 石家庄开发区中实检测设备有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "similarity": 0.7452851837533546,
+      "source_type": "taichang_mvp_mineru_asset",
+      "source_url": null,
+      "specs": {
+        "bbox": [
+          186,
+          604,
+          379,
+          744
+        ],
+        "evidence_type": "testing_capacity",
+        "page_no": 5,
+        "target_library": "product_library"
+      },
+      "status": "indexed",
+      "storage_bucket": "knowledge-files",
+      "storage_path": "product/eb6192f8b7654e43a30523bc26fee6a1.jpg",
+      "tags": [
+        "泰昌",
+        "MVP试点企业",
+        "testing_capacity",
+        "图片资产"
+      ],
+      "title": "泰昌 testing_capacity 第5页图片 taichang_testing_capacity_p5_089_beeff89d",
+      "updated_at": "2026-06-06T16:20:10.197922+08:00",
+      "width": 320
+    },
+    {
+      "ai_caption": "TC-13 制造单位： 济南艾德诺仪器有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "anonymized": false,
+      "applicable_sections": [],
+      "applicable_volumes": [
+        "technical",
+        "product"
+      ],
+      "asset_type": "product_image",
+      "attribution": "河北泰昌电力器材科技有限公司",
+      "category": "泰昌产品能力图片",
+      "created_at": "2026-06-06T16:20:10.629948+08:00",
+      "description": "TC-13 制造单位： 济南艾德诺仪器有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "file_ext": "jpg",
+      "file_name": "796266488662ac7e7df544fc2a713c94be50d15618b5444d92b349dc1a9e98d2.jpg",
+      "file_size": 21111,
+      "height": 328,
+      "id": "4442246b-42d2-4c5a-ae30-3e7b827b02d6",
+      "industry": "电力行业",
+      "is_sensitive": false,
+      "is_synthetic": false,
+      "knowledge_document_id": null,
+      "license": "customer_internal",
+      "metadata": {
+        "access_scope": "taichang_tenant_internal",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "asset_id": "taichang_testing_capacity_p6_083_a350525d",
+        "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/电子拉力试验机_e82a9b/extract/images/796266488662ac7e7df544fc2a713c94be50d15618b5444d92b349dc1a9e98d2.jpg",
+        "asset_sha256": "a8a87b5bf075b180249f702b47b2c4e2e43f674ff2a1bb60bd2a455e4ccceb3c",
+        "bbox": [
+          186,
+          604,
+          379,
+          744
+        ],
+        "bbox_anchor": [
+          186,
+          604,
+          379,
+          744
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "doc_owner": "泰昌",
+        "enterprise": "泰昌",
+        "evidence_type": "testing_capacity",
+        "fact_source_allowed_for_enterprise": true,
+        "page_anchor": "page:6",
+        "page_no": 6,
+        "privacy_level": "private",
+        "reference_only": false,
+        "sensitive_handling": "normal_enterprise_evidence",
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "source_domain": "enterprise_fact",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "target_library": "product_library",
+        "tenant_visibility": "taichang_only",
+        "thumbnail_mime_type": "image/webp",
+        "thumbnail_size": 15394,
+        "thumbnail_storage_bucket": "knowledge-files",
+        "thumbnail_storage_path": "product/thumbnails/49f9566bb9bc4bd99aee3eefd075746f.webp"
+      },
+      "mime_type": "image/jpeg",
+      "ocr_text": "TC-13 制造单位： 济南艾德诺仪器有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "public_url": "/local-storage/knowledge-files/product/e5d5d8bfc6344f25a68de36546e666fe.jpg",
+      "rerank_score": 0.8283825343630973,
+      "searchable_text": "泰昌 testing_capacity 第6页图片。TC-13 制造单位： 济南艾德诺仪器有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "similarity": 0.7416796088218689,
+      "source_type": "taichang_mvp_mineru_asset",
+      "source_url": null,
+      "specs": {
+        "bbox": [
+          186,
+          604,
+          379,
+          744
+        ],
+        "evidence_type": "testing_capacity",
+        "page_no": 6,
+        "target_library": "product_library"
+      },
+      "status": "indexed",
+      "storage_bucket": "knowledge-files",
+      "storage_path": "product/e5d5d8bfc6344f25a68de36546e666fe.jpg",
+      "tags": [
+        "泰昌",
+        "MVP试点企业",
+        "testing_capacity",
+        "图片资产"
+      ],
+      "title": "泰昌 testing_capacity 第6页图片 taichang_testing_capacity_p6_083_a350525d",
+      "updated_at": "2026-06-06T16:20:10.629948+08:00",
+      "width": 320
+    }
+  ],
+  "images": [
+    {
+      "alt": "泰昌 testing_capacity 第1页图片 taichang_testing_capacity_p1_006_9b7dd006",
+      "url": "/api/knowledge/assets/4712614d-92c8-4c8d-a55d-671154f1feb7/file"
+    },
+    {
+      "alt": "泰昌 testing_capacity 第1页图片 taichang_testing_capacity_p1_001_b7594832",
+      "url": "/api/knowledge/assets/e250e2fc-07b8-41c4-9c5f-33404bfe9237/file"
+    },
+    {
+      "alt": "泰昌 testing_capacity 第4页图片 taichang_testing_capacity_p4_039_3dc19173",
+      "url": "/api/knowledge/assets/17b86695-57c6-4e99-be74-7ba38592b95d/file"
+    },
+    {
+      "alt": "泰昌 testing_capacity 第6页图片 taichang_testing_capacity_p6_060_7fd9a0ff",
+      "url": "/api/knowledge/assets/b0eb881d-ff5d-4741-ad89-c12b2eda3ddf/file"
+    },
+    {
+      "alt": "泰昌 testing_capacity 第5页图片 taichang_testing_capacity_p5_065_fa544dfd",
+      "url": "/api/knowledge/assets/ce435272-95db-4ac9-9851-edf5d54c3335/file"
+    },
+    {
+      "alt": "泰昌 testing_capacity 第6页图片 taichang_testing_capacity_p6_062_b7520cd8",
+      "url": "/api/knowledge/assets/28d0b265-2c35-4c75-9116-019230859bbd/file"
+    },
+    {
+      "alt": "泰昌 testing_capacity 第5页图片 taichang_testing_capacity_p5_089_beeff89d",
+      "url": "/api/knowledge/assets/fbd4e46a-50cf-4a34-8016-e82b0b84e67d/file"
+    },
+    {
+      "alt": "泰昌 testing_capacity 第6页图片 taichang_testing_capacity_p6_083_a350525d",
+      "url": "/api/knowledge/assets/4442246b-42d2-4c5a-ae30-3e7b827b02d6/file"
+    }
+  ],
+  "raw_contexts": [
+    {
+      "content": "如果您对本资料有版权申诉，请及时联系我方进行处理（联系方式详见页脚）。 ②由于网络或浏览器兼容性等问题导致下载失败，请加客服微信处理（详见下载弹窗提示），感谢理解。 ③本资料由其他用户上传，本站不保证质量、数量等令人满意，若存在资料虚假不完整，请及时联系客服投诉处理。 ④本站仅收取资料上传人设置的下载费中的一部分分成，用以平摊存储及运营成本。本站仅为用户提供资料分享平台，且会员之间资料免费共享（平台无费用分成），不提供其他经营性业务。\n\n中华人民共和国电力行业标准\n\nDL/T5962021代替DL/T596-1996\n\n电力设备 预防性试验规程\n\nPreventivetestcodeforelectricpowerequipment\n\n国家能源局 发布\n\n目次",
+      "document_id": "52358107-8fea-4e3c-9324-574569a410ae",
+      "id": "37b59402-18d6-4002-a81a-04e43425e7d2",
+      "metadata": {
+        "authority_level": "industry_standard",
+        "block_type": "clause",
+        "category_label": "power_grid_standards_specs",
+        "chunk_layer": "child",
+        "chunker": "parent_child_v2",
+        "citation_policy": "summary_only",
+        "content_sha256": "edd701089a256acfe7560fea970c733c6d319bdeddfcfec4282541bd3e9d9ae6",
+        "doc_role": "standard_spec",
+        "doc_type": "行业标准网页",
+        "parent_index": 0,
+        "seed_corpus": "power_grid_resources",
+        "source_category": "03_standards_specs",
+        "source_file": "03_standards_specs/38_DL_T_596-2021_电力设备预防性试验规程_e31a3491.md",
+        "source_org": "规范库标准分享",
+        "tags": "电气设备,预防性试验,试验规程",
+        "type": "text"
+      },
+      "project_id": null,
+      "rerank_score": 0.3815262469849274,
+      "similarity": 0.39391675140459426,
+      "source_page": null,
+      "source_section": "DL/T 596-2021 电力设备预防性试验规程"
+    },
+    {
+      "content": "本站仅为用户提供资料分享平台，且会员之间资料免费共享（平台无费用分成），不提供其他经营性业务。\n\n标准化 检测 电力设备 电子式 附录\n\n标准化 检测 电力设备 电子式 附录\n\n- 标准化 检测 电力设备 电子式 附录",
+      "document_id": "52358107-8fea-4e3c-9324-574569a410ae",
+      "id": "4ec44ca8-009b-4438-9a97-dfde4b917c1f",
+      "metadata": {
+        "authority_level": "industry_standard",
+        "block_type": "clause",
+        "category_label": "power_grid_standards_specs",
+        "chunk_layer": "child",
+        "chunker": "parent_child_v2",
+        "citation_policy": "summary_only",
+        "content_sha256": "4fc935bcba8fc876ec15397f86d2601e63b88852e622b14a23c8b7fb1e7022f8",
+        "doc_role": "standard_spec",
+        "doc_type": "行业标准网页",
+        "parent_index": 0,
+        "seed_corpus": "power_grid_resources",
+        "source_category": "03_standards_specs",
+        "source_file": "03_standards_specs/38_DL_T_596-2021_电力设备预防性试验规程_e31a3491.md",
+        "source_org": "规范库标准分享",
+        "tags": "电气设备,预防性试验,试验规程",
+        "type": "text"
+      },
+      "project_id": null,
+      "rerank_score": 0.35994287354059723,
+      "similarity": 0.4900162500172187,
+      "source_page": null,
+      "source_section": "DL/T 596-2021 电力设备预防性试验规程"
+    },
+    {
+      "content": "本文件按照GB/T1.1一2020《 标准化 工作导则第1部分：标准化文件的结构和起草规则》的规定起草.\n\n本文件代替DL/T596一1996《电力设备预防性试验规程》，与DL/T596一1996相比，主要技术变化如下：\n\n增加750kV设备的试验要求：\n\n增加了串联补偿装置设备、 电子式 电流互感器、电子式电压互感器、三相组合式互感器、SF.电流互感器、复合绝缘电流互感器、电子式电流互感器、复合绝缘子等设备类型；\n\n增加电抗器及消弧线圈、并联电容器装置设备章节；\n\n增加了在线监测、初值、检修级别等术语和定义；\n\n增加了设备红外测温、局部放电检测、绕组频率响应分析、SF.分解物测试等新型检测项目；\n\n依据最新的国标和行标，更新了变压器油、SF.气体等\n\n部分项目的检测方法或判断依据.\n\n请注意本文件的某些内容可能涉及专利.本文件的发布机构不承担识别专利的责任.\n\n本文件由中国电力企业联合会提出.\n\n本文件由全国电力设备状态维修与在线监测标准化技术委员会（SAC/TC321）归口.\n\nDL/T596-2021",
+      "document_id": "52358107-8fea-4e3c-9324-574569a410ae",
+      "id": "f823b6a8-8910-4a2b-8754-ebad30a6266c",
+      "metadata": {
+        "authority_level": "industry_standard",
+        "block_type": "clause",
+        "category_label": "power_grid_standards_specs",
+        "chunk_layer": "child",
+        "chunker": "parent_child_v2",
+        "citation_policy": "summary_only",
+        "content_sha256": "b2bbfb46e5b3e07fbdad93b8e718033cb17686b44a8df331159fdf1e2ca7299f",
+        "doc_role": "standard_spec",
+        "doc_type": "行业标准网页",
+        "parent_index": 0,
+        "seed_corpus": "power_grid_resources",
+        "source_category": "03_standards_specs",
+        "source_file": "03_standards_specs/38_DL_T_596-2021_电力设备预防性试验规程_e31a3491.md",
+        "source_org": "规范库标准分享",
+        "tags": "电气设备,预防性试验,试验规程",
+        "type": "text"
+      },
+      "project_id": null,
+      "rerank_score": 0.30393539757433663,
+      "similarity": 0.41714799404144287,
+      "source_page": null,
+      "source_section": "DL/T 596-2021 电力设备预防性试验规程"
+    },
+    {
+      "content": "- 核心原则：总监理工程师负责制，强调公平、独立、诚信、科学。\n\n- 文档要求：各类通知、报告、记录需按规范表格填写，签字盖章齐全，确保合规性。\n\n资源下载 下载价格 6.00 元 VIP免费 升级VIP 立即购买 本站资源来源于用户上传，版权归原作者所有，本站只收取管理维护费用，若您的权益受到侵害，请尽快 发起投诉\n\n下载价格 6.00 元 VIP免费 升级VIP 立即购买\n\n下载价格 6.00 元\n\nVIP免费 升级VIP 立即购买\n\nVIP免费 升级VIP\n\n本站资源来源于用户上传，版权归原作者所有，本站只收取管理维护费用，若您的权益受到侵害，请尽快 发起投诉\n\n大小： 19.74MB 格式： pdf 版权： 仅供学习，请勿商用 解压密码： www.bimzyw.com\n\n大小： 19.74MB\n\n格式： pdf\n\n版权： 仅供学习，请勿商用\n\n解压密码： www.bimzyw.com\n\n声明：本站资源全部来自公开网络购买或收集，水印不代表署名仅用于防盗，版权归原作者所有。 版权说明：资源均源于互联网收集整理，不保证资源的可用及完整性，仅供个人学习研究，请勿商用。喜欢记得支持正版，若侵犯第三方权益，请及时联系我们删除！ 《版权声明》\n\n0 0",
+      "document_id": "cb8059db-5693-4f6d-bf92-d63a867f169f",
+      "id": "f0de7e6c-5645-4de0-bea4-03332c0e8c45",
+      "metadata": {
+        "authority_level": "national_standard",
+        "block_type": "clause",
+        "category_label": "power_grid_standards_specs",
+        "chunk_layer": "child",
+        "chunker": "parent_child_v2",
+        "citation_policy": "summary_only",
+        "content_sha256": "da1b4a1e0be57627a3fcd92d773abbac6a623bf5077f023e21f90855162b9835",
+        "doc_role": "standard_spec",
+        "doc_type": "国家标准网页",
+        "parent_index": 0,
+        "seed_corpus": "power_grid_resources",
+        "source_category": "03_standards_specs",
+        "source_file": "03_standards_specs/35_GB_T_50319-2013_建设工程监理规范_8959aeee.md",
+        "source_org": "BIM资源网标准分享",
+        "tags": "工程监理,监理规范,监理旁站",
+        "type": "text"
+      },
+      "project_id": null,
+      "rerank_score": 0.30107935566307176,
+      "similarity": 0.31289905309677124,
+      "source_page": null,
+      "source_section": "GB/T 50319-2013 建设工程监理规范"
+    },
+    {
+      "content": "DL/T 596-2021 电力设备预防性试验规程(正式版).pdf 文档页数： 173 文档大小： 65.73MB 文档格式： pdf 文档分类： 电力 上传会员： cook 上传日期： 2025-12-29 最后更新： 2025-12-29 获取高清文档\n\nDL/T 596-2021 电力设备预防性试验规程(正式版).pdf 文档页数： 173 文档大小： 65.73MB 文档格式： pdf 文档分类： 电力 上传会员： cook 上传日期： 2025-12-29 最后更新： 2025-12-29 获取高清文档\n\nDL/T 596-2021 电力设备预防性试验规程(正式版).pdf\n\n# DL/T 596-2021 电力设备预防性试验规程(正式版).pdf\n\n文档页数： 173 文档大小： 65.73MB 文档格式： pdf 文档分类： 电力 上传会员： cook 上传日期： 2025-12-29 最后更新： 2025-12-29 获取高清文档\n\n文档页数： 173 文档大小： 65.73MB 文档格式： pdf 文档分类： 电力 上传会员： cook 上传日期： 2025-12-29 最后更新： 2025-12-29 获取高清文档\n\n文档页数： 173\n\n文档大小： 65.73MB\n\n文档格式： pdf\n\n文档分类： 电力\n\n上传会员： cook",
+      "document_id": "52358107-8fea-4e3c-9324-574569a410ae",
+      "id": "edda927b-4840-4eab-904f-63c752f41b50",
+      "metadata": {
+        "authority_level": "industry_standard",
+        "block_type": "clause",
+        "category_label": "power_grid_standards_specs",
+        "chunk_layer": "child",
+        "chunker": "parent_child_v2",
+        "citation_policy": "summary_only",
+        "content_sha256": "60d06156f0ff255f6f0e85128e76357c9abc6e3ee45a1107d8a67daea694847e",
+        "doc_role": "standard_spec",
+        "doc_type": "行业标准网页",
+        "parent_index": 0,
+        "seed_corpus": "power_grid_resources",
+        "source_category": "03_standards_specs",
+        "source_file": "03_standards_specs/38_DL_T_596-2021_电力设备预防性试验规程_e31a3491.md",
+        "source_org": "规范库标准分享",
+        "tags": "电气设备,预防性试验,试验规程",
+        "type": "text"
+      },
+      "project_id": null,
+      "rerank_score": 0.2973396282703574,
+      "similarity": 0.4153947504688369,
+      "source_page": null,
+      "source_section": "DL/T 596-2021 电力设备预防性试验规程"
+    },
+    {
+      "content": "增加电抗器及消弧线圈、并联电容器装置设备章节； 增加了在线监测、初值、检修级别等术语和定义； 增加了设备红外测温、局部放电检测、绕组频率响应分析、SF.分解物测试等新型检测项目；",
+      "document_id": "52358107-8fea-4e3c-9324-574569a410ae",
+      "id": "1f236335-65c7-454f-9ca3-37fa06cdba99",
+      "metadata": {
+        "authority_level": "industry_standard",
+        "block_type": "clause",
+        "category_label": "power_grid_standards_specs",
+        "chunk_layer": "child",
+        "chunker": "parent_child_v2",
+        "citation_policy": "summary_only",
+        "content_sha256": "9caddbc895906f32de190362870f02a50b702bd6d96d0f10ab236a9845444aab",
+        "doc_role": "standard_spec",
+        "doc_type": "行业标准网页",
+        "parent_index": 0,
+        "seed_corpus": "power_grid_resources",
+        "source_category": "03_standards_specs",
+        "source_file": "03_standards_specs/38_DL_T_596-2021_电力设备预防性试验规程_e31a3491.md",
+        "source_org": "规范库标准分享",
+        "tags": "电气设备,预防性试验,试验规程",
+        "type": "text"
+      },
+      "project_id": null,
+      "rerank_score": 0.2845071837293286,
+      "similarity": 0.43937902784134353,
+      "source_page": null,
+      "source_section": "DL/T 596-2021 电力设备预防性试验规程"
+    },
+    {
+      "content": "ICS 29.240.01 Q/GDW 国家电网有限公司企业 标准 Q/GDW 10741—2022 代替 Q/GDW 741—2012 配电网技术改造 设备 选型和配置原则 Equipment selection and configuration principle for distribution network technical transformation 2022-05-13 发布 2022-05-13 实施 国家电网有限公司 发布 好的，OCR识别结果如下： “` 的 “` 目 次 前言 …………………………………………………………………………………………………… II 1 范围 ………………………………………………………………………………………………….. 1 2 规范 性引用文件 ………………………………………………………………………………. 1 3 术语和定义 ……………………………………………………………………………………… 1 4 一般规定 …………………………………………………………………………………………. 2 5 架空线路 …………………………………………………………………………………………. 3 6 电缆线路 …………………………………………………………………………………………. 6 7 配电变压器 ……………………………………………………………………………………… 7 8 开关设备 …………………………………………………………………………………………. 9 9 环网柜（箱） ………………………………………………………………………………….. 10 10 箱式变电站 ………………………………………………………………………………….. 11 11 低压配电箱（盘）、低压电缆分支箱 ……………………………………………. 12 12 电能计量装置 ………………………………………………………………………………… 13 13 无功补偿装置 ………………………………………………………………………………… 14 14 电力监控系统、通信和自动化装置 ……………………………………………. 14 15 建筑物（构筑物）及站址 ……………………………………………………………… 15 附录A（规范性附录） 供电区域划分 ………………………………………………… 16 编制说明 …………………………………………………………………………………………. 16",
+      "document_id": "da86e65f-043a-46c1-bc16-89f075dcd36f",
+      "id": "1322743e-8797-4ebc-9f1a-18ddb40396b6",
+      "metadata": {
+        "authority_level": "sgcc_rule",
+        "block_type": "clause",
+        "category_label": "power_grid_standards_specs",
+        "chunk_layer": "child",
+        "chunker": "parent_child_v2",
+        "citation_policy": "summary_only",
+        "content_sha256": "459e51a662a4d566b9c9a2f6b31edbafdf34d36ac1061928b9b393103e66c821",
+        "doc_role": "standard_spec",
+        "doc_type": "国网标准网页",
+        "parent_index": 0,
+        "seed_corpus": "power_grid_resources",
+        "source_category": "03_standards_specs",
+        "source_file": "03_standards_specs/48_Q_GDW_10741_配电网施工工艺规范_6c94bfdf.md",
+        "source_org": "BIM吧分享",
+        "tags": "配电网,施工工艺,规范",
+        "type": "text"
+      },
+      "project_id": null,
+      "rerank_score": 0.2810660986231141,
+      "similarity": 0.38224114391313546,
+      "source_page": null,
+      "source_section": "Q/GDW 10741 配电网施工工艺规范"
+    },
+    {
+      "content": "ICS 29.240.01 Q/GDW 国家电网有限公司企业 标准 Q/GDW 10741—2022 代替 Q/GDW 741—2012 配电网技术改造 设备 选型和配置原则 Equipment selection and configuration principle for distribution network technical transformation 2022-05-13 发布 2022-05-13 实施 国家电网有限公司 发布 好的，OCR识别结果如下： “` 的 “` 目 次 前言 …………………………………………………………………………………………………… II 1 范围 ………………………………………………………………………………………………….. 1 2 规范 性引用文件 ………………………………………………………………………………. 1 3 术语和定义 ……………………………………………………………………………………… 1 4 一般规定 …………………………………………………………………………………………. 2 5 架空线路 …………………………………………………………………………………………. 3 6 电缆线路 …………………………………………………………………………………………. 6 7 配电变压器 ……………………………………………………………………………………… 7 8 开关设备 …………………………………………………………………………………………. 9 9 环网柜（箱） ………………………………………………………………………………….. 10 10 箱式变电站 ………………………………………………………………………………….. 11 11 低压配电箱（盘）、低压电缆分支箱 ……………………………………………. 12 12 电能计量装置 ………………………………………………………………………………… 13 13 无功补偿装置 ………………………………………………………………………………… 14 14 电力监控系统、通信和自动化装置 ……………………………………………. 14 15 建筑物（构筑物）及站址 ……………………………………………………………… 15 附录A（规范性附录） 供电区域划分 ………………………………………………… 16 编制说明 …………………………………………………………………………………………. 16 资源下载 下载价格 8.88 椰币 VIP免费 立即购买 购买后自动出现下载链接，如有疑问请加微信 xycost",
+      "document_id": "da86e65f-043a-46c1-bc16-89f075dcd36f",
+      "id": "ed553d99-0293-4da0-8f50-140991bbe74a",
+      "metadata": {
+        "authority_level": "sgcc_rule",
+        "block_type": "clause",
+        "category_label": "power_grid_standards_specs",
+        "chunk_layer": "child",
+        "chunker": "parent_child_v2",
+        "citation_policy": "summary_only",
+        "content_sha256": "2c0f5841887f89246966b54618a1de5b7714e722c737224550c6f89a5870c1bc",
+        "doc_role": "standard_spec",
+        "doc_type": "国网标准网页",
+        "parent_index": 0,
+        "seed_corpus": "power_grid_resources",
+        "source_category": "03_standards_specs",
+        "source_file": "03_standards_specs/48_Q_GDW_10741_配电网施工工艺规范_6c94bfdf.md",
+        "source_org": "BIM吧分享",
+        "tags": "配电网,施工工艺,规范",
+        "type": "text"
+      },
+      "project_id": null,
+      "rerank_score": 0.27712374198407136,
+      "similarity": 0.37128586934301944,
+      "source_page": null,
+      "source_section": "Q/GDW 10741 配电网施工工艺规范"
+    }
+  ]
+}

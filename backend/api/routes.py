@@ -311,6 +311,14 @@ def _asset_text(asset: dict) -> str:
     parts.extend(asset.get("tags") or [])
     parts.extend(asset.get("applicable_sections") or [])
     parts.extend(asset_applicable_volumes(asset))
+    for container_name in ("metadata", "specs"):
+        container = asset.get(container_name) or {}
+        if isinstance(container, dict):
+            for value in container.values():
+                if isinstance(value, list):
+                    parts.extend(str(item) for item in value if item)
+                elif isinstance(value, (str, int, float, bool)):
+                    parts.append(str(value))
     return " ".join(str(item) for item in parts if item).lower()
 
 
@@ -354,10 +362,45 @@ def _section_needs_image(section: dict) -> bool:
     return any(keyword in text for keyword in keywords)
 
 
+def _asset_meta_value(asset: dict, key: str) -> str:
+    metadata = asset.get("metadata") or {}
+    specs = asset.get("specs") or {}
+    for container in (metadata, specs, asset):
+        if isinstance(container, dict) and container.get(key) not in (None, ""):
+            return str(container.get(key)).lower()
+    return ""
+
+
+def _section_asset_profile(section: dict) -> dict[str, set[str]]:
+    text = _section_text(section)
+    profile = {"evidence_types": set(), "libraries": set()}
+    if any(keyword in text for keyword in ["营业执照", "执照"]):
+        profile["evidence_types"].add("business_license")
+        profile["libraries"].add("qualification_library")
+    if any(keyword in text for keyword in ["资信", "资质", "证书", "体系认证", "认证证书", "许可"]):
+        profile["evidence_types"].add("certification")
+        profile["libraries"].add("qualification_library")
+    if any(keyword in text for keyword in ["生产制造", "生产线", "产线", "车间", "厂房", "制造能力", "生产能力", "生产设备"]):
+        profile["evidence_types"].add("production_capacity")
+        profile["libraries"].add("product_library")
+    if any(keyword in text for keyword in ["试验检测", "检测能力", "试验能力", "检测设备", "试验设备", "电子天平", "万能试验机", "维卡", "锤击", "溶体流动"]):
+        profile["evidence_types"].add("testing_capacity")
+        profile["libraries"].add("product_library")
+    if any(keyword in text for keyword in ["绿色供应链", "绿色低碳", "低碳", "esg", "碳足迹", "废水废气", "环保"]):
+        profile["evidence_types"].add("green_low_carbon")
+    if any(keyword in text for keyword in ["检验报告", "检测报告", "型式试验", "内径250"]):
+        profile["evidence_types"].add("inspection_report")
+        profile["libraries"].add("product_library")
+    return profile
+
+
 def _score_asset_for_section(asset: dict, section: dict) -> int:
     asset_text = _asset_text(asset)
     section_text = _section_text(section)
     volume_type = section_volume_type(section)
+    profile = _section_asset_profile(section)
+    evidence_type = _asset_meta_value(asset, "evidence_type")
+    target_library = _asset_meta_value(asset, "target_library")
     score = 0
 
     for token in re.findall(r"[\u4e00-\u9fffA-Za-z0-9]{2,}", section_text):
@@ -407,10 +450,26 @@ def _score_asset_for_section(asset: dict, section: dict) -> int:
         score += 6
     if asset_type and asset_type.lower() in section_text:
         score += 4
+    preferred_evidence = profile["evidence_types"]
+    preferred_libraries = profile["libraries"]
+    if preferred_evidence:
+        if evidence_type in preferred_evidence:
+            score += 36
+        elif evidence_type:
+            score -= 28
+    if preferred_libraries:
+        if target_library in preferred_libraries:
+            score += 12
+        elif target_library:
+            score -= 10
     return score
 
 
 def _asset_image_ref(asset: dict) -> str:
+    asset_id = str(asset.get("id") or "").strip()
+    if asset_id:
+        return f"/api/bidding/knowledge/assets/{quote(asset_id)}/file?variant=original"
+
     local_path = str(asset.get("local_path") or "").strip()
     if local_path:
         candidate = Path(local_path)
@@ -418,10 +477,6 @@ def _asset_image_ref(asset: dict) -> str:
             candidate = Path.cwd() / candidate
         if candidate.exists() and candidate.is_file():
             return str(candidate)
-
-    asset_id = str(asset.get("id") or "").strip()
-    if asset_id:
-        return f"/api/bidding/knowledge/assets/{quote(asset_id)}/file?variant=original"
 
     public_url = str(asset.get("public_url") or "").strip()
     if public_url.startswith(("http://", "https://")):
@@ -470,6 +525,19 @@ def _asset_match_reason(asset: dict, section: dict, score: int) -> str:
     elif volume_type == "business":
         reasons.append("商务文件仅插入证明或附件类资料")
 
+    evidence_type = _asset_meta_value(asset, "evidence_type")
+    profile = _section_asset_profile(section)
+    if evidence_type and evidence_type in profile["evidence_types"]:
+        evidence_labels = {
+            "business_license": "营业执照",
+            "certification": "资信/认证证书",
+            "production_capacity": "生产制造能力",
+            "testing_capacity": "试验检测能力",
+            "green_low_carbon": "绿色低碳资料",
+            "inspection_report": "检验/检测报告",
+        }
+        reasons.append(f"匹配章节证据类型：{evidence_labels.get(evidence_type, evidence_type)}")
+
     for keyword in ["产品", "设备", "工艺", "施工", "资质", "证书", "营业执照", "业绩", "人员", "授权", "保证金", "保函"]:
         if keyword in section_text and keyword in asset_text:
             reasons.append(f"章节与资产同时命中“{keyword}”")
@@ -485,6 +553,10 @@ def _asset_allowed_for_volume(asset: dict, section: dict) -> bool:
     if volume_type == "price":
         return False
     if not asset_matches_volume(asset, volume_type, allow_unscoped=True):
+        return False
+    profile = _section_asset_profile(section)
+    evidence_type = _asset_meta_value(asset, "evidence_type")
+    if profile["evidence_types"] and evidence_type and evidence_type not in profile["evidence_types"]:
         return False
     asset_text = _asset_text(asset)
     metadata = asset.get("metadata") or {}

@@ -116,6 +116,43 @@
 | 成稿参考 | 很有价值 | 主体不是泰昌，必须防止事实串用 |
 | 直接入库可行性 | 不建议直接全量入正式库 | 需先 OCR、分类、敏感级别标注、评测集扩展 |
 
+## 2026-06-06 真实链路复核结论
+
+本轮按真实生产链路复核后，P1A-2 从“进行中”收口为“可用但有业务边界”：
+
+- 泰昌是 MVP 试点企业事实主线，已入库企业事实、图片资产、资信库和产品库可支撑 MVP 演示。
+- 辽宁资料仅作为电缆保护管 CPVC/MPP 招标场景样本，已可支撑真实上传、解析、AI 解读、大纲、章节生成、合规检查和 DOCX 导出。
+- 河北豪乾资料仅作为格式、目录和写法参考，不能作为泰昌企业事实。
+- 泰昌扫描件 OCR、图片 metadata、企业事实隔离、问答图片输出和标书图文配图均已通过真实链路验证。
+
+真实验证记录：
+
+| 验证项 | 结果 |
+| --- | --- |
+| 服务就绪 | `/api/ready` 通过，Celery/Postgres/Redis/模型配置均 `ok` |
+| 真实上传解析 | 辽宁 CPVC 包 1 主招标文件 `.docx` 上传并 indexed，解析器 `native_text`，入库 42 chunks、80 requirements、60 risks、80 scoring_items |
+| AI 解读 | 真实 DeepSeek 调用通过，耗时约 345 秒 |
+| 大纲生成 | 生成 74 个章节 |
+| 章节长任务 | 30 个章节真实生成，30/30 done，耗时约 278 秒 |
+| 合规检查 | 220 条 rows，覆盖率从 3 章节时 27% 提升到 30 章节时 36% |
+| DOCX 导出 | Celery 导出完成，LibreOffice 字段刷新成功，模板为 `sgcc_power_grid` |
+| 智能问答图片 | 泰昌试验检测问答返回 8 个 `testing_capacity` 资产和 8 个图片 URL |
+| 图文并茂章节 | 带图章节真实生成并保存，正文含 `/api/bidding/knowledge/assets/...` 图片链接 |
+
+新增产物：
+
+- `docs/development/runs/run_20260606_taichang_mvp_real_flow_3_sections.md`
+- `docs/development/runs/run_20260606_taichang_mvp_real_flow_30_sections.md`
+- `docs/development/runs/run_20260606_taichang_mvp_real_knowledge_qa_images.json`
+- `docs/development/runs/run_20260606_taichang_mvp_real_image_section_sse_saved.txt`
+
+本轮同时修复了图文并茂正文的图片引用问题：知识库资产有 `id` 时优先输出 `/api/bidding/knowledge/assets/<id>/file?variant=original`，避免浏览器端收到本机绝对路径。
+
+保留业务风险：
+
+- 泰昌检验报告文件名显示“内径250”，辽宁需求覆盖 φ50/100/150/175/200；是否可作为全规格等效证明，仍需客户或技术人员确认。
+- 30 章节无图导出中发现模型偶发生成非资产图片占位，导出时被跳过；正式图文并茂应继续依赖系统资产选择链路，而不是模型自造图片路径。
+
 ## 建议入库策略
 
 1. 辽宁招标资料先入 `tender_scope=liaoning_2025_03_2225AC` 的客户招标库。
@@ -135,4 +172,3 @@
 | 泰昌授权/脱敏规则 | 影响审计报告、社保、劳动合同入库 | 明确哪些资料可进入 RAG，哪些只做本地临时引用 |
 | OCR 质量检查 | 扫描件无法可靠召回 | 跑 MinerU/OCR 后生成 parse quality report |
 | 辽宁专项评测集 | 无法证明入库后不串用河北豪乾/泰昌事实 | 新增 20-30 条辽宁/泰昌用例并跑 Base 回归 |
-

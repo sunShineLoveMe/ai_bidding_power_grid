@@ -160,7 +160,12 @@ def search_knowledge_base(
     return rerank_documents(query, rows, text_key="content", top_n=match_count)
 
 
-def search_knowledge_assets(query: str, match_count: int = 8, volume_type: str | None = None) -> List[Dict[str, Any]]:
+def search_knowledge_assets(
+    query: str,
+    match_count: int = 8,
+    volume_type: str | None = None,
+    metadata_filter: dict[str, Any] | None = None,
+) -> List[Dict[str, Any]]:
     """
     检索企业知识库中的图片/资质资产。
     图片本身不直接参与语义检索，检索的是 OCR、AI 描述、规格参数和适用章节组成的 searchable_text。
@@ -190,13 +195,21 @@ def search_knowledge_assets(query: str, match_count: int = 8, volume_type: str |
     rpc_rows = response.data or []
     if target_volume:
         rpc_rows = [asset for asset in rpc_rows if asset_matches_volume(asset, target_volume, allow_unscoped=True)]
+    if metadata_filter:
+        rpc_rows = [asset for asset in rpc_rows if _asset_matches_metadata_filter(asset, metadata_filter)]
     assets = rerank_documents(query, rpc_rows, text_key="searchable_text", top_n=match_count)
+    assets.sort(key=lambda asset: float(asset.get("similarity") or 0) + _asset_query_intent_bonus(query, asset), reverse=True)
     # 过滤掉明显弱相关的资产，保留图片来源展示的准确性。
     strong_assets = [asset for asset in assets if float(asset.get("similarity") or 0) >= 0.28]
     if len(strong_assets) >= min(match_count, 3):
         return strong_assets[:match_count]
 
-    fallback_assets = _keyword_search_knowledge_assets(query, match_count=match_count, volume_type=target_volume)
+    fallback_assets = _keyword_search_knowledge_assets(
+        query,
+        match_count=match_count,
+        volume_type=target_volume,
+        metadata_filter=metadata_filter,
+    )
     merged: list[dict[str, Any]] = []
     seen: set[str] = set()
     for asset in [*strong_assets, *fallback_assets]:
@@ -211,7 +224,12 @@ def search_knowledge_assets(query: str, match_count: int = 8, volume_type: str |
     return merged
 
 
-def _keyword_search_knowledge_assets(query: str, match_count: int = 8, volume_type: str | None = None) -> list[dict[str, Any]]:
+def _keyword_search_knowledge_assets(
+    query: str,
+    match_count: int = 8,
+    volume_type: str | None = None,
+    metadata_filter: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
     """
     企业资信库/产品库里经常是短标题、短说明和图片附件，纯向量召回可能偏弱。
     这里补一层轻量关键词召回，确保“营业执照图片、社保缴纳证明、类似业绩证明”等私有资产问题不会被误拒。
@@ -221,7 +239,7 @@ def _keyword_search_knowledge_assets(query: str, match_count: int = 8, volume_ty
         client.table("knowledge_assets")
         .select("*")
         .eq("status", "indexed")
-        .limit(200)
+        .limit(500)
         .execute()
     )
     rows = response.data or []
@@ -232,6 +250,8 @@ def _keyword_search_knowledge_assets(query: str, match_count: int = 8, volume_ty
     scored: list[tuple[int, dict[str, Any]]] = []
     for asset in rows:
         if volume_type and not asset_matches_volume(asset, volume_type, allow_unscoped=True):
+            continue
+        if metadata_filter and not _asset_matches_metadata_filter(asset, metadata_filter):
             continue
         text = _asset_search_text(asset)
         score = sum(1 for token in query_tokens if token and token in text)
@@ -244,15 +264,45 @@ def _keyword_search_knowledge_assets(query: str, match_count: int = 8, volume_ty
         if any(token in query for token in ["资质", "资信", "证书", "执照", "许可", "社保", "人员"]):
             if str(asset.get("asset_type") or "") == "qualification_image":
                 score += 3
-        if any(token in query for token in ["产品", "设备", "材料", "闸门", "水泵", "水轮机", "叶片"]):
+        if any(token in query for token in ["产品", "设备", "材料", "生产", "生产线", "检测", "试验", "闸门", "水泵", "水轮机", "叶片"]):
             if str(asset.get("asset_type") or "") == "product_image":
                 score += 3
+        score += int(_asset_query_intent_bonus(query, asset) * 20)
         if score > 0:
             enriched = {**asset, "similarity": max(float(asset.get("similarity") or 0), min(score / 10, 0.99))}
             scored.append((score, enriched))
 
     scored.sort(key=lambda item: item[0], reverse=True)
     return [asset for _, asset in scored[:match_count]]
+
+
+def _asset_metadata_value(asset: dict[str, Any], key: str) -> str:
+    metadata = asset.get("metadata") if isinstance(asset.get("metadata"), dict) else {}
+    specs = asset.get("specs") if isinstance(asset.get("specs"), dict) else {}
+    for container in (metadata, specs, asset):
+        if isinstance(container, dict) and container.get(key) not in (None, ""):
+            return str(container.get(key)).lower()
+    return ""
+
+
+def _asset_query_intent_bonus(query: str, asset: dict[str, Any]) -> float:
+    text = query or ""
+    evidence_type = _asset_metadata_value(asset, "evidence_type")
+    target_library = _asset_metadata_value(asset, "target_library")
+    bonus = 0.0
+    if "营业执照" in text or "执照" in text:
+        bonus += 0.35 if evidence_type == "business_license" else -0.08
+    if any(keyword in text for keyword in ["绿色供应链", "绿色低碳", "低碳", "碳足迹", "废水废气", "环保"]):
+        bonus += 0.35 if evidence_type == "green_low_carbon" else -0.08
+    if any(keyword in text for keyword in ["生产线", "生产制造", "生产能力", "车间", "厂房"]):
+        bonus += 0.35 if evidence_type == "production_capacity" else -0.08
+    if any(keyword in text for keyword in ["试验检测", "检测设备", "试验设备", "电子天平", "万能试验机", "维卡", "锤击"]):
+        bonus += 0.35 if evidence_type == "testing_capacity" else -0.08
+    if any(keyword in text for keyword in ["检验报告", "检测报告", "型式试验", "内径250"]):
+        bonus += 0.35 if evidence_type == "inspection_report" else -0.08
+    if any(keyword in text for keyword in ["资信", "资质", "证书", "体系认证"]) and target_library == "qualification_library":
+        bonus += 0.06
+    return bonus
 
 
 def _asset_search_text(asset: dict[str, Any]) -> str:
@@ -272,6 +322,13 @@ def _asset_search_text(asset: dict[str, Any]) -> str:
     specs = asset.get("specs") or {}
     if isinstance(specs, dict):
         parts.extend(str(value) for value in specs.values() if value)
+    metadata = asset.get("metadata") or {}
+    if isinstance(metadata, dict):
+        for value in metadata.values():
+            if isinstance(value, list):
+                parts.extend(str(item) for item in value if item)
+            elif isinstance(value, (str, int, float, bool)):
+                parts.append(str(value))
     return " ".join(str(part) for part in parts if part).lower()
 
 
@@ -284,6 +341,12 @@ def _asset_query_tokens(query: str) -> list[str]:
         "资质": ["资质", "证书", "资格", "资信", "许可"],
         "人员": ["人员", "项目经理", "技术负责人", "职称", "执业", "社保"],
         "产品": ["产品", "设备", "参数", "图册", "样张"],
+        "生产": ["生产", "生产线", "产线", "车间", "厂房", "制造", "production_capacity"],
+        "生产线": ["生产", "生产线", "产线", "车间", "厂房", "制造", "production_capacity"],
+        "试验": ["试验", "检测", "试验设备", "检测设备", "电子天平", "万能试验机", "维卡", "锤击", "testing_capacity"],
+        "检测": ["试验", "检测", "试验设备", "检测设备", "电子天平", "万能试验机", "维卡", "锤击", "testing_capacity"],
+        "绿色供应链": ["绿色供应链", "绿色", "低碳", "esg", "碳足迹", "废水废气", "green_low_carbon"],
+        "检验报告": ["检验报告", "检测报告", "型式试验", "cpvc", "mpp", "内径250", "inspection_report"],
         "图片": ["图片", "照片", "图", "附件", "材料", "样张"],
     }
     tokens = set(re.findall(r"[\u4e00-\u9fa5A-Za-z0-9_]+", query.lower()))
@@ -291,6 +354,40 @@ def _asset_query_tokens(query: str) -> list[str]:
         if key in query:
             tokens.update(value.lower() for value in values)
     return [token for token in tokens if token]
+
+
+def _asset_matches_metadata_filter(asset: dict[str, Any], metadata_filter: dict[str, Any]) -> bool:
+    if not metadata_filter:
+        return True
+    metadata = asset.get("metadata") if isinstance(asset.get("metadata"), dict) else {}
+    specs = asset.get("specs") if isinstance(asset.get("specs"), dict) else {}
+
+    def values_for(key: str) -> list[Any]:
+        if key == "ingestion_batch_id":
+            return [
+                metadata.get("ingestion_batch_id"),
+                metadata.get("source_batch_id"),
+                specs.get("ingestion_batch_id"),
+                specs.get("source_batch_id"),
+                asset.get("ingestion_batch_id"),
+            ]
+        return [metadata.get(key), specs.get(key), asset.get(key)]
+
+    ignored = {"chunk_layer", "doc_role", "package_code", "province", "batch_no", "material_category"}
+    for key, expected in metadata_filter.items():
+        if expected in (None, "", "all") or key in ignored:
+            continue
+        candidates = values_for(str(key))
+        expected_values = expected if isinstance(expected, list) else [expected]
+        matched = False
+        for candidate in candidates:
+            candidate_values = candidate if isinstance(candidate, list) else [candidate]
+            if any(str(item) == str(value) for item in candidate_values for value in expected_values):
+                matched = True
+                break
+        if not matched:
+            return False
+    return True
 
 def generate_knowledge_answer(
     query: str,
