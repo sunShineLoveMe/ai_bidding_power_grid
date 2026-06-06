@@ -1,0 +1,19 @@
+# 泰昌图片资产目录 - business_license - taichang_internal_private
+
+本目录用于泰昌 MVP 试点企业内部标书写作、智能问答和图片资产检索。
+所有资产均为泰昌企业事实，仅在泰昌租户内使用。
+
+## taichang_business_license_p1_005
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_smoke/business_license/extract/images/f04f263b21208caeeb67cd74f9b3a36af4ad7b5c85da3cce65eb5eedc28ddd22.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/营业执照副本.pdf
+- page_no: 1
+- bbox: [750, 236, 825, 342]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: business_license
+- caption: 
+- ocr_context: 

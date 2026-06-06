@@ -35,7 +35,24 @@
       "asset_count": 1,
       "page_count": 2,
       "evidence_type": "production_capacity",
-      "privacy_level": "restricted_private"
+      "privacy_level": "taichang_internal_private",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/1.人员情况一览表/3.劳动合同/2.晁坤琳.pdf",
@@ -44,7 +61,24 @@
       "asset_count": 1,
       "page_count": 2,
       "evidence_type": "production_capacity",
-      "privacy_level": "restricted_private"
+      "privacy_level": "taichang_internal_private",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/2.人员花名册/公司人员花名册.pdf",
@@ -53,7 +87,24 @@
       "asset_count": 0,
       "page_count": 2,
       "evidence_type": "testing_capacity",
-      "privacy_level": "restricted_private"
+      "privacy_level": "taichang_internal_private",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/3.劳动合同/1.陈仙瑞.pdf",
@@ -62,7 +113,24 @@
       "asset_count": 1,
       "page_count": 2,
       "evidence_type": "testing_capacity",
-      "privacy_level": "restricted_private"
+      "privacy_level": "taichang_internal_private",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/3.劳动合同/2.晁坤琳.pdf",
@@ -71,7 +139,24 @@
       "asset_count": 1,
       "page_count": 2,
       "evidence_type": "testing_capacity",
-      "privacy_level": "restricted_private"
+      "privacy_level": "taichang_internal_private",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/CPVC电缆保护管检验报告内径250.pdf",
@@ -116,7 +201,24 @@
       "asset_count": 20,
       "page_count": 19,
       "evidence_type": "finance",
-      "privacy_level": "restricted_private"
+      "privacy_level": "taichang_internal_private",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
@@ -125,7 +227,24 @@
       "asset_count": 22,
       "page_count": 19,
       "evidence_type": "finance",
-      "privacy_level": "restricted_private"
+      "privacy_level": "taichang_internal_private",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
@@ -134,7 +253,24 @@
       "asset_count": 21,
       "page_count": 29,
       "evidence_type": "finance",
-      "privacy_level": "restricted_private"
+      "privacy_level": "taichang_internal_private",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/2废水.废气废固监(检)测报告一览表/废水废气废固报告.pdf",

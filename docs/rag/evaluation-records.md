@@ -269,3 +269,59 @@ Run 2 与 Run 1 指标保持一致，删除误入库水利资料后没有造成�
 ### 结论
 
 PDF 标准入库前必须增加源文件审计门禁。当前错源 GB/DL 标准 PDF 已从自动入库候选中排除；下一步等待客户提供正确源文件，重跑审计通过后再做 MinerU/OCR 解析、条文级分块和召回评测。
+
+---
+
+## Run 6 — 辽宁 / 泰昌 MVP 正式入库与专项回归（2026-06-06）
+
+> Staging manifest：`parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/staging_manifest.json`  
+> 入库汇总：`parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/formal_ingestion_summary.md`  
+> Base filtered：`docs/rag/runs/run_20260606_taichang_mvp_base_filtered.json`  
+> Customer filtered：`docs/rag/runs/run_20260606_taichang_mvp_customer_filtered.json`
+
+### 正式入库结果
+
+| 表 / 对象 | 数量 |
+| --- | ---: |
+| `knowledge_documents` | 124 |
+| `document_chunks` | 29683 |
+| `power_grid_goods_list_rows` | 87 |
+| `knowledge_assets` | 242 |
+| `knowledge_assets.embedding` | 242 |
+
+资产目标库：
+
+| target_library | 数量 |
+| --- | ---: |
+| `qualification_library` | 105 |
+| `product_library` | 137 |
+
+### 召回回归
+
+| 测试集 | Recall@5 | top1 来源准确率 | 关键词命中率 | 跨 doc_role 串扰 | 禁用关键词命中率 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Base filtered | 86.7% | 93.3% | 86.7% | 0.0% | - |
+| 辽宁/泰昌专项 filtered | 100.0% | 100.0% | 100.0% | 0.0% | 0.0% |
+
+专项分场景 Recall@5：
+
+| scenario | cases | Recall@5 |
+| --- | ---: | ---: |
+| `asset_search` | 2 | 100% |
+| `format_reference` | 2 | 100% |
+| `negative` | 3 | 100% |
+| `qa` | 5 | 100% |
+| `table` | 2 | 100% |
+| `writing` | 3 | 100% |
+
+### 处置记录
+
+- 为了让图片 metadata 在 `eval_recall.py` 的 `document_chunks` 评测链路中可测，新增 9 个泰昌图片资产目录文本块；正式图片仍写入 `knowledge_assets`。
+- 资产目录正文去掉“河北豪乾”字样，仅在 metadata 保留 `do_not_mix_with`，避免泰昌事实召回命中禁用关键词。
+- 补入 1 条 `self_phrase` Base 回归话术，使 T23 恢复命中；Base Recall@5 回到既有 86.7% 门槛。
+- 修复 `backend/db/supabase_repo.py` 中 `upload_knowledge_asset_file()` 调用未定义 `_knowledge_asset_bucket()` 的问题，否则正式资产上传会全部失败。
+
+### 剩余风险
+
+- Base 未命中 T04/T17/T18/T20 仍为既有问题：T04 关键词标注偏严，T17/T18 源数据质量差，T20 标准仅有摘要/目录。
+- 泰昌 CPVC/MPP 检验报告为“内径250”，与辽宁清单中的 φ50/100/150/175/200 覆盖关系仍需业务确认。

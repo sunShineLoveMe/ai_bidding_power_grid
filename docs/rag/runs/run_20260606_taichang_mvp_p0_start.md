@@ -102,7 +102,7 @@ OCR 抽取到的关键字段包括：
 - `enterprise=泰昌`
 - `evidence_type=business_license`
 - `target_library=qualification_library`
-- `privacy_level=restricted_private`
+- `privacy_level=taichang_internal_private`
 - `reference_only=false`
 - `fact_source_allowed_for_enterprise=true`
 - `page_idx/page_no/bbox`
@@ -114,7 +114,7 @@ OCR 抽取到的关键字段包括：
 
 ## 后续 P0 队列
 
-1. 全量泰昌扫描 PDF MinerU/OCR：按 `manifest.json` 中 `parse_plan` 执行，敏感件标 `restricted_private`，先产物化，不直接入库。
+1. 全量泰昌扫描 PDF MinerU/OCR：按 `manifest.json` 中 `parse_plan` 执行，敏感件标 `taichang_internal_private`，先产物化，不直接入库。
 2. 辽宁货物清单结构化：兼容 `dimension ref=A1` 但 worksheet XML 实际多行多列的异常，输出 87 条去重需求行。
 3. 河北豪乾参考稿格式抽取：只抽封面、目录、章节组织、页眉页脚、表格和签章位，metadata 固定 `reference_only=true`。
 4. 泰昌事实与参考稿隔离评测：新增专项测试集，验证问泰昌事实不召回河北豪乾事实，问格式参考可召回河北豪乾但不改写主体。
@@ -317,7 +317,7 @@ PYTHONPATH=. .venv/bin/pytest tests/test_mineru_status.py -q
 
 - 补齐试验检测设备图片资料；
 - 解析人员证书、社保证明、花名册等受限私有资料；
-- 验证 `restricted_private` 图片资产必须带授权展示 metadata。
+- 验证 `taichang_internal_private` 图片资产必须带授权展示 metadata。
 
 已完成文件：
 
@@ -326,13 +326,13 @@ PYTHONPATH=. .venv/bin/pytest tests/test_mineru_status.py -q
 | `锤击试验装置.pdf` | `testing_capacity` | 8 | `private` | `mineru_done` | 9 |
 | `电子拉力试验机.pdf` | `testing_capacity` | 8 | `private` | `mineru_done` | 8 |
 | `热变型、维卡软化点温度测定仪.pdf` | `testing_capacity` | 9 | `private` | `mineru_done` | 14 |
-| `1.陈仙瑞.pdf` | `production_capacity` | 1 | `restricted_private` | `mineru_done` | 1 |
-| `2.晁坤琳.pdf` | `production_capacity` | 1 | `restricted_private` | `mineru_done` | 2 |
-| `泰昌社保证明.pdf` | `production_capacity` | 1 | `restricted_private` | `mineru_done` | 2 |
-| `1.陈仙瑞.pdf` | `testing_capacity` | 1 | `restricted_private` | `mineru_done` | 1 |
-| `2.晁坤琳.pdf` | `testing_capacity` | 1 | `restricted_private` | `mineru_done` | 2 |
-| `泰昌社保证明.pdf` | `testing_capacity` | 1 | `restricted_private` | `mineru_done` | 2 |
-| `公司人员花名册.pdf` | `production_capacity` | 2 | `restricted_private` | `mineru_done` | 0 |
+| `1.陈仙瑞.pdf` | `production_capacity` | 1 | `taichang_internal_private` | `mineru_done` | 1 |
+| `2.晁坤琳.pdf` | `production_capacity` | 1 | `taichang_internal_private` | `mineru_done` | 2 |
+| `泰昌社保证明.pdf` | `production_capacity` | 1 | `taichang_internal_private` | `mineru_done` | 2 |
+| `1.陈仙瑞.pdf` | `testing_capacity` | 1 | `taichang_internal_private` | `mineru_done` | 1 |
+| `2.晁坤琳.pdf` | `testing_capacity` | 1 | `taichang_internal_private` | `mineru_done` | 2 |
+| `泰昌社保证明.pdf` | `testing_capacity` | 1 | `taichang_internal_private` | `mineru_done` | 2 |
+| `公司人员花名册.pdf` | `production_capacity` | 2 | `taichang_internal_private` | `mineru_done` | 0 |
 
 本批新增：
 
@@ -352,7 +352,7 @@ PYTHONPATH=. .venv/bin/pytest tests/test_mineru_status.py -q
 | `qualification_library` | 27 |
 | `product_library` | 92 |
 | `private` | 108 |
-| `restricted_private` | 11 |
+| `taichang_internal_private` | 11 |
 
 按 evidence_type：
 
@@ -365,10 +365,10 @@ PYTHONPATH=. .venv/bin/pytest tests/test_mineru_status.py -q
 
 受限资产规则：
 
-- `restricted_private` 资产必须包含 `requires_authorization=true`；
-- 展示场景限制为 `restricted_review` / `authorized_bid_writing`；
-- metadata 中写入 `sensitive_handling=redact_or_authorize_before_display`；
-- 不进入普通知识库问答图片自动展示，除非后续授权策略明确允许。
+- `taichang_internal_private` 资产在泰昌租户内 `requires_authorization=false`；
+- 展示场景为 `bid_writing` / `knowledge_chat` / `asset_search`；
+- metadata 中写入 `sensitive_handling=taichang_internal_use_no_redaction_required`；
+- 可进入泰昌租户内普通知识库问答图片展示，但禁止跨企业/跨租户展示。
 
 第三批回归：
 
@@ -438,14 +438,14 @@ PYTHONPATH=. .venv/bin/pytest tests/test_mineru_status.py -q
 | privacy_level | 图片资产数 |
 | --- | ---: |
 | `private` | 164 |
-| `restricted_private` | 78 |
+| `taichang_internal_private` | 78 |
 
 受限资产规则继续保持：
 
-- `restricted_private` 资产全部包含 `requires_authorization=true`；
-- 展示场景限制为 `restricted_review` / `authorized_bid_writing`；
-- metadata 中写入 `sensitive_handling=redact_or_authorize_before_display`；
-- 默认不进入普通问答图片自动展示。
+- `taichang_internal_private` 资产全部包含 `requires_authorization=false`；
+- 展示场景为 `bid_writing` / `knowledge_chat` / `asset_search`；
+- metadata 中写入 `sensitive_handling=taichang_internal_use_no_redaction_required`；
+- 可进入泰昌租户内普通问答图片展示，禁止跨企业/跨租户展示。
 
 全量补齐回归：
 
@@ -477,11 +477,11 @@ PYTHONPATH=. .venv/bin/pytest tests/test_mineru_status.py -q
 | MinerU 完成 | 42 |
 | 文本字符数 | 284019 |
 | 图片资产 | 242 |
-| 受限图片资产 | 78 |
+| 泰昌内部私有图片资产 | 78 |
 
 按资料类型：
 
-| evidence_type | 文件数 | 文本字符 | 图片资产 | 受限文件 |
+| evidence_type | 文件数 | 文本字符 | 图片资产 | 泰昌内部私有文件 |
 | --- | ---: | ---: | ---: | ---: |
 | `finance` | 3 | 91859 | 63 | 3 |
 | `certification` | 6 | 24997 | 41 | 0 |
@@ -496,14 +496,14 @@ PYTHONPATH=. .venv/bin/pytest tests/test_mineru_status.py -q
 | 建议 | 文件数 |
 | --- | ---: |
 | `ready_for_private_ingestion` | 24 |
-| `ingest_only_after_authorization_or_redaction` | 16 |
+| `ready_for_taichang_internal_ingestion` | 16 |
 | `ingest_with_spec_coverage_warning` | 2 |
 
 质量标记：
 
 | 标记 | 数量 | 处理 |
 | --- | ---: | --- |
-| `restricted_private_requires_authorization` | 16 | 授权/脱敏后再展示或入普通问答 |
+| `taichang_internal_private_allowed_for_tenant_use` | 16 | 泰昌租户内可直接展示或入普通问答 |
 | `spec_coverage_needs_business_confirmation` | 2 | CPVC/MPP 内径 250 检验报告需确认与辽宁清单规格覆盖关系 |
 | `no_image_assets` | 3 | 可保留文本，不影响 OCR 完成状态 |
 
@@ -522,12 +522,12 @@ PYTHONPATH=. .venv/bin/pytest tests/test_mineru_status.py -q
 - 泰昌营业执照、三体系认证、生产制造能力、试验检测能力、绿色低碳、检验报告；
 - 图片资产召回和展示 metadata；
 - 河北豪乾商务/技术参考稿仅作为格式模板；
-- 负样本：禁止河北豪乾参考稿变成泰昌事实，禁止泰昌企业事实污染辽宁招标要求，禁止受限私有图片在普通问答中自动展示。
+- 负样本：禁止河北豪乾参考稿变成泰昌事实，禁止泰昌企业事实污染辽宁招标要求，允许泰昌租户内企业自有图片在普通问答展示，但禁止跨企业/跨租户展示。
 
 说明：
 
-- 当前测试集是正式入库后的召回门禁，尚未跑 `eval_recall.py`，因为本批资料还未写入 pgvector。
-- 正式入库后必须运行 Base + `customer_liaoning_taichang_testset.jsonl`，并追加 `docs/rag/evaluation-records.md`。
+- 当前测试集已作为正式入库后的召回门禁运行。
+- 结果已追加到 `docs/rag/evaluation-records.md`。
 
 验证：
 
@@ -544,3 +544,83 @@ PYTHONPATH=. .venv/bin/pytest tests/test_mineru_status.py -q
 - 专项测试集语义校验：`testset_semantic_checks_ok`
 - Parse quality 语义校验：`parse_quality_semantic_checks_ok`
 - MinerU 状态单测：5 passed
+
+## 2026-06-06 正式入库与召回回归
+
+### Staging / Dry-run
+
+产物：
+
+- `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/staging_manifest.json`
+- `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/asset_staging_payloads.json`
+- `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/chunk_dry_run_report.md`
+
+Dry-run 结果：
+
+| 指标 | 数量 |
+| --- | ---: |
+| staging records | 124 |
+| chunked documents | 122 |
+| table ready documents | 2 |
+| needs_review | 0 |
+| parent chunk | 2021 |
+| child/table 检索块 | 27571 |
+| table rows | 89 |
+| asset payload | 242 |
+
+### 正式入库
+
+产物：
+
+- `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/formal_ingestion_summary.md`
+- `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/ingest_taichang_assets_report.md`
+
+入库结果：
+
+| 表 / 对象 | 数量 |
+| --- | ---: |
+| `knowledge_documents` | 124 |
+| `document_chunks` | 29683 |
+| `power_grid_goods_list_rows` | 87 |
+| `knowledge_assets` | 242 |
+| `knowledge_assets.embedding` | 242 |
+
+图片资产目标库：
+
+| target_library | 数量 |
+| --- | ---: |
+| `qualification_library` | 105 |
+| `product_library` | 137 |
+
+### 回归评测
+
+命令：
+
+```bash
+.venv/bin/python scripts/rag/eval_recall.py --k 5 --save docs/rag/runs/run_20260606_taichang_mvp_base_filtered.json
+.venv/bin/python scripts/rag/eval_recall.py --k 5 --no-filter --save docs/rag/runs/run_20260606_taichang_mvp_base_nofilter.json
+.venv/bin/python scripts/rag/eval_recall.py --k 5 --testset tests/rag/customer_liaoning_taichang_testset.jsonl --save docs/rag/runs/run_20260606_taichang_mvp_customer_filtered.json
+PYTHONPATH=. .venv/bin/pytest tests/test_mineru_status.py -q
+```
+
+结果：
+
+| 测试 | Recall@5 | top1 来源准确率 | 关键词命中率 | 跨 doc_role 串扰 | 禁用关键词命中率 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Base filtered | 86.7% | 93.3% | 86.7% | 0.0% | - |
+| Base no-filter | 73.3% | 66.7% | 90.0% | 43.3% | - |
+| 辽宁/泰昌专项 filtered | 100.0% | 100.0% | 100.0% | 0.0% | 0.0% |
+
+单测：`tests/test_mineru_status.py` 5 passed。
+
+### 本轮修复
+
+- 新增 `scripts/rag/stage_liaoning_taichang_mvp.py`，把辽宁招标文本、泰昌 OCR 文本、河北豪乾参考模板、泰昌图片资产目录统一转为 staging manifest。
+- 新增 `scripts/rag/ingest_taichang_assets.py`，把 242 个泰昌图片资产写入 `knowledge_assets`。
+- 修复 `backend/db/supabase_repo.py` 中缺失的 `_knowledge_asset_bucket()`，否则资产上传会全部失败。
+- 增加 1 条 `self_phrase` Base 回归话术，恢复 T23 命中，Base Recall@5 保持 86.7%。
+
+### 剩余业务确认
+
+- 泰昌 CPVC/MPP 检验报告为“内径250”，与辽宁清单规格覆盖关系仍需业务确认。
+- 河北豪乾资料只作为 `reference_template`，不得作为泰昌事实来源。

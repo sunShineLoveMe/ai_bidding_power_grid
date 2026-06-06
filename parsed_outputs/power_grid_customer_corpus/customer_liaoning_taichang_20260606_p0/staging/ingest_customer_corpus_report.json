@@ -1,0 +1,27 @@
+{
+  "summary": {
+    "generated_at": "2026-06-06T16:23:43",
+    "manifest": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/base_regression_self_phrase_manifest.json",
+    "batch_id": "base_regression_20260606_self_phrase",
+    "dry_run": false,
+    "refresh": true,
+    "documents": 1,
+    "indexed": 1,
+    "skipped": 0,
+    "parents": 1,
+    "children": 1,
+    "embedding_count": 1
+  },
+  "results": [
+    {
+      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/base_regression/technical_qualification_response_phrase.md",
+      "status": "indexed",
+      "document_id": "e2555589-2991-4299-89e2-ff4ace8abf09",
+      "doc_role": "self_phrase",
+      "parents": 1,
+      "children": 1,
+      "embedding_count": 1,
+      "inserted_chunks": 2
+    }
+  ]
+}

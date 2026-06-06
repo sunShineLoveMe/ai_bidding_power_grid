@@ -5,7 +5,7 @@
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
       "file_name": "2023年审计报告.pdf",
       "evidence_type": "finance",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "page_count": 19,
       "first3_text_chars": 0,
       "native_text_status": "empty_text",
@@ -16,13 +16,30 @@
       "asset_metadata_required": true,
       "reference_only": false,
       "doc_owner": "泰昌",
-      "source_domain": "enterprise_fact"
+      "source_domain": "enterprise_fact",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
       "file_name": "2024年审计报告.pdf",
       "evidence_type": "finance",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "page_count": 29,
       "first3_text_chars": 0,
       "native_text_status": "empty_text",
@@ -33,13 +50,30 @@
       "asset_metadata_required": true,
       "reference_only": false,
       "doc_owner": "泰昌",
-      "source_domain": "enterprise_fact"
+      "source_domain": "enterprise_fact",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
       "file_name": "2025年审计报告.pdf",
       "evidence_type": "finance",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "page_count": 19,
       "first3_text_chars": 0,
       "native_text_status": "empty_text",
@@ -50,7 +84,24 @@
       "asset_metadata_required": true,
       "reference_only": false,
       "doc_owner": "泰昌",
-      "source_domain": "enterprise_fact"
+      "source_domain": "enterprise_fact",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/1.质量管理体系认证证书.pdf",
@@ -141,7 +192,7 @@
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/1.人员情况一览表/1.试验检测人员证书/1.陈仙瑞.pdf",
       "file_name": "1.陈仙瑞.pdf",
       "evidence_type": "production_capacity",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "page_count": 1,
       "first3_text_chars": 0,
       "native_text_status": "empty_text",
@@ -152,13 +203,30 @@
       "asset_metadata_required": true,
       "reference_only": false,
       "doc_owner": "泰昌",
-      "source_domain": "enterprise_fact"
+      "source_domain": "enterprise_fact",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/1.人员情况一览表/1.试验检测人员证书/2.晁坤琳.pdf",
       "file_name": "2.晁坤琳.pdf",
       "evidence_type": "production_capacity",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "page_count": 1,
       "first3_text_chars": 0,
       "native_text_status": "empty_text",
@@ -169,13 +237,30 @@
       "asset_metadata_required": true,
       "reference_only": false,
       "doc_owner": "泰昌",
-      "source_domain": "enterprise_fact"
+      "source_domain": "enterprise_fact",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/1.人员情况一览表/2.人员花名册/公司人员花名册.pdf",
       "file_name": "公司人员花名册.pdf",
       "evidence_type": "production_capacity",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "page_count": 2,
       "first3_text_chars": 0,
       "native_text_status": "empty_text",
@@ -186,13 +271,30 @@
       "asset_metadata_required": true,
       "reference_only": false,
       "doc_owner": "泰昌",
-      "source_domain": "enterprise_fact"
+      "source_domain": "enterprise_fact",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/1.人员情况一览表/3.劳动合同/1.陈仙瑞.pdf",
       "file_name": "1.陈仙瑞.pdf",
       "evidence_type": "production_capacity",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "page_count": 2,
       "first3_text_chars": 0,
       "native_text_status": "empty_text",
@@ -203,13 +305,30 @@
       "asset_metadata_required": true,
       "reference_only": false,
       "doc_owner": "泰昌",
-      "source_domain": "enterprise_fact"
+      "source_domain": "enterprise_fact",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/1.人员情况一览表/3.劳动合同/2.晁坤琳.pdf",
       "file_name": "2.晁坤琳.pdf",
       "evidence_type": "production_capacity",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "page_count": 2,
       "first3_text_chars": 0,
       "native_text_status": "empty_text",
@@ -220,13 +339,30 @@
       "asset_metadata_required": true,
       "reference_only": false,
       "doc_owner": "泰昌",
-      "source_domain": "enterprise_fact"
+      "source_domain": "enterprise_fact",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/1.人员情况一览表/4.参保证明/泰昌社保证明.pdf",
       "file_name": "泰昌社保证明.pdf",
       "evidence_type": "production_capacity",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "page_count": 1,
       "first3_text_chars": 0,
       "native_text_status": "empty_text",
@@ -237,7 +373,24 @@
       "asset_metadata_required": true,
       "reference_only": false,
       "doc_owner": "泰昌",
-      "source_domain": "enterprise_fact"
+      "source_domain": "enterprise_fact",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/1.CPVC63三层复合管材挤出生产线/1.CPVC63三层复合管材挤出生产线.pdf",
@@ -498,7 +651,7 @@
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/1.试验检测人员证书/1.陈仙瑞.pdf",
       "file_name": "1.陈仙瑞.pdf",
       "evidence_type": "testing_capacity",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "page_count": 1,
       "first3_text_chars": 0,
       "native_text_status": "empty_text",
@@ -509,13 +662,30 @@
       "asset_metadata_required": true,
       "reference_only": false,
       "doc_owner": "泰昌",
-      "source_domain": "enterprise_fact"
+      "source_domain": "enterprise_fact",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/1.试验检测人员证书/2.晁坤琳.pdf",
       "file_name": "2.晁坤琳.pdf",
       "evidence_type": "testing_capacity",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "page_count": 1,
       "first3_text_chars": 0,
       "native_text_status": "empty_text",
@@ -526,13 +696,30 @@
       "asset_metadata_required": true,
       "reference_only": false,
       "doc_owner": "泰昌",
-      "source_domain": "enterprise_fact"
+      "source_domain": "enterprise_fact",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/2.人员花名册/公司人员花名册.pdf",
       "file_name": "公司人员花名册.pdf",
       "evidence_type": "testing_capacity",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "page_count": 2,
       "first3_text_chars": 0,
       "native_text_status": "empty_text",
@@ -543,13 +730,30 @@
       "asset_metadata_required": true,
       "reference_only": false,
       "doc_owner": "泰昌",
-      "source_domain": "enterprise_fact"
+      "source_domain": "enterprise_fact",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/3.劳动合同/1.陈仙瑞.pdf",
       "file_name": "1.陈仙瑞.pdf",
       "evidence_type": "testing_capacity",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "page_count": 2,
       "first3_text_chars": 0,
       "native_text_status": "empty_text",
@@ -560,13 +764,30 @@
       "asset_metadata_required": true,
       "reference_only": false,
       "doc_owner": "泰昌",
-      "source_domain": "enterprise_fact"
+      "source_domain": "enterprise_fact",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/3.劳动合同/2.晁坤琳.pdf",
       "file_name": "2.晁坤琳.pdf",
       "evidence_type": "testing_capacity",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "page_count": 2,
       "first3_text_chars": 0,
       "native_text_status": "empty_text",
@@ -577,13 +798,30 @@
       "asset_metadata_required": true,
       "reference_only": false,
       "doc_owner": "泰昌",
-      "source_domain": "enterprise_fact"
+      "source_domain": "enterprise_fact",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/4.参保证明/泰昌社保证明.pdf",
       "file_name": "泰昌社保证明.pdf",
       "evidence_type": "testing_capacity",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "page_count": 1,
       "first3_text_chars": 0,
       "native_text_status": "empty_text",
@@ -594,7 +832,24 @@
       "asset_metadata_required": true,
       "reference_only": false,
       "doc_owner": "泰昌",
-      "source_domain": "enterprise_fact"
+      "source_domain": "enterprise_fact",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/1绿色工厂、绿色供应链管理企业评价/绿色供应链认证证书.pdf",
@@ -702,7 +957,7 @@
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/营业执照副本.pdf",
       "file_name": "营业执照副本.pdf",
       "evidence_type": "business_license",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "page_count": 1,
       "first3_text_chars": 0,
       "native_text_status": "empty_text",
@@ -713,7 +968,24 @@
       "asset_metadata_required": true,
       "reference_only": false,
       "doc_owner": "泰昌",
-      "source_domain": "enterprise_fact"
+      "source_domain": "enterprise_fact",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     }
   ],
   "summary": {
@@ -758,7 +1030,7 @@
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/营业执照副本.pdf",
       "file_name": "营业执照副本.pdf",
       "evidence_type": "business_license",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "page_count": 1,
       "first3_text_chars": 0,
       "native_text_status": "empty_text",
@@ -769,7 +1041,24 @@
       "asset_metadata_required": true,
       "reference_only": false,
       "doc_owner": "泰昌",
-      "source_domain": "enterprise_fact"
+      "source_domain": "enterprise_fact",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
     },
     {
       "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/2.环境管理体系认证证书.pdf",

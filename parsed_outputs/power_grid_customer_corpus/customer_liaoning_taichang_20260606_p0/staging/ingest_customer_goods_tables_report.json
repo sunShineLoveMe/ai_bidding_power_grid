@@ -1,0 +1,30 @@
+{
+  "summary": {
+    "generated_at": "2026-06-06T16:17:07",
+    "batch_id": "customer_liaoning_taichang_20260606_p0",
+    "manifest": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/staging_manifest.json",
+    "dry_run": false,
+    "refresh": true,
+    "goods_list_documents": 2,
+    "rows": 87,
+    "deleted_existing": 0,
+    "inserted": 87,
+    "missing_documents": 0
+  },
+  "details": [
+    {
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "source_file": "customer_liaoning_taichang_20260606_p0/goods_tables/goods_rows.json#CPVC",
+      "document_id": "0bfca0f7-d17e-4770-a572-49331ef4d35a",
+      "rows": 35
+    },
+    {
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "source_file": "customer_liaoning_taichang_20260606_p0/goods_tables/goods_rows.json#MPP",
+      "document_id": "647a6c82-95c3-4a05-843c-f4d82fd53a52",
+      "rows": 52
+    }
+  ]
+}

@@ -1,0 +1,949 @@
+# 泰昌图片资产目录 - finance - taichang_internal_private
+
+本目录用于泰昌 MVP 试点企业内部标书写作、智能问答和图片资产检索。
+所有资产均为泰昌企业事实，仅在泰昌租户内使用。
+
+## taichang_finance_p1_002_6baad7db
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2023年审计报告_91e149/extract/images/71e8f8306ec21845dd0629e56e2a921c21f58831ef416cfd88d8f2d0143da9cf.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf
+- page_no: 1
+- bbox: [914, 492, 998, 621]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 河北泰昌电力器材科技有限公司2023年度 世仁审字【2024】第VE-73号 审计单位：石家庄世仁会计师事务所（普通合伙） 地址：河北省石家庄市栾城区石栾大街与栾武路交口南行200米路西
+- ocr_context: 河北泰昌电力器材科技有限公司2023年度 世仁审字【2024】第VE-73号 审计单位：石家庄世仁会计师事务所（普通合伙） 地址：河北省石家庄市栾城区石栾大街与栾武路交口南行200米路西
+
+## taichang_finance_p3_030_7afc51b8
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2023年审计报告_91e149/extract/images/ea08384b8c0fa88e776117ace3647142c24dae67e18058251e619c33a6e6d04e.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf
+- page_no: 3
+- bbox: [179, 677, 400, 806]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: （3）评价管理层选用会计政策的恰当性和作出会计估计及相关披露的合理性。 （4）对管理层使用持续经营假设的恰当性得出结论。同时，根据获取的审计证据，就可能导致对贵公司持续经营能力产生重大疑虑的事项或情况是否存在重大不确定性得出结论。如果我们得出结论认为存在重大不确定性，审计准则要求我们在审计报告中提请报表使用者注意财务报表中的相关披露；如果披露不充分，我们应当发表非无保留意 我们的结论基于截至审 相关交易和事项。 我们与治理层就计划的审计范围、时间安排和重大审计发现等事项进行沟通，包括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师：
+- ocr_context: （3）评价管理层选用会计政策的恰当性和作出会计估计及相关披露的合理性。 （4）对管理层使用持续经营假设的恰当性得出结论。同时，根据获取的审计证据，就可能导致对贵公司持续经营能力产生重大疑虑的事项或情况是否存在重大不确定性得出结论。如果我们得出结论认为存在重大不确定性，审计准则要求我们在审计报告中提请报表使用者注意财务报表中的相关披露；如果披露不充分，我们应当发表非无保留意 我们的结论基于截至审 相关交易和事项。 我们与治理层就计划的审计范围、时间安排和重大审计发现等事项进行沟通，包括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师：
+
+## taichang_finance_p3_032_5c938b1c
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2023年审计报告_91e149/extract/images/3e644f750f8094254929968ac0449aa3f9c36c9e6f3c89cf51ad58bfa2f2f0ca.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf
+- page_no: 3
+- bbox: [707, 672, 826, 747]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 相关交易和事项。 我们与治理层就计划的审计范围、时间安排和重大审计发现等事项进行沟通，包括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师： 二〇二四年三月十一日
+- ocr_context: 相关交易和事项。 我们与治理层就计划的审计范围、时间安排和重大审计发现等事项进行沟通，包括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师： 二〇二四年三月十一日
+
+## taichang_finance_p3_034_656a7e9a
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2023年审计报告_91e149/extract/images/baec1e11aae03c98f4a239c6eee09d18206d461750e4a0137ad36e5fb0f6ed42.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf
+- page_no: 3
+- bbox: [710, 750, 818, 825]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 中国注册会计师： 中国注册会计师： 二〇二四年三月十一日
+- ocr_context: 中国注册会计师： 中国注册会计师： 二〇二四年三月十一日
+
+## taichang_finance_p16_217_57082b32
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2023年审计报告_91e149/extract/images/cf3c14d1e24986a8ebde87aa6f73f494b6863483c03f4c5a337681a09f2c0215.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf
+- page_no: 16
+- bbox: [107, 448, 236, 538]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 事二日
+- ocr_context: 事二日
+
+## taichang_finance_p16_228_958df809
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2023年审计报告_91e149/extract/images/bb71e792995c9d2a8a73ff653f289f860a95353278bfcbfd7c7fc3732e8f9ea1.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf
+- page_no: 16
+- bbox: [260, 220, 346, 283]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 品 -1台 （） ）开 名 名
+- ocr_context: 品 -1台 （） ）开 名 名
+
+## taichang_finance_p16_244_c9f27706
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2023年审计报告_91e149/extract/images/d06cb60612059d4185ec2dbf446106f9a199ca6368e37b6246b1a98c579045b8.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf
+- page_no: 16
+- bbox: [563, 169, 719, 283]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 
+- ocr_context: 
+
+## taichang_finance_p16_249_518a90e2
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2023年审计报告_91e149/extract/images/d85413c4ca2fd6e4ae2568e4b70a50912dba85772ba3c81133a91b5f54a51ae9.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf
+- page_no: 16
+- bbox: [670, 478, 850, 609]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 
+- ocr_context: 
+
+## taichang_finance_p17_250_af0ab58b
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2023年审计报告_91e149/extract/images/fddde64c16185a854f114896d0bdc737a080a55af36435d8fafd2b3fa4e9fd59.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf
+- page_no: 17
+- bbox: [119, 117, 852, 469]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 
+- ocr_context: 
+
+## taichang_finance_p17_251_09254a4f
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2023年审计报告_91e149/extract/images/3f8b95386d4c5c89e437a21221654da1ab1e6e076cbdfb281dab18e156c4c629.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf
+- page_no: 17
+- bbox: [122, 525, 860, 883]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 
+- ocr_context: 
+
+## taichang_finance_p18_255_643bc081
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2023年审计报告_91e149/extract/images/a8178f6d22886714663e36a14e0dce36e949fbaf4a9aa1e216e6c2f38c80daa9.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf
+- page_no: 18
+- bbox: [243, 143, 317, 225]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: se 发证日期： 201501 川省注册会计师协会 51010003172 本证书经检查 有效一年thisrene
+- ocr_context: se 发证日期： 201501 川省注册会计师协会 51010003172 本证书经检查 有效一年thisrene
+
+## taichang_finance_p18_257_d9a34167
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2023年审计报告_91e149/extract/images/39c81a950b84e916a5370876434d91dff91978e7e8787ae8ab5be76416d0d83b.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf
+- page_no: 18
+- bbox: [371, 326, 460, 460]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 川省注册会计师协会 51010003172 本证书经检查 有效一年thisrene 名Sex出生日期Dateofbith身份证有理 何平丰男1979-04-02四州华信（集团）会计师事（特普通合伙）513624197904021158
+- ocr_context: 川省注册会计师协会 51010003172 本证书经检查 有效一年thisrene 名Sex出生日期Dateofbith身份证有理 何平丰男1979-04-02四州华信（集团）会计师事（特普通合伙）513624197904021158
+
+## taichang_finance_p18_258_43df667a
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2023年审计报告_91e149/extract/images/fa938accb6c61e85d0fa634b0545971c9ace1c1db5af5a47b3b02b7e100baec3.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf
+- page_no: 18
+- bbox: [591, 156, 727, 253]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 51010003172 本证书经检查 有效一年thisrene 名Sex出生日期Dateofbith身份证有理 何平丰男1979-04-02四州华信（集团）会计师事（特普通合伙）513624197904021158
+- ocr_context: 51010003172 本证书经检查 有效一年thisrene 名Sex出生日期Dateofbith身份证有理 何平丰男1979-04-02四州华信（集团）会计师事（特普通合伙）513624197904021158
+
+## taichang_finance_p18_259_e1bf02db
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2023年审计报告_91e149/extract/images/b656569060a87dba4e6931f39636a8a9f25297c39cd827612eca51d679b3f6c8.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf
+- page_no: 18
+- bbox: [505, 355, 581, 436]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 本证书经检查 有效一年thisrene 名Sex出生日期Dateofbith身份证有理 何平丰男1979-04-02四州华信（集团）会计师事（特普通合伙）513624197904021158 注册会计师工作单位变更事项登记
+- ocr_context: 本证书经检查 有效一年thisrene 名Sex出生日期Dateofbith身份证有理 何平丰男1979-04-02四州华信（集团）会计师事（特普通合伙）513624197904021158 注册会计师工作单位变更事项登记
+
+## taichang_finance_p18_262_45160a37
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2023年审计报告_91e149/extract/images/4daca8be789ed8ecc164eae78b241dd28d4c5ae7070a388286c4b4cef04f9b82.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf
+- page_no: 18
+- bbox: [173, 352, 319, 448]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 名Sex出生日期Dateofbith身份证有理 何平丰男1979-04-02四州华信（集团）会计师事（特普通合伙）513624197904021158 注册会计师工作单位变更事项登记 Registration of the Change of Working Unit by a CPA 同意调出 Agree the holder tobetrasferd fro
+- ocr_context: 名Sex出生日期Dateofbith身份证有理 何平丰男1979-04-02四州华信（集团）会计师事（特普通合伙）513624197904021158 注册会计师工作单位变更事项登记 Registration of the Change of Working Unit by a CPA 同意调出 Agree the holder tobetrasferd fro
+
+## taichang_finance_p18_267_eb8fbd9f
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2023年审计报告_91e149/extract/images/e0db64f36212b562bd7312a7e52e1840691c22c59e5eb9b1252c0b97ddd11230.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf
+- page_no: 18
+- bbox: [282, 632, 473, 800]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 注册会计师工作单位变更事项登记 Registration of the Change of Working Unit by a CPA 同意调出 Agree the holder tobetrasferd fro 同意调入 Agreethe holder tobe tto 新中衡委信 务所CPAs 转入协会盖章
+- ocr_context: 注册会计师工作单位变更事项登记 Registration of the Change of Working Unit by a CPA 同意调出 Agree the holder tobetrasferd fro 同意调入 Agreethe holder tobe tto 新中衡委信 务所CPAs 转入协会盖章
+
+## taichang_finance_p18_278_546bf742
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2023年审计报告_91e149/extract/images/5b38a6b8d43c2ce20b224db652015cb25632259350cd3991dbd6ba1df7b74d2a.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf
+- page_no: 18
+- bbox: [631, 487, 813, 612]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 注册会计师工作单位变更事项登记 Registrationof the Change oPWorkingibyaCRA 同意调出 Agreethe holder to betransferredfrom 快衡安信 注册会计师专出协会章StpesrtuteofCPA20221010 日 同意调入 Agree the holder to be transferred to
+- ocr_context: 注册会计师工作单位变更事项登记 Registrationof the Change oPWorkingibyaCRA 同意调出 Agreethe holder to betransferredfrom 快衡安信 注册会计师专出协会章StpesrtuteofCPA20221010 日 同意调入 Agree the holder to be transferred to
+
+## taichang_finance_p19_291_f18752f4
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2023年审计报告_91e149/extract/images/ba434db28a1bd0f99a53dfdcc7c056efb0dc9e726185b6bff0d79ffd304d7cbb.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf
+- page_no: 19
+- bbox: [102, 95, 473, 488]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 
+- ocr_context: 
+
+## taichang_finance_p19_292_f8f91934
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2023年审计报告_91e149/extract/images/e4d248a1ab084fa6b6c39171284b984a8af0fa4e6eafe38064418e930e537249.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf
+- page_no: 19
+- bbox: [490, 95, 863, 482]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 
+- ocr_context: 
+
+## taichang_finance_p19_293_836656fe
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2023年审计报告_91e149/extract/images/ee2900692625dc22aa2c8a1be9597abab6f0b018cfbe0d37d8f6569f7e205ce1.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf
+- page_no: 19
+- bbox: [110, 498, 873, 894]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 
+- ocr_context: 
+
+## taichang_finance_p1_003_4dcd6dd2
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/c57e36181da5b25f3e3ad7f1e38d92d6e6bee321fe63aa37c3db85a61c4f48cc.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf
+- page_no: 1
+- bbox: [403, 446, 569, 566]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 河北泰昌电力器材科技有限公司 2024年度 审计报告
+- ocr_context: 河北泰昌电力器材科技有限公司 2024年度 审计报告
+
+## taichang_finance_p5_040_f0d01955
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/ad461e59088f213a62f3f4240951d179776a35dd4981b91433b1a1792d7e250c.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf
+- page_no: 5
+- bbox: [225, 515, 460, 663]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 是否公允反映相关交易和事项。 我们与治理层就计划的审计范围、时间安排和重大审计发现等事项进行沟通，包括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师：
+- ocr_context: 是否公允反映相关交易和事项。 我们与治理层就计划的审计范围、时间安排和重大审计发现等事项进行沟通，包括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师：
+
+## taichang_finance_p5_042_cbee190b
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/33b89ce1336569cf5e4124319d92f32560c210f47600aa398e5b717345309f3d.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf
+- page_no: 5
+- bbox: [739, 543, 885, 597]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 是否公允反映相关交易和事项。 我们与治理层就计划的审计范围、时间安排和重大审计发现等事项进行沟通，包括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师： 2025年02月19日
+- ocr_context: 是否公允反映相关交易和事项。 我们与治理层就计划的审计范围、时间安排和重大审计发现等事项进行沟通，包括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师： 2025年02月19日
+
+## taichang_finance_p5_044_4948b46f
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/3592585750500635a213b3c44afa8c6d3aa2e90237d29125753f1fcba21a2f96.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf
+- page_no: 5
+- bbox: [752, 624, 900, 680]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 中国注册会计师： 中国注册会计师： 2025年02月19日
+- ocr_context: 中国注册会计师： 中国注册会计师： 2025年02月19日
+
+## taichang_finance_p26_296_6337f711
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/4d9480c8ae13d3127c2d8dad00eaed2a202cca88da33210d3ffb2da60b744dd1.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf
+- page_no: 26
+- bbox: [647, 128, 842, 269]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 日1101000 （1-1）（）
+- ocr_context: 日1101000 （1-1）（）
+
+## taichang_finance_p26_298_df669056
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/189a4d3edf79cfc8b23c85cfdcd72733febd13e50cc7009448f9da2eca3c9d75.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf
+- page_no: 26
+- bbox: [252, 106, 344, 276]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 日1101000 （1-1）（）
+- ocr_context: 日1101000 （1-1）（）
+
+## taichang_finance_p26_302_32e47aea
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/17584901f9e8649c0e847438c5f60e1c743c63327dfd16a179d596d6e068bcf6.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf
+- page_no: 26
+- bbox: [252, 106, 401, 276]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 
+- ocr_context: 
+
+## taichang_finance_p26_303_8fe33222
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/5cb18fe901d3cf7153a9d15cdb255cf91aa585390adcdc57c4fadc97e7fd1833.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf
+- page_no: 26
+- bbox: [65, 463, 218, 560]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 
+- ocr_context: 
+
+## taichang_finance_p27_314_1247be22
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/25e74de8ffb5a34c242a0c31621cf39390ebfda18c3c89d0ca0ad3b110ab8868.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf
+- page_no: 27
+- bbox: [667, 106, 855, 277]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 《不开》 《中不开与积断大》回 中国开中
+- ocr_context: 《不开》 《中不开与积断大》回 中国开中
+
+## taichang_finance_p27_316_8328cf3e
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/06ed98b5d9e864f89e63ce075a7362041405ae79c00036e432d48240d783c028.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf
+- page_no: 27
+- bbox: [796, 378, 887, 445]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 《中不开与积断大》回 中国开中
+- ocr_context: 《中不开与积断大》回 中国开中
+
+## taichang_finance_p27_317_94b9240b
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/5801b5d75ebaf7274225049f2631fff96ea67d6d56ece6c83f3a397021562ff4.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf
+- page_no: 27
+- bbox: [403, 452, 608, 596]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 《中不开与积断大》回 中国开中 称
+- ocr_context: 《中不开与积断大》回 中国开中 称
+
+## taichang_finance_p27_318_068884f1
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/38821be0394f55f3a401fa5e4987bc0f15c682dd10301f5bdca8fb088d1e6e78.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf
+- page_no: 27
+- bbox: [87, 688, 265, 807]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 中国开中 称 工王源
+- ocr_context: 中国开中 称 工王源
+
+## taichang_finance_p28_335_5bca9251
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/45b0565c22cc2a10b522185c50a5e72d1bbeffd099228fac85395779bc1baaf8.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf
+- page_no: 28
+- bbox: [221, 393, 394, 486]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 注册会计师工作单位变更事项登记 RegistrationoftheChangeof Working Ui 同意调出 Agree the oldertobetnsfeedfrom
+- ocr_context: 注册会计师工作单位变更事项登记 RegistrationoftheChangeof Working Ui 同意调出 Agree the oldertobetnsfeedfrom
+
+## taichang_finance_p28_336_93c68b7e
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/38d254b1c2ce9b6668b573a86284ad94cf92f23cc183a33c75105a72acc8524f.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf
+- page_no: 28
+- bbox: [401, 422, 603, 566]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 注册会计师工作单位变更事项登记 RegistrationoftheChangeof Working Ui 同意调出 Agree the oldertobetnsfeedfrom
+- ocr_context: 注册会计师工作单位变更事项登记 RegistrationoftheChangeof Working Ui 同意调出 Agree the oldertobetnsfeedfrom
+
+## taichang_finance_p28_340_6942be91
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/8e8b4821caf12388893095007f953c6a95f512a6a074a98c2e71b9a384527010.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf
+- page_no: 28
+- bbox: [596, 222, 800, 336]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 注册会计师工作单位变更事项登记 RegistrationoftheChangeof Working Ui 同意调出 Agree the oldertobetnsfeedfrom 事务所 CPAs 转出协会盖章 Stampofthe transfer-outInstituteofCPAs 203-05月25日 同意调入
+- ocr_context: 注册会计师工作单位变更事项登记 RegistrationoftheChangeof Working Ui 同意调出 Agree the oldertobetnsfeedfrom 事务所 CPAs 转出协会盖章 Stampofthe transfer-outInstituteofCPAs 203-05月25日 同意调入
+
+## taichang_finance_p28_346_c500027b
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/bb1012184a50f1810b93041d0a2991baffc5e4662528ab17c1bd2e9835f7f5d9.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf
+- page_no: 28
+- bbox: [601, 369, 806, 488]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 转出协会盖章 Stampofthe transfer-outInstituteofCPAs 203-05月25日 同意调入 Agree the holder tobe transferred to 转入协会盖章 Stampofthetransfer-inInstituteof CPAs 2023-05-25
+- ocr_context: 转出协会盖章 Stampofthe transfer-outInstituteofCPAs 203-05月25日 同意调入 Agree the holder tobe transferred to 转入协会盖章 Stampofthetransfer-inInstituteof CPAs 2023-05-25
+
+## taichang_finance_p28_354_420d7bac
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/9f3903e9c62141d94d5b6449039668963aef956c746e38a5b502051a1229e5d3.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf
+- page_no: 28
+- bbox: [189, 654, 433, 725]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 2023-05-25 年度检验登记 Annual Renewal Registration 本证书经检验合格，继续有效一年 This certificate is valid for another year after this renewal.
+- ocr_context: 2023-05-25 年度检验登记 Annual Renewal Registration 本证书经检验合格，继续有效一年 This certificate is valid for another year after this renewal.
+
+## taichang_finance_p28_355_7d345925
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/e88cc9f2ed37b9dc2d9f1f85948035e287827d01e2282dfa9881783def6b5469.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf
+- page_no: 28
+- bbox: [189, 730, 442, 792]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 年度检验登记 Annual Renewal Registration 本证书经检验合格，继续有效一年 This certificate is valid for another year after this renewal. 吉林省注册会计师协会
+- ocr_context: 年度检验登记 Annual Renewal Registration 本证书经检验合格，继续有效一年 This certificate is valid for another year after this renewal. 吉林省注册会计师协会
+
+## taichang_finance_p28_357_566a15cf
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/b253fa75e82b542d15356759a456b80540f7d287cba41b8f5fe7fb754df2fff3.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf
+- page_no: 28
+- bbox: [611, 520, 752, 621]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 本证书经检验合格，继续有效一年 This certificate is valid for another year after this renewal. 吉林省注册会计师协会 批准注册协会： AuthorizedInstituteofCPAs
+- ocr_context: 本证书经检验合格，继续有效一年 This certificate is valid for another year after this renewal. 吉林省注册会计师协会 批准注册协会： AuthorizedInstituteofCPAs
+
+## taichang_finance_p28_358_a6e4f6a0
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/11a62a6a6936d2e2fe8601ee6b21526fd88df421860d523e3e761e8df794c19d.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf
+- page_no: 28
+- bbox: [532, 647, 744, 767]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 吉林省注册会计师协会 批准注册协会： AuthorizedInstituteofCPAs 2009
+- ocr_context: 吉林省注册会计师协会 批准注册协会： AuthorizedInstituteofCPAs 2009
+
+## taichang_finance_p29_370_4abb650d
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/5c26618abbd95c2ecc66891a877c785ac3776f14ecb5a2a6a5f9fa46362c6dad.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf
+- page_no: 29
+- bbox: [124, 146, 853, 862]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 
+- ocr_context: 
+
+## taichang_finance_p1_004_fda73e00
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/9857552eb07f26be734e1772a42e0e332323a3a6368c03d8bab842745ce65abf.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 1
+- bbox: [932, 462, 998, 588]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 河北泰昌电力器材科技有限公司2025年度 世仁审字【2026】第St-050号 审计单位：石家庄世仁会计师事务所（普通合伙） 地址：河北省石家庄市栾城区石栾大街与栾武路交口南行200米路西
+- ocr_context: 河北泰昌电力器材科技有限公司2025年度 世仁审字【2026】第St-050号 审计单位：石家庄世仁会计师事务所（普通合伙） 地址：河北省石家庄市栾城区石栾大街与栾武路交口南行200米路西
+
+## taichang_finance_p3_031_586ccb8a
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/56e8561f8eb33d40c095d4b168343523439301b6a263e72727df636d14bd79e5.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 3
+- bbox: [200, 684, 537, 818]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: （3）评价管理层选用会计政策的恰当性和作出会计估计及相关披露的合理性。 （4）对管理层使用持续经营假设的恰当性得出结论。同时，根据获取的审计证据，就可能导致对贵公司持续经营能力产生重大疑虑的事项或情况是否存在重大不确定性得出结论。如果我们得出结论认为存在重大不确定性，审计准则要求我们在审计报告中提请报表使用者注意财务报表中的相关披露；如果披露不充分，我们应当发表非无保留意见。我们的结论基于截至审 报表是否公允反映相关交易和事项。 括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师：
+- ocr_context: （3）评价管理层选用会计政策的恰当性和作出会计估计及相关披露的合理性。 （4）对管理层使用持续经营假设的恰当性得出结论。同时，根据获取的审计证据，就可能导致对贵公司持续经营能力产生重大疑虑的事项或情况是否存在重大不确定性得出结论。如果我们得出结论认为存在重大不确定性，审计准则要求我们在审计报告中提请报表使用者注意财务报表中的相关披露；如果披露不充分，我们应当发表非无保留意见。我们的结论基于截至审 报表是否公允反映相关交易和事项。 括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师：
+
+## taichang_finance_p3_033_b0cd96b3
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/163e5d42e425ec46272093932cdad7c8b7efb9d6a799f992cab07787a6239250.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 3
+- bbox: [720, 669, 831, 747]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 报表是否公允反映相关交易和事项。 括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师： 二〇二六年三月十三日
+- ocr_context: 报表是否公允反映相关交易和事项。 括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师： 二〇二六年三月十三日
+
+## taichang_finance_p3_035_fa5d0153
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/9bc2bcfc3c4d7757b2b3d4b10a9b0a80a099b08bbdafc76bca0d4d782012593c.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 3
+- bbox: [717, 768, 850, 847]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 中国注册会计师： 中国注册会计师： 二〇二六年三月十三日
+- ocr_context: 中国注册会计师： 中国注册会计师： 二〇二六年三月十三日
+
+## taichang_finance_p16_192_ec5284b8
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/b8085363e35271d90796d03b5bac337788a6817ae0de8fcd39db751a9338b590.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 16
+- bbox: [117, 438, 240, 524]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 不异 （） 县园备二日
+- ocr_context: 不异 （） 县园备二日
+
+## taichang_finance_p16_197_afc0dccd
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/220661bf375084bc42c9e890477f159f6d93145cbb1d5db5b901e649830b6042.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 16
+- bbox: [269, 221, 351, 281]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 不异 （） 县园备二日 1-1 ）师 名 类
+- ocr_context: 不异 （） 县园备二日 1-1 ）师 名 类
+
+## taichang_finance_p16_208_e24c7898
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/4612a9b1cd757133776e833e77003c3c877677760e862c23fb8ed943314aa3ca.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 16
+- bbox: [560, 174, 717, 285]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 122222222 2 县
+- ocr_context: 122222222 2 县
+
+## taichang_finance_p16_210_31f67c69
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/7c228e61d7c28004ccd3637aa9110e39b4ebd1b23d33a1202f06d371fb14557b.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 16
+- bbox: [619, 482, 803, 612]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 2 县
+- ocr_context: 2 县
+
+## taichang_finance_p17_216_f63d0a59
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/576b818015ef62e8d12e1272fec6c0ab55d169cae1ab717a023b6a4418049178.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 17
+- bbox: [731, 376, 806, 432]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 真电店
+- ocr_context: 真电店
+
+## taichang_finance_p17_217_b88c22bc
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/a3610a068bb469524ebf4bbf7675704c0a84cdedd930c9365b427a23cf744bff.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 17
+- bbox: [566, 178, 733, 343]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 真电店
+- ocr_context: 真电店
+
+## taichang_finance_p17_231_8fe1f992
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/1da3082fe7fe24ef97d65e64b7c03d4abf46183098d3fbc07973bc8e01e99831.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 17
+- bbox: [175, 633, 315, 730]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 海《不》 开 名
+- ocr_context: 海《不》 开 名
+
+## taichang_finance_p17_238_ef5dee42
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/0cace31440917f1e4d422f5bdea707630803bd14b12a014e8c76a37a97efab04.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 17
+- bbox: [647, 484, 836, 612]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 开 名 王 与
+- ocr_context: 开 名 王 与
+
+## taichang_finance_p18_242_1dea58bf
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/44509117f7784b35830f132af654682bf17d8b7e974b117e7ed0aef90ec34e69.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 18
+- bbox: [627, 122, 782, 233]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 证书编号： No.fCertifite 130100090028批准注册协会：北省注会计协会发证日期 Daefssace 217 8 姓 Fullname 名 孙晓娜性 Sex 别 女生 1984年4月2日工作单位 石家庄世仁会计师事务所（普通合伙）prking unit份证号码130984198404021222 RENACCOUNTINGFIRMGERALPARKERSHIP事
+- ocr_context: 证书编号： No.fCertifite 130100090028批准注册协会：北省注会计协会发证日期 Daefssace 217 8 姓 Fullname 名 孙晓娜性 Sex 别 女生 1984年4月2日工作单位 石家庄世仁会计师事务所（普通合伙）prking unit份证号码130984198404021222 RENACCOUNTINGFIRMGERALPARKERSHIP事
+
+## taichang_finance_p18_243_c470757a
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/53ee8633beaa8c5751dffe5235f1faa54c3d2cc056c5c80ca7e02891189ea6c0.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 18
+- bbox: [146, 279, 429, 467]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 证书编号： No.fCertifite 130100090028批准注册协会：北省注会计协会发证日期 Daefssace 217 8 姓 Fullname 名 孙晓娜性 Sex 别 女生 1984年4月2日工作单位 石家庄世仁会计师事务所（普通合伙）prking unit份证号码130984198404021222 RENACCOUNTINGFIRMGERALPARKERSHIP事 注册会计师工作单位变更事项登记 RegistrationoftheChangeofWorkingUnit byaCPA
+- ocr_context: 证书编号： No.fCertifite 130100090028批准注册协会：北省注会计协会发证日期 Daefssace 217 8 姓 Fullname 名 孙晓娜性 Sex 别 女生 1984年4月2日工作单位 石家庄世仁会计师事务所（普通合伙）prking unit份证号码130984198404021222 RENACCOUNTINGFIRMGERALPARKERSHIP事 注册会计师工作单位变更事项登记 RegistrationoftheChangeofWorkingUnit byaCPA
+
+## taichang_finance_p18_244_d23629c9
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/0e144bbe0479dcc745049bb15a13ad5942fcbb307cc88c602ed965eb21cd6382.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 18
+- bbox: [543, 336, 627, 410]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 证书编号： No.fCertifite 130100090028批准注册协会：北省注会计协会发证日期 Daefssace 217 8 姓 Fullname 名 孙晓娜性 Sex 别 女生 1984年4月2日工作单位 石家庄世仁会计师事务所（普通合伙）prking unit份证号码130984198404021222 RENACCOUNTINGFIRMGERALPARKERSHIP事 注册会计师工作单位变更事项登记 RegistrationoftheChangeofWorkingUnit byaCPA 同意调出 Agreetheholdertobe transferred from
+- ocr_context: 证书编号： No.fCertifite 130100090028批准注册协会：北省注会计协会发证日期 Daefssace 217 8 姓 Fullname 名 孙晓娜性 Sex 别 女生 1984年4月2日工作单位 石家庄世仁会计师事务所（普通合伙）prking unit份证号码130984198404021222 RENACCOUNTINGFIRMGERALPARKERSHIP事 注册会计师工作单位变更事项登记 RegistrationoftheChangeofWorkingUnit byaCPA 同意调出 Agreetheholdertobe transferred from
+
+## taichang_finance_p18_249_5628b907
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/cb00a151026da24a08ea2e489ba383411049bf1daac1d4a16b976956b2af9052.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 18
+- bbox: [166, 597, 378, 716]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 姓 Fullname 名 孙晓娜性 Sex 别 女生 1984年4月2日工作单位 石家庄世仁会计师事务所（普通合伙）prking unit份证号码130984198404021222 RENACCOUNTINGFIRMGERALPARKERSHIP事 注册会计师工作单位变更事项登记 RegistrationoftheChangeofWorkingUnit byaCPA 同意调出 Agreetheholdertobe transferred from 事务所CPAs 转出协会盖章 Stampofhe transfer-out Institute of CPAs ster-out Institute of CPA:
+- ocr_context: 姓 Fullname 名 孙晓娜性 Sex 别 女生 1984年4月2日工作单位 石家庄世仁会计师事务所（普通合伙）prking unit份证号码130984198404021222 RENACCOUNTINGFIRMGERALPARKERSHIP事 注册会计师工作单位变更事项登记 RegistrationoftheChangeofWorkingUnit byaCPA 同意调出 Agreetheholdertobe transferred from 事务所CPAs 转出协会盖章 Stampofhe transfer-out Institute of CPAs ster-out Institute of CPA:
+
+## taichang_finance_p18_255_76af7210
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/5c9f1e971d91927976844e0de28b866c435975efc3f68b43f5d262a585cd5600.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 18
+- bbox: [173, 754, 380, 867]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 转出协会盖章 Stampofhe transfer-out Institute of CPAs ster-out Institute of CPA: 同意调入Agreethe holder to be transferred to 事务所CPAs 转入协会盖章 Stapof thetansfet-in Institute of CPAs 21月 日/m 1d
+- ocr_context: 转出协会盖章 Stampofhe transfer-out Institute of CPAs ster-out Institute of CPA: 同意调入Agreethe holder to be transferred to 事务所CPAs 转入协会盖章 Stapof thetansfet-in Institute of CPAs 21月 日/m 1d
+
+## taichang_finance_p19_265_055e2230
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/5f706e7eed9279ec97e587a29e30d7a4e0e7ec840775149e1b2dc07fd50e80a4.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 19
+- bbox: [190, 236, 404, 368]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 
+- ocr_context: 
+
+## taichang_finance_p19_273_938f858a
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/876f55ef3f5c54c393e891fac91bd15ab03af26f81e0365363f2b5952c1cd67c.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 19
+- bbox: [615, 375, 753, 440]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: m 日
+- ocr_context: m 日
+
+## taichang_finance_p19_274_7466b709
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/bda9add30433f4bc00e806d4f0e11821f84cad0484e0dc2880555328940fda51.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 19
+- bbox: [757, 334, 814, 440]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: m 日
+- ocr_context: m 日
+
+## taichang_finance_p19_281_0b69f294
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/2ecb27e6689bc3a6776d1b6a256bbca705ba6ce3b5e0ecda82bc7b1ff002cb95.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 19
+- bbox: [642, 491, 829, 618]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 
+- ocr_context: 
+
+## taichang_finance_p19_290_c82e2ce6
+
+- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/images/f3cd051aaf5ee865b48c3510a0e939fe34c6851934c8952a1eca167e3489bc01.jpg
+- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf
+- page_no: 19
+- bbox: [596, 696, 797, 837]
+- display_contexts: bid_writing, knowledge_chat, asset_search
+- requires_authorization=false
+- access_scope: taichang_tenant_internal
+- tenant_visibility: taichang_only
+- target_library: qualification_library
+- evidence_type: finance
+- caption: 水
+- ocr_context: 水

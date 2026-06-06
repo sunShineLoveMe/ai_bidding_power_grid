@@ -9,7 +9,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -26,9 +26,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "河北泰昌电力器材科技有限公司2025年度 世仁审字【2026】第St-050号 审计单位：石家庄世仁会计师事务所（普通合伙） 地址：河北省石家庄市栾城区石栾大街与栾武路交口南行200米路西",
       "ocr_context": "河北泰昌电力器材科技有限公司2025年度 世仁审字【2026】第St-050号 审计单位：石家庄世仁会计师事务所（普通合伙） 地址：河北省石家庄市栾城区石栾大街与栾武路交口南行200米路西",
       "retrieval_text": "泰昌 finance 第1页图片。河北泰昌电力器材科技有限公司2025年度 世仁审字【2026】第St-050号 审计单位：石家庄世仁会计师事务所（普通合伙） 地址：河北省石家庄市栾城区石栾大街与栾武路交口南行200米路西",
@@ -45,8 +45,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -58,8 +59,16 @@
           998,
           588
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_finance_p3_031_586ccb8a",
@@ -70,7 +79,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -87,9 +96,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "（3）评价管理层选用会计政策的恰当性和作出会计估计及相关披露的合理性。 （4）对管理层使用持续经营假设的恰当性得出结论。同时，根据获取的审计证据，就可能导致对贵公司持续经营能力产生重大疑虑的事项或情况是否存在重大不确定性得出结论。如果我们得出结论认为存在重大不确定性，审计准则要求我们在审计报告中提请报表使用者注意财务报表中的相关披露；如果披露不充分，我们应当发表非无保留意见。我们的结论基于截至审 报表是否公允反映相关交易和事项。 括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师：",
       "ocr_context": "（3）评价管理层选用会计政策的恰当性和作出会计估计及相关披露的合理性。 （4）对管理层使用持续经营假设的恰当性得出结论。同时，根据获取的审计证据，就可能导致对贵公司持续经营能力产生重大疑虑的事项或情况是否存在重大不确定性得出结论。如果我们得出结论认为存在重大不确定性，审计准则要求我们在审计报告中提请报表使用者注意财务报表中的相关披露；如果披露不充分，我们应当发表非无保留意见。我们的结论基于截至审 报表是否公允反映相关交易和事项。 括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师：",
       "retrieval_text": "泰昌 finance 第3页图片。（3）评价管理层选用会计政策的恰当性和作出会计估计及相关披露的合理性。 （4）对管理层使用持续经营假设的恰当性得出结论。同时，根据获取的审计证据，就可能导致对贵公司持续经营能力产生重大疑虑的事项或情况是否存在重大不确定性得出结论。如果我们得出结论认为存在重大不确定性，审计准则要求我们在审计报告中提请报表使用者注意财务报表中的相关披露；如果披露不充分，我们应当发表非无保留意见。我们的结论基于截至审 报表是否公允反映相关交易和事项。 括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师：",
@@ -106,8 +115,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -119,8 +129,16 @@
           537,
           818
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_finance_p3_033_b0cd96b3",
@@ -131,7 +149,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -148,9 +166,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "报表是否公允反映相关交易和事项。 括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师： 二〇二六年三月十三日",
       "ocr_context": "报表是否公允反映相关交易和事项。 括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师： 二〇二六年三月十三日",
       "retrieval_text": "泰昌 finance 第3页图片。报表是否公允反映相关交易和事项。 括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师： 二〇二六年三月十三日",
@@ -167,8 +185,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -180,8 +199,16 @@
           831,
           747
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_finance_p3_035_fa5d0153",
@@ -192,7 +219,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -209,9 +236,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "中国注册会计师： 中国注册会计师： 二〇二六年三月十三日",
       "ocr_context": "中国注册会计师： 中国注册会计师： 二〇二六年三月十三日",
       "retrieval_text": "泰昌 finance 第3页图片。中国注册会计师： 中国注册会计师： 二〇二六年三月十三日",
@@ -228,8 +255,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -241,8 +269,16 @@
           850,
           847
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_finance_p16_192_ec5284b8",
@@ -253,7 +289,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -270,9 +306,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "不异 （） 县园备二日",
       "ocr_context": "不异 （） 县园备二日",
       "retrieval_text": "泰昌 finance 第16页图片。不异 （） 县园备二日",
@@ -289,8 +325,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -302,8 +339,16 @@
           240,
           524
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_finance_p16_197_afc0dccd",
@@ -314,7 +359,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -331,9 +376,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "不异 （） 县园备二日 1-1 ）师 名 类",
       "ocr_context": "不异 （） 县园备二日 1-1 ）师 名 类",
       "retrieval_text": "泰昌 finance 第16页图片。不异 （） 县园备二日 1-1 ）师 名 类",
@@ -350,8 +395,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -363,8 +409,16 @@
           351,
           281
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_finance_p16_208_e24c7898",
@@ -375,7 +429,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -392,9 +446,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "122222222 2 县",
       "ocr_context": "122222222 2 县",
       "retrieval_text": "泰昌 finance 第16页图片。122222222 2 县",
@@ -411,8 +465,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -424,8 +479,16 @@
           717,
           285
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_finance_p16_210_31f67c69",
@@ -436,7 +499,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -453,9 +516,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "2 县",
       "ocr_context": "2 县",
       "retrieval_text": "泰昌 finance 第16页图片。2 县",
@@ -472,8 +535,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -485,8 +549,16 @@
           803,
           612
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_finance_p17_216_f63d0a59",
@@ -497,7 +569,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -514,9 +586,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "真电店",
       "ocr_context": "真电店",
       "retrieval_text": "泰昌 finance 第17页图片。真电店",
@@ -533,8 +605,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -546,8 +619,16 @@
           806,
           432
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_finance_p17_217_b88c22bc",
@@ -558,7 +639,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -575,9 +656,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "真电店",
       "ocr_context": "真电店",
       "retrieval_text": "泰昌 finance 第17页图片。真电店",
@@ -594,8 +675,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -607,8 +689,16 @@
           733,
           343
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_finance_p17_231_8fe1f992",
@@ -619,7 +709,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -636,9 +726,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "海《不》 开 名",
       "ocr_context": "海《不》 开 名",
       "retrieval_text": "泰昌 finance 第17页图片。海《不》 开 名",
@@ -655,8 +745,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -668,8 +759,16 @@
           315,
           730
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_finance_p17_238_ef5dee42",
@@ -680,7 +779,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -697,9 +796,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "开 名 王 与",
       "ocr_context": "开 名 王 与",
       "retrieval_text": "泰昌 finance 第17页图片。开 名 王 与",
@@ -716,8 +815,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -729,8 +829,16 @@
           836,
           612
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_finance_p18_242_1dea58bf",
@@ -741,7 +849,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -758,9 +866,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "证书编号： No.fCertifite 130100090028批准注册协会：北省注会计协会发证日期 Daefssace 217 8 姓 Fullname 名 孙晓娜性 Sex 别 女生 1984年4月2日工作单位 石家庄世仁会计师事务所（普通合伙）prking unit份证号码130984198404021222 RENACCOUNTINGFIRMGERALPARKERSHIP事",
       "ocr_context": "证书编号： No.fCertifite 130100090028批准注册协会：北省注会计协会发证日期 Daefssace 217 8 姓 Fullname 名 孙晓娜性 Sex 别 女生 1984年4月2日工作单位 石家庄世仁会计师事务所（普通合伙）prking unit份证号码130984198404021222 RENACCOUNTINGFIRMGERALPARKERSHIP事",
       "retrieval_text": "泰昌 finance 第18页图片。证书编号： No.fCertifite 130100090028批准注册协会：北省注会计协会发证日期 Daefssace 217 8 姓 Fullname 名 孙晓娜性 Sex 别 女生 1984年4月2日工作单位 石家庄世仁会计师事务所（普通合伙）prking unit份证号码130984198404021222 RENACCOUNTINGFIRMGERALPARKERSHIP事",
@@ -777,8 +885,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -790,8 +899,16 @@
           782,
           233
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_finance_p18_243_c470757a",
@@ -802,7 +919,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -819,9 +936,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "证书编号： No.fCertifite 130100090028批准注册协会：北省注会计协会发证日期 Daefssace 217 8 姓 Fullname 名 孙晓娜性 Sex 别 女生 1984年4月2日工作单位 石家庄世仁会计师事务所（普通合伙）prking unit份证号码130984198404021222 RENACCOUNTINGFIRMGERALPARKERSHIP事 注册会计师工作单位变更事项登记 RegistrationoftheChangeofWorkingUnit byaCPA",
       "ocr_context": "证书编号： No.fCertifite 130100090028批准注册协会：北省注会计协会发证日期 Daefssace 217 8 姓 Fullname 名 孙晓娜性 Sex 别 女生 1984年4月2日工作单位 石家庄世仁会计师事务所（普通合伙）prking unit份证号码130984198404021222 RENACCOUNTINGFIRMGERALPARKERSHIP事 注册会计师工作单位变更事项登记 RegistrationoftheChangeofWorkingUnit byaCPA",
       "retrieval_text": "泰昌 finance 第18页图片。证书编号： No.fCertifite 130100090028批准注册协会：北省注会计协会发证日期 Daefssace 217 8 姓 Fullname 名 孙晓娜性 Sex 别 女生 1984年4月2日工作单位 石家庄世仁会计师事务所（普通合伙）prking unit份证号码130984198404021222 RENACCOUNTINGFIRMGERALPARKERSHIP事 注册会计师工作单位变更事项登记 RegistrationoftheChangeofWorkingUnit byaCPA",
@@ -838,8 +955,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -851,8 +969,16 @@
           429,
           467
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_finance_p18_244_d23629c9",
@@ -863,7 +989,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -880,9 +1006,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "证书编号： No.fCertifite 130100090028批准注册协会：北省注会计协会发证日期 Daefssace 217 8 姓 Fullname 名 孙晓娜性 Sex 别 女生 1984年4月2日工作单位 石家庄世仁会计师事务所（普通合伙）prking unit份证号码130984198404021222 RENACCOUNTINGFIRMGERALPARKERSHIP事 注册会计师工作单位变更事项登记 RegistrationoftheChangeofWorkingUnit byaCPA 同意调出 Agreetheholdertobe transferred from",
       "ocr_context": "证书编号： No.fCertifite 130100090028批准注册协会：北省注会计协会发证日期 Daefssace 217 8 姓 Fullname 名 孙晓娜性 Sex 别 女生 1984年4月2日工作单位 石家庄世仁会计师事务所（普通合伙）prking unit份证号码130984198404021222 RENACCOUNTINGFIRMGERALPARKERSHIP事 注册会计师工作单位变更事项登记 RegistrationoftheChangeofWorkingUnit byaCPA 同意调出 Agreetheholdertobe transferred from",
       "retrieval_text": "泰昌 finance 第18页图片。证书编号： No.fCertifite 130100090028批准注册协会：北省注会计协会发证日期 Daefssace 217 8 姓 Fullname 名 孙晓娜性 Sex 别 女生 1984年4月2日工作单位 石家庄世仁会计师事务所（普通合伙）prking unit份证号码130984198404021222 RENACCOUNTINGFIRMGERALPARKERSHIP事 注册会计师工作单位变更事项登记 RegistrationoftheChangeofWorkingUnit byaCPA 同意调出 Agreetheholdertobe transferred from",
@@ -899,8 +1025,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -912,8 +1039,16 @@
           627,
           410
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_finance_p18_249_5628b907",
@@ -924,7 +1059,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -941,9 +1076,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "姓 Fullname 名 孙晓娜性 Sex 别 女生 1984年4月2日工作单位 石家庄世仁会计师事务所（普通合伙）prking unit份证号码130984198404021222 RENACCOUNTINGFIRMGERALPARKERSHIP事 注册会计师工作单位变更事项登记 RegistrationoftheChangeofWorkingUnit byaCPA 同意调出 Agreetheholdertobe transferred from 事务所CPAs 转出协会盖章 Stampofhe transfer-out Institute of CPAs ster-out Institute of CPA:",
       "ocr_context": "姓 Fullname 名 孙晓娜性 Sex 别 女生 1984年4月2日工作单位 石家庄世仁会计师事务所（普通合伙）prking unit份证号码130984198404021222 RENACCOUNTINGFIRMGERALPARKERSHIP事 注册会计师工作单位变更事项登记 RegistrationoftheChangeofWorkingUnit byaCPA 同意调出 Agreetheholdertobe transferred from 事务所CPAs 转出协会盖章 Stampofhe transfer-out Institute of CPAs ster-out Institute of CPA:",
       "retrieval_text": "泰昌 finance 第18页图片。姓 Fullname 名 孙晓娜性 Sex 别 女生 1984年4月2日工作单位 石家庄世仁会计师事务所（普通合伙）prking unit份证号码130984198404021222 RENACCOUNTINGFIRMGERALPARKERSHIP事 注册会计师工作单位变更事项登记 RegistrationoftheChangeofWorkingUnit byaCPA 同意调出 Agreetheholdertobe transferred from 事务所CPAs 转出协会盖章 Stampofhe transfer-out Institute of CPAs ster-out Institute of CPA:",
@@ -960,8 +1095,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -973,8 +1109,16 @@
           378,
           716
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_finance_p18_255_76af7210",
@@ -985,7 +1129,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -1002,9 +1146,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "转出协会盖章 Stampofhe transfer-out Institute of CPAs ster-out Institute of CPA: 同意调入Agreethe holder to be transferred to 事务所CPAs 转入协会盖章 Stapof thetansfet-in Institute of CPAs 21月 日/m 1d",
       "ocr_context": "转出协会盖章 Stampofhe transfer-out Institute of CPAs ster-out Institute of CPA: 同意调入Agreethe holder to be transferred to 事务所CPAs 转入协会盖章 Stapof thetansfet-in Institute of CPAs 21月 日/m 1d",
       "retrieval_text": "泰昌 finance 第18页图片。转出协会盖章 Stampofhe transfer-out Institute of CPAs ster-out Institute of CPA: 同意调入Agreethe holder to be transferred to 事务所CPAs 转入协会盖章 Stapof thetansfet-in Institute of CPAs 21月 日/m 1d",
@@ -1021,8 +1165,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -1034,8 +1179,16 @@
           380,
           867
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_finance_p19_265_055e2230",
@@ -1046,7 +1199,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -1063,9 +1216,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "",
       "ocr_context": "",
       "retrieval_text": "泰昌 finance 第19页图片。",
@@ -1082,8 +1235,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -1095,8 +1249,16 @@
           404,
           368
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_finance_p19_273_938f858a",
@@ -1107,7 +1269,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -1124,9 +1286,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "m 日",
       "ocr_context": "m 日",
       "retrieval_text": "泰昌 finance 第19页图片。m 日",
@@ -1143,8 +1305,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -1156,8 +1319,16 @@
           753,
           440
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_finance_p19_274_7466b709",
@@ -1168,7 +1339,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -1185,9 +1356,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "m 日",
       "ocr_context": "m 日",
       "retrieval_text": "泰昌 finance 第19页图片。m 日",
@@ -1204,8 +1375,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -1217,8 +1389,16 @@
           814,
           440
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_finance_p19_281_0b69f294",
@@ -1229,7 +1409,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -1246,9 +1426,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "",
       "ocr_context": "",
       "retrieval_text": "泰昌 finance 第19页图片。",
@@ -1265,8 +1445,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -1278,8 +1459,16 @@
           829,
           618
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_finance_p19_290_c82e2ce6",
@@ -1290,7 +1479,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "finance",
       "target_library": "qualification_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -1307,9 +1496,9 @@
       "parser": "mineru",
       "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
       "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "水",
       "ocr_context": "水",
       "retrieval_text": "泰昌 finance 第19页图片。水",
@@ -1326,8 +1515,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -1339,8 +1529,16 @@
           797,
           837
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     }
   ]
 }

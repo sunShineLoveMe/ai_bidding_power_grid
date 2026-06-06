@@ -1,0 +1,1709 @@
+{
+  "generated_at": "2026-06-06T16:20:18",
+  "payloads": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/asset_staging_payloads.json",
+  "batch_id": "customer_liaoning_taichang_20260606_p0",
+  "dry_run": false,
+  "refresh": true,
+  "embedding": true,
+  "total": 242,
+  "imported": 242,
+  "skipped": 0,
+  "failed": 0,
+  "deleted_existing": 0,
+  "items": [
+    {
+      "status": "imported",
+      "id": "4d20e288-9e0e-4023-81a1-7e837172346e",
+      "asset_id": "taichang_certification_p1_016",
+      "asset_type": "qualification_image",
+      "file_name": "b7e38a5fd6f5f38d7d5443ee464d3cb76da2fbb3d849dc3612eb04fb2ead5c53.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "8a4472a4-1653-48ad-80fa-b9fb5b5b1b7d",
+      "asset_id": "taichang_certification_p1_017",
+      "asset_type": "qualification_image",
+      "file_name": "235109b0179359dd620a90432c1e62dd6e81aa8f3dafd5ef975994fed29b91d6.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "89006072-3d16-4234-85e5-a8ce4209bab9",
+      "asset_id": "taichang_certification_p1_019",
+      "asset_type": "qualification_image",
+      "file_name": "4fc13e5a2002ddadb954db0f60e46a51299a66869fc7cd16f22d4d9ca86c1f6b.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "ace802b3-e25d-4797-9457-18ae3d9e20b2",
+      "asset_id": "taichang_certification_p1_020",
+      "asset_type": "qualification_image",
+      "file_name": "71f8a9390b159af45f4eeeb53d673f1235cbb4e225d0fbcf35d42439ce978c7e.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "70802f74-e588-41eb-916e-c2a92fec93fc",
+      "asset_id": "taichang_certification_p2_049",
+      "asset_type": "qualification_image",
+      "file_name": "f5e39d22b4f1fd6243bdf290deefff72b8ae5be6f1b3c867d4442884a775d4be.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "7bb40c05-b7ca-433d-8beb-3072a3cad153",
+      "asset_id": "taichang_certification_p2_050",
+      "asset_type": "qualification_image",
+      "file_name": "f9f29f6b70a2abd64f8d41a173dc2b73d162e7281915d3bf7e685009233abdf4.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "7848e1b1-7774-4fe4-b2e8-8d522dbe5a49",
+      "asset_id": "taichang_certification_p2_051",
+      "asset_type": "qualification_image",
+      "file_name": "e66192c62245dd7d86bb6f27dc631b4a6c4b6e128aa0b1148bf0dd9e1dfd4d08.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "00e167d8-e044-4dc4-8bf5-220b71c91fe1",
+      "asset_id": "taichang_certification_p2_052",
+      "asset_type": "qualification_image",
+      "file_name": "c45b9201b93a7e5a458a46060c9cd52231f1806cde91dcaea1ed3a9588423f0f.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "078b3218-8516-494d-9c97-921d0d265201",
+      "asset_id": "taichang_certification_p3_075",
+      "asset_type": "qualification_image",
+      "file_name": "b5636fd7f6cfa0e40bb23d50e05a5d5e38a2106f0e9644c4f7be65f5e9d9ffd5.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "f3a5a3af-cc13-4ce6-88cb-8c3bc3d20a86",
+      "asset_id": "taichang_certification_p1_013",
+      "asset_type": "qualification_image",
+      "file_name": "ab7214ece2d51c555e103be0532f86d22a2909677fe150a3d666f43d2e413f1a.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "87f2f475-04ef-4c17-9e48-5c89cd8dbf72",
+      "asset_id": "taichang_certification_p1_015",
+      "asset_type": "qualification_image",
+      "file_name": "6e196db18de002eb1b4a2be7e64fd79663370ffe225e0f0c9750cb8aae9f0d37.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "8105043f-c3d0-4d26-8a81-3a5eb1f9fa1c",
+      "asset_id": "taichang_certification_p1_016",
+      "asset_type": "qualification_image",
+      "file_name": "7cc270c76b5ee23f73a5e5d5b16233ffe213c56549dca4b8ee1067ee2afb61c4.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "d54c4ffd-1332-431e-b0b4-2b858cd85460",
+      "asset_id": "taichang_certification_p1_017",
+      "asset_type": "qualification_image",
+      "file_name": "83342342ddde70505085798d0398f9c6dbf44567046a2325a005e80a6546470a.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "7a4a9047-d130-4420-871a-e4d2631896ed",
+      "asset_id": "taichang_certification_p1_023",
+      "asset_type": "qualification_image",
+      "file_name": "e30b08f2fde301f4ac48a6f03a71ee59d602365537d3b547a19874fc9c21be25.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "48bb5c30-951b-4ce5-99dd-4a40d5f5c468",
+      "asset_id": "taichang_certification_p2_044",
+      "asset_type": "qualification_image",
+      "file_name": "acd2f1d677af289e0fdea60202060d2ddee6ebaaa55acaf98028275fa9e79846.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "960e1fcc-af33-45f8-a20b-9699241033c5",
+      "asset_id": "taichang_certification_p2_046",
+      "asset_type": "qualification_image",
+      "file_name": "b373b1125ef201a193d56b90f57155db0fdce92935c9060fa6cb7f6e3a0bae0a.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "6031b95e-26c9-42da-ad30-002a868afb99",
+      "asset_id": "taichang_certification_p2_047",
+      "asset_type": "qualification_image",
+      "file_name": "ed87cf62d5d69e8d164f36af44f2a1ff8b29feef4ce12ca7561e00f30b51aecc.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "1163d70e-a489-4753-8a20-f1689de1a389",
+      "asset_id": "taichang_certification_p2_048",
+      "asset_type": "qualification_image",
+      "file_name": "d029388f95a2d258cb3be4d265523595dce042077a6e6bed91b9e3494303160d.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "5816b7c6-b5e4-4b70-af50-cc976499f597",
+      "asset_id": "taichang_certification_p2_054",
+      "asset_type": "qualification_image",
+      "file_name": "4a92b1d4ae8aabf9a2d34e406e923156dd258cc37c603ff14dc507876c4bd896.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "1093b4cc-aa53-45e5-8e4a-36a1130f72e4",
+      "asset_id": "taichang_certification_p1_013",
+      "asset_type": "qualification_image",
+      "file_name": "381b4b5403d539199f2412e422e8d7684d5e0c4cde30b151a32960725aaf1a5d.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "cdc231b6-fea5-4beb-a54c-7e02da01d457",
+      "asset_id": "taichang_certification_p1_015",
+      "asset_type": "qualification_image",
+      "file_name": "81fda7dd82f4e8bd810d122facf8d0d7ad1383ca4cd43e967cef9a3474d7d0b9.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "85f65846-fd9e-4e09-ba61-62db346315e0",
+      "asset_id": "taichang_certification_p1_023",
+      "asset_type": "qualification_image",
+      "file_name": "0e4d009818574828a5ec1c6b4766240c6c447e82fe2cf08495cd6b812ebf107e.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "1ef38489-f3c3-44ef-8343-6d33660292b8",
+      "asset_id": "taichang_certification_p2_042",
+      "asset_type": "qualification_image",
+      "file_name": "ef6ec1ce102dd915e9be9ffbcea9a587a3c7a61579a99aa4da156299257a9d56.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "eca8a06a-0389-41c6-b4cb-6d857d666b0a",
+      "asset_id": "taichang_certification_p2_044",
+      "asset_type": "qualification_image",
+      "file_name": "461fd20bb812621cc9ed8b00213cf6ed68121b58c35069bb0474c8252b0de980.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "5711288e-2485-475c-a8b2-0233f5decc3c",
+      "asset_id": "taichang_certification_p2_052",
+      "asset_type": "qualification_image",
+      "file_name": "20e2e4b4b72854fd4290700bd966e62e424c8e6ae40456fb0d067e830f045fee.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "a6e74b8e-6444-4955-abb7-f36dc5172a1d",
+      "asset_id": "taichang_certification_p3_068",
+      "asset_type": "qualification_image",
+      "file_name": "19b83fcd99c324f20697e523e259a683fb74bbd6f5313c630af8b21983d35ddc.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "3fbd8db2-6933-4917-a34a-c2d722b558ba",
+      "asset_id": "taichang_production_capacity_p1_002",
+      "asset_type": "product_image",
+      "file_name": "be1ebd77f4b261b01488d751972df17cbc7d9542181434ac621fec2ffbb7a97e.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "a4cc7545-5f84-4d5c-a86f-87359f621a19",
+      "asset_id": "taichang_production_capacity_p4_064_062f2129",
+      "asset_type": "product_image",
+      "file_name": "2fc8c76097baf5e7d64f6f9c081a046980ce68b7a0da87997d0eeea6fc170258.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "6cf080c6-4ee4-4d72-a101-3ce94f0c514d",
+      "asset_id": "taichang_production_capacity_p4_072_a98b320a",
+      "asset_type": "product_image",
+      "file_name": "32f06090f4cfe0183a7c98edb655fb7124b585773133eb86afeb2d0563ce185c.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "53508996-5208-47a5-97b9-8a8c61fcff2a",
+      "asset_id": "taichang_production_capacity_p5_079_3d311007",
+      "asset_type": "product_image",
+      "file_name": "8bd6738cf1bf07215b3e797f8053224c0bf559b34230737f612eefeff8dde5cf.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "09f12f1d-b591-456f-9969-1df05c03e26f",
+      "asset_id": "taichang_production_capacity_p6_080_2819498b",
+      "asset_type": "product_image",
+      "file_name": "008f1e1bbf30f9d37bbca2a73ae45fcc7e53612327ec8929ed7527c2212be7e9.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "6e65aaf3-7ec4-4226-a830-be67419e9bd8",
+      "asset_id": "taichang_production_capacity_p7_081_93f95f3a",
+      "asset_type": "product_image",
+      "file_name": "c71111698acf6279818dd7293c59fd4f731233c64699e9abbaebf3eecdd6e17f.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "7b8f1223-d91d-4900-8597-cb819a43d600",
+      "asset_id": "taichang_production_capacity_p2_019_3209a424",
+      "asset_type": "product_image",
+      "file_name": "026359d7e4026963d4b2d5107f831ad707e954d7ea9a2e84c90623920d4e1702.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b299f5fa-6529-451d-a5b8-9174fcbcedd1",
+      "asset_id": "taichang_production_capacity_p4_031_6d875e24",
+      "asset_type": "product_image",
+      "file_name": "1b5faf6167b8cfce6afda450846a60e90931567f8ac078fbecbaf886face3df4.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "3344a7d9-1615-4e70-968d-2f542c3ebda7",
+      "asset_id": "taichang_production_capacity_p4_041_73cd244f",
+      "asset_type": "product_image",
+      "file_name": "fcba09e0859d515c73f5a667e3805d43515308f6e00cc7e6c4d6445c57b806f0.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "e208208a-1d07-4870-9a87-1d405e22d846",
+      "asset_id": "taichang_production_capacity_p4_048_c913fd59",
+      "asset_type": "product_image",
+      "file_name": "0634f335d9d2a834b84b9f3e1c0b8aabc672bf49642ca716fd75839a5e4883c7.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "1f5a1492-7efc-4490-9856-d32e111fd7ef",
+      "asset_id": "taichang_production_capacity_p4_064_42c16b99",
+      "asset_type": "product_image",
+      "file_name": "2fc8c76097baf5e7d64f6f9c081a046980ce68b7a0da87997d0eeea6fc170258.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "cbc7b7b4-6bc1-40ef-81cc-a9fb42dc5417",
+      "asset_id": "taichang_production_capacity_p4_072_6448693f",
+      "asset_type": "product_image",
+      "file_name": "26485797168fb6e615d4a2f83da25c05312e2a04bef8033883c902442e44c2c6.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "48adbc72-be80-4736-bd91-f6cb25cb28d7",
+      "asset_id": "taichang_production_capacity_p5_079_0f275f67",
+      "asset_type": "product_image",
+      "file_name": "8bd6738cf1bf07215b3e797f8053224c0bf559b34230737f612eefeff8dde5cf.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "35ce03f8-e6db-4790-9c07-c166d7ba2d68",
+      "asset_id": "taichang_production_capacity_p6_080_178c9ea2",
+      "asset_type": "product_image",
+      "file_name": "e58641cd657e4dba80f43aea7f406384b539db884677beffb63fb8515a53172b.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "bfa5e56d-669c-4946-b16d-b10261114bfb",
+      "asset_id": "taichang_production_capacity_p7_081_a99652d1",
+      "asset_type": "product_image",
+      "file_name": "785c0e514742b6d69f8181afa935e2f538646d4dc22916be6106cf8f3c44ccbd.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "61ec0edc-d1ef-494e-bc94-315971d8fe62",
+      "asset_id": "taichang_production_capacity_p1_004_b2b79ff6",
+      "asset_type": "product_image",
+      "file_name": "8a8fc681cab7799343e8ba70f8fd8bb8d6abcf98611eba675c710c4aaf56f98b.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "840343dc-cc59-4bde-a9cc-008c39d2e9c4",
+      "asset_id": "taichang_production_capacity_p3_033_370aede2",
+      "asset_type": "product_image",
+      "file_name": "6ebe41e90a08f030077397eb08468727acc62ae5f9604e0aa8bba6461db4038d.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "47cf2219-aa2c-4d9d-bff2-f601c60e64f7",
+      "asset_id": "taichang_production_capacity_p3_043_408e0535",
+      "asset_type": "product_image",
+      "file_name": "00b60f85e9389be0d9498b73e3d2c65068a3edd36f92d79c911531ab006518e4.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "edce2bd3-5181-49fa-ac89-6b0345552695",
+      "asset_id": "taichang_production_capacity_p4_060_e7386d00",
+      "asset_type": "product_image",
+      "file_name": "cec67b79eae4fe14ea3ba768dd5731cab1feeacd42ef0b9b886dbc3b7f693523.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "0b31e2fe-1280-40d6-a8bf-7c712e795d20",
+      "asset_id": "taichang_production_capacity_p5_061_528ef423",
+      "asset_type": "product_image",
+      "file_name": "d84ce31c4fdfb3e70af5871180c3e1c686042f87fc089c8d21b04414c5632502.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b2158017-057b-419d-834f-48b6467334ed",
+      "asset_id": "taichang_production_capacity_p6_062_85be48a0",
+      "asset_type": "product_image",
+      "file_name": "198b246ef26b8d88f2d31a427d686c6b5bd6a4f8b0cecc4e0ea9484790e745c6.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b4e1de83-6048-4d50-94f7-955e76e76da8",
+      "asset_id": "taichang_production_capacity_p7_063_8ab69715",
+      "asset_type": "product_image",
+      "file_name": "3ad4a859860b1d1ed89bf4cf8ab530f98742a1c3eac0d37026cab37df3e89d2a.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b276f59c-9009-4e6f-808f-4efc4312f6f4",
+      "asset_id": "taichang_production_capacity_p8_064_30ecddb7",
+      "asset_type": "product_image",
+      "file_name": "c0478d33bc43d3b6ca6eb975f9b9d824ac69690f04602befddab1baf888788ad.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "42a21872-cea0-4d80-a7d0-670db2aae9f3",
+      "asset_id": "taichang_production_capacity_p2_001_f376c461",
+      "asset_type": "product_image",
+      "file_name": "d211b1622a89602638d6a934b9c1de1ad56176f34832b097dc20db47649c30dc.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "86c1a85a-73af-4f0c-b36c-d00bbebfc5f2",
+      "asset_id": "taichang_production_capacity_p3_002_708329b8",
+      "asset_type": "product_image",
+      "file_name": "0a80ac7e67c7ca58b11952aa07b76e97d42ab6b26bbaf5edafcc13f03cb51bfd.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "d756b640-bbb7-481b-b978-953af69c94b6",
+      "asset_id": "taichang_production_capacity_p4_003_e9b01359",
+      "asset_type": "product_image",
+      "file_name": "0b791d2cd73595fda9edf428032e7dbd8ac9e564e47b79e009d32221a31f2e45.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "cc774b93-499c-4a57-8f06-64571df8d57b",
+      "asset_id": "taichang_production_capacity_p5_004_a90b61de",
+      "asset_type": "product_image",
+      "file_name": "740797c7b55354c0bcdf53f7f14a78adc6239c285f77d1e5eefa11aa016b95fc.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "e39ad332-a35c-4d0f-9cbf-90b0b844bd62",
+      "asset_id": "taichang_production_capacity_p6_005_ce187907",
+      "asset_type": "product_image",
+      "file_name": "7e907998f115eca1ef770fc433fb3ff49aaf0a04a279f407de4259d00d7782cf.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "022c90dd-170d-4b4f-8d23-a7938e7fc811",
+      "asset_id": "taichang_production_capacity_p6_006_14ff564f",
+      "asset_type": "product_image",
+      "file_name": "089ac6a664dd604b1c91b840a2db5aa43ee46ccb98a01d9ff9f02dc344b25464.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "96d65776-17d8-44de-ad4e-8e5099e2bbd6",
+      "asset_id": "taichang_testing_capacity_p2_028_da4fc3bf",
+      "asset_type": "product_image",
+      "file_name": "ba6366112fdd974ecd99548db84e5866e155855431082c2aa1a02661627080d2.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "5c529c27-898a-4495-97ef-1c2cdd760468",
+      "asset_id": "taichang_testing_capacity_p3_036_d9c9dba9",
+      "asset_type": "product_image",
+      "file_name": "0c116754b151ff014c68074329bd965b3d1dae020dbe9f2de1518ad4160bd0fa.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "210c4a5c-d5d0-4200-90b1-44948642af18",
+      "asset_id": "taichang_testing_capacity_p4_037_b7b84a28",
+      "asset_type": "product_image",
+      "file_name": "708c9f1f319c703eba388004efd426bb1b19135e676335f44fca076a7bf0ab40.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "912f3505-adf5-46dd-afe9-1b04227094d0",
+      "asset_id": "taichang_testing_capacity_p6_040_59217b5f",
+      "asset_type": "product_image",
+      "file_name": "5de264f9ef006a12ebc34a180889703371c153825e87846909289e7a4948d18f.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "8d29964b-056f-4989-8893-17f0df4402e1",
+      "asset_id": "taichang_testing_capacity_p6_041_101cf1a8",
+      "asset_type": "product_image",
+      "file_name": "22a636354744e9c7a2f5032a42706d955a92a9cc0f960fff0f393e7f3cca0acc.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "28d0b265-2c35-4c75-9116-019230859bbd",
+      "asset_id": "taichang_testing_capacity_p6_062_b7520cd8",
+      "asset_type": "product_image",
+      "file_name": "28858e8a885f29ef81cfec36db30920489e5b6c87e00c06d7d1e51dba44abf03.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "ac08f3cb-225f-47d5-b722-b1a8c72cf572",
+      "asset_id": "taichang_testing_capacity_p6_073_60bb3c4d",
+      "asset_type": "product_image",
+      "file_name": "e7c63f345ddad17b7805ac700973d8d97af293d0d292d004e1b5c9a0c23b07c0.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "31400717-0ea0-4eb1-bda8-ca027aca482d",
+      "asset_id": "taichang_testing_capacity_p2_019_fdf00a60",
+      "asset_type": "product_image",
+      "file_name": "8dd711442f631e42db04794ad86f28c5af0d92c0fb20ce854f96e8a8a2c66f9a.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "f4535562-103b-4511-b294-3f02cc2184a3",
+      "asset_id": "taichang_testing_capacity_p2_023_c9d890a0",
+      "asset_type": "product_image",
+      "file_name": "8f75fa7fb20085530a93580e1e80fdd7bd3e3927cfd1b2f944d929d2ba54ded9.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "aa27d95f-ed68-4a11-ac4b-98f6e110fa22",
+      "asset_id": "taichang_testing_capacity_p3_039_8ffe144c",
+      "asset_type": "product_image",
+      "file_name": "0c116754b151ff014c68074329bd965b3d1dae020dbe9f2de1518ad4160bd0fa.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "17d189d9-1dc3-4d1c-aaf7-32ef4306aa3f",
+      "asset_id": "taichang_testing_capacity_p4_040_ecd28456",
+      "asset_type": "product_image",
+      "file_name": "39c3eca55b5c4f1b94b87407b8b50aacc171f0235a6c0f458aac3549b30fa6c9.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "2779b679-b464-4339-976b-71ba4195445c",
+      "asset_id": "taichang_testing_capacity_p5_042_2743fc79",
+      "asset_type": "product_image",
+      "file_name": "76be6e8ef86f45b11966c94f929bd3e25bfe4dcca9954f3b088d03179be74fa9.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "404f161f-329c-478b-9844-7f71076a3c06",
+      "asset_id": "taichang_testing_capacity_p5_043_8c48ee46",
+      "asset_type": "product_image",
+      "file_name": "9567d735b6d87fb978ba170c94d81ddb33487099c9bdc2390ba1154dc4f98af3.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "ce435272-95db-4ac9-9851-edf5d54c3335",
+      "asset_id": "taichang_testing_capacity_p5_065_fa544dfd",
+      "asset_type": "product_image",
+      "file_name": "12e3ce794b6f52cbdc22d7fe84cf7ea4229207ef331cacf6bfde633f147b9ad6.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "0f8218e2-7484-4e90-8d9a-19c51f8e700d",
+      "asset_id": "taichang_testing_capacity_p5_076_61d1e4c1",
+      "asset_type": "product_image",
+      "file_name": "0d4738455f4f179d708dcf973ec969db9314d4c8c2166dd64802d74e48acaf86.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "e250e2fc-07b8-41c4-9c5f-33404bfe9237",
+      "asset_id": "taichang_testing_capacity_p1_001_b7594832",
+      "asset_type": "product_image",
+      "file_name": "7f5d703ef6e00fb7567423491d0b960fca7a5eac023bb61309c537908807e562.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "4712614d-92c8-4c8d-a55d-671154f1feb7",
+      "asset_id": "taichang_testing_capacity_p1_006_9b7dd006",
+      "asset_type": "product_image",
+      "file_name": "f0b3e62701a9a233aa5de3bcc8b8cb26cba05f7817d978dd6c122e65e59c6ad8.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b95a3073-10a6-4ef1-a537-eb09db900cb8",
+      "asset_id": "taichang_testing_capacity_p2_010_dfd6b847",
+      "asset_type": "product_image",
+      "file_name": "76c8612ad21bdd4d9eb86d203419a503f147d2e7d7a835424ff8fa7ed9acb7d6.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "6b6325a7-e781-45ee-854c-1c17ff94d4f9",
+      "asset_id": "taichang_testing_capacity_p4_017_067a3553",
+      "asset_type": "product_image",
+      "file_name": "9ece0d34c4121b9181fe8fca22a6d6bdbe5fe15607db7a52448ecaf5c110149f.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "e4c52544-d4aa-450b-a772-d5139a9484fc",
+      "asset_id": "taichang_testing_capacity_p4_018_0ad6fc33",
+      "asset_type": "product_image",
+      "file_name": "df04bc6fac9dcff86a0c6d1cbc82df38ff39c3e7b663fff35c30b8a446f29205.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "17b86695-57c6-4e99-be74-7ba38592b95d",
+      "asset_id": "taichang_testing_capacity_p4_039_3dc19173",
+      "asset_type": "product_image",
+      "file_name": "0d2e3a45699201abb242cf4696bfcfeb96de3737a5179857023920d3f618a3e9.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "10b68e00-d41c-46af-99a5-9a8c93157467",
+      "asset_id": "taichang_testing_capacity_p4_050_070baa13",
+      "asset_type": "product_image",
+      "file_name": "65fe6f5405f73a38e449deaf1f80325b449d4d0abebba5e1334069b9e24f1f59.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "110bddf4-9cc0-423d-bd7d-d8e98a28eaef",
+      "asset_id": "taichang_production_capacity_p1_008_f3efe5fd",
+      "asset_type": "product_image",
+      "file_name": "ced395f375998874eca5ee57f4753b7a75221cec29d0fb2fa668f4fd94eedcd1.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "0a40b2ae-77b1-4250-bdf6-f45e1ad56eca",
+      "asset_id": "taichang_testing_capacity_p1_008_13ffce46",
+      "asset_type": "product_image",
+      "file_name": "ced395f375998874eca5ee57f4753b7a75221cec29d0fb2fa668f4fd94eedcd1.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "8e71dab7-6f32-4c44-ae84-ca8b4f6c7293",
+      "asset_id": "taichang_testing_capacity_p1_008_8d7c5f6c",
+      "asset_type": "product_image",
+      "file_name": "eeba51f3cdd5cb91890bb84678d4a1d96d80f0166ac99425f7fdf7a5859c0612.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "60bc8093-005f-4c5b-9003-66e77fe57f54",
+      "asset_id": "taichang_testing_capacity_p1_009_9638ab45",
+      "asset_type": "product_image",
+      "file_name": "79dfeefb4c0c6375523baa7c08ff3a9df5ff8a2cbda33a20846efb21f17238d1.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "acaa8688-2530-4b43-8445-8403d781db5d",
+      "asset_id": "taichang_production_capacity_p1_008_22025f4c",
+      "asset_type": "product_image",
+      "file_name": "eeba51f3cdd5cb91890bb84678d4a1d96d80f0166ac99425f7fdf7a5859c0612.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "87abcd38-5d44-4ffd-a7e5-b593b03a8414",
+      "asset_id": "taichang_production_capacity_p1_009_5132c583",
+      "asset_type": "product_image",
+      "file_name": "79dfeefb4c0c6375523baa7c08ff3a9df5ff8a2cbda33a20846efb21f17238d1.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "5baf602e-0a60-4d44-a5c7-6224ad5fe3f8",
+      "asset_id": "taichang_production_capacity_p1_016_62b46bf6",
+      "asset_type": "product_image",
+      "file_name": "4db09f224b9a754fdf22a82e3c58e0757825027f75b0a380f220dc44f3c9a4eb.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "f4a21bdd-da7d-4f0f-a963-445fa357dfa8",
+      "asset_id": "taichang_production_capacity_p1_019_408b83fc",
+      "asset_type": "product_image",
+      "file_name": "746da4e77792dd11cb4115f2d22f7b6860c2e231077376767741930c3b6ec024.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "61340567-8ddb-43fc-bdab-5325b208d9b5",
+      "asset_id": "taichang_testing_capacity_p1_016_e07f2a73",
+      "asset_type": "product_image",
+      "file_name": "4db09f224b9a754fdf22a82e3c58e0757825027f75b0a380f220dc44f3c9a4eb.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "c82075d6-9073-421d-bef8-3b2b91b1222b",
+      "asset_id": "taichang_testing_capacity_p1_019_a25881d9",
+      "asset_type": "product_image",
+      "file_name": "746da4e77792dd11cb4115f2d22f7b6860c2e231077376767741930c3b6ec024.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "26a5b160-5ada-450d-ad95-26d6efcfcf81",
+      "asset_id": "taichang_testing_capacity_p2_018_7a2b0ca4",
+      "asset_type": "product_image",
+      "file_name": "c8372a56b9cb4a8c3f191a516794a3c0036888259b648b417c56a2a9a6180f59.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "160b7c3b-f69a-4e16-ab96-d6526b0c306b",
+      "asset_id": "taichang_testing_capacity_p2_028_255156cc",
+      "asset_type": "product_image",
+      "file_name": "27a7e0e3c055808ce0b40a7efc82cc193322b0671e289ae8d72edab7b96743dc.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "2e9766c1-3b7d-4a84-b578-67ec91c5bc17",
+      "asset_id": "taichang_testing_capacity_p3_036_1c2a9a69",
+      "asset_type": "product_image",
+      "file_name": "0c116754b151ff014c68074329bd965b3d1dae020dbe9f2de1518ad4160bd0fa.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "40f2fe36-12c9-474f-91f5-fd08afb4d3e6",
+      "asset_id": "taichang_testing_capacity_p4_037_1c766e39",
+      "asset_type": "product_image",
+      "file_name": "062de878d5108831a726b6e6ddf225308c60cef2be6511b065a02839227c4a38.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b7829ea4-7d81-47c2-b6e3-6ea0fc79efae",
+      "asset_id": "taichang_testing_capacity_p4_038_eb677d4c",
+      "asset_type": "product_image",
+      "file_name": "61e2f85efbfc2787c5a30ab9ec59d0c5bcf892dd137e4fa04fd15ae82e7222f3.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "4d6a831d-51c9-4156-b0d9-e986a9690fea",
+      "asset_id": "taichang_testing_capacity_p4_041_c5705d3a",
+      "asset_type": "product_image",
+      "file_name": "99fdac0a710709eccdc5919e719ed307e36feae94b2c24acf53a7fbacf2e34fe.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "edb12cf4-3c4d-448d-9443-28ad9c20d6b1",
+      "asset_id": "taichang_testing_capacity_p4_044_958987e5",
+      "asset_type": "product_image",
+      "file_name": "c140d9debdd8178a0a39cf056d51fd09e80bb1f9c4a0e8b52af91d6a181a8056.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "e7aa818a-70a0-4807-944b-07bd7e5ca06b",
+      "asset_id": "taichang_testing_capacity_p4_047_96f7108d",
+      "asset_type": "product_image",
+      "file_name": "967d05b3f80172a46f05dea4421071ab5097866355392af9df408bbd68320ecf.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "bca39def-07cd-425a-84d6-9882345370cc",
+      "asset_id": "taichang_testing_capacity_p4_053_a1e4af10",
+      "asset_type": "product_image",
+      "file_name": "79c4c21b79833809cbf652f905809649338647f2f9e2e8f326be944209459b23.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "99c35dd8-da02-4ec5-99ee-8e15a87c72e0",
+      "asset_id": "taichang_testing_capacity_p4_065_833895a4",
+      "asset_type": "product_image",
+      "file_name": "c3b6d9c6587c617846872c7bff0237db7e0337e38d4d02bc10ef948340e328e0.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "7edfa0fd-066d-40d9-bd52-d10142f4b58f",
+      "asset_id": "taichang_testing_capacity_p5_067_1aee93a8",
+      "asset_type": "product_image",
+      "file_name": "4bd15965177e37ad681058df4709d9e323bdd6294e7ebf2f964b3e432c7ff2d6.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "9693baec-bed4-4815-993c-c9db6553e61f",
+      "asset_id": "taichang_testing_capacity_p5_068_8e40080a",
+      "asset_type": "product_image",
+      "file_name": "3223573b7901b7e551d708e3a298dc969928390f0c85c8dae41c9e7754258ac6.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "fbd4e46a-50cf-4a34-8016-e82b0b84e67d",
+      "asset_id": "taichang_testing_capacity_p5_089_beeff89d",
+      "asset_type": "product_image",
+      "file_name": "232e1fdeb774d8497fa2b44f5f81dad0f470169501f889bf6c8c678babe1436d.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b0b978f4-20e1-499b-af9b-692b7cf3c9a2",
+      "asset_id": "taichang_testing_capacity_p5_100_cd56298a",
+      "asset_type": "product_image",
+      "file_name": "ee9fc06b77e1fff59b80665bc2c8d8da0a21b3e753a455d71d289589d4d8878c.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "37b5296a-581d-4c9d-ba3e-86fb26a15b23",
+      "asset_id": "taichang_testing_capacity_p3_040_2025568e",
+      "asset_type": "product_image",
+      "file_name": "edef6b3135e5b4272a85ff2f9c535e3360ef97871bd1c430c59bcaff75fde357.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "a3826f79-d531-43d4-b8bb-43b78bd8701d",
+      "asset_id": "taichang_testing_capacity_p3_049_ac994f2c",
+      "asset_type": "product_image",
+      "file_name": "c2e3eb202886ff32cd611e2a652293831788f7885433a57dc7a7db6303128289.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "c6e7b41e-65e1-4a7e-8b52-132ce8091777",
+      "asset_id": "taichang_testing_capacity_p4_057_3a9e39c1",
+      "asset_type": "product_image",
+      "file_name": "cec67b79eae4fe14ea3ba768dd5731cab1feeacd42ef0b9b886dbc3b7f693523.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "38b67cca-5007-43ae-8375-abe608515c6e",
+      "asset_id": "taichang_testing_capacity_p5_058_46b9be7e",
+      "asset_type": "product_image",
+      "file_name": "e4eb59c9ece26f62df28c7fb9a49921bf7ae1414e85072fb6c710e23a301ec35.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "0733dc8b-7726-45d6-b104-f9908b03df66",
+      "asset_id": "taichang_testing_capacity_p6_060_d993d228",
+      "asset_type": "product_image",
+      "file_name": "cf357a6e38c13f11ebd668ccb5eb7a2efda83a64257079f4f4dd49f44b4c212a.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "13fbc8f5-bc63-4a8d-b17e-10e4a73e2d59",
+      "asset_id": "taichang_testing_capacity_p6_061_d2b66641",
+      "asset_type": "product_image",
+      "file_name": "53a15b7a2b55770e069136571d28cb9ffae462af237be51c3f2bd490d06a8112.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "4442246b-42d2-4c5a-ae30-3e7b827b02d6",
+      "asset_id": "taichang_testing_capacity_p6_083_a350525d",
+      "asset_type": "product_image",
+      "file_name": "796266488662ac7e7df544fc2a713c94be50d15618b5444d92b349dc1a9e98d2.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b0e38810-b332-4450-bcfd-a18894387089",
+      "asset_id": "taichang_testing_capacity_p6_094_ecd010ad",
+      "asset_type": "product_image",
+      "file_name": "3a41b9098ac831a73779d9d86ded1840e6b35d63701b7a085ecb18ed42734878.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "12b31995-89ab-46d7-b563-742aa916bedc",
+      "asset_id": "taichang_testing_capacity_p1_009_b00276f2",
+      "asset_type": "product_image",
+      "file_name": "84abd103e582bb7aad73550db000ecbb3cc7c8c6a51482ff4d9358b81d7413ec.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "645b12ac-672e-41a9-8541-1c84be5be780",
+      "asset_id": "taichang_testing_capacity_p1_010_61cf14af",
+      "asset_type": "product_image",
+      "file_name": "68075726bd9c7c231ea6c13abb96089ef4b9679058b89138fb2a5878ed0e2341.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "6d41b587-acf7-43b2-8ef9-6cb4d662d17a",
+      "asset_id": "taichang_testing_capacity_p2_013_3b7f6e4b",
+      "asset_type": "product_image",
+      "file_name": "cdcd76dd069dfec7205296d36bdb82bfcc9a6c78e67e3841dce51560aca8a5a0.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b478dd36-a58a-4e85-ba1b-b6d783d7a416",
+      "asset_id": "taichang_testing_capacity_p3_030_9a000ae4",
+      "asset_type": "product_image",
+      "file_name": "0c116754b151ff014c68074329bd965b3d1dae020dbe9f2de1518ad4160bd0fa.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "43ad3bc2-04f4-4db4-b312-9cdb0a1e6812",
+      "asset_id": "taichang_testing_capacity_p4_031_f2695753",
+      "asset_type": "product_image",
+      "file_name": "1584ef93077ef22ced31e85a58614848192e3b5aacdb3076335095bd7740a6a1.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "5abf9b9f-dd9d-47a8-a1ce-f730f5c395c4",
+      "asset_id": "taichang_testing_capacity_p6_038_25d916b1",
+      "asset_type": "product_image",
+      "file_name": "4b6bdff0219091e54cf090aca42aad7a702cb5ae9056290b24399ae434b31858.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "43020eda-a304-4ba8-b49d-5b451650c747",
+      "asset_id": "taichang_testing_capacity_p6_039_82dd6cb6",
+      "asset_type": "product_image",
+      "file_name": "afbf222ce4ed28beaa46c46c5a935734b31e0e1ffc108712fcac89eb3dbd4573.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b0eb881d-ff5d-4741-ad89-c12b2eda3ddf",
+      "asset_id": "taichang_testing_capacity_p6_060_7fd9a0ff",
+      "asset_type": "product_image",
+      "file_name": "47ff13db4c0f391bb182defea56d14b6d7b34bb177a6709270898acb631cc9ec.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "ecf58385-5a27-4f4f-82cf-3ba8edadbe94",
+      "asset_id": "taichang_testing_capacity_p6_071_cc153812",
+      "asset_type": "product_image",
+      "file_name": "8da7bac61d648faa4693ff164be59e85c201f9d720967c010e408c2286ed3529.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "f7bb1a0e-c5bb-44ae-857c-903ae6cf2257",
+      "asset_id": "taichang_testing_capacity_p2_028_7024548d",
+      "asset_type": "product_image",
+      "file_name": "73898e905608f78a15122e4c5174dba86ffb998bae63e60bd01429f653770aca.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "c5e54a5e-8d16-4ebb-8ac4-4501c33526ec",
+      "asset_id": "taichang_production_capacity_p2_028_523d3169",
+      "asset_type": "product_image",
+      "file_name": "73898e905608f78a15122e4c5174dba86ffb998bae63e60bd01429f653770aca.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "75f4ccad-eb84-4d73-9fbc-400a661955a4",
+      "asset_id": "taichang_finance_p1_002_6baad7db",
+      "asset_type": "qualification_image",
+      "file_name": "71e8f8306ec21845dd0629e56e2a921c21f58831ef416cfd88d8f2d0143da9cf.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "0852f61f-4db3-44a3-bb05-c9c7afad1213",
+      "asset_id": "taichang_finance_p3_030_7afc51b8",
+      "asset_type": "qualification_image",
+      "file_name": "ea08384b8c0fa88e776117ace3647142c24dae67e18058251e619c33a6e6d04e.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "3f9c4ae9-2b35-456b-8da2-efcb06222dab",
+      "asset_id": "taichang_finance_p3_032_5c938b1c",
+      "asset_type": "qualification_image",
+      "file_name": "3e644f750f8094254929968ac0449aa3f9c36c9e6f3c89cf51ad58bfa2f2f0ca.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "c5f43126-97d7-4bb1-ba88-505cc8597d87",
+      "asset_id": "taichang_finance_p3_034_656a7e9a",
+      "asset_type": "qualification_image",
+      "file_name": "baec1e11aae03c98f4a239c6eee09d18206d461750e4a0137ad36e5fb0f6ed42.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b40ff256-d099-4021-8a75-bf3992a9d59b",
+      "asset_id": "taichang_finance_p16_217_57082b32",
+      "asset_type": "qualification_image",
+      "file_name": "cf3c14d1e24986a8ebde87aa6f73f494b6863483c03f4c5a337681a09f2c0215.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "8adf8e4e-e13d-465d-a4c0-1198ef774dfe",
+      "asset_id": "taichang_finance_p16_228_958df809",
+      "asset_type": "qualification_image",
+      "file_name": "bb71e792995c9d2a8a73ff653f289f860a95353278bfcbfd7c7fc3732e8f9ea1.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "1138e944-8b43-405f-9f86-08101c3e115a",
+      "asset_id": "taichang_finance_p16_244_c9f27706",
+      "asset_type": "qualification_image",
+      "file_name": "d06cb60612059d4185ec2dbf446106f9a199ca6368e37b6246b1a98c579045b8.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "1f92da81-b01b-4519-a390-76d8ee1bd04f",
+      "asset_id": "taichang_finance_p16_249_518a90e2",
+      "asset_type": "qualification_image",
+      "file_name": "d85413c4ca2fd6e4ae2568e4b70a50912dba85772ba3c81133a91b5f54a51ae9.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "fe97a3c7-739f-4b41-b1aa-7d96cb9fa1bd",
+      "asset_id": "taichang_finance_p17_250_af0ab58b",
+      "asset_type": "qualification_image",
+      "file_name": "fddde64c16185a854f114896d0bdc737a080a55af36435d8fafd2b3fa4e9fd59.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "c109af00-bba5-4107-9eb9-1f63d40f7fbf",
+      "asset_id": "taichang_finance_p17_251_09254a4f",
+      "asset_type": "qualification_image",
+      "file_name": "3f8b95386d4c5c89e437a21221654da1ab1e6e076cbdfb281dab18e156c4c629.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "2c40b22b-e556-44f0-83b5-25c4b46195e2",
+      "asset_id": "taichang_finance_p18_255_643bc081",
+      "asset_type": "qualification_image",
+      "file_name": "a8178f6d22886714663e36a14e0dce36e949fbaf4a9aa1e216e6c2f38c80daa9.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "09c93d11-b8a7-43cd-a880-421212d8ab02",
+      "asset_id": "taichang_finance_p18_257_d9a34167",
+      "asset_type": "qualification_image",
+      "file_name": "39c81a950b84e916a5370876434d91dff91978e7e8787ae8ab5be76416d0d83b.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "33cef570-7b67-4a16-b164-3671560ff26a",
+      "asset_id": "taichang_finance_p18_258_43df667a",
+      "asset_type": "qualification_image",
+      "file_name": "fa938accb6c61e85d0fa634b0545971c9ace1c1db5af5a47b3b02b7e100baec3.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "58f59b1b-3168-4bd8-a87a-fecc0548cef9",
+      "asset_id": "taichang_finance_p18_259_e1bf02db",
+      "asset_type": "qualification_image",
+      "file_name": "b656569060a87dba4e6931f39636a8a9f25297c39cd827612eca51d679b3f6c8.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "525709ee-4c30-4b63-91f7-dcc2b8954ae6",
+      "asset_id": "taichang_finance_p18_262_45160a37",
+      "asset_type": "qualification_image",
+      "file_name": "4daca8be789ed8ecc164eae78b241dd28d4c5ae7070a388286c4b4cef04f9b82.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "75597d81-4ef3-4898-8fb0-70d51337addd",
+      "asset_id": "taichang_finance_p18_267_eb8fbd9f",
+      "asset_type": "qualification_image",
+      "file_name": "e0db64f36212b562bd7312a7e52e1840691c22c59e5eb9b1252c0b97ddd11230.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "3476ab97-da5c-4677-98ee-d2ad166c542e",
+      "asset_id": "taichang_finance_p18_278_546bf742",
+      "asset_type": "qualification_image",
+      "file_name": "5b38a6b8d43c2ce20b224db652015cb25632259350cd3991dbd6ba1df7b74d2a.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "c6cc59ff-2e13-4b11-a7cb-cb81c4b4c084",
+      "asset_id": "taichang_finance_p19_291_f18752f4",
+      "asset_type": "qualification_image",
+      "file_name": "ba434db28a1bd0f99a53dfdcc7c056efb0dc9e726185b6bff0d79ffd304d7cbb.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "a287ff45-1d10-4b6a-a278-3d0c9c11faaa",
+      "asset_id": "taichang_finance_p19_292_f8f91934",
+      "asset_type": "qualification_image",
+      "file_name": "e4d248a1ab084fa6b6c39171284b984a8af0fa4e6eafe38064418e930e537249.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b1b7a3c9-5378-4c90-902a-240b471157fb",
+      "asset_id": "taichang_finance_p19_293_836656fe",
+      "asset_type": "qualification_image",
+      "file_name": "ee2900692625dc22aa2c8a1be9597abab6f0b018cfbe0d37d8f6569f7e205ce1.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "c055c604-6f27-4b9a-866f-ae3d38a042a8",
+      "asset_id": "taichang_finance_p1_003_4dcd6dd2",
+      "asset_type": "qualification_image",
+      "file_name": "c57e36181da5b25f3e3ad7f1e38d92d6e6bee321fe63aa37c3db85a61c4f48cc.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "d1850e31-4426-403b-a34c-6568b0409978",
+      "asset_id": "taichang_finance_p5_040_f0d01955",
+      "asset_type": "qualification_image",
+      "file_name": "ad461e59088f213a62f3f4240951d179776a35dd4981b91433b1a1792d7e250c.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "38dc2668-733e-43c4-8075-882b2743e773",
+      "asset_id": "taichang_finance_p5_042_cbee190b",
+      "asset_type": "qualification_image",
+      "file_name": "33b89ce1336569cf5e4124319d92f32560c210f47600aa398e5b717345309f3d.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "bf45b9ce-fef8-4cac-84c7-847f4eb82e10",
+      "asset_id": "taichang_finance_p5_044_4948b46f",
+      "asset_type": "qualification_image",
+      "file_name": "3592585750500635a213b3c44afa8c6d3aa2e90237d29125753f1fcba21a2f96.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "e5d4cd07-1404-4d73-b9fe-71601a698224",
+      "asset_id": "taichang_finance_p26_296_6337f711",
+      "asset_type": "qualification_image",
+      "file_name": "4d9480c8ae13d3127c2d8dad00eaed2a202cca88da33210d3ffb2da60b744dd1.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "eb43fa4e-f366-47a0-b4b6-5431aa1b507a",
+      "asset_id": "taichang_finance_p26_298_df669056",
+      "asset_type": "qualification_image",
+      "file_name": "189a4d3edf79cfc8b23c85cfdcd72733febd13e50cc7009448f9da2eca3c9d75.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "3bf8c96a-8079-4ab1-80e7-5858d31e53bc",
+      "asset_id": "taichang_finance_p26_302_32e47aea",
+      "asset_type": "qualification_image",
+      "file_name": "17584901f9e8649c0e847438c5f60e1c743c63327dfd16a179d596d6e068bcf6.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "f3b12ce5-1831-4819-994b-6041207880f4",
+      "asset_id": "taichang_finance_p26_303_8fe33222",
+      "asset_type": "qualification_image",
+      "file_name": "5cb18fe901d3cf7153a9d15cdb255cf91aa585390adcdc57c4fadc97e7fd1833.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "656a347e-680a-4d02-9200-43be9331e9be",
+      "asset_id": "taichang_finance_p27_314_1247be22",
+      "asset_type": "qualification_image",
+      "file_name": "25e74de8ffb5a34c242a0c31621cf39390ebfda18c3c89d0ca0ad3b110ab8868.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "ddd74bef-edee-4a93-a5be-a5824f9a6775",
+      "asset_id": "taichang_finance_p27_316_8328cf3e",
+      "asset_type": "qualification_image",
+      "file_name": "06ed98b5d9e864f89e63ce075a7362041405ae79c00036e432d48240d783c028.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "f39a645d-ab92-4fb1-8326-b234e66a860f",
+      "asset_id": "taichang_finance_p27_317_94b9240b",
+      "asset_type": "qualification_image",
+      "file_name": "5801b5d75ebaf7274225049f2631fff96ea67d6d56ece6c83f3a397021562ff4.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "fdee7f82-ed79-4f5c-b8dc-29e2fe9eea62",
+      "asset_id": "taichang_finance_p27_318_068884f1",
+      "asset_type": "qualification_image",
+      "file_name": "38821be0394f55f3a401fa5e4987bc0f15c682dd10301f5bdca8fb088d1e6e78.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "eb8cd4ae-ba23-4dfd-b120-023a3e9e68cf",
+      "asset_id": "taichang_finance_p28_335_5bca9251",
+      "asset_type": "qualification_image",
+      "file_name": "45b0565c22cc2a10b522185c50a5e72d1bbeffd099228fac85395779bc1baaf8.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "20b93e39-6331-4e0a-a9db-944c594d46a3",
+      "asset_id": "taichang_finance_p28_336_93c68b7e",
+      "asset_type": "qualification_image",
+      "file_name": "38d254b1c2ce9b6668b573a86284ad94cf92f23cc183a33c75105a72acc8524f.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "fa5c6339-f372-4ded-beb5-58795682e2fb",
+      "asset_id": "taichang_finance_p28_340_6942be91",
+      "asset_type": "qualification_image",
+      "file_name": "8e8b4821caf12388893095007f953c6a95f512a6a074a98c2e71b9a384527010.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "7d91326a-04d0-4c8d-9b5e-af1c8bb2e836",
+      "asset_id": "taichang_finance_p28_346_c500027b",
+      "asset_type": "qualification_image",
+      "file_name": "bb1012184a50f1810b93041d0a2991baffc5e4662528ab17c1bd2e9835f7f5d9.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "2a3057ba-86b0-43de-98e9-95e4ca8408ea",
+      "asset_id": "taichang_finance_p28_354_420d7bac",
+      "asset_type": "qualification_image",
+      "file_name": "9f3903e9c62141d94d5b6449039668963aef956c746e38a5b502051a1229e5d3.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "6f261234-d476-4331-8949-204f7a3a4233",
+      "asset_id": "taichang_finance_p28_355_7d345925",
+      "asset_type": "qualification_image",
+      "file_name": "e88cc9f2ed37b9dc2d9f1f85948035e287827d01e2282dfa9881783def6b5469.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "39068eb0-1c35-418e-b061-007902c5fba2",
+      "asset_id": "taichang_finance_p28_357_566a15cf",
+      "asset_type": "qualification_image",
+      "file_name": "b253fa75e82b542d15356759a456b80540f7d287cba41b8f5fe7fb754df2fff3.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "79de2d01-0bc4-411f-a1b5-531c4dd0dfd2",
+      "asset_id": "taichang_finance_p28_358_a6e4f6a0",
+      "asset_type": "qualification_image",
+      "file_name": "11a62a6a6936d2e2fe8601ee6b21526fd88df421860d523e3e761e8df794c19d.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "f559f331-fe99-4439-b6c5-3a6a00383e96",
+      "asset_id": "taichang_finance_p29_370_4abb650d",
+      "asset_type": "qualification_image",
+      "file_name": "5c26618abbd95c2ecc66891a877c785ac3776f14ecb5a2a6a5f9fa46362c6dad.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "d59e4ad7-7276-4974-b7a3-edb2c6cdbc36",
+      "asset_id": "taichang_finance_p1_004_fda73e00",
+      "asset_type": "qualification_image",
+      "file_name": "9857552eb07f26be734e1772a42e0e332323a3a6368c03d8bab842745ce65abf.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "ef25b6da-ea7d-48d7-8ca2-1735e503b8bd",
+      "asset_id": "taichang_finance_p3_031_586ccb8a",
+      "asset_type": "qualification_image",
+      "file_name": "56e8561f8eb33d40c095d4b168343523439301b6a263e72727df636d14bd79e5.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "70173163-def7-434f-8d93-97fa33e1305a",
+      "asset_id": "taichang_finance_p3_033_b0cd96b3",
+      "asset_type": "qualification_image",
+      "file_name": "163e5d42e425ec46272093932cdad7c8b7efb9d6a799f992cab07787a6239250.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "7e275c39-3048-4877-b9f6-6ed976a224c9",
+      "asset_id": "taichang_finance_p3_035_fa5d0153",
+      "asset_type": "qualification_image",
+      "file_name": "9bc2bcfc3c4d7757b2b3d4b10a9b0a80a099b08bbdafc76bca0d4d782012593c.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "936ae249-a411-4b8f-ab67-b59717cac200",
+      "asset_id": "taichang_finance_p16_192_ec5284b8",
+      "asset_type": "qualification_image",
+      "file_name": "b8085363e35271d90796d03b5bac337788a6817ae0de8fcd39db751a9338b590.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "fcff5d5e-905f-4b5a-a6e1-f4e24935aa8b",
+      "asset_id": "taichang_finance_p16_197_afc0dccd",
+      "asset_type": "qualification_image",
+      "file_name": "220661bf375084bc42c9e890477f159f6d93145cbb1d5db5b901e649830b6042.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "7a42e911-7e4e-4699-994b-12d81082f283",
+      "asset_id": "taichang_finance_p16_208_e24c7898",
+      "asset_type": "qualification_image",
+      "file_name": "4612a9b1cd757133776e833e77003c3c877677760e862c23fb8ed943314aa3ca.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "74aef361-8983-4442-b25b-50fdb3ebed4f",
+      "asset_id": "taichang_finance_p16_210_31f67c69",
+      "asset_type": "qualification_image",
+      "file_name": "7c228e61d7c28004ccd3637aa9110e39b4ebd1b23d33a1202f06d371fb14557b.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "9b70247d-4cdf-4546-8945-535008ef4d94",
+      "asset_id": "taichang_finance_p17_216_f63d0a59",
+      "asset_type": "qualification_image",
+      "file_name": "576b818015ef62e8d12e1272fec6c0ab55d169cae1ab717a023b6a4418049178.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "3176ac40-d4cf-4ebb-82ad-2ad7f482efcc",
+      "asset_id": "taichang_finance_p17_217_b88c22bc",
+      "asset_type": "qualification_image",
+      "file_name": "a3610a068bb469524ebf4bbf7675704c0a84cdedd930c9365b427a23cf744bff.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "0d9d03cf-3886-4ef8-a2de-9b928aaabeac",
+      "asset_id": "taichang_finance_p17_231_8fe1f992",
+      "asset_type": "qualification_image",
+      "file_name": "1da3082fe7fe24ef97d65e64b7c03d4abf46183098d3fbc07973bc8e01e99831.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "4808a5c3-2705-49e6-a502-f3633626cb3b",
+      "asset_id": "taichang_finance_p17_238_ef5dee42",
+      "asset_type": "qualification_image",
+      "file_name": "0cace31440917f1e4d422f5bdea707630803bd14b12a014e8c76a37a97efab04.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "9867c6d0-f2c9-4055-a7c2-daab17721935",
+      "asset_id": "taichang_finance_p18_242_1dea58bf",
+      "asset_type": "qualification_image",
+      "file_name": "44509117f7784b35830f132af654682bf17d8b7e974b117e7ed0aef90ec34e69.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "a0ccbd58-f7df-44e4-9fc0-543953981678",
+      "asset_id": "taichang_finance_p18_243_c470757a",
+      "asset_type": "qualification_image",
+      "file_name": "53ee8633beaa8c5751dffe5235f1faa54c3d2cc056c5c80ca7e02891189ea6c0.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "4d7f5be7-1e66-464b-9b4c-dc60795de59c",
+      "asset_id": "taichang_finance_p18_244_d23629c9",
+      "asset_type": "qualification_image",
+      "file_name": "0e144bbe0479dcc745049bb15a13ad5942fcbb307cc88c602ed965eb21cd6382.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "47ceb125-85e1-4a96-982d-88a0b51280eb",
+      "asset_id": "taichang_finance_p18_249_5628b907",
+      "asset_type": "qualification_image",
+      "file_name": "cb00a151026da24a08ea2e489ba383411049bf1daac1d4a16b976956b2af9052.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "9ff494e2-0831-4f27-b6e9-2e8157c8495e",
+      "asset_id": "taichang_finance_p18_255_76af7210",
+      "asset_type": "qualification_image",
+      "file_name": "5c9f1e971d91927976844e0de28b866c435975efc3f68b43f5d262a585cd5600.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b7e1ef85-c3ea-480c-b06e-632122d67707",
+      "asset_id": "taichang_finance_p19_265_055e2230",
+      "asset_type": "qualification_image",
+      "file_name": "5f706e7eed9279ec97e587a29e30d7a4e0e7ec840775149e1b2dc07fd50e80a4.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b9008985-f9c1-424c-9ed7-ae3e2db2df6c",
+      "asset_id": "taichang_finance_p19_273_938f858a",
+      "asset_type": "qualification_image",
+      "file_name": "876f55ef3f5c54c393e891fac91bd15ab03af26f81e0365363f2b5952c1cd67c.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "1231c74a-fdcc-4ab4-aedb-77b5b80dc280",
+      "asset_id": "taichang_finance_p19_274_7466b709",
+      "asset_type": "qualification_image",
+      "file_name": "bda9add30433f4bc00e806d4f0e11821f84cad0484e0dc2880555328940fda51.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "7f317a56-54e1-47f0-a347-81b171adf449",
+      "asset_id": "taichang_finance_p19_281_0b69f294",
+      "asset_type": "qualification_image",
+      "file_name": "2ecb27e6689bc3a6776d1b6a256bbca705ba6ce3b5e0ecda82bc7b1ff002cb95.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "2709c4dd-8942-4778-a73b-0f01bf558885",
+      "asset_id": "taichang_finance_p19_290_c82e2ce6",
+      "asset_type": "qualification_image",
+      "file_name": "f3cd051aaf5ee865b48c3510a0e939fe34c6851934c8952a1eca167e3489bc01.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "ad1f57b6-ef44-4035-b901-f8147df177fd",
+      "asset_id": "taichang_production_capacity_p2_028_55c2d1be",
+      "asset_type": "product_image",
+      "file_name": "c95581260cec08025e0ea59ee0e38c54ba105f3c4b9d24f98cc04e337795c209.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b30c2eab-4f3a-44f8-9acf-dc3802415c83",
+      "asset_id": "taichang_testing_capacity_p2_028_58d87fb0",
+      "asset_type": "product_image",
+      "file_name": "c95581260cec08025e0ea59ee0e38c54ba105f3c4b9d24f98cc04e337795c209.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "19aeda54-287d-4d18-86f1-757346c2b48c",
+      "asset_id": "taichang_inspection_report_p1_000_3d3a90f9",
+      "asset_type": "product_image",
+      "file_name": "438096e1c2fbaecb921d01db2e4f097a00c179b0fcb2aa3f2dd5c376947ccff6.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "501ba72a-267c-4da2-84df-685afdf06f6d",
+      "asset_id": "taichang_green_low_carbon_p1_001_963bc1ea",
+      "asset_type": "product_image",
+      "file_name": "7985f4166d9e7a5df8f3b1d27c2f2e0156aa4f3be71fe5b1ce790fdeff75db03.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "1904a93b-002a-4129-a836-421258fed19f",
+      "asset_id": "taichang_green_low_carbon_p1_002_bc881f69",
+      "asset_type": "product_image",
+      "file_name": "1a4015e6b333abf8ca6d0c633ef151f8e4e7ffe0f8973ec75b0d50650f44c3d0.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "6adce569-4d51-4d5a-8b46-ec8e05735aa9",
+      "asset_id": "taichang_green_low_carbon_p1_010_fb090ba0",
+      "asset_type": "product_image",
+      "file_name": "07b03cf5ce937222dbb57e6af774aab248c90633f57bb84f4d885e635833edc1.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b00e4edb-6d5b-4253-94c1-633506f39997",
+      "asset_id": "taichang_green_low_carbon_p1_012_f06a7387",
+      "asset_type": "product_image",
+      "file_name": "a3776ee74f808ba5ba9336fb318d202a238a5452f1eb7eebe3d0907110da7cf6.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "08dbe7e9-04ad-43c4-b464-7158291779ba",
+      "asset_id": "taichang_green_low_carbon_p2_024_facf104e",
+      "asset_type": "product_image",
+      "file_name": "d85ad095c1292d1060f2758fed73bca5df1868305c8fb555e783c2c1421833d5.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "17fc52b6-0a5b-49c3-9504-0e8b690f897e",
+      "asset_id": "taichang_green_low_carbon_p2_025_b19c8e3f",
+      "asset_type": "product_image",
+      "file_name": "019a74683d2f5e2a444b1af271bd9cef3341d7241951ea289dffbd7d4566bd3d.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "5a146141-022d-418f-9c52-ce12be2749b1",
+      "asset_id": "taichang_green_low_carbon_p7_066_60f56b64",
+      "asset_type": "product_image",
+      "file_name": "b9a65070cba935096e5b5632100f7777c0a31c0838cb7b960afb18bc973e85c2.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "d222c0dd-e4bf-4290-abfe-4cc0b651fe44",
+      "asset_id": "taichang_green_low_carbon_p7_069_c34651a7",
+      "asset_type": "product_image",
+      "file_name": "382d1aef5accc7e4a8025f480b7c9e3cdb4db66d20c17f9606d9b014ea38e3a5.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "ef1d50a5-b740-4119-8d50-aa57cd33d4f9",
+      "asset_id": "taichang_green_low_carbon_p7_078_d0c1c605",
+      "asset_type": "product_image",
+      "file_name": "0eed039042d06442312fa3d9524a260f904cfadec0a9b3f798a2d30b95a423fc.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "f5f19d71-a36d-4485-9fd7-4887f6ed6039",
+      "asset_id": "taichang_green_low_carbon_p9_095_ffb06a73",
+      "asset_type": "product_image",
+      "file_name": "d9e3797edfe04260906403303716fc63fe7168f090bb75c22b393ea035b979df.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "51a05d18-486c-40ab-ab59-c5ad445f4d65",
+      "asset_id": "taichang_green_low_carbon_p10_102_ecafab21",
+      "asset_type": "product_image",
+      "file_name": "7f4353183b358359a4674a5e663f497142a076a3a4f6578161aef6a4911acb27.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b9320690-747f-4edf-8b2b-1df023ffc904",
+      "asset_id": "taichang_green_low_carbon_p10_104_599a7299",
+      "asset_type": "product_image",
+      "file_name": "52c466d60ca95b3c3cd6cc34a52332b1e6a027c4206a5f7fcf3743f83c029a98.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "d9a12068-e86e-4dab-9a59-fe368c204486",
+      "asset_id": "taichang_green_low_carbon_p10_105_6c0bed7f",
+      "asset_type": "product_image",
+      "file_name": "f623804dfb065967813fee60305fe4587e0adaa10578d1ef829e63eea3005643.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "cc639e2f-a6eb-4be0-9581-fed561cbec6f",
+      "asset_id": "taichang_green_low_carbon_p11_111_4b58e837",
+      "asset_type": "product_image",
+      "file_name": "2ed8d0d5e2384319edf63afa9e5819cc05d50e6a3e88c1efbc1d7d8f88d1f44c.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b89fae4b-2c6f-410e-a469-87ec3ef4c766",
+      "asset_id": "taichang_green_low_carbon_p17_164_6f0af281",
+      "asset_type": "product_image",
+      "file_name": "edbac50f6ea186f4bcd1acef43e463ec5edf77e434aa7fb90cd62324ab9b8ad2.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "f1ee81c6-9fdf-4eb9-b419-a188e700a3e8",
+      "asset_id": "taichang_green_low_carbon_p18_175_293dccbe",
+      "asset_type": "product_image",
+      "file_name": "158b861d64af2b6ef854762f95fa0ce2658c20f7ce9231365463bcb0f2de2c65.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "cb31471f-59d3-4f47-9dfd-ed776691cfd3",
+      "asset_id": "taichang_green_low_carbon_p18_176_63df5ce7",
+      "asset_type": "product_image",
+      "file_name": "2c89fdc9b27d379e15b221a429c942ba4fe36be76bdd2d034105498bd3c1b801.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b128d59e-5640-4eb7-85dd-fc347ca68787",
+      "asset_id": "taichang_green_low_carbon_p37_329_ea528284",
+      "asset_type": "product_image",
+      "file_name": "94e2f0f9caa20449ab03d5b038899a81d45565cca535c13f1cb789f93da59a9c.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "0690e469-c011-432e-8884-5eb872033421",
+      "asset_id": "taichang_green_low_carbon_p38_332_3c1e0d79",
+      "asset_type": "product_image",
+      "file_name": "0cfb933c0d132ea4b04ff645d7464a2ad52f0dcc441fa2e14ba3d7dd1ab98a90.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "3b834fbd-9b2a-44f5-9587-e6a51d8369e0",
+      "asset_id": "taichang_inspection_report_p1_000_5d7a08a1",
+      "asset_type": "product_image",
+      "file_name": "f46a44ce8e539c4f35160e9b201f975fb08587d7daca5791bf331bbf6db2b15d.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "479ca8a9-add1-4f91-a6ee-52d6c500aa60",
+      "asset_id": "taichang_green_low_carbon_p1_001_8f7dddf5",
+      "asset_type": "product_image",
+      "file_name": "9377e7978262954eab56b56aa3161e38d40b626a2f1b26429a1a3c23f5118b5e.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "2610d008-3f83-4d3f-9adc-f06d46a559bd",
+      "asset_id": "taichang_green_low_carbon_p1_002_735e3e3f",
+      "asset_type": "product_image",
+      "file_name": "918d28e80977415b27f8e33dd0995b5f3a90e4c86689daf1c54b58c4e0c57878.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "dfbef8cb-c5c3-4681-b7b9-9bf0ab4583e7",
+      "asset_id": "taichang_green_low_carbon_p1_011_18ffe0cd",
+      "asset_type": "product_image",
+      "file_name": "f2c94dceae358925c5abb44b275aeac3f9e74e68a214e14c019d84152ec99d90.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "3361aece-406e-43ff-b9e7-aef0afb80e55",
+      "asset_id": "taichang_green_low_carbon_p1_012_d7b5e4dd",
+      "asset_type": "product_image",
+      "file_name": "b892876f42f26a3529be1da1ead7020f268d47b56086dd38421eed1433500402.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "c3d8861f-5d16-4303-95a9-6408c0519dc7",
+      "asset_id": "taichang_green_low_carbon_p2_024_c5e1f901",
+      "asset_type": "product_image",
+      "file_name": "df2c20a36e006f5fe0f29f362aa37ccb71e5d62d675c6bf27ff13fb55b67623b.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b382707c-e47d-4df0-89c8-5b3a8c44e2ad",
+      "asset_id": "taichang_green_low_carbon_p2_025_fd18c7d6",
+      "asset_type": "product_image",
+      "file_name": "b84f17d1a7f039082f6973a3f6827acb67c2d5d1e5a81b1d33caa792bbfab7c0.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "bb5e8e4e-8e52-4cb5-b634-06e2d1f7df7b",
+      "asset_id": "taichang_green_low_carbon_p7_062_560b385d",
+      "asset_type": "product_image",
+      "file_name": "39da6dd89f847e6885987ae41ba8ab3203041693c1aac9ad9350da3cb473438a.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "7a5d426c-a908-4350-9566-3974bba820b1",
+      "asset_id": "taichang_green_low_carbon_p8_069_0a413629",
+      "asset_type": "product_image",
+      "file_name": "1b414f5c83eece5f7252204f4e9511d857ae7434234a90df4cfee10ef5c81671.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "bbfe72a9-7144-40e1-a6c2-a3d1037cf647",
+      "asset_id": "taichang_green_low_carbon_p9_074_be33da85",
+      "asset_type": "product_image",
+      "file_name": "7adc1d30dcb265c7cb24ffbfff4b0d95e1580c46449d8ea19bd70ff74632706c.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "d18e2134-5c3f-4afd-ae82-64db95fc9927",
+      "asset_id": "taichang_green_low_carbon_p10_080_51ccc36d",
+      "asset_type": "product_image",
+      "file_name": "4b41b4dc135765153321d9f199fe8c4230dc310265b33bf37d6ca25884bb9975.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "e30d7ac6-04f3-4937-ada9-8c9f80ce0d27",
+      "asset_id": "taichang_green_low_carbon_p10_081_1597c73e",
+      "asset_type": "product_image",
+      "file_name": "950eb5568fec6e0fbaed314ed98b4d245e14d70b9353511b775a9ffbe5c765fa.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "0d7b659d-04ba-4c2b-bd55-2cf79da9c954",
+      "asset_id": "taichang_green_low_carbon_p30_246_8076a51a",
+      "asset_type": "product_image",
+      "file_name": "54ac1409d59ab344617623b864c116c70693d2f6dfefad12532637aabcf17c81.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "fa2283df-2dca-402c-84f6-0304539a65d6",
+      "asset_id": "taichang_green_low_carbon_p30_247_3b74679d",
+      "asset_type": "product_image",
+      "file_name": "c3528b209387062e39404968584b216223c5543642c96937f1ec794e151ffe03.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b51cb264-bae2-49a7-b96f-9fa9f24e88e8",
+      "asset_id": "taichang_green_low_carbon_p30_248_a714ce43",
+      "asset_type": "product_image",
+      "file_name": "01f7194596f93bd706cd5a5fa7214a4de26682ae0d629bcf69fc32fadc87e827.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "93f3c71e-ae84-4cf8-bb4a-b339122d7034",
+      "asset_id": "taichang_green_low_carbon_p1_006_cebd16b3",
+      "asset_type": "product_image",
+      "file_name": "22095e6c989f741e38002dff3ef232819c1a9db23ae5a7a7541ea5c29f5678a7.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "322eb03e-5679-46b7-a3c6-d4e0cc30d9dc",
+      "asset_id": "taichang_green_low_carbon_p4_043_00f3400d",
+      "asset_type": "product_image",
+      "file_name": "a28a60493871dbe4554bcf307b4bb3f4d1b4edd542525ff8b6a50f6874b971b7.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "fb0fc6b5-73b4-4d70-82db-ea64834ffeab",
+      "asset_id": "taichang_green_low_carbon_p9_092_ae57dc1e",
+      "asset_type": "product_image",
+      "file_name": "7540e2cb38fdf76e80200bca7767969952cc1ae253a3b3802e6395ba25b2dc3c.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "9ef01fce-04c3-4168-9b76-d2694bc08360",
+      "asset_id": "taichang_green_low_carbon_p16_183_f52e9499",
+      "asset_type": "product_image",
+      "file_name": "dd2c66a6243401a8a3d9d75142a806b4f675a4473f54c29f05df09cb836054b0.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "3957037a-4540-4076-93f4-b818e66afab0",
+      "asset_id": "taichang_green_low_carbon_p17_188_45555785",
+      "asset_type": "product_image",
+      "file_name": "4ea64aab3234239a52d6d183f2199980117ad715ec07afb2ff27822ad9a11f53.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "8bc1d0de-61c4-45b7-a405-ad30437ba18a",
+      "asset_id": "taichang_certification_p1_000_651f72e9",
+      "asset_type": "qualification_image",
+      "file_name": "88f78d4697768c4952711489dbaa0b3b8b2ef990d74691d79e5cc27d2fc0863e.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "e85c1f1c-2eef-4c98-975c-244cd913bcfc",
+      "asset_id": "taichang_certification_p1_017_bbd569bc",
+      "asset_type": "qualification_image",
+      "file_name": "8b9559c51193a95f08d9405b29e11e7c3d934deeac91f0806f9f7fe94c4542ad.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "3ddd30ea-dad8-43c4-a2c9-fa44e1bc44a3",
+      "asset_id": "taichang_certification_p1_018_1870115c",
+      "asset_type": "qualification_image",
+      "file_name": "9535c3c9ae0c53014056015808c14aea8ca3269fa167c816bb98ab100edd88f7.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "782d14fb-3d06-4c88-83d0-3098fd49d5b7",
+      "asset_id": "taichang_certification_p1_019_a7f8819c",
+      "asset_type": "qualification_image",
+      "file_name": "817d44fb988bcf4f1148a9bcd154c689e5964ad5340ad2fd3bac82a4c20ab9e3.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "5c97c0cc-7e1f-4284-aa95-2dd52044b63b",
+      "asset_id": "taichang_certification_p1_021_051b9f2c",
+      "asset_type": "qualification_image",
+      "file_name": "57ac0271378db4ef1782f1f3597a71eb3e09c700f87245d0a3c66cacd4078ef4.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "4a4245b7-7855-474a-8d51-13db22b44653",
+      "asset_id": "taichang_certification_p1_006_e874c087",
+      "asset_type": "qualification_image",
+      "file_name": "d5c727444c45682b0a46eda816df00262aa860abcbbc0a295acf7c80f9bb706d.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "8c4ef9e3-8956-4dce-8a78-72bd8bb684b9",
+      "asset_id": "taichang_certification_p4_032_ce9bbed0",
+      "asset_type": "qualification_image",
+      "file_name": "a21223a39800eb83f37a466f71351c28989b05bb91d9f690938634f65878eda6.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "d14309e3-eac9-4294-91b4-a36c78c1e16e",
+      "asset_id": "taichang_certification_p8_072_aaca34db",
+      "asset_type": "qualification_image",
+      "file_name": "8476ab77f9ff0bdb0de92eba4077f3206b59b0edb68bb100f9d59bf722844153.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "0bff4eba-25fa-4d29-a3c5-770eeec131e6",
+      "asset_id": "taichang_certification_p17_175_f3864dc1",
+      "asset_type": "qualification_image",
+      "file_name": "d5b85750e4580a3498a80256bad122bc0da0858dae05ae9c871fac4fff74fbd4.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "e256bc04-cfc7-4229-b048-1c4a21763914",
+      "asset_id": "taichang_certification_p18_180_0b990a1f",
+      "asset_type": "qualification_image",
+      "file_name": "5ae757775176b038994da75b84f5d3204e063a00840641d2877df2088f359d87.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "08355325-2ccd-4ff3-aeb5-c8736d22a368",
+      "asset_id": "taichang_certification_p1_000_ebee4736",
+      "asset_type": "qualification_image",
+      "file_name": "17e8a2c292290c321d25eb3a999f97c4e7c03c35f65675cbffa0e0962cff66fc.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "064a4c70-c208-49d1-8905-ebf5298f62aa",
+      "asset_id": "taichang_certification_p1_016_3f87e933",
+      "asset_type": "qualification_image",
+      "file_name": "1e7004617f1f1aba929283865f9e1d09523ef497689d7f9bc5cbc03c5f5c0282.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "63c2a100-950c-4eeb-8adf-a2d385b2cc1f",
+      "asset_id": "taichang_certification_p1_017_6aba6186",
+      "asset_type": "qualification_image",
+      "file_name": "9085f9cad322a67b157ec0223ad932b8d48710741655fac28d925e1dfde8e3b8.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "5147c6fa-cf48-4249-afcc-28e11bee821c",
+      "asset_id": "taichang_certification_p1_018_c1eb02ef",
+      "asset_type": "qualification_image",
+      "file_name": "80147aa090ea81fb48d118c7e5a05b312b45afc7ce42411beef839a914a5dc5b.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "94a8957d-9ef6-471e-92bd-3d8d0cfdc760",
+      "asset_id": "taichang_certification_p1_020_4d163d06",
+      "asset_type": "qualification_image",
+      "file_name": "fcefc3b33876b9f385322503dd8e08c34f1558ddec129741bf92c438c7912188.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "b1852ef9-5ea7-40a6-a16b-3dbe0edd62df",
+      "asset_id": "taichang_production_capacity_p1_002_0d22e1ba",
+      "asset_type": "product_image",
+      "file_name": "2db8d57086b5182325cd211518c8c87757f7c5ddddaf2bbcda42a03e5d670afb.jpg"
+    },
+    {
+      "status": "imported",
+      "id": "801f18bd-8b7d-49ab-8c0a-b9b1dbee05be",
+      "asset_id": "taichang_business_license_p1_005",
+      "asset_type": "qualification_image",
+      "file_name": "f04f263b21208caeeb67cd74f9b3a36af4ad7b5c85da3cce65eb5eedc28ddd22.jpg"
+    }
+  ]
+}

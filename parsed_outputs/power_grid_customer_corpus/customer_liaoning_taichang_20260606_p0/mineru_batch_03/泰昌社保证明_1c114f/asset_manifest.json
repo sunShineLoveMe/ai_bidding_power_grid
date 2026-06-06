@@ -9,7 +9,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "production_capacity",
       "target_library": "product_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -26,9 +26,9 @@
       "parser": "mineru",
       "parse_id": "taichang_production_capacity_20260606_111813_1c114f10",
       "batch_id": "ad4b32a4-e601-40cf-b4d7-6566610d5b55",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "单位参保类型：企业 证明机 证明日期：2026年05月28日",
       "ocr_context": "单位参保类型：企业 证明机 证明日期：2026年05月28日",
       "retrieval_text": "泰昌 production_capacity 第1页图片。单位参保类型：企业 证明机 证明日期：2026年05月28日",
@@ -45,8 +45,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -58,8 +59,16 @@
           307,
           620
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     },
     {
       "asset_id": "taichang_production_capacity_p1_019_408b83fc",
@@ -70,7 +79,7 @@
       "doc_role": "enterprise_evidence",
       "evidence_type": "production_capacity",
       "target_library": "product_library",
-      "privacy_level": "restricted_private",
+      "privacy_level": "taichang_internal_private",
       "reference_only": false,
       "fact_source_allowed_for_enterprise": true,
       "asset_type": "image",
@@ -87,9 +96,9 @@
       "parser": "mineru",
       "parse_id": "taichang_production_capacity_20260606_111813_1c114f10",
       "batch_id": "ad4b32a4-e601-40cf-b4d7-6566610d5b55",
-      "usage_policy": "enterprise_fact_evidence_restricted",
+      "usage_policy": "enterprise_fact_evidence_internal",
       "requires_human_review": true,
-      "requires_authorization": true,
+      "requires_authorization": false,
       "caption_candidate": "证明日期：2026年05月28日",
       "ocr_context": "证明日期：2026年05月28日",
       "retrieval_text": "泰昌 production_capacity 第1页图片。证明日期：2026年05月28日",
@@ -106,8 +115,9 @@
           "图片资产"
         ],
         "display_contexts": [
-          "restricted_review",
-          "authorized_bid_writing"
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
@@ -119,8 +129,16 @@
           803,
           925
         ],
-        "sensitive_handling": "redact_or_authorize_before_display"
-      }
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
     }
   ]
 }

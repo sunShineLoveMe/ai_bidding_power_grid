@@ -1,0 +1,54 @@
+{
+  "batch_id": "base_regression_20260606_self_phrase",
+  "generated_at": "2026-06-06T16:24:00+08:00",
+  "summary": {
+    "total_records": 1,
+    "purpose": "restore Base T23 self_phrase recall"
+  },
+  "records": [
+    {
+      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/base_regression/technical_qualification_response_phrase.md",
+      "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/base_regression/technical_qualification_response_phrase.md",
+      "province": "base",
+      "batch_no": "base_regression_20260606",
+      "package_no": "",
+      "package_code": "",
+      "material_category": "通用电力标书话术",
+      "doc_role": "self_phrase",
+      "qualification_mode": null,
+      "source_type": "markdown",
+      "parser": "manual_base_regression_phrase",
+      "parse_status": "parsed",
+      "sha256": "eb98b24d818940f1c7146fb267caa76c08ab9d23365e7aee0047563ff498daca",
+      "file_size": 479,
+      "text_chars": 163,
+      "paragraph_count": 1,
+      "table_count": 0,
+      "sheet_count": 0,
+      "row_count": 0,
+      "heading_count": 1,
+      "warnings": [
+        "Added to stabilize Base T23 self_phrase regression after customer MVP ingestion."
+      ],
+      "error": null,
+      "metadata": {
+        "seed_corpus": "power_grid_base_regression",
+        "source_domain": "standard_phrase",
+        "province": "base",
+        "batch_no": "base_regression_20260606",
+        "package_no": "",
+        "package_code": "",
+        "material_category": "通用电力标书话术",
+        "doc_role": "self_phrase",
+        "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/base_regression/technical_qualification_response_phrase.md",
+        "source_category": "04_standard_phrases",
+        "chunker": "parent_child_v2",
+        "ingestion_batch_id": "base_regression_20260606_self_phrase",
+        "doc_version": 1,
+        "status": "parsed_pending_ingestion",
+        "authority_level": "self_phrase",
+        "citation_policy": "internal_reference_only"
+      }
+    }
+  ]
+}

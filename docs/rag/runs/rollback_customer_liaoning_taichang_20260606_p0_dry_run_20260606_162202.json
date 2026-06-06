@@ -1,0 +1,121 @@
+{
+  "generated_at": "2026-06-06T16:22:02",
+  "batch_id": "customer_liaoning_taichang_20260606_p0",
+  "execute": false,
+  "before_counts": {
+    "knowledge_documents": 124,
+    "document_chunks": 29683,
+    "goods_list_rows": 87
+  },
+  "deleted_counts": null,
+  "role_counts": [
+    {
+      "doc_role": "main_tender_file",
+      "count": 12126
+    },
+    {
+      "doc_role": "technical_spec",
+      "count": 9563
+    },
+    {
+      "doc_role": "enterprise_evidence",
+      "count": 4377
+    },
+    {
+      "doc_role": "contract_general_terms",
+      "count": 2466
+    },
+    {
+      "doc_role": "tender_notice",
+      "count": 768
+    },
+    {
+      "doc_role": "contract_special_terms",
+      "count": 222
+    },
+    {
+      "doc_role": "goods_list",
+      "count": 91
+    },
+    {
+      "doc_role": "technical_response_reference",
+      "count": 38
+    },
+    {
+      "doc_role": "winning_bid_reference",
+      "count": 32
+    }
+  ],
+  "sample_documents": [
+    {
+      "id": "9caa9ea4-0f85-4794-9a40-a536b1bbb433",
+      "title": "1.CPVC63三层复合管材挤出生产线",
+      "province": "河北",
+      "package_code": "2225AC",
+      "doc_role": "enterprise_evidence"
+    },
+    {
+      "id": "6a576d0c-5638-43e4-8225-8f26b24cfbe2",
+      "title": "1.土地租赁协议",
+      "province": "河北",
+      "package_code": "2225AC",
+      "doc_role": "enterprise_evidence"
+    },
+    {
+      "id": "84938dbf-b340-4e56-bd66-664f7465b171",
+      "title": "1.质量管理体系认证证书",
+      "province": "河北",
+      "package_code": "2225AC",
+      "doc_role": "enterprise_evidence"
+    },
+    {
+      "id": "8f9f7bcb-037b-4bfa-9be8-9e0ebcb81851",
+      "title": "1.陈仙瑞",
+      "province": "河北",
+      "package_code": "2225AC",
+      "doc_role": "enterprise_evidence"
+    },
+    {
+      "id": "72bb1420-cbe6-4f43-8027-569b9000ddd5",
+      "title": "1.陈仙瑞",
+      "province": "河北",
+      "package_code": "2225AC",
+      "doc_role": "enterprise_evidence"
+    },
+    {
+      "id": "8cd0ed94-b176-4295-acd7-38365f0bd77a",
+      "title": "1.陈仙瑞",
+      "province": "河北",
+      "package_code": "2225AC",
+      "doc_role": "enterprise_evidence"
+    },
+    {
+      "id": "13358525-7d99-45f6-8eac-ca8f96166f71",
+      "title": "1.陈仙瑞",
+      "province": "河北",
+      "package_code": "2225AC",
+      "doc_role": "enterprise_evidence"
+    },
+    {
+      "id": "d6ed8711-bf97-4511-bc3f-b8e0a223915d",
+      "title": "2023年审计报告",
+      "province": "河北",
+      "package_code": "2225AC",
+      "doc_role": "enterprise_evidence"
+    },
+    {
+      "id": "d3075bb2-7fe8-420b-9600-7ebbd2f4da6a",
+      "title": "2024年审计报告",
+      "province": "河北",
+      "package_code": "2225AC",
+      "doc_role": "enterprise_evidence"
+    },
+    {
+      "id": "383cd51d-818b-494f-817b-91dab7409665",
+      "title": "2025年审计报告",
+      "province": "河北",
+      "package_code": "2225AC",
+      "doc_role": "enterprise_evidence"
+    }
+  ]
+}

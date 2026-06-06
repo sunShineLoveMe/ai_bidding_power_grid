@@ -38,6 +38,10 @@ def _storage_extension(filename: str, local_path: Path) -> str:
     return ""
 
 
+def _knowledge_asset_bucket() -> str:
+    return get_bucket_name("knowledge")
+
+
 def create_bid_project_for_upload(original_filename: str) -> dict[str, Any]:
     client = get_supabase_client()
     payload = {
