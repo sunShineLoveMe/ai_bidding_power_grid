@@ -1,0 +1,1044 @@
+{
+    "pdf_info": [
+        {
+            "preproc_blocks": [
+                {
+                    "bbox": [
+                        181,
+                        242,
+                        329,
+                        253
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                180,
+                                239,
+                                331,
+                                253
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        180,
+                                        239,
+                                        331,
+                                        253
+                                    ],
+                                    "type": "text",
+                                    "content": "证N号：T13060219980525061X",
+                                    "score": 0.971
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        182,
+                        255,
+                        252,
+                        267
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 1,
+                    "lines": [
+                        {
+                            "bbox": [
+                                180,
+                                253,
+                                254,
+                                268
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        180,
+                                        253,
+                                        254,
+                                        268
+                                    ],
+                                    "type": "text",
+                                    "content": "姓名：晁坤琳",
+                                    "score": 0.989
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        334,
+                        255,
+                        369,
+                        266
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 2,
+                    "lines": [
+                        {
+                            "bbox": [
+                                332,
+                                253,
+                                371,
+                                269
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        332,
+                                        253,
+                                        371,
+                                        269
+                                    ],
+                                    "type": "text",
+                                    "content": "性别：男",
+                                    "score": 0.923
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        182,
+                        270,
+                        262,
+                        282
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 3,
+                    "lines": [
+                        {
+                            "bbox": [
+                                182,
+                                269,
+                                264,
+                                283
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        182,
+                                        269,
+                                        264,
+                                        283
+                                    ],
+                                    "type": "text",
+                                    "content": "作业类别：电工作业",
+                                    "score": 0.947
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        182,
+                        288,
+                        285,
+                        300
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 4,
+                    "lines": [
+                        {
+                            "bbox": [
+                                182,
+                                286,
+                                285,
+                                301
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        182,
+                                        286,
+                                        285,
+                                        301
+                                    ],
+                                    "type": "text",
+                                    "content": "准操项目：电气试验作业",
+                                    "score": 0.997
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        180,
+                        320,
+                        265,
+                        331
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 5,
+                    "lines": [
+                        {
+                            "bbox": [
+                                179,
+                                319,
+                                267,
+                                332
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        179,
+                                        319,
+                                        267,
+                                        332
+                                    ],
+                                    "type": "text",
+                                    "content": "初领日期：20241029",
+                                    "score": 0.994
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        182,
+                        337,
+                        313,
+                        348
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 6,
+                    "lines": [
+                        {
+                            "bbox": [
+                                181,
+                                335,
+                                314,
+                                348
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        181,
+                                        335,
+                                        314,
+                                        348
+                                    ],
+                                    "type": "text",
+                                    "content": "有效期阳20241029-20301029",
+                                    "score": 0.991
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        182,
+                        353,
+                        266,
+                        364
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 7,
+                    "lines": [
+                        {
+                            "bbox": [
+                                181,
+                                350,
+                                267,
+                                365
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        181,
+                                        350,
+                                        267,
+                                        365
+                                    ],
+                                    "type": "text",
+                                    "content": "复审日期：20271029",
+                                    "score": 0.998
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        353,
+                        277,
+                        411,
+                        376
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                353,
+                                277,
+                                411,
+                                376
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        353,
+                                        277,
+                                        411,
+                                        376
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                353,
+                                                277,
+                                                411,
+                                                376
+                                            ],
+                                            "type": "image",
+                                            "content": "河北省农业生产监督管理局\n考核专用章",
+                                            "image_path": "eeba51f3cdd5cb91890bb84678d4a1d96d80f0166ac99425f7fdf7a5859c0612.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 8
+                        }
+                    ],
+                    "index": 8,
+                    "sub_type": "text_image"
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        199,
+                        453,
+                        242,
+                        497
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                199,
+                                453,
+                                242,
+                                497
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        199,
+                                        453,
+                                        242,
+                                        497
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                199,
+                                                453,
+                                                242,
+                                                497
+                                            ],
+                                            "type": "image",
+                                            "image_path": "79dfeefb4c0c6375523baa7c08ff3a9df5ff8a2cbda33a20846efb21f17238d1.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 9
+                        }
+                    ],
+                    "index": 9
+                },
+                {
+                    "bbox": [
+                        270,
+                        456,
+                        365,
+                        471
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 10,
+                    "lines": [
+                        {
+                            "bbox": [
+                                269,
+                                454,
+                                367,
+                                473
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        269,
+                                        454,
+                                        367,
+                                        473
+                                    ],
+                                    "type": "text",
+                                    "content": "中华人民共和国",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        248,
+                        476,
+                        388,
+                        497
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 11,
+                    "lines": [
+                        {
+                            "bbox": [
+                                246,
+                                475,
+                                390,
+                                497
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        246,
+                                        475,
+                                        390,
+                                        497
+                                    ],
+                                    "type": "text",
+                                    "content": "特种作业操作证",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        231,
+                        530,
+                        308,
+                        540
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 12,
+                    "lines": [
+                        {
+                            "bbox": [
+                                230,
+                                529,
+                                268,
+                                541
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        230,
+                                        529,
+                                        268,
+                                        541
+                                    ],
+                                    "type": "text",
+                                    "content": "复审记录",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        231,
+                        559,
+                        359,
+                        570
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 13,
+                    "lines": [
+                        {
+                            "bbox": [
+                                231,
+                                558,
+                                360,
+                                570
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        231,
+                                        558,
+                                        360,
+                                        570
+                                    ],
+                                    "type": "text",
+                                    "content": "国家安全生产监督管理总局监制",
+                                    "score": 0.998
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                }
+            ],
+            "discarded_blocks": [],
+            "page_size": [
+                595,
+                841
+            ],
+            "page_idx": 0,
+            "para_blocks": [
+                {
+                    "bbox": [
+                        181,
+                        242,
+                        329,
+                        253
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                180,
+                                239,
+                                331,
+                                253
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        180,
+                                        239,
+                                        331,
+                                        253
+                                    ],
+                                    "type": "text",
+                                    "content": "证N号：T13060219980525061X",
+                                    "score": 0.971
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        182,
+                        255,
+                        252,
+                        267
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 1,
+                    "lines": [
+                        {
+                            "bbox": [
+                                180,
+                                253,
+                                254,
+                                268
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        180,
+                                        253,
+                                        254,
+                                        268
+                                    ],
+                                    "type": "text",
+                                    "content": "姓名：晁坤琳",
+                                    "score": 0.989
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        334,
+                        255,
+                        369,
+                        266
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 2,
+                    "lines": [
+                        {
+                            "bbox": [
+                                332,
+                                253,
+                                371,
+                                269
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        332,
+                                        253,
+                                        371,
+                                        269
+                                    ],
+                                    "type": "text",
+                                    "content": "性别：男",
+                                    "score": 0.923
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        182,
+                        270,
+                        262,
+                        282
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 3,
+                    "lines": [
+                        {
+                            "bbox": [
+                                182,
+                                269,
+                                264,
+                                283
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        182,
+                                        269,
+                                        264,
+                                        283
+                                    ],
+                                    "type": "text",
+                                    "content": "作业类别：电工作业",
+                                    "score": 0.947
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        182,
+                        288,
+                        285,
+                        300
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 4,
+                    "lines": [
+                        {
+                            "bbox": [
+                                182,
+                                286,
+                                285,
+                                301
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        182,
+                                        286,
+                                        285,
+                                        301
+                                    ],
+                                    "type": "text",
+                                    "content": "准操项目：电气试验作业",
+                                    "score": 0.997
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        180,
+                        320,
+                        265,
+                        331
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 5,
+                    "lines": [
+                        {
+                            "bbox": [
+                                179,
+                                319,
+                                267,
+                                332
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        179,
+                                        319,
+                                        267,
+                                        332
+                                    ],
+                                    "type": "text",
+                                    "content": "初领日期：20241029",
+                                    "score": 0.994
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        182,
+                        337,
+                        313,
+                        348
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 6,
+                    "lines": [
+                        {
+                            "bbox": [
+                                181,
+                                335,
+                                314,
+                                348
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        181,
+                                        335,
+                                        314,
+                                        348
+                                    ],
+                                    "type": "text",
+                                    "content": "有效期阳20241029-20301029",
+                                    "score": 0.991
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        182,
+                        353,
+                        266,
+                        364
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 7,
+                    "lines": [
+                        {
+                            "bbox": [
+                                181,
+                                350,
+                                267,
+                                365
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        181,
+                                        350,
+                                        267,
+                                        365
+                                    ],
+                                    "type": "text",
+                                    "content": "复审日期：20271029",
+                                    "score": 0.998
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        353,
+                        277,
+                        411,
+                        376
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                353,
+                                277,
+                                411,
+                                376
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        353,
+                                        277,
+                                        411,
+                                        376
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                353,
+                                                277,
+                                                411,
+                                                376
+                                            ],
+                                            "type": "image",
+                                            "content": "河北省农业生产监督管理局\n考核专用章",
+                                            "image_path": "eeba51f3cdd5cb91890bb84678d4a1d96d80f0166ac99425f7fdf7a5859c0612.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 8
+                        }
+                    ],
+                    "index": 8,
+                    "sub_type": "text_image"
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        199,
+                        453,
+                        242,
+                        497
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                199,
+                                453,
+                                242,
+                                497
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        199,
+                                        453,
+                                        242,
+                                        497
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                199,
+                                                453,
+                                                242,
+                                                497
+                                            ],
+                                            "type": "image",
+                                            "image_path": "79dfeefb4c0c6375523baa7c08ff3a9df5ff8a2cbda33a20846efb21f17238d1.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 9
+                        }
+                    ],
+                    "index": 9
+                },
+                {
+                    "bbox": [
+                        270,
+                        456,
+                        365,
+                        471
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 10,
+                    "lines": [
+                        {
+                            "bbox": [
+                                269,
+                                454,
+                                367,
+                                473
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        269,
+                                        454,
+                                        367,
+                                        473
+                                    ],
+                                    "type": "text",
+                                    "content": "中华人民共和国",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        248,
+                        476,
+                        388,
+                        497
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 11,
+                    "lines": [
+                        {
+                            "bbox": [
+                                246,
+                                475,
+                                390,
+                                497
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        246,
+                                        475,
+                                        390,
+                                        497
+                                    ],
+                                    "type": "text",
+                                    "content": "特种作业操作证",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        231,
+                        530,
+                        308,
+                        540
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 12,
+                    "lines": [
+                        {
+                            "bbox": [
+                                230,
+                                529,
+                                268,
+                                541
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        230,
+                                        529,
+                                        268,
+                                        541
+                                    ],
+                                    "type": "text",
+                                    "content": "复审记录",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        231,
+                        559,
+                        359,
+                        570
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 13,
+                    "lines": [
+                        {
+                            "bbox": [
+                                231,
+                                558,
+                                360,
+                                570
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        231,
+                                        558,
+                                        360,
+                                        570
+                                    ],
+                                    "type": "text",
+                                    "content": "国家安全生产监督管理总局监制",
+                                    "score": 0.998
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                }
+            ]
+        }
+    ],
+    "_backend": "hybrid",
+    "_ocr_enable": true,
+    "_vlm_ocr_enable": false,
+    "_version_name": "3.2.1"
+}

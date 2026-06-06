@@ -1,0 +1,37 @@
+{
+  "parse_id": "taichang_production_capacity_20260606_111756_d8c9e91d",
+  "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/1.人员情况一览表/1.试验检测人员证书/2.晁坤琳.pdf",
+  "evidence_type": "production_capacity",
+  "started_at": "2026-06-06T03:17:56.212563+00:00",
+  "parser": "mineru",
+  "privacy_level": "restricted_private",
+  "target_library": "product_library",
+  "page_count": 1,
+  "batch_id": "7f3a4576-be8c-41df-a818-db31b27af305",
+  "data_id": "taichang_production_capacity_20260606_111756_d8c9e91d",
+  "submitted_at": "2026-06-06T03:17:56.459746+00:00",
+  "parse_status": "mineru_done",
+  "mineru_result": {
+    "data_id": "taichang_production_capacity_20260606_111756_d8c9e91d",
+    "file_name": "2.晁坤琳.pdf",
+    "state": "done",
+    "err_msg": ""
+  },
+  "artifacts": {
+    "zip_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/2_晁坤琳_d8c9e9/mineru_result.zip",
+    "extract_dir": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/2_晁坤琳_d8c9e9/extract",
+    "markdown_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/2_晁坤琳_d8c9e9/extract/full.md",
+    "content_list_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/2_晁坤琳_d8c9e9/extract/2c13b6a9-3e45-413e-b27c-8bdd3840de4b_content_list.json",
+    "model_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/2_晁坤琳_d8c9e9/extract/2c13b6a9-3e45-413e-b27c-8bdd3840de4b_model.json",
+    "middle_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/2_晁坤琳_d8c9e9/extract/layout.json",
+    "download_info": {
+      "url_host": "cdn-mineru.openxlab.org.cn",
+      "resume_enabled": true,
+      "used_curl_fallback": true,
+      "resumed_from_bytes": 0,
+      "downloaded_bytes": 0,
+      "zip_size": 367001
+    }
+  },
+  "finished_at": "2026-06-06T03:18:13.597103+00:00"
+}

@@ -1,0 +1,37 @@
+{
+  "parse_id": "taichang_testing_capacity_20260606_111710_21ab818b",
+  "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+  "evidence_type": "testing_capacity",
+  "started_at": "2026-06-06T03:17:10.731614+00:00",
+  "parser": "mineru",
+  "privacy_level": "private",
+  "target_library": "product_library",
+  "page_count": 9,
+  "batch_id": "8ebd8b62-bbe4-43c6-8e86-9e2250943652",
+  "data_id": "taichang_testing_capacity_20260606_111710_21ab818b",
+  "submitted_at": "2026-06-06T03:17:11.952564+00:00",
+  "parse_status": "mineru_done",
+  "mineru_result": {
+    "data_id": "taichang_testing_capacity_20260606_111710_21ab818b",
+    "file_name": "热变型、维卡软化点温度测定仪.pdf",
+    "state": "done",
+    "err_msg": ""
+  },
+  "artifacts": {
+    "zip_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81/mineru_result.zip",
+    "extract_dir": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81/extract",
+    "markdown_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81/extract/full.md",
+    "content_list_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81/extract/8bdb384d-666a-4580-9430-23330ed44e4c_content_list.json",
+    "model_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81/extract/8bdb384d-666a-4580-9430-23330ed44e4c_model.json",
+    "middle_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81/extract/layout.json",
+    "download_info": {
+      "url_host": "cdn-mineru.openxlab.org.cn",
+      "resume_enabled": true,
+      "used_curl_fallback": true,
+      "resumed_from_bytes": 0,
+      "downloaded_bytes": 0,
+      "zip_size": 8076190
+    }
+  },
+  "finished_at": "2026-06-06T03:17:38.519821+00:00"
+}

@@ -1,0 +1,64 @@
+{
+  "assets": [
+    {
+      "asset_id": "taichang_production_capacity_p1_004_b2b79ff6",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.生产厂房一览表/2.土地使用证明.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "production_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/2_土地使用证明_9fb76e/extract/images/8a8fc681cab7799343e8ba70f8fd8bb8d6abcf98611eba675c710c4aaf56f98b.jpg",
+      "asset_sha256": "9cdf7f66b17d1764260c0bea8ed1b7c6a29e6b03a0374fa31f24a3c14259dea1",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        522,
+        468,
+        714,
+        605
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_production_capacity_20260606_110724_9fb76eb6",
+      "batch_id": "ca26a718-637d-4cfe-98cf-917c4c40b415",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "兹有河北泰昌电力器材科技有限公司办理用地位置坐落在满城区方顺桥镇陉阳驿村（村委会)，持有土地批准证书号码为13062101209建筑物用地。该建筑物是由本人建造使用，所占用地为工业用地办理土地批准和土地登记手续，土地使用权属于河北泰昌电力器材科技有限公司。 特此证明！ 保定市满城区办顺桥镇陉阳驿村村民委员会 29年12月30日",
+      "ocr_context": "兹有河北泰昌电力器材科技有限公司办理用地位置坐落在满城区方顺桥镇陉阳驿村（村委会)，持有土地批准证书号码为13062101209建筑物用地。该建筑物是由本人建造使用，所占用地为工业用地办理土地批准和土地登记手续，土地使用权属于河北泰昌电力器材科技有限公司。 特此证明！ 保定市满城区办顺桥镇陉阳驿村村民委员会 29年12月30日",
+      "retrieval_text": "泰昌 production_capacity 第1页图片。兹有河北泰昌电力器材科技有限公司办理用地位置坐落在满城区方顺桥镇陉阳驿村（村委会)，持有土地批准证书号码为13062101209建筑物用地。该建筑物是由本人建造使用，所占用地为工业用地办理土地批准和土地登记手续，土地使用权属于河北泰昌电力器材科技有限公司。 特此证明！ 保定市满城区办顺桥镇陉阳驿村村民委员会 29年12月30日",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "production_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:1",
+        "bbox_anchor": [
+          522,
+          468,
+          714,
+          605
+        ]
+      }
+    }
+  ]
+}

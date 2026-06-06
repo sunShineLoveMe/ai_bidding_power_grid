@@ -1,0 +1,872 @@
+{
+  "assets": [
+    {
+      "asset_id": "taichang_green_low_carbon_p1_001_8f7dddf5",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/2废水.废气废固监(检)测报告一览表/废水废气废固报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/废水废气废固报告_ac0910/extract/images/9377e7978262954eab56b56aa3161e38d40b626a2f1b26429a1a3c23f5118b5e.jpg",
+      "asset_sha256": "c02c47203a0463e316506e3ede9038ca826dd69e1bddaadd6a4ee0752c706c37",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        0,
+        330,
+        998,
+        615
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_112957_ac0910db",
+      "batch_id": "235065e1-c09b-4534-b88d-d6252fb718e5",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "废水、废气、废固报告 九洲寰宇（北京）认证服务有限公司 JIUZHOU HUANYU(BEIJING) CERTIFICATION SERVICECO.,LTD 报告主体：河北泰昌电力器材科技有限公司",
+      "ocr_context": "废水、废气、废固报告 九洲寰宇（北京）认证服务有限公司 JIUZHOU HUANYU(BEIJING) CERTIFICATION SERVICECO.,LTD 报告主体：河北泰昌电力器材科技有限公司",
+      "retrieval_text": "泰昌 green_low_carbon 第1页图片。废水、废气、废固报告 九洲寰宇（北京）认证服务有限公司 JIUZHOU HUANYU(BEIJING) CERTIFICATION SERVICECO.,LTD 报告主体：河北泰昌电力器材科技有限公司",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:1",
+        "bbox_anchor": [
+          0,
+          330,
+          998,
+          615
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p1_002_735e3e3f",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/2废水.废气废固监(检)测报告一览表/废水废气废固报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/废水废气废固报告_ac0910/extract/images/918d28e80977415b27f8e33dd0995b5f3a90e4c86689daf1c54b58c4e0c57878.jpg",
+      "asset_sha256": "5b008b641b31aaa94fcf93b48e928c4f86aac1c1b4e4940b04c5bf64a15a8bb8",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        191,
+        751,
+        288,
+        816
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_112957_ac0910db",
+      "batch_id": "235065e1-c09b-4534-b88d-d6252fb718e5",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "废水、废气、废固报告 九洲寰宇（北京）认证服务有限公司 JIUZHOU HUANYU(BEIJING) CERTIFICATION SERVICECO.,LTD 报告主体：河北泰昌电力器材科技有限公司 报告编号：JZHY-2025-1547",
+      "ocr_context": "废水、废气、废固报告 九洲寰宇（北京）认证服务有限公司 JIUZHOU HUANYU(BEIJING) CERTIFICATION SERVICECO.,LTD 报告主体：河北泰昌电力器材科技有限公司 报告编号：JZHY-2025-1547",
+      "retrieval_text": "泰昌 green_low_carbon 第1页图片。废水、废气、废固报告 九洲寰宇（北京）认证服务有限公司 JIUZHOU HUANYU(BEIJING) CERTIFICATION SERVICECO.,LTD 报告主体：河北泰昌电力器材科技有限公司 报告编号：JZHY-2025-1547",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:1",
+        "bbox_anchor": [
+          191,
+          751,
+          288,
+          816
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p1_011_18ffe0cd",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/2废水.废气废固监(检)测报告一览表/废水废气废固报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/废水废气废固报告_ac0910/extract/images/f2c94dceae358925c5abb44b275aeac3f9e74e68a214e14c019d84152ec99d90.jpg",
+      "asset_sha256": "f82db560528f62c7abb2b94faca70ddaab84c94c2ea5b73538fcc5b510990a3d",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        686,
+        759,
+        787,
+        910
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_112957_ac0910db",
+      "batch_id": "235065e1-c09b-4534-b88d-d6252fb718e5",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "报告年度：2025年 咨询单位：九洲寰宇（北京）认证服务有限公司 查询网址：中国信用招标投标网www.c报专用章ng.org.cn 企业可持续发展公共服务平台www.ccesg.cn",
+      "ocr_context": "报告年度：2025年 咨询单位：九洲寰宇（北京）认证服务有限公司 查询网址：中国信用招标投标网www.c报专用章ng.org.cn 企业可持续发展公共服务平台www.ccesg.cn",
+      "retrieval_text": "泰昌 green_low_carbon 第1页图片。报告年度：2025年 咨询单位：九洲寰宇（北京）认证服务有限公司 查询网址：中国信用招标投标网www.c报专用章ng.org.cn 企业可持续发展公共服务平台www.ccesg.cn",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:1",
+        "bbox_anchor": [
+          686,
+          759,
+          787,
+          910
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p1_012_d7b5e4dd",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/2废水.废气废固监(检)测报告一览表/废水废气废固报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/废水废气废固报告_ac0910/extract/images/b892876f42f26a3529be1da1ead7020f268d47b56086dd38421eed1433500402.jpg",
+      "asset_sha256": "14aa5ab0862e2645212293a1d3e4824b10a5571d5e7359abdc1a2d995276a52d",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        854,
+        772,
+        949,
+        910
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_112957_ac0910db",
+      "batch_id": "235065e1-c09b-4534-b88d-d6252fb718e5",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "咨询单位：九洲寰宇（北京）认证服务有限公司 查询网址：中国信用招标投标网www.c报专用章ng.org.cn 企业可持续发展公共服务平台www.ccesg.cn",
+      "ocr_context": "咨询单位：九洲寰宇（北京）认证服务有限公司 查询网址：中国信用招标投标网www.c报专用章ng.org.cn 企业可持续发展公共服务平台www.ccesg.cn",
+      "retrieval_text": "泰昌 green_low_carbon 第1页图片。咨询单位：九洲寰宇（北京）认证服务有限公司 查询网址：中国信用招标投标网www.c报专用章ng.org.cn 企业可持续发展公共服务平台www.ccesg.cn",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:1",
+        "bbox_anchor": [
+          854,
+          772,
+          949,
+          910
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p2_024_c5e1f901",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/2废水.废气废固监(检)测报告一览表/废水废气废固报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/废水废气废固报告_ac0910/extract/images/df2c20a36e006f5fe0f29f362aa37ccb71e5d62d675c6bf27ff13fb55b67623b.jpg",
+      "asset_sha256": "0590298a5d8f5d44a6f45dda481960ee844a038b770a74ba8bfd7524e6612e92",
+      "page_idx": 1,
+      "page_no": 2,
+      "bbox": [
+        147,
+        633,
+        366,
+        782
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_112957_ac0910db",
+      "batch_id": "235065e1-c09b-4534-b88d-d6252fb718e5",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "咨询单位：九洲寰宇（北京）认证服务有限公司 编制日期：2025年10月9日 适用范围：报告范围涵盖企业总部地址及分支机构，与企业年度财务报表及业务合并范围一致。 公示查询：中国信用招标投标网www.creditbidding.org.cn企业可持续发展公共服务平台wwW.ccesg.cn",
+      "ocr_context": "咨询单位：九洲寰宇（北京）认证服务有限公司 编制日期：2025年10月9日 适用范围：报告范围涵盖企业总部地址及分支机构，与企业年度财务报表及业务合并范围一致。 公示查询：中国信用招标投标网www.creditbidding.org.cn企业可持续发展公共服务平台wwW.ccesg.cn",
+      "retrieval_text": "泰昌 green_low_carbon 第2页图片。咨询单位：九洲寰宇（北京）认证服务有限公司 编制日期：2025年10月9日 适用范围：报告范围涵盖企业总部地址及分支机构，与企业年度财务报表及业务合并范围一致。 公示查询：中国信用招标投标网www.creditbidding.org.cn企业可持续发展公共服务平台wwW.ccesg.cn",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:2",
+        "bbox_anchor": [
+          147,
+          633,
+          366,
+          782
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p2_025_fd18c7d6",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/2废水.废气废固监(检)测报告一览表/废水废气废固报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/废水废气废固报告_ac0910/extract/images/b84f17d1a7f039082f6973a3f6827acb67c2d5d1e5a81b1d33caa792bbfab7c0.jpg",
+      "asset_sha256": "9c0658ad97d886678c5fec67e3aabf9a46f8fc4359ca6d02412d374f18e33e55",
+      "page_idx": 1,
+      "page_no": 2,
+      "bbox": [
+        529,
+        633,
+        845,
+        782
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_112957_ac0910db",
+      "batch_id": "235065e1-c09b-4534-b88d-d6252fb718e5",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "编制日期：2025年10月9日 适用范围：报告范围涵盖企业总部地址及分支机构，与企业年度财务报表及业务合并范围一致。 公示查询：中国信用招标投标网www.creditbidding.org.cn企业可持续发展公共服务平台wwW.ccesg.cn",
+      "ocr_context": "编制日期：2025年10月9日 适用范围：报告范围涵盖企业总部地址及分支机构，与企业年度财务报表及业务合并范围一致。 公示查询：中国信用招标投标网www.creditbidding.org.cn企业可持续发展公共服务平台wwW.ccesg.cn",
+      "retrieval_text": "泰昌 green_low_carbon 第2页图片。编制日期：2025年10月9日 适用范围：报告范围涵盖企业总部地址及分支机构，与企业年度财务报表及业务合并范围一致。 公示查询：中国信用招标投标网www.creditbidding.org.cn企业可持续发展公共服务平台wwW.ccesg.cn",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:2",
+        "bbox_anchor": [
+          529,
+          633,
+          845,
+          782
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p7_062_560b385d",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/2废水.废气废固监(检)测报告一览表/废水废气废固报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/废水废气废固报告_ac0910/extract/images/39da6dd89f847e6885987ae41ba8ab3203041693c1aac9ad9350da3cb473438a.jpg",
+      "asset_sha256": "da0cf3869305336d081b3b321249182c4650dec821c0c1ff30ab3d2c8428494e",
+      "page_idx": 6,
+      "page_no": 7,
+      "bbox": [
+        174,
+        394,
+        818,
+        714
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_112957_ac0910db",
+      "batch_id": "235065e1-c09b-4534-b88d-d6252fb718e5",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "在市场定位方面，企业立足河北，辐射华北地区电力器材市场。凭借一亿元的注册资本实力和完善的生产检测设备，企业具备了承接大型电力工程配套器材供应的能力。企业产品严格执行国家及行业标准，均获得国家颁发的生产许可证，在市场上建立了良好的品牌信誉。 2.管理架构与组织人员 企业建立了清晰高效的组织管理架构。总经理作为企业最高领导，全面负责企业的战略规划和经营决策。在总经理领导下，设置了管理者代表和副总经理两个高层管理职位，形成了分工明确、协调有序的管理体系。管理者代表主要负责供销部的运营管理，统筹原材料库和成品库的物资调配，确保供应链的稳定高效。副总经理分管质量管理办公室和生产技术部，负责产品质量控制和生产技术管理，生产技术部下设的各个车间是企业生产活动的基本单元。",
+      "ocr_context": "在市场定位方面，企业立足河北，辐射华北地区电力器材市场。凭借一亿元的注册资本实力和完善的生产检测设备，企业具备了承接大型电力工程配套器材供应的能力。企业产品严格执行国家及行业标准，均获得国家颁发的生产许可证，在市场上建立了良好的品牌信誉。 2.管理架构与组织人员 企业建立了清晰高效的组织管理架构。总经理作为企业最高领导，全面负责企业的战略规划和经营决策。在总经理领导下，设置了管理者代表和副总经理两个高层管理职位，形成了分工明确、协调有序的管理体系。管理者代表主要负责供销部的运营管理，统筹原材料库和成品库的物资调配，确保供应链的稳定高效。副总经理分管质量管理办公室和生产技术部，负责产品质量控制和生产技术管理，生产技术部下设的各个车间是企业生产活动的基本单元。",
+      "retrieval_text": "泰昌 green_low_carbon 第7页图片。在市场定位方面，企业立足河北，辐射华北地区电力器材市场。凭借一亿元的注册资本实力和完善的生产检测设备，企业具备了承接大型电力工程配套器材供应的能力。企业产品严格执行国家及行业标准，均获得国家颁发的生产许可证，在市场上建立了良好的品牌信誉。 2.管理架构与组织人员 企业建立了清晰高效的组织管理架构。总经理作为企业最高领导，全面负责企业的战略规划和经营决策。在总经理领导下，设置了管理者代表和副总经理两个高层管理职位，形成了分工明确、协调有序的管理体系。管理者代表主要负责供销部的运营管理，统筹原材料库和成品库的物资调配，确保供应链的稳定高效。副总经理分管质量管理办公室和生产技术部，负责产品质量控制和生产技术管理，生产技术部下设的各个车间是企业生产活动的基本单元。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:7",
+        "bbox_anchor": [
+          174,
+          394,
+          818,
+          714
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p8_069_0a413629",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/2废水.废气废固监(检)测报告一览表/废水废气废固报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/废水废气废固报告_ac0910/extract/images/1b414f5c83eece5f7252204f4e9511d857ae7434234a90df4cfee10ef5c81671.jpg",
+      "asset_sha256": "ad5670723360db452175b4e3f799406f9b44354c832100118c098cf8464a1384",
+      "page_idx": 7,
+      "page_no": 8,
+      "bbox": [
+        235,
+        341,
+        821,
+        800
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_112957_ac0910db",
+      "batch_id": "235065e1-c09b-4534-b88d-d6252fb718e5",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "这种组织架构体现了企业对质量管理和生产技术的高度重视，质量管理办公室的设置确保了产品质量控制贯穿生产全过程。企业坚持\"用户第一、质量第一、服务第一、信誉第一\"的经营宗旨，通过完善的管理体系保障产品质量和客户服务。",
+      "ocr_context": "这种组织架构体现了企业对质量管理和生产技术的高度重视，质量管理办公室的设置确保了产品质量控制贯穿生产全过程。企业坚持\"用户第一、质量第一、服务第一、信誉第一\"的经营宗旨，通过完善的管理体系保障产品质量和客户服务。",
+      "retrieval_text": "泰昌 green_low_carbon 第8页图片。这种组织架构体现了企业对质量管理和生产技术的高度重视，质量管理办公室的设置确保了产品质量控制贯穿生产全过程。企业坚持\"用户第一、质量第一、服务第一、信誉第一\"的经营宗旨，通过完善的管理体系保障产品质量和客户服务。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:8",
+        "bbox_anchor": [
+          235,
+          341,
+          821,
+          800
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p9_074_be33da85",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/2废水.废气废固监(检)测报告一览表/废水废气废固报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/废水废气废固报告_ac0910/extract/images/7adc1d30dcb265c7cb24ffbfff4b0d95e1580c46449d8ea19bd70ff74632706c.jpg",
+      "asset_sha256": "b402614eace427fea24ee8fcd1313584d1d9e5cef59aef5dccf4b7ac72ce5975",
+      "page_idx": 8,
+      "page_no": 9,
+      "bbox": [
+        347,
+        304,
+        700,
+        677
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_112957_ac0910db",
+      "batch_id": "235065e1-c09b-4534-b88d-d6252fb718e5",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "3.公司专利和创新情况 企业在技术创新方面取得了显著成果。获得了\"一种电缆敷设电缆保护管\"的发明专利证书，这项专利技术提升了电缆保护管产品的技术含量和市场竞争力。同时，企业还开发了\"电缆保护管材质检测管理平台V1.0\"并获得软件著作权登记证书，实现了产品质量检测的信息化管理，提高了质量控制的效率和精度。这些创新成果的取得，反映了企业在技术研发方面的持续投入和创新能力。 4.企业环保管理情况 企业高度重视环境保护工作，已通过环境管理体系认证，建立了完善的环境管理制度。在生产运营过程中，企业严格执行环保法规要求，配备了必要的污染防治设施。企业的环保管理工作纳入了整体管理体系，与质量管理、职业健康安全管理形成了有机整体。作为连续多年获得\"捐资助教先进单位\"和\"尊师重教先进单位\"荣誉的企业，充分体现了其在履行社会责任方面的积极态度，环境保护作为社会责任的重要组成部分，也得到了企业的高度重视和有效落实。",
+      "ocr_context": "3.公司专利和创新情况 企业在技术创新方面取得了显著成果。获得了\"一种电缆敷设电缆保护管\"的发明专利证书，这项专利技术提升了电缆保护管产品的技术含量和市场竞争力。同时，企业还开发了\"电缆保护管材质检测管理平台V1.0\"并获得软件著作权登记证书，实现了产品质量检测的信息化管理，提高了质量控制的效率和精度。这些创新成果的取得，反映了企业在技术研发方面的持续投入和创新能力。 4.企业环保管理情况 企业高度重视环境保护工作，已通过环境管理体系认证，建立了完善的环境管理制度。在生产运营过程中，企业严格执行环保法规要求，配备了必要的污染防治设施。企业的环保管理工作纳入了整体管理体系，与质量管理、职业健康安全管理形成了有机整体。作为连续多年获得\"捐资助教先进单位\"和\"尊师重教先进单位\"荣誉的企业，充分体现了其在履行社会责任方面的积极态度，环境保护作为社会责任的重要组成部分，也得到了企业的高度重视和有效落实。",
+      "retrieval_text": "泰昌 green_low_carbon 第9页图片。3.公司专利和创新情况 企业在技术创新方面取得了显著成果。获得了\"一种电缆敷设电缆保护管\"的发明专利证书，这项专利技术提升了电缆保护管产品的技术含量和市场竞争力。同时，企业还开发了\"电缆保护管材质检测管理平台V1.0\"并获得软件著作权登记证书，实现了产品质量检测的信息化管理，提高了质量控制的效率和精度。这些创新成果的取得，反映了企业在技术研发方面的持续投入和创新能力。 4.企业环保管理情况 企业高度重视环境保护工作，已通过环境管理体系认证，建立了完善的环境管理制度。在生产运营过程中，企业严格执行环保法规要求，配备了必要的污染防治设施。企业的环保管理工作纳入了整体管理体系，与质量管理、职业健康安全管理形成了有机整体。作为连续多年获得\"捐资助教先进单位\"和\"尊师重教先进单位\"荣誉的企业，充分体现了其在履行社会责任方面的积极态度，环境保护作为社会责任的重要组成部分，也得到了企业的高度重视和有效落实。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:9",
+        "bbox_anchor": [
+          347,
+          304,
+          700,
+          677
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p10_080_51ccc36d",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/2废水.废气废固监(检)测报告一览表/废水废气废固报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/废水废气废固报告_ac0910/extract/images/4b41b4dc135765153321d9f199fe8c4230dc310265b33bf37d6ca25884bb9975.jpg",
+      "asset_sha256": "8b0dc946493bcf06f0e6e5568c8a8f7697ce75cddb6b78a607252eaf676194ba",
+      "page_idx": 9,
+      "page_no": 10,
+      "bbox": [
+        152,
+        167,
+        505,
+        375
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_112957_ac0910db",
+      "batch_id": "235065e1-c09b-4534-b88d-d6252fb718e5",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "三、废水评价 1.废水产生情况 河北泰昌电力器材科技有限公司在生产经营过程中产生的废水主要包括工业废水和生活污水两大类。工业废水主要来源于生产工艺过程和设备清洗维护环节。在水泥制品生产过程中，混凝土搅拌、养护等工序会产生一定量的生产废水，这类废水主要含有水泥浆、砂石颗粒等悬浮物质，pH值呈碱性特征。电缆和电线生产过程中，挤塑工序的冷却水循环系统会产生少量排污水，主要污染物为悬浮物和少量油类物质。",
+      "ocr_context": "三、废水评价 1.废水产生情况 河北泰昌电力器材科技有限公司在生产经营过程中产生的废水主要包括工业废水和生活污水两大类。工业废水主要来源于生产工艺过程和设备清洗维护环节。在水泥制品生产过程中，混凝土搅拌、养护等工序会产生一定量的生产废水，这类废水主要含有水泥浆、砂石颗粒等悬浮物质，pH值呈碱性特征。电缆和电线生产过程中，挤塑工序的冷却水循环系统会产生少量排污水，主要污染物为悬浮物和少量油类物质。",
+      "retrieval_text": "泰昌 green_low_carbon 第10页图片。三、废水评价 1.废水产生情况 河北泰昌电力器材科技有限公司在生产经营过程中产生的废水主要包括工业废水和生活污水两大类。工业废水主要来源于生产工艺过程和设备清洗维护环节。在水泥制品生产过程中，混凝土搅拌、养护等工序会产生一定量的生产废水，这类废水主要含有水泥浆、砂石颗粒等悬浮物质，pH值呈碱性特征。电缆和电线生产过程中，挤塑工序的冷却水循环系统会产生少量排污水，主要污染物为悬浮物和少量油类物质。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:10",
+        "bbox_anchor": [
+          152,
+          167,
+          505,
+          375
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p10_081_1597c73e",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/2废水.废气废固监(检)测报告一览表/废水废气废固报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/废水废气废固报告_ac0910/extract/images/950eb5568fec6e0fbaed314ed98b4d245e14d70b9353511b775a9ffbe5c765fa.jpg",
+      "asset_sha256": "54780d17fa7543ae1681651fb598a656c707c2f330f4f7bdd8a3ef4a30dfcc12",
+      "page_idx": 9,
+      "page_no": 10,
+      "bbox": [
+        512,
+        167,
+        867,
+        372
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_112957_ac0910db",
+      "batch_id": "235065e1-c09b-4534-b88d-d6252fb718e5",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "三、废水评价 1.废水产生情况 河北泰昌电力器材科技有限公司在生产经营过程中产生的废水主要包括工业废水和生活污水两大类。工业废水主要来源于生产工艺过程和设备清洗维护环节。在水泥制品生产过程中，混凝土搅拌、养护等工序会产生一定量的生产废水，这类废水主要含有水泥浆、砂石颗粒等悬浮物质，pH值呈碱性特征。电缆和电线生产过程中，挤塑工序的冷却水循环系统会产生少量排污水，主要污染物为悬浮物和少量油类物质。 在电力金具、玛钢件等金属制品的生产加工过程中，机械加工设备的冷却和润滑会产生含油废水。这类废水的特点是油类物质浓度相对较高，同时含有金属切削液等化学物质。配电箱、开关柜等产品的表面处理工序，包括除锈、清洗等环节会产生含有金属离子和表面活性剂的清洗废水。复合材料绝缘横担的生产过程中，树脂固化和模具清洗会产生含有有机物的废水。",
+      "ocr_context": "三、废水评价 1.废水产生情况 河北泰昌电力器材科技有限公司在生产经营过程中产生的废水主要包括工业废水和生活污水两大类。工业废水主要来源于生产工艺过程和设备清洗维护环节。在水泥制品生产过程中，混凝土搅拌、养护等工序会产生一定量的生产废水，这类废水主要含有水泥浆、砂石颗粒等悬浮物质，pH值呈碱性特征。电缆和电线生产过程中，挤塑工序的冷却水循环系统会产生少量排污水，主要污染物为悬浮物和少量油类物质。 在电力金具、玛钢件等金属制品的生产加工过程中，机械加工设备的冷却和润滑会产生含油废水。这类废水的特点是油类物质浓度相对较高，同时含有金属切削液等化学物质。配电箱、开关柜等产品的表面处理工序，包括除锈、清洗等环节会产生含有金属离子和表面活性剂的清洗废水。复合材料绝缘横担的生产过程中，树脂固化和模具清洗会产生含有有机物的废水。",
+      "retrieval_text": "泰昌 green_low_carbon 第10页图片。三、废水评价 1.废水产生情况 河北泰昌电力器材科技有限公司在生产经营过程中产生的废水主要包括工业废水和生活污水两大类。工业废水主要来源于生产工艺过程和设备清洗维护环节。在水泥制品生产过程中，混凝土搅拌、养护等工序会产生一定量的生产废水，这类废水主要含有水泥浆、砂石颗粒等悬浮物质，pH值呈碱性特征。电缆和电线生产过程中，挤塑工序的冷却水循环系统会产生少量排污水，主要污染物为悬浮物和少量油类物质。 在电力金具、玛钢件等金属制品的生产加工过程中，机械加工设备的冷却和润滑会产生含油废水。这类废水的特点是油类物质浓度相对较高，同时含有金属切削液等化学物质。配电箱、开关柜等产品的表面处理工序，包括除锈、清洗等环节会产生含有金属离子和表面活性剂的清洗废水。复合材料绝缘横担的生产过程中，树脂固化和模具清洗会产生含有有机物的废水。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:10",
+        "bbox_anchor": [
+          512,
+          167,
+          867,
+          372
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p30_246_8076a51a",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/2废水.废气废固监(检)测报告一览表/废水废气废固报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/废水废气废固报告_ac0910/extract/images/54ac1409d59ab344617623b864c116c70693d2f6dfefad12532637aabcf17c81.jpg",
+      "asset_sha256": "c39897953d3ae11a14b60f27f9e98e94840f5392cba6792b1e83265fe9ef77fa",
+      "page_idx": 29,
+      "page_no": 30,
+      "bbox": [
+        122,
+        653,
+        347,
+        891
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_112957_ac0910db",
+      "batch_id": "235065e1-c09b-4534-b88d-d6252fb718e5",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "六、方案总结 1.综合评估 通过对河北泰昌电力器材科技有限公司废水、废气、废固管理现状的全面评价和深入分析，可以看出企业在环境管理方面建立了较为系统和完善的管理体系。作为一家注册资本达一亿元的电力器材制造企业，公司在追求经济效益的同时，充分认识到了环境保护的重要性，并将其作为企业可持续发展战略的重要组成部分。 从管理体系建设角度来看，企业已经通过了环境管理体系认证、质量管理体系认证和职业健康安全管理体系认证，形成了三体系融合的综合管理模式。这种管理模式的建立，不仅提升了企业的整体管理水平，也为环境管理工作提供了系统性的制度保障。企业设置的组织架构中，管理者代表和副总经理的职责分工明确，质量管理办公室的设立更是体现了企业对产品质量和环境质量的高度重视。这种自上而下的管理体系，确保了环境管理政策能够得到有效贯彻和执行。",
+      "ocr_context": "六、方案总结 1.综合评估 通过对河北泰昌电力器材科技有限公司废水、废气、废固管理现状的全面评价和深入分析，可以看出企业在环境管理方面建立了较为系统和完善的管理体系。作为一家注册资本达一亿元的电力器材制造企业，公司在追求经济效益的同时，充分认识到了环境保护的重要性，并将其作为企业可持续发展战略的重要组成部分。 从管理体系建设角度来看，企业已经通过了环境管理体系认证、质量管理体系认证和职业健康安全管理体系认证，形成了三体系融合的综合管理模式。这种管理模式的建立，不仅提升了企业的整体管理水平，也为环境管理工作提供了系统性的制度保障。企业设置的组织架构中，管理者代表和副总经理的职责分工明确，质量管理办公室的设立更是体现了企业对产品质量和环境质量的高度重视。这种自上而下的管理体系，确保了环境管理政策能够得到有效贯彻和执行。",
+      "retrieval_text": "泰昌 green_low_carbon 第30页图片。六、方案总结 1.综合评估 通过对河北泰昌电力器材科技有限公司废水、废气、废固管理现状的全面评价和深入分析，可以看出企业在环境管理方面建立了较为系统和完善的管理体系。作为一家注册资本达一亿元的电力器材制造企业，公司在追求经济效益的同时，充分认识到了环境保护的重要性，并将其作为企业可持续发展战略的重要组成部分。 从管理体系建设角度来看，企业已经通过了环境管理体系认证、质量管理体系认证和职业健康安全管理体系认证，形成了三体系融合的综合管理模式。这种管理模式的建立，不仅提升了企业的整体管理水平，也为环境管理工作提供了系统性的制度保障。企业设置的组织架构中，管理者代表和副总经理的职责分工明确，质量管理办公室的设立更是体现了企业对产品质量和环境质量的高度重视。这种自上而下的管理体系，确保了环境管理政策能够得到有效贯彻和执行。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:30",
+        "bbox_anchor": [
+          122,
+          653,
+          347,
+          891
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p30_247_3b74679d",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/2废水.废气废固监(检)测报告一览表/废水废气废固报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/废水废气废固报告_ac0910/extract/images/c3528b209387062e39404968584b216223c5543642c96937f1ec794e151ffe03.jpg",
+      "asset_sha256": "3fd6be089aca431a053bc731638319f0d32f8cd02312b69e3805301be912cd54",
+      "page_idx": 29,
+      "page_no": 30,
+      "bbox": [
+        359,
+        653,
+        670,
+        896
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_112957_ac0910db",
+      "batch_id": "235065e1-c09b-4534-b88d-d6252fb718e5",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "1.综合评估 通过对河北泰昌电力器材科技有限公司废水、废气、废固管理现状的全面评价和深入分析，可以看出企业在环境管理方面建立了较为系统和完善的管理体系。作为一家注册资本达一亿元的电力器材制造企业，公司在追求经济效益的同时，充分认识到了环境保护的重要性，并将其作为企业可持续发展战略的重要组成部分。 从管理体系建设角度来看，企业已经通过了环境管理体系认证、质量管理体系认证和职业健康安全管理体系认证，形成了三体系融合的综合管理模式。这种管理模式的建立，不仅提升了企业的整体管理水平，也为环境管理工作提供了系统性的制度保障。企业设置的组织架构中，管理者代表和副总经理的职责分工明确，质量管理办公室的设立更是体现了企业对产品质量和环境质量的高度重视。这种自上而下的管理体系，确保了环境管理政策能够得到有效贯彻和执行。",
+      "ocr_context": "1.综合评估 通过对河北泰昌电力器材科技有限公司废水、废气、废固管理现状的全面评价和深入分析，可以看出企业在环境管理方面建立了较为系统和完善的管理体系。作为一家注册资本达一亿元的电力器材制造企业，公司在追求经济效益的同时，充分认识到了环境保护的重要性，并将其作为企业可持续发展战略的重要组成部分。 从管理体系建设角度来看，企业已经通过了环境管理体系认证、质量管理体系认证和职业健康安全管理体系认证，形成了三体系融合的综合管理模式。这种管理模式的建立，不仅提升了企业的整体管理水平，也为环境管理工作提供了系统性的制度保障。企业设置的组织架构中，管理者代表和副总经理的职责分工明确，质量管理办公室的设立更是体现了企业对产品质量和环境质量的高度重视。这种自上而下的管理体系，确保了环境管理政策能够得到有效贯彻和执行。",
+      "retrieval_text": "泰昌 green_low_carbon 第30页图片。1.综合评估 通过对河北泰昌电力器材科技有限公司废水、废气、废固管理现状的全面评价和深入分析，可以看出企业在环境管理方面建立了较为系统和完善的管理体系。作为一家注册资本达一亿元的电力器材制造企业，公司在追求经济效益的同时，充分认识到了环境保护的重要性，并将其作为企业可持续发展战略的重要组成部分。 从管理体系建设角度来看，企业已经通过了环境管理体系认证、质量管理体系认证和职业健康安全管理体系认证，形成了三体系融合的综合管理模式。这种管理模式的建立，不仅提升了企业的整体管理水平，也为环境管理工作提供了系统性的制度保障。企业设置的组织架构中，管理者代表和副总经理的职责分工明确，质量管理办公室的设立更是体现了企业对产品质量和环境质量的高度重视。这种自上而下的管理体系，确保了环境管理政策能够得到有效贯彻和执行。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:30",
+        "bbox_anchor": [
+          359,
+          653,
+          670,
+          896
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p30_248_a714ce43",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/2废水.废气废固监(检)测报告一览表/废水废气废固报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/废水废气废固报告_ac0910/extract/images/01f7194596f93bd706cd5a5fa7214a4de26682ae0d629bcf69fc32fadc87e827.jpg",
+      "asset_sha256": "f3a9bf00bd43aa2653d1e8ca7258d94ae6f149ceaff977f9ba2e7e958809cf68",
+      "page_idx": 29,
+      "page_no": 30,
+      "bbox": [
+        672,
+        657,
+        863,
+        894
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_112957_ac0910db",
+      "batch_id": "235065e1-c09b-4534-b88d-d6252fb718e5",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "通过对河北泰昌电力器材科技有限公司废水、废气、废固管理现状的全面评价和深入分析，可以看出企业在环境管理方面建立了较为系统和完善的管理体系。作为一家注册资本达一亿元的电力器材制造企业，公司在追求经济效益的同时，充分认识到了环境保护的重要性，并将其作为企业可持续发展战略的重要组成部分。 从管理体系建设角度来看，企业已经通过了环境管理体系认证、质量管理体系认证和职业健康安全管理体系认证，形成了三体系融合的综合管理模式。这种管理模式的建立，不仅提升了企业的整体管理水平，也为环境管理工作提供了系统性的制度保障。企业设置的组织架构中，管理者代表和副总经理的职责分工明确，质量管理办公室的设立更是体现了企业对产品质量和环境质量的高度重视。这种自上而下的管理体系，确保了环境管理政策能够得到有效贯彻和执行。",
+      "ocr_context": "通过对河北泰昌电力器材科技有限公司废水、废气、废固管理现状的全面评价和深入分析，可以看出企业在环境管理方面建立了较为系统和完善的管理体系。作为一家注册资本达一亿元的电力器材制造企业，公司在追求经济效益的同时，充分认识到了环境保护的重要性，并将其作为企业可持续发展战略的重要组成部分。 从管理体系建设角度来看，企业已经通过了环境管理体系认证、质量管理体系认证和职业健康安全管理体系认证，形成了三体系融合的综合管理模式。这种管理模式的建立，不仅提升了企业的整体管理水平，也为环境管理工作提供了系统性的制度保障。企业设置的组织架构中，管理者代表和副总经理的职责分工明确，质量管理办公室的设立更是体现了企业对产品质量和环境质量的高度重视。这种自上而下的管理体系，确保了环境管理政策能够得到有效贯彻和执行。",
+      "retrieval_text": "泰昌 green_low_carbon 第30页图片。通过对河北泰昌电力器材科技有限公司废水、废气、废固管理现状的全面评价和深入分析，可以看出企业在环境管理方面建立了较为系统和完善的管理体系。作为一家注册资本达一亿元的电力器材制造企业，公司在追求经济效益的同时，充分认识到了环境保护的重要性，并将其作为企业可持续发展战略的重要组成部分。 从管理体系建设角度来看，企业已经通过了环境管理体系认证、质量管理体系认证和职业健康安全管理体系认证，形成了三体系融合的综合管理模式。这种管理模式的建立，不仅提升了企业的整体管理水平，也为环境管理工作提供了系统性的制度保障。企业设置的组织架构中，管理者代表和副总经理的职责分工明确，质量管理办公室的设立更是体现了企业对产品质量和环境质量的高度重视。这种自上而下的管理体系，确保了环境管理政策能够得到有效贯彻和执行。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:30",
+        "bbox_anchor": [
+          672,
+          657,
+          863,
+          894
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    }
+  ]
+}

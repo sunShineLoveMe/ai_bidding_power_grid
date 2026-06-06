@@ -1,0 +1,320 @@
+[
+    [
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/0eab8844819309ecb3be27eb635beb3f1b2cb661e9792fb8584b2b4fb647543f.jpg"
+                },
+                "table_caption": [],
+                "table_footnote": [
+                    {
+                        "type": "text",
+                        "content": "开票人：李森"
+                    }
+                ],
+                "html": "<table><tr><td>购买方信息</td><td colspan=\"4\">名称:河北泰昌电力器材科技有限公司统一社会信用代码/纳税人识别号:91130607056539515C</td><td>销售方信息</td><td colspan=\"3\">名称:国网河北省电力有限公司保定市满城区供电分公司统一社会信用代码/纳税人识别号:91130607MA07L8G440</td></tr><tr><td colspan=\"9\">项目名称 规格型号 单位 数量 单价 金额 税率/征收率 税额*供电*电费 千瓦时 7927 0.6704062066 5314.31 13% 690.86 合 计 ¥5314.31 ¥690.86</td></tr><tr><td colspan=\"2\">价税合计(大写)</td><td colspan=\"7\">陆仟零伍壹角柒分 (小写)¥6005.17</td></tr><tr><td>备注</td><td colspan=\"8\">户号:1300387477671,电费年月:202602</td></tr></table>",
+                "table_type": "complex_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                40,
+                212,
+                917,
+                830
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                53,
+                48,
+                135,
+                167
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "电子发票（增值专用发票）"
+                    }
+                ]
+            },
+            "bbox": [
+                274,
+                70,
+                659,
+                119
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "河北省税务局"
+                    }
+                ]
+            },
+            "bbox": [
+                402,
+                72,
+                536,
+                203
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "发票号码：26137000000114344410"
+                    }
+                ]
+            },
+            "bbox": [
+                704,
+                85,
+                907,
+                109
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "开票日期：2026年03月10日"
+                    }
+                ]
+            },
+            "bbox": [
+                704,
+                126,
+                864,
+                150
+            ]
+        }
+    ],
+    [
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/b3bfaae7910f55aa22f95f6bea5aedb790303bb5793509bab85ce47daa3e1b3e.jpg"
+                },
+                "table_caption": [],
+                "table_footnote": [
+                    {
+                        "type": "text",
+                        "content": "开票人：李森"
+                    }
+                ],
+                "html": "<table><tr><td>购 买 方 信 息</td><td colspan=\"4\">名称:河北泰昌电力器材科技有限公司统一社会信用代码/纳税人识别号:91130607056539515C</td><td>销 售 方 信 息</td><td colspan=\"3\">名称:国网河北省电力有限公司保定市满城区供电分公司统一社会信用代码/纳税人识别号:91130607MA07L8G440</td></tr><tr><td colspan=\"9\">项目名称 规格型号 单位 数量 单价 金额 税率/征收率 税额*供电*电费 千瓦时 6744 0.6116607355 4125.04 13% 536.25 合 计 ¥4125.04 ¥536.25</td></tr><tr><td colspan=\"2\">价税合计(大写)</td><td colspan=\"7\">肆仟陆佰陆拾壹圆贰角玖分 (小写)¥4661.29</td></tr><tr><td>备注</td><td colspan=\"8\">户号:1300387477671,电费年月:202603</td></tr></table>",
+                "table_type": "complex_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                40,
+                214,
+                934,
+                856
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                53,
+                44,
+                137,
+                170
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "电子发票（增值专用发票）"
+                    }
+                ]
+            },
+            "bbox": [
+                278,
+                70,
+                670,
+                119
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "河北省税务局"
+                    }
+                ]
+            },
+            "bbox": [
+                409,
+                70,
+                542,
+                206
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "发票号码：26137000000157598630"
+                    }
+                ]
+            },
+            "bbox": [
+                715,
+                82,
+                922,
+                109
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "开票日期：2026年04月10日"
+                    }
+                ]
+            },
+            "bbox": [
+                717,
+                125,
+                878,
+                151
+            ]
+        }
+    ],
+    [
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/a52c2b544bce93135c1395a30ae0dcfa53acf6e643675f723d0a8ac378b96db5.jpg"
+                },
+                "table_caption": [],
+                "table_footnote": [
+                    {
+                        "type": "text",
+                        "content": "开票人：李森"
+                    }
+                ],
+                "html": "<table><tr><td>购 买 方 信 息</td><td colspan=\"4\">名称:河北泰昌电力器材科技有限公司统一社会信用代码/纳税人识别号:91130607056539515C</td><td>销 售 方 信 息</td><td colspan=\"3\">名称:国网河北省电力有限公司保定市满城区供电分公司统一社会信用代码/纳税人识别号:91130607MA07L8G440</td></tr><tr><td colspan=\"9\">项目名称 规格型号 单位 数量 单价 金额 税率/征收率 税额*供电*电费 千瓦时 4637 0.6879253828 3189.91 13% 414.69 合 计 ¥3189.91 ¥414.69</td></tr><tr><td colspan=\"2\">价税合计(大写)</td><td colspan=\"7\">叁仟陆佰零肆圆陆角整 (小写)¥3604.60</td></tr><tr><td>备注</td><td colspan=\"8\">户号:1300387477671,电费年月:202604</td></tr></table>",
+                "table_type": "complex_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                35,
+                217,
+                961,
+                853
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                49,
+                48,
+                136,
+                171
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "电子发票（值专用发票）"
+                    }
+                ]
+            },
+            "bbox": [
+                282,
+                72,
+                686,
+                122
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "河北省税务局"
+                    }
+                ]
+            },
+            "bbox": [
+                418,
+                74,
+                558,
+                209
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "发票号码：26137000000210774396"
+                    }
+                ]
+            },
+            "bbox": [
+                736,
+                86,
+                950,
+                112
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "开票日期：2026年05月13日"
+                    }
+                ]
+            },
+            "bbox": [
+                737,
+                128,
+                905,
+                152
+            ]
+        }
+    ]
+]

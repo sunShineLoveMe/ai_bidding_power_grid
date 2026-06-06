@@ -1,0 +1,37 @@
+{
+  "parse_id": "taichang_production_capacity_20260606_110733_28a14584",
+  "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.生产厂房一览表/4.电费发票.pdf",
+  "evidence_type": "production_capacity",
+  "started_at": "2026-06-06T03:07:33.987766+00:00",
+  "parser": "mineru",
+  "privacy_level": "private",
+  "target_library": "product_library",
+  "page_count": 3,
+  "batch_id": "ff50e3b6-576b-4413-8bcd-ff6c1c3eef30",
+  "data_id": "taichang_production_capacity_20260606_110733_28a14584",
+  "submitted_at": "2026-06-06T03:07:34.186765+00:00",
+  "parse_status": "mineru_done",
+  "mineru_result": {
+    "data_id": "taichang_production_capacity_20260606_110733_28a14584",
+    "file_name": "4.电费发票.pdf",
+    "state": "done",
+    "err_msg": ""
+  },
+  "artifacts": {
+    "zip_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/4_电费发票_28a145/mineru_result.zip",
+    "extract_dir": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/4_电费发票_28a145/extract",
+    "markdown_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/4_电费发票_28a145/extract/full.md",
+    "content_list_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/4_电费发票_28a145/extract/47e02304-2fa4-481f-9a62-95234359190b_content_list.json",
+    "model_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/4_电费发票_28a145/extract/47e02304-2fa4-481f-9a62-95234359190b_model.json",
+    "middle_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/4_电费发票_28a145/extract/layout.json",
+    "download_info": {
+      "url_host": "cdn-mineru.openxlab.org.cn",
+      "resume_enabled": true,
+      "used_curl_fallback": true,
+      "resumed_from_bytes": 0,
+      "downloaded_bytes": 0,
+      "zip_size": 322317
+    }
+  },
+  "finished_at": "2026-06-06T03:07:43.510150+00:00"
+}

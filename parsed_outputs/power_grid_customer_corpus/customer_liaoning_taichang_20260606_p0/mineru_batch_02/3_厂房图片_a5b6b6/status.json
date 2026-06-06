@@ -1,0 +1,37 @@
+{
+  "parse_id": "taichang_production_capacity_20260606_110801_a5b6b69a",
+  "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.生产厂房一览表/3.厂房图片.pdf",
+  "evidence_type": "production_capacity",
+  "started_at": "2026-06-06T03:08:01.505686+00:00",
+  "parser": "mineru",
+  "privacy_level": "private",
+  "target_library": "product_library",
+  "page_count": 6,
+  "batch_id": "fe5dc3f1-0f83-4238-a0a9-a06b12d78ac3",
+  "data_id": "taichang_production_capacity_20260606_110801_a5b6b69a",
+  "submitted_at": "2026-06-06T03:08:02.215631+00:00",
+  "parse_status": "mineru_done",
+  "mineru_result": {
+    "data_id": "taichang_production_capacity_20260606_110801_a5b6b69a",
+    "file_name": "3.厂房图片.pdf",
+    "state": "done",
+    "err_msg": ""
+  },
+  "artifacts": {
+    "zip_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/3_厂房图片_a5b6b6/mineru_result.zip",
+    "extract_dir": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/3_厂房图片_a5b6b6/extract",
+    "markdown_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/3_厂房图片_a5b6b6/extract/full.md",
+    "content_list_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/3_厂房图片_a5b6b6/extract/ac6efe87-c7d2-44a5-bd31-87663efbb028_content_list.json",
+    "model_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/3_厂房图片_a5b6b6/extract/ac6efe87-c7d2-44a5-bd31-87663efbb028_model.json",
+    "middle_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/3_厂房图片_a5b6b6/extract/layout.json",
+    "download_info": {
+      "url_host": "cdn-mineru.openxlab.org.cn",
+      "resume_enabled": true,
+      "used_curl_fallback": true,
+      "resumed_from_bytes": 0,
+      "downloaded_bytes": 0,
+      "zip_size": 2833085
+    }
+  },
+  "finished_at": "2026-06-06T03:08:19.849699+00:00"
+}

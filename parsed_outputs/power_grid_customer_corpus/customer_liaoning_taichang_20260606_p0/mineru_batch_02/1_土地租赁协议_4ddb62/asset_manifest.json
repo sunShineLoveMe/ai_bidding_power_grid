@@ -1,0 +1,244 @@
+{
+  "assets": [
+    {
+      "asset_id": "taichang_production_capacity_p2_019_3209a424",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.生产厂房一览表/1.土地租赁协议.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "production_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/1_土地租赁协议_4ddb62/extract/images/026359d7e4026963d4b2d5107f831ad707e954d7ea9a2e84c90623920d4e1702.jpg",
+      "asset_sha256": "703de93ae2b4732d4f3be9beb6a67ccdc3fbcc6ddd3f634e3d288660d1074079",
+      "page_idx": 1,
+      "page_no": 2,
+      "bbox": [
+        922,
+        316,
+        998,
+        413
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_production_capacity_20260606_110743_4ddb6282",
+      "batch_id": "0e0f790a-4683-4253-a8a7-9f7d497bde6b",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "4.6甲方保证乙方承租经营期间地方关系的协调，保证乙方不受当地村民或地方恶势力的阻挠和刁难； 4.7甲方承租给乙方的场地应承担风险，确保该场地不因任何第三人的权利主张或其他因素而使乙方受到使用上的障碍或其他损失，乙方有权提出，甲方应负责赔偿； 4.8乙方保证及时足额支付租金，逾期不支付愿承担相应的违约责任；",
+      "ocr_context": "4.6甲方保证乙方承租经营期间地方关系的协调，保证乙方不受当地村民或地方恶势力的阻挠和刁难； 4.7甲方承租给乙方的场地应承担风险，确保该场地不因任何第三人的权利主张或其他因素而使乙方受到使用上的障碍或其他损失，乙方有权提出，甲方应负责赔偿； 4.8乙方保证及时足额支付租金，逾期不支付愿承担相应的违约责任；",
+      "retrieval_text": "泰昌 production_capacity 第2页图片。4.6甲方保证乙方承租经营期间地方关系的协调，保证乙方不受当地村民或地方恶势力的阻挠和刁难； 4.7甲方承租给乙方的场地应承担风险，确保该场地不因任何第三人的权利主张或其他因素而使乙方受到使用上的障碍或其他损失，乙方有权提出，甲方应负责赔偿； 4.8乙方保证及时足额支付租金，逾期不支付愿承担相应的违约责任；",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "production_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:2",
+        "bbox_anchor": [
+          922,
+          316,
+          998,
+          413
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_production_capacity_p4_031_6d875e24",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.生产厂房一览表/1.土地租赁协议.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "production_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/1_土地租赁协议_4ddb62/extract/images/1b5faf6167b8cfce6afda450846a60e90931567f8ac078fbecbaf886face3df4.jpg",
+      "asset_sha256": "1c0dad50c8bcedd0720d5d4614ea27b7ac65586329fe724e3238e3ebda6fe57e",
+      "page_idx": 3,
+      "page_no": 4,
+      "bbox": [
+        50,
+        113,
+        196,
+        438
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_production_capacity_20260606_110743_4ddb6282",
+      "batch_id": "0e0f790a-4683-4253-a8a7-9f7d497bde6b",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "2025年4月3日N0054579 今收到河北泰昌勃器材科技有限公 交来2025租金",
+      "ocr_context": "2025年4月3日N0054579 今收到河北泰昌勃器材科技有限公 交来2025租金",
+      "retrieval_text": "泰昌 production_capacity 第4页图片。2025年4月3日N0054579 今收到河北泰昌勃器材科技有限公 交来2025租金",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "production_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:4",
+        "bbox_anchor": [
+          50,
+          113,
+          196,
+          438
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_production_capacity_p4_041_73cd244f",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.生产厂房一览表/1.土地租赁协议.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "production_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/1_土地租赁协议_4ddb62/extract/images/fcba09e0859d515c73f5a667e3805d43515308f6e00cc7e6c4d6445c57b806f0.jpg",
+      "asset_sha256": "86bfeb1c2c7471a9064edd11cf8981353671f21394435a9ccc0bd53daad091c6",
+      "page_idx": 3,
+      "page_no": 4,
+      "bbox": [
+        44,
+        565,
+        196,
+        906
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_production_capacity_20260606_110743_4ddb6282",
+      "batch_id": "0e0f790a-4683-4253-a8a7-9f7d497bde6b",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "收款人 交款人 晁地琳 2026年4月5日N6007A500 今收到河北泰昌出力驾材科技有公司 交来2026年金",
+      "ocr_context": "收款人 交款人 晁地琳 2026年4月5日N6007A500 今收到河北泰昌出力驾材科技有公司 交来2026年金",
+      "retrieval_text": "泰昌 production_capacity 第4页图片。收款人 交款人 晁地琳 2026年4月5日N6007A500 今收到河北泰昌出力驾材科技有公司 交来2026年金",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "production_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:4",
+        "bbox_anchor": [
+          44,
+          565,
+          196,
+          906
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_production_capacity_p4_048_c913fd59",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.生产厂房一览表/1.土地租赁协议.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "production_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/1_土地租赁协议_4ddb62/extract/images/0634f335d9d2a834b84b9f3e1c0b8aabc672bf49642ca716fd75839a5e4883c7.jpg",
+      "asset_sha256": "7bc8c8dd7cce94b4f31276aacf6e238b40a6c30557d8ab9e1b4f0c84db4276b4",
+      "page_idx": 3,
+      "page_no": 4,
+      "bbox": [
+        317,
+        747,
+        531,
+        939
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_production_capacity_20260606_110743_4ddb6282",
+      "batch_id": "0e0f790a-4683-4253-a8a7-9f7d497bde6b",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "人民币（大写）抗捌万趣 ￥180000、00 收款单",
+      "ocr_context": "人民币（大写）抗捌万趣 ￥180000、00 收款单",
+      "retrieval_text": "泰昌 production_capacity 第4页图片。人民币（大写）抗捌万趣 ￥180000、00 收款单",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "production_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:4",
+        "bbox_anchor": [
+          317,
+          747,
+          531,
+          939
+        ]
+      }
+    }
+  ]
+}

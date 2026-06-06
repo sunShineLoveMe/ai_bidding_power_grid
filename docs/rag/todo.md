@@ -70,9 +70,10 @@
 | P1A-1 | [x] | 解压并 inventory 辽宁/泰昌新增资料 | `docs/rag/liaoning-taichang-mvp-corpus-review.md`、`parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_inventory.json` | 已保留原始包，辽宁 185 个文件、泰昌 45 个文件已登记 |
 | P1A-2 | [~] | 判断资料完整性和可用边界 | `docs/rag/liaoning-taichang-mvp-corpus-review.md` | 已确认辽宁招标侧较完整；泰昌侧需 OCR、脱敏、型号覆盖确认 |
 | P1A-3 | [x] | 辽宁货物清单结构化解析兼容 | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/goods_tables/` | 已兼容 `dimension ref=A1` 异常并输出 87 条去重需求行 |
-| P1A-4 | [~] | 泰昌扫描 PDF OCR 与质量报告 | parse quality report | MinerU 已完成营业执照 smoke + 三体系证书 + 生产设备台账首批 OCR，累计 5 份文件、28 个图片资产 metadata；全量扫描件 OCR 待执行 |
+| P1A-4 | [x] | 泰昌扫描 PDF OCR 与图片资产 metadata | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/ocr_coverage_report.json`、`asset_index.json` | 泰昌 42 份 PDF 已全部 MinerU 完成，生成 242 个图片资产 metadata，其中 78 个 `restricted_private` 资产需授权后展示；覆盖率和资产语义校验通过 |
 | P1A-5 | [x] | 河北豪乾参考稿隔离入库 | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/reference_templates/` | 已抽取 2 份河北豪乾参考稿基础模板数据，均标记 `reference_only=true`，不得作为泰昌企业事实来源 |
-| P1A-6 | [ ] | 辽宁/泰昌专项评测集 | `tests/rag/customer_liaoning_taichang_testset.jsonl` | 覆盖 CPVC/MPP 型号、包号、技术规范编码、泰昌事实、参考稿隔离 |
+| P1A-6 | [x] | 辽宁/泰昌专项评测集 | `tests/rag/customer_liaoning_taichang_testset.jsonl` | 已创建 17 条用例，覆盖 CPVC/MPP 型号、包号、技术规范编码、泰昌事实、图片资产、河北豪乾参考稿隔离和受限图片展示策略；待正式入库后跑召回 |
+| P1A-7 | [x] | 泰昌 OCR parse quality report | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/parse_quality_report.md` | 已汇总 42 份 PDF 的文本量、图片资产、敏感级别、人工复核项和可入库建议 |
 
 ## P3：召回质量增强
 

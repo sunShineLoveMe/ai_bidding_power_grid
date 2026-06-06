@@ -1,0 +1,95 @@
+{
+  "created_at": "2026-06-06T03:19:17.101200+00:00",
+  "results": [
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/4.锤击试验装置/锤击试验装置.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/锤击试验装置_058c93",
+      "asset_count": 9,
+      "page_count": 8,
+      "evidence_type": "testing_capacity",
+      "privacy_level": "private"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/电子拉力试验机_e82a9b",
+      "asset_count": 8,
+      "page_count": 8,
+      "evidence_type": "testing_capacity",
+      "privacy_level": "private"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81",
+      "asset_count": 14,
+      "page_count": 9,
+      "evidence_type": "testing_capacity",
+      "privacy_level": "private"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/1.人员情况一览表/1.试验检测人员证书/1.陈仙瑞.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/1_陈仙瑞_35023d",
+      "asset_count": 1,
+      "page_count": 1,
+      "evidence_type": "production_capacity",
+      "privacy_level": "restricted_private"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/1.人员情况一览表/1.试验检测人员证书/2.晁坤琳.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/2_晁坤琳_d8c9e9",
+      "asset_count": 2,
+      "page_count": 1,
+      "evidence_type": "production_capacity",
+      "privacy_level": "restricted_private"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/1.人员情况一览表/4.参保证明/泰昌社保证明.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/泰昌社保证明_1c114f",
+      "asset_count": 2,
+      "page_count": 1,
+      "evidence_type": "production_capacity",
+      "privacy_level": "restricted_private"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/1.试验检测人员证书/1.陈仙瑞.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/1_陈仙瑞_5fc530",
+      "asset_count": 1,
+      "page_count": 1,
+      "evidence_type": "testing_capacity",
+      "privacy_level": "restricted_private"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/1.试验检测人员证书/2.晁坤琳.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/2_晁坤琳_924fe5",
+      "asset_count": 2,
+      "page_count": 1,
+      "evidence_type": "testing_capacity",
+      "privacy_level": "restricted_private"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/4.参保证明/泰昌社保证明.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/泰昌社保证明_a544d2",
+      "asset_count": 2,
+      "page_count": 1,
+      "evidence_type": "testing_capacity",
+      "privacy_level": "restricted_private"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/1.人员情况一览表/2.人员花名册/公司人员花名册.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/公司人员花名册_373414",
+      "asset_count": 0,
+      "page_count": 2,
+      "evidence_type": "production_capacity",
+      "privacy_level": "restricted_private"
+    }
+  ]
+}

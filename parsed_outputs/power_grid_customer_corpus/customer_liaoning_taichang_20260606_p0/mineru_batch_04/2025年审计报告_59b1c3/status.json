@@ -1,0 +1,37 @@
+{
+  "parse_id": "taichang_finance_20260606_112830_59b1c3e8",
+  "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+  "evidence_type": "finance",
+  "started_at": "2026-06-06T03:28:30.411316+00:00",
+  "parser": "mineru",
+  "privacy_level": "restricted_private",
+  "target_library": "qualification_library",
+  "page_count": 19,
+  "batch_id": "a0fdb0c9-bb48-48c7-ac3a-e0ca8c4834e9",
+  "data_id": "taichang_finance_20260606_112830_59b1c3e8",
+  "submitted_at": "2026-06-06T03:28:31.434116+00:00",
+  "parse_status": "mineru_done",
+  "mineru_result": {
+    "data_id": "taichang_finance_20260606_112830_59b1c3e8",
+    "file_name": "2025年审计报告.pdf",
+    "state": "done",
+    "err_msg": ""
+  },
+  "artifacts": {
+    "zip_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/mineru_result.zip",
+    "extract_dir": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract",
+    "markdown_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/full.md",
+    "content_list_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/ebb9dc0a-6986-4d48-a7f3-d3ef5e0d5eb1_content_list.json",
+    "model_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/ebb9dc0a-6986-4d48-a7f3-d3ef5e0d5eb1_model.json",
+    "middle_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3/extract/layout.json",
+    "download_info": {
+      "url_host": "cdn-mineru.openxlab.org.cn",
+      "resume_enabled": true,
+      "used_curl_fallback": true,
+      "resumed_from_bytes": 0,
+      "downloaded_bytes": 0,
+      "zip_size": 8966773
+    }
+  },
+  "finished_at": "2026-06-06T03:29:06.026785+00:00"
+}

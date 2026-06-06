@@ -1,0 +1,1285 @@
+{
+  "assets": [
+    {
+      "asset_id": "taichang_finance_p1_003_4dcd6dd2",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "finance",
+      "target_library": "qualification_library",
+      "privacy_level": "restricted_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/c57e36181da5b25f3e3ad7f1e38d92d6e6bee321fe63aa37c3db85a61c4f48cc.jpg",
+      "asset_sha256": "785dfd69b822a6cb46b00aae4fbc2f7935904e980854a2997c729647f38bd352",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        403,
+        446,
+        569,
+        566
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_finance_20260606_112906_1db0b07b",
+      "batch_id": "4724a95a-b627-443e-828a-2ba3c0f65692",
+      "usage_policy": "enterprise_fact_evidence_restricted",
+      "requires_human_review": true,
+      "requires_authorization": true,
+      "caption_candidate": "河北泰昌电力器材科技有限公司 2024年度 审计报告",
+      "ocr_context": "河北泰昌电力器材科技有限公司 2024年度 审计报告",
+      "retrieval_text": "泰昌 finance 第1页图片。河北泰昌电力器材科技有限公司 2024年度 审计报告",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "finance",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:1",
+        "bbox_anchor": [
+          403,
+          446,
+          569,
+          566
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display"
+      }
+    },
+    {
+      "asset_id": "taichang_finance_p5_040_f0d01955",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "finance",
+      "target_library": "qualification_library",
+      "privacy_level": "restricted_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/ad461e59088f213a62f3f4240951d179776a35dd4981b91433b1a1792d7e250c.jpg",
+      "asset_sha256": "075174a08d96f3019086c918a5d1d542758f0f7cad78c07fe6c24bd55bd11a72",
+      "page_idx": 4,
+      "page_no": 5,
+      "bbox": [
+        225,
+        515,
+        460,
+        663
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_finance_20260606_112906_1db0b07b",
+      "batch_id": "4724a95a-b627-443e-828a-2ba3c0f65692",
+      "usage_policy": "enterprise_fact_evidence_restricted",
+      "requires_human_review": true,
+      "requires_authorization": true,
+      "caption_candidate": "是否公允反映相关交易和事项。 我们与治理层就计划的审计范围、时间安排和重大审计发现等事项进行沟通，包括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师：",
+      "ocr_context": "是否公允反映相关交易和事项。 我们与治理层就计划的审计范围、时间安排和重大审计发现等事项进行沟通，包括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师：",
+      "retrieval_text": "泰昌 finance 第5页图片。是否公允反映相关交易和事项。 我们与治理层就计划的审计范围、时间安排和重大审计发现等事项进行沟通，包括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师：",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "finance",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:5",
+        "bbox_anchor": [
+          225,
+          515,
+          460,
+          663
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display"
+      }
+    },
+    {
+      "asset_id": "taichang_finance_p5_042_cbee190b",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "finance",
+      "target_library": "qualification_library",
+      "privacy_level": "restricted_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/33b89ce1336569cf5e4124319d92f32560c210f47600aa398e5b717345309f3d.jpg",
+      "asset_sha256": "a1c99b9614e3d104d2d2b552555fe7d94321ab685e6c919906a92bdd8e2df474",
+      "page_idx": 4,
+      "page_no": 5,
+      "bbox": [
+        739,
+        543,
+        885,
+        597
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_finance_20260606_112906_1db0b07b",
+      "batch_id": "4724a95a-b627-443e-828a-2ba3c0f65692",
+      "usage_policy": "enterprise_fact_evidence_restricted",
+      "requires_human_review": true,
+      "requires_authorization": true,
+      "caption_candidate": "是否公允反映相关交易和事项。 我们与治理层就计划的审计范围、时间安排和重大审计发现等事项进行沟通，包括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师： 2025年02月19日",
+      "ocr_context": "是否公允反映相关交易和事项。 我们与治理层就计划的审计范围、时间安排和重大审计发现等事项进行沟通，包括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师： 2025年02月19日",
+      "retrieval_text": "泰昌 finance 第5页图片。是否公允反映相关交易和事项。 我们与治理层就计划的审计范围、时间安排和重大审计发现等事项进行沟通，包括沟通我们在审计中识别出的值得关注的内部控制缺陷。 中国注册会计师： 中国注册会计师： 2025年02月19日",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "finance",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:5",
+        "bbox_anchor": [
+          739,
+          543,
+          885,
+          597
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display"
+      }
+    },
+    {
+      "asset_id": "taichang_finance_p5_044_4948b46f",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "finance",
+      "target_library": "qualification_library",
+      "privacy_level": "restricted_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/3592585750500635a213b3c44afa8c6d3aa2e90237d29125753f1fcba21a2f96.jpg",
+      "asset_sha256": "e3d07d90f31cc17eae6740320d93a768d9d81e4ea7be989a0e90e693f4f57bc1",
+      "page_idx": 4,
+      "page_no": 5,
+      "bbox": [
+        752,
+        624,
+        900,
+        680
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_finance_20260606_112906_1db0b07b",
+      "batch_id": "4724a95a-b627-443e-828a-2ba3c0f65692",
+      "usage_policy": "enterprise_fact_evidence_restricted",
+      "requires_human_review": true,
+      "requires_authorization": true,
+      "caption_candidate": "中国注册会计师： 中国注册会计师： 2025年02月19日",
+      "ocr_context": "中国注册会计师： 中国注册会计师： 2025年02月19日",
+      "retrieval_text": "泰昌 finance 第5页图片。中国注册会计师： 中国注册会计师： 2025年02月19日",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "finance",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:5",
+        "bbox_anchor": [
+          752,
+          624,
+          900,
+          680
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display"
+      }
+    },
+    {
+      "asset_id": "taichang_finance_p26_296_6337f711",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "finance",
+      "target_library": "qualification_library",
+      "privacy_level": "restricted_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/4d9480c8ae13d3127c2d8dad00eaed2a202cca88da33210d3ffb2da60b744dd1.jpg",
+      "asset_sha256": "d1c6dd1d192e7959c0f38854aea8d78babcbeadca2abdf7ee59bdfa7dc943fca",
+      "page_idx": 25,
+      "page_no": 26,
+      "bbox": [
+        647,
+        128,
+        842,
+        269
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_finance_20260606_112906_1db0b07b",
+      "batch_id": "4724a95a-b627-443e-828a-2ba3c0f65692",
+      "usage_policy": "enterprise_fact_evidence_restricted",
+      "requires_human_review": true,
+      "requires_authorization": true,
+      "caption_candidate": "日1101000 （1-1）（）",
+      "ocr_context": "日1101000 （1-1）（）",
+      "retrieval_text": "泰昌 finance 第26页图片。日1101000 （1-1）（）",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "finance",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:26",
+        "bbox_anchor": [
+          647,
+          128,
+          842,
+          269
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display"
+      }
+    },
+    {
+      "asset_id": "taichang_finance_p26_298_df669056",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "finance",
+      "target_library": "qualification_library",
+      "privacy_level": "restricted_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/189a4d3edf79cfc8b23c85cfdcd72733febd13e50cc7009448f9da2eca3c9d75.jpg",
+      "asset_sha256": "8af7c6edb8e6d5767fdd16912988ee3c33135be4a3bee4525fb75b1dc65fe80e",
+      "page_idx": 25,
+      "page_no": 26,
+      "bbox": [
+        252,
+        106,
+        344,
+        276
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_finance_20260606_112906_1db0b07b",
+      "batch_id": "4724a95a-b627-443e-828a-2ba3c0f65692",
+      "usage_policy": "enterprise_fact_evidence_restricted",
+      "requires_human_review": true,
+      "requires_authorization": true,
+      "caption_candidate": "日1101000 （1-1）（）",
+      "ocr_context": "日1101000 （1-1）（）",
+      "retrieval_text": "泰昌 finance 第26页图片。日1101000 （1-1）（）",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "finance",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:26",
+        "bbox_anchor": [
+          252,
+          106,
+          344,
+          276
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display"
+      }
+    },
+    {
+      "asset_id": "taichang_finance_p26_302_32e47aea",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "finance",
+      "target_library": "qualification_library",
+      "privacy_level": "restricted_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/17584901f9e8649c0e847438c5f60e1c743c63327dfd16a179d596d6e068bcf6.jpg",
+      "asset_sha256": "338400eea71462493be78ea046be4ad4d66b69ce56408ddad0ca58c57f2d9857",
+      "page_idx": 25,
+      "page_no": 26,
+      "bbox": [
+        252,
+        106,
+        401,
+        276
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_finance_20260606_112906_1db0b07b",
+      "batch_id": "4724a95a-b627-443e-828a-2ba3c0f65692",
+      "usage_policy": "enterprise_fact_evidence_restricted",
+      "requires_human_review": true,
+      "requires_authorization": true,
+      "caption_candidate": "",
+      "ocr_context": "",
+      "retrieval_text": "泰昌 finance 第26页图片。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "finance",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:26",
+        "bbox_anchor": [
+          252,
+          106,
+          401,
+          276
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display"
+      }
+    },
+    {
+      "asset_id": "taichang_finance_p26_303_8fe33222",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "finance",
+      "target_library": "qualification_library",
+      "privacy_level": "restricted_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/5cb18fe901d3cf7153a9d15cdb255cf91aa585390adcdc57c4fadc97e7fd1833.jpg",
+      "asset_sha256": "076478451d21ed9a709a300c7650d9ca7cac7cd6bc0d2335f46899eb25ea4dc7",
+      "page_idx": 25,
+      "page_no": 26,
+      "bbox": [
+        65,
+        463,
+        218,
+        560
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_finance_20260606_112906_1db0b07b",
+      "batch_id": "4724a95a-b627-443e-828a-2ba3c0f65692",
+      "usage_policy": "enterprise_fact_evidence_restricted",
+      "requires_human_review": true,
+      "requires_authorization": true,
+      "caption_candidate": "",
+      "ocr_context": "",
+      "retrieval_text": "泰昌 finance 第26页图片。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "finance",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:26",
+        "bbox_anchor": [
+          65,
+          463,
+          218,
+          560
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display"
+      }
+    },
+    {
+      "asset_id": "taichang_finance_p27_314_1247be22",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "finance",
+      "target_library": "qualification_library",
+      "privacy_level": "restricted_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/25e74de8ffb5a34c242a0c31621cf39390ebfda18c3c89d0ca0ad3b110ab8868.jpg",
+      "asset_sha256": "9e0ab8766ef046f74eb975ebac85bb030147dd356f1bd6043bc844f7a4fc0d92",
+      "page_idx": 26,
+      "page_no": 27,
+      "bbox": [
+        667,
+        106,
+        855,
+        277
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_finance_20260606_112906_1db0b07b",
+      "batch_id": "4724a95a-b627-443e-828a-2ba3c0f65692",
+      "usage_policy": "enterprise_fact_evidence_restricted",
+      "requires_human_review": true,
+      "requires_authorization": true,
+      "caption_candidate": "《不开》 《中不开与积断大》回 中国开中",
+      "ocr_context": "《不开》 《中不开与积断大》回 中国开中",
+      "retrieval_text": "泰昌 finance 第27页图片。《不开》 《中不开与积断大》回 中国开中",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "finance",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:27",
+        "bbox_anchor": [
+          667,
+          106,
+          855,
+          277
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display"
+      }
+    },
+    {
+      "asset_id": "taichang_finance_p27_316_8328cf3e",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "finance",
+      "target_library": "qualification_library",
+      "privacy_level": "restricted_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/06ed98b5d9e864f89e63ce075a7362041405ae79c00036e432d48240d783c028.jpg",
+      "asset_sha256": "36b0ed79fd0592b2d8c8003d5c797baa2ed3e366257e167c0953e93dca39a133",
+      "page_idx": 26,
+      "page_no": 27,
+      "bbox": [
+        796,
+        378,
+        887,
+        445
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_finance_20260606_112906_1db0b07b",
+      "batch_id": "4724a95a-b627-443e-828a-2ba3c0f65692",
+      "usage_policy": "enterprise_fact_evidence_restricted",
+      "requires_human_review": true,
+      "requires_authorization": true,
+      "caption_candidate": "《中不开与积断大》回 中国开中",
+      "ocr_context": "《中不开与积断大》回 中国开中",
+      "retrieval_text": "泰昌 finance 第27页图片。《中不开与积断大》回 中国开中",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "finance",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:27",
+        "bbox_anchor": [
+          796,
+          378,
+          887,
+          445
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display"
+      }
+    },
+    {
+      "asset_id": "taichang_finance_p27_317_94b9240b",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "finance",
+      "target_library": "qualification_library",
+      "privacy_level": "restricted_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/5801b5d75ebaf7274225049f2631fff96ea67d6d56ece6c83f3a397021562ff4.jpg",
+      "asset_sha256": "2fa7d6050b4260ab0495780d998b1dc9329f967e219145ad956805d67b6e762b",
+      "page_idx": 26,
+      "page_no": 27,
+      "bbox": [
+        403,
+        452,
+        608,
+        596
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_finance_20260606_112906_1db0b07b",
+      "batch_id": "4724a95a-b627-443e-828a-2ba3c0f65692",
+      "usage_policy": "enterprise_fact_evidence_restricted",
+      "requires_human_review": true,
+      "requires_authorization": true,
+      "caption_candidate": "《中不开与积断大》回 中国开中 称",
+      "ocr_context": "《中不开与积断大》回 中国开中 称",
+      "retrieval_text": "泰昌 finance 第27页图片。《中不开与积断大》回 中国开中 称",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "finance",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:27",
+        "bbox_anchor": [
+          403,
+          452,
+          608,
+          596
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display"
+      }
+    },
+    {
+      "asset_id": "taichang_finance_p27_318_068884f1",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "finance",
+      "target_library": "qualification_library",
+      "privacy_level": "restricted_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/38821be0394f55f3a401fa5e4987bc0f15c682dd10301f5bdca8fb088d1e6e78.jpg",
+      "asset_sha256": "5f3e37aa13a9020d771beebcca8acc46be4b7d0fb82adcc5ab8170ca918eb0d2",
+      "page_idx": 26,
+      "page_no": 27,
+      "bbox": [
+        87,
+        688,
+        265,
+        807
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_finance_20260606_112906_1db0b07b",
+      "batch_id": "4724a95a-b627-443e-828a-2ba3c0f65692",
+      "usage_policy": "enterprise_fact_evidence_restricted",
+      "requires_human_review": true,
+      "requires_authorization": true,
+      "caption_candidate": "中国开中 称 工王源",
+      "ocr_context": "中国开中 称 工王源",
+      "retrieval_text": "泰昌 finance 第27页图片。中国开中 称 工王源",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "finance",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:27",
+        "bbox_anchor": [
+          87,
+          688,
+          265,
+          807
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display"
+      }
+    },
+    {
+      "asset_id": "taichang_finance_p28_335_5bca9251",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "finance",
+      "target_library": "qualification_library",
+      "privacy_level": "restricted_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/45b0565c22cc2a10b522185c50a5e72d1bbeffd099228fac85395779bc1baaf8.jpg",
+      "asset_sha256": "a0a693c2967dbbf499ed5985a91ae2084ee22c18c884597a9adb194cb2effceb",
+      "page_idx": 27,
+      "page_no": 28,
+      "bbox": [
+        221,
+        393,
+        394,
+        486
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_finance_20260606_112906_1db0b07b",
+      "batch_id": "4724a95a-b627-443e-828a-2ba3c0f65692",
+      "usage_policy": "enterprise_fact_evidence_restricted",
+      "requires_human_review": true,
+      "requires_authorization": true,
+      "caption_candidate": "注册会计师工作单位变更事项登记 RegistrationoftheChangeof Working Ui 同意调出 Agree the oldertobetnsfeedfrom",
+      "ocr_context": "注册会计师工作单位变更事项登记 RegistrationoftheChangeof Working Ui 同意调出 Agree the oldertobetnsfeedfrom",
+      "retrieval_text": "泰昌 finance 第28页图片。注册会计师工作单位变更事项登记 RegistrationoftheChangeof Working Ui 同意调出 Agree the oldertobetnsfeedfrom",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "finance",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:28",
+        "bbox_anchor": [
+          221,
+          393,
+          394,
+          486
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display"
+      }
+    },
+    {
+      "asset_id": "taichang_finance_p28_336_93c68b7e",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "finance",
+      "target_library": "qualification_library",
+      "privacy_level": "restricted_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/38d254b1c2ce9b6668b573a86284ad94cf92f23cc183a33c75105a72acc8524f.jpg",
+      "asset_sha256": "82bca34af1888f1f12dff9eff5ac07f9535481919e4d1d4a0bd0d80ba66a2071",
+      "page_idx": 27,
+      "page_no": 28,
+      "bbox": [
+        401,
+        422,
+        603,
+        566
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_finance_20260606_112906_1db0b07b",
+      "batch_id": "4724a95a-b627-443e-828a-2ba3c0f65692",
+      "usage_policy": "enterprise_fact_evidence_restricted",
+      "requires_human_review": true,
+      "requires_authorization": true,
+      "caption_candidate": "注册会计师工作单位变更事项登记 RegistrationoftheChangeof Working Ui 同意调出 Agree the oldertobetnsfeedfrom",
+      "ocr_context": "注册会计师工作单位变更事项登记 RegistrationoftheChangeof Working Ui 同意调出 Agree the oldertobetnsfeedfrom",
+      "retrieval_text": "泰昌 finance 第28页图片。注册会计师工作单位变更事项登记 RegistrationoftheChangeof Working Ui 同意调出 Agree the oldertobetnsfeedfrom",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "finance",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:28",
+        "bbox_anchor": [
+          401,
+          422,
+          603,
+          566
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display"
+      }
+    },
+    {
+      "asset_id": "taichang_finance_p28_340_6942be91",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "finance",
+      "target_library": "qualification_library",
+      "privacy_level": "restricted_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/8e8b4821caf12388893095007f953c6a95f512a6a074a98c2e71b9a384527010.jpg",
+      "asset_sha256": "502f98e31e5408317b57816244a844e1aab2fc297ba7f87b482d8d96906e0d60",
+      "page_idx": 27,
+      "page_no": 28,
+      "bbox": [
+        596,
+        222,
+        800,
+        336
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_finance_20260606_112906_1db0b07b",
+      "batch_id": "4724a95a-b627-443e-828a-2ba3c0f65692",
+      "usage_policy": "enterprise_fact_evidence_restricted",
+      "requires_human_review": true,
+      "requires_authorization": true,
+      "caption_candidate": "注册会计师工作单位变更事项登记 RegistrationoftheChangeof Working Ui 同意调出 Agree the oldertobetnsfeedfrom 事务所 CPAs 转出协会盖章 Stampofthe transfer-outInstituteofCPAs 203-05月25日 同意调入",
+      "ocr_context": "注册会计师工作单位变更事项登记 RegistrationoftheChangeof Working Ui 同意调出 Agree the oldertobetnsfeedfrom 事务所 CPAs 转出协会盖章 Stampofthe transfer-outInstituteofCPAs 203-05月25日 同意调入",
+      "retrieval_text": "泰昌 finance 第28页图片。注册会计师工作单位变更事项登记 RegistrationoftheChangeof Working Ui 同意调出 Agree the oldertobetnsfeedfrom 事务所 CPAs 转出协会盖章 Stampofthe transfer-outInstituteofCPAs 203-05月25日 同意调入",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "finance",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:28",
+        "bbox_anchor": [
+          596,
+          222,
+          800,
+          336
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display"
+      }
+    },
+    {
+      "asset_id": "taichang_finance_p28_346_c500027b",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "finance",
+      "target_library": "qualification_library",
+      "privacy_level": "restricted_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/bb1012184a50f1810b93041d0a2991baffc5e4662528ab17c1bd2e9835f7f5d9.jpg",
+      "asset_sha256": "a8037846be31139b0b795aa1b2b69e023b567d185cc668679040083f9bf04c28",
+      "page_idx": 27,
+      "page_no": 28,
+      "bbox": [
+        601,
+        369,
+        806,
+        488
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_finance_20260606_112906_1db0b07b",
+      "batch_id": "4724a95a-b627-443e-828a-2ba3c0f65692",
+      "usage_policy": "enterprise_fact_evidence_restricted",
+      "requires_human_review": true,
+      "requires_authorization": true,
+      "caption_candidate": "转出协会盖章 Stampofthe transfer-outInstituteofCPAs 203-05月25日 同意调入 Agree the holder tobe transferred to 转入协会盖章 Stampofthetransfer-inInstituteof CPAs 2023-05-25",
+      "ocr_context": "转出协会盖章 Stampofthe transfer-outInstituteofCPAs 203-05月25日 同意调入 Agree the holder tobe transferred to 转入协会盖章 Stampofthetransfer-inInstituteof CPAs 2023-05-25",
+      "retrieval_text": "泰昌 finance 第28页图片。转出协会盖章 Stampofthe transfer-outInstituteofCPAs 203-05月25日 同意调入 Agree the holder tobe transferred to 转入协会盖章 Stampofthetransfer-inInstituteof CPAs 2023-05-25",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "finance",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:28",
+        "bbox_anchor": [
+          601,
+          369,
+          806,
+          488
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display"
+      }
+    },
+    {
+      "asset_id": "taichang_finance_p28_354_420d7bac",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "finance",
+      "target_library": "qualification_library",
+      "privacy_level": "restricted_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/9f3903e9c62141d94d5b6449039668963aef956c746e38a5b502051a1229e5d3.jpg",
+      "asset_sha256": "7858ec49ccdabbf2dc333c195a43f4b68d2408b866371c445142f84cbb28d343",
+      "page_idx": 27,
+      "page_no": 28,
+      "bbox": [
+        189,
+        654,
+        433,
+        725
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_finance_20260606_112906_1db0b07b",
+      "batch_id": "4724a95a-b627-443e-828a-2ba3c0f65692",
+      "usage_policy": "enterprise_fact_evidence_restricted",
+      "requires_human_review": true,
+      "requires_authorization": true,
+      "caption_candidate": "2023-05-25 年度检验登记 Annual Renewal Registration 本证书经检验合格，继续有效一年 This certificate is valid for another year after this renewal.",
+      "ocr_context": "2023-05-25 年度检验登记 Annual Renewal Registration 本证书经检验合格，继续有效一年 This certificate is valid for another year after this renewal.",
+      "retrieval_text": "泰昌 finance 第28页图片。2023-05-25 年度检验登记 Annual Renewal Registration 本证书经检验合格，继续有效一年 This certificate is valid for another year after this renewal.",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "finance",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:28",
+        "bbox_anchor": [
+          189,
+          654,
+          433,
+          725
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display"
+      }
+    },
+    {
+      "asset_id": "taichang_finance_p28_355_7d345925",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "finance",
+      "target_library": "qualification_library",
+      "privacy_level": "restricted_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/e88cc9f2ed37b9dc2d9f1f85948035e287827d01e2282dfa9881783def6b5469.jpg",
+      "asset_sha256": "553bd14911a7f968d6c7268d1430683eb6002d82438b71eb23b048b814afd591",
+      "page_idx": 27,
+      "page_no": 28,
+      "bbox": [
+        189,
+        730,
+        442,
+        792
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_finance_20260606_112906_1db0b07b",
+      "batch_id": "4724a95a-b627-443e-828a-2ba3c0f65692",
+      "usage_policy": "enterprise_fact_evidence_restricted",
+      "requires_human_review": true,
+      "requires_authorization": true,
+      "caption_candidate": "年度检验登记 Annual Renewal Registration 本证书经检验合格，继续有效一年 This certificate is valid for another year after this renewal. 吉林省注册会计师协会",
+      "ocr_context": "年度检验登记 Annual Renewal Registration 本证书经检验合格，继续有效一年 This certificate is valid for another year after this renewal. 吉林省注册会计师协会",
+      "retrieval_text": "泰昌 finance 第28页图片。年度检验登记 Annual Renewal Registration 本证书经检验合格，继续有效一年 This certificate is valid for another year after this renewal. 吉林省注册会计师协会",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "finance",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:28",
+        "bbox_anchor": [
+          189,
+          730,
+          442,
+          792
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display"
+      }
+    },
+    {
+      "asset_id": "taichang_finance_p28_357_566a15cf",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "finance",
+      "target_library": "qualification_library",
+      "privacy_level": "restricted_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/b253fa75e82b542d15356759a456b80540f7d287cba41b8f5fe7fb754df2fff3.jpg",
+      "asset_sha256": "f159fd12cae30d221d85bbec3bfee14424aa666626d83713dc3da47576295542",
+      "page_idx": 27,
+      "page_no": 28,
+      "bbox": [
+        611,
+        520,
+        752,
+        621
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_finance_20260606_112906_1db0b07b",
+      "batch_id": "4724a95a-b627-443e-828a-2ba3c0f65692",
+      "usage_policy": "enterprise_fact_evidence_restricted",
+      "requires_human_review": true,
+      "requires_authorization": true,
+      "caption_candidate": "本证书经检验合格，继续有效一年 This certificate is valid for another year after this renewal. 吉林省注册会计师协会 批准注册协会： AuthorizedInstituteofCPAs",
+      "ocr_context": "本证书经检验合格，继续有效一年 This certificate is valid for another year after this renewal. 吉林省注册会计师协会 批准注册协会： AuthorizedInstituteofCPAs",
+      "retrieval_text": "泰昌 finance 第28页图片。本证书经检验合格，继续有效一年 This certificate is valid for another year after this renewal. 吉林省注册会计师协会 批准注册协会： AuthorizedInstituteofCPAs",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "finance",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:28",
+        "bbox_anchor": [
+          611,
+          520,
+          752,
+          621
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display"
+      }
+    },
+    {
+      "asset_id": "taichang_finance_p28_358_a6e4f6a0",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "finance",
+      "target_library": "qualification_library",
+      "privacy_level": "restricted_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/11a62a6a6936d2e2fe8601ee6b21526fd88df421860d523e3e761e8df794c19d.jpg",
+      "asset_sha256": "63f281446681e38df3f9f6997b698483690627cf7b6a76993fd7be3277d2a62c",
+      "page_idx": 27,
+      "page_no": 28,
+      "bbox": [
+        532,
+        647,
+        744,
+        767
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_finance_20260606_112906_1db0b07b",
+      "batch_id": "4724a95a-b627-443e-828a-2ba3c0f65692",
+      "usage_policy": "enterprise_fact_evidence_restricted",
+      "requires_human_review": true,
+      "requires_authorization": true,
+      "caption_candidate": "吉林省注册会计师协会 批准注册协会： AuthorizedInstituteofCPAs 2009",
+      "ocr_context": "吉林省注册会计师协会 批准注册协会： AuthorizedInstituteofCPAs 2009",
+      "retrieval_text": "泰昌 finance 第28页图片。吉林省注册会计师协会 批准注册协会： AuthorizedInstituteofCPAs 2009",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "finance",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:28",
+        "bbox_anchor": [
+          532,
+          647,
+          744,
+          767
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display"
+      }
+    },
+    {
+      "asset_id": "taichang_finance_p29_370_4abb650d",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "finance",
+      "target_library": "qualification_library",
+      "privacy_level": "restricted_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/5c26618abbd95c2ecc66891a877c785ac3776f14ecb5a2a6a5f9fa46362c6dad.jpg",
+      "asset_sha256": "13439d0bdb9c4b279b385c6352116afcebb3f0080fb5d952faae83e125248e86",
+      "page_idx": 28,
+      "page_no": 29,
+      "bbox": [
+        124,
+        146,
+        853,
+        862
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_finance_20260606_112906_1db0b07b",
+      "batch_id": "4724a95a-b627-443e-828a-2ba3c0f65692",
+      "usage_policy": "enterprise_fact_evidence_restricted",
+      "requires_human_review": true,
+      "requires_authorization": true,
+      "caption_candidate": "",
+      "ocr_context": "",
+      "retrieval_text": "泰昌 finance 第29页图片。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "finance",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:29",
+        "bbox_anchor": [
+          124,
+          146,
+          853,
+          862
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display"
+      }
+    }
+  ]
+}

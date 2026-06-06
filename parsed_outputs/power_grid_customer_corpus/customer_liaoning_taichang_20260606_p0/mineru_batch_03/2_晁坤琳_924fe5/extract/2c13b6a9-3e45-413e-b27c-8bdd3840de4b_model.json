@@ -1,0 +1,303 @@
+[
+    [
+        {
+            "type": "text",
+            "bbox": [
+                0.305,
+                0.288,
+                0.554,
+                0.301
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.306,
+                0.304,
+                0.425,
+                0.318
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.562,
+                0.304,
+                0.621,
+                0.317
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.307,
+                0.322,
+                0.442,
+                0.336
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.307,
+                0.343,
+                0.479,
+                0.357
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.304,
+                0.381,
+                0.447,
+                0.394
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.307,
+                0.401,
+                0.527,
+                0.414
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.306,
+                0.42,
+                0.448,
+                0.433
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.594,
+                0.33,
+                0.691,
+                0.448
+            ],
+            "angle": 0,
+            "content": "河北省农业生产监督管理局\n考核专用章",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.336,
+                0.539,
+                0.408,
+                0.591
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.455,
+                0.543,
+                0.614,
+                0.561
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.417,
+                0.567,
+                0.653,
+                0.591
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.389,
+                0.631,
+                0.519,
+                0.643
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.389,
+                0.665,
+                0.605,
+                0.678
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.304,
+                0.285,
+                0.557,
+                0.302
+            ],
+            "text": "证N号：T13060219980525061X",
+            "score": 0.971
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.305,
+                0.399,
+                0.528,
+                0.414
+            ],
+            "text": "有效期阳20241029-20301029",
+            "score": 0.991
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.415,
+                0.565,
+                0.656,
+                0.592
+            ],
+            "text": "特种作业操作证",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.389,
+                0.664,
+                0.606,
+                0.678
+            ],
+            "text": "国家安全生产监督管理总局监制",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.304,
+                0.301,
+                0.427,
+                0.319
+            ],
+            "text": "姓名：晁坤琳",
+            "score": 0.989
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.559,
+                0.301,
+                0.625,
+                0.32
+            ],
+            "text": "性别：男",
+            "score": 0.923
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.307,
+                0.32,
+                0.444,
+                0.337
+            ],
+            "text": "作业类别：电工作业",
+            "score": 0.947
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.302,
+                0.38,
+                0.449,
+                0.395
+            ],
+            "text": "初领日期：20241029",
+            "score": 0.994
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.305,
+                0.417,
+                0.45,
+                0.435
+            ],
+            "text": "复审日期：20271029",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.453,
+                0.54,
+                0.617,
+                0.563
+            ],
+            "text": "中华人民共和国",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.306,
+                0.341,
+                0.48,
+                0.358
+            ],
+            "text": "准操项目：电气试验作业",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.388,
+                0.63,
+                0.452,
+                0.644
+            ],
+            "text": "复审记录",
+            "score": 1.0
+        }
+    ]
+]

@@ -1,0 +1,2859 @@
+[
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "合同协议书"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                458,
+                146,
+                600,
+                171
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "买方：济南艾德诺仪器有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                154,
+                205,
+                557,
+                227
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "卖方：河北泰昌电力器材科技有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                154,
+                234,
+                557,
+                256
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "一、合同标的"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                201,
+                291,
+                346,
+                311
+            ]
+        },
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/d9d0ab3d819946919fbff4383a9e3e11fa43231b88c067bacfe1ca90e90ab22d.jpg"
+                },
+                "table_caption": [],
+                "table_footnote": [],
+                "html": "<table><tr><td>标的名称</td><td>规格型号</td><td>单位</td><td>数量</td><td>单价(元)</td><td>总价(元)</td><td>备注</td></tr><tr><td>电子拉力试验机</td><td>LD-5</td><td>台</td><td>1</td><td>17500.00</td><td>17500.00</td><td>含税,含配件</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></table>",
+                "table_type": "simple_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                80,
+                313,
+                927,
+                476
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "二、合同价格与支付"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                196,
+                508,
+                413,
+                530
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "1.本合同价格为人民币（小写）17500.00元（大写：壹万柒仟伍佰元整"
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                538,
+                852,
+                585
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2.合同价格分预付款、到货款、投运款和质保金四次支付，支付比例为1:8:0:1。"
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                594,
+                850,
+                640
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "三、承诺"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                194,
+                651,
+                294,
+                671
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "1.卖方承诺按合同约定向买方提供符合要求的合同货物和服务。"
+                    }
+                ]
+            },
+            "bbox": [
+                193,
+                680,
+                847,
+                699
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2．买方承诺按合同约定向卖方支付合同价款。"
+                    }
+                ]
+            },
+            "bbox": [
+                191,
+                709,
+                668,
+                726
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "3．卖方承诺按照合同的技术要求制造合格的合同货物，按照工期要求及时供货，在合同签订、生产制造、履约及售后服务等阶段避免出现不诚信行为。卖方同意买方有权将卖方的不诚信行为在电子商务平台质量监督栏目的业务公告中予以公布。卖方承诺已知悉买方针对上述不诚信行为制定的供应商不良行为处理相关规定。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                737,
+                848,
+                870
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "4。未经买方同意，卖方不得将本合同项下的债权（合同价款及其他权利）转让给任何第三方。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                881,
+                843,
+                926
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "四、争议解决"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                201,
+                110,
+                349,
+                131
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "双方发生争议时，应首先通过友好协商解决；协商不成的，向买方所在地有管辖权的人民法院提起诉讼。"
+                    }
+                ]
+            },
+            "bbox": [
+                154,
+                140,
+                860,
+                189
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "五、生效"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                201,
+                197,
+                302,
+                217
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "本合同经双方法定代表人（负责人）或其授权代表签署并加盖双方公章或合同专用章之日起生效。合同签订日期以双方中最后一方签署并加盖公章或合同专用章的日期为准。"
+                    }
+                ]
+            },
+            "bbox": [
+                152,
+                225,
+                860,
+                303
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "六、份数"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                200,
+                312,
+                300,
+                331
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "本合同一式二份，买方执二份，卖方执二份，具有同等法律效力。"
+                    }
+                ]
+            },
+            "bbox": [
+                152,
+                341,
+                853,
+                388
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "签署页"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                482,
+                424,
+                600,
+                448
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "（盖章）"
+                    }
+                ]
+            },
+            "bbox": [
+                159,
+                482,
+                490,
+                530
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "法定表人（负责及）或"
+                    }
+                ]
+            },
+            "bbox": [
+                159,
+                539,
+                421,
+                558
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "授权代表签学："
+                    }
+                ]
+            },
+            "bbox": [
+                159,
+                565,
+                347,
+                586
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "签订日期：2012年7月20日"
+                    }
+                ]
+            },
+            "bbox": [
+                159,
+                596,
+                460,
+                615
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "地址：济南市槐荫区美里湖办事处"
+                    }
+                ]
+            },
+            "bbox": [
+                159,
+                624,
+                514,
+                643
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "联系人："
+                    }
+                ]
+            },
+            "bbox": [
+                159,
+                653,
+                240,
+                671
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "电话：0531-85921877"
+                    }
+                ]
+            },
+            "bbox": [
+                159,
+                682,
+                386,
+                700
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "开户银行：建行济南市槐荫区支行"
+                    }
+                ]
+            },
+            "bbox": [
+                157,
+                709,
+                512,
+                728
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "账号：100100247567433买方：河北泰昌电力器材科技有限公司（盖章）"
+                    }
+                ]
+            },
+            "bbox": [
+                157,
+                739,
+                386,
+                757
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                536,
+                482,
+                905,
+                530
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "法定代表人（负责人）或"
+                    }
+                ]
+            },
+            "bbox": [
+                536,
+                539,
+                796,
+                558
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "授权代表（签字）"
+                    }
+                ]
+            },
+            "bbox": [
+                537,
+                568,
+                715,
+                588
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "签订日期：2012年7月20日"
+                    }
+                ]
+            },
+            "bbox": [
+                537,
+                596,
+                836,
+                615
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "地址：满城县陉阳驿村"
+                    }
+                ]
+            },
+            "bbox": [
+                537,
+                625,
+                771,
+                644
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "联系人：晁猛"
+                    }
+                ]
+            },
+            "bbox": [
+                537,
+                653,
+                680,
+                673
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "电话：13932277113"
+                    }
+                ]
+            },
+            "bbox": [
+                537,
+                682,
+                739,
+                701
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "开户银行：中国银行满城支行"
+                    }
+                ]
+            },
+            "bbox": [
+                536,
+                709,
+                843,
+                731
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "账号：100222840234"
+                    }
+                ]
+            },
+            "bbox": [
+                537,
+                739,
+                751,
+                758
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "3700121140"
+                    }
+                ]
+            },
+            "bbox": [
+                256,
+                297,
+                378,
+                326
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "山东增值税专用发票"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                426,
+                273,
+                625,
+                307
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/edef6b3135e5b4272a85ff2f9c535e3360ef97871bd1c430c59bcaff75fde357.jpg"
+                },
+                "content": "",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "bbox": [
+                473,
+                307,
+                578,
+                375
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "No 00952136"
+                    }
+                ]
+            },
+            "bbox": [
+                662,
+                288,
+                791,
+                318
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "3700121140"
+                    }
+                ]
+            },
+            "bbox": [
+                800,
+                297,
+                860,
+                315
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "00952136"
+                    }
+                ]
+            },
+            "bbox": [
+                793,
+                319,
+                858,
+                339
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "开票日期：2012年07月26日"
+                    }
+                ]
+            },
+            "bbox": [
+                685,
+                351,
+                828,
+                371
+            ]
+        },
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/4044c9dcef5007cafe0b3d7a7e877355940977b577c126a756a10f3808be3bcd.jpg"
+                },
+                "table_caption": [
+                    {
+                        "type": "text",
+                        "content": "税总函[2014]257号西安印钞有限公司"
+                    }
+                ],
+                "table_footnote": [],
+                "html": "<table><tr><td>购买方</td><td colspan=\"5\">名称:河北泰昌电力器材科技有限公司纳税人识别号:130621056539515地址、电话:满城县方顺桥乡陉阳驿村7180808开户行及帐号:中国银行满城县支行100222840234</td><td>密码区</td><td colspan=\"3\">73/9-2&lt;22960-30697/3/9/35-0-*/68/-64908-09-46&lt;*+347+83--10714+6858-61&lt;46-009+7/06**+56-4+70/98551310879-2&gt;-/</td></tr><tr><td rowspan=\"2\" colspan=\"2\">货物或应税劳务、服务名称电子拉力试验机合计</td><td rowspan=\"2\">规格型号LD-5</td><td rowspan=\"2\">单位台</td><td rowspan=\"2\">数量1</td><td rowspan=\"2\">单价14957.264957</td><td>金额14957.26</td><td>税率17%</td><td>税额2542.74</td><td></td></tr><tr><td>¥14957.26</td><td></td><td>¥2542.74</td><td></td></tr><tr><td colspan=\"2\">价税合计(大写)</td><td colspan=\"7\">壹万柒仟伍佰圆整 (小写) ¥17500.00</td><td></td></tr><tr><td>销售方</td><td colspan=\"4\">名称:济南艾德诺仪器有限公司纳税人识别号:370104256005158地址、电话:济南市槐荫区美里湖办事处新沙工业区三街15号开户行及帐号:建行济南市槐荫区支行100100247567433</td><td>备注</td><td colspan=\"3\"></td><td></td></tr></table>",
+                "table_type": "complex_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                183,
+                384,
+                865,
+                839
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "收款人：陈雪华"
+                    }
+                ]
+            },
+            "bbox": [
+                196,
+                841,
+                292,
+                861
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "复核：张彩凤"
+                    }
+                ]
+            },
+            "bbox": [
+                386,
+                841,
+                460,
+                861
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "开票人：李丽英"
+                    }
+                ]
+            },
+            "bbox": [
+                533,
+                841,
+                624,
+                861
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/c2e3eb202886ff32cd611e2a652293831788f7885433a57dc7a7db6303128289.jpg"
+                },
+                "content": "济南艾德诺仪器有限公司\n370104256005158\n发票专用章\n销售方：（章）",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                677,
+                731,
+                806,
+                875
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第二联：抵扣联购买方扣税凭证"
+                    }
+                ]
+            },
+            "bbox": [
+                866,
+                489,
+                881,
+                734
+            ]
+        },
+        {
+            "type": "page_aside_text",
+            "content": {
+                "page_aside_text_content": [
+                    {
+                        "type": "text",
+                        "content": "1"
+                    }
+                ]
+            },
+            "bbox": [
+                125,
+                250,
+                152,
+                884
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "生产、试验设备发票查验说明文件"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                319,
+                92,
+                678,
+                114
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "致：国家电网有限公司及其所属各省公司"
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                125,
+                500,
+                144
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "鉴于国家税务总局全国增值税发票查验平台https://inv-veri.chinatax.gov.cn/index.html查询年限5年，故我公司部分生产、试验设备发票超出查询年限而无法查询。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                153,
+                852,
+                228
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "我公司承诺所提供所有设备发票信息真实有效，无任何虚假。如有虚假愿意承担一切法律责任，特此证明。"
+                    }
+                ]
+            },
+            "bbox": [
+                146,
+                237,
+                850,
+                283
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "承诺人：河北泰昌电力器材科技有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                482,
+                315,
+                850,
+                334
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/cec67b79eae4fe14ea3ba768dd5731cab1feeacd42ef0b9b886dbc3b7f693523.jpg"
+                },
+                "content": "北泰昌电力器材科技\n1309210005674\n北泰昌电力器材科技",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                579,
+                264,
+                757,
+                393
+            ]
+        }
+    ],
+    [
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/e4eb59c9ece26f62df28c7fb9a49921bf7ae1414e85072fb6c710e23a301ec35.jpg"
+                },
+                "content": "电子拉力试验机\n电极测试器 10kV 10000000000\n红墙专用测试仪 10kV 10000000000\n隔离实验试验仪和隔离实验",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                0,
+                0,
+                998,
+                998
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "校准证书"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                401,
+                156,
+                620,
+                199
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/cf357a6e38c13f11ebd668ccb5eb7a2efda83a64257079f4f4dd49f44b4c212a.jpg"
+                },
+                "content": "",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "bbox": [
+                657,
+                149,
+                727,
+                204
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/53a15b7a2b55770e069136571d28cb9ffae462af237be51c3f2bd490d06a8112.jpg"
+                },
+                "content": "",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "bbox": [
+                727,
+                154,
+                803,
+                203
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "中国认可国际互认校准CALIBRATIONCNAS L14602"
+                    }
+                ]
+            },
+            "bbox": [
+                805,
+                155,
+                873,
+                202
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Calibration Certificate"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                324,
+                212,
+                653,
+                231
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "证书编号： GL2605LX02285"
+                    }
+                ]
+            },
+            "bbox": [
+                38,
+                244,
+                357,
+                266
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Certificate No."
+                    }
+                ]
+            },
+            "bbox": [
+                38,
+                272,
+                161,
+                286
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第1页，共3页"
+                    }
+                ]
+            },
+            "bbox": [
+                660,
+                244,
+                860,
+                262
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Page 1of3 Pages"
+                    }
+                ]
+            },
+            "bbox": [
+                670,
+                269,
+                873,
+                288
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "客户名称：河北泰昌电力器材科技有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                38,
+                307,
+                495,
+                326
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Customer"
+                    }
+                ]
+            },
+            "bbox": [
+                40,
+                328,
+                105,
+                338
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "客户地址： 保定市满城区陉阳驿村"
+                    }
+                ]
+            },
+            "bbox": [
+                38,
+                359,
+                416,
+                376
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Address"
+                    }
+                ]
+            },
+            "bbox": [
+                38,
+                378,
+                97,
+                388
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "器具名称：电子拉力试验机"
+                    }
+                ]
+            },
+            "bbox": [
+                38,
+                409,
+                354,
+                426
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Description"
+                    }
+                ]
+            },
+            "bbox": [
+                40,
+                428,
+                115,
+                439
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "型号/规格：LD-5"
+                    }
+                ]
+            },
+            "bbox": [
+                38,
+                458,
+                258,
+                475
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Model"
+                    }
+                ]
+            },
+            "bbox": [
+                40,
+                478,
+                84,
+                489
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "出厂编号：20120617"
+                    }
+                ]
+            },
+            "bbox": [
+                38,
+                508,
+                295,
+                526
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Serial No."
+                    }
+                ]
+            },
+            "bbox": [
+                40,
+                527,
+                105,
+                539
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "管理编号"
+                    }
+                ]
+            },
+            "bbox": [
+                549,
+                508,
+                633,
+                527
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": " Equipment No."
+                    }
+                ]
+            },
+            "bbox": [
+                542,
+                529,
+                642,
+                541
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "TC-13"
+                    }
+                ]
+            },
+            "bbox": [
+                658,
+                508,
+                715,
+                521
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "制造单位： 济南艾德诺仪器有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                38,
+                558,
+                435,
+                576
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Manufacturer"
+                    }
+                ]
+            },
+            "bbox": [
+                40,
+                577,
+                134,
+                589
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/796266488662ac7e7df544fc2a713c94be50d15618b5444d92b349dc1a9e98d2.jpg"
+                },
+                "content": "证书专用章\nIssued by(Stamp)\n证书专用章",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                186,
+                604,
+                379,
+                744
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "批准人： 张绍安 Approved by"
+                    }
+                ]
+            },
+            "bbox": [
+                529,
+                619,
+                816,
+                655
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "核验员： 赵华聪 Checked by"
+                    }
+                ]
+            },
+            "bbox": [
+                529,
+                669,
+                821,
+                706
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "校准员： 刘浩 Calibrated by"
+                    }
+                ]
+            },
+            "bbox": [
+                529,
+                720,
+                816,
+                756
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "接收日期： 2026年05月25日"
+                    }
+                ]
+            },
+            "bbox": [
+                38,
+                759,
+                440,
+                783
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Receipt date:"
+                    }
+                ]
+            },
+            "bbox": [
+                40,
+                781,
+                136,
+                794
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "校准日期："
+                    }
+                ]
+            },
+            "bbox": [
+                40,
+                800,
+                131,
+                816
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Calibration date:"
+                    }
+                ]
+            },
+            "bbox": [
+                40,
+                819,
+                166,
+                831
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "签发日期："
+                    }
+                ]
+            },
+            "bbox": [
+                40,
+                838,
+                129,
+                854
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Date of issue:"
+                    }
+                ]
+            },
+            "bbox": [
+                40,
+                857,
+                137,
+                869
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2026年05月26日"
+                    }
+                ]
+            },
+            "bbox": [
+                295,
+                843,
+                438,
+                860
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/3a41b9098ac831a73779d9d86ded1840e6b35d63701b7a085ecb18ed42734878.jpg"
+                },
+                "content": "",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "bbox": [
+                660,
+                795,
+                742,
+                858
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "电话(Te1):0755-27407284"
+                    }
+                ]
+            },
+            "bbox": [
+                38,
+                884,
+                226,
+                897
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "邮箱(Mail) :szgljl@126.com"
+                    }
+                ]
+            },
+            "bbox": [
+                594,
+                884,
+                789,
+                897
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "地址：深圳市光明区公明街道兴发路170号华澳时光全球美酒星链云仓产"
+                    }
+                ]
+            },
+            "bbox": [
+                38,
+                903,
+                519,
+                917
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "邮政编码(Post No.）:518107"
+                    }
+                ]
+            },
+            "bbox": [
+                594,
+                903,
+                794,
+                917
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "业园B栋C302"
+                    }
+                ]
+            },
+            "bbox": [
+                40,
+                917,
+                126,
+                929
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Address: No.170 Xingfa Road, Gongming Sub-district， Guangming District， Shenzhen City， China, Building B,"
+                    }
+                ]
+            },
+            "bbox": [
+                38,
+                932,
+                842,
+                946
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "C02, Huao Time Global Fine Wine Starlink Cloud Warehouse Industrial Park"
+                    }
+                ]
+            },
+            "bbox": [
+                40,
+                947,
+                594,
+                958
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                77,
+                26,
+                186,
+                102
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广量计量检测技术（深圳）有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                216,
+                41,
+                890,
+                77
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "GuangLiang Measurement and Testing Technology (Shenzhen) Co., Ltd."
+                    }
+                ]
+            },
+            "bbox": [
+                215,
+                78,
+                895,
+                96
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "证书说明"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                391,
+                156,
+                601,
+                195
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Certificate Statement"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                366,
+                200,
+                621,
+                221
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "证书编号： GL2605LX02285"
+                    }
+                ]
+            },
+            "bbox": [
+                30,
+                229,
+                290,
+                247
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Certificate No."
+                    }
+                ]
+            },
+            "bbox": [
+                26,
+                250,
+                137,
+                263
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第2页，共3页"
+                    }
+                ]
+            },
+            "bbox": [
+                783,
+                227,
+                929,
+                244
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Page 2 of 3 Pages"
+                    }
+                ]
+            },
+            "bbox": [
+                793,
+                250,
+                956,
+                267
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "一、“#”项目为实验室具备能力，非CNAS认可能力。"
+                    }
+                ]
+            },
+            "bbox": [
+                26,
+                271,
+                438,
+                287
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "\"#\"represents the capacity of the laboratory,which is beyond the scope of accreditation of CNAS."
+                    }
+                ]
+            },
+            "bbox": [
+                63,
+                288,
+                769,
+                306
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "二、此证书无本公司盖章无效。未经本公司书面批准，不得部分复制校准证书."
+                    }
+                ]
+            },
+            "bbox": [
+                26,
+                307,
+                653,
+                324
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The certificate shall not be valid without stamp of DN. This certificate shall not be copied partly without the written"
+                    }
+                ]
+            },
+            "bbox": [
+                63,
+                326,
+                910,
+                341
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "三、本证书校准结果只与受校准仪器有关."
+                    }
+                ]
+            },
+            "bbox": [
+                26,
+                344,
+                363,
+                362
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The results relate only to the items calibrated."
+                    }
+                ]
+            },
+            "bbox": [
+                70,
+                363,
+                406,
+                379
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "四、我司对本证书的内容拥有最终解释权。"
+                    }
+                ]
+            },
+            "bbox": [
+                26,
+                382,
+                366,
+                398
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "This certificate of content with our final interpretation."
+                    }
+                ]
+            },
+            "bbox": [
+                63,
+                401,
+                463,
+                416
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "五、我司出具的数据均可溯源到国际单位制（SI）."
+                    }
+                ]
+            },
+            "bbox": [
+                26,
+                419,
+                433,
+                435
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "All data issued by the laboratory are traceable to International System of Units(S1)."
+                    }
+                ]
+            },
+            "bbox": [
+                63,
+                438,
+                673,
+                454
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "六、本次校准的技术依据："
+                    }
+                ]
+            },
+            "bbox": [
+                26,
+                456,
+                236,
+                470
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Reference Documents for the Verification :"
+                    }
+                ]
+            },
+            "bbox": [
+                63,
+                475,
+                381,
+                489
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "参照JJG139-2014《拉力、压力和万能试验机检定规程》《V.R.ofTension,Compresson and Universal Testing Machines》"
+                    }
+                ]
+            },
+            "bbox": [
+                26,
+                492,
+                868,
+                508
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "七、本次校准使用主要计量标准器具"
+                    }
+                ]
+            },
+            "bbox": [
+                26,
+                539,
+                319,
+                557
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Main Standards of Measurement Used"
+                    }
+                ]
+            },
+            "bbox": [
+                26,
+                558,
+                310,
+                573
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "设备名称/技术指标"
+                    }
+                ]
+            },
+            "bbox": [
+                95,
+                577,
+                265,
+                594
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Equipment Name/Characteristics"
+                    }
+                ]
+            },
+            "bbox": [
+                48,
+                596,
+                312,
+                613
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "测力仪/MPE:±0.5%"
+                    }
+                ]
+            },
+            "bbox": [
+                107,
+                618,
+                253,
+                633
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "设备编号"
+                    }
+                ]
+            },
+            "bbox": [
+                398,
+                577,
+                478,
+                594
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": " Equipment No."
+                    }
+                ]
+            },
+            "bbox": [
+                376,
+                596,
+                499,
+                613
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2111162363"
+                    }
+                ]
+            },
+            "bbox": [
+                394,
+                618,
+                480,
+                631
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "证书编号/溯源单位"
+                    }
+                ]
+            },
+            "bbox": [
+                581,
+                577,
+                752,
+                594
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Certificate No/Traceability to"
+                    }
+                ]
+            },
+            "bbox": [
+                549,
+                596,
+                784,
+                613
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "JL2025242154/深圳计量院"
+                    }
+                ]
+            },
+            "bbox": [
+                571,
+                618,
+                761,
+                632
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "有效日期"
+                    }
+                ]
+            },
+            "bbox": [
+                842,
+                577,
+                922,
+                594
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Validity date"
+                    }
+                ]
+            },
+            "bbox": [
+                830,
+                596,
+                934,
+                613
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2026-7-9"
+                    }
+                ]
+            },
+            "bbox": [
+                850,
+                618,
+                914,
+                631
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "附加说明"
+                    }
+                ]
+            },
+            "bbox": [
+                450,
+                663,
+                544,
+                682
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": " Appended Directions"
+                    }
+                ]
+            },
+            "bbox": [
+                396,
+                684,
+                600,
+                702
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "复校日期： 2027年05月25日"
+                    }
+                ]
+            },
+            "bbox": [
+                28,
+                703,
+                473,
+                720
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Application date"
+                    }
+                ]
+            },
+            "bbox": [
+                28,
+                722,
+                161,
+                739
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "校准地点： 委托方现场"
+                    }
+                ]
+            },
+            "bbox": [
+                28,
+                741,
+                436,
+                758
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Operation Location"
+                    }
+                ]
+            },
+            "bbox": [
+                28,
+                760,
+                184,
+                775
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "环境条件： 温度：21.2℃ 相对湿度：53%"
+                    }
+                ]
+            },
+            "bbox": [
+                28,
+                778,
+                789,
+                795
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Operation Environment"
+                    }
+                ]
+            },
+            "bbox": [
+                28,
+                797,
+                218,
+                813
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "相关使用说明： 参见结果使用"
+                    }
+                ]
+            },
+            "bbox": [
+                28,
+                815,
+                455,
+                832
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Statement of Compliance Limitation"
+                    }
+                ]
+            },
+            "bbox": [
+                28,
+                834,
+                319,
+                850
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                75,
+                26,
+                186,
+                102
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广量计量检测技术（深圳）有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                215,
+                41,
+                890,
+                77
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "GuangLiang Measurement and Testing Technology (Shenzhen) Co., Ltd."
+                    }
+                ]
+            },
+            "bbox": [
+                215,
+                78,
+                895,
+                96
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "校准结果"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                400,
+                156,
+                628,
+                187
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Result of Calibration"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                435,
+                189,
+                594,
+                202
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "证书编号：GL2605LX02285"
+                    }
+                ]
+            },
+            "bbox": [
+                90,
+                197,
+                381,
+                212
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Certificate No."
+                    }
+                ]
+            },
+            "bbox": [
+                94,
+                216,
+                191,
+                228
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "一、外观及工作正常性检查： 正常"
+                    }
+                ]
+            },
+            "bbox": [
+                90,
+                255,
+                428,
+                269
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "二、力示值校准："
+                    }
+                ]
+            },
+            "bbox": [
+                90,
+                282,
+                211,
+                297
+            ]
+        },
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/8d1c131cb454815f0d4f1366763ade15ca732b1d31261f757f540ebfc97ff84f.jpg"
+                },
+                "table_caption": [],
+                "table_footnote": [
+                    {
+                        "type": "text",
+                        "content": "注：(Notes):"
+                    },
+                    {
+                        "type": "text",
+                        "content": "1、依据JJF1059.1-2012测量不确定度评定与表示，本次校准结果的扩展不确定度为："
+                    },
+                    {
+                        "type": "text",
+                        "content": "力值：Ure=0.2%，k=2"
+                    },
+                    {
+                        "type": "text",
+                        "content": " According to JF1059.1-2012 Evaluation and Expresson of Uncertainty in Measurement,， Expanded uncertainty measurement:"
+                    },
+                    {
+                        "type": "text",
+                        "content": "2、校准项目符合1.0级技术要求"
+                    },
+                    {
+                        "type": "text",
+                        "content": "Passed at class 1.0 calibrated item"
+                    }
+                ],
+                "html": "<table><tr><td>标准力值</td><td>实测值</td><td>误差</td><td>允差</td><td>重复性</td><td>允差</td><td>结论</td></tr><tr><td>(N)</td><td>(N)</td><td>(%)</td><td>(%)</td><td>(%)</td><td>(%)</td><td>(P/F)</td></tr><tr><td>1000</td><td>1001.56</td><td>0.16</td><td>±1.0</td><td>0.10</td><td>≤1.0</td><td>P</td></tr><tr><td>2000</td><td>2001.16</td><td>0.06</td><td>±1.0</td><td>0.30</td><td>≤1.0</td><td>P</td></tr><tr><td>3000</td><td>3002.42</td><td>0.08</td><td>±1.0</td><td>0.10</td><td>≤1.0</td><td>P</td></tr><tr><td>4000</td><td>4000.65</td><td>0.02</td><td>±1.0</td><td>0.10</td><td>≤1.0</td><td>P</td></tr><tr><td>5000</td><td>5008.74</td><td>0.17</td><td>±1.0</td><td>0.10</td><td>≤1.0</td><td>P</td></tr></table>",
+                "table_type": "simple_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                110,
+                312,
+                783,
+                514
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "以下空白"
+                    }
+                ]
+            },
+            "bbox": [
+                416,
+                671,
+                475,
+                684
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Blank below"
+                    }
+                ]
+            },
+            "bbox": [
+                408,
+                686,
+                484,
+                697
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                77,
+                26,
+                186,
+                102
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广量计量检测技术（深圳）有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                216,
+                41,
+                890,
+                77
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "GuangLiang Measurement and Testing Technology (Shenzhen) Co., Ltd."
+                    }
+                ]
+            },
+            "bbox": [
+                215,
+                79,
+                895,
+                96
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "第3页共3页"
+                    }
+                ]
+            },
+            "bbox": [
+                781,
+                198,
+                937,
+                215
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "Page 3 of 3 Pages"
+                    }
+                ]
+            },
+            "bbox": [
+                800,
+                216,
+                937,
+                229
+            ]
+        }
+    ]
+]

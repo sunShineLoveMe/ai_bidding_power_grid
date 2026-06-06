@@ -1,0 +1,431 @@
+[
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "社会保险单位参保证明"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                357,
+                184,
+                628,
+                206
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "险种：企业职工基本养老保险"
+                    }
+                ]
+            },
+            "bbox": [
+                45,
+                208,
+                247,
+                223
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "经办机构代码：130621"
+                    }
+                ]
+            },
+            "bbox": [
+                783,
+                209,
+                937,
+                223
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "兹证明"
+                    }
+                ]
+            },
+            "bbox": [
+                45,
+                229,
+                97,
+                243
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "参保单位名称：河北泰昌电力器材科技有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                45,
+                253,
+                368,
+                268
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "单位社保编号：13052100680"
+                    }
+                ]
+            },
+            "bbox": [
+                48,
+                275,
+                260,
+                290
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "单位参保日期：2017年05月01日"
+                    }
+                ]
+            },
+            "bbox": [
+                48,
+                300,
+                280,
+                313
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "参保缴费人数：2"
+                    }
+                ]
+            },
+            "bbox": [
+                48,
+                325,
+                186,
+                338
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "单位有无欠费：无"
+                    }
+                ]
+            },
+            "bbox": [
+                48,
+                348,
+                191,
+                361
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "社会信用代码： 91130607056539515C"
+                    }
+                ]
+            },
+            "bbox": [
+                490,
+                253,
+                752,
+                267
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "经办机构名称：满城区"
+                    }
+                ]
+            },
+            "bbox": [
+                490,
+                275,
+                660,
+                290
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "单位参保状态：参保缴费"
+                    }
+                ]
+            },
+            "bbox": [
+                490,
+                300,
+                675,
+                313
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "单位参保险种：企业职工基本养老保险"
+                    }
+                ]
+            },
+            "bbox": [
+                490,
+                325,
+                766,
+                338
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "单位参保类型：企业"
+                    }
+                ]
+            },
+            "bbox": [
+                490,
+                348,
+                645,
+                362
+            ]
+        },
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/f55335bcadf654e944de03a650a60e385a054044394a101dd1fbf71463050f17.jpg"
+                },
+                "table_caption": [
+                    {
+                        "type": "text",
+                        "content": "该单位参保人员明细（部分/全部）"
+                    }
+                ],
+                "table_footnote": [],
+                "html": "<table><tr><td>序号</td><td>姓名</td><td>社会保障号码</td><td>本单位参保日期</td><td>缴费状态</td><td>个人缴费基数</td><td>本单位缴费起止年月</td></tr><tr><td>1</td><td>陈仙瑞</td><td>130602197408170641</td><td>2017-06-01</td><td>缴费</td><td>4007.00</td><td>201706至202605</td></tr><tr><td>2</td><td>晁坤琳</td><td>13060219980525061X</td><td>2017-06-01</td><td>缴费</td><td>4007.00</td><td>201706至202605</td></tr></table>",
+                "table_type": "simple_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                43,
+                426,
+                944,
+                514
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "证明机"
+                    }
+                ]
+            },
+            "bbox": [
+                45,
+                551,
+                144,
+                565
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/4db09f224b9a754fdf22a82e3c58e0757825027f75b0a380f220dc44f3c9a4eb.jpg"
+                },
+                "content": "深圳市满城区人力资源社会保障\n业务专用章\n1208070828576",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                94,
+                519,
+                307,
+                620
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "证明日期：2026年05月28日"
+                    }
+                ]
+            },
+            "bbox": [
+                668,
+                551,
+                862,
+                565
+            ]
+        },
+        {
+            "type": "list",
+            "content": {
+                "list_type": "text_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "1.证明开具后6个月内有效。本证明加盖印章为电子签章，黑色签章与红色签章效力相同。"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "2.对上述信息有疑义的，可向查询地经办机构咨询，服务电话：12333。"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                36,
+                749,
+                695,
+                788
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/746da4e77792dd11cb4115f2d22f7b6860c2e231077376767741930c3b6ec024.jpg"
+                },
+                "content": "",
+                "image_caption": [
+                    {
+                        "type": "text",
+                        "content": "验证码：0-20116039771596801"
+                    }
+                ],
+                "image_footnote": []
+            },
+            "bbox": [
+                710,
+                858,
+                803,
+                925
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                43,
+                79,
+                164,
+                133
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "河北省人力资源和社会保障厅统一制式"
+                    }
+                ]
+            },
+            "bbox": [
+                45,
+                133,
+                309,
+                147
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                803,
+                86,
+                919,
+                168
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "13062120260528028510"
+                    }
+                ]
+            },
+            "bbox": [
+                784,
+                168,
+                937,
+                179
+            ]
+        }
+    ]
+]

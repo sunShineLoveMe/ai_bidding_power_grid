@@ -1,0 +1,377 @@
+{
+    "pdf_info": [
+        {
+            "preproc_blocks": [
+                {
+                    "bbox": [
+                        110,
+                        79,
+                        487,
+                        105
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                108,
+                                79,
+                                487,
+                                106
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        108,
+                                        79,
+                                        487,
+                                        106
+                                    ],
+                                    "type": "text",
+                                    "content": "河北泰昌电力器材科技有限公司花名册",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 1
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        82,
+                        146,
+                        515,
+                        759
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                144,
+                                119,
+                                451,
+                                138
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 1,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        145,
+                                        118,
+                                        451,
+                                        138
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                145,
+                                                118,
+                                                451,
+                                                138
+                                            ],
+                                            "type": "text",
+                                            "content": "填报单位：河北泰昌电力器材科技有限公司",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                82,
+                                146,
+                                515,
+                                759
+                            ],
+                            "type": "table_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        82,
+                                        146,
+                                        515,
+                                        759
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                82,
+                                                146,
+                                                515,
+                                                759
+                                            ],
+                                            "type": "table",
+                                            "html": "<table><tr><td>序号</td><td>姓名</td><td>岗位</td><td>学历</td><td>职称</td><td>购买社保</td><td>签订劳动合同</td><td>入职时间</td><td>备注</td></tr><tr><td>1</td><td>晁坤琳</td><td>董事长、试验员</td><td>本科</td><td></td><td>√</td><td>√</td><td>2010</td><td></td></tr><tr><td>2</td><td>杨贺</td><td>总经理</td><td>本科</td><td></td><td>√</td><td>√</td><td>2010</td><td></td></tr><tr><td>3</td><td>晁猛</td><td>项目经理(厂长)</td><td>大专</td><td></td><td>√</td><td>√</td><td>2010</td><td></td></tr><tr><td>4</td><td>陈仙瑞</td><td>高压试验员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2010</td><td></td></tr><tr><td>5</td><td>王赛</td><td>会计</td><td>大专</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr><tr><td>6</td><td>马园</td><td>资料员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2018</td><td></td></tr><tr><td>7</td><td>赵称心</td><td>技术总监</td><td>大专</td><td></td><td>√</td><td>√</td><td>2011</td><td></td></tr><tr><td>8</td><td>曲艳霞</td><td>后勤经理</td><td>大专</td><td></td><td>√</td><td>√</td><td>2010</td><td></td></tr><tr><td>9</td><td>王强</td><td>技术售后</td><td>大专</td><td></td><td>√</td><td>√</td><td>2011</td><td></td></tr><tr><td>10</td><td>陈国华</td><td>技术售后</td><td>大专</td><td></td><td>√</td><td>√</td><td>2010</td><td></td></tr><tr><td>11</td><td>黄文清</td><td>技术售后</td><td>大专</td><td></td><td>√</td><td>√</td><td>2012</td><td></td></tr><tr><td>12</td><td>林乌金</td><td>技术售后</td><td>大专</td><td></td><td>√</td><td>√</td><td>2011</td><td></td></tr><tr><td>13</td><td>张振中</td><td>车间主任</td><td>大专</td><td></td><td>√</td><td>√</td><td>2012</td><td></td></tr><tr><td>14</td><td>施娟</td><td>车间主任</td><td>大专</td><td></td><td>√</td><td>√</td><td>2012</td><td></td></tr><tr><td>15</td><td>李清香</td><td>车间副主任</td><td>大专</td><td></td><td>√</td><td>√</td><td>2012</td><td></td></tr><tr><td>16</td><td>赵华</td><td>营销外勤</td><td>大专</td><td></td><td>√</td><td>√</td><td>2013</td><td></td></tr><tr><td>17</td><td>刘媛</td><td>销售外勤</td><td>大专</td><td></td><td>√</td><td>√</td><td>2013</td><td></td></tr><tr><td>18</td><td>任晓华</td><td>业务员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2011</td><td></td></tr><tr><td>19</td><td>赵连胜</td><td>业务员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2010</td><td></td></tr><tr><td>20</td><td>李鹏</td><td>业务员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2012</td><td></td></tr><tr><td>21</td><td>晁凡</td><td>出纳</td><td>大专</td><td></td><td>√</td><td>√</td><td>2012</td><td></td></tr><tr><td>22</td><td>周丽琴</td><td>会计</td><td>大专</td><td></td><td>√</td><td>√</td><td>2012</td><td></td></tr><tr><td>23</td><td>黄肖</td><td>库管员</td><td>中专</td><td></td><td>√</td><td>√</td><td>2012</td><td></td></tr><tr><td>24</td><td>谢攀</td><td>库管员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr><tr><td>25</td><td>王恒</td><td>技术员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr><tr><td>26</td><td>袁斌</td><td>技术员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr><tr><td>27</td><td>袁佳泽</td><td>技术员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>28</td><td>李根</td><td>技术员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2014</td><td></td></tr><tr><td>29</td><td>张军</td><td>焊接与切割</td><td>大专</td><td></td><td>√</td><td>√</td><td>2014</td><td></td></tr><tr><td>30</td><td>郭永生</td><td>低压电工</td><td>大专</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>31</td><td>袁恒</td><td>低压电工</td><td>大专</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr></table>",
+                                            "image_path": "32ff05b77d0d4038ed306f55aa6bef84d76c2068dbb186e56c281ebf82208a24.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 2
+                        }
+                    ],
+                    "index": 2
+                }
+            ],
+            "discarded_blocks": [],
+            "page_size": [
+                595,
+                841
+            ],
+            "page_idx": 0,
+            "para_blocks": [
+                {
+                    "bbox": [
+                        110,
+                        79,
+                        487,
+                        105
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                108,
+                                79,
+                                487,
+                                106
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        108,
+                                        79,
+                                        487,
+                                        106
+                                    ],
+                                    "type": "text",
+                                    "content": "河北泰昌电力器材科技有限公司花名册",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 1
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        82,
+                        146,
+                        515,
+                        759
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                144,
+                                119,
+                                451,
+                                138
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 1,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        145,
+                                        118,
+                                        451,
+                                        138
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                145,
+                                                118,
+                                                451,
+                                                138
+                                            ],
+                                            "type": "text",
+                                            "content": "填报单位：河北泰昌电力器材科技有限公司",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                82,
+                                146,
+                                515,
+                                759
+                            ],
+                            "type": "table_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        82,
+                                        146,
+                                        515,
+                                        759
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                82,
+                                                146,
+                                                515,
+                                                759
+                                            ],
+                                            "type": "table",
+                                            "html": "<table><tr><td>序号</td><td>姓名</td><td>岗位</td><td>学历</td><td>职称</td><td>购买社保</td><td>签订劳动合同</td><td>入职时间</td><td>备注</td></tr><tr><td>1</td><td>晁坤琳</td><td>董事长、试验员</td><td>本科</td><td></td><td>√</td><td>√</td><td>2010</td><td></td></tr><tr><td>2</td><td>杨贺</td><td>总经理</td><td>本科</td><td></td><td>√</td><td>√</td><td>2010</td><td></td></tr><tr><td>3</td><td>晁猛</td><td>项目经理(厂长)</td><td>大专</td><td></td><td>√</td><td>√</td><td>2010</td><td></td></tr><tr><td>4</td><td>陈仙瑞</td><td>高压试验员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2010</td><td></td></tr><tr><td>5</td><td>王赛</td><td>会计</td><td>大专</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr><tr><td>6</td><td>马园</td><td>资料员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2018</td><td></td></tr><tr><td>7</td><td>赵称心</td><td>技术总监</td><td>大专</td><td></td><td>√</td><td>√</td><td>2011</td><td></td></tr><tr><td>8</td><td>曲艳霞</td><td>后勤经理</td><td>大专</td><td></td><td>√</td><td>√</td><td>2010</td><td></td></tr><tr><td>9</td><td>王强</td><td>技术售后</td><td>大专</td><td></td><td>√</td><td>√</td><td>2011</td><td></td></tr><tr><td>10</td><td>陈国华</td><td>技术售后</td><td>大专</td><td></td><td>√</td><td>√</td><td>2010</td><td></td></tr><tr><td>11</td><td>黄文清</td><td>技术售后</td><td>大专</td><td></td><td>√</td><td>√</td><td>2012</td><td></td></tr><tr><td>12</td><td>林乌金</td><td>技术售后</td><td>大专</td><td></td><td>√</td><td>√</td><td>2011</td><td></td></tr><tr><td>13</td><td>张振中</td><td>车间主任</td><td>大专</td><td></td><td>√</td><td>√</td><td>2012</td><td></td></tr><tr><td>14</td><td>施娟</td><td>车间主任</td><td>大专</td><td></td><td>√</td><td>√</td><td>2012</td><td></td></tr><tr><td>15</td><td>李清香</td><td>车间副主任</td><td>大专</td><td></td><td>√</td><td>√</td><td>2012</td><td></td></tr><tr><td>16</td><td>赵华</td><td>营销外勤</td><td>大专</td><td></td><td>√</td><td>√</td><td>2013</td><td></td></tr><tr><td>17</td><td>刘媛</td><td>销售外勤</td><td>大专</td><td></td><td>√</td><td>√</td><td>2013</td><td></td></tr><tr><td>18</td><td>任晓华</td><td>业务员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2011</td><td></td></tr><tr><td>19</td><td>赵连胜</td><td>业务员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2010</td><td></td></tr><tr><td>20</td><td>李鹏</td><td>业务员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2012</td><td></td></tr><tr><td>21</td><td>晁凡</td><td>出纳</td><td>大专</td><td></td><td>√</td><td>√</td><td>2012</td><td></td></tr><tr><td>22</td><td>周丽琴</td><td>会计</td><td>大专</td><td></td><td>√</td><td>√</td><td>2012</td><td></td></tr><tr><td>23</td><td>黄肖</td><td>库管员</td><td>中专</td><td></td><td>√</td><td>√</td><td>2012</td><td></td></tr><tr><td>24</td><td>谢攀</td><td>库管员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr><tr><td>25</td><td>王恒</td><td>技术员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr><tr><td>26</td><td>袁斌</td><td>技术员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr><tr><td>27</td><td>袁佳泽</td><td>技术员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>28</td><td>李根</td><td>技术员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2014</td><td></td></tr><tr><td>29</td><td>张军</td><td>焊接与切割</td><td>大专</td><td></td><td>√</td><td>√</td><td>2014</td><td></td></tr><tr><td>30</td><td>郭永生</td><td>低压电工</td><td>大专</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>31</td><td>袁恒</td><td>低压电工</td><td>大专</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>32</td><td>杨福进</td><td>高压电工</td><td>大专</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>33</td><td>赵洪亮</td><td>车间副主任</td><td>大专</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>34</td><td>晁萌</td><td>电焊工</td><td>大专</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>35</td><td>赵伟</td><td>质检员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2014</td><td></td></tr><tr><td>36</td><td>刘合钦</td><td>质检员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2014</td><td></td></tr><tr><td>37</td><td>杨华</td><td>质检员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2014</td><td></td></tr><tr><td>38</td><td>巩超</td><td>质检员(售后)</td><td>大专</td><td></td><td>√</td><td>√</td><td>2014</td><td></td></tr><tr><td>39</td><td>于诗兰</td><td>质检员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2014</td><td></td></tr><tr><td>40</td><td>莫文清</td><td>质检员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2014</td><td></td></tr><tr><td>41</td><td>王景录</td><td>焊接车间组长</td><td>大专</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>42</td><td>王二伟</td><td>高压试验员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>43</td><td>杨秋伟</td><td>高压试验员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>44</td><td>任新会</td><td>焊工</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>45</td><td>赵增林</td><td>焊工</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>46</td><td>李奇</td><td>焊工</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>47</td><td>宁明明</td><td>焊工</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>48</td><td>任伟</td><td>焊工</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>49</td><td>李志新</td><td>车间组长</td><td>初中</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr><tr><td>50</td><td>刘俊虎</td><td>技术工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr><tr><td>51</td><td>贾岩</td><td>检验员</td><td>初中</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr><tr><td>52</td><td>胡洪明</td><td>技术工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>53</td><td>郭红霞</td><td>检验员</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>54</td><td>林宇飞</td><td>技术工人(售后)</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>55</td><td>孙梦娇</td><td>工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>56</td><td>超然</td><td>工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>57</td><td>杨秋环</td><td>工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>58</td><td>李蓓</td><td>工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>59</td><td>姜红莲</td><td>工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr><tr><td>60</td><td>王倩</td><td>检验员</td><td>初中</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr><tr><td>61</td><td>刘曼</td><td>工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr><tr><td>62</td><td>宋玉兰</td><td>工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>63</td><td>王强</td><td>工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>64</td><td>方亚帅</td><td>工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>65</td><td>朱玉明</td><td>工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr></table>",
+                                            "image_path": "32ff05b77d0d4038ed306f55aa6bef84d76c2068dbb186e56c281ebf82208a24.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 2
+                        }
+                    ],
+                    "index": 2
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "type": "table",
+                    "bbox": [
+                        83,
+                        70,
+                        515,
+                        705
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                83,
+                                70,
+                                515,
+                                705
+                            ],
+                            "type": "table_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        83,
+                                        70,
+                                        515,
+                                        705
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                83,
+                                                70,
+                                                515,
+                                                705
+                                            ],
+                                            "type": "table",
+                                            "html": "<table><tr><td>32</td><td>杨福进</td><td>高压电工</td><td>大专</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>33</td><td>赵洪亮</td><td>车间副主任</td><td>大专</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>34</td><td>晁萌</td><td>电焊工</td><td>大专</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>35</td><td>赵伟</td><td>质检员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2014</td><td></td></tr><tr><td>36</td><td>刘合钦</td><td>质检员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2014</td><td></td></tr><tr><td>37</td><td>杨华</td><td>质检员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2014</td><td></td></tr><tr><td>38</td><td>巩超</td><td>质检员(售后)</td><td>大专</td><td></td><td>√</td><td>√</td><td>2014</td><td></td></tr><tr><td>39</td><td>于诗兰</td><td>质检员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2014</td><td></td></tr><tr><td>40</td><td>莫文清</td><td>质检员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2014</td><td></td></tr><tr><td>41</td><td>王景录</td><td>焊接车间组长</td><td>大专</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>42</td><td>王二伟</td><td>高压试验员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>43</td><td>杨秋伟</td><td>高压试验员</td><td>大专</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>44</td><td>任新会</td><td>焊工</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>45</td><td>赵增林</td><td>焊工</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>46</td><td>李奇</td><td>焊工</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>47</td><td>宁明明</td><td>焊工</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>48</td><td>任伟</td><td>焊工</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>49</td><td>李志新</td><td>车间组长</td><td>初中</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr><tr><td>50</td><td>刘俊虎</td><td>技术工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr><tr><td>51</td><td>贾岩</td><td>检验员</td><td>初中</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr><tr><td>52</td><td>胡洪明</td><td>技术工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>53</td><td>郭红霞</td><td>检验员</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>54</td><td>林宇飞</td><td>技术工人(售后)</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>55</td><td>孙梦娇</td><td>工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>56</td><td>超然</td><td>工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>57</td><td>杨秋环</td><td>工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>58</td><td>李蓓</td><td>工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>59</td><td>姜红莲</td><td>工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr><tr><td>60</td><td>王倩</td><td>检验员</td><td>初中</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr><tr><td>61</td><td>刘曼</td><td>工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr><tr><td>62</td><td>宋玉兰</td><td>工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>63</td><td>王强</td><td>工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>64</td><td>方亚帅</td><td>工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2015</td><td></td></tr><tr><td>65</td><td>朱玉明</td><td>工人</td><td>初中</td><td></td><td>√</td><td>√</td><td>2016</td><td></td></tr></table>",
+                                            "image_path": "a10f66fff477cf8b1df4db80ea662e9ddd3df88371e7070c8074b101956119e6.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 0,
+                            "cell_merge": [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ]
+                        }
+                    ],
+                    "index": 0,
+                    "cell_merge": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ]
+                }
+            ],
+            "discarded_blocks": [],
+            "page_size": [
+                595,
+                841
+            ],
+            "page_idx": 1,
+            "para_blocks": [
+                {
+                    "type": "table",
+                    "bbox": [
+                        83,
+                        70,
+                        515,
+                        705
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                83,
+                                70,
+                                515,
+                                705
+                            ],
+                            "type": "table_body",
+                            "angle": 0,
+                            "lines": [],
+                            "index": 0,
+                            "cell_merge": [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            "lines_deleted": true
+                        }
+                    ],
+                    "index": 0,
+                    "cell_merge": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ]
+                }
+            ]
+        }
+    ],
+    "_backend": "hybrid",
+    "_ocr_enable": true,
+    "_vlm_ocr_enable": false,
+    "_version_name": "3.2.1"
+}

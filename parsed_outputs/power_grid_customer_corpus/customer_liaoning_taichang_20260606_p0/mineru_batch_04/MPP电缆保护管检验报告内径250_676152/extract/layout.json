@@ -1,0 +1,4706 @@
+{
+    "pdf_info": [
+        {
+            "preproc_blocks": [
+                {
+                    "type": "image",
+                    "bbox": [
+                        396,
+                        153,
+                        469,
+                        227
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                396,
+                                153,
+                                469,
+                                227
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        396,
+                                        153,
+                                        469,
+                                        227
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                396,
+                                                153,
+                                                469,
+                                                227
+                                            ],
+                                            "type": "image",
+                                            "content": "QR code image containing encoded data, no visible human-readable text",
+                                            "image_path": "f46a44ce8e539c4f35160e9b201f975fb08587d7daca5791bf331bbf6db2b15d.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 9
+                        }
+                    ],
+                    "index": 9,
+                    "sub_type": "text_image"
+                },
+                {
+                    "bbox": [
+                        129,
+                        237,
+                        461,
+                        299
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 10,
+                    "lines": [
+                        {
+                            "bbox": [
+                                114,
+                                222,
+                                473,
+                                315
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        114,
+                                        222,
+                                        473,
+                                        315
+                                    ],
+                                    "type": "text",
+                                    "content": "检验报告",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "bbox": [
+                        215,
+                        344,
+                        374,
+                        359
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 11,
+                    "lines": [
+                        {
+                            "bbox": [
+                                215,
+                                344,
+                                373,
+                                361
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        215,
+                                        344,
+                                        373,
+                                        361
+                                    ],
+                                    "type": "text",
+                                    "content": "No: 2024100312005501712",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        128,
+                        468,
+                        305,
+                        486
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 12,
+                    "lines": [
+                        {
+                            "bbox": [
+                                129,
+                                468,
+                                306,
+                                486
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        129,
+                                        468,
+                                        306,
+                                        486
+                                    ],
+                                    "type": "text",
+                                    "content": "样品名称：MPP电缆保护管",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        128,
+                        530,
+                        418,
+                        549
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 13,
+                    "lines": [
+                        {
+                            "bbox": [
+                                130,
+                                530,
+                                418,
+                                549
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        130,
+                                        530,
+                                        418,
+                                        549
+                                    ],
+                                    "type": "text",
+                                    "content": "委托单位：河北泰昌电力器材科技有限公司",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        128,
+                        592,
+                        268,
+                        609
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 14,
+                    "lines": [
+                        {
+                            "bbox": [
+                                130,
+                                592,
+                                268,
+                                609
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        130,
+                                        592,
+                                        268,
+                                        609
+                                    ],
+                                    "type": "text",
+                                    "content": "检验类别：型式检验",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        172,
+                        657,
+                        417,
+                        681
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 15,
+                    "lines": [
+                        {
+                            "bbox": [
+                                173,
+                                657,
+                                417,
+                                682
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        173,
+                                        657,
+                                        417,
+                                        682
+                                    ],
+                                    "type": "text",
+                                    "content": "辽宁省产品质量监督检验院",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        114,
+                        692,
+                        476,
+                        715
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 16,
+                    "lines": [
+                        {
+                            "bbox": [
+                                114,
+                                692,
+                                476,
+                                717
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        114,
+                                        692,
+                                        476,
+                                        717
+                                    ],
+                                    "type": "text",
+                                    "content": "国家建筑装修材料质量安全检验检测中心",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                }
+            ],
+            "discarded_blocks": [
+                {
+                    "bbox": [
+                        98,
+                        52,
+                        189,
+                        105
+                    ],
+                    "type": "header",
+                    "angle": 0,
+                    "index": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                92,
+                                54,
+                                193,
+                                107
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        92,
+                                        54,
+                                        193,
+                                        107
+                                    ],
+                                    "type": "text",
+                                    "content": "MA",
+                                    "score": 0.994
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "bbox": [
+                        98,
+                        110,
+                        186,
+                        121
+                    ],
+                    "type": "header",
+                    "angle": 0,
+                    "index": 1,
+                    "lines": [
+                        {
+                            "bbox": [
+                                98,
+                                109,
+                                187,
+                                122
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        98,
+                                        109,
+                                        187,
+                                        122
+                                    ],
+                                    "type": "text",
+                                    "content": "220020349229",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "bbox": [
+                        216,
+                        37,
+                        304,
+                        125
+                    ],
+                    "type": "header",
+                    "angle": 0,
+                    "index": 2,
+                    "lines": [
+                        {
+                            "bbox": [
+                                219,
+                                64,
+                                300,
+                                97
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        219,
+                                        64,
+                                        300,
+                                        97
+                                    ],
+                                    "type": "text",
+                                    "content": "ilac-MRA",
+                                    "score": 0.941
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "bbox": [
+                        307,
+                        43,
+                        406,
+                        119
+                    ],
+                    "type": "header",
+                    "angle": 0,
+                    "index": 3,
+                    "lines": [
+                        {
+                            "bbox": [
+                                305,
+                                44,
+                                407,
+                                107
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        305,
+                                        44,
+                                        407,
+                                        107
+                                    ],
+                                    "type": "text",
+                                    "content": "CNAS",
+                                    "score": 0.969
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "bbox": [
+                        413,
+                        45,
+                        459,
+                        59
+                    ],
+                    "type": "header",
+                    "angle": 0,
+                    "index": 4,
+                    "lines": [
+                        {
+                            "bbox": [
+                                412,
+                                43,
+                                461,
+                                61
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        412,
+                                        43,
+                                        461,
+                                        61
+                                    ],
+                                    "type": "text",
+                                    "content": "中国认可",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "bbox": [
+                        413,
+                        60,
+                        459,
+                        73
+                    ],
+                    "type": "header",
+                    "angle": 0,
+                    "index": 5,
+                    "lines": [
+                        {
+                            "bbox": [
+                                412,
+                                58,
+                                461,
+                                75
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        412,
+                                        58,
+                                        461,
+                                        75
+                                    ],
+                                    "type": "text",
+                                    "content": "国际互认",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "bbox": [
+                        413,
+                        74,
+                        437,
+                        87
+                    ],
+                    "type": "header",
+                    "angle": 0,
+                    "index": 6,
+                    "lines": [
+                        {
+                            "bbox": [
+                                412,
+                                71,
+                                439,
+                                88
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        412,
+                                        71,
+                                        439,
+                                        88
+                                    ],
+                                    "type": "text",
+                                    "content": "检测",
+                                    "score": 0.994
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "bbox": [
+                        413,
+                        88,
+                        462,
+                        100
+                    ],
+                    "type": "header",
+                    "angle": 0,
+                    "index": 7,
+                    "lines": [
+                        {
+                            "bbox": [
+                                412,
+                                86,
+                                464,
+                                101
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        412,
+                                        86,
+                                        464,
+                                        101
+                                    ],
+                                    "type": "text",
+                                    "content": "TESTING",
+                                    "score": 0.996
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "bbox": [
+                        413,
+                        102,
+                        478,
+                        114
+                    ],
+                    "type": "header",
+                    "angle": 0,
+                    "index": 8,
+                    "lines": [
+                        {
+                            "bbox": [
+                                411,
+                                100,
+                                480,
+                                116
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        411,
+                                        100,
+                                        480,
+                                        116
+                                    ],
+                                    "type": "text",
+                                    "content": "CNASL0199",
+                                    "score": 0.998
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "bbox": [
+                        571,
+                        216,
+                        594,
+                        431
+                    ],
+                    "type": "aside_text",
+                    "angle": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                571,
+                                216,
+                                594,
+                                431
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        571,
+                                        216,
+                                        594,
+                                        431
+                                    ],
+                                    "type": "text",
+                                    "content": "国家建筑"
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 17
+                }
+            ],
+            "page_size": [
+                595,
+                841
+            ],
+            "page_idx": 0,
+            "para_blocks": [
+                {
+                    "type": "image",
+                    "bbox": [
+                        396,
+                        153,
+                        469,
+                        227
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                396,
+                                153,
+                                469,
+                                227
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        396,
+                                        153,
+                                        469,
+                                        227
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                396,
+                                                153,
+                                                469,
+                                                227
+                                            ],
+                                            "type": "image",
+                                            "content": "QR code image containing encoded data, no visible human-readable text",
+                                            "image_path": "f46a44ce8e539c4f35160e9b201f975fb08587d7daca5791bf331bbf6db2b15d.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 9
+                        }
+                    ],
+                    "index": 9,
+                    "sub_type": "text_image"
+                },
+                {
+                    "bbox": [
+                        129,
+                        237,
+                        461,
+                        299
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 10,
+                    "lines": [
+                        {
+                            "bbox": [
+                                114,
+                                222,
+                                473,
+                                315
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        114,
+                                        222,
+                                        473,
+                                        315
+                                    ],
+                                    "type": "text",
+                                    "content": "检验报告",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "bbox": [
+                        215,
+                        344,
+                        374,
+                        359
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 11,
+                    "lines": [
+                        {
+                            "bbox": [
+                                215,
+                                344,
+                                373,
+                                361
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        215,
+                                        344,
+                                        373,
+                                        361
+                                    ],
+                                    "type": "text",
+                                    "content": "No: 2024100312005501712",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        128,
+                        468,
+                        305,
+                        486
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 12,
+                    "lines": [
+                        {
+                            "bbox": [
+                                129,
+                                468,
+                                306,
+                                486
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        129,
+                                        468,
+                                        306,
+                                        486
+                                    ],
+                                    "type": "text",
+                                    "content": "样品名称：MPP电缆保护管",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        128,
+                        530,
+                        418,
+                        549
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 13,
+                    "lines": [
+                        {
+                            "bbox": [
+                                130,
+                                530,
+                                418,
+                                549
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        130,
+                                        530,
+                                        418,
+                                        549
+                                    ],
+                                    "type": "text",
+                                    "content": "委托单位：河北泰昌电力器材科技有限公司",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        128,
+                        592,
+                        268,
+                        609
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 14,
+                    "lines": [
+                        {
+                            "bbox": [
+                                130,
+                                592,
+                                268,
+                                609
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        130,
+                                        592,
+                                        268,
+                                        609
+                                    ],
+                                    "type": "text",
+                                    "content": "检验类别：型式检验",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        172,
+                        657,
+                        417,
+                        681
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 15,
+                    "lines": [
+                        {
+                            "bbox": [
+                                173,
+                                657,
+                                417,
+                                682
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        173,
+                                        657,
+                                        417,
+                                        682
+                                    ],
+                                    "type": "text",
+                                    "content": "辽宁省产品质量监督检验院",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        114,
+                        692,
+                        476,
+                        715
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 16,
+                    "lines": [
+                        {
+                            "bbox": [
+                                114,
+                                692,
+                                476,
+                                717
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        114,
+                                        692,
+                                        476,
+                                        717
+                                    ],
+                                    "type": "text",
+                                    "content": "国家建筑装修材料质量安全检验检测中心",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "bbox": [
+                        191,
+                        39,
+                        412,
+                        60
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                191,
+                                38,
+                                411,
+                                62
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        191,
+                                        38,
+                                        411,
+                                        62
+                                    ],
+                                    "type": "text",
+                                    "content": "辽宁省产品质量监督检验院",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "bbox": [
+                        139,
+                        67,
+                        465,
+                        88
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 1,
+                    "lines": [
+                        {
+                            "bbox": [
+                                138,
+                                65,
+                                466,
+                                89
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        138,
+                                        65,
+                                        466,
+                                        89
+                                    ],
+                                    "type": "text",
+                                    "content": "国家建筑装修材料质量安全检验检测中心",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        54,
+                        133,
+                        547,
+                        728
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                223,
+                                95,
+                                380,
+                                116
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 2,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        221,
+                                        94,
+                                        381,
+                                        119
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                221,
+                                                94,
+                                                249,
+                                                118
+                                            ],
+                                            "type": "text",
+                                            "content": "检",
+                                            "score": 1.0
+                                        },
+                                        {
+                                            "bbox": [
+                                                265,
+                                                94,
+                                                292,
+                                                118
+                                            ],
+                                            "type": "text",
+                                            "content": "验",
+                                            "score": 1.0
+                                        },
+                                        {
+                                            "bbox": [
+                                                311,
+                                                94,
+                                                337,
+                                                119
+                                            ],
+                                            "type": "text",
+                                            "content": "报",
+                                            "score": 1.0
+                                        },
+                                        {
+                                            "bbox": [
+                                                357,
+                                                94,
+                                                381,
+                                                118
+                                            ],
+                                            "type": "text",
+                                            "content": "告",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                55,
+                                121,
+                                190,
+                                132
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 3,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        56,
+                                        122,
+                                        190,
+                                        133
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                56,
+                                                122,
+                                                190,
+                                                133
+                                            ],
+                                            "type": "text",
+                                            "content": "No:2024100312005501712",
+                                            "score": 0.998
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                478,
+                                121,
+                                545,
+                                133
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 4,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        478,
+                                        120,
+                                        545,
+                                        135
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                478,
+                                                120,
+                                                545,
+                                                135
+                                            ],
+                                            "type": "text",
+                                            "content": "共4页第1页",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                54,
+                                133,
+                                547,
+                                728
+                            ],
+                            "type": "table_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        54,
+                                        133,
+                                        547,
+                                        728
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                54,
+                                                133,
+                                                547,
+                                                728
+                                            ],
+                                            "type": "table",
+                                            "html": "<table><tr><td>委托单位*</td><td colspan=\"3\">河北泰昌电力器材科技有限公司</td></tr><tr><td>检验类别</td><td>型式检验</td><td>样品编号</td><td>240JX501712</td></tr><tr><td>样品名称*</td><td colspan=\"3\">MPP电缆保护管</td></tr><tr><td>生产单位*</td><td colspan=\"3\">河北泰昌电力器材科技有限公司</td></tr><tr><td>规格型号*</td><td>DF 250×22×9000 SN40 MPP</td><td>样品等级*</td><td>合格品</td></tr><tr><td>样品数量</td><td>9米</td><td>批号/生产日期*</td><td>****</td></tr><tr><td>送样人*</td><td>晁坤琳</td><td>样品状态</td><td>样品完好,符合检验要求</td></tr><tr><td>送样日期</td><td>2024/03/20</td><td>检验期间</td><td>2024/03/21~03/22</td></tr><tr><td>检验依据</td><td colspan=\"3\">GB/T 8806-2008; QB/T 2803-2006; GB/T 1033.1-2008; GB/T 9647-2015; GB/T 8804.3-2003; GB/T 14152-2001; YD/T 841.1-2016; GB/T 1633-2000; GB/T 6671-2001; DL/T 802.1-2023</td></tr><tr><td>检验项目</td><td colspan=\"3\">密度等共13项</td></tr><tr><td>检验结论</td><td colspan=\"3\">依据GB/T 8806-2008、QB/T 2803-2006等标准检验,所检项目符合DL/T 802.7-2023标准要求,该样品合格。(检验检测专用章)</td></tr><tr><td>备注</td><td colspan=\"3\">****</td></tr></table>",
+                                            "image_path": "8240a14253e48c00ab9813b1e8417460ff14465ca2b9faa957b2267104e274ea.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 5
+                        }
+                    ],
+                    "index": 5
+                },
+                {
+                    "bbox": [
+                        67,
+                        741,
+                        98,
+                        755
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 6,
+                    "lines": [
+                        {
+                            "bbox": [
+                                66,
+                                740,
+                                101,
+                                757
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        66,
+                                        740,
+                                        101,
+                                        757
+                                    ],
+                                    "type": "text",
+                                    "content": "批准：",
+                                    "score": 0.959
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        264,
+                        741,
+                        293,
+                        755
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 8,
+                    "lines": [
+                        {
+                            "bbox": [
+                                262,
+                                741,
+                                295,
+                                757
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        262,
+                                        741,
+                                        295,
+                                        757
+                                    ],
+                                    "type": "text",
+                                    "content": "审核:",
+                                    "score": 0.916
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        409,
+                        741,
+                        439,
+                        755
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 10,
+                    "lines": [
+                        {
+                            "bbox": [
+                                408,
+                                741,
+                                442,
+                                757
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        408,
+                                        741,
+                                        442,
+                                        757
+                                    ],
+                                    "type": "text",
+                                    "content": "编制：",
+                                    "score": 0.883
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                }
+            ],
+            "discarded_blocks": [
+                {
+                    "bbox": [
+                        102,
+                        744,
+                        155,
+                        768
+                    ],
+                    "type": "footer",
+                    "angle": 0,
+                    "index": 7,
+                    "lines": []
+                },
+                {
+                    "bbox": [
+                        305,
+                        744,
+                        357,
+                        767
+                    ],
+                    "type": "footer",
+                    "angle": 0,
+                    "index": 9,
+                    "lines": [
+                        {
+                            "bbox": [
+                                300,
+                                740,
+                                360,
+                                772
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        300,
+                                        740,
+                                        360,
+                                        772
+                                    ],
+                                    "type": "text",
+                                    "content": "商成景",
+                                    "score": 0.631
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "bbox": [
+                        451,
+                        745,
+                        491,
+                        766
+                    ],
+                    "type": "footer",
+                    "angle": 0,
+                    "index": 11,
+                    "lines": [
+                        {
+                            "bbox": [
+                                448,
+                                740,
+                                496,
+                                772
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        448,
+                                        740,
+                                        496,
+                                        772
+                                    ],
+                                    "type": "text",
+                                    "content": "李根",
+                                    "score": 0.995
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "bbox": [
+                        570,
+                        206,
+                        594,
+                        439
+                    ],
+                    "type": "aside_text",
+                    "angle": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                570,
+                                206,
+                                594,
+                                439
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        570,
+                                        206,
+                                        594,
+                                        439
+                                    ],
+                                    "type": "text",
+                                    "content": "品检验材料检验"
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 12
+                }
+            ],
+            "page_size": [
+                595,
+                841
+            ],
+            "page_idx": 1,
+            "para_blocks": [
+                {
+                    "bbox": [
+                        191,
+                        39,
+                        412,
+                        60
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                191,
+                                38,
+                                411,
+                                62
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        191,
+                                        38,
+                                        411,
+                                        62
+                                    ],
+                                    "type": "text",
+                                    "content": "辽宁省产品质量监督检验院",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "bbox": [
+                        139,
+                        67,
+                        465,
+                        88
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 1,
+                    "lines": [
+                        {
+                            "bbox": [
+                                138,
+                                65,
+                                466,
+                                89
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        138,
+                                        65,
+                                        466,
+                                        89
+                                    ],
+                                    "type": "text",
+                                    "content": "国家建筑装修材料质量安全检验检测中心",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        54,
+                        133,
+                        547,
+                        728
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                223,
+                                95,
+                                380,
+                                116
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 2,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        221,
+                                        94,
+                                        381,
+                                        119
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                221,
+                                                94,
+                                                249,
+                                                118
+                                            ],
+                                            "type": "text",
+                                            "content": "检",
+                                            "score": 1.0
+                                        },
+                                        {
+                                            "bbox": [
+                                                265,
+                                                94,
+                                                292,
+                                                118
+                                            ],
+                                            "type": "text",
+                                            "content": "验",
+                                            "score": 1.0
+                                        },
+                                        {
+                                            "bbox": [
+                                                311,
+                                                94,
+                                                337,
+                                                119
+                                            ],
+                                            "type": "text",
+                                            "content": "报",
+                                            "score": 1.0
+                                        },
+                                        {
+                                            "bbox": [
+                                                357,
+                                                94,
+                                                381,
+                                                118
+                                            ],
+                                            "type": "text",
+                                            "content": "告",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                55,
+                                121,
+                                190,
+                                132
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 3,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        56,
+                                        122,
+                                        190,
+                                        133
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                56,
+                                                122,
+                                                190,
+                                                133
+                                            ],
+                                            "type": "text",
+                                            "content": "No:2024100312005501712",
+                                            "score": 0.998
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                478,
+                                121,
+                                545,
+                                133
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 4,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        478,
+                                        120,
+                                        545,
+                                        135
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                478,
+                                                120,
+                                                545,
+                                                135
+                                            ],
+                                            "type": "text",
+                                            "content": "共4页第1页",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                54,
+                                133,
+                                547,
+                                728
+                            ],
+                            "type": "table_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        54,
+                                        133,
+                                        547,
+                                        728
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                54,
+                                                133,
+                                                547,
+                                                728
+                                            ],
+                                            "type": "table",
+                                            "html": "<table><tr><td>委托单位*</td><td colspan=\"3\">河北泰昌电力器材科技有限公司</td></tr><tr><td>检验类别</td><td>型式检验</td><td>样品编号</td><td>240JX501712</td></tr><tr><td>样品名称*</td><td colspan=\"3\">MPP电缆保护管</td></tr><tr><td>生产单位*</td><td colspan=\"3\">河北泰昌电力器材科技有限公司</td></tr><tr><td>规格型号*</td><td>DF 250×22×9000 SN40 MPP</td><td>样品等级*</td><td>合格品</td></tr><tr><td>样品数量</td><td>9米</td><td>批号/生产日期*</td><td>****</td></tr><tr><td>送样人*</td><td>晁坤琳</td><td>样品状态</td><td>样品完好,符合检验要求</td></tr><tr><td>送样日期</td><td>2024/03/20</td><td>检验期间</td><td>2024/03/21~03/22</td></tr><tr><td>检验依据</td><td colspan=\"3\">GB/T 8806-2008; QB/T 2803-2006; GB/T 1033.1-2008; GB/T 9647-2015; GB/T 8804.3-2003; GB/T 14152-2001; YD/T 841.1-2016; GB/T 1633-2000; GB/T 6671-2001; DL/T 802.1-2023</td></tr><tr><td>检验项目</td><td colspan=\"3\">密度等共13项</td></tr><tr><td>检验结论</td><td colspan=\"3\">依据GB/T 8806-2008、QB/T 2803-2006等标准检验,所检项目符合DL/T 802.7-2023标准要求,该样品合格。(检验检测专用章)</td></tr><tr><td>备注</td><td colspan=\"3\">****</td></tr></table>",
+                                            "image_path": "8240a14253e48c00ab9813b1e8417460ff14465ca2b9faa957b2267104e274ea.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 5
+                        }
+                    ],
+                    "index": 5
+                },
+                {
+                    "bbox": [
+                        67,
+                        741,
+                        98,
+                        755
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 6,
+                    "lines": [
+                        {
+                            "bbox": [
+                                66,
+                                740,
+                                101,
+                                757
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        66,
+                                        740,
+                                        101,
+                                        757
+                                    ],
+                                    "type": "text",
+                                    "content": "批准：",
+                                    "score": 0.959
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        264,
+                        741,
+                        293,
+                        755
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 8,
+                    "lines": [
+                        {
+                            "bbox": [
+                                262,
+                                741,
+                                295,
+                                757
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        262,
+                                        741,
+                                        295,
+                                        757
+                                    ],
+                                    "type": "text",
+                                    "content": "审核:",
+                                    "score": 0.916
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        409,
+                        741,
+                        439,
+                        755
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 10,
+                    "lines": [
+                        {
+                            "bbox": [
+                                408,
+                                741,
+                                442,
+                                757
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        408,
+                                        741,
+                                        442,
+                                        757
+                                    ],
+                                    "type": "text",
+                                    "content": "编制：",
+                                    "score": 0.883
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "bbox": [
+                        192,
+                        39,
+                        412,
+                        60
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                192,
+                                38,
+                                411,
+                                61
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        192,
+                                        38,
+                                        411,
+                                        61
+                                    ],
+                                    "type": "text",
+                                    "content": "辽宁省产品质量监督检验院",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 1
+                },
+                {
+                    "bbox": [
+                        139,
+                        67,
+                        465,
+                        88
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 1,
+                    "lines": [
+                        {
+                            "bbox": [
+                                139,
+                                66,
+                                467,
+                                89
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        139,
+                                        66,
+                                        467,
+                                        89
+                                    ],
+                                    "type": "text",
+                                    "content": "国家建筑装修材料质量安全检验检测中心",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 1
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        54,
+                        133,
+                        548,
+                        756
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                223,
+                                95,
+                                380,
+                                116
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 2,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        221,
+                                        94,
+                                        381,
+                                        119
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                221,
+                                                94,
+                                                249,
+                                                118
+                                            ],
+                                            "type": "text",
+                                            "content": "检",
+                                            "score": 1.0
+                                        },
+                                        {
+                                            "bbox": [
+                                                265,
+                                                94,
+                                                293,
+                                                118
+                                            ],
+                                            "type": "text",
+                                            "content": "验",
+                                            "score": 1.0
+                                        },
+                                        {
+                                            "bbox": [
+                                                311,
+                                                94,
+                                                337,
+                                                119
+                                            ],
+                                            "type": "text",
+                                            "content": "报",
+                                            "score": 1.0
+                                        },
+                                        {
+                                            "bbox": [
+                                                358,
+                                                94,
+                                                381,
+                                                118
+                                            ],
+                                            "type": "text",
+                                            "content": "告",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                55,
+                                121,
+                                190,
+                                132
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 3,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        55,
+                                        122,
+                                        190,
+                                        133
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                55,
+                                                122,
+                                                190,
+                                                133
+                                            ],
+                                            "type": "text",
+                                            "content": "No:2024100312005501712",
+                                            "score": 0.998
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                480,
+                                121,
+                                545,
+                                132
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 4,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        479,
+                                        120,
+                                        546,
+                                        135
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                479,
+                                                120,
+                                                546,
+                                                135
+                                            ],
+                                            "type": "text",
+                                            "content": "共4页第2页",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                54,
+                                133,
+                                548,
+                                756
+                            ],
+                            "type": "table_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        54,
+                                        133,
+                                        548,
+                                        756
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                54,
+                                                133,
+                                                548,
+                                                756
+                                            ],
+                                            "type": "table",
+                                            "html": "<table><tr><td>序号</td><td colspan=\"2\">检验项目</td><td>单位</td><td>标准要求</td><td>检验结果</td><td>单项结论</td></tr><tr><td>1</td><td colspan=\"2\">颜色和外观</td><td>****</td><td>导管颜色应均匀一致;导管内外壁不应有气泡、裂口和明显的痕纹、凹陷、杂质、分解变色线及色泽不均等缺陷;导管内壁应光滑、平整;导管端面应切割平整并与轴线垂直。</td><td>符合要求</td><td>合格</td></tr><tr><td rowspan=\"5\">2</td><td rowspan=\"5\">尺寸</td><td>长度</td><td>mm</td><td><eq>\\geqslant 9000</eq></td><td>9002</td><td>合格</td></tr><tr><td>平均内径</td><td>mm</td><td>250.0~251.5</td><td>250.0~250.2</td><td>合格</td></tr><tr><td>壁厚</td><td>mm</td><td><eq>22_{0}^{+2.0}</eq></td><td>22.0~22.1</td><td>合格</td></tr><tr><td>不圆度</td><td>mm</td><td><eq>\\leqslant 4.2</eq></td><td>0.2~0.4</td><td>合格</td></tr><tr><td>弯曲度</td><td>%</td><td><eq>\\leqslant 0.5</eq></td><td>0.2</td><td>合格</td></tr><tr><td>3</td><td colspan=\"2\">密度</td><td>g/cm3</td><td>0.89~0.93</td><td>0.903</td><td>合格</td></tr><tr><td>4</td><td colspan=\"2\">环刚度</td><td>kN/m2</td><td><eq>\\geqslant 40</eq></td><td>66.40</td><td>合格</td></tr><tr><td>5</td><td colspan=\"2\">压扁试验</td><td>****</td><td>加载负荷至试样两内壁相碰,试样不应出现破裂。</td><td>符合要求</td><td>合格</td></tr><tr><td>6</td><td colspan=\"2\">拉伸强度</td><td>MPa</td><td><eq>\\geqslant 25</eq></td><td>25.4</td><td>合格</td></tr></table>",
+                                            "image_path": "3f9f15c6ee62ddc8cef72770e614f3ffbdee38d1480a0f3212e6aa804fb968b9.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 5
+                        }
+                    ],
+                    "index": 5
+                }
+            ],
+            "discarded_blocks": [
+                {
+                    "bbox": [
+                        570,
+                        205,
+                        594,
+                        443
+                    ],
+                    "type": "aside_text",
+                    "angle": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                570,
+                                205,
+                                594,
+                                443
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        570,
+                                        205,
+                                        594,
+                                        443
+                                    ],
+                                    "type": "text",
+                                    "content": "质量\n★\n检测专\n(2)\n质量\n★\n检测专"
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 6
+                }
+            ],
+            "page_size": [
+                595,
+                841
+            ],
+            "page_idx": 2,
+            "para_blocks": [
+                {
+                    "bbox": [
+                        192,
+                        39,
+                        412,
+                        60
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                192,
+                                38,
+                                411,
+                                61
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        192,
+                                        38,
+                                        411,
+                                        61
+                                    ],
+                                    "type": "text",
+                                    "content": "辽宁省产品质量监督检验院",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 1
+                },
+                {
+                    "bbox": [
+                        139,
+                        67,
+                        465,
+                        88
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 1,
+                    "lines": [
+                        {
+                            "bbox": [
+                                139,
+                                66,
+                                467,
+                                89
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        139,
+                                        66,
+                                        467,
+                                        89
+                                    ],
+                                    "type": "text",
+                                    "content": "国家建筑装修材料质量安全检验检测中心",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 1
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        54,
+                        133,
+                        548,
+                        756
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                223,
+                                95,
+                                380,
+                                116
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 2,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        221,
+                                        94,
+                                        381,
+                                        119
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                221,
+                                                94,
+                                                249,
+                                                118
+                                            ],
+                                            "type": "text",
+                                            "content": "检",
+                                            "score": 1.0
+                                        },
+                                        {
+                                            "bbox": [
+                                                265,
+                                                94,
+                                                293,
+                                                118
+                                            ],
+                                            "type": "text",
+                                            "content": "验",
+                                            "score": 1.0
+                                        },
+                                        {
+                                            "bbox": [
+                                                311,
+                                                94,
+                                                337,
+                                                119
+                                            ],
+                                            "type": "text",
+                                            "content": "报",
+                                            "score": 1.0
+                                        },
+                                        {
+                                            "bbox": [
+                                                358,
+                                                94,
+                                                381,
+                                                118
+                                            ],
+                                            "type": "text",
+                                            "content": "告",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                55,
+                                121,
+                                190,
+                                132
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 3,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        55,
+                                        122,
+                                        190,
+                                        133
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                55,
+                                                122,
+                                                190,
+                                                133
+                                            ],
+                                            "type": "text",
+                                            "content": "No:2024100312005501712",
+                                            "score": 0.998
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                480,
+                                121,
+                                545,
+                                132
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 4,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        479,
+                                        120,
+                                        546,
+                                        135
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                479,
+                                                120,
+                                                546,
+                                                135
+                                            ],
+                                            "type": "text",
+                                            "content": "共4页第2页",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                54,
+                                133,
+                                548,
+                                756
+                            ],
+                            "type": "table_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        54,
+                                        133,
+                                        548,
+                                        756
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                54,
+                                                133,
+                                                548,
+                                                756
+                                            ],
+                                            "type": "table",
+                                            "html": "<table><tr><td>序号</td><td colspan=\"2\">检验项目</td><td>单位</td><td>标准要求</td><td>检验结果</td><td>单项结论</td></tr><tr><td>1</td><td colspan=\"2\">颜色和外观</td><td>****</td><td>导管颜色应均匀一致;导管内外壁不应有气泡、裂口和明显的痕纹、凹陷、杂质、分解变色线及色泽不均等缺陷;导管内壁应光滑、平整;导管端面应切割平整并与轴线垂直。</td><td>符合要求</td><td>合格</td></tr><tr><td rowspan=\"5\">2</td><td rowspan=\"5\">尺寸</td><td>长度</td><td>mm</td><td><eq>\\geqslant 9000</eq></td><td>9002</td><td>合格</td></tr><tr><td>平均内径</td><td>mm</td><td>250.0~251.5</td><td>250.0~250.2</td><td>合格</td></tr><tr><td>壁厚</td><td>mm</td><td><eq>22_{0}^{+2.0}</eq></td><td>22.0~22.1</td><td>合格</td></tr><tr><td>不圆度</td><td>mm</td><td><eq>\\leqslant 4.2</eq></td><td>0.2~0.4</td><td>合格</td></tr><tr><td>弯曲度</td><td>%</td><td><eq>\\leqslant 0.5</eq></td><td>0.2</td><td>合格</td></tr><tr><td>3</td><td colspan=\"2\">密度</td><td>g/cm3</td><td>0.89~0.93</td><td>0.903</td><td>合格</td></tr><tr><td>4</td><td colspan=\"2\">环刚度</td><td>kN/m2</td><td><eq>\\geqslant 40</eq></td><td>66.40</td><td>合格</td></tr><tr><td>5</td><td colspan=\"2\">压扁试验</td><td>****</td><td>加载负荷至试样两内壁相碰,试样不应出现破裂。</td><td>符合要求</td><td>合格</td></tr><tr><td>6</td><td colspan=\"2\">拉伸强度</td><td>MPa</td><td><eq>\\geqslant 25</eq></td><td>25.4</td><td>合格</td></tr></table>",
+                                            "image_path": "3f9f15c6ee62ddc8cef72770e614f3ffbdee38d1480a0f3212e6aa804fb968b9.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 5
+                        }
+                    ],
+                    "index": 5
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "bbox": [
+                        192,
+                        39,
+                        412,
+                        60
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                192,
+                                38,
+                                411,
+                                61
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        192,
+                                        38,
+                                        411,
+                                        61
+                                    ],
+                                    "type": "text",
+                                    "content": "辽宁省产品质量监督检验院",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 1
+                },
+                {
+                    "bbox": [
+                        139,
+                        67,
+                        465,
+                        88
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 1,
+                    "lines": [
+                        {
+                            "bbox": [
+                                139,
+                                66,
+                                467,
+                                89
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        139,
+                                        66,
+                                        467,
+                                        89
+                                    ],
+                                    "type": "text",
+                                    "content": "国家建筑装修材料质量安全检验检测中心",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 1
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        55,
+                        133,
+                        548,
+                        627
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                223,
+                                95,
+                                380,
+                                116
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 2,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        221,
+                                        94,
+                                        381,
+                                        119
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                221,
+                                                94,
+                                                249,
+                                                118
+                                            ],
+                                            "type": "text",
+                                            "content": "检",
+                                            "score": 1.0
+                                        },
+                                        {
+                                            "bbox": [
+                                                265,
+                                                94,
+                                                293,
+                                                118
+                                            ],
+                                            "type": "text",
+                                            "content": "验",
+                                            "score": 1.0
+                                        },
+                                        {
+                                            "bbox": [
+                                                311,
+                                                94,
+                                                337,
+                                                119
+                                            ],
+                                            "type": "text",
+                                            "content": "报",
+                                            "score": 1.0
+                                        },
+                                        {
+                                            "bbox": [
+                                                358,
+                                                94,
+                                                381,
+                                                118
+                                            ],
+                                            "type": "text",
+                                            "content": "告",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                55,
+                                121,
+                                190,
+                                132
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 3,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        56,
+                                        122,
+                                        190,
+                                        133
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                56,
+                                                122,
+                                                190,
+                                                133
+                                            ],
+                                            "type": "text",
+                                            "content": "No:2024100312005501712",
+                                            "score": 0.998
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                479,
+                                121,
+                                545,
+                                132
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 4,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        478,
+                                        120,
+                                        546,
+                                        135
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                478,
+                                                120,
+                                                546,
+                                                135
+                                            ],
+                                            "type": "text",
+                                            "content": "共4页第3页",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                55,
+                                133,
+                                548,
+                                627
+                            ],
+                            "type": "table_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        55,
+                                        133,
+                                        548,
+                                        627
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                55,
+                                                133,
+                                                548,
+                                                627
+                                            ],
+                                            "type": "table",
+                                            "html": "<table><tr><td>序号</td><td>检验项目</td><td>单位</td><td>标准要求</td><td>检验结果</td><td>单项结论</td></tr><tr><td>7</td><td>焊接强度</td><td>MPa</td><td><eq>\\geqslant 22.5</eq></td><td>22.9</td><td>合格</td></tr><tr><td>8</td><td>断裂伸长率</td><td>%</td><td><eq>\\geqslant 150</eq></td><td>176</td><td>合格</td></tr><tr><td>9</td><td>落锤冲击</td><td>****</td><td>落锤质量15.0kg,冲击高度1200mm,取10个试样,每个试样冲击一次,冲击后10个试样中至少有9个不破裂。</td><td>10个试样均未破裂</td><td>合格</td></tr><tr><td>10</td><td>静摩擦系数</td><td>****</td><td><eq>\\leqslant 0.35</eq></td><td>0.30</td><td>合格</td></tr><tr><td>11</td><td>维卡软化温度</td><td>°C</td><td><eq>\\geqslant 150</eq></td><td>152</td><td>合格</td></tr><tr><td>12</td><td>纵向回缩率</td><td>%</td><td><eq>\\leqslant 3</eq></td><td>1.4</td><td>合格</td></tr><tr><td>13</td><td>散热性能</td><td>°C</td><td>常温下放置规定的时间,导管内、外壁温度均<eq>\\leqslant 30^{\\circ}C</eq>。</td><td>内壁:26.2;26.2;25.9内壁平均:26.1外壁:25.3;25.5;25.3外壁平均:25.4</td><td>合格</td></tr></table>",
+                                            "image_path": "9d8c1f37fae0ce6da1dfd18b1ceef4a47d431b9961353b0a9f7cc5f19154131c.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 5
+                        },
+                        {
+                            "bbox": [
+                                168,
+                                629,
+                                436,
+                                642
+                            ],
+                            "type": "table_footnote",
+                            "angle": 0,
+                            "index": 6,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        167,
+                                        629,
+                                        436,
+                                        644
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                167,
+                                                629,
+                                                436,
+                                                644
+                                            ],
+                                            "type": "text",
+                                            "content": "**************** *以 下 空 白* ****************",
+                                            "score": 0.933
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 5
+                }
+            ],
+            "discarded_blocks": [
+                {
+                    "bbox": [
+                        570,
+                        206,
+                        594,
+                        440
+                    ],
+                    "type": "aside_text",
+                    "angle": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                570,
+                                206,
+                                594,
+                                440
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        570,
+                                        206,
+                                        594,
+                                        440
+                                    ],
+                                    "type": "text",
+                                    "content": "监督专用章安全检查专用章"
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 7
+                }
+            ],
+            "page_size": [
+                595,
+                841
+            ],
+            "page_idx": 3,
+            "para_blocks": [
+                {
+                    "bbox": [
+                        192,
+                        39,
+                        412,
+                        60
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                192,
+                                38,
+                                411,
+                                61
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        192,
+                                        38,
+                                        411,
+                                        61
+                                    ],
+                                    "type": "text",
+                                    "content": "辽宁省产品质量监督检验院",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 1
+                },
+                {
+                    "bbox": [
+                        139,
+                        67,
+                        465,
+                        88
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 1,
+                    "lines": [
+                        {
+                            "bbox": [
+                                139,
+                                66,
+                                467,
+                                89
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        139,
+                                        66,
+                                        467,
+                                        89
+                                    ],
+                                    "type": "text",
+                                    "content": "国家建筑装修材料质量安全检验检测中心",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 1
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        55,
+                        133,
+                        548,
+                        627
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                223,
+                                95,
+                                380,
+                                116
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 2,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        221,
+                                        94,
+                                        381,
+                                        119
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                221,
+                                                94,
+                                                249,
+                                                118
+                                            ],
+                                            "type": "text",
+                                            "content": "检",
+                                            "score": 1.0
+                                        },
+                                        {
+                                            "bbox": [
+                                                265,
+                                                94,
+                                                293,
+                                                118
+                                            ],
+                                            "type": "text",
+                                            "content": "验",
+                                            "score": 1.0
+                                        },
+                                        {
+                                            "bbox": [
+                                                311,
+                                                94,
+                                                337,
+                                                119
+                                            ],
+                                            "type": "text",
+                                            "content": "报",
+                                            "score": 1.0
+                                        },
+                                        {
+                                            "bbox": [
+                                                358,
+                                                94,
+                                                381,
+                                                118
+                                            ],
+                                            "type": "text",
+                                            "content": "告",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                55,
+                                121,
+                                190,
+                                132
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 3,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        56,
+                                        122,
+                                        190,
+                                        133
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                56,
+                                                122,
+                                                190,
+                                                133
+                                            ],
+                                            "type": "text",
+                                            "content": "No:2024100312005501712",
+                                            "score": 0.998
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                479,
+                                121,
+                                545,
+                                132
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 4,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        478,
+                                        120,
+                                        546,
+                                        135
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                478,
+                                                120,
+                                                546,
+                                                135
+                                            ],
+                                            "type": "text",
+                                            "content": "共4页第3页",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                55,
+                                133,
+                                548,
+                                627
+                            ],
+                            "type": "table_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        55,
+                                        133,
+                                        548,
+                                        627
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                55,
+                                                133,
+                                                548,
+                                                627
+                                            ],
+                                            "type": "table",
+                                            "html": "<table><tr><td>序号</td><td>检验项目</td><td>单位</td><td>标准要求</td><td>检验结果</td><td>单项结论</td></tr><tr><td>7</td><td>焊接强度</td><td>MPa</td><td><eq>\\geqslant 22.5</eq></td><td>22.9</td><td>合格</td></tr><tr><td>8</td><td>断裂伸长率</td><td>%</td><td><eq>\\geqslant 150</eq></td><td>176</td><td>合格</td></tr><tr><td>9</td><td>落锤冲击</td><td>****</td><td>落锤质量15.0kg,冲击高度1200mm,取10个试样,每个试样冲击一次,冲击后10个试样中至少有9个不破裂。</td><td>10个试样均未破裂</td><td>合格</td></tr><tr><td>10</td><td>静摩擦系数</td><td>****</td><td><eq>\\leqslant 0.35</eq></td><td>0.30</td><td>合格</td></tr><tr><td>11</td><td>维卡软化温度</td><td>°C</td><td><eq>\\geqslant 150</eq></td><td>152</td><td>合格</td></tr><tr><td>12</td><td>纵向回缩率</td><td>%</td><td><eq>\\leqslant 3</eq></td><td>1.4</td><td>合格</td></tr><tr><td>13</td><td>散热性能</td><td>°C</td><td>常温下放置规定的时间,导管内、外壁温度均<eq>\\leqslant 30^{\\circ}C</eq>。</td><td>内壁:26.2;26.2;25.9内壁平均:26.1外壁:25.3;25.5;25.3外壁平均:25.4</td><td>合格</td></tr></table>",
+                                            "image_path": "9d8c1f37fae0ce6da1dfd18b1ceef4a47d431b9961353b0a9f7cc5f19154131c.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 5
+                        },
+                        {
+                            "bbox": [
+                                168,
+                                629,
+                                436,
+                                642
+                            ],
+                            "type": "table_footnote",
+                            "angle": 0,
+                            "index": 6,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        167,
+                                        629,
+                                        436,
+                                        644
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                167,
+                                                629,
+                                                436,
+                                                644
+                                            ],
+                                            "type": "text",
+                                            "content": "**************** *以 下 空 白* ****************",
+                                            "score": 0.933
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 5
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "bbox": [
+                        262,
+                        55,
+                        343,
+                        79
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 2,
+                    "lines": [
+                        {
+                            "bbox": [
+                                260,
+                                52,
+                                344,
+                                81
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        260,
+                                        52,
+                                        290,
+                                        81
+                                    ],
+                                    "type": "text",
+                                    "content": "声",
+                                    "score": 1.0
+                                },
+                                {
+                                    "bbox": [
+                                        317,
+                                        53,
+                                        344,
+                                        81
+                                    ],
+                                    "type": "text",
+                                    "content": "明",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "bbox": [
+                        54,
+                        103,
+                        548,
+                        355
+                    ],
+                    "type": "list",
+                    "angle": 0,
+                    "index": 3,
+                    "blocks": [
+                        {
+                            "bbox": [
+                                55,
+                                103,
+                                371,
+                                119
+                            ],
+                            "type": "text",
+                            "angle": 0,
+                            "index": 4,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        56,
+                                        104,
+                                        373,
+                                        119
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                56,
+                                                104,
+                                                373,
+                                                119
+                                            ],
+                                            "type": "text",
+                                            "content": "1.报告无“检验检测专用章”无效，无骑缝章无效。",
+                                            "score": 0.999
+                                        }
+                                    ]
+                                }
+                            ],
+                            "merge_prev": false
+                        },
+                        {
+                            "bbox": [
+                                54,
+                                128,
+                                337,
+                                145
+                            ],
+                            "type": "text",
+                            "angle": 0,
+                            "index": 5,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        55,
+                                        127,
+                                        339,
+                                        146
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                55,
+                                                127,
+                                                339,
+                                                146
+                                            ],
+                                            "type": "text",
+                                            "content": "2.报告无编制/主检、审核、批准人签字无效。",
+                                            "score": 0.999
+                                        }
+                                    ]
+                                }
+                            ],
+                            "merge_prev": false
+                        },
+                        {
+                            "bbox": [
+                                54,
+                                155,
+                                232,
+                                170
+                            ],
+                            "type": "text",
+                            "angle": 0,
+                            "index": 6,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        55,
+                                        153,
+                                        233,
+                                        172
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                55,
+                                                153,
+                                                233,
+                                                172
+                                            ],
+                                            "type": "text",
+                                            "content": "3.报告一律打印，涂改无效。",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ],
+                            "merge_prev": false
+                        },
+                        {
+                            "bbox": [
+                                54,
+                                180,
+                                547,
+                                224
+                            ],
+                            "type": "text",
+                            "angle": 0,
+                            "index": 7,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        55,
+                                        181,
+                                        549,
+                                        198
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                55,
+                                                181,
+                                                549,
+                                                198
+                                            ],
+                                            "type": "text",
+                                            "content": "4.委托方如对检验结果和报告有异议，应于收到检验报告之日起十五日内向本机",
+                                            "score": 0.999
+                                        }
+                                    ]
+                                },
+                                {
+                                    "bbox": [
+                                        57,
+                                        207,
+                                        289,
+                                        223
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                57,
+                                                207,
+                                                289,
+                                                223
+                                            ],
+                                            "type": "text",
+                                            "content": "构提出书面异议申请，逾期不予受理。",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ],
+                            "merge_prev": false
+                        },
+                        {
+                            "bbox": [
+                                54,
+                                233,
+                                428,
+                                250
+                            ],
+                            "type": "text",
+                            "angle": 0,
+                            "index": 8,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        55,
+                                        234,
+                                        429,
+                                        250
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                55,
+                                                234,
+                                                429,
+                                                250
+                                            ],
+                                            "type": "text",
+                                            "content": "5.委托检验报告仅适用于委托方提供并经本机构检验的样品。",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ],
+                            "merge_prev": false
+                        },
+                        {
+                            "bbox": [
+                                54,
+                                259,
+                                547,
+                                303
+                            ],
+                            "type": "text",
+                            "angle": 0,
+                            "index": 9,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        55,
+                                        260,
+                                        547,
+                                        275
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                55,
+                                                260,
+                                                547,
+                                                275
+                                            ],
+                                            "type": "text",
+                                            "content": "6.本报告仅供委托方了解所委托检验样品的品质之用，检验检测数据、结果仅证",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                },
+                                {
+                                    "bbox": [
+                                        57,
+                                        287,
+                                        288,
+                                        303
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                57,
+                                                287,
+                                                288,
+                                                303
+                                            ],
+                                            "type": "text",
+                                            "content": "明样品所检验检测项目的符合性情况。",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ],
+                            "merge_prev": false
+                        },
+                        {
+                            "bbox": [
+                                54,
+                                312,
+                                399,
+                                329
+                            ],
+                            "type": "text",
+                            "angle": 0,
+                            "index": 10,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        57,
+                                        312,
+                                        401,
+                                        329
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                57,
+                                                312,
+                                                401,
+                                                329
+                                            ],
+                                            "type": "text",
+                                            "content": "7.未经本机构批准，不得复制（全文复制除外）本报告。",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ],
+                            "merge_prev": false
+                        },
+                        {
+                            "bbox": [
+                                54,
+                                338,
+                                456,
+                                355
+                            ],
+                            "type": "text",
+                            "angle": 0,
+                            "index": 11,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        55,
+                                        338,
+                                        456,
+                                        356
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                55,
+                                                338,
+                                                456,
+                                                356
+                                            ],
+                                            "type": "text",
+                                            "content": "8.检验报告中注“*”项内容均由委托方提供，本机构不负责确认。",
+                                            "score": 0.996
+                                        }
+                                    ]
+                                }
+                            ],
+                            "merge_prev": false
+                        }
+                    ],
+                    "sub_type": "text"
+                },
+                {
+                    "bbox": [
+                        54,
+                        362,
+                        546,
+                        433
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 12,
+                    "lines": [
+                        {
+                            "bbox": [
+                                85,
+                                363,
+                                546,
+                                377
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        85,
+                                        363,
+                                        546,
+                                        377
+                                    ],
+                                    "type": "text",
+                                    "content": "国家建筑装修材料质量安全检验检测中心是经授权成立的国家产品质量检验",
+                                    "score": 1.0
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                57,
+                                381,
+                                546,
+                                396
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        57,
+                                        381,
+                                        546,
+                                        396
+                                    ],
+                                    "type": "text",
+                                    "content": "检测中心，在其授权的范围内开展检验检测业务，对外出具检验检测报告或证书",
+                                    "score": 0.999
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                56,
+                                398,
+                                542,
+                                415
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        56,
+                                        398,
+                                        542,
+                                        415
+                                    ],
+                                    "type": "text",
+                                    "content": "的法律责任由其法人单位辽宁省产品质量监督检验院（辽宁省消防技术检测站、",
+                                    "score": 1.0
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                56,
+                                417,
+                                346,
+                                433
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        56,
+                                        417,
+                                        346,
+                                        433
+                                    ],
+                                    "type": "text",
+                                    "content": "辽宁省烟花爆竹产品质量监督检验中心）承担。",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        55,
+                        443,
+                        337,
+                        459
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 13,
+                    "lines": [
+                        {
+                            "bbox": [
+                                56,
+                                443,
+                                337,
+                                460
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        56,
+                                        443,
+                                        337,
+                                        460
+                                    ],
+                                    "type": "text",
+                                    "content": "通信地址：辽宁省沈阳市皇姑区崇山东路61号",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        55,
+                        469,
+                        549,
+                        511
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 14,
+                    "lines": [
+                        {
+                            "bbox": [
+                                57,
+                                470,
+                                549,
+                                485
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        57,
+                                        470,
+                                        549,
+                                        485
+                                    ],
+                                    "type": "text",
+                                    "content": "实验室地址：沈阳市皇姑区崇山东路61号/沈阳市经济技术开发区沈西三东路2甲3",
+                                    "score": 0.998
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                55,
+                                494,
+                                73,
+                                514
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        55,
+                                        494,
+                                        73,
+                                        514
+                                    ],
+                                    "type": "text",
+                                    "content": "号",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        55,
+                        522,
+                        143,
+                        538
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 15,
+                    "lines": [
+                        {
+                            "bbox": [
+                                55,
+                                520,
+                                143,
+                                540
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        55,
+                                        520,
+                                        143,
+                                        540
+                                    ],
+                                    "type": "text",
+                                    "content": "邮编：110032",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        55,
+                        548,
+                        240,
+                        564
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 16,
+                    "lines": [
+                        {
+                            "bbox": [
+                                57,
+                                548,
+                                241,
+                                565
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        57,
+                                        548,
+                                        241,
+                                        565
+                                    ],
+                                    "type": "text",
+                                    "content": "报告查询电话：024-86610662",
+                                    "score": 0.998
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        54,
+                        573,
+                        548,
+                        644
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 17,
+                    "lines": [
+                        {
+                            "bbox": [
+                                57,
+                                572,
+                                549,
+                                591
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        57,
+                                        572,
+                                        549,
+                                        591
+                                    ],
+                                    "type": "text",
+                                    "content": "二维码查询方式：微信扫描后，点击界面右上角的“...”，选择“在浏览器中打",
+                                    "score": 0.984
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                57,
+                                601,
+                                547,
+                                618
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        57,
+                                        601,
+                                        547,
+                                        618
+                                    ],
+                                    "type": "text",
+                                    "content": "开”下载查询到的检验报告；或者直接选择手机浏览器中“扫一扫”功能扫描检",
+                                    "score": 1.0
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                57,
+                                628,
+                                331,
+                                645
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        57,
+                                        628,
+                                        331,
+                                        645
+                                    ],
+                                    "type": "text",
+                                    "content": "验报告二维码，可直接下载查询到检验报告。",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        55,
+                        653,
+                        309,
+                        669
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 18,
+                    "lines": [
+                        {
+                            "bbox": [
+                                57,
+                                653,
+                                310,
+                                670
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        57,
+                                        653,
+                                        310,
+                                        670
+                                    ],
+                                    "type": "text",
+                                    "content": "业务电话：024-86620952；024-86618871",
+                                    "score": 0.992
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        55,
+                        678,
+                        394,
+                        695
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 19,
+                    "lines": [
+                        {
+                            "bbox": [
+                                57,
+                                677,
+                                394,
+                                698
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        57,
+                                        677,
+                                        394,
+                                        698
+                                    ],
+                                    "type": "text",
+                                    "content": "电子邮箱：lnszly_sy@126.com传真：024-86621453",
+                                    "score": 0.997
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        55,
+                        705,
+                        212,
+                        721
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 20,
+                    "lines": [
+                        {
+                            "bbox": [
+                                57,
+                                703,
+                                214,
+                                724
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        57,
+                                        703,
+                                        214,
+                                        724
+                                    ],
+                                    "type": "text",
+                                    "content": "网址：www.liecc.com.cn",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                }
+            ],
+            "discarded_blocks": [
+                {
+                    "bbox": [
+                        54,
+                        37,
+                        189,
+                        49
+                    ],
+                    "type": "header",
+                    "angle": 0,
+                    "index": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                55,
+                                38,
+                                189,
+                                50
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        55,
+                                        38,
+                                        189,
+                                        50
+                                    ],
+                                    "type": "text",
+                                    "content": "No:2024100312005501712",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "bbox": [
+                        480,
+                        37,
+                        547,
+                        49
+                    ],
+                    "type": "header",
+                    "angle": 0,
+                    "index": 1,
+                    "lines": [
+                        {
+                            "bbox": [
+                                480,
+                                35,
+                                549,
+                                52
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        480,
+                                        35,
+                                        549,
+                                        52
+                                    ],
+                                    "type": "text",
+                                    "content": "共4页第4页",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "bbox": [
+                        568,
+                        216,
+                        594,
+                        431
+                    ],
+                    "type": "aside_text",
+                    "angle": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                568,
+                                216,
+                                594,
+                                431
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        568,
+                                        216,
+                                        594,
+                                        431
+                                    ],
+                                    "type": "text",
+                                    "content": "中国银行\n中国银行"
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 21
+                }
+            ],
+            "page_size": [
+                595,
+                841
+            ],
+            "page_idx": 4,
+            "para_blocks": [
+                {
+                    "bbox": [
+                        262,
+                        55,
+                        343,
+                        79
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 2,
+                    "lines": [
+                        {
+                            "bbox": [
+                                260,
+                                52,
+                                344,
+                                81
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        260,
+                                        52,
+                                        290,
+                                        81
+                                    ],
+                                    "type": "text",
+                                    "content": "声",
+                                    "score": 1.0
+                                },
+                                {
+                                    "bbox": [
+                                        317,
+                                        53,
+                                        344,
+                                        81
+                                    ],
+                                    "type": "text",
+                                    "content": "明",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "bbox": [
+                        54,
+                        103,
+                        548,
+                        355
+                    ],
+                    "type": "list",
+                    "angle": 0,
+                    "index": 3,
+                    "blocks": [
+                        {
+                            "bbox": [
+                                55,
+                                103,
+                                371,
+                                119
+                            ],
+                            "type": "text",
+                            "angle": 0,
+                            "index": 4,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        56,
+                                        104,
+                                        373,
+                                        119
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                56,
+                                                104,
+                                                373,
+                                                119
+                                            ],
+                                            "type": "text",
+                                            "content": "1.报告无“检验检测专用章”无效，无骑缝章无效。",
+                                            "score": 0.999
+                                        }
+                                    ]
+                                }
+                            ],
+                            "merge_prev": false
+                        },
+                        {
+                            "bbox": [
+                                54,
+                                128,
+                                337,
+                                145
+                            ],
+                            "type": "text",
+                            "angle": 0,
+                            "index": 5,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        55,
+                                        127,
+                                        339,
+                                        146
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                55,
+                                                127,
+                                                339,
+                                                146
+                                            ],
+                                            "type": "text",
+                                            "content": "2.报告无编制/主检、审核、批准人签字无效。",
+                                            "score": 0.999
+                                        }
+                                    ]
+                                }
+                            ],
+                            "merge_prev": false
+                        },
+                        {
+                            "bbox": [
+                                54,
+                                155,
+                                232,
+                                170
+                            ],
+                            "type": "text",
+                            "angle": 0,
+                            "index": 6,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        55,
+                                        153,
+                                        233,
+                                        172
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                55,
+                                                153,
+                                                233,
+                                                172
+                                            ],
+                                            "type": "text",
+                                            "content": "3.报告一律打印，涂改无效。",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ],
+                            "merge_prev": false
+                        },
+                        {
+                            "bbox": [
+                                54,
+                                180,
+                                547,
+                                224
+                            ],
+                            "type": "text",
+                            "angle": 0,
+                            "index": 7,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        55,
+                                        181,
+                                        549,
+                                        198
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                55,
+                                                181,
+                                                549,
+                                                198
+                                            ],
+                                            "type": "text",
+                                            "content": "4.委托方如对检验结果和报告有异议，应于收到检验报告之日起十五日内向本机",
+                                            "score": 0.999
+                                        }
+                                    ]
+                                },
+                                {
+                                    "bbox": [
+                                        57,
+                                        207,
+                                        289,
+                                        223
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                57,
+                                                207,
+                                                289,
+                                                223
+                                            ],
+                                            "type": "text",
+                                            "content": "构提出书面异议申请，逾期不予受理。",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ],
+                            "merge_prev": false
+                        },
+                        {
+                            "bbox": [
+                                54,
+                                233,
+                                428,
+                                250
+                            ],
+                            "type": "text",
+                            "angle": 0,
+                            "index": 8,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        55,
+                                        234,
+                                        429,
+                                        250
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                55,
+                                                234,
+                                                429,
+                                                250
+                                            ],
+                                            "type": "text",
+                                            "content": "5.委托检验报告仅适用于委托方提供并经本机构检验的样品。",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ],
+                            "merge_prev": false
+                        },
+                        {
+                            "bbox": [
+                                54,
+                                259,
+                                547,
+                                303
+                            ],
+                            "type": "text",
+                            "angle": 0,
+                            "index": 9,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        55,
+                                        260,
+                                        547,
+                                        275
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                55,
+                                                260,
+                                                547,
+                                                275
+                                            ],
+                                            "type": "text",
+                                            "content": "6.本报告仅供委托方了解所委托检验样品的品质之用，检验检测数据、结果仅证",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                },
+                                {
+                                    "bbox": [
+                                        57,
+                                        287,
+                                        288,
+                                        303
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                57,
+                                                287,
+                                                288,
+                                                303
+                                            ],
+                                            "type": "text",
+                                            "content": "明样品所检验检测项目的符合性情况。",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ],
+                            "merge_prev": false
+                        },
+                        {
+                            "bbox": [
+                                54,
+                                312,
+                                399,
+                                329
+                            ],
+                            "type": "text",
+                            "angle": 0,
+                            "index": 10,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        57,
+                                        312,
+                                        401,
+                                        329
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                57,
+                                                312,
+                                                401,
+                                                329
+                                            ],
+                                            "type": "text",
+                                            "content": "7.未经本机构批准，不得复制（全文复制除外）本报告。",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ],
+                            "merge_prev": false
+                        },
+                        {
+                            "bbox": [
+                                54,
+                                338,
+                                456,
+                                355
+                            ],
+                            "type": "text",
+                            "angle": 0,
+                            "index": 11,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        55,
+                                        338,
+                                        456,
+                                        356
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                55,
+                                                338,
+                                                456,
+                                                356
+                                            ],
+                                            "type": "text",
+                                            "content": "8.检验报告中注“*”项内容均由委托方提供，本机构不负责确认。",
+                                            "score": 0.996
+                                        }
+                                    ]
+                                }
+                            ],
+                            "merge_prev": false
+                        }
+                    ],
+                    "sub_type": "text"
+                },
+                {
+                    "bbox": [
+                        54,
+                        362,
+                        546,
+                        433
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 12,
+                    "lines": [
+                        {
+                            "bbox": [
+                                85,
+                                363,
+                                546,
+                                377
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        85,
+                                        363,
+                                        546,
+                                        377
+                                    ],
+                                    "type": "text",
+                                    "content": "国家建筑装修材料质量安全检验检测中心是经授权成立的国家产品质量检验",
+                                    "score": 1.0
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                57,
+                                381,
+                                546,
+                                396
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        57,
+                                        381,
+                                        546,
+                                        396
+                                    ],
+                                    "type": "text",
+                                    "content": "检测中心，在其授权的范围内开展检验检测业务，对外出具检验检测报告或证书",
+                                    "score": 0.999
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                56,
+                                398,
+                                542,
+                                415
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        56,
+                                        398,
+                                        542,
+                                        415
+                                    ],
+                                    "type": "text",
+                                    "content": "的法律责任由其法人单位辽宁省产品质量监督检验院（辽宁省消防技术检测站、",
+                                    "score": 1.0
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                56,
+                                417,
+                                346,
+                                433
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        56,
+                                        417,
+                                        346,
+                                        433
+                                    ],
+                                    "type": "text",
+                                    "content": "辽宁省烟花爆竹产品质量监督检验中心）承担。",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        55,
+                        443,
+                        337,
+                        459
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 13,
+                    "lines": [
+                        {
+                            "bbox": [
+                                56,
+                                443,
+                                337,
+                                460
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        56,
+                                        443,
+                                        337,
+                                        460
+                                    ],
+                                    "type": "text",
+                                    "content": "通信地址：辽宁省沈阳市皇姑区崇山东路61号",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        55,
+                        469,
+                        549,
+                        511
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 14,
+                    "lines": [
+                        {
+                            "bbox": [
+                                57,
+                                470,
+                                549,
+                                485
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        57,
+                                        470,
+                                        549,
+                                        485
+                                    ],
+                                    "type": "text",
+                                    "content": "实验室地址：沈阳市皇姑区崇山东路61号/沈阳市经济技术开发区沈西三东路2甲3",
+                                    "score": 0.998
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                55,
+                                494,
+                                73,
+                                514
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        55,
+                                        494,
+                                        73,
+                                        514
+                                    ],
+                                    "type": "text",
+                                    "content": "号",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        55,
+                        522,
+                        143,
+                        538
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 15,
+                    "lines": [
+                        {
+                            "bbox": [
+                                55,
+                                520,
+                                143,
+                                540
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        55,
+                                        520,
+                                        143,
+                                        540
+                                    ],
+                                    "type": "text",
+                                    "content": "邮编：110032",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        55,
+                        548,
+                        240,
+                        564
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 16,
+                    "lines": [
+                        {
+                            "bbox": [
+                                57,
+                                548,
+                                241,
+                                565
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        57,
+                                        548,
+                                        241,
+                                        565
+                                    ],
+                                    "type": "text",
+                                    "content": "报告查询电话：024-86610662",
+                                    "score": 0.998
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        54,
+                        573,
+                        548,
+                        644
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 17,
+                    "lines": [
+                        {
+                            "bbox": [
+                                57,
+                                572,
+                                549,
+                                591
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        57,
+                                        572,
+                                        549,
+                                        591
+                                    ],
+                                    "type": "text",
+                                    "content": "二维码查询方式：微信扫描后，点击界面右上角的“...”，选择“在浏览器中打",
+                                    "score": 0.984
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                57,
+                                601,
+                                547,
+                                618
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        57,
+                                        601,
+                                        547,
+                                        618
+                                    ],
+                                    "type": "text",
+                                    "content": "开”下载查询到的检验报告；或者直接选择手机浏览器中“扫一扫”功能扫描检",
+                                    "score": 1.0
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                57,
+                                628,
+                                331,
+                                645
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        57,
+                                        628,
+                                        331,
+                                        645
+                                    ],
+                                    "type": "text",
+                                    "content": "验报告二维码，可直接下载查询到检验报告。",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        55,
+                        653,
+                        309,
+                        669
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 18,
+                    "lines": [
+                        {
+                            "bbox": [
+                                57,
+                                653,
+                                310,
+                                670
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        57,
+                                        653,
+                                        310,
+                                        670
+                                    ],
+                                    "type": "text",
+                                    "content": "业务电话：024-86620952；024-86618871",
+                                    "score": 0.992
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        55,
+                        678,
+                        394,
+                        695
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 19,
+                    "lines": [
+                        {
+                            "bbox": [
+                                57,
+                                677,
+                                394,
+                                698
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        57,
+                                        677,
+                                        394,
+                                        698
+                                    ],
+                                    "type": "text",
+                                    "content": "电子邮箱：lnszly_sy@126.com传真：024-86621453",
+                                    "score": 0.997
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        55,
+                        705,
+                        212,
+                        721
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 20,
+                    "lines": [
+                        {
+                            "bbox": [
+                                57,
+                                703,
+                                214,
+                                724
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        57,
+                                        703,
+                                        214,
+                                        724
+                                    ],
+                                    "type": "text",
+                                    "content": "网址：www.liecc.com.cn",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                }
+            ]
+        }
+    ],
+    "_backend": "hybrid",
+    "_ocr_enable": true,
+    "_vlm_ocr_enable": false,
+    "_version_name": "3.2.1"
+}

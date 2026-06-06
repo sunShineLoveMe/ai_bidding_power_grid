@@ -1,0 +1,163 @@
+[
+    {
+        "type": "text",
+        "text": "证N号：T13060219980525061X",
+        "bbox": [
+            304,
+            287,
+            552,
+            300
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "姓名：晁坤琳",
+        "bbox": [
+            305,
+            303,
+            423,
+            317
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "性别：男",
+        "bbox": [
+            561,
+            303,
+            620,
+            316
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "作业类别：电工作业",
+        "bbox": [
+            305,
+            321,
+            440,
+            335
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "准操项目：电气试验作业",
+        "bbox": [
+            305,
+            342,
+            478,
+            356
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "初领日期：20241029",
+        "bbox": [
+            302,
+            380,
+            445,
+            393
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "有效期阳20241029-20301029",
+        "bbox": [
+            305,
+            400,
+            526,
+            413
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "复审日期：20271029",
+        "bbox": [
+            305,
+            419,
+            447,
+            432
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "image",
+        "img_path": "images/eeba51f3cdd5cb91890bb84678d4a1d96d80f0166ac99425f7fdf7a5859c0612.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "河北省农业生产监督管理局\n考核专用章",
+        "sub_type": "text_image",
+        "bbox": [
+            593,
+            329,
+            690,
+            447
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "image",
+        "img_path": "images/79dfeefb4c0c6375523baa7c08ff3a9df5ff8a2cbda33a20846efb21f17238d1.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "",
+        "bbox": [
+            334,
+            538,
+            406,
+            590
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "中华人民共和国",
+        "bbox": [
+            453,
+            542,
+            613,
+            560
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "特种作业操作证",
+        "bbox": [
+            416,
+            565,
+            652,
+            590
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "复审记录",
+        "bbox": [
+            388,
+            630,
+            517,
+            642
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "国家安全生产监督管理总局监制",
+        "bbox": [
+            388,
+            664,
+            603,
+            677
+        ],
+        "page_idx": 0
+    }
+]

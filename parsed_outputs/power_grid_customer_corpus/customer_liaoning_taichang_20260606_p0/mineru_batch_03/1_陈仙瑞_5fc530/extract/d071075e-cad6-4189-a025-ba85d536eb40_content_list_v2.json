@@ -1,0 +1,158 @@
+[
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "证号：T130602197408170641"
+                    }
+                ]
+            },
+            "bbox": [
+                29,
+                96,
+                620,
+                158
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "姓名：陈仙瑞"
+                    }
+                ]
+            },
+            "bbox": [
+                29,
+                193,
+                333,
+                275
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "性别：女"
+                    }
+                ]
+            },
+            "bbox": [
+                518,
+                200,
+                645,
+                275
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "作业类别：电工作业"
+                    }
+                ]
+            },
+            "bbox": [
+                29,
+                310,
+                367,
+                386
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "准操项目：高压电工作业"
+                    }
+                ]
+            },
+            "bbox": [
+                29,
+                427,
+                451,
+                503
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "初领日期：20240523"
+                    }
+                ]
+            },
+            "bbox": [
+                29,
+                641,
+                371,
+                703
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "有效期限：20240523-20300522"
+                    }
+                ]
+            },
+            "bbox": [
+                29,
+                751,
+                565,
+                820
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "复审日期：20270523"
+                    }
+                ]
+            },
+            "bbox": [
+                29,
+                862,
+                371,
+                931
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/ced395f375998874eca5ee57f4753b7a75221cec29d0fb2fa668f4fd94eedcd1.jpg"
+                },
+                "content": "生产\n生产\n生产\n生产\n生产\n考核专用章",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                683,
+                96,
+                953,
+                875
+            ]
+        }
+    ]
+]

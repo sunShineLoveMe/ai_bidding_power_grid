@@ -1,0 +1,45 @@
+[
+    {
+        "type": "text",
+        "text": "河北泰昌电力器材科技有限公司",
+        "text_level": 2,
+        "bbox": [
+            329,
+            130,
+            665,
+            149
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "table",
+        "img_path": "images/774c233e928b6aa5badbb6e4e084c66f6185c20eac9c96d6d296fe1ccc0db215.jpg",
+        "table_caption": [
+            "试验设备台账"
+        ],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>序号</td><td>设备型号</td><td>设备名称</td><td>生产厂家</td></tr><tr><td>1</td><td>WDW-1</td><td>微机控制电子万能试验机</td><td>济南思达测试技术有限公司</td></tr><tr><td>2</td><td>XRW-300HL-3</td><td>热变型、微卡软化点温度测定仪</td><td>石家庄开发区中实检测设备有限公司</td></tr><tr><td>3</td><td>FA1004</td><td>电子天平</td><td>上海衡际科学仪器有限公司</td></tr><tr><td>4</td><td>SR-1</td><td>锤击试验装置</td><td>济南辰达试验机制造有限公司</td></tr><tr><td>5</td><td>XNR-400AM</td><td>溶体流动速率仪</td><td>承德衡通试验检测仪器有限公司</td></tr><tr><td>6</td><td>LD-5</td><td>电子拉力试验机</td><td>济南艾德诺仪器有限公司</td></tr></table>",
+        "bbox": [
+            137,
+            193,
+            858,
+            350
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "image",
+        "img_path": "images/2db8d57086b5182325cd211518c8c87757f7c5ddddaf2bbcda42a03e5d670afb.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "NR-400AM\n溶体\nLB-5\n电子\n河北电力技术有限公司\n1306210005674",
+        "sub_type": "text_image",
+        "bbox": [
+            265,
+            310,
+            445,
+            439
+        ],
+        "page_idx": 0
+    }
+]

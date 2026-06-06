@@ -1,0 +1,424 @@
+{
+  "assets": [
+    {
+      "asset_id": "taichang_testing_capacity_p1_001_b7594832",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/3.电子天平/电子天平.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/电子天平_96dba4/extract/images/7f5d703ef6e00fb7567423491d0b960fca7a5eac023bb61309c537908807e562.jpg",
+      "asset_sha256": "36db4cc147ecee2dd01501ce84a88ef8ada52c8f9396bbe06b7a3f67029fcf06",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        253,
+        263,
+        338,
+        541
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_110819_96dba40c",
+      "batch_id": "cc2849c0-1eb9-457c-aa7a-4afb2d083107",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "此收据不作为经营性业务收支结算凭证用 2015年10月23日字N0241729 今收到电子天平：1台X402410 交来",
+      "ocr_context": "此收据不作为经营性业务收支结算凭证用 2015年10月23日字N0241729 今收到电子天平：1台X402410 交来",
+      "retrieval_text": "泰昌 testing_capacity 第1页图片。此收据不作为经营性业务收支结算凭证用 2015年10月23日字N0241729 今收到电子天平：1台X402410 交来",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:1",
+        "bbox_anchor": [
+          253,
+          263,
+          338,
+          541
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p1_006_9b7dd006",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/3.电子天平/电子天平.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/电子天平_96dba4/extract/images/f0b3e62701a9a233aa5de3bcc8b8cb26cba05f7817d978dd6c122e65e59c6ad8.jpg",
+      "asset_sha256": "f5900a7aeeb26e5c1ca5d1e509e63047d26105c03621e1cabfa977d031ca311a",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        419,
+        413,
+        573,
+        574
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_110819_96dba40c",
+      "batch_id": "cc2849c0-1eb9-457c-aa7a-4afb2d083107",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "今收到电子天平：1台X402410 交来 人民币（大写） ￥410",
+      "ocr_context": "今收到电子天平：1台X402410 交来 人民币（大写） ￥410",
+      "retrieval_text": "泰昌 testing_capacity 第1页图片。今收到电子天平：1台X402410 交来 人民币（大写） ￥410",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:1",
+        "bbox_anchor": [
+          419,
+          413,
+          573,
+          574
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p2_010_dfd6b847",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/3.电子天平/电子天平.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/电子天平_96dba4/extract/images/76c8612ad21bdd4d9eb86d203419a503f147d2e7d7a835424ff8fa7ed9acb7d6.jpg",
+      "asset_sha256": "1e8f120fa67a91aa8a35374f0a9ef01cb77488b99c08bfb25bd46582bbccd51e",
+      "page_idx": 1,
+      "page_no": 2,
+      "bbox": [
+        0,
+        0,
+        998,
+        998
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_110819_96dba40c",
+      "batch_id": "cc2849c0-1eb9-457c-aa7a-4afb2d083107",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "",
+      "ocr_context": "",
+      "retrieval_text": "泰昌 testing_capacity 第2页图片。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:2",
+        "bbox_anchor": [
+          0,
+          0,
+          998,
+          998
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p4_017_067a3553",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/3.电子天平/电子天平.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/电子天平_96dba4/extract/images/9ece0d34c4121b9181fe8fca22a6d6bdbe5fe15607db7a52448ecaf5c110149f.jpg",
+      "asset_sha256": "3f66c03ba34b581565417339f7a22ba9c2edabd367e7e53c027ce18e7d896753",
+      "page_idx": 3,
+      "page_no": 4,
+      "bbox": [
+        657,
+        149,
+        727,
+        204
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_110819_96dba40c",
+      "batch_id": "cc2849c0-1eb9-457c-aa7a-4afb2d083107",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate",
+      "ocr_context": "校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate",
+      "retrieval_text": "泰昌 testing_capacity 第4页图片。校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:4",
+        "bbox_anchor": [
+          657,
+          149,
+          727,
+          204
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p4_018_0ad6fc33",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/3.电子天平/电子天平.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/电子天平_96dba4/extract/images/df04bc6fac9dcff86a0c6d1cbc82df38ff39c3e7b663fff35c30b8a446f29205.jpg",
+      "asset_sha256": "5683d0ab1b127fa44930934f64ebe4d2618f71e6c7884dad515b72b230613756",
+      "page_idx": 3,
+      "page_no": 4,
+      "bbox": [
+        727,
+        154,
+        803,
+        203
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_110819_96dba40c",
+      "batch_id": "cc2849c0-1eb9-457c-aa7a-4afb2d083107",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate 证书编号： GL2605LX02283",
+      "ocr_context": "校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate 证书编号： GL2605LX02283",
+      "retrieval_text": "泰昌 testing_capacity 第4页图片。校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate 证书编号： GL2605LX02283",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:4",
+        "bbox_anchor": [
+          727,
+          154,
+          803,
+          203
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p4_039_3dc19173",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/3.电子天平/电子天平.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/电子天平_96dba4/extract/images/0d2e3a45699201abb242cf4696bfcfeb96de3737a5179857023920d3f618a3e9.jpg",
+      "asset_sha256": "a8a87b5bf075b180249f702b47b2c4e2e43f674ff2a1bb60bd2a455e4ccceb3c",
+      "page_idx": 3,
+      "page_no": 4,
+      "bbox": [
+        186,
+        604,
+        379,
+        744
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_110819_96dba40c",
+      "batch_id": "cc2849c0-1eb9-457c-aa7a-4afb2d083107",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "Equipment No. 制造单位：上海衡际科学仪器有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "ocr_context": "Equipment No. 制造单位：上海衡际科学仪器有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "retrieval_text": "泰昌 testing_capacity 第4页图片。Equipment No. 制造单位：上海衡际科学仪器有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:4",
+        "bbox_anchor": [
+          186,
+          604,
+          379,
+          744
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p4_050_070baa13",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/3.电子天平/电子天平.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/电子天平_96dba4/extract/images/65fe6f5405f73a38e449deaf1f80325b449d4d0abebba5e1334069b9e24f1f59.jpg",
+      "asset_sha256": "4a4bef44056789c7d955d857463b43f82db9b17b6d068c0c42b8377c328ad0e5",
+      "page_idx": 3,
+      "page_no": 4,
+      "bbox": [
+        660,
+        795,
+        742,
+        858
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_110819_96dba40c",
+      "batch_id": "cc2849c0-1eb9-457c-aa7a-4afb2d083107",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "签发日期： Date of issue: 2026年05月26日 电话(Te1):0755-27407284 邮箱(Mail) :szgljl@126.com 地址：深圳市光明区公明街道兴发路170号华澳时光全球美酒星链云仓产",
+      "ocr_context": "签发日期： Date of issue: 2026年05月26日 电话(Te1):0755-27407284 邮箱(Mail) :szgljl@126.com 地址：深圳市光明区公明街道兴发路170号华澳时光全球美酒星链云仓产",
+      "retrieval_text": "泰昌 testing_capacity 第4页图片。签发日期： Date of issue: 2026年05月26日 电话(Te1):0755-27407284 邮箱(Mail) :szgljl@126.com 地址：深圳市光明区公明街道兴发路170号华澳时光全球美酒星链云仓产",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:4",
+        "bbox_anchor": [
+          660,
+          795,
+          742,
+          858
+        ]
+      }
+    }
+  ]
+}

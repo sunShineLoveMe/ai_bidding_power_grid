@@ -1,0 +1,1182 @@
+{
+  "assets": [
+    {
+      "asset_id": "taichang_green_low_carbon_p1_001_963bc1ea",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/ESG环境社会公司治理报告_517d3b/extract/images/7985f4166d9e7a5df8f3b1d27c2f2e0156aa4f3be71fe5b1ce790fdeff75db03.jpg",
+      "asset_sha256": "05503c360b09d05262fda932e987ecc84fac2164fef5e0c011b33b66d154507d",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        0,
+        329,
+        998,
+        615
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_113023_517d3bb3",
+      "batch_id": "fd0c99ef-02ce-46ab-ab07-7edd317be599",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "ESG （环境、社会、公司治理） 报告 九洲寰宇（北京）认证服务有限公司 JIUZHOU HUANYU (BEIJING) CERTIFICATION SERVICECO.,LTD 报告主体：河北泰昌电力器材科技有限公司",
+      "ocr_context": "ESG （环境、社会、公司治理） 报告 九洲寰宇（北京）认证服务有限公司 JIUZHOU HUANYU (BEIJING) CERTIFICATION SERVICECO.,LTD 报告主体：河北泰昌电力器材科技有限公司",
+      "retrieval_text": "泰昌 green_low_carbon 第1页图片。ESG （环境、社会、公司治理） 报告 九洲寰宇（北京）认证服务有限公司 JIUZHOU HUANYU (BEIJING) CERTIFICATION SERVICECO.,LTD 报告主体：河北泰昌电力器材科技有限公司",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:1",
+        "bbox_anchor": [
+          0,
+          329,
+          998,
+          615
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p1_002_bc881f69",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/ESG环境社会公司治理报告_517d3b/extract/images/1a4015e6b333abf8ca6d0c633ef151f8e4e7ffe0f8973ec75b0d50650f44c3d0.jpg",
+      "asset_sha256": "5b008b641b31aaa94fcf93b48e928c4f86aac1c1b4e4940b04c5bf64a15a8bb8",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        191,
+        751,
+        288,
+        816
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_113023_517d3bb3",
+      "batch_id": "fd0c99ef-02ce-46ab-ab07-7edd317be599",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "ESG （环境、社会、公司治理） 报告 九洲寰宇（北京）认证服务有限公司 JIUZHOU HUANYU (BEIJING) CERTIFICATION SERVICECO.,LTD 报告主体：河北泰昌电力器材科技有限公司 报告编号：JZHY-2025-1546",
+      "ocr_context": "ESG （环境、社会、公司治理） 报告 九洲寰宇（北京）认证服务有限公司 JIUZHOU HUANYU (BEIJING) CERTIFICATION SERVICECO.,LTD 报告主体：河北泰昌电力器材科技有限公司 报告编号：JZHY-2025-1546",
+      "retrieval_text": "泰昌 green_low_carbon 第1页图片。ESG （环境、社会、公司治理） 报告 九洲寰宇（北京）认证服务有限公司 JIUZHOU HUANYU (BEIJING) CERTIFICATION SERVICECO.,LTD 报告主体：河北泰昌电力器材科技有限公司 报告编号：JZHY-2025-1546",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:1",
+        "bbox_anchor": [
+          191,
+          751,
+          288,
+          816
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p1_010_fb090ba0",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/ESG环境社会公司治理报告_517d3b/extract/images/07b03cf5ce937222dbb57e6af774aab248c90633f57bb84f4d885e635833edc1.jpg",
+      "asset_sha256": "4a4c4d6007ab61e38501f5b12f8cdc606acec7629eb85514cecb587e80674b21",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        685,
+        760,
+        787,
+        912
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_113023_517d3bb3",
+      "batch_id": "fd0c99ef-02ce-46ab-ab07-7edd317be599",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "报告编号：JZHY-2025-1546 报告年度：2025年 咨询单位：九洲寰宇（北京）认证服务有限公司 查询网址：中国信用招标投标网 企业可持续发展公共服务平台www.ccesg.cn",
+      "ocr_context": "报告编号：JZHY-2025-1546 报告年度：2025年 咨询单位：九洲寰宇（北京）认证服务有限公司 查询网址：中国信用招标投标网 企业可持续发展公共服务平台www.ccesg.cn",
+      "retrieval_text": "泰昌 green_low_carbon 第1页图片。报告编号：JZHY-2025-1546 报告年度：2025年 咨询单位：九洲寰宇（北京）认证服务有限公司 查询网址：中国信用招标投标网 企业可持续发展公共服务平台www.ccesg.cn",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:1",
+        "bbox_anchor": [
+          685,
+          760,
+          787,
+          912
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p1_012_f06a7387",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/ESG环境社会公司治理报告_517d3b/extract/images/a3776ee74f808ba5ba9336fb318d202a238a5452f1eb7eebe3d0907110da7cf6.jpg",
+      "asset_sha256": "092b43950f43093b83470922c2fc3db4b175c5cbe0e59af5d4433299d50ff30c",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        852,
+        766,
+        947,
+        904
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_113023_517d3bb3",
+      "batch_id": "fd0c99ef-02ce-46ab-ab07-7edd317be599",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "咨询单位：九洲寰宇（北京）认证服务有限公司 查询网址：中国信用招标投标网 企业可持续发展公共服务平台www.ccesg.cn",
+      "ocr_context": "咨询单位：九洲寰宇（北京）认证服务有限公司 查询网址：中国信用招标投标网 企业可持续发展公共服务平台www.ccesg.cn",
+      "retrieval_text": "泰昌 green_low_carbon 第1页图片。咨询单位：九洲寰宇（北京）认证服务有限公司 查询网址：中国信用招标投标网 企业可持续发展公共服务平台www.ccesg.cn",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:1",
+        "bbox_anchor": [
+          852,
+          766,
+          947,
+          904
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p2_024_facf104e",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/ESG环境社会公司治理报告_517d3b/extract/images/d85ad095c1292d1060f2758fed73bca5df1868305c8fb555e783c2c1421833d5.jpg",
+      "asset_sha256": "0590298a5d8f5d44a6f45dda481960ee844a038b770a74ba8bfd7524e6612e92",
+      "page_idx": 1,
+      "page_no": 2,
+      "bbox": [
+        147,
+        633,
+        366,
+        782
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_113023_517d3bb3",
+      "batch_id": "fd0c99ef-02ce-46ab-ab07-7edd317be599",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "咨询单位：九洲寰宇（北京）认证服务有限公司 编制日期：2025年10月9日 适用范围：报告范围涵盖企业总部地址及分支机构，与企业年度财务报表及业务合并范围一致。 公示查询：中国信用招标投标网www.creditbidding.org.cn企业可持续发展公共服务平台www.ccesg.cn",
+      "ocr_context": "咨询单位：九洲寰宇（北京）认证服务有限公司 编制日期：2025年10月9日 适用范围：报告范围涵盖企业总部地址及分支机构，与企业年度财务报表及业务合并范围一致。 公示查询：中国信用招标投标网www.creditbidding.org.cn企业可持续发展公共服务平台www.ccesg.cn",
+      "retrieval_text": "泰昌 green_low_carbon 第2页图片。咨询单位：九洲寰宇（北京）认证服务有限公司 编制日期：2025年10月9日 适用范围：报告范围涵盖企业总部地址及分支机构，与企业年度财务报表及业务合并范围一致。 公示查询：中国信用招标投标网www.creditbidding.org.cn企业可持续发展公共服务平台www.ccesg.cn",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:2",
+        "bbox_anchor": [
+          147,
+          633,
+          366,
+          782
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p2_025_b19c8e3f",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/ESG环境社会公司治理报告_517d3b/extract/images/019a74683d2f5e2a444b1af271bd9cef3341d7241951ea289dffbd7d4566bd3d.jpg",
+      "asset_sha256": "9c0658ad97d886678c5fec67e3aabf9a46f8fc4359ca6d02412d374f18e33e55",
+      "page_idx": 1,
+      "page_no": 2,
+      "bbox": [
+        529,
+        633,
+        845,
+        782
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_113023_517d3bb3",
+      "batch_id": "fd0c99ef-02ce-46ab-ab07-7edd317be599",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "编制日期：2025年10月9日 适用范围：报告范围涵盖企业总部地址及分支机构，与企业年度财务报表及业务合并范围一致。 公示查询：中国信用招标投标网www.creditbidding.org.cn企业可持续发展公共服务平台www.ccesg.cn",
+      "ocr_context": "编制日期：2025年10月9日 适用范围：报告范围涵盖企业总部地址及分支机构，与企业年度财务报表及业务合并范围一致。 公示查询：中国信用招标投标网www.creditbidding.org.cn企业可持续发展公共服务平台www.ccesg.cn",
+      "retrieval_text": "泰昌 green_low_carbon 第2页图片。编制日期：2025年10月9日 适用范围：报告范围涵盖企业总部地址及分支机构，与企业年度财务报表及业务合并范围一致。 公示查询：中国信用招标投标网www.creditbidding.org.cn企业可持续发展公共服务平台www.ccesg.cn",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:2",
+        "bbox_anchor": [
+          529,
+          633,
+          845,
+          782
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p7_066_60f56b64",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/ESG环境社会公司治理报告_517d3b/extract/images/b9a65070cba935096e5b5632100f7777c0a31c0838cb7b960afb18bc973e85c2.jpg",
+      "asset_sha256": "66fb03abf0864c35c8c99ea28029a9217ea6c0f75ef9ae255f6330bde02dd890",
+      "page_idx": 6,
+      "page_no": 7,
+      "bbox": [
+        457,
+        470,
+        547,
+        543
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_113023_517d3bb3",
+      "batch_id": "fd0c99ef-02ce-46ab-ab07-7edd317be599",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "公司注册资本达到1亿元，展现了雄厚的资金实力和长期发展的决心。占地面积约6800平方米的生产基地，配备了现代化的生产设施和检测设备。其中办公面积约1200平方米，为管理和技术研发提供了充足的空间保障。这种规模布局体现了公司在生产制造和管理创新方面的均衡发展理念。 发展历程中，公司始终坚持技术创新和质量提升并重的发展战略。通过持续的技术改造和设备更新，公司建立了包括全自动注塑成型机、压接机、捏合机等在内的先进生产线。同时配备工频试验装置、冲击试验成套检测设备等专业检测设施，确保产品质量的稳定可靠。 统一社会信用代码91130607056539515C 营业执照 二码企北信用信息公示系了解多备、许可，药",
+      "ocr_context": "公司注册资本达到1亿元，展现了雄厚的资金实力和长期发展的决心。占地面积约6800平方米的生产基地，配备了现代化的生产设施和检测设备。其中办公面积约1200平方米，为管理和技术研发提供了充足的空间保障。这种规模布局体现了公司在生产制造和管理创新方面的均衡发展理念。 发展历程中，公司始终坚持技术创新和质量提升并重的发展战略。通过持续的技术改造和设备更新，公司建立了包括全自动注塑成型机、压接机、捏合机等在内的先进生产线。同时配备工频试验装置、冲击试验成套检测设备等专业检测设施，确保产品质量的稳定可靠。 统一社会信用代码91130607056539515C 营业执照 二码企北信用信息公示系了解多备、许可，药",
+      "retrieval_text": "泰昌 green_low_carbon 第7页图片。公司注册资本达到1亿元，展现了雄厚的资金实力和长期发展的决心。占地面积约6800平方米的生产基地，配备了现代化的生产设施和检测设备。其中办公面积约1200平方米，为管理和技术研发提供了充足的空间保障。这种规模布局体现了公司在生产制造和管理创新方面的均衡发展理念。 发展历程中，公司始终坚持技术创新和质量提升并重的发展战略。通过持续的技术改造和设备更新，公司建立了包括全自动注塑成型机、压接机、捏合机等在内的先进生产线。同时配备工频试验装置、冲击试验成套检测设备等专业检测设施，确保产品质量的稳定可靠。 统一社会信用代码91130607056539515C 营业执照 二码企北信用信息公示系了解多备、许可，药",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:7",
+        "bbox_anchor": [
+          457,
+          470,
+          547,
+          543
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p7_069_c34651a7",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/ESG环境社会公司治理报告_517d3b/extract/images/382d1aef5accc7e4a8025f480b7c9e3cdb4db66d20c17f9606d9b014ea38e3a5.jpg",
+      "asset_sha256": "7406734190039b1e7bc15abaf78540604c070479bef2127a3c73bafdca1185d7",
+      "page_idx": 6,
+      "page_no": 7,
+      "bbox": [
+        705,
+        558,
+        751,
+        592
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_113023_517d3bb3",
+      "batch_id": "fd0c99ef-02ce-46ab-ab07-7edd317be599",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "发展历程中，公司始终坚持技术创新和质量提升并重的发展战略。通过持续的技术改造和设备更新，公司建立了包括全自动注塑成型机、压接机、捏合机等在内的先进生产线。同时配备工频试验装置、冲击试验成套检测设备等专业检测设施，确保产品质量的稳定可靠。 统一社会信用代码91130607056539515C 营业执照 二码企北信用信息公示系了解多备、许可，药 名类 称河北泰品电力器材科技有限公司型有限责任公司（自然人投资或控股） 法定代表人晁坤琳经营范围水泥制品 水泥制品、电线、电缆，低压电表计量箱、电力金具、铁附件、配电箱、低压无功补偿配电柜、开关柜、避雷器、隔离开关、熔断器，绝缘子、安全工器具、标识牌、拉闸杆、拉线保护套管、电缆保护管研发、制造、加工：高低压开关、安全工具、通信设备、变压器及配件、仪器、仪表、互感器、柱上断路器、电缆分支箱、电缆接头、工具瓷件，电力线材，铁塔、交通安全设施，箱式开闭所。环网柜、紧锁连接头。智能电能质量矫正装置批发、零售。（依法须经批准的项目，经相关部门批准后方可开展经营话动）",
+      "ocr_context": "发展历程中，公司始终坚持技术创新和质量提升并重的发展战略。通过持续的技术改造和设备更新，公司建立了包括全自动注塑成型机、压接机、捏合机等在内的先进生产线。同时配备工频试验装置、冲击试验成套检测设备等专业检测设施，确保产品质量的稳定可靠。 统一社会信用代码91130607056539515C 营业执照 二码企北信用信息公示系了解多备、许可，药 名类 称河北泰品电力器材科技有限公司型有限责任公司（自然人投资或控股） 法定代表人晁坤琳经营范围水泥制品 水泥制品、电线、电缆，低压电表计量箱、电力金具、铁附件、配电箱、低压无功补偿配电柜、开关柜、避雷器、隔离开关、熔断器，绝缘子、安全工器具、标识牌、拉闸杆、拉线保护套管、电缆保护管研发、制造、加工：高低压开关、安全工具、通信设备、变压器及配件、仪器、仪表、互感器、柱上断路器、电缆分支箱、电缆接头、工具瓷件，电力线材，铁塔、交通安全设施，箱式开闭所。环网柜、紧锁连接头。智能电能质量矫正装置批发、零售。（依法须经批准的项目，经相关部门批准后方可开展经营话动）",
+      "retrieval_text": "泰昌 green_low_carbon 第7页图片。发展历程中，公司始终坚持技术创新和质量提升并重的发展战略。通过持续的技术改造和设备更新，公司建立了包括全自动注塑成型机、压接机、捏合机等在内的先进生产线。同时配备工频试验装置、冲击试验成套检测设备等专业检测设施，确保产品质量的稳定可靠。 统一社会信用代码91130607056539515C 营业执照 二码企北信用信息公示系了解多备、许可，药 名类 称河北泰品电力器材科技有限公司型有限责任公司（自然人投资或控股） 法定代表人晁坤琳经营范围水泥制品 水泥制品、电线、电缆，低压电表计量箱、电力金具、铁附件、配电箱、低压无功补偿配电柜、开关柜、避雷器、隔离开关、熔断器，绝缘子、安全工器具、标识牌、拉闸杆、拉线保护套管、电缆保护管研发、制造、加工：高低压开关、安全工具、通信设备、变压器及配件、仪器、仪表、互感器、柱上断路器、电缆分支箱、电缆接头、工具瓷件，电力线材，铁塔、交通安全设施，箱式开闭所。环网柜、紧锁连接头。智能电能质量矫正装置批发、零售。（依法须经批准的项目，经相关部门批准后方可开展经营话动）",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:7",
+        "bbox_anchor": [
+          705,
+          558,
+          751,
+          592
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p7_078_d0c1c605",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/ESG环境社会公司治理报告_517d3b/extract/images/0eed039042d06442312fa3d9524a260f904cfadec0a9b3f798a2d30b95a423fc.jpg",
+      "asset_sha256": "293b982755c24d4ba19d26b06c7f54c3a8280787d222c7f2bd26807e9403a702",
+      "page_idx": 6,
+      "page_no": 7,
+      "bbox": [
+        700,
+        715,
+        776,
+        769
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_113023_517d3bb3",
+      "batch_id": "fd0c99ef-02ce-46ab-ab07-7edd317be599",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "注册资本壹亿元整 成立日期2012年11月14日 营业期限2012年11月14日至2032年11月13日住 所保定市满城区陉阳驿村 登记机关202 国家企业信用信息公示系统网址： 国家市场监督管理总局监制 公司营业执照",
+      "ocr_context": "注册资本壹亿元整 成立日期2012年11月14日 营业期限2012年11月14日至2032年11月13日住 所保定市满城区陉阳驿村 登记机关202 国家企业信用信息公示系统网址： 国家市场监督管理总局监制 公司营业执照",
+      "retrieval_text": "泰昌 green_low_carbon 第7页图片。注册资本壹亿元整 成立日期2012年11月14日 营业期限2012年11月14日至2032年11月13日住 所保定市满城区陉阳驿村 登记机关202 国家企业信用信息公示系统网址： 国家市场监督管理总局监制 公司营业执照",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:7",
+        "bbox_anchor": [
+          700,
+          715,
+          776,
+          769
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p9_095_ffb06a73",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/ESG环境社会公司治理报告_517d3b/extract/images/d9e3797edfe04260906403303716fc63fe7168f090bb75c22b393ea035b979df.jpg",
+      "asset_sha256": "f6cf87c95cb3b1ff240016bffd0b4e24dbbe743b9cc60992bff9c53615e42080",
+      "page_idx": 8,
+      "page_no": 9,
+      "bbox": [
+        233,
+        229,
+        821,
+        686
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_113023_517d3bb3",
+      "batch_id": "fd0c99ef-02ce-46ab-ab07-7edd317be599",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "这种架构设计确保了产品质量控制和生产效率提升的有机结合。 组织架构的设计充分考虑了电力器材制造业的特点，既保证了生产运营的高效性，又强化了质量管理的严密性。通过明确的职责划分和汇报关系，公司能够快速响应市场需求，同时确保产品质量的稳定性。 4.公司资质和荣誉情况 河北泰昌电力器材科技有限公司在管理体系认证方面取得了显著成就。公司先后获得了质量管理体系认证证书、环境管理体系认证证书、职业健康安全管理体系认证证书，实现了三大管理体系的全覆盖。这些认证不仅证明了公司管理的规范性，更体现了公司在可持续发展方面的系统性努力。此外，公司还取得了强制性认证产品符合性自我声明，进一步保障了产品的安全性和合规性。",
+      "ocr_context": "这种架构设计确保了产品质量控制和生产效率提升的有机结合。 组织架构的设计充分考虑了电力器材制造业的特点，既保证了生产运营的高效性，又强化了质量管理的严密性。通过明确的职责划分和汇报关系，公司能够快速响应市场需求，同时确保产品质量的稳定性。 4.公司资质和荣誉情况 河北泰昌电力器材科技有限公司在管理体系认证方面取得了显著成就。公司先后获得了质量管理体系认证证书、环境管理体系认证证书、职业健康安全管理体系认证证书，实现了三大管理体系的全覆盖。这些认证不仅证明了公司管理的规范性，更体现了公司在可持续发展方面的系统性努力。此外，公司还取得了强制性认证产品符合性自我声明，进一步保障了产品的安全性和合规性。",
+      "retrieval_text": "泰昌 green_low_carbon 第9页图片。这种架构设计确保了产品质量控制和生产效率提升的有机结合。 组织架构的设计充分考虑了电力器材制造业的特点，既保证了生产运营的高效性，又强化了质量管理的严密性。通过明确的职责划分和汇报关系，公司能够快速响应市场需求，同时确保产品质量的稳定性。 4.公司资质和荣誉情况 河北泰昌电力器材科技有限公司在管理体系认证方面取得了显著成就。公司先后获得了质量管理体系认证证书、环境管理体系认证证书、职业健康安全管理体系认证证书，实现了三大管理体系的全覆盖。这些认证不仅证明了公司管理的规范性，更体现了公司在可持续发展方面的系统性努力。此外，公司还取得了强制性认证产品符合性自我声明，进一步保障了产品的安全性和合规性。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:9",
+        "bbox_anchor": [
+          233,
+          229,
+          821,
+          686
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p10_102_ecafab21",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/ESG环境社会公司治理报告_517d3b/extract/images/7f4353183b358359a4674a5e663f497142a076a3a4f6578161aef6a4911acb27.jpg",
+      "asset_sha256": "a89b7ea2d2c2859ebde300df0cff31ba0934e2178c789ff18f356ac978d0373a",
+      "page_idx": 9,
+      "page_no": 10,
+      "bbox": [
+        352,
+        260,
+        672,
+        583
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_113023_517d3bb3",
+      "batch_id": "fd0c99ef-02ce-46ab-ab07-7edd317be599",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "在技术创新方面，公司获得了\"一种电缆敷设电缆保护管\"的发明专利证书，展现了在产品研发领域的创新能力。同时，\"电缆保护管材质检测管理平台V1.0\"软件著作权的取得，标志着公司在数字化管理方面迈出了重要步伐。这些知识产权成果不仅提升了公司的技术竞争力，也为行业发展贡献了创新方案。 社会荣誉方面，公司连续多年获得\"尊师重教先进单位\"称号，并被评为\"捐资助教先进单位\"，充分体现了企业的社会责任担当。\"河北省守合同重信用企业\"的荣誉则证明了公司在商业信誉方面的良好表现。这些荣誉的取得，反映了公司在追求经济效益的同时，积极履行社会责任，实现了企业价值与社会价值的统一。",
+      "ocr_context": "在技术创新方面，公司获得了\"一种电缆敷设电缆保护管\"的发明专利证书，展现了在产品研发领域的创新能力。同时，\"电缆保护管材质检测管理平台V1.0\"软件著作权的取得，标志着公司在数字化管理方面迈出了重要步伐。这些知识产权成果不仅提升了公司的技术竞争力，也为行业发展贡献了创新方案。 社会荣誉方面，公司连续多年获得\"尊师重教先进单位\"称号，并被评为\"捐资助教先进单位\"，充分体现了企业的社会责任担当。\"河北省守合同重信用企业\"的荣誉则证明了公司在商业信誉方面的良好表现。这些荣誉的取得，反映了公司在追求经济效益的同时，积极履行社会责任，实现了企业价值与社会价值的统一。",
+      "retrieval_text": "泰昌 green_low_carbon 第10页图片。在技术创新方面，公司获得了\"一种电缆敷设电缆保护管\"的发明专利证书，展现了在产品研发领域的创新能力。同时，\"电缆保护管材质检测管理平台V1.0\"软件著作权的取得，标志着公司在数字化管理方面迈出了重要步伐。这些知识产权成果不仅提升了公司的技术竞争力，也为行业发展贡献了创新方案。 社会荣誉方面，公司连续多年获得\"尊师重教先进单位\"称号，并被评为\"捐资助教先进单位\"，充分体现了企业的社会责任担当。\"河北省守合同重信用企业\"的荣誉则证明了公司在商业信誉方面的良好表现。这些荣誉的取得，反映了公司在追求经济效益的同时，积极履行社会责任，实现了企业价值与社会价值的统一。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:10",
+        "bbox_anchor": [
+          352,
+          260,
+          672,
+          583
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p10_104_599a7299",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/ESG环境社会公司治理报告_517d3b/extract/images/52c466d60ca95b3c3cd6cc34a52332b1e6a027c4206a5f7fcf3743f83c029a98.jpg",
+      "asset_sha256": "13c404325854e3a38f6c46d817a9c784bf41c7bec0e1481055f3c8e6d9e419a5",
+      "page_idx": 9,
+      "page_no": 10,
+      "bbox": [
+        159,
+        749,
+        495,
+        908
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_113023_517d3bb3",
+      "batch_id": "fd0c99ef-02ce-46ab-ab07-7edd317be599",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "在技术创新方面，公司获得了\"一种电缆敷设电缆保护管\"的发明专利证书，展现了在产品研发领域的创新能力。同时，\"电缆保护管材质检测管理平台V1.0\"软件著作权的取得，标志着公司在数字化管理方面迈出了重要步伐。这些知识产权成果不仅提升了公司的技术竞争力，也为行业发展贡献了创新方案。 社会荣誉方面，公司连续多年获得\"尊师重教先进单位\"称号，并被评为\"捐资助教先进单位\"，充分体现了企业的社会责任担当。\"河北省守合同重信用企业\"的荣誉则证明了公司在商业信誉方面的良好表现。这些荣誉的取得，反映了公司在追求经济效益的同时，积极履行社会责任，实现了企业价值与社会价值的统一。",
+      "ocr_context": "在技术创新方面，公司获得了\"一种电缆敷设电缆保护管\"的发明专利证书，展现了在产品研发领域的创新能力。同时，\"电缆保护管材质检测管理平台V1.0\"软件著作权的取得，标志着公司在数字化管理方面迈出了重要步伐。这些知识产权成果不仅提升了公司的技术竞争力，也为行业发展贡献了创新方案。 社会荣誉方面，公司连续多年获得\"尊师重教先进单位\"称号，并被评为\"捐资助教先进单位\"，充分体现了企业的社会责任担当。\"河北省守合同重信用企业\"的荣誉则证明了公司在商业信誉方面的良好表现。这些荣誉的取得，反映了公司在追求经济效益的同时，积极履行社会责任，实现了企业价值与社会价值的统一。",
+      "retrieval_text": "泰昌 green_low_carbon 第10页图片。在技术创新方面，公司获得了\"一种电缆敷设电缆保护管\"的发明专利证书，展现了在产品研发领域的创新能力。同时，\"电缆保护管材质检测管理平台V1.0\"软件著作权的取得，标志着公司在数字化管理方面迈出了重要步伐。这些知识产权成果不仅提升了公司的技术竞争力，也为行业发展贡献了创新方案。 社会荣誉方面，公司连续多年获得\"尊师重教先进单位\"称号，并被评为\"捐资助教先进单位\"，充分体现了企业的社会责任担当。\"河北省守合同重信用企业\"的荣誉则证明了公司在商业信誉方面的良好表现。这些荣誉的取得，反映了公司在追求经济效益的同时，积极履行社会责任，实现了企业价值与社会价值的统一。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:10",
+        "bbox_anchor": [
+          159,
+          749,
+          495,
+          908
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p10_105_6c0bed7f",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/ESG环境社会公司治理报告_517d3b/extract/images/f623804dfb065967813fee60305fe4587e0adaa10578d1ef829e63eea3005643.jpg",
+      "asset_sha256": "8087732b997fa6bddadad7ca9278edd94ff6f3d520bbe94504bc9509e49ebb80",
+      "page_idx": 9,
+      "page_no": 10,
+      "bbox": [
+        512,
+        743,
+        840,
+        903
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_113023_517d3bb3",
+      "batch_id": "fd0c99ef-02ce-46ab-ab07-7edd317be599",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "在技术创新方面，公司获得了\"一种电缆敷设电缆保护管\"的发明专利证书，展现了在产品研发领域的创新能力。同时，\"电缆保护管材质检测管理平台V1.0\"软件著作权的取得，标志着公司在数字化管理方面迈出了重要步伐。这些知识产权成果不仅提升了公司的技术竞争力，也为行业发展贡献了创新方案。 社会荣誉方面，公司连续多年获得\"尊师重教先进单位\"称号，并被评为\"捐资助教先进单位\"，充分体现了企业的社会责任担当。\"河北省守合同重信用企业\"的荣誉则证明了公司在商业信誉方面的良好表现。这些荣誉的取得，反映了公司在追求经济效益的同时，积极履行社会责任，实现了企业价值与社会价值的统一。",
+      "ocr_context": "在技术创新方面，公司获得了\"一种电缆敷设电缆保护管\"的发明专利证书，展现了在产品研发领域的创新能力。同时，\"电缆保护管材质检测管理平台V1.0\"软件著作权的取得，标志着公司在数字化管理方面迈出了重要步伐。这些知识产权成果不仅提升了公司的技术竞争力，也为行业发展贡献了创新方案。 社会荣誉方面，公司连续多年获得\"尊师重教先进单位\"称号，并被评为\"捐资助教先进单位\"，充分体现了企业的社会责任担当。\"河北省守合同重信用企业\"的荣誉则证明了公司在商业信誉方面的良好表现。这些荣誉的取得，反映了公司在追求经济效益的同时，积极履行社会责任，实现了企业价值与社会价值的统一。",
+      "retrieval_text": "泰昌 green_low_carbon 第10页图片。在技术创新方面，公司获得了\"一种电缆敷设电缆保护管\"的发明专利证书，展现了在产品研发领域的创新能力。同时，\"电缆保护管材质检测管理平台V1.0\"软件著作权的取得，标志着公司在数字化管理方面迈出了重要步伐。这些知识产权成果不仅提升了公司的技术竞争力，也为行业发展贡献了创新方案。 社会荣誉方面，公司连续多年获得\"尊师重教先进单位\"称号，并被评为\"捐资助教先进单位\"，充分体现了企业的社会责任担当。\"河北省守合同重信用企业\"的荣誉则证明了公司在商业信誉方面的良好表现。这些荣誉的取得，反映了公司在追求经济效益的同时，积极履行社会责任，实现了企业价值与社会价值的统一。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:10",
+        "bbox_anchor": [
+          512,
+          743,
+          840,
+          903
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p11_111_4b58e837",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/ESG环境社会公司治理报告_517d3b/extract/images/2ed8d0d5e2384319edf63afa9e5819cc05d50e6a3e88c1efbc1d7d8f88d1f44c.jpg",
+      "asset_sha256": "66a1ce9cc86a763c9d58d1a60e7bf0a3b6c71d699e00809a091a65c9898d4362",
+      "page_idx": 10,
+      "page_no": 11,
+      "bbox": [
+        147,
+        282,
+        860,
+        625
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_113023_517d3bb3",
+      "batch_id": "fd0c99ef-02ce-46ab-ab07-7edd317be599",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "三、环境绩效 1.环境政策和管理体系 河北泰昌电力器材科技有限公司高度重视环境保护工作，将环境管理作为企业可持续发展的重要基石。公司通过了环境管理体系认证，建立了符合国际标准的环境管理框架。这一体系覆盖了从原材料采购、生产制造到产品交付的全过程，确保各个环节的环境影响得到有效控制。 环境政策的制定充分考虑了电力器材制造业的特点。公司明确提出在保证产品质量的前提下，最大限度地减少资源消耗和环境污染。通过设立专门的环境管理职能，将环境保护责任落实到各个部门和岗位。质量管理办公室在副总经理的领导下，承担起环境管理体系运行的监督职责，定期开展环境绩效评估和改进活动。 管理体系的有效运行依托于完善的制度建设。公司制定了环境管理手册、程序文件和作业指导书，明确了环境目标、指标和管理方案。通过定期的内部审核和管理评审，持续改进环境管理绩效。员工环保意识的培养也是管理体系的重要组成部分，公司通过培训和宣传活动，提升全员的环保意识和技能。",
+      "ocr_context": "三、环境绩效 1.环境政策和管理体系 河北泰昌电力器材科技有限公司高度重视环境保护工作，将环境管理作为企业可持续发展的重要基石。公司通过了环境管理体系认证，建立了符合国际标准的环境管理框架。这一体系覆盖了从原材料采购、生产制造到产品交付的全过程，确保各个环节的环境影响得到有效控制。 环境政策的制定充分考虑了电力器材制造业的特点。公司明确提出在保证产品质量的前提下，最大限度地减少资源消耗和环境污染。通过设立专门的环境管理职能，将环境保护责任落实到各个部门和岗位。质量管理办公室在副总经理的领导下，承担起环境管理体系运行的监督职责，定期开展环境绩效评估和改进活动。 管理体系的有效运行依托于完善的制度建设。公司制定了环境管理手册、程序文件和作业指导书，明确了环境目标、指标和管理方案。通过定期的内部审核和管理评审，持续改进环境管理绩效。员工环保意识的培养也是管理体系的重要组成部分，公司通过培训和宣传活动，提升全员的环保意识和技能。",
+      "retrieval_text": "泰昌 green_low_carbon 第11页图片。三、环境绩效 1.环境政策和管理体系 河北泰昌电力器材科技有限公司高度重视环境保护工作，将环境管理作为企业可持续发展的重要基石。公司通过了环境管理体系认证，建立了符合国际标准的环境管理框架。这一体系覆盖了从原材料采购、生产制造到产品交付的全过程，确保各个环节的环境影响得到有效控制。 环境政策的制定充分考虑了电力器材制造业的特点。公司明确提出在保证产品质量的前提下，最大限度地减少资源消耗和环境污染。通过设立专门的环境管理职能，将环境保护责任落实到各个部门和岗位。质量管理办公室在副总经理的领导下，承担起环境管理体系运行的监督职责，定期开展环境绩效评估和改进活动。 管理体系的有效运行依托于完善的制度建设。公司制定了环境管理手册、程序文件和作业指导书，明确了环境目标、指标和管理方案。通过定期的内部审核和管理评审，持续改进环境管理绩效。员工环保意识的培养也是管理体系的重要组成部分，公司通过培训和宣传活动，提升全员的环保意识和技能。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:11",
+        "bbox_anchor": [
+          147,
+          282,
+          860,
+          625
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p17_164_6f0af281",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/ESG环境社会公司治理报告_517d3b/extract/images/edbac50f6ea186f4bcd1acef43e463ec5edf77e434aa7fb90cd62324ab9b8ad2.jpg",
+      "asset_sha256": "163d62766280a9d2bd1a54bea02e4f0394b51791f022693cc56b6846aeba00ee",
+      "page_idx": 16,
+      "page_no": 17,
+      "bbox": [
+        324,
+        87,
+        690,
+        451
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_113023_517d3bb3",
+      "batch_id": "fd0c99ef-02ce-46ab-ab07-7edd317be599",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "安全风险评估和控制是预防事故的关键措施。公司定期开展危险源辨识和风险评估，针对生产过程中的各类危险因素制定相应的控制措施。对于全自动注塑成型机、压接机等大型设备的操作，制定了详细的安全操作规程。对于电气作业、高处作业等特种作业，要求操作人员必须持证上岗，并配备必要的安全防护装备。 职业病防护工作得到高度重视。公司针对生产过程中可能产生的噪声、粉尘、化学物质等职业危害因素，采取了有效的防护措施。在噪声较大的车间安装隔音设施，为员工配备防护耳塞。对于可能接触化学物质的岗位，提供防护手套、口罩等个人防护用品。定期进行作业场所职业危害因素检测，确保各项指标符合国家标准。 安全培训教育是提高员工安全意识的重要手段。公司建立了三级安全教育制度，新员工入职必须接受公司级、部门级和班组级的安全培训。定期组织安全知识培训和应急演练，提高员工的安全技能和应急处置能力。通过安全生产月、安全知识竞赛等活动，营造全员参与安全管理的良好氛围。",
+      "ocr_context": "安全风险评估和控制是预防事故的关键措施。公司定期开展危险源辨识和风险评估，针对生产过程中的各类危险因素制定相应的控制措施。对于全自动注塑成型机、压接机等大型设备的操作，制定了详细的安全操作规程。对于电气作业、高处作业等特种作业，要求操作人员必须持证上岗，并配备必要的安全防护装备。 职业病防护工作得到高度重视。公司针对生产过程中可能产生的噪声、粉尘、化学物质等职业危害因素，采取了有效的防护措施。在噪声较大的车间安装隔音设施，为员工配备防护耳塞。对于可能接触化学物质的岗位，提供防护手套、口罩等个人防护用品。定期进行作业场所职业危害因素检测，确保各项指标符合国家标准。 安全培训教育是提高员工安全意识的重要手段。公司建立了三级安全教育制度，新员工入职必须接受公司级、部门级和班组级的安全培训。定期组织安全知识培训和应急演练，提高员工的安全技能和应急处置能力。通过安全生产月、安全知识竞赛等活动，营造全员参与安全管理的良好氛围。",
+      "retrieval_text": "泰昌 green_low_carbon 第17页图片。安全风险评估和控制是预防事故的关键措施。公司定期开展危险源辨识和风险评估，针对生产过程中的各类危险因素制定相应的控制措施。对于全自动注塑成型机、压接机等大型设备的操作，制定了详细的安全操作规程。对于电气作业、高处作业等特种作业，要求操作人员必须持证上岗，并配备必要的安全防护装备。 职业病防护工作得到高度重视。公司针对生产过程中可能产生的噪声、粉尘、化学物质等职业危害因素，采取了有效的防护措施。在噪声较大的车间安装隔音设施，为员工配备防护耳塞。对于可能接触化学物质的岗位，提供防护手套、口罩等个人防护用品。定期进行作业场所职业危害因素检测，确保各项指标符合国家标准。 安全培训教育是提高员工安全意识的重要手段。公司建立了三级安全教育制度，新员工入职必须接受公司级、部门级和班组级的安全培训。定期组织安全知识培训和应急演练，提高员工的安全技能和应急处置能力。通过安全生产月、安全知识竞赛等活动，营造全员参与安全管理的良好氛围。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:17",
+        "bbox_anchor": [
+          324,
+          87,
+          690,
+          451
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p18_175_293dccbe",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/ESG环境社会公司治理报告_517d3b/extract/images/158b861d64af2b6ef854762f95fa0ce2658c20f7ce9231365463bcb0f2de2c65.jpg",
+      "asset_sha256": "9b8f9e5e69b9f667fdbd130cd4b501912c583784f8c715ca655090b874ef2dc3",
+      "page_idx": 17,
+      "page_no": 18,
+      "bbox": [
+        142,
+        715,
+        519,
+        901
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_113023_517d3bb3",
+      "batch_id": "fd0c99ef-02ce-46ab-ab07-7edd317be599",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "应急管理体系为突发事件的处置提供保障。公司制定了各类应急预案，包括火灾、触电、机械伤害等事故的应急处置程序。配备了消防器材、急救箱等应急设施，并定期进行检查维护。建立了与当地医院、消防等部门的联动机制，确保紧急情况下能够得到及时救援。 3.社区参与和发展 河北泰昌电力器材科技有限公司深知企业发展离不开社区支持，积极履行企业公民责任，与所在地保定市满城区建立了良好的互动关系。公司将社区发展纳入企业社会责任战略，通过多种方式参与和支持当地社区建设，实现企业与社区的共同发展。 教育支持是公司社区贡献的重要方面。公司连续多年获得\"尊师重教先进单位\"和\"捐资助教先进单位\"荣誉称号，充分体现了对教育事业的重视和支持。通过设立奖学金、资助贫困学生、改善学校设施等方式，为当地教育发展贡献力量。公司还与职业院校建立校企合作关系，提供实习岗位和就业机会，培养电力器材行业的专业人才。",
+      "ocr_context": "应急管理体系为突发事件的处置提供保障。公司制定了各类应急预案，包括火灾、触电、机械伤害等事故的应急处置程序。配备了消防器材、急救箱等应急设施，并定期进行检查维护。建立了与当地医院、消防等部门的联动机制，确保紧急情况下能够得到及时救援。 3.社区参与和发展 河北泰昌电力器材科技有限公司深知企业发展离不开社区支持，积极履行企业公民责任，与所在地保定市满城区建立了良好的互动关系。公司将社区发展纳入企业社会责任战略，通过多种方式参与和支持当地社区建设，实现企业与社区的共同发展。 教育支持是公司社区贡献的重要方面。公司连续多年获得\"尊师重教先进单位\"和\"捐资助教先进单位\"荣誉称号，充分体现了对教育事业的重视和支持。通过设立奖学金、资助贫困学生、改善学校设施等方式，为当地教育发展贡献力量。公司还与职业院校建立校企合作关系，提供实习岗位和就业机会，培养电力器材行业的专业人才。",
+      "retrieval_text": "泰昌 green_low_carbon 第18页图片。应急管理体系为突发事件的处置提供保障。公司制定了各类应急预案，包括火灾、触电、机械伤害等事故的应急处置程序。配备了消防器材、急救箱等应急设施，并定期进行检查维护。建立了与当地医院、消防等部门的联动机制，确保紧急情况下能够得到及时救援。 3.社区参与和发展 河北泰昌电力器材科技有限公司深知企业发展离不开社区支持，积极履行企业公民责任，与所在地保定市满城区建立了良好的互动关系。公司将社区发展纳入企业社会责任战略，通过多种方式参与和支持当地社区建设，实现企业与社区的共同发展。 教育支持是公司社区贡献的重要方面。公司连续多年获得\"尊师重教先进单位\"和\"捐资助教先进单位\"荣誉称号，充分体现了对教育事业的重视和支持。通过设立奖学金、资助贫困学生、改善学校设施等方式，为当地教育发展贡献力量。公司还与职业院校建立校企合作关系，提供实习岗位和就业机会，培养电力器材行业的专业人才。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:18",
+        "bbox_anchor": [
+          142,
+          715,
+          519,
+          901
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p18_176_63df5ce7",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/ESG环境社会公司治理报告_517d3b/extract/images/2c89fdc9b27d379e15b221a429c942ba4fe36be76bdd2d034105498bd3c1b801.jpg",
+      "asset_sha256": "47a86b1ae79ef9df722dfebf116a722eb7a81af3881ecf90d56b9f61d6e7cb60",
+      "page_idx": 17,
+      "page_no": 18,
+      "bbox": [
+        521,
+        715,
+        870,
+        901
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_113023_517d3bb3",
+      "batch_id": "fd0c99ef-02ce-46ab-ab07-7edd317be599",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "3.社区参与和发展 河北泰昌电力器材科技有限公司深知企业发展离不开社区支持，积极履行企业公民责任，与所在地保定市满城区建立了良好的互动关系。公司将社区发展纳入企业社会责任战略，通过多种方式参与和支持当地社区建设，实现企业与社区的共同发展。 教育支持是公司社区贡献的重要方面。公司连续多年获得\"尊师重教先进单位\"和\"捐资助教先进单位\"荣誉称号，充分体现了对教育事业的重视和支持。通过设立奖学金、资助贫困学生、改善学校设施等方式，为当地教育发展贡献力量。公司还与职业院校建立校企合作关系，提供实习岗位和就业机会，培养电力器材行业的专业人才。",
+      "ocr_context": "3.社区参与和发展 河北泰昌电力器材科技有限公司深知企业发展离不开社区支持，积极履行企业公民责任，与所在地保定市满城区建立了良好的互动关系。公司将社区发展纳入企业社会责任战略，通过多种方式参与和支持当地社区建设，实现企业与社区的共同发展。 教育支持是公司社区贡献的重要方面。公司连续多年获得\"尊师重教先进单位\"和\"捐资助教先进单位\"荣誉称号，充分体现了对教育事业的重视和支持。通过设立奖学金、资助贫困学生、改善学校设施等方式，为当地教育发展贡献力量。公司还与职业院校建立校企合作关系，提供实习岗位和就业机会，培养电力器材行业的专业人才。",
+      "retrieval_text": "泰昌 green_low_carbon 第18页图片。3.社区参与和发展 河北泰昌电力器材科技有限公司深知企业发展离不开社区支持，积极履行企业公民责任，与所在地保定市满城区建立了良好的互动关系。公司将社区发展纳入企业社会责任战略，通过多种方式参与和支持当地社区建设，实现企业与社区的共同发展。 教育支持是公司社区贡献的重要方面。公司连续多年获得\"尊师重教先进单位\"和\"捐资助教先进单位\"荣誉称号，充分体现了对教育事业的重视和支持。通过设立奖学金、资助贫困学生、改善学校设施等方式，为当地教育发展贡献力量。公司还与职业院校建立校企合作关系，提供实习岗位和就业机会，培养电力器材行业的专业人才。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:18",
+        "bbox_anchor": [
+          521,
+          715,
+          870,
+          901
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p37_329_ea528284",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/ESG环境社会公司治理报告_517d3b/extract/images/94e2f0f9caa20449ab03d5b038899a81d45565cca535c13f1cb789f93da59a9c.jpg",
+      "asset_sha256": "61891eed9a958eeae813a7abd090c1a40865d1009573cbceffb5a743e7076de9",
+      "page_idx": 36,
+      "page_no": 37,
+      "bbox": [
+        127,
+        115,
+        910,
+        914
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_113023_517d3bb3",
+      "batch_id": "fd0c99ef-02ce-46ab-ab07-7edd317be599",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "八、附录:",
+      "ocr_context": "八、附录:",
+      "retrieval_text": "泰昌 green_low_carbon 第37页图片。八、附录:",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:37",
+        "bbox_anchor": [
+          127,
+          115,
+          910,
+          914
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p38_332_3c1e0d79",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/ESG环境社会公司治理报告_517d3b/extract/images/0cfb933c0d132ea4b04ff645d7464a2ad52f0dcc441fa2e14ba3d7dd1ab98a90.jpg",
+      "asset_sha256": "11ac228bd343855cc0277de1395f0c21702eec05791abc632452cdb034747b7e",
+      "page_idx": 37,
+      "page_no": 38,
+      "bbox": [
+        147,
+        85,
+        850,
+        917
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_113023_517d3bb3",
+      "batch_id": "fd0c99ef-02ce-46ab-ab07-7edd317be599",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "",
+      "ocr_context": "",
+      "retrieval_text": "泰昌 green_low_carbon 第38页图片。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:38",
+        "bbox_anchor": [
+          147,
+          85,
+          850,
+          917
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    }
+  ]
+}

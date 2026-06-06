@@ -1,0 +1,424 @@
+{
+  "assets": [
+    {
+      "asset_id": "taichang_production_capacity_p3_033_370aede2",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/3.MPP生产线/3.MPP生产线.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "production_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/3_MPP生产线_6de5e2/extract/images/6ebe41e90a08f030077397eb08468727acc62ae5f9604e0aa8bba6461db4038d.jpg",
+      "asset_sha256": "1ae0fcff56f63041c1d91b0116e4bb4d44aa71cbe14081494a59c097bde90b0a",
+      "page_idx": 2,
+      "page_no": 3,
+      "bbox": [
+        473,
+        175,
+        673,
+        276
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_production_capacity_20260606_110933_6de5e2a4",
+      "batch_id": "a86f4445-e736-44a7-aa8c-66f04d4cfca8",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "1300151170 No 02115079 1300151170",
+      "ocr_context": "1300151170 No 02115079 1300151170",
+      "retrieval_text": "泰昌 production_capacity 第3页图片。1300151170 No 02115079 1300151170",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "production_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:3",
+        "bbox_anchor": [
+          473,
+          175,
+          673,
+          276
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_production_capacity_p3_043_408e0535",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/3.MPP生产线/3.MPP生产线.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "production_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/3_MPP生产线_6de5e2/extract/images/00b60f85e9389be0d9498b73e3d2c65068a3edd36f92d79c911531ab006518e4.jpg",
+      "asset_sha256": "994e546c66fb83097ac2a064712aeb44496436567a10e7829c27b2b2b76ba0da",
+      "page_idx": 2,
+      "page_no": 3,
+      "bbox": [
+        717,
+        639,
+        853,
+        783
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_production_capacity_20260606_110933_6de5e2a4",
+      "batch_id": "a86f4445-e736-44a7-aa8c-66f04d4cfca8",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "收款人：姚书平 复核：姚书平 开票人：姚书平",
+      "ocr_context": "收款人：姚书平 复核：姚书平 开票人：姚书平",
+      "retrieval_text": "泰昌 production_capacity 第3页图片。收款人：姚书平 复核：姚书平 开票人：姚书平",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "production_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:3",
+        "bbox_anchor": [
+          717,
+          639,
+          853,
+          783
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_production_capacity_p4_060_e7386d00",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/3.MPP生产线/3.MPP生产线.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "production_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/3_MPP生产线_6de5e2/extract/images/cec67b79eae4fe14ea3ba768dd5731cab1feeacd42ef0b9b886dbc3b7f693523.jpg",
+      "asset_sha256": "5849cc764734199feaaf8e53fac7fc9b1b2d38b60fb3990f1940029e38646479",
+      "page_idx": 3,
+      "page_no": 4,
+      "bbox": [
+        579,
+        264,
+        757,
+        393
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_production_capacity_20260606_110933_6de5e2a4",
+      "batch_id": "a86f4445-e736-44a7-aa8c-66f04d4cfca8",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "鉴于国家税务总局全国增值税发票查验平台https:/inv-veri.chinatax.gov.cn/index.html查询年限5年，故我公司部分生产、试验设备发票超出查询年限而无法查询。 我公司承诺所提供所有设备发票信息真实有效，无任何虚假。如有虚假愿意承担一切法律责任，特此证明。 承诺人：河北泰昌电力器材科技有限公司",
+      "ocr_context": "鉴于国家税务总局全国增值税发票查验平台https:/inv-veri.chinatax.gov.cn/index.html查询年限5年，故我公司部分生产、试验设备发票超出查询年限而无法查询。 我公司承诺所提供所有设备发票信息真实有效，无任何虚假。如有虚假愿意承担一切法律责任，特此证明。 承诺人：河北泰昌电力器材科技有限公司",
+      "retrieval_text": "泰昌 production_capacity 第4页图片。鉴于国家税务总局全国增值税发票查验平台https:/inv-veri.chinatax.gov.cn/index.html查询年限5年，故我公司部分生产、试验设备发票超出查询年限而无法查询。 我公司承诺所提供所有设备发票信息真实有效，无任何虚假。如有虚假愿意承担一切法律责任，特此证明。 承诺人：河北泰昌电力器材科技有限公司",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "production_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:4",
+        "bbox_anchor": [
+          579,
+          264,
+          757,
+          393
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_production_capacity_p5_061_528ef423",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/3.MPP生产线/3.MPP生产线.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "production_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/3_MPP生产线_6de5e2/extract/images/d84ce31c4fdfb3e70af5871180c3e1c686042f87fc089c8d21b04414c5632502.jpg",
+      "asset_sha256": "f77eb51e1860d751ef4f90bc8d61d5e1d555e78009fd844e8a3bbb998b2c0f85",
+      "page_idx": 4,
+      "page_no": 5,
+      "bbox": [
+        0,
+        0,
+        998,
+        998
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_production_capacity_20260606_110933_6de5e2a4",
+      "batch_id": "a86f4445-e736-44a7-aa8c-66f04d4cfca8",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "",
+      "ocr_context": "",
+      "retrieval_text": "泰昌 production_capacity 第5页图片。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "production_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:5",
+        "bbox_anchor": [
+          0,
+          0,
+          998,
+          998
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_production_capacity_p6_062_85be48a0",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/3.MPP生产线/3.MPP生产线.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "production_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/3_MPP生产线_6de5e2/extract/images/198b246ef26b8d88f2d31a427d686c6b5bd6a4f8b0cecc4e0ea9484790e745c6.jpg",
+      "asset_sha256": "ff840e1a0543b6d85b8e754a129ee815b91b9f545d2a43938745157e4602e867",
+      "page_idx": 5,
+      "page_no": 6,
+      "bbox": [
+        0,
+        0,
+        998,
+        998
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_production_capacity_20260606_110933_6de5e2a4",
+      "batch_id": "a86f4445-e736-44a7-aa8c-66f04d4cfca8",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "",
+      "ocr_context": "",
+      "retrieval_text": "泰昌 production_capacity 第6页图片。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "production_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:6",
+        "bbox_anchor": [
+          0,
+          0,
+          998,
+          998
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_production_capacity_p7_063_8ab69715",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/3.MPP生产线/3.MPP生产线.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "production_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/3_MPP生产线_6de5e2/extract/images/3ad4a859860b1d1ed89bf4cf8ab530f98742a1c3eac0d37026cab37df3e89d2a.jpg",
+      "asset_sha256": "0cbccce8bfc4cc4bdf06a4d5e3923744f8443a4dc367745731fb4cfc92b92e0a",
+      "page_idx": 6,
+      "page_no": 7,
+      "bbox": [
+        0,
+        0,
+        998,
+        998
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_production_capacity_20260606_110933_6de5e2a4",
+      "batch_id": "a86f4445-e736-44a7-aa8c-66f04d4cfca8",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "",
+      "ocr_context": "",
+      "retrieval_text": "泰昌 production_capacity 第7页图片。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "production_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:7",
+        "bbox_anchor": [
+          0,
+          0,
+          998,
+          998
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_production_capacity_p8_064_30ecddb7",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/3.MPP生产线/3.MPP生产线.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "production_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/3_MPP生产线_6de5e2/extract/images/c0478d33bc43d3b6ca6eb975f9b9d824ac69690f04602befddab1baf888788ad.jpg",
+      "asset_sha256": "8f857008ba328678edb17bad3d1a526f8db74fcbb272ad656b820e1e7c05269a",
+      "page_idx": 7,
+      "page_no": 8,
+      "bbox": [
+        0,
+        0,
+        998,
+        998
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_production_capacity_20260606_110933_6de5e2a4",
+      "batch_id": "a86f4445-e736-44a7-aa8c-66f04d4cfca8",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "",
+      "ocr_context": "",
+      "retrieval_text": "泰昌 production_capacity 第8页图片。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "production_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:8",
+        "bbox_anchor": [
+          0,
+          0,
+          998,
+          998
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,484 @@
+{
+  "assets": [
+    {
+      "asset_id": "taichang_testing_capacity_p2_019_fdf00a60",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/5.溶体流动速率仪/溶体流动速率仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/溶体流动速率仪_145192/extract/images/8dd711442f631e42db04794ad86f28c5af0d92c0fb20ce854f96e8a8a2c66f9a.jpg",
+      "asset_sha256": "9fa39f803fd4cb08867500ff1f22dd3bcff6c715504f81e418b80b9f07c2a80c",
+      "page_idx": 1,
+      "page_no": 2,
+      "bbox": [
+        433,
+        135,
+        536,
+        235
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_110915_14519200",
+      "batch_id": "4b862154-d9f0-49a7-99cd-86d9324b460d",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "1300102140 河北增值模专用发票 No 00360729 开票日期：2010年09月18日",
+      "ocr_context": "1300102140 河北增值模专用发票 No 00360729 开票日期：2010年09月18日",
+      "retrieval_text": "泰昌 testing_capacity 第2页图片。1300102140 河北增值模专用发票 No 00360729 开票日期：2010年09月18日",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:2",
+        "bbox_anchor": [
+          433,
+          135,
+          536,
+          235
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p2_023_c9d890a0",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/5.溶体流动速率仪/溶体流动速率仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/溶体流动速率仪_145192/extract/images/8f75fa7fb20085530a93580e1e80fdd7bd3e3927cfd1b2f944d929d2ba54ded9.jpg",
+      "asset_sha256": "07dc642451ffb084edf772b074cf72fb8ab7c843e2e8bb9e60b699a5bd268a51",
+      "page_idx": 1,
+      "page_no": 2,
+      "bbox": [
+        613,
+        591,
+        749,
+        736
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_110915_14519200",
+      "batch_id": "4b862154-d9f0-49a7-99cd-86d9324b460d",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "No 00360729 开票日期：2010年09月18日",
+      "ocr_context": "No 00360729 开票日期：2010年09月18日",
+      "retrieval_text": "泰昌 testing_capacity 第2页图片。No 00360729 开票日期：2010年09月18日",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:2",
+        "bbox_anchor": [
+          613,
+          591,
+          749,
+          736
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p3_039_8ffe144c",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/5.溶体流动速率仪/溶体流动速率仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/溶体流动速率仪_145192/extract/images/0c116754b151ff014c68074329bd965b3d1dae020dbe9f2de1518ad4160bd0fa.jpg",
+      "asset_sha256": "5849cc764734199feaaf8e53fac7fc9b1b2d38b60fb3990f1940029e38646479",
+      "page_idx": 2,
+      "page_no": 3,
+      "bbox": [
+        579,
+        264,
+        757,
+        393
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_110915_14519200",
+      "batch_id": "4b862154-d9f0-49a7-99cd-86d9324b460d",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "鉴于国家税务总局全国增值税发票查验平台https://inv-veri.chinatax.gov.cn/index.html查询年限5年，故我公司部分生产、试验设备发票超出查询年限而无法查询。 我公司承诺所提供所有设备发票信息真实有效，无任何虚假。如有虚假愿意承担一切法律责任，特此证明。 承诺人：河北泰昌电力器材科技有限公司",
+      "ocr_context": "鉴于国家税务总局全国增值税发票查验平台https://inv-veri.chinatax.gov.cn/index.html查询年限5年，故我公司部分生产、试验设备发票超出查询年限而无法查询。 我公司承诺所提供所有设备发票信息真实有效，无任何虚假。如有虚假愿意承担一切法律责任，特此证明。 承诺人：河北泰昌电力器材科技有限公司",
+      "retrieval_text": "泰昌 testing_capacity 第3页图片。鉴于国家税务总局全国增值税发票查验平台https://inv-veri.chinatax.gov.cn/index.html查询年限5年，故我公司部分生产、试验设备发票超出查询年限而无法查询。 我公司承诺所提供所有设备发票信息真实有效，无任何虚假。如有虚假愿意承担一切法律责任，特此证明。 承诺人：河北泰昌电力器材科技有限公司",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:3",
+        "bbox_anchor": [
+          579,
+          264,
+          757,
+          393
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p4_040_ecd28456",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/5.溶体流动速率仪/溶体流动速率仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/溶体流动速率仪_145192/extract/images/39c3eca55b5c4f1b94b87407b8b50aacc171f0235a6c0f458aac3549b30fa6c9.jpg",
+      "asset_sha256": "2b327b412f460b691655fa0a377aab9e1382110408e94951d6254f8043e32594",
+      "page_idx": 3,
+      "page_no": 4,
+      "bbox": [
+        0,
+        0,
+        998,
+        998
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_110915_14519200",
+      "batch_id": "4b862154-d9f0-49a7-99cd-86d9324b460d",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "",
+      "ocr_context": "",
+      "retrieval_text": "泰昌 testing_capacity 第4页图片。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:4",
+        "bbox_anchor": [
+          0,
+          0,
+          998,
+          998
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p5_042_2743fc79",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/5.溶体流动速率仪/溶体流动速率仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/溶体流动速率仪_145192/extract/images/76be6e8ef86f45b11966c94f929bd3e25bfe4dcca9954f3b088d03179be74fa9.jpg",
+      "asset_sha256": "3f66c03ba34b581565417339f7a22ba9c2edabd367e7e53c027ce18e7d896753",
+      "page_idx": 4,
+      "page_no": 5,
+      "bbox": [
+        657,
+        149,
+        727,
+        204
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_110915_14519200",
+      "batch_id": "4b862154-d9f0-49a7-99cd-86d9324b460d",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate",
+      "ocr_context": "校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate",
+      "retrieval_text": "泰昌 testing_capacity 第5页图片。校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:5",
+        "bbox_anchor": [
+          657,
+          149,
+          727,
+          204
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p5_043_8c48ee46",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/5.溶体流动速率仪/溶体流动速率仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/溶体流动速率仪_145192/extract/images/9567d735b6d87fb978ba170c94d81ddb33487099c9bdc2390ba1154dc4f98af3.jpg",
+      "asset_sha256": "5683d0ab1b127fa44930934f64ebe4d2618f71e6c7884dad515b72b230613756",
+      "page_idx": 4,
+      "page_no": 5,
+      "bbox": [
+        727,
+        154,
+        803,
+        203
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_110915_14519200",
+      "batch_id": "4b862154-d9f0-49a7-99cd-86d9324b460d",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate 证书编号： GL2605LH00753",
+      "ocr_context": "校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate 证书编号： GL2605LH00753",
+      "retrieval_text": "泰昌 testing_capacity 第5页图片。校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate 证书编号： GL2605LH00753",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:5",
+        "bbox_anchor": [
+          727,
+          154,
+          803,
+          203
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p5_065_fa544dfd",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/5.溶体流动速率仪/溶体流动速率仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/溶体流动速率仪_145192/extract/images/12e3ce794b6f52cbdc22d7fe84cf7ea4229207ef331cacf6bfde633f147b9ad6.jpg",
+      "asset_sha256": "a8a87b5bf075b180249f702b47b2c4e2e43f674ff2a1bb60bd2a455e4ccceb3c",
+      "page_idx": 4,
+      "page_no": 5,
+      "bbox": [
+        186,
+        604,
+        379,
+        744
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_110915_14519200",
+      "batch_id": "4b862154-d9f0-49a7-99cd-86d9324b460d",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "TC-12 制造单位： 承德衡通试验检测仪器有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 梁俊雄 Checked by 校准员： 刚 Calibrated by",
+      "ocr_context": "TC-12 制造单位： 承德衡通试验检测仪器有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 梁俊雄 Checked by 校准员： 刚 Calibrated by",
+      "retrieval_text": "泰昌 testing_capacity 第5页图片。TC-12 制造单位： 承德衡通试验检测仪器有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 梁俊雄 Checked by 校准员： 刚 Calibrated by",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:5",
+        "bbox_anchor": [
+          186,
+          604,
+          379,
+          744
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p5_076_61d1e4c1",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/5.溶体流动速率仪/溶体流动速率仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/溶体流动速率仪_145192/extract/images/0d4738455f4f179d708dcf973ec969db9314d4c8c2166dd64802d74e48acaf86.jpg",
+      "asset_sha256": "c23057acdccc354229b124340bc7ffcd0939bc5c008d9c352ff254482fe752d3",
+      "page_idx": 4,
+      "page_no": 5,
+      "bbox": [
+        660,
+        795,
+        742,
+        858
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_110915_14519200",
+      "batch_id": "4b862154-d9f0-49a7-99cd-86d9324b460d",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "签发日期： Date of issue: 2026年05月26日 电话(Te1):0755-27407284 邮箱(Mail) :szgljl@126.com 地址：深圳市光明区公明街道兴发路170号华澳时光全球美酒星链云仓产",
+      "ocr_context": "签发日期： Date of issue: 2026年05月26日 电话(Te1):0755-27407284 邮箱(Mail) :szgljl@126.com 地址：深圳市光明区公明街道兴发路170号华澳时光全球美酒星链云仓产",
+      "retrieval_text": "泰昌 testing_capacity 第5页图片。签发日期： Date of issue: 2026年05月26日 电话(Te1):0755-27407284 邮箱(Mail) :szgljl@126.com 地址：深圳市光明区公明街道兴发路170号华澳时光全球美酒星链云仓产",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:5",
+        "bbox_anchor": [
+          660,
+          795,
+          742,
+          858
+        ]
+      }
+    }
+  ]
+}

@@ -26,7 +26,7 @@
       "parser": "mineru",
       "parse_id": "taichang_business_license_mineru_20260606_104409",
       "batch_id": "7756b743-59e1-49a7-b684-a8eb6e3b8417",
-      "usage_policy": "enterprise_fact_evidence",
+      "usage_policy": "enterprise_fact_evidence_restricted",
       "requires_human_review": true,
       "metadata": {
         "source_batch_id": "customer_liaoning_taichang_20260606_p0",
@@ -42,8 +42,14 @@
         ],
         "do_not_mix_with": [
           "河北豪乾参考稿"
+        ],
+        "sensitive_handling": "redact_or_authorize_before_display",
+        "display_contexts": [
+          "restricted_review",
+          "authorized_bid_writing"
         ]
-      }
+      },
+      "requires_authorization": true
     }
   ]
 }

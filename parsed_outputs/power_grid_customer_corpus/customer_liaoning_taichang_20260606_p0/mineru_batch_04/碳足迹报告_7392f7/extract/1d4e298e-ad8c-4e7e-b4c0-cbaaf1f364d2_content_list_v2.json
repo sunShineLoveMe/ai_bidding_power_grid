@@ -1,0 +1,3428 @@
+[
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "碳足迹报告"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                366,
+                231,
+                675,
+                279
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业名称：河北泰昌电力器材科技有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                759,
+                665,
+                784
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "报告编号：ZRC-TZJ2025224 "
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                796,
+                499,
+                819
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第三方服务机构：广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                833,
+                690,
+                858
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "查询网址：www.zrlhrz.com"
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                871,
+                475,
+                892
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2025年10月16日"
+                    }
+                ]
+            },
+            "bbox": [
+                384,
+                906,
+                608,
+                929
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/22095e6c989f741e38002dff3ef232819c1a9db23ae5a7a7541ea5c29f5678a7.jpg"
+                },
+                "content": "16日\n江苏银行联合认证有限公司\n报告专用章",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                541,
+                854,
+                746,
+                998
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "联 合 认 认 "
+                    }
+                ]
+            },
+            "bbox": [
+                92,
+                41,
+                250,
+                151
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                811,
+                55,
+                902,
+                118
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "基本信息"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                440,
+                93,
+                554,
+                114
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "报告信息"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                149,
+                247,
+                168
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "报告编号：ZRC-TZJ2025224 "
+                    }
+                ]
+            },
+            "bbox": [
+                184,
+                202,
+                436,
+                219
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "编写单位：广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                184,
+                234,
+                532,
+                252
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "编制人员：丁亚亚 "
+                    }
+                ]
+            },
+            "bbox": [
+                186,
+                267,
+                354,
+                285
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "审核单位：广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                186,
+                300,
+                532,
+                318
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "审核人员：陆一文"
+                    }
+                ]
+            },
+            "bbox": [
+                186,
+                334,
+                354,
+                351
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "发布日期：2025年10月16日"
+                    }
+                ]
+            },
+            "bbox": [
+                186,
+                367,
+                457,
+                384
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "申请者信息"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                147,
+                430,
+                270,
+                450
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "公司全称：河北泰昌电力器材科技有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                186,
+                483,
+                574,
+                501
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "统一社会信用代码：91130607056539515C"
+                    }
+                ]
+            },
+            "bbox": [
+                186,
+                516,
+                556,
+                533
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "地址：保定市满城区陉阳驿村"
+                    }
+                ]
+            },
+            "bbox": [
+                186,
+                548,
+                453,
+                565
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "联系人：晁坤琳"
+                    }
+                ]
+            },
+            "bbox": [
+                186,
+                582,
+                332,
+                599
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "联系方式：0312-7083333"
+                    }
+                ]
+            },
+            "bbox": [
+                186,
+                615,
+                413,
+                632
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "采用的标准信息"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                678,
+                317,
+                699
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "ISO/TS 14067-2018《温室气体-产品的碳排放量-量化和通信的要求和指南》"
+                    }
+                ]
+            },
+            "bbox": [
+                184,
+                731,
+                860,
+                750
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "PAS2050：2011《商品和服务在生命周期内的温室气体排放评价规范》"
+                    }
+                ]
+            },
+            "bbox": [
+                186,
+                764,
+                796,
+                782
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                151,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                36,
+                470,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co.,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                76
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "1 "
+                    }
+                ]
+            },
+            "bbox": [
+                492,
+                928,
+                502,
+                939
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "目录"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                465,
+                92,
+                534,
+                114
+            ]
+        },
+        {
+            "type": "list",
+            "content": {
+                "list_type": "text_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "1．执行摘要， 4 "
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "2．产品碳足迹(CFP)介绍. 5 "
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "3．目标与范围定义. 6 "
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                127,
+                850,
+                219
+            ]
+        },
+        {
+            "type": "list",
+            "content": {
+                "list_type": "text_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "3.1公司及其产品介绍... 6"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "3.2研究目的... 6"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "3.3研究的边界．.."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "3.4功能单位... 8"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "3.5生命周期流程图的绘制 8 "
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "3.6取舍原则"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "3.7影响类型和评价方法.."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "3.8数据质量要求.. 10"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                181,
+                237,
+                850,
+                514
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "4.过程描述. 11"
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                535,
+                848,
+                552
+            ]
+        },
+        {
+            "type": "list",
+            "content": {
+                "list_type": "text_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "4.1原材料运输阶段."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "4.2产品生产阶段..."
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                181,
+                571,
+                848,
+                626
+            ]
+        },
+        {
+            "type": "list",
+            "content": {
+                "list_type": "text_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "5.数据的收集和主要排放因子说明 11"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "6.碳足迹计算， 12"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                646,
+                850,
+                701
+            ]
+        },
+        {
+            "type": "list",
+            "content": {
+                "list_type": "text_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "6.1碳足迹识别... .12 "
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "6.2 计算公式... 12"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "6.3碳足迹数据计算.. 13"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "6.4碳足迹数据分析... 13 "
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                181,
+                720,
+                848,
+                848
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "7.不确定分析， 14"
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                869,
+                850,
+                885
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                36,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                74
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": []
+            },
+            "bbox": [
+                492,
+                928,
+                502,
+                938
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "8.结语 15 "
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                90,
+                850,
+                107
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/a28a60493871dbe4554bcf307b4bb3f4d1b4edd542525ff8b6a50f6874b971b7.jpg"
+                },
+                "content": "4th\nCHONG REN LIAN HE REN ZHIENG",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                250,
+                323,
+                744,
+                671
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                38,
+                467,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co.,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                63,
+                499,
+                74
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "3 "
+                    }
+                ]
+            },
+            "bbox": [
+                492,
+                928,
+                502,
+                939
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "1．执行摘要 "
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                147,
+                93,
+                299,
+                115
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "河北泰昌电力器材科技有限公司作为行业知名企业，为相关环境披露要求，履行社会责任、接受社会监督，特邀请广东中认联合认证有限公司对其生产产品的碳足迹排放情况进行研究，出具研究报告。研究的目的是以生命周期评价方法为基础，采用ISO/TS 14067-2018《温室气体-产品的碳排放量-量化和通信的要求和指南》、PAS2050：2011《商品和服务在生命周期内的温室气体排放评价规范》的要求中规定的碳足迹核算方法，计算得到河北泰昌电力器材科技有限公司的电能计量箱、电缆保护管、铁附件的碳足迹。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                151,
+                852,
+                391
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "本报告的功能单位定义为生产“1吨电能计量箱、电缆保护管、铁附件”。系统边界为“从摇篮到大门”类型，调研了电能计量箱、电缆保护管、铁附件原材料运输阶段、电能计量箱、电缆保护管、铁附件生产阶段。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                410,
+                847,
+                502
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "报告中对生产电能计量箱、电缆保护管、铁附件的不同过程比例的差别、各生产过程碳足迹比例做了对比分析。从单个过程对碳足迹贡献来看，发现产品生产对产品碳足迹的贡献最大，其次为原材料运输阶段。研究过程中，数据质量被认为是最重要的考虑因素之一。本次数据收集和选择的指导原则是：数据尽可能具有代表性，主要体现在生产技术、地域、时间等方面。电能计量箱、电缆保护管、铁附件生产生命周期主要过程活动数据来源于企业现场调研的初级数据，部分通用的原辅料数据来源于CLCD-China数据库、瑞士Ecoinvent数据库、欧洲生命周期参考数据库（ELCD）以及EFDB数据库，本次评价选用的数据在国内外LCA 研究中心被高度认可和广泛应用。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                521,
+                853,
+                835
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "数据库简介如下："
+                    }
+                ]
+            },
+            "bbox": [
+                186,
+                854,
+                339,
+                871
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "CLCD-China 数据库是一个基于中国基础工业系统生命周期核心模型的行业"
+                    }
+                ]
+            },
+            "bbox": [
+                184,
+                892,
+                847,
+                909
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                38,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co.,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                76
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "4 "
+                    }
+                ]
+            },
+            "bbox": [
+                492,
+                928,
+                502,
+                938
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "平均数据库。CLCD包括国内主要能源、交通数据和基础原材料的清单数据集。"
+                    }
+                ]
+            },
+            "bbox": [
+                146,
+                95,
+                830,
+                112
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Ecoinvent数据库由瑞士生命周期研发中心开发，数据主要来源于瑞士和西欧国家，该数据库包含约4000条的产品和服务的数据集，涉及能源、运输、建材、电子、化工、纸浆和纸张、废物处理和农业活动。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                131,
+                848,
+                224
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "ELCD 数据库由欧盟研究总署开发，其核心数据库包含超过300个数据集，其清单数据来自欧盟行业协会和其他来源的原材料、能源、运输、废物管理数据。"
+                    }
+                ]
+            },
+            "bbox": [
+                146,
+                243,
+                847,
+                299
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "EFDB 数据库为联合国政府间气候变化专门委员会（IPCC）为便于各国温室气体排放和减缓情况进行评估而建立的排放因子及参数数据库，以其科学性、权威性的数据评估被国际上广泛认可。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                317,
+                848,
+                409
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "2．产品碳足迹(CFP)介绍 "
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                445,
+                448,
+                467
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "近年来，温室效应、气候变化已成为全球关注的焦点，“碳足迹”这个新的术语越来越广泛地为全世界所使用。碳足迹通常分为项目、组织、产品这三个层面。其中，产品碳足迹（Carbon Footprint of Products，CFP）是指衡量某个产品或服务在其生命周期各阶段的温室气体排放量总和，即从原材料开采、产品生产（或服务提供）、分销、使用到最终处置/再生利用等多个阶段的各种温室气体排放的累加。温室气体主要包括二氧化碳（CO2）、甲烷（CH4）、氧化亚氮（N2O）、氢氟碳化物（HFC）、全氟化碳（PFC）等。碳足迹的计算结果为产品生命周期各种温室气体排放量的加权之和，用二氧化碳当量（CO2e）表示，单位为kgCOze或者 tCOze。全球变暖潜质（GlobalWarming Potential，简称GWP），即各种温室气体的二氧化碳当量值，通常采用联合国政府间气候变化专家委员会（IPCC）提供的值，目前这套因子被全球范围广泛使用。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                502,
+                850,
+                891
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                38,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                74
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": []
+            },
+            "bbox": [
+                492,
+                928,
+                502,
+                938
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "产品碳足迹计算只包含一个完整生命周期评估（LCA）的温室气体的部分。基于LCA的评价方法，国际上已建立起多种碳足迹评估指南和要求，用于产品碳足迹认证，目前广泛使用的碳足迹评估标准有三种：①《PAS2050：2011商品和服务在生命周期内的温室气体排放评价规范》，此标准是由英国标准协会（BSI）与碳信托公司（Carbon Trust）、英国食品和乡村事务部（Defra）联合发布，是国际上最早的、最具体计算方法的标准，也是目前使用较多的产品碳足迹评价标准；②《温室气体核算体：产品寿命周期核算与报告标准》，此标准是由世界资源研究所（WorldResources Institute）和世界可持续发展工商理事会（WorldBusiness Council for Sustainable Development）发布的产品和供应链标准;③《IS0/TS14067：2018 温室气体—产品碳足迹一量化和信息交流的要求与指南》，此标准以PSA 2050 为种子文件，由国际标准化组织（ISO）编制发布。产品碳足迹核算标准的出现目的是建立一个一致的、国际认可的评估产品碳足迹的方法。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                95,
+                853,
+                558
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "3．目标与范围定义"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                593,
+                381,
+                615
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "3.1公司及其产品介绍"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                650,
+                381,
+                670
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "河北泰昌电力器材科技有限公司创建于2010年，2012年改组为企业有限公司。公司注册资本10000万元。占地面积约6800平方米，办公面积约1200 平方米。公司主要产品有“泰昌”牌电力器材产品符合国家及行业标准及相关技术条件，均获得国家颁发的生产许可证。公司主要经营水泥制品、电线、电缆、低压电表计量箱、电力金具、玛钢件、配电箱、复合材料绝缘横担、开关柜、避雷器、隔离开关、熔断器、绝缘子、电缆保护管研发、制造、加工；高低压开关、安全工具、通信设备、变压器及配件、仪器、仪表、互感器、电缆分支箱、电缆接头、工具瓷件、电力线材、铁塔、交通安全设施、箱式开闭所、环网柜、紧锁连接头、智能电能质量矫正装置批发、零售。公司拥有多台全自动注塑成型机、压接机、捏合机、开炼机、芯棒打磨机、激光打标机等先进的生产设备；同事拥有工频试验装置、冲击试验成套检测设备、拉力试验机等专业的检测设备。公司全体员工坚持“用户第一、质量第一、服务第一、信誉第一”的宗旨，恪守质量承诺，用更好的质量和服务回报广大客户的厚爱。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                697,
+                850,
+                902
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                38,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                74
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "6 "
+                    }
+                ]
+            },
+            "bbox": [
+                492,
+                928,
+                505,
+                939
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                144,
+                95,
+                853,
+                336
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "3.2研究目的"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                363,
+                285,
+                382
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "本研究的目的是得到河北泰昌电力器材科技有限公司生产的电能计量箱、电缆保护管、铁附件全生命周期过程的碳足迹，为河北泰昌电力器材科技有限公司开展持续的节能减排工作提供数据支撑。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                410,
+                848,
+                502
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "碳足迹核算是实现低碳、绿色发展的基础和关键，披露产品的碳足迹是环境保护工作和社会责任的一部分，也是河北泰昌电力器材科技有限公司走向行业龙头的重要一步。本项目的研究结果将为河北泰昌电力器材科技有限公司与电能计量箱、电缆保护管、铁附件的采购商和原材料的供应商的有效沟通提供良好的途径，对促进产品全供应链的温室气体减排具有一定积极作用。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                521,
+                848,
+                687
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "本项目研究结果的潜在沟通对象包括两个群体：一是河北泰昌电力器材科技有限公司内部管理人员及其他相关人员，二是企业外部利益相关方，如上游主要原材料供应商、下游采购商、地方政府和环境非政府组织等。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                706,
+                848,
+                799
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "3.3研究的边界"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                826,
+                310,
+                845
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "根据本项目的研究目的，按照ISO/TS14067-2018、PAS 2050：2011标准的要求，本次碳足迹评价的边界为河北泰昌电力器材科技有限公司2024年全年生产活动及非生产活动数据。经现场走访与沟通，确定本次评价边界为：产品的碳足迹=原材料运输＋产品生产"
+                    }
+                ]
+            },
+            "bbox": [
+                186,
+                873,
+                847,
+                891
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                38,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                74
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "7 "
+                    }
+                ]
+            },
+            "bbox": [
+                492,
+                928,
+                502,
+                938
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                144,
+                95,
+                847,
+                185
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "3.4功能单位"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                214,
+                287,
+                234
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "为方便系统中输入/输出的量化，功能单位被定义为生产1吨电能计量箱、电缆保护管、铁附件。"
+                    }
+                ]
+            },
+            "bbox": [
+                146,
+                262,
+                836,
+                317
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "3.5生命周期流程图的绘制"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                344,
+                428,
+                363
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "根据 PAS2050：2011《商品和服务在生命周期内的温室气体排放评价规范》绘制1吨电能计量箱、电缆保护管、铁附件的生命周期流程图，其碳足迹评价模式为从商业到产品评价：包括从原料获取，通过制造到产品出厂整个过程的排放。电能计量箱、电缆保护管、铁附件的生命周期流程图如下："
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                391,
+                847,
+                521
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/7540e2cb38fdf76e80200bca7767969952cc1ae253a3b3802e6395ba25b2dc3c.jpg"
+                },
+                "content": "```mermaid\ngraph LR\n    A[\"原料运输\"] --> B[\"产品生产\"]\n    C[\"能源\"] --> A\n    D[\"CO2\"] --> A\n    E[\"能源\"] --> B\n```",
+                "image_caption": [
+                    {
+                        "type": "text",
+                        "content": "图1产品生命周期评价边界图"
+                    }
+                ],
+                "image_footnote": []
+            },
+            "sub_type": "flowchart",
+            "bbox": [
+                183,
+                546,
+                838,
+                875
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                38,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                74
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "8 "
+                    }
+                ]
+            },
+            "bbox": [
+                492,
+                928,
+                502,
+                938
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "在本项目中，产品的系统边界属“从摇篮到大门”的类型，为了实现上述功能单位，电能计量箱、电缆保护管、铁附件的系统边界见下表："
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                95,
+                850,
+                149
+            ]
+        },
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/2ad2710a888eb907a3b3bd6dd6f00dcf3e615c8019087b8542644d7c0efc4e30.jpg"
+                },
+                "table_caption": [
+                    {
+                        "type": "text",
+                        "content": "表1包含和未包含在系统边界内的生产过程"
+                    }
+                ],
+                "table_footnote": [],
+                "html": "<table><tr><td>包含的过程</td><td>未包含的过程</td></tr><tr><td>a 原材料运输b 生产过程电力等能源的消耗c 产品运输</td><td>a 次要辅料运输</td></tr></table>",
+                "table_type": "simple_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                139,
+                191,
+                858,
+                326
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "3.6取舍原则"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                344,
+                287,
+                363
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "本项目采用的取舍原则以各项原材料投入占产品重量或过程总投入的重量比为依据，具体规则如下："
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                391,
+                852,
+                445
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "I普通物料重量<1%产品重量时，以及含稀贵或高纯成分的物料重量<0.1%产品重量时，可忽略该物料的上游生产数据；总共忽略的物料重量不超过 5%;"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                464,
+                853,
+                521
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Ⅱ大多数情况下，生产设备、厂房、生活设施等可以忽略；"
+                    }
+                ]
+            },
+            "bbox": [
+                188,
+                539,
+                704,
+                558
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "ⅢI在选定环境影响类型范围内的已知排放数据不应忽略。"
+                    }
+                ]
+            },
+            "bbox": [
+                184,
+                577,
+                684,
+                594
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "本报过所有原辅料和能源等消耗都关联了上游数据，部分消耗的上有数据才有近似替代的方式处理，基本无忽略的物料。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                614,
+                850,
+                669
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "3.7影响类型和评价方法"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                696,
+                406,
+                715
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "基于研究目标的定义，本研究只选择了全球变暖这一种影响类型，并对产品生命周期的全球变暖潜值（GWP）进行了分析，因为GWP是用来量化产品碳足迹的环境影响指标。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                744,
+                848,
+                835
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "研究过程中统计了各种温室气体，包括二氧化碳（CO）、甲烷（CH4）、氧化亚氮（NO）、四氟化碳(CF)、六氟乙烷(C2F）、六氟化硫(SF）、氢氟碳化物(HFC)"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                854,
+                850,
+                910
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                38,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                74
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "9 "
+                    }
+                ]
+            },
+            "bbox": [
+                492,
+                928,
+                502,
+                939
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "和哈龙等。并且采用了IPCC 第四次评估报告（2007年）提出的方法来计算产品生命周期的GWP 值。该方法基于100 年时间范围内其他温室气体与二氧化碳相比的得到的相对辐射影响值，即特征化因子，此因子用来将其他温室气体的排放量转化为COz当量（COze）。例如，1kg 甲烷在100年内对全球变暖的影响相当于25kg二氧化碳排放对全球变暖的影响，因此以二氧化碳当量（COze）为基础，甲烷的特征因子就是 25kgCOze。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                95,
+                853,
+                300
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "3.8数据质量要求"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                325,
+                334,
+                346
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "为满足数据质量要求，在本研究中主要考虑了以下几个方面："
+                    }
+                ]
+            },
+            "bbox": [
+                186,
+                373,
+                722,
+                391
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "I数据准确性：实景数据的可靠程度"
+                    }
+                ]
+            },
+            "bbox": [
+                191,
+                410,
+                515,
+                426
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Ⅱ数据代表性：生产商、技术、地域以及时间上的代表性"
+                    }
+                ]
+            },
+            "bbox": [
+                189,
+                447,
+                695,
+                464
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Ⅲ模型一致性：采用的方法和系统边界一致性的程度"
+                    }
+                ]
+            },
+            "bbox": [
+                186,
+                483,
+                655,
+                502
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "为了满足上述要求，并确保计算结果的可靠性，在研究过程中首先选择来自生产商和供应商直接提供的初级数据，其中企业提供的经验数据取平均值，本研究在 2025年2月进行数据的调查、收集和整理工作。当初级数据不可得时，尽量选择代表区域平均和特定技术条件下的次级数据，次级数据大部分选择来自CLCD-China 数据库、瑞士Ecoinvent 数据库、欧洲生命周期参考数据库（ELCD）以及 EFDB 数据库；当目前数据库中没有完全一致的次级数据时，采用近似替代的方式选择数据库中的数据。数据库的数据是经严格审查，并广泛应用于国际上的LCA研究。各个数据集和数据质量将在第4章对每个过程介绍时详细说明。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                521,
+                850,
+                800
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                38,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                74
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": []
+            },
+            "bbox": [
+                490,
+                928,
+                507,
+                939
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "4.过程描述"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                93,
+                285,
+                112
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "4.1原材料运输阶段 "
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                149,
+                359,
+                168
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "主要数据来源：供应商运输距离、CLCD-China 数据库、瑞士Ecoinvent数据库、欧洲生命周期参考数据库（ELCD）以及 EFDB 数据库。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                197,
+                850,
+                252
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "分析：企业大多数原材料使用陆路运输购入。本研究采用数据库数据和供应商平均运距来计算原材料运输过程产生的碳排放。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                271,
+                850,
+                325
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "4.2产品生产阶段"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                353,
+                334,
+                373
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "（1）过程基本信息"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                156,
+                401,
+                322,
+                418
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "过程名称：电能计量箱、电缆保护管、铁附件的生产"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                437,
+                615,
+                455
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "过程边界：从原材料进场到产品出厂 "
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                475,
+                473,
+                492
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "（2）数据代表性"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                156,
+                512,
+                302,
+                529
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "主要数据来源：企业2024年实际生产数据"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                549,
+                524,
+                565
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业名称：河北泰昌电力器材科技有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                586,
+                532,
+                602
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "基准年：2023年"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                623,
+                297,
+                640
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "主要原料：塑料颗粒、ABS 颗粒、聚氯乙烯、角钢"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                659,
+                589,
+                678
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "主要能耗：电力、汽油"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                697,
+                352,
+                714
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "5.数据的收集和主要排放因子说明"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                751,
+                556,
+                772
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "为了计算产品的碳足迹，必须考虑活动水平数据、排放因子数据和全球增温潜势（GWP）。活动水平数据是指产品在生命周期中的所有的量化数据（包括物质的输入、输出；能量使用；交通等方面）。排放因子数据是指单位活动水平数据排放的温室气体数量。利用排放因子数据，可以将活动水平数据转化为温室气体排放量。如：电力的排放因子可表示为：COze/kWh，全球增温潜势是将单位质量的某种温室效应气体（GHG）在给定时间段内辐射强度的影响与等量二氧化碳辐射强度影响相关联的系数，如CH4（甲烷）的GWP 值是21。活动水平数据来自现场实测；排放因子采用IPCC 规定的缺失值。活动水平数据主要包括：电力消耗量等。排放因子数据主要包括电力排放因子等。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                808,
+                850,
+                900
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                151,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                38,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co.,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                74
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "11 "
+                    }
+                ]
+            },
+            "bbox": [
+                490,
+                928,
+                507,
+                939
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                144,
+                95,
+                850,
+                299
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "6.碳足迹计算 "
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                334,
+                314,
+                356
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "6.1碳足迹识别 "
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                390,
+                312,
+                410
+            ]
+        },
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/8e8d5bb85d7faf51b9b200948755338f16f606a08292e062ac5a5f626b84c19e.jpg"
+                },
+                "table_caption": [],
+                "table_footnote": [],
+                "html": "<table><tr><td>序号</td><td>主体</td><td>活动内容</td><td colspan=\"2\">活动数据来源</td></tr><tr><td>1</td><td>生产设备</td><td>消耗电力、天然气</td><td rowspan=\"2\">初级活动数据</td><td>生产报表</td></tr><tr><td>2</td><td>制冷机、空调、采暖等辅助设备</td><td>消耗电力</td><td>生产报表</td></tr><tr><td>3</td><td>原材料运输</td><td>消耗柴油、汽油</td><td>次级活动数据</td><td>供应商地址、数据库</td></tr><tr><td>4</td><td>产品运输</td><td>消耗柴油、汽油</td><td>次级活动数据</td><td>客户地址、数据库</td></tr></table>",
+                "table_type": "complex_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                137,
+                426,
+                858,
+                694
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "6.2计算公式"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                709,
+                289,
+                728
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "产品碳足迹的公式是整个产品生命周期中所有活动的所有材料、能源和废物乘以其排放因子后再加和。其计算公式如下："
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                757,
+                848,
+                812
+            ]
+        },
+        {
+            "type": "equation_interline",
+            "content": {
+                "math_content": "\\mathrm{CF} = \\sum_ {\\mathrm{i} = 1, \\mathrm{j} = 1} ^ {\\mathrm{n}} \\mathrm{P} _ {\\mathrm{i}} \\times \\mathrm{Q} _ {\\mathrm{ij}} \\times \\mathrm{GWP} _ {\\mathrm{i}}",
+                "math_type": "latex",
+                "image_source": {
+                    "path": "images/72550d0a1088e09c54d7a8f288d337dd3e939f32f8baebbb60def4362f825137.jpg"
+                }
+            },
+            "bbox": [
+                364,
+                818,
+                631,
+                854
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "其中，CF 为碳足迹，P为活动水平数据，Q为排放因子，GWP为全球变温潜势。排放因子源于EFDB 数据库和相关参考文献，由于部分物料数据库中暂无排放因子，取值均来自于相近物料排放因子。"
+                    }
+                ]
+            },
+            "bbox": [
+                184,
+                864,
+                850,
+                882
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                38,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co.,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                76
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": []
+            },
+            "bbox": [
+                490,
+                928,
+                507,
+                939
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                144,
+                95,
+                850,
+                149
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "6.3碳足迹数据计算"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                177,
+                359,
+                197
+            ]
+        },
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/a3fd4e8cd70866f4a838592e27f342e4fb980049868787393e1eb9b3d6d78b59.jpg"
+                },
+                "table_caption": [],
+                "table_footnote": [],
+                "html": "<table><tr><td>项目</td><td>组分</td><td>消耗数据</td><td>排放因子</td><td>GWP</td><td> $tCO_2e$ </td></tr><tr><td>电力(MWh)</td><td> $CO_2$ </td><td>92.758</td><td>0.5568 $tCO_2/MWH$ </td><td>1</td><td>51.65</td></tr><tr><td>汽油(t)</td><td> $CO_2$ </td><td>0.435097897</td><td>2.924 $tCO_2/t$ </td><td>1</td><td>1.27</td></tr><tr><td>原材料运输 (tkm)</td><td> $CO_2$ </td><td>231257.5</td><td>0.14kg/tkm</td><td>1</td><td>32.38</td></tr><tr><td>产品运输 (tkm)</td><td> $CO_2$ </td><td>1669226.32</td><td>0.14kg/tkm</td><td></td><td>233.69</td></tr><tr><td colspan=\"5\">合计( $tCO_2e$ )</td><td>318.99</td></tr></table>",
+                "table_type": "complex_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                137,
+                212,
+                860,
+                467
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "6.4碳足迹数据分析 "
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                482,
+                359,
+                502
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "根据以上公式可以计算出 2024年度产品全周期的二氧化碳的排放量为318.99tC0ze。全年产品总产量为1615.524 吨。因此1吨产品的碳足迹为0.197tCO2e/t。从产品生命周期累计碳足迹贡献比例的情况，可以看出公司产品的碳排放环节主要集中在产品生产环节的能源消耗活动，其次为原材料运输。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                530,
+                852,
+                659
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "电能计量箱、电缆保护管、铁附件产品生命周期碳排放清单："
+                    }
+                ]
+            },
+            "bbox": [
+                186,
+                678,
+                724,
+                696
+            ]
+        },
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/9e4cbb340cb395951789abbfc5bd5a809f2499d8da4641be90fe5f0b4fb5a871.jpg"
+                },
+                "table_caption": [],
+                "table_footnote": [],
+                "html": "<table><tr><td>环境类型</td><td>当量单位</td><td>原材料运输</td><td>产品生产</td><td>产品运输</td><td>合计</td></tr><tr><td>产品碳足迹(CF)</td><td> $tCO_{2}e$ </td><td>32.38</td><td>52.92</td><td>233.69</td><td>318.99</td></tr><tr><td colspan=\"2\">占比(%)</td><td>10.15%</td><td>16.59%</td><td>73.26%</td><td>100.00%</td></tr></table>",
+                "table_type": "complex_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                139,
+                703,
+                858,
+                895
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                38,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co.,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                76
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": []
+            },
+            "bbox": [
+                490,
+                928,
+                507,
+                939
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "所以为减小产品碳足迹，应重点研发加大对产品生产过程中的节能降耗管理。"
+                    }
+                ]
+            },
+            "bbox": [
+                184,
+                95,
+                857,
+                112
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "为了减小产品碳足迹，建议如下："
+                    }
+                ]
+            },
+            "bbox": [
+                186,
+                131,
+                480,
+                149
+            ]
+        },
+        {
+            "type": "list",
+            "content": {
+                "list_type": "text_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "（1）加强产品的生态设计，投入更多资金研发更节能的产品；"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "（2）加强节能工作，从技术及管理层面提升能源效率，减少能源投入，厂内可考虑实施节能改造；"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "（3）在原材料价位差异不大的情况下，尽量选取原材料碳足迹小的供应商；"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "（4）在分析指标的符合性评价结果以及碳足迹分析、计算结果的基础上，结合环境友好的设计方案采用、落实生产者责任延伸制度、绿色供应链管理工作，提出产品生态设计改进的具体方案;"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                168,
+                848,
+                410
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "（5）继续推进绿色低碳发展意识"
+                    }
+                ]
+            },
+            "bbox": [
+                196,
+                429,
+                484,
+                445
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "坚定树立企业可持续发展原则，加强生命周期理念的宣传和实践。运用科学方法，加强产品碳足迹全过程中数据的积累和记录，定期对产品全生命周期的环境影响进行自查，以便企业内部开展相关对比分析，发现问题。在生态设计管理、组织、人员等方面进一步完善;"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                464,
+                848,
+                595
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "（6）推进产业链的绿色设计发展"
+                    }
+                ]
+            },
+            "bbox": [
+                196,
+                614,
+                484,
+                631
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "制定生态设计管理体制和生态设计管理制度，明确任务分工；构建支撑企业生态设计的评价体系；建立打造绿色供应链的相关制度，推动供应链协同改进。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                651,
+                848,
+                707
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "7.不确定分析"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                146,
+                741,
+                312,
+                763
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "不确定性的主要来源为初级数据存在测量误差和计算误差。减少不确定性的方法主要有："
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                799,
+                847,
+                853
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "使用准确率较高的初级数据；"
+                    }
+                ]
+            },
+            "bbox": [
+                186,
+                873,
+                440,
+                891
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                38,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                74
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": []
+            },
+            "bbox": [
+                490,
+                928,
+                507,
+                938
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "对每道工序都进行能源消耗的跟踪监测，提高初级数据的准确性。"
+                    }
+                ]
+            },
+            "bbox": [
+                186,
+                95,
+                764,
+                112
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "8.结语 "
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                149,
+                231,
+                168
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "低碳是企业未来生存和发展的必然选择，进行产品碳足迹的核算是实现温室气体管理，制定低碳发展的战略的第一步。通过产品生命周期的碳足迹核算，可以了解排放源，明确各生产环节的排放量，为制定合理的减排目标和发展战略打下基础。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                206,
+                852,
+                334
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/dd2c66a6243401a8a3d9d75142a806b4f675a4473f54c29f05df09cb836054b0.jpg"
+                },
+                "content": "承认联合认证\nZHONG REN LIAN HE REN ZHEJIANG",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                250,
+                322,
+                744,
+                675
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                38,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co.,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                74
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "15 "
+                    }
+                ]
+            },
+            "bbox": [
+                490,
+                928,
+                507,
+                939
+            ]
+        }
+    ],
+    [
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/4ea64aab3234239a52d6d183f2199980117ad715ec07afb2ff27822ad9a11f53.jpg"
+                },
+                "content": "Abstract wave design with green and blue gradients, no text or symbols present",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "natural_image",
+            "bbox": [
+                0,
+                0,
+                998,
+                832
+            ]
+        },
+        {
+            "type": "page_footer",
+            "content": {
+                "page_footer_content": [
+                    {
+                        "type": "text",
+                        "content": "联★"
+                    }
+                ]
+            },
+            "bbox": [
+                80,
+                853,
+                164,
+                910
+            ]
+        },
+        {
+            "type": "page_footer",
+            "content": {
+                "page_footer_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证"
+                    }
+                ]
+            },
+            "bbox": [
+                191,
+                856,
+                559,
+                882
+            ]
+        },
+        {
+            "type": "page_footer",
+            "content": {
+                "page_footer_content": [
+                    {
+                        "type": "text",
+                        "content": "ZhongRenLianHe Certification Co.,Ltd "
+                    }
+                ]
+            },
+            "bbox": [
+                194,
+                889,
+                559,
+                904
+            ]
+        },
+        {
+            "type": "page_footer",
+            "content": {
+                "page_footer_content": [
+                    {
+                        "type": "text",
+                        "content": "地址：广东省佛山市顺德区容桂朝桂南路1号科技创新中心4座2305号"
+                    }
+                ]
+            },
+            "bbox": [
+                82,
+                923,
+                566,
+                938
+            ]
+        }
+    ]
+]

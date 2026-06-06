@@ -1,0 +1,85 @@
+{
+  "created_at": "2026-06-06T03:10:12.450053+00:00",
+  "results": [
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.生产厂房一览表/2.土地使用证明.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/2_土地使用证明_9fb76e",
+      "asset_count": 1,
+      "page_count": 1,
+      "evidence_type": "production_capacity"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.生产厂房一览表/4.电费发票.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/4_电费发票_28a145",
+      "asset_count": 0,
+      "page_count": 3,
+      "evidence_type": "production_capacity"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.生产厂房一览表/1.土地租赁协议.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/1_土地租赁协议_4ddb62",
+      "asset_count": 4,
+      "page_count": 4,
+      "evidence_type": "production_capacity"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.生产厂房一览表/3.厂房图片.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/3_厂房图片_a5b6b6",
+      "asset_count": 6,
+      "page_count": 6,
+      "evidence_type": "production_capacity"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/3.电子天平/电子天平.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/电子天平_96dba4",
+      "asset_count": 7,
+      "page_count": 6,
+      "evidence_type": "testing_capacity"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/1.CPVC63三层复合管材挤出生产线/1.CPVC63三层复合管材挤出生产线.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/1_CPVC63三层复合管材挤出生产线_7c628e",
+      "asset_count": 5,
+      "page_count": 7,
+      "evidence_type": "production_capacity"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/2.CPVC110三层复合管材挤出生产线/2.CPVC110三层复合管材挤出生产线.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/2_CPVC110三层复合管材挤出生产线_d08ccd",
+      "asset_count": 5,
+      "page_count": 7,
+      "evidence_type": "production_capacity"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/5.溶体流动速率仪/溶体流动速率仪.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/溶体流动速率仪_145192",
+      "asset_count": 8,
+      "page_count": 7,
+      "evidence_type": "testing_capacity"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/3.MPP生产线/3.MPP生产线.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/3_MPP生产线_6de5e2",
+      "asset_count": 7,
+      "page_count": 8,
+      "evidence_type": "production_capacity"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/1.微机控制电子万能试验机/微机控制电子万能试验机.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/微机控制电子万能试验机_74c9e1",
+      "asset_count": 7,
+      "page_count": 8,
+      "evidence_type": "testing_capacity"
+    }
+  ]
+}
