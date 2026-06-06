@@ -1,0 +1,64 @@
+[
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "河北泰昌电力器材科技有限公司"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                329,
+                130,
+                665,
+                149
+            ]
+        },
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/357c0affa4dc2f311d02157527c7e78383a03cd2c89fce801b277e432f87f991.jpg"
+                },
+                "table_caption": [
+                    {
+                        "type": "text",
+                        "content": "生产设备台账"
+                    }
+                ],
+                "table_footnote": [],
+                "html": "<table><tr><td>序号</td><td>设备型号</td><td>设备名称</td><td>生产厂家</td></tr><tr><td>1</td><td>CPVC63</td><td>CPVC63 三层复合管材挤出生产线</td><td>江苏欣荣科技发展有限公司</td></tr><tr><td>2</td><td>CPVC110</td><td>CPVC110 三层复合管材挤出生产线</td><td>江苏欣荣科技发展有限公司</td></tr><tr><td>3</td><td>SJMPP-90 型</td><td>MPP 生产线</td><td>雄县顺达塑料机械厂</td></tr></table>",
+                "table_type": "simple_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                137,
+                193,
+                878,
+                273
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/be1ebd77f4b261b01488d751972df17cbc7d9542181434ac621fec2ffbb7a97e.jpg"
+                },
+                "content": "生产线\n江苏欣荣科\n雄县顺达\n河北电气科技有限公司\n1306210005674",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                556,
+                229,
+                736,
+                355
+            ]
+        }
+    ]
+]

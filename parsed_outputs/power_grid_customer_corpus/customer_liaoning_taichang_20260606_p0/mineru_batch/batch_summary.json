@@ -1,0 +1,29 @@
+{
+  "created_at": "2026-06-06T02:52:29.725263+00:00",
+  "results": [
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/2.环境管理体系认证证书.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/2_环境管理体系认证证书",
+      "asset_count": 10
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/1.质量管理体系认证证书.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/1_质量管理体系认证证书",
+      "asset_count": 9
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/3.职业健康安全管理体系认证证书.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/3_职业健康安全管理体系认证证书",
+      "asset_count": 7
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/生产设备台账.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/生产设备台账",
+      "asset_count": 1
+    }
+  ]
+}

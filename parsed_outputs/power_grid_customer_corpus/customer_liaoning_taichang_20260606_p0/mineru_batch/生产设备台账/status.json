@@ -1,0 +1,36 @@
+{
+  "parse_id": "taichang_production_capacity_20260606_105220_c5c9c1ec",
+  "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/生产设备台账.pdf",
+  "evidence_type": "production_capacity",
+  "started_at": "2026-06-06T02:52:20.190453+00:00",
+  "parser": "mineru",
+  "privacy_level": "private",
+  "target_library": "product_library",
+  "batch_id": "215f47f6-b1a9-4372-a0c6-eb159f80f7c9",
+  "data_id": "taichang_production_capacity_20260606_105220_c5c9c1ec",
+  "submitted_at": "2026-06-06T02:52:20.386795+00:00",
+  "parse_status": "mineru_done",
+  "mineru_result": {
+    "data_id": "taichang_production_capacity_20260606_105220_c5c9c1ec",
+    "file_name": "生产设备台账.pdf",
+    "state": "done",
+    "err_msg": ""
+  },
+  "artifacts": {
+    "zip_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/生产设备台账/mineru_result.zip",
+    "extract_dir": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/生产设备台账/extract",
+    "markdown_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/生产设备台账/extract/full.md",
+    "content_list_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/生产设备台账/extract/bddb365c-5138-4048-89e4-bb358a0aeb92_content_list.json",
+    "model_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/生产设备台账/extract/bddb365c-5138-4048-89e4-bb358a0aeb92_model.json",
+    "middle_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/生产设备台账/extract/layout.json",
+    "download_info": {
+      "url_host": "cdn-mineru.openxlab.org.cn",
+      "resume_enabled": true,
+      "used_curl_fallback": true,
+      "resumed_from_bytes": 0,
+      "downloaded_bytes": 0,
+      "zip_size": 202573
+    }
+  },
+  "finished_at": "2026-06-06T02:52:29.724787+00:00"
+}

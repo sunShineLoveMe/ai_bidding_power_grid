@@ -1,0 +1,5018 @@
+{
+    "pdf_info": [
+        {
+            "preproc_blocks": [
+                {
+                    "bbox": [
+                        180,
+                        61,
+                        418,
+                        151
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                176,
+                                56,
+                                423,
+                                111
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        176,
+                                        56,
+                                        423,
+                                        111
+                                    ],
+                                    "type": "text",
+                                    "content": "环境管理体系",
+                                    "score": 0.995
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                178,
+                                98,
+                                386,
+                                160
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        178,
+                                        98,
+                                        386,
+                                        160
+                                    ],
+                                    "type": "text",
+                                    "content": "认证证书",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 1
+                },
+                {
+                    "bbox": [
+                        395,
+                        183,
+                        530,
+                        197
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 1,
+                    "lines": [
+                        {
+                            "bbox": [
+                                395,
+                                182,
+                                531,
+                                197
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        395,
+                                        182,
+                                        531,
+                                        197
+                                    ],
+                                    "type": "text",
+                                    "content": "证书号：17424E20980R0M",
+                                    "score": 0.995
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        273,
+                        215,
+                        336,
+                        232
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 2,
+                    "lines": [
+                        {
+                            "bbox": [
+                                271,
+                                212,
+                                339,
+                                235
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        271,
+                                        212,
+                                        339,
+                                        235
+                                    ],
+                                    "type": "text",
+                                    "content": "兹证明",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        177,
+                        246,
+                        430,
+                        266
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 3,
+                    "lines": [
+                        {
+                            "bbox": [
+                                175,
+                                244,
+                                431,
+                                267
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        175,
+                                        244,
+                                        431,
+                                        267
+                                    ],
+                                    "type": "text",
+                                    "content": "河北泰昌电力器材科技有限公司",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "bbox": [
+                        194,
+                        277,
+                        416,
+                        293
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 4,
+                    "lines": [
+                        {
+                            "bbox": [
+                                192,
+                                275,
+                                418,
+                                294
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        192,
+                                        275,
+                                        418,
+                                        294
+                                    ],
+                                    "type": "text",
+                                    "content": "统一社会信用代码：91130607056539515C",
+                                    "score": 0.996
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        195,
+                        298,
+                        414,
+                        313
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 5,
+                    "lines": [
+                        {
+                            "bbox": [
+                                194,
+                                296,
+                                416,
+                                314
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        194,
+                                        296,
+                                        416,
+                                        314
+                                    ],
+                                    "type": "text",
+                                    "content": "注册地址：河北省保定市满城区陉阳驿村",
+                                    "score": 0.981
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        196,
+                        316,
+                        414,
+                        330
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 6,
+                    "lines": [
+                        {
+                            "bbox": [
+                                194,
+                                314,
+                                416,
+                                331
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        194,
+                                        314,
+                                        416,
+                                        331
+                                    ],
+                                    "type": "text",
+                                    "content": "办公地址：河北省保定市满城区陉阳驿村",
+                                    "score": 0.975
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        180,
+                        334,
+                        430,
+                        349
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 7,
+                    "lines": [
+                        {
+                            "bbox": [
+                                179,
+                                332,
+                                430,
+                                350
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        179,
+                                        332,
+                                        430,
+                                        350
+                                    ],
+                                    "type": "text",
+                                    "content": "生产/经营地址：河北省保定市满城区陉阳驿村",
+                                    "score": 0.97
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        255,
+                        380,
+                        354,
+                        395
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 8,
+                    "lines": [
+                        {
+                            "bbox": [
+                                253,
+                                378,
+                                355,
+                                397
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        253,
+                                        378,
+                                        355,
+                                        397
+                                    ],
+                                    "type": "text",
+                                    "content": "环境管理体系符合",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        146,
+                        411,
+                        464,
+                        426
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 9,
+                    "lines": [
+                        {
+                            "bbox": [
+                                146,
+                                410,
+                                464,
+                                426
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        146,
+                                        410,
+                                        464,
+                                        426
+                                    ],
+                                    "type": "text",
+                                    "content": "GB/T24001-2016/IS014001:2015标准条款的要求",
+                                    "score": 0.99
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        238,
+                        442,
+                        373,
+                        458
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 10,
+                    "lines": [
+                        {
+                            "bbox": [
+                                238,
+                                441,
+                                373,
+                                458
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        238,
+                                        441,
+                                        373,
+                                        458
+                                    ],
+                                    "type": "text",
+                                    "content": "该体系认证所覆盖的范围",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        148,
+                        498,
+                        464,
+                        529
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 11,
+                    "lines": [
+                        {
+                            "bbox": [
+                                148,
+                                496,
+                                465,
+                                513
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        148,
+                                        496,
+                                        465,
+                                        513
+                                    ],
+                                    "type": "text",
+                                    "content": "低压配电箱的生产，电力金具、铁附件、电缆保护管的销售",
+                                    "score": 0.999
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                245,
+                                513,
+                                370,
+                                529
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        245,
+                                        513,
+                                        370,
+                                        529
+                                    ],
+                                    "type": "text",
+                                    "content": "所涉及的环境管理活动",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        83,
+                        584,
+                        434,
+                        635
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                83,
+                                584,
+                                434,
+                                635
+                            ],
+                            "type": "table_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        83,
+                                        584,
+                                        434,
+                                        635
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                83,
+                                                584,
+                                                434,
+                                                635
+                                            ],
+                                            "type": "table",
+                                            "html": "<table><tr><td>第一次监审</td><td>贴标处</td><td>第二次监审</td><td>贴标处</td><td>第三次监审</td><td>贴标处</td></tr></table>",
+                                            "image_path": "662e71a145c2ba1b5ec4aa385ef5f6532194fb253183c8ff0b0b6d767cadabb7.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 12
+                        }
+                    ],
+                    "index": 12
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        481,
+                        589,
+                        527,
+                        635
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                481,
+                                589,
+                                527,
+                                635
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        481,
+                                        589,
+                                        527,
+                                        635
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                481,
+                                                589,
+                                                527,
+                                                635
+                                            ],
+                                            "type": "image",
+                                            "image_path": "ab7214ece2d51c555e103be0532f86d22a2909677fe150a3d666f43d2e413f1a.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 13
+                        }
+                    ],
+                    "index": 13
+                },
+                {
+                    "bbox": [
+                        82,
+                        636,
+                        422,
+                        668
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 14,
+                    "lines": [
+                        {
+                            "bbox": [
+                                83,
+                                635,
+                                422,
+                                647
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        83,
+                                        635,
+                                        422,
+                                        647
+                                    ],
+                                    "type": "text",
+                                    "content": "证书有效期内，获证组织须每年至少接受一次监督审核并加贴合格标志，证书方为有效。",
+                                    "score": 0.999
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                83,
+                                645,
+                                390,
+                                659
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        83,
+                                        645,
+                                        390,
+                                        659
+                                    ],
+                                    "type": "text",
+                                    "content": "本证书信息可在国家认证认可监督管理委员会官方网站：www.cnca.gov.cn查询",
+                                    "score": 0.984
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                83,
+                                657,
+                                239,
+                                668
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        83,
+                                        657,
+                                        239,
+                                        668
+                                    ],
+                                    "type": "text",
+                                    "content": "证书有效性以右侧二维码扫描内容为准。",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        70,
+                        673,
+                        133,
+                        730
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                70,
+                                673,
+                                133,
+                                730
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        70,
+                                        673,
+                                        133,
+                                        730
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                70,
+                                                673,
+                                                133,
+                                                730
+                                            ],
+                                            "type": "image",
+                                            "image_path": "6e196db18de002eb1b4a2be7e64fd79663370ffe225e0f0c9750cb8aae9f0d37.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 15
+                        },
+                        {
+                            "bbox": [
+                                76,
+                                730,
+                                127,
+                                740
+                            ],
+                            "type": "image_caption",
+                            "angle": 0,
+                            "index": 16,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        75,
+                                        728,
+                                        129,
+                                        742
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                75,
+                                                728,
+                                                129,
+                                                742
+                                            ],
+                                            "type": "text",
+                                            "content": "华信创认证",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 15
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        151,
+                        679,
+                        243,
+                        737
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                151,
+                                679,
+                                243,
+                                737
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        151,
+                                        679,
+                                        243,
+                                        737
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                151,
+                                                679,
+                                                243,
+                                                737
+                                            ],
+                                            "type": "image",
+                                            "content": "MEMBER OF MULTILATERAL\nRECOGNITION ARRANGEMENT",
+                                            "image_path": "7cc270c76b5ee23f73a5e5d5b16233ffe213c56549dca4b8ee1067ee2afb61c4.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 17
+                        }
+                    ],
+                    "index": 17,
+                    "sub_type": "text_image"
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        254,
+                        678,
+                        332,
+                        738
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                254,
+                                678,
+                                332,
+                                738
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        254,
+                                        678,
+                                        332,
+                                        738
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                254,
+                                                678,
+                                                332,
+                                                738
+                                            ],
+                                            "type": "image",
+                                            "image_path": "83342342ddde70505085798d0398f9c6dbf44567046a2325a005e80a6546470a.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 18
+                        }
+                    ],
+                    "index": 18
+                },
+                {
+                    "bbox": [
+                        345,
+                        687,
+                        371,
+                        695
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 19,
+                    "lines": [
+                        {
+                            "bbox": [
+                                344,
+                                687,
+                                373,
+                                696
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        344,
+                                        687,
+                                        373,
+                                        696
+                                    ],
+                                    "type": "text",
+                                    "content": "中国认可",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        345,
+                        695,
+                        371,
+                        702
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 20,
+                    "lines": [
+                        {
+                            "bbox": [
+                                344,
+                                693,
+                                372,
+                                703
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        344,
+                                        693,
+                                        372,
+                                        703
+                                    ],
+                                    "type": "text",
+                                    "content": "国际互认",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        345,
+                        702,
+                        371,
+                        709
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 21,
+                    "lines": [
+                        {
+                            "bbox": [
+                                344,
+                                701,
+                                373,
+                                711
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        344,
+                                        701,
+                                        373,
+                                        711
+                                    ],
+                                    "type": "text",
+                                    "content": "管理体系",
+                                    "score": 0.997
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        345,
+                        710,
+                        419,
+                        717
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 22,
+                    "lines": [
+                        {
+                            "bbox": [
+                                344,
+                                709,
+                                420,
+                                718
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        344,
+                                        709,
+                                        420,
+                                        718
+                                    ],
+                                    "type": "text",
+                                    "content": "MANAGEMENTSYSTEM",
+                                    "score": 0.998
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        345,
+                        718,
+                        390,
+                        725
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 23,
+                    "lines": [
+                        {
+                            "bbox": [
+                                344,
+                                717,
+                                390,
+                                726
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        344,
+                                        717,
+                                        390,
+                                        726
+                                    ],
+                                    "type": "text",
+                                    "content": "CNASC174-M",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        425,
+                        667,
+                        527,
+                        746
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                425,
+                                667,
+                                527,
+                                746
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        425,
+                                        667,
+                                        527,
+                                        746
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                425,
+                                                667,
+                                                527,
+                                                746
+                                            ],
+                                            "type": "image",
+                                            "content": "Beijing Certification Center\n证书专用章\n北京认证中心\n证书专用章",
+                                            "image_path": "e30b08f2fde301f4ac48a6f03a71ee59d602365537d3b547a19874fc9c21be25.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 24
+                        }
+                    ],
+                    "index": 24,
+                    "sub_type": "text_image"
+                },
+                {
+                    "bbox": [
+                        90,
+                        754,
+                        235,
+                        766
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 25,
+                    "lines": [
+                        {
+                            "bbox": [
+                                91,
+                                753,
+                                236,
+                                766
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        91,
+                                        753,
+                                        236,
+                                        766
+                                    ],
+                                    "type": "text",
+                                    "content": "初次获证日期：2024年10月21日",
+                                    "score": 0.998
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        256,
+                        754,
+                        378,
+                        766
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 26,
+                    "lines": [
+                        {
+                            "bbox": [
+                                256,
+                                753,
+                                378,
+                                766
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        256,
+                                        753,
+                                        378,
+                                        766
+                                    ],
+                                    "type": "text",
+                                    "content": "签发日期：2024年10月21日",
+                                    "score": 0.998
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        398,
+                        754,
+                        520,
+                        766
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 27,
+                    "lines": [
+                        {
+                            "bbox": [
+                                398,
+                                752,
+                                520,
+                                767
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        398,
+                                        752,
+                                        520,
+                                        767
+                                    ],
+                                    "type": "text",
+                                    "content": "有效日期：2027年10月20日",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        128,
+                        767,
+                        324,
+                        778
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 28,
+                    "lines": [
+                        {
+                            "bbox": [
+                                129,
+                                767,
+                                325,
+                                778
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        129,
+                                        767,
+                                        325,
+                                        778
+                                    ],
+                                    "type": "text",
+                                    "content": "北京市昌平区科技园区振兴路28号2号楼228室",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        345,
+                        769,
+                        406,
+                        778
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 29,
+                    "lines": [
+                        {
+                            "bbox": [
+                                343,
+                                767,
+                                408,
+                                780
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        343,
+                                        767,
+                                        408,
+                                        780
+                                    ],
+                                    "type": "text",
+                                    "content": "www.hxccc.org",
+                                    "score": 0.993
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        427,
+                        768,
+                        483,
+                        778
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 30,
+                    "lines": [
+                        {
+                            "bbox": [
+                                426,
+                                767,
+                                484,
+                                778
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        426,
+                                        767,
+                                        484,
+                                        778
+                                    ],
+                                    "type": "text",
+                                    "content": "010-57146599",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                }
+            ],
+            "discarded_blocks": [
+                {
+                    "bbox": [
+                        461,
+                        797,
+                        565,
+                        815
+                    ],
+                    "type": "footer",
+                    "angle": 0,
+                    "index": 31,
+                    "lines": [
+                        {
+                            "bbox": [
+                                458,
+                                794,
+                                566,
+                                816
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        458,
+                                        794,
+                                        566,
+                                        816
+                                    ],
+                                    "type": "text",
+                                    "content": "No.0011169",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "page_size": [
+                595,
+                842
+            ],
+            "page_idx": 0,
+            "para_blocks": [
+                {
+                    "bbox": [
+                        180,
+                        61,
+                        418,
+                        151
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                176,
+                                56,
+                                423,
+                                111
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        176,
+                                        56,
+                                        423,
+                                        111
+                                    ],
+                                    "type": "text",
+                                    "content": "环境管理体系",
+                                    "score": 0.995
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                178,
+                                98,
+                                386,
+                                160
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        178,
+                                        98,
+                                        386,
+                                        160
+                                    ],
+                                    "type": "text",
+                                    "content": "认证证书",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 1
+                },
+                {
+                    "bbox": [
+                        395,
+                        183,
+                        530,
+                        197
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 1,
+                    "lines": [
+                        {
+                            "bbox": [
+                                395,
+                                182,
+                                531,
+                                197
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        395,
+                                        182,
+                                        531,
+                                        197
+                                    ],
+                                    "type": "text",
+                                    "content": "证书号：17424E20980R0M",
+                                    "score": 0.995
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        273,
+                        215,
+                        336,
+                        232
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 2,
+                    "lines": [
+                        {
+                            "bbox": [
+                                271,
+                                212,
+                                339,
+                                235
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        271,
+                                        212,
+                                        339,
+                                        235
+                                    ],
+                                    "type": "text",
+                                    "content": "兹证明",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        177,
+                        246,
+                        430,
+                        266
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 3,
+                    "lines": [
+                        {
+                            "bbox": [
+                                175,
+                                244,
+                                431,
+                                267
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        175,
+                                        244,
+                                        431,
+                                        267
+                                    ],
+                                    "type": "text",
+                                    "content": "河北泰昌电力器材科技有限公司",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "bbox": [
+                        194,
+                        277,
+                        416,
+                        293
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 4,
+                    "lines": [
+                        {
+                            "bbox": [
+                                192,
+                                275,
+                                418,
+                                294
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        192,
+                                        275,
+                                        418,
+                                        294
+                                    ],
+                                    "type": "text",
+                                    "content": "统一社会信用代码：91130607056539515C",
+                                    "score": 0.996
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        195,
+                        298,
+                        414,
+                        313
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 5,
+                    "lines": [
+                        {
+                            "bbox": [
+                                194,
+                                296,
+                                416,
+                                314
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        194,
+                                        296,
+                                        416,
+                                        314
+                                    ],
+                                    "type": "text",
+                                    "content": "注册地址：河北省保定市满城区陉阳驿村",
+                                    "score": 0.981
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        196,
+                        316,
+                        414,
+                        330
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 6,
+                    "lines": [
+                        {
+                            "bbox": [
+                                194,
+                                314,
+                                416,
+                                331
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        194,
+                                        314,
+                                        416,
+                                        331
+                                    ],
+                                    "type": "text",
+                                    "content": "办公地址：河北省保定市满城区陉阳驿村",
+                                    "score": 0.975
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        180,
+                        334,
+                        430,
+                        349
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 7,
+                    "lines": [
+                        {
+                            "bbox": [
+                                179,
+                                332,
+                                430,
+                                350
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        179,
+                                        332,
+                                        430,
+                                        350
+                                    ],
+                                    "type": "text",
+                                    "content": "生产/经营地址：河北省保定市满城区陉阳驿村",
+                                    "score": 0.97
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        255,
+                        380,
+                        354,
+                        395
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 8,
+                    "lines": [
+                        {
+                            "bbox": [
+                                253,
+                                378,
+                                355,
+                                397
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        253,
+                                        378,
+                                        355,
+                                        397
+                                    ],
+                                    "type": "text",
+                                    "content": "环境管理体系符合",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        146,
+                        411,
+                        464,
+                        426
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 9,
+                    "lines": [
+                        {
+                            "bbox": [
+                                146,
+                                410,
+                                464,
+                                426
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        146,
+                                        410,
+                                        464,
+                                        426
+                                    ],
+                                    "type": "text",
+                                    "content": "GB/T24001-2016/IS014001:2015标准条款的要求",
+                                    "score": 0.99
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        238,
+                        442,
+                        373,
+                        458
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 10,
+                    "lines": [
+                        {
+                            "bbox": [
+                                238,
+                                441,
+                                373,
+                                458
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        238,
+                                        441,
+                                        373,
+                                        458
+                                    ],
+                                    "type": "text",
+                                    "content": "该体系认证所覆盖的范围",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        148,
+                        498,
+                        464,
+                        529
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 11,
+                    "lines": [
+                        {
+                            "bbox": [
+                                148,
+                                496,
+                                465,
+                                513
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        148,
+                                        496,
+                                        465,
+                                        513
+                                    ],
+                                    "type": "text",
+                                    "content": "低压配电箱的生产，电力金具、铁附件、电缆保护管的销售",
+                                    "score": 0.999
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                245,
+                                513,
+                                370,
+                                529
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        245,
+                                        513,
+                                        370,
+                                        529
+                                    ],
+                                    "type": "text",
+                                    "content": "所涉及的环境管理活动",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        83,
+                        584,
+                        434,
+                        635
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                83,
+                                584,
+                                434,
+                                635
+                            ],
+                            "type": "table_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        83,
+                                        584,
+                                        434,
+                                        635
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                83,
+                                                584,
+                                                434,
+                                                635
+                                            ],
+                                            "type": "table",
+                                            "html": "<table><tr><td>第一次监审</td><td>贴标处</td><td>第二次监审</td><td>贴标处</td><td>第三次监审</td><td>贴标处</td></tr></table>",
+                                            "image_path": "662e71a145c2ba1b5ec4aa385ef5f6532194fb253183c8ff0b0b6d767cadabb7.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 12
+                        }
+                    ],
+                    "index": 12
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        481,
+                        589,
+                        527,
+                        635
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                481,
+                                589,
+                                527,
+                                635
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        481,
+                                        589,
+                                        527,
+                                        635
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                481,
+                                                589,
+                                                527,
+                                                635
+                                            ],
+                                            "type": "image",
+                                            "image_path": "ab7214ece2d51c555e103be0532f86d22a2909677fe150a3d666f43d2e413f1a.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 13
+                        }
+                    ],
+                    "index": 13
+                },
+                {
+                    "bbox": [
+                        82,
+                        636,
+                        422,
+                        668
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 14,
+                    "lines": [
+                        {
+                            "bbox": [
+                                83,
+                                635,
+                                422,
+                                647
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        83,
+                                        635,
+                                        422,
+                                        647
+                                    ],
+                                    "type": "text",
+                                    "content": "证书有效期内，获证组织须每年至少接受一次监督审核并加贴合格标志，证书方为有效。",
+                                    "score": 0.999
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                83,
+                                645,
+                                390,
+                                659
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        83,
+                                        645,
+                                        390,
+                                        659
+                                    ],
+                                    "type": "text",
+                                    "content": "本证书信息可在国家认证认可监督管理委员会官方网站：www.cnca.gov.cn查询",
+                                    "score": 0.984
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                83,
+                                657,
+                                239,
+                                668
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        83,
+                                        657,
+                                        239,
+                                        668
+                                    ],
+                                    "type": "text",
+                                    "content": "证书有效性以右侧二维码扫描内容为准。",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        70,
+                        673,
+                        133,
+                        730
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                70,
+                                673,
+                                133,
+                                730
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        70,
+                                        673,
+                                        133,
+                                        730
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                70,
+                                                673,
+                                                133,
+                                                730
+                                            ],
+                                            "type": "image",
+                                            "image_path": "6e196db18de002eb1b4a2be7e64fd79663370ffe225e0f0c9750cb8aae9f0d37.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 15
+                        },
+                        {
+                            "bbox": [
+                                76,
+                                730,
+                                127,
+                                740
+                            ],
+                            "type": "image_caption",
+                            "angle": 0,
+                            "index": 16,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        75,
+                                        728,
+                                        129,
+                                        742
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                75,
+                                                728,
+                                                129,
+                                                742
+                                            ],
+                                            "type": "text",
+                                            "content": "华信创认证",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 15
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        151,
+                        679,
+                        243,
+                        737
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                151,
+                                679,
+                                243,
+                                737
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        151,
+                                        679,
+                                        243,
+                                        737
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                151,
+                                                679,
+                                                243,
+                                                737
+                                            ],
+                                            "type": "image",
+                                            "content": "MEMBER OF MULTILATERAL\nRECOGNITION ARRANGEMENT",
+                                            "image_path": "7cc270c76b5ee23f73a5e5d5b16233ffe213c56549dca4b8ee1067ee2afb61c4.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 17
+                        }
+                    ],
+                    "index": 17,
+                    "sub_type": "text_image"
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        254,
+                        678,
+                        332,
+                        738
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                254,
+                                678,
+                                332,
+                                738
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        254,
+                                        678,
+                                        332,
+                                        738
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                254,
+                                                678,
+                                                332,
+                                                738
+                                            ],
+                                            "type": "image",
+                                            "image_path": "83342342ddde70505085798d0398f9c6dbf44567046a2325a005e80a6546470a.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 18
+                        }
+                    ],
+                    "index": 18
+                },
+                {
+                    "bbox": [
+                        345,
+                        687,
+                        371,
+                        695
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 19,
+                    "lines": [
+                        {
+                            "bbox": [
+                                344,
+                                687,
+                                373,
+                                696
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        344,
+                                        687,
+                                        373,
+                                        696
+                                    ],
+                                    "type": "text",
+                                    "content": "中国认可",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        345,
+                        695,
+                        371,
+                        702
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 20,
+                    "lines": [
+                        {
+                            "bbox": [
+                                344,
+                                693,
+                                372,
+                                703
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        344,
+                                        693,
+                                        372,
+                                        703
+                                    ],
+                                    "type": "text",
+                                    "content": "国际互认",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        345,
+                        702,
+                        371,
+                        709
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 21,
+                    "lines": [
+                        {
+                            "bbox": [
+                                344,
+                                701,
+                                373,
+                                711
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        344,
+                                        701,
+                                        373,
+                                        711
+                                    ],
+                                    "type": "text",
+                                    "content": "管理体系",
+                                    "score": 0.997
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        345,
+                        710,
+                        419,
+                        717
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 22,
+                    "lines": [
+                        {
+                            "bbox": [
+                                344,
+                                709,
+                                420,
+                                718
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        344,
+                                        709,
+                                        420,
+                                        718
+                                    ],
+                                    "type": "text",
+                                    "content": "MANAGEMENTSYSTEM",
+                                    "score": 0.998
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        345,
+                        718,
+                        390,
+                        725
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 23,
+                    "lines": [
+                        {
+                            "bbox": [
+                                344,
+                                717,
+                                390,
+                                726
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        344,
+                                        717,
+                                        390,
+                                        726
+                                    ],
+                                    "type": "text",
+                                    "content": "CNASC174-M",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        425,
+                        667,
+                        527,
+                        746
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                425,
+                                667,
+                                527,
+                                746
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        425,
+                                        667,
+                                        527,
+                                        746
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                425,
+                                                667,
+                                                527,
+                                                746
+                                            ],
+                                            "type": "image",
+                                            "content": "Beijing Certification Center\n证书专用章\n北京认证中心\n证书专用章",
+                                            "image_path": "e30b08f2fde301f4ac48a6f03a71ee59d602365537d3b547a19874fc9c21be25.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 24
+                        }
+                    ],
+                    "index": 24,
+                    "sub_type": "text_image"
+                },
+                {
+                    "bbox": [
+                        90,
+                        754,
+                        235,
+                        766
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 25,
+                    "lines": [
+                        {
+                            "bbox": [
+                                91,
+                                753,
+                                236,
+                                766
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        91,
+                                        753,
+                                        236,
+                                        766
+                                    ],
+                                    "type": "text",
+                                    "content": "初次获证日期：2024年10月21日",
+                                    "score": 0.998
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        256,
+                        754,
+                        378,
+                        766
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 26,
+                    "lines": [
+                        {
+                            "bbox": [
+                                256,
+                                753,
+                                378,
+                                766
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        256,
+                                        753,
+                                        378,
+                                        766
+                                    ],
+                                    "type": "text",
+                                    "content": "签发日期：2024年10月21日",
+                                    "score": 0.998
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        398,
+                        754,
+                        520,
+                        766
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 27,
+                    "lines": [
+                        {
+                            "bbox": [
+                                398,
+                                752,
+                                520,
+                                767
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        398,
+                                        752,
+                                        520,
+                                        767
+                                    ],
+                                    "type": "text",
+                                    "content": "有效日期：2027年10月20日",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        128,
+                        767,
+                        324,
+                        778
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 28,
+                    "lines": [
+                        {
+                            "bbox": [
+                                129,
+                                767,
+                                325,
+                                778
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        129,
+                                        767,
+                                        325,
+                                        778
+                                    ],
+                                    "type": "text",
+                                    "content": "北京市昌平区科技园区振兴路28号2号楼228室",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        345,
+                        769,
+                        406,
+                        778
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 29,
+                    "lines": [
+                        {
+                            "bbox": [
+                                343,
+                                767,
+                                408,
+                                780
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        343,
+                                        767,
+                                        408,
+                                        780
+                                    ],
+                                    "type": "text",
+                                    "content": "www.hxccc.org",
+                                    "score": 0.993
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        427,
+                        768,
+                        483,
+                        778
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 30,
+                    "lines": [
+                        {
+                            "bbox": [
+                                426,
+                                767,
+                                484,
+                                778
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        426,
+                                        767,
+                                        484,
+                                        778
+                                    ],
+                                    "type": "text",
+                                    "content": "010-57146599",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "bbox": [
+                        158,
+                        58,
+                        435,
+                        149
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                185,
+                                57,
+                                413,
+                                89
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        185,
+                                        57,
+                                        413,
+                                        89
+                                    ],
+                                    "type": "text",
+                                    "content": "ENVIRONMENTAL",
+                                    "score": 0.991
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                158,
+                                89,
+                                436,
+                                121
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        158,
+                                        89,
+                                        436,
+                                        121
+                                    ],
+                                    "type": "text",
+                                    "content": "MANAGEMENT SYSTEM",
+                                    "score": 0.978
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                160,
+                                110,
+                                431,
+                                158
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        160,
+                                        110,
+                                        431,
+                                        158
+                                    ],
+                                    "type": "text",
+                                    "content": "GHCEECERTIFICATEEUING",
+                                    "score": 0.679
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "bbox": [
+                        373,
+                        185,
+                        550,
+                        197
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 1,
+                    "lines": [
+                        {
+                            "bbox": [
+                                373,
+                                184,
+                                551,
+                                197
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        373,
+                                        184,
+                                        551,
+                                        197
+                                    ],
+                                    "type": "text",
+                                    "content": "CertificateNo.：17424E20980R0M",
+                                    "score": 0.982
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        258,
+                        207,
+                        351,
+                        224
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 2,
+                    "lines": [
+                        {
+                            "bbox": [
+                                258,
+                                205,
+                                352,
+                                227
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        258,
+                                        205,
+                                        352,
+                                        227
+                                    ],
+                                    "type": "text",
+                                    "content": "Awarded to",
+                                    "score": 0.992
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 1
+                },
+                {
+                    "bbox": [
+                        80,
+                        236,
+                        529,
+                        254
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 3,
+                    "lines": [
+                        {
+                            "bbox": [
+                                77,
+                                234,
+                                530,
+                                255
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        77,
+                                        234,
+                                        530,
+                                        255
+                                    ],
+                                    "type": "text",
+                                    "content": "Hebei Taichang Electric Power Equipment Technology Co.,Ltd",
+                                    "score": 0.972
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "bbox": [
+                        185,
+                        271,
+                        424,
+                        285
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 4,
+                    "lines": [
+                        {
+                            "bbox": [
+                                183,
+                                270,
+                                426,
+                                286
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        183,
+                                        270,
+                                        426,
+                                        286
+                                    ],
+                                    "type": "text",
+                                    "content": "Organization Code:91130607056539515C",
+                                    "score": 0.977
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        143,
+                        288,
+                        465,
+                        318
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 5,
+                    "lines": [
+                        {
+                            "bbox": [
+                                142,
+                                287,
+                                467,
+                                306
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        142,
+                                        287,
+                                        467,
+                                        306
+                                    ],
+                                    "type": "text",
+                                    "content": "Registered Add.:Xingyangyi Village,Mancheng District,",
+                                    "score": 0.967
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                218,
+                                302,
+                                392,
+                                319
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        218,
+                                        302,
+                                        392,
+                                        319
+                                    ],
+                                    "type": "text",
+                                    "content": "Baoding City,Hebei Province",
+                                    "score": 0.936
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        158,
+                        319,
+                        451,
+                        348
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 6,
+                    "lines": [
+                        {
+                            "bbox": [
+                                157,
+                                317,
+                                452,
+                                335
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        157,
+                                        317,
+                                        452,
+                                        335
+                                    ],
+                                    "type": "text",
+                                    "content": "Office Add.: Xingyangyi Village,Mancheng District,",
+                                    "score": 0.969
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                219,
+                                332,
+                                393,
+                                349
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        219,
+                                        332,
+                                        393,
+                                        349
+                                    ],
+                                    "type": "text",
+                                    "content": "Baoding City，Hebei Province",
+                                    "score": 0.951
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        115,
+                        349,
+                        493,
+                        378
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 7,
+                    "lines": [
+                        {
+                            "bbox": [
+                                113,
+                                346,
+                                496,
+                                365
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        113,
+                                        346,
+                                        496,
+                                        365
+                                    ],
+                                    "type": "text",
+                                    "content": "Production/Business Add.:Xingyangyi Village,Mancheng District,",
+                                    "score": 0.965
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                219,
+                                362,
+                                391,
+                                380
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        219,
+                                        362,
+                                        391,
+                                        380
+                                    ],
+                                    "type": "text",
+                                    "content": "Baoding City,Hebei Province",
+                                    "score": 0.956
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        108,
+                        397,
+                        500,
+                        447
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 8,
+                    "lines": [
+                        {
+                            "bbox": [
+                                151,
+                                394,
+                                459,
+                                411
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        151,
+                                        394,
+                                        459,
+                                        411
+                                    ],
+                                    "type": "text",
+                                    "content": "The Environmental Management System of the above",
+                                    "score": 0.992
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                107,
+                                413,
+                                502,
+                                431
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        107,
+                                        413,
+                                        502,
+                                        431
+                                    ],
+                                    "type": "text",
+                                    "content": "organization has been assessed and found to be in accordance with",
+                                    "score": 0.983
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                206,
+                                431,
+                                402,
+                                448
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        206,
+                                        431,
+                                        402,
+                                        448
+                                    ],
+                                    "type": "text",
+                                    "content": "the requirements of the standard:",
+                                    "score": 0.97
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        190,
+                        460,
+                        420,
+                        474
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 9,
+                    "lines": [
+                        {
+                            "bbox": [
+                                188,
+                                458,
+                                421,
+                                474
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        188,
+                                        458,
+                                        421,
+                                        474
+                                    ],
+                                    "type": "text",
+                                    "content": "GB/T24001-2016/ISO 14001:2015",
+                                    "score": 0.974
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        190,
+                        495,
+                        419,
+                        510
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 10,
+                    "lines": [
+                        {
+                            "bbox": [
+                                188,
+                                494,
+                                421,
+                                510
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        188,
+                                        494,
+                                        421,
+                                        510
+                                    ],
+                                    "type": "text",
+                                    "content": "Scope of this management Certification",
+                                    "score": 0.986
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        107,
+                        526,
+                        500,
+                        571
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 11,
+                    "lines": [
+                        {
+                            "bbox": [
+                                105,
+                                522,
+                                503,
+                                543
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        105,
+                                        522,
+                                        503,
+                                        543
+                                    ],
+                                    "type": "text",
+                                    "content": "Production of low-voltage distribution boxes,sales of power fittings,",
+                                    "score": 0.974
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                179,
+                                540,
+                                437,
+                                557
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        179,
+                                        540,
+                                        437,
+                                        557
+                                    ],
+                                    "type": "text",
+                                    "content": "ironaccessories,and cable protection pipes",
+                                    "score": 0.98
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                152,
+                                555,
+                                458,
+                                572
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        152,
+                                        555,
+                                        458,
+                                        572
+                                    ],
+                                    "type": "text",
+                                    "content": "involved in the environmental management activities",
+                                    "score": 0.958
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        82,
+                        584,
+                        433,
+                        635
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                82,
+                                584,
+                                433,
+                                635
+                            ],
+                            "type": "table_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        82,
+                                        584,
+                                        433,
+                                        635
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                82,
+                                                584,
+                                                433,
+                                                635
+                                            ],
+                                            "type": "table",
+                                            "html": "<table><tr><td>First S.A.</td><td>Labelling</td><td>Second S.A.</td><td>Labelling</td><td>Third S.A.</td><td>Labelling</td></tr></table>",
+                                            "image_path": "31601d900fefe484499028ada74103c769b5c2e7364641db6fbb1799945d3011.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 12
+                        }
+                    ],
+                    "index": 12
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        485,
+                        600,
+                        531,
+                        646
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                485,
+                                600,
+                                531,
+                                646
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        485,
+                                        600,
+                                        531,
+                                        646
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                485,
+                                                600,
+                                                531,
+                                                646
+                                            ],
+                                            "type": "image",
+                                            "image_path": "acd2f1d677af289e0fdea60202060d2ddee6ebaaa55acaf98028275fa9e79846.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 13
+                        }
+                    ],
+                    "index": 13
+                },
+                {
+                    "bbox": [
+                        80,
+                        637,
+                        433,
+                        671
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 14,
+                    "lines": [
+                        {
+                            "bbox": [
+                                80,
+                                636,
+                                433,
+                                646
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        80,
+                                        636,
+                                        433,
+                                        646
+                                    ],
+                                    "type": "text",
+                                    "content": "Thecertified organizationmustacceptat leastone surveillanceauditannuallyandaqualifiedmark shallbeattached",
+                                    "score": 0.981
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                80,
+                                645,
+                                387,
+                                655
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        80,
+                                        645,
+                                        387,
+                                        655
+                                    ],
+                                    "type": "text",
+                                    "content": "ontothecertificate，withinvalidityperiod of thecertificate，thenthecertificatecanbemaintained valid.",
+                                    "score": 0.976
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                80,
+                                654,
+                                338,
+                                664
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        80,
+                                        654,
+                                        338,
+                                        664
+                                    ],
+                                    "type": "text",
+                                    "content": "Formoredetailsof thiscertificate,please login CNCA'swebsite:www.cnca.gov.cn.",
+                                    "score": 0.963
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                80,
+                                661,
+                                385,
+                                672
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        80,
+                                        661,
+                                        385,
+                                        672
+                                    ],
+                                    "type": "text",
+                                    "content": "Forthevalidityof thecertificate,pleasescantheQRcodesontherightrideforaccurateinformation.",
+                                    "score": 0.988
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        66,
+                        674,
+                        128,
+                        730
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                66,
+                                674,
+                                128,
+                                730
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        66,
+                                        674,
+                                        128,
+                                        730
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                66,
+                                                674,
+                                                128,
+                                                730
+                                            ],
+                                            "type": "image",
+                                            "image_path": "b373b1125ef201a193d56b90f57155db0fdce92935c9060fa6cb7f6e3a0bae0a.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 15
+                        },
+                        {
+                            "bbox": [
+                                73,
+                                730,
+                                123,
+                                742
+                            ],
+                            "type": "image_caption",
+                            "angle": 0,
+                            "index": 16,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        71,
+                                        727,
+                                        125,
+                                        744
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                71,
+                                                727,
+                                                125,
+                                                744
+                                            ],
+                                            "type": "text",
+                                            "content": "华信创认证",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 15
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        146,
+                        680,
+                        240,
+                        736
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                146,
+                                680,
+                                240,
+                                736
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        146,
+                                        680,
+                                        240,
+                                        736
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                146,
+                                                680,
+                                                240,
+                                                736
+                                            ],
+                                            "type": "image",
+                                            "content": "MEMBER OF MULTILATERAL\nIAF\nRECOGNITION ARRANGEMENT",
+                                            "image_path": "ed87cf62d5d69e8d164f36af44f2a1ff8b29feef4ce12ca7561e00f30b51aecc.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 17
+                        }
+                    ],
+                    "index": 17,
+                    "sub_type": "text_image"
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        251,
+                        679,
+                        327,
+                        738
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                251,
+                                679,
+                                327,
+                                738
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        251,
+                                        679,
+                                        327,
+                                        738
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                251,
+                                                679,
+                                                327,
+                                                738
+                                            ],
+                                            "type": "image",
+                                            "image_path": "d029388f95a2d258cb3be4d265523595dce042077a6e6bed91b9e3494303160d.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 18
+                        }
+                    ],
+                    "index": 18
+                },
+                {
+                    "bbox": [
+                        340,
+                        689,
+                        367,
+                        697
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 19,
+                    "lines": [
+                        {
+                            "bbox": [
+                                340,
+                                688,
+                                368,
+                                698
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        340,
+                                        688,
+                                        368,
+                                        698
+                                    ],
+                                    "type": "text",
+                                    "content": "中国认可",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        340,
+                        697,
+                        367,
+                        704
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 20,
+                    "lines": [
+                        {
+                            "bbox": [
+                                340,
+                                696,
+                                368,
+                                705
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        340,
+                                        696,
+                                        368,
+                                        705
+                                    ],
+                                    "type": "text",
+                                    "content": "国际互认",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        340,
+                        704,
+                        367,
+                        712
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 21,
+                    "lines": [
+                        {
+                            "bbox": [
+                                340,
+                                703,
+                                368,
+                                713
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        340,
+                                        703,
+                                        368,
+                                        713
+                                    ],
+                                    "type": "text",
+                                    "content": "管理体系",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        340,
+                        712,
+                        414,
+                        719
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 22,
+                    "lines": [
+                        {
+                            "bbox": [
+                                340,
+                                711,
+                                415,
+                                720
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        340,
+                                        711,
+                                        415,
+                                        720
+                                    ],
+                                    "type": "text",
+                                    "content": "MANAGEMENTSYSTEM",
+                                    "score": 0.997
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        340,
+                        719,
+                        385,
+                        727
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 23,
+                    "lines": [
+                        {
+                            "bbox": [
+                                340,
+                                718,
+                                387,
+                                728
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        340,
+                                        718,
+                                        387,
+                                        728
+                                    ],
+                                    "type": "text",
+                                    "content": "CNASC174-M",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        425,
+                        668,
+                        527,
+                        747
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                425,
+                                668,
+                                527,
+                                747
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        425,
+                                        668,
+                                        527,
+                                        747
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                425,
+                                                668,
+                                                527,
+                                                747
+                                            ],
+                                            "type": "image",
+                                            "content": "C:\\Bottling\\Certification Center (Co.\\Ltd.)\n北京市(北京)认证中心有限公司\n证书专用章",
+                                            "image_path": "4a92b1d4ae8aabf9a2d34e406e923156dd258cc37c603ff14dc507876c4bd896.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 24
+                        }
+                    ],
+                    "index": 24,
+                    "sub_type": "text_image"
+                }
+            ],
+            "discarded_blocks": [
+                {
+                    "bbox": [
+                        114,
+                        763,
+                        496,
+                        775
+                    ],
+                    "type": "footer",
+                    "angle": 0,
+                    "index": 25,
+                    "lines": [
+                        {
+                            "bbox": [
+                                114,
+                                761,
+                                496,
+                                775
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        114,
+                                        761,
+                                        496,
+                                        775
+                                    ],
+                                    "type": "text",
+                                    "content": "Date ofOriginal lssued:21Oct.2024 Valid from:21 Oct.2024 Valid until:20 Oct.2027",
+                                    "score": 0.952
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "bbox": [
+                        83,
+                        778,
+                        528,
+                        790
+                    ],
+                    "type": "footer",
+                    "angle": 0,
+                    "index": 26,
+                    "lines": [
+                        {
+                            "bbox": [
+                                82,
+                                775,
+                                530,
+                                792
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        82,
+                                        775,
+                                        530,
+                                        792
+                                    ],
+                                    "type": "text",
+                                    "content": "Room228,ilding2，No.28ZheningRoad,iencePark,ChangpingDistrictBejing0-574599",
+                                    "score": 0.82
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "bbox": [
+                        458,
+                        797,
+                        565,
+                        815
+                    ],
+                    "type": "footer",
+                    "angle": 0,
+                    "index": 27,
+                    "lines": [
+                        {
+                            "bbox": [
+                                456,
+                                794,
+                                567,
+                                817
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        456,
+                                        794,
+                                        567,
+                                        817
+                                    ],
+                                    "type": "text",
+                                    "content": "No.0011169",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "page_size": [
+                595,
+                842
+            ],
+            "page_idx": 1,
+            "para_blocks": [
+                {
+                    "bbox": [
+                        158,
+                        58,
+                        435,
+                        149
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                185,
+                                57,
+                                413,
+                                89
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        185,
+                                        57,
+                                        413,
+                                        89
+                                    ],
+                                    "type": "text",
+                                    "content": "ENVIRONMENTAL",
+                                    "score": 0.991
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                158,
+                                89,
+                                436,
+                                121
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        158,
+                                        89,
+                                        436,
+                                        121
+                                    ],
+                                    "type": "text",
+                                    "content": "MANAGEMENT SYSTEM",
+                                    "score": 0.978
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                160,
+                                110,
+                                431,
+                                158
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        160,
+                                        110,
+                                        431,
+                                        158
+                                    ],
+                                    "type": "text",
+                                    "content": "GHCEECERTIFICATEEUING",
+                                    "score": 0.679
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "bbox": [
+                        373,
+                        185,
+                        550,
+                        197
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 1,
+                    "lines": [
+                        {
+                            "bbox": [
+                                373,
+                                184,
+                                551,
+                                197
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        373,
+                                        184,
+                                        551,
+                                        197
+                                    ],
+                                    "type": "text",
+                                    "content": "CertificateNo.：17424E20980R0M",
+                                    "score": 0.982
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        258,
+                        207,
+                        351,
+                        224
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 2,
+                    "lines": [
+                        {
+                            "bbox": [
+                                258,
+                                205,
+                                352,
+                                227
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        258,
+                                        205,
+                                        352,
+                                        227
+                                    ],
+                                    "type": "text",
+                                    "content": "Awarded to",
+                                    "score": 0.992
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 1
+                },
+                {
+                    "bbox": [
+                        80,
+                        236,
+                        529,
+                        254
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 3,
+                    "lines": [
+                        {
+                            "bbox": [
+                                77,
+                                234,
+                                530,
+                                255
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        77,
+                                        234,
+                                        530,
+                                        255
+                                    ],
+                                    "type": "text",
+                                    "content": "Hebei Taichang Electric Power Equipment Technology Co.,Ltd",
+                                    "score": 0.972
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "bbox": [
+                        185,
+                        271,
+                        424,
+                        285
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 4,
+                    "lines": [
+                        {
+                            "bbox": [
+                                183,
+                                270,
+                                426,
+                                286
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        183,
+                                        270,
+                                        426,
+                                        286
+                                    ],
+                                    "type": "text",
+                                    "content": "Organization Code:91130607056539515C",
+                                    "score": 0.977
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        143,
+                        288,
+                        465,
+                        318
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 5,
+                    "lines": [
+                        {
+                            "bbox": [
+                                142,
+                                287,
+                                467,
+                                306
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        142,
+                                        287,
+                                        467,
+                                        306
+                                    ],
+                                    "type": "text",
+                                    "content": "Registered Add.:Xingyangyi Village,Mancheng District,",
+                                    "score": 0.967
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                218,
+                                302,
+                                392,
+                                319
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        218,
+                                        302,
+                                        392,
+                                        319
+                                    ],
+                                    "type": "text",
+                                    "content": "Baoding City,Hebei Province",
+                                    "score": 0.936
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        158,
+                        319,
+                        451,
+                        348
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 6,
+                    "lines": [
+                        {
+                            "bbox": [
+                                157,
+                                317,
+                                452,
+                                335
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        157,
+                                        317,
+                                        452,
+                                        335
+                                    ],
+                                    "type": "text",
+                                    "content": "Office Add.: Xingyangyi Village,Mancheng District,",
+                                    "score": 0.969
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                219,
+                                332,
+                                393,
+                                349
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        219,
+                                        332,
+                                        393,
+                                        349
+                                    ],
+                                    "type": "text",
+                                    "content": "Baoding City，Hebei Province",
+                                    "score": 0.951
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        115,
+                        349,
+                        493,
+                        378
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 7,
+                    "lines": [
+                        {
+                            "bbox": [
+                                113,
+                                346,
+                                496,
+                                365
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        113,
+                                        346,
+                                        496,
+                                        365
+                                    ],
+                                    "type": "text",
+                                    "content": "Production/Business Add.:Xingyangyi Village,Mancheng District,",
+                                    "score": 0.965
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                219,
+                                362,
+                                391,
+                                380
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        219,
+                                        362,
+                                        391,
+                                        380
+                                    ],
+                                    "type": "text",
+                                    "content": "Baoding City,Hebei Province",
+                                    "score": 0.956
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        108,
+                        397,
+                        500,
+                        447
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 8,
+                    "lines": [
+                        {
+                            "bbox": [
+                                151,
+                                394,
+                                459,
+                                411
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        151,
+                                        394,
+                                        459,
+                                        411
+                                    ],
+                                    "type": "text",
+                                    "content": "The Environmental Management System of the above",
+                                    "score": 0.992
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                107,
+                                413,
+                                502,
+                                431
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        107,
+                                        413,
+                                        502,
+                                        431
+                                    ],
+                                    "type": "text",
+                                    "content": "organization has been assessed and found to be in accordance with",
+                                    "score": 0.983
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                206,
+                                431,
+                                402,
+                                448
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        206,
+                                        431,
+                                        402,
+                                        448
+                                    ],
+                                    "type": "text",
+                                    "content": "the requirements of the standard:",
+                                    "score": 0.97
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        190,
+                        460,
+                        420,
+                        474
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 9,
+                    "lines": [
+                        {
+                            "bbox": [
+                                188,
+                                458,
+                                421,
+                                474
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        188,
+                                        458,
+                                        421,
+                                        474
+                                    ],
+                                    "type": "text",
+                                    "content": "GB/T24001-2016/ISO 14001:2015",
+                                    "score": 0.974
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        190,
+                        495,
+                        419,
+                        510
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 10,
+                    "lines": [
+                        {
+                            "bbox": [
+                                188,
+                                494,
+                                421,
+                                510
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        188,
+                                        494,
+                                        421,
+                                        510
+                                    ],
+                                    "type": "text",
+                                    "content": "Scope of this management Certification",
+                                    "score": 0.986
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        107,
+                        526,
+                        500,
+                        571
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 11,
+                    "lines": [
+                        {
+                            "bbox": [
+                                105,
+                                522,
+                                503,
+                                543
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        105,
+                                        522,
+                                        503,
+                                        543
+                                    ],
+                                    "type": "text",
+                                    "content": "Production of low-voltage distribution boxes,sales of power fittings,",
+                                    "score": 0.974
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                179,
+                                540,
+                                437,
+                                557
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        179,
+                                        540,
+                                        437,
+                                        557
+                                    ],
+                                    "type": "text",
+                                    "content": "ironaccessories,and cable protection pipes",
+                                    "score": 0.98
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                152,
+                                555,
+                                458,
+                                572
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        152,
+                                        555,
+                                        458,
+                                        572
+                                    ],
+                                    "type": "text",
+                                    "content": "involved in the environmental management activities",
+                                    "score": 0.958
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        82,
+                        584,
+                        433,
+                        635
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                82,
+                                584,
+                                433,
+                                635
+                            ],
+                            "type": "table_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        82,
+                                        584,
+                                        433,
+                                        635
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                82,
+                                                584,
+                                                433,
+                                                635
+                                            ],
+                                            "type": "table",
+                                            "html": "<table><tr><td>First S.A.</td><td>Labelling</td><td>Second S.A.</td><td>Labelling</td><td>Third S.A.</td><td>Labelling</td></tr></table>",
+                                            "image_path": "31601d900fefe484499028ada74103c769b5c2e7364641db6fbb1799945d3011.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 12
+                        }
+                    ],
+                    "index": 12
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        485,
+                        600,
+                        531,
+                        646
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                485,
+                                600,
+                                531,
+                                646
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        485,
+                                        600,
+                                        531,
+                                        646
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                485,
+                                                600,
+                                                531,
+                                                646
+                                            ],
+                                            "type": "image",
+                                            "image_path": "acd2f1d677af289e0fdea60202060d2ddee6ebaaa55acaf98028275fa9e79846.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 13
+                        }
+                    ],
+                    "index": 13
+                },
+                {
+                    "bbox": [
+                        80,
+                        637,
+                        433,
+                        671
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 14,
+                    "lines": [
+                        {
+                            "bbox": [
+                                80,
+                                636,
+                                433,
+                                646
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        80,
+                                        636,
+                                        433,
+                                        646
+                                    ],
+                                    "type": "text",
+                                    "content": "Thecertified organizationmustacceptat leastone surveillanceauditannuallyandaqualifiedmark shallbeattached",
+                                    "score": 0.981
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                80,
+                                645,
+                                387,
+                                655
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        80,
+                                        645,
+                                        387,
+                                        655
+                                    ],
+                                    "type": "text",
+                                    "content": "ontothecertificate，withinvalidityperiod of thecertificate，thenthecertificatecanbemaintained valid.",
+                                    "score": 0.976
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                80,
+                                654,
+                                338,
+                                664
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        80,
+                                        654,
+                                        338,
+                                        664
+                                    ],
+                                    "type": "text",
+                                    "content": "Formoredetailsof thiscertificate,please login CNCA'swebsite:www.cnca.gov.cn.",
+                                    "score": 0.963
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                80,
+                                661,
+                                385,
+                                672
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        80,
+                                        661,
+                                        385,
+                                        672
+                                    ],
+                                    "type": "text",
+                                    "content": "Forthevalidityof thecertificate,pleasescantheQRcodesontherightrideforaccurateinformation.",
+                                    "score": 0.988
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        66,
+                        674,
+                        128,
+                        730
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                66,
+                                674,
+                                128,
+                                730
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        66,
+                                        674,
+                                        128,
+                                        730
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                66,
+                                                674,
+                                                128,
+                                                730
+                                            ],
+                                            "type": "image",
+                                            "image_path": "b373b1125ef201a193d56b90f57155db0fdce92935c9060fa6cb7f6e3a0bae0a.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 15
+                        },
+                        {
+                            "bbox": [
+                                73,
+                                730,
+                                123,
+                                742
+                            ],
+                            "type": "image_caption",
+                            "angle": 0,
+                            "index": 16,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        71,
+                                        727,
+                                        125,
+                                        744
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                71,
+                                                727,
+                                                125,
+                                                744
+                                            ],
+                                            "type": "text",
+                                            "content": "华信创认证",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 15
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        146,
+                        680,
+                        240,
+                        736
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                146,
+                                680,
+                                240,
+                                736
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        146,
+                                        680,
+                                        240,
+                                        736
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                146,
+                                                680,
+                                                240,
+                                                736
+                                            ],
+                                            "type": "image",
+                                            "content": "MEMBER OF MULTILATERAL\nIAF\nRECOGNITION ARRANGEMENT",
+                                            "image_path": "ed87cf62d5d69e8d164f36af44f2a1ff8b29feef4ce12ca7561e00f30b51aecc.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 17
+                        }
+                    ],
+                    "index": 17,
+                    "sub_type": "text_image"
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        251,
+                        679,
+                        327,
+                        738
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                251,
+                                679,
+                                327,
+                                738
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        251,
+                                        679,
+                                        327,
+                                        738
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                251,
+                                                679,
+                                                327,
+                                                738
+                                            ],
+                                            "type": "image",
+                                            "image_path": "d029388f95a2d258cb3be4d265523595dce042077a6e6bed91b9e3494303160d.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 18
+                        }
+                    ],
+                    "index": 18
+                },
+                {
+                    "bbox": [
+                        340,
+                        689,
+                        367,
+                        697
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 19,
+                    "lines": [
+                        {
+                            "bbox": [
+                                340,
+                                688,
+                                368,
+                                698
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        340,
+                                        688,
+                                        368,
+                                        698
+                                    ],
+                                    "type": "text",
+                                    "content": "中国认可",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        340,
+                        697,
+                        367,
+                        704
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 20,
+                    "lines": [
+                        {
+                            "bbox": [
+                                340,
+                                696,
+                                368,
+                                705
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        340,
+                                        696,
+                                        368,
+                                        705
+                                    ],
+                                    "type": "text",
+                                    "content": "国际互认",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        340,
+                        704,
+                        367,
+                        712
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 21,
+                    "lines": [
+                        {
+                            "bbox": [
+                                340,
+                                703,
+                                368,
+                                713
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        340,
+                                        703,
+                                        368,
+                                        713
+                                    ],
+                                    "type": "text",
+                                    "content": "管理体系",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        340,
+                        712,
+                        414,
+                        719
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 22,
+                    "lines": [
+                        {
+                            "bbox": [
+                                340,
+                                711,
+                                415,
+                                720
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        340,
+                                        711,
+                                        415,
+                                        720
+                                    ],
+                                    "type": "text",
+                                    "content": "MANAGEMENTSYSTEM",
+                                    "score": 0.997
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        340,
+                        719,
+                        385,
+                        727
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 23,
+                    "lines": [
+                        {
+                            "bbox": [
+                                340,
+                                718,
+                                387,
+                                728
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        340,
+                                        718,
+                                        387,
+                                        728
+                                    ],
+                                    "type": "text",
+                                    "content": "CNASC174-M",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        425,
+                        668,
+                        527,
+                        747
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                425,
+                                668,
+                                527,
+                                747
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        425,
+                                        668,
+                                        527,
+                                        747
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                425,
+                                                668,
+                                                527,
+                                                747
+                                            ],
+                                            "type": "image",
+                                            "content": "C:\\Bottling\\Certification Center (Co.\\Ltd.)\n北京市(北京)认证中心有限公司\n证书专用章",
+                                            "image_path": "4a92b1d4ae8aabf9a2d34e406e923156dd258cc37c603ff14dc507876c4bd896.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 24
+                        }
+                    ],
+                    "index": 24,
+                    "sub_type": "text_image"
+                }
+            ]
+        }
+    ],
+    "_backend": "hybrid",
+    "_ocr_enable": true,
+    "_vlm_ocr_enable": false,
+    "_version_name": "3.2.1"
+}

@@ -1,0 +1,282 @@
+[
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "必须招标的工程项目规定"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                310,
+                158,
+                685,
+                186
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第一条为了确定必须招标的工程项目，规范招标投标活动，提高工作效率、降低企业成本、预防腐败，根据《中华人民共和国招标投标法》第三条的规定，制定本规定。"
+                    }
+                ]
+            },
+            "bbox": [
+                129,
+                235,
+                860,
+                325
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第二条全部或者部分使用国有资金投资或者国家融资的项目包括："
+                    }
+                ]
+            },
+            "bbox": [
+                132,
+                338,
+                862,
+                395
+            ]
+        },
+        {
+            "type": "list",
+            "content": {
+                "list_type": "text_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "（一）使用预算资金200万元人民币以上，并且该资金占投资额10%以上的项目；"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "（二）使用国有企业事业单位资金，并且该资金占控股或者主导地位的项目。"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                131,
+                409,
+                860,
+                535
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第三条使用国际组织或者外国政府贷款、援助资金的项目包括："
+                    }
+                ]
+            },
+            "bbox": [
+                129,
+                549,
+                860,
+                604
+            ]
+        },
+        {
+            "type": "list",
+            "content": {
+                "list_type": "text_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "（一）使用世界银行、亚洲开发银行等国际组织贷款、援助资金的项目；"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "（二）使用外国政府及其机构贷款、援助资金的项目。"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                131,
+                618,
+                860,
+                711
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第四条不属于本规定第二条、第三条规定情形的大型基础设施、公用事业等关系社会公共利益、公众安全的项目，必须招标的具体范围由国务院发展改革部门会同国务院有关部门按照确有必要、严格限定的原则制订，报国务院批准。"
+                    }
+                ]
+            },
+            "bbox": [
+                129,
+                722,
+                860,
+                850
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "1 "
+                    }
+                ]
+            },
+            "bbox": [
+                492,
+                884,
+                502,
+                897
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第五条本规定第二条至第四条规定范围内的项目，其勘察、设计、施工、监理以及与工程建设有关的重要设备、材料等的采购达到下列标准之一的，必须招标："
+                    }
+                ]
+            },
+            "bbox": [
+                129,
+                127,
+                860,
+                218
+            ]
+        },
+        {
+            "type": "list",
+            "content": {
+                "list_type": "text_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "（一）施工单项合同估算价在400万元人民币以上；"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "（二）重要设备、材料等货物的采购，单项合同估算价在200万元人民币以上；"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "（三）勘察、设计、监理等服务的采购，单项合同估算价在100万元人民币以上。"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                129,
+                229,
+                868,
+                395
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "同一项目中可以合并进行的勘察、设计、施工、监理以及与工程建设有关的重要设备、材料等的采购，合同估算价合计达到前款规定标准的，必须招标。"
+                    }
+                ]
+            },
+            "bbox": [
+                129,
+                407,
+                860,
+                499
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第六条本规定自2018年6月1日起施行。"
+                    }
+                ]
+            },
+            "bbox": [
+                179,
+                512,
+                663,
+                533
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "2 "
+                    }
+                ]
+            },
+            "bbox": [
+                490,
+                883,
+                505,
+                897
+            ]
+        }
+    ]
+]

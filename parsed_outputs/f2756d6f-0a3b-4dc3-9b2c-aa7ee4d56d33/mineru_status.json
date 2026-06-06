@@ -1,0 +1,53 @@
+{
+  "parse_status": "mineru_done",
+  "parser": "mineru",
+  "source_file": "uploads/ef62441c-b54d-4e82-a54b-5fc87bfd7a4f-tender.pdf",
+  "file_name": "招标文件.pdf",
+  "updated_at": "2026-05-20T07:00:49Z",
+  "project_id": "3015b83f-6ffd-4ce7-ab9e-529a10f59493",
+  "supabase_file_id": "d11450c8-8023-4086-a3b7-c6c272353a63",
+  "data_id": "f2756d6f-0a3b-4dc3-9b2c-aa7ee4d56d33",
+  "batch_id": "d0b5b8c9-9795-401b-810b-235d57a7e143",
+  "mineru_state": "done",
+  "extract_progress": null,
+  "err_msg": "",
+  "full_zip_url": "https://cdn-mineru.openxlab.org.cn/pdf/2026-05-08/74b191d4-5900-4132-9db6-8329762b2082.zip",
+  "download_started_at": "2026-05-20T07:00:47Z",
+  "artifacts": {
+    "zip_path": "parsed_outputs/f2756d6f-0a3b-4dc3-9b2c-aa7ee4d56d33/mineru_result.zip",
+    "extract_dir": "parsed_outputs/f2756d6f-0a3b-4dc3-9b2c-aa7ee4d56d33/extract",
+    "markdown_path": "parsed_outputs/f2756d6f-0a3b-4dc3-9b2c-aa7ee4d56d33/extract/full.md",
+    "content_list_path": "parsed_outputs/f2756d6f-0a3b-4dc3-9b2c-aa7ee4d56d33/extract/8d8582c5-7ffc-4a91-8d31-900b3240e323_content_list.json",
+    "model_path": "parsed_outputs/f2756d6f-0a3b-4dc3-9b2c-aa7ee4d56d33/extract/8d8582c5-7ffc-4a91-8d31-900b3240e323_model.json",
+    "middle_path": "parsed_outputs/f2756d6f-0a3b-4dc3-9b2c-aa7ee4d56d33/extract/layout.json",
+    "download_info": {
+      "url_host": "cdn-mineru.openxlab.org.cn",
+      "resume_enabled": true,
+      "used_curl_fallback": true,
+      "resumed_from_bytes": 0,
+      "downloaded_bytes": 0,
+      "zip_size": 8354232
+    }
+  },
+  "download_finished_at": "2026-05-20T07:00:49Z",
+  "download_info": {
+    "url_host": "cdn-mineru.openxlab.org.cn",
+    "resume_enabled": true,
+    "used_curl_fallback": true,
+    "resumed_from_bytes": 0,
+    "downloaded_bytes": 0,
+    "zip_size": 8354232
+  },
+  "supabase_ingest_status": "done",
+  "supabase_ingest_result": {
+    "project_id": "3015b83f-6ffd-4ce7-ab9e-529a10f59493",
+    "bid_file_id": "d11450c8-8023-4086-a3b7-c6c272353a63",
+    "markdown_chars": 132153,
+    "content_blocks": 1732,
+    "requirements": 80,
+    "risks": 60,
+    "scoring_items": 49,
+    "chapter_suggestions": 30,
+    "chunks": 27
+  }
+}

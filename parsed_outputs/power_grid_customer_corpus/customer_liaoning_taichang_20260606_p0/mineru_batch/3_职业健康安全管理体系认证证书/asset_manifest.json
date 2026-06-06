@@ -1,0 +1,312 @@
+{
+  "assets": [
+    {
+      "asset_id": "taichang_certification_p1_013",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/3.职业健康安全管理体系认证证书.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "certification",
+      "target_library": "qualification_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/3_职业健康安全管理体系认证证书/extract/images/381b4b5403d539199f2412e422e8d7684d5e0c4cde30b151a32960725aaf1a5d.jpg",
+      "asset_sha256": "71dff9af2cf7577b58be1235812cf31784792645ea09a997d70f5e38bac241d1",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        658,
+        676,
+        863,
+        777
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_certification_20260606_105202_fa2f9dce",
+      "batch_id": "d47de33d-285b-4ed5-b2fe-677f993b0f5e",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "certification",
+          "MVP试点企业"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_certification_p1_015",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/3.职业健康安全管理体系认证证书.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "certification",
+      "target_library": "qualification_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/3_职业健康安全管理体系认证证书/extract/images/81fda7dd82f4e8bd810d122facf8d0d7ad1383ca4cd43e967cef9a3474d7d0b9.jpg",
+      "asset_sha256": "eb0e62130bb5c5b574c98ebaa4bc54e23672a20fdc18b4d4863baf9a02462c17",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        305,
+        810,
+        438,
+        869
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_certification_20260606_105202_fa2f9dce",
+      "batch_id": "d47de33d-285b-4ed5-b2fe-677f993b0f5e",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "certification",
+          "MVP试点企业"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_certification_p1_023",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/3.职业健康安全管理体系认证证书.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "certification",
+      "target_library": "qualification_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/3_职业健康安全管理体系认证证书/extract/images/0e4d009818574828a5ec1c6b4766240c6c447e82fe2cf08495cd6b812ebf107e.jpg",
+      "asset_sha256": "2a719564ad564b42097a7ce77e535a0747419c85bcbd1c8e8043d84b3fd595c4",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        668,
+        804,
+        852,
+        887
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_certification_20260606_105202_fa2f9dce",
+      "batch_id": "d47de33d-285b-4ed5-b2fe-677f993b0f5e",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "certification",
+          "MVP试点企业"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_certification_p2_042",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/3.职业健康安全管理体系认证证书.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "certification",
+      "target_library": "qualification_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/3_职业健康安全管理体系认证证书/extract/images/ef6ec1ce102dd915e9be9ffbcea9a587a3c7a61579a99aa4da156299257a9d56.jpg",
+      "asset_sha256": "aafee7477657271b6533807b8e210f3dddad36bd690db8c2f2ed2db2be7655fc",
+      "page_idx": 1,
+      "page_no": 2,
+      "bbox": [
+        662,
+        674,
+        867,
+        777
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_certification_20260606_105202_fa2f9dce",
+      "batch_id": "d47de33d-285b-4ed5-b2fe-677f993b0f5e",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "certification",
+          "MVP试点企业"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_certification_p2_044",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/3.职业健康安全管理体系认证证书.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "certification",
+      "target_library": "qualification_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/3_职业健康安全管理体系认证证书/extract/images/461fd20bb812621cc9ed8b00213cf6ed68121b58c35069bb0474c8252b0de980.jpg",
+      "asset_sha256": "4993c03081c5ab97de59605073d54963398f2ba67828bc5c727351fdde74baca",
+      "page_idx": 1,
+      "page_no": 2,
+      "bbox": [
+        307,
+        808,
+        443,
+        869
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_certification_20260606_105202_fa2f9dce",
+      "batch_id": "d47de33d-285b-4ed5-b2fe-677f993b0f5e",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "certification",
+          "MVP试点企业"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_certification_p2_052",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/3.职业健康安全管理体系认证证书.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "certification",
+      "target_library": "qualification_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/3_职业健康安全管理体系认证证书/extract/images/20e2e4b4b72854fd4290700bd966e62e424c8e6ae40456fb0d067e830f045fee.jpg",
+      "asset_sha256": "23e57e9d5de6df91deedafaaeef3c5a2e803a9953e4bf328365e6330b91036d5",
+      "page_idx": 1,
+      "page_no": 2,
+      "bbox": [
+        673,
+        803,
+        855,
+        884
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_certification_20260606_105202_fa2f9dce",
+      "batch_id": "d47de33d-285b-4ed5-b2fe-677f993b0f5e",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "certification",
+          "MVP试点企业"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_certification_p3_068",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/3.职业健康安全管理体系认证证书.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "certification",
+      "target_library": "qualification_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/3_职业健康安全管理体系认证证书/extract/images/19b83fcd99c324f20697e523e259a683fb74bbd6f5313c630af8b21983d35ddc.jpg",
+      "asset_sha256": "5aa3a9d9c876f0ed75e45beb935ef8ce1119ec677c1529526753f0d02cba919c",
+      "page_idx": 2,
+      "page_no": 3,
+      "bbox": [
+        534,
+        702,
+        882,
+        848
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_certification_20260606_105202_fa2f9dce",
+      "batch_id": "d47de33d-285b-4ed5-b2fe-677f993b0f5e",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "certification",
+          "MVP试点企业"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ]
+      }
+    }
+  ]
+}

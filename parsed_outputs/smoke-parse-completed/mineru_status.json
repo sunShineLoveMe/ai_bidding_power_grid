@@ -1,0 +1,1 @@
+{"parse_status": "mineru_done", "artifacts": {"markdown_path": "parsed_outputs/demo/full.md"}, "supabase_ingest_status": "done", "user_message": "后台解析任务未继续推进，系统正在自动恢复解析。", "retryable": true}

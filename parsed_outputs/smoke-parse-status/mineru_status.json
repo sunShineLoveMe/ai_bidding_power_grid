@@ -1,0 +1,11 @@
+{
+  "parse_status": "mineru_download_retrying",
+  "batch_id": "batch-smoke",
+  "mineru_state": "done",
+  "retryable": true,
+  "failure_stage": "download",
+  "error_type": "MinerUDownloadError",
+  "user_message": "MinerU 结果下载失败，系统正在自动断点重试。",
+  "download_retry_count": 2,
+  "updated_at": "2026-06-05T08:23:54Z"
+}

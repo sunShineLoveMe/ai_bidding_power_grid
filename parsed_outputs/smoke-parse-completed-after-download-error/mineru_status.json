@@ -1,0 +1,1 @@
+{"parse_status": "mineru_download_failed", "artifacts": {"markdown_path": "parsed_outputs/demo/full.md"}, "supabase_ingest_status": "done", "user_message": "MinerU 已完成解析，但结果 zip 下载失败。", "retryable": true}

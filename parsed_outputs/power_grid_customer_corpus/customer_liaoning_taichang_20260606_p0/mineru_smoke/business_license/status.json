@@ -1,0 +1,35 @@
+{
+  "parse_id": "taichang_business_license_mineru_20260606_104409",
+  "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/营业执照副本.pdf",
+  "started_at": "2026-06-06T02:44:09.149450+00:00",
+  "parser": "mineru",
+  "purpose": "taichang_mvp_p0_business_license_ocr_smoke",
+  "batch_id": "7756b743-59e1-49a7-b684-a8eb6e3b8417",
+  "data_id": "taichang_business_license_mineru_20260606_104409",
+  "submitted_at": "2026-06-06T02:44:09.580158+00:00",
+  "mineru_result": {
+    "data_id": "taichang_business_license_mineru_20260606_104409",
+    "file_name": "营业执照副本.pdf",
+    "state": "done",
+    "err_msg": ""
+  },
+  "done_at": "2026-06-06T02:44:25.849702+00:00",
+  "parse_status": "mineru_done",
+  "artifacts": {
+    "zip_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_smoke/business_license/mineru_result.zip",
+    "extract_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_smoke/business_license/extract",
+    "markdown_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_smoke/business_license/extract/full.md",
+    "content_list_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_smoke/business_license/extract/bb1e2413-db49-49b8-b777-7ac42e77d30a_content_list.json",
+    "model_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_smoke/business_license/extract/bb1e2413-db49-49b8-b777-7ac42e77d30a_model.json",
+    "middle_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_smoke/business_license/extract/layout.json",
+    "download_info": {
+      "url_host": "cdn-mineru.openxlab.org.cn",
+      "resume_enabled": true,
+      "used_curl_fallback": true,
+      "resumed_from_bytes": 0,
+      "downloaded_bytes": 0,
+      "zip_size": 686269
+    }
+  },
+  "finished_at": "2026-06-06T02:44:26.966293+00:00"
+}

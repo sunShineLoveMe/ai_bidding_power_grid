@@ -1,0 +1,48 @@
+{
+  "assets": [
+    {
+      "asset_id": "taichang_production_capacity_p1_002",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/生产设备台账.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "production_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/生产设备台账/extract/images/be1ebd77f4b261b01488d751972df17cbc7d9542181434ac621fec2ffbb7a97e.jpg",
+      "asset_sha256": "a3265886112497549d62797bbd2b185efe0f3a14afc7aabb8f037b5a616d6dab",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        556,
+        229,
+        736,
+        355
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_production_capacity_20260606_105220_c5c9c1ec",
+      "batch_id": "215f47f6-b1a9-4372-a0c6-eb159f80f7c9",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "production_capacity",
+          "MVP试点企业"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ]
+      }
+    }
+  ]
+}
