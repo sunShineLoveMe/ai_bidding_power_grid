@@ -1,6 +1,6 @@
 # 国家电网 RAG 基座数据工程待办清单
 
-> 状态日期：2026-06-02
+> 状态日期：2026-06-06
 > 适用范围：电网/国家电网招投标 RAG 基座数据、客户标书模板、行业资料、召回评测与上线门禁。
 
 本文档用于跟踪 RAG 基座数据工程的优先级、完成度和验收口径。全局产品路线仍看 `docs/development/roadmap.md`；本清单只记录 RAG 数据工程相关任务。
@@ -28,7 +28,7 @@
 | [x] | 主检索接入 filtered RPC | `backend/rag/retrieval.py`、`backend/api/knowledge.py` | 单测确认不再默认调用老 `match_knowledge_chunks` |
 | [x] | 写作场景父块回溯 | `backend/rag/retrieval.py`、`backend/ai/chapter_planner.py` | writing 场景 child 命中后可返回 parent |
 | [x] | 核心文档改为 v2 链路 | `docs/features/rag-knowledge-base.md`、`rag_seed/power_grid_resources/README.md` | 当前操作指南不再指向旧入库脚本 |
-| [~] | 旧部署/历史文档标注迁移参考 | `docs/deployment/*` | 旧脚本引用必须标注“历史/迁移参考”，避免新成员误用 |
+| [x] | 旧部署/历史文档标注迁移参考 | `docs/deployment/*` | 已在 Supabase/旧 RAG 入口文档标注“历史/迁移参考”，新环境指向 `migrations/postgres/` 与 v2 RAG 入库链路 |
 
 ## P1：客户江西/山西标书模板入库
 
@@ -60,6 +60,19 @@
 | P2-4 | [ ] | 版本与去重策略 | `content_sha256`、`doc_version`、`superseded_by` | 同一模板新旧版本不会同时污染召回 |
 | P2-5 | [ ] | 模板可引用边界 | `citation_policy` 规则 | 区分客户模板、公开法规、企业话术，避免把模板当强制条款 |
 | P2-6 | [x] | 批次回滚机制 | `scripts/rag/rollback_customer_corpus.py`、`docs/rag/runs/rollback_customer_jx_sx_20260602_p1_dry_run_20260602_165145.md` | 支持按 `ingestion_batch_id` dry-run/execute 删除，当前 dry-run 覆盖 23 文档、4238 chunk、105 结构化行 |
+
+## P1A：辽宁 / 泰昌 MVP 试点资料入库准备
+
+目标：把客户指定的泰昌 MVP 试点企业资料与辽宁电缆保护管招标资料整理成可控、可评测、可隔离的入库批次。
+
+| 优先级 | 状态 | 任务 | 交付物 | 验收口径 |
+| --- | --- | --- | --- | --- |
+| P1A-1 | [x] | 解压并 inventory 辽宁/泰昌新增资料 | `docs/rag/liaoning-taichang-mvp-corpus-review.md`、`parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_inventory.json` | 已保留原始包，辽宁 185 个文件、泰昌 45 个文件已登记 |
+| P1A-2 | [~] | 判断资料完整性和可用边界 | `docs/rag/liaoning-taichang-mvp-corpus-review.md` | 已确认辽宁招标侧较完整；泰昌侧需 OCR、脱敏、型号覆盖确认 |
+| P1A-3 | [x] | 辽宁货物清单结构化解析兼容 | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/goods_tables/` | 已兼容 `dimension ref=A1` 异常并输出 87 条去重需求行 |
+| P1A-4 | [~] | 泰昌扫描 PDF OCR 与质量报告 | parse quality report | MinerU 已完成营业执照 smoke + 三体系证书 + 生产设备台账首批 OCR，累计 5 份文件、28 个图片资产 metadata；全量扫描件 OCR 待执行 |
+| P1A-5 | [x] | 河北豪乾参考稿隔离入库 | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/reference_templates/` | 已抽取 2 份河北豪乾参考稿基础模板数据，均标记 `reference_only=true`，不得作为泰昌企业事实来源 |
+| P1A-6 | [ ] | 辽宁/泰昌专项评测集 | `tests/rag/customer_liaoning_taichang_testset.jsonl` | 覆盖 CPVC/MPP 型号、包号、技术规范编码、泰昌事实、参考稿隔离 |
 
 ## P3：召回质量增强
 

@@ -1,5 +1,9 @@
 # Supabase 初始化与补充表
 
+> 历史/迁移参考：本文记录早期 Supabase 环境的初始化方式，不再作为新环境初始化入口。
+> 新库初始化必须优先使用 `migrations/postgres/001_schema.sql` 及后续 `migrations/postgres/00*_*.sql` 正式迁移链；RAG 入库必须优先使用 `scripts/rag/ingest_power_grid_v2.py` 和客户批次入库脚本。
+> 不要把本文中的 `sql/` 历史脚本整目录直接用于 PostgreSQL/RDS 新环境。
+
 > 快速开始见 [quickstart.md](./quickstart.md)
 
 所有 SQL 脚本都在项目根目录 `sql/` 下。复制文件内容粘贴到 Supabase 控制台 → SQL Editor 执行即可。

@@ -1,7 +1,7 @@
 # 江西/山西客户标书资料 Inventory
 
-> 状态日期：2026-06-02
-> 范围：客户提供的江西、山西国家电网物资协议库存公开招标采购资料包。
+> 状态日期：2026-06-06
+> 范围：客户提供的江西、山西、辽宁国家电网物资协议库存公开招标采购资料包，以及泰昌 MVP 试点企业资料。
 > 目标：为 P1 真实标书 RAG 入库、跨批次负样本和表格结构化解析提供文件清单。
 
 ## 总览
@@ -10,12 +10,15 @@
 | --- | --- | --- | --- | --- |
 | 江西 | 2026 年第一次配网（省网）协议库存物资类公开招标采购 | 铁构件 / 包 1 | `rag_seed/power_grid_resources/01_tender_documents/20_国网江西电力2026年第一次配网省网协议库存物资类公开招标采购/` | P1 |
 | 山西 | 2026 年第二次物资协议库存公开招标采购 | 铁构件 / 包 1 | `rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/` | P1 |
+| 辽宁 | 2025 年第三次物资协议库存招标采购 | 电缆保护管 CPVC / MPP，CPVC 包 1-2、MPP 包 1-4 | `rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/` | P1 |
+| 泰昌 | MVP 试点企业资料 | 企业资质、财务、生产、检测、绿色低碳材料 | `rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/` | P1 |
 
 解析准备批次：
 
 | 批次 ID | Manifest | 质量报告 | 状态 |
 | --- | --- | --- | --- |
 | `customer_jx_sx_20260602_p1` | `parsed_outputs/power_grid_customer_corpus/customer_jx_sx_20260602_p1/manifest.json` | `parsed_outputs/power_grid_customer_corpus/customer_jx_sx_20260602_p1/parse_quality_report.md` | 23 个 `.doc/.docx/.xlsx` 已解析，21 个归档文件已登记，`needs_review=0` |
+| `customer_liaoning_taichang_20260606` | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_inventory.json` | `docs/rag/liaoning-taichang-mvp-corpus-review.md` | 已完成解压和初步 inventory；尚未正式 OCR、分块、入库、评测 |
 
 当前解压后发现的核心文件类型：
 
@@ -56,6 +59,21 @@
 | `5.120 10kV及以下协议库存货物采购合同（材料类）（2024版）.docx` | docx | `contract_special_terms` | 同上 | P1-2 | 合同模板 |
 | `合同专用条款其他文件20250331100191.docx` | docx | `contract_special_terms` | 同上 | P1-2 | 合同专用条款 |
 
+## 辽宁 / 泰昌 MVP 批次核心文件
+
+详细评估见 `docs/rag/liaoning-taichang-mvp-corpus-review.md`。
+
+| 文件 | 类型 | 角色建议 | metadata 建议 | 处理优先级 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `国网辽宁电力2025年第三次物资协议库存招标采购_招标文件包.zip` | zip | `raw_tender_package` | `province=辽宁`、`batch_no=2025-03`、`package_code=2225AC`、`material_category=电缆保护管CPVC/MPP` | P1 | 原始包保留，多层 zip 已解压 |
+| `国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx` | docx | `main_tender_file` | 同上，按 CPVC/MPP 包号补充 `package_no` | P1 | 每包均有主招标文件 |
+| `货物清单_2225AC_电缆保护管CPVC*.xlsx` | xlsx | `goods_list` | `material_category=电缆保护管CPVC`、`package_no=包1/包2` | P1 | 去重后 CPVC 覆盖 φ50/100/150/200；xlsx dimension 异常，需 XML 兼容解析 |
+| `货物清单_2225AC_电缆保护管MPP*.xlsx` | xlsx | `goods_list` | `material_category=电缆保护管MPP`、`package_no=包1-包4` | P1 | 去重后 MPP 覆盖 φ100/150/175/200 |
+| `技术补充文件_电缆保护管CPVC.pdf` | pdf | `technical_response_reference` | `doc_owner=河北豪乾`、`reference_only=true`、`material_category=电缆保护管CPVC` | P1 | 468 页，非泰昌主体，只能作参考 |
+| `泰昌资料.zip` | zip | `raw_enterprise_package` | `enterprise=泰昌`、`privacy_level=private` | P1 | 原始包保留，已解压 |
+| `泰昌资料/*` | pdf/jpg | `enterprise_evidence` | `enterprise=泰昌`、`evidence_type=finance/certification/production/testing/green_low_carbon` | P1 | 扫描件多，需 MinerU/OCR 和脱敏 |
+| `商务投标文件-中标，按投标人制作.pdf` | pdf | `winning_bid_reference` | `doc_owner=河北豪乾`、`reference_only=true`、`material_category=电缆保护管CPVC/MPP/NHAP` | P1 | 362 页，非泰昌主体，禁止作为泰昌事实来源 |
+
 ## 首批真实场景建议
 
 优先选择“铁构件 / 接地铁”作为 P1 首个真实物料场景，原因：
@@ -80,3 +98,4 @@
 - `.zb` 平台文件是否包含可解析文本，当前暂不入库。
 - 山西 `.rar` 是否需要解包并纳入历史技术规范对比。
 - 客户资料是否需要脱敏后再进入持久化 RAG 库。
+- 辽宁/泰昌批次中，河北豪乾参考稿必须与泰昌企业事实隔离；泰昌敏感材料需先确认脱敏和授权边界。

@@ -122,6 +122,7 @@ def _run_bid_docx_export(
             "snapshot_section_count": len(sections_snapshot or []),
             "image_selection": image_selection_report,
             "image_conversion": image_conversion_report,
+            "docx_template": (image_conversion_report or {}).get("template") or {},
             "field_refresh": field_refresh_report,
         }
         update_bid_export_task(project_id, task_id, {

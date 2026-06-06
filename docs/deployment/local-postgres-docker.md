@@ -71,4 +71,6 @@ Disk usage limit: 200 GB
 
 ## 说明
 
-当前 `sql/` 目录里部分脚本仍包含 Supabase Storage 专属对象，例如 `storage.buckets` 和 storage policy，不能原样作为原生 PostgreSQL 初始化脚本执行。后续迁移应整理一版面向 PostgreSQL + OSS/本地存储的 schema。
+当前 `sql/` 目录里部分脚本仍包含 Supabase Storage 专属对象，例如 `storage.buckets` 和 storage policy，不能原样作为原生 PostgreSQL 初始化脚本执行。
+
+新环境初始化必须使用 `migrations/postgres/` 正式迁移链；`sql/` 和 `docs/deployment/supabase-*.md` 仅作为历史/迁移参考。电网 RAG 新资料入库必须走 v2 父子分块链路和评测流程，不再使用早期 `rag_seed/.../_scripts/ingest_power_grid_rag_seed.py` 作为正式入口。

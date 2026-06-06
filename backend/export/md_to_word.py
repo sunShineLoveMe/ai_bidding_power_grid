@@ -5,7 +5,7 @@ from docx import Document
 from docx.shared import Pt, RGBColor, Inches, Cm
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING
 from docx.enum.style import WD_STYLE_TYPE
-from docx.enum.table import WD_CELL_VERTICAL_ALIGNMENT
+from docx.enum.table import WD_CELL_VERTICAL_ALIGNMENT, WD_TABLE_ALIGNMENT
 from docx.oxml.ns import qn
 import re
 import subprocess
@@ -59,6 +59,20 @@ FORMAL_VOLUME_HEADING_RE = re.compile(
     r".{0,16}(?:文件|分册|响应|资料|清单)$"
 )
 DOCX_TOC_MAX_LEVEL = int(os.getenv("DOCX_TOC_MAX_LEVEL", "4"))
+DOCX_TEMPLATE_ID = os.getenv("DOCX_TEMPLATE_ID", "sgcc_power_grid")
+DOCX_BODY_EAST_ASIA = os.getenv("DOCX_BODY_EAST_ASIA", "宋体")
+DOCX_BODY_LATIN = os.getenv("DOCX_BODY_LATIN", "Times New Roman")
+DOCX_BODY_FONT_SIZE = float(os.getenv("DOCX_BODY_FONT_SIZE", "12"))
+DOCX_BODY_LINE_SPACING = float(os.getenv("DOCX_BODY_LINE_SPACING", "28"))
+DOCX_TABLE_EAST_ASIA = os.getenv("DOCX_TABLE_EAST_ASIA", "宋体")
+DOCX_TABLE_FONT_SIZE = float(os.getenv("DOCX_TABLE_FONT_SIZE", "10.5"))
+DOCX_HEADER_MAX_CHARS = int(os.getenv("DOCX_HEADER_MAX_CHARS", "42"))
+DOCX_PAGE_MARGIN_TOP_CM = float(os.getenv("DOCX_PAGE_MARGIN_TOP_CM", "2.54"))
+DOCX_PAGE_MARGIN_BOTTOM_CM = float(os.getenv("DOCX_PAGE_MARGIN_BOTTOM_CM", "2.54"))
+DOCX_PAGE_MARGIN_LEFT_CM = float(os.getenv("DOCX_PAGE_MARGIN_LEFT_CM", "3.18"))
+DOCX_PAGE_MARGIN_RIGHT_CM = float(os.getenv("DOCX_PAGE_MARGIN_RIGHT_CM", "3.18"))
+DOCX_HEADER_DISTANCE_CM = float(os.getenv("DOCX_HEADER_DISTANCE_CM", "1.5"))
+DOCX_FOOTER_DISTANCE_CM = float(os.getenv("DOCX_FOOTER_DISTANCE_CM", "1.75"))
 
 
 def clean_formal_bid_text(text):
@@ -84,7 +98,7 @@ def should_start_heading_on_new_page(level: int, text: str, heading_count: int) 
     return False
 
 
-def apply_run_font(run, *, east_asia='宋体', latin='Times New Roman', size=None, bold=None):
+def apply_run_font(run, *, east_asia=DOCX_BODY_EAST_ASIA, latin=DOCX_BODY_LATIN, size=None, bold=None):
     run.font.name = latin
     run._element.rPr.rFonts.set(qn('w:eastAsia'), east_asia)
     lang = run._element.rPr.find(qn('w:lang'))
@@ -100,13 +114,68 @@ def apply_run_font(run, *, east_asia='宋体', latin='Times New Roman', size=Non
         run.font.bold = bold
 
 
-def apply_paragraph_format(paragraph, *, first_line_chars=2, line_spacing=28, space_before=0, space_after=0):
+def apply_paragraph_format(paragraph, *, first_line_chars=2, line_spacing=DOCX_BODY_LINE_SPACING, space_before=0, space_after=0):
     fmt = paragraph.paragraph_format
     fmt.first_line_indent = Pt(first_line_chars * 12)
     fmt.line_spacing_rule = WD_LINE_SPACING.EXACTLY
     fmt.line_spacing = Pt(line_spacing)
     fmt.space_before = Pt(space_before)
     fmt.space_after = Pt(space_after)
+
+
+def _set_rfonts(rpr, *, east_asia: str, latin: str = DOCX_BODY_LATIN) -> None:
+    rfonts = rpr.find(qn("w:rFonts"))
+    if rfonts is None:
+        rfonts = OxmlElement("w:rFonts")
+        rpr.insert(0, rfonts)
+    rfonts.set(qn("w:ascii"), latin)
+    rfonts.set(qn("w:hAnsi"), latin)
+    rfonts.set(qn("w:eastAsia"), east_asia)
+    rfonts.set(qn("w:cs"), east_asia)
+
+
+def _set_font_size(rpr, size_pt: float) -> None:
+    half_points = str(int(round(size_pt * 2)))
+    for tag in ("w:sz", "w:szCs"):
+        node = rpr.find(qn(tag))
+        if node is None:
+            node = OxmlElement(tag)
+            rpr.append(node)
+        node.set(qn("w:val"), half_points)
+
+
+def _truncate_header_text(text: str) -> str:
+    text = clean_formal_bid_text(text)
+    if len(text) <= DOCX_HEADER_MAX_CHARS:
+        return text
+    return f"{text[:DOCX_HEADER_MAX_CHARS - 1]}…"
+
+
+def docx_template_report() -> dict:
+    return {
+        "template_id": DOCX_TEMPLATE_ID,
+        "body_font": DOCX_BODY_EAST_ASIA,
+        "body_latin_font": DOCX_BODY_LATIN,
+        "body_font_size_pt": DOCX_BODY_FONT_SIZE,
+        "body_line_spacing_pt": DOCX_BODY_LINE_SPACING,
+        "table_font": DOCX_TABLE_EAST_ASIA,
+        "table_font_size_pt": DOCX_TABLE_FONT_SIZE,
+        "page_size": "A4",
+        "margins_cm": {
+            "top": DOCX_PAGE_MARGIN_TOP_CM,
+            "bottom": DOCX_PAGE_MARGIN_BOTTOM_CM,
+            "left": DOCX_PAGE_MARGIN_LEFT_CM,
+            "right": DOCX_PAGE_MARGIN_RIGHT_CM,
+        },
+        "header_footer": {
+            "header_font": "宋体",
+            "header_font_size_pt": 9,
+            "footer_font": "宋体",
+            "footer_font_size_pt": 9,
+            "page_number_format": "第 X 页，共 Y 页",
+            "header_max_chars": DOCX_HEADER_MAX_CHARS,
+        },
+    }
 
 
 def apply_image_paragraph_format(paragraph):
@@ -276,7 +345,7 @@ def _add_toc_page(doc, project_name: str, heading_entries: list[dict]) -> None:
         empty = doc.add_paragraph()
         empty.paragraph_format.first_line_indent = Pt(0)
         empty_run = empty.add_run("暂无章节目录，请先生成章节大纲。")
-        apply_run_font(empty_run, east_asia="仿宋", size=12)
+        apply_run_font(empty_run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_BODY_FONT_SIZE)
     tab_position_twips = _page_text_width_twips(doc)
     for entry in formal_entries:
         _add_formal_toc_entry(doc, entry, tab_position_twips=tab_position_twips)
@@ -583,12 +652,13 @@ def set_document_styles(doc):
     """设置文档样式"""
     styles = doc.styles
     normal = styles['Normal']
-    normal.font.name = 'Times New Roman'
-    normal._element.rPr.rFonts.set(qn('w:eastAsia'), '仿宋')
-    normal.font.size = Pt(12)
+    normal.font.name = DOCX_BODY_LATIN
+    normal._element.rPr.rFonts.set(qn('w:eastAsia'), DOCX_BODY_EAST_ASIA)
+    normal._element.rPr.rFonts.set(qn('w:cs'), DOCX_BODY_EAST_ASIA)
+    normal.font.size = Pt(DOCX_BODY_FONT_SIZE)
     normal.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
-    normal.paragraph_format.line_spacing = Pt(28)
-    normal.paragraph_format.first_line_indent = Pt(24)
+    normal.paragraph_format.line_spacing = Pt(DOCX_BODY_LINE_SPACING)
+    normal.paragraph_format.first_line_indent = Pt(DOCX_BODY_FONT_SIZE * 2)
     normal.paragraph_format.space_before = Pt(0)
     normal.paragraph_format.space_after = Pt(0)
 
@@ -601,23 +671,25 @@ def set_document_styles(doc):
     for i in range(1, 5):
         style = styles[f'Heading {i}']
         east_asia, size, bold = heading_specs[i]
-        style.font.name = 'Times New Roman'
+        style.font.name = DOCX_BODY_LATIN
         style._element.rPr.rFonts.set(qn('w:eastAsia'), east_asia)
+        style._element.rPr.rFonts.set(qn('w:cs'), east_asia)
         style.font.size = Pt(size)
         style.font.bold = bold
         style.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
-        style.paragraph_format.line_spacing = Pt(28)
+        style.paragraph_format.line_spacing = Pt(DOCX_BODY_LINE_SPACING)
         style.paragraph_format.first_line_indent = Pt(0)
         style.paragraph_format.space_before = Pt(8 if i <= 2 else 4)
         style.paragraph_format.space_after = Pt(6 if i <= 2 else 4)
 
     for style_name in ['List Bullet', 'List Number']:
         style = styles[style_name]
-        style.font.name = 'Times New Roman'
-        style._element.rPr.rFonts.set(qn('w:eastAsia'), '仿宋')
-        style.font.size = Pt(12)
+        style.font.name = DOCX_BODY_LATIN
+        style._element.rPr.rFonts.set(qn('w:eastAsia'), DOCX_BODY_EAST_ASIA)
+        style._element.rPr.rFonts.set(qn('w:cs'), DOCX_BODY_EAST_ASIA)
+        style.font.size = Pt(DOCX_BODY_FONT_SIZE)
         style.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
-        style.paragraph_format.line_spacing = Pt(28)
+        style.paragraph_format.line_spacing = Pt(DOCX_BODY_LINE_SPACING)
 
 def _set_rpr_language(rpr):
     lang = rpr.find(qn('w:lang'))
@@ -645,11 +717,16 @@ def set_document_language(doc):
     if rpr is None:
         rpr = OxmlElement('w:rPr')
         rpr_default.append(rpr)
+    _set_rfonts(rpr, east_asia=DOCX_BODY_EAST_ASIA)
+    _set_font_size(rpr, DOCX_BODY_FONT_SIZE)
     _set_rpr_language(rpr)
 
     for style in doc.styles:
         if style.type in {WD_STYLE_TYPE.PARAGRAPH, WD_STYLE_TYPE.CHARACTER, WD_STYLE_TYPE.TABLE}:
             rpr = style._element.get_or_add_rPr()
+            if style.type in {WD_STYLE_TYPE.PARAGRAPH, WD_STYLE_TYPE.CHARACTER} and style.name in {"Normal", "Body Text", "List Bullet", "List Number"}:
+                _set_rfonts(rpr, east_asia=DOCX_BODY_EAST_ASIA)
+                _set_font_size(rpr, DOCX_BODY_FONT_SIZE)
             _set_rpr_language(rpr)
 
     settings = doc.settings.element
@@ -677,17 +754,17 @@ def set_document_format(doc, project_name):
     for section in sections:
         section.page_width = Cm(21)
         section.page_height = Cm(29.7)
-        section.top_margin = Cm(2.54)
-        section.bottom_margin = Cm(2.54)
-        section.left_margin = Cm(3.18)
-        section.right_margin = Cm(3.18)
-        section.header_distance = Cm(1.5)
-        section.footer_distance = Cm(1.75)
+        section.top_margin = Cm(DOCX_PAGE_MARGIN_TOP_CM)
+        section.bottom_margin = Cm(DOCX_PAGE_MARGIN_BOTTOM_CM)
+        section.left_margin = Cm(DOCX_PAGE_MARGIN_LEFT_CM)
+        section.right_margin = Cm(DOCX_PAGE_MARGIN_RIGHT_CM)
+        section.header_distance = Cm(DOCX_HEADER_DISTANCE_CM)
+        section.footer_distance = Cm(DOCX_FOOTER_DISTANCE_CM)
         
         # 添加页眉
         header = section.header
         header_para = header.paragraphs[0]
-        header_para.text = f"{project_name}投标文件"
+        header_para.text = _truncate_header_text(f"{project_name}投标文件")
         header_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
         for run in header_para.runs:
             apply_run_font(run, east_asia='宋体', size=9)
@@ -739,6 +816,8 @@ def process_table(md_table, doc):
     # 创建表格
     table = doc.add_table(rows=1, cols=col_count)
     table.style = 'Table Grid'
+    table.alignment = WD_TABLE_ALIGNMENT.CENTER
+    table.autofit = True
     
     # 添加表头
     header_row = table.rows[0]
@@ -750,7 +829,7 @@ def process_table(md_table, doc):
             paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
             for run in paragraph.runs:
                 run.bold = True
-                apply_run_font(run, east_asia='黑体', size=10.5, bold=True)
+                apply_run_font(run, east_asia='宋体', size=DOCX_TABLE_FONT_SIZE, bold=True)
     
     # 添加数据行
     for line in lines[2:]:  # 跳过表头和分隔行
@@ -764,7 +843,7 @@ def process_table(md_table, doc):
                 for paragraph in row.cells[i].paragraphs:
                     paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
                     for run in paragraph.runs:
-                        apply_run_font(run, east_asia='仿宋', size=10.5)
+                        apply_run_font(run, east_asia=DOCX_TABLE_EAST_ASIA, size=DOCX_TABLE_FONT_SIZE)
 
 
 def _bool_env(name: str, default: bool = False) -> bool:
@@ -1002,7 +1081,7 @@ def convert_md_to_word(md_file, return_report: bool = False):
             text = clean_formal_bid_text(re.sub(r'\*\*(.*?)\*\*', r'\1', text))
             p = doc.add_paragraph(style='List Bullet')
             run = p.add_run(text)
-            apply_run_font(run, east_asia='仿宋', size=12)
+            apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_BODY_FONT_SIZE)
             apply_paragraph_format(p, first_line_chars=0)
         
         # 处理数字列表
@@ -1013,7 +1092,7 @@ def convert_md_to_word(md_file, return_report: bool = False):
             text = clean_formal_bid_text(re.sub(r'\*\*(.*?)\*\*', r'\1', text))
             p = doc.add_paragraph(style='List Number')
             run = p.add_run(text)
-            apply_run_font(run, east_asia='仿宋', size=12)
+            apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_BODY_FONT_SIZE)
             apply_paragraph_format(p, first_line_chars=0)
         
         # 处理普通段落
@@ -1022,7 +1101,7 @@ def convert_md_to_word(md_file, return_report: bool = False):
             text = clean_formal_bid_text(re.sub(r'\*\*(.*?)\*\*', r'\1', line))
             p = doc.add_paragraph()
             run = p.add_run(text)
-            apply_run_font(run, east_asia='仿宋', size=12)
+            apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_BODY_FONT_SIZE)
             apply_paragraph_format(p)
         
         i += 1
@@ -1054,6 +1133,7 @@ def convert_md_to_word(md_file, return_report: bool = False):
 
         logging.info("已生成 Word 文档: %s", saved_path)
         if return_report:
+            image_report["template"] = docx_template_report()
             return Path(saved_path), image_report
         return Path(saved_path)
     finally:

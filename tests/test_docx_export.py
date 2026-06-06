@@ -5,6 +5,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from docx import Document
+from docx.oxml.ns import qn
 from flask import Flask
 
 from backend.api.routes import build_project_bid_markdown, _demote_body_markdown_headings, _numbered_export_sections, _strip_duplicate_section_heading
@@ -346,6 +347,46 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertNotIn("📌", full_text)
             self.assertEqual(len(document.tables), 1)
             self.assertEqual(document.tables[0].cell(1, 0).text, "工期")
+
+    def test_formal_bid_template_uses_sgcc_default_fonts_layout_and_metadata(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            markdown_path = Path(tmpdir) / "sgcc-template.md"
+            markdown_path.write_text(
+                "\n".join(
+                    [
+                        "# 国网山西电力2026年第二次物资协议库存公开招标采购投标文件",
+                        "",
+                        "# 1. 投标函及格式文件",
+                        "",
+                        "本企业承诺严格响应招标文件第六章投标文件格式要求。",
+                        "",
+                        "| 序号 | 文件名称 | 响应情况 |",
+                        "| --- | --- | --- |",
+                        "| 1 | 商务投标文件 | 已按要求编制 |",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            output_path, report = convert_md_to_word(markdown_path, return_report=True)
+            document = Document(str(output_path))
+            normal = document.styles["Normal"]
+            section = document.sections[0]
+            body_paragraph = next(p for p in document.paragraphs if p.text.startswith("本企业承诺"))
+            body_run = body_paragraph.runs[0]
+            body_rfonts = body_run._element.rPr.rFonts
+            table_run = document.tables[0].cell(1, 1).paragraphs[0].runs[0]
+
+            self.assertEqual("sgcc_power_grid", report["template"]["template_id"])
+            self.assertEqual("宋体", report["template"]["body_font"])
+            self.assertEqual("宋体", normal._element.rPr.rFonts.get(qn("w:eastAsia")))
+            self.assertEqual("宋体", body_rfonts.get(qn("w:eastAsia")))
+            self.assertEqual(12, body_run.font.size.pt)
+            self.assertEqual("宋体", table_run._element.rPr.rFonts.get(qn("w:eastAsia")))
+            self.assertEqual(10.5, table_run.font.size.pt)
+            self.assertEqual(21, round(section.page_width.cm))
+            self.assertEqual(29.7, round(section.page_height.cm, 1))
+            self.assertLessEqual(len(section.header.paragraphs[0].text), 42)
 
     def test_markdown_image_limit_records_skipped_images(self):
         with tempfile.TemporaryDirectory() as tmpdir:
