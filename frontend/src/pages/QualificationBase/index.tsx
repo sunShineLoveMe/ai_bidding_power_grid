@@ -38,6 +38,7 @@ const categoryMap: Record<string, string> = {
   财务资料: '财务资料',
   项目业绩: '项目业绩',
   授权模板: '授权模板',
+  绿色低碳资料: '绿色低碳资料',
 };
 
 const volumeOptions = [
@@ -59,8 +60,12 @@ function applicableVolumes(asset: KnowledgeAsset): string[] {
 function inferQualificationCategory(asset: KnowledgeAsset): string {
   const text = `${asset.title || ''} ${(asset.tags || []).join('、')} ${asset.description || ''}`;
   if (text.includes('营业执照')) return '基础证照';
+  if (text.includes('开户许可证')) return '基础证照';
   if (text.includes('资质')) return '资质证书';
+  if (text.includes('认证证书')) return '资质证书';
   if (text.includes('安全生产许可证')) return '资质证书';
+  if (text.includes('财务') || text.includes('审计报告')) return '财务资料';
+  if (text.includes('绿色') || text.includes('低碳') || text.includes('ESG')) return '绿色低碳资料';
   return categoryMap[asset.category || ''] || '企业资信';
 }
 
@@ -127,7 +132,7 @@ export function QualificationBasePage(): JSX.Element {
       acc[asset.qualificationCategory] = (acc[asset.qualificationCategory] || 0) + 1;
       return acc;
     }, {});
-    const names = ['基础证照', '资质证书', '人员证书', '财务资料', '项目业绩', '授权模板'];
+    const names = ['基础证照', '资质证书', '人员证书', '财务资料', '绿色低碳资料', '项目业绩', '授权模板'];
     return [
       { name: '全部资信', count: enrichedAssets.length },
       ...names.map(name => ({ name, count: counts[name] || 0 })),
@@ -377,8 +382,8 @@ export function QualificationBasePage(): JSX.Element {
               <Descriptions.Item label="说明">{detail.description || '-'}</Descriptions.Item>
               <Descriptions.Item label="适用章节">{(detail.applicable_sections || []).join('、') || '-'}</Descriptions.Item>
               <Descriptions.Item label="标签">{(detail.tags || []).join('、') || '-'}</Descriptions.Item>
-              <Descriptions.Item label="来源">{detail.source_url ? <a href={detail.source_url} target="_blank" rel="noreferrer">查看来源</a> : '脱敏样张'}</Descriptions.Item>
-              <Descriptions.Item label="合规说明">{detail.is_synthetic ? '脱敏合成样张，仅用于测试和排版占位，不可替代正式法定资质文件。' : '公开来源素材，使用前需复核授权。'}</Descriptions.Item>
+              <Descriptions.Item label="来源">{detail.source_url ? <a href={detail.source_url} target="_blank" rel="noreferrer">查看来源</a> : '客户提供资料'}</Descriptions.Item>
+              <Descriptions.Item label="合规说明">{detail.is_synthetic ? '脱敏合成样张，仅用于测试和排版占位，不可替代正式法定资质文件。' : '泰昌客户自有资料，仅按泰昌租户内部投标场景使用。'}</Descriptions.Item>
             </Descriptions>
           </div>
         ) : null}

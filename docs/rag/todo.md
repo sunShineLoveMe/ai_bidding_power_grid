@@ -70,12 +70,12 @@
 | P1A-1 | [x] | 解压并 inventory 辽宁/泰昌新增资料 | `docs/rag/liaoning-taichang-mvp-corpus-review.md`、`parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_inventory.json` | 已保留原始包，辽宁 185 个文件、泰昌 45 个文件已登记 |
 | P1A-2 | [x] | 判断资料完整性和可用边界 | `docs/rag/liaoning-taichang-mvp-corpus-review.md`、`docs/development/runs/run_20260606_taichang_mvp_real_flow_30_sections.md` | 已确认泰昌为 MVP 企业事实主线、辽宁仅作招标样本、河北豪乾仅作参考稿；真实链路完成 30 章节生成与 DOCX 导出。剩余业务风险：CPVC/MPP 各规格检验报告覆盖仍需客户确认 |
 | P1A-3 | [x] | 辽宁货物清单结构化解析兼容 | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/goods_tables/` | 已兼容 `dimension ref=A1` 异常并输出 87 条去重需求行 |
-| P1A-4 | [x] | 泰昌扫描 PDF OCR 与图片资产 metadata | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/ocr_coverage_report.json`、`asset_index.json` | 泰昌 42 份 PDF 已全部 MinerU 完成，生成 242 个图片资产 metadata，其中 78 个 `taichang_internal_private` 资产可在泰昌租户内问答/写作/资产检索展示；覆盖率和资产语义校验通过 |
+| P1A-4 | [x] | 泰昌扫描 PDF OCR 与正式图片资产 metadata | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/ocr_coverage_report.json`、`asset_index.json`、`parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/rebuild_formal_image_assets_report.md` | 泰昌 42 份 PDF 已全部 MinerU/OCR 完成；原 242 个 MinerU 局部图片资产已删除，改用客户已提供 PDF/JPG 生成 300 个正式整页/原图图片资产；标题、分类、标签均为中文展示 |
 | P1A-5 | [x] | 河北豪乾参考稿隔离入库 | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/reference_templates/` | 已抽取 2 份河北豪乾参考稿基础模板数据，均标记 `reference_only=true`，不得作为泰昌企业事实来源 |
 | P1A-6 | [x] | 辽宁/泰昌专项评测集 | `tests/rag/customer_liaoning_taichang_testset.jsonl`、`docs/rag/runs/run_20260606_taichang_mvp_customer_filtered.json` | 17 条用例已跑正式召回，Recall@5 100%，禁用关键词命中率 0%，覆盖 CPVC/MPP 型号、包号、技术规范编码、泰昌事实、图片资产、河北豪乾参考稿隔离和泰昌租户内图片展示策略 |
 | P1A-7 | [x] | 泰昌 OCR parse quality report | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/parse_quality_report.md` | 已汇总 42 份 PDF 的文本量、图片资产、敏感级别、人工复核项和可入库建议 |
-| P1A-8 | [x] | 辽宁/泰昌 MVP 正式入库与回归 | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/formal_ingestion_summary.md`、`docs/rag/runs/run_20260606_taichang_mvp_base_filtered.json` | 已写入 124 个 `knowledge_documents`、29683 个 `document_chunks`、87 条结构化货物清单、242 个图片资产；Base Recall@5 保持 86.7%，专项 Recall@5 100% |
-| P1A-9 | [x] | P0：泰昌 MVP 图片智能问答与图文并茂选图准确性 | `backend/rag/retrieval.py`、`backend/api/knowledge.py`、`backend/api/routes.py`、`tests/test_rag_asset_scoring.py`、`tests/test_rag_retrieval.py`、`docs/rag/runs/run_20260606_taichang_mvp_asset_p0_*` | 问答资产检索已按泰昌企业事实 metadata 过滤；标书配图已按 `evidence_type` 强约束生产制造、试验检测、绿色低碳、营业执照/证书、检验报告；真实库 242 个资产模拟通过，Base Recall@5 86.7%，泰昌专项 Recall@5 100% |
+| P1A-8 | [x] | 辽宁/泰昌 MVP 正式入库与回归 | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/formal_ingestion_summary.md`、`docs/rag/runs/run_20260606_taichang_mvp_base_filtered.json`、`parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/rebuild_formal_image_assets_report.md` | 已写入 124 个 `knowledge_documents`、29683 个 `document_chunks`、87 条结构化货物清单；图片资产已从 242 个 MinerU 局部图重建为 300 个正式整页/原图资产；Base Recall@5 保持 86.7%，专项 Recall@5 100% |
+| P1A-9 | [x] | P0：泰昌 MVP 图片智能问答与图文并茂选图准确性 | `backend/rag/retrieval.py`、`backend/api/knowledge.py`、`backend/api/routes.py`、`tests/test_rag_asset_scoring.py`、`tests/test_rag_retrieval.py`、`docs/rag/runs/run_20260606_taichang_mvp_asset_p0_*`、`scripts/rag/rebuild_taichang_formal_image_assets.py` | 问答资产检索已按泰昌企业事实 metadata 过滤；标书配图已按 `evidence_type` 强约束生产制造、试验检测、绿色低碳、营业执照/证书、检验报告；真实库现为 300 个正式整页/原图资产；页面展示标题、分类、标签使用中文命名 |
 
 ## P3：召回质量增强
 
@@ -118,5 +118,6 @@
 1. 进入 P2-4/P2-5：补版本去重策略和模板可引用边界，避免旧模板、参考稿和企业事实污染召回。
 2. 进入 P3 Query Rewrite / 关键词补召回 / authority 排序，提升标准号、包号、物料编码精确召回。
 3. 向客户确认泰昌 CPVC/MPP 各规格检验报告覆盖关系，尤其是“内径250”报告能否覆盖辽宁 φ50/100/150/175/200 需求。
-4. 扩展泰昌 MVP 专项评测集到 40-60 条，并加入更多包号、技术规范编码、合同条款、图片问答和参考稿隔离负样本。
-5. 追加导出观感人工验收：打开 30 章节真实 DOCX，检查封面、目录、正文、表格、页眉页脚、页码和图片占位告警。
+4. 向客户补充产品实物高清照片、生产线/检测设备原始照片、同类业绩合同/中标通知书/验收证明、项目级盖章扫描件和官方 Logo。
+5. 扩展泰昌 MVP 专项评测集到 40-60 条，并加入更多包号、技术规范编码、合同条款、图片问答和参考稿隔离负样本。
+6. 追加导出观感人工验收：打开 30 章节真实 DOCX，检查封面、目录、正文、表格、页眉页脚、页码和正式图片资产插入效果。

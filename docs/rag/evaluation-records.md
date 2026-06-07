@@ -376,3 +376,66 @@ PDF 标准入库前必须增加源文件审计门禁。当前错源 GB/DL 标准
 
 - `PYTHONPATH=. .venv/bin/pytest tests/test_rag_asset_scoring.py tests/test_rag_retrieval.py -q`
 - 结果：16 passed，1 个 PyPDF2 deprecation warning。
+
+---
+
+## Run 8 — 泰昌正式图片资产整页化重建与中文命名（2026-06-07）
+
+> 重建报告：`parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/rebuild_formal_image_assets_report.md`  
+> Base filtered：`docs/rag/runs/run_20260607_taichang_formal_assets_base_filtered.json`  
+> Customer filtered：`docs/rag/runs/run_20260607_taichang_formal_assets_customer_filtered.json`
+
+### 背景
+
+- 资信库、产品库中原有 242 个图片资产来自 MinerU `extract/images` 局部切图，包含二维码、页脚、签名/印章附近局部、文字块和表格局部。
+- 页面展示直接使用资产 `title/category/tags`，因此出现 `taichang_*`、`production_capacity`、`green_low_carbon` 等内部英文/拼音值。
+- 客户已提供营业执照、开户许可证、审计报告、管理体系证书、CPVC/MPP 检验报告、生产线/厂房/设备/人员/社保/绿色低碳等 PDF/JPG，可按正式投标文件规则处理为整页/原图资产。
+
+### 处理内容
+
+- 新增 `scripts/rag/rebuild_taichang_formal_image_assets.py`。
+- 删除旧批次 `knowledge_assets` 中 242 个 MinerU 局部图资产。
+- 使用客户已提供 42 个 PDF 和 1 个 JPG，按 PDF 文件顺序逐页渲染整页图片，导入 300 个正式图片资产。
+- 用户可见字段全部改为中文：标题、分类、标签、说明均不再出现拼音或英文枚举。
+- 技术枚举仅保留在 metadata/specs 内，用于过滤和召回，例如 `evidence_type`、`target_library`、`asset_visual_type`。
+- 更新 `AGENTS.md`，固化国内中文命名规则和正式图片资产门禁规则。
+- 更新产品库、资信库页面旧文案，把“公开素材/公开来源素材/脱敏合成规格图”改为“泰昌资料/客户提供资料/客户自有资料”口径。
+
+### 数据库验证
+
+| 指标 | 结果 |
+| --- | ---: |
+| 删除旧局部图片资产 | 242 |
+| 导入正式整页/原图资产 | 300 |
+| `product_image` | 203 |
+| `qualification_image` | 97 |
+| 标题英文/拼音残留 | 0 |
+| 标签英文枚举残留 | 0 |
+
+正式资产分类：
+
+| 分类 | 数量 |
+| --- | ---: |
+| 绿色低碳资料 | 111 |
+| 财务资料 | 67 |
+| 试验检测设备 | 46 |
+| 生产制造能力 | 24 |
+| 人员证书 | 18 |
+| 厂房仓储资料 | 14 |
+| 检验报告 | 10 |
+| 资质证书 | 8 |
+| 基础证照 | 2 |
+
+### 回归验证
+
+- Base filtered Recall@5：86.7%，top1 来源准确率：93.3%，关键词命中率：86.7%，跨 doc_role 串扰均值：0.0%。
+- 泰昌专项 filtered Recall@5：100.0%，top1 来源准确率：100.0%，关键词命中率：100.0%，禁用关键词命中率：0.0%。
+- `PYTHONPATH=. .venv/bin/pytest tests/test_rag_asset_scoring.py tests/test_rag_retrieval.py -q`
+- 结果：16 passed，1 个 PyPDF2 deprecation warning。
+- `cd frontend && npm run build`
+- 结果：构建通过；Vite 仅提示既有大 chunk 和动态/静态 import 混用警告。
+
+### 剩余风险
+
+- CPVC/MPP 现有检验报告为“内径250”，是否覆盖辽宁清单中的其他口径仍需客户业务确认。
+- 产品实物高清照片、生产线/检测设备原始照片、同类业绩合同/中标通知书/验收证明、项目级盖章扫描件和官方 Logo 仍需客户补充。

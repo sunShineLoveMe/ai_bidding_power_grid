@@ -30,6 +30,12 @@ interface KnowledgeAsset {
 }
 
 const preferredCategories = [
+  '产品实物图片',
+  '生产制造能力',
+  '试验检测设备',
+  '检验报告',
+  '绿色低碳资料',
+  '厂房仓储资料',
   '输变电设备',
   '配网设备',
   '电缆与附件',
@@ -65,7 +71,7 @@ function scenario(asset: KnowledgeAsset): string {
 }
 
 function versionLabel(asset: KnowledgeAsset): string {
-  return asset.is_synthetic ? '脱敏样例' : '公开素材';
+  return asset.is_synthetic ? '脱敏样例' : '泰昌资料';
 }
 
 function assetFileUrl(asset: KnowledgeAsset): string {
@@ -128,7 +134,7 @@ export function ProductBasePage(): JSX.Element {
   const dataSource = activeCategory === '全部产品' ? assets : assets.filter(asset => asset.category === activeCategory);
   const tagCount = new Set(assets.flatMap(asset => asset.tags || [])).size;
   const specCount = assets.filter(asset => asset.is_synthetic || Object.keys(asset.specs || {}).length > 0).length;
-  const publicCaseCount = assets.filter(asset => !asset.is_synthetic && asset.source_url).length;
+  const customerAssetCount = assets.filter(asset => !asset.is_synthetic).length;
 
   const columns: ColumnsType<KnowledgeAsset> = [
     { title: '产品/服务名称', dataIndex: 'title', ellipsis: true },
@@ -254,7 +260,7 @@ export function ProductBasePage(): JSX.Element {
           { title: '产品资料数', value: assets.length, desc: '已接入产品资产', icon: Box, colorClass: 'bg-blue-50 text-blue-600' },
           { title: '能力标签', value: tagCount, desc: '来自图片资产标签', icon: Tags, colorClass: 'bg-emerald-50 text-emerald-600' },
           { title: '技术参数表', value: specCount, desc: '规格图与参数素材', icon: Cpu, colorClass: 'bg-violet-50 text-violet-600' },
-          { title: '案例附件', value: publicCaseCount, desc: '公开来源图片', icon: FileStack, colorClass: 'bg-orange-50 text-orange-500' },
+          { title: '客户资料', value: customerAssetCount, desc: '泰昌已提供素材', icon: FileStack, colorClass: 'bg-orange-50 text-orange-500' },
         ]}
       />
       <div className="grid min-h-0 grid-cols-[250px_minmax(0,1fr)] gap-4">
@@ -375,8 +381,8 @@ export function ProductBasePage(): JSX.Element {
               <Descriptions.Item label="能力标签">{(detail.tags || []).join('、') || '-'}</Descriptions.Item>
               <Descriptions.Item label="产品说明">{detail.description || '-'}</Descriptions.Item>
               <Descriptions.Item label="适用章节">{(detail.applicable_sections || []).join('、') || '-'}</Descriptions.Item>
-              <Descriptions.Item label="来源">{detail.source_url ? <a href={detail.source_url} target="_blank" rel="noreferrer">查看来源</a> : '脱敏合成规格图'}</Descriptions.Item>
-              <Descriptions.Item label="合规说明">{detail.is_synthetic ? '脱敏合成样张，可用于产品库/RAG/自动插图测试。' : '公开来源素材，正式商用前需复核许可和署名要求。'}</Descriptions.Item>
+              <Descriptions.Item label="来源">{detail.source_url ? <a href={detail.source_url} target="_blank" rel="noreferrer">查看来源</a> : '客户提供资料'}</Descriptions.Item>
+              <Descriptions.Item label="合规说明">{detail.is_synthetic ? '脱敏合成样张，仅用于测试和排版占位。' : '泰昌客户自有资料，仅按泰昌租户内部投标场景使用。'}</Descriptions.Item>
             </Descriptions>
           </div>
         ) : null}
