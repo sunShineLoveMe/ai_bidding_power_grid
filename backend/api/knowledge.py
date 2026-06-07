@@ -49,6 +49,13 @@ from backend.rag.retrieval import (
 
 
 CUSTOMER_SEED_CORPUS = "power_grid_customer_corpus"
+PILOT_ENTERPRISE = "泰昌"
+PILOT_ENTERPRISE_FILTER = {
+    "enterprise": PILOT_ENTERPRISE,
+    "source_domain": "enterprise_fact",
+    "fact_source_allowed_for_enterprise": True,
+    "reference_only": False,
+}
 CUSTOMER_SCOPE_TERMS = [
     "货物清单", "技术规范编码", "物料编码", "交货方式", "交货地点", "主招标文件",
     "招标编号", "资格预审", "评标办法", "专用资格", "包号", "包件", "分标编号",
@@ -187,6 +194,79 @@ def _infer_customer_filter(query: str, explicit_filter: dict[str, Any] | None = 
     return None, None
 
 
+def _pilot_enterprise_metadata_filter(explicit_filter: dict[str, Any] | None = None) -> dict[str, Any]:
+    metadata_filter = dict(PILOT_ENTERPRISE_FILTER)
+    for key, value in (explicit_filter or {}).items():
+        if value not in (None, "", "all"):
+            metadata_filter[key] = value
+    return metadata_filter
+
+
+def _metadata_bool(value: Any) -> bool | None:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        normalized = value.strip().lower()
+        if normalized in {"true", "1", "yes", "y"}:
+            return True
+        if normalized in {"false", "0", "no", "n"}:
+            return False
+    return None
+
+
+def _is_pilot_enterprise_context(context: dict[str, Any]) -> bool:
+    meta = _safe_meta(context)
+    has_enterprise_signal = (
+        str(meta.get("enterprise") or "") == PILOT_ENTERPRISE
+        or meta.get("source_domain") == "enterprise_fact"
+        or _metadata_bool(meta.get("fact_source_allowed_for_enterprise")) is True
+    )
+    if not has_enterprise_signal:
+        return False
+    if meta.get("enterprise") and str(meta.get("enterprise")) != PILOT_ENTERPRISE:
+        return False
+    if meta.get("source_domain") and meta.get("source_domain") != "enterprise_fact":
+        return False
+    fact_allowed = _metadata_bool(meta.get("fact_source_allowed_for_enterprise"))
+    if fact_allowed is False:
+        return False
+    reference_only = _metadata_bool(meta.get("reference_only"))
+    if reference_only is True:
+        return False
+    return True
+
+
+def _source_group_key(context: dict[str, Any]) -> str:
+    meta = _safe_meta(context)
+    return "|".join(
+        str(part or "")
+        for part in [
+            meta.get("source_file") or meta.get("source_org") or meta.get("category_label") or meta.get("category"),
+            meta.get("source_page") or meta.get("page_no") or meta.get("page_index"),
+            meta.get("source_section"),
+        ]
+    )
+
+
+def _curate_pilot_enterprise_contexts(contexts: list[dict[str, Any]], limit: int = 5) -> list[dict[str, Any]]:
+    curated: dict[str, dict[str, Any]] = {}
+    for context in contexts or []:
+        if not _is_pilot_enterprise_context(context):
+            continue
+        key = _source_group_key(context)
+        if not key.strip("|"):
+            key = str(context.get("id") or len(curated))
+        current = curated.get(key)
+        if current is None or float(context.get("similarity") or 0) > float(current.get("similarity") or 0):
+            curated[key] = context
+
+    return sorted(
+        curated.values(),
+        key=lambda item: float(item.get("similarity") or 0),
+        reverse=True,
+    )[:limit]
+
+
 def _asset_metadata_filter_from_query(query: str, metadata_filter: dict[str, Any] | None, explicit_asset_filter: dict[str, Any] | None = None) -> dict[str, Any] | None:
     asset_filter = {key: value for key, value in (explicit_asset_filter or {}).items() if value not in (None, "", "all")}
     if metadata_filter:
@@ -309,26 +389,18 @@ def search_knowledge():
         return jsonify({'error': '缺少检索问题 query'}), 400
         
     try:
-        metadata_filter, clarification = _infer_customer_filter(query, data.get("metadata_filter") or None)
-        if clarification:
-            return jsonify({
-                "answer": clarification["message"],
-                "needs_clarification": True,
-                "clarification": clarification,
-                "images": [],
-                "assets": [],
-                "raw_contexts": [],
-            }), 200
+        metadata_filter = _pilot_enterprise_metadata_filter(data.get("metadata_filter") or None)
         # 1. 向量化并检索 Supabase
         contexts = search_knowledge_base(
             query,
             match_threshold=0.3,
-            match_count=8,
-            scenario=data.get("scenario") or "qa",
+            match_count=5,
+            scenario="qa",
             metadata_filter=metadata_filter,
             project_id=data.get("project_id") or None,
-            return_parent=data.get("return_parent"),
+            return_parent=False,
         )
+        contexts = _curate_pilot_enterprise_contexts(contexts, limit=5)
         asset_metadata_filter = _asset_metadata_filter_from_query(
             query,
             metadata_filter,
@@ -378,22 +450,18 @@ def stream_search_knowledge():
     def generate():
         yield emit({"type": "start"})
         try:
-            metadata_filter, clarification = _infer_customer_filter(query, data.get("metadata_filter") or None)
-            if clarification:
-                yield emit({"type": "clarification", "clarification": clarification})
-                yield emit({"type": "chunk", "content": clarification["message"]})
-                yield emit({"type": "done"})
-                return
+            metadata_filter = _pilot_enterprise_metadata_filter(data.get("metadata_filter") or None)
             yield emit({"type": "status", "message": "正在检索企业知识库和图片资产..."})
             contexts = search_knowledge_base(
                 query,
                 match_threshold=0.3,
-                match_count=8,
-                scenario=data.get("scenario") or "qa",
+                match_count=5,
+                scenario="qa",
                 metadata_filter=metadata_filter,
                 project_id=data.get("project_id") or None,
-                return_parent=data.get("return_parent"),
+                return_parent=False,
             )
+            contexts = _curate_pilot_enterprise_contexts(contexts, limit=5)
             asset_metadata_filter = _asset_metadata_filter_from_query(
                 query,
                 metadata_filter,

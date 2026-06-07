@@ -439,3 +439,39 @@ PDF 标准入库前必须增加源文件审计门禁。当前错源 GB/DL 标准
 
 - CPVC/MPP 现有检验报告为“内径250”，是否覆盖辽宁清单中的其他口径仍需客户业务确认。
 - 产品实物高清照片、生产线/检测设备原始照片、同类业绩合同/中标通知书/验收证明、项目级盖章扫描件和官方 Logo 仍需客户补充。
+
+---
+
+## Run 9 — 泰昌企业知识库问答入口与参考来源收紧（2026-06-07）
+
+### 背景
+
+- MVP 版本已确定以河北泰昌电力器材科技有限公司为试点企业。
+- 企业知识库助手原先仍向用户暴露“自动判断资料范围”和“问答/写作/合规/货物清单”等场景选择，容易让业务用户误以为可以跨省份、跨包号或跨主体选择资料。
+- 回答下方“参考资料来源”直接展示 `province/package_code/material_category/doc_role` 等 metadata，导致江西、山西、辽宁等招标资料在企业事实问答中被明示展示，不符合泰昌企业事实边界。
+
+### 处理内容
+
+- 前端 `KnowledgeSearchDrawer` 移除资料范围和问答类型下拉控件，默认入口文案改为泰昌企业资信、产品资料和标书材料问答。
+- 后端 `/api/knowledge/search` 与 `/api/knowledge/search/stream` 默认使用泰昌企业事实过滤：
+  - `enterprise=泰昌`
+  - `source_domain=enterprise_fact`
+  - `fact_source_allowed_for_enterprise=true`
+  - `reference_only=false`
+- 文本参考来源返回前执行企业事实门禁、同源去重、按 `similarity` 降序排序，最多返回 5 条。
+- 前端来源卡片不再展示省份、包号、物料类别等招标资料标签，仅展示企业事实标题、中文化说明、内容预览和相关度。
+
+### 回归验证
+
+- 本次未新增客户资料，未执行重新入库。
+- `./.venv/bin/python -m pytest tests/test_rag_retrieval.py -q`
+- 结果：8 passed，1 个 PyPDF2 deprecation warning。
+- `cd frontend && npm run build`
+- 结果：构建通过；Vite 仅提示既有大 chunk 和动态/静态 import 混用警告。
+- `curl -I http://127.0.0.1:5173/`
+- 结果：本地前端服务返回 HTTP 200。
+
+### 剩余风险
+
+- 本次锁定的是企业知识库助手的泰昌试点口径；如后续恢复多企业租户模式，需要把试点企业常量改为租户上下文，而不是重新暴露省份/包号型筛选。
+- Playwright 未安装，未做自动截图；已通过 TypeScript 构建、静态文本检查和本地服务可访问性检查。

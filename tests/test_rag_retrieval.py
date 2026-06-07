@@ -258,6 +258,58 @@ class RagRetrievalQualityTest(unittest.TestCase):
         self.assertIn("/api/knowledge/assets/asset-1/file", prompt)
         self.assertEqual(images[-1]["url"], "/api/knowledge/assets/asset-1/file")
 
+    def test_pilot_enterprise_contexts_filter_dedupe_sort_and_limit_sources(self):
+        from backend.api.knowledge import _curate_pilot_enterprise_contexts
+
+        contexts = [
+            {
+                "id": "jiangxi",
+                "content": "江西招标文件营业执照要求。",
+                "similarity": 0.99,
+                "metadata": {"source_file": "江西招标文件.docx", "source_domain": "tender_requirement", "province": "江西"},
+            },
+            {
+                "id": "haoqian",
+                "content": "河北豪乾参考稿营业执照。",
+                "similarity": 0.98,
+                "metadata": {"source_file": "河北豪乾参考稿.docx", "source_domain": "reference_template", "reference_only": True},
+            },
+            *[
+                {
+                    "id": f"tc-{index}",
+                    "content": f"泰昌企业事实资料 {index}",
+                    "similarity": similarity,
+                    "metadata": {
+                        "source_file": f"泰昌资料{index}.pdf",
+                        "enterprise": "泰昌",
+                        "source_domain": "enterprise_fact",
+                        "fact_source_allowed_for_enterprise": True,
+                        "reference_only": False,
+                    },
+                }
+                for index, similarity in enumerate([0.71, 0.95, 0.83, 0.78, 0.66, 0.88], 1)
+            ],
+            {
+                "id": "tc-duplicate-lower",
+                "content": "泰昌企业事实资料 duplicate",
+                "similarity": 0.52,
+                "metadata": {
+                    "source_file": "泰昌资料2.pdf",
+                    "enterprise": "泰昌",
+                    "source_domain": "enterprise_fact",
+                    "fact_source_allowed_for_enterprise": True,
+                    "reference_only": False,
+                },
+            },
+        ]
+
+        result = _curate_pilot_enterprise_contexts(contexts, limit=5)
+
+        self.assertEqual(len(result), 5)
+        self.assertEqual([item["id"] for item in result], ["tc-2", "tc-6", "tc-3", "tc-4", "tc-1"])
+        self.assertNotIn("jiangxi", [item["id"] for item in result])
+        self.assertNotIn("haoqian", [item["id"] for item in result])
+
 
 if __name__ == "__main__":
     unittest.main()
