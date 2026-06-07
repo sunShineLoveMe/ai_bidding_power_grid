@@ -475,3 +475,48 @@ PDF 标准入库前必须增加源文件审计门禁。当前错源 GB/DL 标准
 
 - 本次锁定的是企业知识库助手的泰昌试点口径；如后续恢复多企业租户模式，需要把试点企业常量改为租户上下文，而不是重新暴露省份/包号型筛选。
 - Playwright 未安装，未做自动截图；已通过 TypeScript 构建、静态文本检查和本地服务可访问性检查。
+
+---
+
+## Run 10 — P2 版本去重与引用边界门禁（2026-06-07）
+
+> Run summary：`docs/rag/runs/run_20260607_p2_version_citation_summary.md`  
+> Base filtered：`docs/rag/runs/run_20260607_p2_version_citation_base_filtered.json`  
+> Customer filtered：`docs/rag/runs/run_20260607_p2_version_citation_customer_filtered.json`
+
+### 背景
+
+- P2-4 要求同一模板新旧版本不能同时污染召回。
+- P2-5 要求区分企业事实、招标要求、参考模板、法规/标准等引用边界，避免把参考稿当事实、把招标要求写成企业能力。
+
+### 处理内容
+
+- 新增 `scripts/rag/customer_metadata_policy.py`：
+  - `enterprise_fact` -> `citation_policy=enterprise_fact_citable`
+  - `tender_requirement` -> `citation_policy=tender_requirement_citable`
+  - `reference_template` -> `citation_policy=reference_style_only`
+  - `policy_regulation` -> `citation_policy=law_or_standard_citable`
+  - `base_seed` -> `citation_policy=summary_only`
+- `scripts/rag/ingest_customer_corpus.py` 在 dry-run 和正式入库前执行 metadata 门禁。
+- 入库 metadata 统一补齐或校验 `source_sha256`、`doc_identity_key`、`doc_version`、`superseded_by`。
+- 正式入库时，同一 `doc_identity_key`、不同 `source_sha256` 且新版本不低于旧版本的旧文档会被置为 `superseded`。
+- 强校验泰昌企业事实、辽宁/江西/山西招标要求、河北豪乾参考稿三类边界。
+
+### dry-run
+
+| manifest | documents | skipped | blocked_metadata | parent | child/table 检索块 | embedding |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 泰昌/辽宁 P0 staging | 124 | 0 | 0 | 2023 | 27660 | 27660 |
+| 江西/山西 P1 manifest | 44 | 21 | 0 | 223 | 4015 | 4015 |
+
+### 回归验证
+
+- `./.venv/bin/python -m pytest tests/test_customer_metadata_policy.py tests/test_rag_retrieval.py -q`
+- 结果：14 passed，1 个 PyPDF2 deprecation warning。
+- Base filtered Recall@5：86.7%，top1 来源准确率：93.3%，关键词命中率：86.7%，跨 doc_role 串扰均值：0.0%。
+- 泰昌专项 filtered Recall@5：100.0%，top1 来源准确率：100.0%，关键词命中率：100.0%，禁用关键词命中率：0.0%。
+
+### 剩余风险
+
+- 历史已入库文档如果没有 `doc_identity_key`，无法自动反向判定新旧版本关系；后续新批次按新门禁入库后会稳定生效。
+- 如果客户后续提供同一资料但文件名变化的新版本，manifest 应显式填写稳定 `doc_key` 或 `document_key`。

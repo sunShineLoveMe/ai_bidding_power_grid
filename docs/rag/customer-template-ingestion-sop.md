@@ -76,6 +76,34 @@ AI 标书写作默认投标申请主体为泰昌。只有用户显式指定其�
 3. 标书写作引用必须能回溯到 parent、页码或资产。
 4. 泰昌企业图片资产要可被问答和标书图文并茂功能按 `evidence_type` 检索。
 
+## 6.1 版本、去重与引用边界
+
+客户资料入库必须执行 `scripts/rag/customer_metadata_policy.py` 中的 metadata 门禁。`scripts/rag/ingest_customer_corpus.py --dry-run` 和正式入库都会执行同一套规则。
+
+### 版本与去重
+
+- 每条可入库记录必须有 `doc_version` 和原始文件 `sha256`；入库时统一写入 `source_sha256`。
+- 每条记录必须生成或显式提供 `doc_identity_key`。同一逻辑资料的新旧版本必须使用同一个 `doc_identity_key`。
+- 若新资料与已有资料 `doc_identity_key` 相同、`source_sha256` 不同，且新 `doc_version` 不低于旧版本，正式入库后旧 `knowledge_documents.status` 与 metadata `status` 必须置为 `superseded`，并写入 `superseded_by=<新document_id>`。
+- 同一内容重复入库（`source_sha256` 相同）不得触发 supersede。
+- `blocked_metadata>0` 时不得正式入库；先修 manifest 或 metadata。
+
+### citation_policy
+
+| source_domain | citation_policy | 允许用途 | 禁止用途 |
+| --- | --- | --- | --- |
+| `enterprise_fact` | `enterprise_fact_citable` | 泰昌企业事实、资信、产品、生产/检测/财务等证明材料 | 不得跨企业复用 |
+| `tender_requirement` | `tender_requirement_citable` | 招标要求、技术规范、货物清单、合同条款、评分/否决项 | 不得写成泰昌企业能力或历史事实 |
+| `reference_template` | `reference_style_only` | 封面、目录、章节组织、表格结构、表达风格参考 | 不得作为泰昌事实、业绩、资质、设备、人员或财务来源 |
+| `policy_regulation` | `law_or_standard_citable` | 法规、国网制度、标准规范依据 | 不得替代客户招标文件的项目级要求 |
+| `base_seed` | `summary_only` | 通用背景、辅助检索、非正式说明 | 不得作为正式项目条款引用 |
+
+边界强校验：
+
+- `enterprise_fact` 必须 `enterprise`、`doc_owner` 非空，`reference_only=false`，`fact_source_allowed_for_enterprise=true`。
+- `tender_requirement` 必须 `fact_source_allowed_for_enterprise=false`。
+- `reference_template` 必须 `reference_only=true`，`fact_source_allowed_for_enterprise=false`，`citation_policy=reference_style_only`。
+
 ## 7. 图片资产 metadata
 
 每个图片资产至少记录：

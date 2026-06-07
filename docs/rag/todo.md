@@ -57,8 +57,8 @@
 | P2-1 | [x] | 客户资料入库 SOP | `docs/rag/customer-template-ingestion-sop.md` | 已沉淀从收件、inventory、解析、图片 metadata、入库、回归到归档的全流程；固化泰昌企业事实、辽宁招标要求、河北豪乾参考稿隔离边界 |
 | P2-2 | [x] | 每批资料 manifest 规范 | `docs/rag/customer-batch-manifest-template.md` | 已定义批次级与文件级字段、取值约束、泰昌/辽宁/河北豪乾强校验和入库前检查命令 |
 | P2-3 | [x] | 解析质量报告模板 | `docs/rag/parse-quality-report-template.md` | 已覆盖空文本、乱码、表格丢失、页码缺失、扫描件、图片资产、metadata 完整性和真实链路回归记录 |
-| P2-4 | [ ] | 版本与去重策略 | `content_sha256`、`doc_version`、`superseded_by` | 同一模板新旧版本不会同时污染召回 |
-| P2-5 | [ ] | 模板可引用边界 | `citation_policy` 规则 | 区分客户模板、公开法规、企业话术，避免把模板当强制条款 |
+| P2-4 | [x] | 版本与去重策略 | `scripts/rag/customer_metadata_policy.py`、`scripts/rag/ingest_customer_corpus.py`、`docs/rag/runs/run_20260607_p2_version_citation_summary.md` | 入库门禁校验 `source_sha256/doc_identity_key/doc_version/superseded_by`；同一逻辑资料新版本正式入库后会将旧版本置为 `superseded`；dry-run 已验证泰昌/辽宁与江西/山西 manifest `blocked_metadata=0` |
+| P2-5 | [x] | 模板可引用边界 | `scripts/rag/customer_metadata_policy.py`、`docs/rag/customer-template-ingestion-sop.md`、`tests/test_customer_metadata_policy.py` | `enterprise_fact/tender_requirement/reference_template/policy_regulation/base_seed` 均有明确 `citation_policy`；企业事实、招标要求、参考稿边界已单测覆盖并纳入入库 dry-run 门禁 |
 | P2-6 | [x] | 批次回滚机制 | `scripts/rag/rollback_customer_corpus.py`、`docs/rag/runs/rollback_customer_jx_sx_20260602_p1_dry_run_20260602_165145.md` | 支持按 `ingestion_batch_id` dry-run/execute 删除，当前 dry-run 覆盖 23 文档、4238 chunk、105 结构化行 |
 
 ## P1A：泰昌 MVP 试点资料入库与辽宁招标样本隔离
@@ -115,8 +115,8 @@
 
 ## 当前最近任务
 
-1. 进入 P2-4/P2-5：补版本去重策略和模板可引用边界，避免旧模板、参考稿和企业事实污染召回。
-2. 进入 P3 Query Rewrite / 关键词补召回 / authority 排序，提升标准号、包号、物料编码精确召回。
+1. 进入 P3 Query Rewrite / 关键词补召回 / authority 排序，提升标准号、包号、物料编码精确召回。
+2. 进入 P4-2：技术参数表抽取，补保证值、项目需求值、备注字段结构化。
 3. 向客户确认泰昌 CPVC/MPP 各规格检验报告覆盖关系，尤其是“内径250”报告能否覆盖辽宁 φ50/100/150/175/200 需求。
 4. 向客户补充产品实物高清照片、生产线/检测设备原始照片、同类业绩合同/中标通知书/验收证明、项目级盖章扫描件和官方 Logo。
 5. 扩展泰昌 MVP 专项评测集到 40-60 条，并加入更多包号、技术规范编码、合同条款、图片问答和参考稿隔离负样本。

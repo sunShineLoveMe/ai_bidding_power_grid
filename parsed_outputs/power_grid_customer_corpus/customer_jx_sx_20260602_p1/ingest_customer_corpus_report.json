@@ -1,13 +1,15 @@
 {
   "summary": {
-    "generated_at": "2026-06-02T16:51:26",
+    "generated_at": "2026-06-07T19:52:20",
     "manifest": "parsed_outputs/power_grid_customer_corpus/customer_jx_sx_20260602_p1/manifest.json",
     "batch_id": "customer_jx_sx_20260602_p1",
-    "dry_run": false,
-    "refresh": true,
+    "dry_run": true,
+    "refresh": false,
     "documents": 44,
-    "indexed": 23,
+    "indexed": 0,
     "skipped": 21,
+    "blocked_metadata": 0,
+    "superseded_documents": 0,
     "parents": 223,
     "children": 4015,
     "embedding_count": 4015
@@ -39,23 +41,21 @@
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/20_国网江西电力2026年第一次配网省网协议库存物资类公开招标采购/extracted/铁构件/包1_完整招标文件_89112639724864228/包1_技术规范书_89112634200096205/国网江西省电力有限公司_2021年江西公司配省网协议库存固化ID编制（G00K-500118948-00001）/国家电网江西公司物资固化技术规范书_铁附件.doc",
-      "status": "indexed",
-      "document_id": "01dd8e0b-1fcf-461b-8108-981f4b3f0e2c",
+      "status": "dry_run",
       "doc_role": "technical_spec",
       "parents": 5,
       "children": 1058,
       "embedding_count": 1058,
-      "inserted_chunks": 1063
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/20_国网江西电力2026年第一次配网省网协议库存物资类公开招标采购/extracted/铁构件/包1_完整招标文件_89112639724864228/包1_技术规范书_89112634200096205/国网江西省电力有限公司_2021年江西公司配省网协议库存固化ID编制（G00K-500118948-00001）/国网江西省电力有限公司_2021年江西公司配省网协议库存固化ID编制（G00K-500118948-00001）.docx",
-      "status": "indexed",
-      "document_id": "8cc35140-2aeb-4259-aa0d-6c8ed4454814",
+      "status": "dry_run",
       "doc_role": "technical_spec",
       "parents": 1,
       "children": 16,
       "embedding_count": 16,
-      "inserted_chunks": 17
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/20_国网江西电力2026年第一次配网省网协议库存物资类公开招标采购/extracted/铁构件/包1_完整招标文件_89112639724864228/合同文件.zip",
@@ -65,23 +65,21 @@
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/20_国网江西电力2026年第一次配网省网协议库存物资类公开招标采购/extracted/铁构件/包1_完整招标文件_89112639724864228/合同文件/5.120 10kV及以下协议库存货物采购合同通用条款（材料类）（2024版）.docx",
-      "status": "indexed",
-      "document_id": "df57eb11-cfa0-43de-8a9c-e6a824e1d16c",
+      "status": "dry_run",
       "doc_role": "contract_general_terms",
       "parents": 53,
       "children": 358,
       "embedding_count": 358,
-      "inserted_chunks": 411
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/20_国网江西电力2026年第一次配网省网协议库存物资类公开招标采购/extracted/铁构件/包1_完整招标文件_89112639724864228/合同文件/5.120 10kV及以下协议库存货物采购合同（材料类）（2024版）.docx",
-      "status": "indexed",
-      "document_id": "5398152a-e163-47b4-baf2-35c02f21f3fc",
+      "status": "dry_run",
       "doc_role": "contract_special_terms",
       "parents": 2,
       "children": 9,
       "embedding_count": 9,
-      "inserted_chunks": 11
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/20_国网江西电力2026年第一次配网省网协议库存物资类公开招标采购/extracted/铁构件/包1_完整招标文件_89112639724864228/合同文件/合同专用条款文件.zip",
@@ -91,13 +89,12 @@
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/20_国网江西电力2026年第一次配网省网协议库存物资类公开招标采购/extracted/铁构件/包1_完整招标文件_89112639724864228/合同文件/合同专用条款文件/合同专用条款其他文件202510290022128.docx",
-      "status": "indexed",
-      "document_id": "8ced8475-0158-4a6f-9300-a5adf0bc1dfc",
+      "status": "dry_run",
       "doc_role": "contract_special_terms",
       "parents": 1,
       "children": 1,
       "embedding_count": 1,
-      "inserted_chunks": 2
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/20_国网江西电力2026年第一次配网省网协议库存物资类公开招标采购/extracted/铁构件/包1_完整招标文件_89112639724864228/国网江西电力2026年第一次配网（省网）协议库存物资类公开招标采购招标公告.zip",
@@ -107,43 +104,39 @@
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/20_国网江西电力2026年第一次配网省网协议库存物资类公开招标采购/extracted/铁构件/包1_完整招标文件_89112639724864228/国网江西电力2026年第一次配网（省网）协议库存物资类公开招标采购招标公告/国网江西电力2026年第一次配网（省网）协议库存物资类公开招标采购招标公告/投标注意事项V3.docx",
-      "status": "indexed",
-      "document_id": "a82094b9-5ddf-4170-818a-79303f512b27",
+      "status": "dry_run",
       "doc_role": "bid_instructions",
       "parents": 1,
       "children": 19,
       "embedding_count": 19,
-      "inserted_chunks": 20
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/20_国网江西电力2026年第一次配网省网协议库存物资类公开招标采购/extracted/铁构件/包1_完整招标文件_89112639724864228/国网江西电力2026年第一次配网（省网）协议库存物资类公开招标采购招标公告/国网江西电力2026年第一次配网（省网）协议库存物资类公开招标采购招标公告/（资格后审）国网江西电力2026年第一次配网（省网）协议库存物资类公开招标采购招标公告.docx",
-      "status": "indexed",
-      "document_id": "657fdcd6-8089-47bb-8652-52653d20952a",
+      "status": "dry_run",
       "doc_role": "tender_notice",
       "parents": 4,
       "children": 87,
       "embedding_count": 87,
-      "inserted_chunks": 91
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/20_国网江西电力2026年第一次配网省网协议库存物资类公开招标采购/extracted/铁构件/包1_完整招标文件_89112639724864228/国网江西电力2026年第一次配网（省网）协议库存物资类公开招标采购招标公告/国网江西电力2026年第一次配网（省网）协议库存物资类公开招标采购招标公告/（资格预审）国网江西电力2026年第一次配网（省网）协议库存物资类公开招标采购招标公告.docx",
-      "status": "indexed",
-      "document_id": "6d04ca46-d9a2-46a4-833a-264df087287f",
+      "status": "dry_run",
       "doc_role": "tender_notice",
       "parents": 3,
       "children": 83,
       "embedding_count": 83,
-      "inserted_chunks": 86
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/20_国网江西电力2026年第一次配网省网协议库存物资类公开招标采购/extracted/铁构件/包1_完整招标文件_89112639724864228/货物清单_1826AA_铁构件20260403_193635_546.xlsx",
-      "status": "indexed",
-      "document_id": "6c27f97e-e2ed-48fc-a214-8a22ec237f63",
+      "status": "dry_run",
       "doc_role": "goods_list",
       "parents": 1,
       "children": 8,
       "embedding_count": 8,
-      "inserted_chunks": 9
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/20_国网江西电力2026年第一次配网省网协议库存物资类公开招标采购/extracted/铁构件/包1_完整招标文件_89112639724864228/（资格预审）国网江西电力2026年第一次配网（省网）协议库存物资类公开招标采购招标文件V2.zip",
@@ -159,13 +152,12 @@
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/20_国网江西电力2026年第一次配网省网协议库存物资类公开招标采购/extracted/铁构件/包1_完整招标文件_89112639724864228/（资格预审）国网江西电力2026年第一次配网（省网）协议库存物资类公开招标采购招标文件V2/（资格预审）国网江西电力2026年第一次配网（省网）协议库存物资类公开招标采购招标文件V2/（资格预审）国网江西电力2026年第一次配网（省网）协议库存物资类公开招标采购招标文件V2.docx",
-      "status": "indexed",
-      "document_id": "0259c1bf-4414-4531-a94c-70cd103486d5",
+      "status": "dry_run",
       "doc_role": "main_tender_file",
       "parents": 42,
       "children": 632,
       "embedding_count": 632,
-      "inserted_chunks": 674
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/20_国网江西电力2026年第一次配网省网协议库存物资类公开招标采购/国网江西电力2026年第一次配网（省网）协议库存物资类公开招标采购_招标文件包(1).zip",
@@ -199,13 +191,12 @@
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/extracted/铁构件/包1_完整招标文件_64281725749688283/包1_技术规范书_64281724551341496/国网山西省电力公司_2022年山西公司物资类采购结构化固化ID编制（G00F-500118948-00004）/国网山西省电力公司_2022年山西公司物资类采购结构化固化ID编制（G00F-500118948-00004）.docx",
-      "status": "indexed",
-      "document_id": "ba00ef0b-ed05-4238-8a9a-4e50f748dff0",
+      "status": "dry_run",
       "doc_role": "technical_spec",
       "parents": 1,
       "children": 48,
       "embedding_count": 48,
-      "inserted_chunks": 49
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/extracted/铁构件/包1_完整招标文件_64281725749688283/包1_技术规范书_64281724551341496/国网山西省电力公司_2025年山西公司物资类采购结构化固化ID编制（G00F-500118948-00007）.zip",
@@ -215,13 +206,12 @@
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/extracted/铁构件/包1_完整招标文件_64281725749688283/包1_技术规范书_64281724551341496/国网山西省电力公司_2025年山西公司物资类采购结构化固化ID编制（G00F-500118948-00007）/国网山西省电力公司_2025年山西公司物资类采购结构化固化ID编制（G00F-500118948-00007）.docx",
-      "status": "indexed",
-      "document_id": "a3d6db03-18a4-4705-a342-3efae858009a",
+      "status": "dry_run",
       "doc_role": "technical_spec",
       "parents": 1,
       "children": 15,
       "embedding_count": 15,
-      "inserted_chunks": 16
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/extracted/铁构件/包1_完整招标文件_64281725749688283/包1_技术规范书_64281724551341496/国网山西省电力公司_2025年山西公司物资类采购结构化固化ID编制（G00F-500118948-00007）/山西省电力公司-配网标准化物资固化技术规范书_铁构件.rar",
@@ -231,13 +221,12 @@
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/extracted/铁构件/包1_完整招标文件_64281725749688283/包1_技术规范书_64281724551341496/国网山西省电力公司第一次固化ID编制接地铁(05GH-500075342-00002).doc",
-      "status": "indexed",
-      "document_id": "476a774a-683e-403b-b931-797952514d84",
+      "status": "dry_run",
       "doc_role": "technical_spec",
       "parents": 1,
       "children": 112,
       "embedding_count": 112,
-      "inserted_chunks": 113
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/extracted/铁构件/包1_完整招标文件_64281725749688283/包1_技术规范书_64281724551341496/国网山西省电力有限公司_2025年山西公司物资类采购结构化固化ID编制（G00F-500082436-00001）.zip",
@@ -247,23 +236,21 @@
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/extracted/铁构件/包1_完整招标文件_64281725749688283/包1_技术规范书_64281724551341496/国网山西省电力有限公司_2025年山西公司物资类采购结构化固化ID编制（G00F-500082436-00001）/国网山西省电力有限公司_2025年山西公司物资类采购结构化固化ID编制（G00F-500082436-00001）.docx",
-      "status": "indexed",
-      "document_id": "f456c126-a202-4925-bbb9-baf83d2a4c6d",
+      "status": "dry_run",
       "doc_role": "technical_spec",
       "parents": 1,
       "children": 15,
       "embedding_count": 15,
-      "inserted_chunks": 16
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/extracted/铁构件/包1_完整招标文件_64281725749688283/包1_技术规范书_64281724551341496/国网山西省电力有限公司_2025年山西公司物资类采购结构化固化ID编制（G00F-500082436-00001）/接地铁镀锌扁钢（角钢、圆钢）-技术规范书（上传）.docx",
-      "status": "indexed",
-      "document_id": "5a619602-56f4-46d5-bf91-40f4a1d0db1b",
+      "status": "dry_run",
       "doc_role": "technical_spec",
       "parents": 1,
       "children": 200,
       "embedding_count": 200,
-      "inserted_chunks": 201
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/extracted/铁构件/包1_完整招标文件_64281725749688283/包1_技术规范书_64281724551341496/国网山西省电力有限公司_2026年山西公司物资类采购结构化固化ID编制（G00F-500118948-00008）.zip",
@@ -273,23 +260,21 @@
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/extracted/铁构件/包1_完整招标文件_64281725749688283/包1_技术规范书_64281724551341496/国网山西省电力有限公司_2026年山西公司物资类采购结构化固化ID编制（G00F-500118948-00008）/国网山西省电力有限公司_2026年山西公司物资类采购结构化固化ID编制（G00F-500118948-00008）.docx",
-      "status": "indexed",
-      "document_id": "ac4c7052-9ffa-4eb9-b668-a66bbf159997",
+      "status": "dry_run",
       "doc_role": "technical_spec",
       "parents": 1,
       "children": 15,
       "embedding_count": 15,
-      "inserted_chunks": 16
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/extracted/铁构件/包1_完整招标文件_64281725749688283/包1_技术规范书_64281724551341496/国网山西省电力有限公司_2026年山西公司物资类采购结构化固化ID编制（G00F-500118948-00008）/铁构件技术规范书-不锈钢电缆支架.doc",
-      "status": "indexed",
-      "document_id": "747067c2-7e17-48e1-8ac5-fc985f2437d7",
+      "status": "dry_run",
       "doc_role": "technical_spec",
       "parents": 2,
       "children": 262,
       "embedding_count": 262,
-      "inserted_chunks": 264
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/extracted/铁构件/包1_完整招标文件_64281725749688283/合同文件.zip",
@@ -299,23 +284,21 @@
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/extracted/铁构件/包1_完整招标文件_64281725749688283/合同文件/5.120 10kV及以下协议库存货物采购合同通用条款（材料类）（2024版）.docx",
-      "status": "indexed",
-      "document_id": "d8ca64f1-55a0-48ef-862a-9f89da410612",
+      "status": "dry_run",
       "doc_role": "contract_general_terms",
       "parents": 53,
       "children": 358,
       "embedding_count": 358,
-      "inserted_chunks": 411
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/extracted/铁构件/包1_完整招标文件_64281725749688283/合同文件/5.120 10kV及以下协议库存货物采购合同（材料类）（2024版）.docx",
-      "status": "indexed",
-      "document_id": "d9ce7f12-f5b4-478d-b978-511cfb4b2750",
+      "status": "dry_run",
       "doc_role": "contract_special_terms",
       "parents": 2,
       "children": 9,
       "embedding_count": 9,
-      "inserted_chunks": 11
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/extracted/铁构件/包1_完整招标文件_64281725749688283/合同文件/合同专用条款文件.zip",
@@ -325,43 +308,39 @@
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/extracted/铁构件/包1_完整招标文件_64281725749688283/合同文件/合同专用条款文件/合同专用条款其他文件20250331100191.docx",
-      "status": "indexed",
-      "document_id": "f027e7a9-97c4-492a-acda-a2b87a8a2863",
+      "status": "dry_run",
       "doc_role": "contract_special_terms",
       "parents": 4,
       "children": 25,
       "embedding_count": 25,
-      "inserted_chunks": 29
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/extracted/铁构件/包1_完整招标文件_64281725749688283/国网山西电力2026年第二次物资协议库存公开招标采购招标公告.docx",
-      "status": "indexed",
-      "document_id": "192d37c5-6f83-4535-ac4b-75a53a88c881",
+      "status": "dry_run",
       "doc_role": "tender_notice",
       "parents": 3,
       "children": 41,
       "embedding_count": 41,
-      "inserted_chunks": 44
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/extracted/铁构件/包1_完整招标文件_64281725749688283/国网山西电力2026年第二次物资协议库存公开招标采购招标文件.docx",
-      "status": "indexed",
-      "document_id": "357482dc-9332-43b4-b29c-5cc57de5e23f",
+      "status": "dry_run",
       "doc_role": "main_tender_file",
       "parents": 39,
       "children": 545,
       "embedding_count": 545,
-      "inserted_chunks": 584
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/extracted/铁构件/包1_完整招标文件_64281725749688283/货物清单_0526AB_铁构件20260430_153228_019.xlsx",
-      "status": "indexed",
-      "document_id": "a24b111e-5ba4-4e87-9f88-2a42705fed1b",
+      "status": "dry_run",
       "doc_role": "goods_list",
       "parents": 1,
       "children": 99,
       "embedding_count": 99,
-      "inserted_chunks": 100
+      "metadata_warnings": []
     },
     {
       "source_file": "rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/国网山西电力2026年第二次物资协议库存公开招标采购_招标文件包(1).zip",
