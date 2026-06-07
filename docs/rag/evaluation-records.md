@@ -559,3 +559,154 @@ PDF 标准入库前必须增加源文件审计门禁。当前错源 GB/DL 标准
 - Base 仅剩 T04 合规用例未命中关键词；top1 doc_role 已正确为 `policy_regulation`。
 - 国网规则网页存在明显导航噪声，应在后续重洗并重新入库。
 - 关键词补召回暂在应用层过滤；后续可补数据库侧关键词索引或专用 RPC。
+
+---
+
+## Run 12 — 国网规则网页噪声重洗与回归（2026-06-07）
+
+> Run summary：`docs/rag/runs/run_20260607_sgcc_rule_clean_summary.md`  
+> Base filtered：`docs/rag/runs/run_20260607_sgcc_rule_clean_base_filtered.json`  
+> Customer filtered：`docs/rag/runs/run_20260607_sgcc_rule_clean_customer_filtered.json`
+
+### 背景
+
+- `国家电网有限公司招标活动管理办法`、`国家电网有限公司供应商管理办法`、`国家电网有限公司物资采购标准` 三份 seed 文档的原正文为门户首页导航/新闻内容，不是制度原文。
+- 该问题会污染国网规则问答和合规召回，且影响后续 P4 技术参数表抽取前的整体回归稳定性。
+
+### 处理内容
+
+- 新增 `scripts/rag/repair_sgcc_rule_seed_docs.py`，重洗三份异常 markdown，并同步 `index.csv`、`index.jsonl` 的 `sha256` 与错误说明。
+- 三份异常资料改为明确标注的“检索种子摘要”，均标明原始采集链接失效、待官方原文复核、`citation_policy=summary_only`。
+- 重新入库 `02_policy_regulations`：11 文档、266 parent、2180 child。
+- 重新入库 `04_standard_phrases`：6 文档、16 parent、22 child，用于恢复本次回归暴露的标准话术库不完整问题。
+- `search_knowledge_base()` 补充 `质量安全环保/质量目标/安全目标` 领域关键词，并将关键词补召回改为分页扫描，避免固定窗口漏扫小类资料。
+
+### 回归验证
+
+- `./.venv/bin/python -m pytest tests/test_rag_retrieval.py tests/test_rag_asset_scoring.py tests/test_customer_metadata_policy.py -q`
+- 结果：26 passed，1 个 PyPDF2 deprecation warning。
+- `./.venv/bin/python -m py_compile backend/rag/retrieval.py scripts/rag/eval_recall.py scripts/rag/repair_sgcc_rule_seed_docs.py`
+- 结果：通过。
+
+| 测试集 | Recall@5 | top1 来源准确率 | 关键词命中率 | 跨 doc_role 串扰 | 禁用关键词命中率 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Base filtered | 96.7% | 100.0% | 96.7% | 0.0% | - |
+| 泰昌 MVP 专项 filtered | 100.0% | 100.0% | 100.0% | 0.0% | 0.0% |
+
+### 剩余风险
+
+- Base 仅剩 T04：top1 `policy_regulation` 正确，但关键词口径仍是“无效”与“否决所有投标”的表达差异。
+- 三份国网规则当前仍是检索种子摘要，不是官方制度全文；后续拿到官方原文后仍需替换 seed、重入库并复跑评测。
+
+---
+
+## Run 13 — P4-2 技术参数表抽取（2026-06-07）
+
+> Run summary：`docs/rag/runs/run_20260607_p4_technical_parameters_summary.md`  
+> Base filtered：`docs/rag/runs/run_20260607_p4_technical_parameters_base_filtered.json`  
+> Customer filtered：`docs/rag/runs/run_20260607_p4_technical_parameters_customer_filtered.json`
+
+### 背景
+
+- P4-2 要求技术参数表不能只做普通文本向量，必须保留原始结构、检索摘要和行级记录。
+- 后续客户继续提供技术规范书、技术补充文件、技术响应参考稿、检验报告参数页或偏差表时，也需要按同一方式结构化。
+
+### 处理内容
+
+- 更新 `AGENTS.md`，固化后续客户技术资料的技术参数表抽取规则。
+- 新增 `scripts/rag/extract_customer_technical_parameters.py`。
+- 对辽宁/泰昌 MVP staging manifest 中 39 份 `technical_spec` 文档进行抽取。
+- 输出：
+  - `technical_parameter_rows.json`
+  - `technical_parameter_rows.csv`
+  - `technical_parameter_summary.md`
+  - `extract_technical_parameters_report.json`
+
+### 抽取结果
+
+| 指标 | 数量 |
+| --- | ---: |
+| 技术规范文档 | 39 |
+| 成功抽取文档 | 39 |
+| 技术参数行 | 928 |
+| CPVC 参数行 | 285 |
+| MPP 参数行 | 643 |
+| 尺寸参数行 | 349 |
+| 性能参数行 | 369 |
+| 投标响应参数行 | 210 |
+
+### 回归验证
+
+- `./.venv/bin/python -m pytest tests/test_technical_parameter_extraction.py tests/test_rag_retrieval.py tests/test_rag_asset_scoring.py tests/test_customer_metadata_policy.py -q`
+- 结果：27 passed，1 个 PyPDF2 deprecation warning。
+- `./.venv/bin/python -m py_compile scripts/rag/extract_customer_technical_parameters.py backend/rag/retrieval.py`
+- 结果：通过。
+
+| 测试集 | Recall@5 | top1 来源准确率 | 关键词命中率 | 跨 doc_role 串扰 | 禁用关键词命中率 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Base filtered | 96.7% | 100.0% | 96.7% | 0.0% | - |
+| 泰昌 MVP 专项 filtered | 100.0% | 100.0% | 100.0% | 0.0% | 0.0% |
+
+### 剩余风险
+
+- 本轮只生成 JSON/CSV/summary chunk，尚未新增 `power_grid_technical_parameter_rows` 数据库表。
+- 本批招标技术规范中的 `投标人响应值`、`投标人保证值` 多为空白，字段已保留；后续可由泰昌产品资料、检验报告或人工确认值补齐。
+
+---
+
+## Run 14 — P4-4 技术偏差辅助判断（2026-06-07）
+
+> Run summary：`docs/rag/runs/run_20260607_p4_deviation_summary.md`  
+> Base filtered：`docs/rag/runs/run_20260607_p4_deviation_base_filtered.json`  
+> Customer filtered：`docs/rag/runs/run_20260607_p4_deviation_customer_filtered.json`
+
+### 背景
+
+- P4-2 已产出 `technical_parameter_rows.json`。
+- P4-4 初版要求先支持“项目需求值/标准值 vs 投标响应/保证值”的差异判断，用于技术偏差表、漏项检查和检验报告覆盖性判断。
+
+### 处理内容
+
+- 新增 `scripts/rag/generate_technical_deviation_report.py`。
+- 对 928 行技术参数生成偏差辅助判断：
+  - `pending_response`
+  - `no_deviation`
+  - `positive_deviation`
+  - `negative_deviation`
+  - `manual_review`
+  - `informational`
+- 输出：
+  - `technical_deviation_rows.json`
+  - `technical_deviation_rows.csv`
+  - `technical_deviation_summary.md`
+  - `technical_deviation_report.json`
+
+### 产物结果
+
+| 指标 | 数量 |
+| --- | ---: |
+| 参数行 | 928 |
+| 需处理行 | 900 |
+| `pending_response` | 900 |
+| `informational` | 28 |
+| `medium` 风险 | 900 |
+| `low` 风险 | 28 |
+
+本批大量参数被标为 `pending_response`，原因是招标技术规范里有明确项目需求值或标准值，但 `投标人响应值`、`投标人保证值` 多为空白。该结果符合预期，不能直接写成无偏差。
+
+### 回归验证
+
+- `./.venv/bin/python -m pytest tests/test_technical_deviation_report.py tests/test_technical_parameter_extraction.py tests/test_rag_retrieval.py tests/test_rag_asset_scoring.py tests/test_customer_metadata_policy.py -q`
+- 结果：33 passed，1 个 PyPDF2 deprecation warning。
+- `./.venv/bin/python -m py_compile scripts/rag/generate_technical_deviation_report.py scripts/rag/extract_customer_technical_parameters.py backend/rag/retrieval.py`
+- 结果：通过。
+
+| 测试集 | Recall@5 | top1 来源准确率 | 关键词命中率 | 跨 doc_role 串扰 | 禁用关键词命中率 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Base filtered | 96.7% | 100.0% | 96.7% | 0.0% | - |
+| 泰昌 MVP 专项 filtered | 100.0% | 100.0% | 100.0% | 0.0% | 0.0% |
+
+### 剩余风险
+
+- 初版偏差判断尚未接入泰昌检验报告或产品规格作为保证值来源。
+- 本轮未新增结构化数据库表，产物仍以 JSON/CSV/Markdown 为主。

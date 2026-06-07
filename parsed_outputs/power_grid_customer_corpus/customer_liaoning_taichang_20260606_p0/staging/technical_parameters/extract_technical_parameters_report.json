@@ -1,0 +1,414 @@
+{
+  "batch_id": "customer_liaoning_taichang_20260606_p0",
+  "generated_at": "2026-06-07T21:24:07",
+  "dry_run": false,
+  "documents": 39,
+  "parsed_documents": 39,
+  "parameter_rows": 928,
+  "by_material": {
+    "电缆保护管CPVC": 285,
+    "电缆保护管MPP": 643
+  },
+  "by_table_type": {
+    "dimension_parameter_table": 349,
+    "performance_parameter_table": 369,
+    "bid_response_parameter_table": 210
+  },
+  "details": [
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包1_完整招标文件_53488484541066181/包1_技术规范书_53488481987137315/国家电网有限公司_电缆保护管 - 设备部(A171-500021527-00001)714025/国家电网有限公司_电缆保护管 - 设备部(A171-500021527-00001)/A171-500021527-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 CPVC.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/A171-500021527-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 CPVC.docx",
+      "package_no": "包1",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管CPVC",
+      "tables": 6,
+      "rows": 44,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包1_完整招标文件_53488484541066181/包1_技术规范书_53488481987137315/国网辽宁省电力有限公司_2025年辽宁公司省招采购非结构化固化ID编制（G00J-500032536-00005）/电缆保护管-CPVC（φ150）.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/电缆保护管-CPVC（φ150）.docx",
+      "package_no": "包1",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管CPVC",
+      "tables": 6,
+      "rows": 40,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包1_完整招标文件_53488484541066181/包1_技术规范书_53488481987137315/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500038391-00004）/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500038391-00004）.docx",
+      "docx_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包1_完整招标文件_53488484541066181/包1_技术规范书_53488481987137315/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500038391-00004）/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500038391-00004）.docx",
+      "package_no": "包1",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管CPVC",
+      "tables": 1,
+      "rows": 1,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包1_完整招标文件_53488484541066181/包1_技术规范书_53488481987137315/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500038391-00004）/电缆保护管-CPVC（φ200）.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/电缆保护管-CPVC（φ200）.docx",
+      "package_no": "包1",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管CPVC",
+      "tables": 6,
+      "rows": 40,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包1_完整招标文件_53488484541066181/包1_技术规范书_53488481987137315/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500021532-00004）/电缆保护管-CPVC（φ100）.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/电缆保护管-CPVC（φ100）.docx",
+      "package_no": "包1",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管CPVC",
+      "tables": 6,
+      "rows": 40,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包1_完整招标文件_53488484541066181/包1_技术规范书_53488481987137315/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500038391-00003）/电缆保护管-CPVC（φ200）.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/电缆保护管-CPVC（φ200）.docx",
+      "package_no": "包1",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管CPVC",
+      "tables": 6,
+      "rows": 40,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包2_完整招标文件_53488483999455372/包2_技术规范书_53488482466628243/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500021532-00004）/电缆保护管-CPVC（φ100）.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/电缆保护管-CPVC（φ100）.docx",
+      "package_no": "包2",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管CPVC",
+      "tables": 6,
+      "rows": 40,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包2_完整招标文件_53488483999455372/包2_技术规范书_53488482466628243/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500038391-00003）/电缆保护管-CPVC（φ200）.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/电缆保护管-CPVC（φ200）.docx",
+      "package_no": "包2",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管CPVC",
+      "tables": 6,
+      "rows": 40,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包1_完整招标文件_53488483495666502/包1_技术规范书_53488482948183136/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00001)713595/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00001)/A171-500021541-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/A171-500021541-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖.docx",
+      "package_no": "包1",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 2,
+      "rows": 15,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包1_完整招标文件_53488483495666502/包1_技术规范书_53488482948183136/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00002)713768/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00002)/A171-500021541-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/A171-500021541-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.docx",
+      "package_no": "包1",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 2,
+      "rows": 15,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包1_完整招标文件_53488483495666502/包1_技术规范书_53488482948183136/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00001)713537/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00001)/A171-500047131-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/A171-500047131-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖.docx",
+      "package_no": "包1",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 2,
+      "rows": 15,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包1_完整招标文件_53488483495666502/包1_技术规范书_53488482948183136/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00002)713828/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00002)/A171-500047131-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/A171-500047131-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.docx",
+      "package_no": "包1",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 2,
+      "rows": 15,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包1_完整招标文件_53488483495666502/包1_技术规范书_53488482948183136/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500021520-00007）/电缆保护管-MPP非开挖（φ200）.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/电缆保护管-MPP非开挖（φ200）.docx",
+      "package_no": "包1",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 5,
+      "rows": 35,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包2_完整招标文件_53488487936896812/包2_技术规范书_53488483512605679/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00001)713595/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00001)/A171-500021541-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/A171-500021541-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖.docx",
+      "package_no": "包2",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 2,
+      "rows": 15,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包2_完整招标文件_53488487936896812/包2_技术规范书_53488483512605679/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00002)713768/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00002)/A171-500021541-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/A171-500021541-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.docx",
+      "package_no": "包2",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 2,
+      "rows": 15,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包2_完整招标文件_53488487936896812/包2_技术规范书_53488483512605679/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00001)713537/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00001)/A171-500047131-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/A171-500047131-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖.docx",
+      "package_no": "包2",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 2,
+      "rows": 15,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包2_完整招标文件_53488487936896812/包2_技术规范书_53488483512605679/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00002)713828/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00002)/A171-500047131-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/A171-500047131-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.docx",
+      "package_no": "包2",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 2,
+      "rows": 15,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包2_完整招标文件_53488487936896812/包2_技术规范书_53488483512605679/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500021520-00007）/电缆保护管-MPP非开挖（φ200）.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/电缆保护管-MPP非开挖（φ200）.docx",
+      "package_no": "包2",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 5,
+      "rows": 35,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/包3_技术规范书_53488484020778719/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00002)713768/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00002)/A171-500021541-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/A171-500021541-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.docx",
+      "package_no": "包3",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 2,
+      "rows": 15,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/包3_技术规范书_53488484020778719/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00001)713537/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00001)/A171-500047131-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/A171-500047131-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖.docx",
+      "package_no": "包3",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 2,
+      "rows": 15,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/包3_技术规范书_53488484020778719/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00002)713828/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00002)/A171-500047131-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/A171-500047131-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.docx",
+      "package_no": "包3",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 2,
+      "rows": 15,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/包3_技术规范书_53488484020778719/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021546-00006）/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021546-00006）.docx",
+      "docx_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/包3_技术规范书_53488484020778719/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021546-00006）/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021546-00006）.docx",
+      "package_no": "包3",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 1,
+      "rows": 1,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/包3_技术规范书_53488484020778719/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021546-00006）/电缆保护管-MPP地埋用（φ175）.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/电缆保护管-MPP地埋用（φ175）.docx",
+      "package_no": "包3",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 5,
+      "rows": 35,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/包3_技术规范书_53488484020778719/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021546-00007）/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021546-00007）.docx",
+      "docx_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/包3_技术规范书_53488484020778719/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021546-00007）/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021546-00007）.docx",
+      "package_no": "包3",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 1,
+      "rows": 1,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/包3_技术规范书_53488484020778719/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021546-00007）/电缆保护管-MPP非开挖（φ175）.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/电缆保护管-MPP非开挖（φ175）.docx",
+      "package_no": "包3",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 5,
+      "rows": 35,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/包3_技术规范书_53488484020778719/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500021520-00006）/电缆保护管-MPP地埋用（φ200）.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/电缆保护管-MPP地埋用（φ200）.docx",
+      "package_no": "包3",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 5,
+      "rows": 35,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/包3_技术规范书_53488484020778719/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500021520-00007）/电缆保护管-MPP非开挖（φ200）.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/电缆保护管-MPP非开挖（φ200）.docx",
+      "package_no": "包3",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 5,
+      "rows": 35,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国家电网有限公司_电缆保护管 - 设备部(A171-500021520-00002)713962/国家电网有限公司_电缆保护管 - 设备部(A171-500021520-00002)/A171-500021520-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/A171-500021520-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.docx",
+      "package_no": "包4",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 2,
+      "rows": 15,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00001)713595/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00001)/A171-500021541-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/A171-500021541-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖.docx",
+      "package_no": "包4",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 2,
+      "rows": 15,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00002)713768/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00002)/A171-500021541-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/A171-500021541-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.docx",
+      "package_no": "包4",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 2,
+      "rows": 15,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国家电网有限公司_电缆保护管 - 设备部(A171-500021546-00002)713903/国家电网有限公司_电缆保护管 - 设备部(A171-500021546-00002)/A171-500021546-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/A171-500021546-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.docx",
+      "package_no": "包4",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 2,
+      "rows": 15,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00001)713537/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00001)/A171-500047131-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/A171-500047131-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖.docx",
+      "package_no": "包4",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 2,
+      "rows": 15,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00002)713828/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00002)/A171-500047131-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/A171-500047131-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.docx",
+      "package_no": "包4",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 2,
+      "rows": 15,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021520-00008）/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021520-00008）.docx",
+      "docx_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021520-00008）/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021520-00008）.docx",
+      "package_no": "包4",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 1,
+      "rows": 1,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021520-00008）/电缆保护管-MPP非开挖（φ200）.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/电缆保护管-MPP非开挖（φ200）.docx",
+      "package_no": "包4",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 5,
+      "rows": 35,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500021520-00006）/电缆保护管-MPP地埋用（φ200）.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/电缆保护管-MPP地埋用（φ200）.docx",
+      "package_no": "包4",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 5,
+      "rows": 35,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500021520-00007）/电缆保护管-MPP非开挖（φ200）.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/电缆保护管-MPP非开挖（φ200）.docx",
+      "package_no": "包4",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 5,
+      "rows": 35,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500021546-00004）/电缆保护管-MPP地埋用（φ175）.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/电缆保护管-MPP地埋用（φ175）.docx",
+      "package_no": "包4",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 5,
+      "rows": 35,
+      "status": "parsed"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500021546-00005）/电缆保护管-MPP非开挖（φ175）.doc",
+      "docx_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/converted_docx/电缆保护管-MPP非开挖（φ175）.docx",
+      "package_no": "包4",
+      "package_code": "2225AC",
+      "material_category": "电缆保护管MPP",
+      "tables": 5,
+      "rows": 35,
+      "status": "parsed"
+    }
+  ],
+  "outputs": {
+    "json": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/technical_parameters/technical_parameter_rows.json",
+    "csv": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/technical_parameters/technical_parameter_rows.csv",
+    "summary": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/technical_parameters/technical_parameter_summary.md"
+  }
+}

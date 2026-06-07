@@ -22,6 +22,8 @@ AUTHORITY_SCORE = {
 }
 
 _CHUNK_KEYWORD_CACHE: list[dict[str, Any]] | None = None
+_CHUNK_KEYWORD_SCAN_LIMIT = 120000
+_CHUNK_KEYWORD_PAGE_SIZE = 5000
 
 
 def _normalize_query_text(query: str) -> str:
@@ -45,6 +47,11 @@ def _query_terms(query: str) -> list[str]:
         "技术规范编码",
         "物料编码",
         "包号",
+        "质量安全环保",
+        "质量目标",
+        "安全目标",
+        "环保水保",
+        "环保目标",
     ]
     for term in domain_terms:
         if term in text:
@@ -58,6 +65,9 @@ def _query_terms(query: str) -> list[str]:
         "技术规范编码": ["技术规范编码", "固化ID", "物料编码"],
         "物料编码": ["物料编码", "技术规范编码"],
         "包号": ["包号", "包件", "package_code"],
+        "质量安全环保": ["质量安全环保", "质量目标", "安全目标", "环保水保"],
+        "质量目标": ["质量目标", "验收合格", "质量标准"],
+        "安全目标": ["安全目标", "安全生产", "风险预控"],
     }
     for key, values in synonym_map.items():
         if key in text:
@@ -222,13 +232,19 @@ def _keyword_search_knowledge_chunks(
     try:
         global _CHUNK_KEYWORD_CACHE
         if _CHUNK_KEYWORD_CACHE is None:
-            _CHUNK_KEYWORD_CACHE = (
-                client.table("document_chunks")
-                .select("*")
-                .order("id")
-                .limit(50000)
-                .execute()
-            ).data or []
+            scanned: list[dict[str, Any]] = []
+            for start in range(0, _CHUNK_KEYWORD_SCAN_LIMIT, _CHUNK_KEYWORD_PAGE_SIZE):
+                batch = (
+                    client.table("document_chunks")
+                    .select("*")
+                    .order("id")
+                    .range(start, start + _CHUNK_KEYWORD_PAGE_SIZE - 1)
+                    .execute()
+                ).data or []
+                scanned.extend(batch)
+                if len(batch) < _CHUNK_KEYWORD_PAGE_SIZE:
+                    break
+            _CHUNK_KEYWORD_CACHE = scanned
         rows = _CHUNK_KEYWORD_CACHE
     except Exception:
         return []

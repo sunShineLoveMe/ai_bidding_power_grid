@@ -1,0 +1,19 @@
+{
+  "batch_id": "customer_liaoning_taichang_20260606_p0",
+  "generated_at": "2026-06-07T21:58:40",
+  "rows": 928,
+  "by_status": {
+    "pending_response": 900,
+    "informational": 28
+  },
+  "by_risk": {
+    "medium": 900,
+    "low": 28
+  },
+  "actionable_rows": 900,
+  "outputs": {
+    "json": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/technical_parameters/technical_deviations/technical_deviation_rows.json",
+    "csv": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/technical_parameters/technical_deviations/technical_deviation_rows.csv",
+    "summary": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/technical_parameters/technical_deviations/technical_deviation_summary.md"
+  }
+}

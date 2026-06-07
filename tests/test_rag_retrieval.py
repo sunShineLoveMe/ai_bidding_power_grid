@@ -141,6 +141,7 @@ class RagRetrievalQualityTest(unittest.TestCase):
             return rows
 
         rerank_mock.side_effect = passthrough
+        retrieval._CHUNK_KEYWORD_CACHE = None
         with patch("backend.rag.retrieval.get_supabase_client", return_value=client):
             result = retrieval.search_knowledge_base(
                 "国家电网供应商管理对供应商不良行为如何处理？",
@@ -151,6 +152,44 @@ class RagRetrievalQualityTest(unittest.TestCase):
 
         self.assertEqual(result[0]["id"], "sgcc-keyword")
         self.assertEqual(result[0]["retrieval_source"], "keyword")
+
+    @patch("backend.rag.retrieval.rerank_documents")
+    @patch("backend.rag.retrieval.get_embeddings", return_value=[[0.1, 0.2, 0.3]])
+    @patch("backend.rag.retrieval.init_ali_client", return_value=object())
+    def test_quality_safety_writing_query_splits_domain_terms(self, _ali, _embeddings, rerank_mock):
+        from backend.rag import retrieval
+
+        keyword_row = {
+            "id": "quality-safety",
+            "content": "质量目标：验收合格。安全目标：落实安全生产责任制和风险预控。",
+            "similarity": 0.0,
+            "metadata": {
+                "chunk_layer": "child",
+                "doc_role": "self_phrase",
+                "authority_level": "template",
+                "citation_policy": "direct_quote_allowed",
+            },
+        }
+        client = _RpcClient(rpc_rows=[])
+        client.chunk_rows = [keyword_row]
+
+        def passthrough(_query, rows, **_kwargs):
+            return rows
+
+        rerank_mock.side_effect = passthrough
+        retrieval._CHUNK_KEYWORD_CACHE = None
+        with patch("backend.rag.retrieval.get_supabase_client", return_value=client):
+            result = retrieval.search_knowledge_base(
+                "质量安全环保响应的质量目标和安全目标怎么写？",
+                scenario="writing",
+                match_threshold=0.3,
+                match_count=1,
+                metadata_filter={"doc_role": "self_phrase"},
+            )
+
+        self.assertEqual(result[0]["id"], "quality-safety")
+        self.assertIn("质量目标", retrieval._query_terms("质量安全环保响应的质量目标和安全目标怎么写？"))
+        self.assertIn("安全目标", retrieval._query_terms("质量安全环保响应的质量目标和安全目标怎么写？"))
 
     def test_authority_ranking_pushes_reference_template_behind_citable_sources(self):
         from backend.rag.retrieval import _rank_rows

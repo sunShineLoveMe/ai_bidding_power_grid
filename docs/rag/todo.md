@@ -1,6 +1,6 @@
 # 国家电网 RAG 基座数据工程待办清单
 
-> 状态日期：2026-06-06
+> 状态日期：2026-06-07
 > 适用范围：电网/国家电网招投标 RAG 基座数据、客户标书模板、行业资料、召回评测与上线门禁。
 
 本文档用于跟踪 RAG 基座数据工程的优先级、完成度和验收口径。全局产品路线仍看 `docs/development/roadmap.md`；本清单只记录 RAG 数据工程相关任务。
@@ -84,8 +84,9 @@
 | 优先级 | 状态 | 任务 | 交付物 | 验收口径 |
 | --- | --- | --- | --- | --- |
 | P3-1 | [x] | Query Rewrite | `backend/rag/retrieval.py`、`tests/test_rag_retrieval.py`、`docs/rag/runs/run_20260607_p3_query_keyword_summary.md` | 已提取标准号、包号、技术规范编码、物料编码、供应商管理、不良行为、施工工艺等关键词，并拼入 embedding 查询文本 |
-| P3-2 | [x] | 关键词补召回 | `backend/rag/retrieval.py`、`scripts/rag/eval_recall.py`、`docs/rag/runs/run_20260607_p3_query_keyword_*` | 向量召回不足或高精度关键词未命中时补查 `document_chunks`；Base Recall@5 86.7% -> 96.7%，泰昌专项保持 100%，跨域串扰 0% |
+| P3-2 | [x] | 关键词补召回 | `backend/rag/retrieval.py`、`scripts/rag/eval_recall.py`、`docs/rag/runs/run_20260607_p3_query_keyword_*` | 向量召回不足或高精度关键词未命中时补查 `document_chunks`；已改为分页扫描并补充质量安全环保领域词；Base Recall@5 86.7% -> 96.7%，泰昌专项保持 100%，跨域串扰 0% |
 | P3-3 | [x] | authority 排序 | `backend/rag/retrieval.py`、`tests/test_rag_retrieval.py` | 法规/标准、招标要求、企业事实加权；`reference_style_only` 降权，单测覆盖参考模板不得压过正式依据 |
+| P3-7 | [x] | 国网规则网页噪声重洗 | `scripts/rag/repair_sgcc_rule_seed_docs.py`、`docs/rag/runs/run_20260607_sgcc_rule_clean_summary.md` | 三份异常国网规则资料已由门户首页噪声改为明确标注的检索种子摘要，`02_policy_regulations` 与 `04_standard_phrases` 已重入库；Base Recall@5 96.7%，泰昌专项 100% |
 | P3-4 | [ ] | Rerank 对比实验 | 评测记录新 run | 对比无 rerank、DashScope rerank、本地 rerank 的 Recall/MRR |
 | P3-5 | [ ] | 评测集扩到 40-60 条 | 扩展 JSONL | qa/writing/compliance/table 四类均有样本 |
 | P3-6 | [ ] | 增量回归门禁 | CI/脚本说明 | 新批次入库后必须跑评测，指标退化需记录原因 |
@@ -97,9 +98,9 @@
 | 优先级 | 状态 | 任务 | 交付物 | 验收口径 |
 | --- | --- | --- | --- | --- |
 | P4-1 | [x] | 表格三形态存储 | 原始结构 + 检索摘要 + 行级记录 | 货物清单已保留 JSON 原始结构、staging table summary/table row，并写入 `power_grid_goods_list_rows` 结构化行表 |
-| P4-2 | [ ] | 技术参数表抽取 | JSON/CSV + summary chunk | 保证值、项目需求值、备注字段不丢失 |
+| P4-2 | [x] | 技术参数表抽取 | `scripts/rag/extract_customer_technical_parameters.py`、`technical_parameter_rows.json/csv`、`technical_parameter_summary.md`、`docs/rag/runs/run_20260607_p4_technical_parameters_summary.md` | 辽宁/泰昌 39 份 CPVC/MPP 技术规范已抽取 928 行参数，覆盖尺寸参数、性能指标、投标响应参数表；保留项目需求值、投标响应值、投标保证值、偏差、备注等字段 |
 | P4-3 | [x] | 货物清单解析 | `scripts/rag/ingest_customer_goods_tables.py`、`scripts/rag/query_customer_goods_tables.py` | 江西 7 行、山西 98 行已可按包号、物料名称、单位、数量、技术规范编码、物料编码过滤 |
-| P4-4 | [ ] | 技术偏差/商务偏差辅助 | 偏差表生成依据 | 能定位招标要求和响应模板来源 |
+| P4-4 | [x] | 技术偏差/商务偏差辅助 | `scripts/rag/generate_technical_deviation_report.py`、`technical_deviation_rows.json/csv`、`technical_deviation_summary.md`、`docs/rag/runs/run_20260607_p4_deviation_summary.md` | 已基于 928 行技术参数生成偏差辅助判断，支持 `pending_response/no_deviation/positive_deviation/negative_deviation/manual_review/informational`；本批 900 行因投标响应/保证值为空被标为待响应，避免误写无偏差 |
 
 ## 每批客户资料入库检查清单
 
@@ -115,9 +116,9 @@
 
 ## 当前最近任务
 
-1. 进入 P4-2：技术参数表抽取，补保证值、项目需求值、备注字段结构化。
-2. 进入 P3-4：Rerank 对比实验，对比无 rerank、DashScope rerank、本地 rerank 的 Recall/MRR。
-3. 重洗国网规则网页资料，重点处理 `国家电网有限公司招标活动管理办法`、`国家电网有限公司供应商管理办法` 的网页导航噪声。
+1. 接入泰昌产品参数/检验报告保证值，把 `technical_deviation_rows.json` 中的 `pending_response` 转为可判断的无偏差/正偏差/负偏差。
+2. 评估是否新增 `power_grid_technical_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表，让页面和问答可直接按包号、规格、参数名精确查询。
+3. 进入 P3-4：Rerank 对比实验，对比无 rerank、DashScope rerank、本地 rerank 的 Recall/MRR。
 4. 向客户确认泰昌 CPVC/MPP 各规格检验报告覆盖关系，尤其是“内径250”报告能否覆盖辽宁 φ50/100/150/175/200 需求。
 5. 向客户补充产品实物高清照片、生产线/检测设备原始照片、同类业绩合同/中标通知书/验收证明、项目级盖章扫描件和官方 Logo。
 6. 扩展泰昌 MVP 专项评测集到 40-60 条，并加入更多包号、技术规范编码、合同条款、图片问答和参考稿隔离负样本。
