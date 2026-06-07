@@ -32,8 +32,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT))
 load_dotenv(PROJECT_ROOT / ".env")
 
-from backend.db.supabase_client import get_supabase_client  # noqa: E402
-from backend.rag.vector_store import init_ali_client, get_embeddings  # noqa: E402
+from backend.rag.retrieval import search_knowledge_base  # noqa: E402
 
 DEFAULT_TESTSET = PROJECT_ROOT / "tests" / "rag" / "base_testset.jsonl"
 
@@ -51,54 +50,17 @@ def _role_of(row: dict) -> str | None:
     return (row.get("metadata") or {}).get("doc_role")
 
 
-def _parent_rows_for(client, rows: list[dict]) -> list[dict]:
-    parents: list[dict] = []
-    seen: set[tuple[str, int]] = set()
-    for row in rows:
-        metadata = row.get("metadata") or {}
-        document_id = row.get("document_id")
-        parent_index = metadata.get("parent_index")
-        if not document_id or not isinstance(parent_index, int):
-            continue
-        key = (str(document_id), parent_index)
-        if key in seen:
-            continue
-        seen.add(key)
-        resp = client.rpc(
-            "get_parent_chunk",
-            {"p_document_id": document_id, "p_parent_index": parent_index},
-        ).execute()
-        for parent in resp.data or []:
-            parent_meta = parent.get("metadata") or {}
-            parents.append({
-                **parent,
-                "similarity": row.get("similarity"),
-                "metadata": {
-                    **parent_meta,
-                    "retrieved_by_child": {
-                        "id": row.get("id"),
-                        "metadata": metadata,
-                        "source_section": row.get("source_section"),
-                    },
-                },
-            })
-    return parents
-
-
-def recall_for_case(client, ali, case: dict, k: int, use_filter: bool) -> dict:
-    q_emb = get_embeddings(ali, [case["question"]])[0]
+def recall_for_case(case: dict, k: int, use_filter: bool) -> dict:
     filter_md = case.get("metadata_filter", {}) if use_filter else {}
-    resp = client.rpc(
-        "match_knowledge_chunks_filtered",
-        {
-            "query_embedding": q_emb,
-            "match_threshold": 0.2,
-            "match_count": k,
-            "filter_metadata": filter_md,
-        },
-    ).execute()
-    rows = resp.data or []
-    evaluated_rows = _parent_rows_for(client, rows) if case.get("return_parent") else rows
+    rows = search_knowledge_base(
+        case["question"],
+        match_threshold=0.2,
+        match_count=k,
+        scenario=case.get("scenario") or "qa",
+        metadata_filter=filter_md,
+        return_parent=case.get("return_parent"),
+    )
+    evaluated_rows = rows
 
     expected_role = case.get("expected_doc_role")
     keywords = case.get("must_include_keywords", [])
@@ -152,11 +114,9 @@ def main() -> int:
     if not testset_path.is_absolute():
         testset_path = PROJECT_ROOT / testset_path
     cases = load_cases(testset_path)
-    client = get_supabase_client()
-    ali = init_ali_client()
     use_filter = not args.no_filter
 
-    results = [recall_for_case(client, ali, c, args.k, use_filter) for c in cases]
+    results = [recall_for_case(c, args.k, use_filter) for c in cases]
 
     n = len(results)
     recall = sum(1 for r in results if r["recall_hit"]) / n

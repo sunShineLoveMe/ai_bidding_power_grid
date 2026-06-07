@@ -27,6 +27,12 @@ class _TableQuery:
     def limit(self, *_args, **_kwargs):
         return self
 
+    def range(self, *_args, **_kwargs):
+        return self
+
+    def order(self, *_args, **_kwargs):
+        return self
+
     def execute(self):
         return _ExecuteResult(self.rows)
 
@@ -35,6 +41,7 @@ class _RpcClient:
     def __init__(self, rpc_rows=None, asset_rows=None, parent_rows=None):
         self.rpc_rows = rpc_rows or []
         self.asset_rows = asset_rows or []
+        self.chunk_rows = []
         self.parent_rows = parent_rows or []
         self.rpc_calls = []
 
@@ -45,9 +52,11 @@ class _RpcClient:
         return _TableQuery(self.rpc_rows)
 
     def table(self, name):
-        if name != "knowledge_assets":
-            raise AssertionError(f"unexpected table {name}")
-        return _TableQuery(self.asset_rows)
+        if name == "knowledge_assets":
+            return _TableQuery(self.asset_rows)
+        if name == "document_chunks":
+            return _TableQuery(self.chunk_rows)
+        raise AssertionError(f"unexpected table {name}")
 
 
 class RagRetrievalQualityTest(unittest.TestCase):
@@ -107,6 +116,63 @@ class RagRetrievalQualityTest(unittest.TestCase):
         self.assertEqual(client.rpc_calls[0][0], "match_knowledge_chunks_filtered")
         self.assertEqual(client.rpc_calls[1][0], "get_parent_chunk")
         self.assertEqual(result[0]["metadata"]["retrieved_by_child"]["id"], "child-1")
+
+    @patch("backend.rag.retrieval.rerank_documents")
+    @patch("backend.rag.retrieval.get_embeddings", return_value=[[0.1, 0.2, 0.3]])
+    @patch("backend.rag.retrieval.init_ali_client", return_value=object())
+    def test_text_recall_uses_keyword_supplement_when_vector_misses(self, _ali, _embeddings, rerank_mock):
+        from backend.rag import retrieval
+
+        keyword_row = {
+            "id": "sgcc-keyword",
+            "content": "国家电网供应商管理规定：供应商发生不良行为的，按规定暂停中标资格。",
+            "similarity": 0.0,
+            "metadata": {
+                "chunk_layer": "child",
+                "doc_role": "sgcc_rule",
+                "authority_level": "law_or_standard",
+                "citation_policy": "law_or_standard_citable",
+            },
+        }
+        client = _RpcClient(rpc_rows=[])
+        client.chunk_rows = [keyword_row]
+
+        def passthrough(_query, rows, **_kwargs):
+            return rows
+
+        rerank_mock.side_effect = passthrough
+        with patch("backend.rag.retrieval.get_supabase_client", return_value=client):
+            result = retrieval.search_knowledge_base(
+                "国家电网供应商管理对供应商不良行为如何处理？",
+                match_threshold=0.3,
+                match_count=1,
+                metadata_filter={"doc_role": "sgcc_rule"},
+            )
+
+        self.assertEqual(result[0]["id"], "sgcc-keyword")
+        self.assertEqual(result[0]["retrieval_source"], "keyword")
+
+    def test_authority_ranking_pushes_reference_template_behind_citable_sources(self):
+        from backend.rag.retrieval import _rank_rows
+
+        rows = [
+            {
+                "id": "reference",
+                "content": "施工工艺章节模板，可参考写法。",
+                "similarity": 0.95,
+                "metadata": {"authority_level": "reference_template", "citation_policy": "reference_style_only"},
+            },
+            {
+                "id": "standard",
+                "content": "配电网施工工艺规范要求施工应符合验收标准。",
+                "similarity": 0.82,
+                "metadata": {"authority_level": "law_or_standard", "citation_policy": "law_or_standard_citable"},
+            },
+        ]
+
+        result = _rank_rows("配电网施工工艺规范对施工有哪些要求？", rows, 2)
+
+        self.assertEqual([row["id"] for row in result], ["standard", "reference"])
 
     @patch("backend.rag.retrieval.rerank_documents", return_value=[])
     @patch("backend.rag.retrieval.get_embeddings", return_value=[[0.4, 0.5]])

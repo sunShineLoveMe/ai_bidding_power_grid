@@ -520,3 +520,42 @@ PDF 标准入库前必须增加源文件审计门禁。当前错源 GB/DL 标准
 
 - 历史已入库文档如果没有 `doc_identity_key`，无法自动反向判定新旧版本关系；后续新批次按新门禁入库后会稳定生效。
 - 如果客户后续提供同一资料但文件名变化的新版本，manifest 应显式填写稳定 `doc_key` 或 `document_key`。
+
+---
+
+## Run 11 — P3 Query Rewrite / 关键词补召回 / Authority 排序（2026-06-07）
+
+> Run summary：`docs/rag/runs/run_20260607_p3_query_keyword_summary.md`  
+> Base filtered：`docs/rag/runs/run_20260607_p3_query_keyword_base_filtered.json`  
+> Customer filtered：`docs/rag/runs/run_20260607_p3_query_keyword_customer_filtered.json`
+
+### 背景
+
+- P2 后 Base Recall@5 为 86.7%，未命中集中在标准规范、国网规则和合规类问题。
+- 原评测脚本直接调用 RPC，未覆盖生产检索链路中的 rerank、后处理和后续增强逻辑。
+
+### 处理内容
+
+- `search_knowledge_base()` 增加轻量 Query Rewrite，提取标准号、包号、技术规范编码、物料编码、供应商管理、不良行为、施工工艺等关键词。
+- 增加 document chunk 关键词补召回：向量召回不足或高精度关键词未命中时触发，并继续执行 metadata 边界过滤。
+- 对关键词命中的网页型国网规则分片补充来源文件名、标签、类型、来源单位作为上下文前缀，缓解网页导航噪声。
+- 增加 authority/citation 排序：正式法规/标准、招标要求、企业事实加权；`reference_style_only` 降权。
+- `scripts/rag/eval_recall.py` 改为调用生产检索函数，确保回归覆盖 Query Rewrite、关键词补召回和 authority 排序。
+
+### 回归验证
+
+- `./.venv/bin/python -m pytest tests/test_rag_retrieval.py tests/test_rag_asset_scoring.py tests/test_customer_metadata_policy.py -q`
+- 结果：25 passed，1 个 PyPDF2 deprecation warning。
+- `./.venv/bin/python -m py_compile backend/rag/retrieval.py scripts/rag/eval_recall.py`
+- 结果：通过。
+
+| 测试集 | Recall@5 | top1 来源准确率 | 关键词命中率 | 跨 doc_role 串扰 | 禁用关键词命中率 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Base filtered | 96.7% | 100.0% | 96.7% | 0.0% | - |
+| 泰昌 MVP 专项 filtered | 100.0% | 100.0% | 100.0% | 0.0% | 0.0% |
+
+### 剩余风险
+
+- Base 仅剩 T04 合规用例未命中关键词；top1 doc_role 已正确为 `policy_regulation`。
+- 国网规则网页存在明显导航噪声，应在后续重洗并重新入库。
+- 关键词补召回暂在应用层过滤；后续可补数据库侧关键词索引或专用 RPC。

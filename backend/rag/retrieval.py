@@ -1,5 +1,6 @@
 import json
 import re
+from pathlib import Path
 from typing import Any, Iterator, List, Dict
 from openai import OpenAI
 
@@ -9,6 +10,68 @@ from backend.ai.qwen_client import stream_dashscope_api
 from backend.core.config import get_stage_model
 from backend.ai.rerank_client import rerank_documents
 from backend.core.bid_volumes import asset_applicable_volumes, asset_matches_volume, normalize_volume_type
+
+AUTHORITY_SCORE = {
+    "law_or_standard": 0.18,
+    "tender_file": 0.16,
+    "enterprise_fact": 0.14,
+    "sgcc_rule": 0.14,
+    "standard_spec": 0.12,
+    "reference_template": -0.08,
+    "template": -0.05,
+}
+
+_CHUNK_KEYWORD_CACHE: list[dict[str, Any]] | None = None
+
+
+def _normalize_query_text(query: str) -> str:
+    return re.sub(r"\s+", " ", (query or "").strip())
+
+
+def _query_terms(query: str) -> list[str]:
+    text = _normalize_query_text(query)
+    terms = set(re.findall(r"[A-Za-z]+/[A-Za-z]+\s*\d+(?:[-—]\d+)?(?:[-—]\d+)?|[A-Za-z]{1,8}[-—]?\d+[A-Za-z0-9-]*|[0-9]{4}[A-Z]{2}|[\u4e00-\u9fa5]{2,}", text))
+    domain_terms = [
+        "国家电网",
+        "招标活动",
+        "管理办法",
+        "招标方式",
+        "供应商管理",
+        "供应商",
+        "不良行为",
+        "施工工艺",
+        "配电网",
+        "技术规范",
+        "技术规范编码",
+        "物料编码",
+        "包号",
+    ]
+    for term in domain_terms:
+        if term in text:
+            terms.add(term)
+    synonym_map = {
+        "招标方式": ["公开招标", "邀请招标", "竞争性谈判", "招标方式"],
+        "供应商管理": ["供应商", "不良行为", "暂停中标资格", "列入黑名单"],
+        "不良行为": ["不良行为", "暂停中标资格", "供应商"],
+        "施工工艺": ["施工", "工艺", "施工工艺", "验收"],
+        "配电网施工": ["配电网", "施工", "工艺"],
+        "技术规范编码": ["技术规范编码", "固化ID", "物料编码"],
+        "物料编码": ["物料编码", "技术规范编码"],
+        "包号": ["包号", "包件", "package_code"],
+    }
+    for key, values in synonym_map.items():
+        if key in text:
+            terms.update(values)
+    return [term.strip() for term in terms if term and len(term.strip()) >= 2]
+
+
+def _rewrite_query_for_embedding(query: str) -> str:
+    terms = _query_terms(query)
+    if not terms:
+        return query
+    extras = " ".join(term for term in terms if term not in query)
+    return f"{query}\n检索关键词：{extras}" if extras else query
+
 
 def _infer_doc_role_filter(query: str, scenario: str | None = None) -> str | None:
     text = query or ""
@@ -63,6 +126,157 @@ def _rpc_search_chunks(
         },
     ).execute()
     return response.data or []
+
+
+def _metadata_matches_filter(metadata: dict[str, Any], metadata_filter: dict[str, Any] | None) -> bool:
+    if not metadata_filter:
+        return True
+    for key, expected in metadata_filter.items():
+        if expected in (None, "", "all"):
+            continue
+        candidate = metadata.get(key)
+        expected_values = expected if isinstance(expected, list) else [expected]
+        candidate_values = candidate if isinstance(candidate, list) else [candidate]
+        if not any(str(item) == str(value) for item in candidate_values for value in expected_values):
+            return False
+    return True
+
+
+def _row_text(row: dict[str, Any]) -> str:
+    metadata = row.get("metadata") if isinstance(row.get("metadata"), dict) else {}
+    parts = [
+        row.get("content"),
+        row.get("source_section"),
+        metadata.get("source_file"),
+        metadata.get("source_org"),
+        metadata.get("doc_type"),
+        metadata.get("tags"),
+        metadata.get("material_category"),
+        metadata.get("package_code"),
+        metadata.get("source_domain"),
+        metadata.get("citation_policy"),
+    ]
+    return " ".join(str(part) for part in parts if part).lower()
+
+
+def _source_context_prefix(row: dict[str, Any]) -> str:
+    metadata = row.get("metadata") if isinstance(row.get("metadata"), dict) else {}
+    source_name = Path(str(metadata.get("source_file") or "")).stem if metadata.get("source_file") else ""
+    parts = [
+        source_name,
+        metadata.get("tags"),
+        metadata.get("doc_type"),
+        metadata.get("source_org"),
+    ]
+    text = "；".join(str(part) for part in parts if part)
+    return f"资料来源信息：{text}\n" if text else ""
+
+
+def _keyword_score(query: str, row: dict[str, Any]) -> float:
+    terms = _query_terms(query)
+    if not terms:
+        return 0.0
+    text = _row_text(row)
+    score = 0.0
+    for term in terms:
+        normalized = term.lower().replace("—", "-")
+        if normalized and normalized in text:
+            score += 1.0 if len(normalized) >= 4 else 0.6
+    return score / max(len(terms), 1)
+
+
+def _authority_bonus(row: dict[str, Any]) -> float:
+    metadata = row.get("metadata") if isinstance(row.get("metadata"), dict) else {}
+    authority = str(metadata.get("authority_level") or metadata.get("doc_role") or "")
+    citation = str(metadata.get("citation_policy") or "")
+    bonus = AUTHORITY_SCORE.get(authority, 0.0)
+    if citation in {"law_or_standard_citable", "tender_requirement_citable", "enterprise_fact_citable"}:
+        bonus += 0.03
+    if citation == "reference_style_only":
+        bonus -= 0.12
+    if metadata.get("status") == "superseded":
+        bonus -= 0.4
+    return bonus
+
+
+def _needs_keyword_supplement(query: str, rows: list[dict[str, Any]], match_count: int) -> bool:
+    terms = _query_terms(query)
+    if not terms:
+        return False
+    if len(rows) < match_count:
+        return True
+    best_keyword_score = max((_keyword_score(query, row) for row in rows), default=0.0)
+    return best_keyword_score <= 0.0
+
+
+def _keyword_search_knowledge_chunks(
+    client,
+    *,
+    query: str,
+    match_count: int,
+    metadata_filter: dict[str, Any],
+) -> list[dict[str, Any]]:
+    terms = _query_terms(query)
+    if not terms:
+        return []
+    try:
+        global _CHUNK_KEYWORD_CACHE
+        if _CHUNK_KEYWORD_CACHE is None:
+            _CHUNK_KEYWORD_CACHE = (
+                client.table("document_chunks")
+                .select("*")
+                .order("id")
+                .limit(50000)
+                .execute()
+            ).data or []
+        rows = _CHUNK_KEYWORD_CACHE
+    except Exception:
+        return []
+
+    scored: list[tuple[float, dict[str, Any]]] = []
+    for row in rows:
+        metadata = row.get("metadata") if isinstance(row.get("metadata"), dict) else {}
+        if not _metadata_matches_filter(metadata, metadata_filter):
+            continue
+        if metadata.get("status") == "superseded":
+            continue
+        score = _keyword_score(query, row)
+        if score <= 0:
+            continue
+        enriched = {
+            **row,
+            "content": f"{_source_context_prefix(row)}{row.get('content') or ''}",
+            "similarity": max(float(row.get("similarity") or 0), min(0.99, 0.55 + score / 3)),
+            "keyword_score": round(score, 4),
+            "retrieval_source": "keyword",
+        }
+        scored.append((score + _authority_bonus(enriched), enriched))
+    scored.sort(key=lambda item: item[0], reverse=True)
+    return [row for _, row in scored[: max(match_count * 2, match_count)]]
+
+
+def _merge_rows(primary: list[dict[str, Any]], supplemental: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    merged: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for row in [*primary, *supplemental]:
+        row_id = str(row.get("id") or "")
+        key = row_id or f"{row.get('document_id')}:{row.get('chunk_index')}:{hash(row.get('content') or '')}"
+        if key in seen:
+            continue
+        seen.add(key)
+        merged.append(row)
+    return merged
+
+
+def _rank_rows(query: str, rows: list[dict[str, Any]], match_count: int) -> list[dict[str, Any]]:
+    def score(row: dict[str, Any]) -> float:
+        return (
+            float(row.get("similarity") or 0)
+            + min(_keyword_score(query, row), 1.0) * 0.18
+            + _authority_bonus(row)
+        )
+
+    return sorted(rows, key=score, reverse=True)[:match_count]
 
 
 def _attach_parent_context(client, rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -123,8 +337,10 @@ def search_knowledge_base(
     ali_client = init_ali_client()
     client = get_supabase_client()
     
+    rewritten_query = _rewrite_query_for_embedding(query)
+
     # 1. 向量化查询
-    query_embeddings = get_embeddings(ali_client, [query])
+    query_embeddings = get_embeddings(ali_client, [rewritten_query])
     if not query_embeddings:
         return []
     query_vector = query_embeddings[0]
@@ -153,11 +369,23 @@ def search_knowledge_base(
         seen_ids = {str(row.get("id")) for row in rows if row.get("id")}
         rows.extend(row for row in fallback_rows if not row.get("id") or str(row.get("id")) not in seen_ids)
 
+    if _needs_keyword_supplement(query, rows, match_count):
+        rows = _merge_rows(
+            rows,
+            _keyword_search_knowledge_chunks(
+                client,
+                query=query,
+                match_count=match_count,
+                metadata_filter=filter_md,
+            ),
+        )
+
     if return_parent is None:
         return_parent = scenario == "writing"
     if return_parent:
         rows = _attach_parent_context(client, rows)
-    return rerank_documents(query, rows, text_key="content", top_n=match_count)
+    reranked = rerank_documents(rewritten_query, rows, text_key="content", top_n=max(match_count * 2, match_count))
+    return _rank_rows(query, reranked, match_count)
 
 
 def search_knowledge_assets(
