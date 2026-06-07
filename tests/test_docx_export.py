@@ -8,8 +8,8 @@ from docx import Document
 from docx.oxml.ns import qn
 from flask import Flask
 
-from backend.api.routes import build_project_bid_markdown, _demote_body_markdown_headings, _numbered_export_sections, _strip_duplicate_section_heading
-from backend.export.md_to_word import convert_md_to_word, refresh_docx_fields_with_soffice
+from backend.api.routes import build_project_bid_markdown, _asset_allowed_for_bid, _demote_body_markdown_headings, _numbered_export_sections, _strip_duplicate_section_heading
+from backend.export.md_to_word import DOCX_BIDDER_FULL_NAME, convert_md_to_word, refresh_docx_fields_with_soffice, taichang_bid_document_title
 
 
 class DocxExportRegressionTest(unittest.TestCase):
@@ -118,6 +118,19 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertEqual(numbered[1]["_export_title"], "1.1 质量控制措施")
         self.assertEqual(numbered[2]["_export_title"], "1.2 环保与文明施工措施")
 
+    def test_export_section_numbering_collapses_leading_child_level_without_zero_prefix(self):
+        sections = [
+            {"id": "a", "level": 2, "title": "投标函及投标函附录"},
+            {"id": "b", "level": 3, "title": "编制依据"},
+            {"id": "c", "level": 1, "title": "资格审查资料"},
+        ]
+
+        numbered = _numbered_export_sections(sections)
+
+        self.assertEqual(numbered[0]["_export_title"], "1. 投标函及投标函附录")
+        self.assertEqual(numbered[1]["_export_title"], "1.1 编制依据")
+        self.assertEqual(numbered[2]["_export_title"], "2. 资格审查资料")
+
     def test_bid_markdown_export_prefers_editor_snapshot_over_stale_database_sections(self):
         project_id = "11111111-1111-1111-1111-111111111111"
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -167,6 +180,111 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertNotIn("资格审查资料封面及目录", markdown)
             self.assertNotIn("待补充章节正文", markdown)
 
+    def test_bid_markdown_with_images_loads_taichang_assets(self):
+        project_id = "11111111-1111-1111-1111-111111111111"
+        with tempfile.TemporaryDirectory() as tmpdir:
+            app = Flask(__name__)
+            app.config["GENERATED_FOLDER"] = tmpdir
+            sections = [
+                {
+                    "id": "section-1",
+                    "order_index": 1,
+                    "level": 1,
+                    "title": "试验检测能力",
+                    "content": "泰昌具备电子天平和万能试验机等试验检测能力。",
+                    "metadata": {"volume_type": "technical"},
+                }
+            ]
+            assets = [
+                {
+                    "id": "asset-1",
+                    "title": "泰昌电子天平",
+                    "category": "试验检测",
+                    "asset_type": "image",
+                    "metadata": {
+                        "enterprise": "泰昌",
+                        "doc_owner": DOCX_BIDDER_FULL_NAME,
+                        "source_domain": "enterprise_fact",
+                        "evidence_type": "testing_capacity",
+                        "target_library": "product_library",
+                        "library_type": "product",
+                        "reference_only": False,
+                    },
+                }
+            ]
+
+            with (
+                app.app_context(),
+                patch("backend.api.routes.get_project_interpretation", return_value={
+                    "project": {"id": project_id, "project_name": "国网辽宁电力2025年第三次物资协议库存招标采购招标文件"},
+                    "analysis": {"project_meta": {"project_name": "国网辽宁电力2025年第三次物资协议库存招标采购招标文件"}},
+                }),
+                patch("backend.api.routes.list_bid_sections", return_value=sections),
+                patch("backend.api.routes.list_knowledge_assets", return_value=assets) as list_assets_mock,
+            ):
+                markdown_path, document_title, report = build_project_bid_markdown(project_id, with_images=True)
+
+            markdown = markdown_path.read_text(encoding="utf-8")
+            self.assertEqual("国网辽宁电力2025年第三次物资协议库存招标采购投标文件", document_title)
+            list_assets_mock.assert_called_once()
+            self.assertEqual(1, report["asset_candidates"])
+            self.assertEqual(1, report["selected"])
+            self.assertIn("/api/bidding/knowledge/assets/asset-1/file?variant=original", markdown)
+
+    def test_bid_markdown_with_images_does_not_repeat_same_asset(self):
+        project_id = "11111111-1111-1111-1111-111111111111"
+        with tempfile.TemporaryDirectory() as tmpdir:
+            app = Flask(__name__)
+            app.config["GENERATED_FOLDER"] = tmpdir
+            sections = [
+                {
+                    "id": "section-1",
+                    "order_index": 1,
+                    "level": 1,
+                    "title": "试验检测能力",
+                    "content": "泰昌具备电子天平试验检测能力。",
+                    "metadata": {"volume_type": "technical"},
+                },
+                {
+                    "id": "section-2",
+                    "order_index": 2,
+                    "level": 1,
+                    "title": "试验检测设备",
+                    "content": "泰昌万能试验机和电子天平配置完善。",
+                    "metadata": {"volume_type": "technical"},
+                },
+            ]
+            asset = {
+                "id": "asset-1",
+                "title": "泰昌电子天平",
+                "category": "试验检测",
+                "asset_type": "image",
+                "metadata": {
+                    "enterprise": "泰昌",
+                    "doc_owner": DOCX_BIDDER_FULL_NAME,
+                    "source_domain": "enterprise_fact",
+                    "evidence_type": "testing_capacity",
+                    "target_library": "product_library",
+                    "library_type": "product",
+                    "reference_only": False,
+                },
+            }
+
+            with (
+                app.app_context(),
+                patch("backend.api.routes.get_project_interpretation", return_value={
+                    "project": {"id": project_id, "project_name": "测试招标文件"},
+                    "analysis": {"project_meta": {"project_name": "测试招标文件"}},
+                }),
+                patch("backend.api.routes.list_bid_sections", return_value=sections),
+                patch("backend.api.routes.list_knowledge_assets", return_value=[asset]),
+            ):
+                markdown_path, _, report = build_project_bid_markdown(project_id, with_images=True)
+
+            markdown = markdown_path.read_text(encoding="utf-8")
+            self.assertEqual(1, report["selected"])
+            self.assertEqual(1, markdown.count("/api/bidding/knowledge/assets/asset-1/file?variant=original"))
+
     def test_docx_first_page_is_formal_toc_and_title_is_not_outline_heading(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             markdown_path = Path(tmpdir) / "toc.md"
@@ -207,10 +325,11 @@ class DocxExportRegressionTest(unittest.TestCase):
             ]
             document_xml = document._element.xml
 
-            self.assertEqual(non_empty_paragraphs[0], "招标文件")
-            self.assertEqual(non_empty_paragraphs[1], "目录")
-            self.assertIn("1. 企业营业执照", non_empty_paragraphs[:8])
-            self.assertIn("2. 安全生产许可证", non_empty_paragraphs[:8])
+            self.assertEqual(non_empty_paragraphs[0], "投标文件")
+            self.assertEqual(non_empty_paragraphs[1], f"投标人：{DOCX_BIDDER_FULL_NAME}")
+            self.assertEqual(non_empty_paragraphs[3], "目  录")
+            self.assertIn("1. 企业营业执照", non_empty_paragraphs[:10])
+            self.assertIn("2. 安全生产许可证", non_empty_paragraphs[:10])
             self.assertNotIn("招标文件", headings)
             self.assertIn("1. 企业营业执照", headings)
             self.assertIn("2. 安全生产许可证", headings)
@@ -377,16 +496,54 @@ class DocxExportRegressionTest(unittest.TestCase):
             body_rfonts = body_run._element.rPr.rFonts
             table_run = document.tables[0].cell(1, 1).paragraphs[0].runs[0]
 
-            self.assertEqual("sgcc_power_grid", report["template"]["template_id"])
+            self.assertEqual("sgcc_taichang_bid", report["template"]["template_id"])
+            self.assertEqual(DOCX_BIDDER_FULL_NAME, report["template"]["bidder_full_name"])
             self.assertEqual("宋体", report["template"]["body_font"])
             self.assertEqual("宋体", normal._element.rPr.rFonts.get(qn("w:eastAsia")))
             self.assertEqual("宋体", body_rfonts.get(qn("w:eastAsia")))
-            self.assertEqual(12, body_run.font.size.pt)
+            self.assertEqual(10.5, body_run.font.size.pt)
             self.assertEqual("宋体", table_run._element.rPr.rFonts.get(qn("w:eastAsia")))
             self.assertEqual(10.5, table_run.font.size.pt)
             self.assertEqual(21, round(section.page_width.cm))
             self.assertEqual(29.7, round(section.page_height.cm, 1))
+            self.assertEqual(2.0, round(section.top_margin.cm, 1))
+            self.assertEqual(2.0, round(section.bottom_margin.cm, 1))
+            self.assertIn(DOCX_BIDDER_FULL_NAME, section.header.paragraphs[0].text)
             self.assertLessEqual(len(section.header.paragraphs[0].text), 42)
+
+    def test_taichang_bid_document_title_rewrites_tender_file_title(self):
+        self.assertEqual(
+            "国网辽宁电力2025年第三次物资协议库存招标采购投标文件",
+            taichang_bid_document_title("国网辽宁电力2025年第三次物资协议库存招标采购招标文件"),
+        )
+
+    def test_bid_export_assets_are_limited_to_taichang_enterprise_facts(self):
+        taichang_asset = {
+            "metadata": {
+                "enterprise": "泰昌",
+                "doc_owner": DOCX_BIDDER_FULL_NAME,
+                "source_domain": "enterprise_fact",
+                "reference_only": False,
+            }
+        }
+        haoqian_reference = {
+            "metadata": {
+                "doc_owner": "河北豪乾电气设备科技有限公司",
+                "source_domain": "reference_template",
+                "reference_only": True,
+            }
+        }
+        liaoning_tender = {
+            "metadata": {
+                "doc_owner": "国网辽宁省电力有限公司",
+                "source_domain": "tender_requirement",
+                "reference_only": False,
+            }
+        }
+
+        self.assertTrue(_asset_allowed_for_bid(taichang_asset))
+        self.assertFalse(_asset_allowed_for_bid(haoqian_reference))
+        self.assertFalse(_asset_allowed_for_bid(liaoning_tender))
 
     def test_markdown_image_limit_records_skipped_images(self):
         with tempfile.TemporaryDirectory() as tmpdir:

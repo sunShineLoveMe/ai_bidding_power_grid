@@ -15,13 +15,13 @@ import codecs
 import PyPDF2
 from urllib.parse import quote
 from backend.ai.qwen_client import call_dashscope_api, generate_bid_section
-from backend.export.md_to_word import clean_formal_bid_text, convert_md_to_word
+from backend.export.md_to_word import DOCX_BIDDER_FULL_NAME, clean_formal_bid_text, convert_md_to_word, taichang_bid_document_title
 from backend.ai.chapter_planner import generate_bid_outline, stream_bid_outline
 from backend.ai.section_writer import estimate_bid_content_words, stream_bid_section
 from backend.ai.interpreter import generate_ai_interpretation_report
 from backend.ai.compliance_checker import build_compliance_report
 from backend.ai.semantic_compliance import build_semantic_compliance_report
-from backend.db.supabase_repo import cancel_bid_generation_task, create_bid_export_task, create_bid_generation_task, create_knowledge_asset, delete_bid_project, delete_bid_section, download_bid_file_to_local, download_knowledge_asset_file_variant, get_ai_usage_overview, get_bid_export_task, get_bid_file, get_latest_bid_file_for_project, get_latest_bid_generation_task, get_onlyoffice_document, get_project_interpretation, list_bid_history, list_bid_sections, list_recent_bid_projects, reorder_bid_sections, reset_bid_sections_generation, save_onlyoffice_document, sync_uploaded_tender_to_supabase, update_bid_analysis_project_meta, update_bid_export_task, update_bid_file_parse_status, update_bid_generation_task_item, update_bid_section_content, update_knowledge_asset, upload_knowledge_asset_file, upsert_bid_section
+from backend.db.supabase_repo import cancel_bid_generation_task, create_bid_export_task, create_bid_generation_task, create_knowledge_asset, delete_bid_project, delete_bid_section, download_bid_file_to_local, download_knowledge_asset_file_variant, get_ai_usage_overview, get_bid_export_task, get_bid_file, get_latest_bid_file_for_project, get_latest_bid_generation_task, get_onlyoffice_document, get_project_interpretation, list_bid_history, list_bid_sections, list_knowledge_assets, list_recent_bid_projects, reorder_bid_sections, reset_bid_sections_generation, save_onlyoffice_document, sync_uploaded_tender_to_supabase, update_bid_analysis_project_meta, update_bid_export_task, update_bid_file_parse_status, update_bid_generation_task_item, update_bid_section_content, update_knowledge_asset, upload_knowledge_asset_file, upsert_bid_section
 from backend.core.llm_json_utils import strip_llm_json
 from backend.core.bid_volumes import asset_applicable_volumes, asset_matches_volume, delivery_volume_type, normalize_volume_list, section_volume_type, volume_name
 from backend.ai.length_settings import apply_length_allocations_to_sections, allocate_chapter_length_targets, evaluate_length_feasibility, normalize_length_settings
@@ -211,21 +211,26 @@ def _strip_existing_section_number(title: str) -> str:
 
 def _numbered_export_sections(sections: list[dict]) -> list[dict]:
     raw_levels = [max(1, min(int(section.get("level") or 1), 6)) for section in sections]
-    base_level = min(raw_levels) if raw_levels else 1
     counters: list[int] = []
     numbered: list[dict] = []
-    raw_level_map: dict[int, int] = {}
+    raw_stack: list[int] = []
     for section, raw_level in zip(sections, raw_levels):
-        if raw_level in raw_level_map:
-            level = raw_level_map[raw_level]
+        # 真实大纲偶尔会出现从二级开始或从一级直接跳到三级的脏层级。
+        # 用 raw level 栈按上下文压平，避免 0.1 / 18.0.1，也避免把后续子节误升成大章。
+        if not raw_stack:
+            level = 1
+            raw_stack = [raw_level]
+        elif raw_level > raw_stack[-1]:
+            level = min(len(raw_stack) + 1, 6)
+            raw_stack.append(raw_level)
         else:
-            level = raw_level - base_level + 1 if base_level > 1 else raw_level
-            level = max(1, min(level, 6))
-            # 真实大纲偶尔会出现从一级直接跳到三级的脏层级。
-            # Word 目录不能出现 18.0.1 这类编号，导出时压平成紧邻的下一层。
-            if counters and level > len(counters) + 1:
-                level = len(counters) + 1
-            raw_level_map[raw_level] = level
+            while raw_stack and raw_level < raw_stack[-1]:
+                raw_stack.pop()
+            if raw_stack and raw_level == raw_stack[-1]:
+                level = len(raw_stack)
+            else:
+                level = 1 if not raw_stack else min(len(raw_stack) + 1, 6)
+                raw_stack.append(raw_level)
         level = max(1, min(level, 6))
         while len(counters) < level:
             counters.append(0)
@@ -298,6 +303,25 @@ def _demote_body_markdown_headings(content: str) -> str:
         output.append(raw_line)
 
     return "\n".join(output).strip()
+
+
+def _strip_untrusted_export_images(content: str) -> str:
+    """Keep formal DOCX images tied to curated knowledge assets or real local files."""
+    if not content:
+        return ""
+
+    def replace(match: re.Match) -> str:
+        alt = clean_formal_bid_text(match.group(1) or "图片")
+        ref = (match.group(2) or "").strip().strip('"').strip("'")
+        if re.match(r"^/api/(?:bidding/)?knowledge/assets/[^/]+/file(?:\?|$)", ref):
+            return match.group(0)
+        candidate = Path(ref)
+        if candidate.is_absolute() and candidate.exists() and candidate.is_file():
+            return match.group(0)
+        logging.warning("导出 DOCX 时移除未入库或不可解析图片引用: alt=%s ref=%s", alt, ref)
+        return ""
+
+    return re.sub(r"!\[(.*?)\]\((.*?)\)", replace, content).strip()
 
 
 def _asset_text(asset: dict) -> str:
@@ -594,11 +618,11 @@ def _build_section_image_markdown(
         if not image_ref:
             continue
         asset_id = str(asset.get("id") or image_ref)
+        if asset_id in used_asset_ids:
+            continue
         if not _asset_allowed_for_volume(asset, section):
             continue
         score = _score_asset_for_section(asset, section)
-        if asset_id in used_asset_ids:
-            score -= 8
         if score > 0:
             candidates.append((score, asset))
 
@@ -608,6 +632,9 @@ def _build_section_image_markdown(
         for asset in assets:
             image_ref = _asset_image_ref(asset)
             if not image_ref:
+                continue
+            asset_id = str(asset.get("id") or image_ref)
+            if asset_id in used_asset_ids:
                 continue
             if not _asset_allowed_for_volume(asset, section):
                 continue
@@ -660,6 +687,28 @@ def _asset_allowed_for_bid(asset: dict) -> bool:
     if isinstance(metadata, dict) and metadata.get("allowed_for_bid") is False:
         return False
     if isinstance(specs, dict) and specs.get("allowed_for_bid") is False:
+        return False
+    reference_only_values = [
+        metadata.get("reference_only") if isinstance(metadata, dict) else None,
+        specs.get("reference_only") if isinstance(specs, dict) else None,
+        asset.get("reference_only"),
+    ]
+    if any(value is True or str(value).lower() == "true" for value in reference_only_values if value is not None):
+        return False
+
+    enterprise_values = [
+        metadata.get("enterprise") if isinstance(metadata, dict) else None,
+        specs.get("enterprise") if isinstance(specs, dict) else None,
+        asset.get("enterprise"),
+        metadata.get("doc_owner") if isinstance(metadata, dict) else None,
+        specs.get("doc_owner") if isinstance(specs, dict) else None,
+    ]
+    enterprise_text = " ".join(str(value) for value in enterprise_values if value)
+    if "泰昌" not in enterprise_text and DOCX_BIDDER_FULL_NAME not in enterprise_text:
+        return False
+
+    source_domain = _asset_meta_value(asset, "source_domain")
+    if source_domain and source_domain != "enterprise_fact":
         return False
     return True
 
@@ -773,15 +822,18 @@ def build_project_bid_markdown(
             image_assets = []
             export_image_report["warnings"].append("加载知识库图片资产失败，已降级为无配图导出。")
 
-    document_title = f"{project_name}-{volume_name(volume_type)}" if volume_type and not focus_section else project_name
-    file_stem = _display_filename(f"{project_name}{display_suffix}", fallback=document_title)
+    base_document_title = taichang_bid_document_title(project_name)
+    document_title = f"{base_document_title}-{volume_name(volume_type)}" if volume_type and not focus_section else base_document_title
+    file_stem = _display_filename(f"{base_document_title}-{DOCX_BIDDER_FULL_NAME}{display_suffix}", fallback=document_title)
     markdown_path = output_dir / f"{file_stem}.md"
     chunks: list[str] = [f"# {document_title}\n\n"]
     used_asset_ids: set[str] = set()
     for section in _numbered_export_sections(sections):
         title = section.get("_export_title") or _section_display_title(section)
-        content = _demote_body_markdown_headings(
-            _strip_duplicate_section_heading(section.get("content") or "", section)
+        content = _strip_untrusted_export_images(
+            _demote_body_markdown_headings(
+                _strip_duplicate_section_heading(section.get("content") or "", section)
+            )
         )
         chunks.append(_section_markdown_heading(int(section.get("level") or 1), title))
         if content:

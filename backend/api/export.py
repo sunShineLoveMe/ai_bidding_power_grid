@@ -32,7 +32,8 @@ def download_bid_docx(project_id):
     try:
         request_payload = request.get_json(silent=True) or {}
         section_id = request_payload.get("sectionId")
-        with_images = bool(request_payload.get("withImages"))
+        # 泰昌 MVP 交付件默认必须图文并茂；前端未传值时不能降级成无图 DOCX。
+        with_images = bool(request_payload.get("withImages", True))
         volume_type = request_payload.get("volumeType")
         sections_snapshot = request_payload.get("sectionsSnapshot")
         if not isinstance(sections_snapshot, list):

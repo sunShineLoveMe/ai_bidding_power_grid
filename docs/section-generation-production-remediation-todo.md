@@ -2,7 +2,7 @@
 
 日期：2026-06-03
 
-最近更新：2026-06-05，基于真实山西招标文件全流程下载验收，新增 DOCX 导出交付观感与格式模板整改 P0；此前基于真实“一键生成全文”复测结果补充 `partial_failed`、草稿不可见、自动续写中断、字数统计偏差、模型过度输出长期占用 worker、长任务轮询窗口过短、数据库迁移链缺口和历史僵尸任务清理问题。
+最近更新：2026-06-06，基于泰昌 MVP 真实项目下载验收，完成 DOCX 导出泰昌主体口径、图文资产、目录编号和模板参数二次整改；此前基于真实山西招标文件全流程下载验收，新增 DOCX 导出交付观感与格式模板整改 P0。
 
 范围：一键生成全文、按章节目录批量生成正文、Celery 章节子任务、DeepSeek 流式输出、章节正文落盘、前端任务进度展示、DOCX 导出格式与交付观感。
 
@@ -26,7 +26,7 @@
 | P0 | 前端轮询改成长任务友好模式 | 不再用固定 5 分钟/900 次判失败，支持刷新恢复后台任务 | 前端，基础版已完成 |
 | P0 | 补齐 PostgreSQL 正式迁移链 | 将 `20260603` 章节任务 DDL 纳入新库初始化，避免新环境缺表/RPC | 后端 / 数据库，基础版已完成 |
 | P0 | 协调任务异常失败回写 | `run_bid_section_generation()` 异常时写入业务终态，避免永久 `queued/running` | 后端，基础版已完成 |
-| P0 | DOCX 导出交付观感与格式模板整改 | 按招标文件格式要求和投标文件惯例输出规整 Word，避免客户第一印象差和形式评审风险 | 后端 / 导出 / 产品，基础版已完成 |
+| P0 | DOCX 导出交付观感与格式模板整改 | 按招标文件格式要求和投标文件惯例输出规整 Word，避免客户第一印象差和形式评审风险 | 后端 / 导出 / 产品，泰昌 MVP 二次整改已完成 |
 | P1 | 增加任务 reconciler | 将超过 lease/心跳窗口的历史 `running/queued` 任务转为可恢复或失败态 | 后端，基础版已完成 |
 | P1 | 补最小 E2E 长任务回归 | 覆盖上传、目录生成、30+ 章节全文生成、刷新恢复与导出 | 全栈，基础版已完成 |
 | P1 | 可见字数统计口径与压缩改写 | 修正误导性统计，并对 too_long 内容提供压缩重写 | AI / 后端 / 前端 |
@@ -58,6 +58,20 @@
 - 已用山西真实导出 Markdown 副本生成 DOCX 并结构化验证：正文宋体 `12pt`、A4、左右边距 `3.18cm`、页眉长度正常。
 - 已重新生成当前山西项目下载 DOCX 并刷新页码字段。
 - 回归测试：`PYTHONPATH=. .venv/bin/pytest tests/test_docx_export.py tests/test_celery_export_tasks.py tests/test_smoke.py tests/test_api_sections.py -q`，41 passed。
+
+2026-06-06 泰昌 MVP 二次整改已完成：
+
+- 导出标题、文件名、封面、页眉统一为泰昌投标人口径，默认投标人为 `河北泰昌电力器材科技有限公司`。
+- `/download-docx` 未显式传参时默认 `withImages=true`。
+- DOCX 模板 ID 改为 `sgcc_taichang_bid`，默认页面参数按客户/国网参考文件抽取结果调整为 A4、上下 `2.0cm`、左右 `3.18cm`、正文宋体 `10.5pt`、固定行距 `20pt`。
+- 新增独立封面页和 `目  录` 目录页，目录正文宋体 `10.5pt`，点引导线和页码字段继续由 LibreOffice 刷新。
+- 修复真实大纲从二级开始时导出 `0.1` 的编号问题，改为栈式压平。
+- 修复 `list_knowledge_assets()` 未导入导致图文导出降级为无图的问题。
+- 泰昌图文导出只允许泰昌企业事实资产，排除辽宁招标要求和河北豪乾参考稿；整份自动插图上限统一为 24 张，同一资产只插入一次。
+- 导出阶段移除未入库或不可解析的 Markdown 图片引用，避免模型编造图片路径进入 Word。
+- 真实项目 `4bc3ee73-9ec5-4184-aafd-eaede9f90798` 已重新导出泰昌图文 DOCX，验证 242 个泰昌资产候选、24 个唯一资产选中、24 个全部插入、0 skipped、0 failed，LibreOffice 页码刷新成功。
+- 验证记录：`docs/development/runs/run_20260606_taichang_docx_template_p0.md`、`docs/development/runs/run_20260606_taichang_docx_template_real_export.json`。
+- 回归测试：`PYTHONPATH=. .venv/bin/pytest tests/test_docx_export.py tests/test_celery_export_tasks.py tests/test_rag_asset_scoring.py tests/test_rag_retrieval.py -q`，44 passed。
 
 #### 现象
 

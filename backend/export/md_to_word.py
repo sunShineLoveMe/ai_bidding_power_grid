@@ -18,6 +18,7 @@ import uuid
 import requests
 import ipaddress
 import socket
+from datetime import datetime
 from urllib.parse import parse_qs, urlparse, unquote
 
 try:
@@ -59,20 +60,25 @@ FORMAL_VOLUME_HEADING_RE = re.compile(
     r".{0,16}(?:文件|分册|响应|资料|清单)$"
 )
 DOCX_TOC_MAX_LEVEL = int(os.getenv("DOCX_TOC_MAX_LEVEL", "4"))
-DOCX_TEMPLATE_ID = os.getenv("DOCX_TEMPLATE_ID", "sgcc_power_grid")
+DOCX_TEMPLATE_ID = os.getenv("DOCX_TEMPLATE_ID", "sgcc_taichang_bid")
+DOCX_BIDDER_FULL_NAME = os.getenv("DOCX_BIDDER_FULL_NAME", "河北泰昌电力器材科技有限公司")
 DOCX_BODY_EAST_ASIA = os.getenv("DOCX_BODY_EAST_ASIA", "宋体")
 DOCX_BODY_LATIN = os.getenv("DOCX_BODY_LATIN", "Times New Roman")
-DOCX_BODY_FONT_SIZE = float(os.getenv("DOCX_BODY_FONT_SIZE", "12"))
-DOCX_BODY_LINE_SPACING = float(os.getenv("DOCX_BODY_LINE_SPACING", "28"))
+DOCX_BODY_FONT_SIZE = float(os.getenv("DOCX_BODY_FONT_SIZE", "10.5"))
+DOCX_BODY_LINE_SPACING = float(os.getenv("DOCX_BODY_LINE_SPACING", "20"))
 DOCX_TABLE_EAST_ASIA = os.getenv("DOCX_TABLE_EAST_ASIA", "宋体")
 DOCX_TABLE_FONT_SIZE = float(os.getenv("DOCX_TABLE_FONT_SIZE", "10.5"))
 DOCX_HEADER_MAX_CHARS = int(os.getenv("DOCX_HEADER_MAX_CHARS", "42"))
-DOCX_PAGE_MARGIN_TOP_CM = float(os.getenv("DOCX_PAGE_MARGIN_TOP_CM", "2.54"))
-DOCX_PAGE_MARGIN_BOTTOM_CM = float(os.getenv("DOCX_PAGE_MARGIN_BOTTOM_CM", "2.54"))
+DOCX_PAGE_MARGIN_TOP_CM = float(os.getenv("DOCX_PAGE_MARGIN_TOP_CM", "2.0"))
+DOCX_PAGE_MARGIN_BOTTOM_CM = float(os.getenv("DOCX_PAGE_MARGIN_BOTTOM_CM", "2.0"))
 DOCX_PAGE_MARGIN_LEFT_CM = float(os.getenv("DOCX_PAGE_MARGIN_LEFT_CM", "3.18"))
 DOCX_PAGE_MARGIN_RIGHT_CM = float(os.getenv("DOCX_PAGE_MARGIN_RIGHT_CM", "3.18"))
-DOCX_HEADER_DISTANCE_CM = float(os.getenv("DOCX_HEADER_DISTANCE_CM", "1.5"))
-DOCX_FOOTER_DISTANCE_CM = float(os.getenv("DOCX_FOOTER_DISTANCE_CM", "1.75"))
+DOCX_HEADER_DISTANCE_CM = float(os.getenv("DOCX_HEADER_DISTANCE_CM", "0.8"))
+DOCX_FOOTER_DISTANCE_CM = float(os.getenv("DOCX_FOOTER_DISTANCE_CM", "1.48"))
+DOCX_COVER_TITLE_FONT_SIZE = float(os.getenv("DOCX_COVER_TITLE_FONT_SIZE", "22"))
+DOCX_TOC_TITLE_FONT_SIZE = float(os.getenv("DOCX_TOC_TITLE_FONT_SIZE", "22"))
+DOCX_TOC_ENTRY_FONT_SIZE = float(os.getenv("DOCX_TOC_ENTRY_FONT_SIZE", "10.5"))
+DOCX_TOC_ENTRY_LINE_SPACING = float(os.getenv("DOCX_TOC_ENTRY_LINE_SPACING", "18"))
 
 
 def clean_formal_bid_text(text):
@@ -151,13 +157,28 @@ def _truncate_header_text(text: str) -> str:
     return f"{text[:DOCX_HEADER_MAX_CHARS - 1]}…"
 
 
+def taichang_bid_document_title(project_name: str) -> str:
+    """Convert a tender project name into a Taichang bidder document title."""
+    value = clean_formal_bid_text(project_name) or "投标文件"
+    value = re.sub(r"招标文件$", "", value).strip()
+    value = re.sub(r"招标文件", "", value).strip()
+    if value.endswith("投标文件"):
+        return value
+    return f"{value}投标文件"
+
+
 def docx_template_report() -> dict:
     return {
         "template_id": DOCX_TEMPLATE_ID,
+        "bidder_full_name": DOCX_BIDDER_FULL_NAME,
         "body_font": DOCX_BODY_EAST_ASIA,
         "body_latin_font": DOCX_BODY_LATIN,
         "body_font_size_pt": DOCX_BODY_FONT_SIZE,
         "body_line_spacing_pt": DOCX_BODY_LINE_SPACING,
+        "cover_title_font_size_pt": DOCX_COVER_TITLE_FONT_SIZE,
+        "toc_title_font_size_pt": DOCX_TOC_TITLE_FONT_SIZE,
+        "toc_entry_font_size_pt": DOCX_TOC_ENTRY_FONT_SIZE,
+        "toc_entry_line_spacing_pt": DOCX_TOC_ENTRY_LINE_SPACING,
         "table_font": DOCX_TABLE_EAST_ASIA,
         "table_font_size_pt": DOCX_TABLE_FONT_SIZE,
         "page_size": "A4",
@@ -173,6 +194,7 @@ def docx_template_report() -> dict:
             "footer_font": "宋体",
             "footer_font_size_pt": 9,
             "page_number_format": "第 X 页，共 Y 页",
+            "header_text": f"{DOCX_BIDDER_FULL_NAME}投标文件",
             "header_max_chars": DOCX_HEADER_MAX_CHARS,
         },
     }
@@ -293,7 +315,7 @@ def _add_pageref_field(paragraph, bookmark_name: str, *, placeholder: str = "1")
     separate._r.append(fld_separate)
 
     result = paragraph.add_run(placeholder)
-    apply_run_font(result, east_asia="宋体", size=12)
+    apply_run_font(result, east_asia="宋体", size=DOCX_TOC_ENTRY_FONT_SIZE)
 
     end = paragraph.add_run()
     fld_end = OxmlElement("w:fldChar")
@@ -312,30 +334,55 @@ def _add_formal_toc_entry(doc, entry: dict, *, tab_position_twips: int) -> None:
     fmt.first_line_indent = Pt(0)
     fmt.left_indent = Pt((level - 1) * 18)
     fmt.line_spacing_rule = WD_LINE_SPACING.EXACTLY
-    fmt.line_spacing = Pt(22)
-    fmt.space_after = Pt(2)
+    fmt.line_spacing = Pt(DOCX_TOC_ENTRY_LINE_SPACING)
+    fmt.space_after = Pt(0)
     _set_paragraph_right_dot_leader_tab(paragraph, position_twips=tab_position_twips)
 
     text_run = paragraph.add_run(_toc_entry_text(entry))
-    apply_run_font(text_run, east_asia="宋体", size=12, bold=(level == 1))
+    apply_run_font(text_run, east_asia="宋体", size=DOCX_TOC_ENTRY_FONT_SIZE, bold=(level == 1))
     paragraph.add_run("\t")
     _add_pageref_field(paragraph, str(entry.get("anchor") or ""), placeholder="1")
 
 
-def _add_toc_page(doc, project_name: str, heading_entries: list[dict]) -> None:
+def _add_cover_page(doc, project_name: str) -> None:
+    bid_title = taichang_bid_document_title(project_name)
+    spacer_count = 4
+    for _ in range(spacer_count):
+        doc.add_paragraph()
+
     title = doc.add_paragraph()
     title.alignment = WD_ALIGN_PARAGRAPH.CENTER
     title.paragraph_format.first_line_indent = Pt(0)
-    title.paragraph_format.space_after = Pt(16)
-    title_run = title.add_run(project_name)
-    apply_run_font(title_run, east_asia="黑体", size=20, bold=True)
+    title.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
+    title.paragraph_format.line_spacing = Pt(34)
+    title_run = title.add_run(bid_title)
+    apply_run_font(title_run, east_asia="黑体", size=DOCX_COVER_TITLE_FONT_SIZE, bold=True)
+
+    doc.add_paragraph()
+    bidder = doc.add_paragraph()
+    bidder.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    bidder.paragraph_format.first_line_indent = Pt(0)
+    bidder_run = bidder.add_run(f"投标人：{DOCX_BIDDER_FULL_NAME}")
+    apply_run_font(bidder_run, east_asia="宋体", size=15)
+
+    date_para = doc.add_paragraph()
+    date_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    date_para.paragraph_format.first_line_indent = Pt(0)
+    date_run = date_para.add_run(datetime.today().strftime("%Y年%m月%d日"))
+    apply_run_font(date_run, east_asia="宋体", size=15)
+    doc.add_page_break()
+
+
+def _add_toc_page(doc, project_name: str, heading_entries: list[dict]) -> None:
+    _add_cover_page(doc, project_name)
 
     toc_title = doc.add_paragraph()
     toc_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
     toc_title.paragraph_format.first_line_indent = Pt(0)
-    toc_title.paragraph_format.space_after = Pt(14)
-    toc_run = toc_title.add_run("目录")
-    apply_run_font(toc_run, east_asia="黑体", size=16, bold=True)
+    toc_title.paragraph_format.space_before = Pt(0)
+    toc_title.paragraph_format.space_after = Pt(12)
+    toc_run = toc_title.add_run("目  录")
+    apply_run_font(toc_run, east_asia="黑体", size=DOCX_TOC_TITLE_FONT_SIZE, bold=True)
 
     formal_entries = [
         entry for entry in heading_entries
@@ -663,10 +710,10 @@ def set_document_styles(doc):
     normal.paragraph_format.space_after = Pt(0)
 
     heading_specs = {
-        1: ('黑体', 18, True),
-        2: ('黑体', 16, True),
-        3: ('黑体', 15, True),
-        4: ('黑体', 12, True),
+        1: ('黑体', 16, True),
+        2: ('黑体', 14, True),
+        3: ('黑体', 12, True),
+        4: ('黑体', 10.5, True),
     }
     for i in range(1, 5):
         style = styles[f'Heading {i}']
@@ -679,8 +726,8 @@ def set_document_styles(doc):
         style.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
         style.paragraph_format.line_spacing = Pt(DOCX_BODY_LINE_SPACING)
         style.paragraph_format.first_line_indent = Pt(0)
-        style.paragraph_format.space_before = Pt(8 if i <= 2 else 4)
-        style.paragraph_format.space_after = Pt(6 if i <= 2 else 4)
+        style.paragraph_format.space_before = Pt(6 if i <= 2 else 3)
+        style.paragraph_format.space_after = Pt(3)
 
     for style_name in ['List Bullet', 'List Number']:
         style = styles[style_name]
@@ -764,7 +811,7 @@ def set_document_format(doc, project_name):
         # 添加页眉
         header = section.header
         header_para = header.paragraphs[0]
-        header_para.text = _truncate_header_text(f"{project_name}投标文件")
+        header_para.text = _truncate_header_text(f"{DOCX_BIDDER_FULL_NAME}投标文件")
         header_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
         for run in header_para.runs:
             apply_run_font(run, east_asia='宋体', size=9)
@@ -984,6 +1031,7 @@ def convert_md_to_word(md_file, return_report: bool = False):
     # 设置文档格式
     title_match = re.search(r'^\s*#\s+(.+?)\s*$', md_content, re.MULTILINE)
     project_name = clean_formal_bid_text(title_match.group(1).strip()) if title_match else Path(md_file).stem
+    project_name = taichang_bid_document_title(project_name)
     set_document_format(doc, project_name)
     title_line_index, heading_entries = _markdown_heading_lines(md_content)
     heading_entry_by_line = {entry["line_index"]: entry for entry in heading_entries}
@@ -1057,17 +1105,17 @@ def convert_md_to_word(md_file, return_report: bool = False):
             if level == 1:
                 p.alignment = WD_ALIGN_PARAGRAPH.LEFT
                 for run in p.runs:
-                    apply_run_font(run, east_asia='黑体', size=18, bold=True)
+                    apply_run_font(run, east_asia='黑体', size=16, bold=True)
             elif level == 2:
                 p.alignment = WD_ALIGN_PARAGRAPH.LEFT
                 for run in p.runs:
-                    apply_run_font(run, east_asia='黑体', size=16, bold=True)
+                    apply_run_font(run, east_asia='黑体', size=14, bold=True)
             elif level == 3:
                 for run in p.runs:
-                    apply_run_font(run, east_asia='黑体', size=15, bold=True)
+                    apply_run_font(run, east_asia='黑体', size=12, bold=True)
             else:
                 for run in p.runs:
-                    apply_run_font(run, east_asia='黑体', size=12, bold=True)
+                    apply_run_font(run, east_asia='黑体', size=10.5, bold=True)
             if i in heading_entry_by_line:
                 entry = heading_entry_by_line[i]
                 _add_bookmark(p, entry["anchor"], int(entry["bookmark_id"]))

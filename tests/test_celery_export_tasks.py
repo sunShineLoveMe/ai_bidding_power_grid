@@ -31,11 +31,17 @@ VALID_TASK_ID = "22222222-2222-4222-8222-222222222222"
 class DocxExportCeleryMigrationTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        os.environ["APP_AUTH_ENABLED"] = "false"
+        os.environ["APP_LOGIN_ENABLED"] = "false"
         import main
 
         cls.app = main.app
         cls.app.config.update(TESTING=True)
         cls.client = cls.app.test_client()
+
+    def setUp(self):
+        os.environ["APP_AUTH_ENABLED"] = "false"
+        os.environ["APP_LOGIN_ENABLED"] = "false"
 
     def test_celery_app_runs_in_eager_mode_for_tests(self):
         from backend.tasks.celery_app import celery_app
@@ -63,6 +69,23 @@ class DocxExportCeleryMigrationTest(unittest.TestCase):
         create_mock.assert_called_once()
         # 改为投递 Celery 任务，而不是起线程
         delay_mock.assert_called_once()
+
+    def test_download_docx_defaults_to_with_images_for_taichang_mvp(self):
+        created_task = {"id": VALID_TASK_ID, "status": "queued", "progress": 0}
+
+        with (
+            patch("backend.api.export.create_bid_export_task", return_value=created_task) as create_mock,
+            patch("backend.tasks.export_tasks.run_bid_docx_export.delay") as delay_mock,
+        ):
+            response = self.client.post(
+                f"/api/bidding/interpretations/{VALID_PROJECT_ID}/download-docx",
+                json={},
+            )
+
+        self.assertEqual(response.status_code, 201)
+        self.assertTrue(response.get_json()["withImages"])
+        self.assertTrue(create_mock.call_args.kwargs["with_images"])
+        self.assertTrue(delay_mock.call_args.args[3])
 
     def test_download_docx_rejects_invalid_project_id(self):
         response = self.client.post(

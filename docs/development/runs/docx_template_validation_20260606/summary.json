@@ -1,0 +1,58 @@
+{
+  "docx_path": "docs/development/runs/docx_template_validation_20260606/taichang_template_validation.docx",
+  "template": {
+    "template_id": "sgcc_taichang_bid",
+    "bidder_full_name": "河北泰昌电力器材科技有限公司",
+    "body_font": "宋体",
+    "body_latin_font": "Times New Roman",
+    "body_font_size_pt": 10.5,
+    "body_line_spacing_pt": 20.0,
+    "cover_title_font_size_pt": 22.0,
+    "toc_title_font_size_pt": 22.0,
+    "toc_entry_font_size_pt": 10.5,
+    "toc_entry_line_spacing_pt": 18.0,
+    "table_font": "宋体",
+    "table_font_size_pt": 10.5,
+    "page_size": "A4",
+    "margins_cm": {
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 3.18,
+      "right": 3.18
+    },
+    "header_footer": {
+      "header_font": "宋体",
+      "header_font_size_pt": 9,
+      "footer_font": "宋体",
+      "footer_font_size_pt": 9,
+      "page_number_format": "第 X 页，共 Y 页",
+      "header_text": "河北泰昌电力器材科技有限公司投标文件",
+      "header_max_chars": 42
+    }
+  },
+  "first_non_empty_paragraphs": [
+    "国网辽宁电力2025年第三次物资协议库存招标采购投标文件",
+    "投标人：河北泰昌电力器材科技有限公司",
+    "2026年06月06日",
+    "目  录",
+    "0.1 投标函及投标函附录\t1",
+    "0.1.1 投标函及投标函附录 - 编制依据\t1",
+    "0.1.2 投标函及投标函附录 - 工程概况\t1",
+    "0.1.3 投标函及投标函附录 - 总体部署\t1"
+  ],
+  "page_cm": [
+    21.0,
+    29.7
+  ],
+  "margins_cm": [
+    2.0,
+    2.0,
+    3.18,
+    3.18
+  ],
+  "header": "河北泰昌电力器材科技有限公司投标文件",
+  "normal_font": "宋体",
+  "normal_size_pt": 10.5,
+  "sample_body": "投标人：河北泰昌电力器材科技有限公司",
+  "sample_body_size_pt": 15.0
+}
