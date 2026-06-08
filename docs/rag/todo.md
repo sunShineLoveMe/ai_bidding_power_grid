@@ -1,6 +1,6 @@
 # 国家电网 RAG 基座数据工程待办清单
 
-> 状态日期：2026-06-07
+> 状态日期：2026-06-08
 > 适用范围：电网/国家电网招投标 RAG 基座数据、客户标书模板、行业资料、召回评测与上线门禁。
 
 本文档用于跟踪 RAG 基座数据工程的优先级、完成度和验收口径。全局产品路线仍看 `docs/development/roadmap.md`；本清单只记录 RAG 数据工程相关任务。
@@ -68,7 +68,7 @@
 | 优先级 | 状态 | 任务 | 交付物 | 验收口径 |
 | --- | --- | --- | --- | --- |
 | P1A-1 | [x] | 解压并 inventory 辽宁/泰昌新增资料 | `docs/rag/liaoning-taichang-mvp-corpus-review.md`、`parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_inventory.json` | 已保留原始包，辽宁 185 个文件、泰昌 45 个文件已登记 |
-| P1A-2 | [x] | 判断资料完整性和可用边界 | `docs/rag/liaoning-taichang-mvp-corpus-review.md`、`docs/development/runs/run_20260606_taichang_mvp_real_flow_30_sections.md` | 已确认泰昌为 MVP 企业事实主线、辽宁仅作招标样本、河北豪乾仅作参考稿；真实链路完成 30 章节生成与 DOCX 导出。剩余业务风险：CPVC/MPP 各规格检验报告覆盖仍需客户确认 |
+| P1A-2 | [x] | 判断资料完整性和可用边界 | `docs/rag/liaoning-taichang-mvp-corpus-review.md`、`docs/development/runs/run_20260606_taichang_mvp_real_flow_30_sections.md` | 已确认泰昌为 MVP 企业事实主线、辽宁仅作招标样本、河北豪乾仅作参考稿；真实链路完成 30 章节生成与 DOCX 导出。若具体省公司投标需引用检验报告覆盖某规格，必须按目标省公司/批次/规格单独人工确认 |
 | P1A-3 | [x] | 辽宁货物清单结构化解析兼容 | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/goods_tables/` | 已兼容 `dimension ref=A1` 异常并输出 87 条去重需求行 |
 | P1A-4 | [x] | 泰昌扫描 PDF OCR 与正式图片资产 metadata | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/ocr_coverage_report.json`、`asset_index.json`、`parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/rebuild_formal_image_assets_report.md` | 泰昌 42 份 PDF 已全部 MinerU/OCR 完成；原 242 个 MinerU 局部图片资产已删除，改用客户已提供 PDF/JPG 生成 300 个正式整页/原图图片资产；标题、分类、标签均为中文展示 |
 | P1A-5 | [x] | 河北豪乾参考稿隔离入库 | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/reference_templates/` | 已抽取 2 份河北豪乾参考稿基础模板数据，均标记 `reference_only=true`，不得作为泰昌企业事实来源 |
@@ -101,6 +101,8 @@
 | P4-2 | [x] | 技术参数表抽取 | `scripts/rag/extract_customer_technical_parameters.py`、`technical_parameter_rows.json/csv`、`technical_parameter_summary.md`、`docs/rag/runs/run_20260607_p4_technical_parameters_summary.md` | 辽宁/泰昌 39 份 CPVC/MPP 技术规范已抽取 928 行参数，覆盖尺寸参数、性能指标、投标响应参数表；保留项目需求值、投标响应值、投标保证值、偏差、备注等字段 |
 | P4-3 | [x] | 货物清单解析 | `scripts/rag/ingest_customer_goods_tables.py`、`scripts/rag/query_customer_goods_tables.py` | 江西 7 行、山西 98 行已可按包号、物料名称、单位、数量、技术规范编码、物料编码过滤 |
 | P4-4 | [x] | 技术偏差/商务偏差辅助 | `scripts/rag/generate_technical_deviation_report.py`、`technical_deviation_rows.json/csv`、`technical_deviation_summary.md`、`docs/rag/runs/run_20260607_p4_deviation_summary.md` | 已基于 928 行技术参数生成偏差辅助判断，支持 `pending_response/no_deviation/positive_deviation/negative_deviation/manual_review/informational`；本批 900 行因投标响应/保证值为空被标为待响应，避免误写无偏差 |
+| P4-5 | [x] | 泰昌产品/检验报告参数抽取 | `scripts/rag/extract_taichang_product_parameters.py`、`taichang_product_parameter_rows.json/csv`、`taichang_product_parameter_summary.md`、`docs/rag/runs/run_20260608_taichang_product_params_summary.md` | 已抽取 2 份泰昌检验报告、36 行企业事实参数；辽宁参数仅作 QA/异常校验参照，不自动形成泰昌覆盖辽宁全部规格的结论 |
+| P4-6 | [x] | 泰昌产品参数真实查询接入 | `backend/rag/product_parameters.py`、`backend/api/knowledge.py`、`tests/test_taichang_product_parameter_query.py`、`docs/rag/runs/run_20260608_taichang_product_params_json_query_summary.md` | 已把 `taichang_product_parameter_rows.json` 作为 staging 查询层接入真实 API / 页面同源 stream 问答；MPP 环刚度、CPVC 平均内径/壁厚可返回具体值；辽宁边界仍正确 |
 
 ## 每批客户资料入库检查清单
 
@@ -116,10 +118,10 @@
 
 ## 当前最近任务
 
-1. 接入泰昌产品参数/检验报告保证值，把 `technical_deviation_rows.json` 中的 `pending_response` 转为可判断的无偏差/正偏差/负偏差。
-2. 评估是否新增 `power_grid_technical_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表，让页面和问答可直接按包号、规格、参数名精确查询。
-3. 进入 P3-4：Rerank 对比实验，对比无 rerank、DashScope rerank、本地 rerank 的 Recall/MRR。
-4. 向客户确认泰昌 CPVC/MPP 各规格检验报告覆盖关系，尤其是“内径250”报告能否覆盖辽宁 φ50/100/150/175/200 需求。
+1. 评估客户后续新增产品/检验报告资料时的自动重抽取流程：新资料进入后自动更新 `taichang_product_parameter_rows.json`，并复跑真实 API/stream 参数问答。
+2. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表，让页面和问答可直接按企业、产品、规格、参数名精确查询。
+3. 仅在明确目标省公司/批次/规格和客户确认口径后，再把泰昌产品参数用于具体投标偏差判断；不得默认以辽宁样本推出泰昌覆盖义务。
+4. 进入 P3-4：Rerank 对比实验，对比无 rerank、DashScope rerank、本地 rerank 的 Recall/MRR。
 5. 向客户补充产品实物高清照片、生产线/检测设备原始照片、同类业绩合同/中标通知书/验收证明、项目级盖章扫描件和官方 Logo。
 6. 扩展泰昌 MVP 专项评测集到 40-60 条，并加入更多包号、技术规范编码、合同条款、图片问答和参考稿隔离负样本。
 7. 追加导出观感人工验收：打开 30 章节真实 DOCX，检查封面、目录、正文、表格、页眉页脚、页码和正式图片资产插入效果。

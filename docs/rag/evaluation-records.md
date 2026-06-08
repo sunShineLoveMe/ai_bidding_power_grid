@@ -710,3 +710,140 @@ PDF 标准入库前必须增加源文件审计门禁。当前错源 GB/DL 标准
 
 - 初版偏差判断尚未接入泰昌检验报告或产品规格作为保证值来源。
 - 本轮未新增结构化数据库表，产物仍以 JSON/CSV/Markdown 为主。
+
+---
+
+## Run 15 — 泰昌产品/检验报告参数抽取（2026-06-08）
+
+> Run summary：`docs/rag/runs/run_20260608_taichang_product_params_summary.md`  
+> Base filtered：`docs/rag/runs/run_20260608_taichang_product_params_base_filtered.json`  
+> Customer filtered：`docs/rag/runs/run_20260608_taichang_product_params_customer_filtered.json`
+
+### 背景
+
+用户明确业务边界：辽宁需求只代表辽宁省公司本批招标要求，不代表全国电网或其他省公司要求。本轮不把泰昌检验报告自动映射为“覆盖辽宁全部规格”，只抽取泰昌原始产品/检验报告参数；辽宁参数最多作为抽取 QA/异常校验参照。
+
+### 处理内容
+
+- 更新 `AGENTS.md`，固化辽宁资料仅作样本/QA 参照、不作泰昌覆盖义务的规则。
+- 新增 `scripts/rag/extract_taichang_product_parameters.py`。
+- 从泰昌 CPVC/MPP 内径 250 检验报告 MinerU `full.md` 中抽取企业事实参数。
+- 输出：
+  - `taichang_product_parameter_rows.json`
+  - `taichang_product_parameter_rows.csv`
+  - `taichang_product_parameter_summary.md`
+  - `extract_taichang_product_parameters_report.json`
+
+### 抽取结果
+
+| 指标 | 数量 |
+| --- | ---: |
+| 泰昌检验报告 | 2 |
+| 成功抽取文档 | 2 |
+| 企业事实参数行 | 36 |
+| CPVC 电缆保护管参数行 | 19 |
+| MPP 电缆保护管参数行 | 17 |
+
+| 产品 | 报告编号 | 规格型号 | 参数行 |
+| --- | --- | --- | ---: |
+| CPVC电缆保护管 | `2024100312005501713` | `DS 250×15×6000 SN16 PVC-C` | 19 |
+| MPP电缆保护管 | `2024100312005501712` | `DF 250×22×9000 SN40 MPP` | 17 |
+
+### 回归验证
+
+- `.venv/bin/python -m pytest tests/test_taichang_product_parameter_extraction.py tests/test_technical_parameter_extraction.py tests/test_technical_deviation_report.py -q`
+- 结果：9 passed。
+
+| 测试集 | Recall@5 | top1 来源准确率 | 关键词命中率 | 跨 doc_role 串扰 | 禁用关键词命中率 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Base filtered | 96.7% | 100.0% | 96.7% | 0.0% | - |
+| 泰昌 MVP 专项 filtered | 100.0% | 100.0% | 100.0% | 0.0% | 0.0% |
+
+### 剩余风险
+
+- 本轮不自动将泰昌报告参数写入辽宁 `technical_deviation_rows.json` 作为响应/保证值，避免形成错误覆盖结论。
+- 后续若具体省公司投标需要做偏差判断，应在明确目标省公司、规格、报告适用范围和客户业务确认后再生成正式偏差结论。
+
+---
+
+## Run 16 — 泰昌产品参数真实 API / 页面同源链路专项测试（2026-06-08）
+
+> Run summary：`docs/rag/runs/run_20260608_taichang_product_params_real_chain_summary.md`  
+> API 结果：`docs/rag/runs/run_20260608_taichang_product_params_real_api.json`  
+> Stream 结果：`docs/rag/runs/run_20260608_taichang_product_params_real_stream.json`
+
+### 背景
+
+用户已启动后端和前端服务，要求不使用 mock，直接进行真实 API / 页面问答链路专项测试。
+
+### 测试内容
+
+- `GET /api/health`：通过。
+- `GET http://127.0.0.1:5173/api/health`：通过，确认前端 Vite 代理可达后端。
+- `POST /api/users/register`：通过，获取真实 session token。
+- `POST /api/knowledge/search`：完成真实非流式问答。
+- `POST http://127.0.0.1:5173/api/knowledge/search/stream`：完成页面同源流式问答。
+
+### 测试结论
+
+| 测试问题 | 结果 |
+| --- | --- |
+| 泰昌 MPP 内径250 环刚度 | 未达标。真实链路未返回 `66.40`，而是提示文本未提取出具体数值 |
+| 泰昌 CPVC 内径250 平均内径/壁厚 | 未达标。真实链路未返回 `250.2~250.4` / `15.2~15.3` |
+| 两份内径250报告是否覆盖辽宁全部规格 | 通过。回答明确不能直接说明覆盖辽宁所有规格 |
+
+### 根因判断
+
+真实问答链路当前没有接入 P4-5 产出的 `taichang_product_parameter_rows.json`。接口主要召回报告基础信息和图片资产，`sources=0`，因此无法稳定回答结构化参数值。
+
+### 后续处理
+
+P4-6 下一步应先接入 staging JSON 查询层，而不是立即新增数据库表：
+
+- 命中泰昌 + CPVC/MPP + 规格/参数名的问题时，优先查结构化参数行；
+- 将报告编号、规格型号、参数名、标准要求、检验结果作为高优先级 context；
+- 继续保持辽宁仅作 QA/异常校验参照，不输出覆盖义务。
+
+---
+
+## Run 17 — 泰昌产品参数 JSON 查询接入真实问答链路（2026-06-08）
+
+> Run summary：`docs/rag/runs/run_20260608_taichang_product_params_json_query_summary.md`  
+> Base filtered：`docs/rag/runs/run_20260608_taichang_product_params_json_query_base_filtered.json`  
+> Customer filtered：`docs/rag/runs/run_20260608_taichang_product_params_json_query_customer_filtered.json`  
+> 非流式 API 结果：`docs/rag/runs/run_20260608_taichang_product_params_real_api_after_json.json`  
+> 页面同源 Stream 结果：`docs/rag/runs/run_20260608_taichang_product_params_real_stream_after_json.json`
+
+### 背景
+
+Run 16 已证明真实链路缺少结构化参数查询。本轮不新增数据库表，先把 P4-5 产出的 `taichang_product_parameter_rows.json` 接入知识库问答链路。
+
+### 处理内容
+
+- 新增 `backend/rag/product_parameters.py`，基于真实 JSON 查询泰昌产品参数。
+- 更新 `backend/api/knowledge.py`，在 `/api/knowledge/search` 和 `/api/knowledge/search/stream` 中把结构化参数作为高优先级 context 注入。
+- 新增 `tests/test_taichang_product_parameter_query.py`，覆盖 MPP 环刚度、CPVC 平均内径/壁厚和辽宁边界。
+
+### 真实链路验证
+
+| 问题 | 结果 |
+| --- | --- |
+| 泰昌 MPP 内径250 环刚度 | 已返回 `66.40 kN/m2`，报告编号 `2024100312005501712` |
+| 泰昌 CPVC 内径250 平均内径/壁厚 | 已返回 `250.2~250.4` / `15.2~15.3`，报告编号 `2024100312005501713` |
+| 两份内径250报告是否覆盖辽宁全部规格 | 已明确回答不能覆盖辽宁全部规格 |
+
+### 回归验证
+
+- 相关单测：22 passed，1 个 PyPDF2 deprecation warning。
+- 二次复验：14 passed，1 个 PyPDF2 deprecation warning。
+- `py_compile`：通过。
+
+| 测试集 | Recall@5 | top1 来源准确率 | 关键词命中率 | 跨 doc_role 串扰 | 禁用关键词命中率 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Base filtered | 96.7% | 100.0% | 96.7% | 0.0% | - |
+| 泰昌 MVP 专项 filtered | 100.0% | 100.0% | 100.0% | 0.0% | 0.0% |
+
+### 剩余风险
+
+- 当前仍是 staging JSON 查询层，不是数据库表；多批次、多版本、多规格持续增长后，需要评估结构化表。
+- 当前仅接入泰昌产品检验报告参数，不自动把这些值用于具体省公司偏差判断；偏差判断仍需目标省公司/批次/规格和客户确认口径。

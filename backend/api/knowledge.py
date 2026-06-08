@@ -46,6 +46,7 @@ from backend.rag.retrieval import (
     search_knowledge_base,
     stream_knowledge_answer,
 )
+from backend.rag.product_parameters import search_taichang_product_parameter_contexts
 
 
 CUSTOMER_SEED_CORPUS = "power_grid_customer_corpus"
@@ -400,7 +401,9 @@ def search_knowledge():
             project_id=data.get("project_id") or None,
             return_parent=False,
         )
+        parameter_contexts = search_taichang_product_parameter_contexts(query, limit=5)
         contexts = _curate_pilot_enterprise_contexts(contexts, limit=5)
+        contexts = (parameter_contexts + contexts)[:5]
         asset_metadata_filter = _asset_metadata_filter_from_query(
             query,
             metadata_filter,
@@ -461,7 +464,9 @@ def stream_search_knowledge():
                 project_id=data.get("project_id") or None,
                 return_parent=False,
             )
+            parameter_contexts = search_taichang_product_parameter_contexts(query, limit=5)
             contexts = _curate_pilot_enterprise_contexts(contexts, limit=5)
+            contexts = (parameter_contexts + contexts)[:5]
             asset_metadata_filter = _asset_metadata_filter_from_query(
                 query,
                 metadata_filter,
