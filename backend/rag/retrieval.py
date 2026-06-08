@@ -344,6 +344,8 @@ def search_knowledge_base(
     metadata_filter: dict[str, Any] | None = None,
     project_id: str | None = None,
     return_parent: bool | None = None,
+    rerank_enabled: bool | None = None,
+    rerank_model: str | None = None,
 ) -> List[Dict[str, Any]]:
     """
     通过 pgvector RPC 检索知识库内容。
@@ -401,7 +403,15 @@ def search_knowledge_base(
         return_parent = scenario == "writing"
     if return_parent:
         rows = _attach_parent_context(client, rows)
-    reranked = rerank_documents(rewritten_query, rows, text_key="content", top_n=max(match_count * 2, match_count))
+    reranked = rerank_documents(
+        rewritten_query,
+        rows,
+        text_key="content",
+        top_n=max(match_count * 2, match_count),
+        enabled=rerank_enabled,
+        model=rerank_model,
+        usage_context={"stage": "rag_text_recall", "project_id": project_id},
+    )
     return _rank_rows(query, reranked, match_count)
 
 

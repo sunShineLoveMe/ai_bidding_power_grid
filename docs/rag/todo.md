@@ -88,9 +88,9 @@
 | P3-2 | [x] | 关键词补召回 | `backend/rag/retrieval.py`、`scripts/rag/eval_recall.py`、`docs/rag/runs/run_20260607_p3_query_keyword_*` | 向量召回不足或高精度关键词未命中时补查 `document_chunks`；已改为分页扫描并补充质量安全环保领域词；Base Recall@5 86.7% -> 96.7%，泰昌专项保持 100%，跨域串扰 0% |
 | P3-3 | [x] | authority 排序 | `backend/rag/retrieval.py`、`tests/test_rag_retrieval.py` | 法规/标准、招标要求、企业事实加权；`reference_style_only` 降权，单测覆盖参考模板不得压过正式依据 |
 | P3-7 | [x] | 国网规则网页噪声重洗 | `scripts/rag/repair_sgcc_rule_seed_docs.py`、`docs/rag/runs/run_20260607_sgcc_rule_clean_summary.md` | 三份异常国网规则资料已由门户首页噪声改为明确标注的检索种子摘要，`02_policy_regulations` 与 `04_standard_phrases` 已重入库；Base Recall@5 96.7%，泰昌专项 100% |
-| P3-4 | [ ] | Rerank 对比实验 | 评测记录新 run | 对比无 rerank、DashScope rerank、本地 rerank 的 Recall/MRR |
-| P3-5 | [ ] | 评测集扩到 40-60 条 | 扩展 JSONL | qa/writing/compliance/table 四类均有样本 |
-| P3-6 | [ ] | 增量回归门禁 | CI/脚本说明 | 新批次入库后必须跑评测，指标退化需记录原因 |
+| P3-4 | [x] | Rerank 对比实验 | `backend/ai/rerank_client.py`、`backend/rag/retrieval.py`、`scripts/rag/eval_recall.py`、`docs/rag/runs/run_20260608_p3_rerank_summary.md` | 已完成无 rerank vs 在线 `qwen3-rerank` 对照；Base Recall@5/MRR 均为 96.7%/0.944，泰昌专项均为 100%/0.971；在线 rerank 无退化但平均耗时增加，先保持可控开关，不扩大默认候选 |
+| P3-5 | [x] | 评测集扩到 40-60 条 | `tests/rag/customer_liaoning_taichang_testset.jsonl`、`docs/rag/runs/run_20260608_p3_hard_eval_summary.md` | Base 30 + 泰昌专项 30，合计 60 条；新增 13 条困难样本，覆盖相似报告、企业事实/招标要求/参考模板隔离、图片资产目录、合同/货物清单混淆和内部资料边界；在线 `qwen3-rerank` 将泰昌专项 Recall@5 从 96.7% 提升到 100%，MRR 从 0.950 提升到 0.983 |
+| P3-6 | [x] | 增量回归门禁 | `scripts/rag/run_incremental_regression_gate.py`、`tests/test_incremental_regression_gate.py`、`docs/rag/runs/run_20260608_p3_incremental_gate_summary.md` | 已固化一键门禁脚本，自动跑 Base/泰昌专项的 `rerank off` 与 `qwen3-rerank` 四组真实召回评测；本轮 Gate PASS，Base qwen3 Recall@5 96.7%、泰昌专项 qwen3 Recall@5 100%、跨 doc_role 串扰 0%、禁用关键词命中 0% |
 
 ## P4：表格与结构化知识
 
@@ -122,7 +122,5 @@
 1. 评估客户后续新增产品/检验报告资料时的自动重抽取流程：新资料进入后自动更新 `taichang_product_parameter_rows.json`，并复跑真实 API/stream 参数问答。
 2. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表，让页面和问答可直接按企业、产品、规格、参数名精确查询。
 3. 仅在明确目标省公司/批次/规格和客户确认口径后，再把泰昌产品参数用于具体投标偏差判断；不得默认以辽宁样本推出泰昌覆盖义务。
-4. 进入 P3-4：Rerank 对比实验，对比无 rerank、DashScope rerank、本地 rerank 的 Recall/MRR。
-5. 向客户补充产品实物高清照片、生产线/检测设备原始照片、同类业绩合同/中标通知书/验收证明、项目级盖章扫描件和官方 Logo。
-6. 扩展泰昌 MVP 专项评测集到 40-60 条，并加入更多包号、技术规范编码、合同条款、图片问答和参考稿隔离负样本。
-7. 追加导出观感人工验收：打开 30 章节真实 DOCX，检查封面、目录、正文、表格、页眉页脚、页码和正式图片资产插入效果。
+4. 向客户补充产品实物高清照片、生产线/检测设备原始照片、同类业绩合同/中标通知书/验收证明、项目级盖章扫描件和官方 Logo。
+5. 追加导出观感人工验收：打开 30 章节真实 DOCX，检查封面、目录、正文、表格、页眉页脚、页码和正式图片资产插入效果。

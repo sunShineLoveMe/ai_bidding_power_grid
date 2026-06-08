@@ -160,8 +160,12 @@ sgcc_taichang_bid
 涉及 RAG 入库、metadata、召回策略或客户资料边界调整时：
 
 - 必须跑 Base + 客户专项召回评测；
+- 新增客户资料、调整召回/rerank/metadata/参考来源展示后，必须执行增量回归门禁：Base 30 条 + 泰昌专项 30 条困难样本，必要时同时跑 `--rerank off` 与 `--rerank on --rerank-model qwen3-rerank` 对照；
+- 当前标准命令优先使用：`set -a; source .env; set +a; .venv/bin/python scripts/rag/run_incremental_regression_gate.py --run-id <run>`；该脚本会生成 `<run>_base_off.json`、`<run>_base_qwen3.json`、`<run>_customer_off.json`、`<run>_customer_qwen3.json` 和 `<run>_summary.md`；
+- 验收口径至少记录 `Recall@5`、Top1 来源准确率、MRR、禁用关键词命中率、跨 doc_role 串扰、平均耗时和 `rerank_scored_cases`；若任一指标退化，必须在 run summary 写明原因和处理结论，不得只覆盖 JSON 结果；
+- 企业知识库问答、参考来源去重/中文化、泰昌/辽宁/河北豪乾边界相关改动，还必须至少抽样 1-2 条 `/api/knowledge/search/stream` 页面同源真实链路，不使用 mock；
 - 必须检查跨资料域串用，尤其是泰昌/辽宁/河北豪乾边界；
-- 必须更新 `docs/rag/evaluation-records.md`、`docs/rag/todo.md` 或对应 run 文档。
+- 必须更新 `docs/rag/evaluation-records.md`、`docs/rag/todo.md` 和对应 `docs/rag/runs/` run summary。
 
 涉及 DOCX 导出、标书格式、图片资产或正式文件观感时，至少验证：
 

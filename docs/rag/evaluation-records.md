@@ -896,3 +896,145 @@ Run 16 已证明真实链路缺少结构化参数查询。本轮不新增数据�
 
 - 本轮已重命名用户可见的资产目录 staging Markdown；MinerU 中间目录、UUID 解析文件和原始资料路径仍保留不动，避免破坏资产/原文定位。
 - 后续如果新增解析脚本直接生成英文 staging Markdown，必须在入库前改为中文文件名或补中文 `source_display_name`，否则不得进入正式展示链路。
+
+---
+
+## Run 19 — P3-4 在线 Rerank 对比实验（2026-06-08）
+
+> Run summary：`docs/rag/runs/run_20260608_p3_rerank_summary.md`  
+> Base off：`docs/rag/runs/run_20260608_p3_rerank_base_off.json`  
+> Base qwen3：`docs/rag/runs/run_20260608_p3_rerank_base_qwen3.json`  
+> Customer off：`docs/rag/runs/run_20260608_p3_rerank_customer_off.json`  
+> Customer qwen3：`docs/rag/runs/run_20260608_p3_rerank_customer_qwen3.json`
+
+### 背景
+
+用户确认在线 rerank 可使用，要求启动 P3-4，并做好测试回归和任务状态同步。本轮对比关闭 rerank 与在线 `qwen3-rerank` 的召回排序效果。
+
+### 处理内容
+
+- `rerank_documents` 支持显式 `enabled/model` 覆盖，实验不受运行时配置文件干扰。
+- `search_knowledge_base` 支持 `rerank_enabled/rerank_model` 参数。
+- `eval_recall.py` 新增 `--rerank default|off|on`、`--rerank-model`、MRR、平均耗时、`rerank_scored_cases`。
+- 补充 rerank 单测，覆盖强制关闭和显式模型覆盖。
+
+### 结果
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 平均耗时 | Rerank 打分用例 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 396 ms | 0/30 |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 781 ms | 28/30 |
+| 泰昌 MVP 专项 | off | 100.0% | 100.0% | 0.971 | 689 ms | 0/17 |
+| 泰昌 MVP 专项 | qwen3-rerank | 100.0% | 100.0% | 0.971 | 1000 ms | 17/17 |
+
+### 结论
+
+- 在线 `qwen3-rerank` 已验证可用，无召回、排序和跨域隔离退化。
+- 当前测试集上未观察到指标提升，主要增加了 300-400 ms 级平均耗时。
+- 暂保持可控开关，不扩大默认候选池；下一步 P3-5 应补充更难的相似资料/错误引用负样本，再判断是否默认开启更强 rerank 策略。
+
+### 回归验证
+
+- `.venv/bin/python -m pytest tests/test_rerank_client.py tests/test_rag_retrieval.py tests/test_rag_display_names.py tests/test_taichang_product_parameter_query.py -q`
+- 结果：21 passed，1 个 PyPDF2 deprecation warning。
+- `py_compile`：通过。
+
+---
+
+## Run 20 — P3-5 困难样本评测集扩展与真实链路回归（2026-06-08）
+
+> Run summary：`docs/rag/runs/run_20260608_p3_hard_eval_summary.md`  
+> Base off：`docs/rag/runs/run_20260608_p3_hard_base_off.json`  
+> Base qwen3：`docs/rag/runs/run_20260608_p3_hard_base_qwen3.json`  
+> Customer off：`docs/rag/runs/run_20260608_p3_hard_customer_off.json`  
+> Customer qwen3：`docs/rag/runs/run_20260608_p3_hard_customer_qwen3.json`  
+> 页面同源 Stream 抽样：`docs/rag/runs/run_20260608_p3_hard_real_stream.json`
+
+### 背景
+
+用户强调 P3-5 必须完全按真实链路进行评估和测试。本轮扩展泰昌专项评测集，从常规样本升级为包含相似资料、误引用负样本和 rerank 排序困难样本的 30 条专项集。
+
+### 处理内容
+
+- `tests/rag/customer_liaoning_taichang_testset.jsonl` 从 17 条扩展到 30 条。
+- 新增 13 条困难样本，覆盖泰昌/辽宁/河北豪乾资料域边界、CPVC/MPP 相似检验报告、生产/检测/绿色低碳相似资产、合同/货物清单混淆和内部资料访问边界。
+- 复跑 Base 30 + 泰昌专项 30，合计 60 条真实召回评测。
+- 使用页面同源 `/api/knowledge/search/stream` 抽样验证困难 query 的真实问答链路。
+
+### 结果
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 平均耗时 | Rerank 打分用例 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base 30 | off | 96.7% | 100.0% | 0.944 | 0.0% | 375 ms | 0/30 |
+| Base 30 | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 741 ms | 28/30 |
+| 泰昌专项 30 | off | 96.7% | 100.0% | 0.950 | 3.3% | 451 ms | 0/30 |
+| 泰昌专项 30 | qwen3-rerank | 100.0% | 100.0% | 0.983 | 0.0% | 756 ms | 30/30 |
+
+### 真实页面链路
+
+- CPVC 检验报告与 MPP 参数混淆问题：stream 完成，5 条上下文，无错误可见来源。
+- 泰昌生产制造能力与河北豪乾/辽宁招标混淆问题：stream 完成，5 条上下文，无错误可见来源。
+
+### 结论
+
+- 困难样本扩展后，在线 `qwen3-rerank` 对泰昌专项有明确收益：Recall@5、MRR 和禁用关键词命中率均改善。
+- Base 无退化，跨 doc_role 串扰仍为 0。
+- 下一步 P3-6 应把 Base + 泰昌专项 + 困难样本评测固化为增量回归门禁，并记录每次新增客户资料后的退化原因。
+
+### 回归验证
+
+- `.venv/bin/python -m pytest tests/test_rerank_client.py tests/test_rag_retrieval.py tests/test_rag_display_names.py tests/test_taichang_product_parameter_query.py -q`
+- 结果：21 passed，1 个 PyPDF2 deprecation warning。
+- `py_compile`：通过。
+
+---
+
+## Run 21 — P3-6 增量回归门禁固化（2026-06-08）
+
+> Gate summary：`docs/rag/runs/run_20260608_p3_incremental_gate_summary.md`  
+> Base off：`docs/rag/runs/run_20260608_p3_incremental_gate_base_off.json`  
+> Base qwen3：`docs/rag/runs/run_20260608_p3_incremental_gate_base_qwen3.json`  
+> Customer off：`docs/rag/runs/run_20260608_p3_incremental_gate_customer_off.json`  
+> Customer qwen3：`docs/rag/runs/run_20260608_p3_incremental_gate_customer_qwen3.json`
+
+### 背景
+
+用户要求把 P3-5 形成的 Base + 泰昌专项 + 困难样本真实链路评测固化为后续新增资料后的必跑门禁。本轮新增一键脚本，避免后续手工漏跑或漏记指标。
+
+### 处理内容
+
+- 新增 `scripts/rag/run_incremental_regression_gate.py`，自动执行四组真实召回评测：
+  - Base / rerank off；
+  - Base / `qwen3-rerank`；
+  - 泰昌专项 / rerank off；
+  - 泰昌专项 / `qwen3-rerank`。
+- 脚本自动生成四个 JSON 结果和一份 gate summary。
+- 脚本内置门禁阈值：Base qwen3 Recall@5 不低于 96.67%、Top1 100%、跨 doc_role 串扰 0；泰昌专项 qwen3 Recall@5 100%、Top1 100%、禁用关键词命中 0、跨 doc_role 串扰 0，并要求记录 rerank_score。
+- 新增 `tests/test_incremental_regression_gate.py`，覆盖门禁通过和 rerank 未实际运行时失败的判断。
+- 更新 `AGENTS.md`，把标准命令收敛为 `run_incremental_regression_gate.py --run-id <run>`。
+
+### 真实门禁结果
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 | Rerank 打分用例 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 254 ms | 0 |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 619 ms | 28 |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.950 | 3.3% | 0.0% | 333 ms | 0 |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 0.983 | 0.0% | 0.0% | 689 ms | 30 |
+
+### 结论
+
+- Gate PASS。
+- 后续新增客户资料、调整 metadata、召回、rerank 或参考来源展示时，优先运行：
+
+```bash
+set -a; source .env; set +a; .venv/bin/python scripts/rag/run_incremental_regression_gate.py --run-id <run>
+```
+
+- 若门禁失败，必须保留失败 JSON 和 summary，并在 evaluation records 中说明退化原因和修复策略。
+
+### 回归验证
+
+- `.venv/bin/python -m pytest tests/test_incremental_regression_gate.py tests/test_rerank_client.py tests/test_rag_retrieval.py -q`
+- 结果：17 passed，1 个 PyPDF2 deprecation warning。
+- `py_compile`：通过。
