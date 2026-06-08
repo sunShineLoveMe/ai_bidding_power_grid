@@ -14,12 +14,14 @@ interface ImageMeta {
 interface SourceContext {
   content?: string;
   similarity?: number;
+  retrieval_source?: string;
   metadata?: {
     doc_type?: string;
     doc_role?: string;
     source_org?: string;
     source_url?: string;
     source_file?: string;
+    source_display_name?: string;
     category_label?: string;
     category?: string;
     tags?: string;
@@ -28,9 +30,17 @@ interface SourceContext {
     table_name?: string;
     row_number?: number;
     source_domain?: string;
+    source_category?: string;
+    source_category_label?: string;
     enterprise?: string;
     evidence_type?: string;
+    evidence_type_label?: string;
     target_library?: string;
+    target_library_label?: string;
+    report_no?: string;
+    specification_model?: string;
+    retrieval_source?: string;
+    source_section?: string;
   };
 }
 
@@ -87,18 +97,98 @@ const evidenceTypeLabel: Record<string, string> = {
   enterprise_evidence: '企业证明材料',
 };
 
+const categoryLabel: Record<string, string> = {
+  power_grid_tender_documents: '电网招投标资料',
+  power_grid_policy_regulations: '电网政策法规',
+  power_grid_standard_phrases: '电网标准话术',
+  '01_tender_documents': '招标文件资料',
+  '02_policy_regulations': '政策法规资料',
+  '03_standards_specs': '标准规范资料',
+  '04_standard_phrases': '标准话术资料',
+  '05_enterprise_documents': '泰昌企业资料',
+  structured_product_parameter_json: '泰昌产品结构化参数',
+};
+
+const targetLibraryLabel: Record<string, string> = {
+  knowledge_library: '知识库资料',
+  product_library: '产品库资料',
+  qualification_library: '资信库资料',
+  reference_template_library: '参考模板资料',
+};
+
+const internalNameLabel: Record<string, string> = {
+  taichang_business_license_private: '泰昌基础证照资料',
+  taichang_business_license_taichang_internal_private: '泰昌基础证照资料',
+  taichang_certification_private: '泰昌资质证书资料',
+  taichang_finance_taichang_internal_private: '泰昌财务资料',
+  taichang_green_low_carbon_private: '泰昌绿色低碳资料',
+  taichang_inspection_report_private: '泰昌检验报告资料',
+  taichang_production_capacity_private: '泰昌生产制造能力资料',
+  taichang_production_capacity_taichang_internal_private: '泰昌生产制造能力资料',
+  taichang_testing_capacity_private: '泰昌试验检测能力资料',
+  taichang_testing_capacity_taichang_internal_private: '泰昌试验检测能力资料',
+  technical_qualification_response_phrase: '技术资格响应标准话术',
+  power_grid_standards_catalog: '电网标准规范目录',
+  power_grid_section_library: '电网标书章节标准话术',
+  qualification_response_phrases: '资格响应标准话术',
+  business_response_phrases: '商务响应标准话术',
+  quality_safety_environment_phrases: '质量安全环保响应标准话术',
+  bid_document_checklist: '投标文件核查清单',
+  power_grid_rag_ingestion_notes: '电网RAG资料入库说明',
+};
+
+function basenameWithoutExt(value?: string): string {
+  const name = (value || '').split('/').pop() || value || '';
+  return name
+    .replace(/\.url\.md$/i, '')
+    .replace(/\.(md|pdf|docx?|xlsx?|csv|txt)$/i, '')
+    .replace(/_[0-9a-f]{6,}$/i, '')
+    .replace(/^\d+[._-]?/, '')
+    .trim();
+}
+
+function containsChinese(value?: string): boolean {
+  return /[\u4e00-\u9fff]/.test(value || '');
+}
+
+function isInternalName(value?: string): boolean {
+  return /[a-zA-Z]+_[a-zA-Z_]+/.test(value || '');
+}
+
+function displayLabel(value?: string): string {
+  const raw = value || '';
+  const base = basenameWithoutExt(raw);
+  const lowered = base.toLowerCase();
+  if (internalNameLabel[lowered]) return internalNameLabel[lowered];
+  if (categoryLabel[base]) return categoryLabel[base];
+  if (evidenceTypeLabel[base]) return evidenceTypeLabel[base];
+  if (targetLibraryLabel[base]) return targetLibraryLabel[base];
+  if (containsChinese(base) && !isInternalName(base)) return base;
+  return '';
+}
+
 function sourceTitle(source: SourceContext): string {
   const meta = source.metadata || {};
-  const sourceName = meta.source_org || meta.source_file || meta.category_label || meta.category || '企业知识库';
-  return sourceName.split('/').pop() || sourceName;
+  return (
+    displayLabel(meta.source_display_name) ||
+    displayLabel(meta.source_file) ||
+    displayLabel(meta.source_org) ||
+    displayLabel(meta.category_label) ||
+    displayLabel(meta.category) ||
+    displayLabel(meta.source_category) ||
+    displayLabel(meta.target_library) ||
+    displayLabel(meta.evidence_type) ||
+    '企业知识库资料'
+  );
 }
 
 function sourceDescription(source: SourceContext): string {
   const meta = source.metadata || {};
   return [
     meta.enterprise || '泰昌',
-    meta.evidence_type ? evidenceTypeLabel[meta.evidence_type] || undefined : undefined,
-    meta.category_label,
+    meta.evidence_type_label || (meta.evidence_type ? evidenceTypeLabel[meta.evidence_type] || displayLabel(meta.evidence_type) : undefined),
+    displayLabel(meta.category_label || meta.category || meta.source_category_label || meta.source_category),
+    meta.target_library_label || (meta.target_library ? targetLibraryLabel[meta.target_library] || displayLabel(meta.target_library) : undefined),
     meta.doc_role ? docRoleLabel[meta.doc_role] || undefined : meta.doc_type,
     meta.table_name ? `${meta.table_name}${meta.row_number ? ` 第${meta.row_number}行` : ''}` : '',
   ].filter(Boolean).join(' · ') || '知识片段';
@@ -110,10 +200,21 @@ function previewText(content?: string): string {
 
 function sourceKey(source: SourceContext): string {
   const meta = source.metadata || {};
+  const sourceName = meta.source_display_name || meta.source_file || meta.source_org || meta.category_label || meta.category || '';
+  if (
+    source.retrieval_source === 'structured_product_parameter_json' ||
+    meta.retrieval_source === 'structured_product_parameter_json' ||
+    meta.category_label === '泰昌产品结构化参数'
+  ) {
+    return [
+      sourceName,
+      meta.report_no || '',
+      meta.specification_model || '',
+    ].join('|');
+  }
   return [
-    meta.source_file || meta.source_org || meta.category_label || meta.category || '',
+    sourceName,
     meta.source_url || '',
-    previewText(source.content),
   ].join('|');
 }
 

@@ -98,14 +98,17 @@ def _parameter_match_score(query: str, row: dict[str, Any]) -> int:
 
 
 def _row_match_score(query: str, row: dict[str, Any]) -> int:
-    score = _parameter_match_score(query, row)
+    parameter_score = _parameter_match_score(query, row)
+    score = parameter_score
     families = _query_product_families(query)
+    diameters = _query_nominal_inner_diameters(query)
+    if parameter_score <= 0 and not families and not diameters:
+        return 0
     if families:
         if row.get("product_family") in families:
             score += 5
         else:
             score -= 8
-    diameters = _query_nominal_inner_diameters(query)
     if diameters:
         if str(row.get("nominal_inner_diameter") or "") in diameters:
             score += 4
@@ -179,6 +182,8 @@ def search_taichang_product_parameter_contexts(query: str, limit: int = 5) -> li
                     "fact_source_allowed_for_enterprise": True,
                     "reference_only": False,
                     "doc_type": "泰昌产品结构化参数",
+                    "source_display_name": Path(str(row.get("source_file") or "")).name or "泰昌产品检验报告",
+                    "category_label": "泰昌产品结构化参数",
                     "source_file": row.get("source_file"),
                     "source_section": parameter_name,
                     "evidence_type": row.get("evidence_type") or "inspection_report",

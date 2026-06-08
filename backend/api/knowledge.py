@@ -40,6 +40,7 @@ from backend.rag.ingestion import (
     ingest_knowledge_document,
     update_knowledge_document_status,
 )
+from backend.rag.display_names import sanitize_source_contexts
 from backend.rag.retrieval import (
     generate_knowledge_answer,
     search_knowledge_assets,
@@ -404,6 +405,7 @@ def search_knowledge():
         parameter_contexts = search_taichang_product_parameter_contexts(query, limit=5)
         contexts = _curate_pilot_enterprise_contexts(contexts, limit=5)
         contexts = (parameter_contexts + contexts)[:5]
+        contexts = sanitize_source_contexts(contexts)
         asset_metadata_filter = _asset_metadata_filter_from_query(
             query,
             metadata_filter,
@@ -467,6 +469,7 @@ def stream_search_knowledge():
             parameter_contexts = search_taichang_product_parameter_contexts(query, limit=5)
             contexts = _curate_pilot_enterprise_contexts(contexts, limit=5)
             contexts = (parameter_contexts + contexts)[:5]
+            contexts = sanitize_source_contexts(contexts)
             asset_metadata_filter = _asset_metadata_filter_from_query(
                 query,
                 metadata_filter,

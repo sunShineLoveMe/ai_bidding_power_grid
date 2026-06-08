@@ -132,15 +132,15 @@
 | chunked | 河北 | `enterprise_evidence` | `ESG环境社会公司治理报告.pdf` | 56 | 234 | 0 |  |
 | chunked | 河北 | `enterprise_evidence` | `碳足迹报告.pdf` | 30 | 105 | 0 |  |
 | chunked | 河北 | `enterprise_evidence` | `营业执照副本.pdf` | 3 | 15 | 0 |  |
-| chunked | 河北 | `enterprise_evidence` | `taichang_business_license_taichang_internal_private.md` | 2 | 3 | 0 |  |
-| chunked | 河北 | `enterprise_evidence` | `taichang_certification_private.md` | 42 | 83 | 0 |  |
-| chunked | 河北 | `enterprise_evidence` | `taichang_finance_taichang_internal_private.md` | 64 | 130 | 0 |  |
-| chunked | 河北 | `enterprise_evidence` | `taichang_green_low_carbon_private.md` | 39 | 93 | 0 |  |
-| chunked | 河北 | `enterprise_evidence` | `taichang_inspection_report_private.md` | 3 | 5 | 0 |  |
-| chunked | 河北 | `enterprise_evidence` | `taichang_production_capacity_private.md` | 31 | 61 | 0 |  |
-| chunked | 河北 | `enterprise_evidence` | `taichang_production_capacity_taichang_internal_private.md` | 8 | 15 | 0 |  |
-| chunked | 河北 | `enterprise_evidence` | `taichang_testing_capacity_private.md` | 54 | 107 | 0 |  |
-| chunked | 河北 | `enterprise_evidence` | `taichang_testing_capacity_taichang_internal_private.md` | 8 | 15 | 0 |  |
+| chunked | 河北 | `enterprise_evidence` | `泰昌基础证照内部专用图片资产目录.md` | 2 | 3 | 0 |  |
+| chunked | 河北 | `enterprise_evidence` | `泰昌资质证书图片资产目录.md` | 42 | 83 | 0 |  |
+| chunked | 河北 | `enterprise_evidence` | `泰昌财务资料内部专用图片资产目录.md` | 64 | 130 | 0 |  |
+| chunked | 河北 | `enterprise_evidence` | `泰昌绿色低碳资料图片资产目录.md` | 39 | 93 | 0 |  |
+| chunked | 河北 | `enterprise_evidence` | `泰昌检验报告图片资产目录.md` | 3 | 5 | 0 |  |
+| chunked | 河北 | `enterprise_evidence` | `泰昌生产制造能力图片资产目录.md` | 31 | 61 | 0 |  |
+| chunked | 河北 | `enterprise_evidence` | `泰昌生产制造能力内部专用图片资产目录.md` | 8 | 15 | 0 |  |
+| chunked | 河北 | `enterprise_evidence` | `泰昌试验检测能力图片资产目录.md` | 54 | 107 | 0 |  |
+| chunked | 河北 | `enterprise_evidence` | `泰昌试验检测能力内部专用图片资产目录.md` | 8 | 15 | 0 |  |
 | chunked | 辽宁 | `technical_response_reference` | `技术补充文件_电缆保护管CPVC.pdf` | 6 | 32 | 0 |  |
 | chunked | 辽宁 | `winning_bid_reference` | `商务投标文件-中标，按投标人制作.pdf` | 5 | 27 | 0 |  |
 

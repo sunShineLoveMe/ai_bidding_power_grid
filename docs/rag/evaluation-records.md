@@ -847,3 +847,52 @@ Run 16 已证明真实链路缺少结构化参数查询。本轮不新增数据�
 
 - 当前仍是 staging JSON 查询层，不是数据库表；多批次、多版本、多规格持续增长后，需要评估结构化表。
 - 当前仅接入泰昌产品检验报告参数，不自动把这些值用于具体省公司偏差判断；偏差判断仍需目标省公司/批次/规格和客户确认口径。
+
+---
+
+## Run 18 — 企业知识库参考来源中文化与确定性来源去重（2026-06-08）
+
+> Run summary：`docs/rag/runs/run_20260608_chinese_display_names_summary.md`  
+> DB 修复 dry-run：`docs/rag/runs/run_20260608_chinese_display_names_dry_run.json`  
+> DB 修复 execute：`docs/rag/runs/run_20260608_chinese_display_names_execute.json`、`docs/rag/runs/run_20260608_chinese_display_names_execute_after_enterprise_category.json`、`docs/rag/runs/run_20260608_chinese_display_names_execute_after_file_rename.json`  
+> 页面同源 Stream 结果：`docs/rag/runs/run_20260608_chinese_display_names_real_stream_after_file_rename.json`  
+> Base filtered：`docs/rag/runs/run_20260608_chinese_display_names_base_filtered_after_file_rename.json`  
+> Customer filtered：`docs/rag/runs/run_20260608_chinese_display_names_customer_filtered_after_file_rename.json`
+
+### 背景
+
+用户指出企业知识库问答参考来源中仍出现 `taichang_production_capacity_private.md`、`power_grid_tender_documents` 等拼音/英文内部命名，并且 MPP 检验报告结构化参数命中 5 行时页面重复展示同一份报告 5 次。
+
+### 处理内容
+
+- 新增 `backend/rag/display_names.py`，统一把内部 source/category/evidence/target library 转为中文展示名。
+- 更新知识库检索与提示词构建，返回来源前补充中文 `source_display_name`、`category_label`、`evidence_type_label`、`target_library_label`。
+- 新增 `scripts/rag/repair_chinese_display_names.py`，在不修改原始文件内容和追溯路径的前提下，修复现有 `knowledge_documents`、`document_chunks`、`knowledge_assets` 的用户可见 metadata。
+- 更新前端参考来源展示逻辑：同一确定性文件、同一检验报告或同一结构化参数来源命中多行时合并展示，不再为了凑满 5 条重复显示。
+- 将 9 个遗留资产目录 staging Markdown 从 `taichang_*_private.md` 重命名为中文专业文件名，并同步更新 staging manifest/report 引用；生成脚本后续也输出中文文件名。
+- 更新 `AGENTS.md`，把后续新增资料必须中文命名、内部枚举不得直接展示、确定性来源必须去重固化为 SOP。
+
+### 修复结果
+
+- 首次执行修复：174 个文档、36555 个 chunk、300 个图片资产写入中文展示 metadata。
+- 企业资料分类二次修复：4377 个 chunk、300 个图片资产的分类展示从内部/泛化库名修正为“泰昌企业资料”。
+- 文件级重命名后二次修复：9 个文档、763 个 chunk 的 `source_file` metadata 从旧英文/拼音 md 路径改为中文文件名路径。
+- MPP 环刚度真实页面同源 stream：raw context 5 条结构化参数，前端去重后展示 1 条确定性来源；回答仍返回 `66.40 kN/m²`。
+- 泰昌产品/生产/检测能力真实页面同源 stream：参考来源无内部英文/拼音展示，分类为“泰昌企业资料”。
+
+### 回归验证
+
+- `.venv/bin/python -m pytest tests/test_rag_display_names.py tests/test_taichang_product_parameter_query.py tests/test_rag_retrieval.py -q`
+- 结果：17 passed，1 个 PyPDF2 deprecation warning。
+- `py_compile`：通过。
+- `frontend/npm run build`：通过。
+
+| 测试集 | Recall@5 | top1 来源准确率 | 关键词命中率 | 跨 doc_role 串扰 | 禁用关键词命中率 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Base filtered | 96.7% | 100.0% | 96.7% | 0.0% | - |
+| 泰昌 MVP 专项 filtered | 100.0% | 100.0% | 100.0% | 0.0% | 0.0% |
+
+### 剩余风险
+
+- 本轮已重命名用户可见的资产目录 staging Markdown；MinerU 中间目录、UUID 解析文件和原始资料路径仍保留不动，避免破坏资产/原文定位。
+- 后续如果新增解析脚本直接生成英文 staging Markdown，必须在入库前改为中文文件名或补中文 `source_display_name`，否则不得进入正式展示链路。

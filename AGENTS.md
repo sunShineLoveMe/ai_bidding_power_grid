@@ -122,10 +122,13 @@ do_not_mix_with=["泰昌企业事实"]
 执行原则：
 
 - 面向用户展示的 `title`、`category`、`tags`、`applicable_sections`、说明文字、导出图片 caption 不得出现拼音、英文 snake_case、内部批次编号或解析器产物名。
+- 客户新增资料、解析 staging Markdown、`source_display_name`、`category_label`、图片资产标题和参考来源标题必须使用行业内或专业中文命名；不得把 `taichang_*`、`power_grid_*`、`*_private.md`、解析批次目录名等内部名称暴露给用户。
 - 允许 metadata 内保留英文枚举和技术字段用于程序过滤，例如 `evidence_type=production_capacity`、`target_library=product_library`；但这些值不得直接显示在页面列表、标签和标题中。
+- 如果底层 `source_file` 或解析路径必须保留英文/拼音以保证追溯，必须同时写入中文 `source_display_name`、`category_label`、`evidence_type_label` 或 `target_library_label`，页面和导出只展示中文字段。
 - 图片资产标题必须表达“主体 + 资料名称 + 页码/场景”，例如“泰昌质量管理体系认证证书第1页”“泰昌CPVC电缆保护管检验报告第3页”“泰昌MPP生产线资料第2页”。
 - 产品库分类应使用“产品实物图片、生产制造能力、试验检测设备、检验报告、绿色低碳资料、厂房仓储资料”等中文；资信库分类应使用“基础证照、资质证书、财务资料、人员证书、项目业绩、授权文件”等中文。
 - 如果发现页面出现 `taichang_*`、`production_capacity`、`green_low_carbon`、`business_license`、`certification`、`product`、`technical` 等内部值，必须优先修正为中文展示或中文资产数据。
+- 知识库问答的参考来源必须按确定性和准确率从高到低展示；同一确定性文件、同一检验报告或同一结构化参数来源命中多行时，用户界面只展示一条合并后的来源，不得为了凑满 5 条而重复显示同一文件。
 
 ## DOCX 正式投标文件导出规则
 

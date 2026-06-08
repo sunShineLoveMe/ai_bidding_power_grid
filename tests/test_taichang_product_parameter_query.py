@@ -43,6 +43,16 @@ class TaichangProductParameterQueryTest(unittest.TestCase):
         self.assertIn("辽宁资料仅可作QA/异常校验参照", content)
         self.assertIn("不构成覆盖辽宁全部规格的结论", content)
 
+    def test_broad_capability_query_does_not_force_parameter_rows(self):
+        from backend.rag.product_parameters import search_taichang_product_parameter_contexts
+
+        contexts = search_taichang_product_parameter_contexts(
+            "泰昌有哪些产品、生产和检测能力资料可以用于技术响应？",
+            limit=5,
+        )
+
+        self.assertEqual(contexts, [])
+
 
 if __name__ == "__main__":
     unittest.main()

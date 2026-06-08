@@ -10,6 +10,7 @@ from backend.ai.qwen_client import stream_dashscope_api
 from backend.core.config import get_stage_model
 from backend.ai.rerank_client import rerank_documents
 from backend.core.bid_volumes import asset_applicable_volumes, asset_matches_volume, normalize_volume_type
+from backend.rag.display_names import sanitize_source_metadata
 
 AUTHORITY_SCORE = {
     "law_or_standard": 0.18,
@@ -681,9 +682,9 @@ def build_knowledge_prompt(
 
     for index, ctx in enumerate(contexts, 1):
         content = ctx.get("content", "")
-        meta = ctx.get("metadata", {}) or {}
+        meta = sanitize_source_metadata(ctx.get("metadata", {}) or {})
         similarity = ctx.get("similarity", 0)
-        source = meta.get("source_org") or meta.get("source_file") or "企业知识库"
+        source = meta.get("source_display_name") or meta.get("source_org") or meta.get("source_file") or "企业知识库"
         doc_type = meta.get("doc_type") or "知识片段"
 
         text_contexts.append(

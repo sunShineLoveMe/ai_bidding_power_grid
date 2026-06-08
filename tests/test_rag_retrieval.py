@@ -357,7 +357,7 @@ class RagRetrievalQualityTest(unittest.TestCase):
             ],
         )
 
-        self.assertIn("招标文件.pdf", prompt)
+        self.assertIn("来源 招标文件", prompt)
         self.assertIn("图片资产1", prompt)
         self.assertIn("脱敏项目经理身份证明材料样张", prompt)
         self.assertIn("/api/knowledge/assets/asset-1/file", prompt)

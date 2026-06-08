@@ -44,6 +44,26 @@ TENDER_TEXT_ROLES = {
 }
 TEXT_SUFFIXES = {".doc", ".docx"}
 DISPLAY_CONTEXTS = ["bid_writing", "knowledge_chat", "asset_search"]
+EVIDENCE_TYPE_DISPLAY = {
+    "business_license": "基础证照",
+    "certification": "资质证书",
+    "enterprise_evidence": "企业证明材料",
+    "finance": "财务资料",
+    "green_low_carbon": "绿色低碳资料",
+    "inspection_report": "检验报告",
+    "production_capacity": "生产制造能力",
+    "testing_capacity": "试验检测能力",
+}
+PRIVACY_LEVEL_DISPLAY = {
+    "private": "内部资料",
+    "taichang_internal_private": "内部专用",
+}
+TARGET_LIBRARY_DISPLAY = {
+    "knowledge_library": "知识库资料",
+    "product_library": "产品库资料",
+    "qualification_library": "资信库资料",
+    "reference_template_library": "参考模板资料",
+}
 
 
 @dataclass
@@ -595,11 +615,18 @@ def _stage_asset_catalog_records(out_dir: Path) -> list[StagingRecord]:
 
     records: list[StagingRecord] = []
     for (evidence_type, target_library, privacy_level), assets in sorted(groups.items()):
+        evidence_label = EVIDENCE_TYPE_DISPLAY.get(evidence_type, "企业证明材料")
+        privacy_label = PRIVACY_LEVEL_DISPLAY.get(privacy_level, "内部资料")
+        target_label = TARGET_LIBRARY_DISPLAY.get(target_library, "知识库资料")
+        catalog_title = f"泰昌{evidence_label}图片资产目录"
+        if privacy_level != "private":
+            catalog_title = f"泰昌{evidence_label}{privacy_label}图片资产目录"
         lines = [
-            f"# 泰昌图片资产目录 - {evidence_type} - {privacy_level}",
+            f"# {catalog_title}",
             "",
             "本目录用于泰昌 MVP 试点企业内部标书写作、智能问答和图片资产检索。",
             "所有资产均为泰昌企业事实，仅在泰昌租户内使用。",
+            f"资料范围：{evidence_label}；目标库：{target_label}；访问级别：{privacy_label}。",
             "",
         ]
         for asset in assets:
@@ -622,7 +649,7 @@ def _stage_asset_catalog_records(out_dir: Path) -> list[StagingRecord]:
                 "",
             ])
         body = "\n".join(lines)
-        output = out_dir / "texts" / "asset_catalogs" / f"taichang_{evidence_type}_{privacy_level}.md"
+        output = out_dir / "texts" / "asset_catalogs" / f"{catalog_title}.md"
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(body, encoding="utf-8")
         metadata = {
@@ -635,7 +662,9 @@ def _stage_asset_catalog_records(out_dir: Path) -> list[StagingRecord]:
             "material_category": "电缆保护管CPVC/MPP",
             "doc_role": "enterprise_evidence",
             "source_file": _rel(output),
+            "source_display_name": catalog_title,
             "source_category": "05_enterprise_documents",
+            "category_label": "泰昌企业资料",
             "chunker": "parent_child_v2",
             "ingestion_batch_id": BATCH_ID,
             "doc_version": 1,
@@ -645,7 +674,9 @@ def _stage_asset_catalog_records(out_dir: Path) -> list[StagingRecord]:
             "doc_owner": "泰昌",
             "enterprise": "泰昌",
             "evidence_type": evidence_type,
+            "evidence_type_label": evidence_label,
             "target_library": target_library,
+            "target_library_label": target_label,
             "privacy_level": privacy_level,
             "reference_only": False,
             "fact_source_allowed_for_enterprise": True,

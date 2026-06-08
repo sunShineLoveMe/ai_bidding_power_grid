@@ -6338,8 +6338,8 @@
       }
     },
     {
-      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_business_license_taichang_internal_private.md",
-      "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_business_license_taichang_internal_private.md",
+      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌基础证照内部专用图片资产目录.md",
+      "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌基础证照内部专用图片资产目录.md",
       "province": "河北",
       "batch_no": "taichang_mvp_20260606",
       "package_no": "",
@@ -6369,7 +6369,7 @@
         "package_code": "2225AC",
         "material_category": "电缆保护管CPVC/MPP",
         "doc_role": "enterprise_evidence",
-        "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_business_license_taichang_internal_private.md",
+        "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌基础证照内部专用图片资产目录.md",
         "source_category": "05_enterprise_documents",
         "chunker": "parent_child_v2",
         "ingestion_batch_id": "customer_liaoning_taichang_20260606_p0",
@@ -6400,8 +6400,8 @@
       }
     },
     {
-      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_certification_private.md",
-      "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_certification_private.md",
+      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌资质证书图片资产目录.md",
+      "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌资质证书图片资产目录.md",
       "province": "河北",
       "batch_no": "taichang_mvp_20260606",
       "package_no": "",
@@ -6431,7 +6431,7 @@
         "package_code": "2225AC",
         "material_category": "电缆保护管CPVC/MPP",
         "doc_role": "enterprise_evidence",
-        "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_certification_private.md",
+        "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌资质证书图片资产目录.md",
         "source_category": "05_enterprise_documents",
         "chunker": "parent_child_v2",
         "ingestion_batch_id": "customer_liaoning_taichang_20260606_p0",
@@ -6462,8 +6462,8 @@
       }
     },
     {
-      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_finance_taichang_internal_private.md",
-      "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_finance_taichang_internal_private.md",
+      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌财务资料内部专用图片资产目录.md",
+      "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌财务资料内部专用图片资产目录.md",
       "province": "河北",
       "batch_no": "taichang_mvp_20260606",
       "package_no": "",
@@ -6493,7 +6493,7 @@
         "package_code": "2225AC",
         "material_category": "电缆保护管CPVC/MPP",
         "doc_role": "enterprise_evidence",
-        "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_finance_taichang_internal_private.md",
+        "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌财务资料内部专用图片资产目录.md",
         "source_category": "05_enterprise_documents",
         "chunker": "parent_child_v2",
         "ingestion_batch_id": "customer_liaoning_taichang_20260606_p0",
@@ -6524,8 +6524,8 @@
       }
     },
     {
-      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_green_low_carbon_private.md",
-      "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_green_low_carbon_private.md",
+      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌绿色低碳资料图片资产目录.md",
+      "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌绿色低碳资料图片资产目录.md",
       "province": "河北",
       "batch_no": "taichang_mvp_20260606",
       "package_no": "",
@@ -6555,7 +6555,7 @@
         "package_code": "2225AC",
         "material_category": "电缆保护管CPVC/MPP",
         "doc_role": "enterprise_evidence",
-        "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_green_low_carbon_private.md",
+        "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌绿色低碳资料图片资产目录.md",
         "source_category": "05_enterprise_documents",
         "chunker": "parent_child_v2",
         "ingestion_batch_id": "customer_liaoning_taichang_20260606_p0",
@@ -6586,8 +6586,8 @@
       }
     },
     {
-      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_inspection_report_private.md",
-      "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_inspection_report_private.md",
+      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌检验报告图片资产目录.md",
+      "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌检验报告图片资产目录.md",
       "province": "河北",
       "batch_no": "taichang_mvp_20260606",
       "package_no": "",
@@ -6617,7 +6617,7 @@
         "package_code": "2225AC",
         "material_category": "电缆保护管CPVC/MPP",
         "doc_role": "enterprise_evidence",
-        "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_inspection_report_private.md",
+        "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌检验报告图片资产目录.md",
         "source_category": "05_enterprise_documents",
         "chunker": "parent_child_v2",
         "ingestion_batch_id": "customer_liaoning_taichang_20260606_p0",
@@ -6648,8 +6648,8 @@
       }
     },
     {
-      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_production_capacity_private.md",
-      "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_production_capacity_private.md",
+      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌生产制造能力图片资产目录.md",
+      "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌生产制造能力图片资产目录.md",
       "province": "河北",
       "batch_no": "taichang_mvp_20260606",
       "package_no": "",
@@ -6679,7 +6679,7 @@
         "package_code": "2225AC",
         "material_category": "电缆保护管CPVC/MPP",
         "doc_role": "enterprise_evidence",
-        "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_production_capacity_private.md",
+        "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌生产制造能力图片资产目录.md",
         "source_category": "05_enterprise_documents",
         "chunker": "parent_child_v2",
         "ingestion_batch_id": "customer_liaoning_taichang_20260606_p0",
@@ -6710,8 +6710,8 @@
       }
     },
     {
-      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_production_capacity_taichang_internal_private.md",
-      "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_production_capacity_taichang_internal_private.md",
+      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌生产制造能力内部专用图片资产目录.md",
+      "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌生产制造能力内部专用图片资产目录.md",
       "province": "河北",
       "batch_no": "taichang_mvp_20260606",
       "package_no": "",
@@ -6741,7 +6741,7 @@
         "package_code": "2225AC",
         "material_category": "电缆保护管CPVC/MPP",
         "doc_role": "enterprise_evidence",
-        "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_production_capacity_taichang_internal_private.md",
+        "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌生产制造能力内部专用图片资产目录.md",
         "source_category": "05_enterprise_documents",
         "chunker": "parent_child_v2",
         "ingestion_batch_id": "customer_liaoning_taichang_20260606_p0",
@@ -6772,8 +6772,8 @@
       }
     },
     {
-      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_testing_capacity_private.md",
-      "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_testing_capacity_private.md",
+      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌试验检测能力图片资产目录.md",
+      "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌试验检测能力图片资产目录.md",
       "province": "河北",
       "batch_no": "taichang_mvp_20260606",
       "package_no": "",
@@ -6803,7 +6803,7 @@
         "package_code": "2225AC",
         "material_category": "电缆保护管CPVC/MPP",
         "doc_role": "enterprise_evidence",
-        "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_testing_capacity_private.md",
+        "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌试验检测能力图片资产目录.md",
         "source_category": "05_enterprise_documents",
         "chunker": "parent_child_v2",
         "ingestion_batch_id": "customer_liaoning_taichang_20260606_p0",
@@ -6834,8 +6834,8 @@
       }
     },
     {
-      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_testing_capacity_taichang_internal_private.md",
-      "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_testing_capacity_taichang_internal_private.md",
+      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌试验检测能力内部专用图片资产目录.md",
+      "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌试验检测能力内部专用图片资产目录.md",
       "province": "河北",
       "batch_no": "taichang_mvp_20260606",
       "package_no": "",
@@ -6865,7 +6865,7 @@
         "package_code": "2225AC",
         "material_category": "电缆保护管CPVC/MPP",
         "doc_role": "enterprise_evidence",
-        "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_testing_capacity_taichang_internal_private.md",
+        "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌试验检测能力内部专用图片资产目录.md",
         "source_category": "05_enterprise_documents",
         "chunker": "parent_child_v2",
         "ingestion_batch_id": "customer_liaoning_taichang_20260606_p0",

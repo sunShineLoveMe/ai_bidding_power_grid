@@ -1,0 +1,210 @@
+{
+  "mpp_after_file_rename": {
+    "query": "泰昌MPP电缆保护管内径250的环刚度检验结果是多少？请说明报告编号和资料来源。",
+    "done": true,
+    "errors": [],
+    "event_count": 424,
+    "answer_has_66.40": true,
+    "raw_context_count": 5,
+    "structured_contexts": 5,
+    "frontend_deduped_source_count": 1,
+    "bad_visible_internal_name": false,
+    "display_sources": [
+      {
+        "retrieval_source": "structured_product_parameter_json",
+        "source_display_name": "MPP电缆保护管检验报告内径250.pdf",
+        "category_label": "泰昌产品结构化参数",
+        "source_category_label": "泰昌产品结构化参数",
+        "evidence_type_label": "检验报告",
+        "target_library_label": "产品库资料",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+        "report_no": "2024100312005501712",
+        "specification_model": "DF 250×22×9000 SN40 MPP"
+      },
+      {
+        "retrieval_source": "structured_product_parameter_json",
+        "source_display_name": "MPP电缆保护管检验报告内径250.pdf",
+        "category_label": "泰昌产品结构化参数",
+        "source_category_label": "泰昌产品结构化参数",
+        "evidence_type_label": "检验报告",
+        "target_library_label": "产品库资料",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+        "report_no": "2024100312005501712",
+        "specification_model": "DF 250×22×9000 SN40 MPP"
+      },
+      {
+        "retrieval_source": "structured_product_parameter_json",
+        "source_display_name": "MPP电缆保护管检验报告内径250.pdf",
+        "category_label": "泰昌产品结构化参数",
+        "source_category_label": "泰昌产品结构化参数",
+        "evidence_type_label": "检验报告",
+        "target_library_label": "产品库资料",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+        "report_no": "2024100312005501712",
+        "specification_model": "DF 250×22×9000 SN40 MPP"
+      },
+      {
+        "retrieval_source": "structured_product_parameter_json",
+        "source_display_name": "MPP电缆保护管检验报告内径250.pdf",
+        "category_label": "泰昌产品结构化参数",
+        "source_category_label": "泰昌产品结构化参数",
+        "evidence_type_label": "检验报告",
+        "target_library_label": "产品库资料",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+        "report_no": "2024100312005501712",
+        "specification_model": "DF 250×22×9000 SN40 MPP"
+      },
+      {
+        "retrieval_source": "structured_product_parameter_json",
+        "source_display_name": "MPP电缆保护管检验报告内径250.pdf",
+        "category_label": "泰昌产品结构化参数",
+        "source_category_label": "泰昌产品结构化参数",
+        "evidence_type_label": "检验报告",
+        "target_library_label": "产品库资料",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+        "report_no": "2024100312005501712",
+        "specification_model": "DF 250×22×9000 SN40 MPP"
+      }
+    ],
+    "frontend_unique_sources": [
+      {
+        "retrieval_source": "structured_product_parameter_json",
+        "source_display_name": "MPP电缆保护管检验报告内径250.pdf",
+        "category_label": "泰昌产品结构化参数",
+        "source_category_label": "泰昌产品结构化参数",
+        "evidence_type_label": "检验报告",
+        "target_library_label": "产品库资料",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+        "report_no": "2024100312005501712",
+        "specification_model": "DF 250×22×9000 SN40 MPP"
+      }
+    ],
+    "answer_preview": "## 结论\n河北泰昌电力器材科技有限公司生产的MPP电缆保护管（规格DF 250×22×9000 SN40 MPP，公称内径250mm）的环刚度检验结果为 **66.40 kN/m²**，远高于标准要求（≥40 kN/m²），单项结论为合格。\n\n## 关键信息\n- **产品**：MPP电缆保护管，规格型号 DF 250×22×9000 SN40 MPP，公称内径250mm  \n- **检验参数**：环刚度  \n- **检验结果**：66.40 kN/m²（标准要求 ≥ 40 kN/m²）  \n- **单项结论**：合格  \n- **报告编号**：2024100312005501712  \n- **资料来源**：泰昌原始检验报告《MPP电缆保护管检验报告内径250.pdf》，该文件已结构化提取，并附有整页原图资产。\n\n## 操作建议\n该检验结果可直接用于技术响应文件或投标材料中“产品性能参数”部分，证明产品环刚度满足并优于国家标准要求。建议在标书中插入检验报告首页（包含报告编号与检测结论）作为支撑材料。\n\n![泰昌MPP电缆保护管检验报告内径250第1页](/api/knowledge/assets/39eed227-992a-4e19-a09b-27bcb926e665/file)\n\n## 参考依据\n- **资料1**：MPP电缆保护管检验报告内径250.pdf – 环刚度参数（检验结果66.40 kN/m²，标准≥40，结论合格，报告编号2024100312005501712）  \n- **图片资产6**：泰昌MPP电缆保护管检验报告内径250第1页（整页原图，含报告编号等关键信息）  \n- 所依据资料均来自河北泰昌电力器材科技有限公司官方检验报告，仅代表泰昌企业事实，不涉及其他企业或规格。"
+  },
+  "capability_after_file_rename": {
+    "query": "泰昌有哪些产品、生产和检测能力资料可以用于技术响应？",
+    "done": true,
+    "errors": [],
+    "event_count": 711,
+    "answer_has_66.40": false,
+    "raw_context_count": 5,
+    "structured_contexts": 0,
+    "frontend_deduped_source_count": 5,
+    "bad_visible_internal_name": false,
+    "display_sources": [
+      {
+        "retrieval_source": null,
+        "source_display_name": "碳足迹报告",
+        "category_label": "泰昌企业资料",
+        "source_category_label": "泰昌企业资料",
+        "evidence_type_label": "绿色低碳资料",
+        "target_library_label": "产品库资料",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/5其他绿色低碳证书一览表/碳足迹报告.pdf",
+        "report_no": null,
+        "specification_model": null
+      },
+      {
+        "retrieval_source": null,
+        "source_display_name": "绿色发展规划报告",
+        "category_label": "泰昌企业资料",
+        "source_category_label": "泰昌企业资料",
+        "evidence_type_label": "资质证书",
+        "target_library_label": "资信库资料",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色发展规划报告.pdf",
+        "report_no": null,
+        "specification_model": null
+      },
+      {
+        "retrieval_source": null,
+        "source_display_name": "ESG环境社会公司治理报告",
+        "category_label": "泰昌企业资料",
+        "source_category_label": "泰昌企业资料",
+        "evidence_type_label": "绿色低碳资料",
+        "target_library_label": "产品库资料",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+        "report_no": null,
+        "specification_model": null
+      },
+      {
+        "retrieval_source": null,
+        "source_display_name": "废水废气废固报告",
+        "category_label": "泰昌企业资料",
+        "source_category_label": "泰昌企业资料",
+        "evidence_type_label": "绿色低碳资料",
+        "target_library_label": "产品库资料",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/2废水.废气废固监(检)测报告一览表/废水废气废固报告.pdf",
+        "report_no": null,
+        "specification_model": null
+      },
+      {
+        "retrieval_source": null,
+        "source_display_name": "电子拉力试验机",
+        "category_label": "泰昌企业资料",
+        "source_category_label": "泰昌企业资料",
+        "evidence_type_label": "试验检测能力",
+        "target_library_label": "产品库资料",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+        "report_no": null,
+        "specification_model": null
+      }
+    ],
+    "frontend_unique_sources": [
+      {
+        "retrieval_source": null,
+        "source_display_name": "碳足迹报告",
+        "category_label": "泰昌企业资料",
+        "source_category_label": "泰昌企业资料",
+        "evidence_type_label": "绿色低碳资料",
+        "target_library_label": "产品库资料",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/5其他绿色低碳证书一览表/碳足迹报告.pdf",
+        "report_no": null,
+        "specification_model": null
+      },
+      {
+        "retrieval_source": null,
+        "source_display_name": "绿色发展规划报告",
+        "category_label": "泰昌企业资料",
+        "source_category_label": "泰昌企业资料",
+        "evidence_type_label": "资质证书",
+        "target_library_label": "资信库资料",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色发展规划报告.pdf",
+        "report_no": null,
+        "specification_model": null
+      },
+      {
+        "retrieval_source": null,
+        "source_display_name": "ESG环境社会公司治理报告",
+        "category_label": "泰昌企业资料",
+        "source_category_label": "泰昌企业资料",
+        "evidence_type_label": "绿色低碳资料",
+        "target_library_label": "产品库资料",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+        "report_no": null,
+        "specification_model": null
+      },
+      {
+        "retrieval_source": null,
+        "source_display_name": "废水废气废固报告",
+        "category_label": "泰昌企业资料",
+        "source_category_label": "泰昌企业资料",
+        "evidence_type_label": "绿色低碳资料",
+        "target_library_label": "产品库资料",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/2废水.废气废固监(检)测报告一览表/废水废气废固报告.pdf",
+        "report_no": null,
+        "specification_model": null
+      },
+      {
+        "retrieval_source": null,
+        "source_display_name": "电子拉力试验机",
+        "category_label": "泰昌企业资料",
+        "source_category_label": "泰昌企业资料",
+        "evidence_type_label": "试验检测能力",
+        "target_library_label": "产品库资料",
+        "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+        "report_no": null,
+        "specification_model": null
+      }
+    ],
+    "answer_preview": "## 结论\n\n河北泰昌电力器材科技有限公司（简称“泰昌”）拥有明确的产品系列和可用于技术响应文件的生产制造、试验检测能力资料。以下内容整理了可用于投标技术响应中的具体企业资料。\n\n## 关键信息\n\n- **产品范围**：根据知识库，泰昌主要产品包括“泰昌”牌水泥制品、电线电缆、低压电表计量箱、电力金具、配电箱、绝缘子、电缆保护管、开关柜、避雷器、变压器及配件等，覆盖输变电线路及配电领域的多种器材。\n- **生产制造能力**：公司拥有全自动注塑成型机、压接机、捏合机、开炼机、芯棒打磨机、激光打标机等先进生产设备。图片资产1（**泰昌试验设备台账第1页**）可直接用于“技术响应文件”中的“生产制造能力”章节，直观展示设备管理台账。\n- **试验检测能力**：公司配备工频试验装置、冲击试验成套检测设备、拉力试验机等专业检测设备。同时，图片资产2至8为**泰昌微机控制电子万能试验机**的完整7页资料，可用于“技术响应文件”中的“试验检测设备”章节。该万能试验机是材料力学性能检测的核心设备，其资质档案可证实企业具备完整的检验能力。\n\n## 操作建议\n\n在编写技术响应文件时，建议按以下清单整理和插入对应资料：\n- **产品清单**：直接从知识库资料1和2中摘录“主要产品”列表，用于响应“产品业绩”或“供货范围”要求。\n- **生产设备资料**：插入图片资产1（试验设备台账），并可与资料1中的生产设备描述结合，证明企业硬件实力。\n- **试验设备资料**：将图片资产2至8中关于“微机控制电子万能试验机”的关键页（如设备铭牌、校准证书、技术参数页）插入“试验检测设备”章节。推荐在描述配备引伸计、大变形引伸计及高低温环境箱等功能的段落后，插入图片资产2（第1页）进行示意。\n- **检验报告**：资料1中“工频试验装置”等检测设备，可与相关的型式试验报告、出厂检验报告模板组合使用。\n\n## 需要确认或补充\n\n当前资料均为企业通用能力描述，缺少针对特定招标项目的**具体证明材料**。建议补充以下内容：\n- 与本次招标物资对应的具体产品型式试验报告或检验报告（需包含报告编号、检测机构、合格结论）。\n- 本次投标所需的关键人员证书（如项目经理、技术负责人、质检员等，需提供姓名、证书编号、有效期）。\n- 针对招标文件要求的特定工况（如高寒、高海拔、盐雾环境）下的产品适应性证明或认证证书。\n\n## 参考依据\n\n- **资料1**：碳足迹报告 / 知识片段，描述了泰昌的产品范围、生产及检测设备清单。\n- **资料2**：绿色发展规划报告 / 知识片段，提供了企业基本概况与产品范围。\n- **图片资产1**：泰昌试验设备台账第1页，展示生产制造能力。\n- **图片资产2、8**：泰昌微机控制电子万能试验机第1页至第7页，展示试验检测核心设备资质。"
+  }
+}
