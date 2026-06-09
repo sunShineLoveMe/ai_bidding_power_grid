@@ -115,6 +115,18 @@ do_not_mix_with=["泰昌企业事实"]
 - 营业执照、资质证书、认证证书、检验报告、审计报告、人员证书、社保证明、合同证明等 PDF 扫描件可按文件顺序逐页渲染为整页图片资产；metadata 必须保留 `source_file`、`page_no`、`page_index`、`asset_visual_type=full_page_render/full_page_certificate/full_page_document_image`、`full_page=true`。
 - 产品实物、生产线、检测设备、厂房、仓库等用于宣传和技术响应的图片，优先要求客户提供原始高清照片；如客户只提供 PDF 图片合集，可按 PDF 整页渲染入库，但不得从 PDF 中自动裁局部冒充原始照片。
 
+## 泰昌产品参数与检验报告重抽取 SOP
+
+客户后续新增泰昌产品参数、检验报告、规格型号、试验检测报告或包含保证值/检验结果的资料时，必须进入产品参数重抽取与真实链路回归流程。
+
+执行原则：
+
+- 只把泰昌原始产品资料和检验报告作为企业事实来源；辽宁资料仅可作为抽取 QA/异常校验参照，不得自动推出泰昌覆盖辽宁全部规格或全部需求。
+- 新资料落位、解析或 OCR 后，优先执行：`set -a; source .env; set +a; .venv/bin/python scripts/rag/run_taichang_product_parameter_refresh.py --run-id <run>`。
+- 该脚本必须完成产品参数重抽取、`taichang_product_parameter_rows.json/csv` 更新、参数查询单测、增量回归门禁和真实 `/api/knowledge/search/stream` 页面同源参数问答抽样。
+- 验收至少检查：成功抽取报告数、参数行数、CPVC/MPP 产品族是否存在、`qa_reference.scope=qa_only_not_coverage_judgement`、MPP 环刚度 `66.40`、CPVC 平均内径 `250.2~250.4` 和壁厚 `15.2~15.3` 的真实问答结果。
+- 每次重抽取后必须写入 `docs/rag/runs/<run>_summary.md`，并同步 `docs/rag/evaluation-records.md`、`docs/rag/todo.md` 或对应任务状态。
+
 ## 国内中文命名规则
 
 本项目面向国内电网投标场景，企业知识库、资信库、产品库、图片资产、标签、分类和页面展示文案必须使用中文友好命名。

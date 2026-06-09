@@ -104,6 +104,7 @@
 | P4-4 | [x] | 技术偏差/商务偏差辅助 | `scripts/rag/generate_technical_deviation_report.py`、`technical_deviation_rows.json/csv`、`technical_deviation_summary.md`、`docs/rag/runs/run_20260607_p4_deviation_summary.md` | 已基于 928 行技术参数生成偏差辅助判断，支持 `pending_response/no_deviation/positive_deviation/negative_deviation/manual_review/informational`；本批 900 行因投标响应/保证值为空被标为待响应，避免误写无偏差 |
 | P4-5 | [x] | 泰昌产品/检验报告参数抽取 | `scripts/rag/extract_taichang_product_parameters.py`、`taichang_product_parameter_rows.json/csv`、`taichang_product_parameter_summary.md`、`docs/rag/runs/run_20260608_taichang_product_params_summary.md` | 已抽取 2 份泰昌检验报告、36 行企业事实参数；辽宁参数仅作 QA/异常校验参照，不自动形成泰昌覆盖辽宁全部规格的结论 |
 | P4-6 | [x] | 泰昌产品参数真实查询接入 | `backend/rag/product_parameters.py`、`backend/api/knowledge.py`、`tests/test_taichang_product_parameter_query.py`、`docs/rag/runs/run_20260608_taichang_product_params_json_query_summary.md` | 已把 `taichang_product_parameter_rows.json` 作为 staging 查询层接入真实 API / 页面同源 stream 问答；MPP 环刚度、CPVC 平均内径/壁厚可返回具体值；辽宁边界仍正确 |
+| P4-7 | [x] | 泰昌产品参数自动重抽取与真实链路回归 | `scripts/rag/run_taichang_product_parameter_refresh.py`、`tests/test_taichang_product_parameter_refresh.py`、`docs/rag/runs/run_20260608_taichang_product_parameter_refresh_summary.md` | 已固化客户新增泰昌产品/检验报告后的重抽取 SOP；一键完成结构化抽取、参数查询测试、增量回归门禁和真实页面同源 stream 抽样；本轮抽取 2 份检验报告、36 行参数，MPP 环刚度与 CPVC 平均内径/壁厚真实问答通过 |
 
 ## 每批客户资料入库检查清单
 
@@ -119,8 +120,7 @@
 
 ## 当前最近任务
 
-1. 评估客户后续新增产品/检验报告资料时的自动重抽取流程：新资料进入后自动更新 `taichang_product_parameter_rows.json`，并复跑真实 API/stream 参数问答。
-2. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表，让页面和问答可直接按企业、产品、规格、参数名精确查询。
-3. 仅在明确目标省公司/批次/规格和客户确认口径后，再把泰昌产品参数用于具体投标偏差判断；不得默认以辽宁样本推出泰昌覆盖义务。
-4. 向客户补充产品实物高清照片、生产线/检测设备原始照片、同类业绩合同/中标通知书/验收证明、项目级盖章扫描件和官方 Logo。
-5. 追加导出观感人工验收：打开 30 章节真实 DOCX，检查封面、目录、正文、表格、页眉页脚、页码和正式图片资产插入效果。
+1. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表，让页面和问答可直接按企业、产品、规格、参数名精确查询。
+2. 仅在明确目标省公司/批次/规格和客户确认口径后，再把泰昌产品参数用于具体投标偏差判断；不得默认以辽宁样本推出泰昌覆盖义务。
+3. 向客户补充产品实物高清照片、生产线/检测设备原始照片、同类业绩合同/中标通知书/验收证明、项目级盖章扫描件和官方 Logo。
+4. 追加导出观感人工验收：打开 30 章节真实 DOCX，检查封面、目录、正文、表格、页眉页脚、页码和正式图片资产插入效果。

@@ -1038,3 +1038,60 @@ set -a; source .env; set +a; .venv/bin/python scripts/rag/run_incremental_regres
 - `.venv/bin/python -m pytest tests/test_incremental_regression_gate.py tests/test_rerank_client.py tests/test_rag_retrieval.py -q`
 - 结果：17 passed，1 个 PyPDF2 deprecation warning。
 - `py_compile`：通过。
+
+---
+
+## Run 22 — 泰昌产品参数自动重抽取与真实链路回归（2026-06-08）
+
+> Run summary：`docs/rag/runs/run_20260608_taichang_product_parameter_refresh_summary.md`  
+> 页面同源 Stream 抽样：`docs/rag/runs/run_20260608_taichang_product_parameter_refresh_real_stream.json`  
+> Gate summary：`docs/rag/runs/run_20260608_taichang_product_parameter_refresh_gate_summary.md`
+
+### 背景
+
+用户确认客户后续还会持续补充泰昌产品参数、检验报告和技术资料，要求把“新增资料后自动重抽取、真实问答验证、回归记录同步”固化为标准流程，并开始执行本轮验证。
+
+### 处理内容
+
+- 新增 `scripts/rag/run_taichang_product_parameter_refresh.py`，一键执行泰昌产品参数重抽取、抽取报告校验、参数查询测试、增量回归门禁和真实页面同源 stream 抽样。
+- 新增 `tests/test_taichang_product_parameter_refresh.py`，覆盖抽取报告门禁与真实 stream 结果校验逻辑。
+- 更新 `AGENTS.md`，新增“泰昌产品参数与检验报告重抽取 SOP”，要求客户新增同类资料后必须运行该流程，并同步 `docs/rag/runs/`、`evaluation-records.md` 和 `todo.md`。
+- 保持辽宁技术参数只作 QA/异常校验参照，不自动推出泰昌覆盖辽宁全部规格或全部需求。
+
+### 抽取与真实链路结果
+
+| 项目 | 结果 |
+| --- | --- |
+| 检验报告文档 | 2 |
+| 成功抽取文档 | 2 |
+| 产品参数行 | 36 |
+| QA 参照边界 | `qa_only_not_coverage_judgement` |
+| MPP 真实问答校验 | 返回环刚度 `66.40 kN/m²` |
+| CPVC 真实问答校验 | 返回平均内径 `250.2/250.4 mm`、壁厚 `15.2/15.3 mm` |
+
+### 增量回归门禁
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 | Rerank 打分用例 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 259 ms | 0 |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 622 ms | 28 |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.950 | 3.3% | 0.0% | 317 ms | 0 |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 0.983 | 0.0% | 0.0% | 678 ms | 30 |
+
+### 结论
+
+- Run PASS。
+- 后续客户新增泰昌产品参数、检验报告或等价技术资料后，优先运行：
+
+```bash
+set -a; source .env; set +a; .venv/bin/python scripts/rag/run_taichang_product_parameter_refresh.py --run-id <run>
+```
+
+- 该流程失败时不得只记录接口可返回，必须保留失败 summary/JSON 并在本文件说明未达标项。
+
+### 回归验证
+
+- `.venv/bin/python -m pytest tests/test_taichang_product_parameter_refresh.py tests/test_taichang_product_parameter_extraction.py tests/test_taichang_product_parameter_query.py -q`
+- 结果：9 passed。
+- `.venv/bin/python -m py_compile scripts/rag/run_taichang_product_parameter_refresh.py scripts/rag/extract_taichang_product_parameters.py backend/rag/product_parameters.py`
+- 结果：通过。
