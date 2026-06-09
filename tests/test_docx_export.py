@@ -9,7 +9,13 @@ from docx.oxml.ns import qn
 from flask import Flask
 
 from backend.api.routes import build_project_bid_markdown, _asset_allowed_for_bid, _demote_body_markdown_headings, _numbered_export_sections, _strip_duplicate_section_heading
-from backend.export.md_to_word import DOCX_BIDDER_FULL_NAME, convert_md_to_word, refresh_docx_fields_with_soffice, taichang_bid_document_title
+from backend.export.md_to_word import (
+    DOCX_BIDDER_FULL_NAME,
+    convert_md_to_word,
+    extract_bid_cover_fields,
+    refresh_docx_fields_with_soffice,
+    taichang_bid_document_title,
+)
 
 
 class DocxExportRegressionTest(unittest.TestCase):
@@ -516,6 +522,55 @@ class DocxExportRegressionTest(unittest.TestCase):
             "国网辽宁电力2025年第三次物资协议库存招标采购投标文件",
             taichang_bid_document_title("国网辽宁电力2025年第三次物资协议库存招标采购招标文件"),
         )
+
+    def test_docx_cover_includes_extracted_formal_bid_fields(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            markdown_path = Path(tmpdir) / "cover-fields.md"
+            markdown_path.write_text(
+                "\n".join(
+                    [
+                        "# 国网辽宁电力2025年第三次物资协议库存招标采购商务投标文件",
+                        "",
+                        "**招标编号：** 2225AC",
+                        "**分标编号**：2225AC-1408006-3401",
+                        "**分标名称**：电缆保护管CPVC",
+                        "**包号**：包1-包2",
+                        "",
+                        "# 1. 商务偏差表",
+                        "",
+                        "全部响应，无偏差。",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            output_path, report = convert_md_to_word(markdown_path, return_report=True)
+            document = Document(str(output_path))
+            non_empty_paragraphs = [p.text for p in document.paragraphs if p.text.strip()]
+
+            self.assertIn("文件类型：商务投标文件", non_empty_paragraphs[:10])
+            self.assertIn("招标编号：2225AC", non_empty_paragraphs[:10])
+            self.assertIn("分标编号：2225AC-1408006-3401", non_empty_paragraphs[:10])
+            self.assertIn("分标名称：电缆保护管CPVC", non_empty_paragraphs[:10])
+            self.assertIn("包号：包1-包2", non_empty_paragraphs[:10])
+            self.assertEqual("2225AC", report["template"]["cover_fields"]["招标编号"])
+
+    def test_extract_bid_cover_fields_from_markdown_table(self):
+        fields = extract_bid_cover_fields(
+            "\n".join(
+                [
+                    "# 投标文件",
+                    "",
+                    "| 字段 | 内容 |",
+                    "| --- | --- |",
+                    "| 招标编号 | 2225AC |",
+                    "| 分标名称 | 电缆保护管MPP |",
+                ]
+            )
+        )
+
+        self.assertEqual("2225AC", fields["招标编号"])
+        self.assertEqual("电缆保护管MPP", fields["分标名称"])
 
     def test_bid_export_assets_are_limited_to_taichang_enterprise_facts(self):
         taichang_asset = {

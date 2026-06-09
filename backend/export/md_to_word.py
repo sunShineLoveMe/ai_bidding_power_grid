@@ -80,6 +80,15 @@ DOCX_TOC_TITLE_FONT_SIZE = float(os.getenv("DOCX_TOC_TITLE_FONT_SIZE", "22"))
 DOCX_TOC_ENTRY_FONT_SIZE = float(os.getenv("DOCX_TOC_ENTRY_FONT_SIZE", "10.5"))
 DOCX_TOC_ENTRY_LINE_SPACING = float(os.getenv("DOCX_TOC_ENTRY_LINE_SPACING", "18"))
 
+COVER_FIELD_LABELS = (
+    "文件类型",
+    "招标编号",
+    "分标编号",
+    "分标名称",
+    "包号",
+    "包名称",
+)
+
 
 def clean_formal_bid_text(text):
     """Remove emoji/decorative symbols that are unsuitable for formal bid DOCX output."""
@@ -167,7 +176,41 @@ def taichang_bid_document_title(project_name: str) -> str:
     return f"{value}投标文件"
 
 
-def docx_template_report() -> dict:
+def _extract_cover_field_value(md_content: str, label: str) -> str:
+    label_pattern = re.escape(label)
+    patterns = [
+        rf"(?:^|\n)\s*(?:[-*+]\s*)?(?:\*\*)?{label_pattern}\s*[:：](?:\*\*)?\s*(.+?)(?:\n|$)",
+        rf"(?:^|\n)\s*(?:[-*+]\s*)?(?:\*\*)?{label_pattern}(?:\*\*)?\s*[:：]\s*(.+?)(?:\n|$)",
+        rf"(?:^|\n)\s*\|\s*(?:\*\*)?{label_pattern}(?:\*\*)?\s*\|\s*(.+?)\s*\|",
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, md_content)
+        if match:
+            value = clean_formal_bid_text(re.sub(r"\*\*(.*?)\*\*", r"\1", match.group(1))).strip()
+            value = re.sub(r"^[*：:\s]+", "", value).strip()
+            value = re.split(r"\s{2,}|\s*\|\s*", value)[0].strip()
+            if value and value not in {"无", "暂无", "待补充", "【待补充】"}:
+                return value[:80]
+    return ""
+
+
+def extract_bid_cover_fields(md_content: str) -> dict:
+    fields = {
+        label: value
+        for label in COVER_FIELD_LABELS
+        if (value := _extract_cover_field_value(md_content, label))
+    }
+    if not fields.get("文件类型"):
+        title_match = re.search(r"^\s*#\s+(.+?)\s*$", md_content, re.MULTILINE)
+        title = clean_formal_bid_text(title_match.group(1).strip()) if title_match else ""
+        for candidate in ("商务投标文件", "技术投标文件", "资格投标文件", "价格投标文件", "投标文件"):
+            if candidate in title:
+                fields["文件类型"] = candidate
+                break
+    return fields
+
+
+def docx_template_report(cover_fields: dict | None = None) -> dict:
     return {
         "template_id": DOCX_TEMPLATE_ID,
         "bidder_full_name": DOCX_BIDDER_FULL_NAME,
@@ -197,6 +240,7 @@ def docx_template_report() -> dict:
             "header_text": f"{DOCX_BIDDER_FULL_NAME}投标文件",
             "header_max_chars": DOCX_HEADER_MAX_CHARS,
         },
+        "cover_fields": cover_fields or {},
     }
 
 
@@ -344,7 +388,7 @@ def _add_formal_toc_entry(doc, entry: dict, *, tab_position_twips: int) -> None:
     _add_pageref_field(paragraph, str(entry.get("anchor") or ""), placeholder="1")
 
 
-def _add_cover_page(doc, project_name: str) -> None:
+def _add_cover_page(doc, project_name: str, cover_fields: dict | None = None) -> None:
     bid_title = taichang_bid_document_title(project_name)
     spacer_count = 4
     for _ in range(spacer_count):
@@ -357,6 +401,26 @@ def _add_cover_page(doc, project_name: str) -> None:
     title.paragraph_format.line_spacing = Pt(34)
     title_run = title.add_run(bid_title)
     apply_run_font(title_run, east_asia="黑体", size=DOCX_COVER_TITLE_FONT_SIZE, bold=True)
+
+    doc.add_paragraph()
+    formal_fields = {
+        "文件类型": cover_fields.get("文件类型") if cover_fields else "",
+        "招标编号": cover_fields.get("招标编号") if cover_fields else "",
+        "分标编号": cover_fields.get("分标编号") if cover_fields else "",
+        "分标名称": cover_fields.get("分标名称") if cover_fields else "",
+        "包号": cover_fields.get("包号") if cover_fields else "",
+        "包名称": cover_fields.get("包名称") if cover_fields else "",
+    }
+    for label, value in formal_fields.items():
+        if not value:
+            continue
+        para = doc.add_paragraph()
+        para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        para.paragraph_format.first_line_indent = Pt(0)
+        para.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
+        para.paragraph_format.line_spacing = Pt(24)
+        run = para.add_run(f"{label}：{value}")
+        apply_run_font(run, east_asia="宋体", size=15)
 
     doc.add_paragraph()
     bidder = doc.add_paragraph()
@@ -373,8 +437,8 @@ def _add_cover_page(doc, project_name: str) -> None:
     doc.add_page_break()
 
 
-def _add_toc_page(doc, project_name: str, heading_entries: list[dict]) -> None:
-    _add_cover_page(doc, project_name)
+def _add_toc_page(doc, project_name: str, heading_entries: list[dict], cover_fields: dict | None = None) -> None:
+    _add_cover_page(doc, project_name, cover_fields=cover_fields)
 
     toc_title = doc.add_paragraph()
     toc_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -1035,7 +1099,8 @@ def convert_md_to_word(md_file, return_report: bool = False):
     set_document_format(doc, project_name)
     title_line_index, heading_entries = _markdown_heading_lines(md_content)
     heading_entry_by_line = {entry["line_index"]: entry for entry in heading_entries}
-    _add_toc_page(doc, project_name, heading_entries)
+    cover_fields = extract_bid_cover_fields(md_content)
+    _add_toc_page(doc, project_name, heading_entries, cover_fields=cover_fields)
     
     # 处理Markdown内容
     lines = md_content.split('\n')
@@ -1181,7 +1246,7 @@ def convert_md_to_word(md_file, return_report: bool = False):
 
         logging.info("已生成 Word 文档: %s", saved_path)
         if return_report:
-            image_report["template"] = docx_template_report()
+            image_report["template"] = docx_template_report(cover_fields=cover_fields)
             return Path(saved_path), image_report
         return Path(saved_path)
     finally:
