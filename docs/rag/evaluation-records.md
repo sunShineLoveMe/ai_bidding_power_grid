@@ -74,6 +74,57 @@ python scripts/rag/eval_recall.py --k 5 --no-filter --save docs/rag/_run_nofilte
 
 ---
 
+## Run 20260611 — 泰昌资质补充包与 Logo 入库回归（2026-06-11）
+
+> 完整记录：`docs/rag/runs/run_20260611_taichang_supplement_full_summary.md`
+> 增量门禁：`docs/rag/runs/run_20260611_taichang_supplement_ingestion_summary.md`
+> 真实 stream：`docs/rag/runs/run_20260611_taichang_supplement_real_stream.json`
+
+### 触发原因
+
+客户补充 `泰昌资质文件(补充).zip` 和泰昌官方 Logo，需要按泰昌 MVP 试点企业事实资料入库，并验证不会破坏既有 Base 与泰昌专项召回质量。
+
+### 入库数据
+
+| 项 | 数量 |
+| --- | ---: |
+| inventory 文件 | 70 |
+| 文本入库文档 | 13 |
+| parent chunks | 33 |
+| child chunks / embeddings | 331 |
+| 正式图片资产 payload | 297 |
+| 图片资产导入成功 | 297 |
+| metadata blocked | 0 |
+
+### 回归门禁
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% |
+
+门禁结论：PASS，无召回、来源排序、禁用关键词或跨资料域串扰退化。
+
+### 真实链路抽样
+
+真实 `/api/bidding/knowledge/search/stream` 验证了：
+
+- CPVC/MPP 内径 250 检验报告参数可返回报告编号、平均内径、环刚度；
+- 泰昌官方 Logo、MPP 生产线、宣传彩页等图片资产可被召回；
+- 中标通知书专项问题可返回项目名称、招标编号 `0322AB`、包号 `157-保护管（CPVC和MPP） 包2_电缆保护管MPP和CPVC`；
+- 复合问题“合同或中标通知书”中，检索层能命中资料，但生成回答漏提中标通知书，记录为回答合成完整性待优化项。
+
+### 处置记录
+
+- 新增 staging 脚本 `scripts/rag/stage_taichang_supplement_20260611.py`。
+- 文本抽取清洗 NUL/control 字符，解决 PostgreSQL text 写入限制。
+- 签名、手章、公章图片仅归档，设置为不自动用于标书。
+- CPVC/MPP 检验报告编号与既有结构化参数层一致，本次只补充可追溯文本与图片来源，不重复新增参数行。
+
+---
+
 ## Run 2 — 删除水利误入库记录后的复验（2026-06-02）
 
 > 摘要：`docs/rag/runs/run_20260602_152803_summary.md`

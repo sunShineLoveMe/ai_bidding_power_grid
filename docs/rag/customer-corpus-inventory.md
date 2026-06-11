@@ -1,6 +1,6 @@
 # 江西/山西客户标书资料 Inventory
 
-> 状态日期：2026-06-06
+> 状态日期：2026-06-11
 > 范围：客户提供的江西、山西、辽宁国家电网物资协议库存公开招标采购资料包，以及泰昌 MVP 试点企业资料。
 > 目标：为 P1 真实标书 RAG 入库、跨批次负样本和表格结构化解析提供文件清单。
 
@@ -12,6 +12,7 @@
 | 山西 | 2026 年第二次物资协议库存公开招标采购 | 铁构件 / 包 1 | `rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/` | P1 |
 | 辽宁 | 2025 年第三次物资协议库存招标采购 | 电缆保护管 CPVC / MPP，CPVC 包 1-2、MPP 包 1-4 | `rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/` | P1 |
 | 泰昌 | MVP 试点企业资料 | 企业资质、财务、生产、检测、绿色低碳材料 | `rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/` | P1 |
+| 泰昌 | 资质补充资料（2026-06-11） | Logo、检验报告、生产/检测/财务/绿色低碳/项目业绩补充材料 | `rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/` | P1A |
 
 解析准备批次：
 
@@ -19,6 +20,7 @@
 | --- | --- | --- | --- |
 | `customer_jx_sx_20260602_p1` | `parsed_outputs/power_grid_customer_corpus/customer_jx_sx_20260602_p1/manifest.json` | `parsed_outputs/power_grid_customer_corpus/customer_jx_sx_20260602_p1/parse_quality_report.md` | 23 个 `.doc/.docx/.xlsx` 已解析，21 个归档文件已登记，`needs_review=0` |
 | `customer_liaoning_taichang_20260606` | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_inventory.json` | `docs/rag/liaoning-taichang-mvp-corpus-review.md` | 已完成解压和初步 inventory；尚未正式 OCR、分块、入库、评测 |
+| `customer_taichang_supplement_20260611` | `parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/manifest.json` | `docs/rag/runs/run_20260611_taichang_supplement_full_summary.md` | 已完成 70 个文件 inventory，13 份文本资料入库，297 个正式图片资产入库，增量回归门禁 PASS |
 
 当前解压后发现的核心文件类型：
 
@@ -73,6 +75,17 @@
 | `泰昌资料.zip` | zip | `raw_enterprise_package` | `enterprise=泰昌`、`privacy_level=private` | P1 | 原始包保留，已解压 |
 | `泰昌资料/*` | pdf/jpg | `enterprise_evidence` | `enterprise=泰昌`、`evidence_type=finance/certification/production/testing/green_low_carbon` | P1 | 扫描件多，需 MinerU/OCR 和脱敏 |
 | `商务投标文件-中标，按投标人制作.pdf` | pdf | `winning_bid_reference` | `doc_owner=河北豪乾`、`reference_only=true`、`material_category=电缆保护管CPVC/MPP/NHAP` | P1 | 362 页，非泰昌主体，禁止作为泰昌事实来源 |
+
+## 泰昌资质补充资料（2026-06-11）
+
+| 文件/目录 | 类型 | 角色建议 | metadata 建议 | 处理状态 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `泰昌资质文件(补充).zip` | zip | `raw_enterprise_package` | `enterprise=泰昌`、`source_domain=enterprise_fact`、`tenant_visibility=taichang_only` | 已落位并解压 | 原始包保留在 `05_enterprise_documents/02_泰昌资质文件补充_20260611/` |
+| `assets/icons/taichang.png` / `泰昌官方Logo.png` | png | `brand_logo` | `evidence_type=brand_logo`、`target_library=qualification_library` | 已入库 | 可用于标书封面、页眉、企业介绍页，需遵循正式导出版式 |
+| CPVC/MPP 内径 250 检验报告 | pdf/jpg | `inspection_report` | `evidence_type=inspection_report`、`target_library=product_library` | 文本与整页图片已入库 | 报告编号与既有结构化参数一致：MPP `2024100312005501712`，CPVC `2024100312005501713` |
+| 生产线、产品实物、检测设备图片 | jpg/png/pdf | `enterprise_evidence` | `evidence_type=production_capacity/testing_capacity` | 正式图片资产已入库 | 可用于生产制造能力、试验检测能力章节配图 |
+| 财务、资质证书、绿色低碳、项目业绩材料 | pdf/jpg/png | `enterprise_evidence` | `evidence_type=finance/certification/green_low_carbon/project_performance` | 文本可抽取项与整页图片已入库 | 包含合同协议书和中标通知书，作为项目业绩证明材料 |
+| 公章、法人章、签名图片 | png/jpg | `restricted_signature_seal` | `allowed_for_bid=false`、`fact_source_allowed_for_enterprise=false` | 仅归档，不自动用于标书 | 需人工授权后才可用于签章流程 |
 
 ## 首批真实场景建议
 

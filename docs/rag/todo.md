@@ -1,6 +1,6 @@
 # 国家电网 RAG 基座数据工程待办清单
 
-> 状态日期：2026-06-08
+> 状态日期：2026-06-11
 > 适用范围：电网/国家电网招投标 RAG 基座数据、客户标书模板、行业资料、召回评测与上线门禁。
 
 本文档用于跟踪 RAG 基座数据工程的优先级、完成度和验收口径。全局产品路线仍看 `docs/development/roadmap.md`；本清单只记录 RAG 数据工程相关任务。
@@ -77,6 +77,7 @@
 | P1A-8 | [x] | 辽宁/泰昌 MVP 正式入库与回归 | `parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/formal_ingestion_summary.md`、`docs/rag/runs/run_20260606_taichang_mvp_base_filtered.json`、`parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/rebuild_formal_image_assets_report.md` | 已写入 124 个 `knowledge_documents`、29683 个 `document_chunks`、87 条结构化货物清单；图片资产已从 242 个 MinerU 局部图重建为 300 个正式整页/原图资产；Base Recall@5 保持 86.7%，专项 Recall@5 100% |
 | P1A-9 | [x] | P0：泰昌 MVP 图片智能问答与图文并茂选图准确性 | `backend/rag/retrieval.py`、`backend/api/knowledge.py`、`backend/api/routes.py`、`frontend/src/pages/KnowledgeBase/KnowledgeSearchDrawer.tsx`、`tests/test_rag_asset_scoring.py`、`tests/test_rag_retrieval.py`、`docs/rag/runs/run_20260606_taichang_mvp_asset_p0_*`、`scripts/rag/rebuild_taichang_formal_image_assets.py` | 问答资产检索与企业知识库问答已按泰昌企业事实 metadata 过滤；企业助手不再暴露资料范围/问答类型选择；参考来源按相关度降序、最多 5 条，且不明示江西/山西/辽宁等招标资料标签；标书配图已按 `evidence_type` 强约束生产制造、试验检测、绿色低碳、营业执照/证书、检验报告；真实库现为 300 个正式整页/原图资产；页面展示标题、分类、标签使用中文命名 |
 | P1A-10 | [x] | 企业知识库参考来源中文化与确定性来源去重 | `backend/rag/display_names.py`、`scripts/rag/repair_chinese_display_names.py`、`scripts/rag/stage_liaoning_taichang_mvp.py`、`frontend/src/pages/KnowledgeBase/KnowledgeSearchDrawer.tsx`、`docs/rag/runs/run_20260608_chinese_display_names_*` | 已修复参考来源中 `taichang_*`、`power_grid_*`、`*_private.md` 等内部命名展示；9 个遗留资产目录 md 已改为中文文件名；真实库 metadata 已补充中文 `source_display_name/category_label/source_file`；同一 MPP 检验报告命中 5 行结构化参数时页面去重为 1 条确定性来源；Base Recall@5 96.7%，泰昌专项 Recall@5 100% |
+| P1A-11 | [x] | 泰昌资质补充包与官方 Logo 入库 | `scripts/rag/stage_taichang_supplement_20260611.py`、`parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/`、`docs/rag/runs/run_20260611_taichang_supplement_full_summary.md` | 已处理 `泰昌资质文件(补充).zip` 和 `taichang.png`；70 个文件完成 inventory，13 份文本资料入库，297 个正式图片资产入库；签章/签名图片仅归档不自动用于标书；增量回归门禁 PASS，真实 stream 验证 CPVC/MPP 参数、Logo/生产线资产和中标通知书专项问答 |
 
 ## P3：召回质量增强
 
@@ -122,5 +123,6 @@
 
 1. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表，让页面和问答可直接按企业、产品、规格、参数名精确查询。
 2. 仅在明确目标省公司/批次/规格和客户确认口径后，再把泰昌产品参数用于具体投标偏差判断；不得默认以辽宁样本推出泰昌覆盖义务。
-3. 向客户补充产品实物高清照片、生产线/检测设备原始照片、同类业绩合同/中标通知书/验收证明、项目级盖章扫描件和官方 Logo。
-4. 追加导出观感人工验收：打开 30 章节真实 DOCX，检查封面、目录、正文、表格、页眉页脚、页码和正式图片资产插入效果。
+3. 对补充包中无文本扫描 PDF 评估是否追加 OCR；当前已作为正式整页图片资产入库。
+4. 优化真实 stream 复合问题回答完整性：检索层能命中中标通知书，但“合同或中标通知书”复合查询的生成回答漏提中标通知书。
+5. 追加导出观感人工验收：打开 30 章节真实 DOCX，检查封面、目录、正文、表格、页眉页脚、页码和正式图片资产插入效果。
