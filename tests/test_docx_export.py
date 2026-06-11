@@ -3,8 +3,10 @@ import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
+from zipfile import ZipFile
 
 from docx import Document
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING
 from docx.oxml.ns import qn
 from flask import Flask
 
@@ -17,6 +19,10 @@ from backend.api.routes import (
 )
 from backend.export.md_to_word import (
     DOCX_BIDDER_FULL_NAME,
+    DOCX_BODY_FIRST_LINE_INDENT_PT,
+    DOCX_BODY_LINE_SPACING,
+    DOCX_LIST_HANGING_INDENT_PT,
+    DOCX_LIST_LEFT_INDENT_PT,
     convert_md_to_word,
     extract_bid_cover_fields,
     refresh_docx_fields_with_soffice,
@@ -379,6 +385,76 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertTrue(document.settings.element.xpath(".//w:updateFields[@w:val='true']"))
             self.assertTrue(document._element.xpath(".//w:fldChar[@w:dirty='true']"))
 
+    def test_formal_toc_stability_level_limit_indents_fields_and_markers(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            markdown_path = Path(tmpdir) / "toc-stability.md"
+            markdown_path.write_text(
+                "\n".join(
+                    [
+                        "# 目录稳定性测试投标文件",
+                        "",
+                        "# 1. 一级章节",
+                        "",
+                        "正文内容。",
+                        "",
+                        "## 1.1 二级章节",
+                        "",
+                        "正文内容。",
+                        "",
+                        "### 1.1.1 三级章节",
+                        "",
+                        "正文内容。",
+                        "",
+                        "#### 1.1.1.1 四级章节",
+                        "",
+                        "正文内容。",
+                        "",
+                        "##### 1.1.1.1.1 五级章节",
+                        "",
+                        "正文内容。",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            output_path = convert_md_to_word(markdown_path)
+            document = Document(str(output_path))
+            non_empty = [p.text for p in document.paragraphs if p.text.strip()]
+            toc_entries = [p for p in document.paragraphs if "\t" in p.text and p.text.strip()[0].isdigit()]
+            field_codes = [node.text or "" for node in document._element.xpath(".//w:instrText")]
+
+            self.assertIn("目  录", non_empty[:8])
+            self.assertEqual(4, len(toc_entries))
+            self.assertEqual([
+                "1. 一级章节",
+                "1.1 二级章节",
+                "1.1.1 三级章节",
+                "1.1.1.1 四级章节",
+            ], [p.text.split("\t")[0] for p in toc_entries])
+            self.assertNotIn("1.1.1.1.1 五级章节", "\n".join(p.text for p in toc_entries))
+
+            expected_indents = [0, 18, 36, 54]
+            for paragraph, expected_indent in zip(toc_entries, expected_indents):
+                self.assertEqual(expected_indent, paragraph.paragraph_format.left_indent.pt)
+                self.assertEqual(18, paragraph.paragraph_format.line_spacing.pt)
+                self.assertEqual(0, paragraph.paragraph_format.first_line_indent.pt)
+                self.assertFalse(paragraph._p.xpath(".//w:keepLines"))
+                self.assertFalse(paragraph._p.xpath(".//w:keepNext"))
+                self.assertTrue(paragraph._p.xpath(".//w:tab[@w:val='right'][@w:leader='dot']"))
+
+            for index in range(1, 5):
+                self.assertTrue(any(f"PAGEREF bid_heading_{index}" in code for code in field_codes))
+
+            with ZipFile(output_path) as docx_zip:
+                document_xml = docx_zip.read("word/document.xml").decode("utf-8")
+                styles_xml = docx_zip.read("word/styles.xml").decode("utf-8")
+            self.assertNotIn("w:keepLines", document_xml)
+            self.assertNotIn("w:keepNext", document_xml)
+            self.assertNotIn("w:pageBreakBefore", document_xml)
+            self.assertNotIn("w:keepLines", styles_xml)
+            self.assertNotIn("w:keepNext", styles_xml)
+            self.assertNotIn("w:pageBreakBefore", styles_xml)
+
     def test_mermaid_fence_source_is_not_exported_when_conversion_fails(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             markdown_path = Path(tmpdir) / "mermaid.md"
@@ -550,21 +626,187 @@ class DocxExportRegressionTest(unittest.TestCase):
             body_run = body_paragraph.runs[0]
             body_rfonts = body_run._element.rPr.rFonts
             table_run = document.tables[0].cell(1, 1).paragraphs[0].runs[0]
+            table = document.tables[0]
+            table_pr = table._tbl.tblPr
+            table_width = table_pr.find(qn("w:tblW"))
+            table_layout = table_pr.find(qn("w:tblLayout"))
 
             self.assertEqual("sgcc_taichang_bid", report["template"]["template_id"])
             self.assertEqual(DOCX_BIDDER_FULL_NAME, report["template"]["bidder_full_name"])
             self.assertEqual("宋体", report["template"]["body_font"])
+            self.assertEqual(DOCX_BODY_FIRST_LINE_INDENT_PT, report["template"]["body_first_line_indent_pt"])
+            self.assertEqual(DOCX_LIST_LEFT_INDENT_PT, report["template"]["list_left_indent_pt"])
+            self.assertEqual(DOCX_LIST_HANGING_INDENT_PT, report["template"]["list_hanging_indent_pt"])
+            self.assertFalse(report["template"]["heading_keep_with_next"])
+            self.assertEqual(16, report["template"]["table_line_spacing_pt"])
             self.assertEqual("宋体", normal._element.rPr.rFonts.get(qn("w:eastAsia")))
             self.assertEqual("宋体", body_rfonts.get(qn("w:eastAsia")))
             self.assertEqual(10.5, body_run.font.size.pt)
+            self.assertEqual(WD_LINE_SPACING.EXACTLY, body_paragraph.paragraph_format.line_spacing_rule)
+            self.assertEqual(DOCX_BODY_LINE_SPACING, body_paragraph.paragraph_format.line_spacing.pt)
+            self.assertEqual(DOCX_BODY_FIRST_LINE_INDENT_PT, body_paragraph.paragraph_format.first_line_indent.pt)
             self.assertEqual("宋体", table_run._element.rPr.rFonts.get(qn("w:eastAsia")))
             self.assertEqual(10.5, table_run.font.size.pt)
+            self.assertEqual("5000", table_width.get(qn("w:w")))
+            self.assertEqual("pct", table_width.get(qn("w:type")))
+            self.assertEqual("fixed", table_layout.get(qn("w:type")))
             self.assertEqual(21, round(section.page_width.cm))
             self.assertEqual(29.7, round(section.page_height.cm, 1))
             self.assertEqual(2.0, round(section.top_margin.cm, 1))
             self.assertEqual(2.0, round(section.bottom_margin.cm, 1))
             self.assertIn(DOCX_BIDDER_FULL_NAME, section.header.paragraphs[0].text)
             self.assertLessEqual(len(section.header.paragraphs[0].text), 42)
+
+    def test_formal_bid_body_headings_and_lists_use_stable_paragraph_format(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            markdown_path = Path(tmpdir) / "body-format.md"
+            markdown_path.write_text(
+                "\n".join(
+                    [
+                        "# 正文格式测试投标文件",
+                        "",
+                        "",
+                        "# 1. 施工组织设计",
+                        "",
+                        "本节正文用于检查正式投标文件的正文段落格式。",
+                        "",
+                        "",
+                        "## 1.1 组织措施",
+                        "",
+                        "- 配置项目经理和技术负责人。",
+                        "- 建立质量、安全、进度协调机制。",
+                        "",
+                        "1. 明确资料提交节点。",
+                        "2. 明确现场配合责任。",
+                        "",
+                        "后续正文不得因为 Markdown 空行出现异常空白段落。",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            output_path, report = convert_md_to_word(markdown_path, return_report=True)
+            document = Document(str(output_path))
+            body_paragraph = next(p for p in document.paragraphs if p.text.startswith("本节正文"))
+            trailing_body = next(p for p in document.paragraphs if p.text.startswith("后续正文"))
+            heading = next(p for p in document.paragraphs if p.text == "1. 施工组织设计")
+            bullet = next(p for p in document.paragraphs if p.text.startswith("配置项目经理"))
+            numbered = next(p for p in document.paragraphs if p.text.startswith("明确资料提交"))
+
+            self.assertEqual(DOCX_BODY_FIRST_LINE_INDENT_PT, report["template"]["body_first_line_indent_pt"])
+            self.assertEqual(WD_LINE_SPACING.EXACTLY, body_paragraph.paragraph_format.line_spacing_rule)
+            self.assertEqual(DOCX_BODY_LINE_SPACING, body_paragraph.paragraph_format.line_spacing.pt)
+            self.assertEqual(DOCX_BODY_FIRST_LINE_INDENT_PT, body_paragraph.paragraph_format.first_line_indent.pt)
+            self.assertEqual(0, body_paragraph.paragraph_format.space_before.pt)
+            self.assertEqual(0, body_paragraph.paragraph_format.space_after.pt)
+            self.assertIsNone(body_paragraph.paragraph_format.keep_together)
+            self.assertIsNone(body_paragraph.paragraph_format.widow_control)
+            self.assertIsNone(trailing_body.paragraph_format.keep_together)
+
+            self.assertIsNone(heading.paragraph_format.keep_with_next)
+            self.assertIsNone(heading.paragraph_format.keep_together)
+            self.assertEqual(0, heading.paragraph_format.first_line_indent.pt)
+
+            for paragraph in (bullet, numbered):
+                self.assertEqual(WD_LINE_SPACING.EXACTLY, paragraph.paragraph_format.line_spacing_rule)
+                self.assertEqual(DOCX_BODY_LINE_SPACING, paragraph.paragraph_format.line_spacing.pt)
+                self.assertEqual(DOCX_LIST_LEFT_INDENT_PT, paragraph.paragraph_format.left_indent.pt)
+                self.assertEqual(-DOCX_LIST_HANGING_INDENT_PT, paragraph.paragraph_format.first_line_indent.pt)
+
+    def test_formal_docx_does_not_emit_black_square_paragraph_markers(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            markdown_path = Path(tmpdir) / "paragraph-marker.md"
+            markdown_path.write_text(
+                "\n".join(
+                    [
+                        "# 段落格式标记测试投标文件",
+                        "",
+                        "# 1. 商务响应",
+                        "",
+                        "正文段落一。",
+                        "",
+                        "## 1.1 响应要求",
+                        "",
+                        "正文段落二。",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            output_path = convert_md_to_word(markdown_path)
+            document = Document(str(output_path))
+            normal = document.styles["Normal"]
+            toc_entry = next(p for p in document.paragraphs if p.text.startswith("1. 商务响应") and "\t" in p.text)
+            body_paragraph = next(p for p in document.paragraphs if p.text == "正文段落一。")
+            heading = next(p for p in document.paragraphs if p.text == "1. 商务响应" and p.style.name.startswith("Heading"))
+
+            self.assertIsNone(normal.paragraph_format.keep_together)
+            self.assertIsNone(normal.paragraph_format.keep_with_next)
+            self.assertIsNone(toc_entry.paragraph_format.keep_together)
+            self.assertIsNone(toc_entry.paragraph_format.keep_with_next)
+            self.assertIsNone(body_paragraph.paragraph_format.keep_together)
+            self.assertIsNone(body_paragraph.paragraph_format.keep_with_next)
+            self.assertIsNone(heading.paragraph_format.keep_together)
+            self.assertIsNone(heading.paragraph_format.keep_with_next)
+            with ZipFile(output_path) as docx_zip:
+                document_xml = docx_zip.read("word/document.xml").decode("utf-8")
+                styles_xml = docx_zip.read("word/styles.xml").decode("utf-8")
+            for xml in (document_xml, styles_xml):
+                self.assertNotIn("w:keepLines", xml)
+                self.assertNotIn("w:keepNext", xml)
+                self.assertNotIn("w:pageBreakBefore", xml)
+
+            _, report = convert_md_to_word(markdown_path, return_report=True)
+            self.assertEqual(0, report["marker_cleanup"]["counts_after"]["keepLines"])
+            self.assertEqual(0, report["marker_cleanup"]["counts_after"]["keepNext"])
+
+    def test_formal_bid_tables_use_repeat_header_width_and_cell_spacing(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            markdown_path = Path(tmpdir) / "formal-table.md"
+            markdown_path.write_text(
+                "\n".join(
+                    [
+                        "# 表格正式化测试投标文件",
+                        "",
+                        "# 1. 资格审查资料",
+                        "",
+                        "| 序号 | 文件名称 | 响应情况 | 说明 |",
+                        "| --- | --- | --- | --- |",
+                        "| 1 | 营业执照 | 已提供 | 原件扫描件清晰完整，满足招标文件要求 |",
+                        "| 2 | 质量管理体系认证证书 | 已提供 | 证书在有效期内 |",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            output_path = convert_md_to_word(markdown_path)
+            document = Document(str(output_path))
+            table = document.tables[0]
+            table_pr = table._tbl.tblPr
+            table_width = table_pr.find(qn("w:tblW"))
+            table_layout = table_pr.find(qn("w:tblLayout"))
+            cell_margins = table_pr.find(qn("w:tblCellMar"))
+            first_cell_margins = table.cell(1, 1)._tc.get_or_add_tcPr().find(qn("w:tcMar"))
+            header_pr = table.rows[0]._tr.get_or_add_trPr()
+            header_repeat = header_pr.find(qn("w:tblHeader"))
+            header_shading = table.cell(0, 0)._tc.get_or_add_tcPr().find(qn("w:shd"))
+            header_run = table.cell(0, 1).paragraphs[0].runs[0]
+            body_paragraph = table.cell(1, 1).paragraphs[0]
+            centered_paragraph = table.cell(1, 0).paragraphs[0]
+
+            self.assertEqual("5000", table_width.get(qn("w:w")))
+            self.assertEqual("pct", table_width.get(qn("w:type")))
+            self.assertEqual("fixed", table_layout.get(qn("w:type")))
+            self.assertEqual("true", header_repeat.get(qn("w:val")))
+            self.assertEqual("D9EAF7", header_shading.get(qn("w:fill")))
+            self.assertEqual("100", cell_margins.find(qn("w:left")).get(qn("w:w")))
+            self.assertEqual("100", first_cell_margins.find(qn("w:left")).get(qn("w:w")))
+            self.assertTrue(header_run.bold)
+            self.assertEqual(WD_ALIGN_PARAGRAPH.LEFT, body_paragraph.alignment)
+            self.assertEqual(WD_ALIGN_PARAGRAPH.CENTER, centered_paragraph.alignment)
+            self.assertEqual(WD_LINE_SPACING.EXACTLY, body_paragraph.paragraph_format.line_spacing_rule)
+            self.assertEqual(16, body_paragraph.paragraph_format.line_spacing.pt)
+            self.assertEqual(0, body_paragraph.paragraph_format.first_line_indent.pt)
 
     def test_taichang_bid_document_title_rewrites_tender_file_title(self):
         self.assertEqual(

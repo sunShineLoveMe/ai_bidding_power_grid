@@ -20,6 +20,7 @@ import ipaddress
 import socket
 from datetime import datetime
 from urllib.parse import parse_qs, urlparse, unquote
+from zipfile import BadZipFile, ZipFile, ZIP_DEFLATED
 
 try:
     from PIL import Image, ImageOps
@@ -66,6 +67,9 @@ DOCX_BODY_EAST_ASIA = os.getenv("DOCX_BODY_EAST_ASIA", "宋体")
 DOCX_BODY_LATIN = os.getenv("DOCX_BODY_LATIN", "Times New Roman")
 DOCX_BODY_FONT_SIZE = float(os.getenv("DOCX_BODY_FONT_SIZE", "10.5"))
 DOCX_BODY_LINE_SPACING = float(os.getenv("DOCX_BODY_LINE_SPACING", "20"))
+DOCX_BODY_FIRST_LINE_INDENT_PT = float(os.getenv("DOCX_BODY_FIRST_LINE_INDENT_PT", str(DOCX_BODY_FONT_SIZE * 2)))
+DOCX_LIST_LEFT_INDENT_PT = float(os.getenv("DOCX_LIST_LEFT_INDENT_PT", "21"))
+DOCX_LIST_HANGING_INDENT_PT = float(os.getenv("DOCX_LIST_HANGING_INDENT_PT", "10.5"))
 DOCX_TABLE_EAST_ASIA = os.getenv("DOCX_TABLE_EAST_ASIA", "宋体")
 DOCX_TABLE_FONT_SIZE = float(os.getenv("DOCX_TABLE_FONT_SIZE", "10.5"))
 DOCX_HEADER_MAX_CHARS = int(os.getenv("DOCX_HEADER_MAX_CHARS", "42"))
@@ -79,6 +83,8 @@ DOCX_COVER_TITLE_FONT_SIZE = float(os.getenv("DOCX_COVER_TITLE_FONT_SIZE", "22")
 DOCX_TOC_TITLE_FONT_SIZE = float(os.getenv("DOCX_TOC_TITLE_FONT_SIZE", "22"))
 DOCX_TOC_ENTRY_FONT_SIZE = float(os.getenv("DOCX_TOC_ENTRY_FONT_SIZE", "10.5"))
 DOCX_TOC_ENTRY_LINE_SPACING = float(os.getenv("DOCX_TOC_ENTRY_LINE_SPACING", "18"))
+DOCX_TABLE_LINE_SPACING = float(os.getenv("DOCX_TABLE_LINE_SPACING", "16"))
+DOCX_TABLE_CELL_MARGIN_TWIPS = int(os.getenv("DOCX_TABLE_CELL_MARGIN_TWIPS", "100"))
 
 COVER_FIELD_LABELS = (
     "文件类型",
@@ -131,11 +137,45 @@ def apply_run_font(run, *, east_asia=DOCX_BODY_EAST_ASIA, latin=DOCX_BODY_LATIN,
 
 def apply_paragraph_format(paragraph, *, first_line_chars=2, line_spacing=DOCX_BODY_LINE_SPACING, space_before=0, space_after=0):
     fmt = paragraph.paragraph_format
-    fmt.first_line_indent = Pt(first_line_chars * 12)
+    fmt.first_line_indent = Pt(DOCX_BODY_FIRST_LINE_INDENT_PT if first_line_chars else 0)
     fmt.line_spacing_rule = WD_LINE_SPACING.EXACTLY
     fmt.line_spacing = Pt(line_spacing)
     fmt.space_before = Pt(space_before)
     fmt.space_after = Pt(space_after)
+
+
+def apply_heading_paragraph_format(paragraph, level: int) -> None:
+    fmt = paragraph.paragraph_format
+    fmt.first_line_indent = Pt(0)
+    fmt.left_indent = Pt(0)
+    fmt.right_indent = Pt(0)
+    fmt.line_spacing_rule = WD_LINE_SPACING.EXACTLY
+    fmt.line_spacing = Pt(DOCX_BODY_LINE_SPACING)
+    fmt.space_before = Pt(6 if level <= 2 else 3)
+    fmt.space_after = Pt(3)
+
+
+def apply_list_paragraph_format(paragraph) -> None:
+    fmt = paragraph.paragraph_format
+    fmt.first_line_indent = Pt(-DOCX_LIST_HANGING_INDENT_PT)
+    fmt.left_indent = Pt(DOCX_LIST_LEFT_INDENT_PT)
+    fmt.right_indent = Pt(0)
+    fmt.line_spacing_rule = WD_LINE_SPACING.EXACTLY
+    fmt.line_spacing = Pt(DOCX_BODY_LINE_SPACING)
+    fmt.space_before = Pt(0)
+    fmt.space_after = Pt(0)
+
+
+def apply_table_paragraph_format(paragraph, *, alignment=WD_ALIGN_PARAGRAPH.CENTER) -> None:
+    paragraph.alignment = alignment
+    fmt = paragraph.paragraph_format
+    fmt.first_line_indent = Pt(0)
+    fmt.left_indent = Pt(0)
+    fmt.right_indent = Pt(0)
+    fmt.line_spacing_rule = WD_LINE_SPACING.EXACTLY
+    fmt.line_spacing = Pt(DOCX_TABLE_LINE_SPACING)
+    fmt.space_before = Pt(0)
+    fmt.space_after = Pt(0)
 
 
 def _set_rfonts(rpr, *, east_asia: str, latin: str = DOCX_BODY_LATIN) -> None:
@@ -157,6 +197,74 @@ def _set_font_size(rpr, size_pt: float) -> None:
             node = OxmlElement(tag)
             rpr.append(node)
         node.set(qn("w:val"), half_points)
+
+
+def _remove_paragraph_marker_controls(ppr) -> None:
+    if ppr is None:
+        return
+    for tag in ("w:keepLines", "w:keepNext", "w:pageBreakBefore"):
+        node = ppr.find(qn(tag))
+        while node is not None:
+            ppr.remove(node)
+            node = ppr.find(qn(tag))
+
+
+def remove_black_square_paragraph_markers(doc) -> None:
+    """Remove pagination controls that Word/WPS renders as black square format marks."""
+    for style in doc.styles:
+        if style.type == WD_STYLE_TYPE.PARAGRAPH:
+            _remove_paragraph_marker_controls(style._element.pPr)
+    for paragraph in doc.paragraphs:
+        _remove_paragraph_marker_controls(paragraph._p.pPr)
+    for table in doc.tables:
+        for row in table.rows:
+            for cell in row.cells:
+                for paragraph in cell.paragraphs:
+                    _remove_paragraph_marker_controls(paragraph._p.pPr)
+
+
+def scrub_docx_black_square_markers(docx_path: str | Path) -> dict:
+    """Remove Word pagination marker XML that appears as black squares in format-mark view."""
+    source = Path(docx_path)
+    if not source.exists():
+        return {"enabled": True, "status": "skipped", "reason": "docx not found"}
+    targets = {"word/document.xml", "word/styles.xml"}
+    marker_re = re.compile(
+        r"<w:(?:keepLines|keepNext|pageBreakBefore)(?:\s+[^>]*)?/>"
+        r"|<w:(?:keepLines|keepNext|pageBreakBefore)(?:\s+[^>]*)?>\s*</w:(?:keepLines|keepNext|pageBreakBefore)>"
+    )
+    counts_before = {"keepLines": 0, "keepNext": 0, "pageBreakBefore": 0}
+    counts_after = {"keepLines": 0, "keepNext": 0, "pageBreakBefore": 0}
+    changed = False
+    temp_path = source.with_suffix(f".{uuid.uuid4().hex}.tmp.docx")
+    try:
+        with ZipFile(source, "r") as zin, ZipFile(temp_path, "w", ZIP_DEFLATED) as zout:
+            for item in zin.infolist():
+                data = zin.read(item.filename)
+                if item.filename in targets:
+                    text = data.decode("utf-8")
+                    for marker in counts_before:
+                        counts_before[marker] += text.count(f"w:{marker}")
+                    cleaned = marker_re.sub("", text)
+                    for marker in counts_after:
+                        counts_after[marker] += cleaned.count(f"w:{marker}")
+                    if cleaned != text:
+                        changed = True
+                    data = cleaned.encode("utf-8")
+                zout.writestr(item, data)
+    except BadZipFile:
+        temp_path.unlink(missing_ok=True)
+        return {"enabled": True, "status": "skipped", "reason": "not a valid docx zip"}
+    if changed:
+        os.replace(temp_path, source)
+    else:
+        temp_path.unlink(missing_ok=True)
+    return {
+        "enabled": True,
+        "status": "cleaned" if changed else "unchanged",
+        "counts_before": counts_before,
+        "counts_after": counts_after,
+    }
 
 
 def _truncate_header_text(text: str) -> str:
@@ -218,12 +326,18 @@ def docx_template_report(cover_fields: dict | None = None) -> dict:
         "body_latin_font": DOCX_BODY_LATIN,
         "body_font_size_pt": DOCX_BODY_FONT_SIZE,
         "body_line_spacing_pt": DOCX_BODY_LINE_SPACING,
+        "body_first_line_indent_pt": DOCX_BODY_FIRST_LINE_INDENT_PT,
+        "list_left_indent_pt": DOCX_LIST_LEFT_INDENT_PT,
+        "list_hanging_indent_pt": DOCX_LIST_HANGING_INDENT_PT,
+        "heading_keep_with_next": False,
         "cover_title_font_size_pt": DOCX_COVER_TITLE_FONT_SIZE,
         "toc_title_font_size_pt": DOCX_TOC_TITLE_FONT_SIZE,
         "toc_entry_font_size_pt": DOCX_TOC_ENTRY_FONT_SIZE,
         "toc_entry_line_spacing_pt": DOCX_TOC_ENTRY_LINE_SPACING,
         "table_font": DOCX_TABLE_EAST_ASIA,
         "table_font_size_pt": DOCX_TABLE_FONT_SIZE,
+        "table_line_spacing_pt": DOCX_TABLE_LINE_SPACING,
+        "table_cell_margin_twips": DOCX_TABLE_CELL_MARGIN_TWIPS,
         "page_size": "A4",
         "margins_cm": {
             "top": DOCX_PAGE_MARGIN_TOP_CM,
@@ -318,6 +432,63 @@ def _add_internal_hyperlink(paragraph, text: str, anchor: str) -> None:
 def _page_text_width_twips(doc) -> int:
     section = doc.sections[0]
     return max(7200, int((section.page_width - section.left_margin - section.right_margin) / 635))
+
+
+def _set_table_element_value(parent, tag: str, **attrs) -> OxmlElement:
+    node = parent.find(qn(tag))
+    if node is None:
+        node = OxmlElement(tag)
+        parent.append(node)
+    for key, value in attrs.items():
+        node.set(qn(f"w:{key}"), str(value))
+    return node
+
+
+def _set_table_cell_margins(table, margin_twips: int = DOCX_TABLE_CELL_MARGIN_TWIPS) -> None:
+    tbl_pr = table._tbl.tblPr
+    cell_margin = tbl_pr.find(qn("w:tblCellMar"))
+    if cell_margin is None:
+        cell_margin = OxmlElement("w:tblCellMar")
+        tbl_pr.append(cell_margin)
+    for side in ("top", "bottom", "left", "right"):
+        _set_table_element_value(cell_margin, f"w:{side}", w=margin_twips, type="dxa")
+
+
+def _set_cell_margins(cell, margin_twips: int = DOCX_TABLE_CELL_MARGIN_TWIPS) -> None:
+    tc_pr = cell._tc.get_or_add_tcPr()
+    cell_margin = tc_pr.find(qn("w:tcMar"))
+    if cell_margin is None:
+        cell_margin = OxmlElement("w:tcMar")
+        tc_pr.append(cell_margin)
+    for side in ("top", "bottom", "left", "right"):
+        _set_table_element_value(cell_margin, f"w:{side}", w=margin_twips, type="dxa")
+
+
+def _set_row_repeat_header(row) -> None:
+    tr_pr = row._tr.get_or_add_trPr()
+    tbl_header = tr_pr.find(qn("w:tblHeader"))
+    if tbl_header is None:
+        tbl_header = OxmlElement("w:tblHeader")
+        tr_pr.append(tbl_header)
+    tbl_header.set(qn("w:val"), "true")
+
+
+def _set_cell_width(cell, width_twips: int) -> None:
+    tc_pr = cell._tc.get_or_add_tcPr()
+    _set_table_element_value(tc_pr, "w:tcW", w=max(720, width_twips), type="dxa")
+
+
+def _shade_cell(cell, fill: str) -> None:
+    tc_pr = cell._tc.get_or_add_tcPr()
+    shading = tc_pr.find(qn("w:shd"))
+    if shading is None:
+        shading = OxmlElement("w:shd")
+        tc_pr.append(shading)
+    shading.set(qn("w:fill"), fill)
+
+
+def _is_centered_table_column(header_text: str) -> bool:
+    return any(keyword in header_text for keyword in ("序号", "编号", "代码", "单位", "数量", "页码", "响应情况", "结论", "结果"))
 
 
 def _set_paragraph_right_dot_leader_tab(paragraph, *, position_twips: int) -> None:
@@ -771,7 +942,7 @@ def set_document_styles(doc):
     normal.font.size = Pt(DOCX_BODY_FONT_SIZE)
     normal.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
     normal.paragraph_format.line_spacing = Pt(DOCX_BODY_LINE_SPACING)
-    normal.paragraph_format.first_line_indent = Pt(DOCX_BODY_FONT_SIZE * 2)
+    normal.paragraph_format.first_line_indent = Pt(DOCX_BODY_FIRST_LINE_INDENT_PT)
     normal.paragraph_format.space_before = Pt(0)
     normal.paragraph_format.space_after = Pt(0)
 
@@ -803,6 +974,10 @@ def set_document_styles(doc):
         style.font.size = Pt(DOCX_BODY_FONT_SIZE)
         style.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
         style.paragraph_format.line_spacing = Pt(DOCX_BODY_LINE_SPACING)
+        style.paragraph_format.first_line_indent = Pt(-DOCX_LIST_HANGING_INDENT_PT)
+        style.paragraph_format.left_indent = Pt(DOCX_LIST_LEFT_INDENT_PT)
+        style.paragraph_format.space_before = Pt(0)
+        style.paragraph_format.space_after = Pt(0)
 
 def _set_rpr_language(rpr):
     lang = rpr.find(qn('w:lang'))
@@ -930,16 +1105,28 @@ def process_table(md_table, doc):
     table = doc.add_table(rows=1, cols=col_count)
     table.style = 'Table Grid'
     table.alignment = WD_TABLE_ALIGNMENT.CENTER
-    table.autofit = True
+    table.autofit = False
+    table.allow_autofit = False
+    tbl_pr = table._tbl.tblPr
+    _set_table_element_value(tbl_pr, "w:tblW", w="5000", type="pct")
+    _set_table_element_value(tbl_pr, "w:tblLayout", type="fixed")
+    _set_table_cell_margins(table)
+    page_text_width = _page_text_width_twips(doc)
+    col_width = max(720, page_text_width // col_count)
     
     # 添加表头
     header_row = table.rows[0]
+    _set_row_repeat_header(header_row)
     for i, cell in enumerate(header_cells):
-        header_row.cells[i].text = clean_formal_bid_text(cell)
+        clean_cell = clean_formal_bid_text(cell)
+        header_row.cells[i].text = clean_cell
         header_row.cells[i].vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
+        _set_cell_width(header_row.cells[i], col_width)
+        _set_cell_margins(header_row.cells[i])
+        _shade_cell(header_row.cells[i], "D9EAF7")
         # 设置表头格式
         for paragraph in header_row.cells[i].paragraphs:
-            paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            apply_table_paragraph_format(paragraph, alignment=WD_ALIGN_PARAGRAPH.CENTER)
             for run in paragraph.runs:
                 run.bold = True
                 apply_run_font(run, east_asia='宋体', size=DOCX_TABLE_FONT_SIZE, bold=True)
@@ -950,11 +1137,16 @@ def process_table(md_table, doc):
         if len(cells) == col_count:
             row = table.add_row()
             for i, cell in enumerate(cells):
-                row.cells[i].text = clean_formal_bid_text(cell)
+                clean_cell = clean_formal_bid_text(cell)
+                row.cells[i].text = clean_cell
                 row.cells[i].vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
+                _set_cell_width(row.cells[i], col_width)
+                _set_cell_margins(row.cells[i])
                 # 设置单元格格式
+                header_text = clean_formal_bid_text(header_cells[i]) if i < len(header_cells) else ""
+                alignment = WD_ALIGN_PARAGRAPH.CENTER if _is_centered_table_column(header_text) else WD_ALIGN_PARAGRAPH.LEFT
                 for paragraph in row.cells[i].paragraphs:
-                    paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                    apply_table_paragraph_format(paragraph, alignment=alignment)
                     for run in paragraph.runs:
                         apply_run_font(run, east_asia=DOCX_TABLE_EAST_ASIA, size=DOCX_TABLE_FONT_SIZE)
 
@@ -1079,6 +1271,8 @@ def refresh_docx_fields_with_soffice(docx_path: str | Path) -> tuple[Path, dict]
         shutil.copy2(refreshed, temp_refreshed)
         os.replace(str(temp_refreshed), str(source))
         _update_refresh_report(report, status="refreshed", output_path=str(source), size=source.stat().st_size)
+        report["marker_cleanup"] = scrub_docx_black_square_markers(source)
+        report["size"] = source.stat().st_size
         logging.info("LibreOffice 已刷新 DOCX 字段: %s", source)
         return source, report
 
@@ -1206,6 +1400,7 @@ def convert_md_to_word(md_file, return_report: bool = False):
                 doc.add_page_break()
             word_heading_level = min(level, 4)
             p = doc.add_heading(text, level=word_heading_level)
+            apply_heading_paragraph_format(p, word_heading_level)
             if level == 1:
                 p.alignment = WD_ALIGN_PARAGRAPH.LEFT
                 for run in p.runs:
@@ -1234,7 +1429,7 @@ def convert_md_to_word(md_file, return_report: bool = False):
             p = doc.add_paragraph(style='List Bullet')
             run = p.add_run(text)
             apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_BODY_FONT_SIZE)
-            apply_paragraph_format(p, first_line_chars=0)
+            apply_list_paragraph_format(p)
         
         # 处理数字列表
         elif re.match(r'^\d+\.', line):
@@ -1245,7 +1440,7 @@ def convert_md_to_word(md_file, return_report: bool = False):
             p = doc.add_paragraph(style='List Number')
             run = p.add_run(text)
             apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_BODY_FONT_SIZE)
-            apply_paragraph_format(p, first_line_chars=0)
+            apply_list_paragraph_format(p)
         
         # 处理普通段落
         elif line:
@@ -1262,6 +1457,7 @@ def convert_md_to_word(md_file, return_report: bool = False):
     parent = Path(md_file).parent
     parent.mkdir(parents=True, exist_ok=True)
     output_file = Path(md_file).with_suffix('.docx')
+    remove_black_square_paragraph_markers(doc)
 
     temp_path = None
     try:
@@ -1284,6 +1480,7 @@ def convert_md_to_word(md_file, return_report: bool = False):
             logging.warning("目标文件被占用，已生成备用文件: %s", saved_path)
 
         logging.info("已生成 Word 文档: %s", saved_path)
+        image_report["marker_cleanup"] = scrub_docx_black_square_markers(saved_path)
         if return_report:
             image_report["template"] = docx_template_report(cover_fields=cover_fields)
             return Path(saved_path), image_report

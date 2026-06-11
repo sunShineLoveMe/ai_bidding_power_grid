@@ -1,6 +1,6 @@
 # 标书文档编写与正式导出质量待办清单
 
-更新日期：2026-06-09
+更新日期：2026-06-11
 
 范围：标书正文编写、封面/目录/页眉页脚、图表与表格、DOCX 字段刷新、真实导出验收、后续 PDF/模板化能力。本文档用于管理客户最终交付物质量，优先级高于普通导出功能优化。
 
@@ -19,11 +19,11 @@
 | 已完成 | 默认正式模板固定为 `sgcc_taichang_bid` | metadata 记录模板 ID、正文/目录/页边距、页眉页脚设置 |
 | 已完成 | 封面正式字段补齐第一阶段 | 封面包含标题、投标人、日期，并在正文可提取时自动加入招标编号、分标编号、分标名称、包号/包名称、文件类型 |
 | 待办 | 封面字段结构化来源补齐 | 从项目解析 metadata 或招标文件结构化结果稳定补齐分标编号、分标名称、包号/包名称，不依赖正文猜测 |
-| 待办 | 目录稳定性验收 | 独立目录页、最多 3-4 级、点引导线、页码右对齐、字段刷新成功 |
+| 已完成 | 目录稳定性验收 | 独立目录页、最多 3-4 级、点引导线、页码右对齐、字段刷新成功 |
 | 已完成 | 目录标题去重 | 子章节不得重复父章节前缀，例如 `2.1.1 响应要求`，不得输出 `2.1.1 企业基本资格资料 - 响应要求` |
-| 待办 | 正文格式统一 | 字体、字号、行距、首行缩进、标题层级、分页规则稳定 |
+| 已完成 | 正文格式统一 | 字体、字号、行距、首行缩进、标题层级、分页规则稳定 |
 | 已完成 | Mermaid/流程图源码清理 | Mermaid 能转图则插入图片，转换失败不得把源码块写入正式 DOCX |
-| 待办 | 表格正式化 | A4 内可读、边框清晰、表头加粗、必要时重复表头、不大面积越界 |
+| 已完成 | 表格正式化 | A4 内可读、边框清晰、表头加粗、必要时重复表头、不大面积越界 |
 | 已完成 | 图片资产正式化 | 只允许泰昌企业事实资产，禁止虚假图片路径，正式 DOCX 不展示内部来源库、匹配依据或得分，记录图片候选/选中/插入/失败数 |
 | 待办 | 真实导出验收记录 | 用真实项目导出 DOCX，记录封面、目录、正文、表格、图片、页眉页脚、字段刷新状态 |
 
@@ -75,3 +75,49 @@
 - 真实导出链路：项目 `4bc3ee73-9ec5-4184-aafd-eaede9f90798`，执行 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
 - 验证记录：`docs/development/runs/run_20260609_docx_quality_p0_cleanup_real_export.md` 和 `docs/development/runs/run_20260609_docx_quality_p0_cleanup_real_export.json`。
 - 本次真实导出结果：`cleanup_checks.contains_mermaid_fence=false`，`cleanup_checks.contains_internal_image_source=false`，`repeated_title_patterns_found=[]`；图片 found/inserted/skipped/failed 为 `24/24/0/0`，Mermaid found/inserted/skipped 为 `1/0/1`，LibreOffice 字段刷新成功。
+
+### 2026-06-11 表格正式化修复记录
+
+- 表格正式化已修复：Markdown 表格导出为 100% 可用页宽、固定布局、居中表格、表头浅灰底、表头加粗、表头跨页重复、单元格边距、表格内 16pt 固定行距且不首行缩进。
+- 正文样式未作为本轮完整 P0 关闭项；本轮只处理与表格同源的表格内段落样式，正文全篇分页、空行和标题间距仍按后续 `正文格式统一` 任务继续验收。
+- 自动化回归：`PYTHONPATH=. .venv/bin/pytest tests/test_docx_export.py tests/test_rag_asset_scoring.py tests/test_chapter_planner.py tests/test_celery_export_tasks.py -q`，结果 `49 passed, 5 warnings`。
+- 真实导出链路：项目 `4bc3ee73-9ec5-4184-aafd-eaede9f90798`，执行 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
+- 验证记录：`docs/development/runs/run_20260611_docx_quality_p0_table_real_export.md` 和 `docs/development/runs/run_20260611_docx_quality_p0_table_real_export.json`。
+- 本次真实导出结果：表格数量 `60`；表格抽样检查 `table_count_gt_zero`、`all_sample_tables_full_width`、`all_sample_tables_fixed_layout`、`all_sample_tables_repeat_header`、`all_sample_tables_have_cell_margin`、`all_sample_data_rows_no_first_line_indent`、`all_sample_data_rows_line_spacing_16pt`、`all_sample_data_rows_alignment_readable` 全部为 `true`；LibreOffice 字段刷新成功。
+
+### 2026-06-11 正文格式统一修复记录
+
+- 正文格式统一已修复：正文段落宋体 `10.5pt`、固定行距 `20pt`、首行缩进 `21pt`、段前段后 `0pt`；后续因格式标记观感要求，已移除会显示黑色方块的分页控制。
+- 标题格式已统一：标题不首行缩进，固定行距 `20pt`；后续因格式标记观感要求，已移除 `keep_with_next/keep_together`。
+- 列表格式已统一：列表固定行距 `20pt`，左缩进 `21pt`，悬挂缩进 `10.5pt`；LibreOffice roundtrip 后会把 `left` 规范化为 `start`，真实验收按刷新后 XML 口径检查。
+- 自动化回归：`PYTHONPATH=. .venv/bin/pytest tests/test_docx_export.py tests/test_rag_asset_scoring.py tests/test_chapter_planner.py tests/test_celery_export_tasks.py -q`，结果 `50 passed, 5 warnings`。
+- 真实导出链路：项目 `4bc3ee73-9ec5-4184-aafd-eaede9f90798`，执行 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
+- 验证记录：`docs/development/runs/run_20260611_docx_quality_p0_body_real_export.md` 和 `docs/development/runs/run_20260611_docx_quality_p0_body_real_export.json`。
+- 本次真实导出结果：正文、标题、列表、表格抽样检查全部通过；正文范围最大连续空段落数为 `1`；Mermaid 源码、内部图片来源/匹配依据、重复父章节标题均未出现在正式 DOCX；LibreOffice 字段刷新成功。
+
+### 2026-06-11 目录格式标记修复记录
+
+- 二次验收发现：Word/WPS 显示格式标记时，目录左侧出现竖向黑色小方块。
+- 原因：`Normal` 样式继承了正文段落的 `keep lines together` 分页控制，目录条目使用 `Normal` 样式，因此在显示格式标记时出现黑色方块；这不是目录页码刷新失败，也不是会打印的正文字符。
+- 修复：移除 `Normal` 样式上的全局分页控制，仅对正文段落和标题段落直接设置分页控制，避免目录条目继承。
+- 自动化回归：`PYTHONPATH=. .venv/bin/pytest tests/test_docx_export.py tests/test_rag_asset_scoring.py tests/test_chapter_planner.py tests/test_celery_export_tasks.py -q`，结果 `51 passed, 5 warnings`。
+- 真实导出链路：项目 `4bc3ee73-9ec5-4184-aafd-eaede9f90798`，执行 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
+- 验证记录：`docs/development/runs/run_20260611_docx_quality_p0_toc_marker_cleanup.md` 和 `docs/development/runs/run_20260611_docx_quality_p0_toc_marker_cleanup.json`。
+- 本次真实导出结果：`normal_style_has_no_keep_lines=true`，`all_toc_samples_have_no_direct_keep_lines=true`，`all_body_samples_still_keep_lines=true`，LibreOffice 字段刷新成功。
+
+### 2026-06-11 全文格式标记清理记录
+
+- 三次验收发现：正文区域也会显示同类黑色方块，说明正式 DOCX 不应保留 `keep lines together`、`keep with next`、`page break before` 这类会显示黑色方块的分页控制。
+- 修复：导出层停止写入 `keepLines/keepNext/pageBreakBefore`，并在 DOCX 保存后、LibreOffice 字段刷新后对 `word/document.xml` 和 `word/styles.xml` 做最终 XML 清理。
+- 自动化回归：`PYTHONPATH=. .venv/bin/pytest tests/test_docx_export.py tests/test_rag_asset_scoring.py tests/test_chapter_planner.py tests/test_celery_export_tasks.py -q`，结果 `51 passed, 5 warnings`。
+- 真实导出链路：项目 `4bc3ee73-9ec5-4184-aafd-eaede9f90798`，执行 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
+- 验证记录：`docs/development/runs/run_20260611_docx_quality_p0_full_marker_cleanup.md` 和 `docs/development/runs/run_20260611_docx_quality_p0_full_marker_cleanup.json`。
+- 本次真实导出结果：`document_keepLines=0`、`document_keepNext=0`、`document_pageBreakBefore=0`、`styles_keepLines=0`、`styles_keepNext=0`、`styles_pageBreakBefore=0`；正文、标题、列表、目录抽样格式仍通过；LibreOffice 字段刷新成功。
+
+### 2026-06-11 目录稳定性验收记录
+
+- 目录稳定性验收已完成：目录标题唯一且位于正文之前，目录条目存在，层级控制在 4 级以内，点引导线、右侧页码和 `PAGEREF` 字段均保留。
+- 自动化回归：`PYTHONPATH=. .venv/bin/pytest tests/test_docx_export.py tests/test_rag_asset_scoring.py tests/test_chapter_planner.py tests/test_celery_export_tasks.py -q`，结果 `52 passed, 5 warnings`。
+- 真实导出链路：项目 `4bc3ee73-9ec5-4184-aafd-eaede9f90798`，执行 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
+- 验证记录：`docs/development/runs/run_20260611_docx_quality_p0_toc_stability.md` 和 `docs/development/runs/run_20260611_docx_quality_p0_toc_stability.json`。
+- 本次真实导出结果：`toc_entry_count=7`，`toc_max_level=1`，目录页码范围 `4-73`；`toc_entries_have_dot_leader=true`、`toc_entries_have_pageref_field=true`、`toc_entries_have_refreshed_page_numbers=true`、`toc_entries_no_black_square_markers=true`、`toc_no_repeated_parent_title_pattern=true`；LibreOffice 字段刷新成功。
