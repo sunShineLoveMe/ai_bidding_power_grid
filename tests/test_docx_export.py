@@ -28,6 +28,7 @@ from backend.export.md_to_word import (
     refresh_docx_fields_with_soffice,
     taichang_bid_document_title,
 )
+from backend.parsing.tender_metadata import extract_tender_project_metadata
 
 
 class DocxExportRegressionTest(unittest.TestCase):
@@ -211,6 +212,90 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertIn("在线工作台正文二。", markdown)
             self.assertNotIn("资格审查资料封面及目录", markdown)
             self.assertNotIn("待补充章节正文", markdown)
+
+    def test_tender_metadata_extracts_cover_fields_from_uploaded_tender_text(self):
+        markdown = "\n".join(
+            [
+                "# 国网辽宁电力2025年第三次物资协议库存招标采购招标文件",
+                "",
+                "| 字段 | 内容 |",
+                "| --- | --- |",
+                "| 招标编号 | 2225AC |",
+                "| 分标编号 | 102-CPVC |",
+                "| 分标名称 | 电缆保护管 |",
+                "| 包号 | 包1 |",
+                "| 包名称 | CPVC电缆保护管包1 |",
+                "| 招标人 | 国网辽宁省电力有限公司 |",
+                "| 招标代理机构 | 国网辽宁招标有限公司 |",
+            ]
+        )
+        content_list = [{"text": "招标编号 2225AC 分标编号 102-CPVC", "page_idx": 0}]
+
+        meta = extract_tender_project_metadata(markdown, content_list)
+
+        self.assertEqual(meta["project_name"], "国网辽宁电力2025年第三次物资协议库存招标采购")
+        self.assertEqual(meta["tender_no"], "2225AC")
+        self.assertEqual(meta["project_no"], "2225AC")
+        self.assertEqual(meta["tender_unit"], "国网辽宁省电力有限公司")
+        self.assertEqual(meta["agency"], "国网辽宁招标有限公司")
+        self.assertEqual(meta["cover_fields"]["招标编号"], "2225AC")
+        self.assertEqual(meta["cover_fields"]["分标编号"], "102-CPVC")
+        self.assertEqual(meta["cover_fields"]["包名称"], "CPVC电缆保护管包1")
+        self.assertIn("招标编号", meta["cover_field_sources"])
+
+    def test_tender_metadata_does_not_treat_next_label_as_empty_project_name_value(self):
+        markdown = "\n".join(
+            [
+                "项目名称：",
+                "招标编号：2225AC",
+                "招标人：",
+                "招标代理机构：国网辽宁招标有限公司",
+            ]
+        )
+
+        meta = extract_tender_project_metadata(markdown, [])
+
+        self.assertNotEqual(meta.get("project_name"), "招标编号：")
+        self.assertNotIn("项目名称", meta["cover_fields"])
+        self.assertNotEqual(meta.get("tender_unit"), "招标代理机构：")
+        self.assertEqual(meta["cover_fields"]["招标编号"], "2225AC")
+
+    def test_bid_markdown_report_carries_structured_cover_fields_from_project_meta(self):
+        project_id = "11111111-1111-1111-1111-111111111111"
+        with tempfile.TemporaryDirectory() as tmpdir:
+            app = Flask(__name__)
+            app.config["GENERATED_FOLDER"] = tmpdir
+            sections = [
+                {
+                    "id": "section-1",
+                    "order_index": 1,
+                    "level": 1,
+                    "title": "投标函",
+                    "content": "正文内容。",
+                }
+            ]
+            cover_fields = {
+                "项目名称": "国网辽宁电力2025年第三次物资协议库存招标采购",
+                "文件类型": "技术投标文件",
+                "招标编号": "2225AC",
+                "分标编号": "102-CPVC",
+                "包号": "包1",
+            }
+
+            with (
+                app.app_context(),
+                patch("backend.api.routes.get_project_interpretation", return_value={
+                    "project": {"id": project_id, "project_name": "上传文件名"},
+                    "analysis": {"project_meta": {"project_name": "上传文件名", "cover_fields": cover_fields}},
+                }),
+                patch("backend.api.routes.list_bid_sections", return_value=sections),
+            ):
+                _, document_title, report = build_project_bid_markdown(project_id)
+
+        self.assertEqual(document_title, "上传文件名投标文件")
+        self.assertEqual(report["cover_field_source"], "uploaded_tender_structured_extract")
+        self.assertEqual(report["cover_fields"]["招标编号"], "2225AC")
+        self.assertEqual(report["cover_fields"]["分标编号"], "102-CPVC")
 
     def test_bid_markdown_with_images_loads_taichang_assets(self):
         project_id = "11111111-1111-1111-1111-111111111111"
@@ -862,6 +947,49 @@ class DocxExportRegressionTest(unittest.TestCase):
 
         self.assertEqual("2225AC", fields["招标编号"])
         self.assertEqual("电缆保护管MPP", fields["分标名称"])
+
+    def test_docx_cover_prefers_structured_tender_fields_over_markdown_fallback(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            markdown_path = Path(tmpdir) / "cover.md"
+            markdown_path.write_text(
+                "\n".join(
+                    [
+                        "# 旧标题招标文件",
+                        "",
+                        "招标编号：OLD-NO",
+                        "",
+                        "# 1. 投标函",
+                        "",
+                        "正文内容。",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            output_path, report = convert_md_to_word(
+                markdown_path,
+                return_report=True,
+                cover_fields={
+                    "项目名称": "国网辽宁电力2025年第三次物资协议库存招标采购",
+                    "文件类型": "技术投标文件",
+                    "招标编号": "2225AC",
+                    "分标编号": "102-CPVC",
+                    "包号": "包1",
+                    "招标人": "国网辽宁省电力有限公司",
+                },
+            )
+            document = Document(str(output_path))
+            text = "\n".join(paragraph.text for paragraph in document.paragraphs)
+            cover_text = "\n".join(paragraph.text for paragraph in document.paragraphs[:14])
+
+        self.assertEqual(report["template"]["cover_fields"]["招标编号"], "2225AC")
+        self.assertIn("国网辽宁电力2025年第三次物资协议库存招标采购投标文件", text)
+        self.assertIn("文件类型：技术投标文件", text)
+        self.assertIn("招标编号：2225AC", text)
+        self.assertIn("分标编号：102-CPVC", text)
+        self.assertIn("包号：包1", text)
+        self.assertIn("招标人：国网辽宁省电力有限公司", text)
+        self.assertNotIn("招标编号：OLD-NO", cover_text)
 
     def test_bid_export_assets_are_limited_to_taichang_enterprise_facts(self):
         taichang_asset = {

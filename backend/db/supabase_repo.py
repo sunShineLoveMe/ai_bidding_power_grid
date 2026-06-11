@@ -102,6 +102,26 @@ def sync_uploaded_tender_to_supabase(local_file_path: str | Path, original_filen
     }
 
 
+def update_bid_project_metadata_fields(project_id: str, project_meta: dict[str, Any]) -> dict[str, Any] | None:
+    """Persist high-confidence structured tender fields onto bid_projects."""
+    if not project_meta:
+        return None
+    payload: dict[str, Any] = {}
+    for source_key, column in (
+        ("project_name", "project_name"),
+        ("tender_unit", "tender_unit"),
+        ("agency", "agency"),
+        ("project_no", "project_no"),
+    ):
+        value = project_meta.get(source_key)
+        if isinstance(value, str) and value.strip():
+            payload[column] = value.strip()
+    if not payload:
+        return None
+    response = get_supabase_client().table("bid_projects").update(payload).eq("id", project_id).execute()
+    return response.data[0] if response.data else None
+
+
 def update_bid_file_parse_status(file_id: str, parse_status: str) -> None:
     get_supabase_client().table("bid_files").update({"parse_status": parse_status}).eq("id", file_id).execute()
 

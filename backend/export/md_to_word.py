@@ -87,12 +87,15 @@ DOCX_TABLE_LINE_SPACING = float(os.getenv("DOCX_TABLE_LINE_SPACING", "16"))
 DOCX_TABLE_CELL_MARGIN_TWIPS = int(os.getenv("DOCX_TABLE_CELL_MARGIN_TWIPS", "100"))
 
 COVER_FIELD_LABELS = (
+    "项目名称",
     "文件类型",
     "招标编号",
     "分标编号",
     "分标名称",
     "包号",
     "包名称",
+    "招标人",
+    "招标代理机构",
 )
 
 
@@ -316,6 +319,19 @@ def extract_bid_cover_fields(md_content: str) -> dict:
                 fields["文件类型"] = candidate
                 break
     return fields
+
+
+def merge_bid_cover_fields(markdown_fields: dict | None, structured_fields: dict | None = None) -> dict:
+    """Prefer uploaded tender structured fields over markdown fallback fields."""
+    merged: dict[str, str] = {}
+    for source in (markdown_fields or {}, structured_fields or {}):
+        if not isinstance(source, dict):
+            continue
+        for label in COVER_FIELD_LABELS:
+            value = clean_formal_bid_text(source.get(label) or "")
+            if value:
+                merged[label] = value[:120]
+    return merged
 
 
 def docx_template_report(cover_fields: dict | None = None) -> dict:
@@ -560,7 +576,7 @@ def _add_formal_toc_entry(doc, entry: dict, *, tab_position_twips: int) -> None:
 
 
 def _add_cover_page(doc, project_name: str, cover_fields: dict | None = None) -> None:
-    bid_title = taichang_bid_document_title(project_name)
+    bid_title = taichang_bid_document_title((cover_fields or {}).get("项目名称") or project_name)
     spacer_count = 4
     for _ in range(spacer_count):
         doc.add_paragraph()
@@ -581,6 +597,8 @@ def _add_cover_page(doc, project_name: str, cover_fields: dict | None = None) ->
         "分标名称": cover_fields.get("分标名称") if cover_fields else "",
         "包号": cover_fields.get("包号") if cover_fields else "",
         "包名称": cover_fields.get("包名称") if cover_fields else "",
+        "招标人": cover_fields.get("招标人") if cover_fields else "",
+        "招标代理机构": cover_fields.get("招标代理机构") if cover_fields else "",
     }
     for label, value in formal_fields.items():
         if not value:
@@ -1277,7 +1295,7 @@ def refresh_docx_fields_with_soffice(docx_path: str | Path) -> tuple[Path, dict]
         return source, report
 
 
-def convert_md_to_word(md_file, return_report: bool = False):
+def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict | None = None):
     """将Markdown文件转换为Word文档"""
     # 读取Markdown文件
     with open(md_file, 'r', encoding='utf-8') as f:
@@ -1290,13 +1308,15 @@ def convert_md_to_word(md_file, return_report: bool = False):
     
     # 设置文档格式
     title_match = re.search(r'^\s*#\s+(.+?)\s*$', md_content, re.MULTILINE)
-    project_name = clean_formal_bid_text(title_match.group(1).strip()) if title_match else Path(md_file).stem
+    markdown_project_name = clean_formal_bid_text(title_match.group(1).strip()) if title_match else Path(md_file).stem
+    project_name = (cover_fields or {}).get("项目名称") or markdown_project_name
     project_name = taichang_bid_document_title(project_name)
     set_document_format(doc, project_name)
     title_line_index, heading_entries = _markdown_heading_lines(md_content)
     heading_entry_by_line = {entry["line_index"]: entry for entry in heading_entries}
-    cover_fields = extract_bid_cover_fields(md_content)
-    _add_toc_page(doc, project_name, heading_entries, cover_fields=cover_fields)
+    markdown_cover_fields = extract_bid_cover_fields(md_content)
+    resolved_cover_fields = merge_bid_cover_fields(markdown_cover_fields, cover_fields)
+    _add_toc_page(doc, project_name, heading_entries, cover_fields=resolved_cover_fields)
     
     # 处理Markdown内容
     lines = md_content.split('\n')
@@ -1482,7 +1502,7 @@ def convert_md_to_word(md_file, return_report: bool = False):
         logging.info("已生成 Word 文档: %s", saved_path)
         image_report["marker_cleanup"] = scrub_docx_black_square_markers(saved_path)
         if return_report:
-            image_report["template"] = docx_template_report(cover_fields=cover_fields)
+            image_report["template"] = docx_template_report(cover_fields=resolved_cover_fields)
             return Path(saved_path), image_report
         return Path(saved_path)
     finally:

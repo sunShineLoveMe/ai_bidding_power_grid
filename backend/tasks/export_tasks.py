@@ -106,7 +106,11 @@ def _run_bid_docx_export(
             "message": "正在转换 Word 文档。",
             "project_name": project_name,
         })
-        generated_docx_path, image_conversion_report = convert_md_to_word(markdown_path, return_report=True)
+        generated_docx_path, image_conversion_report = convert_md_to_word(
+            markdown_path,
+            return_report=True,
+            cover_fields=(image_selection_report or {}).get("cover_fields") or None,
+        )
         if not generated_docx_path or not Path(generated_docx_path).exists():
             raise RuntimeError("DOCX 生成失败，未找到输出文件。")
         generated_docx_path = Path(generated_docx_path)

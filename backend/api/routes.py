@@ -802,12 +802,14 @@ def build_project_bid_markdown(
 ) -> tuple[Path, str, dict]:
     payload = get_project_interpretation(project_id)
     project = payload.get("project") or {}
+    analysis = payload.get("analysis") or {}
+    project_meta = analysis.get("project_meta") if isinstance(analysis.get("project_meta"), dict) else {}
     sections = _snapshot_export_sections(sections_snapshot) or list_bid_sections(project_id)
     if not sections:
         raise RuntimeError("当前项目暂无章节内容，请先生成章节大纲或正文。")
 
     project_name = (
-        (payload.get("analysis") or {}).get("project_meta", {}) or {}
+        project_meta or {}
     ).get("project_name") or project.get("project_name") or "投标文件"
     project_name = clean_formal_bid_text(project_name) or "投标文件"
     folder_name = _slug_filename(project_name, f"project-{project_id[:8]}")
@@ -843,6 +845,10 @@ def build_project_bid_markdown(
         "max_total": DOCX_TOTAL_ASSET_IMAGE_LIMIT,
         "manifest": [],
         "warnings": [],
+        "cover_fields": project_meta.get("cover_fields") if isinstance(project_meta.get("cover_fields"), dict) else {},
+        "cover_field_sources": project_meta.get("cover_field_sources") if isinstance(project_meta.get("cover_field_sources"), dict) else {},
+        "cover_field_missing": project_meta.get("cover_field_missing") if isinstance(project_meta.get("cover_field_missing"), list) else [],
+        "cover_field_source": "uploaded_tender_structured_extract" if isinstance(project_meta.get("cover_fields"), dict) and project_meta.get("cover_fields") else "markdown_fallback",
     }
     if with_images:
         try:

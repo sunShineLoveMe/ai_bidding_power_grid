@@ -18,14 +18,14 @@
 | --- | --- | --- |
 | 已完成 | 默认正式模板固定为 `sgcc_taichang_bid` | metadata 记录模板 ID、正文/目录/页边距、页眉页脚设置 |
 | 已完成 | 封面正式字段补齐第一阶段 | 封面包含标题、投标人、日期，并在正文可提取时自动加入招标编号、分标编号、分标名称、包号/包名称、文件类型 |
-| 待办 | 封面字段结构化来源补齐 | 从项目解析 metadata 或招标文件结构化结果稳定补齐分标编号、分标名称、包号/包名称，不依赖正文猜测 |
+| 已完成 | 封面字段结构化来源补齐 | 从项目解析 metadata 或招标文件结构化结果稳定补齐分标编号、分标名称、包号/包名称，不依赖正文猜测 |
 | 已完成 | 目录稳定性验收 | 独立目录页、最多 3-4 级、点引导线、页码右对齐、字段刷新成功 |
 | 已完成 | 目录标题去重 | 子章节不得重复父章节前缀，例如 `2.1.1 响应要求`，不得输出 `2.1.1 企业基本资格资料 - 响应要求` |
 | 已完成 | 正文格式统一 | 字体、字号、行距、首行缩进、标题层级、分页规则稳定 |
 | 已完成 | Mermaid/流程图源码清理 | Mermaid 能转图则插入图片，转换失败不得把源码块写入正式 DOCX |
 | 已完成 | 表格正式化 | A4 内可读、边框清晰、表头加粗、必要时重复表头、不大面积越界 |
 | 已完成 | 图片资产正式化 | 只允许泰昌企业事实资产，禁止虚假图片路径，正式 DOCX 不展示内部来源库、匹配依据或得分，记录图片候选/选中/插入/失败数 |
-| 待办 | 真实导出验收记录 | 用真实项目导出 DOCX，记录封面、目录、正文、表格、图片、页眉页脚、字段刷新状态 |
+| 已完成 | 真实导出验收记录 | 用真实项目导出 DOCX，记录封面、目录、正文、表格、图片、页眉页脚、字段刷新状态 |
 
 ## P1 应该完成
 
@@ -121,3 +121,13 @@
 - 真实导出链路：项目 `4bc3ee73-9ec5-4184-aafd-eaede9f90798`，执行 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
 - 验证记录：`docs/development/runs/run_20260611_docx_quality_p0_toc_stability.md` 和 `docs/development/runs/run_20260611_docx_quality_p0_toc_stability.json`。
 - 本次真实导出结果：`toc_entry_count=7`，`toc_max_level=1`，目录页码范围 `4-73`；`toc_entries_have_dot_leader=true`、`toc_entries_have_pageref_field=true`、`toc_entries_have_refreshed_page_numbers=true`、`toc_entries_no_black_square_markers=true`、`toc_no_repeated_parent_title_pattern=true`；LibreOffice 字段刷新成功。
+
+### 2026-06-11 封面字段结构化来源修复记录
+
+- 封面字段结构化来源补齐已完成：招标文件解析阶段新增 `project_meta.cover_fields`、`cover_field_sources`、`cover_field_missing`，DOCX 导出优先读取结构化字段，OnlyOffice 预览和 Celery 正式导出均接入同一链路。
+- 抽取字段范围：`项目名称`、`文件类型`、`招标编号`、`分标编号`、`分标名称`、`包号`、`包名称`、`招标人`、`招标代理机构`。
+- 安全策略：字段缺失时记录缺失，不编造；当解析文本出现 `项目名称： 招标编号： 分标名称：` 这类空字段串联时，不把字段名误识别为字段值。
+- 自动化回归：`PYTHONPATH=. .venv/bin/pytest tests/test_docx_export.py tests/test_native_parse_ingestion.py tests/test_rag_asset_scoring.py tests/test_chapter_planner.py tests/test_celery_export_tasks.py -q`，结果 `57 passed, 5 warnings`。
+- 真实导出链路：项目 `4bc3ee73-9ec5-4184-aafd-eaede9f90798`，执行 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
+- 验证记录：`docs/development/runs/run_20260611_docx_quality_p0_structured_cover_fields.md` 和 `docs/development/runs/run_20260611_docx_quality_p0_structured_cover_fields.json`。
+- 本次真实导出结果：封面字段来源 `uploaded_tender_structured_extract`，封面包含 `项目名称=国网辽宁电力2025年第三次物资协议库存招标采购`、`文件类型=投标文件`、`招标编号=2225AC`；当前历史解析文本缺失可靠的 `分标编号/分标名称/包号/包名称`，已记录在 `cover_field_missing`，未做猜测填充。

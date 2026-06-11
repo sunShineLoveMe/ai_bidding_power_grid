@@ -56,8 +56,11 @@ def generate_onlyoffice_config(project_id):
             except ValueError:
                 focus_section_id = None
 
-        markdown_path, project_name, _ = build_project_bid_markdown(project_id, focus_section_id)
-        generated_docx_path = convert_md_to_word(markdown_path)
+        markdown_path, project_name, export_report = build_project_bid_markdown(project_id, focus_section_id)
+        generated_docx_path = convert_md_to_word(
+            markdown_path,
+            cover_fields=(export_report or {}).get("cover_fields") or None,
+        )
         if not generated_docx_path or not Path(generated_docx_path).exists():
             raise RuntimeError("DOCX 生成失败，未找到输出文件。")
 
