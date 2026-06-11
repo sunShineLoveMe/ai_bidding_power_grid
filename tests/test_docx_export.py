@@ -8,7 +8,13 @@ from docx import Document
 from docx.oxml.ns import qn
 from flask import Flask
 
-from backend.api.routes import build_project_bid_markdown, _asset_allowed_for_bid, _demote_body_markdown_headings, _numbered_export_sections, _strip_duplicate_section_heading
+from backend.api.routes import (
+    build_project_bid_markdown,
+    _asset_allowed_for_bid,
+    _demote_body_markdown_headings,
+    _numbered_export_sections,
+    _strip_duplicate_section_heading,
+)
 from backend.export.md_to_word import (
     DOCX_BIDDER_FULL_NAME,
     convert_md_to_word,
@@ -136,6 +142,20 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertEqual(numbered[0]["_export_title"], "1. 投标函及投标函附录")
         self.assertEqual(numbered[1]["_export_title"], "1.1 编制依据")
         self.assertEqual(numbered[2]["_export_title"], "2. 资格审查资料")
+
+    def test_export_section_titles_strip_repeated_parent_prefixes(self):
+        sections = [
+            {"id": "a", "level": 1, "title": "资格审查资料"},
+            {"id": "b", "level": 2, "title": "企业基本资格资料"},
+            {"id": "c", "level": 3, "title": "企业基本资格资料 - 响应要求"},
+            {"id": "d", "level": 3, "title": "企业基本资格资料 - 资料清单"},
+        ]
+
+        numbered = _numbered_export_sections(sections)
+
+        self.assertEqual(numbered[1]["_export_title"], "1.1 企业基本资格资料")
+        self.assertEqual(numbered[2]["_export_title"], "1.1.1 响应要求")
+        self.assertEqual(numbered[3]["_export_title"], "1.1.2 资料清单")
 
     def test_bid_markdown_export_prefers_editor_snapshot_over_stale_database_sections(self):
         project_id = "11111111-1111-1111-1111-111111111111"
@@ -358,6 +378,35 @@ class DocxExportRegressionTest(unittest.TestCase):
 
             self.assertTrue(document.settings.element.xpath(".//w:updateFields[@w:val='true']"))
             self.assertTrue(document._element.xpath(".//w:fldChar[@w:dirty='true']"))
+
+    def test_mermaid_fence_source_is_not_exported_when_conversion_fails(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            markdown_path = Path(tmpdir) / "mermaid.md"
+            markdown_path.write_text(
+                "\n".join(
+                    [
+                        "# 流程图测试",
+                        "",
+                        "# 1. 现场施工流程",
+                        "",
+                        "```mermaid",
+                        "graph TD",
+                        "A[接收订单] --> B[生产备货]",
+                        "```",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            with patch("backend.export.md_to_word.process_mermaid", return_value=False):
+                output_path, report = convert_md_to_word(markdown_path, return_report=True)
+
+            document = Document(str(output_path))
+            text = "\n".join(p.text for p in document.paragraphs)
+            self.assertNotIn("```mermaid", text)
+            self.assertNotIn("graph TD", text)
+            self.assertEqual(1, report["mermaid"]["found"])
+            self.assertEqual(1, report["mermaid"]["skipped"])
 
     def test_soffice_refresh_replaces_docx_and_reports_success(self):
         with tempfile.TemporaryDirectory() as tmpdir:

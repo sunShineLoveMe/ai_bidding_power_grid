@@ -169,6 +169,8 @@ class RagAssetScoringQualityTest(unittest.TestCase):
 
         self.assertIn("高压旋喷桩设备产品图", markdown)
         self.assertNotIn("质量管理体系认证证书", markdown)
+        self.assertNotIn("来源：", markdown)
+        self.assertNotIn("匹配依据", markdown)
         self.assertEqual(manifest[0]["library"], "企业产品库")
         self.assertIn("技术标优先使用产品/设备资料", manifest[0]["reason"])
 

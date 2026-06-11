@@ -1,11 +1,27 @@
 import unittest
 from unittest.mock import patch
 
-from backend.ai.chapter_planner import _build_rule_outline, stream_bid_outline
+from backend.ai.chapter_planner import _build_rule_outline, _build_split_child, stream_bid_outline
 from backend.db.supabase_repo import replace_bid_sections_from_outline
 
 
 class ChapterPlannerRegressionTest(unittest.TestCase):
+    def test_split_child_title_does_not_repeat_parent_prefix(self):
+        child = _build_split_child(
+            {
+                "title": "企业基本资格资料",
+                "order": "2.1",
+                "level": 2,
+                "metadata": {},
+            },
+            1,
+            3,
+            ("响应要求", "概述资格条件响应关系。"),
+        )
+
+        self.assertEqual("响应要求", child["title"])
+        self.assertEqual("企业基本资格资料", child["metadata"]["split_from_parent_title"])
+
     def test_rule_outline_tolerates_string_material_checklist_items(self):
         payload = {
             "project": {"id": "project-1", "project_name": "测试项目"},

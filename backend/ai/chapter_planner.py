@@ -321,7 +321,7 @@ def _build_split_child(parent: dict[str, Any], child_index: int, child_count: in
     inherited_notes = list(parent.get("writing_notes") or [])
     target_words = max(700, min(1400, int(round((_writing_plan_target_words(parent) or LEAF_SPLIT_TARGET_WORDS) / child_count / 50) * 50)))
     child = {
-        "title": f"{parent_title} - {title}",
+        "title": title,
         "purpose": purpose,
         "priority": parent.get("priority") or "medium",
         "order": f"{parent_order}.{child_index}",

@@ -209,6 +209,19 @@ def _strip_existing_section_number(title: str) -> str:
     return value.strip() or clean_formal_bid_text(title or "未命名章节").strip() or "未命名章节"
 
 
+def _strip_repeated_parent_title_prefix(title: str) -> str:
+    value = _strip_existing_section_number(title)
+    if " - " not in value and "－" not in value:
+        return value
+    parts = re.split(r"\s*[-－]\s*", value, maxsplit=1)
+    if len(parts) != 2:
+        return value
+    parent, child = [part.strip(" ：:、，,。") for part in parts]
+    if parent and child and len(parent) >= 4 and len(child) <= 24:
+        return child
+    return value
+
+
 def _numbered_export_sections(sections: list[dict]) -> list[dict]:
     raw_levels = [max(1, min(int(section.get("level") or 1), 6)) for section in sections]
     counters: list[int] = []
@@ -237,7 +250,8 @@ def _numbered_export_sections(sections: list[dict]) -> list[dict]:
         counters = counters[:level]
         counters[level - 1] += 1
         number = ".".join(str(value) for value in counters)
-        clean_title = _strip_existing_section_number(section.get("title") or "未命名章节")
+        raw_title = _strip_existing_section_number(section.get("title") or "未命名章节")
+        clean_title = _strip_repeated_parent_title_prefix(raw_title) if level > 1 else raw_title
         title_prefix = f"{number}. " if "." not in number else f"{number} "
         numbered.append({
             **section,
@@ -267,6 +281,31 @@ def _strip_duplicate_section_heading(content: str, section: dict) -> str:
     ):
         return "\n".join(lines[1:]).strip()
     return content.strip()
+
+
+def _strip_redundant_section_label(content: str, section: dict) -> str:
+    if not content:
+        return ""
+    raw_title = _strip_existing_section_number(section.get("title") or "")
+    export_title = _strip_existing_section_number(section.get("_export_title") or "")
+    candidates = {
+        clean_formal_bid_text(raw_title).strip(),
+        clean_formal_bid_text(export_title).strip(),
+        _strip_repeated_parent_title_prefix(raw_title),
+        _strip_repeated_parent_title_prefix(export_title),
+    }
+    candidates = {candidate for candidate in candidates if candidate}
+    output: list[str] = []
+    removed = False
+    for raw_line in content.splitlines():
+        stripped = raw_line.strip()
+        label = stripped.strip("【】[]（）()# ：:、，,。")
+        label = re.sub(r"^[一二三四五六七八九十百]+[、.．]\s*", "", label)
+        if not removed and label in candidates:
+            removed = True
+            continue
+        output.append(raw_line)
+    return "\n".join(output).strip()
 
 
 def _demote_body_markdown_headings(content: str) -> str:
@@ -529,11 +568,8 @@ def _asset_library_label(asset: dict) -> str:
 
 def _asset_caption(asset: dict, match_reason: str | None = None) -> str:
     title = str(asset.get("title") or "知识库图片资产").strip()
-    category = str(asset.get("category") or "电网行业资料").strip()
-    sensitive_note = "，脱敏示意图，不替代正式资质文件" if asset.get("is_sensitive") or asset.get("anonymized") else ""
-    source_note = f"来源：{_asset_library_label(asset)}"
-    reason_note = f"；匹配依据：{match_reason}" if match_reason else ""
-    return f"图示：{title}（{category}{sensitive_note}；{source_note}{reason_note}）"
+    sensitive_note = "（脱敏示意图）" if asset.get("is_sensitive") or asset.get("anonymized") else ""
+    return f"图示：{title}{sensitive_note}"
 
 
 def _asset_match_reason(asset: dict, section: dict, score: int) -> str:
@@ -831,8 +867,11 @@ def build_project_bid_markdown(
     for section in _numbered_export_sections(sections):
         title = section.get("_export_title") or _section_display_title(section)
         content = _strip_untrusted_export_images(
-            _demote_body_markdown_headings(
-                _strip_duplicate_section_heading(section.get("content") or "", section)
+            _strip_redundant_section_label(
+                _demote_body_markdown_headings(
+                    _strip_duplicate_section_heading(section.get("content") or "", section)
+                ),
+                section,
             )
         )
         chunks.append(_section_markdown_heading(int(section.get("level") or 1), title))

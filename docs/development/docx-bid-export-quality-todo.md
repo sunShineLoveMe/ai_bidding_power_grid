@@ -20,9 +20,11 @@
 | 已完成 | 封面正式字段补齐第一阶段 | 封面包含标题、投标人、日期，并在正文可提取时自动加入招标编号、分标编号、分标名称、包号/包名称、文件类型 |
 | 待办 | 封面字段结构化来源补齐 | 从项目解析 metadata 或招标文件结构化结果稳定补齐分标编号、分标名称、包号/包名称，不依赖正文猜测 |
 | 待办 | 目录稳定性验收 | 独立目录页、最多 3-4 级、点引导线、页码右对齐、字段刷新成功 |
+| 已完成 | 目录标题去重 | 子章节不得重复父章节前缀，例如 `2.1.1 响应要求`，不得输出 `2.1.1 企业基本资格资料 - 响应要求` |
 | 待办 | 正文格式统一 | 字体、字号、行距、首行缩进、标题层级、分页规则稳定 |
+| 已完成 | Mermaid/流程图源码清理 | Mermaid 能转图则插入图片，转换失败不得把源码块写入正式 DOCX |
 | 待办 | 表格正式化 | A4 内可读、边框清晰、表头加粗、必要时重复表头、不大面积越界 |
-| 待办 | 图片资产正式化 | 只允许泰昌企业事实资产，禁止虚假图片路径，记录图片候选/选中/插入/失败数 |
+| 已完成 | 图片资产正式化 | 只允许泰昌企业事实资产，禁止虚假图片路径，正式 DOCX 不展示内部来源库、匹配依据或得分，记录图片候选/选中/插入/失败数 |
 | 待办 | 真实导出验收记录 | 用真实项目导出 DOCX，记录封面、目录、正文、表格、图片、页眉页脚、字段刷新状态 |
 
 ## P1 应该完成
@@ -56,3 +58,20 @@
 - 真实导出链路：项目 `4bc3ee73-9ec5-4184-aafd-eaede9f90798`，执行 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
 - 验证记录：`docs/development/runs/run_20260609_docx_quality_p0_real_export.md` 和 `docs/development/runs/run_20260609_docx_quality_p0_real_export.json`。
 - 本次真实导出结果：模板 `sgcc_taichang_bid`，封面提取 `文件类型=投标文件`、`招标编号=2225AC`，图片 found/inserted/skipped/failed 为 `24/24/0/0`，LibreOffice 字段刷新成功。
+
+### 2026-06-09 二次验收发现
+
+- 问题 1：正式 DOCX 中出现 Mermaid 源码块，说明流程图转换失败时没有在导出层兜底清理。
+- 问题 2：目录小节标题重复父章节前缀，例如 `企业基本资格资料 - 响应要求`，应改为 `响应要求`；系统生成章节目录源头也应同步修正。
+- 问题 3：图片 caption 展示了内部来源库和匹配依据，正式交付版应去掉，仅在 metadata/manifest 中保留。
+- 处理要求：这三项均纳入 P0，必须修复后复跑真实导出链路并新增 run 记录。
+
+### 2026-06-09 二次问题修复记录
+
+- 目录标题去重已修复：系统章节拆分源头不再生成 `父章节 - 子章节` 标题，导出层也会兜底移除重复父章节前缀。
+- Mermaid/流程图源码清理已修复：Mermaid 转图成功时插入图片；当前环境未安装 `mmdc` 时记录 skipped，正式 DOCX 不再输出 ```mermaid 源码块。
+- 图片资产正式化已修复：正式 DOCX caption 只保留 `图示：资料标题`，内部来源库、匹配依据、得分等只保留在 metadata/manifest。
+- 单元与集成测试：`PYTHONPATH=. .venv/bin/pytest tests/test_docx_export.py tests/test_rag_asset_scoring.py tests/test_chapter_planner.py tests/test_celery_export_tasks.py -q`，结果 `48 passed, 5 warnings`。
+- 真实导出链路：项目 `4bc3ee73-9ec5-4184-aafd-eaede9f90798`，执行 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
+- 验证记录：`docs/development/runs/run_20260609_docx_quality_p0_cleanup_real_export.md` 和 `docs/development/runs/run_20260609_docx_quality_p0_cleanup_real_export.json`。
+- 本次真实导出结果：`cleanup_checks.contains_mermaid_fence=false`，`cleanup_checks.contains_internal_image_source=false`，`repeated_title_patterns_found=[]`；图片 found/inserted/skipped/failed 为 `24/24/0/0`，Mermaid found/inserted/skipped 为 `1/0/1`，LibreOffice 字段刷新成功。

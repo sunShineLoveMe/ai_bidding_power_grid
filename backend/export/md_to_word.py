@@ -491,7 +491,7 @@ def convert_mermaid_to_image(mermaid_code):
             '-c', 'config.json'  # 使用配置文件
         ], check=True)
         return png_file
-    except subprocess.CalledProcessError:
+    except (subprocess.CalledProcessError, FileNotFoundError):
         logging.exception("转换流程图失败")
         return None
     finally:
@@ -548,6 +548,8 @@ def process_mermaid(doc, mermaid_code):
         finally:
             # 清理临时图片文件
             os.unlink(png_file)
+        return True
+    return False
 
 
 def _image_suffix_from_response(image_ref, response=None):
@@ -1114,12 +1116,49 @@ def convert_md_to_word(md_file, return_report: bool = False):
         "skipped": 0,
         "failed": 0,
         "events": [],
+        "mermaid": {
+            "found": 0,
+            "inserted": 0,
+            "skipped": 0,
+        },
     }
     heading_count = 0
     while i < len(lines):
         line = lines[i].strip()
         if re.match(r'^(-{3,}|\*{3,}|_{3,})$', line):
             i += 1
+            continue
+
+        fence_match = re.match(r"^(```|~~~)\s*([A-Za-z0-9_-]+)?\s*$", line)
+        if fence_match:
+            fence = fence_match.group(1)
+            lang = (fence_match.group(2) or "").lower()
+            block_lines = []
+            i += 1
+            while i < len(lines) and not lines[i].strip().startswith(fence):
+                block_lines.append(lines[i])
+                i += 1
+            if i < len(lines) and lines[i].strip().startswith(fence):
+                i += 1
+            if lang == "mermaid":
+                image_report["mermaid"]["found"] += 1
+                if process_mermaid(doc, "\n".join(block_lines)):
+                    image_report["mermaid"]["inserted"] += 1
+                else:
+                    image_report["mermaid"]["skipped"] += 1
+                    _append_image_report(image_report, {
+                        "status": "skipped",
+                        "reason": "Mermaid 流程图转换失败，正式 DOCX 已省略源码块。",
+                        "type": "mermaid",
+                    })
+                continue
+            for code_line in block_lines:
+                text = clean_formal_bid_text(code_line)
+                if text:
+                    p = doc.add_paragraph()
+                    run = p.add_run(text)
+                    apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_BODY_FONT_SIZE)
+                    apply_paragraph_format(p)
             continue
 
         image_match = re.match(r'^!\[(.*?)\]\((.*?)\)\s*$', line)
