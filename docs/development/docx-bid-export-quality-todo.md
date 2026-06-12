@@ -174,3 +174,14 @@
 - 真实导出链路：项目 `4bc3ee73-9ec5-4184-aafd-eaede9f90798`，执行 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`，并用 LibreOffice 生成 PDF。
 - 验证记录：`docs/development/runs/run_20260612_taichang_deepseek_full_rewrite.md`、`docs/development/runs/run_20260612_taichang_full_bid_final_v6.md` 和对应 JSON。
 - 本次真实验收结果：状态 `PASS`；源项目 74 个章节节点、74 个有正文；Markdown `166913` 字符；DOCX 段落 `2747`、标题 `74`、目录条目 `65`、表格 `109`；图片选中 `24`、插入 `24`、失败 `0`；封面首页页眉为空、目录点引导线和 `PAGEREF` 存在、页脚 `PAGE/NUMPAGES` 字段存在、配置中文字体检查通过、无内部检索字段泄漏、无重复父章节标题、无黑色方块分页标记、PDF 预览生成成功。
+
+### 2026-06-12 编号与 PDF 差异复核记录
+
+- 根因：数字列表统一使用 Word `List Number` 样式，导致各章节的序号共享同一 `numId`，LibreOffice/Word 排版后连续累计到 300 以上。
+- 修复：正式导出改为保留 Markdown 原始数字标记，普通业务列表可在各章节从 `1.` 重新开始，`5.4.1` 等业务层级编号不再被改写成全文连续序号。
+- 字号对照：客户提供的 362 页参考标书抽样页正文主字体为宋体，主字号约 `10.6pt`；当前正文 `10.5pt` 与参考稿一致，本轮不放大字号。
+- PDF 说明：当前流程为 DOCX 生成后由 LibreOffice headless 刷新字段并另行排版导出 PDF；不是 Word 原生“另存为 PDF”，因此字体映射和分页不能保证像素级一致。本机 Word 原生自动导出因应用交互/权限阻塞未纳入无人值守链路。
+- 自动化回归：`.venv/bin/python -m pytest tests/test_docx_export.py -q`，结果 `37 passed, 1 warning`。
+- 真实导出：`build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice -> LibreOffice PDF`，状态 PASS；PDF `208` 页，图片 `24/24/0`，表格 `109`，字段刷新成功。
+- 编号专项检查：普通数字列表最大序号 `12`，PDF 中原异常 `360.`、`361.`、`362.`、`367.`、`368.` 均不存在。
+- 验证记录：`docs/development/runs/run_20260612_taichang_bid_numbering_final.md`。

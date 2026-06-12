@@ -1419,3 +1419,19 @@ set -a; source .env; set +a; .venv/bin/python scripts/rag/run_taichang_product_p
 
 - Gate PASS。
 - 本轮客户版完整标书已经完成真实 DeepSeek 全量章节重写、正式 DOCX 导出、LibreOffice 字段刷新、PDF 生成和 Base + 泰昌专项增量回归。
+
+---
+
+## Run 27 — 泰昌标书待补充信息与资料入库反查（2026-06-12）
+
+> 审计清单：`docs/rag/taichang-bid-information-gap-audit-20260612.md`
+> DOCX/PDF 验证：`docs/development/runs/run_20260612_taichang_bid_numbering_final.md`
+> 增量回归：`docs/rag/runs/run_20260612_taichang_bid_information_gap_audit_summary.md`
+
+- 最终 Markdown 检出 `845` 处 `【待补充】`，归并后 `404` 类。
+- 泰昌补充批次已有 `24` 份文本资料、`1687` 个 child/table 检索块，三体系证书、合同、中标通知书、检验报告、企业报告和人员资料均已真实解析入库。
+- 审计确认大量占位属于“已有资料未回填”，不能归为客户资料缺失；另有设备台账、审计报告、开户图片等需要二次结构化和人工核验。
+- 真正需要客户确认的核心项为本次投标包、最终报价、交货/质保/有效期承诺、保证金信息、项目角色指定、签章日期和量化产能/服务承诺。
+- 施工资质、建造师、BIM、水利施工等与电缆保护管供货无关的内容列为不适用清理项，不向客户索要。
+- 编号修复后的真实 DOCX/PDF 导出 PASS；原 360+ 全文连续序号已消失。
+- 增量回归 Gate PASS：Base off/qwen3 Recall@5 均为 `96.7%`，泰昌专项 off 为 `96.7%`、qwen3 为 `100.0%`；四组 Top1 来源准确率均为 `100%`，跨 doc_role 串扰均为 `0%`。

@@ -844,7 +844,7 @@ class DocxExportRegressionTest(unittest.TestCase):
             trailing_body = next(p for p in document.paragraphs if p.text.startswith("后续正文"))
             heading = next(p for p in document.paragraphs if p.text == "1. 施工组织设计")
             bullet = next(p for p in document.paragraphs if p.text.startswith("配置项目经理"))
-            numbered = next(p for p in document.paragraphs if p.text.startswith("明确资料提交"))
+            numbered = next(p for p in document.paragraphs if p.text.startswith("1. 明确资料提交"))
 
             self.assertEqual(DOCX_BODY_FIRST_LINE_INDENT_PT, report["template"]["body_first_line_indent_pt"])
             self.assertEqual(WD_LINE_SPACING.EXACTLY, body_paragraph.paragraph_format.line_spacing_rule)
@@ -865,6 +865,46 @@ class DocxExportRegressionTest(unittest.TestCase):
                 self.assertEqual(DOCX_BODY_LINE_SPACING, paragraph.paragraph_format.line_spacing.pt)
                 self.assertEqual(DOCX_LIST_LEFT_INDENT_PT, paragraph.paragraph_format.left_indent.pt)
                 self.assertEqual(-DOCX_LIST_HANGING_INDENT_PT, paragraph.paragraph_format.first_line_indent.pt)
+
+    def test_numbered_lists_preserve_source_markers_and_restart_between_sections(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            markdown_path = Path(tmpdir) / "numbering-restart.md"
+            markdown_path.write_text(
+                "\n".join(
+                    [
+                        "# 编号回归测试投标文件",
+                        "",
+                        "# 1. 商务响应",
+                        "",
+                        "1. 第一项商务要求。",
+                        "2. 第二项商务要求。",
+                        "",
+                        "## 1.1 技术响应",
+                        "",
+                        "1. 第一项技术要求。",
+                        "2. 第二项技术要求。",
+                        "",
+                        "5.4.1 生产工艺文件控制",
+                        "5.4.2 过程检验",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            output_path = convert_md_to_word(markdown_path)
+            document = Document(str(output_path))
+            texts = [p.text for p in document.paragraphs]
+
+            self.assertEqual(2, texts.count("1. 第一项商务要求。") + texts.count("1. 第一项技术要求。"))
+            self.assertIn("1. 第一项商务要求。", texts)
+            self.assertIn("2. 第二项商务要求。", texts)
+            self.assertIn("1. 第一项技术要求。", texts)
+            self.assertIn("2. 第二项技术要求。", texts)
+            self.assertIn("5.4.1 生产工艺文件控制", texts)
+            self.assertIn("5.4.2 过程检验", texts)
+            with ZipFile(output_path) as docx_zip:
+                document_xml = docx_zip.read("word/document.xml").decode("utf-8")
+            self.assertNotIn("<w:numPr>", document_xml)
 
     def test_formal_docx_does_not_emit_black_square_paragraph_markers(self):
         with tempfile.TemporaryDirectory() as tmpdir:

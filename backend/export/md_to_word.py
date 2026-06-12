@@ -1692,14 +1692,17 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
             apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_BODY_FONT_SIZE)
             apply_list_paragraph_format(p)
         
-        # 处理数字列表
-        elif re.match(r'^\d+\.', line):
-            # 移除数字和点
-            text = re.sub(r'^\d+\.', '', line).strip()
+        # 处理数字列表。保留 Markdown 原始序号，避免 Word/LibreOffice 将全文
+        # 共用的 List Number 样式连续累计到数百位；章节内的 1.1、2.1 等层级
+        # 编号也应按模型原文展示，不能被错误改写为全局自动编号。
+        elif re.match(r'^\d+(?:\.\d+)*\.?(?:\s+|$)', line):
+            marker_match = re.match(r'^(\d+(?:\.\d+)*\.?)\s*', line)
+            marker = marker_match.group(1) if marker_match else ""
+            text = line[marker_match.end():].strip() if marker_match else line.strip()
             # 移除加粗标记
             text = clean_formal_bid_text(re.sub(r'\*\*(.*?)\*\*', r'\1', text))
-            p = doc.add_paragraph(style='List Number')
-            run = p.add_run(text)
+            p = doc.add_paragraph()
+            run = p.add_run(f"{marker} {text}".strip())
             apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_BODY_FONT_SIZE)
             apply_list_paragraph_format(p)
         
