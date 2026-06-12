@@ -1,0 +1,27 @@
+{
+  "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/6环境管理体系认证证书整页扫描件/2.环境管理体系认证证书.pdf",
+  "status": "mineru_done",
+  "ocr_reason": "no_extractable_text",
+  "pdf_pages": 2,
+  "text_chars_before": 0,
+  "text_chars_after": 3274,
+  "batch_id": "c7e3722a-1ae0-4e01-a48b-2337495035e3",
+  "data_id": "customer_taichang_supplement_20260611_p1b_ocr_3bdf5e3aaa68",
+  "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_3bdf5e3a",
+  "artifacts": {
+    "zip_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_3bdf5e3a/mineru_result.zip",
+    "extract_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_3bdf5e3a/extract",
+    "markdown_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_3bdf5e3a/extract/full.md",
+    "content_list_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_3bdf5e3a/extract/25b169d8-b496-44ea-9809-d17c34891089_content_list.json",
+    "model_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_3bdf5e3a/extract/25b169d8-b496-44ea-9809-d17c34891089_model.json",
+    "middle_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_3bdf5e3a/extract/layout.json",
+    "download_info": {
+      "url_host": "cdn-mineru.openxlab.org.cn",
+      "resume_enabled": true,
+      "used_curl_fallback": true,
+      "resumed_from_bytes": 0,
+      "downloaded_bytes": 0,
+      "zip_size": 1040617
+    }
+  }
+}

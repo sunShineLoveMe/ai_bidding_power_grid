@@ -402,6 +402,72 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertEqual(1, report["selected"])
             self.assertEqual(1, markdown.count("/api/bidding/knowledge/assets/asset-1/file?variant=original"))
 
+    def test_bid_markdown_with_images_prefers_project_performance_assets(self):
+        project_id = "11111111-1111-1111-1111-111111111111"
+        with tempfile.TemporaryDirectory() as tmpdir:
+            app = Flask(__name__)
+            app.config["GENERATED_FOLDER"] = tmpdir
+            sections = [
+                {
+                    "id": "section-1",
+                    "order_index": 1,
+                    "level": 1,
+                    "title": "类似项目业绩",
+                    "content": "提供同类产品供货合同、中标通知书和业绩证明材料。",
+                    "metadata": {"volume_type": "qualification"},
+                }
+            ]
+            assets = [
+                {
+                    "id": "cert-1",
+                    "title": "泰昌体系认证证书",
+                    "category": "资质证书",
+                    "asset_type": "qualification_image",
+                    "metadata": {
+                        "enterprise": "泰昌",
+                        "doc_owner": DOCX_BIDDER_FULL_NAME,
+                        "source_domain": "enterprise_fact",
+                        "evidence_type": "certification",
+                        "target_library": "qualification_library",
+                        "library_type": "qualification",
+                        "reference_only": False,
+                    },
+                },
+                {
+                    "id": "award-1",
+                    "title": "泰昌电缆保护管中标通知书第1页",
+                    "category": "项目业绩",
+                    "asset_type": "qualification_image",
+                    "metadata": {
+                        "enterprise": "泰昌",
+                        "doc_owner": DOCX_BIDDER_FULL_NAME,
+                        "source_domain": "enterprise_fact",
+                        "evidence_type": "project_performance",
+                        "target_library": "qualification_library",
+                        "library_type": "qualification",
+                        "reference_only": False,
+                    },
+                    "searchable_text": "中标通知书 招标编号 0322AB 包号 157-保护管",
+                },
+            ]
+
+            with (
+                app.app_context(),
+                patch("backend.api.routes.get_project_interpretation", return_value={
+                    "project": {"id": project_id, "project_name": "测试招标文件"},
+                    "analysis": {"project_meta": {"project_name": "测试招标文件"}},
+                }),
+                patch("backend.api.routes.list_bid_sections", return_value=sections),
+                patch("backend.api.routes.list_knowledge_assets", return_value=assets),
+            ):
+                markdown_path, _, report = build_project_bid_markdown(project_id, with_images=True)
+
+            markdown = markdown_path.read_text(encoding="utf-8")
+            self.assertEqual(1, report["selected"])
+            self.assertIn("/api/bidding/knowledge/assets/award-1/file?variant=original", markdown)
+            self.assertNotIn("/api/bidding/knowledge/assets/cert-1/file?variant=original", markdown)
+            self.assertEqual("project_performance", report["manifest"][0]["evidence_type"])
+
     def test_docx_first_page_is_formal_toc_and_title_is_not_outline_heading(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             markdown_path = Path(tmpdir) / "toc.md"

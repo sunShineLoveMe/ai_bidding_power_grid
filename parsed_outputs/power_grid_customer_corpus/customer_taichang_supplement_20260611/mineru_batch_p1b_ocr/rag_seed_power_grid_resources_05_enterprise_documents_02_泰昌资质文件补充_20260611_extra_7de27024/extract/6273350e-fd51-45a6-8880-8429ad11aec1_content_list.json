@@ -1,0 +1,297 @@
+[
+    {
+        "type": "image",
+        "img_path": "images/17e8a2c292290c321d25eb3a999f97c4e7c03c35f65675cbffa0e0962cff66fc.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "SHQC",
+        "sub_type": "text_image",
+        "bbox": [
+            359,
+            93,
+            630,
+            205
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "绿色电力认证证书",
+        "text_level": 2,
+        "bbox": [
+            307,
+            216,
+            689,
+            243
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "证书编号：30325LDL22619R0S",
+        "bbox": [
+            369,
+            254,
+            628,
+            269
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "兹证明",
+        "bbox": [
+            467,
+            278,
+            527,
+            294
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "河北泰昌电力器材科技有限公司",
+        "text_level": 2,
+        "bbox": [
+            287,
+            305,
+            712,
+            330
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "统一社会信用代码：91130607056539515C",
+        "bbox": [
+            331,
+            335,
+            658,
+            351
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "注册地址：保定市满城区陉阳驿村",
+        "bbox": [
+            309,
+            363,
+            588,
+            379
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "办公地址：保定市满城区陉阳驿村",
+        "bbox": [
+            310,
+            388,
+            588,
+            406
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "生产地址：保定市满城区陉阳驿村",
+        "bbox": [
+            310,
+            414,
+            588,
+            432
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "经评审，组织的绿色电力认证体系符合：",
+        "bbox": [
+            292,
+            460,
+            690,
+            480
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "DB15/T 2748-2022《绿色电力应用评价方法》的要求",
+        "bbox": [
+            235,
+            488,
+            759,
+            508
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "该证书覆盖的范围：",
+        "bbox": [
+            408,
+            518,
+            576,
+            537
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "资质范围内电表箱及低压无功补偿配电柜的生产；非标电力金具（横担、抱箍、拉线棒）、高压隔离开关、高压熔断器、电缆保护管的生产；管状母线、电缆分支箱及柱上断路器的销售",
+        "bbox": [
+            147,
+            544,
+            850,
+            642
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "初次发证日期：2025年10月15日",
+        "bbox": [
+            164,
+            671,
+            433,
+            688
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "证书有效期至：2028年10月14日",
+        "bbox": [
+            510,
+            671,
+            778,
+            688
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "注：获证组织在此证书有效期内需按期接受监督审核，监督审核后此证书与保持通知书一起使用方为继续有效。本证书信息可在国家认证认可监督委员会网站（www.cnca.gov.cn）及公司网站（www.bjshz.com）上查询。",
+        "bbox": [
+            144,
+            699,
+            855,
+            728
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "image",
+        "img_path": "images/1e7004617f1f1aba929283865f9e1d09523ef497689d7f9bc5cbc03c5f5c0282.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "",
+        "bbox": [
+            171,
+            741,
+            290,
+            825
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "image",
+        "img_path": "images/9085f9cad322a67b157ec0223ad932b8d48710741655fac28d925e1dfde8e3b8.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "",
+        "bbox": [
+            337,
+            738,
+            453,
+            822
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "image",
+        "img_path": "images/80147aa090ea81fb48d118c7e5a05b312b45afc7ce42411beef839a914a5dc5b.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "刘多文",
+        "sub_type": "text_image",
+        "bbox": [
+            482,
+            730,
+            675,
+            783
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "证书签发人",
+        "bbox": [
+            510,
+            791,
+            633,
+            809
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "image",
+        "img_path": "images/fcefc3b33876b9f385322503dd8e08c34f1558ddec129741bf92c438c7912188.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "证券承销团\n证券承销团\n证券承销团\n证券承销团\n本次发证日期：\n2025年10月15日",
+        "sub_type": "text_image",
+        "bbox": [
+            667,
+            725,
+            860,
+            854
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "北京圣慧认证服务有限公司",
+        "bbox": [
+            329,
+            838,
+            663,
+            860
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "地址：北京市丰台区北宫镇园博园南路渡业大厦6层618B室",
+        "bbox": [
+            257,
+            875,
+            722,
+            892
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "电话：010-83602260",
+        "bbox": [
+            307,
+            898,
+            450,
+            912
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "网址：www.b.jshrz.com",
+        "bbox": [
+            514,
+            898,
+            673,
+            913
+        ],
+        "page_idx": 0
+    }
+]

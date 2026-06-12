@@ -1,0 +1,2124 @@
+{
+    "pdf_info": [
+        {
+            "preproc_blocks": [
+                {
+                    "type": "image",
+                    "bbox": [
+                        214,
+                        79,
+                        375,
+                        173
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                214,
+                                79,
+                                375,
+                                173
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        214,
+                                        79,
+                                        375,
+                                        173
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                214,
+                                                79,
+                                                375,
+                                                173
+                                            ],
+                                            "type": "image",
+                                            "content": "SHQC",
+                                            "image_path": "88f78d4697768c4952711489dbaa0b3b8b2ef990d74691d79e5cc27d2fc0863e.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0,
+                    "sub_type": "text_image"
+                },
+                {
+                    "bbox": [
+                        169,
+                        182,
+                        424,
+                        205
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 1,
+                    "lines": [
+                        {
+                            "bbox": [
+                                167,
+                                179,
+                                426,
+                                206
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        167,
+                                        179,
+                                        426,
+                                        206
+                                    ],
+                                    "type": "text",
+                                    "content": "绿色供应链认证证书",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "bbox": [
+                        226,
+                        214,
+                        368,
+                        227
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 2,
+                    "lines": [
+                        {
+                            "bbox": [
+                                224,
+                                213,
+                                370,
+                                228
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        224,
+                                        213,
+                                        370,
+                                        228
+                                    ],
+                                    "type": "text",
+                                    "content": "证书编号：30325L22617R0S",
+                                    "score": 0.995
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        278,
+                        234,
+                        314,
+                        248
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 3,
+                    "lines": [
+                        {
+                            "bbox": [
+                                276,
+                                232,
+                                317,
+                                249
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        276,
+                                        232,
+                                        317,
+                                        249
+                                    ],
+                                    "type": "text",
+                                    "content": "兹证明",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        179,
+                        253,
+                        433,
+                        275
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 4,
+                    "lines": [
+                        {
+                            "bbox": [
+                                177,
+                                252,
+                                433,
+                                275
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        177,
+                                        252,
+                                        433,
+                                        275
+                                    ],
+                                    "type": "text",
+                                    "content": "河北泰昌电力器材科技有限公司",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "bbox": [
+                        198,
+                        282,
+                        392,
+                        296
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 5,
+                    "lines": [
+                        {
+                            "bbox": [
+                                196,
+                                280,
+                                393,
+                                296
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        196,
+                                        280,
+                                        393,
+                                        296
+                                    ],
+                                    "type": "text",
+                                    "content": "统一社会信用代码：91130607056539515C",
+                                    "score": 0.996
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        177,
+                        306,
+                        342,
+                        319
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 6,
+                    "lines": [
+                        {
+                            "bbox": [
+                                176,
+                                304,
+                                343,
+                                320
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        176,
+                                        304,
+                                        343,
+                                        320
+                                    ],
+                                    "type": "text",
+                                    "content": "注册地址：保定市满城区陉阳驿村",
+                                    "score": 0.996
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        177,
+                        327,
+                        342,
+                        342
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 7,
+                    "lines": [
+                        {
+                            "bbox": [
+                                176,
+                                327,
+                                344,
+                                343
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        176,
+                                        327,
+                                        344,
+                                        343
+                                    ],
+                                    "type": "text",
+                                    "content": "办公地址：保定市满城区陉阳驿村",
+                                    "score": 0.995
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        177,
+                        349,
+                        342,
+                        364
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 8,
+                    "lines": [
+                        {
+                            "bbox": [
+                                176,
+                                348,
+                                343,
+                                364
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        176,
+                                        348,
+                                        343,
+                                        364
+                                    ],
+                                    "type": "text",
+                                    "content": "生产地址：保定市满城区陉阳驿村",
+                                    "score": 0.996
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        181,
+                        386,
+                        404,
+                        404
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 9,
+                    "lines": [
+                        {
+                            "bbox": [
+                                179,
+                                385,
+                                406,
+                                405
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        179,
+                                        385,
+                                        406,
+                                        405
+                                    ],
+                                    "type": "text",
+                                    "content": "经评审，组织的供应链管理体系符合：",
+                                    "score": 0.995
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        210,
+                        410,
+                        382,
+                        428
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 10,
+                    "lines": [
+                        {
+                            "bbox": [
+                                208,
+                                409,
+                                383,
+                                428
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        208,
+                                        409,
+                                        383,
+                                        428
+                                    ],
+                                    "type": "text",
+                                    "content": "GB/T39257-2020标准要求",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        243,
+                        436,
+                        343,
+                        451
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 11,
+                    "lines": [
+                        {
+                            "bbox": [
+                                242,
+                                436,
+                                344,
+                                451
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        242,
+                                        436,
+                                        344,
+                                        451
+                                    ],
+                                    "type": "text",
+                                    "content": "该证书覆盖的范围：",
+                                    "score": 0.996
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        86,
+                        465,
+                        508,
+                        538
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 12,
+                    "lines": [
+                        {
+                            "bbox": [
+                                86,
+                                465,
+                                508,
+                                481
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        86,
+                                        465,
+                                        508,
+                                        481
+                                    ],
+                                    "type": "text",
+                                    "content": "资质范围内电表箱及低压无功补偿配电柜的生产；非标电力金具（横",
+                                    "score": 1.0
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                92,
+                                483,
+                                500,
+                                500
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        92,
+                                        483,
+                                        500,
+                                        500
+                                    ],
+                                    "type": "text",
+                                    "content": "担、抱箍、拉线棒）、高压隔离开关、高压熔断器、电缆保护管的",
+                                    "score": 0.998
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                142,
+                                502,
+                                451,
+                                518
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        142,
+                                        502,
+                                        451,
+                                        518
+                                    ],
+                                    "type": "text",
+                                    "content": "生产；管状母线、电缆分支箱及柱上断路器的销售",
+                                    "score": 1.0
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                206,
+                                521,
+                                388,
+                                536
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        206,
+                                        521,
+                                        388,
+                                        536
+                                    ],
+                                    "type": "text",
+                                    "content": "所涉及的绿色供应链管理活动",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        215,
+                        541,
+                        379,
+                        560
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 13,
+                    "lines": [
+                        {
+                            "bbox": [
+                                213,
+                                538,
+                                381,
+                                563
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        213,
+                                        538,
+                                        381,
+                                        563
+                                    ],
+                                    "type": "text",
+                                    "content": "评价级别：★★★★★",
+                                    "score": 0.95
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        97,
+                        566,
+                        257,
+                        580
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 14,
+                    "lines": [
+                        {
+                            "bbox": [
+                                96,
+                                565,
+                                258,
+                                581
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        96,
+                                        565,
+                                        258,
+                                        581
+                                    ],
+                                    "type": "text",
+                                    "content": "证书发证日期：2025年10月15日",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        304,
+                        565,
+                        462,
+                        579
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 15,
+                    "lines": [
+                        {
+                            "bbox": [
+                                303,
+                                565,
+                                463,
+                                580
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        303,
+                                        565,
+                                        463,
+                                        580
+                                    ],
+                                    "type": "text",
+                                    "content": "证书有效期至：2028年10月14日",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        86,
+                        588,
+                        508,
+                        613
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 16,
+                    "lines": [
+                        {
+                            "bbox": [
+                                85,
+                                587,
+                                509,
+                                602
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        85,
+                                        587,
+                                        509,
+                                        602
+                                    ],
+                                    "type": "text",
+                                    "content": "注：获证组织在此证书有效期内需按期接受监督审核，监督审核后此证书与保持通知书一起使用方为继续有效。",
+                                    "score": 0.999
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                102,
+                                597,
+                                501,
+                                615
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        102,
+                                        597,
+                                        501,
+                                        615
+                                    ],
+                                    "type": "text",
+                                    "content": "本证书信息可在国家认证认可监督委员会网站（www.cnca.gov.cn）及公司网站（www.bjsz.com上查询。",
+                                    "score": 0.967
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        96,
+                        622,
+                        167,
+                        692
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                96,
+                                622,
+                                167,
+                                692
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        96,
+                                        622,
+                                        167,
+                                        692
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                96,
+                                                622,
+                                                167,
+                                                692
+                                            ],
+                                            "type": "image",
+                                            "image_path": "8b9559c51193a95f08d9405b29e11e7c3d934deeac91f0806f9f7fe94c4542ad.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 17
+                        }
+                    ],
+                    "index": 17
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        201,
+                        620,
+                        271,
+                        692
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                201,
+                                620,
+                                271,
+                                692
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        201,
+                                        620,
+                                        271,
+                                        692
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                201,
+                                                620,
+                                                271,
+                                                692
+                                            ],
+                                            "type": "image",
+                                            "content": "SHQC\nR-2017-303",
+                                            "image_path": "9535c3c9ae0c53014056015808c14aea8ca3269fa167c816bb98ab100edd88f7.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 18
+                        }
+                    ],
+                    "index": 18,
+                    "sub_type": "text_image"
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        287,
+                        614,
+                        402,
+                        659
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                287,
+                                614,
+                                402,
+                                659
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        287,
+                                        614,
+                                        402,
+                                        659
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                287,
+                                                614,
+                                                402,
+                                                659
+                                            ],
+                                            "type": "image",
+                                            "content": "刘多文",
+                                            "image_path": "817d44fb988bcf4f1148a9bcd154c689e5964ad5340ad2fd3bac82a4c20ab9e3.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 19
+                        }
+                    ],
+                    "index": 19,
+                    "sub_type": "text_image"
+                },
+                {
+                    "bbox": [
+                        304,
+                        666,
+                        376,
+                        681
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 20,
+                    "lines": [
+                        {
+                            "bbox": [
+                                302,
+                                665,
+                                378,
+                                682
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        302,
+                                        665,
+                                        378,
+                                        682
+                                    ],
+                                    "type": "text",
+                                    "content": "证书签发人",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        397,
+                        610,
+                        514,
+                        719
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                397,
+                                610,
+                                514,
+                                719
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        397,
+                                        610,
+                                        514,
+                                        719
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                397,
+                                                610,
+                                                514,
+                                                719
+                                            ],
+                                            "type": "image",
+                                            "content": "北京全惠认证服务有限公司\n本次发证日期：\n2025年10月15日",
+                                            "image_path": "57ac0271378db4ef1782f1f3597a71eb3e09c700f87245d0a3c66cacd4078ef4.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 21
+                        }
+                    ],
+                    "index": 21,
+                    "sub_type": "text_image"
+                },
+                {
+                    "bbox": [
+                        196,
+                        705,
+                        395,
+                        724
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 22,
+                    "lines": [
+                        {
+                            "bbox": [
+                                194,
+                                703,
+                                397,
+                                726
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        194,
+                                        703,
+                                        397,
+                                        726
+                                    ],
+                                    "type": "text",
+                                    "content": "北京圣慧认证服务有限公司",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        153,
+                        736,
+                        430,
+                        751
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 23,
+                    "lines": [
+                        {
+                            "bbox": [
+                                152,
+                                735,
+                                431,
+                                751
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        152,
+                                        735,
+                                        431,
+                                        751
+                                    ],
+                                    "type": "text",
+                                    "content": "地址：北京市丰台区北宫镇园博园南路渡业大厦6层618B室",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        183,
+                        756,
+                        268,
+                        767
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 24,
+                    "lines": [
+                        {
+                            "bbox": [
+                                182,
+                                754,
+                                269,
+                                768
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        182,
+                                        754,
+                                        269,
+                                        768
+                                    ],
+                                    "type": "text",
+                                    "content": "电话：010-83602260",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        306,
+                        756,
+                        401,
+                        768
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 25,
+                    "lines": [
+                        {
+                            "bbox": [
+                                304,
+                                753,
+                                402,
+                                770
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        304,
+                                        753,
+                                        402,
+                                        770
+                                    ],
+                                    "type": "text",
+                                    "content": "网址：www.b.jshrz.com",
+                                    "score": 0.99
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                }
+            ],
+            "discarded_blocks": [],
+            "page_size": [
+                595,
+                841
+            ],
+            "page_idx": 0,
+            "para_blocks": [
+                {
+                    "type": "image",
+                    "bbox": [
+                        214,
+                        79,
+                        375,
+                        173
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                214,
+                                79,
+                                375,
+                                173
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        214,
+                                        79,
+                                        375,
+                                        173
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                214,
+                                                79,
+                                                375,
+                                                173
+                                            ],
+                                            "type": "image",
+                                            "content": "SHQC",
+                                            "image_path": "88f78d4697768c4952711489dbaa0b3b8b2ef990d74691d79e5cc27d2fc0863e.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0,
+                    "sub_type": "text_image"
+                },
+                {
+                    "bbox": [
+                        169,
+                        182,
+                        424,
+                        205
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 1,
+                    "lines": [
+                        {
+                            "bbox": [
+                                167,
+                                179,
+                                426,
+                                206
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        167,
+                                        179,
+                                        426,
+                                        206
+                                    ],
+                                    "type": "text",
+                                    "content": "绿色供应链认证证书",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "bbox": [
+                        226,
+                        214,
+                        368,
+                        227
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 2,
+                    "lines": [
+                        {
+                            "bbox": [
+                                224,
+                                213,
+                                370,
+                                228
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        224,
+                                        213,
+                                        370,
+                                        228
+                                    ],
+                                    "type": "text",
+                                    "content": "证书编号：30325L22617R0S",
+                                    "score": 0.995
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        278,
+                        234,
+                        314,
+                        248
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 3,
+                    "lines": [
+                        {
+                            "bbox": [
+                                276,
+                                232,
+                                317,
+                                249
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        276,
+                                        232,
+                                        317,
+                                        249
+                                    ],
+                                    "type": "text",
+                                    "content": "兹证明",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        179,
+                        253,
+                        433,
+                        275
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 4,
+                    "lines": [
+                        {
+                            "bbox": [
+                                177,
+                                252,
+                                433,
+                                275
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        177,
+                                        252,
+                                        433,
+                                        275
+                                    ],
+                                    "type": "text",
+                                    "content": "河北泰昌电力器材科技有限公司",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "bbox": [
+                        198,
+                        282,
+                        392,
+                        296
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 5,
+                    "lines": [
+                        {
+                            "bbox": [
+                                196,
+                                280,
+                                393,
+                                296
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        196,
+                                        280,
+                                        393,
+                                        296
+                                    ],
+                                    "type": "text",
+                                    "content": "统一社会信用代码：91130607056539515C",
+                                    "score": 0.996
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        177,
+                        306,
+                        342,
+                        319
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 6,
+                    "lines": [
+                        {
+                            "bbox": [
+                                176,
+                                304,
+                                343,
+                                320
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        176,
+                                        304,
+                                        343,
+                                        320
+                                    ],
+                                    "type": "text",
+                                    "content": "注册地址：保定市满城区陉阳驿村",
+                                    "score": 0.996
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        177,
+                        327,
+                        342,
+                        342
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 7,
+                    "lines": [
+                        {
+                            "bbox": [
+                                176,
+                                327,
+                                344,
+                                343
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        176,
+                                        327,
+                                        344,
+                                        343
+                                    ],
+                                    "type": "text",
+                                    "content": "办公地址：保定市满城区陉阳驿村",
+                                    "score": 0.995
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        177,
+                        349,
+                        342,
+                        364
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 8,
+                    "lines": [
+                        {
+                            "bbox": [
+                                176,
+                                348,
+                                343,
+                                364
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        176,
+                                        348,
+                                        343,
+                                        364
+                                    ],
+                                    "type": "text",
+                                    "content": "生产地址：保定市满城区陉阳驿村",
+                                    "score": 0.996
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        181,
+                        386,
+                        404,
+                        404
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 9,
+                    "lines": [
+                        {
+                            "bbox": [
+                                179,
+                                385,
+                                406,
+                                405
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        179,
+                                        385,
+                                        406,
+                                        405
+                                    ],
+                                    "type": "text",
+                                    "content": "经评审，组织的供应链管理体系符合：",
+                                    "score": 0.995
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        210,
+                        410,
+                        382,
+                        428
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 10,
+                    "lines": [
+                        {
+                            "bbox": [
+                                208,
+                                409,
+                                383,
+                                428
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        208,
+                                        409,
+                                        383,
+                                        428
+                                    ],
+                                    "type": "text",
+                                    "content": "GB/T39257-2020标准要求",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        243,
+                        436,
+                        343,
+                        451
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 11,
+                    "lines": [
+                        {
+                            "bbox": [
+                                242,
+                                436,
+                                344,
+                                451
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        242,
+                                        436,
+                                        344,
+                                        451
+                                    ],
+                                    "type": "text",
+                                    "content": "该证书覆盖的范围：",
+                                    "score": 0.996
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        86,
+                        465,
+                        508,
+                        538
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 12,
+                    "lines": [
+                        {
+                            "bbox": [
+                                86,
+                                465,
+                                508,
+                                481
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        86,
+                                        465,
+                                        508,
+                                        481
+                                    ],
+                                    "type": "text",
+                                    "content": "资质范围内电表箱及低压无功补偿配电柜的生产；非标电力金具（横",
+                                    "score": 1.0
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                92,
+                                483,
+                                500,
+                                500
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        92,
+                                        483,
+                                        500,
+                                        500
+                                    ],
+                                    "type": "text",
+                                    "content": "担、抱箍、拉线棒）、高压隔离开关、高压熔断器、电缆保护管的",
+                                    "score": 0.998
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                142,
+                                502,
+                                451,
+                                518
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        142,
+                                        502,
+                                        451,
+                                        518
+                                    ],
+                                    "type": "text",
+                                    "content": "生产；管状母线、电缆分支箱及柱上断路器的销售",
+                                    "score": 1.0
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                206,
+                                521,
+                                388,
+                                536
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        206,
+                                        521,
+                                        388,
+                                        536
+                                    ],
+                                    "type": "text",
+                                    "content": "所涉及的绿色供应链管理活动",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        215,
+                        541,
+                        379,
+                        560
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 13,
+                    "lines": [
+                        {
+                            "bbox": [
+                                213,
+                                538,
+                                381,
+                                563
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        213,
+                                        538,
+                                        381,
+                                        563
+                                    ],
+                                    "type": "text",
+                                    "content": "评价级别：★★★★★",
+                                    "score": 0.95
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        97,
+                        566,
+                        257,
+                        580
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 14,
+                    "lines": [
+                        {
+                            "bbox": [
+                                96,
+                                565,
+                                258,
+                                581
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        96,
+                                        565,
+                                        258,
+                                        581
+                                    ],
+                                    "type": "text",
+                                    "content": "证书发证日期：2025年10月15日",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        304,
+                        565,
+                        462,
+                        579
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 15,
+                    "lines": [
+                        {
+                            "bbox": [
+                                303,
+                                565,
+                                463,
+                                580
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        303,
+                                        565,
+                                        463,
+                                        580
+                                    ],
+                                    "type": "text",
+                                    "content": "证书有效期至：2028年10月14日",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        86,
+                        588,
+                        508,
+                        613
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 16,
+                    "lines": [
+                        {
+                            "bbox": [
+                                85,
+                                587,
+                                509,
+                                602
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        85,
+                                        587,
+                                        509,
+                                        602
+                                    ],
+                                    "type": "text",
+                                    "content": "注：获证组织在此证书有效期内需按期接受监督审核，监督审核后此证书与保持通知书一起使用方为继续有效。",
+                                    "score": 0.999
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                102,
+                                597,
+                                501,
+                                615
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        102,
+                                        597,
+                                        501,
+                                        615
+                                    ],
+                                    "type": "text",
+                                    "content": "本证书信息可在国家认证认可监督委员会网站（www.cnca.gov.cn）及公司网站（www.bjsz.com上查询。",
+                                    "score": 0.967
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        96,
+                        622,
+                        167,
+                        692
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                96,
+                                622,
+                                167,
+                                692
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        96,
+                                        622,
+                                        167,
+                                        692
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                96,
+                                                622,
+                                                167,
+                                                692
+                                            ],
+                                            "type": "image",
+                                            "image_path": "8b9559c51193a95f08d9405b29e11e7c3d934deeac91f0806f9f7fe94c4542ad.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 17
+                        }
+                    ],
+                    "index": 17
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        201,
+                        620,
+                        271,
+                        692
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                201,
+                                620,
+                                271,
+                                692
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        201,
+                                        620,
+                                        271,
+                                        692
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                201,
+                                                620,
+                                                271,
+                                                692
+                                            ],
+                                            "type": "image",
+                                            "content": "SHQC\nR-2017-303",
+                                            "image_path": "9535c3c9ae0c53014056015808c14aea8ca3269fa167c816bb98ab100edd88f7.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 18
+                        }
+                    ],
+                    "index": 18,
+                    "sub_type": "text_image"
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        287,
+                        614,
+                        402,
+                        659
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                287,
+                                614,
+                                402,
+                                659
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        287,
+                                        614,
+                                        402,
+                                        659
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                287,
+                                                614,
+                                                402,
+                                                659
+                                            ],
+                                            "type": "image",
+                                            "content": "刘多文",
+                                            "image_path": "817d44fb988bcf4f1148a9bcd154c689e5964ad5340ad2fd3bac82a4c20ab9e3.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 19
+                        }
+                    ],
+                    "index": 19,
+                    "sub_type": "text_image"
+                },
+                {
+                    "bbox": [
+                        304,
+                        666,
+                        376,
+                        681
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 20,
+                    "lines": [
+                        {
+                            "bbox": [
+                                302,
+                                665,
+                                378,
+                                682
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        302,
+                                        665,
+                                        378,
+                                        682
+                                    ],
+                                    "type": "text",
+                                    "content": "证书签发人",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        397,
+                        610,
+                        514,
+                        719
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                397,
+                                610,
+                                514,
+                                719
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        397,
+                                        610,
+                                        514,
+                                        719
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                397,
+                                                610,
+                                                514,
+                                                719
+                                            ],
+                                            "type": "image",
+                                            "content": "北京全惠认证服务有限公司\n本次发证日期：\n2025年10月15日",
+                                            "image_path": "57ac0271378db4ef1782f1f3597a71eb3e09c700f87245d0a3c66cacd4078ef4.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 21
+                        }
+                    ],
+                    "index": 21,
+                    "sub_type": "text_image"
+                },
+                {
+                    "bbox": [
+                        196,
+                        705,
+                        395,
+                        724
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 22,
+                    "lines": [
+                        {
+                            "bbox": [
+                                194,
+                                703,
+                                397,
+                                726
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        194,
+                                        703,
+                                        397,
+                                        726
+                                    ],
+                                    "type": "text",
+                                    "content": "北京圣慧认证服务有限公司",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        153,
+                        736,
+                        430,
+                        751
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 23,
+                    "lines": [
+                        {
+                            "bbox": [
+                                152,
+                                735,
+                                431,
+                                751
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        152,
+                                        735,
+                                        431,
+                                        751
+                                    ],
+                                    "type": "text",
+                                    "content": "地址：北京市丰台区北宫镇园博园南路渡业大厦6层618B室",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        183,
+                        756,
+                        268,
+                        767
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 24,
+                    "lines": [
+                        {
+                            "bbox": [
+                                182,
+                                754,
+                                269,
+                                768
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        182,
+                                        754,
+                                        269,
+                                        768
+                                    ],
+                                    "type": "text",
+                                    "content": "电话：010-83602260",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        306,
+                        756,
+                        401,
+                        768
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 25,
+                    "lines": [
+                        {
+                            "bbox": [
+                                304,
+                                753,
+                                402,
+                                770
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        304,
+                                        753,
+                                        402,
+                                        770
+                                    ],
+                                    "type": "text",
+                                    "content": "网址：www.b.jshrz.com",
+                                    "score": 0.99
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                }
+            ]
+        }
+    ],
+    "_backend": "hybrid",
+    "_ocr_enable": true,
+    "_vlm_ocr_enable": false,
+    "_version_name": "3.2.1"
+}

@@ -1,6 +1,6 @@
 # 国家电网 RAG 基座数据工程待办清单
 
-> 状态日期：2026-06-11
+> 状态日期：2026-06-12
 > 适用范围：电网/国家电网招投标 RAG 基座数据、客户标书模板、行业资料、召回评测与上线门禁。
 
 本文档用于跟踪 RAG 基座数据工程的优先级、完成度和验收口径。全局产品路线仍看 `docs/development/roadmap.md`；本清单只记录 RAG 数据工程相关任务。
@@ -79,6 +79,20 @@
 | P1A-10 | [x] | 企业知识库参考来源中文化与确定性来源去重 | `backend/rag/display_names.py`、`scripts/rag/repair_chinese_display_names.py`、`scripts/rag/stage_liaoning_taichang_mvp.py`、`frontend/src/pages/KnowledgeBase/KnowledgeSearchDrawer.tsx`、`docs/rag/runs/run_20260608_chinese_display_names_*` | 已修复参考来源中 `taichang_*`、`power_grid_*`、`*_private.md` 等内部命名展示；9 个遗留资产目录 md 已改为中文文件名；真实库 metadata 已补充中文 `source_display_name/category_label/source_file`；同一 MPP 检验报告命中 5 行结构化参数时页面去重为 1 条确定性来源；Base Recall@5 96.7%，泰昌专项 Recall@5 100% |
 | P1A-11 | [x] | 泰昌资质补充包与官方 Logo 入库 | `scripts/rag/stage_taichang_supplement_20260611.py`、`parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/`、`docs/rag/runs/run_20260611_taichang_supplement_full_summary.md` | 已处理 `泰昌资质文件(补充).zip` 和 `taichang.png`；70 个文件完成 inventory，13 份文本资料入库，297 个正式图片资产入库；签章/签名图片仅归档不自动用于标书；增量回归门禁 PASS，真实 stream 验证 CPVC/MPP 参数、Logo/生产线资产和中标通知书专项问答 |
 
+## P1B：泰昌资质补充资料后续质量增强
+
+目标：把 `customer_taichang_supplement_20260611` 从“已入库可检索”推进到“稳定支撑真实标书生成、业绩结构化和 DOCX 正式交付观感”。
+
+| 优先级 | 状态 | 任务 | 交付物 | 验收口径 |
+| --- | --- | --- | --- | --- |
+| P1B-1 | [x] | 补充资料入库质量复核 | `docs/rag/runs/run_20260611_taichang_supplement_p1b_quality.md`、`docs/rag/runs/run_20260611_taichang_supplement_p1b_quality.json` | 真实库复核通过：13 个文档、364 个 chunk、297 个图片资产、异常资产 metadata=0；Logo、检验报告、生产线、检测设备、合同协议书、中标通知书等均保留泰昌企业事实边界 |
+| P1B-2 | [x] | 真实标书生成链路引用验证 | `docs/development/runs/run_20260611_taichang_supplement_p1b_docx_export.md`、导出 DOCX | 已走真实 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice` 链路；24 张图片全部插入，18 张来自补充包，覆盖项目业绩、生产制造、试验检测、检验报告、资质证书、基础证照 |
+| P1B-3 | [x] | 复合问答漏答修复 | `backend/rag/retrieval.py`、`docs/rag/runs/run_20260611_taichang_supplement_p1b_quality.md`、`docs/rag/runs/run_20260611_taichang_supplement_p1b_compound_fix_summary.md` | “合同或中标通知书”类复合问题已通过真实 stream 回归；回答同时覆盖合同和中标通知书，并包含招标编号 `0322AB`；增量回归门禁 PASS |
+| P1B-4 | [x] | 补充包扫描 PDF OCR 增强 | `scripts/rag/run_taichang_supplement_mineru_ocr.py`、`parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/p1b_mineru_ocr_report.md`、`docs/rag/runs/run_20260612_taichang_supplement_p1b_mineru_ocr_fix2_summary.md` | 15 份低文本/无文本扫描 PDF 已走真实 MinerU OCR，Manifest 更新 15 份；本批文本资料入库扩展为 24 份、1900 个 chunk；真实 stream 与增量回归门禁 PASS |
+| P1B-5 | [x] | 项目业绩结构化抽取 | `scripts/rag/extract_taichang_project_performance.py`、`parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/staging/taichang_project_performance/`、`docs/rag/runs/run_20260612_taichang_project_performance_p1b5_summary.md` | 已从合同协议书和中标通知书交叉抽取 1 项业绩、2 份证据、每份 9 行明细；确认招标编号 `0322AB`、包2、总数量 54,678 米、含税金额 6,372,409.05 元；合同签署日期原件为空且未推断；真实 stream 与 Base+泰昌专项增量门禁 PASS |
+| P1B-6 | [~] | Logo 与图片资产 DOCX 版式验证 | `docs/development/runs/run_20260611_taichang_supplement_p1b_docx_export.md`、导出 DOCX | 生产线、检测设备、检验报告、项目业绩图片已插入正式 DOCX，图片下方未出现系统来源字段、匹配依据或内部 metadata；Logo 已在资产库但尚未自动插入封面/页眉，需后续增加封面/页眉 Logo 支持后关闭 |
+| P1B-7 | [ ] | 泰昌 MVP 资料完整性评分 | 资料完整度清单或页面数据源 | 按标书章节标出资料充足/缺口：资格证照、财务、检验报告、生产检测、绿色低碳、同类业绩、验收证明、项目现场图等 |
+
 ## P3：召回质量增强
 
 目标：从“能召回”升级到“可控、可解释、可持续优化”。
@@ -123,6 +137,5 @@
 
 1. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表，让页面和问答可直接按企业、产品、规格、参数名精确查询。
 2. 仅在明确目标省公司/批次/规格和客户确认口径后，再把泰昌产品参数用于具体投标偏差判断；不得默认以辽宁样本推出泰昌覆盖义务。
-3. 对补充包中无文本扫描 PDF 评估是否追加 OCR；当前已作为正式整页图片资产入库。
-4. 优化真实 stream 复合问题回答完整性：检索层能命中中标通知书，但“合同或中标通知书”复合查询的生成回答漏提中标通知书。
-5. 追加导出观感人工验收：打开 30 章节真实 DOCX，检查封面、目录、正文、表格、页眉页脚、页码和正式图片资产插入效果。
+3. 按 P1B 清单继续推进泰昌补充资料的项目业绩结构化、Logo 封面/页眉插入和资料完整性评分。
+4. 追加导出观感人工验收：打开 30 章节真实 DOCX，检查封面、目录、正文、表格、页眉页脚、页码和正式图片资产插入效果。

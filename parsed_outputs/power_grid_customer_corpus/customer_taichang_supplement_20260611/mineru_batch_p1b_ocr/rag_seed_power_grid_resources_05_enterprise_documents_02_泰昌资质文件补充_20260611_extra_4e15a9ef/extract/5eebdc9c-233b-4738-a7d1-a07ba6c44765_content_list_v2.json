@@ -1,0 +1,108 @@
+[
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "土地使用证明"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                388,
+                131,
+                618,
+                164
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "兹有河北泰昌电力器材科技有限公司办理用地位置坐落在满城区方顺桥镇陉阳驿村（村委会)，持有土地批准证书号码为13062101209建筑物用地。该建筑物是由本人建造使用，所占用地为工业用地办理土地批准和土地登记手续，土地使用权属于河北泰昌电力器材科技有限公司。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                222,
+                857,
+                418
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "特此证明！"
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                478,
+                342,
+                501
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "保定市满城区办顺桥镇陉阳驿村村民委员会"
+                    }
+                ]
+            },
+            "bbox": [
+                396,
+                521,
+                850,
+                543
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/8a8fc681cab7799343e8ba70f8fd8bb8d6abcf98611eba675c710c4aaf56f98b.jpg"
+                },
+                "content": "市满城区方顺桥镇\n区方顺桥镇陉阳驿村\n村民委员会\n1308070100442\n2019年",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                522,
+                468,
+                714,
+                605
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "29年12月30日"
+                    }
+                ]
+            },
+            "bbox": [
+                636,
+                565,
+                836,
+                585
+            ]
+        }
+    ]
+]

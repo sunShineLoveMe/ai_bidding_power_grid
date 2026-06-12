@@ -125,6 +125,105 @@ python scripts/rag/eval_recall.py --k 5 --no-filter --save docs/rag/_run_nofilte
 
 ---
 
+## Run 20260611-P1B — 泰昌补充资料质量增强与复合问答修复（2026-06-11）
+
+> 质量复核：`docs/rag/runs/run_20260611_taichang_supplement_p1b_quality.md`
+> DOCX 验证：`docs/development/runs/run_20260611_taichang_supplement_p1b_docx_export.md`
+> 增量门禁：`docs/rag/runs/run_20260611_taichang_supplement_p1b_compound_fix_summary.md`
+
+### 触发原因
+
+针对 P1B 清单继续推进泰昌资质补充资料，从“已入库可检索”提升到“能支撑真实问答和真实 DOCX 导出”。重点修复复合问题“合同或中标通知书”漏答，并验证新增资产在正式标书导出中的使用情况。
+
+### 处理内容
+
+- `backend/rag/retrieval.py` 补充合同、中标通知书、项目业绩等并列证据的关键词扩展与资产补召回。
+- 知识库回答 prompt 增加多资料类型逐项核对要求，避免检索命中后仍笼统回答“未发现”。
+- `backend/api/routes.py` 增加项目业绩、Logo 证据类型画像，并收紧自动插图章节，避免图片额度被泛化章节提前耗尽。
+- 导出图片 manifest 增加 `evidence_type`、`target_library`、`source_batch_id`，便于追溯本次补充包是否进入 DOCX。
+
+### 真实库与真实 stream
+
+| 指标 | 数量 |
+| --- | ---: |
+| 补充批次文档 | 13 |
+| 补充批次 chunks | 364 |
+| 补充批次图片资产 | 297 |
+| 异常资产 metadata | 0 |
+
+真实 `/api/bidding/knowledge/search/stream` 抽样：
+
+| 用例 | HTTP | 资料/资产召回 | 结论 |
+| --- | ---: | --- | --- |
+| 合同或中标通知书 | 200 | 2/8 | 通过，同时覆盖合同和中标通知书，含招标编号 `0322AB` |
+| Logo 与生产线/产品图片 | 200 | 4/8 | 通过 |
+| CPVC/MPP 内径 250 检验报告参数 | 200 | 5/8 | 通过 |
+
+### 增量回归
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% |
+
+门禁结论：PASS。
+
+### DOCX 真实导出
+
+真实链路 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`：
+
+- 图片候选 597，选中 24，插入 24，失败 0；
+- 选中图片中 18 张来自 `customer_taichang_supplement_20260611`；
+- 覆盖证据类型：基础证照 2、资质证书 5、项目业绩 4、试验检测 4、生产制造 2、检验报告 1；
+- 字段刷新 `refreshed`；
+- DOCX 未出现 Mermaid 源码、内部来源字段、匹配依据或 metadata 文案；
+- Warning：Logo 已在资产库，但尚未自动插入 DOCX 封面/页眉，后续归入 P1B-6。
+
+---
+
+## Run 20260612-P1B-OCR — 泰昌补充资料 MinerU OCR 增强（2026-06-12）
+
+> OCR 报告：`parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/p1b_mineru_ocr_report.md`
+> 入库报告：`parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/ingest_customer_corpus_report.md`
+> 真实 stream：`docs/rag/runs/run_20260612_taichang_supplement_p1b_mineru_ocr_fix2_stream.md`
+> 增量门禁：`docs/rag/runs/run_20260612_taichang_supplement_p1b_mineru_ocr_fix2_summary.md`
+
+### 触发原因
+
+客户确认继续推进 PDF OCR 增强。补充包中部分扫描 PDF 原生文本量为 0 或低于 1000 字，之前主要作为整页图片资产参与展示，不能稳定支撑问答和后续结构化抽取。
+
+### 处理内容
+
+- 新增 `scripts/rag/run_taichang_supplement_mineru_ocr.py`，按补充包 inventory 筛选低文本/无文本 PDF 并逐份提交真实 MinerU。
+- 15 份扫描 PDF 完成 MinerU OCR，失败 0；包含土地证明、人员证书/花名册、体系认证证书、投标保证金凭证、中标通知书、绿色证书和 50 页宣传彩页。
+- `manifest.json` 更新 15 份 OCR 结果，`parser=mineru_ocr`、`ocr_enhanced=true`、`source_domain=enterprise_fact`，仍保持泰昌企业事实边界。
+- 真实入库后，本批文本资料从 13 份扩展到 24 份，写入 213 个 parent、1687 个 child embedding；数据库复核为 24 个文档、1900 个 chunk、297 个图片资产、异常资产 metadata=0。
+- OCR 后合同 chunk 数量增加，复合问题“合同或中标通知书”一度被合同上下文挤占；已补充复合证据覆盖排序，确保合同和中标通知书同时进入上下文/资产结果。
+- 同步补充“输电线路施工主要工序”关键词兜底，修复 Base T26 在 self_phrase 场景下偶发 0 召回。
+
+### 回归门禁
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% |
+
+门禁结论：PASS，无召回、来源排序、禁用关键词或跨资料域串扰退化。
+
+### 真实链路抽样
+
+真实 `/api/bidding/knowledge/search/stream` 抽样通过：
+
+- 合同或中标通知书复合问题可同时覆盖供货合同和中标通知书，并保留招标编号 `0322AB`；
+- Logo、生产线、产品图片等资产仍可按泰昌企业事实召回；
+- CPVC/MPP 内径 250 检验报告参数仍可返回结构化参数和来源。
+
+---
+
 ## Run 2 — 删除水利误入库记录后的复验（2026-06-02）
 
 > 摘要：`docs/rag/runs/run_20260602_152803_summary.md`
@@ -1146,3 +1245,52 @@ set -a; source .env; set +a; .venv/bin/python scripts/rag/run_taichang_product_p
 - 结果：9 passed。
 - `.venv/bin/python -m py_compile scripts/rag/run_taichang_product_parameter_refresh.py scripts/rag/extract_taichang_product_parameters.py backend/rag/product_parameters.py`
 - 结果：通过。
+
+---
+
+## Run 23 — P1B-5 泰昌项目业绩结构化抽取（2026-06-12）
+
+> 抽取报告：`parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/staging/taichang_project_performance/extract_taichang_project_performance_report.md`
+> 真实 Stream：`docs/rag/runs/run_20260612_taichang_project_performance_real_stream.json`
+> Gate summary：`docs/rag/runs/run_20260612_taichang_project_performance_p1b5_summary.md`
+
+### 处理内容
+
+- 从泰昌合同协议书与中标通知书抽取同一项目的结构化业绩记录，输出 JSON、CSV 和抽取报告。
+- 中标通知书保留 9 行数量、金额和总部采购申请号；合同保留产品族、规格和合同页码，通过每行含税金额唯一匹配，不按两份文件的不同排序直接拼接。
+- 新增 `backend/rag/project_performance.py`，企业知识库问答优先读取结构化业绩层。
+- 合同签署日期在原件字段中为空，记录为 `contract_sign_date_blank_in_source`，未使用中标日期或交货日期代填。
+
+### 抽取结果
+
+| 项目 | 结果 |
+| --- | --- |
+| 项目业绩 | 1 项 |
+| 证据文件 | 2 份 |
+| 逐项明细 | 每份 9 行，共 18 行交叉核验 |
+| 招标编号/包号 | `0322AB` / 包2 |
+| 产品 | MPP、CPVC 电缆保护管 |
+| 总数量 | 54,678 米 |
+| 含税金额 | 6,372,409.05 元 |
+| 中标日期 | 2022-11-21 |
+| 合同签署日期 | 原件字段为空，未推断 |
+
+### 真实链路结果
+
+- 真实 HTTP `/api/knowledge/search/stream` 返回正确项目名称、招标编号、产品、数量、金额、甲乙方、中标日期、合同日期缺失状态和来源页码。
+- 结构化结果纠正了此前普通 RAG 曾生成的错误汇总值；当前准确值为 54,678 米、6,372,409.05 元。
+- 单元与查询回归：`21 passed`，1 个既有 PyPDF2 deprecation warning。
+
+### 增量回归门禁
+
+| 测试集 | 模式 | Recall@5 | Top1 | MRR | 禁用关键词 | 跨域串扰 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% |
+| Base | qwen3 | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% |
+| 泰昌专项 | qwen3 | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% |
+
+### 结论
+
+- Gate PASS，P1B-5 完成。
+- 后续新增合同、中标通知书、验收单或发票时，按 `AGENTS.md` 中“泰昌项目业绩结构化抽取 SOP”重跑并记录差异。

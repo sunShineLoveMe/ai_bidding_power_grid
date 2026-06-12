@@ -191,6 +191,64 @@ class RagRetrievalQualityTest(unittest.TestCase):
         self.assertIn("质量目标", retrieval._query_terms("质量安全环保响应的质量目标和安全目标怎么写？"))
         self.assertIn("安全目标", retrieval._query_terms("质量安全环保响应的质量目标和安全目标怎么写？"))
 
+    @patch("backend.rag.retrieval.rerank_documents")
+    @patch("backend.rag.retrieval.get_embeddings", return_value=[[0.1, 0.2, 0.3]])
+    @patch("backend.rag.retrieval.init_ali_client", return_value=object())
+    def test_transmission_line_workflow_query_splits_domain_terms(self, _ali, _embeddings, rerank_mock):
+        from backend.rag import retrieval
+
+        keyword_row = {
+            "id": "transmission-workflow",
+            "content": "输电线路：复测分坑、基础开挖浇筑、杆塔组立、架线放线、跨越施工、接地、附件安装、验收消缺。",
+            "similarity": 0.0,
+            "metadata": {
+                "chunk_layer": "child",
+                "doc_role": "self_phrase",
+                "authority_level": "template",
+                "citation_policy": "direct_quote_allowed",
+            },
+        }
+        client = _RpcClient(rpc_rows=[])
+        client.chunk_rows = [keyword_row]
+
+        def passthrough(_query, rows, **_kwargs):
+            return rows
+
+        rerank_mock.side_effect = passthrough
+        retrieval._CHUNK_KEYWORD_CACHE = None
+        with patch("backend.rag.retrieval.get_supabase_client", return_value=client):
+            result = retrieval.search_knowledge_base(
+                "输电线路施工的主要工序有哪些？",
+                scenario="writing",
+                match_threshold=0.3,
+                match_count=1,
+                metadata_filter={"doc_role": "self_phrase"},
+            )
+
+        self.assertEqual(result[0]["id"], "transmission-workflow")
+        terms = retrieval._query_terms("输电线路施工的主要工序有哪些？")
+        self.assertIn("输电线路", terms)
+        self.assertIn("杆塔组立", terms)
+        self.assertIn("架线放线", terms)
+
+    def test_required_evidence_coverage_keeps_contract_and_award_notice(self):
+        from backend.rag import retrieval
+
+        rows = [
+            {"id": "contract-1", "content": "合同协议书 供货合同 电缆保护管 MPP"},
+            {"id": "contract-2", "content": "供货合同 甲方 乙方 交货条款"},
+            {"id": "award-1", "content": "中标通知书 招标编号：0322AB 中标单位：河北泰昌电力器材科技有限公司"},
+        ]
+
+        selected = retrieval._select_with_required_evidence_coverage(
+            "有没有供货合同或中标通知书？",
+            rows,
+            text_getter=lambda row: row["content"],
+            limit=2,
+        )
+
+        self.assertEqual({row["id"] for row in selected}, {"contract-1", "award-1"})
+
     def test_authority_ranking_pushes_reference_template_behind_citable_sources(self):
         from backend.rag.retrieval import _rank_rows
 
@@ -267,6 +325,67 @@ class RagRetrievalQualityTest(unittest.TestCase):
 
         self.assertEqual([asset["id"] for asset in result], ["a1", "a2", "a3"])
         self.assertEqual(client.rpc_calls[0][0], "match_knowledge_assets")
+
+    @patch("backend.rag.retrieval.rerank_documents")
+    @patch("backend.rag.retrieval.get_embeddings", return_value=[[0.4, 0.5]])
+    @patch("backend.rag.retrieval.init_ali_client", return_value=object())
+    def test_asset_recall_supplements_multi_evidence_query(self, _ali, _embeddings, rerank_mock):
+        from backend.rag import retrieval
+
+        strong_assets = [
+            {
+                "id": "contract-1",
+                "title": "泰昌TJ20220002363合同协议书第1页",
+                "similarity": 0.82,
+                "searchable_text": "合同协议书 项目业绩",
+                "metadata": {"enterprise": "泰昌", "source_domain": "enterprise_fact", "reference_only": False},
+            },
+            {
+                "id": "contract-2",
+                "title": "泰昌TJ20220002363合同协议书第3页",
+                "similarity": 0.78,
+                "searchable_text": "合同协议书 供货合同",
+                "metadata": {"enterprise": "泰昌", "source_domain": "enterprise_fact", "reference_only": False},
+            },
+            {
+                "id": "contract-3",
+                "title": "泰昌TJ20220002363合同协议书第14页",
+                "similarity": 0.72,
+                "searchable_text": "合同协议书 签章页",
+                "metadata": {"enterprise": "泰昌", "source_domain": "enterprise_fact", "reference_only": False},
+            },
+        ]
+
+        def fake_rerank(_query, rows, **_kwargs):
+            return strong_assets if rows == strong_assets else rows
+
+        rerank_mock.side_effect = fake_rerank
+        client = _RpcClient(
+            rpc_rows=strong_assets,
+            asset_rows=[
+                *strong_assets,
+                {
+                    "id": "award-1",
+                    "title": "泰昌电缆保护管中标通知书第1页",
+                    "asset_type": "qualification_image",
+                    "mime_type": "image/jpeg",
+                    "similarity": 0.0,
+                    "searchable_text": "中标通知书 招标编号 0322AB 包号 157-保护管",
+                    "tags": ["项目业绩", "中标通知书"],
+                    "metadata": {"enterprise": "泰昌", "source_domain": "enterprise_fact", "reference_only": False},
+                },
+            ],
+        )
+
+        with patch("backend.rag.retrieval.get_supabase_client", return_value=client):
+            result = retrieval.search_knowledge_assets(
+                "泰昌补充资料里有没有同类产品供货合同或中标通知书？",
+                match_count=8,
+                metadata_filter={"enterprise": "泰昌", "source_domain": "enterprise_fact", "reference_only": False},
+            )
+
+        self.assertIn("award-1", [asset["id"] for asset in result])
+        self.assertIn("contract-1", [asset["id"] for asset in result])
 
     @patch("backend.rag.retrieval.rerank_documents")
     @patch("backend.rag.retrieval.get_embeddings", return_value=[[0.4, 0.5]])
@@ -361,6 +480,7 @@ class RagRetrievalQualityTest(unittest.TestCase):
         self.assertIn("图片资产1", prompt)
         self.assertIn("脱敏项目经理身份证明材料样张", prompt)
         self.assertIn("/api/knowledge/assets/asset-1/file", prompt)
+        self.assertIn("必须逐项核对并分别回答", prompt)
         self.assertEqual(images[-1]["url"], "/api/knowledge/assets/asset-1/file")
 
     def test_pilot_enterprise_contexts_filter_dedupe_sort_and_limit_sources(self):

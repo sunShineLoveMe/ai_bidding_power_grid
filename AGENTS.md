@@ -127,6 +127,20 @@ do_not_mix_with=["泰昌企业事实"]
 - 验收至少检查：成功抽取报告数、参数行数、CPVC/MPP 产品族是否存在、`qa_reference.scope=qa_only_not_coverage_judgement`、MPP 环刚度 `66.40`、CPVC 平均内径 `250.2~250.4` 和壁厚 `15.2~15.3` 的真实问答结果。
 - 每次重抽取后必须写入 `docs/rag/runs/<run>_summary.md`，并同步 `docs/rag/evaluation-records.md`、`docs/rag/todo.md` 或对应任务状态。
 
+## 泰昌项目业绩结构化抽取 SOP
+
+客户新增泰昌合同协议书、中标通知书、成交通知书、订单、验收单或发票等项目业绩证据时，必须进入结构化业绩重抽取流程。
+
+执行原则：
+
+- 只把泰昌原始业绩材料作为泰昌企业事实；河北豪乾参考稿和辽宁招标要求不得生成泰昌业绩。
+- 至少抽取项目名称、招标编号、分标/包号、产品、规格、数量、金额、甲乙方、中标时间、合同签署时间、合同编号、资料来源和来源页码。
+- 合同与中标通知书字段不一致时必须分别保存并标记来源；不得静默覆盖，也不得用中标日期、交货日期推断空白的合同签署日期。
+- PDF 表格文本发生数字粘连时，不得猜测拆列；应使用结构化表、唯一金额、总价、总数量和双方主体做交叉校验，仍不确定的字段标记人工复核。
+- 当前泰昌补充批次优先执行：`.venv/bin/python scripts/rag/extract_taichang_project_performance.py`，更新 `taichang_project_performance_rows.json/csv` 和抽取报告。
+- 结构化业绩接入问答后必须跑真实 `/api/knowledge/search/stream`，验证数量、金额、招标编号、日期缺失状态和来源页码；不得只用 mock 或单元测试替代。
+- 每次新增或重抽取后必须执行增量回归门禁，并同步 `docs/rag/runs/`、`docs/rag/evaluation-records.md` 和 `docs/rag/todo.md`。
+
 ## 国内中文命名规则
 
 本项目面向国内电网投标场景，企业知识库、资信库、产品库、图片资产、标签、分类和页面展示文案必须使用中文友好命名。

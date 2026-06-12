@@ -38,6 +38,7 @@ CATEGORY_LABELS = {
     "04_standard_phrases": "标准话术资料",
     "05_enterprise_documents": "泰昌企业资料",
     "structured_product_parameter_json": "泰昌产品结构化参数",
+    "structured_project_performance_json": "泰昌项目业绩",
 }
 
 EVIDENCE_TYPE_LABELS = {
@@ -49,6 +50,7 @@ EVIDENCE_TYPE_LABELS = {
     "inspection_report": "检验报告",
     "production_capacity": "生产制造能力",
     "testing_capacity": "试验检测能力",
+    "project_performance": "项目业绩",
 }
 
 TARGET_LIBRARY_LABELS = {

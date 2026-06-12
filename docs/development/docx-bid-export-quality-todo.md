@@ -131,3 +131,13 @@
 - 真实导出链路：项目 `4bc3ee73-9ec5-4184-aafd-eaede9f90798`，执行 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
 - 验证记录：`docs/development/runs/run_20260611_docx_quality_p0_structured_cover_fields.md` 和 `docs/development/runs/run_20260611_docx_quality_p0_structured_cover_fields.json`。
 - 本次真实导出结果：封面字段来源 `uploaded_tender_structured_extract`，封面包含 `项目名称=国网辽宁电力2025年第三次物资协议库存招标采购`、`文件类型=投标文件`、`招标编号=2225AC`；当前历史解析文本缺失可靠的 `分标编号/分标名称/包号/包名称`，已记录在 `cover_field_missing`，未做猜测填充。
+
+### 2026-06-11 泰昌补充资料图文导出验证记录
+
+- 背景：客户补充 `泰昌资质文件(补充).zip` 和官方 Logo 后，需要验证新增企业事实资产能否进入正式投标文件图文导出。
+- 修复：自动插图章节画像新增 `project_performance`、`brand_logo` 等证据类型；图片 manifest 增加 `evidence_type`、`target_library`、`source_batch_id`；收紧泛化章节自动插图，避免编制依据、工程概况、总体部署等章节过早耗尽图片额度。
+- 自动化回归：`PYTHONPATH=. .venv/bin/pytest tests/test_docx_export.py::DocxExportRegressionTest::test_bid_markdown_with_images_prefers_project_performance_assets tests/test_docx_export.py::DocxExportRegressionTest::test_bid_markdown_with_images_loads_taichang_assets tests/test_docx_export.py::DocxExportRegressionTest::test_bid_markdown_with_images_does_not_repeat_same_asset -q`，结果 `3 passed, 1 warning`。
+- 真实导出链路：项目 `4bc3ee73-9ec5-4184-aafd-eaede9f90798`，执行 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
+- 验证记录：`docs/development/runs/run_20260611_taichang_supplement_p1b_docx_export.md` 和 `docs/development/runs/run_20260611_taichang_supplement_p1b_docx_export.json`。
+- 本次真实导出结果：图片候选 `597`，选中 `24`，插入 `24`，失败 `0`；其中 `18` 张来自 `customer_taichang_supplement_20260611`，覆盖基础证照、资质证书、项目业绩、中标通知书/合同、生产制造、试验检测和检验报告；LibreOffice 字段刷新成功。
+- 剩余项：官方 Logo 已入资产库，但当前 DOCX 仍未自动插入封面/页眉，后续按 P1B-6 增加封面/页眉 Logo 支持后关闭。

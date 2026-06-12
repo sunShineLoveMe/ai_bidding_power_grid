@@ -1,0 +1,421 @@
+{
+  "batch_id": "customer_taichang_supplement_20260611",
+  "generated_at": "2026-06-12T00:53:10+00:00",
+  "dry_run": false,
+  "inventory": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/inventory.json",
+  "manifest": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/manifest.json",
+  "ocr_batch_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr",
+  "summary": {
+    "candidates": 15,
+    "mineru_done": 15,
+    "failed": 0,
+    "manifest_updated": 15
+  },
+  "results": [
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/22土地厂房权属或租赁证明整页扫描件/2.土地使用证明.pdf",
+      "status": "mineru_done",
+      "ocr_reason": "no_extractable_text",
+      "pdf_pages": 1,
+      "text_chars_before": 0,
+      "text_chars_after": 358,
+      "batch_id": "b4f992b2-56a9-4ead-a00d-152280437b0b",
+      "data_id": "customer_taichang_supplement_20260611_p1b_ocr_4e15a9ef83fd",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_4e15a9ef",
+      "artifacts": {
+        "zip_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_4e15a9ef/mineru_result.zip",
+        "extract_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_4e15a9ef/extract",
+        "markdown_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_4e15a9ef/extract/full.md",
+        "content_list_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_4e15a9ef/extract/5eebdc9c-233b-4738-a7d1-a07ba6c44765_content_list.json",
+        "model_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_4e15a9ef/extract/5eebdc9c-233b-4738-a7d1-a07ba6c44765_model.json",
+        "middle_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_4e15a9ef/extract/layout.json",
+        "download_info": {
+          "url_host": "cdn-mineru.openxlab.org.cn",
+          "resume_enabled": true,
+          "used_curl_fallback": true,
+          "resumed_from_bytes": 0,
+          "downloaded_bytes": 0,
+          "zip_size": 149202
+        }
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/30试验检测人员证书整页扫描件/1.陈仙瑞.pdf",
+      "status": "mineru_done",
+      "ocr_reason": "no_extractable_text",
+      "pdf_pages": 1,
+      "text_chars_before": 0,
+      "text_chars_after": 270,
+      "batch_id": "9cf233c8-5647-4eaa-a75c-9c2856048483",
+      "data_id": "customer_taichang_supplement_20260611_p1b_ocr_34d4cb336b04",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_34d4cb33",
+      "artifacts": {
+        "zip_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_34d4cb33/mineru_result.zip",
+        "extract_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_34d4cb33/extract",
+        "markdown_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_34d4cb33/extract/full.md",
+        "content_list_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_34d4cb33/extract/d071075e-cad6-4189-a025-ba85d536eb40_content_list.json",
+        "model_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_34d4cb33/extract/d071075e-cad6-4189-a025-ba85d536eb40_model.json",
+        "middle_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_34d4cb33/extract/layout.json",
+        "download_info": {
+          "url_host": "cdn-mineru.openxlab.org.cn",
+          "resume_enabled": true,
+          "used_curl_fallback": true,
+          "resumed_from_bytes": 0,
+          "downloaded_bytes": 0,
+          "zip_size": 118149
+        }
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/30试验检测人员证书整页扫描件/2.晁坤琳.pdf",
+      "status": "mineru_done",
+      "ocr_reason": "no_extractable_text",
+      "pdf_pages": 1,
+      "text_chars_before": 0,
+      "text_chars_after": 390,
+      "batch_id": "4e7c7f77-100c-450d-8b1e-dc45dfca83ae",
+      "data_id": "customer_taichang_supplement_20260611_p1b_ocr_507bd2dd33a3",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_507bd2dd",
+      "artifacts": {
+        "zip_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_507bd2dd/mineru_result.zip",
+        "extract_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_507bd2dd/extract",
+        "markdown_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_507bd2dd/extract/full.md",
+        "content_list_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_507bd2dd/extract/2c13b6a9-3e45-413e-b27c-8bdd3840de4b_content_list.json",
+        "model_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_507bd2dd/extract/2c13b6a9-3e45-413e-b27c-8bdd3840de4b_model.json",
+        "middle_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_507bd2dd/extract/layout.json",
+        "download_info": {
+          "url_host": "cdn-mineru.openxlab.org.cn",
+          "resume_enabled": true,
+          "used_curl_fallback": true,
+          "resumed_from_bytes": 0,
+          "downloaded_bytes": 0,
+          "zip_size": 367001
+        }
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/41投标保证金凭证银行保函整页扫描件/泰昌-投标.pdf",
+      "status": "mineru_done",
+      "ocr_reason": "low_extractable_text<1000",
+      "pdf_pages": 1,
+      "text_chars_before": 8,
+      "text_chars_after": 981,
+      "batch_id": "279aa865-8436-41b1-9f03-623cc4d27fa0",
+      "data_id": "customer_taichang_supplement_20260611_p1b_ocr_a82444853f21",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_a8244485",
+      "artifacts": {
+        "zip_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_a8244485/mineru_result.zip",
+        "extract_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_a8244485/extract",
+        "markdown_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_a8244485/extract/full.md",
+        "content_list_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_a8244485/extract/82e72df9-41c6-4b30-87da-10ee56260ac6_content_list.json",
+        "model_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_a8244485/extract/82e72df9-41c6-4b30-87da-10ee56260ac6_model.json",
+        "middle_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_a8244485/extract/layout.json",
+        "download_info": {
+          "url_host": "cdn-mineru.openxlab.org.cn",
+          "resume_enabled": true,
+          "used_curl_fallback": true,
+          "resumed_from_bytes": 0,
+          "downloaded_bytes": 0,
+          "zip_size": 563603
+        }
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/8绿色供应链绿色工厂绿色低碳认证证书整页扫描件/绿色供应链认证证书.pdf",
+      "status": "mineru_done",
+      "ocr_reason": "low_extractable_text<1000",
+      "pdf_pages": 1,
+      "text_chars_before": 370,
+      "text_chars_after": 1213,
+      "batch_id": "cdfc4d06-211e-4b45-8519-2c5c3fab854b",
+      "data_id": "customer_taichang_supplement_20260611_p1b_ocr_ce4e5c53251e",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_ce4e5c53",
+      "artifacts": {
+        "zip_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_ce4e5c53/mineru_result.zip",
+        "extract_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_ce4e5c53/extract",
+        "markdown_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_ce4e5c53/extract/full.md",
+        "content_list_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_ce4e5c53/extract/12bc9127-a33a-4968-b025-bb8bcd19cc58_content_list.json",
+        "model_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_ce4e5c53/extract/12bc9127-a33a-4968-b025-bb8bcd19cc58_model.json",
+        "middle_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_ce4e5c53/extract/layout.json",
+        "download_info": {
+          "url_host": "cdn-mineru.openxlab.org.cn",
+          "resume_enabled": true,
+          "used_curl_fallback": true,
+          "resumed_from_bytes": 0,
+          "downloaded_bytes": 0,
+          "zip_size": 722009
+        }
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/8绿色供应链绿色工厂绿色低碳认证证书整页扫描件/绿色电力认证证书.pdf",
+      "status": "mineru_done",
+      "ocr_reason": "low_extractable_text<1000",
+      "pdf_pages": 1,
+      "text_chars_before": 361,
+      "text_chars_after": 1147,
+      "batch_id": "cfde088f-f320-4ab8-9cc3-825c87ab9d9a",
+      "data_id": "customer_taichang_supplement_20260611_p1b_ocr_7de27024baf4",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_7de27024",
+      "artifacts": {
+        "zip_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_7de27024/mineru_result.zip",
+        "extract_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_7de27024/extract",
+        "markdown_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_7de27024/extract/full.md",
+        "content_list_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_7de27024/extract/6273350e-fd51-45a6-8880-8429ad11aec1_content_list.json",
+        "model_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_7de27024/extract/6273350e-fd51-45a6-8880-8429ad11aec1_model.json",
+        "middle_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_7de27024/extract/layout.json",
+        "download_info": {
+          "url_host": "cdn-mineru.openxlab.org.cn",
+          "resume_enabled": true,
+          "used_curl_fallback": true,
+          "resumed_from_bytes": 0,
+          "downloaded_bytes": 0,
+          "zip_size": 719732
+        }
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/31人员花名册整页扫描件表格文件/公司人员花名册.pdf",
+      "status": "mineru_done",
+      "ocr_reason": "no_extractable_text",
+      "pdf_pages": 2,
+      "text_chars_before": 0,
+      "text_chars_after": 7056,
+      "batch_id": "7fc2be1f-316f-4c86-b91c-d6702e584b8b",
+      "data_id": "customer_taichang_supplement_20260611_p1b_ocr_02125e5ddcb2",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_02125e5d",
+      "artifacts": {
+        "zip_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_02125e5d/mineru_result.zip",
+        "extract_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_02125e5d/extract",
+        "markdown_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_02125e5d/extract/full.md",
+        "content_list_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_02125e5d/extract/cfe47cff-26fa-47f0-aa85-3f72c81414c5_content_list.json",
+        "model_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_02125e5d/extract/cfe47cff-26fa-47f0-aa85-3f72c81414c5_model.json",
+        "middle_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_02125e5d/extract/layout.json",
+        "download_info": {
+          "url_host": "cdn-mineru.openxlab.org.cn",
+          "resume_enabled": true,
+          "used_curl_fallback": true,
+          "resumed_from_bytes": 0,
+          "downloaded_bytes": 0,
+          "zip_size": 2320682
+        }
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/32劳动合同社保证明整页扫描件/1.陈仙瑞.pdf",
+      "status": "mineru_done",
+      "ocr_reason": "no_extractable_text",
+      "pdf_pages": 2,
+      "text_chars_before": 0,
+      "text_chars_after": 1415,
+      "batch_id": "a8df5e73-e5c5-416f-9a66-3f3e3f62f935",
+      "data_id": "customer_taichang_supplement_20260611_p1b_ocr_c905c8f9faff",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_c905c8f9",
+      "artifacts": {
+        "zip_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_c905c8f9/mineru_result.zip",
+        "extract_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_c905c8f9/extract",
+        "markdown_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_c905c8f9/extract/full.md",
+        "content_list_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_c905c8f9/extract/02b79bec-d378-4ea2-9293-47827cc47d69_content_list.json",
+        "model_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_c905c8f9/extract/02b79bec-d378-4ea2-9293-47827cc47d69_model.json",
+        "middle_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_c905c8f9/extract/layout.json",
+        "download_info": {
+          "url_host": "cdn-mineru.openxlab.org.cn",
+          "resume_enabled": true,
+          "used_curl_fallback": true,
+          "resumed_from_bytes": 0,
+          "downloaded_bytes": 0,
+          "zip_size": 561499
+        }
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/32劳动合同社保证明整页扫描件/2.晁坤琳.pdf",
+      "status": "mineru_done",
+      "ocr_reason": "no_extractable_text",
+      "pdf_pages": 2,
+      "text_chars_before": 0,
+      "text_chars_after": 1414,
+      "batch_id": "e04668b6-de6c-4dee-97dd-79eee302d013",
+      "data_id": "customer_taichang_supplement_20260611_p1b_ocr_463501fe931e",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_463501fe",
+      "artifacts": {
+        "zip_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_463501fe/mineru_result.zip",
+        "extract_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_463501fe/extract",
+        "markdown_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_463501fe/extract/full.md",
+        "content_list_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_463501fe/extract/09fa2f63-8900-471a-beea-b2dc9151ecfe_content_list.json",
+        "model_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_463501fe/extract/09fa2f63-8900-471a-beea-b2dc9151ecfe_model.json",
+        "middle_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_463501fe/extract/layout.json",
+        "download_info": {
+          "url_host": "cdn-mineru.openxlab.org.cn",
+          "resume_enabled": true,
+          "used_curl_fallback": true,
+          "resumed_from_bytes": 0,
+          "downloaded_bytes": 0,
+          "zip_size": 557850
+        }
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/38中标通知书整页扫描件/157-保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书.pdf",
+      "status": "mineru_done",
+      "ocr_reason": "low_extractable_text<1000",
+      "pdf_pages": 2,
+      "text_chars_before": 888,
+      "text_chars_after": 1498,
+      "batch_id": "f8da767c-2d91-4ad2-99f7-4d22d263d441",
+      "data_id": "customer_taichang_supplement_20260611_p1b_ocr_f25300bd7c3e",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_f25300bd",
+      "artifacts": {
+        "zip_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_f25300bd/mineru_result.zip",
+        "extract_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_f25300bd/extract",
+        "markdown_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_f25300bd/extract/full.md",
+        "content_list_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_f25300bd/extract/f1f6f594-b480-41c5-b958-142334c07e3e_content_list.json",
+        "model_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_f25300bd/extract/f1f6f594-b480-41c5-b958-142334c07e3e_model.json",
+        "middle_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_f25300bd/extract/layout.json",
+        "download_info": {
+          "url_host": "cdn-mineru.openxlab.org.cn",
+          "resume_enabled": true,
+          "used_curl_fallback": true,
+          "resumed_from_bytes": 0,
+          "downloaded_bytes": 0,
+          "zip_size": 160064
+        }
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/6环境管理体系认证证书整页扫描件/2.环境管理体系认证证书.pdf",
+      "status": "mineru_done",
+      "ocr_reason": "no_extractable_text",
+      "pdf_pages": 2,
+      "text_chars_before": 0,
+      "text_chars_after": 3274,
+      "batch_id": "c7e3722a-1ae0-4e01-a48b-2337495035e3",
+      "data_id": "customer_taichang_supplement_20260611_p1b_ocr_3bdf5e3aaa68",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_3bdf5e3a",
+      "artifacts": {
+        "zip_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_3bdf5e3a/mineru_result.zip",
+        "extract_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_3bdf5e3a/extract",
+        "markdown_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_3bdf5e3a/extract/full.md",
+        "content_list_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_3bdf5e3a/extract/25b169d8-b496-44ea-9809-d17c34891089_content_list.json",
+        "model_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_3bdf5e3a/extract/25b169d8-b496-44ea-9809-d17c34891089_model.json",
+        "middle_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_3bdf5e3a/extract/layout.json",
+        "download_info": {
+          "url_host": "cdn-mineru.openxlab.org.cn",
+          "resume_enabled": true,
+          "used_curl_fallback": true,
+          "resumed_from_bytes": 0,
+          "downloaded_bytes": 0,
+          "zip_size": 1040617
+        }
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/5质量管理体系认证证书整页扫描件/1.质量管理体系认证证书.pdf",
+      "status": "mineru_done",
+      "ocr_reason": "no_extractable_text",
+      "pdf_pages": 3,
+      "text_chars_before": 0,
+      "text_chars_after": 6113,
+      "batch_id": "12b558eb-c518-4aba-920b-56317dfaef90",
+      "data_id": "customer_taichang_supplement_20260611_p1b_ocr_b2f2dde88513",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_b2f2dde8",
+      "artifacts": {
+        "zip_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_b2f2dde8/mineru_result.zip",
+        "extract_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_b2f2dde8/extract",
+        "markdown_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_b2f2dde8/extract/full.md",
+        "content_list_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_b2f2dde8/extract/56aecc02-99f4-48d2-a4ba-a7cb917561a6_content_list.json",
+        "model_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_b2f2dde8/extract/56aecc02-99f4-48d2-a4ba-a7cb917561a6_model.json",
+        "middle_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_b2f2dde8/extract/layout.json",
+        "download_info": {
+          "url_host": "cdn-mineru.openxlab.org.cn",
+          "resume_enabled": true,
+          "used_curl_fallback": true,
+          "resumed_from_bytes": 0,
+          "downloaded_bytes": 0,
+          "zip_size": 1049808
+        }
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/7职业健康安全管理体系认证证书整页扫描件/3.职业健康安全管理体系认证证书.pdf",
+      "status": "mineru_done",
+      "ocr_reason": "no_extractable_text",
+      "pdf_pages": 3,
+      "text_chars_before": 0,
+      "text_chars_after": 4539,
+      "batch_id": "31dd4015-24cb-43aa-b40b-abee73c0b90b",
+      "data_id": "customer_taichang_supplement_20260611_p1b_ocr_afd104f1075c",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_afd104f1",
+      "artifacts": {
+        "zip_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_afd104f1/mineru_result.zip",
+        "extract_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_afd104f1/extract",
+        "markdown_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_afd104f1/extract/full.md",
+        "content_list_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_afd104f1/extract/f45d09b2-9f3c-42ca-b228-205c02292434_content_list.json",
+        "model_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_afd104f1/extract/f45d09b2-9f3c-42ca-b228-205c02292434_model.json",
+        "middle_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_afd104f1/extract/layout.json",
+        "download_info": {
+          "url_host": "cdn-mineru.openxlab.org.cn",
+          "resume_enabled": true,
+          "used_curl_fallback": true,
+          "resumed_from_bytes": 0,
+          "downloaded_bytes": 0,
+          "zip_size": 1167832
+        }
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/22土地厂房权属或租赁证明整页扫描件/1.土地租赁协议.pdf",
+      "status": "mineru_done",
+      "ocr_reason": "no_extractable_text",
+      "pdf_pages": 4,
+      "text_chars_before": 0,
+      "text_chars_after": 1778,
+      "batch_id": "b1d4ceab-9ad6-4fff-9d5b-c67bfb68506f",
+      "data_id": "customer_taichang_supplement_20260611_p1b_ocr_b3deba306c95",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_b3deba30",
+      "artifacts": {
+        "zip_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_b3deba30/mineru_result.zip",
+        "extract_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_b3deba30/extract",
+        "markdown_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_b3deba30/extract/full.md",
+        "content_list_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_b3deba30/extract/f04009a2-15fd-44e5-98a5-703cebf3b253_content_list.json",
+        "model_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_b3deba30/extract/f04009a2-15fd-44e5-98a5-703cebf3b253_model.json",
+        "middle_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_b3deba30/extract/layout.json",
+        "download_info": {
+          "url_host": "cdn-mineru.openxlab.org.cn",
+          "resume_enabled": true,
+          "used_curl_fallback": true,
+          "resumed_from_bytes": 0,
+          "downloaded_bytes": 0,
+          "zip_size": 844678
+        }
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/47PDF 整页渲染图/泰昌宣传彩页.pdf",
+      "status": "mineru_done",
+      "ocr_reason": "low_extractable_text<1000",
+      "pdf_pages": 50,
+      "text_chars_before": 698,
+      "text_chars_after": 97560,
+      "batch_id": "0de1841e-2a7f-4b3f-9445-5a3e293b3309",
+      "data_id": "customer_taichang_supplement_20260611_p1b_ocr_663b5cb7a293",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_663b5cb7",
+      "artifacts": {
+        "zip_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_663b5cb7/mineru_result.zip",
+        "extract_dir": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_663b5cb7/extract",
+        "markdown_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_663b5cb7/extract/full.md",
+        "content_list_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_663b5cb7/extract/c0e776e7-3875-4617-9c46-c45917d35ea9_content_list.json",
+        "model_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_663b5cb7/extract/c0e776e7-3875-4617-9c46-c45917d35ea9_model.json",
+        "middle_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_663b5cb7/extract/layout.json",
+        "download_info": {
+          "url_host": "cdn-mineru.openxlab.org.cn",
+          "resume_enabled": true,
+          "used_curl_fallback": true,
+          "resumed_from_bytes": 0,
+          "downloaded_bytes": 0,
+          "zip_size": 10737795
+        }
+      }
+    }
+  ]
+}

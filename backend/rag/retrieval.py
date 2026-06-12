@@ -53,6 +53,22 @@ def _query_terms(query: str) -> list[str]:
         "安全目标",
         "环保水保",
         "环保目标",
+        "输电线路",
+        "线路施工",
+        "杆塔",
+        "架线",
+        "放线",
+        "施工工序",
+        "主要工序",
+        "项目业绩",
+        "类似业绩",
+        "合同",
+        "供货合同",
+        "合同协议书",
+        "中标",
+        "中标通知书",
+        "招标编号",
+        "中标单位",
     ]
     for term in domain_terms:
         if term in text:
@@ -69,6 +85,17 @@ def _query_terms(query: str) -> list[str]:
         "质量安全环保": ["质量安全环保", "质量目标", "安全目标", "环保水保"],
         "质量目标": ["质量目标", "验收合格", "质量标准"],
         "安全目标": ["安全目标", "安全生产", "风险预控"],
+        "输电线路": ["输电线路", "线路施工", "杆塔", "杆塔组立", "架线", "放线", "施工工序", "主要工序"],
+        "线路施工": ["输电线路", "线路施工", "杆塔", "杆塔组立", "架线", "放线", "施工工序", "主要工序"],
+        "施工工序": ["施工工序", "主要工序", "复测分坑", "基础开挖", "杆塔组立", "架线放线", "验收消缺"],
+        "主要工序": ["施工工序", "主要工序", "复测分坑", "基础开挖", "杆塔组立", "架线放线", "验收消缺"],
+        "项目业绩": ["项目业绩", "类似业绩", "合同", "合同协议书", "供货合同", "中标", "中标通知书"],
+        "类似业绩": ["类似业绩", "项目业绩", "合同", "合同协议书", "供货合同", "中标", "中标通知书"],
+        "合同": ["合同", "合同协议书", "供货合同", "甲方", "乙方"],
+        "供货合同": ["供货合同", "合同协议书", "合同", "甲方", "乙方"],
+        "合同协议书": ["合同协议书", "供货合同", "合同", "甲方", "乙方"],
+        "中标通知书": ["中标通知书", "中标", "招标编号", "包号", "中标单位"],
+        "中标": ["中标", "中标通知书", "招标编号", "包号", "中标单位"],
     }
     for key, values in synonym_map.items():
         if key in text:
@@ -217,7 +244,75 @@ def _needs_keyword_supplement(query: str, rows: list[dict[str, Any]], match_coun
     if len(rows) < match_count:
         return True
     best_keyword_score = max((_keyword_score(query, row) for row in rows), default=0.0)
-    return best_keyword_score <= 0.0
+    if best_keyword_score <= 0.0:
+        return True
+    required_intents = _required_evidence_intents(query)
+    if required_intents:
+        covered = _covered_evidence_intents(rows)
+        return bool(required_intents - covered)
+    return False
+
+
+def _required_evidence_intents(query: str) -> set[str]:
+    text = query or ""
+    required: set[str] = set()
+    if any(keyword in text for keyword in ["合同协议书", "供货合同", "合同"]):
+        required.add("contract")
+    if any(keyword in text for keyword in ["中标通知书", "中标"]):
+        required.add("award_notice")
+    return required
+
+
+def _covered_evidence_intents(rows: list[dict[str, Any]]) -> set[str]:
+    covered: set[str] = set()
+    for row in rows or []:
+        covered.update(_evidence_intents_from_text(_row_text(row)))
+    return covered
+
+
+def _evidence_intents_from_text(text: str) -> set[str]:
+    intents: set[str] = set()
+    if any(keyword in text for keyword in ["合同协议书", "供货合同", "合同"]):
+        intents.add("contract")
+    if any(keyword in text for keyword in ["中标通知书", "中标"]):
+        intents.add("award_notice")
+    return intents
+
+
+def _select_with_required_evidence_coverage(
+    query: str,
+    rows: list[dict[str, Any]],
+    *,
+    text_getter,
+    limit: int,
+) -> list[dict[str, Any]]:
+    required = _required_evidence_intents(query)
+    if not required:
+        return rows[:limit]
+    selected: list[dict[str, Any]] = []
+    seen: set[str] = set()
+
+    def row_key(row: dict[str, Any]) -> str:
+        return str(row.get("id") or row.get("storage_path") or f"{row.get('document_id')}:{row.get('chunk_index')}:{hash(text_getter(row))}")
+
+    for intent in required:
+        for row in rows:
+            key = row_key(row)
+            if key in seen:
+                continue
+            if intent in _evidence_intents_from_text(text_getter(row)):
+                selected.append(row)
+                seen.add(key)
+                break
+    for row in rows:
+        if len(selected) >= limit:
+            break
+        key = row_key(row)
+        if key in seen:
+            continue
+        selected.append(row)
+        seen.add(key)
+    return selected
 
 
 def _keyword_search_knowledge_chunks(
@@ -269,7 +364,13 @@ def _keyword_search_knowledge_chunks(
         }
         scored.append((score + _authority_bonus(enriched), enriched))
     scored.sort(key=lambda item: item[0], reverse=True)
-    return [row for _, row in scored[: max(match_count * 2, match_count)]]
+    limit = max(match_count * 2, match_count)
+    return _select_with_required_evidence_coverage(
+        query,
+        [row for _, row in scored],
+        text_getter=_row_text,
+        limit=limit,
+    )
 
 
 def _merge_rows(primary: list[dict[str, Any]], supplemental: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -456,7 +557,7 @@ def search_knowledge_assets(
     assets.sort(key=lambda asset: float(asset.get("similarity") or 0) + _asset_query_intent_bonus(query, asset), reverse=True)
     # 过滤掉明显弱相关的资产，保留图片来源展示的准确性。
     strong_assets = [asset for asset in assets if float(asset.get("similarity") or 0) >= 0.28]
-    if len(strong_assets) >= min(match_count, 3):
+    if len(strong_assets) >= min(match_count, 3) and not _needs_asset_keyword_supplement(query, strong_assets):
         return strong_assets[:match_count]
 
     fallback_assets = _keyword_search_knowledge_assets(
@@ -465,18 +566,12 @@ def search_knowledge_assets(
         volume_type=target_volume,
         metadata_filter=metadata_filter,
     )
-    merged: list[dict[str, Any]] = []
-    seen: set[str] = set()
-    for asset in [*strong_assets, *fallback_assets]:
-        asset_id = str(asset.get("id") or asset.get("storage_path") or asset.get("title") or "")
-        if asset_id and asset_id in seen:
-            continue
-        if asset_id:
-            seen.add(asset_id)
-        merged.append(asset)
-        if len(merged) >= match_count:
-            break
-    return merged
+    return _select_with_required_evidence_coverage(
+        query,
+        [*strong_assets, *fallback_assets],
+        text_getter=_asset_search_text,
+        limit=match_count,
+    )
 
 
 def _keyword_search_knowledge_assets(
@@ -528,7 +623,22 @@ def _keyword_search_knowledge_assets(
             scored.append((score, enriched))
 
     scored.sort(key=lambda item: item[0], reverse=True)
-    return [asset for _, asset in scored[:match_count]]
+    return _select_with_required_evidence_coverage(
+        query,
+        [asset for _, asset in scored],
+        text_getter=_asset_search_text,
+        limit=match_count,
+    )
+
+
+def _needs_asset_keyword_supplement(query: str, assets: list[dict[str, Any]]) -> bool:
+    required_intents = _required_evidence_intents(query)
+    if not required_intents:
+        return False
+    covered: set[str] = set()
+    for asset in assets or []:
+        covered.update(_evidence_intents_from_text(_asset_search_text(asset)))
+    return bool(required_intents - covered)
 
 
 def _asset_metadata_value(asset: dict[str, Any], key: str) -> str:
@@ -590,6 +700,12 @@ def _asset_search_text(asset: dict[str, Any]) -> str:
 def _asset_query_tokens(query: str) -> list[str]:
     synonym_tokens = {
         "业绩": ["业绩", "类似业绩", "合同", "中标", "验收", "证明材料"],
+        "项目业绩": ["项目业绩", "类似业绩", "合同", "合同协议书", "供货合同", "中标", "中标通知书", "招标编号", "包号"],
+        "类似业绩": ["类似业绩", "项目业绩", "合同", "合同协议书", "供货合同", "中标", "中标通知书", "招标编号", "包号"],
+        "合同": ["合同", "合同协议书", "供货合同", "项目业绩", "证明材料"],
+        "合同协议书": ["合同协议书", "供货合同", "合同", "项目业绩", "证明材料"],
+        "中标": ["中标", "中标通知书", "招标编号", "包号", "中标单位", "项目业绩", "证明材料"],
+        "中标通知书": ["中标通知书", "中标", "招标编号", "包号", "中标单位", "项目业绩", "证明材料"],
         "社保": ["社保", "缴纳", "参保", "人员", "证明"],
         "营业执照": ["营业执照", "执照", "基础证照", "企业证照"],
         "安全生产许可证": ["安全生产", "许可证", "安全生产许可", "资质证书"],
@@ -756,7 +872,8 @@ def build_knowledge_prompt(
 7. 最多插入 3 张最相关图片。资质证书、营业执照、安全生产许可证、社保缴纳证明类图片如为脱敏样张，必须说明“仅作为脱敏示意图/排版占位图，不能替代正式法定文件”。
 8. 不要输出 Markdown 表格，图片建议用自然段和项目符号描述，避免表格在聊天窗口中换行错乱。
 9. `## 参考依据` 小节必须用“资料1、资料2...”和“图片资产1、图片资产2...”说明依据来自哪些检索片段或资产；图片资产只作为配图/材料建议，不要把它当成法规依据。
-10. 语言专业、客观、准确，适合非技术标书人员阅读。
+10. 当用户一次询问多个资料类型、证据类型或事项（例如“合同或中标通知书”“Logo和生产线图片”）时，必须逐项核对并分别回答；只要检索片段、来源文件名、图片资产名称或说明中出现某一项，就不得笼统回答“未发现”。
+11. 语言专业、客观、准确，适合非技术标书人员阅读。
 """
     return prompt, images
 

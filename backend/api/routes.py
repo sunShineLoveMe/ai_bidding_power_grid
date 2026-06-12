@@ -416,9 +416,20 @@ def _section_needs_image(section: dict) -> bool:
         return any(keyword in text for keyword in ["附件", "证明材料", "授权委托", "保证金", "保函", "扫描件"])
     if plan.get("needs_image"):
         return True
+    title_text = f"{_section_display_title(section)} {section.get('title') or ''}".lower()
+    explicit_image_title_keywords = [
+        "资料清单", "附件", "营业执照", "资质", "证书", "业绩", "合同", "中标通知书",
+        "生产", "生产线", "制造", "检测", "试验", "设备", "绿色", "低碳", "碳足迹",
+        "检验报告", "检测报告", "产品", "厂房", "仓储", "logo", "Logo",
+    ]
+    generic_titles = ["编制依据", "工程概况", "总体部署", "响应要求", "有效性说明", "条款响应", "承诺事项", "偏离说明"]
+    if any(title == title_text.strip() or title in title_text for title in generic_titles):
+        return False
+    if int(section.get("level") or 1) <= 2 and not any(keyword in title_text for keyword in explicit_image_title_keywords):
+        return False
     text = _section_text(section)
     keywords = [
-        "资质", "证书", "营业执照", "许可", "业绩", "产品", "设备", "材料", "施工",
+        "资质", "证书", "营业执照", "许可", "业绩", "合同", "中标通知书", "产品", "设备", "材料", "施工",
         "输变电", "配网", "变电站", "线路", "电缆", "开关柜", "变压器", "箱变",
         "继电保护", "自动化", "调试", "试验", "运维", "检修", "组织实施", "工程范围",
     ]
@@ -436,6 +447,7 @@ def _asset_meta_value(asset: dict, key: str) -> str:
 
 def _section_asset_profile(section: dict) -> dict[str, set[str]]:
     text = _section_text(section)
+    heading_text = f"{_section_display_title(section)} {section.get('title') or ''}".lower()
     profile = {"evidence_types": set(), "libraries": set()}
     if any(keyword in text for keyword in ["营业执照", "执照"]):
         profile["evidence_types"].add("business_license")
@@ -454,6 +466,12 @@ def _section_asset_profile(section: dict) -> dict[str, set[str]]:
     if any(keyword in text for keyword in ["检验报告", "检测报告", "型式试验", "内径250"]):
         profile["evidence_types"].add("inspection_report")
         profile["libraries"].add("product_library")
+    if any(keyword in heading_text for keyword in ["同类业绩", "类似业绩", "项目业绩", "业绩证明", "合同协议书", "供货合同", "中标通知书"]):
+        profile["evidence_types"].add("project_performance")
+        profile["libraries"].add("qualification_library")
+    if any(keyword in heading_text for keyword in ["logo", "Logo", "标识", "企业形象", "封面"]):
+        profile["evidence_types"].add("brand_logo")
+        profile["libraries"].add("qualification_library")
     return profile
 
 
@@ -595,10 +613,12 @@ def _asset_match_reason(asset: dict, section: dict, score: int) -> str:
             "testing_capacity": "试验检测能力",
             "green_low_carbon": "绿色低碳资料",
             "inspection_report": "检验/检测报告",
+            "project_performance": "同类项目业绩",
+            "brand_logo": "企业 Logo",
         }
         reasons.append(f"匹配章节证据类型：{evidence_labels.get(evidence_type, evidence_type)}")
 
-    for keyword in ["产品", "设备", "工艺", "施工", "资质", "证书", "营业执照", "业绩", "人员", "授权", "保证金", "保函"]:
+    for keyword in ["产品", "设备", "工艺", "施工", "资质", "证书", "营业执照", "业绩", "合同", "中标通知书", "人员", "授权", "保证金", "保函"]:
         if keyword in section_text and keyword in asset_text:
             reasons.append(f"章节与资产同时命中“{keyword}”")
             if len(reasons) >= 3:
@@ -702,6 +722,9 @@ def _build_section_image_markdown(
                 "asset_title": asset.get("title"),
                 "asset_category": asset.get("category"),
                 "asset_type": asset.get("asset_type"),
+                "evidence_type": _asset_meta_value(asset, "evidence_type"),
+                "target_library": _asset_meta_value(asset, "target_library"),
+                "source_batch_id": _asset_meta_value(asset, "source_batch_id") or _asset_meta_value(asset, "ingestion_batch_id"),
                 "library": _asset_library_label(asset),
                 "section_id": section.get("id"),
                 "section_title": _section_display_title(section),

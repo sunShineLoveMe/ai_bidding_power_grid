@@ -48,6 +48,7 @@ from backend.rag.retrieval import (
     stream_knowledge_answer,
 )
 from backend.rag.product_parameters import search_taichang_product_parameter_contexts
+from backend.rag.project_performance import search_taichang_project_performance_contexts
 
 
 CUSTOMER_SEED_CORPUS = "power_grid_customer_corpus"
@@ -403,8 +404,9 @@ def search_knowledge():
             return_parent=False,
         )
         parameter_contexts = search_taichang_product_parameter_contexts(query, limit=5)
+        performance_contexts = search_taichang_project_performance_contexts(query, limit=3)
         contexts = _curate_pilot_enterprise_contexts(contexts, limit=5)
-        contexts = (parameter_contexts + contexts)[:5]
+        contexts = (performance_contexts + parameter_contexts + contexts)[:5]
         contexts = sanitize_source_contexts(contexts)
         asset_metadata_filter = _asset_metadata_filter_from_query(
             query,
@@ -467,8 +469,9 @@ def stream_search_knowledge():
                 return_parent=False,
             )
             parameter_contexts = search_taichang_product_parameter_contexts(query, limit=5)
+            performance_contexts = search_taichang_project_performance_contexts(query, limit=3)
             contexts = _curate_pilot_enterprise_contexts(contexts, limit=5)
-            contexts = (parameter_contexts + contexts)[:5]
+            contexts = (performance_contexts + parameter_contexts + contexts)[:5]
             contexts = sanitize_source_contexts(contexts)
             asset_metadata_filter = _asset_metadata_filter_from_query(
                 query,

@@ -1,0 +1,307 @@
+[
+  {
+    "performance_id": "taichang-tianjin-2022-0322AB-package-2",
+    "enterprise": "泰昌",
+    "doc_owner": "河北泰昌电力器材科技有限公司",
+    "source_domain": "enterprise_fact",
+    "reference_only": false,
+    "fact_source_allowed_for_enterprise": true,
+    "evidence_type": "award_notice",
+    "evidence_type_label": "中标通知书",
+    "target_library": "qualification_library",
+    "project_name": "国网天津市电力公司2022年第二次配网物资协 议库存招标采购",
+    "tender_no": "0322AB",
+    "section_name": "157-保护管（CPVC和MPP）",
+    "package_no": "包2",
+    "package_description": "157-保护管（CPVC和MPP） 包2_电 缆保护管MPP和CPVC",
+    "product_summary": "电缆保护管MPP和CPVC",
+    "product_families": [
+      "MPP电缆保护管",
+      "CPVC电缆保护管"
+    ],
+    "total_quantity": 54678.0,
+    "quantity_unit": "米",
+    "amount_tax_included_yuan": 6372409.05,
+    "buyer": "国网天津市电力公司",
+    "seller": "河北泰昌电力器材科技有限公司",
+    "award_date": "2022-11-21",
+    "contract_sign_date": "",
+    "contract_no_buyer": "",
+    "line_items": [
+      {
+        "line_no": 1,
+        "project_unit": "国网天津市电力公司",
+        "product_name": "电缆保护管",
+        "quantity": 6749.0,
+        "quantity_unit": "米",
+        "amount_tax_included_wan": 8.053447,
+        "amount_tax_included_yuan": 80534.47,
+        "purchase_request_no": "400208312800050",
+        "source_page": 1
+      },
+      {
+        "line_no": 2,
+        "project_unit": "国网天津市电力公司",
+        "product_name": "电缆保护管",
+        "quantity": 1125.0,
+        "quantity_unit": "米",
+        "amount_tax_included_wan": 21.250215,
+        "amount_tax_included_yuan": 212502.15,
+        "purchase_request_no": "400208312800090",
+        "source_page": 1
+      },
+      {
+        "line_no": 3,
+        "project_unit": "国网天津市电力公司",
+        "product_name": "电缆保护管",
+        "quantity": 900.0,
+        "quantity_unit": "米",
+        "amount_tax_included_wan": 21.371238,
+        "amount_tax_included_yuan": 213712.38,
+        "purchase_request_no": "400208312800080",
+        "source_page": 1
+      },
+      {
+        "line_no": 4,
+        "project_unit": "国网天津市电力公司",
+        "product_name": "电缆保护管",
+        "quantity": 11248.0,
+        "quantity_unit": "米",
+        "amount_tax_included_wan": 144.235804,
+        "amount_tax_included_yuan": 1442358.04,
+        "purchase_request_no": "400208312800070",
+        "source_page": 1
+      },
+      {
+        "line_no": 5,
+        "project_unit": "国网天津市电力公司",
+        "product_name": "电缆保护管",
+        "quantity": 1249.0,
+        "quantity_unit": "米",
+        "amount_tax_included_wan": 7.381465,
+        "amount_tax_included_yuan": 73814.65,
+        "purchase_request_no": "400208312800010",
+        "source_page": 1
+      },
+      {
+        "line_no": 6,
+        "project_unit": "国网天津市电力公司",
+        "product_name": "电缆保护管",
+        "quantity": 17097.0,
+        "quantity_unit": "米",
+        "amount_tax_included_wan": 259.829435,
+        "amount_tax_included_yuan": 2598294.35,
+        "purchase_request_no": "400208312800020",
+        "source_page": 1
+      },
+      {
+        "line_no": 7,
+        "project_unit": "国网天津市电力公司",
+        "product_name": "电缆保护管",
+        "quantity": 6749.0,
+        "quantity_unit": "米",
+        "amount_tax_included_wan": 25.639856,
+        "amount_tax_included_yuan": 256398.56,
+        "purchase_request_no": "400208312800060",
+        "source_page": 1
+      },
+      {
+        "line_no": 8,
+        "project_unit": "国网天津市电力公司",
+        "product_name": "电缆保护管",
+        "quantity": 5062.0,
+        "quantity_unit": "米",
+        "amount_tax_included_wan": 136.429151,
+        "amount_tax_included_yuan": 1364291.51,
+        "purchase_request_no": "400208312800030",
+        "source_page": 1
+      },
+      {
+        "line_no": 9,
+        "project_unit": "国网天津市电力公司",
+        "product_name": "电缆保护管",
+        "quantity": 4499.0,
+        "quantity_unit": "米",
+        "amount_tax_included_wan": 13.050294,
+        "amount_tax_included_yuan": 130502.94,
+        "purchase_request_no": "400208312800040",
+        "source_page": 1
+      }
+    ],
+    "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/38中标通知书整页扫描件/157-保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书.pdf",
+    "markdown_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/mineru_batch_p1b_ocr/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_f25300bd/extract/full.md",
+    "source_pages": {
+      "project_and_tender": [
+        1
+      ],
+      "line_items": [
+        1
+      ],
+      "award_date": [
+        2
+      ]
+    },
+    "date_status": "award_date_explicit",
+    "value_source": "mineru_ocr_and_pdf_page_text"
+  },
+  {
+    "performance_id": "taichang-tianjin-2022-0322AB-package-2",
+    "enterprise": "泰昌",
+    "doc_owner": "河北泰昌电力器材科技有限公司",
+    "source_domain": "enterprise_fact",
+    "reference_only": false,
+    "fact_source_allowed_for_enterprise": true,
+    "evidence_type": "supply_contract",
+    "evidence_type_label": "供货合同",
+    "target_library": "qualification_library",
+    "project_name": "国网天津市电力公司2022年第二次配网物资协议库存招标采购",
+    "tender_no": "0322AB",
+    "tender_no_value_source": "cross_document_exact_amount_and_party_match",
+    "section_name": "157-保护管（CPVC和MPP）",
+    "package_no": "包2",
+    "product_summary": "电缆保护管MPP和CPVC",
+    "product_families": [
+      "MPP电缆保护管",
+      "CPVC电缆保护管"
+    ],
+    "total_quantity": 54678.0,
+    "quantity_unit": "米",
+    "amount_tax_included_yuan": 6372409.05,
+    "buyer": "国网天津市电力公司",
+    "seller": "河北泰昌电力器材科技有限公司",
+    "award_date": "2022-11-21",
+    "contract_sign_date": "",
+    "contract_no_buyer": "SGTJWZ00HTMM2210273",
+    "line_items": [
+      {
+        "line_no": 1,
+        "product_name": "电缆保护管",
+        "product_family": "MPP电缆保护管",
+        "specification_model": "φ100",
+        "source_page": 8,
+        "quantity": 6749.0,
+        "quantity_unit": "米",
+        "amount_tax_included_yuan": 256398.56,
+        "purchase_request_no": "400208312800060",
+        "quantity_amount_value_source": "award_notice_row_cross_checked_against_contract_total"
+      },
+      {
+        "line_no": 2,
+        "product_name": "电缆保护管",
+        "product_family": "MPP电缆保护管",
+        "specification_model": "φ250",
+        "source_page": 8,
+        "quantity": 900.0,
+        "quantity_unit": "米",
+        "amount_tax_included_yuan": 213712.38,
+        "purchase_request_no": "400208312800080",
+        "quantity_amount_value_source": "award_notice_row_cross_checked_against_contract_total"
+      },
+      {
+        "line_no": 3,
+        "product_name": "电缆保护管",
+        "product_family": "CPVC电缆保护管",
+        "specification_model": "φ250",
+        "source_page": 9,
+        "quantity": 1125.0,
+        "quantity_unit": "米",
+        "amount_tax_included_yuan": 212502.15,
+        "purchase_request_no": "400208312800090",
+        "quantity_amount_value_source": "award_notice_row_cross_checked_against_contract_total"
+      },
+      {
+        "line_no": 4,
+        "product_name": "电缆保护管",
+        "product_family": "MPP电缆保护管",
+        "specification_model": "φ100",
+        "source_page": 9,
+        "quantity": 1249.0,
+        "quantity_unit": "米",
+        "amount_tax_included_yuan": 73814.65,
+        "purchase_request_no": "400208312800010",
+        "quantity_amount_value_source": "award_notice_row_cross_checked_against_contract_total"
+      },
+      {
+        "line_no": 5,
+        "product_name": "电缆保护管",
+        "product_family": "MPP电缆保护管",
+        "specification_model": "φ200",
+        "source_page": 9,
+        "quantity": 17097.0,
+        "quantity_unit": "米",
+        "amount_tax_included_yuan": 2598294.35,
+        "purchase_request_no": "400208312800020",
+        "quantity_amount_value_source": "award_notice_row_cross_checked_against_contract_total"
+      },
+      {
+        "line_no": 6,
+        "product_name": "电缆保护管",
+        "product_family": "CPVC电缆保护管",
+        "specification_model": "φ200",
+        "source_page": 9,
+        "quantity": 11248.0,
+        "quantity_unit": "米",
+        "amount_tax_included_yuan": 1442358.04,
+        "purchase_request_no": "400208312800070",
+        "quantity_amount_value_source": "award_notice_row_cross_checked_against_contract_total"
+      },
+      {
+        "line_no": 7,
+        "product_name": "电缆保护管",
+        "product_family": "MPP电缆保护管",
+        "specification_model": "φ200",
+        "source_page": 10,
+        "quantity": 5062.0,
+        "quantity_unit": "米",
+        "amount_tax_included_yuan": 1364291.51,
+        "purchase_request_no": "400208312800030",
+        "quantity_amount_value_source": "award_notice_row_cross_checked_against_contract_total"
+      },
+      {
+        "line_no": 8,
+        "product_name": "电缆保护管",
+        "product_family": "CPVC电缆保护管",
+        "specification_model": "φ50",
+        "source_page": 10,
+        "quantity": 6749.0,
+        "quantity_unit": "米",
+        "amount_tax_included_yuan": 80534.47,
+        "purchase_request_no": "400208312800050",
+        "quantity_amount_value_source": "award_notice_row_cross_checked_against_contract_total"
+      },
+      {
+        "line_no": 9,
+        "product_name": "电缆保护管",
+        "product_family": "CPVC电缆保护管",
+        "specification_model": "φ100",
+        "source_page": 10,
+        "quantity": 4499.0,
+        "quantity_unit": "米",
+        "amount_tax_included_yuan": 130502.94,
+        "purchase_request_no": "400208312800040",
+        "quantity_amount_value_source": "award_notice_row_cross_checked_against_contract_total"
+      }
+    ],
+    "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/37同类产品供货合同关键页整页扫描件/TJ20220002363合同协议书（双方已签章）.pdf",
+    "markdown_path": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/texts/rag_seed_power_grid_resources_05_enterprise_documents_02_泰昌资质文件补充_20260611_extra_16500fc6.md",
+    "source_pages": {
+      "contract_identity_and_parties": [
+        1,
+        2
+      ],
+      "contract_amount": [
+        3
+      ],
+      "signature_and_blank_sign_date": [
+        6
+      ],
+      "line_items": [
+        8,
+        9,
+        10
+      ]
+    },
+    "date_status": "contract_sign_date_blank_in_source",
+    "value_source": "pdf_page_text_with_cross_document_project_link"
+  }
+]
