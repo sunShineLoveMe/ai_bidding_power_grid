@@ -63,14 +63,15 @@ FORMAL_VOLUME_HEADING_RE = re.compile(
 DOCX_TOC_MAX_LEVEL = int(os.getenv("DOCX_TOC_MAX_LEVEL", "4"))
 DOCX_TEMPLATE_ID = os.getenv("DOCX_TEMPLATE_ID", "sgcc_taichang_bid")
 DOCX_BIDDER_FULL_NAME = os.getenv("DOCX_BIDDER_FULL_NAME", "河北泰昌电力器材科技有限公司")
-DOCX_BODY_EAST_ASIA = os.getenv("DOCX_BODY_EAST_ASIA", "宋体")
+DOCX_BODY_EAST_ASIA = os.getenv("DOCX_BODY_EAST_ASIA", os.getenv("DOCX_CJK_BODY_FONT", "SimSun"))
+DOCX_HEADING_EAST_ASIA = os.getenv("DOCX_HEADING_EAST_ASIA", os.getenv("DOCX_CJK_HEADING_FONT", "Arial Unicode MS"))
 DOCX_BODY_LATIN = os.getenv("DOCX_BODY_LATIN", "Times New Roman")
 DOCX_BODY_FONT_SIZE = float(os.getenv("DOCX_BODY_FONT_SIZE", "10.5"))
 DOCX_BODY_LINE_SPACING = float(os.getenv("DOCX_BODY_LINE_SPACING", "20"))
 DOCX_BODY_FIRST_LINE_INDENT_PT = float(os.getenv("DOCX_BODY_FIRST_LINE_INDENT_PT", str(DOCX_BODY_FONT_SIZE * 2)))
 DOCX_LIST_LEFT_INDENT_PT = float(os.getenv("DOCX_LIST_LEFT_INDENT_PT", "21"))
 DOCX_LIST_HANGING_INDENT_PT = float(os.getenv("DOCX_LIST_HANGING_INDENT_PT", "10.5"))
-DOCX_TABLE_EAST_ASIA = os.getenv("DOCX_TABLE_EAST_ASIA", "宋体")
+DOCX_TABLE_EAST_ASIA = os.getenv("DOCX_TABLE_EAST_ASIA", DOCX_BODY_EAST_ASIA)
 DOCX_TABLE_FONT_SIZE = float(os.getenv("DOCX_TABLE_FONT_SIZE", "10.5"))
 DOCX_HEADER_MAX_CHARS = int(os.getenv("DOCX_HEADER_MAX_CHARS", "42"))
 DOCX_PAGE_MARGIN_TOP_CM = float(os.getenv("DOCX_PAGE_MARGIN_TOP_CM", "2.0"))
@@ -103,6 +104,12 @@ COVER_FIELD_LABELS = (
 )
 
 
+def _is_invalid_cover_field_value(value: str) -> bool:
+    normalized = re.sub(r"[\s：:、,，;；|]+", "", clean_formal_bid_text(value or ""))
+    labels = {re.sub(r"[\s：:、,，;；|]+", "", label) for label in COVER_FIELD_LABELS}
+    return not normalized or normalized in labels
+
+
 def clean_formal_bid_text(text):
     """Remove emoji/decorative symbols that are unsuitable for formal bid DOCX output."""
     if text is None:
@@ -127,8 +134,11 @@ def should_start_heading_on_new_page(level: int, text: str, heading_count: int) 
 
 
 def apply_run_font(run, *, east_asia=DOCX_BODY_EAST_ASIA, latin=DOCX_BODY_LATIN, size=None, bold=None):
-    run.font.name = latin
+    run.font.name = east_asia
+    run._element.rPr.rFonts.set(qn('w:ascii'), east_asia)
+    run._element.rPr.rFonts.set(qn('w:hAnsi'), east_asia)
     run._element.rPr.rFonts.set(qn('w:eastAsia'), east_asia)
+    run._element.rPr.rFonts.set(qn('w:cs'), east_asia)
     lang = run._element.rPr.find(qn('w:lang'))
     if lang is None:
         lang = OxmlElement('w:lang')
@@ -190,8 +200,8 @@ def _set_rfonts(rpr, *, east_asia: str, latin: str = DOCX_BODY_LATIN) -> None:
     if rfonts is None:
         rfonts = OxmlElement("w:rFonts")
         rpr.insert(0, rfonts)
-    rfonts.set(qn("w:ascii"), latin)
-    rfonts.set(qn("w:hAnsi"), latin)
+    rfonts.set(qn("w:ascii"), east_asia)
+    rfonts.set(qn("w:hAnsi"), east_asia)
     rfonts.set(qn("w:eastAsia"), east_asia)
     rfonts.set(qn("w:cs"), east_asia)
 
@@ -274,6 +284,36 @@ def scrub_docx_black_square_markers(docx_path: str | Path) -> dict:
     }
 
 
+def ensure_docx_table_header_repeat(docx_path: str | Path) -> dict:
+    """Ensure first table rows keep repeat-header metadata after LibreOffice roundtrip."""
+    source = Path(docx_path)
+    report = {"table_count": 0, "updated": 0, "failed": False}
+    if not source.exists():
+        report.update({"failed": True, "reason": "docx not found"})
+        return report
+    try:
+        doc = Document(str(source))
+        for table in doc.tables:
+            report["table_count"] += 1
+            if not table.rows:
+                continue
+            tr_pr = table.rows[0]._tr.get_or_add_trPr()
+            tbl_header = tr_pr.find(qn("w:tblHeader"))
+            if tbl_header is None:
+                tbl_header = OxmlElement("w:tblHeader")
+                tr_pr.append(tbl_header)
+                report["updated"] += 1
+            if tbl_header.get(qn("w:val")) != "true":
+                tbl_header.set(qn("w:val"), "true")
+                report["updated"] += 1
+        if report["updated"]:
+            doc.save(str(source))
+    except Exception as exc:
+        logging.exception("DOCX 表格表头重复属性兜底失败: %s", source)
+        report.update({"failed": True, "reason": str(exc)})
+    return report
+
+
 def _truncate_header_text(text: str) -> str:
     text = clean_formal_bid_text(text)
     if len(text) <= DOCX_HEADER_MAX_CHARS:
@@ -304,7 +344,7 @@ def _extract_cover_field_value(md_content: str, label: str) -> str:
             value = clean_formal_bid_text(re.sub(r"\*\*(.*?)\*\*", r"\1", match.group(1))).strip()
             value = re.sub(r"^[*：:\s]+", "", value).strip()
             value = re.split(r"\s{2,}|\s*\|\s*", value)[0].strip()
-            if value and value not in {"无", "暂无", "待补充", "【待补充】"}:
+            if value and value not in {"无", "暂无", "待补充", "【待补充】"} and not _is_invalid_cover_field_value(value):
                 return value[:80]
     return ""
 
@@ -333,7 +373,7 @@ def merge_bid_cover_fields(markdown_fields: dict | None, structured_fields: dict
             continue
         for label in COVER_FIELD_LABELS:
             value = clean_formal_bid_text(source.get(label) or "")
-            if value:
+            if value and not _is_invalid_cover_field_value(value):
                 merged[label] = value[:120]
     return merged
 
@@ -365,10 +405,11 @@ def docx_template_report(cover_fields: dict | None = None) -> dict:
             "left": DOCX_PAGE_MARGIN_LEFT_CM,
             "right": DOCX_PAGE_MARGIN_RIGHT_CM,
         },
+        "heading_font": DOCX_HEADING_EAST_ASIA,
         "header_footer": {
-            "header_font": "宋体",
+            "header_font": DOCX_BODY_EAST_ASIA,
             "header_font_size_pt": 9,
-            "footer_font": "宋体",
+            "footer_font": DOCX_BODY_EAST_ASIA,
             "footer_font_size_pt": 9,
             "page_number_format": "第 X 页，共 Y 页",
             "header_text": f"{DOCX_BIDDER_FULL_NAME}投标文件",
@@ -528,25 +569,78 @@ def _taichang_logo_path() -> Path | None:
     return path if path.exists() and path.is_file() else None
 
 
+def _prepare_logo_image_for_docx(logo_path: Path) -> tuple[str, bool]:
+    if Image is None:
+        return str(logo_path), False
+    try:
+        with Image.open(logo_path) as source:
+            image = ImageOps.exif_transpose(source) if ImageOps is not None else source.copy()
+            image = image.convert("RGBA")
+            width, height = image.size
+            if width <= 0 or height <= 0:
+                return str(logo_path), False
+
+            bg = image.getpixel((0, 0))[:3]
+            pixels = image.load()
+            left, top, right, bottom = width, height, -1, -1
+            for y in range(height):
+                for x in range(width):
+                    r, g, b, a = pixels[x, y]
+                    if a <= 8:
+                        continue
+                    delta = abs(r - bg[0]) + abs(g - bg[1]) + abs(b - bg[2])
+                    if delta > 45:
+                        left = min(left, x)
+                        top = min(top, y)
+                        right = max(right, x)
+                        bottom = max(bottom, y)
+            if right < left or bottom < top:
+                return str(logo_path), False
+            pad_x = max(8, int((right - left + 1) * 0.04))
+            pad_y = max(8, int((bottom - top + 1) * 0.08))
+            crop_box = (
+                max(0, left - pad_x),
+                max(0, top - pad_y),
+                min(width, right + pad_x + 1),
+                min(height, bottom + pad_y + 1),
+            )
+            if crop_box == (0, 0, width, height):
+                return str(logo_path), False
+            cropped = image.crop(crop_box)
+            temp = tempfile.NamedTemporaryFile(suffix=".png", delete=False)
+            temp.close()
+            cropped.save(temp.name, "PNG", optimize=True)
+            return temp.name, True
+    except Exception:
+        logging.exception("Logo 自动裁白失败，继续使用原图: %s", logo_path)
+        return str(logo_path), False
+
+
 def _add_taichang_logo(paragraph, *, width_in: float, max_height_in: float, report: dict | None = None, placement: str = "unknown") -> bool:
     logo_path = _taichang_logo_path()
     if not logo_path:
         if report is not None:
             report.setdefault("logo", {})[placement] = {"inserted": False, "reason": "logo file missing"}
         return False
+    prepared_logo, cleanup = _prepare_logo_image_for_docx(logo_path)
     width, height, metrics = _fit_image_dimensions_for_docx(
-        logo_path,
+        prepared_logo,
         max_width_in=width_in,
         max_height_in=max_height_in,
     )
-    run = paragraph.add_run()
-    run.add_picture(str(logo_path), width=Inches(width), height=Inches(height) if height else None)
-    if report is not None:
-        report.setdefault("logo", {})[placement] = {
-            "inserted": True,
-            "path": str(logo_path),
-            **metrics,
-        }
+    try:
+        run = paragraph.add_run()
+        run.add_picture(str(prepared_logo), width=Inches(width), height=Inches(height) if height else None)
+        if report is not None:
+            report.setdefault("logo", {})[placement] = {
+                "inserted": True,
+                "path": str(logo_path),
+                "auto_cropped": bool(cleanup),
+                **metrics,
+            }
+    finally:
+        if cleanup and os.path.exists(prepared_logo):
+            os.unlink(prepared_logo)
     return True
 
 
@@ -646,7 +740,7 @@ def _add_pageref_field(paragraph, bookmark_name: str, *, placeholder: str = "1")
     separate._r.append(fld_separate)
 
     result = paragraph.add_run(placeholder)
-    apply_run_font(result, east_asia="宋体", size=DOCX_TOC_ENTRY_FONT_SIZE)
+    apply_run_font(result, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_TOC_ENTRY_FONT_SIZE)
 
     end = paragraph.add_run()
     fld_end = OxmlElement("w:fldChar")
@@ -670,7 +764,7 @@ def _add_formal_toc_entry(doc, entry: dict, *, tab_position_twips: int) -> None:
     _set_paragraph_right_dot_leader_tab(paragraph, position_twips=tab_position_twips)
 
     text_run = paragraph.add_run(_toc_entry_text(entry))
-    apply_run_font(text_run, east_asia="宋体", size=DOCX_TOC_ENTRY_FONT_SIZE, bold=(level == 1))
+    apply_run_font(text_run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_TOC_ENTRY_FONT_SIZE, bold=(level == 1))
     paragraph.add_run("\t")
     _add_pageref_field(paragraph, str(entry.get("anchor") or ""), placeholder="1")
 
@@ -679,7 +773,8 @@ def _add_cover_page(doc, project_name: str, cover_fields: dict | None = None, im
     bid_title = taichang_bid_document_title((cover_fields or {}).get("项目名称") or project_name)
     logo_para = doc.add_paragraph()
     logo_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    logo_para.paragraph_format.first_line_indent = Pt(0)
+    apply_image_paragraph_format(logo_para)
+    logo_para.paragraph_format.space_before = Pt(0)
     logo_para.paragraph_format.space_after = Pt(18)
     _add_taichang_logo(
         logo_para,
@@ -699,7 +794,7 @@ def _add_cover_page(doc, project_name: str, cover_fields: dict | None = None, im
     title.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
     title.paragraph_format.line_spacing = Pt(34)
     title_run = title.add_run(bid_title)
-    apply_run_font(title_run, east_asia="黑体", size=DOCX_COVER_TITLE_FONT_SIZE, bold=True)
+    apply_run_font(title_run, east_asia=DOCX_HEADING_EAST_ASIA, size=DOCX_COVER_TITLE_FONT_SIZE, bold=True)
 
     doc.add_paragraph()
     formal_fields = {
@@ -721,20 +816,20 @@ def _add_cover_page(doc, project_name: str, cover_fields: dict | None = None, im
         para.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
         para.paragraph_format.line_spacing = Pt(24)
         run = para.add_run(f"{label}：{value}")
-        apply_run_font(run, east_asia="宋体", size=15)
+        apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=15)
 
     doc.add_paragraph()
     bidder = doc.add_paragraph()
     bidder.alignment = WD_ALIGN_PARAGRAPH.CENTER
     bidder.paragraph_format.first_line_indent = Pt(0)
     bidder_run = bidder.add_run(f"投标人：{DOCX_BIDDER_FULL_NAME}")
-    apply_run_font(bidder_run, east_asia="宋体", size=15)
+    apply_run_font(bidder_run, east_asia=DOCX_BODY_EAST_ASIA, size=15)
 
     date_para = doc.add_paragraph()
     date_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
     date_para.paragraph_format.first_line_indent = Pt(0)
     date_run = date_para.add_run(datetime.today().strftime("%Y年%m月%d日"))
-    apply_run_font(date_run, east_asia="宋体", size=15)
+    apply_run_font(date_run, east_asia=DOCX_BODY_EAST_ASIA, size=15)
     doc.add_page_break()
 
 
@@ -747,7 +842,7 @@ def _add_toc_page(doc, project_name: str, heading_entries: list[dict], cover_fie
     toc_title.paragraph_format.space_before = Pt(0)
     toc_title.paragraph_format.space_after = Pt(12)
     toc_run = toc_title.add_run("目  录")
-    apply_run_font(toc_run, east_asia="黑体", size=DOCX_TOC_TITLE_FONT_SIZE, bold=True)
+    apply_run_font(toc_run, east_asia=DOCX_HEADING_EAST_ASIA, size=DOCX_TOC_TITLE_FONT_SIZE, bold=True)
 
     formal_entries = [
         entry for entry in heading_entries
@@ -771,9 +866,9 @@ def convert_mermaid_to_image(mermaid_code):
     with tempfile.NamedTemporaryFile(suffix='.mmd', delete=False, mode='w', encoding='utf-8') as f:
         # 添加主题和样式设置
         mermaid_config = """
-%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '16px', 'fontFamily': '宋体' }}}%%
+%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '16px', 'fontFamily': '%s' }}}%%
 """
-        f.write(mermaid_config + mermaid_code)
+        f.write((mermaid_config % DOCX_BODY_EAST_ASIA) + mermaid_code)
         mmd_file = f.name
     
     # 创建输出图片文件
@@ -806,7 +901,7 @@ def create_mermaid_config():
         "theme": "default",
         "themeVariables": {
             "fontSize": "16px",
-            "fontFamily": "宋体",
+            "fontFamily": DOCX_BODY_EAST_ASIA,
             "primaryColor": "#1f77b4",
             "primaryTextColor": "#000000",
             "primaryBorderColor": "#1f77b4",
@@ -844,7 +939,8 @@ def process_mermaid(doc, mermaid_code):
             caption = doc.add_paragraph()
             caption.alignment = WD_ALIGN_PARAGRAPH.CENTER
             caption_run = caption.add_run("图 X-X 流程图")
-            caption_run.font.name = '宋体'
+            caption_run.font.name = DOCX_BODY_EAST_ASIA
+            caption_run._element.rPr.rFonts.set(qn('w:eastAsia'), DOCX_BODY_EAST_ASIA)
             caption_run.font.size = Pt(10.5)
         finally:
             # 清理临时图片文件
@@ -1072,7 +1168,9 @@ def set_document_styles(doc):
     """设置文档样式"""
     styles = doc.styles
     normal = styles['Normal']
-    normal.font.name = DOCX_BODY_LATIN
+    normal.font.name = DOCX_BODY_EAST_ASIA
+    normal._element.rPr.rFonts.set(qn('w:ascii'), DOCX_BODY_EAST_ASIA)
+    normal._element.rPr.rFonts.set(qn('w:hAnsi'), DOCX_BODY_EAST_ASIA)
     normal._element.rPr.rFonts.set(qn('w:eastAsia'), DOCX_BODY_EAST_ASIA)
     normal._element.rPr.rFonts.set(qn('w:cs'), DOCX_BODY_EAST_ASIA)
     normal.font.size = Pt(DOCX_BODY_FONT_SIZE)
@@ -1083,15 +1181,17 @@ def set_document_styles(doc):
     normal.paragraph_format.space_after = Pt(0)
 
     heading_specs = {
-        1: ('黑体', 16, True),
-        2: ('黑体', 14, True),
-        3: ('黑体', 12, True),
-        4: ('黑体', 10.5, True),
+        1: (DOCX_HEADING_EAST_ASIA, 16, True),
+        2: (DOCX_HEADING_EAST_ASIA, 14, True),
+        3: (DOCX_HEADING_EAST_ASIA, 12, True),
+        4: (DOCX_HEADING_EAST_ASIA, 10.5, True),
     }
     for i in range(1, 5):
         style = styles[f'Heading {i}']
         east_asia, size, bold = heading_specs[i]
-        style.font.name = DOCX_BODY_LATIN
+        style.font.name = east_asia
+        style._element.rPr.rFonts.set(qn('w:ascii'), east_asia)
+        style._element.rPr.rFonts.set(qn('w:hAnsi'), east_asia)
         style._element.rPr.rFonts.set(qn('w:eastAsia'), east_asia)
         style._element.rPr.rFonts.set(qn('w:cs'), east_asia)
         style.font.size = Pt(size)
@@ -1104,7 +1204,9 @@ def set_document_styles(doc):
 
     for style_name in ['List Bullet', 'List Number']:
         style = styles[style_name]
-        style.font.name = DOCX_BODY_LATIN
+        style.font.name = DOCX_BODY_EAST_ASIA
+        style._element.rPr.rFonts.set(qn('w:ascii'), DOCX_BODY_EAST_ASIA)
+        style._element.rPr.rFonts.set(qn('w:hAnsi'), DOCX_BODY_EAST_ASIA)
         style._element.rPr.rFonts.set(qn('w:eastAsia'), DOCX_BODY_EAST_ASIA)
         style._element.rPr.rFonts.set(qn('w:cs'), DOCX_BODY_EAST_ASIA)
         style.font.size = Pt(DOCX_BODY_FONT_SIZE)
@@ -1184,12 +1286,21 @@ def set_document_format(doc, project_name, image_report: dict | None = None):
         section.right_margin = Cm(DOCX_PAGE_MARGIN_RIGHT_CM)
         section.header_distance = Cm(DOCX_HEADER_DISTANCE_CM)
         section.footer_distance = Cm(DOCX_FOOTER_DISTANCE_CM)
+        section.different_first_page_header_footer = True
+        first_header = section.first_page_header
+        if first_header.paragraphs:
+            first_header.paragraphs[0].text = ""
         
         # 添加页眉
         header = section.header
         header_para = header.paragraphs[0]
         header_para.text = ""
         header_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        header_para.paragraph_format.first_line_indent = Pt(0)
+        header_para.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+        header_para.paragraph_format.line_spacing = 1.0
+        header_para.paragraph_format.space_before = Pt(0)
+        header_para.paragraph_format.space_after = Pt(0)
         if _add_taichang_logo(
             header_para,
             width_in=DOCX_HEADER_LOGO_WIDTH_IN,
@@ -1199,9 +1310,9 @@ def set_document_format(doc, project_name, image_report: dict | None = None):
         ):
             header_para.add_run("  ")
         text_run = header_para.add_run(_truncate_header_text(f"{DOCX_BIDDER_FULL_NAME}投标文件"))
-        apply_run_font(text_run, east_asia='宋体', size=9)
+        apply_run_font(text_run, east_asia=DOCX_BODY_EAST_ASIA, size=9)
         for run in header_para.runs:
-            apply_run_font(run, east_asia='宋体', size=9)
+            apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=9)
         
         # 添加页脚
         footer = section.footer
@@ -1235,7 +1346,7 @@ def set_document_format(doc, project_name, image_report: dict | None = None):
         footer_para.add_run(" 页")
         footer_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
         for run in footer_para.runs:
-            apply_run_font(run, east_asia='宋体', size=9)
+            apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=9)
 
 def process_table(md_table, doc):
     """处理 Markdown 表格"""
@@ -1275,7 +1386,7 @@ def process_table(md_table, doc):
             apply_table_paragraph_format(paragraph, alignment=WD_ALIGN_PARAGRAPH.CENTER)
             for run in paragraph.runs:
                 run.bold = True
-                apply_run_font(run, east_asia='宋体', size=DOCX_TABLE_FONT_SIZE, bold=True)
+                apply_run_font(run, east_asia=DOCX_TABLE_EAST_ASIA, size=DOCX_TABLE_FONT_SIZE, bold=True)
     
     # 添加数据行
     for line in lines[2:]:  # 跳过表头和分隔行
@@ -1417,6 +1528,7 @@ def refresh_docx_fields_with_soffice(docx_path: str | Path) -> tuple[Path, dict]
         shutil.copy2(refreshed, temp_refreshed)
         os.replace(str(temp_refreshed), str(source))
         _update_refresh_report(report, status="refreshed", output_path=str(source), size=source.stat().st_size)
+        report["table_header_repeat"] = ensure_docx_table_header_repeat(source)
         report["marker_cleanup"] = scrub_docx_black_square_markers(source)
         report["size"] = source.stat().st_size
         logging.info("LibreOffice 已刷新 DOCX 字段: %s", source)
@@ -1553,17 +1665,17 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
             if level == 1:
                 p.alignment = WD_ALIGN_PARAGRAPH.LEFT
                 for run in p.runs:
-                    apply_run_font(run, east_asia='黑体', size=16, bold=True)
+                    apply_run_font(run, east_asia=DOCX_HEADING_EAST_ASIA, size=16, bold=True)
             elif level == 2:
                 p.alignment = WD_ALIGN_PARAGRAPH.LEFT
                 for run in p.runs:
-                    apply_run_font(run, east_asia='黑体', size=14, bold=True)
+                    apply_run_font(run, east_asia=DOCX_HEADING_EAST_ASIA, size=14, bold=True)
             elif level == 3:
                 for run in p.runs:
-                    apply_run_font(run, east_asia='黑体', size=12, bold=True)
+                    apply_run_font(run, east_asia=DOCX_HEADING_EAST_ASIA, size=12, bold=True)
             else:
                 for run in p.runs:
-                    apply_run_font(run, east_asia='黑体', size=10.5, bold=True)
+                    apply_run_font(run, east_asia=DOCX_HEADING_EAST_ASIA, size=10.5, bold=True)
             if i in heading_entry_by_line:
                 entry = heading_entry_by_line[i]
                 _add_bookmark(p, entry["anchor"], int(entry["bookmark_id"]))

@@ -1324,3 +1324,98 @@ set -a; source .env; set +a; .venv/bin/python scripts/rag/run_taichang_product_p
 
 - P1B-6 PASS。
 - Logo 已稳定进入封面和页眉；正式 DOCX 中整页扫描件和资产图片保持完整显示，没有裁剪标记和比例变形。
+
+---
+
+## Run 25 — P1B-7 泰昌 MVP 资料完整性评分（2026-06-12）
+
+> 完整性评分表：`docs/rag/taichang-material-completeness-scorecard.md`  
+> 增量门禁：`docs/rag/runs/run_20260612_taichang_material_completeness_scorecard_summary.md`  
+> 真实 Stream：`docs/rag/runs/run_20260612_taichang_material_completeness_scorecard_stream.md`
+
+### 处理内容
+
+- 新增泰昌 MVP 资料完整性评分表，按标书章节和资料域评估企业基本情况、资质证书、财务、检验报告、产品实物、生产制造、试验检测、绿色低碳、人员、项目业绩、偏差表、签章授权、招标场景样本、标准规范和 DOCX 交付版式。
+- 明确区分“MVP 演示可用”和“正式投标资料完整”：当前 MVP 演示与本地试点可用度为 86/100，正式投标资料完整度为 76/100。
+- 将客户仍需补充或确认的资料分为 P0/P1/P2：目标项目招标文件与第六章格式、目标规格参数覆盖、投标保证值、签章授权、正确 GB/DL 标准 PDF、验收/履约证明、产品实物照片、银行资信和信用证明等。
+
+### 真实链路验证
+
+真实 DB + `/api/bidding/knowledge/search/stream` 专项验证：
+
+| 指标 | 结果 |
+| --- | ---: |
+| 补充批次文档 | 24 |
+| 补充批次 chunks | 1900 |
+| 补充批次图片资产 | 297 |
+| 异常资产 metadata | 0 |
+| 复合合同/中标通知书问题 | HTTP 200，5 个文本上下文 / 8 个资产，PASS |
+| Logo/生产线/产品图片问题 | HTTP 200，5 个文本上下文 / 8 个资产，PASS |
+| CPVC/MPP 检验报告参数问题 | HTTP 200，5 个文本上下文 / 8 个资产，PASS |
+
+### 增量回归门禁
+
+| 测试集 | 模式 | Recall@5 | Top1 | MRR | 禁用关键词 | 跨域串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 258 ms |
+| Base | qwen3 | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 572 ms |
+| 泰昌专项 | off | 93.3% | 100.0% | 0.933 | 3.3% | 0.0% | 321 ms |
+| 泰昌专项 | qwen3 | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 656 ms |
+
+### 结论
+
+- Gate PASS，P1B-7 完成。
+- 当前资料可支撑泰昌 MVP 演示、企业知识库问答和正式 DOCX 初稿；正式投标前仍需按目标招标文件补齐或确认 P0/P1 清单中的规格覆盖、偏差保证值、签章授权、验收/履约证明和正确标准 PDF。
+
+---
+
+## Run 26 — DeepSeek 全量重写完整标书与客户版导出回归（2026-06-12）
+
+> DeepSeek 全量重写记录：`docs/development/runs/run_20260612_taichang_deepseek_full_rewrite.md`  
+> DOCX/PDF 验收记录：`docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`  
+> RAG 增量门禁：`docs/rag/runs/run_20260612_taichang_full_bid_deepseek_rewrite_regression_summary.md`
+
+### 处理内容
+
+- 针对客户反馈修复正式标书导出问题：封面首页清空页眉 Logo，正文页保留泰昌页眉；Logo 自动裁白并解除固定行距裁切；正文使用 `SimSun`、标题使用 `Arial Unicode MS`，并统一 DOCX 四类字体字段，避免 PDF 字体替换异常。
+- 新增 `scripts/rag/regenerate_taichang_full_bid_deepseek.py`，按章节先清空旧正文，再调用真实 DeepSeek 生成并保存，不使用历史 30 章正文替换。
+- 新增/增强客户验收检查：封面首页页眉为空、配置中文字体存在、空章节数、目录点引导线、页脚页码字段、图片插入、表格版式、内部字段泄漏和重复父章节标题。
+
+### 真实 DeepSeek 生成结果
+
+| 项目 | 结果 |
+| --- | ---: |
+| 模型 | `deepseek-v4-flash` |
+| 目标章节 | 74 |
+| 成功章节 | 74 |
+| 失败章节 | 0 |
+| 生成耗时 | 1979.87 秒 |
+
+### 真实 DOCX/PDF 导出结果
+
+| 指标 | 结果 |
+| --- | ---: |
+| 有正文章节 | 74/74 |
+| Markdown 字符数 | 166913 |
+| DOCX 段落 | 2747 |
+| DOCX 标题 | 74 |
+| 目录条目 | 65 |
+| 表格数量 | 109 |
+| 图片选中/插入/失败 | 24 / 24 / 0 |
+| 封面首页页眉为空 | 通过 |
+| 配置中文字体检查 | 通过 |
+| PDF 预览 | 已生成 |
+
+### 增量回归门禁
+
+| 测试集 | 模式 | Recall@5 | Top1 | MRR | 禁用关键词 | 跨域串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 228 ms |
+| Base | qwen3 | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 592 ms |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% | 311 ms |
+| 泰昌专项 | qwen3 | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 639 ms |
+
+### 结论
+
+- Gate PASS。
+- 本轮客户版完整标书已经完成真实 DeepSeek 全量章节重写、正式 DOCX 导出、LibreOffice 字段刷新、PDF 生成和 Base + 泰昌专项增量回归。

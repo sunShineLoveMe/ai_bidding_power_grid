@@ -91,7 +91,8 @@
 | P1B-4 | [x] | 补充包扫描 PDF OCR 增强 | `scripts/rag/run_taichang_supplement_mineru_ocr.py`、`parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/p1b_mineru_ocr_report.md`、`docs/rag/runs/run_20260612_taichang_supplement_p1b_mineru_ocr_fix2_summary.md` | 15 份低文本/无文本扫描 PDF 已走真实 MinerU OCR，Manifest 更新 15 份；本批文本资料入库扩展为 24 份、1900 个 chunk；真实 stream 与增量回归门禁 PASS |
 | P1B-5 | [x] | 项目业绩结构化抽取 | `scripts/rag/extract_taichang_project_performance.py`、`parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/staging/taichang_project_performance/`、`docs/rag/runs/run_20260612_taichang_project_performance_p1b5_summary.md` | 已从合同协议书和中标通知书交叉抽取 1 项业绩、2 份证据、每份 9 行明细；确认招标编号 `0322AB`、包2、总数量 54,678 米、含税金额 6,372,409.05 元；合同签署日期原件为空且未推断；真实 stream 与 Base+泰昌专项增量门禁 PASS |
 | P1B-6 | [x] | Logo 与图片资产 DOCX 版式验证 | `backend/export/md_to_word.py`、`scripts/rag/verify_taichang_supplement_docx.py`、`docs/development/runs/run_20260612_taichang_supplement_p1b6_logo_image_layout.md` | 已接入高清 `assets/icons/taichang_logo.png`，封面和页眉均插入 Logo；真实 DOCX 导出 selected 24、inserted 24、failed 0，补充包图片 18 张；DOCX 图片裁剪标记 0，27 个内联图片比例检查通过，最大比例偏差 0.000101；LibreOffice 字段刷新成功 |
-| P1B-7 | [ ] | 泰昌 MVP 资料完整性评分 | 资料完整度清单或页面数据源 | 按标书章节标出资料充足/缺口：资格证照、财务、检验报告、生产检测、绿色低碳、同类业绩、验收证明、项目现场图等 |
+| P1B-7 | [x] | 泰昌 MVP 资料完整性评分 | `docs/rag/taichang-material-completeness-scorecard.md`、`docs/rag/runs/run_20260612_taichang_material_completeness_scorecard_summary.md`、`docs/rag/runs/run_20260612_taichang_material_completeness_scorecard_stream.md` | 已按标书章节和资料域标出资料充足/缺口：MVP 演示可用度 86/100、正式投标资料完整度 76/100；真实增量回归门禁 PASS，真实 DB + stream 验证 PASS |
+| P1B-8 | [x] | DeepSeek 全量章节重写与客户版 DOCX/PDF 验收 | `scripts/rag/regenerate_taichang_full_bid_deepseek.py`、`docs/development/runs/run_20260612_taichang_deepseek_full_rewrite.md`、`docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`、`docs/rag/runs/run_20260612_taichang_full_bid_deepseek_rewrite_regression_summary.md` | 已按 74 个章节清空旧正文后真实调用 `deepseek-v4-flash` 全量重写，成功 74、失败 0；正式导出链路 PASS，74/74 章节有正文，封面首页页眉为空，Logo 完整显示，错误分标占位已过滤，PDF 字体使用 `SimSun` / `Arial Unicode MS` 且视觉验证正常，图片 24/24 插入，表格 109 个；Base + 泰昌专项增量回归 Gate PASS |
 
 ## P3：召回质量增强
 
@@ -137,5 +138,5 @@
 
 1. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表，让页面和问答可直接按企业、产品、规格、参数名精确查询。
 2. 仅在明确目标省公司/批次/规格和客户确认口径后，再把泰昌产品参数用于具体投标偏差判断；不得默认以辽宁样本推出泰昌覆盖义务。
-3. 按 P1B 清单继续推进泰昌补充资料的项目业绩结构化、Logo 封面/页眉插入和资料完整性评分。
-4. 追加导出观感人工验收：打开 30 章节真实 DOCX，检查封面、目录、正文、表格、页眉页脚、页码和正式图片资产插入效果。
+3. P1B 泰昌补充资料质量增强已完成；后续新增资料按 `docs/rag/taichang-material-completeness-scorecard.md` 的 P0/P1/P2 补资料清单更新评分，并重跑真实回归。
+4. 客户演示完整标书已完成 DeepSeek 全量章节重写和真实 DOCX/PDF 验收：见 `docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`；后续若客户更换目标招标文件或 Word 模板，需重新生成章节、重新导出并复跑验收。

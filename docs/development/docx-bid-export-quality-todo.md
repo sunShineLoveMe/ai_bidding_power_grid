@@ -1,6 +1,6 @@
 # 标书文档编写与正式导出质量待办清单
 
-更新日期：2026-06-11
+更新日期：2026-06-12
 
 范围：标书正文编写、封面/目录/页眉页脚、图表与表格、DOCX 字段刷新、真实导出验收、后续 PDF/模板化能力。本文档用于管理客户最终交付物质量，优先级高于普通导出功能优化。
 
@@ -32,7 +32,7 @@
 | 状态 | 任务 | 验收口径 |
 | --- | --- | --- |
 | 待办 | 格式方案选择 | 提供“国网/泰昌标准格式、通用正式标书、紧凑上传版、图文展示版”，默认国网/泰昌 |
-| 待办 | 格式预检报告 | 检查目录缺失、页码未刷新、表格越界、图片失败、非泰昌资产误用 |
+| 脚本版已完成 | 格式预检报告 | `scripts/rag/verify_taichang_full_bid_acceptance.py` 已检查目录缺失、页码字段、表格格式、图片失败/裁剪/比例、内部字段泄露、重复父章节标题和补充包资产选中；后续再接入页面/导出任务 metadata |
 | 待办 | 分册格式 | 商务标、技术标、资信标支持不同封面字段、目录和页眉文案 |
 | 待办 | 第六章格式表单保真 | 偏差表、承诺函、签章表单等优先保留结构和占位 |
 | 待办 | 导出任务 metadata 扩充 | 记录格式方案、封面字段、目录层级、图表题注、格式告警 |
@@ -127,7 +127,7 @@
 - 高清 Logo 已接入正式 DOCX：默认使用 `assets/icons/taichang_logo.png`，不使用旧低清 `taichang.png`，WebP 仅作为网页端备选。
 - 封面和页眉均插入泰昌 Logo，保持原始宽高比；封面显示尺寸约 `1.65in x 1.1in`，页眉约 `0.55in x 0.3667in`。
 - Markdown 图片插入策略已改为按可用宽高等比例缩放，不做裁剪、不填充固定框；整页 PDF 渲染图、合同页、证书页和检验报告页均保持完整页面。
-- 自动化回归：`PYTHONPATH=. .venv/bin/pytest tests/test_docx_export.py tests/test_rag_asset_scoring.py tests/test_rag_retrieval.py -q`，结果 `58 passed, 1 warning`。
+- 自动化回归：`PYTHONPATH=. .venv/bin/pytest tests/test_docx_export.py tests/test_rag_asset_scoring.py tests/test_rag_retrieval.py -q`，结果 `59 passed, 1 warning`。
 - 真实导出链路：项目 `4bc3ee73-9ec5-4184-aafd-eaede9f90798`，执行 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
 - 验证记录：`docs/development/runs/run_20260612_taichang_supplement_p1b6_logo_image_layout.md` 和 `docs/development/runs/run_20260612_taichang_supplement_p1b6_logo_image_layout.json`。
 - 本次真实导出结果：图片 candidates/selected 为 `597/24`，补充包选中 `18` 张；DOCX 图片 found/inserted/skipped/failed 为 `24/24/0/0`；DOCX 图片裁剪标记 `0`，内联图片比例检查 `27` 个，最大比例偏差 `0.000101`，LibreOffice 字段刷新成功。
@@ -151,3 +151,26 @@
 - 验证记录：`docs/development/runs/run_20260611_taichang_supplement_p1b_docx_export.md` 和 `docs/development/runs/run_20260611_taichang_supplement_p1b_docx_export.json`。
 - 本次真实导出结果：图片候选 `597`，选中 `24`，插入 `24`，失败 `0`；其中 `18` 张来自 `customer_taichang_supplement_20260611`，覆盖基础证照、资质证书、项目业绩、中标通知书/合同、生产制造、试验检测和检验报告；LibreOffice 字段刷新成功。
 - 后续状态：官方 Logo 封面/页眉插入已在 2026-06-12 P1B-6 中关闭。
+
+### 2026-06-12 客户演示完整标书验收记录
+
+- 背景：客户演示前需要真实生成一份完整泰昌投标文件，并做硬性成品验收。
+- 新增验收脚本：`scripts/rag/verify_taichang_full_bid_acceptance.py`。
+- 首轮真实验收发现并修复：
+  - 正文小标题仍残留 `父章节 - 子章节` 样式，例如 `发包人要求响应 - 总体部署`，已在导出层清理编号前缀后兜底移除。
+  - LibreOffice roundtrip 后个别表格丢失首行重复表头属性，已在字段刷新后统一补 `w:tblHeader`。
+  - 验收脚本页脚字段检查改为读取全 DOCX XML，避免漏检 footer 中的 `PAGE/NUMPAGES` 字段。
+- 自动化回归：`PYTHONPATH=. .venv/bin/pytest tests/test_docx_export.py tests/test_rag_asset_scoring.py tests/test_rag_retrieval.py -q`，结果 `58 passed, 1 warning`。
+- 真实导出链路：项目 `4bc3ee73-9ec5-4184-aafd-eaede9f90798`，执行 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`，并用 LibreOffice 额外生成 PDF 预览。
+- 验证记录：`docs/development/runs/run_20260612_taichang_full_bid_customer_acceptance.md` 和 `docs/development/runs/run_20260612_taichang_full_bid_customer_acceptance.json`。
+- 本次真实验收结果：状态 `PASS`；源项目 74 个章节节点、53 个有正文；DOCX 目录条目 65、表格 60、图片选中 24/插入 24/失败 0；表格全宽、固定布局、表头跨页重复均通过；页脚 `PAGE/NUMPAGES` 字段存在；LibreOffice 字段刷新成功；PDF 预览 127 页。
+
+### 2026-06-12 DeepSeek 全量重写与客户版 DOCX/PDF 验收记录
+
+- 背景：客户验收反馈上一版封面首页页眉多出 Logo、PDF 字体替换异常、`投标函及投标函附录` 等章节未真实生成正文。
+- 修复：封面首页启用独立首页页眉并清空，正文页仍保留泰昌页眉；Logo 插入前自动裁白，封面/页眉图片段落改为单倍行距，避免固定 20pt 行距裁切图片；DOCX 正文使用 LibreOffice 可稳定解析的 `SimSun`，标题使用 `Arial Unicode MS`，并统一写入 `ascii/hAnsi/eastAsia/cs` 字体字段，避免 macOS PDF 导出替换字体；验收脚本新增首页页眉为空和配置中文字体检查。
+- 真实 DeepSeek 全量重写：执行 `scripts/rag/regenerate_taichang_full_bid_deepseek.py --run-id run_20260612_taichang_deepseek_full_rewrite`，模型 `deepseek-v4-flash`，74 个章节全部清空后重新生成，成功 74、失败 0，旧正文哈希备份见 `docs/development/runs/run_20260612_taichang_deepseek_full_rewrite_before_sections_backup.json`。
+- 自动化回归：`PYTHONPATH=. .venv/bin/pytest tests/test_docx_export.py tests/test_rag_asset_scoring.py tests/test_rag_retrieval.py -q`，结果 `58 passed, 1 warning`。
+- 真实导出链路：项目 `4bc3ee73-9ec5-4184-aafd-eaede9f90798`，执行 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`，并用 LibreOffice 生成 PDF。
+- 验证记录：`docs/development/runs/run_20260612_taichang_deepseek_full_rewrite.md`、`docs/development/runs/run_20260612_taichang_full_bid_final_v6.md` 和对应 JSON。
+- 本次真实验收结果：状态 `PASS`；源项目 74 个章节节点、74 个有正文；Markdown `166913` 字符；DOCX 段落 `2747`、标题 `74`、目录条目 `65`、表格 `109`；图片选中 `24`、插入 `24`、失败 `0`；封面首页页眉为空、目录点引导线和 `PAGEREF` 存在、页脚 `PAGE/NUMPAGES` 字段存在、配置中文字体检查通过、无内部检索字段泄漏、无重复父章节标题、无黑色方块分页标记、PDF 预览生成成功。

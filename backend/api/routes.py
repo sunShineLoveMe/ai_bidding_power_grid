@@ -301,6 +301,7 @@ def _strip_redundant_section_label(content: str, section: dict) -> str:
         stripped = raw_line.strip()
         label = stripped.strip("【】[]（）()# ：:、，,。")
         label = re.sub(r"^[一二三四五六七八九十百]+[、.．]\s*", "", label)
+        label = _strip_existing_section_number(label)
         if not removed and label in candidates:
             removed = True
             continue

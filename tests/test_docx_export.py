@@ -19,8 +19,10 @@ from backend.api.routes import (
 )
 from backend.export.md_to_word import (
     DOCX_BIDDER_FULL_NAME,
+    DOCX_BODY_EAST_ASIA,
     DOCX_BODY_FIRST_LINE_INDENT_PT,
     DOCX_BODY_LINE_SPACING,
+    DOCX_TABLE_EAST_ASIA,
     DOCX_LIST_HANGING_INDENT_PT,
     DOCX_LIST_LEFT_INDENT_PT,
     convert_md_to_word,
@@ -784,19 +786,19 @@ class DocxExportRegressionTest(unittest.TestCase):
 
             self.assertEqual("sgcc_taichang_bid", report["template"]["template_id"])
             self.assertEqual(DOCX_BIDDER_FULL_NAME, report["template"]["bidder_full_name"])
-            self.assertEqual("宋体", report["template"]["body_font"])
+            self.assertEqual(DOCX_BODY_EAST_ASIA, report["template"]["body_font"])
             self.assertEqual(DOCX_BODY_FIRST_LINE_INDENT_PT, report["template"]["body_first_line_indent_pt"])
             self.assertEqual(DOCX_LIST_LEFT_INDENT_PT, report["template"]["list_left_indent_pt"])
             self.assertEqual(DOCX_LIST_HANGING_INDENT_PT, report["template"]["list_hanging_indent_pt"])
             self.assertFalse(report["template"]["heading_keep_with_next"])
             self.assertEqual(16, report["template"]["table_line_spacing_pt"])
-            self.assertEqual("宋体", normal._element.rPr.rFonts.get(qn("w:eastAsia")))
-            self.assertEqual("宋体", body_rfonts.get(qn("w:eastAsia")))
+            self.assertEqual(DOCX_BODY_EAST_ASIA, normal._element.rPr.rFonts.get(qn("w:eastAsia")))
+            self.assertEqual(DOCX_BODY_EAST_ASIA, body_rfonts.get(qn("w:eastAsia")))
             self.assertEqual(10.5, body_run.font.size.pt)
             self.assertEqual(WD_LINE_SPACING.EXACTLY, body_paragraph.paragraph_format.line_spacing_rule)
             self.assertEqual(DOCX_BODY_LINE_SPACING, body_paragraph.paragraph_format.line_spacing.pt)
             self.assertEqual(DOCX_BODY_FIRST_LINE_INDENT_PT, body_paragraph.paragraph_format.first_line_indent.pt)
-            self.assertEqual("宋体", table_run._element.rPr.rFonts.get(qn("w:eastAsia")))
+            self.assertEqual(DOCX_TABLE_EAST_ASIA, table_run._element.rPr.rFonts.get(qn("w:eastAsia")))
             self.assertEqual(10.5, table_run.font.size.pt)
             self.assertEqual("5000", table_width.get(qn("w:w")))
             self.assertEqual("pct", table_width.get(qn("w:type")))
@@ -1014,6 +1016,21 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertEqual("2225AC", fields["招标编号"])
         self.assertEqual("电缆保护管MPP", fields["分标名称"])
 
+    def test_extract_bid_cover_fields_rejects_adjacent_field_name_as_value(self):
+        fields = extract_bid_cover_fields(
+            "\n".join(
+                [
+                    "# 投标文件",
+                    "",
+                    "招标编号：2225AC",
+                    "分标编号：分标名称",
+                ]
+            )
+        )
+
+        self.assertEqual("2225AC", fields["招标编号"])
+        self.assertNotIn("分标编号", fields)
+
     def test_docx_cover_prefers_structured_tender_fields_over_markdown_fallback(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             markdown_path = Path(tmpdir) / "cover.md"
@@ -1124,8 +1141,9 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertTrue(report["logo"]["cover"]["inserted"])
             self.assertTrue(report["logo"]["header"]["inserted"])
             self.assertIn("taichang_logo.png", report["logo"]["cover"]["path"])
-            self.assertEqual(report["logo"]["cover"]["pixel_width"], 2508)
-            self.assertEqual(report["logo"]["cover"]["pixel_height"], 1672)
+            self.assertTrue(report["logo"]["cover"]["auto_cropped"])
+            self.assertGreater(report["logo"]["cover"]["pixel_width"], 1000)
+            self.assertGreater(report["logo"]["cover"]["pixel_height"], 600)
             self.assertTrue(report["logo"]["cover"]["aspect_ratio_preserved"])
             with ZipFile(output_path) as archive:
                 media_names = [name for name in archive.namelist() if name.startswith("word/media/")]
