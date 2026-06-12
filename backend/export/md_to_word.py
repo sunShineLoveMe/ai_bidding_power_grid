@@ -85,6 +85,10 @@ DOCX_TOC_ENTRY_FONT_SIZE = float(os.getenv("DOCX_TOC_ENTRY_FONT_SIZE", "10.5"))
 DOCX_TOC_ENTRY_LINE_SPACING = float(os.getenv("DOCX_TOC_ENTRY_LINE_SPACING", "18"))
 DOCX_TABLE_LINE_SPACING = float(os.getenv("DOCX_TABLE_LINE_SPACING", "16"))
 DOCX_TABLE_CELL_MARGIN_TWIPS = int(os.getenv("DOCX_TABLE_CELL_MARGIN_TWIPS", "100"))
+DOCX_TAICHANG_LOGO_PATH = os.getenv("DOCX_TAICHANG_LOGO_PATH", "assets/icons/taichang_logo.png")
+DOCX_COVER_LOGO_WIDTH_IN = float(os.getenv("DOCX_COVER_LOGO_WIDTH_IN", "1.65"))
+DOCX_HEADER_LOGO_WIDTH_IN = float(os.getenv("DOCX_HEADER_LOGO_WIDTH_IN", "0.55"))
+DOCX_IMAGE_MAX_HEIGHT_IN = float(os.getenv("DOCX_IMAGE_MAX_HEIGHT_IN", "9.0"))
 
 COVER_FIELD_LABELS = (
     "项目名称",
@@ -450,6 +454,102 @@ def _page_text_width_twips(doc) -> int:
     return max(7200, int((section.page_width - section.left_margin - section.right_margin) / 635))
 
 
+def _length_to_inches(value) -> float:
+    return float(value) / 914400
+
+
+def _page_text_width_inches(doc) -> float:
+    section = doc.sections[0]
+    return max(1.0, _length_to_inches(section.page_width - section.left_margin - section.right_margin))
+
+
+def _page_text_height_inches(doc) -> float:
+    section = doc.sections[0]
+    return max(1.0, _length_to_inches(section.page_height - section.top_margin - section.bottom_margin))
+
+
+def _image_pixel_size(image_path: str | Path) -> tuple[int, int] | None:
+    if Image is None:
+        return None
+    try:
+        with Image.open(image_path) as image:
+            return image.size
+    except Exception:
+        logging.exception("读取图片尺寸失败: %s", image_path)
+        return None
+
+
+def _fit_image_dimensions_for_docx(
+    image_path: str | Path,
+    *,
+    max_width_in: float,
+    max_height_in: float | None = None,
+) -> tuple[float, float | None, dict]:
+    """Return dimensions that fit the image without cropping or aspect distortion."""
+    pixel_size = _image_pixel_size(image_path)
+    if not pixel_size:
+        return max_width_in, None, {
+            "pixel_width": None,
+            "pixel_height": None,
+            "display_width_in": max_width_in,
+            "display_height_in": None,
+            "aspect_ratio_preserved": None,
+        }
+    pixel_width, pixel_height = pixel_size
+    if pixel_width <= 0 or pixel_height <= 0:
+        return max_width_in, None, {
+            "pixel_width": pixel_width,
+            "pixel_height": pixel_height,
+            "display_width_in": max_width_in,
+            "display_height_in": None,
+            "aspect_ratio_preserved": None,
+        }
+    max_height_in = max_height_in or DOCX_IMAGE_MAX_HEIGHT_IN
+    ratio = pixel_height / pixel_width
+    display_width = max_width_in
+    display_height = display_width * ratio
+    if display_height > max_height_in:
+        display_height = max_height_in
+        display_width = display_height / ratio
+    aspect_delta = abs((display_width / display_height) - (pixel_width / pixel_height)) if display_height else 0
+    return display_width, display_height, {
+        "pixel_width": pixel_width,
+        "pixel_height": pixel_height,
+        "display_width_in": round(display_width, 4),
+        "display_height_in": round(display_height, 4),
+        "aspect_ratio_preserved": aspect_delta < 0.001,
+    }
+
+
+def _taichang_logo_path() -> Path | None:
+    path = Path(DOCX_TAICHANG_LOGO_PATH)
+    if not path.is_absolute():
+        path = Path(__file__).resolve().parents[2] / path
+    return path if path.exists() and path.is_file() else None
+
+
+def _add_taichang_logo(paragraph, *, width_in: float, max_height_in: float, report: dict | None = None, placement: str = "unknown") -> bool:
+    logo_path = _taichang_logo_path()
+    if not logo_path:
+        if report is not None:
+            report.setdefault("logo", {})[placement] = {"inserted": False, "reason": "logo file missing"}
+        return False
+    width, height, metrics = _fit_image_dimensions_for_docx(
+        logo_path,
+        max_width_in=width_in,
+        max_height_in=max_height_in,
+    )
+    run = paragraph.add_run()
+    run.add_picture(str(logo_path), width=Inches(width), height=Inches(height) if height else None)
+    if report is not None:
+        report.setdefault("logo", {})[placement] = {
+            "inserted": True,
+            "path": str(logo_path),
+            **metrics,
+        }
+    return True
+
+
 def _set_table_element_value(parent, tag: str, **attrs) -> OxmlElement:
     node = parent.find(qn(tag))
     if node is None:
@@ -575,9 +675,21 @@ def _add_formal_toc_entry(doc, entry: dict, *, tab_position_twips: int) -> None:
     _add_pageref_field(paragraph, str(entry.get("anchor") or ""), placeholder="1")
 
 
-def _add_cover_page(doc, project_name: str, cover_fields: dict | None = None) -> None:
+def _add_cover_page(doc, project_name: str, cover_fields: dict | None = None, image_report: dict | None = None) -> None:
     bid_title = taichang_bid_document_title((cover_fields or {}).get("项目名称") or project_name)
-    spacer_count = 4
+    logo_para = doc.add_paragraph()
+    logo_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    logo_para.paragraph_format.first_line_indent = Pt(0)
+    logo_para.paragraph_format.space_after = Pt(18)
+    _add_taichang_logo(
+        logo_para,
+        width_in=DOCX_COVER_LOGO_WIDTH_IN,
+        max_height_in=1.1,
+        report=image_report,
+        placement="cover",
+    )
+
+    spacer_count = 2
     for _ in range(spacer_count):
         doc.add_paragraph()
 
@@ -626,8 +738,8 @@ def _add_cover_page(doc, project_name: str, cover_fields: dict | None = None) ->
     doc.add_page_break()
 
 
-def _add_toc_page(doc, project_name: str, heading_entries: list[dict], cover_fields: dict | None = None) -> None:
-    _add_cover_page(doc, project_name, cover_fields=cover_fields)
+def _add_toc_page(doc, project_name: str, heading_entries: list[dict], cover_fields: dict | None = None, image_report: dict | None = None) -> None:
+    _add_cover_page(doc, project_name, cover_fields=cover_fields, image_report=image_report)
 
     toc_title = doc.add_paragraph()
     toc_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -924,7 +1036,12 @@ def process_markdown_image(doc, alt_text, image_ref, image_cache=None, image_rep
             })
             return False
         prepared_path, prepared_cleanup = _prepare_docx_image(image_path)
-        doc.add_picture(prepared_path, width=Inches(5.8))
+        width_in, height_in, metrics = _fit_image_dimensions_for_docx(
+            prepared_path,
+            max_width_in=min(5.8, _page_text_width_inches(doc)),
+            max_height_in=min(DOCX_IMAGE_MAX_HEIGHT_IN, _page_text_height_inches(doc)),
+        )
+        doc.add_picture(prepared_path, width=Inches(width_in), height=Inches(height_in) if height_in else None)
         image_para = doc.paragraphs[-1]
         image_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
         apply_image_paragraph_format(image_para)
@@ -935,6 +1052,7 @@ def process_markdown_image(doc, alt_text, image_ref, image_cache=None, image_rep
             "ref": image_ref,
             "source_path": str(image_path),
             "prepared": bool(prepared_cleanup),
+            "fit": metrics,
         })
         return True
     except Exception as exc:
@@ -1052,7 +1170,7 @@ def set_document_language(doc):
         settings.append(update_fields)
     update_fields.set(qn('w:val'), 'true')
 
-def set_document_format(doc, project_name):
+def set_document_format(doc, project_name, image_report: dict | None = None):
     """设置文档格式"""
     project_name = clean_formal_bid_text(project_name) or "投标文件"
     # 设置页面边距
@@ -1070,8 +1188,18 @@ def set_document_format(doc, project_name):
         # 添加页眉
         header = section.header
         header_para = header.paragraphs[0]
-        header_para.text = _truncate_header_text(f"{DOCX_BIDDER_FULL_NAME}投标文件")
+        header_para.text = ""
         header_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        if _add_taichang_logo(
+            header_para,
+            width_in=DOCX_HEADER_LOGO_WIDTH_IN,
+            max_height_in=0.38,
+            report=image_report,
+            placement="header",
+        ):
+            header_para.add_run("  ")
+        text_run = header_para.add_run(_truncate_header_text(f"{DOCX_BIDDER_FULL_NAME}投标文件"))
+        apply_run_font(text_run, east_asia='宋体', size=9)
         for run in header_para.runs:
             apply_run_font(run, east_asia='宋体', size=9)
         
@@ -1305,24 +1433,6 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
     doc = Document()
     set_document_styles(doc)
     set_document_language(doc)
-    
-    # 设置文档格式
-    title_match = re.search(r'^\s*#\s+(.+?)\s*$', md_content, re.MULTILINE)
-    markdown_project_name = clean_formal_bid_text(title_match.group(1).strip()) if title_match else Path(md_file).stem
-    project_name = (cover_fields or {}).get("项目名称") or markdown_project_name
-    project_name = taichang_bid_document_title(project_name)
-    set_document_format(doc, project_name)
-    title_line_index, heading_entries = _markdown_heading_lines(md_content)
-    heading_entry_by_line = {entry["line_index"]: entry for entry in heading_entries}
-    markdown_cover_fields = extract_bid_cover_fields(md_content)
-    resolved_cover_fields = merge_bid_cover_fields(markdown_cover_fields, cover_fields)
-    _add_toc_page(doc, project_name, heading_entries, cover_fields=resolved_cover_fields)
-    
-    # 处理Markdown内容
-    lines = md_content.split('\n')
-    i = 0
-    image_cache = {}
-    inserted_image_count = 0
     image_report = {
         "max_images": MARKDOWN_IMAGE_MAX_COUNT,
         "found": 0,
@@ -1330,12 +1440,31 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
         "skipped": 0,
         "failed": 0,
         "events": [],
+        "logo": {},
         "mermaid": {
             "found": 0,
             "inserted": 0,
             "skipped": 0,
         },
     }
+    
+    # 设置文档格式
+    title_match = re.search(r'^\s*#\s+(.+?)\s*$', md_content, re.MULTILINE)
+    markdown_project_name = clean_formal_bid_text(title_match.group(1).strip()) if title_match else Path(md_file).stem
+    project_name = (cover_fields or {}).get("项目名称") or markdown_project_name
+    project_name = taichang_bid_document_title(project_name)
+    set_document_format(doc, project_name, image_report=image_report)
+    title_line_index, heading_entries = _markdown_heading_lines(md_content)
+    heading_entry_by_line = {entry["line_index"]: entry for entry in heading_entries}
+    markdown_cover_fields = extract_bid_cover_fields(md_content)
+    resolved_cover_fields = merge_bid_cover_fields(markdown_cover_fields, cover_fields)
+    _add_toc_page(doc, project_name, heading_entries, cover_fields=resolved_cover_fields, image_report=image_report)
+    
+    # 处理Markdown内容
+    lines = md_content.split('\n')
+    i = 0
+    image_cache = {}
+    inserted_image_count = 0
     heading_count = 0
     while i < len(lines):
         line = lines[i].strip()

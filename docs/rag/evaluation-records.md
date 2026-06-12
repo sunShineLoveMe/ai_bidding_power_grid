@@ -1294,3 +1294,33 @@ set -a; source .env; set +a; .venv/bin/python scripts/rag/run_taichang_product_p
 
 - Gate PASS，P1B-5 完成。
 - 后续新增合同、中标通知书、验收单或发票时，按 `AGENTS.md` 中“泰昌项目业绩结构化抽取 SOP”重跑并记录差异。
+
+---
+
+## Run 24 — P1B-6 Logo 与图片资产 DOCX 版式验证（2026-06-12）
+
+> 验证报告：`docs/development/runs/run_20260612_taichang_supplement_p1b6_logo_image_layout.md`
+
+### 处理内容
+
+- 正式 DOCX 封面和页眉接入高清 `assets/icons/taichang_logo.png`。
+- 正文图片插入改为按可用宽高等比例缩放，不做裁剪、不按固定框填充。
+- 验证脚本新增 DOCX 图片版式审计：检查 `a:srcRect` 裁剪标记、媒体原始宽高比和 Word 内联显示宽高比。
+
+### 真实导出结果
+
+| 项目 | 结果 |
+| --- | ---: |
+| 图片候选 | 597 |
+| 自动选图 | 24 |
+| 补充包选中图片 | 18 |
+| 图片插入 | 24 |
+| 图片失败 | 0 |
+| DOCX 图片裁剪标记 | 0 |
+| 比例检查图片 | 27 |
+| 最大比例偏差 | 0.000101 |
+
+### 结论
+
+- P1B-6 PASS。
+- Logo 已稳定进入封面和页眉；正式 DOCX 中整页扫描件和资产图片保持完整显示，没有裁剪标记和比例变形。

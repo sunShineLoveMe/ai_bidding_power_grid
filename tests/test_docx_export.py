@@ -1114,6 +1114,54 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertEqual(report["inserted"], 1)
             self.assertEqual(report["skipped"], 1)
 
+    def test_docx_cover_and_header_insert_high_resolution_taichang_logo(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            markdown_path = Path(tmpdir) / "logo.md"
+            markdown_path.write_text("# 测试投标文件\n\n# 1. 企业简介\n\n正文内容。\n", encoding="utf-8")
+
+            output_path, report = convert_md_to_word(markdown_path, return_report=True)
+
+            self.assertTrue(report["logo"]["cover"]["inserted"])
+            self.assertTrue(report["logo"]["header"]["inserted"])
+            self.assertIn("taichang_logo.png", report["logo"]["cover"]["path"])
+            self.assertEqual(report["logo"]["cover"]["pixel_width"], 2508)
+            self.assertEqual(report["logo"]["cover"]["pixel_height"], 1672)
+            self.assertTrue(report["logo"]["cover"]["aspect_ratio_preserved"])
+            with ZipFile(output_path) as archive:
+                media_names = [name for name in archive.namelist() if name.startswith("word/media/")]
+                header_xml = "\n".join(
+                    archive.read(name).decode("utf-8", errors="ignore")
+                    for name in archive.namelist()
+                    if name.startswith("word/header")
+                )
+            self.assertGreaterEqual(len(media_names), 1)
+            self.assertIn("<w:drawing>", header_xml)
+
+    def test_markdown_image_is_scaled_without_cropping_or_aspect_distortion(self):
+        from PIL import Image as PILImage
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp = Path(tmpdir)
+            image_path = tmp / "full-page-scan.png"
+            PILImage.new("RGB", (800, 1600), "white").save(image_path)
+            markdown_path = tmp / "image-fit.md"
+            markdown_path.write_text(
+                f"# 图文测试\n\n# 1. 合同整页扫描件\n\n![合同整页扫描件]({image_path})\n",
+                encoding="utf-8",
+            )
+
+            output_path, report = convert_md_to_word(markdown_path, return_report=True)
+            document = Document(str(output_path))
+            body_shape_ratios = [
+                round(shape.width / shape.height, 3)
+                for shape in document.inline_shapes
+                if shape.height
+            ]
+
+            self.assertEqual(report["inserted"], 1)
+            self.assertTrue(report["events"][0]["fit"]["aspect_ratio_preserved"])
+            self.assertIn(0.5, body_shape_ratios)
+
 
 if __name__ == "__main__":
     unittest.main()

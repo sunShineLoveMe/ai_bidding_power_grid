@@ -122,6 +122,16 @@
 - 验证记录：`docs/development/runs/run_20260611_docx_quality_p0_toc_stability.md` 和 `docs/development/runs/run_20260611_docx_quality_p0_toc_stability.json`。
 - 本次真实导出结果：`toc_entry_count=7`，`toc_max_level=1`，目录页码范围 `4-73`；`toc_entries_have_dot_leader=true`、`toc_entries_have_pageref_field=true`、`toc_entries_have_refreshed_page_numbers=true`、`toc_entries_no_black_square_markers=true`、`toc_no_repeated_parent_title_pattern=true`；LibreOffice 字段刷新成功。
 
+### 2026-06-12 Logo 与图片资产版式验收记录
+
+- 高清 Logo 已接入正式 DOCX：默认使用 `assets/icons/taichang_logo.png`，不使用旧低清 `taichang.png`，WebP 仅作为网页端备选。
+- 封面和页眉均插入泰昌 Logo，保持原始宽高比；封面显示尺寸约 `1.65in x 1.1in`，页眉约 `0.55in x 0.3667in`。
+- Markdown 图片插入策略已改为按可用宽高等比例缩放，不做裁剪、不填充固定框；整页 PDF 渲染图、合同页、证书页和检验报告页均保持完整页面。
+- 自动化回归：`PYTHONPATH=. .venv/bin/pytest tests/test_docx_export.py tests/test_rag_asset_scoring.py tests/test_rag_retrieval.py -q`，结果 `58 passed, 1 warning`。
+- 真实导出链路：项目 `4bc3ee73-9ec5-4184-aafd-eaede9f90798`，执行 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
+- 验证记录：`docs/development/runs/run_20260612_taichang_supplement_p1b6_logo_image_layout.md` 和 `docs/development/runs/run_20260612_taichang_supplement_p1b6_logo_image_layout.json`。
+- 本次真实导出结果：图片 candidates/selected 为 `597/24`，补充包选中 `18` 张；DOCX 图片 found/inserted/skipped/failed 为 `24/24/0/0`；DOCX 图片裁剪标记 `0`，内联图片比例检查 `27` 个，最大比例偏差 `0.000101`，LibreOffice 字段刷新成功。
+
 ### 2026-06-11 封面字段结构化来源修复记录
 
 - 封面字段结构化来源补齐已完成：招标文件解析阶段新增 `project_meta.cover_fields`、`cover_field_sources`、`cover_field_missing`，DOCX 导出优先读取结构化字段，OnlyOffice 预览和 Celery 正式导出均接入同一链路。
@@ -140,4 +150,4 @@
 - 真实导出链路：项目 `4bc3ee73-9ec5-4184-aafd-eaede9f90798`，执行 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
 - 验证记录：`docs/development/runs/run_20260611_taichang_supplement_p1b_docx_export.md` 和 `docs/development/runs/run_20260611_taichang_supplement_p1b_docx_export.json`。
 - 本次真实导出结果：图片候选 `597`，选中 `24`，插入 `24`，失败 `0`；其中 `18` 张来自 `customer_taichang_supplement_20260611`，覆盖基础证照、资质证书、项目业绩、中标通知书/合同、生产制造、试验检测和检验报告；LibreOffice 字段刷新成功。
-- 剩余项：官方 Logo 已入资产库，但当前 DOCX 仍未自动插入封面/页眉，后续按 P1B-6 增加封面/页眉 Logo 支持后关闭。
+- 后续状态：官方 Logo 封面/页眉插入已在 2026-06-12 P1B-6 中关闭。
