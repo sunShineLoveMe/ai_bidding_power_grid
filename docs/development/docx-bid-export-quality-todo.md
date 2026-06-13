@@ -185,3 +185,13 @@
 - 真实导出：`build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice -> LibreOffice PDF`，状态 PASS；PDF `208` 页，图片 `24/24/0`，表格 `109`，字段刷新成功。
 - 编号专项检查：普通数字列表最大序号 `12`，PDF 中原异常 `360.`、`361.`、`362.`、`367.`、`368.` 均不存在。
 - 验证记录：`docs/development/runs/run_20260612_taichang_bid_numbering_final.md`。
+
+### 2026-06-12 泰昌企业事实约束重写与最终演示版验收记录
+
+- 背景：客户继续反馈完整标书仍存在事实缺口和旧模板污染，需要按泰昌真实企业事实重新收口，并对残留 `【待补充】` 做客户可执行归类。
+- 修复：新增 `scripts/rag/regenerate_taichang_fact_grounded_bid.py`，将泰昌企业事实包注入章节写作约束，禁止水利施工、桩基、防渗墙、BIM、建造师、施工总承包等不适用内容；74 个章节全部通过真实 `deepseek-v4-flash` 重写。
+- 事实约束重写记录：`docs/development/runs/run_20260612_taichang_fact_grounded_full_rewrite.md`，状态 PASS；目标/成功/失败为 `74/74/0`，标题修正 `30`，占位从 `845` 降至成品 `649`，禁用主题命中 `0`。
+- 真实导出链路：`build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice -> LibreOffice PDF`，验收记录 `docs/development/runs/run_20260612_taichang_fact_grounded_final.md`。
+- 本次真实验收结果：状态 PASS；源项目 74 个章节节点、74 个有正文；DOCX 段落 `2834`、标题 `74`、目录条目 `65`、表格 `130`；图片候选/选中/插入/失败为 `597/24/24/0`；页眉页脚、目录点引导线、`PAGEREF`、`PAGE/NUMPAGES`、中文字体、无黑色方块、无重复父标题、无图片裁剪均通过；LibreOffice 字段刷新成功。
+- 残留占位归类：`docs/rag/taichang-bid-remaining-placeholders-classification-20260612.md` 和 CSV `docs/rag/runs/run_20260612_taichang_fact_grounded_remaining_placeholders.csv`；649 处逐项归类为 P0 `436`、P1 `155`、P2 `58`。
+- 自动化回归：`.venv/bin/python -m pytest tests/test_length_settings.py tests/test_section_generation_autoresume.py tests/test_docx_export.py -q`，结果 `51 passed, 1 warning`。

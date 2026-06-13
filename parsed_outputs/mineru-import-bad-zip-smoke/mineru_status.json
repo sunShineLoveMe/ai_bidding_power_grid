@@ -1,11 +1,11 @@
 {
   "parse_status": "mineru_import_failed",
-  "import_started_at": "2026-06-12T09:25:05Z",
-  "updated_at": "2026-06-12T09:25:05Z",
+  "import_started_at": "2026-06-12T15:08:47Z",
+  "updated_at": "2026-06-12T15:08:47Z",
   "failure_stage": "manual_import",
   "error": "MinerU result zip is invalid: parsed_outputs/mineru-import-bad-zip-smoke/bad.zip",
   "error_type": "MinerUDownloadError",
   "user_message": "MinerU 结果 zip 导入失败，请确认 zip 文件完整且包含 full.md 或 content_list 产物。",
   "retryable": true,
-  "failed_at": "2026-06-12T09:25:05Z"
+  "failed_at": "2026-06-12T15:08:47Z"
 }

@@ -10,6 +10,35 @@ from backend.ai.length_settings import (
 
 
 class LengthSettingsTest(unittest.TestCase):
+
+    def test_section_prompt_includes_fact_grounding_and_forbidden_topics(self):
+        from backend.ai.section_writer import build_section_prompt
+
+        payload = {
+            "project": {"project_name": "测试项目", "project_no": "TEST-001"},
+            "analysis": {"summary": "测试摘要", "project_meta": {}},
+        }
+        chapter = {
+            "title": "企业基本资格资料",
+            "purpose": "说明企业资格事实",
+            "metadata": {
+                "generation_options": {
+                    "factual_context": "- 统一社会信用代码：91130607056539515C",
+                    "required_scope": "电缆保护管供货，不含施工总承包",
+                    "forbidden_topics": ["水利施工", "建造师"],
+                    "allowed_placeholders": ["本次投标报价"],
+                }
+            },
+        }
+        with patch("backend.ai.section_writer.get_project_interpretation", return_value=payload), patch(
+            "backend.ai.section_writer.list_knowledge_assets", return_value=[]
+        ), patch("backend.rag.retrieval.search_knowledge_base", return_value=[]):
+            prompt = build_section_prompt("project-id", chapter)
+
+        self.assertIn("91130607056539515C", prompt)
+        self.assertIn("电缆保护管供货，不含施工总承包", prompt)
+        self.assertIn("水利施工、建造师", prompt)
+        self.assertIn("仅以下未确认事项允许保留", prompt)
     def test_pages_mode_converts_to_volume_words(self):
         settings = normalize_length_settings({
             "mode": "pages",

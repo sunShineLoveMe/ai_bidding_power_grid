@@ -1435,3 +1435,59 @@ set -a; source .env; set +a; .venv/bin/python scripts/rag/run_taichang_product_p
 - 施工资质、建造师、BIM、水利施工等与电缆保护管供货无关的内容列为不适用清理项，不向客户索要。
 - 编号修复后的真实 DOCX/PDF 导出 PASS；原 360+ 全文连续序号已消失。
 - 增量回归 Gate PASS：Base off/qwen3 Recall@5 均为 `96.7%`，泰昌专项 off 为 `96.7%`、qwen3 为 `100.0%`；四组 Top1 来源准确率均为 `100%`，跨 doc_role 串扰均为 `0%`。
+
+---
+
+## Run 28 — 泰昌企业事实约束重写、残留占位归类与真实回归（2026-06-12）
+
+> DeepSeek 事实约束重写：`docs/development/runs/run_20260612_taichang_fact_grounded_full_rewrite.md`
+> DOCX/PDF 客户演示验收：`docs/development/runs/run_20260612_taichang_fact_grounded_final.md`
+> 残留占位逐项归类：`docs/rag/taichang-bid-remaining-placeholders-classification-20260612.md`
+> 真实 stream：`docs/rag/runs/run_20260612_taichang_fact_grounded_targeted_stream.md`
+> 增量门禁：`docs/rag/runs/run_20260612_taichang_fact_grounded_full_rewrite_summary.md`
+
+### 处理内容
+
+- 新增企业事实约束写作链路，将泰昌统一社会信用代码、三体系证书、MPP/CPVC 检验报告、0322AB 项目业绩、生产/检测能力等可追溯事实注入章节 prompt。
+- 清理与电缆保护管供货不适用的施工模板语义，标题和正文禁止继续引入水利施工、桩基、防渗墙、BIM、建造师、施工总承包等内容。
+- 74 个章节全部通过真实 `deepseek-v4-flash` 重写，生成阶段没有失败章节，没有触发禁用主题二次清理。
+- 对成品 Markdown 中 `649` 处残留 `【待补充】` 逐项归类，输出 649 行 CSV；按优先级归并为 P0 `436`、P1 `155`、P2 `58`，其中 P0 主要是最终报价、包件货物清单、交货/质保/响应期限、保证金银行信息、授权签章等不可由模型编造的信息。
+
+### 真实 DOCX/PDF 导出结果
+
+| 指标 | 结果 |
+| --- | ---: |
+| 状态 | PASS |
+| 章节节点/有正文 | 74 / 74 |
+| Markdown 字符数 | 186251 |
+| DOCX 段落/标题 | 2834 / 74 |
+| 目录条目 | 65 |
+| 表格数量 | 130 |
+| 图片选中/插入/失败 | 24 / 24 / 0 |
+| 图片裁剪标记 | 0 |
+| 页眉页脚/页码字段 | 通过 |
+| LibreOffice 字段刷新 | refreshed |
+
+### 真实 stream 验证
+
+- `run_20260612_taichang_fact_grounded_real_stream` 真实 DB + stream 质量复核中，数据库、资产 metadata、报告参数、Logo/生产线问答均通过；综合“合同或中标通知书”问法未显式带出 `0322AB`，按失败样本保留。
+- 追加专项真实 stream `run_20260612_taichang_fact_grounded_targeted_stream` 通过：`0322AB`、包2、合同金额 `6,372,409.05`、数量 `54,678`、合同签署日期空白状态均可从真实链路回答；完整标书不可编造项分类问答通过。
+
+### 增量回归门禁
+
+| 测试集 | 模式 | Recall@5 | Top1 | MRR | 禁用关键词 | 跨域串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 249 ms |
+| Base | qwen3 | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 586 ms |
+| 泰昌专项 | off | 93.3% | 100.0% | 0.933 | 3.3% | 0.0% | 314 ms |
+| 泰昌专项 | qwen3 | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 664 ms |
+
+### 自动化回归
+
+- `.venv/bin/python -m pytest tests/test_length_settings.py tests/test_section_generation_autoresume.py tests/test_docx_export.py -q`
+- 结果：`51 passed, 1 warning`。
+
+### 结论
+
+- Gate PASS，P1B-10 完成。
+- 当前客户演示版可展示真实全流程结果；正式投标前必须优先让客户确认 P0 清单，不能由模型自动补全报价、包件、期限、保证金、授权签章等实质性承诺信息。

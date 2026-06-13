@@ -295,6 +295,7 @@ def build_section_supplement_prompt(project_id: str, chapter: dict[str, Any], cu
     allow_auto_expand = _allow_auto_expand(chapter)
     supporting_assets = _compact_supporting_assets(chapter, volume_type)
     rag_context = _compact_section_rag_context(project, analysis, chapter, limit=4)
+    grounding_instructions = _grounding_instructions(chapter)
     current_excerpt = (current_content or "").strip()
     if len(current_excerpt) > 4200:
         current_excerpt = current_excerpt[-4200:]
@@ -335,6 +336,9 @@ def build_section_supplement_prompt(project_id: str, chapter: dict[str, Any], cu
 当前命中的企业资料候选：
 {supporting_assets}
 
+本次专项事实与边界约束：
+{grounding_instructions}
+
 章节级 RAG 写作依据：
 {rag_context}
 
@@ -367,6 +371,30 @@ def _generation_options(chapter: dict[str, Any]) -> dict[str, Any]:
     return options
 
 
+def _grounding_instructions(chapter: dict[str, Any]) -> str:
+    options = _generation_options(chapter)
+    factual_context = str(options.get("factual_context") or options.get("grounding_context") or "").strip()
+    required_scope = str(options.get("required_scope") or "").strip()
+    forbidden_topics = options.get("forbidden_topics") or []
+    allowed_placeholders = options.get("allowed_placeholders") or []
+    if isinstance(forbidden_topics, str):
+        forbidden_topics = [forbidden_topics]
+    if isinstance(allowed_placeholders, str):
+        allowed_placeholders = [allowed_placeholders]
+    if not any([factual_context, required_scope, forbidden_topics, allowed_placeholders]):
+        return "- 未配置额外事实约束，按章节 RAG 依据稳健生成。"
+    rows = []
+    if required_scope:
+        rows.append(f"- 本节业务边界：{required_scope}")
+    if factual_context:
+        rows.extend(["- 已核验企业事实如下，涉及相同字段时必须直接使用，不得再次留空：", factual_context])
+    if forbidden_topics:
+        rows.append("- 禁止写入的主题或资质：" + "、".join(str(item) for item in forbidden_topics if item))
+    if allowed_placeholders:
+        rows.append("- 仅以下未确认事项允许保留【待补充】：" + "、".join(str(item) for item in allowed_placeholders if item))
+    return "\n".join(rows)
+
+
 def _continuation_draft(chapter: dict[str, Any]) -> str:
     options = _generation_options(chapter)
     draft = options.get("continuationDraft") or options.get("continuation_draft") or ""
@@ -388,6 +416,7 @@ def build_section_continuation_prompt(project_id: str, chapter: dict[str, Any], 
     draft_words = estimate_bid_content_words(draft_content)
     supporting_assets = _compact_supporting_assets(chapter, volume_type)
     rag_context = _compact_section_rag_context(project, analysis, chapter, limit=4)
+    grounding_instructions = _grounding_instructions(chapter)
     draft_excerpt = (draft_content or "").strip()
     if len(draft_excerpt) > 5200:
         draft_excerpt = draft_excerpt[-5200:]
@@ -421,6 +450,9 @@ def build_section_continuation_prompt(project_id: str, chapter: dict[str, Any], 
 
 当前命中的企业资料候选：
 {supporting_assets}
+
+本次专项事实与边界约束：
+{grounding_instructions}
 
 章节级 RAG 写作依据：
 {rag_context}
@@ -483,6 +515,7 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
     enterprise_context = build_enterprise_context()
     supporting_assets = _compact_supporting_assets(chapter, volume_type)
     rag_context = _compact_section_rag_context(project, analysis, chapter, limit=5)
+    grounding_instructions = _grounding_instructions(chapter)
 
     return f"""
 你是资深投标文件撰写专家，熟悉电网/电力工程、设备供货、安装调试、试验检测、运维检修、质量安全管理和招投标文件格式要求。
@@ -525,6 +558,9 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
 
 当前命中的企业资料候选：
 {supporting_assets}
+
+本次专项事实与边界约束：
+{grounding_instructions}
 
 章节级 RAG 写作依据：
 {rag_context}

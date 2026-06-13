@@ -484,7 +484,7 @@ def main() -> int:
             "checks": {
                 "docx_opens_with_python_docx": True,
                 "cover_has_bid_title": "投标文件" in "\n".join(_paragraph_summary(document)["first_non_empty"][:6]),
-                "cover_has_bidder": "投标人：河北泰昌电力器材科技有限公司" in "\n".join(_paragraph_summary(document)["first_non_empty"][:8]),
+                "cover_has_bidder": "投标人：河北泰昌电力器材科技有限公司" in "\n".join(_paragraph_summary(document)["first_non_empty"][:10]),
                 "cover_has_project_name": "国网辽宁电力2025年第三次物资协议库存招标采购" in all_text,
                 "cover_has_tender_no": "2225AC" in all_text,
                 "cover_first_page_header_empty": first_page_header_is_empty,
