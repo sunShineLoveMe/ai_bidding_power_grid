@@ -1,7 +1,7 @@
 # 本地下一阶段任务清单（云环境到位前）
 
 > 制定日期：2026-06-02  
-> 修订日期：2026-06-03  
+> 修订日期：2026-06-16  
 > 适用前提：**阿里云测试环境账号未到位；客户完整/正式私有资料未到位，但已有江西/山西样本资料完成本地 staging 解析、入库与召回评测。**  
 > 目标：在不依赖云资源的前提下，优先补齐技术标知识库、正文生成可靠性和回归保护，让后续客户资料与云资源到位后能高质量接入。  
 > 依据：`docs/development/maturity-assessment.md`、`docs/rag/customer-corpus-parse-runs.md`、`docs/rag/evaluation-records.md`、当前代码实际。
@@ -15,6 +15,20 @@
 3. 已有能力先产品化/通用化，不重复按“从零开发”排期。例如 `.doc/.xlsx` 解析脚本已跑通，下一步是接入正式知识库流程。
 4. 工程债穿插处理，不抢占影响客户测试质量和演示稳定性的任务。
 5. 云上联调、HTTPS/SLS 真实采集、客户完整私有资料入库等依赖外部条件的任务显式排除。
+
+### 2026-06-16 调整：阿里云测试环境暂未提供时的本地优先级
+
+客户暂未提供阿里云测试环境账号，因此云上 ECS/RDS/OSS/Redis 联调继续暂挂。本轮按“泰昌单企业试点、本地真实环境可验证、直接影响客户试用稳定性”的口径重新排序：
+
+| 顺序 | 优先级 | 任务 | 归属清单 | 当前状态 | 真实验收口径 |
+| ---: | --- | --- | --- | --- | --- |
+| 1 | P0 | 泰昌 20260606 正式图片资产 embedding backfill | `docs/rag/todo.md` P1C-1 | 已完成 | 已用本地 Ollama `qwen3-embedding:0.6b` 补齐 20260606 批次 300 条资产 embedding；当前真实库 `knowledge_assets` 共 597 条，597 条有 embedding，缺失 0；真实 stream 和增量回归门禁 PASS |
+| 2 | P0 | 本地回归门禁自动化/CI 化设计 | 本文 D6 | 未开始 | 先不依赖云资源，固化后端 unittest、前端 build、RAG 增量门禁的本地一键命令与后续 CI 入口 |
+| 3 | P1 | 关键词兜底缓存失效机制 | `docs/rag/todo.md` P1C-2 | 已完成 | 已实现 `document_chunks` 水位指纹 + 入库流程显式清理；真实 stream 复验新增 chunk 可在不重启 Web 的情况下命中；增量回归 Gate PASS |
+| 4 | P1 | 单章正文生成链路收敛 | 本文 B3 | 未开始 | 单章长文生成不依赖请求内 SSE 长连接；任务关闭/刷新/重试语义与批量章节生成保持一致 |
+| 5 | P1 | BidEditor 组件化与前端最小测试 | 本文 D2/D4 | 未开始 | 先覆盖章节任务轮询、正文回填、DOCX `sectionsSnapshot` 下载等关键交互；前端构建和测试可一键运行 |
+
+本轮真实基线已完成：`/api/ready` 返回 `ok`，数据库/Redis/Celery/模型配置/Storage 均可用；`run_20260616_local_priority_sync_baseline` 增量回归门禁 PASS，详见 `docs/rag/runs/run_20260616_local_priority_sync_baseline_summary.md`。
 
 ---
 
@@ -127,6 +141,15 @@
   - 实时体验修正后已通过 `py_compile`、`tests.test_api_sections tests.test_smoke_key_flow_script` 和 `npm run build`；真实 LLM 联调需重启后端与 Celery worker 后补跑。
 - **后续维护**：当前首版采用轮询降低复杂度；如后续需要更细粒度 token 级进度，可在此基础上增加 Redis pub/sub 或任务事件流。
 
+### B3. 单章正文生成链路收敛 🟡
+
+- **现状**：批量章节生成已走 Celery 任务、lease、heartbeat 和轮询恢复；但单章 `POST /api/bidding/interpretations/<project_id>/sections/stream` 仍保留请求内 SSE 生成入口，长章节会受 HTTP 长连接、浏览器刷新和网关超时影响。
+- **任务**：
+  - 评估将单章生成统一到 `section-generation-tasks` 的任务模型，或明确单章 SSE 只作为短章节/即时体验入口。
+  - 与批量任务共用 `attempt_id`、`worker_id`、草稿续写、取消、重试、恢复和最终保存语义。
+  - 前端保持实时可见正文，但以任务状态和 `generated_content` 作为可恢复事实源。
+- **验收**：真实后端 + Celery + DeepSeek 链路下，关闭页面后单章生成不丢失；超时保留草稿；重试不会被旧 worker 覆盖。
+
 ---
 
 ## C. 召回质量增强
@@ -183,6 +206,15 @@
 - **任务**：按路由懒加载，降低首屏体积。
 - **验收**：主 chunk 体积下降，构建无超大包警告。
 
+### D6. 本地回归门禁自动化/CI 化设计 🔴
+
+- **现状**：真实回归脚本和 run summary 已经较完整，但仍依赖人工记得执行；云环境未到位时，仍应先把本地可运行的回归组合固化。
+- **任务**：
+  - 定义本地一键门禁脚本，至少覆盖后端 unittest、前端 build、RAG 增量回归门禁、必要的真实 API 健康检查。
+  - 区分“可在 CI 跑的无外部依赖检查”和“需要真实 LLM/MinerU/DB 的本地真实门禁”。
+  - 后续接入 GitHub Actions 或 Gitee 流水线时复用同一套命令。
+- **验收**：任一开发者可按一条命令跑出明确 PASS/FAIL 和报告路径；失败时能定位到 API、RAG、前端或导出阶段。
+
 ---
 
 ## E. 文档与对外沉淀
@@ -213,8 +245,8 @@
 
 | 周 | 重点 | 任务 |
 | --- | --- | --- |
-| 第 1 周 | 知识库缺口 + 回归护栏 | A1(PDF 标准样板/批量)、B1(全链路冒烟)、A2(重采规章) |
-| 第 2 周 | 正文可靠性 + 召回评估 | B2(正文 Celery 化)、A4(测试集扩充+MRR)、C1(混合检索一期) |
+| 第 1 周 | 泰昌本地试点稳定性 + 回归护栏 | P1C-1(图片资产 embedding backfill)、D6(本地回归门禁自动化)、P1C-2(关键词缓存失效) |
+| 第 2 周 | 正文可靠性 + 前端保护 | B3(单章正文生成链路收敛)、D2/D4(前端最小测试与 BidEditor 拆分)、A4(测试集持续扩充) |
 
 > A3（`.doc/.xlsx` 通用化）可和 A4/C1 并行推进；D 类工程债作为穿插任务处理，不抢占 P0/P1。
 

@@ -1491,3 +1491,207 @@ set -a; source .env; set +a; .venv/bin/python scripts/rag/run_taichang_product_p
 
 - Gate PASS，P1B-10 完成。
 - 当前客户演示版可展示真实全流程结果；正式投标前必须优先让客户确认 P0 清单，不能由模型自动补全报价、包件、期限、保证金、授权签章等实质性承诺信息。
+
+---
+
+## Run 29 — 云环境暂挂后的本地优先级同步与真实基线回归（2026-06-16）
+
+> 任务清单同步：`docs/rag/todo.md` P1C、`docs/development/local-next-phase-tasks.md`
+> 增量门禁：`docs/rag/runs/run_20260616_local_priority_sync_baseline_summary.md`
+> 真实 stream：`docs/rag/runs/run_20260616_local_priority_sync_stream.jsonl`
+> 任务状态记录：`docs/development/runs/run_20260616_local_priority_sync.md`
+
+### 触发原因
+
+客户暂未提供阿里云测试环境账号，因此云上 ECS/RDS/OSS/Redis 联调继续暂挂。本轮按本地真实环境可验证、且直接影响泰昌单企业试点客户试用稳定性的口径，重新同步任务优先级。
+
+### 真实环境检查
+
+- `/api/ready` 真实健康检查通过：database、Redis、Celery、model_config、storage 均为 `ok`，在线 Celery worker 数为 `1`。
+- 直连 PostgreSQL 复核 `knowledge_assets`：总数 `597`，已有 embedding `297`，缺失 embedding `300`。
+- 缺失 embedding 的资产全部集中在 `source_batch_id=customer_liaoning_taichang_20260606_p0_formal_full_page_assets_v1`；`customer_taichang_supplement_20260611` 批次 `297/297` 已有 embedding。
+- 真实 `/api/bidding/knowledge/search/stream` 登录鉴权后抽样通过：问题“泰昌有哪些生产线或生产制造能力图片资料？”召回 `4` 条资料、`8` 个图片资产，并返回 `done`。
+
+### 优先级同步
+
+- 第一任务确认为：`P1C-1 泰昌 20260606 正式图片资产 embedding backfill`。
+- 同步新增本地优先任务：图片资产 embedding backfill、关键词兜底缓存失效、RAG 本地门禁自动化入口、前导确认页变量 schema v1。
+- 云上联调继续列为外部条件阻塞，不纳入当前本地 P0 执行序列。
+
+### 增量回归门禁
+
+| 测试集 | 模式 | Recall@5 | Top1 | MRR | 禁用关键词 | 跨域串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 260 ms |
+| Base | qwen3 | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 564 ms |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% | 327 ms |
+| 泰昌专项 | qwen3 | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 647 ms |
+
+### 结论
+
+- Gate PASS。
+- 本轮没有新增资料入库，也没有修改召回策略代码；仅同步任务清单并建立当前真实环境基线。
+- 下一步执行 P1C-1 时必须在补齐资产 embedding 后复跑真实资产语义召回、真实 `/api/knowledge/search/stream` 抽样和 Base + 泰昌专项增量回归门禁。
+
+---
+
+## Run 30 — 泰昌 20260606 正式图片资产 embedding backfill（2026-06-16）
+
+> Backfill 脚本：`scripts/rag/backfill_knowledge_asset_embeddings.py`
+> Backfill 记录：`docs/rag/runs/run_20260616_taichang_asset_embedding_backfill_asset_embedding_backfill.md`
+> 增量门禁：`docs/rag/runs/run_20260616_taichang_asset_embedding_backfill_gate_summary.md`
+> 真实 stream：`docs/rag/runs/run_20260616_taichang_asset_embedding_backfill_stream_*.jsonl`
+
+### 触发原因
+
+P1C-1 要求补齐 `customer_liaoning_taichang_20260606_p0_formal_full_page_assets_v1` 批次 300 条正式整页/原图资产的 embedding。该批次此前 300 条资产全部 `embedding is null`，影响图片资产语义召回和后续 DOCX 自动配图排序。
+
+### 执行环境
+
+- Embedding 后端：本地 Ollama OpenAI-compatible，`EMBEDDING_BASE_URL=http://localhost:11434/v1`
+- Embedding 模型：`qwen3-embedding:0.6b`
+- 向量维度：`1024`
+- 执行命令：
+
+```bash
+set -a; source .env; set +a
+.venv/bin/python scripts/rag/backfill_knowledge_asset_embeddings.py \
+  --run-id run_20260616_taichang_asset_embedding_backfill \
+  --batch-size 20
+```
+
+### Backfill 结果
+
+| 批次 | before total | before with embedding | before missing | after with embedding | after missing |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `customer_liaoning_taichang_20260606_p0_formal_full_page_assets_v1` | 300 | 0 | 300 | 300 | 0 |
+
+执行统计：
+
+| 指标 | 数量 |
+| --- | ---: |
+| selected | 300 |
+| updated | 300 |
+| skipped_empty_text | 0 |
+| failed | 0 |
+
+脚本在首次真实执行时触发了非阻断的 AI 用量记录日志：`usage_context.batch_id` 传入了非 UUID 的 run id，导致 `ai_usage_logs.batch_id` 写入失败；embedding 生成与资产更新均已成功。随后已修正脚本，改为把 run id 写入 metadata，不再占用 UUID 字段。
+
+### 资产召回抽样
+
+直接资产召回验证：
+
+| 问法 | 结果 |
+| --- | --- |
+| 泰昌营业执照图片 | 命中营业执照副本原图和 20260606 批次“泰昌营业执照副本第1页” |
+| 泰昌MPP生产线图片 | 命中 MPP 生产线原图和 20260606 批次生产线页 |
+| 泰昌检测设备图片 | 命中试验设备台账、锤击试验装置等 testing_capacity 资产 |
+| 泰昌CPVC电缆保护管检验报告图片 | 命中 CPVC 检验报告原图和 20260606 批次检验报告页 |
+| 泰昌MPP电缆保护管检验报告图片 | 命中 MPP 检验报告原图和 20260606 批次检验报告页 |
+| 泰昌绿色低碳资料图片 | 命中绿色发展规划报告、绿色供应链认证证书等资产 |
+
+真实 `/api/bidding/knowledge/search/stream` 抽样：
+
+| 问法 | contexts | assets | 状态 | 代表性图片 |
+| --- | ---: | ---: | --- | --- |
+| 泰昌MPP生产线有哪些图片资料？ | 5 | 8 | done | MPP生产线第1页、MPP生产线原图 |
+| 泰昌MPP电缆保护管检验报告图片资料有哪些？ | 5 | 8 | done | MPP检验报告原图、MPP检验报告第3页/第1页 |
+| 泰昌营业执照图片资料有哪些？ | 4 | 8 | done | 营业执照副本原图、营业执照副本第1页 |
+| 泰昌营业执照和绿色低碳资料图片有哪些？ | 2 | 8 | done | 绿色发展规划报告、绿色供应链认证证书 |
+
+说明：复合问法“营业执照和绿色低碳”被绿色低碳资产占据靠前位置，因此追加单独营业执照问法作为验收样本；后续若要求复合问法逐类均衡展示，可归入资产排序/多证据覆盖优化。
+
+### 增量回归门禁
+
+| 测试集 | 模式 | Recall@5 | Top1 | MRR | 禁用关键词 | 跨域串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 229 ms |
+| Base | qwen3 | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 590 ms |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% | 320 ms |
+| 泰昌专项 | qwen3 | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 651 ms |
+
+### 结论
+
+- Gate PASS。
+- P1C-1 完成，当前真实库 `knowledge_assets` 两个泰昌批次合计 597 条资产均已有 embedding。
+- 下一任务顺延为 P1C-2：关键词兜底缓存失效机制。
+
+---
+
+## Run 31 — 企业知识库/资信库/产品库页面与 P1C-2 关联复核（2026-06-16）
+
+> 页面复核记录：`docs/rag/runs/run_20260616_enterprise_library_pages_review.md`
+
+### 触发原因
+
+客户后续大概率持续补充资料，同时前端“企业知识库”“企业资信库”“企业产品库”支持用户单独上传资料。本轮先复核三类页面是否可用，并确认它们与 `P1C-2 关键词兜底缓存失效机制` 的关系。
+
+### 真实环境结果
+
+- 真实后端实际监听 `0.0.0.0:3012`，`/api/ready` 返回 `ok`。
+- 当前用户侧 `5173` 前端仍代理到默认 `127.0.0.1:8000`，浏览器登录请求 `/api/users/login` 返回 `500`，三类页面会停留在登录页。
+- 使用临时 `5174` 前端并设置 `VITE_API_PROXY_TARGET=http://127.0.0.1:3012` 后，登录和三类页面均可正常访问。
+
+### 页面和接口抽样
+
+| 页面/接口 | 结果 |
+| --- | --- |
+| `GET /api/knowledge/documents` | 200，198 条文档 |
+| `GET /api/knowledge/assets?asset_type=qualification_image` | 200，208 条资信资产 |
+| `GET /api/knowledge/assets?asset_type=product_image` | 200，389 条产品资产 |
+| 企业知识库页面 | 列表正常，上传资料按钮可见，文档详情和解析内容预览可打开 |
+| 企业资信库页面 | 列表正常，新增/上传入口可见，新增表单和必填校验正常 |
+| 企业产品库页面 | 列表正常，新增/上传入口可见，新增表单和必填校验正常 |
+
+### 与 P1C-2 的结论
+
+- 企业知识库文档上传强相关：上传后会写入 `knowledge_documents` 和 `document_chunks`，而 `_keyword_search_knowledge_chunks` 使用进程级 `_CHUNK_KEYWORD_CACHE`，必须在新增/重入库后失效。
+- 企业资信库/企业产品库资产上传间接相关：上传写 `knowledge_assets`，并即时生成 asset embedding；资产关键词兜底直接查询 `knowledge_assets`，不使用 `_CHUNK_KEYWORD_CACHE`。
+- P1C-2 仍有必要，核心验收应覆盖“Web 不重启 + 新增文档 chunk + 真实 stream 可立即命中”；资信/产品上传作为补充回归样本，验证 asset embedding 和资产检索链路。
+
+---
+
+## Run 32 — P1C-2 关键词兜底缓存失效机制（2026-06-16）
+
+> 实现记录：`docs/rag/runs/run_20260616_p1c2_keyword_cache_invalidation_summary.md`
+> 真实 stream：`docs/rag/runs/run_20260616_p1c2_keyword_cache_invalidation_after_stream.jsonl`
+> 增量门禁：`docs/rag/runs/run_20260616_p1c2_keyword_cache_invalidation_gate_summary.md`
+
+### 触发原因
+
+客户后续会持续补充资料，且企业知识库页面支持单独上传资料。原关键词兜底缓存为 Web 进程内全局 `_CHUNK_KEYWORD_CACHE`，存在新增/重入库 `document_chunks` 后读取旧快照的风险。
+
+### 实现内容
+
+- `backend/rag/retrieval.py` 新增 `document_chunks` 水位指纹：总数、最新 `created_at`、最新 `id`。
+- 关键词兜底每次使用缓存前先读取轻量指纹；指纹变化时自动重建缓存。
+- 新增 `invalidate_chunk_keyword_cache(reason)` 显式清理入口。
+- `backend/rag/ingestion.py` 在删除旧分片和写入新分片后调用显式清理。
+- `tests/test_rag_retrieval.py` 增加显式失效和指纹变化自动重建测试。
+
+### 测试与真实验收
+
+| 验收项 | 结果 |
+| --- | --- |
+| `py_compile` | PASS |
+| `pytest tests/test_rag_retrieval.py -q` | 16 passed |
+| 真实 stream 预热旧缓存后插入新 chunk | PASS |
+| 不重启 Web 命中新 chunk | PASS，`after_contains_secret=true`、`after_done=true` |
+| 测试数据清理 | PASS |
+
+说明：真实 stream 验收中，测试 chunk 必须带完整泰昌企业事实 metadata，尤其是 `reference_only=false`；缺失该字段时会被泰昌试点过滤正确排除。
+
+### 增量回归门禁
+
+| 测试集 | 模式 | Recall@5 | Top1 | MRR | 禁用关键词 | 跨域串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 268 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 619 ms |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% | 357 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 686 ms |
+
+### 结论
+
+- Gate PASS。
+- P1C-2 完成。
+- 下一任务顺延为 P1C-3：RAG 本地门禁自动化入口。

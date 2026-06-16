@@ -1,0 +1,1140 @@
+data: {"type": "start"}
+
+data: {"type": "status", "message": "正在检索企业知识库和图片资产..."}
+
+data: {"type": "status", "message": "已召回 2 条资料、8 个图片资产，正在生成回答..."}
+
+data: {"type": "retrieved", "contexts_count": 2, "assets_count": 8, "images": [{"url": "/api/knowledge/assets/79767ad8-478b-4019-826e-f505cbec7d95/file", "alt": "泰昌绿色发展规划报告第4页"}, {"url": "/api/knowledge/assets/e261aca2-6303-441e-9605-a29ccf3a1968/file", "alt": "泰昌绿色发展规划报告第15页"}, {"url": "/api/knowledge/assets/d2282a28-42b6-42a2-8c29-9eb41295fb14/file", "alt": "泰昌绿色发展规划报告第12页"}, {"url": "/api/knowledge/assets/012bcbb3-9adf-4315-8329-1e0ea8006967/file", "alt": "泰昌绿色供应链认证证书第1页"}, {"url": "/api/knowledge/assets/ac753b6b-ff93-4a24-b5b7-7ef52f2a790e/file", "alt": "泰昌绿色发展规划报告第3页"}, {"url": "/api/knowledge/assets/96dc11c9-857d-429f-b8ad-ec194bff5542/file", "alt": "泰昌绿色发展规划报告第7页"}, {"url": "/api/knowledge/assets/a7188e0d-d334-4ded-9a5a-e428f5fd4334/file", "alt": "泰昌绿色发展规划报告第2页"}, {"url": "/api/knowledge/assets/b5d9b4dc-ba35-4bbe-b24a-728a00b3489f/file", "alt": "泰昌绿色发展规划报告第8页"}], "raw_contexts": [{"id": "f70ee7d5-7380-495c-8fe3-d72fa0c1eb64", "document_id": "90ecc1e2-4b6d-4acd-9ecf-03b76e3b4858", "project_id": null, "content": "- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/绿色电力认证证书_766d20/extract/images/1e7004617f1f1aba929283865f9e1d09523ef497689d7f9bc5cbc03c5f5c0282.jpg\n- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色电力认证证书.pdf\n- page_no: 1\n- bbox: [171, 741, 290, 825]\n- display_contexts: bid_writing, knowledge_chat, asset_search\n- requires_authorization=false\n- access_scope: taichang_tenant_internal\n- tenant_visibility: taichang_only\n- target_library: qualification_library", "source_page": null, "source_section": "taichang_certification_p1_016_3f87e933", "metadata": {"type": "text", "parser": "asset_index_catalog", "status": "staging_indexed", "chunker": "parent_child_v2", "batch_no": "taichang_mvp_20260606", "doc_role": "enterprise_evidence", "province": "河北", "doc_owner": "泰昌", "block_type": "paragraph", "enterprise": "泰昌", "package_no": "", "chunk_layer": "child", "doc_version": 1, "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_certification_private.md", "seed_corpus": "power_grid_customer_corpus", "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌资质证书图片资产目录.md", "source_type": "asset_metadata_catalog", "access_scope": "taichang_tenant_internal", "package_code": "2225AC", "parent_index": 113, "parse_status": "parsed", "evidence_type": "certification", "privacy_level": "private", "source_domain": "enterprise_fact", "category_label": "泰昌企业资料", "content_sha256": "b83e01c7a86e96ac3188c80045ac0d72a7ca3c89aaf8613a5059cf28c0e35946", "reference_only": false, "target_library": "qualification_library", "authority_level": "tender_file", "citation_policy": "internal_reference_only", "do_not_mix_with": ["河北豪乾参考稿"], "source_category": "05_enterprise_documents", "display_contexts": ["bid_writing", "knowledge_chat", "asset_search"], "is_asset_catalog": true, "material_category": "电缆保护管CPVC/MPP", "tenant_visibility": "taichang_only", "ingestion_batch_id": "customer_liaoning_taichang_20260606_p0", "sensitive_handling": "taichang_internal_use_no_redaction_required", "evidence_type_label": "资质证书", "source_display_name": "泰昌资质证书资料", "target_library_label": "资信库资料", "source_category_label": "泰昌企业资料", "requires_authorization": false, "fact_source_allowed_for_enterprise": true}, "similarity": 0.7331922053029002, "rerank_score": 0.8778027933907324}, {"id": "0643c112-8bac-465a-9267-9299c372d7b8", "document_id": "64399487-0385-4ecd-be9e-ba4dd1332d50", "project_id": null, "content": "- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/碳足迹报告_7392f7/extract/images/22095e6c989f741e38002dff3ef232819c1a9db23ae5a7a7541ea5c29f5678a7.jpg\n- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/5其他绿色低碳证书一览表/碳足迹报告.pdf\n- page_no: 1\n- bbox: [541, 854, 746, 998]\n- display_contexts: bid_writing, knowledge_chat, asset_search\n- requires_authorization=false\n- access_scope: taichang_tenant_internal\n- tenant_visibility: taichang_only\n- target_library: product_library", "source_page": null, "source_section": "taichang_green_low_carbon_p1_006_cebd16b3", "metadata": {"type": "text", "parser": "asset_index_catalog", "status": "staging_indexed", "chunker": "parent_child_v2", "batch_no": "taichang_mvp_20260606", "doc_role": "enterprise_evidence", "province": "河北", "doc_owner": "泰昌", "block_type": "paragraph", "enterprise": "泰昌", "package_no": "", "chunk_layer": "child", "doc_version": 1, "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_green_low_carbon_private.md", "seed_corpus": "power_grid_customer_corpus", "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌绿色低碳资料图片资产目录.md", "source_type": "asset_metadata_catalog", "access_scope": "taichang_tenant_internal", "package_code": "2225AC", "parent_index": 117, "parse_status": "parsed", "evidence_type": "green_low_carbon", "privacy_level": "private", "source_domain": "enterprise_fact", "category_label": "泰昌企业资料", "content_sha256": "a83a8b2443d14117bda85d928c85c343e29a46d4874082f9294fe6d9a8d7eb7f", "reference_only": false, "target_library": "product_library", "authority_level": "tender_file", "citation_policy": "internal_reference_only", "do_not_mix_with": ["河北豪乾参考稿"], "source_category": "05_enterprise_documents", "display_contexts": ["bid_writing", "knowledge_chat", "asset_search"], "is_asset_catalog": true, "material_category": "电缆保护管CPVC/MPP", "tenant_visibility": "taichang_only", "ingestion_batch_id": "customer_liaoning_taichang_20260606_p0", "sensitive_handling": "taichang_internal_use_no_redaction_required", "evidence_type_label": "绿色低碳资料", "source_display_name": "泰昌绿色低碳资料", "target_library_label": "产品库资料", "source_category_label": "泰昌企业资料", "requires_authorization": false, "fact_source_allowed_for_enterprise": true}, "similarity": 0.7237112992818221, "rerank_score": 0.876542421919758}], "assets": [{"id": "79767ad8-478b-4019-826e-f505cbec7d95", "title": "泰昌绿色发展规划报告第4页", "description": "河北泰昌电力器材科技有限公司绿色低碳资料资料，来源于客户补充文件《绿色发展规划报告.pdf》第4页。", "category": "绿色低碳资料", "asset_type": "product_image", "file_name": "绿色发展规划报告_c93dc568_第004页.jpg", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 95787, "storage_bucket": "knowledge-files", "storage_path": "product/88294c5f5b9845b4b57d42db2edd67d6.jpg", "public_url": "/local-storage/knowledge-files/product/88294c5f5b9845b4b57d42db2edd67d6.jpg", "width": 1191, "height": 1684, "source_type": "customer_pdf_full_page_render", "source_url": null, "license": "客户自有资料", "attribution": "河北泰昌电力器材科技有限公司", "is_synthetic": false, "is_sensitive": false, "anonymized": false, "industry": "电力行业", "applicable_sections": ["绿色低碳资料"], "applicable_volumes": ["technical"], "tags": ["泰昌", "泰昌企业事实", "绿色低碳资料", "绿色供应链"], "specs": {"page_no": 4, "display_name": "泰昌绿色发展规划报告第4页", "evidence_type": "green_low_carbon", "target_library": "product_library", "asset_visual_type": "full_page_render"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司绿色低碳资料资料，来源于客户补充文件《绿色发展规划报告.pdf》第4页。", "searchable_text": "泰昌绿色发展规划报告第4页\n河北泰昌电力器材科技有限公司绿色低碳资料资料，来源于客户补充文件《绿色发展规划报告.pdf》第4页。\n绿色低碳资料\n泰昌 泰昌企业事实 绿色低碳资料 绿色供应链\nrag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/8绿色供应链绿色工厂绿色低碳认证证书整页扫描件/绿色发展规划报告.pdf", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 4, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/8绿色供应链绿色工厂绿色低碳认证证书整页扫描件/绿色发展规划报告.pdf", "access_scope": "taichang_tenant_internal", "evidence_type": "green_low_carbon", "source_domain": "enterprise_fact", "reference_only": false, "target_library": "product_library", "thumbnail_size": 15470, "ui_name_policy": "domestic_chinese_friendly", "allowed_for_bid": true, "do_not_mix_with": ["河北豪乾参考稿", "辽宁招标资料"], "source_batch_id": "customer_taichang_supplement_20260611", "display_language": "zh-CN", "source_file_name": "绿色发展规划报告.pdf", "asset_visual_type": "full_page_render", "rendered_from_pdf": true, "tenant_visibility": "taichang_only", "evidence_type_label": "绿色低碳资料", "source_display_name": "泰昌绿色发展规划报告第4页", "thumbnail_mime_type": "image/webp", "target_library_label": "产品库", "thumbnail_storage_path": "product/thumbnails/a51577c435624d96b5551a86e4e4906c.webp", "thumbnail_storage_bucket": "knowledge-files", "fact_source_allowed_for_enterprise": true}, "created_at": "2026-06-11T17:31:52.325510+08:00", "updated_at": "2026-06-11T17:31:52.325510+08:00", "similarity": 0.7877371328067752, "rerank_score": 0.9188023669734973}, {"id": "e261aca2-6303-441e-9605-a29ccf3a1968", "title": "泰昌绿色发展规划报告第15页", "description": "河北泰昌电力器材科技有限公司绿色低碳资料资料，来源于客户补充文件《绿色发展规划报告.pdf》第15页。", "category": "绿色低碳资料", "asset_type": "product_image", "file_name": "绿色发展规划报告_c93dc568_第015页.jpg", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 328608, "storage_bucket": "knowledge-files", "storage_path": "product/e523a9d01e57418b8337283ae71c9e06.jpg", "public_url": "/local-storage/knowledge-files/product/e523a9d01e57418b8337283ae71c9e06.jpg", "width": 1191, "height": 1684, "source_type": "customer_pdf_full_page_render", "source_url": null, "license": "客户自有资料", "attribution": "河北泰昌电力器材科技有限公司", "is_synthetic": false, "is_sensitive": false, "anonymized": false, "industry": "电力行业", "applicable_sections": ["绿色低碳资料"], "applicable_volumes": ["technical"], "tags": ["泰昌", "泰昌企业事实", "绿色低碳资料", "绿色供应链"], "specs": {"page_no": 15, "display_name": "泰昌绿色发展规划报告第15页", "evidence_type": "green_low_carbon", "target_library": "product_library", "asset_visual_type": "full_page_render"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司绿色低碳资料资料，来源于客户补充文件《绿色发展规划报告.pdf》第15页。", "searchable_text": "泰昌绿色发展规划报告第15页\n河北泰昌电力器材科技有限公司绿色低碳资料资料，来源于客户补充文件《绿色发展规划报告.pdf》第15页。\n绿色低碳资料\n泰昌 泰昌企业事实 绿色低碳资料 绿色供应链\nrag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/8绿色供应链绿色工厂绿色低碳认证证书整页扫描件/绿色发展规划报告.pdf", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 15, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/8绿色供应链绿色工厂绿色低碳认证证书整页扫描件/绿色发展规划报告.pdf", "access_scope": "taichang_tenant_internal", "evidence_type": "green_low_carbon", "source_domain": "enterprise_fact", "reference_only": false, "target_library": "product_library", "thumbnail_size": 62304, "ui_name_policy": "domestic_chinese_friendly", "allowed_for_bid": true, "do_not_mix_with": ["河北豪乾参考稿", "辽宁招标资料"], "source_batch_id": "customer_taichang_supplement_20260611", "display_language": "zh-CN", "source_file_name": "绿色发展规划报告.pdf", "asset_visual_type": "full_page_render", "rendered_from_pdf": true, "tenant_visibility": "taichang_only", "evidence_type_label": "绿色低碳资料", "source_display_name": "泰昌绿色发展规划报告第15页", "thumbnail_mime_type": "image/webp", "target_library_label": "产品库", "thumbnail_storage_path": "product/thumbnails/8194ccc76d194a5a911bf14bb0422286.webp", "thumbnail_storage_bucket": "knowledge-files", "fact_source_allowed_for_enterprise": true}, "created_at": "2026-06-11T17:31:53.338324+08:00", "updated_at": "2026-06-11T17:31:53.338324+08:00", "similarity": 0.7833691453249848, "rerank_score": 0.9130887772548122}, {"id": "d2282a28-42b6-42a2-8c29-9eb41295fb14", "title": "泰昌绿色发展规划报告第12页", "description": "河北泰昌电力器材科技有限公司绿色低碳资料资料，来源于客户补充文件《绿色发展规划报告.pdf》第12页。", "category": "绿色低碳资料", "asset_type": "product_image", "file_name": "绿色发展规划报告_c93dc568_第012页.jpg", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 316966, "storage_bucket": "knowledge-files", "storage_path": "product/0e0fc176d96c41c98275d88c8612cdc6.jpg", "public_url": "/local-storage/knowledge-files/product/0e0fc176d96c41c98275d88c8612cdc6.jpg", "width": 1191, "height": 1684, "source_type": "customer_pdf_full_page_render", "source_url": null, "license": "客户自有资料", "attribution": "河北泰昌电力器材科技有限公司", "is_synthetic": false, "is_sensitive": false, "anonymized": false, "industry": "电力行业", "applicable_sections": ["绿色低碳资料"], "applicable_volumes": ["technical"], "tags": ["泰昌", "泰昌企业事实", "绿色低碳资料", "绿色供应链"], "specs": {"page_no": 12, "display_name": "泰昌绿色发展规划报告第12页", "evidence_type": "green_low_carbon", "target_library": "product_library", "asset_visual_type": "full_page_render"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司绿色低碳资料资料，来源于客户补充文件《绿色发展规划报告.pdf》第12页。", "searchable_text": "泰昌绿色发展规划报告第12页\n河北泰昌电力器材科技有限公司绿色低碳资料资料，来源于客户补充文件《绿色发展规划报告.pdf》第12页。\n绿色低碳资料\n泰昌 泰昌企业事实 绿色低碳资料 绿色供应链\nrag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/8绿色供应链绿色工厂绿色低碳认证证书整页扫描件/绿色发展规划报告.pdf", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 12, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/8绿色供应链绿色工厂绿色低碳认证证书整页扫描件/绿色发展规划报告.pdf", "access_scope": "taichang_tenant_internal", "evidence_type": "green_low_carbon", "source_domain": "enterprise_fact", "reference_only": false, "target_library": "product_library", "thumbnail_size": 60892, "ui_name_policy": "domestic_chinese_friendly", "allowed_for_bid": true, "do_not_mix_with": ["河北豪乾参考稿", "辽宁招标资料"], "source_batch_id": "customer_taichang_supplement_20260611", "display_language": "zh-CN", "source_file_name": "绿色发展规划报告.pdf", "asset_visual_type": "full_page_render", "rendered_from_pdf": true, "tenant_visibility": "taichang_only", "evidence_type_label": "绿色低碳资料", "source_display_name": "泰昌绿色发展规划报告第12页", "thumbnail_mime_type": "image/webp", "target_library_label": "产品库", "thumbnail_storage_path": "product/thumbnails/6ed2bd46116d43eda3d12b7c3e47aa29.webp", "thumbnail_storage_bucket": "knowledge-files", "fact_source_allowed_for_enterprise": true}, "created_at": "2026-06-11T17:31:53.057588+08:00", "updated_at": "2026-06-11T17:31:53.057588+08:00", "similarity": 0.7830832162301078, "rerank_score": 0.9149775751163636}, {"id": "012bcbb3-9adf-4315-8329-1e0ea8006967", "title": "泰昌绿色供应链认证证书第1页", "description": "河北泰昌电力器材科技有限公司绿色低碳资料资料，来源于客户补充文件《绿色供应链认证证书.pdf》第1页。", "category": "绿色低碳资料", "asset_type": "product_image", "file_name": "绿色供应链认证证书_7633e0da_第001页.jpg", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 625170, "storage_bucket": "knowledge-files", "storage_path": "product/3e9d402ee51d4130a94da980bdd65aca.jpg", "public_url": "/local-storage/knowledge-files/product/3e9d402ee51d4130a94da980bdd65aca.jpg", "width": 1191, "height": 1682, "source_type": "customer_pdf_full_page_render", "source_url": null, "license": "客户自有资料", "attribution": "河北泰昌电力器材科技有限公司", "is_synthetic": false, "is_sensitive": false, "anonymized": false, "industry": "电力行业", "applicable_sections": ["绿色低碳资料"], "applicable_volumes": ["technical"], "tags": ["泰昌", "泰昌企业事实", "绿色低碳资料", "绿色供应链"], "specs": {"page_no": 1, "display_name": "泰昌绿色供应链认证证书第1页", "evidence_type": "green_low_carbon", "target_library": "product_library", "asset_visual_type": "full_page_render"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司绿色低碳资料资料，来源于客户补充文件《绿色供应链认证证书.pdf》第1页。", "searchable_text": "泰昌绿色供应链认证证书第1页\n河北泰昌电力器材科技有限公司绿色低碳资料资料，来源于客户补充文件《绿色供应链认证证书.pdf》第1页。\n绿色低碳资料\n泰昌 泰昌企业事实 绿色低碳资料 绿色供应链\nrag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/8绿色供应链绿色工厂绿色低碳认证证书整页扫描件/绿色供应链认证证书.pdf", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 1, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/8绿色供应链绿色工厂绿色低碳认证证书整页扫描件/绿色供应链认证证书.pdf", "access_scope": "taichang_tenant_internal", "evidence_type": "green_low_carbon", "source_domain": "enterprise_fact", "reference_only": false, "target_library": "product_library", "thumbnail_size": 126030, "ui_name_policy": "domestic_chinese_friendly", "allowed_for_bid": true, "do_not_mix_with": ["河北豪乾参考稿", "辽宁招标资料"], "source_batch_id": "customer_taichang_supplement_20260611", "display_language": "zh-CN", "source_file_name": "绿色供应链认证证书.pdf", "asset_visual_type": "full_page_render", "rendered_from_pdf": true, "tenant_visibility": "taichang_only", "evidence_type_label": "绿色低碳资料", "source_display_name": "泰昌绿色供应链认证证书第1页", "thumbnail_mime_type": "image/webp", "target_library_label": "产品库", "thumbnail_storage_path": "product/thumbnails/682d1bf78d4a405fac536ab410f6e2b1.webp", "thumbnail_storage_bucket": "knowledge-files", "fact_source_allowed_for_enterprise": true}, "created_at": "2026-06-11T17:31:52.006590+08:00", "updated_at": "2026-06-11T17:31:52.006590+08:00", "similarity": 0.7767927508311475, "rerank_score": 0.9148482644485365}, {"id": "ac753b6b-ff93-4a24-b5b7-7ef52f2a790e", "title": "泰昌绿色发展规划报告第3页", "description": "河北泰昌电力器材科技有限公司资质证书资料，来源于客户已提供文件《绿色发展规划报告.pdf》第3页。该图片为正式整页/原图资产，不是 MinerU 局部切图。", "category": "绿色低碳资料", "asset_type": "qualification_image", "file_name": "绿色发展规划报告_第003页.jpg", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 215681, "storage_bucket": "knowledge-files", "storage_path": "qualification/b9d871653780489ea43dc260376249e4.jpg", "public_url": "/local-storage/knowledge-files/qualification/b9d871653780489ea43dc260376249e4.jpg", "width": 1191, "height": 1684, "source_type": "customer_pdf_full_page_render", "source_url": null, "license": "客户自有资料", "attribution": "河北泰昌电力器材科技有限公司", "is_synthetic": false, "is_sensitive": false, "anonymized": false, "industry": "电力行业", "applicable_sections": ["资格审查资料", "绿色低碳资料"], "applicable_volumes": ["qualification", "business", "attachment"], "tags": ["泰昌", "泰昌企业事实", "资质证书", "资信库"], "specs": {"page_no": 3, "full_page": true, "page_index": 2, "display_name": "泰昌绿色发展规划报告第3页", "evidence_type": "certification", "target_library": "qualification_library", "asset_visual_type": "full_page_certificate"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司资质证书资料，来源于客户已提供文件《绿色发展规划报告.pdf》第3页。该图片为正式整页/原图资产，不是 MinerU 局部切图。", "searchable_text": "泰昌绿色发展规划报告第3页\n河北泰昌电力器材科技有限公司资质证书资料，来源于客户已提供文件《绿色发展规划报告.pdf》第3页。该图片为正式整页/原图资产，不是 MinerU 局部切图。\n绿色低碳资料\n泰昌 泰昌企业事实 资质证书 资信库\n绿色发展规划报告\n资质证书\n泰昌\n河北泰昌电力器材科技有限公司", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 3, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "page_index": 2, "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色发展规划报告.pdf", "access_scope": "taichang_tenant_internal", "evidence_type": "certification", "source_domain": "enterprise_fact", "category_label": "泰昌企业资料", "reference_only": false, "target_library": "qualification_library", "thumbnail_size": 39250, "ui_name_policy": "domestic_chinese_friendly", "do_not_mix_with": ["河北豪乾参考稿", "辽宁招标资料"], "embedding_model": "qwen3-embedding:0.6b", "source_batch_id": "customer_liaoning_taichang_20260606_p0_formal_full_page_assets_v1", "display_language": "zh-CN", "embedding_source": "knowledge_asset_embedding_backfill", "extracted_region": false, "source_file_name": "绿色发展规划报告.pdf", "asset_visual_type": "full_page_certificate", "rendered_from_pdf": true, "tenant_visibility": "taichang_only", "evidence_type_label": "资质证书", "source_display_name": "绿色发展规划报告", "thumbnail_mime_type": "image/webp", "embedding_dimensions": 1024, "target_library_label": "资信库资料", "formal_source_batch_id": "customer_liaoning_taichang_20260606_p0_formal_full_page_assets_v1", "thumbnail_storage_path": "qualification/thumbnails/1a70913e0b6e4d05b0028bfc6d276d4e.webp", "embedding_backfilled_at": "2026-06-16T07:24:16+00:00", "replaces_source_batch_id": "customer_liaoning_taichang_20260606_p0", "thumbnail_storage_bucket": "knowledge-files", "embedding_backfill_run_id": "run_20260616_taichang_asset_embedding_backfill", "fact_source_allowed_for_enterprise": true}, "created_at": "2026-06-07T11:34:26.133623+08:00", "updated_at": "2026-06-16T15:24:16.422457+08:00", "similarity": 0.7772566475595356, "rerank_score": 0.919222699083528}, {"id": "96dc11c9-857d-429f-b8ad-ec194bff5542", "title": "泰昌绿色发展规划报告第7页", "description": "河北泰昌电力器材科技有限公司资质证书资料，来源于客户已提供文件《绿色发展规划报告.pdf》第7页。该图片为正式整页/原图资产，不是 MinerU 局部切图。", "category": "绿色低碳资料", "asset_type": "qualification_image", "file_name": "绿色发展规划报告_第007页.jpg", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 267573, "storage_bucket": "knowledge-files", "storage_path": "qualification/a0d978e00e004bda9dd2dbf8796cedab.jpg", "public_url": "/local-storage/knowledge-files/qualification/a0d978e00e004bda9dd2dbf8796cedab.jpg", "width": 1191, "height": 1684, "source_type": "customer_pdf_full_page_render", "source_url": null, "license": "客户自有资料", "attribution": "河北泰昌电力器材科技有限公司", "is_synthetic": false, "is_sensitive": false, "anonymized": false, "industry": "电力行业", "applicable_sections": ["资格审查资料", "绿色低碳资料"], "applicable_volumes": ["qualification", "business", "attachment"], "tags": ["泰昌", "泰昌企业事实", "资质证书", "资信库"], "specs": {"page_no": 7, "full_page": true, "page_index": 6, "display_name": "泰昌绿色发展规划报告第7页", "evidence_type": "certification", "target_library": "qualification_library", "asset_visual_type": "full_page_certificate"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司资质证书资料，来源于客户已提供文件《绿色发展规划报告.pdf》第7页。该图片为正式整页/原图资产，不是 MinerU 局部切图。", "searchable_text": "泰昌绿色发展规划报告第7页\n河北泰昌电力器材科技有限公司资质证书资料，来源于客户已提供文件《绿色发展规划报告.pdf》第7页。该图片为正式整页/原图资产，不是 MinerU 局部切图。\n绿色低碳资料\n泰昌 泰昌企业事实 资质证书 资信库\n绿色发展规划报告\n资质证书\n泰昌\n河北泰昌电力器材科技有限公司", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 7, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "page_index": 6, "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色发展规划报告.pdf", "access_scope": "taichang_tenant_internal", "evidence_type": "certification", "source_domain": "enterprise_fact", "category_label": "泰昌企业资料", "reference_only": false, "target_library": "qualification_library", "thumbnail_size": 49894, "ui_name_policy": "domestic_chinese_friendly", "do_not_mix_with": ["河北豪乾参考稿", "辽宁招标资料"], "embedding_model": "qwen3-embedding:0.6b", "source_batch_id": "customer_liaoning_taichang_20260606_p0_formal_full_page_assets_v1", "display_language": "zh-CN", "embedding_source": "knowledge_asset_embedding_backfill", "extracted_region": false, "source_file_name": "绿色发展规划报告.pdf", "asset_visual_type": "full_page_certificate", "rendered_from_pdf": true, "tenant_visibility": "taichang_only", "evidence_type_label": "资质证书", "source_display_name": "绿色发展规划报告", "thumbnail_mime_type": "image/webp", "embedding_dimensions": 1024, "target_library_label": "资信库资料", "formal_source_batch_id": "customer_liaoning_taichang_20260606_p0_formal_full_page_assets_v1", "thumbnail_storage_path": "qualification/thumbnails/2abf8d3f226e40e7a2008465a35af856.webp", "embedding_backfilled_at": "2026-06-16T07:24:16+00:00", "replaces_source_batch_id": "customer_liaoning_taichang_20260606_p0", "thumbnail_storage_bucket": "knowledge-files", "embedding_backfill_run_id": "run_20260616_taichang_asset_embedding_backfill", "fact_source_allowed_for_enterprise": true}, "created_at": "2026-06-07T11:34:26.415266+08:00", "updated_at": "2026-06-16T15:24:16.438404+08:00", "similarity": 0.7765676337795411, "rerank_score": 0.9134546648382813}, {"id": "a7188e0d-d334-4ded-9a5a-e428f5fd4334", "title": "泰昌绿色发展规划报告第2页", "description": "河北泰昌电力器材科技有限公司资质证书资料，来源于客户已提供文件《绿色发展规划报告.pdf》第2页。该图片为正式整页/原图资产，不是 MinerU 局部切图。", "category": "绿色低碳资料", "asset_type": "qualification_image", "file_name": "绿色发展规划报告_第002页.jpg", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 207717, "storage_bucket": "knowledge-files", "storage_path": "qualification/bb668304ea8f4bb9a31b224df3b388d7.jpg", "public_url": "/local-storage/knowledge-files/qualification/bb668304ea8f4bb9a31b224df3b388d7.jpg", "width": 1191, "height": 1684, "source_type": "customer_pdf_full_page_render", "source_url": null, "license": "客户自有资料", "attribution": "河北泰昌电力器材科技有限公司", "is_synthetic": false, "is_sensitive": false, "anonymized": false, "industry": "电力行业", "applicable_sections": ["资格审查资料", "绿色低碳资料"], "applicable_volumes": ["qualification", "business", "attachment"], "tags": ["泰昌", "泰昌企业事实", "资质证书", "资信库"], "specs": {"page_no": 2, "full_page": true, "page_index": 1, "display_name": "泰昌绿色发展规划报告第2页", "evidence_type": "certification", "target_library": "qualification_library", "asset_visual_type": "full_page_certificate"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司资质证书资料，来源于客户已提供文件《绿色发展规划报告.pdf》第2页。该图片为正式整页/原图资产，不是 MinerU 局部切图。", "searchable_text": "泰昌绿色发展规划报告第2页\n河北泰昌电力器材科技有限公司资质证书资料，来源于客户已提供文件《绿色发展规划报告.pdf》第2页。该图片为正式整页/原图资产，不是 MinerU 局部切图。\n绿色低碳资料\n泰昌 泰昌企业事实 资质证书 资信库\n绿色发展规划报告\n资质证书\n泰昌\n河北泰昌电力器材科技有限公司", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 2, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "page_index": 1, "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色发展规划报告.pdf", "access_scope": "taichang_tenant_internal", "evidence_type": "certification", "source_domain": "enterprise_fact", "category_label": "泰昌企业资料", "reference_only": false, "target_library": "qualification_library", "thumbnail_size": 34620, "ui_name_policy": "domestic_chinese_friendly", "do_not_mix_with": ["河北豪乾参考稿", "辽宁招标资料"], "embedding_model": "qwen3-embedding:0.6b", "source_batch_id": "customer_liaoning_taichang_20260606_p0_formal_full_page_assets_v1", "display_language": "zh-CN", "embedding_source": "knowledge_asset_embedding_backfill", "extracted_region": false, "source_file_name": "绿色发展规划报告.pdf", "asset_visual_type": "full_page_certificate", "rendered_from_pdf": true, "tenant_visibility": "taichang_only", "evidence_type_label": "资质证书", "source_display_name": "绿色发展规划报告", "thumbnail_mime_type": "image/webp", "embedding_dimensions": 1024, "target_library_label": "资信库资料", "formal_source_batch_id": "customer_liaoning_taichang_20260606_p0_formal_full_page_assets_v1", "thumbnail_storage_path": "qualification/thumbnails/3de0093a5de74ff08f65c1fa549d435b.webp", "embedding_backfilled_at": "2026-06-16T07:24:16+00:00", "replaces_source_batch_id": "customer_liaoning_taichang_20260606_p0", "thumbnail_storage_bucket": "knowledge-files", "embedding_backfill_run_id": "run_20260616_taichang_asset_embedding_backfill", "fact_source_allowed_for_enterprise": true}, "created_at": "2026-06-07T11:34:26.071102+08:00", "updated_at": "2026-06-16T15:24:16.417935+08:00", "similarity": 0.7763942072827135, "rerank_score": 0.9141331189139417}, {"id": "b5d9b4dc-ba35-4bbe-b24a-728a00b3489f", "title": "泰昌绿色发展规划报告第8页", "description": "河北泰昌电力器材科技有限公司资质证书资料，来源于客户已提供文件《绿色发展规划报告.pdf》第8页。该图片为正式整页/原图资产，不是 MinerU 局部切图。", "category": "绿色低碳资料", "asset_type": "qualification_image", "file_name": "绿色发展规划报告_第008页.jpg", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 152704, "storage_bucket": "knowledge-files", "storage_path": "qualification/ce60606bee23457896ef4f4cc1259ff3.jpg", "public_url": "/local-storage/knowledge-files/qualification/ce60606bee23457896ef4f4cc1259ff3.jpg", "width": 1191, "height": 1684, "source_type": "customer_pdf_full_page_render", "source_url": null, "license": "客户自有资料", "attribution": "河北泰昌电力器材科技有限公司", "is_synthetic": false, "is_sensitive": false, "anonymized": false, "industry": "电力行业", "applicable_sections": ["资格审查资料", "绿色低碳资料"], "applicable_volumes": ["qualification", "business", "attachment"], "tags": ["泰昌", "泰昌企业事实", "资质证书", "资信库"], "specs": {"page_no": 8, "full_page": true, "page_index": 7, "display_name": "泰昌绿色发展规划报告第8页", "evidence_type": "certification", "target_library": "qualification_library", "asset_visual_type": "full_page_certificate"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司资质证书资料，来源于客户已提供文件《绿色发展规划报告.pdf》第8页。该图片为正式整页/原图资产，不是 MinerU 局部切图。", "searchable_text": "泰昌绿色发展规划报告第8页\n河北泰昌电力器材科技有限公司资质证书资料，来源于客户已提供文件《绿色发展规划报告.pdf》第8页。该图片为正式整页/原图资产，不是 MinerU 局部切图。\n绿色低碳资料\n泰昌 泰昌企业事实 资质证书 资信库\n绿色发展规划报告\n资质证书\n泰昌\n河北泰昌电力器材科技有限公司", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 8, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "page_index": 7, "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色发展规划报告.pdf", "access_scope": "taichang_tenant_internal", "evidence_type": "certification", "source_domain": "enterprise_fact", "category_label": "泰昌企业资料", "reference_only": false, "target_library": "qualification_library", "thumbnail_size": 24018, "ui_name_policy": "domestic_chinese_friendly", "do_not_mix_with": ["河北豪乾参考稿", "辽宁招标资料"], "embedding_model": "qwen3-embedding:0.6b", "source_batch_id": "customer_liaoning_taichang_20260606_p0_formal_full_page_assets_v1", "display_language": "zh-CN", "embedding_source": "knowledge_asset_embedding_backfill", "extracted_region": false, "source_file_name": "绿色发展规划报告.pdf", "asset_visual_type": "full_page_certificate", "rendered_from_pdf": true, "tenant_visibility": "taichang_only", "evidence_type_label": "资质证书", "source_display_name": "绿色发展规划报告", "thumbnail_mime_type": "image/webp", "embedding_dimensions": 1024, "target_library_label": "资信库资料", "formal_source_batch_id": "customer_liaoning_taichang_20260606_p0_formal_full_page_assets_v1", "thumbnail_storage_path": "qualification/thumbnails/bcd82259f0ce4c2fafe62960a35778eb.webp", "embedding_backfilled_at": "2026-06-16T07:24:16+00:00", "replaces_source_batch_id": "customer_liaoning_taichang_20260606_p0", "thumbnail_storage_bucket": "knowledge-files", "embedding_backfill_run_id": "run_20260616_taichang_asset_embedding_backfill", "fact_source_allowed_for_enterprise": true}, "created_at": "2026-06-07T11:34:26.476601+08:00", "updated_at": "2026-06-16T15:24:16.443153+08:00", "similarity": 0.7759128737191657, "rerank_score": 0.9146375194665864}]}
+
+data: {"type": "chunk", "content": "##"}
+
+data: {"type": "chunk", "content": " "}
+
+data: {"type": "chunk", "content": "结论"}
+
+data: {"type": "chunk", "content": "\n"}
+
+data: {"type": "chunk", "content": "目前"}
+
+data: {"type": "chunk", "content": "提供的"}
+
+data: {"type": "chunk", "content": "资料"}
+
+data: {"type": "chunk", "content": "中"}
+
+data: {"type": "chunk", "content": "，"}
+
+data: {"type": "chunk", "content": "**"}
+
+data: {"type": "chunk", "content": "未"}
+
+data: {"type": "chunk", "content": "包含"}
+
+data: {"type": "chunk", "content": "泰"}
+
+data: {"type": "chunk", "content": "昌"}
+
+data: {"type": "chunk", "content": "的"}
+
+data: {"type": "chunk", "content": "营业执照"}
+
+data: {"type": "chunk", "content": "图片"}
+
+data: {"type": "chunk", "content": "或"}
+
+data: {"type": "chunk", "content": "任何"}
+
+data: {"type": "chunk", "content": "相关"}
+
+data: {"type": "chunk", "content": "文本"}
+
+data: {"type": "chunk", "content": "信息"}
+
+data: {"type": "chunk", "content": "**"}
+
+data: {"type": "chunk", "content": "。"}
+
+data: {"type": "chunk", "content": "关于"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "低碳"}
+
+data: {"type": "chunk", "content": "资料"}
+
+data: {"type": "chunk", "content": "图片"}
+
+data: {"type": "chunk", "content": "，"}
+
+data: {"type": "chunk", "content": "系统"}
+
+data: {"type": "chunk", "content": "内"}
+
+data: {"type": "chunk", "content": "已"}
+
+data: {"type": "chunk", "content": "收录"}
+
+data: {"type": "chunk", "content": "多"}
+
+data: {"type": "chunk", "content": "份"}
+
+data: {"type": "chunk", "content": "相关"}
+
+data: {"type": "chunk", "content": "企业"}
+
+data: {"type": "chunk", "content": "资产"}
+
+data: {"type": "chunk", "content": "，"}
+
+data: {"type": "chunk", "content": "可用于"}
+
+data: {"type": "chunk", "content": "投标"}
+
+data: {"type": "chunk", "content": "或"}
+
+data: {"type": "chunk", "content": "资格审查"}
+
+data: {"type": "chunk", "content": "中的"}
+
+data: {"type": "chunk", "content": "“"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "低碳"}
+
+data: {"type": "chunk", "content": "”"}
+
+data: {"type": "chunk", "content": "章节"}
+
+data: {"type": "chunk", "content": "。\n\n"}
+
+data: {"type": "chunk", "content": "##"}
+
+data: {"type": "chunk", "content": " "}
+
+data: {"type": "chunk", "content": "关键"}
+
+data: {"type": "chunk", "content": "信息"}
+
+data: {"type": "chunk", "content": "\n"}
+
+data: {"type": "chunk", "content": "-"}
+
+data: {"type": "chunk", "content": " **"}
+
+data: {"type": "chunk", "content": "营业执照"}
+
+data: {"type": "chunk", "content": "**"}
+
+data: {"type": "chunk", "content": "："}
+
+data: {"type": "chunk", "content": "无"}
+
+data: {"type": "chunk", "content": "相关"}
+
+data: {"type": "chunk", "content": "图片"}
+
+data: {"type": "chunk", "content": "或"}
+
+data: {"type": "chunk", "content": "知识"}
+
+data: {"type": "chunk", "content": "片段"}
+
+data: {"type": "chunk", "content": "命中"}
+
+data: {"type": "chunk", "content": "，"}
+
+data: {"type": "chunk", "content": "建议"}
+
+data: {"type": "chunk", "content": "企业"}
+
+data: {"type": "chunk", "content": "补充"}
+
+data: {"type": "chunk", "content": "提供"}
+
+data: {"type": "chunk", "content": "。\n"}
+
+data: {"type": "chunk", "content": "-"}
+
+data: {"type": "chunk", "content": " **"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "低碳"}
+
+data: {"type": "chunk", "content": "资料"}
+
+data: {"type": "chunk", "content": "图片"}
+
+data: {"type": "chunk", "content": "（"}
+
+data: {"type": "chunk", "content": "共"}
+
+data: {"type": "chunk", "content": "8"}
+
+data: {"type": "chunk", "content": "张"}
+
+data: {"type": "chunk", "content": "）"}
+
+data: {"type": "chunk", "content": "**"}
+
+data: {"type": "chunk", "content": "：\n"}
+
+data: {"type": "chunk", "content": " "}
+
+data: {"type": "chunk", "content": " -"}
+
+data: {"type": "chunk", "content": " **"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "发展规划"}
+
+data: {"type": "chunk", "content": "报告"}
+
+data: {"type": "chunk", "content": "**"}
+
+data: {"type": "chunk", "content": "（"}
+
+data: {"type": "chunk", "content": "第"}
+
+data: {"type": "chunk", "content": "2"}
+
+data: {"type": "chunk", "content": "、"}
+
+data: {"type": "chunk", "content": "3"}
+
+data: {"type": "chunk", "content": "、"}
+
+data: {"type": "chunk", "content": "4"}
+
+data: {"type": "chunk", "content": "、"}
+
+data: {"type": "chunk", "content": "7"}
+
+data: {"type": "chunk", "content": "、"}
+
+data: {"type": "chunk", "content": "8"}
+
+data: {"type": "chunk", "content": "、"}
+
+data: {"type": "chunk", "content": "12"}
+
+data: {"type": "chunk", "content": "、"}
+
+data: {"type": "chunk", "content": "15"}
+
+data: {"type": "chunk", "content": "页"}
+
+data: {"type": "chunk", "content": "）："}
+
+data: {"type": "chunk", "content": "展示"}
+
+data: {"type": "chunk", "content": "泰"}
+
+data: {"type": "chunk", "content": "昌"}
+
+data: {"type": "chunk", "content": "在"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "发展规划"}
+
+data: {"type": "chunk", "content": "方面的"}
+
+data: {"type": "chunk", "content": "总体"}
+
+data: {"type": "chunk", "content": "方案"}
+
+data: {"type": "chunk", "content": "、"}
+
+data: {"type": "chunk", "content": "目标"}
+
+data: {"type": "chunk", "content": "及"}
+
+data: {"type": "chunk", "content": "实施"}
+
+data: {"type": "chunk", "content": "路径"}
+
+data: {"type": "chunk", "content": "。\n"}
+
+data: {"type": "chunk", "content": " "}
+
+data: {"type": "chunk", "content": " -"}
+
+data: {"type": "chunk", "content": " **"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "供应链"}
+
+data: {"type": "chunk", "content": "认证"}
+
+data: {"type": "chunk", "content": "证书"}
+
+data: {"type": "chunk", "content": "**"}
+
+data: {"type": "chunk", "content": "（"}
+
+data: {"type": "chunk", "content": "第"}
+
+data: {"type": "chunk", "content": "1"}
+
+data: {"type": "chunk", "content": "页"}
+
+data: {"type": "chunk", "content": "）："}
+
+data: {"type": "chunk", "content": "证明"}
+
+data: {"type": "chunk", "content": "泰"}
+
+data: {"type": "chunk", "content": "昌"}
+
+data: {"type": "chunk", "content": "已"}
+
+data: {"type": "chunk", "content": "通过"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "供应链"}
+
+data: {"type": "chunk", "content": "管理体系"}
+
+data: {"type": "chunk", "content": "认证"}
+
+data: {"type": "chunk", "content": "，"}
+
+data: {"type": "chunk", "content": "适用于"}
+
+data: {"type": "chunk", "content": "“"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "供应链"}
+
+data: {"type": "chunk", "content": "”"}
+
+data: {"type": "chunk", "content": "或"}
+
+data: {"type": "chunk", "content": "“"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "工厂"}
+
+data: {"type": "chunk", "content": "”"}
+
+data: {"type": "chunk", "content": "等"}
+
+data: {"type": "chunk", "content": "资格审查"}
+
+data: {"type": "chunk", "content": "项"}
+
+data: {"type": "chunk", "content": "。\n\n"}
+
+data: {"type": "chunk", "content": "##"}
+
+data: {"type": "chunk", "content": " "}
+
+data: {"type": "chunk", "content": "操作"}
+
+data: {"type": "chunk", "content": "建议"}
+
+data: {"type": "chunk", "content": "\n"}
+
+data: {"type": "chunk", "content": "1"}
+
+data: {"type": "chunk", "content": "."}
+
+data: {"type": "chunk", "content": " **"}
+
+data: {"type": "chunk", "content": "标"}
+
+data: {"type": "chunk", "content": "书"}
+
+data: {"type": "chunk", "content": "装配"}
+
+data: {"type": "chunk", "content": "**"}
+
+data: {"type": "chunk", "content": "："}
+
+data: {"type": "chunk", "content": "可将"}
+
+data: {"type": "chunk", "content": "上述"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "低碳"}
+
+data: {"type": "chunk", "content": "资料"}
+
+data: {"type": "chunk", "content": "图片"}
+
+data: {"type": "chunk", "content": "插入"}
+
+data: {"type": "chunk", "content": "标"}
+
+data: {"type": "chunk", "content": "书"}
+
+data: {"type": "chunk", "content": "“"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "低碳"}
+
+data: {"type": "chunk", "content": "管理"}
+
+data: {"type": "chunk", "content": "”"}
+
+data: {"type": "chunk", "content": "或"}
+
+data: {"type": "chunk", "content": "“"}
+
+data: {"type": "chunk", "content": "企业"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "资质"}
+
+data: {"type": "chunk", "content": "”"}
+
+data: {"type": "chunk", "content": "章节"}
+
+data: {"type": "chunk", "content": "，"}
+
+data: {"type": "chunk", "content": "作为"}
+
+data: {"type": "chunk", "content": "佐"}
+
+data: {"type": "chunk", "content": "证"}
+
+data: {"type": "chunk", "content": "材料"}
+
+data: {"type": "chunk", "content": "。\n"}
+
+data: {"type": "chunk", "content": "2"}
+
+data: {"type": "chunk", "content": "."}
+
+data: {"type": "chunk", "content": " **"}
+
+data: {"type": "chunk", "content": "资质"}
+
+data: {"type": "chunk", "content": "补充"}
+
+data: {"type": "chunk", "content": "**"}
+
+data: {"type": "chunk", "content": "："}
+
+data: {"type": "chunk", "content": "若"}
+
+data: {"type": "chunk", "content": "投标"}
+
+data: {"type": "chunk", "content": "要求"}
+
+data: {"type": "chunk", "content": "提供"}
+
+data: {"type": "chunk", "content": "营业执照"}
+
+data: {"type": "chunk", "content": "，"}
+
+data: {"type": "chunk", "content": "请"}
+
+data: {"type": "chunk", "content": "立即"}
+
+data: {"type": "chunk", "content": "从"}
+
+data: {"type": "chunk", "content": "官方"}
+
+data: {"type": "chunk", "content": "渠道"}
+
+data: {"type": "chunk", "content": "获取"}
+
+data: {"type": "chunk", "content": "清晰的"}
+
+data: {"type": "chunk", "content": "彩色"}
+
+data: {"type": "chunk", "content": "扫描"}
+
+data: {"type": "chunk", "content": "件"}
+
+data: {"type": "chunk", "content": "（"}
+
+data: {"type": "chunk", "content": "含"}
+
+data: {"type": "chunk", "content": "统一"}
+
+data: {"type": "chunk", "content": "社会"}
+
+data: {"type": "chunk", "content": "信用"}
+
+data: {"type": "chunk", "content": "代码"}
+
+data: {"type": "chunk", "content": "、"}
+
+data: {"type": "chunk", "content": "经营范围"}
+
+data: {"type": "chunk", "content": "、"}
+
+data: {"type": "chunk", "content": "有效期"}
+
+data: {"type": "chunk", "content": "等"}
+
+data: {"type": "chunk", "content": "关键"}
+
+data: {"type": "chunk", "content": "信息"}
+
+data: {"type": "chunk", "content": "）。\n\n"}
+
+data: {"type": "chunk", "content": "##"}
+
+data: {"type": "chunk", "content": " "}
+
+data: {"type": "chunk", "content": "需要"}
+
+data: {"type": "chunk", "content": "确认"}
+
+data: {"type": "chunk", "content": "或"}
+
+data: {"type": "chunk", "content": "补充"}
+
+data: {"type": "chunk", "content": "\n"}
+
+data: {"type": "chunk", "content": "-"}
+
+data: {"type": "chunk", "content": " **"}
+
+data: {"type": "chunk", "content": "营业执照"}
+
+data: {"type": "chunk", "content": "**"}
+
+data: {"type": "chunk", "content": "："}
+
+data: {"type": "chunk", "content": "当前"}
+
+data: {"type": "chunk", "content": "资料"}
+
+data: {"type": "chunk", "content": "完全"}
+
+data: {"type": "chunk", "content": "缺失"}
+
+data: {"type": "chunk", "content": "，"}
+
+data: {"type": "chunk", "content": "请"}
+
+data: {"type": "chunk", "content": "用户"}
+
+data: {"type": "chunk", "content": "提供"}
+
+data: {"type": "chunk", "content": "“"}
+
+data: {"type": "chunk", "content": "泰"}
+
+data: {"type": "chunk", "content": "昌"}
+
+data: {"type": "chunk", "content": "电力"}
+
+data: {"type": "chunk", "content": "器材"}
+
+data: {"type": "chunk", "content": "科技有限公司"}
+
+data: {"type": "chunk", "content": "”"}
+
+data: {"type": "chunk", "content": "的最新"}
+
+data: {"type": "chunk", "content": "营业执照"}
+
+data: {"type": "chunk", "content": "整"}
+
+data: {"type": "chunk", "content": "页"}
+
+data: {"type": "chunk", "content": "扫描"}
+
+data: {"type": "chunk", "content": "件"}
+
+data: {"type": "chunk", "content": "（"}
+
+data: {"type": "chunk", "content": "正"}
+
+data: {"type": "chunk", "content": "本"}
+
+data: {"type": "chunk", "content": "或"}
+
+data: {"type": "chunk", "content": "副本"}
+
+data: {"type": "chunk", "content": "均可"}
+
+data: {"type": "chunk", "content": "）。\n"}
+
+data: {"type": "chunk", "content": "-"}
+
+data: {"type": "chunk", "content": " **"}
+
+data: {"type": "chunk", "content": "其他"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "低碳"}
+
+data: {"type": "chunk", "content": "证书"}
+
+data: {"type": "chunk", "content": "**"}
+
+data: {"type": "chunk", "content": "："}
+
+data: {"type": "chunk", "content": "如果"}
+
+data: {"type": "chunk", "content": "还需要"}
+
+data: {"type": "chunk", "content": "“"}
+
+data: {"type": "chunk", "content": "碳"}
+
+data: {"type": "chunk", "content": "足迹"}
+
+data: {"type": "chunk", "content": "报告"}
+
+data: {"type": "chunk", "content": "”“"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "电力"}
+
+data: {"type": "chunk", "content": "认证"}
+
+data: {"type": "chunk", "content": "证书"}
+
+data: {"type": "chunk", "content": "”"}
+
+data: {"type": "chunk", "content": "等"}
+
+data: {"type": "chunk", "content": "，"}
+
+data: {"type": "chunk", "content": "可"}
+
+data: {"type": "chunk", "content": "进一步"}
+
+data: {"type": "chunk", "content": "检索"}
+
+data: {"type": "chunk", "content": "，"}
+
+data: {"type": "chunk", "content": "但"}
+
+data: {"type": "chunk", "content": "当前"}
+
+data: {"type": "chunk", "content": "图片"}
+
+data: {"type": "chunk", "content": "资产"}
+
+data: {"type": "chunk", "content": "中"}
+
+data: {"type": "chunk", "content": "未"}
+
+data: {"type": "chunk", "content": "包含"}
+
+data: {"type": "chunk", "content": "这些"}
+
+data: {"type": "chunk", "content": "证书"}
+
+data: {"type": "chunk", "content": "的"}
+
+data: {"type": "chunk", "content": "完整"}
+
+data: {"type": "chunk", "content": "页面"}
+
+data: {"type": "chunk", "content": "（"}
+
+data: {"type": "chunk", "content": "仅有"}
+
+data: {"type": "chunk", "content": "知识"}
+
+data: {"type": "chunk", "content": "片段"}
+
+data: {"type": "chunk", "content": "中的"}
+
+data: {"type": "chunk", "content": "局部"}
+
+data: {"type": "chunk", "content": "切"}
+
+data: {"type": "chunk", "content": "图"}
+
+data: {"type": "chunk", "content": "）。\n\n"}
+
+data: {"type": "chunk", "content": "##"}
+
+data: {"type": "chunk", "content": " "}
+
+data: {"type": "chunk", "content": "参考"}
+
+data: {"type": "chunk", "content": "依据"}
+
+data: {"type": "chunk", "content": "\n"}
+
+data: {"type": "chunk", "content": "-"}
+
+data: {"type": "chunk", "content": " **"}
+
+data: {"type": "chunk", "content": "知识"}
+
+data: {"type": "chunk", "content": "库"}
+
+data: {"type": "chunk", "content": "检索"}
+
+data: {"type": "chunk", "content": "片段"}
+
+data: {"type": "chunk", "content": "**"}
+
+data: {"type": "chunk", "content": "："}
+
+data: {"type": "chunk", "content": "资料"}
+
+data: {"type": "chunk", "content": "1"}
+
+data: {"type": "chunk", "content": "（"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "电力"}
+
+data: {"type": "chunk", "content": "认证"}
+
+data: {"type": "chunk", "content": "证书"}
+
+data: {"type": "chunk", "content": "局部"}
+
+data: {"type": "chunk", "content": "）、"}
+
+data: {"type": "chunk", "content": "资料"}
+
+data: {"type": "chunk", "content": "2"}
+
+data: {"type": "chunk", "content": "（"}
+
+data: {"type": "chunk", "content": "碳"}
+
+data: {"type": "chunk", "content": "足迹"}
+
+data: {"type": "chunk", "content": "报告"}
+
+data: {"type": "chunk", "content": "局部"}
+
+data: {"type": "chunk", "content": "）"}
+
+data: {"type": "chunk", "content": "——"}
+
+data: {"type": "chunk", "content": "因"}
+
+data: {"type": "chunk", "content": "均为"}
+
+data: {"type": "chunk", "content": "局部"}
+
+data: {"type": "chunk", "content": "切"}
+
+data: {"type": "chunk", "content": "图"}
+
+data: {"type": "chunk", "content": "且"}
+
+data: {"type": "chunk", "content": "未"}
+
+data: {"type": "chunk", "content": "提供"}
+
+data: {"type": "chunk", "content": "完整"}
+
+data: {"type": "chunk", "content": "图片"}
+
+data: {"type": "chunk", "content": "地址"}
+
+data: {"type": "chunk", "content": "，"}
+
+data: {"type": "chunk", "content": "未"}
+
+data: {"type": "chunk", "content": "直接"}
+
+data: {"type": "chunk", "content": "采用"}
+
+data: {"type": "chunk", "content": "。\n"}
+
+data: {"type": "chunk", "content": "-"}
+
+data: {"type": "chunk", "content": " **"}
+
+data: {"type": "chunk", "content": "相关"}
+
+data: {"type": "chunk", "content": "图片"}
+
+data: {"type": "chunk", "content": "/"}
+
+data: {"type": "chunk", "content": "资质"}
+
+data: {"type": "chunk", "content": "资产"}
+
+data: {"type": "chunk", "content": "**"}
+
+data: {"type": "chunk", "content": "："}
+
+data: {"type": "chunk", "content": "图片"}
+
+data: {"type": "chunk", "content": "资产"}
+
+data: {"type": "chunk", "content": "1"}
+
+data: {"type": "chunk", "content": "~"}
+
+data: {"type": "chunk", "content": "8"}
+
+data: {"type": "chunk", "content": "（"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "发展规划"}
+
+data: {"type": "chunk", "content": "报告"}
+
+data: {"type": "chunk", "content": "各"}
+
+data: {"type": "chunk", "content": "页"}
+
+data: {"type": "chunk", "content": "、"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "供应链"}
+
+data: {"type": "chunk", "content": "认证"}
+
+data: {"type": "chunk", "content": "证书"}
+
+data: {"type": "chunk", "content": "），"}
+
+data: {"type": "chunk", "content": "均"}
+
+data: {"type": "chunk", "content": "来自"}
+
+data: {"type": "chunk", "content": "《"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "发展规划"}
+
+data: {"type": "chunk", "content": "报告"}
+
+data: {"type": "chunk", "content": ".pdf"}
+
+data: {"type": "chunk", "content": "》"}
+
+data: {"type": "chunk", "content": "和"}
+
+data: {"type": "chunk", "content": "《"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "供应链"}
+
+data: {"type": "chunk", "content": "认证"}
+
+data: {"type": "chunk", "content": "证书"}
+
+data: {"type": "chunk", "content": ".pdf"}
+
+data: {"type": "chunk", "content": "》，"}
+
+data: {"type": "chunk", "content": "所属"}
+
+data: {"type": "chunk", "content": "分类"}
+
+data: {"type": "chunk", "content": "为"}
+
+data: {"type": "chunk", "content": "“"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "低碳"}
+
+data: {"type": "chunk", "content": "资料"}
+
+data: {"type": "chunk", "content": "”。\n\n"}
+
+data: {"type": "chunk", "content": "以下"}
+
+data: {"type": "chunk", "content": "为"}
+
+data: {"type": "chunk", "content": "最"}
+
+data: {"type": "chunk", "content": "相关的"}
+
+data: {"type": "chunk", "content": "3"}
+
+data: {"type": "chunk", "content": "张"}
+
+data: {"type": "chunk", "content": "图片"}
+
+data: {"type": "chunk", "content": "参考"}
+
+data: {"type": "chunk", "content": "（"}
+
+data: {"type": "chunk", "content": "可"}
+
+data: {"type": "chunk", "content": "插入"}
+
+data: {"type": "chunk", "content": "标"}
+
+data: {"type": "chunk", "content": "书"}
+
+data: {"type": "chunk", "content": "对应"}
+
+data: {"type": "chunk", "content": "位置"}
+
+data: {"type": "chunk", "content": "）：\n\n"}
+
+data: {"type": "chunk", "content": "!["}
+
+data: {"type": "chunk", "content": "泰"}
+
+data: {"type": "chunk", "content": "昌"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "供应链"}
+
+data: {"type": "chunk", "content": "认证"}
+
+data: {"type": "chunk", "content": "证书"}
+
+data: {"type": "chunk", "content": "第"}
+
+data: {"type": "chunk", "content": "1"}
+
+data: {"type": "chunk", "content": "页"}
+
+data: {"type": "chunk", "content": "](/"}
+
+data: {"type": "chunk", "content": "api"}
+
+data: {"type": "chunk", "content": "/k"}
+
+data: {"type": "chunk", "content": "now"}
+
+data: {"type": "chunk", "content": "ledge"}
+
+data: {"type": "chunk", "content": "/assets"}
+
+data: {"type": "chunk", "content": "/"}
+
+data: {"type": "chunk", "content": "012"}
+
+data: {"type": "chunk", "content": "bc"}
+
+data: {"type": "chunk", "content": "bb"}
+
+data: {"type": "chunk", "content": "3"}
+
+data: {"type": "chunk", "content": "-"}
+
+data: {"type": "chunk", "content": "9"}
+
+data: {"type": "chunk", "content": "ad"}
+
+data: {"type": "chunk", "content": "f"}
+
+data: {"type": "chunk", "content": "-"}
+
+data: {"type": "chunk", "content": "431"}
+
+data: {"type": "chunk", "content": "5"}
+
+data: {"type": "chunk", "content": "-"}
+
+data: {"type": "chunk", "content": "832"}
+
+data: {"type": "chunk", "content": "9"}
+
+data: {"type": "chunk", "content": "-"}
+
+data: {"type": "chunk", "content": "1"}
+
+data: {"type": "chunk", "content": "e"}
+
+data: {"type": "chunk", "content": "0"}
+
+data: {"type": "chunk", "content": "ea"}
+
+data: {"type": "chunk", "content": "800"}
+
+data: {"type": "chunk", "content": "696"}
+
+data: {"type": "chunk", "content": "7"}
+
+data: {"type": "chunk", "content": "/file"}
+
+data: {"type": "chunk", "content": ")\n\n"}
+
+data: {"type": "chunk", "content": "!["}
+
+data: {"type": "chunk", "content": "泰"}
+
+data: {"type": "chunk", "content": "昌"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "发展规划"}
+
+data: {"type": "chunk", "content": "报告"}
+
+data: {"type": "chunk", "content": "第"}
+
+data: {"type": "chunk", "content": "4"}
+
+data: {"type": "chunk", "content": "页"}
+
+data: {"type": "chunk", "content": "](/"}
+
+data: {"type": "chunk", "content": "api"}
+
+data: {"type": "chunk", "content": "/k"}
+
+data: {"type": "chunk", "content": "now"}
+
+data: {"type": "chunk", "content": "ledge"}
+
+data: {"type": "chunk", "content": "/assets"}
+
+data: {"type": "chunk", "content": "/"}
+
+data: {"type": "chunk", "content": "797"}
+
+data: {"type": "chunk", "content": "67"}
+
+data: {"type": "chunk", "content": "ad"}
+
+data: {"type": "chunk", "content": "8"}
+
+data: {"type": "chunk", "content": "-"}
+
+data: {"type": "chunk", "content": "478"}
+
+data: {"type": "chunk", "content": "b"}
+
+data: {"type": "chunk", "content": "-"}
+
+data: {"type": "chunk", "content": "401"}
+
+data: {"type": "chunk", "content": "9"}
+
+data: {"type": "chunk", "content": "-"}
+
+data: {"type": "chunk", "content": "826"}
+
+data: {"type": "chunk", "content": "e"}
+
+data: {"type": "chunk", "content": "-f"}
+
+data: {"type": "chunk", "content": "505"}
+
+data: {"type": "chunk", "content": "c"}
+
+data: {"type": "chunk", "content": "bec"}
+
+data: {"type": "chunk", "content": "7"}
+
+data: {"type": "chunk", "content": "d"}
+
+data: {"type": "chunk", "content": "95"}
+
+data: {"type": "chunk", "content": "/file"}
+
+data: {"type": "chunk", "content": ")\n\n"}
+
+data: {"type": "chunk", "content": "!["}
+
+data: {"type": "chunk", "content": "泰"}
+
+data: {"type": "chunk", "content": "昌"}
+
+data: {"type": "chunk", "content": "绿色"}
+
+data: {"type": "chunk", "content": "发展规划"}
+
+data: {"type": "chunk", "content": "报告"}
+
+data: {"type": "chunk", "content": "第"}
+
+data: {"type": "chunk", "content": "3"}
+
+data: {"type": "chunk", "content": "页"}
+
+data: {"type": "chunk", "content": "（"}
+
+data: {"type": "chunk", "content": "资质"}
+
+data: {"type": "chunk", "content": "类"}
+
+data: {"type": "chunk", "content": "）"}
+
+data: {"type": "chunk", "content": "](/"}
+
+data: {"type": "chunk", "content": "api"}
+
+data: {"type": "chunk", "content": "/k"}
+
+data: {"type": "chunk", "content": "now"}
+
+data: {"type": "chunk", "content": "ledge"}
+
+data: {"type": "chunk", "content": "/assets"}
+
+data: {"type": "chunk", "content": "/ac"}
+
+data: {"type": "chunk", "content": "753"}
+
+data: {"type": "chunk", "content": "b"}
+
+data: {"type": "chunk", "content": "6"}
+
+data: {"type": "chunk", "content": "b"}
+
+data: {"type": "chunk", "content": "-"}
+
+data: {"type": "chunk", "content": "ff"}
+
+data: {"type": "chunk", "content": "93"}
+
+data: {"type": "chunk", "content": "-"}
+
+data: {"type": "chunk", "content": "4"}
+
+data: {"type": "chunk", "content": "a"}
+
+data: {"type": "chunk", "content": "24"}
+
+data: {"type": "chunk", "content": "-b"}
+
+data: {"type": "chunk", "content": "5"}
+
+data: {"type": "chunk", "content": "b"}
+
+data: {"type": "chunk", "content": "7"}
+
+data: {"type": "chunk", "content": "-"}
+
+data: {"type": "chunk", "content": "7"}
+
+data: {"type": "chunk", "content": "ef"}
+
+data: {"type": "chunk", "content": "52"}
+
+data: {"type": "chunk", "content": "f"}
+
+data: {"type": "chunk", "content": "2"}
+
+data: {"type": "chunk", "content": "a"}
+
+data: {"type": "chunk", "content": "790"}
+
+data: {"type": "chunk", "content": "e"}
+
+data: {"type": "chunk", "content": "/file"}
+
+data: {"type": "chunk", "content": ")"}
+
+data: {"type": "done"}
+

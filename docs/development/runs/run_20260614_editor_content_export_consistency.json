@@ -1,0 +1,289 @@
+{
+  "run_id": "run_20260614_editor_content_export_consistency",
+  "generated_at": "2026-06-14T11:10:43",
+  "project_id": "4bc3ee73-9ec5-4184-aafd-eaede9f90798",
+  "tests": [
+    {
+      "label": "saved_database_content_export",
+      "marker": "【run_20260614_editor_content_export_consistency_SAVED_DB_MARKER】",
+      "markdown": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司.md",
+      "docx": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司.docx",
+      "marker_in_docx": true,
+      "field_refresh": {
+        "enabled": true,
+        "status": "refreshed",
+        "tool": "libreoffice",
+        "soffice_bin": "/opt/homebrew/bin/soffice",
+        "input_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司.docx",
+        "timeout_seconds": 180,
+        "returncode": 0,
+        "stdout": "convert /var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-m8t6nymm/input/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司.docx as a Writer document -> /private/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-m8t6nymm/output/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司.docx using filter : Office Open XML Text\n",
+        "stderr": "2026-06-14 11:10:51.959 soffice[74032:24039247] Task policy set failed: 4 ((os/kern) invalid argument)\n",
+        "manual_refresh_required": false,
+        "user_message": "DOCX 已完成自动刷新，目录页码、页脚页码和总页数字段已重新保存。",
+        "output_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司.docx",
+        "size": 1059342,
+        "table_header_repeat": {
+          "table_count": 130,
+          "updated": 0,
+          "failed": false
+        },
+        "marker_cleanup": {
+          "enabled": true,
+          "status": "cleaned",
+          "counts_before": {
+            "keepLines": 0,
+            "keepNext": 1,
+            "pageBreakBefore": 0
+          },
+          "counts_after": {
+            "keepLines": 0,
+            "keepNext": 0,
+            "pageBreakBefore": 0
+          }
+        }
+      },
+      "image_conversion": {
+        "max_images": 24,
+        "found": 0,
+        "inserted": 0,
+        "skipped": 0,
+        "failed": 0,
+        "events": [],
+        "logo": {
+          "header": {
+            "inserted": true,
+            "path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/assets/icons/taichang_logo.png",
+            "auto_cropped": true,
+            "pixel_width": 2281,
+            "pixel_height": 1339,
+            "display_width_in": 0.55,
+            "display_height_in": 0.3229,
+            "aspect_ratio_preserved": true
+          },
+          "cover": {
+            "inserted": true,
+            "path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/assets/icons/taichang_logo.png",
+            "auto_cropped": true,
+            "pixel_width": 2281,
+            "pixel_height": 1339,
+            "display_width_in": 1.65,
+            "display_height_in": 0.9686,
+            "aspect_ratio_preserved": true
+          }
+        },
+        "mermaid": {
+          "found": 0,
+          "inserted": 0,
+          "skipped": 0
+        },
+        "marker_cleanup": {
+          "enabled": true,
+          "status": "unchanged",
+          "counts_before": {
+            "keepLines": 0,
+            "keepNext": 0,
+            "pageBreakBefore": 0
+          },
+          "counts_after": {
+            "keepLines": 0,
+            "keepNext": 0,
+            "pageBreakBefore": 0
+          }
+        },
+        "template": {
+          "template_id": "sgcc_taichang_bid",
+          "bidder_full_name": "河北泰昌电力器材科技有限公司",
+          "body_font": "SimSun",
+          "body_latin_font": "Times New Roman",
+          "body_font_size_pt": 10.5,
+          "body_line_spacing_pt": 20.0,
+          "body_first_line_indent_pt": 21.0,
+          "list_left_indent_pt": 21.0,
+          "list_hanging_indent_pt": 10.5,
+          "heading_keep_with_next": false,
+          "cover_title_font_size_pt": 22.0,
+          "toc_title_font_size_pt": 22.0,
+          "toc_entry_font_size_pt": 10.5,
+          "toc_entry_line_spacing_pt": 18.0,
+          "table_font": "SimSun",
+          "table_font_size_pt": 10.5,
+          "table_line_spacing_pt": 16.0,
+          "table_cell_margin_twips": 100,
+          "page_size": "A4",
+          "margins_cm": {
+            "top": 2.0,
+            "bottom": 2.0,
+            "left": 3.18,
+            "right": 3.18
+          },
+          "heading_font": "Arial Unicode MS",
+          "header_footer": {
+            "header_font": "SimSun",
+            "header_font_size_pt": 9,
+            "footer_font": "SimSun",
+            "footer_font_size_pt": 9,
+            "page_number_format": "第 X 页，共 Y 页",
+            "header_text": "河北泰昌电力器材科技有限公司投标文件",
+            "header_max_chars": 42
+          },
+          "cover_fields": {
+            "项目名称": "国网辽宁电力2025年第三次物资协议库存招标采购",
+            "文件类型": "投标文件",
+            "招标编号": "2225AC",
+            "分标编号": "【待补充：人工复核并填入实际所投分标编号】",
+            "包号": "包2",
+            "包名称": "【待补充：人工复核并填入实际所投包名称】",
+            "招标人": "国网辽宁省电力有限公司",
+            "招标代理机构": "国网辽宁招标有限公司"
+          }
+        }
+      }
+    },
+    {
+      "label": "editor_snapshot_unsaved_content_export",
+      "marker": "【run_20260614_editor_content_export_consistency_EDITOR_SNAPSHOT_MARKER】",
+      "markdown": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司.md",
+      "docx": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司.docx",
+      "marker_in_docx": true,
+      "field_refresh": {
+        "enabled": true,
+        "status": "refreshed",
+        "tool": "libreoffice",
+        "soffice_bin": "/opt/homebrew/bin/soffice",
+        "input_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司.docx",
+        "timeout_seconds": 180,
+        "returncode": 0,
+        "stdout": "convert /var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-vtkiy61h/input/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司.docx as a Writer document -> /private/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-vtkiy61h/output/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司.docx using filter : Office Open XML Text\n",
+        "stderr": "2026-06-14 11:10:59.406 soffice[74819:24040548] Task policy set failed: 4 ((os/kern) invalid argument)\n",
+        "manual_refresh_required": false,
+        "user_message": "DOCX 已完成自动刷新，目录页码、页脚页码和总页数字段已重新保存。",
+        "output_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司.docx",
+        "size": 1059350,
+        "table_header_repeat": {
+          "table_count": 130,
+          "updated": 0,
+          "failed": false
+        },
+        "marker_cleanup": {
+          "enabled": true,
+          "status": "cleaned",
+          "counts_before": {
+            "keepLines": 0,
+            "keepNext": 1,
+            "pageBreakBefore": 0
+          },
+          "counts_after": {
+            "keepLines": 0,
+            "keepNext": 0,
+            "pageBreakBefore": 0
+          }
+        }
+      },
+      "image_conversion": {
+        "max_images": 24,
+        "found": 0,
+        "inserted": 0,
+        "skipped": 0,
+        "failed": 0,
+        "events": [],
+        "logo": {
+          "header": {
+            "inserted": true,
+            "path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/assets/icons/taichang_logo.png",
+            "auto_cropped": true,
+            "pixel_width": 2281,
+            "pixel_height": 1339,
+            "display_width_in": 0.55,
+            "display_height_in": 0.3229,
+            "aspect_ratio_preserved": true
+          },
+          "cover": {
+            "inserted": true,
+            "path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/assets/icons/taichang_logo.png",
+            "auto_cropped": true,
+            "pixel_width": 2281,
+            "pixel_height": 1339,
+            "display_width_in": 1.65,
+            "display_height_in": 0.9686,
+            "aspect_ratio_preserved": true
+          }
+        },
+        "mermaid": {
+          "found": 0,
+          "inserted": 0,
+          "skipped": 0
+        },
+        "marker_cleanup": {
+          "enabled": true,
+          "status": "unchanged",
+          "counts_before": {
+            "keepLines": 0,
+            "keepNext": 0,
+            "pageBreakBefore": 0
+          },
+          "counts_after": {
+            "keepLines": 0,
+            "keepNext": 0,
+            "pageBreakBefore": 0
+          }
+        },
+        "template": {
+          "template_id": "sgcc_taichang_bid",
+          "bidder_full_name": "河北泰昌电力器材科技有限公司",
+          "body_font": "SimSun",
+          "body_latin_font": "Times New Roman",
+          "body_font_size_pt": 10.5,
+          "body_line_spacing_pt": 20.0,
+          "body_first_line_indent_pt": 21.0,
+          "list_left_indent_pt": 21.0,
+          "list_hanging_indent_pt": 10.5,
+          "heading_keep_with_next": false,
+          "cover_title_font_size_pt": 22.0,
+          "toc_title_font_size_pt": 22.0,
+          "toc_entry_font_size_pt": 10.5,
+          "toc_entry_line_spacing_pt": 18.0,
+          "table_font": "SimSun",
+          "table_font_size_pt": 10.5,
+          "table_line_spacing_pt": 16.0,
+          "table_cell_margin_twips": 100,
+          "page_size": "A4",
+          "margins_cm": {
+            "top": 2.0,
+            "bottom": 2.0,
+            "left": 3.18,
+            "right": 3.18
+          },
+          "heading_font": "Arial Unicode MS",
+          "header_footer": {
+            "header_font": "SimSun",
+            "header_font_size_pt": 9,
+            "footer_font": "SimSun",
+            "footer_font_size_pt": 9,
+            "page_number_format": "第 X 页，共 Y 页",
+            "header_text": "河北泰昌电力器材科技有限公司投标文件",
+            "header_max_chars": 42
+          },
+          "cover_fields": {
+            "项目名称": "国网辽宁电力2025年第三次物资协议库存招标采购",
+            "文件类型": "投标文件",
+            "招标编号": "2225AC",
+            "分标编号": "【待补充：人工复核并填入实际所投分标编号】",
+            "包号": "包2",
+            "包名称": "【待补充：人工复核并填入实际所投包名称】",
+            "招标人": "国网辽宁省电力有限公司",
+            "招标代理机构": "国网辽宁招标有限公司"
+          }
+        }
+      }
+    }
+  ],
+  "failures": [],
+  "section_under_test": {
+    "id": "9a8de84d-200b-446b-a314-349130d006b8",
+    "title": "投标函及投标函附录",
+    "order_index": 1
+  },
+  "database_restored": true,
+  "status": "PASS"
+}

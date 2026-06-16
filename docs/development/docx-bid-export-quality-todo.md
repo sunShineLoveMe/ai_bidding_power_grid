@@ -195,3 +195,13 @@
 - 本次真实验收结果：状态 PASS；源项目 74 个章节节点、74 个有正文；DOCX 段落 `2834`、标题 `74`、目录条目 `65`、表格 `130`；图片候选/选中/插入/失败为 `597/24/24/0`；页眉页脚、目录点引导线、`PAGEREF`、`PAGE/NUMPAGES`、中文字体、无黑色方块、无重复父标题、无图片裁剪均通过；LibreOffice 字段刷新成功。
 - 残留占位归类：`docs/rag/taichang-bid-remaining-placeholders-classification-20260612.md` 和 CSV `docs/rag/runs/run_20260612_taichang_fact_grounded_remaining_placeholders.csv`；649 处逐项归类为 P0 `436`、P1 `155`、P2 `58`。
 - 自动化回归：`.venv/bin/python -m pytest tests/test_length_settings.py tests/test_section_generation_autoresume.py tests/test_docx_export.py -q`，结果 `51 passed, 1 warning`。
+
+### 2026-06-14 正文编辑与 DOCX 导出一致性验收记录
+
+- 背景：确认用户在系统正文编辑器中修改正文后，实际 Word 导出是否严格使用修改后的正文。
+- 代码链路复核：前端 `BidEditor.downloadDocx` 会传入当前 `chapters` 生成的 `sectionsSnapshot`；后端 `download-docx` 任务将 `sectionsSnapshot` 传给 `build_project_bid_markdown`，导出时优先使用快照正文，否则读取 `bid_sections.content`。
+- 真实回归：`docs/development/runs/run_20260614_editor_content_export_consistency.md` 和对应 JSON。
+- 验证项目：`4bc3ee73-9ec5-4184-aafd-eaede9f90798`。
+- 验证链路：`build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
+- 验证结果：状态 PASS；已保存到 `bid_sections.content` 的唯一标记进入 DOCX；未保存但通过 `sectionsSnapshot` 传入的唯一标记也进入 DOCX；测试结束后已恢复数据库原章节正文。
+- 结论：正文编辑功能对正式 Word 导出有效。后续修改前端导出参数、章节保存接口或后台导出任务时，必须保留该回归。

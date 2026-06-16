@@ -10,8 +10,9 @@ os.environ.setdefault("APP_ENV", "testing")
 
 
 class _ExecuteResult:
-    def __init__(self, data):
+    def __init__(self, data, count=None):
         self.data = data
+        self.count = count
 
 
 class _TableQuery:
@@ -34,7 +35,7 @@ class _TableQuery:
         return self
 
     def execute(self):
-        return _ExecuteResult(self.rows)
+        return _ExecuteResult(self.rows, count=len(self.rows))
 
 
 class _RpcClient:
@@ -60,6 +61,17 @@ class _RpcClient:
 
 
 class RagRetrievalQualityTest(unittest.TestCase):
+    def test_invalidate_chunk_keyword_cache_clears_rows_and_fingerprint(self):
+        from backend.rag import retrieval
+
+        retrieval._CHUNK_KEYWORD_CACHE = [{"id": "cached"}]
+        retrieval._CHUNK_KEYWORD_CACHE_FINGERPRINT = (1, "2026-06-16T00:00:00+08:00", "cached")
+
+        retrieval.invalidate_chunk_keyword_cache("unit_test")
+
+        self.assertIsNone(retrieval._CHUNK_KEYWORD_CACHE)
+        self.assertIsNone(retrieval._CHUNK_KEYWORD_CACHE_FINGERPRINT)
+
     @patch("backend.rag.retrieval.rerank_documents")
     @patch("backend.rag.retrieval.get_embeddings", return_value=[[0.1, 0.2, 0.3]])
     @patch("backend.rag.retrieval.init_ali_client", return_value=object())
@@ -152,6 +164,61 @@ class RagRetrievalQualityTest(unittest.TestCase):
 
         self.assertEqual(result[0]["id"], "sgcc-keyword")
         self.assertEqual(result[0]["retrieval_source"], "keyword")
+
+    @patch("backend.rag.retrieval.rerank_documents")
+    @patch("backend.rag.retrieval.get_embeddings", return_value=[[0.1, 0.2, 0.3]])
+    @patch("backend.rag.retrieval.init_ali_client", return_value=object())
+    def test_keyword_cache_reloads_when_document_chunks_fingerprint_changes(self, _ali, _embeddings, rerank_mock):
+        from backend.rag import retrieval
+
+        old_row = {
+            "id": "old-keyword",
+            "created_at": "2026-06-16T00:00:00+08:00",
+            "content": "国家电网供应商管理规定：旧资料要求暂停中标资格。",
+            "similarity": 0.0,
+            "metadata": {
+                "chunk_layer": "child",
+                "doc_role": "sgcc_rule",
+                "authority_level": "law_or_standard",
+            },
+        }
+        new_row = {
+            "id": "new-keyword",
+            "created_at": "2026-06-16T01:00:00+08:00",
+            "content": "国家电网供应商管理规定：新增资料要求列入黑名单。",
+            "similarity": 0.0,
+            "metadata": {
+                "chunk_layer": "child",
+                "doc_role": "sgcc_rule",
+                "authority_level": "law_or_standard",
+            },
+        }
+        client = _RpcClient(rpc_rows=[])
+        client.chunk_rows = [old_row]
+
+        def passthrough(_query, rows, **_kwargs):
+            return rows
+
+        rerank_mock.side_effect = passthrough
+        retrieval.invalidate_chunk_keyword_cache("unit_test_start")
+        with patch("backend.rag.retrieval.get_supabase_client", return_value=client):
+            first = retrieval.search_knowledge_base(
+                "国家电网供应商管理对供应商不良行为如何处理？",
+                match_threshold=0.3,
+                match_count=1,
+                metadata_filter={"doc_role": "sgcc_rule"},
+            )
+            client.chunk_rows = [new_row]
+            second = retrieval.search_knowledge_base(
+                "国家电网供应商管理新增资料如何处理供应商不良行为？",
+                match_threshold=0.3,
+                match_count=1,
+                metadata_filter={"doc_role": "sgcc_rule"},
+            )
+
+        self.assertEqual(first[0]["id"], "old-keyword")
+        self.assertEqual(second[0]["id"], "new-keyword")
+        self.assertEqual(retrieval._CHUNK_KEYWORD_CACHE[0]["id"], "new-keyword")
 
     @patch("backend.rag.retrieval.rerank_documents")
     @patch("backend.rag.retrieval.get_embeddings", return_value=[[0.1, 0.2, 0.3]])

@@ -1,5 +1,6 @@
 import json
 import re
+import threading
 from pathlib import Path
 from typing import Any, Iterator, List, Dict
 from openai import OpenAI
@@ -23,8 +24,67 @@ AUTHORITY_SCORE = {
 }
 
 _CHUNK_KEYWORD_CACHE: list[dict[str, Any]] | None = None
+_CHUNK_KEYWORD_CACHE_FINGERPRINT: tuple[int | None, str, str] | None = None
+_CHUNK_KEYWORD_CACHE_LOCK = threading.Lock()
 _CHUNK_KEYWORD_SCAN_LIMIT = 120000
 _CHUNK_KEYWORD_PAGE_SIZE = 5000
+
+
+def invalidate_chunk_keyword_cache(reason: str | None = None) -> None:
+    """Clear the in-process keyword fallback cache after document chunk changes."""
+    global _CHUNK_KEYWORD_CACHE, _CHUNK_KEYWORD_CACHE_FINGERPRINT
+    with _CHUNK_KEYWORD_CACHE_LOCK:
+        _CHUNK_KEYWORD_CACHE = None
+        _CHUNK_KEYWORD_CACHE_FINGERPRINT = None
+
+
+def _document_chunks_fingerprint(client) -> tuple[int | None, str, str] | None:
+    try:
+        response = (
+            client.table("document_chunks")
+            .select("id,created_at", count="exact")
+            .order("created_at", desc=True)
+            .limit(1)
+            .execute()
+        )
+    except Exception:
+        return None
+    latest = (response.data or [{}])[0] if getattr(response, "data", None) else {}
+    return (
+        getattr(response, "count", None),
+        str(latest.get("created_at") or ""),
+        str(latest.get("id") or ""),
+    )
+
+
+def _load_chunk_keyword_cache(client) -> list[dict[str, Any]]:
+    scanned: list[dict[str, Any]] = []
+    for start in range(0, _CHUNK_KEYWORD_SCAN_LIMIT, _CHUNK_KEYWORD_PAGE_SIZE):
+        batch = (
+            client.table("document_chunks")
+            .select("*")
+            .order("id")
+            .range(start, start + _CHUNK_KEYWORD_PAGE_SIZE - 1)
+            .execute()
+        ).data or []
+        scanned.extend(batch)
+        if len(batch) < _CHUNK_KEYWORD_PAGE_SIZE:
+            break
+    return scanned
+
+
+def _get_chunk_keyword_cache_rows(client) -> list[dict[str, Any]]:
+    global _CHUNK_KEYWORD_CACHE, _CHUNK_KEYWORD_CACHE_FINGERPRINT
+    fingerprint = _document_chunks_fingerprint(client)
+    with _CHUNK_KEYWORD_CACHE_LOCK:
+        if _CHUNK_KEYWORD_CACHE is not None and (
+            fingerprint is None or fingerprint == _CHUNK_KEYWORD_CACHE_FINGERPRINT
+        ):
+            return _CHUNK_KEYWORD_CACHE
+        rows = _load_chunk_keyword_cache(client)
+        _CHUNK_KEYWORD_CACHE = rows
+        _CHUNK_KEYWORD_CACHE_FINGERPRINT = fingerprint
+        return rows
 
 
 def _normalize_query_text(query: str) -> str:
@@ -326,22 +386,7 @@ def _keyword_search_knowledge_chunks(
     if not terms:
         return []
     try:
-        global _CHUNK_KEYWORD_CACHE
-        if _CHUNK_KEYWORD_CACHE is None:
-            scanned: list[dict[str, Any]] = []
-            for start in range(0, _CHUNK_KEYWORD_SCAN_LIMIT, _CHUNK_KEYWORD_PAGE_SIZE):
-                batch = (
-                    client.table("document_chunks")
-                    .select("*")
-                    .order("id")
-                    .range(start, start + _CHUNK_KEYWORD_PAGE_SIZE - 1)
-                    .execute()
-                ).data or []
-                scanned.extend(batch)
-                if len(batch) < _CHUNK_KEYWORD_PAGE_SIZE:
-                    break
-            _CHUNK_KEYWORD_CACHE = scanned
-        rows = _CHUNK_KEYWORD_CACHE
+        rows = _get_chunk_keyword_cache_rows(client)
     except Exception:
         return []
 

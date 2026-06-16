@@ -95,6 +95,18 @@
 | P1B-8 | [x] | DeepSeek 全量章节重写与客户版 DOCX/PDF 验收 | `scripts/rag/regenerate_taichang_full_bid_deepseek.py`、`docs/development/runs/run_20260612_taichang_deepseek_full_rewrite.md`、`docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`、`docs/rag/runs/run_20260612_taichang_full_bid_deepseek_rewrite_regression_summary.md` | 已按 74 个章节清空旧正文后真实调用 `deepseek-v4-flash` 全量重写，成功 74、失败 0；正式导出链路 PASS，74/74 章节有正文，封面首页页眉为空，Logo 完整显示，错误分标占位已过滤，PDF 字体使用 `SimSun` / `Arial Unicode MS` 且视觉验证正常，图片 24/24 插入，表格 109 个；Base + 泰昌专项增量回归 Gate PASS |
 | P1B-9 | [x] | 标书编号、PDF 差异与待补充资料审计 | `backend/export/md_to_word.py`、`tests/test_docx_export.py`、`docs/rag/taichang-bid-information-gap-audit-20260612.md`、`docs/development/runs/run_20260612_taichang_bid_numbering_final.md`、`docs/rag/runs/run_20260612_taichang_bid_information_gap_audit_summary.md` | 数字列表改为保留章节原始序号，不再使用全文共享 Word 自动编号；客户参考稿正文主字号实测约 10.6pt，与当前 10.5pt 一致；正式链路重新导出 DOCX/PDF，原 360+ 连续编号已消失；完成 845 处占位审计并区分已提供、待结构化、客户确认和不适用四类；Base + 泰昌专项增量回归 Gate PASS |
 | P1B-10 | [x] | 泰昌企业事实字段回填与不适用章节清理 | `scripts/rag/regenerate_taichang_fact_grounded_bid.py`、`docs/development/runs/run_20260612_taichang_fact_grounded_full_rewrite.md`、`docs/development/runs/run_20260612_taichang_fact_grounded_final.md`、`docs/rag/taichang-bid-remaining-placeholders-classification-20260612.md`、`docs/rag/runs/run_20260612_taichang_fact_grounded_full_rewrite_summary.md` | 已构建可追溯泰昌企业事实包，真实 DeepSeek 逐章重写 74/74 章节，旧正文备份完整；施工/水利/BIM/建造师等禁用主题命中 0；正式 DOCX/PDF 链路 PASS，74/74 章节有正文，图片 24/24 插入，表格 130 个，LibreOffice 字段刷新成功；649 处残留占位已逐项归类为 P0 436、P1 155、P2 58；专项真实 stream PASS，Base+泰昌专项增量回归 Gate PASS |
+| P1B-11 | [~] | 投标前导确认页与变量回填产品化 | `docs/development/bid-prefill-guide-page-priority-20260614.md`、`docs/development/runs/run_20260614_editor_content_export_consistency.md` | 已确认前导页仍有必要，但定位为生成正文前的投标信息确认/变量收口页，不替代章节目录编辑和正文编辑；正文编辑导出一致性真实回归 PASS。下一步需完成变量 schema v1、变量回填引擎、招标文件/企业库自动预填和缺口报告 |
+
+## P1C：云环境暂挂期间的泰昌本地试点质量收口
+
+目标：阿里云测试环境账号暂未提供时，先处理本地真实环境可验证、且直接影响泰昌客户试用稳定性的任务。云上 ECS/RDS/OSS/Redis 联调继续列为外部条件阻塞，不占用当前 P0 执行序列。
+
+| 优先级 | 状态 | 任务 | 交付物 | 验收口径 |
+| --- | --- | --- | --- | --- |
+| P1C-1 | [x] | 泰昌 20260606 正式图片资产 embedding backfill | `scripts/rag/backfill_knowledge_asset_embeddings.py`、`docs/rag/runs/run_20260616_taichang_asset_embedding_backfill_asset_embedding_backfill.md`、`docs/rag/runs/run_20260616_taichang_asset_embedding_backfill_gate_summary.md` | 已使用本地 Ollama `qwen3-embedding:0.6b` 对 `customer_liaoning_taichang_20260606_p0_formal_full_page_assets_v1` 执行真实 backfill：选中 300、更新 300、失败 0，批次 missing embedding 从 300 降为 0；真实资产召回覆盖营业执照、MPP生产线、检测设备、CPVC/MPP检验报告、绿色低碳资料；真实 stream 抽样均返回 `done`；Base + 泰昌专项增量回归 Gate PASS |
+| P1C-2 | [x] | 关键词兜底缓存失效机制 | `backend/rag/retrieval.py`、`backend/rag/ingestion.py`、`tests/test_rag_retrieval.py`、`docs/rag/runs/run_20260616_p1c2_keyword_cache_invalidation_summary.md`、`docs/rag/runs/run_20260616_p1c2_keyword_cache_invalidation_gate_summary.md` | 已实现 `document_chunks` 水位指纹（总数 + 最新 `created_at` + 最新 `id`）驱动的关键词兜底缓存自动重建，并在知识库入库删除旧分片/写入新分片后显式清理进程内缓存；真实 stream 先预热旧缓存，再插入带完整泰昌企业事实 metadata 的测试 chunk，不重启 Web 即命中新增口令并返回 `done`；`pytest tests/test_rag_retrieval.py` 16 passed；Base + 泰昌专项增量回归 Gate PASS |
+| P1C-3 | [ ] | RAG 本地门禁自动化入口 | 本地一键门禁命令或脚本、运行报告模板 | 不依赖阿里云资源即可一键执行 API ready、Base + 泰昌专项增量回归、必要真实 stream 抽样，并输出 PASS/FAIL 与报告路径 |
+| P1C-4 | [ ] | 前导确认页变量 schema v1 与预填缺口报告 | 变量 schema v1、预填字段来源规则、客户确认缺口报告 | 只读确认页优先，字段按“系统已识别/企业库带出/客户需填写/待人工确认”分组；不得替代章节正文编辑，不得影响 `sectionsSnapshot` DOCX 导出契约 |
 
 ## P3：召回质量增强
 
@@ -138,7 +150,10 @@
 
 ## 当前最近任务
 
-1. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表，让页面和问答可直接按企业、产品、规格、参数名精确查询。
-2. 仅在明确目标省公司/批次/规格和客户确认口径后，再把泰昌产品参数用于具体投标偏差判断；不得默认以辽宁样本推出泰昌覆盖义务。
-3. P1B 泰昌补充资料质量增强已完成；后续新增资料按 `docs/rag/taichang-material-completeness-scorecard.md` 的 P0/P1/P2 补资料清单更新评分，并重跑真实回归。
-4. 客户演示完整标书已完成 DeepSeek 全量章节重写和真实 DOCX/PDF 验收：见 `docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`；后续若客户更换目标招标文件或 Word 模板，需重新生成章节、重新导出并复跑验收。
+1. **P1C-1 已完成：泰昌 20260606 正式图片资产 embedding backfill。** 当前真实库 `knowledge_assets=597`，已有 embedding `597`，缺失 `0`。
+2. **P1C-2 已完成：关键词兜底缓存失效机制。** 新增/重入库 `document_chunks` 后，关键词兜底缓存可自动识别水位变化并重建；真实 stream 已验证不重启 Web 命中新 chunk。
+3. **下一任务：P1C-3 RAG 本地门禁自动化入口**，把 API ready、增量回归门禁和真实 stream 抽样固化为可重复执行的本地门禁。
+4. P1B-11 投标前导确认页与变量回填产品化继续推进，但保持旁路式、非阻断接入，不影响章节正文编辑和 `sectionsSnapshot` DOCX 导出契约。
+5. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表；仅在参数规模变大、多批次查询复杂或页面精确查询成为瓶颈后启动。
+6. P1B 泰昌补充资料质量增强已完成；后续新增资料按 `docs/rag/taichang-material-completeness-scorecard.md` 的 P0/P1/P2 补资料清单更新评分，并重跑真实回归。
+7. 客户演示完整标书已完成 DeepSeek 全量章节重写和真实 DOCX/PDF 验收：见 `docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`；后续若客户更换目标招标文件或 Word 模板，需重新生成章节、重新导出并复跑验收。
