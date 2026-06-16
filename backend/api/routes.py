@@ -1044,4 +1044,5 @@ from backend.api import export as _export_routes  # noqa: F401, E402
 from backend.api import onlyoffice as _onlyoffice_routes  # noqa: F401, E402
 from backend.api import knowledge as _knowledge_routes  # noqa: F401, E402
 from backend.api import assets as _assets_routes  # noqa: F401, E402
+from backend.api import prefill as _prefill_routes  # noqa: F401, E402
 from backend.api import legacy as _legacy_routes  # noqa: F401, E402

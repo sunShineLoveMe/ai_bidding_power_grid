@@ -1750,3 +1750,75 @@ set -a; source .env; set +a
 - 本地 RAG 门禁 PASS。
 - P1C-3 完成。
 - 下一任务顺延为 P1C-4：前导确认页变量 schema v1 与预填缺口报告。
+
+---
+
+## Run 34 — P1C-4 前导确认页变量 schema v1 与预填缺口报告（2026-06-16）
+
+> 功能验收：`docs/rag/runs/run_20260616_p1c4_prefill_schema_gap_report_feature_summary.md`
+> 本地门禁汇总：`docs/rag/runs/run_20260616_p1c4_prefill_schema_gap_report_summary.md`
+> 增量门禁汇总：`docs/rag/runs/run_20260616_p1c4_prefill_schema_gap_report_incremental_summary.md`
+> 真实 stream：`docs/rag/runs/run_20260616_p1c4_prefill_schema_gap_report_stream.jsonl`
+
+### 触发原因
+
+P1C-4 要求把前导确认页从产品概念推进到真实可用能力：将当前正式投标高风险占位从大量正文缺口收敛为可确认的投标字段 schema、预填来源规则和客户确认缺口报告，并提供前端旁路只读页面。
+
+### 实现内容
+
+- 新增 `backend/services/bid_prefill.py`：定义 `2026-06-16.v1` 变量 schema，共 32 个字段。
+- 新增 `GET /api/bidding/projects/<project_id>/prefill-report`：基于真实项目解读、招标文本和知识资产生成报告。
+- 新增 `/prefill` 投标信息确认页：默认读取最新项目，支持 `?projectId=<id>`，展示字段分组、候选值、来源规则和客户确认缺口。
+- 主导航新增“投标确认”；招标项目页新增“投标信息确认”入口。
+- 新增 `tests/test_bid_prefill.py`，覆盖客户决策字段不得自动补全、企业资产仅作为候选来源。
+
+### 真实接口与页面验收
+
+| 项 | 结果 |
+| --- | --- |
+| 真实项目 | `4bc3ee73-9ec5-4184-aafd-eaede9f90798` |
+| 新接口 | PASS，`schemaVersion=2026-06-16.v1` |
+| 字段数 | 32 |
+| 客户需填写 | 10 |
+| 待人工确认 | 10 |
+| 正式必填缺口 | 15 |
+| 旁路只读 | `readonlyFirst=true` |
+| 导出契约 | `affectsSectionsSnapshotExport=false` |
+| 前端页面 | 使用本地真实账号登录访问 `/prefill` PASS，截图：`docs/development/runs/run_20260616_p1c4_prefill_page.png` |
+
+### 执行命令
+
+```bash
+.venv/bin/python -m pytest tests/test_bid_prefill.py tests/test_local_rag_gate.py
+cd frontend && npm run build
+set -a; source .env; set +a
+.venv/bin/python scripts/rag/run_local_rag_gate.py \
+  --run-id run_20260616_p1c4_prefill_schema_gap_report
+```
+
+### 本地门禁结果
+
+| 步骤 | 状态 | 结果 |
+| --- | --- | --- |
+| api_ready | PASS | http=200；database、Redis、Celery、model_config、storage 均正常 |
+| targeted pytest | PASS | `tests/test_bid_prefill.py tests/test_local_rag_gate.py` 4 passed |
+| frontend build | PASS | `npm run build` 成功 |
+| rag_unit_tests | PASS | 门禁脚本内 RAG 单测 exit_code=0 |
+| incremental_regression_gate | PASS | exit_code=0 |
+| stream_sample | PASS | contexts=5、assets=8、images=8、done=true |
+
+### 增量回归门禁
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词 | 跨域串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 279 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 614 ms |
+| 泰昌专项 | off | 93.3% | 100.0% | 0.933 | 3.3% | 0.0% | 328 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 692 ms |
+
+### 结论
+
+- Gate PASS。
+- P1C-4 完成第一版真实可用闭环。
+- 当前版本为旁路只读确认页，不写入 `bid_sections`，不替代正文编辑，不影响 `sectionsSnapshot` DOCX 导出契约。
+- 下一步建议进入“变量确认后的显式回填引擎”，继续保持用户确认优先。

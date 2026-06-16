@@ -56,6 +56,7 @@ def asset_file(filename):
 @app.route('/register')
 @app.route('/bidding')
 @app.route('/interpretation')
+@app.route('/prefill')
 @app.route('/bid-editor')
 @app.route('/onlyoffice-editor')
 @app.route('/knowledge')

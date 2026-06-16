@@ -470,6 +470,13 @@ export function InterpretationPage(): JSX.Element {
             <Button icon={<FileText size={16} />} loading={generatingOutline} disabled={!data?.analysis} onClick={() => void generateOutline()}>
               生成章节大纲
             </Button>
+            <Button
+              icon={<ClipboardCheck size={16} />}
+              disabled={!data?.project?.id}
+              onClick={() => data?.project?.id && navigate(`/prefill?projectId=${data.project.id}`)}
+            >
+              投标信息确认
+            </Button>
             <Dropdown
               disabled={!data?.analysis}
               menu={{

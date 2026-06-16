@@ -391,6 +391,77 @@ export async function getBidExportTask(projectId: string, taskId: string): Promi
   return response.data.task;
 }
 
+export type BidPrefillStatus = 'system_recognized' | 'enterprise_library' | 'customer_required' | 'manual_confirm';
+
+export type BidPrefillField = {
+  key: string;
+  label: string;
+  group: string;
+  valueType: string;
+  requiredLevel: string;
+  riskLevel: string;
+  sourcePolicy: string;
+  editable: boolean;
+  customerDecision: boolean;
+  status: BidPrefillStatus;
+  statusLabel: string;
+  value?: unknown;
+  confidence?: number;
+  evidence?: {
+    sourceType?: string;
+    sourceLabel?: string;
+    snippet?: string;
+    assetCount?: number;
+    assets?: Array<{
+      id?: string;
+      title?: string;
+      category?: string;
+      assetType?: string;
+    }>;
+  };
+  mapsTo?: string[];
+};
+
+export type BidPrefillReport = {
+  schemaVersion: string;
+  generatedAt: string;
+  project?: {
+    id?: string;
+    project_name?: string | null;
+    project_no?: string | null;
+    tender_unit?: string | null;
+  };
+  summary: {
+    totalFields: number;
+    systemRecognized: number;
+    enterpriseLibrary: number;
+    customerRequired: number;
+    manualConfirm: number;
+    formalRequiredGaps: number;
+    readonlyFirst: boolean;
+    affectsSectionsSnapshotExport: boolean;
+  };
+  groups: Array<{
+    name: string;
+    fields: BidPrefillField[];
+  }>;
+  fields: BidPrefillField[];
+  gapReport: {
+    title: string;
+    formalRequiredGaps: BidPrefillField[];
+    customerRequiredFields: BidPrefillField[];
+    manualConfirmFields: BidPrefillField[];
+  };
+  sourceRules: string[];
+};
+
+export async function getBidPrefillReport(projectId: string): Promise<BidPrefillReport> {
+  const response = await apiClient.get(`/api/bidding/projects/${projectId}/prefill-report`, {
+    skipGlobalLoading: true,
+  });
+  return response.data;
+}
+
 export async function preAnalyzeBid(biddingId: number): Promise<unknown> {
   const response = await apiClient.post('/api/bidding/pre-analysis_bid', { biddingId });
   return response.data;
