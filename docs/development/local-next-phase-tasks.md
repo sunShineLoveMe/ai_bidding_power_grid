@@ -23,7 +23,7 @@
 | 顺序 | 优先级 | 任务 | 归属清单 | 当前状态 | 真实验收口径 |
 | ---: | --- | --- | --- | --- | --- |
 | 1 | P0 | 泰昌 20260606 正式图片资产 embedding backfill | `docs/rag/todo.md` P1C-1 | 已完成 | 已用本地 Ollama `qwen3-embedding:0.6b` 补齐 20260606 批次 300 条资产 embedding；当前真实库 `knowledge_assets` 共 597 条，597 条有 embedding，缺失 0；真实 stream 和增量回归门禁 PASS |
-| 2 | P0 | 本地回归门禁自动化/CI 化设计 | 本文 D6 | 未开始 | 先不依赖云资源，固化后端 unittest、前端 build、RAG 增量门禁的本地一键命令与后续 CI 入口 |
+| 2 | P0 | 本地回归门禁自动化/CI 化设计 | 本文 D6 | 已完成 | 已新增 `scripts/rag/run_local_rag_gate.py`，一键覆盖 API ready、RAG 单测、Base + 泰昌专项增量回归门禁、真实 stream 抽样，并输出 PASS/FAIL、JSON/Markdown 汇总和失败步骤定位 |
 | 3 | P1 | 关键词兜底缓存失效机制 | `docs/rag/todo.md` P1C-2 | 已完成 | 已实现 `document_chunks` 水位指纹 + 入库流程显式清理；真实 stream 复验新增 chunk 可在不重启 Web 的情况下命中；增量回归 Gate PASS |
 | 4 | P1 | 单章正文生成链路收敛 | 本文 B3 | 未开始 | 单章长文生成不依赖请求内 SSE 长连接；任务关闭/刷新/重试语义与批量章节生成保持一致 |
 | 5 | P1 | BidEditor 组件化与前端最小测试 | 本文 D2/D4 | 未开始 | 先覆盖章节任务轮询、正文回填、DOCX `sectionsSnapshot` 下载等关键交互；前端构建和测试可一键运行 |
@@ -206,14 +206,17 @@
 - **任务**：按路由懒加载，降低首屏体积。
 - **验收**：主 chunk 体积下降，构建无超大包警告。
 
-### D6. 本地回归门禁自动化/CI 化设计 🔴
+### D6. 本地回归门禁自动化/CI 化设计 ✅
 
-- **现状**：真实回归脚本和 run summary 已经较完整，但仍依赖人工记得执行；云环境未到位时，仍应先把本地可运行的回归组合固化。
-- **任务**：
-  - 定义本地一键门禁脚本，至少覆盖后端 unittest、前端 build、RAG 增量回归门禁、必要的真实 API 健康检查。
-  - 区分“可在 CI 跑的无外部依赖检查”和“需要真实 LLM/MinerU/DB 的本地真实门禁”。
-  - 后续接入 GitHub Actions 或 Gitee 流水线时复用同一套命令。
-- **验收**：任一开发者可按一条命令跑出明确 PASS/FAIL 和报告路径；失败时能定位到 API、RAG、前端或导出阶段。
+- **现状**：已完成 RAG 本地门禁入口，命令为：
+  `set -a; source .env; set +a; .venv/bin/python scripts/rag/run_local_rag_gate.py --run-id <run>`。
+- **已覆盖**：
+  - 真实 `/api/ready`；
+  - RAG 相关单测：`tests/test_incremental_regression_gate.py`、`tests/test_rag_retrieval.py`；
+  - Base 30 + 泰昌专项 30 增量回归门禁；
+  - 真实 `/api/knowledge/search/stream` 抽样；
+  - JSON/Markdown 汇总和失败步骤定位。
+- **验收**：`run_20260616_p1c3_local_rag_gate` 真实执行 PASS，见 `docs/rag/runs/run_20260616_p1c3_local_rag_gate_summary.md`。
 
 ---
 

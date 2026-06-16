@@ -1695,3 +1695,58 @@ set -a; source .env; set +a
 - Gate PASS。
 - P1C-2 完成。
 - 下一任务顺延为 P1C-3：RAG 本地门禁自动化入口。
+
+---
+
+## Run 33 — P1C-3 RAG 本地门禁自动化入口（2026-06-16）
+
+> 本地门禁脚本：`scripts/rag/run_local_rag_gate.py`
+> 本地门禁汇总：`docs/rag/runs/run_20260616_p1c3_local_rag_gate_summary.md`
+> 增量门禁汇总：`docs/rag/runs/run_20260616_p1c3_local_rag_gate_incremental_summary.md`
+> 真实 stream：`docs/rag/runs/run_20260616_p1c3_local_rag_gate_stream.jsonl`
+
+### 触发原因
+
+P1C-3 要求把本地 RAG 质量门禁固化为一个可重复入口，避免每次 RAG 改动后依赖人工记忆分别执行 API ready、单元测试、增量回归和真实 stream 抽样。
+
+### 实现内容
+
+- 新增 `scripts/rag/run_local_rag_gate.py`：
+  - 真实 `GET /api/ready`；
+  - RAG 相关单测；
+  - 调用现有 `scripts/rag/run_incremental_regression_gate.py`；
+  - 登录真实本地账号并调用 `/api/knowledge/search/stream`；
+  - 输出 JSON/Markdown 汇总、步骤耗时、产物路径和 PASS/FAIL。
+- 新增 `tests/test_local_rag_gate.py`，覆盖 SSE 事件解析和 stream 汇总逻辑。
+
+### 执行命令
+
+```bash
+set -a; source .env; set +a
+.venv/bin/python scripts/rag/run_local_rag_gate.py \
+  --run-id run_20260616_p1c3_local_rag_gate
+```
+
+### 本地门禁结果
+
+| 步骤 | 状态 | 耗时 | 结果 |
+| --- | --- | ---: | --- |
+| api_ready | PASS | 2149 ms | database、Redis、Celery、model_config、storage 均正常 |
+| rag_unit_tests | PASS | 942 ms | exit_code=0 |
+| incremental_regression_gate | PASS | 60126 ms | exit_code=0 |
+| stream_sample | PASS | 15134 ms | contexts=5、assets=8、images=8、done=true |
+
+### 增量回归门禁
+
+| 测试集 | 模式 | Recall@5 | Top1 | MRR | 禁用关键词 | 跨域串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 291 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 607 ms |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% | 323 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 670 ms |
+
+### 结论
+
+- 本地 RAG 门禁 PASS。
+- P1C-3 完成。
+- 下一任务顺延为 P1C-4：前导确认页变量 schema v1 与预填缺口报告。
