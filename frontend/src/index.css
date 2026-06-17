@@ -107,6 +107,51 @@ textarea {
   line-height: 1.25;
 }
 
+.bounded-table {
+  width: 100%;
+  overflow: hidden;
+}
+
+.bounded-table .ant-table-wrapper,
+.bounded-table .ant-spin-nested-loading,
+.bounded-table .ant-spin-container {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.bounded-table .ant-table-container {
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.bounded-table .ant-table-content,
+.bounded-table .ant-table-body {
+  overscroll-behavior: contain;
+}
+
+.bounded-table .ant-table-cell {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.bounded-table .ant-tag {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+.bounded-table .ant-pagination {
+  flex-wrap: wrap;
+  row-gap: 8px;
+  margin: 12px 0 0;
+}
+
+.bounded-table .ant-pagination-total-text {
+  margin-right: auto;
+}
+
 .compact-uploader .ant-upload-drag {
   border-color: #9ab7ff;
   background: #f7faff;
@@ -296,6 +341,10 @@ textarea {
   .prefill-main {
     padding-right: 0;
     padding-bottom: 88px;
+  }
+
+  .bounded-table {
+    overflow-x: auto;
   }
 }
 

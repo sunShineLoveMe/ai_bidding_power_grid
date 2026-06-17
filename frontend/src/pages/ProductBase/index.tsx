@@ -155,6 +155,7 @@ export function ProductBasePage(): JSX.Element {
     {
       title: '操作',
       width: 130,
+      fixed: 'right',
       render: (_, record) => (
         <Space size={4}>
           <Button type="link" size="small" onClick={() => setDetail(record)}>详情</Button>
@@ -270,18 +271,20 @@ export function ProductBasePage(): JSX.Element {
             <h2 className="panel-title mb-0">产品与服务列表</h2>
             <Button type="primary" icon={<UploadCloud size={16} />} onClick={openCreateForm}>新增产品资料</Button>
           </div>
-          <Table
-            rowKey="id"
-            size="small"
-            pagination={{ pageSize: 10, showSizeChanger: true, pageSizeOptions: [10, 20, 50], showTotal: total => `共 ${total} 条` }}
-            columns={columns}
-            dataSource={dataSource}
-            loading={loading}
-            className="compact-table"
-            tableLayout="fixed"
-            scroll={{ y: 'calc(100vh - 430px)' }}
-            locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无产品资料，请维护真实产品信息" /> }}
-          />
+          <div className="bounded-table min-h-0 flex-1">
+            <Table
+              rowKey="id"
+              size="small"
+              pagination={{ pageSize: 10, showSizeChanger: true, pageSizeOptions: [10, 20, 50], showTotal: total => `共 ${total} 条` }}
+              columns={columns}
+              dataSource={dataSource}
+              loading={loading}
+              className="compact-table"
+              tableLayout="fixed"
+              scroll={{ x: 1050, y: 'max(180px, calc(100vh - 550px))' }}
+              locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无产品资料，请维护真实产品信息" /> }}
+            />
+          </div>
         </section>
       </div>
 

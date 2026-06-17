@@ -163,6 +163,7 @@ export function KnowledgeBasePage(): JSX.Element {
     {
       title: '操作',
       width: 130,
+      fixed: 'right',
       render: (_, record) => (
         <Space size={4}>
           <Button type="link" size="small" onClick={() => handleView(record)}>查看</Button>
@@ -211,18 +212,20 @@ export function KnowledgeBasePage(): JSX.Element {
               上传资质扫描件、产品图片或图文混排资料后，可继续扩展图片召回和标书自动配图能力。
             </div>
           </div>
-          <Table
-            rowKey="id"
-            size="small"
-            pagination={{ pageSize: 10, showSizeChanger: true, pageSizeOptions: [10, 20, 50], showTotal: total => `共 ${total} 条` }}
-            columns={columns}
-            dataSource={dataSource}
-            loading={loading}
-            className="compact-table"
-            tableLayout="fixed"
-            scroll={{ y: 'calc(100vh - 500px)' }}
-            locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无知识库资料，请上传真实企业资料" /> }}
-          />
+          <div className="bounded-table min-h-0 flex-1">
+            <Table
+              rowKey="id"
+              size="small"
+              pagination={{ pageSize: 10, showSizeChanger: true, pageSizeOptions: [10, 20, 50], showTotal: total => `共 ${total} 条` }}
+              columns={columns}
+              dataSource={dataSource}
+              loading={loading}
+              className="compact-table knowledge-list-table"
+              tableLayout="fixed"
+              scroll={{ x: 860, y: 'max(160px, calc(100vh - 670px))' }}
+              locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无知识库资料，请上传真实企业资料" /> }}
+            />
+          </div>
         </section>
       </div>
       <Modal

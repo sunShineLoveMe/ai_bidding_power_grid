@@ -284,6 +284,7 @@ export function HistoryPage(): JSX.Element {
     {
       title: '操作',
       width: 160,
+      fixed: 'right',
       align: 'right',
       render: (_, record) => (
         <Space size={6}>
@@ -334,7 +335,7 @@ export function HistoryPage(): JSX.Element {
 
       <div className="grid min-h-0 grid-cols-[220px_minmax(0,1fr)] gap-4">
         <CategoryList title="记录阶段" items={stageCategories} activeName={activeStage} onChange={setActiveStage} />
-        <section className="panel-card h-full overflow-hidden">
+        <section className="panel-card flex h-full min-h-0 flex-col overflow-hidden">
           <div className="mb-3 flex items-center justify-between gap-3">
             <h2 className="panel-title mb-0">历史任务列表</h2>
             <Select
@@ -344,18 +345,20 @@ export function HistoryPage(): JSX.Element {
               options={stageCategories.map(item => ({ label: item.name, value: item.name }))}
             />
           </div>
-          <Table
-            rowKey="id"
-            size="small"
-            pagination={{ pageSize: 12 }}
-            columns={columns}
-            dataSource={filteredItems}
-            loading={loading}
-            className="compact-table"
-            tableLayout="fixed"
-            scroll={{ y: 'calc(100vh - 392px)' }}
-            locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无历史记录，上传招标文件后会显示在这里" /> }}
-          />
+          <div className="bounded-table min-h-0 flex-1">
+            <Table
+              rowKey="id"
+              size="small"
+              pagination={{ pageSize: 10, showSizeChanger: true, pageSizeOptions: [10, 20, 50], showTotal: total => `共 ${total} 条` }}
+              columns={columns}
+              dataSource={filteredItems}
+              loading={loading}
+              className="compact-table"
+              tableLayout="fixed"
+              scroll={{ x: 1125, y: 'max(180px, calc(100vh - 550px))' }}
+              locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无历史记录，上传招标文件后会显示在这里" /> }}
+            />
+          </div>
         </section>
       </div>
     </div>
