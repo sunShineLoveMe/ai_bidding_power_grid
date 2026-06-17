@@ -13,6 +13,7 @@ def test_init_postgres_schema_includes_section_generation_migrations():
         "sql/20260603_create_bid_generation_task_items.sql",
         "sql/20260603_add_bid_generation_task_item_lease.sql",
         "migrations/postgres/007_atomic_section_task_item.sql",
+        "migrations/postgres/008_bid_interpretation_tasks.sql",
         "sql/20260603_update_bid_generation_task_status_model.sql",
     ]
     for file_path in required_files:
@@ -25,6 +26,7 @@ def test_init_postgres_schema_includes_section_generation_migrations():
         "heartbeat_bid_generation_task_item",
         "expire_bid_generation_task_items",
         "update_bid_generation_task_item_atomic",
+        "bid_interpretation_tasks",
     ]
     for object_name in required_objects:
         assert object_name in script

@@ -131,6 +131,13 @@ export function BidWorkflow({ onReady, onTaskChanged }: BidWorkflowProps): JSX.E
     setStatuses(prev => prev.map((item, itemIndex) => (itemIndex === index ? 'finish' : item)));
   }
 
+  function updateInterpretationTaskDetail(task: { progress?: number; message?: string; metadata?: { segment_done?: number; segment_total?: number } }): void {
+    const done = task.metadata?.segment_done;
+    const total = task.metadata?.segment_total;
+    const segmentText = done !== undefined && total ? ` 分段 ${done}/${total}` : '';
+    setDetail(`${task.message || 'AI 深度解读生成中。'}${segmentText}，进度 ${task.progress ?? 0}%。`);
+  }
+
   async function waitForParseIndexed(fileId: string, token: number, options?: { projectId?: string | null; supabaseFileId?: string | null }): Promise<void> {
     for (let count = 1; count <= 90; count += 1) {
       if (runTokenRef.current !== token) return;
@@ -220,8 +227,12 @@ export function BidWorkflow({ onReady, onTaskChanged }: BidWorkflowProps): JSX.E
       if (runTokenRef.current !== token) return;
       finishStep(1);
 
-      updateStep(2, 'process', '正在生成招标解读...', '正在提取项目概况、资格要求、评分标准、废标风险和关键时间节点。');
-      await generateAIInterpretation(uploadResult.projectId);
+      updateStep(2, 'process', '正在生成招标解读...', '已创建后台任务，正在提取项目概况、资格要求、评分标准、废标风险和关键时间节点。');
+      await generateAIInterpretation(uploadResult.projectId, {
+        onStatus: task => {
+          if (runTokenRef.current === token) updateInterpretationTaskDetail(task);
+        },
+      });
       if (runTokenRef.current !== token) return;
       finishStep(2);
 
@@ -320,8 +331,12 @@ export function BidWorkflow({ onReady, onTaskChanged }: BidWorkflowProps): JSX.E
       finishStep(1);
 
       if (!hasInterpretation) {
-        updateStep(2, 'process', '正在生成招标解读...', '解析已完成，继续提取项目概况、资格要求、评分标准和风险项。');
-        await generateAIInterpretation(active.projectId);
+        updateStep(2, 'process', '正在生成招标解读...', '已创建后台任务，继续提取项目概况、资格要求、评分标准和风险项。');
+        await generateAIInterpretation(active.projectId, {
+          onStatus: task => {
+            if (runTokenRef.current === token) updateInterpretationTaskDetail(task);
+          },
+        });
         if (runTokenRef.current !== token) return;
       }
       finishStep(2);

@@ -135,6 +135,8 @@ export function InterpretationPage(): JSX.Element {
   const [data, setData] = useState<InterpretationResponse | null>(null);
   const [complianceReport, setComplianceReport] = useState<ComplianceReport | null>(null);
   const [generatingAI, setGeneratingAI] = useState(false);
+  const [aiTaskMessage, setAiTaskMessage] = useState<string | null>(null);
+  const [aiTaskAlertType, setAiTaskAlertType] = useState<'info' | 'success' | 'error'>('info');
   const [generatingOutline, setGeneratingOutline] = useState(false);
   const [sourceTrace, setSourceTrace] = useState<SourceTrace | null>(null);
   const [advancedPanel, setAdvancedPanel] = useState<'chunks' | 'mineru' | null>(null);
@@ -346,12 +348,25 @@ export function InterpretationPage(): JSX.Element {
       return;
     }
     setGeneratingAI(true);
+    setAiTaskAlertType('info');
+    setAiTaskMessage('正在创建 AI 深度解读后台任务。');
     try {
-      await generateAIInterpretation(data.project.id);
+      await generateAIInterpretation(data.project.id, {
+        onStatus: task => {
+          const done = task.metadata?.segment_done;
+          const total = task.metadata?.segment_total;
+          const segmentText = done !== undefined && total ? ` 分段 ${done}/${total}` : '';
+          setAiTaskMessage(`${task.message || 'AI 深度解读生成中。'}${segmentText}，进度 ${task.progress ?? 0}%。`);
+        },
+      });
+      setAiTaskAlertType('success');
+      setAiTaskMessage('AI 深度解读已生成。');
       message.success('AI 深度解读已生成');
       await load();
     } catch (error) {
       const reason = error instanceof Error ? error.message : String(error);
+      setAiTaskAlertType('error');
+      setAiTaskMessage(reason);
       message.error(reason);
     } finally {
       setGeneratingAI(false);
@@ -496,6 +511,14 @@ export function InterpretationPage(): JSX.Element {
         }
       />
       <MetricCards items={metrics} />
+      {aiTaskMessage ? (
+        <Alert
+          className="mb-4"
+          type={generatingAI ? 'info' : aiTaskAlertType}
+          showIcon
+          message={aiTaskMessage}
+        />
+      ) : null}
 
       {!data?.analysis ? (
         <section className="panel-card">

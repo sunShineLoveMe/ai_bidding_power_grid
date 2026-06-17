@@ -81,12 +81,76 @@ export async function generateComplianceSupplement(
   return response.data;
 }
 
-export async function generateAIInterpretation(projectId: string): Promise<unknown> {
-  const response = await apiClient.post(`/api/bidding/interpretations/${projectId}/ai-report`, undefined, {
+export type AIInterpretationTask = {
+  id: string;
+  project_id: string;
+  status: 'queued' | 'running' | 'completed' | 'failed';
+  progress: number;
+  message?: string;
+  error_message?: string;
+  metadata?: {
+    stage?: string;
+    segment_total?: number;
+    segment_done?: number;
+    segment_index?: number;
+    failure_count?: number;
+    cached?: boolean;
+    [key: string]: unknown;
+  };
+  started_at?: string;
+  finished_at?: string;
+  created_at?: string;
+  updated_at?: string;
+};
+
+export async function createAIInterpretationTask(projectId: string): Promise<{ task: AIInterpretationTask; taskId: string; cached?: boolean }> {
+  const response = await apiClient.post(`/api/bidding/interpretations/${projectId}/ai-report-tasks`, undefined, {
     skipGlobalLoading: true,
-    timeout: 360000,
   });
   return response.data;
+}
+
+export async function getAIInterpretationTask(projectId: string, taskId: string): Promise<AIInterpretationTask> {
+  const response = await apiClient.get(`/api/bidding/interpretations/${projectId}/ai-report-tasks/${taskId}`, {
+    skipGlobalLoading: true,
+  });
+  return response.data.task;
+}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => window.setTimeout(resolve, ms));
+}
+
+export async function generateAIInterpretation(
+  projectId: string,
+  options?: {
+    onStatus?: (task: AIInterpretationTask) => void;
+    pollIntervalMs?: number;
+    timeoutMs?: number;
+  },
+): Promise<{ task: AIInterpretationTask; taskId: string; cached?: boolean }> {
+  const created = await createAIInterpretationTask(projectId);
+  let task = created.task;
+  options?.onStatus?.(task);
+  if (task.status === 'completed') {
+    return { ...created, task };
+  }
+  const startedAt = Date.now();
+  const timeoutMs = options?.timeoutMs ?? 900000;
+  const pollIntervalMs = options?.pollIntervalMs ?? 2500;
+
+  while (Date.now() - startedAt < timeoutMs) {
+    await sleep(pollIntervalMs);
+    task = await getAIInterpretationTask(projectId, created.taskId);
+    options?.onStatus?.(task);
+    if (task.status === 'completed') {
+      return { ...created, task };
+    }
+    if (task.status === 'failed') {
+      throw new Error(task.error_message || task.message || 'AI 深度解读生成失败');
+    }
+  }
+  throw new Error('AI 深度解读任务等待超时，请稍后在招标解读页查看结果。');
 }
 
 export async function generateBidOutline(projectId: string): Promise<unknown> {

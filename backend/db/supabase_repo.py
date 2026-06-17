@@ -710,7 +710,98 @@ def update_bid_analysis_project_meta(project_id: str, project_meta: dict[str, An
         .eq("project_id", project_id)
         .execute()
     )
+    if response.data:
+        return response.data[0]
+
+    # Some Supabase/PostgREST-compatible paths may apply the update without
+    # returning a representation. Re-read before treating the write as failed.
+    rows = (
+        get_supabase_client()
+        .table("bid_analysis")
+        .select("id,project_id,project_meta")
+        .eq("project_id", project_id)
+        .limit(1)
+        .execute()
+        .data
+        or []
+    )
+    if rows and (rows[0].get("project_meta") or {}) == project_meta:
+        return rows[0]
+    return None
+
+
+def create_bid_interpretation_task(
+    project_id: str,
+    *,
+    status: str = "queued",
+    progress: int = 0,
+    message: str | None = None,
+    metadata: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    payload = {
+        "project_id": project_id,
+        "status": status,
+        "progress": max(0, min(100, int(progress))),
+        "message": message or "AI 解读任务已创建，等待处理。",
+        "metadata": metadata or {},
+    }
+    response = _with_supabase_write_retry(
+        lambda client: client.table("bid_interpretation_tasks").insert(payload).execute(),
+        label="创建 AI 解读任务",
+    )
+    if not response.data:
+        raise RuntimeError("Supabase bid_interpretation_tasks insert returned no data")
+    return response.data[0]
+
+
+def get_bid_interpretation_task(project_id: str, task_id: str) -> dict[str, Any] | None:
+    response = (
+        get_supabase_client()
+        .table("bid_interpretation_tasks")
+        .select("*")
+        .eq("id", task_id)
+        .eq("project_id", project_id)
+        .limit(1)
+        .execute()
+    )
     return response.data[0] if response.data else None
+
+
+def update_bid_interpretation_task(project_id: str, task_id: str, patch: dict[str, Any]) -> dict[str, Any]:
+    allowed_keys = {
+        "status",
+        "progress",
+        "message",
+        "error_message",
+        "metadata",
+        "started_at",
+        "finished_at",
+    }
+    payload = {key: value for key, value in patch.items() if key in allowed_keys}
+    if "progress" in payload:
+        payload["progress"] = max(0, min(100, int(payload["progress"])))
+    if not payload:
+        task = get_bid_interpretation_task(project_id, task_id)
+        if not task:
+            raise RuntimeError("AI 解读任务不存在")
+        return task
+
+    response = _with_supabase_write_retry(
+        lambda client: client.table("bid_interpretation_tasks").update(payload).eq("id", task_id).eq("project_id", project_id).execute(),
+        label="更新 AI 解读任务",
+    )
+    if response.data:
+        return response.data[0]
+
+    task = get_bid_interpretation_task(project_id, task_id)
+    if not task:
+        raise RuntimeError("AI 解读任务不存在")
+    for key, value in payload.items():
+        if key in {"started_at", "finished_at"}:
+            continue
+        if task.get(key) != value:
+            raise RuntimeError("Supabase bid_interpretation_tasks update returned no data")
+    return task
 
 
 def _is_valid_uuid(value: Any) -> bool:

@@ -84,11 +84,11 @@ class SegmentedInterpreterTest(unittest.TestCase):
                 "output": {"choices": [{"message": {"content": json.dumps(content, ensure_ascii=False)}}]},
             }
 
-        update_execute = MagicMock(return_value=MagicMock(data=[{"id": "analysis-1"}]))
-        update_chain = MagicMock()
-        update_chain.update.return_value.eq.return_value.execute = update_execute
-        supabase = MagicMock()
-        supabase.table.return_value = update_chain
+        saved_meta = {}
+
+        def fake_update_project_meta(update_project_id, project_meta):
+            saved_meta.update(project_meta)
+            return {"id": "analysis-1", "project_id": update_project_id, "project_meta": project_meta}
 
         with (
             patch("backend.ai.interpreter.get_project_interpretation", return_value=payload),
@@ -100,7 +100,7 @@ class SegmentedInterpreterTest(unittest.TestCase):
                 "section_writing": "deepseek-v4-flash",
             }.get(stage, default or "deepseek-v4-flash")),
             patch("backend.ai.interpreter.call_dashscope_api", side_effect=fake_llm_response) as llm,
-            patch("backend.ai.interpreter.get_supabase_client", return_value=supabase),
+            patch("backend.ai.interpreter.update_bid_analysis_project_meta", side_effect=fake_update_project_meta),
         ):
             report = interpreter.generate_ai_interpretation_report(project_id)
 
@@ -109,10 +109,32 @@ class SegmentedInterpreterTest(unittest.TestCase):
         self.assertIn("ai_interpretation_merge", stages)
         self.assertEqual(report["executive_summary"], ["融合后摘要"])
 
-        saved_meta = update_chain.update.call_args.args[0]["project_meta"]
         self.assertEqual(saved_meta["ai_report_generation"]["mode"], "segmented")
         self.assertEqual(saved_meta["ai_report_model"], "deepseek-v4-pro")
         self.assertGreater(saved_meta["ai_report_generation"]["segment_count"], 0)
+
+    def test_interpretation_writeback_failure_raises_after_generation(self):
+        project_id = "project-1"
+        payload = {
+            "project": {"id": project_id, "project_name": "测试项目"},
+            "analysis": {"id": "analysis-1", "project_meta": {}, "summary": "测试摘要"},
+            "requirements": [],
+            "risks": [],
+            "scoringItems": [],
+            "chapterSuggestions": [],
+        }
+
+        with (
+            patch("backend.ai.interpreter.get_project_interpretation", return_value=payload),
+            patch("backend.ai.interpreter.list_project_document_chunks", return_value=[]),
+            patch("backend.ai.interpreter.call_dashscope_api", return_value={
+                "model": "deepseek-v4-pro",
+                "output": {"choices": [{"message": {"content": json.dumps({"executive_summary": ["摘要"]}, ensure_ascii=False)}}]},
+            }),
+            patch("backend.ai.interpreter.update_bid_analysis_project_meta", return_value=None),
+        ):
+            with self.assertRaisesRegex(RuntimeError, "AI 解读报告写回 Supabase 失败"):
+                interpreter.generate_ai_interpretation_report(project_id)
 
 
 if __name__ == "__main__":

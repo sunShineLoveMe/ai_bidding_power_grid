@@ -1,10 +1,15 @@
 import json
 import logging
 import math
+from collections.abc import Callable
 from typing import Any
 
 from backend.core.config import build_enterprise_context, get_setting, get_stage_model
-from backend.db.supabase_repo import get_project_interpretation, get_supabase_client, list_project_document_chunks
+from backend.db.supabase_repo import (
+    get_project_interpretation,
+    list_project_document_chunks,
+    update_bid_analysis_project_meta,
+)
 from backend.core.llm_json_utils import strip_llm_json
 from backend.ai.qwen_client import call_dashscope_api
 
@@ -288,6 +293,18 @@ def _call_segment_interpretation(payload: dict[str, Any], group: list[dict[str, 
     return _normalize_report(strip_llm_json(content))
 
 
+ProgressCallback = Callable[[dict[str, Any]], None]
+
+
+def _emit_progress(progress_callback: ProgressCallback | None, payload: dict[str, Any]) -> None:
+    if not progress_callback:
+        return
+    try:
+        progress_callback(payload)
+    except Exception:
+        logging.exception("AI 解读任务进度回调失败")
+
+
 def _merge_segment_reports(payload: dict[str, Any], segment_reports: list[dict[str, Any]]) -> tuple[dict[str, Any], str | None]:
     response = call_dashscope_api(
         [{"role": "user", "content": _build_merge_prompt(payload, segment_reports)}],
@@ -303,26 +320,58 @@ def _merge_segment_reports(payload: dict[str, Any], segment_reports: list[dict[s
     return _normalize_report(strip_llm_json(content)), response.get("model")
 
 
-def _generate_segmented_report(payload: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
+def _generate_segmented_report(
+    payload: dict[str, Any],
+    progress_callback: ProgressCallback | None = None,
+) -> tuple[dict[str, Any], dict[str, Any]]:
     project_id = (payload.get("project") or {}).get("id")
     chunks = list_project_document_chunks(project_id, limit=1000) if project_id else []
     groups = _segment_chunks(chunks)
     if not groups:
         raise RuntimeError("未找到可用于分段解读的正文分片。")
 
+    _emit_progress(progress_callback, {
+        "stage": "segmenting",
+        "segment_total": len(groups),
+        "segment_done": 0,
+        "message": f"正在分段解读招标文件，共 {len(groups)} 段。",
+    })
     segment_reports: list[dict[str, Any]] = []
     failures: list[dict[str, Any]] = []
     for index, group in enumerate(groups, start=1):
         try:
             logging.info("招标解读分段开始: project_id=%s segment=%s/%s chunks=%s-%s", project_id, index, len(groups), group[0].get("chunk_index"), group[-1].get("chunk_index"))
             segment_reports.append(_call_segment_interpretation(payload, group, index, len(groups)))
+            _emit_progress(progress_callback, {
+                "stage": "segmenting",
+                "segment_total": len(groups),
+                "segment_done": len(segment_reports),
+                "segment_index": index,
+                "failure_count": len(failures),
+                "message": f"招标解读分段完成 {len(segment_reports)}/{len(groups)}。",
+            })
         except Exception as exc:
             logging.exception("招标解读分段失败: project_id=%s segment=%s/%s", project_id, index, len(groups))
             failures.append({"segment": index, "error": str(exc)[:300]})
+            _emit_progress(progress_callback, {
+                "stage": "segmenting",
+                "segment_total": len(groups),
+                "segment_done": len(segment_reports),
+                "segment_index": index,
+                "failure_count": len(failures),
+                "message": f"招标解读分段 {index}/{len(groups)} 失败，继续处理剩余分段。",
+            })
 
     if not segment_reports:
         raise RuntimeError("所有分段解读均失败，无法生成招标解读。")
 
+    _emit_progress(progress_callback, {
+        "stage": "merging",
+        "segment_total": len(groups),
+        "segment_done": len(segment_reports),
+        "failure_count": len(failures),
+        "message": "正在融合分段解读结果，生成最终报告。",
+    })
     merged, model = _merge_segment_reports(payload, segment_reports)
     merged["_segmented_interpretation"] = {
         "enabled": True,
@@ -340,7 +389,10 @@ def _generate_segmented_report(payload: dict[str, Any]) -> tuple[dict[str, Any],
     }
 
 
-def generate_ai_interpretation_report(project_id: str) -> dict[str, Any]:
+def generate_ai_interpretation_report(
+    project_id: str,
+    progress_callback: ProgressCallback | None = None,
+) -> dict[str, Any]:
     payload = get_project_interpretation(project_id)
     analysis = payload.get("analysis")
     if not analysis:
@@ -349,6 +401,10 @@ def generate_ai_interpretation_report(project_id: str) -> dict[str, Any]:
     project_meta = analysis.get("project_meta") or {}
     existing_report = project_meta.get("ai_report")
     if isinstance(existing_report, dict) and existing_report:
+        _emit_progress(progress_callback, {
+            "stage": "completed",
+            "message": "AI 深度解读已存在，直接使用缓存结果。",
+        })
         return existing_report
 
     chunks = list_project_document_chunks(project_id, limit=1000)
@@ -358,7 +414,7 @@ def generate_ai_interpretation_report(project_id: str) -> dict[str, Any]:
     generation_meta: dict[str, Any] = {}
     if use_segmented:
         try:
-            ai_report, generation_meta = _generate_segmented_report(payload)
+            ai_report, generation_meta = _generate_segmented_report(payload, progress_callback=progress_callback)
             model = generation_meta.get("model")
         except Exception:
             logging.exception("分段招标解读失败，尝试回退整体解读: %s", project_id)
@@ -368,6 +424,11 @@ def generate_ai_interpretation_report(project_id: str) -> dict[str, Any]:
         ai_report = {}
 
     if not ai_report:
+        _emit_progress(progress_callback, {
+            "stage": "single",
+            "document_chunk_count": len(chunks),
+            "message": "正在生成 AI 深度解读报告。",
+        })
         prompt = _build_prompt(payload)
         response = call_dashscope_api(
             [{"role": "user", "content": prompt}],
@@ -393,14 +454,8 @@ def generate_ai_interpretation_report(project_id: str) -> dict[str, Any]:
         "segment_failure_count": generation_meta.get("failure_count", 0),
     }
 
-    updated = (
-        get_supabase_client()
-        .table("bid_analysis")
-        .update({"project_meta": project_meta})
-        .eq("id", analysis["id"])
-        .execute()
-    )
-    if not updated.data:
+    updated = update_bid_analysis_project_meta(project_id, project_meta)
+    if not updated:
         raise RuntimeError("AI 解读报告写回 Supabase 失败")
 
     return ai_report
