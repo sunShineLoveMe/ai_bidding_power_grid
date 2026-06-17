@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from 'react';
-import { BookOpen, Box, CircleDollarSign, ClipboardCheck, FileClock, FileSearch, Home, LogOut, Settings, ShieldCheck, Sparkles, UserRound } from 'lucide-react';
+import { BookOpen, Box, CircleDollarSign, FileClock, FileSearch, Home, LogOut, Settings, ShieldCheck, Sparkles, UserRound } from 'lucide-react';
 import { Button, Tag } from 'antd';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -13,7 +13,6 @@ import { logout } from '../../api/auth';
 const navItems = [
   { path: '/', label: '主页', icon: Home },
   { path: '/interpretation', label: '招标项目', icon: FileSearch },
-  { path: '/prefill', label: '投标确认', icon: ClipboardCheck },
   { path: '/knowledge', label: '企业知识库', icon: BookOpen },
   { path: '/qualification', label: '企业资信库', icon: ShieldCheck },
   { path: '/products', label: '企业产品库', icon: Box },

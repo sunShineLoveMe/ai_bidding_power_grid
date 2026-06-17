@@ -129,6 +129,60 @@ textarea {
   padding-top: 3px;
 }
 
+@media (max-width: 900px) {
+  body {
+    min-width: 0;
+    overflow: auto;
+  }
+
+  header.fixed {
+    height: auto;
+    min-height: 64px;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 12px;
+  }
+
+  header.fixed > div:first-child {
+    min-width: 0;
+    font-size: 18px;
+  }
+
+  header.fixed > div:last-child {
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 12px;
+  }
+
+  aside.fixed {
+    display: none;
+  }
+
+  main.fixed {
+    left: 0 !important;
+    top: 88px !important;
+    bottom: 0 !important;
+    padding: 12px;
+    overflow-x: hidden;
+  }
+
+  footer.fixed {
+    display: none;
+  }
+
+  .module-shell {
+    display: flex;
+    height: auto;
+    min-height: 100%;
+    flex-direction: column;
+  }
+
+  .panel-card {
+    padding: 12px;
+    border-radius: 12px;
+  }
+}
+
 .result-box {
   height: 360px;
   min-height: 240px;

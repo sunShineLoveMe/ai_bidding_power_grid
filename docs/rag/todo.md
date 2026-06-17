@@ -108,6 +108,7 @@
 | P1C-3 | [x] | RAG 本地门禁自动化入口 | `scripts/rag/run_local_rag_gate.py`、`tests/test_local_rag_gate.py`、`docs/rag/runs/run_20260616_p1c3_local_rag_gate_summary.md`、`docs/rag/runs/run_20260616_p1c3_local_rag_gate_incremental_summary.md` | 已固化本地一键 RAG 门禁：真实 `/api/ready`、RAG 相关单测、Base + 泰昌专项增量回归门禁、真实 `/api/knowledge/search/stream` 抽样；真实运行 `run_20260616_p1c3_local_rag_gate` PASS，stream 返回 contexts=5、assets=8、images=8、done=true；脚本输出 JSON/Markdown 汇总和失败步骤定位 |
 | P1C-4 | [x] | 前导确认页变量 schema v1 与预填缺口报告 | `backend/services/bid_prefill.py`、`backend/api/prefill.py`、`frontend/src/pages/BidPrefill/index.tsx`、`tests/test_bid_prefill.py`、`docs/rag/runs/run_20260616_p1c4_prefill_schema_gap_report_feature_summary.md` | 已完成旁路只读投标信息确认页与真实项目报告接口：schema v1 共 32 个字段，按“系统已识别/企业库带出/客户需填写/待人工确认”分组；真实项目接口返回客户需填写 10、待人工确认 10、正式必填缺口 15；不写入 `bid_sections`，不影响 `sectionsSnapshot` DOCX 导出契约；前端页面真实登录访问 PASS，Base + 泰昌专项增量回归 Gate PASS |
 | P1C-5 | [x] | AI 深度解读后台任务化与进度轮询 | `backend/tasks/interpretation_tasks.py`、`backend/api/interpret.py`、`frontend/src/api/bidProject.ts`、`frontend/src/pages/Interpretation/index.tsx`、`frontend/src/components/workflow/BidWorkflow.tsx`、`migrations/postgres/008_bid_interpretation_tasks.sql`、`docs/development/runs/run_20260617_interpretation_async_task.md` | 已新增 `bid_interpretation_tasks`、Celery 任务 `bid.interpretation.generate_report` 和 `/ai-report-tasks` 创建/查询接口；前端上传工作流和招标解读页改为创建任务 + 轮询状态，显示分段/融合进度；真实 PostgreSQL 迁移 PASS，真实 API 缓存命中 PASS，真实 Redis/Celery worker 投递 PASS；`pytest` 定向 11 passed，`npm run build` PASS |
+| P1C-6 | [x] | 前导确认页接入主流程与可编辑 UI | `frontend/src/components/workflow/BidWorkflow.tsx`、`frontend/src/pages/BidPrefill/index.tsx`、`frontend/src/components/layout/AppLayout.tsx`、`docs/development/runs/run_20260617_prefill_workflow_editable_ui.md` | 已从左侧一级菜单移除“投标确认”，并在自动流程中插入“投标信息确认”步骤：上传 → 解析 → 解读 → 分册大纲 → 投标确认 → 标书编制；前导页改为可编辑字段卡片，支持客户确认值本地草稿；真实页面回归确认左侧菜单无投标确认、流程含投标信息确认、33 个可编辑输入框、1440 宽无横向溢出；`pytest` 定向 10 passed，`npm run build` PASS |
 
 ## P3：召回质量增强
 
@@ -156,7 +157,8 @@
 3. **P1C-3 已完成：RAG 本地门禁自动化入口。** 以后本地 RAG 改动优先执行 `set -a; source .env; set +a; .venv/bin/python scripts/rag/run_local_rag_gate.py --run-id <run>`。
 4. **P1C-4 已完成：前导确认页变量 schema v1 与预填缺口报告。** 当前为旁路只读确认页，不替代章节正文编辑，不写入 `bid_sections`，不影响 `sectionsSnapshot` DOCX 导出契约。
 5. **P1C-5 已完成：AI 深度解读后台任务化与进度轮询。** `ai-report-tasks` 创建任务后由 Celery worker 执行，前端轮询 `bid_interpretation_tasks` 状态，不再用长 HTTP 等待完整 DeepSeek 分段/merge。
-6. **建议下一任务：变量确认后的显式回填引擎。** 只有用户确认后才把字段应用到章节占位符；报价、保证金、授权签章等客户决策字段仍不得自动补全。
-7. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表；仅在参数规模变大、多批次查询复杂或页面精确查询成为瓶颈后启动。
-8. P1B 泰昌补充资料质量增强已完成；后续新增资料按 `docs/rag/taichang-material-completeness-scorecard.md` 的 P0/P1/P2 补资料清单更新评分，并重跑真实回归。
-9. 客户演示完整标书已完成 DeepSeek 全量章节重写和真实 DOCX/PDF 验收：见 `docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`；后续若客户更换目标招标文件或 Word 模板，需重新生成章节、重新导出并复跑验收。
+6. **P1C-6 已完成：前导确认页接入主流程与可编辑 UI。** “投标确认”不再是一级菜单，而是生成分册大纲后、进入标书编制前的确认步骤；页面支持客户编辑确认值并避免表格溢出。
+7. **建议下一任务：变量确认后的显式回填引擎。** 只有用户确认后才把字段应用到章节占位符；报价、保证金、授权签章等客户决策字段仍不得自动补全。
+8. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表；仅在参数规模变大、多批次查询复杂或页面精确查询成为瓶颈后启动。
+9. P1B 泰昌补充资料质量增强已完成；后续新增资料按 `docs/rag/taichang-material-completeness-scorecard.md` 的 P0/P1/P2 补资料清单更新评分，并重跑真实回归。
+10. 客户演示完整标书已完成 DeepSeek 全量章节重写和真实 DOCX/PDF 验收：见 `docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`；后续若客户更换目标招标文件或 Word 模板，需重新生成章节、重新导出并复跑验收。
