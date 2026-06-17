@@ -155,24 +155,24 @@ export function BidPrefillPage(): JSX.Element {
     return (
       <article
         key={field.key}
-        className={`rounded-lg border bg-white p-4 shadow-sm ${needsInput ? 'border-rose-100' : 'border-slate-100'}`}
+        className={`prefill-field-card rounded-xl border bg-white p-5 shadow-sm ${needsInput ? 'border-rose-100' : 'border-slate-100'}`}
       >
-        <div className="mb-3 flex flex-wrap items-start justify-between gap-2">
+        <div className="mb-4 grid gap-3 md:grid-cols-[minmax(0,1fr)_auto]">
           <div className="min-w-0">
-            <h3 className="m-0 break-words text-base font-black text-slate-950">{field.label}</h3>
+            <h3 className="m-0 text-lg font-black leading-snug text-slate-950">{field.label}</h3>
             <div className="mt-2 flex flex-wrap gap-2">
-              <Tag color="purple" className="m-0 max-w-full whitespace-normal break-words">{field.group}</Tag>
-              <Tag color={statusColor[field.status]} className="m-0">{field.statusLabel}</Tag>
-              <Tag color={riskColor[field.riskLevel] || 'default'} className="m-0">{field.riskLevel}</Tag>
+              <Tag color="purple" className="m-0 max-w-full whitespace-normal">{field.group}</Tag>
+              <Tag color={statusColor[field.status]} className="m-0 max-w-full whitespace-normal">{field.statusLabel}</Tag>
+              <Tag color={riskColor[field.riskLevel] || 'default'} className="m-0 max-w-full whitespace-normal">{field.riskLevel}</Tag>
             </div>
           </div>
-          <Button size="small" onClick={() => resetDraftValue(field)}>恢复候选值</Button>
+          <Button className="justify-self-start md:justify-self-end" size="small" onClick={() => resetDraftValue(field)}>恢复候选值</Button>
         </div>
 
-        <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-          <div className="min-w-0 rounded-md bg-slate-50 p-3">
+        <div className="grid gap-4 xl:grid-cols-[minmax(280px,1fr)_minmax(320px,1fr)]">
+          <div className="min-w-0 rounded-lg bg-slate-50 p-4">
             <div className="mb-1 text-xs font-bold text-slate-500">系统候选值</div>
-            <Typography.Paragraph className="m-0 whitespace-pre-wrap break-words text-sm font-semibold text-slate-700">
+            <Typography.Paragraph className="prefill-long-text m-0 whitespace-pre-wrap text-sm font-semibold leading-6 text-slate-700">
               {candidateValue || '暂无候选值，需人工填写'}
             </Typography.Paragraph>
           </div>
@@ -181,23 +181,24 @@ export function BidPrefillPage(): JSX.Element {
             <Input.TextArea
               value={confirmedValue}
               autoSize={{ minRows: 2, maxRows: 6 }}
+              className="prefill-confirm-textarea"
               placeholder={needsInput ? '请填写或确认该字段' : '可按实际情况修正'}
               onChange={event => updateDraftValue(field.key, event.target.value)}
             />
           </div>
         </div>
 
-        <div className="mt-3 grid gap-2 text-xs font-semibold leading-5 text-slate-500 lg:grid-cols-3">
-          <div className="min-w-0 break-words">来源规则：{field.sourcePolicy || '-'}</div>
-          <div className="min-w-0 break-words">依据：{field.evidence?.sourceLabel || '-'}</div>
-          <div className="min-w-0 break-words">映射：{field.mapsTo?.join('、') || '-'}</div>
+        <div className="mt-4 grid gap-2 text-xs font-semibold leading-5 text-slate-500 xl:grid-cols-3">
+          <div className="prefill-long-text min-w-0">来源规则：{field.sourcePolicy || '-'}</div>
+          <div className="prefill-long-text min-w-0">依据：{field.evidence?.sourceLabel || '-'}</div>
+          <div className="prefill-long-text min-w-0">映射：{field.mapsTo?.join('、') || '-'}</div>
         </div>
       </article>
     );
   }
 
   return (
-    <div className="module-shell relative">
+    <div className="prefill-shell relative">
       <ModuleHeader
         title="投标信息确认"
         description="生成正文前确认项目变量、企业资料候选和客户决策字段；确认结果用于进入正文编辑前的人工收口。"
@@ -217,7 +218,7 @@ export function BidPrefillPage(): JSX.Element {
       />
 
       <Alert
-        className="my-4"
+        className="prefill-alert"
         type={fromWorkflow ? 'warning' : 'info'}
         showIcon
         message={fromWorkflow ? '请先确认关键投标字段，再进入正文编辑' : '投标确认不会自动覆盖已生成正文'}
@@ -228,29 +229,41 @@ export function BidPrefillPage(): JSX.Element {
         <>
           <MetricCards items={metrics} />
 
-          <section className="panel-card my-4">
-            <div className="grid gap-3 text-sm font-semibold text-slate-600 lg:grid-cols-4">
-              <div className="min-w-0 break-words"><span className="text-slate-400">项目：</span>{report.project?.project_name || '未命名项目'}</div>
-              <div className="min-w-0 break-words"><span className="text-slate-400">招标编号：</span>{report.project?.project_no || '-'}</div>
-              <div className="min-w-0 break-words"><span className="text-slate-400">生成时间：</span>{report.generatedAt}</div>
-              <div className="min-w-0 break-words"><span className="text-slate-400">确认方式：</span>客户人工确认</div>
+          <section className="panel-card">
+            <div className="grid gap-3 text-sm font-semibold text-slate-600 lg:grid-cols-[minmax(0,2fr)_minmax(150px,0.7fr)_minmax(190px,0.9fr)_minmax(150px,0.7fr)]">
+              <div className="prefill-meta-item">
+                <span className="prefill-meta-label">项目</span>
+                <strong>{report.project?.project_name || '未命名项目'}</strong>
+              </div>
+              <div className="prefill-meta-item">
+                <span className="prefill-meta-label">招标编号</span>
+                <strong>{report.project?.project_no || '-'}</strong>
+              </div>
+              <div className="prefill-meta-item">
+                <span className="prefill-meta-label">生成时间</span>
+                <strong>{report.generatedAt}</strong>
+              </div>
+              <div className="prefill-meta-item">
+                <span className="prefill-meta-label">确认方式</span>
+                <strong>客户人工确认</strong>
+              </div>
             </div>
           </section>
 
-          <div className="grid gap-4 xl:grid-cols-[220px_minmax(0,1fr)]">
-            <section className="panel-card self-start">
+          <div className="prefill-workspace">
+            <section className="panel-card prefill-sidebar">
               <h2 className="panel-title">字段分组</h2>
-              <div className="grid gap-2">
+              <div className="prefill-group-list">
                 {groups.map(group => (
                   <button
                     key={group.name}
                     type="button"
-                    className={`flex min-h-11 items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-sm font-bold ${
+                    className={`flex min-h-11 w-full min-w-0 items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-sm font-bold ${
                       activeGroup === group.name ? 'bg-blue-50 text-blue-600' : 'bg-slate-50 text-slate-600 hover:bg-slate-100'
                     }`}
                     onClick={() => setActiveGroup(group.name)}
                   >
-                    <span className="min-w-0 break-words">{group.name}</span>
+                    <span className="prefill-group-name">{group.name}</span>
                     <Tag className="m-0 shrink-0">{group.count}</Tag>
                   </button>
                 ))}
@@ -264,10 +277,10 @@ export function BidPrefillPage(): JSX.Element {
               </Button>
             </section>
 
-            <section className="min-w-0">
-              <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+            <section className="prefill-main">
+              <div className="mb-3 grid gap-3 md:grid-cols-[minmax(0,1fr)_auto]">
                 <h2 className="panel-title mb-0">变量确认</h2>
-                <Space wrap>
+                <Space className="justify-start md:justify-end" wrap>
                   <Tag color="red">客户需填写 {report.gapReport.customerRequiredFields.length}</Tag>
                   <Tag color="orange">待人工确认 {report.gapReport.manualConfirmFields.length}</Tag>
                   <Tag>当前 {fields.length} 个字段</Tag>

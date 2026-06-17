@@ -89,11 +89,13 @@ export function AppLayout({ children }: PropsWithChildren): JSX.Element {
 
       <Button
         type="primary"
-        className="fixed bottom-[72px] right-7 z-40 h-14 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-6 text-base font-black shadow-xl shadow-blue-200"
+        title="知识库助手"
+        aria-label="知识库助手"
+        className="fixed bottom-[72px] right-7 z-40 h-14 w-14 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-0 text-base font-black shadow-xl shadow-blue-200 2xl:w-auto 2xl:px-6"
         icon={<Sparkles size={19} />}
         onClick={() => setKnowledgeAssistantOpen(true)}
       >
-        知识库助手
+        <span className="hidden 2xl:inline">知识库助手</span>
       </Button>
 
       <KnowledgeSearchDrawer

@@ -129,6 +129,100 @@ textarea {
   padding-top: 3px;
 }
 
+.prefill-shell {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 32px;
+}
+
+.prefill-alert {
+  margin: 14px 0 0;
+}
+
+.prefill-alert .ant-alert-message,
+.prefill-alert .ant-alert-description {
+  overflow-wrap: anywhere;
+}
+
+.prefill-meta-item {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+  border-radius: 12px;
+  background: #f8faff;
+  padding: 10px 12px;
+}
+
+.prefill-meta-item strong {
+  min-width: 0;
+  color: #334155;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.prefill-meta-label {
+  color: #8a97ad;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.prefill-workspace {
+  display: grid;
+  min-height: 0;
+  gap: 16px;
+  grid-template-columns: 220px minmax(0, 1fr);
+  align-items: start;
+}
+
+.prefill-sidebar {
+  position: sticky;
+  top: 0;
+  max-height: calc(100vh - 210px);
+  overflow: hidden;
+}
+
+.prefill-group-list {
+  display: grid;
+  max-height: calc(100vh - 360px);
+  gap: 8px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.prefill-group-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.prefill-main {
+  min-width: 0;
+  padding-right: 76px;
+}
+
+.prefill-field-card {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.prefill-long-text {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.prefill-confirm-textarea {
+  width: 100%;
+  min-width: 0;
+  resize: vertical;
+}
+
+@media (min-width: 1536px) {
+  .prefill-main {
+    padding-right: 176px;
+  }
+}
+
 @media (max-width: 900px) {
   body {
     min-width: 0;
@@ -180,6 +274,34 @@ textarea {
   .panel-card {
     padding: 12px;
     border-radius: 12px;
+  }
+
+  .prefill-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .prefill-sidebar {
+    position: static;
+    max-height: none;
+  }
+
+  .prefill-group-list {
+    max-height: none;
+  }
+
+  .prefill-shell {
+    padding-right: 76px;
+  }
+
+  .prefill-main {
+    padding-right: 0;
+    padding-bottom: 88px;
+  }
+}
+
+@media (max-width: 640px) {
+  .prefill-shell {
+    padding-right: 0;
   }
 }
 

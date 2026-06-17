@@ -1,5 +1,31 @@
 # Project Agent Instructions
 
+## 前端 UI / 设计 Skill 与页面质量规则
+
+当用户要求新建前端页面、重构页面、修复页面排版、调整组件视觉、实现 Figma 设计、优化交互或处理“页面错乱/布局混乱/不好看”等问题时，必须先使用本项目已安装的 OpenAI 官方 UI/设计相关 Skill，并结合当前项目 UI 风格再动代码。
+
+已安装 Skill：
+
+- `.agents/skills/figma/`
+- `.agents/skills/openai-figma-use/`
+- `.agents/skills/openai-figma-generate-design/`
+- `.agents/skills/openai-figma-implement-design/`
+- `.agents/skills/openai-figma-create-design-system-rules/`
+- `.agents/skills/openai-figma-create-new-file/`
+- `.agents/skills/openai-figma-generate-library/`
+- `.agents/skills/openai-figma-code-connect-components/`
+- `.agents/skills/openai-playwright/`
+- `.agents/skills/openai-screenshot/`
+
+执行原则：
+
+- 开发前先阅读相关 Skill 的 `SKILL.md`；如果涉及 Figma URL、Figma 节点或设计稿实现，优先使用 `figma` / `openai-figma-implement-design`；如果是页面自检和排版回归，优先使用 `openai-playwright` 与截图核验。
+- 先盘点当前页面和邻近模块的 UI 风格，再设计改动；本项目当前前端是 Vite + React + Ant Design 5，优先复用 `frontend/src/components/`、Ant Design 组件、现有布局壳、`frontend/src/index.css` 中的全局样式和已有中文业务文案。
+- 面向本项目的后台工作台页面应保持信息密度、层级清晰和操作明确；不得做营销式大 Hero、过度装饰、单一大色块或与现有工作台不一致的视觉风格。
+- 新建或重构页面前必须明确：页面主任务、关键数据区、主要操作、空状态、加载状态、错误状态、窄屏/低高度下的滚动边界；避免卡片套卡片、内容溢出、按钮文字挤压、表格横向不可控。
+- 修改 CSS/布局时必须检查全局影响，尤其是 `body`、`#root`、`.module-shell`、`.panel-card`、Ant Design 表格/抽屉/步骤条等共享样式；不得为单页问题引入会破坏其他页面的全局规则。
+- 页面完成后，能跑前端时必须用真实浏览器验证主要视口和关键交互；至少检查首屏是否错位、文本是否溢出、弹窗/抽屉是否遮挡、表格和按钮是否可操作。涉及正式客户演示或复杂页面时，保存截图或在回复中说明验证视口。
+
 ## 国家电网 RAG 基座数据工程 Skill
 
 当用户要求处理电网/国家电网 RAG 基座数据、客户标书模板、招标文件包、技术规范书、货物清单、合同条款、分块、metadata、入库、召回评测或回归跟踪时，必须先使用以下 Skill：
