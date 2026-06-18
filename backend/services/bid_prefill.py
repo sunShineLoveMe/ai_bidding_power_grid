@@ -201,8 +201,13 @@ def apply_bid_prefill_confirmation(project_id: str, values: dict[str, Any]) -> d
     normalized = _normalize_confirmed_values(values)
     changed_sections: list[dict[str, Any]] = []
     replacement_count = 0
+    initial_sections = list_bid_sections(project_id)
+    section_candidates = _build_section_candidates(
+        [_build_field(spec, interpretation, [], normalized) for spec in PREFILL_FIELD_SPECS],
+        initial_sections,
+    )
 
-    for section in list_bid_sections(project_id):
+    for section in initial_sections:
         original = str(section.get("content") or "")
         updated, replacements = apply_confirmed_values_to_text(original, normalized)
         if updated == original:
@@ -230,6 +235,7 @@ def apply_bid_prefill_confirmation(project_id: str, values: dict[str, Any]) -> d
     final_sections = list_bid_sections(project_id)
     unresolved = _collect_unresolved_placeholders(final_sections)
     missing_required = _missing_required_confirmations(normalized)
+    export_gate = _build_prefill_export_gate(final_sections, normalized, section_candidates)
     applied_at = datetime.now().isoformat(timespec="seconds")
     confirmation = {
         "schema_version": PREFILL_SCHEMA_VERSION,
@@ -241,7 +247,9 @@ def apply_bid_prefill_confirmation(project_id: str, values: dict[str, Any]) -> d
         "unresolved_placeholder_count": len(unresolved),
         "unresolved_placeholders": unresolved[:100],
         "missing_formal_required_fields": missing_required,
-        "ready_for_formal_export": bool(final_sections) and not unresolved and not missing_required,
+        "section_application_summary": export_gate["section_application_summary"],
+        "export_gate": export_gate,
+        "ready_for_formal_export": export_gate["ready"],
     }
     if not update_bid_analysis_project_meta(project_id, {**project_meta, PREFILL_META_KEY: confirmation}):
         raise RuntimeError("投标确认值持久化失败")
@@ -343,6 +351,50 @@ def _missing_required_confirmations(values: dict[str, str]) -> list[dict[str, st
         for spec in PREFILL_FIELD_SPECS
         if spec.required_level == "formal_required" and not values.get(spec.key)
     ]
+
+
+def _build_prefill_export_gate(
+    sections: list[dict[str, Any]],
+    values: dict[str, str],
+    section_candidates: list[dict[str, Any]],
+) -> dict[str, Any]:
+    unresolved = _collect_unresolved_placeholders(sections)
+    missing_required = _missing_required_confirmations(values)
+    missing_by_key = {item["key"] for item in missing_required}
+    section_summaries: list[dict[str, Any]] = []
+    for candidate in section_candidates:
+        candidate_fields = candidate.get("fields") if isinstance(candidate.get("fields"), list) else []
+        confirmed_fields = [
+            field for field in candidate_fields
+            if values.get(str(field.get("key") or ""))
+        ]
+        missing_fields = [
+            {
+                "key": field.get("key"),
+                "label": field.get("label"),
+                "status": field.get("status"),
+            }
+            for field in candidate_fields
+            if field.get("key") in missing_by_key
+        ]
+        section_summaries.append({
+            "sectionId": candidate.get("sectionId"),
+            "sectionTitle": candidate.get("sectionTitle"),
+            "fieldCount": candidate.get("fieldCount") or len(candidate_fields),
+            "confirmedFieldCount": len(confirmed_fields),
+            "missingFormalRequiredCount": len(missing_fields),
+            "missingFormalRequiredFields": missing_fields,
+            "boundaryWarnings": candidate.get("boundaryWarnings") or [],
+        })
+    return {
+        "ready": bool(sections) and not unresolved and not missing_required,
+        "sectionCount": len(section_summaries),
+        "confirmedSectionCount": sum(1 for item in section_summaries if item["confirmedFieldCount"] > 0),
+        "unresolvedPlaceholderCount": len(unresolved),
+        "unresolvedPlaceholders": unresolved[:100],
+        "missingFormalRequiredFields": missing_required,
+        "section_application_summary": section_summaries,
+    }
 
 
 def _candidate_value(key: str, interpretation: dict[str, Any], assets: list[dict[str, Any]]) -> tuple[Any, dict[str, Any], float]:

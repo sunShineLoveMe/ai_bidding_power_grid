@@ -566,7 +566,25 @@ export type BidPrefillApplication = {
   changed_section_count: number;
   replacement_count: number;
   unresolved_placeholder_count: number;
+  unresolved_placeholders?: Array<{ section_id?: string; section_title?: string; placeholder: string }>;
   missing_formal_required_fields: Array<{ key: string; label: string }>;
+  section_application_summary?: Array<{
+    sectionId?: string;
+    sectionTitle: string;
+    fieldCount: number;
+    confirmedFieldCount: number;
+    missingFormalRequiredCount: number;
+    missingFormalRequiredFields: Array<{ key?: string; label?: string; status?: string }>;
+    boundaryWarnings: string[];
+  }>;
+  export_gate?: {
+    ready: boolean;
+    sectionCount: number;
+    confirmedSectionCount: number;
+    unresolvedPlaceholderCount: number;
+    unresolvedPlaceholders: Array<{ section_id?: string; section_title?: string; placeholder: string }>;
+    missingFormalRequiredFields: Array<{ key: string; label: string }>;
+  };
   ready_for_formal_export: boolean;
 };
 

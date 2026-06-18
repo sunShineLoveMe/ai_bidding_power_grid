@@ -45,6 +45,10 @@ function fieldNeedsUserInput(field: BidPrefillField): boolean {
   return field.status === 'customer_required' || field.status === 'manual_confirm' || field.riskLevel === 'critical';
 }
 
+function fieldHasConfirmedValue(field: BidPrefillField, draftValues: Record<string, string>): boolean {
+  return Boolean((draftValues[field.key] || '').trim());
+}
+
 function sourceDomainLabel(domain?: string): string {
   const labels: Record<string, string> = {
     tender_requirement: '招标要求',
@@ -129,6 +133,33 @@ export function BidPrefillPage(): JSX.Element {
     return candidates;
   }, [activeGroup, onlyGaps, report]);
 
+  const exportGate = useMemo(() => {
+    if (!report) {
+      return {
+        ready: false,
+        missingRequired: [] as BidPrefillField[],
+        sectionGaps: [] as Array<{ sectionTitle: string; missingLabels: string[] }>,
+        unresolvedPlaceholderCount: 0,
+      };
+    }
+    const missingRequired = report.fields.filter(field => field.requiredLevel === 'formal_required' && !fieldHasConfirmedValue(field, draftValues));
+    const sectionGaps = (report.sectionCandidates || [])
+      .map(candidate => {
+        const missingLabels = candidate.fields
+          .filter(field => field.requiredLevel === 'formal_required' && !((draftValues[field.key] || '').trim()))
+          .map(field => field.label);
+        return { sectionTitle: candidate.sectionTitle, missingLabels };
+      })
+      .filter(item => item.missingLabels.length > 0);
+    const unresolvedPlaceholderCount = report.summary.unresolvedPlaceholderCount || 0;
+    return {
+      ready: missingRequired.length === 0 && unresolvedPlaceholderCount === 0,
+      missingRequired,
+      sectionGaps,
+      unresolvedPlaceholderCount,
+    };
+  }, [draftValues, report]);
+
   const metrics = [
     { title: '字段总数', value: report?.summary.totalFields || 0, desc: `schema ${report?.schemaVersion || '-'}`, icon: ClipboardCheck, colorClass: 'bg-blue-50 text-blue-600' },
     { title: '系统已识别', value: report?.summary.systemRecognized || 0, desc: '来自招标解析', icon: Database, colorClass: 'bg-cyan-50 text-cyan-600' },
@@ -143,6 +174,23 @@ export function BidPrefillPage(): JSX.Element {
 
   function resetDraftValue(field: BidPrefillField): void {
     updateDraftValue(field.key, formatValue(field.value));
+  }
+
+  function adoptSectionCandidate(candidate: BidPrefillSectionCandidate): void {
+    if (!report) return;
+    const fieldByKey = new Map(report.fields.map(field => [field.key, field]));
+    setDraftValues(prev => {
+      const next = { ...prev };
+      for (const candidateField of candidate.fields) {
+        const field = fieldByKey.get(candidateField.key);
+        if (!field) continue;
+        const value = formatValue(field.value);
+        if (value.trim()) {
+          next[field.key] = value;
+        }
+      }
+      return next;
+    });
   }
 
   function focusField(fieldKey: string): void {
@@ -245,6 +293,7 @@ export function BidPrefillPage(): JSX.Element {
             </div>
           </div>
           <div className="flex flex-wrap items-start justify-start gap-2 lg:justify-end">
+            <Button size="small" onClick={() => adoptSectionCandidate(candidate)}>采纳本章候选</Button>
             {Object.entries(candidate.statusCounts || {}).map(([status, count]) => (
               <Tag key={status} color={statusColor[status as BidPrefillStatus] || 'default'} className="m-0">
                 {status === 'manual_confirm' ? '待确认' : status === 'customer_required' ? '需填写' : status} {count}
@@ -313,6 +362,37 @@ export function BidPrefillPage(): JSX.Element {
       {report ? (
         <>
           <MetricCards items={metrics} />
+
+          <section className="panel-card prefill-export-gate">
+            <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto]">
+              <div className="min-w-0">
+                <h2 className="panel-title mb-1">导出前门禁</h2>
+                <p className="m-0 text-sm font-semibold leading-6 text-slate-500">
+                  只检查客户确认值和明确占位符，不生成正文；未通过时仍可保存确认值，但不应作为正式标书导出。
+                </p>
+              </div>
+              <Space className="justify-start lg:justify-end" wrap>
+                <Tag color={exportGate.ready ? 'green' : 'red'}>{exportGate.ready ? '可进入正式导出' : '仍需收口'}</Tag>
+                <Tag color={exportGate.missingRequired.length ? 'red' : 'green'}>必填缺口 {exportGate.missingRequired.length}</Tag>
+                <Tag color={exportGate.unresolvedPlaceholderCount ? 'orange' : 'green'}>正文占位 {exportGate.unresolvedPlaceholderCount}</Tag>
+              </Space>
+            </div>
+            {exportGate.missingRequired.length || exportGate.sectionGaps.length ? (
+              <div className="prefill-gate-list mt-3">
+                {exportGate.missingRequired.slice(0, 8).map(field => (
+                  <button key={field.key} type="button" className="prefill-gate-item" onClick={() => focusField(field.key)}>
+                    <strong>{field.label}</strong>
+                    <span>{field.group} · {field.statusLabel}</span>
+                  </button>
+                ))}
+                {exportGate.missingRequired.length > 8 ? (
+                  <div className="prefill-section-warning">还有 {exportGate.missingRequired.length - 8} 个必填缺口未展示，请切换“只看需确认”。</div>
+                ) : null}
+              </div>
+            ) : (
+              <div className="prefill-gate-pass mt-3">当前确认值已覆盖正式必填字段；仍需以应用后的占位符扫描结果为最终门禁。</div>
+            )}
+          </section>
 
           <section className="panel-card">
             <div className="grid gap-3 text-sm font-semibold text-slate-600 lg:grid-cols-[minmax(0,2fr)_minmax(150px,0.7fr)_minmax(190px,0.9fr)_minmax(150px,0.7fr)]">

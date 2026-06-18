@@ -262,6 +262,56 @@ textarea {
   resize: vertical;
 }
 
+.prefill-export-gate {
+  border-color: #dbeafe;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+}
+
+.prefill-gate-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.prefill-gate-item {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+  border: 1px solid #fecdd3;
+  border-radius: 10px;
+  background: #fff1f2;
+  color: #881337;
+  padding: 9px 10px;
+  text-align: left;
+}
+
+.prefill-gate-item strong,
+.prefill-gate-item span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.prefill-gate-item strong {
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.prefill-gate-item span {
+  color: #9f1239;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.prefill-gate-pass {
+  border-radius: 10px;
+  background: #ecfdf5;
+  color: #047857;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.6;
+  padding: 9px 10px;
+}
+
 .prefill-section-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -407,6 +457,10 @@ textarea {
   }
 
   .prefill-section-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .prefill-gate-list {
     grid-template-columns: 1fr;
   }
 

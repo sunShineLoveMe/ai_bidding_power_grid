@@ -322,9 +322,78 @@ class BidPrefillReportTest(unittest.TestCase):
         self.assertEqual(result["replacement_count"], 2)
         self.assertFalse(result["ready_for_formal_export"])
         self.assertTrue(result["missing_formal_required_fields"])
+        self.assertIn("export_gate", result)
+        self.assertFalse(result["export_gate"]["ready"])
+        self.assertEqual(result["export_gate"]["unresolvedPlaceholderCount"], 0)
+        self.assertTrue(result["export_gate"]["missingFormalRequiredFields"])
+        self.assertTrue(result["section_application_summary"])
+        self.assertTrue(any(item["sectionTitle"] == "投标函" for item in result["section_application_summary"]))
         update_mock.assert_called_once()
         saved_meta = meta_mock.call_args.args[1]["bid_prefill"]
         self.assertEqual(saved_meta["confirmed_values"]["bidder_name"], "河北泰昌电力器材科技有限公司")
+        self.assertIn("export_gate", saved_meta)
+        self.assertIn("section_application_summary", saved_meta)
+
+    def test_apply_confirmation_returns_ready_gate_after_required_values_resolved(self):
+        from backend.services.bid_prefill import apply_bid_prefill_confirmation
+
+        original = {
+            "id": "33333333-3333-3333-3333-333333333333",
+            "title": "投标函",
+            "content": "项目名称：{{project_name}}\n招标编号：{{tender_no}}\n投标人：{{bidder_name}}",
+            "metadata": {},
+        }
+        updated = {
+            **original,
+            "content": "项目名称：辽宁采购项目\n招标编号：2225AC\n投标人：河北泰昌电力器材科技有限公司",
+        }
+        interpretation = {"analysis": {"project_meta": {"cover_fields": {}}}}
+
+        required_values = {
+            "project_name": "辽宁采购项目",
+            "tender_no": "2225AC",
+            "tender_unit": "国网辽宁省电力有限公司",
+            "bidder_name": "河北泰昌电力器材科技有限公司",
+            "package_no": "包1",
+            "package_name": "电缆保护管CPVC",
+            "material_category": "电缆保护管CPVC",
+            "goods_list_summary": "包1 电缆保护管CPVC 1000米",
+            "delivery_place": "辽宁省",
+            "unified_social_credit_code": "91130607056539515C",
+            "legal_representative": "晁坤琳",
+            "total_bid_price": "1000000元",
+            "total_bid_price_upper": "壹佰万元整",
+            "bid_bond_amount": "20000元",
+            "bid_bond_form": "银行保函",
+            "tax_rate": "13%",
+            "delivery_period": "合同签订后30日内",
+            "warranty_period": "按招标文件要求执行",
+            "bid_validity_days": "90",
+            "authorized_representative": "张三",
+            "authorized_representative_id": "110101199001011234",
+            "signature_date": "2026年6月18日",
+            "qualification_assets": "营业执照副本",
+            "inspection_reports": "CPVC电缆保护管检验报告",
+            "product_models": "CPVC电缆保护管：DS 250×15×6000 SN16 PVC-C",
+            "technical_parameter_summary": "技术参数表候选已确认",
+            "technical_deviation_candidates": "技术偏差表候选待写入偏差表",
+        }
+
+        with patch("backend.services.bid_prefill.get_project_interpretation", return_value=interpretation), \
+             patch("backend.services.bid_prefill.list_bid_sections", side_effect=[[original], [updated]]), \
+             patch("backend.services.bid_prefill.update_bid_section_content", return_value=updated), \
+             patch("backend.services.bid_prefill.update_bid_analysis_project_meta", return_value={"id": "analysis"}):
+            result = apply_bid_prefill_confirmation(
+                "11111111-1111-1111-1111-111111111111",
+                required_values,
+            )
+
+        self.assertTrue(result["ready_for_formal_export"])
+        self.assertTrue(result["export_gate"]["ready"])
+        self.assertEqual(result["export_gate"]["unresolvedPlaceholderCount"], 0)
+        self.assertEqual(result["export_gate"]["missingFormalRequiredFields"], [])
+        self.assertEqual(result["changed_section_count"], 1)
+        self.assertGreaterEqual(result["replacement_count"], 3)
 
     def test_rejects_changing_taichang_bidder(self):
         from backend.services.bid_prefill import apply_bid_prefill_confirmation

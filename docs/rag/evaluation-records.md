@@ -8,6 +8,56 @@
 
 ---
 
+## Run 20260618-P4-11 — 章节候选确认值批量应用与导出前门禁（2026-06-18）
+
+> 实施记录：`docs/rag/runs/run_20260618_p4_11_prefill_gate_apply_impl.md`
+> 本地门禁：`docs/rag/runs/run_20260618_p4_11_prefill_gate_apply_summary.md`
+> 增量门禁：`docs/rag/runs/run_20260618_p4_11_prefill_gate_apply_incremental_summary.md`
+
+### 触发原因
+
+P4-10 已完成章节级候选展示。本轮把展示层推进到确认闭环：页面支持按章节采纳候选到客户确认草稿，后端应用确认值后返回章节级应用摘要和导出前 gate。仍然只替换明确占位符，不生成正文，不处理 PDF 字体或乱码。
+
+### 功能验证
+
+真实项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d`：
+
+| 项 | 结果 |
+| --- | ---: |
+| 章节候选数 | 22 |
+| 当前草稿正式必填缺口 | 10 |
+| 正文未解析占位符 | 39 |
+| readyForFormalExport | false |
+
+真实浏览器验证：
+
+- 页面显示“导出前门禁”和“仍需收口”。
+- 页面显示 `正文占位 39`。
+- 页面存在 22 个“采纳本章候选”按钮。
+- 点击首个“采纳本章候选”只更新本地草稿，未提交正式应用。
+- 控制台仅有既有 Ant Design `Drawer bodyStyle` 弃用提示，无 P4-11 新增功能错误。
+- 截图：`output/playwright/run_20260618_p4_11_prefill_gate.png`
+
+### 回归门禁
+
+| 命令 | 结果 |
+| --- | --- |
+| `py_compile backend/services/bid_prefill.py` | PASS |
+| `pytest tests/test_bid_prefill.py -q` | PASS，9 passed |
+| `cd frontend && npm run build` | PASS |
+| `scripts/rag/run_local_rag_gate.py --run-id run_20260618_p4_11_prefill_gate_apply` | PASS |
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 | Rerank 打分用例 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 293 ms | 0 |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 611 ms | 26 |
+| 泰昌专项 | off | 93.3% | 100.0% | 0.933 | 3.3% | 0.0% | 349 ms | 0 |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 688 ms | 30 |
+
+门禁结论：PASS。以 qwen3-rerank 为泰昌专项正式门禁口径，无来源排序、禁用关键词或跨资料域串扰退化。
+
+---
+
 ## Run 20260618-P4-10 — 章节级候选展示与缺口清单 UI 收口（2026-06-18）
 
 > 实施记录：`docs/rag/runs/run_20260618_p4_section_candidate_ui_impl.md`
