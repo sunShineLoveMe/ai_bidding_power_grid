@@ -242,7 +242,13 @@ class BidPrefillReportTest(unittest.TestCase):
              patch("backend.services.bid_prefill._load_liaoning_goods_rows", return_value=[]), \
              patch("backend.services.bid_prefill._load_liaoning_technical_parameter_rows", return_value=technical_rows), \
              patch("backend.services.bid_prefill._load_liaoning_technical_deviation_rows", return_value=deviation_rows), \
-             patch("backend.services.bid_prefill._load_taichang_product_parameter_rows", return_value=product_rows):
+             patch("backend.services.bid_prefill._load_taichang_product_parameter_rows", return_value=product_rows), \
+             patch("backend.services.bid_prefill._safe_list_bid_sections", return_value=[
+                 {"id": "s1", "title": "4.2 技术特性参数表", "order_index": 42, "level": 2},
+                 {"id": "s2", "title": "4.1 技术偏差表", "order_index": 41, "level": 2},
+                 {"id": "s3", "title": "6. 报价文件及货物清单", "order_index": 76, "level": 1},
+                 {"id": "s4", "title": "4.4 产品制造与质量控制", "order_index": 61, "level": 2},
+             ]):
             report = build_bid_prefill_report("11111111-1111-1111-1111-111111111111")
 
         by_key = {field["key"]: field for field in report["fields"]}
@@ -258,6 +264,16 @@ class BidPrefillReportTest(unittest.TestCase):
         self.assertIn("辽宁技术参数表规格中未由现有泰昌结构化报告直接覆盖的内径：200", by_key["taichang_parameter_match_summary"]["value"])
         self.assertIn("不构成覆盖辽宁全部规格的结论", by_key["taichang_parameter_match_summary"]["value"])
         self.assertTrue(by_key["taichang_parameter_match_summary"]["evidence"]["factSourceAllowedForEnterprise"])
+        section_by_title = {item["sectionTitle"]: item for item in report["sectionCandidates"]}
+        self.assertIn("4.2 技术特性参数表", section_by_title)
+        self.assertIn("4.1 技术偏差表", section_by_title)
+        self.assertIn("4.4 产品制造与质量控制", section_by_title)
+        self.assertTrue(any(field["key"] == "technical_parameter_summary" for field in section_by_title["4.2 技术特性参数表"]["fields"]))
+        self.assertTrue(any(field["key"] == "technical_deviation_candidates" for field in section_by_title["4.1 技术偏差表"]["fields"]))
+        self.assertTrue(any(field["key"] == "taichang_parameter_match_summary" for field in section_by_title["4.4 产品制造与质量控制"]["fields"]))
+        self.assertGreaterEqual(section_by_title["4.1 技术偏差表"]["gapCount"], 1)
+        self.assertIn("tender_requirement", section_by_title["4.1 技术偏差表"]["sourceDomains"])
+        self.assertTrue(section_by_title["4.1 技术偏差表"]["boundaryWarnings"])
 
     def test_placeholder_replacement_is_explicit_and_preserves_ordinary_text(self):
         from backend.services.bid_prefill import apply_confirmed_values_to_text

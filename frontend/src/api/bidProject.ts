@@ -481,6 +481,8 @@ export type BidPrefillField = {
   evidence?: {
     sourceType?: string;
     sourceLabel?: string;
+    sourceDomain?: string;
+    factSourceAllowedForEnterprise?: boolean;
     snippet?: string;
     assetCount?: number;
     assets?: Array<{
@@ -491,6 +493,32 @@ export type BidPrefillField = {
     }>;
   };
   mapsTo?: string[];
+};
+
+export type BidPrefillSectionCandidate = {
+  sectionId?: string;
+  sectionTitle: string;
+  orderIndex?: number;
+  virtual?: boolean;
+  fieldCount: number;
+  gapCount: number;
+  statusCounts: Partial<Record<BidPrefillStatus, number>>;
+  sourceDomains: string[];
+  boundaryWarnings: string[];
+  fields: Array<{
+    key: string;
+    label: string;
+    group: string;
+    status: BidPrefillStatus;
+    statusLabel: string;
+    requiredLevel: string;
+    riskLevel: string;
+    valuePreview?: string;
+    sourceLabel?: string;
+    sourceType?: string;
+    sourceDomain?: string;
+    factSourceAllowedForEnterprise?: boolean;
+  }>;
 };
 
 export type BidPrefillReport = {
@@ -519,6 +547,7 @@ export type BidPrefillReport = {
     fields: BidPrefillField[];
   }>;
   fields: BidPrefillField[];
+  sectionCandidates?: BidPrefillSectionCandidate[];
   gapReport: {
     title: string;
     formalRequiredGaps: BidPrefillField[];

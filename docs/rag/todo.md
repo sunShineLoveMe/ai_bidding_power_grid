@@ -1,6 +1,6 @@
 # 国家电网 RAG 基座数据工程待办清单
 
-> 状态日期：2026-06-12
+> 状态日期：2026-06-18
 > 适用范围：电网/国家电网招投标 RAG 基座数据、客户标书模板、行业资料、召回评测与上线门禁。
 
 本文档用于跟踪 RAG 基座数据工程的优先级、完成度和验收口径。全局产品路线仍看 `docs/development/roadmap.md`；本清单只记录 RAG 数据工程相关任务。
@@ -141,6 +141,7 @@
 | P4-7 | [x] | 泰昌产品参数自动重抽取与真实链路回归 | `scripts/rag/run_taichang_product_parameter_refresh.py`、`tests/test_taichang_product_parameter_refresh.py`、`docs/rag/runs/run_20260608_taichang_product_parameter_refresh_summary.md` | 已固化客户新增泰昌产品/检验报告后的重抽取 SOP；一键完成结构化抽取、参数查询测试、增量回归门禁和真实页面同源 stream 抽样；本轮抽取 2 份检验报告、36 行参数，MPP 环刚度与 CPVC 平均内径/壁厚真实问答通过 |
 | P4-8 | [x] | 货物清单结构化联动前导页候选 | `backend/services/bid_prefill.py`、`tests/test_bid_prefill.py`、`docs/rag/runs/run_20260617_p4_structured_prefill_linkage_impl.md` | 前导页包号、包名称、物料类别、货物清单摘要已优先读取 `goods_rows.json` 行级记录；证据标记为招标要求且不可作为泰昌企业事实；定向测试 17 passed，本地 RAG 门禁 PASS |
 | P4-9 | [x] | 技术参数表联动章节占位与偏差表候选 | `backend/services/bid_prefill.py`、`tests/test_bid_prefill.py`、`docs/rag/runs/run_20260618_p4_technical_parameter_linkage_impl.md` | 前导页新增技术参数表候选摘要、技术偏差表候选和泰昌参数佐证摘要；辽宁参数/偏差为招标要求且不可作为泰昌事实，泰昌检验报告仅作企业事实佐证；定向测试 18 passed，本地 RAG 门禁 PASS |
+| P4-10 | [x] | 章节级候选展示与缺口清单 UI 收口 | `backend/services/bid_prefill.py`、`frontend/src/pages/BidPrefill/index.tsx`、`frontend/src/api/bidProject.ts`、`frontend/src/index.css`、`tests/test_bid_prefill.py`、`docs/rag/runs/run_20260618_p4_section_candidate_ui_impl.md` | 前导页新增 `sectionCandidates`，把货物清单、技术参数表、技术偏差表和泰昌参数佐证按真实章节归类展示；真实项目展示 22 个章节候选、25 个缺口，技术特性参数表、技术偏差表、报价文件及货物清单、产品制造与质量控制均可见；定向测试 8 passed，前端 build PASS，真实浏览器验证 PASS，本地 RAG 门禁 PASS |
 
 ## 每批客户资料入库检查清单
 
@@ -166,7 +167,8 @@
 8. **P1C-8 已完成：客户参考模板目录解析修复。** 供货类大纲不再只用 23 节兜底结构，已改为解析豪乾参考稿 TOC 并泛化参考稿企业事实；真实项目目录已重建为 102 节。
 9. **P4-8 已完成：货物清单结构化联动前导页候选。** 包号、包名称、物料类别、货物清单摘要已从结构化行级记录带出候选，仍需客户确认后才应用到正文占位符。
 10. **P4-9 已完成：技术参数表联动章节占位与偏差表候选。** 技术参数表、技术偏差表和泰昌检验报告参数已进入前导页候选层；仍需客户确认后才应用到正文占位符。
-11. **建议下一任务：P4-10 章节级候选展示与缺口清单 UI 收口。** 在不生成正文的前提下，把 P4-8/P4-9 的结构化候选按章节归类展示，便于客户确认“哪些表格字段要写入哪一章”。
-12. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表；仅在参数规模变大、多批次查询复杂或页面精确查询成为瓶颈后启动。
-13. P1B 泰昌补充资料质量增强已完成；后续新增资料按 `docs/rag/taichang-material-completeness-scorecard.md` 的 P0/P1/P2 补资料清单更新评分，并重跑真实回归。
-14. 客户演示完整标书已完成 DeepSeek 全量章节重写和真实 DOCX/PDF 验收：见 `docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`；后续若客户更换目标招标文件或 Word 模板，需重新生成章节、重新导出并复跑验收。
+11. **P4-10 已完成：章节级候选展示与缺口清单 UI 收口。** 前导页已把 P4-8/P4-9 的结构化候选按章节归类展示，真实项目显示 22 个章节候选、25 个缺口；本轮不生成正文、不处理 PDF 字体或乱码。
+12. **建议下一任务：P4-11 章节候选确认值批量应用与导出前门禁。** 在不让 AI 自动写正文的前提下，把客户确认过的章节候选安全应用到明确占位符，并在导出前继续列出未确认的报价、保证金、授权签章、技术偏差等关键缺口。
+13. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表；仅在参数规模变大、多批次查询复杂或页面精确查询成为瓶颈后启动。
+14. P1B 泰昌补充资料质量增强已完成；后续新增资料按 `docs/rag/taichang-material-completeness-scorecard.md` 的 P0/P1/P2 补资料清单更新评分，并重跑真实回归。
+15. 客户演示完整标书已完成 DeepSeek 全量章节重写和真实 DOCX/PDF 验收：见 `docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`；后续若客户更换目标招标文件或 Word 模板，需重新生成章节、重新导出并复跑验收。

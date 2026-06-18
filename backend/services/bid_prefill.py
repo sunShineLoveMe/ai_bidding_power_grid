@@ -103,6 +103,7 @@ def build_bid_prefill_report(project_id: str) -> dict[str, Any]:
     confirmed_values = saved_prefill.get("confirmed_values") if isinstance(saved_prefill.get("confirmed_values"), dict) else {}
     assets = _safe_list_knowledge_assets()
     fields = [_build_field(spec, interpretation, assets, confirmed_values) for spec in PREFILL_FIELD_SPECS]
+    section_candidates = _build_section_candidates(fields, _safe_list_bid_sections(project_id))
     status_counts = Counter(field["status"] for field in fields)
     required_gaps = [
         field for field in fields
@@ -127,6 +128,7 @@ def build_bid_prefill_report(project_id: str) -> dict[str, Any]:
         },
         "groups": _group_fields(fields),
         "fields": fields,
+        "sectionCandidates": section_candidates,
         "gapReport": {
             "title": "客户确认缺口报告",
             "formalRequiredGaps": required_gaps,
@@ -431,6 +433,13 @@ def _candidate_value(key: str, interpretation: dict[str, Any], assets: list[dict
 def _safe_list_knowledge_assets() -> list[dict[str, Any]]:
     try:
         return list_knowledge_assets()
+    except Exception:
+        return []
+
+
+def _safe_list_bid_sections(project_id: str) -> list[dict[str, Any]]:
+    try:
+        return list_bid_sections(project_id)
     except Exception:
         return []
 
@@ -1058,6 +1067,171 @@ def _group_fields(fields: list[dict[str, Any]]) -> list[dict[str, Any]]:
     for field in fields:
         groups.setdefault(field["group"], []).append(field)
     return [{"name": name, "fields": values} for name, values in groups.items()]
+
+
+def _build_section_candidates(fields: list[dict[str, Any]], sections: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    targets: dict[str, dict[str, Any]] = {}
+    for field in fields:
+        for target in _field_section_targets(field):
+            section = _match_section(target, sections)
+            key = str(section.get("id") or section.get("title") or target)
+            if key not in targets:
+                targets[key] = {
+                    "sectionId": section.get("id"),
+                    "sectionTitle": section.get("title") or target,
+                    "orderIndex": section.get("order_index"),
+                    "virtual": not bool(section.get("id")),
+                    "fields": [],
+                }
+            targets[key]["fields"].append(_section_candidate_field(field))
+
+    candidates = []
+    for item in targets.values():
+        candidate_fields = _dedupe_section_candidate_fields(item["fields"])
+        status_counts = Counter(str(field.get("status")) for field in candidate_fields)
+        source_domains = sorted({
+            str(field.get("sourceDomain") or "")
+            for field in candidate_fields
+            if str(field.get("sourceDomain") or "").strip()
+        })
+        gap_fields = [
+            field for field in candidate_fields
+            if field.get("status") in {"customer_required", "manual_confirm"} or field.get("riskLevel") == "critical"
+        ]
+        candidates.append({
+            **item,
+            "fields": candidate_fields,
+            "fieldCount": len(candidate_fields),
+            "gapCount": len(gap_fields),
+            "statusCounts": dict(status_counts),
+            "sourceDomains": source_domains,
+            "boundaryWarnings": _section_boundary_warnings(candidate_fields),
+        })
+    candidates.sort(key=lambda item: (
+        item.get("orderIndex") is None,
+        item.get("orderIndex") if item.get("orderIndex") is not None else 999999,
+        str(item.get("sectionTitle") or ""),
+    ))
+    return candidates
+
+
+def _field_section_targets(field: dict[str, Any]) -> list[str]:
+    key = str(field.get("key") or "")
+    maps_to = [str(item) for item in field.get("mapsTo") or [] if str(item).strip()]
+    explicit: dict[str, list[str]] = {
+        "package_no": ["封面", "货物清单", "技术响应"],
+        "package_name": ["封面", "货物清单", "技术响应"],
+        "material_category": ["货物清单", "技术响应"],
+        "goods_list_summary": ["报价文件及货物清单", "货物清单", "技术响应"],
+        "technical_parameter_summary": ["技术特性参数表", "技术响应文件", "技术响应"],
+        "technical_deviation_candidates": ["技术偏差表", "技术响应文件", "技术响应"],
+        "taichang_parameter_match_summary": ["产品制造与质量控制", "技术响应文件", "检验报告", "技术响应"],
+        "inspection_reports": ["检验报告", "附件清单", "技术响应"],
+        "product_models": ["技术特性参数表", "产品制造与质量控制", "技术响应"],
+        "product_image_assets": ["产品制造与质量控制", "供货组织与交付保障", "技术响应"],
+        "qualification_assets": ["资格证明文件", "附件清单"],
+        "project_performance_cases": ["业绩文件", "技术评分支撑材料"],
+    }
+    return list(dict.fromkeys([*(explicit.get(key) or []), *maps_to]))
+
+
+def _match_section(target: str, sections: list[dict[str, Any]]) -> dict[str, Any]:
+    clean_target = _normalize_section_text(target)
+    if not sections:
+        return {"title": target}
+    scored: list[tuple[int, dict[str, Any]]] = []
+    for section in sections:
+        title = str(section.get("title") or "")
+        clean_title = _normalize_section_text(title)
+        score = 0
+        if clean_target and clean_target in clean_title:
+            score += 10 + len(clean_target)
+        if clean_title and clean_title in clean_target:
+            score += 6 + len(clean_title)
+        for keyword in _section_match_keywords(target):
+            if keyword and keyword in clean_title:
+                score += 5
+        if score:
+            scored.append((score, section))
+    if not scored:
+        return {"title": target}
+    scored.sort(key=lambda item: (
+        item[0],
+        -int(item[1].get("level") or 99),
+        -int(item[1].get("order_index") or 999999),
+    ), reverse=True)
+    return scored[0][1]
+
+
+def _normalize_section_text(value: str) -> str:
+    return re.sub(r"[\s　：:、.．·\-—_（）()【】\\[\\]]+", "", str(value or ""))
+
+
+def _section_match_keywords(target: str) -> list[str]:
+    target_text = str(target or "")
+    keywords = []
+    for keyword in ["货物清单", "技术响应", "技术特性", "技术参数", "技术偏差", "报价", "附件", "检验报告", "资格", "业绩", "产品制造", "质量控制"]:
+        if keyword in target_text:
+            keywords.append(keyword)
+    return keywords
+
+
+def _section_candidate_field(field: dict[str, Any]) -> dict[str, Any]:
+    evidence = field.get("evidence") if isinstance(field.get("evidence"), dict) else {}
+    return {
+        "key": field.get("key"),
+        "label": field.get("label"),
+        "group": field.get("group"),
+        "status": field.get("status"),
+        "statusLabel": field.get("statusLabel"),
+        "requiredLevel": field.get("requiredLevel"),
+        "riskLevel": field.get("riskLevel"),
+        "valuePreview": _preview_value(field.get("value")),
+        "sourceLabel": evidence.get("sourceLabel"),
+        "sourceType": evidence.get("sourceType"),
+        "sourceDomain": evidence.get("sourceDomain"),
+        "factSourceAllowedForEnterprise": evidence.get("factSourceAllowedForEnterprise"),
+    }
+
+
+def _dedupe_section_candidate_fields(fields: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    deduped: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for field in fields:
+        key = str(field.get("key") or "")
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(field)
+    return deduped
+
+
+def _preview_value(value: Any) -> str:
+    if value is None:
+        return ""
+    if isinstance(value, list):
+        text = "；".join(
+            str(item.get("title") if isinstance(item, dict) else item)
+            for item in value
+            if str(item.get("title") if isinstance(item, dict) else item).strip()
+        )
+    elif isinstance(value, dict):
+        text = json.dumps(value, ensure_ascii=False)
+    else:
+        text = str(value)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text[:180] + ("..." if len(text) > 180 else "")
+
+
+def _section_boundary_warnings(fields: list[dict[str, Any]]) -> list[str]:
+    warnings: list[str] = []
+    if any(field.get("sourceDomain") == "tender_requirement" for field in fields):
+        warnings.append("含招标要求候选，需客户确认后才能写入本次投标响应。")
+    if any(field.get("factSourceAllowedForEnterprise") is False for field in fields):
+        warnings.append("存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。")
+    if any(field.get("key") == "technical_deviation_candidates" for field in fields):
+        warnings.append("偏差表候选不自动生成无偏差结论。")
+    return warnings
 
 
 def _status_label(status: Status) -> str:

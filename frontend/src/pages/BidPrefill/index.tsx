@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Alert, Button, Empty, Input, Space, Tag, Typography, message } from 'antd';
-import { ClipboardCheck, Database, FileWarning, RefreshCw, ShieldAlert, SquarePen } from 'lucide-react';
+import { ClipboardCheck, Database, FileWarning, ListChecks, RefreshCw, ShieldAlert, SquarePen } from 'lucide-react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { applyBidPrefillConfirmation, getBidPrefillReport, getLatestInterpretation } from '../../api/bidProject';
-import type { BidPrefillField, BidPrefillReport, BidPrefillStatus } from '../../api/bidProject';
+import type { BidPrefillField, BidPrefillReport, BidPrefillSectionCandidate, BidPrefillStatus } from '../../api/bidProject';
 import { MetricCards } from '../../components/common/MetricCards';
 import { ModuleHeader } from '../../components/common/ModuleHeader';
 
@@ -43,6 +43,15 @@ function emptyText(text: string): JSX.Element {
 
 function fieldNeedsUserInput(field: BidPrefillField): boolean {
   return field.status === 'customer_required' || field.status === 'manual_confirm' || field.riskLevel === 'critical';
+}
+
+function sourceDomainLabel(domain?: string): string {
+  const labels: Record<string, string> = {
+    tender_requirement: '招标要求',
+    enterprise_fact: '泰昌企业事实',
+    reference_template: '参考稿',
+  };
+  return labels[domain || ''] || domain || '未标注来源域';
 }
 
 export function BidPrefillPage(): JSX.Element {
@@ -136,6 +145,16 @@ export function BidPrefillPage(): JSX.Element {
     updateDraftValue(field.key, formatValue(field.value));
   }
 
+  function focusField(fieldKey: string): void {
+    const target = report?.fields.find(field => field.key === fieldKey);
+    if (!target) return;
+    setOnlyGaps(false);
+    setActiveGroup(target.group);
+    window.setTimeout(() => {
+      document.querySelector(`[data-prefill-field="${fieldKey}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 80);
+  }
+
   async function confirmAndEnterEditor(): Promise<void> {
     if (!projectId) return;
     try {
@@ -163,6 +182,7 @@ export function BidPrefillPage(): JSX.Element {
     return (
       <article
         key={field.key}
+        data-prefill-field={field.key}
         className={`prefill-field-card rounded-xl border bg-white p-5 shadow-sm ${needsInput ? 'border-rose-100' : 'border-slate-100'}`}
       >
         <div className="mb-4 grid gap-3 md:grid-cols-[minmax(0,1fr)_auto]">
@@ -200,6 +220,62 @@ export function BidPrefillPage(): JSX.Element {
           <div className="prefill-long-text min-w-0">来源规则：{field.sourcePolicy || '-'}</div>
           <div className="prefill-long-text min-w-0">依据：{field.evidence?.sourceLabel || '-'}</div>
           <div className="prefill-long-text min-w-0">映射：{field.mapsTo?.join('、') || '-'}</div>
+        </div>
+      </article>
+    );
+  }
+
+  function renderSectionCandidate(candidate: BidPrefillSectionCandidate): JSX.Element {
+    return (
+      <article key={`${candidate.sectionId || candidate.sectionTitle}`} className="prefill-section-candidate rounded-xl border border-slate-100 bg-white p-4 shadow-sm">
+        <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto]">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2">
+              <h3 className="m-0 min-w-0 text-base font-black text-slate-950">{candidate.sectionTitle}</h3>
+              {candidate.virtual ? <Tag className="m-0">虚拟章节</Tag> : null}
+            </div>
+            <div className="mt-2 flex flex-wrap gap-2">
+              <Tag color={candidate.gapCount ? 'orange' : 'green'} className="m-0">缺口 {candidate.gapCount}</Tag>
+              <Tag className="m-0">候选 {candidate.fieldCount}</Tag>
+              {(candidate.sourceDomains || []).map(domain => (
+                <Tag key={domain} color={domain === 'enterprise_fact' ? 'green' : 'blue'} className="m-0">
+                  {sourceDomainLabel(domain)}
+                </Tag>
+              ))}
+            </div>
+          </div>
+          <div className="flex flex-wrap items-start justify-start gap-2 lg:justify-end">
+            {Object.entries(candidate.statusCounts || {}).map(([status, count]) => (
+              <Tag key={status} color={statusColor[status as BidPrefillStatus] || 'default'} className="m-0">
+                {status === 'manual_confirm' ? '待确认' : status === 'customer_required' ? '需填写' : status} {count}
+              </Tag>
+            ))}
+          </div>
+        </div>
+
+        {candidate.boundaryWarnings?.length ? (
+          <div className="mt-3 grid gap-1">
+            {candidate.boundaryWarnings.map(warning => (
+              <div key={warning} className="prefill-section-warning">{warning}</div>
+            ))}
+          </div>
+        ) : null}
+
+        <div className="mt-3 grid gap-2">
+          {candidate.fields.map(field => (
+            <button
+              key={field.key}
+              type="button"
+              className="prefill-section-field"
+              onClick={() => focusField(field.key)}
+            >
+              <span className="min-w-0">
+                <strong>{field.label}</strong>
+                <span>{field.valuePreview || '暂无候选值'}</span>
+              </span>
+              <Tag color={statusColor[field.status]} className="m-0 shrink-0">{field.statusLabel}</Tag>
+            </button>
+          ))}
         </div>
       </article>
     );
@@ -257,6 +333,31 @@ export function BidPrefillPage(): JSX.Element {
                 <strong>客户人工确认</strong>
               </div>
             </div>
+          </section>
+
+          <section className="panel-card">
+            <div className="mb-3 grid gap-3 md:grid-cols-[minmax(0,1fr)_auto]">
+              <div className="min-w-0">
+                <h2 className="panel-title mb-1 flex items-center gap-2">
+                  <ListChecks size={18} />
+                  章节候选与缺口清单
+                </h2>
+                <p className="m-0 text-sm font-semibold leading-6 text-slate-500">
+                  将结构化货物清单、技术参数表、偏差表和泰昌参数佐证按章节归类展示；这里只做确认提示，不自动生成正文。
+                </p>
+              </div>
+              <Space className="justify-start md:justify-end" wrap>
+                <Tag color="blue">章节 {report.sectionCandidates?.length || 0}</Tag>
+                <Tag color="orange">
+                  缺口 {(report.sectionCandidates || []).reduce((total, item) => total + (item.gapCount || 0), 0)}
+                </Tag>
+              </Space>
+            </div>
+            {report.sectionCandidates?.length ? (
+              <div className="prefill-section-grid">
+                {report.sectionCandidates.map(renderSectionCandidate)}
+              </div>
+            ) : emptyText('暂无章节级候选，请先生成分册大纲或补充结构化资料')}
           </section>
 
           <div className="prefill-workspace">

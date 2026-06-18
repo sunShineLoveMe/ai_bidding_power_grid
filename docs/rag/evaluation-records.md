@@ -8,6 +8,56 @@
 
 ---
 
+## Run 20260618-P4-10 — 章节级候选展示与缺口清单 UI 收口（2026-06-18）
+
+> 实施记录：`docs/rag/runs/run_20260618_p4_section_candidate_ui_impl.md`
+> 本地门禁：`docs/rag/runs/run_20260618_p4_section_candidate_ui_summary.md`
+> 增量门禁：`docs/rag/runs/run_20260618_p4_section_candidate_ui_incremental_summary.md`
+
+### 触发原因
+
+P4-8/P4-9 已把货物清单、技术参数表、技术偏差表和泰昌检验报告参数佐证接入前导页候选层。本轮把这些结构化候选按真实标书章节归类展示，便于客户确认“哪些表格字段要进入哪一章”。本轮不生成正文，不处理 PDF 字体或乱码。
+
+### 功能验证
+
+真实项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d`：
+
+| 项 | 结果 |
+| --- | ---: |
+| 章节候选数 | 22 |
+| 总缺口数 | 25 |
+| 技术响应文件 | 候选 10，缺口 6 |
+| 技术偏差表 | 候选 2，缺口 2 |
+| 技术特性参数表 | 候选 2，缺口 1 |
+| 产品制造与质量控制 | 候选 3，缺口 1 |
+
+真实浏览器验证：
+
+- 页面显示“章节候选与缺口清单”。
+- 页面包含 `技术特性参数表`、`技术偏差表`、`报价文件及货物清单`、`产品制造与质量控制`。
+- 章节候选卡片展示来源边界：招标要求候选需客户确认，禁止作为泰昌企业事实；偏差表候选不自动生成无偏差结论。
+- 截图：`docs/rag/runs/artifacts/run_20260618_p4_section_candidate_ui.png`
+
+### 回归门禁
+
+| 命令 | 结果 |
+| --- | --- |
+| `py_compile backend/services/bid_prefill.py` | PASS |
+| `pytest tests/test_bid_prefill.py -q` | PASS，8 passed |
+| `cd frontend && npm run build` | PASS |
+| `scripts/rag/run_local_rag_gate.py --run-id run_20260618_p4_section_candidate_ui` | PASS |
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 | Rerank 打分用例 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 279 ms | 0 |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 595 ms | 27 |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% | 337 ms | 0 |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 672 ms | 30 |
+
+门禁结论：PASS，无召回、来源排序、禁用关键词或跨资料域串扰退化。
+
+---
+
 ## Run 1 — P0 基线（2026-06-02）
 
 ### 环境

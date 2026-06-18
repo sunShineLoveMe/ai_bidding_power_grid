@@ -262,6 +262,69 @@ textarea {
   resize: vertical;
 }
 
+.prefill-section-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.prefill-section-candidate {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.prefill-section-warning {
+  border-radius: 10px;
+  background: #fff7ed;
+  color: #9a3412;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  padding: 7px 10px;
+}
+
+.prefill-section-field {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #f8faff;
+  padding: 9px 10px;
+  text-align: left;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.prefill-section-field:hover {
+  border-color: #93c5fd;
+  background: #eff6ff;
+}
+
+.prefill-section-field strong,
+.prefill-section-field span {
+  display: block;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.prefill-section-field strong {
+  color: #1e293b;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.prefill-section-field span span {
+  margin-top: 2px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
 @media (min-width: 1536px) {
   .prefill-main {
     padding-right: 176px;
@@ -341,6 +404,10 @@ textarea {
   .prefill-main {
     padding-right: 0;
     padding-bottom: 88px;
+  }
+
+  .prefill-section-grid {
+    grid-template-columns: 1fr;
   }
 
   .bounded-table {
