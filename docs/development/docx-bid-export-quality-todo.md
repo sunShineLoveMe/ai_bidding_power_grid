@@ -231,3 +231,19 @@
 - 缺口字段包括：招标人、包号、包名称、货物清单摘要、投标总价、投标总价大写、税率、投标保证金金额、投标保证金形式、交货期承诺、质保期承诺、投标有效期、授权代表、授权代表身份证号、签署日期、技术参数表候选摘要、技术偏差表候选。
 - 自动化回归：`.venv/bin/python -m pytest tests/test_bid_prefill.py tests/test_docx_export.py -q`，结果 `46 passed, 1 warning`；本地 RAG 门禁 `run_20260618_formal_export_gate_real_acceptance` PASS。
 - 结论：当前项目链路可以真实生成 DOCX/PDF，但尚不能作为正式投标文件交付。下一步必须先补齐客户确认字段、清理 26 处正文占位符、补生成剩余 63 个空叶子章节，再复跑本验收脚本。
+
+### 2026-06-18 P1C-10 正式导出门禁正文与图片收口记录
+
+- 背景：承接上一轮门禁失败项，继续在真实项目中收口空章节、正文占位符和补充包图片覆盖，不自动填写报价、保证金、授权代表、签署日期等客户决策字段。
+- 修复：
+  - 新增 `scripts/rag/run_taichang_formal_export_gate_closure.py`，用真实 Flask/app 上下文应用可确认字段、生成剩余叶子章节、清理正式占位符并输出收口报告。
+  - 前导预填增加辽宁招标人兜底识别，可从“国网辽宁”项目语境确定 `国网辽宁省电力有限公司`，不再把招标人留为人工缺口。
+  - DOCX 自动插图增加补充包项目业绩最低覆盖逻辑，在 24 张总上限内保证项目业绩证明资产不少于 2 张，同时保持泰昌企业事实过滤。
+- 真实项目：`a1d853bc-ca4e-43b4-bbea-256f561c8a3d`。
+- 章节生成记录：`docs/development/runs/run_20260618_p1c10_formal_gate_closure.md`，状态 `PASS`；目标空章节 `88`，成功生成 `88`，失败 `0`，占位符清理 `157` 处；收口后空叶子章节 `0`，正文占位符 `0`，正式必填缺口 `11`。
+- 真实导出链路：`build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice -> LibreOffice PDF`。
+- 验证记录：`docs/development/runs/run_20260618_p1c10_formal_gate_acceptance_final6.md` 和对应 JSON。
+- 本次真实验收结果：状态 `FAIL`，但仅因客户确认字段阻断；章节节点 `102`，有正文章节 `102`，空叶子章节 `0`，正文占位符 `0`，正式必填缺口 `11`；图片候选/选中/插入/失败为 `597/23/23/0`；补充包项目业绩资产 `2`、检测能力资产 `4`、检验报告资产 `5`；表格 `166` 个；封面、目录、页眉页脚、字体、表格、图片比例、内部字段泄露检查和 LibreOffice 字段刷新均通过。
+- 剩余缺口字段：投标总价、投标总价大写、税率、投标保证金金额、投标保证金形式、交货期承诺、质保期承诺、投标有效期、授权代表、授权代表身份证号、签署日期。
+- 自动化回归：`.venv/bin/python -m pytest tests/test_docx_export.py -q`，结果 `37 passed, 1 warning`；本地 RAG 门禁 `run_20260618_p1c10_formal_gate_closure` PASS。
+- 结论：DOCX/PDF 的正文完整度、图片资产、版式和字段刷新已达到自动化门禁要求；正式交付门禁仍应保持阻断，直到客户确认 11 个投标决策字段后重新导出。

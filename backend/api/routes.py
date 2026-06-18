@@ -467,7 +467,19 @@ def _section_asset_profile(section: dict) -> dict[str, set[str]]:
     if any(keyword in text for keyword in ["检验报告", "检测报告", "型式试验", "内径250"]):
         profile["evidence_types"].add("inspection_report")
         profile["libraries"].add("product_library")
-    if any(keyword in heading_text for keyword in ["同类业绩", "类似业绩", "项目业绩", "业绩证明", "合同协议书", "供货合同", "中标通知书"]):
+    if any(keyword in heading_text for keyword in [
+        "同类业绩",
+        "类似业绩",
+        "项目业绩",
+        "业绩文件",
+        "业绩证明",
+        "新增业绩合同",
+        "产品购销合同",
+        "同类项目",
+        "合同协议书",
+        "供货合同",
+        "中标通知书",
+    ]):
         profile["evidence_types"].add("project_performance")
         profile["libraries"].add("qualification_library")
     if any(keyword in heading_text for keyword in ["logo", "Logo", "标识", "企业形象", "封面"]):
@@ -629,6 +641,41 @@ def _asset_match_reason(asset: dict, section: dict, score: int) -> str:
     return "；".join(reasons[:3])
 
 
+def _manifest_evidence_counts(image_manifest: list[dict] | None) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for item in image_manifest or []:
+        evidence_type = str(item.get("evidence_type") or "")
+        if evidence_type:
+            counts[evidence_type] = counts.get(evidence_type, 0) + 1
+    return counts
+
+
+def _asset_evidence_allowed_by_manifest(asset: dict, image_manifest: list[dict] | None) -> bool:
+    evidence_type = _asset_meta_value(asset, "evidence_type")
+    counts = _manifest_evidence_counts(image_manifest)
+    selected_total = len(image_manifest or [])
+    if (
+        selected_total >= max(0, DOCX_TOTAL_ASSET_IMAGE_LIMIT - 2)
+        and counts.get("project_performance", 0) < 2
+        and evidence_type != "project_performance"
+    ):
+        return False
+    caps = {
+        # A long bid can otherwise spend the whole 24-image budget on early
+        # certificate/business pages before performance and inspection-report
+        # chapters are reached.
+        "certification": 7,
+        "business_license": 4,
+        "testing_capacity": 4,
+        "green_low_carbon": 4,
+        "inspection_report": 5,
+    }
+    cap = caps.get(evidence_type)
+    if not cap:
+        return True
+    return counts.get(evidence_type, 0) < cap
+
+
 def _asset_allowed_for_volume(asset: dict, section: dict) -> bool:
     volume_type = section_volume_type(section)
     if volume_type == "price":
@@ -649,6 +696,8 @@ def _asset_allowed_for_volume(asset: dict, section: dict) -> bool:
         library_type = str(specs.get("library_type") or "")
 
     if volume_type == "technical":
+        if evidence_type == "project_performance":
+            return True
         return library_type != "qualification" or any(keyword in asset_text for keyword in ["设备", "产品", "参数", "工艺", "施工", "现场"])
     if volume_type == "qualification":
         return library_type != "product" or any(keyword in asset_text for keyword in ["业绩", "证明", "资质", "证书"])
@@ -677,6 +726,8 @@ def _build_section_image_markdown(
         asset_id = str(asset.get("id") or image_ref)
         if asset_id in used_asset_ids:
             continue
+        if not _asset_evidence_allowed_by_manifest(asset, image_manifest):
+            continue
         if not _asset_allowed_for_volume(asset, section):
             continue
         score = _score_asset_for_section(asset, section)
@@ -692,6 +743,8 @@ def _build_section_image_markdown(
                 continue
             asset_id = str(asset.get("id") or image_ref)
             if asset_id in used_asset_ids:
+                continue
+            if not _asset_evidence_allowed_by_manifest(asset, image_manifest):
                 continue
             if not _asset_allowed_for_volume(asset, section):
                 continue
@@ -955,6 +1008,65 @@ def build_project_bid_markdown(
             )
             if snippet:
                 chunks.append(snippet)
+
+    if with_images and image_assets:
+        evidence_counts = _manifest_evidence_counts(export_image_report["manifest"])
+        required_project_performance = 2
+        missing_project_performance = max(
+            0,
+            required_project_performance - evidence_counts.get("project_performance", 0),
+        )
+        remaining = DOCX_TOTAL_ASSET_IMAGE_LIMIT - len(export_image_report["manifest"])
+        if missing_project_performance and remaining > 0:
+            project_assets: list[tuple[int, dict]] = []
+            for asset in image_assets:
+                image_ref = _asset_image_ref(asset)
+                if not image_ref:
+                    continue
+                asset_id = str(asset.get("id") or image_ref)
+                if asset_id in used_asset_ids:
+                    continue
+                if _asset_meta_value(asset, "evidence_type") != "project_performance":
+                    continue
+                score = 20
+                asset_text = _asset_text(asset)
+                if _asset_meta_value(asset, "source_batch_id") == "customer_taichang_supplement_20260611":
+                    score += 20
+                if any(keyword in asset_text for keyword in ["中标通知书", "合同", "业绩", "购销"]):
+                    score += 12
+                project_assets.append((score, asset))
+
+            if project_assets:
+                chunks.append("## 同类项目业绩证明补充附件\n\n")
+                project_assets.sort(key=lambda item: item[0], reverse=True)
+                for score, asset in project_assets[: min(missing_project_performance, remaining)]:
+                    image_ref = _asset_image_ref(asset)
+                    asset_id = str(asset.get("id") or image_ref)
+                    used_asset_ids.add(asset_id)
+                    alt = re.sub(r"[\[\]\(\)]", "", str(asset.get("title") or "同类项目业绩证明")).strip()
+                    match_reason = "正式投标文件业绩证明最低配图要求"
+                    caption = _asset_caption(asset, match_reason)
+                    chunks.append(f"\n\n![{alt}]({image_ref})\n\n{caption}\n\n")
+                    export_image_report["manifest"].append({
+                        "asset_id": asset.get("id"),
+                        "asset_title": asset.get("title"),
+                        "asset_category": asset.get("category"),
+                        "asset_type": asset.get("asset_type"),
+                        "evidence_type": _asset_meta_value(asset, "evidence_type"),
+                        "target_library": _asset_meta_value(asset, "target_library"),
+                        "source_batch_id": _asset_meta_value(asset, "source_batch_id") or _asset_meta_value(asset, "ingestion_batch_id"),
+                        "library": _asset_library_label(asset),
+                        "section_id": None,
+                        "section_title": "同类项目业绩证明补充附件",
+                        "volume_type": "attachment",
+                        "volume_name": volume_name("attachment"),
+                        "score": score,
+                        "reason": match_reason,
+                        "image_ref": image_ref,
+                        "caption": caption,
+                        "sensitive": bool(asset.get("is_sensitive")),
+                        "anonymized": bool(asset.get("anonymized")),
+                    })
 
     markdown_path.write_text("".join(chunks), encoding="utf-8")
     export_image_report["selected"] = len(export_image_report["manifest"])

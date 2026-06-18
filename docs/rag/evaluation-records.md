@@ -8,6 +8,65 @@
 
 ---
 
+## Run 20260618-P1C-10 — 正式导出门禁正文与图片收口回归（2026-06-18）
+
+> 生成收口记录：`docs/development/runs/run_20260618_p1c10_formal_gate_closure.md`
+> DOCX/PDF 验收记录：`docs/development/runs/run_20260618_p1c10_formal_gate_acceptance_final6.md`
+> 本地门禁：`docs/rag/runs/run_20260618_p1c10_formal_gate_closure_summary.md`
+> 增量门禁：`docs/rag/runs/run_20260618_p1c10_formal_gate_closure_incremental_summary.md`
+
+### 触发原因
+
+P1C-9 已证明正式导出门禁能正确阻断半成品，但真实项目仍有 63 个空叶子章节、26 处正文占位符和 17 个正式必填缺口。本轮按真实环境继续收口：只自动应用可确认字段和结构化候选，生成剩余章节正文，清理模型遗留占位；投标总价、保证金、交货期、授权代表等客户决策字段继续阻断，不自动编造。
+
+### 真实项目验收
+
+真实项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d`：
+
+| 项 | 结果 |
+| --- | ---: |
+| 章节节点 | 102 |
+| 有正文章节 | 102 |
+| 空叶子章节 | 0 |
+| 正文占位符 | 0 |
+| 正式必填缺口 | 11 |
+| 图片候选 / 选中 / 插入 / 失败 | 597 / 23 / 23 / 0 |
+| 补充包项目业绩资产 | 2 |
+| 补充包检测能力资产 | 4 |
+| 补充包检验报告资产 | 5 |
+| 表格数量 | 166 |
+| LibreOffice 字段刷新 | refreshed |
+| 验收状态 | FAIL，仅因客户确认字段未填 |
+
+缺口字段包括：投标总价、投标总价大写、税率、投标保证金金额、投标保证金形式、交货期承诺、质保期承诺、投标有效期、授权代表、授权代表身份证号、签署日期。
+
+### 回归门禁
+
+| 命令 | 结果 |
+| --- | --- |
+| `py_compile backend/api/routes.py` | PASS |
+| `pytest tests/test_docx_export.py -q` | PASS，37 passed |
+| `scripts/rag/run_taichang_formal_export_gate_closure.py --run-id run_20260618_p1c10_formal_gate_closure --project-id a1d853bc-ca4e-43b4-bbea-256f561c8a3d --include-containers` | PASS，生成 88/88，空叶子章节 0，占位 0 |
+| `scripts/rag/verify_taichang_full_bid_acceptance.py --run-id run_20260618_p1c10_formal_gate_acceptance_final6 --project-id a1d853bc-ca4e-43b4-bbea-256f561c8a3d --expected-min-sections 100 --expected-min-non-empty-sections 90 --pdf-preview` | FAIL，符合客户字段阻断预期 |
+| `scripts/rag/run_local_rag_gate.py --run-id run_20260618_p1c10_formal_gate_closure` | PASS |
+
+增量回归指标：
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 284 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 601 ms |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% | 346 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 680 ms |
+
+### 结论
+
+- 正文与图片自动化收口通过：空章节、正文占位和补充包图片覆盖问题已关闭。
+- 正式交付门禁仍必须保持 FAIL，直到客户确认 11 个投标决策字段。
+- RAG 本地门禁 PASS，无召回、来源排序、禁用关键词或跨资料域串扰退化。
+
+---
+
 ## Run 20260618 — 正式导出门禁真实验收与回归（2026-06-18）
 
 > DOCX/PDF 验收记录：`docs/development/runs/run_20260618_formal_export_gate_real_acceptance.md`

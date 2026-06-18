@@ -1,0 +1,82 @@
+{
+  "run_id": "run_20260618_p1c10_formal_gate_closure",
+  "generated_at": "2026-06-18T14:44:11.324729+00:00",
+  "status": "pass",
+  "steps": [
+    {
+      "name": "api_ready",
+      "status": "pass",
+      "duration_ms": 2279,
+      "detail": "http=200; status=ok; failed_checks=[]",
+      "artifact": null
+    },
+    {
+      "name": "rag_unit_tests",
+      "status": "pass",
+      "duration_ms": 937,
+      "detail": "exit_code=0",
+      "artifact": "docs/rag/runs/run_20260618_p1c10_formal_gate_closure_pytest.log"
+    },
+    {
+      "name": "incremental_regression_gate",
+      "status": "pass",
+      "duration_ms": 60707,
+      "detail": "exit_code=0",
+      "artifact": "docs/rag/runs/run_20260618_p1c10_formal_gate_closure_incremental_gate.log"
+    },
+    {
+      "name": "stream_sample",
+      "status": "pass",
+      "duration_ms": 14192,
+      "detail": "done=True; contexts=5; assets=8; images=8; error=None",
+      "artifact": "docs/rag/runs/run_20260618_p1c10_formal_gate_closure_stream.jsonl"
+    }
+  ],
+  "ready": {
+    "checks": {
+      "celery": {
+        "status": "ok",
+        "workers": 1
+      },
+      "database": {
+        "checks": {
+          "match_knowledge_assets": true,
+          "match_knowledge_chunks": true,
+          "vector": true
+        },
+        "status": "ok"
+      },
+      "model_config": {
+        "optional": {
+          "mineru_api_token": true
+        },
+        "required": {
+          "dashscope_api_key": true,
+          "deepseek_api_key": true
+        },
+        "status": "ok"
+      },
+      "redis": {
+        "host": "127.0.0.1",
+        "port": 16379,
+        "status": "ok"
+      },
+      "storage": {
+        "provider": "local",
+        "root": "storage",
+        "status": "ok"
+      }
+    },
+    "duration_ms": 2269,
+    "status": "ok"
+  },
+  "stream_summary": {
+    "done": true,
+    "error": null,
+    "contexts_count": 5,
+    "assets_count": 8,
+    "images_count": 8,
+    "chunks": 648
+  },
+  "gate_summary_path": "docs/rag/runs/run_20260618_p1c10_formal_gate_closure_incremental_summary.md"
+}

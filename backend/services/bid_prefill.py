@@ -417,7 +417,20 @@ def _candidate_value(key: str, interpretation: dict[str, Any], assets: list[dict
         "bidder_name": [DOCX_BIDDER_FULL_NAME],
     }
     if key in direct_map:
-        return _first_value(direct_map[key], "project_or_tender_extract")
+        value = _first_value(direct_map[key], "project_or_tender_extract")
+        if value[0]:
+            return value
+        if key == "tender_unit":
+            project_text = "\n".join(str(item or "") for item in [
+                project.get("project_name"),
+                project.get("project_no"),
+                cover_fields.get("project_name"),
+                cover_fields.get("tender_no"),
+                cover_fields.get("project_no"),
+            ])
+            if "国网辽宁" in project_text or "辽宁电力" in project_text:
+                return "国网辽宁省电力有限公司", _evidence("liaoning_tender_metadata_policy"), 0.78
+        return value
 
     chunks = interpretation.get("documentChunks") or []
     requirements = interpretation.get("requirements") or []
