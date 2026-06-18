@@ -1,6 +1,6 @@
 # 标书文档编写与正式导出质量待办清单
 
-更新日期：2026-06-12
+更新日期：2026-06-18
 
 范围：标书正文编写、封面/目录/页眉页脚、图表与表格、DOCX 字段刷新、真实导出验收、后续 PDF/模板化能力。本文档用于管理客户最终交付物质量，优先级高于普通导出功能优化。
 
@@ -219,3 +219,15 @@
 - 验证记录：`docs/development/runs/run_20260617_p1c7_taichang_reference_bid.md` 和对应 JSON。
 - 本次真实验收结果：源项目 23 个章节节点、19 个叶子章节、19 个叶子章节有正文、空叶子章节 0；DOCX 段落 `1799`、标题 `23`、表格 `36`；图片 selected/inserted/failed 为 `24/24/0`；目录标题、页眉、`PAGE/NUMPAGES/PAGEREF` 字段、宋体配置和 PDF 预览均通过；禁用主题命中 0。
 - 正式状态：readiness 为 `false`，原因是仍有 `39` 处客户确认占位和 `15` 个正式必填字段未确认。系统不得编造报价、税率、保证金、授权代表、签署日期等客户决策字段，必须由客户或招标文件补齐后重新导出最终版。
+
+### 2026-06-18 正式导出门禁真实验收记录
+
+- 背景：P4-11 已完成章节候选确认值批量应用与导出前门禁，需要确认真实 DOCX/PDF 验收不会把“可生成文件”误判为“可正式交付”。
+- 修复：`scripts/rag/verify_taichang_full_bid_acceptance.py` 已读取导出 metadata 中的 `formal_readiness`；当 `ready=false` 时，验收脚本直接 FAIL，并在报告中输出空叶子章节、正文占位符和正式必填缺口。
+- 真实项目：`a1d853bc-ca4e-43b4-bbea-256f561c8a3d`。
+- 真实导出链路：`build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice -> LibreOffice PDF`。
+- 验证记录：`docs/development/runs/run_20260618_formal_export_gate_real_acceptance.md` 和对应 JSON。
+- 本次真实验收结果：状态 `FAIL`，符合门禁预期；章节节点 `102`，有正文章节 `14`，空叶子章节 `63`，正文占位符 `26`，正式必填缺口 `17`；图片候选/选中/插入/失败为 `597/24/24/0`；目录、页眉页脚字段、图片比例、表格格式和 LibreOffice 字段刷新通过，但 `has_supplement_testing_assets` 仍失败。
+- 缺口字段包括：招标人、包号、包名称、货物清单摘要、投标总价、投标总价大写、税率、投标保证金金额、投标保证金形式、交货期承诺、质保期承诺、投标有效期、授权代表、授权代表身份证号、签署日期、技术参数表候选摘要、技术偏差表候选。
+- 自动化回归：`.venv/bin/python -m pytest tests/test_bid_prefill.py tests/test_docx_export.py -q`，结果 `46 passed, 1 warning`；本地 RAG 门禁 `run_20260618_formal_export_gate_real_acceptance` PASS。
+- 结论：当前项目链路可以真实生成 DOCX/PDF，但尚不能作为正式投标文件交付。下一步必须先补齐客户确认字段、清理 26 处正文占位符、补生成剩余 63 个空叶子章节，再复跑本验收脚本。

@@ -279,10 +279,19 @@ def _validate(report: dict[str, Any]) -> tuple[list[str], list[str]]:
     image_selection = report["image_selection"]
     image_conversion = report["image_conversion"]
     field_refresh = report["field_refresh"]
+    formal_readiness = image_selection.get("formal_readiness") if isinstance(image_selection.get("formal_readiness"), dict) else {}
     tables = docx["tables"]
     images = docx["images"]
     checks = docx["checks"]
 
+    if not formal_readiness.get("ready"):
+        missing = formal_readiness.get("missing_formal_required_fields") or []
+        failures.append(
+            "正式导出门禁未通过："
+            f"empty_sections={formal_readiness.get('empty_section_count', 0)}，"
+            f"placeholders={formal_readiness.get('placeholder_count', 0)}，"
+            f"missing_required={len(missing)}"
+        )
     if sections["total"] < report["expected_min_sections"]:
         failures.append(f"章节数量不足：{sections['total']} < {report['expected_min_sections']}")
     if sections["non_empty"] < report["expected_min_non_empty_sections"]:
@@ -333,6 +342,26 @@ def _write_report(report: dict[str, Any]) -> Path:
     ]
     if report["pdf_preview"].get("pdf_path"):
         lines.append(f"- PDF 预览：`{report['pdf_preview']['pdf_path']}`")
+    formal_readiness = report["image_selection"].get("formal_readiness") or {}
+    missing_required = formal_readiness.get("missing_formal_required_fields") or []
+    lines.extend([
+        "",
+        "## 正式导出门禁",
+        "",
+        "| 指标 | 结果 |",
+        "| --- | ---: |",
+        f"| ready | {formal_readiness.get('ready')} |",
+        f"| 空叶子章节 | {formal_readiness.get('empty_section_count')} |",
+        f"| 正文占位符 | {formal_readiness.get('placeholder_count')} |",
+        f"| 正式必填缺口 | {len(missing_required)} |",
+        "",
+        "缺口字段：",
+        "",
+    ])
+    if missing_required:
+        lines.extend(f"- {item.get('label') or item.get('key')}" for item in missing_required)
+    else:
+        lines.append("- 无")
     lines.extend([
         "",
         "## 源项目与正文",

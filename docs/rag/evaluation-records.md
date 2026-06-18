@@ -8,6 +8,59 @@
 
 ---
 
+## Run 20260618 — 正式导出门禁真实验收与回归（2026-06-18）
+
+> DOCX/PDF 验收记录：`docs/development/runs/run_20260618_formal_export_gate_real_acceptance.md`
+> 本地门禁：`docs/rag/runs/run_20260618_formal_export_gate_real_acceptance_summary.md`
+> 增量门禁：`docs/rag/runs/run_20260618_formal_export_gate_real_acceptance_incremental_summary.md`
+
+### 触发原因
+
+P4-11 已完成章节候选确认值批量应用与导出前门禁。本轮按真实环境验收口径复核：正式 DOCX/PDF 导出链路可以生成文件，但如果前导确认字段、正文占位符或章节正文未达标，验收脚本必须明确 FAIL，避免把“可生成”误认为“可正式交付”。
+
+### 真实项目验收
+
+真实项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d`：
+
+| 项 | 结果 |
+| --- | ---: |
+| 章节节点 | 102 |
+| 有正文章节 | 14 |
+| 空叶子章节 | 63 |
+| 正文占位符 | 26 |
+| 正式必填缺口 | 17 |
+| 图片候选 / 选中 / 插入 / 失败 | 597 / 24 / 24 / 0 |
+| LibreOffice 字段刷新 | refreshed |
+| 验收状态 | FAIL |
+
+缺口字段包括：招标人、包号、包名称、货物清单摘要、投标总价、投标总价大写、税率、投标保证金金额、投标保证金形式、交货期承诺、质保期承诺、投标有效期、授权代表、授权代表身份证号、签署日期、技术参数表候选摘要、技术偏差表候选。
+
+### 回归门禁
+
+| 命令 | 结果 |
+| --- | --- |
+| `py_compile scripts/rag/verify_taichang_full_bid_acceptance.py backend/services/bid_prefill.py` | PASS |
+| `pytest tests/test_bid_prefill.py tests/test_docx_export.py -q` | PASS，46 passed |
+| `scripts/rag/verify_taichang_full_bid_acceptance.py --run-id run_20260618_formal_export_gate_real_acceptance --project-id a1d853bc-ca4e-43b4-bbea-256f561c8a3d --expected-min-sections 100 --expected-min-non-empty-sections 90 --pdf-preview` | FAIL，符合门禁预期 |
+| `scripts/rag/run_local_rag_gate.py --run-id run_20260618_formal_export_gate_real_acceptance` | PASS |
+
+增量回归指标：
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 277 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 586 ms |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% | 339 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 682 ms |
+
+### 结论
+
+- 验收脚本已把 `formal_readiness.ready=false` 纳入失败项。
+- 当前真实项目仍不得作为正式投标文件交付；必须先补齐客户确认字段、清理正文占位符，并生成/补齐剩余叶子章节正文。
+- RAG 本地门禁 PASS，无召回、来源排序、禁用关键词或跨资料域串扰退化。
+
+---
+
 ## Run 20260618-P4-11 — 章节候选确认值批量应用与导出前门禁（2026-06-18）
 
 > 实施记录：`docs/rag/runs/run_20260618_p4_11_prefill_gate_apply_impl.md`
