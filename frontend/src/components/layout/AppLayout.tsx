@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react';
 import { BookOpen, Box, CircleDollarSign, FileClock, FileSearch, Home, LogOut, Settings, ShieldCheck, Sparkles, UserRound } from 'lucide-react';
-import { Button, Tag } from 'antd';
+import { Button } from 'antd';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { GlobalLoading } from '../common/GlobalLoading';
@@ -56,7 +56,6 @@ export function AppLayout({ children }: PropsWithChildren): JSX.Element {
           <Button type="text" icon={<LogOut size={18} />} onClick={handleLogout}>
             退出
           </Button>
-          <Tag className="m-0 rounded-lg border-blue-300 px-4 py-1.5 text-base font-bold text-blue-600">v0.1 单机版</Tag>
         </div>
       </header>
 
