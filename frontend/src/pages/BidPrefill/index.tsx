@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Alert, Button, Empty, Input, Space, Tag, Typography, message } from 'antd';
 import { ClipboardCheck, Database, FileWarning, RefreshCw, ShieldAlert, SquarePen } from 'lucide-react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { getBidPrefillReport, getLatestInterpretation } from '../../api/bidProject';
+import { applyBidPrefillConfirmation, getBidPrefillReport, getLatestInterpretation } from '../../api/bidProject';
 import type { BidPrefillField, BidPrefillReport, BidPrefillStatus } from '../../api/bidProject';
 import { MetricCards } from '../../components/common/MetricCards';
 import { ModuleHeader } from '../../components/common/ModuleHeader';
@@ -37,10 +37,6 @@ function formatValue(value: unknown): string {
   return String(value);
 }
 
-function confirmedStorageKey(projectId: string): string {
-  return `bidPrefillConfirmed:${projectId}`;
-}
-
 function emptyText(text: string): JSX.Element {
   return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={text} />;
 }
@@ -58,6 +54,7 @@ export function BidPrefillPage(): JSX.Element {
   const [report, setReport] = useState<BidPrefillReport | null>(null);
   const [draftValues, setDraftValues] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
+  const [applying, setApplying] = useState(false);
   const [activeGroup, setActiveGroup] = useState('全部字段');
   const [onlyGaps, setOnlyGaps] = useState(false);
 
@@ -68,13 +65,11 @@ export function BidPrefillPage(): JSX.Element {
   }
 
   function buildDraft(nextReport: BidPrefillReport, resolvedProjectId: string): Record<string, string> {
-    const base = Object.fromEntries(nextReport.fields.map(field => [field.key, formatValue(field.value)]));
-    try {
-      const saved = JSON.parse(localStorage.getItem(confirmedStorageKey(resolvedProjectId)) || '{}') as Record<string, string>;
-      return { ...base, ...saved };
-    } catch {
-      return base;
-    }
+    void resolvedProjectId;
+    return Object.fromEntries(nextReport.fields.map(field => [
+      field.key,
+      formatValue(field.confirmedValue ?? field.value),
+    ]));
   }
 
   async function load(): Promise<void> {
@@ -141,11 +136,24 @@ export function BidPrefillPage(): JSX.Element {
     updateDraftValue(field.key, formatValue(field.value));
   }
 
-  function confirmAndEnterEditor(): void {
+  async function confirmAndEnterEditor(): Promise<void> {
     if (!projectId) return;
-    localStorage.setItem(confirmedStorageKey(projectId), JSON.stringify(draftValues));
-    message.success('投标关键信息已确认');
-    navigate(`/bid-editor?projectId=${projectId}`);
+    try {
+      setApplying(true);
+      const application = await applyBidPrefillConfirmation(projectId, draftValues);
+      if (application.ready_for_formal_export) {
+        message.success(`确认值已应用，共替换 ${application.replacement_count} 处占位符`);
+      } else {
+        message.warning(
+          `已应用 ${application.replacement_count} 处；仍有 ${application.unresolved_placeholder_count} 处占位和 ${application.missing_formal_required_fields.length} 个正式必填缺口`,
+        );
+      }
+      navigate(`/bid-editor?projectId=${projectId}`);
+    } catch (error) {
+      message.error(error instanceof Error ? error.message : String(error));
+    } finally {
+      setApplying(false);
+    }
   }
 
   function renderFieldCard(field: BidPrefillField): JSX.Element {
@@ -209,9 +217,10 @@ export function BidPrefillPage(): JSX.Element {
               type="primary"
               icon={<SquarePen size={16} />}
               disabled={!projectId}
-              onClick={confirmAndEnterEditor}
+              loading={applying}
+              onClick={() => void confirmAndEnterEditor()}
             >
-              确认并进入正文编辑
+              确认、应用并进入正文编辑
             </Button>
           </>
         }
@@ -221,8 +230,8 @@ export function BidPrefillPage(): JSX.Element {
         className="prefill-alert"
         type={fromWorkflow ? 'warning' : 'info'}
         showIcon
-        message={fromWorkflow ? '请先确认关键投标字段，再进入正文编辑' : '投标确认不会自动覆盖已生成正文'}
-        description="报价、保证金、授权签章、税率等客户决策字段必须人工填写或确认；当前确认值先作为本地确认草稿保存，不直接改写 bid_sections 或 sectionsSnapshot。"
+        message={fromWorkflow ? '请先确认关键投标字段，再应用到正文占位符' : '投标确认只替换明确占位符'}
+        description="报价、保证金、授权签章、税率等客户决策字段必须人工填写或确认；系统不会覆盖用户已编辑的普通正文，未确认字段会继续列为正式导出缺口。"
       />
 
       {report ? (

@@ -109,6 +109,8 @@
 | P1C-4 | [x] | 前导确认页变量 schema v1 与预填缺口报告 | `backend/services/bid_prefill.py`、`backend/api/prefill.py`、`frontend/src/pages/BidPrefill/index.tsx`、`tests/test_bid_prefill.py`、`docs/rag/runs/run_20260616_p1c4_prefill_schema_gap_report_feature_summary.md` | 已完成旁路只读投标信息确认页与真实项目报告接口：schema v1 共 32 个字段，按“系统已识别/企业库带出/客户需填写/待人工确认”分组；真实项目接口返回客户需填写 10、待人工确认 10、正式必填缺口 15；不写入 `bid_sections`，不影响 `sectionsSnapshot` DOCX 导出契约；前端页面真实登录访问 PASS，Base + 泰昌专项增量回归 Gate PASS |
 | P1C-5 | [x] | AI 深度解读后台任务化与进度轮询 | `backend/tasks/interpretation_tasks.py`、`backend/api/interpret.py`、`frontend/src/api/bidProject.ts`、`frontend/src/pages/Interpretation/index.tsx`、`frontend/src/components/workflow/BidWorkflow.tsx`、`migrations/postgres/008_bid_interpretation_tasks.sql`、`docs/development/runs/run_20260617_interpretation_async_task.md` | 已新增 `bid_interpretation_tasks`、Celery 任务 `bid.interpretation.generate_report` 和 `/ai-report-tasks` 创建/查询接口；前端上传工作流和招标解读页改为创建任务 + 轮询状态，显示分段/融合进度；真实 PostgreSQL 迁移 PASS，真实 API 缓存命中 PASS，真实 Redis/Celery worker 投递 PASS；`pytest` 定向 11 passed，`npm run build` PASS |
 | P1C-6 | [x] | 前导确认页接入主流程与可编辑 UI | `frontend/src/components/workflow/BidWorkflow.tsx`、`frontend/src/pages/BidPrefill/index.tsx`、`frontend/src/components/layout/AppLayout.tsx`、`docs/development/runs/run_20260617_prefill_workflow_editable_ui.md` | 已从左侧一级菜单移除“投标确认”，并在自动流程中插入“投标信息确认”步骤：上传 → 解析 → 解读 → 分册大纲 → 投标确认 → 标书编制；前导页改为可编辑字段卡片，支持客户确认值本地草稿；真实页面回归确认左侧菜单无投标确认、流程含投标信息确认、33 个可编辑输入框、1440 宽无横向溢出；`pytest` 定向 10 passed，`npm run build` PASS |
+| P1C-7 | [x] | 泰昌参考模板标书成品度收口 | `backend/ai/chapter_planner.py`、`backend/ai/section_writer.py`、`backend/services/bid_prefill.py`、`backend/services/taichang_bid_context.py`、`backend/services/section_generation.py`、`backend/api/routes.py`、`docs/development/runs/run_20260617_p1c7_taichang_reference_bid.md`、`docs/rag/runs/run_20260617_p1c7_taichang_reference_bid_summary.md` | 已完成前导确认应用、泰昌 fact pack 注入、重复占位归并和正式 readiness metadata；首轮使用 23 节兜底目录压住施工模板污染，但已在 P1C-8 改为客户参考稿 TOC 解析；正式 DOCX/PDF 链路 PASS，readiness 因 15 个客户/招标确认字段保持 `false`；后端 67 passed、前端 build PASS、RAG 本地门禁 PASS |
+| P1C-8 | [x] | 客户参考模板目录解析修复 | `backend/ai/chapter_planner.py`、`tests/test_chapter_planner.py`、`docs/development/runs/run_20260617_p1c8_reference_outline_rebuild.md` | 已修复供货类大纲只用 23 节手写兜底结构的问题，改为读取 `haoqian_reference_templates.json` 的商务/技术参考稿 `toc_lines`，清洗点引导线、页码和目录噪声，并泛化河北豪乾供应商、专利、软件、历史业绩等具体事实；真实项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d` 目录从 23 节重建为 102 节，最大 4 级，豪乾具体事实标题命中 0，已有正文回填 14 个同名章节；`pytest tests/test_chapter_planner.py` 10 passed |
 
 ## P3：召回质量增强
 
@@ -137,6 +139,8 @@
 | P4-5 | [x] | 泰昌产品/检验报告参数抽取 | `scripts/rag/extract_taichang_product_parameters.py`、`taichang_product_parameter_rows.json/csv`、`taichang_product_parameter_summary.md`、`docs/rag/runs/run_20260608_taichang_product_params_summary.md` | 已抽取 2 份泰昌检验报告、36 行企业事实参数；辽宁参数仅作 QA/异常校验参照，不自动形成泰昌覆盖辽宁全部规格的结论 |
 | P4-6 | [x] | 泰昌产品参数真实查询接入 | `backend/rag/product_parameters.py`、`backend/api/knowledge.py`、`tests/test_taichang_product_parameter_query.py`、`docs/rag/runs/run_20260608_taichang_product_params_json_query_summary.md` | 已把 `taichang_product_parameter_rows.json` 作为 staging 查询层接入真实 API / 页面同源 stream 问答；MPP 环刚度、CPVC 平均内径/壁厚可返回具体值；辽宁边界仍正确 |
 | P4-7 | [x] | 泰昌产品参数自动重抽取与真实链路回归 | `scripts/rag/run_taichang_product_parameter_refresh.py`、`tests/test_taichang_product_parameter_refresh.py`、`docs/rag/runs/run_20260608_taichang_product_parameter_refresh_summary.md` | 已固化客户新增泰昌产品/检验报告后的重抽取 SOP；一键完成结构化抽取、参数查询测试、增量回归门禁和真实页面同源 stream 抽样；本轮抽取 2 份检验报告、36 行参数，MPP 环刚度与 CPVC 平均内径/壁厚真实问答通过 |
+| P4-8 | [x] | 货物清单结构化联动前导页候选 | `backend/services/bid_prefill.py`、`tests/test_bid_prefill.py`、`docs/rag/runs/run_20260617_p4_structured_prefill_linkage_impl.md` | 前导页包号、包名称、物料类别、货物清单摘要已优先读取 `goods_rows.json` 行级记录；证据标记为招标要求且不可作为泰昌企业事实；定向测试 17 passed，本地 RAG 门禁 PASS |
+| P4-9 | [x] | 技术参数表联动章节占位与偏差表候选 | `backend/services/bid_prefill.py`、`tests/test_bid_prefill.py`、`docs/rag/runs/run_20260618_p4_technical_parameter_linkage_impl.md` | 前导页新增技术参数表候选摘要、技术偏差表候选和泰昌参数佐证摘要；辽宁参数/偏差为招标要求且不可作为泰昌事实，泰昌检验报告仅作企业事实佐证；定向测试 18 passed，本地 RAG 门禁 PASS |
 
 ## 每批客户资料入库检查清单
 
@@ -158,7 +162,11 @@
 4. **P1C-4 已完成：前导确认页变量 schema v1 与预填缺口报告。** 当前为旁路只读确认页，不替代章节正文编辑，不写入 `bid_sections`，不影响 `sectionsSnapshot` DOCX 导出契约。
 5. **P1C-5 已完成：AI 深度解读后台任务化与进度轮询。** `ai-report-tasks` 创建任务后由 Celery worker 执行，前端轮询 `bid_interpretation_tasks` 状态，不再用长 HTTP 等待完整 DeepSeek 分段/merge。
 6. **P1C-6 已完成：前导确认页接入主流程与可编辑 UI。** “投标确认”不再是一级菜单，而是生成分册大纲后、进入标书编制前的确认步骤；页面支持客户编辑确认值并避免表格溢出。
-7. **建议下一任务：变量确认后的显式回填引擎。** 只有用户确认后才把字段应用到章节占位符；报价、保证金、授权签章等客户决策字段仍不得自动补全。
-8. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表；仅在参数规模变大、多批次查询复杂或页面精确查询成为瓶颈后启动。
-9. P1B 泰昌补充资料质量增强已完成；后续新增资料按 `docs/rag/taichang-material-completeness-scorecard.md` 的 P0/P1/P2 补资料清单更新评分，并重跑真实回归。
-10. 客户演示完整标书已完成 DeepSeek 全量章节重写和真实 DOCX/PDF 验收：见 `docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`；后续若客户更换目标招标文件或 Word 模板，需重新生成章节、重新导出并复跑验收。
+7. **P1C-7 已完成：前导确认应用与泰昌参考模板标书成品度收口。** 变量确认值可显式回填章节占位，泰昌 fact pack 已接入，报价、保证金、授权签章等客户决策字段仍不得自动补全。
+8. **P1C-8 已完成：客户参考模板目录解析修复。** 供货类大纲不再只用 23 节兜底结构，已改为解析豪乾参考稿 TOC 并泛化参考稿企业事实；真实项目目录已重建为 102 节。
+9. **P4-8 已完成：货物清单结构化联动前导页候选。** 包号、包名称、物料类别、货物清单摘要已从结构化行级记录带出候选，仍需客户确认后才应用到正文占位符。
+10. **P4-9 已完成：技术参数表联动章节占位与偏差表候选。** 技术参数表、技术偏差表和泰昌检验报告参数已进入前导页候选层；仍需客户确认后才应用到正文占位符。
+11. **建议下一任务：P4-10 章节级候选展示与缺口清单 UI 收口。** 在不生成正文的前提下，把 P4-8/P4-9 的结构化候选按章节归类展示，便于客户确认“哪些表格字段要写入哪一章”。
+12. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表；仅在参数规模变大、多批次查询复杂或页面精确查询成为瓶颈后启动。
+13. P1B 泰昌补充资料质量增强已完成；后续新增资料按 `docs/rag/taichang-material-completeness-scorecard.md` 的 P0/P1/P2 补资料清单更新评分，并重跑真实回归。
+14. 客户演示完整标书已完成 DeepSeek 全量章节重写和真实 DOCX/PDF 验收：见 `docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`；后续若客户更换目标招标文件或 Word 模板，需重新生成章节、重新导出并复跑验收。

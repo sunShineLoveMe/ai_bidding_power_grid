@@ -47,13 +47,13 @@ DEFAULT_SETTINGS: dict[str, Any] = {
     "auto_backup_enabled": True,
     "backup_frequency": "daily",
     "backup_dir": "backups/",
-    "enterprise_name": "某电力工程服务企业",
-    "enterprise_region": "华北地区",
-    "enterprise_industry": "电力工程建设、设备供货、运维检修与技术服务",
-    "enterprise_business_scope": "输变电工程、配网工程、电力设备供货、安装调试、试验检测、运维检修、技术服务和项目交付保障",
-    "enterprise_advantages": "具备电力项目响应、质量安全管理、设备供应链协同、现场施工组织、调试试验、运维服务和资料交付能力",
-    "enterprise_target_customers": "国家电网、南方电网、发电集团、电力建设单位、工业园区和能源类企业",
-    "enterprise_response_style": "专业、严谨、合规、可落地；不得编造资质证书编号、人员姓名、业绩合同金额、具体日期和未提供的企业证明材料",
+    "enterprise_name": "河北泰昌电力器材科技有限公司",
+    "enterprise_region": "河北省保定市",
+    "enterprise_industry": "电缆保护管研发、生产、检验与物资供货",
+    "enterprise_business_scope": "CPVC、MPP等电缆保护管生产、检验、包装、运输、交付和售后服务",
+    "enterprise_advantages": "具备电缆保护管生产线、试验检测设备、质量体系、产品检验报告和可追溯供货业绩",
+    "enterprise_target_customers": "国家电网及电力物资采购单位",
+    "enterprise_response_style": "专业、严谨、合规、可追溯；只使用泰昌原始资料和已核验结构化事实，不得从招标样本或参考稿推断企业事实",
 }
 
 ENV_MAPPING = {

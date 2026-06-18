@@ -405,6 +405,12 @@ export type BidExportTask = {
       asset_candidates?: number;
       warnings?: string[];
       manifest?: Array<Record<string, unknown>>;
+      formal_readiness?: {
+        ready?: boolean;
+        empty_section_count?: number;
+        placeholder_count?: number;
+        missing_formal_required_fields?: Array<{ key?: string; label?: string }>;
+      };
     };
     image_conversion?: {
       found?: number;
@@ -470,6 +476,7 @@ export type BidPrefillField = {
   status: BidPrefillStatus;
   statusLabel: string;
   value?: unknown;
+  confirmedValue?: unknown;
   confidence?: number;
   evidence?: {
     sourceType?: string;
@@ -504,6 +511,8 @@ export type BidPrefillReport = {
     formalRequiredGaps: number;
     readonlyFirst: boolean;
     affectsSectionsSnapshotExport: boolean;
+    readyForFormalExport: boolean;
+    unresolvedPlaceholderCount: number;
   };
   groups: Array<{
     name: string;
@@ -517,6 +526,19 @@ export type BidPrefillReport = {
     manualConfirmFields: BidPrefillField[];
   };
   sourceRules: string[];
+  confirmation?: BidPrefillApplication;
+};
+
+export type BidPrefillApplication = {
+  schema_version: string;
+  confirmed_at: string;
+  applied_at: string;
+  confirmed_values: Record<string, string>;
+  changed_section_count: number;
+  replacement_count: number;
+  unresolved_placeholder_count: number;
+  missing_formal_required_fields: Array<{ key: string; label: string }>;
+  ready_for_formal_export: boolean;
 };
 
 export async function getBidPrefillReport(projectId: string): Promise<BidPrefillReport> {
@@ -524,6 +546,17 @@ export async function getBidPrefillReport(projectId: string): Promise<BidPrefill
     skipGlobalLoading: true,
   });
   return response.data;
+}
+
+export async function applyBidPrefillConfirmation(
+  projectId: string,
+  confirmedValues: Record<string, string>,
+): Promise<BidPrefillApplication> {
+  const response = await apiClient.post(`/api/bidding/projects/${projectId}/prefill-confirmation/apply`, {
+    confirmed: true,
+    confirmedValues,
+  });
+  return response.data.application;
 }
 
 export async function preAnalyzeBid(biddingId: number): Promise<unknown> {

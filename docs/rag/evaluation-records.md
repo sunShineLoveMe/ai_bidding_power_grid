@@ -1822,3 +1822,265 @@ set -a; source .env; set +a
 - P1C-4 完成第一版真实可用闭环。
 - 当前版本为旁路只读确认页，不写入 `bid_sections`，不替代正文编辑，不影响 `sectionsSnapshot` DOCX 导出契约。
 - 下一步建议进入“变量确认后的显式回填引擎”，继续保持用户确认优先。
+
+---
+
+## Run 35 — P1C-7 泰昌参考模板标书成品度收口（2026-06-17）
+
+> 开发验收：`docs/development/runs/run_20260617_p1c7_taichang_reference_bid.md`
+> 本地门禁汇总：`docs/rag/runs/run_20260617_p1c7_taichang_reference_bid_summary.md`
+> 增量门禁汇总：`docs/rag/runs/run_20260617_p1c7_taichang_reference_bid_incremental_summary.md`
+> 真实 stream：`docs/rag/runs/run_20260617_p1c7_taichang_reference_bid_stream.jsonl`
+
+### 触发原因
+
+用户指出真实生成标书仍像半成品，且没有贴近客户提供的河北豪乾参考标书结构。按资料边界，河北豪乾只能作为目录、表式和写法参考，泰昌企业事实必须来自泰昌资料，辽宁资料只作为招标要求样本。
+
+### 实现内容
+
+- 前导确认页新增确认值后端应用和审计，回填显式占位符但不覆盖用户编辑正文。
+- 纯物资供货项目大纲改为 23 节参考结构，覆盖业绩、投标函、商务响应、技术响应、报价文件和附件索引。
+- 章节写作注入泰昌核验事实包，统一社会信用代码、法人、产品检验报告、参数和真实业绩不再写成待补充。
+- 新增正式占位归并，重复泛化占位压缩为少量客户确认项。
+- DOCX 导出新增正式 readiness metadata，记录空章节、占位、必填缺口和模板策略。
+
+### 真实项目验收
+
+| 项 | 结果 |
+| --- | --- |
+| 项目 | `a1d853bc-ca4e-43b4-bbea-256f561c8a3d` |
+| 章节节点 | 23 |
+| 叶子章节 | 19 |
+| 有正文叶子章节 | 19 |
+| 空叶子章节 | 0 |
+| 正文占位 | 39 |
+| 禁用主题 | 0 |
+| DOCX 字段刷新 | `refreshed` |
+| PDF 预览 | `generated` |
+| 图片 | selected 24，inserted 24，failed 0 |
+| formal readiness | `false`，剩余 15 个客户/招标文件确认字段 |
+
+### 执行命令
+
+```bash
+.venv/bin/python -m pytest \
+  tests/test_bid_prefill.py \
+  tests/test_section_writer_formal_quality.py \
+  tests/test_chapter_planner.py \
+  tests/test_length_settings.py \
+  tests/test_section_generation_autoresume.py \
+  tests/test_docx_export.py -q
+cd frontend && npm run build
+set -a; source .env; set +a
+.venv/bin/python scripts/rag/run_local_rag_gate.py \
+  --run-id run_20260617_p1c7_taichang_reference_bid
+```
+
+### 本地门禁结果
+
+| 步骤 | 状态 | 结果 |
+| --- | --- | --- |
+| api_ready | PASS | http=200；status=ok |
+| targeted pytest | PASS | `67 passed, 1 warning` |
+| frontend build | PASS | Vite build 成功，仅既有 chunk 警告 |
+| rag_unit_tests | PASS | 门禁脚本内 RAG 单测 exit_code=0 |
+| incremental_regression_gate | PASS | exit_code=0 |
+| stream_sample | PASS | contexts=5、assets=8、images=8、done=true |
+
+### 增量回归门禁
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词 | 跨域串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 282 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 604 ms |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% | 344 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 684 ms |
+
+### 结论
+
+- Gate PASS。
+- P1C-7 完成工程链路和真实项目草稿收口。
+- 产物不再是空章节/施工模板污染的半成品，但正式投标前必须由客户或招标文件补齐 15 个报价、包件、保证金、授权签署等字段，之后重新应用前导确认并导出 readiness 为 `true` 的最终版。
+
+---
+
+## Run 36 — P1C-8 客户参考模板目录解析修复（2026-06-17）
+
+> 开发验收：`docs/development/runs/run_20260617_p1c8_reference_outline_rebuild.md`
+> JSON 报告：`docs/development/runs/run_20260617_p1c8_reference_outline_rebuild.json`
+
+### 触发原因
+
+用户指出 P1C-7 导出的目录只有 23 节，明显少于客户参考标书。复核后确认问题不是 DOCX/PDF 目录渲染，而是大纲源头使用了手写 23 节兜底结构，没有真正读取客户提供的河北豪乾参考稿 TOC。
+
+### 实现内容
+
+- 供货类大纲优先读取 `haoqian_reference_templates.json` 中商务/技术参考稿的 `toc_lines`。
+- 清洗目录点引导线、页码和目录页噪声，并按 `（一）`、`1.`、`1.1`、`1.1.1` 等编号层级建树。
+- 目录只复用结构，河北豪乾供应商名、具体专利名、软件名和历史业绩项目名被泛化为结构项。
+- 最大目录层级收敛为 4 级，避免正式 DOCX 目录过深。
+- 参考稿缺失或截断时合并投标函、授权、保证金、售后、报价、附件索引等必备供货结构。
+
+### 真实项目验收
+
+| 项 | 结果 |
+| --- | --- |
+| 项目 | `a1d853bc-ca4e-43b4-bbea-256f561c8a3d` |
+| 重建前章节 | 23 |
+| 重建后章节 | 102 |
+| 一级章节 | 6 |
+| 二级章节 | 27 |
+| 三级章节 | 30 |
+| 四级章节 | 39 |
+| 最大层级 | 4 |
+| 已有正文回填 | 14 个同名章节 |
+| 豪乾具体事实标题命中 | 0 |
+
+### 执行命令
+
+```bash
+.venv/bin/python -m py_compile backend/ai/chapter_planner.py
+.venv/bin/python -m pytest tests/test_chapter_planner.py -q
+```
+
+结果：`10 passed`。
+
+### 结论
+
+- P1C-8 完成。
+- 后续供货类大纲不再默认落到 23 节兜底目录。
+- 下一任务进入 P4：货物清单/技术参数表结构化联动增强，优先提升包号、包名称、货物清单摘要、产品规格型号和技术参数表的自动预填质量。
+
+---
+
+## Run 37 — P4-8 货物清单结构化联动前导页候选（2026-06-17）
+
+> 实现记录：`docs/rag/runs/run_20260617_p4_structured_prefill_linkage_impl.md`
+> 本地门禁：`docs/rag/runs/run_20260617_p4_structured_prefill_linkage_summary.md`
+> 增量门禁：`docs/rag/runs/run_20260617_p4_structured_prefill_linkage_incremental_summary.md`
+
+### 触发原因
+
+P1C-8 修复章节目录后，下一优先级进入 P4。目标是在不生成正文、不处理 PDF 的前提下，让章节/前导页所需的包号、包名称、货物清单摘要先从结构化表取候选，避免继续靠正文正则猜测。
+
+### 实现内容
+
+- `backend/services/bid_prefill.py` 接入辽宁 2225AC 货物清单行级记录 `goods_tables/goods_rows.json`。
+- 按项目编号、包号、CPVC/MPP 物料关键词过滤结构化货物清单。
+- 为 `package_no`、`package_name`、`material_category`、`goods_list_summary` 生成前导页候选。
+- 证据标记为 `sourceDomain=tender_requirement` 且 `factSourceAllowedForEnterprise=false`，不把辽宁招标清单作为泰昌企业事实。
+- 确认应用逻辑未改变：只有客户确认后的值才会替换正文占位符。
+
+### 真实项目抽样
+
+项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d`：
+
+| 字段 | 状态 | 结果 |
+| --- | --- | --- |
+| 包号 | 待人工确认 | `包1` |
+| 包名称 | 待人工确认 | `电缆保护管CPVC、电缆保护管MPP（需按目标包确认）` |
+| 物料类别 | 系统已识别 | `电缆保护管CPVC、电缆保护管MPP` |
+| 货物清单摘要 | 待人工确认 | 共 38 行需求，包1 合计 102583 米，技术规范编码 10 个 |
+| 产品规格型号 | 企业库带出 | 仍来自泰昌核验事实包，未被辽宁清单覆盖 |
+
+### 测试与回归
+
+```bash
+.venv/bin/python -m py_compile backend/services/bid_prefill.py
+.venv/bin/python -m pytest tests/test_bid_prefill.py tests/test_chapter_planner.py -q
+set -a; source .env; set +a
+.venv/bin/python scripts/rag/run_local_rag_gate.py --run-id run_20260617_p4_structured_prefill_linkage
+```
+
+定向测试：`17 passed`。
+
+本地门禁结果：
+
+| 步骤 | 状态 | 结果 |
+| --- | --- | --- |
+| api_ready | PASS | http=200；status=ok |
+| rag_unit_tests | PASS | exit_code=0 |
+| incremental_regression_gate | PASS | exit_code=0 |
+| stream_sample | PASS | contexts=5、assets=8、images=8、done=true |
+
+增量回归指标：
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 252 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 636 ms |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% | 336 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 696 ms |
+
+### 结论
+
+- P4-8 完成，门禁 PASS。
+- 前导页已能从结构化货物清单获取可追溯候选。
+- 辽宁招标要求、泰昌企业事实边界保持隔离。
+- 本次未生成正文，也未处理 DOCX/PDF 字体、格式或乱码问题。
+
+---
+
+## Run 38 — P4-9 技术参数表联动章节占位与偏差表候选（2026-06-18）
+
+> 实现记录：`docs/rag/runs/run_20260618_p4_technical_parameter_linkage_impl.md`
+> 本地门禁：`docs/rag/runs/run_20260618_p4_technical_parameter_linkage_summary.md`
+> 增量门禁：`docs/rag/runs/run_20260618_p4_technical_parameter_linkage_incremental_summary.md`
+
+### 触发原因
+
+P4-8 已把货物清单结构化候选接入前导页。本轮继续推进技术参数表和偏差表，但仍保持边界：不生成正文，不处理 DOCX/PDF，只把结构化参数和缺口做成客户可确认候选。
+
+### 实现内容
+
+- `backend/services/bid_prefill.py` 新增 `technical_parameter_summary`、`technical_deviation_candidates`、`taichang_parameter_match_summary` 3 个候选字段。
+- 接入辽宁技术参数表 `technical_parameter_rows.json`、偏差辅助表 `technical_deviation_rows.json` 和泰昌产品参数 `taichang_product_parameter_rows.json`。
+- 技术参数和偏差候选按项目编号、包号、物料类别过滤，证据标记为 `sourceDomain=tender_requirement` 且 `factSourceAllowedForEnterprise=false`。
+- 泰昌参数佐证标记为 `sourceDomain=enterprise_fact`，但覆盖判断优先对比货物清单实际规格，并明确“不构成覆盖辽宁全部规格结论”。
+- 确认应用链路未改变：只有客户确认后的值才替换正文占位符，不自动写无偏差。
+
+### 真实项目抽样
+
+项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d`：
+
+| 字段 | 状态 | 结果 |
+| --- | --- | --- |
+| 技术参数表候选摘要 | 待人工确认 | 包1 共 300 行，CPVC/MPP，待补投标响应/保证值 300 行 |
+| 技术偏差表候选 | 待人工确认 | `pending_response` 284 行、`informational` 16 行；不自动写入无偏差 |
+| 泰昌参数佐证摘要 | 待人工确认 | 泰昌结构化检验报告 36 行、2 份报告；现有内径 250 报告未直接覆盖辽宁货物清单规格 50/100/150/200 |
+
+### 测试与回归
+
+```bash
+.venv/bin/python -m py_compile backend/services/bid_prefill.py
+.venv/bin/python -m pytest tests/test_bid_prefill.py tests/test_taichang_product_parameter_query.py tests/test_technical_deviation_report.py -q
+set -a; source .env; set +a
+.venv/bin/python scripts/rag/run_local_rag_gate.py --run-id run_20260618_p4_technical_parameter_linkage
+```
+
+定向测试：`18 passed`。
+
+本地门禁结果：
+
+| 步骤 | 状态 | 结果 |
+| --- | --- | --- |
+| api_ready | PASS | http=200；status=ok |
+| rag_unit_tests | PASS | exit_code=0 |
+| incremental_regression_gate | PASS | exit_code=0 |
+| stream_sample | PASS | contexts=5、assets=8、images=8、done=true |
+
+增量回归指标：
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 276 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 590 ms |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% | 342 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 705 ms |
+
+### 结论
+
+- P4-9 完成，门禁 PASS。
+- 技术参数表、技术偏差表和泰昌检验报告参数已进入前导页/章节占位候选层。
+- 辽宁招标要求与泰昌企业事实边界保持隔离。
+- 本次未生成正文，也未处理 DOCX/PDF 字体、格式或乱码问题。

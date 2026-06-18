@@ -1,0 +1,82 @@
+{
+  "run_id": "run_20260617_p1c7_taichang_reference_bid",
+  "generated_at": "2026-06-17T12:27:35.532831+00:00",
+  "status": "pass",
+  "steps": [
+    {
+      "name": "api_ready",
+      "status": "pass",
+      "duration_ms": 2268,
+      "detail": "http=200; status=ok; failed_checks=[]",
+      "artifact": null
+    },
+    {
+      "name": "rag_unit_tests",
+      "status": "pass",
+      "duration_ms": 1001,
+      "detail": "exit_code=0",
+      "artifact": "docs/rag/runs/run_20260617_p1c7_taichang_reference_bid_pytest.log"
+    },
+    {
+      "name": "incremental_regression_gate",
+      "status": "pass",
+      "duration_ms": 60838,
+      "detail": "exit_code=0",
+      "artifact": "docs/rag/runs/run_20260617_p1c7_taichang_reference_bid_incremental_gate.log"
+    },
+    {
+      "name": "stream_sample",
+      "status": "pass",
+      "duration_ms": 10452,
+      "detail": "done=True; contexts=5; assets=8; images=8; error=None",
+      "artifact": "docs/rag/runs/run_20260617_p1c7_taichang_reference_bid_stream.jsonl"
+    }
+  ],
+  "ready": {
+    "checks": {
+      "celery": {
+        "status": "ok",
+        "workers": 1
+      },
+      "database": {
+        "checks": {
+          "match_knowledge_assets": true,
+          "match_knowledge_chunks": true,
+          "vector": true
+        },
+        "status": "ok"
+      },
+      "model_config": {
+        "optional": {
+          "mineru_api_token": true
+        },
+        "required": {
+          "dashscope_api_key": true,
+          "deepseek_api_key": true
+        },
+        "status": "ok"
+      },
+      "redis": {
+        "host": "127.0.0.1",
+        "port": 16379,
+        "status": "ok"
+      },
+      "storage": {
+        "provider": "local",
+        "root": "storage",
+        "status": "ok"
+      }
+    },
+    "duration_ms": 2256,
+    "status": "ok"
+  },
+  "stream_summary": {
+    "done": true,
+    "error": null,
+    "contexts_count": 5,
+    "assets_count": 8,
+    "images_count": 8,
+    "chunks": 634
+  },
+  "gate_summary_path": "docs/rag/runs/run_20260617_p1c7_taichang_reference_bid_incremental_summary.md"
+}

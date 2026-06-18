@@ -11,7 +11,12 @@ from collections.abc import Callable, Iterable
 from typing import Any
 
 from backend.ai.qwen_client import LLMStreamTimeoutError
-from backend.ai.section_writer import estimate_bid_content_words, stream_bid_section
+from backend.ai.section_writer import (
+    compact_formal_placeholders,
+    estimate_bid_content_words,
+    rewrite_generated_section_for_formal_quality,
+    stream_bid_section,
+)
 from backend.db.supabase_repo import (
     list_knowledge_assets,
     update_bid_section_content,
@@ -58,7 +63,16 @@ def append_section_images(full_content: str, chapter: dict[str, Any], *, with_im
         return ""
 
 
-def save_generated_section(project_id: str, chapter: dict[str, Any], full_content: str) -> dict[str, Any]:
+def save_generated_section(
+    project_id: str,
+    chapter: dict[str, Any],
+    full_content: str,
+    quality_report: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    full_content, compaction_report = compact_formal_placeholders(chapter, full_content)
+    quality = {**(quality_report or {})}
+    if compaction_report.get("compacted"):
+        quality["placeholder_compaction"] = compaction_report
     actual_words = estimate_bid_content_words(full_content)
     target_words = None
     metadata = chapter.get("metadata") if isinstance(chapter.get("metadata"), dict) else {}
@@ -80,6 +94,7 @@ def save_generated_section(project_id: str, chapter: dict[str, Any], full_conten
             "actual_words": actual_words,
             "target_words": target_words,
             "length_completion_ratio": round(actual_words / target_words, 3) if target_words else None,
+            "formal_quality": quality,
         },
     )
 
@@ -153,6 +168,7 @@ def generate_and_save_bid_section(
     full_content = continuation_draft or f"## {chapter.get('title') or '未命名章节'}\n\n"
     chunk_count = 0
     saved_section: dict[str, Any] | None = None
+    quality_report: dict[str, Any] = {}
     try:
         for event in stream_bid_section(project_id, chapter):
             event_type = event.get("type", "message")
@@ -162,17 +178,21 @@ def generate_and_save_bid_section(
                 if content:
                     chunk_count += 1
             if event_type == "done" and chapter.get("id"):
+                full_content, quality_report = rewrite_generated_section_for_formal_quality(project_id, chapter, full_content)
+                if quality_report.get("rewritten") and on_event:
+                    on_event({"type": "quality_rewrite", "report": quality_report})
                 image_markdown = append_section_images(full_content, chapter, with_images=with_images)
                 if image_markdown:
                     full_content += image_markdown
                     chunk_count += 1
                     if on_event:
                         on_event({"type": "chunk", "content": image_markdown})
-                saved_section = save_generated_section(project_id, chapter, full_content)
+                saved_section = save_generated_section(project_id, chapter, full_content, quality_report)
             if on_event:
                 on_event(event)
         if chapter.get("id") and saved_section is None:
-            saved_section = save_generated_section(project_id, chapter, full_content)
+            full_content, quality_report = rewrite_generated_section_for_formal_quality(project_id, chapter, full_content)
+            saved_section = save_generated_section(project_id, chapter, full_content, quality_report)
     except SectionGenerationCancelled:
         raise
     except LLMStreamTimeoutError as exc:

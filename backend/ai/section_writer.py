@@ -9,6 +9,18 @@ from backend.ai.bid_writing_plan import ensure_chapter_writing_plan
 from backend.db.supabase_repo import get_project_interpretation, list_knowledge_assets
 from backend.ai.qwen_client import LLMStreamTimeoutError, call_dashscope_api, stream_dashscope_api
 from backend.core.config import get_stage_model
+from backend.services.bid_prefill import confirmed_prefill_context
+from backend.services.taichang_bid_context import build_taichang_verified_fact_context
+
+FORMAL_PLACEHOLDER_RE = re.compile(r"【\s*待(?:补充|填写|确认|核对)[^】]*】|\{\{[^}]+}}|\$\{[^}]+}")
+GENERIC_PLACEHOLDER_LABELS = {
+    "",
+    "人工复核",
+    "人工复核后填写",
+    "人工核实后填写",
+    "同上",
+    "当前章节正文生成失败，请稍后重新生成。",
+}
 
 
 def _text(value: Any) -> str:
@@ -18,6 +30,13 @@ def _text(value: Any) -> str:
 def _compact_list(items: list[str] | None, limit: int = 6) -> str:
     values = [item for item in (items or []) if item]
     return "\n".join(f"- {item}" for item in values[:limit]) or "- 需人工复核"
+
+
+def _confirmed_prefill_text(project_meta: dict[str, Any]) -> str:
+    values = confirmed_prefill_context(project_meta)
+    if not values:
+        return "- 暂无用户确认变量；缺失事实仍须明确标注人工确认。"
+    return "\n".join(f"- {key}: {value}" for key, value in values.items())
 
 
 def _chunk_text(content: str, size: int = 90) -> Iterator[str]:
@@ -296,6 +315,8 @@ def build_section_supplement_prompt(project_id: str, chapter: dict[str, Any], cu
     supporting_assets = _compact_supporting_assets(chapter, volume_type)
     rag_context = _compact_section_rag_context(project, analysis, chapter, limit=4)
     grounding_instructions = _grounding_instructions(chapter)
+    confirmed_variables = _confirmed_prefill_text(project_meta)
+    taichang_facts = build_taichang_verified_fact_context()
     current_excerpt = (current_content or "").strip()
     if len(current_excerpt) > 4200:
         current_excerpt = current_excerpt[-4200:]
@@ -324,6 +345,13 @@ def build_section_supplement_prompt(project_id: str, chapter: dict[str, Any], cu
 3. 不得为了凑页数重复同义段落、塞入无关内容或虚构证书编号、人员姓名、合同金额、具体日期。
 4. 缺少企业事实时使用“【待补充：...】”占位，并说明需要补充的材料。
 5. 正式正文不得使用 emoji、图标符号或装饰性提示符。
+6. 下列用户确认变量必须直接使用，不得再次输出为【待补充】。
+
+用户已确认投标变量：
+{confirmed_variables}
+
+泰昌已核验企业事实：
+{taichang_facts}
 
 项目信息：
 - 项目名称：{project_meta.get("project_name") or project.get("project_name") or "需人工复核"}
@@ -417,6 +445,8 @@ def build_section_continuation_prompt(project_id: str, chapter: dict[str, Any], 
     supporting_assets = _compact_supporting_assets(chapter, volume_type)
     rag_context = _compact_section_rag_context(project, analysis, chapter, limit=4)
     grounding_instructions = _grounding_instructions(chapter)
+    confirmed_variables = _confirmed_prefill_text(project_meta)
+    taichang_facts = build_taichang_verified_fact_context()
     draft_excerpt = (draft_content or "").strip()
     if len(draft_excerpt) > 5200:
         draft_excerpt = draft_excerpt[-5200:]
@@ -439,6 +469,13 @@ def build_section_continuation_prompt(project_id: str, chapter: dict[str, Any], 
 4. 缺少企业事实时使用“【待补充：...】”占位，并说明需要补充的材料。
 5. 正式正文不得使用 emoji、图标符号或装饰性提示符。
 6. 如果草稿末尾是未完成句子，请先补全句子，再继续写后续段落。
+7. 下列用户确认变量必须直接使用，不得再次输出为【待补充】。
+
+用户已确认投标变量：
+{confirmed_variables}
+
+泰昌已核验企业事实：
+{taichang_facts}
 
 项目信息：
 - 项目名称：{project_meta.get("project_name") or project.get("project_name") or "需人工复核"}
@@ -516,6 +553,8 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
     supporting_assets = _compact_supporting_assets(chapter, volume_type)
     rag_context = _compact_section_rag_context(project, analysis, chapter, limit=5)
     grounding_instructions = _grounding_instructions(chapter)
+    confirmed_variables = _confirmed_prefill_text(project_meta)
+    taichang_facts = build_taichang_verified_fact_context()
 
     return f"""
 你是资深投标文件撰写专家，熟悉电网/电力工程、设备供货、安装调试、试验检测、运维检修、质量安全管理和招投标文件格式要求。
@@ -527,14 +566,21 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
 写作要求：
 1. 只输出章节正文，不要解释你如何生成。
 2. 语言正式、稳健、可落地，符合国内投标文件表达习惯。
-3. 不要编造企业没有提供的证书编号、人员姓名、合同金额、具体日期；遇到缺失信息，用“【待补充：...】”占位。
+3. 不要编造企业没有提供的证书编号、人员姓名、合同金额、具体日期；已核验事实必须直接填写，不得再次留空。
 4. 必须回应章节目标、响应要点、评分项和风险点。
 5. 如适合表格，用 Markdown 表格输出。
 6. 正文字数按章节写作计划控制。本次生成尽量覆盖完整章节；若目标字数较长，可先输出结构完整的第一版，并保留可续写的小标题。
 7. 必须遵守当前分册策略，尤其是金额、证书、人员、日期、签章、保证金和报价信息的禁编造约束。
 8. 正式标书正文不得使用 emoji、图标符号或装饰性提示符；“关键提醒”“风险提示”等内容必须使用纯文字标题。
-9. 不得为了凑页数重复同义段落、塞入无关内容或虚构资料；当证据不足以支撑目标篇幅时，用“【待补充：...】”标明所需材料和人工复核点。
+9. 不得为了凑页数重复同义段落、塞入无关内容或虚构资料；未知客户决策不得展开成大面积空表，每章最多保留 3 个合并后的“【待补充：...】”，其余集中写入简短人工确认清单。
 10. 必须优先依据“章节级 RAG 写作依据”和“关联要求/评分项/风险提醒”写作；RAG 未覆盖的企业事实不得编造。
+11. 下列用户确认变量必须直接使用，不得再次输出为【待补充】；未确认字段不得推断。
+
+用户已确认投标变量：
+{confirmed_variables}
+
+泰昌已核验企业事实（必须优先直接使用）：
+{taichang_facts}
 
 项目信息：
 - 项目名称：{context["project_name"] or "需人工复核"}
@@ -599,6 +645,150 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
 写作注意事项：
 {_compact_list(context["writing_notes"])}
 """.strip()
+
+
+def _placeholder_label(token: str) -> str:
+    text = token.strip("【】{}$ ")
+    text = re.sub(r"^待(?:补充|填写|确认|核对)\s*[:：]?", "", text).strip()
+    return text
+
+
+def _generic_placeholder_for_section(chapter: dict[str, Any]) -> str:
+    title = str(chapter.get("title") or "")
+    if "附件" in title or "页码" in title:
+        return "【待补充：附件页码索引待最终目录页码生成后填写】"
+    if "投标函" in title:
+        return "【待补充：投标函关键字段由客户最终确认】"
+    if "商务承诺" in title:
+        return "【待补充：商务承诺签章日期及客户最终承诺口径】"
+    if "产品制造" in title or "质量控制" in title:
+        return "【待补充：响应时间及产能数据待客户最终确认】"
+    return "【待补充：本节客户决策字段待最终确认】"
+
+
+def compact_formal_placeholders(
+    chapter: dict[str, Any],
+    content: str,
+    *,
+    max_placeholders: int = 3,
+) -> tuple[str, dict[str, Any]]:
+    """Collapse repeated placeholders so the exported bid reads as a formal draft."""
+    original = content or ""
+    tokens = FORMAL_PLACEHOLDER_RE.findall(original)
+    if len(tokens) <= max_placeholders:
+        return original, {
+            "compacted": False,
+            "before_placeholders": len(tokens),
+            "placeholders": len(tokens),
+        }
+
+    kept: list[str] = []
+    has_generic = False
+    for token in tokens:
+        label = _placeholder_label(token)
+        is_generic = label in GENERIC_PLACEHOLDER_LABELS
+        if is_generic:
+            has_generic = True
+            continue
+        if token not in kept and len(kept) < max_placeholders:
+            kept.append(token)
+
+    if has_generic and len(kept) < max_placeholders:
+        kept.insert(0, _generic_placeholder_for_section(chapter))
+
+    seen_keep: set[str] = set()
+
+    def replace(match: re.Match[str]) -> str:
+        token = match.group(0)
+        label = _placeholder_label(token)
+        is_generic = label in GENERIC_PLACEHOLDER_LABELS
+        if is_generic:
+            generic = _generic_placeholder_for_section(chapter)
+            if generic in kept and generic not in seen_keep:
+                seen_keep.add(generic)
+                return generic
+            return "客户确认后填写"
+        if token in kept and token not in seen_keep:
+            seen_keep.add(token)
+            return token
+        return f"客户确认后填写（{label}）" if label else "客户确认后填写"
+
+    compacted = FORMAL_PLACEHOLDER_RE.sub(replace, original)
+    compacted = re.sub(r"(客户确认后填写)(?:[、，,；;]\s*\1)+", r"\1", compacted)
+    after = len(FORMAL_PLACEHOLDER_RE.findall(compacted))
+    return compacted, {
+        "compacted": compacted != original,
+        "before_placeholders": len(tokens),
+        "placeholders": after,
+        "placeholder_compaction_replacements": len(tokens) - after,
+    }
+
+
+def rewrite_generated_section_for_formal_quality(
+    project_id: str,
+    chapter: dict[str, Any],
+    content: str,
+) -> tuple[str, dict[str, Any]]:
+    content, compaction_report = compact_formal_placeholders(chapter, content)
+    placeholder_count = len(re.findall(r"【\s*待(?:补充|填写|确认|核对)", content or ""))
+    forbidden_topics = ["施工组织", "建造师", "安全生产许可证", "BIM", "水利施工", "安装总承包"]
+    forbidden_hits = [topic for topic in forbidden_topics if topic in (content or "")]
+    if placeholder_count <= 3 and not forbidden_hits:
+        return content, {"rewritten": False, "placeholders": placeholder_count, "forbidden_hits": [], **compaction_report}
+
+    payload = get_project_interpretation(project_id)
+    analysis = payload.get("analysis") or {}
+    project_meta = analysis.get("project_meta") or {}
+    confirmed_variables = _confirmed_prefill_text(project_meta)
+    taichang_facts = build_taichang_verified_fact_context()
+    title = _text(chapter.get("title")) or "未命名章节"
+    prompt = f"""
+你是正式投标文件终审人员。请重写下面章节，使其可直接进入河北泰昌电力器材科技有限公司的电缆保护管物资投标文件。
+
+硬性要求：
+1. 保留章节核心响应内容和必要 Markdown 表格，但删除泛化、重复和与物资供货无关的内容。
+2. 已核验事实必须直接填写；不得把已知企业名称、信用代码、法人、证书、报告编号、产品参数和真实业绩继续写成待补充。
+3. 全章最多保留 3 个合并后的【待补充：...】，仅限本次包号/包名称、报价/税率、保证金、授权签章日期、最终交货期/质保期等客户决策。不得把整张表铺满占位符。
+4. 删除施工组织、建造师、安全生产许可证、BIM、水利施工、安装总承包等与本次电缆保护管物资供货无关内容。
+5. 河北豪乾资料只参考目录和表式，不得引用其企业事实、专利、供应商、人员、证书或业绩。
+6. 只输出重写后的完整章节正文，不要解释。
+
+章节标题：{title}
+
+用户已确认变量：
+{confirmed_variables}
+
+泰昌已核验事实：
+{taichang_facts}
+
+待终审正文：
+{content}
+""".strip()
+    response = call_dashscope_api(
+        [{"role": "user", "content": prompt}],
+        model=get_stage_model("section_writing"),
+        json_mode=False,
+        usage_context={
+            "project_id": project_id,
+            "section_id": chapter.get("id"),
+            "stage": "bid_section_formal_quality_rewrite",
+            "metadata": {"chapter_title": title, "before_placeholders": placeholder_count},
+        },
+    )
+    rewritten = str(response["output"]["choices"][0]["message"]["content"] or "").strip()
+    if not rewritten:
+        return content, {"rewritten": False, "placeholders": placeholder_count, "forbidden_hits": forbidden_hits, **compaction_report}
+    after_placeholders = len(re.findall(r"【\s*待(?:补充|填写|确认|核对)", rewritten))
+    after_forbidden = [topic for topic in forbidden_topics if topic in rewritten]
+    if after_placeholders > placeholder_count or len(after_forbidden) > len(forbidden_hits):
+        return content, {"rewritten": False, "placeholders": placeholder_count, "forbidden_hits": forbidden_hits, **compaction_report}
+    return rewritten, {
+        "rewritten": True,
+        "before_placeholders": placeholder_count,
+        "placeholders": after_placeholders,
+        "forbidden_hits": after_forbidden,
+        "placeholder_compaction": compaction_report,
+    }
 
 
 def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dict[str, Any]]:

@@ -1,7 +1,9 @@
 import json
 import logging
+import re
 import time
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any, Iterator
 
 from backend.db.supabase_repo import get_project_interpretation, get_supabase_client, replace_bid_sections_from_outline
@@ -16,6 +18,21 @@ from backend.core.bid_volumes import (
     normalize_volume_type,
     volume_description,
     volume_name,
+)
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+HAOQIAN_REFERENCE_TEMPLATE_PATH = PROJECT_ROOT / (
+    "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/"
+    "reference_templates/haoqian_reference_templates.json"
+)
+REFERENCE_FACT_MARKERS = (
+    "有限公司",
+    "专利证书",
+    "实用新型",
+    "软件著作权",
+    "认证证书",
+    "校准证书",
+    "资质文件",
 )
 
 
@@ -191,7 +208,7 @@ def _normalize_outline_chapters(
             row = {key: value for key, value in item.items() if key not in {"children", "subsections"}}
             row["order"] = order
             row["order_index"] = item.get("order_index") or order_index
-            row["level"] = max(1, min(int(item.get("level") or level), 5))
+            row["level"] = max(1, min(int(item.get("level") or level), 4))
             row["title"] = row.get("title") or "未命名章节"
             row["priority"] = row.get("priority") or "medium"
             row["response_points"] = row.get("response_points") or []
@@ -223,7 +240,7 @@ def _normalize_outline_chapters(
             row = ensure_section_volume(row)
             normalized.append(row)
             if isinstance(children, list) and children:
-                visit(children, min(level + 1, 5), str(order))
+                visit(children, min(level + 1, 4), str(order))
 
     visit(chapters, 1)
     return normalized
@@ -260,6 +277,19 @@ def _leaf_split_topics(title: str, count: int) -> list[tuple[str, str]]:
         ("质量控制", "说明材料、过程、验收、资料归档和质量追溯措施。"),
         ("安全环保", "说明安全生产、文明施工、环境保护、应急响应和风险管控。"),
     ]
+    supply_technical_bank = [
+        ("招标要求", "归纳本节对应的技术规范、货物清单、标准参数值和响应边界。"),
+        ("泰昌响应", "使用泰昌检验报告、产品资料和结构化参数填写投标响应值。"),
+        ("偏差核对", "逐项核对标准要求、投标保证值、偏差和人工复核事项。"),
+        ("证明材料索引", "列出本节采用的泰昌检验报告、产品资料和附件页码。"),
+    ]
+    supply_delivery_bank = [
+        ("备料与排产", "说明原材料准备、订单分解、生产排程和产能协调。"),
+        ("检验与放行", "说明过程检验、出厂检验、不合格控制和放行要求。"),
+        ("包装与运输", "说明包装标识、装卸防护、运输计划和到货交接。"),
+        ("交付与应急保障", "说明交货计划、进度跟踪、异常订单和应急供货措施。"),
+        ("质量追溯", "说明原料、生产批次、检验报告和交付记录的追溯关系。"),
+    ]
     qualification_bank = [
         ("响应要求", "概述本项资质、证书、人员或材料对招标资格条件的响应关系。"),
         ("资料清单", "列出应提交的证明文件、复印件、签章和索引要求。"),
@@ -273,7 +303,11 @@ def _leaf_split_topics(title: str, count: int) -> list[tuple[str, str]]:
         ("附件要求", "列明需配套提交的格式文件、签章文件和证明材料。"),
     ]
     title_text = normalized_title
-    if any(keyword in title_text for keyword in ["资格", "资质", "证书", "人员", "业绩"]):
+    if any(keyword in title_text for keyword in ["技术偏差", "技术特性参数", "材料配置", "产品制造", "质量控制"]):
+        bank = supply_technical_bank
+    elif any(keyword in title_text for keyword in ["供货", "交付", "售后", "质量保证"]):
+        bank = supply_delivery_bank
+    elif any(keyword in title_text for keyword in ["资格", "资质", "证书", "人员", "业绩"]):
         bank = qualification_bank
     elif any(keyword in title_text for keyword in ["商务", "合同", "付款", "承诺", "偏离"]):
         bank = commercial_bank
@@ -502,7 +536,8 @@ def _normalize_outline_structure(outline: dict[str, Any]) -> dict[str, Any]:
         ]
         flat_chapters = _outline_chapters_from_volumes(normalized_volumes)
 
-    flat_chapters = _expand_large_leaf_sections(flat_chapters)
+    if not outline.get("preserve_reference_structure"):
+        flat_chapters = _expand_large_leaf_sections(flat_chapters)
 
     for index, chapter in enumerate(flat_chapters, start=1):
         chapter["order_index"] = index
@@ -513,6 +548,332 @@ def _normalize_outline_structure(outline: dict[str, Any]) -> dict[str, Any]:
         "volumes": normalized_volumes,
         "chapters": flat_chapters,
     }
+
+
+def _is_supply_only_bid(payload: dict[str, Any]) -> bool:
+    text = json.dumps(payload, ensure_ascii=False)
+    supply_terms = ("电缆保护管", "CPVC", "MPP", "物资采购", "协议库存", "货物清单")
+    construction_terms = ("施工总承包", "安装工程", "土建工程", "工程施工招标")
+    return any(term in text for term in supply_terms) and not any(term in text for term in construction_terms)
+
+
+def _taichang_reference_template_hint() -> str:
+    return """客户提供的河北豪乾同类标书仅作目录、格式和写法参考，禁止引用其企业事实。参考结构如下：
+- 技术文件：技术偏差表；专项投标文件；业绩文件；技术特性参数表；货物组件材料配置表；符合投标人资格要求的证明文件；技术评分支撑材料。
+- 商务文件：商务偏差表；投标保证资料；投标人基本情况表；营业执照；资格证明文件；信用查询报告及截图；补充文件。
+- 正式内容必须全部替换为河北泰昌电力器材科技有限公司的真实资料；专利、供应商、人员、业绩和证书不得从河北豪乾参考稿继承。
+- 格式来源优先级：本次招标文件明确格式 > 客户参考稿结构 > 系统默认模板。"""
+
+
+def _clean_reference_toc_line(line: str) -> str:
+    text = re.sub(r"\s+", " ", str(line or "")).strip()
+    text = re.sub(r"^[\-\u2022]\s*", "", text)
+    text = re.sub(r"^(?:\d+\s+)?目录\s*$", "", text)
+    text = re.sub(r"^\d+\s+(?=\d+(?:\.\d+)+\.?\s*)", "", text)
+    text = re.sub(r"(?:\s*[\.\u2026·]{2,}|\s+\.{2,}|\s+…+|\s+·{2,}).*$", "", text).strip()
+    text = re.sub(r"\s+\d{1,4}$", "", text).strip()
+    return text.strip(" -_")
+
+
+def _reference_toc_level_and_title(line: str) -> tuple[int, str] | None:
+    text = _clean_reference_toc_line(line)
+    if not text:
+        return None
+    chinese = re.match(r"^（[一二三四五六七八九十]+）\s*(.+)$", text)
+    if chinese:
+        return 1, chinese.group(1).strip()
+    number = re.match(r"^(\d+(?:\.\d+)*)\.?\s*(.+)$", text)
+    if number:
+        level = min(number.group(1).count(".") + 1, 4)
+        return level, number.group(2).strip()
+    code_like = re.match(r"^（[A-Z0-9][A-Z0-9\s\-_]+）$", text, flags=re.I)
+    if code_like:
+        return 3, "技术特性参数明细（按物料编码）"
+    if len(text) >= 3:
+        return 2, text
+    return None
+
+
+def _sanitize_reference_template_title(title: str) -> str:
+    text = re.sub(r"\s+", " ", str(title or "")).strip()
+    text = re.sub(r"\s*[-_]\s*", "-", text)
+    lowered = text.lower()
+    if text.startswith("一种"):
+        return "专利证书"
+    if "国网辽宁电力" in text and re.search(r"20\d{2}", text):
+        return "同类项目业绩证明材料"
+    if "有限公司" in text and "资质文件" in text:
+        return "原材料供应商资质文件"
+    if "有限公司" in text:
+        return "供应商及外协证明材料"
+    if "一种" in text and ("专利" in text or "保护管" in text):
+        return "专利证书"
+    if "电缆保护管生产" in text and ("系统" in text or "平台" in text or "软件" in text):
+        return "软件著作权登记证书"
+    if "软件" in text and ("系统" in text or "平台" in text or "评估" in text):
+        return "软件著作权登记证书"
+    if re.match(r"^20\d{2}\s*年?审计报告$", text):
+        return "近三年审计报告"
+    if re.search(r"\b[A-Z]\d{2,}-\d", text) or re.match(r"^（?[A-Z0-9][A-Z0-9\s\-_]{8,}）?$", text, flags=re.I):
+        return "技术特性参数明细（按物料编码）"
+    if "cpvc" in lowered:
+        text = re.sub("cpvc", "CPVC", text, flags=re.I)
+    if "mpp" in lowered:
+        text = re.sub("mpp", "MPP", text, flags=re.I)
+    return text[:80]
+
+
+def _reference_root_title(record: dict[str, Any]) -> tuple[str, str]:
+    role = str(record.get("doc_role") or "")
+    file_name = str(record.get("file_name") or record.get("source_file") or "")
+    if "technical" in role or "技术" in file_name:
+        return "技术响应文件", "technical"
+    if "business" in role or "商务" in file_name or "winning_bid" in role:
+        return "商务响应文件", "business"
+    return "参考模板响应文件", "business"
+
+
+def _make_reference_node(title: str, volume_type: str, *, children: list[dict[str, Any]] | None = None) -> dict[str, Any]:
+    child_nodes = children or []
+    writing_plan = {
+        "target_words": 0 if child_nodes else 900,
+        "min_words": 0 if child_nodes else 450,
+        "max_words": 0 if child_nodes else 1200,
+        "suggested_pages": "结构汇总" if child_nodes else "1-2",
+        "generation_mode": "container" if child_nodes else "single_pass",
+        "strategy": "本章节来自客户参考稿目录结构，只复用目录/表式/写法，正文必须使用泰昌事实和本次招标要求。",
+    }
+    return {
+        "title": title,
+        "purpose": "参考客户同类标书目录组织本节，内容以泰昌事实和本次招标要求重写。",
+        "priority": "high",
+        "children": child_nodes,
+        "metadata": {
+            "volume_type": volume_type,
+            "section_role": "container" if child_nodes else "leaf",
+            "leaf_generation": not bool(child_nodes),
+            "reference_template_source": "haoqian_toc_structure_only",
+            "writing_plan": writing_plan,
+            "generation_options": {
+                "required_scope": "河北泰昌电力器材科技有限公司电缆保护管物资供货投标，范围为生产、检验、包装、运输、交付和售后服务。",
+                "forbidden_topics": ["施工组织", "建造师", "安全生产许可证", "BIM", "水利施工", "安装总承包"],
+                "allowed_placeholders": ["本次包号及包名称", "最终报价及税率", "投标保证金", "授权代表及签署日期", "最终交货期及质保期"],
+            },
+        },
+    }
+
+
+def _parse_reference_toc_lines(record: dict[str, Any], *, max_nodes: int = 45) -> dict[str, Any] | None:
+    root_title, volume_type = _reference_root_title(record)
+    root = _make_reference_node(root_title, volume_type, children=[])
+    stack: list[tuple[int, dict[str, Any]]] = [(0, root)]
+    seen_by_parent: dict[int, set[str]] = {}
+    added = 0
+    for raw_line in record.get("toc_lines") or []:
+        parsed = _reference_toc_level_and_title(str(raw_line))
+        if not parsed:
+            continue
+        level, raw_title = parsed
+        title = _sanitize_reference_template_title(raw_title)
+        if not title or title in {"目录", root_title}:
+            continue
+        while stack and stack[-1][0] >= level:
+            stack.pop()
+        parent = stack[-1][1] if stack else root
+        parent_key = id(parent)
+        seen_by_parent.setdefault(parent_key, set())
+        if title in seen_by_parent[parent_key]:
+            continue
+        seen_by_parent[parent_key].add(title)
+        node = _make_reference_node(title, volume_type, children=[])
+        parent.setdefault("children", []).append(node)
+        stack.append((level, node))
+        added += 1
+        if added >= max_nodes:
+            break
+    if not root.get("children"):
+        return None
+    _refresh_reference_container_metadata(root)
+    return root
+
+
+def _refresh_reference_container_metadata(node: dict[str, Any]) -> None:
+    children = node.get("children") or []
+    metadata = node.setdefault("metadata", {})
+    metadata["section_role"] = "container" if children else "leaf"
+    metadata["leaf_generation"] = not bool(children)
+    writing_plan = metadata.setdefault("writing_plan", {})
+    if children:
+        writing_plan.update({
+            "target_words": 0,
+            "min_words": 0,
+            "max_words": 0,
+            "suggested_pages": "结构汇总",
+            "generation_mode": "container",
+        })
+    for child in children:
+        _refresh_reference_container_metadata(child)
+
+
+def _reference_template_chapters_from_files() -> list[dict[str, Any]]:
+    if not HAOQIAN_REFERENCE_TEMPLATE_PATH.exists():
+        return []
+    try:
+        payload = json.loads(HAOQIAN_REFERENCE_TEMPLATE_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return []
+    records = payload.get("records") if isinstance(payload, dict) else []
+    roots: list[dict[str, Any]] = []
+    for record in records or []:
+        if not isinstance(record, dict) or not record.get("reference_only"):
+            continue
+        root = _parse_reference_toc_lines(record)
+        if root:
+            roots.append(root)
+    if sum(_count_outline_nodes(root) for root in roots) < 40:
+        return []
+    _merge_required_supply_sections(roots)
+    roots.append(_make_reference_node("报价文件及货物清单", "price"))
+    roots.append(_make_reference_node("附件清单及页码索引", "attachment"))
+    return roots
+
+
+def _merge_required_supply_sections(roots: list[dict[str, Any]]) -> None:
+    existing_titles: set[str] = set()
+
+    def collect(node: dict[str, Any]) -> None:
+        existing_titles.add(str(node.get("title") or ""))
+        for child in node.get("children") or []:
+            collect(child)
+
+    for root in roots:
+        collect(root)
+
+    for required_root in _supply_reference_base_chapters():
+        title = str(required_root.get("title") or "")
+        if title in {"报价文件及货物清单", "附件清单及页码索引"}:
+            continue
+        if title not in existing_titles:
+            roots.insert(0, required_root)
+            collect(required_root)
+            continue
+        if "技术" not in title:
+            continue
+        technical_root = next((root for root in roots if "技术" in str(root.get("title") or "")), None)
+        if not technical_root:
+            continue
+        for child in required_root.get("children") or []:
+            child_title = str(child.get("title") or "")
+            if child_title not in existing_titles:
+                technical_root.setdefault("children", []).append(child)
+                collect(child)
+        _refresh_reference_container_metadata(technical_root)
+
+
+def _count_outline_nodes(node: dict[str, Any]) -> int:
+    return 1 + sum(_count_outline_nodes(child) for child in node.get("children") or [])
+
+
+def _supply_reference_base_chapters() -> list[dict[str, Any]]:
+    chapters = [
+        {
+            "title": "投标函及法定格式文件",
+            "purpose": "严格采用招标文件规定格式，填写投标主体、包件、报价、授权和签章信息。",
+            "priority": "high",
+            "children": [
+                {"title": "投标函及投标函附录", "purpose": "按招标文件原表式填写投标承诺和报价信息。", "priority": "high"},
+                {"title": "法定代表人身份证明及授权委托书", "purpose": "使用泰昌真实法定代表人与客户确认的授权信息。", "priority": "high"},
+                {"title": "投标保证金及基本账户资料", "purpose": "放置本项目确认后的保证金凭证和基本账户证明。", "priority": "high"},
+            ],
+        },
+        {
+            "title": "商务响应文件",
+            "purpose": "参照客户同类商务标结构并逐条响应本次招标商务要求。",
+            "priority": "high",
+            "children": [
+                {"title": "商务偏差表", "purpose": "按招标文件原表式填写商务偏差。", "priority": "high"},
+                {"title": "投标人基本情况表", "purpose": "使用泰昌营业执照和企业事实填写。", "priority": "high"},
+                {"title": "资格证明文件", "purpose": "归集泰昌营业执照、体系认证、资信和适用资格证明。", "priority": "high"},
+                {"title": "信用查询报告及截图", "purpose": "归集本次投标要求的泰昌信用查询材料。", "priority": "medium"},
+                {"title": "商务承诺及补充文件", "purpose": "响应交货、质保、售后、廉洁和保密等商务条款。", "priority": "high"},
+            ],
+        },
+        {
+            "title": "技术响应文件",
+            "purpose": "围绕电缆保护管产品参数、生产检验、供货交付和售后服务响应技术要求。",
+            "priority": "high",
+            "children": [
+                {"title": "技术偏差表", "purpose": "按技术规范逐项填写标准值、保证值和偏差。", "priority": "high"},
+                {"title": "技术特性参数表", "purpose": "优先使用泰昌检验报告结构化参数并匹配本次规格。", "priority": "high"},
+                {"title": "货物组件材料配置表", "purpose": "按本次货物清单和技术规范填写产品组成及原材料。", "priority": "high"},
+                {"title": "产品制造与质量控制", "purpose": "说明CPVC/MPP生产、过程检验、出厂检验和质量追溯。", "priority": "high"},
+                {"title": "供货组织与交付保障", "purpose": "说明备料、排产、包装、运输、交货和应急供货安排。", "priority": "high"},
+                {"title": "售后服务与质量保证", "purpose": "说明质保、响应、问题处理和技术支持。", "priority": "high"},
+            ],
+        },
+        {
+            "title": "业绩文件",
+            "purpose": "仅使用泰昌真实合同、中标通知书及可追溯业绩证明。",
+            "priority": "high",
+            "children": [
+                {"title": "业绩汇总表", "purpose": "列示经结构化核验的泰昌同类产品业绩。", "priority": "high"},
+                {"title": "合同及中标通知书", "purpose": "附泰昌真实合同关键页和中标通知书。", "priority": "high"},
+            ],
+        },
+        {
+            "title": "技术评分支撑材料",
+            "purpose": "按本次评分办法归集泰昌已有且适用的产品、生产、检测、绿色低碳和创新证明。",
+            "priority": "high",
+        },
+        {
+            "title": "报价文件及货物清单",
+            "purpose": "按招标文件原表式填写价格清单、数量、税率和总价，不由模型推断。",
+            "priority": "high",
+        },
+        {
+            "title": "附件清单及页码索引",
+            "purpose": "汇总本次实际采用的泰昌证明文件并在定稿后回填页码。",
+            "priority": "medium",
+        },
+    ]
+    volume_types = ["business", "business", "technical", "qualification", "technical", "price", "attachment"]
+    for chapter, volume_type in zip(chapters, volume_types, strict=True):
+        stack = [chapter]
+        while stack:
+            item = stack.pop()
+            children = item.get("children") or []
+            if children:
+                writing_plan = {
+                    "target_words": 0,
+                    "min_words": 0,
+                    "max_words": 0,
+                    "suggested_pages": "结构汇总",
+                    "generation_mode": "container",
+                    "strategy": "本章节作为客户范本结构容器，正文由下级小节生成。",
+                }
+            else:
+                writing_plan = {
+                    "target_words": 1200,
+                    "min_words": 600,
+                    "max_words": 1500,
+                    "suggested_pages": "1-2",
+                    "generation_mode": "single_pass",
+                    "strategy": "按招标文件原格式和泰昌真实资料形成可直接复核的正文或表格。",
+                }
+            item["metadata"] = {
+                **(item.get("metadata") or {}),
+                "volume_type": volume_type,
+                "section_role": "container" if children else "leaf",
+                "leaf_generation": not bool(children),
+                "writing_plan": writing_plan,
+                "generation_options": {
+                    "required_scope": "河北泰昌电力器材科技有限公司电缆保护管物资供货投标，范围为生产、检验、包装、运输、交付和售后服务。",
+                    "forbidden_topics": ["施工组织", "建造师", "安全生产许可证", "BIM", "水利施工", "安装总承包"],
+                    "allowed_placeholders": ["本次包号及包名称", "最终报价及税率", "投标保证金", "授权代表及签署日期", "最终交货期及质保期"],
+                },
+            }
+            stack.extend(children)
+    return chapters
 
 
 def _build_rule_outline(payload: dict[str, Any]) -> dict[str, Any]:
@@ -602,6 +963,8 @@ def _build_rule_outline(payload: dict[str, Any]) -> dict[str, Any]:
             ],
         },
     ]
+    if _is_supply_only_bid(payload):
+        base_chapters = _reference_template_chapters_from_files() or _supply_reference_base_chapters()
 
     requirements = _dict_items(payload.get("requirements") or [])
     scoring_items = _dict_items(payload.get("scoringItems") or [])
@@ -646,6 +1009,7 @@ def _build_rule_outline(payload: dict[str, Any]) -> dict[str, Any]:
                 if item.get("material") and (keyword in _text(item.get("material")) or title[:2] in _text(item.get("category")))
             ][:5],
             "writing_notes": writing_notes,
+            "metadata": dict(node.get("metadata") or {}),
             "children": [enrich_node(child, min(level + 1, 4)) for child in node.get("children") or []],
         }
         return enriched
@@ -654,6 +1018,7 @@ def _build_rule_outline(payload: dict[str, Any]) -> dict[str, Any]:
 
     return _normalize_outline_structure({
         "version": "rule-volume-v1",
+        "preserve_reference_structure": _is_supply_only_bid(payload),
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "project_name": project_meta.get("project_name") or project.get("project_name"),
         "tender_no": project_meta.get("tender_no") or project.get("project_no"),
@@ -662,7 +1027,7 @@ def _build_rule_outline(payload: dict[str, Any]) -> dict[str, Any]:
         "next_steps": [
             "先人工确认章节是否覆盖招标文件格式和实质性条款。",
             "补齐企业资信、人员证书、业绩和产品资料后，再进入单章节正文生成。",
-            "优先生成资格审查资料、技术响应及施工组织设计等高风险章节。",
+            "优先生成资格审查、技术参数响应、商务偏差和报价等高风险章节。",
         ],
     })
 
@@ -672,6 +1037,7 @@ def _build_prompt(payload: dict[str, Any]) -> str:
     analysis = payload.get("analysis") or {}
     project_meta = analysis.get("project_meta") or {}
     ai_report = project_meta.get("ai_report") or {}
+    supply_only = _is_supply_only_bid(payload)
 
     requirements = payload.get("requirements") or []
     scoring_items = payload.get("scoringItems") or []
@@ -768,7 +1134,7 @@ def _build_prompt(payload: dict[str, Any]) -> str:
         )
 
     prompt_parts = [
-        "你是资深电网/电力工程投标文件编制负责人。请基于招标文件结构化解读和企业私有知识库，生成\"真实投标分册组成 + 各分册章节大纲\"。",
+        "你是资深国家电网物资投标文件编制负责人。请基于招标文件结构化解读和企业私有知识库，生成\"真实投标分册组成 + 各分册章节大纲\"。",
         "",
         "核心要求：",
         "1. 面向后续自动生成标书正文，不要写完整正文。",
@@ -782,12 +1148,19 @@ def _build_prompt(payload: dict[str, Any]) -> str:
         f"- 建议生成章节总数不少于 {min_chapters_hint} 个（含各级子章节）。",
         "- 每个评分项必须有至少一个对应章节或子章节明确响应，不得合并到笼统章节里。",
         "- 每个高风险/废标项必须有专项章节或子章节响应。",
-        "- 技术标中施工组织设计必须展开到三级，至少包含：总体部署、进度计划、质量控制、安全管理、环保文明施工、资源配置、关键工序专项方案等子章节。",
+        ("- 当前为电缆保护管物资供货项目，禁止生成施工组织设计、建造师、安全生产许可证、BIM、水利施工等工程承包内容；技术部分应展开产品参数、生产检验、供货交付、质量保证和售后服务。" if supply_only else "- 技术标中施工组织设计必须展开到三级，至少包含：总体部署、进度计划、质量控制、安全管理、环保文明施工、资源配置、关键工序专项方案等子章节。"),
         "- 资格文件分册必须为每类资质/证书/人员/业绩单独设置章节，不得合并为一个资格材料章节。",
         "- 如果企业知识库中有产品/设备资产，技术标中必须为主要产品/设备设置专项技术参数响应章节。",
         "- 目录层级灵活：简单章节保留一级，复杂章节展开到二级、三级，必要时四级。",
         "- 不要编造招标文件没有的信息；无法确认的写需人工复核。",
     ]
+
+    if supply_only:
+        prompt_parts += [
+            "",
+            "客户同类标书范本约束（只借目录/格式/写法，不借企业事实）：",
+            _taichang_reference_template_hint(),
+        ]
 
     if knowledge_section:
         prompt_parts += ["", "企业私有知识库上下文（必须结合以下信息生成章节）：", knowledge_section]

@@ -1,11 +1,75 @@
 import unittest
 from unittest.mock import patch
 
-from backend.ai.chapter_planner import _build_rule_outline, _build_split_child, stream_bid_outline
+from backend.ai.chapter_planner import (
+    _build_prompt,
+    _build_rule_outline,
+    _build_split_child,
+    _reference_template_chapters_from_files,
+    stream_bid_outline,
+)
 from backend.db.supabase_repo import replace_bid_sections_from_outline
 
 
 class ChapterPlannerRegressionTest(unittest.TestCase):
+    def test_supply_bid_uses_customer_reference_structure_without_construction_topics(self):
+        payload = {
+            "project": {"id": "project-1", "project_name": "电缆保护管采购"},
+            "analysis": {"summary": "CPVC、MPP电缆保护管物资采购", "project_meta": {}},
+            "requirements": [{"content": "提交技术偏差表和技术特性参数表"}],
+            "scoringItems": [],
+            "risks": [],
+        }
+
+        outline = _build_rule_outline(payload)
+        titles = [str(item.get("title") or "") for item in outline.get("chapters") or []]
+        prompt = _build_prompt(payload)
+
+        self.assertTrue(any("技术特性参数表" in title for title in titles))
+        self.assertTrue(any("商务偏差表" in title for title in titles))
+        self.assertFalse(any("施工组织设计" in title for title in titles))
+        self.assertIn("河北豪乾同类标书仅作目录、格式和写法参考", prompt)
+        self.assertIn("禁止生成施工组织设计", prompt)
+        self.assertIn("河北泰昌电力器材科技有限公司", prompt)
+
+    def test_supply_bid_prefers_parsed_customer_reference_template_outline(self):
+        payload = {
+            "project": {"id": "project-1", "project_name": "电缆保护管采购"},
+            "analysis": {"summary": "CPVC、MPP电缆保护管物资采购", "project_meta": {}},
+            "requirements": [{"content": "提交技术偏差表、商务偏差表和投标文件格式"}],
+            "scoringItems": [],
+            "risks": [],
+        }
+
+        outline = _build_rule_outline(payload)
+        titles = [str(item.get("title") or "") for item in outline.get("chapters") or []]
+
+        self.assertGreater(len(titles), 60)
+        self.assertIn("商务响应文件", titles)
+        self.assertIn("技术响应文件", titles)
+        self.assertTrue(any("绿色低碳" in title for title in titles))
+        self.assertTrue(any("售后服务" in title for title in titles))
+        self.assertFalse(any("陕西云天创石化有限公司" in title for title in titles))
+        self.assertFalse(any("电气施工用电线保护管道连接装置" in title for title in titles))
+        self.assertLessEqual(max(int(item.get("level") or 1) for item in outline.get("chapters") or []), 4)
+
+    def test_reference_template_parser_returns_expanded_structure(self):
+        chapters = _reference_template_chapters_from_files()
+        flattened: list[str] = []
+
+        def visit(node):
+            flattened.append(str(node.get("title") or ""))
+            for child in node.get("children") or []:
+                visit(child)
+
+        for chapter in chapters:
+            visit(chapter)
+
+        self.assertGreater(len(flattened), 60)
+        self.assertIn("商务响应文件", flattened)
+        self.assertIn("技术响应文件", flattened)
+        self.assertIn("报价文件及货物清单", flattened)
+
     def test_split_child_title_does_not_repeat_parent_prefix(self):
         child = _build_split_child(
             {

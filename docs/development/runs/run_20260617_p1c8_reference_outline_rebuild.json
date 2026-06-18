@@ -1,0 +1,85 @@
+{
+  "run_id": "run_20260617_p1c8_reference_outline_rebuild",
+  "project_id": "a1d853bc-ca4e-43b4-bbea-256f561c8a3d",
+  "rebuilt_at": "2026-06-17T12:42:43.443684+00:00",
+  "before_count": 102,
+  "after_count": 102,
+  "outline_count": 102,
+  "restored_content_count": 14,
+  "restored": [
+    {
+      "title": "投标函及投标函附录",
+      "chars": 2822
+    },
+    {
+      "title": "法定代表人身份证明及授权委托书",
+      "chars": 799
+    },
+    {
+      "title": "投标保证金及基本账户资料",
+      "chars": 876
+    },
+    {
+      "title": "投标人基本情况表",
+      "chars": 1093
+    },
+    {
+      "title": "投标人基本情况表",
+      "chars": 1093
+    },
+    {
+      "title": "技术评分支撑材料",
+      "chars": 1868
+    },
+    {
+      "title": "技术偏差表",
+      "chars": 1787
+    },
+    {
+      "title": "技术特性参数表",
+      "chars": 2390
+    },
+    {
+      "title": "货物组件材料配置表",
+      "chars": 8810
+    },
+    {
+      "title": "产品制造与质量控制",
+      "chars": 4716
+    },
+    {
+      "title": "供货组织与交付保障",
+      "chars": 3164
+    },
+    {
+      "title": "售后服务与质量保证",
+      "chars": 2233
+    },
+    {
+      "title": "报价文件及货物清单",
+      "chars": 907
+    },
+    {
+      "title": "附件清单及页码索引",
+      "chars": 2608
+    }
+  ],
+  "before_backup": "docs/development/runs/run_20260617_p1c8_reference_outline_rebuild_before_second_rebuild_sections.json",
+  "roots": [
+    "投标函及法定格式文件",
+    "商务响应文件",
+    "技术评分支撑材料",
+    "技术响应文件",
+    "报价文件及货物清单",
+    "附件清单及页码索引"
+  ],
+  "level_counts": {
+    "1": 6,
+    "2": 27,
+    "3": 30,
+    "4": 39,
+    "5": 0
+  },
+  "max_level": 4,
+  "specific_reference_title_hits": []
+}

@@ -874,6 +874,41 @@ def build_project_bid_markdown(
         "cover_field_missing": project_meta.get("cover_field_missing") if isinstance(project_meta.get("cover_field_missing"), list) else [],
         "cover_field_source": "uploaded_tender_structured_extract" if isinstance(project_meta.get("cover_fields"), dict) and project_meta.get("cover_fields") else "markdown_fallback",
     }
+    prefill_state = project_meta.get("bid_prefill") if isinstance(project_meta.get("bid_prefill"), dict) else {}
+    parent_section_ids = {str(section.get("parent_id")) for section in sections if section.get("parent_id")}
+
+    def is_container_section(section: dict) -> bool:
+        metadata = section.get("metadata") if isinstance(section.get("metadata"), dict) else {}
+        return (
+            metadata.get("section_role") == "container"
+            or metadata.get("leaf_generation") is False
+            or str(section.get("id") or "") in parent_section_ids
+        )
+
+    empty_section_count = sum(
+        1 for section in sections
+        if not is_container_section(section) and not str(section.get("content") or "").strip()
+    )
+    placeholder_count = sum(
+        len(re.findall(r"【\s*待(?:补充|填写|确认|核对)", str(section.get("content") or "")))
+        for section in sections
+    )
+    missing_required = prefill_state.get("missing_formal_required_fields") if isinstance(prefill_state.get("missing_formal_required_fields"), list) else []
+    export_image_report["formal_readiness"] = {
+        "template_id": "sgcc_taichang_bid",
+        "reference_template_policy": "tender_format_then_customer_reference_then_system_default",
+        "bidder": DOCX_BIDDER_FULL_NAME,
+        "empty_section_count": empty_section_count,
+        "placeholder_count": placeholder_count,
+        "missing_formal_required_fields": missing_required,
+        "ready": empty_section_count == 0 and placeholder_count == 0 and not missing_required,
+    }
+    if empty_section_count:
+        export_image_report["warnings"].append(f"仍有 {empty_section_count} 个章节没有正文，当前文件只能作为草稿。")
+    if placeholder_count:
+        export_image_report["warnings"].append(f"仍有 {placeholder_count} 处待补充/待确认占位，当前文件尚未达到正式投标文件标准。")
+    if missing_required:
+        export_image_report["warnings"].append(f"仍有 {len(missing_required)} 个正式必填字段未确认，请返回投标信息确认步骤补齐。")
     if with_images:
         try:
             image_assets = [
@@ -907,7 +942,7 @@ def build_project_bid_markdown(
         chunks.append(_section_markdown_heading(int(section.get("level") or 1), title))
         if content:
             chunks.append(f"{content}\n\n" if content.endswith("\n") else f"{content}\n\n")
-        else:
+        elif not is_container_section(section):
             chunks.append("待补充章节正文。\n\n")
         if with_images and "![" not in content:
             remaining = DOCX_TOTAL_ASSET_IMAGE_LIMIT - len(export_image_report["manifest"])

@@ -1896,7 +1896,13 @@ export function BidEditorPage(): JSX.Element {
         const skippedImages = Number(imageConversion?.skipped || 0);
         const insertedImages = Number(imageConversion?.inserted || 0);
         const selectionWarnings = imageSelection?.warnings || [];
-        if (fieldRefresh?.manual_refresh_required) {
+        const formalReadiness = imageSelection?.formal_readiness;
+        if (formalReadiness && formalReadiness.ready === false) {
+          message.warning(
+            `DOCX 已生成但仍是草稿：空章节 ${Number(formalReadiness.empty_section_count || 0)} 个，占位 ${Number(formalReadiness.placeholder_count || 0)} 处，正式必填缺口 ${formalReadiness.missing_formal_required_fields?.length || 0} 个。`,
+            10,
+          );
+        } else if (fieldRefresh?.manual_refresh_required) {
           message.warning(fieldRefresh.user_message || 'DOCX 已生成，但目录页码可能需要打开 Word/WPS 后手动刷新。', 8);
         } else if (fieldRefresh?.status === 'refreshed') {
           message.success(fieldRefresh.user_message || (scope === 'section' ? '本章 DOCX 已生成，目录页码已刷新' : `${activeVolume === 'all' ? '全文' : volumeLabel(activeVolume)} DOCX 已生成，目录页码已刷新`), 5);

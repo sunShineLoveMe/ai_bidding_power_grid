@@ -205,3 +205,17 @@
 - 验证链路：`build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
 - 验证结果：状态 PASS；已保存到 `bid_sections.content` 的唯一标记进入 DOCX；未保存但通过 `sectionsSnapshot` 传入的唯一标记也进入 DOCX；测试结束后已恢复数据库原章节正文。
 - 结论：正文编辑功能对正式 Word 导出有效。后续修改前端导出参数、章节保存接口或后台导出任务时，必须保留该回归。
+
+### 2026-06-17 泰昌参考模板标书成品度收口验收记录
+
+- 背景：客户反馈生成标书像半成品，且没有贴近客户提供的参考标书结构。本轮按正式投标文件标准收口真实项目导出观感，同时保持泰昌/辽宁/河北豪乾资料边界。
+- 修复：
+  - 纯物资供货大纲改为 23 节参考结构，覆盖业绩、投标函、商务响应、技术响应、报价文件和附件索引，禁止施工组织、水利、BIM、建造师等模板污染。
+  - 章节写作注入泰昌核验事实包，并新增正式占位归并，避免 `【待补充】` 大量重复铺满正文和表格。
+  - DOCX 导出记录 `formal_readiness`，包含模板 ID、参考策略、空章节数、占位数和正式必填缺口；前端导出完成提示优先展示未达正式标准原因。
+  - 容器章节不再写入 `待补充章节正文。`，空章节统计排除容器节点。
+- 真实项目：`a1d853bc-ca4e-43b4-bbea-256f561c8a3d`。
+- 真实导出链路：`build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice -> LibreOffice PDF`。
+- 验证记录：`docs/development/runs/run_20260617_p1c7_taichang_reference_bid.md` 和对应 JSON。
+- 本次真实验收结果：源项目 23 个章节节点、19 个叶子章节、19 个叶子章节有正文、空叶子章节 0；DOCX 段落 `1799`、标题 `23`、表格 `36`；图片 selected/inserted/failed 为 `24/24/0`；目录标题、页眉、`PAGE/NUMPAGES/PAGEREF` 字段、宋体配置和 PDF 预览均通过；禁用主题命中 0。
+- 正式状态：readiness 为 `false`，原因是仍有 `39` 处客户确认占位和 `15` 个正式必填字段未确认。系统不得编造报价、税率、保证金、授权代表、签署日期等客户决策字段，必须由客户或招标文件补齐后重新导出最终版。
