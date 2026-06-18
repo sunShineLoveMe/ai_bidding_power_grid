@@ -297,7 +297,7 @@ export function ProductBasePage(): JSX.Element {
           setAssetFile(null);
         }}
         width={920}
-        destroyOnClose={false}
+        destroyOnHidden={false}
         footer={[
           <Button key="cancel" onClick={() => {
             setFormOpen(false);

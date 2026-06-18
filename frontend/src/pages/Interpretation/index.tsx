@@ -84,6 +84,7 @@ function formatListItem(item: unknown): string {
   if (typeof item === 'object') {
     const record = item as Record<string, unknown>;
     const preferred = [
+      record.summary,
       record.action,
       record.detail,
       record.priority ? `优先级：${record.priority}` : '',
@@ -91,6 +92,7 @@ function formatListItem(item: unknown): string {
       record.reason,
       record.content,
       record.title,
+      record.source ? `来源：${record.source}` : '',
     ].map(formatListItem).filter(Boolean);
     if (preferred.length) return preferred.join('；');
     return Object.entries(record)
@@ -548,7 +550,7 @@ export function InterpretationPage(): JSX.Element {
               <Descriptions.Item label="项目类型">{String(data.project?.project_type || projectMeta.document_type || '-')}</Descriptions.Item>
               <Descriptions.Item label="招标人">{data.project?.tender_unit || '-'}</Descriptions.Item>
               <Descriptions.Item label="代理机构">{data.project?.agency || '-'}</Descriptions.Item>
-              <Descriptions.Item label="创建时间">{formatDateTime(data.project?.created_at)}</Descriptions.Item>
+              <Descriptions.Item label="创建时间" span={2}>{formatDateTime(data.project?.created_at)}</Descriptions.Item>
               <Descriptions.Item label="解读摘要" span={4}>
                 {data.analysis.summary || '-'}
               </Descriptions.Item>
@@ -576,7 +578,7 @@ export function InterpretationPage(): JSX.Element {
                           <section className="report-section report-wide">
                             <h3>一页式业务摘要</h3>
                             <ul>
-                              {(aiReport.executive_summary || []).map((item, index) => <li key={`summary-${index}`}>{item}</li>)}
+                              {(aiReport.executive_summary || []).map(formatListItem).filter(Boolean).map((item, index) => <li key={`summary-${index}`}>{item}</li>)}
                             </ul>
                           </section>
                           <section className="report-section">
@@ -590,7 +592,7 @@ export function InterpretationPage(): JSX.Element {
                           <section className="report-section">
                             <h3>关键时间/节点</h3>
                             <ul>
-                              {(aiReport.project_brief?.key_deadlines || []).map((item, index) => <li key={`deadline-${index}`}>{item}</li>)}
+                              {(aiReport.project_brief?.key_deadlines || []).map(formatListItem).filter(Boolean).map((item, index) => <li key={`deadline-${index}`}>{item}</li>)}
                             </ul>
                           </section>
                           <section className="report-section report-wide">

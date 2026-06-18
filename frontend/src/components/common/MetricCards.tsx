@@ -29,7 +29,7 @@ export function MetricCards({ items }: MetricCardsProps): JSX.Element {
         return (
           <article key={item.title} className="flex min-h-24 min-w-0 items-center gap-4 rounded-2xl border border-slate-200 bg-white px-4 shadow-soft">
             {item.tooltip ? (
-              <Tooltip title={item.tooltip} placement="top" overlayStyle={{ maxWidth: 360 }}>
+              <Tooltip title={item.tooltip} placement="top" styles={{ root: { maxWidth: 360 } }}>
                 {iconNode}
               </Tooltip>
             ) : iconNode}

@@ -528,7 +528,7 @@ export function KnowledgeSearchDrawer({
       width={720}
       onClose={onClose}
       open={visible}
-      bodyStyle={{ display: 'flex', flexDirection: 'column', padding: 0 }}
+      styles={{ body: { display: 'flex', flexDirection: 'column', padding: 0 } }}
     >
       <div className="flex-1 overflow-y-auto bg-slate-50 p-4">
         {messages.length === 0 ? (

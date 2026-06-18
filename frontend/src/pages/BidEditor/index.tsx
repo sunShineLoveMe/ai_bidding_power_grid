@@ -911,7 +911,7 @@ export function BidEditorPage(): JSX.Element {
         width={760}
         onOk={() => void saveLengthSettings()}
         onCancel={() => setLengthSettingsOpen(false)}
-        destroyOnClose
+        destroyOnHidden
       >
         <Alert
           className="mb-4"
@@ -2950,7 +2950,7 @@ export function BidEditorPage(): JSX.Element {
           okButtonProps={{ danger: resetClearContent, loading: resettingGeneration }}
           onOk={() => void resetGenerationStatus()}
           onCancel={() => setResetModalOpen(false)}
-          destroyOnClose
+          destroyOnHidden
         >
           <Alert
             type="warning"
