@@ -38,6 +38,19 @@ CUSTOMER_DECISION_KEYS = {
     "authorized_representative_phone",
     "signature_date",
 }
+SIMULATED_FORMAL_VALUES = {
+    "total_bid_price": "8888888.00 元（内部测试模拟值，非正式报价）",
+    "total_bid_price_upper": "人民币捌佰捌拾捌万捌仟捌佰捌拾捌元整（内部测试模拟值，非正式报价）",
+    "tax_rate": "13%（内部测试模拟值）",
+    "bid_bond_amount": "100000.00 元（内部测试模拟值，非正式保证金金额）",
+    "bid_bond_form": "投标保证保险（内部测试模拟值）",
+    "delivery_period": "按招标文件及合同约定执行，内部测试模拟为合同签订后 30 日内完成供货。",
+    "warranty_period": "按招标文件及合同约定执行，内部测试模拟为到货验收合格后 12 个月。",
+    "bid_validity_days": "90",
+    "authorized_representative": "张三（内部测试模拟授权代表）",
+    "authorized_representative_id": "110101199001011234（内部测试模拟身份证号）",
+    "signature_date": "2026年06月19日（内部测试模拟签署日期）",
+}
 FORBIDDEN_TOPICS = [
     "水利施工",
     "桩基",
@@ -119,6 +132,20 @@ def _confirmed_values_from_report(report: dict[str, Any]) -> tuple[dict[str, str
     return values, auto_applied, blocked
 
 
+def _apply_simulated_formal_values(values: dict[str, str]) -> list[dict[str, str]]:
+    simulated: list[dict[str, str]] = []
+    for key, value in SIMULATED_FORMAL_VALUES.items():
+        if values.get(key):
+            continue
+        values[key] = value
+        simulated.append({
+            "key": key,
+            "value_preview": value[:240],
+            "source": "simulated_for_internal_regression",
+        })
+    return simulated
+
+
 def _write_summary(path: Path, report: dict[str, Any]) -> None:
     lines = [
         f"# {report['run_id']} — 泰昌正式导出门禁收口",
@@ -132,6 +159,7 @@ def _write_summary(path: Path, report: dict[str, Any]) -> None:
         "",
         f"- 应用前导确认字段：{report['prefill']['confirmed_value_count']} 个",
         f"- 自动采纳非客户决策候选：{len(report['prefill']['auto_applied'])} 个",
+        f"- 内部测试模拟字段：{len(report['prefill'].get('simulated_values') or [])} 个",
         f"- 客户决策/缺候选字段保留阻断：{len(report['prefill']['blocked_required'])} 个",
         f"- 目标空章节：{report['sections']['target_count']} 个",
         f"- 成功生成章节：{report['sections']['generated_count']} 个",
@@ -148,6 +176,16 @@ def _write_summary(path: Path, report: dict[str, Any]) -> None:
         lines.extend(
             f"- {item['label']}（`{item['key']}`）：{item['value_preview']}"
             for item in report["prefill"]["auto_applied"]
+        )
+    else:
+        lines.append("- 无")
+    lines.extend(["", "## 内部测试模拟字段", ""])
+    if report["prefill"].get("simulated_values"):
+        lines.append("> 以下字段仅用于内部演示/回归测试，不代表正式投标承诺。")
+        lines.append("")
+        lines.extend(
+            f"- `{item['key']}`：{item['value_preview']}"
+            for item in report["prefill"]["simulated_values"]
         )
     else:
         lines.append("- 无")
@@ -181,6 +219,11 @@ def main() -> int:
     parser.add_argument("--limit", type=int, default=0)
     parser.add_argument("--include-containers", action="store_true", help="Generate empty container sections too.")
     parser.add_argument("--no-generate", action="store_true")
+    parser.add_argument(
+        "--simulate-formal-fields",
+        action="store_true",
+        help="Fill remaining formal customer-decision fields with explicit internal-regression simulated values.",
+    )
     args = parser.parse_args()
 
     os.environ["APP_AUTH_ENABLED"] = "false"
@@ -192,7 +235,7 @@ def main() -> int:
 
     import main as flask_main  # noqa: WPS433
     from backend.api.routes import _snapshot_export_sections  # noqa: WPS433
-    from backend.db.supabase_repo import get_project_interpretation, get_supabase_client, list_bid_sections, update_bid_section_content  # noqa: WPS433
+    from backend.db.supabase_repo import get_project_interpretation, get_supabase_client, list_bid_sections, update_bid_analysis_project_meta, update_bid_section_content  # noqa: WPS433
     from backend.services.bid_prefill import apply_bid_prefill_confirmation, build_bid_prefill_report  # noqa: WPS433
     from backend.services.section_generation import generate_and_save_bid_section  # noqa: WPS433
     from backend.services.taichang_bid_context import build_taichang_verified_fact_context  # noqa: WPS433
@@ -209,6 +252,7 @@ def main() -> int:
 
         prefill_report = build_bid_prefill_report(args.project_id)
         confirmed_values, auto_applied, blocked_required = _confirmed_values_from_report(prefill_report)
+        simulated_values = _apply_simulated_formal_values(confirmed_values) if args.simulate_formal_fields else []
         prefill_application = (
             {
                 "dry_run": True,
@@ -220,6 +264,18 @@ def main() -> int:
             if args.no_generate
             else apply_bid_prefill_confirmation(args.project_id, confirmed_values)
         )
+        if args.simulate_formal_fields and not args.no_generate:
+            interpretation_after_prefill = get_project_interpretation(args.project_id)
+            project_meta_after_prefill = (interpretation_after_prefill.get("analysis") or {}).get("project_meta") or {}
+            bid_prefill_meta = project_meta_after_prefill.get("bid_prefill") if isinstance(project_meta_after_prefill.get("bid_prefill"), dict) else {}
+            bid_prefill_meta.update({
+                "simulated_for_regression": True,
+                "simulation_scope": "internal_demo_complete_bid_only_not_formal_bid_commitment",
+                "simulation_run_id": args.run_id,
+                "simulated_values": simulated_values,
+                "simulation_notice": "这些字段为内部演示/回归测试模拟值，不代表正式投标报价、保证金、授权或交付承诺。",
+            })
+            update_bid_analysis_project_meta(args.project_id, {**project_meta_after_prefill, "bid_prefill": bid_prefill_meta})
 
         sections = list_bid_sections(args.project_id)
         parent_ids = {str(row.get("parent_id")) for row in sections if row.get("parent_id")}
@@ -363,6 +419,8 @@ def main() -> int:
         "backup_path": str(backup_path.relative_to(PROJECT_ROOT)),
         "prefill": {
             "confirmed_value_count": len(confirmed_values),
+            "simulated_for_regression": bool(args.simulate_formal_fields),
+            "simulated_values": simulated_values,
             "auto_applied": auto_applied,
             "blocked_required": blocked_required,
             "application": prefill_application,

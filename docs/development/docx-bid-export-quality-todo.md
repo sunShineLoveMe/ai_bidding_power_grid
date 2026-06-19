@@ -247,3 +247,19 @@
 - 剩余缺口字段：投标总价、投标总价大写、税率、投标保证金金额、投标保证金形式、交货期承诺、质保期承诺、投标有效期、授权代表、授权代表身份证号、签署日期。
 - 自动化回归：`.venv/bin/python -m pytest tests/test_docx_export.py -q`，结果 `37 passed, 1 warning`；本地 RAG 门禁 `run_20260618_p1c10_formal_gate_closure` PASS。
 - 结论：DOCX/PDF 的正文完整度、图片资产、版式和字段刷新已达到自动化门禁要求；正式交付门禁仍应保持阻断，直到客户确认 11 个投标决策字段后重新导出。
+
+### 2026-06-19 P1C-11 内部演示完整标书验收记录
+
+- 背景：客户未回复正式投标决策字段，但当前目标是先参考客户提供的标书模板，真实输出一份完整标书用于内部演示和系统回归。
+- 处理方式：`scripts/rag/run_taichang_formal_export_gate_closure.py` 新增 `--simulate-formal-fields` 显式开关，仅在内部演示回归时补齐投标总价、税率、保证金、交货期、质保期、投标有效期、授权代表、身份证号和签署日期等 11 个字段；metadata 标记 `simulated_for_regression=true`，并记录“非正式投标承诺”说明。
+- 模拟值口径：投标总价 `8888888.00 元`、税率 `13%`、投标保证金 `100000.00 元`、投标保证金形式 `投标保证保险`、交货期模拟合同签订后 30 日内供货、质保期模拟到货验收合格后 12 个月、投标有效期 `90` 天、授权代表和身份证号使用测试值。
+- 真实项目：`a1d853bc-ca4e-43b4-bbea-256f561c8a3d`。
+- 模拟确认值应用记录：`docs/development/runs/run_20260619_p1c11_simulated_complete_bid.md`，状态 `PASS`；应用前导确认字段 `31` 个，其中内部测试模拟字段 `11` 个；收口后空叶子章节 `0`，正文占位符 `0`，正式必填缺口 `0`。
+- 真实导出链路：`build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice -> LibreOffice PDF`。
+- 验证记录：`docs/development/runs/run_20260619_p1c11_simulated_complete_bid_acceptance.md` 和对应 JSON。
+- 本次真实验收结果：状态 `PASS`；章节节点 `102`，有正文章节 `102`，目录条目 `102`，表格 `166` 个；图片候选/选中/插入/失败为 `597/23/23/0`；补充包项目业绩资产 `2`、检测能力资产 `4`、检验报告资产 `5`；封面、目录、页眉页脚、字体、表格、图片比例、内部字段泄露检查、页码字段和 LibreOffice 字段刷新均通过。
+- 输出文件：
+  - DOCX：`outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.docx`
+  - PDF：`outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.pdf`
+- 自动化回归：`.venv/bin/python -m pytest tests/test_bid_prefill.py tests/test_docx_export.py -q`，结果 `46 passed, 1 warning`；本地 RAG 门禁 `run_20260619_p1c11_simulated_complete_bid` PASS。
+- 结论：完整标书演示版已真实生成并通过 DOCX/PDF 成品结构验收；该版本依赖模拟字段，只能用于内部演示/回归测试，正式投标前必须替换为客户真实确认值并复跑验收。

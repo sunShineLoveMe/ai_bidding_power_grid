@@ -1,0 +1,679 @@
+{
+  "run_id": "run_20260619_p1c11_simulated_complete_bid",
+  "generated_at": "2026-06-19T22:42:43",
+  "project_id": "a1d853bc-ca4e-43b4-bbea-256f561c8a3d",
+  "status": "PASS",
+  "elapsed_seconds": 4.66,
+  "backup_path": "docs/development/runs/run_20260619_p1c11_simulated_complete_bid_before_sections_backup.json",
+  "prefill": {
+    "confirmed_value_count": 31,
+    "simulated_for_regression": true,
+    "simulated_values": [
+      {
+        "key": "total_bid_price",
+        "value_preview": "8888888.00 元（内部测试模拟值，非正式报价）",
+        "source": "simulated_for_internal_regression"
+      },
+      {
+        "key": "total_bid_price_upper",
+        "value_preview": "人民币捌佰捌拾捌万捌仟捌佰捌拾捌元整（内部测试模拟值，非正式报价）",
+        "source": "simulated_for_internal_regression"
+      },
+      {
+        "key": "tax_rate",
+        "value_preview": "13%（内部测试模拟值）",
+        "source": "simulated_for_internal_regression"
+      },
+      {
+        "key": "bid_bond_amount",
+        "value_preview": "100000.00 元（内部测试模拟值，非正式保证金金额）",
+        "source": "simulated_for_internal_regression"
+      },
+      {
+        "key": "bid_bond_form",
+        "value_preview": "投标保证保险（内部测试模拟值）",
+        "source": "simulated_for_internal_regression"
+      },
+      {
+        "key": "delivery_period",
+        "value_preview": "按招标文件及合同约定执行，内部测试模拟为合同签订后 30 日内完成供货。",
+        "source": "simulated_for_internal_regression"
+      },
+      {
+        "key": "warranty_period",
+        "value_preview": "按招标文件及合同约定执行，内部测试模拟为到货验收合格后 12 个月。",
+        "source": "simulated_for_internal_regression"
+      },
+      {
+        "key": "bid_validity_days",
+        "value_preview": "90",
+        "source": "simulated_for_internal_regression"
+      },
+      {
+        "key": "authorized_representative",
+        "value_preview": "张三（内部测试模拟授权代表）",
+        "source": "simulated_for_internal_regression"
+      },
+      {
+        "key": "authorized_representative_id",
+        "value_preview": "110101199001011234（内部测试模拟身份证号）",
+        "source": "simulated_for_internal_regression"
+      },
+      {
+        "key": "signature_date",
+        "value_preview": "2026年06月19日（内部测试模拟签署日期）",
+        "source": "simulated_for_internal_regression"
+      }
+    ],
+    "auto_applied": [],
+    "blocked_required": [
+      {
+        "key": "total_bid_price",
+        "label": "投标总价",
+        "status": "customer_required",
+        "source": "blocked_customer_decision",
+        "customer_decision": true
+      },
+      {
+        "key": "total_bid_price_upper",
+        "label": "投标总价大写",
+        "status": "customer_required",
+        "source": "blocked_customer_decision",
+        "customer_decision": true
+      },
+      {
+        "key": "tax_rate",
+        "label": "税率",
+        "status": "customer_required",
+        "source": "blocked_customer_decision",
+        "customer_decision": true
+      },
+      {
+        "key": "bid_bond_amount",
+        "label": "投标保证金金额",
+        "status": "customer_required",
+        "source": "blocked_customer_decision",
+        "customer_decision": true
+      },
+      {
+        "key": "bid_bond_form",
+        "label": "投标保证金形式",
+        "status": "customer_required",
+        "source": "blocked_customer_decision",
+        "customer_decision": true
+      },
+      {
+        "key": "delivery_period",
+        "label": "交货期承诺",
+        "status": "manual_confirm",
+        "source": "blocked_customer_decision",
+        "customer_decision": true
+      },
+      {
+        "key": "warranty_period",
+        "label": "质保期承诺",
+        "status": "manual_confirm",
+        "source": "blocked_customer_decision",
+        "customer_decision": true
+      },
+      {
+        "key": "bid_validity_days",
+        "label": "投标有效期",
+        "status": "manual_confirm",
+        "source": "missing_candidate",
+        "customer_decision": false
+      },
+      {
+        "key": "authorized_representative",
+        "label": "授权代表",
+        "status": "customer_required",
+        "source": "blocked_customer_decision",
+        "customer_decision": true
+      },
+      {
+        "key": "authorized_representative_id",
+        "label": "授权代表身份证号",
+        "status": "customer_required",
+        "source": "blocked_customer_decision",
+        "customer_decision": true
+      },
+      {
+        "key": "signature_date",
+        "label": "签署日期",
+        "status": "customer_required",
+        "source": "blocked_customer_decision",
+        "customer_decision": true
+      }
+    ],
+    "application": {
+      "schema_version": "2026-06-16.v1",
+      "confirmed_at": "2026-06-19T22:42:41",
+      "applied_at": "2026-06-19T22:42:41",
+      "confirmed_values": {
+        "project_name": "国网辽宁电力2025年第三次物资协议库存招标采购",
+        "tender_no": "2225AC",
+        "tender_unit": "国网辽宁省电力有限公司",
+        "package_no": "包1",
+        "package_name": "电缆保护管CPVC、电缆保护管MPP（需按目标包确认）",
+        "material_category": "电缆保护管",
+        "goods_list_summary": "辽宁 2025-03 2225AC 货物清单结构化行级记录：共 38 行需求；包号：包1；物料：电缆保护管CPVC、电缆保护管MPP；规格：φ50、φ100、φ150、φ200；数量汇总：包1 102583米；交货地点示例：辽宁省抚顺市、辽宁省朝阳市、辽宁省本溪市、辽宁省沈阳市、辽宁省营口市、辽宁省葫芦岛市；技术规范编码 10 个",
+        "delivery_place": "见投标邀请书",
+        "bidder_name": "河北泰昌电力器材科技有限公司",
+        "unified_social_credit_code": "91130607056539515C",
+        "legal_representative": "晁坤琳",
+        "company_address": "河北省保定市满城区陉阳驿村",
+        "qualification_assets": "营业执照副本；质量管理体系认证证书；环境管理体系认证证书；职业健康安全管理体系认证证书",
+        "inspection_reports": "CPVC电缆保护管检验报告（报告编号：2024100312005501713）；MPP电缆保护管检验报告（报告编号：2024100312005501712）",
+        "project_performance_cases": "{'id': 'ee3b0a64-4152-4bc1-9643-62c3873c4979', 'title': '泰昌157-保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书第2页', 'category': '项目业绩', 'assetType': 'qualification_image'}；{'id': '6bde9fe2-ce32-4e2c-9cbc-9fd4696de3d2', 'title': '泰昌157-保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书第1页', 'category': '项目业绩', 'assetType': 'qualification_image'}；{'id': '2c918f6d-aa3a-4ed0-88b7-a490f554eb54', 'title': '泰昌TJ20220002363合同协议书（双方已签章）第15页', 'category': '项目业绩', 'assetType': 'qualification_image'}；{'id': '8e8b12f5-c3d5-401e-920c-c84a262a7a5b', 'title': '泰昌TJ20220002363合同协议书（双方已签章）第14页', 'category': '项目业绩', 'assetType': 'qualification_image'}；{'id': 'f340d05f-4f6d-494a-ba0e-d33e0d8b6692', 'title': '泰昌TJ20220002363合同协议书（双方已签章）第13页', 'category': '项目业绩', 'assetType': 'qualification_image'}；{'id': '84f7a1b2-05d3-4f7b-bf0e-e6fc0dabea51', 'title': '泰昌TJ20220002363合同协议书（双方已签章）第12页', 'category': '项目业绩', 'assetType': 'qualification_image'}；{'id': 'fff62a89-d252-4ebd-9ffa-8e6223a1c0fc', 'title': '泰昌TJ20220002363合同协议书（双方已签章）第11页', 'category': '项目业绩', 'assetType': 'qualification_image'}；{'id': '70f8c8d6-de6f-447b-91ee-1f192f958fb8', 'title': '泰昌TJ20220002363合同协议书（双方已签章）第10页', 'category': '项目业绩', 'assetType': 'qualification_image'}",
+        "product_models": "CPVC电缆保护管：DS 250×15×6000 SN16 PVC-C；MPP电缆保护管：DF 250×22×9000 SN40 MPP",
+        "technical_parameter_summary": "辽宁 2025-03 2225AC 技术参数表结构化记录：共 300 行；包号：包1；物料：电缆保护管CPVC、电缆保护管MPP；公称内径：50、70、90、100、125、150、175、200、225、250；表类型：dimension_parameter_table 151行、bid_response_parameter_table 75行、performance_parameter_table 74行；待补投标响应/保证值 300 行；示例：公称内径 50：公称内径=50、公称壁厚 / 氯化氯乙烯塑料电缆导管环刚度(3%)等级(80℃) / SN12=4、公称长度=6000；公称内径 100：公称内径=100、公称壁厚 / 氯化氯乙烯塑料电缆导管环刚度(3%)等级(80℃) / SN12=5、公称长度=6000；公称内径 125：公称内径=125、公称壁厚 / 氯化氯乙烯塑料电缆导管环刚度(3%)等级(80℃) / SN12=6.5、公称长度=6000；公称内径 150：公称内径=150、公称壁厚 / 氯化氯乙烯塑料电缆导管环刚度(3%)等级(80℃) / SN12=8、公称长度=6000；边界：辽宁技术参数是本次招标要求，不能自动作为泰昌企业事实或覆盖结论。",
+        "technical_deviation_candidates": "技术偏差辅助候选：共 300 行；包号：包1；物料：电缆保护管CPVC、电缆保护管MPP；状态：pending_response 284行、informational 16行；风险：medium 284行、low 16行；待处理示例：公称内径 50：pending_response，补充泰昌响应值、保证值或明确写入无偏差承诺后复核。；公称内径 100：pending_response，补充泰昌响应值、保证值或明确写入无偏差承诺后复核。；公称内径 125：pending_response，补充泰昌响应值、保证值或明确写入无偏差承诺后复核。；公称内径 150：pending_response，补充泰昌响应值、保证值或明确写入无偏差承诺后复核。；边界：偏差状态是辅助候选，不自动写入无偏差或正/负偏差结论，需客户确认响应值。",
+        "taichang_parameter_match_summary": "泰昌结构化检验报告参数：共 36 行，报告 2 份；产品：CPVC电缆保护管、MPP电缆保护管；规格型号：DF 250×22×9000 SN40 MPP、DS 250×15×6000 SN16 PVC-C；报告编号：2024100312005501712、2024100312005501713；泰昌已结构化公称内径：250；辽宁货物清单规格中未由现有泰昌结构化报告直接覆盖的内径：50、100、150、200；可引用实测示例：CPVC电缆保护管 尺寸-平均内径=250.2~250.4（报告2024100312005501713）；CPVC电缆保护管 尺寸-壁厚=15.2~15.3（报告2024100312005501713）；CPVC电缆保护管 尺寸-承口平均内径=280.5（报告2024100312005501713）；CPVC电缆保护管 尺寸-承口壁厚=15.1~15.3（报告2024100312005501713）；边界：泰昌参数来自企业检验报告；辽宁需求仅作 QA/异常校验，不构成覆盖辽宁全部规格的结论。",
+        "product_image_assets": "{'id': '7e1feea3-277f-4656-888c-ed166c055aa6', 'title': '泰昌绿色电力认证证书第1页', 'category': '绿色低碳资料', 'assetType': 'product_image'}；{'id': '96dffe93-5d4c-4b26-b025-2f9013e52658', 'title': '泰昌绿色发展规划报告第18页', 'category': '绿色低碳资料', 'assetType': 'product_image'}；{'id': '45762eaf-de3e-4ce7-bfe0-aedd90dbfa28', 'title': '泰昌绿色发展规划报告第17页', 'category': '绿色低碳资料', 'assetType': 'product_image'}；{'id': '04cc9646-61a5-4c33-aea6-a6b16ed6a27a', 'title': '泰昌绿色发展规划报告第16页', 'category': '绿色低碳资料', 'assetType': 'product_image'}；{'id': 'e261aca2-6303-441e-9605-a29ccf3a1968', 'title': '泰昌绿色发展规划报告第15页', 'category': '绿色低碳资料', 'assetType': 'product_image'}；{'id': 'd2d5fadc-1b8b-4d9a-8648-86999b660b5a', 'title': '泰昌绿色发展规划报告第14页', 'category': '绿色低碳资料', 'assetType': 'product_image'}；{'id': '02f0da52-f5c6-422f-9834-fc4fb415e0f9', 'title': '泰昌绿色发展规划报告第13页', 'category': '绿色低碳资料', 'assetType': 'product_image'}；{'id': 'd2282a28-42b6-42a2-8c29-9eb41295fb14', 'title': '泰昌绿色发展规划报告第12页', 'category': '绿色低碳资料', 'assetType': 'product_image'}",
+        "total_bid_price": "8888888.00 元（内部测试模拟值，非正式报价）",
+        "total_bid_price_upper": "人民币捌佰捌拾捌万捌仟捌佰捌拾捌元整（内部测试模拟值，非正式报价）",
+        "tax_rate": "13%（内部测试模拟值）",
+        "bid_bond_amount": "100000.00 元（内部测试模拟值，非正式保证金金额）",
+        "bid_bond_form": "投标保证保险（内部测试模拟值）",
+        "delivery_period": "按招标文件及合同约定执行，内部测试模拟为合同签订后 30 日内完成供货。",
+        "warranty_period": "按招标文件及合同约定执行，内部测试模拟为到货验收合格后 12 个月。",
+        "bid_validity_days": "90",
+        "authorized_representative": "张三（内部测试模拟授权代表）",
+        "authorized_representative_id": "110101199001011234（内部测试模拟身份证号）",
+        "signature_date": "2026年06月19日（内部测试模拟签署日期）"
+      },
+      "changed_section_count": 0,
+      "replacement_count": 0,
+      "unresolved_placeholder_count": 0,
+      "unresolved_placeholders": [],
+      "missing_formal_required_fields": [],
+      "section_application_summary": [
+        {
+          "sectionId": "264e9dd1-3cc7-4ee4-9251-ef973c629c27",
+          "sectionTitle": "投标函及法定格式文件",
+          "fieldCount": 3,
+          "confirmedFieldCount": 3,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": "845a2776-244b-4858-a51e-ab061be07955",
+          "sectionTitle": "法定代表人身份证明及授权委托书",
+          "fieldCount": 2,
+          "confirmedFieldCount": 2,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": "94f534f8-3bf8-4bad-8de6-26da222af6a4",
+          "sectionTitle": "商务响应文件",
+          "fieldCount": 1,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": [
+            "含招标要求候选，需客户确认后才能写入本次投标响应。",
+            "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。"
+          ]
+        },
+        {
+          "sectionId": "bedb004f-2344-4a9c-a06b-612ea3816365",
+          "sectionTitle": "（一）商务偏差表",
+          "fieldCount": 1,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": "b3e4594b-c107-47f0-8587-dc79bc4bbcaa",
+          "sectionTitle": "投标保证金",
+          "fieldCount": 1,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": "6966a5d3-43b3-4df0-ad2c-a1d020329027",
+          "sectionTitle": "符合招标文件投标人资格要求的证明文件",
+          "fieldCount": 1,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": "60bd57f7-cc20-4a00-a271-88195015422e",
+          "sectionTitle": "技术评分支撑材料",
+          "fieldCount": 1,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": "490b2695-be74-4d05-abc7-a106276b0e0a",
+          "sectionTitle": "技术响应文件",
+          "fieldCount": 10,
+          "confirmedFieldCount": 10,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": [
+            "含招标要求候选，需客户确认后才能写入本次投标响应。",
+            "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。",
+            "偏差表候选不自动生成无偏差结论。"
+          ]
+        },
+        {
+          "sectionId": "ec6e0c99-b72d-4d49-961d-db4a5f329b37",
+          "sectionTitle": "技术偏差表",
+          "fieldCount": 2,
+          "confirmedFieldCount": 2,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": [
+            "含招标要求候选，需客户确认后才能写入本次投标响应。",
+            "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。",
+            "偏差表候选不自动生成无偏差结论。"
+          ]
+        },
+        {
+          "sectionId": "c4f8afc5-3127-430a-9d49-5d651e9d3dc2",
+          "sectionTitle": "业绩文件",
+          "fieldCount": 1,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": "d4d9161f-3d00-4a84-bd74-cf5d80bc3c56",
+          "sectionTitle": "技术特性参数表",
+          "fieldCount": 2,
+          "confirmedFieldCount": 2,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": [
+            "含招标要求候选，需客户确认后才能写入本次投标响应。",
+            "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。"
+          ]
+        },
+        {
+          "sectionId": "8ee6d00b-3590-4706-ba4e-52107ca2dfe1",
+          "sectionTitle": "产品制造与质量控制",
+          "fieldCount": 3,
+          "confirmedFieldCount": 3,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": "bf7fbe66-c062-4728-94f7-d06ef2c83e35",
+          "sectionTitle": "供货组织与交付保障",
+          "fieldCount": 1,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": "603917aa-740f-4fd9-a79e-a409cd491834",
+          "sectionTitle": "报价文件及货物清单",
+          "fieldCount": 5,
+          "confirmedFieldCount": 5,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": [
+            "含招标要求候选，需客户确认后才能写入本次投标响应。",
+            "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。"
+          ]
+        },
+        {
+          "sectionId": "ad06de1f-cfc8-49fd-92e3-613c6d30d0fe",
+          "sectionTitle": "附件清单及页码索引",
+          "fieldCount": 4,
+          "confirmedFieldCount": 4,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": [
+            "含招标要求候选，需客户确认后才能写入本次投标响应。",
+            "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。",
+            "偏差表候选不自动生成无偏差结论。"
+          ]
+        },
+        {
+          "sectionId": null,
+          "sectionTitle": "产品参数",
+          "fieldCount": 1,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": null,
+          "sectionTitle": "企业能力展示",
+          "fieldCount": 1,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": null,
+          "sectionTitle": "封面",
+          "fieldCount": 4,
+          "confirmedFieldCount": 4,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": [
+            "含招标要求候选，需客户确认后才能写入本次投标响应。",
+            "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。"
+          ]
+        },
+        {
+          "sectionId": null,
+          "sectionTitle": "检验报告",
+          "fieldCount": 2,
+          "confirmedFieldCount": 2,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": null,
+          "sectionTitle": "正文页眉",
+          "fieldCount": 1,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": null,
+          "sectionTitle": "目录",
+          "fieldCount": 1,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": null,
+          "sectionTitle": "签章页",
+          "fieldCount": 1,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        }
+      ],
+      "export_gate": {
+        "ready": true,
+        "sectionCount": 22,
+        "confirmedSectionCount": 22,
+        "unresolvedPlaceholderCount": 0,
+        "unresolvedPlaceholders": [],
+        "missingFormalRequiredFields": [],
+        "section_application_summary": [
+          {
+            "sectionId": "264e9dd1-3cc7-4ee4-9251-ef973c629c27",
+            "sectionTitle": "投标函及法定格式文件",
+            "fieldCount": 3,
+            "confirmedFieldCount": 3,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": "845a2776-244b-4858-a51e-ab061be07955",
+            "sectionTitle": "法定代表人身份证明及授权委托书",
+            "fieldCount": 2,
+            "confirmedFieldCount": 2,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": "94f534f8-3bf8-4bad-8de6-26da222af6a4",
+            "sectionTitle": "商务响应文件",
+            "fieldCount": 1,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": [
+              "含招标要求候选，需客户确认后才能写入本次投标响应。",
+              "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。"
+            ]
+          },
+          {
+            "sectionId": "bedb004f-2344-4a9c-a06b-612ea3816365",
+            "sectionTitle": "（一）商务偏差表",
+            "fieldCount": 1,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": "b3e4594b-c107-47f0-8587-dc79bc4bbcaa",
+            "sectionTitle": "投标保证金",
+            "fieldCount": 1,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": "6966a5d3-43b3-4df0-ad2c-a1d020329027",
+            "sectionTitle": "符合招标文件投标人资格要求的证明文件",
+            "fieldCount": 1,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": "60bd57f7-cc20-4a00-a271-88195015422e",
+            "sectionTitle": "技术评分支撑材料",
+            "fieldCount": 1,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": "490b2695-be74-4d05-abc7-a106276b0e0a",
+            "sectionTitle": "技术响应文件",
+            "fieldCount": 10,
+            "confirmedFieldCount": 10,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": [
+              "含招标要求候选，需客户确认后才能写入本次投标响应。",
+              "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。",
+              "偏差表候选不自动生成无偏差结论。"
+            ]
+          },
+          {
+            "sectionId": "ec6e0c99-b72d-4d49-961d-db4a5f329b37",
+            "sectionTitle": "技术偏差表",
+            "fieldCount": 2,
+            "confirmedFieldCount": 2,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": [
+              "含招标要求候选，需客户确认后才能写入本次投标响应。",
+              "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。",
+              "偏差表候选不自动生成无偏差结论。"
+            ]
+          },
+          {
+            "sectionId": "c4f8afc5-3127-430a-9d49-5d651e9d3dc2",
+            "sectionTitle": "业绩文件",
+            "fieldCount": 1,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": "d4d9161f-3d00-4a84-bd74-cf5d80bc3c56",
+            "sectionTitle": "技术特性参数表",
+            "fieldCount": 2,
+            "confirmedFieldCount": 2,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": [
+              "含招标要求候选，需客户确认后才能写入本次投标响应。",
+              "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。"
+            ]
+          },
+          {
+            "sectionId": "8ee6d00b-3590-4706-ba4e-52107ca2dfe1",
+            "sectionTitle": "产品制造与质量控制",
+            "fieldCount": 3,
+            "confirmedFieldCount": 3,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": "bf7fbe66-c062-4728-94f7-d06ef2c83e35",
+            "sectionTitle": "供货组织与交付保障",
+            "fieldCount": 1,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": "603917aa-740f-4fd9-a79e-a409cd491834",
+            "sectionTitle": "报价文件及货物清单",
+            "fieldCount": 5,
+            "confirmedFieldCount": 5,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": [
+              "含招标要求候选，需客户确认后才能写入本次投标响应。",
+              "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。"
+            ]
+          },
+          {
+            "sectionId": "ad06de1f-cfc8-49fd-92e3-613c6d30d0fe",
+            "sectionTitle": "附件清单及页码索引",
+            "fieldCount": 4,
+            "confirmedFieldCount": 4,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": [
+              "含招标要求候选，需客户确认后才能写入本次投标响应。",
+              "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。",
+              "偏差表候选不自动生成无偏差结论。"
+            ]
+          },
+          {
+            "sectionId": null,
+            "sectionTitle": "产品参数",
+            "fieldCount": 1,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": null,
+            "sectionTitle": "企业能力展示",
+            "fieldCount": 1,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": null,
+            "sectionTitle": "封面",
+            "fieldCount": 4,
+            "confirmedFieldCount": 4,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": [
+              "含招标要求候选，需客户确认后才能写入本次投标响应。",
+              "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。"
+            ]
+          },
+          {
+            "sectionId": null,
+            "sectionTitle": "检验报告",
+            "fieldCount": 2,
+            "confirmedFieldCount": 2,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": null,
+            "sectionTitle": "正文页眉",
+            "fieldCount": 1,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": null,
+            "sectionTitle": "目录",
+            "fieldCount": 1,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": null,
+            "sectionTitle": "签章页",
+            "fieldCount": 1,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          }
+        ]
+      },
+      "ready_for_formal_export": true,
+      "changed_sections": []
+    },
+    "final_summary": {
+      "totalFields": 35,
+      "systemRecognized": 5,
+      "enterpriseLibrary": 9,
+      "customerRequired": 10,
+      "manualConfirm": 11,
+      "formalRequiredGaps": 16,
+      "readonlyFirst": true,
+      "affectsSectionsSnapshotExport": true,
+      "readyForFormalExport": true,
+      "unresolvedPlaceholderCount": 0
+    }
+  },
+  "sections": {
+    "target_count": 0,
+    "generated_count": 0,
+    "failed_count": 0,
+    "placeholder_replacements": 0,
+    "results": [],
+    "failures": []
+  },
+  "after": {
+    "total_sections": 102,
+    "non_empty_sections": 102,
+    "empty_leaf_sections": 0,
+    "empty_leaf_titles": [],
+    "placeholder_count": 0,
+    "missing_formal_required_fields": [],
+    "ready_for_formal_export": true
+  }
+}

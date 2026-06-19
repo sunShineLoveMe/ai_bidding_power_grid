@@ -8,6 +8,84 @@
 
 ---
 
+## Run 20260619-P1C-11 — 内部演示完整标书模拟确认值回归（2026-06-19）
+
+> 模拟确认值应用记录：`docs/development/runs/run_20260619_p1c11_simulated_complete_bid.md`
+> DOCX/PDF 验收记录：`docs/development/runs/run_20260619_p1c11_simulated_complete_bid_acceptance.md`
+> 本地门禁：`docs/rag/runs/run_20260619_p1c11_simulated_complete_bid_summary.md`
+> 增量门禁：`docs/rag/runs/run_20260619_p1c11_simulated_complete_bid_incremental_summary.md`
+
+### 触发原因
+
+客户未回复投标总价、保证金、授权代表等正式决策字段，但当前目标是先真实生成一份参考客户模板的完整标书用于内部演示和系统回归。因此本轮通过显式开关 `--simulate-formal-fields` 写入模拟确认值，并在 metadata 标记 `simulated_for_regression=true`。这些值不代表正式投标承诺。
+
+### 模拟字段
+
+| 字段 | 模拟值口径 |
+| --- | --- |
+| 投标总价 | `8888888.00 元（内部测试模拟值，非正式报价）` |
+| 投标总价大写 | `人民币捌佰捌拾捌万捌仟捌佰捌拾捌元整（内部测试模拟值，非正式报价）` |
+| 税率 | `13%（内部测试模拟值）` |
+| 投标保证金金额 | `100000.00 元（内部测试模拟值，非正式保证金金额）` |
+| 投标保证金形式 | `投标保证保险（内部测试模拟值）` |
+| 交货期承诺 | `按招标文件及合同约定执行，内部测试模拟为合同签订后 30 日内完成供货。` |
+| 质保期承诺 | `按招标文件及合同约定执行，内部测试模拟为到货验收合格后 12 个月。` |
+| 投标有效期 | `90` |
+| 授权代表 | `张三（内部测试模拟授权代表）` |
+| 授权代表身份证号 | `110101199001011234（内部测试模拟身份证号）` |
+| 签署日期 | `2026年06月19日（内部测试模拟签署日期）` |
+
+### 真实项目验收
+
+真实项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d`：
+
+| 项 | 结果 |
+| --- | ---: |
+| 章节节点 | 102 |
+| 有正文章节 | 102 |
+| 空叶子章节 | 0 |
+| 正文占位符 | 0 |
+| 正式必填缺口 | 0 |
+| 图片候选 / 选中 / 插入 / 失败 | 597 / 23 / 23 / 0 |
+| 补充包项目业绩资产 | 2 |
+| 补充包检测能力资产 | 4 |
+| 补充包检验报告资产 | 5 |
+| 表格数量 | 166 |
+| LibreOffice 字段刷新 | refreshed |
+| DOCX/PDF 验收状态 | PASS |
+
+输出文件：
+
+- DOCX：`outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.docx`
+- PDF：`outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.pdf`
+
+### 回归门禁
+
+| 命令 | 结果 |
+| --- | --- |
+| `py_compile scripts/rag/run_taichang_formal_export_gate_closure.py backend/services/bid_prefill.py backend/api/routes.py` | PASS |
+| `pytest tests/test_bid_prefill.py tests/test_docx_export.py -q` | PASS，46 passed |
+| `scripts/rag/run_taichang_formal_export_gate_closure.py --run-id run_20260619_p1c11_simulated_complete_bid --project-id a1d853bc-ca4e-43b4-bbea-256f561c8a3d --include-containers --simulate-formal-fields` | PASS，正式缺口 0 |
+| `scripts/rag/verify_taichang_full_bid_acceptance.py --run-id run_20260619_p1c11_simulated_complete_bid_acceptance --project-id a1d853bc-ca4e-43b4-bbea-256f561c8a3d --expected-min-sections 100 --expected-min-non-empty-sections 100 --pdf-preview` | PASS |
+| `scripts/rag/run_local_rag_gate.py --run-id run_20260619_p1c11_simulated_complete_bid` | PASS |
+
+增量回归指标：
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 281 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 693 ms |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% | 353 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 845 ms |
+
+### 结论
+
+- 内部演示完整标书版已真实导出并通过成品结构验收。
+- 当前 PASS 基于模拟客户确认字段，只能用于演示/回归；正式投标前必须替换为客户真实确认值并复跑验收。
+- RAG 本地门禁 PASS，无召回、来源排序、禁用关键词或跨资料域串扰退化。
+
+---
+
 ## Run 20260618-P1C-10 — 正式导出门禁正文与图片收口回归（2026-06-18）
 
 > 生成收口记录：`docs/development/runs/run_20260618_p1c10_formal_gate_closure.md`
