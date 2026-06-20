@@ -263,3 +263,46 @@
   - PDF：`outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.pdf`
 - 自动化回归：`.venv/bin/python -m pytest tests/test_bid_prefill.py tests/test_docx_export.py -q`，结果 `46 passed, 1 warning`；本地 RAG 门禁 `run_20260619_p1c11_simulated_complete_bid` PASS。
 - 结论：完整标书演示版已真实生成并通过 DOCX/PDF 成品结构验收；该版本依赖模拟字段，只能用于内部演示/回归测试，正式投标前必须替换为客户真实确认值并复跑验收。
+
+### 2026-06-19 客户参考稿封面版式修复记录
+
+- 背景：用户复核 Word 首页后指出封面投标人信息位置和公司 Logo 位置不符合客户参考标书观感，需要严格参考客户提供的河北豪乾商务投标文件模板。
+- 参考稿复核：`商务投标文件-中标，按投标人制作.pdf` 首页无公司 Logo；项目名称位于页面上部，主标题为大号“商务投标文件”，招标编号/分标编号/包号等居中排列，投标人、法定代表人或委托代理人签名位、日期位于页面下半部偏底部。
+- 修复：
+  - 封面默认不再插入 Logo；若后续确需封面 Logo，可通过 `DOCX_COVER_SHOW_LOGO=true` 显式开启。
+  - 封面标题改为“项目名称两行 + 文件类型大标题”结构，不再把项目名称和“投标文件”拼成一行大标题。
+  - “文件类型”不再作为普通字段行重复展示；主标题直接显示 `投标文件/商务投标文件/技术投标文件`。
+  - 投标人、法定代表人或委托代理人签名位、日期下移，并按字段数量动态留白，避免字段多时溢出。
+- 真实导出链路：`build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice -> LibreOffice PDF`。
+- 验证记录：`docs/development/runs/run_20260619_p1c12_reference_cover_layout_acceptance_v2.md` 和对应 JSON。
+- 视觉复核截图：
+  - 参考稿首页：`docs/development/runs/cover_layout_check_20260619/ql_ref/商务投标文件-中标，按投标人制作.pdf.png`
+  - 修复后首页：`docs/development/runs/cover_layout_check_20260619/ql_new_v2/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.pdf.png`
+- 自动化回归：`.venv/bin/python -m pytest tests/test_docx_export.py -q`，结果 `37 passed, 1 warning`。
+- 本次真实验收结果：状态 `PASS`；章节节点 `102`，有正文章节 `102`，空叶子章节 `0`，正文占位符 `0`，正式必填缺口 `0`；图片选中/插入/失败为 `23/23/0`；封面、目录、页眉页脚、字体、表格、图片比例、内部字段泄露检查、页码字段和 LibreOffice 字段刷新均通过。
+
+### 2026-06-19 客户参考稿整份格式对照审计记录
+
+- 背景：不能只修封面第一页；客户提供的标书模板必须作为整份标书的版式基准，覆盖封面、目录、正文、标题、表格、页边距、页眉页脚和字号字体。
+- 新增审计脚本：`scripts/rag/audit_taichang_bid_template_format.py`，抽样对照：
+  - 商务参考稿：`商务投标文件-中标，按投标人制作.pdf`
+  - 技术参考稿：`技术补充文件_电缆保护管CPVC.pdf`
+  - 当前生成 DOCX：泰昌完整标书图文版
+- 参考稿抽样结论：
+  - 页面尺寸：A4，`595.32 x 841.92 pt`。
+  - 封面项目标题：约 `18pt`，主标题“商务投标文件/技术投标文件”：`36pt`。
+  - 封面字段：约 `14.04pt`。
+  - 目录条目：约 `10.56pt`。
+  - 正文可抽取文本：约 `10.56pt`，字体为宋体子集。
+  - 正文一级/二级标题：约 `14.04pt`。
+- 修复：
+  - 封面主标题字号调整为 `36pt`。
+  - 封面项目标题调整为 `18pt`。
+  - 封面字段字号调整为 `14.04pt`。
+  - 目录标题从 `22pt` 收敛为 `10.5pt`，与参考稿目录条目一致。
+  - 正文一级/二级标题统一收敛为 `14pt`；正文、表格继续使用宋体 `10.5pt`，贴近参考稿 `10.56pt`。
+- 审计报告：`docs/development/runs/run_20260619_p1c13_template_format_audit.md` 和对应 JSON；对照项 10 项全部 PASS。
+- 真实导出验收：`docs/development/runs/run_20260619_p1c13_template_format_acceptance.md`，状态 `PASS`，无 failures/warnings。
+- 最终封面截图：`docs/development/runs/cover_layout_check_20260619/ql_p1c13/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.pdf.png`。
+- 自动化回归：`.venv/bin/python -m pytest tests/test_docx_export.py -q`，结果 `37 passed, 1 warning`。
+- 当前边界：河北豪乾参考稿只用于版式、目录、表格结构和表达风格参考，不作为泰昌事实、资质、业绩、设备或人员来源。

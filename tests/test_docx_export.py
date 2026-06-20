@@ -511,10 +511,11 @@ class DocxExportRegressionTest(unittest.TestCase):
             document_xml = document._element.xml
 
             self.assertEqual(non_empty_paragraphs[0], "投标文件")
-            self.assertEqual(non_empty_paragraphs[1], f"投标人：{DOCX_BIDDER_FULL_NAME}")
-            self.assertEqual(non_empty_paragraphs[3], "目  录")
-            self.assertIn("1. 企业营业执照", non_empty_paragraphs[:10])
-            self.assertIn("2. 安全生产许可证", non_empty_paragraphs[:10])
+            self.assertIn(f"投标人：{DOCX_BIDDER_FULL_NAME}", non_empty_paragraphs[:8])
+            self.assertIn("法定代表人或其委托代理人：        （签名）", non_empty_paragraphs[:8])
+            self.assertIn("目  录", non_empty_paragraphs[:10])
+            self.assertTrue(any(item.startswith("1. 企业营业执照") for item in non_empty_paragraphs[:10]))
+            self.assertTrue(any(item.startswith("2. 安全生产许可证") for item in non_empty_paragraphs[:10]))
             self.assertNotIn("招标文件", headings)
             self.assertIn("1. 企业营业执照", headings)
             self.assertIn("2. 安全生产许可证", headings)
@@ -1032,7 +1033,8 @@ class DocxExportRegressionTest(unittest.TestCase):
             document = Document(str(output_path))
             non_empty_paragraphs = [p.text for p in document.paragraphs if p.text.strip()]
 
-            self.assertIn("文件类型：商务投标文件", non_empty_paragraphs[:10])
+            self.assertIn("商务投标文件", non_empty_paragraphs[:10])
+            self.assertNotIn("文件类型：商务投标文件", non_empty_paragraphs[:10])
             self.assertIn("招标编号：2225AC", non_empty_paragraphs[:10])
             self.assertIn("分标编号：2225AC-1408006-3401", non_empty_paragraphs[:10])
             self.assertIn("分标名称：电缆保护管CPVC", non_empty_paragraphs[:10])
@@ -1106,8 +1108,10 @@ class DocxExportRegressionTest(unittest.TestCase):
             cover_text = "\n".join(paragraph.text for paragraph in document.paragraphs[:14])
 
         self.assertEqual(report["template"]["cover_fields"]["招标编号"], "2225AC")
-        self.assertIn("国网辽宁电力2025年第三次物资协议库存招标采购投标文件", text)
-        self.assertIn("文件类型：技术投标文件", text)
+        self.assertIn("国网辽宁电力2025年第三次物资协议", text)
+        self.assertIn("库存招标采购", text)
+        self.assertIn("技术投标文件", text)
+        self.assertNotIn("文件类型：技术投标文件", text)
         self.assertIn("招标编号：2225AC", text)
         self.assertIn("分标编号：102-CPVC", text)
         self.assertIn("包号：包1", text)
@@ -1171,20 +1175,21 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertEqual(report["inserted"], 1)
             self.assertEqual(report["skipped"], 1)
 
-    def test_docx_cover_and_header_insert_high_resolution_taichang_logo(self):
+    def test_docx_reference_cover_omits_logo_but_header_keeps_logo(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             markdown_path = Path(tmpdir) / "logo.md"
             markdown_path.write_text("# 测试投标文件\n\n# 1. 企业简介\n\n正文内容。\n", encoding="utf-8")
 
             output_path, report = convert_md_to_word(markdown_path, return_report=True)
 
-            self.assertTrue(report["logo"]["cover"]["inserted"])
+            self.assertFalse(report["logo"]["cover"]["inserted"])
+            self.assertEqual("reference_template_cover_has_no_logo", report["logo"]["cover"]["reason"])
             self.assertTrue(report["logo"]["header"]["inserted"])
-            self.assertIn("taichang_logo.png", report["logo"]["cover"]["path"])
-            self.assertTrue(report["logo"]["cover"]["auto_cropped"])
-            self.assertGreater(report["logo"]["cover"]["pixel_width"], 1000)
-            self.assertGreater(report["logo"]["cover"]["pixel_height"], 600)
-            self.assertTrue(report["logo"]["cover"]["aspect_ratio_preserved"])
+            self.assertIn("taichang_logo.png", report["logo"]["header"]["path"])
+            self.assertTrue(report["logo"]["header"]["auto_cropped"])
+            self.assertGreater(report["logo"]["header"]["pixel_width"], 1000)
+            self.assertGreater(report["logo"]["header"]["pixel_height"], 600)
+            self.assertTrue(report["logo"]["header"]["aspect_ratio_preserved"])
             with ZipFile(output_path) as archive:
                 media_names = [name for name in archive.namelist() if name.startswith("word/media/")]
                 header_xml = "\n".join(

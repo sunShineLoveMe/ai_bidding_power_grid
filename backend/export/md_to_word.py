@@ -80,14 +80,15 @@ DOCX_PAGE_MARGIN_LEFT_CM = float(os.getenv("DOCX_PAGE_MARGIN_LEFT_CM", "3.18"))
 DOCX_PAGE_MARGIN_RIGHT_CM = float(os.getenv("DOCX_PAGE_MARGIN_RIGHT_CM", "3.18"))
 DOCX_HEADER_DISTANCE_CM = float(os.getenv("DOCX_HEADER_DISTANCE_CM", "0.8"))
 DOCX_FOOTER_DISTANCE_CM = float(os.getenv("DOCX_FOOTER_DISTANCE_CM", "1.48"))
-DOCX_COVER_TITLE_FONT_SIZE = float(os.getenv("DOCX_COVER_TITLE_FONT_SIZE", "22"))
-DOCX_TOC_TITLE_FONT_SIZE = float(os.getenv("DOCX_TOC_TITLE_FONT_SIZE", "22"))
+DOCX_COVER_TITLE_FONT_SIZE = float(os.getenv("DOCX_COVER_TITLE_FONT_SIZE", "36"))
+DOCX_TOC_TITLE_FONT_SIZE = float(os.getenv("DOCX_TOC_TITLE_FONT_SIZE", "10.5"))
 DOCX_TOC_ENTRY_FONT_SIZE = float(os.getenv("DOCX_TOC_ENTRY_FONT_SIZE", "10.5"))
 DOCX_TOC_ENTRY_LINE_SPACING = float(os.getenv("DOCX_TOC_ENTRY_LINE_SPACING", "18"))
 DOCX_TABLE_LINE_SPACING = float(os.getenv("DOCX_TABLE_LINE_SPACING", "16"))
 DOCX_TABLE_CELL_MARGIN_TWIPS = int(os.getenv("DOCX_TABLE_CELL_MARGIN_TWIPS", "100"))
 DOCX_TAICHANG_LOGO_PATH = os.getenv("DOCX_TAICHANG_LOGO_PATH", "assets/icons/taichang_logo.png")
 DOCX_COVER_LOGO_WIDTH_IN = float(os.getenv("DOCX_COVER_LOGO_WIDTH_IN", "1.65"))
+DOCX_COVER_SHOW_LOGO = os.getenv("DOCX_COVER_SHOW_LOGO", "false").lower() in {"1", "true", "yes", "on"}
 DOCX_HEADER_LOGO_WIDTH_IN = float(os.getenv("DOCX_HEADER_LOGO_WIDTH_IN", "0.55"))
 DOCX_IMAGE_MAX_HEIGHT_IN = float(os.getenv("DOCX_IMAGE_MAX_HEIGHT_IN", "9.0"))
 
@@ -769,36 +770,78 @@ def _add_formal_toc_entry(doc, entry: dict, *, tab_position_twips: int) -> None:
     _add_pageref_field(paragraph, str(entry.get("anchor") or ""), placeholder="1")
 
 
+def _split_cover_title_lines(project_title: str) -> list[str]:
+    title = clean_formal_bid_text(project_title)
+    if not title:
+        return []
+    match = re.match(r"^(.*?第[一二三四五六七八九十百千万0-9]+次物资协议)\s*(库存.*)$", title)
+    if match:
+        return [match.group(1).strip(), match.group(2).strip()]
+    if len(title) <= 22:
+        return [title]
+    split_at = len(title) // 2
+    for token in ("协议", "采购", "招标"):
+        idx = title.find(token)
+        if 8 <= idx <= len(title) - 8:
+            split_at = idx + len(token)
+            break
+    return [title[:split_at].strip(), title[split_at:].strip()]
+
+
 def _add_cover_page(doc, project_name: str, cover_fields: dict | None = None, image_report: dict | None = None) -> None:
     bid_title = taichang_bid_document_title((cover_fields or {}).get("项目名称") or project_name)
-    logo_para = doc.add_paragraph()
-    logo_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    apply_image_paragraph_format(logo_para)
-    logo_para.paragraph_format.space_before = Pt(0)
-    logo_para.paragraph_format.space_after = Pt(18)
-    _add_taichang_logo(
-        logo_para,
-        width_in=DOCX_COVER_LOGO_WIDTH_IN,
-        max_height_in=1.1,
-        report=image_report,
-        placement="cover",
-    )
+    if DOCX_COVER_SHOW_LOGO:
+        logo_para = doc.add_paragraph()
+        logo_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        apply_image_paragraph_format(logo_para)
+        logo_para.paragraph_format.space_before = Pt(0)
+        logo_para.paragraph_format.space_after = Pt(18)
+        _add_taichang_logo(
+            logo_para,
+            width_in=DOCX_COVER_LOGO_WIDTH_IN,
+            max_height_in=1.1,
+            report=image_report,
+            placement="cover",
+        )
+    elif image_report is not None:
+        image_report.setdefault("logo", {})["cover"] = {
+            "inserted": False,
+            "reason": "reference_template_cover_has_no_logo",
+        }
 
-    spacer_count = 2
-    for _ in range(spacer_count):
-        doc.add_paragraph()
+    top_spacer = doc.add_paragraph()
+    top_spacer.paragraph_format.first_line_indent = Pt(0)
+    top_spacer.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
+    top_spacer.paragraph_format.line_spacing = Pt(34 if not DOCX_COVER_SHOW_LOGO else 10)
+    top_spacer.paragraph_format.space_before = Pt(0)
+    top_spacer.paragraph_format.space_after = Pt(0)
+
+    project_title = clean_formal_bid_text((cover_fields or {}).get("项目名称") or project_name or "")
+    for line in _split_cover_title_lines(project_title):
+        para = doc.add_paragraph()
+        para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        para.paragraph_format.first_line_indent = Pt(0)
+        para.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
+        para.paragraph_format.line_spacing = Pt(28)
+        para.paragraph_format.space_before = Pt(0)
+        para.paragraph_format.space_after = Pt(0)
+        run = para.add_run(line)
+        apply_run_font(run, east_asia=DOCX_HEADING_EAST_ASIA, size=18, bold=True)
 
     title = doc.add_paragraph()
     title.alignment = WD_ALIGN_PARAGRAPH.CENTER
     title.paragraph_format.first_line_indent = Pt(0)
     title.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
-    title.paragraph_format.line_spacing = Pt(34)
-    title_run = title.add_run(bid_title)
+    title.paragraph_format.line_spacing = Pt(50)
+    title.paragraph_format.space_before = Pt(18)
+    title.paragraph_format.space_after = Pt(20)
+    display_file_type = clean_formal_bid_text((cover_fields or {}).get("文件类型") if cover_fields else "") or "投标文件"
+    if display_file_type == "投标文件" and "商务" in bid_title:
+        display_file_type = "商务投标文件"
+    title_run = title.add_run(display_file_type)
     apply_run_font(title_run, east_asia=DOCX_HEADING_EAST_ASIA, size=DOCX_COVER_TITLE_FONT_SIZE, bold=True)
 
-    doc.add_paragraph()
     formal_fields = {
-        "文件类型": cover_fields.get("文件类型") if cover_fields else "",
         "招标编号": cover_fields.get("招标编号") if cover_fields else "",
         "分标编号": cover_fields.get("分标编号") if cover_fields else "",
         "分标名称": cover_fields.get("分标名称") if cover_fields else "",
@@ -807,29 +850,47 @@ def _add_cover_page(doc, project_name: str, cover_fields: dict | None = None, im
         "招标人": cover_fields.get("招标人") if cover_fields else "",
         "招标代理机构": cover_fields.get("招标代理机构") if cover_fields else "",
     }
-    for label, value in formal_fields.items():
-        if not value:
-            continue
+    visible_formal_fields = [(label, value) for label, value in formal_fields.items() if value]
+    for label, value in visible_formal_fields:
         para = doc.add_paragraph()
         para.alignment = WD_ALIGN_PARAGRAPH.CENTER
         para.paragraph_format.first_line_indent = Pt(0)
         para.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
-        para.paragraph_format.line_spacing = Pt(24)
+        para.paragraph_format.line_spacing = Pt(29)
+        para.paragraph_format.space_before = Pt(0)
+        para.paragraph_format.space_after = Pt(0)
         run = para.add_run(f"{label}：{value}")
-        apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=15)
+        apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=14.04)
 
-    doc.add_paragraph()
     bidder = doc.add_paragraph()
     bidder.alignment = WD_ALIGN_PARAGRAPH.CENTER
     bidder.paragraph_format.first_line_indent = Pt(0)
+    bidder.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
+    bidder.paragraph_format.line_spacing = Pt(26)
+    bidder.paragraph_format.space_before = Pt(max(105, min(205, 285 - len(visible_formal_fields) * 20)))
+    bidder.paragraph_format.space_after = Pt(0)
     bidder_run = bidder.add_run(f"投标人：{DOCX_BIDDER_FULL_NAME}")
-    apply_run_font(bidder_run, east_asia=DOCX_BODY_EAST_ASIA, size=15)
+    apply_run_font(bidder_run, east_asia=DOCX_BODY_EAST_ASIA, size=12)
+
+    signer_para = doc.add_paragraph()
+    signer_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    signer_para.paragraph_format.first_line_indent = Pt(0)
+    signer_para.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
+    signer_para.paragraph_format.line_spacing = Pt(26)
+    signer_para.paragraph_format.space_before = Pt(0)
+    signer_para.paragraph_format.space_after = Pt(0)
+    signer_run = signer_para.add_run("法定代表人或其委托代理人：        （签名）")
+    apply_run_font(signer_run, east_asia=DOCX_BODY_EAST_ASIA, size=12)
 
     date_para = doc.add_paragraph()
     date_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
     date_para.paragraph_format.first_line_indent = Pt(0)
+    date_para.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
+    date_para.paragraph_format.line_spacing = Pt(26)
+    date_para.paragraph_format.space_before = Pt(0)
+    date_para.paragraph_format.space_after = Pt(0)
     date_run = date_para.add_run(datetime.today().strftime("%Y年%m月%d日"))
-    apply_run_font(date_run, east_asia=DOCX_BODY_EAST_ASIA, size=15)
+    apply_run_font(date_run, east_asia=DOCX_BODY_EAST_ASIA, size=12)
     doc.add_page_break()
 
 
@@ -1665,7 +1726,7 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
             if level == 1:
                 p.alignment = WD_ALIGN_PARAGRAPH.LEFT
                 for run in p.runs:
-                    apply_run_font(run, east_asia=DOCX_HEADING_EAST_ASIA, size=16, bold=True)
+                    apply_run_font(run, east_asia=DOCX_HEADING_EAST_ASIA, size=14, bold=True)
             elif level == 2:
                 p.alignment = WD_ALIGN_PARAGRAPH.LEFT
                 for run in p.runs:
