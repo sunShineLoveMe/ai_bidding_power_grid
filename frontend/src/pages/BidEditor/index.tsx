@@ -378,7 +378,7 @@ export function BidEditorPage(): JSX.Element {
   const [contentDirty, setContentDirty] = useState(false);
   const [batchGenerating, setBatchGenerating] = useState(false);
   const [batchTasks, setBatchTasks] = useState<Record<string, BatchTask>>({});
-  const [withImages, setWithImages] = useState(false);
+  const withImages = true;
   const [resetModalOpen, setResetModalOpen] = useState(false);
   const [resetClearContent, setResetClearContent] = useState(false);
   const [resettingGeneration, setResettingGeneration] = useState(false);
@@ -823,8 +823,8 @@ export function BidEditorPage(): JSX.Element {
   const generationProgress = scopedLeafChapters.length ? Math.round((generatedCount / scopedLeafChapters.length) * 10000) / 100 : 0;
   const lengthProgress = lengthGoalChars ? Math.min(100, Math.round((actualChars / lengthGoalChars) * 10000) / 100) : 0;
   const complianceSummary = complianceReport?.summary || {
-    metricName: '条款响应覆盖率',
-    scopeNote: '基于招标条款、评分项、风险项与当前章节映射/正文片段的响应追踪结果，不等同于最终 Word 标书合规结论。',
+    metricName: '条款覆盖率',
+    scopeNote: '仅统计招标条款、评分项、风险项在当前章节正文中的覆盖证据；投标信息确认页字段不计入该指标，也不等同于最终 Word 标书合规结论。',
     total: 0,
     covered: 0,
     partial: 0,
@@ -833,7 +833,7 @@ export function BidEditorPage(): JSX.Element {
     highRiskMissing: 0,
   };
   const complianceStatus = complianceSummary.highRiskMissing
-    ? { label: '高风险未响应', color: 'red' as const }
+    ? { label: '高风险待覆盖', color: 'red' as const }
     : complianceSummary.missing || complianceSummary.partial
       ? { label: '有待补强', color: 'orange' as const }
       : complianceSummary.total
@@ -843,6 +843,7 @@ export function BidEditorPage(): JSX.Element {
     ? complianceLastCheckedAt.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
     : '尚未检查';
   const pendingComplianceRows = (complianceReport?.rows || []).filter(row => row.status !== 'covered');
+  const pendingCoverageCount = complianceSummary.missing + complianceSummary.partial;
   const complianceVolumeSummaries = (complianceReport?.volumeSummaries || []).filter(item => item.total > 0 || item.highRiskMissing || item.missing);
 
   function jumpToComplianceRow(row: ComplianceRow): void {
@@ -1065,7 +1066,7 @@ export function BidEditorPage(): JSX.Element {
             <strong>{complianceSummary.volumeName || volumeLabel(activeVolume)}</strong>
           </div>
           <Space size={8} wrap>
-            {contentDirty ? <Tag color="gold">正文已修改，保存后更新响应率</Tag> : null}
+            {contentDirty ? <Tag color="gold">正文已修改，保存后更新覆盖率</Tag> : null}
             {complianceRefreshing ? <Tag color="processing">检查中...</Tag> : null}
             {complianceError ? <Tag color="red">检查失败</Tag> : <Tag color={complianceStatus.color}>{complianceStatus.label}</Tag>}
             <Button size="small" onClick={() => setQualityCollapsed(true)}>
@@ -1078,10 +1079,10 @@ export function BidEditorPage(): JSX.Element {
               disabled={!data?.project?.id}
               onClick={() => data?.project?.id && void refreshComplianceReport(data.project.id)}
             >
-              刷新响应率
+              刷新覆盖率
             </Button>
             <Button size="small" icon={<Eye size={14} />} disabled={!pendingComplianceRows.length} onClick={() => setComplianceDrawerOpen(true)}>
-              查看未响应
+              查看待处理
             </Button>
             <Button
               size="small"
@@ -1097,14 +1098,14 @@ export function BidEditorPage(): JSX.Element {
           </Space>
         </div>
         <div className="quality-dashboard-grid">
-          <Tooltip title="当前视图下已生成正文的叶子小节数。父级结构容器不计入正文生成进度。">
+          <Tooltip title="当前视图下已生成正文的叶子小节数。父级结构容器和投标信息确认页不计入正文生成进度。">
             <article>
               <CheckCircle2 size={18} />
-              <span>已生成小节</span>
+              <span>已生成正文小节</span>
               <strong>{generatedCount}/{scopedLeafChapters.length}</strong>
             </article>
           </Tooltip>
-          <Tooltip title="按当前视图下已生成章节正文去除空白后的字符数估算，用于判断标书厚度和扩写需求。">
+          <Tooltip title="按当前视图下已生成章节正文去除空白后的字符数估算，用于判断标书厚度和扩写需求；不包含投标信息确认页字段。">
             <article>
               <FileText size={18} />
               <span>正文字数</span>
@@ -1114,21 +1115,21 @@ export function BidEditorPage(): JSX.Element {
           <Tooltip title={complianceSummary.scopeNote}>
             <article>
               <Gauge size={18} />
-              <span>条款响应率</span>
+              <span>条款覆盖率</span>
               <strong>{complianceSummary.percent}%</strong>
             </article>
           </Tooltip>
-          <Tooltip title="仍未在当前章节映射或正文中找到响应证据的要求条款、评分项和风险项。">
+          <Tooltip title="仍未覆盖或仅部分覆盖的要求条款、评分项和风险项。该数值用于提示正文补强，不代表前导确认页缺口。">
             <article>
               <AlertTriangle size={18} />
-              <span>未响应项</span>
-              <strong>{complianceSummary.missing}</strong>
+              <span>待处理覆盖项</span>
+              <strong>{pendingCoverageCount}</strong>
             </article>
           </Tooltip>
-          <Tooltip title="风险项、否决项、废标项或高优先级条款中仍未找到响应证据的数量。">
+          <Tooltip title="风险项、否决项、废标项或高优先级条款中仍未找到正文覆盖证据的数量。">
             <article>
               <ShieldAlert size={18} />
-              <span>高风险未响应</span>
+              <span>高风险待覆盖</span>
               <strong>{complianceSummary.highRiskMissing || 0}</strong>
             </article>
           </Tooltip>
@@ -1145,7 +1146,7 @@ export function BidEditorPage(): JSX.Element {
             {complianceVolumeSummaries.map(item => (
               <Tooltip
                 key={item.volumeType}
-                title={`${item.volumeName}：共 ${item.total} 项，已响应 ${item.covered} 项，待补强 ${item.partial} 项，未响应 ${item.missing} 项。`}
+                title={`${item.volumeName}：共 ${item.total} 项，已覆盖 ${item.covered} 项，待补强 ${item.partial} 项，待覆盖 ${item.missing} 项。`}
               >
                 <button
                   type="button"
@@ -1156,7 +1157,7 @@ export function BidEditorPage(): JSX.Element {
                 >
                   <span className="font-semibold text-slate-700">{item.volumeName}</span>
                   <span className="text-slate-500">{item.percent}%</span>
-                  {item.highRiskMissing ? <Tag color="red">{item.highRiskMissing} 高风险</Tag> : item.missing ? <Tag color="orange">{item.missing} 未响应</Tag> : <Tag color="green">正常</Tag>}
+                  {item.highRiskMissing ? <Tag color="red">{item.highRiskMissing} 高风险</Tag> : item.missing || item.partial ? <Tag color="orange">{(item.missing || 0) + (item.partial || 0)} 待处理</Tag> : <Tag color="green">正常</Tag>}
                 </button>
               </Tooltip>
             ))}
@@ -1169,7 +1170,7 @@ export function BidEditorPage(): JSX.Element {
   function ComplianceDrawer(): JSX.Element {
     return (
       <Drawer
-        title={`未响应与待补强项 - ${complianceSummary.volumeName || volumeLabel(activeVolume)}`}
+        title={`待覆盖与待补强项 - ${complianceSummary.volumeName || volumeLabel(activeVolume)}`}
         width={680}
         open={complianceDrawerOpen}
         onClose={() => setComplianceDrawerOpen(false)}
@@ -1179,11 +1180,11 @@ export function BidEditorPage(): JSX.Element {
           showIcon
           className="mb-3"
           message="点击“定位章节”可跳转到建议补强位置。"
-          description="建议章节由系统根据条款关键词、章节标题、章节目标和正文内容推断；若无建议章节，通常需要新增补强章节或段落。"
+          description="本列表只跟踪招标条款、评分项、风险项在章节正文中的覆盖证据；投标信息确认页的客户确认字段不计入这里。建议章节由系统根据条款关键词、章节标题、章节目标和正文内容推断。"
         />
         <List
           dataSource={pendingComplianceRows}
-          locale={{ emptyText: '当前范围暂无未响应或待补强项' }}
+          locale={{ emptyText: '当前范围暂无待覆盖或待补强项' }}
           renderItem={row => (
             <List.Item
               actions={[
@@ -1212,7 +1213,7 @@ export function BidEditorPage(): JSX.Element {
                 title={(
                   <Space size={6} wrap>
                     <Tag color={row.category === '风险项' ? 'red' : row.category === '评分项' ? 'green' : 'blue'}>{row.category}</Tag>
-                    <Tag color={row.status === 'missing' ? 'red' : 'orange'}>{row.status === 'missing' ? '未响应' : '待补强'}</Tag>
+                    <Tag color={row.status === 'missing' ? 'red' : 'orange'}>{row.status === 'missing' ? '待覆盖' : '待补强'}</Tag>
                     <span>{row.content}</span>
                   </Space>
                 )}
@@ -1820,17 +1821,17 @@ export function BidEditorPage(): JSX.Element {
             <Alert
               type="warning"
               showIcon
-              message={`${summary.metricName || '条款响应覆盖率'} ${summary.percent}%`}
-              description={summary.scopeNote || '该指标用于追踪招标条款与当前章节/正文的响应关系，不等同于最终 Word 标书合规结论。'}
+              message={`${summary.metricName || '条款覆盖率'} ${summary.percent}%`}
+              description={summary.scopeNote || '该指标用于追踪招标条款与当前章节正文的覆盖关系，不统计投标信息确认页字段，也不等同于最终 Word 标书合规结论。'}
             />
             <div className="grid grid-cols-2 gap-2">
               <Tag color="blue">共检查 {summary.total} 项</Tag>
               <Tag color="green">已响应 {summary.covered} 项</Tag>
               <Tag color="orange">待补强 {summary.partial} 项</Tag>
-              <Tag color="red">未响应 {summary.missing} 项</Tag>
+              <Tag color="red">待覆盖 {summary.missing} 项</Tag>
             </div>
             <p className="text-slate-600">
-              当前仍有 {summary.highRiskMissing || 0} 项高风险未响应。建议优先补齐资格要求、否决风险和高分评分项后再提交正式投标文件。
+              当前仍有 {summary.highRiskMissing || 0} 项高风险待覆盖。建议优先补齐资格要求、否决风险和高分评分项后再提交正式投标文件。
             </p>
           </div>
         ),
@@ -2735,7 +2736,6 @@ export function BidEditorPage(): JSX.Element {
           </div>
           <Space size={10} wrap>
             <Button onClick={() => navigate('/interpretation')}>返回解读</Button>
-            <Button icon={<BookOpen size={16} />}>关联资料</Button>
             <Button
               type="primary"
               icon={<Download size={17} />}
@@ -2790,14 +2790,6 @@ export function BidEditorPage(): JSX.Element {
                 <strong>标书目录</strong>
               </div>
               <Space size={10} wrap className="outline-toolbar-actions">
-                <label className="outline-switch">
-                  <input
-                    type="checkbox"
-                    checked={withImages}
-                    onChange={event => setWithImages(event.target.checked)}
-                  />
-                  <span>全篇图文并茂</span>
-                </label>
                 <Tooltip title="设置目标页数、目标字数、技术标/商务标篇幅和生成策略">
                   <Button size="small" icon={<SlidersHorizontal size={14} />} onClick={openLengthSettings}>全文设置</Button>
                 </Tooltip>
@@ -2983,7 +2975,6 @@ export function BidEditorPage(): JSX.Element {
         </div>
         <Space size={10} wrap>
           <Button onClick={() => navigate('/interpretation')}>返回解读</Button>
-          <Button icon={<BookOpen size={16} />}>关联资料</Button>
           <Button
             type="primary"
             icon={<Download size={17} />}
