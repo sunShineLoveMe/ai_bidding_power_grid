@@ -3,6 +3,7 @@ import { SearchOutlined, SendOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { BrandMark } from '../../components/common/BrandMark';
+import { displayAssetTitle } from '../../utils/assetDisplay';
 
 const { Text } = Typography;
 
@@ -57,6 +58,8 @@ interface KnowledgeAsset {
   applicable_sections?: string[];
   applicable_volumes?: string[];
   tags?: string[];
+  metadata?: Record<string, unknown>;
+  specs?: Record<string, unknown>;
   similarity?: number;
 }
 
@@ -234,7 +237,7 @@ function displaySources(sources?: SourceContext[]): SourceContext[] {
 
 function assetImageMarkdown(asset: KnowledgeAsset, index: number): string {
   if (!asset.id) return '';
-  const alt = (asset.title || `图片资产${index}`).replace(/[\[\]()]/g, '');
+  const alt = (displayAssetTitle(asset) || `图片资产${index}`).replace(/[\[\]()]/g, '');
   return `\n\n![${alt}](/api/knowledge/assets/${asset.id}/file?variant=thumb)\n\n`;
 }
 

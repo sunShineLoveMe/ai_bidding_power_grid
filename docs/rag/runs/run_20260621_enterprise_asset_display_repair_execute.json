@@ -1,0 +1,242 @@
+{
+  "dry_run": false,
+  "assets_scanned": 597,
+  "assets_updated": 26,
+  "personnel_assets_moved": 18,
+  "updates": [
+    {
+      "id": "93af985d-57ff-485f-93c4-0e7f7ab6c0c8",
+      "old_title": "泰昌1.陈仙瑞第1页",
+      "new_title": "陈仙瑞人员证书（第1页）",
+      "old_category": "试验检测能力",
+      "new_category": "人员证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "7d13cac2-f8ab-468e-b5ae-1bac90b3dcda",
+      "old_title": "泰昌2.晁坤琳第1页",
+      "new_title": "晁坤琳人员证书（第1页）",
+      "old_category": "试验检测能力",
+      "new_category": "人员证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "dd0e070a-ad26-4ee6-9432-650d8e0dba28",
+      "old_title": "泰昌公司人员花名册第1页",
+      "new_title": "泰昌公司人员花名册（第1页）",
+      "old_category": "试验检测能力",
+      "new_category": "人员证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "d5e955cd-4aa0-45ad-959a-6d3b853f48cb",
+      "old_title": "泰昌公司人员花名册第2页",
+      "new_title": "泰昌公司人员花名册（第2页）",
+      "old_category": "试验检测能力",
+      "new_category": "人员证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "1d2de174-1fc4-4f7c-9385-f7e0259d812a",
+      "old_title": "泰昌1.陈仙瑞第1页",
+      "new_title": "陈仙瑞人员证书（第1页）",
+      "old_category": "试验检测能力",
+      "new_category": "人员证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "d6273124-5c92-41ca-82ac-9054834d8649",
+      "old_title": "泰昌1.陈仙瑞第2页",
+      "new_title": "陈仙瑞人员证书（第2页）",
+      "old_category": "试验检测能力",
+      "new_category": "人员证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "f76e304d-6d05-4156-80f7-8f96cc2e3b36",
+      "old_title": "泰昌2.晁坤琳第1页",
+      "new_title": "晁坤琳人员证书（第1页）",
+      "old_category": "试验检测能力",
+      "new_category": "人员证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "9b52738d-3296-4063-93b6-727924624c05",
+      "old_title": "泰昌2.晁坤琳第2页",
+      "new_title": "晁坤琳人员证书（第2页）",
+      "old_category": "试验检测能力",
+      "new_category": "人员证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "25f2fb04-a128-493d-b8de-73243d08ef53",
+      "old_title": "泰昌1.陈仙瑞第1页",
+      "new_title": "陈仙瑞人员证书（第1页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "product_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "f901db7d-eb26-4649-8afd-535a61cf2b93",
+      "old_title": "泰昌2.晁坤琳第1页",
+      "new_title": "晁坤琳人员证书（第1页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "product_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "971e3b7a-bda7-42cf-982d-09648126c1d2",
+      "old_title": "泰昌公司人员花名册第1页",
+      "new_title": "泰昌公司人员花名册（第1页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "product_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "309c16a4-af0e-4ede-829f-db4073a26dd2",
+      "old_title": "泰昌1.陈仙瑞第1页",
+      "new_title": "陈仙瑞人员证书（第1页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "product_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "36561aed-3937-4937-ac00-b6be6155f92e",
+      "old_title": "泰昌2.晁坤琳第1页",
+      "new_title": "晁坤琳人员证书（第1页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "product_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "676b8b28-1531-459e-9112-3b4784e96b0d",
+      "old_title": "泰昌泰昌社保证明第1页",
+      "new_title": "泰昌泰昌社保证明（第1页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "product_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "677f4552-c0c9-4c44-918e-0495288a97fd",
+      "old_title": "泰昌2.晁坤琳第1页",
+      "new_title": "晁坤琳人员证书（第1页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "product_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "a4927387-35de-4576-bf8b-785e84a84d63",
+      "old_title": "泰昌公司人员花名册第2页",
+      "new_title": "泰昌公司人员花名册（第2页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "product_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "d763b95c-dacc-42f3-9b9c-3a4d56e1d243",
+      "old_title": "泰昌1.陈仙瑞第2页",
+      "new_title": "陈仙瑞人员证书（第2页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "product_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "64397a9e-c668-4152-94dc-79dbbc605523",
+      "old_title": "泰昌2.晁坤琳第2页",
+      "new_title": "晁坤琳人员证书（第2页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "product_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "0e669ee9-4d26-4f70-892a-907f27b32f9a",
+      "old_title": "泰昌泰昌社保证明第1页",
+      "new_title": "泰昌泰昌社保证明（第1页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "product_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "9a4858d2-5f20-4d6f-ac47-c0872beddd3e",
+      "old_title": "泰昌公司人员花名册第2页",
+      "new_title": "泰昌公司人员花名册（第2页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "product_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "cd8992c4-3ab4-4cc2-b8cb-849fdf04f106",
+      "old_title": "泰昌1.陈仙瑞第2页",
+      "new_title": "陈仙瑞人员证书（第2页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "product_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "8654b9b4-82ae-42db-8785-eabe6dfcc48f",
+      "old_title": "泰昌2.晁坤琳第2页",
+      "new_title": "晁坤琳人员证书（第2页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "product_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "97beb91e-22d9-4dfe-9197-ecad3ae45c63",
+      "old_title": "泰昌1.陈仙瑞第1页",
+      "new_title": "陈仙瑞人员证书（第1页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "product_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "91c22424-7db8-43cc-aedc-3e52fef6dd0c",
+      "old_title": "泰昌公司人员花名册第1页",
+      "new_title": "泰昌公司人员花名册（第1页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "product_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "e0d42d16-78dc-48ae-9b61-2fcc85784010",
+      "old_title": "泰昌1.陈仙瑞第1页",
+      "new_title": "陈仙瑞人员证书（第1页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "product_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "1df6b038-b21e-41df-aba8-1df7c4156b73",
+      "old_title": "泰昌2.晁坤琳第1页",
+      "new_title": "晁坤琳人员证书（第1页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "product_image",
+      "new_asset_type": "qualification_image"
+    }
+  ]
+}

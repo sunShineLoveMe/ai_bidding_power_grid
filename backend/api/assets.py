@@ -94,6 +94,32 @@ def _build_asset_searchable_text(payload: dict) -> str:
     return "\n".join(str(part).strip() for part in parts if str(part or "").strip())
 
 
+def _asset_library_type(asset: dict) -> str:
+    metadata = asset.get("metadata") if isinstance(asset.get("metadata"), dict) else {}
+    specs = asset.get("specs") if isinstance(asset.get("specs"), dict) else {}
+    for container in (metadata, specs, asset):
+        value = str(container.get("library_type") or "").strip()
+        if value in {"qualification", "product"}:
+            return value
+    target_library = str(metadata.get("target_library") or specs.get("target_library") or "").strip()
+    if target_library == "qualification_library":
+        return "qualification"
+    if target_library == "product_library":
+        return "product"
+    asset_type = str(asset.get("asset_type") or "").strip()
+    if asset_type == "qualification_image":
+        return "qualification"
+    if asset_type == "product_image":
+        return "product"
+    return ""
+
+
+def _asset_matches_library_type(asset: dict, library_type: str | None) -> bool:
+    if not library_type:
+        return True
+    return _asset_library_type(asset) == library_type
+
+
 def _asset_payload_from_form(storage_info: dict | None = None, existing: dict | None = None) -> dict:
     existing = existing or {}
     storage_info = storage_info or {}
@@ -196,7 +222,12 @@ def get_knowledge_assets():
     try:
         asset_type = request.args.get('asset_type')
         category = request.args.get('category')
+        library_type = request.args.get('library_type')
+        if library_type and library_type not in {"qualification", "product"}:
+            return jsonify({'error': 'library_type 仅支持 qualification 或 product'}), 400
         assets = list_knowledge_assets(asset_type=asset_type, category=category)
+        if library_type:
+            assets = [asset for asset in assets if _asset_matches_library_type(asset, library_type)]
         return jsonify(assets), 200
     except Exception as e:
         logging.exception("查询知识资产列表失败")

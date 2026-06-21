@@ -6,6 +6,7 @@ import { CategoryList } from '../../components/common/CategoryList';
 import { MetricCards } from '../../components/common/MetricCards';
 import { ModuleHeader } from '../../components/common/ModuleHeader';
 import { apiClient } from '../../api/client';
+import { displayAssetCategory, displayAssetTitle } from '../../utils/assetDisplay';
 
 interface KnowledgeAsset {
   id: string;
@@ -24,6 +25,7 @@ interface KnowledgeAsset {
   applicable_sections?: string[];
   tags?: string[];
   specs?: Record<string, unknown>;
+  metadata?: Record<string, unknown>;
   status?: string;
   is_synthetic?: boolean;
   created_at?: string;
@@ -100,7 +102,7 @@ export function ProductBasePage(): JSX.Element {
   const fetchAssets = async () => {
     try {
       setLoading(true);
-      const { data } = await apiClient.get<KnowledgeAsset[]>('/api/knowledge/assets?asset_type=product_image', {
+      const { data } = await apiClient.get<KnowledgeAsset[]>('/api/knowledge/assets?library_type=product', {
         skipGlobalLoading: true,
       });
       setAssets(data);
@@ -117,7 +119,7 @@ export function ProductBasePage(): JSX.Element {
 
   const categories = useMemo(() => {
     const counts = assets.reduce<Record<string, number>>((acc, asset) => {
-      const category = asset.category || '其他产品资料';
+      const category = displayAssetCategory(asset) || '其他产品资料';
       acc[category] = (acc[category] || 0) + 1;
       return acc;
     }, {});
@@ -131,14 +133,14 @@ export function ProductBasePage(): JSX.Element {
     ];
   }, [assets]);
 
-  const dataSource = activeCategory === '全部产品' ? assets : assets.filter(asset => asset.category === activeCategory);
+  const dataSource = activeCategory === '全部产品' ? assets : assets.filter(asset => displayAssetCategory(asset) === activeCategory);
   const tagCount = new Set(assets.flatMap(asset => asset.tags || [])).size;
   const specCount = assets.filter(asset => asset.is_synthetic || Object.keys(asset.specs || {}).length > 0).length;
   const customerAssetCount = assets.filter(asset => !asset.is_synthetic).length;
 
   const columns: ColumnsType<KnowledgeAsset> = [
-    { title: '产品/服务名称', dataIndex: 'title', ellipsis: true },
-    { title: '类型', dataIndex: 'category', width: 150, render: value => <Tag color="blue">{value || '产品资料'}</Tag> },
+    { title: '资料名称', dataIndex: 'title', ellipsis: true, render: (_, record) => displayAssetTitle(record) },
+    { title: '类型', dataIndex: 'category', width: 150, render: (_, record) => <Tag color="blue">{displayAssetCategory(record) || '产品资料'}</Tag> },
     { title: '版本', width: 90, render: (_, record) => versionLabel(record) },
     { title: '适用场景', width: 180, ellipsis: true, render: (_, record) => scenario(record) },
     {
@@ -177,7 +179,7 @@ export function ProductBasePage(): JSX.Element {
     setAssetFile(null);
     form.setFieldsValue({
       title: asset.title,
-      category: asset.category,
+      category: displayAssetCategory(asset),
       description: asset.description,
       product_model: asset.specs?.product_model,
       applicable_volumes: applicableVolumes(asset).length ? applicableVolumes(asset) : ['technical'],
@@ -308,9 +310,32 @@ export function ProductBasePage(): JSX.Element {
         ]}
       >
         <Form form={form} layout="vertical" size="middle" className="compact-form">
+          {editingAsset ? (
+            <div className="mb-4 grid gap-4 rounded-lg border border-slate-200 bg-slate-50 p-3 md:grid-cols-[220px_1fr]">
+              <div className="flex min-h-36 items-center justify-center overflow-hidden rounded-md bg-white">
+                {isImageAsset(editingAsset) ? (
+                  <Image
+                    src={assetThumbnailUrl(editingAsset)}
+                    alt={displayAssetTitle(editingAsset)}
+                    className="max-h-52 object-contain"
+                    preview={{ src: assetFileUrl(editingAsset) }}
+                    fallback="/assets/brand-logo.png"
+                  />
+                ) : (
+                  <Box className="text-blue-500" size={42} />
+                )}
+              </div>
+              <Descriptions size="small" column={1}>
+                <Descriptions.Item label="当前资料">{displayAssetTitle(editingAsset)}</Descriptions.Item>
+                <Descriptions.Item label="当前分类">{displayAssetCategory(editingAsset)}</Descriptions.Item>
+                <Descriptions.Item label="原始文件">{editingAsset.file_name || '-'}</Descriptions.Item>
+                <Descriptions.Item label="替换说明">如需替换，请选择新的图片或附件；不选择文件时仅更新名称、分类和标签。</Descriptions.Item>
+              </Descriptions>
+            </div>
+          ) : null}
           <div className="grid gap-x-5 md:grid-cols-2">
-            <Form.Item label="产品名称" name="title" rules={[{ required: true, message: '请输入产品名称' }]}>
-              <Input placeholder="例如：水轮机叶片精密加工件" />
+            <Form.Item label="资料名称" name="title" rules={[{ required: true, message: '请输入资料名称' }]}>
+              <Input placeholder="例如：CPVC电缆保护管检验报告（第1页）" />
             </Form.Item>
             <Form.Item label="产品类型" name="category" rules={[{ required: true, message: '请选择产品类型' }]}>
               <Select options={categories.slice(1).map(item => ({ label: item.name, value: item.name }))} placeholder="选择类型" />
@@ -377,8 +402,8 @@ export function ProductBasePage(): JSX.Element {
               )}
             </div>
             <Descriptions size="small" bordered column={1}>
-              <Descriptions.Item label="产品名称">{detail.title}</Descriptions.Item>
-              <Descriptions.Item label="产品分类">{detail.category || '-'}</Descriptions.Item>
+              <Descriptions.Item label="资料名称">{displayAssetTitle(detail)}</Descriptions.Item>
+              <Descriptions.Item label="资料分类">{displayAssetCategory(detail) || '-'}</Descriptions.Item>
               <Descriptions.Item label="适用场景">{scenario(detail)}</Descriptions.Item>
               <Descriptions.Item label="适用分册">{applicableVolumes(detail).map(value => volumeLabelMap[value] || value).join('、') || '-'}</Descriptions.Item>
               <Descriptions.Item label="能力标签">{(detail.tags || []).join('、') || '-'}</Descriptions.Item>

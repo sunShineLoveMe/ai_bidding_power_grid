@@ -48,6 +48,7 @@ EVIDENCE_TYPE_LABELS = {
     "finance": "财务资料",
     "green_low_carbon": "绿色低碳资料",
     "inspection_report": "检验报告",
+    "personnel_certificate": "人员证书",
     "production_capacity": "生产制造能力",
     "testing_capacity": "试验检测能力",
     "project_performance": "项目业绩",

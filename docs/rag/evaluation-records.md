@@ -8,6 +8,66 @@
 
 ---
 
+## Run 20260621 — 企业库客户测试展示与人员证书归库修复（2026-06-21）
+
+> 资产修复 dry-run：`docs/rag/runs/run_20260621_enterprise_asset_display_repair_dry_run.json`
+> 资产修复执行记录：`docs/rag/runs/run_20260621_enterprise_asset_display_repair_execute.json`
+> 资产修复后检查：`docs/rag/runs/run_20260621_enterprise_asset_display_repair_postcheck.json`
+> 本地门禁：`docs/rag/runs/run_20260621_enterprise_asset_display_repair_summary.md`
+> 增量门禁：`docs/rag/runs/run_20260621_enterprise_asset_display_repair_incremental_summary.md`
+
+### 触发原因
+
+客户测试发现企业资信库“人员证书”为空、人员证书误出现在企业产品库，且企业资信库/产品库/知识库展示的资料名称不够友好；编辑资产时缺少当前图片预览，不利于客户判断是否替换。
+
+### 修复范围
+
+| 项 | 结果 |
+| --- | ---: |
+| 扫描知识资产 | 597 |
+| 更新人员相关资产 | 26 |
+| 从产品资产迁回资信资产 | 18 |
+| 修复后人员证书资信资产 | 26 |
+| 修复后产品库人员证书残留 | 0 |
+
+本轮只更新人员证书相关资产的 `asset_type/category/metadata/specs/searchable_text`，不移动文件、不改变 asset id 和 storage path；企业资信库、企业产品库和企业知识库页面使用展示层友好名称，不批量重写非人员资产底层标题。
+
+### 回归门禁
+
+| 命令 | 结果 |
+| --- | --- |
+| `py_compile backend/api/assets.py backend/rag/display_names.py scripts/rag/repair_enterprise_asset_library_display.py` | PASS |
+| `pytest tests/test_asset_display_repair.py tests/test_rag_display_names.py tests/test_rag_asset_scoring.py tests/test_rag_retrieval.py -q` | PASS，30 passed |
+| `cd frontend && npm run build` | PASS，仅保留既有 chunk size 警告 |
+| `scripts/rag/run_local_rag_gate.py --run-id run_20260621_enterprise_asset_display_repair` | PASS |
+
+增量回归指标：
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 285 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 660 ms |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% | 336 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 849 ms |
+
+### 阿里云测试环境注意
+
+部署到阿里云后，需在目标数据库执行一次：
+
+```bash
+set -a; source .env; set +a; .venv/bin/python scripts/rag/repair_enterprise_asset_library_display.py --execute --save docs/rag/runs/run_aliyun_enterprise_asset_display_repair_execute.json
+```
+
+脚本默认只迁移人员证书相关资产；非人员资产标题清洗必须显式增加 `--include-title-cleanup`，避免上线前批量改写检索文本。
+
+### 结论
+
+- 企业资信库人员证书归库问题已修复，产品库不再显示人员证书。
+- 页面展示和编辑体验已优化，不影响标书自动插图和知识库图片文件 URL。
+- 本地 RAG 门禁 PASS，无召回、来源排序、禁用关键词或跨资料域串扰退化。
+
+---
+
 ## Run 20260619-P1C-11 — 内部演示完整标书模拟确认值回归（2026-06-19）
 
 > 模拟确认值应用记录：`docs/development/runs/run_20260619_p1c11_simulated_complete_bid.md`

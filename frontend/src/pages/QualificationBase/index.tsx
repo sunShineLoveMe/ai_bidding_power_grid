@@ -6,6 +6,7 @@ import { CategoryList } from '../../components/common/CategoryList';
 import { MetricCards } from '../../components/common/MetricCards';
 import { ModuleHeader } from '../../components/common/ModuleHeader';
 import { apiClient } from '../../api/client';
+import { displayAssetCategory, displayAssetTitle } from '../../utils/assetDisplay';
 
 interface KnowledgeAsset {
   id: string;
@@ -24,6 +25,7 @@ interface KnowledgeAsset {
   applicable_sections?: string[];
   tags?: string[];
   specs?: Record<string, unknown>;
+  metadata?: Record<string, unknown>;
   status?: string;
   is_synthetic?: boolean;
   anonymized?: boolean;
@@ -58,6 +60,8 @@ function applicableVolumes(asset: KnowledgeAsset): string[] {
 }
 
 function inferQualificationCategory(asset: KnowledgeAsset): string {
+  const displayCategory = displayAssetCategory(asset);
+  if (categoryMap[displayCategory]) return displayCategory;
   const text = `${asset.title || ''} ${(asset.tags || []).join('、')} ${asset.description || ''}`;
   if (text.includes('营业执照')) return '基础证照';
   if (text.includes('开户许可证')) return '基础证照';
@@ -107,7 +111,7 @@ export function QualificationBasePage(): JSX.Element {
   const fetchAssets = async () => {
     try {
       setLoading(true);
-      const { data } = await apiClient.get<KnowledgeAsset[]>('/api/knowledge/assets?asset_type=qualification_image', {
+      const { data } = await apiClient.get<KnowledgeAsset[]>('/api/knowledge/assets?library_type=qualification', {
         skipGlobalLoading: true,
       });
       setAssets(data);
@@ -144,7 +148,7 @@ export function QualificationBasePage(): JSX.Element {
     : enrichedAssets.filter(asset => asset.qualificationCategory === activeCategory);
 
   const columns: ColumnsType<KnowledgeAsset & { qualificationCategory?: string }> = [
-    { title: '资信文件', dataIndex: 'title', ellipsis: true },
+    { title: '资信文件', dataIndex: 'title', ellipsis: true, render: (_, record) => displayAssetTitle(record) },
     { title: '分类', dataIndex: 'qualificationCategory', width: 110, render: value => <Tag color="purple">{value}</Tag> },
     { title: '发证/出具机构', dataIndex: 'attribution', width: 150, ellipsis: true, render: value => value || '脱敏样张' },
     { title: '编号', width: 130, render: (_, record) => (record.is_synthetic ? '脱敏样例' : '-') },
@@ -304,6 +308,29 @@ export function QualificationBasePage(): JSX.Element {
         ]}
       >
         <Form form={form} layout="vertical" size="middle" className="compact-form">
+          {editingAsset ? (
+            <div className="mb-4 grid gap-4 rounded-lg border border-slate-200 bg-slate-50 p-3 md:grid-cols-[220px_1fr]">
+              <div className="flex min-h-36 items-center justify-center overflow-hidden rounded-md bg-white">
+                {isImageAsset(editingAsset) ? (
+                  <Image
+                    src={assetThumbnailUrl(editingAsset)}
+                    alt={displayAssetTitle(editingAsset)}
+                    className="max-h-52 object-contain"
+                    preview={{ src: assetFileUrl(editingAsset) }}
+                    fallback="/assets/brand-logo.png"
+                  />
+                ) : (
+                  <FileBadge className="text-blue-500" size={42} />
+                )}
+              </div>
+              <Descriptions size="small" column={1}>
+                <Descriptions.Item label="当前资料">{displayAssetTitle(editingAsset)}</Descriptions.Item>
+                <Descriptions.Item label="当前分类">{inferQualificationCategory(editingAsset)}</Descriptions.Item>
+                <Descriptions.Item label="原始文件">{editingAsset.file_name || '-'}</Descriptions.Item>
+                <Descriptions.Item label="替换说明">如需替换，请选择新的图片或附件；不选择文件时仅更新名称、分类和标签。</Descriptions.Item>
+              </Descriptions>
+            </div>
+          ) : null}
           <div className="grid gap-x-5 md:grid-cols-2">
             <Form.Item label="资信名称" name="title" rules={[{ required: true, message: '请输入资信名称' }]}>
               <Input placeholder="例如：承装（修、试）电力设施许可证" />
@@ -379,7 +406,7 @@ export function QualificationBasePage(): JSX.Element {
               )}
             </div>
             <Descriptions size="small" bordered column={1}>
-              <Descriptions.Item label="文件名称">{detail.title}</Descriptions.Item>
+              <Descriptions.Item label="文件名称">{displayAssetTitle(detail)}</Descriptions.Item>
               <Descriptions.Item label="分类">{inferQualificationCategory(detail)}</Descriptions.Item>
               <Descriptions.Item label="适用分册">{applicableVolumes(detail).map(value => volumeLabelMap[value] || value).join('、') || '-'}</Descriptions.Item>
               <Descriptions.Item label="说明">{detail.description || '-'}</Descriptions.Item>
