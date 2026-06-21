@@ -1956,9 +1956,84 @@ textarea {
 .interpretation-shell {
   display: grid;
   min-height: 100%;
-  grid-template-rows: 96px 96px auto auto 1fr;
+  grid-template-rows: auto;
   gap: 14px;
   padding-bottom: 20px;
+}
+
+.interpretation-project-context {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.project-context-main {
+  min-width: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.project-context-title {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+}
+
+.project-context-title h2 {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  color: #111a33;
+  font-size: 18px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.project-context-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.project-context-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.project-switcher {
+  width: min(420px, 38vw);
+}
+
+@media (max-width: 900px) {
+  .interpretation-project-context {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .project-context-title {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .project-context-title h2 {
+    white-space: normal;
+  }
+
+  .project-context-actions {
+    flex-wrap: wrap;
+  }
+
+  .project-switcher {
+    width: 100%;
+  }
 }
 
 .interpretation-main {

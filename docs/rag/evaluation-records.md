@@ -8,6 +8,47 @@
 
 ---
 
+## Run 20260621 — 招标项目项目化上下文与解读页可用性回归（2026-06-21）
+
+> 回归记录：`docs/rag/runs/run_20260621_interpretation_project_context_summary.md`
+> 增量门禁：`docs/rag/runs/run_20260621_interpretation_project_context_incremental_summary.md`
+> 真实 stream 抽样：`docs/rag/runs/run_20260621_interpretation_project_context_stream.jsonl`
+
+### 触发原因
+
+客户测试发现点击“招标项目”后直接进入解读页，但不知道当前是哪一次招标文件解析、是否为最近一次、前几次解析从哪里找；同时怀疑“解读总览、条款响应、资格与要求、风险检查、评分办法、章节建议”等标签在多轮架构调整后是否仍真实可用。
+
+### 本轮结论
+
+- 默认 `/interpretation` 入口确认为“最近一个已有结构化解读的招标项目”，当前返回项目 `628ed517-0c31-44ea-a5cb-95b25db06fc2`，创建时间 `2026-06-20 17:30`。
+- 前几次解析记录仍在历史记录中，可通过 `/interpretation?projectId=<项目ID>` 精确打开；页面已新增历史项目下拉和“查看全部历史”入口。
+- 红框标签真实可用：当前项目要求 80、风险 60、评分 80；章节建议旧字段为空，但已回退使用分册大纲/章节数据，页面显示 253 条候选/章节。
+- 浏览器真实页面验证通过：项目来源、项目 ID、创建时间、招标编号、招标文件名、历史切换、进入标书编制按钮均可见，1440 宽无横向溢出。
+
+### 回归门禁
+
+| 命令 | 结果 |
+| --- | --- |
+| `pytest tests/test_project_latest_interpretation.py tests/test_celery_interpretation_tasks.py tests/test_api_sections.py tests/test_bid_prefill.py -q` | PASS，23 passed |
+| `cd frontend && npm run build` | PASS，仅保留既有 chunk size 警告 |
+| 真实 HTTP 抽样 `/api/bidding/history?limit=5`、`/api/bidding/interpretations/latest` | PASS |
+| `scripts/rag/run_local_rag_gate.py --run-id run_20260621_interpretation_project_context` | PASS |
+
+增量回归指标：
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 296 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 830 ms |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% | 342 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 850 ms |
+
+### 阿里云测试环境注意
+
+本轮不需要数据库迁移。部署到阿里云测试环境后，重点检查目标库中 `/api/bidding/history` 和 `/api/bidding/interpretations/latest` 是否返回同一批项目数据，并确认页面可切换历史项目。
+
+---
+
 ## Run 20260621 — 企业库客户测试展示与人员证书归库修复（2026-06-21）
 
 > 资产修复 dry-run：`docs/rag/runs/run_20260621_enterprise_asset_display_repair_dry_run.json`

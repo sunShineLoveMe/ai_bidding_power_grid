@@ -1,6 +1,6 @@
 # 国家电网 RAG 基座数据工程待办清单
 
-> 状态日期：2026-06-18
+> 状态日期：2026-06-21
 > 适用范围：电网/国家电网招投标 RAG 基座数据、客户标书模板、行业资料、召回评测与上线门禁。
 
 本文档用于跟踪 RAG 基座数据工程的优先级、完成度和验收口径。全局产品路线仍看 `docs/development/roadmap.md`；本清单只记录 RAG 数据工程相关任务。
@@ -115,6 +115,7 @@
 | P1C-10 | [x] | 正式导出门禁正文与图片收口回归 | `scripts/rag/run_taichang_formal_export_gate_closure.py`、`backend/services/bid_prefill.py`、`backend/api/routes.py`、`docs/development/runs/run_20260618_p1c10_formal_gate_closure.md`、`docs/development/runs/run_20260618_p1c10_formal_gate_acceptance_final6.md`、`docs/rag/runs/run_20260618_p1c10_formal_gate_closure_summary.md` | 已在真实项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d` 自动应用可确认字段、生成剩余 88 个叶子章节并清理占位；最终正式导出链路生成 DOCX/PDF，102/102 章节有正文，空叶子章节 0，正文占位符 0，图片选中/插入/失败 23/23/0，补充包项目业绩/检测能力/检验报告资产检查通过，LibreOffice 字段刷新成功；正式 ready 仍为 false，仅因投标总价、保证金、交货期、质保期、授权代表、签署日期等 11 个客户决策字段未确认；`pytest tests/test_docx_export.py -q` 37 passed，本地 RAG 门禁 PASS |
 | P1C-11 | [x] | 内部演示完整标书模拟确认值回归 | `scripts/rag/run_taichang_formal_export_gate_closure.py`、`docs/development/runs/run_20260619_p1c11_simulated_complete_bid.md`、`docs/development/runs/run_20260619_p1c11_simulated_complete_bid_acceptance.md`、`docs/rag/runs/run_20260619_p1c11_simulated_complete_bid_summary.md` | 在客户未回复前，为演示完整标书生成显式模拟确认值并写入 metadata：`simulated_for_regression=true`，模拟字段覆盖投标总价、税率、保证金、交货期、质保期、投标有效期、授权代表、身份证号、签署日期；真实导出验收 PASS，102/102 章节有正文，空叶子章节 0，正文占位符 0，正式必填缺口 0，图片选中/插入/失败 23/23/0，DOCX/PDF 生成并刷新字段；该版本仅可作为内部演示/回归测试，不代表正式投标承诺；`pytest tests/test_bid_prefill.py tests/test_docx_export.py -q` 46 passed，本地 RAG 门禁 PASS |
 | P1C-12 | [x] | 企业库客户测试展示与人员证书归库修复 | `frontend/src/pages/QualificationBase/index.tsx`、`frontend/src/pages/ProductBase/index.tsx`、`frontend/src/pages/KnowledgeBase/KnowledgeSearchDrawer.tsx`、`frontend/src/utils/assetDisplay.ts`、`backend/api/assets.py`、`scripts/rag/repair_enterprise_asset_library_display.py`、`docs/rag/runs/run_20260621_enterprise_asset_display_repair_summary.md` | 客户反馈的人员证书误在产品库问题已修复：26 条人员相关资产归为企业资信库“人员证书”，其中 18 条从 `product_image` 迁为 `qualification_image`；企业资信库/产品库/知识库页面使用中文友好展示名，编辑弹窗展示当前图片/附件预览；前端 build、定向测试和本地 RAG 门禁 PASS。阿里云测试环境部署后需执行修复脚本同步目标库 |
+| P1C-13 | [x] | 招标项目项目化上下文与解读页可用性回归 | `frontend/src/pages/Interpretation/index.tsx`、`frontend/src/pages/History/index.tsx`、`frontend/src/components/home/RecentTasks.tsx`、`tests/test_project_latest_interpretation.py`、`docs/rag/runs/run_20260621_interpretation_project_context_summary.md` | 招标项目页已明确默认展示“最近一次已完成解读”，显示项目 ID、创建时间、招标编号、招标文件名，并支持下拉切换历史项目；历史记录/首页操作区区分“查看解读”和“继续编制”；红框标签真实可用性已回归，当前项目要求 80、风险 60、评分 80、章节建议兼容旧字段为空并展示 253 条候选/章节；浏览器验证无横向溢出，前端 build、定向测试和本地 RAG 门禁 PASS |
 
 ## P3：召回质量增强
 
@@ -178,7 +179,8 @@
 14. **P1C-10 已完成：正式导出门禁正文与图片收口回归。** 当前真实项目已收口为 102/102 章节有正文、空叶子章节 0、正文占位符 0、图片成品检查通过；正式 ready 仍因 11 个客户决策字段保持 `false`，这些字段不得自动编造。
 15. **P1C-11 已完成：内部演示完整标书模拟确认值回归。** 客户未回复前，已用明确标记的模拟确认值生成完整标书演示版；真实 DOCX/PDF 验收 PASS，`missing_required=0`。该版本只用于内部演示/回归测试，不得作为正式投标承诺。
 16. **P1C-12 已完成：企业库客户测试展示与人员证书归库修复。** 26 条人员相关资产已归到企业资信库“人员证书”，产品库不再残留人员证书；页面展示名和编辑预览已优化。阿里云测试环境部署后需执行 `scripts/rag/repair_enterprise_asset_library_display.py --execute` 对目标库做同样修复。
-17. **下一步：演示版人工观感复核与客户字段替换预案。** 建议先人工打开最新 DOCX/PDF 复核封面、目录、报价页、授权页、业绩附件和图片页；客户一旦回复真实报价/保证金/授权信息，应替换模拟字段并复跑正式验收。
-18. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表；仅在参数规模变大、多批次查询复杂或页面精确查询成为瓶颈后启动。
-19. P1B 泰昌补充资料质量增强已完成；后续新增资料按 `docs/rag/taichang-material-completeness-scorecard.md` 的 P0/P1/P2 补资料清单更新评分，并重跑真实回归。
-20. 客户演示完整标书已完成 DeepSeek 全量章节重写和真实 DOCX/PDF 验收：见 `docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`；后续若客户更换目标招标文件或 Word 模板，需重新生成章节、重新导出并复跑验收。
+17. **P1C-13 已完成：招标项目项目化上下文与解读页可用性回归。** 招标项目页不再让客户猜测当前是哪次解析；默认入口标注为“最近一次已完成解读”，并提供历史项目下拉、查看全部历史和进入标书编制入口；红框标签已按真实接口和当前项目数据回归。
+18. **下一步：演示版人工观感复核与客户字段替换预案。** 建议先人工打开最新 DOCX/PDF 复核封面、目录、报价页、授权页、业绩附件和图片页；客户一旦回复真实报价/保证金/授权信息，应替换模拟字段并复跑正式验收。
+19. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表；仅在参数规模变大、多批次查询复杂或页面精确查询成为瓶颈后启动。
+20. P1B 泰昌补充资料质量增强已完成；后续新增资料按 `docs/rag/taichang-material-completeness-scorecard.md` 的 P0/P1/P2 补资料清单更新评分，并重跑真实回归。
+21. 客户演示完整标书已完成 DeepSeek 全量章节重写和真实 DOCX/PDF 验收：见 `docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`；后续若客户更换目标招标文件或 Word 模板，需重新生成章节、重新导出并复跑验收。

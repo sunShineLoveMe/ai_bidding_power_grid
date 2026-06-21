@@ -294,7 +294,7 @@ export function HistoryPage(): JSX.Element {
             </Button>
           ) : null}
           <Button type="primary" ghost size="small" onClick={() => openRecord(record)}>
-            {record.action || '查看'}
+            {(record.section_count || 0) > 0 || record.stage === '标书编制' ? '继续编制' : record.analysis_count ? '查看解读' : record.action || '查看'}
           </Button>
           <Popconfirm title="确认删除该历史任务？" description="会删除项目记录和已解析的结构化数据。" okText="删除" cancelText="取消" onConfirm={() => deleteRecord(record)}>
             <Button danger size="small" icon={<Trash2 size={14} />}>删除</Button>

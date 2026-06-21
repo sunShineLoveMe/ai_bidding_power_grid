@@ -87,7 +87,11 @@ export function RecentTasks({ refreshKey = 0 }: RecentTasksProps): JSX.Element {
       title: '操作',
       dataIndex: 'action',
       width: 70,
-      render: (_, record) => <Button type="link" onClick={() => openTask(record)}>{record.action || '查看'}</Button>,
+      render: (_, record) => (
+        <Button type="link" onClick={() => openTask(record)}>
+          {(record.section_count || 0) > 0 || record.stage === '标书编制' ? '继续编制' : record.action || '查看解读'}
+        </Button>
+      ),
     },
   ];
 

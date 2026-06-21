@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Alert, Button, Descriptions, Drawer, Dropdown, Empty, List, Progress, Space, Table, Tabs, Tag, Typography, message } from 'antd';
+import { Alert, Button, Descriptions, Drawer, Dropdown, Empty, List, Progress, Select, Space, Table, Tabs, Tag, Typography, message } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { AlertTriangle, BrainCircuit, CheckCircle2, ClipboardCheck, Database, Eye, FileSearch, FileText, ListChecks, MoreHorizontal, RefreshCw, ShieldAlert, XCircle } from 'lucide-react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { apiClient } from '../../api/client';
 import { generateAIInterpretation, getComplianceCheck, getInterpretation, getLatestInterpretation } from '../../api/bidProject';
 import { MetricCards } from '../../components/common/MetricCards';
 import { ModuleHeader } from '../../components/common/ModuleHeader';
@@ -20,6 +21,19 @@ import type {
   RiskItem,
   ScoringItem,
 } from '../../types/interpretation';
+
+interface RecentProjectOption {
+  id: string;
+  project_name?: string | null;
+  project_no?: string | null;
+  latest_file_name?: string | null;
+  created_at?: string | null;
+  stage?: string | null;
+  analysis_count?: number;
+  requirement_count?: number;
+  risk_count?: number;
+  section_count?: number;
+}
 
 const priorityColor: Record<string, string> = {
   high: 'red',
@@ -103,6 +117,27 @@ function formatListItem(item: unknown): string {
   return String(item);
 }
 
+function flattenOutlineChapters(outline: BidOutline | null): ChapterSuggestion[] {
+  if (!outline) return [];
+  const direct = outline.chapters || [];
+  const fromVolumes = (outline.volumes || []).flatMap(volume => volume.chapters || []);
+  return [...direct, ...fromVolumes].map((chapter, index) => ({
+    id: chapter.id || `outline-${index}`,
+    chapter_title: chapter.title || `章节 ${index + 1}`,
+    priority: chapter.priority || 'medium',
+    reason: chapter.purpose || chapter.writing_notes?.join('；') || '已生成章节大纲，可进入标书编制继续编辑正文。',
+  }));
+}
+
+function sectionChapterSuggestions(sections?: InterpretationResponse['sections']): ChapterSuggestion[] {
+  return (sections || []).map(section => ({
+    id: section.id,
+    chapter_title: section.title,
+    priority: section.priority || 'medium',
+    reason: section.content ? '已生成正文，可进入标书编制继续修改。' : '已有章节大纲，正文待生成或待补充。',
+  }));
+}
+
 function TextList({ title, items }: { title: string; items?: unknown[] }): JSX.Element {
   const normalizedItems = (items || []).map(formatListItem).filter(Boolean);
 
@@ -142,11 +177,16 @@ export function InterpretationPage(): JSX.Element {
   const [generatingOutline, setGeneratingOutline] = useState(false);
   const [sourceTrace, setSourceTrace] = useState<SourceTrace | null>(null);
   const [advancedPanel, setAdvancedPanel] = useState<'chunks' | 'mineru' | null>(null);
+  const [recentProjects, setRecentProjects] = useState<RecentProjectOption[]>([]);
 
   async function load(): Promise<void> {
     try {
-      const result = projectIdParam ? await getInterpretation(projectIdParam) : await getLatestInterpretation();
+      const [result, historyResult] = await Promise.all([
+        projectIdParam ? getInterpretation(projectIdParam) : getLatestInterpretation(),
+        apiClient.get<{ items: RecentProjectOption[] }>('/api/bidding/history?limit=20', { skipGlobalLoading: true }).then(res => res.data).catch(() => ({ items: [] })),
+      ]);
       setData(result);
+      setRecentProjects(historyResult.items || []);
       if (result.project?.id) {
         try {
           setComplianceReport(await getComplianceCheck(result.project.id));
@@ -172,6 +212,14 @@ export function InterpretationPage(): JSX.Element {
   const bidOutline = asBidOutline(projectMeta);
   const bidOutlineChapterCount = bidOutline?.chapters?.length
     || (bidOutline?.volumes || []).reduce((sum, volume) => sum + (volume.chapters?.length || 0), 0);
+  const projectHistoryItem = recentProjects.find(item => item.id === data?.project?.id);
+  const projectSourceLabel = projectIdParam ? '历史项目精确打开' : '最近一次已完成解读';
+  const projectFileName = projectHistoryItem?.latest_file_name;
+  const chapterRows = data?.chapterSuggestions?.length
+    ? data.chapterSuggestions
+    : flattenOutlineChapters(bidOutline).length
+      ? flattenOutlineChapters(bidOutline)
+      : sectionChapterSuggestions(data?.sections);
   const mineruQuality = asQuality(projectMeta);
   const relatedChunks = useMemo(() => {
     if (!sourceTrace?.sourcePage || !data?.documentChunks.length) {
@@ -198,9 +246,9 @@ export function InterpretationPage(): JSX.Element {
       { title: '风险条款', value: data?.risks.length ?? 0, desc: '否决/无效/合规风险', icon: ShieldAlert, colorClass: 'bg-rose-50 text-rose-600', tooltip: '从招标文件中识别的废标、否决、无效投标和关键合规风险。该数量越高，越需要优先逐条确认响应。' },
       { title: '评分项', value: data?.scoringItems.length ?? 0, desc: '评分办法初步拆解', icon: ClipboardCheck, colorClass: 'bg-emerald-50 text-emerald-600', tooltip: '从评分办法中拆解出的得分点。后续标书正文应围绕高分项补充施工细节、证明材料、页码索引和可量化承诺。' },
       { title: '条款响应率', value: `${complianceSummary.percent}%`, desc: `${complianceSummary.missing} 项未响应 / ${complianceSummary.highRiskMissing || 0} 项高风险`, icon: CheckCircle2, colorClass: complianceSummary.missing ? 'bg-amber-50 text-amber-600' : 'bg-emerald-50 text-emerald-600', tooltip: complianceSummary.scopeNote || '基于招标条款、评分项、风险项与当前章节映射/正文片段的响应追踪结果，不等同于最终 Word 标书合规结论。' },
-      { title: '章节大纲', value: bidOutlineChapterCount, desc: `${bidOutline?.volumes?.length || 0} 个分册`, icon: FileText, colorClass: 'bg-violet-50 text-violet-600', tooltip: '当前项目已生成的标书章节数量和分册数量。章节大纲是正文生成、条款响应和分册导出的基础。' },
+      { title: '章节大纲', value: bidOutlineChapterCount || chapterRows.length, desc: `${bidOutline?.volumes?.length || 0} 个分册`, icon: FileText, colorClass: 'bg-violet-50 text-violet-600', tooltip: '当前项目已生成的标书章节数量和分册数量。章节大纲是正文生成、条款响应和分册导出的基础。' },
     ],
-    [bidOutlineChapterCount, bidOutline?.volumes?.length, complianceSummary.highRiskMissing, complianceSummary.missing, complianceSummary.percent, data],
+    [bidOutlineChapterCount, bidOutline?.volumes?.length, chapterRows.length, complianceSummary.highRiskMissing, complianceSummary.missing, complianceSummary.percent, data],
   );
 
   const complianceColumns: ColumnsType<ComplianceRow> = [
@@ -478,7 +526,7 @@ export function InterpretationPage(): JSX.Element {
     <div className="interpretation-shell">
       <ModuleHeader
         title="招标项目"
-        description="集中查看当前招标文件的项目概况、资格要求、评分办法、风险检查和章节建议。"
+        description={projectIdParam ? '查看指定历史招标项目的解析、条款响应、风险和章节大纲。' : '默认展示最近一次已完成结构化解读的招标项目，可从下方切换历史项目。'}
         actions={
           <>
             <Button icon={<BrainCircuit size={16} />} loading={generatingAI} disabled={!data?.analysis} onClick={() => void generateAIReport()}>
@@ -512,6 +560,40 @@ export function InterpretationPage(): JSX.Element {
           </>
         }
       />
+      <section className="panel-card interpretation-project-context">
+        <div className="project-context-main">
+          <div className="project-context-title">
+            <Tag color={projectIdParam ? 'blue' : 'gold'}>{projectSourceLabel}</Tag>
+            <h2>{String(projectMeta.project_name || data?.project?.project_name || '暂无招标项目')}</h2>
+          </div>
+          <div className="project-context-meta">
+            <span>项目ID：{data?.project?.id || '-'}</span>
+            <span>创建时间：{formatDateTime(data?.project?.created_at)}</span>
+            <span>招标编号：{String(projectMeta.tender_no || data?.project?.project_no || '-')}</span>
+            <span>招标文件：{projectFileName || '可在历史记录查看文件名'}</span>
+          </div>
+        </div>
+        <div className="project-context-actions">
+          <Select
+            showSearch
+            placeholder="切换历史招标项目"
+            value={data?.project?.id}
+            optionFilterProp="label"
+            className="project-switcher"
+            onChange={projectId => navigate(`/interpretation?projectId=${projectId}`)}
+            options={recentProjects.map(item => ({
+              value: item.id,
+              label: `${item.project_name || '未命名招标项目'} · ${formatDateTime(item.created_at)} · ${item.stage || '未知状态'}`,
+            }))}
+          />
+          <Button onClick={() => navigate('/history')}>查看全部历史</Button>
+          {data?.project?.id ? (
+            <Button type="primary" ghost onClick={() => navigate(`/bid-editor?projectId=${data.project!.id}`)}>
+              进入标书编制
+            </Button>
+          ) : null}
+        </div>
+      </section>
       <MetricCards items={metrics} />
       {aiTaskMessage ? (
         <Alert
@@ -762,7 +844,7 @@ export function InterpretationPage(): JSX.Element {
                 },
                 {
                   key: 'requirements',
-                  label: '资格与要求',
+                  label: `资格与要求 ${data.requirements.length}`,
                   children: (
                     <Table rowKey="id" size="small" pagination={{ pageSize: 10 }} columns={requirementColumns} dataSource={data.requirements} className="compact-table" locale={{ emptyText: emptyText('暂无要求条款') }} />
                   ),
@@ -772,20 +854,20 @@ export function InterpretationPage(): JSX.Element {
                   label: (
                     <span className="inline-flex items-center gap-1">
                       <AlertTriangle size={14} />
-                      风险检查
+                      风险检查 {data.risks.length}
                     </span>
                   ),
                   children: <Table rowKey="id" size="small" pagination={{ pageSize: 10 }} columns={riskColumns} dataSource={data.risks} className="compact-table" locale={{ emptyText: emptyText('暂无风险项') }} />,
                 },
                 {
                   key: 'scoring',
-                  label: '评分办法',
+                  label: `评分办法 ${data.scoringItems.length}`,
                   children: <Table rowKey="id" size="small" pagination={{ pageSize: 10 }} columns={scoringColumns} dataSource={data.scoringItems} className="compact-table" locale={{ emptyText: emptyText('暂无评分项') }} />,
                 },
                 {
                   key: 'chapters',
-                  label: '章节建议',
-                  children: <Table rowKey="id" size="small" pagination={{ pageSize: 10 }} columns={chapterColumns} dataSource={data.chapterSuggestions} className="compact-table" locale={{ emptyText: emptyText('暂无建议章节') }} />,
+                  label: `章节建议 ${chapterRows.length}`,
+                  children: <Table rowKey="id" size="small" pagination={{ pageSize: 10 }} columns={chapterColumns} dataSource={chapterRows} className="compact-table" locale={{ emptyText: emptyText('暂无建议章节') }} />,
                 },
               ]}
             />
