@@ -155,7 +155,7 @@ def main() -> int:
         embeddings = get_embeddings(
             init_ali_client(),
             texts,
-            batch_size=20,
+            batch_size=10,
             usage_context={
                 "stage": "taichang_asset_ingestion",
                 "metadata": {"source_batch_id": batch_id, "asset_count": len(payloads)},

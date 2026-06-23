@@ -83,4 +83,6 @@ tender_references/
 
 # Backups and database exports
 backups/
+*.tar.gz
+
 
