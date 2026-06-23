@@ -101,7 +101,7 @@ export function QualificationBasePage(): JSX.Element {
   const [form] = Form.useForm();
   const [activeCategory, setActiveCategory] = useState('全部资信');
   const [assets, setAssets] = useState<KnowledgeAsset[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [assetFile, setAssetFile] = useState<File | null>(null);
   const [formOpen, setFormOpen] = useState(false);
@@ -114,7 +114,7 @@ export function QualificationBasePage(): JSX.Element {
       const { data } = await apiClient.get<KnowledgeAsset[]>('/api/knowledge/assets?library_type=qualification', {
         skipGlobalLoading: true,
       });
-      setAssets(data);
+      setAssets(data || []);
     } catch (error: any) {
       message.error(error.message || '获取资信资产失败');
     } finally {
@@ -146,6 +146,7 @@ export function QualificationBasePage(): JSX.Element {
   const dataSource = activeCategory === '全部资信'
     ? enrichedAssets
     : enrichedAssets.filter(asset => asset.qualificationCategory === activeCategory);
+  const metricValue = (value: number) => (loading && assets.length === 0 ? '...' : value);
 
   const columns: ColumnsType<KnowledgeAsset & { qualificationCategory?: string }> = [
     { title: '资信文件', dataIndex: 'title', ellipsis: true, render: (_, record) => displayAssetTitle(record) },
@@ -258,10 +259,10 @@ export function QualificationBasePage(): JSX.Element {
       />
       <MetricCards
         items={[
-          { title: '资信文件数', value: assets.length, desc: '已接入资信资产', icon: FileBadge, colorClass: 'bg-blue-50 text-blue-600' },
-          { title: '有效证照', value: assets.filter(asset => asset.status === 'indexed').length, desc: '可用于检索', icon: BadgeCheck, colorClass: 'bg-emerald-50 text-emerald-600' },
+          { title: '资信文件数', value: metricValue(assets.length), desc: loading && assets.length === 0 ? '正在加载资信资产' : '已接入资信资产', icon: FileBadge, colorClass: 'bg-blue-50 text-blue-600' },
+          { title: '有效证照', value: metricValue(assets.filter(asset => asset.status === 'indexed').length), desc: loading && assets.length === 0 ? '正在检查索引状态' : '可用于检索', icon: BadgeCheck, colorClass: 'bg-emerald-50 text-emerald-600' },
           { title: '临期提醒', value: 0, desc: '待接入到期字段', icon: CalendarClock, colorClass: 'bg-orange-50 text-orange-500' },
-          { title: '待核验资料', value: assets.filter(asset => asset.status !== 'indexed').length, desc: '需人工复核', icon: AlertTriangle, colorClass: 'bg-red-50 text-red-500' },
+          { title: '待核验资料', value: metricValue(assets.filter(asset => asset.status !== 'indexed').length), desc: loading && assets.length === 0 ? '正在加载核验状态' : '需人工复核', icon: AlertTriangle, colorClass: 'bg-red-50 text-red-500' },
         ]}
       />
       <div className="grid min-h-0 grid-cols-[250px_minmax(0,1fr)] gap-4">

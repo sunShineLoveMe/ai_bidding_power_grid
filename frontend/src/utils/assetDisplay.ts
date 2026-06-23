@@ -20,6 +20,21 @@ const categoryLabelMap: Record<string, string> = {
   project_performance: '项目业绩',
   product_library: '产品库资料',
   qualification_library: '资信库资料',
+  泰昌产品能力图片: '产品实物图片',
+  泰昌资信图片: '资信资料',
+};
+
+const tagLabelMap: Record<string, string> = {
+  production_capacity: '生产制造能力',
+  testing_capacity: '试验检测能力',
+  green_low_carbon: '绿色低碳资料',
+  inspection_report: '检验报告',
+  enterprise_evidence: '企业证明材料',
+  product_image: '产品图片',
+  qualification_image: '资信图片',
+  MVP试点企业: '客户资料',
+  泰昌企业事实: '企业自有资料',
+  图片资产: '图片资料',
 };
 
 function textValue(value: unknown): string {
@@ -74,4 +89,20 @@ export function displayAssetCategory(asset: AssetDisplayInput): string {
     return categoryLabelMap[value] || value;
   }
   return '企业资料';
+}
+
+export function displayAssetTags(asset: AssetDisplayInput, limit = 3): string[] {
+  const seen = new Set<string>();
+  const visibleTags: string[] = [];
+  for (const rawTag of asset.tags || []) {
+    const tag = textValue(rawTag);
+    if (!tag || /^taichang_/i.test(tag)) continue;
+    const label = tagLabelMap[tag] || categoryLabelMap[tag] || tag;
+    if (!label || /_/.test(label)) continue;
+    if (seen.has(label)) continue;
+    seen.add(label);
+    visibleTags.push(label);
+    if (visibleTags.length >= limit) break;
+  }
+  return visibleTags;
 }

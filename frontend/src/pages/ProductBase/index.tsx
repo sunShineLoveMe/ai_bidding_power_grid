@@ -6,7 +6,7 @@ import { CategoryList } from '../../components/common/CategoryList';
 import { MetricCards } from '../../components/common/MetricCards';
 import { ModuleHeader } from '../../components/common/ModuleHeader';
 import { apiClient } from '../../api/client';
-import { displayAssetCategory, displayAssetTitle } from '../../utils/assetDisplay';
+import { displayAssetCategory, displayAssetTags, displayAssetTitle } from '../../utils/assetDisplay';
 
 interface KnowledgeAsset {
   id: string;
@@ -92,7 +92,7 @@ export function ProductBasePage(): JSX.Element {
   const [form] = Form.useForm();
   const [activeCategory, setActiveCategory] = useState('全部产品');
   const [assets, setAssets] = useState<KnowledgeAsset[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [assetFile, setAssetFile] = useState<File | null>(null);
   const [formOpen, setFormOpen] = useState(false);
@@ -105,7 +105,7 @@ export function ProductBasePage(): JSX.Element {
       const { data } = await apiClient.get<KnowledgeAsset[]>('/api/knowledge/assets?library_type=product', {
         skipGlobalLoading: true,
       });
-      setAssets(data);
+      setAssets(data || []);
     } catch (error: any) {
       message.error(error.message || '获取产品资产失败');
     } finally {
@@ -134,9 +134,10 @@ export function ProductBasePage(): JSX.Element {
   }, [assets]);
 
   const dataSource = activeCategory === '全部产品' ? assets : assets.filter(asset => displayAssetCategory(asset) === activeCategory);
-  const tagCount = new Set(assets.flatMap(asset => asset.tags || [])).size;
-  const specCount = assets.filter(asset => asset.is_synthetic || Object.keys(asset.specs || {}).length > 0).length;
+  const tagCount = new Set(assets.flatMap(asset => displayAssetTags(asset, 10))).size;
+  const materialCount = assets.length;
   const customerAssetCount = assets.filter(asset => !asset.is_synthetic).length;
+  const metricValue = (value: number) => (loading && assets.length === 0 ? '...' : value);
 
   const columns: ColumnsType<KnowledgeAsset> = [
     { title: '资料名称', dataIndex: 'title', ellipsis: true, render: (_, record) => displayAssetTitle(record) },
@@ -147,9 +148,9 @@ export function ProductBasePage(): JSX.Element {
       title: '能力标签',
       dataIndex: 'tags',
       width: 230,
-      render: tags => (
+      render: (_, record) => (
         <Space size={4} wrap>
-          {((tags as string[]) || []).slice(0, 3).map(tag => <Tag key={tag}>{tag}</Tag>)}
+          {displayAssetTags(record).map(tag => <Tag key={tag}>{tag}</Tag>)}
         </Space>
       ),
     },
@@ -260,10 +261,10 @@ export function ProductBasePage(): JSX.Element {
       />
       <MetricCards
         items={[
-          { title: '产品资料数', value: assets.length, desc: '已接入产品资产', icon: Box, colorClass: 'bg-blue-50 text-blue-600' },
-          { title: '能力标签', value: tagCount, desc: '来自图片资产标签', icon: Tags, colorClass: 'bg-emerald-50 text-emerald-600' },
-          { title: '技术参数表', value: specCount, desc: '规格图与参数素材', icon: Cpu, colorClass: 'bg-violet-50 text-violet-600' },
-          { title: '客户资料', value: customerAssetCount, desc: '泰昌已提供素材', icon: FileStack, colorClass: 'bg-orange-50 text-orange-500' },
+          { title: '产品资料数', value: metricValue(assets.length), desc: loading && assets.length === 0 ? '正在加载产品资产' : '已接入产品资产', icon: Box, colorClass: 'bg-blue-50 text-blue-600' },
+          { title: '能力标签', value: metricValue(tagCount), desc: loading && assets.length === 0 ? '正在统计中文标签' : '来自产品资料标签', icon: Tags, colorClass: 'bg-emerald-50 text-emerald-600' },
+          { title: '参数/图片素材', value: metricValue(materialCount), desc: loading && assets.length === 0 ? '正在加载素材' : '检验报告、产品图片和参数素材', icon: Cpu, colorClass: 'bg-violet-50 text-violet-600' },
+          { title: '客户资料', value: metricValue(customerAssetCount), desc: loading && assets.length === 0 ? '正在加载泰昌素材' : '泰昌已提供素材', icon: FileStack, colorClass: 'bg-orange-50 text-orange-500' },
         ]}
       />
       <div className="grid min-h-0 grid-cols-[250px_minmax(0,1fr)] gap-4">
@@ -406,7 +407,7 @@ export function ProductBasePage(): JSX.Element {
               <Descriptions.Item label="资料分类">{displayAssetCategory(detail) || '-'}</Descriptions.Item>
               <Descriptions.Item label="适用场景">{scenario(detail)}</Descriptions.Item>
               <Descriptions.Item label="适用分册">{applicableVolumes(detail).map(value => volumeLabelMap[value] || value).join('、') || '-'}</Descriptions.Item>
-              <Descriptions.Item label="能力标签">{(detail.tags || []).join('、') || '-'}</Descriptions.Item>
+              <Descriptions.Item label="能力标签">{displayAssetTags(detail, 8).join('、') || '-'}</Descriptions.Item>
               <Descriptions.Item label="产品说明">{detail.description || '-'}</Descriptions.Item>
               <Descriptions.Item label="适用章节">{(detail.applicable_sections || []).join('、') || '-'}</Descriptions.Item>
               <Descriptions.Item label="来源">{detail.source_url ? <a href={detail.source_url} target="_blank" rel="noreferrer">查看来源</a> : '客户提供资料'}</Descriptions.Item>

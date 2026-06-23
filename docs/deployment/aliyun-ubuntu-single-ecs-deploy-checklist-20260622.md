@@ -1,6 +1,6 @@
 # 阿里云 Ubuntu 单 ECS 测试部署操作清单
 
-更新日期：2026-06-22  
+更新日期：2026-06-23  
 适用环境：阿里云 ECS 单企业测试环境  
 当前实例：`launch-advisor-20260604`  
 公网 IP：`8.160.187.226`  
@@ -203,6 +203,192 @@ cd ai_bidding_power_grid
 | [x] | 配置 Gitee SSH 访问 | `ssh -T git@gitee.com` 认证成功 | 实测 `successfully authenticated` |
 | [x] | 代码上传或拉取完成 | 项目根目录存在 `docker-compose.yml` | 已拉取 `feat/aliyun-test-readiness`，工作区 clean |
 | [x] | 确认关键文件 | `Dockerfile.backend`、`Dockerfile.frontend`、`.env.example` 存在 | 已确认 |
+
+### 4.1 代码发布到阿里云测试环境 SOP
+
+本环境代码来源统一以 Gitee 为准，测试部署分支为：
+
+```text
+feat/aliyun-test-readiness
+```
+
+除非只是紧急排障且已在执行记录中注明，否则不要只把本地单个文件 `scp` 到服务器后长期运行。正确流程是：本地提交代码 -> 推送 Gitee 测试分支 -> 服务器拉取指定 commit -> 构建对应镜像 -> 冒烟验证。
+
+#### 4.1.1 开发人员本地提交与推送
+
+本地确认当前分支：
+
+```bash
+cd /Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid
+git branch --show-current
+```
+
+如不在测试分支，先切换：
+
+```bash
+git checkout feat/aliyun-test-readiness
+git pull --rebase origin feat/aliyun-test-readiness
+```
+
+提交前检查：
+
+```bash
+git status --short
+git diff
+```
+
+只提交本次相关文件，不要把 `.env`、客户密钥、临时压缩包、`node_modules`、`.venv`、大体积解析中间产物误提交：
+
+```bash
+git add <本次修改文件>
+git commit -m "<简短说明>"
+git push origin feat/aliyun-test-readiness
+```
+
+推送后记录本地 commit：
+
+```bash
+git rev-parse --short HEAD
+git log -1 --oneline
+```
+
+#### 4.1.2 服务器拉取并确认代码版本
+
+服务器执行：
+
+```bash
+cd /opt/ai-bidding/ai_bidding_power_grid
+
+git status --short
+git branch --show-current
+git fetch origin feat/aliyun-test-readiness
+git pull --ff-only origin feat/aliyun-test-readiness
+git log -1 --oneline
+```
+
+验收口径：
+
+- `git branch --show-current` 必须是 `feat/aliyun-test-readiness`；
+- `git log -1 --oneline` 必须等于或晚于本地刚推送的 commit；
+- 如果服务器有未提交改动，先判断是否为 `.env`、数据文件或临时热修复。不要直接 `git reset --hard`，避免覆盖线上排障痕迹和客户资料。
+
+#### 4.1.3 前端改动发布
+
+适用范围：`frontend/` 下页面、组件、样式、接口调用、构建配置等变更。
+
+服务器执行：
+
+```bash
+cd /opt/ai-bidding/ai_bidding_power_grid
+
+git log -1 --oneline
+docker compose build frontend
+docker compose up -d --force-recreate frontend
+docker compose ps
+```
+
+如果怀疑 Docker 构建缓存导致旧前端仍被打包，执行无缓存构建：
+
+```bash
+docker compose build --no-cache frontend
+docker compose up -d --force-recreate frontend
+```
+
+如果仍怀疑旧镜像残留，可只删除前端镜像，禁止删除数据库 volume：
+
+```bash
+docker compose down frontend
+docker image rm -f ai-bidding-frontend:local
+docker builder prune -f
+docker compose build --no-cache frontend
+docker compose up -d frontend
+```
+
+注意：
+
+- `docker compose down frontend` 只会移除前端容器；提示 `Network ... Resource is still in use` 属于正常，因为 backend/postgres/redis 仍在使用网络；
+- 不要执行 `docker compose down -v`，会删除 volume，存在清空数据库或存储数据风险；
+- 不要删除 `postgres_data`、`redis`、`storage` 等数据 volume。
+
+前端发布后验证静态包：
+
+```bash
+docker compose exec frontend sh -lc 'ls -lh /usr/share/nginx/html/assets | head'
+docker compose exec frontend sh -lc 'grep -R "<关键字符串>" -n /usr/share/nginx/html/assets | head'
+```
+
+浏览器验证：
+
+- 优先使用无痕窗口；
+- 或打开 DevTools -> Network -> 勾选 Disable cache -> 强制刷新；
+- 对前端功能问题，除页面显示外，还应检查 Network 中对应接口 Response。
+
+#### 4.1.4 后端改动发布
+
+适用范围：`backend/`、`scripts/`、Python 依赖、数据库访问、RAG 检索、导出逻辑等变更。
+
+服务器执行：
+
+```bash
+cd /opt/ai-bidding/ai_bidding_power_grid
+
+git log -1 --oneline
+docker compose build backend
+docker compose up -d --force-recreate backend celery-worker
+docker compose ps
+```
+
+后端发布后验证：
+
+```bash
+curl -fsS http://127.0.0.1:3012/api/health
+curl -fsS http://127.0.0.1:8080/api/health
+docker compose logs --tail=100 backend
+docker compose logs --tail=100 celery-worker
+```
+
+如果只是临时验证一个 Python 文件，可短期使用 `docker cp` 覆盖容器内文件，但必须满足：
+
+- 同步把代码提交并推送到 Gitee；
+- 在执行记录中注明临时覆盖了哪个文件；
+- 后续正式发布必须重新 `git pull + docker compose build backend`，避免容器内文件和 Git 代码不一致。
+
+#### 4.1.5 前后端同时改动发布
+
+服务器执行：
+
+```bash
+cd /opt/ai-bidding/ai_bidding_power_grid
+
+git fetch origin feat/aliyun-test-readiness
+git pull --ff-only origin feat/aliyun-test-readiness
+git log -1 --oneline
+
+docker compose build backend frontend
+docker compose up -d --force-recreate backend celery-worker frontend
+docker compose ps
+```
+
+基础验证：
+
+```bash
+curl -fsS http://127.0.0.1:3012/api/health
+curl -fsS http://127.0.0.1:8080/api/health
+curl -fsS -I http://127.0.0.1:8080/
+```
+
+#### 4.1.6 发布前后必查清单
+
+| 状态 | 任务 | 验收口径 | 备注 |
+| --- | --- | --- | --- |
+| [ ] | 本地代码已提交 | `git status --short` 无应提交源码改动 | `.env` 和客户密钥不得提交 |
+| [ ] | 已推送 Gitee 测试分支 | `git push origin feat/aliyun-test-readiness` 成功 | 不使用 GitHub |
+| [ ] | 服务器已拉取目标 commit | 服务器 `git log -1 --oneline` 与本地一致 | 构建前必须确认 |
+| [ ] | 按改动范围构建镜像 | 前端改动构建 frontend；后端改动构建 backend | 不盲目全量重建 |
+| [ ] | 容器已重建或重启 | `docker compose ps` 显示目标服务 healthy/running | frontend 可能只显示 Started |
+| [ ] | 本机健康检查通过 | `/api/health` 返回 `{"status":"ok"}` | 同时检查 `3012` 和 `8080` |
+| [ ] | 浏览器无痕验证通过 | 页面显示和核心操作符合预期 | 前端问题必须验证真实页面 |
+| [ ] | 执行记录已更新 | 写明 commit、构建服务、验证结果 | 便于交接追踪 |
 
 ## 5. 配置生产测试 `.env`
 
@@ -504,8 +690,8 @@ parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/
 | [x] | 首批文本语料正式入库 | `knowledge_documents` 和 `document_chunks` 数量增加 | 已入库 `124` 个文档 |
 | [x] | 补充包文本语料 dry-run | `skipped=0`、`blocked_metadata=0`、`parents/children/embedding_count > 0` | 使用补充包 manifest |
 | [x] | 补充包文本语料正式入库 | 文档和 chunk 数继续增加 | 两批文本均已入库，文档总数约 `148` |
-| [x] | 企业知识库页面验证 | 页面资料总数、已索引文件不再为 0 | 已可见企业知识库文件；分类展示需单独优化 |
-| [ ] | 企业知识库分类展示优化 | 左侧按 `doc_role/category_label/source_category` 展示中文细分类 | 当前云上仍按粗分类 `power_grid_tender_documents` 显示为单一“电网招标文件” |
+| [x] | 企业知识库页面验证 | 页面资料总数、已索引文件不再为 0 | 已可见企业知识库文件 |
+| [x] | 企业知识库分类展示优化 | 左侧按 `doc_role/category_label/source_category` 展示中文细分类 | 根因是阿里云服务器前端源码未同步；同步 `frontend/src/pages/KnowledgeBase/index.tsx` 并重建 frontend 后恢复 |
 
 ### 9.1 泰昌企业资信库 / 产品库资产入库
 
@@ -560,6 +746,92 @@ parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/
 | [ ] | 记录云上运行报告 | 写入 `docs/development/runs/` 或部署记录 | 便于交接 |
 
 ## 常用排障命令
+
+### 前端重建后页面仍然是旧逻辑
+
+典型症状：
+
+- 已执行 `docker compose build --no-cache frontend` 和 `docker compose up -d --force-recreate frontend`；
+- 无痕窗口访问后页面仍显示旧文案、旧分类或旧交互；
+- 数据库和接口 Response 已确认是正确的。
+
+优先判断顺序：
+
+1. 先确认服务器源码是否是最新；
+2. 再确认构建产物是否包含关键字符串；
+3. 最后才考虑浏览器缓存或 Nginx 静态文件缓存。
+
+服务器检查源码：
+
+```bash
+cd /opt/ai-bidding/ai_bidding_power_grid
+
+git branch --show-current
+git log -1 --oneline
+git status --short
+
+# 用本次改动的关键函数/字段做确认，例如企业知识库分类展示：
+grep -n "displayDocumentCategory" frontend/src/pages/KnowledgeBase/index.tsx
+grep -n "category_label" frontend/src/pages/KnowledgeBase/index.tsx
+```
+
+如果 `grep` 没有输出，说明服务器源码不是最新。此时重建 Docker 没有意义，因为 Docker 只会把旧源码重新打包。
+
+正确处理：
+
+```bash
+cd /opt/ai-bidding/ai_bidding_power_grid
+git fetch origin feat/aliyun-test-readiness
+git pull --ff-only origin feat/aliyun-test-readiness
+git log -1 --oneline
+```
+
+如果只是临时从本地同步单文件，应立即记录，并在后续补 Git 提交：
+
+```bash
+scp frontend/src/pages/KnowledgeBase/index.tsx \
+root@8.160.187.226:/opt/ai-bidding/ai_bidding_power_grid/frontend/src/pages/KnowledgeBase/index.tsx
+```
+
+重新构建前端：
+
+```bash
+cd /opt/ai-bidding/ai_bidding_power_grid
+docker compose build --no-cache frontend
+docker compose up -d --force-recreate frontend
+```
+
+验证容器静态包：
+
+```bash
+docker compose exec frontend sh -lc \
+'grep -R "category_label" -n /usr/share/nginx/html/assets | head'
+```
+
+如果源码有、静态包没有，说明构建上下文或 Dockerfile 没吃到最新文件，需要删除前端镜像后重建：
+
+```bash
+docker compose down frontend
+docker image rm -f ai-bidding-frontend:local
+docker builder prune -f
+docker compose build --no-cache frontend
+docker compose up -d frontend
+```
+
+如果源码有、静态包也有，但页面仍旧：
+
+- 使用无痕窗口重新打开；
+- 或 DevTools -> Network -> 勾选 Disable cache -> 强制刷新；
+- 在 Network 中打开接口，例如 `/api/knowledge/documents`，确认 Response 是否含新字段；
+- 前端页面问题不要先改数据库或后端接口兜底，除非确认 API 合同本身缺字段。
+
+本次企业知识库分类问题根因：
+
+- 数据库 `knowledge_documents.metadata` 已有 `category_label`、`doc_role`、`source_category`；
+- 本地前端已有 `displayDocumentCategory()`；
+- 但阿里云服务器 `frontend/src/pages/KnowledgeBase/index.tsx` 没有该函数和 `category_label` 字符串；
+- 因此之前多次重建 Docker 都是在重建旧源码；
+- 同步最新前端文件并重建 frontend 后，左侧分类和表格分类恢复正常。
 
 ### Docker Hub 拉取超时
 
@@ -682,4 +954,7 @@ docker compose exec postgres psql -U bidding -d bidding
 | 2026-06-23 | chris | 正式导入泰昌补充批资产 | 通过 | `knowledge_assets` 总数 `538`；资信 `215`、产品 `323`、embedding `538` |
 | 2026-06-23 | chris | 企业知识库文档入库 dry-run 使用原始 manifest | 未通过 | `knowledge_documents=0`、`document_chunks=0`；原始 `manifest.json` dry-run 为 `documents=230 skipped=230`，下一步改用 `staging/staging_manifest.json` |
 | 2026-06-23 | chris | 完成两批企业知识库文本语料入库 | 通过 | 首批 `124` 文档，补充包约 `24` 文档；企业知识库页面已有数据 |
-| 2026-06-23 | Codex | 修复企业知识库分类展示逻辑 | 待部署 | 前端改为优先按 `metadata.category_label/doc_role/source_category` 展示中文细分类 |
+| 2026-06-23 | Codex | 修复企业知识库分类展示逻辑 | 已部署 | 前端改为优先按 `metadata.category_label/doc_role/source_category` 展示中文细分类 |
+| 2026-06-23 | chris/Codex | 排查企业知识库分类仍显示单一“电网招标文件” | 通过 | 根因不是数据库、浏览器缓存或 Docker 缓存，而是阿里云服务器前端源码未同步；服务器 `grep displayDocumentCategory/category_label` 无输出，导致重建的是旧源码 |
+| 2026-06-23 | chris | 同步最新 `KnowledgeBase/index.tsx` 并重建 frontend | 通过 | 无痕窗口验证企业知识库分类已正常显示 |
+| 2026-06-23 | Codex | 补充阿里云测试环境代码发布 SOP 与排障说明 | 完成 | 新增 Gitee 分支提交流程、服务器拉取 commit、前后端镜像构建、缓存排查和执行记录要求 |
