@@ -439,6 +439,54 @@ class RagRetrievalQualityTest(unittest.TestCase):
     @patch("backend.rag.retrieval.rerank_documents")
     @patch("backend.rag.retrieval.get_embeddings", return_value=[[0.4, 0.5]])
     @patch("backend.rag.retrieval.init_ali_client", return_value=object())
+    def test_certificate_asset_recall_prefers_full_page_over_mineru_crop(self, _ali, _embeddings, rerank_mock):
+        from backend.rag import retrieval
+
+        assets = [
+            {
+                "id": "crop",
+                "title": "质量管理体系认证证书",
+                "similarity": 0.91,
+                "asset_type": "qualification_image",
+                "mime_type": "image/jpeg",
+                "source_type": "taichang_mvp_mineru_asset",
+                "width": 240,
+                "height": 220,
+                "searchable_text": "质量管理体系认证证书 局部印章",
+                "specs": {"bbox": [1, 2, 3, 4]},
+                "metadata": {
+                    "evidence_type": "certification",
+                    "target_library": "qualification_library",
+                },
+            },
+            {
+                "id": "full-page",
+                "title": "泰昌1.质量管理体系认证证书第1页",
+                "similarity": 0.74,
+                "asset_type": "qualification_image",
+                "mime_type": "image/jpeg",
+                "source_type": "customer_pdf_full_page_render",
+                "width": 1191,
+                "height": 1685,
+                "searchable_text": "质量管理体系认证证书 客户原始资料",
+                "metadata": {
+                    "evidence_type": "certification",
+                    "target_library": "qualification_library",
+                    "asset_visual_type": "full_page_render",
+                },
+            },
+        ]
+        rerank_mock.return_value = assets
+        client = _RpcClient(rpc_rows=assets, asset_rows=[])
+
+        with patch("backend.rag.retrieval.get_supabase_client", return_value=client):
+            result = retrieval.search_knowledge_assets("泰昌有哪些资质证书？", match_count=2)
+
+        self.assertEqual(result[0]["id"], "full-page")
+
+    @patch("backend.rag.retrieval.rerank_documents")
+    @patch("backend.rag.retrieval.get_embeddings", return_value=[[0.4, 0.5]])
+    @patch("backend.rag.retrieval.init_ali_client", return_value=object())
     def test_asset_recall_supplements_multi_evidence_query(self, _ali, _embeddings, rerank_mock):
         from backend.rag import retrieval
 

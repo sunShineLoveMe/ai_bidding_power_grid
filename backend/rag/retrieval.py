@@ -407,7 +407,8 @@ def _select_with_required_evidence_coverage(
                         "ohs_certification": "职业健康安全管理体系认证证书",
                     }[intent]
                     title_bonus = 2 if expected in title else 0
-                candidates.append((title_bonus, float(row.get("similarity") or 0), row, key))
+                rank_score = _asset_rank_score(query, row) if text_getter is _asset_search_text else float(row.get("similarity") or 0)
+                candidates.append((title_bonus, rank_score, row, key))
         if candidates:
             _, _, row, key = max(candidates, key=lambda item: (item[0], item[1]))
             selected.append(row)
@@ -647,7 +648,7 @@ def search_knowledge_assets(
     if metadata_filter:
         rpc_rows = [asset for asset in rpc_rows if _asset_matches_metadata_filter(asset, metadata_filter)]
     assets = rerank_documents(query, rpc_rows, text_key="searchable_text", top_n=match_count)
-    assets.sort(key=lambda asset: float(asset.get("similarity") or 0) + _asset_query_intent_bonus(query, asset), reverse=True)
+    assets.sort(key=lambda asset: _asset_rank_score(query, asset), reverse=True)
     # 过滤掉明显弱相关的资产，保留图片来源展示的准确性。
     strong_assets = [asset for asset in assets if float(asset.get("similarity") or 0) >= 0.28]
     if len(strong_assets) >= min(match_count, 3) and not _needs_asset_keyword_supplement(query, strong_assets):
@@ -710,7 +711,7 @@ def _keyword_search_knowledge_assets(
         if any(token in query for token in ["产品", "设备", "材料", "生产", "生产线", "检测", "试验", "闸门", "水泵", "水轮机", "叶片"]):
             if str(asset.get("asset_type") or "") == "product_image":
                 score += 3
-        score += int(_asset_query_intent_bonus(query, asset) * 20)
+        score += int((_asset_query_intent_bonus(query, asset) + _asset_visual_quality_bonus(query, asset)) * 20)
         if score > 0:
             enriched = {**asset, "similarity": max(float(asset.get("similarity") or 0), min(score / 10, 0.99))}
             scored.append((score, enriched))
@@ -770,6 +771,43 @@ def _asset_query_intent_bonus(query: str, asset: dict[str, Any]) -> float:
             bonus += 0.25
     if "社保" in text or "参保" in text:
         bonus += 0.5 if evidence_type == "personnel_certificate" else -0.15
+    return bonus
+
+
+def _asset_rank_score(query: str, asset: dict[str, Any]) -> float:
+    return (
+        float(asset.get("similarity") or 0)
+        + _asset_query_intent_bonus(query, asset)
+        + _asset_visual_quality_bonus(query, asset)
+    )
+
+
+def _asset_visual_quality_bonus(query: str, asset: dict[str, Any]) -> float:
+    text = query or ""
+    if not any(keyword in text for keyword in ["资质证书", "体系认证", "认证证书", "企业证明材料", "企业资信"]):
+        return 0.0
+
+    evidence_type = _asset_metadata_value(asset, "evidence_type")
+    if evidence_type not in {"certification", "business_license", "personnel_certificate"}:
+        return 0.0
+
+    metadata = asset.get("metadata") if isinstance(asset.get("metadata"), dict) else {}
+    specs = asset.get("specs") if isinstance(asset.get("specs"), dict) else {}
+    visual_type = str(metadata.get("asset_visual_type") or specs.get("asset_visual_type") or "").lower()
+    source_type = str(asset.get("source_type") or "").lower()
+    width = int(asset.get("width") or 0)
+    height = int(asset.get("height") or 0)
+    has_bbox = bool(specs.get("bbox") or metadata.get("bbox"))
+
+    bonus = 0.0
+    if visual_type in {"full_page_render", "full_page_certificate", "full_page_document_image", "customer_original_image"}:
+        bonus += 0.45
+    if source_type in {"customer_pdf_full_page_render", "customer_original_image"}:
+        bonus += 0.35
+    if source_type == "taichang_mvp_mineru_asset" or has_bbox:
+        bonus -= 0.45
+    if width and height and (width < 500 or height < 500):
+        bonus -= 0.25
     return bonus
 
 
@@ -974,6 +1012,7 @@ def build_knowledge_prompt(
 正式证书原件优先于企业宣传、ESG 或绿色发展类报告。
 本题只回答已命中的资质证书和体系认证；不得主动扩展到营业执照、生产许可证、安全生产许可证或其他证照是否缺失。
 如果用户没有询问“还缺什么”，不要输出“需要确认或补充”小节，也不要写“当前未提供/未发现/缺少某证照”。
+如果某项资料只命中图片资产、没有可靠 OCR 正文，不得推断证书编号、有效期、覆盖范围或与其他证书的一致性，只能按资产名称说明“已命中该证书资料”。
 """
     prompt = f"""你是一个专业的企业私有知识库与电网/电力招投标 RAG 问答助手。
 你可以同时依据“企业知识库检索片段”和“相关图片/资质资产”回答用户问题。用户询问企业资信库、产品库、业绩材料、人员证书、社保缴纳证明、营业执照、产品图片等私有资产时，应优先基于相关图片/资质资产回答。
@@ -1010,7 +1049,8 @@ def build_knowledge_prompt(
 12. 判断“缺少某项材料”前，必须同时核对知识片段和图片资产；只要任一处存在营业执照、体系认证、社保或其他原始材料，就不得声称该材料缺失。
 13. 对资质证书问题，优先逐项列出质量管理体系、环境管理体系、职业健康安全管理体系等正式证书原件，不得用 ESG、宣传册或绿色发展报告替代正式证书来源。
 14. 只回答用户询问的资料范围，不要主动列举无关材料并声称“未发现”或“缺少”；需要补充的项目必须与本次问题直接相关。
-15. 语言专业、客观、准确，适合非技术标书人员阅读。
+15. 证书编号、有效期、发证机构、覆盖范围等细节只能来自知识库检索片段中的明确文字；如果只来自图片资产标题或图片预览，不得自行解释图片内容或把局部印章、局部文字当成完整证书正文。
+16. 语言专业、客观、准确，适合非技术标书人员阅读。
 """
     return prompt, images
 
