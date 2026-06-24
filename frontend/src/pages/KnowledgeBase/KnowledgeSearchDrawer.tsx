@@ -23,6 +23,7 @@ interface SourceContext {
     source_url?: string;
     source_file?: string;
     source_display_name?: string;
+    source_document_name?: string;
     category_label?: string;
     category?: string;
     tags?: string;
@@ -173,6 +174,7 @@ function displayLabel(value?: string): string {
 function sourceTitle(source: SourceContext): string {
   const meta = source.metadata || {};
   return (
+    displayLabel(meta.source_document_name) ||
     displayLabel(meta.source_display_name) ||
     displayLabel(meta.source_file) ||
     displayLabel(meta.source_org) ||
@@ -187,23 +189,36 @@ function sourceTitle(source: SourceContext): string {
 
 function sourceDescription(source: SourceContext): string {
   const meta = source.metadata || {};
-  return [
+  const labels = [
     meta.enterprise || '泰昌',
     meta.evidence_type_label || (meta.evidence_type ? evidenceTypeLabel[meta.evidence_type] || displayLabel(meta.evidence_type) : undefined),
     displayLabel(meta.category_label || meta.category || meta.source_category_label || meta.source_category),
     meta.target_library_label || (meta.target_library ? targetLibraryLabel[meta.target_library] || displayLabel(meta.target_library) : undefined),
     meta.doc_role ? docRoleLabel[meta.doc_role] || undefined : meta.doc_type,
     meta.table_name ? `${meta.table_name}${meta.row_number ? ` 第${meta.row_number}行` : ''}` : '',
-  ].filter(Boolean).join(' · ') || '知识片段';
+  ].filter(Boolean) as string[];
+  return [...new Set(labels)].join(' · ') || '知识片段';
 }
 
 function previewText(content?: string): string {
-  return (content || '').replace(/\s+/g, ' ').trim().slice(0, 120);
+  return sanitizeVisibleText(content).replace(/\s+/g, ' ').trim().slice(0, 120);
+}
+
+function sanitizeVisibleText(content?: string): string {
+  return (content || '')
+    .replace(/(?:parsed_outputs|rag_seed)\/[^\s)\]，。；;]+/gi, '客户原始资料')
+    .replace(/\/api\/knowledge\/assets\/[A-Za-z0-9-]+\/file(?:\?[^\s)]*)?/gi, '')
+    .replace(/taichang_certification_[A-Za-z0-9_]+/gi, '泰昌资质证书资料')
+    .replace(/taichang_production_capacity_[A-Za-z0-9_]+/gi, '泰昌生产制造能力资料')
+    .replace(/taichang_testing_capacity_[A-Za-z0-9_]+/gi, '泰昌试验检测能力资料')
+    .replace(/\bproduction_capacity\b/g, '生产制造能力')
+    .replace(/\btesting_capacity\b/g, '试验检测能力')
+    .replace(/\bcertification\b/g, '资质证书');
 }
 
 function sourceKey(source: SourceContext): string {
   const meta = source.metadata || {};
-  const sourceName = meta.source_display_name || meta.source_file || meta.source_org || meta.category_label || meta.category || '';
+  const sourceName = meta.source_document_name || meta.source_display_name || meta.source_file || meta.source_org || meta.category_label || meta.category || '';
   if (
     source.retrieval_source === 'structured_product_parameter_json' ||
     meta.retrieval_source === 'structured_product_parameter_json' ||
@@ -217,7 +232,6 @@ function sourceKey(source: SourceContext): string {
   }
   return [
     sourceName,
-    meta.source_url || '',
   ].join('|');
 }
 
@@ -583,7 +597,7 @@ export function KnowledgeSearchDrawer({
                             <h3 className="mb-2 mt-3 text-sm font-bold text-slate-800">{children}</h3>
                           ),
                           p: ({ children }) => (
-                            <p className="my-2 whitespace-pre-wrap text-[15px] leading-7">{children}</p>
+                            <div className="my-2 whitespace-pre-wrap text-[15px] leading-7">{children}</div>
                           ),
                           ul: ({ children }) => (
                             <ul className="my-2 space-y-1 pl-5">{children}</ul>
@@ -626,7 +640,9 @@ export function KnowledgeSearchDrawer({
                           ),
                         }}
                       >
-                        {msg.role === 'assistant' ? withInlineAssetImages(msg.content, msg.assets) : msg.content}
+                        {msg.role === 'assistant'
+                          ? withInlineAssetImages(sanitizeVisibleText(msg.content), msg.assets)
+                          : msg.content}
                       </ReactMarkdown>
                     ) : null}
                     {msg.streaming && msg.content && <span className="ml-1 inline-block h-4 w-1 animate-pulse rounded bg-blue-500 align-middle" />}

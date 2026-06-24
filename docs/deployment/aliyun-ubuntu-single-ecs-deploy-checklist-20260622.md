@@ -657,7 +657,7 @@ select
 | [ ] | 确认 `rag_seed` 在服务器存在 | `rag_seed/power_grid_resources/index.csv` 存在 | Git 拉取或包上传后应已存在 |
 | [ ] | RAG 种子库 dry-run | 输出 docs/parents/children 统计，无异常 | 不写数据库 |
 | [ ] | RAG 种子库正式入库 | `knowledge_documents`、`document_chunks` 数量增加 | 需要 DashScope Embedding Key 可用 |
-| [ ] | RAG 基础问答验证 | 企业知识库问答接口可返回内容和来源 | 后续再跑完整门禁 |
+| [ ] | RAG 基础问答验证 | 企业知识库问答接口可返回内容和来源 | 2026-06-24 云上真实页面 3 条问答：1 条基本通过、2 条 FAIL；本地 P1C-14 已修复并通过三问真实 stream 复测，待推送部署后按同口径云上复测 |
 | [ ] | 泰昌/辽宁客户资料专项入库 | 企业资信库、产品库、图片资产可见 | 需按专项脚本和 metadata 边界执行，不与基础种子库混跑 |
 
 ### 9.0 泰昌/辽宁企业知识库文档入库
@@ -731,7 +731,7 @@ parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/
 | [ ] | 进入投标确认页 | 候选字段/缺口可见 | |
 | [ ] | 生成一节正文 | SSE/任务状态正常，正文保存 | |
 | [ ] | 运行合规检查 | 能输出覆盖/缺口/风险 | |
-| [ ] | 企业知识库问答 | `/api/knowledge/search/stream` 正常返回 | 需要 RAG 数据 |
+| [ ] | 企业知识库问答 | `/api/knowledge/search/stream` 正常返回且来源正确 | 2026-06-24 本地修复后通过：资质证书、CPVC 检验报告、企业证明材料三问 3/3 PASS；阿里云部署后必须复测同三问，通过前暂不进入最小标书主流程 |
 | [ ] | 导出 DOCX | 能下载 Word 文件 | |
 | [ ] | DOCX 字段刷新 | metadata 或日志显示刷新成功 | LibreOffice |
 
@@ -958,3 +958,5 @@ docker compose exec postgres psql -U bidding -d bidding
 | 2026-06-23 | chris/Codex | 排查企业知识库分类仍显示单一“电网招标文件” | 通过 | 根因不是数据库、浏览器缓存或 Docker 缓存，而是阿里云服务器前端源码未同步；服务器 `grep displayDocumentCategory/category_label` 无输出，导致重建的是旧源码 |
 | 2026-06-23 | chris | 同步最新 `KnowledgeBase/index.tsx` 并重建 frontend | 通过 | 无痕窗口验证企业知识库分类已正常显示 |
 | 2026-06-23 | Codex | 补充阿里云测试环境代码发布 SOP 与排障说明 | 完成 | 新增 Gitee 分支提交流程、服务器拉取 commit、前后端镜像构建、缓存排查和执行记录要求 |
+| 2026-06-24 | Codex | 阿里云企业知识库 3 条真实问答冒烟 | 部分通过 | 环境 ready；CPVC 检验报告基本正确，资质证书和企业证明材料问答失败；发现正式证书未优先、基础证照误判缺失、社保证明错误归类及内部枚举/路径暴露，详见 `docs/rag/runs/run_20260624_aliyun_enterprise_knowledge_qa_smoke.md` |
+| 2026-06-24 | Codex | P1C-14 本地修复与真实回归 | 本地通过 | 修复企业知识库事实来源优先级、中文展示清洗、社保证明归类和 Ollama embedding 兼容；本地 RAG 门禁 PASS，三问真实 stream 3/3 PASS，详见 `docs/rag/runs/run_20260624_p1c14_local_final_three_question_stream_summary.md` |

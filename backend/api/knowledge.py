@@ -17,6 +17,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import re
 import uuid
 from pathlib import Path
 from typing import Any
@@ -40,7 +41,7 @@ from backend.rag.ingestion import (
     ingest_knowledge_document,
     update_knowledge_document_status,
 )
-from backend.rag.display_names import sanitize_source_contexts
+from backend.rag.display_names import sanitize_knowledge_assets, sanitize_source_contexts
 from backend.rag.retrieval import (
     generate_knowledge_answer,
     search_knowledge_assets,
@@ -241,17 +242,69 @@ def _is_pilot_enterprise_context(context: dict[str, Any]) -> bool:
 
 def _source_group_key(context: dict[str, Any]) -> str:
     meta = _safe_meta(context)
+    if (
+        context.get("retrieval_source") == "structured_product_parameter_json"
+        or meta.get("retrieval_source") == "structured_product_parameter_json"
+    ):
+        return "|".join(
+            str(part or "")
+            for part in [
+                meta.get("source_display_name") or meta.get("source_file"),
+                meta.get("report_no"),
+                meta.get("specification_model"),
+            ]
+        )
     return "|".join(
         str(part or "")
         for part in [
-            meta.get("source_file") or meta.get("source_org") or meta.get("category_label") or meta.get("category"),
-            meta.get("source_page") or meta.get("page_no") or meta.get("page_index"),
-            meta.get("source_section"),
+            meta.get("source_document_name")
+            or meta.get("source_display_name")
+            or meta.get("source_file")
+            or meta.get("source_org")
+            or meta.get("category_label")
+            or meta.get("category"),
         ]
     )
 
 
-def _curate_pilot_enterprise_contexts(contexts: list[dict[str, Any]], limit: int = 5) -> list[dict[str, Any]]:
+def _enterprise_context_intent_bonus(query: str, context: dict[str, Any]) -> float:
+    meta = _safe_meta(context)
+    text = " ".join(
+        str(value or "")
+        for value in [
+            meta.get("source_display_name"),
+            meta.get("source_file"),
+            meta.get("evidence_type"),
+            meta.get("evidence_type_label"),
+            context.get("content"),
+        ]
+    )
+    bonus = 0.0
+    if any(keyword in query for keyword in ["资质证书", "体系认证", "认证证书"]):
+        if any(name in text for name in ["质量管理体系认证证书", "环境管理体系认证证书", "职业健康安全管理体系认证证书"]):
+            bonus += 0.65
+        elif "认证证书" in text or meta.get("evidence_type") == "certification":
+            bonus += 0.3
+        if any(name in text for name in ["ESG", "绿色发展规划"]):
+            bonus -= 0.25
+    if any(keyword in query for keyword in ["企业证明材料", "企业资信", "基础证照"]):
+        if any(name in text for name in ["营业执照", "质量管理体系认证证书", "环境管理体系认证证书", "职业健康安全管理体系认证证书", "社保证明", "参保证明"]):
+            bonus += 0.45
+    if "社保" in query or "参保" in query:
+        if "社保" in text or "参保" in text:
+            bonus += 0.6
+        if meta.get("evidence_type") in {"production_capacity", "testing_capacity"}:
+            bonus -= 0.4
+    if meta.get("is_asset_catalog"):
+        bonus -= 0.15
+    return bonus
+
+
+def _curate_pilot_enterprise_contexts(
+    contexts: list[dict[str, Any]],
+    limit: int = 5,
+    query: str = "",
+) -> list[dict[str, Any]]:
     curated: dict[str, dict[str, Any]] = {}
     for context in contexts or []:
         if not _is_pilot_enterprise_context(context):
@@ -265,7 +318,7 @@ def _curate_pilot_enterprise_contexts(contexts: list[dict[str, Any]], limit: int
 
     return sorted(
         curated.values(),
-        key=lambda item: float(item.get("similarity") or 0),
+        key=lambda item: float(item.get("similarity") or 0) + _enterprise_context_intent_bonus(query, item),
         reverse=True,
     )[:limit]
 
@@ -284,6 +337,32 @@ def _asset_metadata_filter_from_query(query: str, metadata_filter: dict[str, Any
         asset_filter.setdefault("source_domain", "enterprise_fact")
         asset_filter.setdefault("reference_only", False)
     return asset_filter or None
+
+
+def _merge_asset_source_contexts(
+    contexts: list[dict[str, Any]],
+    assets: list[dict[str, Any]],
+    limit: int = 5,
+    query: str = "",
+) -> list[dict[str, Any]]:
+    merged = list(contexts or [])
+    for asset in assets or []:
+        metadata = asset.get("metadata") if isinstance(asset.get("metadata"), dict) else {}
+        merged.append(
+            {
+                "id": f"asset:{asset.get('id')}",
+                "content": asset.get("description") or asset.get("title") or "",
+                "similarity": float(asset.get("similarity") or 0),
+                "retrieval_source": "knowledge_asset",
+                "metadata": {
+                    **metadata,
+                    "source_display_name": metadata.get("source_display_name") or asset.get("title"),
+                    "category_label": asset.get("category") or metadata.get("category_label"),
+                    "retrieval_source": "knowledge_asset",
+                },
+            }
+        )
+    return _curate_pilot_enterprise_contexts(merged, limit=limit, query=query)
 
 
 @knowledge_bp.route('/scopes', methods=['GET'])
@@ -397,7 +476,7 @@ def search_knowledge():
         contexts = search_knowledge_base(
             query,
             match_threshold=0.3,
-            match_count=5,
+            match_count=15,
             scenario="qa",
             metadata_filter=metadata_filter,
             project_id=data.get("project_id") or None,
@@ -405,7 +484,7 @@ def search_knowledge():
         )
         parameter_contexts = search_taichang_product_parameter_contexts(query, limit=5)
         performance_contexts = search_taichang_project_performance_contexts(query, limit=3)
-        contexts = _curate_pilot_enterprise_contexts(contexts, limit=5)
+        contexts = _curate_pilot_enterprise_contexts(contexts, limit=5, query=query)
         contexts = (performance_contexts + parameter_contexts + contexts)[:5]
         contexts = sanitize_source_contexts(contexts)
         asset_metadata_filter = _asset_metadata_filter_from_query(
@@ -413,7 +492,10 @@ def search_knowledge():
             metadata_filter,
             data.get("asset_metadata_filter") or None,
         )
-        assets = search_knowledge_assets(query, match_count=8, metadata_filter=asset_metadata_filter)
+        assets = sanitize_knowledge_assets(
+            search_knowledge_assets(query, match_count=12, metadata_filter=asset_metadata_filter)[:8]
+        )
+        contexts = _merge_asset_source_contexts(contexts, assets, limit=5, query=query)
         
         # 2. RAG 生成回答
         result = generate_knowledge_answer(query, contexts, assets)
@@ -462,7 +544,7 @@ def stream_search_knowledge():
             contexts = search_knowledge_base(
                 query,
                 match_threshold=0.3,
-                match_count=5,
+                match_count=15,
                 scenario="qa",
                 metadata_filter=metadata_filter,
                 project_id=data.get("project_id") or None,
@@ -470,7 +552,7 @@ def stream_search_knowledge():
             )
             parameter_contexts = search_taichang_product_parameter_contexts(query, limit=5)
             performance_contexts = search_taichang_project_performance_contexts(query, limit=3)
-            contexts = _curate_pilot_enterprise_contexts(contexts, limit=5)
+            contexts = _curate_pilot_enterprise_contexts(contexts, limit=5, query=query)
             contexts = (performance_contexts + parameter_contexts + contexts)[:5]
             contexts = sanitize_source_contexts(contexts)
             asset_metadata_filter = _asset_metadata_filter_from_query(
@@ -478,7 +560,10 @@ def stream_search_knowledge():
                 metadata_filter,
                 data.get("asset_metadata_filter") or None,
             )
-            assets = search_knowledge_assets(query, match_count=8, metadata_filter=asset_metadata_filter)
+            assets = sanitize_knowledge_assets(
+                search_knowledge_assets(query, match_count=12, metadata_filter=asset_metadata_filter)[:8]
+            )
+            contexts = _merge_asset_source_contexts(contexts, assets, limit=5, query=query)
             if not contexts and not assets and not is_relevant_knowledge_query(query):
                 yield emit({
                     "type": "chunk",
@@ -540,6 +625,8 @@ def _normalize_followups(payload: dict) -> dict:
         text = str(item or "").strip()
         if not text or text in seen:
             continue
+        if re.search(r"(?:目前|当前|泰昌).{0,12}(?:缺少|缺失|未提供|尚未提供)", text):
+            continue
         if len(text) > 80:
             text = text[:80].rstrip("，。；;,. ") + "？"
         if not text.endswith(("?", "？")):
@@ -590,7 +677,8 @@ def generate_knowledge_followups():
 3. 如果回答涉及图片资产，要优先引导"图片适合放在哪个章节""哪些能插入正文/附件""还缺哪些原件或证明"。
 4. 如果回答涉及资质、人员、社保、营业执照、许可证，要优先引导材料完整性和废标风险核查。
 5. 如果回答涉及产品、设备、参数，要优先引导技术响应配图和参数匹配。
-6. 只输出 JSON，不要输出 Markdown，不要解释。
+6. 只有当助手回答已经明确确认某项材料缺失时，后续问题才能复述该缺失；否则必须使用“是否具备”“能否检索到”等中性问法，不得写“目前缺少”“当前缺失”“未提供”等未经证实的结论。
+7. 只输出 JSON，不要输出 Markdown，不要解释。
 
 JSON 格式：
 {{

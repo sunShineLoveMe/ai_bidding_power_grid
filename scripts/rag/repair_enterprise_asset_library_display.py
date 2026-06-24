@@ -55,6 +55,7 @@ def _friendly_title(row: dict[str, Any], category: str) -> str:
     if not title:
         return "泰昌企业资料"
     title = re.sub(r"^河北泰昌电力器材科技有限公司\s*", "", title)
+    title = re.sub(r"^泰昌泰昌", "泰昌", title)
     title = re.sub(r"^泰昌\s*[0-9]+[._、-]?", "", title)
     title = re.sub(r"\s+", "", title)
     title = title.replace("Logo", " Logo")

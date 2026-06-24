@@ -1,9 +1,10 @@
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import Mock, patch
 
 from backend.rag import vector_store
-from backend.rag.vector_store import EmptyDocumentContentError, ensure_extractable_text
+from backend.rag.vector_store import EmptyDocumentContentError, ensure_extractable_text, get_embeddings
 
 
 class VectorStorePgvectorTest(unittest.TestCase):
@@ -39,6 +40,35 @@ class VectorStorePgvectorTest(unittest.TestCase):
 
             with self.assertRaises(EmptyDocumentContentError):
                 ensure_extractable_text(str(empty_file))
+
+    @patch("backend.rag.vector_store.record_ai_usage_log")
+    @patch("backend.rag.vector_store.get_setting")
+    @patch("backend.rag.vector_store.requests.post")
+    def test_local_openai_compatible_embedding_uses_direct_request(self, post, get_setting, _usage_log):
+        def fake_get_setting(key, default=None):
+            return {
+                "embedding_base_url": "http://localhost:11434/v1",
+                "embedding_model": "qwen3-embedding:0.6b",
+                "embedding_dimensions": 1024,
+                "request_timeout_seconds": 120,
+            }.get(key, default)
+
+        response = Mock()
+        response.json.return_value = {
+            "model": "qwen3-embedding:0.6b",
+            "data": [{"embedding": [0.1, 0.2, 0.3]}],
+            "usage": {"total_tokens": 3},
+        }
+        response.raise_for_status.return_value = None
+        post.return_value = response
+        get_setting.side_effect = fake_get_setting
+
+        embeddings = get_embeddings(Mock(), ["泰昌资质证书"])
+
+        self.assertEqual(embeddings, [[0.1, 0.2, 0.3]])
+        post.assert_called_once()
+        self.assertEqual(post.call_args.kwargs["json"]["input"], ["泰昌资质证书"])
+        self.assertNotIn("dimensions", post.call_args.kwargs["json"])
 
 
 if __name__ == "__main__":

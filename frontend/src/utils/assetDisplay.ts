@@ -56,6 +56,13 @@ function hasPersonnelSignal(asset: AssetDisplayInput): boolean {
 function normalizeTitle(rawTitle: string, asset: AssetDisplayInput): string {
   let title = rawTitle.trim();
   if (!title) return '';
+  title = title
+    .replace(/taichang_certification_[A-Za-z0-9_]+/gi, '泰昌资质证书资料')
+    .replace(/taichang_production_capacity_[A-Za-z0-9_]+/gi, '泰昌生产制造能力资料')
+    .replace(/taichang_testing_capacity_[A-Za-z0-9_]+/gi, '泰昌试验检测能力资料')
+    .replace(/\bproduction_capacity\b/g, '生产制造能力')
+    .replace(/\btesting_capacity\b/g, '试验检测能力')
+    .replace(/\bcertification\b/g, '资质证书');
   title = title.replace(/^泰昌\s*([0-9]+[._、-]?)?/, '');
   title = title.replace(/^河北泰昌电力器材科技有限公司\s*/, '');
   title = title.replace(/\s+/g, '');
@@ -69,7 +76,7 @@ function normalizeTitle(rawTitle: string, asset: AssetDisplayInput): string {
 
 export function displayAssetTitle(asset: AssetDisplayInput): string {
   const metadataTitle = textValue(asset.metadata?.source_display_name);
-  const title = normalizeTitle(asset.title || metadataTitle || '企业资料', asset);
+  const title = normalizeTitle(metadataTitle || asset.title || '企业资料', asset);
   return title || '企业资料';
 }
 

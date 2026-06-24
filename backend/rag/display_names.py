@@ -61,13 +61,41 @@ TARGET_LIBRARY_LABELS = {
     "reference_template_library": "参考模板资料",
 }
 
+SAFE_METADATA_KEYS = {
+    "enterprise",
+    "doc_owner",
+    "source_domain",
+    "source_display_name",
+    "source_document_name",
+    "source_category_label",
+    "category_label",
+    "evidence_type",
+    "evidence_type_label",
+    "target_library",
+    "target_library_label",
+    "doc_role",
+    "doc_type",
+    "report_no",
+    "specification_model",
+    "source_section",
+    "table_name",
+    "row_number",
+    "retrieval_source",
+    "page_no",
+    "page_index",
+    "full_page",
+    "anonymized",
+    "is_redacted",
+    "asset_visual_type",
+}
+
 
 def _basename(value: str) -> str:
     name = Path(value).name if "/" in value else value
     if name.endswith(".url.md"):
         name = name[:-7]
     else:
-        name = re.sub(r"\.(md|pdf|docx?|xlsx?|csv|txt)$", "", name, flags=re.I)
+        name = re.sub(r"\.(md|pdf|docx?|xlsx?|csv|txt|png|jpe?g|webp)$", "", name, flags=re.I)
     name = re.sub(r"_[0-9a-f]{6,}$", "", name, flags=re.I)
     name = re.sub(r"^\d+[._-]?", "", name).strip()
     return name
@@ -86,6 +114,22 @@ def category_display_name(value: Any) -> str:
     if not raw:
         return ""
     return CATEGORY_LABELS.get(raw) or EVIDENCE_TYPE_LABELS.get(raw) or TARGET_LIBRARY_LABELS.get(raw) or raw
+
+
+def sanitize_visible_text(value: Any) -> str:
+    text = str(value or "")
+    text = re.sub(r"(?im)^\s*[-*]?\s*(?:asset_path|local_path|storage_path|source_file)\s*:\s*.*$", "", text)
+    text = re.sub(r"(?:parsed_outputs|rag_seed)/[^\s)\]，。；;]+", "客户原始资料", text)
+    text = re.sub(r"/api/knowledge/assets/[A-Za-z0-9-]+/file(?:\?[^\s)]*)?", "", text)
+    text = re.sub(r"\btaichang_certification_[A-Za-z0-9_]+", "泰昌资质证书资料", text, flags=re.I)
+    text = re.sub(r"\btaichang_production_capacity_[A-Za-z0-9_]+", "泰昌生产制造能力资料", text, flags=re.I)
+    text = re.sub(r"\btaichang_testing_capacity_[A-Za-z0-9_]+", "泰昌试验检测能力资料", text, flags=re.I)
+    text = re.sub(r"\bproduction_capacity\b", "生产制造能力", text)
+    text = re.sub(r"\btesting_capacity\b", "试验检测能力", text)
+    text = re.sub(r"\bcertification\b", "资质证书", text)
+    text = re.sub(r"[，。；;]?\s*该图片为正式整页/原图资产，不是\s*MinerU\s*局部切图[。.]?", "。", text)
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    return text.strip()
 
 
 def source_display_name(metadata: dict[str, Any] | None, fallback_title: str | None = None) -> str:
@@ -122,6 +166,11 @@ def source_display_name(metadata: dict[str, Any] | None, fallback_title: str | N
 def sanitize_source_metadata(metadata: dict[str, Any] | None, fallback_title: str | None = None) -> dict[str, Any]:
     meta = dict(metadata or {})
     meta["source_display_name"] = source_display_name(meta, fallback_title=fallback_title)
+    source_file = str(meta.get("source_file") or "").strip()
+    source_document_name = _basename(source_file) if source_file else meta["source_display_name"]
+    if not _contains_chinese(source_document_name) or _is_internal_name(source_document_name):
+        source_document_name = meta["source_display_name"]
+    meta["source_document_name"] = source_document_name
     if meta.get("source_category") == "05_enterprise_documents" or meta.get("source_domain") == "enterprise_fact":
         meta["category_label"] = category_display_name(meta.get("source_category") or "05_enterprise_documents")
     elif meta.get("category_label"):
@@ -136,7 +185,9 @@ def sanitize_source_metadata(metadata: dict[str, Any] | None, fallback_title: st
         meta["target_library_label"] = category_display_name(meta.get("target_library"))
     if meta.get("evidence_type"):
         meta["evidence_type_label"] = category_display_name(meta.get("evidence_type"))
-    return meta
+    sanitized = {key: value for key, value in meta.items() if key in SAFE_METADATA_KEYS}
+    sanitized["source_display_name"] = meta["source_display_name"]
+    return sanitized
 
 
 def sanitize_source_contexts(contexts: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -145,5 +196,49 @@ def sanitize_source_contexts(contexts: list[dict[str, Any]]) -> list[dict[str, A
         item = dict(context)
         metadata = item.get("metadata") if isinstance(item.get("metadata"), dict) else {}
         item["metadata"] = sanitize_source_metadata(metadata)
+        item["content"] = sanitize_visible_text(item.get("content"))
+        sanitized.append(item)
+    return sanitized
+
+
+def sanitize_knowledge_assets(assets: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    sanitized: list[dict[str, Any]] = []
+    seen_display_names: set[str] = set()
+    for asset in assets or []:
+        item = dict(asset)
+        metadata = item.get("metadata") if isinstance(item.get("metadata"), dict) else {}
+        safe_meta = sanitize_source_metadata(metadata, fallback_title=str(item.get("title") or ""))
+        item["metadata"] = safe_meta
+        item["title"] = safe_meta.get("source_display_name") or source_display_name(metadata, str(item.get("title") or ""))
+        item["category"] = (
+            safe_meta.get("evidence_type_label")
+            or category_display_name(item.get("category"))
+            or "企业资料"
+        )
+        item["description"] = sanitize_visible_text(item.get("description"))
+        item["searchable_text"] = sanitize_visible_text(item.get("searchable_text"))
+        if safe_meta.get("evidence_type") == "personnel_certificate":
+            item["description"] = re.sub(
+                r"(?:生产制造能力|试验检测能力)资料",
+                "人员证书及社保证明资料",
+                item["description"],
+            )
+            item["searchable_text"] = re.sub(
+                r"(?:生产制造能力|试验检测能力)资料",
+                "人员证书及社保证明资料",
+                item["searchable_text"],
+            )
+        item["tags"] = [
+            category_display_name(tag)
+            for tag in item.get("tags") or []
+            if tag and not re.search(r"^taichang_|[a-zA-Z]+_[a-zA-Z_]+", str(tag))
+        ]
+        for key in ("local_path", "storage_path", "source_url", "public_url", "file_name", "attribution"):
+            item.pop(key, None)
+        display_key = re.sub(r"\s+", "", str(item.get("title") or "")).lower()
+        if display_key and display_key in seen_display_names:
+            continue
+        if display_key:
+            seen_display_names.add(display_key)
         sanitized.append(item)
     return sanitized

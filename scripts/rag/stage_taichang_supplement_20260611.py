@@ -62,7 +62,9 @@ def _classify(path: Path) -> tuple[str, str, str]:
         return "inspection_report", "product_library", "enterprise_fact"
     if any(key in text for key in ["产品实物", "生产线", "生产设备", "挤出机", "牵引机", "切割机"]):
         return "production_capacity", "product_library", "enterprise_fact"
-    if any(key in text for key in ["试验", "检测", "电子天平", "维卡", "锤击", "熔体", "拉力", "人员证书", "花名册", "劳动合同", "社保"]):
+    if any(key in text for key in ["人员证书", "花名册", "劳动合同", "社保", "参保证明"]):
+        return "personnel_certificate", "qualification_library", "enterprise_fact"
+    if any(key in text for key in ["试验", "检测", "电子天平", "维卡", "锤击", "熔体", "拉力"]):
         target = "product_library" if "照片" in text or "设备" in text else "qualification_library"
         return "testing_capacity", target, "enterprise_fact"
     if any(key in text for key in ["审计报告", "银行资信", "授信证明"]):
@@ -92,6 +94,7 @@ def _category_label(evidence_type: str) -> str:
         "finance": "财务资料",
         "green_low_carbon": "绿色低碳资料",
         "inspection_report": "检验报告",
+        "personnel_certificate": "人员证书",
         "production_capacity": "生产制造能力",
         "project_performance": "项目业绩",
         "signature_seal": "签章资料",

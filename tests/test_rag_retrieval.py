@@ -316,6 +316,49 @@ class RagRetrievalQualityTest(unittest.TestCase):
 
         self.assertEqual({row["id"] for row in selected}, {"contract-1", "award-1"})
 
+    def test_required_evidence_coverage_keeps_three_system_certificates(self):
+        from backend.rag import retrieval
+
+        rows = [
+            {"id": "esg", "content": "ESG环境社会公司治理报告提到质量管理。"},
+            {"id": "quality", "content": "质量管理体系认证证书"},
+            {"id": "environment", "content": "环境管理体系认证证书"},
+            {"id": "ohs", "content": "职业健康安全管理体系认证证书"},
+        ]
+
+        selected = retrieval._select_with_required_evidence_coverage(
+            "泰昌有哪些资质证书和体系认证？",
+            rows,
+            text_getter=lambda row: row["content"],
+            limit=3,
+        )
+
+        self.assertEqual({row["id"] for row in selected}, {"quality", "environment", "ohs"})
+
+    def test_enterprise_evidence_coverage_prefers_explicit_social_security_asset(self):
+        from backend.rag import retrieval
+
+        rows = [
+            {"id": "person", "title": "陈仙瑞人员证书", "searchable_text": "来源目录含劳动合同社保证明", "similarity": 0.9},
+            {"id": "social", "title": "泰昌社保证明第1页", "searchable_text": "社保证明 参保证明", "similarity": 0.7},
+            {"id": "license", "title": "泰昌营业执照副本原图", "searchable_text": "营业执照", "similarity": 0.8},
+            {"id": "quality", "title": "质量管理体系认证证书", "searchable_text": "质量管理体系认证证书", "similarity": 0.8},
+            {"id": "environment", "title": "环境管理体系认证证书", "searchable_text": "环境管理体系认证证书", "similarity": 0.8},
+            {"id": "ohs", "title": "职业健康安全管理体系认证证书", "searchable_text": "职业健康安全管理体系认证证书", "similarity": 0.8},
+        ]
+
+        selected = retrieval._select_with_required_evidence_coverage(
+            "泰昌有哪些企业证明材料？",
+            rows,
+            text_getter=lambda row: f"{row['title']} {row['searchable_text']}",
+            limit=5,
+        )
+
+        self.assertEqual(
+            {row["id"] for row in selected},
+            {"social", "license", "quality", "environment", "ohs"},
+        )
+
     def test_authority_ranking_pushes_reference_template_behind_citable_sources(self):
         from backend.rag.retrieval import _rank_rows
 
@@ -546,9 +589,62 @@ class RagRetrievalQualityTest(unittest.TestCase):
         self.assertIn("来源 招标文件", prompt)
         self.assertIn("图片资产1", prompt)
         self.assertIn("脱敏项目经理身份证明材料样张", prompt)
-        self.assertIn("/api/knowledge/assets/asset-1/file", prompt)
+        self.assertNotIn("/api/knowledge/assets/asset-1/file", prompt)
         self.assertIn("必须逐项核对并分别回答", prompt)
         self.assertEqual(images[-1]["url"], "/api/knowledge/assets/asset-1/file")
+
+    def test_knowledge_prompt_does_not_mark_original_enterprise_asset_as_redacted(self):
+        from backend.rag.retrieval import build_knowledge_prompt
+
+        prompt, _ = build_knowledge_prompt(
+            "泰昌有哪些企业证明材料？",
+            contexts=[],
+            assets=[{
+                "id": "license-1",
+                "title": "taichang_business_license_private",
+                "category": "business_license",
+                "description": "来源路径 parsed_outputs/customer/license.jpg",
+                "metadata": {
+                    "source_display_name": "泰昌营业执照副本原图",
+                    "evidence_type": "business_license",
+                    "target_library": "qualification_library",
+                    "anonymized": False,
+                },
+            }],
+        )
+
+        self.assertIn("泰昌营业执照副本原图", prompt)
+        self.assertIn("资料属性：客户原始资料", prompt)
+        self.assertNotIn("parsed_outputs", prompt)
+        self.assertNotIn("taichang_business_license_private", prompt)
+
+    def test_enterprise_evidence_prompt_uses_broad_business_scope(self):
+        from backend.rag.retrieval import build_knowledge_prompt
+
+        prompt, _ = build_knowledge_prompt(
+            "泰昌有哪些企业证明材料？",
+            contexts=[],
+            assets=[],
+        )
+
+        self.assertIn("广义企业事实集合", prompt)
+        self.assertIn("基础证照", prompt)
+        self.assertIn("正式体系认证", prompt)
+        self.assertIn("人员与社保证明", prompt)
+        self.assertIn("不能把回答缩窄为“企业现场照片”", prompt)
+
+    def test_certification_prompt_does_not_expand_to_missing_license_claims(self):
+        from backend.rag.retrieval import build_knowledge_prompt
+
+        prompt, _ = build_knowledge_prompt(
+            "泰昌有哪些资质证书？",
+            contexts=[],
+            assets=[],
+        )
+
+        self.assertIn("只回答已命中的资质证书和体系认证", prompt)
+        self.assertIn("不要输出“需要确认或补充”小节", prompt)
+        self.assertIn("不得主动扩展到营业执照", prompt)
 
     def test_pilot_enterprise_contexts_filter_dedupe_sort_and_limit_sources(self):
         from backend.api.knowledge import _curate_pilot_enterprise_contexts
@@ -601,6 +697,30 @@ class RagRetrievalQualityTest(unittest.TestCase):
         self.assertEqual([item["id"] for item in result], ["tc-2", "tc-6", "tc-3", "tc-4", "tc-1"])
         self.assertNotIn("jiangxi", [item["id"] for item in result])
         self.assertNotIn("haoqian", [item["id"] for item in result])
+
+    def test_pilot_enterprise_contexts_prioritize_formal_certificates(self):
+        from backend.api.knowledge import _curate_pilot_enterprise_contexts
+
+        common = {
+            "enterprise": "泰昌",
+            "source_domain": "enterprise_fact",
+            "fact_source_allowed_for_enterprise": True,
+            "reference_only": False,
+        }
+        contexts = [
+            {"id": "esg", "content": "ESG报告提到质量管理", "similarity": 0.95, "metadata": {**common, "source_display_name": "ESG环境社会公司治理报告"}},
+            {"id": "quality", "content": "质量管理体系认证证书", "similarity": 0.65, "metadata": {**common, "source_display_name": "质量管理体系认证证书", "evidence_type": "certification"}},
+            {"id": "environment", "content": "环境管理体系认证证书", "similarity": 0.64, "metadata": {**common, "source_display_name": "环境管理体系认证证书", "evidence_type": "certification"}},
+            {"id": "ohs", "content": "职业健康安全管理体系认证证书", "similarity": 0.63, "metadata": {**common, "source_display_name": "职业健康安全管理体系认证证书", "evidence_type": "certification"}},
+        ]
+
+        result = _curate_pilot_enterprise_contexts(
+            contexts,
+            limit=3,
+            query="泰昌有哪些资质证书？",
+        )
+
+        self.assertEqual({item["id"] for item in result}, {"quality", "environment", "ohs"})
 
 
 if __name__ == "__main__":

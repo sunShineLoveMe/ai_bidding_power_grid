@@ -11,7 +11,7 @@ from backend.ai.qwen_client import stream_dashscope_api
 from backend.core.config import get_stage_model
 from backend.ai.rerank_client import rerank_documents
 from backend.core.bid_volumes import asset_applicable_volumes, asset_matches_volume, normalize_volume_type
-from backend.rag.display_names import sanitize_source_metadata
+from backend.rag.display_names import sanitize_knowledge_assets, sanitize_source_metadata, sanitize_visible_text
 
 AUTHORITY_SCORE = {
     "law_or_standard": 0.18,
@@ -320,6 +320,22 @@ def _required_evidence_intents(query: str) -> set[str]:
         required.add("contract")
     if any(keyword in text for keyword in ["中标通知书", "中标"]):
         required.add("award_notice")
+    if any(keyword in text for keyword in ["资质证书", "体系认证", "认证证书"]):
+        required.update({"quality_certification", "environment_certification", "ohs_certification"})
+    if any(keyword in text for keyword in ["企业证明材料", "企业资信", "基础证照"]):
+        required.update({
+            "business_license",
+            "quality_certification",
+            "environment_certification",
+            "ohs_certification",
+            "personnel_social_security",
+        })
+    if "营业执照" in text:
+        required.add("business_license")
+    if any(keyword in text for keyword in ["社保", "参保"]):
+        required.add("personnel_social_security")
+    if any(keyword in text for keyword in ["检验报告", "检测报告", "型式试验"]):
+        required.add("inspection_report")
     return required
 
 
@@ -336,6 +352,18 @@ def _evidence_intents_from_text(text: str) -> set[str]:
         intents.add("contract")
     if any(keyword in text for keyword in ["中标通知书", "中标"]):
         intents.add("award_notice")
+    if "质量管理体系认证证书" in text:
+        intents.update({"quality_certification", "certification"})
+    if "环境管理体系认证证书" in text:
+        intents.update({"environment_certification", "certification"})
+    if "职业健康安全管理体系认证证书" in text:
+        intents.update({"ohs_certification", "certification"})
+    if "营业执照" in text:
+        intents.add("business_license")
+    if any(keyword in text for keyword in ["社保证明", "参保证明", "社保缴纳"]):
+        intents.add("personnel_social_security")
+    if any(keyword in text for keyword in ["检验报告", "检测报告", "型式试验报告"]):
+        intents.add("inspection_report")
     return intents
 
 
@@ -356,14 +384,34 @@ def _select_with_required_evidence_coverage(
         return str(row.get("id") or row.get("storage_path") or f"{row.get('document_id')}:{row.get('chunk_index')}:{hash(text_getter(row))}")
 
     for intent in required:
+        candidates = []
         for row in rows:
             key = row_key(row)
             if key in seen:
                 continue
             if intent in _evidence_intents_from_text(text_getter(row)):
-                selected.append(row)
-                seen.add(key)
-                break
+                title = str(row.get("title") or row.get("file_name") or "")
+                title_bonus = 0
+                if intent == "personnel_social_security" and any(word in title for word in ["社保", "参保"]):
+                    title_bonus = 2
+                elif intent == "business_license" and "营业执照" in title:
+                    title_bonus = 2
+                elif intent.endswith("_certification") and intent.split("_")[0] in {
+                    "quality",
+                    "environment",
+                    "ohs",
+                }:
+                    expected = {
+                        "quality_certification": "质量管理体系认证证书",
+                        "environment_certification": "环境管理体系认证证书",
+                        "ohs_certification": "职业健康安全管理体系认证证书",
+                    }[intent]
+                    title_bonus = 2 if expected in title else 0
+                candidates.append((title_bonus, float(row.get("similarity") or 0), row, key))
+        if candidates:
+            _, _, row, key = max(candidates, key=lambda item: (item[0], item[1]))
+            selected.append(row)
+            seen.add(key)
     for row in rows:
         if len(selected) >= limit:
             break
@@ -712,6 +760,16 @@ def _asset_query_intent_bonus(query: str, asset: dict[str, Any]) -> float:
         bonus += 0.35 if evidence_type == "inspection_report" else -0.08
     if any(keyword in text for keyword in ["资信", "资质", "证书", "体系认证"]) and target_library == "qualification_library":
         bonus += 0.06
+    if any(keyword in text for keyword in ["资质证书", "体系认证", "认证证书"]):
+        bonus += 0.45 if evidence_type == "certification" else -0.12
+        asset_text = _asset_search_text(asset)
+        if any(name in asset_text for name in ["质量管理体系认证证书", "环境管理体系认证证书", "职业健康安全管理体系认证证书"]):
+            bonus += 0.25
+    if any(keyword in text for keyword in ["企业证明材料", "企业资信", "基础证照"]):
+        if evidence_type in {"business_license", "certification", "personnel_certificate", "enterprise_evidence"}:
+            bonus += 0.25
+    if "社保" in text or "参保" in text:
+        bonus += 0.5 if evidence_type == "personnel_certificate" else -0.15
     return bonus
 
 
@@ -868,18 +926,26 @@ def build_knowledge_prompt(
                 "alt": meta.get("alt", "未命名图片")
             })
 
+    safe_assets = sanitize_knowledge_assets(assets or [])
     asset_contexts = []
-    for index, asset in enumerate(assets or [], 1):
+    for index, asset in enumerate(safe_assets, 1):
         title = asset.get("title") or "未命名图片"
         category = asset.get("category") or "图片资产"
-        asset_type = asset.get("asset_type") or "image"
         similarity = float(asset.get("similarity") or 0)
-        searchable_text = asset.get("searchable_text") or asset.get("description") or ""
+        description = sanitize_visible_text(asset.get("description") or asset.get("searchable_text") or "")
         sections = "、".join(asset.get("applicable_sections") or [])
         public_url = f"/api/knowledge/assets/{asset.get('id')}/file" if asset.get("id") else (asset.get("public_url") or "")
+        meta = asset.get("metadata") if isinstance(asset.get("metadata"), dict) else {}
+        is_redacted = bool(
+            asset.get("anonymized")
+            or meta.get("anonymized")
+            or meta.get("is_redacted")
+            or "脱敏" in str(title)
+        )
         asset_contexts.append(
-            f"【图片资产{index}｜相关度 {similarity:.2f}｜分类 {category}｜类型 {asset_type}】\n"
-            f"名称：{title}\n适用章节：{sections}\n图片地址：{public_url}\n说明：{searchable_text}"
+            f"【图片资产{index}｜相关度 {similarity:.2f}｜分类 {category}】\n"
+            f"名称：{title}\n资料属性：{'脱敏样张' if is_redacted else '客户原始资料'}\n"
+            f"适用章节：{sections}\n说明：{description}"
         )
         if public_url:
             images.append({
@@ -889,6 +955,26 @@ def build_knowledge_prompt(
 
     context_str = "\n\n---\n\n".join(text_contexts)
     asset_context_str = "\n\n---\n\n".join(asset_contexts) or "无相关图片资产。"
+    query_guidance = ""
+    if any(keyword in query for keyword in ["企业证明材料", "企业资信材料", "企业资信"]):
+        query_guidance = """
+【本题业务口径】：
+“企业证明材料”是广义企业事实集合，不是数据库中某一个同名分类。必须逐类核对并回答：
+1. 基础证照，例如营业执照；
+2. 正式体系认证，例如质量、环境、职业健康安全管理体系认证；
+3. 人员与社保证明；
+4. 项目业绩、场地、生产检测或企业现场材料（命中时再列出）。
+只要资产清单中存在上述材料，就必须列出，不能把回答缩窄为“企业现场照片”。
+本题不得主动对项目业绩、合同、中标通知书、检验报告、生产线等其他资料下“未发现”“未包含”或“缺少”的结论；用户未逐项询问时，只需回答已确认存在的企业证明材料。
+"""
+    elif any(keyword in query for keyword in ["资质证书", "体系认证", "认证证书"]):
+        query_guidance = """
+【本题业务口径】：
+优先核对并逐项列出质量管理体系、环境管理体系、职业健康安全管理体系认证证书。
+正式证书原件优先于企业宣传、ESG 或绿色发展类报告。
+本题只回答已命中的资质证书和体系认证；不得主动扩展到营业执照、生产许可证、安全生产许可证或其他证照是否缺失。
+如果用户没有询问“还缺什么”，不要输出“需要确认或补充”小节，也不要写“当前未提供/未发现/缺少某证照”。
+"""
     prompt = f"""你是一个专业的企业私有知识库与电网/电力招投标 RAG 问答助手。
 你可以同时依据“企业知识库检索片段”和“相关图片/资质资产”回答用户问题。用户询问企业资信库、产品库、业绩材料、人员证书、社保缴纳证明、营业执照、产品图片等私有资产时，应优先基于相关图片/资质资产回答。
 不要编造未出现在资料中的证书编号、人员姓名、合同金额或具体日期。
@@ -902,6 +988,8 @@ def build_knowledge_prompt(
 【用户问题】：
 {query}
 
+{query_guidance}
+
 回答要求：
 1. 必须使用清晰 Markdown 结构回答，推荐固定为：
    - `## 结论`
@@ -913,12 +1001,16 @@ def build_knowledge_prompt(
 3. 如果只有图片/资质资产命中、没有文本片段，也要基于资产标题、说明、标签和适用章节回答，并明确这些是“可参考/可插入的企业资料”。
 4. 如果资料不足，不要硬答；先说明“当前资料不足以直接确认”，再列出需要补充或需要用户确认的范围。
 5. 涉及投标材料、废标风险、施工组织设计等内容时，尽量给出可执行清单。
-6. 如果相关图片/资质资产适合插入标书正文，请直接在对应说明段落后使用 Markdown 图片语法插入，不要在结尾集中罗列图片。格式必须是：![图片名称](图片地址)
-7. 最多插入 3 张最相关图片。资质证书、营业执照、安全生产许可证、社保缴纳证明类图片如为脱敏样张，必须说明“仅作为脱敏示意图/排版占位图，不能替代正式法定文件”。
+6. 如果相关图片/资质资产适合展示，只需在对应说明中引用“图片资产1、图片资产2”等编号；不要自行输出图片地址、Markdown 图片链接或占位地址，页面会自动展示对应原图。
+7. 最多引用 3 张最相关图片。只有“资料属性”明确为“脱敏样张”时，才说明其不能替代正式法定文件；标记为“客户原始资料”的文件不得描述成脱敏样例、占位图或待替换材料。
 8. 不要输出 Markdown 表格，图片建议用自然段和项目符号描述，避免表格在聊天窗口中换行错乱。
 9. `## 参考依据` 小节必须用“资料1、资料2...”和“图片资产1、图片资产2...”说明依据来自哪些检索片段或资产；图片资产只作为配图/材料建议，不要把它当成法规依据。
 10. 当用户一次询问多个资料类型、证据类型或事项（例如“合同或中标通知书”“Logo和生产线图片”）时，必须逐项核对并分别回答；只要检索片段、来源文件名、图片资产名称或说明中出现某一项，就不得笼统回答“未发现”。
-11. 语言专业、客观、准确，适合非技术标书人员阅读。
+11. 禁止输出或复述任何内部技术字段、英文枚举、服务器路径、文件哈希、资产内部编号和 API 路径，只能使用中文业务名称。
+12. 判断“缺少某项材料”前，必须同时核对知识片段和图片资产；只要任一处存在营业执照、体系认证、社保或其他原始材料，就不得声称该材料缺失。
+13. 对资质证书问题，优先逐项列出质量管理体系、环境管理体系、职业健康安全管理体系等正式证书原件，不得用 ESG、宣传册或绿色发展报告替代正式证书来源。
+14. 只回答用户询问的资料范围，不要主动列举无关材料并声称“未发现”或“缺少”；需要补充的项目必须与本次问题直接相关。
+15. 语言专业、客观、准确，适合非技术标书人员阅读。
 """
     return prompt, images
 
