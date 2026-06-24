@@ -3,6 +3,7 @@ import { SearchOutlined, SendOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { BrandMark } from '../../components/common/BrandMark';
+import { getAuthToken } from '../../stores/authStore';
 import { displayAssetTitle } from '../../utils/assetDisplay';
 
 const { Text } = Typography;
@@ -381,9 +382,11 @@ export function KnowledgeSearchDrawer({
     setLoading(true);
 
     try {
+      const token = getAuthToken();
+      const authHeaders: Record<string, string> = token ? { Authorization: `Bearer ${token}` } : {};
       const res = await fetch('/api/knowledge/search/stream', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...authHeaders },
         body: JSON.stringify({
           query: userMessage.content,
         }),
@@ -490,7 +493,7 @@ export function KnowledgeSearchDrawer({
         try {
           const followupRes = await fetch('/api/knowledge/followups', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', ...authHeaders },
             body: JSON.stringify({
               question: userMessage.content,
               answer: streamedAnswer,

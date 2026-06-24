@@ -7,6 +7,7 @@ import { MetricCards } from '../../components/common/MetricCards';
 import { ModuleHeader } from '../../components/common/ModuleHeader';
 import dayjs from 'dayjs';
 import { apiClient } from '../../api/client';
+import { getAuthToken } from '../../stores/authStore';
 
 interface KnowledgeFile {
   id: string;
@@ -143,8 +144,10 @@ export function KnowledgeBasePage(): JSX.Element {
     formData.append('file', file);
 
     try {
+      const token = getAuthToken();
       const res = await fetch('/api/knowledge/upload', {
         method: 'POST',
+        headers: token ? { Authorization: `Bearer ${token}` } : undefined,
         body: formData,
       });
       if (!res.ok) throw new Error('上传失败');
