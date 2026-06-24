@@ -1,6 +1,6 @@
 import { Drawer, Input, Button, List, Typography, Image, message } from 'antd';
 import { SearchOutlined, SendOutlined } from '@ant-design/icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { BrandMark } from '../../components/common/BrandMark';
 import { getAuthToken } from '../../stores/authStore';
@@ -76,6 +76,83 @@ interface Message {
   followupLoading?: boolean;
   streaming?: boolean;
   status?: string;
+}
+
+function isKnowledgeAssetUrl(src?: string): boolean {
+  return Boolean(src && /\/api\/knowledge\/assets\/[A-Za-z0-9-]+\/file/.test(src));
+}
+
+function AuthenticatedKnowledgeImage({ src, alt }: { src?: string; alt?: string }): JSX.Element {
+  const [objectUrl, setObjectUrl] = useState('');
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    if (!src || !isKnowledgeAssetUrl(src)) {
+      setObjectUrl(src || '');
+      setFailed(false);
+      return;
+    }
+
+    let cancelled = false;
+    let nextObjectUrl = '';
+    const token = getAuthToken();
+
+    setObjectUrl('');
+    setFailed(false);
+
+    fetch(src, {
+      headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error(`图片加载失败：${res.status}`);
+        return res.blob();
+      })
+      .then((blob) => {
+        if (cancelled) return;
+        nextObjectUrl = URL.createObjectURL(blob);
+        setObjectUrl(nextObjectUrl);
+      })
+      .catch(() => {
+        if (!cancelled) setFailed(true);
+      });
+
+    return () => {
+      cancelled = true;
+      if (nextObjectUrl) URL.revokeObjectURL(nextObjectUrl);
+    };
+  }, [src]);
+
+  if (failed) {
+    return (
+      <span className="my-3 block rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-700">
+        图片预览加载失败，请稍后重试
+      </span>
+    );
+  }
+
+  if (!objectUrl) {
+    return (
+      <span className="my-3 block rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-500">
+        图片加载中...
+      </span>
+    );
+  }
+
+  return (
+    <span className="my-3 block">
+      <Image
+        src={objectUrl}
+        alt={alt || '知识库图片'}
+        className="max-h-64 rounded-xl border border-slate-200 object-contain"
+        preview={{ src: objectUrl }}
+      />
+      {alt && (
+        <span className="mt-1 block text-center text-xs font-semibold text-slate-400">
+          {alt}
+        </span>
+      )}
+    </span>
+  );
 }
 
 const docRoleLabel: Record<string, string> = {
@@ -627,19 +704,7 @@ export function KnowledgeSearchDrawer({
                             </a>
                           ),
                           img: ({ alt, src }) => (
-                            <span className="my-3 block">
-                              <Image
-                                src={src || ''}
-                                alt={alt || '知识库图片'}
-                                className="max-h-64 rounded-xl border border-slate-200 object-contain"
-                                preview={{ src }}
-                              />
-                              {alt && (
-                                <span className="mt-1 block text-center text-xs font-semibold text-slate-400">
-                                  {alt}
-                                </span>
-                              )}
-                            </span>
+                            <AuthenticatedKnowledgeImage src={src || ''} alt={alt || '知识库图片'} />
                           ),
                         }}
                       >
