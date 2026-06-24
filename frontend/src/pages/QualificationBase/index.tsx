@@ -1,8 +1,9 @@
-import { Button, Descriptions, Empty, Form, Image, Input, Modal, Select, Space, Switch, Table, Tag, Upload, message } from 'antd';
+import { Button, Descriptions, Empty, Form, Input, Modal, Select, Space, Switch, Table, Tag, Upload, message } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { AlertTriangle, BadgeCheck, CalendarClock, FileBadge, UploadCloud } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { CategoryList } from '../../components/common/CategoryList';
+import { AuthenticatedImage, openAuthenticatedFile } from '../../components/common/AuthenticatedImage';
 import { MetricCards } from '../../components/common/MetricCards';
 import { ModuleHeader } from '../../components/common/ModuleHeader';
 import { apiClient } from '../../api/client';
@@ -313,11 +314,11 @@ export function QualificationBasePage(): JSX.Element {
             <div className="mb-4 grid gap-4 rounded-lg border border-slate-200 bg-slate-50 p-3 md:grid-cols-[220px_1fr]">
               <div className="flex min-h-36 items-center justify-center overflow-hidden rounded-md bg-white">
                 {isImageAsset(editingAsset) ? (
-                  <Image
+                  <AuthenticatedImage
                     src={assetThumbnailUrl(editingAsset)}
                     alt={displayAssetTitle(editingAsset)}
                     className="max-h-52 object-contain"
-                    preview={{ src: assetFileUrl(editingAsset) }}
+                    previewSrc={assetFileUrl(editingAsset)}
                     fallback="/assets/brand-logo.png"
                   />
                 ) : (
@@ -389,18 +390,18 @@ export function QualificationBasePage(): JSX.Element {
           <div className="grid gap-4 md:grid-cols-[260px_1fr]">
             <div className="rounded-xl border border-slate-100 bg-slate-50 p-3">
               {isImageAsset(detail) ? (
-                <Image
+                <AuthenticatedImage
                   src={assetThumbnailUrl(detail)}
                   alt={detail.title}
                   className="rounded-lg object-contain"
-                  preview={{ src: assetFileUrl(detail) }}
+                  previewSrc={assetFileUrl(detail)}
                   fallback="/assets/brand-logo.png"
                 />
               ) : detail.storage_path || detail.public_url ? (
                 <div className="flex h-full min-h-48 flex-col items-center justify-center gap-3 text-center">
                   <FileBadge className="text-blue-500" size={42} />
                   <div className="text-sm font-bold text-slate-600">{detail.file_name || detail.title}</div>
-                  <Button href={assetFileUrl(detail)} target="_blank">打开附件</Button>
+                  <Button onClick={() => openAuthenticatedFile(assetFileUrl(detail))}>打开附件</Button>
                 </div>
               ) : (
                 <Empty description="无附件" />
