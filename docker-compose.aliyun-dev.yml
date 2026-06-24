@@ -1,0 +1,24 @@
+services:
+  backend:
+    volumes:
+      - ./backend:/app/backend:ro
+      - ./scripts:/app/scripts:ro
+      - ./main.py:/app/main.py:ro
+      - ./gunicorn.conf.py:/app/gunicorn.conf.py:ro
+      - app_uploads:/app/uploads
+      - app_outputs:/app/outputs
+      - app_storage:/app/storage
+      - app_backups:/app/backups
+      - app_parsed_outputs:/app/parsed_outputs
+
+  celery-worker:
+    volumes:
+      - ./backend:/app/backend:ro
+      - ./scripts:/app/scripts:ro
+      - ./main.py:/app/main.py:ro
+      - ./gunicorn.conf.py:/app/gunicorn.conf.py:ro
+      - app_uploads:/app/uploads
+      - app_outputs:/app/outputs
+      - app_storage:/app/storage
+      - app_backups:/app/backups
+      - app_parsed_outputs:/app/parsed_outputs

@@ -30,3 +30,14 @@ migration_reports/
 tender_references/
 *.log
 
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.rar
+*.7z
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx

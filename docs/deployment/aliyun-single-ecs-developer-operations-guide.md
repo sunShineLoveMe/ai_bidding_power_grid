@@ -333,6 +333,54 @@ docker compose up -d --force-recreate frontend
 
 适用于 `backend/`、`scripts/`、Python 依赖、RAG 检索、解析、导出或任务逻辑变更。
 
+#### 7.4.1 测试环境快速后端代码发布
+
+阿里云单 ECS 测试环境允许使用 `docker-compose.aliyun-dev.yml` 将后端源码以只读 bind mount 挂入容器。这样在 **未修改 Python 依赖、系统依赖或 Dockerfile** 时，后端代码改动不需要重新构建 backend 镜像，只需要拉取代码并重启 `backend` 与 `celery-worker`。
+
+适用范围：
+
+- `backend/` 下 Python 业务代码；
+- `scripts/` 下运行脚本；
+- `main.py`、`gunicorn.conf.py`。
+
+不适用范围：
+
+- 修改 `requirements.txt`；
+- 修改 `Dockerfile.backend`；
+- 修改 apt/LibreOffice/字体等系统依赖；
+- 修改前端代码；
+- 需要验证“完整镜像可独立运行”的正式发布。
+
+首次启用或确认 override 生效：
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.aliyun-dev.yml config --quiet
+docker compose -f docker-compose.yml -f docker-compose.aliyun-dev.yml up -d --force-recreate backend celery-worker
+```
+
+之后纯后端代码发布：
+
+```bash
+cd /opt/ai-bidding/ai_bidding_power_grid
+git fetch origin feat/aliyun-test-readiness
+git pull --ff-only origin feat/aliyun-test-readiness
+git log -1 --oneline
+
+docker compose -f docker-compose.yml -f docker-compose.aliyun-dev.yml restart backend celery-worker
+docker compose -f docker-compose.yml -f docker-compose.aliyun-dev.yml ps backend celery-worker
+```
+
+验证容器看到的是服务器源码：
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.aliyun-dev.yml exec backend sh -lc \
+  'grep -n "只回答已命中的资质证书" /app/backend/rag/retrieval.py || true'
+```
+
+注意：该方式是测试环境提速手段。正式生产环境仍应优先使用完整镜像构建发布，避免运行代码与镜像内容不一致。
+
+#### 7.4.2 完整后端镜像发布
+
 ```bash
 docker compose build backend
 docker compose up -d --force-recreate backend celery-worker

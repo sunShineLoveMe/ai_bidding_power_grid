@@ -327,6 +327,31 @@ docker compose exec frontend sh -lc 'grep -R "<关键字符串>" -n /usr/share/n
 
 适用范围：`backend/`、`scripts/`、Python 依赖、数据库访问、RAG 检索、导出逻辑等变更。
 
+如果只是 `backend/`、`scripts/`、`main.py` 或 `gunicorn.conf.py` 的代码改动，且没有修改 `requirements.txt`、`Dockerfile.backend` 或系统依赖，阿里云测试环境可用源码挂载方式快速发布，避免每次重新 `pip install`：
+
+```bash
+cd /opt/ai-bidding/ai_bidding_power_grid
+
+git fetch origin feat/aliyun-test-readiness
+git pull --ff-only origin feat/aliyun-test-readiness
+git log -1 --oneline
+
+docker compose -f docker-compose.yml -f docker-compose.aliyun-dev.yml config --quiet
+docker compose -f docker-compose.yml -f docker-compose.aliyun-dev.yml restart backend celery-worker
+docker compose -f docker-compose.yml -f docker-compose.aliyun-dev.yml ps backend celery-worker
+```
+
+验证容器内代码确实来自最新源码：
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.aliyun-dev.yml exec backend sh -lc \
+  'grep -n "只回答已命中的资质证书" /app/backend/rag/retrieval.py || true'
+docker compose -f docker-compose.yml -f docker-compose.aliyun-dev.yml exec backend sh -lc \
+  'grep -n "_request_openai_compatible_embeddings" /app/backend/rag/vector_store.py || true'
+```
+
+如果修改了依赖、Dockerfile 或需要验证完整镜像，则执行完整镜像发布。
+
 服务器执行：
 
 ```bash
