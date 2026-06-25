@@ -24,7 +24,6 @@ PROJECT_ID = "a1d853bc-ca4e-43b4-bbea-256f561c8a3d"
 sys.path.insert(0, str(PROJECT_ROOT))
 load_dotenv(PROJECT_ROOT / ".env")
 
-FORMAL_PLACEHOLDER_RE = re.compile(r"【\s*待(?:补充|填写|确认|核对)\s*[：:]?\s*([^】]*)】")
 CUSTOMER_DECISION_KEYS = {
     "total_bid_price",
     "total_bid_price_upper",
@@ -78,13 +77,9 @@ def _sha(value: str) -> str:
 
 
 def _clean_placeholder_text(content: str) -> tuple[str, int]:
-    def replace(match: re.Match[str]) -> str:
-        label = match.group(1).strip(" ：:")
-        if label:
-            return f"客户最终确认后填写（{label}）"
-        return "客户最终确认后填写"
+    from backend.services.formal_placeholders import replace_formal_placeholders_with_confirmation_text
 
-    return FORMAL_PLACEHOLDER_RE.subn(replace, content or "")
+    return replace_formal_placeholders_with_confirmation_text(content or "")
 
 
 def _confirmed_values_from_report(report: dict[str, Any]) -> tuple[dict[str, str], list[dict[str, Any]], list[dict[str, Any]]]:
@@ -408,7 +403,9 @@ def main() -> int:
             row for row in snapshot_sections
             if str(row.get("id") or "") not in parent_ids and not str(row.get("content") or "").strip()
         ]
-        placeholder_count = sum(len(FORMAL_PLACEHOLDER_RE.findall(str(row.get("content") or ""))) for row in snapshot_sections)
+        from backend.services.formal_placeholders import count_formal_placeholders
+
+        placeholder_count = count_formal_placeholders(str(row.get("content") or "") for row in snapshot_sections)
 
     report = {
         "run_id": args.run_id,

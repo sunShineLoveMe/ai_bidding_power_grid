@@ -53,18 +53,18 @@ class FormalBidCheckTest(unittest.TestCase):
                 field("total_bid_price", "1000000元"),
                 field("bid_bond_amount", "按招标文件要求"),
                 field("authorized_representative", "张三"),
-                field("authorized_representative_id_no", "130000000000000000"),
-                field("signing_date", "2026年6月24日"),
+                field("authorized_representative_id", "130000000000000000"),
+                field("signature_date", "2026年6月24日"),
                 field("delivery_period", "按招标文件要求"),
                 field("warranty_period", "按招标文件要求"),
-                field("bid_validity_period", "90天"),
+                field("bid_validity_days", "90天"),
                 field("package_no", "包2"),
                 field("package_name", "电缆保护管CPVC"),
                 field("material_category", "电缆保护管CPVC"),
                 field("goods_list_summary", "包2 共 2 行需求"),
                 field("technical_parameter_summary", "CPVC 技术参数候选"),
-                field("technical_deviation_summary", "技术偏差表候选"),
-                field("taichang_parameter_evidence", "泰昌检验报告参数佐证"),
+                field("technical_deviation_candidates", "技术偏差表候选"),
+                field("taichang_parameter_match_summary", "泰昌检验报告参数佐证"),
                 field("tax_rate", "13%"),
             ],
         }
@@ -79,6 +79,18 @@ class FormalBidCheckTest(unittest.TestCase):
             {"id": "a6", "title": "泰昌CPVC电缆保护管检验报告", "category": "检验报告"},
             {"id": "a7", "title": "泰昌社保证明", "category": "人员证书"},
             {"id": "a8", "title": "泰昌ESG绿色供应链资料", "category": "绿色低碳资料"},
+            {
+                "id": "a9",
+                "title": "泰昌官方Logo",
+                "category": "品牌标识",
+                "description": "河北泰昌电力器材科技有限公司品牌标识资料。",
+                "specs": {
+                    "enterprise": "泰昌",
+                    "source_domain": "enterprise_fact",
+                    "reference_only": False,
+                    "do_not_mix_with": ["河北豪乾参考稿", "辽宁招标资料"],
+                },
+            },
         ]
 
     def test_blocker_rules_force_draft_export_when_customer_field_missing(self):
@@ -96,6 +108,18 @@ class FormalBidCheckTest(unittest.TestCase):
         by_id = {item["id"]: item for item in report["items"]}
         self.assertEqual(by_id["B-002"]["status"], "blocked")
         self.assertTrue(by_id["B-002"]["blocksFormalExport"])
+
+    def test_enterprise_logo_do_not_mix_metadata_is_not_forbidden_source(self):
+        from backend.services.formal_bid_check import build_formal_bid_check_report
+
+        with patch("backend.services.formal_bid_check.get_project_interpretation", return_value=self._payload()), \
+             patch("backend.services.formal_bid_check.build_bid_prefill_report", return_value=self._prefill_report()), \
+             patch("backend.services.formal_bid_check.build_compliance_report", return_value={"summary": {"percent": 80, "missing": 1, "highRiskMissing": 1}}), \
+             patch("backend.services.formal_bid_check.list_knowledge_assets", return_value=self._assets()):
+            report = build_formal_bid_check_report("11111111-1111-1111-1111-111111111111")
+
+        by_id = {item["id"]: item for item in report["items"]}
+        self.assertEqual(by_id["D-003"]["status"], "passed")
 
     def test_rule_inventory_has_sixty_objective_rules(self):
         from backend.services.formal_bid_check import load_formal_check_rules

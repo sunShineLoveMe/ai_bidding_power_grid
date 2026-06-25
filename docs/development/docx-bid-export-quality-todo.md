@@ -39,7 +39,7 @@
 | 待办 | 第六章格式表单保真 | 偏差表、承诺函、签章表单等优先保留结构和占位 |
 | 待办 | 导出任务 metadata 扩充 | 记录格式方案、封面字段、目录层级、图表题注、格式告警 |
 | 待办 | 阿里云下载体验收口 | 线上 DOCX 下载不得被浏览器弹窗/不安全下载策略阻断；优先启用 HTTPS，并改为同页下载或 blob 下载 |
-| 待办 | 正式缺口口径统一 | 导出完成提示、投标信息确认页、formal readiness metadata 必须使用同一缺口计算源 |
+| 已完成 | 正式缺口口径统一 | 导出完成提示、投标信息确认页、formal readiness metadata 使用同一占位符与正式字段口径；当前演示项目正式必填缺口 0、正文占位符 0 |
 | 待办 | 章节图片与候选证据映射收口 | 项目业绩不得映射人员证书；法定格式章节默认不自动插图；生产能力图片不得泛化使用碳足迹等弱相关资料 |
 
 ## P2 后续增强
@@ -71,6 +71,19 @@
 - 验证记录：`docs/development/runs/run_20260625_docx_formal_standard_local_acceptance.md` 和对应 JSON。
 - 本次真实验收结果：状态 `PASS`；章节节点 `102`、有正文 `102`；DOCX 标题 `103`、目录条目 `102`、表格 `166`；图片候选/选中/插入/失败为 `597/23/23/0`；页边距、正文样式、封面、目录、页眉页脚、页码字段、中文字体、表格、图片比例、内部字段泄漏检查均通过；LibreOffice 字段刷新成功。
 - 阿里云兼容注意：线上容器/主机需确保 LibreOffice 字段刷新可用，并安装或可替代解析 `FangSong_GB2312`、`KaiTi_GB2312`、`SimHei` 的中文字体；否则 DOCX 本身带样式但 PDF/预览可能出现字体替换。
+
+### 2026-06-25 正式门禁与占位符收口验收记录
+
+- 背景：当前演示项目需要避免旧版正文中残留 `待补充`、`【设备型号待补充】` 等显眼草稿标记，同时正式检查规则不能把泰昌企业事实资产的边界说明误判为资料混用。
+- 修复：
+  - 新增正式占位符识别与清理工具，统一正式检查、导出 readiness metadata 和收口脚本的占位符口径。
+  - 修正规则字段 key，使授权代表身份证号、签署日期、投标有效期、技术偏差和参数匹配摘要按现有投标确认结构检查。
+  - 资料边界检查只扫描真实来源字段；泰昌企业事实资产 metadata 中的 `do_not_mix_with` 边界说明不再误判为 forbidden source。
+  - 客户演示验收脚本默认项目切换为当前演示项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d`，避免后续误跑历史旧项目。
+- 自动化回归：`PYTHONPATH=. .venv/bin/pytest tests/test_formal_placeholders.py tests/test_formal_bid_check.py tests/test_docx_export.py tests/test_celery_export_tasks.py -q`，结果 `54 passed, 7 warnings`。
+- 真实项目：`a1d853bc-ca4e-43b4-bbea-256f561c8a3d`。
+- 门禁收口记录：`docs/development/runs/run_20260625_placeholder_cleanup_current_project.md`，状态 `PASS`；应用确认字段 `31` 个，占位符清理 `18` 处，空叶子章节 `0`，正文占位符 `0`，正式必填缺口 `0`。
+- 完整导出验收记录：`docs/development/runs/run_20260625_placeholder_cleanup_docx_acceptance.md` 和对应 JSON，状态 `PASS`；默认入口复验 `docs/development/runs/run_20260625_placeholder_cleanup_default_acceptance.md` 也为 `PASS`。DOCX 生成、LibreOffice 字段刷新、页边距/正文样式、封面、目录、页眉页脚、图片、表格、内部字段泄露检查均通过，failures/warnings 均为空。
 
 ### 2026-06-09
 

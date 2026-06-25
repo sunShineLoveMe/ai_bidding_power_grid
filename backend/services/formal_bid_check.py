@@ -11,6 +11,7 @@ from typing import Any
 from backend.ai.compliance_checker import build_compliance_report
 from backend.db.supabase_repo import get_bid_export_task, get_project_interpretation, list_knowledge_assets
 from backend.services.bid_prefill import build_bid_prefill_report
+from backend.services.formal_placeholders import collect_formal_placeholders
 
 RULES_PATH = Path(__file__).resolve().parents[2] / "rules" / "power_grid" / "formal_bid_check_rules.v1.json"
 
@@ -94,6 +95,35 @@ def _asset_blob(asset: dict[str, Any]) -> str:
         _text(asset.get("metadata")),
         _text(asset.get("source_file")),
     ])
+
+
+def _asset_forbidden_source_blob(asset: dict[str, Any]) -> str:
+    metadata = asset.get("metadata") if isinstance(asset.get("metadata"), dict) else {}
+    specs = asset.get("specs") if isinstance(asset.get("specs"), dict) else {}
+    source_fields = [
+        asset.get("source_file"),
+        asset.get("local_path"),
+        asset.get("source_url"),
+        asset.get("attribution"),
+        metadata.get("source_file"),
+        metadata.get("source_display_name"),
+        metadata.get("doc_owner"),
+        metadata.get("source_domain"),
+        specs.get("source_file"),
+        specs.get("source_display_name"),
+        specs.get("doc_owner"),
+        specs.get("source_domain"),
+    ]
+    return " ".join(_text(value) for value in source_fields)
+
+
+def _asset_is_enterprise_fact(asset: dict[str, Any]) -> bool:
+    metadata = asset.get("metadata") if isinstance(asset.get("metadata"), dict) else {}
+    specs = asset.get("specs") if isinstance(asset.get("specs"), dict) else {}
+    source_domain = str(metadata.get("source_domain") or specs.get("source_domain") or "")
+    reference_only = bool(metadata.get("reference_only") or specs.get("reference_only"))
+    enterprise = str(metadata.get("enterprise") or specs.get("enterprise") or "")
+    return source_domain == "enterprise_fact" and not reference_only and ("泰昌" in enterprise or not enterprise)
 
 
 def _field_by_key(prefill_report: dict[str, Any]) -> dict[str, dict[str, Any]]:
@@ -236,7 +266,7 @@ def _evaluate_rule(
         return _make_result(rule, status="blocked", evidence=f"空叶子章节 {len(empty)} 个，示例：{empty[0].get('title') or empty[0].get('id')}")
 
     if check_type == "no_placeholders":
-        placeholders = re.findall(r"【待补充[^】]*】|待补充|TODO|TBD", content_blob, flags=re.IGNORECASE)
+        placeholders = collect_formal_placeholders(content_blob)
         if not placeholders:
             return _make_result(rule, status="passed", evidence="正文未发现常见占位符。")
         return _make_result(rule, status="blocked", evidence=f"发现占位符 {len(placeholders)} 处，示例：{placeholders[0]}")
@@ -247,7 +277,7 @@ def _evaluate_rule(
             if _contains_any(" ".join([_text(section.get("title")), _text(section.get("content"))]), rule.get("keywords"))
         ]
         target_blob = _section_blob(target_sections)
-        placeholders = re.findall(r"【待补充[^】]*】|待补充|TODO|TBD", target_blob, flags=re.IGNORECASE)
+        placeholders = collect_formal_placeholders(target_blob)
         if not target_sections:
             return _make_result(rule, status="warning", evidence="未找到目标章节。")
         if placeholders:
@@ -255,7 +285,11 @@ def _evaluate_rule(
         return _make_result(rule, status="passed", evidence=f"已检查目标章节 {len(target_sections)} 个。")
 
     if check_type == "asset_no_forbidden_owner":
-        wrong = [asset for asset in assets if _contains_any(_asset_blob(asset), rule.get("keywords"))]
+        wrong = [
+            asset for asset in assets
+            if not _asset_is_enterprise_fact(asset)
+            and _contains_any(_asset_forbidden_source_blob(asset), rule.get("keywords"))
+        ]
         if wrong:
             return _make_result(rule, status="blocked", evidence=f"发现疑似禁用来源资产：{wrong[0].get('title') or wrong[0].get('id')}")
         return _make_result(rule, status="passed", evidence="未发现禁用来源图片资产。")
@@ -371,4 +405,3 @@ def build_formal_bid_check_report(project_id: str, *, export_task_id: str | None
             "导出后还需执行 DOCX 成品复验，检查目录、页码、图片、表格和内部字段泄露。",
         ],
     }
-

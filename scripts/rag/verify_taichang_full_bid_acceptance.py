@@ -24,7 +24,7 @@ from PIL import Image
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 RUNS_DIR = PROJECT_ROOT / "docs" / "development" / "runs"
-PROJECT_ID = "4bc3ee73-9ec5-4184-aafd-eaede9f90798"
+PROJECT_ID = "a1d853bc-ca4e-43b4-bbea-256f561c8a3d"
 SUPPLEMENT_BATCH_ID = "customer_taichang_supplement_20260611"
 FORBIDDEN_TEXT_TOKENS = [
     "```mermaid",

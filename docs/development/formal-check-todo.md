@@ -60,10 +60,10 @@
 | [~] | 招标文件动态项接入 | 正式检查服务 | 已接入条款覆盖率与结构化候选摘要；动态检查项逐条进入正式检查明细待增强 |
 | [~] | 企业事实边界检查 | 正式检查规则与服务 | 已有资料边界规则与正文/资产扫描；仍需真实项目和 RAG 门禁复验 |
 | [x] | 条款覆盖率整合 | 正式检查页面与服务 | 现有条款覆盖率作为正式检查子指标，不再作为唯一质量判断 |
-| [~] | DOCX 导出前检查 | 正式检查服务 | 已检查正文、占位符、章节、客户字段和资料来源，并接入全文/分册导出门禁；图片候选/导出任务联动待增强 |
-| [~] | DOCX 导出后成品检查 | 导出任务 metadata | 服务能读取导出任务 metadata；未传入导出任务时返回导出后复验 |
-| [x] | 检查报告归档 | `docs/development/runs/` | 已新增 `run_20260624_formal_check_v1_skeleton.md`、`run_20260625_formal_export_gate_draft_mode.md`、`run_20260625_formal_export_gate_docx_chain.md` |
-| [~] | 确认值和时间记录 | 投标确认数据结构 | 沿用投标确认现有确认值；确认时间完整记录待复核 |
+| [x] | DOCX 导出前检查 | 正式检查服务 | 已检查正文、占位符、章节、客户字段和资料来源，并接入全文/分册导出门禁；当前演示项目阻断项 0、占位符 0 |
+| [x] | DOCX 导出后成品检查 | 导出任务 metadata | 完整 DOCX 真实链路已跑通，字段刷新、版式、图片、表格、目录、内部字段泄露检查均通过 |
+| [x] | 检查报告归档 | `docs/development/runs/` | 已新增 `run_20260624_formal_check_v1_skeleton.md`、`run_20260625_formal_export_gate_draft_mode.md`、`run_20260625_formal_export_gate_docx_chain.md`、`run_20260625_placeholder_cleanup_current_project.md`、`run_20260625_placeholder_cleanup_docx_acceptance.md` |
+| [x] | 确认值和时间记录 | 投标确认数据结构 | 当前演示项目已应用 31 个确认字段，正式必填缺口 0；客户决策字段未由模型编造 |
 | [~] | 页面散落检查项清理 | 解读页、标书编制页、投标确认页、导出提示 | 已新增统一入口；旧页面重复项清理待下一轮处理 |
 
 ## 6. P1 强烈建议完成

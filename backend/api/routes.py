@@ -30,6 +30,7 @@ import shutil
 from datetime import timedelta
 from backend.core.config import DEFAULT_SETTINGS, build_enterprise_context, get_setting, load_runtime_settings, save_runtime_settings
 from backend.core.security import UploadValidationError, safe_upload_filename, validate_uploaded_file
+from backend.services.formal_placeholders import count_formal_placeholders
 
 # 操作向量数据库的函数
 from backend.parsing.document_parser import ingest_artifacts as ingest_mineru_artifacts_to_supabase, import_mineru_result_zip, parse_and_index_tender_file, read_parse_status, retry_mineru_result_download, write_parse_status
@@ -942,10 +943,7 @@ def build_project_bid_markdown(
         1 for section in sections
         if not is_container_section(section) and not str(section.get("content") or "").strip()
     )
-    placeholder_count = sum(
-        len(re.findall(r"【\s*待(?:补充|填写|确认|核对)", str(section.get("content") or "")))
-        for section in sections
-    )
+    placeholder_count = count_formal_placeholders(str(section.get("content") or "") for section in sections)
     missing_required = prefill_state.get("missing_formal_required_fields") if isinstance(prefill_state.get("missing_formal_required_fields"), list) else []
     export_image_report["formal_readiness"] = {
         "template_id": "sgcc_taichang_bid",
