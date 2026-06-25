@@ -8,6 +8,36 @@
 
 ---
 
+## Run 20260625 — 合同 MVP 覆盖验收 RAG 真实门禁（2026-06-25）
+
+> 汇总：`docs/rag/runs/run_20260625_contract_mvp_acceptance_summary.md`
+> 增量门禁：`docs/rag/runs/run_20260625_contract_mvp_acceptance_incremental_summary.md`
+
+### 触发原因
+
+合同 MVP 17 项功能进入统一真实链路验收，需要确认服务重启后知识库、企业资料、图片资产、metadata 边界和页面同源 stream 未退化。
+
+### 结果
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 268 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 590 ms |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% | 350 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 734 ms |
+
+- API ready：PASS。
+- RAG 单测：PASS。
+- Base 30 + 泰昌专项 30 增量门禁：PASS。
+- 真实 `/api/knowledge/search/stream`：PASS，返回 5 条上下文、4 个资产、4 张图片。
+- 本轮未新增资料、未调整 metadata 或召回策略，因此不执行入库和 inventory 变更。
+
+### 结论
+
+合同 MVP 验收未引入召回退化、来源排序退化或泰昌/辽宁/河北豪乾跨域串扰。
+
+---
+
 ## Run 20260624 — 阿里云企业知识库线上真实回归（2026-06-24）
 
 > 运行记录：`docs/rag/runs/run_20260624_aliyun_online_rag_regression.md`

@@ -69,6 +69,22 @@ class FormalBidCheckTest(unittest.TestCase):
             ],
         }
 
+    def _simulated_prefill_report(self):
+        report = self._prefill_report()
+        simulated = {
+            "total_bid_price": "8888888.00 元（内部测试模拟值，非正式报价）",
+            "bid_bond_amount": "100000.00 元（内部测试模拟值，非正式保证金金额）",
+            "authorized_representative": "张三（内部测试模拟授权代表）",
+            "authorized_representative_id": "110101199001011234（内部测试模拟身份证号）",
+            "signature_date": "2026年06月19日（内部测试模拟签署日期）",
+            "delivery_period": "内部测试模拟为合同签订后 30 日内完成供货。",
+            "warranty_period": "内部测试模拟为到货验收合格后 12 个月。",
+        }
+        for field in report["fields"]:
+            if field["key"] in simulated:
+                field["value"] = simulated[field["key"]]
+        return report
+
     def _assets(self):
         return [
             {"id": "a1", "title": "泰昌营业执照副本原图", "category": "基础证照"},
@@ -120,6 +136,21 @@ class FormalBidCheckTest(unittest.TestCase):
 
         by_id = {item["id"]: item for item in report["items"]}
         self.assertEqual(by_id["D-003"]["status"], "passed")
+
+    def test_simulated_customer_values_block_formal_export(self):
+        from backend.services.formal_bid_check import build_formal_bid_check_report
+
+        with patch("backend.services.formal_bid_check.get_project_interpretation", return_value=self._payload()), \
+             patch("backend.services.formal_bid_check.build_bid_prefill_report", return_value=self._simulated_prefill_report()), \
+             patch("backend.services.formal_bid_check.build_compliance_report", return_value={"summary": {"percent": 80, "missing": 1, "highRiskMissing": 1}}), \
+             patch("backend.services.formal_bid_check.list_knowledge_assets", return_value=self._assets()):
+            report = build_formal_bid_check_report("11111111-1111-1111-1111-111111111111")
+
+        self.assertFalse(report["summary"]["canFormalExport"])
+        by_id = {item["id"]: item for item in report["items"]}
+        for rule_id in ("B-002", "B-003", "B-004", "B-005", "B-006", "B-007", "B-008", "P-005"):
+            self.assertEqual(by_id[rule_id]["status"], "blocked")
+            self.assertIn("非正式", by_id[rule_id]["evidence"])
 
     def test_rule_inventory_has_sixty_objective_rules(self):
         from backend.services.formal_bid_check import load_formal_check_rules

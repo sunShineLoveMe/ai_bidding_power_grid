@@ -10,7 +10,7 @@ from typing import Any
 
 from backend.ai.compliance_checker import build_compliance_report
 from backend.db.supabase_repo import get_bid_export_task, get_project_interpretation, list_knowledge_assets
-from backend.services.bid_prefill import build_bid_prefill_report
+from backend.services.bid_prefill import build_bid_prefill_report, formal_confirmation_issue
 from backend.services.formal_placeholders import collect_formal_placeholders
 
 RULES_PATH = Path(__file__).resolve().parents[2] / "rules" / "power_grid" / "formal_bid_check_rules.v1.json"
@@ -139,11 +139,11 @@ def _field_value(field: dict[str, Any] | None) -> str:
 def _field_confirmed(field: dict[str, Any] | None) -> bool:
     if not field:
         return False
-    return bool(_field_value(field).strip())
+    return formal_confirmation_issue(_field_value(field)) is None
 
 
 def _candidate_present(field: dict[str, Any] | None) -> bool:
-    return _field_confirmed(field)
+    return bool(_field_value(field).strip())
 
 
 def _make_result(
@@ -233,17 +233,29 @@ def _evaluate_rule(
         return _make_result(rule, status="blocked" if rule.get("blocks_formal_export") else "warning", evidence="未找到匹配章节。")
 
     if check_type == "prefill_confirmed":
-        missing = [key for key in rule.get("field_keys") or [] if not _field_confirmed(fields.get(key))]
-        if not missing:
+        invalid = {
+            key: formal_confirmation_issue(_field_value(fields.get(key)))
+            for key in rule.get("field_keys") or []
+            if not _field_confirmed(fields.get(key))
+        }
+        if not invalid:
             values = [f"{key}={_field_value(fields.get(key))}" for key in rule.get("field_keys") or []]
             return _make_result(rule, status="passed", evidence="；".join(values))
-        return _make_result(rule, status="blocked", evidence=f"未确认字段：{'、'.join(missing)}")
+        details = "；".join(f"{key}：{reason}" for key, reason in invalid.items())
+        return _make_result(rule, status="blocked", evidence=f"未形成正式客户确认：{details}")
 
     if check_type == "prefill_confirmed_any":
+        invalid: dict[str, str] = {}
         for key in rule.get("field_keys") or []:
             if _field_confirmed(fields.get(key)):
                 return _make_result(rule, status="passed", evidence=f"{key}={_field_value(fields.get(key))}")
-        return _make_result(rule, status="blocked" if rule.get("blocks_formal_export") else "manual_confirm", evidence=f"候选字段均未确认：{'、'.join(rule.get('field_keys') or [])}")
+            invalid[key] = formal_confirmation_issue(_field_value(fields.get(key))) or "未填写"
+        details = "；".join(f"{key}：{reason}" for key, reason in invalid.items())
+        return _make_result(
+            rule,
+            status="blocked" if rule.get("blocks_formal_export") else "manual_confirm",
+            evidence=f"候选字段均未形成正式客户确认：{details}",
+        )
 
     if check_type == "prefill_candidate_present":
         for key in rule.get("field_keys") or []:

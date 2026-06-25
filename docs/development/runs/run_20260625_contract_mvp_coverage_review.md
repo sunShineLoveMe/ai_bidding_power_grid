@@ -2,7 +2,9 @@
 
 - 生成时间：2026-06-25
 - 输入依据：用户截图《系统功能清单 1》、`docs/development/master-todo.md`
-- 状态：已完成覆盖审阅，缺口已并入项目任务总账
+- 状态：已完成覆盖审阅；2026-06-25 已补真实链路验收并关闭代码级 P0
+
+> 最新真实验收见 `docs/development/runs/run_20260625_contract_mvp_real_acceptance.md`。该记录覆盖真实 HTTP 主链路、真实浏览器、RAG 增量门禁和正式导出门禁修复；本文件保留为初始覆盖审阅。
 
 ## 结论
 

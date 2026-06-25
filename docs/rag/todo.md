@@ -165,6 +165,7 @@
 
 ## 当前最近任务
 
+0. **合同 MVP 真实覆盖验收 RAG 门禁已通过。** `run_20260625_contract_mvp_acceptance` 完成 API ready、RAG 单测、Base 30 + 泰昌专项 30 rerank 开/关对照和真实页面同源 stream；Base Recall@5 96.7%，泰昌专项 qwen3-rerank Recall@5 100%，跨 doc_role 串扰 0%，本轮未新增资料或调整召回策略。
 1. **P1C-1 已完成：泰昌 20260606 正式图片资产 embedding backfill。** 当前真实库 `knowledge_assets=597`，已有 embedding `597`，缺失 `0`。
 2. **P1C-2 已完成：关键词兜底缓存失效机制。** 新增/重入库 `document_chunks` 后，关键词兜底缓存可自动识别水位变化并重建；真实 stream 已验证不重启 Web 命中新 chunk。
 3. **P1C-3 已完成：RAG 本地门禁自动化入口。** 以后本地 RAG 改动优先执行 `set -a; source .env; set +a; .venv/bin/python scripts/rag/run_local_rag_gate.py --run-id <run>`。

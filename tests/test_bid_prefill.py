@@ -3,6 +3,14 @@ from unittest.mock import patch
 
 
 class BidPrefillReportTest(unittest.TestCase):
+    def test_formal_confirmation_rejects_simulated_and_pending_values(self):
+        from backend.services.bid_prefill import formal_confirmation_issue, is_formal_confirmation_value
+
+        self.assertIsNone(formal_confirmation_issue("按招标文件要求执行"))
+        self.assertTrue(is_formal_confirmation_value("90天"))
+        self.assertIn("非正式", formal_confirmation_issue("8888888元（内部测试模拟值，非正式报价）"))
+        self.assertIn("确认", formal_confirmation_issue("电缆保护管（需按目标包确认）"))
+
     def test_customer_decision_fields_remain_customer_required(self):
         from backend.services.bid_prefill import build_bid_prefill_report
 

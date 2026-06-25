@@ -38,6 +38,16 @@ class PrefillFieldSpec:
 
 PREFILL_SCHEMA_VERSION = "2026-06-16.v1"
 PREFILL_META_KEY = "bid_prefill"
+NON_FINAL_CONFIRMATION_MARKERS = (
+    "内部测试",
+    "模拟值",
+    "非正式报价",
+    "非正式保证金",
+    "仅供测试",
+    "test-only",
+    "regression-only",
+)
+NON_FINAL_CONFIRMATION_RE = re.compile(r"(?:待|需).{0,8}确认|待补充")
 PLACEHOLDER_RE = re.compile(r"【\s*待(?:补充|填写|确认|核对)\s*[：:]?\s*([^】]*)】")
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 LIAONING_GOODS_ROWS_PATH = PROJECT_ROOT / (
@@ -262,6 +272,25 @@ def confirmed_prefill_context(project_meta: dict[str, Any]) -> dict[str, str]:
     return {str(key): str(value) for key, value in values.items() if str(value).strip()}
 
 
+def formal_confirmation_issue(value: Any) -> str | None:
+    """说明字段为何不能作为正式客户确认值。"""
+    text = str(value or "").strip()
+    if not text:
+        return "未填写"
+    normalized = re.sub(r"\s+", "", text).lower()
+    for marker in NON_FINAL_CONFIRMATION_MARKERS:
+        if marker.lower() in normalized:
+            return f"包含非正式标记“{marker}”"
+    match = NON_FINAL_CONFIRMATION_RE.search(normalized)
+    if match:
+        return f"仍需确认或补充（{match.group(0)}）"
+    return None
+
+
+def is_formal_confirmation_value(value: Any) -> bool:
+    return formal_confirmation_issue(value) is None
+
+
 def apply_confirmed_values_to_text(text: str, values: dict[str, str]) -> tuple[str, int]:
     result = str(text or "")
     replacements = 0
@@ -346,11 +375,14 @@ def _collect_unresolved_placeholders(sections: list[dict[str, Any]]) -> list[dic
 
 
 def _missing_required_confirmations(values: dict[str, str]) -> list[dict[str, str]]:
-    return [
-        {"key": spec.key, "label": spec.label}
-        for spec in PREFILL_FIELD_SPECS
-        if spec.required_level == "formal_required" and not values.get(spec.key)
-    ]
+    missing: list[dict[str, str]] = []
+    for spec in PREFILL_FIELD_SPECS:
+        if spec.required_level != "formal_required":
+            continue
+        issue = formal_confirmation_issue(values.get(spec.key))
+        if issue:
+            missing.append({"key": spec.key, "label": spec.label, "reason": issue})
+    return missing
 
 
 def _build_prefill_export_gate(
@@ -366,7 +398,7 @@ def _build_prefill_export_gate(
         candidate_fields = candidate.get("fields") if isinstance(candidate.get("fields"), list) else []
         confirmed_fields = [
             field for field in candidate_fields
-            if values.get(str(field.get("key") or ""))
+            if is_formal_confirmation_value(values.get(str(field.get("key") or "")))
         ]
         missing_fields = [
             {

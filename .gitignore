@@ -71,6 +71,7 @@ tender_references/
 # Logs
 *.log
 .antigravitycli/
+.playwright-cli/
 
 #skills
 .agents/
@@ -84,5 +85,4 @@ tender_references/
 # Backups and database exports
 backups/
 *.tar.gz
-
 
