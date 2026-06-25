@@ -81,3 +81,84 @@ def test_adaptive_policy_holds_recent_increase_to_avoid_jitter():
 
     assert decision["current_concurrency"] == 1
     assert decision["metadata"]["last_policy_change"] == "hold_concurrency"
+
+
+def test_partial_resume_policy_auto_resumes_short_slow_draft():
+    from backend.services.section_generation_policy import resolve_partial_resume_policy
+
+    task = {"metadata": {"autoResumePartial": True, "maxAutoResumeAttempts": 2}}
+    item = {
+        "section_id": "partial-1",
+        "status": "partial_generated",
+        "attempt": 1,
+        "target_words": 1000,
+        "chars": 180,
+        "metadata": {"slow_stream": True, "timeout_code": "MODEL_STREAM_SLOW_TIMEOUT"},
+    }
+
+    decision = resolve_partial_resume_policy(task, item)
+
+    assert decision["action"] == "auto_resume"
+    assert decision["metadata"]["partial_resume_policy"] == "partial_resume_v1"
+    assert decision["metadata"]["next_action"] == "auto_resume_with_slim_prompt"
+    assert decision["metadata"]["retry_policy"]["next_profile"] == "continuation_slim"
+
+
+def test_partial_resume_policy_needs_review_when_draft_is_near_target():
+    from backend.services.section_generation_policy import resolve_partial_resume_policy
+
+    task = {"metadata": {"autoResumePartial": True, "maxAutoResumeAttempts": 2}}
+    item = {
+        "section_id": "partial-2",
+        "status": "partial_generated",
+        "attempt": 1,
+        "target_words": 1000,
+        "chars": 760,
+        "metadata": {"slow_stream": True, "timeout_code": "MODEL_STREAM_SLOW_TIMEOUT"},
+    }
+
+    decision = resolve_partial_resume_policy(task, item)
+
+    assert decision["action"] == "needs_review"
+    assert decision["metadata"]["partial_review_required"] is True
+    assert decision["metadata"]["partial_resume_reason"] == "draft_near_target"
+
+
+def test_partial_resume_policy_stops_after_two_slow_partials():
+    from backend.services.section_generation_policy import resolve_partial_resume_policy
+
+    task = {"metadata": {"autoResumePartial": True, "maxAutoResumeAttempts": 3, "partialMaxSlowAttempts": 2}}
+    item = {
+        "section_id": "partial-3",
+        "status": "partial_generated",
+        "attempt": 2,
+        "target_words": 1000,
+        "chars": 180,
+        "metadata": {"slow_stream": True, "timeout_code": "MODEL_STREAM_SLOW_TIMEOUT"},
+    }
+
+    decision = resolve_partial_resume_policy(task, item)
+
+    assert decision["action"] == "needs_review"
+    assert decision["metadata"]["partial_resume_reason"] == "slow_partial_limit_reached"
+    assert decision["metadata"]["retry_policy"]["exhausted"] is True
+
+
+def test_partial_resume_policy_keeps_price_sensitive_profile_manual():
+    from backend.services.section_generation_policy import resolve_partial_resume_policy
+
+    task = {"metadata": {"autoResumePartial": True}}
+    item = {
+        "section_id": "partial-4",
+        "title": "单价分析表",
+        "status": "partial_generated",
+        "attempt": 0,
+        "target_words": 1000,
+        "chars": 80,
+        "metadata": {"prompt_profile": "price_sensitive"},
+    }
+
+    decision = resolve_partial_resume_policy(task, item)
+
+    assert decision["action"] == "needs_review"
+    assert decision["metadata"]["partial_resume_reason"] == "manual_only_profile"

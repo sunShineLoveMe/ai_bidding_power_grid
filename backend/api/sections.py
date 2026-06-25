@@ -309,6 +309,7 @@ def resume_section_generation_task_api(project_id, task_id):
             task_id,
             statuses=statuses,
             preserve_draft=bool(payload.get("preserveDraft", True)),
+            reason=str(payload.get("reason") or "resume_task"),
         )
         if payload.get("autoStart", True):
             dispatch_section_generation_task(project_id, task_id)

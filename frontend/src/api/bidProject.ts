@@ -322,6 +322,7 @@ export type SectionGenerationTask = {
   done_count: number;
   failed_count: number;
   stopped_count: number;
+  metadata?: Record<string, unknown>;
   items: SectionGenerationTaskItem[];
   created_at?: string;
   updated_at?: string;
@@ -403,7 +404,7 @@ export async function retrySectionGenerationTaskItem(
 export async function resumeSectionGenerationTask(
   projectId: string,
   taskId: string,
-  options?: { autoStart?: boolean; preserveDraft?: boolean; statuses?: string[] },
+  options?: { autoStart?: boolean; preserveDraft?: boolean; statuses?: string[]; reason?: string },
 ): Promise<SectionGenerationTask> {
   const response = await apiClient.post(
     `/api/bidding/interpretations/${projectId}/section-generation-tasks/${taskId}/resume`,

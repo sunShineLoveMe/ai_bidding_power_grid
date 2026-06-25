@@ -1174,3 +1174,41 @@ docs/rag/runs/run_20260625_sg_concurrency_001_incremental_summary.md
 ```text
 SG-PARTIAL-001：partial 草稿续写上限、复核态与批量续写入口。
 ```
+
+### 15.12 2026-06-25 本地实施与回归：SG-PARTIAL-001
+
+本轮已完成第九项 P0：
+
+- 新增 `partial_resume_v1` 策略：草稿低于目标 30% 且未达到慢流上限时自动续写；草稿接近目标 70%、连续两次慢流、达到自动续写次数上限或报价/附件类章节时转人工复核。
+- 修复 coordinator 早退问题：partial-only 任务即使没有 queued item，也会进入 `_dispatch_next_sections()` 执行 partial 策略。
+- partial item metadata 写入 `partial_resume_action`、`partial_review_required`、`partial_resume_reason`、`partial_draft_ratio`、`retry_policy` 和 `next_action`。
+- 手动/批量续写写入 `manual_resume_requested=true`，保留草稿并清除复核阻断，续写 prompt 使用 `continuation_slim`。
+- 前端目录页新增 partial/复核/慢流/当前并发统计；行级状态区分“草稿可续写”和“草稿需复核”；工具栏新增“批量续写草稿”入口。
+
+真实回归记录：
+
+```text
+docs/development/runs/run_20260625_sg_partial_001_partial_resume.md
+docs/rag/runs/run_20260625_sg_partial_001_summary.md
+docs/rag/runs/run_20260625_sg_partial_001_incremental_summary.md
+```
+
+关键验收结果：
+
+| 验收项 | 结果 |
+| --- | --- |
+| partial policy / 调度 / prompt 定向测试 | `tests/test_section_generation_policy.py tests/test_section_generation_autoresume.py tests/test_section_prompt_policy.py` 24 passed |
+| 章节/API/DOCX 相关回归 | `tests/test_api_sections.py tests/test_section_writer_formal_quality.py tests/test_docx_export.py tests/test_celery_export_tasks.py tests/test_formal_bid_check.py` 61 passed |
+| 前端构建 | `npm --prefix frontend run build` PASS |
+| 短 partial 自动续写真实任务 | 临时任务 `096b97ea-0315-4df7-aa75-7f807f115f78` completed，item 为 `done`，`retry_reason=auto_resume_partial`、`partial_resume_action=auto_resume`、`prompt_profile=continuation_slim` |
+| 复核态真实任务 | 临时任务 `5276347b-d8f2-4ff2-8c8a-76a103395b8b` 在 attempt=2 慢流 partial 后保持 `partial_generated`，`partial_review_required=true`、`partial_resume_reason=slow_partial_limit_reached` |
+| 批量续写真实 API | 同一复核态任务经 `/resume` + `reason=batch_resume_partial` 续写到 `done`，`manual_resume_requested=true`、`partial_review_required=false`、`prompt_profile=continuation_slim` |
+| 页面 partial 入口 | 真实 API 临时 partial 任务下，目录页显示“批量续写草稿”、草稿/复核/慢流统计，1440px 无横向溢出 |
+| 临时数据清理 | `regression_case=sg_partial_001` 与 `sg_partial_001_ui` 临时任务和章节剩余 0 |
+| RAG 门禁 | Base + 泰昌专项增量回归 Gate PASS；泰昌专项 qwen3-rerank Recall@5/Top1/MRR 为 `100%/100%/1.000` |
+
+下一项 P0：
+
+```text
+SG-PROGRESS-001：前端可解释进度与下载前 partial 草稿提示。
+```

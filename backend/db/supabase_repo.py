@@ -1728,6 +1728,7 @@ def requeue_bid_generation_task_item(
     *,
     reason: str = "manual_retry",
     preserve_draft: bool = True,
+    metadata_patch: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Requeue one generation item and invalidate any old worker lease."""
     message = "已重新排队，等待重试生成。"
@@ -1740,12 +1741,25 @@ def requeue_bid_generation_task_item(
         {},
     )
     existing_metadata = existing_item.get("metadata") if isinstance(existing_item.get("metadata"), dict) else {}
+    queued_at = datetime.utcnow().isoformat()
+    explicit_metadata_patch = metadata_patch if isinstance(metadata_patch, dict) else {}
     next_metadata = {
         **existing_metadata,
+        **explicit_metadata_patch,
         "retry_reason": reason,
         "retry_preserve_draft": bool(preserve_draft),
-        "retry_queued_at": datetime.utcnow().isoformat(),
+        "retry_queued_at": queued_at,
     }
+    if reason in {"manual_retry", "manual_retry_from_editor", "resume_task", "manual_resume_partial", "batch_resume_partial"}:
+        next_metadata.update({
+            "manual_resume_requested": True,
+            "manual_resume_requested_at": queued_at,
+            "partial_review_required": False,
+            "partial_auto_resume_allowed": False,
+            "partial_resume_action": "manual_resume_requested",
+            "next_action": "manual_resume_with_slim_prompt" if preserve_draft else "manual_retry_full_generation",
+        })
+        message = "已按人工续写请求重新排队。"
     direct_patch = {
         "status": "queued",
         "percent": 0,
@@ -1852,6 +1866,7 @@ def resume_bid_generation_task(
     *,
     statuses: set[str] | None = None,
     preserve_draft: bool = True,
+    reason: str = "resume_task",
 ) -> dict[str, Any]:
     task = get_bid_generation_task(project_id, task_id)
     if not task:
@@ -1868,7 +1883,7 @@ def resume_bid_generation_task(
             project_id,
             task_id,
             section_id,
-            reason="resume_task",
+            reason=reason,
             preserve_draft=preserve_draft,
         )
     if not target_ids:
@@ -1882,6 +1897,7 @@ def resume_bid_generation_task(
             "status": latest.get("status"),
             "message": f"已恢复 {len(target_ids)} 个章节生成 item",
             "count": len(target_ids),
+            "reason": reason,
         },
     )
     return latest

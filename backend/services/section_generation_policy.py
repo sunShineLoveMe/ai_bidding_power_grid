@@ -8,8 +8,10 @@ from typing import Any
 
 
 POLICY_NAME = "adaptive_v1"
+PARTIAL_RESUME_POLICY_NAME = "partial_resume_v1"
 ACTIVE_STATUSES = {"leased", "running", "generating", "saving"}
 TERMINAL_STATUSES = {"done", "failed", "stopped", "cancelled", "expired", "partial_generated"}
+MANUAL_ONLY_PROFILES = {"price_sensitive", "attachment_index"}
 
 
 def _env_int(name: str, default: int) -> int:
@@ -24,6 +26,13 @@ def _env_bool(name: str, default: bool = True) -> bool:
     if raw is None:
         return default
     return str(raw).strip().lower() not in {"0", "false", "no", "off"}
+
+
+def _env_float(name: str, default: float) -> float:
+    try:
+        return float(os.getenv(name, str(default)))
+    except (TypeError, ValueError):
+        return default
 
 
 def _metadata(row: dict[str, Any]) -> dict[str, Any]:
@@ -72,6 +81,198 @@ def _safe_int(value: Any, default: int = 0) -> int:
         return int(float(value or default))
     except (TypeError, ValueError):
         return default
+
+
+def _safe_float(value: Any, default: float = 0.0) -> float:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _text_units(value: Any) -> int:
+    text = str(value or "")
+    return len("".join(text.split()))
+
+
+def partial_auto_resume_enabled(task: dict[str, Any]) -> bool:
+    metadata = _metadata(task)
+    raw = metadata.get("autoResumePartial", metadata.get("auto_resume_partial", True))
+    if isinstance(raw, str):
+        return raw.strip().lower() not in {"0", "false", "no", "off"}
+    return bool(raw)
+
+
+def max_partial_auto_resume_attempts(task: dict[str, Any]) -> int:
+    metadata = _metadata(task)
+    raw = metadata.get(
+        "maxAutoResumeAttempts",
+        metadata.get("max_auto_resume_attempts", os.getenv("BID_SECTION_MAX_AUTO_RESUME_ATTEMPTS", "2")),
+    )
+    try:
+        value = int(raw)
+    except (TypeError, ValueError):
+        value = 2
+    return max(1, min(value, 6))
+
+
+def _partial_policy_config(task: dict[str, Any]) -> dict[str, Any]:
+    metadata = _metadata(task)
+    min_ratio = _safe_float(
+        metadata.get("partialAutoResumeMinDraftRatio"),
+        _env_float("BID_SECTION_AUTO_RESUME_MIN_DRAFT_RATIO", 0.30),
+    )
+    review_ratio = _safe_float(
+        metadata.get("partialReviewDraftRatio"),
+        _env_float("BID_SECTION_PARTIAL_REVIEW_DRAFT_RATIO", 0.70),
+    )
+    max_slow_attempts = _safe_int(
+        metadata.get("partialMaxSlowAttempts"),
+        _env_int("BID_SECTION_AUTO_RESUME_MAX_SLOW_ATTEMPTS", 2),
+    )
+    return {
+        "enabled": partial_auto_resume_enabled(task),
+        "max_attempts": max_partial_auto_resume_attempts(task),
+        "min_draft_ratio": min(max(min_ratio, 0.05), 0.95),
+        "review_draft_ratio": min(max(review_ratio, 0.10), 0.98),
+        "max_slow_attempts": max(1, min(max_slow_attempts, 6)),
+    }
+
+
+def _target_units(item: dict[str, Any]) -> int:
+    metadata = _metadata(item)
+    plan = metadata.get("writing_plan") if isinstance(metadata.get("writing_plan"), dict) else {}
+    raw = item.get("target_words") or metadata.get("target_words") or plan.get("target_words")
+    return max(0, _safe_int(raw, 0))
+
+
+def _partial_units(item: dict[str, Any]) -> int:
+    metadata = _metadata(item)
+    candidates = [
+        metadata.get("partial_words"),
+        metadata.get("draft_words"),
+        metadata.get("partial_chars"),
+        item.get("chars"),
+        _text_units(item.get("draft_content") or item.get("generated_content") or ""),
+    ]
+    return max(_safe_int(value, 0) for value in candidates)
+
+
+def _profile_name(item: dict[str, Any]) -> str:
+    metadata = _metadata(item)
+    profile = metadata.get("prompt_profile")
+    if isinstance(profile, dict):
+        profile = profile.get("name")
+    return str(profile or metadata.get("profile") or "").strip()
+
+
+def _is_manual_only_partial(item: dict[str, Any]) -> bool:
+    profile = _profile_name(item)
+    if profile in MANUAL_ONLY_PROFILES:
+        return True
+    title = str(item.get("title") or "")
+    return any(keyword in title for keyword in ("报价", "单价", "保证金", "附件索引", "证明材料索引"))
+
+
+def resolve_partial_resume_policy(task: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]:
+    """Decide whether a saved partial draft should auto-resume or wait for review.
+
+    The policy is intentionally metadata-first. We keep the database item status
+    as ``partial_generated`` for compatibility, and expose the review/next action
+    state through item metadata and frontend copy.
+    """
+    now_iso = datetime.now(timezone.utc).isoformat()
+    config = _partial_policy_config(task)
+    metadata = _metadata(item)
+    attempt = _safe_int(item.get("attempt"), _safe_int(metadata.get("attempt"), 0))
+    target_units = _target_units(item)
+    partial_units = _partial_units(item)
+    draft_ratio = (partial_units / target_units) if target_units > 0 else 0.0
+    slow_partial = _is_slow_or_timeout(item)
+    profile = _profile_name(item)
+
+    action = "manual_resume"
+    reason = "draft_requires_manual_decision"
+    message = "草稿已保存，可人工复核后继续续写。"
+    next_action = "manual_review_or_single_section_retry"
+    auto_resume_allowed = False
+    review_required = False
+
+    if not config["enabled"]:
+        reason = "auto_resume_disabled"
+        message = "自动续写已关闭，草稿已保存，等待人工续写。"
+    elif _is_manual_only_partial(item):
+        action = "needs_review"
+        reason = "manual_only_profile"
+        message = "报价、保证金或附件索引类章节不自动长篇续写，请人工复核后处理。"
+        review_required = True
+    elif target_units and draft_ratio >= config["review_draft_ratio"]:
+        action = "needs_review"
+        reason = "draft_near_target"
+        message = "草稿已接近目标篇幅，系统停止自动续写，请人工复核质量后决定是否继续。"
+        review_required = True
+    elif slow_partial and attempt >= config["max_slow_attempts"]:
+        action = "needs_review"
+        reason = "slow_partial_limit_reached"
+        message = "同一章节已连续慢流，系统停止自动续写，请人工复核或手动续写。"
+        review_required = True
+    elif attempt >= config["max_attempts"]:
+        action = "needs_review"
+        reason = "auto_resume_attempt_limit_reached"
+        message = "已达到自动续写上限，草稿已保存，请人工复核或手动续写。"
+        review_required = True
+    elif target_units and draft_ratio < config["min_draft_ratio"]:
+        action = "auto_resume"
+        reason = "draft_too_short"
+        message = "草稿较短，系统将使用轻量续写 prompt 自动续写一次。"
+        next_action = "auto_resume_with_slim_prompt"
+        auto_resume_allowed = True
+    elif not target_units and attempt == 0:
+        action = "auto_resume"
+        reason = "missing_target_first_partial"
+        message = "草稿已保存，系统将使用轻量续写 prompt 自动续写一次。"
+        next_action = "auto_resume_with_slim_prompt"
+        auto_resume_allowed = True
+
+    exhausted = action != "auto_resume" and review_required
+    metadata_patch = {
+        "partial_resume_policy": PARTIAL_RESUME_POLICY_NAME,
+        "partial_resume_action": action,
+        "partial_resume_reason": reason,
+        "partial_auto_resume_allowed": auto_resume_allowed,
+        "partial_review_required": review_required,
+        "partial_review_reason": reason if review_required else None,
+        "partial_policy_evaluated_at": now_iso,
+        "partial_draft_units": partial_units,
+        "partial_target_units": target_units,
+        "partial_draft_ratio": round(draft_ratio, 4) if target_units else None,
+        "partial_prompt_profile": profile or None,
+        "next_action": next_action,
+        "retry_policy": {
+            "attempt": attempt,
+            "max_attempts": config["max_attempts"],
+            "max_slow_attempts": config["max_slow_attempts"],
+            "min_draft_ratio": config["min_draft_ratio"],
+            "review_draft_ratio": config["review_draft_ratio"],
+            "next_profile": "continuation_slim",
+            "exhausted": exhausted,
+            "reason": reason,
+        },
+    }
+    return {
+        "action": action,
+        "reason": reason,
+        "message": message,
+        "next_action": next_action,
+        "metadata": metadata_patch,
+        "auto_resume_allowed": auto_resume_allowed,
+        "review_required": review_required,
+        "draft_ratio": draft_ratio,
+        "draft_units": partial_units,
+        "target_units": target_units,
+        "attempt": attempt,
+        "requeue_reason": "auto_resume_partial",
+    }
 
 
 def _parse_datetime(value: Any) -> datetime | None:

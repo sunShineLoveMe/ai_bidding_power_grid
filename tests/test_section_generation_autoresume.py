@@ -1,6 +1,6 @@
 import os
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import ANY, MagicMock, patch
 
 
 os.environ.setdefault("APP_AUTH_ENABLED", "false")
@@ -28,6 +28,8 @@ class SectionGenerationAutoResumeTest(unittest.TestCase):
                     "section_id": section_id,
                     "status": "partial_generated",
                     "attempt": 1,
+                    "target_words": 1000,
+                    "chars": 120,
                     "draft_content": "## 章节\n\n已有草稿",
                 }
             ],
@@ -60,10 +62,59 @@ class SectionGenerationAutoResumeTest(unittest.TestCase):
             section_id,
             reason="auto_resume_partial",
             preserve_draft=True,
+            metadata_patch=ANY,
         )
+        self.assertEqual(requeue_mock.call_args.kwargs["metadata_patch"]["partial_resume_action"], "auto_resume")
         lease_mock.assert_called_once()
         apply_async.assert_called_once()
         self.assertEqual(result["dispatched"], 1)
+
+    def test_dispatch_marks_exhausted_partial_for_review_without_requeue(self):
+        from backend.tasks import section_tasks
+
+        project_id = "11111111-1111-1111-1111-111111111111"
+        task_id = "22222222-2222-2222-2222-222222222222"
+        section_id = "33333333-3333-3333-3333-333333333333"
+        partial_task = {
+            "id": task_id,
+            "project_id": project_id,
+            "status": "partial_failed",
+            "metadata": {"autoResumePartial": True, "maxAutoResumeAttempts": 3, "partialMaxSlowAttempts": 2},
+            "items": [
+                {
+                    "section_id": section_id,
+                    "status": "partial_generated",
+                    "attempt": 2,
+                    "target_words": 1000,
+                    "chars": 120,
+                    "metadata": {"slow_stream": True, "timeout_code": "MODEL_STREAM_SLOW_TIMEOUT"},
+                }
+            ],
+        }
+        apply_async = MagicMock()
+
+        with (
+            patch("backend.db.supabase_repo.get_bid_generation_task", return_value=partial_task),
+            patch("backend.db.supabase_repo.expire_bid_generation_task_items", return_value=[]),
+            patch("backend.db.supabase_repo.requeue_bid_generation_task_item") as requeue_mock,
+            patch("backend.db.supabase_repo.update_bid_generation_task_item", return_value=partial_task) as update_mock,
+            patch("backend.db.supabase_repo.patch_bid_generation_task_metadata", return_value=partial_task) as metadata_mock,
+            patch("backend.db.supabase_repo.lease_bid_generation_task_items", return_value=[]) as lease_mock,
+            patch("backend.tasks.section_tasks.group", return_value=MagicMock(apply_async=apply_async)),
+        ):
+            result = section_tasks._dispatch_next_sections(project_id, task_id)
+
+        requeue_mock.assert_not_called()
+        update_mock.assert_called_once()
+        item_patch = update_mock.call_args.args[3]
+        self.assertEqual(item_patch["_event_type"], "partial_review_required")
+        self.assertTrue(item_patch["metadata"]["partial_review_required"])
+        self.assertEqual(item_patch["metadata"]["partial_resume_reason"], "slow_partial_limit_reached")
+        metadata = next(call.args[2] for call in metadata_mock.call_args_list if "partial_review_required_count" in call.args[2])
+        self.assertEqual(metadata["partial_review_required_count"], 1)
+        lease_mock.assert_called_once()
+        apply_async.assert_not_called()
+        self.assertEqual(result["dispatched"], 0)
 
     def test_dispatch_uses_adaptive_policy_to_reduce_lease_window(self):
         from backend.tasks import section_tasks
@@ -147,6 +198,32 @@ class SectionGenerationAutoResumeTest(unittest.TestCase):
         self.assertIn("调度失败", kwargs["message"])
         self.assertEqual(kwargs["error"], "missing rpc")
         self.assertEqual(result["status"], "failed")
+
+    def test_coordinator_dispatches_partial_only_tasks_for_resume_policy(self):
+        from backend.tasks import section_tasks
+
+        project_id = "11111111-1111-1111-1111-111111111111"
+        task_id = "22222222-2222-2222-2222-222222222222"
+        task = {
+            "id": task_id,
+            "project_id": project_id,
+            "status": "partial_failed",
+            "items": [
+                {
+                    "section_id": "33333333-3333-3333-3333-333333333333",
+                    "status": "partial_generated",
+                }
+            ],
+        }
+
+        with (
+            patch("backend.db.supabase_repo.get_bid_generation_task", return_value=task),
+            patch("backend.tasks.section_tasks._dispatch_next_sections", return_value={"task_id": task_id, "dispatched": 1}) as dispatch_mock,
+        ):
+            result = section_tasks.run_bid_section_generation.run(project_id, task_id)
+
+        dispatch_mock.assert_called_once_with(project_id, task_id)
+        self.assertEqual(result["dispatched"], 1)
 
     def test_reconciler_expires_new_style_items_and_fails_legacy_tasks(self):
         from backend.db import supabase_repo

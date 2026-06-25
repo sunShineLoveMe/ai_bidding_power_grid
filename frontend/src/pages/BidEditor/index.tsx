@@ -44,6 +44,7 @@ import {
   getSectionGenerationTask,
   reorderBidSections,
   resetBidSectionsGeneration,
+  resumeSectionGenerationTask,
   retrySectionGenerationTaskItem,
   runSemanticComplianceCheck,
   saveBidSection,
@@ -99,6 +100,7 @@ type BatchTask = {
   chars: number;
   targetWords: number;
   message?: string;
+  metadata?: Record<string, unknown>;
 };
 
 type ChapterWordMeta = {
@@ -116,6 +118,7 @@ type ChapterWordMeta = {
 type PersistedBatchTask = {
   id: string;
   status: SectionGenerationTask['status'];
+  metadata?: Record<string, unknown>;
 };
 
 type SectionGenerationPollResult = {
@@ -497,8 +500,9 @@ export function BidEditorPage(): JSX.Element {
       chars: item.chars || 0,
       targetWords: item.target_words || 800,
       message: generatedIds.has(item.section_id) ? '已完成' : item.message || item.error || batchStatusLabel(item.status),
+      metadata: item.metadata || {},
     } satisfies BatchTask]));
-    setPersistedBatchTask({ id: task.id, status: task.status });
+    setPersistedBatchTask({ id: task.id, status: task.status, metadata: task.metadata || {} });
     persistedBatchTaskIdRef.current = task.id;
     setBatchTasks(nextTasks);
     const runningItem = task.items.find(item => ACTIVE_BATCH_TASK_STATUSES.has(item.status));
@@ -1642,6 +1646,40 @@ export function BidEditorPage(): JSX.Element {
     return batchTasks[chapter.id]?.status === 'partial_generated';
   }
 
+  function batchTaskMetadata(task?: BatchTask): Record<string, unknown> {
+    return task?.metadata && typeof task.metadata === 'object' ? task.metadata : {};
+  }
+
+  function isPartialReviewRequired(task?: BatchTask): boolean {
+    return batchTaskMetadata(task).partial_review_required === true;
+  }
+
+  function isSlowStreamTask(task?: BatchTask): boolean {
+    const metadata = batchTaskMetadata(task);
+    return metadata.slow_stream === true || String(metadata.timeout_code || '').startsWith('MODEL_STREAM_');
+  }
+
+  function batchTaskLabel(task: BatchTask): string {
+    if (task.status === 'partial_generated') {
+      return isPartialReviewRequired(task) ? '草稿需复核' : '草稿可续写';
+    }
+    return batchStatusLabel(task.status);
+  }
+
+  function batchTaskTooltip(task: BatchTask): string {
+    if (task.status !== 'partial_generated') {
+      return task.message || batchStatusLabel(task.status);
+    }
+    const metadata = batchTaskMetadata(task);
+    if (isPartialReviewRequired(task)) {
+      return String(metadata.partial_review_reason || task.message || '自动续写已达到上限，需人工复核后再决定是否续写。');
+    }
+    if (metadata.partial_auto_resume_allowed === true) {
+      return '系统将使用轻量续写策略继续，不会重载完整资料上下文。';
+    }
+    return task.message || '草稿已保存，可单章续写或批量续写草稿。';
+  }
+
   function chapterWordMeta(chapter: ChapterDraft): ChapterWordMeta {
     if (!isLeafChapter(chapter)) {
       return {
@@ -1652,9 +1690,15 @@ export function BidEditorPage(): JSX.Element {
       };
     }
     if (isChapterPartialGenerated(chapter)) {
+      const task = batchTasks[chapter.id];
       return {
-        label: '草稿待续写',
-        tooltip: '模型输出超时，系统已保存草稿。可点击“重试”继续生成。',
+        label: isPartialReviewRequired(task) ? '草稿需复核' : '草稿待续写',
+        tooltip: batchTaskTooltip(task || {
+          status: 'partial_generated',
+          percent: 100,
+          chars: 0,
+          targetWords: targetChapterWords(chapter),
+        }),
         generated: false,
         failed: false,
       };
@@ -3358,6 +3402,66 @@ export function BidEditorPage(): JSX.Element {
     }
   }
 
+  async function resumePartialDraftsInBatch(): Promise<void> {
+    const taskId = persistedBatchTaskIdRef.current || persistedBatchTask?.id;
+    if (!data?.project?.id || !taskId) {
+      message.warning('当前没有可恢复的批量章节任务');
+      return;
+    }
+    const partialIds = Object.entries(batchTasks)
+      .filter(([, task]) => task.status === 'partial_generated')
+      .map(([id]) => id);
+    if (!partialIds.length) {
+      message.info('当前没有待续写的草稿章节');
+      return;
+    }
+    setMode('目录模式');
+    setBatchGenerating(true);
+    batchCancelRequestedRef.current = false;
+    setBatchTasks(tasks => Object.fromEntries(Object.entries(tasks).map(([id, task]) => [
+      id,
+      partialIds.includes(id)
+        ? { ...task, status: 'queued' as BatchTaskStatus, percent: 0, message: '已加入批量续写队列' }
+        : task,
+    ])));
+    try {
+      const task = await resumeSectionGenerationTask(data.project.id, taskId, {
+        autoStart: true,
+        preserveDraft: true,
+        statuses: ['partial_generated'],
+        reason: 'batch_resume_partial',
+      });
+      setPersistedBatchTask({ id: task.id, status: task.status, metadata: task.metadata || {} });
+      persistedBatchTaskIdRef.current = task.id;
+      applyPersistedBatchTask(task);
+      const pollResult = await pollSectionGenerationTask(data.project.id, task.id);
+      const finalTask = pollResult.task;
+      if (pollResult.background) {
+        applyPersistedBatchTask(finalTask);
+        message.info('批量续写仍在后台执行，可稍后刷新恢复进度');
+        return;
+      }
+      await reloadProject(data.project.id);
+      applyPersistedBatchTask(finalTask);
+      if (finalTask.status === 'completed') {
+        message.success('草稿续写已完成');
+      } else if (finalTask.status === 'partial_failed') {
+        message.warning('仍有草稿需要人工复核或再次续写');
+      } else {
+        message.error('批量续写未全部完成，请查看章节状态');
+      }
+    } catch (error) {
+      const reason = error instanceof Error ? error.message : String(error);
+      setBatchTasks(tasks => Object.fromEntries(Object.entries(tasks).map(([id, task]) => [
+        id,
+        partialIds.includes(id) ? { ...task, status: 'partial_generated' as BatchTaskStatus, message: '批量续写启动失败' } : task,
+      ])));
+      message.error(`批量续写草稿失败：${reason}`);
+    } finally {
+      setBatchGenerating(false);
+    }
+  }
+
   function stopCurrentSectionGeneration(): void {
     if (!sectionStreaming) {
       return;
@@ -3388,6 +3492,15 @@ export function BidEditorPage(): JSX.Element {
       void refreshComplianceReport(data.project.id, { silent: true, volumeType: value });
     }
   }
+
+  const batchTaskValues = Object.values(batchTasks);
+  const partialDraftCount = batchTaskValues.filter(task => task.status === 'partial_generated').length;
+  const partialReviewCount = batchTaskValues.filter(task => task.status === 'partial_generated' && isPartialReviewRequired(task)).length;
+  const slowStreamCount = batchTaskValues.filter(isSlowStreamTask).length;
+  const activeTaskCount = batchTaskValues.filter(task => ACTIVE_BATCH_TASK_STATUSES.has(task.status)).length;
+  const queuedTaskCount = batchTaskValues.filter(task => task.status === 'queued').length;
+  const currentConcurrency = Number(persistedBatchTask?.metadata?.current_concurrency || 0);
+  const maxConcurrency = Number(persistedBatchTask?.metadata?.max_concurrency || 0);
 
   if (loading) {
     return (
@@ -3471,6 +3584,12 @@ export function BidEditorPage(): JSX.Element {
               <span>章节计划：{estimatedTotalChars.toLocaleString()} 字（约{estimatedPages}页）</span>
               <span>篇幅进度：{lengthProgress}%</span>
               <span>进度：{generationProgress}%</span>
+              {activeTaskCount ? <span>正在写：{activeTaskCount}</span> : null}
+              {queuedTaskCount ? <span>排队：{queuedTaskCount}</span> : null}
+              {partialDraftCount ? <span>草稿待续写：{partialDraftCount}</span> : null}
+              {partialReviewCount ? <span>需复核：{partialReviewCount}</span> : null}
+              {slowStreamCount ? <span>模型慢流：{slowStreamCount}</span> : null}
+              {currentConcurrency ? <span>当前并发：{currentConcurrency}{maxConcurrency ? `/${maxConcurrency}` : ''}</span> : null}
               {batchGenerating ? <span>后台章节任务执行中</span> : null}
             </div>
             </div>
@@ -3498,6 +3617,18 @@ export function BidEditorPage(): JSX.Element {
                 >
                   重置生成状态
                 </Button>
+                {partialDraftCount ? (
+                  <Tooltip title="仅续写已保存的 partial 草稿，保留现有草稿内容并使用轻量续写策略">
+                    <Button
+                      size="small"
+                      icon={<RefreshCw size={14} />}
+                      disabled={batchGenerating || sectionStreaming}
+                      onClick={() => void resumePartialDraftsInBatch()}
+                    >
+                      批量续写草稿
+                    </Button>
+                  </Tooltip>
+                ) : null}
                 <Button size="small" icon={<Download size={14} />} onClick={downloadOutlineMarkdown}>下载目录</Button>
               </Space>
             </div>
@@ -3548,7 +3679,9 @@ export function BidEditorPage(): JSX.Element {
                       <div className="outline-task-progress">
                         {task ? (
                           <>
-                            <Tag color={batchStatusColor(task.status)}>{batchStatusLabel(task.status)}</Tag>
+                            <Tooltip title={batchTaskTooltip(task)}>
+                              <Tag color={batchStatusColor(task.status)}>{batchTaskLabel(task)}</Tag>
+                            </Tooltip>
                             <Progress percent={task.percent} size="small" showInfo={false} status={task.status === 'failed' ? 'exception' : undefined} />
                           </>
                         ) : null}

@@ -88,21 +88,15 @@ def _section_chunk_event_limit() -> int:
 
 
 def _auto_resume_partial_enabled(task: dict[str, Any]) -> bool:
-    metadata = _task_metadata(task)
-    raw = metadata.get("autoResumePartial", metadata.get("auto_resume_partial", True))
-    if isinstance(raw, str):
-        return raw.lower() not in {"0", "false", "no", "off"}
-    return bool(raw)
+    from backend.services.section_generation_policy import partial_auto_resume_enabled
+
+    return partial_auto_resume_enabled(task)
 
 
 def _max_auto_resume_attempts(task: dict[str, Any]) -> int:
-    metadata = _task_metadata(task)
-    raw = metadata.get("maxAutoResumeAttempts", metadata.get("max_auto_resume_attempts", os.getenv("BID_SECTION_MAX_AUTO_RESUME_ATTEMPTS", "3")))
-    try:
-        value = int(raw)
-    except (TypeError, ValueError):
-        value = 3
-    return max(1, min(value, 6))
+    from backend.services.section_generation_policy import max_partial_auto_resume_attempts
+
+    return max_partial_auto_resume_attempts(task)
 
 
 def _worker_id() -> str:
@@ -163,8 +157,12 @@ def _dispatch_next_sections(project_id: str, task_id: str) -> dict:
         lease_bid_generation_task_items,
         patch_bid_generation_task_metadata,
         requeue_bid_generation_task_item,
+        update_bid_generation_task_item,
     )
-    from backend.services.section_generation_policy import resolve_section_generation_concurrency
+    from backend.services.section_generation_policy import (
+        resolve_partial_resume_policy,
+        resolve_section_generation_concurrency,
+    )
 
     task = get_bid_generation_task(project_id, task_id)
     if not task:
@@ -180,32 +178,72 @@ def _dispatch_next_sections(project_id: str, task_id: str) -> dict:
     running_count = sum(1 for item in items if item.get("status") in ACTIVE_ITEM_STATUSES)
     queued_count = sum(1 for item in items if item.get("status") == "queued")
 
-    if (
-        queued_count == 0
-        and running_count == 0
-        and _auto_resume_partial_enabled(task)
-    ):
-        max_attempts = _max_auto_resume_attempts(task)
-        resumable = [
-            item
-            for item in items
-            if item.get("status") == "partial_generated"
-            and int(item.get("attempt") or 0) < max_attempts
-        ]
-        if resumable:
-            for item in resumable:
+    if queued_count == 0 and running_count == 0:
+        partial_items = [item for item in items if item.get("status") == "partial_generated"]
+        if partial_items:
+            auto_resumed = 0
+            review_required = 0
+            manual_waiting = 0
+            for item in partial_items:
                 section_id = str(item.get("section_id") or "")
                 if not section_id:
                     continue
-                requeue_bid_generation_task_item(
-                    project_id,
-                    task_id,
-                    section_id,
-                    reason="auto_resume_partial",
-                    preserve_draft=True,
-                )
+                resume_policy = resolve_partial_resume_policy(task, item)
+                if resume_policy.get("action") == "auto_resume":
+                    requeue_bid_generation_task_item(
+                        project_id,
+                        task_id,
+                        section_id,
+                        reason=str(resume_policy.get("requeue_reason") or "auto_resume_partial"),
+                        preserve_draft=True,
+                        metadata_patch=resume_policy.get("metadata") or {},
+                    )
+                    auto_resumed += 1
+                    continue
+
+                if resume_policy.get("review_required"):
+                    review_required += 1
+                else:
+                    manual_waiting += 1
+                try:
+                    update_bid_generation_task_item(
+                        project_id,
+                        task_id,
+                        section_id,
+                        {
+                            "_event_type": "partial_review_required" if resume_policy.get("review_required") else "partial_manual_resume_waiting",
+                            "status": "partial_generated",
+                            "percent": 100,
+                            "message": str(resume_policy.get("message") or "草稿已保存，待人工复核或续写。"),
+                            "metadata": {
+                                **(item.get("metadata") if isinstance(item.get("metadata"), dict) else {}),
+                                **(resume_policy.get("metadata") or {}),
+                            },
+                        },
+                    )
+                except Exception:
+                    logger.exception("partial 续写策略 metadata 更新失败", extra={"task_id": task_id, "section_id": section_id})
+            if auto_resumed or review_required or manual_waiting:
+                try:
+                    patch_bid_generation_task_metadata(
+                        project_id,
+                        task_id,
+                        {
+                            "partial_resume_policy": "partial_resume_v1",
+                            "partial_auto_resumed_count": auto_resumed,
+                            "partial_review_required_count": review_required,
+                            "partial_manual_waiting_count": manual_waiting,
+                            "partial_policy_message": (
+                                f"partial 草稿处理：自动续写 {auto_resumed} 个，需复核 {review_required} 个，待手动续写 {manual_waiting} 个"
+                            ),
+                            "partial_policy_evaluated_at": _now_iso(),
+                        },
+                    )
+                except Exception:
+                    logger.exception("partial 续写任务 metadata 更新失败", extra={"task_id": task_id})
             task = get_bid_generation_task(project_id, task_id) or task
             items = list(task.get("items") or [])
+            running_count = sum(1 for item in items if item.get("status") in ACTIVE_ITEM_STATUSES)
             queued_count = sum(1 for item in items if item.get("status") == "queued")
 
     max_concurrency = _section_gen_concurrency()
@@ -697,6 +735,12 @@ def run_bid_section_generation(self, project_id: str, task_id: str) -> dict:
                 if str(item.get("section_id") or "")
                 and item.get("status") == "queued"
             ]
+            partial_ids = [
+                str(item.get("section_id"))
+                for item in items
+                if str(item.get("section_id") or "")
+                and item.get("status") == "partial_generated"
+            ]
             logger.info(
                 "section_generation_task_started",
                 extra={
@@ -707,7 +751,7 @@ def run_bid_section_generation(self, project_id: str, task_id: str) -> dict:
                     "concurrency": _section_gen_concurrency(),
                 },
             )
-            if not pending_ids:
+            if not pending_ids and not partial_ids:
                 return {"task_id": task_id, "dispatched": 0}
 
             return _dispatch_next_sections(project_id, task_id)

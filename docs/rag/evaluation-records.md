@@ -2738,3 +2738,55 @@ SG-SLOW-001 已能让低吞吐章节提前保存 partial 草稿并释放生成�
 - `SG-CONCURRENCY-001` 已完成，本地真实环境验证通过。
 - 召回门禁无退化，泰昌/辽宁/河北豪乾边界未出现跨资料域串扰。
 - 后续 P0 继续进入 `SG-PARTIAL-001`：partial 草稿续写上限、复核态与批量续写入口。
+
+---
+
+## Run 44 — SG-PARTIAL-001 partial 草稿续写闭环回归（2026-06-25）
+
+> 本地门禁：`docs/rag/runs/run_20260625_sg_partial_001_summary.md`
+> 增量门禁：`docs/rag/runs/run_20260625_sg_partial_001_incremental_summary.md`
+> 开发运行记录：`docs/development/runs/run_20260625_sg_partial_001_partial_resume.md`
+
+### 触发原因
+
+SG-CONCURRENCY-001 已能按任务慢流窗口降档，但 partial 草稿还缺少明确的续写上限、复核态和批量续写入口。真实回归同时发现 coordinator 对 partial-only 任务存在早退：没有 queued item 时不会进入 `_dispatch_next_sections()`，导致自动续写策略无法触发。
+
+### 修复范围
+
+- 新增 `partial_resume_v1` 策略，按草稿占目标比例、尝试次数、慢流次数和 prompt profile 判定自动续写、人工复核或手动续写。
+- 修复 partial-only coordinator 早退，确保已有 partial 草稿也能进入调度策略。
+- partial item metadata 写入 `partial_resume_action`、`partial_review_required`、`partial_resume_reason`、`partial_draft_ratio`、`retry_policy` 和 `next_action`。
+- 手动/批量续写写入 `manual_resume_requested`，保留草稿并清除复核阻断。
+- 标书目录页新增 partial/复核/慢流/当前并发统计，行级状态区分“草稿可续写/草稿需复核”，工具栏新增“批量续写草稿”。
+- 本轮未新增客户资料、未改 RAG 入库策略、未改召回排序；仅按 P0 回归规则执行 RAG 门禁。
+
+### 测试与回归
+
+| 验证项 | 结果 |
+| --- | --- |
+| partial policy / 调度 / prompt 定向测试 | PASS，24 passed |
+| 章节/API/DOCX 相关回归 | PASS，61 passed |
+| 前端构建 | PASS |
+| 本地 RAG 门禁 | PASS，api_ready / rag_unit_tests / incremental_regression_gate / stream_sample 全部通过 |
+| 短 partial 自动续写真实任务 | PASS，任务 `096b97ea-0315-4df7-aa75-7f807f115f78` completed，`retry_reason=auto_resume_partial`、`partial_resume_action=auto_resume`、`prompt_profile=continuation_slim` |
+| 复核态真实任务 | PASS，任务 `5276347b-d8f2-4ff2-8c8a-76a103395b8b` 保持 `partial_generated`，`partial_review_required=true`、`partial_resume_reason=slow_partial_limit_reached` |
+| 批量续写真实 API | PASS，同一复核态任务经 `/resume` + `reason=batch_resume_partial` 续写到 `done`，`manual_resume_requested=true`、`partial_review_required=false`、`prompt_profile=continuation_slim` |
+| 页面入口真实回归 | PASS，真实 API 临时 partial 任务下出现“批量续写草稿”，顶部统计显示草稿/复核/慢流，1440px 无横向溢出 |
+| 临时数据清理 | PASS，`regression_case=sg_partial_001` 与 `sg_partial_001_ui` 临时任务和章节剩余 0 |
+
+增量回归指标：
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 264 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 607 ms |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% | 342 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 704 ms |
+
+真实 stream 抽样：`done=true`，contexts=5，assets=4，images=4。
+
+### 结论
+
+- `SG-PARTIAL-001` 已完成，本地真实环境验证通过。
+- 召回门禁无退化，泰昌/辽宁/河北豪乾边界未出现跨资料域串扰。
+- 后续 P0 继续进入 `SG-PROGRESS-001`：前端可解释进度与下载前 partial 草稿提示。
