@@ -48,6 +48,7 @@ class SectionGenerationAutoResumeTest(unittest.TestCase):
             patch("backend.db.supabase_repo.get_bid_generation_task", side_effect=[partial_task, queued_task]),
             patch("backend.db.supabase_repo.expire_bid_generation_task_items", return_value=[]),
             patch("backend.db.supabase_repo.requeue_bid_generation_task_item", return_value=queued_task) as requeue_mock,
+            patch("backend.db.supabase_repo.patch_bid_generation_task_metadata", return_value=queued_task),
             patch("backend.db.supabase_repo.lease_bid_generation_task_items", return_value=[leased_item]) as lease_mock,
             patch("backend.tasks.section_tasks.group", return_value=MagicMock(apply_async=apply_async)),
         ):
@@ -63,6 +64,58 @@ class SectionGenerationAutoResumeTest(unittest.TestCase):
         lease_mock.assert_called_once()
         apply_async.assert_called_once()
         self.assertEqual(result["dispatched"], 1)
+
+    def test_dispatch_uses_adaptive_policy_to_reduce_lease_window(self):
+        from backend.tasks import section_tasks
+
+        project_id = "11111111-1111-1111-1111-111111111111"
+        task_id = "22222222-2222-2222-2222-222222222222"
+        task = {
+            "id": task_id,
+            "project_id": project_id,
+            "status": "running",
+            "metadata": {"scheduler_policy": "adaptive_v1"},
+            "items": [
+                {
+                    "section_id": "slow-1",
+                    "status": "partial_generated",
+                    "finished_at": "2026-06-25T08:00:01+00:00",
+                    "metadata": {"slow_stream": True, "timeout_code": "MODEL_STREAM_SLOW_TIMEOUT"},
+                },
+                {
+                    "section_id": "slow-2",
+                    "status": "partial_generated",
+                    "finished_at": "2026-06-25T08:00:02+00:00",
+                    "metadata": {"timeout_code": "MODEL_STREAM_WALL_TIMEOUT"},
+                },
+                {"section_id": "queued-1", "status": "queued"},
+                {"section_id": "queued-2", "status": "queued"},
+            ],
+        }
+        leased_item = {
+            "section_id": "queued-1",
+            "attempt_id": "attempt-1",
+            "worker_id": "worker-1",
+        }
+        apply_async = MagicMock()
+
+        with (
+            patch.dict("os.environ", {"SECTION_GEN_CONCURRENCY": "3"}, clear=False),
+            patch("backend.db.supabase_repo.get_bid_generation_task", return_value=task),
+            patch("backend.db.supabase_repo.expire_bid_generation_task_items", return_value=[]),
+            patch("backend.db.supabase_repo.patch_bid_generation_task_metadata", return_value=task) as metadata_mock,
+            patch("backend.db.supabase_repo.lease_bid_generation_task_items", return_value=[leased_item]) as lease_mock,
+            patch("backend.tasks.section_tasks.group", return_value=MagicMock(apply_async=apply_async)),
+        ):
+            result = section_tasks._dispatch_next_sections(project_id, task_id)
+
+        metadata = metadata_mock.call_args.args[2]
+        self.assertEqual(metadata["current_concurrency"], 1)
+        self.assertEqual(metadata["last_policy_change"], "reduce_concurrency")
+        lease_mock.assert_called_once()
+        self.assertEqual(lease_mock.call_args.kwargs["limit"], 1)
+        apply_async.assert_called_once()
+        self.assertEqual(result["concurrency"], 1)
 
     def test_coordinator_failure_marks_business_task_failed(self):
         from backend.tasks import section_tasks

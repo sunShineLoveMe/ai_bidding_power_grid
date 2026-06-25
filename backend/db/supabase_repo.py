@@ -1731,6 +1731,21 @@ def requeue_bid_generation_task_item(
 ) -> dict[str, Any]:
     """Requeue one generation item and invalidate any old worker lease."""
     message = "已重新排队，等待重试生成。"
+    task = get_bid_generation_task(project_id, task_id) or {}
+    existing_item = next(
+        (
+            item for item in list(task.get("items") or [])
+            if str(item.get("section_id") or "") == str(section_id)
+        ),
+        {},
+    )
+    existing_metadata = existing_item.get("metadata") if isinstance(existing_item.get("metadata"), dict) else {}
+    next_metadata = {
+        **existing_metadata,
+        "retry_reason": reason,
+        "retry_preserve_draft": bool(preserve_draft),
+        "retry_queued_at": datetime.utcnow().isoformat(),
+    }
     direct_patch = {
         "status": "queued",
         "percent": 0,
@@ -1746,6 +1761,7 @@ def requeue_bid_generation_task_item(
         "draft_saved_at": None,
         "final_saved_at": None,
         "finished_at": None,
+        "metadata": next_metadata,
     }
     if not preserve_draft:
         direct_patch.update({
@@ -1782,7 +1798,7 @@ def requeue_bid_generation_task_item(
         "last_token_at": None,
         "draft_saved_at": None,
         "final_saved_at": None,
-        "metadata": {"retry_reason": reason},
+        "metadata": next_metadata,
     }
     if not preserve_draft:
         patch.update({
@@ -1792,6 +1808,42 @@ def requeue_bid_generation_task_item(
             "chunk_events": [],
         })
     return update_bid_generation_task_item(project_id, task_id, section_id, patch)
+
+
+def patch_bid_generation_task_metadata(
+    project_id: str,
+    task_id: str,
+    metadata_patch: dict[str, Any],
+) -> dict[str, Any]:
+    """Merge a small metadata patch onto a batch generation task."""
+    task = get_bid_generation_task(project_id, task_id)
+    if not task:
+        raise RuntimeError("批量章节生成任务不存在")
+    current_metadata = task.get("metadata") if isinstance(task.get("metadata"), dict) else {}
+    next_metadata = {**current_metadata, **(metadata_patch or {})}
+    response = _with_supabase_write_retry(
+        lambda client: client.table("bid_generation_tasks")
+        .update({"metadata": next_metadata})
+        .eq("id", task_id)
+        .eq("project_id", project_id)
+        .execute(),
+        label="更新批量章节生成任务 metadata",
+    )
+    if not response.data:
+        raise RuntimeError("Supabase bid_generation_tasks metadata update returned no data")
+    updated = response.data[0]
+    _record_generation_task_event(
+        project_id=project_id,
+        task_id=task_id,
+        section_id=None,
+        patch={
+            "_event_type": "scheduler_policy_updated",
+            "status": updated.get("status"),
+            "message": next_metadata.get("policy_message") or "章节生成调度策略已更新",
+            "metadata": metadata_patch,
+        },
+    )
+    return updated
 
 
 def resume_bid_generation_task(

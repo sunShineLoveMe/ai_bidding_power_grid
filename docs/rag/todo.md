@@ -186,6 +186,7 @@
 19. **P1C-15 进行中：阿里云企业库展示与来源收敛收口。** 剩余优化资质证书问题参考来源混入 ESG/废水报告、CPVC 报告规格覆盖措辞冲突，以及公网 80 端口入口说明/反代；P0 关闭后可并行进入最小标书主流程云上冒烟。
 20. **SG-PROMPT-001 已完成：Prompt profile 分级瘦身与生成输入预算。** 章节生成已按 profile 控制 RAG/企业资料/事实包/prompt 字符预算，并把 profile 指标写入生成任务 metadata；本地 RAG 门禁 `run_20260625_sg_prompt_001` PASS，完整 DOCX 导出链路 PASS。
 21. **SG-SLOW-001 已完成：慢流提前保护与 partial 草稿释放并发槽。** 章节生成低吞吐时会提前触发 `MODEL_STREAM_SLOW_TIMEOUT`，保存 partial 草稿并释放生成槽；本地强制慢流任务、正常阈值任务和 RAG 门禁 `run_20260625_sg_slow_001` 均 PASS。
-22. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表；仅在参数规模变大、多批次查询复杂或页面精确查询成为瓶颈后启动。
-23. P1B 泰昌补充资料质量增强已完成；后续新增资料按 `docs/rag/taichang-material-completeness-scorecard.md` 的 P0/P1/P2 补资料清单更新评分，并重跑真实回归。
-24. 客户演示完整标书已完成 DeepSeek 全量章节重写和真实 DOCX/PDF 验收：见 `docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`；后续若客户更换目标招标文件或 Word 模板，需重新生成章节、重新导出并复跑验收。
+22. **SG-CONCURRENCY-001 已完成：自适应并发调度与任务级慢流窗口降档。** 批量章节生成已按任务最近窗口输出 `current_concurrency`；连续慢流/模型流超时自动降为单路补位，稳定窗口具备恢复并发能力；本地真实初始窗口、慢流降档和 RAG 门禁 `run_20260625_sg_concurrency_001` 均 PASS。
+23. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表；仅在参数规模变大、多批次查询复杂或页面精确查询成为瓶颈后启动。
+24. P1B 泰昌补充资料质量增强已完成；后续新增资料按 `docs/rag/taichang-material-completeness-scorecard.md` 的 P0/P1/P2 补资料清单更新评分，并重跑真实回归。
+25. 客户演示完整标书已完成 DeepSeek 全量章节重写和真实 DOCX/PDF 验收：见 `docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`；后续若客户更换目标招标文件或 Word 模板，需重新生成章节、重新导出并复跑验收。

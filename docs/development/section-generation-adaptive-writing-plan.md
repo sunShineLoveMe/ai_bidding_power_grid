@@ -1136,3 +1136,41 @@ docs/rag/runs/run_20260625_sg_slow_001_incremental_summary.md
 ```text
 SG-CONCURRENCY-001：自适应并发调度与任务级慢流窗口降档。
 ```
+
+### 15.11 2026-06-25 本地实施与回归：SG-CONCURRENCY-001
+
+本轮已完成第八项 P0：
+
+- 新增 `backend/services/section_generation_policy.py`，将自适应并发规则从 Celery 调度代码中独立出来。
+- `_dispatch_next_sections()` 不再直接使用固定 `SECTION_GEN_CONCURRENCY` 补齐窗口，而是按 policy 输出的 `current_concurrency` 租约补位。
+- 任务级 metadata 已写入 `scheduler_policy`、`current_concurrency`、`max_concurrency`、`recent_slow_count`、`slow_stream_count`、`timeout_count`、`last_policy_change` 和 `policy_message`。
+- 默认最大并发仍由 `SECTION_GEN_CONCURRENCY` 控制；自适应初始窗口为 2，最近 2 个慢流/模型流超时降为 1，最近 5 个稳定完成可恢复到最大并发。
+- `MODEL_STREAM_SLOW_TIMEOUT` partial item 写入 `partial_reason=slow_stream`、`next_action=auto_resume_with_slim_prompt` 和 `retry_policy`。
+- `requeue_bid_generation_task_item()` 已保留原 item metadata 后追加 `retry_reason`，避免 partial 自动续写丢失慢流历史。
+
+真实回归记录：
+
+```text
+docs/development/runs/run_20260625_sg_concurrency_001_adaptive_scheduler.md
+docs/rag/runs/run_20260625_sg_concurrency_001_summary.md
+docs/rag/runs/run_20260625_sg_concurrency_001_incremental_summary.md
+```
+
+关键验收结果：
+
+| 验收项 | 结果 |
+| --- | --- |
+| 自适应 policy/调度单测 | `tests/test_section_generation_policy.py tests/test_section_generation_autoresume.py` 13 passed |
+| 章节/API 相关回归 | `tests/test_api_sections.py tests/test_section_generation_policy.py tests/test_section_generation_autoresume.py tests/test_section_prompt_policy.py tests/test_length_settings.py tests/test_postgres_schema_init.py` 35 passed |
+| DOCX/Celery 导出单测 | `tests/test_docx_export.py tests/test_celery_export_tasks.py` 48 passed |
+| 初始窗口真实任务 | 临时任务 `98ad8494-ba70-40c7-8856-f01c77db2cc9` completed，metadata 记录 `current_concurrency=2`、`max_concurrency=3` |
+| 慢流降档真实任务 | 临时任务 `3881462f-e18f-4aa3-88d7-965d740f0b97` 在 2 个慢流 partial 后记录 `current_concurrency=1`、`last_policy_change=reduce_concurrency`，只单路补位 |
+| partial metadata 保留 | partial item 重新排队后仍保留 `timeout_code=MODEL_STREAM_SLOW_TIMEOUT` 与 `retry_reason=auto_resume_partial` |
+| 临时数据清理 | 4 个 `regression_case=sg_concurrency_001` 临时章节已删除，测试任务行也已按 regression metadata 清理，剩余 0 |
+| RAG 门禁 | Base + 泰昌专项增量回归 Gate PASS；泰昌专项 qwen3-rerank Recall@5/Top1/MRR 为 `100%/100%/1.000` |
+
+下一项 P0：
+
+```text
+SG-PARTIAL-001：partial 草稿续写上限、复核态与批量续写入口。
+```

@@ -2688,3 +2688,53 @@ Run 39 在阿里云真实页面发现企业知识库问答存在 P0/P1 缺陷：
 - `SG-SLOW-001` 已完成，本地真实环境验证通过。
 - 召回门禁无退化，泰昌/辽宁/河北豪乾边界未出现跨资料域串扰。
 - 后续 P0 继续进入 `SG-CONCURRENCY-001`：自适应并发调度与任务级慢流窗口降档。
+
+---
+
+## Run 43 — SG-CONCURRENCY-001 自适应并发调度回归（2026-06-25）
+
+> 本地门禁：`docs/rag/runs/run_20260625_sg_concurrency_001_summary.md`
+> 增量门禁：`docs/rag/runs/run_20260625_sg_concurrency_001_incremental_summary.md`
+> 开发运行记录：`docs/development/runs/run_20260625_sg_concurrency_001_adaptive_scheduler.md`
+
+### 触发原因
+
+SG-SLOW-001 已能让低吞吐章节提前保存 partial 草稿并释放生成槽，但调度器仍按固定 `SECTION_GEN_CONCURRENCY` 补位。如果模型服务整体变慢，固定补位会持续把新章节推入慢流窗口。本轮增加任务级自适应并发策略，让慢流窗口自动降档，稳定窗口具备恢复并发能力。
+
+### 修复范围
+
+- 新增 `section_generation_policy.resolve_section_generation_concurrency()`，独立计算调度窗口。
+- `_dispatch_next_sections()` 按 policy 输出的 `current_concurrency` 租约补位，不再直接用固定并发。
+- 任务 metadata 写入 `scheduler_policy/current_concurrency/max_concurrency/recent_slow_count/slow_stream_count/timeout_count/policy_message`。
+- 慢流 partial 写入 `partial_reason/next_action/retry_policy`，后续续写和前端展示可解释。
+- `requeue_bid_generation_task_item()` 保留原 item metadata，避免 partial 续写丢失慢流历史。
+- 本轮未新增客户资料、未改 RAG 入库策略、未改召回排序；仅按 P0 回归规则执行 RAG 门禁。
+
+### 测试与回归
+
+| 验证项 | 结果 |
+| --- | --- |
+| 自适应 policy/调度单测 | PASS，13 passed |
+| 章节/API 相关回归 | PASS，35 passed |
+| DOCX/Celery 导出单测 | PASS，48 passed |
+| 本地 RAG 门禁 | PASS，api_ready / rag_unit_tests / incremental_regression_gate / stream_sample 全部通过 |
+| 初始窗口真实任务 | PASS，任务 `98ad8494-ba70-40c7-8856-f01c77db2cc9` completed，`current_concurrency=2`、`max_concurrency=3` |
+| 慢流降档真实任务 | PASS，任务 `3881462f-e18f-4aa3-88d7-965d740f0b97` 在 2 个慢流 partial 后 `current_concurrency=1`、`last_policy_change=reduce_concurrency`，只单路补位 |
+| 临时数据清理 | PASS，4 个 `regression_case=sg_concurrency_001` 临时章节剩余 0，测试任务行剩余 0 |
+
+增量回归指标：
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 239 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 580 ms |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% | 340 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 712 ms |
+
+真实 stream 抽样：`done=true`，contexts=5，assets=4，images=4。
+
+### 结论
+
+- `SG-CONCURRENCY-001` 已完成，本地真实环境验证通过。
+- 召回门禁无退化，泰昌/辽宁/河北豪乾边界未出现跨资料域串扰。
+- 后续 P0 继续进入 `SG-PARTIAL-001`：partial 草稿续写上限、复核态与批量续写入口。
