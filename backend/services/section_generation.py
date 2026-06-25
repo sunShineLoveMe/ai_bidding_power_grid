@@ -21,11 +21,6 @@ from backend.db.supabase_repo import (
     list_knowledge_assets,
     update_bid_section_content,
 )
-from backend.api.routes import (
-    _asset_allowed_for_bid,
-    _asset_image_ref,
-    _build_section_image_markdown,
-)
 
 ProgressCallback = Callable[[dict[str, Any]], None]
 
@@ -37,16 +32,19 @@ class SectionGenerationCancelled(Exception):
 class SectionGenerationTimeout(Exception):
     """Raised when a section stream exceeds wall-clock or idle-token budget."""
 
-    def __init__(self, *, code: str, message: str, partial_content: str):
+    def __init__(self, *, code: str, message: str, partial_content: str, metadata: dict[str, Any] | None = None):
         super().__init__(message)
         self.code = code
         self.partial_content = partial_content
+        self.metadata = metadata if isinstance(metadata, dict) else {}
 
 
 def append_section_images(full_content: str, chapter: dict[str, Any], *, with_images: bool) -> str:
     if not with_images:
         return ""
     try:
+        from backend.api.routes import _asset_allowed_for_bid, _asset_image_ref, _build_section_image_markdown
+
         image_assets = [
             asset for asset in list_knowledge_assets()
             if _asset_image_ref(asset)
@@ -187,6 +185,25 @@ def generate_and_save_bid_section(
                     ]
                     if event.get(key) is not None
                 }
+            if event_type == "stream_metric":
+                prompt_metadata.update({
+                    key: event.get(key)
+                    for key in [
+                        "first_token_latency_ms",
+                        "first_token_slow",
+                        "chars_at_60s",
+                        "chars_at_90s",
+                        "chars_per_minute",
+                        "stream_elapsed_ms",
+                        "stream_chars",
+                        "slow_check_seconds",
+                        "min_chars_at_slow_check",
+                        "slow_stream",
+                        "slow_stream_reason",
+                        "timeout_code",
+                    ]
+                    if event.get(key) is not None
+                })
             if event_type == "chunk":
                 content = event.get("content", "")
                 full_content += content
@@ -213,6 +230,13 @@ def generate_and_save_bid_section(
     except LLMStreamTimeoutError as exc:
         code = str(getattr(exc, "code", None) or "MODEL_STREAM_TIMEOUT")
         message = str(exc)
+        timeout_metadata = getattr(exc, "metadata", {}) if isinstance(getattr(exc, "metadata", {}), dict) else {}
+        timeout_metadata = {
+            **prompt_metadata,
+            **timeout_metadata,
+            "timeout_code": code,
+            "timeout_message": message,
+        }
         if on_event:
             on_event({
                 "type": "timeout",
@@ -221,6 +245,7 @@ def generate_and_save_bid_section(
                 "partial_content": full_content,
                 "chars": len(full_content.replace("\n", "")),
                 "words": estimate_bid_content_words(full_content),
+                "metadata": timeout_metadata,
             })
         mark_section_generation_partial(
             project_id,
@@ -229,7 +254,7 @@ def generate_and_save_bid_section(
             code=code,
             partial_content=full_content,
         )
-        raise SectionGenerationTimeout(code=code, message=message, partial_content=full_content) from exc
+        raise SectionGenerationTimeout(code=code, message=message, partial_content=full_content, metadata=timeout_metadata) from exc
     except Exception:
         if saved_section is None:
             mark_section_generation_failed(project_id, chapter, "章节正文后台生成失败，已保留原正文。")

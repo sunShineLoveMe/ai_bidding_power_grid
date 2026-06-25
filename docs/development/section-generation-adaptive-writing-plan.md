@@ -1097,3 +1097,42 @@ docs/rag/runs/run_20260625_sg_prompt_001_incremental_summary.md
 ```text
 SG-SLOW-001：慢流提前保护与 partial 草稿释放并发槽。
 ```
+
+### 15.10 2026-06-25 本地实施与回归：SG-SLOW-001
+
+本轮已完成第七项 P0：
+
+- `section_writer.stream_bid_section()` 增加 `_SectionStreamMonitor`，记录首 token 延迟、stream 字符数、chars/min、60/90 秒字符里程碑和慢流原因。
+- 慢流保护支持 `SECTION_STREAM_SLOW_CHECK_SECONDS`、`SECTION_STREAM_MIN_CHARS_AT_SLOW_CHECK`、`SECTION_STREAM_FIRST_TOKEN_SLOW_SECONDS` 配置，并按 prompt profile 设置默认低吞吐阈值。
+- 低吞吐章节抛出 `MODEL_STREAM_SLOW_TIMEOUT`，`generate_and_save_bid_section()` 透传 timeout metadata，Celery item 进入 `partial_generated` 并保存 partial 草稿。
+- 生成任务 item metadata 已记录 `first_token_latency_ms`、`stream_elapsed_ms`、`stream_chars`、`chars_per_minute`、`slow_stream_reason`、`partial_chars` 和 `partial_words`，便于前端与任务列表解释卡顿原因。
+- `backend/services/section_generation.py` 将图片 helper 改为函数内懒加载，修复服务层单测直接导入时的循环导入隐患。
+- 本轮不做全局自适应并发降档；该项进入下一项 P0。
+
+真实回归记录：
+
+```text
+docs/development/runs/run_20260625_sg_slow_001_slow_stream_protection.md
+docs/rag/runs/run_20260625_sg_slow_001_summary.md
+docs/rag/runs/run_20260625_sg_slow_001_incremental_summary.md
+```
+
+关键验收结果：
+
+| 验收项 | 结果 |
+| --- | --- |
+| 后端编译检查 | `.venv/bin/python -m py_compile backend/ai/qwen_client.py backend/ai/section_writer.py backend/services/section_generation.py backend/tasks/section_tasks.py` 通过 |
+| 慢流/续写单测 | `tests/test_section_generation_autoresume.py tests/test_section_prompt_policy.py` 13 passed |
+| 章节/API 相关回归 | `tests/test_api_sections.py tests/test_section_generation_autoresume.py tests/test_section_prompt_policy.py tests/test_length_settings.py tests/test_postgres_schema_init.py` 30 passed |
+| DOCX/Celery 导出单测 | `tests/test_docx_export.py tests/test_celery_export_tasks.py` 48 passed |
+| 强制慢流真实任务 | 临时任务 `29c99120-38e9-4b3d-a67c-5eef6925dbd3` 进入 `partial_failed`，item 为 `partial_generated`，`timeout_code=MODEL_STREAM_SLOW_TIMEOUT`，partial 草稿已保存 |
+| 正常阈值真实任务 | 临时任务 `41b912db-3d7a-4ca5-b8aa-1e64dbfcfe66` completed，`slow_stream=false`，`stream_chars=589` |
+| 临时章节清理 | 两个回归临时章节均已通过 API 删除，`regression_case in ('sg_slow_001','sg_slow_001_normal')` 剩余 0 |
+| RAG 门禁 | Base + 泰昌专项增量回归 Gate PASS；泰昌专项 qwen3-rerank Recall@5/Top1/MRR 为 `100%/100%/1.000` |
+| 真实 stream 抽样 | `done=true`，contexts=5，assets=4，images=4 |
+
+下一项 P0：
+
+```text
+SG-CONCURRENCY-001：自适应并发调度与任务级慢流窗口降档。
+```

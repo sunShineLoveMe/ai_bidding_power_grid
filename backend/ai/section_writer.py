@@ -1,6 +1,7 @@
 import logging
 import os
 import re
+import time
 from typing import Any, Iterator
 
 from backend.core.config import build_enterprise_context
@@ -131,9 +132,156 @@ def estimate_bid_content_words(content: str) -> int:
 def _is_stream_timeout_error(exc: Exception) -> bool:
     return (
         isinstance(exc, LLMStreamTimeoutError)
-        or str(getattr(exc, "code", "")) in {"MODEL_STREAM_WALL_TIMEOUT", "MODEL_STREAM_IDLE_TIMEOUT"}
+        or str(getattr(exc, "code", "")) in {"MODEL_STREAM_WALL_TIMEOUT", "MODEL_STREAM_IDLE_TIMEOUT", "MODEL_STREAM_SLOW_TIMEOUT"}
         or "MODEL_STREAM_" in str(exc)
     )
+
+
+def _env_float_value(names: list[str], default: float | None = None) -> float | None:
+    for name in names:
+        raw = os.getenv(name)
+        if raw is None:
+            continue
+        try:
+            return float(raw)
+        except (TypeError, ValueError):
+            logging.warning("忽略无效的章节流配置 %s=%s", name, raw)
+    return default
+
+
+def _env_int_value(names: list[str], default: int | None = None) -> int | None:
+    value = _env_float_value(names, None)
+    if value is None:
+        return default
+    return int(value)
+
+
+def _stream_slow_check_seconds(profile) -> float:
+    value = _env_float_value(
+        ["SECTION_STREAM_SLOW_CHECK_SECONDS", "BID_SECTION_STREAM_SLOW_CHECK_SECONDS"],
+        90.0,
+    )
+    if value is None or value <= 0:
+        return 0.0
+    return max(0.1, value)
+
+
+def _stream_first_token_slow_seconds() -> float:
+    value = _env_float_value(
+        ["SECTION_STREAM_FIRST_TOKEN_SLOW_SECONDS", "BID_SECTION_STREAM_FIRST_TOKEN_SLOW_SECONDS"],
+        30.0,
+    )
+    if value is None or value <= 0:
+        return 0.0
+    return max(0.1, value)
+
+
+def _stream_min_chars_at_slow_check(profile) -> int:
+    configured = _env_int_value(
+        ["SECTION_STREAM_MIN_CHARS_AT_SLOW_CHECK", "BID_SECTION_STREAM_MIN_CHARS_AT_SLOW_CHECK"],
+        None,
+    )
+    if configured is not None:
+        return max(1, configured)
+    profile_defaults = {
+        "continuation_slim": 120,
+        "attachment_index": 120,
+        "price_sensitive": 120,
+        "structured_table": 160,
+        "simple_plan": 180,
+    }
+    return profile_defaults.get(profile.name, 250)
+
+
+class _SectionStreamMonitor:
+    def __init__(self, profile) -> None:
+        self.profile = profile
+        self.started_at = time.monotonic()
+        self.first_token_at: float | None = None
+        self.stream_chars = 0
+        self.metrics: dict[str, Any] = {
+            "slow_check_seconds": _stream_slow_check_seconds(profile),
+            "min_chars_at_slow_check": _stream_min_chars_at_slow_check(profile),
+        }
+        self._emitted_first_token = False
+        self._emitted_milestones: set[int] = set()
+        self._emitted_final = False
+        self._slow_triggered = False
+
+    def _base_metrics(self, now: float) -> dict[str, Any]:
+        elapsed = max(0.001, now - self.started_at)
+        metrics = {
+            **self.metrics,
+            "stream_elapsed_ms": int(elapsed * 1000),
+            "stream_chars": self.stream_chars,
+            "chars_per_minute": round(self.stream_chars * 60 / elapsed, 2),
+        }
+        if self.first_token_at is not None:
+            latency_ms = int((self.first_token_at - self.started_at) * 1000)
+            metrics["first_token_latency_ms"] = latency_ms
+            first_token_slow_seconds = _stream_first_token_slow_seconds()
+            if first_token_slow_seconds and latency_ms >= int(first_token_slow_seconds * 1000):
+                metrics["first_token_slow"] = True
+        return metrics
+
+    def record_chunk(self, chunk: str) -> tuple[dict[str, Any] | None, LLMStreamTimeoutError | None]:
+        now = time.monotonic()
+        self.stream_chars += len((chunk or "").replace("\n", ""))
+        first_token_event = False
+        if self.first_token_at is None:
+            self.first_token_at = now
+            first_token_event = True
+
+        elapsed = max(0.001, now - self.started_at)
+        milestone_event = False
+        if elapsed >= 60 and "chars_at_60s" not in self.metrics:
+            self.metrics["chars_at_60s"] = self.stream_chars
+            self._emitted_milestones.add(60)
+            milestone_event = True
+        if elapsed >= 90 and "chars_at_90s" not in self.metrics:
+            self.metrics["chars_at_90s"] = self.stream_chars
+            self._emitted_milestones.add(90)
+            milestone_event = True
+
+        metrics = self._base_metrics(now)
+
+        slow_check_seconds = float(metrics.get("slow_check_seconds") or 0)
+        min_chars = int(metrics.get("min_chars_at_slow_check") or 0)
+        if slow_check_seconds and elapsed >= slow_check_seconds and self.stream_chars < min_chars:
+            reason = f"elapsed_{int(elapsed)}s_chars_{self.stream_chars}_below_{min_chars}"
+            slow_metrics = {
+                **metrics,
+                "slow_stream": True,
+                "slow_stream_reason": reason,
+                "timeout_code": "MODEL_STREAM_SLOW_TIMEOUT",
+            }
+            self.metrics.update(slow_metrics)
+            self._slow_triggered = True
+            message = (
+                f"模型流式输出超过 {int(slow_check_seconds)} 秒但仅输出 {self.stream_chars} 字，"
+                f"低于慢流阈值 {min_chars} 字，已提前保存草稿并释放生成槽。"
+            )
+            return slow_metrics, LLMStreamTimeoutError("MODEL_STREAM_SLOW_TIMEOUT", message, metadata=slow_metrics)
+
+        if first_token_event and not self._emitted_first_token:
+            self._emitted_first_token = True
+            return metrics, None
+        if milestone_event:
+            return metrics, None
+        return None, None
+
+    def finish(self) -> dict[str, Any] | None:
+        if self._emitted_final or self._slow_triggered:
+            return None
+        self._emitted_final = True
+        now = time.monotonic()
+        metrics = {
+            **self._base_metrics(now),
+            "slow_stream": False,
+            "slow_stream_reason": None,
+        }
+        self.metrics.update(metrics)
+        return metrics
 
 
 def _target_words(chapter: dict[str, Any]) -> int:
@@ -900,6 +1048,7 @@ def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dic
     emitted = False
     generated_content = continuation_draft
     try:
+        stream_monitor = _SectionStreamMonitor(profile)
         for chunk in stream_dashscope_api(
             [{"role": "user", "content": prompt}],
             model=get_stage_model("section_writing"),
@@ -922,6 +1071,14 @@ def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dic
                 "type": "chunk",
                 "content": chunk,
             }
+            metric_event, slow_error = stream_monitor.record_chunk(chunk)
+            if metric_event:
+                yield {
+                    "type": "stream_metric",
+                    **metric_event,
+                }
+            if slow_error:
+                raise slow_error
             cap_reached, max_words, actual_words = _length_cap_reached(generated_content, chapter)
             if cap_reached:
                 yield {
@@ -931,6 +1088,12 @@ def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dic
                     "actual_words": actual_words,
                 }
                 break
+        final_metric = stream_monitor.finish()
+        if final_metric:
+            yield {
+                "type": "stream_metric",
+                **final_metric,
+            }
     except Exception as exc:
         if _is_stream_timeout_error(exc):
             raise
@@ -987,6 +1150,7 @@ def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dic
             "content": supplement_prefix,
         }
         try:
+            supplement_monitor = _SectionStreamMonitor(supplement_profile)
             for chunk in stream_dashscope_api(
                 [{"role": "user", "content": supplement_prompt}],
                 model=get_stage_model("section_supplement"),
@@ -1011,6 +1175,14 @@ def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dic
                     "type": "chunk",
                     "content": chunk,
                 }
+                metric_event, slow_error = supplement_monitor.record_chunk(chunk)
+                if metric_event:
+                    yield {
+                        "type": "stream_metric",
+                        **metric_event,
+                    }
+                if slow_error:
+                    raise slow_error
                 cap_reached, max_words, actual_words = _length_cap_reached(generated_content, chapter)
                 if cap_reached:
                     yield {
@@ -1020,6 +1192,12 @@ def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dic
                         "actual_words": actual_words,
                     }
                     break
+            final_metric = supplement_monitor.finish()
+            if final_metric:
+                yield {
+                    "type": "stream_metric",
+                    **final_metric,
+                }
         except Exception as exc:
             if _is_stream_timeout_error(exc):
                 raise

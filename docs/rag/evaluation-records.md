@@ -2638,3 +2638,53 @@ Run 39 在阿里云真实页面发现企业知识库问答存在 P0/P1 缺陷：
 - `SG-PROMPT-001` 已完成，本地真实环境验证通过。
 - 本轮未新增客户资料、未改变 RAG 入库策略；召回门禁无退化，泰昌/辽宁/河北豪乾边界未出现跨资料域串扰。
 - 后续 P0 继续进入慢流提前保护、partial 草稿释放并发槽、自适应并发和前端可解释进度。
+
+---
+
+## Run 42 — SG-SLOW-001 慢流提前保护回归（2026-06-25）
+
+> 本地门禁：`docs/rag/runs/run_20260625_sg_slow_001_summary.md`
+> 增量门禁：`docs/rag/runs/run_20260625_sg_slow_001_incremental_summary.md`
+> 开发运行记录：`docs/development/runs/run_20260625_sg_slow_001_slow_stream_protection.md`
+
+### 触发原因
+
+客户真实批量章节生成已出现后半段慢流和 `MODEL_STREAM_WALL_TIMEOUT`，旧链路会长期占用生成槽直到 300 秒超时，导致全文编制体感为卡死。本轮在 SG-PROMPT-001 输入预算基础上，增加流式低吞吐提前保护，让慢章节尽早保存 partial 草稿并释放生成槽。
+
+### 修复范围
+
+- `stream_bid_section()` 增加流式监控，记录首 token 延迟、输出字符数、chars/min 和慢流原因。
+- 慢流阈值支持环境变量配置，并按 prompt profile 设置默认最小字符数。
+- 低吞吐时抛出 `MODEL_STREAM_SLOW_TIMEOUT`，任务 item 进入 `partial_generated`，并保存 `partial_chars`、`partial_words`、`timeout_code` 和慢流指标。
+- `generate_and_save_bid_section()` 与 Celery worker 均透传 `stream_metric/timeout` metadata，legacy task JSON 和任务明细保持一致。
+- 本轮未新增客户资料、未改 RAG 入库策略、未改召回排序；仅按专项规则执行 RAG 回归门禁。
+
+### 测试与回归
+
+| 验证项 | 结果 |
+| --- | --- |
+| 后端编译检查 | PASS |
+| 慢流/续写单测 | PASS，13 passed |
+| 章节/API 相关回归 | PASS，30 passed |
+| DOCX/Celery 导出单测 | PASS，48 passed |
+| 本地 RAG 门禁 | PASS，api_ready / rag_unit_tests / incremental_regression_gate / stream_sample 全部通过 |
+| 强制慢流真实任务 | PASS，任务 `29c99120-38e9-4b3d-a67c-5eef6925dbd3` 进入 `partial_failed`，item 为 `partial_generated`，`timeout_code=MODEL_STREAM_SLOW_TIMEOUT` |
+| 正常阈值真实任务 | PASS，任务 `41b912db-3d7a-4ca5-b8aa-1e64dbfcfe66` completed，`slow_stream=false` |
+| 临时数据清理 | PASS，两个回归临时章节均已删除，回归 metadata 剩余 0 |
+
+增量回归指标：
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 242 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 594 ms |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% | 344 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 706 ms |
+
+真实 stream 抽样：`done=true`，contexts=5，assets=4，images=4。
+
+### 结论
+
+- `SG-SLOW-001` 已完成，本地真实环境验证通过。
+- 召回门禁无退化，泰昌/辽宁/河北豪乾边界未出现跨资料域串扰。
+- 后续 P0 继续进入 `SG-CONCURRENCY-001`：自适应并发调度与任务级慢流窗口降档。

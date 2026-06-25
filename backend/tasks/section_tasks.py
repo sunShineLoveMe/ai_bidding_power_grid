@@ -352,6 +352,25 @@ def generate_one_section(
         last_heartbeat_at = 0.0
         first_token_at: str | None = None
 
+        def _clean_stream_metadata(source: dict[str, Any]) -> dict[str, Any]:
+            metadata = source.get("metadata") if isinstance(source.get("metadata"), dict) else source
+            allowed = [
+                "first_token_latency_ms",
+                "first_token_slow",
+                "chars_at_60s",
+                "chars_at_90s",
+                "chars_per_minute",
+                "stream_elapsed_ms",
+                "stream_chars",
+                "slow_check_seconds",
+                "min_chars_at_slow_check",
+                "slow_stream",
+                "slow_stream_reason",
+                "timeout_code",
+                "timeout_message",
+            ]
+            return {key: metadata.get(key) for key in allowed if metadata.get(key) is not None}
+
         def assert_owner() -> None:
             if not attempt_id or not worker_id:
                 return
@@ -444,6 +463,30 @@ def generate_one_section(
                     "attempt_id": attempt_id,
                     "worker_id": worker_id,
                 })
+                return
+            if event_type == "stream_metric":
+                prompt_metadata = {**prompt_metadata, **_clean_stream_metadata(event)}
+                update_bid_generation_task_item(project_id, task_id, section_id, {
+                    "status": "generating",
+                    "percent": min(98, max(3, int((len(generated_content.replace("\n", "")) / max(int(item.get("target_words") or 800), 1)) * 100))),
+                    "chars": len(generated_content.replace("\n", "")),
+                    "message": "模型输出较慢，正在保护当前草稿" if prompt_metadata.get("slow_stream") else "正在编写",
+                    "metadata": {**item_metadata, **prompt_metadata},
+                    "attempt_id": attempt_id,
+                    "worker_id": worker_id,
+                })
+                return
+            if event_type == "timeout":
+                prompt_metadata = {
+                    **prompt_metadata,
+                    **_clean_stream_metadata(event),
+                    "timeout_code": event.get("code") or prompt_metadata.get("timeout_code"),
+                    "timeout_message": event.get("message") or prompt_metadata.get("timeout_message"),
+                    "timeout_at": _now_iso(),
+                    "partial_chars": event.get("chars"),
+                    "partial_words": event.get("words"),
+                }
+                prompt_metadata = {key: value for key, value in prompt_metadata.items() if value is not None}
                 return
             if event_type != "chunk":
                 return
@@ -538,11 +581,22 @@ def generate_one_section(
                 _dispatch_next_sections(project_id, task_id)
                 return {"section_id": section_id, "status": "superseded"}
             partial_content = exc.partial_content or generated_content
+            timeout_metadata = getattr(exc, "metadata", {}) if isinstance(getattr(exc, "metadata", {}), dict) else {}
+            merged_metadata = {
+                **item_metadata,
+                **prompt_metadata,
+                **timeout_metadata,
+                "timeout_code": exc.code,
+                "timeout_message": str(exc),
+            }
+            if exc.code == "MODEL_STREAM_SLOW_TIMEOUT":
+                merged_metadata["slow_stream"] = True
+                merged_metadata.setdefault("slow_stream_reason", timeout_metadata.get("slow_stream_reason") or "slow_stream_timeout")
             update_bid_generation_task_item(project_id, task_id, section_id, {
                 "status": "partial_generated",
                 "percent": 100,
                 "chars": len(partial_content.replace("\n", "")),
-                "message": "模型输出超时，已保存草稿，待续写或人工复核。",
+                "message": "模型输出较慢，已提前保存草稿，待续写或人工复核。" if exc.code == "MODEL_STREAM_SLOW_TIMEOUT" else "模型输出超时，已保存草稿，待续写或人工复核。",
                 "error": f"{exc.code}: {str(exc)}",
                 "generated_content": partial_content,
                 "draft_content": partial_content,
@@ -551,7 +605,7 @@ def generate_one_section(
                 "first_token_at": first_token_at,
                 "last_token_at": _now_iso(),
                 "draft_saved_at": _now_iso(),
-                "metadata": {**item_metadata, **prompt_metadata},
+                "metadata": merged_metadata,
                 "attempt_id": attempt_id,
                 "worker_id": worker_id,
             })

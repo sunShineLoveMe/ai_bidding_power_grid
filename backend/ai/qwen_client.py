@@ -30,9 +30,10 @@ class LLMRetryableError(RuntimeError):
 
 
 class LLMStreamTimeoutError(RuntimeError):
-    def __init__(self, code: str, message: str):
+    def __init__(self, code: str, message: str, metadata: dict | None = None):
         super().__init__(message)
         self.code = code
+        self.metadata = metadata if isinstance(metadata, dict) else {}
 
 
 def _active_provider() -> str:

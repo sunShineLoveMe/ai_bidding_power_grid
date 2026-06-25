@@ -197,6 +197,80 @@ class SectionGenerationAutoResumeTest(unittest.TestCase):
         self.assertTrue(any(event.get("type") == "length_cap_reached" for event in events))
         self.assertEqual(events[-1]["type"], "done")
 
+    def test_stream_bid_section_raises_slow_timeout_with_metrics(self):
+        from backend.ai import section_writer
+        from backend.ai.qwen_client import LLMStreamTimeoutError
+
+        chapter = {
+            "id": "33333333-3333-3333-3333-333333333333",
+            "title": "编制依据",
+            "metadata": {"volume_type": "technical"},
+        }
+        events = []
+        with (
+            patch.dict(
+                "os.environ",
+                {
+                    "SECTION_STREAM_SLOW_CHECK_SECONDS": "2",
+                    "SECTION_STREAM_MIN_CHARS_AT_SLOW_CHECK": "10",
+                    "SECTION_STREAM_FIRST_TOKEN_SLOW_SECONDS": "1",
+                },
+                clear=False,
+            ),
+            patch("backend.ai.section_writer.time.monotonic", side_effect=[0.0, 1.5, 2.5]),
+            patch("backend.ai.section_writer.build_section_prompt", return_value="prompt"),
+            patch("backend.ai.section_writer.stream_dashscope_api", return_value=iter(["少", "量"])),
+            patch("backend.ai.section_writer.get_stage_model", return_value="test-model"),
+            patch("backend.ai.section_writer._needs_length_supplement", return_value=False),
+        ):
+            with self.assertRaises(LLMStreamTimeoutError) as raised:
+                for event in section_writer.stream_bid_section("11111111-1111-1111-1111-111111111111", chapter):
+                    events.append(event)
+
+        self.assertEqual(raised.exception.code, "MODEL_STREAM_SLOW_TIMEOUT")
+        self.assertTrue(raised.exception.metadata["slow_stream"])
+        self.assertEqual(raised.exception.metadata["stream_chars"], 2)
+        self.assertEqual(raised.exception.metadata["min_chars_at_slow_check"], 10)
+        self.assertTrue(any(event.get("type") == "stream_metric" and event.get("first_token_slow") for event in events))
+        self.assertTrue(any(event.get("type") == "stream_metric" and event.get("slow_stream") for event in events))
+
+    def test_generate_and_save_bid_section_preserves_timeout_metadata(self):
+        from backend.ai.qwen_client import LLMStreamTimeoutError
+        from backend.services.section_generation import SectionGenerationTimeout, generate_and_save_bid_section
+
+        def slow_stream(*_args, **_kwargs):
+            yield {"type": "start", "prompt_profile": "simple_plan", "prompt_chars": 1000}
+            yield {
+                "type": "stream_metric",
+                "first_token_latency_ms": 1500,
+                "stream_chars": 2,
+                "slow_stream": True,
+                "slow_stream_reason": "elapsed_2s_chars_2_below_10",
+            }
+            raise LLMStreamTimeoutError(
+                "MODEL_STREAM_SLOW_TIMEOUT",
+                "slow stream",
+                metadata={"slow_stream": True, "timeout_code": "MODEL_STREAM_SLOW_TIMEOUT"},
+            )
+
+        events = []
+        with (
+            patch("backend.services.section_generation.stream_bid_section", side_effect=slow_stream),
+            patch("backend.services.section_generation.mark_section_generation_partial") as partial_mock,
+        ):
+            with self.assertRaises(SectionGenerationTimeout) as raised:
+                generate_and_save_bid_section(
+                    "11111111-1111-1111-1111-111111111111",
+                    {"id": "33333333-3333-3333-3333-333333333333", "title": "编制依据"},
+                    on_event=events.append,
+                )
+
+        self.assertEqual(raised.exception.code, "MODEL_STREAM_SLOW_TIMEOUT")
+        self.assertTrue(raised.exception.metadata["slow_stream"])
+        self.assertEqual(raised.exception.metadata["timeout_code"], "MODEL_STREAM_SLOW_TIMEOUT")
+        self.assertTrue(any(event.get("type") == "timeout" and event.get("metadata", {}).get("slow_stream") for event in events))
+        partial_mock.assert_called_once()
+
 
 if __name__ == "__main__":
     unittest.main()
