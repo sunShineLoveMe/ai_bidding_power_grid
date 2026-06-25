@@ -77,6 +77,14 @@ type AddChapterPersistOptions = AddChapterOptions & {
   conversionMode?: LeafToContainerConversionMode;
 };
 
+type DeletedChapterSnapshot = {
+  title: string;
+  count: number;
+  selectedId: string;
+  deletedAt: string;
+  chapters: ChapterDraft[];
+};
+
 type StreamingChildPlaceholder = {
   id: string;
   parentOrder: string;
@@ -400,6 +408,10 @@ export function BidEditorPage(): JSX.Element {
   const [leafToContainerTarget, setLeafToContainerTarget] = useState<ChapterDraft | null>(null);
   const [leafToContainerMode, setLeafToContainerMode] = useState<LeafToContainerConversionMode>('keep_parent_summary');
   const [leafToContainerSaving, setLeafToContainerSaving] = useState(false);
+  const [recentDeletedChapter, setRecentDeletedChapter] = useState<DeletedChapterSnapshot | null>(null);
+  const [restoringDeletedChapter, setRestoringDeletedChapter] = useState(false);
+  const [deleteTarget, setDeleteTarget] = useState<ChapterDraft | null>(null);
+  const [deletingChapter, setDeletingChapter] = useState(false);
   const [streamText, setStreamText] = useState('');
   const [streamingChildPlaceholders, setStreamingChildPlaceholders] = useState<StreamingChildPlaceholder[]>([]);
   const [downloadUrl, setDownloadUrl] = useState('');
@@ -1239,6 +1251,81 @@ export function BidEditorPage(): JSX.Element {
     );
   }
 
+  function RecentlyDeletedChapterBanner(): JSX.Element | null {
+    if (!recentDeletedChapter) {
+      return null;
+    }
+    return (
+      <Alert
+        className="chapter-delete-undo-alert"
+        type="warning"
+        showIcon
+        message={`已删除“${recentDeletedChapter.title}”`}
+        description={`共删除 ${recentDeletedChapter.count} 个章节，该操作已同步到当前项目。可在本页面停留期间撤销恢复。`}
+        action={(
+          <Space>
+            <Button
+              size="small"
+              type="primary"
+              loading={restoringDeletedChapter}
+              onClick={() => void restoreRecentlyDeletedChapter()}
+            >
+              撤销删除
+            </Button>
+            <Button
+              size="small"
+              disabled={restoringDeletedChapter}
+              onClick={() => setRecentDeletedChapter(null)}
+            >
+              关闭
+            </Button>
+          </Space>
+        )}
+      />
+    );
+  }
+
+  function DeleteChapterConfirmModal(): JSX.Element {
+    const chapter = deleteTarget
+      ? chapters.find(item => item.id === deleteTarget.id) || deleteTarget
+      : null;
+    const deletedChapters = chapter ? collectChapterSubtree(chapter) : [];
+    const childCount = Math.max(0, deletedChapters.length - 1);
+    return (
+      <Modal
+        title="删除章节"
+        open={!!chapter}
+        okText="确认删除"
+        cancelText="取消"
+        confirmLoading={deletingChapter}
+        okButtonProps={{ danger: true, disabled: !chapter }}
+        cancelButtonProps={{ disabled: deletingChapter }}
+        maskClosable={!deletingChapter}
+        width={560}
+        onOk={() => void confirmDeleteChapter()}
+        onCancel={() => {
+          if (!deletingChapter) {
+            setDeleteTarget(null);
+          }
+        }}
+        destroyOnHidden
+      >
+        <Space direction="vertical" size={12}>
+          <span>
+            确认从当前项目中删除“{chapter?.title || '未命名章节'}”？
+            {childCount > 0 ? ` 其下 ${childCount} 个子章节也会一并删除。` : ''}
+          </span>
+          <Alert
+            type="warning"
+            showIcon
+            message="该操作会同步删除后端章节数据"
+            description="删除成功后，本页面会保留一次临时撤销入口；离开或刷新页面后将不能从前端直接撤销。"
+          />
+        </Space>
+      </Modal>
+    );
+  }
+
   function QualityDashboard(): JSX.Element {
     if (qualityCollapsed) {
       return (
@@ -1775,6 +1862,63 @@ export function BidEditorPage(): JSX.Element {
         container_content_policy: movedContent ? 'original_content_moved_to_first_child' : 'parent_content_kept_as_overview',
       },
     };
+  }
+
+  function cloneChapterDraft(chapter: ChapterDraft): ChapterDraft {
+    return JSON.parse(JSON.stringify(chapter)) as ChapterDraft;
+  }
+
+  function collectChapterSubtree(root: ChapterDraft, source = chapters): ChapterDraft[] {
+    const descendants = new Set<string>([root.id]);
+    let changed = true;
+    while (changed) {
+      changed = false;
+      source.forEach(item => {
+        if (item.parent_id && descendants.has(item.parent_id) && !descendants.has(item.id)) {
+          descendants.add(item.id);
+          changed = true;
+        }
+      });
+    }
+    return source.filter(item => descendants.has(item.id)).map(cloneChapterDraft);
+  }
+
+  async function restoreRecentlyDeletedChapter(): Promise<void> {
+    if (!data?.project?.id || !recentDeletedChapter || restoringDeletedChapter) {
+      return;
+    }
+    const snapshot = recentDeletedChapter;
+    const restoreSource = normalizeChapterHierarchy([
+      ...chapters,
+      ...snapshot.chapters.map(cloneChapterDraft),
+    ]);
+    const restoreOrder = [...snapshot.chapters].sort((left, right) => {
+      const levelDiff = (left.level || 1) - (right.level || 1);
+      if (levelDiff !== 0) {
+        return levelDiff;
+      }
+      return (left.order_index || 0) - (right.order_index || 0);
+    });
+
+    setRestoringDeletedChapter(true);
+    try {
+      for (const chapter of restoreOrder) {
+        await saveBidSection(data.project.id, {
+          ...chapter,
+          parent_id: safeParentIdForSave(chapter.parent_id, restoreSource),
+          level: chapter.level || 1,
+          order_index: chapter.order_index || restoreSource.findIndex(item => item.id === chapter.id) + 1,
+          status: chapter.status || 'draft',
+        });
+      }
+      await reloadProject(data.project.id);
+      setSelectedId(snapshot.selectedId || snapshot.chapters[0]?.id || '');
+      setRecentDeletedChapter(null);
+    } catch (error) {
+      message.error(error instanceof Error ? error.message : String(error));
+    } finally {
+      setRestoringDeletedChapter(false);
+    }
   }
 
   function hasChildChapters(chapter: ChapterDraft, source = chapters): boolean {
@@ -2539,37 +2683,44 @@ export function BidEditorPage(): JSX.Element {
     });
   }
 
-  function deleteChapter(chapter: ChapterDraft): void {
-    Modal.confirm({
-      title: '删除章节',
-      content: `确认删除“${chapter.title || '未命名章节'}”？此操作只影响当前页面草稿。`,
-      okText: '删除',
-      cancelText: '取消',
-      okButtonProps: { danger: true },
-      onOk: async () => {
-        if (data?.project?.id && chapter.id && isUuid(chapter.id)) {
-          await deleteBidSection(data.project.id, chapter.id);
+  async function confirmDeleteChapter(): Promise<void> {
+    if (!deleteTarget) {
+      return;
+    }
+    const chapter = chapters.find(item => item.id === deleteTarget.id) || deleteTarget;
+    const deletedChapters = collectChapterSubtree(chapter);
+    const deletedIds = new Set(deletedChapters.map(item => item.id));
+    const restoredSelectedId = selectedId && deletedIds.has(selectedId) ? selectedId : chapter.id;
+
+    setDeletingChapter(true);
+    try {
+      if (data?.project?.id && chapter.id && isUuid(chapter.id)) {
+        await deleteBidSection(data.project.id, chapter.id);
+      }
+      setRecentDeletedChapter({
+        title: chapter.title || '未命名章节',
+        count: deletedChapters.length,
+        selectedId: restoredSelectedId,
+        deletedAt: new Date().toISOString(),
+        chapters: deletedChapters,
+      });
+      setChapters(items => {
+        const nextItems = normalizeChapterHierarchy(items.filter(item => !deletedIds.has(item.id)));
+        if (selectedId && deletedIds.has(selectedId)) {
+          setSelectedId(nextItems[0]?.id || '');
         }
-        setChapters(items => {
-          const descendants = new Set<string>([chapter.id]);
-          let changed = true;
-          while (changed) {
-            changed = false;
-            items.forEach(item => {
-              if (item.parent_id && descendants.has(item.parent_id) && !descendants.has(item.id)) {
-                descendants.add(item.id);
-                changed = true;
-              }
-            });
-          }
-          const nextItems = normalizeChapterHierarchy(items.filter(item => !descendants.has(item.id)));
-          if (selectedId === chapter.id) {
-            setSelectedId(nextItems[0]?.id || '');
-          }
-          return nextItems;
-        });
-      },
-    });
+        return nextItems;
+      });
+      setDeleteTarget(null);
+    } catch (error) {
+      message.error(error instanceof Error ? error.message : String(error));
+    } finally {
+      setDeletingChapter(false);
+    }
+  }
+
+  function deleteChapter(chapter: ChapterDraft): void {
+    setDeleteTarget(chapter);
   }
 
   function customWritingPlaceholder(chapter: ChapterDraft): string {
@@ -3293,7 +3444,8 @@ export function BidEditorPage(): JSX.Element {
         </header>
 
         <main className="outline-workbench">
-          <section className="outline-topbar">
+          <section className="outline-topbar-stack">
+            <div className="outline-topbar">
             <Segmented<EditorMode>
               value={mode}
               onChange={value => setMode(value)}
@@ -3321,6 +3473,8 @@ export function BidEditorPage(): JSX.Element {
               <span>进度：{generationProgress}%</span>
               {batchGenerating ? <span>后台章节任务执行中</span> : null}
             </div>
+            </div>
+            <RecentlyDeletedChapterBanner />
           </section>
           <section className="outline-panel">
             <div className="outline-panel-header">
@@ -3520,6 +3674,7 @@ export function BidEditorPage(): JSX.Element {
         <LengthSettingsModal />
         <CustomWritingModal />
         <LeafToContainerConfirmModal />
+        <DeleteChapterConfirmModal />
         <CompressionConfirmModal />
         <ComplianceDrawer />
         <SemanticComplianceDrawer />
@@ -3677,35 +3832,38 @@ export function BidEditorPage(): JSX.Element {
       </aside>
 
       <main className="bid-editor-main">
-        <section className="editor-title-row">
-          <div>
-            <h1>{selectedChapter ? chapterDisplayTitle(selectedChapter) : '未选择章节'}</h1>
-            <p>{streaming ? streamText : selectedChapter?.purpose || '使用 AI 编辑器编写章节正文，支持标题、列表、表格和 Markdown 存储。'}</p>
+        <section className="editor-title-stack">
+          <div className="editor-title-row">
+            <div>
+              <h1>{selectedChapter ? chapterDisplayTitle(selectedChapter) : '未选择章节'}</h1>
+              <p>{streaming ? streamText : selectedChapter?.purpose || '使用 AI 编辑器编写章节正文，支持标题、列表、表格和 Markdown 存储。'}</p>
+            </div>
+            <Space>
+              {streaming ? <Tag color="processing">大纲生成中</Tag> : null}
+              {sectionStreaming ? <Tag color="processing">正文生成中</Tag> : null}
+              {selectedChapter ? <Tag color="blue">{volumeLabel(deliveryVolumeType(selectedChapter))}</Tag> : null}
+              {selectedChapter ? <Tag color="default">{internalVolumeLabel(inferVolumeType(selectedChapter))}</Tag> : null}
+              <Button icon={<Save size={16} />} disabled={!selectedChapter || !contentDirty} onClick={() => void saveDraft()}>保存章节</Button>
+              <Button icon={<Sparkles size={16} />} loading={sectionStreaming} disabled={!selectedChapter || streaming} onClick={() => void generateCurrentSection()}>生成本章正文</Button>
+              {sectionStreaming ? (
+                <Button danger icon={<Square size={16} />} onClick={stopCurrentSectionGeneration}>停止生成</Button>
+              ) : null}
+              <Button
+                icon={<Download size={16} />}
+                loading={downloadGenerating === 'section'}
+                disabled={!selectedChapter || !!downloadGenerating}
+                onClick={() => selectedChapter && void downloadDocx(selectedChapter.id)}
+              >
+                下载本章
+              </Button>
+              {exportTask && downloadGenerating === 'section' ? (
+                <Tooltip title={exportTask.message || '正在导出 DOCX'}>
+                  <Progress type="circle" size={30} percent={exportTask.progress || 0} />
+                </Tooltip>
+              ) : null}
+            </Space>
           </div>
-          <Space>
-            {streaming ? <Tag color="processing">大纲生成中</Tag> : null}
-            {sectionStreaming ? <Tag color="processing">正文生成中</Tag> : null}
-            {selectedChapter ? <Tag color="blue">{volumeLabel(deliveryVolumeType(selectedChapter))}</Tag> : null}
-            {selectedChapter ? <Tag color="default">{internalVolumeLabel(inferVolumeType(selectedChapter))}</Tag> : null}
-            <Button icon={<Save size={16} />} disabled={!selectedChapter || !contentDirty} onClick={() => void saveDraft()}>保存章节</Button>
-            <Button icon={<Sparkles size={16} />} loading={sectionStreaming} disabled={!selectedChapter || streaming} onClick={() => void generateCurrentSection()}>生成本章正文</Button>
-            {sectionStreaming ? (
-              <Button danger icon={<Square size={16} />} onClick={stopCurrentSectionGeneration}>停止生成</Button>
-            ) : null}
-            <Button
-              icon={<Download size={16} />}
-              loading={downloadGenerating === 'section'}
-              disabled={!selectedChapter || !!downloadGenerating}
-              onClick={() => selectedChapter && void downloadDocx(selectedChapter.id)}
-            >
-              下载本章
-            </Button>
-            {exportTask && downloadGenerating === 'section' ? (
-              <Tooltip title={exportTask.message || '正在导出 DOCX'}>
-                <Progress type="circle" size={30} percent={exportTask.progress || 0} />
-              </Tooltip>
-            ) : null}
-          </Space>
+          <RecentlyDeletedChapterBanner />
         </section>
 
         <section className="editor-workspace">
@@ -3732,6 +3890,7 @@ export function BidEditorPage(): JSX.Element {
       <QualityDashboard />
       <CustomWritingModal />
       <LeafToContainerConfirmModal />
+      <DeleteChapterConfirmModal />
       <CompressionConfirmModal />
       <ComplianceDrawer />
       <SemanticComplianceDrawer />

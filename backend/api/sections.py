@@ -335,12 +335,12 @@ def cancel_section_generation_task_api(project_id, task_id):
 
 @bp.route('/interpretations/<project_id>/sections/<section_id>', methods=['DELETE'])
 def remove_bid_section(project_id, section_id):
-    """删除单个标书章节。"""
+    """删除标书章节及其下级章节。"""
     try:
         uuid.UUID(project_id)
         uuid.UUID(section_id)
-        delete_bid_section(project_id, section_id)
-        return jsonify({"message": "章节已删除。"})
+        deleted_count = delete_bid_section(project_id, section_id)
+        return jsonify({"message": "章节已删除。", "deleted_count": deleted_count})
     except ValueError:
         return jsonify({'error': 'project_id 或 section_id 不是合法 UUID。'}), 400
     except Exception as e:

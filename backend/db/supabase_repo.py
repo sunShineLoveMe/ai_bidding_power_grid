@@ -1324,8 +1324,28 @@ def reset_bid_sections_generation(project_id: str, clear_content: bool = False) 
     return response.data or []
 
 
-def delete_bid_section(project_id: str, section_id: str) -> None:
-    get_supabase_client().table("bid_sections").delete().eq("id", section_id).eq("project_id", project_id).execute()
+def delete_bid_section(project_id: str, section_id: str) -> int:
+    rows = list_bid_sections(project_id)
+    descendant_ids = {section_id}
+    changed = True
+    while changed:
+        changed = False
+        for row in rows:
+            row_id = str(row.get("id") or "")
+            parent_id = str(row.get("parent_id") or "")
+            if row_id and parent_id in descendant_ids and row_id not in descendant_ids:
+                descendant_ids.add(row_id)
+                changed = True
+
+    response = (
+        get_supabase_client()
+        .table("bid_sections")
+        .delete()
+        .eq("project_id", project_id)
+        .in_("id", list(descendant_ids))
+        .execute()
+    )
+    return len(response.data or [])
 
 
 ACTIVE_GENERATION_ITEM_STATUSES = {"leased", "running", "generating", "saving"}

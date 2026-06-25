@@ -633,9 +633,15 @@ textarea {
   display: grid;
   min-height: 0;
   min-width: 0;
-  grid-template-rows: 58px minmax(0, 1fr) 62px;
+  grid-template-rows: auto minmax(0, 1fr) 62px;
   background: #f7f9fc;
   overflow: hidden;
+}
+
+.outline-topbar-stack {
+  display: grid;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .outline-topbar {
@@ -643,8 +649,8 @@ textarea {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  border-bottom: 1px solid #e2e8f0;
   background: #ffffff;
+  min-height: 58px;
   padding: 0 22px;
 }
 
@@ -1266,7 +1272,7 @@ textarea {
   display: grid;
   min-width: 0;
   min-height: 0;
-  grid-template-rows: 82px minmax(0, 1fr) 34px;
+  grid-template-rows: auto minmax(0, 1fr) 34px;
   overflow: hidden;
   background: #f1f3f7;
 }
@@ -1495,6 +1501,19 @@ textarea {
   border-bottom: 1px solid #e2e8f0;
   background: #ffffff;
   padding: 12px 22px;
+}
+
+.editor-title-stack {
+  display: grid;
+  background: #ffffff;
+}
+
+.chapter-delete-undo-alert {
+  margin: 0 22px 12px;
+}
+
+.editor-title-stack .chapter-delete-undo-alert {
+  margin-top: 0;
 }
 
 .editor-title-row h1 {
