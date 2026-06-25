@@ -32,6 +32,7 @@ AI_EDIT_ACTIONS: dict[str, dict[str, str]] = {
 }
 
 MAX_SELECTED_CHARS = 5000
+MAX_SHORTEN_SELECTED_CHARS = 12000
 MAX_CONTEXT_CHARS = 6000
 
 
@@ -92,13 +93,14 @@ def build_ai_edit_messages(
     section_title: str = "",
     section_context: str = "",
     full_content: str = "",
+    selected_limit: int = MAX_SELECTED_CHARS,
 ) -> list[dict[str, str]]:
     action_spec = AI_EDIT_ACTIONS[action]
     project = project_payload.get("project") or {}
     analysis = project_payload.get("analysis") or {}
     project_meta = analysis.get("project_meta") if isinstance(analysis.get("project_meta"), dict) else {}
     enterprise_context = build_enterprise_context()
-    selected_text = _truncate(selected_text, MAX_SELECTED_CHARS)
+    selected_text = _truncate(selected_text, selected_limit)
     full_content = _truncate(full_content, MAX_CONTEXT_CHARS)
 
     system = (
@@ -145,11 +147,12 @@ def edit_bid_section_text(project_id: str, payload: dict[str, Any]) -> dict[str,
     action = _text(payload.get("action"))
     if action not in AI_EDIT_ACTIONS:
         raise ValueError("不支持的 AI 编辑动作。")
+    selected_limit = MAX_SHORTEN_SELECTED_CHARS if action == "shorten" else MAX_SELECTED_CHARS
     selected_text = _text(payload.get("selectedText") or payload.get("selected_text"))
     if not selected_text:
         raise ValueError("请先选中需要 AI 编辑的正文。")
-    if len(selected_text) > MAX_SELECTED_CHARS:
-        raise ValueError(f"选中文本过长，请控制在 {MAX_SELECTED_CHARS} 字以内。")
+    if len(selected_text) > selected_limit:
+        raise ValueError(f"选中文本过长，请控制在 {selected_limit} 字以内。")
     if not re.search(r"[\u4e00-\u9fffA-Za-z0-9]", selected_text):
         raise ValueError("选中文本缺少有效内容。")
 
@@ -161,6 +164,7 @@ def edit_bid_section_text(project_id: str, payload: dict[str, Any]) -> dict[str,
         section_title=_text(payload.get("sectionTitle") or payload.get("section_title")),
         section_context=_text(payload.get("sectionContext") or payload.get("section_context")),
         full_content=_text(payload.get("fullContent") or payload.get("full_content")),
+        selected_limit=selected_limit,
     )
     response = call_dashscope_api(
         messages,

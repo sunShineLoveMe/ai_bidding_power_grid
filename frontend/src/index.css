@@ -796,7 +796,7 @@ textarea {
 
 .outline-row {
   display: grid;
-  grid-template-columns: 24px minmax(180px, 1fr) 132px minmax(220px, 0.9fr) 224px;
+  grid-template-columns: 24px minmax(180px, 1fr) 132px minmax(220px, 0.9fr) 300px;
   align-items: center;
   gap: 10px;
   min-height: 44px;
@@ -885,6 +885,31 @@ textarea {
   color: #ef4444;
 }
 
+.outline-quality-pill {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  border-radius: 99px;
+  padding: 0 9px;
+  border: 1px solid transparent;
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.outline-quality-pill.long {
+  border-color: #fdba74;
+  background: #fff7ed;
+  color: #ea580c;
+}
+
+.outline-quality-pill.short {
+  border-color: #93c5fd;
+  background: #eff6ff;
+  color: #2563eb;
+}
+
 .outline-plan-tags {
   min-width: 0;
   display: inline-flex;
@@ -918,7 +943,7 @@ textarea {
   align-items: center;
   justify-content: flex-end;
   gap: 6px;
-  width: 224px;
+  width: 300px;
   min-width: 0;
   opacity: 0;
   transition: 0.16s ease;

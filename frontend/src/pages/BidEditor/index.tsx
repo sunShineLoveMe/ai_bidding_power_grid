@@ -12,6 +12,7 @@ import {
   MoreVertical,
   Plus,
   Search,
+  Scissors,
   Sparkles,
   Square,
   ArrowUp,
@@ -84,6 +85,18 @@ type BatchTask = {
   chars: number;
   targetWords: number;
   message?: string;
+};
+
+type ChapterWordMeta = {
+  label: string;
+  tooltip: string;
+  generated: boolean;
+  failed: boolean;
+  quality?: 'short' | 'long';
+  qualityLabel?: string;
+  qualityTooltip?: string;
+  actualWords?: number;
+  targetWords?: number;
 };
 
 type PersistedBatchTask = {
@@ -363,6 +376,8 @@ export function BidEditorPage(): JSX.Element {
   const [loading, setLoading] = useState(true);
   const [streaming, setStreaming] = useState(false);
   const [sectionStreaming, setSectionStreaming] = useState(false);
+  const [compressingChapterId, setCompressingChapterId] = useState('');
+  const [compressConfirmChapter, setCompressConfirmChapter] = useState<ChapterDraft | null>(null);
   const [streamText, setStreamText] = useState('');
   const [streamingChildPlaceholders, setStreamingChildPlaceholders] = useState<StreamingChildPlaceholder[]>([]);
   const [downloadUrl, setDownloadUrl] = useState('');
@@ -1057,6 +1072,47 @@ export function BidEditorPage(): JSX.Element {
     );
   }
 
+  function CompressionConfirmModal(): JSX.Element {
+    const chapter = compressConfirmChapter
+      ? chapters.find(item => item.id === compressConfirmChapter.id) || compressConfirmChapter
+      : null;
+    const actualWords = chapter ? chapterActualWords(chapter) : 0;
+    const targetWords = chapter ? targetChapterWords(chapter) : 0;
+    const isCompressing = Boolean(compressingChapterId);
+    return (
+      <Modal
+        title="压缩到目标篇幅"
+        open={!!chapter}
+        okText="开始压缩"
+        cancelText="取消"
+        confirmLoading={isCompressing}
+        okButtonProps={{ disabled: !chapter }}
+        cancelButtonProps={{ disabled: isCompressing }}
+        maskClosable={!isCompressing}
+        width={560}
+        onOk={() => void confirmCompressChapterToTarget()}
+        onCancel={() => {
+          if (!isCompressing) {
+            setCompressConfirmChapter(null);
+          }
+        }}
+        destroyOnHidden
+      >
+        <div className="space-y-3 text-sm">
+          <Alert
+            type="info"
+            showIcon
+            message={chapter ? `当前 ${actualWords} 字，目标约 ${targetWords} 字` : '请选择需要压缩的章节'}
+            description="系统会基于当前正文做缩写，尽量保留事实、数值、承诺、小标题和必要响应点。不会重新生成整章。"
+          />
+          <p className="text-slate-600">
+            压缩完成后将覆盖当前章节正文。若章节属于核心技术响应且客户认可当前篇幅，也可以直接保留现状。
+          </p>
+        </div>
+      </Modal>
+    );
+  }
+
   function QualityDashboard(): JSX.Element {
     if (qualityCollapsed) {
       return (
@@ -1373,7 +1429,7 @@ export function BidEditorPage(): JSX.Element {
     return batchTasks[chapter.id]?.status === 'partial_generated';
   }
 
-  function chapterWordMeta(chapter: ChapterDraft): { label: string; tooltip: string; generated: boolean; failed: boolean } {
+  function chapterWordMeta(chapter: ChapterDraft): ChapterWordMeta {
     if (!isLeafChapter(chapter)) {
       return {
         label: '结构容器',
@@ -1393,7 +1449,7 @@ export function BidEditorPage(): JSX.Element {
     if (isChapterFailed(chapter)) {
       return {
         label: '生成失败',
-        tooltip: '本章节正文生成失败，请点击“重写正文”重新生成。',
+        tooltip: '本章节正文生成失败，请点击“重新生成”再次生成。',
         generated: false,
         failed: true,
       };
@@ -1404,18 +1460,28 @@ export function BidEditorPage(): JSX.Element {
       const targetWords = targetChapterWords(chapter);
       if (actualWords < targetWords * 0.75) {
         return {
-          label: `建议扩写 ${actualWords}/${targetWords}字`,
-          tooltip: `当前正文低于目标字数 75%。建议结合评分点、风险项和企业资料补充，不要用重复或无关内容凑字数。`,
+          label: `已完成 ${actualWords}字`,
+          tooltip: `已完成字数：按当前章节正文去除空白后统计。计划目标：${targetWords}字。`,
           generated: true,
           failed: false,
+          quality: 'short',
+          qualityLabel: `偏短 ${actualWords}/${targetWords}字`,
+          qualityTooltip: '当前正文低于目标字数 75%。建议结合评分点、风险项和企业资料补充，不要用重复或无关内容凑字数。',
+          actualWords,
+          targetWords,
         };
       }
       if (actualWords > targetWords * 1.35) {
         return {
-          label: `篇幅偏长 ${actualWords}/${targetWords}字`,
-          tooltip: `当前正文明显超过目标字数。建议复核是否存在重复段落、无关内容或格式性材料过度展开。`,
+          label: `已完成 ${actualWords}字`,
+          tooltip: `已完成字数：按当前章节正文去除空白后统计。计划目标：${targetWords}字。`,
           generated: true,
           failed: false,
+          quality: 'long',
+          qualityLabel: `偏长 ${actualWords}/${targetWords}字`,
+          qualityTooltip: '当前正文明显超过目标字数。可接受当前篇幅，也可点击“压缩到目标”在保留事实和小标题的前提下收敛篇幅。',
+          actualWords,
+          targetWords,
         };
       }
       return {
@@ -1423,6 +1489,8 @@ export function BidEditorPage(): JSX.Element {
         tooltip: `已完成字数：按当前章节正文去除空白后统计。计划目标：${targetWords}字。`,
         generated: true,
         failed: false,
+        actualWords,
+        targetWords,
       };
     }
     return {
@@ -1812,6 +1880,88 @@ export function BidEditorPage(): JSX.Element {
       message.success('已采纳草稿为正文');
     } catch (error) {
       message.error(error instanceof Error ? error.message : String(error));
+    }
+  }
+
+  async function compressChapterToTarget(chapter: ChapterDraft): Promise<void> {
+    if (!data?.project?.id) {
+      message.warning('当前项目不存在，无法压缩章节');
+      return;
+    }
+    if (!isChapterGenerated(chapter)) {
+      message.warning('只有已完成正文的章节才支持压缩到目标篇幅');
+      return;
+    }
+    const content = (chapter.content || '').trim();
+    if (!content) {
+      message.warning('当前章节没有可压缩的正文');
+      return;
+    }
+    const actualWords = chapterActualWords(chapter);
+    const targetWords = targetChapterWords(chapter);
+    if (actualWords <= targetWords * 1.05) {
+      message.info('当前章节已接近目标篇幅，无需压缩');
+      return;
+    }
+    setSelectedId(chapter.id);
+    setCompressConfirmChapter(chapter);
+  }
+
+  async function confirmCompressChapterToTarget(): Promise<void> {
+    if (!data?.project?.id || !compressConfirmChapter) {
+      message.warning('请先选择需要压缩的章节');
+      return;
+    }
+    const projectId = data.project.id;
+    const chapter = chapters.find(item => item.id === compressConfirmChapter.id) || compressConfirmChapter;
+    const content = (chapter.content || '').trim();
+    if (!content) {
+      message.warning('当前章节没有可压缩的正文');
+      return;
+    }
+    const actualWords = chapterActualWords(chapter);
+    const targetWords = targetChapterWords(chapter);
+    setCompressingChapterId(chapter.id);
+    try {
+      const result = await editBidSectionText(projectId, {
+        action: 'shorten',
+        selectedText: content,
+        sectionId: chapter.id,
+        sectionTitle: chapterDisplayTitle(chapter),
+        sectionContext: [
+          chapter.purpose || '',
+          `压缩目标：从当前约 ${actualWords} 字压缩到约 ${targetWords} 字。`,
+          '压缩要求：保留事实、数值、承诺、小标题、表格 Markdown 和必要响应点；删除重复铺垫和空泛表述。',
+        ].filter(Boolean).join('\n'),
+        fullContent: '',
+      });
+      const revisedText = (result.revisedText || '').trim();
+      if (!revisedText) {
+        throw new Error('AI 压缩未返回有效正文');
+      }
+      const saved = await saveBidSection(projectId, {
+        ...chapter,
+        content: revisedText,
+        parent_id: safeParentIdForSave(chapter.parent_id, chapters),
+        level: chapter.level || 1,
+        order_index: chapters.findIndex(item => item.id === chapter.id) + 1,
+        status: 'edited',
+      });
+      setChapters(items => normalizeChapterHierarchy(items.map(item => item.id === chapter.id ? { ...item, ...saved, status: 'edited' } : item)));
+      setSelectedId(saved.id || chapter.id);
+      setContentDirty(false);
+      setDownloadUrl('');
+      setCompressConfirmChapter(null);
+      const nextWords = revisedText.replace(/\s+/g, '').length;
+      message.success(`章节已压缩并保存：${nextWords}/${targetWords}字`);
+      if (result.warnings?.length) {
+        message.warning(result.warnings.join('；'));
+      }
+      void refreshComplianceReport(projectId, { silent: true, volumeType: deliveryVolumeType(chapter) });
+    } catch (error) {
+      message.error(error instanceof Error ? error.message : String(error));
+    } finally {
+      setCompressingChapterId('');
     }
   }
 
@@ -2554,7 +2704,7 @@ export function BidEditorPage(): JSX.Element {
         setPersistedBatchTask(null);
         persistedBatchTaskIdRef.current = '';
       }
-      message.info(`当前${volumeLabel(activeVolume)}章节都已生成，如需重写请点击单章重写正文`);
+      message.info(`当前${volumeLabel(activeVolume)}章节都已生成，如需重新生成请点击单章重新生成`);
       return;
     }
 
@@ -2887,6 +3037,13 @@ export function BidEditorPage(): JSX.Element {
                       </div>
                     </Tooltip>
                     <div className="outline-plan-tags">
+                      {wordMeta.quality ? (
+                        <Tooltip title={wordMeta.qualityTooltip}>
+                          <div className={`outline-quality-pill ${wordMeta.quality}`}>
+                            {wordMeta.qualityLabel}
+                          </div>
+                        </Tooltip>
+                      ) : null}
                       <div className="outline-task-progress">
                         {task ? (
                           <>
@@ -2919,11 +3076,23 @@ export function BidEditorPage(): JSX.Element {
                         size="small"
                         icon={<Sparkles size={14} />}
                         loading={(sectionStreaming && selectedId === chapter.id) || Boolean(task?.status && ACTIVE_BATCH_TASK_STATUSES.has(task.status))}
-                        disabled={batchGenerating}
+                        disabled={batchGenerating || Boolean(compressingChapterId)}
                         onClick={() => void generateCurrentSection(chapter)}
                       >
-                        {wordMeta.generated ? '重写正文' : '生成正文'}
+                        {wordMeta.generated ? '重新生成' : '生成正文'}
                       </Button>
+                      {wordMeta.quality === 'long' ? (
+                        <Button
+                          type="link"
+                          size="small"
+                          icon={<Scissors size={14} />}
+                          loading={compressingChapterId === chapter.id}
+                          disabled={batchGenerating || sectionStreaming || Boolean(compressingChapterId)}
+                          onClick={() => void compressChapterToTarget(chapter)}
+                        >
+                          压缩到目标
+                        </Button>
+                      ) : null}
                       <Button type="link" size="small" icon={<Eye size={14} />} onClick={() => previewChapter(chapter)}>预览</Button>
                       <Dropdown
                         trigger={['click']}
@@ -3002,6 +3171,7 @@ export function BidEditorPage(): JSX.Element {
           </label>
         </Modal>
         <LengthSettingsModal />
+        <CompressionConfirmModal />
         <ComplianceDrawer />
         <SemanticComplianceDrawer />
       </div>
@@ -3211,6 +3381,7 @@ export function BidEditorPage(): JSX.Element {
         </footer>
       </main>
       <QualityDashboard />
+      <CompressionConfirmModal />
       <ComplianceDrawer />
       <SemanticComplianceDrawer />
     </div>
