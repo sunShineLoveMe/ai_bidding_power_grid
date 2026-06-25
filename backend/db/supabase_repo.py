@@ -1311,6 +1311,7 @@ def _normalize_generation_task_items(items: list[dict[str, Any]]) -> list[dict[s
         section_id = item.get("section_id") or item.get("sectionId") or item.get("id")
         if not section_id:
             continue
+        metadata = item.get("metadata") if isinstance(item.get("metadata"), dict) else {}
         normalized.append({
             "section_id": section_id,
             "title": item.get("title") or "未命名章节",
@@ -1327,6 +1328,7 @@ def _normalize_generation_task_items(items: list[dict[str, Any]]) -> list[dict[s
             "generated_content": item.get("generated_content") or "",
             "chunk_seq": _as_order_index(item.get("chunk_seq"), 0),
             "chunk_events": item.get("chunk_events") if isinstance(item.get("chunk_events"), list) else [],
+            "metadata": metadata,
         })
     return normalized
 
@@ -1426,6 +1428,7 @@ def _generation_task_item_row(project_id: str, task_id: str, item: dict[str, Any
         "draft_content": item.get("draft_content") or item.get("generated_content") or "",
         "chunk_seq": _as_order_index(item.get("chunk_seq"), 0),
         "chunk_events": item.get("chunk_events") if isinstance(item.get("chunk_events"), list) else [],
+        "metadata": item.get("metadata") if isinstance(item.get("metadata"), dict) else {},
         "started_at": item.get("started_at"),
         "finished_at": item.get("finished_at"),
     }

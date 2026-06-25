@@ -307,6 +307,7 @@ export type SectionGenerationTaskItem = {
     content: string;
     created_at?: string;
   }>;
+  metadata?: Record<string, unknown>;
 };
 
 export type SectionGenerationTask = {
@@ -354,6 +355,7 @@ export async function createSectionGenerationTask(
       order_index?: number;
       volume_type?: string;
       target_words?: number;
+      metadata?: Record<string, unknown>;
     }>;
   },
 ): Promise<SectionGenerationTask> {

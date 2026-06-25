@@ -893,7 +893,7 @@ CELERY_WORKER_CONCURRENCY=3
 推荐 P0 顺序：
 
 1. [x] 完成状态与长度质量提示拆分，新增“压缩到目标”。本地已实现并通过真实回归，见 15.4。
-2. 自定义编写持久化，确保用户单章要求进入后台任务。
+2. [x] 自定义编写持久化，确保用户单章要求进入后台任务。本地已实现并通过 API + 浏览器真实回归，见 15.5。
 3. 新增子章节继承父章节分册，并在当前筛选中可见。
 4. 叶子章节转结构容器前增加确认和正文处理策略。
 5. 删除真实提示与撤销/回收站兜底。
@@ -931,5 +931,39 @@ output/playwright/local_bid_editor_length_status_final_20260625.png
 下一项 P0：
 
 ```text
-SG-AI-001：自定义编写要求持久化，确保用户单章要求进入后台任务。
+SG-DATA-001：新增子章节继承父章节分册，并在当前筛选中可见。
+```
+
+### 15.5 2026-06-25 本地实施与回归：SG-AI-001
+
+本轮已完成第二项 P0：
+
+- `SG-AI-001`：单章“自定义编写”从静态 `Modal.confirm` 改为受控弹窗，用户输入不再只写入前端内存。
+- 保存自定义要求时立即调用 `saveBidSection()`，把要求追加到章节 `writing_notes`，并写入 `metadata.custom_writing`。
+- 单章生成和批量生成创建 task item 时，会携带 `writing_notes` 与 `custom_writing` 快照。
+- 后端 `create_bid_generation_task()` 的 item 归一化与 `bid_generation_task_items` 行同步保留 `metadata`，避免任务明细丢失用户要求。
+- 后端现有 `build_section_prompt()` 已读取章节 `writing_notes`，因此 Celery 从数据库读取章节时可拿到该要求。
+
+真实回归记录：
+
+```text
+docs/development/runs/run_20260625_local_custom_writing_persistence_regression.md
+```
+
+关键验收结果：
+
+| 验收项 | 结果 |
+| --- | --- |
+| API 持久化 | 临时章节写入 `writing_notes` 和 `metadata.custom_writing`，读取一致 |
+| 任务快照 | `section-generation-tasks` 使用 `autoStart=false` 创建真实任务，item metadata 保留 `writing_notes/custom_writing` |
+| 任务清理 | 回归任务已取消，临时章节已删除 |
+| 浏览器流程 | 登录、搜索临时章节、打开“更多 -> 自定义编写”、输入并保存均跑通 |
+| 页面菜单 | 编写章节、自定义编写、添加章节、上移章节、下移章节、修改标题、删除章节均存在 |
+| 构建检查 | `npm run build` 通过；`python3 -m py_compile backend/db/supabase_repo.py` 通过 |
+| 遗留告警 | 浏览器 console 出现 Ant Design 5 静态 `message.*` context warning，功能不阻断，建议后续统一改为 `App.useApp()` |
+
+下一项 P0：
+
+```text
+SG-DATA-001：新增子章节继承父章节分册，并在当前筛选中可见。
 ```

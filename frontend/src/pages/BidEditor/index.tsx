@@ -378,6 +378,9 @@ export function BidEditorPage(): JSX.Element {
   const [sectionStreaming, setSectionStreaming] = useState(false);
   const [compressingChapterId, setCompressingChapterId] = useState('');
   const [compressConfirmChapter, setCompressConfirmChapter] = useState<ChapterDraft | null>(null);
+  const [customWriteTarget, setCustomWriteTarget] = useState<ChapterDraft | null>(null);
+  const [customWriteInstruction, setCustomWriteInstruction] = useState('');
+  const [customWriteSaving, setCustomWriteSaving] = useState(false);
   const [streamText, setStreamText] = useState('');
   const [streamingChildPlaceholders, setStreamingChildPlaceholders] = useState<StreamingChildPlaceholder[]>([]);
   const [downloadUrl, setDownloadUrl] = useState('');
@@ -1113,6 +1116,48 @@ export function BidEditorPage(): JSX.Element {
     );
   }
 
+  function CustomWritingModal(): JSX.Element {
+    const chapter = customWriteTarget
+      ? chapters.find(item => item.id === customWriteTarget.id) || customWriteTarget
+      : null;
+    return (
+      <Modal
+        title={`自定义编写：${chapter?.title || '未命名章节'}`}
+        open={!!chapter}
+        okText="保存写作要求"
+        cancelText="取消"
+        confirmLoading={customWriteSaving}
+        okButtonProps={{ disabled: !chapter }}
+        cancelButtonProps={{ disabled: customWriteSaving }}
+        maskClosable={!customWriteSaving}
+        width={560}
+        onOk={() => void saveCustomWritingRequirement()}
+        onCancel={() => {
+          if (!customWriteSaving) {
+            setCustomWriteTarget(null);
+            setCustomWriteInstruction('');
+          }
+        }}
+        destroyOnHidden
+      >
+        <Space direction="vertical" size={12} className="w-full">
+          <Input.TextArea
+            rows={5}
+            value={customWriteInstruction}
+            placeholder={chapter ? customWritingPlaceholder(chapter) : '请输入本章补充要求。'}
+            onChange={event => setCustomWriteInstruction(event.target.value)}
+          />
+          <Alert
+            type="info"
+            showIcon
+            message="保存后会进入章节写作注意事项"
+            description="本要求会持久化到当前章节，并在单章生成或批量生成任务中作为写作要求快照记录。"
+          />
+        </Space>
+      </Modal>
+    );
+  }
+
   function QualityDashboard(): JSX.Element {
     if (qualityCollapsed) {
       return (
@@ -1500,6 +1545,17 @@ export function BidEditorPage(): JSX.Element {
         : '目标字数：来自章节写作计划；如当前项目尚未保存计划，则按章节标题、层级和用途临时推导。',
       generated: false,
       failed: false,
+    };
+  }
+
+  function generationTaskItemMetadata(chapter: ChapterDraft): Record<string, unknown> {
+    const metadata = chapter.metadata && typeof chapter.metadata === 'object' ? chapter.metadata : {};
+    const writingNotes = (chapter.writing_notes || []).filter(note => String(note || '').trim());
+    return {
+      source: 'bid_editor_task_item_snapshot',
+      writing_notes: writingNotes,
+      writing_notes_count: writingNotes.length,
+      custom_writing: metadata.custom_writing || null,
     };
   }
 
@@ -2315,30 +2371,60 @@ export function BidEditorPage(): JSX.Element {
   }
 
   function customWriteChapter(chapter: ChapterDraft): void {
-    let instruction = '';
-    const placeholder = customWritingPlaceholder(chapter);
-    Modal.confirm({
-      title: `自定义编写：${chapter.title || '未命名章节'}`,
-      content: (
-        <Input.TextArea
-          rows={5}
-          placeholder={placeholder}
-          onChange={event => {
-            instruction = event.target.value;
-          }}
-        />
-      ),
-      okText: '加入写作要求',
-      cancelText: '取消',
-      onOk: () => {
-        setChapters(items => items.map(item => item.id === chapter.id ? {
-          ...item,
-          writing_notes: [...(item.writing_notes || []), instruction.trim() || '按用户自定义要求编写。'],
-        } : item));
-        setSelectedId(chapter.id);
-        message.success('已加入自定义写作要求，可点击生成本章正文');
+    setSelectedId(chapter.id);
+    setCustomWriteTarget(chapter);
+    setCustomWriteInstruction('');
+  }
+
+  async function saveCustomWritingRequirement(): Promise<void> {
+    if (!data?.project?.id || !customWriteTarget) {
+      message.warning('请先选择需要自定义编写的章节');
+      return;
+    }
+    const latestChapter = chapters.find(item => item.id === customWriteTarget.id) || customWriteTarget;
+    const instruction = customWriteInstruction.trim() || '按用户自定义要求编写。';
+    const nextNotes = [...(latestChapter.writing_notes || []), instruction];
+    const currentMetadata = latestChapter.metadata && typeof latestChapter.metadata === 'object'
+      ? latestChapter.metadata
+      : {};
+    const previousCustomWriting = currentMetadata.custom_writing && typeof currentMetadata.custom_writing === 'object'
+      ? currentMetadata.custom_writing as Record<string, unknown>
+      : {};
+    const nextChapter: ChapterDraft = {
+      ...latestChapter,
+      writing_notes: nextNotes,
+      metadata: {
+        ...currentMetadata,
+        custom_writing: {
+          ...previousCustomWriting,
+          enabled: true,
+          last_instruction: instruction,
+          last_updated_at: new Date().toISOString(),
+          source: 'bid_editor_custom_write',
+          instruction_count: nextNotes.length,
+        },
       },
-    });
+    };
+
+    setCustomWriteSaving(true);
+    try {
+      const saved = await saveBidSection(data.project.id, {
+        ...nextChapter,
+        parent_id: safeParentIdForSave(nextChapter.parent_id, chapters),
+        level: nextChapter.level || 1,
+        order_index: chapters.findIndex(item => item.id === nextChapter.id) + 1,
+        status: nextChapter.status || 'draft',
+      });
+      setChapters(items => normalizeChapterHierarchy(items.map(item => item.id === nextChapter.id ? { ...item, ...saved } : item)));
+      setSelectedId(saved.id || nextChapter.id);
+      setCustomWriteTarget(null);
+      setCustomWriteInstruction('');
+      message.success('自定义写作要求已保存，生成本章正文时会自动采用');
+    } catch (error) {
+      message.error(error instanceof Error ? error.message : String(error));
+    } finally {
+      setCustomWriteSaving(false);
+    }
   }
 
   function chapterMenuItems(chapter: ChapterDraft): MenuProps['items'] {
@@ -2528,6 +2614,7 @@ export function BidEditorPage(): JSX.Element {
           order_index: targetChapter.order_index || chapters.findIndex(item => item.id === targetChapter.id) + 1,
           volume_type: deliveryVolumeType(targetChapter),
           target_words: targetChapterWords(targetChapter),
+          metadata: generationTaskItemMetadata(targetChapter),
         }],
       });
       setPersistedBatchTask({ id: task.id, status: task.status });
@@ -2733,6 +2820,7 @@ export function BidEditorPage(): JSX.Element {
           order_index: chapter.order_index || index + 1,
           volume_type: deliveryVolumeType(chapter),
           target_words: targetChapterWords(chapter),
+          metadata: generationTaskItemMetadata(chapter),
         })),
       });
       setPersistedBatchTask({ id: task.id, status: task.status });
@@ -3171,6 +3259,7 @@ export function BidEditorPage(): JSX.Element {
           </label>
         </Modal>
         <LengthSettingsModal />
+        <CustomWritingModal />
         <CompressionConfirmModal />
         <ComplianceDrawer />
         <SemanticComplianceDrawer />
@@ -3381,6 +3470,7 @@ export function BidEditorPage(): JSX.Element {
         </footer>
       </main>
       <QualityDashboard />
+      <CustomWritingModal />
       <CompressionConfirmModal />
       <ComplianceDrawer />
       <SemanticComplianceDrawer />
