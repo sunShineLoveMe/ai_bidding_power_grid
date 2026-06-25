@@ -71,6 +71,12 @@ type AddChapterOptions = {
   parent?: ChapterDraft | null;
 };
 
+type LeafToContainerConversionMode = 'keep_parent_summary' | 'move_content_to_child';
+
+type AddChapterPersistOptions = AddChapterOptions & {
+  conversionMode?: LeafToContainerConversionMode;
+};
+
 type StreamingChildPlaceholder = {
   id: string;
   parentOrder: string;
@@ -391,6 +397,9 @@ export function BidEditorPage(): JSX.Element {
   const [customWriteTarget, setCustomWriteTarget] = useState<ChapterDraft | null>(null);
   const [customWriteInstruction, setCustomWriteInstruction] = useState('');
   const [customWriteSaving, setCustomWriteSaving] = useState(false);
+  const [leafToContainerTarget, setLeafToContainerTarget] = useState<ChapterDraft | null>(null);
+  const [leafToContainerMode, setLeafToContainerMode] = useState<LeafToContainerConversionMode>('keep_parent_summary');
+  const [leafToContainerSaving, setLeafToContainerSaving] = useState(false);
   const [streamText, setStreamText] = useState('');
   const [streamingChildPlaceholders, setStreamingChildPlaceholders] = useState<StreamingChildPlaceholder[]>([]);
   const [downloadUrl, setDownloadUrl] = useState('');
@@ -1168,6 +1177,68 @@ export function BidEditorPage(): JSX.Element {
     );
   }
 
+  function LeafToContainerConfirmModal(): JSX.Element {
+    const chapter = leafToContainerTarget
+      ? chapters.find(item => item.id === leafToContainerTarget.id) || leafToContainerTarget
+      : null;
+    const actualWords = chapter ? meaningfulChapterWords(chapter) : 0;
+    const targetWords = chapter ? targetChapterWords(chapter) : 0;
+    const canMoveContent = actualWords > 0;
+    return (
+      <Modal
+        title="新增子章节前确认"
+        open={!!chapter}
+        okText="确认新增"
+        cancelText="取消"
+        confirmLoading={leafToContainerSaving}
+        okButtonProps={{ disabled: !chapter }}
+        cancelButtonProps={{ disabled: leafToContainerSaving }}
+        maskClosable={!leafToContainerSaving}
+        width={620}
+        onOk={() => void confirmLeafToContainerAdd()}
+        onCancel={() => {
+          if (!leafToContainerSaving) {
+            setLeafToContainerTarget(null);
+            setLeafToContainerMode('keep_parent_summary');
+          }
+        }}
+        destroyOnHidden
+      >
+        <Space direction="vertical" size={12} className="w-full">
+          <Alert
+            type="warning"
+            showIcon
+            message={chapter ? `“${chapter.title || '未命名章节'}”将从正文叶子章节变为结构容器` : '当前章节将变为结构容器'}
+            description={`新增子章节后，批量生成会优先生成下级叶子章节。当前章节正文约 ${actualWords} 字，计划目标约 ${targetWords} 字，请先选择原正文处理方式。`}
+          />
+          <Radio.Group
+            value={leafToContainerMode}
+            onChange={event => setLeafToContainerMode(event.target.value as LeafToContainerConversionMode)}
+          >
+            <Space direction="vertical" size={10}>
+              <Radio value="keep_parent_summary">
+                保留本章正文作为父章节概述
+                <span className="ml-2 text-xs text-slate-500">适合已有正文可作为章节导语或汇总说明</span>
+              </Radio>
+              <Radio value="move_content_to_child" disabled={!canMoveContent}>
+                将本章正文迁移到新子章节
+                <span className="ml-2 text-xs text-slate-500">适合原正文应继续作为可生成、可编辑的小节内容</span>
+              </Radio>
+            </Space>
+          </Radio.Group>
+          {!canMoveContent ? (
+            <Alert
+              type="info"
+              showIcon
+              message="当前章节暂无可迁移正文"
+              description="系统仍会保留原章节作为结构容器，并创建一个空白子章节。"
+            />
+          ) : null}
+        </Space>
+      </Modal>
+    );
+  }
+
   function QualityDashboard(): JSX.Element {
     if (qualityCollapsed) {
       return (
@@ -1634,6 +1705,78 @@ export function BidEditorPage(): JSX.Element {
     return isLeafChapter(chapter) && (!isChapterGenerated(chapter) || isChapterUnderTarget(chapter));
   }
 
+  function contentWithoutMarkdownHeading(content: string | undefined): string {
+    return (content || '').replace(/^#{1,6}\s+.*$/gm, '').trim();
+  }
+
+  function meaningfulChapterWords(chapter: ChapterDraft): number {
+    return contentWithoutMarkdownHeading(chapter.content)
+      .replace(/请在此编写章节内容。?/g, '')
+      .replace(/待进一步生成正文。?/g, '')
+      .replace(/\s+/g, '')
+      .length;
+  }
+
+  function hasMeaningfulChapterContent(chapter: ChapterDraft): boolean {
+    return meaningfulChapterWords(chapter) > 20;
+  }
+
+  function hasExplicitWritingTarget(chapter: ChapterDraft): boolean {
+    const plan = chapter.metadata?.writing_plan;
+    return !!plan && typeof plan === 'object' && Number((plan as ChapterWritingPlan).target_words || 0) > 0;
+  }
+
+  function shouldConfirmLeafToContainer(parent: ChapterDraft | null): boolean {
+    if (!parent || !isLeafChapter(parent) || hasChildChapters(parent)) {
+      return false;
+    }
+    return (
+      hasMeaningfulChapterContent(parent)
+      || isChapterGenerated(parent)
+      || isChapterPartialGenerated(parent)
+      || hasExplicitWritingTarget(parent)
+    );
+  }
+
+  function contentWithChapterHeading(content: string | undefined, title: string): string {
+    const trimmed = (content || '').trim();
+    if (!trimmed) {
+      return `## ${title}\n\n请在此编写章节内容。`;
+    }
+    if (/^#{1,6}\s+.*$/m.test(trimmed)) {
+      return trimmed.replace(/^#{1,6}\s+.*$/m, `## ${title}`);
+    }
+    return `## ${title}\n\n${trimmed}`;
+  }
+
+  function buildContainerParent(
+    parent: ChapterDraft,
+    mode: LeafToContainerConversionMode,
+    childTitle: string,
+    convertedAt: string,
+  ): ChapterDraft {
+    const metadata = parent.metadata && typeof parent.metadata === 'object' ? parent.metadata : {};
+    const parentTitle = parent.title || '未命名章节';
+    const movedContent = mode === 'move_content_to_child';
+    return {
+      ...parent,
+      content: movedContent
+        ? `## ${parentTitle}\n\n本章已拆分为下级子章节，原正文已迁移至“${childTitle}”。`
+        : parent.content,
+      expanded: true,
+      status: parent.status || 'edited',
+      metadata: {
+        ...metadata,
+        section_role: 'container',
+        leaf_generation: false,
+        converted_to_container_at: convertedAt,
+        container_conversion_mode: mode,
+        container_conversion_source: 'bid_editor_add_child',
+        container_content_policy: movedContent ? 'original_content_moved_to_first_child' : 'parent_content_kept_as_overview',
+      },
+    };
+  }
+
   function hasChildChapters(chapter: ChapterDraft, source = chapters): boolean {
     return source.some(item => item.parent_id === chapter.id);
   }
@@ -1869,13 +2012,69 @@ export function BidEditorPage(): JSX.Element {
 
   async function addChapter(options?: AddChapterOptions): Promise<void> {
     const parent = options?.parent || null;
-    const chapter = createBlankChapter(chapters.length + 1, '新增章节', parent);
-    const nextChapters = (() => {
-      if (!parent) {
-        return normalizeChapterHierarchy([...chapters, chapter]);
+    if (parent && shouldConfirmLeafToContainer(parent)) {
+      setLeafToContainerTarget(parent);
+      setLeafToContainerMode('keep_parent_summary');
+      return;
+    }
+    await persistAddedChapter({ parent });
+  }
+
+  async function confirmLeafToContainerAdd(): Promise<void> {
+    if (!leafToContainerTarget) {
+      return;
+    }
+    const latestParent = chapters.find(item => item.id === leafToContainerTarget.id) || leafToContainerTarget;
+    setLeafToContainerSaving(true);
+    try {
+      const added = await persistAddedChapter({ parent: latestParent, conversionMode: leafToContainerMode });
+      if (added) {
+        setLeafToContainerTarget(null);
+        setLeafToContainerMode('keep_parent_summary');
       }
-      const insertAfter = lastDescendantIndex(chapters, parent.id);
-      const nextItems = [...chapters];
+    } finally {
+      setLeafToContainerSaving(false);
+    }
+  }
+
+  async function persistAddedChapter(options?: AddChapterPersistOptions): Promise<boolean> {
+    const parent = options?.parent || null;
+    const conversionMode = options?.conversionMode;
+    const convertedAt = new Date().toISOString();
+    let chapter = createBlankChapter(chapters.length + 1, '新增章节', parent);
+    const convertedParent = parent && conversionMode
+      ? buildContainerParent(parent, conversionMode, chapter.title || '新增章节', convertedAt)
+      : null;
+
+    if (parent && conversionMode === 'move_content_to_child' && hasMeaningfulChapterContent(parent)) {
+      const childMetadata = chapter.metadata && typeof chapter.metadata === 'object' ? chapter.metadata : {};
+      chapter = {
+        ...chapter,
+        content: contentWithChapterHeading(parent.content, chapter.title || '新增章节'),
+        status: 'edited',
+        writing_notes: [
+          ...(chapter.writing_notes || []),
+          '本章节正文由父章节拆分迁移而来，建议先修改标题并复核正文结构。',
+        ],
+        metadata: {
+          ...childMetadata,
+          migrated_from_parent_id: parent.id,
+          migrated_from_parent_title: parent.title || '未命名章节',
+          migrated_at: convertedAt,
+          migration_source: 'leaf_to_container_conversion',
+        },
+      };
+    }
+
+    const nextChapters = (() => {
+      const sourceChapters = convertedParent
+        ? chapters.map(item => item.id === convertedParent.id ? convertedParent : item)
+        : chapters;
+      if (!parent) {
+        return normalizeChapterHierarchy([...sourceChapters, chapter]);
+      }
+      const insertAfter = lastDescendantIndex(sourceChapters, parent.id);
+      const nextItems = [...sourceChapters];
       nextItems.splice(insertAfter + 1, 0, chapter);
       return normalizeChapterHierarchy(nextItems);
     })();
@@ -1889,12 +2088,34 @@ export function BidEditorPage(): JSX.Element {
           level: chapter.level || 1,
           order_index: nextChapters.findIndex(item => item.id === chapter.id) + 1,
         });
-        setChapters(items => normalizeChapterHierarchy(items.map(item => item.id === chapter.id ? { ...item, ...saved } : item)));
+        let savedParent: BidSection | null = null;
+        if (convertedParent) {
+          savedParent = await saveBidSection(data.project.id, {
+            ...convertedParent,
+            parent_id: safeParentIdForSave(convertedParent.parent_id, chapters),
+            level: convertedParent.level || 1,
+            order_index: nextChapters.findIndex(item => item.id === convertedParent.id) + 1,
+            status: convertedParent.status || 'edited',
+          });
+        }
+        setChapters(items => normalizeChapterHierarchy(items.map(item => {
+          if (item.id === chapter.id) {
+            return { ...item, ...saved };
+          }
+          if (savedParent && item.id === convertedParent?.id) {
+            return { ...item, ...savedParent, expanded: true };
+          }
+          return item;
+        })));
         setSelectedId(saved.id);
+        return true;
       } catch (error) {
         message.error(error instanceof Error ? error.message : String(error));
+        void reloadProject(data.project.id);
+        return false;
       }
     }
+    return true;
   }
 
   function toggleChapter(id: string): void {
@@ -3298,6 +3519,7 @@ export function BidEditorPage(): JSX.Element {
         </Modal>
         <LengthSettingsModal />
         <CustomWritingModal />
+        <LeafToContainerConfirmModal />
         <CompressionConfirmModal />
         <ComplianceDrawer />
         <SemanticComplianceDrawer />
@@ -3509,6 +3731,7 @@ export function BidEditorPage(): JSX.Element {
       </main>
       <QualityDashboard />
       <CustomWritingModal />
+      <LeafToContainerConfirmModal />
       <CompressionConfirmModal />
       <ComplianceDrawer />
       <SemanticComplianceDrawer />

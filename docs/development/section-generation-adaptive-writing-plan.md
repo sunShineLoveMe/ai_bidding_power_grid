@@ -895,7 +895,7 @@ CELERY_WORKER_CONCURRENCY=3
 1. [x] 完成状态与长度质量提示拆分，新增“压缩到目标”。本地已实现并通过真实回归，见 15.4。
 2. [x] 自定义编写持久化，确保用户单章要求进入后台任务。本地已实现并通过 API + 浏览器真实回归，见 15.5。
 3. [x] 新增子章节继承父章节分册，并在当前筛选中可见。本地已实现并通过 API + 浏览器真实回归，见 15.6。
-4. 叶子章节转结构容器前增加确认和正文处理策略。
+4. [x] 叶子章节转结构容器前增加确认和正文处理策略。本地已实现并通过 API + 浏览器真实回归，见 15.7。
 5. 删除真实提示与撤销/回收站兜底。
 6. Prompt profile、慢流保护、自适应并发按前文 Phase 1-3 实施。
 
@@ -994,4 +994,38 @@ docs/development/runs/run_20260625_local_child_section_volume_inheritance_regres
 
 ```text
 SG-DATA-002：叶子章节转结构容器前增加确认和正文处理策略。
+```
+
+### 15.7 2026-06-25 本地实施与回归：SG-DATA-002
+
+本轮已完成第四项 P0：
+
+- 对已有正文或明确目标字数的叶子章节点击“添加章节”时，先弹出“新增子章节前确认”，不再静默把原章节变成结构容器。
+- 确认弹窗提供两种策略：保留本章正文作为父章节概述，或将本章正文迁移到新子章节；无有效正文时迁移选项自动禁用。
+- 父章节转容器后写入 `metadata.section_role=container`、`leaf_generation=false`、`container_conversion_mode`、`container_content_policy` 和转换来源/时间。
+- 迁移策略会把原正文改挂到首个新子章节，并记录 `migrated_from_parent_id`、`migrated_from_parent_title`、`migration_source` 和 `migrated_at`。
+- 子章节继续继承父章节分册和写作计划，避免本轮修复破坏 SG-DATA-001 的分册可见性。
+
+真实回归记录：
+
+```text
+docs/development/runs/run_20260625_local_leaf_to_container_confirmation_regression.md
+```
+
+关键验收结果：
+
+| 验收项 | 结果 |
+| --- | --- |
+| 构建检查 | `npm run build` 通过；仅保留 Vite chunk size / 动态导入既有 warning |
+| 保留概述路径 | 浏览器弹窗确认后，父章节写入 `container_conversion_mode=keep_parent_summary`，正文保留在父章节 |
+| 保留路径子章节 | 新子章节从父章节继承 `volume_type=technical`、`volume_name=技术标`、`export_group=技术标文件` |
+| 迁移正文路径 | 浏览器选择“将本章正文迁移到新子章节”后，父章节转为结构容器概述 |
+| 迁移路径子章节 | 新子章节正文保留原父章节正文，并写入 `migrated_from_parent_id` 等迁移 metadata |
+| 清理 | 4 个临时父子章节均已删除，`regression_case=leaf_to_container_confirmation` 剩余 0 |
+| 浏览器 console | 本功能操作完成后 `console error` 为 0；登录成功提示仍会触发项目既有 Ant Design 静态 `message.*` context warning |
+
+下一项 P0：
+
+```text
+SG-DATA-003：删除真实提示与撤销/回收站兜底。
 ```
