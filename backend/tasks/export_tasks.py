@@ -34,6 +34,7 @@ def run_bid_docx_export(
     with_images: bool,
     volume_type: str | None,
     sections_snapshot: list[dict] | None = None,
+    initial_metadata: dict | None = None,
 ) -> dict:
     """执行 DOCX 导出，全程把进度写回 bid_export_tasks。
 
@@ -53,6 +54,7 @@ def run_bid_docx_export(
                 with_images,
                 volume_type,
                 sections_snapshot,
+                initial_metadata,
                 build_project_bid_markdown,
                 _output_url_for_path,
                 update_bid_export_task,
@@ -81,6 +83,7 @@ def _run_bid_docx_export(
     with_images: bool,
     volume_type: str | None,
     sections_snapshot: list[dict] | None,
+    initial_metadata: dict | None,
     build_project_bid_markdown,
     _output_url_for_path,
     update_bid_export_task,
@@ -119,8 +122,10 @@ def _run_bid_docx_export(
             "message": "正在刷新 Word 目录页码和页脚页码。",
         })
         generated_docx_path, field_refresh_report = refresh_docx_fields_with_soffice(generated_docx_path)
+        base_metadata = initial_metadata if isinstance(initial_metadata, dict) else {}
         export_metadata = {
-            "requested_from": "bid_editor",
+            **base_metadata,
+            "requested_from": base_metadata.get("requested_from") or "bid_editor",
             "with_images": bool(with_images),
             "used_editor_snapshot": bool(sections_snapshot),
             "snapshot_section_count": len(sections_snapshot or []),

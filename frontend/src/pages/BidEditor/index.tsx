@@ -1891,7 +1891,15 @@ export function BidEditorPage(): JSX.Element {
         sectionsSnapshot,
       });
       setExportTask(result.task);
-      message.info(sectionId ? '本章 DOCX 导出任务已创建' : `${activeVolume === 'all' ? '全文' : volumeLabel(activeVolume)} DOCX 导出任务已创建`);
+      const formalGate = result.formalExportGate;
+      if (!sectionId && formalGate?.export_mode === 'draft') {
+        message.warning(
+          `正式检查仍有 ${Number(formalGate.blocked_count || 0)} 个阻断项，本次仅创建草稿版 DOCX 导出任务。`,
+          10,
+        );
+      } else {
+        message.info(sectionId ? '本章 DOCX 导出任务已创建' : `${activeVolume === 'all' ? '全文' : volumeLabel(activeVolume)} DOCX 导出任务已创建`);
+      }
       await pollBidExportTask(data.project.id, result.taskId, sectionId ? 'section' : 'full');
     } catch (error) {
       message.error(error instanceof Error ? error.message : String(error));
@@ -1914,12 +1922,18 @@ export function BidEditorPage(): JSX.Element {
         const imageConversion = task.metadata?.image_conversion;
         const imageSelection = task.metadata?.image_selection;
         const fieldRefresh = task.metadata?.field_refresh;
+        const formalGate = task.metadata?.formal_export_gate;
         const failedImages = Number(imageConversion?.failed || 0);
         const skippedImages = Number(imageConversion?.skipped || 0);
         const insertedImages = Number(imageConversion?.inserted || 0);
         const selectionWarnings = imageSelection?.warnings || [];
         const formalReadiness = imageSelection?.formal_readiness;
-        if (formalReadiness && formalReadiness.ready === false) {
+        if (scope !== 'section' && formalGate?.export_mode === 'draft') {
+          message.warning(
+            `DOCX 草稿版已生成：正式检查仍有 ${Number(formalGate.blocked_count || 0)} 个阻断项，不能作为正式投标文件提交。`,
+            10,
+          );
+        } else if (formalReadiness && formalReadiness.ready === false) {
           message.warning(
             `DOCX 已生成但仍是草稿：空章节 ${Number(formalReadiness.empty_section_count || 0)} 个，占位 ${Number(formalReadiness.placeholder_count || 0)} 处，正式必填缺口 ${formalReadiness.missing_formal_required_fields?.length || 0} 个。`,
             10,

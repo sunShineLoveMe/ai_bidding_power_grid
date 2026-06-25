@@ -535,7 +535,14 @@ def main() -> int:
     forbidden_hits = [token for token in FORBIDDEN_TEXT_TOKENS if token in all_xml or token in all_text]
     repeated_title_pattern = re.findall(r"\d+(?:\.\d+)+\s+[^。\n\t]{2,30}\s+-\s+[^。\n\t]{2,30}", all_text)
     section_text_lengths = [len(str(section.get("content") or "")) for section in sections]
-    project_name = ((project_payload.get("project") or {}).get("project_name")) or ""
+    project_meta = (project_payload.get("analysis") or {}).get("project_meta") or {}
+    cover_fields = project_meta.get("cover_fields") or {}
+    project_name = (
+        cover_fields.get("项目名称")
+        or project_meta.get("project_name")
+        or ((project_payload.get("project") or {}).get("project_name"))
+        or ""
+    )
     paragraph_summary = _paragraph_summary(document)
     image_audit = _audit_docx_images(docx_path)
     report = {

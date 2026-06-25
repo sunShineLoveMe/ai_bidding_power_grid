@@ -53,7 +53,7 @@
 | 进行中 | 合同 MVP 功能覆盖验收与缺口关闭 | 产品验收 / 项目管理 | 合同截图中的所有功能均标为 MVP；必须有统一覆盖判断和缺口关闭记录，不能只按内部技术路线图验收 | 合同 MVP 17 项覆盖报告已形成；缺口必须进入本文档 P0/P1 并有验收记录，直到 AI 辅助编辑、产品库多品类、PDF 口径等缺口关闭 | `docs/development/runs/run_20260625_contract_mvp_coverage_review.md`、本文档、`docs/development/roadmap.md`、`docs/rag/todo.md` |
 | 进行中 | DOCX 正式交付排版升级 | DOCX / 产品交付 | Word 是客户第一眼看到的正式交付物；当前导出观感被客户认为像草稿，会直接影响信任和试用转化 | 默认提供“通用正式标书格式”并可保留“国网/泰昌紧凑格式”；正文、标题、表格、页眉页脚、目录、封面、第六章格式表单均按正式投标文件标准验收；真实链路 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice` 通过并写入 run 记录 | `docs/development/docx-bid-export-quality-todo.md`、`docs/section-generation-production-remediation-todo.md`、`AGENTS.md` |
 | 已完成 | AI 辅助编辑 MVP 最小闭环 | 编辑器 / AI 伴写 | 合同 MVP 明确要求扩写、缩写、润色、风格调整；当前若只支持人工编辑和整章生成，会被认为缺少合同功能 | 正文编辑器已支持选中文本扩写、缩写、润色、正式化；调用真实模型；结果可预览、采纳、撤销；已用真实章节完成 API 与浏览器验收 | `docs/development/runs/run_20260625_ai_edit_mvp_real_api_acceptance.md`、`docs/development/runs/run_20260625_ai_edit_mvp_ui_acceptance.md` |
-| 进行中 | 正式检查与导出门禁收口 | 正式检查 / 导出前门禁 | 不能把可下载草稿误导成正式投标文件；必须区分草稿版和正式版 | 阻断项为 0 才允许正式版导出；阻断项存在时只允许草稿版；检查项能覆盖客户确认字段、条款覆盖、资料边界、正文占位、DOCX 成品质量 | `docs/development/formal-check-todo.md`、`rules/power_grid/formal_bid_check_rules.v1.json` |
+| 进行中 | 正式检查与导出门禁收口 | 正式检查 / 导出前门禁 | 不能把可下载草稿误导成正式投标文件；必须区分草稿版和正式版 | 阻断项为 0 才允许正式版导出；阻断项存在时只允许草稿版；检查项能覆盖客户确认字段、条款覆盖、资料边界、正文占位、DOCX 成品质量 | `docs/development/formal-check-todo.md`、`docs/development/runs/run_20260625_formal_export_gate_draft_mode.md`、`rules/power_grid/formal_bid_check_rules.v1.json` |
 | 进行中 | 阿里云企业库展示与来源收敛 | 企业知识库 / 云环境 | 客户正在真实试用；来源混入、分类不准、入口不稳定会直接影响可信度 | 云上企业知识库问答与页面展示不混入错误来源；人员证书、资质证书、检验报告、产品资料分类准确；公网入口说明清晰 | `docs/rag/todo.md` P1C-15、`docs/rag/runs/run_20260624_aliyun_online_rag_regression.md` |
 | 进行中 | 正式投标关键字段确认闭环 | 投标确认 / 正式交付 | 报价、保证金、授权代表、签署日期等字段不能由模型编造，但缺失会阻断正式交付 | 前导确认页、正式检查、导出提示使用同一缺口来源；未确认字段可保存、可追踪、可明确阻断正式版导出 | `docs/rag/todo.md` P4-11、`docs/development/formal-check-todo.md`、`docs/development/docx-bid-export-quality-todo.md` |
 | 已完成 | 项目任务总账收口 | 项目管理 / 工程治理 | 多个 TODO 分散导致优先级遗忘和重复建清单 | 新增本文档并将主要散落任务映射到统一 P0/P1/P2；后续优先级以本文档为准 | 本文档 |
@@ -123,3 +123,4 @@
 | 2026-06-25 | 将合同 MVP 功能清单纳入总账 | AI 辅助编辑由 P2 提升为 P0；产品库多品类展示、多格式导出口径进入 P1 |
 | 2026-06-25 | DOCX 默认模板切换为 `formal_bid_standard` | 用户认可的国网正式通用排版口径已进入代码、验收脚本和文档；历史 `sgcc_taichang_bid` 不再作为默认 |
 | 2026-06-25 | AI 辅助编辑 MVP 最小闭环完成 | 合同 MVP 中“扩写、缩写、润色、风格调整”已有真实模型与页面验收记录 |
+| 2026-06-25 | 全文/分册 DOCX 导出接入正式检查门禁 | 阻断项存在时导出任务和前端提示均降级为草稿版，`formal_export_gate` metadata 可追溯 |

@@ -428,6 +428,7 @@ export type BidExportTask = {
   download_url?: string;
   error_message?: string;
   metadata?: {
+    formal_export_gate?: BidFormalExportGate;
     image_selection?: {
       selected?: number;
       asset_candidates?: number;
@@ -464,6 +465,36 @@ export type BidExportTask = {
   finished_at?: string;
 };
 
+export type BidFormalExportGate = {
+  checked?: boolean;
+  scope?: 'full' | 'volume' | 'section' | string;
+  export_mode?: 'formal' | 'draft' | 'section' | string;
+  can_formal_export?: boolean;
+  draft_export_allowed?: boolean;
+  reason?: string;
+  formal_export_label?: string;
+  blocked_count?: number;
+  warning_count?: number;
+  manual_confirm_count?: number;
+  formal_required_gaps?: number;
+  unresolved_placeholder_count?: number;
+  compliance_percent?: number;
+  high_risk_missing?: number;
+  rule_set_version?: string;
+  checked_at?: string;
+  top_blockers?: Array<{
+    id?: string;
+    category?: string;
+    severity?: string;
+    title?: string;
+    status?: string;
+    evidence?: string;
+    suggestion?: string;
+    target?: string;
+  }>;
+  [key: string]: unknown;
+};
+
 export async function generateOnlyOfficeConfig(projectId: string, sectionId?: string): Promise<OnlyOfficeConfigResponse> {
   const response = await apiClient.post(`/api/bidding/interpretations/${projectId}/onlyoffice-config`, sectionId ? { sectionId } : undefined, {
     skipGlobalLoading: true,
@@ -475,7 +506,7 @@ export async function generateOnlyOfficeConfig(projectId: string, sectionId?: st
 export async function generateBidDocxDownload(
   projectId: string,
   options?: { sectionId?: string; withImages?: boolean; volumeType?: string; sectionsSnapshot?: Partial<BidSection>[] },
-): Promise<{ task: BidExportTask; taskId: string }> {
+): Promise<{ task: BidExportTask; taskId: string; exportMode?: string; formalExportGate?: BidFormalExportGate }> {
   const response = await apiClient.post(`/api/bidding/interpretations/${projectId}/download-docx`, options || undefined, {
     skipGlobalLoading: true,
   });
