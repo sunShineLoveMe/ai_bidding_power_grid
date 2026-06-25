@@ -3,7 +3,7 @@ import logging
 import markdown
 from docx import Document
 from docx.shared import Pt, RGBColor, Inches, Cm
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING, WD_TAB_ALIGNMENT
 from docx.enum.style import WD_STYLE_TYPE
 from docx.enum.table import WD_CELL_VERTICAL_ALIGNMENT, WD_TABLE_ALIGNMENT
 from docx.oxml.ns import qn
@@ -61,30 +61,31 @@ FORMAL_VOLUME_HEADING_RE = re.compile(
     r".{0,16}(?:文件|分册|响应|资料|清单)$"
 )
 DOCX_TOC_MAX_LEVEL = int(os.getenv("DOCX_TOC_MAX_LEVEL", "4"))
-DOCX_TEMPLATE_ID = os.getenv("DOCX_TEMPLATE_ID", "sgcc_taichang_bid")
+DOCX_TEMPLATE_ID = os.getenv("DOCX_TEMPLATE_ID", "formal_bid_standard")
 DOCX_BIDDER_FULL_NAME = os.getenv("DOCX_BIDDER_FULL_NAME", "河北泰昌电力器材科技有限公司")
-DOCX_BODY_EAST_ASIA = os.getenv("DOCX_BODY_EAST_ASIA", os.getenv("DOCX_CJK_BODY_FONT", "SimSun"))
-DOCX_HEADING_EAST_ASIA = os.getenv("DOCX_HEADING_EAST_ASIA", os.getenv("DOCX_CJK_HEADING_FONT", "Arial Unicode MS"))
+DOCX_BODY_EAST_ASIA = os.getenv("DOCX_BODY_EAST_ASIA", os.getenv("DOCX_CJK_BODY_FONT", "FangSong_GB2312"))
+DOCX_HEADING_EAST_ASIA = os.getenv("DOCX_HEADING_EAST_ASIA", os.getenv("DOCX_CJK_HEADING_FONT", "SimHei"))
+DOCX_LEVEL3_EAST_ASIA = os.getenv("DOCX_LEVEL3_EAST_ASIA", "KaiTi_GB2312")
 DOCX_BODY_LATIN = os.getenv("DOCX_BODY_LATIN", "Times New Roman")
-DOCX_BODY_FONT_SIZE = float(os.getenv("DOCX_BODY_FONT_SIZE", "10.5"))
-DOCX_BODY_LINE_SPACING = float(os.getenv("DOCX_BODY_LINE_SPACING", "20"))
+DOCX_BODY_FONT_SIZE = float(os.getenv("DOCX_BODY_FONT_SIZE", "14"))
+DOCX_BODY_LINE_SPACING = float(os.getenv("DOCX_BODY_LINE_SPACING", "22"))
 DOCX_BODY_FIRST_LINE_INDENT_PT = float(os.getenv("DOCX_BODY_FIRST_LINE_INDENT_PT", str(DOCX_BODY_FONT_SIZE * 2)))
-DOCX_LIST_LEFT_INDENT_PT = float(os.getenv("DOCX_LIST_LEFT_INDENT_PT", "21"))
-DOCX_LIST_HANGING_INDENT_PT = float(os.getenv("DOCX_LIST_HANGING_INDENT_PT", "10.5"))
+DOCX_LIST_LEFT_INDENT_PT = float(os.getenv("DOCX_LIST_LEFT_INDENT_PT", str(DOCX_BODY_FONT_SIZE * 2)))
+DOCX_LIST_HANGING_INDENT_PT = float(os.getenv("DOCX_LIST_HANGING_INDENT_PT", str(DOCX_BODY_FONT_SIZE)))
 DOCX_TABLE_EAST_ASIA = os.getenv("DOCX_TABLE_EAST_ASIA", DOCX_BODY_EAST_ASIA)
-DOCX_TABLE_FONT_SIZE = float(os.getenv("DOCX_TABLE_FONT_SIZE", "10.5"))
+DOCX_TABLE_FONT_SIZE = float(os.getenv("DOCX_TABLE_FONT_SIZE", "12"))
 DOCX_HEADER_MAX_CHARS = int(os.getenv("DOCX_HEADER_MAX_CHARS", "42"))
-DOCX_PAGE_MARGIN_TOP_CM = float(os.getenv("DOCX_PAGE_MARGIN_TOP_CM", "2.0"))
-DOCX_PAGE_MARGIN_BOTTOM_CM = float(os.getenv("DOCX_PAGE_MARGIN_BOTTOM_CM", "2.0"))
-DOCX_PAGE_MARGIN_LEFT_CM = float(os.getenv("DOCX_PAGE_MARGIN_LEFT_CM", "3.18"))
-DOCX_PAGE_MARGIN_RIGHT_CM = float(os.getenv("DOCX_PAGE_MARGIN_RIGHT_CM", "3.18"))
+DOCX_PAGE_MARGIN_TOP_CM = float(os.getenv("DOCX_PAGE_MARGIN_TOP_CM", "2.5"))
+DOCX_PAGE_MARGIN_BOTTOM_CM = float(os.getenv("DOCX_PAGE_MARGIN_BOTTOM_CM", "2.5"))
+DOCX_PAGE_MARGIN_LEFT_CM = float(os.getenv("DOCX_PAGE_MARGIN_LEFT_CM", "2.8"))
+DOCX_PAGE_MARGIN_RIGHT_CM = float(os.getenv("DOCX_PAGE_MARGIN_RIGHT_CM", "2.5"))
 DOCX_HEADER_DISTANCE_CM = float(os.getenv("DOCX_HEADER_DISTANCE_CM", "0.8"))
 DOCX_FOOTER_DISTANCE_CM = float(os.getenv("DOCX_FOOTER_DISTANCE_CM", "1.48"))
 DOCX_COVER_TITLE_FONT_SIZE = float(os.getenv("DOCX_COVER_TITLE_FONT_SIZE", "36"))
-DOCX_TOC_TITLE_FONT_SIZE = float(os.getenv("DOCX_TOC_TITLE_FONT_SIZE", "10.5"))
-DOCX_TOC_ENTRY_FONT_SIZE = float(os.getenv("DOCX_TOC_ENTRY_FONT_SIZE", "10.5"))
+DOCX_TOC_TITLE_FONT_SIZE = float(os.getenv("DOCX_TOC_TITLE_FONT_SIZE", "16"))
+DOCX_TOC_ENTRY_FONT_SIZE = float(os.getenv("DOCX_TOC_ENTRY_FONT_SIZE", "12"))
 DOCX_TOC_ENTRY_LINE_SPACING = float(os.getenv("DOCX_TOC_ENTRY_LINE_SPACING", "18"))
-DOCX_TABLE_LINE_SPACING = float(os.getenv("DOCX_TABLE_LINE_SPACING", "16"))
+DOCX_TABLE_LINE_SPACING = float(os.getenv("DOCX_TABLE_LINE_SPACING", "18"))
 DOCX_TABLE_CELL_MARGIN_TWIPS = int(os.getenv("DOCX_TABLE_CELL_MARGIN_TWIPS", "100"))
 DOCX_TAICHANG_LOGO_PATH = os.getenv("DOCX_TAICHANG_LOGO_PATH", "assets/icons/taichang_logo.png")
 DOCX_COVER_LOGO_WIDTH_IN = float(os.getenv("DOCX_COVER_LOGO_WIDTH_IN", "1.65"))
@@ -315,11 +316,11 @@ def ensure_docx_table_header_repeat(docx_path: str | Path) -> dict:
     return report
 
 
-def _truncate_header_text(text: str) -> str:
+def _truncate_header_text(text: str, max_chars: int = DOCX_HEADER_MAX_CHARS) -> str:
     text = clean_formal_bid_text(text)
-    if len(text) <= DOCX_HEADER_MAX_CHARS:
+    if len(text) <= max_chars:
         return text
-    return f"{text[:DOCX_HEADER_MAX_CHARS - 1]}…"
+    return f"{text[:max_chars - 1]}…"
 
 
 def taichang_bid_document_title(project_name: str) -> str:
@@ -407,13 +408,14 @@ def docx_template_report(cover_fields: dict | None = None) -> dict:
             "right": DOCX_PAGE_MARGIN_RIGHT_CM,
         },
         "heading_font": DOCX_HEADING_EAST_ASIA,
+        "heading_level3_font": DOCX_LEVEL3_EAST_ASIA,
         "header_footer": {
             "header_font": DOCX_BODY_EAST_ASIA,
             "header_font_size_pt": 9,
             "footer_font": DOCX_BODY_EAST_ASIA,
             "footer_font_size_pt": 9,
-            "page_number_format": "第 X 页，共 Y 页",
-            "header_text": f"{DOCX_BIDDER_FULL_NAME}投标文件",
+            "page_number_format": "第 X 页 共 Y 页",
+            "header_text": "左侧项目名称，右侧投标文件",
             "header_max_chars": DOCX_HEADER_MAX_CHARS,
         },
         "cover_fields": cover_fields or {},
@@ -1242,10 +1244,10 @@ def set_document_styles(doc):
     normal.paragraph_format.space_after = Pt(0)
 
     heading_specs = {
-        1: (DOCX_HEADING_EAST_ASIA, 16, True),
-        2: (DOCX_HEADING_EAST_ASIA, 14, True),
-        3: (DOCX_HEADING_EAST_ASIA, 12, True),
-        4: (DOCX_HEADING_EAST_ASIA, 10.5, True),
+        1: (DOCX_HEADING_EAST_ASIA, 22, True),
+        2: (DOCX_HEADING_EAST_ASIA, 15, True),
+        3: (DOCX_LEVEL3_EAST_ASIA, 14, True),
+        4: (DOCX_LEVEL3_EAST_ASIA, 14, True),
     }
     for i in range(1, 5):
         style = styles[f'Heading {i}']
@@ -1356,12 +1358,16 @@ def set_document_format(doc, project_name, image_report: dict | None = None):
         header = section.header
         header_para = header.paragraphs[0]
         header_para.text = ""
-        header_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        header_para.alignment = WD_ALIGN_PARAGRAPH.LEFT
         header_para.paragraph_format.first_line_indent = Pt(0)
         header_para.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
         header_para.paragraph_format.line_spacing = 1.0
         header_para.paragraph_format.space_before = Pt(0)
         header_para.paragraph_format.space_after = Pt(0)
+        header_para.paragraph_format.tab_stops.add_tab_stop(
+            section.page_width - section.left_margin - section.right_margin,
+            WD_TAB_ALIGNMENT.RIGHT,
+        )
         if _add_taichang_logo(
             header_para,
             width_in=DOCX_HEADER_LOGO_WIDTH_IN,
@@ -1370,7 +1376,8 @@ def set_document_format(doc, project_name, image_report: dict | None = None):
             placement="header",
         ):
             header_para.add_run("  ")
-        text_run = header_para.add_run(_truncate_header_text(f"{DOCX_BIDDER_FULL_NAME}投标文件"))
+        header_left = _truncate_header_text(project_name, max_chars=DOCX_HEADER_MAX_CHARS)
+        text_run = header_para.add_run(f"{header_left}\t投标文件")
         apply_run_font(text_run, east_asia=DOCX_BODY_EAST_ASIA, size=9)
         for run in header_para.runs:
             apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=9)
@@ -1391,7 +1398,7 @@ def set_document_format(doc, project_name, image_report: dict | None = None):
         fldChar2 = OxmlElement('w:fldChar')
         fldChar2.set(qn('w:fldCharType'), 'end')
         run._r.append(fldChar2)
-        footer_para.add_run(" 页，共 ")
+        footer_para.add_run(" 页 共 ")
         # 总页数
         run = footer_para.add_run()
         fldChar1 = OxmlElement('w:fldChar')
@@ -1724,19 +1731,19 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
             p = doc.add_heading(text, level=word_heading_level)
             apply_heading_paragraph_format(p, word_heading_level)
             if level == 1:
-                p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+                p.alignment = WD_ALIGN_PARAGRAPH.CENTER
                 for run in p.runs:
-                    apply_run_font(run, east_asia=DOCX_HEADING_EAST_ASIA, size=14, bold=True)
+                    apply_run_font(run, east_asia=DOCX_HEADING_EAST_ASIA, size=22, bold=True)
             elif level == 2:
                 p.alignment = WD_ALIGN_PARAGRAPH.LEFT
                 for run in p.runs:
-                    apply_run_font(run, east_asia=DOCX_HEADING_EAST_ASIA, size=14, bold=True)
+                    apply_run_font(run, east_asia=DOCX_HEADING_EAST_ASIA, size=15, bold=True)
             elif level == 3:
                 for run in p.runs:
-                    apply_run_font(run, east_asia=DOCX_HEADING_EAST_ASIA, size=12, bold=True)
+                    apply_run_font(run, east_asia=DOCX_LEVEL3_EAST_ASIA, size=14, bold=True)
             else:
                 for run in p.runs:
-                    apply_run_font(run, east_asia=DOCX_HEADING_EAST_ASIA, size=10.5, bold=True)
+                    apply_run_font(run, east_asia=DOCX_LEVEL3_EAST_ASIA, size=14, bold=True)
             if i in heading_entry_by_line:
                 entry = heading_entry_by_line[i]
                 _add_bookmark(p, entry["anchor"], int(entry["bookmark_id"]))

@@ -167,7 +167,7 @@ def main() -> int:
     parser.add_argument("--source-batch-id", default=DEFAULT_SOURCE_BATCH_ID)
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--limit", type=int, default=0)
-    parser.add_argument("--batch-size", type=int, default=20)
+    parser.add_argument("--batch-size", type=int, default=10)
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument(
         "--report",

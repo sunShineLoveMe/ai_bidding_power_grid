@@ -1,0 +1,3 @@
+data: {"type": "start"}
+data: {"type": "status", "message": "正在检索企业知识库和图片资产..."}
+data: {"type": "error", "error": "检索问答失败，请查看后端日志。"}

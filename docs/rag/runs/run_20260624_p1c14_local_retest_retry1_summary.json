@@ -1,0 +1,82 @@
+{
+  "run_id": "run_20260624_p1c14_local_retest_retry1",
+  "generated_at": "2026-06-24T08:17:53.692099+00:00",
+  "status": "fail",
+  "steps": [
+    {
+      "name": "api_ready",
+      "status": "pass",
+      "duration_ms": 2148,
+      "detail": "http=200; status=ok; failed_checks=[]",
+      "artifact": null
+    },
+    {
+      "name": "rag_unit_tests",
+      "status": "pass",
+      "duration_ms": 960,
+      "detail": "exit_code=0",
+      "artifact": "docs/rag/runs/run_20260624_p1c14_local_retest_retry1_pytest.log"
+    },
+    {
+      "name": "incremental_regression_gate",
+      "status": "fail",
+      "duration_ms": 5781,
+      "detail": "exit_code=1; output_tail=ne 1047, in request\n    raise self._make_status_error_from_response(err.response) from None\nopenai.InternalServerError: Error code: 502\n\n>>> Base rerank off\n/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/.venv/bin/python scripts/rag/eval_recall.py --k 5 --rerank off --save docs/rag/runs/run_20260624_p1c14_local_retest_retry1_incremental_base_off.json\nTraceback (most recent call last):\n  File \"/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/scripts/rag/run_incremental_regression_gate.py\", line 175, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/scripts/rag/run_incremental_regression_gate.py\", line 146, in main\n    \"base_off\": _run_eval(\"Base rerank off\", [\"--k\", str(args.k), \"--rerank\", \"off\"], outputs[\"base_off\"]),\n                ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/scripts/rag/run_incremental_regression_gate.py\", line 37, in _run_eval\n    raise RuntimeError(f\"{label} failed with exit code {completed.returncode}\")\nRuntimeError: Base rerank off failed with exit code 1\n",
+      "artifact": "docs/rag/runs/run_20260624_p1c14_local_retest_retry1_incremental_gate.log"
+    },
+    {
+      "name": "stream_sample",
+      "status": "fail",
+      "duration_ms": 4902,
+      "detail": "done=False; contexts=0; assets=0; images=0; error=检索问答失败，请查看后端日志。",
+      "artifact": "docs/rag/runs/run_20260624_p1c14_local_retest_retry1_stream.jsonl"
+    }
+  ],
+  "ready": {
+    "checks": {
+      "celery": {
+        "status": "ok",
+        "workers": 1
+      },
+      "database": {
+        "checks": {
+          "match_knowledge_assets": true,
+          "match_knowledge_chunks": true,
+          "vector": true
+        },
+        "status": "ok"
+      },
+      "model_config": {
+        "optional": {
+          "mineru_api_token": true
+        },
+        "required": {
+          "dashscope_api_key": true,
+          "deepseek_api_key": true
+        },
+        "status": "ok"
+      },
+      "redis": {
+        "host": "127.0.0.1",
+        "port": 16379,
+        "status": "ok"
+      },
+      "storage": {
+        "provider": "local",
+        "root": "storage",
+        "status": "ok"
+      }
+    },
+    "duration_ms": 2139,
+    "status": "ok"
+  },
+  "stream_summary": {
+    "done": false,
+    "error": "检索问答失败，请查看后端日志。",
+    "contexts_count": 0,
+    "assets_count": 0,
+    "images_count": 0,
+    "chunks": 0
+  },
+  "gate_summary_path": "docs/rag/runs/run_20260624_p1c14_local_retest_retry1_incremental_summary.md"
+}

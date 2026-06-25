@@ -606,6 +606,76 @@ export async function applyBidPrefillConfirmation(
   return response.data.application;
 }
 
+export type FormalCheckStatus = 'passed' | 'blocked' | 'warning' | 'manual_confirm' | 'not_applicable';
+
+export type FormalCheckItem = {
+  id: string;
+  category: string;
+  severity: 'blocker' | 'high' | 'medium' | 'low';
+  title: string;
+  description: string;
+  status: FormalCheckStatus;
+  statusLabel: string;
+  blocksFormalExport: boolean;
+  draftExportAllowed: boolean;
+  sourceLevel: string;
+  sourceRef: string;
+  evidence: string;
+  suggestion: string;
+  target?: string;
+};
+
+export type FormalCheckReport = {
+  schemaVersion: string;
+  ruleSetVersion: string;
+  ruleSetName: string;
+  generatedAt: string;
+  projectId: string;
+  project?: {
+    id?: string;
+    project_name?: string | null;
+    project_no?: string | null;
+    tender_unit?: string | null;
+  };
+  summary: {
+    totalRules: number;
+    passed: number;
+    blocked: number;
+    warnings: number;
+    manualConfirm: number;
+    notApplicable: number;
+    canFormalExport: boolean;
+    draftExportAllowed: boolean;
+    formalExportLabel: string;
+    compliancePercent: number;
+    complianceMissing: number;
+    highRiskMissing: number;
+    formalRequiredGaps: number;
+    unresolvedPlaceholderCount: number;
+  };
+  statusCounts: Partial<Record<FormalCheckStatus, number>>;
+  severityCounts: Partial<Record<FormalCheckItem['severity'], number>>;
+  categorySummaries: Array<{
+    category: string;
+    total: number;
+    blocked: number;
+    warning: number;
+    manual_confirm: number;
+    passed: number;
+  }>;
+  items: FormalCheckItem[];
+  sourceNotes: string[];
+  recommendations: string[];
+};
+
+export async function getFormalCheckReport(projectId: string, options?: { exportTaskId?: string }): Promise<FormalCheckReport> {
+  const response = await apiClient.get(`/api/bidding/projects/${projectId}/formal-check`, {
+    params: options?.exportTaskId ? { exportTaskId: options.exportTaskId } : undefined,
+    skipGlobalLoading: true,
+  });
+  return response.data;
+}
+
 export async function preAnalyzeBid(biddingId: number): Promise<unknown> {
   const response = await apiClient.post('/api/bidding/pre-analysis_bid', { biddingId });
   return response.data;

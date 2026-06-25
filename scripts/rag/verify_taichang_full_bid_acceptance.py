@@ -183,6 +183,57 @@ def _paragraph_summary(document: Document) -> dict[str, Any]:
     }
 
 
+def _pt(value: Any) -> float | None:
+    if value is None:
+        return None
+    pt = getattr(value, "pt", None)
+    return round(float(pt), 2) if pt is not None else None
+
+
+def _cm(value: Any) -> float | None:
+    if value is None:
+        return None
+    cm = getattr(value, "cm", None)
+    return round(float(cm), 2) if cm is not None else None
+
+
+def _format_audit(document: Document) -> dict[str, Any]:
+    section = document.sections[0]
+    normal_style = document.styles["Normal"]
+    normal_paragraph = normal_style.paragraph_format
+    normal_font = normal_style.font
+    margins = {
+        "top_cm": _cm(section.top_margin),
+        "bottom_cm": _cm(section.bottom_margin),
+        "left_cm": _cm(section.left_margin),
+        "right_cm": _cm(section.right_margin),
+        "header_distance_cm": _cm(section.header_distance),
+        "footer_distance_cm": _cm(section.footer_distance),
+    }
+    normal = {
+        "font_size_pt": _pt(normal_font.size),
+        "line_spacing_pt": _pt(normal_paragraph.line_spacing),
+        "first_line_indent_pt": _pt(normal_paragraph.first_line_indent),
+    }
+    return {
+        "margins": margins,
+        "normal_style": normal,
+        "checks": {
+            "page_margins_match_formal_standard": (
+                margins["top_cm"] == 2.5
+                and margins["bottom_cm"] == 2.5
+                and margins["left_cm"] == 2.8
+                and margins["right_cm"] == 2.5
+            ),
+            "body_style_matches_formal_standard": (
+                normal["font_size_pt"] == 14.0
+                and normal["line_spacing_pt"] == 22.0
+                and normal["first_line_indent_pt"] == 28.0
+            ),
+        },
+    }
+
+
 def _table_audit(document: Document) -> dict[str, Any]:
     samples: list[dict[str, Any]] = []
     full_width = 0
@@ -282,6 +333,7 @@ def _validate(report: dict[str, Any]) -> tuple[list[str], list[str]]:
     formal_readiness = image_selection.get("formal_readiness") if isinstance(image_selection.get("formal_readiness"), dict) else {}
     tables = docx["tables"]
     images = docx["images"]
+    format_audit = docx["format"]
     checks = docx["checks"]
 
     if not formal_readiness.get("ready"):
@@ -313,6 +365,9 @@ def _validate(report: dict[str, Any]) -> tuple[list[str], list[str]]:
         failures.append(f"图片存在裁剪标记：{images['crop_marker_count']}")
     if images["bad_ratio"]:
         failures.append(f"图片比例变形：{images['bad_ratio']}")
+    for key, passed in format_audit["checks"].items():
+        if not passed:
+            failures.append(f"DOCX 版式检查失败：{key}")
     if report["pdf_preview"].get("enabled") and report["pdf_preview"].get("status") != "generated":
         warnings.append(f"PDF 预览未生成：{report['pdf_preview'].get('reason') or report['pdf_preview'].get('status')}")
     for key, passed in checks.items():
@@ -391,6 +446,18 @@ def _write_report(report: dict[str, Any]) -> Path:
         f"| 表格固定布局 | {report['docx_audit']['tables']['all_tables_fixed_layout']} |",
         f"| 表头跨页重复 | {report['docx_audit']['tables']['all_tables_repeat_header']} |",
         "",
+        "## 正式版式",
+        "",
+        "| 检查项 | 结果 |",
+        "| --- | --- |",
+    ])
+    for key, value in report["docx_audit"]["format"]["checks"].items():
+        lines.append(f"| `{key}` | {'通过' if value else '失败'} |")
+    lines.extend([
+        "",
+        f"- 页边距：`{report['docx_audit']['format']['margins']}`",
+        f"- 正文样式：`{report['docx_audit']['format']['normal_style']}`",
+        "",
         "## 封面/目录/页眉页脚",
         "",
         "| 检查项 | 结果 |",
@@ -434,7 +501,7 @@ def main() -> int:
     import main as flask_main  # noqa: WPS433
     from backend.api.routes import build_project_bid_markdown  # noqa: WPS433
     from backend.db.supabase_repo import get_project_interpretation, list_bid_sections  # noqa: WPS433
-    from backend.export.md_to_word import DOCX_BODY_EAST_ASIA, DOCX_HEADING_EAST_ASIA, convert_md_to_word, refresh_docx_fields_with_soffice  # noqa: WPS433
+    from backend.export.md_to_word import DOCX_BODY_EAST_ASIA, DOCX_HEADING_EAST_ASIA, DOCX_LEVEL3_EAST_ASIA, convert_md_to_word, refresh_docx_fields_with_soffice  # noqa: WPS433
 
     with flask_main.app.app_context():
         sections = list_bid_sections(args.project_id)
@@ -468,11 +535,14 @@ def main() -> int:
     forbidden_hits = [token for token in FORBIDDEN_TEXT_TOKENS if token in all_xml or token in all_text]
     repeated_title_pattern = re.findall(r"\d+(?:\.\d+)+\s+[^。\n\t]{2,30}\s+-\s+[^。\n\t]{2,30}", all_text)
     section_text_lengths = [len(str(section.get("content") or "")) for section in sections]
+    project_name = ((project_payload.get("project") or {}).get("project_name")) or ""
+    paragraph_summary = _paragraph_summary(document)
+    image_audit = _audit_docx_images(docx_path)
     report = {
         "run_id": args.run_id,
         "generated_at": datetime.now().isoformat(timespec="seconds"),
         "project_id": args.project_id,
-        "project_name": ((project_payload.get("project") or {}).get("project_name")),
+        "project_name": project_name,
         "document_title": title,
         "expected_min_sections": args.expected_min_sections,
         "expected_min_non_empty_sections": args.expected_min_non_empty_sections,
@@ -500,10 +570,12 @@ def main() -> int:
             "configured_fonts": {
                 "body_east_asia": DOCX_BODY_EAST_ASIA,
                 "heading_east_asia": DOCX_HEADING_EAST_ASIA,
+                "level3_east_asia": DOCX_LEVEL3_EAST_ASIA,
             },
-            "paragraphs": _paragraph_summary(document),
+            "format": _format_audit(document),
+            "paragraphs": paragraph_summary,
             "tables": _table_audit(document),
-            "images": _audit_docx_images(docx_path),
+            "images": image_audit,
             "field_counts": {
                 "instrText": len(field_codes),
                 "PAGEREF": sum(1 for code in field_codes if "PAGEREF" in code),
@@ -512,23 +584,23 @@ def main() -> int:
             },
             "checks": {
                 "docx_opens_with_python_docx": True,
-                "cover_has_bid_title": "投标文件" in "\n".join(_paragraph_summary(document)["first_non_empty"][:6]),
-                "cover_has_bidder": "投标人：河北泰昌电力器材科技有限公司" in "\n".join(_paragraph_summary(document)["first_non_empty"][:10]),
+                "cover_has_bid_title": "投标文件" in "\n".join(paragraph_summary["first_non_empty"][:6]),
+                "cover_has_bidder": "投标人：河北泰昌电力器材科技有限公司" in "\n".join(paragraph_summary["first_non_empty"][:10]),
                 "cover_has_project_name": "国网辽宁电力2025年第三次物资协议库存招标采购" in all_text,
                 "cover_has_tender_no": "2225AC" in all_text,
                 "cover_first_page_header_empty": first_page_header_is_empty,
                 "toc_title_exists": "目  录" in all_text,
-                "toc_has_entries": _paragraph_summary(document)["toc_entry_count"] > 0,
+                "toc_has_entries": paragraph_summary["toc_entry_count"] > 0,
                 "toc_has_dot_leader": 'w:leader="dot"' in document_xml,
                 "toc_has_pageref": any("PAGEREF" in code for code in field_codes),
-                "header_has_taichang_bid": "河北泰昌电力器材科技有限公司投标文件" in headers,
-                "footer_has_page_text": "第 " in footers and " 页，共 " in footers,
+                "header_has_project_name_and_file_type": project_name in headers and "投标文件" in headers,
+                "footer_has_page_text": "第 " in footers and " 页 共 " in footers,
                 "footer_has_page_fields": any(code.strip() == "PAGE" for code in field_codes) and any(code.strip() == "NUMPAGES" for code in field_codes),
-                "uses_configured_cjk_fonts": DOCX_BODY_EAST_ASIA in all_xml and DOCX_HEADING_EAST_ASIA in all_xml,
+                "uses_configured_cjk_fonts": DOCX_BODY_EAST_ASIA in all_xml and DOCX_HEADING_EAST_ASIA in all_xml and DOCX_LEVEL3_EAST_ASIA in all_xml,
                 "no_forbidden_internal_tokens": not forbidden_hits,
                 "no_repeated_parent_title_pattern": not repeated_title_pattern,
                 "no_black_square_markers": all(token not in document_xml and token not in styles_xml for token in ("w:keepLines", "w:keepNext", "w:pageBreakBefore")),
-                "no_image_crop_or_distortion": _audit_docx_images(docx_path)["crop_marker_count"] == 0 and not _audit_docx_images(docx_path)["bad_ratio"],
+                "no_image_crop_or_distortion": image_audit["crop_marker_count"] == 0 and not image_audit["bad_ratio"],
                 "has_supplement_project_performance_assets": (Counter(f"{item.get('source_batch_id')}|{item.get('evidence_type')}" for item in manifest).get(f"{SUPPLEMENT_BATCH_ID}|project_performance", 0) >= 2),
                 "has_supplement_testing_assets": (Counter(f"{item.get('source_batch_id')}|{item.get('evidence_type')}" for item in manifest).get(f"{SUPPLEMENT_BATCH_ID}|testing_capacity", 0) >= 1),
                 "has_supplement_inspection_report_asset": (Counter(f"{item.get('source_batch_id')}|{item.get('evidence_type')}" for item in manifest).get(f"{SUPPLEMENT_BATCH_ID}|inspection_report", 0) >= 1),

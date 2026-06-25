@@ -256,6 +256,83 @@ textarea {
   word-break: break-word;
 }
 
+.formal-check-shell {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 32px;
+}
+
+.formal-check-meta {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.9fr) minmax(220px, 0.7fr);
+}
+
+.formal-check-meta > div {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+  border-radius: 12px;
+  background: #f8faff;
+  padding: 10px 12px;
+}
+
+.formal-check-meta span {
+  color: #8a97ad;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.formal-check-meta strong,
+.formal-check-long-text,
+.formal-check-title-cell span,
+.formal-check-source span {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.formal-check-title-cell {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+}
+
+.formal-check-title-cell strong {
+  color: #111a33;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.formal-check-title-cell span,
+.formal-check-source span {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+.formal-check-source {
+  display: grid;
+  gap: 4px;
+}
+
+.formal-check-source strong {
+  color: #334155;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.formal-check-long-text {
+  max-width: 520px;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.55;
+}
+
 .prefill-confirm-textarea {
   width: 100%;
   min-width: 0;

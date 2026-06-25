@@ -1,0 +1,100 @@
+{
+  "run_id": "run_20260624_p1c14_local_three_question_stream",
+  "generated_at": "2026-06-24T08:23:27.740900+00:00",
+  "base_url": "http://127.0.0.1:3012",
+  "status": "PASS",
+  "cases": [
+    {
+      "slug": "qualification",
+      "query": "泰昌有哪些资质证书？",
+      "status": "PASS",
+      "checks": {
+        "done": true,
+        "error": null,
+        "contexts_count": 5,
+        "assets_count": 6,
+        "answer_chars": 801,
+        "has_internal_path": false,
+        "has_english_enum": false,
+        "mentions_liaoning_or_haoqian_as_fact": false,
+        "mentions_quality_cert": true,
+        "mentions_environment_cert": true,
+        "mentions_ohs_cert": true,
+        "no_esg_priority": true
+      },
+      "sources": [],
+      "asset_titles": [
+        "泰昌1.质量管理体系认证证书第1页",
+        "泰昌1.质量管理体系认证证书第3页",
+        "泰昌1.质量管理体系认证证书第2页",
+        "质量管理体系认证证书",
+        "泰昌3.职业健康安全管理体系认证证书第1页",
+        "泰昌2.环境管理体系认证证书第1页"
+      ],
+      "answer_excerpt": "## 结论\n\n根据已提供的资料，河北泰昌电力器材科技有限公司目前拥有**质量管理体系认证证书、环境管理体系认证证书、职业健康安全管理体系认证证书**三项正式资质证书，均为客户提供的原始证书文件。\n\n## 关键信息\n\n- **质量管理体系认证证书**：来源于客户补充文件《1.质量管理体系认证证书.pdf》，包含第1、2、3页内容（图片资产1～4）。\n- **环境管理体系认证证书**：来源于客户补充文件《2.环境管理体系认证证书.pdf》第1页（图片资产6）。\n- **职业健康安全管理体系认证证书**：来源于客户补充文件《3.职业健康安全管理体系认证证书.pdf》第1页（图片资产5）。\n\n以上三项证书属于企业资格审查的常用资质，均以原始证书文件形式存在，可直接作为投标或资质核查的支撑材料。\n\n## 操作建议\n\n- 在使用上述证书参与投标或资质审查时，可直接引用“图片资产1（或4）”、“图片资产6”、“图片资产5”对应的原始文件，无需额外加工。\n- 若需核实证书有效期、认证范围等具体字段信息，建议直接查看对应图片资产中的证书内容。\n\n## 需要确认或补充\n\n当前资料未提供以下资质，如需完整清单可补充提供：\n- 营业执照、生产许可证（仅在文字报告[资料4]中提及，未以证书图片形式出现）\n- 其他可能的资质（如安防、检测、3C等）\n\n## 参考依据\n\n- **资料1**：泰昌1.质量管理体系认证证书第1页（知识片段，来源同图片资产）\n- **资料2**：泰昌3.职业健康安全管理体系认证证书第1页（知识片段）\n- **资料3**：泰昌2.环境管理体系认证证书第1页（知识片段）\n- **图片资产1/4**：质量管理体系认证证书第1页（客户原始资料）\n- **图片资产5**：职业健康安全管理体系认证证书第1页（客户原始资料）\n- **图片资产6**：环境管理体系认证证书第1页（客户原始资料）",
+      "artifact": "docs/rag/runs/run_20260624_p1c14_local_three_question_stream_qualification.jsonl"
+    },
+    {
+      "slug": "cpvc_report",
+      "query": "泰昌 CPVC 电缆保护管有哪些检验报告？",
+      "status": "PASS",
+      "checks": {
+        "done": true,
+        "error": null,
+        "contexts_count": 5,
+        "assets_count": 6,
+        "answer_chars": 867,
+        "has_internal_path": false,
+        "has_english_enum": false,
+        "mentions_liaoning_or_haoqian_as_fact": false,
+        "mentions_report_no": true,
+        "mentions_spec": true,
+        "mentions_structured_parameter_source": true,
+        "no_api_path": true
+      },
+      "sources": [],
+      "asset_titles": [
+        "泰昌CPVC电缆保护管检验报告内径250_页面_4原图",
+        "泰昌CPVC电缆保护管检验报告内径250_页面_3原图",
+        "泰昌CPVC电缆保护管检验报告内径250_页面_2原图",
+        "泰昌CPVC电缆保护管检验报告内径250第4页",
+        "CPVC电缆保护管检验报告内径250",
+        "泰昌CPVC电缆保护管检验报告内径250第1页"
+      ],
+      "answer_excerpt": "## 结论\n\n根据现有资料，河北泰昌电力器材科技有限公司（以下简称“泰昌”）针对其 **CPVC电缆保护管（规格型号：DS 250×15×6000 SN16 PVC-C，公称内径250）** 提供了一份完整的检验报告。此外，未发现其他规格或类型的CPVC电缆保护管检验报告。\n\n## 关键信息\n\n- **对应产品**：CPVC电缆保护管，公称内径250mm。\n- **报告性质**：检验报告，报告编号为 **2024100312005501713**。\n- **检验结论**：颜色项目“符合要求”，单项结论“合格”。\n- **资料形式**：包含结构化参数（材质、颜色等）及原始检验报告图片（共4页）。\n- **来源**：企业原始检验文件（PDF及JPG原图）。\n\n## 操作建议\n\n若您需要该检验报告用于投标或资质审核，可以直接引用以下材料：\n- 检验报告原图：**图片资产1**（第4页原图）、**图片资产2**（第3页原图）、**图片资产3**（第2页原图）均为原始资料，可直接作为附件或证明材料。\n- 结构化参数摘要：可提取“颜色合格”“报告编号”等关键字段用于技术响应。\n\n## 需要确认或补充\n\n当前资料仅覆盖 **公称内径250mm** 这一规格的CPVC电缆保护管。如果您需要其他规格（如不同内径、壁厚或长度）的检验报告，请提供具体型号或补充相关资料。\n\n## 参考依据\n\n- **资料1**：泰昌产品结构化参数（来源CPVC电缆保护管检验报告内径250.pdf，报告编号2024100312005501713）\n- **资料2**：《CPVC电缆保护管检验报告内径250_页面_4.jpg》原图\n- **资料3**：《CPVC电缆保护管检验报告内径250_页面_3.jpg》原图\n- **图片资产1**：泰昌CPVC电缆保护管检验报告内径250_页面_4原图\n- **图片资产2**：泰昌CPVC电缆保护管检验报告内径250_页面_3原图\n- **图片资产3**：泰昌CPVC电缆保护管检验报告内径250_页面_2原图",
+      "artifact": "docs/rag/runs/run_20260624_p1c14_local_three_question_stream_cpvc_report.jsonl"
+    },
+    {
+      "slug": "enterprise_evidence",
+      "query": "泰昌有哪些企业证明材料？",
+      "status": "PASS",
+      "checks": {
+        "done": true,
+        "error": null,
+        "contexts_count": 5,
+        "assets_count": 7,
+        "answer_chars": 604,
+        "has_internal_path": false,
+        "has_english_enum": false,
+        "mentions_liaoning_or_haoqian_as_fact": false,
+        "mentions_business_license": true,
+        "mentions_social_security": true,
+        "mentions_system_certs": true,
+        "does_not_claim_missing_license": true,
+        "social_security_not_production_testing": true
+      },
+      "sources": [],
+      "asset_titles": [
+        "职业健康安全管理体系认证证书",
+        "环境管理体系认证证书",
+        "泰昌营业执照副本原图",
+        "质量管理体系认证证书",
+        "泰昌社保证明（第1页）",
+        "泰昌照片1原图",
+        "泰昌照片2原图"
+      ],
+      "answer_excerpt": "## 结论\n根据已提供的企业材料，河北泰昌电力器材科技有限公司目前可确认的企业证明材料包括：基础证照、三项管理体系认证证书、社保证明（首页）以及企业现场照片。以下列出每类已存在的具体材料。\n\n## 关键信息\n- **基础证照**  \n  - 营业执照副本（见图片资产3）\n- **正式体系认证**  \n  - 质量管理体系认证证书（见图片资产4）  \n  - 环境管理体系认证证书（见图片资产2）  \n  - 职业健康安全管理体系认证证书（见图片资产1）\n- **人员与社保证明**  \n  - 社保证明第1页（见图片资产5）\n- **企业现场材料**  \n  - 企业现场照片两张（见图片资产6、图片资产7）\n\n以上材料均来源于客户原始文件，可作为投标资格审查、技术响应或企业实力展示的支撑材料。\n\n## 操作建议\n- 若需用于招投标，建议将上述材料按招标文件要求整理至对应章节（如基础证照归入“资格审查资料”，体系证书归入“资质证书”，社保证明归入“技术响应文件/人员证书”，现场照片归入“企业证明材料”）。\n- 如招标文件要求更多人员证书或完整社保证明，可补充泰昌社保证明后续页面或其他人员资质证书。\n\n## 参考依据\n- 资料1～资料5 及 图片资产1～图片资产7 均直接对应上述材料，来源为客户提供的PDF、JPG及PNG原始文件。其中图片资产3、图片资产4、图片资产7为当前最相关的3张图片示例。",
+      "artifact": "docs/rag/runs/run_20260624_p1c14_local_three_question_stream_enterprise_evidence.jsonl"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # 阿里云 Ubuntu 单 ECS 测试部署操作清单
 
-更新日期：2026-06-23  
+更新日期：2026-06-25  
 适用环境：阿里云 ECS 单企业测试环境  
 当前实例：`launch-advisor-20260604`  
 公网 IP：`8.160.187.226`  
@@ -490,6 +490,7 @@ MINERU_PARSE_PDF_FIRST=true
 DOCX_REFRESH_FIELDS=true
 CONTAINER_SOFFICE_BIN=/usr/bin/soffice
 DOCX_REFRESH_TIMEOUT_SECONDS=180
+DOCX_TEMPLATE_ID=formal_bid_standard
 
 MAX_UPLOAD_MB=200
 ALLOWED_TENDER_EXTENSIONS=pdf,doc,docx,txt,md
@@ -514,6 +515,7 @@ openssl rand -hex 32
 | [x] | 配置 DashScope Key | embedding/rerank 可用 | 本地验证百炼 embedding 返回向量；云上容器烟测输出 `1 1024` |
 | [ ] | 配置 MinerU Token | OCR/MinerU 可用 | 可后补 |
 | [ ] | 配置 DOCX 字段刷新 | `CONTAINER_SOFFICE_BIN=/usr/bin/soffice` | 容器内路径 |
+| [ ] | 配置 DOCX 中文字体 | 容器内 `fc-match` 能匹配仿宋/黑体/楷体替代字体 | 保障 `formal_bid_standard` 线上 DOCX/PDF 预览不被异常替换 |
 
 ## 6. 构建并启动容器
 
@@ -949,6 +951,14 @@ docker compose exec backend bash
 ```bash
 docker compose exec backend soffice --version
 ```
+
+检查正式 DOCX 中文字体匹配：
+
+```bash
+docker compose exec backend bash -lc 'fc-match FangSong_GB2312 && fc-match SimHei && fc-match KaiTi_GB2312'
+```
+
+若返回 DejaVu、Noto Sans CJK 之外的异常空值，需在镜像或宿主机安装中文字体包并执行 `fc-cache -fv` 后重启 backend/celery。
 
 检查数据库：
 

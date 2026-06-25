@@ -6,6 +6,7 @@ import {
   CheckCircle2,
   ChevronDown,
   ChevronRight,
+  ClipboardCheck,
   Download,
   FileText,
   MoreVertical,
@@ -2737,6 +2738,13 @@ export function BidEditorPage(): JSX.Element {
           <Space size={10} wrap>
             <Button onClick={() => navigate('/interpretation')}>返回解读</Button>
             <Button
+              icon={<ClipboardCheck size={16} />}
+              disabled={!data?.project?.id}
+              onClick={() => data?.project?.id && navigate(`/formal-check?projectId=${data.project.id}`)}
+            >
+              正式检查
+            </Button>
+            <Button
               type="primary"
               icon={<Download size={17} />}
               loading={downloadGenerating === 'full'}
@@ -2975,6 +2983,13 @@ export function BidEditorPage(): JSX.Element {
         </div>
         <Space size={10} wrap>
           <Button onClick={() => navigate('/interpretation')}>返回解读</Button>
+          <Button
+            icon={<ClipboardCheck size={16} />}
+            disabled={!data?.project?.id}
+            onClick={() => data?.project?.id && navigate(`/formal-check?projectId=${data.project.id}`)}
+          >
+            正式检查
+          </Button>
           <Button
             type="primary"
             icon={<Download size={17} />}
