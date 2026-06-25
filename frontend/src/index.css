@@ -1537,6 +1537,13 @@ textarea {
   border-radius: 7px;
 }
 
+.tiptap-toolbar-separator {
+  width: 1px;
+  height: 22px;
+  flex: 0 0 auto;
+  background: #dbe3ef;
+}
+
 .tiptap-style-select {
   width: 112px;
   flex: 0 0 auto;
@@ -1690,6 +1697,70 @@ textarea {
   height: 0;
   color: #94a3b8;
   pointer-events: none;
+}
+
+.ai-edit-preview {
+  display: grid;
+  gap: 12px;
+}
+
+.ai-edit-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #334155;
+  font-weight: 700;
+}
+
+.ai-edit-warnings {
+  display: grid;
+  gap: 4px;
+  border: 1px solid #fed7aa;
+  border-radius: 8px;
+  background: #fff7ed;
+  padding: 8px 10px;
+  color: #9a3412;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.ai-edit-columns {
+  width: 100%;
+}
+
+.ai-edit-column {
+  min-width: 0;
+  width: 50%;
+  display: grid;
+  gap: 8px;
+}
+
+.ai-edit-column strong {
+  color: #475569;
+  font-size: 13px;
+}
+
+.ai-edit-column pre {
+  min-height: 220px;
+  max-height: 420px;
+  margin: 0;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+  padding: 12px;
+  color: #1f2937;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.ai-edit-column-result pre {
+  border-color: #bfdbfe;
+  background: #f8fbff;
 }
 
 .onlyoffice-embed-shell {

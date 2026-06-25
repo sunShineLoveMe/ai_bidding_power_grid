@@ -1,0 +1,31 @@
+{
+  "run_id": "run_20260625_ai_edit_mvp_real_api_acceptance",
+  "generated_at": "2026-06-25T10:34:30",
+  "project_id": "a1d853bc-ca4e-43b4-bbea-256f561c8a3d",
+  "endpoint": "/api/bidding/interpretations/a1d853bc-ca4e-43b4-bbea-256f561c8a3d/sections/ai-edit",
+  "request": {
+    "action": "shorten",
+    "sectionId": "ai-edit-real-test-section",
+    "sectionTitle": "供货服务承诺",
+    "sectionContext": "用于验证正文编辑器 AI 缩写能力",
+    "selectedText": "我公司将严格按照招标文件约定的供货期限，及时、足量交付符合质量要求的产品，并在供货过程中持续做好进度跟踪和质量复核。",
+    "fullContent": "我公司将严格按照招标文件约定的供货期限，及时、足量交付符合质量要求的产品，并在供货过程中持续做好进度跟踪和质量复核。"
+  },
+  "status_code": 200,
+  "response": {
+    "action": "shorten",
+    "actionLabel": "缩写",
+    "originalText": "我公司将严格按照招标文件约定的供货期限，及时、足量交付符合质量要求的产品，并在供货过程中持续做好进度跟踪和质量复核。",
+    "revisedText": "我公司承诺按招标文件约定期限，及时足量交付合格产品，并持续进行进度跟踪与质量复核。",
+    "summary": "缩写原句，压缩重复表达，保留核心承诺和动作。",
+    "warnings": []
+  },
+  "checks": {
+    "http_200": true,
+    "has_revised_text": true,
+    "changed_text": true,
+    "keeps_bid_context": true,
+    "has_action_label": true
+  },
+  "failures": []
+}

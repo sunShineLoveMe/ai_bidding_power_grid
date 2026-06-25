@@ -226,6 +226,34 @@ export async function saveBidSection(projectId: string, section: Partial<BidSect
   return response.data.section;
 }
 
+export type BidAiEditAction = 'expand' | 'shorten' | 'polish' | 'formalize';
+
+export type BidAiEditRequest = {
+  action: BidAiEditAction;
+  selectedText: string;
+  sectionId?: string;
+  sectionTitle?: string;
+  sectionContext?: string;
+  fullContent?: string;
+};
+
+export type BidAiEditResponse = {
+  action: BidAiEditAction;
+  actionLabel: string;
+  originalText: string;
+  revisedText: string;
+  summary?: string;
+  warnings?: string[];
+};
+
+export async function editBidSectionText(projectId: string, payload: BidAiEditRequest): Promise<BidAiEditResponse> {
+  const response = await apiClient.post(`/api/bidding/interpretations/${projectId}/sections/ai-edit`, payload, {
+    skipGlobalLoading: true,
+    timeout: 180000,
+  });
+  return response.data;
+}
+
 export async function saveBidLengthSettings(projectId: string, settings: BidLengthSettings): Promise<{
   settings: BidLengthSettings;
   feasibility: BidLengthFeasibility;

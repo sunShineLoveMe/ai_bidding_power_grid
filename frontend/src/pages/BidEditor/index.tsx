@@ -32,6 +32,7 @@ import {
   cancelSectionGenerationTask,
   createSectionGenerationTask,
   deleteBidSection,
+  editBidSectionText,
   generateBidDocxDownload,
   getBidExportTask,
   generateComplianceSupplement,
@@ -52,6 +53,7 @@ import type { SectionGenerationTask } from '../../api/bidProject';
 import type { BidExportTask } from '../../api/bidProject';
 import { BrandMark } from '../../components/common/BrandMark';
 import { TiptapBidEditor } from '../../components/editor/TiptapBidEditor';
+import type { BidAiEditEditorRequest, BidAiEditEditorResult } from '../../components/editor/TiptapBidEditor';
 import type { BidLengthFeasibility, BidLengthSettings, BidOutline, BidOutlineChapter, BidSection, ChapterWritingPlan, ComplianceReport, ComplianceRow, InterpretationResponse, SemanticComplianceReport, SemanticComplianceReview } from '../../types/interpretation';
 
 type EditorMode = '正文模式' | '目录模式';
@@ -790,6 +792,24 @@ export function BidEditorPage(): JSX.Element {
   const selectedChapter = filteredChapters.find(chapter => chapter.id === selectedId)
     || filteredChapters[0]
     || (activeVolume === 'all' ? chapters.find(chapter => chapter.id === selectedId) || chapters[0] : undefined);
+  const handleAiEdit = useCallback(async (request: BidAiEditEditorRequest): Promise<BidAiEditEditorResult> => {
+    if (!data?.project?.id || !selectedChapter) {
+      throw new Error('请先选择需要编辑的章节');
+    }
+    const result = await editBidSectionText(data.project.id, {
+      action: request.action,
+      selectedText: request.selectedText,
+      sectionId: selectedChapter.id,
+      sectionTitle: chapterDisplayTitle(selectedChapter),
+      sectionContext: selectedChapter.purpose || '',
+      fullContent: request.fullContent,
+    });
+    return {
+      revisedText: result.revisedText,
+      summary: result.summary,
+      warnings: result.warnings || [],
+    };
+  }, [data?.project?.id, selectedChapter]);
   const visibleChapters = useMemo(
     () => filteredChapters.filter(chapter => isVisibleChapter(chapter, filteredChapters)),
     [filteredChapters],
@@ -3160,6 +3180,7 @@ export function BidEditorPage(): JSX.Element {
             <TiptapBidEditor
               content={selectedChapter.content || ''}
               onChange={handleEditorChange}
+              onAiEdit={handleAiEdit}
               placeholder="开始编写标书章节内容..."
             />
           ) : (

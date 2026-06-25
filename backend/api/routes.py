@@ -1193,4 +1193,5 @@ from backend.api import knowledge as _knowledge_routes  # noqa: F401, E402
 from backend.api import assets as _assets_routes  # noqa: F401, E402
 from backend.api import prefill as _prefill_routes  # noqa: F401, E402
 from backend.api import formal_check as _formal_check_routes  # noqa: F401, E402
+from backend.api import ai_editing as _ai_editing_routes  # noqa: F401, E402
 from backend.api import legacy as _legacy_routes  # noqa: F401, E402

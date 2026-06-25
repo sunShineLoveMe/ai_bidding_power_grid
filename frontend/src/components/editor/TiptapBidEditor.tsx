@@ -1,16 +1,21 @@
-import { Button, Select, Tooltip } from 'antd';
+import { Button, Modal, Select, Space, Tooltip, Typography, message } from 'antd';
 import {
   Bold,
+  ChevronsDown,
+  ChevronsUp,
   Heading1,
   Heading2,
   Heading3,
   Italic,
   List,
   ListOrdered,
+  PenLine,
   Redo2,
+  Sparkles,
   Table2,
   Underline as UnderlineIcon,
   Undo2,
+  WandSparkles,
 } from 'lucide-react';
 import { EditorContent, JSONContent, useEditor } from '@tiptap/react';
 import { mergeAttributes, Node } from '@tiptap/core';
@@ -28,7 +33,43 @@ interface TiptapBidEditorProps {
   content: string;
   onChange?: (markdown: string) => void;
   placeholder?: string;
+  onAiEdit?: (request: BidAiEditEditorRequest) => Promise<BidAiEditEditorResult>;
 }
+
+export type BidAiEditEditorAction = 'expand' | 'shorten' | 'polish' | 'formalize';
+
+export interface BidAiEditEditorRequest {
+  action: BidAiEditEditorAction;
+  selectedText: string;
+  fullContent: string;
+}
+
+export interface BidAiEditEditorResult {
+  revisedText: string;
+  summary?: string;
+  warnings?: string[];
+}
+
+type AiPreviewState = {
+  action: BidAiEditEditorAction;
+  actionLabel: string;
+  originalText: string;
+  revisedText: string;
+  summary?: string;
+  warnings?: string[];
+  range: { from: number; to: number };
+};
+
+const AI_EDIT_ACTIONS: Array<{
+  action: BidAiEditEditorAction;
+  label: string;
+  icon: JSX.Element;
+}> = [
+  { action: 'expand', label: '扩写选区', icon: <ChevronsUp size={15} /> },
+  { action: 'shorten', label: '缩写选区', icon: <ChevronsDown size={15} /> },
+  { action: 'polish', label: '润色选区', icon: <PenLine size={15} /> },
+  { action: 'formalize', label: '正式化选区', icon: <WandSparkles size={15} /> },
+];
 
 function escapeHtml(value: string): string {
   return value
@@ -269,9 +310,11 @@ function docToMarkdown(doc: JSONContent): string {
   return (doc.content || []).map(nodeToMarkdown).filter(Boolean).join('\n\n').trim();
 }
 
-export function TiptapBidEditor({ content, onChange, placeholder }: TiptapBidEditorProps): JSX.Element {
+export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: TiptapBidEditorProps): JSX.Element {
   const lastExternalContent = useRef(content || '');
   const lastEmittedContent = useRef(content || '');
+  const [aiEditingAction, setAiEditingAction] = useState<BidAiEditEditorAction | null>(null);
+  const [aiPreview, setAiPreview] = useState<AiPreviewState | null>(null);
   const extensions = useMemo(() => [
     StarterKit.configure({
       heading: { levels: [1, 2, 3, 4, 5, 6] },
@@ -359,6 +402,54 @@ export function TiptapBidEditor({ content, onChange, placeholder }: TiptapBidEdi
     editor.chain().focus().toggleHeading({ level }).run();
   };
 
+  const requestAiEdit = async (action: BidAiEditEditorAction) => {
+    if (!editor || !onAiEdit) return;
+    const { from, to, empty } = editor.state.selection;
+    if (empty || from === to) {
+      message.warning('请先选中需要 AI 编辑的正文');
+      return;
+    }
+    const selectedText = editor.state.doc.textBetween(from, to, '\n').trim();
+    if (!selectedText) {
+      message.warning('选区内没有可编辑文本');
+      return;
+    }
+    const actionLabel = AI_EDIT_ACTIONS.find(item => item.action === action)?.label.replace('选区', '') || 'AI 编辑';
+    setAiEditingAction(action);
+    try {
+      const result = await onAiEdit({
+        action,
+        selectedText,
+        fullContent: docToMarkdown(editor.getJSON()),
+      });
+      setAiPreview({
+        action,
+        actionLabel,
+        originalText: selectedText,
+        revisedText: result.revisedText,
+        summary: result.summary,
+        warnings: result.warnings || [],
+        range: { from, to },
+      });
+    } catch (error) {
+      message.error(error instanceof Error ? error.message : String(error));
+    } finally {
+      setAiEditingAction(null);
+    }
+  };
+
+  const acceptAiPreview = () => {
+    if (!editor || !aiPreview) return;
+    editor
+      .chain()
+      .focus()
+      .setTextSelection(aiPreview.range)
+      .insertContent(markdownToHtml(aiPreview.revisedText))
+      .run();
+    setAiPreview(null);
+    message.success('已采纳 AI 编辑结果，可用撤销按钮恢复');
+  };
+
   return (
     <div className="tiptap-bid-editor">
       <div className="tiptap-toolbar">
@@ -396,12 +487,64 @@ export function TiptapBidEditor({ content, onChange, placeholder }: TiptapBidEdi
             onClick={() => (editor?.chain().focus() as any).insertTable({ rows: 3, cols: 4, withHeaderRow: true }).run()}
           />
         </Tooltip>
+        {onAiEdit ? (
+          <>
+            <span className="tiptap-toolbar-separator" />
+            {AI_EDIT_ACTIONS.map(item => (
+              <Tooltip key={item.action} title={item.label}>
+                <Button
+                  size="small"
+                  aria-label={item.label}
+                  icon={item.icon}
+                  loading={aiEditingAction === item.action}
+                  disabled={!editor || Boolean(aiEditingAction)}
+                  onClick={() => void requestAiEdit(item.action)}
+                />
+              </Tooltip>
+            ))}
+          </>
+        ) : null}
       </div>
       <div className="tiptap-page-scroll">
         <div className="tiptap-page">
           <EditorContent editor={editor} />
         </div>
       </div>
+      <Modal
+        title={aiPreview ? `${aiPreview.actionLabel}预览` : 'AI 编辑预览'}
+        open={Boolean(aiPreview)}
+        width={920}
+        okText="采纳"
+        cancelText="取消"
+        onOk={acceptAiPreview}
+        onCancel={() => setAiPreview(null)}
+      >
+        {aiPreview ? (
+          <div className="ai-edit-preview">
+            {aiPreview.summary ? (
+              <Typography.Paragraph className="ai-edit-summary">
+                <Sparkles size={15} />
+                <span>{aiPreview.summary}</span>
+              </Typography.Paragraph>
+            ) : null}
+            {aiPreview.warnings?.length ? (
+              <div className="ai-edit-warnings">
+                {aiPreview.warnings.map(item => <div key={item}>{item}</div>)}
+              </div>
+            ) : null}
+            <Space align="start" size={12} className="ai-edit-columns">
+              <div className="ai-edit-column">
+                <strong>原文</strong>
+                <pre>{aiPreview.originalText}</pre>
+              </div>
+              <div className="ai-edit-column ai-edit-column-result">
+                <strong>编辑后</strong>
+                <pre>{aiPreview.revisedText}</pre>
+              </div>
+            </Space>
+          </div>
+        ) : null}
+      </Modal>
     </div>
   );
 }

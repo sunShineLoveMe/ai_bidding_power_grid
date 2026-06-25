@@ -6,7 +6,7 @@
   "supabase_ingest_status": "running",
   "supabase_ingest_reason": null,
   "project_id": "11111111-1111-4111-8111-111111111111",
-  "updated_at": "2026-06-16T08:30:34Z",
+  "updated_at": "2026-06-25T02:43:36Z",
   "user_message": "解析结果已下载，正在补充写入项目解读数据。",
   "retryable": true
 }
