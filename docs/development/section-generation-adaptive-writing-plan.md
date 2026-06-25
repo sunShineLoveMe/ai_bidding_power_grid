@@ -894,7 +894,7 @@ CELERY_WORKER_CONCURRENCY=3
 
 1. [x] 完成状态与长度质量提示拆分，新增“压缩到目标”。本地已实现并通过真实回归，见 15.4。
 2. [x] 自定义编写持久化，确保用户单章要求进入后台任务。本地已实现并通过 API + 浏览器真实回归，见 15.5。
-3. 新增子章节继承父章节分册，并在当前筛选中可见。
+3. [x] 新增子章节继承父章节分册，并在当前筛选中可见。本地已实现并通过 API + 浏览器真实回归，见 15.6。
 4. 叶子章节转结构容器前增加确认和正文处理策略。
 5. 删除真实提示与撤销/回收站兜底。
 6. Prompt profile、慢流保护、自适应并发按前文 Phase 1-3 实施。
@@ -928,12 +928,6 @@ output/playwright/local_bid_editor_length_status_final_20260625.png
 | 浏览器 console | 新会话 0 errors、0 warnings |
 | 真实 API 压缩 | 6198 字临时章节通过 `shorten` 压缩并保存；临时章节已删除 |
 
-下一项 P0：
-
-```text
-SG-DATA-001：新增子章节继承父章节分册，并在当前筛选中可见。
-```
-
 ### 15.5 2026-06-25 本地实施与回归：SG-AI-001
 
 本轮已完成第二项 P0：
@@ -966,4 +960,38 @@ docs/development/runs/run_20260625_local_custom_writing_persistence_regression.m
 
 ```text
 SG-DATA-001：新增子章节继承父章节分册，并在当前筛选中可见。
+```
+
+### 15.6 2026-06-25 本地实施与回归：SG-DATA-001
+
+本轮已完成第三项 P0：
+
+- 前端新增章节时会根据父章节或当前分册筛选写入 `metadata.volume_type`、`volume_name`、`export_group` 和 `document_role`。
+- 子章节默认继承父章节分册；如果没有父章节，则在技术/商务筛选下按当前筛选创建对应分册章节。
+- 子章节继承父章节 `priority`，并在 metadata 中记录 `inherited_from_parent_id` 和 `created_from_active_volume`。
+- 后端 `upsert_bid_section()` 增加兜底：客户端未传有效分册 metadata，且存在父章节时，从父章节 metadata 继承分册字段。
+- 后端继承时会同步修正 `export_group`，避免出现 `volume_type=technical` 但 `export_group=其他文件` 的不一致状态。
+
+真实回归记录：
+
+```text
+docs/development/runs/run_20260625_local_child_section_volume_inheritance_regression.md
+```
+
+关键验收结果：
+
+| 验收项 | 结果 |
+| --- | --- |
+| 后端兜底 | 默认标题 `新增章节` 且不传 metadata 时，子章节从技术父章节继承 `volume_type=technical` |
+| 派生字段 | 子章节 `volume_name=技术标`、`export_group=技术标文件`、`document_role=正文` |
+| 浏览器流程 | 登录、进入标书编辑页、切换技术筛选、对临时技术父章节点击“添加章节”均跑通 |
+| 当前筛选可见 | 新增后技术计数 `126 -> 127`，左侧技术视图显示 `29.1 新增章节` |
+| 右侧标签 | 新增子章节详情区显示 `技术标 / 技术标` |
+| 清理 | 临时父子章节均已删除，章节数恢复 206 |
+| 构建检查 | `npm run build` 通过；`python3 -m py_compile backend/db/supabase_repo.py` 通过 |
+
+下一项 P0：
+
+```text
+SG-DATA-002：叶子章节转结构容器前增加确认和正文处理策略。
 ```

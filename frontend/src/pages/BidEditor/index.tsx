@@ -345,6 +345,16 @@ function internalVolumeLabel(volumeType: InternalVolumeType): string {
   return internalVolumeOptions.find(item => item.value === volumeType)?.label || '其他';
 }
 
+function activeVolumeToInternal(volumeType: VolumeType): InternalVolumeType | null {
+  if (volumeType === 'technical') {
+    return 'technical';
+  }
+  if (volumeType === 'business') {
+    return 'business';
+  }
+  return null;
+}
+
 function deliveryVolumeType(chapter: Pick<ChapterDraft, 'title' | 'purpose' | 'required_materials' | 'response_points' | 'metadata'>): VolumeType {
   return inferVolumeType(chapter) === 'technical' ? 'technical' : 'business';
 }
@@ -1785,7 +1795,21 @@ export function BidEditorPage(): JSX.Element {
     }
   }
 
+  function resolveNewChapterVolume(parent?: ChapterDraft | null): InternalVolumeType {
+    const activeInternalVolume = activeVolumeToInternal(activeVolume);
+    if (parent) {
+      const parentVolume = inferVolumeType(parent);
+      return parentVolume === 'other' && activeInternalVolume ? activeInternalVolume : parentVolume;
+    }
+    return activeInternalVolume || 'other';
+  }
+
   function createBlankChapter(order: number, title = '新增章节', parent?: ChapterDraft | null): ChapterDraft {
+    const volumeType = resolveNewChapterVolume(parent);
+    const volumeName = internalVolumeLabel(volumeType);
+    const parentWritingPlan = parent?.metadata?.writing_plan && typeof parent.metadata.writing_plan === 'object'
+      ? parent.metadata.writing_plan as Record<string, unknown>
+      : null;
     return {
       id: `${order}-${title}-${Date.now()}`,
       order,
@@ -1793,8 +1817,8 @@ export function BidEditorPage(): JSX.Element {
       parent_id: parent?.id || null,
       level: Math.min((parent?.level || 0) + 1 || 1, 4),
       title,
-      priority: 'medium',
-      purpose: '请补充本章编写目标。',
+      priority: parent?.priority || 'medium',
+      purpose: parent ? `请补充“${parent.title || '父章节'}”下的子章节编写目标。` : '请补充本章编写目标。',
       response_points: ['请补充响应要点。'],
       mapped_requirements: [],
       mapped_scoring_items: [],
@@ -1803,6 +1827,20 @@ export function BidEditorPage(): JSX.Element {
       required_materials: [],
       writing_notes: ['新增章节后建议先关联招标要求，再生成正文。'],
       content: `## ${title}\n\n请在此编写章节内容。`,
+      metadata: {
+        volume_type: volumeType,
+        volume_name: volumeName,
+        export_group: `${volumeName}文件`,
+        document_role: '正文',
+        created_from_active_volume: activeVolume,
+        ...(parent?.id ? { inherited_from_parent_id: parent.id } : {}),
+        ...(parentWritingPlan ? {
+          writing_plan: {
+            ...parentWritingPlan,
+            inherited_from_parent_id: parent?.id,
+          },
+        } : {}),
+      },
       expanded: true,
     };
   }

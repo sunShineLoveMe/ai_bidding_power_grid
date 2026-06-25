@@ -9,7 +9,7 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
-from backend.core.bid_volumes import ensure_section_volume
+from backend.core.bid_volumes import ensure_section_volume, volume_name
 
 from backend.db.supabase_client import get_bucket_name, get_supabase_client, reset_supabase_client, upload_file_to_storage
 
@@ -872,6 +872,49 @@ def _normalize_section_parent_id(client, project_id: str, parent_id: Any) -> str
     return None
 
 
+def _inherit_child_section_volume(client, project_id: str, payload: dict[str, Any]) -> dict[str, Any]:
+    parent_id = payload.get("parent_id")
+    if not parent_id:
+        return payload
+
+    metadata = payload.get("metadata") if isinstance(payload.get("metadata"), dict) else {}
+    current_volume = str(metadata.get("volume_type") or "").strip()
+    if current_volume and current_volume != "other":
+        return payload
+
+    try:
+        response = (
+            client.table("bid_sections")
+            .select("metadata")
+            .eq("id", parent_id)
+            .eq("project_id", project_id)
+            .limit(1)
+            .execute()
+        )
+    except Exception:
+        logging.exception("读取父章节分册 metadata 失败，跳过继承: project_id=%s parent_id=%s", project_id, parent_id)
+        return payload
+
+    parent = (response.data or [{}])[0] if response.data else {}
+    parent_metadata = parent.get("metadata") if isinstance(parent.get("metadata"), dict) else {}
+    parent_volume = str(parent_metadata.get("volume_type") or "").strip()
+    if not parent_volume or parent_volume == "other":
+        return payload
+
+    parent_volume_name = parent_metadata.get("volume_name") or volume_name(parent_volume)
+    current_export_group = str(metadata.get("export_group") or "").strip()
+    inherited_export_group = parent_metadata.get("export_group") or f"{parent_volume_name}文件"
+    next_metadata = {
+        **metadata,
+        "volume_type": parent_volume,
+        "volume_name": parent_volume_name,
+        "document_role": metadata.get("document_role") or parent_metadata.get("document_role") or "正文",
+        "export_group": inherited_export_group if current_export_group in {"", "其他文件"} else current_export_group,
+        "inherited_from_parent_id": metadata.get("inherited_from_parent_id") or parent_id,
+    }
+    return {**payload, "metadata": next_metadata}
+
+
 def _section_payload(project_id: str, section: dict[str, Any], index: int) -> dict[str, Any]:
     section = ensure_section_volume(section)
     # order_index 必须是整数。旧代码直接用 `section.get("order") or index + 1` 会把
@@ -1116,6 +1159,7 @@ def upsert_bid_section(project_id: str, section: dict[str, Any]) -> dict[str, An
     section_id = section.get("id")
     client = get_supabase_client()
     payload["parent_id"] = _normalize_section_parent_id(client, project_id, payload.get("parent_id"))
+    payload = _inherit_child_section_volume(client, project_id, payload)
 
     if _is_valid_uuid(section_id):
         response = client.table("bid_sections").update(payload).eq("id", section_id).eq("project_id", project_id).execute()
