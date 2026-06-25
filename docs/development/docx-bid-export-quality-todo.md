@@ -353,3 +353,15 @@
 - 最终封面截图：`docs/development/runs/cover_layout_check_20260619/ql_p1c13/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.pdf.png`。
 - 自动化回归：`.venv/bin/python -m pytest tests/test_docx_export.py -q`，结果 `37 passed, 1 warning`。
 - 当前边界：河北豪乾参考稿只用于版式、目录、表格结构和表达风格参考，不作为泰昌事实、资质、业绩、设备或人员来源。
+
+### 2026-06-25 SG-PROMPT-001 完整 DOCX 链路回归记录
+
+- 背景：`SG-PROMPT-001` 修改章节正文生成 prompt profile、输入预算和任务 metadata，需要确认不会破坏正式投标文件导出链路。
+- 本轮未修改 DOCX 模板、封面、目录、页眉页脚、表格或图片插入代码；仅执行真实导出回归。
+- 真实项目：`a1d853bc-ca4e-43b4-bbea-256f561c8a3d`，102/102 章节已有正文。
+- 导出任务：`84af9199-f3cc-44ce-bf3f-9bb5c882cced`，`export_mode=formal`，正式门禁阻断项 `0`。
+- 真实导出链路：`build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
+- 输出文件：`outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.docx`，大小约 `7.8M`。
+- 本次真实验收结果：DOCX completed；模板 `formal_bid_standard`；图片 selected/inserted/failed 为 `23/23/0`；Mermaid found/inserted/skipped 为 `0/0/0`；LibreOffice 字段刷新 `status=refreshed`、`returncode=0`、`manual_refresh_required=false`；刷新报告识别表格 `166` 个。
+- 自动化回归：`.venv/bin/python -m pytest tests/test_docx_export.py tests/test_celery_export_tasks.py -q`，结果 `48 passed, 7 warnings`。
+- 运行记录：`docs/development/runs/run_20260625_sg_prompt_001_prompt_profile_budget.md`。

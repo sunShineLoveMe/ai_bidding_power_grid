@@ -169,9 +169,24 @@ def generate_and_save_bid_section(
     chunk_count = 0
     saved_section: dict[str, Any] | None = None
     quality_report: dict[str, Any] = {}
+    prompt_metadata: dict[str, Any] = {}
     try:
         for event in stream_bid_section(project_id, chapter):
             event_type = event.get("type", "message")
+            if event_type == "start":
+                prompt_metadata = {
+                    key: event.get(key)
+                    for key in [
+                        "prompt_profile",
+                        "prompt_profile_label",
+                        "prompt_chars",
+                        "max_prompt_chars",
+                        "rag_limit",
+                        "asset_limit",
+                        "fact_pack_mode",
+                    ]
+                    if event.get(key) is not None
+                }
             if event_type == "chunk":
                 content = event.get("content", "")
                 full_content += content
@@ -227,6 +242,7 @@ def generate_and_save_bid_section(
         "words": estimate_bid_content_words(full_content),
         "chunks": chunk_count,
         "content_length": len(full_content),
+        **prompt_metadata,
     }
 
 

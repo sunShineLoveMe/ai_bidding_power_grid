@@ -6,11 +6,16 @@ from typing import Any, Iterator
 from backend.core.config import build_enterprise_context
 from backend.core.bid_volumes import asset_applicable_volumes, asset_matches_volume, section_volume_type, volume_generation_strategy, volume_name
 from backend.ai.bid_writing_plan import ensure_chapter_writing_plan
+from backend.ai.section_prompt_policy import (
+    build_section_context_budget,
+    classify_section_prompt_profile,
+    enforce_prompt_budget,
+)
 from backend.db.supabase_repo import get_project_interpretation, list_knowledge_assets
 from backend.ai.qwen_client import LLMStreamTimeoutError, call_dashscope_api, stream_dashscope_api
 from backend.core.config import get_stage_model
 from backend.services.bid_prefill import confirmed_prefill_context
-from backend.services.taichang_bid_context import build_taichang_verified_fact_context
+from backend.services.taichang_bid_context import build_taichang_verified_fact_context, load_taichang_verified_fact_pack
 
 FORMAL_PLACEHOLDER_RE = re.compile(r"【\s*待(?:补充|填写|确认|核对)[^】]*】|\{\{[^}]+}}|\$\{[^}]+}")
 GENERIC_PLACEHOLDER_LABELS = {
@@ -37,6 +42,65 @@ def _confirmed_prefill_text(project_meta: dict[str, Any]) -> str:
     if not values:
         return "- 暂无用户确认变量；缺失事实仍须明确标注人工确认。"
     return "\n".join(f"- {key}: {value}" for key, value in values.items())
+
+
+def _taichang_fact_digest(mode: str) -> str:
+    if mode == "full":
+        return build_taichang_verified_fact_context()
+
+    facts = load_taichang_verified_fact_pack()
+    if not facts:
+        return "- 泰昌核验事实包当前不可用；不得从参考稿或招标样本推断企业事实。"
+
+    enterprise = facts.get("enterprise") if isinstance(facts.get("enterprise"), dict) else {}
+    rows = [
+        "- 投标人：河北泰昌电力器材科技有限公司。",
+        f"- 统一社会信用代码：{enterprise.get('unified_social_credit_code') or '未核验'}；法定代表人：{enterprise.get('legal_representative') or '未核验'}。",
+    ]
+
+    if mode == "identity_only":
+        rows.append("- 本节仅保留投标主体基础事实；证书编号、金额、日期等专属事实不得编造。")
+        return "\n".join(rows)
+
+    if mode == "minimal_constraints":
+        rows.append("- 本 profile 不加载完整泰昌事实包；金额、报价、保证金、签章日期、人员、证书编号和业绩金额缺失时必须保留人工确认。")
+        rows.append("- 辽宁资料仅为招标要求样本；河北豪乾资料仅可参考目录/表式，不得作为泰昌企业事实。")
+        return "\n".join(rows)
+
+    if mode in {"certifications", "performance"}:
+        cert_rows = []
+        for cert in facts.get("certifications") or []:
+            if isinstance(cert, dict) and cert.get("name"):
+                cert_rows.append(
+                    f"- {cert.get('name')}：证书编号 {cert.get('certificate_no') or '未核验'}，有效期至 {cert.get('valid_until') or '未核验'}。"
+                )
+        rows.extend(cert_rows[:5] or ["- 暂未命中证书摘要；涉及资质证书编号和有效期时不得编造。"])
+
+    if mode in {"product_parameters", "performance"}:
+        product_rows = []
+        for product, report in (facts.get("product_inspection") or {}).items():
+            if not isinstance(report, dict):
+                continue
+            parameters = "；".join(
+                f"{item.get('parameter')} {item.get('inspection_result')}{item.get('unit') or ''}"
+                for item in (report.get("parameters") or [])[:5]
+                if isinstance(item, dict) and item.get("parameter")
+            )
+            product_rows.append(
+                f"- {product}检验报告：报告编号 {report.get('report_no') or '未核验'}，规格型号 {report.get('specification_model') or '未核验'}；{parameters or '关键参数见结构化参数表'}。"
+            )
+        rows.extend(product_rows[:4] or ["- 暂未命中检验报告摘要；技术参数和报告编号缺失时不得编造。"])
+
+    if mode == "performance":
+        performance = facts.get("project_performance") if isinstance(facts.get("project_performance"), dict) else {}
+        if performance:
+            rows.append(
+                f"- 泰昌真实业绩：{performance.get('project_name')}，招标编号 {performance.get('tender_no')}，"
+                f"{performance.get('package_no')}，产品 {performance.get('product_summary')}，数量 {performance.get('total_quantity')}，"
+                f"含税金额 {performance.get('amount_tax_included')}；合同签署日期原件为空，不得推断。"
+            )
+    rows.append("- 河北豪乾资料只允许参考目录、表式和写法，严禁作为上述泰昌事实来源。")
+    return "\n".join(rows)
 
 
 def _chunk_text(content: str, size: int = 90) -> Iterator[str]:
@@ -206,6 +270,8 @@ def _supporting_asset_score(asset: dict[str, Any], chapter: dict[str, Any], volu
 
 
 def _compact_supporting_assets(chapter: dict[str, Any], volume_type: str, limit: int = 6) -> str:
+    if limit <= 0:
+        return "- 当前 prompt profile 不加载企业资料候选；如本节缺少企业事实，必须使用【待补充：...】并提示人工确认。"
     try:
         assets = list_knowledge_assets()
     except LLMStreamTimeoutError:
@@ -254,6 +320,8 @@ def _section_rag_query(project: dict[str, Any], analysis: dict[str, Any], chapte
 
 
 def _compact_section_rag_context(project: dict[str, Any], analysis: dict[str, Any], chapter: dict[str, Any], limit: int = 5) -> str:
+    if limit <= 0:
+        return "- 当前 prompt profile 不加载章节级 RAG 写作依据；仅使用草稿、客户确认变量和最小事实边界续写。"
     query = _section_rag_query(project, analysis, chapter)
     if not query:
         return "- 未形成有效章节检索 query，本节按招标解读和人工占位生成。"
@@ -308,15 +376,16 @@ def build_section_supplement_prompt(project_id: str, chapter: dict[str, Any], cu
     writing_plan = ensure_chapter_writing_plan(chapter)
     volume_type = section_volume_type(chapter)
     volume_strategy = volume_generation_strategy(volume_type)
+    profile = classify_section_prompt_profile(chapter)
     target_words = _target_words(chapter)
     actual_words = estimate_bid_content_words(current_content)
     missing_words = max(0, target_words - actual_words)
     allow_auto_expand = _allow_auto_expand(chapter)
-    supporting_assets = _compact_supporting_assets(chapter, volume_type)
-    rag_context = _compact_section_rag_context(project, analysis, chapter, limit=4)
+    supporting_assets = _compact_supporting_assets(chapter, volume_type, limit=min(profile.asset_limit, 2))
+    rag_context = _compact_section_rag_context(project, analysis, chapter, limit=min(profile.rag_limit, 2))
     grounding_instructions = _grounding_instructions(chapter)
     confirmed_variables = _confirmed_prefill_text(project_meta)
-    taichang_facts = build_taichang_verified_fact_context()
+    taichang_facts = _taichang_fact_digest(profile.fact_pack_mode)
     current_excerpt = (current_content or "").strip()
     if len(current_excerpt) > 4200:
         current_excerpt = current_excerpt[-4200:]
@@ -327,13 +396,14 @@ def build_section_supplement_prompt(project_id: str, chapter: dict[str, Any], cu
         else "仅补充有依据的内容；资料不足时输出【待补充：...】、复核清单或表格占位，不得空泛扩写。"
     )
 
-    return f"""
+    prompt = f"""
 你是资深投标文件撰写专家。当前章节已生成一版，但低于该章节写作计划目标。请只输出“可直接追加到本章节末尾”的补写内容，不要重复已有内容，不要输出解释。
 
 补写目标：
 - 章节标题：{title}
 - 编写目标：{purpose or "需人工复核"}
 - 所属分册：{volume_name(volume_type)}（{volume_type}）
+- Prompt profile：{profile.label}（{profile.name}，RAG {min(profile.rag_limit, 2)} 条，企业资料 {min(profile.asset_limit, 2)} 条）
 - 章节目标字数：{target_words or "需人工复核"} 字
 - 当前估算字数：{actual_words} 字
 - 建议补写字数：约 {missing_words} 字，优先补足到目标字数的 75% 以上
@@ -371,16 +441,16 @@ def build_section_supplement_prompt(project_id: str, chapter: dict[str, Any], cu
 {rag_context}
 
 响应要点：
-{_compact_list(chapter.get("response_points") or [])}
+{_compact_list(chapter.get("response_points") or [], limit=profile.requirement_limit)}
 
 关联要求：
-{_compact_list(chapter.get("mapped_requirements") or [])}
+{_compact_list(chapter.get("mapped_requirements") or [], limit=profile.requirement_limit)}
 
 关联评分项：
-{_compact_list(chapter.get("mapped_scoring_items") or [])}
+{_compact_list(chapter.get("mapped_scoring_items") or [], limit=profile.scoring_limit)}
 
 风险提醒：
-{_compact_list(chapter.get("mapped_risks") or [])}
+{_compact_list(chapter.get("mapped_risks") or [], limit=profile.risk_limit)}
 
 章节写作计划：
 - 目标字数：{writing_plan.get("target_words") or "需人工复核"} 字
@@ -391,6 +461,8 @@ def build_section_supplement_prompt(project_id: str, chapter: dict[str, Any], cu
 当前章节已有内容节选：
 {current_excerpt or "暂无"}
 """.strip()
+    prompt, _ = enforce_prompt_budget(prompt, profile)
+    return prompt
 
 
 def _generation_options(chapter: dict[str, Any]) -> dict[str, Any]:
@@ -440,24 +512,26 @@ def build_section_continuation_prompt(project_id: str, chapter: dict[str, Any], 
     writing_plan = ensure_chapter_writing_plan(chapter)
     volume_type = section_volume_type(chapter)
     volume_strategy = volume_generation_strategy(volume_type)
+    profile = classify_section_prompt_profile(chapter, continuation=True)
     target_words = _target_words(chapter)
     draft_words = estimate_bid_content_words(draft_content)
-    supporting_assets = _compact_supporting_assets(chapter, volume_type)
-    rag_context = _compact_section_rag_context(project, analysis, chapter, limit=4)
+    supporting_assets = _compact_supporting_assets(chapter, volume_type, limit=profile.asset_limit)
+    rag_context = _compact_section_rag_context(project, analysis, chapter, limit=profile.rag_limit)
     grounding_instructions = _grounding_instructions(chapter)
     confirmed_variables = _confirmed_prefill_text(project_meta)
-    taichang_facts = build_taichang_verified_fact_context()
+    taichang_facts = _taichang_fact_digest(profile.fact_pack_mode)
     draft_excerpt = (draft_content or "").strip()
-    if len(draft_excerpt) > 5200:
-        draft_excerpt = draft_excerpt[-5200:]
+    if len(draft_excerpt) > 2600:
+        draft_excerpt = draft_excerpt[-2600:]
 
-    return f"""
+    prompt = f"""
 你是资深投标文件撰写专家。当前章节此前生成时模型超时，系统已保存草稿。请基于草稿继续补齐本章节，只输出“可直接追加到草稿末尾”的续写内容，不要重写标题，不要重复已有段落，不要解释。
 
 续写目标：
 - 章节标题：{title}
 - 编写目标：{purpose or "需人工复核"}
 - 所属分册：{volume_name(volume_type)}（{volume_type}）
+- Prompt profile：{profile.label}（{profile.name}，只保留草稿末尾和最小事实边界）
 - 目标字数：{target_words or "需人工复核"} 字
 - 草稿估算字数：{draft_words} 字
 - 续写原则：优先补齐未完成的承诺、措施、表格、复核清单或待补充项；如果草稿已经基本完整，只补一个简短收束段。
@@ -495,16 +569,16 @@ def build_section_continuation_prompt(project_id: str, chapter: dict[str, Any], 
 {rag_context}
 
 响应要点：
-{_compact_list(chapter.get("response_points") or [])}
+{_compact_list(chapter.get("response_points") or [], limit=profile.requirement_limit)}
 
 关联要求：
-{_compact_list(chapter.get("mapped_requirements") or [])}
+{_compact_list(chapter.get("mapped_requirements") or [], limit=profile.requirement_limit)}
 
 关联评分项：
-{_compact_list(chapter.get("mapped_scoring_items") or [])}
+{_compact_list(chapter.get("mapped_scoring_items") or [], limit=profile.scoring_limit)}
 
 风险提醒：
-{_compact_list(chapter.get("mapped_risks") or [])}
+{_compact_list(chapter.get("mapped_risks") or [], limit=profile.risk_limit)}
 
 章节写作计划：
 - 建议篇幅：{writing_plan.get("suggested_pages") or "需人工复核"} 页
@@ -517,6 +591,8 @@ def build_section_continuation_prompt(project_id: str, chapter: dict[str, Any], 
 当前草稿末尾节选：
 {draft_excerpt or "暂无"}
 """.strip()
+    prompt, _ = enforce_prompt_budget(prompt, profile)
+    return prompt
 
 
 def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
@@ -530,6 +606,8 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
     writing_plan = ensure_chapter_writing_plan(chapter)
     volume_type = section_volume_type(chapter)
     volume_strategy = volume_generation_strategy(volume_type)
+    profile = classify_section_prompt_profile(chapter)
+    context_budget = build_section_context_budget(profile, chapter)
     context = {
         "project_name": project_meta.get("project_name") or project.get("project_name"),
         "tender_no": project_meta.get("tender_no") or project.get("project_no"),
@@ -549,14 +627,18 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
         "volume_strategy": volume_strategy,
     }
 
-    enterprise_context = build_enterprise_context()
-    supporting_assets = _compact_supporting_assets(chapter, volume_type)
-    rag_context = _compact_section_rag_context(project, analysis, chapter, limit=5)
+    enterprise_context = (
+        build_enterprise_context()
+        if profile.include_enterprise_profile
+        else "- 当前 prompt profile 不加载完整企业画像；仅保留投标主体和事实边界约束。"
+    )
+    supporting_assets = _compact_supporting_assets(chapter, volume_type, limit=context_budget["asset_limit"])
+    rag_context = _compact_section_rag_context(project, analysis, chapter, limit=context_budget["rag_limit"])
     grounding_instructions = _grounding_instructions(chapter)
     confirmed_variables = _confirmed_prefill_text(project_meta)
-    taichang_facts = build_taichang_verified_fact_context()
+    taichang_facts = _taichang_fact_digest(profile.fact_pack_mode)
 
-    return f"""
+    prompt = f"""
 你是资深投标文件撰写专家，熟悉电网/电力工程、设备供货、安装调试、试验检测、运维检修、质量安全管理和招投标文件格式要求。
 企业画像：
 {enterprise_context}
@@ -568,7 +650,7 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
 2. 语言正式、稳健、可落地，符合国内投标文件表达习惯。
 3. 不要编造企业没有提供的证书编号、人员姓名、合同金额、具体日期；已核验事实必须直接填写，不得再次留空。
 4. 必须回应章节目标、响应要点、评分项和风险点。
-5. 如适合表格，用 Markdown 表格输出。
+5. {"如适合表格，用 Markdown 表格输出。" if profile.allow_table else "本章节以正文段落为主，除非招标文件强制要求，不主动铺开大表格。"}
 6. 正文字数按章节写作计划控制。本次生成尽量覆盖完整章节；若目标字数较长，可先输出结构完整的第一版，并保留可续写的小标题。
 7. 必须遵守当前分册策略，尤其是金额、证书、人员、日期、签章、保证金和报价信息的禁编造约束。
 8. 正式标书正文不得使用 emoji、图标符号或装饰性提示符；“关键提醒”“风险提示”等内容必须使用纯文字标题。
@@ -592,6 +674,8 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
 - 标题：{title}
 - 编写目标：{purpose or "需人工复核"}
 - 来源页码：{context["source_pages"] or "需人工复核"}
+- Prompt profile：{profile.label}（{profile.name}）
+- 输入预算：prompt≤{profile.max_prompt_chars} 字符；RAG {context_budget["rag_limit"]} 条；企业资料 {context_budget["asset_limit"]} 条；事实包模式 {profile.fact_pack_mode}
 
 分册写作策略：
 {_compact_list(context["volume_strategy"].get("focus"), limit=8)}
@@ -628,23 +712,25 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
 - 写作策略：{writing_plan.get("strategy") or "需人工复核"}
 
 响应要点：
-{_compact_list(context["response_points"])}
+{_compact_list(context["response_points"], limit=profile.requirement_limit)}
 
 关联要求：
-{_compact_list(context["mapped_requirements"])}
+{_compact_list(context["mapped_requirements"], limit=profile.requirement_limit)}
 
 关联评分项：
-{_compact_list(context["mapped_scoring_items"])}
+{_compact_list(context["mapped_scoring_items"], limit=profile.scoring_limit)}
 
 风险提醒：
-{_compact_list(context["mapped_risks"])}
+{_compact_list(context["mapped_risks"], limit=profile.risk_limit)}
 
 需要准备的资料：
-{_compact_list(context["required_materials"])}
+{_compact_list(context["required_materials"], limit=profile.material_limit)}
 
 写作注意事项：
-{_compact_list(context["writing_notes"])}
+{_compact_list(context["writing_notes"], limit=profile.writing_note_limit)}
 """.strip()
+    prompt, _ = enforce_prompt_budget(prompt, profile)
+    return prompt
 
 
 def _placeholder_label(token: str) -> str:
@@ -793,6 +879,7 @@ def rewrite_generated_section_for_formal_quality(
 
 def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dict[str, Any]]:
     continuation_draft = _continuation_draft(chapter)
+    profile = classify_section_prompt_profile(chapter, continuation=bool(continuation_draft))
     prompt = (
         build_section_continuation_prompt(project_id, chapter, continuation_draft)
         if continuation_draft
@@ -801,6 +888,13 @@ def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dic
     yield {
         "type": "start",
         "title": chapter.get("title") or "未命名章节",
+        "prompt_profile": profile.name,
+        "prompt_profile_label": profile.label,
+        "prompt_chars": len(prompt),
+        "max_prompt_chars": profile.max_prompt_chars,
+        "rag_limit": profile.rag_limit,
+        "asset_limit": profile.asset_limit,
+        "fact_pack_mode": profile.fact_pack_mode,
     }
 
     emitted = False
@@ -816,6 +910,9 @@ def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dic
                 "metadata": {
                     "chapter_title": chapter.get("title"),
                     "volume_type": section_volume_type(chapter),
+                    "prompt_profile": profile.name,
+                    "prompt_chars": len(prompt),
+                    "max_prompt_chars": profile.max_prompt_chars,
                 },
             },
         ):
@@ -848,6 +945,9 @@ def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dic
                 "metadata": {
                     "chapter_title": chapter.get("title"),
                     "volume_type": section_volume_type(chapter),
+                    "prompt_profile": profile.name,
+                    "prompt_chars": len(prompt),
+                    "max_prompt_chars": profile.max_prompt_chars,
                 },
             },
         )
@@ -879,6 +979,7 @@ def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dic
     cap_reached, _, _ = _length_cap_reached(generated_content, chapter)
     if emitted and not cap_reached and _needs_length_supplement(generated_content, chapter):
         supplement_prompt = build_section_supplement_prompt(project_id, chapter, generated_content)
+        supplement_profile = classify_section_prompt_profile(chapter)
         supplement_prefix = "\n\n"
         generated_content += supplement_prefix
         yield {
@@ -896,6 +997,9 @@ def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dic
                     "metadata": {
                         "chapter_title": chapter.get("title"),
                         "volume_type": section_volume_type(chapter),
+                        "prompt_profile": supplement_profile.name,
+                        "prompt_chars": len(supplement_prompt),
+                        "max_prompt_chars": supplement_profile.max_prompt_chars,
                         "target_words": _target_words(chapter),
                         "actual_words": estimate_bid_content_words(generated_content),
                         "allow_auto_expand": _allow_auto_expand(chapter),
@@ -931,6 +1035,9 @@ def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dic
                         "metadata": {
                             "chapter_title": chapter.get("title"),
                             "volume_type": section_volume_type(chapter),
+                            "prompt_profile": supplement_profile.name,
+                            "prompt_chars": len(supplement_prompt),
+                            "max_prompt_chars": supplement_profile.max_prompt_chars,
                             "target_words": _target_words(chapter),
                             "actual_words": estimate_bid_content_words(generated_content),
                             "allow_auto_expand": _allow_auto_expand(chapter),

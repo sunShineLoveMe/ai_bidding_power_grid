@@ -40,7 +40,8 @@ declare
     'last_token_at',
     'draft_saved_at',
     'final_saved_at',
-    'draft_content'
+    'draft_content',
+    'metadata'
   ];
   v_active_statuses text[] := array['leased', 'running', 'generating', 'saving'];
   v_terminal_statuses text[] := array['done', 'failed', 'stopped', 'cancelled', 'expired', 'partial_generated'];
@@ -104,7 +105,8 @@ begin
       'error', p_patch->>'error',
       'generated_content', coalesce(p_patch->>'generated_content', ''),
       'chunk_seq', coalesce((p_patch->>'chunk_seq')::int, 0),
-      'chunk_events', coalesce(p_patch->'chunk_events', '[]'::jsonb)
+      'chunk_events', coalesce(p_patch->'chunk_events', '[]'::jsonb),
+      'metadata', coalesce(p_patch->'metadata', '{}'::jsonb)
     );
   end if;
 

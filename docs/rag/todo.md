@@ -1,6 +1,6 @@
 # 国家电网 RAG 基座数据工程待办清单
 
-> 状态日期：2026-06-21
+> 状态日期：2026-06-25
 > 适用范围：电网/国家电网招投标 RAG 基座数据、客户标书模板、行业资料、召回评测与上线门禁。
 
 本文档用于跟踪 RAG 基座数据工程的优先级、完成度和验收口径。全局产品路线仍看 `docs/development/roadmap.md`；本清单只记录 RAG 数据工程相关任务。
@@ -184,6 +184,7 @@
 17. **P1C-13 已完成：招标项目项目化上下文与解读页可用性回归。** 招标项目页不再让客户猜测当前是哪次解析；默认入口标注为“最近一次已完成解读”，并提供历史项目下拉、查看全部历史和进入标书编制入口；红框标签已按真实接口和当前项目数据回归。
 18. **P1C-14 已完成：企业知识库问答事实与来源修复。** 阿里云 `:8080` 真实页面三问主答案可用，formal 图片资产和 embedding 已恢复，二维码/局部裁剪图问题消失；社保证明归库 P0 已修复，页面复测显示为“人员证书 · 资信库资料”。
 19. **P1C-15 进行中：阿里云企业库展示与来源收敛收口。** 剩余优化资质证书问题参考来源混入 ESG/废水报告、CPVC 报告规格覆盖措辞冲突，以及公网 80 端口入口说明/反代；P0 关闭后可并行进入最小标书主流程云上冒烟。
-20. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表；仅在参数规模变大、多批次查询复杂或页面精确查询成为瓶颈后启动。
-21. P1B 泰昌补充资料质量增强已完成；后续新增资料按 `docs/rag/taichang-material-completeness-scorecard.md` 的 P0/P1/P2 补资料清单更新评分，并重跑真实回归。
-22. 客户演示完整标书已完成 DeepSeek 全量章节重写和真实 DOCX/PDF 验收：见 `docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`；后续若客户更换目标招标文件或 Word 模板，需重新生成章节、重新导出并复跑验收。
+20. **SG-PROMPT-001 已完成：Prompt profile 分级瘦身与生成输入预算。** 章节生成已按 profile 控制 RAG/企业资料/事实包/prompt 字符预算，并把 profile 指标写入生成任务 metadata；本地 RAG 门禁 `run_20260625_sg_prompt_001` PASS，完整 DOCX 导出链路 PASS。
+21. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表；仅在参数规模变大、多批次查询复杂或页面精确查询成为瓶颈后启动。
+22. P1B 泰昌补充资料质量增强已完成；后续新增资料按 `docs/rag/taichang-material-completeness-scorecard.md` 的 P0/P1/P2 补资料清单更新评分，并重跑真实回归。
+23. 客户演示完整标书已完成 DeepSeek 全量章节重写和真实 DOCX/PDF 验收：见 `docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`；后续若客户更换目标招标文件或 Word 模板，需重新生成章节、重新导出并复跑验收。

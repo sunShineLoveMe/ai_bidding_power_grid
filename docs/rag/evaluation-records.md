@@ -2592,3 +2592,49 @@ Run 39 在阿里云真实页面发现企业知识库问答存在 P0/P1 缺陷：
 
 - P1C-14 本地真实环境修复通过，可进入提交、推送和阿里云测试环境部署。
 - 云上部署后仍需按 Run 39 的同三问口径做真实页面复测；云上复测通过前，阿里云环境仍不应进入最小标书主流程正式验收。
+
+---
+
+## Run 41 — SG-PROMPT-001 Prompt profile 输入预算回归（2026-06-25）
+
+> 本地门禁：`docs/rag/runs/run_20260625_sg_prompt_001_summary.md`
+> 增量门禁：`docs/rag/runs/run_20260625_sg_prompt_001_incremental_summary.md`
+> 开发运行记录：`docs/development/runs/run_20260625_sg_prompt_001_prompt_profile_budget.md`
+
+### 触发原因
+
+批量章节生成在客户真实测试中出现后半段慢流与 `MODEL_STREAM_WALL_TIMEOUT`，且旧 `build_section_prompt()` 对大量简单章节仍加载企业上下文、事实包、资料候选、RAG 和完整章节约束。本轮先完成可验证的 prompt profile 分级、输入预算和任务 metadata，为后续慢流提前保护与自适应并发提供指标基础。
+
+### 修复范围
+
+- 章节生成新增七类 profile：轻量方案、事实支撑、技术参数、结构化表格、附件索引、报价敏感和草稿续写。
+- 不同 profile 独立控制 RAG 条数、企业资料条数、泰昌事实包模式、列表输入上限和 `max_prompt_chars`。
+- `stream_bid_section()` 的 `start` 事件输出 profile 指标；Celery item metadata 和 legacy task JSON 同步保存这些指标。
+- PostgreSQL 原子更新函数白名单允许 patch `metadata`，避免 profile 指标只存在明细表、不进入任务快照。
+
+### 测试与回归
+
+| 验证项 | 结果 |
+| --- | --- |
+| Prompt profile 单测 | PASS，`tests/test_section_prompt_policy.py` 5 passed |
+| 章节生成相关回归 | PASS，21 passed |
+| API/RAG 相关回归 | PASS，35 passed |
+| DOCX/Celery 导出单测 | PASS，48 passed |
+| 本地 RAG 门禁 | PASS，api_ready / rag_unit_tests / incremental_regression_gate / stream_sample 全部通过 |
+| 真实 stream 抽样 | PASS，contexts=5、assets=4、images=4、done=true |
+| 完整 DOCX 链路 | PASS，正式导出任务 completed，图片 selected/inserted/failed 为 `23/23/0`，LibreOffice 字段刷新成功 |
+
+增量回归指标：
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 265 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 594 ms |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% | 354 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 698 ms |
+
+### 结论
+
+- `SG-PROMPT-001` 已完成，本地真实环境验证通过。
+- 本轮未新增客户资料、未改变 RAG 入库策略；召回门禁无退化，泰昌/辽宁/河北豪乾边界未出现跨资料域串扰。
+- 后续 P0 继续进入慢流提前保护、partial 草稿释放并发槽、自适应并发和前端可解释进度。

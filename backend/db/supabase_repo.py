@@ -2202,6 +2202,7 @@ def _update_bid_generation_task_item_legacy(
                 "draft_saved_at",
                 "final_saved_at",
                 "draft_content",
+                "metadata",
             }
         })
         item["status"] = next_status
@@ -2222,6 +2223,7 @@ def _update_bid_generation_task_item_legacy(
             "generated_content": patch.get("generated_content") or "",
             "chunk_seq": _as_order_index(patch.get("chunk_seq"), 0),
             "chunk_events": patch.get("chunk_events") if isinstance(patch.get("chunk_events"), list) else [],
+            "metadata": patch.get("metadata") if isinstance(patch.get("metadata"), dict) else {},
         })
 
     counts = _task_item_counts(items)

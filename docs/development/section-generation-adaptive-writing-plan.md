@@ -1061,8 +1061,39 @@ docs/development/runs/run_20260625_local_delete_subtree_undo_regression.md
 | 清理 | 回归临时父子章节已删除，章节数恢复 `206`，回归 metadata 剩余 0 |
 | 浏览器 console | 受控删除/撤销路径完成后 `console error=0`；登录成功提示仍属于既有全局静态 `message.*` warning |
 
+### 15.9 2026-06-25 本地实施与回归：SG-PROMPT-001
+
+本轮已完成第六项 P0：
+
+- 新增 `backend/ai/section_prompt_policy.py`，把章节生成拆分为 `simple_plan`、`fact_grounded`、`technical_parameter`、`structured_table`、`attachment_index`、`price_sensitive`、`continuation_slim` 七类 prompt profile。
+- `build_section_prompt()`、补写 prompt 和 partial 续写 prompt 已按 profile 控制 RAG 条数、企业资料条数、事实包模式、列表输入上限和 prompt 字符预算。
+- 续写 profile 不再加载章节级 RAG 与企业资料候选，仅保留草稿末尾、客户确认变量和最小事实边界，避免 partial 续写继续吃满大输入。
+- `stream_bid_section()` 的首个 `start` 事件输出 `prompt_profile`、`prompt_chars`、`max_prompt_chars`、`rag_limit`、`asset_limit` 和 `fact_pack_mode`。
+- Celery worker 接收 `start` 事件后写入 task item `metadata`，并同步到 legacy task JSON；PostgreSQL 原子更新函数已允许 `metadata` patch。
+
+真实回归记录：
+
+```text
+docs/development/runs/run_20260625_sg_prompt_001_prompt_profile_budget.md
+docs/rag/runs/run_20260625_sg_prompt_001_summary.md
+docs/rag/runs/run_20260625_sg_prompt_001_incremental_summary.md
+```
+
+关键验收结果：
+
+| 验收项 | 结果 |
+| --- | --- |
+| Prompt profile 单测 | `tests/test_section_prompt_policy.py` 5 passed |
+| 章节生成相关回归 | `tests/test_section_prompt_policy.py tests/test_length_settings.py tests/test_section_generation_autoresume.py tests/test_postgres_schema_init.py` 21 passed |
+| API/RAG 相关回归 | `tests/test_api_sections.py tests/test_section_prompt_policy.py tests/test_length_settings.py tests/test_section_generation_autoresume.py tests/test_rag_asset_scoring.py` 35 passed |
+| DOCX/Celery 导出单测 | `tests/test_docx_export.py tests/test_celery_export_tasks.py` 48 passed |
+| SQL 初始化 | `./scripts/init_postgres_schema.sh` 通过，`update_bid_generation_task_item_atomic` 已重建 |
+| 真实单章生成 | 临时任务 `d2af70bd-2391-4303-ba99-cfebe019e557` completed，metadata 记录 `prompt_profile=simple_plan`、`prompt_chars=5000`、`rag_limit=1`、`asset_limit=1` |
+| RAG 门禁 | Base + 泰昌专项增量回归 Gate PASS；泰昌专项 qwen3-rerank Recall@5/Top1/MRR 为 `100%/100%/1.000` |
+| 完整 DOCX 链路 | 102/102 正文项目导出任务 `84af9199-f3cc-44ce-bf3f-9bb5c882cced` completed；正式门禁阻断项 0；图片 selected/inserted/failed 为 `23/23/0`；LibreOffice 字段刷新成功 |
+
 下一项 P0：
 
 ```text
-SG-PROMPT-001：Prompt profile 分级瘦身与生成输入预算。
+SG-SLOW-001：慢流提前保护与 partial 草稿释放并发槽。
 ```

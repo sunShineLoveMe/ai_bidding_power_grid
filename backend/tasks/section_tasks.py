@@ -343,6 +343,8 @@ def generate_one_section(
         generated_content = str(item.get("draft_content") or item.get("generated_content") or "").strip()
         if not generated_content:
             generated_content = f"## {chapter.get('title') or '未命名章节'}\n\n"
+        item_metadata = dict(item.get("metadata") if isinstance(item.get("metadata"), dict) else {})
+        prompt_metadata: dict[str, Any] = {}
         pending_chunk = ""
         chunk_seq = 0
         chunk_events: list[dict] = []
@@ -412,6 +414,7 @@ def generate_one_section(
                 "chunk_events": chunk_events,
                 "first_token_at": first_token_at,
                 "last_token_at": _now_iso(),
+                "metadata": {**item_metadata, **prompt_metadata},
                 "attempt_id": attempt_id,
                 "worker_id": worker_id,
             })
@@ -419,8 +422,30 @@ def generate_one_section(
             last_flush_at = now
 
         def on_event(event: dict) -> None:
-            nonlocal generated_content, pending_chunk, chunk_seq, first_token_at
-            if event.get("type") != "chunk":
+            nonlocal generated_content, pending_chunk, chunk_seq, first_token_at, prompt_metadata
+            event_type = event.get("type")
+            if event_type == "start":
+                prompt_metadata = {
+                    "prompt_profile": event.get("prompt_profile"),
+                    "prompt_profile_label": event.get("prompt_profile_label"),
+                    "prompt_chars": event.get("prompt_chars"),
+                    "max_prompt_chars": event.get("max_prompt_chars"),
+                    "rag_limit": event.get("rag_limit"),
+                    "asset_limit": event.get("asset_limit"),
+                    "fact_pack_mode": event.get("fact_pack_mode"),
+                    "prompt_profile_event_at": _now_iso(),
+                }
+                prompt_metadata = {key: value for key, value in prompt_metadata.items() if value is not None}
+                update_bid_generation_task_item(project_id, task_id, section_id, {
+                    "status": "generating",
+                    "percent": 3,
+                    "message": f"正在按{prompt_metadata.get('prompt_profile_label') or '默认'} profile 编写",
+                    "metadata": {**item_metadata, **prompt_metadata},
+                    "attempt_id": attempt_id,
+                    "worker_id": worker_id,
+                })
+                return
+            if event_type != "chunk":
                 return
             content = str(event.get("content") or "")
             if not content:
@@ -446,6 +471,7 @@ def generate_one_section(
                 "generated_content": generated_content,
                 "chunk_seq": chunk_seq,
                 "chunk_events": chunk_events,
+                "metadata": {**item_metadata, **prompt_metadata},
                 "attempt_id": attempt_id,
                 "worker_id": worker_id,
             })
@@ -463,6 +489,23 @@ def generate_one_section(
                 "first_token_at": first_token_at,
                 "last_token_at": _now_iso(),
                 "final_saved_at": _now_iso(),
+                "metadata": {
+                    **item_metadata,
+                    **prompt_metadata,
+                    **{
+                        key: result.get(key)
+                        for key in [
+                            "prompt_profile",
+                            "prompt_profile_label",
+                            "prompt_chars",
+                            "max_prompt_chars",
+                            "rag_limit",
+                            "asset_limit",
+                            "fact_pack_mode",
+                        ]
+                        if result.get(key) is not None
+                    },
+                },
                 "attempt_id": attempt_id,
                 "worker_id": worker_id,
             })
@@ -508,6 +551,7 @@ def generate_one_section(
                 "first_token_at": first_token_at,
                 "last_token_at": _now_iso(),
                 "draft_saved_at": _now_iso(),
+                "metadata": {**item_metadata, **prompt_metadata},
                 "attempt_id": attempt_id,
                 "worker_id": worker_id,
             })

@@ -30,3 +30,11 @@ def test_init_postgres_schema_includes_section_generation_migrations():
     ]
     for object_name in required_objects:
         assert object_name in script
+
+
+def test_section_task_atomic_update_allows_item_metadata_patch():
+    status_model_sql = (ROOT / "sql" / "20260603_update_bid_generation_task_status_model.sql").read_text()
+    atomic_sql = (ROOT / "migrations" / "postgres" / "007_atomic_section_task_item.sql").read_text()
+
+    assert "'metadata'" in status_model_sql
+    assert "'metadata'" in atomic_sql
