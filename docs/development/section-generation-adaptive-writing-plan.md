@@ -1183,7 +1183,7 @@ SG-PARTIAL-001：partial 草稿续写上限、复核态与批量续写入口。
 - 修复 coordinator 早退问题：partial-only 任务即使没有 queued item，也会进入 `_dispatch_next_sections()` 执行 partial 策略。
 - partial item metadata 写入 `partial_resume_action`、`partial_review_required`、`partial_resume_reason`、`partial_draft_ratio`、`retry_policy` 和 `next_action`。
 - 手动/批量续写写入 `manual_resume_requested=true`，保留草稿并清除复核阻断，续写 prompt 使用 `continuation_slim`。
-- 前端目录页新增 partial/复核/慢流/当前并发统计；行级状态区分“草稿可续写”和“草稿需复核”；工具栏新增“批量续写草稿”入口。
+- 前端目录页新增 partial/复核/后台任务统计；行级状态区分“草稿可续写”和“草稿需复核”；工具栏新增“批量续写草稿”入口。
 
 真实回归记录：
 
@@ -1211,4 +1211,41 @@ docs/rag/runs/run_20260625_sg_partial_001_incremental_summary.md
 
 ```text
 SG-PROGRESS-001：前端可解释进度与下载前 partial 草稿提示。
+```
+
+### 15.13 2026-06-25 本地实施与回归：SG-PROGRESS-001
+
+本轮已完成第十项 P0：
+
+- 目录顶部统计改为客户可理解的业务口径：全部章节、已生成章节、待完成章节、正在写、排队、草稿待续写、需复核。
+- 移除客户界面上的“模型慢流”“当前并发”等技术提示；技术调度细节继续保留在任务 metadata 和内部 run 记录中。
+- 下载全文 DOCX 前新增草稿版确认，明确“当前文件仍是草稿版”，可下载用于内部查看，但不能作为正式投标文件提交。
+- 下载前确认弹窗展示正文章节、已完成、待完成、已保存草稿、需人工复核、仍在编写等客户可理解状态。
+- partial 章节 tooltip 改为用户口径：草稿已保存、需要人工复核或系统会保留已有内容继续编写。
+
+真实回归记录：
+
+```text
+docs/development/runs/run_20260625_sg_progress_001_user_readiness.md
+docs/rag/runs/run_20260625_sg_progress_001_summary.md
+docs/rag/runs/run_20260625_sg_progress_001_incremental_summary.md
+```
+
+关键验收结果：
+
+| 验收项 | 结果 |
+| --- | --- |
+| 前端构建 | `npm --prefix frontend run build` PASS |
+| 章节/API/DOCX 相关回归 | `tests/test_api_sections.py tests/test_section_generation_policy.py tests/test_section_generation_autoresume.py tests/test_docx_export.py tests/test_celery_export_tasks.py` 74 passed |
+| 后端 ready | `/api/ready` PASS，Celery workers=1 |
+| 页面进度真实回归 | 真实 API 临时 partial 任务下，目录页显示“待完成章节”“草稿待续写：1”“需复核：1”，未出现“模型慢流/当前并发/partial_generated”等技术词 |
+| 下载前确认真实回归 | 点击“标书下载”先弹出“下载前确认：当前文件仍是草稿版”，提示草稿版风险，并可“返回继续编写”取消下载 |
+| 临时数据清理 | `regression_case=sg_progress_001_ui` 临时任务 2 条已删除 |
+| RAG 门禁 | Base + 泰昌专项增量回归 Gate PASS；泰昌专项 qwen3-rerank Recall@5/Top1/MRR 为 `100%/100%/1.000` |
+
+阶段结论：
+
+```text
+批量章节生成可靠性与 Prompt 分级瘦身 P0 主链路已完成：
+SG-UX-001/002、SG-AI-001、SG-DATA-001/002/003、SG-PROMPT-001、SG-SLOW-001、SG-CONCURRENCY-001、SG-PARTIAL-001、SG-PROGRESS-001 均已通过本地真实环境回归。
 ```

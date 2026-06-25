@@ -187,7 +187,8 @@
 20. **SG-PROMPT-001 已完成：Prompt profile 分级瘦身与生成输入预算。** 章节生成已按 profile 控制 RAG/企业资料/事实包/prompt 字符预算，并把 profile 指标写入生成任务 metadata；本地 RAG 门禁 `run_20260625_sg_prompt_001` PASS，完整 DOCX 导出链路 PASS。
 21. **SG-SLOW-001 已完成：慢流提前保护与 partial 草稿释放并发槽。** 章节生成低吞吐时会提前触发 `MODEL_STREAM_SLOW_TIMEOUT`，保存 partial 草稿并释放生成槽；本地强制慢流任务、正常阈值任务和 RAG 门禁 `run_20260625_sg_slow_001` 均 PASS。
 22. **SG-CONCURRENCY-001 已完成：自适应并发调度与任务级慢流窗口降档。** 批量章节生成已按任务最近窗口输出 `current_concurrency`；连续慢流/模型流超时自动降为单路补位，稳定窗口具备恢复并发能力；本地真实初始窗口、慢流降档和 RAG 门禁 `run_20260625_sg_concurrency_001` 均 PASS。
-23. **SG-PARTIAL-001 已完成：partial 草稿续写上限、复核态与批量续写入口。** partial-only 任务不再被 coordinator 早退跳过；短草稿自动使用 `continuation_slim` 续写，连续慢流/达到上限转人工复核，页面显示“批量续写草稿”和草稿/复核/慢流统计；本地真实自动续写、复核态、批量续写 API、页面入口和 RAG 门禁 `run_20260625_sg_partial_001` 均 PASS。
-24. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表；仅在参数规模变大、多批次查询复杂或页面精确查询成为瓶颈后启动。
-25. P1B 泰昌补充资料质量增强已完成；后续新增资料按 `docs/rag/taichang-material-completeness-scorecard.md` 的 P0/P1/P2 补资料清单更新评分，并重跑真实回归。
-26. 客户演示完整标书已完成 DeepSeek 全量章节重写和真实 DOCX/PDF 验收：见 `docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`；后续若客户更换目标招标文件或 Word 模板，需重新生成章节、重新导出并复跑验收。
+23. **SG-PARTIAL-001 已完成：partial 草稿续写上限、复核态与批量续写入口。** partial-only 任务不再被 coordinator 早退跳过；短草稿自动使用 `continuation_slim` 续写，连续慢流/达到上限转人工复核，页面显示“批量续写草稿”和草稿/复核统计；本地真实自动续写、复核态、批量续写 API、页面入口和 RAG 门禁 `run_20260625_sg_partial_001` 均 PASS。
+24. **SG-PROGRESS-001 已完成：客户视角进度与下载前草稿版确认。** 目录页显示待完成、正在写、排队、草稿待续写和需复核，不向客户暴露慢流/并发等技术词；全文 DOCX 下载前会提示“当前文件仍是草稿版”，明确不能作为正式投标文件提交；真实浏览器回归、临时 partial 任务清理和 RAG 门禁 `run_20260625_sg_progress_001` 均 PASS。
+25. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表；仅在参数规模变大、多批次查询复杂或页面精确查询成为瓶颈后启动。
+26. P1B 泰昌补充资料质量增强已完成；后续新增资料按 `docs/rag/taichang-material-completeness-scorecard.md` 的 P0/P1/P2 补资料清单更新评分，并重跑真实回归。
+27. 客户演示完整标书已完成 DeepSeek 全量章节重写和真实 DOCX/PDF 验收：见 `docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`；后续若客户更换目标招标文件或 Word 模板，需重新生成章节、重新导出并复跑验收。

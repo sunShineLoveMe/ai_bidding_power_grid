@@ -1654,11 +1654,6 @@ export function BidEditorPage(): JSX.Element {
     return batchTaskMetadata(task).partial_review_required === true;
   }
 
-  function isSlowStreamTask(task?: BatchTask): boolean {
-    const metadata = batchTaskMetadata(task);
-    return metadata.slow_stream === true || String(metadata.timeout_code || '').startsWith('MODEL_STREAM_');
-  }
-
   function batchTaskLabel(task: BatchTask): string {
     if (task.status === 'partial_generated') {
       return isPartialReviewRequired(task) ? '草稿需复核' : '草稿可续写';
@@ -1672,10 +1667,10 @@ export function BidEditorPage(): JSX.Element {
     }
     const metadata = batchTaskMetadata(task);
     if (isPartialReviewRequired(task)) {
-      return String(metadata.partial_review_reason || task.message || '自动续写已达到上限，需人工复核后再决定是否续写。');
+      return String(task.message || '本章草稿已保存，但还需要人工复核后再决定是否继续编写。');
     }
     if (metadata.partial_auto_resume_allowed === true) {
-      return '系统将使用轻量续写策略继续，不会重载完整资料上下文。';
+      return '系统会基于已保存草稿继续编写，不会丢失已有内容。';
     }
     return task.message || '草稿已保存，可单章续写或批量续写草稿。';
   }
@@ -2515,12 +2510,83 @@ export function BidEditorPage(): JSX.Element {
     });
   }
 
+  function pendingGenerationSummary(): {
+    leafTotal: number;
+    generated: number;
+    incomplete: number;
+    writing: number;
+    queued: number;
+    savedDrafts: number;
+    reviewRequired: number;
+  } {
+    const taskValues = Object.values(batchTasks);
+    const writing = taskValues.filter(task => ACTIVE_BATCH_TASK_STATUSES.has(task.status)).length;
+    const queued = taskValues.filter(task => task.status === 'queued').length;
+    const savedDrafts = taskValues.filter(task => task.status === 'partial_generated').length;
+    const reviewRequired = taskValues.filter(task => task.status === 'partial_generated' && isPartialReviewRequired(task)).length;
+    return {
+      leafTotal: scopedLeafChapters.length,
+      generated: generatedCount,
+      incomplete: Math.max(0, scopedLeafChapters.length - generatedCount),
+      writing,
+      queued,
+      savedDrafts,
+      reviewRequired,
+    };
+  }
+
+  async function confirmDownloadWithGenerationReadiness(): Promise<boolean> {
+    const summary = pendingGenerationSummary();
+    const hasPendingWork = summary.incomplete > 0 || summary.writing > 0 || summary.queued > 0 || summary.savedDrafts > 0 || summary.reviewRequired > 0;
+    if (!hasPendingWork) {
+      return true;
+    }
+
+    return new Promise(resolve => {
+      Modal.confirm({
+        title: '下载前确认：当前文件仍是草稿版',
+        okText: '下载草稿版',
+        cancelText: '返回继续编写',
+        width: 600,
+        icon: <AlertTriangle size={20} />,
+        content: (
+          <div className="space-y-3 text-sm">
+            <Alert
+              type="warning"
+              showIcon
+              message="当前标书正文尚未全部完成"
+              description="可以先下载草稿版用于内部查看，但不能作为正式投标文件提交。全部章节完成并通过正式检查后，再导出正式版。"
+            />
+            <div className="grid grid-cols-2 gap-2">
+              <Tag color="blue">正文章节 {summary.leafTotal} 个</Tag>
+              <Tag color="green">已完成 {summary.generated} 个</Tag>
+              <Tag color={summary.incomplete ? 'orange' : 'green'}>待完成 {summary.incomplete} 个</Tag>
+              {summary.savedDrafts ? <Tag color="gold">已保存草稿 {summary.savedDrafts} 个</Tag> : <Tag color="green">无待续写草稿</Tag>}
+              {summary.reviewRequired ? <Tag color="red">需人工复核 {summary.reviewRequired} 个</Tag> : <Tag color="green">无复核项</Tag>}
+              {summary.writing || summary.queued ? <Tag color="processing">仍在编写 {summary.writing + summary.queued} 个</Tag> : <Tag color="green">无后台编写任务</Tag>}
+            </div>
+            <p className="text-slate-600">
+              建议先点击“批量续写草稿”或逐章处理待完成章节；确需下载，请将本次文件作为草稿版流转。
+            </p>
+          </div>
+        ),
+        onOk: () => resolve(true),
+        onCancel: () => resolve(false),
+      });
+    });
+  }
+
   async function downloadDocx(sectionId?: string): Promise<void> {
     if (!data?.project?.id) {
       message.warning('当前项目不存在，无法下载');
       return;
     }
     if (!sectionId) {
+      const generationConfirmed = await confirmDownloadWithGenerationReadiness();
+      if (!generationConfirmed) {
+        message.info('已取消下载，请先完成剩余章节或复核草稿。');
+        return;
+      }
       const confirmed = await confirmDownloadWithCompliance(data.project.id, activeVolume);
       if (!confirmed) {
         message.info('已取消下载，请先处理条款响应补强项。');
@@ -3496,11 +3562,9 @@ export function BidEditorPage(): JSX.Element {
   const batchTaskValues = Object.values(batchTasks);
   const partialDraftCount = batchTaskValues.filter(task => task.status === 'partial_generated').length;
   const partialReviewCount = batchTaskValues.filter(task => task.status === 'partial_generated' && isPartialReviewRequired(task)).length;
-  const slowStreamCount = batchTaskValues.filter(isSlowStreamTask).length;
   const activeTaskCount = batchTaskValues.filter(task => ACTIVE_BATCH_TASK_STATUSES.has(task.status)).length;
   const queuedTaskCount = batchTaskValues.filter(task => task.status === 'queued').length;
-  const currentConcurrency = Number(persistedBatchTask?.metadata?.current_concurrency || 0);
-  const maxConcurrency = Number(persistedBatchTask?.metadata?.max_concurrency || 0);
+  const incompleteLeafCount = Math.max(0, scopedLeafChapters.length - generatedCount);
 
   if (loading) {
     return (
@@ -3584,12 +3648,11 @@ export function BidEditorPage(): JSX.Element {
               <span>章节计划：{estimatedTotalChars.toLocaleString()} 字（约{estimatedPages}页）</span>
               <span>篇幅进度：{lengthProgress}%</span>
               <span>进度：{generationProgress}%</span>
+              {incompleteLeafCount ? <span>待完成章节：{incompleteLeafCount}</span> : null}
               {activeTaskCount ? <span>正在写：{activeTaskCount}</span> : null}
               {queuedTaskCount ? <span>排队：{queuedTaskCount}</span> : null}
               {partialDraftCount ? <span>草稿待续写：{partialDraftCount}</span> : null}
               {partialReviewCount ? <span>需复核：{partialReviewCount}</span> : null}
-              {slowStreamCount ? <span>模型慢流：{slowStreamCount}</span> : null}
-              {currentConcurrency ? <span>当前并发：{currentConcurrency}{maxConcurrency ? `/${maxConcurrency}` : ''}</span> : null}
               {batchGenerating ? <span>后台章节任务执行中</span> : null}
             </div>
             </div>
@@ -3618,7 +3681,7 @@ export function BidEditorPage(): JSX.Element {
                   重置生成状态
                 </Button>
                 {partialDraftCount ? (
-                  <Tooltip title="仅续写已保存的 partial 草稿，保留现有草稿内容并使用轻量续写策略">
+                  <Tooltip title="继续编写已保存的草稿章节，保留已有内容">
                     <Button
                       size="small"
                       icon={<RefreshCw size={14} />}
