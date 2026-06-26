@@ -651,6 +651,7 @@ export function BidEditorPage(): JSX.Element {
     setDownloadUrl('');
     try {
       const projectId = searchParams.get('projectId');
+      const sectionIdParam = searchParams.get('sectionId');
       const result = projectId ? await getInterpretation(projectId) : await getLatestInterpretation();
       setData(result);
       setLengthFeasibility(asBidLengthFeasibility(result.analysis?.project_meta));
@@ -665,7 +666,12 @@ export function BidEditorPage(): JSX.Element {
         const drafts = sectionDrafts.length ? sectionDrafts : flattenChapters(outline);
         loadedDrafts = drafts;
         setChapters(drafts);
-        setSelectedId(current => current || drafts[0]?.id || '');
+        setSelectedId(current => {
+          if (sectionIdParam && drafts.some(chapter => chapter.id === sectionIdParam)) {
+            return sectionIdParam;
+          }
+          return current || drafts[0]?.id || '';
+        });
       }
       if (result.project?.id) {
         void refreshComplianceReport(result.project.id, { silent: true });

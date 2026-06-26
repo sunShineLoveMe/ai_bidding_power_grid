@@ -71,12 +71,12 @@
 | 状态 | 任务 | 交付物 | 验收口径 |
 | --- | --- | --- | --- |
 | [~] | 权威来源核验文档 | `docs/development/formal-check-rules-source-review.md` | 已有第一版来源核验；目标省公司招标文件逐条页码/条款待补 |
-| [ ] | 检查项跳转处理 | 前端页面 | 支持跳转到投标确认页、章节编辑页、企业库或产品库 |
-| [ ] | 分级筛选 | 前端页面 | 支持 blocker / high / medium / low 筛选 |
-| [ ] | 分类筛选 | 前端页面 | 支持资格、商务、技术、报价、格式、附件、资料边界、导出成品筛选 |
-| [ ] | 检查项证据链展示 | 前端页面与 API | 每条检查项展示来源、章节、证据摘录和处理建议 |
+| [x] | 检查项跳转处理 | 前端页面 | 已支持跳转到投标确认页、章节编辑页、企业资信库或企业产品库；投标确认页支持 `focus=<fieldKey>` 定位字段，正文编辑页支持 `sectionId=<sectionId>` 选中章节 |
+| [x] | 分级筛选 | 前端页面 | 已支持 blocker / high / medium / low 筛选，并保留状态筛选 |
+| [x] | 分类筛选 | 前端页面 | 已支持资格、商务、技术、报价、格式、附件、资料边界、导出成品等分类筛选 |
+| [x] | 检查项证据链展示 | 前端页面与 API | 每条检查项已返回 `evidenceChain`，页面可展开查看规则依据、当前证据和处理建议 |
 | [ ] | 检查结果导出 | Markdown 或 DOCX | 支持导出正式检查报告 |
-| [~] | Chrome 本地浏览评估 | `docs/development/runs/` 记录 | 已用 Playwright 完成真实浏览器页面评估并保存截图；当前未暴露可调用的 Chrome 插件能力，待可用后补 Chrome 专项复核 |
+| [x] | Chrome 本地浏览评估 | `docs/development/runs/` 记录 | 已用本机 Chrome + Playwright 完成真实浏览器页面评估、证据链展开和处理路径跳转验证；记录见 `docs/development/runs/run_20260626_formal_check_processing_path.md` |
 
 ## 7. P2 后续增强
 

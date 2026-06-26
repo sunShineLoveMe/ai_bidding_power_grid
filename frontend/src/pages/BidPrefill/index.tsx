@@ -63,6 +63,7 @@ export function BidPrefillPage(): JSX.Element {
   const [searchParams] = useSearchParams();
   const projectIdParam = searchParams.get('projectId');
   const fromWorkflow = searchParams.get('fromWorkflow') === '1';
+  const focusFieldParam = searchParams.get('focus');
   const [projectId, setProjectId] = useState<string | null>(projectIdParam);
   const [report, setReport] = useState<BidPrefillReport | null>(null);
   const [draftValues, setDraftValues] = useState<Record<string, string>>({});
@@ -109,6 +110,17 @@ export function BidPrefillPage(): JSX.Element {
   useEffect(() => {
     void load();
   }, [projectIdParam]);
+
+  useEffect(() => {
+    if (!report || !focusFieldParam) return;
+    const target = report.fields.find(field => field.key === focusFieldParam);
+    if (!target) return;
+    setOnlyGaps(false);
+    setActiveGroup(target.group);
+    window.setTimeout(() => {
+      document.querySelector(`[data-prefill-field="${focusFieldParam}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 120);
+  }, [focusFieldParam, report]);
 
   const groups = useMemo(() => {
     const reportGroups = report?.groups || [];

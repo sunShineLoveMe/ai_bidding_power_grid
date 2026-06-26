@@ -152,6 +152,23 @@ class FormalBidCheckTest(unittest.TestCase):
             self.assertEqual(by_id[rule_id]["status"], "blocked")
             self.assertIn("非正式", by_id[rule_id]["evidence"])
 
+    def test_report_items_include_processing_action_and_evidence_chain(self):
+        from backend.services.formal_bid_check import build_formal_bid_check_report
+
+        with patch("backend.services.formal_bid_check.get_project_interpretation", return_value=self._payload()), \
+             patch("backend.services.formal_bid_check.build_bid_prefill_report", return_value=self._prefill_report(missing_price=True)), \
+             patch("backend.services.formal_bid_check.build_compliance_report", return_value={"summary": {"percent": 80, "missing": 1, "highRiskMissing": 1}}), \
+             patch("backend.services.formal_bid_check.list_knowledge_assets", return_value=self._assets()):
+            report = build_formal_bid_check_report("11111111-1111-1111-1111-111111111111")
+
+        by_id = {item["id"]: item for item in report["items"]}
+        self.assertEqual(by_id["B-002"]["action"]["type"], "prefill")
+        self.assertEqual(by_id["B-002"]["action"]["target"], "total_bid_price")
+        self.assertEqual(by_id["Q-001"]["action"]["type"], "qualification_library")
+        self.assertEqual(by_id["T-001"]["action"]["type"], "bid_editor")
+        self.assertGreaterEqual(len(by_id["B-002"]["evidenceChain"]), 3)
+        self.assertEqual(by_id["B-002"]["evidenceChain"][0]["label"], "规则依据")
+
     def test_rule_inventory_has_sixty_objective_rules(self):
         from backend.services.formal_bid_check import load_formal_check_rules
 

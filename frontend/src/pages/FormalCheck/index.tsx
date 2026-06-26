@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Alert, Button, Empty, Select, Space, Table, Tag, Typography, message } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { AlertTriangle, CheckCircle2, ClipboardCheck, FileWarning, RefreshCw, ShieldCheck } from 'lucide-react';
+import { AlertTriangle, ArrowRight, CheckCircle2, ClipboardCheck, FileWarning, RefreshCw, ShieldCheck } from 'lucide-react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { getFormalCheckReport, getLatestInterpretation } from '../../api/bidProject';
 import type { FormalCheckItem, FormalCheckReport, FormalCheckStatus } from '../../api/bidProject';
@@ -32,6 +32,10 @@ const severityLabel: Record<FormalCheckItem['severity'], string> = {
 
 function emptyText(text: string): JSX.Element {
   return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={text} />;
+}
+
+function actionTone(item: FormalCheckItem): 'primary' | 'default' {
+  return item.status === 'blocked' ? 'primary' : 'default';
 }
 
 export function FormalCheckPage(): JSX.Element {
@@ -99,6 +103,24 @@ export function FormalCheckPage(): JSX.Element {
     { title: '条款覆盖率', value: `${report?.summary.compliancePercent || 0}%`, desc: `${report?.summary.complianceMissing || 0} 项待覆盖`, icon: CheckCircle2, colorClass: 'bg-violet-50 text-violet-600' },
   ];
 
+  function handleItemAction(item: FormalCheckItem): void {
+    if (!projectId || !item.action) return;
+    const target = item.action.target || item.target || '';
+    if (item.action.type === 'prefill') {
+      navigate(`/prefill?projectId=${projectId}${target ? `&focus=${encodeURIComponent(target)}` : ''}`);
+      return;
+    }
+    if (item.action.type === 'product_library') {
+      navigate(`/products${target ? `?category=${encodeURIComponent(target)}` : ''}`);
+      return;
+    }
+    if (item.action.type === 'qualification_library') {
+      navigate(`/qualification${target ? `?category=${encodeURIComponent(target)}` : ''}`);
+      return;
+    }
+    navigate(`/bid-editor?projectId=${projectId}${target ? `&sectionId=${encodeURIComponent(target)}` : ''}`);
+  }
+
   const columns: ColumnsType<FormalCheckItem> = [
     {
       title: '检查项',
@@ -128,17 +150,31 @@ export function FormalCheckPage(): JSX.Element {
       render: value => <Typography.Paragraph className="formal-check-long-text m-0">{value || '-'}</Typography.Paragraph>,
     },
     {
-      title: '处理建议',
-      dataIndex: 'suggestion',
-      render: value => <Typography.Paragraph className="formal-check-long-text m-0">{value || '-'}</Typography.Paragraph>,
-    },
-    {
       title: '来源',
       width: 190,
       render: (_, item) => (
         <div className="formal-check-source">
           <strong>{item.sourceLevel || '-'}</strong>
           <span>{item.sourceRef || '-'}</span>
+        </div>
+      ),
+    },
+    {
+      title: '处理路径',
+      width: 160,
+      fixed: 'right',
+      render: (_, item) => (
+        <div className="formal-check-action-cell">
+          <Button
+            size="small"
+            type={actionTone(item)}
+            icon={<ArrowRight size={14} />}
+            disabled={!projectId || !item.action}
+            onClick={() => handleItemAction(item)}
+          >
+            {item.action?.label || '去处理'}
+          </Button>
+          <span>{item.action?.description || item.suggestion || '-'}</span>
         </div>
       ),
     },
@@ -233,6 +269,23 @@ export function FormalCheckPage(): JSX.Element {
                 dataSource={filteredItems}
                 pagination={{ pageSize: 12, showTotal: total => `共 ${total} 项` }}
                 locale={{ emptyText: emptyText('当前筛选条件下暂无检查项') }}
+                scroll={{ x: 1160 }}
+                expandable={{
+                  expandedRowRender: item => (
+                    <div className="formal-check-evidence-chain">
+                      {(item.evidenceChain?.length ? item.evidenceChain : [
+                        { label: '当前证据', value: item.evidence || '-' },
+                        { label: '处理建议', value: item.suggestion || '-' },
+                      ]).map(node => (
+                        <div key={node.label}>
+                          <strong>{node.label}</strong>
+                          <span>{node.value || '-'}</span>
+                        </div>
+                      ))}
+                    </div>
+                  ),
+                  rowExpandable: item => Boolean(item.evidence || item.suggestion || item.evidenceChain?.length),
+                }}
               />
             </div>
           </section>
@@ -252,4 +305,3 @@ export function FormalCheckPage(): JSX.Element {
     </div>
   );
 }
-

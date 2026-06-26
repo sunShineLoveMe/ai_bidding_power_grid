@@ -325,6 +325,52 @@ textarea {
   font-weight: 900;
 }
 
+.formal-check-action-cell {
+  display: grid;
+  min-width: 0;
+  gap: 6px;
+}
+
+.formal-check-action-cell .ant-btn {
+  width: fit-content;
+  max-width: 100%;
+}
+
+.formal-check-action-cell span {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.formal-check-evidence-chain {
+  display: grid;
+  gap: 10px;
+  padding: 4px 8px 4px 38px;
+}
+
+.formal-check-evidence-chain > div {
+  display: grid;
+  gap: 4px;
+  border-left: 3px solid #dbeafe;
+  padding-left: 10px;
+}
+
+.formal-check-evidence-chain strong {
+  color: #334155;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.formal-check-evidence-chain span {
+  color: #475569;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
 .formal-check-long-text {
   max-width: 520px;
   color: #475569;

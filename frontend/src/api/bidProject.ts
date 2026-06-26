@@ -685,6 +685,15 @@ export type FormalCheckItem = {
   evidence: string;
   suggestion: string;
   target?: string;
+  checkType?: string;
+  fieldKeys?: string[];
+  evidenceChain?: Array<{ label: string; value: string }>;
+  action?: {
+    type: 'prefill' | 'bid_editor' | 'qualification_library' | 'product_library';
+    label: string;
+    target?: string | null;
+    description?: string;
+  };
 };
 
 export type FormalCheckReport = {

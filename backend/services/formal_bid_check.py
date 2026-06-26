@@ -26,6 +26,48 @@ STATUS_LABELS = {
 SEVERITY_ORDER = {"blocker": 0, "high": 1, "medium": 2, "low": 3}
 
 
+def _primary_action_for_rule(rule: dict[str, Any], target: str | None = None) -> dict[str, Any]:
+    check_type = str(rule.get("check_type") or "")
+    category = str(rule.get("category") or "")
+    title = str(rule.get("title") or "")
+    field_keys = [str(key) for key in rule.get("field_keys") or [] if key]
+    keywords = [str(keyword) for keyword in rule.get("keywords") or [] if keyword]
+    combined = " ".join([category, title, " ".join(keywords)])
+
+    if check_type.startswith("prefill_"):
+        return {
+            "type": "prefill",
+            "label": "去投标确认",
+            "target": field_keys[0] if field_keys else None,
+            "description": "补齐或确认该投标关键字段后，重新执行正式检查。",
+        }
+
+    if check_type.startswith("asset_") or check_type == "content_requires_asset_when_mentions":
+        product_terms = ["产品", "检验报告", "技术", "CPVC", "MPP", "生产", "检测", "绿色", "参数"]
+        is_product = any(term in combined for term in product_terms)
+        return {
+            "type": "product_library" if is_product else "qualification_library",
+            "label": "去产品库" if is_product else "去资信库",
+            "target": keywords[0] if keywords else None,
+            "description": "补充、修正或确认企业资料资产后，重新执行正式检查。",
+        }
+
+    if check_type.startswith("export_"):
+        return {
+            "type": "bid_editor",
+            "label": "去导出/编制",
+            "target": target,
+            "description": "完成 DOCX 导出或成品复验后，刷新正式检查。",
+        }
+
+    return {
+        "type": "bid_editor",
+        "label": "去章节编辑",
+        "target": target,
+        "description": "在正文编辑页补齐对应章节或修正正文后，重新执行正式检查。",
+    }
+
+
 @lru_cache(maxsize=1)
 def load_formal_check_rules() -> dict[str, Any]:
     return json.loads(RULES_PATH.read_text(encoding="utf-8"))
@@ -155,6 +197,14 @@ def _make_result(
     target: str | None = None,
 ) -> dict[str, Any]:
     blocks = bool(rule.get("blocks_formal_export")) and status == "blocked"
+    resolved_suggestion = suggestion or rule.get("remediation") or ""
+    source_ref = rule.get("source_ref") or ""
+    source_level = rule.get("source_level") or ""
+    evidence_chain = [
+        {"label": "规则依据", "value": " / ".join(part for part in [source_level, source_ref] if part) or "-"},
+        {"label": "当前证据", "value": evidence or "-"},
+        {"label": "处理建议", "value": resolved_suggestion or "-"},
+    ]
     return {
         "id": rule["id"],
         "category": rule.get("category") or "未分类",
@@ -165,11 +215,15 @@ def _make_result(
         "statusLabel": STATUS_LABELS.get(status, status),
         "blocksFormalExport": blocks,
         "draftExportAllowed": status in {"blocked", "warning", "manual_confirm"},
-        "sourceLevel": rule.get("source_level") or "",
-        "sourceRef": rule.get("source_ref") or "",
+        "sourceLevel": source_level,
+        "sourceRef": source_ref,
         "evidence": evidence,
-        "suggestion": suggestion or rule.get("remediation") or "",
+        "suggestion": resolved_suggestion,
         "target": target,
+        "checkType": rule.get("check_type") or "",
+        "fieldKeys": [str(key) for key in rule.get("field_keys") or [] if key],
+        "evidenceChain": evidence_chain,
+        "action": _primary_action_for_rule(rule, target),
     }
 
 
