@@ -317,14 +317,42 @@ def _is_formal_certification_context(context: dict[str, Any]) -> bool:
             context.get("content"),
         ]
     )
-    formal_certificate_names = ["质量管理体系认证证书", "环境管理体系认证证书", "职业健康安全管理体系认证证书", "认证证书"]
-    if any(name in text for name in formal_certificate_names):
-        return True
+
+    # 负向企业宣传/环保资料必须先拦截。线上存在被误标为 certification 的绿色发展、
+    # ESG、废水废气废固资料，不能因为正文中出现泛化“认证证书”就进入资质证书回答。
     if any(name in text for name in ["ESG", "绿色发展规划", "绿色供应链", "碳足迹", "废水废气", "废水废气废固"]):
         return False
+
+    formal_certificate_names = ["质量管理体系认证证书", "环境管理体系认证证书", "职业健康安全管理体系认证证书"]
+    if any(name in text for name in formal_certificate_names):
+        return True
     if meta.get("evidence_type") == "certification":
         return True
     return False
+
+
+def _is_formal_certification_asset(asset: dict[str, Any]) -> bool:
+    metadata = asset.get("metadata") if isinstance(asset.get("metadata"), dict) else {}
+    context = {
+        "content": " ".join(
+            str(value or "")
+            for value in [
+                asset.get("title"),
+                asset.get("description"),
+                asset.get("searchable_text"),
+                asset.get("category"),
+                asset.get("file_name"),
+            ]
+        ),
+        "metadata": {
+            **metadata,
+            "source_display_name": metadata.get("source_display_name") or asset.get("title"),
+            "evidence_type": metadata.get("evidence_type") or asset.get("evidence_type"),
+            "evidence_type_label": metadata.get("evidence_type_label") or asset.get("category"),
+            "source_file": metadata.get("source_file") or asset.get("file_name"),
+        },
+    }
+    return _is_formal_certification_context(context)
 
 
 def _curate_pilot_enterprise_contexts(
@@ -350,8 +378,7 @@ def _curate_pilot_enterprise_contexts(
     )
     if _is_certification_query(query):
         certification_contexts = [item for item in ranked if _is_formal_certification_context(item)]
-        if certification_contexts:
-            return certification_contexts[:limit]
+        return certification_contexts[:limit]
     return ranked[:limit]
 
 
@@ -527,6 +554,8 @@ def search_knowledge():
         assets = sanitize_knowledge_assets(
             search_knowledge_assets(query, match_count=12, metadata_filter=asset_metadata_filter)[:8]
         )
+        if _is_certification_query(query):
+            assets = [asset for asset in assets if _is_formal_certification_asset(asset)]
         contexts = _merge_asset_source_contexts(contexts, assets, limit=5, query=query)
         
         # 2. RAG 生成回答
@@ -595,6 +624,8 @@ def stream_search_knowledge():
             assets = sanitize_knowledge_assets(
                 search_knowledge_assets(query, match_count=12, metadata_filter=asset_metadata_filter)[:8]
             )
+            if _is_certification_query(query):
+                assets = [asset for asset in assets if _is_formal_certification_asset(asset)]
             contexts = _merge_asset_source_contexts(contexts, assets, limit=5, query=query)
             if not contexts and not assets and not is_relevant_knowledge_query(query):
                 yield emit({

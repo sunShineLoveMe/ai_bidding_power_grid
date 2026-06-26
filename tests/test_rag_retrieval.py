@@ -814,7 +814,7 @@ class RagRetrievalQualityTest(unittest.TestCase):
             },
             {
                 "id": "green-mislabeled",
-                "content": "绿色发展规划报告",
+                "content": "绿色发展规划报告 附件提到认证证书",
                 "similarity": 0.97,
                 "metadata": {**common, "source_display_name": "绿色发展规划报告", "evidence_type": "certification"},
             },
@@ -827,6 +827,60 @@ class RagRetrievalQualityTest(unittest.TestCase):
         )
 
         self.assertEqual([item["id"] for item in result], ["quality"])
+
+    def test_pilot_enterprise_contexts_return_empty_when_certificate_query_only_hits_green_reports(self):
+        from backend.api.knowledge import _curate_pilot_enterprise_contexts
+
+        common = {
+            "enterprise": "泰昌",
+            "source_domain": "enterprise_fact",
+            "fact_source_allowed_for_enterprise": True,
+            "reference_only": False,
+        }
+        contexts = [
+            {
+                "id": "esg-mislabeled",
+                "content": "ESG环境社会公司治理报告 附件提到认证证书",
+                "similarity": 0.99,
+                "metadata": {**common, "source_display_name": "ESG环境社会公司治理报告", "evidence_type": "certification"},
+            },
+            {
+                "id": "waste-mislabeled",
+                "content": "废水废气废固检测报告 认证证书材料归档",
+                "similarity": 0.98,
+                "metadata": {**common, "source_display_name": "废水废气废固检测报告", "evidence_type": "certification"},
+            },
+        ]
+
+        result = _curate_pilot_enterprise_contexts(
+            contexts,
+            limit=5,
+            query="泰昌有哪些资质证书？",
+        )
+
+        self.assertEqual(result, [])
+
+    def test_formal_certification_asset_filter_rejects_mislabeled_green_assets(self):
+        from backend.api.knowledge import _is_formal_certification_asset
+
+        self.assertTrue(
+            _is_formal_certification_asset(
+                {
+                    "title": "泰昌质量管理体系认证证书第1页",
+                    "description": "质量管理体系认证证书",
+                    "metadata": {"enterprise": "泰昌", "source_domain": "enterprise_fact", "evidence_type": "certification"},
+                }
+            )
+        )
+        self.assertFalse(
+            _is_formal_certification_asset(
+                {
+                    "title": "泰昌绿色发展规划报告第1页",
+                    "description": "绿色发展规划报告 附件提到认证证书",
+                    "metadata": {"enterprise": "泰昌", "source_domain": "enterprise_fact", "evidence_type": "certification"},
+                }
+            )
+        )
 
 
 if __name__ == "__main__":

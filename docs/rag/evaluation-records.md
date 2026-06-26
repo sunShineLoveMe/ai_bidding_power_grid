@@ -8,6 +8,44 @@
 
 ---
 
+## Run 20260626 — 阿里云资质证书负向来源过滤热修（2026-06-26）
+
+> 自动门禁：`docs/rag/runs/run_20260626_aliyun_cert_negative_filter_hotfix_summary.md`
+> 增量门禁：`docs/rag/runs/run_20260626_aliyun_cert_negative_filter_hotfix_incremental_summary.md`
+> 真实 stream：`docs/rag/runs/run_20260626_aliyun_cert_negative_filter_hotfix_stream.jsonl`
+
+### 触发原因
+
+阿里云发布 `f97b31a` 后，容器代码检查确认存在 `_is_formal_certification_context`，但线上源码显示过滤顺序存在缺陷：先用泛化“认证证书”命中返回 True，再执行 ESG/绿色发展/废水类负向排除。若绿色发展、ESG、废水废气废固资料被误标为 `certification`，或正文/说明中带有“认证证书”，仍可能进入“泰昌有哪些资质证书？”的参考来源和回答资产。
+
+### 修复范围
+
+- 负向来源词优先拦截：`ESG`、`绿色发展规划`、`绿色供应链`、`碳足迹`、`废水废气`、`废水废气废固`。
+- 正式证书正向命中只保留三类体系认证证书：质量管理体系、环境管理体系、职业健康安全管理体系。
+- 资质证书查询不再在没有正式证书命中时回退填充绿色发展/ESG/废水类资料。
+- 资质证书查询下同步过滤图片资产输入，避免参考来源已收敛但答案正文仍被资产污染。
+
+### 结果
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 275 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 597 ms |
+| 泰昌专项 | off | 93.3% | 100.0% | 0.933 | 3.3% | 0.0% | 356 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 694 ms |
+
+- 定向单测：`PYTHONPATH=. .venv/bin/pytest tests/test_rag_retrieval.py -q`，27 passed。
+- 本地 RAG 门禁：PASS，api_ready / rag_unit_tests / incremental_regression_gate / stream_sample 全部通过。
+- 真实 `/api/knowledge/search/stream` 资质证书问题：PASS，contexts=3，assets=6，BAD_TERMS=[]。
+- `raw_contexts` 仅包含：质量管理体系认证证书、环境管理体系认证证书、职业健康安全管理体系认证证书。
+- 本轮未新增资料、未执行入库、未批量修改数据库 metadata；仅调整检索后处理和资产输入过滤。
+
+### 结论
+
+本地热修通过，需发布到阿里云后重新执行线上 `/api/knowledge/search/stream` 抽样和真实页面复测，再关闭 P1C-15。
+
+---
+
 ## Run 20260626 — 阿里云企业库展示与来源收敛本地收口（2026-06-26）
 
 > 汇总：`docs/rag/runs/run_20260626_aliyun_enterprise_source_convergence_final_review.md`
