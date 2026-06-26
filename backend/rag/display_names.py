@@ -171,12 +171,14 @@ def sanitize_source_metadata(metadata: dict[str, Any] | None, fallback_title: st
     if not _contains_chinese(source_document_name) or _is_internal_name(source_document_name):
         source_document_name = meta["source_display_name"]
     meta["source_document_name"] = source_document_name
-    if meta.get("source_category") == "05_enterprise_documents" or meta.get("source_domain") == "enterprise_fact":
-        meta["category_label"] = category_display_name(meta.get("source_category") or "05_enterprise_documents")
-    elif meta.get("category_label"):
+    if meta.get("category_label"):
         meta["category_label"] = category_display_name(meta.get("category_label"))
+        if meta["category_label"] == "泰昌企业资料" and meta.get("evidence_type"):
+            meta["category_label"] = category_display_name(meta.get("evidence_type"))
     elif meta.get("category"):
         meta["category_label"] = category_display_name(meta.get("category"))
+    elif meta.get("evidence_type"):
+        meta["category_label"] = category_display_name(meta.get("evidence_type"))
     elif meta.get("source_category"):
         meta["category_label"] = category_display_name(meta.get("source_category"))
     if meta.get("source_category"):

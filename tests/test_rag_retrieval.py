@@ -882,6 +882,142 @@ class RagRetrievalQualityTest(unittest.TestCase):
             )
         )
 
+    def test_pilot_enterprise_contexts_scope_production_query_away_from_green_reports(self):
+        from backend.api.knowledge import _curate_pilot_enterprise_contexts
+
+        common = {
+            "enterprise": "泰昌",
+            "source_domain": "enterprise_fact",
+            "fact_source_allowed_for_enterprise": True,
+            "reference_only": False,
+        }
+        contexts = [
+            {
+                "id": "esg",
+                "content": "ESG环境社会公司治理报告中提到生产节能。",
+                "similarity": 0.99,
+                "metadata": {**common, "source_display_name": "ESG环境社会公司治理报告", "evidence_type": "green_low_carbon"},
+            },
+            {
+                "id": "factory",
+                "content": "泰昌厂房、车间和生产线资料。",
+                "similarity": 0.7,
+                "metadata": {**common, "source_display_name": "厂房图片", "evidence_type": "production_capacity"},
+            },
+            {
+                "id": "mpp-line",
+                "content": "MPP生产线设备照片。",
+                "similarity": 0.68,
+                "metadata": {**common, "source_display_name": "MPP生产线", "evidence_type": "production_capacity"},
+            },
+        ]
+
+        result = _curate_pilot_enterprise_contexts(
+            contexts,
+            limit=5,
+            query="泰昌有哪些生产制造能力资料？",
+        )
+
+        self.assertEqual([item["id"] for item in result], ["factory", "mpp-line"])
+
+    def test_pilot_enterprise_contexts_scope_personnel_query_away_from_certificates(self):
+        from backend.api.knowledge import _curate_pilot_enterprise_contexts
+
+        common = {
+            "enterprise": "泰昌",
+            "source_domain": "enterprise_fact",
+            "fact_source_allowed_for_enterprise": True,
+            "reference_only": False,
+        }
+        contexts = [
+            {
+                "id": "ohs",
+                "content": "职业健康安全管理体系认证证书。",
+                "similarity": 0.95,
+                "metadata": {**common, "source_display_name": "职业健康安全管理体系认证证书", "evidence_type": "certification"},
+            },
+            {
+                "id": "social-security",
+                "content": "泰昌社保证明、参保证明。",
+                "similarity": 0.7,
+                "metadata": {**common, "source_display_name": "泰昌社保证明（第1页）", "evidence_type": "personnel_certificate"},
+            },
+            {
+                "id": "roster",
+                "content": "泰昌公司人员花名册。",
+                "similarity": 0.68,
+                "metadata": {**common, "source_display_name": "泰昌公司人员花名册", "evidence_type": "personnel_certificate"},
+            },
+        ]
+
+        result = _curate_pilot_enterprise_contexts(
+            contexts,
+            limit=5,
+            query="泰昌有哪些人员证书或社保证明？",
+        )
+
+        self.assertEqual([item["id"] for item in result], ["social-security", "roster"])
+
+    def test_pilot_enterprise_contexts_scope_green_query_keeps_green_sources(self):
+        from backend.api.knowledge import _curate_pilot_enterprise_contexts
+
+        common = {
+            "enterprise": "泰昌",
+            "source_domain": "enterprise_fact",
+            "fact_source_allowed_for_enterprise": True,
+            "reference_only": False,
+        }
+        contexts = [
+            {
+                "id": "quality",
+                "content": "质量管理体系认证证书。",
+                "similarity": 0.99,
+                "metadata": {**common, "source_display_name": "质量管理体系认证证书", "evidence_type": "certification"},
+            },
+            {
+                "id": "green-plan",
+                "content": "绿色发展规划报告。",
+                "similarity": 0.7,
+                "metadata": {**common, "source_display_name": "绿色发展规划报告", "evidence_type": "green_low_carbon"},
+            },
+            {
+                "id": "green-chain",
+                "content": "绿色供应链认证证书。",
+                "similarity": 0.68,
+                "metadata": {**common, "source_display_name": "绿色供应链认证证书", "evidence_type": "certification"},
+            },
+        ]
+
+        result = _curate_pilot_enterprise_contexts(
+            contexts,
+            limit=5,
+            query="泰昌有哪些绿色低碳资料？",
+        )
+
+        self.assertEqual([item["id"] for item in result], ["green-plan", "green-chain"])
+
+    def test_asset_query_scope_filters_production_assets_away_from_green_assets(self):
+        from backend.api.knowledge import _filter_assets_for_query_scope
+
+        assets = [
+            {
+                "id": "green",
+                "title": "泰昌ESG环境社会公司治理报告第7页",
+                "description": "ESG环境社会公司治理报告",
+                "metadata": {"enterprise": "泰昌", "source_domain": "enterprise_fact", "evidence_type": "green_low_carbon"},
+            },
+            {
+                "id": "factory",
+                "title": "厂房图片",
+                "description": "生产制造能力资料",
+                "metadata": {"enterprise": "泰昌", "source_domain": "enterprise_fact", "evidence_type": "production_capacity"},
+            },
+        ]
+
+        result = _filter_assets_for_query_scope(assets, "泰昌有哪些生产制造能力资料？")
+
+        self.assertEqual([asset["id"] for asset in result], ["factory"])
+
 
 if __name__ == "__main__":
     unittest.main()

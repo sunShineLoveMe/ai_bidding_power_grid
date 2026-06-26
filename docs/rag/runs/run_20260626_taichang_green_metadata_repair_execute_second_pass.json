@@ -1,0 +1,82 @@
+{
+  "dry_run": false,
+  "assets_scanned": 221,
+  "assets_updated": 0,
+  "chunks_scanned": 1208,
+  "chunks_updated": 9,
+  "asset_updates": [],
+  "chunk_updates": [
+    {
+      "id": "8284dab9-8c1e-4028-984f-983226a54c74",
+      "green_document_type": "绿色发展规划报告",
+      "old_source_display_name": "泰昌资质证书资料",
+      "new_source_display_name": "绿色发展规划报告",
+      "old_evidence_type": "certification",
+      "new_evidence_type": "green_low_carbon"
+    },
+    {
+      "id": "6ade9bd4-9bef-4d2d-98af-ecf974a14609",
+      "green_document_type": "绿色发展规划报告",
+      "old_source_display_name": "碳足迹报告",
+      "new_source_display_name": "碳足迹报告",
+      "old_evidence_type": "green_low_carbon",
+      "new_evidence_type": "green_low_carbon"
+    },
+    {
+      "id": "d5c2cf74-ac4e-4f69-895f-06e1924b70eb",
+      "green_document_type": "绿色发展规划报告",
+      "old_source_display_name": "废水废气废固报告",
+      "new_source_display_name": "废水废气废固报告",
+      "old_evidence_type": "green_low_carbon",
+      "new_evidence_type": "green_low_carbon"
+    },
+    {
+      "id": "077ecca2-fd12-4c50-ac2f-643192ee6fee",
+      "green_document_type": "绿色发展规划报告",
+      "old_source_display_name": "碳足迹报告",
+      "new_source_display_name": "碳足迹报告",
+      "old_evidence_type": "green_low_carbon",
+      "new_evidence_type": "green_low_carbon"
+    },
+    {
+      "id": "ec6ecf83-b8cc-46c8-881b-de3745cd2bdc",
+      "green_document_type": "绿色发展规划报告",
+      "old_source_display_name": "碳足迹报告",
+      "new_source_display_name": "碳足迹报告",
+      "old_evidence_type": "green_low_carbon",
+      "new_evidence_type": "green_low_carbon"
+    },
+    {
+      "id": "b3fb4b8c-b577-4e29-8c38-c864c8991328",
+      "green_document_type": "绿色发展规划报告",
+      "old_source_display_name": "废水废气废固报告",
+      "new_source_display_name": "废水废气废固报告",
+      "old_evidence_type": "green_low_carbon",
+      "new_evidence_type": "green_low_carbon"
+    },
+    {
+      "id": "6fb181a5-363c-4265-8a0a-f241098e7349",
+      "green_document_type": "绿色发展规划报告",
+      "old_source_display_name": "废水废气废固报告",
+      "new_source_display_name": "废水废气废固报告",
+      "old_evidence_type": "green_low_carbon",
+      "new_evidence_type": "green_low_carbon"
+    },
+    {
+      "id": "7e7da991-b4e6-4236-810a-b2a359b603f2",
+      "green_document_type": "绿色发展规划报告",
+      "old_source_display_name": "废水废气废固报告",
+      "new_source_display_name": "废水废气废固报告",
+      "old_evidence_type": "green_low_carbon",
+      "new_evidence_type": "green_low_carbon"
+    },
+    {
+      "id": "c25e9068-4eb9-4ae7-aa0a-a9c9be5908cc",
+      "green_document_type": "绿色发展规划报告",
+      "old_source_display_name": "碳足迹报告",
+      "new_source_display_name": "碳足迹报告",
+      "old_evidence_type": "green_low_carbon",
+      "new_evidence_type": "green_low_carbon"
+    }
+  ]
+}

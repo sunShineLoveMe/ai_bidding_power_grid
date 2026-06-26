@@ -304,9 +304,28 @@ def _is_certification_query(query: str) -> bool:
     return any(keyword in (query or "") for keyword in ["资质证书", "体系认证", "认证证书"])
 
 
-def _is_formal_certification_context(context: dict[str, Any]) -> bool:
+def _query_evidence_scope(query: str) -> str | None:
+    text = query or ""
+    if _is_certification_query(text):
+        return "formal_certification"
+    if any(keyword in text for keyword in ["绿色低碳", "绿色发展", "绿色供应链", "ESG", "碳足迹", "废水废气", "废水废气废固"]):
+        return "green_low_carbon"
+    if any(keyword in text for keyword in ["人员证书", "社保证明", "参保证明", "劳动合同", "人员花名册"]):
+        return "personnel_certificate"
+    if any(keyword in text for keyword in ["检验报告", "检测报告", "型式试验报告"]):
+        return "inspection_report"
+    if any(keyword in text for keyword in ["生产制造能力", "生产能力", "生产线", "厂房", "车间"]):
+        return "production_capacity"
+    if any(keyword in text for keyword in ["试验检测设备", "检测设备", "试验设备"]):
+        return "testing_capacity"
+    if any(keyword in text for keyword in ["营业执照", "基础证照"]):
+        return "business_license"
+    return None
+
+
+def _context_text_for_scope(context: dict[str, Any]) -> str:
     meta = _safe_meta(context)
-    text = " ".join(
+    return " ".join(
         str(value or "")
         for value in [
             meta.get("source_display_name"),
@@ -314,9 +333,40 @@ def _is_formal_certification_context(context: dict[str, Any]) -> bool:
             meta.get("source_file"),
             meta.get("evidence_type"),
             meta.get("evidence_type_label"),
+            meta.get("category_label"),
             context.get("content"),
         ]
     )
+
+
+def _context_matches_query_scope(context: dict[str, Any], scope: str | None) -> bool:
+    if not scope:
+        return True
+    meta = _safe_meta(context)
+    evidence_type = str(meta.get("evidence_type") or "")
+    text = _context_text_for_scope(context)
+    if scope == "formal_certification":
+        return _is_formal_certification_context(context)
+    if scope == "green_low_carbon":
+        return evidence_type == "green_low_carbon" or any(
+            keyword in text for keyword in ["绿色低碳", "绿色发展", "绿色供应链", "ESG", "碳足迹", "废水废气", "废水废气废固"]
+        )
+    if scope == "personnel_certificate":
+        return evidence_type == "personnel_certificate" or any(keyword in text for keyword in ["人员证书", "社保证明", "参保证明", "劳动合同", "人员花名册"])
+    if scope == "inspection_report":
+        return evidence_type == "inspection_report" or any(keyword in text for keyword in ["检验报告", "检测报告", "型式试验"])
+    if scope == "production_capacity":
+        return evidence_type == "production_capacity" or any(keyword in text for keyword in ["生产制造能力", "生产线", "厂房", "车间"])
+    if scope == "testing_capacity":
+        return evidence_type == "testing_capacity" or any(keyword in text for keyword in ["试验检测设备", "检测设备", "试验设备"])
+    if scope == "business_license":
+        return evidence_type == "business_license" or "营业执照" in text
+    return True
+
+
+def _is_formal_certification_context(context: dict[str, Any]) -> bool:
+    meta = _safe_meta(context)
+    text = _context_text_for_scope(context)
 
     # 负向企业宣传/环保资料必须先拦截。线上存在被误标为 certification 的绿色发展、
     # ESG、废水废气废固资料，不能因为正文中出现泛化“认证证书”就进入资质证书回答。
@@ -331,9 +381,9 @@ def _is_formal_certification_context(context: dict[str, Any]) -> bool:
     return False
 
 
-def _is_formal_certification_asset(asset: dict[str, Any]) -> bool:
+def _asset_as_source_context(asset: dict[str, Any]) -> dict[str, Any]:
     metadata = asset.get("metadata") if isinstance(asset.get("metadata"), dict) else {}
-    context = {
+    return {
         "content": " ".join(
             str(value or "")
             for value in [
@@ -352,6 +402,24 @@ def _is_formal_certification_asset(asset: dict[str, Any]) -> bool:
             "source_file": metadata.get("source_file") or asset.get("file_name"),
         },
     }
+
+
+def _is_formal_certification_asset(asset: dict[str, Any]) -> bool:
+    return _is_formal_certification_context(_asset_as_source_context(asset))
+
+
+def _asset_matches_query_scope(asset: dict[str, Any], scope: str | None) -> bool:
+    return _context_matches_query_scope(_asset_as_source_context(asset), scope)
+
+
+def _filter_assets_for_query_scope(assets: list[dict[str, Any]], query: str) -> list[dict[str, Any]]:
+    scope = _query_evidence_scope(query)
+    if not scope:
+        return assets
+    filtered = [asset for asset in assets if _asset_matches_query_scope(asset, scope)]
+    if filtered or scope == "formal_certification":
+        return filtered
+    return assets
     return _is_formal_certification_context(context)
 
 
@@ -376,9 +444,11 @@ def _curate_pilot_enterprise_contexts(
         key=lambda item: float(item.get("similarity") or 0) + _enterprise_context_intent_bonus(query, item),
         reverse=True,
     )
-    if _is_certification_query(query):
-        certification_contexts = [item for item in ranked if _is_formal_certification_context(item)]
-        return certification_contexts[:limit]
+    scope = _query_evidence_scope(query)
+    if scope:
+        scoped_contexts = [item for item in ranked if _context_matches_query_scope(item, scope)]
+        if scoped_contexts or scope == "formal_certification":
+            return scoped_contexts[:limit]
     return ranked[:limit]
 
 
@@ -554,8 +624,7 @@ def search_knowledge():
         assets = sanitize_knowledge_assets(
             search_knowledge_assets(query, match_count=12, metadata_filter=asset_metadata_filter)[:8]
         )
-        if _is_certification_query(query):
-            assets = [asset for asset in assets if _is_formal_certification_asset(asset)]
+        assets = _filter_assets_for_query_scope(assets, query)
         contexts = _merge_asset_source_contexts(contexts, assets, limit=5, query=query)
         
         # 2. RAG 生成回答
@@ -624,8 +693,7 @@ def stream_search_knowledge():
             assets = sanitize_knowledge_assets(
                 search_knowledge_assets(query, match_count=12, metadata_filter=asset_metadata_filter)[:8]
             )
-            if _is_certification_query(query):
-                assets = [asset for asset in assets if _is_formal_certification_asset(asset)]
+            assets = _filter_assets_for_query_scope(assets, query)
             contexts = _merge_asset_source_contexts(contexts, assets, limit=5, query=query)
             if not contexts and not assets and not is_relevant_knowledge_query(query):
                 yield emit({

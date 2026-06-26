@@ -1,0 +1,82 @@
+{
+  "run_id": "run_20260626_taichang_enterprise_source_scope_final",
+  "generated_at": "2026-06-26T03:22:55.425400+00:00",
+  "status": "pass",
+  "steps": [
+    {
+      "name": "api_ready",
+      "status": "pass",
+      "duration_ms": 2215,
+      "detail": "http=200; status=ok; failed_checks=[]",
+      "artifact": null
+    },
+    {
+      "name": "rag_unit_tests",
+      "status": "pass",
+      "duration_ms": 1073,
+      "detail": "exit_code=0",
+      "artifact": "docs/rag/runs/run_20260626_taichang_enterprise_source_scope_final_pytest.log"
+    },
+    {
+      "name": "incremental_regression_gate",
+      "status": "pass",
+      "duration_ms": 61573,
+      "detail": "exit_code=0",
+      "artifact": "docs/rag/runs/run_20260626_taichang_enterprise_source_scope_final_incremental_gate.log"
+    },
+    {
+      "name": "stream_sample",
+      "status": "pass",
+      "duration_ms": 7263,
+      "detail": "done=True; contexts=3; assets=6; images=6; error=None",
+      "artifact": "docs/rag/runs/run_20260626_taichang_enterprise_source_scope_final_stream.jsonl"
+    }
+  ],
+  "ready": {
+    "checks": {
+      "celery": {
+        "status": "ok",
+        "workers": 3
+      },
+      "database": {
+        "checks": {
+          "match_knowledge_assets": true,
+          "match_knowledge_chunks": true,
+          "vector": true
+        },
+        "status": "ok"
+      },
+      "model_config": {
+        "optional": {
+          "mineru_api_token": true
+        },
+        "required": {
+          "dashscope_api_key": true,
+          "deepseek_api_key": true
+        },
+        "status": "ok"
+      },
+      "redis": {
+        "host": "127.0.0.1",
+        "port": 16379,
+        "status": "ok"
+      },
+      "storage": {
+        "provider": "local",
+        "root": "storage",
+        "status": "ok"
+      }
+    },
+    "duration_ms": 2206,
+    "status": "ok"
+  },
+  "stream_summary": {
+    "done": true,
+    "error": null,
+    "contexts_count": 3,
+    "assets_count": 6,
+    "images_count": 6,
+    "chunks": 365
+  },
+  "gate_summary_path": "docs/rag/runs/run_20260626_taichang_enterprise_source_scope_final_incremental_summary.md"
+}
