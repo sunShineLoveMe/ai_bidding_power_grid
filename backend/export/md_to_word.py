@@ -72,15 +72,26 @@ FORMAL_SIGNATURE_LINE_RE = re.compile(
     r"单位名称|统一社会信用代码|通讯地址|联系电话|传真|身份证号码|"
     r"日期|投标日期|授权日期|签署日期)\s*[（(]?(?:盖章|签字|签名|签字或盖章|盖单位章)?[）)]?\s*[：:]"
 )
-DOCX_TOC_MAX_LEVEL = int(os.getenv("DOCX_TOC_MAX_LEVEL", "4"))
+DOCX_TOC_MAX_LEVEL = int(os.getenv("DOCX_TOC_MAX_LEVEL", "2"))
 DOCX_TEMPLATE_ID = os.getenv("DOCX_TEMPLATE_ID", "formal_bid_standard")
 DOCX_BIDDER_FULL_NAME = os.getenv("DOCX_BIDDER_FULL_NAME", "河北泰昌电力器材科技有限公司")
 DOCX_BODY_EAST_ASIA = os.getenv("DOCX_BODY_EAST_ASIA", os.getenv("DOCX_CJK_BODY_FONT", "FangSong_GB2312"))
 DOCX_HEADING_EAST_ASIA = os.getenv("DOCX_HEADING_EAST_ASIA", os.getenv("DOCX_CJK_HEADING_FONT", "SimHei"))
 DOCX_LEVEL3_EAST_ASIA = os.getenv("DOCX_LEVEL3_EAST_ASIA", "KaiTi_GB2312")
 DOCX_BODY_LATIN = os.getenv("DOCX_BODY_LATIN", "Times New Roman")
-DOCX_BODY_FONT_SIZE = float(os.getenv("DOCX_BODY_FONT_SIZE", "14"))
-DOCX_BODY_LINE_SPACING = float(os.getenv("DOCX_BODY_LINE_SPACING", "22"))
+DOCX_BODY_FONT_SIZE = float(os.getenv("DOCX_BODY_FONT_SIZE", "12"))
+_DOCX_BODY_LINE_SPACING_RAW = os.getenv("DOCX_BODY_LINE_SPACING")
+_DOCX_BODY_LINE_SPACING_RULE_RAW = os.getenv("DOCX_BODY_LINE_SPACING_RULE")
+if _DOCX_BODY_LINE_SPACING_RULE_RAW:
+    DOCX_BODY_LINE_SPACING_RULE = _DOCX_BODY_LINE_SPACING_RULE_RAW.strip().lower()
+elif _DOCX_BODY_LINE_SPACING_RAW:
+    try:
+        DOCX_BODY_LINE_SPACING_RULE = "exact" if float(_DOCX_BODY_LINE_SPACING_RAW) > 3 else "multiple"
+    except ValueError:
+        DOCX_BODY_LINE_SPACING_RULE = "multiple"
+else:
+    DOCX_BODY_LINE_SPACING_RULE = "multiple"
+DOCX_BODY_LINE_SPACING = float(_DOCX_BODY_LINE_SPACING_RAW or ("1.5" if DOCX_BODY_LINE_SPACING_RULE == "multiple" else "22"))
 DOCX_BODY_FIRST_LINE_INDENT_PT = float(os.getenv("DOCX_BODY_FIRST_LINE_INDENT_PT", str(DOCX_BODY_FONT_SIZE * 2)))
 DOCX_LIST_LEFT_INDENT_PT = float(os.getenv("DOCX_LIST_LEFT_INDENT_PT", str(DOCX_BODY_FONT_SIZE * 2)))
 DOCX_LIST_HANGING_INDENT_PT = float(os.getenv("DOCX_LIST_HANGING_INDENT_PT", str(DOCX_BODY_FONT_SIZE)))
@@ -95,8 +106,8 @@ DOCX_HEADER_DISTANCE_CM = float(os.getenv("DOCX_HEADER_DISTANCE_CM", "0.8"))
 DOCX_FOOTER_DISTANCE_CM = float(os.getenv("DOCX_FOOTER_DISTANCE_CM", "1.48"))
 DOCX_COVER_TITLE_FONT_SIZE = float(os.getenv("DOCX_COVER_TITLE_FONT_SIZE", "36"))
 DOCX_TOC_TITLE_FONT_SIZE = float(os.getenv("DOCX_TOC_TITLE_FONT_SIZE", "16"))
-DOCX_TOC_ENTRY_FONT_SIZE = float(os.getenv("DOCX_TOC_ENTRY_FONT_SIZE", "12"))
-DOCX_TOC_ENTRY_LINE_SPACING = float(os.getenv("DOCX_TOC_ENTRY_LINE_SPACING", "18"))
+DOCX_TOC_ENTRY_FONT_SIZE = float(os.getenv("DOCX_TOC_ENTRY_FONT_SIZE", "10.5"))
+DOCX_TOC_ENTRY_LINE_SPACING = float(os.getenv("DOCX_TOC_ENTRY_LINE_SPACING", "15"))
 DOCX_TABLE_LINE_SPACING = float(os.getenv("DOCX_TABLE_LINE_SPACING", "18"))
 DOCX_TABLE_CELL_MARGIN_TWIPS = int(os.getenv("DOCX_TABLE_CELL_MARGIN_TWIPS", "100"))
 DOCX_TAICHANG_LOGO_PATH = os.getenv("DOCX_TAICHANG_LOGO_PATH", "assets/icons/taichang_logo.png")
@@ -104,6 +115,120 @@ DOCX_COVER_LOGO_WIDTH_IN = float(os.getenv("DOCX_COVER_LOGO_WIDTH_IN", "1.65"))
 DOCX_COVER_SHOW_LOGO = os.getenv("DOCX_COVER_SHOW_LOGO", "false").lower() in {"1", "true", "yes", "on"}
 DOCX_HEADER_LOGO_WIDTH_IN = float(os.getenv("DOCX_HEADER_LOGO_WIDTH_IN", "0.55"))
 DOCX_IMAGE_MAX_HEIGHT_IN = float(os.getenv("DOCX_IMAGE_MAX_HEIGHT_IN", "9.0"))
+DOCX_IMAGE_UNIFORM_FRAME = os.getenv("DOCX_IMAGE_UNIFORM_FRAME", "true").lower() in {"1", "true", "yes", "on"}
+DOCX_IMAGE_FRAME_WIDTH_IN = float(os.getenv("DOCX_IMAGE_FRAME_WIDTH_IN", "5.8"))
+DOCX_IMAGE_FRAME_HEIGHT_IN = float(os.getenv("DOCX_IMAGE_FRAME_HEIGHT_IN", "8.2"))
+DOCX_IMAGE_FRAME_DPI = int(os.getenv("DOCX_IMAGE_FRAME_DPI", "220"))
+DOCX_IMAGE_FRAME_BACKGROUND = os.getenv("DOCX_IMAGE_FRAME_BACKGROUND", "FFFFFF")
+DOCX_TOC_ENTRY_BOLD_ALL = os.getenv("DOCX_TOC_ENTRY_BOLD_ALL", "false").lower() in {"1", "true", "yes", "on"}
+DOCX_REFERENCE_TEMPLATE_SOURCES = (
+    {
+        "path": "assets/template_words/5d2a2c833dad4bb3b3ccc0856f755b54.docx",
+        "role": "primary_reference_style",
+        "usage": "抽取目录、页边距、封面字段、表格和签章位风格，作为 formal_bid_standard 的参考规则，不直接套打正文。",
+    },
+    {
+        "path": "assets/template_words/1523993.doc",
+        "role": "secondary_legacy_reference",
+        "usage": "旧版二进制 Word 参考稿，仅用于补充格式项比对，不作为运行时模板依赖。",
+    },
+)
+DOCX_XINJIANG_TECHNICAL_REFERENCE_PATH = "assets/template_words/技术文件 - 10kV架空绝缘导线-新疆.docx"
+DOCX_XINJIANG_BUSINESS_REFERENCE_PATH = "assets/template_words/商务文件 - 10kV架空绝缘导线-新疆(1).docx"
+DOCX_REFERENCE_MARGIN_CM = 3.17
+DOCX_REFERENCE_HEADER_DISTANCE_CM = 1.5
+DOCX_REFERENCE_FOOTER_DISTANCE_CM = 1.75
+
+DOCX_TEMPLATE_PROFILES = {
+    "formal_bid_standard": {
+        "template_id": DOCX_TEMPLATE_ID,
+        "template_family": "formal_bid_standard",
+        "applies_to": "full_or_generic_bid",
+        "reference_source": "system_default_plus_reference_templates",
+        "reference_path": None,
+        "runtime_policy": "内置稳定模板生成，不直接套用客户/兄弟公司成稿。",
+        "margins_cm": {
+            "top": DOCX_PAGE_MARGIN_TOP_CM,
+            "bottom": DOCX_PAGE_MARGIN_BOTTOM_CM,
+            "left": DOCX_PAGE_MARGIN_LEFT_CM,
+            "right": DOCX_PAGE_MARGIN_RIGHT_CM,
+        },
+        "header_distance_cm": DOCX_HEADER_DISTANCE_CM,
+        "footer_distance_cm": DOCX_FOOTER_DISTANCE_CM,
+        "toc_max_level": DOCX_TOC_MAX_LEVEL,
+        "toc_entry_font_size_pt": DOCX_TOC_ENTRY_FONT_SIZE,
+        "toc_entry_line_spacing_pt": DOCX_TOC_ENTRY_LINE_SPACING,
+        "toc_font": DOCX_BODY_EAST_ASIA,
+        "header_footer_font": DOCX_BODY_EAST_ASIA,
+        "toc_entry_bold_all": DOCX_TOC_ENTRY_BOLD_ALL,
+        "table_header_fill": "EDEDED",
+        "reference_outline": [],
+    },
+    "technical_bid_standard": {
+        "template_id": "technical_bid_standard",
+        "template_family": "formal_bid_xinjiang_sgcc_reference",
+        "applies_to": "technical_bid_volume",
+        "reference_source": "新疆10kV架空绝缘导线中标技术文件",
+        "reference_path": DOCX_XINJIANG_TECHNICAL_REFERENCE_PATH,
+        "runtime_policy": "仅抽取版式、目录组织和分册结构；禁止复用参考稿企业事实、产品参数、证书和附件内容。",
+        "margins_cm": {
+            "top": 2.54,
+            "bottom": 2.54,
+            "left": DOCX_REFERENCE_MARGIN_CM,
+            "right": DOCX_REFERENCE_MARGIN_CM,
+        },
+        "header_distance_cm": DOCX_REFERENCE_HEADER_DISTANCE_CM,
+        "footer_distance_cm": DOCX_REFERENCE_FOOTER_DISTANCE_CM,
+        "toc_max_level": 4,
+        "toc_entry_font_size_pt": 10.5,
+        "toc_entry_line_spacing_pt": 15,
+        "toc_font": "宋体",
+        "header_footer_font": "宋体",
+        "toc_entry_bold_all": False,
+        "table_header_fill": "EDEDED",
+        "reference_outline": [
+            "技术偏差表",
+            "技术特性参数表",
+            "技术规范点对点应答",
+            "货物组件材料配置表",
+            "评审要素补充技术文件",
+            "检测检验报告",
+            "其他技术附件",
+        ],
+    },
+    "business_bid_standard": {
+        "template_id": "business_bid_standard",
+        "template_family": "formal_bid_xinjiang_sgcc_reference",
+        "applies_to": "business_bid_volume",
+        "reference_source": "新疆10kV架空绝缘导线中标商务文件",
+        "reference_path": DOCX_XINJIANG_BUSINESS_REFERENCE_PATH,
+        "runtime_policy": "仅抽取版式、目录组织和分册结构；禁止复用参考稿企业事实、查询报告、审计报告和授权文件内容。",
+        "margins_cm": {
+            "top": 2.54,
+            "bottom": 2.54,
+            "left": DOCX_REFERENCE_MARGIN_CM,
+            "right": DOCX_REFERENCE_MARGIN_CM,
+        },
+        "header_distance_cm": DOCX_REFERENCE_HEADER_DISTANCE_CM,
+        "footer_distance_cm": DOCX_REFERENCE_FOOTER_DISTANCE_CM,
+        "toc_max_level": 4,
+        "toc_entry_font_size_pt": 10.5,
+        "toc_entry_line_spacing_pt": 15,
+        "toc_font": "宋体",
+        "header_footer_font": "宋体",
+        "toc_entry_bold_all": False,
+        "table_header_fill": "EDEDED",
+        "reference_outline": [
+            "商务偏差表",
+            "补充文件",
+            "查询报告及截图",
+            "财务状况",
+            "评审要素补充商务材料",
+            "授权委托书",
+            "其他商务附件",
+        ],
+    },
+}
 
 COVER_FIELD_LABELS = (
     "项目名称",
@@ -124,6 +249,45 @@ def _is_invalid_cover_field_value(value: str) -> bool:
     return not normalized or normalized in labels
 
 
+def _copy_template_profile(profile_id: str) -> dict:
+    source = DOCX_TEMPLATE_PROFILES.get(profile_id) or DOCX_TEMPLATE_PROFILES["formal_bid_standard"]
+    profile: dict = {}
+    for key, value in source.items():
+        if isinstance(value, dict):
+            profile[key] = dict(value)
+        elif isinstance(value, list):
+            profile[key] = list(value)
+        else:
+            profile[key] = value
+    return profile
+
+
+def resolve_docx_template_profile(cover_fields: dict | None = None) -> dict:
+    """Select the formal DOCX rendering profile from the delivery file type."""
+    file_type = clean_formal_bid_text((cover_fields or {}).get("文件类型") or "")
+    if "技术" in file_type:
+        return _copy_template_profile("technical_bid_standard")
+    if "商务" in file_type:
+        return _copy_template_profile("business_bid_standard")
+    return _copy_template_profile("formal_bid_standard")
+
+
+def _template_profile_value(profile: dict | None, key: str, default):
+    if isinstance(profile, dict) and key in profile:
+        return profile[key]
+    return default
+
+
+def _template_profile_margins(profile: dict | None) -> dict:
+    margins = _template_profile_value(profile, "margins_cm", {}) or {}
+    return {
+        "top": float(margins.get("top", DOCX_PAGE_MARGIN_TOP_CM)),
+        "bottom": float(margins.get("bottom", DOCX_PAGE_MARGIN_BOTTOM_CM)),
+        "left": float(margins.get("left", DOCX_PAGE_MARGIN_LEFT_CM)),
+        "right": float(margins.get("right", DOCX_PAGE_MARGIN_RIGHT_CM)),
+    }
+
+
 def clean_formal_bid_text(text):
     """Remove emoji/decorative symbols that are unsuitable for formal bid DOCX output."""
     if text is None:
@@ -131,6 +295,7 @@ def clean_formal_bid_text(text):
     cleaned = FORMAL_BID_GENERATION_NOTE_RE.sub("", str(text))
     cleaned = FORMAL_TEXT_CONTROL_RE.sub("", cleaned)
     cleaned = FORMAL_TEXT_SYMBOL_RE.sub("", cleaned)
+    cleaned = re.sub(r"(?<=[\u4e00-\u9fff])[ \t]+(?=[\u4e00-\u9fff])", "", cleaned)
     cleaned = re.sub(r"[ \t]{2,}", " ", cleaned)
     return cleaned.strip()
 
@@ -140,9 +305,9 @@ def should_start_heading_on_new_page(level: int, text: str, heading_count: int) 
     if heading_count <= 0:
         return False
     clean_text = clean_formal_bid_text(text)
-    if level == 1:
+    if level <= 2:
         return True
-    if level == 2 and FORMAL_VOLUME_HEADING_RE.match(clean_text):
+    if FORMAL_VOLUME_HEADING_RE.match(clean_text):
         return True
     return False
 
@@ -164,13 +329,25 @@ def apply_run_font(run, *, east_asia=DOCX_BODY_EAST_ASIA, latin=DOCX_BODY_LATIN,
         run.font.size = Pt(size)
     if bold is not None:
         run.font.bold = bold
+    run.font.color.rgb = RGBColor(0, 0, 0)
+
+
+def apply_body_line_spacing(paragraph_format, *, line_spacing=DOCX_BODY_LINE_SPACING, rule=DOCX_BODY_LINE_SPACING_RULE) -> None:
+    normalized_rule = (rule or "multiple").strip().lower()
+    if normalized_rule in {"multiple", "1.5", "one_point_five", "one-and-half", "one_and_half"}:
+        paragraph_format.line_spacing = float(line_spacing)
+    elif normalized_rule in {"single", "1"}:
+        paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+        paragraph_format.line_spacing = 1.0
+    else:
+        paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
+        paragraph_format.line_spacing = Pt(float(line_spacing))
 
 
 def apply_paragraph_format(paragraph, *, first_line_chars=2, line_spacing=DOCX_BODY_LINE_SPACING, space_before=0, space_after=0):
     fmt = paragraph.paragraph_format
     fmt.first_line_indent = Pt(DOCX_BODY_FIRST_LINE_INDENT_PT if first_line_chars else 0)
-    fmt.line_spacing_rule = WD_LINE_SPACING.EXACTLY
-    fmt.line_spacing = Pt(line_spacing)
+    apply_body_line_spacing(fmt, line_spacing=line_spacing)
     fmt.space_before = Pt(space_before)
     fmt.space_after = Pt(space_after)
 
@@ -180,8 +357,7 @@ def apply_heading_paragraph_format(paragraph, level: int) -> None:
     fmt.first_line_indent = Pt(0)
     fmt.left_indent = Pt(0)
     fmt.right_indent = Pt(0)
-    fmt.line_spacing_rule = WD_LINE_SPACING.EXACTLY
-    fmt.line_spacing = Pt(DOCX_BODY_LINE_SPACING)
+    apply_body_line_spacing(fmt)
     fmt.space_before = Pt(6 if level <= 2 else 3)
     fmt.space_after = Pt(3)
 
@@ -191,8 +367,7 @@ def apply_list_paragraph_format(paragraph) -> None:
     fmt.first_line_indent = Pt(-DOCX_LIST_HANGING_INDENT_PT)
     fmt.left_indent = Pt(DOCX_LIST_LEFT_INDENT_PT)
     fmt.right_indent = Pt(0)
-    fmt.line_spacing_rule = WD_LINE_SPACING.EXACTLY
-    fmt.line_spacing = Pt(DOCX_BODY_LINE_SPACING)
+    apply_body_line_spacing(fmt)
     fmt.space_before = Pt(0)
     fmt.space_after = Pt(0)
 
@@ -228,6 +403,14 @@ def _set_font_size(rpr, size_pt: float) -> None:
             node = OxmlElement(tag)
             rpr.append(node)
         node.set(qn("w:val"), half_points)
+
+
+def _set_rpr_color(rpr, value: str = "000000") -> None:
+    color = rpr.find(qn("w:color"))
+    if color is None:
+        color = OxmlElement("w:color")
+        rpr.append(color)
+    color.set(qn("w:val"), value)
 
 
 def _remove_paragraph_marker_controls(ppr) -> None:
@@ -393,41 +576,62 @@ def merge_bid_cover_fields(markdown_fields: dict | None, structured_fields: dict
 
 
 def docx_template_report(cover_fields: dict | None = None) -> dict:
+    profile = resolve_docx_template_profile(cover_fields)
+    header_file_type = clean_formal_bid_text((cover_fields or {}).get("文件类型") or "投标文件") or "投标文件"
     return {
-        "template_id": DOCX_TEMPLATE_ID,
+        "template_id": profile.get("template_id") or DOCX_TEMPLATE_ID,
+        "template_family": profile.get("template_family"),
+        "applies_to": profile.get("applies_to"),
+        "reference_source": profile.get("reference_source"),
+        "reference_path": profile.get("reference_path"),
+        "runtime_policy": profile.get("runtime_policy"),
+        "reference_outline": profile.get("reference_outline") or [],
         "bidder_full_name": DOCX_BIDDER_FULL_NAME,
         "body_font": DOCX_BODY_EAST_ASIA,
         "body_latin_font": DOCX_BODY_LATIN,
         "body_font_size_pt": DOCX_BODY_FONT_SIZE,
-        "body_line_spacing_pt": DOCX_BODY_LINE_SPACING,
+        "body_line_spacing_rule": DOCX_BODY_LINE_SPACING_RULE,
+        "body_line_spacing": DOCX_BODY_LINE_SPACING,
+        "body_line_spacing_pt": None if DOCX_BODY_LINE_SPACING_RULE in {"multiple", "1.5", "one_point_five", "one-and-half", "one_and_half"} else DOCX_BODY_LINE_SPACING,
         "body_first_line_indent_pt": DOCX_BODY_FIRST_LINE_INDENT_PT,
         "list_left_indent_pt": DOCX_LIST_LEFT_INDENT_PT,
         "list_hanging_indent_pt": DOCX_LIST_HANGING_INDENT_PT,
         "heading_keep_with_next": False,
         "cover_title_font_size_pt": DOCX_COVER_TITLE_FONT_SIZE,
         "toc_title_font_size_pt": DOCX_TOC_TITLE_FONT_SIZE,
-        "toc_entry_font_size_pt": DOCX_TOC_ENTRY_FONT_SIZE,
-        "toc_entry_line_spacing_pt": DOCX_TOC_ENTRY_LINE_SPACING,
+        "toc_max_level": int(profile.get("toc_max_level") or DOCX_TOC_MAX_LEVEL),
+        "toc_font": profile.get("toc_font") or DOCX_BODY_EAST_ASIA,
+        "toc_entry_font_size_pt": float(profile.get("toc_entry_font_size_pt") or DOCX_TOC_ENTRY_FONT_SIZE),
+        "toc_entry_line_spacing_pt": float(profile.get("toc_entry_line_spacing_pt") or DOCX_TOC_ENTRY_LINE_SPACING),
         "table_font": DOCX_TABLE_EAST_ASIA,
         "table_font_size_pt": DOCX_TABLE_FONT_SIZE,
         "table_line_spacing_pt": DOCX_TABLE_LINE_SPACING,
         "table_cell_margin_twips": DOCX_TABLE_CELL_MARGIN_TWIPS,
-        "page_size": "A4",
-        "margins_cm": {
-            "top": DOCX_PAGE_MARGIN_TOP_CM,
-            "bottom": DOCX_PAGE_MARGIN_BOTTOM_CM,
-            "left": DOCX_PAGE_MARGIN_LEFT_CM,
-            "right": DOCX_PAGE_MARGIN_RIGHT_CM,
+        "table_header_fill": profile.get("table_header_fill") or "EDEDED",
+        "toc_entry_bold_all": bool(profile.get("toc_entry_bold_all", DOCX_TOC_ENTRY_BOLD_ALL)),
+        "reference_templates": list(DOCX_REFERENCE_TEMPLATE_SOURCES),
+        "reference_template_policy": "assets/template_words 仅作为格式参考源，按文件类型选择 technical_bid_standard / business_bid_standard / formal_bid_standard，不直接套用参考稿事实内容。",
+        "image_layout": {
+            "uniform_frame_enabled": DOCX_IMAGE_UNIFORM_FRAME,
+            "frame_width_in": DOCX_IMAGE_FRAME_WIDTH_IN,
+            "frame_height_in": DOCX_IMAGE_FRAME_HEIGHT_IN,
+            "frame_dpi": DOCX_IMAGE_FRAME_DPI,
+            "frame_background": DOCX_IMAGE_FRAME_BACKGROUND,
+            "content_policy": "contain_no_crop_no_distortion",
         },
+        "page_size": "A4",
+        "margins_cm": _template_profile_margins(profile),
         "heading_font": DOCX_HEADING_EAST_ASIA,
         "heading_level3_font": DOCX_LEVEL3_EAST_ASIA,
         "header_footer": {
-            "header_font": DOCX_BODY_EAST_ASIA,
+            "header_font": profile.get("header_footer_font") or DOCX_BODY_EAST_ASIA,
             "header_font_size_pt": 9,
-            "footer_font": DOCX_BODY_EAST_ASIA,
+            "footer_font": profile.get("header_footer_font") or DOCX_BODY_EAST_ASIA,
             "footer_font_size_pt": 9,
+            "header_logo": False,
+            "text_color": "000000",
             "page_number_format": "第 X 页 共 Y 页",
-            "header_text": "左侧项目名称，右侧投标文件",
+            "header_text": f"左侧项目名称，右侧{header_file_type}",
             "header_max_chars": DOCX_HEADER_MAX_CHARS,
         },
         "cover_fields": cover_fields or {},
@@ -489,11 +693,9 @@ def _add_internal_hyperlink(paragraph, text: str, anchor: str) -> None:
 
     run_element = OxmlElement("w:r")
     rpr = OxmlElement("w:rPr")
-    color = OxmlElement("w:color")
-    color.set(qn("w:val"), "1F4E79")
     underline = OxmlElement("w:u")
-    underline.set(qn("w:val"), "single")
-    rpr.append(color)
+    underline.set(qn("w:val"), "none")
+    _set_rpr_color(rpr)
     rpr.append(underline)
     _set_rpr_language(rpr)
     run_element.append(rpr)
@@ -533,6 +735,21 @@ def _image_pixel_size(image_path: str | Path) -> tuple[int, int] | None:
     except Exception:
         logging.exception("读取图片尺寸失败: %s", image_path)
         return None
+
+
+def _parse_rgb_hex(value: str, default: tuple[int, int, int] = (255, 255, 255)) -> tuple[int, int, int]:
+    cleaned = re.sub(r"[^0-9A-Fa-f]", "", value or "")[:6]
+    if len(cleaned) != 6:
+        return default
+    try:
+        return tuple(int(cleaned[index:index + 2], 16) for index in (0, 2, 4))
+    except ValueError:
+        return default
+
+
+def _image_resample_filter():
+    resampling = getattr(Image, "Resampling", None) if Image is not None else None
+    return getattr(resampling, "LANCZOS", getattr(Image, "LANCZOS", 1))
 
 
 def _fit_image_dimensions_for_docx(
@@ -575,6 +792,113 @@ def _fit_image_dimensions_for_docx(
         "display_height_in": round(display_height, 4),
         "aspect_ratio_preserved": aspect_delta < 0.001,
     }
+
+
+def _docx_image_frame_size(doc) -> tuple[float, float]:
+    width = min(DOCX_IMAGE_FRAME_WIDTH_IN, _page_text_width_inches(doc))
+    height = min(DOCX_IMAGE_FRAME_HEIGHT_IN, max(1.0, _page_text_height_inches(doc) - 0.35))
+    return round(width, 4), round(height, 4)
+
+
+def _standardize_image_frame_for_docx(
+    image_path: str | Path,
+    *,
+    frame_width_in: float,
+    frame_height_in: float,
+) -> tuple[str, bool, dict]:
+    """Render the source into a fixed white frame while preserving source content ratio."""
+    source_path = Path(image_path)
+    if Image is None or not DOCX_IMAGE_UNIFORM_FRAME:
+        width, height, metrics = _fit_image_dimensions_for_docx(
+            source_path,
+            max_width_in=frame_width_in,
+            max_height_in=frame_height_in,
+        )
+        metrics.update({
+            "uniform_frame_enabled": False,
+            "content_display_width_in": width,
+            "content_display_height_in": height,
+            "content_aspect_ratio_preserved": metrics.get("aspect_ratio_preserved"),
+        })
+        return str(source_path), False, metrics
+
+    try:
+        with Image.open(source_path) as source:
+            image = ImageOps.exif_transpose(source) if ImageOps is not None else source.copy()
+            source_width, source_height = image.size
+            if source_width <= 0 or source_height <= 0:
+                raise ValueError("invalid image size")
+
+            background = _parse_rgb_hex(DOCX_IMAGE_FRAME_BACKGROUND)
+            if image.mode in {"RGBA", "LA"} or ("transparency" in image.info):
+                rgba = image.convert("RGBA")
+                base = Image.new("RGBA", rgba.size, (*background, 255))
+                base.alpha_composite(rgba)
+                image = base.convert("RGB")
+            elif image.mode != "RGB":
+                image = image.convert("RGB")
+
+            frame_width_px = max(1, int(round(frame_width_in * DOCX_IMAGE_FRAME_DPI)))
+            frame_height_px = max(1, int(round(frame_height_in * DOCX_IMAGE_FRAME_DPI)))
+            scale = min(frame_width_px / source_width, frame_height_px / source_height)
+            content_width_px = max(1, int(round(source_width * scale)))
+            content_height_px = max(1, int(round(source_height * scale)))
+            resized = image.resize((content_width_px, content_height_px), _image_resample_filter())
+            canvas = Image.new("RGB", (frame_width_px, frame_height_px), background)
+            offset_x = (frame_width_px - content_width_px) // 2
+            offset_y = (frame_height_px - content_height_px) // 2
+            canvas.paste(resized, (offset_x, offset_y))
+
+            temp = tempfile.NamedTemporaryFile(suffix=".jpg", delete=False)
+            temp.close()
+            canvas.save(
+                temp.name,
+                "JPEG",
+                quality=DOCX_IMAGE_JPEG_QUALITY,
+                optimize=True,
+                progressive=True,
+                dpi=(DOCX_IMAGE_FRAME_DPI, DOCX_IMAGE_FRAME_DPI),
+            )
+            source_ratio = source_width / source_height
+            content_ratio = content_width_px / content_height_px
+            frame_ratio = frame_width_px / frame_height_px
+            return temp.name, True, {
+                "uniform_frame_enabled": True,
+                "source_pixel_width": source_width,
+                "source_pixel_height": source_height,
+                "source_aspect_ratio": round(source_ratio, 6),
+                "pixel_width": frame_width_px,
+                "pixel_height": frame_height_px,
+                "display_width_in": round(frame_width_in, 4),
+                "display_height_in": round(frame_height_in, 4),
+                "frame_aspect_ratio": round(frame_ratio, 6),
+                "content_pixel_width": content_width_px,
+                "content_pixel_height": content_height_px,
+                "content_display_width_in": round(content_width_px / DOCX_IMAGE_FRAME_DPI, 4),
+                "content_display_height_in": round(content_height_px / DOCX_IMAGE_FRAME_DPI, 4),
+                "content_offset_x_px": offset_x,
+                "content_offset_y_px": offset_y,
+                "aspect_ratio_preserved": True,
+                "content_aspect_ratio_preserved": abs((content_ratio - source_ratio) / source_ratio) < 0.01,
+                "frame_background": DOCX_IMAGE_FRAME_BACKGROUND,
+            }
+    except Exception:
+        logging.exception("图片统一尺寸框处理失败，退回等比例缩放: %s", image_path)
+        width, height, metrics = _fit_image_dimensions_for_docx(
+            source_path,
+            max_width_in=frame_width_in,
+            max_height_in=frame_height_in,
+        )
+        metrics.update({
+            "uniform_frame_enabled": False,
+            "uniform_frame_fallback": True,
+            "display_width_in": width,
+            "display_height_in": height,
+            "content_display_width_in": width,
+            "content_display_height_in": height,
+            "content_aspect_ratio_preserved": metrics.get("aspect_ratio_preserved"),
+        })
+        return str(source_path), False, metrics
 
 
 def _taichang_logo_path() -> Path | None:
@@ -784,8 +1108,7 @@ def _add_formal_signature_paragraph(doc, text: str) -> None:
     fmt.first_line_indent = Pt(0)
     fmt.left_indent = Pt(0)
     fmt.right_indent = Pt(14)
-    fmt.line_spacing_rule = WD_LINE_SPACING.EXACTLY
-    fmt.line_spacing = Pt(DOCX_BODY_LINE_SPACING)
+    apply_body_line_spacing(fmt)
     fmt.space_before = Pt(0)
     fmt.space_after = Pt(0)
     run = paragraph.add_run(text)
@@ -811,7 +1134,7 @@ def _mark_field_dirty(fld_char) -> None:
     fld_char.set(qn("w:fldLock"), "false")
 
 
-def _add_pageref_field(paragraph, bookmark_name: str, *, placeholder: str = "1") -> None:
+def _add_pageref_field(paragraph, bookmark_name: str, *, placeholder: str = "1", bold: bool = False, size: float = DOCX_TOC_ENTRY_FONT_SIZE, east_asia: str = DOCX_BODY_EAST_ASIA) -> None:
     """Add a Word PAGEREF field. Word/LibreOffice refreshes it into the real page number."""
     begin = paragraph.add_run()
     fld_begin = OxmlElement("w:fldChar")
@@ -831,7 +1154,7 @@ def _add_pageref_field(paragraph, bookmark_name: str, *, placeholder: str = "1")
     separate._r.append(fld_separate)
 
     result = paragraph.add_run(placeholder)
-    apply_run_font(result, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_TOC_ENTRY_FONT_SIZE)
+    apply_run_font(result, east_asia=east_asia, size=size, bold=bold)
 
     end = paragraph.add_run()
     fld_end = OxmlElement("w:fldChar")
@@ -843,21 +1166,34 @@ def _toc_entry_text(entry: dict) -> str:
     return clean_formal_bid_text(entry.get("text") or "").strip()
 
 
-def _add_formal_toc_entry(doc, entry: dict, *, tab_position_twips: int) -> None:
-    level = max(1, min(int(entry.get("level") or 1), DOCX_TOC_MAX_LEVEL))
+def _add_formal_toc_entry(doc, entry: dict, *, tab_position_twips: int, template_profile: dict | None = None) -> None:
+    toc_max_level = int(_template_profile_value(template_profile, "toc_max_level", DOCX_TOC_MAX_LEVEL))
+    toc_entry_font_size = float(_template_profile_value(template_profile, "toc_entry_font_size_pt", DOCX_TOC_ENTRY_FONT_SIZE))
+    toc_entry_line_spacing = float(_template_profile_value(template_profile, "toc_entry_line_spacing_pt", DOCX_TOC_ENTRY_LINE_SPACING))
+    toc_entry_bold = bool(_template_profile_value(template_profile, "toc_entry_bold_all", DOCX_TOC_ENTRY_BOLD_ALL))
+    toc_font = str(_template_profile_value(template_profile, "toc_font", DOCX_BODY_EAST_ASIA))
+    level = max(1, min(int(entry.get("level") or 1), toc_max_level))
     paragraph = doc.add_paragraph()
     fmt = paragraph.paragraph_format
     fmt.first_line_indent = Pt(0)
     fmt.left_indent = Pt((level - 1) * 18)
     fmt.line_spacing_rule = WD_LINE_SPACING.EXACTLY
-    fmt.line_spacing = Pt(DOCX_TOC_ENTRY_LINE_SPACING)
+    fmt.line_spacing = Pt(toc_entry_line_spacing)
+    fmt.space_before = Pt(0)
     fmt.space_after = Pt(0)
     _set_paragraph_right_dot_leader_tab(paragraph, position_twips=tab_position_twips)
 
     text_run = paragraph.add_run(_toc_entry_text(entry))
-    apply_run_font(text_run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_TOC_ENTRY_FONT_SIZE, bold=(level == 1))
+    apply_run_font(text_run, east_asia=toc_font, size=toc_entry_font_size, bold=toc_entry_bold)
     paragraph.add_run("\t")
-    _add_pageref_field(paragraph, str(entry.get("anchor") or ""), placeholder="1")
+    _add_pageref_field(
+        paragraph,
+        str(entry.get("anchor") or ""),
+        placeholder="1",
+        bold=toc_entry_bold,
+        size=toc_entry_font_size,
+        east_asia=toc_font,
+    )
 
 
 def _split_cover_title_lines(project_title: str) -> list[str]:
@@ -984,7 +1320,7 @@ def _add_cover_page(doc, project_name: str, cover_fields: dict | None = None, im
     doc.add_page_break()
 
 
-def _add_toc_page(doc, project_name: str, heading_entries: list[dict], cover_fields: dict | None = None, image_report: dict | None = None) -> None:
+def _add_toc_page(doc, project_name: str, heading_entries: list[dict], cover_fields: dict | None = None, image_report: dict | None = None, template_profile: dict | None = None) -> None:
     _add_cover_page(doc, project_name, cover_fields=cover_fields, image_report=image_report)
 
     toc_title = doc.add_paragraph()
@@ -995,9 +1331,10 @@ def _add_toc_page(doc, project_name: str, heading_entries: list[dict], cover_fie
     toc_run = toc_title.add_run("目  录")
     apply_run_font(toc_run, east_asia=DOCX_HEADING_EAST_ASIA, size=DOCX_TOC_TITLE_FONT_SIZE, bold=True)
 
+    toc_max_level = int(_template_profile_value(template_profile, "toc_max_level", DOCX_TOC_MAX_LEVEL))
     formal_entries = [
         entry for entry in heading_entries
-        if 1 <= int(entry.get("level") or 1) <= DOCX_TOC_MAX_LEVEL and _toc_entry_text(entry)
+        if 1 <= int(entry.get("level") or 1) <= toc_max_level and _toc_entry_text(entry)
     ]
     if not formal_entries:
         empty = doc.add_paragraph()
@@ -1006,7 +1343,7 @@ def _add_toc_page(doc, project_name: str, heading_entries: list[dict], cover_fie
         apply_run_font(empty_run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_BODY_FONT_SIZE)
     tab_position_twips = _page_text_width_twips(doc)
     for entry in formal_entries:
-        _add_formal_toc_entry(doc, entry, tab_position_twips=tab_position_twips)
+        _add_formal_toc_entry(doc, entry, tab_position_twips=tab_position_twips, template_profile=template_profile)
 
     doc.add_page_break()
 
@@ -1077,9 +1414,17 @@ def process_mermaid(doc, mermaid_code):
     # 转换 Mermaid 代码为图片
     png_file = convert_mermaid_to_image(mermaid_code)
     if png_file and os.path.exists(png_file):
+        display_path = png_file
+        display_cleanup = False
         try:
+            frame_width_in, frame_height_in = _docx_image_frame_size(doc)
+            display_path, display_cleanup, _ = _standardize_image_frame_for_docx(
+                png_file,
+                frame_width_in=frame_width_in,
+                frame_height_in=frame_height_in,
+            )
             # 添加图片到文档
-            doc.add_picture(png_file, width=Inches(6))  # 先插入图片
+            doc.add_picture(display_path, width=Inches(frame_width_in), height=Inches(frame_height_in))
             
             # 设置图片居中
             last_paragraph = doc.paragraphs[-1]
@@ -1095,6 +1440,8 @@ def process_mermaid(doc, mermaid_code):
             caption_run.font.size = Pt(10.5)
         finally:
             # 清理临时图片文件
+            if display_cleanup and display_path and os.path.exists(display_path):
+                os.unlink(display_path)
             os.unlink(png_file)
         return True
     return False
@@ -1271,6 +1618,8 @@ def process_markdown_image(doc, alt_text, image_ref, image_cache=None, image_rep
     cleanup = False
     prepared_path = None
     prepared_cleanup = False
+    frame_path = None
+    frame_cleanup = False
     clean_alt = clean_formal_bid_text(alt_text) or "未命名图片"
     try:
         image_path, cleanup = _resolve_markdown_image(image_ref, image_cache=image_cache)
@@ -1283,12 +1632,15 @@ def process_markdown_image(doc, alt_text, image_ref, image_cache=None, image_rep
             })
             return False
         prepared_path, prepared_cleanup = _prepare_docx_image(image_path)
-        width_in, height_in, metrics = _fit_image_dimensions_for_docx(
+        frame_width_in, frame_height_in = _docx_image_frame_size(doc)
+        frame_path, frame_cleanup, metrics = _standardize_image_frame_for_docx(
             prepared_path,
-            max_width_in=min(5.8, _page_text_width_inches(doc)),
-            max_height_in=min(DOCX_IMAGE_MAX_HEIGHT_IN, _page_text_height_inches(doc)),
+            frame_width_in=frame_width_in,
+            frame_height_in=frame_height_in,
         )
-        doc.add_picture(prepared_path, width=Inches(width_in), height=Inches(height_in) if height_in else None)
+        width_in = metrics.get("display_width_in") or frame_width_in
+        height_in = metrics.get("display_height_in") or frame_height_in
+        doc.add_picture(frame_path, width=Inches(width_in), height=Inches(height_in) if height_in else None)
         image_para = doc.paragraphs[-1]
         image_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
         apply_image_paragraph_format(image_para)
@@ -1312,6 +1664,8 @@ def process_markdown_image(doc, alt_text, image_ref, image_cache=None, image_rep
         })
         return False
     finally:
+        if frame_cleanup and frame_path and os.path.exists(frame_path):
+            os.unlink(frame_path)
         if prepared_cleanup and prepared_path and os.path.exists(prepared_path):
             os.unlink(prepared_path)
 
@@ -1325,8 +1679,8 @@ def set_document_styles(doc):
     normal._element.rPr.rFonts.set(qn('w:eastAsia'), DOCX_BODY_EAST_ASIA)
     normal._element.rPr.rFonts.set(qn('w:cs'), DOCX_BODY_EAST_ASIA)
     normal.font.size = Pt(DOCX_BODY_FONT_SIZE)
-    normal.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
-    normal.paragraph_format.line_spacing = Pt(DOCX_BODY_LINE_SPACING)
+    normal.font.color.rgb = RGBColor(0, 0, 0)
+    apply_body_line_spacing(normal.paragraph_format)
     normal.paragraph_format.first_line_indent = Pt(DOCX_BODY_FIRST_LINE_INDENT_PT)
     normal.paragraph_format.space_before = Pt(0)
     normal.paragraph_format.space_after = Pt(0)
@@ -1347,8 +1701,8 @@ def set_document_styles(doc):
         style._element.rPr.rFonts.set(qn('w:cs'), east_asia)
         style.font.size = Pt(size)
         style.font.bold = bold
-        style.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
-        style.paragraph_format.line_spacing = Pt(DOCX_BODY_LINE_SPACING)
+        style.font.color.rgb = RGBColor(0, 0, 0)
+        apply_body_line_spacing(style.paragraph_format)
         style.paragraph_format.first_line_indent = Pt(0)
         style.paragraph_format.space_before = Pt(6 if i <= 2 else 3)
         style.paragraph_format.space_after = Pt(3)
@@ -1361,8 +1715,8 @@ def set_document_styles(doc):
         style._element.rPr.rFonts.set(qn('w:eastAsia'), DOCX_BODY_EAST_ASIA)
         style._element.rPr.rFonts.set(qn('w:cs'), DOCX_BODY_EAST_ASIA)
         style.font.size = Pt(DOCX_BODY_FONT_SIZE)
-        style.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
-        style.paragraph_format.line_spacing = Pt(DOCX_BODY_LINE_SPACING)
+        style.font.color.rgb = RGBColor(0, 0, 0)
+        apply_body_line_spacing(style.paragraph_format)
         style.paragraph_format.first_line_indent = Pt(-DOCX_LIST_HANGING_INDENT_PT)
         style.paragraph_format.left_indent = Pt(DOCX_LIST_LEFT_INDENT_PT)
         style.paragraph_format.space_before = Pt(0)
@@ -1396,6 +1750,7 @@ def set_document_language(doc):
         rpr_default.append(rpr)
     _set_rfonts(rpr, east_asia=DOCX_BODY_EAST_ASIA)
     _set_font_size(rpr, DOCX_BODY_FONT_SIZE)
+    _set_rpr_color(rpr)
     _set_rpr_language(rpr)
 
     for style in doc.styles:
@@ -1404,6 +1759,7 @@ def set_document_language(doc):
             if style.type in {WD_STYLE_TYPE.PARAGRAPH, WD_STYLE_TYPE.CHARACTER} and style.name in {"Normal", "Body Text", "List Bullet", "List Number"}:
                 _set_rfonts(rpr, east_asia=DOCX_BODY_EAST_ASIA)
                 _set_font_size(rpr, DOCX_BODY_FONT_SIZE)
+            _set_rpr_color(rpr)
             _set_rpr_language(rpr)
 
     settings = doc.settings.element
@@ -1423,20 +1779,24 @@ def set_document_language(doc):
         settings.append(update_fields)
     update_fields.set(qn('w:val'), 'true')
 
-def set_document_format(doc, project_name, image_report: dict | None = None):
+def set_document_format(doc, project_name, image_report: dict | None = None, file_type: str = "投标文件", template_profile: dict | None = None):
     """设置文档格式"""
     project_name = clean_formal_bid_text(project_name) or "投标文件"
+    margins = _template_profile_margins(template_profile)
+    header_distance_cm = float(_template_profile_value(template_profile, "header_distance_cm", DOCX_HEADER_DISTANCE_CM))
+    footer_distance_cm = float(_template_profile_value(template_profile, "footer_distance_cm", DOCX_FOOTER_DISTANCE_CM))
+    header_footer_font = str(_template_profile_value(template_profile, "header_footer_font", DOCX_BODY_EAST_ASIA))
     # 设置页面边距
     sections = doc.sections
     for section in sections:
         section.page_width = Cm(21)
         section.page_height = Cm(29.7)
-        section.top_margin = Cm(DOCX_PAGE_MARGIN_TOP_CM)
-        section.bottom_margin = Cm(DOCX_PAGE_MARGIN_BOTTOM_CM)
-        section.left_margin = Cm(DOCX_PAGE_MARGIN_LEFT_CM)
-        section.right_margin = Cm(DOCX_PAGE_MARGIN_RIGHT_CM)
-        section.header_distance = Cm(DOCX_HEADER_DISTANCE_CM)
-        section.footer_distance = Cm(DOCX_FOOTER_DISTANCE_CM)
+        section.top_margin = Cm(margins["top"])
+        section.bottom_margin = Cm(margins["bottom"])
+        section.left_margin = Cm(margins["left"])
+        section.right_margin = Cm(margins["right"])
+        section.header_distance = Cm(header_distance_cm)
+        section.footer_distance = Cm(footer_distance_cm)
         section.different_first_page_header_footer = True
         first_header = section.first_page_header
         if first_header.paragraphs:
@@ -1456,19 +1816,17 @@ def set_document_format(doc, project_name, image_report: dict | None = None):
             section.page_width - section.left_margin - section.right_margin,
             WD_TAB_ALIGNMENT.RIGHT,
         )
-        if _add_taichang_logo(
-            header_para,
-            width_in=DOCX_HEADER_LOGO_WIDTH_IN,
-            max_height_in=0.38,
-            report=image_report,
-            placement="header",
-        ):
-            header_para.add_run("  ")
+        if image_report is not None:
+            image_report.setdefault("logo", {})["header"] = {
+                "inserted": False,
+                "reason": "formal_header_has_no_logo",
+            }
         header_left = _truncate_header_text(project_name, max_chars=DOCX_HEADER_MAX_CHARS)
-        text_run = header_para.add_run(f"{header_left}\t投标文件")
-        apply_run_font(text_run, east_asia=DOCX_BODY_EAST_ASIA, size=9)
+        header_file_type = clean_formal_bid_text(file_type or "投标文件") or "投标文件"
+        text_run = header_para.add_run(f"{header_left}\t{header_file_type}")
+        apply_run_font(text_run, east_asia=header_footer_font, size=9)
         for run in header_para.runs:
-            apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=9)
+            apply_run_font(run, east_asia=header_footer_font, size=9)
         
         # 添加页脚
         footer = section.footer
@@ -1502,9 +1860,9 @@ def set_document_format(doc, project_name, image_report: dict | None = None):
         footer_para.add_run(" 页")
         footer_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
         for run in footer_para.runs:
-            apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=9)
+            apply_run_font(run, east_asia=header_footer_font, size=9)
 
-def process_table(md_table, doc, *, form_type: str | None = None, form_report: dict | None = None):
+def process_table(md_table, doc, *, form_type: str | None = None, form_report: dict | None = None, template_profile: dict | None = None):
     """处理 Markdown 表格"""
     lines = md_table.strip().split('\n')
     if len(lines) < 3:  # 至少需要表头、分隔行和一行数据
@@ -1540,7 +1898,7 @@ def process_table(md_table, doc, *, form_type: str | None = None, form_report: d
         header_row.cells[i].vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
         _set_cell_width(header_row.cells[i], col_widths[i])
         _set_cell_margins(header_row.cells[i])
-        _shade_cell(header_row.cells[i], "D9EAF7")
+        _shade_cell(header_row.cells[i], str(_template_profile_value(template_profile, "table_header_fill", "EDEDED")))
         # 设置表头格式
         for paragraph in header_row.cells[i].paragraphs:
             apply_table_paragraph_format(paragraph, alignment=WD_ALIGN_PARAGRAPH.CENTER)
@@ -1703,7 +2061,15 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
     # 读取Markdown文件
     with open(md_file, 'r', encoding='utf-8') as f:
         md_content = clean_formal_bid_text(f.read())
-    
+
+    title_match = re.search(r'^\s*#\s+(.+?)\s*$', md_content, re.MULTILINE)
+    markdown_project_name = clean_formal_bid_text(title_match.group(1).strip()) if title_match else Path(md_file).stem
+    markdown_cover_fields = extract_bid_cover_fields(md_content)
+    resolved_cover_fields = merge_bid_cover_fields(markdown_cover_fields, cover_fields)
+    template_profile = resolve_docx_template_profile(resolved_cover_fields)
+    project_name = resolved_cover_fields.get("项目名称") or markdown_project_name
+    project_name = taichang_bid_document_title(project_name)
+
     # 创建Word文档
     doc = Document()
     set_document_styles(doc)
@@ -1731,16 +2097,23 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
     }
     
     # 设置文档格式
-    title_match = re.search(r'^\s*#\s+(.+?)\s*$', md_content, re.MULTILINE)
-    markdown_project_name = clean_formal_bid_text(title_match.group(1).strip()) if title_match else Path(md_file).stem
-    project_name = (cover_fields or {}).get("项目名称") or markdown_project_name
-    project_name = taichang_bid_document_title(project_name)
-    set_document_format(doc, project_name, image_report=image_report)
+    set_document_format(
+        doc,
+        project_name,
+        image_report=image_report,
+        file_type=resolved_cover_fields.get("文件类型") or "投标文件",
+        template_profile=template_profile,
+    )
     title_line_index, heading_entries = _markdown_heading_lines(md_content)
     heading_entry_by_line = {entry["line_index"]: entry for entry in heading_entries}
-    markdown_cover_fields = extract_bid_cover_fields(md_content)
-    resolved_cover_fields = merge_bid_cover_fields(markdown_cover_fields, cover_fields)
-    _add_toc_page(doc, project_name, heading_entries, cover_fields=resolved_cover_fields, image_report=image_report)
+    _add_toc_page(
+        doc,
+        project_name,
+        heading_entries,
+        cover_fields=resolved_cover_fields,
+        image_report=image_report,
+        template_profile=template_profile,
+    )
     
     # 处理Markdown内容
     lines = md_content.split('\n')
@@ -1822,6 +2195,7 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
                 doc,
                 form_type=current_form_type,
                 form_report=image_report["formal_forms"],
+                template_profile=template_profile,
             )
             continue
         

@@ -21,13 +21,19 @@ from backend.export.md_to_word import (
     DOCX_BIDDER_FULL_NAME,
     DOCX_BODY_EAST_ASIA,
     DOCX_BODY_FIRST_LINE_INDENT_PT,
+    DOCX_IMAGE_FRAME_HEIGHT_IN,
+    DOCX_IMAGE_FRAME_WIDTH_IN,
     DOCX_BODY_LINE_SPACING,
+    DOCX_BODY_LINE_SPACING_RULE,
+    DOCX_TOC_ENTRY_FONT_SIZE,
+    DOCX_TOC_ENTRY_LINE_SPACING,
     DOCX_TABLE_EAST_ASIA,
     DOCX_LIST_HANGING_INDENT_PT,
     DOCX_LIST_LEFT_INDENT_PT,
     convert_md_to_word,
     extract_bid_cover_fields,
     refresh_docx_fields_with_soffice,
+    should_start_heading_on_new_page,
     taichang_bid_document_title,
 )
 from backend.parsing.tender_metadata import extract_tender_project_metadata
@@ -298,6 +304,57 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertEqual(report["cover_field_source"], "uploaded_tender_structured_extract")
         self.assertEqual(report["cover_fields"]["招标编号"], "2225AC")
         self.assertEqual(report["cover_fields"]["分标编号"], "102-CPVC")
+
+    def test_bid_markdown_volume_export_sets_delivery_file_type_and_scope(self):
+        project_id = "11111111-1111-1111-1111-111111111111"
+        with tempfile.TemporaryDirectory() as tmpdir:
+            app = Flask(__name__)
+            app.config["GENERATED_FOLDER"] = tmpdir
+            sections = [
+                {
+                    "id": "technical-1",
+                    "order_index": 1,
+                    "level": 1,
+                    "title": "技术响应文件",
+                    "content": "技术标正文。",
+                    "metadata": {"volume_type": "technical"},
+                },
+                {
+                    "id": "business-1",
+                    "order_index": 2,
+                    "level": 1,
+                    "title": "商务偏差表",
+                    "content": "商务标正文。",
+                    "metadata": {"volume_type": "business"},
+                },
+            ]
+            cover_fields = {
+                "项目名称": "国网辽宁电力2025年第三次物资协议库存招标采购",
+                "招标编号": "2225AC",
+            }
+
+            with (
+                app.app_context(),
+                patch("backend.api.routes.get_project_interpretation", return_value={
+                    "project": {"id": project_id, "project_name": "上传文件名"},
+                    "analysis": {"project_meta": {"project_name": "上传文件名", "cover_fields": cover_fields}},
+                }),
+                patch("backend.api.routes.list_bid_sections", return_value=sections),
+            ):
+                markdown_path, document_title, report = build_project_bid_markdown(project_id, volume_type="technical")
+                markdown = markdown_path.read_text(encoding="utf-8")
+
+        self.assertEqual(document_title, "上传文件名投标文件-技术标")
+        self.assertEqual(report["scope"], "volume")
+        self.assertEqual(report["volume_type"], "technical")
+        self.assertEqual(report["volume_name"], "技术标")
+        self.assertEqual(report["delivery_file_type"], "技术投标文件")
+        self.assertEqual(report["cover_fields"]["文件类型"], "技术投标文件")
+        self.assertEqual(report["formal_readiness"]["template_id"], "technical_bid_standard")
+        self.assertEqual(report["formal_readiness"]["template_family"], "formal_bid_xinjiang_sgcc_reference")
+        self.assertEqual(report["section_count"], 1)
+        self.assertIn("技术标正文", markdown)
+        self.assertNotIn("商务标正文", markdown)
 
     def test_bid_markdown_formal_readiness_rejects_simulated_customer_values(self):
         project_id = "11111111-1111-1111-1111-111111111111"
@@ -633,26 +690,31 @@ class DocxExportRegressionTest(unittest.TestCase):
             field_codes = [node.text or "" for node in document._element.xpath(".//w:instrText")]
 
             self.assertIn("目  录", non_empty[:8])
-            self.assertEqual(4, len(toc_entries))
+            self.assertEqual(2, len(toc_entries))
             self.assertEqual([
                 "1. 一级章节",
                 "1.1 二级章节",
-                "1.1.1 三级章节",
-                "1.1.1.1 四级章节",
             ], [p.text.split("\t")[0] for p in toc_entries])
+            self.assertNotIn("1.1.1 三级章节", "\n".join(p.text for p in toc_entries))
             self.assertNotIn("1.1.1.1.1 五级章节", "\n".join(p.text for p in toc_entries))
 
-            expected_indents = [0, 18, 36, 54]
+            expected_indents = [0, 18]
             for paragraph, expected_indent in zip(toc_entries, expected_indents):
                 self.assertEqual(expected_indent, paragraph.paragraph_format.left_indent.pt)
-                self.assertEqual(18, paragraph.paragraph_format.line_spacing.pt)
+                self.assertEqual(DOCX_TOC_ENTRY_LINE_SPACING, paragraph.paragraph_format.line_spacing.pt)
                 self.assertEqual(0, paragraph.paragraph_format.first_line_indent.pt)
+                for run in paragraph.runs:
+                    if run.text.strip():
+                        self.assertFalse(run.bold)
+                        if run.font.size:
+                            self.assertEqual(DOCX_TOC_ENTRY_FONT_SIZE, run.font.size.pt)
                 self.assertFalse(paragraph._p.xpath(".//w:keepLines"))
                 self.assertFalse(paragraph._p.xpath(".//w:keepNext"))
                 self.assertTrue(paragraph._p.xpath(".//w:tab[@w:val='right'][@w:leader='dot']"))
 
-            for index in range(1, 5):
+            for index in range(1, 3):
                 self.assertTrue(any(f"PAGEREF bid_heading_{index}" in code for code in field_codes))
+            self.assertFalse(any("PAGEREF bid_heading_3" in code for code in field_codes))
 
             with ZipFile(output_path) as docx_zip:
                 document_xml = docx_zip.read("word/document.xml").decode("utf-8")
@@ -663,6 +725,24 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertNotIn("w:keepLines", styles_xml)
             self.assertNotIn("w:keepNext", styles_xml)
             self.assertNotIn("w:pageBreakBefore", styles_xml)
+
+    def test_formal_bid_text_is_black_and_level_two_headings_start_new_page(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            markdown_path = Path(tmpdir) / "black-pagination.md"
+            markdown_path.write_text(
+                "# 颜色分页测试投标文件\n\n# 1. 商务响应\n\n正文内容。\n\n## 1.1 投标函\n\n正文内容。",
+                encoding="utf-8",
+            )
+
+            output_path = convert_md_to_word(markdown_path)
+            self.assertTrue(should_start_heading_on_new_page(2, "1.1 投标函", 1))
+            with ZipFile(output_path) as archive:
+                document_xml = archive.read("word/document.xml").decode("utf-8")
+                styles_xml = archive.read("word/styles.xml").decode("utf-8")
+            self.assertNotIn("1F4E79", document_xml)
+            self.assertNotIn("1F4E79", styles_xml)
+            self.assertIn('w:val="000000"', document_xml)
+            self.assertIn('w:type="page"', document_xml)
 
     def test_mermaid_fence_source_is_not_exported_when_conversion_fails(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -844,15 +924,22 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertEqual(DOCX_BIDDER_FULL_NAME, report["template"]["bidder_full_name"])
             self.assertEqual(DOCX_BODY_EAST_ASIA, report["template"]["body_font"])
             self.assertEqual(DOCX_BODY_FIRST_LINE_INDENT_PT, report["template"]["body_first_line_indent_pt"])
+            self.assertEqual(DOCX_BODY_LINE_SPACING_RULE, report["template"]["body_line_spacing_rule"])
+            self.assertEqual(DOCX_BODY_LINE_SPACING, report["template"]["body_line_spacing"])
             self.assertEqual(DOCX_LIST_LEFT_INDENT_PT, report["template"]["list_left_indent_pt"])
             self.assertEqual(DOCX_LIST_HANGING_INDENT_PT, report["template"]["list_hanging_indent_pt"])
             self.assertFalse(report["template"]["heading_keep_with_next"])
+            self.assertFalse(report["template"]["toc_entry_bold_all"])
+            self.assertEqual("assets/template_words/5d2a2c833dad4bb3b3ccc0856f755b54.docx", report["template"]["reference_templates"][0]["path"])
+            self.assertTrue(report["template"]["image_layout"]["uniform_frame_enabled"])
+            self.assertEqual(DOCX_IMAGE_FRAME_WIDTH_IN, report["template"]["image_layout"]["frame_width_in"])
+            self.assertEqual(DOCX_IMAGE_FRAME_HEIGHT_IN, report["template"]["image_layout"]["frame_height_in"])
             self.assertEqual(18, report["template"]["table_line_spacing_pt"])
             self.assertEqual(DOCX_BODY_EAST_ASIA, normal._element.rPr.rFonts.get(qn("w:eastAsia")))
             self.assertEqual(DOCX_BODY_EAST_ASIA, body_rfonts.get(qn("w:eastAsia")))
-            self.assertEqual(14, body_run.font.size.pt)
-            self.assertEqual(WD_LINE_SPACING.EXACTLY, body_paragraph.paragraph_format.line_spacing_rule)
-            self.assertEqual(DOCX_BODY_LINE_SPACING, body_paragraph.paragraph_format.line_spacing.pt)
+            self.assertEqual(12, body_run.font.size.pt)
+            self.assertEqual(WD_LINE_SPACING.ONE_POINT_FIVE, body_paragraph.paragraph_format.line_spacing_rule)
+            self.assertEqual(DOCX_BODY_LINE_SPACING, body_paragraph.paragraph_format.line_spacing)
             self.assertEqual(DOCX_BODY_FIRST_LINE_INDENT_PT, body_paragraph.paragraph_format.first_line_indent.pt)
             self.assertEqual(DOCX_TABLE_EAST_ASIA, table_run._element.rPr.rFonts.get(qn("w:eastAsia")))
             self.assertEqual(12, table_run.font.size.pt)
@@ -867,6 +954,7 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertEqual(2.5, round(section.right_margin.cm, 1))
             self.assertIn("国网山西电力2026年第二次物资协议库存公开招标采购投标文件", section.header.paragraphs[0].text)
             self.assertIn("投标文件", section.header.paragraphs[0].text)
+            self.assertFalse(report["template"]["header_footer"]["header_logo"])
 
     def test_formal_bid_body_headings_and_lists_use_stable_paragraph_format(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -906,8 +994,8 @@ class DocxExportRegressionTest(unittest.TestCase):
             numbered = next(p for p in document.paragraphs if p.text.startswith("1. 明确资料提交"))
 
             self.assertEqual(DOCX_BODY_FIRST_LINE_INDENT_PT, report["template"]["body_first_line_indent_pt"])
-            self.assertEqual(WD_LINE_SPACING.EXACTLY, body_paragraph.paragraph_format.line_spacing_rule)
-            self.assertEqual(DOCX_BODY_LINE_SPACING, body_paragraph.paragraph_format.line_spacing.pt)
+            self.assertEqual(WD_LINE_SPACING.ONE_POINT_FIVE, body_paragraph.paragraph_format.line_spacing_rule)
+            self.assertEqual(DOCX_BODY_LINE_SPACING, body_paragraph.paragraph_format.line_spacing)
             self.assertEqual(DOCX_BODY_FIRST_LINE_INDENT_PT, body_paragraph.paragraph_format.first_line_indent.pt)
             self.assertEqual(0, body_paragraph.paragraph_format.space_before.pt)
             self.assertEqual(0, body_paragraph.paragraph_format.space_after.pt)
@@ -924,8 +1012,8 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertTrue(subheading.runs[0].font.bold)
 
             for paragraph in (bullet, numbered):
-                self.assertEqual(WD_LINE_SPACING.EXACTLY, paragraph.paragraph_format.line_spacing_rule)
-                self.assertEqual(DOCX_BODY_LINE_SPACING, paragraph.paragraph_format.line_spacing.pt)
+                self.assertEqual(WD_LINE_SPACING.ONE_POINT_FIVE, paragraph.paragraph_format.line_spacing_rule)
+                self.assertEqual(DOCX_BODY_LINE_SPACING, paragraph.paragraph_format.line_spacing)
                 self.assertEqual(DOCX_LIST_LEFT_INDENT_PT, paragraph.paragraph_format.left_indent.pt)
                 self.assertEqual(-DOCX_LIST_HANGING_INDENT_PT, paragraph.paragraph_format.first_line_indent.pt)
 
@@ -1054,7 +1142,7 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertEqual("pct", table_width.get(qn("w:type")))
             self.assertEqual("fixed", table_layout.get(qn("w:type")))
             self.assertEqual("true", header_repeat.get(qn("w:val")))
-            self.assertEqual("D9EAF7", header_shading.get(qn("w:fill")))
+            self.assertEqual("EDEDED", header_shading.get(qn("w:fill")))
             self.assertEqual("100", cell_margins.find(qn("w:left")).get(qn("w:w")))
             self.assertEqual("100", first_cell_margins.find(qn("w:left")).get(qn("w:w")))
             self.assertTrue(header_run.bold)
@@ -1228,6 +1316,11 @@ class DocxExportRegressionTest(unittest.TestCase):
             document = Document(str(output_path))
             text = "\n".join(paragraph.text for paragraph in document.paragraphs)
             cover_text = "\n".join(paragraph.text for paragraph in document.paragraphs[:14])
+            header_text = "\n".join(
+                paragraph.text
+                for section in document.sections
+                for paragraph in section.header.paragraphs
+            )
 
         self.assertEqual(report["template"]["cover_fields"]["招标编号"], "2225AC")
         self.assertIn("国网辽宁电力2025年第三次物资协议", text)
@@ -1239,6 +1332,97 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertIn("包号：包1", text)
         self.assertIn("招标人：国网辽宁省电力有限公司", text)
         self.assertNotIn("招标编号：OLD-NO", cover_text)
+        self.assertIn("技术投标文件", header_text)
+        self.assertEqual(report["template"]["header_footer"]["header_text"], "左侧项目名称，右侧技术投标文件")
+
+    def test_technical_bid_reference_profile_uses_volume_template_layout_and_toc_depth(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            markdown_path = Path(tmpdir) / "technical-template.md"
+            markdown_path.write_text(
+                "\n".join(
+                    [
+                        "# 技术投标文件",
+                        "",
+                        "# （一）技术偏差表",
+                        "",
+                        "## 1. 技术偏差表",
+                        "",
+                        "### 1.1 技术特性参数表",
+                        "",
+                        "#### 附:技术规范点对点应答",
+                        "",
+                        "正文内容。",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            output_path, report = convert_md_to_word(
+                markdown_path,
+                return_report=True,
+                cover_fields={
+                    "项目名称": "国网新疆10kV架空绝缘导线采购",
+                    "文件类型": "技术投标文件",
+                    "招标编号": "SL265A",
+                },
+            )
+            document = Document(str(output_path))
+            section = document.sections[0]
+            toc_entries = [p.text.split("\t")[0] for p in document.paragraphs if "\t" in p.text and p.text.strip()]
+            full_text = "\n".join(p.text for p in document.paragraphs)
+
+        self.assertEqual("technical_bid_standard", report["template"]["template_id"])
+        self.assertEqual("formal_bid_xinjiang_sgcc_reference", report["template"]["template_family"])
+        self.assertEqual("assets/template_words/技术文件 - 10kV架空绝缘导线-新疆.docx", report["template"]["reference_path"])
+        self.assertIn("技术规范点对点应答", report["template"]["reference_outline"])
+        self.assertEqual(4, report["template"]["toc_max_level"])
+        self.assertEqual("宋体", report["template"]["toc_font"])
+        self.assertEqual("宋体", report["template"]["header_footer"]["header_font"])
+        self.assertEqual(3.17, report["template"]["margins_cm"]["left"])
+        self.assertEqual(3.17, round(section.left_margin.cm, 2))
+        self.assertEqual(3.17, round(section.right_margin.cm, 2))
+        self.assertEqual(1.5, round(section.header_distance.cm, 1))
+        self.assertIn("附:技术规范点对点应答", toc_entries)
+        self.assertNotIn("保定铠蒂电力器材有限公司", full_text)
+        self.assertNotIn("SL265A-1402005-0001", full_text)
+
+    def test_business_bid_reference_profile_uses_business_template_metadata(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            markdown_path = Path(tmpdir) / "business-template.md"
+            markdown_path.write_text(
+                "\n".join(
+                    [
+                        "# 商务投标文件",
+                        "",
+                        "# （一）商务偏差表",
+                        "",
+                        "## 1. 商务偏差表",
+                        "",
+                        "### 1.1 查询报告及截图",
+                        "",
+                        "正文内容。",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            _, report = convert_md_to_word(
+                markdown_path,
+                return_report=True,
+                cover_fields={
+                    "项目名称": "国网新疆10kV架空绝缘导线采购",
+                    "文件类型": "商务投标文件",
+                    "招标编号": "SL265A",
+                },
+            )
+
+        self.assertEqual("business_bid_standard", report["template"]["template_id"])
+        self.assertEqual("formal_bid_xinjiang_sgcc_reference", report["template"]["template_family"])
+        self.assertEqual("assets/template_words/商务文件 - 10kV架空绝缘导线-新疆(1).docx", report["template"]["reference_path"])
+        self.assertIn("商务偏差表", report["template"]["reference_outline"])
+        self.assertIn("查询报告及截图", report["template"]["reference_outline"])
+        self.assertEqual("宋体", report["template"]["toc_font"])
+        self.assertIn("禁止复用参考稿企业事实", report["template"]["runtime_policy"])
 
     def test_bid_export_assets_are_limited_to_taichang_enterprise_facts(self):
         taichang_asset = {
@@ -1297,7 +1481,7 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertEqual(report["inserted"], 1)
             self.assertEqual(report["skipped"], 1)
 
-    def test_docx_reference_cover_omits_logo_but_header_keeps_logo(self):
+    def test_docx_reference_cover_and_header_omit_logo(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             markdown_path = Path(tmpdir) / "logo.md"
             markdown_path.write_text("# 测试投标文件\n\n# 1. 企业简介\n\n正文内容。\n", encoding="utf-8")
@@ -1306,12 +1490,8 @@ class DocxExportRegressionTest(unittest.TestCase):
 
             self.assertFalse(report["logo"]["cover"]["inserted"])
             self.assertEqual("reference_template_cover_has_no_logo", report["logo"]["cover"]["reason"])
-            self.assertTrue(report["logo"]["header"]["inserted"])
-            self.assertIn("taichang_logo.png", report["logo"]["header"]["path"])
-            self.assertTrue(report["logo"]["header"]["auto_cropped"])
-            self.assertGreater(report["logo"]["header"]["pixel_width"], 1000)
-            self.assertGreater(report["logo"]["header"]["pixel_height"], 600)
-            self.assertTrue(report["logo"]["header"]["aspect_ratio_preserved"])
+            self.assertFalse(report["logo"]["header"]["inserted"])
+            self.assertEqual("formal_header_has_no_logo", report["logo"]["header"]["reason"])
             with ZipFile(output_path) as archive:
                 media_names = [name for name in archive.namelist() if name.startswith("word/media/")]
                 header_xml = "\n".join(
@@ -1319,33 +1499,49 @@ class DocxExportRegressionTest(unittest.TestCase):
                     for name in archive.namelist()
                     if name.startswith("word/header")
                 )
-            self.assertGreaterEqual(len(media_names), 1)
-            self.assertIn("<w:drawing>", header_xml)
+            self.assertEqual([], media_names)
+            self.assertNotIn("<w:drawing>", header_xml)
 
-    def test_markdown_image_is_scaled_without_cropping_or_aspect_distortion(self):
+    def test_markdown_images_use_uniform_frame_without_cropping_source_content(self):
         from PIL import Image as PILImage
 
         with tempfile.TemporaryDirectory() as tmpdir:
             tmp = Path(tmpdir)
-            image_path = tmp / "full-page-scan.png"
-            PILImage.new("RGB", (800, 1600), "white").save(image_path)
+            portrait_path = tmp / "full-page-scan.png"
+            landscape_path = tmp / "factory-photo.png"
+            PILImage.new("RGB", (800, 1600), "white").save(portrait_path)
+            PILImage.new("RGB", (1600, 800), "white").save(landscape_path)
             markdown_path = tmp / "image-fit.md"
             markdown_path.write_text(
-                f"# 图文测试\n\n# 1. 合同整页扫描件\n\n![合同整页扫描件]({image_path})\n",
+                "\n".join(
+                    [
+                        "# 图文测试",
+                        "",
+                        "# 1. 合同整页扫描件",
+                        "",
+                        f"![合同整页扫描件]({portrait_path})",
+                        "",
+                        f"![厂房实景照片]({landscape_path})",
+                    ]
+                ),
                 encoding="utf-8",
             )
 
             output_path, report = convert_md_to_word(markdown_path, return_report=True)
             document = Document(str(output_path))
-            body_shape_ratios = [
-                round(shape.width / shape.height, 3)
+            body_shape_sizes = [
+                (round(shape.width / 914400, 3), round(shape.height / 914400, 3))
                 for shape in document.inline_shapes
                 if shape.height
             ]
 
-            self.assertEqual(report["inserted"], 1)
-            self.assertTrue(report["events"][0]["fit"]["aspect_ratio_preserved"])
-            self.assertIn(0.5, body_shape_ratios)
+            self.assertEqual(report["inserted"], 2)
+            self.assertEqual(1, len(set(body_shape_sizes)))
+            self.assertEqual((DOCX_IMAGE_FRAME_WIDTH_IN, DOCX_IMAGE_FRAME_HEIGHT_IN), body_shape_sizes[0])
+            self.assertTrue(all(event["fit"]["uniform_frame_enabled"] for event in report["events"]))
+            self.assertTrue(all(event["fit"]["content_aspect_ratio_preserved"] for event in report["events"]))
+            self.assertEqual(0.5, round(report["events"][0]["fit"]["source_aspect_ratio"], 3))
+            self.assertEqual(2.0, round(report["events"][1]["fit"]["source_aspect_ratio"], 3))
 
 
 if __name__ == "__main__":

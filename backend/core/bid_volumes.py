@@ -219,6 +219,24 @@ def volume_name(volume_type: Any) -> str:
     return VOLUME_DEFINITIONS.get(normalize_volume_type(volume_type), VOLUME_DEFINITIONS["other"])["name"]
 
 
+def delivery_volume_file_type(volume_type: Any | None) -> str:
+    """Formal DOCX cover/header file type for the exported delivery package."""
+    if volume_type is None:
+        return "投标文件"
+    normalized = normalize_volume_type(volume_type)
+    if normalized == "technical":
+        return "技术投标文件"
+    if normalized == "business":
+        return "商务投标文件"
+    if normalized == "qualification":
+        return "资格文件"
+    if normalized == "price":
+        return "价格文件"
+    if normalized == "attachment":
+        return "附件材料"
+    return "投标文件"
+
+
 def volume_description(volume_type: Any) -> str:
     return VOLUME_DEFINITIONS.get(normalize_volume_type(volume_type), VOLUME_DEFINITIONS["other"])["description"]
 

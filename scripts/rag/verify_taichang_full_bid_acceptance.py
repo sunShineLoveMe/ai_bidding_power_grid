@@ -110,6 +110,7 @@ def _audit_docx_images(docx_path: Path) -> dict[str, Any]:
         crop_markers = 0
         max_ratio_delta = 0.0
         bad_ratio: list[dict[str, Any]] = []
+        body_display_sizes: list[tuple[float, float]] = []
         for part in archive.namelist():
             if not (part == "word/document.xml" or part.startswith("word/header")):
                 continue
@@ -140,6 +141,9 @@ def _audit_docx_images(docx_path: Path) -> dict[str, Any]:
                 source_ratio = width / height
                 display_ratio = cx / cy
                 delta = abs(display_ratio - source_ratio) / source_ratio
+                display_size = (round(cx / 914400, 3), round(cy / 914400, 3))
+                if part == "word/document.xml":
+                    body_display_sizes.append(display_size)
                 checked += 1
                 max_ratio_delta = max(max_ratio_delta, delta)
                 if delta > 0.01:
@@ -156,6 +160,11 @@ def _audit_docx_images(docx_path: Path) -> dict[str, Any]:
             "crop_marker_count": crop_markers,
             "max_ratio_delta": round(max_ratio_delta, 6),
             "bad_ratio": bad_ratio[:10],
+            "body_display_size_counts": {
+                f"{width_in}x{height_in}": count
+                for (width_in, height_in), count in Counter(body_display_sizes).items()
+            },
+            "body_images_uniform_display_size": len(set(body_display_sizes)) <= 1,
         }
 
 
@@ -190,6 +199,24 @@ def _pt(value: Any) -> float | None:
     return round(float(pt), 2) if pt is not None else None
 
 
+def _line_spacing_value(value: Any) -> float | None:
+    if value is None:
+        return None
+    pt = getattr(value, "pt", None)
+    if pt is not None:
+        return round(float(pt), 2)
+    if isinstance(value, (int, float)):
+        return round(float(value), 2)
+    return None
+
+
+def _line_spacing_rule_name(value: Any) -> str:
+    name = getattr(value, "name", None)
+    if name:
+        return str(name)
+    return str(value) if value is not None else ""
+
+
 def _cm(value: Any) -> float | None:
     if value is None:
         return None
@@ -212,6 +239,8 @@ def _format_audit(document: Document) -> dict[str, Any]:
     }
     normal = {
         "font_size_pt": _pt(normal_font.size),
+        "line_spacing_rule": _line_spacing_rule_name(normal_paragraph.line_spacing_rule),
+        "line_spacing": _line_spacing_value(normal_paragraph.line_spacing),
         "line_spacing_pt": _pt(normal_paragraph.line_spacing),
         "first_line_indent_pt": _pt(normal_paragraph.first_line_indent),
     }
@@ -226,9 +255,10 @@ def _format_audit(document: Document) -> dict[str, Any]:
                 and margins["right_cm"] == 2.5
             ),
             "body_style_matches_formal_standard": (
-                normal["font_size_pt"] == 14.0
-                and normal["line_spacing_pt"] == 22.0
-                and normal["first_line_indent_pt"] == 28.0
+                normal["font_size_pt"] == 12.0
+                and normal["line_spacing_rule"] == "ONE_POINT_FIVE"
+                and normal["line_spacing"] == 1.5
+                and normal["first_line_indent_pt"] == 24.0
             ),
         },
     }
@@ -365,6 +395,8 @@ def _validate(report: dict[str, Any]) -> tuple[list[str], list[str]]:
         failures.append(f"图片存在裁剪标记：{images['crop_marker_count']}")
     if images["bad_ratio"]:
         failures.append(f"图片比例变形：{images['bad_ratio']}")
+    if not images.get("body_images_uniform_display_size"):
+        failures.append(f"正文图片显示尺寸不统一：{images.get('body_display_size_counts')}")
     for key, passed in format_audit["checks"].items():
         if not passed:
             failures.append(f"DOCX 版式检查失败：{key}")
@@ -441,6 +473,7 @@ def _write_report(report: dict[str, Any]) -> Path:
         f"| DOCX 媒体文件 | {report['docx_audit']['images']['media_count']} |",
         f"| 图片裁剪标记 | {report['docx_audit']['images']['crop_marker_count']} |",
         f"| 图片最大比例偏差 | {report['docx_audit']['images']['max_ratio_delta']} |",
+        f"| 正文图片统一尺寸 | {report['docx_audit']['images']['body_images_uniform_display_size']} |",
         f"| 表格数量 | {report['docx_audit']['tables']['table_count']} |",
         f"| 表格全宽 | {report['docx_audit']['tables']['all_tables_full_width']} |",
         f"| 表格固定布局 | {report['docx_audit']['tables']['all_tables_fixed_layout']} |",
@@ -520,6 +553,7 @@ def main() -> int:
     xml_parts = _docx_xml_parts(docx_path)
     document_xml = xml_parts.get("word/document.xml", "")
     styles_xml = xml_parts.get("word/styles.xml", "")
+    headers_xml = "\n".join(value for name, value in xml_parts.items() if name.startswith("word/header"))
     all_xml = "\n".join(xml_parts.values())
     first_page_header_is_empty = 'w:type="first"' in document_xml and not any(
         text.strip()
@@ -544,6 +578,11 @@ def main() -> int:
         or ""
     )
     paragraph_summary = _paragraph_summary(document)
+    toc_levels = []
+    for toc_entry in paragraph_summary["toc_samples"]:
+        match = re.match(r"^(\d+(?:\.\d+)*)", toc_entry)
+        if match:
+            toc_levels.append(match.group(1).count(".") + 1)
     image_audit = _audit_docx_images(docx_path)
     report = {
         "run_id": args.run_id,
@@ -600,14 +639,18 @@ def main() -> int:
                 "toc_has_entries": paragraph_summary["toc_entry_count"] > 0,
                 "toc_has_dot_leader": 'w:leader="dot"' in document_xml,
                 "toc_has_pageref": any("PAGEREF" in code for code in field_codes),
+                "toc_max_level_lte_2": bool(toc_levels) and max(toc_levels) <= 2,
                 "header_has_project_name_and_file_type": project_name in headers and "投标文件" in headers,
+                "header_has_no_logo_image": "<w:drawing>" not in headers_xml,
                 "footer_has_page_text": "第 " in footers and " 页 共 " in footers,
                 "footer_has_page_fields": any(code.strip() == "PAGE" for code in field_codes) and any(code.strip() == "NUMPAGES" for code in field_codes),
                 "uses_configured_cjk_fonts": DOCX_BODY_EAST_ASIA in all_xml and DOCX_HEADING_EAST_ASIA in all_xml and DOCX_LEVEL3_EAST_ASIA in all_xml,
+                "no_blue_text_or_table_shading": all(token not in all_xml for token in ("1F4E79", "D9EAF7")),
                 "no_forbidden_internal_tokens": not forbidden_hits,
                 "no_repeated_parent_title_pattern": not repeated_title_pattern,
                 "no_black_square_markers": all(token not in document_xml and token not in styles_xml for token in ("w:keepLines", "w:keepNext", "w:pageBreakBefore")),
                 "no_image_crop_or_distortion": image_audit["crop_marker_count"] == 0 and not image_audit["bad_ratio"],
+                "body_images_use_uniform_display_size": image_audit["body_images_uniform_display_size"],
                 "has_supplement_project_performance_assets": (Counter(f"{item.get('source_batch_id')}|{item.get('evidence_type')}" for item in manifest).get(f"{SUPPLEMENT_BATCH_ID}|project_performance", 0) >= 2),
                 "has_supplement_testing_assets": (Counter(f"{item.get('source_batch_id')}|{item.get('evidence_type')}" for item in manifest).get(f"{SUPPLEMENT_BATCH_ID}|testing_capacity", 0) >= 1),
                 "has_supplement_inspection_report_asset": (Counter(f"{item.get('source_batch_id')}|{item.get('evidence_type')}" for item in manifest).get(f"{SUPPLEMENT_BATCH_ID}|inspection_report", 0) >= 1),

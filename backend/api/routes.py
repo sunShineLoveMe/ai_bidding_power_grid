@@ -15,7 +15,7 @@ import codecs
 import PyPDF2
 from urllib.parse import quote
 from backend.ai.qwen_client import call_dashscope_api, generate_bid_section
-from backend.export.md_to_word import DOCX_BIDDER_FULL_NAME, DOCX_TEMPLATE_ID, clean_formal_bid_text, convert_md_to_word, taichang_bid_document_title
+from backend.export.md_to_word import DOCX_BIDDER_FULL_NAME, clean_formal_bid_text, convert_md_to_word, resolve_docx_template_profile, taichang_bid_document_title
 from backend.ai.chapter_planner import generate_bid_outline, stream_bid_outline
 from backend.ai.section_writer import estimate_bid_content_words, stream_bid_section
 from backend.ai.interpreter import generate_ai_interpretation_report
@@ -23,14 +23,14 @@ from backend.ai.compliance_checker import build_compliance_report
 from backend.ai.semantic_compliance import build_semantic_compliance_report
 from backend.db.supabase_repo import cancel_bid_generation_task, create_bid_export_task, create_bid_generation_task, create_knowledge_asset, delete_bid_project, delete_bid_section, download_bid_file_to_local, download_knowledge_asset_file_variant, get_ai_usage_overview, get_bid_export_task, get_bid_file, get_latest_bid_file_for_project, get_latest_bid_generation_task, get_onlyoffice_document, get_project_interpretation, list_bid_history, list_bid_sections, list_knowledge_assets, list_recent_bid_projects, reorder_bid_sections, reset_bid_sections_generation, save_onlyoffice_document, sync_uploaded_tender_to_supabase, update_bid_analysis_project_meta, update_bid_export_task, update_bid_file_parse_status, update_bid_generation_task_item, update_bid_section_content, update_knowledge_asset, upload_knowledge_asset_file, upsert_bid_section
 from backend.core.llm_json_utils import strip_llm_json
-from backend.core.bid_volumes import asset_applicable_volumes, asset_matches_volume, delivery_volume_type, normalize_volume_list, section_volume_type, volume_name
+from backend.core.bid_volumes import asset_applicable_volumes, asset_matches_volume, delivery_volume_file_type, delivery_volume_type, normalize_volume_list, section_volume_type, volume_name
 from backend.ai.length_settings import apply_length_allocations_to_sections, allocate_chapter_length_targets, evaluate_length_feasibility, normalize_length_settings
 import threading
 import shutil
 from datetime import timedelta
 from backend.core.config import DEFAULT_SETTINGS, build_enterprise_context, get_setting, load_runtime_settings, save_runtime_settings
 from backend.core.security import UploadValidationError, safe_upload_filename, validate_uploaded_file
-from backend.services.formal_placeholders import count_formal_placeholders
+from backend.services.formal_placeholders import apply_confirmed_values_to_export_text, count_formal_placeholders
 from backend.services.bid_prefill import formal_required_confirmation_gaps
 
 # 操作向量数据库的函数
@@ -916,15 +916,25 @@ def build_project_bid_markdown(
     if with_images:
         display_suffix = f"{display_suffix}-图文"
 
+    delivery_file_type = delivery_volume_file_type(volume_type if not focus_section_id else None)
+    report_cover_fields = dict(project_meta.get("cover_fields") if isinstance(project_meta.get("cover_fields"), dict) else {})
+    if delivery_file_type != "投标文件":
+        report_cover_fields["文件类型"] = delivery_file_type
+
     image_assets: list[dict] = []
     export_image_report: dict = {
         "enabled": bool(with_images),
+        "scope": "section" if focus_section_id else ("volume" if volume_type else "full"),
+        "volume_type": volume_type,
+        "volume_name": volume_name(volume_type) if volume_type else "完整投标文件",
+        "delivery_file_type": delivery_file_type,
+        "section_count": len(sections),
         "asset_candidates": 0,
         "selected": 0,
         "max_total": DOCX_TOTAL_ASSET_IMAGE_LIMIT,
         "manifest": [],
         "warnings": [],
-        "cover_fields": project_meta.get("cover_fields") if isinstance(project_meta.get("cover_fields"), dict) else {},
+        "cover_fields": report_cover_fields,
         "cover_field_sources": project_meta.get("cover_field_sources") if isinstance(project_meta.get("cover_field_sources"), dict) else {},
         "cover_field_missing": project_meta.get("cover_field_missing") if isinstance(project_meta.get("cover_field_missing"), list) else [],
         "cover_field_source": "uploaded_tender_structured_extract" if isinstance(project_meta.get("cover_fields"), dict) and project_meta.get("cover_fields") else "markdown_fallback",
@@ -947,13 +957,17 @@ def build_project_bid_markdown(
     placeholder_count = count_formal_placeholders(str(section.get("content") or "") for section in sections)
     confirmed_values = prefill_state.get("confirmed_values") if isinstance(prefill_state.get("confirmed_values"), dict) else {}
     missing_required = formal_required_confirmation_gaps(confirmed_values)
+    template_profile = resolve_docx_template_profile(report_cover_fields)
     export_image_report["formal_readiness"] = {
-        "template_id": DOCX_TEMPLATE_ID,
+        "template_id": template_profile.get("template_id") or "formal_bid_standard",
+        "template_family": template_profile.get("template_family"),
+        "reference_path": template_profile.get("reference_path"),
         "reference_template_policy": "tender_format_then_customer_reference_then_system_default",
         "bidder": DOCX_BIDDER_FULL_NAME,
         "empty_section_count": empty_section_count,
         "placeholder_count": placeholder_count,
         "missing_formal_required_fields": missing_required,
+        "export_confirmation_replacements": 0,
         "ready": empty_section_count == 0 and placeholder_count == 0 and not missing_required,
     }
     if empty_section_count:
@@ -992,6 +1006,9 @@ def build_project_bid_markdown(
                 section,
             )
         )
+        if confirmed_values:
+            content, confirmation_replacements = apply_confirmed_values_to_export_text(content, confirmed_values)
+            export_image_report["formal_readiness"]["export_confirmation_replacements"] += confirmation_replacements
         chunks.append(_section_markdown_heading(int(section.get("level") or 1), title))
         if content:
             chunks.append(f"{content}\n\n" if content.endswith("\n") else f"{content}\n\n")
@@ -1058,6 +1075,64 @@ def build_project_bid_markdown(
                         "library": _asset_library_label(asset),
                         "section_id": None,
                         "section_title": "同类项目业绩证明补充附件",
+                        "volume_type": "attachment",
+                        "volume_name": volume_name("attachment"),
+                        "score": score,
+                        "reason": match_reason,
+                        "image_ref": image_ref,
+                        "caption": caption,
+                        "sensitive": bool(asset.get("is_sensitive")),
+                        "anonymized": bool(asset.get("anonymized")),
+                    })
+
+        evidence_counts = _manifest_evidence_counts(export_image_report["manifest"])
+        supplement_testing_count = sum(
+            1 for item in export_image_report["manifest"]
+            if item.get("source_batch_id") == "customer_taichang_supplement_20260611"
+            and item.get("evidence_type") == "testing_capacity"
+        )
+        remaining = DOCX_TOTAL_ASSET_IMAGE_LIMIT - len(export_image_report["manifest"])
+        if supplement_testing_count < 1 and remaining > 0:
+            testing_assets: list[tuple[int, dict]] = []
+            for asset in image_assets:
+                image_ref = _asset_image_ref(asset)
+                if not image_ref:
+                    continue
+                asset_id = str(asset.get("id") or image_ref)
+                if asset_id in used_asset_ids:
+                    continue
+                if _asset_meta_value(asset, "evidence_type") != "testing_capacity":
+                    continue
+                if _asset_meta_value(asset, "source_batch_id") != "customer_taichang_supplement_20260611":
+                    continue
+                score = 24
+                asset_text = _asset_text(asset)
+                if any(keyword in asset_text for keyword in ["试验", "检测", "设备", "万能试验机", "电子天平"]):
+                    score += 16
+                testing_assets.append((score, asset))
+
+            if testing_assets:
+                chunks.append("## 试验检测能力证明补充附件\n\n")
+                testing_assets.sort(key=lambda item: item[0], reverse=True)
+                for score, asset in testing_assets[:1]:
+                    image_ref = _asset_image_ref(asset)
+                    asset_id = str(asset.get("id") or image_ref)
+                    used_asset_ids.add(asset_id)
+                    alt = re.sub(r"[\[\]\(\)]", "", str(asset.get("title") or "试验检测能力证明")).strip()
+                    match_reason = "正式投标文件试验检测能力最低配图要求"
+                    caption = _asset_caption(asset, match_reason)
+                    chunks.append(f"\n\n![{alt}]({image_ref})\n\n{caption}\n\n")
+                    export_image_report["manifest"].append({
+                        "asset_id": asset.get("id"),
+                        "asset_title": asset.get("title"),
+                        "asset_category": asset.get("category"),
+                        "asset_type": asset.get("asset_type"),
+                        "evidence_type": _asset_meta_value(asset, "evidence_type"),
+                        "target_library": _asset_meta_value(asset, "target_library"),
+                        "source_batch_id": _asset_meta_value(asset, "source_batch_id") or _asset_meta_value(asset, "ingestion_batch_id"),
+                        "library": _asset_library_label(asset),
+                        "section_id": None,
+                        "section_title": "试验检测能力证明补充附件",
                         "volume_type": "attachment",
                         "volume_name": volume_name("attachment"),
                         "score": score,

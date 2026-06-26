@@ -117,7 +117,7 @@ def build_bid_prefill_report(project_id: str) -> dict[str, Any]:
     status_counts = Counter(field["status"] for field in fields)
     required_gaps = [
         field for field in fields
-        if field["requiredLevel"] == "formal_required" and field["status"] in {"customer_required", "manual_confirm"}
+        if field["requiredLevel"] == "formal_required" and _field_formal_gap_reason(field)
     ]
 
     return {
@@ -153,6 +153,16 @@ def build_bid_prefill_report(project_id: str) -> dict[str, Any]:
         ],
         "confirmation": saved_prefill,
     }
+
+
+def _field_formal_gap_reason(field: dict[str, Any]) -> str | None:
+    """Return why a formal-required prefill field is still a gap."""
+    confirmed = field.get("confirmedValue")
+    if confirmed not in (None, ""):
+        return formal_confirmation_issue(confirmed)
+    if field.get("status") in {"customer_required", "manual_confirm"}:
+        return "需要客户确认"
+    return formal_confirmation_issue(field.get("value"))
 
 
 def _build_field(

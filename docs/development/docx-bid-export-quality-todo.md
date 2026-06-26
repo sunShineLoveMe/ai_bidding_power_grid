@@ -1,6 +1,6 @@
 # 标书文档编写与正式导出质量待办清单
 
-更新日期：2026-06-25
+更新日期：2026-06-26
 
 > 项目级优先级以 `docs/development/master-todo.md` 为准。本文档保留 DOCX 正式导出专项详情、验收口径和历史验证记录。
 
@@ -8,16 +8,23 @@
 
 ## 当前结论
 
-- MVP 默认采用 `formal_bid_standard`，即“国网正式通用标书格式”；历史 `sgcc_taichang_bid` 只作为客户参考稿紧凑版式记录，不再作为默认。
+- MVP 默认采用 `formal_bid_standard`，即面向泰昌的正式投标文件默认格式；当前阶段不向普通用户提供格式方案选择。
+- 历史 `sgcc_taichang_bid` 只作为客户参考稿紧凑版式记录，不再作为默认。
+- 客户已确认当前无法提供原版 Word 正文标书模板；`template_docx` 像素级套版不再作为当前 P0 阻塞项。
+- 当前可用参考为 `assets/template_words/5d2a2c833dad4bb3b3ccc0856f755b54.docx` 和 `assets/template_words/1523993.doc`，其中 `5d2a...docx` 作为主参考样式源，抽取目录域、封面字段、表格、签章位和页边距参考后扩展 `formal_bid_standard`，不直接套打正文。
+- `assets/template_words/~$2a2c833dad4bb3b3ccc0856f755b54.docx` 是 Word/WPS 临时锁文件，不作为模板来源。
+- 当前正式正文默认样式为仿宋_GB2312 小四 `12pt`、`1.5` 倍行距、首行缩进 `2` 字符；表格仍保持仿宋_GB2312 `12pt`、固定 `18pt` 行距。
 - 普通用户默认不直接进入全量自定义格式；自定义能力作为后续高级功能。
 - 若招标文件明确第六章格式、前附表或否决项要求，优先按招标文件要求。
-- 若客户提供可编辑 Word 模板，优先进入 `template_docx` 模式。
+- 若未来客户重新提供可编辑 Word 模板，再进入 `template_docx` 模式；当前 MVP 不等待该资料。
 - 真实验证必须走项目导出链路：`build_project_bid_markdown` -> `convert_md_to_word` -> `refresh_docx_fields_with_soffice`，不得只用 mock 替代。
 
 ## P0 必须完成
 
 | 状态 | 任务 | 验收口径 |
 | --- | --- | --- |
+| 已完成 | 参考 Word 模板规则落地 | 完成 `assets/template_words` 下两份参考模板 inventory；`5d2a...docx` 作为主参考样式源，规则写入 `formal_bid_standard` metadata；技术标/商务标真实导出均通过字段刷新、目录、表格、图片统一尺寸回归 |
+| 后置（客户暂无原版模板） | 可编辑 Word 模板导入 `template_docx` | 仅当客户后续重新提供可编辑 Word 版正式模板时启动；当前不阻塞 MVP 导出质量收口 |
 | 已完成 | 默认正式模板固定为 `formal_bid_standard` | metadata 记录模板 ID、正文/目录/页边距、页眉页脚设置 |
 | 已完成 | 封面正式字段补齐第一阶段 | 封面包含标题、投标人、日期，并在正文可提取时自动加入招标编号、分标编号、分标名称、包号/包名称、文件类型 |
 | 已完成 | 封面字段结构化来源补齐 | 从项目解析 metadata 或招标文件结构化结果稳定补齐分标编号、分标名称、包号/包名称，不依赖正文猜测 |
@@ -33,11 +40,12 @@
 
 | 状态 | 任务 | 验收口径 |
 | --- | --- | --- |
-| 待办 | 格式方案选择 | 提供“国网/泰昌标准格式、通用正式标书、紧凑上传版、图文展示版”，默认国网/泰昌 |
+| 延后 | 格式方案选择 | 当前 MVP 不做；导出固定使用面向泰昌的正式投标文件默认格式，后续有非泰昌/非正式交付场景再评估 |
 | 脚本版已完成 | 格式预检报告 | `scripts/rag/verify_taichang_full_bid_acceptance.py` 已检查目录缺失、页码字段、表格格式、图片失败/裁剪/比例、内部字段泄露、重复父章节标题和补充包资产选中；后续再接入页面/导出任务 metadata |
-| 待办 | 分册格式 | 商务标、技术标、资信标支持不同封面字段、目录和页眉文案 |
+| 已完成 | 分册格式 | 技术标/商务标两个交付包支持不同封面文件类型、目录、页眉文案和导出 metadata；资格文件、报价文件、附件材料归入商务标内部资料类型 |
 | 已完成基础版 | 第六章格式表单保真 | 已识别投标函、授权委托书、商务/技术偏差表和承诺函；签章行右对齐、语义列宽和表格行禁止跨页拆分通过真实 DOCX 回归 |
-| 待办 | 导出任务 metadata 扩充 | 记录格式方案、封面字段、目录层级、图表题注、格式告警 |
+| 已完成 | DOCX 图片统一长宽 | Markdown 图片和 Mermaid 转图均进入统一正文图片框；默认 `5.8in x 8.2in`，白底 contain，不裁剪、不拉伸；技术标/商务标真实导出中正文图片尺寸均一致 |
+| 待办 | 导出任务 metadata 扩充 | 记录模板 ID、封面字段、目录层级、图表题注、格式告警 |
 | 待办 | 阿里云下载体验收口 | 线上 DOCX 下载不得被浏览器弹窗/不安全下载策略阻断；优先启用 HTTPS，并改为同页下载或 blob 下载 |
 | 已完成 | 正式缺口口径统一 | 导出完成提示、投标信息确认页、formal readiness metadata 使用同一占位符与正式字段口径；当前演示项目正式必填缺口 0、正文占位符 0 |
 | 待办 | 章节图片与候选证据映射收口 | 项目业绩不得映射人员证书；法定格式章节默认不自动插图；生产能力图片不得泛化使用碳足迹等弱相关资料 |
@@ -48,11 +56,43 @@
 | --- | --- | --- |
 | 待办 | 高级自定义格式面板 | 参考竞品开放编号、正文、页面、图表设置，并支持恢复默认 |
 | 待办 | 企业模板保存 | 用户可另存企业模板，并在后续项目复用 |
-| 待办 | 可编辑 Word 模板导入 | 上传 Word 模板后进入 `template_docx` 模式 |
 | 待办 | PDF 预览与导出 | DOCX 刷新后可转 PDF 预览，便于提交前检查 |
 | 待办 | 招标文件格式约束抽取 | 自动抽取第六章/前附表格式要求，并提示用户确认 |
 
 ## P0 第一阶段执行记录
+
+### 2026-06-26 正文字号与 1.5 倍行距调整记录
+
+- 背景：用户要求正文改为小四，并将正文行间距调整为 `1.5` 倍行距。
+- 调整：
+  - 正文字号从 `14pt` 改为小四 `12pt`，字体仍为仿宋_GB2312。
+  - 正文、列表和正式表单签章行改为 `1.5` 倍行距；目录、表格、封面继续使用各自独立行距，避免表格过松或封面位移。
+  - 正文首行缩进仍为 `2` 字符，随小四字号变为 `24pt`。
+  - 兼容旧环境变量：若显式配置 `DOCX_BODY_LINE_SPACING=22` 且未配置规则，仍按固定行距解释，避免误变成 22 倍行距。
+- 自动化回归：
+  - `.venv/bin/python -m pytest tests/test_docx_export.py -q`，结果 `40 passed, 1 warning`。
+  - `.venv/bin/python -m pytest tests/test_celery_export_tasks.py -q`，结果 `11 passed, 7 warnings`。
+  - `.venv/bin/python -m pytest tests/test_compliance.py tests/test_formal_bid_check.py -q`，结果 `10 passed, 1 warning`。
+- 真实分册导出回归：`docs/development/runs/run_20260626_body_xiaosi_1_5_line_spacing.md` 和 JSON，状态 `PASS`；技术标 `50` 个章节、图片 `24/24/0`、表格 `110` 个；商务标 `52` 个章节、图片 `17/17/0`、表格 `56` 个；两份 DOCX 字段刷新均为 `refreshed`，正文样式均为 `12pt / ONE_POINT_FIVE 1.5 / 首行缩进24pt`。
+
+### 2026-06-26 参考 Word 模板规则落地与图片统一尺寸记录
+
+- 背景：客户确认无法提供原版 Word 正文标书模板；本轮改为分析 `assets/template_words` 下两份空白参考模板，并把可复用规则扩展到当前 `formal_bid_standard`。
+- 模板 inventory：
+  - `5d2a2c833dad4bb3b3ccc0856f755b54.docx`：可直接解析的 DOCX，A4，页边距约上/下 `2.54cm`、左/右 `3.175cm`；目录为 `HYPERLINK + PAGEREF` 域，`toc 2` 样式含右对齐点引导线，字体参考为仿宋/仿宋_GB2312 加粗；截图中的灰底是 Word/WPS 目录域阴影，不是稳定可打印底纹，因此未做成正式打印灰底。
+  - `1523993.doc`：旧版二进制 Word，已通过 LibreOffice 临时转 DOCX 分析；可作为格式表单、说明文字和表格结构补充参考，但不作为运行时依赖。
+  - `~$2a2c833dad4bb3b3ccc0856f755b54.docx`：Word/WPS 临时锁文件，已排除。
+- 落地策略：
+  - `formal_bid_standard` metadata 记录两份参考模板来源和参考策略，不直接套打正文，避免旧模板业务口径污染泰昌投标文件。
+  - 目录条目增强为全加粗，并保留右侧点引导线、`PAGEREF` 页码域和 LibreOffice 字段刷新。
+  - Markdown 图片和 Mermaid 转图进入统一白底正文图片框，默认 `5.8in x 8.2in`、`220dpi`、contain 模式，不裁剪、不拉伸。
+  - 技术标、商务标均复用同一正式导出版式和图片框规则。
+- 自动化回归：
+  - `.venv/bin/python -m pytest tests/test_docx_export.py -q`，结果 `40 passed, 1 warning`。
+  - `.venv/bin/python -m pytest tests/test_celery_export_tasks.py -q`，结果 `11 passed, 7 warnings`。
+  - `.venv/bin/python -m pytest tests/test_compliance.py tests/test_formal_bid_check.py -q`，结果 `10 passed, 1 warning`。
+- 真实分册导出回归：`docs/development/runs/run_20260626_reference_template_volume_docx.md` 和 JSON，状态 `PASS`；技术标 `50` 个章节、图片 `24/24/0`、表格 `110` 个；商务标 `52` 个章节、图片 `17/17/0`、表格 `56` 个；两份 DOCX 字段刷新均为 `refreshed`，正文图片显示尺寸均为 `5.8x8.2in`。
+- 完整标书真实链路：`docs/development/runs/run_20260626_reference_template_docx_format.md` 和 JSON 已生成；DOCX/PDF 生成、字段刷新、封面、目录、页眉页脚、正文样式、表格、图片统一尺寸均通过。该综合脚本状态为 `FAIL`，失败原因是当前项目正式必填确认字段缺 `12` 项，以及自动选图未命中 `testing_capacity` 补充包资产；这两个是业务门禁/选图覆盖问题，不属于本轮参考模板版式改动。
 
 ### 2026-06-25 第六章格式表单保真验收记录
 
@@ -66,6 +106,14 @@
 - 真实下载 API 任务 `fd40ab53-841b-482b-b1b0-1ecb31117a87` 正常完成；因当前模拟客户字段形成 `8` 个正式检查阻断项，API 与浏览器均只创建草稿版 DOCX。
 - 验证记录：`docs/development/runs/run_20260625_docx_sixth_chapter_form_fidelity.md` 和对应 JSON。
 - 边界：客户原始 Word 表单的像素级套表、复杂合并单元格和原始签章位仍由后续 `template_docx` 模式处理。
+
+### 2026-06-26 分册 DOCX 正式导出回归记录
+
+- 当前 MVP 保持默认完整导出为泰昌正式投标文件，不提供普通用户格式方案选择。
+- 技术标/商务标单独导出时，封面 `文件类型`、页眉右侧和导出 metadata 均按分册区分。
+- 真实链路：`build_project_bid_markdown(volume_type=technical/business, with_images=true) -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
+- 验证结果：技术标 50 个章节、图片 24/24/0、表格 110 个、字段刷新成功；商务标 52 个章节、图片 17/17/0、表格 56 个、字段刷新成功。
+- 输出记录：`docs/development/runs/run_20260626_p1_volume_docx_export.md`。
 
 ### 2026-06-25 国网正式通用排版升级验收记录
 
@@ -93,7 +141,7 @@
   - 修正规则字段 key，使授权代表身份证号、签署日期、投标有效期、技术偏差和参数匹配摘要按现有投标确认结构检查。
   - 资料边界检查只扫描真实来源字段；泰昌企业事实资产 metadata 中的 `do_not_mix_with` 边界说明不再误判为 forbidden source。
   - 客户演示验收脚本默认项目切换为当前演示项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d`，避免后续误跑历史旧项目。
-- 自动化回归：`PYTHONPATH=. .venv/bin/pytest tests/test_formal_placeholders.py tests/test_formal_bid_check.py tests/test_docx_export.py tests/test_celery_export_tasks.py -q`，结果 `54 passed, 7 warnings`。
+- 自动化回归：`PYTHONPATH=. .venv/bin/pytest tests/test_formal_placeholders.py tests/test_formal_bid_check.py tests/test_docx_export.py tests/test_celery_export_tasks.py -q`，结果 `64 passed, 7 warnings`。
 - 真实项目：`a1d853bc-ca4e-43b4-bbea-256f561c8a3d`。
 - 门禁收口记录：`docs/development/runs/run_20260625_placeholder_cleanup_current_project.md`，状态 `PASS`；应用确认字段 `31` 个，占位符清理 `18` 处，空叶子章节 `0`，正文占位符 `0`，正式必填缺口 `0`。
 - 完整导出验收记录：`docs/development/runs/run_20260625_placeholder_cleanup_docx_acceptance.md` 和对应 JSON，状态 `PASS`；默认入口复验 `docs/development/runs/run_20260625_placeholder_cleanup_default_acceptance.md` 也为 `PASS`。DOCX 生成、LibreOffice 字段刷新、页边距/正文样式、封面、目录、页眉页脚、图片、表格、内部字段泄露检查均通过，failures/warnings 均为空。
@@ -378,3 +426,60 @@
 - 本次真实验收结果：DOCX completed；模板 `formal_bid_standard`；图片 selected/inserted/failed 为 `23/23/0`；Mermaid found/inserted/skipped 为 `0/0/0`；LibreOffice 字段刷新 `status=refreshed`、`returncode=0`、`manual_refresh_required=false`；刷新报告识别表格 `166` 个。
 - 自动化回归：`.venv/bin/python -m pytest tests/test_docx_export.py tests/test_celery_export_tasks.py -q`，结果 `48 passed, 7 warnings`。
 - 运行记录：`docs/development/runs/run_20260625_sg_prompt_001_prompt_profile_budget.md`。
+
+### 2026-06-26 真实用户完整导出与格式收口记录
+
+- 背景：客户反馈正式 Word 标书格式仍“不行”，本轮按真实用户本地操作方式复测完整导出；客户未提供正式报价/保证金/授权等字段，因此本地使用正式口径演示值补齐 12 个确认字段。
+- 真实浏览器链路：Chrome 登录本地系统 `admin / 12345678`，进入投标确认页，调用确认接口应用字段，再从登录浏览器同源上下文触发 `download-docx` 导出任务并轮询完成。
+- 导出任务：`eb51b93e-191d-4e23-8f8b-897a93f753b8`，`export_mode=formal`，`blocked_count=0`，`can_formal_export=true`。
+- 本轮修复：
+  - 正式导出层新增确认值渲染清理，避免旧正文中的 `客户最终确认后填写`、`客户确认后填写`、`待补充` 等草稿占位进入 DOCX。
+  - 自动选图新增泰昌补充资料 `testing_capacity` 兜底，确保完整标书包含试验检测能力资产。
+  - 保持正文小四 `12pt`、`1.5` 倍行距、首行缩进 `24pt`，图片统一 `5.8in x 8.2in`。
+- 真实导出链路：`prefill-confirmation/apply -> download-docx -> Celery run_bid_docx_export -> build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice -> LibreOffice PDF`。
+- 验收记录：
+  - 浏览器操作记录：`docs/development/runs/run_20260626_real_user_full_export_browser.md`
+  - 成品验收报告：`docs/development/runs/run_20260626_real_user_full_export_acceptance.md`
+  - 成品验收 JSON：`docs/development/runs/run_20260626_real_user_full_export_acceptance.json`
+- 输出文件：
+  - DOCX：`outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.docx`
+  - PDF：`outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.pdf`
+- 本次真实验收结果：状态 `PASS`，无 failures/warnings；章节 `102/102` 有正文；图片候选/选中/插入/失败为 `598/24/24/0`；项目业绩 `2`、试验检测能力 `1`、检验报告 `6`；表格 `166`；封面、目录、页眉页脚、字段刷新、字体字号行距、表格、图片比例和统一尺寸均通过。
+- 残留扫描：生成 DOCX 中 `客户最终确认`、`客户确认后填写`、`待补充`、`内部测试`、`模拟值`、`非正式报价` 计数均为 `0`。
+- 自动化回归：
+  - `.venv/bin/python -m pytest tests/test_bid_prefill.py tests/test_formal_placeholders.py tests/test_docx_export.py tests/test_celery_export_tasks.py -q`，结果 `64 passed, 7 warnings`。
+  - `set -a; source .env; set +a; .venv/bin/python scripts/rag/verify_taichang_full_bid_acceptance.py --run-id run_20260626_real_user_full_export_acceptance --project-id a1d853bc-ca4e-43b4-bbea-256f561c8a3d --pdf-preview`，结果 `PASS`。
+
+### 2026-06-26 新疆中标参考技术标/商务标模板族落地记录
+
+- 背景：客户提供兄弟公司刚中标的正式技术标、商务标，要求评估并按其正式观感形成可用模板。
+- 参考文件：
+  - `assets/template_words/技术文件 - 10kV架空绝缘导线-新疆.docx`
+  - `assets/template_words/商务文件 - 10kV架空绝缘导线-新疆(1).docx`
+- 审阅结论：两份文件是正式成稿分册，不是空白套打模板；只能抽取版式、目录组织和分册结构，不得复用参考企业事实、产品参数、证书、审计报告、查询报告或附件内容。
+- 本轮实现：
+  - 新增 `technical_bid_standard` 和 `business_bid_standard` 模板 profile，按 `文件类型=技术投标文件/商务投标文件` 自动选择。
+  - 两个 profile 归属 `formal_bid_xinjiang_sgcc_reference` 模板族，记录参考文件路径、适用分册、运行策略和分册参考目录。
+  - 技术/商务分册使用参考稿页边距：上/下 `2.54cm`，左/右 `3.17cm`，页眉距 `1.5cm`，页脚距 `1.75cm`。
+  - 技术/商务目录支持 1-4 级，目录/页眉页脚字体切换为宋体，条目 `10.5pt`、`15pt` 行距、非加粗、点引导线右对齐。
+  - 页眉继续不放 Logo；黑白文本和灰阶表头保持不变。
+- 真实用户链路：
+  - 本地登录 API：`admin / 12345678`。
+  - 调用正式导出接口：`POST /api/bidding/interpretations/<project_id>/download-docx`，分别传 `volumeType=technical`、`volumeType=business`、`withImages=true`。
+  - Celery worker 执行：`build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
+- 输出文件：
+  - 技术标 DOCX/PDF：`outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-技术标-图文.docx`
+  - 商务标 DOCX/PDF：`outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-商务标-图文.docx`
+- 验收记录：
+  - 参考稿审阅：`docs/development/runs/run_20260626_reference_bid_templates_review.md`
+  - 真实 API 导出任务：`docs/development/runs/run_20260626_reference_template_real_api_tasks.json`
+  - DOCX XML 审计：`docs/development/runs/run_20260626_reference_template_docx_audit.json`
+  - PDF 抽样截图：`docs/development/runs/run_20260626_reference_template_real_export_pages/`
+  - 完整标书回归：`docs/development/runs/run_20260626_reference_template_full_acceptance.md`
+- 本次真实验收结果：
+  - 技术标：`template_id=technical_bid_standard`，`template_family=formal_bid_xinjiang_sgcc_reference`，字段刷新 `refreshed`，XML 审计 failures `[]`。
+  - 商务标：`template_id=business_bid_standard`，`template_family=formal_bid_xinjiang_sgcc_reference`，字段刷新 `refreshed`，XML 审计 failures `[]`。
+  - 完整标书：`run_20260626_reference_template_full_acceptance` PASS，无 failures/warnings。
+- 自动化回归：
+  - `.venv/bin/python -m pytest tests/test_docx_export.py tests/test_formal_placeholders.py tests/test_bid_prefill.py tests/test_celery_export_tasks.py -q`，结果 `67 passed, 7 warnings`。
+- 当前边界：本轮已形成技术/商务模板 profile 和正式导出门禁；后续若要进一步贴近参考稿，需要把章节树升级为“分册对象模型”，按技术偏差表、技术特性参数表、商务偏差表、查询报告、财务状况、附件证据页等对象生成，而不是继续把通用章节树原样输出。

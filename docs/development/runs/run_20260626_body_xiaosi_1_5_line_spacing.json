@@ -1,0 +1,561 @@
+{
+  "run_id": "run_20260626_body_xiaosi_1_5_line_spacing",
+  "generated_at": "2026-06-26T16:27:56",
+  "project_id": "a1d853bc-ca4e-43b4-bbea-256f561c8a3d",
+  "status": "PASS",
+  "failures": [],
+  "records": [
+    {
+      "volume_type": "technical",
+      "file_type": "技术投标文件",
+      "title": "国网辽宁电力2025年第三次物资协议库存招标采购投标文件-技术标",
+      "markdown_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-技术标-图文.md",
+      "docx_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-技术标-图文.docx",
+      "section_count": 50,
+      "image_selection": {
+        "candidates": 598,
+        "selected": 24
+      },
+      "image_conversion": {
+        "found": 24,
+        "inserted": 24,
+        "skipped": 0,
+        "failed": 0
+      },
+      "field_refresh": {
+        "status": "refreshed",
+        "returncode": 0
+      },
+      "normal_style": {
+        "font_size_pt": 12.0,
+        "line_spacing_rule": "ONE_POINT_FIVE",
+        "line_spacing": 1.5,
+        "line_spacing_pt": null,
+        "first_line_indent_pt": 24.0
+      },
+      "paragraphs": {
+        "paragraph_count": 3284,
+        "non_empty_paragraph_count": 3256,
+        "heading_count": 51,
+        "toc_entry_count": 50,
+        "first_non_empty": [
+          "国网辽宁电力2025年第三次物资协议",
+          "库存招标采购",
+          "技术投标文件",
+          "招标编号：2225AC",
+          "包号：包2",
+          "投标人：河北泰昌电力器材科技有限公司",
+          "法定代表人或其委托代理人：        （签名）",
+          "2026年06月26日",
+          "目  录",
+          "1. 技术评分支撑材料\t4",
+          "2. 技术响应文件\t9",
+          "2.1 技术偏差表\t22",
+          "2.2 专项投标文件\t28",
+          "2.3 业绩文件\t46",
+          "2.3.1 平台业绩汇总查询截图\t54",
+          "2.3.2 资质业绩凭证 单\t61"
+        ],
+        "heading_samples": [
+          "1. 技术评分支撑材料",
+          "2. 技术响应文件",
+          "2.1 技术偏差表",
+          "2.2 专项投标文件",
+          "2.3 业绩文件",
+          "2.3.1 平台业绩汇总查询截图",
+          "2.3.2 资质业绩凭证 单",
+          "2.3.3 新增业绩合同",
+          "2.3.3.1 产品购销合同",
+          "2.3.3.2 同类项目业绩证明材料",
+          "2.4 技术特性参数表",
+          "2.4.1 技术特性参数明细（按物料编码）",
+          "2.5 货物组件材料配置表",
+          "2.6 符合招标文件投标人资格要求的证明文件",
+          "2.6.1 资格预审结果通知书",
+          "2.6.2 资质业绩凭证单",
+          "2.7 招标文件第三章评标办法前附表 之四“技术评分标准”涉及的支撑材料",
+          "2.7.1 创新能力",
+          "2.7.1.1 专利证书",
+          "2.7.1.2 专利证书"
+        ],
+        "toc_samples": [
+          "1. 技术评分支撑材料\t4",
+          "2. 技术响应文件\t9",
+          "2.1 技术偏差表\t22",
+          "2.2 专项投标文件\t28",
+          "2.3 业绩文件\t46",
+          "2.3.1 平台业绩汇总查询截图\t54",
+          "2.3.2 资质业绩凭证 单\t61",
+          "2.3.3 新增业绩合同\t66",
+          "2.3.3.1 产品购销合同\t73",
+          "2.3.3.2 同类项目业绩证明材料\t83",
+          "2.4 技术特性参数表\t91",
+          "2.4.1 技术特性参数明细（按物料编码）\t96",
+          "2.5 货物组件材料配置表\t112",
+          "2.6 符合招标文件投标人资格要求的证明文件\t128",
+          "2.6.1 资格预审结果通知书\t136",
+          "2.6.2 资质业绩凭证单\t138",
+          "2.7 招标文件第三章评标办法前附表 之四“技术评分标准”涉及的支撑材料\t139",
+          "2.7.1 创新能力\t158",
+          "2.7.1.1 专利证书\t164",
+          "2.7.1.2 专利证书\t165"
+        ]
+      },
+      "tables": {
+        "table_count": 110,
+        "full_width_count": 110,
+        "fixed_layout_count": 110,
+        "repeat_header_count": 110,
+        "cell_margin_count": 110,
+        "all_tables_full_width": true,
+        "all_tables_fixed_layout": true,
+        "all_tables_repeat_header": true,
+        "all_tables_have_cell_margins": true,
+        "samples": [
+          {
+            "rows": 9,
+            "cols": 3,
+            "full_width": true,
+            "fixed_layout": true,
+            "repeat_header": true,
+            "cell_margins": true
+          },
+          {
+            "rows": 2,
+            "cols": 6,
+            "full_width": true,
+            "fixed_layout": true,
+            "repeat_header": true,
+            "cell_margins": true
+          },
+          {
+            "rows": 4,
+            "cols": 4,
+            "full_width": true,
+            "fixed_layout": true,
+            "repeat_header": true,
+            "cell_margins": true
+          },
+          {
+            "rows": 17,
+            "cols": 5,
+            "full_width": true,
+            "fixed_layout": true,
+            "repeat_header": true,
+            "cell_margins": true
+          },
+          {
+            "rows": 6,
+            "cols": 5,
+            "full_width": true,
+            "fixed_layout": true,
+            "repeat_header": true,
+            "cell_margins": true
+          },
+          {
+            "rows": 6,
+            "cols": 5,
+            "full_width": true,
+            "fixed_layout": true,
+            "repeat_header": true,
+            "cell_margins": true
+          },
+          {
+            "rows": 6,
+            "cols": 5,
+            "full_width": true,
+            "fixed_layout": true,
+            "repeat_header": true,
+            "cell_margins": true
+          },
+          {
+            "rows": 9,
+            "cols": 5,
+            "full_width": true,
+            "fixed_layout": true,
+            "repeat_header": true,
+            "cell_margins": true
+          }
+        ]
+      },
+      "images": {
+        "media_count": 25,
+        "checked_inline_images": 25,
+        "crop_marker_count": 0,
+        "max_ratio_delta": 0.000167,
+        "bad_ratio": [],
+        "body_display_size_counts": {
+          "5.8x8.2": 24
+        },
+        "body_images_uniform_display_size": true
+      },
+      "template": {
+        "template_id": "formal_bid_standard",
+        "bidder_full_name": "河北泰昌电力器材科技有限公司",
+        "body_font": "FangSong_GB2312",
+        "body_latin_font": "Times New Roman",
+        "body_font_size_pt": 12.0,
+        "body_line_spacing_rule": "multiple",
+        "body_line_spacing": 1.5,
+        "body_line_spacing_pt": null,
+        "body_first_line_indent_pt": 24.0,
+        "list_left_indent_pt": 24.0,
+        "list_hanging_indent_pt": 12.0,
+        "heading_keep_with_next": false,
+        "cover_title_font_size_pt": 36.0,
+        "toc_title_font_size_pt": 16.0,
+        "toc_entry_font_size_pt": 12.0,
+        "toc_entry_line_spacing_pt": 18.0,
+        "table_font": "FangSong_GB2312",
+        "table_font_size_pt": 12.0,
+        "table_line_spacing_pt": 18.0,
+        "table_cell_margin_twips": 100,
+        "toc_entry_bold_all": true,
+        "reference_templates": [
+          {
+            "path": "assets/template_words/5d2a2c833dad4bb3b3ccc0856f755b54.docx",
+            "role": "primary_reference_style",
+            "usage": "抽取目录、页边距、封面字段、表格和签章位风格，作为 formal_bid_standard 的参考规则，不直接套打正文。"
+          },
+          {
+            "path": "assets/template_words/1523993.doc",
+            "role": "secondary_legacy_reference",
+            "usage": "旧版二进制 Word 参考稿，仅用于补充格式项比对，不作为运行时模板依赖。"
+          }
+        ],
+        "reference_template_policy": "assets/template_words 仅作为格式参考源，当前仍由 formal_bid_standard 稳定生成技术标和商务标。",
+        "image_layout": {
+          "uniform_frame_enabled": true,
+          "frame_width_in": 5.8,
+          "frame_height_in": 8.2,
+          "frame_dpi": 220,
+          "frame_background": "FFFFFF",
+          "content_policy": "contain_no_crop_no_distortion"
+        },
+        "page_size": "A4",
+        "margins_cm": {
+          "top": 2.5,
+          "bottom": 2.5,
+          "left": 2.8,
+          "right": 2.5
+        },
+        "heading_font": "SimHei",
+        "heading_level3_font": "KaiTi_GB2312",
+        "header_footer": {
+          "header_font": "FangSong_GB2312",
+          "header_font_size_pt": 9,
+          "footer_font": "FangSong_GB2312",
+          "footer_font_size_pt": 9,
+          "page_number_format": "第 X 页 共 Y 页",
+          "header_text": "左侧项目名称，右侧技术投标文件",
+          "header_max_chars": 42
+        },
+        "cover_fields": {
+          "项目名称": "国网辽宁电力2025年第三次物资协议库存招标采购",
+          "文件类型": "技术投标文件",
+          "招标编号": "2225AC",
+          "包号": "包2"
+        }
+      },
+      "manifest_counts": {
+        "inspection_report": 6,
+        "production_capacity": 9,
+        "testing_capacity": 5,
+        "green_low_carbon": 2,
+        "unknown": 1,
+        "project_performance": 1
+      },
+      "checks": {
+        "field_refresh_refreshed": true,
+        "body_font_size_xiaosi_12pt": true,
+        "body_line_spacing_one_point_five": true,
+        "body_first_line_indent_two_chars": true,
+        "cover_has_file_type": true,
+        "header_has_file_type": true,
+        "toc_has_entries": true,
+        "toc_has_dot_leader": true,
+        "toc_has_pageref": true,
+        "table_layout_ok": true,
+        "images_inserted_without_failure": true,
+        "body_images_uniform_display_size": true,
+        "no_image_crop_or_distortion": true
+      }
+    },
+    {
+      "volume_type": "business",
+      "file_type": "商务投标文件",
+      "title": "国网辽宁电力2025年第三次物资协议库存招标采购投标文件-商务标",
+      "markdown_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-商务标-图文.md",
+      "docx_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-商务标-图文.docx",
+      "section_count": 52,
+      "image_selection": {
+        "candidates": 598,
+        "selected": 17
+      },
+      "image_conversion": {
+        "found": 17,
+        "inserted": 17,
+        "skipped": 0,
+        "failed": 0
+      },
+      "field_refresh": {
+        "status": "refreshed",
+        "returncode": 0
+      },
+      "normal_style": {
+        "font_size_pt": 12.0,
+        "line_spacing_rule": "ONE_POINT_FIVE",
+        "line_spacing": 1.5,
+        "line_spacing_pt": null,
+        "first_line_indent_pt": 24.0
+      },
+      "paragraphs": {
+        "paragraph_count": 1695,
+        "non_empty_paragraph_count": 1672,
+        "heading_count": 53,
+        "toc_entry_count": 52,
+        "first_non_empty": [
+          "国网辽宁电力2025年第三次物资协议",
+          "库存招标采购",
+          "商务投标文件",
+          "招标编号：2225AC",
+          "分标编号：客户最终确认后填写（依据招标文件填写）",
+          "包号：包1",
+          "包名称：电缆保护管CPVC、电缆保护管MPP（需按目标包确认）",
+          "投标人：河北泰昌电力器材科技有限公司",
+          "法定代表人或其委托代理人：        （签名）",
+          "2026年06月26日",
+          "目  录",
+          "1. 投标函及法定格式文件\t4",
+          "1.1 投标函及投标函附录\t10",
+          "1.2 法定代表人身份证明及授权委托书\t15",
+          "1.3 投标保证金及基本账户资料\t17",
+          "2. 商务响应文件\t21"
+        ],
+        "heading_samples": [
+          "1. 投标函及法定格式文件",
+          "1.1 投标函及投标函附录",
+          "1.2 法定代表人身份证明及授权委托书",
+          "1.3 投标保证金及基本账户资料",
+          "2. 商务响应文件",
+          "2.1 （一）商务偏差表",
+          "2.2 投标保证保险",
+          "2.3 投标保证保险（电缆保护管 CPVC）",
+          "2.4 投标保证保险（电缆保护管 MPP）",
+          "2.5 投标保证保险（电 缆保护管 NHAP）",
+          "2.6 补充文件",
+          "2.7 投标保证金",
+          "2.7.1 保险购买凭证",
+          "2.7.1.1 保险购买凭证-电缆保护管 CPVC",
+          "2.7.1.2 保险购买凭证-电缆保护管 MPP",
+          "2.7.1.3 保险购买凭证-电缆保护管 NHAP",
+          "2.7.2 银行基本账户证明扫描件",
+          "2.7.3 投标保证金明细表",
+          "2.8 投标人基本情况表",
+          "2.8.1 投标人基本情况表"
+        ],
+        "toc_samples": [
+          "1. 投标函及法定格式文件\t4",
+          "1.1 投标函及投标函附录\t10",
+          "1.2 法定代表人身份证明及授权委托书\t15",
+          "1.3 投标保证金及基本账户资料\t17",
+          "2. 商务响应文件\t21",
+          "2.1 （一）商务偏差表\t27",
+          "2.2 投标保证保险\t31",
+          "2.3 投标保证保险（电缆保护管 CPVC）\t34",
+          "2.4 投标保证保险（电缆保护管 MPP）\t39",
+          "2.5 投标保证保险（电 缆保护管 NHAP）\t42",
+          "2.6 补充文件\t44",
+          "2.7 投标保证金\t51",
+          "2.7.1 保险购买凭证\t54",
+          "2.7.1.1 保险购买凭证-电缆保护管 CPVC\t57",
+          "2.7.1.2 保险购买凭证-电缆保护管 MPP\t61",
+          "2.7.1.3 保险购买凭证-电缆保护管 NHAP\t68",
+          "2.7.2 银行基本账户证明扫描件\t72",
+          "2.7.3 投标保证金明细表\t75",
+          "2.8 投标人基本情况表\t78",
+          "2.8.1 投标人基本情况表\t81"
+        ]
+      },
+      "tables": {
+        "table_count": 56,
+        "full_width_count": 56,
+        "fixed_layout_count": 56,
+        "repeat_header_count": 56,
+        "cell_margin_count": 56,
+        "all_tables_full_width": true,
+        "all_tables_fixed_layout": true,
+        "all_tables_repeat_header": true,
+        "all_tables_have_cell_margins": true,
+        "samples": [
+          {
+            "rows": 11,
+            "cols": 4,
+            "full_width": true,
+            "fixed_layout": true,
+            "repeat_header": true,
+            "cell_margins": true
+          },
+          {
+            "rows": 9,
+            "cols": 6,
+            "full_width": true,
+            "fixed_layout": true,
+            "repeat_header": true,
+            "cell_margins": true
+          },
+          {
+            "rows": 2,
+            "cols": 3,
+            "full_width": true,
+            "fixed_layout": true,
+            "repeat_header": true,
+            "cell_margins": true
+          },
+          {
+            "rows": 12,
+            "cols": 5,
+            "full_width": true,
+            "fixed_layout": true,
+            "repeat_header": true,
+            "cell_margins": true
+          },
+          {
+            "rows": 16,
+            "cols": 4,
+            "full_width": true,
+            "fixed_layout": true,
+            "repeat_header": true,
+            "cell_margins": true
+          },
+          {
+            "rows": 8,
+            "cols": 2,
+            "full_width": true,
+            "fixed_layout": true,
+            "repeat_header": true,
+            "cell_margins": true
+          },
+          {
+            "rows": 5,
+            "cols": 2,
+            "full_width": true,
+            "fixed_layout": true,
+            "repeat_header": true,
+            "cell_margins": true
+          },
+          {
+            "rows": 7,
+            "cols": 2,
+            "full_width": true,
+            "fixed_layout": true,
+            "repeat_header": true,
+            "cell_margins": true
+          }
+        ]
+      },
+      "images": {
+        "media_count": 16,
+        "checked_inline_images": 18,
+        "crop_marker_count": 0,
+        "max_ratio_delta": 0.000167,
+        "bad_ratio": [],
+        "body_display_size_counts": {
+          "5.8x8.2": 17
+        },
+        "body_images_uniform_display_size": true
+      },
+      "template": {
+        "template_id": "formal_bid_standard",
+        "bidder_full_name": "河北泰昌电力器材科技有限公司",
+        "body_font": "FangSong_GB2312",
+        "body_latin_font": "Times New Roman",
+        "body_font_size_pt": 12.0,
+        "body_line_spacing_rule": "multiple",
+        "body_line_spacing": 1.5,
+        "body_line_spacing_pt": null,
+        "body_first_line_indent_pt": 24.0,
+        "list_left_indent_pt": 24.0,
+        "list_hanging_indent_pt": 12.0,
+        "heading_keep_with_next": false,
+        "cover_title_font_size_pt": 36.0,
+        "toc_title_font_size_pt": 16.0,
+        "toc_entry_font_size_pt": 12.0,
+        "toc_entry_line_spacing_pt": 18.0,
+        "table_font": "FangSong_GB2312",
+        "table_font_size_pt": 12.0,
+        "table_line_spacing_pt": 18.0,
+        "table_cell_margin_twips": 100,
+        "toc_entry_bold_all": true,
+        "reference_templates": [
+          {
+            "path": "assets/template_words/5d2a2c833dad4bb3b3ccc0856f755b54.docx",
+            "role": "primary_reference_style",
+            "usage": "抽取目录、页边距、封面字段、表格和签章位风格，作为 formal_bid_standard 的参考规则，不直接套打正文。"
+          },
+          {
+            "path": "assets/template_words/1523993.doc",
+            "role": "secondary_legacy_reference",
+            "usage": "旧版二进制 Word 参考稿，仅用于补充格式项比对，不作为运行时模板依赖。"
+          }
+        ],
+        "reference_template_policy": "assets/template_words 仅作为格式参考源，当前仍由 formal_bid_standard 稳定生成技术标和商务标。",
+        "image_layout": {
+          "uniform_frame_enabled": true,
+          "frame_width_in": 5.8,
+          "frame_height_in": 8.2,
+          "frame_dpi": 220,
+          "frame_background": "FFFFFF",
+          "content_policy": "contain_no_crop_no_distortion"
+        },
+        "page_size": "A4",
+        "margins_cm": {
+          "top": 2.5,
+          "bottom": 2.5,
+          "left": 2.8,
+          "right": 2.5
+        },
+        "heading_font": "SimHei",
+        "heading_level3_font": "KaiTi_GB2312",
+        "header_footer": {
+          "header_font": "FangSong_GB2312",
+          "header_font_size_pt": 9,
+          "footer_font": "FangSong_GB2312",
+          "footer_font_size_pt": 9,
+          "page_number_format": "第 X 页 共 Y 页",
+          "header_text": "左侧项目名称，右侧商务投标文件",
+          "header_max_chars": 42
+        },
+        "cover_fields": {
+          "项目名称": "国网辽宁电力2025年第三次物资协议库存招标采购",
+          "文件类型": "商务投标文件",
+          "招标编号": "2225AC",
+          "分标编号": "客户最终确认后填写（依据招标文件填写）",
+          "包号": "包1",
+          "包名称": "电缆保护管CPVC、电缆保护管MPP（需按目标包确认）"
+        }
+      },
+      "manifest_counts": {
+        "certification": 7,
+        "business_license": 4,
+        "project_performance": 2,
+        "green_low_carbon": 4
+      },
+      "checks": {
+        "field_refresh_refreshed": true,
+        "body_font_size_xiaosi_12pt": true,
+        "body_line_spacing_one_point_five": true,
+        "body_first_line_indent_two_chars": true,
+        "cover_has_file_type": true,
+        "header_has_file_type": true,
+        "toc_has_entries": true,
+        "toc_has_dot_leader": true,
+        "toc_has_pageref": true,
+        "table_layout_ok": true,
+        "images_inserted_without_failure": true,
+        "body_images_uniform_display_size": true,
+        "no_image_crop_or_distortion": true
+      }
+    }
+  ]
+}
