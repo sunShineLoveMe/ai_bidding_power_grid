@@ -308,24 +308,60 @@ git remote -v
 适用于 `frontend/` 下页面、组件、样式、接口调用或构建配置变更。
 
 ```bash
+unset BUILD_ID BUILD_COMMIT BUILD_BRANCH BUILD_TIME
+export BUILD_COMMIT="$(git rev-parse --short=12 HEAD)"
+export BUILD_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+export BUILD_TIME="$(date -Iseconds)"
+export BUILD_ID="$(date +%Y%m%d%H%M%S)-${BUILD_COMMIT}"
+echo "${BUILD_ID}"
+
 docker compose build frontend
 docker compose up -d --force-recreate frontend
 docker compose ps frontend
 ```
+
+前端构建版本说明：
+
+- Docker 构建上下文排除了 `.git/`，构建容器内不能直接读取 Git commit；
+- 每次前端发布都必须显式注入 `BUILD_ID`、`BUILD_COMMIT`、`BUILD_BRANCH`、`BUILD_TIME`；
+- 不要在 `.env` 长期写死 `BUILD_*`，否则后续发布可能出现“代码已更新，但 `/build-info.json` 仍是旧 commit”。
 
 验证：
 
 ```bash
 curl -fsS -I http://127.0.0.1:8080/
 curl -fsS http://127.0.0.1:8080/build-info.json
+docker compose exec frontend sh -lc 'cat /usr/share/nginx/html/build-info.json'
 docker compose logs --tail=100 frontend
 ```
 
-若构建仍使用旧静态包：
+验收口径：`curl` 和容器内 `build-info.json` 的 `commit` 必须等于 `git rev-parse --short=12 HEAD`。
+
+常规发布不要默认使用 `--no-cache`。`--no-cache` 会重新执行 `npm ci`，阿里云 ECS 到 npm 源网络不稳定时可能出现 `ECONNRESET`。只有在依赖变更或明确怀疑依赖层损坏时再使用无缓存构建。需要无缓存构建前，建议先配置临时国内 npm 镜像：
 
 ```bash
+cat > frontend/.npmrc <<'EOF'
+registry=https://registry.npmmirror.com
+fetch-retries=5
+fetch-retry-mintimeout=20000
+fetch-retry-maxtimeout=120000
+EOF
+
+unset BUILD_ID BUILD_COMMIT BUILD_BRANCH BUILD_TIME
+export BUILD_COMMIT="$(git rev-parse --short=12 HEAD)"
+export BUILD_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+export BUILD_TIME="$(date -Iseconds)"
+export BUILD_ID="$(date +%Y%m%d%H%M%S)-${BUILD_COMMIT}"
+
 docker compose build --no-cache frontend
 docker compose up -d --force-recreate frontend
+```
+
+如果 Git 已是目标版本但构建结果仍显示旧 commit，先检查当前 shell 或 Compose 配置中是否残留旧构建变量：
+
+```bash
+env | grep '^BUILD_' || true
+docker compose config | sed -n '/frontend:/,/healthcheck:/p' | grep BUILD -n || true
 ```
 
 浏览器使用无痕窗口验证，或在 DevTools 中禁用缓存后强制刷新。

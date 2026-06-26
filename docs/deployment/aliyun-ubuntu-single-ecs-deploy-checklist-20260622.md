@@ -227,8 +227,11 @@ git branch --show-current
 
 ```bash
 git checkout feat/aliyun-test-readiness
-git pull --rebase origin feat/aliyun-test-readiness
+git remote -v
+git pull --rebase <gitee远端名> feat/aliyun-test-readiness
 ```
+
+> 说明：本项目阿里云测试环境代码来源以 Gitee 为准。不同本地机器的远端名可能是 `origin` 或 `gitee`，提交前先用 `git remote -v` 确认，后续命令中的 `<gitee远端名>` 替换为实际远端名。
 
 提交前检查：
 
@@ -242,7 +245,7 @@ git diff
 ```bash
 git add <本次修改文件>
 git commit -m "<简短说明>"
-git push origin feat/aliyun-test-readiness
+git push <gitee远端名> feat/aliyun-test-readiness
 ```
 
 推送后记录本地 commit：
@@ -282,14 +285,46 @@ git log -1 --oneline
 cd /opt/ai-bidding/ai_bidding_power_grid
 
 git log -1 --oneline
+unset BUILD_ID BUILD_COMMIT BUILD_BRANCH BUILD_TIME
+export BUILD_COMMIT="$(git rev-parse --short=12 HEAD)"
+export BUILD_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+export BUILD_TIME="$(date -Iseconds)"
+export BUILD_ID="$(date +%Y%m%d%H%M%S)-${BUILD_COMMIT}"
+echo "${BUILD_ID}"
+
 docker compose build frontend
 docker compose up -d --force-recreate frontend
 docker compose ps
 ```
 
-如果怀疑 Docker 构建缓存导致旧前端仍被打包，执行无缓存构建：
+为什么需要显式设置 `BUILD_*`：
+
+- `.dockerignore` 已排除 `.git/`，Docker build 容器内无法直接读取 Git HEAD；
+- `Dockerfile.frontend` 的 `npm run build` 会优先使用 Compose 传入的 `BUILD_ID`、`BUILD_COMMIT`、`BUILD_BRANCH`、`BUILD_TIME`；
+- 如果不显式注入，`/build-info.json` 可能显示 `unknown`，或被当前 shell 中残留的旧 `BUILD_*` 影响。
+
+常规发布不要默认使用 `--no-cache`。`--no-cache` 会强制重新执行 `npm ci`，阿里云 ECS 到公网 npm 源可能出现 `ECONNRESET`，导致构建失败。只有以下场景再使用无缓存构建：
+
+- `package.json` / `package-lock.json` 改动；
+- 怀疑 node_modules 依赖层损坏；
+- 常规构建后容器内静态包仍明确不是目标版本。
+
+如必须无缓存构建，优先先配置临时 npm 国内镜像：
 
 ```bash
+cat > frontend/.npmrc <<'EOF'
+registry=https://registry.npmmirror.com
+fetch-retries=5
+fetch-retry-mintimeout=20000
+fetch-retry-maxtimeout=120000
+EOF
+
+unset BUILD_ID BUILD_COMMIT BUILD_BRANCH BUILD_TIME
+export BUILD_COMMIT="$(git rev-parse --short=12 HEAD)"
+export BUILD_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+export BUILD_TIME="$(date -Iseconds)"
+export BUILD_ID="$(date +%Y%m%d%H%M%S)-${BUILD_COMMIT}"
+
 docker compose build --no-cache frontend
 docker compose up -d --force-recreate frontend
 ```
@@ -300,7 +335,7 @@ docker compose up -d --force-recreate frontend
 docker compose down frontend
 docker image rm -f ai-bidding-frontend:local
 docker builder prune -f
-docker compose build --no-cache frontend
+docker compose build frontend
 docker compose up -d frontend
 ```
 
@@ -315,6 +350,16 @@ docker compose up -d frontend
 ```bash
 docker compose exec frontend sh -lc 'ls -lh /usr/share/nginx/html/assets | head'
 docker compose exec frontend sh -lc 'grep -R "<关键字符串>" -n /usr/share/nginx/html/assets | head'
+docker compose exec frontend sh -lc 'cat /usr/share/nginx/html/build-info.json'
+curl -fsS http://127.0.0.1/build-info.json || curl -fsS http://127.0.0.1:8080/build-info.json
+curl -fsS http://8.160.187.226/build-info.json
+```
+
+验收口径：三处 `build-info.json` 的 `commit` 必须等于 `git rev-parse --short=12 HEAD`。如果 Git 已是新 commit，但容器内 `build-info.json` 还是旧 commit，优先检查当前 shell 是否残留旧 `BUILD_*`：
+
+```bash
+env | grep '^BUILD_' || true
+docker compose config | sed -n '/frontend:/,/healthcheck:/p' | grep BUILD -n || true
 ```
 
 浏览器验证：
@@ -843,7 +888,12 @@ root@8.160.187.226:/opt/ai-bidding/ai_bidding_power_grid/frontend/src/pages/Know
 
 ```bash
 cd /opt/ai-bidding/ai_bidding_power_grid
-docker compose build --no-cache frontend
+unset BUILD_ID BUILD_COMMIT BUILD_BRANCH BUILD_TIME
+export BUILD_COMMIT="$(git rev-parse --short=12 HEAD)"
+export BUILD_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+export BUILD_TIME="$(date -Iseconds)"
+export BUILD_ID="$(date +%Y%m%d%H%M%S)-${BUILD_COMMIT}"
+docker compose build frontend
 docker compose up -d --force-recreate frontend
 ```
 
@@ -860,7 +910,7 @@ docker compose exec frontend sh -lc \
 docker compose down frontend
 docker image rm -f ai-bidding-frontend:local
 docker builder prune -f
-docker compose build --no-cache frontend
+docker compose build frontend
 docker compose up -d frontend
 ```
 
