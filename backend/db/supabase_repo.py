@@ -1397,6 +1397,115 @@ def _normalize_generation_task_items(items: list[dict[str, Any]]) -> list[dict[s
     return normalized
 
 
+def _history_generation_summary(task: dict[str, Any] | None) -> dict[str, Any]:
+    if not task:
+        return {
+            "writing_task_id": None,
+            "writing_task_status": None,
+            "writing_total_count": 0,
+            "writing_done_count": 0,
+            "writing_partial_count": 0,
+            "writing_review_count": 0,
+            "writing_active_count": 0,
+            "writing_failed_count": 0,
+        }
+    items = task.get("items") if isinstance(task.get("items"), list) else []
+    done_count = _as_int(task.get("done_count")) or sum(1 for item in items if str(item.get("status") or "") == "done")
+    partial_count = sum(1 for item in items if str(item.get("status") or "") == "partial_generated")
+    review_count = sum(
+        1
+        for item in items
+        if str(item.get("status") or "") == "partial_generated"
+        and isinstance(item.get("metadata"), dict)
+        and item["metadata"].get("partial_review_required")
+    )
+    active_count = (
+        _as_int(task.get("running_count"))
+        or sum(1 for item in items if str(item.get("status") or "") in ACTIVE_GENERATION_ITEM_STATUSES)
+    )
+    queued_count = _as_int(task.get("queued_count")) or sum(1 for item in items if str(item.get("status") or "") == "queued")
+    failed_count = (
+        _as_int(task.get("failed_count"))
+        or sum(1 for item in items if str(item.get("status") or "") in {"failed", "stopped", "cancelled", "expired"})
+    )
+    total_count = _as_int(task.get("total_count")) or len(items)
+    return {
+        "writing_task_id": task.get("id"),
+        "writing_task_status": task.get("status"),
+        "writing_total_count": total_count,
+        "writing_done_count": done_count,
+        "writing_partial_count": partial_count,
+        "writing_review_count": review_count,
+        "writing_active_count": active_count + queued_count,
+        "writing_failed_count": failed_count,
+    }
+
+
+def _history_prefill_summary(project_meta: dict[str, Any] | None) -> dict[str, Any]:
+    prefill = (project_meta or {}).get("bid_prefill")
+    if not isinstance(prefill, dict):
+        prefill = {}
+    missing = prefill.get("missing_formal_required_fields")
+    missing_count = len(missing) if isinstance(missing, list) else 0
+    return {
+        "prefill_applied": bool(prefill.get("applied_at")),
+        "prefill_ready_for_formal_export": bool(prefill.get("ready_for_formal_export")),
+        "prefill_missing_required_count": missing_count,
+    }
+
+
+def _history_stage_action(
+    *,
+    project_status: str | None,
+    has_analysis: bool,
+    section_count: int,
+    chunk_count: int,
+    parse_status: str | None,
+    generation_summary: dict[str, Any],
+    prefill_summary: dict[str, Any],
+) -> dict[str, str]:
+    partial_count = _as_int(generation_summary.get("writing_partial_count"))
+    active_count = _as_int(generation_summary.get("writing_active_count"))
+    total_count = _as_int(generation_summary.get("writing_total_count"))
+    done_count = _as_int(generation_summary.get("writing_done_count"))
+    failed_count = _as_int(generation_summary.get("writing_failed_count"))
+    task_status = str(generation_summary.get("writing_task_status") or "")
+
+    if section_count > 0:
+        if active_count > 0 or task_status in {"queued", "running", "partial_running"}:
+            return {"stage": "正文生成中", "action": "查看进度", "next_step": "editor", "next_action": "查看进度"}
+        if partial_count > 0:
+            return {"stage": "草稿待续写", "action": "续写草稿", "next_step": "resume_partial", "next_action": "续写草稿"}
+        if total_count > 0 and done_count >= total_count and failed_count == 0:
+            return {"stage": "正文初稿完成", "action": "正式检查", "next_step": "formal_check", "next_action": "正式检查"}
+        if not prefill_summary.get("prefill_applied"):
+            return {"stage": "待投标确认", "action": "进入投标确认", "next_step": "prefill", "next_action": "投标确认"}
+        return {"stage": "标书编制", "action": "继续编制", "next_step": "editor", "next_action": "继续编制"}
+    if has_analysis:
+        return {"stage": "解读完成", "action": "查看解读", "next_step": "interpretation", "next_action": "查看解读"}
+    if chunk_count > 0 or parse_status in {"indexed", "mineru_done"}:
+        return {"stage": "解析完成", "action": "查看解读", "next_step": "interpretation", "next_action": "查看解读"}
+    if parse_status in {
+        "pending",
+        "mineru_submitted",
+        "mineru_running",
+        "mineru_split_submitted",
+        "mineru_split_running",
+        "mineru_downloading",
+        "syncing_supabase",
+        "supabase_synced",
+    }:
+        return {"stage": "解析中", "action": "查看状态", "next_step": "interpretation", "next_action": "查看状态"}
+    if parse_status in {"mineru_failed", "index_failed", "ocr_required", "mineru_download_failed"}:
+        return {"stage": "解析失败", "action": "查看", "next_step": "interpretation", "next_action": "查看"}
+    return {
+        "stage": project_status or "已上传",
+        "action": "查看",
+        "next_step": "interpretation",
+        "next_action": "查看",
+    }
+
+
 def _leaf_generation_section_ids(sections: list[dict[str, Any]]) -> set[str]:
     parent_ids = {
         str(section.get("parent_id"))
@@ -2479,6 +2588,41 @@ def list_bid_history(limit: int = 100) -> list[dict[str, Any]]:
     section_counts = count_by_project("bid_sections")
     chunk_counts = count_by_project("document_chunks")
 
+    analysis_rows = (
+        client.table("bid_analysis")
+        .select("id,project_id,project_meta,created_at")
+        .in_("project_id", project_ids)
+        .order("created_at", desc=True)
+        .execute()
+        .data
+        or []
+    )
+    analysis_meta_by_project: dict[str, dict[str, Any]] = {}
+    for row in analysis_rows:
+        project_id = row.get("project_id")
+        if project_id and project_id not in analysis_meta_by_project:
+            project_meta = row.get("project_meta")
+            analysis_meta_by_project[project_id] = project_meta if isinstance(project_meta, dict) else {}
+
+    generation_rows = (
+        client.table("bid_generation_tasks")
+        .select(
+            "id,project_id,status,total_count,done_count,failed_count,stopped_count,"
+            "queued_count,running_count,items,metadata,created_at,updated_at,finished_at"
+        )
+        .in_("project_id", project_ids)
+        .eq("task_type", "batch_sections")
+        .order("created_at", desc=True)
+        .execute()
+        .data
+        or []
+    )
+    latest_generation_by_project: dict[str, dict[str, Any]] = {}
+    for row in generation_rows:
+        project_id = row.get("project_id")
+        if project_id and project_id not in latest_generation_by_project:
+            latest_generation_by_project[project_id] = row
+
     file_rows = (
         client.table("bid_files")
         .select("id,project_id,parse_status,created_at,file_name")
@@ -2502,29 +2646,23 @@ def list_bid_history(limit: int = 100) -> list[dict[str, Any]]:
         files = files_by_project.get(project_id, [])
         latest_file = files[0] if files else {}
         parse_status = latest_file.get("parse_status")
-        if section_count > 0:
-            stage = "标书编制"
-            action = "继续编制"
-        elif has_analysis:
-            stage = "解读完成"
-            action = "查看解读"
-        elif chunk_counts.get(project_id, 0) > 0 or parse_status in {"indexed", "mineru_done"}:
-            stage = "解析完成"
-            action = "查看解读"
-        elif parse_status in {"pending", "mineru_submitted", "mineru_running", "mineru_split_submitted", "mineru_split_running", "mineru_downloading", "syncing_supabase", "supabase_synced"}:
-            stage = "解析中"
-            action = "查看状态"
-        elif parse_status in {"mineru_failed", "index_failed", "ocr_required", "mineru_download_failed"}:
-            stage = "解析失败"
-            action = "查看"
-        else:
-            stage = project.get("status") or "已上传"
-            action = "查看"
+        generation_summary = _history_generation_summary(latest_generation_by_project.get(project_id))
+        prefill_summary = _history_prefill_summary(analysis_meta_by_project.get(project_id))
+        stage_action = _history_stage_action(
+            project_status=project.get("status"),
+            has_analysis=has_analysis,
+            section_count=section_count,
+            chunk_count=chunk_counts.get(project_id, 0),
+            parse_status=parse_status,
+            generation_summary=generation_summary,
+            prefill_summary=prefill_summary,
+        )
 
         history.append({
             **project,
-            "stage": stage,
-            "action": action,
+            **stage_action,
+            **generation_summary,
+            **prefill_summary,
             "analysis_count": analysis_counts.get(project_id, 0),
             "requirement_count": requirement_counts.get(project_id, 0),
             "risk_count": risk_counts.get(project_id, 0),

@@ -198,7 +198,20 @@ def get_bid_history():
             local_status = _find_local_parse_status_for_supabase_file(item.get("latest_file_id"))
             if not local_status:
                 continue
-            parse_status = local_status.get("parse_status") or item.get("parse_status")
+            structured_result_ready = bool(item.get("chunk_count") or item.get("analysis_count") or item.get("section_count"))
+            local_parse_status = local_status.get("parse_status")
+            if structured_result_ready:
+                if local_parse_status in {"indexed", "mineru_done"}:
+                    item["parse_status"] = local_parse_status
+                item["parse_error"] = None
+                item["parse_raw_error"] = None
+                item["parse_retryable"] = False
+                item["parse_failure_stage"] = None
+                item["parse_error_type"] = None
+                item["parse_download_retry_count"] = 0
+                item["parse_updated_at"] = local_status.get("updated_at")
+                continue
+            parse_status = local_parse_status or item.get("parse_status")
             item["parse_status"] = parse_status
             item["parse_task_id"] = local_status.get("_parse_id")
             item["parse_error"] = (
@@ -224,9 +237,11 @@ def get_bid_history():
                 "mineru_download_failed",
                 "mineru_import_failed",
                 "supabase_sync_failed",
-            }:
+            } and not item.get("chunk_count") and not item.get("analysis_count") and not item.get("section_count"):
                 item["stage"] = "解析失败"
                 item["action"] = "查看"
+                item["next_step"] = "interpretation"
+                item["next_action"] = "查看"
                 item["parse_retryable"] = True
             elif parse_status in {
                 "uploaded",
@@ -244,6 +259,8 @@ def get_bid_history():
             } and not item.get("chunk_count"):
                 item["stage"] = "解析中"
                 item["action"] = "查看状态"
+                item["next_step"] = "interpretation"
+                item["next_action"] = "查看状态"
         return jsonify({"items": items}), 200
     except Exception as e:
         logging.exception("查询历史记录失败")

@@ -21,6 +21,10 @@ const riskColor: Record<string, string> = {
   low: 'default',
 };
 
+function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => window.setTimeout(resolve, ms));
+}
+
 function formatValue(value: unknown): string {
   if (value === null || value === undefined || value === '') return '';
   if (Array.isArray(value)) {
@@ -68,6 +72,7 @@ export function BidPrefillPage(): JSX.Element {
   const [report, setReport] = useState<BidPrefillReport | null>(null);
   const [draftValues, setDraftValues] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
+  const [autoRetrying, setAutoRetrying] = useState(false);
   const [applying, setApplying] = useState(false);
   const [activeGroup, setActiveGroup] = useState('全部字段');
   const [onlyGaps, setOnlyGaps] = useState(false);
@@ -86,9 +91,34 @@ export function BidPrefillPage(): JSX.Element {
     ]));
   }
 
+  async function loadReportWithWorkflowRetry(resolvedProjectId: string): Promise<BidPrefillReport> {
+    const maxAttempts = fromWorkflow ? 4 : 1;
+    let lastReport: BidPrefillReport | null = null;
+    let lastError: unknown = null;
+    for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+      try {
+        const nextReport = await getBidPrefillReport(resolvedProjectId);
+        lastReport = nextReport;
+        if (!fromWorkflow || nextReport.fields.length > 0 || attempt === maxAttempts) {
+          return nextReport;
+        }
+      } catch (error) {
+        lastError = error;
+        if (attempt === maxAttempts) {
+          throw error;
+        }
+      }
+      setAutoRetrying(true);
+      await sleep(1200);
+    }
+    if (lastReport) return lastReport;
+    throw lastError instanceof Error ? lastError : new Error(String(lastError || '投标确认报告加载失败'));
+  }
+
   async function load(): Promise<void> {
     try {
       setLoading(true);
+      setAutoRetrying(false);
       const resolvedProjectId = await resolveProjectId();
       setProjectId(resolvedProjectId);
       if (!resolvedProjectId) {
@@ -96,7 +126,7 @@ export function BidPrefillPage(): JSX.Element {
         setDraftValues({});
         return;
       }
-      const nextReport = await getBidPrefillReport(resolvedProjectId);
+      const nextReport = await loadReportWithWorkflowRetry(resolvedProjectId);
       setReport(nextReport);
       setDraftValues(buildDraft(nextReport, resolvedProjectId));
     } catch (error) {
@@ -104,6 +134,7 @@ export function BidPrefillPage(): JSX.Element {
       message.error(reason);
     } finally {
       setLoading(false);
+      setAutoRetrying(false);
     }
   }
 
@@ -368,7 +399,9 @@ export function BidPrefillPage(): JSX.Element {
         type={fromWorkflow ? 'warning' : 'info'}
         showIcon
         message={fromWorkflow ? '请先确认关键投标字段，再应用到正文占位符' : '投标确认只替换明确占位符'}
-        description="报价、保证金、授权签章、税率等客户决策字段必须人工填写或确认；系统不会覆盖用户已编辑的普通正文，未确认字段会继续列为正式导出缺口。"
+        description={autoRetrying
+          ? '正在等待分册大纲和投标确认字段同步完成，请稍候。'
+          : '报价、保证金、授权签章、税率等客户决策字段必须人工填写或确认；系统不会覆盖用户已编辑的普通正文，未确认字段会继续列为正式导出缺口。'}
       />
 
       {report ? (

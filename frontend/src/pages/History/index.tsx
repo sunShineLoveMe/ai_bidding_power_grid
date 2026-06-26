@@ -19,10 +19,20 @@ interface HistoryItem {
   status?: string | null;
   stage?: string;
   action?: string;
+  next_step?: string | null;
+  next_action?: string | null;
   analysis_count?: number;
   requirement_count?: number;
   risk_count?: number;
   section_count?: number;
+  writing_task_status?: string | null;
+  writing_total_count?: number;
+  writing_done_count?: number;
+  writing_partial_count?: number;
+  writing_review_count?: number;
+  writing_active_count?: number;
+  prefill_applied?: boolean;
+  prefill_missing_required_count?: number;
   chunk_count?: number;
   file_count?: number;
   parse_status?: string | null;
@@ -46,6 +56,10 @@ const stageColor: Record<string, string> = {
   解析失败: 'red',
   解读完成: 'blue',
   标书编制: 'green',
+  待投标确认: 'gold',
+  正文生成中: 'processing',
+  草稿待续写: 'orange',
+  正文初稿完成: 'green',
   failed: 'red',
 };
 
@@ -140,7 +154,7 @@ export function HistoryPage(): JSX.Element {
   }, []);
 
   useEffect(() => {
-    const hasRunningTask = items.some(item => item.stage === '解析中' || runningParseStatuses.has(item.parse_status || ''));
+    const hasRunningTask = items.some(item => item.stage === '解析中' || item.stage === '正文生成中' || runningParseStatuses.has(item.parse_status || ''));
     if (!hasRunningTask) return undefined;
     const timer = window.setInterval(() => {
       void fetchHistory();
@@ -154,7 +168,7 @@ export function HistoryPage(): JSX.Element {
       acc[stage] = (acc[stage] || 0) + 1;
       return acc;
     }, {});
-    const order = ['解析中', '解析失败', '已上传', '解析完成', '解读完成', '标书编制'];
+    const order = ['解析中', '解析失败', '已上传', '解析完成', '解读完成', '待投标确认', '正文生成中', '草稿待续写', '标书编制', '正文初稿完成'];
     return [
       { name: '全部记录', count: items.length },
       ...order.filter(stage => counts[stage]).map(stage => ({ name: stage, count: counts[stage] })),
@@ -179,7 +193,20 @@ export function HistoryPage(): JSX.Element {
 
   const openRecord = (record: HistoryItem) => {
     if (!record.id) return;
-    if ((record.section_count || 0) > 0 || record.stage === '标书编制') {
+    const nextStep = record.next_step || '';
+    if (nextStep === 'prefill') {
+      window.location.href = `/prefill?projectId=${record.id}&fromHistory=1`;
+      return;
+    }
+    if (nextStep === 'resume_partial') {
+      window.location.href = `/bid-editor?projectId=${record.id}&action=resume-partial`;
+      return;
+    }
+    if (nextStep === 'formal_check') {
+      window.location.href = `/formal-check?projectId=${record.id}`;
+      return;
+    }
+    if (nextStep === 'editor' || (record.section_count || 0) > 0 || record.stage === '标书编制') {
       window.location.href = `/bid-editor?projectId=${record.id}`;
       return;
     }
@@ -264,6 +291,16 @@ export function HistoryPage(): JSX.Element {
             {record.parse_task_id ? (
               <div className="text-[11px] font-semibold text-slate-400">任务 {record.parse_task_id.slice(0, 8)}</div>
             ) : null}
+            {record.writing_total_count ? (
+              <div className="grid gap-1 text-[11px] font-semibold text-slate-500">
+                <span>正文 {record.writing_done_count || 0}/{record.writing_total_count}</span>
+                {record.writing_partial_count ? <span>待续写草稿 {record.writing_partial_count}</span> : null}
+                {record.writing_review_count ? <span>需人工复核 {record.writing_review_count}</span> : null}
+              </div>
+            ) : null}
+            {(record.section_count || 0) > 0 && !record.prefill_applied ? (
+              <div className="text-[11px] font-semibold text-amber-600">尚未完成投标确认</div>
+            ) : null}
           </div>
         );
       },
@@ -283,7 +320,7 @@ export function HistoryPage(): JSX.Element {
     { title: '创建时间', dataIndex: 'created_at', width: 155, render: value => <span className="text-slate-600">{formatDate(value)}</span> },
     {
       title: '操作',
-      width: 160,
+      width: 190,
       fixed: 'right',
       align: 'right',
       render: (_, record) => (
@@ -294,7 +331,7 @@ export function HistoryPage(): JSX.Element {
             </Button>
           ) : null}
           <Button type="primary" ghost size="small" onClick={() => openRecord(record)}>
-            {(record.section_count || 0) > 0 || record.stage === '标书编制' ? '继续编制' : record.analysis_count ? '查看解读' : record.action || '查看'}
+            {record.next_action || (record.analysis_count ? '查看解读' : record.action || '查看')}
           </Button>
           <Popconfirm title="确认删除该历史任务？" description="会删除项目记录和已解析的结构化数据。" okText="删除" cancelText="取消" onConfirm={() => deleteRecord(record)}>
             <Button danger size="small" icon={<Trash2 size={14} />}>删除</Button>

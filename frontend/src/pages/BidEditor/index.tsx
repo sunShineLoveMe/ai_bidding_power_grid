@@ -447,6 +447,7 @@ export function BidEditorPage(): JSX.Element {
   const batchAbortControllersRef = useRef<Map<string, AbortController>>(new Map());
   const persistedBatchTaskIdRef = useRef('');
   const batchTaskSyncAtRef = useRef<Map<string, number>>(new Map());
+  const autoResumePartialRef = useRef(false);
 
   function applyTaskGeneratedContent(task: SectionGenerationTask | null): void {
     if (!task?.items?.length) {
@@ -3571,6 +3572,17 @@ export function BidEditorPage(): JSX.Element {
   const activeTaskCount = batchTaskValues.filter(task => ACTIVE_BATCH_TASK_STATUSES.has(task.status)).length;
   const queuedTaskCount = batchTaskValues.filter(task => task.status === 'queued').length;
   const incompleteLeafCount = Math.max(0, scopedLeafChapters.length - generatedCount);
+
+  useEffect(() => {
+    if (searchParams.get('action') !== 'resume-partial') return;
+    if (autoResumePartialRef.current || loading || batchGenerating || sectionStreaming) return;
+    if (!data?.project?.id || !persistedBatchTaskIdRef.current || partialDraftCount <= 0) return;
+    autoResumePartialRef.current = true;
+    setMode('目录模式');
+    void resumePartialDraftsInBatch();
+    // resumePartialDraftsInBatch intentionally reads the latest component state.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [batchGenerating, data?.project?.id, loading, partialDraftCount, searchParams, sectionStreaming]);
 
   if (loading) {
     return (

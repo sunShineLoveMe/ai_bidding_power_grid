@@ -11,7 +11,12 @@ interface HistoryItem {
   created_at?: string | null;
   stage?: string | null;
   action?: string | null;
+  next_step?: string | null;
+  next_action?: string | null;
   section_count?: number;
+  writing_total_count?: number;
+  writing_done_count?: number;
+  writing_partial_count?: number;
   parse_status?: string | null;
 }
 
@@ -25,6 +30,10 @@ const statusColor: Record<string, string> = {
   已上传: 'cyan',
   解读完成: 'blue',
   标书编制: 'green',
+  待投标确认: 'gold',
+  正文生成中: 'processing',
+  草稿待续写: 'orange',
+  正文初稿完成: 'green',
 };
 
 function formatDate(value?: string | null): string {
@@ -66,7 +75,20 @@ export function RecentTasks({ refreshKey = 0 }: RecentTasksProps): JSX.Element {
   }, [refreshKey]);
 
   const openTask = (record: HistoryItem) => {
-    if ((record.section_count || 0) > 0 || record.stage === '标书编制') {
+    const nextStep = record.next_step || '';
+    if (nextStep === 'prefill') {
+      window.location.href = `/prefill?projectId=${record.id}&fromHistory=1`;
+      return;
+    }
+    if (nextStep === 'resume_partial') {
+      window.location.href = `/bid-editor?projectId=${record.id}&action=resume-partial`;
+      return;
+    }
+    if (nextStep === 'formal_check') {
+      window.location.href = `/formal-check?projectId=${record.id}`;
+      return;
+    }
+    if (nextStep === 'editor' || (record.section_count || 0) > 0 || record.stage === '标书编制') {
       window.location.href = `/bid-editor?projectId=${record.id}`;
       return;
     }
@@ -81,7 +103,17 @@ export function RecentTasks({ refreshKey = 0 }: RecentTasksProps): JSX.Element {
       title: '当前状态',
       dataIndex: 'stage',
       width: 96,
-      render: (_, record) => <Tag color={statusColor[record.stage as string] || 'default'}>{record.stage || record.parse_status || '已上传'}</Tag>,
+      render: (_, record) => (
+        <div className="flex flex-col items-start gap-1">
+          <Tag color={statusColor[record.stage as string] || 'default'}>{record.stage || record.parse_status || '已上传'}</Tag>
+          {record.writing_total_count ? (
+            <span className="text-[11px] font-semibold text-slate-400">
+              正文 {record.writing_done_count || 0}/{record.writing_total_count}
+              {record.writing_partial_count ? ` · 草稿 ${record.writing_partial_count}` : ''}
+            </span>
+          ) : null}
+        </div>
+      ),
     },
     {
       title: '操作',
@@ -89,7 +121,7 @@ export function RecentTasks({ refreshKey = 0 }: RecentTasksProps): JSX.Element {
       width: 70,
       render: (_, record) => (
         <Button type="link" onClick={() => openTask(record)}>
-          {(record.section_count || 0) > 0 || record.stage === '标书编制' ? '继续编制' : record.action || '查看解读'}
+          {record.next_action || record.action || '查看'}
         </Button>
       ),
     },
