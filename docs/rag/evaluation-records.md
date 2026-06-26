@@ -8,6 +8,39 @@
 
 ---
 
+## Run 20260626 — 产品库/资信库上传入口收口与新资产索引回归（2026-06-26）
+
+> 汇总：`docs/rag/runs/run_20260626_product_qualification_upload_index_regression_summary.md`
+> 增量门禁：`docs/rag/runs/run_20260626_product_qualification_upload_index_regression_incremental_summary.md`
+> 产品/资信库回归：`docs/development/runs/run_20260626_product_qualification_upload_index_regression.md`
+
+### 触发原因
+
+客户反馈产品库存在多个上传/新增入口，含义不清；同时产品图片上传后必须能按客户输入的资料名称、规格型号、标签和说明进入知识问答、技术标正文和标书配图索引。
+
+### 修复范围
+
+- 产品库和资信库上传入口收口为单一主入口。
+- 新上传知识资产默认补充泰昌企业事实 metadata，避免真实 stream 中因 `enterprise/source_domain` 过滤无法命中新上传资产。
+- 资产召回新增精确标题/规格关键词补召回，并对向量召回和关键词补召回结果去重重排。
+
+### 结果
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 255 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 599 ms |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% | 352 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 749 ms |
+
+真实浏览器上传 `泰昌CPVC电缆保护管模拟产品图片-20260626070309` 后，`POST /api/knowledge/search/stream` 命中新增资产 `17e53f70-649b-4a0c-8716-dfc5a502ed02`，返回内容包含新增标题和规格型号 `CPVC-DN250-真实回归`。
+
+### 结论
+
+本轮无召回、来源排序、禁用关键词或跨资料域串扰退化。上传入口收口和新上传资产索引链路通过真实页面、真实 API stream 和本地 RAG 门禁。
+
+---
+
 ## Run 20260626 — 泰昌企业资料来源误解读专项收敛（2026-06-26）
 
 > 汇总：`docs/rag/runs/run_20260626_taichang_enterprise_source_scope_final_review.md`

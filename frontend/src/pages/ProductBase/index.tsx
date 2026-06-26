@@ -33,6 +33,12 @@ interface KnowledgeAsset {
 }
 
 const preferredCategories = [
+  '电缆与附件',
+  '开关柜与成套设备',
+  '变压器与箱变',
+  '互感器',
+  '继电保护与自动化',
+  '通信与调度设备',
   '产品实物图片',
   '生产制造能力',
   '试验检测设备',
@@ -41,11 +47,6 @@ const preferredCategories = [
   '厂房仓储资料',
   '输变电设备',
   '配网设备',
-  '电缆与附件',
-  '开关柜与成套设备',
-  '变压器与箱变',
-  '继电保护与自动化',
-  '通信与调度设备',
   '检测与试验设备',
   '安装调试服务',
   '运维检修服务',
@@ -125,7 +126,7 @@ export function ProductBasePage(): JSX.Element {
       return acc;
     }, {});
     const ordered = [
-      ...preferredCategories.filter(category => counts[category]),
+      ...preferredCategories,
       ...Object.keys(counts).filter(category => !preferredCategories.includes(category)).sort((a, b) => a.localeCompare(b, 'zh-CN')),
     ];
     return [
@@ -241,23 +242,9 @@ export function ProductBasePage(): JSX.Element {
     <div className="module-shell">
       <ModuleHeader
         title="企业产品库"
-        description="沉淀产品参数、制造能力、适用场景、案例资料和服务能力，为技术响应和商务材料生成提供标准素材。"
+        description="沉淀产品参数、图片、检验报告、制造能力和适用场景，上传后用于知识问答、技术标正文和标书配图。"
         actions={
-          <>
-            <Button onClick={() => {
-              openCreateForm();
-            }}>新增产品</Button>
-            <Upload showUploadList={false} beforeUpload={(file) => {
-              setEditingAsset(null);
-              form.resetFields();
-              setAssetFile(file);
-              setFormOpen(true);
-              message.success('已选择文件，请补充产品信息后保存');
-              return false;
-            }}>
-              <Button type="primary" icon={<UploadCloud size={16} />}>上传产品资料</Button>
-            </Upload>
-          </>
+          <Button type="primary" icon={<UploadCloud size={16} />} onClick={openCreateForm}>上传/新增产品资料</Button>
         }
       />
       <MetricCards
@@ -273,7 +260,7 @@ export function ProductBasePage(): JSX.Element {
         <section className="panel-card flex h-full min-h-0 flex-col overflow-hidden">
           <div className="mb-3 flex items-center justify-between gap-3">
             <h2 className="panel-title mb-0">产品与服务列表</h2>
-            <Button type="primary" icon={<UploadCloud size={16} />} onClick={openCreateForm}>新增产品资料</Button>
+            <span className="text-xs font-semibold text-slate-400">资料保存后自动接入检索索引</span>
           </div>
           <div className="bounded-table min-h-0 flex-1">
             <Table
@@ -286,14 +273,21 @@ export function ProductBasePage(): JSX.Element {
               className="compact-table"
               tableLayout="fixed"
               scroll={{ x: 1050, y: 'max(180px, calc(100vh - 550px))' }}
-              locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无产品资料，请维护真实产品信息" /> }}
+              locale={{
+                emptyText: (
+                  <Empty
+                    image={Empty.PRESENTED_IMAGE_SIMPLE}
+                    description={activeCategory === '全部产品' ? '暂无产品资料，请上传真实产品图片、参数表或检验报告' : `${activeCategory} 暂无资料，请上传客户真实资料后使用`}
+                  />
+                ),
+              }}
             />
           </div>
         </section>
       </div>
 
       <Modal
-        title={editingAsset ? '编辑产品资料' : '产品能力维护'}
+        title={editingAsset ? '编辑产品资料' : '上传/新增产品资料'}
         open={formOpen}
         onCancel={() => {
           setFormOpen(false);
@@ -308,7 +302,7 @@ export function ProductBasePage(): JSX.Element {
             setEditingAsset(null);
             setAssetFile(null);
           }}>取消</Button>,
-          <Button key="save" type="primary" loading={saving} onClick={saveProductAsset}>{editingAsset ? '保存修改' : '保存产品信息'}</Button>,
+          <Button key="save" type="primary" loading={saving} onClick={saveProductAsset}>{editingAsset ? '保存修改' : '保存并接入检索'}</Button>,
         ]}
       >
         <Form form={form} layout="vertical" size="middle" className="compact-form">
@@ -339,7 +333,7 @@ export function ProductBasePage(): JSX.Element {
             <Form.Item label="资料名称" name="title" rules={[{ required: true, message: '请输入资料名称' }]}>
               <Input placeholder="例如：CPVC电缆保护管检验报告（第1页）" />
             </Form.Item>
-            <Form.Item label="产品类型" name="category" rules={[{ required: true, message: '请选择产品类型' }]}>
+            <Form.Item label="资料分类" name="category" rules={[{ required: true, message: '请选择资料分类' }]}>
               <Select options={categories.slice(1).map(item => ({ label: item.name, value: item.name }))} placeholder="选择类型" />
             </Form.Item>
             <Form.Item label="规格型号" name="product_model">
@@ -355,8 +349,8 @@ export function ProductBasePage(): JSX.Element {
             <Form.Item label="核心能力标签" name="tags">
               <Select mode="tags" placeholder="输入能力标签" />
             </Form.Item>
-            <Form.Item label="产品图片/图册说明" name="description" rules={[{ required: true, message: '请输入说明，便于AI检索和插图' }]}>
-              <Input.TextArea rows={3} placeholder="说明图片中的产品、规格、使用场景，以及适合插入的标书章节" />
+            <Form.Item label="资料说明" name="description" rules={[{ required: true, message: '请输入说明，便于AI检索和插图' }]}>
+              <Input.TextArea rows={3} placeholder="说明资料中的产品、规格、使用场景、关键参数，以及适合插入的标书章节；这些内容会进入知识问答和标书素材索引" />
             </Form.Item>
             <Form.Item label="图片/附件文件" required={!editingAsset}>
               <Upload

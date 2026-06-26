@@ -244,18 +244,9 @@ export function QualificationBasePage(): JSX.Element {
     <div className="module-shell">
       <ModuleHeader
         title="企业资信库"
-        description="维护营业执照、资质证书、人员证书、财务资料、项目业绩和授权模板，避免投标材料过期或缺失。"
+        description="维护营业执照、资质证书、人员证书、财务资料、项目业绩和授权模板，上传后用于知识问答、商务标和资格文件。"
         actions={
-          <Upload showUploadList={false} beforeUpload={(file) => {
-            setEditingAsset(null);
-            form.resetFields();
-            setAssetFile(file);
-            setFormOpen(true);
-            message.success('已选择文件，请补充证照信息后保存');
-            return false;
-          }}>
-            <Button type="primary" icon={<UploadCloud size={16} />}>上传资信文件</Button>
-          </Upload>
+          <Button type="primary" icon={<UploadCloud size={16} />} onClick={openCreateForm}>上传/新增资信资料</Button>
         }
       />
       <MetricCards
@@ -271,7 +262,7 @@ export function QualificationBasePage(): JSX.Element {
         <section className="panel-card flex h-full min-h-0 flex-col overflow-hidden">
           <div className="mb-3 flex items-center justify-between gap-3">
             <h2 className="panel-title mb-0">资信文件列表</h2>
-            <Button type="primary" icon={<UploadCloud size={16} />} onClick={openCreateForm}>新增资信资料</Button>
+            <span className="text-xs font-semibold text-slate-400">资料保存后自动接入检索索引</span>
           </div>
           <div className="bounded-table min-h-0 flex-1">
             <Table
@@ -284,14 +275,21 @@ export function QualificationBasePage(): JSX.Element {
               className="compact-table"
               tableLayout="fixed"
               scroll={{ x: 1000, y: 'max(180px, calc(100vh - 550px))' }}
-              locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无资信文件，请上传真实证照材料" /> }}
+              locale={{
+                emptyText: (
+                  <Empty
+                    image={Empty.PRESENTED_IMAGE_SIMPLE}
+                    description={activeCategory === '全部资信' ? '暂无资信文件，请上传真实证照、业绩或授权材料' : `${activeCategory} 暂无资料，请上传客户真实资料后使用`}
+                  />
+                ),
+              }}
             />
           </div>
         </section>
       </div>
 
       <Modal
-        title={editingAsset ? '编辑资信资料' : '证照信息维护'}
+        title={editingAsset ? '编辑资信资料' : '上传/新增资信资料'}
         open={formOpen}
         onCancel={() => {
           setFormOpen(false);
@@ -306,7 +304,7 @@ export function QualificationBasePage(): JSX.Element {
             setEditingAsset(null);
             setAssetFile(null);
           }}>取消</Button>,
-          <Button key="save" type="primary" loading={saving} onClick={saveQualificationAsset}>{editingAsset ? '保存修改' : '保存资信信息'}</Button>,
+          <Button key="save" type="primary" loading={saving} onClick={saveQualificationAsset}>{editingAsset ? '保存修改' : '保存并接入检索'}</Button>,
         ]}
       >
         <Form form={form} layout="vertical" size="middle" className="compact-form">
@@ -356,8 +354,8 @@ export function QualificationBasePage(): JSX.Element {
             <Form.Item label="检索标签" name="tags">
               <Select mode="tags" placeholder="例如：资质证书、安全生产许可证、资格审查" />
             </Form.Item>
-            <Form.Item label="图片/附件说明" name="description" rules={[{ required: true, message: '请输入图片说明，便于AI检索和插图' }]}>
-              <Input.TextArea rows={3} placeholder="说明该证照适合出现在哪类标书章节、是否为脱敏样张、使用注意事项等" />
+            <Form.Item label="资料说明" name="description" rules={[{ required: true, message: '请输入资料说明，便于AI检索和插图' }]}>
+              <Input.TextArea rows={3} placeholder="说明该资料适合出现在哪类标书章节、关键编号或有效期、是否敏感、使用注意事项；这些内容会进入知识问答和标书素材索引" />
             </Form.Item>
             <Form.Item label="图片/附件文件" required={!editingAsset}>
               <Upload

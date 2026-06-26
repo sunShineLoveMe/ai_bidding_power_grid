@@ -424,6 +424,27 @@ def _select_with_required_evidence_coverage(
     return selected
 
 
+def _asset_row_key(asset: dict[str, Any]) -> str:
+    return str(asset.get("id") or asset.get("storage_path") or asset.get("public_url") or hash(_asset_search_text(asset)))
+
+
+def _merge_and_rank_assets(query: str, assets: list[dict[str, Any]], limit: int) -> list[dict[str, Any]]:
+    deduped: dict[str, dict[str, Any]] = {}
+    for asset in assets:
+        key = _asset_row_key(asset)
+        existing = deduped.get(key)
+        if existing is None or _asset_rank_score(query, asset) > _asset_rank_score(query, existing):
+            deduped[key] = asset
+    ranked = list(deduped.values())
+    ranked.sort(key=lambda asset: _asset_rank_score(query, asset), reverse=True)
+    return _select_with_required_evidence_coverage(
+        query,
+        ranked,
+        text_getter=_asset_search_text,
+        limit=limit,
+    )
+
+
 def _keyword_search_knowledge_chunks(
     client,
     *,
@@ -660,12 +681,7 @@ def search_knowledge_assets(
         volume_type=target_volume,
         metadata_filter=metadata_filter,
     )
-    return _select_with_required_evidence_coverage(
-        query,
-        [*strong_assets, *fallback_assets],
-        text_getter=_asset_search_text,
-        limit=match_count,
-    )
+    return _merge_and_rank_assets(query, [*strong_assets, *fallback_assets], match_count)
 
 
 def _keyword_search_knowledge_assets(
@@ -727,12 +743,41 @@ def _keyword_search_knowledge_assets(
 
 def _needs_asset_keyword_supplement(query: str, assets: list[dict[str, Any]]) -> bool:
     required_intents = _required_evidence_intents(query)
-    if not required_intents:
-        return False
-    covered: set[str] = set()
-    for asset in assets or []:
-        covered.update(_evidence_intents_from_text(_asset_search_text(asset)))
-    return bool(required_intents - covered)
+    if required_intents:
+        covered: set[str] = set()
+        for asset in assets or []:
+            covered.update(_evidence_intents_from_text(_asset_search_text(asset)))
+        if required_intents - covered:
+            return True
+
+    combined_text = " ".join(_asset_search_text(asset) for asset in assets or [])
+    return any(term not in combined_text for term in _distinctive_asset_query_terms(query))
+
+
+def _distinctive_asset_query_terms(query: str) -> list[str]:
+    stop_terms = {
+        "查询",
+        "产品",
+        "图片",
+        "照片",
+        "资料",
+        "材料",
+        "适用章节",
+        "适用场景",
+        "技术标",
+        "商务标",
+        "资格文件",
+        "泰昌",
+    }
+    terms: list[str] = []
+    for token in re.findall(r"[\u4e00-\u9fa5A-Za-z0-9_-]+", (query or "").lower()):
+        token = token.strip("_-")
+        if not token or token in stop_terms:
+            continue
+        has_digit_or_delimiter = any(ch.isdigit() for ch in token) or "-" in token or "_" in token
+        if has_digit_or_delimiter or len(token) >= 4:
+            terms.append(token)
+    return terms[:8]
 
 
 def _asset_metadata_value(asset: dict[str, Any], key: str) -> str:

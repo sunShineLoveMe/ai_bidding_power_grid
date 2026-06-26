@@ -164,6 +164,25 @@ def _asset_payload_from_form(storage_info: dict | None = None, existing: dict | 
         "applicable_volumes": applicable_volumes,
         "upload_source": "enterprise_library_page",
     }
+    metadata.setdefault("enterprise", "泰昌")
+    metadata.setdefault("doc_owner", "河北泰昌电力器材科技有限公司")
+    metadata.setdefault("source_domain", "enterprise_fact")
+    metadata.setdefault("reference_only", False)
+    metadata.setdefault("fact_source_allowed_for_enterprise", True)
+    metadata.setdefault("tenant_visibility", "taichang_only")
+    metadata.setdefault("access_scope", "taichang_tenant_internal")
+    metadata.setdefault(
+        "target_library",
+        "qualification_library" if library_type == "qualification" else "product_library",
+    )
+    metadata.setdefault(
+        "target_library_label",
+        "资信库资料" if library_type == "qualification" else "产品库资料",
+    )
+    metadata.setdefault(
+        "category_label",
+        category,
+    )
     if storage_info:
         metadata.update({
             "thumbnail_storage_bucket": storage_info.get("thumbnail_bucket"),

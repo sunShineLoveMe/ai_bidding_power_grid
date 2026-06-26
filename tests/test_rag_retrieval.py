@@ -439,6 +439,63 @@ class RagRetrievalQualityTest(unittest.TestCase):
     @patch("backend.rag.retrieval.rerank_documents")
     @patch("backend.rag.retrieval.get_embeddings", return_value=[[0.4, 0.5]])
     @patch("backend.rag.retrieval.init_ali_client", return_value=object())
+    def test_asset_recall_supplements_exact_uploaded_product_title(self, _ali, _embeddings, rerank_mock):
+        from backend.rag import retrieval
+
+        strong_assets = [
+            {
+                "id": "old-report-1",
+                "title": "泰昌CPVC电缆保护管检验报告内径250第1页",
+                "similarity": 0.81,
+                "asset_type": "product_image",
+                "searchable_text": "CPVC电缆保护管 检验报告 内径250",
+                "metadata": {"target_library": "product_library", "evidence_type": "inspection_report"},
+            },
+            {
+                "id": "old-report-2",
+                "title": "泰昌CPVC电缆保护管检验报告内径250第2页",
+                "similarity": 0.79,
+                "asset_type": "product_image",
+                "searchable_text": "CPVC电缆保护管 检验报告 壁厚",
+                "metadata": {"target_library": "product_library", "evidence_type": "inspection_report"},
+            },
+            {
+                "id": "old-report-3",
+                "title": "泰昌CPVC电缆保护管检验报告内径250第3页",
+                "similarity": 0.77,
+                "asset_type": "product_image",
+                "searchable_text": "CPVC电缆保护管 检验报告 环刚度",
+                "metadata": {"target_library": "product_library", "evidence_type": "inspection_report"},
+            },
+        ]
+        uploaded_asset = {
+            "id": "uploaded-product",
+            "title": "泰昌CPVC电缆保护管模拟产品图片-20260626065331",
+            "similarity": 0.0,
+            "asset_type": "product_image",
+            "mime_type": "image/png",
+            "searchable_text": "泰昌CPVC电缆保护管模拟产品图片-20260626065331 CPVC-DN250-模拟回归 电缆与附件 技术标",
+            "tags": ["CPVC", "电缆保护管", "模拟回归"],
+            "specs": {"product_model": "CPVC-DN250-模拟回归", "applicable_volumes": ["technical"]},
+            "metadata": {"library_type": "product", "applicable_volumes": ["technical"]},
+        }
+
+        rerank_mock.return_value = strong_assets
+        client = _RpcClient(rpc_rows=strong_assets, asset_rows=[*strong_assets, uploaded_asset])
+
+        with patch("backend.rag.retrieval.get_supabase_client", return_value=client):
+            result = retrieval.search_knowledge_assets(
+                "查询泰昌CPVC电缆保护管模拟产品图片-20260626065331的产品资料",
+                match_count=3,
+            )
+
+        result_ids = [asset["id"] for asset in result]
+        self.assertIn("uploaded-product", result_ids)
+        self.assertEqual(result_ids[0], "uploaded-product")
+
+    @patch("backend.rag.retrieval.rerank_documents")
+    @patch("backend.rag.retrieval.get_embeddings", return_value=[[0.4, 0.5]])
+    @patch("backend.rag.retrieval.init_ali_client", return_value=object())
     def test_certificate_asset_recall_prefers_full_page_over_mineru_crop(self, _ali, _embeddings, rerank_mock):
         from backend.rag import retrieval
 
