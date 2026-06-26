@@ -1,6 +1,7 @@
 import subprocess
 import tempfile
 import unittest
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from unittest.mock import patch
 from zipfile import ZipFile
@@ -27,6 +28,8 @@ from backend.export.md_to_word import (
     DOCX_BODY_LINE_SPACING_RULE,
     DOCX_TOC_ENTRY_FONT_SIZE,
     DOCX_TOC_ENTRY_LINE_SPACING,
+    DOCX_TOC_PAGE_NUMBER_FONT_SIZE,
+    DOCX_IMAGE_CAPTION_FONT_SIZE,
     DOCX_TABLE_EAST_ASIA,
     DOCX_LIST_HANGING_INDENT_PT,
     DOCX_LIST_LEFT_INDENT_PT,
@@ -707,7 +710,8 @@ class DocxExportRegressionTest(unittest.TestCase):
                     if run.text.strip():
                         self.assertFalse(run.bold)
                         if run.font.size:
-                            self.assertEqual(DOCX_TOC_ENTRY_FONT_SIZE, run.font.size.pt)
+                            expected_size = DOCX_TOC_PAGE_NUMBER_FONT_SIZE if run.text.strip().isdigit() else DOCX_TOC_ENTRY_FONT_SIZE
+                            self.assertEqual(expected_size, run.font.size.pt)
                 self.assertFalse(paragraph._p.xpath(".//w:keepLines"))
                 self.assertFalse(paragraph._p.xpath(".//w:keepNext"))
                 self.assertTrue(paragraph._p.xpath(".//w:tab[@w:val='right'][@w:leader='dot']"))
@@ -725,6 +729,44 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertNotIn("w:keepLines", styles_xml)
             self.assertNotIn("w:keepNext", styles_xml)
             self.assertNotIn("w:pageBreakBefore", styles_xml)
+
+    def test_formal_image_caption_is_sanitized_centered_and_small(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            markdown_path = Path(tmpdir) / "caption.md"
+            markdown_path.write_text(
+                "\n".join(
+                    [
+                        "# 图片题注测试投标文件",
+                        "",
+                        "# 1. 检验报告",
+                        "",
+                        "图示：泰昌CPVC电缆保护管检验报告内径250第1页",
+                        "",
+                        "资料：3.职业健康安全管理体系认证证书第1页",
+                        "",
+                        "图示：晁坤琳2原图（脱敏示意图）",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            output_path, report = convert_md_to_word(markdown_path, return_report=True)
+            document = Document(str(output_path))
+            captions = [p for p in document.paragraphs if p.text.startswith("资料：")]
+
+            self.assertEqual([
+                "资料：CPVC电缆保护管检验报告首页",
+                "资料：职业健康安全管理体系认证证书首页",
+                "资料：身份证明文件",
+            ], [p.text for p in captions])
+            for caption in captions:
+                self.assertEqual(WD_ALIGN_PARAGRAPH.CENTER, caption.alignment)
+                self.assertEqual(0, caption.paragraph_format.first_line_indent.pt)
+                self.assertEqual(DOCX_IMAGE_CAPTION_FONT_SIZE, caption.runs[0].font.size.pt)
+            self.assertNotIn("图示", "\n".join(p.text for p in document.paragraphs))
+            self.assertNotIn("内径250", "\n".join(p.text for p in document.paragraphs))
+            self.assertNotIn("原图", "\n".join(p.text for p in document.paragraphs))
+            self.assertEqual(3, report["captions"]["formalized"])
 
     def test_formal_bid_text_is_black_and_level_two_headings_start_new_page(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1423,6 +1465,55 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertIn("查询报告及截图", report["template"]["reference_outline"])
         self.assertEqual("宋体", report["template"]["toc_font"])
         self.assertIn("禁止复用参考稿企业事实", report["template"]["runtime_policy"])
+
+    def test_formal_form_subheading_switch_starts_on_new_page(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            markdown_path = Path(tmpdir) / "formal-forms.md"
+            markdown_path.write_text(
+                "\n".join(
+                    [
+                        "# 商务投标文件",
+                        "",
+                        "# 1. 投标函及法定格式文件",
+                        "",
+                        "【一、投标函】",
+                        "",
+                        "投标人名称：河北泰昌电力器材科技有限公司",
+                        "",
+                        "【二、法定代表人授权书】",
+                        "",
+                        "授权代表：李明",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            output_path, report = convert_md_to_word(
+                markdown_path,
+                return_report=True,
+                cover_fields={
+                    "项目名称": "国网新疆10kV架空绝缘导线采购",
+                    "文件类型": "商务投标文件",
+                },
+            )
+
+            with ZipFile(output_path) as docx:
+                root = ET.fromstring(docx.read("word/document.xml"))
+            ns = {"w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
+            paragraphs = root.findall(".//w:p", ns)
+            auth_index = next(
+                index
+                for index, paragraph in enumerate(paragraphs)
+                if "二、法定代表人授权书" in "".join(t.text or "" for t in paragraph.findall(".//w:t", ns))
+            )
+            previous = paragraphs[auth_index - 1]
+            previous_has_page_break = any(
+                br.get("{http://schemas.openxmlformats.org/wordprocessingml/2006/main}type") == "page"
+                for br in previous.findall(".//w:br", ns)
+            )
+
+        self.assertEqual(1, report["formal_forms"]["subheading_page_breaks"])
+        self.assertTrue(previous_has_page_break)
 
     def test_bid_export_assets_are_limited_to_taichang_enterprise_facts(self):
         taichang_asset = {

@@ -21,6 +21,7 @@ import socket
 from datetime import datetime
 from urllib.parse import parse_qs, urlparse, unquote
 from zipfile import BadZipFile, ZipFile, ZIP_DEFLATED
+import xml.etree.ElementTree as ET
 
 try:
     from PIL import Image, ImageOps
@@ -107,9 +108,12 @@ DOCX_FOOTER_DISTANCE_CM = float(os.getenv("DOCX_FOOTER_DISTANCE_CM", "1.48"))
 DOCX_COVER_TITLE_FONT_SIZE = float(os.getenv("DOCX_COVER_TITLE_FONT_SIZE", "36"))
 DOCX_TOC_TITLE_FONT_SIZE = float(os.getenv("DOCX_TOC_TITLE_FONT_SIZE", "16"))
 DOCX_TOC_ENTRY_FONT_SIZE = float(os.getenv("DOCX_TOC_ENTRY_FONT_SIZE", "10.5"))
+DOCX_TOC_PAGE_NUMBER_FONT_SIZE = float(os.getenv("DOCX_TOC_PAGE_NUMBER_FONT_SIZE", "9"))
 DOCX_TOC_ENTRY_LINE_SPACING = float(os.getenv("DOCX_TOC_ENTRY_LINE_SPACING", "15"))
 DOCX_TABLE_LINE_SPACING = float(os.getenv("DOCX_TABLE_LINE_SPACING", "18"))
 DOCX_TABLE_CELL_MARGIN_TWIPS = int(os.getenv("DOCX_TABLE_CELL_MARGIN_TWIPS", "100"))
+DOCX_FOOTER_PAGE_NUMBER_FONT_SIZE = float(os.getenv("DOCX_FOOTER_PAGE_NUMBER_FONT_SIZE", "9"))
+DOCX_IMAGE_CAPTION_FONT_SIZE = float(os.getenv("DOCX_IMAGE_CAPTION_FONT_SIZE", "9"))
 DOCX_TAICHANG_LOGO_PATH = os.getenv("DOCX_TAICHANG_LOGO_PATH", "assets/icons/taichang_logo.png")
 DOCX_COVER_LOGO_WIDTH_IN = float(os.getenv("DOCX_COVER_LOGO_WIDTH_IN", "1.65"))
 DOCX_COVER_SHOW_LOGO = os.getenv("DOCX_COVER_SHOW_LOGO", "false").lower() in {"1", "true", "yes", "on"}
@@ -138,6 +142,8 @@ DOCX_XINJIANG_BUSINESS_REFERENCE_PATH = "assets/template_words/商务文件 - 10
 DOCX_REFERENCE_MARGIN_CM = 3.17
 DOCX_REFERENCE_HEADER_DISTANCE_CM = 1.5
 DOCX_REFERENCE_FOOTER_DISTANCE_CM = 1.75
+W_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+ET.register_namespace("w", W_NS)
 
 DOCX_TEMPLATE_PROFILES = {
     "formal_bid_standard": {
@@ -481,6 +487,102 @@ def scrub_docx_black_square_markers(docx_path: str | Path) -> dict:
     }
 
 
+def _w_tag(local_name: str) -> str:
+    return f"{{{W_NS}}}{local_name}"
+
+
+def _set_xml_run_size(run: ET.Element, half_points: int) -> bool:
+    rpr = run.find(_w_tag("rPr"))
+    if rpr is None:
+        rpr = ET.Element(_w_tag("rPr"))
+        run.insert(0, rpr)
+
+    changed = False
+    for tag_name in ("sz", "szCs"):
+        node = rpr.find(_w_tag(tag_name))
+        if node is None:
+            node = ET.Element(_w_tag(tag_name))
+            rpr.append(node)
+        if node.get(_w_tag("val")) != str(half_points):
+            node.set(_w_tag("val"), str(half_points))
+            changed = True
+    return changed
+
+
+def _normalize_document_pageref_sizes(xml_text: str, half_points: int) -> tuple[str, int]:
+    root = ET.fromstring(xml_text.encode("utf-8"))
+    updated = 0
+    for paragraph in root.iter(_w_tag("p")):
+        field_codes = "".join(node.text or "" for node in paragraph.iter(_w_tag("instrText")))
+        if "PAGEREF" not in field_codes.upper():
+            continue
+        for run in paragraph.findall(_w_tag("r")):
+            visible_text = "".join(node.text or "" for node in run.iter(_w_tag("t"))).strip()
+            if re.fullmatch(r"\d+", visible_text or "") and _set_xml_run_size(run, half_points):
+                updated += 1
+    return ET.tostring(root, encoding="unicode"), updated
+
+
+def _normalize_footer_field_sizes(xml_text: str, half_points: int) -> tuple[str, int]:
+    root = ET.fromstring(xml_text.encode("utf-8"))
+    updated = 0
+    for run in root.iter(_w_tag("r")):
+        # Footer content is intentionally small and quiet; enforce it after
+        # LibreOffice rewrites PAGE/NUMPAGES cached field results.
+        if _set_xml_run_size(run, half_points):
+            updated += 1
+    return ET.tostring(root, encoding="unicode"), updated
+
+
+def normalize_docx_field_result_fonts(docx_path: str | Path) -> dict:
+    """Keep refreshed TOC page numbers and footer page fields at formal small size."""
+    source = Path(docx_path)
+    report = {
+        "enabled": True,
+        "status": "skipped",
+        "toc_page_number_font_size_pt": DOCX_TOC_PAGE_NUMBER_FONT_SIZE,
+        "footer_page_number_font_size_pt": DOCX_FOOTER_PAGE_NUMBER_FONT_SIZE,
+        "toc_page_number_runs": 0,
+        "footer_runs": 0,
+    }
+    if not source.exists():
+        report["reason"] = "docx not found"
+        return report
+
+    toc_half_points = int(round(DOCX_TOC_PAGE_NUMBER_FONT_SIZE * 2))
+    footer_half_points = int(round(DOCX_FOOTER_PAGE_NUMBER_FONT_SIZE * 2))
+    changed = False
+    temp_path = source.with_suffix(f".{uuid.uuid4().hex}.tmp.docx")
+    try:
+        with ZipFile(source, "r") as zin, ZipFile(temp_path, "w", ZIP_DEFLATED) as zout:
+            for item in zin.infolist():
+                data = zin.read(item.filename)
+                if item.filename == "word/document.xml":
+                    text, updated = _normalize_document_pageref_sizes(data.decode("utf-8"), toc_half_points)
+                    report["toc_page_number_runs"] += updated
+                    if updated:
+                        changed = True
+                        data = text.encode("utf-8")
+                elif re.fullmatch(r"word/footer\d+\.xml", item.filename):
+                    text, updated = _normalize_footer_field_sizes(data.decode("utf-8"), footer_half_points)
+                    report["footer_runs"] += updated
+                    if updated:
+                        changed = True
+                        data = text.encode("utf-8")
+                zout.writestr(item, data)
+    except (BadZipFile, ET.ParseError, UnicodeDecodeError) as exc:
+        temp_path.unlink(missing_ok=True)
+        report.update({"status": "skipped", "reason": str(exc)})
+        return report
+
+    if changed:
+        os.replace(temp_path, source)
+    else:
+        temp_path.unlink(missing_ok=True)
+    report["status"] = "normalized" if changed else "unchanged"
+    return report
+
+
 def ensure_docx_table_header_repeat(docx_path: str | Path) -> dict:
     """Ensure first table rows keep repeat-header metadata after LibreOffice roundtrip."""
     source = Path(docx_path)
@@ -602,6 +704,7 @@ def docx_template_report(cover_fields: dict | None = None) -> dict:
         "toc_max_level": int(profile.get("toc_max_level") or DOCX_TOC_MAX_LEVEL),
         "toc_font": profile.get("toc_font") or DOCX_BODY_EAST_ASIA,
         "toc_entry_font_size_pt": float(profile.get("toc_entry_font_size_pt") or DOCX_TOC_ENTRY_FONT_SIZE),
+        "toc_page_number_font_size_pt": DOCX_TOC_PAGE_NUMBER_FONT_SIZE,
         "toc_entry_line_spacing_pt": float(profile.get("toc_entry_line_spacing_pt") or DOCX_TOC_ENTRY_LINE_SPACING),
         "table_font": DOCX_TABLE_EAST_ASIA,
         "table_font_size_pt": DOCX_TABLE_FONT_SIZE,
@@ -627,7 +730,7 @@ def docx_template_report(cover_fields: dict | None = None) -> dict:
             "header_font": profile.get("header_footer_font") or DOCX_BODY_EAST_ASIA,
             "header_font_size_pt": 9,
             "footer_font": profile.get("header_footer_font") or DOCX_BODY_EAST_ASIA,
-            "footer_font_size_pt": 9,
+            "footer_font_size_pt": DOCX_FOOTER_PAGE_NUMBER_FONT_SIZE,
             "header_logo": False,
             "text_color": "000000",
             "page_number_format": "第 X 页 共 Y 页",
@@ -635,6 +738,12 @@ def docx_template_report(cover_fields: dict | None = None) -> dict:
             "header_max_chars": DOCX_HEADER_MAX_CHARS,
         },
         "cover_fields": cover_fields or {},
+        "image_caption": {
+            "font_size_pt": DOCX_IMAGE_CAPTION_FONT_SIZE,
+            "alignment": "center",
+            "prefix": "资料：",
+            "policy": "清洗图片资产检索标题，仅保留正式材料说明，不展示内部参数命名或检索来源字段。",
+        },
     }
 
 
@@ -646,6 +755,46 @@ def apply_image_paragraph_format(paragraph):
     fmt.line_spacing = 1.0
     fmt.space_before = Pt(6)
     fmt.space_after = Pt(6)
+
+
+def _formal_image_caption_text(text: str) -> str | None:
+    value = clean_formal_bid_text(re.sub(r"\*\*(.*?)\*\*", r"\1", text or "")).strip()
+    match = re.match(r"^(?:图示|图片|资料|图\s*\d+(?:[.\-—]\d+)*)\s*[：:、.\s]*(.+)$", value)
+    if not match:
+        return None
+
+    caption = match.group(1).strip()
+    caption = re.sub(r"^(?:河北)?泰昌(?:电力器材科技有限公司)?", "", caption).strip()
+    caption = caption.replace("河北泰昌电力器材科技有限公司", "").replace("泰昌", "")
+    caption = re.sub(r"^\d+(?:\.\d+)*[、.．]\s*", "", caption)
+    caption = re.sub(r"(?:内径|外径|壁厚|环刚度|管径)\s*[：:]?\s*[φΦ]?\s*\d+(?:\.\d+)?(?:\s*(?:mm|毫米|MPa|kN/m2|kN/m²))?", "", caption)
+    if "身份证" in caption or "脱敏" in caption or "原图" in caption:
+        caption = "身份证明文件"
+    caption = re.sub(r"[（(]\s*脱敏示意图\s*[）)]", "", caption)
+    caption = caption.replace("原图", "")
+    caption = re.sub(r"第\s*1\s*页", "首页", caption)
+    caption = re.sub(r"\s+", "", caption)
+    caption = re.sub(r"[，,。；;：:\-_\s]+$", "", caption)
+    if not caption:
+        return None
+    if caption.startswith("资料："):
+        return caption
+    return f"资料：{caption}"
+
+
+def _add_formal_image_caption(doc, caption_text: str) -> None:
+    paragraph = doc.add_paragraph()
+    paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    fmt = paragraph.paragraph_format
+    fmt.first_line_indent = Pt(0)
+    fmt.left_indent = Pt(0)
+    fmt.right_indent = Pt(0)
+    fmt.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    fmt.line_spacing = 1.0
+    fmt.space_before = Pt(2)
+    fmt.space_after = Pt(8)
+    run = paragraph.add_run(caption_text)
+    apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_IMAGE_CAPTION_FONT_SIZE, bold=False)
 
 
 def _markdown_heading_lines(md_content: str) -> tuple[int | None, list[dict]]:
@@ -1191,7 +1340,7 @@ def _add_formal_toc_entry(doc, entry: dict, *, tab_position_twips: int, template
         str(entry.get("anchor") or ""),
         placeholder="1",
         bold=toc_entry_bold,
-        size=toc_entry_font_size,
+        size=DOCX_TOC_PAGE_NUMBER_FONT_SIZE,
         east_asia=toc_font,
     )
 
@@ -2051,6 +2200,7 @@ def refresh_docx_fields_with_soffice(docx_path: str | Path) -> tuple[Path, dict]
         _update_refresh_report(report, status="refreshed", output_path=str(source), size=source.stat().st_size)
         report["table_header_repeat"] = ensure_docx_table_header_repeat(source)
         report["marker_cleanup"] = scrub_docx_black_square_markers(source)
+        report["field_font_normalization"] = normalize_docx_field_result_fonts(source)
         report["size"] = source.stat().st_size
         logging.info("LibreOffice 已刷新 DOCX 字段: %s", source)
         return source, report
@@ -2087,10 +2237,16 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
             "inserted": 0,
             "skipped": 0,
         },
+        "captions": {
+            "detected": 0,
+            "formalized": 0,
+            "samples": [],
+        },
         "formal_forms": {
             "detected_types": [],
             "tables": 0,
             "subheadings": 0,
+            "subheading_page_breaks": 0,
             "signature_lines": 0,
             "non_split_rows": 0,
         },
@@ -2269,11 +2425,25 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
             # 移除加粗标记
             text = clean_formal_bid_text(re.sub(r'\*\*(.*?)\*\*', r'\1', line))
             bracket_heading = _formal_bracket_heading(text)
-            if bracket_heading:
+            caption_text = _formal_image_caption_text(text)
+            if caption_text:
+                _add_formal_image_caption(doc, caption_text)
+                image_report["captions"]["detected"] += 1
+                image_report["captions"]["formalized"] += 1
+                if len(image_report["captions"]["samples"]) < 8:
+                    image_report["captions"]["samples"].append({
+                        "source": text[:160],
+                        "caption": caption_text[:160],
+                    })
+            elif bracket_heading:
+                previous_form_type = current_form_type
                 current_form_type, heading_text = bracket_heading
                 detected_types = image_report["formal_forms"]["detected_types"]
                 if current_form_type not in detected_types:
                     detected_types.append(current_form_type)
+                if previous_form_type and previous_form_type != current_form_type:
+                    doc.add_page_break()
+                    image_report["formal_forms"]["subheading_page_breaks"] += 1
                 _add_formal_subheading(doc, heading_text)
                 image_report["formal_forms"]["subheadings"] += 1
             elif current_form_type and FORMAL_SIGNATURE_LINE_RE.match(text):
@@ -2315,6 +2485,7 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
 
         logging.info("已生成 Word 文档: %s", saved_path)
         image_report["marker_cleanup"] = scrub_docx_black_square_markers(saved_path)
+        image_report["field_font_normalization"] = normalize_docx_field_result_fonts(saved_path)
         if return_report:
             image_report["template"] = docx_template_report(cover_fields=resolved_cover_fields)
             return Path(saved_path), image_report

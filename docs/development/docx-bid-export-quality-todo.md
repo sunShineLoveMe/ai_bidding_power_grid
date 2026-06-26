@@ -16,6 +16,7 @@
 - 当前正式正文默认样式为仿宋_GB2312 小四 `12pt`、`1.5` 倍行距、首行缩进 `2` 字符；表格仍保持仿宋_GB2312 `12pt`、固定 `18pt` 行距。
 - 普通用户默认不直接进入全量自定义格式；自定义能力作为后续高级功能。
 - 若招标文件明确第六章格式、前附表或否决项要求，优先按招标文件要求。
+- 2026-06-26 客户新增的 `国家电网有限公司2026年西北、西藏区域第一次联合采购...招标文件包` 已审阅；该批资料定位为招标要求来源和技术参数/货物清单来源，不作为泰昌企业事实，也不作为投标正文视觉主模板直接套用。
 - 若未来客户重新提供可编辑 Word 模板，再进入 `template_docx` 模式；当前 MVP 不等待该资料。
 - 真实验证必须走项目导出链路：`build_project_bid_markdown` -> `convert_md_to_word` -> `refresh_docx_fields_with_soffice`，不得只用 mock 替代。
 
@@ -93,6 +94,27 @@
   - `.venv/bin/python -m pytest tests/test_compliance.py tests/test_formal_bid_check.py -q`，结果 `10 passed, 1 warning`。
 - 真实分册导出回归：`docs/development/runs/run_20260626_reference_template_volume_docx.md` 和 JSON，状态 `PASS`；技术标 `50` 个章节、图片 `24/24/0`、表格 `110` 个；商务标 `52` 个章节、图片 `17/17/0`、表格 `56` 个；两份 DOCX 字段刷新均为 `refreshed`，正文图片显示尺寸均为 `5.8x8.2in`。
 - 完整标书真实链路：`docs/development/runs/run_20260626_reference_template_docx_format.md` 和 JSON 已生成；DOCX/PDF 生成、字段刷新、封面、目录、页眉页脚、正文样式、表格、图片统一尺寸均通过。该综合脚本状态为 `FAIL`，失败原因是当前项目正式必填确认字段缺 `12` 项，以及自动选图未命中 `testing_capacity` 补充包资产；这两个是业务门禁/选图覆盖问题，不属于本轮参考模板版式改动。
+
+### 2026-06-26 国网 2026 西北/西藏招标文件包审阅记录
+
+- 背景：客户新增 `国家电网有限公司2026年西北、西藏区域第一次联合采购10kV电力电缆、架空绝缘导线协议库存公开招标采购_招标文件包`，需判断其对当前投标文件生成是否有参考意义。
+- 解压与盘点：12 个外层招标包和嵌套 ZIP 已展开；解压后文件数 `190`，其中 `.docx` 68、`.doc` 54、`.xlsx` 12、`.zip` 44、`.sign` 12；嵌套 ZIP 未发现未解压残留。
+- 判断：该批资料是招标文件包，不是投标人中标成稿；不应直接作为 `technical_bid_standard` / `business_bid_standard` 视觉模板覆盖当前成果。
+- 可复用点：第六章投标文件格式、投标人须知前附表、商务/技术偏差表、技术特性参数表、货物组件材料配置表、货物清单字段，可作为后续招标要求抽取、技术参数响应和正式导出结构约束。
+- 边界：按 `source_domain=tender_requirement` 处理，不得作为泰昌企业事实，不得把其中图片、业绩、合同主体等内容写入泰昌正式投标文件。
+- 记录：`docs/development/runs/run_20260626_sgcc_2026_tender_package_review.md`。
+
+### 2026-06-26 新疆技术/商务参考模板分册真实复验
+
+- 背景：针对用户截图反馈的页眉 Logo、目录加粗/点引导线、标题颜色、章节标题混乱和章节分页问题，重新真实导出技术标与商务标分册复验。
+- 本轮修正：正式表单小标题从一种表单类型切换到另一种表单类型时，插入实际分页符，例如 `投标函 -> 法定代表人授权书`；不使用 `pageBreakBefore`，避免 Word/WPS 黑色格式标记。
+- 真实链路：`build_project_bid_markdown(volume_type=technical/business, with_images=true) -> convert_md_to_word(return_report=true) -> refresh_docx_fields_with_soffice`，并用 LibreOffice 转 PDF、`pdftoppm` 抽样目录页和正文页。
+- 结果：
+  - 技术标使用 `technical_bid_standard`，字段刷新 `refreshed`，页眉 Logo `false`，目录真实加粗 run `0`，非黑色文字 `[]`，H1/H2 分页 `13/13`，failures `[]`。
+  - 商务标使用 `business_bid_standard`，字段刷新 `refreshed`，页眉 Logo `false`，目录真实加粗 run `0`，非黑色文字 `[]`，H1/H2 分页 `21/21`，正式表单切换分页 `15`，failures `[]`。
+  - PDF 抽样确认商务标第 5 页不再把 `二、法定代表人授权书` 挤在页底。
+- 自动化回归：`.venv/bin/python -m pytest tests/test_docx_export.py tests/test_celery_export_tasks.py -q`，结果 `55 passed, 7 warnings`。
+- 记录：`docs/development/runs/run_20260626_xinjiang_profile_volume_revalidation.md` 和 JSON；PDF 抽样截图位于 `docs/development/runs/run_20260626_xinjiang_profile_volume_revalidation_pages/`。
 
 ### 2026-06-25 第六章格式表单保真验收记录
 
@@ -483,3 +505,20 @@
 - 自动化回归：
   - `.venv/bin/python -m pytest tests/test_docx_export.py tests/test_formal_placeholders.py tests/test_bid_prefill.py tests/test_celery_export_tasks.py -q`，结果 `67 passed, 7 warnings`。
 - 当前边界：本轮已形成技术/商务模板 profile 和正式导出门禁；后续若要进一步贴近参考稿，需要把章节树升级为“分册对象模型”，按技术偏差表、技术特性参数表、商务偏差表、查询报告、财务状况、附件证据页等对象生成，而不是继续把通用章节树原样输出。
+
+### 2026-06-26 DOCX 页码字号与图片题注正式复验记录
+
+- 背景：用户反馈技术/商务标成品中目录右侧页码、页脚页码观感偏大，图片下方题注存在“图示：泰昌CPVC电缆保护管检验报告内径250第1页”等不合规资产标题，并要求实事求是评估泰昌产品资料是否足以支撑技术标。
+- 本轮实现：
+  - 目录 PAGEREF 页码字段结果独立收敛为 `9pt`，目录条目正文仍保持模板 profile 的 `10.5pt`。
+  - LibreOffice 字段刷新后新增 DOCX XML 字号归一化，防止刷新后的目录页码、页脚 PAGE/NUMPAGES 字段结果回退为默认大字号。
+  - 图片题注识别 `图示/图片/资料/图X-X` 前缀，统一输出为居中 `9pt` 的 `资料：...`，清理检索参数、资料编号、`原图/脱敏示意图` 和内部来源字段。
+- 输出文件：
+  - 技术标 DOCX/PDF：`outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-技术标-图文.docx`
+  - 商务标 DOCX/PDF：`outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-商务标-图文.docx`
+- 真实复验记录：
+  - `docs/development/runs/run_20260626_docx_page_caption_evidence_revalidation.md`
+  - `docs/development/runs/run_20260626_docx_page_caption_evidence_revalidation.json`
+- 本次真实验收结果：状态 `PASS`，无 failures；技术标 `template_id=technical_bid_standard`，商务标 `template_id=business_bid_standard`；两份文件字段刷新均 `refreshed`；目录页码最大字号 `9pt`；页脚最大字号 `9pt`；技术标题注 `27` 条、商务标题注 `18` 条，不合规题注命中 `0`。
+- 自动化回归：`.venv/bin/python -m pytest tests/test_docx_export.py tests/test_celery_export_tasks.py -q`，结果 `56 passed, 7 warnings`。
+- 产品资料支撑度结论：泰昌现有资料能支撑 CPVC/MPP 电缆保护管的基础技术响应和资质证明，但产品维度仍偏薄；若投标对象是 `10kV架空绝缘导线`，当前企业事实资料明显不匹配，不能用电缆保护管资料硬撑导线技术标，需客户补充目标产品参数、型式试验/检验报告、生产检测设备、工艺质量控制和同类业绩资料。

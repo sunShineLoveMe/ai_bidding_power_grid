@@ -1,0 +1,752 @@
+{
+  "run_id": "run_20260626_docx_page_caption_evidence_revalidation",
+  "generated_at": "2026-06-26T22:05:32",
+  "project_id": "a1d853bc-ca4e-43b4-bbea-256f561c8a3d",
+  "chain": "build_project_bid_markdown(volume_type, with_images=true) -> convert_md_to_word(return_report=true) -> refresh_docx_fields_with_soffice -> LibreOffice PDF -> DOCX XML audit",
+  "expected": {
+    "toc_page_number_font_size_pt": 9.0,
+    "footer_page_number_font_size_pt": 9.0,
+    "caption_font_size_pt": 9.0
+  },
+  "results": {
+    "technical": {
+      "title": "国网辽宁电力2025年第三次物资协议库存招标采购投标文件-技术标",
+      "markdown_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-技术标-图文.md",
+      "docx_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-技术标-图文.docx",
+      "pdf": {
+        "enabled": true,
+        "soffice_bin": "/opt/homebrew/bin/soffice",
+        "status": "converted",
+        "pdf_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-技术标-图文.pdf",
+        "returncode": 0,
+        "stdout": "convert /Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-技术标-图文.docx as a Writer document -> /Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-技术标-图文.pdf using filter : writer_pdf_Export\nOverwriting: /Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-技术标-图文.pdf\n",
+        "stderr": "",
+        "pdf_size": 9266367
+      },
+      "image_selection_summary": {
+        "candidate_count": 598,
+        "selected": 24,
+        "inserted": 24,
+        "failed": 0,
+        "manifest_count": 24,
+        "evidence_counter": {
+          "unknown": 24
+        },
+        "title_token_counter": {
+          "CPVC": 7,
+          "检验报告": 6,
+          "MPP": 8,
+          "生产/设备": 8
+        }
+      },
+      "image_conversion_captions": {
+        "detected": 27,
+        "formalized": 27,
+        "samples": [
+          {
+            "source": "图示：泰昌CPVC电缆保护管检验报告内径250第3页",
+            "caption": "资料：CPVC电缆保护管检验报告第3页"
+          },
+          {
+            "source": "图示：泰昌MPP电缆保护管检验报告内径250第5页",
+            "caption": "资料：MPP电缆保护管检验报告第5页"
+          },
+          {
+            "source": "图示：泰昌MPP电缆保护管检验报告内径250第2页",
+            "caption": "资料：MPP电缆保护管检验报告第2页"
+          },
+          {
+            "source": "图示：泰昌CPVC电缆保护管检验报告内径250第1页",
+            "caption": "资料：CPVC电缆保护管检验报告首页"
+          },
+          {
+            "source": "图示：泰昌CPVC电缆保护管检验报告内径250第4页",
+            "caption": "资料：CPVC电缆保护管检验报告第4页"
+          },
+          {
+            "source": "图示：泰昌CPVC电缆保护管检验报告内径250第2页",
+            "caption": "资料：CPVC电缆保护管检验报告第2页"
+          },
+          {
+            "source": "图示：泰昌aa787a1c-d48d-46f6-bcbd-4806003b8428原图",
+            "caption": "资料：身份证明文件"
+          },
+          {
+            "source": "图示：泰昌锤击试验装置_页面_4原图",
+            "caption": "资料：身份证明文件"
+          }
+        ]
+      },
+      "template": {
+        "template_id": "technical_bid_standard",
+        "template_family": "formal_bid_xinjiang_sgcc_reference",
+        "applies_to": "technical_bid_volume",
+        "reference_source": "新疆10kV架空绝缘导线中标技术文件",
+        "reference_path": "assets/template_words/技术文件 - 10kV架空绝缘导线-新疆.docx",
+        "runtime_policy": "仅抽取版式、目录组织和分册结构；禁止复用参考稿企业事实、产品参数、证书和附件内容。",
+        "reference_outline": [
+          "技术偏差表",
+          "技术特性参数表",
+          "技术规范点对点应答",
+          "货物组件材料配置表",
+          "评审要素补充技术文件",
+          "检测检验报告",
+          "其他技术附件"
+        ],
+        "bidder_full_name": "河北泰昌电力器材科技有限公司",
+        "body_font": "FangSong_GB2312",
+        "body_latin_font": "Times New Roman",
+        "body_font_size_pt": 12.0,
+        "body_line_spacing_rule": "multiple",
+        "body_line_spacing": 1.5,
+        "body_line_spacing_pt": null,
+        "body_first_line_indent_pt": 24.0,
+        "list_left_indent_pt": 24.0,
+        "list_hanging_indent_pt": 12.0,
+        "heading_keep_with_next": false,
+        "cover_title_font_size_pt": 36.0,
+        "toc_title_font_size_pt": 16.0,
+        "toc_max_level": 4,
+        "toc_font": "宋体",
+        "toc_entry_font_size_pt": 10.5,
+        "toc_page_number_font_size_pt": 9.0,
+        "toc_entry_line_spacing_pt": 15.0,
+        "table_font": "FangSong_GB2312",
+        "table_font_size_pt": 12.0,
+        "table_line_spacing_pt": 18.0,
+        "table_cell_margin_twips": 100,
+        "table_header_fill": "EDEDED",
+        "toc_entry_bold_all": false,
+        "reference_templates": [
+          {
+            "path": "assets/template_words/5d2a2c833dad4bb3b3ccc0856f755b54.docx",
+            "role": "primary_reference_style",
+            "usage": "抽取目录、页边距、封面字段、表格和签章位风格，作为 formal_bid_standard 的参考规则，不直接套打正文。"
+          },
+          {
+            "path": "assets/template_words/1523993.doc",
+            "role": "secondary_legacy_reference",
+            "usage": "旧版二进制 Word 参考稿，仅用于补充格式项比对，不作为运行时模板依赖。"
+          }
+        ],
+        "reference_template_policy": "assets/template_words 仅作为格式参考源，按文件类型选择 technical_bid_standard / business_bid_standard / formal_bid_standard，不直接套用参考稿事实内容。",
+        "image_layout": {
+          "uniform_frame_enabled": true,
+          "frame_width_in": 5.8,
+          "frame_height_in": 8.2,
+          "frame_dpi": 220,
+          "frame_background": "FFFFFF",
+          "content_policy": "contain_no_crop_no_distortion"
+        },
+        "page_size": "A4",
+        "margins_cm": {
+          "top": 2.54,
+          "bottom": 2.54,
+          "left": 3.17,
+          "right": 3.17
+        },
+        "heading_font": "SimHei",
+        "heading_level3_font": "KaiTi_GB2312",
+        "header_footer": {
+          "header_font": "宋体",
+          "header_font_size_pt": 9,
+          "footer_font": "宋体",
+          "footer_font_size_pt": 9.0,
+          "header_logo": false,
+          "text_color": "000000",
+          "page_number_format": "第 X 页 共 Y 页",
+          "header_text": "左侧项目名称，右侧技术投标文件",
+          "header_max_chars": 42
+        },
+        "cover_fields": {
+          "项目名称": "国网辽宁电力2025年第三次物资协议库存招标采购",
+          "文件类型": "技术投标文件",
+          "招标编号": "2225AC",
+          "包号": "包2"
+        },
+        "image_caption": {
+          "font_size_pt": 9.0,
+          "alignment": "center",
+          "prefix": "资料：",
+          "policy": "清洗图片资产检索标题，仅保留正式材料说明，不展示内部参数命名或检索来源字段。"
+        }
+      },
+      "field_refresh": {
+        "enabled": true,
+        "status": "refreshed",
+        "tool": "libreoffice",
+        "soffice_bin": "/opt/homebrew/bin/soffice",
+        "input_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-技术标-图文.docx",
+        "timeout_seconds": 180,
+        "returncode": 0,
+        "stdout": "convert /var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-c22xjo4i/input/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-技术标-图文.docx as a Writer document -> /private/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-c22xjo4i/output/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-技术标-图文.docx using filter : Office Open XML Text\n",
+        "stderr": "2026-06-26 22:05:13.562 soffice[79984:40027590] Task policy set failed: 4 ((os/kern) invalid argument)\n",
+        "manual_refresh_required": false,
+        "user_message": "DOCX 已完成自动刷新，目录页码、页脚页码和总页数字段已重新保存。",
+        "output_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-技术标-图文.docx",
+        "size": 4356183,
+        "table_header_repeat": {
+          "table_count": 110,
+          "updated": 0,
+          "failed": false
+        },
+        "marker_cleanup": {
+          "enabled": true,
+          "status": "cleaned",
+          "counts_before": {
+            "keepLines": 0,
+            "keepNext": 1,
+            "pageBreakBefore": 0
+          },
+          "counts_after": {
+            "keepLines": 0,
+            "keepNext": 0,
+            "pageBreakBefore": 0
+          }
+        },
+        "field_font_normalization": {
+          "enabled": true,
+          "status": "normalized",
+          "toc_page_number_font_size_pt": 9.0,
+          "footer_page_number_font_size_pt": 9.0,
+          "toc_page_number_runs": 51,
+          "footer_runs": 12
+        }
+      },
+      "docx_audit": {
+        "toc_page_number_expected_pt": 9.0,
+        "toc_page_number_run_count": 51,
+        "toc_page_number_text_samples": [
+          "4",
+          "9",
+          "24",
+          "30",
+          "50",
+          "57",
+          "65",
+          "70",
+          "77",
+          "87",
+          "96",
+          "100"
+        ],
+        "toc_page_number_half_point_values": [
+          18
+        ],
+        "toc_page_number_max_pt": 9.0,
+        "footer_expected_pt": 9.0,
+        "footer_half_point_values": [
+          18
+        ],
+        "footer_max_pt": 9.0,
+        "caption_expected_pt": 9.0,
+        "caption_count": 27,
+        "caption_samples": [
+          {
+            "text": "资料：CPVC电缆保护管检验报告第3页",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0,
+              9.0,
+              9.0,
+              9.0,
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：MPP电缆保护管检验报告第5页",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0,
+              9.0,
+              9.0,
+              9.0,
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：MPP电缆保护管检验报告第2页",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0,
+              9.0,
+              9.0,
+              9.0,
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：CPVC电缆保护管检验报告首页",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0,
+              9.0,
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：CPVC电缆保护管检验报告第4页",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0,
+              9.0,
+              9.0,
+              9.0,
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：CPVC电缆保护管检验报告第2页",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0,
+              9.0,
+              9.0,
+              9.0,
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：身份证明文件",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：身份证明文件",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：身份证明文件",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：身份证明文件",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：附注：本截图来源于国网ECP2.0系统，为系统实时查询界面，非静态图片。鉴于网络环境及系统版本可能更新，我公司承诺在投标有效期内可供招标人实时核查上述信息的真实性与有效性",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0,
+              9.0,
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：身份证明文件",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          }
+        ],
+        "bad_caption_tokens": [],
+        "caption_alignment_failures": [],
+        "caption_font_failures": []
+      }
+    },
+    "business": {
+      "title": "国网辽宁电力2025年第三次物资协议库存招标采购投标文件-商务标",
+      "markdown_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-商务标-图文.md",
+      "docx_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-商务标-图文.docx",
+      "pdf": {
+        "enabled": true,
+        "soffice_bin": "/opt/homebrew/bin/soffice",
+        "status": "converted",
+        "pdf_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-商务标-图文.pdf",
+        "returncode": 0,
+        "stdout": "convert /Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-商务标-图文.docx as a Writer document -> /Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-商务标-图文.pdf using filter : writer_pdf_Export\nOverwriting: /Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-商务标-图文.pdf\n",
+        "stderr": "",
+        "pdf_size": 6919111
+      },
+      "image_selection_summary": {
+        "candidate_count": 598,
+        "selected": 18,
+        "inserted": 18,
+        "failed": 0,
+        "manifest_count": 18,
+        "evidence_counter": {
+          "unknown": 18
+        },
+        "title_token_counter": {
+          "CPVC": 2,
+          "MPP": 2,
+          "生产/设备": 1
+        }
+      },
+      "image_conversion_captions": {
+        "detected": 18,
+        "formalized": 18,
+        "samples": [
+          {
+            "source": "图示：泰昌绿色电力认证证书第1页",
+            "caption": "资料：绿色电力认证证书首页"
+          },
+          {
+            "source": "图示：泰昌3.职业健康安全管理体系认证证书第3页",
+            "caption": "资料：职业健康安全管理体系认证证书第3页"
+          },
+          {
+            "source": "图示：泰昌晁坤琳2原图（脱敏示意图）",
+            "caption": "资料：身份证明文件"
+          },
+          {
+            "source": "图示：泰昌3.职业健康安全管理体系认证证书第2页",
+            "caption": "资料：职业健康安全管理体系认证证书第2页"
+          },
+          {
+            "source": "图示：泰昌3.职业健康安全管理体系认证证书第1页",
+            "caption": "资料：职业健康安全管理体系认证证书首页"
+          },
+          {
+            "source": "图示：泰昌1.质量管理体系认证证书第2页",
+            "caption": "资料：质量管理体系认证证书第2页"
+          },
+          {
+            "source": "图示：泰昌3.职业健康安全管理体系认证证书第1页",
+            "caption": "资料：职业健康安全管理体系认证证书首页"
+          },
+          {
+            "source": "图示：泰昌2.环境管理体系认证证书第2页",
+            "caption": "资料：环境管理体系认证证书第2页"
+          }
+        ]
+      },
+      "template": {
+        "template_id": "business_bid_standard",
+        "template_family": "formal_bid_xinjiang_sgcc_reference",
+        "applies_to": "business_bid_volume",
+        "reference_source": "新疆10kV架空绝缘导线中标商务文件",
+        "reference_path": "assets/template_words/商务文件 - 10kV架空绝缘导线-新疆(1).docx",
+        "runtime_policy": "仅抽取版式、目录组织和分册结构；禁止复用参考稿企业事实、查询报告、审计报告和授权文件内容。",
+        "reference_outline": [
+          "商务偏差表",
+          "补充文件",
+          "查询报告及截图",
+          "财务状况",
+          "评审要素补充商务材料",
+          "授权委托书",
+          "其他商务附件"
+        ],
+        "bidder_full_name": "河北泰昌电力器材科技有限公司",
+        "body_font": "FangSong_GB2312",
+        "body_latin_font": "Times New Roman",
+        "body_font_size_pt": 12.0,
+        "body_line_spacing_rule": "multiple",
+        "body_line_spacing": 1.5,
+        "body_line_spacing_pt": null,
+        "body_first_line_indent_pt": 24.0,
+        "list_left_indent_pt": 24.0,
+        "list_hanging_indent_pt": 12.0,
+        "heading_keep_with_next": false,
+        "cover_title_font_size_pt": 36.0,
+        "toc_title_font_size_pt": 16.0,
+        "toc_max_level": 4,
+        "toc_font": "宋体",
+        "toc_entry_font_size_pt": 10.5,
+        "toc_page_number_font_size_pt": 9.0,
+        "toc_entry_line_spacing_pt": 15.0,
+        "table_font": "FangSong_GB2312",
+        "table_font_size_pt": 12.0,
+        "table_line_spacing_pt": 18.0,
+        "table_cell_margin_twips": 100,
+        "table_header_fill": "EDEDED",
+        "toc_entry_bold_all": false,
+        "reference_templates": [
+          {
+            "path": "assets/template_words/5d2a2c833dad4bb3b3ccc0856f755b54.docx",
+            "role": "primary_reference_style",
+            "usage": "抽取目录、页边距、封面字段、表格和签章位风格，作为 formal_bid_standard 的参考规则，不直接套打正文。"
+          },
+          {
+            "path": "assets/template_words/1523993.doc",
+            "role": "secondary_legacy_reference",
+            "usage": "旧版二进制 Word 参考稿，仅用于补充格式项比对，不作为运行时模板依赖。"
+          }
+        ],
+        "reference_template_policy": "assets/template_words 仅作为格式参考源，按文件类型选择 technical_bid_standard / business_bid_standard / formal_bid_standard，不直接套用参考稿事实内容。",
+        "image_layout": {
+          "uniform_frame_enabled": true,
+          "frame_width_in": 5.8,
+          "frame_height_in": 8.2,
+          "frame_dpi": 220,
+          "frame_background": "FFFFFF",
+          "content_policy": "contain_no_crop_no_distortion"
+        },
+        "page_size": "A4",
+        "margins_cm": {
+          "top": 2.54,
+          "bottom": 2.54,
+          "left": 3.17,
+          "right": 3.17
+        },
+        "heading_font": "SimHei",
+        "heading_level3_font": "KaiTi_GB2312",
+        "header_footer": {
+          "header_font": "宋体",
+          "header_font_size_pt": 9,
+          "footer_font": "宋体",
+          "footer_font_size_pt": 9.0,
+          "header_logo": false,
+          "text_color": "000000",
+          "page_number_format": "第 X 页 共 Y 页",
+          "header_text": "左侧项目名称，右侧商务投标文件",
+          "header_max_chars": 42
+        },
+        "cover_fields": {
+          "项目名称": "国网辽宁电力2025年第三次物资协议库存招标采购",
+          "文件类型": "商务投标文件",
+          "招标编号": "2225AC",
+          "分标编号": "按招标文件、本投标文件及附件资料执行",
+          "包号": "包1",
+          "包名称": "电缆保护管CPVC、电缆保护管MPP"
+        },
+        "image_caption": {
+          "font_size_pt": 9.0,
+          "alignment": "center",
+          "prefix": "资料：",
+          "policy": "清洗图片资产检索标题，仅保留正式材料说明，不展示内部参数命名或检索来源字段。"
+        }
+      },
+      "field_refresh": {
+        "enabled": true,
+        "status": "refreshed",
+        "tool": "libreoffice",
+        "soffice_bin": "/opt/homebrew/bin/soffice",
+        "input_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-商务标-图文.docx",
+        "timeout_seconds": 180,
+        "returncode": 0,
+        "stdout": "convert /var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-zmg_xzag/input/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-商务标-图文.docx as a Writer document -> /private/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-zmg_xzag/output/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-商务标-图文.docx using filter : Office Open XML Text\n",
+        "stderr": "2026-06-26 22:05:27.166 soffice[80147:40028283] Task policy set failed: 4 ((os/kern) invalid argument)\n",
+        "manual_refresh_required": false,
+        "user_message": "DOCX 已完成自动刷新，目录页码、页脚页码和总页数字段已重新保存。",
+        "output_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-商务标-图文.docx",
+        "size": 4366491,
+        "table_header_repeat": {
+          "table_count": 56,
+          "updated": 0,
+          "failed": false
+        },
+        "marker_cleanup": {
+          "enabled": true,
+          "status": "cleaned",
+          "counts_before": {
+            "keepLines": 0,
+            "keepNext": 1,
+            "pageBreakBefore": 0
+          },
+          "counts_after": {
+            "keepLines": 0,
+            "keepNext": 0,
+            "pageBreakBefore": 0
+          }
+        },
+        "field_font_normalization": {
+          "enabled": true,
+          "status": "normalized",
+          "toc_page_number_font_size_pt": 9.0,
+          "footer_page_number_font_size_pt": 9.0,
+          "toc_page_number_runs": 61,
+          "footer_runs": 12
+        }
+      },
+      "docx_audit": {
+        "toc_page_number_expected_pt": 9.0,
+        "toc_page_number_run_count": 61,
+        "toc_page_number_text_samples": [
+          "4",
+          "12",
+          "17",
+          "20",
+          "23",
+          "32",
+          "37",
+          "40",
+          "45",
+          "48",
+          "51",
+          "61"
+        ],
+        "toc_page_number_half_point_values": [
+          18
+        ],
+        "toc_page_number_max_pt": 9.0,
+        "footer_expected_pt": 9.0,
+        "footer_half_point_values": [
+          18
+        ],
+        "footer_max_pt": 9.0,
+        "caption_expected_pt": 9.0,
+        "caption_count": 18,
+        "caption_samples": [
+          {
+            "text": "资料：绿色电力认证证书首页",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：职业健康安全管理体系认证证书第3页",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0,
+              9.0,
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：身份证明文件",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：职业健康安全管理体系认证证书第2页",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0,
+              9.0,
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：职业健康安全管理体系认证证书首页",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：质量管理体系认证证书第2页",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0,
+              9.0,
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：职业健康安全管理体系认证证书首页",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：环境管理体系认证证书第2页",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0,
+              9.0,
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：157-保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC__中标通知书第2页",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0,
+              9.0,
+              9.0,
+              9.0,
+              9.0,
+              9.0,
+              9.0,
+              9.0,
+              9.0,
+              9.0,
+              9.0,
+              9.0,
+              9.0,
+              9.0,
+              9.0,
+              9.0,
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：身份证明文件",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：报告第37页",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0,
+              9.0,
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          },
+          {
+            "text": "资料：碳足迹报告第15页",
+            "alignment": "CENTER (1)",
+            "font_sizes_pt": [
+              9.0,
+              9.0,
+              9.0
+            ],
+            "first_line_indent_pt": 0.0
+          }
+        ],
+        "bad_caption_tokens": [],
+        "caption_alignment_failures": [],
+        "caption_font_failures": []
+      }
+    }
+  },
+  "product_evidence_assessment": {
+    "cpvc_mpp_evidence_exists": true,
+    "inspection_report_evidence_exists": true,
+    "overhead_conductor_evidence_selected": false,
+    "conclusion": "泰昌现有资料能支撑电缆保护管 CPVC/MPP 的基础技术响应和资质证明，但产品维度仍偏薄；若投标对象是10kV架空绝缘导线，则企业事实资料明显不匹配，不能用现有泰昌电缆保护管资料硬撑导线技术标。",
+    "needed_materials": [
+      "目标产品完整样本/产品手册/技术参数表",
+      "覆盖各规格型号的型式试验或检验报告",
+      "生产线、关键设备、检测设备清单和实拍资料",
+      "原材料供应与进厂检验制度、过程检验记录样例",
+      "同类产品供货业绩、中标通知书、合同和验收证明",
+      "质量控制、售后服务、包装运输和交付能力资料"
+    ]
+  },
+  "failures": [],
+  "status": "PASS"
+}
