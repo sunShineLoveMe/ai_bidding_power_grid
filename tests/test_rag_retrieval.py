@@ -693,6 +693,20 @@ class RagRetrievalQualityTest(unittest.TestCase):
         self.assertIn("只回答已命中的资质证书和体系认证", prompt)
         self.assertIn("不要输出“需要确认或补充”小节", prompt)
         self.assertIn("不得主动扩展到营业执照", prompt)
+        self.assertIn("不能把“存在/已命中证书资料”表述为“有效/合格有效/在有效期内”", prompt)
+
+    def test_inspection_report_prompt_binds_coverage_to_specification(self):
+        from backend.rag.retrieval import build_knowledge_prompt
+
+        prompt, _ = build_knowledge_prompt(
+            "泰昌 CPVC 电缆保护管有哪些检验报告？",
+            contexts=[],
+            assets=[],
+        )
+
+        self.assertIn("覆盖范围必须绑定到产品族、规格型号、报告编号", prompt)
+        self.assertIn("不得写“已覆盖全部 CPVC 规格”", prompt)
+        self.assertIn("需补充对应规格报告或由客户确认", prompt)
 
     def test_pilot_enterprise_contexts_filter_dedupe_sort_and_limit_sources(self):
         from backend.api.knowledge import _curate_pilot_enterprise_contexts
@@ -769,6 +783,50 @@ class RagRetrievalQualityTest(unittest.TestCase):
         )
 
         self.assertEqual({item["id"] for item in result}, {"quality", "environment", "ohs"})
+
+    def test_pilot_enterprise_contexts_do_not_fill_certificate_sources_with_green_reports(self):
+        from backend.api.knowledge import _curate_pilot_enterprise_contexts
+
+        common = {
+            "enterprise": "泰昌",
+            "source_domain": "enterprise_fact",
+            "fact_source_allowed_for_enterprise": True,
+            "reference_only": False,
+        }
+        contexts = [
+            {
+                "id": "quality",
+                "content": "质量管理体系认证证书",
+                "similarity": 0.7,
+                "metadata": {**common, "source_display_name": "质量管理体系认证证书", "evidence_type": "certification"},
+            },
+            {
+                "id": "esg",
+                "content": "ESG环境社会公司治理报告提到质量和环保管理",
+                "similarity": 0.99,
+                "metadata": {**common, "source_display_name": "ESG环境社会公司治理报告", "evidence_type": "green_low_carbon"},
+            },
+            {
+                "id": "waste",
+                "content": "废水废气废固检测报告",
+                "similarity": 0.98,
+                "metadata": {**common, "source_display_name": "废水废气废固检测报告", "evidence_type": "green_low_carbon"},
+            },
+            {
+                "id": "green-mislabeled",
+                "content": "绿色发展规划报告",
+                "similarity": 0.97,
+                "metadata": {**common, "source_display_name": "绿色发展规划报告", "evidence_type": "certification"},
+            },
+        ]
+
+        result = _curate_pilot_enterprise_contexts(
+            contexts,
+            limit=5,
+            query="泰昌有哪些资质证书？",
+        )
+
+        self.assertEqual([item["id"] for item in result], ["quality"])
 
 
 if __name__ == "__main__":

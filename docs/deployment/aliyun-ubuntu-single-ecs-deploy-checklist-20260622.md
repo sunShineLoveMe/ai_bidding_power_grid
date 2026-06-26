@@ -508,7 +508,8 @@ openssl rand -hex 32
 | --- | --- | --- | --- |
 | [ ] | 复制 `.env.example` | `.env` 存在 | |
 | [ ] | 设置生产测试基础项 | `APP_ENV=production` | 测试也按生产启动约束 |
-| [ ] | 配置公网访问地址 | `APP_PUBLIC_BASE_URL=http://8.160.187.226` | 后续有域名再改 |
+| [ ] | 配置公网访问地址 | `APP_PUBLIC_BASE_URL=http://8.160.187.226` | 后续有域名再改；若继续使用测试端口则临时写 `http://8.160.187.226:8080` |
+| [ ] | 配置前端公网端口 | 正式演示入口设置 `FRONTEND_HTTP_PORT=80`；测试端口可保持默认 `8080` | `docker-compose.yml` 已支持 `${FRONTEND_HTTP_PORT:-8080}:80` |
 | [ ] | 配置数据库密码 | `POSTGRES_PASSWORD` 非默认弱口令 | 不提交 Git |
 | [ ] | 配置登录/会话密钥 | `APP_SESSION_SECRET` 已生成随机值 | |
 | [x] | 配置 DeepSeek Key | 模型调用可用 | 本地使用云上 `.env.aliyun.local` 验证 `chat/completions` 返回正常 |
@@ -552,8 +553,8 @@ docker compose ps
 
 ```bash
 curl -fsS http://127.0.0.1:3012/api/health
-curl -fsS http://127.0.0.1:8080/api/health
-curl -fsS -I http://127.0.0.1:8080/
+curl -fsS http://127.0.0.1:${FRONTEND_HTTP_PORT:-8080}/api/health
+curl -fsS -I http://127.0.0.1:${FRONTEND_HTTP_PORT:-8080}/
 ```
 
 外部本机浏览器访问：
@@ -562,13 +563,31 @@ curl -fsS -I http://127.0.0.1:8080/
 http://8.160.187.226
 ```
 
-如果前端当前只映射 `8080:80`，公网直接访问 80 还不可用，需要后续调整为 `80:80` 或增加宿主机 Nginx。测试期可临时访问：
+公网 80 作为客户演示入口时，在服务器 `.env` 中设置：
+
+```bash
+FRONTEND_HTTP_PORT=80
+APP_PUBLIC_BASE_URL=http://8.160.187.226
+APP_HOST=8.160.187.226
+APP_CORS_ORIGINS=http://8.160.187.226,http://8.160.187.226:8080
+docker compose up -d frontend backend celery-worker
+```
+
+然后验证：
+
+```bash
+curl -fsS http://127.0.0.1/api/health
+curl -fsS -I http://127.0.0.1/
+curl -fsS -I http://8.160.187.226/
+```
+
+如果暂时不调整 80 入口，测试期可继续访问：
 
 ```text
 http://8.160.187.226:8080
 ```
 
-但若使用 `8080`，必须临时开放安全组 `8080`。正式建议改 compose 前端端口为 `80:80`。
+但若使用 `8080`，必须临时开放安全组 `8080`，并明确告知客户测试入口包含端口号。`80` 和 `8080` 不建议长期同时作为正式入口，避免客户访问口径混乱。
 
 | 状态 | 任务 | 验收口径 | 备注 |
 | --- | --- | --- | --- |

@@ -300,6 +300,33 @@ def _enterprise_context_intent_bonus(query: str, context: dict[str, Any]) -> flo
     return bonus
 
 
+def _is_certification_query(query: str) -> bool:
+    return any(keyword in (query or "") for keyword in ["资质证书", "体系认证", "认证证书"])
+
+
+def _is_formal_certification_context(context: dict[str, Any]) -> bool:
+    meta = _safe_meta(context)
+    text = " ".join(
+        str(value or "")
+        for value in [
+            meta.get("source_display_name"),
+            meta.get("source_document_name"),
+            meta.get("source_file"),
+            meta.get("evidence_type"),
+            meta.get("evidence_type_label"),
+            context.get("content"),
+        ]
+    )
+    formal_certificate_names = ["质量管理体系认证证书", "环境管理体系认证证书", "职业健康安全管理体系认证证书", "认证证书"]
+    if any(name in text for name in formal_certificate_names):
+        return True
+    if any(name in text for name in ["ESG", "绿色发展规划", "绿色供应链", "碳足迹", "废水废气", "废水废气废固"]):
+        return False
+    if meta.get("evidence_type") == "certification":
+        return True
+    return False
+
+
 def _curate_pilot_enterprise_contexts(
     contexts: list[dict[str, Any]],
     limit: int = 5,
@@ -316,11 +343,16 @@ def _curate_pilot_enterprise_contexts(
         if current is None or float(context.get("similarity") or 0) > float(current.get("similarity") or 0):
             curated[key] = context
 
-    return sorted(
+    ranked = sorted(
         curated.values(),
         key=lambda item: float(item.get("similarity") or 0) + _enterprise_context_intent_bonus(query, item),
         reverse=True,
-    )[:limit]
+    )
+    if _is_certification_query(query):
+        certification_contexts = [item for item in ranked if _is_formal_certification_context(item)]
+        if certification_contexts:
+            return certification_contexts[:limit]
+    return ranked[:limit]
 
 
 def _asset_metadata_filter_from_query(query: str, metadata_filter: dict[str, Any] | None, explicit_asset_filter: dict[str, Any] | None = None) -> dict[str, Any] | None:

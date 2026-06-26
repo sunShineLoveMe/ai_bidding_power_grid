@@ -8,6 +8,39 @@
 
 ---
 
+## Run 20260626 — 阿里云企业库展示与来源收敛本地收口（2026-06-26）
+
+> 汇总：`docs/rag/runs/run_20260626_aliyun_enterprise_source_convergence_final_review.md`
+> 自动门禁：`docs/rag/runs/run_20260626_aliyun_enterprise_source_convergence_final_summary.md`
+> 增量门禁：`docs/rag/runs/run_20260626_aliyun_enterprise_source_convergence_final_incremental_summary.md`
+
+### 触发原因
+
+P1C-15 收口阿里云企业库剩余缺陷：资质证书问答来源混入 ESG/绿色发展/废水类资料、CPVC 检验报告回答泛化规格覆盖范围，以及公网 80 入口说明不清。
+
+### 结果
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 239 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 589 ms |
+| 泰昌专项 | off | 96.7% | 100.0% | 0.967 | 3.3% | 0.0% | 345 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 1.000 | 0.0% | 0.0% | 736 ms |
+
+- API ready：PASS。
+- RAG 定向单测：PASS，38 passed。
+- Base 30 + 泰昌专项 30 增量门禁：PASS。
+- 真实 `/api/knowledge/search/stream` 资质证书问题：PASS，contexts=3，assets=6，来源仅三体系认证证书。
+- 真实 `/api/knowledge/search/stream` CPVC 检验报告问题：PASS，contexts=5，assets=6，回答限定为内径250/`DS 250×15×6000 SN16 PVC-C`/报告编号 `2024100312005501713`。
+- 本轮未新增资料、未执行入库、未批量修改数据库 metadata；仅调整检索后处理、回答约束和部署端口配置。
+- 云上只读检查：`http://8.160.187.226:8080/api/health` PASS；`http://8.160.187.226/api/health` 仍为 `Empty reply from server`，需发布本轮代码并设置 `FRONTEND_HTTP_PORT=80` 后复测。
+
+### 结论
+
+本地收口通过，无召回、来源排序、禁用关键词或跨资料域串扰退化。阿里云 P0 不提前关闭，待云上发布和 80 入口复测后关闭。
+
+---
+
 ## Run 20260625 — 合同 MVP 覆盖验收 RAG 真实门禁（2026-06-25）
 
 > 汇总：`docs/rag/runs/run_20260625_contract_mvp_acceptance_summary.md`

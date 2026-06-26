@@ -1,0 +1,508 @@
+data: {"type": "start"}
+data: {"type": "status", "message": "正在检索企业知识库和图片资产..."}
+data: {"type": "status", "message": "已召回 5 条资料、6 个图片资产，正在生成回答..."}
+data: {"type": "retrieved", "contexts_count": 5, "assets_count": 6, "images": [{"url": "/api/knowledge/assets/b79c421d-1941-489f-b499-da5fb63f6835/file", "alt": "泰昌CPVC电缆保护管检验报告内径250_页面_4原图"}, {"url": "/api/knowledge/assets/5c3734ad-4311-45e9-83a8-e9dc079eac3f/file", "alt": "泰昌CPVC电缆保护管检验报告内径250_页面_3原图"}, {"url": "/api/knowledge/assets/71332414-3fe1-4c72-b8d6-1cb3d84a5390/file", "alt": "泰昌CPVC电缆保护管检验报告内径250_页面_2原图"}, {"url": "/api/knowledge/assets/c2ac0ca2-69b1-4dcc-aac3-329b5888534e/file", "alt": "泰昌CPVC电缆保护管检验报告内径250第4页"}, {"url": "/api/knowledge/assets/f7a3c80a-1dbe-4227-a778-2f9c0d503c6e/file", "alt": "CPVC电缆保护管检验报告内径250"}, {"url": "/api/knowledge/assets/bd4adb9b-54a9-4adf-80c3-d9afc8cdadd6/file", "alt": "泰昌CPVC电缆保护管检验报告内径250第1页"}], "raw_contexts": [{"id": "taichang-product-parameter:2024100312005501713:颜色", "content": "【泰昌产品结构化参数｜优先依据】\n企业：河北泰昌电力器材科技有限公司\n产品：CPVC电缆保护管\n规格型号：DS 250×15×6000 SN16 PVC-C\n公称内径：250\n参数名称：颜色\n单位：****\n标准要求：导管颜色应均匀一致\n检验结果：符合要求\n单项结论：合格\n报告编号：2024100312005501713\n资料来源：客户原始资料\n边界：本参数来自泰昌原始检验报告，只能作为泰昌企业事实；辽宁资料仅可作QA/异常校验参照，不构成覆盖辽宁全部规格的结论。", "similarity": 0.895, "retrieval_source": "structured_product_parameter_json", "metadata": {"enterprise": "泰昌", "doc_owner": "河北泰昌电力器材科技有限公司", "source_domain": "enterprise_fact", "doc_type": "泰昌产品结构化参数", "source_display_name": "CPVC电缆保护管检验报告内径250.pdf", "category_label": "泰昌产品结构化参数", "source_section": "颜色", "evidence_type": "inspection_report", "target_library": "product_library", "report_no": "2024100312005501713", "specification_model": "DS 250×15×6000 SN16 PVC-C", "source_document_name": "CPVC电缆保护管检验报告内径250", "source_category_label": "泰昌产品结构化参数", "target_library_label": "产品库资料", "evidence_type_label": "检验报告"}}, {"id": "asset:b79c421d-1941-489f-b499-da5fb63f6835", "content": "河北泰昌电力器材科技有限公司检验报告资料，来源于客户补充文件《CPVC电缆保护管检验报告内径250_页面_4.jpg》原图。", "similarity": 0.8781211463718445, "retrieval_source": "knowledge_asset", "metadata": {"page_no": null, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "evidence_type": "inspection_report", "source_domain": "enterprise_fact", "target_library": "product_library", "asset_visual_type": "customer_original_image", "evidence_type_label": "检验报告", "source_display_name": "泰昌CPVC电缆保护管检验报告内径250_页面_4原图", "target_library_label": "产品库资料", "source_document_name": "CPVC电缆保护管检验报告内径250_页面_4", "category_label": "检验报告", "retrieval_source": "knowledge_asset"}}, {"id": "asset:5c3734ad-4311-45e9-83a8-e9dc079eac3f", "content": "河北泰昌电力器材科技有限公司检验报告资料，来源于客户补充文件《CPVC电缆保护管检验报告内径250_页面_3.jpg》原图。", "similarity": 0.87765800952917, "retrieval_source": "knowledge_asset", "metadata": {"page_no": null, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "evidence_type": "inspection_report", "source_domain": "enterprise_fact", "target_library": "product_library", "asset_visual_type": "customer_original_image", "evidence_type_label": "检验报告", "source_display_name": "泰昌CPVC电缆保护管检验报告内径250_页面_3原图", "target_library_label": "产品库资料", "source_document_name": "CPVC电缆保护管检验报告内径250_页面_3", "category_label": "检验报告", "retrieval_source": "knowledge_asset"}}, {"id": "asset:71332414-3fe1-4c72-b8d6-1cb3d84a5390", "content": "河北泰昌电力器材科技有限公司检验报告资料，来源于客户补充文件《CPVC电缆保护管检验报告内径250_页面_2.jpg》原图。", "similarity": 0.8751305044008566, "retrieval_source": "knowledge_asset", "metadata": {"page_no": null, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "evidence_type": "inspection_report", "source_domain": "enterprise_fact", "target_library": "product_library", "asset_visual_type": "customer_original_image", "evidence_type_label": "检验报告", "source_display_name": "泰昌CPVC电缆保护管检验报告内径250_页面_2原图", "target_library_label": "产品库资料", "source_document_name": "CPVC电缆保护管检验报告内径250_页面_2", "category_label": "检验报告", "retrieval_source": "knowledge_asset"}}, {"id": "asset:c2ac0ca2-69b1-4dcc-aac3-329b5888534e", "content": "河北泰昌电力器材科技有限公司检验报告资料，来源于客户补充文件《CPVC电缆保护管检验报告内径250.pdf》第4页。", "similarity": 0.8737426099163618, "retrieval_source": "knowledge_asset", "metadata": {"page_no": 4, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "evidence_type": "inspection_report", "source_domain": "enterprise_fact", "target_library": "product_library", "asset_visual_type": "full_page_render", "evidence_type_label": "检验报告", "source_display_name": "泰昌CPVC电缆保护管检验报告内径250第4页", "target_library_label": "产品库资料", "source_document_name": "CPVC电缆保护管检验报告内径250", "category_label": "检验报告", "retrieval_source": "knowledge_asset"}}], "assets": [{"id": "b79c421d-1941-489f-b499-da5fb63f6835", "title": "泰昌CPVC电缆保护管检验报告内径250_页面_4原图", "description": "河北泰昌电力器材科技有限公司检验报告资料，来源于客户补充文件《CPVC电缆保护管检验报告内径250_页面_4.jpg》原图。", "category": "检验报告", "asset_type": "product_image", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 203852, "storage_bucket": "knowledge-files", "width": 1654, "height": 2339, "source_type": "customer_original_image", "license": "客户自有资料", "is_synthetic": false, "is_sensitive": false, "anonymized": false, "industry": "电力行业", "applicable_sections": ["检验报告"], "applicable_volumes": ["technical"], "tags": ["泰昌", "泰昌企业事实", "检验报告", "CPVC"], "specs": {"page_no": null, "display_name": "泰昌CPVC电缆保护管检验报告内径250_页面_4原图", "evidence_type": "inspection_report", "target_library": "product_library", "asset_visual_type": "customer_original_image"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司检验报告资料，来源于客户补充文件《CPVC电缆保护管检验报告内径250_页面_4.jpg》原图。", "searchable_text": "泰昌CPVC电缆保护管检验报告内径250_页面_4原图\n河北泰昌电力器材科技有限公司检验报告资料，来源于客户补充文件《CPVC电缆保护管检验报告内径250_页面_4.jpg》原图。\n检验报告\n泰昌 泰昌企业事实 检验报告 CPVC 检验报告\n客户原始资料 电缆保护管检验报告完整 PDF关键页整页图/CPVC电缆保护管检验报告内径250_页面_4.jpg", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": null, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "evidence_type": "inspection_report", "source_domain": "enterprise_fact", "target_library": "product_library", "asset_visual_type": "customer_original_image", "evidence_type_label": "检验报告", "source_display_name": "泰昌CPVC电缆保护管检验报告内径250_页面_4原图", "target_library_label": "产品库资料", "source_document_name": "CPVC电缆保护管检验报告内径250_页面_4", "category_label": "泰昌企业资料"}, "created_at": "2026-06-11T17:31:27.714892+08:00", "updated_at": "2026-06-11T17:31:27.714892+08:00", "similarity": 0.8781211463718445, "rerank_score": 0.9752337877755013}, {"id": "5c3734ad-4311-45e9-83a8-e9dc079eac3f", "title": "泰昌CPVC电缆保护管检验报告内径250_页面_3原图", "description": "河北泰昌电力器材科技有限公司检验报告资料，来源于客户补充文件《CPVC电缆保护管检验报告内径250_页面_3.jpg》原图。", "category": "检验报告", "asset_type": "product_image", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 296174, "storage_bucket": "knowledge-files", "width": 1654, "height": 2339, "source_type": "customer_original_image", "license": "客户自有资料", "is_synthetic": false, "is_sensitive": false, "anonymized": false, "industry": "电力行业", "applicable_sections": ["检验报告"], "applicable_volumes": ["technical"], "tags": ["泰昌", "泰昌企业事实", "检验报告", "CPVC"], "specs": {"page_no": null, "display_name": "泰昌CPVC电缆保护管检验报告内径250_页面_3原图", "evidence_type": "inspection_report", "target_library": "product_library", "asset_visual_type": "customer_original_image"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司检验报告资料，来源于客户补充文件《CPVC电缆保护管检验报告内径250_页面_3.jpg》原图。", "searchable_text": "泰昌CPVC电缆保护管检验报告内径250_页面_3原图\n河北泰昌电力器材科技有限公司检验报告资料，来源于客户补充文件《CPVC电缆保护管检验报告内径250_页面_3.jpg》原图。\n检验报告\n泰昌 泰昌企业事实 检验报告 CPVC 检验报告\n客户原始资料 电缆保护管检验报告完整 PDF关键页整页图/CPVC电缆保护管检验报告内径250_页面_3.jpg", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": null, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "evidence_type": "inspection_report", "source_domain": "enterprise_fact", "target_library": "product_library", "asset_visual_type": "customer_original_image", "evidence_type_label": "检验报告", "source_display_name": "泰昌CPVC电缆保护管检验报告内径250_页面_3原图", "target_library_label": "产品库资料", "source_document_name": "CPVC电缆保护管检验报告内径250_页面_3", "category_label": "泰昌企业资料"}, "created_at": "2026-06-11T17:31:27.636409+08:00", "updated_at": "2026-06-11T17:31:27.636409+08:00", "similarity": 0.87765800952917, "rerank_score": 0.9694209450873505}, {"id": "71332414-3fe1-4c72-b8d6-1cb3d84a5390", "title": "泰昌CPVC电缆保护管检验报告内径250_页面_2原图", "description": "河北泰昌电力器材科技有限公司检验报告资料，来源于客户补充文件《CPVC电缆保护管检验报告内径250_页面_2.jpg》原图。", "category": "检验报告", "asset_type": "product_image", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 1804702, "storage_bucket": "knowledge-files", "width": 5349, "height": 8980, "source_type": "customer_original_image", "license": "客户自有资料", "is_synthetic": false, "is_sensitive": false, "anonymized": false, "industry": "电力行业", "applicable_sections": ["检验报告"], "applicable_volumes": ["technical"], "tags": ["泰昌", "泰昌企业事实", "检验报告", "CPVC"], "specs": {"page_no": null, "display_name": "泰昌CPVC电缆保护管检验报告内径250_页面_2原图", "evidence_type": "inspection_report", "target_library": "product_library", "asset_visual_type": "customer_original_image"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司检验报告资料，来源于客户补充文件《CPVC电缆保护管检验报告内径250_页面_2.jpg》原图。", "searchable_text": "泰昌CPVC电缆保护管检验报告内径250_页面_2原图\n河北泰昌电力器材科技有限公司检验报告资料，来源于客户补充文件《CPVC电缆保护管检验报告内径250_页面_2.jpg》原图。\n检验报告\n泰昌 泰昌企业事实 检验报告 CPVC 检验报告\n客户原始资料 电缆保护管检验报告完整 PDF关键页整页图/CPVC电缆保护管检验报告内径250_页面_2.jpg", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": null, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "evidence_type": "inspection_report", "source_domain": "enterprise_fact", "target_library": "product_library", "asset_visual_type": "customer_original_image", "evidence_type_label": "检验报告", "source_display_name": "泰昌CPVC电缆保护管检验报告内径250_页面_2原图", "target_library_label": "产品库资料", "source_document_name": "CPVC电缆保护管检验报告内径250_页面_2", "category_label": "泰昌企业资料"}, "created_at": "2026-06-11T17:31:27.537470+08:00", "updated_at": "2026-06-11T17:31:27.537470+08:00", "similarity": 0.8751305044008566, "rerank_score": 0.9702941261617083}, {"id": "c2ac0ca2-69b1-4dcc-aac3-329b5888534e", "title": "泰昌CPVC电缆保护管检验报告内径250第4页", "description": "河北泰昌电力器材科技有限公司检验报告资料，来源于客户补充文件《CPVC电缆保护管检验报告内径250.pdf》第4页。", "category": "检验报告", "asset_type": "product_image", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 159382, "storage_bucket": "knowledge-files", "width": 1191, "height": 1684, "source_type": "customer_pdf_full_page_render", "license": "客户自有资料", "is_synthetic": false, "is_sensitive": false, "anonymized": false, "industry": "电力行业", "applicable_sections": ["检验报告"], "applicable_volumes": ["technical"], "tags": ["泰昌", "泰昌企业事实", "检验报告", "CPVC"], "specs": {"page_no": 4, "display_name": "泰昌CPVC电缆保护管检验报告内径250第4页", "evidence_type": "inspection_report", "target_library": "product_library", "asset_visual_type": "full_page_render"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司检验报告资料，来源于客户补充文件《CPVC电缆保护管检验报告内径250.pdf》第4页。", "searchable_text": "泰昌CPVC电缆保护管检验报告内径250第4页\n河北泰昌电力器材科技有限公司检验报告资料，来源于客户补充文件《CPVC电缆保护管检验报告内径250.pdf》第4页。\n检验报告\n泰昌 泰昌企业事实 检验报告 CPVC 检验报告\n客户原始资料", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 4, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "evidence_type": "inspection_report", "source_domain": "enterprise_fact", "target_library": "product_library", "asset_visual_type": "full_page_render", "evidence_type_label": "检验报告", "source_display_name": "泰昌CPVC电缆保护管检验报告内径250第4页", "target_library_label": "产品库资料", "source_document_name": "CPVC电缆保护管检验报告内径250", "category_label": "泰昌企业资料"}, "created_at": "2026-06-11T17:31:28.349984+08:00", "updated_at": "2026-06-11T17:31:28.349984+08:00", "similarity": 0.8737426099163618, "rerank_score": 0.9727871732064995}, {"id": "f7a3c80a-1dbe-4227-a778-2f9c0d503c6e", "title": "CPVC电缆保护管检验报告内径250", "description": "河北泰昌电力器材科技有限公司检验报告资料，来源于客户已提供文件《CPVC电缆保护管检验报告内径250.pdf》第4页。", "category": "检验报告", "asset_type": "product_image", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 159382, "storage_bucket": "knowledge-files", "width": 1191, "height": 1684, "source_type": "customer_pdf_full_page_render", "license": "客户自有资料", "is_synthetic": false, "is_sensitive": false, "anonymized": false, "industry": "电力行业", "applicable_sections": ["技术响应文件", "检验报告"], "applicable_volumes": ["technical", "qualification", "business"], "tags": ["泰昌", "泰昌企业事实", "检验报告", "CPVC", "产品库"], "specs": {"page_no": 4, "full_page": true, "page_index": 3, "display_name": "泰昌CPVC电缆保护管检验报告内径250第4页", "evidence_type": "inspection_report", "target_library": "product_library", "asset_visual_type": "full_page_inspection_report"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司检验报告资料，来源于客户已提供文件《CPVC电缆保护管检验报告内径250.pdf》第4页。该图片为正式整页/原图资产，不是 MinerU 局部切图。", "searchable_text": "泰昌CPVC电缆保护管检验报告内径250第4页\n河北泰昌电力器材科技有限公司检验报告资料，来源于客户已提供文件《CPVC电缆保护管检验报告内径250.pdf》第4页。\n检验报告\n泰昌 泰昌企业事实 检验报告 CPVC 产品库\nCPVC电缆保护管检验报告内径250\n检验报告\n泰昌\n河北泰昌电力器材科技有限公司", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 4, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "page_index": 3, "evidence_type": "inspection_report", "source_domain": "enterprise_fact", "category_label": "泰昌企业资料", "target_library": "product_library", "asset_visual_type": "full_page_inspection_report", "evidence_type_label": "检验报告", "source_display_name": "CPVC电缆保护管检验报告内径250", "target_library_label": "产品库资料", "source_document_name": "CPVC电缆保护管检验报告内径250"}, "created_at": "2026-06-07T11:34:06.360528+08:00", "updated_at": "2026-06-16T15:24:10.143882+08:00", "similarity": 0.872740812734393, "rerank_score": 0.9752337877755013}, {"id": "bd4adb9b-54a9-4adf-80c3-d9afc8cdadd6", "title": "泰昌CPVC电缆保护管检验报告内径250第1页", "description": "河北泰昌电力器材科技有限公司检验报告资料，来源于客户补充文件《CPVC电缆保护管检验报告内径250.pdf》第1页。", "category": "检验报告", "asset_type": "product_image", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 157492, "storage_bucket": "knowledge-files", "width": 1191, "height": 1684, "source_type": "customer_pdf_full_page_render", "license": "客户自有资料", "is_synthetic": false, "is_sensitive": false, "anonymized": false, "industry": "电力行业", "applicable_sections": ["检验报告"], "applicable_volumes": ["technical"], "tags": ["泰昌", "泰昌企业事实", "检验报告", "CPVC"], "specs": {"page_no": 1, "display_name": "泰昌CPVC电缆保护管检验报告内径250第1页", "evidence_type": "inspection_report", "target_library": "product_library", "asset_visual_type": "full_page_render"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司检验报告资料，来源于客户补充文件《CPVC电缆保护管检验报告内径250.pdf》第1页。", "searchable_text": "泰昌CPVC电缆保护管检验报告内径250第1页\n河北泰昌电力器材科技有限公司检验报告资料，来源于客户补充文件《CPVC电缆保护管检验报告内径250.pdf》第1页。\n检验报告\n泰昌 泰昌企业事实 检验报告 CPVC 检验报告\n客户原始资料", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 1, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "evidence_type": "inspection_report", "source_domain": "enterprise_fact", "target_library": "product_library", "asset_visual_type": "full_page_render", "evidence_type_label": "检验报告", "source_display_name": "泰昌CPVC电缆保护管检验报告内径250第1页", "target_library_label": "产品库资料", "source_document_name": "CPVC电缆保护管检验报告内径250", "category_label": "泰昌企业资料"}, "created_at": "2026-06-11T17:31:28.103197+08:00", "updated_at": "2026-06-11T17:31:28.103197+08:00", "similarity": 0.870781115936146, "rerank_score": 0.9699928692739357}]}
+data: {"type": "chunk", "content": "##"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "结论"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "当前"}
+data: {"type": "chunk", "content": "知识"}
+data: {"type": "chunk", "content": "库"}
+data: {"type": "chunk", "content": "与"}
+data: {"type": "chunk", "content": "图片"}
+data: {"type": "chunk", "content": "资产"}
+data: {"type": "chunk", "content": "中"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "仅"}
+data: {"type": "chunk", "content": "找到"}
+data: {"type": "chunk", "content": "一份"}
+data: {"type": "chunk", "content": "针对"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "泰"}
+data: {"type": "chunk", "content": "昌"}
+data: {"type": "chunk", "content": " CP"}
+data: {"type": "chunk", "content": "VC"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "电缆"}
+data: {"type": "chunk", "content": "保护"}
+data: {"type": "chunk", "content": "管"}
+data: {"type": "chunk", "content": "内"}
+data: {"type": "chunk", "content": "径"}
+data: {"type": "chunk", "content": "250"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "规格"}
+data: {"type": "chunk", "content": "型号"}
+data: {"type": "chunk", "content": " `"}
+data: {"type": "chunk", "content": "DS"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "250"}
+data: {"type": "chunk", "content": "×"}
+data: {"type": "chunk", "content": "15"}
+data: {"type": "chunk", "content": "×"}
+data: {"type": "chunk", "content": "600"}
+data: {"type": "chunk", "content": "0"}
+data: {"type": "chunk", "content": " SN"}
+data: {"type": "chunk", "content": "16"}
+data: {"type": "chunk", "content": " PVC"}
+data: {"type": "chunk", "content": "-C"}
+data: {"type": "chunk", "content": "`"}
+data: {"type": "chunk", "content": "）"}
+data: {"type": "chunk", "content": "的"}
+data: {"type": "chunk", "content": "检验"}
+data: {"type": "chunk", "content": "报告"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "其他"}
+data: {"type": "chunk", "content": "规格"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "如"}
+data: {"type": "chunk", "content": "不同"}
+data: {"type": "chunk", "content": "内"}
+data: {"type": "chunk", "content": "径"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "壁"}
+data: {"type": "chunk", "content": "厚"}
+data: {"type": "chunk", "content": "或"}
+data: {"type": "chunk", "content": "环"}
+data: {"type": "chunk", "content": "刚度"}
+data: {"type": "chunk", "content": "等级"}
+data: {"type": "chunk", "content": "）"}
+data: {"type": "chunk", "content": "的报告"}
+data: {"type": "chunk", "content": "未"}
+data: {"type": "chunk", "content": "出现"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "不能"}
+data: {"type": "chunk", "content": "推断"}
+data: {"type": "chunk", "content": "已"}
+data: {"type": "chunk", "content": "覆盖"}
+data: {"type": "chunk", "content": "全部"}
+data: {"type": "chunk", "content": " CP"}
+data: {"type": "chunk", "content": "VC"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "产品"}
+data: {"type": "chunk", "content": "。\n\n"}
+data: {"type": "chunk", "content": "##"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "关键"}
+data: {"type": "chunk", "content": "信息"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "企业"}
+data: {"type": "chunk", "content": "名称"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "河北"}
+data: {"type": "chunk", "content": "泰"}
+data: {"type": "chunk", "content": "昌"}
+data: {"type": "chunk", "content": "电力"}
+data: {"type": "chunk", "content": "器材"}
+data: {"type": "chunk", "content": "科技有限公司"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "检验"}
+data: {"type": "chunk", "content": "报告"}
+data: {"type": "chunk", "content": "编号"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "202"}
+data: {"type": "chunk", "content": "410"}
+data: {"type": "chunk", "content": "031"}
+data: {"type": "chunk", "content": "200"}
+data: {"type": "chunk", "content": "550"}
+data: {"type": "chunk", "content": "171"}
+data: {"type": "chunk", "content": "3"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "产品"}
+data: {"type": "chunk", "content": "名称"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "CP"}
+data: {"type": "chunk", "content": "VC"}
+data: {"type": "chunk", "content": "电缆"}
+data: {"type": "chunk", "content": "保护"}
+data: {"type": "chunk", "content": "管"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "规格"}
+data: {"type": "chunk", "content": "型号"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "DS"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "250"}
+data: {"type": "chunk", "content": "×"}
+data: {"type": "chunk", "content": "15"}
+data: {"type": "chunk", "content": "×"}
+data: {"type": "chunk", "content": "600"}
+data: {"type": "chunk", "content": "0"}
+data: {"type": "chunk", "content": " SN"}
+data: {"type": "chunk", "content": "16"}
+data: {"type": "chunk", "content": " PVC"}
+data: {"type": "chunk", "content": "-C"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "公"}
+data: {"type": "chunk", "content": "称"}
+data: {"type": "chunk", "content": "内"}
+data: {"type": "chunk", "content": "径"}
+data: {"type": "chunk", "content": "250"}
+data: {"type": "chunk", "content": " mm"}
+data: {"type": "chunk", "content": "）"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "检验"}
+data: {"type": "chunk", "content": "项目"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "部分"}
+data: {"type": "chunk", "content": "）"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "颜色"}
+data: {"type": "chunk", "content": "均匀"}
+data: {"type": "chunk", "content": "性"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "检验"}
+data: {"type": "chunk", "content": "结论"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "颜色"}
+data: {"type": "chunk", "content": "符合"}
+data: {"type": "chunk", "content": "标准"}
+data: {"type": "chunk", "content": "要求"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "单项"}
+data: {"type": "chunk", "content": "结论"}
+data: {"type": "chunk", "content": "“"}
+data: {"type": "chunk", "content": "合格"}
+data: {"type": "chunk", "content": "”"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "报告"}
+data: {"type": "chunk", "content": "来源"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "客户"}
+data: {"type": "chunk", "content": "原始"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "PDF"}
+data: {"type": "chunk", "content": "及"}
+data: {"type": "chunk", "content": "对应"}
+data: {"type": "chunk", "content": "原"}
+data: {"type": "chunk", "content": "图"}
+data: {"type": "chunk", "content": "）"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "相关"}
+data: {"type": "chunk", "content": "图片"}
+data: {"type": "chunk", "content": "资产"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "图片"}
+data: {"type": "chunk", "content": "资产"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "～"}
+data: {"type": "chunk", "content": "6"}
+data: {"type": "chunk", "content": "均为"}
+data: {"type": "chunk", "content": "该"}
+data: {"type": "chunk", "content": "检验"}
+data: {"type": "chunk", "content": "报告"}
+data: {"type": "chunk", "content": "的原"}
+data: {"type": "chunk", "content": "图"}
+data: {"type": "chunk", "content": "或"}
+data: {"type": "chunk", "content": "PDF"}
+data: {"type": "chunk", "content": "页面"}
+data: {"type": "chunk", "content": "截图"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "可作为"}
+data: {"type": "chunk", "content": "该"}
+data: {"type": "chunk", "content": "规格"}
+data: {"type": "chunk", "content": "检验"}
+data: {"type": "chunk", "content": "报告的"}
+data: {"type": "chunk", "content": "附件"}
+data: {"type": "chunk", "content": "参考"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "  \n\n"}
+data: {"type": "chunk", "content": "##"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "操作"}
+data: {"type": "chunk", "content": "建议"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "若"}
+data: {"type": "chunk", "content": "投标"}
+data: {"type": "chunk", "content": "或"}
+data: {"type": "chunk", "content": "应"}
+data: {"type": "chunk", "content": "标"}
+data: {"type": "chunk", "content": "项目"}
+data: {"type": "chunk", "content": "仅"}
+data: {"type": "chunk", "content": "涉及"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "内"}
+data: {"type": "chunk", "content": "径"}
+data: {"type": "chunk", "content": "250"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "的"}
+data: {"type": "chunk", "content": " CP"}
+data: {"type": "chunk", "content": "VC"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "电缆"}
+data: {"type": "chunk", "content": "保护"}
+data: {"type": "chunk", "content": "管"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "规格"}
+data: {"type": "chunk", "content": " `"}
+data: {"type": "chunk", "content": "DS"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "250"}
+data: {"type": "chunk", "content": "×"}
+data: {"type": "chunk", "content": "15"}
+data: {"type": "chunk", "content": "×"}
+data: {"type": "chunk", "content": "600"}
+data: {"type": "chunk", "content": "0"}
+data: {"type": "chunk", "content": " SN"}
+data: {"type": "chunk", "content": "16"}
+data: {"type": "chunk", "content": " PVC"}
+data: {"type": "chunk", "content": "-C"}
+data: {"type": "chunk", "content": "`"}
+data: {"type": "chunk", "content": "），"}
+data: {"type": "chunk", "content": "可直接"}
+data: {"type": "chunk", "content": "引用"}
+data: {"type": "chunk", "content": "该"}
+data: {"type": "chunk", "content": "报告"}
+data: {"type": "chunk", "content": "作为"}
+data: {"type": "chunk", "content": "产品质量"}
+data: {"type": "chunk", "content": "依据"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "若"}
+data: {"type": "chunk", "content": "项目"}
+data: {"type": "chunk", "content": "涉及"}
+data: {"type": "chunk", "content": "其他"}
+data: {"type": "chunk", "content": "内"}
+data: {"type": "chunk", "content": "径"}
+data: {"type": "chunk", "content": "或"}
+data: {"type": "chunk", "content": "规格"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "例如"}
+data: {"type": "chunk", "content": "内"}
+data: {"type": "chunk", "content": "径"}
+data: {"type": "chunk", "content": "150"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "200"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "315"}
+data: {"type": "chunk", "content": "等"}
+data: {"type": "chunk", "content": "），"}
+data: {"type": "chunk", "content": "应"}
+data: {"type": "chunk", "content": "要求"}
+data: {"type": "chunk", "content": "企业"}
+data: {"type": "chunk", "content": "补充"}
+data: {"type": "chunk", "content": "对应"}
+data: {"type": "chunk", "content": "规格"}
+data: {"type": "chunk", "content": "的"}
+data: {"type": "chunk", "content": "检验"}
+data: {"type": "chunk", "content": "报告"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "或"}
+data: {"type": "chunk", "content": "由"}
+data: {"type": "chunk", "content": "客户"}
+data: {"type": "chunk", "content": "书面"}
+data: {"type": "chunk", "content": "确认"}
+data: {"type": "chunk", "content": "该"}
+data: {"type": "chunk", "content": "报告"}
+data: {"type": "chunk", "content": "是否"}
+data: {"type": "chunk", "content": "可"}
+data: {"type": "chunk", "content": "覆盖"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "  \n\n"}
+data: {"type": "chunk", "content": "##"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "需要"}
+data: {"type": "chunk", "content": "确认"}
+data: {"type": "chunk", "content": "或"}
+data: {"type": "chunk", "content": "补充"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "其他"}
+data: {"type": "chunk", "content": "规格"}
+data: {"type": "chunk", "content": "报告"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "当前"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "未"}
+data: {"type": "chunk", "content": "提供"}
+data: {"type": "chunk", "content": "除"}
+data: {"type": "chunk", "content": "内"}
+data: {"type": "chunk", "content": "径"}
+data: {"type": "chunk", "content": "250"}
+data: {"type": "chunk", "content": "以外"}
+data: {"type": "chunk", "content": "任何"}
+data: {"type": "chunk", "content": " CP"}
+data: {"type": "chunk", "content": "VC"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "电缆"}
+data: {"type": "chunk", "content": "保护"}
+data: {"type": "chunk", "content": "管的"}
+data: {"type": "chunk", "content": "检验"}
+data: {"type": "chunk", "content": "报告"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "如需"}
+data: {"type": "chunk", "content": "覆盖"}
+data: {"type": "chunk", "content": "多种"}
+data: {"type": "chunk", "content": "规格"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "请"}
+data: {"type": "chunk", "content": "补充"}
+data: {"type": "chunk", "content": "对应"}
+data: {"type": "chunk", "content": "规格"}
+data: {"type": "chunk", "content": "的"}
+data: {"type": "chunk", "content": "检验"}
+data: {"type": "chunk", "content": "报告"}
+data: {"type": "chunk", "content": "或"}
+data: {"type": "chunk", "content": "型式"}
+data: {"type": "chunk", "content": "试验"}
+data: {"type": "chunk", "content": "报告"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "报告"}
+data: {"type": "chunk", "content": "有效期"}
+data: {"type": "chunk", "content": "与"}
+data: {"type": "chunk", "content": "适用"}
+data: {"type": "chunk", "content": "批次"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "中"}
+data: {"type": "chunk", "content": "未"}
+data: {"type": "chunk", "content": "明确"}
+data: {"type": "chunk", "content": "写"}
+data: {"type": "chunk", "content": "有"}
+data: {"type": "chunk", "content": "报告"}
+data: {"type": "chunk", "content": "有效期"}
+data: {"type": "chunk", "content": "或"}
+data: {"type": "chunk", "content": "适用"}
+data: {"type": "chunk", "content": "批次"}
+data: {"type": "chunk", "content": "范围"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "实际"}
+data: {"type": "chunk", "content": "使用时"}
+data: {"type": "chunk", "content": "以"}
+data: {"type": "chunk", "content": "报告"}
+data: {"type": "chunk", "content": "原件"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "招标"}
+data: {"type": "chunk", "content": "文件"}
+data: {"type": "chunk", "content": "要求和"}
+data: {"type": "chunk", "content": "客户"}
+data: {"type": "chunk", "content": "确认"}
+data: {"type": "chunk", "content": "口径"}
+data: {"type": "chunk", "content": "为准"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "  \n\n"}
+data: {"type": "chunk", "content": "##"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "参考"}
+data: {"type": "chunk", "content": "依据"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "CP"}
+data: {"type": "chunk", "content": "VC"}
+data: {"type": "chunk", "content": "电缆"}
+data: {"type": "chunk", "content": "保护"}
+data: {"type": "chunk", "content": "管"}
+data: {"type": "chunk", "content": "检验"}
+data: {"type": "chunk", "content": "报告"}
+data: {"type": "chunk", "content": "内"}
+data: {"type": "chunk", "content": "径"}
+data: {"type": "chunk", "content": "250"}
+data: {"type": "chunk", "content": ".pdf"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "结构化"}
+data: {"type": "chunk", "content": "参数"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "报告"}
+data: {"type": "chunk", "content": "编号"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "规格"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "颜色"}
+data: {"type": "chunk", "content": "检验"}
+data: {"type": "chunk", "content": "结果"}
+data: {"type": "chunk", "content": "）"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "2"}
+data: {"type": "chunk", "content": "～"}
+data: {"type": "chunk", "content": "5"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "检验"}
+data: {"type": "chunk", "content": "报告"}
+data: {"type": "chunk", "content": "各"}
+data: {"type": "chunk", "content": "页面"}
+data: {"type": "chunk", "content": "原"}
+data: {"type": "chunk", "content": "图"}
+data: {"type": "chunk", "content": "/"}
+data: {"type": "chunk", "content": "PDF"}
+data: {"type": "chunk", "content": "截图"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "同"}
+data: {"type": "chunk", "content": "份"}
+data: {"type": "chunk", "content": "报告"}
+data: {"type": "chunk", "content": "）"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "图片"}
+data: {"type": "chunk", "content": "资产"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "～"}
+data: {"type": "chunk", "content": "6"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "检验"}
+data: {"type": "chunk", "content": "报告"}
+data: {"type": "chunk", "content": "各"}
+data: {"type": "chunk", "content": "页面"}
+data: {"type": "chunk", "content": "原"}
+data: {"type": "chunk", "content": "图"}
+data: {"type": "chunk", "content": "及"}
+data: {"type": "chunk", "content": "PDF"}
+data: {"type": "chunk", "content": "页面"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "可作为"}
+data: {"type": "chunk", "content": "配"}
+data: {"type": "chunk", "content": "图"}
+data: {"type": "chunk", "content": "或"}
+data: {"type": "chunk", "content": "材料"}
+data: {"type": "chunk", "content": "附件"}
+data: {"type": "chunk", "content": "直接"}
+data: {"type": "chunk", "content": "展示"}
+data: {"type": "chunk", "content": "）"}
+data: {"type": "done"}

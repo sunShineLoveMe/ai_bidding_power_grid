@@ -42,6 +42,7 @@
 | Git 来源 | `git@gitee.com:mainiutech/ai-bid.git` |
 | 测试分支 | `feat/aliyun-test-readiness` |
 | 测试入口 | `http://8.160.187.226:8080` |
+| 正式演示入口 | 设置 `FRONTEND_HTTP_PORT=80` 后使用 `http://8.160.187.226` |
 | 时区 | `Asia/Shanghai` |
 
 > 公网 IP、分支和端口是当前测试环境基线。环境迁移后，应先更新本节，再执行本文命令。
@@ -51,7 +52,7 @@
 ```text
 外部浏览器
     |
-    | TCP 8080
+    | TCP 8080（测试）/ TCP 80（正式演示）
     v
 Frontend / Nginx
     |
@@ -75,7 +76,7 @@ Celery Worker ---------------------+
 | `redis` | `ai-bidding-redis` | `16379 -> 6379` | Celery 队列和运行态 | 部分 |
 | `backend` | `ai-bidding-backend` | `3012 -> 8000` | API、解析、检索、导出 | 否 |
 | `celery-worker` | `ai-bidding-celery-worker` | 无公网端口 | 异步解析、生成任务 | 否 |
-| `frontend` | `ai-bidding-frontend` | `8080 -> 80` | Web 静态文件和 API 反代 | 否 |
+| `frontend` | `ai-bidding-frontend` | `${FRONTEND_HTTP_PORT:-8080} -> 80` | Web 静态文件和 API 反代 | 否 |
 
 持久化数据位于 Docker volumes：
 
@@ -416,7 +417,22 @@ curl -fsS http://127.0.0.1:8080/api/ready
 curl -fsS -I http://127.0.0.1:8080/
 ```
 
-### 7.6 数据库迁移发布
+### 7.6 公网 80 入口切换
+
+正式演示入口需要使用 `http://8.160.187.226` 时，先确认阿里云安全组放通 TCP `80`，再执行：
+
+```bash
+cd /opt/ai-bidding/ai_bidding_power_grid
+grep -q '^FRONTEND_HTTP_PORT=' .env && sed -i 's/^FRONTEND_HTTP_PORT=.*/FRONTEND_HTTP_PORT=80/' .env || echo 'FRONTEND_HTTP_PORT=80' >> .env
+grep -q '^APP_PUBLIC_BASE_URL=' .env && sed -i 's#^APP_PUBLIC_BASE_URL=.*#APP_PUBLIC_BASE_URL=http://8.160.187.226#' .env || echo 'APP_PUBLIC_BASE_URL=http://8.160.187.226' >> .env
+docker compose up -d frontend backend celery-worker
+curl -fsS http://127.0.0.1/api/health
+curl -fsS -I http://127.0.0.1/
+```
+
+若继续使用测试端口，保持 `FRONTEND_HTTP_PORT=8080` 或不设置该变量，并告知客户入口为 `http://8.160.187.226:8080`。
+
+### 7.7 数据库迁移发布
 
 数据库变更属于高风险操作。必须先执行第 10 节数据库备份，并确认迁移脚本支持重复执行。
 
