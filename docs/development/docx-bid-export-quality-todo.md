@@ -36,7 +36,7 @@
 | 待办 | 格式方案选择 | 提供“国网/泰昌标准格式、通用正式标书、紧凑上传版、图文展示版”，默认国网/泰昌 |
 | 脚本版已完成 | 格式预检报告 | `scripts/rag/verify_taichang_full_bid_acceptance.py` 已检查目录缺失、页码字段、表格格式、图片失败/裁剪/比例、内部字段泄露、重复父章节标题和补充包资产选中；后续再接入页面/导出任务 metadata |
 | 待办 | 分册格式 | 商务标、技术标、资信标支持不同封面字段、目录和页眉文案 |
-| 待办 | 第六章格式表单保真 | 偏差表、承诺函、签章表单等优先保留结构和占位 |
+| 已完成基础版 | 第六章格式表单保真 | 已识别投标函、授权委托书、商务/技术偏差表和承诺函；签章行右对齐、语义列宽和表格行禁止跨页拆分通过真实 DOCX 回归 |
 | 待办 | 导出任务 metadata 扩充 | 记录格式方案、封面字段、目录层级、图表题注、格式告警 |
 | 待办 | 阿里云下载体验收口 | 线上 DOCX 下载不得被浏览器弹窗/不安全下载策略阻断；优先启用 HTTPS，并改为同页下载或 blob 下载 |
 | 已完成 | 正式缺口口径统一 | 导出完成提示、投标信息确认页、formal readiness metadata 使用同一占位符与正式字段口径；当前演示项目正式必填缺口 0、正文占位符 0 |
@@ -53,6 +53,19 @@
 | 待办 | 招标文件格式约束抽取 | 自动抽取第六章/前附表格式要求，并提示用户确认 |
 
 ## P0 第一阶段执行记录
+
+### 2026-06-25 第六章格式表单保真验收记录
+
+- 正式表单识别覆盖投标函、法定代表人身份证明/授权委托书、商务偏差表、技术偏差表和承诺函。
+- 签章信息行按正式表单右对齐；商务/技术偏差表按语义分配列宽；表格行写入禁止跨页拆分属性。
+- 导出 metadata 新增 `formal_forms`：本次真实项目识别表格 `38` 个、小标题 `38` 个、签章行 `76` 行、禁止拆分行 `244` 行。
+- 正式 readiness 改为按当前确认值重新计算，带“内部测试”等模拟标记的客户字段不得通过正式版门禁。
+- 自动化回归：`PYTHONPATH=. .venv/bin/pytest tests/test_docx_export.py tests/test_bid_prefill.py tests/test_formal_bid_check.py -q`，结果 `54 passed, 1 warning`。
+- 提交前扩大回归：加入 `tests/test_celery_export_tasks.py` 后结果 `65 passed, 7 warnings`；前端 `npm run build` 通过，仅保留既有 chunk size 提示。
+- 真实链路：`build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`，状态 `PASS`；LibreOffice 刷新后签章对齐、偏差表列宽、表格网格宽度和禁止跨页拆分属性均保留。
+- 真实下载 API 任务 `fd40ab53-841b-482b-b1b0-1ecb31117a87` 正常完成；因当前模拟客户字段形成 `8` 个正式检查阻断项，API 与浏览器均只创建草稿版 DOCX。
+- 验证记录：`docs/development/runs/run_20260625_docx_sixth_chapter_form_fidelity.md` 和对应 JSON。
+- 边界：客户原始 Word 表单的像素级套表、复杂合并单元格和原始签章位仍由后续 `template_docx` 模式处理。
 
 ### 2026-06-25 国网正式通用排版升级验收记录
 

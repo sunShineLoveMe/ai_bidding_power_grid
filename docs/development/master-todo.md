@@ -52,11 +52,11 @@
 | --- | --- | --- | --- | --- | --- |
 | 已完成 | 合同 MVP 功能覆盖验收与缺口关闭 | 产品验收 / 项目管理 | 合同截图中的所有功能均标为 MVP；必须有统一覆盖判断和缺口关闭记录，不能只按内部技术路线图验收 | 已完成 17 项真实链路矩阵：14 项 MVP 通过、产品库多品类和 PDF 口径进入 P1、阿里云部署交接进入 P1；本轮关闭“内部模拟客户字段误通过正式导出门禁”P0，真实项目现有 8 个阻断项并仅允许草稿版导出 | `docs/development/runs/run_20260625_contract_mvp_real_acceptance.md`、`docs/development/runs/run_20260625_contract_mvp_full_http_smoke.md`、`docs/rag/runs/run_20260625_contract_mvp_acceptance_summary.md` |
 | 已完成 | 批量章节生成可靠性与 Prompt 分级瘦身 | 标书正文生成 / AI 调度 | 客户线上真实测试已出现后半段大量 `MODEL_STREAM_WALL_TIMEOUT`，体感为全文编写卡死；这是合同 MVP“标书正文生成”和客户试用转化的核心风险 | 已完成 SG-UX-001/002：完成状态与偏长/偏短质量提示拆分，新增“压缩到目标”；已完成 SG-AI-001：自定义编写要求持久化，并进入生成任务 item metadata 快照；已完成 SG-DATA-001/002/003：新增/删除章节数据一致性与撤销兜底；已完成 SG-PROMPT-001：prompt profile 分级、输入预算、真实任务 metadata 与完整 DOCX 链路回归；已完成 SG-SLOW-001：慢流提前保护、partial 草稿保存、生成槽释放和真实强制慢流/正常阈值回归；已完成 SG-CONCURRENCY-001：任务级自适应并发、慢流窗口降档和调度 metadata 可观测；已完成 SG-PARTIAL-001：partial 自动续写上限、复核态、批量续写入口和真实模型续写回归；已完成 SG-PROGRESS-001：客户视角进度、下载前草稿版确认和真实浏览器回归 | `docs/development/section-generation-adaptive-writing-plan.md`、`docs/development/runs/run_20260625_aliyun_section_generation_timeout_diagnosis.md`、`docs/development/runs/run_20260625_local_bid_editor_length_status_regression.md`、`docs/development/runs/run_20260625_local_custom_writing_persistence_regression.md`、`docs/development/runs/run_20260625_local_child_section_volume_inheritance_regression.md`、`docs/development/runs/run_20260625_local_leaf_to_container_confirmation_regression.md`、`docs/development/runs/run_20260625_local_delete_subtree_undo_regression.md`、`docs/development/runs/run_20260625_sg_prompt_001_prompt_profile_budget.md`、`docs/development/runs/run_20260625_sg_slow_001_slow_stream_protection.md`、`docs/development/runs/run_20260625_sg_concurrency_001_adaptive_scheduler.md`、`docs/development/runs/run_20260625_sg_partial_001_partial_resume.md`、`docs/development/runs/run_20260625_sg_progress_001_user_readiness.md` |
-| 进行中 | DOCX 正式交付排版升级 | DOCX / 产品交付 | Word 是客户第一眼看到的正式交付物；当前导出观感被客户认为像草稿，会直接影响信任和试用转化 | 默认提供“通用正式标书格式”并可保留“国网/泰昌紧凑格式”；正文、标题、表格、页眉页脚、目录、封面、第六章格式表单均按正式投标文件标准验收；真实链路 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice` 通过并写入 run 记录 | `docs/development/docx-bid-export-quality-todo.md`、`docs/section-generation-production-remediation-todo.md`、`AGENTS.md` |
+| 已完成 | DOCX 正式交付排版升级 | DOCX / 产品交付 | Word 是客户第一眼看到的正式交付物；当前导出观感被客户认为像草稿，会直接影响信任和试用转化 | 默认 `formal_bid_standard` 的正文、标题、表格、页眉页脚、目录、封面及第六章常见表单已通过真实链路验收；签章行、偏差表语义列宽、禁止跨页拆分和字段刷新均可追溯 | `docs/development/docx-bid-export-quality-todo.md`、`docs/development/runs/run_20260625_docx_sixth_chapter_form_fidelity.md`、`AGENTS.md` |
 | 已完成 | AI 辅助编辑 MVP 最小闭环 | 编辑器 / AI 伴写 | 合同 MVP 明确要求扩写、缩写、润色、风格调整；当前若只支持人工编辑和整章生成，会被认为缺少合同功能 | 正文编辑器已支持选中文本扩写、缩写、润色、正式化；调用真实模型；结果可预览、采纳、撤销；已用真实章节完成 API 与浏览器验收 | `docs/development/runs/run_20260625_ai_edit_mvp_real_api_acceptance.md`、`docs/development/runs/run_20260625_ai_edit_mvp_ui_acceptance.md` |
-| 已完成 | 正式检查与导出门禁收口 | 正式检查 / 导出前门禁 | 不能把可下载草稿误导成正式投标文件；必须区分草稿版和正式版 | 阻断项为 0 才允许正式版导出；阻断项存在时只允许草稿版；检查项覆盖客户确认字段、条款覆盖、资料边界、正文占位、DOCX 成品质量；当前演示项目正式检查阻断项 0、占位符 0，完整 DOCX 验收 PASS | `docs/development/formal-check-todo.md`、`docs/development/runs/run_20260625_placeholder_cleanup_current_project.md`、`docs/development/runs/run_20260625_placeholder_cleanup_docx_acceptance.md`、`docs/development/runs/run_20260625_placeholder_cleanup_default_acceptance.md`、`rules/power_grid/formal_bid_check_rules.v1.json` |
+| 已完成 | 正式检查与导出门禁收口 | 正式检查 / 导出前门禁 | 不能把可下载草稿误导成正式投标文件；必须区分草稿版和正式版 | 阻断项为 0 才允许正式版导出；阻断项存在时只允许草稿版；检查项覆盖客户确认字段、条款覆盖、资料边界、正文占位、DOCX 成品质量；模拟值真实回归形成 8 个阻断项并仅创建草稿版，完整 DOCX 链路仍正常完成 | `docs/development/formal-check-todo.md`、`docs/development/runs/run_20260625_docx_sixth_chapter_form_fidelity.md`、`docs/development/runs/run_20260625_placeholder_cleanup_docx_acceptance.md`、`rules/power_grid/formal_bid_check_rules.v1.json` |
 | 进行中 | 阿里云企业库展示与来源收敛 | 企业知识库 / 云环境 | 客户正在真实试用；来源混入、分类不准、入口不稳定会直接影响可信度 | 云上企业知识库问答与页面展示不混入错误来源；人员证书、资质证书、检验报告、产品资料分类准确；公网入口说明清晰 | `docs/rag/todo.md` P1C-15、`docs/rag/runs/run_20260624_aliyun_online_rag_regression.md` |
-| 已完成 | 正式投标关键字段确认闭环 | 投标确认 / 正式交付 | 报价、保证金、授权代表、签署日期等字段不能由模型编造，但缺失会阻断正式交付 | 前导确认页、正式检查、导出提示使用同一缺口来源；当前演示项目已应用 31 个确认字段，正式必填缺口 0，仍保留人工终审提示 | `docs/rag/todo.md` P4-11、`docs/development/formal-check-todo.md`、`docs/development/docx-bid-export-quality-todo.md`、`docs/development/runs/run_20260625_placeholder_cleanup_current_project.md` |
+| 已完成 | 正式投标关键字段确认闭环 | 投标确认 / 正式交付 | 报价、保证金、授权代表、签署日期等字段不能由模型编造，但缺失会阻断正式交付 | 前导确认页、正式检查、导出提示使用同一缺口来源；模拟占位可用于测试正文，但带“内部测试”等标记的值会重新进入正式缺口并阻断正式版 | `docs/rag/todo.md` P4-11、`docs/development/formal-check-todo.md`、`docs/development/docx-bid-export-quality-todo.md`、`docs/development/runs/run_20260625_docx_sixth_chapter_form_fidelity.md` |
 | 已完成 | 项目任务总账收口 | 项目管理 / 工程治理 | 多个 TODO 分散导致优先级遗忘和重复建清单 | 新增本文档并将主要散落任务映射到统一 P0/P1/P2；后续优先级以本文档为准 | 本文档 |
 
 ## 当前 P1
@@ -66,7 +66,7 @@
 | 未开始 | DOCX 格式方案选择产品化 | DOCX / 前端 | 导出时支持国网/泰昌标准格式、通用正式标书、紧凑上传版、图文展示版；默认不让普通用户承担复杂配置 | `docs/development/docx-bid-export-quality-todo.md` |
 | 未开始 | 可编辑 Word 模板导入 `template_docx` | DOCX / 模板化 | 客户上传可编辑 Word 模板后，可继承模板样式或按模板套打；优先级高于内置模板 | `docs/development/docx-bid-export-quality-todo.md`、`AGENTS.md` |
 | 进行中 | 分册格式增强 | 标书分册 / DOCX | 商务标、技术标、资信标、报价文件支持不同封面、目录和页眉文案；分册导出观感稳定 | `docs/技术标商务标分册整改TODO.md`、`docs/development/docx-bid-export-quality-todo.md` |
-| 进行中 | 第六章格式表单保真 | DOCX / 正式检查 | 投标函、授权委托书、商务偏差表、技术偏差表、承诺函等固定格式不被普通 Markdown 转换破坏 | `docs/development/docx-bid-export-quality-todo.md`、`docs/development/formal-check-todo.md` |
+| 已完成 | 第六章格式表单保真 | DOCX / 正式检查 | 投标函、授权委托书、商务偏差表、技术偏差表、承诺函已支持结构识别、签章行右对齐、语义列宽和禁止跨页拆分；客户原始 Word 像素级套表归入 `template_docx` | `docs/development/runs/run_20260625_docx_sixth_chapter_form_fidelity.md`、`docs/development/docx-bid-export-quality-todo.md` |
 | 未开始 | 产品库多品类 MVP 展示收口 | 产品库 / 企业资料 | 合同写明产品库覆盖电缆、开关柜、变压器、互感器、保护装置、通信设备等资料管理；当前试点资料集中在电缆保护管，需要给出演示口径或补齐分类 | 产品库页面具备多品类中文分类；无资料品类显示空状态和资料上传入口；泰昌现有资料不被错误扩展为其他品类事实 | `docs/rag/todo.md`、`frontend/src/pages/ProductBase/index.tsx` |
 | 未开始 | 多格式导出与 PDF 口径收口 | DOCX / PDF / 导出 | 合同写明 Word 必做、PDF 可作为转换能力且不保证复杂格式完全一致；产品需明确能力边界 | 导出页面和 metadata 明确 Word 为正式主交付；PDF 为预览/转换能力；PDF 生成失败不冒充正式交付；至少一次真实 DOCX -> PDF 验证记录 | `docs/development/docx-bid-export-quality-todo.md` |
 | 进行中 | 正式检查页面处理路径增强 | 正式检查 / 前端 | 检查项支持筛选、分类、证据链展示和跳转到投标确认页、章节编辑页、企业库或产品库 | `docs/development/formal-check-todo.md` |
@@ -93,8 +93,9 @@
 | 2026-06 | DOCX 基础正式目录和字段刷新 | 目录独立成页、点引导线、页码域、页脚页码和总页数字段刷新已完成 | `docs/development/docx-bid-export-quality-todo.md` |
 | 2026-06 | DOCX 表格和图片基础正式化 | 表格全宽、固定布局、表头加粗、图片只用泰昌企业事实资产、内部检索字段不进入正式 DOCX | `docs/development/docx-bid-export-quality-todo.md` |
 | 2026-06 | DOCX 国网正式通用排版默认模板 | 默认模板切换为 `formal_bid_standard`，已按 A4、页边距、仿宋四号正文、22 磅行距、标题层级、表格小四、页眉页脚和字段刷新跑通真实导出验收 | `docs/development/runs/run_20260625_docx_formal_standard_local_acceptance.md` |
+| 2026-06 | DOCX 第六章格式表单保真基础版 | 投标函、授权委托书、商务/技术偏差表和承诺函已支持结构识别、签章行右对齐、语义列宽、行禁止跨页拆分及 metadata 追踪 | `docs/development/runs/run_20260625_docx_sixth_chapter_form_fidelity.md` |
 | 2026-06 | AI 辅助编辑 MVP 最小闭环 | 正文编辑器支持选区扩写、缩写、润色、正式化，真实模型返回后可预览、采纳、撤销并触发保存状态 | `docs/development/runs/run_20260625_ai_edit_mvp_ui_acceptance.md` |
-| 2026-06 | 正式检查与导出门禁收口 | 当前演示项目正式检查阻断项 0、未解决占位符 0；完整 DOCX 导出验收 failures/warnings 均为空 | `docs/development/runs/run_20260625_placeholder_cleanup_docx_acceptance.md` |
+| 2026-06 | 正式检查与导出门禁收口 | 正式版要求阻断项 0；模拟客户字段真实回归会形成 8 个阻断项并仅允许草稿版导出；完整 DOCX 主链路可正常完成 | `docs/development/runs/run_20260625_placeholder_cleanup_docx_acceptance.md` |
 | 2026-06 | 章节任务状态与批量生成可靠性基础版 | 任务表、章节 item、lease、超时、失败保稿、刷新恢复等基础能力已完成 | `docs/section-generation-production-remediation-todo.md` |
 | 2026-06 | 技术标/商务标分册基础模型 | `volume_type`、分册 Tabs、分册生成和分册导出基础能力已完成 | `docs/技术标商务标分册整改TODO.md` |
 | 2026-06 | 条款覆盖率命名和下载前风险提示 | “合规覆盖度”已收口为条款覆盖率/条款响应，下载前有风险提示 | `docs/合规覆盖度整改TODO.md` |
@@ -121,6 +122,7 @@
 | 日期 | 决策 | 影响 |
 | --- | --- | --- |
 | 2026-06-25 | 将 DOCX 正式交付排版升级重新提升为 P0 | 当前客户反馈的 Word 观感问题不再作为 P1/P2 延后处理 |
+| 2026-06-25 | DOCX 正式交付排版 P0 关闭 | 默认正式模板与第六章常见表单已通过真实 DOCX、下载 API 和浏览器草稿门禁回归；客户原始 Word 像素级套表继续由 P1 `template_docx` 承接 |
 | 2026-06-25 | 建立项目任务总账 | 后续所有新任务和优先级变更必须先写入本文档 |
 | 2026-06-25 | 将合同 MVP 功能清单纳入总账 | AI 辅助编辑由 P2 提升为 P0；产品库多品类展示、多格式导出口径进入 P1 |
 | 2026-06-25 | 完成合同 MVP 17 项真实链路验收 | 关闭内部模拟值误通过正式导出门禁的 P0；剩余产品多品类、PDF 口径和阿里云交接按 P1/外部条件跟踪 |

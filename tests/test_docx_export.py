@@ -299,6 +299,61 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertEqual(report["cover_fields"]["招标编号"], "2225AC")
         self.assertEqual(report["cover_fields"]["分标编号"], "102-CPVC")
 
+    def test_bid_markdown_formal_readiness_rejects_simulated_customer_values(self):
+        project_id = "11111111-1111-1111-1111-111111111111"
+        with tempfile.TemporaryDirectory() as tmpdir:
+            app = Flask(__name__)
+            app.config["GENERATED_FOLDER"] = tmpdir
+            sections = [
+                {
+                    "id": "section-1",
+                    "order_index": 1,
+                    "level": 1,
+                    "title": "投标函",
+                    "content": "投标人（盖章）：河北泰昌电力器材科技有限公司",
+                }
+            ]
+            confirmed_values = {
+                "project_name": "测试项目",
+                "tender_no": "TEST-001",
+                "tender_unit": "测试招标人",
+                "package_no": "包1",
+                "package_name": "测试包",
+                "material_category": "电缆保护管",
+                "goods_list_summary": "测试货物清单",
+                "bidder_name": DOCX_BIDDER_FULL_NAME,
+                "company_address": "河北省保定市",
+                "legal_representative": "晁坤琳",
+                "unified_social_credit_code": "91130607056539515C",
+                "total_bid_price": "8888888元（内部测试模拟值，非正式报价）",
+                "bid_bond_amount": "100000元（内部测试模拟值，非正式保证金金额）",
+                "delivery_period": "内部测试模拟为合同签订后30日",
+                "warranty_period": "内部测试模拟为验收后12个月",
+                "bid_validity_days": "90",
+                "authorized_representative": "张三（内部测试模拟授权代表）",
+                "authorized_representative_id": "110101199001011234（内部测试模拟身份证号）",
+                "signature_date": "2026年06月25日（内部测试模拟日期）",
+                "technical_parameter_summary": "测试参数",
+                "technical_deviation_candidates": "测试偏差候选",
+            }
+
+            with (
+                app.app_context(),
+                patch("backend.api.routes.get_project_interpretation", return_value={
+                    "project": {"id": project_id, "project_name": "测试项目"},
+                    "analysis": {"project_meta": {"bid_prefill": {"confirmed_values": confirmed_values}}},
+                }),
+                patch("backend.api.routes.list_bid_sections", return_value=sections),
+            ):
+                _, _, report = build_project_bid_markdown(project_id)
+
+        readiness = report["formal_readiness"]
+        self.assertEqual("formal_bid_standard", readiness["template_id"])
+        self.assertFalse(readiness["ready"])
+        missing_keys = {item["key"] for item in readiness["missing_formal_required_fields"]}
+        self.assertIn("total_bid_price", missing_keys)
+        self.assertIn("authorized_representative", missing_keys)
+
     def test_bid_markdown_with_images_loads_taichang_assets(self):
         project_id = "11111111-1111-1111-1111-111111111111"
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1008,6 +1063,66 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertEqual(WD_LINE_SPACING.EXACTLY, body_paragraph.paragraph_format.line_spacing_rule)
             self.assertEqual(18, body_paragraph.paragraph_format.line_spacing.pt)
             self.assertEqual(0, body_paragraph.paragraph_format.first_line_indent.pt)
+
+    def test_sixth_chapter_forms_preserve_signature_layout_and_deviation_table_rows(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            markdown_path = Path(tmpdir) / "sixth-chapter-forms.md"
+            markdown_path.write_text(
+                "\n".join(
+                    [
+                        "# 第六章格式表单测试投标文件",
+                        "",
+                        "# 1. 投标函及投标函附录",
+                        "",
+                        "致：国网辽宁省电力有限公司",
+                        "",
+                        "投标人（盖单位章）：河北泰昌电力器材科技有限公司",
+                        "法定代表人（签字或盖章）：晁坤琳",
+                        "授权代表（签字）：内部测试模拟授权代表",
+                        "日期：2026年06月25日（内部测试模拟日期）",
+                        "",
+                        "【投标保证金承诺函】",
+                        "",
+                        "投标人（盖单位章）：河北泰昌电力器材科技有限公司",
+                        "",
+                        "## 1.1 技术偏差表",
+                        "",
+                        "| 序号 | 技术规范条目 | 标准值（技术要求） | 保证值（我公司承诺） | 偏差说明 |",
+                        "| --- | --- | --- | --- | --- |",
+                        "| 1 | CPVC平均内径 | 符合技术规范要求 | 250.2～250.4mm | 无偏差 |",
+                        "| 2 | MPP环刚度 | ≥40kN/m² | 66.40kN/m² | 正偏差 |",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            output_path, report = convert_md_to_word(markdown_path, return_report=True)
+            document = Document(str(output_path))
+            signature_paragraphs = [
+                paragraph for paragraph in document.paragraphs
+                if paragraph.text.startswith(("投标人（", "法定代表人（", "授权代表（", "日期："))
+            ]
+            table = document.tables[0]
+            widths = [
+                int(cell._tc.get_or_add_tcPr().find(qn("w:tcW")).get(qn("w:w")))
+                for cell in table.rows[0].cells
+            ]
+            grid_widths = [int(col.get(qn("w:w"))) for col in table._tbl.tblGrid]
+
+            self.assertEqual(5, len(signature_paragraphs))
+            self.assertTrue(all(paragraph.alignment == WD_ALIGN_PARAGRAPH.RIGHT for paragraph in signature_paragraphs))
+            self.assertEqual(["bid_letter", "commitment", "technical_deviation"], report["formal_forms"]["detected_types"])
+            self.assertEqual(1, report["formal_forms"]["tables"])
+            self.assertEqual(2, report["formal_forms"]["non_split_rows"])
+            self.assertEqual(1, report["formal_forms"]["subheadings"])
+            self.assertEqual(5, report["formal_forms"]["signature_lines"])
+            self.assertLess(widths[0], widths[2])
+            self.assertLess(widths[1], widths[3])
+            self.assertEqual(widths, grid_widths)
+            for row in table.rows:
+                cant_split = row._tr.get_or_add_trPr().find(qn("w:cantSplit"))
+                self.assertIsNotNone(cant_split)
+                self.assertEqual("true", cant_split.get(qn("w:val")))
 
     def test_taichang_bid_document_title_rewrites_tender_file_title(self):
         self.assertEqual(

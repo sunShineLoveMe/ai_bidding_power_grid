@@ -60,6 +60,18 @@ FORMAL_VOLUME_HEADING_RE = re.compile(
     r"(?:技术|商务|资格|报价|附件|投标|响应|投标资格|资格审查)"
     r".{0,16}(?:文件|分册|响应|资料|清单)$"
 )
+FORMAL_FORM_HEADING_PATTERNS = {
+    "bid_letter": re.compile(r"投标函(?:及投标函附录)?"),
+    "authorization": re.compile(r"法定代表人身份证明|授权委托书|法定代表人授权"),
+    "business_deviation": re.compile(r"商务.{0,12}(?:偏差|偏离)表"),
+    "technical_deviation": re.compile(r"技术.{0,12}(?:偏差|偏离)表"),
+    "commitment": re.compile(r"承诺(?:书|函)"),
+}
+FORMAL_SIGNATURE_LINE_RE = re.compile(
+    r"^(?:投标人(?:名称)?|法定代表人|授权代表|委托代理人|代理人|"
+    r"单位名称|统一社会信用代码|通讯地址|联系电话|传真|身份证号码|"
+    r"日期|投标日期|授权日期|签署日期)\s*[（(]?(?:盖章|签字|签名|签字或盖章|盖单位章)?[）)]?\s*[：:]"
+)
 DOCX_TOC_MAX_LEVEL = int(os.getenv("DOCX_TOC_MAX_LEVEL", "4"))
 DOCX_TEMPLATE_ID = os.getenv("DOCX_TEMPLATE_ID", "formal_bid_standard")
 DOCX_BIDDER_FULL_NAME = os.getenv("DOCX_BIDDER_FULL_NAME", "河北泰昌电力器材科技有限公司")
@@ -686,9 +698,28 @@ def _set_row_repeat_header(row) -> None:
     tbl_header.set(qn("w:val"), "true")
 
 
+def _set_row_cant_split(row) -> None:
+    tr_pr = row._tr.get_or_add_trPr()
+    cant_split = tr_pr.find(qn("w:cantSplit"))
+    if cant_split is None:
+        cant_split = OxmlElement("w:cantSplit")
+        tr_pr.append(cant_split)
+    cant_split.set(qn("w:val"), "true")
+
+
 def _set_cell_width(cell, width_twips: int) -> None:
     tc_pr = cell._tc.get_or_add_tcPr()
     _set_table_element_value(tc_pr, "w:tcW", w=max(720, width_twips), type="dxa")
+
+
+def _set_table_grid_widths(table, widths: list[int]) -> None:
+    table_grid = table._tbl.tblGrid
+    for grid_col in list(table_grid):
+        table_grid.remove(grid_col)
+    for width in widths:
+        grid_col = OxmlElement("w:gridCol")
+        grid_col.set(qn("w:w"), str(max(720, width)))
+        table_grid.append(grid_col)
 
 
 def _shade_cell(cell, fill: str) -> None:
@@ -702,6 +733,63 @@ def _shade_cell(cell, fill: str) -> None:
 
 def _is_centered_table_column(header_text: str) -> bool:
     return any(keyword in header_text for keyword in ("序号", "编号", "代码", "单位", "数量", "页码", "响应情况", "结论", "结果"))
+
+
+def _formal_form_type(text: str) -> str | None:
+    clean_text = clean_formal_bid_text(text)
+    for form_type, pattern in FORMAL_FORM_HEADING_PATTERNS.items():
+        if pattern.search(clean_text):
+            return form_type
+    return None
+
+
+def _formal_bracket_heading(text: str) -> tuple[str, str] | None:
+    match = re.match(r"^【\s*(.+?)\s*】$", clean_formal_bid_text(text))
+    if not match:
+        return None
+    heading = match.group(1).strip()
+    form_type = _formal_form_type(heading)
+    return (form_type, heading) if form_type else None
+
+
+def _add_formal_subheading(doc, text: str) -> None:
+    paragraph = doc.add_paragraph()
+    paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    apply_heading_paragraph_format(paragraph, 3)
+    run = paragraph.add_run(text)
+    apply_run_font(run, east_asia=DOCX_LEVEL3_EAST_ASIA, size=14, bold=True)
+
+
+def _formal_table_widths(header_cells: list[str], page_text_width: int, form_type: str | None) -> list[int]:
+    headers = [clean_formal_bid_text(cell) for cell in header_cells]
+    col_count = len(headers)
+    if form_type == "technical_deviation" and col_count == 5:
+        ratios = (0.08, 0.18, 0.24, 0.32, 0.18)
+    elif form_type == "business_deviation" and col_count == 4:
+        ratios = (0.08, 0.38, 0.34, 0.20)
+    elif form_type == "bid_letter" and col_count == 6:
+        ratios = (0.07, 0.15, 0.14, 0.24, 0.30, 0.10)
+    else:
+        ratios = tuple(1 / max(1, col_count) for _ in headers)
+    widths = [max(720, int(page_text_width * ratio)) for ratio in ratios]
+    if widths:
+        widths[-1] += page_text_width - sum(widths)
+    return widths
+
+
+def _add_formal_signature_paragraph(doc, text: str) -> None:
+    paragraph = doc.add_paragraph()
+    paragraph.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+    fmt = paragraph.paragraph_format
+    fmt.first_line_indent = Pt(0)
+    fmt.left_indent = Pt(0)
+    fmt.right_indent = Pt(14)
+    fmt.line_spacing_rule = WD_LINE_SPACING.EXACTLY
+    fmt.line_spacing = Pt(DOCX_BODY_LINE_SPACING)
+    fmt.space_before = Pt(0)
+    fmt.space_after = Pt(0)
+    run = paragraph.add_run(text)
+    apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_BODY_FONT_SIZE)
 
 
 def _set_paragraph_right_dot_leader_tab(paragraph, *, position_twips: int) -> None:
@@ -1416,7 +1504,7 @@ def set_document_format(doc, project_name, image_report: dict | None = None):
         for run in footer_para.runs:
             apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=9)
 
-def process_table(md_table, doc):
+def process_table(md_table, doc, *, form_type: str | None = None, form_report: dict | None = None):
     """处理 Markdown 表格"""
     lines = md_table.strip().split('\n')
     if len(lines) < 3:  # 至少需要表头、分隔行和一行数据
@@ -1437,16 +1525,20 @@ def process_table(md_table, doc):
     _set_table_element_value(tbl_pr, "w:tblLayout", type="fixed")
     _set_table_cell_margins(table)
     page_text_width = _page_text_width_twips(doc)
-    col_width = max(720, page_text_width // col_count)
+    col_widths = _formal_table_widths(header_cells, page_text_width, form_type)
+    _set_table_grid_widths(table, col_widths)
+    if form_type and form_report is not None:
+        form_report["tables"] = int(form_report.get("tables") or 0) + 1
     
     # 添加表头
     header_row = table.rows[0]
     _set_row_repeat_header(header_row)
+    _set_row_cant_split(header_row)
     for i, cell in enumerate(header_cells):
         clean_cell = clean_formal_bid_text(cell)
         header_row.cells[i].text = clean_cell
         header_row.cells[i].vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
-        _set_cell_width(header_row.cells[i], col_width)
+        _set_cell_width(header_row.cells[i], col_widths[i])
         _set_cell_margins(header_row.cells[i])
         _shade_cell(header_row.cells[i], "D9EAF7")
         # 设置表头格式
@@ -1461,11 +1553,14 @@ def process_table(md_table, doc):
         cells = line.strip('|').split('|')
         if len(cells) == col_count:
             row = table.add_row()
+            _set_row_cant_split(row)
+            if form_type and form_report is not None:
+                form_report["non_split_rows"] = int(form_report.get("non_split_rows") or 0) + 1
             for i, cell in enumerate(cells):
                 clean_cell = clean_formal_bid_text(cell)
                 row.cells[i].text = clean_cell
                 row.cells[i].vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
-                _set_cell_width(row.cells[i], col_width)
+                _set_cell_width(row.cells[i], col_widths[i])
                 _set_cell_margins(row.cells[i])
                 # 设置单元格格式
                 header_text = clean_formal_bid_text(header_cells[i]) if i < len(header_cells) else ""
@@ -1626,6 +1721,13 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
             "inserted": 0,
             "skipped": 0,
         },
+        "formal_forms": {
+            "detected_types": [],
+            "tables": 0,
+            "subheadings": 0,
+            "signature_lines": 0,
+            "non_split_rows": 0,
+        },
     }
     
     # 设置文档格式
@@ -1646,6 +1748,7 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
     image_cache = {}
     inserted_image_count = 0
     heading_count = 0
+    current_form_type = None
     while i < len(lines):
         line = lines[i].strip()
         if re.match(r'^(-{3,}|\*{3,}|_{3,})$', line):
@@ -1714,7 +1817,12 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
             while i < len(lines) and lines[i].strip().startswith('|'):
                 table_lines.append(lines[i])
                 i += 1
-            process_table('\n'.join(table_lines), doc)
+            process_table(
+                '\n'.join(table_lines),
+                doc,
+                form_type=current_form_type,
+                form_report=image_report["formal_forms"],
+            )
             continue
         
         # 处理标题
@@ -1725,6 +1833,14 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
             level = len(re.match(r'^#+', line).group())
             # 移除标题中的加粗标记
             text = clean_formal_bid_text(re.sub(r'\*\*(.*?)\*\*', r'\1', line.lstrip('#').strip()))
+            detected_form_type = _formal_form_type(text)
+            if detected_form_type:
+                current_form_type = detected_form_type
+                detected_types = image_report["formal_forms"]["detected_types"]
+                if detected_form_type not in detected_types:
+                    detected_types.append(detected_form_type)
+            elif level <= 2:
+                current_form_type = None
             if should_start_heading_on_new_page(level, text, heading_count):
                 doc.add_page_break()
             word_heading_level = min(level, 4)
@@ -1778,10 +1894,22 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
         elif line:
             # 移除加粗标记
             text = clean_formal_bid_text(re.sub(r'\*\*(.*?)\*\*', r'\1', line))
-            p = doc.add_paragraph()
-            run = p.add_run(text)
-            apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_BODY_FONT_SIZE)
-            apply_paragraph_format(p)
+            bracket_heading = _formal_bracket_heading(text)
+            if bracket_heading:
+                current_form_type, heading_text = bracket_heading
+                detected_types = image_report["formal_forms"]["detected_types"]
+                if current_form_type not in detected_types:
+                    detected_types.append(current_form_type)
+                _add_formal_subheading(doc, heading_text)
+                image_report["formal_forms"]["subheadings"] += 1
+            elif current_form_type and FORMAL_SIGNATURE_LINE_RE.match(text):
+                _add_formal_signature_paragraph(doc, text)
+                image_report["formal_forms"]["signature_lines"] += 1
+            else:
+                p = doc.add_paragraph()
+                run = p.add_run(text)
+                apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_BODY_FONT_SIZE)
+                apply_paragraph_format(p)
         
         i += 1
     

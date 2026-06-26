@@ -15,7 +15,7 @@ import codecs
 import PyPDF2
 from urllib.parse import quote
 from backend.ai.qwen_client import call_dashscope_api, generate_bid_section
-from backend.export.md_to_word import DOCX_BIDDER_FULL_NAME, clean_formal_bid_text, convert_md_to_word, taichang_bid_document_title
+from backend.export.md_to_word import DOCX_BIDDER_FULL_NAME, DOCX_TEMPLATE_ID, clean_formal_bid_text, convert_md_to_word, taichang_bid_document_title
 from backend.ai.chapter_planner import generate_bid_outline, stream_bid_outline
 from backend.ai.section_writer import estimate_bid_content_words, stream_bid_section
 from backend.ai.interpreter import generate_ai_interpretation_report
@@ -31,6 +31,7 @@ from datetime import timedelta
 from backend.core.config import DEFAULT_SETTINGS, build_enterprise_context, get_setting, load_runtime_settings, save_runtime_settings
 from backend.core.security import UploadValidationError, safe_upload_filename, validate_uploaded_file
 from backend.services.formal_placeholders import count_formal_placeholders
+from backend.services.bid_prefill import formal_required_confirmation_gaps
 
 # 操作向量数据库的函数
 from backend.parsing.document_parser import ingest_artifacts as ingest_mineru_artifacts_to_supabase, import_mineru_result_zip, parse_and_index_tender_file, read_parse_status, retry_mineru_result_download, write_parse_status
@@ -944,9 +945,10 @@ def build_project_bid_markdown(
         if not is_container_section(section) and not str(section.get("content") or "").strip()
     )
     placeholder_count = count_formal_placeholders(str(section.get("content") or "") for section in sections)
-    missing_required = prefill_state.get("missing_formal_required_fields") if isinstance(prefill_state.get("missing_formal_required_fields"), list) else []
+    confirmed_values = prefill_state.get("confirmed_values") if isinstance(prefill_state.get("confirmed_values"), dict) else {}
+    missing_required = formal_required_confirmation_gaps(confirmed_values)
     export_image_report["formal_readiness"] = {
-        "template_id": "sgcc_taichang_bid",
+        "template_id": DOCX_TEMPLATE_ID,
         "reference_template_policy": "tender_format_then_customer_reference_then_system_default",
         "bidder": DOCX_BIDDER_FULL_NAME,
         "empty_section_count": empty_section_count,

@@ -291,6 +291,11 @@ def is_formal_confirmation_value(value: Any) -> bool:
     return formal_confirmation_issue(value) is None
 
 
+def formal_required_confirmation_gaps(values: dict[str, Any] | None) -> list[dict[str, str]]:
+    normalized = values if isinstance(values, dict) else {}
+    return _missing_required_confirmations({str(key): str(value) for key, value in normalized.items()})
+
+
 def apply_confirmed_values_to_text(text: str, values: dict[str, str]) -> tuple[str, int]:
     result = str(text or "")
     replacements = 0
