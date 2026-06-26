@@ -173,11 +173,11 @@ function displayLabel(value?: string): string {
   return '';
 }
 
-function sourceTitle(source: SourceContext): string {
+function sourcePrimaryName(source: SourceContext): string {
   const meta = source.metadata || {};
   return (
-    displayLabel(meta.source_document_name) ||
     displayLabel(meta.source_display_name) ||
+    displayLabel(meta.source_document_name) ||
     displayLabel(meta.source_file) ||
     displayLabel(meta.source_org) ||
     displayLabel(meta.category_label) ||
@@ -187,6 +187,10 @@ function sourceTitle(source: SourceContext): string {
     displayLabel(meta.evidence_type) ||
     '企业知识库资料'
   );
+}
+
+function sourceTitle(source: SourceContext): string {
+  return sourcePrimaryName(source);
 }
 
 function sourceDescription(source: SourceContext): string {
@@ -220,7 +224,15 @@ function sanitizeVisibleText(content?: string): string {
 
 function sourceKey(source: SourceContext): string {
   const meta = source.metadata || {};
-  const sourceName = meta.source_document_name || meta.source_display_name || meta.source_file || meta.source_org || meta.category_label || meta.category || '';
+  const sourceName =
+    sourcePrimaryName(source) ||
+    meta.source_display_name ||
+    meta.source_document_name ||
+    meta.source_file ||
+    meta.source_org ||
+    meta.category_label ||
+    meta.category ||
+    '';
   if (
     source.retrieval_source === 'structured_product_parameter_json' ||
     meta.retrieval_source === 'structured_product_parameter_json' ||

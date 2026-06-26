@@ -2982,3 +2982,48 @@ SG-PARTIAL-001 已让 partial 草稿可自动续写、转复核和批量续写�
 - `SG-PROGRESS-001` 已完成，本地真实环境验证通过。
 - 召回门禁无退化，泰昌/辽宁/河北豪乾边界未出现跨资料域串扰。
 - 批量章节生成可靠性与 Prompt 分级瘦身 P0 主链路已完成，后续进入维护回归；下一阶段回到项目总账继续处理剩余 P0。
+
+---
+
+## Run 46 — 阿里云线上企业库来源收敛回归与前端来源标题补丁（2026-06-26）
+
+> 线上回归记录：`docs/rag/runs/run_20260626_aliyun_online_source_scope_regression.md`
+> 本地收敛门禁：`docs/rag/runs/run_20260626_taichang_enterprise_source_scope_final_review.md`
+
+### 触发原因
+
+用户已将 `ac01c14` 发布到阿里云线上环境，需要按 P0 清单对“阿里云企业库展示与来源收敛收口”做真实 API 与 Chrome 页面回归，重点确认“泰昌有哪些资质证书？”不再把 ESG、绿色发展规划、绿色供应链、碳足迹、废水废气等资料作为资质证书参考来源。
+
+### 测试与回归
+
+| 验证项 | 结果 |
+| --- | --- |
+| 线上版本确认 | PASS，`buildId=20260626113858-ac01c14e699a`，`commit=ac01c14e699a` |
+| `/api/health` | PASS |
+| `/api/ready` | PASS，database / redis / celery / storage / vector / model_config ready |
+| 线上临时账号注册登录 | PASS |
+| API：资质证书问答 | PASS，只命中 3 项正式体系认证证书，未混入绿色低碳资料 |
+| API：企业证明材料问答 | PASS，营业执照、体系证书、社保证明等企业证明材料边界正确 |
+| API：绿色低碳问答 | PASS，ESG、绿色发展规划、碳足迹等绿色资料可正常召回 |
+| API：人员证书/社保证明问答 | PASS，只命中人员/社保证明相关资料 |
+| API：CPVC 检验报告问答 | PASS，命中 CPVC 内径 250 检验报告和结构化参数来源 |
+| API：生产制造能力问答 | PASS，命中生产线、厂房、土地租赁等生产制造能力资料 |
+| Chrome 页面：资质证书问答 | PASS，页面回答未出现 ESG、绿色发展规划、绿色供应链、碳足迹、废水废气等资料 |
+| Chrome 页面：绿色低碳问答 | 核心语义 PASS；发现参考来源标题优先级残留 |
+| 前端构建 | PASS，`npm run build` |
+
+### 发现与修复
+
+线上 Chrome 反向场景发现一个展示层残留：绿色低碳资料的 `source_display_name` 已是“绿色发展规划报告”，但旧 `source_document_name` 仍是“泰昌资质证书图片资产目录”；前端参考来源标题优先展示旧字段，导致页面标题不够干净。
+
+本轮已做最小修复：
+
+- `frontend/src/pages/KnowledgeBase/KnowledgeSearchDrawer.tsx` 新增 `sourcePrimaryName()`；
+- `sourceTitle()` 优先使用清洗后的 `source_display_name`；
+- `sourceKey()` 去重使用同一主展示名，避免旧目录名影响页面来源展示。
+
+### 结论
+
+- 阿里云线上 `ac01c14` 的后端来源收敛、metadata 修复和核心问答链路已通过真实 API + Chrome 页面验证。
+- 资质证书问答污染问题已消除。
+- 仍需发布本轮前端标题补丁并复测 Chrome 页面“绿色低碳资料”参考来源标题，确认不再显示旧目录名后，`P1C-15` 才能按严格 P0 口径关闭。
