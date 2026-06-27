@@ -292,6 +292,18 @@ def _evaluate_rule(
             return _make_result(rule, status="blocked" if rule.get("blocks_formal_export") else "warning", evidence=f"正文命中禁用词：{'、'.join(hits[:5])}")
         return _make_result(rule, status="passed", evidence="正文未命中禁用词。")
 
+    if check_type == "content_must_not_match_regex":
+        hits: list[str] = []
+        for pattern in rule.get("patterns") or []:
+            try:
+                if re.search(str(pattern), content_blob, flags=re.I | re.S):
+                    hits.append(str(pattern))
+            except re.error:
+                hits.append(f"规则正则无效：{pattern}")
+        if hits:
+            return _make_result(rule, status="blocked" if rule.get("blocks_formal_export") else "warning", evidence=f"正文命中禁用正则：{'、'.join(hits[:3])}")
+        return _make_result(rule, status="passed", evidence="正文未命中禁用正则。")
+
     if check_type == "content_must_not_include_near":
         keywords = rule.get("keywords") or []
         hit = all(_contains_any(content_blob, [keyword]) for keyword in keywords)

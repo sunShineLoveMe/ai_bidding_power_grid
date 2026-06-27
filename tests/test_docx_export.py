@@ -793,6 +793,8 @@ class DocxExportRegressionTest(unittest.TestCase):
                         "资料：3.职业健康安全管理体系认证证书第1页",
                         "",
                         "图示：晁坤琳2原图（脱敏示意图）",
+                        "",
+                        "图示：泰昌试验设备台账原图",
                     ]
                 ),
                 encoding="utf-8",
@@ -803,9 +805,10 @@ class DocxExportRegressionTest(unittest.TestCase):
             captions = [p for p in document.paragraphs if p.text.startswith("资料：")]
 
             self.assertEqual([
-                "资料：CPVC电缆保护管检验报告首页",
-                "资料：职业健康安全管理体系认证证书首页",
+                "资料：CPVC电缆保护管检验报告",
+                "资料：职业健康安全管理体系认证证书",
                 "资料：身份证明文件",
+                "资料：试验设备台账",
             ], [p.text for p in captions])
             for caption in captions:
                 self.assertEqual(WD_ALIGN_PARAGRAPH.CENTER, caption.alignment)
@@ -814,7 +817,7 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertNotIn("图示", "\n".join(p.text for p in document.paragraphs))
             self.assertNotIn("内径250", "\n".join(p.text for p in document.paragraphs))
             self.assertNotIn("原图", "\n".join(p.text for p in document.paragraphs))
-            self.assertEqual(3, report["captions"]["formalized"])
+            self.assertEqual(4, report["captions"]["formalized"])
 
     def test_formal_bid_text_is_black_and_level_two_headings_start_new_page(self):
         with tempfile.TemporaryDirectory() as tmpdir:

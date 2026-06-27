@@ -282,7 +282,7 @@ class RagAssetScoringQualityTest(unittest.TestCase):
             remaining_limit=2,
         )
 
-        self.assertIn("泰昌电子天平与万能试验机照片", markdown)
+        self.assertIn("电子天平与万能试验机照片", markdown)
         self.assertNotIn("绿色供应链", markdown)
         self.assertEqual(manifest[0]["asset_id"], "taichang-testing")
         self.assertIn("试验检测能力", manifest[0]["reason"])
@@ -305,9 +305,81 @@ class RagAssetScoringQualityTest(unittest.TestCase):
             remaining_limit=2,
         )
 
-        self.assertIn("泰昌 MPP 管材生产线照片", markdown)
+        self.assertIn("MPP管材生产线照片", markdown)
         self.assertNotIn("电子天平", markdown)
         self.assertEqual(manifest[0]["asset_id"], "taichang-production")
+
+    def test_formal_docx_suppresses_report_page_caption(self):
+        from backend.api.routes import _build_section_image_markdown
+
+        technical = _section(
+            "CPVC电缆保护管检验报告",
+            "technical",
+            response_points=["检验报告", "CPVC 电缆保护管", "型式检验"],
+        )
+        report_asset = {
+            "id": "taichang-cpvc-report-p1",
+            "title": "泰昌CPVC电缆保护管检验报告内径250第1页",
+            "category": "检验报告",
+            "asset_type": "product_image",
+            "description": "泰昌 CPVC 电缆保护管检验报告整页渲染资产。",
+            "tags": ["泰昌", "检验报告", "CPVC"],
+            "applicable_sections": ["技术标", "检验报告"],
+            "applicable_volumes": ["technical"],
+            "metadata": {
+                "library_type": "product",
+                "target_library": "product_library",
+                "evidence_type": "inspection_report",
+                "asset_visual_type": "full_page_render",
+                "enterprise": "泰昌",
+            },
+            "specs": {"library_type": "product", "allowed_for_bid": True, "applicable_volumes": ["technical"]},
+            "local_path": __file__,
+        }
+        manifest = []
+
+        markdown = _build_section_image_markdown(
+            technical,
+            [report_asset],
+            used_asset_ids=set(),
+            image_manifest=manifest,
+            remaining_limit=1,
+        )
+
+        self.assertIn("![CPVC电缆保护管检验报告]", markdown)
+        self.assertNotIn("图示", markdown)
+        self.assertNotIn("第1页", markdown)
+        self.assertEqual("", manifest[0]["caption"])
+        self.assertEqual("suppressed_document_page_caption", manifest[0]["caption_policy"])
+
+    def test_formal_docx_photo_caption_uses_chinese_material_name(self):
+        from backend.api.routes import _build_section_image_markdown
+
+        technical = _section(
+            "泰昌生产制造能力",
+            "technical",
+            response_points=["MPP 管材生产线", "生产设备"],
+        )
+        asset = {
+            **TAICHANG_PRODUCTION_ASSET,
+            "title": "泰昌3.MPP生产线_页面_5原图",
+            "local_path": __file__,
+        }
+        manifest = []
+
+        markdown = _build_section_image_markdown(
+            technical,
+            [asset],
+            used_asset_ids=set(),
+            image_manifest=manifest,
+            remaining_limit=1,
+        )
+
+        self.assertIn("资料：MPP生产线", markdown)
+        self.assertNotIn("图示", markdown)
+        self.assertNotIn("页面_5", markdown)
+        self.assertNotIn("原图", markdown)
+        self.assertEqual("formal_material_caption", manifest[0]["caption_policy"])
 
 
 if __name__ == "__main__":

@@ -8,6 +8,58 @@
 
 ---
 
+## Run 20260627 — 泰昌正式资料资产中文化与 RAG 可见字段治理（2026-06-27）
+
+> 资产审计：`docs/development/runs/run_20260627_taichang_formal_asset_audit_visible_and_rag_zero.md`
+> 增量门禁：`docs/rag/runs/run_20260627_taichang_formal_asset_cleanup_gate_summary.md`
+> DOCX 真实导出：`docs/development/runs/run_20260627_formal_docx_asset_cleanup_v2/summary.json`
+
+### 触发原因
+
+真实技术标 DOCX 中出现 `图示：泰昌CPVC电缆保护管检验报告内径250第1页`、`图示：泰昌试验设备台账原图` 等不适合正式投标文件的图片说明。该问题会把内部追溯信息、解析命名和页码型说明暴露到正式投标正文，存在废标风险。
+
+### 修复范围
+
+- 新增正式资产命名与题注策略，区分正式标题、正式题注和追溯 metadata。
+- RAG 选图和 DOCX 导出不再直接使用内部标题、解析目录名、`原图`、`页面_`、UUID、API 路径或页码型追溯说明。
+- 批量回填泰昌真实图片资产、知识文档和文档分块的中文正式展示字段。
+- 将 mock/test 资产、MinerU 局部切图、资产索引中间 chunk、解析路径类 chunk 隔离出正式 RAG 和标书选图。
+- 知识问答公开返回字段做脱敏，避免把 `source_domain`、`target_library`、`specs`、`file_name`、`asset_path`、`parsed_outputs`、embedding/searchable_text 等内部字段返回到页面同源 stream。
+
+### 本地审计结果
+
+| 范围 | 扫描数 | 正式可见/RAG 可见问题数 |
+| --- | ---: | ---: |
+| 真实图片资产 | 599 | 0 |
+| 知识文档 | 77 | 0 |
+| 文档分块 | 6347 | 0 |
+| staging 图片 payload | 539 | 539 |
+
+staging 图片 payload 是历史解析中间产物，保留用于追溯和复核，不作为正式展示、RAG 问答或 DOCX 配图来源。后续新增客户资料必须按 SOP 重新生成整页正式资产，不能把 staging 局部切图直接入正式库。
+
+### 增量门禁结果
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 286 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 634 ms |
+| 泰昌专项 | off | 53.3% | 63.3% | 0.533 | 3.3% | 0.0% | 354 ms |
+| 泰昌专项 | qwen3-rerank | 56.7% | 63.3% | 0.567 | 0.0% | 0.0% | 612 ms |
+
+门禁状态为 FAIL。Base 未退化；泰昌专项失败的主要原因是旧专项用例仍期待历史资产索引/解析中间 chunk 被召回，而这些 chunk 本轮已按正式投标要求隔离为 `internal_only` / `exclude_from_rag`。处理结论是更新泰昌专项评测集，改为校验正式资产、结构化参数和中文参考来源，不应为通过旧门禁重新放开内部 chunk。
+
+### 真实链路验证
+
+- 本地真实 `/api/knowledge/search/stream` 抽样：未再暴露 `图示：`、`原图`、`页面_`、解析路径、内部枚举、向量字段或 API 资产路径。
+- 本地真实技术标/商务标 DOCX：走 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。技术标选图 16、商务标选图 5，字段刷新均为 `refreshed`，DOCX XML 审计 `forbidden_hits=[]`、`caption_page_hits=[]`。
+- 尚未完成：阿里云线上数据库修复脚本执行、线上真实浏览器知识问答/标书导出复验。
+
+### 结论
+
+本地正式资产可见字段、RAG 返回字段和 DOCX 图片题注问题已收口；线上发布与专项评测集更新仍为后续阻塞项。
+
+---
+
 ## Run 20260626 — 产品库/资信库上传入口收口与新资产索引回归（2026-06-26）
 
 > 汇总：`docs/rag/runs/run_20260626_product_qualification_upload_index_regression_summary.md`

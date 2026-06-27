@@ -166,6 +166,7 @@
 
 ## 当前最近任务
 
+0. **P0 进行中：泰昌正式资料资产中文化与标书配图质量治理。** 本地真实库已完成多轮审计和修复，最终 `run_20260627_taichang_formal_asset_audit_visible_and_rag_zero` 中真实图片资产 599、知识文档 77、文档分块 6347 的正式可见/RAG 可见问题均为 0；真实技术标/商务标 DOCX 链路 `run_20260627_formal_docx_asset_cleanup_v2` 中 `forbidden_hits=[]`、`caption_page_hits=[]`。Base 增量门禁未退化，但泰昌专项门禁失败，原因是旧评测集仍期待历史资产索引/解析中间 chunk 被召回；下一步需更新专项评测集，并在阿里云线上执行同等修复和真实浏览器复验。
 0. **阿里云新疆 10kV 新招标包资料域隔离门禁已完成。** 已新增产品适配性预检并覆盖预填候选、技术参数候选、正文事实包和正式检查 `T-000` 阻断规则；架空绝缘导线项目不再自动带入辽宁 2025、CPVC/MPP、电缆保护管资料。定向测试 `64 passed`，真实 DOCX 链路验证 prompt 阻断生效。
 1. **产品库/资信库上传入口收口与新资产索引回归已通过。** `run_20260626_product_qualification_upload_index_regression` 完成真实浏览器产品图上传、资产 metadata 校验、真实 `/api/knowledge/search/stream` 命中新上传资产、RAG 单测和 Base 30 + 泰昌专项 30 增量门禁；Base Recall@5 96.7%，泰昌专项 qwen3-rerank Recall@5 100%，跨 doc_role 串扰 0%。
 2. **合同 MVP 真实覆盖验收 RAG 门禁已通过。** `run_20260625_contract_mvp_acceptance` 完成 API ready、RAG 单测、Base 30 + 泰昌专项 30 rerank 开/关对照和真实页面同源 stream；Base Recall@5 96.7%，泰昌专项 qwen3-rerank Recall@5 100%，跨 doc_role 串扰 0%，本轮未新增资料或调整召回策略。

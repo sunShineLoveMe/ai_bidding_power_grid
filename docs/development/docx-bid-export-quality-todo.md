@@ -25,6 +25,7 @@
 
 | 状态 | 任务 | 验收口径 |
 | --- | --- | --- |
+| 进行中（本地真实链路已通过，待阿里云复验） | 泰昌正式资料资产中文化与图片题注治理 | 见 `docs/development/taichang-formal-asset-cleanup-todo.md`；本地真实技术标/商务标导出 `run_20260627_formal_docx_asset_cleanup_v2` 已确认 `forbidden_hits=[]`、`caption_page_hits=[]`、字段刷新 `refreshed`。阿里云线上修复执行和真实浏览器导出复验未完成前，不关闭线上验收 |
 | 已完成 | 参考 Word 模板规则落地 | 完成 `assets/template_words` 下两份参考模板 inventory；`5d2a...docx` 作为主参考样式源，规则写入 `formal_bid_standard` metadata；技术标/商务标真实导出均通过字段刷新、目录、表格、图片统一尺寸回归 |
 | 后置（客户暂无原版模板） | 可编辑 Word 模板导入 `template_docx` | 仅当客户后续重新提供可编辑 Word 版正式模板时启动；当前不阻塞 MVP 导出质量收口 |
 | 已完成 | 默认正式模板固定为 `formal_bid_standard` | metadata 记录模板 ID、正文/目录/页边距、页眉页脚设置 |
@@ -83,6 +84,17 @@
 - 真实导出链路：`build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
 - 真实回归结果：项目 `580b8c82-42c2-4a51-a0d2-17b60afa22b9`，输出目录 `580b8c82`，文件 `泰昌_SL265A_包1_技术投标文件_20260627.docx`，模板 `technical_bid_standard`，字段刷新 `refreshed`。
 - 记录：`docs/development/runs/run_20260627_p0_product_compatibility_and_short_docx_names.md`。
+
+### 2026-06-27 泰昌正式图片题注治理本地真实导出复验
+
+- 背景：真实技术标中出现 `图示：泰昌CPVC电缆保护管检验报告内径250第1页`、`图示：泰昌试验设备台账原图` 等不适合正式投标文件的图片说明；此类内容会把内部追溯名、页码和解析痕迹暴露到正文。
+- 修复：RAG 选图题注、DOCX 旧题注兜底清洗和正式导出门禁统一接入正式资产命名策略；正文中历史图片占位、`原图`、`页面_`、局部追溯说明也做兜底清理。
+- 真实链路：`build_project_bid_markdown(volume_type=technical/business, with_images=true) -> convert_md_to_word(return_report=true) -> refresh_docx_fields_with_soffice`。
+- 技术标结果：项目 `4d632dbe-f6e6-4066-8fe2-929ecb54ba1d`，选中图片 16，候选 597，字段刷新 `refreshed`，DOCX XML 审计 `forbidden_hits=[]`、`caption_page_hits=[]`，段落 2528。仍有 59 处待补充/待确认和 11 个正式必填字段未确认，属于客户确认字段问题。
+- 商务标结果：选中图片 5，候选 597，字段刷新 `refreshed`，DOCX XML 审计 `forbidden_hits=[]`、`caption_page_hits=[]`，段落 1937。仍有 92 处待补充/待确认和 11 个正式必填字段未确认，属于客户确认字段问题。
+- 自动化回归：`.venv/bin/python -m pytest tests/test_rag_asset_scoring.py tests/test_docx_export.py::DocxExportRegressionTest::test_formal_image_caption_is_sanitized_centered_and_small -q`，结果 `12 passed, 1 warning`。
+- 记录：`docs/development/runs/run_20260627_formal_docx_asset_cleanup_v2/summary.json`。
+- 未完成：阿里云线上修复脚本执行、线上真实浏览器导出复验和导出任务 metadata 扩充仍待完成。
 
 ### 2026-06-27 分册导出完成下载按钮真实浏览器回归
 

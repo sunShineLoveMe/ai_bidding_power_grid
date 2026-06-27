@@ -32,6 +32,7 @@ from backend.core.config import DEFAULT_SETTINGS, build_enterprise_context, get_
 from backend.core.security import UploadValidationError, safe_upload_filename, validate_uploaded_file
 from backend.services.formal_placeholders import apply_confirmed_values_to_export_text, count_formal_placeholders
 from backend.services.bid_prefill import formal_required_confirmation_gaps
+from backend.services.formal_asset_naming import caption_policy, formal_asset_caption, formal_asset_title
 
 # 操作向量数据库的函数
 from backend.parsing.document_parser import ingest_artifacts as ingest_mineru_artifacts_to_supabase, import_mineru_result_zip, parse_and_index_tender_file, read_parse_status, retry_mineru_result_download, write_parse_status
@@ -653,9 +654,7 @@ def _asset_library_label(asset: dict) -> str:
 
 
 def _asset_caption(asset: dict, match_reason: str | None = None) -> str:
-    title = str(asset.get("title") or "知识库图片资产").strip()
-    sensitive_note = "（脱敏示意图）" if asset.get("is_sensitive") or asset.get("anonymized") else ""
-    return f"图示：{title}{sensitive_note}"
+    return formal_asset_caption(asset) or ""
 
 
 def _asset_match_reason(asset: dict, section: dict, score: int) -> str:
@@ -821,14 +820,16 @@ def _build_section_image_markdown(
         image_ref = _asset_image_ref(asset)
         asset_id = str(asset.get("id") or image_ref)
         used_asset_ids.add(asset_id)
-        alt = re.sub(r"[\[\]\(\)]", "", str(asset.get("title") or "电网行业配图")).strip()
+        alt = re.sub(r"[\[\]\(\)]", "", formal_asset_title(asset, "电网行业配图")).strip()
         match_reason = _asset_match_reason(asset, section, score)
         caption = _asset_caption(asset, match_reason)
-        snippets.append(f"\n\n![{alt}]({image_ref})\n\n{caption}\n\n")
+        caption_block = f"\n\n{caption}" if caption else ""
+        snippets.append(f"\n\n![{alt}]({image_ref}){caption_block}\n\n")
         if image_manifest is not None:
             image_manifest.append({
                 "asset_id": asset.get("id"),
                 "asset_title": asset.get("title"),
+                "asset_formal_title": alt,
                 "asset_category": asset.get("category"),
                 "asset_type": asset.get("asset_type"),
                 "evidence_type": _asset_meta_value(asset, "evidence_type"),
@@ -843,6 +844,7 @@ def _build_section_image_markdown(
                 "reason": match_reason,
                 "image_ref": image_ref,
                 "caption": caption,
+                "caption_policy": caption_policy(asset),
                 "sensitive": bool(asset.get("is_sensitive")),
                 "anonymized": bool(asset.get("anonymized")),
             })

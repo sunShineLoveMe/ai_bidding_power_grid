@@ -1,0 +1,55 @@
+# 泰昌 RAG 来源展示与内部分块隔离
+
+> Run：`run_20260627_taichang_rag_source_repair_internal_chunks`
+> dry_run：`False`
+
+| 指标 | 数量 |
+| --- | ---: |
+| 扫描文档 | 77 |
+| 更新文档 | 2 |
+| 扫描分块 | 6347 |
+| 更新分块 | 292 |
+| 隔离内部分块 | 244 |
+
+## 样例
+
+- {'type': 'document', 'id': '08448491-ea28-48a2-902c-0a3f1bfab0a4', 'old_title': '保护管（CPVC和MPP） 包2 电缆保护管MPP和CPVC 中标通知书', 'new_title': '保护管（CPVC和MPP）包2电缆保护管MPP和CPVC中标通知书', 'category': '项目业绩'}
+- {'type': 'document', 'id': '5cca1df4-c540-46bd-8838-cca6da313376', 'old_title': '技术补充文件 电缆保护管CPVC', 'new_title': '技术补充文件电缆保护管CPVC', 'category': '招标文件资料'}
+- {'type': 'chunk', 'id': '5bace953-431e-42fc-9c59-f31d5878f6e2', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': 'b83293d9-ead5-4f5a-a1a6-95d96c4cea79', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '81543b15-73c0-4fbc-b9b1-15af55cdf238', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': 'f9293c4c-820a-453c-8c56-6786c6ff151e', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': 'b1809409-e2a7-4ee7-bcca-1fdc99422171', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': 'a0cdf5c3-4941-4157-b05f-48b3c1277273', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '9cb5467b-bc75-44bf-80a1-3f7425bd6511', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '501a5f52-a624-4f0c-a55d-8192afcbe83e', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': 'b6c0cc72-91cd-4cc0-b5c6-63e945972322', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '8284dab9-8c1e-4028-984f-983226a54c74', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '34bedc27-3e3e-42d7-854d-f97f6f9eb147', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '1d67a685-69e6-4e53-b729-cc8b0b3ccb9b', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '2a9fa7af-9d72-4214-a1c4-e83ddc0491bb', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '593ef99f-9a75-4cd6-a9ca-3be9bb817c44', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '5dd5b844-d5f0-4bc8-8fc7-fa6a2b941f4b', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': 'f5b3e3d8-92a2-4abe-97a8-9c9cfa4a3b2a', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '95a6711a-0ce3-44da-ae5e-6472d0a8a7ea', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '13c6b8a1-69b9-4d5c-b0e3-2181af641157', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': 'b5119f6c-11e0-405b-9281-bc4b51aae6b0', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': 'cb4bbae0-c4fc-41f6-9a9b-7b8833f9ec57', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': 'ec887a8d-8005-4f20-a4be-bc8982f3ffc6', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '4fcf3ac0-b6b2-4e85-bd2d-d396c06ff1a5', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '9f3b0e61-a7de-46db-a2a6-024cfd126bbe', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': 'c25ecc3a-68c0-4aac-abb5-eeee2f025fd0', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '4443ea0f-fff8-4420-be1e-b8e47ae8e666', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '47c46443-023d-40cf-a885-c64715416caa', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '7cd3a0b4-49bb-4cd7-82aa-2fe5836641ca', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': 'cdbeb23a-f349-4291-bf7e-b74ccf7220d8', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': 'f5c558a3-70ee-49ae-b9e6-18fe64461e31', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '244b2aa8-f8f4-4c84-b75e-7e7fcfc2fb3f', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '13586a27-ab8d-44b6-9149-7948a6f4abc7', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '13851481-527d-4e48-a754-bd1f25e81139', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': 'e7a74615-3619-4707-9d43-dbea2681d424', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '20e83750-fd9c-4770-b49a-f939e58e662c', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '1a287978-abe6-424d-8d8f-80a5279249f4', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': 'c12ff491-0c37-4332-87d2-346cb3620e7d', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': '02324e0c-22cf-474a-852d-7cc11dde70cc', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
+- {'type': 'chunk', 'id': 'a303fa11-1b43-4e72-a257-23b657b1a7c9', 'source_display_name': '泰昌图片资产解析索引（内部）', 'isolated': True}
