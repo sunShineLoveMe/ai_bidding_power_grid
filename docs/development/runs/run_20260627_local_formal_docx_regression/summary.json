@@ -1,0 +1,116 @@
+{
+  "run_id": "run_20260627_local_formal_docx_regression",
+  "project_id": "4d632dbe-f6e6-4066-8fe2-929ecb54ba1d",
+  "results": [
+    {
+      "volume": "technical",
+      "title": "国网辽宁电力2025年第三次物资协议库存招标采购投标文件-技术标",
+      "markdown": "outputs/4d632dbe/泰昌_2225AC_技术投标文件_20260627_图文.md",
+      "docx": "docs/development/runs/run_20260627_local_formal_docx_regression/technical_泰昌_2225AC_技术投标文件_20260627_图文.docx",
+      "selected": 16,
+      "asset_candidates": 597,
+      "warnings": [
+        "仍有 59 处待补充/待确认占位，当前文件尚未达到正式投标文件标准。",
+        "仍有 11 个正式必填字段未确认，请返回投标信息确认步骤补齐。"
+      ],
+      "field_refresh_status": "refreshed",
+      "forbidden_hits": [],
+      "caption_page_hits": [],
+      "paragraphs": 4842,
+      "conversion_captions": {
+        "detected": 77,
+        "formalized": 77,
+        "samples": [
+          {
+            "source": "图示：泰昌CPVC电缆保护管检验报告内径250第1页",
+            "caption": "资料：CPVC电缆保护管检验报告"
+          },
+          {
+            "source": "图示：泰昌CPVC电缆保护管检验报告内径250第3页",
+            "caption": "资料：CPVC电缆保护管检验报告"
+          },
+          {
+            "source": "图示：泰昌MPP电缆保护管检验报告内径250第5页",
+            "caption": "资料：MPP电缆保护管检验报告"
+          },
+          {
+            "source": "图示：泰昌CPVC电缆保护管检验报告内径250第3页",
+            "caption": "资料：CPVC电缆保护管检验报告"
+          },
+          {
+            "source": "图示：泰昌CPVC电缆保护管检验报告内径250第1页",
+            "caption": "资料：CPVC电缆保护管检验报告"
+          },
+          {
+            "source": "图示：泰昌CPVC电缆保护管检验报告内径250第5页",
+            "caption": "资料：CPVC电缆保护管检验报告"
+          },
+          {
+            "source": "图示：泰昌MPP电缆保护管检验报告内径250第5页",
+            "caption": "资料：MPP电缆保护管检验报告"
+          },
+          {
+            "source": "图示：泰昌MPP电缆保护管检验报告内径250第4页",
+            "caption": "资料：MPP电缆保护管检验报告"
+          }
+        ]
+      },
+      "image_report": null
+    },
+    {
+      "volume": "business",
+      "title": "国网辽宁电力2025年第三次物资协议库存招标采购投标文件-商务标",
+      "markdown": "outputs/4d632dbe/泰昌_2225AC_商务投标文件_20260627_图文.md",
+      "docx": "docs/development/runs/run_20260627_local_formal_docx_regression/business_泰昌_2225AC_商务投标文件_20260627_图文.docx",
+      "selected": 5,
+      "asset_candidates": 597,
+      "warnings": [
+        "仍有 92 处待补充/待确认占位，当前文件尚未达到正式投标文件标准。",
+        "仍有 11 个正式必填字段未确认，请返回投标信息确认步骤补齐。"
+      ],
+      "field_refresh_status": "refreshed",
+      "forbidden_hits": [],
+      "caption_page_hits": [],
+      "paragraphs": 3312,
+      "conversion_captions": {
+        "detected": 35,
+        "formalized": 35,
+        "samples": [
+          {
+            "source": "图示：职业健康安全管理体系认证证书",
+            "caption": "资料：职业健康安全管理体系认证证书"
+          },
+          {
+            "source": "图示：泰昌晁坤琳2（脱敏示意图）",
+            "caption": "资料：身份证明文件"
+          },
+          {
+            "source": "图示：职业健康安全管理体系认证证书",
+            "caption": "资料：职业健康安全管理体系认证证书"
+          },
+          {
+            "source": "图示：绿色电力认证证书",
+            "caption": "资料：绿色电力认证证书"
+          },
+          {
+            "source": "图示：职业健康安全管理体系认证证书",
+            "caption": "资料：职业健康安全管理体系认证证书"
+          },
+          {
+            "source": "图示：职业健康安全管理体系认证证书",
+            "caption": "资料：职业健康安全管理体系认证证书"
+          },
+          {
+            "source": "图示：职业健康安全管理体系认证证书",
+            "caption": "资料：职业健康安全管理体系认证证书"
+          },
+          {
+            "source": "图示：职业健康安全管理体系认证证书",
+            "caption": "资料：职业健康安全管理体系认证证书"
+          }
+        ]
+      },
+      "image_report": null
+    }
+  ]
+}

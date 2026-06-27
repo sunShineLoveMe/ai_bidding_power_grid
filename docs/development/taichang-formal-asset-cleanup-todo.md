@@ -127,6 +127,18 @@ build_project_bid_markdown(volume_type=technical/business, with_images=true)
 - 回归门禁：Base 30 未退化；泰昌专项门禁失败，需更新旧测试集，避免继续要求召回已被正式隔离的资产索引中间 chunk。
 - 未完成项：阿里云线上修复脚本执行、线上真实浏览器导出复验、产品库/资信库页面截图复验、新上传入口样本复验仍未完成。
 
+### 2026-06-27 本地服务真实回归确认
+
+- 总记录：`docs/development/runs/run_20260627_local_formal_asset_regression.md`。
+- 服务状态：本地后端 `3012`、前端 `5173`、Celery worker 均已启动并参与验证。
+- 资产审计：真实图片资产 599、知识文档 77、文档分块 6347 的正式可见/RAG 可见问题均为 0。
+- 真实 stream：CPVC 检验报告参数、MPP 检验报告、生产制造能力、试验检测设备、资质证书、绿色低碳资料 6 类真实 API 均 HTTP 200，禁用字段命中 0。
+- 浏览器页面：Chrome 打开企业知识库列表和知识库助手 CPVC 参数问答，页面渲染后禁用字段命中 0；截图见 `run_20260627_local_browser_knowledge_page.png` 和 `run_20260627_local_browser_knowledge_assistant_cpvc.png`。
+- DOCX：技术标/商务标真实导出字段刷新均 `refreshed`，禁用表达和页码型题注命中均为 0。
+- 自动化测试：题注/选图定向测试 `12 passed, 1 warning`。
+- 增量门禁：Base 未退化；泰昌专项仍因旧评测集期待内部资产索引 chunk 被召回而失败，作为 P1 评测集更新任务处理。
+- 本地结论：本地正式资产治理确认完成，可以进入阿里云测试环境发布与线上复验。
+
 ## 当前执行顺序
 
 1. P0-1 全量盘点和问题资产分类。

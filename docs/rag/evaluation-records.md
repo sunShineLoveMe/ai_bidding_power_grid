@@ -8,6 +8,42 @@
 
 ---
 
+## Run 20260627 — 泰昌正式资产治理本地真实回归（2026-06-27）
+
+> 总记录：`docs/development/runs/run_20260627_local_formal_asset_regression.md`
+> 资产审计：`docs/development/runs/run_20260627_local_formal_asset_regression_audit.md`
+> 真实 stream：`docs/rag/runs/run_20260627_local_formal_asset_stream_regression.json`
+> 增量门禁：`docs/rag/runs/run_20260627_local_formal_asset_regression_gate_summary.md`
+
+### 触发原因
+
+本地泰昌数据资产已完成正式中文化和图片题注治理，需要在推送阿里云测试环境前，用真实服务确认资产、RAG、页面和 DOCX 导出均不再暴露内部字段或旧式图片题注。
+
+### 结果
+
+- 资产审计：真实图片资产 599、知识文档 77、文档分块 6347，正式可见/RAG 可见问题均为 0；历史 staging payload 仍为解析中间产物，不参与正式展示。
+- 真实 `/api/knowledge/search/stream`：覆盖 CPVC 检验报告参数、MPP 检验报告、生产制造能力、试验检测设备、资质证书、绿色低碳资料 6 类，HTTP 200，禁用字段命中 0。
+- Chrome 页面：企业知识库列表和知识库助手 CPVC 参数问答页面渲染后禁用字段命中 0。
+- DOCX 真实链路：技术标选中图片 16、商务标选中图片 5，字段刷新均 `refreshed`，禁用表达命中 0、页码型题注命中 0。
+- 定向测试：`12 passed, 1 warning`。
+
+### 增量门禁
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% |
+| 泰昌专项 | off | 50.0% | 63.3% | 0.500 | 3.3% | 0.0% |
+| 泰昌专项 | qwen3-rerank | 53.3% | 63.3% | 0.533 | 0.0% | 0.0% |
+
+门禁状态为 FAIL。Base 未退化；泰昌专项失败仍是旧评测集与本轮治理目标不一致导致，旧用例要求召回已被隔离的资产索引/解析中间 chunk。下一步需要更新泰昌专项评测集，改为检验正式资产、中文来源、结构化参数和页面同源回答。
+
+### 结论
+
+本地正式资产治理回归通过，可以进入阿里云测试环境发布与线上复验。剩余 P1 问题：更新泰昌专项评测集；试验检测设备问答中仍可能引用碳足迹报告里的设备描述，来源精度可继续收敛。
+
+---
+
 ## Run 20260627 — 泰昌正式资料资产中文化与 RAG 可见字段治理（2026-06-27）
 
 > 资产审计：`docs/development/runs/run_20260627_taichang_formal_asset_audit_visible_and_rag_zero.md`
