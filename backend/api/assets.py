@@ -39,6 +39,8 @@ from backend.db.supabase_repo import (
     update_knowledge_asset,
     upload_knowledge_asset_file,
 )
+from backend.rag.display_names import category_display_name, sanitize_visible_text
+from backend.services.formal_asset_naming import caption_policy, clean_formal_asset_title, formal_asset_caption
 
 # ---------------------------------------------------------------------------
 # 进程内图片缓存（LRU，最多 200 条，缓解 Supabase Storage 串行下载瓶颈）
@@ -47,6 +49,36 @@ from backend.db.supabase_repo import (
 _ASSET_FILE_CACHE_MAX = 200
 _asset_file_cache: OrderedDict[tuple, tuple] = OrderedDict()
 _asset_file_cache_lock = threading.Lock()
+
+_VOLUME_LABELS = {
+    "technical": "技术标",
+    "qualification": "资格文件",
+    "business": "商务标",
+    "attachment": "附件",
+}
+
+_UPLOAD_EVIDENCE_FALLBACKS = {
+    "business_license": "基础证照资料",
+    "certification": "资质证书资料",
+    "enterprise_evidence": "企业证明材料",
+    "finance": "财务资料",
+    "green_low_carbon": "绿色低碳资料",
+    "inspection_report": "检验报告资料",
+    "personnel_certificate": "人员证书资料",
+    "product_image": "产品实物图片",
+    "production_capacity": "生产制造能力资料",
+    "project_performance": "项目业绩资料",
+    "testing_capacity": "试验检测能力资料",
+}
+
+_SEARCHABLE_SPEC_KEYS = {
+    "usage_note",
+    "certificate_no",
+    "issuer",
+    "product_model",
+    "formal_display_title",
+    "formal_caption",
+}
 
 
 def _get_cached_asset_file(asset_id: str, variant: str):
@@ -79,21 +111,141 @@ def _split_form_list(value: str | None) -> list[str]:
     return [item.strip() for item in re.split(r"[,，\n]", value) if item.strip()]
 
 
+def _contains_chinese(value: str) -> bool:
+    return bool(re.search(r"[\u4e00-\u9fff]", value or ""))
+
+
+def _has_internal_display_trace(value: str) -> bool:
+    return bool(
+        re.search(
+            r"页面[_\-\s]*\d+|原图|parsed_outputs|rag_seed|/api/knowledge/assets|"
+            r"\btaichang_|[a-zA-Z]+_[a-zA-Z_]+|\b[a-f0-9]{8}-[a-f0-9-]{27,}\b",
+            value or "",
+            flags=re.I,
+        )
+    )
+
+
+def _infer_upload_evidence_type(
+    library_type: str,
+    category: str,
+    title: str,
+    description: str,
+    existing: dict | None = None,
+) -> str:
+    existing = existing or {}
+    existing_meta = existing.get("metadata") if isinstance(existing.get("metadata"), dict) else {}
+    existing_specs = existing.get("specs") if isinstance(existing.get("specs"), dict) else {}
+    explicit = (
+        request.form.get("evidence_type")
+        or existing_meta.get("evidence_type")
+        or existing_specs.get("evidence_type")
+        or ""
+    )
+    if explicit:
+        return str(explicit).strip()
+
+    category_key = str(category or "").strip()
+    if category_key in _UPLOAD_EVIDENCE_FALLBACKS:
+        return category_key
+
+    haystack = f"{category} {title} {description}"
+    rules = [
+        ("business_license", ("营业执照", "基础证照", "统一社会信用代码")),
+        ("inspection_report", ("检验报告", "检测报告", "型式试验", "试验报告")),
+        ("testing_capacity", ("试验检测", "检测设备", "试验设备", "电子天平", "万能试验机", "维卡")),
+        ("production_capacity", ("生产制造", "制造能力", "生产线", "车间", "厂房", "仓储")),
+        ("green_low_carbon", ("绿色", "低碳", "环保", "碳足迹", "排污", "废水", "废气")),
+        ("project_performance", ("项目业绩", "合同", "中标", "成交通知", "订单", "验收")),
+        ("finance", ("财务", "审计", "资产负债", "利润表")),
+        ("personnel_certificate", ("人员", "社保", "身份证", "授权委托", "法定代表人")),
+        ("certification", ("资质证书", "认证证书", "体系认证", "证书")),
+        ("product_image", ("产品实物", "产品图片", "管材", "保护管")),
+    ]
+    for evidence_type, keywords in rules:
+        if any(keyword in haystack for keyword in keywords):
+            return evidence_type
+    return "enterprise_evidence" if library_type == "qualification" else "product_image"
+
+
+def _upload_title_fallback(evidence_type: str) -> str:
+    return _UPLOAD_EVIDENCE_FALLBACKS.get(evidence_type) or category_display_name(evidence_type) or "企业资料"
+
+
+def _normalize_uploaded_title(raw_title: str, evidence_type: str) -> str:
+    fallback = _upload_title_fallback(evidence_type)
+    title = clean_formal_asset_title(raw_title, "")
+    title = re.sub(r"(?:上传回归|回归测试|测试样张|测试图片|测试资料|P\d+(?:-\d+)?)", "", title)
+    title = re.sub(r"[，,。；;：:\-_\s]+$", "", title).strip()
+    if not title or not _contains_chinese(title):
+        title = fallback
+
+    if evidence_type in {"production_capacity", "testing_capacity", "green_low_carbon", "product_image"}:
+        if not title.endswith(("资料", "照片", "图片")):
+            title = f"{title}资料"
+    elif evidence_type == "certification" and "证书" not in title:
+        title = f"{title}证书"
+    elif evidence_type == "inspection_report" and "报告" not in title:
+        title = f"{title}检验报告"
+
+    if not title.startswith("泰昌"):
+        title = f"泰昌{title}"
+    return re.sub(r"\s+", "", title)
+
+
+def _normalize_upload_category(category: str, evidence_type: str) -> str:
+    clean_category = category_display_name(category)
+    if not clean_category or clean_category in {"企业资信", "产品资料", "泰昌企业资料"} or _has_internal_display_trace(clean_category):
+        clean_category = category_display_name(evidence_type) or _upload_title_fallback(evidence_type)
+    return clean_category
+
+
+def _sanitize_upload_tags(tags: list[str], category: str, evidence_type: str) -> list[str]:
+    normalized: list[str] = []
+    for tag in tags or []:
+        value = category_display_name(str(tag).strip())
+        if not value:
+            continue
+        if value.lower() == "taichang":
+            value = "泰昌"
+        if _has_internal_display_trace(value) and not _contains_chinese(value):
+            continue
+        if re.fullmatch(r"[a-zA-Z_]+", value) and not _contains_chinese(value):
+            continue
+        normalized.append(value)
+    normalized.extend(["泰昌", category, category_display_name(evidence_type)])
+    deduped: list[str] = []
+    seen: set[str] = set()
+    for tag in normalized:
+        if tag and tag not in seen:
+            seen.add(tag)
+            deduped.append(tag)
+    return deduped
+
+
+def _build_upload_description(title: str, category: str, description: str) -> str:
+    if description:
+        cleaned = sanitize_visible_text(description)
+        if cleaned and not _has_internal_display_trace(cleaned):
+            return cleaned
+    return f"河北泰昌电力器材科技有限公司{category}，用于企业知识库展示和正式投标文件引用。"
+
+
 def _build_asset_searchable_text(payload: dict) -> str:
     parts = [
         payload.get("title"),
         payload.get("description"),
         payload.get("category"),
-        payload.get("asset_type"),
         payload.get("ai_caption"),
     ]
     parts.extend(payload.get("tags") or [])
     parts.extend(payload.get("applicable_sections") or [])
-    parts.extend(payload.get("applicable_volumes") or [])
+    parts.extend(_VOLUME_LABELS.get(str(volume), str(volume)) for volume in payload.get("applicable_volumes") or [])
     specs = payload.get("specs") or {}
     if isinstance(specs, dict):
-        parts.extend(str(value) for value in specs.values() if value)
-    return "\n".join(str(part).strip() for part in parts if str(part or "").strip())
+        parts.extend(str(specs.get(key)) for key in _SEARCHABLE_SPEC_KEYS if specs.get(key))
+    cleaned_parts = [sanitize_visible_text(part) for part in parts if str(part or "").strip()]
+    return "\n".join(part.strip() for part in cleaned_parts if part.strip())
 
 
 def _asset_library_type(asset: dict) -> str:
@@ -144,9 +296,18 @@ def _asset_payload_from_form(storage_info: dict | None = None, existing: dict | 
         raise ValueError('library_type 仅支持 qualification 或 product')
 
     asset_type = request.form.get('asset_type') or existing.get("asset_type") or ('qualification_image' if library_type == 'qualification' else 'product_image')
-    category = request.form.get('category') or existing.get("category") or ('企业资信' if library_type == 'qualification' else '产品资料')
-    title = (request.form.get('title') or existing.get("title") or '').strip()
-    description = (request.form.get('description') or existing.get("description") or '').strip()
+    raw_category = request.form.get('category') or existing.get("category") or ('企业资信' if library_type == 'qualification' else '产品资料')
+    raw_title = (
+        request.form.get('title')
+        or existing.get("title")
+        or storage_info.get("file_name")
+        or ''
+    ).strip()
+    raw_description = (request.form.get('description') or existing.get("description") or '').strip()
+    evidence_type = _infer_upload_evidence_type(library_type, raw_category, raw_title, raw_description, existing=existing)
+    category = _normalize_upload_category(raw_category, evidence_type)
+    title = _normalize_uploaded_title(raw_title, evidence_type)
+    description = _build_upload_description(title, category, raw_description)
     tags = _split_form_list(request.form.get('tags')) if 'tags' in request.form else (existing.get("tags") or [])
     applicable_sections = _split_form_list(request.form.get('applicable_sections')) if 'applicable_sections' in request.form else (existing.get("applicable_sections") or [])
     fallback_volumes = (
@@ -172,6 +333,12 @@ def _asset_payload_from_form(storage_info: dict | None = None, existing: dict | 
         "certificate_no": request.form.get('certificate_no') or (existing.get("specs") or {}).get("certificate_no") or '',
         "issuer": request.form.get('issuer') or (existing.get("specs") or {}).get("issuer") or '',
         "product_model": request.form.get('product_model') or (existing.get("specs") or {}).get("product_model") or '',
+        "evidence_type": evidence_type,
+        "evidence_type_label": category_display_name(evidence_type),
+        "target_library": "qualification_library" if library_type == "qualification" else "product_library",
+        "target_library_label": "资信库资料" if library_type == "qualification" else "产品库资料",
+        "category_label": category,
+        "formal_display_title": title,
     }
     metadata = {
         **(existing.get("metadata") or {}),
@@ -187,18 +354,21 @@ def _asset_payload_from_form(storage_info: dict | None = None, existing: dict | 
     metadata.setdefault("fact_source_allowed_for_enterprise", True)
     metadata.setdefault("tenant_visibility", "taichang_only")
     metadata.setdefault("access_scope", "taichang_tenant_internal")
-    metadata.setdefault(
-        "target_library",
-        "qualification_library" if library_type == "qualification" else "product_library",
+    metadata["target_library"] = "qualification_library" if library_type == "qualification" else "product_library"
+    metadata["target_library_label"] = "资信库资料" if library_type == "qualification" else "产品库资料"
+    metadata["evidence_type"] = evidence_type
+    metadata["evidence_type_label"] = category_display_name(evidence_type)
+    metadata["category_label"] = category
+    metadata["source_display_name"] = title
+    metadata["source_document_name"] = title.removeprefix("泰昌")
+    metadata["asset_visual_type"] = (
+        "customer_original_image"
+        if str(storage_info.get("mime_type") or existing.get("mime_type") or "").startswith("image/")
+        else "customer_uploaded_document"
     )
-    metadata.setdefault(
-        "target_library_label",
-        "资信库资料" if library_type == "qualification" else "产品库资料",
-    )
-    metadata.setdefault(
-        "category_label",
-        category,
-    )
+    metadata["ui_name_policy"] = "domestic_chinese_friendly"
+    metadata["display_language"] = "zh-CN"
+    metadata["caption_policy"] = "formal_bid_clean"
     if storage_info:
         metadata.update({
             "thumbnail_storage_bucket": storage_info.get("thumbnail_bucket"),
@@ -221,7 +391,7 @@ def _asset_payload_from_form(storage_info: dict | None = None, existing: dict | 
         "industry": existing.get("industry") or "电网行业",
         "applicable_sections": applicable_sections,
         "applicable_volumes": applicable_volumes,
-        "tags": tags,
+        "tags": _sanitize_upload_tags(tags, category, evidence_type),
         "specs": specs,
         "ai_caption": description,
         "status": "indexed",
@@ -237,6 +407,11 @@ def _asset_payload_from_form(storage_info: dict | None = None, existing: dict | 
             "storage_path": storage_info.get("object_path"),
             "public_url": storage_info.get("public_url"),
         })
+    formal_caption = formal_asset_caption(payload)
+    if formal_caption:
+        payload["metadata"]["formal_caption"] = formal_caption
+        payload["specs"]["formal_caption"] = formal_caption
+    payload["metadata"]["caption_policy"] = caption_policy(payload)
     payload["searchable_text"] = _build_asset_searchable_text(payload)
     return payload
 

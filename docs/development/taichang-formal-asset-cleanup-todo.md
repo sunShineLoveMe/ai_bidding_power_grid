@@ -54,7 +54,7 @@
 | [x] | P1-2 Base + 泰昌专项增量门禁 | `docs/rag/runs/run_20260627_taichang_formal_asset_cleanup_gate_v2_summary.md`、`tests/rag/customer_liaoning_taichang_testset.jsonl` | 已按正式投标资料治理口径更新泰昌专项评测集：不再要求召回 `asset_path/bbox/parsed_outputs` 等内部字段，企业事实用例显式限定 `doc_role=enterprise_evidence`，河北豪乾参考稿只允许 `reference_only=true`。标准门禁 PASS：Base qwen3 Recall@5 96.7%、Top1 100%、串扰 0；泰昌专项 qwen3 Recall@5 100%、Top1 100%、禁用关键词 0、串扰 0 |
 | [x] | P1-3 图片资产检索与选图回归 | `tests/test_rag_asset_scoring.py`、`tests/test_docx_export.py` | 定向测试 12 passed；真实技术标/商务标 DOCX 中禁用题注命中为 0 |
 | [x] | P1-4 产品库/资信库页面展示回归 | `product_page.png`、`qualification_page.png`、`docs/development/runs/run_20260627_aliyun_browser_full_regression.md` | 阿里云 Chrome 真实页面复验通过；企业产品库、企业资信库用户可见页面未出现内部枚举、解析路径、英文/拼音资产名或旧题注字段 |
-| [~] | P1-5 上传入口新资产规则回归 | 待新增上传样本复验 | 生成/清洗 helper 已覆盖新资产正式标题策略；本轮未重新走上传入口新增样本 |
+| [x] | P1-5 上传入口新资产规则回归 | `backend/api/assets.py`、`backend/rag/display_names.py`、`tests/test_knowledge_asset_upload_payload.py`、`docs/rag/runs/run_20260627_upload_entry_formal_asset_regression.md` | 已走真实登录、真实 `/api/knowledge/assets/upload`、列表/详情和 `/api/knowledge/search/stream`；新上传测试资产返回 `泰昌MPP生产线资料`，用户侧禁用字段命中 0，RAG 可召回，测试资产已删除；定向测试 40 passed，标准增量门禁 PASS |
 | [x] | P1-6 导出任务 metadata 扩充 | `run_20260627_formal_docx_asset_cleanup_v2/summary.json`、`run_20260627_aliyun_browser_full_regression/export_tasks.json` | 本地和阿里云异步导出任务均已记录模板链路、题注清洗、候选/插入/失败、字段刷新和正式门禁；下载后的 DOCX XML 禁用表达命中 0。metadata 中保留追溯 source 属于后台审计字段，不进入正式正文 |
 
 ## P2：长期可维护能力
@@ -138,6 +138,16 @@ build_project_bid_markdown(volume_type=technical/business, with_images=true)
 - 自动化测试：题注/选图定向测试 `12 passed, 1 warning`。
 - 增量门禁：Base 未退化；泰昌专项仍因旧评测集期待内部资产索引 chunk 被召回而失败，作为 P1 评测集更新任务处理。
 - 本地结论：本地正式资产治理确认完成，可以进入阿里云测试环境发布与线上复验。
+
+### 2026-06-27 上传入口新资产规则回归
+
+- 总记录：`docs/rag/runs/run_20260627_upload_entry_formal_asset_regression.md`。
+- 代码收口：`backend/api/assets.py` 在上传/更新资产入库前生成正式中文标题、分类、标签、说明、`source_display_name` 和 `formal_caption`；`searchable_text` 不再拼入 `product_image/technical/production_capacity` 等内部枚举。
+- 用户侧清洗：`backend/rag/display_names.py` 补充证据类型中文标签，并将 SSE/问答返回的 `product_image/qualification_image` 映射为“产品图片/资信图片”。
+- 真实 API：本地登录后上传测试图 `泰昌MPP生产线_页面_9原图.png`，返回标题 `泰昌MPP生产线资料`、分类 `生产制造能力`、标签 `泰昌/生产制造能力`，列表/详情禁用字段命中 0。
+- 真实 stream：`泰昌MPP生产线资料可以作为技术标生产制造能力配图吗？` 召回 4 条资料、4 个图片资产、4 张图片，新上传资产被召回；SSE 和回答正文禁用字段命中 0。
+- 清理：测试资产 `b522d9fb-5011-43e7-840f-f9b85710b14e` 已从数据库删除，避免 1x1 回归样张进入正式产品库或 RAG。
+- 回归：`tests/test_knowledge_asset_upload_payload.py tests/test_rag_display_names.py tests/test_rag_retrieval.py` 为 40 passed；`run_20260627_upload_entry_formal_asset_gate` 标准增量门禁 PASS。
 
 ### 2026-06-27 阿里云线上真实浏览器全流程回归确认
 

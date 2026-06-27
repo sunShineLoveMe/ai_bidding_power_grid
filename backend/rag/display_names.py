@@ -42,14 +42,20 @@ CATEGORY_LABELS = {
 }
 
 EVIDENCE_TYPE_LABELS = {
+    "authorization": "授权文件",
+    "audit_report": "审计报告",
+    "bid_award_notice": "中标通知书",
     "business_license": "基础证照",
     "certification": "资质证书",
+    "contract": "合同证明",
     "enterprise_evidence": "企业证明材料",
     "finance": "财务资料",
     "green_low_carbon": "绿色低碳资料",
     "inspection_report": "检验报告",
     "personnel_certificate": "人员证书",
+    "product_image": "产品实物图片",
     "production_capacity": "生产制造能力",
+    "social_security": "社保证明",
     "testing_capacity": "试验检测能力",
     "project_performance": "项目业绩",
 }
@@ -59,6 +65,11 @@ TARGET_LIBRARY_LABELS = {
     "product_library": "产品库资料",
     "qualification_library": "资信库资料",
     "reference_template_library": "参考模板资料",
+}
+
+ASSET_TYPE_LABELS = {
+    "product_image": "产品图片",
+    "qualification_image": "资信图片",
 }
 
 SAFE_METADATA_KEYS = {
@@ -127,6 +138,8 @@ def sanitize_visible_text(value: Any) -> str:
     text = re.sub(r"\bproduction_capacity\b", "生产制造能力", text)
     text = re.sub(r"\btesting_capacity\b", "试验检测能力", text)
     text = re.sub(r"\bcertification\b", "资质证书", text)
+    text = re.sub(r"\bproduct_image\b", "产品图片", text)
+    text = re.sub(r"\bqualification_image\b", "资信图片", text)
     text = re.sub(r"[，。；;]?\s*该图片为正式整页/原图资产，不是\s*MinerU\s*局部切图[。.]?", "。", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
@@ -212,6 +225,8 @@ def sanitize_knowledge_assets(assets: list[dict[str, Any]]) -> list[dict[str, An
         safe_meta = sanitize_source_metadata(metadata, fallback_title=str(item.get("title") or ""))
         item["metadata"] = safe_meta
         item["title"] = safe_meta.get("source_display_name") or source_display_name(metadata, str(item.get("title") or ""))
+        if item.get("asset_type") in ASSET_TYPE_LABELS:
+            item["asset_type"] = ASSET_TYPE_LABELS[item["asset_type"]]
         item["category"] = (
             safe_meta.get("evidence_type_label")
             or category_display_name(item.get("category"))

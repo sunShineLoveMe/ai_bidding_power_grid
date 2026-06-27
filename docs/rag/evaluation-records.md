@@ -3218,3 +3218,46 @@ SG-PARTIAL-001 已让 partial 草稿可自动续写、转复核和批量续写�
 ### 结论
 
 标准增量回归门禁 PASS。泰昌专项已从旧口径失败恢复为正式资料治理口径下的 100% 召回，且禁用关键词命中率和跨资料域串扰均为 0。本轮不新增客户资料、不重入库；仅修复河北豪乾参考稿 metadata 和评测集口径。
+
+---
+
+## Run 49 — 产品库/资信库上传入口正式资产回归（2026-06-27）
+
+> 真实链路记录：`docs/rag/runs/run_20260627_upload_entry_formal_asset_regression.md`  
+> 门禁记录：`docs/rag/runs/run_20260627_upload_entry_formal_asset_gate_summary.md`
+
+### 触发原因
+
+泰昌正式资产治理完成后，需要验证后续客户从产品库/资信库页面新增上传图片或附件时，不会再次把 `页面_`、`原图`、`taichang_*`、`production_capacity`、`product_image`、`technical` 等内部字段带入用户侧展示、RAG 问答或正式标书配图链路。
+
+### 修复内容
+
+- `backend/api/assets.py` 在上传/更新资产入库前生成正式中文标题、分类、标签、说明、`source_display_name` 和正式题注策略。
+- 新增证据类型推断，覆盖营业执照、资质证书、检验报告、生产制造能力、试验检测能力、绿色低碳、项目业绩、财务、人员证书和产品图片。
+- `searchable_text` 排除内部枚举字段，并把卷册字段写为“技术标/资格文件/商务标”等中文词。
+- `backend/rag/display_names.py` 将用户侧资产返回中的 `product_image/qualification_image` 映射为“产品图片/资信图片”。
+
+### 真实验证
+
+| 验证项 | 结果 |
+| --- | --- |
+| 真实登录 | PASS，`POST /api/users/login` 使用 `admin` 登录成功 |
+| 真实上传 | PASS，`POST /api/knowledge/assets/upload` 上传测试图 `泰昌MPP生产线_页面_9原图.png` |
+| 上传返回 | PASS，标题 `泰昌MPP生产线资料`、分类 `生产制造能力`、标签 `泰昌/生产制造能力` |
+| 列表/详情 | PASS，用户侧禁用字段命中 0 |
+| 真实 stream | PASS，问题 `泰昌MPP生产线资料可以作为技术标生产制造能力配图吗？` 召回新上传资产，回答正文禁用字段命中 0 |
+| 测试资产清理 | PASS，测试资产已从数据库删除，详情接口返回“知识资产不存在” |
+| 自动化测试 | PASS，`tests/test_knowledge_asset_upload_payload.py tests/test_rag_display_names.py tests/test_rag_retrieval.py` 为 40 passed |
+
+### 门禁结果
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 246 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 567 ms |
+| 泰昌专项 | off | 90.0% | 100.0% | 0.867 | 3.3% | 0.0% | 327 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 0.973 | 0.0% | 0.0% | 691 ms |
+
+### 结论
+
+P1-5 上传入口新资产规则回归通过。后续新上传资产默认以正式中文字段入库，RAG 主链路和用户侧 SSE 不再暴露内部枚举或解析追溯痕迹。本轮只删除回归测试资产，不修改泰昌正式资产数据。
