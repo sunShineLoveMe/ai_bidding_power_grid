@@ -44,18 +44,18 @@
 | [x] | P0-7 清理不适合入标书正文的图片资产 | `scripts/rag/repair_taichang_rag_source_display.py`、执行报告 | 已将 mock/test、MinerU 局部切图、资产索引中间 chunk、解析路径类 chunk 标为 `exclude_from_rag=true` / `rag_visibility=internal_only` / `allowed_for_bid=false` 或等价隔离策略，不参与正式问答和标书选图 |
 | [~] | P0-8 重新生成泰昌正式图片资产 | 本轮以真实库修复和隔离为主 | 未重新批量渲染全部原件；现有正式整页/原图资产继续保留并完成正式展示治理。历史 staging payload 仍保留解析中间产物问题，后续新增资料应按 SOP 重新生成整页正式资产 |
 | [x] | P0-9 真实导出技术标/商务标复验 | `docs/development/runs/run_20260627_formal_docx_asset_cleanup_v2/` | 已走 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`；技术标选图 16、商务标选图 5，字段刷新均 `refreshed`，DOCX XML 审计 `forbidden_hits=[]`、`caption_page_hits=[]` |
-| [!] | P0-10 阿里云线上同步与复验 | 待云端发布/执行记录 | 本轮完成本地真实数据库、真实 API 和真实 DOCX 链路；尚未在阿里云线上执行同等修复脚本和浏览器导出复验，不能关闭线上验收 |
+| [x] | P0-10 阿里云线上同步与复验 | `docs/development/runs/run_20260627_aliyun_browser_full_regression.md`、`export_tasks.json`、线上执行报告 | 阿里云已执行正式资产修复和来源显示修复；修复后审计真实图片资产 596、知识文档 77、文档分块 6347 的正式可见/RAG 可见问题均为 0。Chrome 真实回归覆盖企业知识库、产品库、资信库、知识库助手、6 类 stream 问答、技术标/商务标 DOCX 导出和下载文件 XML 审计，用户可见禁用字段命中 0 |
 
 ## P1：不影响现有功能的回归收口
 
 | 状态 | 任务 | 交付物 | 验收口径 |
 | --- | --- | --- | --- |
-| [~] | P1-1 企业知识库问答回归 | 本地真实 stream 抽样记录 | 已抽样真实 `/api/knowledge/search/stream`，返回内容未暴露 `图示：/原图/页面_/asset_path/parsed_outputs/source_domain/target_library/specs/file_name` 等内部字段；尚未完成 6 类全量专项 stream 抽样 |
+| [x] | P1-1 企业知识库问答回归 | `docs/development/runs/run_20260627_aliyun_browser_full_regression.md`、本地真实 stream 抽样记录 | 本地和阿里云均已抽样真实 `/api/knowledge/search/stream`；CPVC 检验报告参数、MPP 检验报告、生产制造能力、试验检测设备、资质证书、绿色低碳资料 6 类问答 HTTP 200，禁用字段命中 0 |
 | [!] | P1-2 Base + 泰昌专项增量门禁 | `docs/rag/runs/run_20260627_taichang_formal_asset_cleanup_gate_summary.md` | 已执行门禁：Base off/qwen3 均 96.7%/100%/0 串扰；泰昌专项失败。失败原因是旧专项用例仍期待历史资产索引/解析中间 chunk 被召回，而本轮已按正式投标要求主动隔离这些内部 chunk；需更新专项评测集后复跑 |
 | [x] | P1-3 图片资产检索与选图回归 | `tests/test_rag_asset_scoring.py`、`tests/test_docx_export.py` | 定向测试 12 passed；真实技术标/商务标 DOCX 中禁用题注命中为 0 |
-| [~] | P1-4 产品库/资信库页面展示回归 | 待前端浏览器复验 | API/RAG 输出已做公开字段脱敏和中文化；本轮未执行产品库/资信库页面真实浏览器截图复验 |
+| [x] | P1-4 产品库/资信库页面展示回归 | `product_page.png`、`qualification_page.png`、`docs/development/runs/run_20260627_aliyun_browser_full_regression.md` | 阿里云 Chrome 真实页面复验通过；企业产品库、企业资信库用户可见页面未出现内部枚举、解析路径、英文/拼音资产名或旧题注字段 |
 | [~] | P1-5 上传入口新资产规则回归 | 待新增上传样本复验 | 生成/清洗 helper 已覆盖新资产正式标题策略；本轮未重新走上传入口新增样本 |
-| [~] | P1-6 导出任务 metadata 扩充 | `run_20260627_formal_docx_asset_cleanup_v2/summary.json` | 本地 run 已记录模板链路、题注清洗、候选/选中、字段刷新和阻断词扫描；异步导出任务 metadata 与阿里云同步状态仍需补齐 |
+| [x] | P1-6 导出任务 metadata 扩充 | `run_20260627_formal_docx_asset_cleanup_v2/summary.json`、`run_20260627_aliyun_browser_full_regression/export_tasks.json` | 本地和阿里云异步导出任务均已记录模板链路、题注清洗、候选/插入/失败、字段刷新和正式门禁；下载后的 DOCX XML 禁用表达命中 0。metadata 中保留追溯 source 属于后台审计字段，不进入正式正文 |
 
 ## P2：长期可维护能力
 
@@ -138,6 +138,19 @@ build_project_bid_markdown(volume_type=technical/business, with_images=true)
 - 自动化测试：题注/选图定向测试 `12 passed, 1 warning`。
 - 增量门禁：Base 未退化；泰昌专项仍因旧评测集期待内部资产索引 chunk 被召回而失败，作为 P1 评测集更新任务处理。
 - 本地结论：本地正式资产治理确认完成，可以进入阿里云测试环境发布与线上复验。
+
+### 2026-06-27 阿里云线上真实浏览器全流程回归确认
+
+- 总记录：`docs/development/runs/run_20260627_aliyun_browser_full_regression.md`。
+- 线上服务：`http://8.160.187.226`，Chrome 真实登录 `admin` 成功；`/api/health` 返回 `status=ok`。
+- 线上修复：执行 `repair_taichang_formal_asset_display.py --execute`，扫描图片资产 596，变更 97，重写标题 51，抑制旧题注 97；执行 `repair_taichang_rag_source_display.py --execute`，扫描知识文档 77、分块 6347，更新文档 2、分块 10。
+- 线上审计：`audit_taichang_formal_assets.py` 显示真实图片资产、知识文档、文档分块问题数均为 0；历史 staging payload 仍为解析中间产物问题，不进入正式展示/RAG/DOCX。
+- 页面回归：企业知识库、企业产品库、企业资信库、知识库助手 CPVC 参数问答均未出现 `图示：`、`原图`、`页面_`、内部枚举、解析路径或 API 资产路径。
+- 真实 stream：CPVC 检验报告参数、MPP 检验报告、生产制造能力、试验检测设备、资质证书、绿色低碳资料 6 类同源流式问答均 HTTP 200，禁用字段命中 0。
+- 真实 DOCX：阿里云技术标、商务标均通过 `download-docx -> Celery -> build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`；技术标插图 24、商务标插图 24，失败 0，字段刷新均 `refreshed`。
+- 文件级审计：下载后的 `aliyun_technical_export.docx` 和 `aliyun_business_export.docx` 解包扫描 `word/*.xml`，禁用表达命中 0。
+- 正式门禁：当前新疆 10kV 导线项目仍有 12 个正式阻断项，导出为 `draft`，其中 `T-000` 明确提示泰昌 CPVC/MPP 资料与导线包不匹配；该阻断符合真实投标场景，不能绕过。
+- 阿里云结论：测试环境正式资产治理主链路通过，可以关闭本轮 P0/P1 页面与 DOCX 线上验收；正式投标前仍需客户补齐确认字段并确认目标产品适配。
 
 ## 当前执行顺序
 

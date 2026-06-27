@@ -575,3 +575,19 @@
 - 本次真实验收结果：状态 `PASS`，无 failures；技术标 `template_id=technical_bid_standard`，商务标 `template_id=business_bid_standard`；两份文件字段刷新均 `refreshed`；目录页码最大字号 `9pt`；页脚最大字号 `9pt`；技术标题注 `27` 条、商务标题注 `18` 条，不合规题注命中 `0`。
 - 自动化回归：`.venv/bin/python -m pytest tests/test_docx_export.py tests/test_celery_export_tasks.py -q`，结果 `56 passed, 7 warnings`。
 - 产品资料支撑度结论：泰昌现有资料能支撑 CPVC/MPP 电缆保护管的基础技术响应和资质证明，但产品维度仍偏薄；若投标对象是 `10kV架空绝缘导线`，当前企业事实资料明显不匹配，不能用电缆保护管资料硬撑导线技术标，需客户补充目标产品参数、型式试验/检验报告、生产检测设备、工艺质量控制和同类业绩资料。
+
+### 2026-06-27 阿里云线上 DOCX 图文导出与题注清洗复验记录
+
+- 背景：泰昌正式资料资产中文化和旧式图片题注治理已同步到阿里云测试环境，需要按线上真实用户链路验证技术标、商务标图文导出质量。
+- 真实浏览器链路：Chrome 访问 `http://8.160.187.226/login`，账号 `admin` 登录后，从同源上下文调用 `download-docx`，分别传 `volumeType=technical/business`、`withImages=true`，轮询异步任务完成并下载 DOCX。
+- 真实项目：`580b8c82-42c2-4a51-a0d2-17b60afa22b9`，国家电网有限公司 2026 年西北、西藏区域第一次联合采购 10kV 电力电缆、架空绝缘导线协议库存公开招标采购项目。
+- 导出任务：
+  - 技术标：`b42be69d-5ea1-4050-8b2d-629603a1eff8`，输出 `泰昌_SL265A_技术投标文件_20260627_图文.docx`。
+  - 商务标：`1acdcae6-8239-4f78-80c6-a5cd030285a3`，输出 `泰昌_SL265A_商务投标文件_20260627_图文.docx`。
+- 本次真实验收结果：
+  - 技术标：`template_id=technical_bid_standard`，导出 completed，图片候选/插入/失败/跳过为 `26/24/0/2`，字段刷新 `refreshed`，`manual_refresh_required=false`。
+  - 商务标：`template_id=business_bid_standard`，导出 completed，图片候选/插入/失败/跳过为 `24/24/0/0`，字段刷新 `refreshed`，`manual_refresh_required=false`。
+  - 下载后的技术标和商务标 DOCX 解包扫描 `word/*.xml`，`图示：`、`原图`、`页面_`、`parsed_outputs`、`taichang_`、`/api/bidding/knowledge/assets` 等禁用表达命中均为 `0`。
+  - 技术标任务 metadata 中保留旧 `source` 作为后台追溯，实际题注已正式化为 `资料：MPP电缆保护管检验报告`、`资料：试验设备台账`、`资料：生产制造能力` 等中文表达；正式 DOCX 正文未暴露旧题注。
+- 当前导出模式：`draft`。正式检查仍有 12 个阻断项，其中包含客户确认字段缺失和产品适配 `T-000`；该阻断符合真实投标场景，不应绕过。
+- 运行记录：`docs/development/runs/run_20260627_aliyun_browser_full_regression.md`、`docs/development/runs/run_20260627_aliyun_browser_full_regression/export_tasks.json`。
