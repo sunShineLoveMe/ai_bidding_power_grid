@@ -1,6 +1,6 @@
 # 阿里云 Ubuntu 单 ECS 测试部署操作清单
 
-更新日期：2026-06-25  
+更新日期：2026-06-27
 适用环境：阿里云 ECS 单企业测试环境  
 当前实例：`launch-advisor-20260604`  
 公网 IP：`8.160.187.226`  
@@ -29,6 +29,8 @@
 3. 正式访问入口优先走前端 Nginx，后续再接域名和 HTTPS。
 4. 所有 API Key、数据库密码、登录密钥只写服务器 `.env`，不得提交 Git。
 5. DOCX/PDF 正式验收必须后续单独跑导出链路和字段刷新检查。
+6. 代码发布前必须先确认服务器 Git remote 名称；当前服务器使用 `origin` 指向 Gitee，本地开发机可能使用 `gitee`。
+7. 客户验收、前端缓存异常、版本不一致排障时，优先使用本文 `4.1.6` 的“强制干净发布 SOP”；但任何场景都禁止执行 `docker compose down -v` 或删除数据 volume。
 
 ## 0. 阿里云控制台准备
 
@@ -264,15 +266,21 @@ cd /opt/ai-bidding/ai_bidding_power_grid
 
 git status --short
 git branch --show-current
-git fetch origin feat/aliyun-test-readiness
-git pull --ff-only origin feat/aliyun-test-readiness
+git remote -v
+GIT_REMOTE=origin
+git fetch "${GIT_REMOTE}" feat/aliyun-test-readiness
+git checkout feat/aliyun-test-readiness
+git pull --ff-only "${GIT_REMOTE}" feat/aliyun-test-readiness
 git log -1 --oneline
+git rev-parse --short=12 HEAD
 ```
 
 验收口径：
 
 - `git branch --show-current` 必须是 `feat/aliyun-test-readiness`；
 - `git log -1 --oneline` 必须等于或晚于本地刚推送的 commit；
+- `git rev-parse --short=12 HEAD` 必须等于发布负责人提供的目标 commit 短哈希；
+- 当前阿里云服务器的 remote 名称是 `origin`；如果其他环境不是 `origin`，先用 `git remote -v` 确认后再替换 `GIT_REMOTE`；
 - 如果服务器有未提交改动，先判断是否为 `.env`、数据文件或临时热修复。不要直接 `git reset --hard`，避免覆盖线上排障痕迹和客户资料。
 
 #### 4.1.3 前端改动发布
@@ -329,19 +337,20 @@ docker compose build --no-cache frontend
 docker compose up -d --force-recreate frontend
 ```
 
-如果仍怀疑旧镜像残留，可只删除前端镜像，禁止删除数据库 volume：
+如果仍怀疑旧镜像残留，可只删除前端容器和前端镜像，禁止删除数据库 volume：
 
 ```bash
-docker compose down frontend
+docker compose stop frontend
+docker compose rm -f frontend
 docker image rm -f ai-bidding-frontend:local
 docker builder prune -f
 docker compose build frontend
-docker compose up -d frontend
+docker compose up -d --force-recreate frontend
 ```
 
 注意：
 
-- `docker compose down frontend` 只会移除前端容器；提示 `Network ... Resource is still in use` 属于正常，因为 backend/postgres/redis 仍在使用网络；
+- `docker compose stop frontend && docker compose rm -f frontend` 只会停止并移除前端容器，不影响数据库和 Redis；
 - 不要执行 `docker compose down -v`，会删除 volume，存在清空数据库或存储数据风险；
 - 不要删除 `postgres_data`、`redis`、`storage` 等数据 volume。
 
@@ -431,8 +440,16 @@ docker compose logs --tail=100 celery-worker
 cd /opt/ai-bidding/ai_bidding_power_grid
 
 git fetch origin feat/aliyun-test-readiness
+git checkout feat/aliyun-test-readiness
 git pull --ff-only origin feat/aliyun-test-readiness
 git log -1 --oneline
+git rev-parse --short=12 HEAD
+
+unset BUILD_ID BUILD_COMMIT BUILD_BRANCH BUILD_TIME
+export BUILD_COMMIT="$(git rev-parse --short=12 HEAD)"
+export BUILD_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+export BUILD_TIME="$(date -Iseconds)"
+export BUILD_ID="$(date +%Y%m%d%H%M%S)-${BUILD_COMMIT}"
 
 docker compose build backend frontend
 docker compose up -d --force-recreate backend celery-worker frontend
@@ -444,10 +461,109 @@ docker compose ps
 ```bash
 curl -fsS http://127.0.0.1:3012/api/health
 curl -fsS http://127.0.0.1:8080/api/health
+curl -fsS http://127.0.0.1:8080/api/ready
+curl -fsS http://127.0.0.1:8080/build-info.json
 curl -fsS -I http://127.0.0.1:8080/
 ```
 
-#### 4.1.6 发布前后必查清单
+#### 4.1.6 客户验收或缓存排障强制干净发布 SOP
+
+适用场景：
+
+- 线上页面疑似仍运行旧前端包；
+- `/build-info.json`、`/api/health` 或浏览器 console 显示前后端 commit 不一致；
+- 客户验收前需要确认容器、镜像和浏览器缓存都不影响结果；
+- 前后端都改动，且本次发布必须排除 Docker 构建缓存影响。
+
+执行前确认：
+
+```bash
+cd /opt/ai-bidding/ai_bidding_power_grid
+git remote -v
+git branch --show-current
+git status --short
+git rev-parse --short=12 HEAD
+```
+
+如未到目标 commit，先拉取：
+
+```bash
+GIT_REMOTE=origin
+git fetch "${GIT_REMOTE}" feat/aliyun-test-readiness
+git checkout feat/aliyun-test-readiness
+git pull --ff-only "${GIT_REMOTE}" feat/aliyun-test-readiness
+git rev-parse --short=12 HEAD
+```
+
+设置前端构建版本变量：
+
+```bash
+unset BUILD_ID BUILD_COMMIT BUILD_BRANCH BUILD_TIME
+export BUILD_COMMIT="$(git rev-parse --short=12 HEAD)"
+export BUILD_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+export BUILD_TIME="$(date -Iseconds)"
+export BUILD_ID="$(date +%Y%m%d%H%M%S)-${BUILD_COMMIT}"
+echo "${BUILD_ID}"
+```
+
+停止并移除可重建服务的旧容器：
+
+```bash
+docker compose stop frontend backend celery-worker
+docker compose rm -f frontend backend celery-worker
+```
+
+清理 Docker 构建缓存并无缓存重建：
+
+```bash
+docker builder prune -f
+docker compose build --no-cache backend frontend
+```
+
+如果 `celery-worker` 在当前 Compose 中单独定义 build，可补充执行；如果提示无需构建或复用 backend 镜像，可忽略：
+
+```bash
+docker compose build --no-cache celery-worker
+```
+
+强制重建启动：
+
+```bash
+docker compose up -d --force-recreate --remove-orphans backend celery-worker frontend
+docker compose ps
+```
+
+版本和健康检查：
+
+```bash
+TARGET_COMMIT="$(git rev-parse --short=12 HEAD)"
+echo "target=${TARGET_COMMIT}"
+
+curl -fsS http://127.0.0.1:3012/api/health
+curl -fsS http://127.0.0.1:3012/api/ready
+curl -fsS http://127.0.0.1:${FRONTEND_HTTP_PORT:-80}/build-info.json || curl -fsS http://127.0.0.1:8080/build-info.json
+docker compose exec frontend sh -lc 'cat /usr/share/nginx/html/build-info.json'
+```
+
+验收口径：
+
+- `git rev-parse --short=12 HEAD` 等于目标 commit；
+- `/api/health` 的 `version.commit` 等于目标 commit；
+- `/build-info.json` 的 `commit` 等于目标 commit；
+- `docker compose ps` 中 backend、celery-worker、frontend 均为 `Up`，backend 健康检查通过；
+- 浏览器使用无痕窗口或 DevTools -> Network -> Disable cache -> Empty Cache and Hard Reload 后再验收页面。
+
+禁止操作：
+
+```bash
+docker compose down -v
+docker volume rm postgres_data
+docker volume rm app_uploads app_outputs app_storage app_backups app_parsed_outputs
+git reset --hard
+git clean -fdx
+```
+
+#### 4.1.7 发布前后必查清单
 
 | 状态 | 任务 | 验收口径 | 备注 |
 | --- | --- | --- | --- |
@@ -907,11 +1023,12 @@ docker compose exec frontend sh -lc \
 如果源码有、静态包没有，说明构建上下文或 Dockerfile 没吃到最新文件，需要删除前端镜像后重建：
 
 ```bash
-docker compose down frontend
+docker compose stop frontend
+docker compose rm -f frontend
 docker image rm -f ai-bidding-frontend:local
 docker builder prune -f
 docker compose build frontend
-docker compose up -d frontend
+docker compose up -d --force-recreate frontend
 ```
 
 如果源码有、静态包也有，但页面仍旧：

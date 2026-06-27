@@ -8,7 +8,7 @@
 
 **维护团队：** AI 标书项目研发与运维团队
 
-**最后复核：** 2026-06-24
+**最后复核：** 2026-06-27
 
 **上游实施记录：** [阿里云 Ubuntu 单 ECS 测试部署操作清单](aliyun-ubuntu-single-ecs-deploy-checklist-20260622.md)
 
@@ -18,6 +18,7 @@
 
 - 新接手人员快速理解云上架构、代码来源、数据位置和安全边界；
 - 完成首次部署、日常前端发布、后端发布和全栈发布；
+- 完成客户验收前的强制干净发布，排除旧容器、旧镜像和浏览器缓存影响；
 - 在不覆盖客户数据的前提下处理服务器本地改动和 Git 拉取失败；
 - 完成数据库初始化、健康检查、日志排查、备份和版本回滚；
 - 按统一格式记录发布结果，减少“服务器代码、Git 提交、容器镜像不一致”的问题。
@@ -289,19 +290,22 @@ git rev-parse HEAD | tee /tmp/ai-bidding-before-release.commit
 ### 7.2 拉取目标版本
 
 ```bash
-git fetch origin feat/aliyun-test-readiness
+git remote -v
+GIT_REMOTE=origin
+git fetch "${GIT_REMOTE}" feat/aliyun-test-readiness
 git checkout feat/aliyun-test-readiness
-git pull --ff-only origin feat/aliyun-test-readiness
+git pull --ff-only "${GIT_REMOTE}" feat/aliyun-test-readiness
 git log -1 --oneline
+git rev-parse --short=12 HEAD
 ```
 
-当前服务器克隆仓库使用 `origin` 指向 Gitee。若后续环境的 remote 名不同，先用以下命令确认并替换命令中的 `origin`：
+当前服务器克隆仓库使用 `origin` 指向 Gitee。若后续环境的 remote 名不同，先用以下命令确认并替换 `GIT_REMOTE`：
 
 ```bash
 git remote -v
 ```
 
-构建前必须确认 `git log -1 --oneline` 与开发人员提供的 commit 一致。
+构建前必须确认 `git log -1 --oneline` 和 `git rev-parse --short=12 HEAD` 与开发人员提供的 commit 一致。若有人误把本地开发机的 remote 名 `gitee` 复制到服务器，而服务器只有 `origin`，会出现 `fatal: 'gitee' does not appear to be a git repository`，此时应改用 `origin`，不要重新 clone。
 
 ### 7.3 前端发布
 
@@ -365,6 +369,8 @@ docker compose config | sed -n '/frontend:/,/healthcheck:/p' | grep BUILD -n || 
 ```
 
 浏览器使用无痕窗口验证，或在 DevTools 中禁用缓存后强制刷新。
+
+如果属于客户验收前发布、线上空表/旧页面排障或前后端 commit 不一致，直接使用第 7.6 节“强制干净发布”，不要只重启 frontend。
 
 ### 7.4 后端发布
 
@@ -439,6 +445,12 @@ docker compose logs --tail=100 celery-worker
 ### 7.5 前后端联合发布
 
 ```bash
+unset BUILD_ID BUILD_COMMIT BUILD_BRANCH BUILD_TIME
+export BUILD_COMMIT="$(git rev-parse --short=12 HEAD)"
+export BUILD_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+export BUILD_TIME="$(date -Iseconds)"
+export BUILD_ID="$(date +%Y%m%d%H%M%S)-${BUILD_COMMIT}"
+
 docker compose build backend frontend
 docker compose up -d --force-recreate backend celery-worker frontend
 docker compose ps
@@ -450,10 +462,98 @@ docker compose ps
 curl -fsS http://127.0.0.1:3012/api/health
 curl -fsS http://127.0.0.1:8080/api/health
 curl -fsS http://127.0.0.1:8080/api/ready
+curl -fsS http://127.0.0.1:8080/build-info.json
 curl -fsS -I http://127.0.0.1:8080/
 ```
 
-### 7.6 公网 80 入口切换
+### 7.6 客户验收前强制干净发布
+
+该流程用于客户验收、缓存排障、线上页面疑似运行旧包、`/build-info.json` 与 `/api/health` commit 不一致等场景。它会删除并重建 `frontend/backend/celery-worker` 容器，清理 Docker build cache，并使用 `--no-cache` 重新构建镜像。
+
+该流程不会删除 PostgreSQL、Redis 或业务数据 volume。禁止把它改成 `docker compose down -v`。
+
+1. 确认目标代码版本：
+
+```bash
+cd /opt/ai-bidding/ai_bidding_power_grid
+git remote -v
+GIT_REMOTE=origin
+git fetch "${GIT_REMOTE}" feat/aliyun-test-readiness
+git checkout feat/aliyun-test-readiness
+git pull --ff-only "${GIT_REMOTE}" feat/aliyun-test-readiness
+git status --short
+git rev-parse --short=12 HEAD
+git log -1 --oneline
+```
+
+2. 设置前端构建版本变量：
+
+```bash
+unset BUILD_ID BUILD_COMMIT BUILD_BRANCH BUILD_TIME
+export BUILD_COMMIT="$(git rev-parse --short=12 HEAD)"
+export BUILD_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+export BUILD_TIME="$(date -Iseconds)"
+export BUILD_ID="$(date +%Y%m%d%H%M%S)-${BUILD_COMMIT}"
+echo "${BUILD_ID}"
+```
+
+3. 停止并移除可重建服务旧容器：
+
+```bash
+docker compose stop frontend backend celery-worker
+docker compose rm -f frontend backend celery-worker
+```
+
+4. 清理 Docker 构建缓存并无缓存重建：
+
+```bash
+docker builder prune -f
+docker compose build --no-cache backend frontend
+```
+
+如果 `celery-worker` 在当前 Compose 中有单独 build 配置，可补充执行；若它复用 backend 镜像或提示无需构建，可忽略：
+
+```bash
+docker compose build --no-cache celery-worker
+```
+
+5. 强制重建启动：
+
+```bash
+docker compose up -d --force-recreate --remove-orphans backend celery-worker frontend
+docker compose ps
+```
+
+6. 验证版本和健康状态：
+
+```bash
+TARGET_COMMIT="$(git rev-parse --short=12 HEAD)"
+echo "target=${TARGET_COMMIT}"
+
+curl -fsS http://127.0.0.1:3012/api/health
+curl -fsS http://127.0.0.1:3012/api/ready
+curl -fsS http://127.0.0.1:${FRONTEND_HTTP_PORT:-80}/build-info.json || curl -fsS http://127.0.0.1:8080/build-info.json
+docker compose exec frontend sh -lc 'cat /usr/share/nginx/html/build-info.json'
+```
+
+验收口径：
+
+- Git HEAD、`/api/health` 的 `version.commit`、`/build-info.json` 的 `commit` 三者一致；
+- backend、celery-worker、frontend 均为 `Up`，backend health 通过；
+- 浏览器使用无痕窗口访问，或 DevTools -> Network -> Disable cache -> Empty Cache and Hard Reload 后验证；
+- 产品库、资信库、历史记录、DOCX 导出等本次改动路径全部真实点击验证。
+
+禁止操作：
+
+```bash
+docker compose down -v
+docker volume rm postgres_data
+docker volume rm app_uploads app_outputs app_storage app_backups app_parsed_outputs
+git reset --hard
+git clean -fdx
+```
+
+### 7.7 公网 80 入口切换
 
 正式演示入口需要使用 `http://8.160.187.226` 时，先确认阿里云安全组放通 TCP `80`，再执行：
 
@@ -468,7 +568,7 @@ curl -fsS -I http://127.0.0.1/
 
 若继续使用测试端口，保持 `FRONTEND_HTTP_PORT=8080` 或不设置该变量，并告知客户入口为 `http://8.160.187.226:8080`。
 
-### 7.7 数据库迁移发布
+### 7.8 数据库迁移发布
 
 数据库变更属于高风险操作。必须先执行第 10 节数据库备份，并确认迁移脚本支持重复执行。
 
