@@ -3185,3 +3185,36 @@ SG-PARTIAL-001 已让 partial 草稿可自动续写、转复核和批量续写�
 ### 结论
 
 阿里云测试环境泰昌正式资料资产中文化、RAG 问答展示、产品库/资信库页面展示和技术/商务分册 DOCX 图文导出主链路已通过真实浏览器回归。本轮 P0/P1 线上验收关闭；后续仍需更新泰昌专项旧评测集，避免继续要求召回已被正式隔离的解析中间 chunk。
+
+---
+
+## Run 48 — 泰昌专项评测集正式资料口径更新与增量门禁闭环（2026-06-27）
+
+> 门禁记录：`docs/rag/runs/run_20260627_taichang_formal_asset_cleanup_gate_v2_summary.md`
+> 豪乾 metadata 修复：`docs/rag/runs/run_20260627_haoqian_reference_metadata_repair.md`
+
+### 触发原因
+
+泰昌正式资料资产治理后，旧专项评测集仍要求召回历史图片资产索引、`asset_path`、`bbox`、`display_contexts`、`parsed_outputs` 等解析内部字段。按正式投标场景，这些内容已被隔离且不得进入用户可见问答或标书正文，因此需要更新评测集口径并重新跑标准门禁。
+
+### 修复内容
+
+- 修复河北豪乾参考稿 metadata：2 个参考文档、70 个 chunk 已统一为 `source_domain=reference_template`、`reference_only=true`、`fact_source_allowed_for_enterprise=false`、`citation_policy=reference_style_only`。
+- 更新 `tests/rag/customer_liaoning_taichang_testset.jsonl`：
+  - 企业事实用例显式增加 `doc_role=enterprise_evidence`，避免“响应”等字样被自动推断为 `self_phrase`；
+  - 资产用例不再以内部字段为成功条件，改为验证正式中文资料、泰昌企业事实和禁用内部字段；
+  - 河北豪乾参考稿用例只验证格式/目录/章节结构参考，不再允许作为泰昌事实来源；
+  - 绿色低碳、生产制造、试验检测等 hard case 问题改为贴近当前正式资料标题和用户真实问法。
+
+### 门禁结果
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 269 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 620 ms |
+| 泰昌专项 | off | 93.3% | 100.0% | 0.917 | 3.3% | 0.0% | 351 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 0.973 | 0.0% | 0.0% | 714 ms |
+
+### 结论
+
+标准增量回归门禁 PASS。泰昌专项已从旧口径失败恢复为正式资料治理口径下的 100% 召回，且禁用关键词命中率和跨资料域串扰均为 0。本轮不新增客户资料、不重入库；仅修复河北豪乾参考稿 metadata 和评测集口径。

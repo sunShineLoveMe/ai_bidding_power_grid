@@ -51,7 +51,7 @@
 | 状态 | 任务 | 交付物 | 验收口径 |
 | --- | --- | --- | --- |
 | [x] | P1-1 企业知识库问答回归 | `docs/development/runs/run_20260627_aliyun_browser_full_regression.md`、本地真实 stream 抽样记录 | 本地和阿里云均已抽样真实 `/api/knowledge/search/stream`；CPVC 检验报告参数、MPP 检验报告、生产制造能力、试验检测设备、资质证书、绿色低碳资料 6 类问答 HTTP 200，禁用字段命中 0 |
-| [!] | P1-2 Base + 泰昌专项增量门禁 | `docs/rag/runs/run_20260627_taichang_formal_asset_cleanup_gate_summary.md` | 已执行门禁：Base off/qwen3 均 96.7%/100%/0 串扰；泰昌专项失败。失败原因是旧专项用例仍期待历史资产索引/解析中间 chunk 被召回，而本轮已按正式投标要求主动隔离这些内部 chunk；需更新专项评测集后复跑 |
+| [x] | P1-2 Base + 泰昌专项增量门禁 | `docs/rag/runs/run_20260627_taichang_formal_asset_cleanup_gate_v2_summary.md`、`tests/rag/customer_liaoning_taichang_testset.jsonl` | 已按正式投标资料治理口径更新泰昌专项评测集：不再要求召回 `asset_path/bbox/parsed_outputs` 等内部字段，企业事实用例显式限定 `doc_role=enterprise_evidence`，河北豪乾参考稿只允许 `reference_only=true`。标准门禁 PASS：Base qwen3 Recall@5 96.7%、Top1 100%、串扰 0；泰昌专项 qwen3 Recall@5 100%、Top1 100%、禁用关键词 0、串扰 0 |
 | [x] | P1-3 图片资产检索与选图回归 | `tests/test_rag_asset_scoring.py`、`tests/test_docx_export.py` | 定向测试 12 passed；真实技术标/商务标 DOCX 中禁用题注命中为 0 |
 | [x] | P1-4 产品库/资信库页面展示回归 | `product_page.png`、`qualification_page.png`、`docs/development/runs/run_20260627_aliyun_browser_full_regression.md` | 阿里云 Chrome 真实页面复验通过；企业产品库、企业资信库用户可见页面未出现内部枚举、解析路径、英文/拼音资产名或旧题注字段 |
 | [~] | P1-5 上传入口新资产规则回归 | 待新增上传样本复验 | 生成/清洗 helper 已覆盖新资产正式标题策略；本轮未重新走上传入口新增样本 |
@@ -151,6 +151,15 @@ build_project_bid_markdown(volume_type=technical/business, with_images=true)
 - 文件级审计：下载后的 `aliyun_technical_export.docx` 和 `aliyun_business_export.docx` 解包扫描 `word/*.xml`，禁用表达命中 0。
 - 正式门禁：当前新疆 10kV 导线项目仍有 12 个正式阻断项，导出为 `draft`，其中 `T-000` 明确提示泰昌 CPVC/MPP 资料与导线包不匹配；该阻断符合真实投标场景，不能绕过。
 - 阿里云结论：测试环境正式资产治理主链路通过，可以关闭本轮 P0/P1 页面与 DOCX 线上验收；正式投标前仍需客户补齐确认字段并确认目标产品适配。
+
+### 2026-06-27 泰昌专项评测集与豪乾参考稿 metadata 收口
+
+- 总记录：`docs/rag/runs/run_20260627_taichang_formal_asset_cleanup_gate_v2_summary.md`。
+- 触发原因：旧泰昌专项评测集仍期待历史资产索引 chunk、`asset_path/bbox/display_contexts` 等解析内部字段；这些内容已按正式投标要求隔离，不应再作为召回成功条件。
+- 数据修复：执行 `scripts/rag/repair_haoqian_reference_metadata.py --execute`，修复河北豪乾参考文档 2 个、chunk 70 个；统一为 `source_domain=reference_template`、`reference_only=true`、`fact_source_allowed_for_enterprise=false`、`citation_policy=reference_style_only`。
+- 评测集修复：更新 `tests/rag/customer_liaoning_taichang_testset.jsonl`，企业事实用例显式加 `doc_role=enterprise_evidence`，正式资产用例改为检查中文正式资料口径和禁用内部字段，豪乾参考用例改为检查参考稿边界。
+- 标准门禁：`run_20260627_taichang_formal_asset_cleanup_gate_v2` PASS。Base qwen3 Recall@5 96.7%、Top1 100%、跨 doc_role 串扰 0；泰昌专项 qwen3 Recall@5 100%、Top1 100%、禁用关键词 0、跨 doc_role 串扰 0。
+- 结论：本轮正式资料资产治理的长期 RAG 回归门禁已闭环；剩余 P1-5 新上传入口样本复验和 P2 SOP 固化可作为后续增强项。
 
 ## 当前执行顺序
 
