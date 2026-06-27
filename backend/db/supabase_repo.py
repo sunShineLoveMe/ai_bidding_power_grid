@@ -2765,6 +2765,31 @@ def get_knowledge_document_detail(document_id: str) -> dict[str, Any] | None:
     }
 
 
+KNOWLEDGE_ASSET_LIST_COLUMNS = (
+    "id,title,description,category,asset_type,public_url,source_url,file_name,mime_type,"
+    "storage_path,license,attribution,applicable_volumes,applicable_sections,tags,specs,"
+    "metadata,status,is_synthetic,anonymized,created_at"
+)
+
+KNOWLEDGE_ASSET_STATS_COLUMNS = "id,status,is_synthetic,category,tags,specs,metadata,asset_type"
+
+
+def _asset_type_for_library_type(library_type: str | None) -> str | None:
+    if library_type == "qualification":
+        return "qualification_image"
+    if library_type == "product":
+        return "product_image"
+    return None
+
+
+def _apply_knowledge_asset_filters(query: Any, asset_type: str | None = None, category: str | None = None):
+    if asset_type:
+        query = query.eq("asset_type", asset_type)
+    if category:
+        query = query.eq("category", category)
+    return query
+
+
 def list_knowledge_assets(asset_type: str | None = None, category: str | None = None) -> list[dict[str, Any]]:
     client = get_supabase_client()
     query = (
@@ -2772,12 +2797,95 @@ def list_knowledge_assets(asset_type: str | None = None, category: str | None = 
         .select("*")
         .order("created_at", desc=True)
     )
-    if asset_type:
-        query = query.eq("asset_type", asset_type)
-    if category:
-        query = query.eq("category", category)
+    query = _apply_knowledge_asset_filters(query, asset_type=asset_type, category=category)
     response = query.execute()
     return response.data or []
+
+
+def list_knowledge_assets_page(
+    *,
+    page: int = 1,
+    page_size: int = 20,
+    asset_type: str | None = None,
+    category: str | None = None,
+    library_type: str | None = None,
+) -> dict[str, Any]:
+    client = get_supabase_client()
+    safe_page = max(1, int(page or 1))
+    safe_page_size = max(1, min(int(page_size or 20), 100))
+    start = (safe_page - 1) * safe_page_size
+    end = start + safe_page_size - 1
+    effective_asset_type = asset_type or _asset_type_for_library_type(library_type)
+
+    query = (
+        client.table("knowledge_assets")
+        .select(KNOWLEDGE_ASSET_LIST_COLUMNS, count="exact")
+        .order("created_at", desc=True)
+        .range(start, end)
+    )
+    query = _apply_knowledge_asset_filters(query, asset_type=effective_asset_type, category=category)
+    response = query.execute()
+    return {
+        "items": response.data or [],
+        "total": int(response.count or 0),
+        "page": safe_page,
+        "page_size": safe_page_size,
+    }
+
+
+def get_knowledge_asset_stats(library_type: str | None = None) -> dict[str, Any]:
+    client = get_supabase_client()
+    effective_asset_type = _asset_type_for_library_type(library_type)
+    query = client.table("knowledge_assets").select(KNOWLEDGE_ASSET_STATS_COLUMNS, count="exact")
+    query = _apply_knowledge_asset_filters(query, asset_type=effective_asset_type)
+    response = query.execute()
+    rows = response.data or []
+    category_counts: dict[str, int] = {}
+    tag_counts: dict[str, int] = {}
+    indexed_count = 0
+    synthetic_count = 0
+    for row in rows:
+        if row.get("status") == "indexed":
+            indexed_count += 1
+        if row.get("is_synthetic"):
+            synthetic_count += 1
+        category = str(row.get("category") or "未分类")
+        category_counts[category] = category_counts.get(category, 0) + 1
+        for tag in row.get("tags") or []:
+            tag_text = str(tag or "").strip()
+            if not tag_text:
+                continue
+            tag_counts[tag_text] = tag_counts.get(tag_text, 0) + 1
+    total = int(response.count if response.count is not None else len(rows))
+    return {
+        "total": total,
+        "indexed_count": indexed_count,
+        "synthetic_count": synthetic_count,
+        "customer_asset_count": total - synthetic_count,
+        "category_counts": category_counts,
+        "tag_count": len(tag_counts),
+    }
+
+
+def get_knowledge_overview_stats() -> dict[str, Any]:
+    client = get_supabase_client()
+    docs_response = client.table("knowledge_documents").select("id,status", count="exact").execute()
+    docs = docs_response.data or []
+    indexed_docs = sum(1 for row in docs if row.get("status") == "indexed")
+    processing_docs = sum(1 for row in docs if row.get("status") == "processing")
+    failed_docs = sum(1 for row in docs if row.get("status") == "failed")
+    return {
+        "documents": {
+            "total": int(docs_response.count if docs_response.count is not None else len(docs)),
+            "indexed": indexed_docs,
+            "processing": processing_docs,
+            "failed": failed_docs,
+        },
+        "assets": {
+            "qualification": get_knowledge_asset_stats("qualification"),
+            "product": get_knowledge_asset_stats("product"),
+        },
+    }
 
 
 def get_knowledge_asset_detail(asset_id: str) -> dict[str, Any] | None:

@@ -32,6 +32,7 @@ from backend.core.llm_json_utils import strip_llm_json
 from backend.core.security import UploadValidationError, safe_upload_filename, validate_uploaded_file
 from backend.db.supabase_client import get_supabase_client
 from backend.db.supabase_repo import (
+    get_knowledge_overview_stats,
     get_knowledge_document_detail,
     list_knowledge_documents,
 )
@@ -854,6 +855,16 @@ def get_knowledge_documents():
         return jsonify(docs), 200
     except Exception as e:
         logging.exception("查询知识库文档列表失败")
+        return jsonify({'error': f'查询失败: {str(e)}'}), 500
+
+
+@knowledge_bp.route('/stats', methods=['GET'])
+@bp.route('/knowledge/stats', methods=['GET'])
+def get_knowledge_stats():
+    try:
+        return jsonify(get_knowledge_overview_stats()), 200
+    except Exception as e:
+        logging.exception("查询知识库统计失败")
         return jsonify({'error': f'查询失败: {str(e)}'}), 500
 
 

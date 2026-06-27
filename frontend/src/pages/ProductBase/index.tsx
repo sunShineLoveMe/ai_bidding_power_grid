@@ -32,6 +32,23 @@ interface KnowledgeAsset {
   created_at?: string;
 }
 
+interface KnowledgeAssetStats {
+  total: number;
+  indexed_count: number;
+  synthetic_count: number;
+  customer_asset_count: number;
+  category_counts: Record<string, number>;
+  tag_count: number;
+}
+
+interface KnowledgeAssetPageResponse {
+  items: KnowledgeAsset[];
+  total: number;
+  page: number;
+  page_size: number;
+  stats?: KnowledgeAssetStats;
+}
+
 const preferredCategories = [
   '电缆与附件',
   '开关柜与成套设备',
@@ -94,6 +111,8 @@ export function ProductBasePage(): JSX.Element {
   const [form] = Form.useForm();
   const [activeCategory, setActiveCategory] = useState('全部产品');
   const [assets, setAssets] = useState<KnowledgeAsset[]>([]);
+  const [stats, setStats] = useState<KnowledgeAssetStats | null>(null);
+  const [pagination, setPagination] = useState({ current: 1, pageSize: 10, total: 0 });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [assetFile, setAssetFile] = useState<File | null>(null);
@@ -101,13 +120,31 @@ export function ProductBasePage(): JSX.Element {
   const [editingAsset, setEditingAsset] = useState<KnowledgeAsset | null>(null);
   const [detail, setDetail] = useState<KnowledgeAsset | null>(null);
 
-  const fetchAssets = async () => {
+  const fetchAssets = async (
+    page = pagination.current,
+    pageSize = pagination.pageSize,
+    category = activeCategory,
+  ) => {
     try {
       setLoading(true);
-      const { data } = await apiClient.get<KnowledgeAsset[]>('/api/knowledge/assets?library_type=product', {
+      const params = new URLSearchParams({
+        library_type: 'product',
+        page: String(page),
+        page_size: String(pageSize),
+      });
+      if (category !== '全部产品') {
+        params.set('category', category);
+      }
+      const { data } = await apiClient.get<KnowledgeAssetPageResponse>(`/api/knowledge/assets?${params.toString()}`, {
         skipGlobalLoading: true,
       });
-      setAssets(data || []);
+      setAssets(data.items || []);
+      setStats(data.stats || null);
+      setPagination({
+        current: data.page || page,
+        pageSize: data.page_size || pageSize,
+        total: data.total || 0,
+      });
     } catch (error: any) {
       message.error(error.message || '获取产品资产失败');
     } finally {
@@ -116,30 +153,26 @@ export function ProductBasePage(): JSX.Element {
   };
 
   useEffect(() => {
-    fetchAssets();
-  }, []);
+    fetchAssets(1, pagination.pageSize, activeCategory);
+  }, [activeCategory]);
 
   const categories = useMemo(() => {
-    const counts = assets.reduce<Record<string, number>>((acc, asset) => {
-      const category = displayAssetCategory(asset) || '其他产品资料';
-      acc[category] = (acc[category] || 0) + 1;
-      return acc;
-    }, {});
+    const counts = stats?.category_counts || {};
     const ordered = [
       ...preferredCategories,
       ...Object.keys(counts).filter(category => !preferredCategories.includes(category)).sort((a, b) => a.localeCompare(b, 'zh-CN')),
     ];
     return [
-      { name: '全部产品', count: assets.length },
+      { name: '全部产品', count: stats?.total || pagination.total },
       ...ordered.map(name => ({ name, count: counts[name] || 0 })),
     ];
-  }, [assets]);
+  }, [pagination.total, stats]);
 
-  const dataSource = activeCategory === '全部产品' ? assets : assets.filter(asset => displayAssetCategory(asset) === activeCategory);
-  const tagCount = new Set(assets.flatMap(asset => displayAssetTags(asset, 10))).size;
-  const materialCount = assets.length;
-  const customerAssetCount = assets.filter(asset => !asset.is_synthetic).length;
-  const metricValue = (value: number) => (loading && assets.length === 0 ? '...' : value);
+  const dataSource = assets;
+  const tagCount = stats?.tag_count || 0;
+  const materialCount = stats?.total || pagination.total;
+  const customerAssetCount = stats?.customer_asset_count || 0;
+  const metricValue = (value: number) => (loading && pagination.total === 0 ? '...' : value);
 
   const columns: ColumnsType<KnowledgeAsset> = [
     { title: '资料名称', dataIndex: 'title', ellipsis: true, render: (_, record) => displayAssetTitle(record) },
@@ -249,10 +282,10 @@ export function ProductBasePage(): JSX.Element {
       />
       <MetricCards
         items={[
-          { title: '产品资料数', value: metricValue(assets.length), desc: loading && assets.length === 0 ? '正在加载产品资产' : '已接入产品资产', icon: Box, colorClass: 'bg-blue-50 text-blue-600' },
-          { title: '能力标签', value: metricValue(tagCount), desc: loading && assets.length === 0 ? '正在统计中文标签' : '来自产品资料标签', icon: Tags, colorClass: 'bg-emerald-50 text-emerald-600' },
-          { title: '参数/图片素材', value: metricValue(materialCount), desc: loading && assets.length === 0 ? '正在加载素材' : '检验报告、产品图片和参数素材', icon: Cpu, colorClass: 'bg-violet-50 text-violet-600' },
-          { title: '客户资料', value: metricValue(customerAssetCount), desc: loading && assets.length === 0 ? '正在加载泰昌素材' : '泰昌已提供素材', icon: FileStack, colorClass: 'bg-orange-50 text-orange-500' },
+          { title: '产品资料数', value: metricValue(stats?.total || pagination.total), desc: loading && pagination.total === 0 ? '正在加载产品资产' : '已接入产品资产', icon: Box, colorClass: 'bg-blue-50 text-blue-600' },
+          { title: '能力标签', value: metricValue(tagCount), desc: loading && pagination.total === 0 ? '正在统计中文标签' : '来自产品资料标签', icon: Tags, colorClass: 'bg-emerald-50 text-emerald-600' },
+          { title: '参数/图片素材', value: metricValue(materialCount), desc: loading && pagination.total === 0 ? '正在加载素材' : '检验报告、产品图片和参数素材', icon: Cpu, colorClass: 'bg-violet-50 text-violet-600' },
+          { title: '客户资料', value: metricValue(customerAssetCount), desc: loading && pagination.total === 0 ? '正在加载泰昌素材' : '泰昌已提供素材', icon: FileStack, colorClass: 'bg-orange-50 text-orange-500' },
         ]}
       />
       <div className="grid min-h-0 grid-cols-[250px_minmax(0,1fr)] gap-4">
@@ -266,7 +299,17 @@ export function ProductBasePage(): JSX.Element {
             <Table
               rowKey="id"
               size="small"
-              pagination={{ pageSize: 10, showSizeChanger: true, pageSizeOptions: [10, 20, 50], showTotal: total => `共 ${total} 条` }}
+              pagination={{
+                current: pagination.current,
+                pageSize: pagination.pageSize,
+                total: pagination.total,
+                showSizeChanger: true,
+                pageSizeOptions: [10, 20, 50],
+                showTotal: total => `共 ${total} 条`,
+              }}
+              onChange={(nextPagination) => {
+                fetchAssets(Number(nextPagination.current || 1), Number(nextPagination.pageSize || pagination.pageSize), activeCategory);
+              }}
               columns={columns}
               dataSource={dataSource}
               loading={loading}

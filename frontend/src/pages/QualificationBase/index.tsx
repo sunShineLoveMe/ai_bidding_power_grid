@@ -33,6 +33,23 @@ interface KnowledgeAsset {
   created_at?: string;
 }
 
+interface KnowledgeAssetStats {
+  total: number;
+  indexed_count: number;
+  synthetic_count: number;
+  customer_asset_count: number;
+  category_counts: Record<string, number>;
+  tag_count: number;
+}
+
+interface KnowledgeAssetPageResponse {
+  items: KnowledgeAsset[];
+  total: number;
+  page: number;
+  page_size: number;
+  stats?: KnowledgeAssetStats;
+}
+
 const categoryMap: Record<string, string> = {
   企业资信: '企业资信',
   基础证照: '基础证照',
@@ -102,6 +119,8 @@ export function QualificationBasePage(): JSX.Element {
   const [form] = Form.useForm();
   const [activeCategory, setActiveCategory] = useState('全部资信');
   const [assets, setAssets] = useState<KnowledgeAsset[]>([]);
+  const [stats, setStats] = useState<KnowledgeAssetStats | null>(null);
+  const [pagination, setPagination] = useState({ current: 1, pageSize: 10, total: 0 });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [assetFile, setAssetFile] = useState<File | null>(null);
@@ -109,13 +128,31 @@ export function QualificationBasePage(): JSX.Element {
   const [editingAsset, setEditingAsset] = useState<KnowledgeAsset | null>(null);
   const [detail, setDetail] = useState<KnowledgeAsset | null>(null);
 
-  const fetchAssets = async () => {
+  const fetchAssets = async (
+    page = pagination.current,
+    pageSize = pagination.pageSize,
+    category = activeCategory,
+  ) => {
     try {
       setLoading(true);
-      const { data } = await apiClient.get<KnowledgeAsset[]>('/api/knowledge/assets?library_type=qualification', {
+      const params = new URLSearchParams({
+        library_type: 'qualification',
+        page: String(page),
+        page_size: String(pageSize),
+      });
+      if (category !== '全部资信') {
+        params.set('category', category);
+      }
+      const { data } = await apiClient.get<KnowledgeAssetPageResponse>(`/api/knowledge/assets?${params.toString()}`, {
         skipGlobalLoading: true,
       });
-      setAssets(data || []);
+      setAssets(data.items || []);
+      setStats(data.stats || null);
+      setPagination({
+        current: data.page || page,
+        pageSize: data.page_size || pageSize,
+        total: data.total || 0,
+      });
     } catch (error: any) {
       message.error(error.message || '获取资信资产失败');
     } finally {
@@ -124,8 +161,8 @@ export function QualificationBasePage(): JSX.Element {
   };
 
   useEffect(() => {
-    fetchAssets();
-  }, []);
+    fetchAssets(1, pagination.pageSize, activeCategory);
+  }, [activeCategory]);
 
   const enrichedAssets = useMemo(
     () => assets.map(asset => ({ ...asset, qualificationCategory: inferQualificationCategory(asset) })),
@@ -133,21 +170,20 @@ export function QualificationBasePage(): JSX.Element {
   );
 
   const categories = useMemo(() => {
-    const counts = enrichedAssets.reduce<Record<string, number>>((acc, asset) => {
-      acc[asset.qualificationCategory] = (acc[asset.qualificationCategory] || 0) + 1;
-      return acc;
-    }, {});
-    const names = ['基础证照', '资质证书', '人员证书', '财务资料', '绿色低碳资料', '项目业绩', '授权模板'];
+    const counts = stats?.category_counts || {};
+    const preferredNames = ['基础证照', '资质证书', '人员证书', '财务资料', '绿色低碳资料', '项目业绩', '授权模板'];
+    const names = [
+      ...preferredNames,
+      ...Object.keys(counts).filter(name => !preferredNames.includes(name)).sort((a, b) => a.localeCompare(b, 'zh-CN')),
+    ];
     return [
-      { name: '全部资信', count: enrichedAssets.length },
+      { name: '全部资信', count: stats?.total || pagination.total },
       ...names.map(name => ({ name, count: counts[name] || 0 })),
     ];
-  }, [enrichedAssets]);
+  }, [pagination.total, stats]);
 
-  const dataSource = activeCategory === '全部资信'
-    ? enrichedAssets
-    : enrichedAssets.filter(asset => asset.qualificationCategory === activeCategory);
-  const metricValue = (value: number) => (loading && assets.length === 0 ? '...' : value);
+  const dataSource = enrichedAssets;
+  const metricValue = (value: number) => (loading && pagination.total === 0 ? '...' : value);
 
   const columns: ColumnsType<KnowledgeAsset & { qualificationCategory?: string }> = [
     { title: '资信文件', dataIndex: 'title', ellipsis: true, render: (_, record) => displayAssetTitle(record) },
@@ -251,10 +287,10 @@ export function QualificationBasePage(): JSX.Element {
       />
       <MetricCards
         items={[
-          { title: '资信文件数', value: metricValue(assets.length), desc: loading && assets.length === 0 ? '正在加载资信资产' : '已接入资信资产', icon: FileBadge, colorClass: 'bg-blue-50 text-blue-600' },
-          { title: '有效证照', value: metricValue(assets.filter(asset => asset.status === 'indexed').length), desc: loading && assets.length === 0 ? '正在检查索引状态' : '可用于检索', icon: BadgeCheck, colorClass: 'bg-emerald-50 text-emerald-600' },
+          { title: '资信文件数', value: metricValue(stats?.total || pagination.total), desc: loading && pagination.total === 0 ? '正在加载资信资产' : '已接入资信资产', icon: FileBadge, colorClass: 'bg-blue-50 text-blue-600' },
+          { title: '有效证照', value: metricValue(stats?.indexed_count || 0), desc: loading && pagination.total === 0 ? '正在检查索引状态' : '可用于检索', icon: BadgeCheck, colorClass: 'bg-emerald-50 text-emerald-600' },
           { title: '临期提醒', value: 0, desc: '待接入到期字段', icon: CalendarClock, colorClass: 'bg-orange-50 text-orange-500' },
-          { title: '待核验资料', value: metricValue(assets.filter(asset => asset.status !== 'indexed').length), desc: loading && assets.length === 0 ? '正在加载核验状态' : '需人工复核', icon: AlertTriangle, colorClass: 'bg-red-50 text-red-500' },
+          { title: '待核验资料', value: metricValue(Math.max((stats?.total || 0) - (stats?.indexed_count || 0), 0)), desc: loading && pagination.total === 0 ? '正在加载核验状态' : '需人工复核', icon: AlertTriangle, colorClass: 'bg-red-50 text-red-500' },
         ]}
       />
       <div className="grid min-h-0 grid-cols-[250px_minmax(0,1fr)] gap-4">
@@ -268,7 +304,17 @@ export function QualificationBasePage(): JSX.Element {
             <Table
               rowKey="id"
               size="small"
-              pagination={{ pageSize: 10, showSizeChanger: true, pageSizeOptions: [10, 20, 50], showTotal: total => `共 ${total} 条` }}
+              pagination={{
+                current: pagination.current,
+                pageSize: pagination.pageSize,
+                total: pagination.total,
+                showSizeChanger: true,
+                pageSizeOptions: [10, 20, 50],
+                showTotal: total => `共 ${total} 条`,
+              }}
+              onChange={(nextPagination) => {
+                fetchAssets(Number(nextPagination.current || 1), Number(nextPagination.pageSize || pagination.pageSize), activeCategory);
+              }}
               columns={columns}
               dataSource={dataSource}
               loading={loading}

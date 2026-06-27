@@ -383,6 +383,32 @@ function matchesActiveVolume(chapter: ChapterDraft, activeVolume: VolumeType): b
   return deliveryVolumeType(chapter) === activeVolume;
 }
 
+function exportPackageLabel(volumeType: VolumeType, scope: 'full' | 'section' = 'full'): string {
+  if (scope === 'section') {
+    return '本章';
+  }
+  if (volumeType === 'technical') {
+    return '技术标';
+  }
+  if (volumeType === 'business') {
+    return '商务标';
+  }
+  return '完整投标文件';
+}
+
+function formatFileSize(size?: number): string {
+  if (!size || size <= 0) {
+    return '-';
+  }
+  if (size >= 1024 * 1024) {
+    return `${(size / 1024 / 1024).toFixed(2)} MB`;
+  }
+  if (size >= 1024) {
+    return `${Math.round(size / 1024)} KB`;
+  }
+  return `${size} B`;
+}
+
 function safeParentIdForSave(parentId: string | null | undefined, chapters: ChapterDraft[]): string | null {
   if (!parentId || !isUuid(parentId)) {
     return null;
@@ -2526,15 +2552,30 @@ export function BidEditorPage(): JSX.Element {
     savedDrafts: number;
     reviewRequired: number;
   } {
+    return pendingGenerationSummaryForVolume(activeVolume);
+  }
+
+  function pendingGenerationSummaryForVolume(volumeType: VolumeType): {
+    leafTotal: number;
+    generated: number;
+    incomplete: number;
+    writing: number;
+    queued: number;
+    savedDrafts: number;
+    reviewRequired: number;
+  } {
+    const leafChapters = (volumeType === 'all' ? chapters : chapters.filter(chapter => matchesActiveVolume(chapter, volumeType)))
+      .filter(chapter => isLeafChapter(chapter, chapters));
+    const generated = leafChapters.filter(isChapterGenerated).length;
     const taskValues = Object.values(batchTasks);
     const writing = taskValues.filter(task => ACTIVE_BATCH_TASK_STATUSES.has(task.status)).length;
     const queued = taskValues.filter(task => task.status === 'queued').length;
     const savedDrafts = taskValues.filter(task => task.status === 'partial_generated').length;
     const reviewRequired = taskValues.filter(task => task.status === 'partial_generated' && isPartialReviewRequired(task)).length;
     return {
-      leafTotal: scopedLeafChapters.length,
-      generated: generatedCount,
-      incomplete: Math.max(0, scopedLeafChapters.length - generatedCount),
+      leafTotal: leafChapters.length,
+      generated,
+      incomplete: Math.max(0, leafChapters.length - generated),
       writing,
       queued,
       savedDrafts,
@@ -2542,8 +2583,8 @@ export function BidEditorPage(): JSX.Element {
     };
   }
 
-  async function confirmDownloadWithGenerationReadiness(): Promise<boolean> {
-    const summary = pendingGenerationSummary();
+  async function confirmDownloadWithGenerationReadiness(volumeType: VolumeType): Promise<boolean> {
+    const summary = pendingGenerationSummaryForVolume(volumeType);
     const hasPendingWork = summary.incomplete > 0 || summary.writing > 0 || summary.queued > 0 || summary.savedDrafts > 0 || summary.reviewRequired > 0;
     if (!hasPendingWork) {
       return true;
@@ -2551,7 +2592,7 @@ export function BidEditorPage(): JSX.Element {
 
     return new Promise(resolve => {
       Modal.confirm({
-        title: '下载前确认：当前文件仍是草稿版',
+        title: `下载前确认：${exportPackageLabel(volumeType)}仍是草稿版`,
         okText: '下载草稿版',
         cancelText: '返回继续编写',
         width: 600,
@@ -2583,18 +2624,18 @@ export function BidEditorPage(): JSX.Element {
     });
   }
 
-  async function downloadDocx(sectionId?: string): Promise<void> {
+  async function downloadDocx(sectionId?: string, targetVolume: VolumeType = activeVolume): Promise<void> {
     if (!data?.project?.id) {
       message.warning('当前项目不存在，无法下载');
       return;
     }
     if (!sectionId) {
-      const generationConfirmed = await confirmDownloadWithGenerationReadiness();
+      const generationConfirmed = await confirmDownloadWithGenerationReadiness(targetVolume);
       if (!generationConfirmed) {
         message.info('已取消下载，请先完成剩余章节或复核草稿。');
         return;
       }
-      const confirmed = await confirmDownloadWithCompliance(data.project.id, activeVolume);
+      const confirmed = await confirmDownloadWithCompliance(data.project.id, targetVolume);
       if (!confirmed) {
         message.info('已取消下载，请先处理条款响应补强项。');
         return;
@@ -2613,7 +2654,7 @@ export function BidEditorPage(): JSX.Element {
       const result = await generateBidDocxDownload(data.project.id, {
         sectionId,
         withImages: !sectionId && withImages,
-        volumeType: !sectionId && activeVolume !== 'all' ? activeVolume : undefined,
+        volumeType: !sectionId && targetVolume !== 'all' ? targetVolume : undefined,
         sectionsSnapshot,
       });
       setExportTask(result.task);
@@ -2624,9 +2665,9 @@ export function BidEditorPage(): JSX.Element {
           10,
         );
       } else {
-        message.info(sectionId ? '本章 DOCX 导出任务已创建' : `${activeVolume === 'all' ? '全文' : volumeLabel(activeVolume)} DOCX 导出任务已创建`);
+        message.info(sectionId ? '本章 DOCX 导出任务已创建' : `${exportPackageLabel(targetVolume)} DOCX 导出任务已创建`);
       }
-      await pollBidExportTask(data.project.id, result.taskId, sectionId ? 'section' : 'full');
+      await pollBidExportTask(data.project.id, result.taskId, sectionId ? 'section' : 'full', targetVolume);
     } catch (error) {
       message.error(error instanceof Error ? error.message : String(error));
     } finally {
@@ -2634,7 +2675,77 @@ export function BidEditorPage(): JSX.Element {
     }
   }
 
-  async function pollBidExportTask(projectId: string, taskId: string, scope: 'full' | 'section'): Promise<void> {
+  function showExportCompletedModal(task: BidExportTask, scope: 'full' | 'section', volumeType: VolumeType): void {
+    const downloadUrlValue = task.download_url || '';
+    const imageConversion = task.metadata?.image_conversion;
+    const fieldRefresh = task.metadata?.field_refresh;
+    const formalGate = task.metadata?.formal_export_gate;
+    const packageLabel = exportPackageLabel(volumeType, scope);
+    const isDraft = scope !== 'section' && formalGate?.export_mode === 'draft';
+    const insertedImages = Number(imageConversion?.inserted || 0);
+    const failedImages = Number(imageConversion?.failed || 0);
+    const skippedImages = Number(imageConversion?.skipped || 0);
+    Modal.info({
+      title: `${packageLabel} DOCX 已生成`,
+      width: 620,
+      icon: isDraft ? <AlertTriangle size={20} className="text-orange-500" /> : <CheckCircle2 size={20} className="text-emerald-500" />,
+      okText: '关闭',
+      content: (
+        <div className="space-y-3 text-sm">
+          {isDraft ? (
+            <Alert
+              type="warning"
+              showIcon
+              message="当前文件为草稿版"
+              description={`正式检查仍有 ${Number(formalGate?.blocked_count || 0)} 个阻断项，本文件仅建议用于内部查看和补强，不建议作为正式投标文件提交。`}
+            />
+          ) : (
+            <Alert
+              type="success"
+              showIcon
+              message={`${packageLabel}已完成导出`}
+              description={fieldRefresh?.user_message || 'DOCX 文件已生成，请下载后用 Word/WPS 进行提交前复核。'}
+            />
+          )}
+          <div className="grid gap-2">
+            <div className="flex items-center justify-between gap-3">
+              <span className="font-semibold text-slate-500">交付包</span>
+              <Tag color={volumeType === 'technical' ? 'blue' : volumeType === 'business' ? 'purple' : 'geekblue'}>{packageLabel}</Tag>
+            </div>
+            <div className="flex items-start justify-between gap-3">
+              <span className="shrink-0 font-semibold text-slate-500">文件名</span>
+              <span className="text-right font-semibold text-slate-700">{task.file_name || '投标文件.docx'}</span>
+            </div>
+            <div className="flex items-center justify-between gap-3">
+              <span className="font-semibold text-slate-500">文件大小</span>
+              <span className="font-semibold text-slate-700">{formatFileSize(fieldRefresh?.size)}</span>
+            </div>
+            <div className="flex items-center justify-between gap-3">
+              <span className="font-semibold text-slate-500">字段刷新</span>
+              <Tag color={fieldRefresh?.status === 'refreshed' ? 'green' : fieldRefresh?.manual_refresh_required ? 'orange' : 'default'}>
+                {fieldRefresh?.status === 'refreshed' ? '已刷新目录和页码' : fieldRefresh?.manual_refresh_required ? '需手动刷新' : '未返回刷新状态'}
+              </Tag>
+            </div>
+            <div className="flex items-center justify-between gap-3">
+              <span className="font-semibold text-slate-500">图片插入</span>
+              <span className="font-semibold text-slate-700">插入 {insertedImages} 张，跳过 {skippedImages} 张，失败 {failedImages} 张</span>
+            </div>
+          </div>
+          <Button
+            type="primary"
+            icon={<Download size={16} />}
+            disabled={!downloadUrlValue}
+            onClick={() => downloadUrlValue && window.open(downloadUrlValue, '_blank')}
+            block
+          >
+            下载{packageLabel} DOCX
+          </Button>
+        </div>
+      ),
+    });
+  }
+
+  async function pollBidExportTask(projectId: string, taskId: string, scope: 'full' | 'section', volumeType: VolumeType): Promise<void> {
     const maxAttempts = 180;
     for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
       const task = await getBidExportTask(projectId, taskId);
@@ -2644,7 +2755,6 @@ export function BidEditorPage(): JSX.Element {
           throw new Error('DOCX 导出完成但未返回下载地址');
         }
         setDownloadUrl(task.download_url);
-        window.open(task.download_url, '_blank');
         const imageConversion = task.metadata?.image_conversion;
         const imageSelection = task.metadata?.image_selection;
         const fieldRefresh = task.metadata?.field_refresh;
@@ -2667,12 +2777,13 @@ export function BidEditorPage(): JSX.Element {
         } else if (fieldRefresh?.manual_refresh_required) {
           message.warning(fieldRefresh.user_message || 'DOCX 已生成，但目录页码可能需要打开 Word/WPS 后手动刷新。', 8);
         } else if (fieldRefresh?.status === 'refreshed') {
-          message.success(fieldRefresh.user_message || (scope === 'section' ? '本章 DOCX 已生成，目录页码已刷新' : `${activeVolume === 'all' ? '全文' : volumeLabel(activeVolume)} DOCX 已生成，目录页码已刷新`), 5);
+          message.success(fieldRefresh.user_message || `${exportPackageLabel(volumeType, scope)} DOCX 已生成，目录页码已刷新`, 5);
         } else if (failedImages > 0 || skippedImages > 0 || selectionWarnings.length > 0) {
           message.warning(`DOCX 已生成，图片插入 ${insertedImages} 张，跳过 ${skippedImages} 张，失败 ${failedImages} 张，请下载后复核图文位置。`, 7);
         } else {
-          message.success(scope === 'section' ? '本章 DOCX 已生成' : `${activeVolume === 'all' ? '全文' : volumeLabel(activeVolume)} DOCX 已生成`);
+          message.success(`${exportPackageLabel(volumeType, scope)} DOCX 已生成`);
         }
+        showExportCompletedModal(task, scope, volumeType);
         return;
       }
       if (task.status === 'failed') {
@@ -3572,6 +3683,49 @@ export function BidEditorPage(): JSX.Element {
   const activeTaskCount = batchTaskValues.filter(task => ACTIVE_BATCH_TASK_STATUSES.has(task.status)).length;
   const queuedTaskCount = batchTaskValues.filter(task => task.status === 'queued').length;
   const incompleteLeafCount = Math.max(0, scopedLeafChapters.length - generatedCount);
+  const exportMenuItems: MenuProps['items'] = [
+    {
+      key: 'technical',
+      label: '下载技术标 DOCX',
+      icon: <Download size={14} />,
+      disabled: !volumeCounts.technical || !!downloadGenerating,
+    },
+    {
+      key: 'business',
+      label: '下载商务标 DOCX',
+      icon: <Download size={14} />,
+      disabled: !volumeCounts.business || !!downloadGenerating,
+    },
+    {
+      key: 'all',
+      label: '下载完整投标文件 DOCX',
+      icon: <Download size={14} />,
+      disabled: !volumeCounts.all || !!downloadGenerating,
+    },
+  ];
+
+  function ExportDownloadButton(): JSX.Element {
+    return (
+      <Dropdown
+        trigger={['click']}
+        menu={{
+          items: exportMenuItems,
+          onClick: ({ key }) => void downloadDocx(undefined, key as VolumeType),
+        }}
+        disabled={!chapters.length || !!downloadGenerating}
+      >
+        <Button
+          type="primary"
+          icon={<Download size={17} />}
+          loading={downloadGenerating === 'full'}
+          disabled={!chapters.length || !!downloadGenerating}
+        >
+          导出投标文件
+          <ChevronDown size={15} />
+        </Button>
+      </Dropdown>
+    );
+  }
 
   useEffect(() => {
     if (searchParams.get('action') !== 'resume-partial') return;
@@ -3621,15 +3775,7 @@ export function BidEditorPage(): JSX.Element {
             >
               正式检查
             </Button>
-            <Button
-              type="primary"
-              icon={<Download size={17} />}
-              loading={downloadGenerating === 'full'}
-            disabled={!scopedChapters.length || !!downloadGenerating}
-            onClick={() => void downloadDocx()}
-          >
-            {activeVolume === 'all' ? '标书下载' : `下载${volumeLabel(activeVolume)}`}
-          </Button>
+            <ExportDownloadButton />
             {exportTask && downloadGenerating === 'full' ? (
               <Tooltip title={exportTask.message || '正在导出 DOCX'}>
                 <Progress type="circle" size={34} percent={exportTask.progress || 0} />
@@ -3912,15 +4058,7 @@ export function BidEditorPage(): JSX.Element {
           >
             正式检查
           </Button>
-          <Button
-            type="primary"
-            icon={<Download size={17} />}
-            loading={downloadGenerating === 'full'}
-            disabled={!scopedChapters.length || !!downloadGenerating}
-            onClick={() => void downloadDocx()}
-          >
-            {activeVolume === 'all' ? '标书下载' : `下载${volumeLabel(activeVolume)}`}
-          </Button>
+          <ExportDownloadButton />
           {exportTask && downloadGenerating === 'full' ? (
             <Tooltip title={exportTask.message || '正在导出 DOCX'}>
               <Progress type="circle" size={34} percent={exportTask.progress || 0} />
