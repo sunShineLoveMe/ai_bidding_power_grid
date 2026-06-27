@@ -8,6 +8,41 @@
 
 ---
 
+## Run 20260627 — 产品库/资信库上传表单资料规范产品化（2026-06-27）
+
+> 总记录：`docs/development/runs/run_20260627_asset_upload_form_productization.md`
+> 增量门禁：`docs/rag/runs/run_20260627_asset_upload_form_productization_gate_summary.md`
+
+### 触发原因
+
+客户后续会自行上传大量图片、PDF、Word、Excel、CSV 等资料。上传入口如果不做资料类型引导、文件质量预检和正式标书使用门禁，二维码、印章、局部截图、表格截图、内部文件名等低质量资料会进入 RAG 和正式 DOCX 候选，影响正式投标文件质量。
+
+### 结果
+
+- 产品库/资信库上传表单新增正式中文资料类型、推荐格式提示和文件质量预检。
+- 资产上传支持 `.xls/.xlsx/.csv`，表格资料默认 `knowledge_only`，不自动作为正式标书图片插入。
+- 后端上传入库写入 `quality_tier`、`quality_tier_label`、`quality_notes`、`user_requested_bid_usage`；DOCX 自动选图只允许 `formal_bid_ready`。
+- 真实 API 上传 `泰昌上传表单回归产品参数表.csv`，返回 `quality_tier=knowledge_only`、`allowed_for_bid=false`，测试资产已删除。
+- Chrome 页面回归：产品库 CSV 预检为“仅用于知识库”；资信库低质量局部截图预检为“需人工复核”。
+- 定向测试：上传 payload `5 passed, 2 subtests passed`；DOCX/RAG/display `95 passed, 1 warning`；前端 build PASS。
+
+### 增量门禁
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% |
+| 泰昌专项 | off | 93.3% | 100.0% | 0.917 | 3.3% | 0.0% |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 0.973 | 0.0% | 0.0% |
+
+门禁状态：PASS。Rerank 正式路径无召回、来源排序、禁用关键词或跨资料域串扰退化。
+
+### 结论
+
+产品库/资信库上传入口已具备面向用户的正式资料准入体验，后端同步执行质量等级和正式 DOCX 配图门禁，后续客户随意上传资料时不会直接污染正式标书正文。
+
+---
+
 ## Run 20260627 — 泰昌正式资产治理本地真实回归（2026-06-27）
 
 > 总记录：`docs/development/runs/run_20260627_local_formal_asset_regression.md`

@@ -1,4 +1,4 @@
-import { Button, Descriptions, Empty, Form, Input, Modal, Select, Space, Switch, Table, Tag, Upload, message } from 'antd';
+import { Alert, Button, Descriptions, Empty, Form, Input, Modal, Select, Space, Switch, Table, Tag, Upload, message } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { AlertTriangle, BadgeCheck, CalendarClock, FileBadge, UploadCloud } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
@@ -8,6 +8,15 @@ import { MetricCards } from '../../components/common/MetricCards';
 import { ModuleHeader } from '../../components/common/ModuleHeader';
 import { apiClient } from '../../api/client';
 import { displayAssetCategory, displayAssetTitle } from '../../utils/assetDisplay';
+import {
+  assetQualityLabel,
+  evidenceLabel,
+  evidenceValueFromLabel,
+  inspectUploadFile,
+  optionForEvidence,
+  qualificationEvidenceOptions,
+  type UploadQualityPreview,
+} from '../../utils/assetUploadGuidance';
 
 interface KnowledgeAsset {
   id: string;
@@ -109,6 +118,26 @@ function isImageAsset(asset: KnowledgeAsset): boolean {
   return (asset.mime_type || '').startsWith('image/');
 }
 
+function metadataText(asset: KnowledgeAsset, key: string): string {
+  const value = asset.metadata?.[key] ?? asset.specs?.[key];
+  return typeof value === 'string' ? value : '';
+}
+
+function metadataList(asset: KnowledgeAsset, key: string): string[] {
+  const value = asset.metadata?.[key] ?? asset.specs?.[key];
+  if (Array.isArray(value)) return value.map(item => String(item)).filter(Boolean);
+  if (typeof value === 'string' && value.trim()) return [value.trim()];
+  return [];
+}
+
+function assetQuality(asset: KnowledgeAsset) {
+  return assetQualityLabel(metadataText(asset, 'quality_tier'));
+}
+
+function assetEvidenceType(asset: KnowledgeAsset): string {
+  return metadataText(asset, 'evidence_type') || evidenceValueFromLabel(displayAssetCategory(asset)) || 'certification';
+}
+
 const statusColor: Record<string, string> = {
   有效: 'green',
   临期: 'orange',
@@ -117,6 +146,7 @@ const statusColor: Record<string, string> = {
 
 export function QualificationBasePage(): JSX.Element {
   const [form] = Form.useForm();
+  const selectedEvidenceType = Form.useWatch('evidence_type', form);
   const [activeCategory, setActiveCategory] = useState('全部资信');
   const [assets, setAssets] = useState<KnowledgeAsset[]>([]);
   const [stats, setStats] = useState<KnowledgeAssetStats | null>(null);
@@ -124,6 +154,7 @@ export function QualificationBasePage(): JSX.Element {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [assetFile, setAssetFile] = useState<File | null>(null);
+  const [uploadReview, setUploadReview] = useState<UploadQualityPreview | null>(null);
   const [formOpen, setFormOpen] = useState(false);
   const [editingAsset, setEditingAsset] = useState<KnowledgeAsset | null>(null);
   const [detail, setDetail] = useState<KnowledgeAsset | null>(null);
@@ -164,6 +195,22 @@ export function QualificationBasePage(): JSX.Element {
     fetchAssets(1, pagination.pageSize, activeCategory);
   }, [activeCategory]);
 
+  useEffect(() => {
+    let cancelled = false;
+    if (!assetFile) {
+      setUploadReview(null);
+      return () => {
+        cancelled = true;
+      };
+    }
+    inspectUploadFile(assetFile, selectedEvidenceType).then(result => {
+      if (!cancelled) setUploadReview(result);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [assetFile, selectedEvidenceType]);
+
   const enrichedAssets = useMemo(
     () => assets.map(asset => ({ ...asset, qualificationCategory: inferQualificationCategory(asset) })),
     [assets],
@@ -184,10 +231,12 @@ export function QualificationBasePage(): JSX.Element {
 
   const dataSource = enrichedAssets;
   const metricValue = (value: number) => (loading && pagination.total === 0 ? '...' : value);
+  const selectedEvidenceOption = optionForEvidence(selectedEvidenceType);
 
   const columns: ColumnsType<KnowledgeAsset & { qualificationCategory?: string }> = [
     { title: '资信文件', dataIndex: 'title', ellipsis: true, render: (_, record) => displayAssetTitle(record) },
     { title: '分类', dataIndex: 'qualificationCategory', width: 110, render: value => <Tag color="purple">{value}</Tag> },
+    { title: '使用范围', width: 130, render: (_, record) => <Tag color={assetQuality(record).color}>{assetQuality(record).label}</Tag> },
     { title: '发证/出具机构', dataIndex: 'attribution', width: 150, ellipsis: true, render: value => value || '脱敏样张' },
     { title: '编号', width: 130, render: (_, record) => (record.is_synthetic ? '脱敏样例' : '-') },
     { title: '有效期', width: 110, render: () => '待维护' },
@@ -208,16 +257,19 @@ export function QualificationBasePage(): JSX.Element {
   const openCreateForm = () => {
     setEditingAsset(null);
     form.resetFields();
+    form.setFieldsValue({ evidence_type: 'certification', applicable_volumes: ['qualification', 'business', 'attachment'], allowed_for_bid: true, is_sensitive: false });
     setAssetFile(null);
+    setUploadReview(null);
     setFormOpen(true);
   };
 
   const openEditForm = (asset: KnowledgeAsset) => {
     setEditingAsset(asset);
     setAssetFile(null);
+    setUploadReview(null);
     form.setFieldsValue({
       title: asset.title,
-      category: inferQualificationCategory(asset),
+      evidence_type: assetEvidenceType(asset),
       description: asset.description,
       certificate_no: asset.specs?.certificate_no,
       issuer: asset.specs?.issuer,
@@ -246,7 +298,8 @@ export function QualificationBasePage(): JSX.Element {
       formData.append('library_type', 'qualification');
       formData.append('asset_type', 'qualification_image');
       formData.append('title', values.title);
-      formData.append('category', values.category);
+      formData.append('evidence_type', values.evidence_type);
+      formData.append('category', evidenceLabel(values.evidence_type) || '企业资信');
       formData.append('description', values.description || '');
       formData.append('certificate_no', values.certificate_no || '');
       formData.append('issuer', values.issuer || '');
@@ -265,6 +318,7 @@ export function QualificationBasePage(): JSX.Element {
       message.success(editingAsset ? '资信资料已更新并刷新检索信息' : '资信资料已保存并接入检索');
       form.resetFields();
       setAssetFile(null);
+      setUploadReview(null);
       setEditingAsset(null);
       setFormOpen(false);
       await fetchAssets();
@@ -343,6 +397,7 @@ export function QualificationBasePage(): JSX.Element {
           setFormOpen(false);
           setEditingAsset(null);
           setAssetFile(null);
+          setUploadReview(null);
         }}
         width={920}
         destroyOnHidden={false}
@@ -351,6 +406,7 @@ export function QualificationBasePage(): JSX.Element {
             setFormOpen(false);
             setEditingAsset(null);
             setAssetFile(null);
+            setUploadReview(null);
           }}>取消</Button>,
           <Button key="save" type="primary" loading={saving} onClick={saveQualificationAsset}>{editingAsset ? '保存修改' : '保存并接入检索'}</Button>,
         ]}
@@ -374,6 +430,7 @@ export function QualificationBasePage(): JSX.Element {
               <Descriptions size="small" column={1}>
                 <Descriptions.Item label="当前资料">{displayAssetTitle(editingAsset)}</Descriptions.Item>
                 <Descriptions.Item label="当前分类">{inferQualificationCategory(editingAsset)}</Descriptions.Item>
+                <Descriptions.Item label="使用范围"><Tag color={assetQuality(editingAsset).color}>{assetQuality(editingAsset).label}</Tag></Descriptions.Item>
                 <Descriptions.Item label="原始文件">{editingAsset.file_name || '-'}</Descriptions.Item>
                 <Descriptions.Item label="替换说明">如需替换，请选择新的图片或附件；不选择文件时仅更新名称、分类和标签。</Descriptions.Item>
               </Descriptions>
@@ -383,8 +440,8 @@ export function QualificationBasePage(): JSX.Element {
             <Form.Item label="资信名称" name="title" rules={[{ required: true, message: '请输入资信名称' }]}>
               <Input placeholder="例如：承装（修、试）电力设施许可证" />
             </Form.Item>
-            <Form.Item label="资信分类" name="category" initialValue="资质证书" rules={[{ required: true, message: '请选择分类' }]}>
-              <Select options={categories.slice(1).map(item => ({ label: item.name, value: item.name }))} />
+            <Form.Item label="资料类型" name="evidence_type" initialValue="certification" rules={[{ required: true, message: '请选择资料类型' }]}>
+              <Select options={qualificationEvidenceOptions.map(item => ({ label: item.label, value: item.value }))} />
             </Form.Item>
             <Form.Item label="证书编号" name="certificate_no">
               <Input placeholder="请输入证书编号，可填写脱敏编号" />
@@ -393,6 +450,15 @@ export function QualificationBasePage(): JSX.Element {
               <Input placeholder="请输入机构名称，可填写脱敏机构" />
             </Form.Item>
           </div>
+            {selectedEvidenceOption ? (
+              <Alert
+                className="mb-4"
+                type={selectedEvidenceOption.warning ? 'warning' : 'info'}
+                showIcon
+                message={`${selectedEvidenceOption.label}：推荐 ${selectedEvidenceOption.recommendedFormats}`}
+                description={selectedEvidenceOption.warning ? `${selectedEvidenceOption.guidance} ${selectedEvidenceOption.warning}` : selectedEvidenceOption.guidance}
+              />
+            ) : null}
             <Form.Item label="适用分册" name="applicable_volumes" initialValue={['qualification', 'business', 'attachment']} rules={[{ required: true, message: '请选择至少一个适用分册' }]}>
               <Select mode="multiple" placeholder="用于控制 RAG 召回和自动插图范围" options={volumeOptions} />
             </Form.Item>
@@ -413,12 +479,24 @@ export function QualificationBasePage(): JSX.Element {
                   setAssetFile(file);
                   return false;
                 }}
-                onRemove={() => setAssetFile(null)}
-                accept="image/*,.pdf,.doc,.docx"
+                onRemove={() => {
+                  setAssetFile(null);
+                  setUploadReview(null);
+                }}
+                accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.csv"
               >
                 <Button icon={<UploadCloud size={16} />}>{editingAsset ? '替换证照图片或附件' : '选择证照图片或附件'}</Button>
               </Upload>
             </Form.Item>
+            {uploadReview ? (
+              <Alert
+                className="mb-4"
+                type={uploadReview.tier === 'formal_bid_ready' ? 'success' : uploadReview.tier === 'knowledge_only' ? 'info' : 'warning'}
+                showIcon
+                message={`资料预检：${uploadReview.label}`}
+                description={uploadReview.notes.join('；')}
+              />
+            ) : null}
             <Form.Item label="允许自动插入标书" name="allowed_for_bid" valuePropName="checked" initialValue>
               <Switch checkedChildren="允许" unCheckedChildren="仅检索" />
             </Form.Item>
@@ -456,6 +534,8 @@ export function QualificationBasePage(): JSX.Element {
             <Descriptions size="small" bordered column={1}>
               <Descriptions.Item label="文件名称">{displayAssetTitle(detail)}</Descriptions.Item>
               <Descriptions.Item label="分类">{inferQualificationCategory(detail)}</Descriptions.Item>
+              <Descriptions.Item label="使用范围"><Tag color={assetQuality(detail).color}>{assetQuality(detail).label}</Tag></Descriptions.Item>
+              <Descriptions.Item label="质量提示">{metadataList(detail, 'quality_notes').join('；') || '-'}</Descriptions.Item>
               <Descriptions.Item label="适用分册">{applicableVolumes(detail).map(value => volumeLabelMap[value] || value).join('、') || '-'}</Descriptions.Item>
               <Descriptions.Item label="说明">{detail.description || '-'}</Descriptions.Item>
               <Descriptions.Item label="适用章节">{(detail.applicable_sections || []).join('、') || '-'}</Descriptions.Item>

@@ -64,7 +64,8 @@
 | [x] | P2-1 建立资产正式化 SOP | `.agents/skills/formal-bid-asset-ingestion/`、`AGENTS.md` | 已抽取为项目 Skill；客户新增图片、PDF、Word、Excel、CSV、产品/资信/企业知识库资料时，必须先 inventory、确认来源域、生成正式中文标题/分类/标签/题注策略和追溯 metadata，不允许直接用原始文件名入库展示 |
 | [x] | P2-2 建立图片资产质量分级 | `.agents/skills/formal-bid-asset-ingestion/references/asset-policy.md` | 已定义 `formal_bid_ready`、`knowledge_only`、`review_only`、`restricted`；正式标书自动选图只允许 `formal_bid_ready`，MinerU 局部切图、二维码、印章、签名、页脚、局部表格单元格默认仅作 `review_only` |
 | [ ] | P2-3 建立云端修复发布 runbook | `docs/deployment/` 或 run 记录 | 本地修复脚本、阿里云执行命令、回滚方式、验证命令固定化，避免线上线下数据不一致 |
-| [ ] | P2-4 客户补资料模板 | 飞书/Markdown 清单 | 明确要求客户提供原始高清产品照片、生产线照片、检测设备照片、完整 PDF 扫描件，不鼓励提供碎片截图 |
+| [x] | P2-4 产品库/资信库上传表单资料规范产品化 | `frontend/src/utils/assetUploadGuidance.ts`、产品库/资信库页面、后端质量门禁、`docs/development/runs/run_20260627_asset_upload_form_productization.md` | 已将正式投标资产 SOP 产品化到用户上传表单：中文资料类型、推荐格式、文件质量预检、Excel/CSV 支持、质量等级入库、DOCX 自动配图门禁、真实 API 上传和 Chrome 页面回归均通过 |
+| [ ] | P2-5 客户补资料清单模板 | 飞书/Markdown 清单 | 明确要求客户提供原始高清产品照片、生产线照片、检测设备照片、完整 PDF 扫描件，不鼓励提供碎片截图 |
 
 ## 正式命名规则
 
@@ -157,6 +158,15 @@ build_project_bid_markdown(volume_type=technical/business, with_images=true)
 - 质量分级：`formal_bid_ready`、`knowledge_only`、`review_only`、`restricted` 已固化在 `references/asset-policy.md`。
 - 验证门禁：真实上传、列表/详情、`/api/knowledge/search/stream`、Base+泰昌专项增量门禁、DOCX 导出和文档同步要求已固化在 `references/validation-gates.md`。
 - 校验：`.venv/bin/python /Users/chris/.codex/skills/.system/skill-creator/scripts/quick_validate.py .agents/skills/formal-bid-asset-ingestion` 通过。
+
+### 2026-06-27 产品库/资信库上传表单资料规范产品化
+
+- 总记录：`docs/development/runs/run_20260627_asset_upload_form_productization.md`。
+- 前端：产品库和资信库上传弹窗新增正式中文资料类型、推荐格式提示和文件质量预检；`.xls/.xlsx/.csv` 已进入上传选择范围。
+- 后端：上传入库统一写入 `quality_tier/quality_tier_label/quality_notes/user_requested_bid_usage`；表格默认 `knowledge_only`，小图、二维码、印章、签名、局部截图默认 `review_only`；DOCX 自动选图只允许 `formal_bid_ready`。
+- 真实 API：上传 `泰昌上传表单回归产品参数表.csv` 返回 `quality_tier=knowledge_only`、`allowed_for_bid=false`，响应不再暴露 `embedding`，内部 `searchable_text` 已压平；测试资产已删除。
+- Chrome 页面：产品库上传 CSV 出现“资料预检：仅用于知识库”；资信库上传 1x1 局部截图出现“资料预检：需人工复核”；截图见 `docs/development/runs/screenshots/run_20260627_asset_upload_product_form.png` 和 `docs/development/runs/screenshots/run_20260627_asset_upload_qualification_form.png`。
+- 回归：上传 payload 测试 `5 passed, 2 subtests passed`；DOCX/RAG/display 定向回归 `95 passed, 1 warning`；前端 build PASS；`run_20260627_asset_upload_form_productization_gate` 标准增量门禁 PASS。
 
 ### 2026-06-27 阿里云线上真实浏览器全流程回归确认
 

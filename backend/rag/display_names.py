@@ -54,10 +54,13 @@ EVIDENCE_TYPE_LABELS = {
     "inspection_report": "检验报告",
     "personnel_certificate": "人员证书",
     "product_image": "产品实物图片",
+    "product_parameter_table": "产品参数表",
     "production_capacity": "生产制造能力",
     "social_security": "社保证明",
+    "technical_response": "技术响应资料",
     "testing_capacity": "试验检测能力",
     "project_performance": "项目业绩",
+    "warehouse_capacity": "厂房仓储资料",
 }
 
 TARGET_LIBRARY_LABELS = {

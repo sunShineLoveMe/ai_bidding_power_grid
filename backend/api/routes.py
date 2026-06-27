@@ -858,6 +858,13 @@ def _asset_allowed_for_bid(asset: dict) -> bool:
         return False
     if isinstance(specs, dict) and specs.get("allowed_for_bid") is False:
         return False
+    quality_tier = ""
+    if isinstance(metadata, dict):
+        quality_tier = str(metadata.get("quality_tier") or "").strip()
+    if not quality_tier and isinstance(specs, dict):
+        quality_tier = str(specs.get("quality_tier") or "").strip()
+    if quality_tier and quality_tier != "formal_bid_ready":
+        return False
     reference_only_values = [
         metadata.get("reference_only") if isinstance(metadata, dict) else None,
         specs.get("reference_only") if isinstance(specs, dict) else None,
