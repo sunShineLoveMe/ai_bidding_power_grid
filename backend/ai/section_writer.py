@@ -15,6 +15,11 @@ from backend.ai.section_prompt_policy import (
 from backend.db.supabase_repo import get_project_interpretation, list_knowledge_assets
 from backend.ai.qwen_client import LLMStreamTimeoutError, call_dashscope_api, stream_dashscope_api
 from backend.core.config import get_stage_model
+from backend.services.bid_compatibility import (
+    build_bid_product_compatibility_report,
+    is_product_compatibility_blocking,
+    product_compatibility_warning,
+)
 from backend.services.bid_prefill import confirmed_prefill_context
 from backend.services.taichang_bid_context import build_taichang_verified_fact_context, load_taichang_verified_fact_pack
 
@@ -417,7 +422,51 @@ def _supporting_asset_score(asset: dict[str, Any], chapter: dict[str, Any], volu
     return score
 
 
-def _compact_supporting_assets(chapter: dict[str, Any], volume_type: str, limit: int = 6) -> str:
+def _is_product_scope_chapter(chapter: dict[str, Any], volume_type: str) -> bool:
+    text = " ".join(
+        str(item or "")
+        for item in [
+            volume_type,
+            chapter.get("title"),
+            chapter.get("purpose"),
+            " ".join(str(value) for value in (chapter.get("response_points") or [])),
+            " ".join(str(value) for value in (chapter.get("mapped_requirements") or [])),
+            " ".join(str(value) for value in (chapter.get("mapped_scoring_items") or [])),
+        ]
+    )
+    return volume_type == "technical" or any(
+        term in text
+        for term in ("技术", "产品", "参数", "偏差", "检验报告", "供货", "质量", "生产", "制造", "架空绝缘导线", "电缆保护管")
+    )
+
+
+def _compatibility_prompt_warning(report: dict[str, Any]) -> str:
+    return (
+        "- 产品适配性预检阻断："
+        f"{product_compatibility_warning(report)}\n"
+        "- 本节不得引用泰昌 CPVC/MPP 电缆保护管、检验报告、生产线或参数作为当前导线/电缆类招标包的满足依据。\n"
+        "- 如必须生成草稿，只能输出适配性风险说明、需客户补充资料清单和【待补充：对应产品资料/检验报告/技术参数】占位。"
+    )
+
+
+def _section_compatibility_report(project: dict[str, Any], analysis: dict[str, Any]) -> dict[str, Any]:
+    return build_bid_product_compatibility_report({"project": project, "analysis": analysis})
+
+
+def _section_taichang_fact_digest(mode: str, report: dict[str, Any], chapter: dict[str, Any], volume_type: str) -> str:
+    if is_product_compatibility_blocking(report) and _is_product_scope_chapter(chapter, volume_type):
+        return _compatibility_prompt_warning(report)
+    return _taichang_fact_digest(mode)
+
+
+def _compact_supporting_assets(
+    chapter: dict[str, Any],
+    volume_type: str,
+    limit: int = 6,
+    compatibility_report: dict[str, Any] | None = None,
+) -> str:
+    if compatibility_report and is_product_compatibility_blocking(compatibility_report) and _is_product_scope_chapter(chapter, volume_type):
+        return _compatibility_prompt_warning(compatibility_report)
     if limit <= 0:
         return "- 当前 prompt profile 不加载企业资料候选；如本节缺少企业事实，必须使用【待补充：...】并提示人工确认。"
     try:
@@ -468,6 +517,9 @@ def _section_rag_query(project: dict[str, Any], analysis: dict[str, Any], chapte
 
 
 def _compact_section_rag_context(project: dict[str, Any], analysis: dict[str, Any], chapter: dict[str, Any], limit: int = 5) -> str:
+    compatibility_report = _section_compatibility_report(project, analysis)
+    if is_product_compatibility_blocking(compatibility_report) and _is_product_scope_chapter(chapter, section_volume_type(chapter)):
+        return _compatibility_prompt_warning(compatibility_report)
     if limit <= 0:
         return "- 当前 prompt profile 不加载章节级 RAG 写作依据；仅使用草稿、客户确认变量和最小事实边界续写。"
     query = _section_rag_query(project, analysis, chapter)
@@ -529,11 +581,12 @@ def build_section_supplement_prompt(project_id: str, chapter: dict[str, Any], cu
     actual_words = estimate_bid_content_words(current_content)
     missing_words = max(0, target_words - actual_words)
     allow_auto_expand = _allow_auto_expand(chapter)
-    supporting_assets = _compact_supporting_assets(chapter, volume_type, limit=min(profile.asset_limit, 2))
+    compatibility_report = _section_compatibility_report(project, analysis)
+    supporting_assets = _compact_supporting_assets(chapter, volume_type, limit=min(profile.asset_limit, 2), compatibility_report=compatibility_report)
     rag_context = _compact_section_rag_context(project, analysis, chapter, limit=min(profile.rag_limit, 2))
     grounding_instructions = _grounding_instructions(chapter)
     confirmed_variables = _confirmed_prefill_text(project_meta)
-    taichang_facts = _taichang_fact_digest(profile.fact_pack_mode)
+    taichang_facts = _section_taichang_fact_digest(profile.fact_pack_mode, compatibility_report, chapter, volume_type)
     current_excerpt = (current_content or "").strip()
     if len(current_excerpt) > 4200:
         current_excerpt = current_excerpt[-4200:]
@@ -663,11 +716,12 @@ def build_section_continuation_prompt(project_id: str, chapter: dict[str, Any], 
     profile = classify_section_prompt_profile(chapter, continuation=True)
     target_words = _target_words(chapter)
     draft_words = estimate_bid_content_words(draft_content)
-    supporting_assets = _compact_supporting_assets(chapter, volume_type, limit=profile.asset_limit)
+    compatibility_report = _section_compatibility_report(project, analysis)
+    supporting_assets = _compact_supporting_assets(chapter, volume_type, limit=profile.asset_limit, compatibility_report=compatibility_report)
     rag_context = _compact_section_rag_context(project, analysis, chapter, limit=profile.rag_limit)
     grounding_instructions = _grounding_instructions(chapter)
     confirmed_variables = _confirmed_prefill_text(project_meta)
-    taichang_facts = _taichang_fact_digest(profile.fact_pack_mode)
+    taichang_facts = _section_taichang_fact_digest(profile.fact_pack_mode, compatibility_report, chapter, volume_type)
     draft_excerpt = (draft_content or "").strip()
     if len(draft_excerpt) > 2600:
         draft_excerpt = draft_excerpt[-2600:]
@@ -780,11 +834,12 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
         if profile.include_enterprise_profile
         else "- 当前 prompt profile 不加载完整企业画像；仅保留投标主体和事实边界约束。"
     )
-    supporting_assets = _compact_supporting_assets(chapter, volume_type, limit=context_budget["asset_limit"])
+    compatibility_report = _section_compatibility_report(project, analysis)
+    supporting_assets = _compact_supporting_assets(chapter, volume_type, limit=context_budget["asset_limit"], compatibility_report=compatibility_report)
     rag_context = _compact_section_rag_context(project, analysis, chapter, limit=context_budget["rag_limit"])
     grounding_instructions = _grounding_instructions(chapter)
     confirmed_variables = _confirmed_prefill_text(project_meta)
-    taichang_facts = _taichang_fact_digest(profile.fact_pack_mode)
+    taichang_facts = _section_taichang_fact_digest(profile.fact_pack_mode, compatibility_report, chapter, volume_type)
 
     prompt = f"""
 你是资深投标文件撰写专家，熟悉电网/电力工程、设备供货、安装调试、试验检测、运维检修、质量安全管理和招投标文件格式要求。

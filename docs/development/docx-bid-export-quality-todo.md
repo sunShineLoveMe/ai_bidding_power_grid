@@ -19,6 +19,7 @@
 - 2026-06-26 客户新增的 `国家电网有限公司2026年西北、西藏区域第一次联合采购...招标文件包` 已审阅；该批资料定位为招标要求来源和技术参数/货物清单来源，不作为泰昌企业事实，也不作为投标正文视觉主模板直接套用。
 - 若未来客户重新提供可编辑 Word 模板，再进入 `template_docx` 模式；当前 MVP 不等待该资料。
 - 真实验证必须走项目导出链路：`build_project_bid_markdown` -> `convert_md_to_word` -> `refresh_docx_fields_with_soffice`，不得只用 mock 替代。
+- 2026-06-27 阿里云新疆 10kV 真实浏览器验收发现：客户真实长项目名会导致技术标 DOCX 导出任务因 `[Errno 36] File name too long` 失败；已将物理输出目录和文件名短名化。
 
 ## P0 必须完成
 
@@ -36,6 +37,7 @@
 | 已完成 | 表格正式化 | A4 内可读、边框清晰、表头加粗、必要时重复表头、不大面积越界 |
 | 已完成 | 图片资产正式化 | 只允许泰昌企业事实资产，禁止虚假图片路径，正式 DOCX 不展示内部来源库、匹配依据或得分，记录图片候选/选中/插入/失败数 |
 | 已完成 | 真实导出验收记录 | 用真实项目导出 DOCX，记录封面、目录、正文、表格、图片、页眉页脚、字段刷新状态 |
+| 已完成 | 长项目名物理路径短名化 | 阿里云新疆 10kV 项目技术标导出不得因项目全名过长失败；输出目录使用 `project_id[:8]`，文件名使用 `泰昌_<招标编号>_<包号>_<分册>_<日期>.docx`；真实链路已生成 `泰昌_SL265A_包1_技术投标文件_20260627.docx`，LibreOffice 字段刷新成功 |
 
 ## P1 应该完成
 
@@ -62,6 +64,25 @@
 | 待办 | 招标文件格式约束抽取 | 自动抽取第六章/前附表格式要求，并提示用户确认 |
 
 ## P0 第一阶段执行记录
+
+### 2026-06-27 阿里云新疆 10kV 长项目名导出失败记录
+
+- 背景：使用客户新增 `国家电网有限公司2026年西北、西藏区域第一次联合采购10kV电力电缆、架空绝缘导线协议库存公开招标采购` 招标文件包做阿里云真实浏览器全流程验收。
+- 测试项目：`580b8c82-42c2-4a51-a0d2-17b60afa22b9`，招标编号 `SL265A`，包号 `包1`。
+- 技术标草稿导出任务：`d10fc57c-a0ca-472e-a432-d08a6130f10c`。
+- 结果：`POST /api/bidding/interpretations/<project_id>/download-docx` 返回 `201`，但导出任务最终 `failed`。
+- 错误：`[Errno 36] File name too long`；失败路径同时拼接了完整项目名拼音目录、完整中文项目名、投标人、技术标、图文和临时 UUID 后缀。
+- 处理要求：物理路径必须短名化，不得用完整项目名拼接输出目录和临时文件名；修复后需要重跑技术标、商务标和完整投标文件草稿导出。
+- 记录：`docs/development/runs/run_20260627_aliyun_xinjiang_e2e_browser_acceptance.md`。
+
+### 2026-06-27 长项目名短命名修复与真实导出回归
+
+- 修复：`build_project_bid_markdown` 输出目录改为 `project_id[:8]`，不再使用完整项目名拼音；文件名改为 `泰昌_<招标编号>_<包号>_<分册>_<日期>.docx`。
+- 异步导出任务：完成后使用 `image_selection.download_file_name` 写回 `file_name`，前端展示与下载归档名称保持短格式。
+- 自动化回归：`PYTHONPATH=. .venv/bin/pytest tests/test_bid_prefill.py tests/test_formal_bid_check.py tests/test_docx_export.py -q`，结果 `64 passed, 1 warning`。
+- 真实导出链路：`build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。
+- 真实回归结果：项目 `580b8c82-42c2-4a51-a0d2-17b60afa22b9`，输出目录 `580b8c82`，文件 `泰昌_SL265A_包1_技术投标文件_20260627.docx`，模板 `technical_bid_standard`，字段刷新 `refreshed`。
+- 记录：`docs/development/runs/run_20260627_p0_product_compatibility_and_short_docx_names.md`。
 
 ### 2026-06-27 分册导出完成下载按钮真实浏览器回归
 

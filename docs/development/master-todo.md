@@ -59,6 +59,8 @@
 | 已完成 | 正式投标关键字段确认闭环 | 投标确认 / 正式交付 | 报价、保证金、授权代表、签署日期等字段不能由模型编造，但缺失会阻断正式交付 | 前导确认页、正式检查、导出提示使用同一缺口来源；模拟占位可用于测试正文，但带“内部测试”等标记的值会重新进入正式缺口并阻断正式版 | `docs/rag/todo.md` P4-11、`docs/development/formal-check-todo.md`、`docs/development/docx-bid-export-quality-todo.md`、`docs/development/runs/run_20260625_docx_sixth_chapter_form_fidelity.md` |
 | 已完成 | 项目任务总账收口 | 项目管理 / 工程治理 | 多个 TODO 分散导致优先级遗忘和重复建清单 | 新增本文档并将主要散落任务映射到统一 P0/P1/P2；后续优先级以本文档为准 | 本文档 |
 | 已完成 | 新疆技术/商务参考模板族落地 | DOCX / 模板化 / 正式交付 | 客户已提供新疆 10kV 架空绝缘导线中标技术标和商务标正式成稿；系统需要继承正式标书的版式、目录组织和分册结构，同时禁止复用参考稿企业事实 | 已完成参考稿审阅、`technical_bid_standard` 与 `business_bid_standard` 模板 profile、真实技术标/商务标 API 导出、LibreOffice 字段刷新、DOCX XML 审计和完整标书回归；该能力按参考模板族抽取版式和结构，不直接套打参考稿正文 | `docs/development/runs/run_20260626_reference_bid_templates_review.md`、`docs/development/runs/run_20260626_reference_template_implementation.md`、`docs/development/runs/run_20260626_reference_template_full_acceptance.md` |
+| 已完成 | 新疆/新招标项目资料域污染修复 | RAG / 预填 / 正文生成 / 正式检查 | 阿里云真实浏览器上传客户新疆 10kV 架空绝缘导线主招标文件后，投标确认页和技术章节正文混入辽宁 2025、CPVC/MPP、电缆保护管资料；该问题会直接生成错误产品、错误检验报告和错误技术承诺，属于正式交付阻断 | 已新增产品适配性预检：架空绝缘导线项目不再带入辽宁 2225AC/CPVC/MPP 结构化候选，技术章节 prompt 不加载 CPVC/MPP 事实和资产，正式检查 `T-000` 阻断正式导出；定向测试 64 passed，真实 DOCX 链路验证 prompt 阻断生效 | `docs/development/runs/run_20260627_aliyun_xinjiang_e2e_browser_acceptance.md`、`docs/development/runs/run_20260627_p0_product_compatibility_and_short_docx_names.md`、`docs/rag/runs/run_20260627_p0_product_compatibility_gate_summary.md` |
+| 已完成 | 长项目名 DOCX 导出失败修复 | DOCX / 导出 / 阿里云 | 阿里云真实浏览器技术标草稿导出任务创建成功但最终 `failed`，错误为 `[Errno 36] File name too long`；客户真实项目名较长时技术标/商务标无法下载 DOCX | 输出目录已改为 `project_id[:8]`，物理文件名改为 `泰昌_<招标编号>_<包号>_<分册>_<日期>.docx`；真实链路生成 `泰昌_SL265A_包1_技术投标文件_20260627.docx` 并完成 LibreOffice 字段刷新 | `docs/development/runs/run_20260627_aliyun_xinjiang_e2e_browser_acceptance.md`、`docs/development/runs/run_20260627_p0_product_compatibility_and_short_docx_names.md`、`docs/development/docx-bid-export-quality-todo.md` |
 
 ## 当前 P1
 
@@ -139,6 +141,8 @@
 | 2026-06-26 | 全流程项目状态同步与投标确认入口收口完成 | 首页/历史记录不再把已完成正文的项目显示为解析中或旧解析错误；投标确认入口可加载真实报告；草稿待续写项目具备主操作和 `action=resume-partial` 路由 |
 | 2026-06-27 | P1-3 分册导出完成下载按钮收口 | 标书编制页“导出投标文件”下拉入口已支持技术标、商务标、完整投标文件；导出完成后显示文件名、大小、字段刷新、图片统计和明确下载按钮，技术标/商务标真实浏览器导出与下载均通过 |
 | 2026-06-27 | P1-4 与 P2 基础体验收口 | 首页/历史/编辑器正文进度统一为真实叶子章节口径；产品库/资信库加载态、前后端版本追踪、导出任务时间字段和缩略图请求去重均通过真实回归 |
+| 2026-06-27 | 阿里云新疆 10kV 新招标包真实浏览器验收发现 P0 | 真实用户流程已覆盖上传、解读、预填、编辑、生成、正式检查和技术标草稿导出；发现新疆架空绝缘导线项目混入辽宁/CPVC/MPP 资料，以及长项目名导致 DOCX 导出失败，均提升为当前 P0 |
+| 2026-06-27 | 新疆资料域污染与长项目名 DOCX 失败 P0 关闭 | 新增产品适配性预检、章节写作降级和正式检查 `T-000` 阻断；DOCX 物理路径短名化并通过真实 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice` 回归 |
 | 2026-06-25 | AI 辅助编辑 MVP 最小闭环完成 | 合同 MVP 中“扩写、缩写、润色、风格调整”已有真实模型与页面验收记录 |
 | 2026-06-25 | 全文/分册 DOCX 导出接入正式检查门禁 | 阻断项存在时导出任务和前端提示均降级为草稿版，`formal_export_gate` metadata 可追溯 |
 | 2026-06-25 | 正式检查与投标关键字段闭环完成 | 当前演示项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d` 已收口到阻断项 0、正文占位 0、正式必填缺口 0；完整 DOCX 真实链路验收 PASS |

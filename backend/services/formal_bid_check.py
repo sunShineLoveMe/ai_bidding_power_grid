@@ -10,6 +10,10 @@ from typing import Any
 
 from backend.ai.compliance_checker import build_compliance_report
 from backend.db.supabase_repo import get_bid_export_task, get_project_interpretation, list_knowledge_assets
+from backend.services.bid_compatibility import (
+    build_bid_product_compatibility_report,
+    is_product_compatibility_blocking,
+)
 from backend.services.bid_prefill import build_bid_prefill_report, formal_confirmation_issue
 from backend.services.formal_placeholders import collect_formal_placeholders
 
@@ -368,6 +372,20 @@ def _evaluate_rule(
         if bad:
             return _make_result(rule, status="warning", evidence=f"发现疑似内部命名资产 {len(bad)} 条：{bad[0].get('title') or bad[0].get('id')}")
         return _make_result(rule, status="passed", evidence="资产标题/分类未发现常见内部命名。")
+
+    if check_type == "product_compatibility_precheck":
+        report = build_bid_product_compatibility_report(payload)
+        if is_product_compatibility_blocking(report):
+            return _make_result(
+                rule,
+                status="blocked",
+                evidence=report.get("message") or "招标物料与泰昌现有产品资料不匹配。",
+            )
+        return _make_result(
+            rule,
+            status="passed" if report.get("status") == "matched" else "manual_confirm",
+            evidence=report.get("message") or "产品适配性需人工复核。",
+        )
 
     if check_type == "export_metadata_present":
         if export_task:

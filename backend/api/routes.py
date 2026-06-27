@@ -170,6 +170,59 @@ def _display_filename(name: str, fallback: str = "投标文件") -> str:
     return (value or fallback)[:120]
 
 
+def _filename_token(value: object, fallback: str = "", *, max_chars: int = 28) -> str:
+    text = clean_formal_bid_text(str(value or "")) or fallback
+    text = re.sub(r'[<>:"/\\|?*\x00-\x1f]', "", text)
+    text = re.sub(r"\s+", "", text).strip(" ._-")
+    text = re.sub(r"（.*?）|\(.*?\)", "", text)
+    return (text or fallback)[:max_chars]
+
+
+def _first_cover_value(project: dict, project_meta: dict, cover_fields: dict, keys: list[str]) -> str:
+    for key in keys:
+        for source in (cover_fields, project_meta, project):
+            value = source.get(key) if isinstance(source, dict) else None
+            if value not in (None, ""):
+                return str(value)
+    return ""
+
+
+def _export_download_stem(
+    *,
+    project_id: str,
+    project: dict,
+    project_meta: dict,
+    cover_fields: dict,
+    volume_type: str | None,
+    focus_section: dict | None,
+    with_images: bool,
+) -> str:
+    bidder = "泰昌"
+    tender_no = _filename_token(
+        _first_cover_value(project, project_meta, cover_fields, ["tender_no", "project_no", "招标编号", "项目编号"]),
+        f"项目{project_id[:8]}",
+        max_chars=24,
+    )
+    package_no = _filename_token(
+        _first_cover_value(project, project_meta, cover_fields, ["package_no", "包号", "package_name", "包名称"]),
+        "",
+        max_chars=12,
+    )
+    if focus_section:
+        file_type = _filename_token(focus_section.get("title") or "章节", "章节", max_chars=16)
+    else:
+        file_type = _filename_token(delivery_volume_file_type(volume_type), "投标文件", max_chars=10)
+    date_token = datetime.now().strftime("%Y%m%d")
+    parts = [bidder, tender_no]
+    if package_no:
+        parts.append(package_no)
+    parts.extend([file_type, date_token])
+    if with_images:
+        parts.append("图文")
+    stem = "_".join(part for part in parts if part)
+    return _display_filename(stem, fallback=f"泰昌_投标文件_{date_token}")[:90]
+
+
 def _output_url_for_path(path: Path) -> str:
     gen_folder = Path(current_app.config.get('GENERATED_FOLDER', 'outputs')).resolve()
     relative_path = Path(path).resolve().relative_to(gen_folder).as_posix()
@@ -891,7 +944,8 @@ def build_project_bid_markdown(
         project_meta or {}
     ).get("project_name") or project.get("project_name") or "投标文件"
     project_name = clean_formal_bid_text(project_name) or "投标文件"
-    folder_name = _slug_filename(project_name, f"project-{project_id[:8]}")
+    report_cover_fields = dict(project_meta.get("cover_fields") if isinstance(project_meta.get("cover_fields"), dict) else {})
+    folder_name = _slug_filename(project_id[:8], f"project-{project_id[:8]}")
     output_dir = Path(current_app.config.get('GENERATED_FOLDER', 'outputs')) / folder_name
     output_dir.mkdir(parents=True, exist_ok=True)
     focus_section = None
@@ -917,7 +971,6 @@ def build_project_bid_markdown(
         display_suffix = f"{display_suffix}-图文"
 
     delivery_file_type = delivery_volume_file_type(volume_type if not focus_section_id else None)
-    report_cover_fields = dict(project_meta.get("cover_fields") if isinstance(project_meta.get("cover_fields"), dict) else {})
     if delivery_file_type != "投标文件":
         report_cover_fields["文件类型"] = delivery_file_type
 
@@ -992,8 +1045,24 @@ def build_project_bid_markdown(
 
     base_document_title = taichang_bid_document_title(project_name)
     document_title = f"{base_document_title}-{volume_name(volume_type)}" if volume_type and not focus_section else base_document_title
-    file_stem = _display_filename(f"{base_document_title}-{DOCX_BIDDER_FULL_NAME}{display_suffix}", fallback=document_title)
+    file_stem = _export_download_stem(
+        project_id=project_id,
+        project=project,
+        project_meta=project_meta,
+        cover_fields=report_cover_fields,
+        volume_type=volume_type if not focus_section_id else None,
+        focus_section=focus_section,
+        with_images=with_images,
+    )
     markdown_path = output_dir / f"{file_stem}.md"
+    export_image_report["download_file_name"] = f"{file_stem}.docx"
+    export_image_report["download_markdown_name"] = f"{file_stem}.md"
+    export_image_report["output_naming"] = {
+        "scheme": "short_bidder_tender_package_volume_date.v1",
+        "physicalFolder": folder_name,
+        "fileStem": file_stem,
+        "legacyDisplaySuffix": display_suffix,
+    }
     chunks: list[str] = [f"# {document_title}\n\n"]
     used_asset_ids: set[str] = set()
     for section in _numbered_export_sections(sections):

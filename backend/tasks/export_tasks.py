@@ -142,12 +142,16 @@ def _run_bid_docx_export(
             "docx_template": (image_conversion_report or {}).get("template") or {},
             "field_refresh": field_refresh_report,
         }
+        display_file_name = (
+            (image_selection_report or {}).get("download_file_name")
+            or generated_docx_path.name
+        )
         update_bid_export_task(project_id, task_id, {
             "status": "completed",
             "progress": 100,
             "message": field_refresh_report.get("user_message") or ("DOCX 已生成，目录页码已刷新。" if field_refresh_report.get("status") == "refreshed" else "DOCX 已生成，目录页码将在 Word 打开时刷新。"),
             "project_name": project_name,
-            "file_name": generated_docx_path.name,
+            "file_name": display_file_name,
             "file_path": str(generated_docx_path),
             "download_url": _output_url_for_path(generated_docx_path),
             "metadata": export_metadata,

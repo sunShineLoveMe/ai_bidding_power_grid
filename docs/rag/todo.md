@@ -1,6 +1,6 @@
 # 国家电网 RAG 基座数据工程待办清单
 
-> 状态日期：2026-06-25
+> 状态日期：2026-06-27
 > 适用范围：电网/国家电网招投标 RAG 基座数据、客户标书模板、行业资料、召回评测与上线门禁。
 
 本文档用于跟踪 RAG 基座数据工程的优先级、完成度和验收口径。全局产品路线仍看 `docs/development/roadmap.md`；本清单只记录 RAG 数据工程相关任务。
@@ -29,6 +29,7 @@
 | [x] | 写作场景父块回溯 | `backend/rag/retrieval.py`、`backend/ai/chapter_planner.py` | writing 场景 child 命中后可返回 parent |
 | [x] | 核心文档改为 v2 链路 | `docs/features/rag-knowledge-base.md`、`rag_seed/power_grid_resources/README.md` | 当前操作指南不再指向旧入库脚本 |
 | [x] | 旧部署/历史文档标注迁移参考 | `docs/deployment/*` | 已在 Supabase/旧 RAG 入口文档标注“历史/迁移参考”，新环境指向 `migrations/postgres/` 与 v2 RAG 入库链路 |
+| [x] | 新招标项目资料域隔离门禁 | `docs/development/runs/run_20260627_aliyun_xinjiang_e2e_browser_acceptance.md`、`docs/development/runs/run_20260627_p0_product_compatibility_and_short_docx_names.md`、`docs/rag/runs/run_20260627_p0_product_compatibility_gate_summary.md` | 已新增产品适配性预检，架空绝缘导线项目不再混入辽宁 2025、CPVC/MPP、电缆保护管候选；章节写作 prompt 在不适配技术章节中不加载 CPVC/MPP 事实包、企业资产和章节级 RAG 依据；正式检查新增 `T-000` 阻断规则。定向测试 64 passed，真实 DOCX 链路验证 prompt 阻断生效 |
 
 ## P1：客户江西/山西标书模板入库
 
@@ -165,32 +166,33 @@
 
 ## 当前最近任务
 
-0. **产品库/资信库上传入口收口与新资产索引回归已通过。** `run_20260626_product_qualification_upload_index_regression` 完成真实浏览器产品图上传、资产 metadata 校验、真实 `/api/knowledge/search/stream` 命中新上传资产、RAG 单测和 Base 30 + 泰昌专项 30 增量门禁；Base Recall@5 96.7%，泰昌专项 qwen3-rerank Recall@5 100%，跨 doc_role 串扰 0%。
-1. **合同 MVP 真实覆盖验收 RAG 门禁已通过。** `run_20260625_contract_mvp_acceptance` 完成 API ready、RAG 单测、Base 30 + 泰昌专项 30 rerank 开/关对照和真实页面同源 stream；Base Recall@5 96.7%，泰昌专项 qwen3-rerank Recall@5 100%，跨 doc_role 串扰 0%，本轮未新增资料或调整召回策略。
-2. **P1C-1 已完成：泰昌 20260606 正式图片资产 embedding backfill。** 当前真实库 `knowledge_assets=597`，已有 embedding `597`，缺失 `0`。
-3. **P1C-2 已完成：关键词兜底缓存失效机制。** 新增/重入库 `document_chunks` 后，关键词兜底缓存可自动识别水位变化并重建；真实 stream 已验证不重启 Web 命中新 chunk。
-4. **P1C-3 已完成：RAG 本地门禁自动化入口。** 以后本地 RAG 改动优先执行 `set -a; source .env; set +a; .venv/bin/python scripts/rag/run_local_rag_gate.py --run-id <run>`。
-5. **P1C-4 已完成：前导确认页变量 schema v1 与预填缺口报告。** 当前为旁路只读确认页，不替代章节正文编辑，不写入 `bid_sections`，不影响 `sectionsSnapshot` DOCX 导出契约。
-6. **P1C-5 已完成：AI 深度解读后台任务化与进度轮询。** `ai-report-tasks` 创建任务后由 Celery worker 执行，前端轮询 `bid_interpretation_tasks` 状态，不再用长 HTTP 等待完整 DeepSeek 分段/merge。
-7. **P1C-6 已完成：前导确认页接入主流程与可编辑 UI。** “投标确认”不再是一级菜单，而是生成分册大纲后、进入标书编制前的确认步骤；页面支持客户编辑确认值并避免表格溢出。
-8. **P1C-7 已完成：前导确认应用与泰昌参考模板标书成品度收口。** 变量确认值可显式回填章节占位，泰昌 fact pack 已接入，报价、保证金、授权签章等客户决策字段仍不得自动补全。
-9. **P1C-8 已完成：客户参考模板目录解析修复。** 供货类大纲不再只用 23 节兜底结构，已改为解析豪乾参考稿 TOC 并泛化参考稿企业事实；真实项目目录已重建为 102 节。
-10. **P4-8 已完成：货物清单结构化联动前导页候选。** 包号、包名称、物料类别、货物清单摘要已从结构化行级记录带出候选，仍需客户确认后才应用到正文占位符。
-11. **P4-9 已完成：技术参数表联动章节占位与偏差表候选。** 技术参数表、技术偏差表和泰昌检验报告参数已进入前导页候选层；仍需客户确认后才应用到正文占位符。
-12. **P4-10 已完成：章节级候选展示与缺口清单 UI 收口。** 前导页已把 P4-8/P4-9 的结构化候选按章节归类展示，真实项目显示 22 个章节候选、25 个缺口；本轮不生成正文、不处理 PDF 字体或乱码。
-13. **P4-11 已完成：章节候选确认值批量应用与导出前门禁。** 前导页支持按章节采纳候选到客户确认草稿，后端应用结果可返回章节级应用摘要和正式导出 gate；真实项目仍因 10 个正式必填缺口和 39 个正文占位符被正确阻断。
-14. **P1C-9 已完成：正式导出门禁真实验收与回归。** 验收脚本已能正确阻断半成品：上一轮真实项目因空叶子章节 63、正文占位符 26、正式必填缺口 17 被判定 FAIL。
-15. **P1C-10 已完成：正式导出门禁正文与图片收口回归。** 当前真实项目已收口为 102/102 章节有正文、空叶子章节 0、正文占位符 0、图片成品检查通过；正式 ready 仍因 11 个客户决策字段保持 `false`，这些字段不得自动编造。
-16. **P1C-11 已完成：内部演示完整标书模拟确认值回归。** 客户未回复前，已用明确标记的模拟确认值生成完整标书演示版；真实 DOCX/PDF 验收 PASS，`missing_required=0`。该版本只用于内部演示/回归测试，不得作为正式投标承诺。
-17. **P1C-12 已完成：企业库客户测试展示与人员证书归库修复。** 26 条人员相关资产已归到企业资信库“人员证书”，产品库不再残留人员证书；页面展示名和编辑预览已优化。阿里云已执行 `scripts/rag/repair_enterprise_asset_library_display.py --execute`，596 条资产扫描、18 条更新、18 条人员资产迁移。
-18. **P1C-13 已完成：招标项目项目化上下文与解读页可用性回归。** 招标项目页不再让客户猜测当前是哪次解析；默认入口标注为“最近一次已完成解读”，并提供历史项目下拉、查看全部历史和进入标书编制入口；红框标签已按真实接口和当前项目数据回归。
-19. **P1C-14 已完成：企业知识库问答事实与来源修复。** 阿里云 `:8080` 真实页面三问主答案可用，formal 图片资产和 embedding 已恢复，二维码/局部裁剪图问题消失；社保证明归库 P0 已修复，页面复测显示为“人员证书 · 资信库资料”。
-20. **P1C-15 已完成：阿里云企业库展示与来源收敛收口。** 查询侧已按证据类型桶收敛资质证书、绿色低碳、人员社保、检验报告、生产制造能力等来源；展示层不再把具体分类覆盖为“泰昌企业资料”；本地执行绿色低碳 metadata 修复后，221 条绿色/低碳资产和 1205 条 chunk 均归入 `green_low_carbon`。6 问真实 API 审计和标准门禁 `run_20260626_taichang_enterprise_source_scope_final` 均 PASS；阿里云线上 `ac01c14` 后端/API 核心回归 PASS，`cfd1e4e03dd5` 前端标题补丁发布后 Chrome 页面复验 PASS。资质证书问答未再混入绿色低碳来源，绿色低碳参考来源标题已显示“绿色发展规划报告”“碳足迹报告”。
-21. **SG-PROMPT-001 已完成：Prompt profile 分级瘦身与生成输入预算。** 章节生成已按 profile 控制 RAG/企业资料/事实包/prompt 字符预算，并把 profile 指标写入生成任务 metadata；本地 RAG 门禁 `run_20260625_sg_prompt_001` PASS，完整 DOCX 导出链路 PASS。
-22. **SG-SLOW-001 已完成：慢流提前保护与 partial 草稿释放并发槽。** 章节生成低吞吐时会提前触发 `MODEL_STREAM_SLOW_TIMEOUT`，保存 partial 草稿并释放生成槽；本地强制慢流任务、正常阈值任务和 RAG 门禁 `run_20260625_sg_slow_001` 均 PASS。
-23. **SG-CONCURRENCY-001 已完成：自适应并发调度与任务级慢流窗口降档。** 批量章节生成已按任务最近窗口输出 `current_concurrency`；连续慢流/模型流超时自动降为单路补位，稳定窗口具备恢复并发能力；本地真实初始窗口、慢流降档和 RAG 门禁 `run_20260625_sg_concurrency_001` 均 PASS。
-24. **SG-PARTIAL-001 已完成：partial 草稿续写上限、复核态与批量续写入口。** partial-only 任务不再被 coordinator 早退跳过；短草稿自动使用 `continuation_slim` 续写，连续慢流/达到上限转人工复核，页面显示“批量续写草稿”和草稿/复核统计；本地真实自动续写、复核态、批量续写 API、页面入口和 RAG 门禁 `run_20260625_sg_partial_001` 均 PASS。
-25. **SG-PROGRESS-001 已完成：客户视角进度与下载前草稿版确认。** 目录页显示待完成、正在写、排队、草稿待续写和需复核，不向客户暴露慢流/并发等技术词；全文 DOCX 下载前会提示“当前文件仍是草稿版”，明确不能作为正式投标文件提交；真实浏览器回归、临时 partial 任务清理和 RAG 门禁 `run_20260625_sg_progress_001` 均 PASS。
-26. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表；仅在参数规模变大、多批次查询复杂或页面精确查询成为瓶颈后启动。
-27. P1B 泰昌补充资料质量增强已完成；后续新增资料按 `docs/rag/taichang-material-completeness-scorecard.md` 的 P0/P1/P2 补资料清单更新评分，并重跑真实回归。
-28. 客户演示完整标书已完成 DeepSeek 全量章节重写和真实 DOCX/PDF 验收：见 `docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`；后续若客户更换目标招标文件或 Word 模板，需重新生成章节、重新导出并复跑验收。
+0. **阿里云新疆 10kV 新招标包资料域隔离门禁已完成。** 已新增产品适配性预检并覆盖预填候选、技术参数候选、正文事实包和正式检查 `T-000` 阻断规则；架空绝缘导线项目不再自动带入辽宁 2025、CPVC/MPP、电缆保护管资料。定向测试 `64 passed`，真实 DOCX 链路验证 prompt 阻断生效。
+1. **产品库/资信库上传入口收口与新资产索引回归已通过。** `run_20260626_product_qualification_upload_index_regression` 完成真实浏览器产品图上传、资产 metadata 校验、真实 `/api/knowledge/search/stream` 命中新上传资产、RAG 单测和 Base 30 + 泰昌专项 30 增量门禁；Base Recall@5 96.7%，泰昌专项 qwen3-rerank Recall@5 100%，跨 doc_role 串扰 0%。
+2. **合同 MVP 真实覆盖验收 RAG 门禁已通过。** `run_20260625_contract_mvp_acceptance` 完成 API ready、RAG 单测、Base 30 + 泰昌专项 30 rerank 开/关对照和真实页面同源 stream；Base Recall@5 96.7%，泰昌专项 qwen3-rerank Recall@5 100%，跨 doc_role 串扰 0%，本轮未新增资料或调整召回策略。
+3. **P1C-1 已完成：泰昌 20260606 正式图片资产 embedding backfill。** 当前真实库 `knowledge_assets=597`，已有 embedding `597`，缺失 `0`。
+4. **P1C-2 已完成：关键词兜底缓存失效机制。** 新增/重入库 `document_chunks` 后，关键词兜底缓存可自动识别水位变化并重建；真实 stream 已验证不重启 Web 命中新 chunk。
+5. **P1C-3 已完成：RAG 本地门禁自动化入口。** 以后本地 RAG 改动优先执行 `set -a; source .env; set +a; .venv/bin/python scripts/rag/run_local_rag_gate.py --run-id <run>`。
+6. **P1C-4 已完成：前导确认页变量 schema v1 与预填缺口报告。** 当前为旁路只读确认页，不替代章节正文编辑，不写入 `bid_sections`，不影响 `sectionsSnapshot` DOCX 导出契约。
+7. **P1C-5 已完成：AI 深度解读后台任务化与进度轮询。** `ai-report-tasks` 创建任务后由 Celery worker 执行，前端轮询 `bid_interpretation_tasks` 状态，不再用长 HTTP 等待完整 DeepSeek 分段/merge。
+8. **P1C-6 已完成：前导确认页接入主流程与可编辑 UI。** “投标确认”不再是一级菜单，而是生成分册大纲后、进入标书编制前的确认步骤；页面支持客户编辑确认值并避免表格溢出。
+9. **P1C-7 已完成：前导确认应用与泰昌参考模板标书成品度收口。** 变量确认值可显式回填章节占位，泰昌 fact pack 已接入，报价、保证金、授权签章等客户决策字段仍不得自动补全。
+10. **P1C-8 已完成：客户参考模板目录解析修复。** 供货类大纲不再只用 23 节兜底结构，已改为解析豪乾参考稿 TOC 并泛化参考稿企业事实；真实项目目录已重建为 102 节。
+11. **P4-8 已完成：货物清单结构化联动前导页候选。** 包号、包名称、物料类别、货物清单摘要已从结构化行级记录带出候选，仍需客户确认后才应用到正文占位符。
+12. **P4-9 已完成：技术参数表联动章节占位与偏差表候选。** 技术参数表、技术偏差表和泰昌检验报告参数已进入前导页候选层；仍需客户确认后才应用到正文占位符。
+13. **P4-10 已完成：章节级候选展示与缺口清单 UI 收口。** 前导页已把 P4-8/P4-9 的结构化候选按章节归类展示，真实项目显示 22 个章节候选、25 个缺口；本轮不生成正文、不处理 PDF 字体或乱码。
+14. **P4-11 已完成：章节候选确认值批量应用与导出前门禁。** 前导页支持按章节采纳候选到客户确认草稿，后端应用结果可返回章节级应用摘要和正式导出 gate；真实项目仍因 10 个正式必填缺口和 39 个正文占位符被正确阻断。
+15. **P1C-9 已完成：正式导出门禁真实验收与回归。** 验收脚本已能正确阻断半成品：上一轮真实项目因空叶子章节 63、正文占位符 26、正式必填缺口 17 被判定 FAIL。
+16. **P1C-10 已完成：正式导出门禁正文与图片收口回归。** 当前真实项目已收口为 102/102 章节有正文、空叶子章节 0、正文占位符 0、图片成品检查通过；正式 ready 仍因 11 个客户决策字段保持 `false`，这些字段不得自动编造。
+17. **P1C-11 已完成：内部演示完整标书模拟确认值回归。** 客户未回复前，已用明确标记的模拟确认值生成完整标书演示版；真实 DOCX/PDF 验收 PASS，`missing_required=0`。该版本只用于内部演示/回归测试，不得作为正式投标承诺。
+18. **P1C-12 已完成：企业库客户测试展示与人员证书归库修复。** 26 条人员相关资产已归到企业资信库“人员证书”，产品库不再残留人员证书；页面展示名和编辑预览已优化。阿里云已执行 `scripts/rag/repair_enterprise_asset_library_display.py --execute`，596 条资产扫描、18 条更新、18 条人员资产迁移。
+19. **P1C-13 已完成：招标项目项目化上下文与解读页可用性回归。** 招标项目页不再让客户猜测当前是哪次解析；默认入口标注为“最近一次已完成解读”，并提供历史项目下拉、查看全部历史和进入标书编制入口；红框标签已按真实接口和当前项目数据回归。
+20. **P1C-14 已完成：企业知识库问答事实与来源修复。** 阿里云 `:8080` 真实页面三问主答案可用，formal 图片资产和 embedding 已恢复，二维码/局部裁剪图问题消失；社保证明归库 P0 已修复，页面复测显示为“人员证书 · 资信库资料”。
+21. **P1C-15 已完成：阿里云企业库展示与来源收敛收口。** 查询侧已按证据类型桶收敛资质证书、绿色低碳、人员社保、检验报告、生产制造能力等来源；展示层不再把具体分类覆盖为“泰昌企业资料”；本地执行绿色低碳 metadata 修复后，221 条绿色/低碳资产和 1205 条 chunk 均归入 `green_low_carbon`。6 问真实 API 审计和标准门禁 `run_20260626_taichang_enterprise_source_scope_final` 均 PASS；阿里云线上 `ac01c14` 后端/API 核心回归 PASS，`cfd1e4e03dd5` 前端标题补丁发布后 Chrome 页面复验 PASS。资质证书问答未再混入绿色低碳来源，绿色低碳参考来源标题已显示“绿色发展规划报告”“碳足迹报告”。
+22. **SG-PROMPT-001 已完成：Prompt profile 分级瘦身与生成输入预算。** 章节生成已按 profile 控制 RAG/企业资料/事实包/prompt 字符预算，并把 profile 指标写入生成任务 metadata；本地 RAG 门禁 `run_20260625_sg_prompt_001` PASS，完整 DOCX 导出链路 PASS。
+23. **SG-SLOW-001 已完成：慢流提前保护与 partial 草稿释放并发槽。** 章节生成低吞吐时会提前触发 `MODEL_STREAM_SLOW_TIMEOUT`，保存 partial 草稿并释放生成槽；本地强制慢流任务、正常阈值任务和 RAG 门禁 `run_20260625_sg_slow_001` 均 PASS。
+24. **SG-CONCURRENCY-001 已完成：自适应并发调度与任务级慢流窗口降档。** 批量章节生成已按任务最近窗口输出 `current_concurrency`；连续慢流/模型流超时自动降为单路补位，稳定窗口具备恢复并发能力；本地真实初始窗口、慢流降档和 RAG 门禁 `run_20260625_sg_concurrency_001` 均 PASS。
+25. **SG-PARTIAL-001 已完成：partial 草稿续写上限、复核态与批量续写入口。** partial-only 任务不再被 coordinator 早退跳过；短草稿自动使用 `continuation_slim` 续写，连续慢流/达到上限转人工复核，页面显示“批量续写草稿”和草稿/复核统计；本地真实自动续写、复核态、批量续写 API、页面入口和 RAG 门禁 `run_20260625_sg_partial_001` 均 PASS。
+26. **SG-PROGRESS-001 已完成：客户视角进度与下载前草稿版确认。** 目录页显示待完成、正在写、排队、草稿待续写和需复核，不向客户暴露慢流/并发等技术词；全文 DOCX 下载前会提示“当前文件仍是草稿版”，明确不能作为正式投标文件提交；真实浏览器回归、临时 partial 任务清理和 RAG 门禁 `run_20260625_sg_progress_001` 均 PASS。
+27. 评估是否新增 `power_grid_technical_parameter_rows`、`power_grid_product_parameter_rows` 和 `power_grid_technical_deviation_rows` 数据库表；仅在参数规模变大、多批次查询复杂或页面精确查询成为瓶颈后启动。
+28. P1B 泰昌补充资料质量增强已完成；后续新增资料按 `docs/rag/taichang-material-completeness-scorecard.md` 的 P0/P1/P2 补资料清单更新评分，并重跑真实回归。
+29. 客户演示完整标书已完成 DeepSeek 全量章节重写和真实 DOCX/PDF 验收：见 `docs/development/runs/run_20260612_taichang_full_bid_final_v6.md`；后续若客户更换目标招标文件或 Word 模板，需重新生成章节、重新导出并复跑验收。

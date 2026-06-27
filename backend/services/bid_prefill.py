@@ -17,6 +17,11 @@ from backend.db.supabase_repo import (
     update_bid_section_content,
 )
 from backend.export.md_to_word import DOCX_BIDDER_FULL_NAME
+from backend.services.bid_compatibility import (
+    build_bid_product_compatibility_report,
+    is_product_compatibility_blocking,
+    product_compatibility_warning,
+)
 from backend.services.taichang_bid_context import build_taichang_prefill_values
 
 
@@ -109,6 +114,7 @@ PREFILL_FIELD_SPECS: tuple[PrefillFieldSpec, ...] = (
 def build_bid_prefill_report(project_id: str) -> dict[str, Any]:
     interpretation = get_project_interpretation(project_id)
     project_meta = _project_meta(interpretation)
+    compatibility_report = build_bid_product_compatibility_report(interpretation)
     saved_prefill = project_meta.get(PREFILL_META_KEY) if isinstance(project_meta.get(PREFILL_META_KEY), dict) else {}
     confirmed_values = saved_prefill.get("confirmed_values") if isinstance(saved_prefill.get("confirmed_values"), dict) else {}
     assets = _safe_list_knowledge_assets()
@@ -135,6 +141,8 @@ def build_bid_prefill_report(project_id: str) -> dict[str, Any]:
             "affectsSectionsSnapshotExport": bool(saved_prefill.get("applied_at")),
             "readyForFormalExport": bool(saved_prefill.get("ready_for_formal_export")),
             "unresolvedPlaceholderCount": int(saved_prefill.get("unresolved_placeholder_count") or 0),
+            "productCompatibilityStatus": compatibility_report.get("status"),
+            "productCompatibilityBlocking": bool(compatibility_report.get("blocking")),
         },
         "groups": _group_fields(fields),
         "fields": fields,
@@ -145,6 +153,7 @@ def build_bid_prefill_report(project_id: str) -> dict[str, Any]:
             "customerRequiredFields": [field for field in fields if field["status"] == "customer_required"],
             "manualConfirmFields": [field for field in fields if field["status"] == "manual_confirm"],
         },
+        "productCompatibility": compatibility_report,
         "sourceRules": [
             "招标文件解析字段只作为候选值，包号、货物清单、交货期等正式投标字段仍需确认。",
             "企业知识库、资信库、产品库只提供可追溯事实和附件候选，不自动代表本次投标采用。",
@@ -445,6 +454,23 @@ def _build_prefill_export_gate(
 
 
 def _candidate_value(key: str, interpretation: dict[str, Any], assets: list[dict[str, Any]]) -> tuple[Any, dict[str, Any], float]:
+    compatibility_report = build_bid_product_compatibility_report(interpretation)
+    compatibility_blocking = is_product_compatibility_blocking(compatibility_report)
+    product_fact_keys = {
+        "inspection_reports",
+        "product_models",
+        "product_image_assets",
+        "technical_parameter_summary",
+        "technical_deviation_candidates",
+        "taichang_parameter_match_summary",
+    }
+    if compatibility_blocking and key in product_fact_keys:
+        return (
+            product_compatibility_warning(compatibility_report),
+            _product_compatibility_evidence(compatibility_report),
+            0.92,
+        )
+
     taichang_values = build_taichang_prefill_values()
     if key in taichang_values:
         return taichang_values[key], _evidence("taichang_verified_fact_pack"), 0.94
@@ -501,7 +527,7 @@ def _candidate_value(key: str, interpretation: dict[str, Any], assets: list[dict
     if key == "material_category":
         if "material_category" in structured_goods:
             return structured_goods["material_category"]
-        return _keyword_value(all_text, ["CPVC电缆保护管", "MPP电缆保护管", "电缆保护管", "铁构件", "接地铁"], "tender_text_keyword")
+        return _keyword_value(all_text, ["架空绝缘导线", "绝缘导线", "电力电缆", "CPVC电缆保护管", "MPP电缆保护管", "电缆保护管", "铁构件", "接地铁"], "tender_text_keyword")
     if key == "goods_list_summary":
         if "goods_list_summary" in structured_goods:
             return structured_goods["goods_list_summary"]
@@ -597,6 +623,10 @@ def _structured_goods_prefill_candidates(
     if not rows:
         return {}
 
+    compatibility_report = build_bid_product_compatibility_report(interpretation)
+    if is_product_compatibility_blocking(compatibility_report):
+        return {}
+
     project = interpretation.get("project") if isinstance(interpretation.get("project"), dict) else {}
     analysis = interpretation.get("analysis") if isinstance(interpretation.get("analysis"), dict) else {}
     project_meta = analysis.get("project_meta") if isinstance(analysis.get("project_meta"), dict) else {}
@@ -613,7 +643,7 @@ def _structured_goods_prefill_candidates(
     ])
 
     filtered = _filter_goods_rows(rows, context_text)
-    summary = _summarize_structured_goods_rows(filtered or rows)
+    summary = _summarize_structured_goods_rows(filtered)
     if not summary:
         return {}
 
@@ -671,16 +701,16 @@ def _filter_goods_rows(rows: list[dict[str, Any]], context_text: str) -> list[di
             row for row in filtered
             if str(row.get("_package_code") or "").upper() in {item.upper() for item in package_code_matches}
             or any(str(row.get("分标编号") or "").upper().startswith(item.upper()) for item in package_code_matches)
-        ] or filtered
+        ]
 
     package_no = _extract_package_from_context(context_text)
     if package_no:
-        filtered = [row for row in filtered if str(row.get("包名称") or "").strip() == package_no] or filtered
+        filtered = [row for row in filtered if str(row.get("包名称") or "").strip() == package_no]
 
     material_matches = [family for family in ("CPVC", "MPP") if family in context_text.upper()]
     if len(material_matches) == 1:
         family = material_matches[0]
-        filtered = [row for row in filtered if str(row.get("_material_family") or "").upper() == family] or filtered
+        filtered = [row for row in filtered if str(row.get("_material_family") or "").upper() == family]
 
     return filtered
 
@@ -774,12 +804,16 @@ def _structured_technical_prefill_candidates(
         return {}
 
     context_text = _prefill_context_text(interpretation, all_text)
+    compatibility_report = build_bid_product_compatibility_report(interpretation)
+    if is_product_compatibility_blocking(compatibility_report):
+        return {}
+
     filtered_technical = _filter_parameter_rows(technical_rows, context_text)
     filtered_deviations = _filter_parameter_rows(deviation_rows, context_text)
     filtered_goods = _filter_goods_rows(goods_rows, context_text)
-    technical_summary = _summarize_technical_parameter_rows(filtered_technical or technical_rows)
-    deviation_summary = _summarize_technical_deviation_rows(filtered_deviations or deviation_rows)
-    product_summary = _summarize_taichang_parameter_match(product_rows, filtered_technical or technical_rows, filtered_goods or goods_rows)
+    technical_summary = _summarize_technical_parameter_rows(filtered_technical)
+    deviation_summary = _summarize_technical_deviation_rows(filtered_deviations)
+    product_summary = _summarize_taichang_parameter_match(product_rows, filtered_technical, filtered_goods)
 
     candidates: dict[str, tuple[Any, dict[str, Any], float]] = {}
     if technical_summary:
@@ -842,16 +876,16 @@ def _filter_parameter_rows(rows: list[dict[str, Any]], context_text: str) -> lis
         filtered = [
             row for row in filtered
             if str(row.get("package_code") or "").upper() in {item.upper() for item in package_code_matches}
-        ] or filtered
+        ]
 
     package_no = _extract_package_from_context(context_text)
     if package_no:
-        filtered = [row for row in filtered if str(row.get("package_no") or "").strip() == package_no] or filtered
+        filtered = [row for row in filtered if str(row.get("package_no") or "").strip() == package_no]
 
     material_matches = [family for family in ("CPVC", "MPP") if family in context_text.upper()]
     if len(material_matches) == 1:
         family = material_matches[0]
-        filtered = [row for row in filtered if family in str(row.get("material_category") or "").upper()] or filtered
+        filtered = [row for row in filtered if family in str(row.get("material_category") or "").upper()]
 
     return filtered
 
@@ -1172,6 +1206,19 @@ def _evidence(source_type: str, *, snippet: str | None = None) -> dict[str, Any]
     if snippet:
         evidence["snippet"] = snippet
     return evidence
+
+
+def _product_compatibility_evidence(report: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "sourceType": "product_compatibility_precheck",
+        "sourceLabel": "投标产品适配性预检",
+        "sourceDomain": "tender_requirement_vs_enterprise_fact",
+        "factSourceAllowedForEnterprise": False,
+        "blocking": bool(report.get("blocking")),
+        "detectedTenderMaterials": report.get("detectedTenderMaterials") or [],
+        "supportedProductFamilies": report.get("supportedProductFamilies") or [],
+        "message": report.get("message"),
+    }
 
 
 def _group_fields(fields: list[dict[str, Any]]) -> list[dict[str, Any]]:
