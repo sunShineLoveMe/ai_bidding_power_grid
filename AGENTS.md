@@ -46,6 +46,25 @@
 - 结构化参数接入知识库问答后，必须用真实 API/stream 链路验证具体数值、报告编号和资料来源，不得只用 mock 或单元测试替代；
 - 出现水利或其他非电网资料时，先隔离/删除，再复跑召回评测。
 
+## 正式投标资产入库与上传资料清洗 Skill
+
+当用户要求处理客户自行上传或批量提供的图片、PDF、Word、Excel、CSV、产品资料、资信资料、企业知识库资料、检验报告图片、生产线/检测设备照片、证书扫描件、合同/中标通知书、图片资产命名、正式 caption、产品库/资信库入库、RAG 图片资产召回或 DOCX 标书配图时，必须先使用以下 Skill：
+
+- Skill 路径：`.agents/skills/formal-bid-asset-ingestion/`
+- 资产策略：`.agents/skills/formal-bid-asset-ingestion/references/asset-policy.md`
+- 验证门禁：`.agents/skills/formal-bid-asset-ingestion/references/validation-gates.md`
+
+执行原则：
+
+- 客户上传资料不得直接以原始文件名、拼音/英文枚举、解析路径、`页面_`、`原图`、UUID 或 API 路径进入用户可见页面、RAG 回答或正式 DOCX。
+- 所有正式展示字段必须中文友好：`title`、`category`、`tags`、`description`、`source_display_name`、`category_label`、`evidence_type_label`、`target_library_label` 和正式题注策略。
+- 文件必须先做来源域、证据类型、目标库、质量等级和正文可用性判断；默认质量等级包括 `formal_bid_ready`、`knowledge_only`、`review_only`、`restricted`。
+- PNG/JPG/WebP 可作为客户原始图片资产；PDF 证书/报告/合同类应优先按整页渲染；MinerU 局部切图、二维码、印章、签名、页脚、局部表格单元格等只能作为复核线索，不得自动入正式展示库或标书正文。
+- `.xlsx/.csv` 和 Word/PDF 中的参数表、货物清单、偏差表、合同明细、金额/数量/日期/型号等必须结构化抽取，不得只做普通文本向量化。
+- 涉及 RAG 入库、召回、metadata 或参考来源展示时，同时使用 `power-grid-rag-ingestion` Skill 并执行 Base + 泰昌专项增量门禁。
+- 涉及正式 DOCX 配图或题注时，必须走真实导出链路并审计 DOCX XML；不得只用 mock 或单元测试替代。
+- 每次处理后必须同步 `docs/rag/runs/`、`docs/rag/evaluation-records.md`、`docs/rag/todo.md`；涉及正式资产治理时同步 `docs/development/taichang-formal-asset-cleanup-todo.md`。
+
 ## 泰昌 MVP 试点企业规则
 
 当前 MVP 试点企业和默认投标主体是：

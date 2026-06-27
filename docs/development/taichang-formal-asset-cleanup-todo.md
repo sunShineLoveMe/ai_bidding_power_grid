@@ -61,8 +61,8 @@
 
 | 状态 | 任务 | 交付物 | 验收口径 |
 | --- | --- | --- | --- |
-| [ ] | P2-1 建立资产正式化 SOP | `docs/rag/customer-template-ingestion-sop.md` 更新 | 客户新增资料后，必须先 inventory，再生成正式标题、正式 caption、正文可用策略、追溯 metadata，不允许直接用文件名入库展示 |
-| [ ] | P2-2 建立图片资产质量分级 | 资产质量枚举与文档 | `formal_bid_ready`、`knowledge_only`、`review_only`、`restricted` 等分级清晰；选图只用 `formal_bid_ready` |
+| [x] | P2-1 建立资产正式化 SOP | `.agents/skills/formal-bid-asset-ingestion/`、`AGENTS.md` | 已抽取为项目 Skill；客户新增图片、PDF、Word、Excel、CSV、产品/资信/企业知识库资料时，必须先 inventory、确认来源域、生成正式中文标题/分类/标签/题注策略和追溯 metadata，不允许直接用原始文件名入库展示 |
+| [x] | P2-2 建立图片资产质量分级 | `.agents/skills/formal-bid-asset-ingestion/references/asset-policy.md` | 已定义 `formal_bid_ready`、`knowledge_only`、`review_only`、`restricted`；正式标书自动选图只允许 `formal_bid_ready`，MinerU 局部切图、二维码、印章、签名、页脚、局部表格单元格默认仅作 `review_only` |
 | [ ] | P2-3 建立云端修复发布 runbook | `docs/deployment/` 或 run 记录 | 本地修复脚本、阿里云执行命令、回滚方式、验证命令固定化，避免线上线下数据不一致 |
 | [ ] | P2-4 客户补资料模板 | 飞书/Markdown 清单 | 明确要求客户提供原始高清产品照片、生产线照片、检测设备照片、完整 PDF 扫描件，不鼓励提供碎片截图 |
 
@@ -148,6 +148,15 @@ build_project_bid_markdown(volume_type=technical/business, with_images=true)
 - 真实 stream：`泰昌MPP生产线资料可以作为技术标生产制造能力配图吗？` 召回 4 条资料、4 个图片资产、4 张图片，新上传资产被召回；SSE 和回答正文禁用字段命中 0。
 - 清理：测试资产 `b522d9fb-5011-43e7-840f-f9b85710b14e` 已从数据库删除，避免 1x1 回归样张进入正式产品库或 RAG。
 - 回归：`tests/test_knowledge_asset_upload_payload.py tests/test_rag_display_names.py tests/test_rag_retrieval.py` 为 40 passed；`run_20260627_upload_entry_formal_asset_gate` 标准增量门禁 PASS。
+
+### 2026-06-27 正式投标资产入库 SOP Skill 化
+
+- Skill：`.agents/skills/formal-bid-asset-ingestion/`。
+- 接入规则：已在 `AGENTS.md` 增加“正式投标资产入库与上传资料清洗 Skill”，后续处理客户上传图片、PDF、Word、Excel、CSV、产品库/资信库/企业知识库资料、RAG 图片资产或 DOCX 配图时必须先使用。
+- 核心流程：客户资料先 inventory，再做来源域、证据类型、目标库、质量等级、正文可用性和正式中文展示字段判断；内部枚举、解析路径、`页面_`、`原图`、UUID 和 API 路径只允许留在 metadata 或审计记录中。
+- 质量分级：`formal_bid_ready`、`knowledge_only`、`review_only`、`restricted` 已固化在 `references/asset-policy.md`。
+- 验证门禁：真实上传、列表/详情、`/api/knowledge/search/stream`、Base+泰昌专项增量门禁、DOCX 导出和文档同步要求已固化在 `references/validation-gates.md`。
+- 校验：`.venv/bin/python /Users/chris/.codex/skills/.system/skill-creator/scripts/quick_validate.py .agents/skills/formal-bid-asset-ingestion` 通过。
 
 ### 2026-06-27 阿里云线上真实浏览器全流程回归确认
 
