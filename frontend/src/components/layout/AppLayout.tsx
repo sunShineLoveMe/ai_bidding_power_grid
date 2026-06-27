@@ -1,7 +1,7 @@
-import type { PropsWithChildren } from 'react';
+import type { PointerEvent as ReactPointerEvent, PropsWithChildren } from 'react';
 import { BookOpen, Box, CircleDollarSign, ClipboardCheck, FileClock, FileSearch, Home, LogOut, Settings, ShieldCheck, Sparkles, UserRound } from 'lucide-react';
 import { Button } from 'antd';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { GlobalLoading } from '../common/GlobalLoading';
 import { BrandMark } from '../common/BrandMark';
@@ -21,10 +21,56 @@ const navItems = [
   { path: '/history', label: '历史记录', icon: FileClock },
 ] as const;
 
+const ASSISTANT_POSITION_KEY = 'ai-bidding-knowledge-assistant-position';
+
+type AssistantPosition = { x: number; y: number };
+
+function defaultAssistantPosition(): AssistantPosition {
+  if (typeof window === 'undefined') return { x: 0, y: 0 };
+  const estimatedWidth = window.innerWidth >= 1536 ? 150 : 48;
+  return {
+    x: window.innerWidth - estimatedWidth - 28,
+    y: window.innerHeight - 120,
+  };
+}
+
+function clampAssistantPosition(position: AssistantPosition, element?: HTMLElement | null): AssistantPosition {
+  if (typeof window === 'undefined') return position;
+  const margin = 12;
+  const headerGuard = 76;
+  const footerGuard = 60;
+  const width = element?.offsetWidth || (window.innerWidth >= 1536 ? 150 : 48);
+  const height = element?.offsetHeight || 48;
+  return {
+    x: Math.min(Math.max(position.x, margin), window.innerWidth - width - margin),
+    y: Math.min(Math.max(position.y, headerGuard), window.innerHeight - height - footerGuard),
+  };
+}
+
+function readAssistantPosition(): AssistantPosition {
+  const fallback = defaultAssistantPosition();
+  if (typeof window === 'undefined') return fallback;
+  try {
+    const raw = window.localStorage.getItem(ASSISTANT_POSITION_KEY);
+    if (!raw) return fallback;
+    const parsed = JSON.parse(raw) as Partial<AssistantPosition>;
+    if (typeof parsed.x === 'number' && typeof parsed.y === 'number') {
+      return { x: parsed.x, y: parsed.y };
+    }
+  } catch {
+    return fallback;
+  }
+  return fallback;
+}
+
 export function AppLayout({ children }: PropsWithChildren): JSX.Element {
   const location = useLocation();
   const navigate = useNavigate();
   const [knowledgeAssistantOpen, setKnowledgeAssistantOpen] = useState(false);
+  const assistantButtonRef = useRef<HTMLButtonElement | null>(null);
+  const dragStateRef = useRef<{ pointerId: number; startX: number; startY: number; originX: number; originY: number; dragged: boolean } | null>(null);
+  const [assistantPosition, setAssistantPosition] = useState<AssistantPosition>(() => readAssistantPosition());
+  const [assistantDragging, setAssistantDragging] = useState(false);
   const pendingCount = useLoadingStore(state => state.pendingCount);
   const user = useAuthStore(state => state.user);
   const clearSession = useAuthStore(state => state.clearSession);
@@ -37,6 +83,66 @@ export function AppLayout({ children }: PropsWithChildren): JSX.Element {
       clearSession();
       navigate('/login', { replace: true });
     }
+  }
+
+  useEffect(() => {
+    const handleResize = () => {
+      setAssistantPosition(position => {
+        const next = clampAssistantPosition(position, assistantButtonRef.current);
+        window.localStorage.setItem(ASSISTANT_POSITION_KEY, JSON.stringify(next));
+        return next;
+      });
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  function handleAssistantPointerDown(event: ReactPointerEvent<HTMLButtonElement>): void {
+    if (event.button !== 0) return;
+    const origin = clampAssistantPosition(assistantPosition, assistantButtonRef.current);
+    dragStateRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      originX: origin.x,
+      originY: origin.y,
+      dragged: false,
+    };
+    event.currentTarget.setPointerCapture(event.pointerId);
+  }
+
+  function handleAssistantPointerMove(event: ReactPointerEvent<HTMLButtonElement>): void {
+    const dragState = dragStateRef.current;
+    if (!dragState || dragState.pointerId !== event.pointerId) return;
+    const dx = event.clientX - dragState.startX;
+    const dy = event.clientY - dragState.startY;
+    if (!dragState.dragged && Math.hypot(dx, dy) < 4) return;
+    dragState.dragged = true;
+    setAssistantDragging(true);
+    setAssistantPosition(clampAssistantPosition({ x: dragState.originX + dx, y: dragState.originY + dy }, assistantButtonRef.current));
+  }
+
+  function finishAssistantDrag(event: ReactPointerEvent<HTMLButtonElement>): void {
+    const dragState = dragStateRef.current;
+    if (!dragState || dragState.pointerId !== event.pointerId) return;
+    const next = clampAssistantPosition({
+      x: dragState.originX + event.clientX - dragState.startX,
+      y: dragState.originY + event.clientY - dragState.startY,
+    }, assistantButtonRef.current);
+    setAssistantPosition(next);
+    window.localStorage.setItem(ASSISTANT_POSITION_KEY, JSON.stringify(next));
+    setAssistantDragging(false);
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+  }
+
+  function handleAssistantClick(): void {
+    const dragged = dragStateRef.current?.dragged;
+    dragStateRef.current = null;
+    if (dragged) return;
+    setKnowledgeAssistantOpen(true);
   }
 
   return (
@@ -88,12 +194,18 @@ export function AppLayout({ children }: PropsWithChildren): JSX.Element {
       </main>
 
       <Button
+        ref={assistantButtonRef}
         type="primary"
         title="知识库助手"
         aria-label="知识库助手"
-        className="fixed bottom-[72px] right-7 z-40 h-14 w-14 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-0 text-base font-black shadow-xl shadow-blue-200 2xl:w-auto 2xl:px-6"
-        icon={<Sparkles size={19} />}
-        onClick={() => setKnowledgeAssistantOpen(true)}
+        className={`knowledge-assistant-fab ${assistantDragging ? 'knowledge-assistant-fab-dragging' : ''}`}
+        style={{ left: assistantPosition.x, top: assistantPosition.y }}
+        icon={<Sparkles size={16} />}
+        onPointerDown={handleAssistantPointerDown}
+        onPointerMove={handleAssistantPointerMove}
+        onPointerUp={finishAssistantDrag}
+        onPointerCancel={finishAssistantDrag}
+        onClick={handleAssistantClick}
       >
         <span className="hidden 2xl:inline">知识库助手</span>
       </Button>
@@ -104,8 +216,8 @@ export function AppLayout({ children }: PropsWithChildren): JSX.Element {
       />
 
       <footer className="fixed bottom-0 left-0 right-0 z-30 flex h-12 items-center justify-between border-t border-slate-200 bg-white px-7 text-sm font-semibold text-slate-500">
-        <span>企业单机部署版 · 招标项目 · 知识库问答 · 标书编制</span>
-        <span>数据本地可控 · 支持内网部署 · 面向电网投标场景</span>
+        <span>国家电网投标智能工作台 · 招标解析 · 标书编制 · 正式检查</span>
+        <span>企业资料本地可控 · 支持内网部署 · 面向真实投标交付</span>
       </footer>
     </div>
   );

@@ -63,6 +63,7 @@
 | 已完成 | 长项目名 DOCX 导出失败修复 | DOCX / 导出 / 阿里云 | 阿里云真实浏览器技术标草稿导出任务创建成功但最终 `failed`，错误为 `[Errno 36] File name too long`；客户真实项目名较长时技术标/商务标无法下载 DOCX | 输出目录已改为 `project_id[:8]`，物理文件名改为 `泰昌_<招标编号>_<包号>_<分册>_<日期>.docx`；真实链路生成 `泰昌_SL265A_包1_技术投标文件_20260627.docx` 并完成 LibreOffice 字段刷新 | `docs/development/runs/run_20260627_aliyun_xinjiang_e2e_browser_acceptance.md`、`docs/development/runs/run_20260627_p0_product_compatibility_and_short_docx_names.md`、`docs/development/docx-bid-export-quality-todo.md` |
 | 已完成 | 正式检查页面客户体验修复 | 前端 / 正式检查 / 中文化 | 页面首次进入会短暂显示空报告，生成时间为 ISO 字符串，检查项明细区域滚动被表格截断，处理按钮和证据中的英文内部字段影响客户理解 | 已改为首屏骨架加载、统一中文时间格式、后端证据字段中文化、前端中文兜底、表格滚动链放开和阻断项按钮增强；本地 Chrome 真实登录回测通过 | `docs/development/runs/run_20260627_formal_check_ui_regression.md` |
 | 已完成 | 正式检查分页与按钮可读性修复 | 前端 / 分页 / 正式检查 | 处理路径按钮文字被说明文字选择器覆盖为灰色；正式检查页选择 20 条/页后表格仍固定 12 条，其他静态分页页面存在同类风险 | 已改为按钮内部白色文字/图标，正式检查分页使用 `defaultPageSize`；历史记录、知识库、用量成本、招标解读静态分页同步修复；Chrome 真实回测正式检查及主要列表页通过 | `docs/development/runs/run_20260627_formal_check_pagination_regression.md` |
+| 已完成 | 知识库助手拖拽与页脚文案定制 | 前端 / 全局布局 / 客户体验 | 右下角知识库助手固定按钮会遮挡页码选择，底部页脚文案偏通用 | 知识库助手改为 48px 可拖拽浮动按钮，图标缩小到 16px，位置本地持久化并避免拖拽误打开；页脚替换为国家电网投标智能工作台定制文案；Chrome 真实回测通过 | `docs/development/runs/run_20260627_draggable_knowledge_assistant_footer_copy.md` |
 
 ## 当前 P1
 
@@ -147,6 +148,7 @@
 | 2026-06-27 | 新疆资料域污染与长项目名 DOCX 失败 P0 关闭 | 新增产品适配性预检、章节写作降级和正式检查 `T-000` 阻断；DOCX 物理路径短名化并通过真实 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice` 回归 |
 | 2026-06-27 | 正式检查页面客户体验修复完成 | 首屏加载不再闪空态，生成时间统一中文格式，证据字段不再展示英文 key，检查项明细和展开内容滚动回归通过，处理路径按钮对比度增强 |
 | 2026-06-27 | 正式检查分页与按钮颜色修复完成 | 主按钮文字/图标恢复白色；正式检查 12 条/页切 20 条/页生效；历史记录、知识库、产品库、资信库、用量成本分页真实抽测通过 |
+| 2026-06-27 | 知识库助手拖拽与页脚定制完成 | 助手按钮可拖拽、位置记忆、拖拽不误打开，按钮缩小；页脚文案改为“国家电网投标智能工作台”口径 |
 | 2026-06-25 | AI 辅助编辑 MVP 最小闭环完成 | 合同 MVP 中“扩写、缩写、润色、风格调整”已有真实模型与页面验收记录 |
 | 2026-06-25 | 全文/分册 DOCX 导出接入正式检查门禁 | 阻断项存在时导出任务和前端提示均降级为草稿版，`formal_export_gate` metadata 可追溯 |
 | 2026-06-25 | 正式检查与投标关键字段闭环完成 | 当前演示项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d` 已收口到阻断项 0、正文占位 0、正式必填缺口 0；完整 DOCX 真实链路验收 PASS |
