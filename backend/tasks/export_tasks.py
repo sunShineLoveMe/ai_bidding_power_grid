@@ -12,13 +12,21 @@
 from __future__ import annotations
 
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from backend.tasks.celery_app import celery_app
 from backend.core.logging_config import log_context
 
 logger = logging.getLogger(__name__)
+
+
+BEIJING_TZ = timezone(timedelta(hours=8))
+
+
+def _now_api_iso() -> str:
+    """Return the same +08:00 display contract as Postgres-created timestamps."""
+    return datetime.now(BEIJING_TZ).isoformat(timespec="microseconds")
 
 
 @celery_app.task(
@@ -69,7 +77,7 @@ def run_bid_docx_export(
                     "progress": 100,
                     "message": "DOCX 导出失败，请查看错误信息。",
                     "error_message": str(exc)[:1000],
-                    "finished_at": datetime.utcnow().isoformat(),
+                    "finished_at": _now_api_iso(),
                 })
             except Exception:
                 logger.exception("写入 DOCX 导出任务失败状态失败")
@@ -95,7 +103,7 @@ def _run_bid_docx_export(
             "status": "running",
             "progress": 10,
             "message": "正在整理标书 Markdown 内容。",
-            "started_at": datetime.utcnow().isoformat(),
+            "started_at": _now_api_iso(),
         })
         markdown_path, project_name, image_selection_report = build_project_bid_markdown(
             project_id,
@@ -143,7 +151,7 @@ def _run_bid_docx_export(
             "file_path": str(generated_docx_path),
             "download_url": _output_url_for_path(generated_docx_path),
             "metadata": export_metadata,
-            "finished_at": datetime.utcnow().isoformat(),
+            "finished_at": _now_api_iso(),
         })
         return {"status": "completed", "task_id": task_id}
     except Exception:

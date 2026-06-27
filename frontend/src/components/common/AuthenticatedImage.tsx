@@ -17,6 +17,69 @@ async function fetchProtectedObjectUrl(src: string): Promise<string> {
   return URL.createObjectURL(await response.blob());
 }
 
+type ProtectedObjectUrlCacheEntry = {
+  refs: number;
+  promise: Promise<string>;
+  objectUrl?: string;
+  revokeTimer?: number;
+};
+
+const protectedObjectUrlCache = new Map<string, ProtectedObjectUrlCacheEntry>();
+const PROTECTED_OBJECT_URL_IDLE_TTL_MS = 60_000;
+
+function acquireProtectedObjectUrl(src: string): { promise: Promise<string>; release: () => void } {
+  let entry = protectedObjectUrlCache.get(src);
+  if (!entry) {
+    entry = {
+      refs: 0,
+      promise: fetchProtectedObjectUrl(src).then(objectUrl => {
+        const current = protectedObjectUrlCache.get(src);
+        if (current) {
+          current.objectUrl = objectUrl;
+        }
+        return objectUrl;
+      }).catch(error => {
+        protectedObjectUrlCache.delete(src);
+        throw error;
+      }),
+    };
+    protectedObjectUrlCache.set(src, entry);
+  }
+  entry.refs += 1;
+  if (entry.revokeTimer) {
+    window.clearTimeout(entry.revokeTimer);
+    entry.revokeTimer = undefined;
+  }
+
+  return {
+    promise: entry.promise,
+    release: () => {
+      const current = protectedObjectUrlCache.get(src);
+      if (!current) return;
+      current.refs = Math.max(0, current.refs - 1);
+      if (current.refs > 0 || current.revokeTimer) return;
+      current.revokeTimer = window.setTimeout(() => {
+        const latest = protectedObjectUrlCache.get(src);
+        if (!latest || latest.refs > 0) return;
+        if (latest.objectUrl) {
+          URL.revokeObjectURL(latest.objectUrl);
+        }
+        protectedObjectUrlCache.delete(src);
+      }, PROTECTED_OBJECT_URL_IDLE_TTL_MS);
+    },
+  };
+}
+
+function resolveDisplayUrl(src: string): { promise: Promise<string>; release: () => void } {
+  if (isProtectedAssetUrl(src)) {
+    return acquireProtectedObjectUrl(src);
+  }
+  return {
+    promise: Promise.resolve(src),
+    release: () => undefined,
+  };
+}
+
 export async function openAuthenticatedFile(src: string): Promise<void> {
   if (!isProtectedAssetUrl(src)) {
     window.open(src, '_blank', 'noopener,noreferrer');
@@ -49,7 +112,7 @@ export function AuthenticatedImage({
 
   useEffect(() => {
     let cancelled = false;
-    const objectUrls: string[] = [];
+    const releases: Array<() => void> = [];
 
     async function load(): Promise<void> {
       setObjectUrl('');
@@ -62,22 +125,21 @@ export function AuthenticatedImage({
           return;
         }
 
-        const displayUrl = isProtectedAssetUrl(src) ? await fetchProtectedObjectUrl(src) : src;
-        if (isProtectedAssetUrl(src)) objectUrls.push(displayUrl);
+        const displayHandle = resolveDisplayUrl(src);
+        releases.push(displayHandle.release);
+        const displayUrl = await displayHandle.promise;
         if (cancelled) {
-          objectUrls.forEach(url => URL.revokeObjectURL(url));
           return;
         }
 
         const fullUrl = previewSrc || src;
-        const resolvedPreviewUrl = fullUrl === src
-          ? displayUrl
-          : isProtectedAssetUrl(fullUrl)
-            ? await fetchProtectedObjectUrl(fullUrl)
-            : fullUrl;
-        if (resolvedPreviewUrl !== displayUrl && isProtectedAssetUrl(fullUrl)) objectUrls.push(resolvedPreviewUrl);
+        let resolvedPreviewUrl = displayUrl;
+        if (fullUrl !== src) {
+          const previewHandle = resolveDisplayUrl(fullUrl);
+          releases.push(previewHandle.release);
+          resolvedPreviewUrl = await previewHandle.promise;
+        }
         if (cancelled) {
-          objectUrls.forEach(url => URL.revokeObjectURL(url));
           return;
         }
 
@@ -94,7 +156,7 @@ export function AuthenticatedImage({
 
     return () => {
       cancelled = true;
-      objectUrls.forEach(url => URL.revokeObjectURL(url));
+      releases.forEach(release => release());
     };
   }, [previewSrc, src]);
 

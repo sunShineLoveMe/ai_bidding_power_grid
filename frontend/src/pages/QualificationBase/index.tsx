@@ -322,7 +322,9 @@ export function QualificationBasePage(): JSX.Element {
               tableLayout="fixed"
               scroll={{ x: 1000, y: 'max(180px, calc(100vh - 550px))' }}
               locale={{
-                emptyText: (
+                emptyText: loading ? (
+                  <span className="text-xs font-semibold text-slate-500">正在加载资信资料...</span>
+                ) : (
                   <Empty
                     image={Empty.PRESENTED_IMAGE_SIMPLE}
                     description={activeCategory === '全部资信' ? '暂无资信文件，请上传真实证照、业绩或授权材料' : `${activeCategory} 暂无资料，请上传客户真实资料后使用`}

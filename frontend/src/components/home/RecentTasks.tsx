@@ -3,6 +3,7 @@ import type { ColumnsType } from 'antd/es/table';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apiClient } from '../../api/client';
+import { formatShortDateTime } from '../../utils/time';
 
 interface HistoryItem {
   id: string;
@@ -14,6 +15,10 @@ interface HistoryItem {
   next_step?: string | null;
   next_action?: string | null;
   section_count?: number;
+  leaf_section_count?: number;
+  generated_section_count?: number;
+  generated_leaf_count?: number;
+  word_count?: number;
   writing_total_count?: number;
   writing_done_count?: number;
   writing_partial_count?: number;
@@ -36,15 +41,14 @@ const statusColor: Record<string, string> = {
   正文初稿完成: 'green',
 };
 
-function formatDate(value?: string | null): string {
-  if (!value) return '-';
-  return new Date(value).toLocaleString('zh-CN', {
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  });
+function sectionProgress(record: HistoryItem): { done: number; total: number; words: number } {
+  const total = record.leaf_section_count ?? record.writing_total_count ?? 0;
+  const done = record.generated_leaf_count ?? record.generated_section_count ?? record.writing_done_count ?? 0;
+  return {
+    done,
+    total,
+    words: record.word_count || 0,
+  };
 }
 
 interface RecentTasksProps {
@@ -98,7 +102,7 @@ export function RecentTasks({ refreshKey = 0 }: RecentTasksProps): JSX.Element {
   const columns: ColumnsType<HistoryItem> = [
     { title: '项目名称', dataIndex: 'project_name', ellipsis: true, render: value => value || '未命名招标项目' },
     { title: '招标单位', dataIndex: 'tender_unit', width: 120, ellipsis: true, render: value => value || '-' },
-    { title: '创建时间', dataIndex: 'created_at', width: 120, render: formatDate },
+    { title: '创建时间', dataIndex: 'created_at', width: 120, render: formatShortDateTime },
     {
       title: '当前状态',
       dataIndex: 'stage',
@@ -106,10 +110,11 @@ export function RecentTasks({ refreshKey = 0 }: RecentTasksProps): JSX.Element {
       render: (_, record) => (
         <div className="flex flex-col items-start gap-1">
           <Tag color={statusColor[record.stage as string] || 'default'}>{record.stage || record.parse_status || '已上传'}</Tag>
-          {record.writing_total_count ? (
+          {sectionProgress(record).total ? (
             <span className="text-[11px] font-semibold text-slate-400">
-              正文 {record.writing_done_count || 0}/{record.writing_total_count}
+              正文 {sectionProgress(record).done}/{sectionProgress(record).total}
               {record.writing_partial_count ? ` · 草稿 ${record.writing_partial_count}` : ''}
+              {sectionProgress(record).words ? ` · ${sectionProgress(record).words.toLocaleString('zh-CN')}字` : ''}
             </span>
           ) : null}
         </div>
@@ -141,7 +146,11 @@ export function RecentTasks({ refreshKey = 0 }: RecentTasksProps): JSX.Element {
         dataSource={recentTasks}
         loading={loading}
         className="compact-table"
-        locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无真实任务，上传招标文件后会显示在这里" /> }}
+        locale={{
+          emptyText: loading
+            ? <span className="text-xs font-semibold text-slate-500">正在加载最近任务...</span>
+            : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无真实任务，上传招标文件后会显示在这里" />,
+        }}
       />
     </section>
   );

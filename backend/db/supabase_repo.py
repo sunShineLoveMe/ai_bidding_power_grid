@@ -1454,6 +1454,40 @@ def _history_prefill_summary(project_meta: dict[str, Any] | None) -> dict[str, A
     }
 
 
+def _section_text_size(content: Any) -> int:
+    text = str(content or "").strip()
+    if not text:
+        return 0
+    return len("".join(text.split()))
+
+
+def _is_history_section_generated(section: dict[str, Any], leaf_ids: set[str]) -> bool:
+    section_id = str(section.get("id") or "")
+    if section_id not in leaf_ids:
+        return False
+    if str(section.get("status") or "") not in {"generated", "edited", "completed"}:
+        return False
+    content = str(section.get("content") or "").strip()
+    if not content:
+        return False
+    return "请在此编写章节内容" not in content and "待进一步生成正文" not in content
+
+
+def _history_section_summary(sections: list[dict[str, Any]]) -> dict[str, Any]:
+    leaf_ids = _leaf_generation_section_ids(sections)
+    generated_leaf_sections = [
+        section for section in sections
+        if _is_history_section_generated(section, leaf_ids)
+    ]
+    return {
+        "section_count": len(sections),
+        "leaf_section_count": len(leaf_ids),
+        "generated_section_count": len(generated_leaf_sections),
+        "generated_leaf_count": len(generated_leaf_sections),
+        "word_count": sum(_section_text_size(section.get("content")) for section in generated_leaf_sections),
+    }
+
+
 def _history_stage_action(
     *,
     project_status: str | None,
@@ -2585,8 +2619,21 @@ def list_bid_history(limit: int = 100) -> list[dict[str, Any]]:
     analysis_counts = count_by_project("bid_analysis")
     requirement_counts = count_by_project("bid_requirements")
     risk_counts = count_by_project("bid_risks")
-    section_counts = count_by_project("bid_sections")
     chunk_counts = count_by_project("document_chunks")
+
+    section_rows = (
+        client.table("bid_sections")
+        .select("id,project_id,parent_id,status,content,metadata")
+        .in_("project_id", project_ids)
+        .execute()
+        .data
+        or []
+    )
+    sections_by_project: dict[str, list[dict[str, Any]]] = {}
+    for row in section_rows:
+        project_id = row.get("project_id")
+        if project_id:
+            sections_by_project.setdefault(project_id, []).append(row)
 
     analysis_rows = (
         client.table("bid_analysis")
@@ -2642,11 +2689,20 @@ def list_bid_history(limit: int = 100) -> list[dict[str, Any]]:
     for project in projects:
         project_id = project["id"]
         has_analysis = analysis_counts.get(project_id, 0) > 0
-        section_count = section_counts.get(project_id, 0)
+        section_summary = _history_section_summary(sections_by_project.get(project_id, []))
+        section_count = int(section_summary.get("section_count") or 0)
         files = files_by_project.get(project_id, [])
         latest_file = files[0] if files else {}
         parse_status = latest_file.get("parse_status")
         generation_summary = _history_generation_summary(latest_generation_by_project.get(project_id))
+        leaf_section_count = int(section_summary.get("leaf_section_count") or 0)
+        generated_leaf_count = int(section_summary.get("generated_leaf_count") or 0)
+        if leaf_section_count:
+            generation_summary = {
+                **generation_summary,
+                "writing_total_count": leaf_section_count,
+                "writing_done_count": generated_leaf_count,
+            }
         prefill_summary = _history_prefill_summary(analysis_meta_by_project.get(project_id))
         stage_action = _history_stage_action(
             project_status=project.get("status"),
@@ -2663,10 +2719,10 @@ def list_bid_history(limit: int = 100) -> list[dict[str, Any]]:
             **stage_action,
             **generation_summary,
             **prefill_summary,
+            **section_summary,
             "analysis_count": analysis_counts.get(project_id, 0),
             "requirement_count": requirement_counts.get(project_id, 0),
             "risk_count": risk_counts.get(project_id, 0),
-            "section_count": section_count,
             "chunk_count": chunk_counts.get(project_id, 0),
             "file_count": len(files),
             "parse_status": parse_status,

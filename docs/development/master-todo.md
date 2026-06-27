@@ -67,6 +67,7 @@
 | 已完成 | 分册格式增强 | 标书分册 / DOCX | 当前 MVP 按真实国网投标上传口径保留技术标、商务标两个交付包，资格文件、报价文件、附件材料归入商务标内部资料类型；技术标/商务标单独 DOCX 导出的封面、目录、页眉、页脚字段和 metadata 已通过真实链路回归；P1-3 已补“导出投标文件”下拉入口和导出完成明确下载按钮，技术标/商务标均通过真实浏览器导出与下载回归 | `docs/技术标商务标分册整改TODO.md`、`docs/development/docx-bid-export-quality-todo.md`、`docs/development/runs/run_20260626_p1_volume_docx_export.md`、`docs/development/runs/run_20260627_p1_3_volume_export_download_completion.md` |
 | 已完成 | 第六章格式表单保真 | DOCX / 正式检查 | 投标函、授权委托书、商务偏差表、技术偏差表、承诺函已支持结构识别、签章行右对齐、语义列宽和禁止跨页拆分；客户原始 Word 像素级套表归入 `template_docx` | `docs/development/runs/run_20260625_docx_sixth_chapter_form_fidelity.md`、`docs/development/docx-bid-export-quality-todo.md` |
 | 已完成 | 产品库多品类 MVP 展示收口 | 产品库 / 企业资料 | 产品库已收口为一个“上传/新增产品资料”入口，保留电缆与附件、开关柜与成套设备、变压器与箱变、互感器、继电保护与自动化、通信与调度设备等中文分类；无资料品类显示空状态，不把泰昌现有电缆保护管资料扩展成其他品类事实；上传资料默认写入泰昌企业事实 metadata，并可被知识问答 stream 命中 | `docs/development/runs/run_20260626_product_qualification_upload_index_regression.md`、`docs/rag/runs/run_20260626_product_qualification_upload_index_regression_summary.md`、`frontend/src/pages/ProductBase/index.tsx` |
+| 已完成 | 首页/历史记录/编辑器正文进度口径与基础体验收口 | 首页 / 历史记录 / 编辑器 / 产品库 / 资信库 | 历史接口按当前真实章节统一返回叶子章节总数、已生成叶子章节和字数；首页、历史记录、编辑器口径一致；产品库/资信库加载态不再误显示空状态；前后端版本可追踪；导出任务时间字段顺序一致；受保护缩略图重复打开不重复请求 | `docs/development/runs/run_20260627_p1_4_progress_and_p2_experience_regression.md` |
 | 延后 | 多格式导出与 PDF 口径收口 | DOCX / PDF / 导出 | 新疆技术/商务参考模板族已落地；当前客户试用主交付仍以可编辑 Word 为准，PDF 只作为预览/转换能力，优先级低于阿里云部署交接和持续门禁 | 导出页面和 metadata 明确 Word 为正式主交付；PDF 为预览/转换能力；PDF 生成失败不冒充正式交付；至少一次真实 DOCX -> PDF 验证记录 | `docs/development/docx-bid-export-quality-todo.md` |
 | 已完成 | 正式检查页面处理路径增强 | 正式检查 / 前端 | 检查项已支持分类/状态/等级筛选、展开证据链、跳转到投标确认页/章节编辑页/企业资信库/企业产品库；投标确认字段和正文章节可通过 URL 参数定位，已通过本机 Chrome 真实页面回归 | `docs/development/formal-check-todo.md`、`docs/development/runs/run_20260626_formal_check_processing_path.md` |
 | 已完成 | 全流程项目状态同步与投标确认入口收口 | 上传解析 / 投标确认 / 历史任务 | 首页/历史记录已按后端统一 `next_step` 展示待投标确认、正文生成中、草稿待续写、正文初稿完成；旧本地解析错误不再覆盖已结构化项目；投标确认页从工作流进入时短轮询加载报告；真实 Chrome 验证最新项目 `4d632dbe-f6e6-4066-8fe2-929ecb54ba1d` 显示正文 75/75 并跳转正式检查 | `docs/development/runs/run_20260626_real_browser_full_bid_body_flow.md`、`docs/development/runs/run_20260626_project_status_prefill_entry_regression.md` |
@@ -137,6 +138,7 @@
 | 2026-06-26 | 正式检查页面处理路径增强完成 | 检查项已具备证据链和明确处理按钮，可跳转到投标确认、正文编辑、企业资信库或企业产品库；真实 Chrome 回归通过 |
 | 2026-06-26 | 全流程项目状态同步与投标确认入口收口完成 | 首页/历史记录不再把已完成正文的项目显示为解析中或旧解析错误；投标确认入口可加载真实报告；草稿待续写项目具备主操作和 `action=resume-partial` 路由 |
 | 2026-06-27 | P1-3 分册导出完成下载按钮收口 | 标书编制页“导出投标文件”下拉入口已支持技术标、商务标、完整投标文件；导出完成后显示文件名、大小、字段刷新、图片统计和明确下载按钮，技术标/商务标真实浏览器导出与下载均通过 |
+| 2026-06-27 | P1-4 与 P2 基础体验收口 | 首页/历史/编辑器正文进度统一为真实叶子章节口径；产品库/资信库加载态、前后端版本追踪、导出任务时间字段和缩略图请求去重均通过真实回归 |
 | 2026-06-25 | AI 辅助编辑 MVP 最小闭环完成 | 合同 MVP 中“扩写、缩写、润色、风格调整”已有真实模型与页面验收记录 |
 | 2026-06-25 | 全文/分册 DOCX 导出接入正式检查门禁 | 阻断项存在时导出任务和前端提示均降级为草稿版，`formal_export_gate` metadata 可追溯 |
 | 2026-06-25 | 正式检查与投标关键字段闭环完成 | 当前演示项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d` 已收口到阻断项 0、正文占位 0、正式必填缺口 0；完整 DOCX 真实链路验收 PASS |

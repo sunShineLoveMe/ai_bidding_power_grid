@@ -8,6 +8,7 @@ import { retryHistoryParse } from '../../api/bidProject';
 import { CategoryList } from '../../components/common/CategoryList';
 import { MetricCards } from '../../components/common/MetricCards';
 import { ModuleHeader } from '../../components/common/ModuleHeader';
+import { formatDateTime } from '../../utils/time';
 
 interface HistoryItem {
   id: string;
@@ -25,6 +26,10 @@ interface HistoryItem {
   requirement_count?: number;
   risk_count?: number;
   section_count?: number;
+  leaf_section_count?: number;
+  generated_section_count?: number;
+  generated_leaf_count?: number;
+  word_count?: number;
   writing_task_status?: string | null;
   writing_total_count?: number;
   writing_done_count?: number;
@@ -115,16 +120,14 @@ const failedParseStatuses = new Set([
 
 const ACTIVE_WORKFLOW_KEY = 'aiBiddingActiveWorkflow';
 
-function formatDate(value?: string | null): string {
-  if (!value) return '-';
-  return new Date(value).toLocaleString('zh-CN', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  });
+function sectionProgress(record: HistoryItem): { done: number; total: number; words: number } {
+  const total = record.leaf_section_count ?? record.writing_total_count ?? 0;
+  const done = record.generated_leaf_count ?? record.generated_section_count ?? record.writing_done_count ?? 0;
+  return {
+    done,
+    total,
+    words: record.word_count || 0,
+  };
 }
 
 export function HistoryPage(): JSX.Element {
@@ -291,9 +294,10 @@ export function HistoryPage(): JSX.Element {
             {record.parse_task_id ? (
               <div className="text-[11px] font-semibold text-slate-400">任务 {record.parse_task_id.slice(0, 8)}</div>
             ) : null}
-            {record.writing_total_count ? (
+            {sectionProgress(record).total ? (
               <div className="grid gap-1 text-[11px] font-semibold text-slate-500">
-                <span>正文 {record.writing_done_count || 0}/{record.writing_total_count}</span>
+                <span>正文 {sectionProgress(record).done}/{sectionProgress(record).total}</span>
+                {sectionProgress(record).words ? <span>字数 {sectionProgress(record).words.toLocaleString('zh-CN')}</span> : null}
                 {record.writing_partial_count ? <span>待续写草稿 {record.writing_partial_count}</span> : null}
                 {record.writing_review_count ? <span>需人工复核 {record.writing_review_count}</span> : null}
               </div>
@@ -313,11 +317,12 @@ export function HistoryPage(): JSX.Element {
           <Tag>需求 {record.requirement_count || 0}</Tag>
           <Tag>风险 {record.risk_count || 0}</Tag>
           <Tag>章节 {record.section_count || 0}</Tag>
+          {sectionProgress(record).total ? <Tag>正文 {sectionProgress(record).done}/{sectionProgress(record).total}</Tag> : null}
           {record.file_count ? <Tag>文件 {record.file_count}</Tag> : null}
         </Space>
       ),
     },
-    { title: '创建时间', dataIndex: 'created_at', width: 155, render: value => <span className="text-slate-600">{formatDate(value)}</span> },
+    { title: '创建时间', dataIndex: 'created_at', width: 155, render: value => <span className="text-slate-600">{formatDateTime(value)}</span> },
     {
       title: '操作',
       width: 190,
@@ -393,7 +398,11 @@ export function HistoryPage(): JSX.Element {
               className="compact-table"
               tableLayout="fixed"
               scroll={{ x: 1125, y: 'max(180px, calc(100vh - 550px))' }}
-              locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无历史记录，上传招标文件后会显示在这里" /> }}
+              locale={{
+                emptyText: loading
+                  ? <span className="text-xs font-semibold text-slate-500">正在加载历史记录...</span>
+                  : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无历史记录，上传招标文件后会显示在这里" />,
+              }}
             />
           </div>
         </section>

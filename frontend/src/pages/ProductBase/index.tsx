@@ -317,7 +317,9 @@ export function ProductBasePage(): JSX.Element {
               tableLayout="fixed"
               scroll={{ x: 1050, y: 'max(180px, calc(100vh - 550px))' }}
               locale={{
-                emptyText: (
+                emptyText: loading ? (
+                  <span className="text-xs font-semibold text-slate-500">正在加载产品资料...</span>
+                ) : (
                   <Empty
                     image={Empty.PRESENTED_IMAGE_SIMPLE}
                     description={activeCategory === '全部产品' ? '暂无产品资料，请上传真实产品图片、参数表或检验报告' : `${activeCategory} 暂无资料，请上传客户真实资料后使用`}
