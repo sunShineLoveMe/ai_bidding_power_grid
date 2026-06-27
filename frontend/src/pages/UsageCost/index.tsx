@@ -281,7 +281,7 @@ export function UsageCostPage(): JSX.Element {
           size="small"
           loading={loading}
           dataSource={overview.projects || []}
-          pagination={{ pageSize: 10, showSizeChanger: true, pageSizeOptions: [10, 20, 50], showTotal: total => `共 ${total} 个项目` }}
+          pagination={{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: [10, 20, 50], showTotal: total => `共 ${total} 个项目` }}
           scroll={{ x: 1120, y: 520 }}
           sticky
           tableLayout="fixed"
@@ -390,7 +390,7 @@ export function UsageCostPage(): JSX.Element {
               size="small"
               loading={detailLoading}
               dataSource={detailOverview.recentLogs || []}
-              pagination={{ pageSize: 10, showSizeChanger: true, pageSizeOptions: [10, 20, 50], showTotal: total => `共 ${total} 条调用` }}
+              pagination={{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: [10, 20, 50], showTotal: total => `共 ${total} 条调用` }}
               scroll={{ x: 1380, y: 420 }}
               tableLayout="fixed"
               columns={[

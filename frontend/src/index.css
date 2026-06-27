@@ -353,7 +353,13 @@ textarea {
   color: #ffffff;
 }
 
-.formal-check-action-cell span {
+.formal-check-action-cell .ant-btn-primary:not(:disabled) span,
+.formal-check-action-cell .ant-btn-primary:not(:disabled) svg {
+  color: #ffffff;
+  stroke: currentColor;
+}
+
+.formal-check-action-description {
   color: #64748b;
   font-size: 12px;
   font-weight: 650;

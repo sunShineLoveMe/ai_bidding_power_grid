@@ -391,7 +391,7 @@ export function HistoryPage(): JSX.Element {
             <Table
               rowKey="id"
               size="small"
-              pagination={{ pageSize: 10, showSizeChanger: true, pageSizeOptions: [10, 20, 50], showTotal: total => `共 ${total} 条` }}
+              pagination={{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: [10, 20, 50], showTotal: total => `共 ${total} 条` }}
               columns={columns}
               dataSource={filteredItems}
               loading={loading}

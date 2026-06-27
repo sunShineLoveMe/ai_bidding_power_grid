@@ -442,7 +442,7 @@ export function InterpretationPage(): JSX.Element {
         <Table
           rowKey="id"
           size="small"
-          pagination={{ pageSize: 8 }}
+          pagination={{ defaultPageSize: 8 }}
           columns={chunkColumns}
           dataSource={data?.documentChunks || []}
           className="compact-table"
@@ -508,7 +508,7 @@ export function InterpretationPage(): JSX.Element {
             <Table
               rowKey={(_, index) => String(index)}
               size="small"
-              pagination={{ pageSize: 6 }}
+              pagination={{ defaultPageSize: 6 }}
               columns={suspiciousColumns}
               dataSource={mineruQuality.suspicious_blocks || []}
               className="compact-table"
@@ -833,7 +833,7 @@ export function InterpretationPage(): JSX.Element {
                       <Table
                         rowKey="id"
                         size="small"
-                        pagination={{ pageSize: 10 }}
+                        pagination={{ defaultPageSize: 10 }}
                         columns={complianceColumns}
                         dataSource={complianceRows}
                         className="compact-table"
@@ -846,7 +846,7 @@ export function InterpretationPage(): JSX.Element {
                   key: 'requirements',
                   label: `资格与要求 ${data.requirements.length}`,
                   children: (
-                    <Table rowKey="id" size="small" pagination={{ pageSize: 10 }} columns={requirementColumns} dataSource={data.requirements} className="compact-table" locale={{ emptyText: emptyText('暂无要求条款') }} />
+                    <Table rowKey="id" size="small" pagination={{ defaultPageSize: 10 }} columns={requirementColumns} dataSource={data.requirements} className="compact-table" locale={{ emptyText: emptyText('暂无要求条款') }} />
                   ),
                 },
                 {
@@ -857,17 +857,17 @@ export function InterpretationPage(): JSX.Element {
                       风险检查 {data.risks.length}
                     </span>
                   ),
-                  children: <Table rowKey="id" size="small" pagination={{ pageSize: 10 }} columns={riskColumns} dataSource={data.risks} className="compact-table" locale={{ emptyText: emptyText('暂无风险项') }} />,
+                  children: <Table rowKey="id" size="small" pagination={{ defaultPageSize: 10 }} columns={riskColumns} dataSource={data.risks} className="compact-table" locale={{ emptyText: emptyText('暂无风险项') }} />,
                 },
                 {
                   key: 'scoring',
                   label: `评分办法 ${data.scoringItems.length}`,
-                  children: <Table rowKey="id" size="small" pagination={{ pageSize: 10 }} columns={scoringColumns} dataSource={data.scoringItems} className="compact-table" locale={{ emptyText: emptyText('暂无评分项') }} />,
+                  children: <Table rowKey="id" size="small" pagination={{ defaultPageSize: 10 }} columns={scoringColumns} dataSource={data.scoringItems} className="compact-table" locale={{ emptyText: emptyText('暂无评分项') }} />,
                 },
                 {
                   key: 'chapters',
                   label: `章节建议 ${chapterRows.length}`,
-                  children: <Table rowKey="id" size="small" pagination={{ pageSize: 10 }} columns={chapterColumns} dataSource={chapterRows} className="compact-table" locale={{ emptyText: emptyText('暂无建议章节') }} />,
+                  children: <Table rowKey="id" size="small" pagination={{ defaultPageSize: 10 }} columns={chapterColumns} dataSource={chapterRows} className="compact-table" locale={{ emptyText: emptyText('暂无建议章节') }} />,
                 },
               ]}
             />

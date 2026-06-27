@@ -210,7 +210,7 @@ export function FormalCheckPage(): JSX.Element {
           >
             {item.action?.label || '去处理'}
           </Button>
-          <span>{toCustomerText(item.action?.description || item.suggestion)}</span>
+          <span className="formal-check-action-description">{toCustomerText(item.action?.description || item.suggestion)}</span>
         </div>
       ),
     },
@@ -303,7 +303,12 @@ export function FormalCheckPage(): JSX.Element {
                 size="small"
                 columns={columns}
                 dataSource={filteredItems}
-                pagination={{ pageSize: 12, showTotal: total => `共 ${total} 项` }}
+                pagination={{
+                  defaultPageSize: 12,
+                  showSizeChanger: true,
+                  pageSizeOptions: [10, 12, 20, 50, 100],
+                  showTotal: total => `共 ${total} 项`,
+                }}
                 locale={{ emptyText: emptyText('当前筛选条件下暂无检查项') }}
                 scroll={{ x: 1160 }}
                 expandable={{
