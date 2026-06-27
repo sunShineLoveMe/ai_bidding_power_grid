@@ -1,0 +1,105 @@
+{
+  "generated_at": "2026-06-06T16:14:26",
+  "batch_id": "customer_liaoning_taichang_20260606_p0",
+  "execute": false,
+  "before_counts": {
+    "knowledge_documents": 69,
+    "document_chunks": 23124,
+    "goods_list_rows": 0
+  },
+  "deleted_counts": null,
+  "role_counts": [
+    {
+      "doc_role": "main_tender_file",
+      "count": 10105
+    },
+    {
+      "doc_role": "technical_spec",
+      "count": 9563
+    },
+    {
+      "doc_role": "contract_general_terms",
+      "count": 2466
+    },
+    {
+      "doc_role": "tender_notice",
+      "count": 768
+    },
+    {
+      "doc_role": "contract_special_terms",
+      "count": 222
+    }
+  ],
+  "sample_documents": [
+    {
+      "id": "af107fe5-57cf-4318-8ee4-16acfe1d49a7",
+      "title": "5.120 10kV及以下协议库存货物采购合同（材料类）（2024版）",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "contract_special_terms"
+    },
+    {
+      "id": "284a9e47-ea12-43d8-ae21-685de2b248f5",
+      "title": "5.120 10kV及以下协议库存货物采购合同（材料类）（2024版）",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "contract_special_terms"
+    },
+    {
+      "id": "2c0d0367-c274-4e24-bcae-66a436577c44",
+      "title": "5.120 10kV及以下协议库存货物采购合同（材料类）（2024版）",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "contract_special_terms"
+    },
+    {
+      "id": "d6d5d2a6-991a-4346-bf98-274507f30187",
+      "title": "5.120 10kV及以下协议库存货物采购合同（材料类）（2024版）",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "contract_special_terms"
+    },
+    {
+      "id": "7c55b851-1fe1-4b70-860f-9b26e0e789a9",
+      "title": "5.120 10kV及以下协议库存货物采购合同（材料类）（2024版）",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "contract_special_terms"
+    },
+    {
+      "id": "4df0b079-5e38-46b2-8851-4d49ec9670e6",
+      "title": "5.120 10kV及以下协议库存货物采购合同（材料类）（2024版）",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "contract_special_terms"
+    },
+    {
+      "id": "6f7c6faa-68c4-4a36-821d-1fce80aa1e9c",
+      "title": "5.120 10kV及以下协议库存货物采购合同通用条款（材料类）（2024版）",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "contract_general_terms"
+    },
+    {
+      "id": "e23ea2ce-5d54-415d-b074-9e3cb4b196ed",
+      "title": "5.120 10kV及以下协议库存货物采购合同通用条款（材料类）（2024版）",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "contract_general_terms"
+    },
+    {
+      "id": "9493b671-e0a9-467c-810c-9be6de7f84b6",
+      "title": "5.120 10kV及以下协议库存货物采购合同通用条款（材料类）（2024版）",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "contract_general_terms"
+    },
+    {
+      "id": "95a477b4-b8d3-4281-b380-0db3c2a18af4",
+      "title": "5.120 10kV及以下协议库存货物采购合同通用条款（材料类）（2024版）",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "contract_general_terms"
+    }
+  ]
+}

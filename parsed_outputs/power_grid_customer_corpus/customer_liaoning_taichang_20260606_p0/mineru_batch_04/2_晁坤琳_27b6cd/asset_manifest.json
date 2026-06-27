@@ -1,0 +1,74 @@
+{
+  "assets": [
+    {
+      "asset_id": "taichang_testing_capacity_p2_028_58d87fb0",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/3.劳动合同/2.晁坤琳.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "taichang_internal_private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2_晁坤琳_27b6cd/extract/images/c95581260cec08025e0ea59ee0e38c54ba105f3c4b9d24f98cc04e337795c209.jpg",
+      "asset_sha256": "92b4949c110cdc454ece05c8604642922191c10d28acd6cb235aadde61043e4a",
+      "page_idx": 1,
+      "page_no": 2,
+      "bbox": [
+        105,
+        690,
+        416,
+        828
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_112643_27b6cd34",
+      "batch_id": "a0926c1e-b1c8-4761-a003-73d6fc3916ae",
+      "usage_policy": "enterprise_fact_evidence_internal",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "因履行本合同发生的劳动争议，当事人可以向本单位劳动争议调解委员会申请调解；调解不成，当事人一方要求仲裁的，应当自劳动争议发生之日起六十日内向保定市满城区劳动争议仲裁委员会申请仲裁。当事人一方也可以直接向劳动争议仲裁委员会申请仲裁。对裁决不服的，可以向人民法院提起诉讼。 九、其他约定 甲方以下规章制度\\_ / \\_作为本合同附件。本合同未尽事宜，或与国家有关规定相悖的，按有关规定执行。 本合同一式两份，甲乙双方各执一份。 2024年08月0日 乙方（盖章）： 代表人： 聚地琳 2024年08月01日",
+      "ocr_context": "因履行本合同发生的劳动争议，当事人可以向本单位劳动争议调解委员会申请调解；调解不成，当事人一方要求仲裁的，应当自劳动争议发生之日起六十日内向保定市满城区劳动争议仲裁委员会申请仲裁。当事人一方也可以直接向劳动争议仲裁委员会申请仲裁。对裁决不服的，可以向人民法院提起诉讼。 九、其他约定 甲方以下规章制度\\_ / \\_作为本合同附件。本合同未尽事宜，或与国家有关规定相悖的，按有关规定执行。 本合同一式两份，甲乙双方各执一份。 2024年08月0日 乙方（盖章）： 代表人： 聚地琳 2024年08月01日",
+      "retrieval_text": "泰昌 testing_capacity 第2页图片。因履行本合同发生的劳动争议，当事人可以向本单位劳动争议调解委员会申请调解；调解不成，当事人一方要求仲裁的，应当自劳动争议发生之日起六十日内向保定市满城区劳动争议仲裁委员会申请仲裁。当事人一方也可以直接向劳动争议仲裁委员会申请仲裁。对裁决不服的，可以向人民法院提起诉讼。 九、其他约定 甲方以下规章制度\\_ / \\_作为本合同附件。本合同未尽事宜，或与国家有关规定相悖的，按有关规定执行。 本合同一式两份，甲乙双方各执一份。 2024年08月0日 乙方（盖章）： 代表人： 聚地琳 2024年08月01日",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:2",
+        "bbox_anchor": [
+          105,
+          690,
+          416,
+          828
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      },
+      "access_scope": "taichang_tenant_internal",
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ]
+    }
+  ]
+}

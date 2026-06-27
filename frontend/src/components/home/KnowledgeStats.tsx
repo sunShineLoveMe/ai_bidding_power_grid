@@ -4,76 +4,87 @@ import { useEffect, useMemo, useState } from 'react';
 import { apiClient } from '../../api/client';
 
 interface KnowledgeFile {
-  id: string;
-  status?: string | null;
+  total: number;
+  indexed: number;
+  processing: number;
+  failed: number;
 }
 
 interface KnowledgeAsset {
-  id: string;
+  total: number;
 }
 
 interface HistoryResponse {
   items: Array<{ id: string }>;
 }
 
+interface KnowledgeOverviewStats {
+  documents: KnowledgeFile;
+  assets: {
+    qualification: KnowledgeAsset;
+    product: KnowledgeAsset;
+  };
+}
+
 export function KnowledgeStats(): JSX.Element {
-  const [knowledgeFiles, setKnowledgeFiles] = useState<KnowledgeFile[]>([]);
-  const [qualificationAssets, setQualificationAssets] = useState<KnowledgeAsset[]>([]);
-  const [productAssets, setProductAssets] = useState<KnowledgeAsset[]>([]);
+  const [knowledgeStats, setKnowledgeStats] = useState<KnowledgeOverviewStats | null>(null);
   const [historyCount, setHistoryCount] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const [docsRes, qualificationsRes, productsRes, historyRes] = await Promise.all([
-          apiClient.get<KnowledgeFile[]>('/api/knowledge/documents', { skipGlobalLoading: true }),
-          apiClient.get<KnowledgeAsset[]>('/api/knowledge/assets?asset_type=qualification_image', { skipGlobalLoading: true }),
-          apiClient.get<KnowledgeAsset[]>('/api/knowledge/assets?asset_type=product_image', { skipGlobalLoading: true }),
+        setLoading(true);
+        const [knowledgeRes, historyRes] = await Promise.all([
+          apiClient.get<KnowledgeOverviewStats>('/api/knowledge/stats', { skipGlobalLoading: true }),
           apiClient.get<HistoryResponse>('/api/bidding/history?limit=100', { skipGlobalLoading: true }),
         ]);
-        setKnowledgeFiles(docsRes.data || []);
-        setQualificationAssets(qualificationsRes.data || []);
-        setProductAssets(productsRes.data || []);
+        setKnowledgeStats(knowledgeRes.data || null);
         setHistoryCount(historyRes.data?.items?.length || 0);
       } catch (error: any) {
         message.error(error.message || '知识库状态加载失败');
+      } finally {
+        setLoading(false);
       }
     };
 
     void fetchStats();
   }, []);
 
-  const indexedCount = knowledgeFiles.filter(item => item.status === 'indexed').length;
+  const valueOf = (value: number) => (loading ? '...' : value);
+  const documentStats = knowledgeStats?.documents || { total: 0, indexed: 0, processing: 0, failed: 0 };
+  const qualificationStats = knowledgeStats?.assets.qualification || { total: 0 };
+  const productStats = knowledgeStats?.assets.product || { total: 0 };
   const stats = useMemo(() => [
     {
       title: '企业知识库文件数',
-      value: knowledgeFiles.length,
-      desc: indexedCount ? `${indexedCount} 份已完成索引` : '等待真实资料入库',
+      value: valueOf(documentStats.total),
+      desc: loading ? '正在加载知识库状态' : documentStats.indexed ? `${documentStats.indexed} 份已完成索引` : '等待真实资料入库',
       icon: BookOpen,
       color: 'bg-blue-50 text-blue-600',
     },
     {
       title: '企业资信库文件数',
-      value: qualificationAssets.length,
-      desc: qualificationAssets.length ? '可用于资质材料引用' : '等待上传资信文件',
+      value: valueOf(qualificationStats.total),
+      desc: loading ? '正在加载资信资产' : qualificationStats.total ? '可用于资质材料引用' : '等待上传资信文件',
       icon: ShieldCheck,
       color: 'bg-emerald-50 text-emerald-600',
     },
     {
       title: '企业产品库资料数',
-      value: productAssets.length,
-      desc: productAssets.length ? '可用于技术响应配图' : '等待维护产品资料',
+      value: valueOf(productStats.total),
+      desc: loading ? '正在加载产品资料' : productStats.total ? '可用于技术响应配图' : '等待维护产品资料',
       icon: Box,
       color: 'bg-orange-50 text-orange-500',
     },
     {
       title: '历史任务数',
-      value: historyCount,
-      desc: historyCount ? '可继续解读或编制' : '上传后自动记录',
+      value: valueOf(historyCount),
+      desc: loading ? '正在加载历史任务' : historyCount ? '可继续解读或编制' : '上传后自动记录',
       icon: Clock3,
       color: 'bg-violet-50 text-violet-600',
     },
-  ], [historyCount, indexedCount, knowledgeFiles.length, productAssets.length, qualificationAssets.length]);
+  ], [documentStats.indexed, documentStats.total, historyCount, loading, productStats.total, qualificationStats.total]);
 
   return (
     <section className="panel-card">

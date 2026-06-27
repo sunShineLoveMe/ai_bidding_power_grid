@@ -1,0 +1,314 @@
+{
+  "assets": [
+    {
+      "asset_id": "taichang_green_low_carbon_p1_006_cebd16b3",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/5其他绿色低碳证书一览表/碳足迹报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/碳足迹报告_7392f7/extract/images/22095e6c989f741e38002dff3ef232819c1a9db23ae5a7a7541ea5c29f5678a7.jpg",
+      "asset_sha256": "c26bb67911f45ca97d6435bc512e83cb1f781163598f01283afd55cff4d84855",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        541,
+        854,
+        746,
+        998
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_112728_7392f75c",
+      "batch_id": "338bebae-3872-46f3-b62d-30c0b6474dd8",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "报告编号：ZRC-TZJ2025224 第三方服务机构：广东中认联合认证有限公司 查询网址：www.zrlhrz.com 2025年10月16日",
+      "ocr_context": "报告编号：ZRC-TZJ2025224 第三方服务机构：广东中认联合认证有限公司 查询网址：www.zrlhrz.com 2025年10月16日",
+      "retrieval_text": "泰昌 green_low_carbon 第1页图片。报告编号：ZRC-TZJ2025224 第三方服务机构：广东中认联合认证有限公司 查询网址：www.zrlhrz.com 2025年10月16日",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:1",
+        "bbox_anchor": [
+          541,
+          854,
+          746,
+          998
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p4_043_00f3400d",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/5其他绿色低碳证书一览表/碳足迹报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/碳足迹报告_7392f7/extract/images/a28a60493871dbe4554bcf307b4bb3f4d1b4edd542525ff8b6a50f6874b971b7.jpg",
+      "asset_sha256": "ca65e82715b69809048c9e42fac3e473d726f320b39e886de1755e466222f7d8",
+      "page_idx": 3,
+      "page_no": 4,
+      "bbox": [
+        250,
+        323,
+        744,
+        671
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_112728_7392f75c",
+      "batch_id": "338bebae-3872-46f3-b62d-30c0b6474dd8",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "8.结语 15",
+      "ocr_context": "8.结语 15",
+      "retrieval_text": "泰昌 green_low_carbon 第4页图片。8.结语 15",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:4",
+        "bbox_anchor": [
+          250,
+          323,
+          744,
+          671
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p9_092_ae57dc1e",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/5其他绿色低碳证书一览表/碳足迹报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/碳足迹报告_7392f7/extract/images/7540e2cb38fdf76e80200bca7767969952cc1ae253a3b3802e6395ba25b2dc3c.jpg",
+      "asset_sha256": "c7adcfec4c1513ce0061ce8a512af12bad5db2269588d2fc69e82b04a7c45478",
+      "page_idx": 8,
+      "page_no": 9,
+      "bbox": [
+        183,
+        546,
+        838,
+        875
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_112728_7392f75c",
+      "batch_id": "338bebae-3872-46f3-b62d-30c0b6474dd8",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "3.4功能单位 为方便系统中输入/输出的量化，功能单位被定义为生产1吨电能计量箱、电缆保护管、铁附件。 3.5生命周期流程图的绘制 根据 PAS2050：2011《商品和服务在生命周期内的温室气体排放评价规范》绘制1吨电能计量箱、电缆保护管、铁附件的生命周期流程图，其碳足迹评价模式为从商业到产品评价：包括从原料获取，通过制造到产品出厂整个过程的排放。电能计量箱、电缆保护管、铁附件的生命周期流程图如下：",
+      "ocr_context": "3.4功能单位 为方便系统中输入/输出的量化，功能单位被定义为生产1吨电能计量箱、电缆保护管、铁附件。 3.5生命周期流程图的绘制 根据 PAS2050：2011《商品和服务在生命周期内的温室气体排放评价规范》绘制1吨电能计量箱、电缆保护管、铁附件的生命周期流程图，其碳足迹评价模式为从商业到产品评价：包括从原料获取，通过制造到产品出厂整个过程的排放。电能计量箱、电缆保护管、铁附件的生命周期流程图如下：",
+      "retrieval_text": "泰昌 green_low_carbon 第9页图片。3.4功能单位 为方便系统中输入/输出的量化，功能单位被定义为生产1吨电能计量箱、电缆保护管、铁附件。 3.5生命周期流程图的绘制 根据 PAS2050：2011《商品和服务在生命周期内的温室气体排放评价规范》绘制1吨电能计量箱、电缆保护管、铁附件的生命周期流程图，其碳足迹评价模式为从商业到产品评价：包括从原料获取，通过制造到产品出厂整个过程的排放。电能计量箱、电缆保护管、铁附件的生命周期流程图如下：",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:9",
+        "bbox_anchor": [
+          183,
+          546,
+          838,
+          875
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p16_183_f52e9499",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/5其他绿色低碳证书一览表/碳足迹报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/碳足迹报告_7392f7/extract/images/dd2c66a6243401a8a3d9d75142a806b4f675a4473f54c29f05df09cb836054b0.jpg",
+      "asset_sha256": "44401dda0e3f668860c5c9fb3b7f44b82d5627b8eb0035df2255801008ab46bf",
+      "page_idx": 15,
+      "page_no": 16,
+      "bbox": [
+        250,
+        322,
+        744,
+        675
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_112728_7392f75c",
+      "batch_id": "338bebae-3872-46f3-b62d-30c0b6474dd8",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "对每道工序都进行能源消耗的跟踪监测，提高初级数据的准确性。 8.结语 低碳是企业未来生存和发展的必然选择，进行产品碳足迹的核算是实现温室气体管理，制定低碳发展的战略的第一步。通过产品生命周期的碳足迹核算，可以了解排放源，明确各生产环节的排放量，为制定合理的减排目标和发展战略打下基础。",
+      "ocr_context": "对每道工序都进行能源消耗的跟踪监测，提高初级数据的准确性。 8.结语 低碳是企业未来生存和发展的必然选择，进行产品碳足迹的核算是实现温室气体管理，制定低碳发展的战略的第一步。通过产品生命周期的碳足迹核算，可以了解排放源，明确各生产环节的排放量，为制定合理的减排目标和发展战略打下基础。",
+      "retrieval_text": "泰昌 green_low_carbon 第16页图片。对每道工序都进行能源消耗的跟踪监测，提高初级数据的准确性。 8.结语 低碳是企业未来生存和发展的必然选择，进行产品碳足迹的核算是实现温室气体管理，制定低碳发展的战略的第一步。通过产品生命周期的碳足迹核算，可以了解排放源，明确各生产环节的排放量，为制定合理的减排目标和发展战略打下基础。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:16",
+        "bbox_anchor": [
+          250,
+          322,
+          744,
+          675
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_green_low_carbon_p17_188_45555785",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/5其他绿色低碳证书一览表/碳足迹报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "green_low_carbon",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/碳足迹报告_7392f7/extract/images/4ea64aab3234239a52d6d183f2199980117ad715ec07afb2ff27822ad9a11f53.jpg",
+      "asset_sha256": "cfb4c282622150ac9d480f49b846aebcc5e0e70ae4054a80d88655764d93ceca",
+      "page_idx": 16,
+      "page_no": 17,
+      "bbox": [
+        0,
+        0,
+        998,
+        832
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_green_low_carbon_20260606_112728_7392f75c",
+      "batch_id": "338bebae-3872-46f3-b62d-30c0b6474dd8",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "",
+      "ocr_context": "",
+      "retrieval_text": "泰昌 green_low_carbon 第17页图片。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "green_low_carbon",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:17",
+        "bbox_anchor": [
+          0,
+          0,
+          998,
+          832
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    }
+  ]
+}

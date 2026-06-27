@@ -4,7 +4,8 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-from backend.db.supabase_repo import replace_bid_analysis, replace_project_rows
+from backend.db.supabase_repo import replace_bid_analysis, replace_project_rows, update_bid_project_metadata_fields
+from backend.parsing.tender_metadata import extract_tender_project_metadata
 
 
 KEYWORD_GROUPS = {
@@ -59,19 +60,7 @@ def _heading_before(markdown: str, offset: int) -> str | None:
 
 
 def extract_project_meta(markdown: str) -> dict[str, Any]:
-    title_match = re.search(r"#\s*(.+?（项目名称）.+?)(?:\n|$)", markdown)
-    tender_no_match = re.search(r"招标编号[:：]\s*([A-Za-z0-9\-]+)", markdown)
-    project_name = None
-    if title_match:
-        project_name = re.sub(r"\s+", "", title_match.group(1))
-        project_name = project_name.split("（项目名称）")[0]
-
-    return {
-        "project_name": project_name,
-        "tender_no": tender_no_match.group(1) if tender_no_match else None,
-        "document_type": "招标文件",
-        "parser": "mineru",
-    }
+    return extract_tender_project_metadata(markdown, [])
 
 
 def build_interpretation_report(
@@ -393,7 +382,7 @@ def build_analysis_summary(
     chapter_suggestions: list[dict[str, Any]],
 ) -> dict[str, Any]:
     type_counter = Counter(str(item.get("type") or "unknown") for item in content_list)
-    project_meta = extract_project_meta(markdown)
+    project_meta = extract_tender_project_metadata(markdown, content_list)
     interpretation_report = build_interpretation_report(
         project_meta=project_meta,
         requirements=requirements,
@@ -461,6 +450,7 @@ def ingest_mineru_artifacts_to_supabase(
         "chapter_suggestions": analysis["chapter_suggestions"],
         "summary": analysis["summary"],
     })
+    update_bid_project_metadata_fields(project_id, analysis["project_meta"])
     replace_project_rows("bid_requirements", project_id, [{"project_id": project_id, **item} for item in requirements])
     replace_project_rows("bid_risks", project_id, [{"project_id": project_id, **item} for item in risks])
     replace_project_rows("bid_scoring_items", project_id, [{"project_id": project_id, **item} for item in scoring_items])

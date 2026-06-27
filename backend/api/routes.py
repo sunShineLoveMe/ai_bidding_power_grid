@@ -15,21 +15,23 @@ import codecs
 import PyPDF2
 from urllib.parse import quote
 from backend.ai.qwen_client import call_dashscope_api, generate_bid_section
-from backend.export.md_to_word import clean_formal_bid_text, convert_md_to_word
+from backend.export.md_to_word import DOCX_BIDDER_FULL_NAME, clean_formal_bid_text, convert_md_to_word, resolve_docx_template_profile, taichang_bid_document_title
 from backend.ai.chapter_planner import generate_bid_outline, stream_bid_outline
 from backend.ai.section_writer import estimate_bid_content_words, stream_bid_section
 from backend.ai.interpreter import generate_ai_interpretation_report
 from backend.ai.compliance_checker import build_compliance_report
 from backend.ai.semantic_compliance import build_semantic_compliance_report
-from backend.db.supabase_repo import cancel_bid_generation_task, create_bid_export_task, create_bid_generation_task, create_knowledge_asset, delete_bid_project, delete_bid_section, download_bid_file_to_local, download_knowledge_asset_file_variant, get_ai_usage_overview, get_bid_export_task, get_bid_file, get_latest_bid_file_for_project, get_latest_bid_generation_task, get_onlyoffice_document, get_project_interpretation, list_bid_history, list_bid_sections, list_recent_bid_projects, reorder_bid_sections, reset_bid_sections_generation, save_onlyoffice_document, sync_uploaded_tender_to_supabase, update_bid_analysis_project_meta, update_bid_export_task, update_bid_file_parse_status, update_bid_generation_task_item, update_bid_section_content, update_knowledge_asset, upload_knowledge_asset_file, upsert_bid_section
+from backend.db.supabase_repo import cancel_bid_generation_task, create_bid_export_task, create_bid_generation_task, create_knowledge_asset, delete_bid_project, delete_bid_section, download_bid_file_to_local, download_knowledge_asset_file_variant, get_ai_usage_overview, get_bid_export_task, get_bid_file, get_latest_bid_file_for_project, get_latest_bid_generation_task, get_onlyoffice_document, get_project_interpretation, list_bid_history, list_bid_sections, list_knowledge_assets, list_recent_bid_projects, reorder_bid_sections, reset_bid_sections_generation, save_onlyoffice_document, sync_uploaded_tender_to_supabase, update_bid_analysis_project_meta, update_bid_export_task, update_bid_file_parse_status, update_bid_generation_task_item, update_bid_section_content, update_knowledge_asset, upload_knowledge_asset_file, upsert_bid_section
 from backend.core.llm_json_utils import strip_llm_json
-from backend.core.bid_volumes import asset_applicable_volumes, asset_matches_volume, delivery_volume_type, normalize_volume_list, section_volume_type, volume_name
+from backend.core.bid_volumes import asset_applicable_volumes, asset_matches_volume, delivery_volume_file_type, delivery_volume_type, normalize_volume_list, section_volume_type, volume_name
 from backend.ai.length_settings import apply_length_allocations_to_sections, allocate_chapter_length_targets, evaluate_length_feasibility, normalize_length_settings
 import threading
 import shutil
 from datetime import timedelta
 from backend.core.config import DEFAULT_SETTINGS, build_enterprise_context, get_setting, load_runtime_settings, save_runtime_settings
 from backend.core.security import UploadValidationError, safe_upload_filename, validate_uploaded_file
+from backend.services.formal_placeholders import apply_confirmed_values_to_export_text, count_formal_placeholders
+from backend.services.bid_prefill import formal_required_confirmation_gaps
 
 # 操作向量数据库的函数
 from backend.parsing.document_parser import ingest_artifacts as ingest_mineru_artifacts_to_supabase, import_mineru_result_zip, parse_and_index_tender_file, read_parse_status, retry_mineru_result_download, write_parse_status
@@ -209,30 +211,49 @@ def _strip_existing_section_number(title: str) -> str:
     return value.strip() or clean_formal_bid_text(title or "未命名章节").strip() or "未命名章节"
 
 
+def _strip_repeated_parent_title_prefix(title: str) -> str:
+    value = _strip_existing_section_number(title)
+    if " - " not in value and "－" not in value:
+        return value
+    parts = re.split(r"\s*[-－]\s*", value, maxsplit=1)
+    if len(parts) != 2:
+        return value
+    parent, child = [part.strip(" ：:、，,。") for part in parts]
+    if parent and child and len(parent) >= 4 and len(child) <= 24:
+        return child
+    return value
+
+
 def _numbered_export_sections(sections: list[dict]) -> list[dict]:
     raw_levels = [max(1, min(int(section.get("level") or 1), 6)) for section in sections]
-    base_level = min(raw_levels) if raw_levels else 1
     counters: list[int] = []
     numbered: list[dict] = []
-    raw_level_map: dict[int, int] = {}
+    raw_stack: list[int] = []
     for section, raw_level in zip(sections, raw_levels):
-        if raw_level in raw_level_map:
-            level = raw_level_map[raw_level]
+        # 真实大纲偶尔会出现从二级开始或从一级直接跳到三级的脏层级。
+        # 用 raw level 栈按上下文压平，避免 0.1 / 18.0.1，也避免把后续子节误升成大章。
+        if not raw_stack:
+            level = 1
+            raw_stack = [raw_level]
+        elif raw_level > raw_stack[-1]:
+            level = min(len(raw_stack) + 1, 6)
+            raw_stack.append(raw_level)
         else:
-            level = raw_level - base_level + 1 if base_level > 1 else raw_level
-            level = max(1, min(level, 6))
-            # 真实大纲偶尔会出现从一级直接跳到三级的脏层级。
-            # Word 目录不能出现 18.0.1 这类编号，导出时压平成紧邻的下一层。
-            if counters and level > len(counters) + 1:
-                level = len(counters) + 1
-            raw_level_map[raw_level] = level
+            while raw_stack and raw_level < raw_stack[-1]:
+                raw_stack.pop()
+            if raw_stack and raw_level == raw_stack[-1]:
+                level = len(raw_stack)
+            else:
+                level = 1 if not raw_stack else min(len(raw_stack) + 1, 6)
+                raw_stack.append(raw_level)
         level = max(1, min(level, 6))
         while len(counters) < level:
             counters.append(0)
         counters = counters[:level]
         counters[level - 1] += 1
         number = ".".join(str(value) for value in counters)
-        clean_title = _strip_existing_section_number(section.get("title") or "未命名章节")
+        raw_title = _strip_existing_section_number(section.get("title") or "未命名章节")
+        clean_title = _strip_repeated_parent_title_prefix(raw_title) if level > 1 else raw_title
         title_prefix = f"{number}. " if "." not in number else f"{number} "
         numbered.append({
             **section,
@@ -262,6 +283,32 @@ def _strip_duplicate_section_heading(content: str, section: dict) -> str:
     ):
         return "\n".join(lines[1:]).strip()
     return content.strip()
+
+
+def _strip_redundant_section_label(content: str, section: dict) -> str:
+    if not content:
+        return ""
+    raw_title = _strip_existing_section_number(section.get("title") or "")
+    export_title = _strip_existing_section_number(section.get("_export_title") or "")
+    candidates = {
+        clean_formal_bid_text(raw_title).strip(),
+        clean_formal_bid_text(export_title).strip(),
+        _strip_repeated_parent_title_prefix(raw_title),
+        _strip_repeated_parent_title_prefix(export_title),
+    }
+    candidates = {candidate for candidate in candidates if candidate}
+    output: list[str] = []
+    removed = False
+    for raw_line in content.splitlines():
+        stripped = raw_line.strip()
+        label = stripped.strip("【】[]（）()# ：:、，,。")
+        label = re.sub(r"^[一二三四五六七八九十百]+[、.．]\s*", "", label)
+        label = _strip_existing_section_number(label)
+        if not removed and label in candidates:
+            removed = True
+            continue
+        output.append(raw_line)
+    return "\n".join(output).strip()
 
 
 def _demote_body_markdown_headings(content: str) -> str:
@@ -300,6 +347,25 @@ def _demote_body_markdown_headings(content: str) -> str:
     return "\n".join(output).strip()
 
 
+def _strip_untrusted_export_images(content: str) -> str:
+    """Keep formal DOCX images tied to curated knowledge assets or real local files."""
+    if not content:
+        return ""
+
+    def replace(match: re.Match) -> str:
+        alt = clean_formal_bid_text(match.group(1) or "图片")
+        ref = (match.group(2) or "").strip().strip('"').strip("'")
+        if re.match(r"^/api/(?:bidding/)?knowledge/assets/[^/]+/file(?:\?|$)", ref):
+            return match.group(0)
+        candidate = Path(ref)
+        if candidate.is_absolute() and candidate.exists() and candidate.is_file():
+            return match.group(0)
+        logging.warning("导出 DOCX 时移除未入库或不可解析图片引用: alt=%s ref=%s", alt, ref)
+        return ""
+
+    return re.sub(r"!\[(.*?)\]\((.*?)\)", replace, content).strip()
+
+
 def _asset_text(asset: dict) -> str:
     parts = [
         asset.get("title"),
@@ -311,6 +377,14 @@ def _asset_text(asset: dict) -> str:
     parts.extend(asset.get("tags") or [])
     parts.extend(asset.get("applicable_sections") or [])
     parts.extend(asset_applicable_volumes(asset))
+    for container_name in ("metadata", "specs"):
+        container = asset.get(container_name) or {}
+        if isinstance(container, dict):
+            for value in container.values():
+                if isinstance(value, list):
+                    parts.extend(str(item) for item in value if item)
+                elif isinstance(value, (str, int, float, bool)):
+                    parts.append(str(value))
     return " ".join(str(item) for item in parts if item).lower()
 
 
@@ -345,19 +419,84 @@ def _section_needs_image(section: dict) -> bool:
         return any(keyword in text for keyword in ["附件", "证明材料", "授权委托", "保证金", "保函", "扫描件"])
     if plan.get("needs_image"):
         return True
+    title_text = f"{_section_display_title(section)} {section.get('title') or ''}".lower()
+    explicit_image_title_keywords = [
+        "资料清单", "附件", "营业执照", "资质", "证书", "业绩", "合同", "中标通知书",
+        "生产", "生产线", "制造", "检测", "试验", "设备", "绿色", "低碳", "碳足迹",
+        "检验报告", "检测报告", "产品", "厂房", "仓储", "logo", "Logo",
+    ]
+    generic_titles = ["编制依据", "工程概况", "总体部署", "响应要求", "有效性说明", "条款响应", "承诺事项", "偏离说明"]
+    if any(title == title_text.strip() or title in title_text for title in generic_titles):
+        return False
+    if int(section.get("level") or 1) <= 2 and not any(keyword in title_text for keyword in explicit_image_title_keywords):
+        return False
     text = _section_text(section)
     keywords = [
-        "资质", "证书", "营业执照", "许可", "业绩", "产品", "设备", "材料", "施工",
+        "资质", "证书", "营业执照", "许可", "业绩", "合同", "中标通知书", "产品", "设备", "材料", "施工",
         "输变电", "配网", "变电站", "线路", "电缆", "开关柜", "变压器", "箱变",
         "继电保护", "自动化", "调试", "试验", "运维", "检修", "组织实施", "工程范围",
     ]
     return any(keyword in text for keyword in keywords)
 
 
+def _asset_meta_value(asset: dict, key: str) -> str:
+    metadata = asset.get("metadata") or {}
+    specs = asset.get("specs") or {}
+    for container in (metadata, specs, asset):
+        if isinstance(container, dict) and container.get(key) not in (None, ""):
+            return str(container.get(key)).lower()
+    return ""
+
+
+def _section_asset_profile(section: dict) -> dict[str, set[str]]:
+    text = _section_text(section)
+    heading_text = f"{_section_display_title(section)} {section.get('title') or ''}".lower()
+    profile = {"evidence_types": set(), "libraries": set()}
+    if any(keyword in text for keyword in ["营业执照", "执照"]):
+        profile["evidence_types"].add("business_license")
+        profile["libraries"].add("qualification_library")
+    if any(keyword in text for keyword in ["资信", "资质", "证书", "体系认证", "认证证书", "许可"]):
+        profile["evidence_types"].add("certification")
+        profile["libraries"].add("qualification_library")
+    if any(keyword in text for keyword in ["生产制造", "生产线", "产线", "车间", "厂房", "制造能力", "生产能力", "生产设备"]):
+        profile["evidence_types"].add("production_capacity")
+        profile["libraries"].add("product_library")
+    if any(keyword in text for keyword in ["试验检测", "检测能力", "试验能力", "检测设备", "试验设备", "电子天平", "万能试验机", "维卡", "锤击", "溶体流动"]):
+        profile["evidence_types"].add("testing_capacity")
+        profile["libraries"].add("product_library")
+    if any(keyword in text for keyword in ["绿色供应链", "绿色低碳", "低碳", "esg", "碳足迹", "废水废气", "环保"]):
+        profile["evidence_types"].add("green_low_carbon")
+    if any(keyword in text for keyword in ["检验报告", "检测报告", "型式试验", "内径250"]):
+        profile["evidence_types"].add("inspection_report")
+        profile["libraries"].add("product_library")
+    if any(keyword in heading_text for keyword in [
+        "同类业绩",
+        "类似业绩",
+        "项目业绩",
+        "业绩文件",
+        "业绩证明",
+        "新增业绩合同",
+        "产品购销合同",
+        "同类项目",
+        "合同协议书",
+        "供货合同",
+        "中标通知书",
+    ]):
+        profile["evidence_types"].add("project_performance")
+        profile["libraries"].add("qualification_library")
+    if any(keyword in heading_text for keyword in ["logo", "Logo", "标识", "企业形象", "封面"]):
+        profile["evidence_types"].add("brand_logo")
+        profile["libraries"].add("qualification_library")
+    return profile
+
+
 def _score_asset_for_section(asset: dict, section: dict) -> int:
     asset_text = _asset_text(asset)
     section_text = _section_text(section)
     volume_type = section_volume_type(section)
+    profile = _section_asset_profile(section)
+    evidence_type = _asset_meta_value(asset, "evidence_type")
+    target_library = _asset_meta_value(asset, "target_library")
     score = 0
 
     for token in re.findall(r"[\u4e00-\u9fffA-Za-z0-9]{2,}", section_text):
@@ -407,10 +546,26 @@ def _score_asset_for_section(asset: dict, section: dict) -> int:
         score += 6
     if asset_type and asset_type.lower() in section_text:
         score += 4
+    preferred_evidence = profile["evidence_types"]
+    preferred_libraries = profile["libraries"]
+    if preferred_evidence:
+        if evidence_type in preferred_evidence:
+            score += 36
+        elif evidence_type:
+            score -= 28
+    if preferred_libraries:
+        if target_library in preferred_libraries:
+            score += 12
+        elif target_library:
+            score -= 10
     return score
 
 
 def _asset_image_ref(asset: dict) -> str:
+    asset_id = str(asset.get("id") or "").strip()
+    if asset_id:
+        return f"/api/bidding/knowledge/assets/{quote(asset_id)}/file?variant=original"
+
     local_path = str(asset.get("local_path") or "").strip()
     if local_path:
         candidate = Path(local_path)
@@ -418,10 +573,6 @@ def _asset_image_ref(asset: dict) -> str:
             candidate = Path.cwd() / candidate
         if candidate.exists() and candidate.is_file():
             return str(candidate)
-
-    asset_id = str(asset.get("id") or "").strip()
-    if asset_id:
-        return f"/api/bidding/knowledge/assets/{quote(asset_id)}/file?variant=original"
 
     public_url = str(asset.get("public_url") or "").strip()
     if public_url.startswith(("http://", "https://")):
@@ -450,11 +601,8 @@ def _asset_library_label(asset: dict) -> str:
 
 def _asset_caption(asset: dict, match_reason: str | None = None) -> str:
     title = str(asset.get("title") or "知识库图片资产").strip()
-    category = str(asset.get("category") or "电网行业资料").strip()
-    sensitive_note = "，脱敏示意图，不替代正式资质文件" if asset.get("is_sensitive") or asset.get("anonymized") else ""
-    source_note = f"来源：{_asset_library_label(asset)}"
-    reason_note = f"；匹配依据：{match_reason}" if match_reason else ""
-    return f"图示：{title}（{category}{sensitive_note}；{source_note}{reason_note}）"
+    sensitive_note = "（脱敏示意图）" if asset.get("is_sensitive") or asset.get("anonymized") else ""
+    return f"图示：{title}{sensitive_note}"
 
 
 def _asset_match_reason(asset: dict, section: dict, score: int) -> str:
@@ -470,7 +618,22 @@ def _asset_match_reason(asset: dict, section: dict, score: int) -> str:
     elif volume_type == "business":
         reasons.append("商务文件仅插入证明或附件类资料")
 
-    for keyword in ["产品", "设备", "工艺", "施工", "资质", "证书", "营业执照", "业绩", "人员", "授权", "保证金", "保函"]:
+    evidence_type = _asset_meta_value(asset, "evidence_type")
+    profile = _section_asset_profile(section)
+    if evidence_type and evidence_type in profile["evidence_types"]:
+        evidence_labels = {
+            "business_license": "营业执照",
+            "certification": "资信/认证证书",
+            "production_capacity": "生产制造能力",
+            "testing_capacity": "试验检测能力",
+            "green_low_carbon": "绿色低碳资料",
+            "inspection_report": "检验/检测报告",
+            "project_performance": "同类项目业绩",
+            "brand_logo": "企业 Logo",
+        }
+        reasons.append(f"匹配章节证据类型：{evidence_labels.get(evidence_type, evidence_type)}")
+
+    for keyword in ["产品", "设备", "工艺", "施工", "资质", "证书", "营业执照", "业绩", "合同", "中标通知书", "人员", "授权", "保证金", "保函"]:
         if keyword in section_text and keyword in asset_text:
             reasons.append(f"章节与资产同时命中“{keyword}”")
             if len(reasons) >= 3:
@@ -480,11 +643,50 @@ def _asset_match_reason(asset: dict, section: dict, score: int) -> str:
     return "；".join(reasons[:3])
 
 
+def _manifest_evidence_counts(image_manifest: list[dict] | None) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for item in image_manifest or []:
+        evidence_type = str(item.get("evidence_type") or "")
+        if evidence_type:
+            counts[evidence_type] = counts.get(evidence_type, 0) + 1
+    return counts
+
+
+def _asset_evidence_allowed_by_manifest(asset: dict, image_manifest: list[dict] | None) -> bool:
+    evidence_type = _asset_meta_value(asset, "evidence_type")
+    counts = _manifest_evidence_counts(image_manifest)
+    selected_total = len(image_manifest or [])
+    if (
+        selected_total >= max(0, DOCX_TOTAL_ASSET_IMAGE_LIMIT - 2)
+        and counts.get("project_performance", 0) < 2
+        and evidence_type != "project_performance"
+    ):
+        return False
+    caps = {
+        # A long bid can otherwise spend the whole 24-image budget on early
+        # certificate/business pages before performance and inspection-report
+        # chapters are reached.
+        "certification": 7,
+        "business_license": 4,
+        "testing_capacity": 4,
+        "green_low_carbon": 4,
+        "inspection_report": 5,
+    }
+    cap = caps.get(evidence_type)
+    if not cap:
+        return True
+    return counts.get(evidence_type, 0) < cap
+
+
 def _asset_allowed_for_volume(asset: dict, section: dict) -> bool:
     volume_type = section_volume_type(section)
     if volume_type == "price":
         return False
     if not asset_matches_volume(asset, volume_type, allow_unscoped=True):
+        return False
+    profile = _section_asset_profile(section)
+    evidence_type = _asset_meta_value(asset, "evidence_type")
+    if profile["evidence_types"] and evidence_type and evidence_type not in profile["evidence_types"]:
         return False
     asset_text = _asset_text(asset)
     metadata = asset.get("metadata") or {}
@@ -496,6 +698,8 @@ def _asset_allowed_for_volume(asset: dict, section: dict) -> bool:
         library_type = str(specs.get("library_type") or "")
 
     if volume_type == "technical":
+        if evidence_type == "project_performance":
+            return True
         return library_type != "qualification" or any(keyword in asset_text for keyword in ["设备", "产品", "参数", "工艺", "施工", "现场"])
     if volume_type == "qualification":
         return library_type != "product" or any(keyword in asset_text for keyword in ["业绩", "证明", "资质", "证书"])
@@ -522,11 +726,13 @@ def _build_section_image_markdown(
         if not image_ref:
             continue
         asset_id = str(asset.get("id") or image_ref)
+        if asset_id in used_asset_ids:
+            continue
+        if not _asset_evidence_allowed_by_manifest(asset, image_manifest):
+            continue
         if not _asset_allowed_for_volume(asset, section):
             continue
         score = _score_asset_for_section(asset, section)
-        if asset_id in used_asset_ids:
-            score -= 8
         if score > 0:
             candidates.append((score, asset))
 
@@ -536,6 +742,11 @@ def _build_section_image_markdown(
         for asset in assets:
             image_ref = _asset_image_ref(asset)
             if not image_ref:
+                continue
+            asset_id = str(asset.get("id") or image_ref)
+            if asset_id in used_asset_ids:
+                continue
+            if not _asset_evidence_allowed_by_manifest(asset, image_manifest):
                 continue
             if not _asset_allowed_for_volume(asset, section):
                 continue
@@ -567,6 +778,9 @@ def _build_section_image_markdown(
                 "asset_title": asset.get("title"),
                 "asset_category": asset.get("category"),
                 "asset_type": asset.get("asset_type"),
+                "evidence_type": _asset_meta_value(asset, "evidence_type"),
+                "target_library": _asset_meta_value(asset, "target_library"),
+                "source_batch_id": _asset_meta_value(asset, "source_batch_id") or _asset_meta_value(asset, "ingestion_batch_id"),
                 "library": _asset_library_label(asset),
                 "section_id": section.get("id"),
                 "section_title": _section_display_title(section),
@@ -588,6 +802,28 @@ def _asset_allowed_for_bid(asset: dict) -> bool:
     if isinstance(metadata, dict) and metadata.get("allowed_for_bid") is False:
         return False
     if isinstance(specs, dict) and specs.get("allowed_for_bid") is False:
+        return False
+    reference_only_values = [
+        metadata.get("reference_only") if isinstance(metadata, dict) else None,
+        specs.get("reference_only") if isinstance(specs, dict) else None,
+        asset.get("reference_only"),
+    ]
+    if any(value is True or str(value).lower() == "true" for value in reference_only_values if value is not None):
+        return False
+
+    enterprise_values = [
+        metadata.get("enterprise") if isinstance(metadata, dict) else None,
+        specs.get("enterprise") if isinstance(specs, dict) else None,
+        asset.get("enterprise"),
+        metadata.get("doc_owner") if isinstance(metadata, dict) else None,
+        specs.get("doc_owner") if isinstance(specs, dict) else None,
+    ]
+    enterprise_text = " ".join(str(value) for value in enterprise_values if value)
+    if "泰昌" not in enterprise_text and DOCX_BIDDER_FULL_NAME not in enterprise_text:
+        return False
+
+    source_domain = _asset_meta_value(asset, "source_domain")
+    if source_domain and source_domain != "enterprise_fact":
         return False
     return True
 
@@ -645,12 +881,14 @@ def build_project_bid_markdown(
 ) -> tuple[Path, str, dict]:
     payload = get_project_interpretation(project_id)
     project = payload.get("project") or {}
+    analysis = payload.get("analysis") or {}
+    project_meta = analysis.get("project_meta") if isinstance(analysis.get("project_meta"), dict) else {}
     sections = _snapshot_export_sections(sections_snapshot) or list_bid_sections(project_id)
     if not sections:
         raise RuntimeError("当前项目暂无章节内容，请先生成章节大纲或正文。")
 
     project_name = (
-        (payload.get("analysis") or {}).get("project_meta", {}) or {}
+        project_meta or {}
     ).get("project_name") or project.get("project_name") or "投标文件"
     project_name = clean_formal_bid_text(project_name) or "投标文件"
     folder_name = _slug_filename(project_name, f"project-{project_id[:8]}")
@@ -678,15 +916,66 @@ def build_project_bid_markdown(
     if with_images:
         display_suffix = f"{display_suffix}-图文"
 
+    delivery_file_type = delivery_volume_file_type(volume_type if not focus_section_id else None)
+    report_cover_fields = dict(project_meta.get("cover_fields") if isinstance(project_meta.get("cover_fields"), dict) else {})
+    if delivery_file_type != "投标文件":
+        report_cover_fields["文件类型"] = delivery_file_type
+
     image_assets: list[dict] = []
     export_image_report: dict = {
         "enabled": bool(with_images),
+        "scope": "section" if focus_section_id else ("volume" if volume_type else "full"),
+        "volume_type": volume_type,
+        "volume_name": volume_name(volume_type) if volume_type else "完整投标文件",
+        "delivery_file_type": delivery_file_type,
+        "section_count": len(sections),
         "asset_candidates": 0,
         "selected": 0,
         "max_total": DOCX_TOTAL_ASSET_IMAGE_LIMIT,
         "manifest": [],
         "warnings": [],
+        "cover_fields": report_cover_fields,
+        "cover_field_sources": project_meta.get("cover_field_sources") if isinstance(project_meta.get("cover_field_sources"), dict) else {},
+        "cover_field_missing": project_meta.get("cover_field_missing") if isinstance(project_meta.get("cover_field_missing"), list) else [],
+        "cover_field_source": "uploaded_tender_structured_extract" if isinstance(project_meta.get("cover_fields"), dict) and project_meta.get("cover_fields") else "markdown_fallback",
     }
+    prefill_state = project_meta.get("bid_prefill") if isinstance(project_meta.get("bid_prefill"), dict) else {}
+    parent_section_ids = {str(section.get("parent_id")) for section in sections if section.get("parent_id")}
+
+    def is_container_section(section: dict) -> bool:
+        metadata = section.get("metadata") if isinstance(section.get("metadata"), dict) else {}
+        return (
+            metadata.get("section_role") == "container"
+            or metadata.get("leaf_generation") is False
+            or str(section.get("id") or "") in parent_section_ids
+        )
+
+    empty_section_count = sum(
+        1 for section in sections
+        if not is_container_section(section) and not str(section.get("content") or "").strip()
+    )
+    placeholder_count = count_formal_placeholders(str(section.get("content") or "") for section in sections)
+    confirmed_values = prefill_state.get("confirmed_values") if isinstance(prefill_state.get("confirmed_values"), dict) else {}
+    missing_required = formal_required_confirmation_gaps(confirmed_values)
+    template_profile = resolve_docx_template_profile(report_cover_fields)
+    export_image_report["formal_readiness"] = {
+        "template_id": template_profile.get("template_id") or "formal_bid_standard",
+        "template_family": template_profile.get("template_family"),
+        "reference_path": template_profile.get("reference_path"),
+        "reference_template_policy": "tender_format_then_customer_reference_then_system_default",
+        "bidder": DOCX_BIDDER_FULL_NAME,
+        "empty_section_count": empty_section_count,
+        "placeholder_count": placeholder_count,
+        "missing_formal_required_fields": missing_required,
+        "export_confirmation_replacements": 0,
+        "ready": empty_section_count == 0 and placeholder_count == 0 and not missing_required,
+    }
+    if empty_section_count:
+        export_image_report["warnings"].append(f"仍有 {empty_section_count} 个章节没有正文，当前文件只能作为草稿。")
+    if placeholder_count:
+        export_image_report["warnings"].append(f"仍有 {placeholder_count} 处待补充/待确认占位，当前文件尚未达到正式投标文件标准。")
+    if missing_required:
+        export_image_report["warnings"].append(f"仍有 {len(missing_required)} 个正式必填字段未确认，请返回投标信息确认步骤补齐。")
     if with_images:
         try:
             image_assets = [
@@ -701,20 +990,29 @@ def build_project_bid_markdown(
             image_assets = []
             export_image_report["warnings"].append("加载知识库图片资产失败，已降级为无配图导出。")
 
-    document_title = f"{project_name}-{volume_name(volume_type)}" if volume_type and not focus_section else project_name
-    file_stem = _display_filename(f"{project_name}{display_suffix}", fallback=document_title)
+    base_document_title = taichang_bid_document_title(project_name)
+    document_title = f"{base_document_title}-{volume_name(volume_type)}" if volume_type and not focus_section else base_document_title
+    file_stem = _display_filename(f"{base_document_title}-{DOCX_BIDDER_FULL_NAME}{display_suffix}", fallback=document_title)
     markdown_path = output_dir / f"{file_stem}.md"
     chunks: list[str] = [f"# {document_title}\n\n"]
     used_asset_ids: set[str] = set()
     for section in _numbered_export_sections(sections):
         title = section.get("_export_title") or _section_display_title(section)
-        content = _demote_body_markdown_headings(
-            _strip_duplicate_section_heading(section.get("content") or "", section)
+        content = _strip_untrusted_export_images(
+            _strip_redundant_section_label(
+                _demote_body_markdown_headings(
+                    _strip_duplicate_section_heading(section.get("content") or "", section)
+                ),
+                section,
+            )
         )
+        if confirmed_values:
+            content, confirmation_replacements = apply_confirmed_values_to_export_text(content, confirmed_values)
+            export_image_report["formal_readiness"]["export_confirmation_replacements"] += confirmation_replacements
         chunks.append(_section_markdown_heading(int(section.get("level") or 1), title))
         if content:
             chunks.append(f"{content}\n\n" if content.endswith("\n") else f"{content}\n\n")
-        else:
+        elif not is_container_section(section):
             chunks.append("待补充章节正文。\n\n")
         if with_images and "![" not in content:
             remaining = DOCX_TOTAL_ASSET_IMAGE_LIMIT - len(export_image_report["manifest"])
@@ -727,6 +1025,123 @@ def build_project_bid_markdown(
             )
             if snippet:
                 chunks.append(snippet)
+
+    if with_images and image_assets:
+        evidence_counts = _manifest_evidence_counts(export_image_report["manifest"])
+        required_project_performance = 2
+        missing_project_performance = max(
+            0,
+            required_project_performance - evidence_counts.get("project_performance", 0),
+        )
+        remaining = DOCX_TOTAL_ASSET_IMAGE_LIMIT - len(export_image_report["manifest"])
+        if missing_project_performance and remaining > 0:
+            project_assets: list[tuple[int, dict]] = []
+            for asset in image_assets:
+                image_ref = _asset_image_ref(asset)
+                if not image_ref:
+                    continue
+                asset_id = str(asset.get("id") or image_ref)
+                if asset_id in used_asset_ids:
+                    continue
+                if _asset_meta_value(asset, "evidence_type") != "project_performance":
+                    continue
+                score = 20
+                asset_text = _asset_text(asset)
+                if _asset_meta_value(asset, "source_batch_id") == "customer_taichang_supplement_20260611":
+                    score += 20
+                if any(keyword in asset_text for keyword in ["中标通知书", "合同", "业绩", "购销"]):
+                    score += 12
+                project_assets.append((score, asset))
+
+            if project_assets:
+                chunks.append("## 同类项目业绩证明补充附件\n\n")
+                project_assets.sort(key=lambda item: item[0], reverse=True)
+                for score, asset in project_assets[: min(missing_project_performance, remaining)]:
+                    image_ref = _asset_image_ref(asset)
+                    asset_id = str(asset.get("id") or image_ref)
+                    used_asset_ids.add(asset_id)
+                    alt = re.sub(r"[\[\]\(\)]", "", str(asset.get("title") or "同类项目业绩证明")).strip()
+                    match_reason = "正式投标文件业绩证明最低配图要求"
+                    caption = _asset_caption(asset, match_reason)
+                    chunks.append(f"\n\n![{alt}]({image_ref})\n\n{caption}\n\n")
+                    export_image_report["manifest"].append({
+                        "asset_id": asset.get("id"),
+                        "asset_title": asset.get("title"),
+                        "asset_category": asset.get("category"),
+                        "asset_type": asset.get("asset_type"),
+                        "evidence_type": _asset_meta_value(asset, "evidence_type"),
+                        "target_library": _asset_meta_value(asset, "target_library"),
+                        "source_batch_id": _asset_meta_value(asset, "source_batch_id") or _asset_meta_value(asset, "ingestion_batch_id"),
+                        "library": _asset_library_label(asset),
+                        "section_id": None,
+                        "section_title": "同类项目业绩证明补充附件",
+                        "volume_type": "attachment",
+                        "volume_name": volume_name("attachment"),
+                        "score": score,
+                        "reason": match_reason,
+                        "image_ref": image_ref,
+                        "caption": caption,
+                        "sensitive": bool(asset.get("is_sensitive")),
+                        "anonymized": bool(asset.get("anonymized")),
+                    })
+
+        evidence_counts = _manifest_evidence_counts(export_image_report["manifest"])
+        supplement_testing_count = sum(
+            1 for item in export_image_report["manifest"]
+            if item.get("source_batch_id") == "customer_taichang_supplement_20260611"
+            and item.get("evidence_type") == "testing_capacity"
+        )
+        remaining = DOCX_TOTAL_ASSET_IMAGE_LIMIT - len(export_image_report["manifest"])
+        if supplement_testing_count < 1 and remaining > 0:
+            testing_assets: list[tuple[int, dict]] = []
+            for asset in image_assets:
+                image_ref = _asset_image_ref(asset)
+                if not image_ref:
+                    continue
+                asset_id = str(asset.get("id") or image_ref)
+                if asset_id in used_asset_ids:
+                    continue
+                if _asset_meta_value(asset, "evidence_type") != "testing_capacity":
+                    continue
+                if _asset_meta_value(asset, "source_batch_id") != "customer_taichang_supplement_20260611":
+                    continue
+                score = 24
+                asset_text = _asset_text(asset)
+                if any(keyword in asset_text for keyword in ["试验", "检测", "设备", "万能试验机", "电子天平"]):
+                    score += 16
+                testing_assets.append((score, asset))
+
+            if testing_assets:
+                chunks.append("## 试验检测能力证明补充附件\n\n")
+                testing_assets.sort(key=lambda item: item[0], reverse=True)
+                for score, asset in testing_assets[:1]:
+                    image_ref = _asset_image_ref(asset)
+                    asset_id = str(asset.get("id") or image_ref)
+                    used_asset_ids.add(asset_id)
+                    alt = re.sub(r"[\[\]\(\)]", "", str(asset.get("title") or "试验检测能力证明")).strip()
+                    match_reason = "正式投标文件试验检测能力最低配图要求"
+                    caption = _asset_caption(asset, match_reason)
+                    chunks.append(f"\n\n![{alt}]({image_ref})\n\n{caption}\n\n")
+                    export_image_report["manifest"].append({
+                        "asset_id": asset.get("id"),
+                        "asset_title": asset.get("title"),
+                        "asset_category": asset.get("category"),
+                        "asset_type": asset.get("asset_type"),
+                        "evidence_type": _asset_meta_value(asset, "evidence_type"),
+                        "target_library": _asset_meta_value(asset, "target_library"),
+                        "source_batch_id": _asset_meta_value(asset, "source_batch_id") or _asset_meta_value(asset, "ingestion_batch_id"),
+                        "library": _asset_library_label(asset),
+                        "section_id": None,
+                        "section_title": "试验检测能力证明补充附件",
+                        "volume_type": "attachment",
+                        "volume_name": volume_name("attachment"),
+                        "score": score,
+                        "reason": match_reason,
+                        "image_ref": image_ref,
+                        "caption": caption,
+                        "sensitive": bool(asset.get("is_sensitive")),
+                        "anonymized": bool(asset.get("anonymized")),
+                    })
 
     markdown_path.write_text("".join(chunks), encoding="utf-8")
     export_image_report["selected"] = len(export_image_report["manifest"])
@@ -851,4 +1266,7 @@ from backend.api import export as _export_routes  # noqa: F401, E402
 from backend.api import onlyoffice as _onlyoffice_routes  # noqa: F401, E402
 from backend.api import knowledge as _knowledge_routes  # noqa: F401, E402
 from backend.api import assets as _assets_routes  # noqa: F401, E402
+from backend.api import prefill as _prefill_routes  # noqa: F401, E402
+from backend.api import formal_check as _formal_check_routes  # noqa: F401, E402
+from backend.api import ai_editing as _ai_editing_routes  # noqa: F401, E402
 from backend.api import legacy as _legacy_routes  # noqa: F401, E402

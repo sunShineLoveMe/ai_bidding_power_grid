@@ -1,0 +1,294 @@
+{
+  "created_at": "2026-06-06T03:30:58.620499+00:00",
+  "results": [
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/1绿色工厂、绿色供应链管理企业评价/绿色供应链认证证书.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/绿色供应链认证证书_a4cc17",
+      "asset_count": 5,
+      "page_count": 1,
+      "evidence_type": "certification",
+      "privacy_level": "private"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色电力认证证书.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/绿色电力认证证书_766d20",
+      "asset_count": 5,
+      "page_count": 1,
+      "evidence_type": "certification",
+      "privacy_level": "private"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/试验设备台账.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/试验设备台账_1ad4cf",
+      "asset_count": 1,
+      "page_count": 1,
+      "evidence_type": "production_capacity",
+      "privacy_level": "private"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/1.人员情况一览表/3.劳动合同/1.陈仙瑞.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/1_陈仙瑞_cc4552",
+      "asset_count": 1,
+      "page_count": 2,
+      "evidence_type": "production_capacity",
+      "privacy_level": "taichang_internal_private",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/1.人员情况一览表/3.劳动合同/2.晁坤琳.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2_晁坤琳_1d465e",
+      "asset_count": 1,
+      "page_count": 2,
+      "evidence_type": "production_capacity",
+      "privacy_level": "taichang_internal_private",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/2.人员花名册/公司人员花名册.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/公司人员花名册_0f4fe2",
+      "asset_count": 0,
+      "page_count": 2,
+      "evidence_type": "testing_capacity",
+      "privacy_level": "taichang_internal_private",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/3.劳动合同/1.陈仙瑞.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/1_陈仙瑞_4596d5",
+      "asset_count": 1,
+      "page_count": 2,
+      "evidence_type": "testing_capacity",
+      "privacy_level": "taichang_internal_private",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/3.劳动合同/2.晁坤琳.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2_晁坤琳_27b6cd",
+      "asset_count": 1,
+      "page_count": 2,
+      "evidence_type": "testing_capacity",
+      "privacy_level": "taichang_internal_private",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/CPVC电缆保护管检验报告内径250.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/CPVC电缆保护管检验报告内径250_ff3b09",
+      "asset_count": 1,
+      "page_count": 5,
+      "evidence_type": "inspection_report",
+      "privacy_level": "private"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/MPP电缆保护管检验报告内径250_676152",
+      "asset_count": 1,
+      "page_count": 5,
+      "evidence_type": "inspection_report",
+      "privacy_level": "private"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/5其他绿色低碳证书一览表/碳足迹报告.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/碳足迹报告_7392f7",
+      "asset_count": 5,
+      "page_count": 17,
+      "evidence_type": "green_low_carbon",
+      "privacy_level": "private"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色发展规划报告.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/绿色发展规划报告_0fc7c6",
+      "asset_count": 5,
+      "page_count": 18,
+      "evidence_type": "certification",
+      "privacy_level": "private"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2023年审计报告_91e149",
+      "asset_count": 20,
+      "page_count": 19,
+      "evidence_type": "finance",
+      "privacy_level": "taichang_internal_private",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2025年审计报告_59b1c3",
+      "asset_count": 22,
+      "page_count": 19,
+      "evidence_type": "finance",
+      "privacy_level": "taichang_internal_private",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0",
+      "asset_count": 21,
+      "page_count": 29,
+      "evidence_type": "finance",
+      "privacy_level": "taichang_internal_private",
+      "access_scope": "taichang_tenant_internal",
+      "requires_authorization": false,
+      "display_contexts": [
+        "bid_writing",
+        "knowledge_chat",
+        "asset_search"
+      ],
+      "metadata": {
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "sensitive_handling": "taichang_internal_use_no_redaction_required",
+        "access_scope": "taichang_tenant_internal",
+        "tenant_visibility": "taichang_only"
+      }
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/2废水.废气废固监(检)测报告一览表/废水废气废固报告.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/废水废气废固报告_ac0910",
+      "asset_count": 14,
+      "page_count": 35,
+      "evidence_type": "green_low_carbon",
+      "privacy_level": "private"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+      "parse_status": "mineru_done",
+      "output_dir": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/ESG环境社会公司治理报告_517d3b",
+      "asset_count": 19,
+      "page_count": 39,
+      "evidence_type": "green_low_carbon",
+      "privacy_level": "private"
+    }
+  ]
+}

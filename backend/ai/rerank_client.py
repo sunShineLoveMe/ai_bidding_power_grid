@@ -48,13 +48,16 @@ def rerank_documents(
     text_key: str,
     top_n: int | None = None,
     usage_context: dict[str, Any] | None = None,
+    enabled: bool | None = None,
+    model: str | None = None,
 ) -> list[dict[str, Any]]:
     """Rerank retrieved rows with Alibaba Cloud Model Studio / DashScope.
 
     The function is deliberately fail-open: if the rerank service is not
     configured or returns an unexpected shape, vector recall results are kept.
     """
-    if not get_setting("rerank_enabled", True) or not rows:
+    should_rerank = get_setting("rerank_enabled", True) if enabled is None else enabled
+    if not should_rerank or not rows:
         return rows
 
     api_key = os.getenv("DASHSCOPE_API_KEY")
@@ -71,7 +74,7 @@ def rerank_documents(
         return rows[:top_n]
 
     top_n = int(top_n or get_setting("rerank_top_n", 6) or 6)
-    model = get_setting("rerank_model", "qwen3-rerank")
+    model = model or get_setting("rerank_model", "qwen3-rerank")
     documents_for_rerank = [doc for _, doc in indexed_documents]
     endpoint, payload = _build_rerank_request(model, query, documents_for_rerank, top_n)
     context = usage_context or {}

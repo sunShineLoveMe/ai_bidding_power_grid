@@ -26,10 +26,12 @@ load_dotenv(PROJECT_ROOT / ".env")
 from backend.db.supabase_client import get_bucket_name, get_supabase_client, upload_file_to_storage  # noqa: E402
 from backend.rag.chunking import Chunk, build_parent_child_chunks  # noqa: E402
 from backend.rag.vector_store import get_embeddings, init_ali_client  # noqa: E402
+from scripts.rag.customer_metadata_policy import (  # noqa: E402
+    normalize_customer_record_metadata,
+    should_supersede,
+)
 
 CATEGORY = "power_grid_tender_documents"
-AUTHORITY_LEVEL = "tender_file"
-CITATION_POLICY = "internal_reference_only"
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -85,12 +87,40 @@ def _upsert_document(record: dict[str, Any], bucket: str, object_path: str) -> s
     return str(resp.data[0]["id"])
 
 
+def _supersede_previous_versions(document_id: str, metadata: dict[str, Any]) -> int:
+    client = get_supabase_client()
+    rows = (
+        client.table("knowledge_documents")
+        .select("id,metadata,status")
+        .eq("category", CATEGORY)
+        .limit(1000)
+        .execute()
+    ).data or []
+    superseded = 0
+    for row in rows:
+        existing_id = str(row.get("id") or "")
+        if existing_id == document_id:
+            continue
+        existing_meta = row.get("metadata") if isinstance(row.get("metadata"), dict) else {}
+        if not should_supersede(existing_meta, metadata):
+            continue
+        next_meta = dict(existing_meta)
+        next_meta.update({
+            "status": "superseded",
+            "superseded_by": document_id,
+        })
+        client.table("knowledge_documents").update({
+            "status": "superseded",
+            "metadata": next_meta,
+        }).eq("id", existing_id).execute()
+        superseded += 1
+    return superseded
+
+
 def _base_chunk_meta(record: dict[str, Any], chunk: Chunk | None = None) -> dict[str, Any]:
     metadata = dict(record.get("metadata") or {})
     metadata.update({
         "type": "text",
-        "authority_level": AUTHORITY_LEVEL,
-        "citation_policy": CITATION_POLICY,
         "category_label": CATEGORY,
         "source_file": record.get("source_file"),
         "output_file": record.get("output_file"),
@@ -216,6 +246,19 @@ def _build_chunks(record: dict[str, Any]) -> list[dict[str, Any]]:
 def _ingest_record(record: dict[str, Any], *, dry_run: bool, refresh: bool) -> dict[str, Any]:
     if record.get("parse_status") != "parsed":
         return {"source_file": record.get("source_file"), "status": "skipped", "parents": 0, "children": 0}
+    normalized_metadata, metadata_warnings, metadata_errors = normalize_customer_record_metadata(record)
+    if metadata_errors:
+        return {
+            "source_file": record.get("source_file"),
+            "status": "blocked_metadata",
+            "doc_role": record.get("doc_role"),
+            "parents": 0,
+            "children": 0,
+            "embedding_count": 0,
+            "metadata_warnings": metadata_warnings,
+            "metadata_errors": metadata_errors,
+        }
+    record = {**record, "metadata": normalized_metadata}
     chunks = _build_chunks(record)
     parents = sum(1 for row in chunks if row["metadata"].get("chunk_layer") == "parent")
     children = sum(1 for row in chunks if row["metadata"].get("chunk_layer") == "child")
@@ -228,6 +271,7 @@ def _ingest_record(record: dict[str, Any], *, dry_run: bool, refresh: bool) -> d
             "parents": parents,
             "children": children,
             "embedding_count": len(pending),
+            "metadata_warnings": metadata_warnings,
         }
 
     bucket = get_bucket_name("knowledge")
@@ -236,6 +280,7 @@ def _ingest_record(record: dict[str, Any], *, dry_run: bool, refresh: bool) -> d
     if output_file:
         upload_file_to_storage(bucket, object_path, PROJECT_ROOT / output_file)
     document_id = _upsert_document(record, bucket, object_path)
+    superseded_documents = _supersede_previous_versions(document_id, normalized_metadata)
 
     client = get_supabase_client()
     if refresh:
@@ -278,6 +323,8 @@ def _ingest_record(record: dict[str, Any], *, dry_run: bool, refresh: bool) -> d
         "children": children,
         "embedding_count": len(pending),
         "inserted_chunks": inserted,
+        "superseded_documents": superseded_documents,
+        "metadata_warnings": metadata_warnings,
     }
 
 
@@ -298,19 +345,26 @@ def _write_report(results: list[dict[str, Any]], summary: dict[str, Any], out_di
         f"| 文档数 | {summary['documents']} |",
         f"| indexed | {summary['indexed']} |",
         f"| skipped | {summary['skipped']} |",
+        f"| blocked_metadata | {summary['blocked_metadata']} |",
+        f"| superseded_documents | {summary['superseded_documents']} |",
         f"| parent | {summary['parents']} |",
         f"| child/table 检索块 | {summary['children']} |",
         f"| embedding | {summary['embedding_count']} |",
         "",
         "## 明细",
         "",
-        "| 状态 | 角色 | 文件 | parent | child | embedding |",
-        "| --- | --- | --- | ---: | ---: | ---: |",
+        "| 状态 | 角色 | 文件 | parent | child | embedding | metadata |",
+        "| --- | --- | --- | ---: | ---: | ---: | --- |",
     ]
     for result in results:
+        metadata_note = ""
+        if result.get("metadata_errors"):
+            metadata_note = "errors: " + "；".join(result.get("metadata_errors") or [])
+        elif result.get("metadata_warnings"):
+            metadata_note = "warnings: " + "；".join(result.get("metadata_warnings") or [])
         lines.append(
             f"| {result['status']} | `{result.get('doc_role') or '-'}` | `{Path(result['source_file']).name}` | "
-            f"{result.get('parents', 0)} | {result.get('children', 0)} | {result.get('embedding_count', 0)} |"
+            f"{result.get('parents', 0)} | {result.get('children', 0)} | {result.get('embedding_count', 0)} | {metadata_note or '-'} |"
         )
     md_path = out_dir / "ingest_customer_corpus_report.md"
     md_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -337,6 +391,8 @@ def main() -> int:
         "documents": len(results),
         "indexed": sum(1 for r in results if r["status"] == "indexed"),
         "skipped": sum(1 for r in results if r["status"] == "skipped"),
+        "blocked_metadata": sum(1 for r in results if r["status"] == "blocked_metadata"),
+        "superseded_documents": sum(r.get("superseded_documents", 0) for r in results),
         "parents": sum(r.get("parents", 0) for r in results),
         "children": sum(r.get("children", 0) for r in results),
         "embedding_count": sum(r.get("embedding_count", 0) for r in results),

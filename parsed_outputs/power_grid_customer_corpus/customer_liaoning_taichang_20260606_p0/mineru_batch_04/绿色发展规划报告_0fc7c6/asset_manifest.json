@@ -1,0 +1,314 @@
+{
+  "assets": [
+    {
+      "asset_id": "taichang_certification_p1_006_e874c087",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色发展规划报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "certification",
+      "target_library": "qualification_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/绿色发展规划报告_0fc7c6/extract/images/d5c727444c45682b0a46eda816df00262aa860abcbbc0a295acf7c80f9bb706d.jpg",
+      "asset_sha256": "1be9cd465587ae9738d000dfd18b75f1daa35b7c7572ed6ef556f33d964aeeee",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        561,
+        795,
+        768,
+        942
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_certification_20260606_112746_0fc7c694",
+      "batch_id": "725501b1-27ab-4803-a7a7-661234aead37",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "报告编号：ZRCC-FZGH2025044 第三方服务机构：广东中认联合认证有限公司 查询网址：www.zrlhrz.com 2025年10月",
+      "ocr_context": "报告编号：ZRCC-FZGH2025044 第三方服务机构：广东中认联合认证有限公司 查询网址：www.zrlhrz.com 2025年10月",
+      "retrieval_text": "泰昌 certification 第1页图片。报告编号：ZRCC-FZGH2025044 第三方服务机构：广东中认联合认证有限公司 查询网址：www.zrlhrz.com 2025年10月",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "certification",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:1",
+        "bbox_anchor": [
+          561,
+          795,
+          768,
+          942
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_certification_p4_032_ce9bbed0",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色发展规划报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "certification",
+      "target_library": "qualification_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/绿色发展规划报告_0fc7c6/extract/images/a21223a39800eb83f37a466f71351c28989b05bb91d9f690938634f65878eda6.jpg",
+      "asset_sha256": "7c451a4c1b4f9dd5937faf31c37f79571a3bf99c81b27849c528784e897a1e60",
+      "page_idx": 3,
+      "page_no": 4,
+      "bbox": [
+        250,
+        330,
+        746,
+        680
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_certification_20260606_112746_0fc7c694",
+      "batch_id": "725501b1-27ab-4803-a7a7-661234aead37",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "五、建议... 14 六、结语... 15",
+      "ocr_context": "五、建议... 14 六、结语... 15",
+      "retrieval_text": "泰昌 certification 第4页图片。五、建议... 14 六、结语... 15",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "certification",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:4",
+        "bbox_anchor": [
+          250,
+          330,
+          746,
+          680
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_certification_p8_072_aaca34db",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色发展规划报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "certification",
+      "target_library": "qualification_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/绿色发展规划报告_0fc7c6/extract/images/8476ab77f9ff0bdb0de92eba4077f3206b59b0edb68bb100f9d59bf722844153.jpg",
+      "asset_sha256": "c13e1ca660fb003dfe015cd67af8d228913c7eb9927ea36f8fe65a0d202e862a",
+      "page_idx": 7,
+      "page_no": 8,
+      "bbox": [
+        208,
+        335,
+        800,
+        829
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_certification_20260606_112746_0fc7c694",
+      "batch_id": "725501b1-27ab-4803-a7a7-661234aead37",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "2.2组织架构图",
+      "ocr_context": "2.2组织架构图",
+      "retrieval_text": "泰昌 certification 第8页图片。2.2组织架构图",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "certification",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:8",
+        "bbox_anchor": [
+          208,
+          335,
+          800,
+          829
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_certification_p17_175_f3864dc1",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色发展规划报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "certification",
+      "target_library": "qualification_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/绿色发展规划报告_0fc7c6/extract/images/d5b85750e4580a3498a80256bad122bc0da0858dae05ae9c871fac4fff74fbd4.jpg",
+      "asset_sha256": "2f06a37415c096379f83f4b84ea21fd282ad80a49ea38efa2bc1d09b128da6db",
+      "page_idx": 16,
+      "page_no": 17,
+      "bbox": [
+        250,
+        336,
+        744,
+        680
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_certification_20260606_112746_0fc7c694",
+      "batch_id": "725501b1-27ab-4803-a7a7-661234aead37",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "本报告的撰写基于对当前全球绿色发展趋势的深刻理解和对国内外成功案例的研究分析。我们旨在为未来绿色发展提供科学、实用的参考依据，帮助企业和政策制定者识别关键领域和潜在风险，制定出更加符合实际、更加有效的绿色发展策略。通过提出具体的行动计划和创新的解决方案，致力于激发社会各界对绿色发展的热情和参与，共同推动经济增长与环境保护的和谐共生，为实现可持续发展目标贡献力量。",
+      "ocr_context": "本报告的撰写基于对当前全球绿色发展趋势的深刻理解和对国内外成功案例的研究分析。我们旨在为未来绿色发展提供科学、实用的参考依据，帮助企业和政策制定者识别关键领域和潜在风险，制定出更加符合实际、更加有效的绿色发展策略。通过提出具体的行动计划和创新的解决方案，致力于激发社会各界对绿色发展的热情和参与，共同推动经济增长与环境保护的和谐共生，为实现可持续发展目标贡献力量。",
+      "retrieval_text": "泰昌 certification 第17页图片。本报告的撰写基于对当前全球绿色发展趋势的深刻理解和对国内外成功案例的研究分析。我们旨在为未来绿色发展提供科学、实用的参考依据，帮助企业和政策制定者识别关键领域和潜在风险，制定出更加符合实际、更加有效的绿色发展策略。通过提出具体的行动计划和创新的解决方案，致力于激发社会各界对绿色发展的热情和参与，共同推动经济增长与环境保护的和谐共生，为实现可持续发展目标贡献力量。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "certification",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:17",
+        "bbox_anchor": [
+          250,
+          336,
+          744,
+          680
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_certification_p18_180_0b990a1f",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色发展规划报告.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "certification",
+      "target_library": "qualification_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/绿色发展规划报告_0fc7c6/extract/images/5ae757775176b038994da75b84f5d3204e063a00840641d2877df2088f359d87.jpg",
+      "asset_sha256": "c8cc768a2c330f771dc6a9da497713ea578f7f370b46889debd62524ed9e3f49",
+      "page_idx": 17,
+      "page_no": 18,
+      "bbox": [
+        0,
+        0,
+        998,
+        832
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_certification_20260606_112746_0fc7c694",
+      "batch_id": "725501b1-27ab-4803-a7a7-661234aead37",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "",
+      "ocr_context": "",
+      "retrieval_text": "泰昌 certification 第18页图片。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "certification",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:18",
+        "bbox_anchor": [
+          0,
+          0,
+          998,
+          832
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "summary": {
+    "generated_at": "2026-06-02T16:44:50",
+    "batch_id": "customer_jx_sx_20260602_p1",
+    "manifest": "parsed_outputs/power_grid_customer_corpus/customer_jx_sx_20260602_p1/manifest.json",
+    "dry_run": false,
+    "refresh": true,
+    "goods_list_documents": 2,
+    "rows": 105,
+    "deleted_existing": 0,
+    "inserted": 105,
+    "missing_documents": 0
+  },
+  "details": [
+    {
+      "province": "江西",
+      "package_code": "1826AA",
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/20_国网江西电力2026年第一次配网省网协议库存物资类公开招标采购/extracted/铁构件/包1_完整招标文件_89112639724864228/货物清单_1826AA_铁构件20260403_193635_546.xlsx",
+      "document_id": "6c27f97e-e2ed-48fc-a214-8a22ec237f63",
+      "rows": 7
+    },
+    {
+      "province": "山西",
+      "package_code": "0526AB",
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/21_国网山西电力2026年第二次物资协议库存公开招标采购/extracted/铁构件/包1_完整招标文件_64281725749688283/货物清单_0526AB_铁构件20260430_153228_019.xlsx",
+      "document_id": "a24b111e-5ba4-4e87-9f88-2a42705fed1b",
+      "rows": 98
+    }
+  ]
+}

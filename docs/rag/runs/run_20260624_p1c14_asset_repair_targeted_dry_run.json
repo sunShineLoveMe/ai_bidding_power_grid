@@ -1,0 +1,26 @@
+{
+  "dry_run": true,
+  "assets_scanned": 597,
+  "assets_updated": 2,
+  "personnel_assets_moved": 0,
+  "updates": [
+    {
+      "id": "0e669ee9-4d26-4f70-892a-907f27b32f9a",
+      "old_title": "泰昌泰昌社保证明（第1页）",
+      "new_title": "泰昌社保证明（第1页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "676b8b28-1531-459e-9112-3b4784e96b0d",
+      "old_title": "泰昌泰昌社保证明（第1页）",
+      "new_title": "泰昌社保证明（第1页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    }
+  ]
+}

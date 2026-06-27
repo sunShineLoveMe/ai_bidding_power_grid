@@ -31,9 +31,11 @@ from backend.core.security import UploadValidationError, safe_upload_filename, v
 from backend.db.supabase_repo import (
     create_knowledge_asset,
     download_knowledge_asset_file_variant,
+    get_knowledge_asset_stats,
     get_knowledge_asset_detail,
     get_knowledge_asset_signed_urls,
     list_knowledge_assets,
+    list_knowledge_assets_page,
     update_knowledge_asset,
     upload_knowledge_asset_file,
 )
@@ -94,6 +96,46 @@ def _build_asset_searchable_text(payload: dict) -> str:
     return "\n".join(str(part).strip() for part in parts if str(part or "").strip())
 
 
+def _asset_library_type(asset: dict) -> str:
+    metadata = asset.get("metadata") if isinstance(asset.get("metadata"), dict) else {}
+    specs = asset.get("specs") if isinstance(asset.get("specs"), dict) else {}
+    for container in (metadata, specs, asset):
+        value = str(container.get("library_type") or "").strip()
+        if value in {"qualification", "product"}:
+            return value
+    target_library = str(metadata.get("target_library") or specs.get("target_library") or "").strip()
+    if target_library == "qualification_library":
+        return "qualification"
+    if target_library == "product_library":
+        return "product"
+    asset_type = str(asset.get("asset_type") or "").strip()
+    if asset_type == "qualification_image":
+        return "qualification"
+    if asset_type == "product_image":
+        return "product"
+    return ""
+
+
+def _asset_matches_library_type(asset: dict, library_type: str | None) -> bool:
+    if not library_type:
+        return True
+    return _asset_library_type(asset) == library_type
+
+
+def _parse_positive_int_arg(name: str, default: int, max_value: int | None = None) -> int:
+    raw = request.args.get(name)
+    if raw in (None, ""):
+        return default
+    try:
+        value = int(raw)
+    except (TypeError, ValueError):
+        return default
+    value = max(1, value)
+    if max_value is not None:
+        value = min(value, max_value)
+    return value
+
+
 def _asset_payload_from_form(storage_info: dict | None = None, existing: dict | None = None) -> dict:
     existing = existing or {}
     storage_info = storage_info or {}
@@ -138,6 +180,25 @@ def _asset_payload_from_form(storage_info: dict | None = None, existing: dict | 
         "applicable_volumes": applicable_volumes,
         "upload_source": "enterprise_library_page",
     }
+    metadata.setdefault("enterprise", "泰昌")
+    metadata.setdefault("doc_owner", "河北泰昌电力器材科技有限公司")
+    metadata.setdefault("source_domain", "enterprise_fact")
+    metadata.setdefault("reference_only", False)
+    metadata.setdefault("fact_source_allowed_for_enterprise", True)
+    metadata.setdefault("tenant_visibility", "taichang_only")
+    metadata.setdefault("access_scope", "taichang_tenant_internal")
+    metadata.setdefault(
+        "target_library",
+        "qualification_library" if library_type == "qualification" else "product_library",
+    )
+    metadata.setdefault(
+        "target_library_label",
+        "资信库资料" if library_type == "qualification" else "产品库资料",
+    )
+    metadata.setdefault(
+        "category_label",
+        category,
+    )
     if storage_info:
         metadata.update({
             "thumbnail_storage_bucket": storage_info.get("thumbnail_bucket"),
@@ -196,10 +257,50 @@ def get_knowledge_assets():
     try:
         asset_type = request.args.get('asset_type')
         category = request.args.get('category')
+        library_type = request.args.get('library_type')
+        if library_type and library_type not in {"qualification", "product"}:
+            return jsonify({'error': 'library_type 仅支持 qualification 或 product'}), 400
+        use_pagination = any(key in request.args for key in ("page", "page_size", "limit", "offset"))
+        if use_pagination:
+            if request.args.get("offset") not in (None, ""):
+                page_size = _parse_positive_int_arg("limit", 20, 100)
+                try:
+                    offset = max(0, int(request.args.get("offset") or 0))
+                except (TypeError, ValueError):
+                    offset = 0
+                page = (offset // page_size) + 1
+            else:
+                page = _parse_positive_int_arg("page", 1)
+                page_size = _parse_positive_int_arg("page_size", _parse_positive_int_arg("limit", 20, 100), 100)
+            page_result = list_knowledge_assets_page(
+                page=page,
+                page_size=page_size,
+                asset_type=asset_type,
+                category=category,
+                library_type=library_type,
+            )
+            if library_type:
+                page_result["stats"] = get_knowledge_asset_stats(library_type)
+            return jsonify(page_result), 200
         assets = list_knowledge_assets(asset_type=asset_type, category=category)
+        if library_type:
+            assets = [asset for asset in assets if _asset_matches_library_type(asset, library_type)]
         return jsonify(assets), 200
     except Exception as e:
         logging.exception("查询知识资产列表失败")
+        return jsonify({'error': f'查询失败: {str(e)}'}), 500
+
+
+@knowledge_bp.route('/assets/stats', methods=['GET'])
+@bp.route('/knowledge/assets/stats', methods=['GET'])
+def get_knowledge_assets_stats_api():
+    try:
+        library_type = request.args.get('library_type')
+        if library_type and library_type not in {"qualification", "product"}:
+            return jsonify({'error': 'library_type 仅支持 qualification 或 product'}), 400
+        return jsonify(get_knowledge_asset_stats(library_type)), 200
+    except Exception as e:
+        logging.exception("查询知识资产统计失败")
         return jsonify({'error': f'查询失败: {str(e)}'}), 500
 
 

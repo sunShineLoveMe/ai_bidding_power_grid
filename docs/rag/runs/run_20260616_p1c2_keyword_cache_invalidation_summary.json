@@ -1,0 +1,11 @@
+{
+  "run_id": "run_20260616_p1c2_keyword_cache_invalidation",
+  "secret": "蓝桥缓存命中c2ca31",
+  "document_id": "25558e9d-45bc-40c0-8ca4-16d5025d9a97",
+  "chunk_id": "a2db6e55-4b2b-4cf0-a431-7a14a75a3229",
+  "before_contains_secret": false,
+  "after_contains_secret": true,
+  "after_done": true,
+  "stream_before_path": "docs/rag/runs/run_20260616_p1c2_keyword_cache_invalidation_before_stream.jsonl",
+  "stream_after_path": "docs/rag/runs/run_20260616_p1c2_keyword_cache_invalidation_after_stream.jsonl"
+}

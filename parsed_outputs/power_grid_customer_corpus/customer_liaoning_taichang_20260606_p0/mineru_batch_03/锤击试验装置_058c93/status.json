@@ -1,0 +1,37 @@
+{
+  "parse_id": "taichang_testing_capacity_20260606_111634_058c9369",
+  "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/4.锤击试验装置/锤击试验装置.pdf",
+  "evidence_type": "testing_capacity",
+  "started_at": "2026-06-06T03:16:34.585363+00:00",
+  "parser": "mineru",
+  "privacy_level": "private",
+  "target_library": "product_library",
+  "page_count": 8,
+  "batch_id": "0130b644-d069-42a6-992e-1d4d81075a60",
+  "data_id": "taichang_testing_capacity_20260606_111634_058c9369",
+  "submitted_at": "2026-06-06T03:16:35.177689+00:00",
+  "parse_status": "mineru_done",
+  "mineru_result": {
+    "data_id": "taichang_testing_capacity_20260606_111634_058c9369",
+    "file_name": "锤击试验装置.pdf",
+    "state": "done",
+    "err_msg": ""
+  },
+  "artifacts": {
+    "zip_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/锤击试验装置_058c93/mineru_result.zip",
+    "extract_dir": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/锤击试验装置_058c93/extract",
+    "markdown_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/锤击试验装置_058c93/extract/full.md",
+    "content_list_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/锤击试验装置_058c93/extract/14ccec55-9114-4492-ba59-ff4aa7231f42_content_list.json",
+    "model_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/锤击试验装置_058c93/extract/14ccec55-9114-4492-ba59-ff4aa7231f42_model.json",
+    "middle_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/锤击试验装置_058c93/extract/layout.json",
+    "download_info": {
+      "url_host": "cdn-mineru.openxlab.org.cn",
+      "resume_enabled": true,
+      "used_curl_fallback": true,
+      "resumed_from_bytes": 0,
+      "downloaded_bytes": 0,
+      "zip_size": 2064242
+    }
+  },
+  "finished_at": "2026-06-06T03:16:52.526295+00:00"
+}

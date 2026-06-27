@@ -1,0 +1,312 @@
+{
+  "generated_at": "2026-06-06T10:50:38.165937+00:00",
+  "ok": true,
+  "base_url": "http://127.0.0.1:8000",
+  "timeout": 1200,
+  "error": null,
+  "artifacts": {
+    "ready": {
+      "checks": {
+        "celery": {
+          "status": "ok",
+          "workers": 1
+        },
+        "database": {
+          "checks": {
+            "match_knowledge_assets": true,
+            "match_knowledge_chunks": true,
+            "vector": true
+          },
+          "status": "ok"
+        },
+        "model_config": {
+          "optional": {
+            "mineru_api_token": true
+          },
+          "required": {
+            "dashscope_api_key": true,
+            "deepseek_api_key": true
+          },
+          "status": "ok"
+        },
+        "redis": {
+          "host": "127.0.0.1",
+          "port": 16379,
+          "status": "ok"
+        },
+        "storage": {
+          "provider": "local",
+          "root": "storage",
+          "status": "ok"
+        }
+      },
+      "duration_ms": 2136,
+      "status": "ok"
+    },
+    "project_id": "4bc3ee73-9ec5-4184-aafd-eaede9f90798",
+    "file_id": "2a58243e-e7f6-4d49-bd82-f6f4608de49f",
+    "supabase_file_id": "3cda2559-159e-41ba-99fd-7e8cfdc5cc4e",
+    "sample_file": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包1_完整招标文件_53488484541066181/国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx",
+    "parse_status": {
+      "downloadRetryCount": 0,
+      "error": null,
+      "errorType": null,
+      "failureStage": null,
+      "fileId": "2a58243e-e7f6-4d49-bd82-f6f4608de49f",
+      "mineru": {
+        "artifacts": {
+          "content_list_path": "parsed_outputs/2a58243e-e7f6-4d49-bd82-f6f4608de49f/native_text/native_content_list.json",
+          "extract_dir": "parsed_outputs/2a58243e-e7f6-4d49-bd82-f6f4608de49f/native_text",
+          "markdown_path": "parsed_outputs/2a58243e-e7f6-4d49-bd82-f6f4608de49f/native_text/full.md",
+          "middle_path": null,
+          "model_path": null,
+          "parser": "native_text",
+          "source_file": "uploads/a88ee6d0-8a05-430e-bfb3-cb72d76070d6-2025.docx",
+          "zip_path": null
+        },
+        "file_name": "国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx",
+        "indexed_source": "parsed_outputs/2a58243e-e7f6-4d49-bd82-f6f4608de49f/native_text/full.md",
+        "parse_recovery_started_at": "2026-06-06T10:43:58Z",
+        "parse_status": "indexed",
+        "parser": "native_text",
+        "project_id": "4bc3ee73-9ec5-4184-aafd-eaede9f90798",
+        "retryable": true,
+        "source_file": "uploads/a88ee6d0-8a05-430e-bfb3-cb72d76070d6-2025.docx",
+        "supabase_file_id": "3cda2559-159e-41ba-99fd-7e8cfdc5cc4e",
+        "supabase_ingest_result": {
+          "bid_file_id": "3cda2559-159e-41ba-99fd-7e8cfdc5cc4e",
+          "chapter_suggestions": 0,
+          "chunks": 42,
+          "content_blocks": 42,
+          "markdown_chars": 332050,
+          "project_id": "4bc3ee73-9ec5-4184-aafd-eaede9f90798",
+          "requirements": 80,
+          "risks": 60,
+          "scoring_items": 80
+        },
+        "supabase_ingest_status": "done",
+        "updated_at": "2026-06-06T10:44:09Z",
+        "user_message": "后台解析任务未继续推进，系统正在自动恢复解析。"
+      },
+      "parseCompleted": true,
+      "parseStatus": "indexed",
+      "retryable": false,
+      "supabaseFile": {
+        "bucket": "tender-files",
+        "created_at": "2026-06-06T18:43:58.807518+08:00",
+        "file_hash": "74cc5511925c323f462699aef279df5ffdf4f61d8443c00e456f8f2a29bfeaaa",
+        "file_name": "国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx",
+        "file_size": 1964321,
+        "file_type": "docx",
+        "id": "3cda2559-159e-41ba-99fd-7e8cfdc5cc4e",
+        "object_path": "4bc3ee73-9ec5-4184-aafd-eaede9f90798/b14d63b388d24980a12cc0cc79eacee7.docx",
+        "parse_status": "indexed",
+        "project_id": "4bc3ee73-9ec5-4184-aafd-eaede9f90798"
+      },
+      "userMessage": null
+    },
+    "outline_chapters": 74,
+    "section_count": 3,
+    "section_generation_task_id": "7f1fade4-8dcc-4e85-aeb8-5e092ae19e7e",
+    "compliance_rows": 220,
+    "compliance_summary": {
+      "covered": 22,
+      "highRiskMissing": 59,
+      "metricName": "条款响应覆盖率",
+      "missing": 122,
+      "partial": 76,
+      "percent": 27,
+      "scopeNote": "当前按完整投标文件统计；基于招标条款、评分项、风险项与当前章节映射/正文片段的响应追踪结果，不等同于最终 Word 标书合规结论。",
+      "total": 220,
+      "volumeName": "完整投标文件",
+      "volumeType": "all"
+    },
+    "docx_task_id": "1e49c5ac-7b94-476a-95da-beff0f72b77f",
+    "docx_export": {
+      "created_at": "2026-06-06T18:50:34.097041+08:00",
+      "download_url": "/api/outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou_Zhao_Biao_Wen_Jian/%E5%9B%BD%E7%BD%91%E8%BE%BD%E5%AE%81%E7%94%B5%E5%8A%9B2025%E5%B9%B4%E7%AC%AC%E4%B8%89%E6%AC%A1%E7%89%A9%E8%B5%84%E5%8D%8F%E8%AE%AE%E5%BA%93%E5%AD%98%E6%8B%9B%E6%A0%87%E9%87%87%E8%B4%AD%E6%8B%9B%E6%A0%87%E6%96%87%E4%BB%B6.docx",
+      "error_message": null,
+      "export_type": "docx",
+      "file_name": "国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx",
+      "file_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou_Zhao_Biao_Wen_Jian/国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx",
+      "finished_at": "2026-06-06T10:50:36.347851+08:00",
+      "id": "1e49c5ac-7b94-476a-95da-beff0f72b77f",
+      "message": "DOCX 已完成自动刷新，目录页码、页脚页码和总页数字段已重新保存。",
+      "metadata": {
+        "docx_template": {
+          "body_font": "宋体",
+          "body_font_size_pt": 12.0,
+          "body_latin_font": "Times New Roman",
+          "body_line_spacing_pt": 28.0,
+          "header_footer": {
+            "footer_font": "宋体",
+            "footer_font_size_pt": 9,
+            "header_font": "宋体",
+            "header_font_size_pt": 9,
+            "header_max_chars": 42,
+            "page_number_format": "第 X 页，共 Y 页"
+          },
+          "margins_cm": {
+            "bottom": 2.54,
+            "left": 3.18,
+            "right": 3.18,
+            "top": 2.54
+          },
+          "page_size": "A4",
+          "table_font": "宋体",
+          "table_font_size_pt": 10.5,
+          "template_id": "sgcc_power_grid"
+        },
+        "field_refresh": {
+          "enabled": true,
+          "input_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou_Zhao_Biao_Wen_Jian/国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx",
+          "manual_refresh_required": false,
+          "output_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou_Zhao_Biao_Wen_Jian/国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx",
+          "returncode": 0,
+          "size": 35194,
+          "soffice_bin": "/opt/homebrew/bin/soffice",
+          "status": "refreshed",
+          "stderr": "2026-06-06 18:50:35.412 soffice[20635:16643219] Task policy set failed: 4 ((os/kern) invalid argument)\n",
+          "stdout": "convert /var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-s4jczee8/input/国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx as a Writer document -> /private/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-s4jczee8/output/国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx using filter : Office Open XML Text\n",
+          "timeout_seconds": 180,
+          "tool": "libreoffice",
+          "user_message": "DOCX 已完成自动刷新，目录页码、页脚页码和总页数字段已重新保存。"
+        },
+        "image_conversion": {
+          "events": [],
+          "failed": 0,
+          "found": 0,
+          "inserted": 0,
+          "max_images": 24,
+          "skipped": 0,
+          "template": {
+            "body_font": "宋体",
+            "body_font_size_pt": 12.0,
+            "body_latin_font": "Times New Roman",
+            "body_line_spacing_pt": 28.0,
+            "header_footer": {
+              "footer_font": "宋体",
+              "footer_font_size_pt": 9,
+              "header_font": "宋体",
+              "header_font_size_pt": 9,
+              "header_max_chars": 42,
+              "page_number_format": "第 X 页，共 Y 页"
+            },
+            "margins_cm": {
+              "bottom": 2.54,
+              "left": 3.18,
+              "right": 3.18,
+              "top": 2.54
+            },
+            "page_size": "A4",
+            "table_font": "宋体",
+            "table_font_size_pt": 10.5,
+            "template_id": "sgcc_power_grid"
+          }
+        },
+        "image_selection": {
+          "asset_candidates": 0,
+          "enabled": false,
+          "manifest": [],
+          "max_total": 36,
+          "selected": 0,
+          "warnings": []
+        },
+        "requested_from": "bid_editor",
+        "snapshot_section_count": 0,
+        "used_editor_snapshot": false,
+        "with_images": false
+      },
+      "progress": 100,
+      "project_id": "4bc3ee73-9ec5-4184-aafd-eaede9f90798",
+      "project_name": "国网辽宁电力2025年第三次物资协议库存招标采购招标文件",
+      "scope": "full",
+      "section_id": null,
+      "started_at": "2026-06-06T10:50:34.108583+08:00",
+      "status": "completed",
+      "updated_at": "2026-06-06T18:50:36.349948+08:00",
+      "volume_type": null,
+      "with_images": false
+    }
+  },
+  "steps": [
+    {
+      "name": "check_ready",
+      "ok": true,
+      "detail": "status=ok checks=5",
+      "elapsed_ms": 2144
+    },
+    {
+      "name": "login",
+      "ok": true,
+      "detail": "user=taichang-smoke-1780742625",
+      "elapsed_ms": 100
+    },
+    {
+      "name": "identify_user",
+      "ok": true,
+      "detail": "userId=d175d4d0-f7c3-44b2-923b-66971447c964",
+      "elapsed_ms": 6
+    },
+    {
+      "name": "upload_tender",
+      "ok": true,
+      "detail": "projectId=4bc3ee73-9ec5-4184-aafd-eaede9f90798 fileId=2a58243e-e7f6-4d49-bd82-f6f4608de49f supabaseFileId=3cda2559-159e-41ba-99fd-7e8cfdc5cc4e",
+      "elapsed_ms": 31
+    },
+    {
+      "name": "wait_parse_completed",
+      "ok": true,
+      "detail": "parseStatus=indexed parser=native_text",
+      "elapsed_ms": 12142
+    },
+    {
+      "name": "query_interpretation",
+      "ok": true,
+      "detail": "hasAnalysis=True",
+      "elapsed_ms": 72
+    },
+    {
+      "name": "generate_ai_report",
+      "ok": true,
+      "detail": "ok",
+      "elapsed_ms": 344604
+    },
+    {
+      "name": "generate_outline",
+      "ok": true,
+      "detail": "chapters=74",
+      "elapsed_ms": 3734
+    },
+    {
+      "name": "list_sections",
+      "ok": true,
+      "detail": "sections=74",
+      "elapsed_ms": 16
+    },
+    {
+      "name": "generate_sections",
+      "ok": true,
+      "detail": "sections=3 done=3 taskId=7f1fade4-8dcc-4e85-aeb8-5e092ae19e7e",
+      "elapsed_ms": 34460
+    },
+    {
+      "name": "run_compliance_check",
+      "ok": true,
+      "detail": "rows=220 coverage=None",
+      "elapsed_ms": 236
+    },
+    {
+      "name": "create_docx_export",
+      "ok": true,
+      "detail": "taskId=1e49c5ac-7b94-476a-95da-beff0f72b77f",
+      "elapsed_ms": 13
+    },
+    {
+      "name": "wait_docx_export",
+      "ok": true,
+      "detail": "status=completed path=outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou_Zhao_Biao_Wen_Jian/国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx",
+      "elapsed_ms": 4061
+    }
+  ]
+}

@@ -12,13 +12,21 @@
 from __future__ import annotations
 
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from backend.tasks.celery_app import celery_app
 from backend.core.logging_config import log_context
 
 logger = logging.getLogger(__name__)
+
+
+BEIJING_TZ = timezone(timedelta(hours=8))
+
+
+def _now_api_iso() -> str:
+    """Return the same +08:00 display contract as Postgres-created timestamps."""
+    return datetime.now(BEIJING_TZ).isoformat(timespec="microseconds")
 
 
 @celery_app.task(
@@ -34,6 +42,7 @@ def run_bid_docx_export(
     with_images: bool,
     volume_type: str | None,
     sections_snapshot: list[dict] | None = None,
+    initial_metadata: dict | None = None,
 ) -> dict:
     """执行 DOCX 导出，全程把进度写回 bid_export_tasks。
 
@@ -53,6 +62,7 @@ def run_bid_docx_export(
                 with_images,
                 volume_type,
                 sections_snapshot,
+                initial_metadata,
                 build_project_bid_markdown,
                 _output_url_for_path,
                 update_bid_export_task,
@@ -67,7 +77,7 @@ def run_bid_docx_export(
                     "progress": 100,
                     "message": "DOCX 导出失败，请查看错误信息。",
                     "error_message": str(exc)[:1000],
-                    "finished_at": datetime.utcnow().isoformat(),
+                    "finished_at": _now_api_iso(),
                 })
             except Exception:
                 logger.exception("写入 DOCX 导出任务失败状态失败")
@@ -81,6 +91,7 @@ def _run_bid_docx_export(
     with_images: bool,
     volume_type: str | None,
     sections_snapshot: list[dict] | None,
+    initial_metadata: dict | None,
     build_project_bid_markdown,
     _output_url_for_path,
     update_bid_export_task,
@@ -92,7 +103,7 @@ def _run_bid_docx_export(
             "status": "running",
             "progress": 10,
             "message": "正在整理标书 Markdown 内容。",
-            "started_at": datetime.utcnow().isoformat(),
+            "started_at": _now_api_iso(),
         })
         markdown_path, project_name, image_selection_report = build_project_bid_markdown(
             project_id,
@@ -106,7 +117,11 @@ def _run_bid_docx_export(
             "message": "正在转换 Word 文档。",
             "project_name": project_name,
         })
-        generated_docx_path, image_conversion_report = convert_md_to_word(markdown_path, return_report=True)
+        generated_docx_path, image_conversion_report = convert_md_to_word(
+            markdown_path,
+            return_report=True,
+            cover_fields=(image_selection_report or {}).get("cover_fields") or None,
+        )
         if not generated_docx_path or not Path(generated_docx_path).exists():
             raise RuntimeError("DOCX 生成失败，未找到输出文件。")
         generated_docx_path = Path(generated_docx_path)
@@ -115,13 +130,16 @@ def _run_bid_docx_export(
             "message": "正在刷新 Word 目录页码和页脚页码。",
         })
         generated_docx_path, field_refresh_report = refresh_docx_fields_with_soffice(generated_docx_path)
+        base_metadata = initial_metadata if isinstance(initial_metadata, dict) else {}
         export_metadata = {
-            "requested_from": "bid_editor",
+            **base_metadata,
+            "requested_from": base_metadata.get("requested_from") or "bid_editor",
             "with_images": bool(with_images),
             "used_editor_snapshot": bool(sections_snapshot),
             "snapshot_section_count": len(sections_snapshot or []),
             "image_selection": image_selection_report,
             "image_conversion": image_conversion_report,
+            "docx_template": (image_conversion_report or {}).get("template") or {},
             "field_refresh": field_refresh_report,
         }
         update_bid_export_task(project_id, task_id, {
@@ -133,7 +151,7 @@ def _run_bid_docx_export(
             "file_path": str(generated_docx_path),
             "download_url": _output_url_for_path(generated_docx_path),
             "metadata": export_metadata,
-            "finished_at": datetime.utcnow().isoformat(),
+            "finished_at": _now_api_iso(),
         })
         return {"status": "completed", "task_id": task_id}
     except Exception:

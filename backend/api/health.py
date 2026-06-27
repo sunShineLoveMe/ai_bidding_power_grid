@@ -1,4 +1,5 @@
 import os
+import subprocess
 import time
 from pathlib import Path
 from urllib.parse import urlparse
@@ -10,6 +11,29 @@ from backend.db.supabase_client import get_bucket_name, get_supabase_client
 
 
 bp = Blueprint("health", __name__)
+
+
+def _build_version() -> dict:
+    root = Path(__file__).resolve().parents[2]
+
+    def git_value(*args: str) -> str:
+        try:
+            return subprocess.check_output(
+                ["git", *args],
+                cwd=root,
+                stderr=subprocess.DEVNULL,
+                text=True,
+                timeout=2,
+            ).strip()
+        except Exception:
+            return "unknown"
+
+    return {
+        "app": "ai-bidding-backend",
+        "commit": os.getenv("BUILD_COMMIT") or git_value("rev-parse", "--short=12", "HEAD"),
+        "branch": os.getenv("BUILD_BRANCH") or git_value("rev-parse", "--abbrev-ref", "HEAD"),
+        "builtAt": os.getenv("BUILD_TIME") or "",
+    }
 
 
 def _check_database() -> dict:
@@ -109,7 +133,7 @@ def _check_model_config() -> dict:
 
 @bp.route("/health")
 def health():
-    return jsonify({"status": "ok"})
+    return jsonify({"status": "ok", "version": _build_version()})
 
 
 @bp.route("/ready")
@@ -127,6 +151,7 @@ def ready():
     return jsonify(
         {
             "status": overall,
+            "version": _build_version(),
             "checks": checks,
             "duration_ms": int((time.time() - started) * 1000),
         }

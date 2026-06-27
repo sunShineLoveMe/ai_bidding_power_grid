@@ -1,0 +1,314 @@
+{
+  "assets": [
+    {
+      "asset_id": "taichang_certification_p1_000_ebee4736",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色电力认证证书.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "certification",
+      "target_library": "qualification_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/绿色电力认证证书_766d20/extract/images/17e8a2c292290c321d25eb3a999f97c4e7c03c35f65675cbffa0e0962cff66fc.jpg",
+      "asset_sha256": "836c1fed8fb9532136d09781b2ccd34ee6b67e01ae979e10ac188823fb112b27",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        359,
+        93,
+        630,
+        205
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_certification_20260606_112529_766d2049",
+      "batch_id": "15865586-8ad4-4edc-97e6-10cf50234a7e",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "绿色电力认证证书 证书编号：30325LDL22619R0S 兹证明 河北泰昌电力器材科技有限公司",
+      "ocr_context": "绿色电力认证证书 证书编号：30325LDL22619R0S 兹证明 河北泰昌电力器材科技有限公司",
+      "retrieval_text": "泰昌 certification 第1页图片。绿色电力认证证书 证书编号：30325LDL22619R0S 兹证明 河北泰昌电力器材科技有限公司",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "certification",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:1",
+        "bbox_anchor": [
+          359,
+          93,
+          630,
+          205
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_certification_p1_016_3f87e933",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色电力认证证书.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "certification",
+      "target_library": "qualification_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/绿色电力认证证书_766d20/extract/images/1e7004617f1f1aba929283865f9e1d09523ef497689d7f9bc5cbc03c5f5c0282.jpg",
+      "asset_sha256": "e9054b5d0189c3c11b9b6f237f694235734380b25c9c4f8bbf8ad8d22b33949b",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        171,
+        741,
+        290,
+        825
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_certification_20260606_112529_766d2049",
+      "batch_id": "15865586-8ad4-4edc-97e6-10cf50234a7e",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "资质范围内电表箱及低压无功补偿配电柜的生产；非标电力金具（横担、抱箍、拉线棒）、高压隔离开关、高压熔断器、电缆保护管的生产；管状母线、电缆分支箱及柱上断路器的销售 初次发证日期：2025年10月15日 证书有效期至：2028年10月14日 注：获证组织在此证书有效期内需按期接受监督审核，监督审核后此证书与保持通知书一起使用方为继续有效。本证书信息可在国家认证认可监督委员会网站（www.cnca.gov.cn）及公司网站（www.bjshz.com）上查询。 证书签发人",
+      "ocr_context": "资质范围内电表箱及低压无功补偿配电柜的生产；非标电力金具（横担、抱箍、拉线棒）、高压隔离开关、高压熔断器、电缆保护管的生产；管状母线、电缆分支箱及柱上断路器的销售 初次发证日期：2025年10月15日 证书有效期至：2028年10月14日 注：获证组织在此证书有效期内需按期接受监督审核，监督审核后此证书与保持通知书一起使用方为继续有效。本证书信息可在国家认证认可监督委员会网站（www.cnca.gov.cn）及公司网站（www.bjshz.com）上查询。 证书签发人",
+      "retrieval_text": "泰昌 certification 第1页图片。资质范围内电表箱及低压无功补偿配电柜的生产；非标电力金具（横担、抱箍、拉线棒）、高压隔离开关、高压熔断器、电缆保护管的生产；管状母线、电缆分支箱及柱上断路器的销售 初次发证日期：2025年10月15日 证书有效期至：2028年10月14日 注：获证组织在此证书有效期内需按期接受监督审核，监督审核后此证书与保持通知书一起使用方为继续有效。本证书信息可在国家认证认可监督委员会网站（www.cnca.gov.cn）及公司网站（www.bjshz.com）上查询。 证书签发人",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "certification",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:1",
+        "bbox_anchor": [
+          171,
+          741,
+          290,
+          825
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_certification_p1_017_6aba6186",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色电力认证证书.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "certification",
+      "target_library": "qualification_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/绿色电力认证证书_766d20/extract/images/9085f9cad322a67b157ec0223ad932b8d48710741655fac28d925e1dfde8e3b8.jpg",
+      "asset_sha256": "41a7d8fcb2bf71a269a726b46da6bb279421b3adb813ac70b9e466418bb36e84",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        337,
+        738,
+        453,
+        822
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_certification_20260606_112529_766d2049",
+      "batch_id": "15865586-8ad4-4edc-97e6-10cf50234a7e",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "初次发证日期：2025年10月15日 证书有效期至：2028年10月14日 注：获证组织在此证书有效期内需按期接受监督审核，监督审核后此证书与保持通知书一起使用方为继续有效。本证书信息可在国家认证认可监督委员会网站（www.cnca.gov.cn）及公司网站（www.bjshz.com）上查询。 证书签发人 北京圣慧认证服务有限公司",
+      "ocr_context": "初次发证日期：2025年10月15日 证书有效期至：2028年10月14日 注：获证组织在此证书有效期内需按期接受监督审核，监督审核后此证书与保持通知书一起使用方为继续有效。本证书信息可在国家认证认可监督委员会网站（www.cnca.gov.cn）及公司网站（www.bjshz.com）上查询。 证书签发人 北京圣慧认证服务有限公司",
+      "retrieval_text": "泰昌 certification 第1页图片。初次发证日期：2025年10月15日 证书有效期至：2028年10月14日 注：获证组织在此证书有效期内需按期接受监督审核，监督审核后此证书与保持通知书一起使用方为继续有效。本证书信息可在国家认证认可监督委员会网站（www.cnca.gov.cn）及公司网站（www.bjshz.com）上查询。 证书签发人 北京圣慧认证服务有限公司",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "certification",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:1",
+        "bbox_anchor": [
+          337,
+          738,
+          453,
+          822
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_certification_p1_018_c1eb02ef",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色电力认证证书.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "certification",
+      "target_library": "qualification_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/绿色电力认证证书_766d20/extract/images/80147aa090ea81fb48d118c7e5a05b312b45afc7ce42411beef839a914a5dc5b.jpg",
+      "asset_sha256": "11093e6a824db0d0e3e8f95f648467496416ee6063446f023026055e8c39721a",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        482,
+        730,
+        675,
+        783
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_certification_20260606_112529_766d2049",
+      "batch_id": "15865586-8ad4-4edc-97e6-10cf50234a7e",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "证书有效期至：2028年10月14日 注：获证组织在此证书有效期内需按期接受监督审核，监督审核后此证书与保持通知书一起使用方为继续有效。本证书信息可在国家认证认可监督委员会网站（www.cnca.gov.cn）及公司网站（www.bjshz.com）上查询。 证书签发人 北京圣慧认证服务有限公司 地址：北京市丰台区北宫镇园博园南路渡业大厦6层618B室",
+      "ocr_context": "证书有效期至：2028年10月14日 注：获证组织在此证书有效期内需按期接受监督审核，监督审核后此证书与保持通知书一起使用方为继续有效。本证书信息可在国家认证认可监督委员会网站（www.cnca.gov.cn）及公司网站（www.bjshz.com）上查询。 证书签发人 北京圣慧认证服务有限公司 地址：北京市丰台区北宫镇园博园南路渡业大厦6层618B室",
+      "retrieval_text": "泰昌 certification 第1页图片。证书有效期至：2028年10月14日 注：获证组织在此证书有效期内需按期接受监督审核，监督审核后此证书与保持通知书一起使用方为继续有效。本证书信息可在国家认证认可监督委员会网站（www.cnca.gov.cn）及公司网站（www.bjshz.com）上查询。 证书签发人 北京圣慧认证服务有限公司 地址：北京市丰台区北宫镇园博园南路渡业大厦6层618B室",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "certification",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:1",
+        "bbox_anchor": [
+          482,
+          730,
+          675,
+          783
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_certification_p1_020_4d163d06",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色电力认证证书.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "certification",
+      "target_library": "qualification_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/绿色电力认证证书_766d20/extract/images/fcefc3b33876b9f385322503dd8e08c34f1558ddec129741bf92c438c7912188.jpg",
+      "asset_sha256": "f0c95c91742e27e5509a8c7dd940d5ae5c98490ca3f048d5cacc946636fcf2e2",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        667,
+        725,
+        860,
+        854
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_certification_20260606_112529_766d2049",
+      "batch_id": "15865586-8ad4-4edc-97e6-10cf50234a7e",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "证书签发人 北京圣慧认证服务有限公司 地址：北京市丰台区北宫镇园博园南路渡业大厦6层618B室 电话：010-83602260 网址：www.b.jshrz.com",
+      "ocr_context": "证书签发人 北京圣慧认证服务有限公司 地址：北京市丰台区北宫镇园博园南路渡业大厦6层618B室 电话：010-83602260 网址：www.b.jshrz.com",
+      "retrieval_text": "泰昌 certification 第1页图片。证书签发人 北京圣慧认证服务有限公司 地址：北京市丰台区北宫镇园博园南路渡业大厦6层618B室 电话：010-83602260 网址：www.b.jshrz.com",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "qualification",
+          "business"
+        ],
+        "tags": [
+          "泰昌",
+          "certification",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:1",
+        "bbox_anchor": [
+          667,
+          725,
+          860,
+          854
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    }
+  ]
+}

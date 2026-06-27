@@ -1,0 +1,344 @@
+{
+    "pdf_info": [
+        {
+            "preproc_blocks": [
+                {
+                    "bbox": [
+                        196,
+                        110,
+                        396,
+                        126
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                197,
+                                110,
+                                396,
+                                127
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        197,
+                                        110,
+                                        396,
+                                        127
+                                    ],
+                                    "type": "text",
+                                    "content": "河北泰昌电力器材科技有限公司",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        82,
+                        163,
+                        523,
+                        230
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                254,
+                                141,
+                                340,
+                                157
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 1,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        252,
+                                        139,
+                                        341,
+                                        158
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                252,
+                                                139,
+                                                341,
+                                                158
+                                            ],
+                                            "type": "text",
+                                            "content": "生产设备台账",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                82,
+                                163,
+                                523,
+                                230
+                            ],
+                            "type": "table_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        82,
+                                        163,
+                                        523,
+                                        230
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                82,
+                                                163,
+                                                523,
+                                                230
+                                            ],
+                                            "type": "table",
+                                            "html": "<table><tr><td>序号</td><td>设备型号</td><td>设备名称</td><td>生产厂家</td></tr><tr><td>1</td><td>CPVC63</td><td>CPVC63 三层复合管材挤出生产线</td><td>江苏欣荣科技发展有限公司</td></tr><tr><td>2</td><td>CPVC110</td><td>CPVC110 三层复合管材挤出生产线</td><td>江苏欣荣科技发展有限公司</td></tr><tr><td>3</td><td>SJMPP-90 型</td><td>MPP 生产线</td><td>雄县顺达塑料机械厂</td></tr></table>",
+                                            "image_path": "357c0affa4dc2f311d02157527c7e78383a03cd2c89fce801b277e432f87f991.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 2
+                        }
+                    ],
+                    "index": 2
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        331,
+                        193,
+                        438,
+                        299
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                331,
+                                193,
+                                438,
+                                299
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        331,
+                                        193,
+                                        438,
+                                        299
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                331,
+                                                193,
+                                                438,
+                                                299
+                                            ],
+                                            "type": "image",
+                                            "content": "生产线\n江苏欣荣科\n雄县顺达\n河北电气科技有限公司\n1306210005674",
+                                            "image_path": "be1ebd77f4b261b01488d751972df17cbc7d9542181434ac621fec2ffbb7a97e.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 3
+                        }
+                    ],
+                    "index": 3,
+                    "sub_type": "text_image"
+                }
+            ],
+            "discarded_blocks": [],
+            "page_size": [
+                595,
+                841
+            ],
+            "page_idx": 0,
+            "para_blocks": [
+                {
+                    "bbox": [
+                        196,
+                        110,
+                        396,
+                        126
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                197,
+                                110,
+                                396,
+                                127
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        197,
+                                        110,
+                                        396,
+                                        127
+                                    ],
+                                    "type": "text",
+                                    "content": "河北泰昌电力器材科技有限公司",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        82,
+                        163,
+                        523,
+                        230
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                254,
+                                141,
+                                340,
+                                157
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 1,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        252,
+                                        139,
+                                        341,
+                                        158
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                252,
+                                                139,
+                                                341,
+                                                158
+                                            ],
+                                            "type": "text",
+                                            "content": "生产设备台账",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                82,
+                                163,
+                                523,
+                                230
+                            ],
+                            "type": "table_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        82,
+                                        163,
+                                        523,
+                                        230
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                82,
+                                                163,
+                                                523,
+                                                230
+                                            ],
+                                            "type": "table",
+                                            "html": "<table><tr><td>序号</td><td>设备型号</td><td>设备名称</td><td>生产厂家</td></tr><tr><td>1</td><td>CPVC63</td><td>CPVC63 三层复合管材挤出生产线</td><td>江苏欣荣科技发展有限公司</td></tr><tr><td>2</td><td>CPVC110</td><td>CPVC110 三层复合管材挤出生产线</td><td>江苏欣荣科技发展有限公司</td></tr><tr><td>3</td><td>SJMPP-90 型</td><td>MPP 生产线</td><td>雄县顺达塑料机械厂</td></tr></table>",
+                                            "image_path": "357c0affa4dc2f311d02157527c7e78383a03cd2c89fce801b277e432f87f991.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 2
+                        }
+                    ],
+                    "index": 2
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        331,
+                        193,
+                        438,
+                        299
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                331,
+                                193,
+                                438,
+                                299
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        331,
+                                        193,
+                                        438,
+                                        299
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                331,
+                                                193,
+                                                438,
+                                                299
+                                            ],
+                                            "type": "image",
+                                            "content": "生产线\n江苏欣荣科\n雄县顺达\n河北电气科技有限公司\n1306210005674",
+                                            "image_path": "be1ebd77f4b261b01488d751972df17cbc7d9542181434ac621fec2ffbb7a97e.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 3
+                        }
+                    ],
+                    "index": 3,
+                    "sub_type": "text_image"
+                }
+            ]
+        }
+    ],
+    "_backend": "hybrid",
+    "_ocr_enable": true,
+    "_vlm_ocr_enable": false,
+    "_version_name": "3.2.1"
+}

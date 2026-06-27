@@ -1,0 +1,225 @@
+{
+  "run_id": "run_20260611_docx_quality_p0_table_real_export",
+  "project_id": "4bc3ee73-9ec5-4184-aafd-eaede9f90798",
+  "markdown_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou_Zhao_Biao_Wen_Jian/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.md",
+  "docx_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou_Zhao_Biao_Wen_Jian/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.docx",
+  "title": "国网辽宁电力2025年第三次物资协议库存招标采购投标文件",
+  "docx_size": 8664395,
+  "image_selection": null,
+  "image_conversion": {
+    "found": 24,
+    "inserted": 24,
+    "skipped": 0,
+    "failed": 0,
+    "mermaid": {
+      "found": 1,
+      "inserted": 0,
+      "skipped": 1
+    }
+  },
+  "docx_template": {
+    "template_id": "sgcc_taichang_bid",
+    "bidder_full_name": "河北泰昌电力器材科技有限公司",
+    "body_font": "宋体",
+    "body_latin_font": "Times New Roman",
+    "body_font_size_pt": 10.5,
+    "body_line_spacing_pt": 20.0,
+    "cover_title_font_size_pt": 22.0,
+    "toc_title_font_size_pt": 22.0,
+    "toc_entry_font_size_pt": 10.5,
+    "toc_entry_line_spacing_pt": 18.0,
+    "table_font": "宋体",
+    "table_font_size_pt": 10.5,
+    "table_line_spacing_pt": 16.0,
+    "table_cell_margin_twips": 100,
+    "page_size": "A4",
+    "margins_cm": {
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 3.18,
+      "right": 3.18
+    },
+    "header_footer": {
+      "header_font": "宋体",
+      "header_font_size_pt": 9,
+      "footer_font": "宋体",
+      "footer_font_size_pt": 9,
+      "page_number_format": "第 X 页，共 Y 页",
+      "header_text": "河北泰昌电力器材科技有限公司投标文件",
+      "header_max_chars": 42
+    },
+    "cover_fields": {
+      "招标编号": "2225AC",
+      "文件类型": "投标文件"
+    }
+  },
+  "field_refresh": {
+    "enabled": true,
+    "status": "refreshed",
+    "tool": "libreoffice",
+    "soffice_bin": "/opt/homebrew/bin/soffice",
+    "input_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou_Zhao_Biao_Wen_Jian/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.docx",
+    "timeout_seconds": 180,
+    "returncode": 0,
+    "stdout": "convert /var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-g8yd1dnv/input/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.docx as a Writer document -> /private/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-g8yd1dnv/output/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.docx using filter : Office Open XML Text\n",
+    "stderr": "",
+    "manual_refresh_required": false,
+    "user_message": "DOCX 已完成自动刷新，目录页码、页脚页码和总页数字段已重新保存。",
+    "output_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou_Zhao_Biao_Wen_Jian/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.docx",
+    "size": 8664395
+  },
+  "table_count": 60,
+  "table_samples": [
+    {
+      "rows": 7,
+      "cols": 4,
+      "width_w": "5000",
+      "width_type": "pct",
+      "layout_type": "fixed",
+      "header_repeat": "true",
+      "header_fill": "D9EAF7",
+      "cell_margin_left_or_start": "100",
+      "body_line_spacing_pt": 16.0,
+      "body_first_line_indent_pt": 0.0,
+      "body_alignment_xml": "start"
+    },
+    {
+      "rows": 7,
+      "cols": 3,
+      "width_w": "5000",
+      "width_type": "pct",
+      "layout_type": "fixed",
+      "header_repeat": "true",
+      "header_fill": "D9EAF7",
+      "cell_margin_left_or_start": "100",
+      "body_line_spacing_pt": 16.0,
+      "body_first_line_indent_pt": 0.0,
+      "body_alignment_xml": "start"
+    },
+    {
+      "rows": 8,
+      "cols": 5,
+      "width_w": "5000",
+      "width_type": "pct",
+      "layout_type": "fixed",
+      "header_repeat": "true",
+      "header_fill": "D9EAF7",
+      "cell_margin_left_or_start": "100",
+      "body_line_spacing_pt": 16.0,
+      "body_first_line_indent_pt": 0.0,
+      "body_alignment_xml": "start"
+    },
+    {
+      "rows": 6,
+      "cols": 3,
+      "width_w": "5000",
+      "width_type": "pct",
+      "layout_type": "fixed",
+      "header_repeat": "true",
+      "header_fill": "D9EAF7",
+      "cell_margin_left_or_start": "100",
+      "body_line_spacing_pt": 16.0,
+      "body_first_line_indent_pt": 0.0,
+      "body_alignment_xml": "start"
+    },
+    {
+      "rows": 1,
+      "cols": 6,
+      "width_w": "5000",
+      "width_type": "pct",
+      "layout_type": "fixed",
+      "header_repeat": "true",
+      "header_fill": "D9EAF7",
+      "cell_margin_left_or_start": "100",
+      "body_line_spacing_pt": null,
+      "body_first_line_indent_pt": null,
+      "body_alignment_xml": null
+    },
+    {
+      "rows": 6,
+      "cols": 4,
+      "width_w": "5000",
+      "width_type": "pct",
+      "layout_type": "fixed",
+      "header_repeat": "true",
+      "header_fill": "D9EAF7",
+      "cell_margin_left_or_start": "100",
+      "body_line_spacing_pt": 16.0,
+      "body_first_line_indent_pt": 0.0,
+      "body_alignment_xml": "start"
+    },
+    {
+      "rows": 6,
+      "cols": 6,
+      "width_w": "5000",
+      "width_type": "pct",
+      "layout_type": "fixed",
+      "header_repeat": "true",
+      "header_fill": "D9EAF7",
+      "cell_margin_left_or_start": "100",
+      "body_line_spacing_pt": 16.0,
+      "body_first_line_indent_pt": 0.0,
+      "body_alignment_xml": "start"
+    },
+    {
+      "rows": 5,
+      "cols": 5,
+      "width_w": "5000",
+      "width_type": "pct",
+      "layout_type": "fixed",
+      "header_repeat": "true",
+      "header_fill": "D9EAF7",
+      "cell_margin_left_or_start": "100",
+      "body_line_spacing_pt": 16.0,
+      "body_first_line_indent_pt": 0.0,
+      "body_alignment_xml": "start"
+    }
+  ],
+  "table_checks": {
+    "table_count_gt_zero": true,
+    "all_sample_tables_full_width": true,
+    "all_sample_tables_fixed_layout": true,
+    "all_sample_tables_repeat_header": true,
+    "all_sample_tables_have_cell_margin": true,
+    "all_sample_data_rows_no_first_line_indent": true,
+    "all_sample_data_rows_line_spacing_16pt": true,
+    "all_sample_data_rows_alignment_readable": true
+  },
+  "cleanup_checks": {
+    "contains_mermaid_fence": false,
+    "contains_internal_image_source": false
+  },
+  "first_non_empty_paragraphs": [
+    "国网辽宁电力2025年第三次物资协议库存招标采购投标文件",
+    "文件类型：投标文件",
+    "招标编号：2225AC",
+    "投标人：河北泰昌电力器材科技有限公司",
+    "2026年06月11日",
+    "目  录",
+    "1. 投标函及投标函附录\t4",
+    "1.1 编制依据\t4",
+    "1.2 工程概况\t7",
+    "1.3 总体部署\t10",
+    "2. 资格审查资料\t15",
+    "2.1 企业基本资格资料\t16",
+    "2.1.1 响应要求\t18",
+    "2.1.2 资料清单\t22",
+    "2.1.3 有效性说明\t25",
+    "2.2 信誉与合规承诺\t28",
+    "2.2.1 条款响应\t29",
+    "2.2.2 承诺事项\t32",
+    "2.2.3 偏离说明\t35",
+    "2.3 类似项目业绩\t39"
+  ],
+  "page_cm": [
+    21.0,
+    29.7
+  ],
+  "margins_cm": [
+    2.0,
+    2.0,
+    3.18,
+    3.18
+  ],
+  "header": "河北泰昌电力器材科技有限公司投标文件"
+}

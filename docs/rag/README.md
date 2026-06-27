@@ -14,6 +14,9 @@
 | [customer-corpus-inventory.md](customer-corpus-inventory.md) | 江西/山西客户真实标书资料清单与入库优先级 |
 | [customer-corpus-parse-runs.md](customer-corpus-parse-runs.md) | 客户真实资料每批解析准备记录、manifest 与质量报告 |
 | [customer-parse-qa-checklist.md](customer-parse-qa-checklist.md) | 客户资料解析 QA 门禁、测试集与本批结果 |
+| [customer-template-ingestion-sop.md](customer-template-ingestion-sop.md) | 客户新增资料从收件、解析、metadata、入库到回归的 SOP |
+| [customer-batch-manifest-template.md](customer-batch-manifest-template.md) | 每批客户资料 manifest 字段模板与泰昌/辽宁/河北豪乾边界校验 |
+| [parse-quality-report-template.md](parse-quality-report-template.md) | 解析质量报告模板，覆盖文本、表格、图片资产和 metadata 门禁 |
 | [runs/](runs/) | 每次召回评测的原始 JSON 与摘要 |
 
 ## 相关代码

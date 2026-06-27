@@ -9,7 +9,7 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
-from backend.core.bid_volumes import ensure_section_volume
+from backend.core.bid_volumes import ensure_section_volume, volume_name
 
 from backend.db.supabase_client import get_bucket_name, get_supabase_client, reset_supabase_client, upload_file_to_storage
 
@@ -36,6 +36,10 @@ def _storage_extension(filename: str, local_path: Path) -> str:
     if suffix and suffix.isascii() and all(ch.isalnum() or ch == "." for ch in suffix):
         return suffix
     return ""
+
+
+def _knowledge_asset_bucket() -> str:
+    return get_bucket_name("knowledge")
 
 
 def create_bid_project_for_upload(original_filename: str) -> dict[str, Any]:
@@ -96,6 +100,26 @@ def sync_uploaded_tender_to_supabase(local_file_path: str | Path, original_filen
         "project": project,
         "file": file_record,
     }
+
+
+def update_bid_project_metadata_fields(project_id: str, project_meta: dict[str, Any]) -> dict[str, Any] | None:
+    """Persist high-confidence structured tender fields onto bid_projects."""
+    if not project_meta:
+        return None
+    payload: dict[str, Any] = {}
+    for source_key, column in (
+        ("project_name", "project_name"),
+        ("tender_unit", "tender_unit"),
+        ("agency", "agency"),
+        ("project_no", "project_no"),
+    ):
+        value = project_meta.get(source_key)
+        if isinstance(value, str) and value.strip():
+            payload[column] = value.strip()
+    if not payload:
+        return None
+    response = get_supabase_client().table("bid_projects").update(payload).eq("id", project_id).execute()
+    return response.data[0] if response.data else None
 
 
 def update_bid_file_parse_status(file_id: str, parse_status: str) -> None:
@@ -686,7 +710,98 @@ def update_bid_analysis_project_meta(project_id: str, project_meta: dict[str, An
         .eq("project_id", project_id)
         .execute()
     )
+    if response.data:
+        return response.data[0]
+
+    # Some Supabase/PostgREST-compatible paths may apply the update without
+    # returning a representation. Re-read before treating the write as failed.
+    rows = (
+        get_supabase_client()
+        .table("bid_analysis")
+        .select("id,project_id,project_meta")
+        .eq("project_id", project_id)
+        .limit(1)
+        .execute()
+        .data
+        or []
+    )
+    if rows and (rows[0].get("project_meta") or {}) == project_meta:
+        return rows[0]
+    return None
+
+
+def create_bid_interpretation_task(
+    project_id: str,
+    *,
+    status: str = "queued",
+    progress: int = 0,
+    message: str | None = None,
+    metadata: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    payload = {
+        "project_id": project_id,
+        "status": status,
+        "progress": max(0, min(100, int(progress))),
+        "message": message or "AI 解读任务已创建，等待处理。",
+        "metadata": metadata or {},
+    }
+    response = _with_supabase_write_retry(
+        lambda client: client.table("bid_interpretation_tasks").insert(payload).execute(),
+        label="创建 AI 解读任务",
+    )
+    if not response.data:
+        raise RuntimeError("Supabase bid_interpretation_tasks insert returned no data")
+    return response.data[0]
+
+
+def get_bid_interpretation_task(project_id: str, task_id: str) -> dict[str, Any] | None:
+    response = (
+        get_supabase_client()
+        .table("bid_interpretation_tasks")
+        .select("*")
+        .eq("id", task_id)
+        .eq("project_id", project_id)
+        .limit(1)
+        .execute()
+    )
     return response.data[0] if response.data else None
+
+
+def update_bid_interpretation_task(project_id: str, task_id: str, patch: dict[str, Any]) -> dict[str, Any]:
+    allowed_keys = {
+        "status",
+        "progress",
+        "message",
+        "error_message",
+        "metadata",
+        "started_at",
+        "finished_at",
+    }
+    payload = {key: value for key, value in patch.items() if key in allowed_keys}
+    if "progress" in payload:
+        payload["progress"] = max(0, min(100, int(payload["progress"])))
+    if not payload:
+        task = get_bid_interpretation_task(project_id, task_id)
+        if not task:
+            raise RuntimeError("AI 解读任务不存在")
+        return task
+
+    response = _with_supabase_write_retry(
+        lambda client: client.table("bid_interpretation_tasks").update(payload).eq("id", task_id).eq("project_id", project_id).execute(),
+        label="更新 AI 解读任务",
+    )
+    if response.data:
+        return response.data[0]
+
+    task = get_bid_interpretation_task(project_id, task_id)
+    if not task:
+        raise RuntimeError("AI 解读任务不存在")
+    for key, value in payload.items():
+        if key in {"started_at", "finished_at"}:
+            continue
+        if task.get(key) != value:
+            raise RuntimeError("Supabase bid_interpretation_tasks update returned no data")
+    return task
 
 
 def _is_valid_uuid(value: Any) -> bool:
@@ -755,6 +870,49 @@ def _normalize_section_parent_id(client, project_id: str, parent_id: Any) -> str
         return parent_id
     logging.warning("章节 parent_id 不存在，已降级为空: project_id=%s parent_id=%s", project_id, parent_id)
     return None
+
+
+def _inherit_child_section_volume(client, project_id: str, payload: dict[str, Any]) -> dict[str, Any]:
+    parent_id = payload.get("parent_id")
+    if not parent_id:
+        return payload
+
+    metadata = payload.get("metadata") if isinstance(payload.get("metadata"), dict) else {}
+    current_volume = str(metadata.get("volume_type") or "").strip()
+    if current_volume and current_volume != "other":
+        return payload
+
+    try:
+        response = (
+            client.table("bid_sections")
+            .select("metadata")
+            .eq("id", parent_id)
+            .eq("project_id", project_id)
+            .limit(1)
+            .execute()
+        )
+    except Exception:
+        logging.exception("读取父章节分册 metadata 失败，跳过继承: project_id=%s parent_id=%s", project_id, parent_id)
+        return payload
+
+    parent = (response.data or [{}])[0] if response.data else {}
+    parent_metadata = parent.get("metadata") if isinstance(parent.get("metadata"), dict) else {}
+    parent_volume = str(parent_metadata.get("volume_type") or "").strip()
+    if not parent_volume or parent_volume == "other":
+        return payload
+
+    parent_volume_name = parent_metadata.get("volume_name") or volume_name(parent_volume)
+    current_export_group = str(metadata.get("export_group") or "").strip()
+    inherited_export_group = parent_metadata.get("export_group") or f"{parent_volume_name}文件"
+    next_metadata = {
+        **metadata,
+        "volume_type": parent_volume,
+        "volume_name": parent_volume_name,
+        "document_role": metadata.get("document_role") or parent_metadata.get("document_role") or "正文",
+        "export_group": inherited_export_group if current_export_group in {"", "其他文件"} else current_export_group,
+        "inherited_from_parent_id": metadata.get("inherited_from_parent_id") or parent_id,
+    }
+    return {**payload, "metadata": next_metadata}
 
 
 def _section_payload(project_id: str, section: dict[str, Any], index: int) -> dict[str, Any]:
@@ -1001,6 +1159,7 @@ def upsert_bid_section(project_id: str, section: dict[str, Any]) -> dict[str, An
     section_id = section.get("id")
     client = get_supabase_client()
     payload["parent_id"] = _normalize_section_parent_id(client, project_id, payload.get("parent_id"))
+    payload = _inherit_child_section_volume(client, project_id, payload)
 
     if _is_valid_uuid(section_id):
         response = client.table("bid_sections").update(payload).eq("id", section_id).eq("project_id", project_id).execute()
@@ -1165,8 +1324,28 @@ def reset_bid_sections_generation(project_id: str, clear_content: bool = False) 
     return response.data or []
 
 
-def delete_bid_section(project_id: str, section_id: str) -> None:
-    get_supabase_client().table("bid_sections").delete().eq("id", section_id).eq("project_id", project_id).execute()
+def delete_bid_section(project_id: str, section_id: str) -> int:
+    rows = list_bid_sections(project_id)
+    descendant_ids = {section_id}
+    changed = True
+    while changed:
+        changed = False
+        for row in rows:
+            row_id = str(row.get("id") or "")
+            parent_id = str(row.get("parent_id") or "")
+            if row_id and parent_id in descendant_ids and row_id not in descendant_ids:
+                descendant_ids.add(row_id)
+                changed = True
+
+    response = (
+        get_supabase_client()
+        .table("bid_sections")
+        .delete()
+        .eq("project_id", project_id)
+        .in_("id", list(descendant_ids))
+        .execute()
+    )
+    return len(response.data or [])
 
 
 ACTIVE_GENERATION_ITEM_STATUSES = {"leased", "running", "generating", "saving"}
@@ -1196,6 +1375,7 @@ def _normalize_generation_task_items(items: list[dict[str, Any]]) -> list[dict[s
         section_id = item.get("section_id") or item.get("sectionId") or item.get("id")
         if not section_id:
             continue
+        metadata = item.get("metadata") if isinstance(item.get("metadata"), dict) else {}
         normalized.append({
             "section_id": section_id,
             "title": item.get("title") or "未命名章节",
@@ -1212,8 +1392,152 @@ def _normalize_generation_task_items(items: list[dict[str, Any]]) -> list[dict[s
             "generated_content": item.get("generated_content") or "",
             "chunk_seq": _as_order_index(item.get("chunk_seq"), 0),
             "chunk_events": item.get("chunk_events") if isinstance(item.get("chunk_events"), list) else [],
+            "metadata": metadata,
         })
     return normalized
+
+
+def _history_generation_summary(task: dict[str, Any] | None) -> dict[str, Any]:
+    if not task:
+        return {
+            "writing_task_id": None,
+            "writing_task_status": None,
+            "writing_total_count": 0,
+            "writing_done_count": 0,
+            "writing_partial_count": 0,
+            "writing_review_count": 0,
+            "writing_active_count": 0,
+            "writing_failed_count": 0,
+        }
+    items = task.get("items") if isinstance(task.get("items"), list) else []
+    done_count = _as_int(task.get("done_count")) or sum(1 for item in items if str(item.get("status") or "") == "done")
+    partial_count = sum(1 for item in items if str(item.get("status") or "") == "partial_generated")
+    review_count = sum(
+        1
+        for item in items
+        if str(item.get("status") or "") == "partial_generated"
+        and isinstance(item.get("metadata"), dict)
+        and item["metadata"].get("partial_review_required")
+    )
+    active_count = (
+        _as_int(task.get("running_count"))
+        or sum(1 for item in items if str(item.get("status") or "") in ACTIVE_GENERATION_ITEM_STATUSES)
+    )
+    queued_count = _as_int(task.get("queued_count")) or sum(1 for item in items if str(item.get("status") or "") == "queued")
+    failed_count = (
+        _as_int(task.get("failed_count"))
+        or sum(1 for item in items if str(item.get("status") or "") in {"failed", "stopped", "cancelled", "expired"})
+    )
+    total_count = _as_int(task.get("total_count")) or len(items)
+    return {
+        "writing_task_id": task.get("id"),
+        "writing_task_status": task.get("status"),
+        "writing_total_count": total_count,
+        "writing_done_count": done_count,
+        "writing_partial_count": partial_count,
+        "writing_review_count": review_count,
+        "writing_active_count": active_count + queued_count,
+        "writing_failed_count": failed_count,
+    }
+
+
+def _history_prefill_summary(project_meta: dict[str, Any] | None) -> dict[str, Any]:
+    prefill = (project_meta or {}).get("bid_prefill")
+    if not isinstance(prefill, dict):
+        prefill = {}
+    missing = prefill.get("missing_formal_required_fields")
+    missing_count = len(missing) if isinstance(missing, list) else 0
+    return {
+        "prefill_applied": bool(prefill.get("applied_at")),
+        "prefill_ready_for_formal_export": bool(prefill.get("ready_for_formal_export")),
+        "prefill_missing_required_count": missing_count,
+    }
+
+
+def _section_text_size(content: Any) -> int:
+    text = str(content or "").strip()
+    if not text:
+        return 0
+    return len("".join(text.split()))
+
+
+def _is_history_section_generated(section: dict[str, Any], leaf_ids: set[str]) -> bool:
+    section_id = str(section.get("id") or "")
+    if section_id not in leaf_ids:
+        return False
+    if str(section.get("status") or "") not in {"generated", "edited", "completed"}:
+        return False
+    content = str(section.get("content") or "").strip()
+    if not content:
+        return False
+    return "请在此编写章节内容" not in content and "待进一步生成正文" not in content
+
+
+def _history_section_summary(sections: list[dict[str, Any]]) -> dict[str, Any]:
+    leaf_ids = _leaf_generation_section_ids(sections)
+    generated_leaf_sections = [
+        section for section in sections
+        if _is_history_section_generated(section, leaf_ids)
+    ]
+    return {
+        "section_count": len(sections),
+        "leaf_section_count": len(leaf_ids),
+        "generated_section_count": len(generated_leaf_sections),
+        "generated_leaf_count": len(generated_leaf_sections),
+        "word_count": sum(_section_text_size(section.get("content")) for section in generated_leaf_sections),
+    }
+
+
+def _history_stage_action(
+    *,
+    project_status: str | None,
+    has_analysis: bool,
+    section_count: int,
+    chunk_count: int,
+    parse_status: str | None,
+    generation_summary: dict[str, Any],
+    prefill_summary: dict[str, Any],
+) -> dict[str, str]:
+    partial_count = _as_int(generation_summary.get("writing_partial_count"))
+    active_count = _as_int(generation_summary.get("writing_active_count"))
+    total_count = _as_int(generation_summary.get("writing_total_count"))
+    done_count = _as_int(generation_summary.get("writing_done_count"))
+    failed_count = _as_int(generation_summary.get("writing_failed_count"))
+    task_status = str(generation_summary.get("writing_task_status") or "")
+
+    if section_count > 0:
+        if active_count > 0 or task_status in {"queued", "running", "partial_running"}:
+            return {"stage": "正文生成中", "action": "查看进度", "next_step": "editor", "next_action": "查看进度"}
+        if partial_count > 0:
+            return {"stage": "草稿待续写", "action": "续写草稿", "next_step": "resume_partial", "next_action": "续写草稿"}
+        if total_count > 0 and done_count >= total_count and failed_count == 0:
+            return {"stage": "正文初稿完成", "action": "正式检查", "next_step": "formal_check", "next_action": "正式检查"}
+        if not prefill_summary.get("prefill_applied"):
+            return {"stage": "待投标确认", "action": "进入投标确认", "next_step": "prefill", "next_action": "投标确认"}
+        return {"stage": "标书编制", "action": "继续编制", "next_step": "editor", "next_action": "继续编制"}
+    if has_analysis:
+        return {"stage": "解读完成", "action": "查看解读", "next_step": "interpretation", "next_action": "查看解读"}
+    if chunk_count > 0 or parse_status in {"indexed", "mineru_done"}:
+        return {"stage": "解析完成", "action": "查看解读", "next_step": "interpretation", "next_action": "查看解读"}
+    if parse_status in {
+        "pending",
+        "mineru_submitted",
+        "mineru_running",
+        "mineru_split_submitted",
+        "mineru_split_running",
+        "mineru_downloading",
+        "syncing_supabase",
+        "supabase_synced",
+    }:
+        return {"stage": "解析中", "action": "查看状态", "next_step": "interpretation", "next_action": "查看状态"}
+    if parse_status in {"mineru_failed", "index_failed", "ocr_required", "mineru_download_failed"}:
+        return {"stage": "解析失败", "action": "查看", "next_step": "interpretation", "next_action": "查看"}
+    return {
+        "stage": project_status or "已上传",
+        "action": "查看",
+        "next_step": "interpretation",
+        "next_action": "查看",
+    }
 
 
 def _leaf_generation_section_ids(sections: list[dict[str, Any]]) -> set[str]:
@@ -1311,6 +1635,7 @@ def _generation_task_item_row(project_id: str, task_id: str, item: dict[str, Any
         "draft_content": item.get("draft_content") or item.get("generated_content") or "",
         "chunk_seq": _as_order_index(item.get("chunk_seq"), 0),
         "chunk_events": item.get("chunk_events") if isinstance(item.get("chunk_events"), list) else [],
+        "metadata": item.get("metadata") if isinstance(item.get("metadata"), dict) else {},
         "started_at": item.get("started_at"),
         "finished_at": item.get("finished_at"),
     }
@@ -1546,9 +1871,38 @@ def requeue_bid_generation_task_item(
     *,
     reason: str = "manual_retry",
     preserve_draft: bool = True,
+    metadata_patch: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Requeue one generation item and invalidate any old worker lease."""
     message = "已重新排队，等待重试生成。"
+    task = get_bid_generation_task(project_id, task_id) or {}
+    existing_item = next(
+        (
+            item for item in list(task.get("items") or [])
+            if str(item.get("section_id") or "") == str(section_id)
+        ),
+        {},
+    )
+    existing_metadata = existing_item.get("metadata") if isinstance(existing_item.get("metadata"), dict) else {}
+    queued_at = datetime.utcnow().isoformat()
+    explicit_metadata_patch = metadata_patch if isinstance(metadata_patch, dict) else {}
+    next_metadata = {
+        **existing_metadata,
+        **explicit_metadata_patch,
+        "retry_reason": reason,
+        "retry_preserve_draft": bool(preserve_draft),
+        "retry_queued_at": queued_at,
+    }
+    if reason in {"manual_retry", "manual_retry_from_editor", "resume_task", "manual_resume_partial", "batch_resume_partial"}:
+        next_metadata.update({
+            "manual_resume_requested": True,
+            "manual_resume_requested_at": queued_at,
+            "partial_review_required": False,
+            "partial_auto_resume_allowed": False,
+            "partial_resume_action": "manual_resume_requested",
+            "next_action": "manual_resume_with_slim_prompt" if preserve_draft else "manual_retry_full_generation",
+        })
+        message = "已按人工续写请求重新排队。"
     direct_patch = {
         "status": "queued",
         "percent": 0,
@@ -1564,6 +1918,7 @@ def requeue_bid_generation_task_item(
         "draft_saved_at": None,
         "final_saved_at": None,
         "finished_at": None,
+        "metadata": next_metadata,
     }
     if not preserve_draft:
         direct_patch.update({
@@ -1600,7 +1955,7 @@ def requeue_bid_generation_task_item(
         "last_token_at": None,
         "draft_saved_at": None,
         "final_saved_at": None,
-        "metadata": {"retry_reason": reason},
+        "metadata": next_metadata,
     }
     if not preserve_draft:
         patch.update({
@@ -1612,12 +1967,49 @@ def requeue_bid_generation_task_item(
     return update_bid_generation_task_item(project_id, task_id, section_id, patch)
 
 
+def patch_bid_generation_task_metadata(
+    project_id: str,
+    task_id: str,
+    metadata_patch: dict[str, Any],
+) -> dict[str, Any]:
+    """Merge a small metadata patch onto a batch generation task."""
+    task = get_bid_generation_task(project_id, task_id)
+    if not task:
+        raise RuntimeError("批量章节生成任务不存在")
+    current_metadata = task.get("metadata") if isinstance(task.get("metadata"), dict) else {}
+    next_metadata = {**current_metadata, **(metadata_patch or {})}
+    response = _with_supabase_write_retry(
+        lambda client: client.table("bid_generation_tasks")
+        .update({"metadata": next_metadata})
+        .eq("id", task_id)
+        .eq("project_id", project_id)
+        .execute(),
+        label="更新批量章节生成任务 metadata",
+    )
+    if not response.data:
+        raise RuntimeError("Supabase bid_generation_tasks metadata update returned no data")
+    updated = response.data[0]
+    _record_generation_task_event(
+        project_id=project_id,
+        task_id=task_id,
+        section_id=None,
+        patch={
+            "_event_type": "scheduler_policy_updated",
+            "status": updated.get("status"),
+            "message": next_metadata.get("policy_message") or "章节生成调度策略已更新",
+            "metadata": metadata_patch,
+        },
+    )
+    return updated
+
+
 def resume_bid_generation_task(
     project_id: str,
     task_id: str,
     *,
     statuses: set[str] | None = None,
     preserve_draft: bool = True,
+    reason: str = "resume_task",
 ) -> dict[str, Any]:
     task = get_bid_generation_task(project_id, task_id)
     if not task:
@@ -1634,7 +2026,7 @@ def resume_bid_generation_task(
             project_id,
             task_id,
             section_id,
-            reason="resume_task",
+            reason=reason,
             preserve_draft=preserve_draft,
         )
     if not target_ids:
@@ -1648,6 +2040,7 @@ def resume_bid_generation_task(
             "status": latest.get("status"),
             "message": f"已恢复 {len(target_ids)} 个章节生成 item",
             "count": len(target_ids),
+            "reason": reason,
         },
     )
     return latest
@@ -2020,6 +2413,7 @@ def _update_bid_generation_task_item_legacy(
                 "draft_saved_at",
                 "final_saved_at",
                 "draft_content",
+                "metadata",
             }
         })
         item["status"] = next_status
@@ -2040,6 +2434,7 @@ def _update_bid_generation_task_item_legacy(
             "generated_content": patch.get("generated_content") or "",
             "chunk_seq": _as_order_index(patch.get("chunk_seq"), 0),
             "chunk_events": patch.get("chunk_events") if isinstance(patch.get("chunk_events"), list) else [],
+            "metadata": patch.get("metadata") if isinstance(patch.get("metadata"), dict) else {},
         })
 
     counts = _task_item_counts(items)
@@ -2224,8 +2619,56 @@ def list_bid_history(limit: int = 100) -> list[dict[str, Any]]:
     analysis_counts = count_by_project("bid_analysis")
     requirement_counts = count_by_project("bid_requirements")
     risk_counts = count_by_project("bid_risks")
-    section_counts = count_by_project("bid_sections")
     chunk_counts = count_by_project("document_chunks")
+
+    section_rows = (
+        client.table("bid_sections")
+        .select("id,project_id,parent_id,status,content,metadata")
+        .in_("project_id", project_ids)
+        .execute()
+        .data
+        or []
+    )
+    sections_by_project: dict[str, list[dict[str, Any]]] = {}
+    for row in section_rows:
+        project_id = row.get("project_id")
+        if project_id:
+            sections_by_project.setdefault(project_id, []).append(row)
+
+    analysis_rows = (
+        client.table("bid_analysis")
+        .select("id,project_id,project_meta,created_at")
+        .in_("project_id", project_ids)
+        .order("created_at", desc=True)
+        .execute()
+        .data
+        or []
+    )
+    analysis_meta_by_project: dict[str, dict[str, Any]] = {}
+    for row in analysis_rows:
+        project_id = row.get("project_id")
+        if project_id and project_id not in analysis_meta_by_project:
+            project_meta = row.get("project_meta")
+            analysis_meta_by_project[project_id] = project_meta if isinstance(project_meta, dict) else {}
+
+    generation_rows = (
+        client.table("bid_generation_tasks")
+        .select(
+            "id,project_id,status,total_count,done_count,failed_count,stopped_count,"
+            "queued_count,running_count,items,metadata,created_at,updated_at,finished_at"
+        )
+        .in_("project_id", project_ids)
+        .eq("task_type", "batch_sections")
+        .order("created_at", desc=True)
+        .execute()
+        .data
+        or []
+    )
+    latest_generation_by_project: dict[str, dict[str, Any]] = {}
+    for row in generation_rows:
+        project_id = row.get("project_id")
+        if project_id and project_id not in latest_generation_by_project:
+            latest_generation_by_project[project_id] = row
 
     file_rows = (
         client.table("bid_files")
@@ -2246,37 +2689,40 @@ def list_bid_history(limit: int = 100) -> list[dict[str, Any]]:
     for project in projects:
         project_id = project["id"]
         has_analysis = analysis_counts.get(project_id, 0) > 0
-        section_count = section_counts.get(project_id, 0)
+        section_summary = _history_section_summary(sections_by_project.get(project_id, []))
+        section_count = int(section_summary.get("section_count") or 0)
         files = files_by_project.get(project_id, [])
         latest_file = files[0] if files else {}
         parse_status = latest_file.get("parse_status")
-        if section_count > 0:
-            stage = "标书编制"
-            action = "继续编制"
-        elif has_analysis:
-            stage = "解读完成"
-            action = "查看解读"
-        elif chunk_counts.get(project_id, 0) > 0 or parse_status in {"indexed", "mineru_done"}:
-            stage = "解析完成"
-            action = "查看解读"
-        elif parse_status in {"pending", "mineru_submitted", "mineru_running", "mineru_split_submitted", "mineru_split_running", "mineru_downloading", "syncing_supabase", "supabase_synced"}:
-            stage = "解析中"
-            action = "查看状态"
-        elif parse_status in {"mineru_failed", "index_failed", "ocr_required", "mineru_download_failed"}:
-            stage = "解析失败"
-            action = "查看"
-        else:
-            stage = project.get("status") or "已上传"
-            action = "查看"
+        generation_summary = _history_generation_summary(latest_generation_by_project.get(project_id))
+        leaf_section_count = int(section_summary.get("leaf_section_count") or 0)
+        generated_leaf_count = int(section_summary.get("generated_leaf_count") or 0)
+        if leaf_section_count:
+            generation_summary = {
+                **generation_summary,
+                "writing_total_count": leaf_section_count,
+                "writing_done_count": generated_leaf_count,
+            }
+        prefill_summary = _history_prefill_summary(analysis_meta_by_project.get(project_id))
+        stage_action = _history_stage_action(
+            project_status=project.get("status"),
+            has_analysis=has_analysis,
+            section_count=section_count,
+            chunk_count=chunk_counts.get(project_id, 0),
+            parse_status=parse_status,
+            generation_summary=generation_summary,
+            prefill_summary=prefill_summary,
+        )
 
         history.append({
             **project,
-            "stage": stage,
-            "action": action,
+            **stage_action,
+            **generation_summary,
+            **prefill_summary,
+            **section_summary,
             "analysis_count": analysis_counts.get(project_id, 0),
             "requirement_count": requirement_counts.get(project_id, 0),
             "risk_count": risk_counts.get(project_id, 0),
-            "section_count": section_count,
             "chunk_count": chunk_counts.get(project_id, 0),
             "file_count": len(files),
             "parse_status": parse_status,
@@ -2375,6 +2821,31 @@ def get_knowledge_document_detail(document_id: str) -> dict[str, Any] | None:
     }
 
 
+KNOWLEDGE_ASSET_LIST_COLUMNS = (
+    "id,title,description,category,asset_type,public_url,source_url,file_name,mime_type,"
+    "storage_path,license,attribution,applicable_volumes,applicable_sections,tags,specs,"
+    "metadata,status,is_synthetic,anonymized,created_at"
+)
+
+KNOWLEDGE_ASSET_STATS_COLUMNS = "id,status,is_synthetic,category,tags,specs,metadata,asset_type"
+
+
+def _asset_type_for_library_type(library_type: str | None) -> str | None:
+    if library_type == "qualification":
+        return "qualification_image"
+    if library_type == "product":
+        return "product_image"
+    return None
+
+
+def _apply_knowledge_asset_filters(query: Any, asset_type: str | None = None, category: str | None = None):
+    if asset_type:
+        query = query.eq("asset_type", asset_type)
+    if category:
+        query = query.eq("category", category)
+    return query
+
+
 def list_knowledge_assets(asset_type: str | None = None, category: str | None = None) -> list[dict[str, Any]]:
     client = get_supabase_client()
     query = (
@@ -2382,12 +2853,95 @@ def list_knowledge_assets(asset_type: str | None = None, category: str | None = 
         .select("*")
         .order("created_at", desc=True)
     )
-    if asset_type:
-        query = query.eq("asset_type", asset_type)
-    if category:
-        query = query.eq("category", category)
+    query = _apply_knowledge_asset_filters(query, asset_type=asset_type, category=category)
     response = query.execute()
     return response.data or []
+
+
+def list_knowledge_assets_page(
+    *,
+    page: int = 1,
+    page_size: int = 20,
+    asset_type: str | None = None,
+    category: str | None = None,
+    library_type: str | None = None,
+) -> dict[str, Any]:
+    client = get_supabase_client()
+    safe_page = max(1, int(page or 1))
+    safe_page_size = max(1, min(int(page_size or 20), 100))
+    start = (safe_page - 1) * safe_page_size
+    end = start + safe_page_size - 1
+    effective_asset_type = asset_type or _asset_type_for_library_type(library_type)
+
+    query = (
+        client.table("knowledge_assets")
+        .select(KNOWLEDGE_ASSET_LIST_COLUMNS, count="exact")
+        .order("created_at", desc=True)
+        .range(start, end)
+    )
+    query = _apply_knowledge_asset_filters(query, asset_type=effective_asset_type, category=category)
+    response = query.execute()
+    return {
+        "items": response.data or [],
+        "total": int(response.count or 0),
+        "page": safe_page,
+        "page_size": safe_page_size,
+    }
+
+
+def get_knowledge_asset_stats(library_type: str | None = None) -> dict[str, Any]:
+    client = get_supabase_client()
+    effective_asset_type = _asset_type_for_library_type(library_type)
+    query = client.table("knowledge_assets").select(KNOWLEDGE_ASSET_STATS_COLUMNS, count="exact")
+    query = _apply_knowledge_asset_filters(query, asset_type=effective_asset_type)
+    response = query.execute()
+    rows = response.data or []
+    category_counts: dict[str, int] = {}
+    tag_counts: dict[str, int] = {}
+    indexed_count = 0
+    synthetic_count = 0
+    for row in rows:
+        if row.get("status") == "indexed":
+            indexed_count += 1
+        if row.get("is_synthetic"):
+            synthetic_count += 1
+        category = str(row.get("category") or "未分类")
+        category_counts[category] = category_counts.get(category, 0) + 1
+        for tag in row.get("tags") or []:
+            tag_text = str(tag or "").strip()
+            if not tag_text:
+                continue
+            tag_counts[tag_text] = tag_counts.get(tag_text, 0) + 1
+    total = int(response.count if response.count is not None else len(rows))
+    return {
+        "total": total,
+        "indexed_count": indexed_count,
+        "synthetic_count": synthetic_count,
+        "customer_asset_count": total - synthetic_count,
+        "category_counts": category_counts,
+        "tag_count": len(tag_counts),
+    }
+
+
+def get_knowledge_overview_stats() -> dict[str, Any]:
+    client = get_supabase_client()
+    docs_response = client.table("knowledge_documents").select("id,status", count="exact").execute()
+    docs = docs_response.data or []
+    indexed_docs = sum(1 for row in docs if row.get("status") == "indexed")
+    processing_docs = sum(1 for row in docs if row.get("status") == "processing")
+    failed_docs = sum(1 for row in docs if row.get("status") == "failed")
+    return {
+        "documents": {
+            "total": int(docs_response.count if docs_response.count is not None else len(docs)),
+            "indexed": indexed_docs,
+            "processing": processing_docs,
+            "failed": failed_docs,
+        },
+        "assets": {
+            "qualification": get_knowledge_asset_stats("qualification"),
+            "product": get_knowledge_asset_stats("product"),
+        },
+    }
 
 
 def get_knowledge_asset_detail(asset_id: str) -> dict[str, Any] | None:

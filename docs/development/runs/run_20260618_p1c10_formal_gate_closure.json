@@ -1,0 +1,1882 @@
+{
+  "run_id": "run_20260618_p1c10_formal_gate_closure",
+  "generated_at": "2026-06-18T22:18:32",
+  "project_id": "a1d853bc-ca4e-43b4-bbea-256f561c8a3d",
+  "status": "PASS",
+  "elapsed_seconds": 2529.37,
+  "backup_path": "docs/development/runs/run_20260618_p1c10_formal_gate_closure_before_sections_backup.json",
+  "prefill": {
+    "confirmed_value_count": 20,
+    "auto_applied": [
+      {
+        "key": "tender_unit",
+        "label": "招标人",
+        "status": "system_recognized",
+        "source": "prefill_candidate",
+        "value_preview": "国网辽宁省电力有限公司"
+      }
+    ],
+    "blocked_required": [
+      {
+        "key": "total_bid_price",
+        "label": "投标总价",
+        "status": "customer_required",
+        "source": "blocked_customer_decision",
+        "customer_decision": true
+      },
+      {
+        "key": "total_bid_price_upper",
+        "label": "投标总价大写",
+        "status": "customer_required",
+        "source": "blocked_customer_decision",
+        "customer_decision": true
+      },
+      {
+        "key": "tax_rate",
+        "label": "税率",
+        "status": "customer_required",
+        "source": "blocked_customer_decision",
+        "customer_decision": true
+      },
+      {
+        "key": "bid_bond_amount",
+        "label": "投标保证金金额",
+        "status": "customer_required",
+        "source": "blocked_customer_decision",
+        "customer_decision": true
+      },
+      {
+        "key": "bid_bond_form",
+        "label": "投标保证金形式",
+        "status": "customer_required",
+        "source": "blocked_customer_decision",
+        "customer_decision": true
+      },
+      {
+        "key": "delivery_period",
+        "label": "交货期承诺",
+        "status": "manual_confirm",
+        "source": "blocked_customer_decision",
+        "customer_decision": true
+      },
+      {
+        "key": "warranty_period",
+        "label": "质保期承诺",
+        "status": "manual_confirm",
+        "source": "blocked_customer_decision",
+        "customer_decision": true
+      },
+      {
+        "key": "bid_validity_days",
+        "label": "投标有效期",
+        "status": "manual_confirm",
+        "source": "missing_candidate",
+        "customer_decision": false
+      },
+      {
+        "key": "authorized_representative",
+        "label": "授权代表",
+        "status": "customer_required",
+        "source": "blocked_customer_decision",
+        "customer_decision": true
+      },
+      {
+        "key": "authorized_representative_id",
+        "label": "授权代表身份证号",
+        "status": "customer_required",
+        "source": "blocked_customer_decision",
+        "customer_decision": true
+      },
+      {
+        "key": "signature_date",
+        "label": "签署日期",
+        "status": "customer_required",
+        "source": "blocked_customer_decision",
+        "customer_decision": true
+      }
+    ],
+    "application": {
+      "schema_version": "2026-06-16.v1",
+      "confirmed_at": "2026-06-18T21:36:25",
+      "applied_at": "2026-06-18T21:36:25",
+      "confirmed_values": {
+        "project_name": "国网辽宁电力2025年第三次物资协议库存招标采购",
+        "tender_no": "2225AC",
+        "tender_unit": "国网辽宁省电力有限公司",
+        "package_no": "包1",
+        "package_name": "电缆保护管CPVC、电缆保护管MPP（需按目标包确认）",
+        "material_category": "电缆保护管",
+        "goods_list_summary": "辽宁 2025-03 2225AC 货物清单结构化行级记录：共 38 行需求；包号：包1；物料：电缆保护管CPVC、电缆保护管MPP；规格：φ50、φ100、φ150、φ200；数量汇总：包1 102583米；交货地点示例：辽宁省抚顺市、辽宁省朝阳市、辽宁省本溪市、辽宁省沈阳市、辽宁省营口市、辽宁省葫芦岛市；技术规范编码 10 个",
+        "delivery_place": "见投标邀请书",
+        "bidder_name": "河北泰昌电力器材科技有限公司",
+        "unified_social_credit_code": "91130607056539515C",
+        "legal_representative": "晁坤琳",
+        "company_address": "河北省保定市满城区陉阳驿村",
+        "qualification_assets": "营业执照副本；质量管理体系认证证书；环境管理体系认证证书；职业健康安全管理体系认证证书",
+        "inspection_reports": "CPVC电缆保护管检验报告（报告编号：2024100312005501713）；MPP电缆保护管检验报告（报告编号：2024100312005501712）",
+        "project_performance_cases": "{'id': 'ee3b0a64-4152-4bc1-9643-62c3873c4979', 'title': '泰昌157-保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书第2页', 'category': '项目业绩', 'assetType': 'qualification_image'}；{'id': '6bde9fe2-ce32-4e2c-9cbc-9fd4696de3d2', 'title': '泰昌157-保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书第1页', 'category': '项目业绩', 'assetType': 'qualification_image'}；{'id': '2c918f6d-aa3a-4ed0-88b7-a490f554eb54', 'title': '泰昌TJ20220002363合同协议书（双方已签章）第15页', 'category': '项目业绩', 'assetType': 'qualification_image'}；{'id': '8e8b12f5-c3d5-401e-920c-c84a262a7a5b', 'title': '泰昌TJ20220002363合同协议书（双方已签章）第14页', 'category': '项目业绩', 'assetType': 'qualification_image'}；{'id': 'f340d05f-4f6d-494a-ba0e-d33e0d8b6692', 'title': '泰昌TJ20220002363合同协议书（双方已签章）第13页', 'category': '项目业绩', 'assetType': 'qualification_image'}；{'id': '84f7a1b2-05d3-4f7b-bf0e-e6fc0dabea51', 'title': '泰昌TJ20220002363合同协议书（双方已签章）第12页', 'category': '项目业绩', 'assetType': 'qualification_image'}；{'id': 'fff62a89-d252-4ebd-9ffa-8e6223a1c0fc', 'title': '泰昌TJ20220002363合同协议书（双方已签章）第11页', 'category': '项目业绩', 'assetType': 'qualification_image'}；{'id': '70f8c8d6-de6f-447b-91ee-1f192f958fb8', 'title': '泰昌TJ20220002363合同协议书（双方已签章）第10页', 'category': '项目业绩', 'assetType': 'qualification_image'}",
+        "product_models": "CPVC电缆保护管：DS 250×15×6000 SN16 PVC-C；MPP电缆保护管：DF 250×22×9000 SN40 MPP",
+        "technical_parameter_summary": "辽宁 2025-03 2225AC 技术参数表结构化记录：共 300 行；包号：包1；物料：电缆保护管CPVC、电缆保护管MPP；公称内径：50、70、90、100、125、150、175、200、225、250；表类型：dimension_parameter_table 151行、bid_response_parameter_table 75行、performance_parameter_table 74行；待补投标响应/保证值 300 行；示例：公称内径 50：公称内径=50、公称壁厚 / 氯化氯乙烯塑料电缆导管环刚度(3%)等级(80℃) / SN12=4、公称长度=6000；公称内径 100：公称内径=100、公称壁厚 / 氯化氯乙烯塑料电缆导管环刚度(3%)等级(80℃) / SN12=5、公称长度=6000；公称内径 125：公称内径=125、公称壁厚 / 氯化氯乙烯塑料电缆导管环刚度(3%)等级(80℃) / SN12=6.5、公称长度=6000；公称内径 150：公称内径=150、公称壁厚 / 氯化氯乙烯塑料电缆导管环刚度(3%)等级(80℃) / SN12=8、公称长度=6000；边界：辽宁技术参数是本次招标要求，不能自动作为泰昌企业事实或覆盖结论。",
+        "technical_deviation_candidates": "技术偏差辅助候选：共 300 行；包号：包1；物料：电缆保护管CPVC、电缆保护管MPP；状态：pending_response 284行、informational 16行；风险：medium 284行、low 16行；待处理示例：公称内径 50：pending_response，补充泰昌响应值、保证值或明确写入无偏差承诺后复核。；公称内径 100：pending_response，补充泰昌响应值、保证值或明确写入无偏差承诺后复核。；公称内径 125：pending_response，补充泰昌响应值、保证值或明确写入无偏差承诺后复核。；公称内径 150：pending_response，补充泰昌响应值、保证值或明确写入无偏差承诺后复核。；边界：偏差状态是辅助候选，不自动写入无偏差或正/负偏差结论，需客户确认响应值。",
+        "taichang_parameter_match_summary": "泰昌结构化检验报告参数：共 36 行，报告 2 份；产品：CPVC电缆保护管、MPP电缆保护管；规格型号：DF 250×22×9000 SN40 MPP、DS 250×15×6000 SN16 PVC-C；报告编号：2024100312005501712、2024100312005501713；泰昌已结构化公称内径：250；辽宁货物清单规格中未由现有泰昌结构化报告直接覆盖的内径：50、100、150、200；可引用实测示例：CPVC电缆保护管 尺寸-平均内径=250.2~250.4（报告2024100312005501713）；CPVC电缆保护管 尺寸-壁厚=15.2~15.3（报告2024100312005501713）；CPVC电缆保护管 尺寸-承口平均内径=280.5（报告2024100312005501713）；CPVC电缆保护管 尺寸-承口壁厚=15.1~15.3（报告2024100312005501713）；边界：泰昌参数来自企业检验报告；辽宁需求仅作 QA/异常校验，不构成覆盖辽宁全部规格的结论。",
+        "product_image_assets": "{'id': '7e1feea3-277f-4656-888c-ed166c055aa6', 'title': '泰昌绿色电力认证证书第1页', 'category': '绿色低碳资料', 'assetType': 'product_image'}；{'id': '96dffe93-5d4c-4b26-b025-2f9013e52658', 'title': '泰昌绿色发展规划报告第18页', 'category': '绿色低碳资料', 'assetType': 'product_image'}；{'id': '45762eaf-de3e-4ce7-bfe0-aedd90dbfa28', 'title': '泰昌绿色发展规划报告第17页', 'category': '绿色低碳资料', 'assetType': 'product_image'}；{'id': '04cc9646-61a5-4c33-aea6-a6b16ed6a27a', 'title': '泰昌绿色发展规划报告第16页', 'category': '绿色低碳资料', 'assetType': 'product_image'}；{'id': 'e261aca2-6303-441e-9605-a29ccf3a1968', 'title': '泰昌绿色发展规划报告第15页', 'category': '绿色低碳资料', 'assetType': 'product_image'}；{'id': 'd2d5fadc-1b8b-4d9a-8648-86999b660b5a', 'title': '泰昌绿色发展规划报告第14页', 'category': '绿色低碳资料', 'assetType': 'product_image'}；{'id': '02f0da52-f5c6-422f-9834-fc4fb415e0f9', 'title': '泰昌绿色发展规划报告第13页', 'category': '绿色低碳资料', 'assetType': 'product_image'}；{'id': 'd2282a28-42b6-42a2-8c29-9eb41295fb14', 'title': '泰昌绿色发展规划报告第12页', 'category': '绿色低碳资料', 'assetType': 'product_image'}"
+      },
+      "changed_section_count": 0,
+      "replacement_count": 0,
+      "unresolved_placeholder_count": 0,
+      "unresolved_placeholders": [],
+      "missing_formal_required_fields": [
+        {
+          "key": "total_bid_price",
+          "label": "投标总价"
+        },
+        {
+          "key": "total_bid_price_upper",
+          "label": "投标总价大写"
+        },
+        {
+          "key": "tax_rate",
+          "label": "税率"
+        },
+        {
+          "key": "bid_bond_amount",
+          "label": "投标保证金金额"
+        },
+        {
+          "key": "bid_bond_form",
+          "label": "投标保证金形式"
+        },
+        {
+          "key": "delivery_period",
+          "label": "交货期承诺"
+        },
+        {
+          "key": "warranty_period",
+          "label": "质保期承诺"
+        },
+        {
+          "key": "bid_validity_days",
+          "label": "投标有效期"
+        },
+        {
+          "key": "authorized_representative",
+          "label": "授权代表"
+        },
+        {
+          "key": "authorized_representative_id",
+          "label": "授权代表身份证号"
+        },
+        {
+          "key": "signature_date",
+          "label": "签署日期"
+        }
+      ],
+      "section_application_summary": [
+        {
+          "sectionId": "264e9dd1-3cc7-4ee4-9251-ef973c629c27",
+          "sectionTitle": "投标函及法定格式文件",
+          "fieldCount": 3,
+          "confirmedFieldCount": 2,
+          "missingFormalRequiredCount": 1,
+          "missingFormalRequiredFields": [
+            {
+              "key": "total_bid_price",
+              "label": "投标总价",
+              "status": "customer_required"
+            }
+          ],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": "845a2776-244b-4858-a51e-ab061be07955",
+          "sectionTitle": "法定代表人身份证明及授权委托书",
+          "fieldCount": 2,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 1,
+          "missingFormalRequiredFields": [
+            {
+              "key": "authorized_representative",
+              "label": "授权代表",
+              "status": "customer_required"
+            }
+          ],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": "94f534f8-3bf8-4bad-8de6-26da222af6a4",
+          "sectionTitle": "商务响应文件",
+          "fieldCount": 1,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": [
+            "含招标要求候选，需客户确认后才能写入本次投标响应。",
+            "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。"
+          ]
+        },
+        {
+          "sectionId": "bedb004f-2344-4a9c-a06b-612ea3816365",
+          "sectionTitle": "（一）商务偏差表",
+          "fieldCount": 1,
+          "confirmedFieldCount": 0,
+          "missingFormalRequiredCount": 1,
+          "missingFormalRequiredFields": [
+            {
+              "key": "bid_bond_amount",
+              "label": "投标保证金金额",
+              "status": "customer_required"
+            }
+          ],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": "b3e4594b-c107-47f0-8587-dc79bc4bbcaa",
+          "sectionTitle": "投标保证金",
+          "fieldCount": 1,
+          "confirmedFieldCount": 0,
+          "missingFormalRequiredCount": 1,
+          "missingFormalRequiredFields": [
+            {
+              "key": "bid_bond_amount",
+              "label": "投标保证金金额",
+              "status": "customer_required"
+            }
+          ],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": "6966a5d3-43b3-4df0-ad2c-a1d020329027",
+          "sectionTitle": "符合招标文件投标人资格要求的证明文件",
+          "fieldCount": 1,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": "60bd57f7-cc20-4a00-a271-88195015422e",
+          "sectionTitle": "技术评分支撑材料",
+          "fieldCount": 1,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": "490b2695-be74-4d05-abc7-a106276b0e0a",
+          "sectionTitle": "技术响应文件",
+          "fieldCount": 10,
+          "confirmedFieldCount": 10,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": [
+            "含招标要求候选，需客户确认后才能写入本次投标响应。",
+            "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。",
+            "偏差表候选不自动生成无偏差结论。"
+          ]
+        },
+        {
+          "sectionId": "ec6e0c99-b72d-4d49-961d-db4a5f329b37",
+          "sectionTitle": "技术偏差表",
+          "fieldCount": 2,
+          "confirmedFieldCount": 2,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": [
+            "含招标要求候选，需客户确认后才能写入本次投标响应。",
+            "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。",
+            "偏差表候选不自动生成无偏差结论。"
+          ]
+        },
+        {
+          "sectionId": "c4f8afc5-3127-430a-9d49-5d651e9d3dc2",
+          "sectionTitle": "业绩文件",
+          "fieldCount": 1,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": "d4d9161f-3d00-4a84-bd74-cf5d80bc3c56",
+          "sectionTitle": "技术特性参数表",
+          "fieldCount": 2,
+          "confirmedFieldCount": 2,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": [
+            "含招标要求候选，需客户确认后才能写入本次投标响应。",
+            "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。"
+          ]
+        },
+        {
+          "sectionId": "8ee6d00b-3590-4706-ba4e-52107ca2dfe1",
+          "sectionTitle": "产品制造与质量控制",
+          "fieldCount": 3,
+          "confirmedFieldCount": 3,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": "bf7fbe66-c062-4728-94f7-d06ef2c83e35",
+          "sectionTitle": "供货组织与交付保障",
+          "fieldCount": 1,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": "603917aa-740f-4fd9-a79e-a409cd491834",
+          "sectionTitle": "报价文件及货物清单",
+          "fieldCount": 5,
+          "confirmedFieldCount": 4,
+          "missingFormalRequiredCount": 1,
+          "missingFormalRequiredFields": [
+            {
+              "key": "total_bid_price",
+              "label": "投标总价",
+              "status": "customer_required"
+            }
+          ],
+          "boundaryWarnings": [
+            "含招标要求候选，需客户确认后才能写入本次投标响应。",
+            "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。"
+          ]
+        },
+        {
+          "sectionId": "ad06de1f-cfc8-49fd-92e3-613c6d30d0fe",
+          "sectionTitle": "附件清单及页码索引",
+          "fieldCount": 4,
+          "confirmedFieldCount": 4,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": [
+            "含招标要求候选，需客户确认后才能写入本次投标响应。",
+            "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。",
+            "偏差表候选不自动生成无偏差结论。"
+          ]
+        },
+        {
+          "sectionId": null,
+          "sectionTitle": "产品参数",
+          "fieldCount": 1,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": null,
+          "sectionTitle": "企业能力展示",
+          "fieldCount": 1,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": null,
+          "sectionTitle": "封面",
+          "fieldCount": 4,
+          "confirmedFieldCount": 4,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": [
+            "含招标要求候选，需客户确认后才能写入本次投标响应。",
+            "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。"
+          ]
+        },
+        {
+          "sectionId": null,
+          "sectionTitle": "检验报告",
+          "fieldCount": 2,
+          "confirmedFieldCount": 2,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": null,
+          "sectionTitle": "正文页眉",
+          "fieldCount": 1,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": null,
+          "sectionTitle": "目录",
+          "fieldCount": 1,
+          "confirmedFieldCount": 1,
+          "missingFormalRequiredCount": 0,
+          "missingFormalRequiredFields": [],
+          "boundaryWarnings": []
+        },
+        {
+          "sectionId": null,
+          "sectionTitle": "签章页",
+          "fieldCount": 1,
+          "confirmedFieldCount": 0,
+          "missingFormalRequiredCount": 1,
+          "missingFormalRequiredFields": [
+            {
+              "key": "authorized_representative",
+              "label": "授权代表",
+              "status": "customer_required"
+            }
+          ],
+          "boundaryWarnings": []
+        }
+      ],
+      "export_gate": {
+        "ready": false,
+        "sectionCount": 22,
+        "confirmedSectionCount": 19,
+        "unresolvedPlaceholderCount": 0,
+        "unresolvedPlaceholders": [],
+        "missingFormalRequiredFields": [
+          {
+            "key": "total_bid_price",
+            "label": "投标总价"
+          },
+          {
+            "key": "total_bid_price_upper",
+            "label": "投标总价大写"
+          },
+          {
+            "key": "tax_rate",
+            "label": "税率"
+          },
+          {
+            "key": "bid_bond_amount",
+            "label": "投标保证金金额"
+          },
+          {
+            "key": "bid_bond_form",
+            "label": "投标保证金形式"
+          },
+          {
+            "key": "delivery_period",
+            "label": "交货期承诺"
+          },
+          {
+            "key": "warranty_period",
+            "label": "质保期承诺"
+          },
+          {
+            "key": "bid_validity_days",
+            "label": "投标有效期"
+          },
+          {
+            "key": "authorized_representative",
+            "label": "授权代表"
+          },
+          {
+            "key": "authorized_representative_id",
+            "label": "授权代表身份证号"
+          },
+          {
+            "key": "signature_date",
+            "label": "签署日期"
+          }
+        ],
+        "section_application_summary": [
+          {
+            "sectionId": "264e9dd1-3cc7-4ee4-9251-ef973c629c27",
+            "sectionTitle": "投标函及法定格式文件",
+            "fieldCount": 3,
+            "confirmedFieldCount": 2,
+            "missingFormalRequiredCount": 1,
+            "missingFormalRequiredFields": [
+              {
+                "key": "total_bid_price",
+                "label": "投标总价",
+                "status": "customer_required"
+              }
+            ],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": "845a2776-244b-4858-a51e-ab061be07955",
+            "sectionTitle": "法定代表人身份证明及授权委托书",
+            "fieldCount": 2,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 1,
+            "missingFormalRequiredFields": [
+              {
+                "key": "authorized_representative",
+                "label": "授权代表",
+                "status": "customer_required"
+              }
+            ],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": "94f534f8-3bf8-4bad-8de6-26da222af6a4",
+            "sectionTitle": "商务响应文件",
+            "fieldCount": 1,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": [
+              "含招标要求候选，需客户确认后才能写入本次投标响应。",
+              "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。"
+            ]
+          },
+          {
+            "sectionId": "bedb004f-2344-4a9c-a06b-612ea3816365",
+            "sectionTitle": "（一）商务偏差表",
+            "fieldCount": 1,
+            "confirmedFieldCount": 0,
+            "missingFormalRequiredCount": 1,
+            "missingFormalRequiredFields": [
+              {
+                "key": "bid_bond_amount",
+                "label": "投标保证金金额",
+                "status": "customer_required"
+              }
+            ],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": "b3e4594b-c107-47f0-8587-dc79bc4bbcaa",
+            "sectionTitle": "投标保证金",
+            "fieldCount": 1,
+            "confirmedFieldCount": 0,
+            "missingFormalRequiredCount": 1,
+            "missingFormalRequiredFields": [
+              {
+                "key": "bid_bond_amount",
+                "label": "投标保证金金额",
+                "status": "customer_required"
+              }
+            ],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": "6966a5d3-43b3-4df0-ad2c-a1d020329027",
+            "sectionTitle": "符合招标文件投标人资格要求的证明文件",
+            "fieldCount": 1,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": "60bd57f7-cc20-4a00-a271-88195015422e",
+            "sectionTitle": "技术评分支撑材料",
+            "fieldCount": 1,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": "490b2695-be74-4d05-abc7-a106276b0e0a",
+            "sectionTitle": "技术响应文件",
+            "fieldCount": 10,
+            "confirmedFieldCount": 10,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": [
+              "含招标要求候选，需客户确认后才能写入本次投标响应。",
+              "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。",
+              "偏差表候选不自动生成无偏差结论。"
+            ]
+          },
+          {
+            "sectionId": "ec6e0c99-b72d-4d49-961d-db4a5f329b37",
+            "sectionTitle": "技术偏差表",
+            "fieldCount": 2,
+            "confirmedFieldCount": 2,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": [
+              "含招标要求候选，需客户确认后才能写入本次投标响应。",
+              "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。",
+              "偏差表候选不自动生成无偏差结论。"
+            ]
+          },
+          {
+            "sectionId": "c4f8afc5-3127-430a-9d49-5d651e9d3dc2",
+            "sectionTitle": "业绩文件",
+            "fieldCount": 1,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": "d4d9161f-3d00-4a84-bd74-cf5d80bc3c56",
+            "sectionTitle": "技术特性参数表",
+            "fieldCount": 2,
+            "confirmedFieldCount": 2,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": [
+              "含招标要求候选，需客户确认后才能写入本次投标响应。",
+              "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。"
+            ]
+          },
+          {
+            "sectionId": "8ee6d00b-3590-4706-ba4e-52107ca2dfe1",
+            "sectionTitle": "产品制造与质量控制",
+            "fieldCount": 3,
+            "confirmedFieldCount": 3,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": "bf7fbe66-c062-4728-94f7-d06ef2c83e35",
+            "sectionTitle": "供货组织与交付保障",
+            "fieldCount": 1,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": "603917aa-740f-4fd9-a79e-a409cd491834",
+            "sectionTitle": "报价文件及货物清单",
+            "fieldCount": 5,
+            "confirmedFieldCount": 4,
+            "missingFormalRequiredCount": 1,
+            "missingFormalRequiredFields": [
+              {
+                "key": "total_bid_price",
+                "label": "投标总价",
+                "status": "customer_required"
+              }
+            ],
+            "boundaryWarnings": [
+              "含招标要求候选，需客户确认后才能写入本次投标响应。",
+              "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。"
+            ]
+          },
+          {
+            "sectionId": "ad06de1f-cfc8-49fd-92e3-613c6d30d0fe",
+            "sectionTitle": "附件清单及页码索引",
+            "fieldCount": 4,
+            "confirmedFieldCount": 4,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": [
+              "含招标要求候选，需客户确认后才能写入本次投标响应。",
+              "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。",
+              "偏差表候选不自动生成无偏差结论。"
+            ]
+          },
+          {
+            "sectionId": null,
+            "sectionTitle": "产品参数",
+            "fieldCount": 1,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": null,
+            "sectionTitle": "企业能力展示",
+            "fieldCount": 1,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": null,
+            "sectionTitle": "封面",
+            "fieldCount": 4,
+            "confirmedFieldCount": 4,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": [
+              "含招标要求候选，需客户确认后才能写入本次投标响应。",
+              "存在不可作为泰昌企业事实的来源，禁止当作企业资质或能力证明。"
+            ]
+          },
+          {
+            "sectionId": null,
+            "sectionTitle": "检验报告",
+            "fieldCount": 2,
+            "confirmedFieldCount": 2,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": null,
+            "sectionTitle": "正文页眉",
+            "fieldCount": 1,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": null,
+            "sectionTitle": "目录",
+            "fieldCount": 1,
+            "confirmedFieldCount": 1,
+            "missingFormalRequiredCount": 0,
+            "missingFormalRequiredFields": [],
+            "boundaryWarnings": []
+          },
+          {
+            "sectionId": null,
+            "sectionTitle": "签章页",
+            "fieldCount": 1,
+            "confirmedFieldCount": 0,
+            "missingFormalRequiredCount": 1,
+            "missingFormalRequiredFields": [
+              {
+                "key": "authorized_representative",
+                "label": "授权代表",
+                "status": "customer_required"
+              }
+            ],
+            "boundaryWarnings": []
+          }
+        ]
+      },
+      "ready_for_formal_export": false,
+      "changed_sections": []
+    },
+    "final_summary": {
+      "totalFields": 35,
+      "systemRecognized": 5,
+      "enterpriseLibrary": 9,
+      "customerRequired": 10,
+      "manualConfirm": 11,
+      "formalRequiredGaps": 16,
+      "readonlyFirst": true,
+      "affectsSectionsSnapshotExport": true,
+      "readyForFormalExport": false,
+      "unresolvedPlaceholderCount": 0
+    }
+  },
+  "sections": {
+    "target_count": 88,
+    "generated_count": 88,
+    "failed_count": 0,
+    "placeholder_replacements": 157,
+    "results": [
+      {
+        "order_index": 1,
+        "title": "投标函及法定格式文件",
+        "status": "generated",
+        "placeholder_replacements": 1,
+        "section_id": "264e9dd1-3cc7-4ee4-9251-ef973c629c27",
+        "old_section_id": "264e9dd1-3cc7-4ee4-9251-ef973c629c27",
+        "chars": 2887,
+        "words": 2185,
+        "chunks": 1691,
+        "content_length": 3009
+      },
+      {
+        "order_index": 5,
+        "title": "商务响应文件",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "94f534f8-3bf8-4bad-8de6-26da222af6a4",
+        "old_section_id": "94f534f8-3bf8-4bad-8de6-26da222af6a4",
+        "chars": 2914,
+        "words": 2190,
+        "chunks": 1715,
+        "content_length": 3018
+      },
+      {
+        "order_index": 6,
+        "title": "（一）商务偏差表",
+        "status": "generated",
+        "placeholder_replacements": 1,
+        "section_id": "bedb004f-2344-4a9c-a06b-612ea3816365",
+        "old_section_id": "bedb004f-2344-4a9c-a06b-612ea3816365",
+        "chars": 1771,
+        "words": 1302,
+        "chunks": 1055,
+        "content_length": 1825
+      },
+      {
+        "order_index": 7,
+        "title": "投标保证保险",
+        "status": "generated",
+        "placeholder_replacements": 0,
+        "section_id": "698cd9fe-9e0b-4b3f-b181-18754a565184",
+        "old_section_id": "698cd9fe-9e0b-4b3f-b181-18754a565184",
+        "chars": 925,
+        "words": 792,
+        "chunks": 519,
+        "content_length": 953
+      },
+      {
+        "order_index": 8,
+        "title": "投标保证保险（电缆保护管 CPVC）",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "3e3e151e-9794-42cb-a386-484d0541cc48",
+        "old_section_id": "3e3e151e-9794-42cb-a386-484d0541cc48",
+        "chars": 1934,
+        "words": 1490,
+        "chunks": 1117,
+        "content_length": 2015
+      },
+      {
+        "order_index": 9,
+        "title": "投标保证保险（电缆保护管 MPP）",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "60cb4030-2ed8-46a7-b0ab-f173fa64253f",
+        "old_section_id": "60cb4030-2ed8-46a7-b0ab-f173fa64253f",
+        "chars": 1554,
+        "words": 1169,
+        "chunks": 883,
+        "content_length": 1603
+      },
+      {
+        "order_index": 10,
+        "title": "投标保证保险（电 缆保护管 NHAP）",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "fe9773c5-a3de-4c6c-8420-ec68a2d7f6c6",
+        "old_section_id": "fe9773c5-a3de-4c6c-8420-ec68a2d7f6c6",
+        "chars": 1291,
+        "words": 949,
+        "chunks": 690,
+        "content_length": 1329
+      },
+      {
+        "order_index": 11,
+        "title": "补充文件",
+        "status": "generated",
+        "placeholder_replacements": 1,
+        "section_id": "414945fb-96ee-43fc-8ffc-b0c527a3323b",
+        "old_section_id": "414945fb-96ee-43fc-8ffc-b0c527a3323b",
+        "chars": 2858,
+        "words": 2174,
+        "chunks": 1687,
+        "content_length": 2951
+      },
+      {
+        "order_index": 12,
+        "title": "投标保证金",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "b3e4594b-c107-47f0-8587-dc79bc4bbcaa",
+        "old_section_id": "b3e4594b-c107-47f0-8587-dc79bc4bbcaa",
+        "chars": 1628,
+        "words": 1349,
+        "chunks": 974,
+        "content_length": 1680
+      },
+      {
+        "order_index": 13,
+        "title": "保险购买凭证",
+        "status": "generated",
+        "placeholder_replacements": 1,
+        "section_id": "546994ab-ea64-41e7-866a-4e2289aa1457",
+        "old_section_id": "546994ab-ea64-41e7-866a-4e2289aa1457",
+        "chars": 1246,
+        "words": 971,
+        "chunks": 732,
+        "content_length": 1294
+      },
+      {
+        "order_index": 14,
+        "title": "保险购买凭证-电缆保护管 CPVC",
+        "status": "generated",
+        "placeholder_replacements": 1,
+        "section_id": "5c3e9d18-23f7-4418-813f-cf4a6b3d61c0",
+        "old_section_id": "5c3e9d18-23f7-4418-813f-cf4a6b3d61c0",
+        "chars": 1676,
+        "words": 1256,
+        "chunks": 985,
+        "content_length": 1729
+      },
+      {
+        "order_index": 15,
+        "title": "保险购买凭证-电缆保护管 MPP",
+        "status": "generated",
+        "placeholder_replacements": 1,
+        "section_id": "f9940e3b-e5c6-4a6a-82c8-1eb16b16f2d1",
+        "old_section_id": "f9940e3b-e5c6-4a6a-82c8-1eb16b16f2d1",
+        "chars": 3227,
+        "words": 2183,
+        "chunks": 1855,
+        "content_length": 3321
+      },
+      {
+        "order_index": 16,
+        "title": "保险购买凭证-电缆保护管 NHAP",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "aeb63925-1413-4393-81b7-7403bc0d6541",
+        "old_section_id": "aeb63925-1413-4393-81b7-7403bc0d6541",
+        "chars": 2181,
+        "words": 1725,
+        "chunks": 1258,
+        "content_length": 2232
+      },
+      {
+        "order_index": 17,
+        "title": "银行基本账户证明扫描件",
+        "status": "generated",
+        "placeholder_replacements": 2,
+        "section_id": "dfe28301-c53b-4990-9e79-2463ed0f8c43",
+        "old_section_id": "dfe28301-c53b-4990-9e79-2463ed0f8c43",
+        "chars": 1577,
+        "words": 1357,
+        "chunks": 908,
+        "content_length": 1627
+      },
+      {
+        "order_index": 18,
+        "title": "投标保证金明细表",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "5e0b1ee4-ad1b-4d8d-a50a-c580a7e67852",
+        "old_section_id": "5e0b1ee4-ad1b-4d8d-a50a-c580a7e67852",
+        "chars": 1955,
+        "words": 1385,
+        "chunks": 1198,
+        "content_length": 2044
+      },
+      {
+        "order_index": 21,
+        "title": "企业营业执照（或事业单位法人证书或其他组织登记证书）",
+        "status": "generated",
+        "placeholder_replacements": 1,
+        "section_id": "c6363be8-7c0f-4742-8ec6-89fce723c0fa",
+        "old_section_id": "c6363be8-7c0f-4742-8ec6-89fce723c0fa",
+        "chars": 1525,
+        "words": 1091,
+        "chunks": 848,
+        "content_length": 1573
+      },
+      {
+        "order_index": 22,
+        "title": "有效的税务登记证明",
+        "status": "generated",
+        "placeholder_replacements": 2,
+        "section_id": "6a3d2af9-3d80-428a-8cd1-3a013d72c857",
+        "old_section_id": "6a3d2af9-3d80-428a-8cd1-3a013d72c857",
+        "chars": 1715,
+        "words": 1392,
+        "chunks": 1005,
+        "content_length": 1772
+      },
+      {
+        "order_index": 23,
+        "title": "符合招标文件投标人资格要求的证明文件",
+        "status": "generated",
+        "placeholder_replacements": 1,
+        "section_id": "6966a5d3-43b3-4df0-ad2c-a1d020329027",
+        "old_section_id": "6966a5d3-43b3-4df0-ad2c-a1d020329027",
+        "chars": 3384,
+        "words": 2189,
+        "chunks": 1886,
+        "content_length": 3514
+      },
+      {
+        "order_index": 24,
+        "title": "符合投标邀请书投标人资格要求的证明文件（更新或补充）",
+        "status": "generated",
+        "placeholder_replacements": 1,
+        "section_id": "911dbffb-d8d1-4fc4-8604-e401a60cd1d2",
+        "old_section_id": "911dbffb-d8d1-4fc4-8604-e401a60cd1d2",
+        "chars": 3617,
+        "words": 2693,
+        "chunks": 2068,
+        "content_length": 3718
+      },
+      {
+        "order_index": 25,
+        "title": "资格预审结果通知书",
+        "status": "generated",
+        "placeholder_replacements": 2,
+        "section_id": "13527658-c2f3-46f0-b920-7d7b7c57ed19",
+        "old_section_id": "13527658-c2f3-46f0-b920-7d7b7c57ed19",
+        "chars": 1442,
+        "words": 1068,
+        "chunks": 829,
+        "content_length": 1479
+      },
+      {
+        "order_index": 26,
+        "title": "资质业绩凭证单",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "b77bb8b0-a9dc-457e-bfad-7b9774dc4271",
+        "old_section_id": "b77bb8b0-a9dc-457e-bfad-7b9774dc4271",
+        "chars": 2031,
+        "words": 1314,
+        "chunks": 1184,
+        "content_length": 2078
+      },
+      {
+        "order_index": 27,
+        "title": "认证证书",
+        "status": "generated",
+        "placeholder_replacements": 2,
+        "section_id": "52fda0c1-3c11-474e-9e50-73f093ecc133",
+        "old_section_id": "52fda0c1-3c11-474e-9e50-73f093ecc133",
+        "chars": 2338,
+        "words": 1422,
+        "chunks": 1262,
+        "content_length": 2431
+      },
+      {
+        "order_index": 28,
+        "title": "监督审核合格通知书",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "78ba93a9-b166-4d1b-a87d-330a97cf2897",
+        "old_section_id": "78ba93a9-b166-4d1b-a87d-330a97cf2897",
+        "chars": 1162,
+        "words": 758,
+        "chunks": 636,
+        "content_length": 1200
+      },
+      {
+        "order_index": 29,
+        "title": "质量管理体系认证证书",
+        "status": "generated",
+        "placeholder_replacements": 1,
+        "section_id": "c38669e9-1d3f-4906-9cbd-46be6734fad1",
+        "old_section_id": "c38669e9-1d3f-4906-9cbd-46be6734fad1",
+        "chars": 536,
+        "words": 334,
+        "chunks": 273,
+        "content_length": 550
+      },
+      {
+        "order_index": 30,
+        "title": "职业健康安全管理体系认证证书",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "a83f00bb-a353-4158-86fb-952743ec6baa",
+        "old_section_id": "a83f00bb-a353-4158-86fb-952743ec6baa",
+        "chars": 1375,
+        "words": 1060,
+        "chunks": 723,
+        "content_length": 1424
+      },
+      {
+        "order_index": 31,
+        "title": "环境管理体系认证证书",
+        "status": "generated",
+        "placeholder_replacements": 2,
+        "section_id": "86582cf8-4891-4b41-981a-8b4302a58228",
+        "old_section_id": "86582cf8-4891-4b41-981a-8b4302a58228",
+        "chars": 1992,
+        "words": 1488,
+        "chunks": 1078,
+        "content_length": 2052
+      },
+      {
+        "order_index": 32,
+        "title": "能源管理体系认证证书",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "a72575d7-27c8-4fce-971f-205fbfd5ca48",
+        "old_section_id": "a72575d7-27c8-4fce-971f-205fbfd5ca48",
+        "chars": 1740,
+        "words": 1330,
+        "chunks": 956,
+        "content_length": 1829
+      },
+      {
+        "order_index": 33,
+        "title": "银行资信证明",
+        "status": "generated",
+        "placeholder_replacements": 2,
+        "section_id": "f2b12af9-75a9-464c-a1fb-0366e8579545",
+        "old_section_id": "f2b12af9-75a9-464c-a1fb-0366e8579545",
+        "chars": 1740,
+        "words": 1326,
+        "chunks": 1009,
+        "content_length": 1809
+      },
+      {
+        "order_index": 34,
+        "title": "厂房租赁合同及产权证明",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "73dd155e-f869-4bf4-92e8-3a78ea3f719a",
+        "old_section_id": "73dd155e-f869-4bf4-92e8-3a78ea3f719a",
+        "chars": 854,
+        "words": 652,
+        "chunks": 482,
+        "content_length": 895
+      },
+      {
+        "order_index": 35,
+        "title": "查询报告及截图",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "31fcb4b3-1344-499e-a52e-6a37a68e8ea1",
+        "old_section_id": "31fcb4b3-1344-499e-a52e-6a37a68e8ea1",
+        "chars": 2178,
+        "words": 1769,
+        "chunks": 1271,
+        "content_length": 2251
+      },
+      {
+        "order_index": 36,
+        "title": "“国家企业信用信息公示系统”",
+        "status": "generated",
+        "placeholder_replacements": 2,
+        "section_id": "c3ab9399-f817-464a-a120-07d727c4ea40",
+        "old_section_id": "c3ab9399-f817-464a-a120-07d727c4ea40",
+        "chars": 579,
+        "words": 483,
+        "chunks": 317,
+        "content_length": 597
+      },
+      {
+        "order_index": 37,
+        "title": "（1）营业执照信息",
+        "status": "generated",
+        "placeholder_replacements": 0,
+        "section_id": "4ef93d40-305b-482d-b7e0-1c17a03ba576",
+        "old_section_id": "4ef93d40-305b-482d-b7e0-1c17a03ba576",
+        "chars": 1774,
+        "words": 1398,
+        "chunks": 958,
+        "content_length": 1843
+      },
+      {
+        "order_index": 38,
+        "title": "（2）清算信息",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "509c2102-cae1-49f0-8509-f940d608990f",
+        "old_section_id": "509c2102-cae1-49f0-8509-f940d608990f",
+        "chars": 2440,
+        "words": 1819,
+        "chunks": 1408,
+        "content_length": 2496
+      },
+      {
+        "order_index": 39,
+        "title": "（3）行政处罚信息",
+        "status": "generated",
+        "placeholder_replacements": 1,
+        "section_id": "f07997b0-9504-4a56-8b45-3a363fbd9755",
+        "old_section_id": "f07997b0-9504-4a56-8b45-3a363fbd9755",
+        "chars": 704,
+        "words": 571,
+        "chunks": 370,
+        "content_length": 728
+      },
+      {
+        "order_index": 40,
+        "title": "（4）纳入经营异常名录信息",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "e2979737-6495-440a-85d7-6df2e52a6d08",
+        "old_section_id": "e2979737-6495-440a-85d7-6df2e52a6d08",
+        "chars": 1739,
+        "words": 1437,
+        "chunks": 972,
+        "content_length": 1800
+      },
+      {
+        "order_index": 41,
+        "title": "（5）纳入严重违反失信企业名单（黑名单）信息",
+        "status": "generated",
+        "placeholder_replacements": 1,
+        "section_id": "c76621e7-bc26-4eb4-9aaf-fa96ac850b75",
+        "old_section_id": "c76621e7-bc26-4eb4-9aaf-fa96ac850b75",
+        "chars": 1619,
+        "words": 1229,
+        "chunks": 875,
+        "content_length": 1675
+      },
+      {
+        "order_index": 42,
+        "title": "（6）股东及出资信息",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "42033386-d362-457a-8a7a-8467253610ac",
+        "old_section_id": "42033386-d362-457a-8a7a-8467253610ac",
+        "chars": 1339,
+        "words": 904,
+        "chunks": 736,
+        "content_length": 1394
+      },
+      {
+        "order_index": 43,
+        "title": "（7） “国家企业信用信息公示系统”",
+        "status": "generated",
+        "placeholder_replacements": 1,
+        "section_id": "5278e8cf-7210-49e3-8f5a-0fc5392817b9",
+        "old_section_id": "5278e8cf-7210-49e3-8f5a-0fc5392817b9",
+        "chars": 1258,
+        "words": 915,
+        "chunks": 703,
+        "content_length": 1316
+      },
+      {
+        "order_index": 44,
+        "title": "信用中国（ www.creditchina.gov.cn ）的查询结果",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "9a88ec10-8ac2-43a7-8ed2-4080ab493aaa",
+        "old_section_id": "9a88ec10-8ac2-43a7-8ed2-4080ab493aaa",
+        "chars": 1965,
+        "words": 1371,
+        "chunks": 1062,
+        "content_length": 2032
+      },
+      {
+        "order_index": 45,
+        "title": "财务信息、股权结构说明书及支持证明材料",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "62b6b9b0-4c52-433f-9ce9-6cf45e55f5fc",
+        "old_section_id": "62b6b9b0-4c52-433f-9ce9-6cf45e55f5fc",
+        "chars": 2024,
+        "words": 1392,
+        "chunks": 1144,
+        "content_length": 2072
+      },
+      {
+        "order_index": 46,
+        "title": "近三年审计报告",
+        "status": "generated",
+        "placeholder_replacements": 1,
+        "section_id": "d947f68a-1030-478b-b818-019e4a82f5aa",
+        "old_section_id": "d947f68a-1030-478b-b818-019e4a82f5aa",
+        "chars": 713,
+        "words": 414,
+        "chunks": 383,
+        "content_length": 727
+      },
+      {
+        "order_index": 47,
+        "title": "股权证明文件",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "a3fc9608-2a9b-4f80-876b-2a034c21b8ff",
+        "old_section_id": "a3fc9608-2a9b-4f80-876b-2a034c21b8ff",
+        "chars": 1276,
+        "words": 972,
+        "chunks": 729,
+        "content_length": 1325
+      },
+      {
+        "order_index": 48,
+        "title": "招标文件第三章评标办法前附表之三“商务评分标准”涉及的支撑材料",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "d83551bc-696d-4719-a35f-632bd6c2bf48",
+        "old_section_id": "d83551bc-696d-4719-a35f-632bd6c2bf48",
+        "chars": 3464,
+        "words": 2723,
+        "chunks": 1957,
+        "content_length": 3609
+      },
+      {
+        "order_index": 49,
+        "title": "履约能力评价",
+        "status": "generated",
+        "placeholder_replacements": 2,
+        "section_id": "86d7644d-14c8-43ee-94ff-3be3d62e971a",
+        "old_section_id": "86d7644d-14c8-43ee-94ff-3be3d62e971a",
+        "chars": 2857,
+        "words": 2167,
+        "chunks": 1625,
+        "content_length": 2957
+      },
+      {
+        "order_index": 50,
+        "title": "经营状况",
+        "status": "generated",
+        "placeholder_replacements": 1,
+        "section_id": "0444f14d-2f33-420e-8acb-b6aae4aabc93",
+        "old_section_id": "0444f14d-2f33-420e-8acb-b6aae4aabc93",
+        "chars": 2229,
+        "words": 1569,
+        "chunks": 1224,
+        "content_length": 2277
+      },
+      {
+        "order_index": 52,
+        "title": "技术响应文件",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "490b2695-be74-4d05-abc7-a106276b0e0a",
+        "old_section_id": "490b2695-be74-4d05-abc7-a106276b0e0a",
+        "chars": 6634,
+        "words": 4619,
+        "chunks": 3964,
+        "content_length": 6951
+      },
+      {
+        "order_index": 54,
+        "title": "专项投标文件",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "5bd0fbf4-b639-43d6-8cbd-c986c6c5fe2c",
+        "old_section_id": "5bd0fbf4-b639-43d6-8cbd-c986c6c5fe2c",
+        "chars": 9308,
+        "words": 6266,
+        "chunks": 5551,
+        "content_length": 9663
+      },
+      {
+        "order_index": 55,
+        "title": "业绩文件",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "c4f8afc5-3127-430a-9d49-5d651e9d3dc2",
+        "old_section_id": "c4f8afc5-3127-430a-9d49-5d651e9d3dc2",
+        "chars": 3309,
+        "words": 2214,
+        "chunks": 1959,
+        "content_length": 3393
+      },
+      {
+        "order_index": 56,
+        "title": "2.0 平台业绩汇总查询截图",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "65e962a2-3951-4820-93c6-1f48e20d784c",
+        "old_section_id": "65e962a2-3951-4820-93c6-1f48e20d784c",
+        "chars": 3081,
+        "words": 2119,
+        "chunks": 1801,
+        "content_length": 3150
+      },
+      {
+        "order_index": 57,
+        "title": "资质业绩凭证 单",
+        "status": "generated",
+        "placeholder_replacements": 0,
+        "section_id": "7e424f9d-8865-403a-baa5-73fea812669e",
+        "old_section_id": "7e424f9d-8865-403a-baa5-73fea812669e",
+        "chars": 1709,
+        "words": 966,
+        "chunks": 934,
+        "content_length": 1765
+      },
+      {
+        "order_index": 58,
+        "title": "新增业绩合同",
+        "status": "generated",
+        "placeholder_replacements": 0,
+        "section_id": "d49ad687-5441-4b31-96d6-55b4d2f3e5a0",
+        "old_section_id": "d49ad687-5441-4b31-96d6-55b4d2f3e5a0",
+        "chars": 2687,
+        "words": 1953,
+        "chunks": 1565,
+        "content_length": 2760
+      },
+      {
+        "order_index": 59,
+        "title": "产品购销合同",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "e0ddb631-7048-4abe-82eb-dc9e10d46260",
+        "old_section_id": "e0ddb631-7048-4abe-82eb-dc9e10d46260",
+        "chars": 4161,
+        "words": 2842,
+        "chunks": 2465,
+        "content_length": 4345
+      },
+      {
+        "order_index": 60,
+        "title": "同类项目业绩证明材料",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "60ce1e06-1b17-413b-ab1b-61ca001d6126",
+        "old_section_id": "60ce1e06-1b17-413b-ab1b-61ca001d6126",
+        "chars": 3001,
+        "words": 1949,
+        "chunks": 1642,
+        "content_length": 3087
+      },
+      {
+        "order_index": 62,
+        "title": "技术特性参数明细（按物料编码）",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "07624d26-f2c4-41f7-ac33-c9db897747b1",
+        "old_section_id": "07624d26-f2c4-41f7-ac33-c9db897747b1",
+        "chars": 3973,
+        "words": 2355,
+        "chunks": 2352,
+        "content_length": 4034
+      },
+      {
+        "order_index": 64,
+        "title": "符合招标文件投标人资格要求的证明文件",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "2718baaf-f4c6-4222-a800-d21d5b67c8f7",
+        "old_section_id": "2718baaf-f4c6-4222-a800-d21d5b67c8f7",
+        "chars": 4739,
+        "words": 2958,
+        "chunks": 2652,
+        "content_length": 4881
+      },
+      {
+        "order_index": 65,
+        "title": "资格预审结果通知书",
+        "status": "generated",
+        "placeholder_replacements": 1,
+        "section_id": "d6570eae-add2-4790-978b-f548cc6d6aa2",
+        "old_section_id": "d6570eae-add2-4790-978b-f548cc6d6aa2",
+        "chars": 1459,
+        "words": 1074,
+        "chunks": 804,
+        "content_length": 1497
+      },
+      {
+        "order_index": 66,
+        "title": "资质业绩凭证单",
+        "status": "generated",
+        "placeholder_replacements": 1,
+        "section_id": "5613d2de-c818-46e3-8641-e0db4d81e82d",
+        "old_section_id": "5613d2de-c818-46e3-8641-e0db4d81e82d",
+        "chars": 815,
+        "words": 662,
+        "chunks": 465,
+        "content_length": 831
+      },
+      {
+        "order_index": 67,
+        "title": "招标文件第三章评标办法前附表 之四“技术评分标准”涉及的支撑材料",
+        "status": "generated",
+        "placeholder_replacements": 1,
+        "section_id": "23c9f1c1-fef5-46b2-a43c-9e5d8a488a95",
+        "old_section_id": "23c9f1c1-fef5-46b2-a43c-9e5d8a488a95",
+        "chars": 11034,
+        "words": 7820,
+        "chunks": 6482,
+        "content_length": 11484
+      },
+      {
+        "order_index": 68,
+        "title": "创新能力",
+        "status": "generated",
+        "placeholder_replacements": 2,
+        "section_id": "6c82c50e-2ed8-4cfd-9eb6-323aa9957f7e",
+        "old_section_id": "6c82c50e-2ed8-4cfd-9eb6-323aa9957f7e",
+        "chars": 4044,
+        "words": 3218,
+        "chunks": 2388,
+        "content_length": 4179
+      },
+      {
+        "order_index": 69,
+        "title": "专利证书",
+        "status": "generated",
+        "placeholder_replacements": 2,
+        "section_id": "c043f900-235a-4130-b678-d1cbe9137f4c",
+        "old_section_id": "c043f900-235a-4130-b678-d1cbe9137f4c",
+        "chars": 582,
+        "words": 410,
+        "chunks": 288,
+        "content_length": 596
+      },
+      {
+        "order_index": 70,
+        "title": "专利证书",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "cc54a911-0856-4d24-85a0-096783a35574",
+        "old_section_id": "cc54a911-0856-4d24-85a0-096783a35574",
+        "chars": 1595,
+        "words": 1254,
+        "chunks": 877,
+        "content_length": 1629
+      },
+      {
+        "order_index": 71,
+        "title": "中华人民共和国国家版权局计算机软件著作权登记证书",
+        "status": "generated",
+        "placeholder_replacements": 0,
+        "section_id": "f7d52433-ff0a-4e6d-8c08-d02f2915c406",
+        "old_section_id": "f7d52433-ff0a-4e6d-8c08-d02f2915c406",
+        "chars": 2235,
+        "words": 1891,
+        "chunks": 1247,
+        "content_length": 2282
+      },
+      {
+        "order_index": 72,
+        "title": "软件著作权登记证书",
+        "status": "generated",
+        "placeholder_replacements": 0,
+        "section_id": "1fb9353f-11cf-40a1-b56a-b4a21565bb90",
+        "old_section_id": "1fb9353f-11cf-40a1-b56a-b4a21565bb90",
+        "chars": 1232,
+        "words": 1060,
+        "chunks": 678,
+        "content_length": 1257
+      },
+      {
+        "order_index": 73,
+        "title": "原材料组部件改进",
+        "status": "generated",
+        "placeholder_replacements": 1,
+        "section_id": "8f6656f9-6705-498d-9212-42ff7078ace1",
+        "old_section_id": "8f6656f9-6705-498d-9212-42ff7078ace1",
+        "chars": 4332,
+        "words": 3268,
+        "chunks": 2553,
+        "content_length": 4500
+      },
+      {
+        "order_index": 74,
+        "title": "原材料供应商资质文件",
+        "status": "generated",
+        "placeholder_replacements": 0,
+        "section_id": "d59c38d7-168b-4e77-9b63-eeb41f23b6ef",
+        "old_section_id": "d59c38d7-168b-4e77-9b63-eeb41f23b6ef",
+        "chars": 4563,
+        "words": 3270,
+        "chunks": 2574,
+        "content_length": 4697
+      },
+      {
+        "order_index": 75,
+        "title": "自主可控水平",
+        "status": "generated",
+        "placeholder_replacements": 0,
+        "section_id": "90206fc7-01e5-46c5-be39-bf4ddf3c3257",
+        "old_section_id": "90206fc7-01e5-46c5-be39-bf4ddf3c3257",
+        "chars": 4811,
+        "words": 3266,
+        "chunks": 2889,
+        "content_length": 4959
+      },
+      {
+        "order_index": 76,
+        "title": "企业标准-MPP电缆保护管",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "a16f086b-4523-4626-84d3-ff8dfd2cb3b0",
+        "old_section_id": "a16f086b-4523-4626-84d3-ff8dfd2cb3b0",
+        "chars": 4601,
+        "words": 3090,
+        "chunks": 2806,
+        "content_length": 4860
+      },
+      {
+        "order_index": 77,
+        "title": "企业标准-UPVC电缆保护管",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "32866ea8-ea19-4c7b-8867-7ba5105ebd2a",
+        "old_section_id": "32866ea8-ea19-4c7b-8867-7ba5105ebd2a",
+        "chars": 4595,
+        "words": 3214,
+        "chunks": 2720,
+        "content_length": 4810
+      },
+      {
+        "order_index": 78,
+        "title": "人力资源",
+        "status": "generated",
+        "placeholder_replacements": 1,
+        "section_id": "b8a91edb-14e9-47ae-9ecf-975a3d24bbcf",
+        "old_section_id": "b8a91edb-14e9-47ae-9ecf-975a3d24bbcf",
+        "chars": 2052,
+        "words": 1614,
+        "chunks": 1169,
+        "content_length": 2110
+      },
+      {
+        "order_index": 79,
+        "title": "产品制造质量控制",
+        "status": "generated",
+        "placeholder_replacements": 2,
+        "section_id": "9553d884-ba50-43a5-9329-6fbbfaa6c020",
+        "old_section_id": "9553d884-ba50-43a5-9329-6fbbfaa6c020",
+        "chars": 4020,
+        "words": 2967,
+        "chunks": 2456,
+        "content_length": 4185
+      },
+      {
+        "order_index": 80,
+        "title": "未来工厂管理体系认证证书",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "c21fa9b1-81ec-4399-b3f4-08e546e19397",
+        "old_section_id": "c21fa9b1-81ec-4399-b3f4-08e546e19397",
+        "chars": 4579,
+        "words": 3348,
+        "chunks": 2623,
+        "content_length": 4682
+      },
+      {
+        "order_index": 81,
+        "title": "智能工厂管理体系认证证书",
+        "status": "generated",
+        "placeholder_replacements": 0,
+        "section_id": "429539d0-32a2-485f-a058-b7a23dc2e898",
+        "old_section_id": "429539d0-32a2-485f-a058-b7a23dc2e898",
+        "chars": 2421,
+        "words": 1844,
+        "chunks": 1353,
+        "content_length": 2477
+      },
+      {
+        "order_index": 82,
+        "title": "数字化车间管理体系认证证书",
+        "status": "generated",
+        "placeholder_replacements": 0,
+        "section_id": "0538fdca-31a3-44b6-8ea1-1533d8eb2c32",
+        "old_section_id": "0538fdca-31a3-44b6-8ea1-1533d8eb2c32",
+        "chars": 2864,
+        "words": 2074,
+        "chunks": 1682,
+        "content_length": 2919
+      },
+      {
+        "order_index": 83,
+        "title": "制度及体系建设 报告",
+        "status": "generated",
+        "placeholder_replacements": 2,
+        "section_id": "1235299d-6d60-4359-8e08-b22a97259bef",
+        "old_section_id": "1235299d-6d60-4359-8e08-b22a97259bef",
+        "chars": 3416,
+        "words": 2684,
+        "chunks": 2042,
+        "content_length": 3581
+      },
+      {
+        "order_index": 84,
+        "title": "绿电绿证",
+        "status": "generated",
+        "placeholder_replacements": 0,
+        "section_id": "f489b073-6387-4c13-840e-78e95100df26",
+        "old_section_id": "f489b073-6387-4c13-840e-78e95100df26",
+        "chars": 2350,
+        "words": 1912,
+        "chunks": 1320,
+        "content_length": 2454
+      },
+      {
+        "order_index": 85,
+        "title": "绿色环保企业体系认证证书",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "0624bc8c-9dbd-4272-90f2-727818abcfc5",
+        "old_section_id": "0624bc8c-9dbd-4272-90f2-727818abcfc5",
+        "chars": 2883,
+        "words": 2137,
+        "chunks": 1621,
+        "content_length": 2960
+      },
+      {
+        "order_index": 86,
+        "title": "绿色工厂评价认证证书",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "11ef4692-f062-42bb-b1f9-c32e4c7d343b",
+        "old_section_id": "11ef4692-f062-42bb-b1f9-c32e4c7d343b",
+        "chars": 3459,
+        "words": 2707,
+        "chunks": 1959,
+        "content_length": 3548
+      },
+      {
+        "order_index": 87,
+        "title": "绿色供应链管理体系认证证书",
+        "status": "generated",
+        "placeholder_replacements": 0,
+        "section_id": "542f9f4f-1fe6-4666-b8b3-5b2cc30c99a9",
+        "old_section_id": "542f9f4f-1fe6-4666-b8b3-5b2cc30c99a9",
+        "chars": 2674,
+        "words": 2214,
+        "chunks": 1547,
+        "content_length": 2764
+      },
+      {
+        "order_index": 88,
+        "title": "绿色电力证书交易凭证",
+        "status": "generated",
+        "placeholder_replacements": 2,
+        "section_id": "1e4b2397-f03a-4141-8e14-b1d4d769f3b9",
+        "old_section_id": "1e4b2397-f03a-4141-8e14-b1d4d769f3b9",
+        "chars": 2136,
+        "words": 1658,
+        "chunks": 1250,
+        "content_length": 2217
+      },
+      {
+        "order_index": 89,
+        "title": "绿色低碳生产",
+        "status": "generated",
+        "placeholder_replacements": 0,
+        "section_id": "17088251-842c-46a8-8cdc-374ecdb105b9",
+        "old_section_id": "17088251-842c-46a8-8cdc-374ecdb105b9",
+        "chars": 4304,
+        "words": 3298,
+        "chunks": 2501,
+        "content_length": 4493
+      },
+      {
+        "order_index": 90,
+        "title": "数智化绿色低碳体系建设综合评价报告",
+        "status": "generated",
+        "placeholder_replacements": 1,
+        "section_id": "eecf9291-0405-4b94-a3d5-78159a661ef9",
+        "old_section_id": "eecf9291-0405-4b94-a3d5-78159a661ef9",
+        "chars": 3288,
+        "words": 2502,
+        "chunks": 1900,
+        "content_length": 3427
+      },
+      {
+        "order_index": 91,
+        "title": "企业碳减排报告",
+        "status": "generated",
+        "placeholder_replacements": 2,
+        "section_id": "42749714-47a5-4fb6-a6af-6f7c5c18f8d6",
+        "old_section_id": "42749714-47a5-4fb6-a6af-6f7c5c18f8d6",
+        "chars": 3118,
+        "words": 2257,
+        "chunks": 1775,
+        "content_length": 3261
+      },
+      {
+        "order_index": 92,
+        "title": "产品碳足迹报告",
+        "status": "generated",
+        "placeholder_replacements": 0,
+        "section_id": "9ee323a9-171c-4778-b125-9fe6133b66de",
+        "old_section_id": "9ee323a9-171c-4778-b125-9fe6133b66de",
+        "chars": 2323,
+        "words": 1769,
+        "chunks": 1359,
+        "content_length": 2372
+      },
+      {
+        "order_index": 93,
+        "title": "绿色运输报告",
+        "status": "generated",
+        "placeholder_replacements": 0,
+        "section_id": "ffe335a9-6cc0-49cf-b67f-ac57f3c16e52",
+        "old_section_id": "ffe335a9-6cc0-49cf-b67f-ac57f3c16e52",
+        "chars": 3175,
+        "words": 2520,
+        "chunks": 1959,
+        "content_length": 3319
+      },
+      {
+        "order_index": 94,
+        "title": "绿色环保改造升级报告",
+        "status": "generated",
+        "placeholder_replacements": 0,
+        "section_id": "901729d0-22b3-4ed2-88a6-0fd95bbab195",
+        "old_section_id": "901729d0-22b3-4ed2-88a6-0fd95bbab195",
+        "chars": 1825,
+        "words": 1524,
+        "chunks": 999,
+        "content_length": 1863
+      },
+      {
+        "order_index": 95,
+        "title": "环境影响 报告批复",
+        "status": "generated",
+        "placeholder_replacements": 0,
+        "section_id": "f5bb80bb-8c08-4f4d-8e9f-4ee32e1ef64f",
+        "old_section_id": "f5bb80bb-8c08-4f4d-8e9f-4ee32e1ef64f",
+        "chars": 3662,
+        "words": 2769,
+        "chunks": 2161,
+        "content_length": 3829
+      },
+      {
+        "order_index": 96,
+        "title": "抽检质量问题不合格通报",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "c72cc15c-6aae-485c-83eb-f0f66c6b67cb",
+        "old_section_id": "c72cc15c-6aae-485c-83eb-f0f66c6b67cb",
+        "chars": 3221,
+        "words": 2456,
+        "chunks": 1879,
+        "content_length": 3298
+      },
+      {
+        "order_index": 97,
+        "title": "招标文件规定的其他应 提交的技术文件",
+        "status": "generated",
+        "placeholder_replacements": 3,
+        "section_id": "33b2face-8c90-4fe2-a609-2a318994caef",
+        "old_section_id": "33b2face-8c90-4fe2-a609-2a318994caef",
+        "chars": 7917,
+        "words": 5199,
+        "chunks": 4641,
+        "content_length": 8216
+      }
+    ],
+    "failures": []
+  },
+  "after": {
+    "total_sections": 102,
+    "non_empty_sections": 102,
+    "empty_leaf_sections": 0,
+    "empty_leaf_titles": [],
+    "placeholder_count": 0,
+    "missing_formal_required_fields": [
+      {
+        "key": "total_bid_price",
+        "label": "投标总价"
+      },
+      {
+        "key": "total_bid_price_upper",
+        "label": "投标总价大写"
+      },
+      {
+        "key": "tax_rate",
+        "label": "税率"
+      },
+      {
+        "key": "bid_bond_amount",
+        "label": "投标保证金金额"
+      },
+      {
+        "key": "bid_bond_form",
+        "label": "投标保证金形式"
+      },
+      {
+        "key": "delivery_period",
+        "label": "交货期承诺"
+      },
+      {
+        "key": "warranty_period",
+        "label": "质保期承诺"
+      },
+      {
+        "key": "bid_validity_days",
+        "label": "投标有效期"
+      },
+      {
+        "key": "authorized_representative",
+        "label": "授权代表"
+      },
+      {
+        "key": "authorized_representative_id",
+        "label": "授权代表身份证号"
+      },
+      {
+        "key": "signature_date",
+        "label": "签署日期"
+      }
+    ],
+    "ready_for_formal_export": false
+  }
+}

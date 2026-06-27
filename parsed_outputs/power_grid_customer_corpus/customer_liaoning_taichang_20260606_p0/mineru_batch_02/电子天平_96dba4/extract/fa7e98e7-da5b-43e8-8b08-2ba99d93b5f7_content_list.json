@@ -1,0 +1,1476 @@
+[
+    {
+        "type": "text",
+        "text": "此收据不作为经营性业务收支结算凭证用",
+        "bbox": [
+            228,
+            275,
+            242,
+            551
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "image",
+        "img_path": "images/7f5d703ef6e00fb7567423491d0b960fca7a5eac023bb61309c537908807e562.jpg",
+        "image_caption": [
+            "交客户"
+        ],
+        "image_footnote": [],
+        "content": "長虹",
+        "sub_type": "text_image",
+        "bbox": [
+            253,
+            263,
+            338,
+            541
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "2015年10月23日字N0241729",
+        "bbox": [
+            363,
+            242,
+            772,
+            284
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "今收到电子天平：1台X402410",
+        "bbox": [
+            368,
+            317,
+            784,
+            361
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "交来",
+        "bbox": [
+            369,
+            373,
+            784,
+            400
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "人民币（大写）",
+        "bbox": [
+            367,
+            416,
+            784,
+            442
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "image",
+        "img_path": "images/f0b3e62701a9a233aa5de3bcc8b8cb26cba05f7817d978dd6c122e65e59c6ad8.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "币（大写）\n五金上\n跟\n专用章\n位\n章",
+        "sub_type": "text_image",
+        "bbox": [
+            419,
+            413,
+            573,
+            574
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "￥410",
+        "bbox": [
+            651,
+            442,
+            784,
+            490
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "table",
+        "img_path": "images/a7e595cea52d714cc0220071630a2c23011fe4d2135650f9a70273d9bfbe2959.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>收款人</td><td></td></tr></table>",
+        "bbox": [
+            585,
+            489,
+            673,
+            559
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "table",
+        "img_path": "images/0531d394cbfe20c5fa45181fd936ed7db1810e82c072c6fa675812679da84c80.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>交款人</td><td></td></tr></table>",
+        "bbox": [
+            694,
+            490,
+            783,
+            559
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "image",
+        "img_path": "images/76c8612ad21bdd4d9eb86d203419a503f147d2e7d7a835424ff8fa7ed9acb7d6.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "HENG JI 南星\nTARE-ZERO\n输出\nPAT\n1.0-200\n允许*保留\n允许*保留\n备用\nCAL",
+        "sub_type": "text_image",
+        "bbox": [
+            0,
+            0,
+            998,
+            998
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "上海衡际科学仪器有限公司C00042",
+        "bbox": [
+            402,
+            354,
+            906,
+            387
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "FA1004电子天平准确度等级：",
+        "bbox": [
+            418,
+            388,
+            883,
+            427
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "MAX:100g e=10d d=0.1mg",
+        "bbox": [
+            418,
+            420,
+            820,
+            445
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "工作电压：220V50Hz编号：431270",
+        "bbox": [
+            403,
+            445,
+            877,
+            471
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "执行标准：GB/T26497-2011出厂日期：2017年01月",
+        "bbox": [
+            407,
+            473,
+            875,
+            502
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "校准证书",
+        "text_level": 1,
+        "bbox": [
+            401,
+            156,
+            620,
+            199
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "image",
+        "img_path": "images/9ece0d34c4121b9181fe8fca22a6d6bdbe5fe15607db7a52448ecaf5c110149f.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "",
+        "bbox": [
+            657,
+            149,
+            727,
+            204
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "image",
+        "img_path": "images/df04bc6fac9dcff86a0c6d1cbc82df38ff39c3e7b663fff35c30b8a446f29205.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "",
+        "bbox": [
+            727,
+            154,
+            803,
+            203
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "中国认可国际互认校准CALIBRATIONCNAS L14602",
+        "bbox": [
+            805,
+            155,
+            873,
+            202
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Calibration Certificate",
+        "text_level": 2,
+        "bbox": [
+            324,
+            212,
+            653,
+            231
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "证书编号： GL2605LX02283",
+        "bbox": [
+            38,
+            244,
+            357,
+            266
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Certificate No.",
+        "bbox": [
+            38,
+            272,
+            161,
+            286
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "第1页，共3页",
+        "bbox": [
+            660,
+            244,
+            860,
+            262
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Page 1of3 Pages",
+        "bbox": [
+            670,
+            269,
+            873,
+            288
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "客户名称：河北泰昌电力器材科技有限公司",
+        "bbox": [
+            38,
+            307,
+            495,
+            326
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Customer",
+        "bbox": [
+            40,
+            328,
+            105,
+            338
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "客户地址： 保定市满城区陉阳驿村",
+        "bbox": [
+            38,
+            359,
+            416,
+            376
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Address",
+        "bbox": [
+            38,
+            378,
+            97,
+            388
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "器具名称：电子天平",
+        "bbox": [
+            38,
+            409,
+            295,
+            426
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Description",
+        "bbox": [
+            40,
+            428,
+            115,
+            439
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "型号/规格：FA1004",
+        "bbox": [
+            38,
+            458,
+            280,
+            475
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Model",
+        "bbox": [
+            40,
+            478,
+            84,
+            488
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "出厂编号： 431270",
+        "bbox": [
+            38,
+            508,
+            273,
+            526
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Serial No.",
+        "bbox": [
+            40,
+            527,
+            105,
+            539
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "管理编号 TC-10",
+        "bbox": [
+            549,
+            508,
+            715,
+            526
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Equipment No.",
+        "bbox": [
+            542,
+            527,
+            642,
+            539
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "制造单位：上海衡际科学仪器有限公司",
+        "bbox": [
+            38,
+            558,
+            455,
+            576
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Manufacturer",
+        "bbox": [
+            40,
+            577,
+            134,
+            589
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "image",
+        "img_path": "images/0d2e3a45699201abb242cf4696bfcfeb96de3737a5179857023920d3f618a3e9.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "证书专用章\nIssued by(Stamp)\n证书专用章",
+        "sub_type": "text_image",
+        "bbox": [
+            186,
+            604,
+            379,
+            744
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "批准人： 张绍安 Approved by",
+        "bbox": [
+            529,
+            619,
+            816,
+            655
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "核验员： 赵华聪 Checked by",
+        "bbox": [
+            529,
+            669,
+            821,
+            706
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "校准员： 刘浩 Calibrated by",
+        "bbox": [
+            529,
+            720,
+            816,
+            756
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "接收日期： 2026年05月25日",
+        "bbox": [
+            38,
+            759,
+            440,
+            783
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Receipt date:",
+        "bbox": [
+            40,
+            781,
+            136,
+            794
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "校准日期：",
+        "bbox": [
+            40,
+            800,
+            131,
+            816
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Calibration date:",
+        "bbox": [
+            40,
+            819,
+            166,
+            831
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "签发日期：",
+        "bbox": [
+            40,
+            838,
+            129,
+            854
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Date of issue:",
+        "bbox": [
+            40,
+            857,
+            137,
+            869
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "2026年05月26日",
+        "bbox": [
+            295,
+            843,
+            438,
+            860
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "image",
+        "img_path": "images/65fe6f5405f73a38e449deaf1f80325b449d4d0abebba5e1334069b9e24f1f59.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "",
+        "bbox": [
+            660,
+            795,
+            742,
+            858
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "电话(Te1):0755-27407284",
+        "bbox": [
+            38,
+            884,
+            226,
+            897
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "邮箱(Mail) :szgljl@126.com",
+        "bbox": [
+            593,
+            884,
+            789,
+            897
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "地址：深圳市光明区公明街道兴发路170号华澳时光全球美酒星链云仓产",
+        "bbox": [
+            38,
+            903,
+            519,
+            917
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "邮政编码(Post No.）:518107",
+        "bbox": [
+            594,
+            903,
+            794,
+            917
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "业园B栋C302",
+        "bbox": [
+            40,
+            917,
+            126,
+            929
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Address: No.170 Xingfa Road, Gongming Sub-district， Guangming District， Shenzhen City， China, Building B,",
+        "bbox": [
+            38,
+            932,
+            842,
+            946
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "C02, Huao Time Global Fine Wine Starlink Cloud Warehouse Industrial Park",
+        "bbox": [
+            40,
+            947,
+            594,
+            958
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "header",
+        "text": "",
+        "bbox": [
+            77,
+            26,
+            186,
+            102
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "header",
+        "text": "广量计量检测技术（深圳）有限公司",
+        "bbox": [
+            216,
+            41,
+            890,
+            77
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "header",
+        "text": "GuangLiang Measurement and Testing Technology (Shenzhen) Co.,Ltd.",
+        "bbox": [
+            215,
+            78,
+            895,
+            96
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "证书说明",
+        "text_level": 2,
+        "bbox": [
+            391,
+            156,
+            601,
+            195
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Certificate Statement",
+        "text_level": 2,
+        "bbox": [
+            366,
+            200,
+            621,
+            221
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "证书编号： GL2605LX02283",
+        "bbox": [
+            31,
+            229,
+            290,
+            247
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Certificate No.",
+        "bbox": [
+            26,
+            250,
+            137,
+            263
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "第2页，共3页",
+        "bbox": [
+            783,
+            227,
+            929,
+            244
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Page 2 of 3 Pages",
+        "bbox": [
+            793,
+            250,
+            956,
+            267
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "一、“#”项目为实验室具备能力，非CNAS认可能力。",
+        "bbox": [
+            26,
+            271,
+            438,
+            287
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "\"#\"represents the capacity of the laboratory,which is beyond the scope of accreditation of CNAS.",
+        "bbox": [
+            63,
+            288,
+            769,
+            306
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "二、此证书无本公司盖章无效。未经本公司书面批准，不得部分复制校准证书.",
+        "bbox": [
+            26,
+            307,
+            653,
+            324
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "The certificate shall not be valid without stamp of DN. This certificate shall not be copied partly without the written",
+        "bbox": [
+            63,
+            326,
+            910,
+            341
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "三、本证书校准结果只与受校准仪器有关.",
+        "bbox": [
+            26,
+            344,
+            363,
+            362
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "The results relate only to the items calibrated.",
+        "bbox": [
+            72,
+            363,
+            406,
+            379
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "四、我司对本证书的内容拥有最终解释权。",
+        "bbox": [
+            26,
+            382,
+            366,
+            398
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "This certificate of content with our final interpretation.",
+        "bbox": [
+            63,
+            401,
+            463,
+            416
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "五、我司出具的数据均可溯源到国际单位制（SI）.",
+        "bbox": [
+            26,
+            419,
+            433,
+            435
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "All data issued by the laboratory are traceable to International System of Units(SI).",
+        "bbox": [
+            63,
+            438,
+            673,
+            454
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "六、本次校准的技术依据：",
+        "bbox": [
+            26,
+            456,
+            236,
+            472
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Reference Documents for the Verification :",
+        "bbox": [
+            63,
+            475,
+            381,
+            489
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "JJF 1847-2020《电子天平校准规范》",
+        "bbox": [
+            26,
+            493,
+            284,
+            507
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "七、本次校准使用主要计量标准器具",
+        "bbox": [
+            26,
+            539,
+            319,
+            557
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Main Standards of Measurement Used",
+        "bbox": [
+            26,
+            558,
+            310,
+            573
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "设备名称/技术指标",
+        "bbox": [
+            97,
+            577,
+            265,
+            594
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Equipment Name/Characteristics",
+        "bbox": [
+            48,
+            596,
+            312,
+            613
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "砝码/E2",
+        "bbox": [
+            149,
+            619,
+            211,
+            633
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "设备编号",
+        "bbox": [
+            398,
+            577,
+            478,
+            594
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Equipment No.",
+        "bbox": [
+            376,
+            596,
+            499,
+            613
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "248142572",
+        "bbox": [
+            398,
+            618,
+            477,
+            632
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "证书编号/潮源单位",
+        "bbox": [
+            581,
+            577,
+            752,
+            594
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Certificate No/Traceability to",
+        "bbox": [
+            549,
+            596,
+            784,
+            613
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "JL2481425728/深圳计量院",
+        "bbox": [
+            573,
+            618,
+            761,
+            632
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "有效日期",
+        "bbox": [
+            842,
+            577,
+            922,
+            594
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Validity date",
+        "bbox": [
+            830,
+            596,
+            934,
+            613
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "2026-10-24",
+        "bbox": [
+            842,
+            618,
+            922,
+            632
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "附加说明",
+        "bbox": [
+            450,
+            663,
+            544,
+            682
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Appended Directions",
+        "bbox": [
+            398,
+            684,
+            600,
+            702
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "复校日期： 2027年05月25日",
+        "bbox": [
+            28,
+            703,
+            473,
+            720
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Application date",
+        "bbox": [
+            28,
+            722,
+            161,
+            739
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "校准地点： 委托方现场",
+        "bbox": [
+            28,
+            741,
+            436,
+            758
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Operation Location",
+        "bbox": [
+            28,
+            760,
+            184,
+            776
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "环境条件： 温度：23.1℃ 相对湿度：52%",
+        "bbox": [
+            28,
+            778,
+            789,
+            795
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Operation Environment",
+        "bbox": [
+            28,
+            797,
+            218,
+            813
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "相关使用说明： 参见结果使用",
+        "bbox": [
+            28,
+            815,
+            455,
+            832
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Statement of Compliance Limitation",
+        "bbox": [
+            28,
+            834,
+            319,
+            850
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "header",
+        "text": "",
+        "bbox": [
+            75,
+            26,
+            186,
+            102
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "header",
+        "text": "广量计量检测技术（深圳）有限公司",
+        "bbox": [
+            216,
+            41,
+            890,
+            77
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "header",
+        "text": "GuangLiang Measurement and Testing Technology (Shenzhen) Co., Ltd.",
+        "bbox": [
+            215,
+            79,
+            895,
+            96
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "校准结果",
+        "text_level": 1,
+        "bbox": [
+            391,
+            156,
+            635,
+            189
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Result of Calibration",
+        "text_level": 2,
+        "bbox": [
+            428,
+            191,
+            600,
+            205
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "证书编号：GL2605LX02283",
+        "bbox": [
+            90,
+            200,
+            400,
+            217
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Certificate No.",
+        "bbox": [
+            94,
+            219,
+            200,
+            233
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "第3页共3页",
+        "bbox": [
+            771,
+            200,
+            937,
+            218
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Page З of 3 Pages",
+        "bbox": [
+            789,
+            219,
+            937,
+            234
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "一、外观及工作正常性检查：正常",
+        "text_level": 2,
+        "bbox": [
+            89,
+            255,
+            327,
+            269
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Appearance and Performance checked:",
+        "bbox": [
+            114,
+            273,
+            354,
+            286
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "二、最大称量(Max): 100g",
+        "text_level": 2,
+        "bbox": [
+            90,
+            291,
+            273,
+            305
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "三、实际分度值(d)： 0.0001g",
+        "text_level": 2,
+        "bbox": [
+            90,
+            309,
+            290,
+            323
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "四、称量测试：",
+        "text_level": 2,
+        "bbox": [
+            90,
+            326,
+            191,
+            338
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "table",
+        "img_path": "images/e1986d94a84b031963aec61260e65b503d0601907e862920b99fe2bdec19f2cc.jpg",
+        "table_caption": [
+            "Weighting test:"
+        ],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>试验载荷(g)</td><td>实测误差(g)</td><td>允许误差(g)</td></tr><tr><td>Test Load</td><td>Error</td><td>MPE</td></tr><tr><td>0</td><td>0.0000</td><td>±0.0005</td></tr><tr><td>2</td><td>0.0002</td><td>±0.0005</td></tr><tr><td>5</td><td>0.0001</td><td>±0.0005</td></tr><tr><td>20</td><td>0.0002</td><td>±0.0010</td></tr><tr><td>50</td><td>0.0001</td><td>±0.0010</td></tr><tr><td>100</td><td>0.0001</td><td>±0.0015</td></tr></table>",
+        "bbox": [
+            208,
+            361,
+            633,
+            502
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "五、偏载测试：",
+        "text_level": 2,
+        "bbox": [
+            90,
+            523,
+            191,
+            536
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "table",
+        "img_path": "images/763a89fe0d94f33c9f3e312cd4bcf46063daaa944a1c128934d71502e7ccf3ff.jpg",
+        "table_caption": [
+            "Corner load test:"
+        ],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>序号: No.</td><td>偏载位置图 Position</td><td>试验载荷(g) Test Load</td><td>示值(g) Indication Value</td><td>实测误差(g) Error</td><td>允许误差(g) MPE</td></tr><tr><td>1</td><td></td><td>50</td><td>50.0000</td><td>0.0000</td><td>±0.0010</td></tr><tr><td>2</td><td></td><td>50</td><td>50.0001</td><td>0.0001</td><td>±0.0010</td></tr><tr><td>3</td><td><img src=\"images/8ac050ccac37a16ee1ff77b38cfaf33106bce6629c3f2b535db5d8ec8bf0d1ec.jpg\"/></td><td>50</td><td>50.0002</td><td>0.0002</td><td>±0.0010</td></tr><tr><td>4</td><td></td><td>50</td><td>50.0001</td><td>0.0001</td><td>±0.0010</td></tr><tr><td>5</td><td></td><td>50</td><td>50.0002</td><td>0.0002</td><td>±0.0010</td></tr></table>",
+        "bbox": [
+            112,
+            556,
+            729,
+            678
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "六、重复性测试：",
+        "text_level": 2,
+        "bbox": [
+            90,
+            683,
+            206,
+            696
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "table",
+        "img_path": "images/b3f748cc0478835a277f8822fd8512fbf8c017cb776c5e60476f685c59b91025.jpg",
+        "table_caption": [
+            "Repeatability test:"
+        ],
+        "table_footnote": [
+            "注(Notes):",
+            "1、依据JJF1059.1-2012测量不确定度评定与表示，本次校准结果的扩展不确定度为：U=0.0003g,k=2",
+            "According to JJF1059.1-2012 Evaluation and Expression of Uncertainty in Measurement， Expanded uncertainty of measurement:",
+            "2、所校准项目符合I级技术要求",
+            "Passed at calibrated item"
+        ],
+        "table_body": "<table><tr><td rowspan=\"2\">试验载荷(g)</td><td colspan=\"6\">示值 (g)</td><td rowspan=\"2\">实测误差(g)</td><td rowspan=\"2\">允许误差(g)</td></tr><tr><td colspan=\"6\">Indication Value</td></tr><tr><td>Test Load</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>Error</td><td>MPE</td></tr><tr><td>100</td><td>100.0000</td><td>100.0000</td><td>100.0002</td><td>100.0002</td><td>100.0001</td><td>100.0001</td><td>0.0002</td><td>≤0.0015</td></tr></table>",
+        "bbox": [
+            122,
+            718,
+            833,
+            785
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "header",
+        "text": "",
+        "bbox": [
+            77,
+            26,
+            186,
+            102
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "header",
+        "text": "广量计量检测技术（深圳）有限公司",
+        "bbox": [
+            216,
+            41,
+            890,
+            77
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "header",
+        "text": "GuangLiang Measurement and Testing Technology (Shenzhen) Co., Ltd.",
+        "bbox": [
+            215,
+            79,
+            895,
+            96
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "footer",
+        "text": "以下空白",
+        "bbox": [
+            411,
+            898,
+            475,
+            913
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "footer",
+        "text": "Blank below",
+        "bbox": [
+            403,
+            914,
+            484,
+            926
+        ],
+        "page_idx": 5
+    }
+]

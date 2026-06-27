@@ -1,0 +1,200 @@
+[
+    [
+        {
+            "type": "text",
+            "bbox": [
+                0.033,
+                0.097,
+                0.622,
+                0.165
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.033,
+                0.197,
+                0.336,
+                0.278
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.522,
+                0.205,
+                0.648,
+                0.278
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.033,
+                0.311,
+                0.37,
+                0.393
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.033,
+                0.43,
+                0.453,
+                0.507
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.033,
+                0.642,
+                0.375,
+                0.707
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.033,
+                0.758,
+                0.567,
+                0.824
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.033,
+                0.866,
+                0.374,
+                0.936
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.684,
+                0.102,
+                0.957,
+                0.879
+            ],
+            "angle": 0,
+            "content": "生产\n生产\n生产\n生产\n生产\n考核专用章",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.029,
+                0.089,
+                0.625,
+                0.167
+            ],
+            "text": "证号：T130602197408170641",
+            "score": 0.995
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.029,
+                0.749,
+                0.571,
+                0.825
+            ],
+            "text": "有效期限：20240523-20300522",
+            "score": 0.992
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.024,
+                0.182,
+                0.341,
+                0.286
+            ],
+            "text": "姓名：陈仙瑞",
+            "score": 0.983
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.513,
+                0.19,
+                0.657,
+                0.288
+            ],
+            "text": "性别：女",
+            "score": 0.916
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.026,
+                0.298,
+                0.376,
+                0.399
+            ],
+            "text": "作业类别：电工作业",
+            "score": 0.991
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.027,
+                0.419,
+                0.458,
+                0.512
+            ],
+            "text": "准操项目：高压电工作业",
+            "score": 0.991
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.027,
+                0.855,
+                0.379,
+                0.941
+            ],
+            "text": "复审日期：20270523",
+            "score": 0.996
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.029,
+                0.635,
+                0.379,
+                0.707
+            ],
+            "text": "初领日期：20240523",
+            "score": 0.998
+        }
+    ]
+]

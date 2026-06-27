@@ -1,0 +1,578 @@
+[
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "劳动合同书"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                411,
+                135,
+                594,
+                165
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "甲方：河北泰昌电力器材科技有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                132,
+                184,
+                490,
+                203
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "地址：河北省保定市满城区方顺桥乡陉阳驿村"
+                    }
+                ]
+            },
+            "bbox": [
+                129,
+                221,
+                557,
+                237
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "邮码：072150 电话：13833007007"
+                    }
+                ]
+            },
+            "bbox": [
+                141,
+                239,
+                499,
+                256
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "法定代表人或委托代表人：_晁坤琳 职务：总经理"
+                    }
+                ]
+            },
+            "bbox": [
+                129,
+                275,
+                636,
+                293
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "乙方：陈仙瑞"
+                    }
+                ]
+            },
+            "bbox": [
+                129,
+                311,
+                282,
+                329
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "性别：女 年龄：50"
+                    }
+                ]
+            },
+            "bbox": [
+                129,
+                347,
+                440,
+                363
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "居民身份证号码：130602197408170641"
+                    }
+                ]
+            },
+            "bbox": [
+                127,
+                382,
+                487,
+                401
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "根据《中华人民共和国劳动法》，甲乙双方经平等协商同意，自愿签订本合同，共同遵守本合同所列条款。"
+                    }
+                ]
+            },
+            "bbox": [
+                87,
+                437,
+                912,
+                481
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "一、劳动合同期限"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                127,
+                489,
+                290,
+                507
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "本合同为5年期合同，本合同生效日期_2024年08月_12日到2029年08月_11日。"
+                    }
+                ]
+            },
+            "bbox": [
+                124,
+                517,
+                910,
+                535
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "二、工作内容"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                127,
+                544,
+                250,
+                560
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "乙方同意根据甲方工作需要，担任出纳岗位（工种）工作。乙方应按照甲方的要求，按时完成规定的工作数量，达到规定的质量标准。"
+                    }
+                ]
+            },
+            "bbox": [
+                85,
+                571,
+                910,
+                615
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "三、劳动保护和劳动条件"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                126,
+                624,
+                347,
+                642
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "执行定时工作制的，甲方安排乙方每日工作时间不超过8小时，平均每周不超过40小时。甲方保证乙方每周至少休息一日，甲方由于工作需要，经与工会和乙方协商后可以延长工作时间，一般每日不得超过1小时，因特殊原因需要延长工作时间的，在保障乙方身体健康的条件下延长工作时间每日不得超过3小时，每月不得超过36小时。甲方负责对乙方进行政治思想、职业道德、业务技术、劳动安全卫生及有关规章制度的教育和培训。"
+                    }
+                ]
+            },
+            "bbox": [
+                84,
+                651,
+                910,
+                778
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "四、劳动报酬"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                124,
+                785,
+                248,
+                803
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "执行定时工作制或综合计算工时工作制的，乙方完成规定的工作任务，甲方每月_15日前以货币形式足额支付乙方工资，工资不低于4500元。"
+                    }
+                ]
+            },
+            "bbox": [
+                84,
+                813,
+                909,
+                859
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "五、保险福利待遇"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                124,
+                866,
+                287,
+                885
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "甲乙双方应按国家和市社会保险的有关规定交纳职工养老、失业和大病医疗统筹及其他社会保险费用。甲方应为乙方填写《职工养老保险手册》。双方解除、终止劳动合同，《职工养老保险手册》按有关规定转移。"
+                    }
+                ]
+            },
+            "bbox": [
+                90,
+                134,
+                917,
+                205
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "六、劳动纪律"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                131,
+                215,
+                253,
+                233
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "乙方应遵守甲方依法规定的规章制度；严格遵守劳动安全卫生、生产工艺、操作规程和工作规范；爱护甲方的财产，遵守职业道德；积极参加甲方组织的培训，提高思想觉悟和职业技能。乙方违反劳动纪律，甲方可依据本单位规章制度，给予纪律处分，直至解除本合同。"
+                    }
+                ]
+            },
+            "bbox": [
+                90,
+                242,
+                914,
+                313
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "七、劳动合同的变更、解除"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                131,
+                323,
+                369,
+                341
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "订立本合同所依据的法律、行政法规、规章制度发生变化，本合同应变更相关内容。订立本合同所依据的客观情况发生重大变化，致使本合同无法履行的，经甲乙双方协商同意，可以变更本合同相关内容。经甲乙双方协商一致，本合同可以解除。"
+                    }
+                ]
+            },
+            "bbox": [
+                90,
+                350,
+                912,
+                420
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "八、劳动争议处理"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                131,
+                431,
+                289,
+                448
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "因履行本合同发生的劳动争议，当事人可以向本单位劳动争议调解委员会申请调解；调解不成，当事人一方要求仲裁的，应当自劳动争议发生之日起六十日内向保定市满城区劳动争议仲裁委员会申请仲裁。当事人一方也可以直接向劳动争议仲裁委员会申请仲裁。对裁决不服的，可以向人民法院提起诉讼。"
+                    }
+                ]
+            },
+            "bbox": [
+                89,
+                457,
+                912,
+                555
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "九、其他约定"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                129,
+                565,
+                248,
+                582
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "甲方以下规章制度 / 作为本合同附件。本合同未尽事宜，或与国家有关规定相悖的，按有关规定执行。"
+                    }
+                ]
+            },
+            "bbox": [
+                87,
+                592,
+                897,
+                634
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "本合同一式两份，甲乙双方各执一份。"
+                    }
+                ]
+            },
+            "bbox": [
+                126,
+                645,
+                452,
+                663
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/73898e905608f78a15122e4c5174dba86ffb998bae63e60bd01429f653770aca.jpg"
+                },
+                "content": "甲方（盖章）：\n代表人：周坤林",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                100,
+                684,
+                413,
+                820
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "乙方（盖章）："
+                    }
+                ]
+            },
+            "bbox": [
+                485,
+                727,
+                873,
+                745
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "代表人： 陈化瑞"
+                    }
+                ]
+            },
+            "bbox": [
+                485,
+                766,
+                872,
+                799
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2024年08月12日"
+                    }
+                ]
+            },
+            "bbox": [
+                100,
+                831,
+                400,
+                853
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2024年08月12日"
+                    }
+                ]
+            },
+            "bbox": [
+                494,
+                831,
+                830,
+                853
+            ]
+        }
+    ]
+]

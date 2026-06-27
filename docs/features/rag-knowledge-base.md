@@ -40,9 +40,12 @@ RAG 检索链路：
 
 ```text
 用户问题
+→ Query Rewrite 提取标准号、包号、技术规范编码、物料编码、条款/关键词等检索 hint
 → 系统配置的 Embedding 模型生成 query embedding
 → Supabase RPC: match_knowledge_chunks_filtered
 → metadata/project 过滤 + pgvector 相似度检索 document_chunks
+→ 高精度关键词未命中或召回不足时，对 document_chunks 做关键词补召回
+→ 按 rerank 分数 + 关键词命中 + authority/citation_policy 排序
 → Supabase RPC: match_knowledge_assets 检索企业资信/产品图片资产
 → 图片资产关键词兜底召回，覆盖营业执照、社保、业绩、产品图片等短文本资产
 → 召回 top-k 文档分片
@@ -72,6 +75,8 @@ RAG 回答完成
 - 每个分片写入 `document_chunks.content`，向量写入 `document_chunks.embedding`（父块 embedding 置空，不参与召回）。
 - `document_chunks.metadata` 保存 `chunk_layer / parent_index / doc_role / authority_level / citation_policy / block_type / content_sha256` 及资料分类、来源单位、文件路径、标签等。
 - 召回经 `match_knowledge_chunks_filtered` 做 metadata 定向过滤（doc_role/省份/批次）+ `project_id` 隔离；向量索引为 HNSW。
+- 检索后处理包含轻量 Query Rewrite、关键词补召回和 authority/citation 排序：标准号、包号、技术规范编码、物料编码、供应商管理、不良行为、施工工艺等高精度词会参与补召回；`law_or_standard_citable`、`tender_requirement_citable`、`enterprise_fact_citable` 加权，`reference_style_only` 降权。
+- `scripts/rag/eval_recall.py` 走生产检索函数 `search_knowledge_base()`，因此 Base/客户专项回归会覆盖 Query Rewrite、关键词补召回和排序逻辑。
 - 前端 RAG 回答完成后展示参考资料来源，帮助用户核对答案依据。
 - 企业资信库、企业产品库上传的图片/附件写入 `knowledge_assets`，可通过向量召回和关键词兜底参与 RAG 问答。
 - RAG 回答若提到 `图片资产1`、`图片资产2、3、4` 等编号，前端会自动把对应图片以 Markdown 图片形式插入到相应段落后，避免只输出文字描述。

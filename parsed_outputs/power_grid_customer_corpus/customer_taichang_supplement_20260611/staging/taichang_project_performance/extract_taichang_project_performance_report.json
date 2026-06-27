@@ -1,0 +1,14 @@
+{
+  "generated_at": "2026-06-25T10:43:43",
+  "batch_id": "customer_taichang_supplement_20260611",
+  "performance_records": 1,
+  "evidence_records": 2,
+  "line_items": 18,
+  "total_quantity": 54678.0,
+  "amount_tax_included_yuan": 6372409.05,
+  "contract_sign_date_status": "contract_sign_date_blank_in_source",
+  "outputs": {
+    "json": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/staging/taichang_project_performance/taichang_project_performance_rows.json",
+    "csv": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/staging/taichang_project_performance/taichang_project_performance_rows.csv"
+  }
+}

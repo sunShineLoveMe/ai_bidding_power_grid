@@ -1,5 +1,3 @@
-import { Badge } from 'antd';
-
 export interface CategoryItem {
   name: string;
   label?: string;
@@ -29,8 +27,14 @@ export function CategoryList({ title, items, activeName, onChange }: CategoryLis
               }`}
               onClick={() => onChange(item.name)}
             >
-              <span>{item.label || item.name}</span>
-              <Badge count={item.count} color={active ? '#3267ff' : '#94a3b8'} />
+              <span className="min-w-0 truncate pr-2">{item.label || item.name}</span>
+              <span
+                className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-extrabold leading-5 ${
+                  active ? 'bg-blue-600 text-white' : 'bg-slate-200 text-slate-600'
+                }`}
+              >
+                {item.count > 99 ? '99+' : item.count}
+              </span>
             </button>
           );
         })}

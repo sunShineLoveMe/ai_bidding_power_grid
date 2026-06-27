@@ -1,0 +1,1015 @@
+[
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "环境管理体系认证证书"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                302,
+                72,
+                702,
+                179
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "证书号：17424E20980R0M"
+                    }
+                ]
+            },
+            "bbox": [
+                663,
+                217,
+                890,
+                233
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "兹证明"
+                    }
+                ]
+            },
+            "bbox": [
+                458,
+                255,
+                564,
+                275
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "河北泰昌电力器材科技有限公司"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                297,
+                292,
+                722,
+                315
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "统一社会信用代码：91130607056539515C"
+                    }
+                ]
+            },
+            "bbox": [
+                326,
+                328,
+                699,
+                347
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "注册地址：河北省保定市满城区陉阳驿村"
+                    }
+                ]
+            },
+            "bbox": [
+                327,
+                353,
+                695,
+                371
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "办公地址：河北省保定市满城区陉阳驿村"
+                    }
+                ]
+            },
+            "bbox": [
+                329,
+                375,
+                695,
+                391
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "生产/经营地址：河北省保定市满城区陉阳驿村"
+                    }
+                ]
+            },
+            "bbox": [
+                302,
+                396,
+                722,
+                414
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "环境管理体系符合"
+                    }
+                ]
+            },
+            "bbox": [
+                428,
+                451,
+                594,
+                469
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "GB/T24001-2016/IS014001:2015标准条款的要求"
+                    }
+                ]
+            },
+            "bbox": [
+                245,
+                488,
+                779,
+                505
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "该体系认证所覆盖的范围"
+                    }
+                ]
+            },
+            "bbox": [
+                400,
+                524,
+                626,
+                543
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "低压配电箱的生产，电力金具、铁附件、电缆保护管的销售所涉及的环境管理活动"
+                    }
+                ]
+            },
+            "bbox": [
+                248,
+                591,
+                779,
+                628
+            ]
+        },
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/662e71a145c2ba1b5ec4aa385ef5f6532194fb253183c8ff0b0b6d767cadabb7.jpg"
+                },
+                "table_caption": [],
+                "table_footnote": [],
+                "html": "<table><tr><td>第一次监审</td><td>贴标处</td><td>第二次监审</td><td>贴标处</td><td>第三次监审</td><td>贴标处</td></tr></table>",
+                "table_type": "simple_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                139,
+                693,
+                729,
+                754
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/ab7214ece2d51c555e103be0532f86d22a2909677fe150a3d666f43d2e413f1a.jpg"
+                },
+                "content": "",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "bbox": [
+                808,
+                699,
+                885,
+                754
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "证书有效期内，获证组织须每年至少接受一次监督审核并加贴合格标志，证书方为有效。本证书信息可在国家认证认可监督管理委员会官方网站：www.cnca.gov.cn查询证书有效性以右侧二维码扫描内容为准。"
+                    }
+                ]
+            },
+            "bbox": [
+                137,
+                755,
+                709,
+                793
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/6e196db18de002eb1b4a2be7e64fd79663370ffe225e0f0c9750cb8aae9f0d37.jpg"
+                },
+                "content": "",
+                "image_caption": [
+                    {
+                        "type": "text",
+                        "content": "华信创认证"
+                    }
+                ],
+                "image_footnote": []
+            },
+            "bbox": [
+                117,
+                799,
+                223,
+                866
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/7cc270c76b5ee23f73a5e5d5b16233ffe213c56549dca4b8ee1067ee2afb61c4.jpg"
+                },
+                "content": "MEMBER OF MULTILATERAL\nRECOGNITION ARRANGEMENT",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                253,
+                806,
+                408,
+                875
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/83342342ddde70505085798d0398f9c6dbf44567046a2325a005e80a6546470a.jpg"
+                },
+                "content": "",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "bbox": [
+                426,
+                805,
+                557,
+                876
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "中国认可"
+                    }
+                ]
+            },
+            "bbox": [
+                579,
+                815,
+                623,
+                825
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "国际互认"
+                    }
+                ]
+            },
+            "bbox": [
+                579,
+                825,
+                623,
+                833
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "管理体系"
+                    }
+                ]
+            },
+            "bbox": [
+                579,
+                833,
+                623,
+                842
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "MANAGEMENTSYSTEM"
+                    }
+                ]
+            },
+            "bbox": [
+                579,
+                843,
+                704,
+                851
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "CNASC174-M"
+                    }
+                ]
+            },
+            "bbox": [
+                579,
+                852,
+                655,
+                861
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/e30b08f2fde301f4ac48a6f03a71ee59d602365537d3b547a19874fc9c21be25.jpg"
+                },
+                "content": "Beijing Certification Center\n证书专用章\n北京认证中心\n证书专用章",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                714,
+                792,
+                885,
+                885
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "初次获证日期：2024年10月21日"
+                    }
+                ]
+            },
+            "bbox": [
+                151,
+                895,
+                394,
+                909
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "签发日期：2024年10月21日"
+                    }
+                ]
+            },
+            "bbox": [
+                430,
+                895,
+                635,
+                909
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "有效日期：2027年10月20日"
+                    }
+                ]
+            },
+            "bbox": [
+                668,
+                895,
+                873,
+                909
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "北京市昌平区科技园区振兴路28号2号楼228室"
+                    }
+                ]
+            },
+            "bbox": [
+                215,
+                910,
+                544,
+                923
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "www.hxccc.org"
+                    }
+                ]
+            },
+            "bbox": [
+                579,
+                913,
+                682,
+                923
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "010-57146599"
+                    }
+                ]
+            },
+            "bbox": [
+                717,
+                912,
+                811,
+                923
+            ]
+        },
+        {
+            "type": "page_footer",
+            "content": {
+                "page_footer_content": [
+                    {
+                        "type": "text",
+                        "content": "No.0011169"
+                    }
+                ]
+            },
+            "bbox": [
+                774,
+                946,
+                949,
+                967
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "ENVIRONMENTAL MANAGEMENT SYSTEM GHCEECERTIFICATEEUING"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                265,
+                68,
+                731,
+                176
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "CertificateNo.：17424E20980R0M"
+                    }
+                ]
+            },
+            "bbox": [
+                626,
+                219,
+                924,
+                233
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Awarded to"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                433,
+                245,
+                589,
+                266
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "Hebei Taichang Electric Power Equipment Technology Co.,Ltd"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                134,
+                280,
+                889,
+                301
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Organization Code:91130607056539515C"
+                    }
+                ]
+            },
+            "bbox": [
+                310,
+                321,
+                712,
+                338
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Registered Add.:Xingyangyi Village,Mancheng District, Baoding City,Hebei Province"
+                    }
+                ]
+            },
+            "bbox": [
+                240,
+                342,
+                781,
+                377
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Office Add.: Xingyangyi Village,Mancheng District, Baoding City，Hebei Province"
+                    }
+                ]
+            },
+            "bbox": [
+                265,
+                378,
+                757,
+                413
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Production/Business Add.:Xingyangyi Village,Mancheng District, Baoding City,Hebei Province"
+                    }
+                ]
+            },
+            "bbox": [
+                193,
+                414,
+                828,
+                448
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "The Environmental Management System of the above organization has been assessed and found to be in accordance with the requirements of the standard:"
+                    }
+                ]
+            },
+            "bbox": [
+                181,
+                471,
+                840,
+                530
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "GB/T24001-2016/ISO 14001:2015"
+                    }
+                ]
+            },
+            "bbox": [
+                319,
+                546,
+                705,
+                562
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Scope of this management Certification"
+                    }
+                ]
+            },
+            "bbox": [
+                319,
+                587,
+                704,
+                605
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Production of low-voltage distribution boxes,sales of power fittings, ironaccessories,and cable protection pipes involved in the environmental management activities"
+                    }
+                ]
+            },
+            "bbox": [
+                179,
+                624,
+                840,
+                678
+            ]
+        },
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/31601d900fefe484499028ada74103c769b5c2e7364641db6fbb1799945d3011.jpg"
+                },
+                "table_caption": [],
+                "table_footnote": [],
+                "html": "<table><tr><td>First S.A.</td><td>Labelling</td><td>Second S.A.</td><td>Labelling</td><td>Third S.A.</td><td>Labelling</td></tr></table>",
+                "table_type": "simple_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                137,
+                693,
+                727,
+                754
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/acd2f1d677af289e0fdea60202060d2ddee6ebaaa55acaf98028275fa9e79846.jpg"
+                },
+                "content": "",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "bbox": [
+                815,
+                712,
+                892,
+                767
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Thecertified organizationmustacceptat leastone surveillanceauditannuallyandaqualifiedmark shallbeattached ontothecertificate，withinvalidityperiod of thecertificate，thenthecertificatecanbemaintained valid. Formoredetailsof thiscertificate,please login CNCA'swebsite:www.cnca.gov.cn. Forthevalidityof thecertificate,pleasescantheQRcodesontherightrideforaccurateinformation."
+                    }
+                ]
+            },
+            "bbox": [
+                134,
+                756,
+                727,
+                796
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/b373b1125ef201a193d56b90f57155db0fdce92935c9060fa6cb7f6e3a0bae0a.jpg"
+                },
+                "content": "",
+                "image_caption": [
+                    {
+                        "type": "text",
+                        "content": "华信创认证"
+                    }
+                ],
+                "image_footnote": []
+            },
+            "bbox": [
+                110,
+                800,
+                215,
+                866
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/ed87cf62d5d69e8d164f36af44f2a1ff8b29feef4ce12ca7561e00f30b51aecc.jpg"
+                },
+                "content": "MEMBER OF MULTILATERAL\nIAF\nRECOGNITION ARRANGEMENT",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                245,
+                807,
+                403,
+                874
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/d029388f95a2d258cb3be4d265523595dce042077a6e6bed91b9e3494303160d.jpg"
+                },
+                "content": "",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "bbox": [
+                421,
+                806,
+                549,
+                876
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "中国认可"
+                    }
+                ]
+            },
+            "bbox": [
+                571,
+                818,
+                616,
+                827
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "国际互认"
+                    }
+                ]
+            },
+            "bbox": [
+                571,
+                827,
+                616,
+                836
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "管理体系"
+                    }
+                ]
+            },
+            "bbox": [
+                571,
+                836,
+                616,
+                845
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "MANAGEMENTSYSTEM"
+                    }
+                ]
+            },
+            "bbox": [
+                571,
+                845,
+                695,
+                853
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "CNASC174-M"
+                    }
+                ]
+            },
+            "bbox": [
+                571,
+                853,
+                647,
+                863
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/4a92b1d4ae8aabf9a2d34e406e923156dd258cc37c603ff14dc507876c4bd896.jpg"
+                },
+                "content": "C:\\Bottling\\Certification Center (Co.\\Ltd.)\n北京市(北京)认证中心有限公司\n证书专用章",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                714,
+                793,
+                885,
+                887
+            ]
+        },
+        {
+            "type": "page_footer",
+            "content": {
+                "page_footer_content": [
+                    {
+                        "type": "text",
+                        "content": "Date ofOriginal lssued:21Oct.2024 Valid from:21 Oct.2024 Valid until:20 Oct.2027"
+                    }
+                ]
+            },
+            "bbox": [
+                191,
+                906,
+                833,
+                920
+            ]
+        },
+        {
+            "type": "page_footer",
+            "content": {
+                "page_footer_content": [
+                    {
+                        "type": "text",
+                        "content": "Room228,ilding2，No.28ZheningRoad,iencePark,ChangpingDistrictBejing0-574599"
+                    }
+                ]
+            },
+            "bbox": [
+                139,
+                923,
+                887,
+                938
+            ]
+        },
+        {
+            "type": "page_footer",
+            "content": {
+                "page_footer_content": [
+                    {
+                        "type": "text",
+                        "content": "No.0011169"
+                    }
+                ]
+            },
+            "bbox": [
+                769,
+                946,
+                949,
+                967
+            ]
+        }
+    ]
+]

@@ -1,0 +1,954 @@
+[
+    {
+        "type": "text",
+        "text": "凯新认证（北京）有限公司",
+        "text_level": 1,
+        "bbox": [
+            398,
+            108,
+            757,
+            133
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "质量管理体系认证证书",
+        "text_level": 1,
+        "bbox": [
+            315,
+            138,
+            836,
+            180
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "注册号：06925Q10172R4",
+        "bbox": [
+            769,
+            243,
+            924,
+            257
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "兹证明",
+        "bbox": [
+            179,
+            258,
+            253,
+            273
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "河北泰昌电力器材科技有限公司",
+        "text_level": 2,
+        "bbox": [
+            178,
+            280,
+            673,
+            308
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "统一社会信用代码：91130607056539515C",
+        "bbox": [
+            178,
+            313,
+            500,
+            328
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "注册地址：保定市满城区陉阳驿村",
+        "bbox": [
+            179,
+            330,
+            445,
+            345
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "经营地址：保定市满城区陉阳驿村",
+        "bbox": [
+            179,
+            347,
+            445,
+            362
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "管理体系符合",
+        "bbox": [
+            179,
+            368,
+            317,
+            385
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "GB/T19001-2016/IS09001:2015标准",
+        "bbox": [
+            208,
+            391,
+            537,
+            408
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "认证覆盖范围",
+        "bbox": [
+            179,
+            413,
+            319,
+            432
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "资质范围内的电表箱及低压无功补偿配电柜的生产；非标电力金具（横担、抱箍、拉线棒）、高压隔离开关、高压熔断器、电缆保护管的生产；管状母线、电缆分支箱及柱上断路器的销售",
+        "bbox": [
+            176,
+            437,
+            976,
+            489
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "换证日期：2025-02-14",
+        "bbox": [
+            178,
+            693,
+            386,
+            707
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "有效期至：2028-02-15",
+        "bbox": [
+            179,
+            710,
+            386,
+            724
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "初次颁证：2013-03-13",
+        "bbox": [
+            179,
+            726,
+            384,
+            741
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "注：获证组织必须定期接受监督审核并经审核合格此证书方继续有效。自2026-02-15日起，本证书需与《保持",
+        "bbox": [
+            178,
+            742,
+            682,
+            752
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "image",
+        "img_path": "images/b7e38a5fd6f5f38d7d5443ee464d3cb76da2fbb3d849dc3612eb04fb2ead5c53.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "凯新认证（北京）有限公司\n证书专用章\nSeal for Certificate\n特认证服务资格通知书》一样使用。\nCertification (Beijing) Co.,Ltd.",
+        "sub_type": "text_image",
+        "bbox": [
+            668,
+            672,
+            875,
+            773
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "image",
+        "img_path": "images/235109b0179359dd620a90432c1e62dd6e81aa8f3dafd5ef975994fed29b91d6.jpg",
+        "image_caption": [
+            "ISO9001"
+        ],
+        "image_footnote": [],
+        "content": "",
+        "bbox": [
+            215,
+            808,
+            349,
+            869
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "KCB Certification",
+        "bbox": [
+            215,
+            883,
+            349,
+            896
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "image",
+        "img_path": "images/4fc13e5a2002ddadb954db0f60e46a51299a66869fc7cd16f22d4d9ca86c1f6b.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "MEMBER OF MULTILATERAL\nRECOGNITION ARRANGEMENT",
+        "sub_type": "text_image",
+        "bbox": [
+            366,
+            802,
+            552,
+            885
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "image",
+        "img_path": "images/71f8a9390b159af45f4eeeb53d673f1235cbb4e225d0fbcf35d42439ce978c7e.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "CNAS",
+        "sub_type": "text_image",
+        "bbox": [
+            569,
+            802,
+            722,
+            887
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "中国认可",
+        "bbox": [
+            737,
+            800,
+            810,
+            815
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "国际互认",
+        "bbox": [
+            737,
+            818,
+            810,
+            832
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "管理体系",
+        "bbox": [
+            737,
+            834,
+            810,
+            850
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "MANAGEMENTSYSTEM",
+        "bbox": [
+            737,
+            853,
+            939,
+            866
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "CNAS C069-M",
+        "bbox": [
+            737,
+            871,
+            855,
+            885
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "本证书信息可在国家认证认可监督管理委员会官方网站（www.cnca.gov.cn）上查询或登陆公司网站www.kcb-china.com进行查询；也可通过电子邮件kcb@kcb-china.com进行确认，本证书在国家规定的各行政、资质许可范围及有效期内使用有效。",
+        "bbox": [
+            186,
+            915,
+            968,
+            933
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Userscan logon www.cnca.gov.cn or www.kcb-china.com to check the certificate status,to confirm by means of kcb@kcb-china.com to check the certificate status,to confirm by means of kcb@kcb-china.com.Thiscertificate shouldbeusedundernationalspecifiedadministrativequalificationlicencescopeandwithintheexpirationdate.",
+        "bbox": [
+            186,
+            934,
+            966,
+            951
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "中国北京市东城区新中西街2号楼（新中大厦）3层309室（100027）服务热线：4006161189电话：+8610-65535910/11/12/13传真：+8610-65511869",
+        "bbox": [
+            253,
+            953,
+            900,
+            963
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Address:Suite309,XinzhongBuilding,Xinzhong WestStreet#2，DongchengDistrict,Beijing，10o027,ChinaServicehotline:4006161189Tel:+8610-65535910/11/12/13Fax:+8610-65511869",
+        "bbox": [
+            186,
+            963,
+            966,
+            971
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "aside_text",
+        "text": "CERTIFICATE OF REGISTRATION",
+        "bbox": [
+            18,
+            17,
+            85,
+            952
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "header",
+        "text": "",
+        "bbox": [
+            502,
+            29,
+            650,
+            97
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "header",
+        "text": "",
+        "bbox": [
+            845,
+            24,
+            974,
+            115
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Kaixin Certification (Beijing) Co.,Ltd.",
+        "text_level": 1,
+        "bbox": [
+            326,
+            106,
+            826,
+            131
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Certificate of Registration",
+        "text_level": 1,
+        "bbox": [
+            278,
+            136,
+            872,
+            176
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Registration No.:06925Q10172R4",
+        "bbox": [
+            692,
+            230,
+            924,
+            244
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "This is to certify that",
+        "bbox": [
+            176,
+            245,
+            386,
+            261
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Hebei Taichang Electric Power Equipment Technology Co.，Ltd.",
+        "text_level": 2,
+        "bbox": [
+            176,
+            266,
+            932,
+            288
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Unified Social Credit Code:91130607056539515C",
+        "bbox": [
+            176,
+            290,
+            563,
+            305
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Registration Address:Xingyangyi Village，Mancheng District,Baoding,China.",
+        "bbox": [
+            176,
+            307,
+            794,
+            321
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Business Address:Xingyangyi Village，Mancheng District,Baoding,China.",
+        "bbox": [
+            176,
+            324,
+            759,
+            338
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "The management system is in conformity with",
+        "text_level": 2,
+        "bbox": [
+            176,
+            343,
+            672,
+            362
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "GB/T19001-2016/IS09001:2015 standard",
+        "bbox": [
+            208,
+            366,
+            579,
+            383
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Scope:",
+        "text_level": 2,
+        "bbox": [
+            176,
+            389,
+            248,
+            406
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Production of Electric Meter Box and Low Voltage Reactive Compens ation Power Distribution Cabinet within Qualification Scope；Production of Nonstandard Electric Power Fittings (Cross Arm，Hoop，Anchor Rod)，High Voltage Isolating Switch，High Voltage Fuse，Cable Protection Pipe; SalesofTubular Busbar, CableBranchBox， Polemounted Circuit Breaker",
+        "bbox": [
+            174,
+            412,
+            976,
+            534
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Reissue Date ：2025-02-14",
+        "bbox": [
+            176,
+            659,
+            442,
+            674
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "TermofValidity:2028-02-15",
+        "bbox": [
+            178,
+            676,
+            440,
+            691
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "First Issue Date:2013-03-13",
+        "bbox": [
+            178,
+            694,
+            440,
+            707
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "hat this certificate canmaintainasvalid.Onand by2026-O2-15,thiscertificate shall be used togetherwith notice ation.",
+        "bbox": [
+            176,
+            709,
+            969,
+            729
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "image",
+        "img_path": "images/f5e39d22b4f1fd6243bdf290deefff72b8ae5be6f1b3c867d4442884a775d4be.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "凯新认证（北京）有限公司\nApproved as effective taking pending use of maintaining certification and registration\nSeal for Certificate\nIssued by Ge-Kat Certification (Beijing) Co.,Ltd.",
+        "sub_type": "text_image",
+        "bbox": [
+            668,
+            672,
+            875,
+            773
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "image",
+        "img_path": "images/f9f29f6b70a2abd64f8d41a173dc2b73d162e7281915d3bf7e685009233abdf4.jpg",
+        "image_caption": [
+            "ISO9001",
+            "KCB Certification"
+        ],
+        "image_footnote": [],
+        "content": "",
+        "bbox": [
+            215,
+            808,
+            349,
+            869
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "image",
+        "img_path": "images/e66192c62245dd7d86bb6f27dc631b4a6c4b6e128aa0b1148bf0dd9e1dfd4d08.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "MEMBER OF MULTILATERAL\nRECOGNITION ARRANGEMENT",
+        "sub_type": "text_image",
+        "bbox": [
+            366,
+            802,
+            552,
+            885
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "image",
+        "img_path": "images/c45b9201b93a7e5a458a46060c9cd52231f1806cde91dcaea1ed3a9588423f0f.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "CNAS",
+        "sub_type": "text_image",
+        "bbox": [
+            569,
+            802,
+            722,
+            887
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "中国认可",
+        "bbox": [
+            737,
+            799,
+            810,
+            815
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "国际互认",
+        "bbox": [
+            737,
+            817,
+            810,
+            832
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "管理体系",
+        "bbox": [
+            737,
+            834,
+            810,
+            850
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "MANAGEMENTSYSTEM",
+        "bbox": [
+            737,
+            853,
+            939,
+            866
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "CNAS C069-M",
+        "bbox": [
+            737,
+            871,
+            855,
+            885
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "本证书信息可在国家认证认可监督管理委员会官方网站（www.cnca.gov.cn）上查询或登陆公司网站www.kcb-china.com进行查询；也可通过电子邮件kcb@kcb-china.com进行确认，本证书在国家规定的各行政、资质许可范围及有效期内使用有效。",
+        "bbox": [
+            186,
+            915,
+            968,
+            933
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Userscan logon www.cnca.gov.cn or www.kcb-china.com to check the certificate status,to confirm by means of kcb@kcb-china.com to check the certificate status,to confirm by means of kcb@kcb-china.com.Thiscertificateshouldbeusedundernationalspecifiedadministrativequalificationlicence scopeandwithintheexpirationdate.",
+        "bbox": [
+            186,
+            934,
+            966,
+            951
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "中国北京市东城区新中西街2号楼（新中大厦）3层309室（100027）服务热线：4006161189电话：+8610-65535910/11/12/13传真：+8610-65511869",
+        "bbox": [
+            253,
+            953,
+            900,
+            963
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Address:Suite309,XinzhongBuilding,Xinzhong WestStreet#2，DongchengDistrict,Bejing，100027,ChinaServicehotline:4006161189Tel:+8610-65535910/11/12/13Fax:+8610-65511869",
+        "bbox": [
+            186,
+            963,
+            966,
+            972
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "aside_text",
+        "text": "CERTIFICATE OF REGISTRATION",
+        "bbox": [
+            18,
+            17,
+            85,
+            952
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "header",
+        "text": "",
+        "bbox": [
+            502,
+            29,
+            650,
+            97
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "header",
+        "text": "",
+        "bbox": [
+            845,
+            24,
+            974,
+            115
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "保持认证注册资格通知书",
+        "text_level": 1,
+        "bbox": [
+            275,
+            123,
+            722,
+            156
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Notice of Maintaining the Qualification ofCertification Registration",
+        "text_level": 1,
+        "bbox": [
+            151,
+            163,
+            845,
+            185
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "注册号：626023S10219R0",
+        "bbox": [
+            734,
+            213,
+            904,
+            226
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "河北泰昌电力器材科技有限公司：",
+        "text_level": 2,
+        "bbox": [
+            94,
+            241,
+            640,
+            271
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "经凯新认证（北京）有限公司技术委员会对审核组提交的监督审核资料进行审议后，认为贵司职业健康安全管理体系运行持续有效，具备保持认证注册资格的条件。",
+        "bbox": [
+            94,
+            314,
+            904,
+            349
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "经公司总经理批准，保持贵单位认证注册资格并继续享有使用认证证书和认证标志的权利和义务，有效期至2026-06-18。",
+        "bbox": [
+            94,
+            366,
+            892,
+            400
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "特此通知。",
+        "bbox": [
+            129,
+            418,
+            210,
+            433
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "After the technical committee of KaiXin Certification (Beijing)Co.，Ltd. (KCB) reviewed the surveillance audit materials submitted by the audit team,it is considered thatyour company’s OHsMs has been running continuously and effectively，and it has satisfied the conditions of maintaining the qualification of certification registration.",
+        "bbox": [
+            92,
+            451,
+            905,
+            522
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "With the approval of the general manager of the company，we will maintain your company’s qualification of certification registration. So you could continue enjoying the rights and obligations of using the certificates and logos of the certifications,which willbevaliduntil 2026-06-18.",
+        "bbox": [
+            92,
+            540,
+            905,
+            610
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Hereby notify the above.",
+        "bbox": [
+            127,
+            629,
+            339,
+            644
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "image",
+        "img_path": "images/b5636fd7f6cfa0e40bb23d50e05a5d5e38a2106f0e9644c4f7be65f5e9d9ffd5.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "凯新认证（北京）有限公司\nKaiXin Certification (Beijing) Co.,Ltd\n2025-02-14",
+        "sub_type": "text_image",
+        "bbox": [
+            534,
+            701,
+            882,
+            849
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "本证书信息可在国家认证认可监督管理委员会官方网站（www.cnca.gov.cn）上查询或登陆公司网站www.kcb-china.com进行查询；也可通过电子邮件kcb@kcb-china.com进行确认。本证书在国家规定的各行政、资质许可范围及有效期内使用有效。",
+        "bbox": [
+            107,
+            887,
+            890,
+            904
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Userscanlogonwww.cnca.gov.cnorwww.kcb-china.comtocheck thecertificatestatus,toconfirm bymeansofkcb@kcb-china.comtocheck thecertificatestatus,toconfirm bymeansof kcb@kcb-china.com.Thiscertificateshouldbeused under nationalspecifiedadministrativequalificationlicencescopeandwithintheexpirationdate.",
+        "bbox": [
+            110,
+            906,
+            889,
+            922
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "中国北京市东城区新中西街2号楼（新中大厦）3层309室（100027）服务热线：4006161189电话：+8610-65535910/11/12/13传真：+8610-65511869Address:Suite309,XinzhongBulding，XinzhongWestStreet#2，DongchengDistrict,Beijing100027ChinaServicehotine:4006161189Tel:+8610-65535910/11/12/13Fax:+8610-65511869",
+        "bbox": [
+            110,
+            925,
+            890,
+            942
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "header",
+        "text": "",
+        "bbox": [
+            72,
+            49,
+            122,
+            73
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "header",
+        "text": "KAIXIN CERTIFICATION",
+        "bbox": [
+            124,
+            49,
+            396,
+            64
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "header",
+        "text": "Part of the Cotecna Group",
+        "bbox": [
+            124,
+            65,
+            277,
+            74
+        ],
+        "page_idx": 2
+    }
+]

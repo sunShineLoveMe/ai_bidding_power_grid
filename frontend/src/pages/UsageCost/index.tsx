@@ -336,7 +336,7 @@ export function UsageCostPage(): JSX.Element {
         title="标书项目调用明细"
         width={1280}
         footer={null}
-        destroyOnClose
+        destroyOnHidden
         onCancel={() => {
           setDetailOpen(false);
           setDetailOverview({});

@@ -8,6 +8,7 @@ import { retryHistoryParse } from '../../api/bidProject';
 import { CategoryList } from '../../components/common/CategoryList';
 import { MetricCards } from '../../components/common/MetricCards';
 import { ModuleHeader } from '../../components/common/ModuleHeader';
+import { formatDateTime } from '../../utils/time';
 
 interface HistoryItem {
   id: string;
@@ -19,10 +20,24 @@ interface HistoryItem {
   status?: string | null;
   stage?: string;
   action?: string;
+  next_step?: string | null;
+  next_action?: string | null;
   analysis_count?: number;
   requirement_count?: number;
   risk_count?: number;
   section_count?: number;
+  leaf_section_count?: number;
+  generated_section_count?: number;
+  generated_leaf_count?: number;
+  word_count?: number;
+  writing_task_status?: string | null;
+  writing_total_count?: number;
+  writing_done_count?: number;
+  writing_partial_count?: number;
+  writing_review_count?: number;
+  writing_active_count?: number;
+  prefill_applied?: boolean;
+  prefill_missing_required_count?: number;
   chunk_count?: number;
   file_count?: number;
   parse_status?: string | null;
@@ -46,6 +61,10 @@ const stageColor: Record<string, string> = {
   解析失败: 'red',
   解读完成: 'blue',
   标书编制: 'green',
+  待投标确认: 'gold',
+  正文生成中: 'processing',
+  草稿待续写: 'orange',
+  正文初稿完成: 'green',
   failed: 'red',
 };
 
@@ -101,16 +120,14 @@ const failedParseStatuses = new Set([
 
 const ACTIVE_WORKFLOW_KEY = 'aiBiddingActiveWorkflow';
 
-function formatDate(value?: string | null): string {
-  if (!value) return '-';
-  return new Date(value).toLocaleString('zh-CN', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  });
+function sectionProgress(record: HistoryItem): { done: number; total: number; words: number } {
+  const total = record.leaf_section_count ?? record.writing_total_count ?? 0;
+  const done = record.generated_leaf_count ?? record.generated_section_count ?? record.writing_done_count ?? 0;
+  return {
+    done,
+    total,
+    words: record.word_count || 0,
+  };
 }
 
 export function HistoryPage(): JSX.Element {
@@ -140,7 +157,7 @@ export function HistoryPage(): JSX.Element {
   }, []);
 
   useEffect(() => {
-    const hasRunningTask = items.some(item => item.stage === '解析中' || runningParseStatuses.has(item.parse_status || ''));
+    const hasRunningTask = items.some(item => item.stage === '解析中' || item.stage === '正文生成中' || runningParseStatuses.has(item.parse_status || ''));
     if (!hasRunningTask) return undefined;
     const timer = window.setInterval(() => {
       void fetchHistory();
@@ -154,7 +171,7 @@ export function HistoryPage(): JSX.Element {
       acc[stage] = (acc[stage] || 0) + 1;
       return acc;
     }, {});
-    const order = ['解析中', '解析失败', '已上传', '解析完成', '解读完成', '标书编制'];
+    const order = ['解析中', '解析失败', '已上传', '解析完成', '解读完成', '待投标确认', '正文生成中', '草稿待续写', '标书编制', '正文初稿完成'];
     return [
       { name: '全部记录', count: items.length },
       ...order.filter(stage => counts[stage]).map(stage => ({ name: stage, count: counts[stage] })),
@@ -179,7 +196,20 @@ export function HistoryPage(): JSX.Element {
 
   const openRecord = (record: HistoryItem) => {
     if (!record.id) return;
-    if ((record.section_count || 0) > 0 || record.stage === '标书编制') {
+    const nextStep = record.next_step || '';
+    if (nextStep === 'prefill') {
+      window.location.href = `/prefill?projectId=${record.id}&fromHistory=1`;
+      return;
+    }
+    if (nextStep === 'resume_partial') {
+      window.location.href = `/bid-editor?projectId=${record.id}&action=resume-partial`;
+      return;
+    }
+    if (nextStep === 'formal_check') {
+      window.location.href = `/formal-check?projectId=${record.id}`;
+      return;
+    }
+    if (nextStep === 'editor' || (record.section_count || 0) > 0 || record.stage === '标书编制') {
       window.location.href = `/bid-editor?projectId=${record.id}`;
       return;
     }
@@ -264,6 +294,17 @@ export function HistoryPage(): JSX.Element {
             {record.parse_task_id ? (
               <div className="text-[11px] font-semibold text-slate-400">任务 {record.parse_task_id.slice(0, 8)}</div>
             ) : null}
+            {sectionProgress(record).total ? (
+              <div className="grid gap-1 text-[11px] font-semibold text-slate-500">
+                <span>正文 {sectionProgress(record).done}/{sectionProgress(record).total}</span>
+                {sectionProgress(record).words ? <span>字数 {sectionProgress(record).words.toLocaleString('zh-CN')}</span> : null}
+                {record.writing_partial_count ? <span>待续写草稿 {record.writing_partial_count}</span> : null}
+                {record.writing_review_count ? <span>需人工复核 {record.writing_review_count}</span> : null}
+              </div>
+            ) : null}
+            {(record.section_count || 0) > 0 && !record.prefill_applied ? (
+              <div className="text-[11px] font-semibold text-amber-600">尚未完成投标确认</div>
+            ) : null}
           </div>
         );
       },
@@ -276,14 +317,16 @@ export function HistoryPage(): JSX.Element {
           <Tag>需求 {record.requirement_count || 0}</Tag>
           <Tag>风险 {record.risk_count || 0}</Tag>
           <Tag>章节 {record.section_count || 0}</Tag>
+          {sectionProgress(record).total ? <Tag>正文 {sectionProgress(record).done}/{sectionProgress(record).total}</Tag> : null}
           {record.file_count ? <Tag>文件 {record.file_count}</Tag> : null}
         </Space>
       ),
     },
-    { title: '创建时间', dataIndex: 'created_at', width: 155, render: value => <span className="text-slate-600">{formatDate(value)}</span> },
+    { title: '创建时间', dataIndex: 'created_at', width: 155, render: value => <span className="text-slate-600">{formatDateTime(value)}</span> },
     {
       title: '操作',
-      width: 160,
+      width: 190,
+      fixed: 'right',
       align: 'right',
       render: (_, record) => (
         <Space size={6}>
@@ -293,7 +336,7 @@ export function HistoryPage(): JSX.Element {
             </Button>
           ) : null}
           <Button type="primary" ghost size="small" onClick={() => openRecord(record)}>
-            {record.action || '查看'}
+            {record.next_action || (record.analysis_count ? '查看解读' : record.action || '查看')}
           </Button>
           <Popconfirm title="确认删除该历史任务？" description="会删除项目记录和已解析的结构化数据。" okText="删除" cancelText="取消" onConfirm={() => deleteRecord(record)}>
             <Button danger size="small" icon={<Trash2 size={14} />}>删除</Button>
@@ -334,7 +377,7 @@ export function HistoryPage(): JSX.Element {
 
       <div className="grid min-h-0 grid-cols-[220px_minmax(0,1fr)] gap-4">
         <CategoryList title="记录阶段" items={stageCategories} activeName={activeStage} onChange={setActiveStage} />
-        <section className="panel-card h-full overflow-hidden">
+        <section className="panel-card flex h-full min-h-0 flex-col overflow-hidden">
           <div className="mb-3 flex items-center justify-between gap-3">
             <h2 className="panel-title mb-0">历史任务列表</h2>
             <Select
@@ -344,18 +387,24 @@ export function HistoryPage(): JSX.Element {
               options={stageCategories.map(item => ({ label: item.name, value: item.name }))}
             />
           </div>
-          <Table
-            rowKey="id"
-            size="small"
-            pagination={{ pageSize: 12 }}
-            columns={columns}
-            dataSource={filteredItems}
-            loading={loading}
-            className="compact-table"
-            tableLayout="fixed"
-            scroll={{ y: 'calc(100vh - 392px)' }}
-            locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无历史记录，上传招标文件后会显示在这里" /> }}
-          />
+          <div className="bounded-table min-h-0 flex-1">
+            <Table
+              rowKey="id"
+              size="small"
+              pagination={{ pageSize: 10, showSizeChanger: true, pageSizeOptions: [10, 20, 50], showTotal: total => `共 ${total} 条` }}
+              columns={columns}
+              dataSource={filteredItems}
+              loading={loading}
+              className="compact-table"
+              tableLayout="fixed"
+              scroll={{ x: 1125, y: 'max(180px, calc(100vh - 550px))' }}
+              locale={{
+                emptyText: loading
+                  ? <span className="text-xs font-semibold text-slate-500">正在加载历史记录...</span>
+                  : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无历史记录，上传招标文件后会显示在这里" />,
+              }}
+            />
+          </div>
         </section>
       </div>
     </div>

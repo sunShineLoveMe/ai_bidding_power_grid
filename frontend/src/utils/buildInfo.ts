@@ -6,6 +6,16 @@ type BuildInfo = {
   builtAt: string;
 };
 
+type BackendHealth = {
+  status?: string;
+  version?: {
+    app?: string;
+    commit?: string;
+    branch?: string;
+    builtAt?: string;
+  };
+};
+
 declare global {
   interface Window {
     __AI_BID_BUILD__?: BuildInfo;
@@ -23,6 +33,16 @@ export async function logBuildInfo(): Promise<void> {
     console.info(
       `[build] ${info.app} buildId=${info.buildId} commit=${info.commit} branch=${info.branch} builtAt=${info.builtAt}`,
     );
+    const healthResponse = await fetch('/api/health', { cache: 'no-store' });
+    if (!healthResponse.ok) {
+      return;
+    }
+    const health = (await healthResponse.json()) as BackendHealth;
+    if (health.version) {
+      console.info(
+        `[build] ${health.version.app || 'ai-bidding-backend'} commit=${health.version.commit || 'unknown'} branch=${health.version.branch || 'unknown'} builtAt=${health.version.builtAt || '-'}`,
+      );
+    }
   } catch {
     // Build metadata is an operational aid; it must not block app startup.
   }

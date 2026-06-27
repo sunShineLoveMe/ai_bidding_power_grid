@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react';
-import { BookOpen, Box, CircleDollarSign, FileClock, FileSearch, Home, LogOut, Settings, ShieldCheck, Sparkles, UserRound } from 'lucide-react';
-import { Button, Tag } from 'antd';
+import { BookOpen, Box, CircleDollarSign, ClipboardCheck, FileClock, FileSearch, Home, LogOut, Settings, ShieldCheck, Sparkles, UserRound } from 'lucide-react';
+import { Button } from 'antd';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { GlobalLoading } from '../common/GlobalLoading';
@@ -13,6 +13,7 @@ import { logout } from '../../api/auth';
 const navItems = [
   { path: '/', label: '主页', icon: Home },
   { path: '/interpretation', label: '招标项目', icon: FileSearch },
+  { path: '/formal-check', label: '正式检查', icon: ClipboardCheck },
   { path: '/knowledge', label: '企业知识库', icon: BookOpen },
   { path: '/qualification', label: '企业资信库', icon: ShieldCheck },
   { path: '/products', label: '企业产品库', icon: Box },
@@ -56,7 +57,6 @@ export function AppLayout({ children }: PropsWithChildren): JSX.Element {
           <Button type="text" icon={<LogOut size={18} />} onClick={handleLogout}>
             退出
           </Button>
-          <Tag className="m-0 rounded-lg border-blue-300 px-4 py-1.5 text-base font-bold text-blue-600">v0.1 单机版</Tag>
         </div>
       </header>
 
@@ -89,11 +89,13 @@ export function AppLayout({ children }: PropsWithChildren): JSX.Element {
 
       <Button
         type="primary"
-        className="fixed bottom-[72px] right-7 z-40 h-14 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-6 text-base font-black shadow-xl shadow-blue-200"
+        title="知识库助手"
+        aria-label="知识库助手"
+        className="fixed bottom-[72px] right-7 z-40 h-14 w-14 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-0 text-base font-black shadow-xl shadow-blue-200 2xl:w-auto 2xl:px-6"
         icon={<Sparkles size={19} />}
         onClick={() => setKnowledgeAssistantOpen(true)}
       >
-        知识库助手
+        <span className="hidden 2xl:inline">知识库助手</span>
       </Button>
 
       <KnowledgeSearchDrawer

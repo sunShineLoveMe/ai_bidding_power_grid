@@ -1,0 +1,71 @@
+[
+    [
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.331,
+                0.131,
+                0.666,
+                0.151
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.427,
+                0.168,
+                0.572,
+                0.187
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.139,
+                0.195,
+                0.88,
+                0.274
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>序号</td><td>设备型号</td><td>设备名称</td><td>生产厂家</td></tr><tr><td>1</td><td>CPVC63</td><td>CPVC63 三层复合管材挤出生产线</td><td>江苏欣荣科技发展有限公司</td></tr><tr><td>2</td><td>CPVC110</td><td>CPVC110 三层复合管材挤出生产线</td><td>江苏欣荣科技发展有限公司</td></tr><tr><td>3</td><td>SJMPP-90 型</td><td>MPP 生产线</td><td>雄县顺达塑料机械厂</td></tr></table>"
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.557,
+                0.23,
+                0.737,
+                0.356
+            ],
+            "angle": 0,
+            "content": "生产线\n江苏欣荣科\n雄县顺达\n河北电气科技有限公司\n1306210005674",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.332,
+                0.131,
+                0.666,
+                0.152
+            ],
+            "text": "河北泰昌电力器材科技有限公司",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.425,
+                0.166,
+                0.574,
+                0.189
+            ],
+            "text": "生产设备台账",
+            "score": 1.0
+        }
+    ]
+]

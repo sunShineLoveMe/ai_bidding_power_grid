@@ -1,0 +1,1981 @@
+[
+    [
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.0,
+                0.0,
+                0.163,
+                0.999
+            ],
+            "angle": 270,
+            "content": "CERTIFICATE OF REGISTRATION"
+        },
+        {
+            "type": "header",
+            "bbox": [
+                0.508,
+                0.034,
+                0.657,
+                0.1
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "doc_title",
+            "bbox": [
+                0.402,
+                0.113,
+                0.762,
+                0.138
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "doc_title",
+            "bbox": [
+                0.249,
+                0.142,
+                0.918,
+                0.183
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.712,
+                0.254,
+                0.916,
+                0.27
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.526,
+                0.285,
+                0.613,
+                0.304
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.286,
+                0.33,
+                0.856,
+                0.361
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.378,
+                0.377,
+                0.761,
+                0.394
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.45,
+                0.411,
+                0.706,
+                0.428
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.504,
+                0.454,
+                0.637,
+                0.474
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.274,
+                0.488,
+                0.864,
+                0.51
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.504,
+                0.525,
+                0.637,
+                0.545
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.21,
+                0.558,
+                0.93,
+                0.653
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.216,
+                0.674,
+                0.543,
+                0.693
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.216,
+                0.7,
+                0.542,
+                0.719
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.659,
+                0.677,
+                0.865,
+                0.778
+            ],
+            "angle": 0,
+            "content": "凯新认证（北京）有限公司\n证书专用章\nSeal for Certificate\nKainan\n自2024-06-20日起，本证书需\nCertification (Beijing)",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.196,
+                0.742,
+                0.914,
+                0.775
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.306,
+                0.811,
+                0.44,
+                0.87
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "image_caption",
+            "bbox": [
+                0.341,
+                0.871,
+                0.404,
+                0.881
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.306,
+                0.885,
+                0.438,
+                0.897
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.493,
+                0.814,
+                0.624,
+                0.838
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.467,
+                0.841,
+                0.643,
+                0.851
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.468,
+                0.856,
+                0.642,
+                0.865
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.515,
+                0.87,
+                0.596,
+                0.879
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.48,
+                0.88,
+                0.626,
+                0.889
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.492,
+                0.89,
+                0.617,
+                0.898
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.669,
+                0.806,
+                0.853,
+                0.888
+            ],
+            "angle": 0,
+            "content": "MEMBER OF MULTILATERAL\nRECOGNITION ARRANGEMENT",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.187,
+                0.919,
+                0.969,
+                0.937
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.189,
+                0.938,
+                0.968,
+                0.954
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.255,
+                0.957,
+                0.902,
+                0.966
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.189,
+                0.966,
+                0.968,
+                0.975
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.489,
+                0.026,
+                0.67,
+                0.111
+            ],
+            "text": "K",
+            "score": 0.531
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.401,
+                0.111,
+                0.765,
+                0.14
+            ],
+            "text": "凯新认证（北京）有限公司",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.215,
+                0.674,
+                0.543,
+                0.692
+            ],
+            "text": "发证日期：2023年06月19日",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.245,
+                0.14,
+                0.921,
+                0.185
+            ],
+            "text": "职业健康安全管理体系认证证书",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.714,
+                0.255,
+                0.917,
+                0.27
+            ],
+            "text": "注册号：626023S10219R0",
+            "score": 0.989
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.524,
+                0.284,
+                0.616,
+                0.306
+            ],
+            "text": "兹证明",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.285,
+                0.329,
+                0.857,
+                0.363
+            ],
+            "text": "河北泰昌电力器材科技有限公司",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.273,
+                0.484,
+                0.868,
+                0.515
+            ],
+            "text": "GB/T 45001-2020/IS045001:2018 标准",
+            "score": 0.98
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.379,
+                0.377,
+                0.761,
+                0.394
+            ],
+            "text": "统一社会信用代码：91130607056539515C",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.452,
+                0.411,
+                0.706,
+                0.428
+            ],
+            "text": "地址：保定市满城区陉阳驿村",
+            "score": 0.976
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.504,
+                0.453,
+                0.64,
+                0.475
+            ],
+            "text": "管理体系符合",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.504,
+                0.524,
+                0.64,
+                0.546
+            ],
+            "text": "认证覆盖范围",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.489,
+                0.811,
+                0.629,
+                0.844
+            ],
+            "text": "ANAB",
+            "score": 0.98
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.266,
+                0.557,
+                0.92,
+                0.581
+            ],
+            "text": "资质范围内的电表箱及低压无功补偿配电柜的生产；非",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.212,
+                0.582,
+                0.931,
+                0.605
+            ],
+            "text": "标电力金具（横担、抱箍、拉线棒)、高压隔离开关、高压熔",
+            "score": 0.978
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.211,
+                0.605,
+                0.92,
+                0.629
+            ],
+            "text": "断器、电缆保护管的生产；管状母线、电缆分支箱及柱上断",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.211,
+                0.629,
+                0.354,
+                0.654
+            ],
+            "text": "路器的销售",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.217,
+                0.701,
+                0.543,
+                0.719
+            ],
+            "text": "证书有效期至：2026年06月18日",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.197,
+                0.742,
+                0.665,
+                0.755
+            ],
+            "text": "注：获证组织必须定期接受监督审核并经审核合格此证书方继续有效。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.666,
+                0.74,
+                0.915,
+                0.757
+            ],
+            "text": "自202406-20日起，本证书需与《保",
+            "score": 0.927
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.227,
+                0.761,
+                0.468,
+                0.775
+            ],
+            "text": "持认证注册资格通知书》一并使用。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.34,
+                0.87,
+                0.406,
+                0.881
+            ],
+            "text": "ISO45001",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.513,
+                0.869,
+                0.597,
+                0.88
+            ],
+            "text": "ISO/IEC17021-1",
+            "score": 0.959
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.303,
+                0.882,
+                0.441,
+                0.899
+            ],
+            "text": "KCB Certification",
+            "score": 0.991
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.492,
+                0.888,
+                0.619,
+                0.899
+            ],
+            "text": "CERTIFICATION BODY",
+            "score": 0.974
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.467,
+                0.84,
+                0.644,
+                0.853
+            ],
+            "text": "ANSI National Accreditation Board",
+            "score": 0.962
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.467,
+                0.855,
+                0.643,
+                0.867
+            ],
+            "text": "ACCREDITED",
+            "score": 0.981
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.479,
+                0.879,
+                0.628,
+                0.891
+            ],
+            "text": "MANAGEMENTSYSTEMS",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.189,
+                0.918,
+                0.97,
+                0.931
+            ],
+            "text": "本证书信息可在国家认证认可监督管理委员会官方网站（www.cnca.gov.cn）上查询或登陆公司网站www.kcb-china.com进行查询；也可通过电子邮件kcb@kcb-china.com进行确认。本证书在",
+            "score": 0.996
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.189,
+                0.926,
+                0.425,
+                0.937
+            ],
+            "text": "国家规定的各行政、资质许可范围及有效期内使用有效。",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.189,
+                0.935,
+                0.97,
+                0.948
+            ],
+            "text": "Userscanlogonwww.cnca.gov.cnorwww.kcb-china.comtocheckthecertificatestatus,toconfirmbymeansofkcb@kcb-china.comtocheckthecertificatestatus,toconfirmbymeansof",
+            "score": 0.975
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.189,
+                0.945,
+                0.802,
+                0.955
+            ],
+            "text": "kcb@kcb-china.com.Thiscertificate should beused under national specified administrativequalification licence scope and withinthe expirationdate.",
+            "score": 0.973
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.256,
+                0.955,
+                0.904,
+                0.968
+            ],
+            "text": "中国北京市东城区新中西街2号楼（新中大厦）3层309室（100027）服务热线：4006161189电话：+8610-65535910/112/13传真：+8610-65511869",
+            "score": 0.99
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.189,
+                0.965,
+                0.97,
+                0.976
+            ],
+            "text": "Address:Suite309,Xinzhong Building，XinzhongWestStreet#2，Dongcheng District,Beijing，10027ChinaServicehotline:4006161189Tel:+8610-65535910/11/12/13Fax:+8610-65511869",
+            "score": 0.964
+        }
+    ],
+    [
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.0,
+                0.0,
+                0.163,
+                0.999
+            ],
+            "angle": 270,
+            "content": "CERTIFICATE OF REGISTRATION"
+        },
+        {
+            "type": "header",
+            "bbox": [
+                0.508,
+                0.033,
+                0.657,
+                0.1
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.333,
+                0.111,
+                0.833,
+                0.136
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.285,
+                0.14,
+                0.877,
+                0.181
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.618,
+                0.251,
+                0.892,
+                0.266
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.477,
+                0.281,
+                0.665,
+                0.299
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.25,
+                0.318,
+                0.912,
+                0.376
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.34,
+                0.391,
+                0.759,
+                0.409
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.222,
+                0.422,
+                0.778,
+                0.44
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.345,
+                0.464,
+                0.785,
+                0.483
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.244,
+                0.496,
+                0.898,
+                0.521
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.223,
+                0.525,
+                0.892,
+                0.651
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.228,
+                0.666,
+                0.546,
+                0.683
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.23,
+                0.685,
+                0.546,
+                0.703
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.663,
+                0.675,
+                0.868,
+                0.778
+            ],
+            "angle": 0,
+            "content": "凯新认证（北京）有限公司\nand the audit shall be approved as\nand by 2024-06-20, this certificate\nstration Issued by Ge Kai",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.202,
+                0.716,
+                0.89,
+                0.761
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.309,
+                0.809,
+                0.445,
+                0.87
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "image_caption",
+            "bbox": [
+                0.344,
+                0.87,
+                0.408,
+                0.88
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.31,
+                0.884,
+                0.442,
+                0.896
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.497,
+                0.812,
+                0.629,
+                0.836
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.471,
+                0.84,
+                0.648,
+                0.849
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.471,
+                0.854,
+                0.646,
+                0.864
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.521,
+                0.869,
+                0.6,
+                0.877
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.484,
+                0.879,
+                0.631,
+                0.888
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.496,
+                0.888,
+                0.621,
+                0.896
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.674,
+                0.804,
+                0.857,
+                0.885
+            ],
+            "angle": 0,
+            "content": "MEMBER OF MULTILATERAL\nRECOGNITION ARRANGEMENT",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.191,
+                0.918,
+                0.974,
+                0.936
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.192,
+                0.937,
+                0.972,
+                0.953
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.193,
+                0.955,
+                0.973,
+                0.974
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.248,
+                0.314,
+                0.914,
+                0.348
+            ],
+            "text": "Hebei Taichang Electric Power Equipment",
+            "score": 0.983
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.394,
+                0.344,
+                0.719,
+                0.379
+            ],
+            "text": "Technology Co.,Ltd.",
+            "score": 0.992
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.477,
+                0.279,
+                0.666,
+                0.301
+            ],
+            "text": "This is to certify that",
+            "score": 0.945
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.619,
+                0.251,
+                0.892,
+                0.265
+            ],
+            "text": "Registration No.:626023S10219R0",
+            "score": 0.98
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.492,
+                0.809,
+                0.633,
+                0.842
+            ],
+            "text": "ANAB",
+            "score": 0.976
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.228,
+                0.664,
+                0.333,
+                0.683
+            ],
+            "text": "Issue Date",
+            "score": 0.987
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.421,
+                0.663,
+                0.548,
+                0.684
+            ],
+            "text": ": 2023-06-19",
+            "score": 0.969
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.228,
+                0.683,
+                0.389,
+                0.706
+            ],
+            "text": "Term of Validity",
+            "score": 0.987
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.418,
+                0.683,
+                0.548,
+                0.703
+            ],
+            "text": "：2026-06-18",
+            "score": 0.96
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.342,
+                0.869,
+                0.41,
+                0.881
+            ],
+            "text": "ISO45001",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.519,
+                0.867,
+                0.602,
+                0.878
+            ],
+            "text": "ISO/IEC17021-1",
+            "score": 0.943
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.308,
+                0.882,
+                0.445,
+                0.898
+            ],
+            "text": "KCB Certification",
+            "score": 0.985
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.495,
+                0.886,
+                0.623,
+                0.897
+            ],
+            "text": "CERTIFICATION BODY",
+            "score": 0.975
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.472,
+                0.84,
+                0.648,
+                0.851
+            ],
+            "text": "ANSINational Accreditation Board",
+            "score": 0.954
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.471,
+                0.851,
+                0.648,
+                0.866
+            ],
+            "text": "ACCREDITED",
+            "score": 0.844
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.483,
+                0.877,
+                0.632,
+                0.889
+            ],
+            "text": "MANAGEMENTSYSTEMS",
+            "score": 0.995
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.193,
+                0.917,
+                0.974,
+                0.929
+            ],
+            "text": "本证书信息可在国家认证认可监督管理委员会官方网站（www.cnca.gov.cn）上查询或登陆公司网站www.kcb-china.com进行查询；也可通过电子邮件kcb@kcb-china.com进行确认。本证书在",
+            "score": 0.994
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.196,
+                0.927,
+                0.429,
+                0.936
+            ],
+            "text": "国家规定的各行政、资质许可范围及有效期内使用有效。",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.193,
+                0.935,
+                0.973,
+                0.946
+            ],
+            "text": "Userscan logonwww.cnca.gov.cnor www.kcb-china.comtocheck thecertificate status,toconfirmbymeansofkcb@kcb-china.comtocheck the certificatestatus,toconfirm bymeans of",
+            "score": 0.973
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.194,
+                0.944,
+                0.807,
+                0.954
+            ],
+            "text": "kcb@kcb-china.com.This certificate should beused under national specified administrative qualification licence scope and within the expiration date.",
+            "score": 0.965
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.261,
+                0.956,
+                0.907,
+                0.966
+            ],
+            "text": "中国北京市东城区新中西街2号楼（新中大厦）3层309室（100027）服务热线：4006161189电话：+8610-65535910/11/12/13传真：+8610-65511869",
+            "score": 0.996
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.192,
+                0.963,
+                0.975,
+                0.974
+            ],
+            "text": "Address:Suite309,XinzhongBuilding，XinzhongWestStreet#2，DongchengDistrict,Beijing，100027ChinaServicehotline:4006161189Tel:+8610-65535910/11/12/13Fax:+8610-65511869",
+            "score": 0.945
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.33,
+                0.107,
+                0.835,
+                0.139
+            ],
+            "text": "Kaixin Certification (Beijing) Co.,Ltd.",
+            "score": 0.995
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.281,
+                0.133,
+                0.886,
+                0.186
+            ],
+            "text": "Certificate of Registration",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.341,
+                0.389,
+                0.76,
+                0.411
+            ],
+            "text": "Unified Social Credit Code: 91130607056539515C",
+            "score": 0.992
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.346,
+                0.462,
+                0.787,
+                0.484
+            ],
+            "text": "TheManagement system isin conformity with",
+            "score": 0.976
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.222,
+                0.421,
+                0.781,
+                0.441
+            ],
+            "text": "Address: Xingyangyi Village,Mancheng District,Baoding,China.",
+            "score": 0.959
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.242,
+                0.495,
+                0.9,
+                0.522
+            ],
+            "text": "GB/T 45001-2020/ls045001:2018 standard",
+            "score": 0.974
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.224,
+                0.525,
+                0.839,
+                0.545
+            ],
+            "text": "Scope: Production of Electric Meter Box and Low Voltage",
+            "score": 0.984
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.289,
+                0.544,
+                0.845,
+                0.561
+            ],
+            "text": "Reactive Compensation Power Distribution Cabinet",
+            "score": 0.98
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.289,
+                0.561,
+                0.891,
+                0.58
+            ],
+            "text": "within Qualification Scope; Production ofNon-standard",
+            "score": 0.989
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.29,
+                0.579,
+                0.885,
+                0.597
+            ],
+            "text": "Electric Power Fittings (Cross Arm, Hoop,Anchor Rod),",
+            "score": 0.968
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.29,
+                0.597,
+                0.891,
+                0.615
+            ],
+            "text": "High Voltage Isolating Switch, High Voltage Fuse, Cable",
+            "score": 0.967
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.289,
+                0.615,
+                0.88,
+                0.632
+            ],
+            "text": "Protection Pipe; Sales ofTubular Busbar, Cable Branch",
+            "score": 0.99
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.29,
+                0.633,
+                0.667,
+                0.649
+            ],
+            "text": "Box, Pole-mounted Circuit Breaker",
+            "score": 0.966
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.247,
+                0.728,
+                0.893,
+                0.745
+            ],
+            "text": "ctive before approving that this certificate can maintain as valid.Onandhyo24o62oihistertificate sh",
+            "score": 0.945
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.246,
+                0.742,
+                0.835,
+                0.763
+            ],
+            "text": "al e used together with notice ofmaintainingcertificationand registrassuedbyGea",
+            "score": 0.916
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.201,
+                0.715,
+                0.891,
+                0.731
+            ],
+            "text": "NOTE:Thecertified organizationmustaccept the surveilanceauditduly，andtheaudshallbprdvedgseffe",
+            "score": 0.937
+        }
+    ],
+    [
+        {
+            "type": "header",
+            "bbox": [
+                0.073,
+                0.05,
+                0.123,
+                0.074
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "header",
+            "bbox": [
+                0.126,
+                0.05,
+                0.397,
+                0.065
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "header",
+            "bbox": [
+                0.126,
+                0.066,
+                0.278,
+                0.075
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "doc_title",
+            "bbox": [
+                0.277,
+                0.124,
+                0.723,
+                0.157
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "doc_title",
+            "bbox": [
+                0.152,
+                0.165,
+                0.847,
+                0.186
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.733,
+                0.214,
+                0.906,
+                0.227
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.092,
+                0.243,
+                0.641,
+                0.272
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.092,
+                0.315,
+                0.906,
+                0.351
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.091,
+                0.367,
+                0.894,
+                0.402
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.127,
+                0.419,
+                0.212,
+                0.434
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.091,
+                0.452,
+                0.906,
+                0.525
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.09,
+                0.541,
+                0.906,
+                0.612
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.126,
+                0.63,
+                0.341,
+                0.645
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.536,
+                0.703,
+                0.883,
+                0.85
+            ],
+            "angle": 0,
+            "content": "凯新认证（北京）有限公司\nKaiXin Certification (Beijing) Co.,Ltd\n2025-02-14",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.108,
+                0.887,
+                0.892,
+                0.906
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.11,
+                0.907,
+                0.891,
+                0.924
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.11,
+                0.926,
+                0.891,
+                0.944
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.735,
+                0.214,
+                0.905,
+                0.227
+            ],
+            "text": "注册号：626023S10219R0",
+            "score": 0.989
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.128,
+                0.418,
+                0.213,
+                0.435
+            ],
+            "text": "特此通知。",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.123,
+                0.047,
+                0.399,
+                0.068
+            ],
+            "text": "KAIXIN CERTIFICATION",
+            "score": 0.95
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.123,
+                0.062,
+                0.281,
+                0.077
+            ],
+            "text": "Part of the Cotecna Group",
+            "score": 0.96
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.11,
+                0.887,
+                0.892,
+                0.9
+            ],
+            "text": "本证书信息可在国家认证认可监督管理委员会官方网站（www.cnca.gov.cn）上查询或登陆公司网站www.kcb-china.com进行查询；也可通过电子邮件kcb@kcb-china.com进行确认。本证书在",
+            "score": 0.966
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.111,
+                0.896,
+                0.349,
+                0.906
+            ],
+            "text": "国家规定的各行政、资质许可范围及有效期内使用有效。",
+            "score": 0.982
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.111,
+                0.906,
+                0.892,
+                0.916
+            ],
+            "text": "Userscanlogon www.cnca.gov.cnor www.kcb-china.comtocheck the certificate status,to confirm bymeansofkcb@kcb-china.comto check thecertificate status,to confirmbymeansof",
+            "score": 0.945
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.11,
+                0.914,
+                0.727,
+                0.924
+            ],
+            "text": "kcb@kcb-china.com.This certificate should be used under national specifiedadministrativequalificationlicencescopeand withintheexpirationdate.",
+            "score": 0.97
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.177,
+                0.925,
+                0.826,
+                0.937
+            ],
+            "text": "中国北京市东城区新中西街2号楼（新中大厦）3层309室（100027）服务热线：400616189电话：+8610-65535910/11/12/13传真：+8610-65511869",
+            "score": 0.97
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.11,
+                0.933,
+                0.892,
+                0.945
+            ],
+            "text": "Address:Suite309,XinzhongBuilding.XinzhongWestStreet#2，DongchengDistrict,Beijing100027,ChinaServicehotine:4006161189Tel:+8610-65535910/11/12/13Fax:+8610-65511869",
+            "score": 0.909
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.091,
+                0.24,
+                0.646,
+                0.274
+            ],
+            "text": "河北泰昌电力器材科技有限公司：",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.271,
+                0.121,
+                0.728,
+                0.161
+            ],
+            "text": "保持认证注册资格通知书",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.151,
+                0.163,
+                0.849,
+                0.188
+            ],
+            "text": "Notice of Maintaining the Qualification ofCertification Registration",
+            "score": 0.968
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.316,
+                0.904,
+                0.33
+            ],
+            "text": "经凯新认证（北京）有限公司技术委员会对审核组提交的监督审核资料进行审议后，认为贵司职业",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.096,
+                0.335,
+                0.601,
+                0.349
+            ],
+            "text": "健康安全管理体系运行持续有效，具备保持认证注册资格的条件。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.129,
+                0.367,
+                0.895,
+                0.383
+            ],
+            "text": "经公司总经理批准，保持贵单位认证注册资格并继续享有使用认证证书和认证标志的权利和义务，",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.094,
+                0.385,
+                0.286,
+                0.402
+            ],
+            "text": "有效期至2026-06-18。",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.126,
+                0.45,
+                0.904,
+                0.468
+            ],
+            "text": "After the technical committee of KaiXin Certification (Beijing)Co.，Ltd.(KCB)",
+            "score": 0.97
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.093,
+                0.47,
+                0.906,
+                0.486
+            ],
+            "text": "reviewed the surveillance audit materials submitted by the audit team, it is considered",
+            "score": 0.976
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.095,
+                0.49,
+                0.907,
+                0.505
+            ],
+            "text": "that your company’s OHsMs has been running continuously and effectively，and it has",
+            "score": 0.964
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.092,
+                0.507,
+                0.881,
+                0.525
+            ],
+            "text": "satisfied the conditions of maintaining the qualification of certification registration .",
+            "score": 0.991
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.126,
+                0.539,
+                0.907,
+                0.558
+            ],
+            "text": "With the approval of the general manager of the company，we will maintain your",
+            "score": 0.991
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.093,
+                0.559,
+                0.909,
+                0.576
+            ],
+            "text": "company’s qualification of certification registration. So you could continue enjoying the",
+            "score": 0.989
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.094,
+                0.578,
+                0.907,
+                0.594
+            ],
+            "text": "rights and obligations of using the certificates and logos of the certifications,which",
+            "score": 0.971
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.093,
+                0.596,
+                0.38,
+                0.612
+            ],
+            "text": "will be validuntil 2026-06-18.",
+            "score": 0.963
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.126,
+                0.629,
+                0.342,
+                0.646
+            ],
+            "text": "Hereby notify the above.",
+            "score": 0.979
+        }
+    ]
+]

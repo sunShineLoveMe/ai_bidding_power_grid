@@ -1,0 +1,105 @@
+{
+  "generated_at": "2026-06-06T16:04:32",
+  "batch_id": "customer_liaoning_taichang_20260606_p0",
+  "execute": false,
+  "before_counts": {
+    "knowledge_documents": 14,
+    "document_chunks": 4820,
+    "goods_list_rows": 0
+  },
+  "deleted_counts": null,
+  "role_counts": [
+    {
+      "doc_role": "technical_spec",
+      "count": 2223
+    },
+    {
+      "doc_role": "main_tender_file",
+      "count": 2021
+    },
+    {
+      "doc_role": "contract_general_terms",
+      "count": 411
+    },
+    {
+      "doc_role": "tender_notice",
+      "count": 128
+    },
+    {
+      "doc_role": "contract_special_terms",
+      "count": 37
+    }
+  ],
+  "sample_documents": [
+    {
+      "id": "4df0b079-5e38-46b2-8851-4d49ec9670e6",
+      "title": "5.120 10kV及以下协议库存货物采购合同（材料类）（2024版）",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "contract_special_terms"
+    },
+    {
+      "id": "6f7c6faa-68c4-4a36-821d-1fce80aa1e9c",
+      "title": "5.120 10kV及以下协议库存货物采购合同通用条款（材料类）（2024版）",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "contract_general_terms"
+    },
+    {
+      "id": "9493b671-e0a9-467c-810c-9be6de7f84b6",
+      "title": "5.120 10kV及以下协议库存货物采购合同通用条款（材料类）（2024版）",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "contract_general_terms"
+    },
+    {
+      "id": "a46e86c9-80d0-48eb-a4fa-75ce54b26e57",
+      "title": "A171-500021527-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 CPVC",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "technical_spec"
+    },
+    {
+      "id": "bde21404-de6e-4398-88b0-60b120ca72da",
+      "title": "合同专用条款其他文件202512261654177",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "contract_special_terms"
+    },
+    {
+      "id": "6cdf133e-c167-4485-b017-2f2cb1ae3b35",
+      "title": "国网辽宁电力2025年第三次物资协议库存招标采购投标邀请书及招标公告",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "tender_notice"
+    },
+    {
+      "id": "2e2bcc2b-4944-4603-9a21-6b01e5da9aa6",
+      "title": "国网辽宁电力2025年第三次物资协议库存招标采购招标文件",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "main_tender_file"
+    },
+    {
+      "id": "1b1fca0e-2396-44d0-957e-d1cce4ee3086",
+      "title": "国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500038391-00004）",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "technical_spec"
+    },
+    {
+      "id": "345f3fed-b502-49f2-af9d-fa7e7ad888d5",
+      "title": "电缆保护管-CPVC（φ100）",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "technical_spec"
+    },
+    {
+      "id": "49b7748a-235b-461d-9fa3-0339d0bb704e",
+      "title": "电缆保护管-CPVC（φ100）",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "technical_spec"
+    }
+  ]
+}

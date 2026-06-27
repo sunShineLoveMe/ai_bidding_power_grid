@@ -1,0 +1,7471 @@
+[
+    [
+        {
+            "type": "title",
+            "bbox": [
+                0.293,
+                0.31,
+                0.723,
+                0.372
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.354,
+                0.388,
+                0.664,
+                0.408
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.915,
+                0.493,
+                0.999,
+                0.622
+            ],
+            "angle": 0,
+            "content": "石家庄世仁公\nSHIJIA ZHUANG SHIRU\nFROMGENERAL PA",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.233,
+                0.763,
+                0.823,
+                0.786
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.233,
+                0.8,
+                0.892,
+                0.861
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.292,
+                0.31,
+                0.725,
+                0.338
+            ],
+            "text": "河北泰昌电力器材科技有限公司",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.44,
+                0.347,
+                0.58,
+                0.376
+            ],
+            "text": "2023年度",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.356,
+                0.388,
+                0.665,
+                0.407
+            ],
+            "text": "世仁审字【2024】第VE-73号",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.235,
+                0.762,
+                0.822,
+                0.786
+            ],
+            "text": "审计单位：石家庄世仁会计师事务所（普通合伙）",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.234,
+                0.799,
+                0.892,
+                0.823
+            ],
+            "text": "地址：河北省石家庄市栾城区石栾大街与栾武路交口南",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.315,
+                0.837,
+                0.484,
+                0.863
+            ],
+            "text": "行200米路西",
+            "score": 1.0
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "bbox": [
+                0.132,
+                0.073,
+                0.863,
+                0.109
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.375,
+                0.129,
+                0.642,
+                0.148
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.432,
+                0.199,
+                0.601,
+                0.224
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.127,
+                0.246,
+                0.399,
+                0.265
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.16,
+                0.273,
+                0.279,
+                0.29
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.127,
+                0.298,
+                0.892,
+                0.37
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.127,
+                0.376,
+                0.892,
+                0.447
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.159,
+                0.455,
+                0.489,
+                0.474
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.16,
+                0.482,
+                0.374,
+                0.5
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.127,
+                0.507,
+                0.892,
+                0.606
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.164,
+                0.613,
+                0.489,
+                0.631
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.127,
+                0.639,
+                0.892,
+                0.71
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.128,
+                0.718,
+                0.892,
+                0.79
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.16,
+                0.797,
+                0.484,
+                0.816
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.127,
+                0.823,
+                0.892,
+                0.895
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.63,
+                0.921,
+                0.884,
+                0.936
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "page_number",
+            "bbox": [
+                0.509,
+                0.937,
+                0.519,
+                0.948
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.166,
+                0.614,
+                0.488,
+                0.631
+            ],
+            "text": "三、管理层和治理层对财务报表的责任",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.162,
+                0.798,
+                0.484,
+                0.814
+            ],
+            "text": "四、注册会计师对财务报表审计的责任",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.131,
+                0.07,
+                0.866,
+                0.112
+            ],
+            "text": "石家庄世仁会计师事务所（普通合伙）",
+            "score": 0.995
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.377,
+                0.13,
+                0.642,
+                0.147
+            ],
+            "text": "世仁审字【2024】第VE-73号",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.248,
+                0.399,
+                0.263
+            ],
+            "text": "河北泰昌电力器材科技有限公司：",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.629,
+                0.922,
+                0.884,
+                0.935
+            ],
+            "text": "石家庄世仁会计师事务所（普通合伙）",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.429,
+                0.196,
+                0.606,
+                0.228
+            ],
+            "text": "审计报告",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.16,
+                0.271,
+                0.28,
+                0.291
+            ],
+            "text": "一、审计意见",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.161,
+                0.3,
+                0.891,
+                0.315
+            ],
+            "text": "我们审计了河北泰昌电力器材科技有限公司（以下简称贵公司）财务报表，包括2023",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.128,
+                0.325,
+                0.892,
+                0.341
+            ],
+            "text": "年12月31日的资产负债表，2023年度的利润及利润分配表、现金流量表、股东权益变动表以",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.131,
+                0.352,
+                0.272,
+                0.368
+            ],
+            "text": "及财务报表附注。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.161,
+                0.377,
+                0.891,
+                0.394
+            ],
+            "text": "我们认为，后附的财务报表在所有重大方面按照企业会计准则的规定编制，公允反映了贵",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.129,
+                0.403,
+                0.891,
+                0.42
+            ],
+            "text": "公司2023年12月31日的财务状况以及2023年度的经营成果和现金流量、所有者权益变动情",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.126,
+                0.428,
+                0.165,
+                0.45
+            ],
+            "text": "况。",
+            "score": 0.996
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.648,
+                0.42,
+                0.701,
+                0.452
+            ],
+            "text": "国家",
+            "score": 0.606
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.165,
+                0.64,
+                0.891,
+                0.656
+            ],
+            "text": "贵公司管理层（以下简称管理层）负责按照企业会计准则的规定编制财务报表，使其实现",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.666,
+                0.891,
+                0.682
+            ],
+            "text": "公允反映，并设计、执行和维护必要的内部控制，以使财务报表不存在由于舞弊或错误导致的",
+            "score": 0.99
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.129,
+                0.692,
+                0.218,
+                0.71
+            ],
+            "text": "重大错报。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.16,
+                0.718,
+                0.892,
+                0.735
+            ],
+            "text": "在编制财务报表时，管理层负责评估贵公司的持续经营能力，披露与持续经营相关的事项",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.14,
+                0.745,
+                0.891,
+                0.762
+            ],
+            "text": "（如适用），并运用持续经营假设，除非管理层计划清算贵公司、终止运营或别无其他现实的",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.772,
+                0.514,
+                0.789
+            ],
+            "text": "选择。治理层负责监督贵公司的财务报告过程。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.161,
+                0.823,
+                0.88,
+                0.841
+            ],
+            "text": "我们的目标是对财务报表整体是否不存在由于舞弊或错误导致的重大错报获取合理保证，",
+            "score": 0.993
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.128,
+                0.85,
+                0.893,
+                0.867
+            ],
+            "text": "并出具包含审计意见的审计报告。合理保证是高水平的保证，但并不能保证按照审计准则执行",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.877,
+                0.892,
+                0.894
+            ],
+            "text": "的审计在某一重大错报存在时总能发现。错报可能由于舞弊或错误导致，如果合理预期错报单",
+            "score": 0.99
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.162,
+                0.456,
+                0.489,
+                0.472
+            ],
+            "text": "本次审计报告仅限于非融资类目的使用。",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.162,
+                0.482,
+                0.373,
+                0.5
+            ],
+            "text": "二、形成审计意见的基础",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.157,
+                0.501,
+                0.896,
+                0.533
+            ],
+            "text": "我们按照中国注册会计师审计准则的规定执行了审计工作。审计报告的“注会计师对财",
+            "score": 0.983
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.128,
+                0.534,
+                0.893,
+                0.551
+            ],
+            "text": "务报表审计的责任”部分进一步阐述了我们在这些准则下的责任。按照中国注册会计师职业道",
+            "score": 0.995
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.56,
+                0.891,
+                0.578
+            ],
+            "text": "德守则，我们独立于贵公司，并履行了职业道德方面的其他责任。我们相信，我们获取的审计",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.131,
+                0.588,
+                0.549,
+                0.604
+            ],
+            "text": "证据是充分、适当的，为发表审计意见提供了基础。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.508,
+                0.937,
+                0.52,
+                0.95
+            ],
+            "text": "一",
+            "score": 0.523
+        }
+    ],
+    [
+        {
+            "type": "text",
+            "bbox": [
+                0.129,
+                0.077,
+                0.892,
+                0.122
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.129,
+                0.129,
+                0.892,
+                0.174
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.129,
+                0.181,
+                0.892,
+                0.278
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.129,
+                0.285,
+                0.892,
+                0.33
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.171,
+                0.337,
+                0.795,
+                0.355
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.129,
+                0.363,
+                0.892,
+                0.486
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.129,
+                0.494,
+                0.892,
+                0.539
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.129,
+                0.546,
+                0.892,
+                0.591
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.18,
+                0.678,
+                0.4,
+                0.807
+            ],
+            "angle": 0,
+            "content": "SHENHUA ZHIANG SHINE ACCOUNTING\nSHENHUA ZHIANG SHINE ACCOUNTING\n石家庄世仁会计师事务所",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "image_caption",
+            "bbox": [
+                0.272,
+                0.82,
+                0.397,
+                0.838
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.545,
+                0.696,
+                0.696,
+                0.714
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.708,
+                0.673,
+                0.828,
+                0.748
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.545,
+                0.758,
+                0.696,
+                0.775
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.711,
+                0.751,
+                0.819,
+                0.826
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.545,
+                0.82,
+                0.749,
+                0.837
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.632,
+                0.92,
+                0.885,
+                0.934
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "page_number",
+            "bbox": [
+                0.51,
+                0.936,
+                0.522,
+                0.947
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.632,
+                0.92,
+                0.884,
+                0.933
+            ],
+            "text": "石家庄世仁会计师事务所（普通合伙）",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.544,
+                0.696,
+                0.699,
+                0.713
+            ],
+            "text": "中国注册会计师：",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.544,
+                0.757,
+                0.699,
+                0.776
+            ],
+            "text": "中国注册会计师：",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.273,
+                0.82,
+                0.399,
+                0.838
+            ],
+            "text": "中国·石家庄",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.175,
+                0.182,
+                0.891,
+                0.198
+            ],
+            "text": "（1）识别和评估由于舞弊或错误导致的财务报表重大错报风险，设计和实施审计程序以",
+            "score": 0.995
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.129,
+                0.208,
+                0.892,
+                0.225
+            ],
+            "text": "应对这些风险，并获取充分、适当的审计证据，作为发表审计意见的基础。由于舞弊可能涉及",
+            "score": 0.99
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.131,
+                0.235,
+                0.891,
+                0.25
+            ],
+            "text": "串通、伪造、故意遗漏、虚假陈述或凌驾于内部控制之上，未能发现由于舞弊导致的重大错报",
+            "score": 0.993
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.129,
+                0.261,
+                0.569,
+                0.276
+            ],
+            "text": "的风险高于未能发现由于错误导致的重大错报的风险。",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.507,
+                0.934,
+                0.524,
+                0.949
+            ],
+            "text": "2",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.129,
+                0.079,
+                0.891,
+                0.094
+            ],
+            "text": "独或汇总起来可能影响财务报表使用者依据财务报表作出的经济决策，则通常认为错报是重大",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.126,
+                0.102,
+                0.165,
+                0.126
+            ],
+            "text": "的。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.165,
+                0.131,
+                0.892,
+                0.146
+            ],
+            "text": "在按照审计准则执行审计工作的过程中，我们运用职业判断，并保持职业怀疑。同时，我",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.129,
+                0.158,
+                0.289,
+                0.174
+            ],
+            "text": "们也执行以下工作：",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.172,
+                0.285,
+                0.892,
+                0.302
+            ],
+            "text": "（2）了解与审计相关的内部控制，以设计恰当的审计程序，但目的并非对内部控制的有效",
+            "score": 0.992
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.131,
+                0.312,
+                0.236,
+                0.33
+            ],
+            "text": "性发表意见。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.131,
+                0.521,
+                0.272,
+                0.538
+            ],
+            "text": "相关交易和事项。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.166,
+                0.547,
+                0.893,
+                0.563
+            ],
+            "text": "我们与治理层就计划的审计范围、时间安排和重大审计发现等事项进行沟通，包括沟通我",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.131,
+                0.573,
+                0.514,
+                0.591
+            ],
+            "text": "们在审计中识别出的值得关注的内部控制缺陷。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.172,
+                0.337,
+                0.797,
+                0.354
+            ],
+            "text": "（3）评价管理层选用会计政策的恰当性和作出会计估计及相关披露的合理性。",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.172,
+                0.364,
+                0.892,
+                0.38
+            ],
+            "text": "（4）对管理层使用持续经营假设的恰当性得出结论。同时，根据获取的审计证据，就可能",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.131,
+                0.391,
+                0.892,
+                0.407
+            ],
+            "text": "导致对贵公司持续经营能力产生重大疑虑的事项或情况是否存在重大不确定性得出结论。如果",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.131,
+                0.417,
+                0.892,
+                0.432
+            ],
+            "text": "我们得出结论认为存在重大不确定性，审计准则要求我们在审计报告中提请报表使用者注意财",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.131,
+                0.443,
+                0.66,
+                0.459
+            ],
+            "text": "务报表中的相关披露；如果披露不充分，我们应当发表非无保留意",
+            "score": 0.996
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.705,
+                0.442,
+                0.892,
+                0.457
+            ],
+            "text": "我们的结论基于截至审",
+            "score": 0.996
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.545,
+                0.818,
+                0.751,
+                0.837
+            ],
+            "text": "二〇二四年三月十一日",
+            "score": 0.982
+        }
+    ],
+    [
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.076,
+                0.428,
+                0.1,
+                0.55
+            ],
+            "angle": 270,
+            "content": null
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.117,
+                0.725,
+                0.131,
+                0.879
+            ],
+            "angle": 270,
+            "content": null
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.117,
+                0.47,
+                0.129,
+                0.527
+            ],
+            "angle": 270,
+            "content": null
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.099,
+                0.103,
+                0.126,
+                0.137
+            ],
+            "angle": 270,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.126,
+                0.1,
+                0.938,
+                0.877
+            ],
+            "angle": 270,
+            "content": "<table><tr><td>资产</td><td>行次</td><td>年初数</td><td>期末数</td><td>负债及所有者权益</td><td>行次</td><td>年初数</td><td>期末数</td></tr><tr><td>流动资产:</td><td></td><td></td><td></td><td>流动负债:</td><td></td><td></td><td></td></tr><tr><td>货币资金</td><td>1</td><td>8,342,561.26</td><td>8,664,031.87</td><td>短期借款</td><td>68</td><td></td><td></td></tr><tr><td>短期投资</td><td>2</td><td></td><td></td><td>应付票据</td><td>69</td><td></td><td></td></tr><tr><td>应收票据</td><td>3</td><td></td><td></td><td>应付账款</td><td>70</td><td>3,092,031.91</td><td>3,988,063.10</td></tr><tr><td>应收股利</td><td>4</td><td></td><td></td><td>预收账款</td><td>71</td><td></td><td></td></tr><tr><td>应收利息</td><td>5</td><td></td><td></td><td>应付职工薪酬</td><td>72</td><td></td><td></td></tr><tr><td>应收账款</td><td>6</td><td>24,732,845.16</td><td>24,471,920.43</td><td>应付福利费</td><td>73</td><td></td><td></td></tr><tr><td>其他应收款</td><td>7</td><td></td><td></td><td>应付股利</td><td>74</td><td></td><td></td></tr><tr><td>预付账款</td><td>8</td><td></td><td></td><td>应交税费</td><td>75</td><td>274,651.26</td><td>306,506.40</td></tr><tr><td>应收补贴款</td><td>9</td><td></td><td></td><td>其他应交款</td><td>80</td><td></td><td></td></tr><tr><td>存货</td><td>10</td><td>18,392,485.35</td><td>18,699,877.46</td><td>其他应付款</td><td>81</td><td></td><td></td></tr><tr><td>待摊费用</td><td>11</td><td></td><td></td><td>预提费用</td><td>82</td><td></td><td></td></tr><tr><td>一年内到期的长期债券投资</td><td>21</td><td></td><td></td><td>预计负债</td><td>83</td><td></td><td></td></tr><tr><td>其他流动资产</td><td>24</td><td></td><td></td><td>一年内到期的长期负债</td><td>86</td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td>其他流动负债</td><td>90</td><td></td><td></td></tr><tr><td>流动资产合计</td><td>31</td><td>51,467,891.77</td><td>51,835,829.76</td><td>流动负债合计</td><td>100</td><td>3,366,683.17</td><td>4,294,569.50</td></tr><tr><td>长期投资:</td><td></td><td></td><td></td><td>长期负债:</td><td></td><td></td><td></td></tr><tr><td>长期股权投资</td><td>32</td><td></td><td></td><td>长期借款</td><td>101</td><td></td><td></td></tr><tr><td>长期债权投资</td><td>34</td><td></td><td></td><td>应付债券</td><td>102</td><td></td><td></td></tr><tr><td>长期投资合计</td><td>38</td><td>-</td><td>-</td><td>长期应付款</td><td>103</td><td></td><td></td></tr><tr><td>固定资产:</td><td></td><td></td><td></td><td>专项应付款</td><td>106</td><td></td><td></td></tr><tr><td>固定资产原价</td><td>39</td><td>39,449,609.05</td><td>40,613,101.65</td><td>其他长期负债</td><td>108</td><td></td><td></td></tr><tr><td>减:累计折旧</td><td>40</td><td>12,254,863.26</td><td>12,698,787.40</td><td>长期负债合计</td><td>110</td><td>-</td><td>-</td></tr><tr><td>固定资产净值</td><td>41</td><td>27,194,745.79</td><td>27,914,314.25</td><td>递延税项:</td><td></td><td></td><td></td></tr><tr><td>减:固定资产减值准备</td><td>42</td><td></td><td></td><td>递延税项贷项</td><td>111</td><td></td><td></td></tr><tr><td>固定资产净额</td><td>43</td><td>27,194,745.79</td><td>27,914,314.25</td><td>负债总计</td><td>114</td><td>3,366,683.17</td><td>4,294,569.50</td></tr><tr><td>工程物资</td><td>44</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>在建工程</td><td>45</td><td></td><td></td><td>所有者权益(或股东权益):</td><td></td><td></td><td></td></tr><tr><td>固定资产清理</td><td>46</td><td></td><td></td><td>实收资本(或股本)</td><td>115</td><td>60,000,000.00</td><td>60,000,000.00</td></tr><tr><td>固定资产合计</td><td>50</td><td>27,194,745.79</td><td>27,914,314.25</td><td>减:已归还投资</td><td>116</td><td></td><td></td></tr><tr><td>无形资产及其他资产:</td><td></td><td></td><td></td><td>实收资本(或股本)净额</td><td>117</td><td>60,000,000.00</td><td>60,000,000.00</td></tr><tr><td>无形资产</td><td>51</td><td></td><td></td><td>资本公积</td><td>118</td><td>250,928.00</td><td>250,928.00</td></tr><tr><td>长期待摊费用</td><td>52</td><td></td><td></td><td>盈余公积</td><td>119</td><td></td><td></td></tr><tr><td>其他长期资产</td><td>53</td><td></td><td></td><td>其中:法定公益金</td><td>120</td><td></td><td></td></tr><tr><td>无形资产及其他资产合计</td><td>60</td><td>-</td><td>-</td><td>未分配利润</td><td>121</td><td>15,045,026.39</td><td>15,204,646.51</td></tr><tr><td>递延税项:</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>递延税款借项</td><td>61</td><td></td><td></td><td>所有者权益(或股东权益)合计</td><td>122</td><td>75,295,954.39</td><td>75,455,574.51</td></tr><tr><td>资产总计</td><td>67</td><td>78,662,637.56</td><td>79,750,144.01</td><td>负债和所有者权益(或股东权益)总计</td><td>135</td><td>78,662,637.56</td><td>79,750,144.01</td></tr></table>"
+        },
+        {
+            "type": "table_footnote",
+            "bbox": [
+                0.941,
+                0.829,
+                0.955,
+                0.873
+            ],
+            "angle": 270,
+            "content": null
+        },
+        {
+            "type": "table_footnote",
+            "bbox": [
+                0.939,
+                0.159,
+                0.951,
+                0.187
+            ],
+            "angle": 270,
+            "content": null
+        },
+        {
+            "type": "page_number",
+            "bbox": [
+                0.964,
+                0.491,
+                0.975,
+                0.499
+            ],
+            "angle": 270,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.961,
+                0.49,
+                0.978,
+                0.5
+            ],
+            "text": "3",
+            "score": 0.99
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.115,
+                0.723,
+                0.132,
+                0.879
+            ],
+            "text": "器",
+            "score": 0.531
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.94,
+                0.827,
+                0.958,
+                0.875
+            ],
+            "text": "Y量不",
+            "score": 0.587
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.109,
+                0.101,
+                0.131,
+                0.139
+            ],
+            "text": "",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.095,
+                0.102,
+                0.118,
+                0.14
+            ],
+            "text": "10号",
+            "score": 0.793
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.935,
+                0.157,
+                0.954,
+                0.19
+            ],
+            "text": "Y举",
+            "score": 0.506
+        }
+    ],
+    [
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.391,
+                0.069,
+                0.636,
+                0.093
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.828,
+                0.09,
+                0.897,
+                0.104
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.132,
+                0.112,
+                0.594,
+                0.125
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.829,
+                0.108,
+                0.897,
+                0.12
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.131,
+                0.123,
+                0.904,
+                0.74
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>项目</td><td>行次</td><td>本年累计数</td><td>上年金额</td></tr><tr><td>一、营业收入</td><td>1</td><td>52,160,031.87</td><td>49,818,165.28</td></tr><tr><td>减:营业成本</td><td>2</td><td>47,787,061.65</td><td>46,445,162.32</td></tr><tr><td>税金及附加</td><td>3</td><td>10,644.32</td><td>96,372.28</td></tr><tr><td>二、主营业务利润(亏损以“-”号填列)</td><td>4</td><td>4,362,325.90</td><td>3,276,630.68</td></tr><tr><td>加:其他业务利润(亏损以“-”号填列)</td><td>5</td><td></td><td></td></tr><tr><td>减:销售费用</td><td>6</td><td>206,873.40</td><td>572,115.61</td></tr><tr><td>管理费用</td><td>7</td><td>2,087,431.32</td><td>694,815.26</td></tr><tr><td>财务费用</td><td>8</td><td></td><td>67,159.16</td></tr><tr><td>其中:利息费用(收入以“-”号填列)</td><td>9</td><td></td><td></td></tr><tr><td>三、营业利润(亏损以“-”号填列)</td><td>10</td><td>2,068,021.18</td><td>1,942,540.65</td></tr><tr><td>加:投资收益(损失以“-”号填列)</td><td>11</td><td></td><td></td></tr><tr><td>补贴收入</td><td>12</td><td></td><td></td></tr><tr><td>营业外收入</td><td>13</td><td></td><td></td></tr><tr><td>减:营业外支出</td><td>14</td><td></td><td></td></tr><tr><td>四、利润总额(亏损以“-”号填列)</td><td>15</td><td>2,068,021.18</td><td>1,942,540.65</td></tr><tr><td>减:所得税费用</td><td>16</td><td>103,401.06</td><td>73,165.25</td></tr><tr><td>五、净利润(亏损以“-”号填列)</td><td>17</td><td>1,964,620.12</td><td>1,869,375.40</td></tr><tr><td>加:年初未分配利润</td><td>18</td><td>15,045,026.39</td><td>13,175,650.99</td></tr><tr><td>其他转入</td><td>19</td><td>-1,805,000.00</td><td></td></tr><tr><td>六、可供分配的利润</td><td>20</td><td>15,204,646.51</td><td>15,045,026.39</td></tr><tr><td>减:提取法定盈余公积</td><td>21</td><td></td><td></td></tr><tr><td>提取法定公益金</td><td>22</td><td></td><td></td></tr><tr><td>提取职工奖励及福利基金</td><td>23</td><td></td><td></td></tr><tr><td>提取储备基金</td><td>24</td><td></td><td></td></tr><tr><td>提取企业发展基金</td><td>25</td><td></td><td></td></tr><tr><td>利润归还投资</td><td>26</td><td></td><td></td></tr><tr><td>七、可供投资者分配的利润</td><td>27</td><td>15,204,646.51</td><td>15,045,026.39</td></tr><tr><td>减:应付优先股股利</td><td>28</td><td></td><td></td></tr><tr><td>提取任意盈余公积</td><td>29</td><td></td><td></td></tr><tr><td>应付普通股股利</td><td>30</td><td></td><td></td></tr><tr><td>转作资本(或股本)的普通股股利</td><td>31</td><td></td><td></td></tr><tr><td>八、未分配利润</td><td>32</td><td>15,204,646.51</td><td>15,045,026.39</td></tr></table>"
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.167,
+                0.763,
+                0.242,
+                0.776
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.139,
+                0.771,
+                0.911,
+                0.909
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>项目</td><td>行次</td><td>本年累计数</td><td>上年金额</td></tr><tr><td>1、出售、处置部门或被投资单位所得收益</td><td>1</td><td></td><td></td></tr><tr><td>2、自然灾害发生的损失</td><td>2</td><td></td><td></td></tr><tr><td>3、会计政策变更增加(或减少)利润总额</td><td>3</td><td></td><td></td></tr><tr><td>4、会计估计变更增加(或减少)利润总额</td><td>4</td><td></td><td></td></tr><tr><td>5、债务重组损失</td><td>5</td><td></td><td></td></tr><tr><td>6、其他</td><td>6</td><td></td><td></td></tr></table>"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.144,
+                0.913,
+                0.236,
+                0.928
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.536,
+                0.911,
+                0.628,
+                0.926
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.744,
+                0.909,
+                0.804,
+                0.924
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "page_number",
+            "bbox": [
+                0.508,
+                0.957,
+                0.521,
+                0.97
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.391,
+                0.069,
+                0.638,
+                0.093
+            ],
+            "text": "利润及利润分配表",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.506,
+                0.956,
+                0.524,
+                0.972
+            ],
+            "text": "4",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.825,
+                0.088,
+                0.9,
+                0.106
+            ],
+            "text": "会企02表",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.166,
+                0.761,
+                0.246,
+                0.779
+            ],
+            "text": "补充资料：",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.143,
+                0.912,
+                0.238,
+                0.929
+            ],
+            "text": "企业负责人：",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.534,
+                0.911,
+                0.63,
+                0.926
+            ],
+            "text": "财务负责人：",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.742,
+                0.906,
+                0.806,
+                0.924
+            ],
+            "text": "制表人：",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.132,
+                0.113,
+                0.453,
+                0.125
+            ],
+            "text": "编制单位：河北泰昌电力器材科技有限公司",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.521,
+                0.109,
+                0.596,
+                0.126
+            ],
+            "text": "2023年度",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.827,
+                0.105,
+                0.9,
+                0.123
+            ],
+            "text": "单位：元",
+            "score": 1.0
+        }
+    ],
+    [
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.076,
+                0.432,
+                0.095,
+                0.565
+            ],
+            "angle": 270,
+            "content": null
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.096,
+                0.113,
+                0.126,
+                0.146
+            ],
+            "angle": 270,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.12,
+                0.111,
+                0.951,
+                0.885
+            ],
+            "angle": 270,
+            "content": "<table><tr><td>项目</td><td>行次</td><td>金额</td><td>补充资料</td><td>行次</td><td>金额</td></tr><tr><td>一、经营活动产生的现金流量:</td><td></td><td></td><td>1、将净利润调节为经营活动现金流量:</td><td></td><td></td></tr><tr><td>销售商品、提供劳务收到的现金</td><td>1</td><td>53,985,757.56</td><td>净利润</td><td>57</td><td>159,620.12</td></tr><tr><td>收到的税费返还</td><td>3</td><td>-</td><td>加:计提的资产减值准备</td><td>58</td><td>-</td></tr><tr><td>收到的其他与经营活动有关的现金</td><td>8</td><td>-133,246.12</td><td>固定资产折旧</td><td>59</td><td>443,924.14</td></tr><tr><td>现金流入小计</td><td>9</td><td>53,852,511.44</td><td>无形资产摊销</td><td>60</td><td>-</td></tr><tr><td>购买商品、接受劳务支付的现金</td><td>10</td><td>50,598,256.18</td><td>长期待摊费用摊销</td><td>61</td><td>-</td></tr><tr><td>支付给职工以及为职工支付的现金</td><td>12</td><td>1,669,945.06</td><td>待摊费用减少(减:增加)</td><td>64</td><td>-</td></tr><tr><td>支付的各项税费</td><td>13</td><td>99,346.99</td><td>预提费用增加(减:减少)</td><td>65</td><td>-</td></tr><tr><td>支付的其他与经营活动有关的现金</td><td>18</td><td>-</td><td>处置固定资产、无形资产和其他长期资产的损失(减:收益)</td><td>66</td><td>-</td></tr><tr><td>现金流出小计</td><td>20</td><td>52,367,548.23</td><td>固定资产报废损失</td><td>67</td><td>-</td></tr><tr><td>经营活动产生的现金流量净额</td><td>21</td><td>1,484,963.21</td><td>财务费用</td><td>68</td><td>-</td></tr><tr><td>二、投资活动产生的现金流量:</td><td></td><td></td><td>投资损失(减:收益)</td><td>69</td><td>-</td></tr><tr><td>收回投资所收到的现金</td><td>22</td><td></td><td>递延税款贷项(减:借项)</td><td>70</td><td>-</td></tr><tr><td>取得投资收益所收到的现金</td><td>23</td><td>-</td><td>存货的减少(减:增加)</td><td>71</td><td>-307,392.11</td></tr><tr><td>处置固定资产、无形资产和其他长期资产所收回的现金净额</td><td>25</td><td>-</td><td>经营性应收项目的减少(减:增加)</td><td>72</td><td>260,924.73</td></tr><tr><td>收到的其他与投资活动有关的现金</td><td>28</td><td>-</td><td>经营性应付项目的增加(减:减少)</td><td>73</td><td>927,886.33</td></tr><tr><td>现金流入小计</td><td>29</td><td>-</td><td>其他</td><td>74</td><td>-</td></tr><tr><td>购建固定资产、无形资产和其他长期资产所支付的现金</td><td>30</td><td>1,163,492.60</td><td>经营活动产生的现金流量净额</td><td>75</td><td>1,484,963.21</td></tr><tr><td>投资所支付的现金</td><td>31</td><td>-</td><td></td><td></td><td></td></tr><tr><td>支付的其他与投资活动有关的现金</td><td>35</td><td>-</td><td></td><td></td><td></td></tr><tr><td>现金流出小计</td><td>36</td><td>1,163,492.60</td><td></td><td></td><td></td></tr><tr><td>投资活动产生的现金流量净额</td><td>37</td><td>-1,163,492.60</td><td>2、不涉及现金收支的投资和筹资活动:</td><td></td><td></td></tr><tr><td>三、筹资活动产生的现金流量:</td><td></td><td></td><td>债务转为资本</td><td>76</td><td></td></tr><tr><td>吸收投资所收到的现金</td><td>38</td><td>-</td><td>一年内到期的可转换公司债券</td><td>77</td><td></td></tr><tr><td>借款所收到的现金</td><td>40</td><td>-</td><td>融资租入固定资产</td><td>78</td><td></td></tr><tr><td>收到的其他与筹资活动有关的现金</td><td>43</td><td>-</td><td></td><td></td><td></td></tr><tr><td>现金流入小计</td><td>44</td><td>-</td><td></td><td></td><td></td></tr><tr><td>偿还债务所支付的现金</td><td>45</td><td></td><td></td><td></td><td></td></tr><tr><td>分配股利、利润或偿付利息所支付的现金</td><td>46</td><td></td><td>3、现金及现金等价物净增加情况:</td><td></td><td></td></tr><tr><td>支付的其他与筹资活动有关的现金</td><td>52</td><td>-</td><td>现金的期末余额</td><td>79</td><td>8,664,031.87</td></tr><tr><td>现金流出小计</td><td>53</td><td>-</td><td>减:现金的期初余额</td><td>80</td><td>8,342,561.26</td></tr><tr><td>筹资活动产生的现金流量净额</td><td>54</td><td>-</td><td>加:现金等价物的期末余额</td><td>81</td><td></td></tr><tr><td>四、汇率变动对现金的影响</td><td>55</td><td></td><td>减:现金等价物的期初余额</td><td>82</td><td></td></tr><tr><td>五、现金及现金等价物净增加额</td><td>56</td><td>321,470.61</td><td>现金及现金等价物净增加额</td><td>83</td><td>321,470.61</td></tr></table>"
+        },
+        {
+            "type": "table_footnote",
+            "bbox": [
+                0.952,
+                0.192,
+                0.964,
+                0.22
+            ],
+            "angle": 270,
+            "content": null
+        },
+        {
+            "type": "table_footnote",
+            "bbox": [
+                0.952,
+                0.462,
+                0.964,
+                0.505
+            ],
+            "angle": 270,
+            "content": null
+        },
+        {
+            "type": "table_footnote",
+            "bbox": [
+                0.964,
+                0.839,
+                0.971,
+                0.881
+            ],
+            "angle": 270,
+            "content": null
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.026,
+                0.046,
+                0.044,
+                0.077
+            ],
+            "angle": 270,
+            "content": "-"
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.026,
+                0.143,
+                0.044,
+                0.173
+            ],
+            "angle": 270,
+            "content": "The image is too blurry to recognize any text content."
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.026,
+                0.239,
+                0.044,
+                0.268
+            ],
+            "angle": 270,
+            "content": "The image is too blurry to recognize any text content."
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.026,
+                0.335,
+                0.044,
+                0.365
+            ],
+            "angle": 270,
+            "content": "The quick brown fox jumps over the lazy dog."
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.026,
+                0.432,
+                0.044,
+                0.462
+            ],
+            "angle": 270,
+            "content": "The image is too blurry to recognize any text content."
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.026,
+                0.528,
+                0.044,
+                0.558
+            ],
+            "angle": 270,
+            "content": "The image is too blurry to recognize any text content."
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.026,
+                0.624,
+                0.044,
+                0.654
+            ],
+            "angle": 270,
+            "content": "The image is too blurry to recognize any text content."
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.026,
+                0.72,
+                0.044,
+                0.75
+            ],
+            "angle": 270,
+            "content": "The quick brown fox jumps over the lazy dog."
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.026,
+                0.816,
+                0.044,
+                0.846
+            ],
+            "angle": 270,
+            "content": "The quick brown fox jumps over the lazy dog."
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.026,
+                0.913,
+                0.044,
+                0.943
+            ],
+            "angle": 270,
+            "content": "The quick brown fox jumps over the lazy dog."
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.951,
+                0.46,
+                0.968,
+                0.507
+            ],
+            "text": "Y星箱",
+            "score": 0.511
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.961,
+                0.838,
+                0.972,
+                0.883
+            ],
+            "text": "",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.112,
+                0.111,
+                0.13,
+                0.147
+            ],
+            "text": "",
+            "score": 1.0
+        }
+    ],
+    [
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.097,
+                0.48,
+                0.117,
+                0.584
+            ],
+            "angle": 270,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.122,
+                0.121,
+                0.134,
+                0.153
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.146,
+                0.79,
+                0.165,
+                0.947
+            ],
+            "angle": 270,
+            "content": null
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.147,
+                0.526,
+                0.163,
+                0.56
+            ],
+            "angle": 270,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.166,
+                0.115,
+                0.925,
+                0.952
+            ],
+            "angle": 270,
+            "content": "<table><tr><td rowspan=\"3\">项目</td><td colspan=\"12\">本年数</td></tr><tr><td rowspan=\"2\">实收资本</td><td colspan=\"3\">其他权益工具</td><td rowspan=\"2\">资本公积</td><td rowspan=\"2\">减:库存股</td><td rowspan=\"2\">其他综合收益</td><td rowspan=\"2\">专项储备</td><td rowspan=\"2\">盈余公积</td><td rowspan=\"2\">一般风险准备</td><td rowspan=\"2\">未分配利润</td><td rowspan=\"2\">股东权益合计</td></tr><tr><td>优先股</td><td>永续债</td><td>其他</td></tr><tr><td>一、上年年末余额</td><td>60,000,000.00</td><td></td><td></td><td></td><td>250,928.00</td><td></td><td></td><td></td><td></td><td></td><td>15,045,026.39</td><td>75,295,954.39</td></tr><tr><td>加:会计政策变更</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>前期差错更正</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>其他</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>二、本年年初余额</td><td>60,000,000.00</td><td></td><td></td><td></td><td>250,928.00</td><td></td><td></td><td></td><td></td><td></td><td>15,045,026.39</td><td>75,295,954.39</td></tr><tr><td>三、本期增减变动金额(减少以“-”号填列)</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>159,620.12</td><td>159,620.12</td></tr><tr><td>(一)综合收益总额</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>1,964,620.12</td><td>1,964,620.12</td></tr><tr><td>(二)股东投入和减少资本</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>1、股东投入的普通股</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>2、其他权益工具持有者投入资本</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>3、股份支付计入股东权益的金额</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>4、其他</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>(三)利润分配</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>1、提取盈余公积</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>2、提取一般风险准备</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>3、对股东的分配</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>4、其他</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>(四)股东权益内部结转</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>1、资本公积转增资本(或股本)</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>2、盈余公积转增资本(或股本)</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>3、盈余公积弥补亏损</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>4、其他</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>(五)专项储备</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>1、本期提取</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>2、本期使用</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>(六)其他</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>-1,805,000.00</td><td>-1,805,000.00</td></tr><tr><td>四、本年年末余额</td><td>60,000,000.00</td><td></td><td></td><td></td><td>250,928.00</td><td></td><td></td><td></td><td></td><td></td><td>15,204,646.51</td><td>75,455,574.51</td></tr></table>"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.928,
+                0.228,
+                0.94,
+                0.258
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.931,
+                0.581,
+                0.943,
+                0.627
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.934,
+                0.902,
+                0.945,
+                0.949
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.025,
+                0.043,
+                0.044,
+                0.076
+            ],
+            "angle": 270,
+            "content": "The quick brown fox jumps over the lazy dog."
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.025,
+                0.141,
+                0.044,
+                0.172
+            ],
+            "angle": 270,
+            "content": "The image is too blurry to recognize any text content."
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.025,
+                0.238,
+                0.044,
+                0.268
+            ],
+            "angle": 270,
+            "content": "The image is too blurry to recognize any text content."
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.025,
+                0.333,
+                0.044,
+                0.364
+            ],
+            "angle": 270,
+            "content": "The image is too blurry to recognize any text content."
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.025,
+                0.43,
+                0.044,
+                0.459
+            ],
+            "angle": 270,
+            "content": "The image is too blurry to recognize any text content."
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.025,
+                0.526,
+                0.044,
+                0.556
+            ],
+            "angle": 270,
+            "content": "The image is too blurry to recognize any text content."
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.025,
+                0.622,
+                0.044,
+                0.653
+            ],
+            "angle": 270,
+            "content": "The image is too blurry to recognize any text content."
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.025,
+                0.719,
+                0.044,
+                0.749
+            ],
+            "angle": 270,
+            "content": "The quick brown fox jumps over the lazy dog."
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.025,
+                0.814,
+                0.044,
+                0.845
+            ],
+            "angle": 270,
+            "content": "The quick brown fox jumps over the lazy dog."
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.025,
+                0.911,
+                0.044,
+                0.942
+            ],
+            "angle": 270,
+            "content": "The image is too blurry to recognize any text content."
+        },
+        {
+            "type": "page_number",
+            "bbox": [
+                0.964,
+                0.496,
+                0.975,
+                0.504
+            ],
+            "angle": 270,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.963,
+                0.496,
+                0.977,
+                0.505
+            ],
+            "text": "6",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.928,
+                0.579,
+                0.945,
+                0.629
+            ],
+            "text": "Y",
+            "score": 0.534
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.932,
+                0.9,
+                0.947,
+                0.95
+            ],
+            "text": "Y不",
+            "score": 0.739
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.119,
+                0.12,
+                0.136,
+                0.155
+            ],
+            "text": "0",
+            "score": 0.657
+        }
+    ],
+    [
+        {
+            "type": "header",
+            "bbox": [
+                0.127,
+                0.057,
+                0.343,
+                0.071
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "header",
+            "bbox": [
+                0.725,
+                0.055,
+                0.883,
+                0.069
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.34,
+                0.097,
+                0.677,
+                0.118
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.365,
+                0.133,
+                0.655,
+                0.155
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.295,
+                0.172,
+                0.726,
+                0.191
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.163,
+                0.225,
+                0.33,
+                0.242
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.128,
+                0.253,
+                0.894,
+                0.332
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.128,
+                0.342,
+                0.894,
+                0.509
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.165,
+                0.522,
+                0.367,
+                0.539
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.165,
+                0.552,
+                0.48,
+                0.568
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.13,
+                0.58,
+                0.894,
+                0.629
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.166,
+                0.642,
+                0.403,
+                0.658
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.166,
+                0.673,
+                0.27,
+                0.688
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.165,
+                0.701,
+                0.728,
+                0.717
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.166,
+                0.732,
+                0.287,
+                0.747
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.166,
+                0.762,
+                0.41,
+                0.777
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.166,
+                0.792,
+                0.36,
+                0.807
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.166,
+                0.819,
+                0.837,
+                0.836
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.166,
+                0.852,
+                0.432,
+                0.868
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.166,
+                0.88,
+                0.897,
+                0.897
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.637,
+                0.919,
+                0.892,
+                0.933
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "page_number",
+            "bbox": [
+                0.512,
+                0.935,
+                0.523,
+                0.946
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.367,
+                0.133,
+                0.656,
+                0.154
+            ],
+            "text": "二O二三年度财务报表附注",
+            "score": 0.986
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.167,
+                0.553,
+                0.481,
+                0.567
+            ],
+            "text": "本公司财务报表以持续经营为基础编制。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.167,
+                0.701,
+                0.73,
+                0.716
+            ],
+            "text": "本公司的会计年度采用公历年度，即每年自1月1日起至12月31日止。",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.169,
+                0.88,
+                0.897,
+                0.897
+            ],
+            "text": "在编制现金流量表时，将本公司库存现金以及可以随时用于支付的存款确认为现金，将本公司",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.168,
+                0.852,
+                0.432,
+                0.867
+            ],
+            "text": "4、现金及现金等价物的确定标准",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.636,
+                0.92,
+                0.892,
+                0.932
+            ],
+            "text": "石家庄世仁会计师事务所（普通合伙）",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.726,
+                0.055,
+                0.882,
+                0.067
+            ],
+            "text": "2023年度财务报表附注",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.165,
+                0.225,
+                0.329,
+                0.242
+            ],
+            "text": "一、企业的基本情况",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.166,
+                0.672,
+                0.27,
+                0.689
+            ],
+            "text": "1、会计期间",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.167,
+                0.731,
+                0.288,
+                0.748
+            ],
+            "text": "2、记账本位币",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.163,
+                0.256,
+                0.892,
+                0.269
+            ],
+            "text": "河北泰昌电力器材科技有限公司（以下简称“本公司”）成立于2012年11月14日，有限责",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.316,
+                0.637,
+                0.329
+            ],
+            "text": "定市满城区陉阳驿村；统一社会信用代码：91130607056539515C。",
+            "score": 0.984
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.128,
+                0.283,
+                0.893,
+                0.301
+            ],
+            "text": "任公司（自然人投资或控股），注册资本为人民币10000万元。法定代表人：晁坤琳；企业住所：保",
+            "score": 0.989
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.341,
+                0.097,
+                0.678,
+                0.117
+            ],
+            "text": "河北泰昌电力器材科技有限公司",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.128,
+                0.058,
+                0.344,
+                0.07
+            ],
+            "text": "河北泰昌电力器材科技有限公司",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.168,
+                0.643,
+                0.402,
+                0.657
+            ],
+            "text": "三、重要会计政策和会计估计",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.168,
+                0.762,
+                0.412,
+                0.776
+            ],
+            "text": "本公司以人民币为记账本位币。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.511,
+                0.935,
+                0.524,
+                0.948
+            ],
+            "text": "7",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.133,
+                0.613,
+                0.463,
+                0.627
+            ],
+            "text": "行确认和计量，在此基础上编制财务报表。",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.168,
+                0.523,
+                0.367,
+                0.538
+            ],
+            "text": "二、财务报表的编制基础",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.167,
+                0.791,
+                0.361,
+                0.807
+            ],
+            "text": "3、记账基础和计价原则",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.296,
+                0.173,
+                0.724,
+                0.189
+            ],
+            "text": "（除特别注明外，本附注金额单位均为人民币元）",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.164,
+                0.345,
+                0.892,
+                0.358
+            ],
+            "text": "经营范围：水泥制品、电线、电缆、低压电表计量箱、电力金具、铁附件、配电箱、低压无功",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.374,
+                0.893,
+                0.388
+            ],
+            "text": "补偿配电柜、开关柜、避雷器、隔离开关、熔断器、绝缘子、安全工器具、标识牌、拉闸杆、拉线",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.403,
+                0.894,
+                0.418
+            ],
+            "text": "保护套管、电缆保护管研发、制造、加工；高低压开关、安全工具、通信设备、变压器及配件、仪",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.433,
+                0.893,
+                0.447
+            ],
+            "text": "器、仪表、互感器、柱上断路器、电缆分支箱、电缆接头、工具瓷件、电力线材、铁塔、交通安全",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.494,
+                0.481,
+                0.509
+            ],
+            "text": "项目，经相关部门批准后方可开展经营活动）",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.132,
+                0.462,
+                0.893,
+                0.478
+            ],
+            "text": "设施、箱式开闭所、环网柜、紧锁连接头、智能电能质量矫正装置批发、零售。（依法须经批准的",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.168,
+                0.819,
+                0.837,
+                0.836
+            ],
+            "text": "会计核算以权责发生制为基础，除特别说明的计价基础外，均以历史成本为计价原则。",
+            "score": 1.0
+        }
+    ],
+    [
+        {
+            "type": "header",
+            "bbox": [
+                0.128,
+                0.057,
+                0.343,
+                0.07
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "header",
+            "bbox": [
+                0.726,
+                0.053,
+                0.883,
+                0.067
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.127,
+                0.092,
+                0.892,
+                0.14
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.163,
+                0.154,
+                0.267,
+                0.17
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.13,
+                0.181,
+                0.893,
+                0.229
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.164,
+                0.242,
+                0.268,
+                0.258
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.13,
+                0.269,
+                0.894,
+                0.317
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.13,
+                0.328,
+                0.894,
+                0.406
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.166,
+                0.42,
+                0.392,
+                0.436
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.166,
+                0.448,
+                0.729,
+                0.466
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.131,
+                0.477,
+                0.896,
+                0.556
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.132,
+                0.566,
+                0.896,
+                0.615
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.132,
+                0.626,
+                0.896,
+                0.675
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.132,
+                0.686,
+                0.896,
+                0.735
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.134,
+                0.746,
+                0.898,
+                0.855
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.169,
+                0.864,
+                0.897,
+                0.883
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.171,
+                0.898,
+                0.238,
+                0.914
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.639,
+                0.918,
+                0.892,
+                0.932
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "page_number",
+            "bbox": [
+                0.514,
+                0.935,
+                0.525,
+                0.946
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.168,
+                0.45,
+                0.728,
+                0.463
+            ],
+            "text": "在发生下列情况之一时，按规定程序批准后确认为坏账，冲销坏账准备。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.173,
+                0.866,
+                0.899,
+                0.882
+            ],
+            "text": "（6）债务人较长时间内未偿付其到期债务，并有足够的证据表明无法收回或收回的可能性极小。",
+            "score": 0.991
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.638,
+                0.919,
+                0.893,
+                0.93
+            ],
+            "text": "石家庄世仁会计师事务所（普通合伙）",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.728,
+                0.053,
+                0.883,
+                0.067
+            ],
+            "text": "2023年度财务报表附注",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.163,
+                0.153,
+                0.268,
+                0.171
+            ],
+            "text": "5、外币业务",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.163,
+                0.241,
+                0.27,
+                0.26
+            ],
+            "text": "6、应收款项",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.168,
+                0.329,
+                0.892,
+                0.345
+            ],
+            "text": "应收款项坏账准备提取按应收款项年末余额分析计提坏账准备，当存在客观证据表明本公司将",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.132,
+                0.359,
+                0.894,
+                0.376
+            ],
+            "text": "无法按照应收款项的原有条款收回所有款项时，根据其预计未来现金流量现值低于其账面价值的差",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.132,
+                0.389,
+                0.817,
+                0.405
+            ],
+            "text": "额，进行减值测试。如有客观证据表明其发生减值，应当确认减值损失，计入当期损益。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.135,
+                0.54,
+                0.304,
+                0.555
+            ],
+            "text": "款项，作为坏账损失；",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.168,
+                0.478,
+                0.896,
+                0.494
+            ],
+            "text": "（1）债务人被依法宣告破产、撤销的，取得破产宣告、注销工商登记或吊销执照的证明或者政",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.133,
+                0.508,
+                0.895,
+                0.524
+            ],
+            "text": "府部门责令关闭的文件等有关资料，在扣除以债务人清算财产清偿的部分后，对仍不能收回的应收",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.7,
+                0.53,
+                0.739,
+                0.554
+            ],
+            "text": "石家庄世",
+            "score": 0.885
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.129,
+                0.058,
+                0.345,
+                0.07
+            ],
+            "text": "河北泰昌电力器材科技有限公司",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.168,
+                0.42,
+                0.393,
+                0.435
+            ],
+            "text": "本公司坏账损失的确认标准：",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.137,
+                0.838,
+                0.448,
+                0.853
+            ],
+            "text": "其破产财产或者遗产清偿后仍无法收回；",
+            "score": 0.995
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.169,
+                0.746,
+                0.898,
+                0.763
+            ],
+            "text": "（5）逾期3年的应收款项，债务人在境外及我国香港、澳门、台湾地区的，经依法催收仍未收",
+            "score": 0.996
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.137,
+                0.776,
+                0.898,
+                0.792
+            ],
+            "text": "回，且在3年内没有任何业务往来的，在取得境外中介机构出具的终止收款意见书，或者取得我国",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.136,
+                0.806,
+                0.899,
+                0.823
+            ],
+            "text": "驻外使（领）馆商务机构出具的债务人逃亡、破产证明后，作为坏账损失。债务人破产或死亡，以",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.512,
+                0.934,
+                0.526,
+                0.946
+            ],
+            "text": "8",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.131,
+                0.125,
+                0.477,
+                0.139
+            ],
+            "text": "险很小四个条件的投资，确定为现金等价物。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.093,
+                0.891,
+                0.109
+            ],
+            "text": "持有的同时具备期限短（从购买日起三个月到期）、流动性强、易于转换为已知现金、价值变动风",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.133,
+                0.214,
+                0.427,
+                0.228
+            ],
+            "text": "目，采用资产负债表日即期汇率折算。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.166,
+                0.182,
+                0.892,
+                0.197
+            ],
+            "text": "本公司发生外币业务，按交易发生日的即期汇率折算为记账本位币金额，期末对外币货币性项",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.133,
+                0.302,
+                0.621,
+                0.314
+            ],
+            "text": "从购货方应收的合同或协议价款的公允价值作为初始确认金额。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.166,
+                0.27,
+                0.894,
+                0.286
+            ],
+            "text": "应收款项包括应收账款、其他应收款等，本公司对外销售商品或提供劳务形成的应收账款，按",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.136,
+                0.598,
+                0.482,
+                0.613
+            ],
+            "text": "项，在取得相关法律文件后，作为坏账损失；",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.136,
+                0.66,
+                0.499,
+                0.672
+            ],
+            "text": "因无法执行被裁定终止执行的，作为坏账损失；",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.168,
+                0.625,
+                0.898,
+                0.644
+            ],
+            "text": "（3）涉诉的应收款项，已生效的人民法院判决书、裁定书判定、裁定败诉的，或者虽然胜诉但",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.136,
+                0.718,
+                0.819,
+                0.732
+            ],
+            "text": "来的，在扣除应付该债务人的各种款项和有关责任人员的赔偿后的余额，作为坏账损失；",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.169,
+                0.686,
+                0.898,
+                0.703
+            ],
+            "text": "（4）逾期3年的应收款项，具有企业依法催收磋商记录，并且能够确认3年内没有任何业务往",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.169,
+                0.896,
+                0.242,
+                0.916
+            ],
+            "text": "7、存货",
+            "score": 0.999
+        }
+    ],
+    [
+        {
+            "type": "header",
+            "bbox": [
+                0.127,
+                0.058,
+                0.342,
+                0.071
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "header",
+            "bbox": [
+                0.727,
+                0.054,
+                0.884,
+                0.068
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.16,
+                0.094,
+                0.618,
+                0.111
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.127,
+                0.122,
+                0.893,
+                0.17
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.129,
+                0.18,
+                0.893,
+                0.228
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.164,
+                0.242,
+                0.267,
+                0.259
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.13,
+                0.269,
+                0.894,
+                0.318
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.13,
+                0.328,
+                0.894,
+                0.377
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.165,
+                0.389,
+                0.57,
+                0.406
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.13,
+                0.417,
+                0.894,
+                0.466
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.167,
+                0.479,
+                0.479,
+                0.494
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.13,
+                0.495,
+                0.902,
+                0.638
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>资产类别</td><td>折旧年限</td><td>残值率(%)</td><td>年折旧率(%)</td></tr><tr><td>房屋建筑物</td><td>20年</td><td>5</td><td>4.75</td></tr><tr><td>机械设备</td><td>10年</td><td>5</td><td>9.50</td></tr><tr><td>运输工具</td><td>4年</td><td>5</td><td>23.75</td></tr><tr><td>电子设备及其他</td><td>3年</td><td>0</td><td>33.33</td></tr></table>"
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.168,
+                0.649,
+                0.272,
+                0.665
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.134,
+                0.675,
+                0.9,
+                0.724
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.169,
+                0.736,
+                0.555,
+                0.753
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.134,
+                0.764,
+                0.902,
+                0.905
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.64,
+                0.917,
+                0.894,
+                0.932
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "page_number",
+            "bbox": [
+                0.515,
+                0.934,
+                0.526,
+                0.945
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.168,
+                0.48,
+                0.481,
+                0.494
+            ],
+            "text": "各类固定资产折旧年限和年折旧率如下：",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.64,
+                0.918,
+                0.894,
+                0.93
+            ],
+            "text": "石家庄世仁会计师事务所（普通合伙）",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.726,
+                0.054,
+                0.885,
+                0.067
+            ],
+            "text": "2023年度财务报表附注",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.161,
+                0.242,
+                0.268,
+                0.26
+            ],
+            "text": "8、固定资产",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.166,
+                0.648,
+                0.274,
+                0.665
+            ],
+            "text": "9、在建工程",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.127,
+                0.058,
+                0.343,
+                0.071
+            ],
+            "text": "河北泰昌电力器材科技有限公司",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.513,
+                0.933,
+                0.527,
+                0.945
+            ],
+            "text": "9",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.129,
+                0.155,
+                0.567,
+                0.168
+            ],
+            "text": "用一次转销法进行摊销。存货盘存制度采用永续盘存制。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.163,
+                0.123,
+                0.893,
+                0.139
+            ],
+            "text": "存货取得时按实际成本计价。原材料、备件等发出时按加权平均法计价；低值易耗品领用时采",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.165,
+                0.182,
+                0.893,
+                0.197
+            ],
+            "text": "本公司期末对存货进行全面清查后，按存货的成本与可变现净值孰低提取或调整存货跌价准",
+            "score": 0.988
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.212,
+                0.728,
+                0.228
+            ],
+            "text": "备。期末存货成本高于其可变现净值的，计提存货跌价准备，计入当期损益。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.302,
+                0.285,
+                0.318
+            ],
+            "text": "计年度的有形资产。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.165,
+                0.271,
+                0.894,
+                0.286
+            ],
+            "text": "本公司固定资产是指为生产商品、提供劳务、出租或经营管理而持有的，使用寿命超过一个会",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.361,
+                0.41,
+                0.376
+            ],
+            "text": "地计量时，固定资产才能予以确认。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.166,
+                0.33,
+                0.894,
+                0.345
+            ],
+            "text": "在同时满足：与该固定资产有关的经济利益很可能流入企业，并且该固定资产的成本能够可靠",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.133,
+                0.451,
+                0.287,
+                0.466
+            ],
+            "text": "残值率确定折旧率。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.167,
+                0.419,
+                0.896,
+                0.434
+            ],
+            "text": "本公司固定资产折旧采用年限平均法分类计提，根据固定资产的类别、预计使用寿命和预计净",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.135,
+                0.708,
+                0.664,
+                0.722
+            ],
+            "text": "到预定可使用状态前的应予资本化的借款费用以及其他相关费用等。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.17,
+                0.677,
+                0.899,
+                0.693
+            ],
+            "text": "本公司在建工程成本按照实际工程支出确定，包括在建期间发生的各项必要工程支出、工程达",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.137,
+                0.89,
+                0.399,
+                0.903
+            ],
+            "text": "值，但不调整原已计提的折旧额。",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.17,
+                0.765,
+                0.9,
+                0.783
+            ],
+            "text": "在建工程项目按建造该项资产达到预定可使用状态前所发生的必要支出，作为固定资产的入账",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.136,
+                0.796,
+                0.901,
+                0.813
+            ],
+            "text": "价值。所建造的固定资产在建工程已达到预定可使用状态，但尚未办理竣工决算的，自达到预定可",
+            "score": 0.991
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.137,
+                0.826,
+                0.902,
+                0.843
+            ],
+            "text": "使用状态之日起，根据工程预算、造价或者工程实际成本等，按估计的价值转入固定资产，并按本",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.137,
+                0.856,
+                0.902,
+                0.873
+            ],
+            "text": "公司固定资产折旧政策计提固定资产的折旧，待办理竣工决算后，再按实际成本调整原来的暂估价",
+            "score": 0.995
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.163,
+                0.096,
+                0.62,
+                0.109
+            ],
+            "text": "本公司存货分为原材料、备件、低值易耗品及库存商品等。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.167,
+                0.391,
+                0.571,
+                0.404
+            ],
+            "text": "本公司固定资产按取得时的实际成本进行初始计量。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.171,
+                0.738,
+                0.556,
+                0.751
+            ],
+            "text": "在建工程在达到预定可使用状态时转入固定资产。",
+            "score": 1.0
+        }
+    ],
+    [
+        {
+            "type": "header",
+            "bbox": [
+                0.128,
+                0.055,
+                0.344,
+                0.068
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "header",
+            "bbox": [
+                0.727,
+                0.054,
+                0.884,
+                0.068
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.164,
+                0.093,
+                0.275,
+                0.109
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.128,
+                0.122,
+                0.89,
+                0.168
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.162,
+                0.182,
+                0.512,
+                0.198
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.127,
+                0.211,
+                0.884,
+                0.257
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.163,
+                0.271,
+                0.353,
+                0.286
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.162,
+                0.299,
+                0.813,
+                0.315
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "list",
+            "bbox": [
+                0.127,
+                0.211,
+                0.884,
+                0.315
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.128,
+                0.328,
+                0.893,
+                0.405
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.128,
+                0.418,
+                0.893,
+                0.495
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.128,
+                0.507,
+                0.893,
+                0.554
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.165,
+                0.568,
+                0.275,
+                0.583
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.163,
+                0.597,
+                0.779,
+                0.613
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.163,
+                0.628,
+                0.512,
+                0.643
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.163,
+                0.658,
+                0.583,
+                0.673
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.163,
+                0.687,
+                0.478,
+                0.703
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "list",
+            "bbox": [
+                0.163,
+                0.658,
+                0.583,
+                0.703
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.128,
+                0.716,
+                0.894,
+                0.853
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.166,
+                0.867,
+                0.312,
+                0.882
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.165,
+                0.897,
+                0.585,
+                0.912
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.633,
+                0.919,
+                0.887,
+                0.933
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "page_number",
+            "bbox": [
+                0.506,
+                0.935,
+                0.522,
+                0.945
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.165,
+                0.687,
+                0.479,
+                0.702
+            ],
+            "text": "（2）该无形资产的成本能够可靠地计量。",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.632,
+                0.919,
+                0.888,
+                0.932
+            ],
+            "text": "石家庄世仁会计师事务所（普通合伙）",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.728,
+                0.054,
+                0.884,
+                0.067
+            ],
+            "text": "2023年度财务报表附注",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.167,
+                0.866,
+                0.313,
+                0.882
+            ],
+            "text": "12、长期待摊费用",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.164,
+                0.093,
+                0.275,
+                0.109
+            ],
+            "text": "10、借款费用",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.163,
+                0.567,
+                0.277,
+                0.584
+            ],
+            "text": "11、无形资产",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.163,
+                0.33,
+                0.892,
+                0.344
+            ],
+            "text": "对于为购建或者生产符合资本化条件的资产而借入的专门借款，以专门借款当期实际发生的借",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.36,
+                0.892,
+                0.373
+            ],
+            "text": "款费用，减去尚未动用的借款资金存入银行取得的利息收入或进行暂时性投资取得的投资收益后的",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.132,
+                0.389,
+                0.425,
+                0.405
+            ],
+            "text": "金额，来确定借款费用的资本化金额。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.163,
+                0.419,
+                0.892,
+                0.433
+            ],
+            "text": "对于为购建或者生产符合资本化条件的资产而占用的一般借款，根据累计资产支出超过专门借",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.449,
+                0.893,
+                0.463
+            ],
+            "text": "款部分的资产支出加权平均数乘以所占用一般借款的资本化率，计算确定一般借款应予资本化的利",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.479,
+                0.568,
+                0.494
+            ],
+            "text": "息金额。资本化率根据一般借款加权平均利率计算确定。",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.165,
+                0.183,
+                0.51,
+                0.198
+            ],
+            "text": "借款费用同时满足下列条件的，开始资本化：",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.168,
+                0.628,
+                0.512,
+                0.643
+            ],
+            "text": "同时满足下列条件时，无形资产才予以确认：",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.055,
+                0.344,
+                0.068
+            ],
+            "text": "河北泰昌电力器材科技有限公司",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.503,
+                0.933,
+                0.525,
+                0.947
+            ],
+            "text": "10",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.164,
+                0.123,
+                0.89,
+                0.137
+            ],
+            "text": "本公司发生的借款费用，可直接归属于符合资本化条件的资产的购建或者生产的，予以资本化，",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.152,
+                0.815,
+                0.168
+            ],
+            "text": "计入相关资产成本；其他借款费用，在发生时根据其发生额确认为费用，计入当期损益。",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.165,
+                0.212,
+                0.884,
+                0.226
+            ],
+            "text": "（1）资产支出已经发生，资产支出包括为购建或者生产符合资本化条件的资产而以支付现金、",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.131,
+                0.243,
+                0.528,
+                0.256
+            ],
+            "text": "转移非现金资产或者承担带息债务形式发生的支出；",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.165,
+                0.508,
+                0.892,
+                0.522
+            ],
+            "text": "借款存在折价或者溢价的，按照实际利率法确定每一会计期间应摊销的折价或者溢价金额，调",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.538,
+                0.267,
+                0.555
+            ],
+            "text": "整每期利息金额。",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.164,
+                0.596,
+                0.782,
+                0.612
+            ],
+            "text": "本公司无形资产是指本公司拥有或控制的没有实物形态的可辨认非货币性资产。",
+            "score": 0.992
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.166,
+                0.718,
+                0.893,
+                0.731
+            ],
+            "text": "公司取得无形资产时按成本进行初始计量。外购无形资产的成本，包括购买价款、相关税费以",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.748,
+                0.893,
+                0.762
+            ],
+            "text": "及直接归属于使该项资产达到预定用途所发生的其他支出。购买无形资产的价款超过正常信用条件",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.778,
+                0.892,
+                0.79
+            ],
+            "text": "延期支付，实质上具有融资性质的，无形资产的成本以购买价款的现值为基础确定。债务重组取得",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.807,
+                0.894,
+                0.821
+            ],
+            "text": "债务人用以抵债的无形资产，以该无形资产的公允价值为基础确定其入账价值，并将重组债务的账",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.836,
+                0.676,
+                0.851
+            ],
+            "text": "面价值与该用以抵债的无形资产公允价值之间的差额，计入当期损益。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.164,
+                0.27,
+                0.353,
+                0.286
+            ],
+            "text": "（2）借款费用已经发生；",
+            "score": 0.995
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.165,
+                0.657,
+                0.584,
+                0.674
+            ],
+            "text": "（1）与该无形资产有关的经济利益很可能流入本公司；",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.166,
+                0.897,
+                0.587,
+                0.912
+            ],
+            "text": "本公司长期待摊费用包括项目筹建期发生的开办费等。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.164,
+                0.298,
+                0.815,
+                0.314
+            ],
+            "text": "（3）为使资产达到预定可使用或者可销售状态所必要的购建或者生产活动已经开始。",
+            "score": 0.999
+        }
+    ],
+    [
+        {
+            "type": "header",
+            "bbox": [
+                0.127,
+                0.056,
+                0.343,
+                0.07
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "header",
+            "bbox": [
+                0.725,
+                0.054,
+                0.882,
+                0.068
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.127,
+                0.093,
+                0.892,
+                0.14
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.163,
+                0.154,
+                0.275,
+                0.169
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.127,
+                0.181,
+                0.893,
+                0.258
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.164,
+                0.272,
+                0.24,
+                0.287
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.128,
+                0.299,
+                0.893,
+                0.377
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.162,
+                0.389,
+                0.867,
+                0.406
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.128,
+                0.418,
+                0.893,
+                0.496
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.166,
+                0.509,
+                0.33,
+                0.526
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.129,
+                0.537,
+                0.893,
+                0.616
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.165,
+                0.629,
+                0.569,
+                0.646
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.166,
+                0.659,
+                0.26,
+                0.675
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.165,
+                0.688,
+                0.41,
+                0.705
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.165,
+                0.717,
+                0.65,
+                0.735
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.166,
+                0.749,
+                0.197,
+                0.764
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.166,
+                0.781,
+                0.243,
+                0.797
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.168,
+                0.815,
+                0.295,
+                0.831
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.143,
+                0.832,
+                0.891,
+                0.92
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>税种</td><td>计税依据</td><td>税率</td></tr><tr><td>增值税</td><td>产品销售收入、技术服务收入</td><td>1%、3%、6%、9%、13%</td></tr><tr><td>城建税</td><td>应纳流转税额</td><td>5%、7%</td></tr></table>"
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.636,
+                0.92,
+                0.889,
+                0.933
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "page_number",
+            "bbox": [
+                0.509,
+                0.936,
+                0.524,
+                0.947
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.635,
+                0.92,
+                0.89,
+                0.932
+            ],
+            "text": "石家庄世仁会计师事务所（普通合伙）",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.725,
+                0.054,
+                0.883,
+                0.068
+            ],
+            "text": "2023年度财务报表附注",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.166,
+                0.51,
+                0.331,
+                0.525
+            ],
+            "text": "15、研究与开发费用",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.163,
+                0.153,
+                0.275,
+                0.17
+            ],
+            "text": "13、职工薪酬",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.168,
+                0.815,
+                0.297,
+                0.831
+            ],
+            "text": "主要税种及税率",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.163,
+                0.184,
+                0.891,
+                0.196
+            ],
+            "text": "职工薪酬主要包括工资、奖金和补贴、职工福利费、社会保险费及住房公积金、工会经费和职",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.243,
+                0.655,
+                0.256
+            ],
+            "text": "酬，并根据职工提供服务的受益对象计入当期损益或相关资产成本。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.212,
+                0.892,
+                0.227
+            ],
+            "text": "工教育经费等其他与获得职工提供的服务的相关支出。于职工提供服务的期间确认应付的职工薪",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.332,
+                0.892,
+                0.345
+            ],
+            "text": "有权相联系的继续管理权，也没有对已出售的产品实施控制，与交易相关的经济利益能够流入，相",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.131,
+                0.361,
+                0.656,
+                0.376
+            ],
+            "text": "关的收入和成本能够可靠地计量为标志，确认产品销售收入的实现。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.163,
+                0.301,
+                0.892,
+                0.316
+            ],
+            "text": "产品销售是以产品所有权上的重要风险和报酬已经转移给购货方，本公司既没有保留通常与所",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.166,
+                0.421,
+                0.892,
+                0.433
+            ],
+            "text": "确认让渡资产使用权收入时，以与交易相关的经济利益很可能流入企业，收入的金额能够可靠",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.132,
+                0.481,
+                0.833,
+                0.493
+            ],
+            "text": "和实际利率确定；使用费收入金额，按照有关合同或协议约定的收费时间和方法计算确定。",
+            "score": 0.994
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.131,
+                0.448,
+                0.892,
+                0.465
+            ],
+            "text": "计量为标志，分别下列情况确定收入金额：利息收入金额，按照他人使用本企业的货币资金的时间",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.167,
+                0.54,
+                0.709,
+                0.553
+            ],
+            "text": "本公司将研究开发新产品、新技术的过程中发生的各种人力、物力和购",
+            "score": 0.98
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.132,
+                0.601,
+                0.428,
+                0.614
+            ],
+            "text": "开发过程中发生的租金及借款费用等。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.128,
+                0.057,
+                0.344,
+                0.069
+            ],
+            "text": "河北泰昌电力器材科技有限公司",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.168,
+                0.69,
+                0.41,
+                0.703
+            ],
+            "text": "按应付税款法核算企业所得税。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.507,
+                0.935,
+                0.527,
+                0.95
+            ],
+            "text": "11",
+            "score": 0.973
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.163,
+                0.095,
+                0.891,
+                0.108
+            ],
+            "text": "本公司发生的长期待摊费用按实际成本计价，并按预计受益期限平均摊销。对不能使以后会计",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.129,
+                0.125,
+                0.759,
+                0.138
+            ],
+            "text": "期间受益的长期待摊费用项目，在确定时将该项目的摊余价值全部计入当期损益。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.166,
+                0.748,
+                0.201,
+                0.767
+            ],
+            "text": "无。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.161,
+                0.268,
+                0.244,
+                0.291
+            ],
+            "text": "14、收入",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.166,
+                0.658,
+                0.262,
+                0.676
+            ],
+            "text": "16、所得税",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.166,
+                0.779,
+                0.246,
+                0.799
+            ],
+            "text": "五、税项",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.167,
+                0.629,
+                0.57,
+                0.644
+            ],
+            "text": "本公司研究与开发费用在发生时直接计入当期损益。",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.165,
+                0.389,
+                0.867,
+                0.405
+            ],
+            "text": "对在提供劳务交易的结果能够可靠估计的情况下，本公司在期末按完工百分比法确认收入。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.168,
+                0.718,
+                0.651,
+                0.733
+            ],
+            "text": "四、会计政策和会计估计变更以及差错更正、其他调整的说明",
+            "score": 1.0
+        }
+    ],
+    [
+        {
+            "type": "header",
+            "bbox": [
+                0.129,
+                0.056,
+                0.344,
+                0.07
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "header",
+            "bbox": [
+                0.728,
+                0.056,
+                0.884,
+                0.069
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.14,
+                0.081,
+                0.883,
+                0.168
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>教育费附加</td><td>应纳流转税额</td><td>3%</td></tr><tr><td>地方教育费附加</td><td>应纳流转税额</td><td>2%</td></tr><tr><td>企业所得税</td><td>应纳税所得额</td><td>25%</td></tr></table>",
+            "cell_merge": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.162,
+                0.18,
+                0.4,
+                0.196
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.162,
+                0.214,
+                0.265,
+                0.229
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.142,
+                0.231,
+                0.88,
+                0.289
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>年初数</td><td>期末数</td></tr><tr><td>8,342,561.26</td><td>8,664,031.87</td></tr></table>"
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.162,
+                0.302,
+                0.265,
+                0.317
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.142,
+                0.319,
+                0.884,
+                0.378
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>年初数</td><td>期末数</td></tr><tr><td>24,732,845.16</td><td>24,471,920.43</td></tr></table>"
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.162,
+                0.391,
+                0.229,
+                0.406
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.142,
+                0.409,
+                0.884,
+                0.468
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>年初数</td><td>期末数</td></tr><tr><td>18,392,485.35</td><td>18,699,877.46</td></tr></table>"
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.162,
+                0.48,
+                0.265,
+                0.496
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.142,
+                0.498,
+                0.884,
+                0.613
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>项目</td><td>年初数</td><td>期末数</td></tr><tr><td>固定资产原价</td><td>39,449,609.05</td><td>40,613,101.65</td></tr><tr><td>累计折旧</td><td>12,254,863.26</td><td>12,698,787.40</td></tr><tr><td>固定资产净值</td><td>27,194,745.79</td><td>27,914,314.25</td></tr></table>"
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.162,
+                0.626,
+                0.265,
+                0.641
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.142,
+                0.643,
+                0.884,
+                0.702
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>年初数</td><td>期末数</td></tr><tr><td>3,092,031.91</td><td>3,988,063.10</td></tr></table>"
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.162,
+                0.715,
+                0.265,
+                0.73
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.142,
+                0.733,
+                0.884,
+                0.792
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>年初数</td><td>期末数</td></tr><tr><td>274,651.26</td><td>306,506.40</td></tr></table>"
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.162,
+                0.805,
+                0.265,
+                0.82
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.142,
+                0.822,
+                0.884,
+                0.882
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>年初数</td><td>期末数</td></tr><tr><td>60,000,000.00</td><td>60,000,000.00</td></tr></table>"
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.162,
+                0.895,
+                0.265,
+                0.911
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.631,
+                0.922,
+                0.886,
+                0.936
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "page_number",
+            "bbox": [
+                0.503,
+                0.937,
+                0.521,
+                0.949
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.63,
+                0.922,
+                0.885,
+                0.935
+            ],
+            "text": "石家庄世仁会计师事务所（普通合伙）",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.729,
+                0.057,
+                0.884,
+                0.069
+            ],
+            "text": "2023年度财务报表附注",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.162,
+                0.213,
+                0.265,
+                0.23
+            ],
+            "text": "1、货币资金",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.161,
+                0.3,
+                0.267,
+                0.318
+            ],
+            "text": "2、应收账款",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.16,
+                0.479,
+                0.265,
+                0.497
+            ],
+            "text": "4、固定资产",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.161,
+                0.624,
+                0.267,
+                0.642
+            ],
+            "text": "5、应付账款",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.161,
+                0.713,
+                0.266,
+                0.732
+            ],
+            "text": "6、应交税费",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.161,
+                0.803,
+                0.266,
+                0.821
+            ],
+            "text": "7、实收资本",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.161,
+                0.894,
+                0.267,
+                0.912
+            ],
+            "text": "8、资本公积",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.056,
+                0.344,
+                0.07
+            ],
+            "text": "河北泰昌电力器材科技有限公司",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.164,
+                0.181,
+                0.399,
+                0.196
+            ],
+            "text": "六、财务报表重要项目的说明",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.16,
+                0.389,
+                0.232,
+                0.409
+            ],
+            "text": "3、存货",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.501,
+                0.936,
+                0.523,
+                0.953
+            ],
+            "text": "12",
+            "score": 0.995
+        }
+    ],
+    [
+        {
+            "type": "header",
+            "bbox": [
+                0.134,
+                0.058,
+                0.347,
+                0.071
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "header",
+            "bbox": [
+                0.73,
+                0.053,
+                0.891,
+                0.067
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.145,
+                0.08,
+                0.887,
+                0.139
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>年初数</td><td>期末数</td></tr><tr><td>250,928.00</td><td>250,928.00</td></tr></table>"
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.167,
+                0.154,
+                0.286,
+                0.169
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.139,
+                0.17,
+                0.898,
+                0.593
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>项目</td><td>金额</td></tr><tr><td>上年年末余额</td><td>15,045,026.39</td></tr><tr><td>加:重大会计差错</td><td></td></tr><tr><td>其他调整因素</td><td></td></tr><tr><td>本年年初余额</td><td>15,045,026.39</td></tr><tr><td>本期增加数</td><td>1,964,620.12</td></tr><tr><td>其中:本期净利润转入</td><td>1,964,620.12</td></tr><tr><td>其他增加</td><td></td></tr><tr><td>本年减少数</td><td></td></tr><tr><td>其中:本年提取的盈余公积数</td><td></td></tr><tr><td>本年分配现金股利数</td><td></td></tr><tr><td>本年分配股票股利数</td><td></td></tr><tr><td>其他减少</td><td></td></tr><tr><td>其他调整(以前年度损益调整)</td><td>-1,805,000.00</td></tr><tr><td>本年年末余额</td><td>15,204,646.51</td></tr></table>"
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.174,
+                0.608,
+                0.373,
+                0.624
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.149,
+                0.625,
+                0.897,
+                0.826
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>项目</td><td>本年累计数</td></tr><tr><td>一、主营业务收入</td><td>52,160,031.87</td></tr><tr><td>其他业务收入</td><td>0.00</td></tr><tr><td>营业收入合计</td><td>52,160,031.87</td></tr><tr><td>二、主营业务成本</td><td>47,787,061.65</td></tr><tr><td>其他业务成本</td><td>0.00</td></tr><tr><td>营业成本合计</td><td>47,787,061.65</td></tr></table>"
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.176,
+                0.841,
+                0.304,
+                0.857
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.149,
+                0.858,
+                0.897,
+                0.919
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>项目</td><td>本年累计数</td></tr><tr><td>税金及附加</td><td>10,644.32</td></tr></table>"
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.644,
+                0.935,
+                0.898,
+                0.949
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "page_number",
+            "bbox": [
+                0.517,
+                0.951,
+                0.532,
+                0.963
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.642,
+                0.935,
+                0.898,
+                0.949
+            ],
+            "text": "石家庄世仁会计师事务所（普通合伙）",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.73,
+                0.054,
+                0.892,
+                0.066
+            ],
+            "text": "2023年度财务报表附注",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.166,
+                0.154,
+                0.288,
+                0.17
+            ],
+            "text": "9、未分配利润",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.176,
+                0.841,
+                0.304,
+                0.857
+            ],
+            "text": "11、税金及附加",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.134,
+                0.058,
+                0.348,
+                0.07
+            ],
+            "text": "河北泰昌电力器材科技有限公司",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.514,
+                0.95,
+                0.536,
+                0.966
+            ],
+            "text": "13",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.174,
+                0.608,
+                0.373,
+                0.623
+            ],
+            "text": "10、营业收入、营业成本",
+            "score": 1.0
+        }
+    ],
+    [
+        {
+            "type": "header",
+            "bbox": [
+                0.133,
+                0.057,
+                0.347,
+                0.071
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "header",
+            "bbox": [
+                0.729,
+                0.056,
+                0.891,
+                0.069
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.141,
+                0.082,
+                0.887,
+                0.111
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>合计</td><td>10,644.32</td></tr></table>",
+            "cell_merge": [
+                0,
+                0
+            ]
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.168,
+                0.126,
+                0.275,
+                0.141
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.141,
+                0.143,
+                0.887,
+                0.228
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>项目</td><td>本年累计数</td></tr><tr><td>销售费用</td><td>206,873.40</td></tr><tr><td>合计</td><td>206,873.40</td></tr></table>"
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.168,
+                0.242,
+                0.276,
+                0.257
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.141,
+                0.26,
+                0.887,
+                0.345
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>项目</td><td>本年累计数</td></tr><tr><td>管理费用</td><td>2,087,431.32</td></tr><tr><td>合计</td><td>2,087,431.32</td></tr></table>"
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.168,
+                0.36,
+                0.294,
+                0.375
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.141,
+                0.377,
+                0.887,
+                0.466
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>项目</td><td>本年累计数</td></tr><tr><td>所得税费用</td><td>103,401.06</td></tr><tr><td>合计</td><td>103,401.06</td></tr></table>"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.168,
+                0.473,
+                0.385,
+                0.505
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.168,
+                0.521,
+                0.331,
+                0.536
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.168,
+                0.538,
+                0.497,
+                0.553
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.634,
+                0.464,
+                0.841,
+                0.584
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.64,
+                0.618,
+                0.89,
+                0.634
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.743,
+                0.643,
+                0.889,
+                0.658
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "page_number",
+            "bbox": [
+                0.508,
+                0.953,
+                0.524,
+                0.964
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.636,
+                0.938,
+                0.889,
+                0.951
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.639,
+                0.618,
+                0.892,
+                0.634
+            ],
+            "text": "河北泰昌电力器材科技有限公司",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.636,
+                0.938,
+                0.889,
+                0.951
+            ],
+            "text": "石家庄世仁会计师事务所（普通合伙）",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.731,
+                0.056,
+                0.891,
+                0.069
+            ],
+            "text": "2023年度财务报表附注",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.169,
+                0.522,
+                0.333,
+                0.537
+            ],
+            "text": "八、财务报表的批准",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.74,
+                0.642,
+                0.893,
+                0.659
+            ],
+            "text": "2023年12月31日",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.166,
+                0.124,
+                0.278,
+                0.142
+            ],
+            "text": "12、销售费用",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.166,
+                0.241,
+                0.278,
+                0.258
+            ],
+            "text": "13、管理费用",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.167,
+                0.359,
+                0.296,
+                0.375
+            ],
+            "text": "14、所得税费用",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.171,
+                0.538,
+                0.499,
+                0.553
+            ],
+            "text": "本财务报表已经本公司总经理办公会批准。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.133,
+                0.057,
+                0.348,
+                0.07
+            ],
+            "text": "河北泰昌电力器材科技有限公司",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.169,
+                0.474,
+                0.385,
+                0.488
+            ],
+            "text": "七、其他需说明的重大事项",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.166,
+                0.488,
+                0.203,
+                0.507
+            ],
+            "text": "无。",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.506,
+                0.951,
+                0.528,
+                0.965
+            ],
+            "text": "14",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.652,
+                0.514,
+                0.824,
+                0.533
+            ],
+            "text": "石家庄世仁会计师事务所（普通合伙）",
+            "score": 0.96
+        }
+    ],
+    [
+        {
+            "type": "image",
+            "bbox": [
+                0.108,
+                0.449,
+                0.237,
+                0.539
+            ],
+            "angle": 270,
+            "content": "Official emblem of the Chinese People's Republic of China, featuring national flag and emblem (no text or symbols visible)",
+            "sub_type": "natural_image"
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.252,
+                0.374,
+                0.318,
+                0.608
+            ],
+            "angle": 270,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.279,
+                0.694,
+                0.301,
+                0.826
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.31,
+                0.698,
+                0.329,
+                0.826
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.262,
+                0.159,
+                0.278,
+                0.212
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.28,
+                0.161,
+                0.29,
+                0.212
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.291,
+                0.166,
+                0.302,
+                0.212
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.303,
+                0.166,
+                0.314,
+                0.212
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.315,
+                0.166,
+                0.326,
+                0.212
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.327,
+                0.16,
+                0.338,
+                0.212
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.339,
+                0.159,
+                0.35,
+                0.212
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.262,
+                0.221,
+                0.347,
+                0.284
+            ],
+            "angle": 270,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.335,
+                0.347,
+                0.355,
+                0.428
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "title",
+            "bbox": [
+                0.333,
+                0.456,
+                0.362,
+                0.522
+            ],
+            "angle": 270,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.411,
+                0.56,
+                0.437,
+                0.824
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.415,
+                0.807,
+                0.439,
+                0.824
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.457,
+                0.674,
+                0.479,
+                0.824
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.486,
+                0.706,
+                0.523,
+                0.824
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.404,
+                0.285,
+                0.428,
+                0.425
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.446,
+                0.265,
+                0.472,
+                0.425
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.486,
+                0.15,
+                0.506,
+                0.425
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.512,
+                0.248,
+                0.529,
+                0.342
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.538,
+                0.445,
+                0.555,
+                0.824
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.557,
+                0.445,
+                0.579,
+                0.824
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.58,
+                0.445,
+                0.602,
+                0.739
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.602,
+                0.445,
+                0.621,
+                0.739
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.623,
+                0.635,
+                0.642,
+                0.739
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.564,
+                0.171,
+                0.721,
+                0.285
+            ],
+            "angle": 270,
+            "content": "石家庄市栾城区行政审批局\n审批专用章\n1301240404205",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "image_caption",
+            "bbox": [
+                0.665,
+                0.281,
+                0.689,
+                0.37
+            ],
+            "angle": 270,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.727,
+                0.146,
+                0.752,
+                0.284
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.806,
+                0.101,
+                0.828,
+                0.217
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.829,
+                0.304,
+                0.845,
+                0.489
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.831,
+                0.644,
+                0.848,
+                0.875
+            ],
+            "angle": 270,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.671,
+                0.479,
+                0.851,
+                0.61
+            ],
+            "angle": 270,
+            "content": "石家庄世仁会计师事务所\nSHINJIAZHUNGSHIREN ACCOUNTING\nFENGJESERIAL PARTNERSHIP\n市家",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.275,
+                0.691,
+                0.304,
+                0.828
+            ],
+            "text": "",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.26,
+                0.157,
+                0.279,
+                0.213
+            ],
+            "text": "事二日",
+            "score": 0.574
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.29,
+                0.165,
+                0.304,
+                0.212
+            ],
+            "text": "",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.312,
+                0.165,
+                0.322,
+                0.206
+            ],
+            "text": "",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.321,
+                0.157,
+                0.339,
+                0.213
+            ],
+            "text": "",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.337,
+                0.156,
+                0.353,
+                0.213
+            ],
+            "text": "品",
+            "score": 0.507
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.412,
+                0.806,
+                0.442,
+                0.826
+            ],
+            "text": "名",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.493,
+                0.702,
+                0.526,
+                0.827
+            ],
+            "text": "",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.803,
+                0.1,
+                0.826,
+                0.218
+            ],
+            "text": "",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.453,
+                0.804,
+                0.483,
+                0.826
+            ],
+            "text": "类",
+            "score": 0.881
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.44,
+                0.262,
+                0.472,
+                0.428
+            ],
+            "text": "22222222222",
+            "score": 0.538
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.332,
+                0.344,
+                0.357,
+                0.43
+            ],
+            "text": "-1台",
+            "score": 0.539
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.661,
+                0.277,
+                0.692,
+                0.372
+            ],
+            "text": "2",
+            "score": 0.629
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.325,
+                0.451,
+                0.368,
+                0.526
+            ],
+            "text": "（）",
+            "score": 0.803
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.405,
+                0.556,
+                0.438,
+                0.77
+            ],
+            "text": "）开",
+            "score": 0.562
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.41,
+                0.806,
+                0.44,
+                0.826
+            ],
+            "text": "名",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.551,
+                0.442,
+                0.581,
+                0.744
+            ],
+            "text": "",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.828,
+                0.643,
+                0.847,
+                0.876
+            ],
+            "text": "",
+            "score": 1.0
+        }
+    ],
+    [
+        {
+            "type": "image",
+            "bbox": [
+                0.121,
+                0.118,
+                0.853,
+                0.47
+            ],
+            "angle": 90,
+            "content": "中华人民共和国财政部制\n2023年1月30日\n发证机构北京市财政厅\n行政审批专用章\n4. 合计师事务所终止或执业许可注销的，应当向财政部门交回《会计师事务所执业证书》。\n3. 《会计师事务所执业证书》不得伪造、涂改、出栏、出借、转让。\n4. 合计师事务所终结或执业许可注销的，应当向财政部门申请核发。\n3. 应当向财政部门申请核发。\n2. 《会计师事务所执业证书》记数事项发生变动的，应当向财政部门申请核发。\n凭证。\n说明\n1. 《会计师事务所执业证书》是证明持有人经财政部门依法审批，准予执行注册会计师法定业务的",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.123,
+                0.526,
+                0.861,
+                0.884
+            ],
+            "angle": 90,
+            "content": "名称：\n石家庄七亿会计师事务所（普通合伙）\n(伙)\n首席合伙人：\n何平丰\n主任会计师：\n江苏省市场监督管理委员会\n首席场所：\n河北省石家庄市荣城区石家大街与荣武路交叉口南行200米路口\n批准执业日期： 2023年1月30日\n批准执业文号： 禹财会（2023）5号\n执业证书\n会计师事务所",
+            "sub_type": "text_image"
+        }
+    ],
+    [
+        {
+            "type": "text",
+            "bbox": [
+                0.164,
+                0.144,
+                0.186,
+                0.284
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.194,
+                0.144,
+                0.212,
+                0.278
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.224,
+                0.144,
+                0.242,
+                0.235
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.244,
+                0.144,
+                0.318,
+                0.226
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.321,
+                0.329,
+                0.364,
+                0.468
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.373,
+                0.327,
+                0.461,
+                0.461
+            ],
+            "angle": 0,
+            "content": "年度检\n验合格专用章\nAnnual Renewal Registration (W)",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.592,
+                0.157,
+                0.729,
+                0.255
+            ],
+            "angle": 0,
+            "content": "THE CHINESE INSTITUTE OF CERTIFIED PUBLIC ACCOUNTMENTS\n中国注册会计师协会",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.507,
+                0.356,
+                0.583,
+                0.437
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.599,
+                0.353,
+                0.655,
+                0.445
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.663,
+                0.353,
+                0.794,
+                0.433
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.174,
+                0.353,
+                0.321,
+                0.449
+            ],
+            "angle": 0,
+            "content": "QR code with partial text 'CILAR' visible on the left side",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.182,
+                0.559,
+                0.475,
+                0.574
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.188,
+                0.575,
+                0.47,
+                0.586
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.186,
+                0.599,
+                0.248,
+                0.609
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.187,
+                0.61,
+                0.34,
+                0.62
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.283,
+                0.633,
+                0.475,
+                0.801
+            ],
+            "angle": 0,
+            "content": "四川华信\n事务所\nCPAs\n转出协会盖章\nComp of the transfer-institute of CPAs\n2009/17 9月17日\nTransferred to\n注册所专\n四川中衡贸易\n事务所\nCPAs",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.188,
+                0.731,
+                0.251,
+                0.742
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.19,
+                0.742,
+                0.332,
+                0.751
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.321,
+                0.764,
+                0.472,
+                0.793
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.375,
+                0.815,
+                0.475,
+                0.827
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.319,
+                0.828,
+                0.478,
+                0.837
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.326,
+                0.837,
+                0.475,
+                0.86
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.518,
+                0.557,
+                0.81,
+                0.572
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.525,
+                0.573,
+                0.807,
+                0.584
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.522,
+                0.597,
+                0.585,
+                0.608
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.524,
+                0.608,
+                0.676,
+                0.617
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.633,
+                0.488,
+                0.814,
+                0.613
+            ],
+            "angle": 0,
+            "content": "作单位变更事项登记\nChange of Working Unit by a CPA\nSHINJIAZHUANSHINE CO.,LTD.\nFIRM GENERAL PARTNERSHIP\nForced from",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.624,
+                0.624,
+                0.808,
+                0.665
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.651,
+                0.666,
+                0.812,
+                0.724
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.527,
+                0.729,
+                0.589,
+                0.74
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.528,
+                0.74,
+                0.67,
+                0.749
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.764,
+                0.769,
+                0.811,
+                0.78
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.784,
+                0.78,
+                0.81,
+                0.789
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.6,
+                0.777,
+                0.712,
+                0.808
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.715,
+                0.813,
+                0.813,
+                0.824
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.657,
+                0.825,
+                0.815,
+                0.834
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.652,
+                0.836,
+                0.813,
+                0.858
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "page_number",
+            "bbox": [
+                0.187,
+                0.875,
+                0.203,
+                0.885
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "page_number",
+            "bbox": [
+                0.8,
+                0.871,
+                0.814,
+                0.881
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.18,
+                0.558,
+                0.477,
+                0.574
+            ],
+            "text": "注册会计师工作单位变更事项登记",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.514,
+                0.555,
+                0.812,
+                0.573
+            ],
+            "text": "注册会计师工作单位变更事项登记",
+            "score": 0.988
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.312,
+                0.759,
+                0.443,
+                0.797
+            ],
+            "text": "新中衡委信",
+            "score": 0.625
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.44,
+                0.769,
+                0.477,
+                0.786
+            ],
+            "text": "务所",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.443,
+                0.78,
+                0.476,
+                0.795
+            ],
+            "text": "CPAs",
+            "score": 0.934
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.318,
+                0.829,
+                0.486,
+                0.867
+            ],
+            "text": "209",
+            "score": 0.944
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.648,
+                0.832,
+                0.819,
+                0.862
+            ],
+            "text": "202321",
+            "score": 0.855
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.591,
+                0.772,
+                0.718,
+                0.81
+            ],
+            "text": "万在世和",
+            "score": 0.523
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.796,
+                0.868,
+                0.817,
+                0.883
+            ],
+            "text": "1",
+            "score": 0.651
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.164,
+                0.142,
+                0.18,
+                0.186
+            ],
+            "text": "se",
+            "score": 0.521
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.17,
+                0.144,
+                0.186,
+                0.183
+            ],
+            "text": "发证日期：",
+            "score": 0.869
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.157,
+                0.184,
+                0.196,
+                0.289
+            ],
+            "text": "201501",
+            "score": 0.712
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.189,
+                0.142,
+                0.216,
+                0.28
+            ],
+            "text": "川省注册会计师协会",
+            "score": 0.837
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.326,
+                0.325,
+                0.355,
+                0.471
+            ],
+            "text": "",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.346,
+                0.328,
+                0.364,
+                0.395
+            ],
+            "text": "本证书经检查",
+            "score": 0.91
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.322,
+                0.329,
+                0.338,
+                0.378
+            ],
+            "text": "thisrene",
+            "score": 0.843
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.351,
+                0.427,
+                0.363,
+                0.465
+            ],
+            "text": "有效一年",
+            "score": 0.876
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.183,
+                0.598,
+                0.25,
+                0.61
+            ],
+            "text": "同意调出",
+            "score": 0.988
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.185,
+                0.728,
+                0.254,
+                0.745
+            ],
+            "text": "同意调入",
+            "score": 0.992
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.518,
+                0.594,
+                0.587,
+                0.609
+            ],
+            "text": "同意调出",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.524,
+                0.728,
+                0.592,
+                0.742
+            ],
+            "text": "同意调入",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.761,
+                0.766,
+                0.814,
+                0.781
+            ],
+            "text": "事务所",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.781,
+                0.777,
+                0.812,
+                0.791
+            ],
+            "text": "CPAs",
+            "score": 0.968
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.22,
+                0.141,
+                0.246,
+                0.237
+            ],
+            "text": "51010003172",
+            "score": 0.832
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.646,
+                0.354,
+                0.656,
+                0.361
+            ],
+            "text": "名",
+            "score": 0.987
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.597,
+                0.378,
+                0.622,
+                0.391
+            ],
+            "text": "Sex",
+            "score": 0.919
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.596,
+                0.387,
+                0.66,
+                0.403
+            ],
+            "text": "出生日期",
+            "score": 0.83
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.597,
+                0.397,
+                0.659,
+                0.409
+            ],
+            "text": "Dateofbith",
+            "score": 0.782
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.589,
+                0.401,
+                0.666,
+                0.433
+            ],
+            "text": "",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.596,
+                0.424,
+                0.659,
+                0.438
+            ],
+            "text": "身份证有理",
+            "score": 0.673
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.662,
+                0.351,
+                0.7,
+                0.364
+            ],
+            "text": "何平丰",
+            "score": 0.86
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.664,
+                0.367,
+                0.679,
+                0.378
+            ],
+            "text": "男",
+            "score": 0.718
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.66,
+                0.386,
+                0.722,
+                0.398
+            ],
+            "text": "1979-04-02",
+            "score": 0.979
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.661,
+                0.398,
+                0.796,
+                0.41
+            ],
+            "text": "四州华信（集团）会计师事",
+            "score": 0.924
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.667,
+                0.408,
+                0.747,
+                0.42
+            ],
+            "text": "（特普通合伙）",
+            "score": 0.919
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.664,
+                0.422,
+                0.762,
+                0.433
+            ],
+            "text": "513624197904021158",
+            "score": 0.93
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.186,
+                0.574,
+                0.471,
+                0.586
+            ],
+            "text": "Registration of the Change of Working Unit by a CPA",
+            "score": 0.919
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.522,
+                0.57,
+                0.808,
+                0.585
+            ],
+            "text": "Registrationof the Change oPWorkingibyaCRA",
+            "score": 0.839
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.186,
+                0.608,
+                0.341,
+                0.62
+            ],
+            "text": "Agree the holder tobetrasferd fro",
+            "score": 0.751
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.189,
+                0.74,
+                0.334,
+                0.752
+            ],
+            "text": "Agreethe holder tobe tto",
+            "score": 0.787
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.319,
+                0.827,
+                0.48,
+                0.839
+            ],
+            "text": "Stampofthetransfer-inInsutateofCPAs",
+            "score": 0.791
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.521,
+                0.606,
+                0.678,
+                0.618
+            ],
+            "text": "Agreethe holder to betransferredfrom",
+            "score": 0.907
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.528,
+                0.739,
+                0.672,
+                0.749
+            ],
+            "text": "Agree the holder to be transferred to",
+            "score": 0.93
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.655,
+                0.824,
+                0.817,
+                0.835
+            ],
+            "text": "Stampof the transfer-inInstituteofCPAs",
+            "score": 0.798
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.373,
+                0.813,
+                0.478,
+                0.829
+            ],
+            "text": "转入协会盖章",
+            "score": 0.973
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.711,
+                0.811,
+                0.815,
+                0.825
+            ],
+            "text": "转入协会盖章",
+            "score": 0.993
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.616,
+                0.617,
+                0.817,
+                0.67
+            ],
+            "text": "快衡安信",
+            "score": 0.691
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.649,
+                0.691,
+                0.814,
+                0.704
+            ],
+            "text": "StpesrtuteofCPA",
+            "score": 0.754
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.653,
+                0.7,
+                0.791,
+                0.725
+            ],
+            "text": "20221010",
+            "score": 0.848
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.796,
+                0.701,
+                0.815,
+                0.725
+            ],
+            "text": "日",
+            "score": 0.979
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.645,
+                0.663,
+                0.805,
+                0.687
+            ],
+            "text": "注册会计师",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.653,
+                0.679,
+                0.815,
+                0.697
+            ],
+            "text": "专出协会章",
+            "score": 0.733
+        }
+    ],
+    [
+        {
+            "type": "image",
+            "bbox": [
+                0.104,
+                0.096,
+                0.475,
+                0.489
+            ],
+            "angle": 0,
+            "content": "年度检验登记\nAnnual Renewal Registration\n\n本证书经检验合格，继续有效一年。\n\n证书编号：130100000028\n\n批准证书协会：河北省注册会计师协会\nAuthorized Institute of CFA.\n凭证日期：2017年06月09日\n\nDate of Bistance 2019\n\nCPA 195-PA0580\nHEBICPA\nCFA\nCPA\nHEBICPA\n2018\n\n分 月 日\n分 /m u\n\n5",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.491,
+                0.096,
+                0.864,
+                0.483
+            ],
+            "angle": 0,
+            "content": "THE CHINESE INSTITUTE OF CERTIFIED PUBLIC ACCOUNT\nSANTA\n中国注册会计师协会\n姓 名 孙晓娜\nFull name ____\n性 别 女\nSex\n出生日期 1984-04-02\nDate of birth\n工作单位 河北瑞立会计师事务所有限公司\nWorking unit\n身份证号码 130964198404021222\nIdentity card No.",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.111,
+                0.499,
+                0.874,
+                0.895
+            ],
+            "angle": 0,
+            "content": "注册会计师工作单位变更事项登记\nRegistration of the Change of Working Unit by a CPA\n同意调出\nAgree the holder to be transferred from\n事务所\nCPAs\n中天星\n转出协会盖章\nStamp of the transfer-out Institute of CPAs\n2011年11月26日\n同意调入\nAgree the holder to be transferred to\n事务所\nCPAs\n中岩国成\n转入协会盖章\nStamp of the transfer-in Institute of CPAs\n2011年11月26日\n12\n注意事项\n一、注册会计师执行业务，主要按照合同签订的本证书。二、本证书已按本人使用本行得转让、涂改。\n三、注册会计师出具法定业务时，应将本证书缴还主管注册会计师协会。\n四、本证书如遗失，应立即向主管注册会计师协会报告，登报声明作废后，办理补发手续。\nNOTES\n1. When certising, the CPA shall show the client this certificate when necessary.\n2. This certificate is exclusively used by the holder. No transfer or alteration shall be allowed.\n3. The CPA shall return the certificate to the competent Institute of CPAs when the CPA shall conducting statutory business.\n4. In case of loss, the CPA shall report to the competent Institute of CPAs immediately and go through the procedure of reissue after making an announcement of loss on the newspaper.",
+            "sub_type": "text_image"
+        }
+    ]
+]

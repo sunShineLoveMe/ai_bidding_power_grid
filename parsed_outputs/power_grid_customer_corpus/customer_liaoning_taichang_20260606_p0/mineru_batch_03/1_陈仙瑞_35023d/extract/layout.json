@@ -1,0 +1,674 @@
+{
+    "pdf_info": [
+        {
+            "preproc_blocks": [
+                {
+                    "bbox": [
+                        7,
+                        14,
+                        147,
+                        23
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                6,
+                                12,
+                                148,
+                                24
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        6,
+                                        12,
+                                        148,
+                                        24
+                                    ],
+                                    "type": "text",
+                                    "content": "证号：T130602197408170641",
+                                    "score": 0.995
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        7,
+                        28,
+                        79,
+                        40
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 1,
+                    "lines": [
+                        {
+                            "bbox": [
+                                5,
+                                26,
+                                80,
+                                41
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        5,
+                                        26,
+                                        80,
+                                        41
+                                    ],
+                                    "type": "text",
+                                    "content": "姓名：陈仙瑞",
+                                    "score": 0.983
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        123,
+                        29,
+                        153,
+                        40
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 2,
+                    "lines": [
+                        {
+                            "bbox": [
+                                121,
+                                27,
+                                155,
+                                41
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        121,
+                                        27,
+                                        155,
+                                        41
+                                    ],
+                                    "type": "text",
+                                    "content": "性别：女",
+                                    "score": 0.916
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        7,
+                        45,
+                        87,
+                        56
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 3,
+                    "lines": [
+                        {
+                            "bbox": [
+                                6,
+                                43,
+                                89,
+                                57
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        6,
+                                        43,
+                                        89,
+                                        57
+                                    ],
+                                    "type": "text",
+                                    "content": "作业类别：电工作业",
+                                    "score": 0.991
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        7,
+                        62,
+                        107,
+                        73
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 4,
+                    "lines": [
+                        {
+                            "bbox": [
+                                6,
+                                60,
+                                108,
+                                74
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        6,
+                                        60,
+                                        108,
+                                        74
+                                    ],
+                                    "type": "text",
+                                    "content": "准操项目：高压电工作业",
+                                    "score": 0.991
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        7,
+                        93,
+                        88,
+                        102
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 5,
+                    "lines": [
+                        {
+                            "bbox": [
+                                6,
+                                92,
+                                89,
+                                102
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        6,
+                                        92,
+                                        89,
+                                        102
+                                    ],
+                                    "type": "text",
+                                    "content": "初领日期：20240523",
+                                    "score": 0.998
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        7,
+                        109,
+                        134,
+                        119
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 6,
+                    "lines": [
+                        {
+                            "bbox": [
+                                6,
+                                108,
+                                135,
+                                119
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        6,
+                                        108,
+                                        135,
+                                        119
+                                    ],
+                                    "type": "text",
+                                    "content": "有效期限：20240523-20300522",
+                                    "score": 0.992
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        7,
+                        125,
+                        88,
+                        135
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 7,
+                    "lines": [
+                        {
+                            "bbox": [
+                                6,
+                                123,
+                                89,
+                                136
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        6,
+                                        123,
+                                        89,
+                                        136
+                                    ],
+                                    "type": "text",
+                                    "content": "复审日期：20270523",
+                                    "score": 0.996
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        162,
+                        14,
+                        226,
+                        127
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                162,
+                                14,
+                                226,
+                                127
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        162,
+                                        14,
+                                        226,
+                                        127
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                162,
+                                                14,
+                                                226,
+                                                127
+                                            ],
+                                            "type": "image",
+                                            "content": "生产\n生产\n生产\n生产\n生产\n考核专用章",
+                                            "image_path": "ced395f375998874eca5ee57f4753b7a75221cec29d0fb2fa668f4fd94eedcd1.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 8
+                        }
+                    ],
+                    "index": 8,
+                    "sub_type": "text_image"
+                }
+            ],
+            "discarded_blocks": [],
+            "page_size": [
+                237,
+                145
+            ],
+            "page_idx": 0,
+            "para_blocks": [
+                {
+                    "bbox": [
+                        7,
+                        14,
+                        147,
+                        23
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 0,
+                    "lines": [
+                        {
+                            "bbox": [
+                                6,
+                                12,
+                                148,
+                                24
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        6,
+                                        12,
+                                        148,
+                                        24
+                                    ],
+                                    "type": "text",
+                                    "content": "证号：T130602197408170641",
+                                    "score": 0.995
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        7,
+                        28,
+                        79,
+                        40
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 1,
+                    "lines": [
+                        {
+                            "bbox": [
+                                5,
+                                26,
+                                80,
+                                41
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        5,
+                                        26,
+                                        80,
+                                        41
+                                    ],
+                                    "type": "text",
+                                    "content": "姓名：陈仙瑞",
+                                    "score": 0.983
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        123,
+                        29,
+                        153,
+                        40
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 2,
+                    "lines": [
+                        {
+                            "bbox": [
+                                121,
+                                27,
+                                155,
+                                41
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        121,
+                                        27,
+                                        155,
+                                        41
+                                    ],
+                                    "type": "text",
+                                    "content": "性别：女",
+                                    "score": 0.916
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        7,
+                        45,
+                        87,
+                        56
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 3,
+                    "lines": [
+                        {
+                            "bbox": [
+                                6,
+                                43,
+                                89,
+                                57
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        6,
+                                        43,
+                                        89,
+                                        57
+                                    ],
+                                    "type": "text",
+                                    "content": "作业类别：电工作业",
+                                    "score": 0.991
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        7,
+                        62,
+                        107,
+                        73
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 4,
+                    "lines": [
+                        {
+                            "bbox": [
+                                6,
+                                60,
+                                108,
+                                74
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        6,
+                                        60,
+                                        108,
+                                        74
+                                    ],
+                                    "type": "text",
+                                    "content": "准操项目：高压电工作业",
+                                    "score": 0.991
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        7,
+                        93,
+                        88,
+                        102
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 5,
+                    "lines": [
+                        {
+                            "bbox": [
+                                6,
+                                92,
+                                89,
+                                102
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        6,
+                                        92,
+                                        89,
+                                        102
+                                    ],
+                                    "type": "text",
+                                    "content": "初领日期：20240523",
+                                    "score": 0.998
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        7,
+                        109,
+                        134,
+                        119
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 6,
+                    "lines": [
+                        {
+                            "bbox": [
+                                6,
+                                108,
+                                135,
+                                119
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        6,
+                                        108,
+                                        135,
+                                        119
+                                    ],
+                                    "type": "text",
+                                    "content": "有效期限：20240523-20300522",
+                                    "score": 0.992
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        7,
+                        125,
+                        88,
+                        135
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 7,
+                    "lines": [
+                        {
+                            "bbox": [
+                                6,
+                                123,
+                                89,
+                                136
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        6,
+                                        123,
+                                        89,
+                                        136
+                                    ],
+                                    "type": "text",
+                                    "content": "复审日期：20270523",
+                                    "score": 0.996
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        162,
+                        14,
+                        226,
+                        127
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                162,
+                                14,
+                                226,
+                                127
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        162,
+                                        14,
+                                        226,
+                                        127
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                162,
+                                                14,
+                                                226,
+                                                127
+                                            ],
+                                            "type": "image",
+                                            "content": "生产\n生产\n生产\n生产\n生产\n考核专用章",
+                                            "image_path": "ced395f375998874eca5ee57f4753b7a75221cec29d0fb2fa668f4fd94eedcd1.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 8
+                        }
+                    ],
+                    "index": 8,
+                    "sub_type": "text_image"
+                }
+            ]
+        }
+    ],
+    "_backend": "hybrid",
+    "_ocr_enable": true,
+    "_vlm_ocr_enable": false,
+    "_version_name": "3.2.1"
+}

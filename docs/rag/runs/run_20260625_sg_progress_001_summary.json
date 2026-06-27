@@ -1,0 +1,82 @@
+{
+  "run_id": "run_20260625_sg_progress_001",
+  "generated_at": "2026-06-25T13:15:32.116197+00:00",
+  "status": "pass",
+  "steps": [
+    {
+      "name": "api_ready",
+      "status": "pass",
+      "duration_ms": 2255,
+      "detail": "http=200; status=ok; failed_checks=[]",
+      "artifact": null
+    },
+    {
+      "name": "rag_unit_tests",
+      "status": "pass",
+      "duration_ms": 894,
+      "detail": "exit_code=0",
+      "artifact": "docs/rag/runs/run_20260625_sg_progress_001_pytest.log"
+    },
+    {
+      "name": "incremental_regression_gate",
+      "status": "pass",
+      "duration_ms": 59632,
+      "detail": "exit_code=0",
+      "artifact": "docs/rag/runs/run_20260625_sg_progress_001_incremental_gate.log"
+    },
+    {
+      "name": "stream_sample",
+      "status": "pass",
+      "duration_ms": 5909,
+      "detail": "done=True; contexts=5; assets=4; images=4; error=None",
+      "artifact": "docs/rag/runs/run_20260625_sg_progress_001_stream.jsonl"
+    }
+  ],
+  "ready": {
+    "checks": {
+      "celery": {
+        "status": "ok",
+        "workers": 1
+      },
+      "database": {
+        "checks": {
+          "match_knowledge_assets": true,
+          "match_knowledge_chunks": true,
+          "vector": true
+        },
+        "status": "ok"
+      },
+      "model_config": {
+        "optional": {
+          "mineru_api_token": true
+        },
+        "required": {
+          "dashscope_api_key": true,
+          "deepseek_api_key": true
+        },
+        "status": "ok"
+      },
+      "redis": {
+        "host": "127.0.0.1",
+        "port": 16379,
+        "status": "ok"
+      },
+      "storage": {
+        "provider": "local",
+        "root": "storage",
+        "status": "ok"
+      }
+    },
+    "duration_ms": 2244,
+    "status": "ok"
+  },
+  "stream_summary": {
+    "done": true,
+    "error": null,
+    "contexts_count": 5,
+    "assets_count": 4,
+    "images_count": 4,
+    "chunks": 313
+  },
+  "gate_summary_path": "docs/rag/runs/run_20260625_sg_progress_001_incremental_summary.md"
+}

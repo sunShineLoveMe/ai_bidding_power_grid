@@ -373,7 +373,7 @@ def build_compliance_report(project_id: str, volume_type: str | None = None) -> 
 
     recommendations = []
     if missing:
-        recommendations.append("该指标为条款响应追踪，不等同于最终 Word 合规结论；建议优先补齐未响应的资格要求、否决风险和强制性条款。")
+        recommendations.append("该指标为章节正文条款覆盖追踪，不统计投标信息确认页字段，也不等同于最终 Word 合规结论；建议优先补齐未覆盖的资格要求、否决风险和强制性条款。")
     if partial:
         recommendations.append("评分项中“待补强”的内容建议补充证明材料、页码索引和可量化承诺。")
     if not scoped_sections_for():
@@ -385,8 +385,8 @@ def build_compliance_report(project_id: str, volume_type: str | None = None) -> 
         "projectId": project_id,
         "projectName": project.get("project_name") if project else None,
         "summary": {
-            "metricName": "条款响应覆盖率",
-            "scopeNote": f"当前按{display_volume_name or '完整投标文件'}统计；基于招标条款、评分项、风险项与当前章节映射/正文片段的响应追踪结果，不等同于最终 Word 标书合规结论。",
+            "metricName": "条款覆盖率",
+            "scopeNote": f"当前按{display_volume_name or '完整投标文件'}统计；仅追踪招标条款、评分项、风险项在章节正文中的覆盖证据，投标信息确认页字段不计入该指标，也不等同于最终 Word 标书合规结论。",
             **summary_base,
         },
         "volumeSummaries": volume_summaries,

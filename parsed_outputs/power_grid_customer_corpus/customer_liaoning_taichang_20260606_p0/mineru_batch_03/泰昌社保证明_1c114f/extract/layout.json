@@ -1,0 +1,1835 @@
+{
+    "pdf_info": [
+        {
+            "preproc_blocks": [
+                {
+                    "bbox": [
+                        213,
+                        155,
+                        374,
+                        174
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 4,
+                    "lines": [
+                        {
+                            "bbox": [
+                                213,
+                                154,
+                                374,
+                                174
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        213,
+                                        154,
+                                        374,
+                                        174
+                                    ],
+                                    "type": "text",
+                                    "content": "社会保险单位参保证明",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "bbox": [
+                        27,
+                        175,
+                        147,
+                        188
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 5,
+                    "lines": [
+                        {
+                            "bbox": [
+                                28,
+                                174,
+                                148,
+                                188
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        174,
+                                        148,
+                                        188
+                                    ],
+                                    "type": "text",
+                                    "content": "险种：企业职工基本养老保险",
+                                    "score": 0.942
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        466,
+                        176,
+                        558,
+                        188
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 6,
+                    "lines": [
+                        {
+                            "bbox": [
+                                465,
+                                174,
+                                559,
+                                189
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        465,
+                                        174,
+                                        559,
+                                        189
+                                    ],
+                                    "type": "text",
+                                    "content": "经办机构代码：130621",
+                                    "score": 0.936
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        27,
+                        193,
+                        58,
+                        205
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 7,
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                190,
+                                60,
+                                206
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        190,
+                                        60,
+                                        206
+                                    ],
+                                    "type": "text",
+                                    "content": "兹证明",
+                                    "score": 0.914
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        27,
+                        213,
+                        219,
+                        226
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 8,
+                    "lines": [
+                        {
+                            "bbox": [
+                                29,
+                                214,
+                                219,
+                                225
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        29,
+                                        214,
+                                        219,
+                                        225
+                                    ],
+                                    "type": "text",
+                                    "content": "参保单位名称：河北泰昌电力器材科技有限公司",
+                                    "score": 0.989
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        29,
+                        232,
+                        155,
+                        244
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 9,
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                231,
+                                157,
+                                246
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        231,
+                                        157,
+                                        246
+                                    ],
+                                    "type": "text",
+                                    "content": "单位社保编号：13052100680",
+                                    "score": 0.979
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        29,
+                        253,
+                        167,
+                        264
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 10,
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                250,
+                                170,
+                                266
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        250,
+                                        170,
+                                        266
+                                    ],
+                                    "type": "text",
+                                    "content": "单位参保日期：2017年05月01日",
+                                    "score": 0.967
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        29,
+                        274,
+                        111,
+                        285
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 11,
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                272,
+                                113,
+                                287
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        272,
+                                        113,
+                                        287
+                                    ],
+                                    "type": "text",
+                                    "content": "参保缴费人数：2",
+                                    "score": 0.944
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        29,
+                        293,
+                        114,
+                        304
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 12,
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                290,
+                                117,
+                                306
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        290,
+                                        117,
+                                        306
+                                    ],
+                                    "type": "text",
+                                    "content": "单位有无欠费：无",
+                                    "score": 0.969
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        292,
+                        213,
+                        448,
+                        225
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 13,
+                    "lines": [
+                        {
+                            "bbox": [
+                                292,
+                                213,
+                                448,
+                                226
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        292,
+                                        213,
+                                        355,
+                                        226
+                                    ],
+                                    "type": "text",
+                                    "content": "社会信用代码：",
+                                    "score": 0.992
+                                },
+                                {
+                                    "bbox": [
+                                        364,
+                                        215,
+                                        448,
+                                        225
+                                    ],
+                                    "type": "text",
+                                    "content": "91130607056539515C",
+                                    "score": 0.975
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        292,
+                        232,
+                        393,
+                        244
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 14,
+                    "lines": [
+                        {
+                            "bbox": [
+                                291,
+                                231,
+                                394,
+                                246
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        291,
+                                        231,
+                                        394,
+                                        246
+                                    ],
+                                    "type": "text",
+                                    "content": "经办机构名称：满城区",
+                                    "score": 0.986
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        292,
+                        253,
+                        402,
+                        264
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 15,
+                    "lines": [
+                        {
+                            "bbox": [
+                                292,
+                                251,
+                                404,
+                                265
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        292,
+                                        251,
+                                        404,
+                                        265
+                                    ],
+                                    "type": "text",
+                                    "content": "单位参保状态：参保缴费",
+                                    "score": 0.968
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        292,
+                        274,
+                        456,
+                        285
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 16,
+                    "lines": [
+                        {
+                            "bbox": [
+                                292,
+                                273,
+                                457,
+                                285
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        292,
+                                        273,
+                                        457,
+                                        285
+                                    ],
+                                    "type": "text",
+                                    "content": "单位参保险种：企业职工基本养老保险",
+                                    "score": 0.976
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        292,
+                        293,
+                        384,
+                        305
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 17,
+                    "lines": [
+                        {
+                            "bbox": [
+                                292,
+                                290,
+                                386,
+                                306
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        292,
+                                        290,
+                                        386,
+                                        306
+                                    ],
+                                    "type": "text",
+                                    "content": "单位参保类型：企业",
+                                    "score": 0.944
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        26,
+                        359,
+                        562,
+                        433
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                221,
+                                343,
+                                360,
+                                354
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 18,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        220,
+                                        340,
+                                        361,
+                                        355
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                220,
+                                                340,
+                                                361,
+                                                355
+                                            ],
+                                            "type": "text",
+                                            "content": "该单位参保人员明细（部分/全部）",
+                                            "score": 0.981
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                26,
+                                359,
+                                562,
+                                433
+                            ],
+                            "type": "table_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        359,
+                                        562,
+                                        433
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                26,
+                                                359,
+                                                562,
+                                                433
+                                            ],
+                                            "type": "table",
+                                            "html": "<table><tr><td>序号</td><td>姓名</td><td>社会保障号码</td><td>本单位参保日期</td><td>缴费状态</td><td>个人缴费基数</td><td>本单位缴费起止年月</td></tr><tr><td>1</td><td>陈仙瑞</td><td>130602197408170641</td><td>2017-06-01</td><td>缴费</td><td>4007.00</td><td>201706至202605</td></tr><tr><td>2</td><td>晁坤琳</td><td>13060219980525061X</td><td>2017-06-01</td><td>缴费</td><td>4007.00</td><td>201706至202605</td></tr></table>",
+                                            "image_path": "f55335bcadf654e944de03a650a60e385a054044394a101dd1fbf71463050f17.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 19
+                        }
+                    ],
+                    "index": 19
+                },
+                {
+                    "bbox": [
+                        27,
+                        464,
+                        86,
+                        476
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 20,
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                461,
+                                87,
+                                477
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        461,
+                                        87,
+                                        477
+                                    ],
+                                    "type": "text",
+                                    "content": "证明机",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        56,
+                        437,
+                        183,
+                        522
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                56,
+                                437,
+                                183,
+                                522
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        56,
+                                        437,
+                                        183,
+                                        522
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                56,
+                                                437,
+                                                183,
+                                                522
+                                            ],
+                                            "type": "image",
+                                            "content": "深圳市满城区人力资源社会保障\n业务专用章\n1208070828576",
+                                            "image_path": "4db09f224b9a754fdf22a82e3c58e0757825027f75b0a380f220dc44f3c9a4eb.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 21
+                        }
+                    ],
+                    "index": 21,
+                    "sub_type": "text_image"
+                },
+                {
+                    "bbox": [
+                        398,
+                        464,
+                        513,
+                        476
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 22,
+                    "lines": [
+                        {
+                            "bbox": [
+                                398,
+                                462,
+                                515,
+                                476
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        398,
+                                        462,
+                                        515,
+                                        476
+                                    ],
+                                    "type": "text",
+                                    "content": "证明日期：2026年05月28日",
+                                    "score": 0.976
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        22,
+                        630,
+                        414,
+                        663
+                    ],
+                    "type": "list",
+                    "angle": 0,
+                    "index": 25,
+                    "blocks": [
+                        {
+                            "bbox": [
+                                22,
+                                630,
+                                414,
+                                643
+                            ],
+                            "type": "text",
+                            "angle": 0,
+                            "index": 23,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        23,
+                                        629,
+                                        415,
+                                        643
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                23,
+                                                629,
+                                                415,
+                                                643
+                                            ],
+                                            "type": "text",
+                                            "content": "1.证明开具后6个月内有效。本证明加盖印章为电子签章，黑色签章与红色签章效力相同。",
+                                            "score": 0.99
+                                        }
+                                    ]
+                                }
+                            ],
+                            "merge_prev": false
+                        },
+                        {
+                            "bbox": [
+                                22,
+                                650,
+                                334,
+                                663
+                            ],
+                            "type": "text",
+                            "angle": 0,
+                            "index": 24,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        22,
+                                        649,
+                                        336,
+                                        664
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                22,
+                                                649,
+                                                336,
+                                                664
+                                            ],
+                                            "type": "text",
+                                            "content": "2.对上述信息有疑义的，可向查询地经办机构咨询，服务电话：12333。",
+                                            "score": 0.975
+                                        }
+                                    ]
+                                }
+                            ],
+                            "merge_prev": false
+                        }
+                    ],
+                    "sub_type": "text"
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        423,
+                        722,
+                        478,
+                        778
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                423,
+                                722,
+                                478,
+                                778
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        423,
+                                        722,
+                                        478,
+                                        778
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                423,
+                                                722,
+                                                478,
+                                                778
+                                            ],
+                                            "type": "image",
+                                            "image_path": "746da4e77792dd11cb4115f2d22f7b6860c2e231077376767741930c3b6ec024.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 26
+                        },
+                        {
+                            "bbox": [
+                                348,
+                                786,
+                                480,
+                                798
+                            ],
+                            "type": "image_caption",
+                            "angle": 0,
+                            "index": 27,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        347,
+                                        785,
+                                        480,
+                                        798
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                347,
+                                                785,
+                                                480,
+                                                798
+                                            ],
+                                            "type": "text",
+                                            "content": "验证码：0-20116039771596801",
+                                            "score": 0.966
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 26
+                }
+            ],
+            "discarded_blocks": [
+                {
+                    "bbox": [
+                        26,
+                        67,
+                        98,
+                        112
+                    ],
+                    "type": "header",
+                    "angle": 0,
+                    "index": 0,
+                    "lines": []
+                },
+                {
+                    "bbox": [
+                        27,
+                        112,
+                        184,
+                        124
+                    ],
+                    "type": "header",
+                    "angle": 0,
+                    "index": 1,
+                    "lines": [
+                        {
+                            "bbox": [
+                                29,
+                                112,
+                                183,
+                                124
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        29,
+                                        112,
+                                        183,
+                                        124
+                                    ],
+                                    "type": "text",
+                                    "content": "河北省人力资源和社会保障厅统一制式",
+                                    "score": 0.995
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "bbox": [
+                        478,
+                        73,
+                        547,
+                        142
+                    ],
+                    "type": "header",
+                    "angle": 0,
+                    "index": 2,
+                    "lines": []
+                },
+                {
+                    "bbox": [
+                        467,
+                        142,
+                        558,
+                        151
+                    ],
+                    "type": "header",
+                    "angle": 0,
+                    "index": 3,
+                    "lines": [
+                        {
+                            "bbox": [
+                                467,
+                                142,
+                                559,
+                                152
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        467,
+                                        142,
+                                        559,
+                                        152
+                                    ],
+                                    "type": "text",
+                                    "content": "13062120260528028510",
+                                    "score": 0.994
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "page_size": [
+                595,
+                841
+            ],
+            "page_idx": 0,
+            "para_blocks": [
+                {
+                    "bbox": [
+                        213,
+                        155,
+                        374,
+                        174
+                    ],
+                    "type": "title",
+                    "angle": 0,
+                    "index": 4,
+                    "lines": [
+                        {
+                            "bbox": [
+                                213,
+                                154,
+                                374,
+                                174
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        213,
+                                        154,
+                                        374,
+                                        174
+                                    ],
+                                    "type": "text",
+                                    "content": "社会保险单位参保证明",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "bbox": [
+                        27,
+                        175,
+                        147,
+                        188
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 5,
+                    "lines": [
+                        {
+                            "bbox": [
+                                28,
+                                174,
+                                148,
+                                188
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        174,
+                                        148,
+                                        188
+                                    ],
+                                    "type": "text",
+                                    "content": "险种：企业职工基本养老保险",
+                                    "score": 0.942
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        466,
+                        176,
+                        558,
+                        188
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 6,
+                    "lines": [
+                        {
+                            "bbox": [
+                                465,
+                                174,
+                                559,
+                                189
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        465,
+                                        174,
+                                        559,
+                                        189
+                                    ],
+                                    "type": "text",
+                                    "content": "经办机构代码：130621",
+                                    "score": 0.936
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        27,
+                        193,
+                        58,
+                        205
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 7,
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                190,
+                                60,
+                                206
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        190,
+                                        60,
+                                        206
+                                    ],
+                                    "type": "text",
+                                    "content": "兹证明",
+                                    "score": 0.914
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        27,
+                        213,
+                        219,
+                        226
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 8,
+                    "lines": [
+                        {
+                            "bbox": [
+                                29,
+                                214,
+                                219,
+                                225
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        29,
+                                        214,
+                                        219,
+                                        225
+                                    ],
+                                    "type": "text",
+                                    "content": "参保单位名称：河北泰昌电力器材科技有限公司",
+                                    "score": 0.989
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        29,
+                        232,
+                        155,
+                        244
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 9,
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                231,
+                                157,
+                                246
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        231,
+                                        157,
+                                        246
+                                    ],
+                                    "type": "text",
+                                    "content": "单位社保编号：13052100680",
+                                    "score": 0.979
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        29,
+                        253,
+                        167,
+                        264
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 10,
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                250,
+                                170,
+                                266
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        250,
+                                        170,
+                                        266
+                                    ],
+                                    "type": "text",
+                                    "content": "单位参保日期：2017年05月01日",
+                                    "score": 0.967
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        29,
+                        274,
+                        111,
+                        285
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 11,
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                272,
+                                113,
+                                287
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        272,
+                                        113,
+                                        287
+                                    ],
+                                    "type": "text",
+                                    "content": "参保缴费人数：2",
+                                    "score": 0.944
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        29,
+                        293,
+                        114,
+                        304
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 12,
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                290,
+                                117,
+                                306
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        290,
+                                        117,
+                                        306
+                                    ],
+                                    "type": "text",
+                                    "content": "单位有无欠费：无",
+                                    "score": 0.969
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        292,
+                        213,
+                        448,
+                        225
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 13,
+                    "lines": [
+                        {
+                            "bbox": [
+                                292,
+                                213,
+                                448,
+                                226
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        292,
+                                        213,
+                                        355,
+                                        226
+                                    ],
+                                    "type": "text",
+                                    "content": "社会信用代码：",
+                                    "score": 0.992
+                                },
+                                {
+                                    "bbox": [
+                                        364,
+                                        215,
+                                        448,
+                                        225
+                                    ],
+                                    "type": "text",
+                                    "content": "91130607056539515C",
+                                    "score": 0.975
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        292,
+                        232,
+                        393,
+                        244
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 14,
+                    "lines": [
+                        {
+                            "bbox": [
+                                291,
+                                231,
+                                394,
+                                246
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        291,
+                                        231,
+                                        394,
+                                        246
+                                    ],
+                                    "type": "text",
+                                    "content": "经办机构名称：满城区",
+                                    "score": 0.986
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        292,
+                        253,
+                        402,
+                        264
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 15,
+                    "lines": [
+                        {
+                            "bbox": [
+                                292,
+                                251,
+                                404,
+                                265
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        292,
+                                        251,
+                                        404,
+                                        265
+                                    ],
+                                    "type": "text",
+                                    "content": "单位参保状态：参保缴费",
+                                    "score": 0.968
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        292,
+                        274,
+                        456,
+                        285
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 16,
+                    "lines": [
+                        {
+                            "bbox": [
+                                292,
+                                273,
+                                457,
+                                285
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        292,
+                                        273,
+                                        457,
+                                        285
+                                    ],
+                                    "type": "text",
+                                    "content": "单位参保险种：企业职工基本养老保险",
+                                    "score": 0.976
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        292,
+                        293,
+                        384,
+                        305
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 17,
+                    "lines": [
+                        {
+                            "bbox": [
+                                292,
+                                290,
+                                386,
+                                306
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        292,
+                                        290,
+                                        386,
+                                        306
+                                    ],
+                                    "type": "text",
+                                    "content": "单位参保类型：企业",
+                                    "score": 0.944
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        26,
+                        359,
+                        562,
+                        433
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                221,
+                                343,
+                                360,
+                                354
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 18,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        220,
+                                        340,
+                                        361,
+                                        355
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                220,
+                                                340,
+                                                361,
+                                                355
+                                            ],
+                                            "type": "text",
+                                            "content": "该单位参保人员明细（部分/全部）",
+                                            "score": 0.981
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                26,
+                                359,
+                                562,
+                                433
+                            ],
+                            "type": "table_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        359,
+                                        562,
+                                        433
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                26,
+                                                359,
+                                                562,
+                                                433
+                                            ],
+                                            "type": "table",
+                                            "html": "<table><tr><td>序号</td><td>姓名</td><td>社会保障号码</td><td>本单位参保日期</td><td>缴费状态</td><td>个人缴费基数</td><td>本单位缴费起止年月</td></tr><tr><td>1</td><td>陈仙瑞</td><td>130602197408170641</td><td>2017-06-01</td><td>缴费</td><td>4007.00</td><td>201706至202605</td></tr><tr><td>2</td><td>晁坤琳</td><td>13060219980525061X</td><td>2017-06-01</td><td>缴费</td><td>4007.00</td><td>201706至202605</td></tr></table>",
+                                            "image_path": "f55335bcadf654e944de03a650a60e385a054044394a101dd1fbf71463050f17.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 19
+                        }
+                    ],
+                    "index": 19
+                },
+                {
+                    "bbox": [
+                        27,
+                        464,
+                        86,
+                        476
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 20,
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                461,
+                                87,
+                                477
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        461,
+                                        87,
+                                        477
+                                    ],
+                                    "type": "text",
+                                    "content": "证明机",
+                                    "score": 0.999
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        56,
+                        437,
+                        183,
+                        522
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                56,
+                                437,
+                                183,
+                                522
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        56,
+                                        437,
+                                        183,
+                                        522
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                56,
+                                                437,
+                                                183,
+                                                522
+                                            ],
+                                            "type": "image",
+                                            "content": "深圳市满城区人力资源社会保障\n业务专用章\n1208070828576",
+                                            "image_path": "4db09f224b9a754fdf22a82e3c58e0757825027f75b0a380f220dc44f3c9a4eb.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 21
+                        }
+                    ],
+                    "index": 21,
+                    "sub_type": "text_image"
+                },
+                {
+                    "bbox": [
+                        398,
+                        464,
+                        513,
+                        476
+                    ],
+                    "type": "text",
+                    "angle": 0,
+                    "index": 22,
+                    "lines": [
+                        {
+                            "bbox": [
+                                398,
+                                462,
+                                515,
+                                476
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        398,
+                                        462,
+                                        515,
+                                        476
+                                    ],
+                                    "type": "text",
+                                    "content": "证明日期：2026年05月28日",
+                                    "score": 0.976
+                                }
+                            ]
+                        }
+                    ],
+                    "merge_prev": false
+                },
+                {
+                    "bbox": [
+                        22,
+                        630,
+                        414,
+                        663
+                    ],
+                    "type": "list",
+                    "angle": 0,
+                    "index": 25,
+                    "blocks": [
+                        {
+                            "bbox": [
+                                22,
+                                630,
+                                414,
+                                643
+                            ],
+                            "type": "text",
+                            "angle": 0,
+                            "index": 23,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        23,
+                                        629,
+                                        415,
+                                        643
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                23,
+                                                629,
+                                                415,
+                                                643
+                                            ],
+                                            "type": "text",
+                                            "content": "1.证明开具后6个月内有效。本证明加盖印章为电子签章，黑色签章与红色签章效力相同。",
+                                            "score": 0.99
+                                        }
+                                    ]
+                                }
+                            ],
+                            "merge_prev": false
+                        },
+                        {
+                            "bbox": [
+                                22,
+                                650,
+                                334,
+                                663
+                            ],
+                            "type": "text",
+                            "angle": 0,
+                            "index": 24,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        22,
+                                        649,
+                                        336,
+                                        664
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                22,
+                                                649,
+                                                336,
+                                                664
+                                            ],
+                                            "type": "text",
+                                            "content": "2.对上述信息有疑义的，可向查询地经办机构咨询，服务电话：12333。",
+                                            "score": 0.975
+                                        }
+                                    ]
+                                }
+                            ],
+                            "merge_prev": false
+                        }
+                    ],
+                    "sub_type": "text"
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        423,
+                        722,
+                        478,
+                        778
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                423,
+                                722,
+                                478,
+                                778
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        423,
+                                        722,
+                                        478,
+                                        778
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                423,
+                                                722,
+                                                478,
+                                                778
+                                            ],
+                                            "type": "image",
+                                            "image_path": "746da4e77792dd11cb4115f2d22f7b6860c2e231077376767741930c3b6ec024.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 26
+                        },
+                        {
+                            "bbox": [
+                                348,
+                                786,
+                                480,
+                                798
+                            ],
+                            "type": "image_caption",
+                            "angle": 0,
+                            "index": 27,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        347,
+                                        785,
+                                        480,
+                                        798
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                347,
+                                                785,
+                                                480,
+                                                798
+                                            ],
+                                            "type": "text",
+                                            "content": "验证码：0-20116039771596801",
+                                            "score": 0.966
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 26
+                }
+            ]
+        }
+    ],
+    "_backend": "hybrid",
+    "_ocr_enable": true,
+    "_vlm_ocr_enable": false,
+    "_version_name": "3.2.1"
+}

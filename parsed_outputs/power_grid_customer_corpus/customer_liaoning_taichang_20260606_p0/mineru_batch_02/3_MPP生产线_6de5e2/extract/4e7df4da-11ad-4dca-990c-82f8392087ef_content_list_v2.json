@@ -1,0 +1,1141 @@
+[
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "产品销售合同"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                384,
+                91,
+                605,
+                120
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "出卖人：雄县顺达塑料机械F"
+                    }
+                ]
+            },
+            "bbox": [
+                84,
+                160,
+                563,
+                197
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "买受人：河北泰昌电力材科技有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                84,
+                203,
+                573,
+                242
+            ]
+        },
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/aa49aafcdd7eb90a085d2c80fc7fe71e97cb9c1358b9e60b485fff1cc9eca22c.jpg"
+                },
+                "table_caption": [
+                    {
+                        "type": "text",
+                        "content": "第一条产品清单及价格"
+                    }
+                ],
+                "table_footnote": [],
+                "html": "<table><tr><td>序号</td><td>物品名称</td><td>产号型号</td><td>单位</td><td>数量</td><td>单价(元)</td><td>总价(元)</td><td>备注</td></tr><tr><td></td><td>MPP生产线</td><td>SJMPP-90型</td><td>套</td><td>2</td><td>423000.</td><td>846000.</td><td>含税</td></tr><tr><td>1</td><td>塑料挤出机</td><td></td><td>台</td><td>2</td><td>234500.</td><td>469000.</td><td></td></tr><tr><td>2</td><td>漏料机</td><td></td><td>台</td><td>2</td><td>25000.</td><td>50000.</td><td></td></tr><tr><td>3</td><td>定型水箱</td><td></td><td>台</td><td>2</td><td>58000.</td><td>116000.</td><td></td></tr><tr><td>4</td><td>三瓜牵引机</td><td></td><td>台</td><td>2</td><td>37000.</td><td>74000.</td><td></td></tr><tr><td>5</td><td>无屑切割机</td><td></td><td>台</td><td>2</td><td>20000.</td><td>40000.</td><td></td></tr><tr><td>6</td><td>自动翻管机</td><td></td><td>台</td><td>2</td><td>8000.</td><td>16000.</td><td></td></tr><tr><td colspan=\"8\">合计(含税): 846000.</td></tr><tr><td colspan=\"8\">合计人民币金额(大写):捌拾肆万陆仟元整.</td></tr></table>",
+                "table_type": "complex_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                23,
+                275,
+                961,
+                687
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第二条质量要求技术标准、供方对质量负责的条件和期限：按国家标准执行，质量保 壹 年。"
+                    }
+                ]
+            },
+            "bbox": [
+                48,
+                690,
+                843,
+                749
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第三条交（提）货地点、方式需方指定地点：河北省保定市满城区"
+                    }
+                ]
+            },
+            "bbox": [
+                75,
+                765,
+                843,
+                789
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第四条运输方式及到达站（港）和费用负担：供方负担"
+                    }
+                ]
+            },
+            "bbox": [
+                75,
+                802,
+                843,
+                826
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第五条合理耗损标准及计算方法："
+                    }
+                ]
+            },
+            "bbox": [
+                75,
+                839,
+                843,
+                863
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第六条包装标准、包装物的供应与回收：不回收"
+                    }
+                ]
+            },
+            "bbox": [
+                75,
+                877,
+                843,
+                901
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第七条验收标准、方法及提出异议期限：国标、期限壹个月"
+                    }
+                ]
+            },
+            "bbox": [
+                75,
+                904,
+                843,
+                938
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第八条随机的必备品、配件、工具数量及供应办法："
+                    }
+                ]
+            },
+            "bbox": [
+                92,
+                89,
+                858,
+                112
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第九条结算方式及期限：货到验收合格后付90%，10%质保金1年后无质量问题付清。"
+                    }
+                ]
+            },
+            "bbox": [
+                67,
+                126,
+                860,
+                186
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第十条如需提供担保，另立合同担保书，作为本合同附加：无"
+                    }
+                ]
+            },
+            "bbox": [
+                92,
+                200,
+                858,
+                223
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第十一条违约责任：协商"
+                    }
+                ]
+            },
+            "bbox": [
+                94,
+                237,
+                858,
+                260
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第十二条解决合同纠纷的方式：法院"
+                    }
+                ]
+            },
+            "bbox": [
+                94,
+                275,
+                858,
+                297
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第十三条其他约定事项：竞价文件执行"
+                    }
+                ]
+            },
+            "bbox": [
+                94,
+                312,
+                858,
+                334
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "出卖人"
+                    }
+                ]
+            },
+            "bbox": [
+                253,
+                386,
+                332,
+                407
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "买受人"
+                    }
+                ]
+            },
+            "bbox": [
+                670,
+                386,
+                749,
+                407
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "出卖人：（章）温顺达塑料机械住址：国约镇关使大道212号委托代表人："
+                    }
+                ]
+            },
+            "bbox": [
+                89,
+                450,
+                505,
+                596
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "电话：0312-5717555"
+                    }
+                ]
+            },
+            "bbox": [
+                90,
+                606,
+                357,
+                634
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "传真：0312-5717556"
+                    }
+                ]
+            },
+            "bbox": [
+                90,
+                644,
+                349,
+                671
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "开户：中国银行雄县支行"
+                    }
+                ]
+            },
+            "bbox": [
+                90,
+                678,
+                381,
+                715
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "账号：100257058205"
+                    }
+                ]
+            },
+            "bbox": [
+                90,
+                719,
+                336,
+                747
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "签订日期：2015年5月20日买受人电力器材科技有限列住址： 城星祥村"
+                    }
+                ]
+            },
+            "bbox": [
+                90,
+                756,
+                381,
+                788
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                507,
+                450,
+                989,
+                526
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "法定代美杨"
+                    }
+                ]
+            },
+            "bbox": [
+                507,
+                529,
+                742,
+                562
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "委托代理人：物贺"
+                    }
+                ]
+            },
+            "bbox": [
+                507,
+                563,
+                742,
+                596
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "电话：0312-7083333"
+                    }
+                ]
+            },
+            "bbox": [
+                507,
+                596,
+                808,
+                631
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "传真：0312-7084444"
+                    }
+                ]
+            },
+            "bbox": [
+                507,
+                637,
+                828,
+                667
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "开户银行：中国银行满城支行、"
+                    }
+                ]
+            },
+            "bbox": [
+                507,
+                671,
+                922,
+                711
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "账号：100222840234"
+                    }
+                ]
+            },
+            "bbox": [
+                507,
+                715,
+                779,
+                744
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "签订日期：2015年5月20日。"
+                    }
+                ]
+            },
+            "bbox": [
+                507,
+                747,
+                833,
+                787
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "1300151170"
+                    }
+                ]
+            },
+            "bbox": [
+                309,
+                200,
+                431,
+                229
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/6ebe41e90a08f030077397eb08468727acc62ae5f9604e0aa8bba6461db4038d.jpg"
+                },
+                "content": "河北增值税专用发票\n全国统一发票监制牌\n河北\n国家税务总局监制\n发票联",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                473,
+                175,
+                673,
+                276
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "No"
+                    }
+                ]
+            },
+            "bbox": [
+                715,
+                188,
+                739,
+                219
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "02115079"
+                    }
+                ]
+            },
+            "bbox": [
+                746,
+                188,
+                845,
+                220
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "1300151170"
+                    }
+                ]
+            },
+            "bbox": [
+                853,
+                206,
+                913,
+                222
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "02115079"
+                    }
+                ]
+            },
+            "bbox": [
+                845,
+                227,
+                911,
+                247
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "开票日期：2015年05月26日"
+                    }
+                ]
+            },
+            "bbox": [
+                737,
+                250,
+                881,
+                273
+            ]
+        },
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/0df3f09d6686dd6aa3bc3921d890f062c8bb793ad2e9494f5b1a435b314b1a77.jpg"
+                },
+                "table_caption": [
+                    {
+                        "type": "text",
+                        "content": "税总函[2015]341号北京印钞有限公司"
+                    }
+                ],
+                "table_footnote": [],
+                "html": "<table><tr><td>购\n买\n方</td><td colspan=\"5\">名称:河北泰昌电力器材科技有限公司\n纳税人识别号:130621056539515\n地址、电话:满城县方顺桥乡陉阳驿村7180808\n开户行及账号:中国银行满城县支行100222840234</td><td>密\n码\n区</td><td colspan=\"3\">5&lt;5&lt;449-9-5&lt;7097&lt;4/368&lt;8748\n33-+-67849-/0*7+8*0//73-323\n681/7-&lt;1+&lt;4467-0486+&lt;7+-8--7044677996-&lt;83&lt;*52&lt;81185&gt;84</td></tr><tr><td colspan=\"2\">货物或应税劳务、服务名称</td><td>规格型号</td><td>单位</td><td>数量</td><td colspan=\"2\">单价</td><td>金额</td><td>税率</td><td>税额</td></tr><tr><td colspan=\"2\">塑料挤出机</td><td>SJMPP-90型</td><td>台</td><td>2</td><td colspan=\"2\">230769.23076</td><td>461538.46</td><td>17%</td><td>78461.54</td></tr><tr><td colspan=\"2\">混料机</td><td></td><td>台</td><td>2</td><td colspan=\"2\">21367.521367</td><td>42735.04</td><td>17%</td><td>7264.96</td></tr><tr><td colspan=\"2\">真空定型水箱</td><td></td><td>台</td><td>2</td><td colspan=\"2\">49572.649572</td><td>99145.30</td><td>17%</td><td>16854.70</td></tr><tr><td colspan=\"2\">三爪牵引机</td><td></td><td>台</td><td>2</td><td colspan=\"2\">35897.435897</td><td>71794.87</td><td>17%</td><td>12205.13</td></tr><tr><td colspan=\"2\">无屑切割机</td><td></td><td>台</td><td>2</td><td colspan=\"2\">17094.017094</td><td>34188.03</td><td>17%</td><td>5811.97</td></tr><tr><td colspan=\"2\">自动翻管架</td><td></td><td>台</td><td>2</td><td colspan=\"2\">6837.6068376</td><td>13675.21</td><td>17%</td><td>2324.79</td></tr><tr><td colspan=\"2\">合 计</td><td></td><td></td><td></td><td colspan=\"2\"></td><td>¥723076.91</td><td></td><td>¥122923.09</td></tr><tr><td colspan=\"2\">价税合计(大写)</td><td colspan=\"8\">⊗捌拾肆万陆仟圆整 (小写) ¥846000.00</td></tr><tr><td>销\n售\n方</td><td colspan=\"5\">名称:雄县顺达塑料机械厂\n纳税人识别号:130638523900172\n地址、电话:雄县督岗镇天使大道212号0312-5717555\n开户行及账号:中国银行雄县支行100257058205</td><td>备\n注</td><td colspan=\"3\">130638523900172</td></tr></table>",
+                "table_type": "complex_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                236,
+                284,
+                919,
+                741
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "收款人：姚书平"
+                    }
+                ]
+            },
+            "bbox": [
+                249,
+                743,
+                342,
+                763
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "复核：姚书平"
+                    }
+                ]
+            },
+            "bbox": [
+                441,
+                741,
+                511,
+                761
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "开票人：姚书平"
+                    }
+                ]
+            },
+            "bbox": [
+                587,
+                740,
+                676,
+                760
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/00b60f85e9389be0d9498b73e3d2c65068a3edd36f92d79c911531ab006518e4.jpg"
+                },
+                "content": "顺达塑料机\n130638523900172\n发票专用章\n销售专用章）",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                717,
+                639,
+                853,
+                783
+            ]
+        },
+        {
+            "type": "page_aside_text",
+            "content": {
+                "page_aside_text_content": [
+                    {
+                        "type": "text",
+                        "content": "↑"
+                    }
+                ]
+            },
+            "bbox": [
+                174,
+                164,
+                200,
+                251
+            ]
+        },
+        {
+            "type": "page_aside_text",
+            "content": {
+                "page_aside_text_content": [
+                    {
+                        "type": "text",
+                        "content": "C"
+                    }
+                ]
+            },
+            "bbox": [
+                174,
+                343,
+                200,
+                370
+            ]
+        },
+        {
+            "type": "page_aside_text",
+            "content": {
+                "page_aside_text_content": [
+                    {
+                        "type": "text",
+                        "content": "O"
+                    }
+                ]
+            },
+            "bbox": [
+                174,
+                403,
+                200,
+                430
+            ]
+        },
+        {
+            "type": "page_aside_text",
+            "content": {
+                "page_aside_text_content": [
+                    {
+                        "type": "text",
+                        "content": "O"
+                    }
+                ]
+            },
+            "bbox": [
+                174,
+                463,
+                200,
+                490
+            ]
+        },
+        {
+            "type": "page_aside_text",
+            "content": {
+                "page_aside_text_content": [
+                    {
+                        "type": "text",
+                        "content": "O"
+                    }
+                ]
+            },
+            "bbox": [
+                174,
+                523,
+                200,
+                550
+            ]
+        },
+        {
+            "type": "page_aside_text",
+            "content": {
+                "page_aside_text_content": [
+                    {
+                        "type": "text",
+                        "content": "C"
+                    }
+                ]
+            },
+            "bbox": [
+                174,
+                583,
+                200,
+                610
+            ]
+        },
+        {
+            "type": "page_aside_text",
+            "content": {
+                "page_aside_text_content": [
+                    {
+                        "type": "text",
+                        "content": "O"
+                    }
+                ]
+            },
+            "bbox": [
+                174,
+                643,
+                200,
+                670
+            ]
+        },
+        {
+            "type": "page_aside_text",
+            "content": {
+                "page_aside_text_content": [
+                    {
+                        "type": "text",
+                        "content": "C"
+                    }
+                ]
+            },
+            "bbox": [
+                174,
+                703,
+                200,
+                730
+            ]
+        },
+        {
+            "type": "page_aside_text",
+            "content": {
+                "page_aside_text_content": [
+                    {
+                        "type": "text",
+                        "content": "O"
+                    }
+                ]
+            },
+            "bbox": [
+                174,
+                763,
+                200,
+                791
+            ]
+        },
+        {
+            "type": "page_aside_text",
+            "content": {
+                "page_aside_text_content": [
+                    {
+                        "type": "text",
+                        "content": "第三联：发票联 购买方记账凭证"
+                    }
+                ]
+            },
+            "bbox": [
+                920,
+                386,
+                935,
+                631
+            ]
+        },
+        {
+            "type": "page_aside_text",
+            "content": {
+                "page_aside_text_content": [
+                    {
+                        "type": "text",
+                        "content": "○\n○\n○\n○\n○\n○\n○\n○\n○"
+                    }
+                ]
+            },
+            "bbox": [
+                953,
+                155,
+                974,
+                785
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "生产、试验设备发票查验说明文件"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                319,
+                92,
+                678,
+                114
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "致：国家电网有限公司及其所属各省公司"
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                125,
+                500,
+                144
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "鉴于国家税务总局全国增值税发票查验平台https:/inv-veri.chinatax.gov.cn/index.html查询年限5年，故我公司部分生产、试验设备发票超出查询年限而无法查询。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                153,
+                852,
+                228
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "我公司承诺所提供所有设备发票信息真实有效，无任何虚假。如有虚假愿意承担一切法律责任，特此证明。"
+                    }
+                ]
+            },
+            "bbox": [
+                146,
+                237,
+                850,
+                283
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "承诺人：河北泰昌电力器材科技有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                482,
+                315,
+                850,
+                334
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/cec67b79eae4fe14ea3ba768dd5731cab1feeacd42ef0b9b886dbc3b7f693523.jpg"
+                },
+                "content": "北泰昌电力器材科技\n1309210005674\n北泰昌电力器材科技",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                579,
+                264,
+                757,
+                393
+            ]
+        }
+    ],
+    [
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/d84ce31c4fdfb3e70af5871180c3e1c686042f87fc089c8d21b04414c5632502.jpg"
+                },
+                "content": "大定万丰管业有限公司 保定万丰\n限公司\n2017年\n2018年\n2019年\n2020年\n2021年\n2022年\n2023年\n2024年\n2025年\n2026年\n2027年\n2028年\n2029年\n2030年\n2031年\n2032年\n2033年\n2034年\n2035年\n2036年\n2037年\n2038年\n2039年\n2040年\n2041年\n2042年\n2043年\n2044年\n2045年\n2046年\n2047年\n2048年\n2049年\n2050年\n2051年\n2052年\n2053年\n2054年\n2055年\n2056年\n2057年\n2058年\n2059年\n2060年\n2061年\n2062年\n2063年\n2064年\n2065年\n2066年\n2067年\n2068年\n2069年\n2070年\n2071年\n2072年\n2073年\n2074年\n2075年\n2076年\n2077年\n2078年\n2079年\n2080年\n2081年\n2082年\n2083年\n2084年\n2085年\n2086年\n2087年\n2088年\n2089年\n2090年\n2091年\n2092年\n2093年\n2094年\n2095年\n2096年\n2097年\n2098年\n2099年\n31.1.1.1",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                0,
+                0,
+                998,
+                998
+            ]
+        }
+    ],
+    [
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/198b246ef26b8d88f2d31a427d686c6b5bd6a4f8b0cecc4e0ea9484790e745c6.jpg"
+                },
+                "content": "Industrial machine setup in a factory setting, no visible text or symbols on the machinery or background",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "natural_image",
+            "bbox": [
+                0,
+                0,
+                998,
+                998
+            ]
+        }
+    ],
+    [
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/3ad4a859860b1d1ed89bf4cf8ab530f98742a1c3eac0d37026cab37df3e89d2a.jpg"
+                },
+                "content": "科学管理 专业创新\n闻",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                0,
+                0,
+                998,
+                998
+            ]
+        }
+    ],
+    [
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/c0478d33bc43d3b6ca6eb975f9b9d824ac69690f04602befddab1baf888788ad.jpg"
+                },
+                "content": "Industrial machine setup in a workshop, no visible text or symbols on the equipment or background",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "natural_image",
+            "bbox": [
+                0,
+                0,
+                998,
+                998
+            ]
+        }
+    ]
+]

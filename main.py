@@ -51,11 +51,22 @@ def asset_file(filename):
         return send_from_directory(public_assets, filename)
     return send_from_directory('assets', filename)
 
+@app.route('/build-info.json')
+def build_info_file():
+    dist_file = os.path.join('frontend', 'dist', 'build-info.json')
+    if os.path.exists(dist_file):
+        return send_from_directory(os.path.join('frontend', 'dist'), 'build-info.json')
+    public_file = os.path.join('frontend', 'public', 'build-info.json')
+    if os.path.exists(public_file):
+        return send_from_directory(os.path.join('frontend', 'public'), 'build-info.json')
+    return jsonify({'version': 'development'}), 200
+
 @app.route('/')
 @app.route('/login')
 @app.route('/register')
 @app.route('/bidding')
 @app.route('/interpretation')
+@app.route('/prefill')
 @app.route('/bid-editor')
 @app.route('/onlyoffice-editor')
 @app.route('/knowledge')

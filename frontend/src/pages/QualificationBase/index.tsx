@@ -1,11 +1,13 @@
-import { Button, Descriptions, Empty, Form, Image, Input, Modal, Select, Space, Switch, Table, Tag, Upload, message } from 'antd';
+import { Button, Descriptions, Empty, Form, Input, Modal, Select, Space, Switch, Table, Tag, Upload, message } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { AlertTriangle, BadgeCheck, CalendarClock, FileBadge, UploadCloud } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { CategoryList } from '../../components/common/CategoryList';
+import { AuthenticatedImage, openAuthenticatedFile } from '../../components/common/AuthenticatedImage';
 import { MetricCards } from '../../components/common/MetricCards';
 import { ModuleHeader } from '../../components/common/ModuleHeader';
 import { apiClient } from '../../api/client';
+import { displayAssetCategory, displayAssetTitle } from '../../utils/assetDisplay';
 
 interface KnowledgeAsset {
   id: string;
@@ -24,10 +26,28 @@ interface KnowledgeAsset {
   applicable_sections?: string[];
   tags?: string[];
   specs?: Record<string, unknown>;
+  metadata?: Record<string, unknown>;
   status?: string;
   is_synthetic?: boolean;
   anonymized?: boolean;
   created_at?: string;
+}
+
+interface KnowledgeAssetStats {
+  total: number;
+  indexed_count: number;
+  synthetic_count: number;
+  customer_asset_count: number;
+  category_counts: Record<string, number>;
+  tag_count: number;
+}
+
+interface KnowledgeAssetPageResponse {
+  items: KnowledgeAsset[];
+  total: number;
+  page: number;
+  page_size: number;
+  stats?: KnowledgeAssetStats;
 }
 
 const categoryMap: Record<string, string> = {
@@ -38,6 +58,7 @@ const categoryMap: Record<string, string> = {
   财务资料: '财务资料',
   项目业绩: '项目业绩',
   授权模板: '授权模板',
+  绿色低碳资料: '绿色低碳资料',
 };
 
 const volumeOptions = [
@@ -57,10 +78,16 @@ function applicableVolumes(asset: KnowledgeAsset): string[] {
 }
 
 function inferQualificationCategory(asset: KnowledgeAsset): string {
+  const displayCategory = displayAssetCategory(asset);
+  if (categoryMap[displayCategory]) return displayCategory;
   const text = `${asset.title || ''} ${(asset.tags || []).join('、')} ${asset.description || ''}`;
   if (text.includes('营业执照')) return '基础证照';
+  if (text.includes('开户许可证')) return '基础证照';
   if (text.includes('资质')) return '资质证书';
+  if (text.includes('认证证书')) return '资质证书';
   if (text.includes('安全生产许可证')) return '资质证书';
+  if (text.includes('财务') || text.includes('审计报告')) return '财务资料';
+  if (text.includes('绿色') || text.includes('低碳') || text.includes('ESG')) return '绿色低碳资料';
   return categoryMap[asset.category || ''] || '企业资信';
 }
 
@@ -92,20 +119,40 @@ export function QualificationBasePage(): JSX.Element {
   const [form] = Form.useForm();
   const [activeCategory, setActiveCategory] = useState('全部资信');
   const [assets, setAssets] = useState<KnowledgeAsset[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [stats, setStats] = useState<KnowledgeAssetStats | null>(null);
+  const [pagination, setPagination] = useState({ current: 1, pageSize: 10, total: 0 });
+  const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [assetFile, setAssetFile] = useState<File | null>(null);
   const [formOpen, setFormOpen] = useState(false);
   const [editingAsset, setEditingAsset] = useState<KnowledgeAsset | null>(null);
   const [detail, setDetail] = useState<KnowledgeAsset | null>(null);
 
-  const fetchAssets = async () => {
+  const fetchAssets = async (
+    page = pagination.current,
+    pageSize = pagination.pageSize,
+    category = activeCategory,
+  ) => {
     try {
       setLoading(true);
-      const { data } = await apiClient.get<KnowledgeAsset[]>('/api/knowledge/assets?asset_type=qualification_image', {
+      const params = new URLSearchParams({
+        library_type: 'qualification',
+        page: String(page),
+        page_size: String(pageSize),
+      });
+      if (category !== '全部资信') {
+        params.set('category', category);
+      }
+      const { data } = await apiClient.get<KnowledgeAssetPageResponse>(`/api/knowledge/assets?${params.toString()}`, {
         skipGlobalLoading: true,
       });
-      setAssets(data);
+      setAssets(data.items || []);
+      setStats(data.stats || null);
+      setPagination({
+        current: data.page || page,
+        pageSize: data.page_size || pageSize,
+        total: data.total || 0,
+      });
     } catch (error: any) {
       message.error(error.message || '获取资信资产失败');
     } finally {
@@ -114,8 +161,8 @@ export function QualificationBasePage(): JSX.Element {
   };
 
   useEffect(() => {
-    fetchAssets();
-  }, []);
+    fetchAssets(1, pagination.pageSize, activeCategory);
+  }, [activeCategory]);
 
   const enrichedAssets = useMemo(
     () => assets.map(asset => ({ ...asset, qualificationCategory: inferQualificationCategory(asset) })),
@@ -123,23 +170,23 @@ export function QualificationBasePage(): JSX.Element {
   );
 
   const categories = useMemo(() => {
-    const counts = enrichedAssets.reduce<Record<string, number>>((acc, asset) => {
-      acc[asset.qualificationCategory] = (acc[asset.qualificationCategory] || 0) + 1;
-      return acc;
-    }, {});
-    const names = ['基础证照', '资质证书', '人员证书', '财务资料', '项目业绩', '授权模板'];
+    const counts = stats?.category_counts || {};
+    const preferredNames = ['基础证照', '资质证书', '人员证书', '财务资料', '绿色低碳资料', '项目业绩', '授权模板'];
+    const names = [
+      ...preferredNames,
+      ...Object.keys(counts).filter(name => !preferredNames.includes(name)).sort((a, b) => a.localeCompare(b, 'zh-CN')),
+    ];
     return [
-      { name: '全部资信', count: enrichedAssets.length },
+      { name: '全部资信', count: stats?.total || pagination.total },
       ...names.map(name => ({ name, count: counts[name] || 0 })),
     ];
-  }, [enrichedAssets]);
+  }, [pagination.total, stats]);
 
-  const dataSource = activeCategory === '全部资信'
-    ? enrichedAssets
-    : enrichedAssets.filter(asset => asset.qualificationCategory === activeCategory);
+  const dataSource = enrichedAssets;
+  const metricValue = (value: number) => (loading && pagination.total === 0 ? '...' : value);
 
   const columns: ColumnsType<KnowledgeAsset & { qualificationCategory?: string }> = [
-    { title: '资信文件', dataIndex: 'title', ellipsis: true },
+    { title: '资信文件', dataIndex: 'title', ellipsis: true, render: (_, record) => displayAssetTitle(record) },
     { title: '分类', dataIndex: 'qualificationCategory', width: 110, render: value => <Tag color="purple">{value}</Tag> },
     { title: '发证/出具机构', dataIndex: 'attribution', width: 150, ellipsis: true, render: value => value || '脱敏样张' },
     { title: '编号', width: 130, render: (_, record) => (record.is_synthetic ? '脱敏样例' : '-') },
@@ -148,6 +195,7 @@ export function QualificationBasePage(): JSX.Element {
     {
       title: '操作',
       width: 130,
+      fixed: 'right',
       render: (_, record) => (
         <Space size={4}>
           <Button type="link" size="small" onClick={() => setDetail(record)}>查看</Button>
@@ -232,26 +280,17 @@ export function QualificationBasePage(): JSX.Element {
     <div className="module-shell">
       <ModuleHeader
         title="企业资信库"
-        description="维护营业执照、资质证书、人员证书、财务资料、项目业绩和授权模板，避免投标材料过期或缺失。"
+        description="维护营业执照、资质证书、人员证书、财务资料、项目业绩和授权模板，上传后用于知识问答、商务标和资格文件。"
         actions={
-          <Upload showUploadList={false} beforeUpload={(file) => {
-            setEditingAsset(null);
-            form.resetFields();
-            setAssetFile(file);
-            setFormOpen(true);
-            message.success('已选择文件，请补充证照信息后保存');
-            return false;
-          }}>
-            <Button type="primary" icon={<UploadCloud size={16} />}>上传资信文件</Button>
-          </Upload>
+          <Button type="primary" icon={<UploadCloud size={16} />} onClick={openCreateForm}>上传/新增资信资料</Button>
         }
       />
       <MetricCards
         items={[
-          { title: '资信文件数', value: assets.length, desc: '已接入资信资产', icon: FileBadge, colorClass: 'bg-blue-50 text-blue-600' },
-          { title: '有效证照', value: assets.filter(asset => asset.status === 'indexed').length, desc: '可用于检索', icon: BadgeCheck, colorClass: 'bg-emerald-50 text-emerald-600' },
+          { title: '资信文件数', value: metricValue(stats?.total || pagination.total), desc: loading && pagination.total === 0 ? '正在加载资信资产' : '已接入资信资产', icon: FileBadge, colorClass: 'bg-blue-50 text-blue-600' },
+          { title: '有效证照', value: metricValue(stats?.indexed_count || 0), desc: loading && pagination.total === 0 ? '正在检查索引状态' : '可用于检索', icon: BadgeCheck, colorClass: 'bg-emerald-50 text-emerald-600' },
           { title: '临期提醒', value: 0, desc: '待接入到期字段', icon: CalendarClock, colorClass: 'bg-orange-50 text-orange-500' },
-          { title: '待核验资料', value: assets.filter(asset => asset.status !== 'indexed').length, desc: '需人工复核', icon: AlertTriangle, colorClass: 'bg-red-50 text-red-500' },
+          { title: '待核验资料', value: metricValue(Math.max((stats?.total || 0) - (stats?.indexed_count || 0), 0)), desc: loading && pagination.total === 0 ? '正在加载核验状态' : '需人工复核', icon: AlertTriangle, colorClass: 'bg-red-50 text-red-500' },
         ]}
       />
       <div className="grid min-h-0 grid-cols-[250px_minmax(0,1fr)] gap-4">
@@ -259,25 +298,46 @@ export function QualificationBasePage(): JSX.Element {
         <section className="panel-card flex h-full min-h-0 flex-col overflow-hidden">
           <div className="mb-3 flex items-center justify-between gap-3">
             <h2 className="panel-title mb-0">资信文件列表</h2>
-            <Button type="primary" icon={<UploadCloud size={16} />} onClick={openCreateForm}>新增资信资料</Button>
+            <span className="text-xs font-semibold text-slate-400">资料保存后自动接入检索索引</span>
           </div>
-          <Table
-            rowKey="id"
-            size="small"
-            pagination={{ pageSize: 10, showSizeChanger: true, pageSizeOptions: [10, 20, 50], showTotal: total => `共 ${total} 条` }}
-            columns={columns}
-            dataSource={dataSource}
-            loading={loading}
-            className="compact-table"
-            tableLayout="fixed"
-            scroll={{ y: 'calc(100vh - 430px)' }}
-            locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无资信文件，请上传真实证照材料" /> }}
-          />
+          <div className="bounded-table min-h-0 flex-1">
+            <Table
+              rowKey="id"
+              size="small"
+              pagination={{
+                current: pagination.current,
+                pageSize: pagination.pageSize,
+                total: pagination.total,
+                showSizeChanger: true,
+                pageSizeOptions: [10, 20, 50],
+                showTotal: total => `共 ${total} 条`,
+              }}
+              onChange={(nextPagination) => {
+                fetchAssets(Number(nextPagination.current || 1), Number(nextPagination.pageSize || pagination.pageSize), activeCategory);
+              }}
+              columns={columns}
+              dataSource={dataSource}
+              loading={loading}
+              className="compact-table"
+              tableLayout="fixed"
+              scroll={{ x: 1000, y: 'max(180px, calc(100vh - 550px))' }}
+              locale={{
+                emptyText: loading ? (
+                  <span className="text-xs font-semibold text-slate-500">正在加载资信资料...</span>
+                ) : (
+                  <Empty
+                    image={Empty.PRESENTED_IMAGE_SIMPLE}
+                    description={activeCategory === '全部资信' ? '暂无资信文件，请上传真实证照、业绩或授权材料' : `${activeCategory} 暂无资料，请上传客户真实资料后使用`}
+                  />
+                ),
+              }}
+            />
+          </div>
         </section>
       </div>
 
       <Modal
-        title={editingAsset ? '编辑资信资料' : '证照信息维护'}
+        title={editingAsset ? '编辑资信资料' : '上传/新增资信资料'}
         open={formOpen}
         onCancel={() => {
           setFormOpen(false);
@@ -285,17 +345,40 @@ export function QualificationBasePage(): JSX.Element {
           setAssetFile(null);
         }}
         width={920}
-        destroyOnClose={false}
+        destroyOnHidden={false}
         footer={[
           <Button key="cancel" onClick={() => {
             setFormOpen(false);
             setEditingAsset(null);
             setAssetFile(null);
           }}>取消</Button>,
-          <Button key="save" type="primary" loading={saving} onClick={saveQualificationAsset}>{editingAsset ? '保存修改' : '保存资信信息'}</Button>,
+          <Button key="save" type="primary" loading={saving} onClick={saveQualificationAsset}>{editingAsset ? '保存修改' : '保存并接入检索'}</Button>,
         ]}
       >
         <Form form={form} layout="vertical" size="middle" className="compact-form">
+          {editingAsset ? (
+            <div className="mb-4 grid gap-4 rounded-lg border border-slate-200 bg-slate-50 p-3 md:grid-cols-[220px_1fr]">
+              <div className="flex min-h-36 items-center justify-center overflow-hidden rounded-md bg-white">
+                {isImageAsset(editingAsset) ? (
+                  <AuthenticatedImage
+                    src={assetThumbnailUrl(editingAsset)}
+                    alt={displayAssetTitle(editingAsset)}
+                    className="max-h-52 object-contain"
+                    previewSrc={assetFileUrl(editingAsset)}
+                    fallback="/assets/brand-logo.png"
+                  />
+                ) : (
+                  <FileBadge className="text-blue-500" size={42} />
+                )}
+              </div>
+              <Descriptions size="small" column={1}>
+                <Descriptions.Item label="当前资料">{displayAssetTitle(editingAsset)}</Descriptions.Item>
+                <Descriptions.Item label="当前分类">{inferQualificationCategory(editingAsset)}</Descriptions.Item>
+                <Descriptions.Item label="原始文件">{editingAsset.file_name || '-'}</Descriptions.Item>
+                <Descriptions.Item label="替换说明">如需替换，请选择新的图片或附件；不选择文件时仅更新名称、分类和标签。</Descriptions.Item>
+              </Descriptions>
+            </div>
+          ) : null}
           <div className="grid gap-x-5 md:grid-cols-2">
             <Form.Item label="资信名称" name="title" rules={[{ required: true, message: '请输入资信名称' }]}>
               <Input placeholder="例如：承装（修、试）电力设施许可证" />
@@ -319,8 +402,8 @@ export function QualificationBasePage(): JSX.Element {
             <Form.Item label="检索标签" name="tags">
               <Select mode="tags" placeholder="例如：资质证书、安全生产许可证、资格审查" />
             </Form.Item>
-            <Form.Item label="图片/附件说明" name="description" rules={[{ required: true, message: '请输入图片说明，便于AI检索和插图' }]}>
-              <Input.TextArea rows={3} placeholder="说明该证照适合出现在哪类标书章节、是否为脱敏样张、使用注意事项等" />
+            <Form.Item label="资料说明" name="description" rules={[{ required: true, message: '请输入资料说明，便于AI检索和插图' }]}>
+              <Input.TextArea rows={3} placeholder="说明该资料适合出现在哪类标书章节、关键编号或有效期、是否敏感、使用注意事项；这些内容会进入知识问答和标书素材索引" />
             </Form.Item>
             <Form.Item label="图片/附件文件" required={!editingAsset}>
               <Upload
@@ -353,32 +436,32 @@ export function QualificationBasePage(): JSX.Element {
           <div className="grid gap-4 md:grid-cols-[260px_1fr]">
             <div className="rounded-xl border border-slate-100 bg-slate-50 p-3">
               {isImageAsset(detail) ? (
-                <Image
+                <AuthenticatedImage
                   src={assetThumbnailUrl(detail)}
                   alt={detail.title}
                   className="rounded-lg object-contain"
-                  preview={{ src: assetFileUrl(detail) }}
+                  previewSrc={assetFileUrl(detail)}
                   fallback="/assets/brand-logo.png"
                 />
               ) : detail.storage_path || detail.public_url ? (
                 <div className="flex h-full min-h-48 flex-col items-center justify-center gap-3 text-center">
                   <FileBadge className="text-blue-500" size={42} />
                   <div className="text-sm font-bold text-slate-600">{detail.file_name || detail.title}</div>
-                  <Button href={assetFileUrl(detail)} target="_blank">打开附件</Button>
+                  <Button onClick={() => openAuthenticatedFile(assetFileUrl(detail))}>打开附件</Button>
                 </div>
               ) : (
                 <Empty description="无附件" />
               )}
             </div>
             <Descriptions size="small" bordered column={1}>
-              <Descriptions.Item label="文件名称">{detail.title}</Descriptions.Item>
+              <Descriptions.Item label="文件名称">{displayAssetTitle(detail)}</Descriptions.Item>
               <Descriptions.Item label="分类">{inferQualificationCategory(detail)}</Descriptions.Item>
               <Descriptions.Item label="适用分册">{applicableVolumes(detail).map(value => volumeLabelMap[value] || value).join('、') || '-'}</Descriptions.Item>
               <Descriptions.Item label="说明">{detail.description || '-'}</Descriptions.Item>
               <Descriptions.Item label="适用章节">{(detail.applicable_sections || []).join('、') || '-'}</Descriptions.Item>
               <Descriptions.Item label="标签">{(detail.tags || []).join('、') || '-'}</Descriptions.Item>
-              <Descriptions.Item label="来源">{detail.source_url ? <a href={detail.source_url} target="_blank" rel="noreferrer">查看来源</a> : '脱敏样张'}</Descriptions.Item>
-              <Descriptions.Item label="合规说明">{detail.is_synthetic ? '脱敏合成样张，仅用于测试和排版占位，不可替代正式法定资质文件。' : '公开来源素材，使用前需复核授权。'}</Descriptions.Item>
+              <Descriptions.Item label="来源">{detail.source_url ? <a href={detail.source_url} target="_blank" rel="noreferrer">查看来源</a> : '客户提供资料'}</Descriptions.Item>
+              <Descriptions.Item label="合规说明">{detail.is_synthetic ? '脱敏合成样张，仅用于测试和排版占位，不可替代正式法定资质文件。' : '泰昌客户自有资料，仅按泰昌租户内部投标场景使用。'}</Descriptions.Item>
             </Descriptions>
           </div>
         ) : null}

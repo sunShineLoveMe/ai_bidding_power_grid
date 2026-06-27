@@ -1,0 +1,972 @@
+[
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "场地租赁协议书"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                363,
+                167,
+                573,
+                191
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "甲方：满城县方顺桥镇陉阳驿村村民委员会"
+                    }
+                ]
+            },
+            "bbox": [
+                127,
+                221,
+                564,
+                241
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "乙方：河北泰昌电力器材科技有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                127,
+                274,
+                517,
+                293
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "根据有关法律法规，甲、乙双方经友好协商一致达成如下条款，以期共同遵守："
+                    }
+                ]
+            },
+            "bbox": [
+                124,
+                325,
+                805,
+                380
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "第一条租赁位置、面积"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                124,
+                413,
+                371,
+                432
+            ]
+        },
+        {
+            "type": "list",
+            "content": {
+                "list_type": "text_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "1.1甲方将于满城县方顺桥镇陉阳驿村北的场地租赁于乙方使用，租赁面积甲、乙双方认可确定为18000平米；"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "1.2本场地采取包租的方式，由乙方自行经营管理。"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                122,
+                464,
+                803,
+                573
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "第二条租赁期限"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                122,
+                602,
+                300,
+                623
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2.1租期限为五十年，即从2011年4月5日起至2061年4月5日止。"
+                    }
+                ]
+            },
+            "bbox": [
+                119,
+                656,
+                803,
+                709
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "第三条租赁费用及支付"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                119,
+                743,
+                366,
+                763
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "3.1租赁费用为每年18万元，租赁期限内不得涨价，租金以一年一付的方式交清。"
+                    }
+                ]
+            },
+            "bbox": [
+                119,
+                796,
+                793,
+                852
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "第四条保证条款"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                119,
+                884,
+                295,
+                904
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "4.1甲方保证有权利签署本协议，保证本协议下出租给乙方的场地使用的合法性及无争议性，同时保证在履行本合同的权利与义务时不存在任何法律的障碍；如因此问题而给乙方的生产经营造成损失，甲方应向乙方支付相应的直接和间接损失；"
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                108,
+                855,
+                243
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "4.2甲方保证出入场地的道路畅通无阻，不存在阻碍交通的情况发生；"
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                273,
+                838,
+                329
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "4.3除租金外，甲方不得向乙方收取其他任何费用，诸如：治安联防费、绿化费、村道路硬化费、管理费、土地使用费等一切与乙方生产经营无关的费用，若发生均由甲方负责缴纳或解决；"
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                365,
+                850,
+                479
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "4.4 甲方在乙方进驻前，应路通、水通、电通；"
+                    }
+                ]
+            },
+            "bbox": [
+                142,
+                508,
+                628,
+                532
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "4.5甲方保证不干涉乙方在所租赁场地有效面积内自由支配；"
+                    }
+                ]
+            },
+            "bbox": [
+                142,
+                562,
+                769,
+                587
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "4.6甲方保证乙方承租经营期间地方关系的协调，保证乙方不受当地村民或地方恶势力的阻挠和刁难；"
+                    }
+                ]
+            },
+            "bbox": [
+                141,
+                615,
+                845,
+                674
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "4.7甲方承租给乙方的场地应承担风险，确保该场地不因任何第三人的权利主张或其他因素而使乙方受到使用上的障碍或其他损失，乙方有权提出，甲方应负责赔偿；"
+                    }
+                ]
+            },
+            "bbox": [
+                139,
+                706,
+                845,
+                802
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "4.8乙方保证及时足额支付租金，逾期不支付愿承担相应的违约责任；"
+                    }
+                ]
+            },
+            "bbox": [
+                139,
+                834,
+                826,
+                891
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/026359d7e4026963d4b2d5107f831ad707e954d7ea9a2e84c90623920d4e1702.jpg"
+                },
+                "content": "",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "bbox": [
+                922,
+                316,
+                998,
+                413
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "4.9乙方保证经营的合法性；"
+                    }
+                ]
+            },
+            "bbox": [
+                149,
+                107,
+                448,
+                128
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "4.10因乙方原因无法继续经营，且承租期限未满，乙方在保证甲方利益的前提下，可转让第三人。"
+                    }
+                ]
+            },
+            "bbox": [
+                149,
+                161,
+                850,
+                219
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "4.11 如若在承租期内由于当地政府拆迁，乙方将承担实际租期内的租金，甲方需偿还乙方因搬迁造成的全部损失。"
+                    }
+                ]
+            },
+            "bbox": [
+                149,
+                252,
+                850,
+                310
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第五条 其他条款"
+                    }
+                ]
+            },
+            "bbox": [
+                149,
+                342,
+                329,
+                363
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "5.1 本合同生效后，除甲、乙双方一致同意或不可抗力外，双方应认真履行，不得违约；"
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                395,
+                850,
+                453
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "5.2本协议未尽事宜，双方另行协商，同意后可另签补充协议；"
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                487,
+                796,
+                508
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "5.3 本协议一式两份，甲、乙双方各执一份，具同等法律效力；"
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                541,
+                796,
+                562
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "甲方（签金"
+                    }
+                ]
+            },
+            "bbox": [
+                159,
+                593,
+                410,
+                619
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "乙方（签字辉"
+                    }
+                ]
+            },
+            "bbox": [
+                573,
+                593,
+                813,
+                619
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2011年4月日"
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                646,
+                329,
+                667
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2011年4月日"
+                    }
+                ]
+            },
+            "bbox": [
+                588,
+                649,
+                813,
+                669
+            ]
+        }
+    ],
+    [
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/1b5faf6167b8cfce6afda450846a60e90931567f8ac078fbecbaf886face3df4.jpg"
+                },
+                "content": "收据",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                50,
+                113,
+                196,
+                438
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2025年4月3日N0054579"
+                    }
+                ]
+            },
+            "bbox": [
+                221,
+                104,
+                897,
+                144
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "今收到河北泰昌勃器材科技有限公"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                147,
+                892,
+                189
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "交来2025租金"
+                    }
+                ]
+            },
+            "bbox": [
+                219,
+                204,
+                892,
+                236
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "人民币（大写)壹拾捌万"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                241,
+                894,
+                282
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "￥18000"
+                    }
+                ]
+            },
+            "bbox": [
+                666,
+                293,
+                894,
+                330
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "收款单位"
+                    }
+                ]
+            },
+            "bbox": [
+                217,
+                366,
+                338,
+                424
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "收款人"
+                    }
+                ]
+            },
+            "bbox": [
+                563,
+                344,
+                595,
+                412
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "交款人"
+                    }
+                ]
+            },
+            "bbox": [
+                743,
+                344,
+                772,
+                412
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "晁地琳"
+                    }
+                ]
+            },
+            "bbox": [
+                785,
+                358,
+                889,
+                403
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/fcba09e0859d515c73f5a667e3805d43515308f6e00cc7e6c4d6445c57b806f0.jpg"
+                },
+                "content": "收据",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                44,
+                565,
+                196,
+                906
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2026年4月5日N6007A500"
+                    }
+                ]
+            },
+            "bbox": [
+                221,
+                567,
+                909,
+                600
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "今收到河北泰昌出力驾材科技有公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                614,
+                907,
+                662
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "交来2026年金"
+                    }
+                ]
+            },
+            "bbox": [
+                219,
+                667,
+                907,
+                709
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "人民币（大写）抗捌万趣"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                713,
+                908,
+                762
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "￥180000、00"
+                    }
+                ]
+            },
+            "bbox": [
+                675,
+                777,
+                851,
+                812
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "收款单"
+                    }
+                ]
+            },
+            "bbox": [
+                215,
+                834,
+                338,
+                892
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/0634f335d9d2a834b84b9f3e1c0b8aabc672bf49642ca716fd75839a5e4883c7.jpg"
+                },
+                "content": "方圆桥\n五国界\n财务专用章",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                317,
+                747,
+                531,
+                939
+            ]
+        },
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/c72d7b71c232f182bc8664de2ab37cde8bcf732af0ce17ca65bcd358f5b80883.jpg"
+                },
+                "table_caption": [],
+                "table_footnote": [],
+                "html": "<table><tr><td>收款人</td><td></td></tr></table>",
+                "table_type": "simple_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                563,
+                817,
+                731,
+                904
+            ]
+        },
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/801dd62d15778107150928ebe41845c1ea6dc5d9230487aa8d8193cf70a17fd9.jpg"
+                },
+                "table_caption": [],
+                "table_footnote": [],
+                "html": "<table><tr><td>交款人</td><td></td></tr></table>",
+                "table_type": "simple_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                744,
+                824,
+                915,
+                912
+            ]
+        },
+        {
+            "type": "page_aside_text",
+            "content": {
+                "page_aside_text_content": [
+                    {
+                        "type": "text",
+                        "content": "此收据不得作为经营性业务收支结算凭证使用"
+                    }
+                ]
+            },
+            "bbox": [
+                19,
+                128,
+                42,
+                430
+            ]
+        },
+        {
+            "type": "page_aside_text",
+            "content": {
+                "page_aside_text_content": [
+                    {
+                        "type": "text",
+                        "content": "此收据不得作为经营性业务收支结算凭证使用"
+                    }
+                ]
+            },
+            "bbox": [
+                13,
+                577,
+                35,
+                892
+            ]
+        },
+        {
+            "type": "page_aside_text",
+            "content": {
+                "page_aside_text_content": [
+                    {
+                        "type": "text",
+                        "content": "二美文居（分）"
+                    }
+                ]
+            },
+            "bbox": [
+                917,
+                161,
+                931,
+                410
+            ]
+        },
+        {
+            "type": "page_aside_text",
+            "content": {
+                "page_aside_text_content": [
+                    {
+                        "type": "text",
+                        "content": "一联存根（白）二联收据（粉）"
+                    }
+                ]
+            },
+            "bbox": [
+                917,
+                648,
+                945,
+                902
+            ]
+        }
+    ]
+]

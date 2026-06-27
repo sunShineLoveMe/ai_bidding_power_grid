@@ -1,0 +1,586 @@
+[
+    {
+        "type": "image",
+        "img_path": "images/438096e1c2fbaecb921d01db2e4f097a00c179b0fcb2aa3f2dd5c376947ccff6.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "QR code image containing encoded data, no visible human-readable text",
+        "sub_type": "text_image",
+        "bbox": [
+            665,
+            181,
+            788,
+            269
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "检验报告",
+        "text_level": 2,
+        "bbox": [
+            216,
+            281,
+            774,
+            355
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "No: 2024100312005501713",
+        "bbox": [
+            361,
+            409,
+            628,
+            426
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "样品名称：CPVC电缆保护管",
+        "bbox": [
+            215,
+            555,
+            527,
+            577
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "委托单位：河北泰昌电力器材科技有限公司",
+        "bbox": [
+            215,
+            627,
+            702,
+            649
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "检验类别：型式检验",
+        "bbox": [
+            215,
+            701,
+            450,
+            721
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "辽宁省产品质量监督检验院国家建筑装修材料质量安全检验检测中心",
+        "bbox": [
+            189,
+            778,
+            800,
+            850
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "header",
+        "text": "MA",
+        "bbox": [
+            164,
+            60,
+            317,
+            124
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "header",
+        "text": "220020349229",
+        "bbox": [
+            164,
+            129,
+            312,
+            143
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "header",
+        "text": "ilac-MRA",
+        "bbox": [
+            363,
+            43,
+            510,
+            148
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "header",
+        "text": "CNAS",
+        "bbox": [
+            515,
+            51,
+            682,
+            141
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "header",
+        "text": "中国认可",
+        "bbox": [
+            694,
+            53,
+            771,
+            70
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "header",
+        "text": "国际互认",
+        "bbox": [
+            694,
+            71,
+            771,
+            86
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "header",
+        "text": "检测",
+        "bbox": [
+            694,
+            87,
+            734,
+            103
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "header",
+        "text": "TESTING",
+        "bbox": [
+            694,
+            104,
+            776,
+            118
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "header",
+        "text": "CNASL0199",
+        "bbox": [
+            694,
+            121,
+            803,
+            135
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "aside_text",
+        "text": "国家建筑",
+        "bbox": [
+            959,
+            256,
+            998,
+            512
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "辽宁省产品质量监督检验院",
+        "text_level": 1,
+        "bbox": [
+            321,
+            46,
+            692,
+            71
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "国家建筑装修材料质量安全检验检测中心",
+        "text_level": 1,
+        "bbox": [
+            233,
+            79,
+            781,
+            104
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "table",
+        "img_path": "images/ac4599979d7e13713b975fd528e906a4afa0275c19b535b0be97142877f69174.jpg",
+        "table_caption": [
+            "检 验 报 告",
+            "No:2024100312005501713",
+            "共4页第1页"
+        ],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>委托单位*</td><td colspan=\"3\">河北泰昌电力器材科技有限公司</td></tr><tr><td>检验类别</td><td>型式检验</td><td>样品编号</td><td>240JX501713</td></tr><tr><td>样品名称*</td><td colspan=\"3\">CPVC电缆保护管</td></tr><tr><td>生产单位*</td><td colspan=\"3\">河北泰昌电力器材科技有限公司</td></tr><tr><td>规格型号*</td><td>DS 250×15×6000 SN16 PVC-C</td><td>样品等级*</td><td>合格品</td></tr><tr><td>样品数量</td><td>6米</td><td>批号/生产日期*</td><td>****</td></tr><tr><td>送样人*</td><td>晁坤琳</td><td>样品状态</td><td>样品完好,符合检验要求</td></tr><tr><td>送样日期</td><td>2024/03/20</td><td>检验期间</td><td>2024/03/21~03/22</td></tr><tr><td>检验依据</td><td colspan=\"3\">GB/T 8806-2008;QB/T 2803-2006;GB/T 1033.1-2008;GB/T 9647-2015;GB/T 14152-2001;YD/T 841.1-2016;GB/T 8802-2001;GB/T 6671-2001;DL/T 802.1-2023;GB/T 39379-2020</td></tr><tr><td>检验项目</td><td colspan=\"3\">密度等共12项</td></tr><tr><td>检验结论</td><td colspan=\"3\">依据GB/T 8806-2008、QB/T 2803-2006等标准检验,所检项目符合DL/T 802.3-2023标准要求,该样品合格。(检验检测专用章)</td></tr><tr><td>备注</td><td colspan=\"3\">****</td></tr></table>",
+        "bbox": [
+            90,
+            158,
+            919,
+            860
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "批准：",
+        "bbox": [
+            112,
+            878,
+            164,
+            894
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "审核:",
+        "bbox": [
+            443,
+            878,
+            492,
+            894
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "编制：",
+        "bbox": [
+            687,
+            878,
+            737,
+            894
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "footer",
+        "text": "",
+        "bbox": [
+            171,
+            881,
+            260,
+            910
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "footer",
+        "text": "商成景",
+        "bbox": [
+            512,
+            881,
+            600,
+            909
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "footer",
+        "text": "李根",
+        "bbox": [
+            757,
+            883,
+            825,
+            907
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "aside_text",
+        "text": "品检验材料检验",
+        "bbox": [
+            957,
+            244,
+            998,
+            521
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "辽宁省产品质量监督检验院",
+        "text_level": 1,
+        "bbox": [
+            322,
+            46,
+            692,
+            71
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "国家建筑装修材料质量安全检验检测中心",
+        "text_level": 1,
+        "bbox": [
+            233,
+            79,
+            781,
+            104
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "table",
+        "img_path": "images/cc419e9af4a7e5f3040495bb96bf105ac9fa70eb8be18b09dbe225236a9d29c8.jpg",
+        "table_caption": [
+            "检 验 报 告",
+            "No:2024100312005501713",
+            "共4页第2页"
+        ],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>序号</td><td colspan=\"2\">检验项目</td><td>单位</td><td>标准要求</td><td>检验结果</td><td>单项结论</td></tr><tr><td>1</td><td colspan=\"2\">颜色</td><td>****</td><td>导管颜色应均匀一致</td><td>符合要求</td><td>合格</td></tr><tr><td>2</td><td colspan=\"2\">外观</td><td>****</td><td>导管内外壁不应有气泡、裂口和明显的痕纹、凹陷、杂质、分解变色线及色泽不均等缺陷;导管内壁应光滑、平整;导管端面应切割平整并与轴线垂直。</td><td>符合要求</td><td>合格</td></tr><tr><td rowspan=\"8\">3</td><td rowspan=\"8\">尺寸</td><td>长度</td><td>mm</td><td>≥6000</td><td>6006</td><td>合格</td></tr><tr><td>平均内径</td><td>mm</td><td>250.0~251.5</td><td>250.2~250.4</td><td>合格</td></tr><tr><td>壁厚</td><td>mm</td><td> $15_{0}^{+1.8}$ </td><td>15.2~15.3</td><td>合格</td></tr><tr><td>不圆度</td><td>mm</td><td>≤4.2</td><td>0.4~0.6</td><td>合格</td></tr><tr><td>承口平均内径</td><td>mm</td><td>280.0~281.5</td><td>280.5</td><td>合格</td></tr><tr><td>承口壁厚</td><td>mm</td><td>≥12</td><td>15.1~15.3</td><td>合格</td></tr><tr><td>承口最小深度</td><td>mm</td><td>≥120</td><td>120.8</td><td>合格</td></tr><tr><td>弯曲度</td><td>%</td><td>≤0.5</td><td>0.3</td><td>合格</td></tr><tr><td>4</td><td colspan=\"2\">密度</td><td>g/cm3</td><td>≤1.60</td><td>1.519</td><td>合格</td></tr><tr><td>5</td><td colspan=\"2\">环刚度(80°C)</td><td>kN/m2</td><td>≥16</td><td>21.63</td><td>合格</td></tr><tr><td>6</td><td colspan=\"2\">压扁试验</td><td>****</td><td>加载负荷至试样垂直方向变形量为原内径的30%时,试样内、外壁应均无破裂。</td><td>符合要求</td><td>合格</td></tr><tr><td>7</td><td colspan=\"2\">落锤冲击</td><td>****</td><td>落锤质量5.0kg,冲击高度1200mm,取10个试样,每个试样冲击一次,冲击后10个试样中至少有9个不破裂。</td><td>10个试样均未破裂</td><td>合格</td></tr></table>",
+        "bbox": [
+            90,
+            158,
+            919,
+            904
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "aside_text",
+        "text": "质量\n★\n检测专\n(2)\n质量\n★\n检测专",
+        "bbox": [
+            957,
+            243,
+            998,
+            526
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "辽宁省产品质量监督检验院",
+        "text_level": 1,
+        "bbox": [
+            322,
+            47,
+            692,
+            73
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "国家建筑装修材料质量安全检验检测中心",
+        "text_level": 1,
+        "bbox": [
+            233,
+            80,
+            781,
+            105
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "table",
+        "img_path": "images/be46d7cf23a3c1c432547ecca70ec6cd5ffb1699109bef925585f63517016c08.jpg",
+        "table_caption": [
+            "检 验 报 告",
+            "No:2024100312005501713",
+            "共4页第3页"
+        ],
+        "table_footnote": [
+            "\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\* 以 \\*下 空 白\\* \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*"
+        ],
+        "table_body": "<table><tr><td>序号</td><td>检验项目</td><td>单位</td><td>标准要求</td><td>检验结果</td><td>单项结论</td></tr><tr><td>8</td><td>静摩擦系数</td><td>****</td><td> $\\leqslant 0.35$ </td><td>0.31</td><td>合格</td></tr><tr><td>9</td><td>维卡软化温度</td><td>°C</td><td> $\\geqslant 93$ </td><td>95</td><td>合格</td></tr><tr><td>10</td><td>纵向回缩率</td><td>%</td><td> $\\leqslant 5$ </td><td>2.8</td><td>合格</td></tr><tr><td>11</td><td>散热性能</td><td>°C</td><td>常温下放置规定的时间,导管内、外壁温度均 $\\leqslant 30^{\\circ}C$ 。</td><td>内壁:24.9;24.8;24.8内壁平均:24.8外壁:24.1;24.4;24.1外壁平均:24.2</td><td>合格</td></tr><tr><td>12</td><td>接头密封性能</td><td>****</td><td>室温下充满水加压至0.05MPa保持15min,接头处不应漏水、渗水。</td><td>符合要求</td><td>合格</td></tr></table>",
+        "bbox": [
+            90,
+            159,
+            921,
+            532
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "aside_text",
+        "text": "监管专用章安全规范专用章",
+        "bbox": [
+            956,
+            244,
+            998,
+            523
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "声 明",
+        "text_level": 2,
+        "bbox": [
+            440,
+            65,
+            576,
+            93
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "1.报告无“检验检测专用章”无效，无骑缝章无效。",
+            "2.报告无编制/主检、审核、批准人签字无效。",
+            "3.报告一律打印，涂改无效。",
+            "4.委托方如对检验结果和报告有异议，应于收到检验报告之日起十五日内向本机 构提出书面异议申请，逾期不予受理。",
+            "5.委托检验报告仅适用于委托方提供并经本机构检验的样品。",
+            "6.本报告仅供委托方了解所委托检验样品的品质之用，检验检测数据、结果仅证明样品所检验检测项目的符合性情况。",
+            "7.未经本机构批准，不得复制（全文复制除外）本报告。",
+            "8.检验报告中注“\\*”项内容均由委托方提供，本机构不负责确认。"
+        ],
+        "bbox": [
+            87,
+            117,
+            924,
+            424
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "国家建筑装修材料质量安全检验检测中心是经授权成立的国家产品质量检验检测中心，在其授权的范围内开展检验检测业务，对外出具检验检测报告或证书的法律责任由其法人单位辽宁省产品质量监督检验院（辽宁省消防技术检测站、辽宁省烟花爆竹产品质量监督检验中心）承担。",
+        "bbox": [
+            90,
+            429,
+            921,
+            508
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "通信地址：辽宁省沈阳市皇姑区崇山东路61号",
+        "bbox": [
+            92,
+            517,
+            566,
+            538
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "实验室地址：沈阳市皇姑区崇山东路61号/沈阳市经济技术开发区沈西三东路2甲3号",
+        "bbox": [
+            92,
+            548,
+            924,
+            600
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "邮编：110032",
+        "bbox": [
+            92,
+            611,
+            240,
+            631
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "报告查询电话：024-86610662",
+        "bbox": [
+            92,
+            642,
+            405,
+            662
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "二维码查询方式：微信扫描后，点击界面右上角的“...”，选择“在浏览器中打开”下载查询到的检验报告；或者直接选择手机浏览器中“扫一扫”功能扫描检验报告二维码，可直接下载查询到检验报告。",
+        "bbox": [
+            90,
+            671,
+            922,
+            756
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "业务电话：024-86620952；024-86618871",
+        "bbox": [
+            92,
+            766,
+            519,
+            787
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "电子邮箱：lnszly\\_sy@126.com 传真：024-86621453",
+        "bbox": [
+            92,
+            797,
+            663,
+            819
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "网址：www.liecc.com.cn",
+        "bbox": [
+            94,
+            829,
+            357,
+            848
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "header",
+        "text": "No:2024100312005501713",
+        "bbox": [
+            92,
+            43,
+            319,
+            58
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "header",
+        "text": "共4页第4页",
+        "bbox": [
+            806,
+            43,
+            919,
+            58
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "aside_text",
+        "text": "中国银行\n中国银行",
+        "bbox": [
+            954,
+            256,
+            998,
+            512
+        ],
+        "page_idx": 4
+    }
+]

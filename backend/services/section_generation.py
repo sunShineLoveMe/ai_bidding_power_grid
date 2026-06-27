@@ -11,15 +11,15 @@ from collections.abc import Callable, Iterable
 from typing import Any
 
 from backend.ai.qwen_client import LLMStreamTimeoutError
-from backend.ai.section_writer import estimate_bid_content_words, stream_bid_section
+from backend.ai.section_writer import (
+    compact_formal_placeholders,
+    estimate_bid_content_words,
+    rewrite_generated_section_for_formal_quality,
+    stream_bid_section,
+)
 from backend.db.supabase_repo import (
     list_knowledge_assets,
     update_bid_section_content,
-)
-from backend.api.routes import (
-    _asset_allowed_for_bid,
-    _asset_image_ref,
-    _build_section_image_markdown,
 )
 
 ProgressCallback = Callable[[dict[str, Any]], None]
@@ -32,16 +32,19 @@ class SectionGenerationCancelled(Exception):
 class SectionGenerationTimeout(Exception):
     """Raised when a section stream exceeds wall-clock or idle-token budget."""
 
-    def __init__(self, *, code: str, message: str, partial_content: str):
+    def __init__(self, *, code: str, message: str, partial_content: str, metadata: dict[str, Any] | None = None):
         super().__init__(message)
         self.code = code
         self.partial_content = partial_content
+        self.metadata = metadata if isinstance(metadata, dict) else {}
 
 
 def append_section_images(full_content: str, chapter: dict[str, Any], *, with_images: bool) -> str:
     if not with_images:
         return ""
     try:
+        from backend.api.routes import _asset_allowed_for_bid, _asset_image_ref, _build_section_image_markdown
+
         image_assets = [
             asset for asset in list_knowledge_assets()
             if _asset_image_ref(asset)
@@ -58,7 +61,16 @@ def append_section_images(full_content: str, chapter: dict[str, Any], *, with_im
         return ""
 
 
-def save_generated_section(project_id: str, chapter: dict[str, Any], full_content: str) -> dict[str, Any]:
+def save_generated_section(
+    project_id: str,
+    chapter: dict[str, Any],
+    full_content: str,
+    quality_report: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    full_content, compaction_report = compact_formal_placeholders(chapter, full_content)
+    quality = {**(quality_report or {})}
+    if compaction_report.get("compacted"):
+        quality["placeholder_compaction"] = compaction_report
     actual_words = estimate_bid_content_words(full_content)
     target_words = None
     metadata = chapter.get("metadata") if isinstance(chapter.get("metadata"), dict) else {}
@@ -80,6 +92,7 @@ def save_generated_section(project_id: str, chapter: dict[str, Any], full_conten
             "actual_words": actual_words,
             "target_words": target_words,
             "length_completion_ratio": round(actual_words / target_words, 3) if target_words else None,
+            "formal_quality": quality,
         },
     )
 
@@ -153,31 +166,77 @@ def generate_and_save_bid_section(
     full_content = continuation_draft or f"## {chapter.get('title') or '未命名章节'}\n\n"
     chunk_count = 0
     saved_section: dict[str, Any] | None = None
+    quality_report: dict[str, Any] = {}
+    prompt_metadata: dict[str, Any] = {}
     try:
         for event in stream_bid_section(project_id, chapter):
             event_type = event.get("type", "message")
+            if event_type == "start":
+                prompt_metadata = {
+                    key: event.get(key)
+                    for key in [
+                        "prompt_profile",
+                        "prompt_profile_label",
+                        "prompt_chars",
+                        "max_prompt_chars",
+                        "rag_limit",
+                        "asset_limit",
+                        "fact_pack_mode",
+                    ]
+                    if event.get(key) is not None
+                }
+            if event_type == "stream_metric":
+                prompt_metadata.update({
+                    key: event.get(key)
+                    for key in [
+                        "first_token_latency_ms",
+                        "first_token_slow",
+                        "chars_at_60s",
+                        "chars_at_90s",
+                        "chars_per_minute",
+                        "stream_elapsed_ms",
+                        "stream_chars",
+                        "slow_check_seconds",
+                        "min_chars_at_slow_check",
+                        "slow_stream",
+                        "slow_stream_reason",
+                        "timeout_code",
+                    ]
+                    if event.get(key) is not None
+                })
             if event_type == "chunk":
                 content = event.get("content", "")
                 full_content += content
                 if content:
                     chunk_count += 1
             if event_type == "done" and chapter.get("id"):
+                full_content, quality_report = rewrite_generated_section_for_formal_quality(project_id, chapter, full_content)
+                if quality_report.get("rewritten") and on_event:
+                    on_event({"type": "quality_rewrite", "report": quality_report})
                 image_markdown = append_section_images(full_content, chapter, with_images=with_images)
                 if image_markdown:
                     full_content += image_markdown
                     chunk_count += 1
                     if on_event:
                         on_event({"type": "chunk", "content": image_markdown})
-                saved_section = save_generated_section(project_id, chapter, full_content)
+                saved_section = save_generated_section(project_id, chapter, full_content, quality_report)
             if on_event:
                 on_event(event)
         if chapter.get("id") and saved_section is None:
-            saved_section = save_generated_section(project_id, chapter, full_content)
+            full_content, quality_report = rewrite_generated_section_for_formal_quality(project_id, chapter, full_content)
+            saved_section = save_generated_section(project_id, chapter, full_content, quality_report)
     except SectionGenerationCancelled:
         raise
     except LLMStreamTimeoutError as exc:
         code = str(getattr(exc, "code", None) or "MODEL_STREAM_TIMEOUT")
         message = str(exc)
+        timeout_metadata = getattr(exc, "metadata", {}) if isinstance(getattr(exc, "metadata", {}), dict) else {}
+        timeout_metadata = {
+            **prompt_metadata,
+            **timeout_metadata,
+            "timeout_code": code,
+            "timeout_message": message,
+        }
         if on_event:
             on_event({
                 "type": "timeout",
@@ -186,6 +245,7 @@ def generate_and_save_bid_section(
                 "partial_content": full_content,
                 "chars": len(full_content.replace("\n", "")),
                 "words": estimate_bid_content_words(full_content),
+                "metadata": timeout_metadata,
             })
         mark_section_generation_partial(
             project_id,
@@ -194,7 +254,7 @@ def generate_and_save_bid_section(
             code=code,
             partial_content=full_content,
         )
-        raise SectionGenerationTimeout(code=code, message=message, partial_content=full_content) from exc
+        raise SectionGenerationTimeout(code=code, message=message, partial_content=full_content, metadata=timeout_metadata) from exc
     except Exception:
         if saved_section is None:
             mark_section_generation_failed(project_id, chapter, "章节正文后台生成失败，已保留原正文。")
@@ -207,6 +267,7 @@ def generate_and_save_bid_section(
         "words": estimate_bid_content_words(full_content),
         "chunks": chunk_count,
         "content_length": len(full_content),
+        **prompt_metadata,
     }
 
 

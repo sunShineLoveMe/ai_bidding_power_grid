@@ -103,6 +103,24 @@ class StorageProviderTest(unittest.TestCase):
         with patch.dict(os.environ, env, clear=False):
             self.assertEqual(get_bucket_name("knowledge"), "shared-bucket")
 
+    def test_local_bucket_names_have_safe_defaults(self):
+        from backend.db.supabase_client import get_bucket_name
+
+        env = {
+            "STORAGE_PROVIDER": "local",
+            "SUPABASE_STORAGE_TENDER_BUCKET": "",
+            "SUPABASE_STORAGE_GENERATED_BUCKET": "",
+            "SUPABASE_STORAGE_KNOWLEDGE_BUCKET": "",
+            "SUPABASE_STORAGE_QUALIFICATION_BUCKET": "",
+            "SUPABASE_STORAGE_PRODUCT_BUCKET": "",
+        }
+        with patch.dict(os.environ, env, clear=False):
+            self.assertEqual(get_bucket_name("tender"), "tender-files")
+            self.assertEqual(get_bucket_name("generated"), "generated-docx")
+            self.assertEqual(get_bucket_name("knowledge"), "knowledge-files")
+            self.assertEqual(get_bucket_name("qualification"), "qualification-files")
+            self.assertEqual(get_bucket_name("product"), "product-files")
+
 
 if __name__ == "__main__":
     unittest.main()

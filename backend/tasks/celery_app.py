@@ -106,6 +106,7 @@ def _build_celery() -> Celery:
     # 任务模块列表：每迁移一类任务，在此登记一个模块。
     app.conf.imports = (
         "backend.tasks.export_tasks",
+        "backend.tasks.interpretation_tasks",
         "backend.tasks.parse_tasks",
         "backend.tasks.outline_tasks",
         "backend.tasks.section_tasks",

@@ -1,0 +1,500 @@
+{
+  "assets": [
+    {
+      "asset_id": "taichang_testing_capacity_p3_040_2025568e",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/电子拉力试验机_e82a9b/extract/images/edef6b3135e5b4272a85ff2f9c535e3360ef97871bd1c430c59bcaff75fde357.jpg",
+      "asset_sha256": "9127bf23ea888470749027bca5daebc9b5b68554c2e94925db9e5be1c667ee21",
+      "page_idx": 2,
+      "page_no": 3,
+      "bbox": [
+        473,
+        307,
+        578,
+        375
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111652_e82a9b18",
+      "batch_id": "3fbd04d6-077e-4225-9f94-a971d3ab27a7",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "3700121140 山东增值税专用发票 No 00952136 3700121140 00952136",
+      "ocr_context": "3700121140 山东增值税专用发票 No 00952136 3700121140 00952136",
+      "retrieval_text": "泰昌 testing_capacity 第3页图片。3700121140 山东增值税专用发票 No 00952136 3700121140 00952136",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:3",
+        "bbox_anchor": [
+          473,
+          307,
+          578,
+          375
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p3_049_ac994f2c",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/电子拉力试验机_e82a9b/extract/images/c2e3eb202886ff32cd611e2a652293831788f7885433a57dc7a7db6303128289.jpg",
+      "asset_sha256": "cf7bd95073e868d4ae8d66df8b5853650d8de69bc8beef39c2d661bb35f96f6d",
+      "page_idx": 2,
+      "page_no": 3,
+      "bbox": [
+        677,
+        731,
+        806,
+        875
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111652_e82a9b18",
+      "batch_id": "3fbd04d6-077e-4225-9f94-a971d3ab27a7",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "收款人：陈雪华 复核：张彩凤 开票人：李丽英 第二联：抵扣联购买方扣税凭证",
+      "ocr_context": "收款人：陈雪华 复核：张彩凤 开票人：李丽英 第二联：抵扣联购买方扣税凭证",
+      "retrieval_text": "泰昌 testing_capacity 第3页图片。收款人：陈雪华 复核：张彩凤 开票人：李丽英 第二联：抵扣联购买方扣税凭证",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:3",
+        "bbox_anchor": [
+          677,
+          731,
+          806,
+          875
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p4_057_3a9e39c1",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/电子拉力试验机_e82a9b/extract/images/cec67b79eae4fe14ea3ba768dd5731cab1feeacd42ef0b9b886dbc3b7f693523.jpg",
+      "asset_sha256": "5849cc764734199feaaf8e53fac7fc9b1b2d38b60fb3990f1940029e38646479",
+      "page_idx": 3,
+      "page_no": 4,
+      "bbox": [
+        579,
+        264,
+        757,
+        393
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111652_e82a9b18",
+      "batch_id": "3fbd04d6-077e-4225-9f94-a971d3ab27a7",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "鉴于国家税务总局全国增值税发票查验平台https://inv-veri.chinatax.gov.cn/index.html查询年限5年，故我公司部分生产、试验设备发票超出查询年限而无法查询。 我公司承诺所提供所有设备发票信息真实有效，无任何虚假。如有虚假愿意承担一切法律责任，特此证明。 承诺人：河北泰昌电力器材科技有限公司",
+      "ocr_context": "鉴于国家税务总局全国增值税发票查验平台https://inv-veri.chinatax.gov.cn/index.html查询年限5年，故我公司部分生产、试验设备发票超出查询年限而无法查询。 我公司承诺所提供所有设备发票信息真实有效，无任何虚假。如有虚假愿意承担一切法律责任，特此证明。 承诺人：河北泰昌电力器材科技有限公司",
+      "retrieval_text": "泰昌 testing_capacity 第4页图片。鉴于国家税务总局全国增值税发票查验平台https://inv-veri.chinatax.gov.cn/index.html查询年限5年，故我公司部分生产、试验设备发票超出查询年限而无法查询。 我公司承诺所提供所有设备发票信息真实有效，无任何虚假。如有虚假愿意承担一切法律责任，特此证明。 承诺人：河北泰昌电力器材科技有限公司",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:4",
+        "bbox_anchor": [
+          579,
+          264,
+          757,
+          393
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p5_058_46b9be7e",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/电子拉力试验机_e82a9b/extract/images/e4eb59c9ece26f62df28c7fb9a49921bf7ae1414e85072fb6c710e23a301ec35.jpg",
+      "asset_sha256": "2e3905377039b3ad80fa880c102591f8034de0080ccef313ee2238694d85ce52",
+      "page_idx": 4,
+      "page_no": 5,
+      "bbox": [
+        0,
+        0,
+        998,
+        998
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111652_e82a9b18",
+      "batch_id": "3fbd04d6-077e-4225-9f94-a971d3ab27a7",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "",
+      "ocr_context": "",
+      "retrieval_text": "泰昌 testing_capacity 第5页图片。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:5",
+        "bbox_anchor": [
+          0,
+          0,
+          998,
+          998
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p6_060_d993d228",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/电子拉力试验机_e82a9b/extract/images/cf357a6e38c13f11ebd668ccb5eb7a2efda83a64257079f4f4dd49f44b4c212a.jpg",
+      "asset_sha256": "3f66c03ba34b581565417339f7a22ba9c2edabd367e7e53c027ce18e7d896753",
+      "page_idx": 5,
+      "page_no": 6,
+      "bbox": [
+        657,
+        149,
+        727,
+        204
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111652_e82a9b18",
+      "batch_id": "3fbd04d6-077e-4225-9f94-a971d3ab27a7",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate",
+      "ocr_context": "校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate",
+      "retrieval_text": "泰昌 testing_capacity 第6页图片。校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:6",
+        "bbox_anchor": [
+          657,
+          149,
+          727,
+          204
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p6_061_d2b66641",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/电子拉力试验机_e82a9b/extract/images/53a15b7a2b55770e069136571d28cb9ffae462af237be51c3f2bd490d06a8112.jpg",
+      "asset_sha256": "5683d0ab1b127fa44930934f64ebe4d2618f71e6c7884dad515b72b230613756",
+      "page_idx": 5,
+      "page_no": 6,
+      "bbox": [
+        727,
+        154,
+        803,
+        203
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111652_e82a9b18",
+      "batch_id": "3fbd04d6-077e-4225-9f94-a971d3ab27a7",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate 证书编号： GL2605LX02285",
+      "ocr_context": "校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate 证书编号： GL2605LX02285",
+      "retrieval_text": "泰昌 testing_capacity 第6页图片。校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate 证书编号： GL2605LX02285",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:6",
+        "bbox_anchor": [
+          727,
+          154,
+          803,
+          203
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p6_083_a350525d",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/电子拉力试验机_e82a9b/extract/images/796266488662ac7e7df544fc2a713c94be50d15618b5444d92b349dc1a9e98d2.jpg",
+      "asset_sha256": "a8a87b5bf075b180249f702b47b2c4e2e43f674ff2a1bb60bd2a455e4ccceb3c",
+      "page_idx": 5,
+      "page_no": 6,
+      "bbox": [
+        186,
+        604,
+        379,
+        744
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111652_e82a9b18",
+      "batch_id": "3fbd04d6-077e-4225-9f94-a971d3ab27a7",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "TC-13 制造单位： 济南艾德诺仪器有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "ocr_context": "TC-13 制造单位： 济南艾德诺仪器有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "retrieval_text": "泰昌 testing_capacity 第6页图片。TC-13 制造单位： 济南艾德诺仪器有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:6",
+        "bbox_anchor": [
+          186,
+          604,
+          379,
+          744
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p6_094_ecd010ad",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/电子拉力试验机_e82a9b/extract/images/3a41b9098ac831a73779d9d86ded1840e6b35d63701b7a085ecb18ed42734878.jpg",
+      "asset_sha256": "a3714417df3d77bcf924b7f7b44b26df610c2e18a6c6f145bd17ad285f96fab6",
+      "page_idx": 5,
+      "page_no": 6,
+      "bbox": [
+        660,
+        795,
+        742,
+        858
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111652_e82a9b18",
+      "batch_id": "3fbd04d6-077e-4225-9f94-a971d3ab27a7",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "签发日期： Date of issue: 2026年05月26日 电话(Te1):0755-27407284 邮箱(Mail) :szgljl@126.com 地址：深圳市光明区公明街道兴发路170号华澳时光全球美酒星链云仓产",
+      "ocr_context": "签发日期： Date of issue: 2026年05月26日 电话(Te1):0755-27407284 邮箱(Mail) :szgljl@126.com 地址：深圳市光明区公明街道兴发路170号华澳时光全球美酒星链云仓产",
+      "retrieval_text": "泰昌 testing_capacity 第6页图片。签发日期： Date of issue: 2026年05月26日 电话(Te1):0755-27407284 邮箱(Mail) :szgljl@126.com 地址：深圳市光明区公明街道兴发路170号华澳时光全球美酒星链云仓产",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:6",
+        "bbox_anchor": [
+          660,
+          795,
+          742,
+          858
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    }
+  ]
+}

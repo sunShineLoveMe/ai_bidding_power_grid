@@ -1,8 +1,11 @@
-import { Drawer, Input, Button, List, Typography, Image, message, Select, Space, Tag } from 'antd';
+import { Drawer, Input, Button, List, Typography, message } from 'antd';
 import { SearchOutlined, SendOutlined } from '@ant-design/icons';
-import { useEffect, useMemo, useState } from 'react';
+import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { AuthenticatedImage } from '../../components/common/AuthenticatedImage';
 import { BrandMark } from '../../components/common/BrandMark';
+import { getAuthToken } from '../../stores/authStore';
+import { displayAssetTitle } from '../../utils/assetDisplay';
 
 const { Text } = Typography;
 
@@ -14,23 +17,34 @@ interface ImageMeta {
 interface SourceContext {
   content?: string;
   similarity?: number;
+  retrieval_source?: string;
   metadata?: {
     doc_type?: string;
     doc_role?: string;
     source_org?: string;
     source_url?: string;
     source_file?: string;
+    source_display_name?: string;
+    source_document_name?: string;
     category_label?: string;
     category?: string;
     tags?: string;
-    province?: string;
-    batch_no?: string;
-    package_code?: string;
-    material_category?: string;
     ingestion_batch_id?: string;
     chunk_layer?: string;
     table_name?: string;
     row_number?: number;
+    source_domain?: string;
+    source_category?: string;
+    source_category_label?: string;
+    enterprise?: string;
+    evidence_type?: string;
+    evidence_type_label?: string;
+    target_library?: string;
+    target_library_label?: string;
+    report_no?: string;
+    specification_model?: string;
+    retrieval_source?: string;
+    source_section?: string;
   };
 }
 
@@ -47,6 +61,8 @@ interface KnowledgeAsset {
   applicable_sections?: string[];
   applicable_volumes?: string[];
   tags?: string[];
+  metadata?: Record<string, unknown>;
+  specs?: Record<string, unknown>;
   similarity?: number;
 }
 
@@ -61,35 +77,7 @@ interface Message {
   followupLoading?: boolean;
   streaming?: boolean;
   status?: string;
-  clarification?: ClarificationPayload;
 }
-
-interface KnowledgeScope {
-  seed_corpus: string;
-  ingestion_batch_id?: string;
-  province?: string;
-  batch_no?: string;
-  package_code?: string;
-  material_category?: string;
-  material_categories?: string[];
-  doc_roles?: string[];
-  documents?: number;
-  label?: string;
-}
-
-interface ClarificationPayload {
-  message: string;
-  scopes?: KnowledgeScope[];
-}
-
-type ScenarioValue = 'qa' | 'writing' | 'compliance' | 'table';
-
-const scenarioOptions: { label: string; value: ScenarioValue; description: string }[] = [
-  { label: '问答', value: 'qa', description: '适合查条款、要求、说明位置' },
-  { label: '写作参考', value: 'writing', description: '命中后回溯较完整 parent 上下文' },
-  { label: '合规风险', value: 'compliance', description: '适合查否决、废标、实质性响应' },
-  { label: '货物清单', value: 'table', description: '适合查物料编码、数量、交货方式' },
-];
 
 const docRoleLabel: Record<string, string> = {
   main_tender_file: '主招标文件',
@@ -105,31 +93,179 @@ const docRoleLabel: Record<string, string> = {
   self_phrase: '标准话术',
 };
 
-function sourceTitle(source: SourceContext): string {
+const evidenceTypeLabel: Record<string, string> = {
+  business_license: '基础证照',
+  certification: '资质证书',
+  inspection_report: '检验报告',
+  production_capacity: '生产制造能力',
+  testing_capacity: '试验检测能力',
+  green_low_carbon: '绿色低碳资料',
+  enterprise_evidence: '企业证明材料',
+};
+
+const categoryLabel: Record<string, string> = {
+  power_grid_tender_documents: '电网招投标资料',
+  power_grid_policy_regulations: '电网政策法规',
+  power_grid_standard_phrases: '电网标准话术',
+  '01_tender_documents': '招标文件资料',
+  '02_policy_regulations': '政策法规资料',
+  '03_standards_specs': '标准规范资料',
+  '04_standard_phrases': '标准话术资料',
+  '05_enterprise_documents': '泰昌企业资料',
+  structured_product_parameter_json: '泰昌产品结构化参数',
+};
+
+const targetLibraryLabel: Record<string, string> = {
+  knowledge_library: '知识库资料',
+  product_library: '产品库资料',
+  qualification_library: '资信库资料',
+  reference_template_library: '参考模板资料',
+};
+
+const internalNameLabel: Record<string, string> = {
+  taichang_business_license_private: '泰昌基础证照资料',
+  taichang_business_license_taichang_internal_private: '泰昌基础证照资料',
+  taichang_certification_private: '泰昌资质证书资料',
+  taichang_finance_taichang_internal_private: '泰昌财务资料',
+  taichang_green_low_carbon_private: '泰昌绿色低碳资料',
+  taichang_inspection_report_private: '泰昌检验报告资料',
+  taichang_production_capacity_private: '泰昌生产制造能力资料',
+  taichang_production_capacity_taichang_internal_private: '泰昌生产制造能力资料',
+  taichang_testing_capacity_private: '泰昌试验检测能力资料',
+  taichang_testing_capacity_taichang_internal_private: '泰昌试验检测能力资料',
+  technical_qualification_response_phrase: '技术资格响应标准话术',
+  power_grid_standards_catalog: '电网标准规范目录',
+  power_grid_section_library: '电网标书章节标准话术',
+  qualification_response_phrases: '资格响应标准话术',
+  business_response_phrases: '商务响应标准话术',
+  quality_safety_environment_phrases: '质量安全环保响应标准话术',
+  bid_document_checklist: '投标文件核查清单',
+  power_grid_rag_ingestion_notes: '电网RAG资料入库说明',
+};
+
+function basenameWithoutExt(value?: string): string {
+  const name = (value || '').split('/').pop() || value || '';
+  return name
+    .replace(/\.url\.md$/i, '')
+    .replace(/\.(md|pdf|docx?|xlsx?|csv|txt)$/i, '')
+    .replace(/_[0-9a-f]{6,}$/i, '')
+    .replace(/^\d+[._-]?/, '')
+    .trim();
+}
+
+function containsChinese(value?: string): boolean {
+  return /[\u4e00-\u9fff]/.test(value || '');
+}
+
+function isInternalName(value?: string): boolean {
+  return /[a-zA-Z]+_[a-zA-Z_]+/.test(value || '');
+}
+
+function displayLabel(value?: string): string {
+  const raw = value || '';
+  const base = basenameWithoutExt(raw);
+  const lowered = base.toLowerCase();
+  if (internalNameLabel[lowered]) return internalNameLabel[lowered];
+  if (categoryLabel[base]) return categoryLabel[base];
+  if (evidenceTypeLabel[base]) return evidenceTypeLabel[base];
+  if (targetLibraryLabel[base]) return targetLibraryLabel[base];
+  if (containsChinese(base) && !isInternalName(base)) return base;
+  return '';
+}
+
+function sourcePrimaryName(source: SourceContext): string {
   const meta = source.metadata || {};
-  const sourceName = meta.source_org || meta.source_file || meta.category_label || meta.category || '企业知识库';
-  return sourceName.split('/').pop() || sourceName;
+  return (
+    displayLabel(meta.source_display_name) ||
+    displayLabel(meta.source_document_name) ||
+    displayLabel(meta.source_file) ||
+    displayLabel(meta.source_org) ||
+    displayLabel(meta.category_label) ||
+    displayLabel(meta.category) ||
+    displayLabel(meta.source_category) ||
+    displayLabel(meta.target_library) ||
+    displayLabel(meta.evidence_type) ||
+    '企业知识库资料'
+  );
+}
+
+function sourceTitle(source: SourceContext): string {
+  return sourcePrimaryName(source);
 }
 
 function sourceDescription(source: SourceContext): string {
   const meta = source.metadata || {};
-  return [
-    meta.province,
-    meta.package_code,
-    meta.material_category,
-    meta.doc_role ? docRoleLabel[meta.doc_role] || meta.doc_role : meta.doc_type,
+  const labels = [
+    meta.enterprise || '泰昌',
+    meta.evidence_type_label || (meta.evidence_type ? evidenceTypeLabel[meta.evidence_type] || displayLabel(meta.evidence_type) : undefined),
+    displayLabel(meta.category_label || meta.category || meta.source_category_label || meta.source_category),
+    meta.target_library_label || (meta.target_library ? targetLibraryLabel[meta.target_library] || displayLabel(meta.target_library) : undefined),
+    meta.doc_role ? docRoleLabel[meta.doc_role] || undefined : meta.doc_type,
     meta.table_name ? `${meta.table_name}${meta.row_number ? ` 第${meta.row_number}行` : ''}` : '',
-    meta.tags,
-  ].filter(Boolean).join(' · ') || '知识片段';
+  ].filter(Boolean) as string[];
+  return [...new Set(labels)].join(' · ') || '知识片段';
 }
 
 function previewText(content?: string): string {
-  return (content || '').replace(/\s+/g, ' ').trim().slice(0, 120);
+  return sanitizeVisibleText(content).replace(/\s+/g, ' ').trim().slice(0, 120);
+}
+
+function sanitizeVisibleText(content?: string): string {
+  return (content || '')
+    .replace(/(?:parsed_outputs|rag_seed)\/[^\s)\]，。；;]+/gi, '客户原始资料')
+    .replace(/\/api\/knowledge\/assets\/[A-Za-z0-9-]+\/file(?:\?[^\s)]*)?/gi, '')
+    .replace(/taichang_certification_[A-Za-z0-9_]+/gi, '泰昌资质证书资料')
+    .replace(/taichang_production_capacity_[A-Za-z0-9_]+/gi, '泰昌生产制造能力资料')
+    .replace(/taichang_testing_capacity_[A-Za-z0-9_]+/gi, '泰昌试验检测能力资料')
+    .replace(/\bproduction_capacity\b/g, '生产制造能力')
+    .replace(/\btesting_capacity\b/g, '试验检测能力')
+    .replace(/\bcertification\b/g, '资质证书');
+}
+
+function sourceKey(source: SourceContext): string {
+  const meta = source.metadata || {};
+  const sourceName =
+    sourcePrimaryName(source) ||
+    meta.source_display_name ||
+    meta.source_document_name ||
+    meta.source_file ||
+    meta.source_org ||
+    meta.category_label ||
+    meta.category ||
+    '';
+  if (
+    source.retrieval_source === 'structured_product_parameter_json' ||
+    meta.retrieval_source === 'structured_product_parameter_json' ||
+    meta.category_label === '泰昌产品结构化参数'
+  ) {
+    return [
+      sourceName,
+      meta.report_no || '',
+      meta.specification_model || '',
+    ].join('|');
+  }
+  return [
+    sourceName,
+  ].join('|');
+}
+
+function displaySources(sources?: SourceContext[]): SourceContext[] {
+  const byKey = new Map<string, SourceContext>();
+  for (const source of sources || []) {
+    const key = sourceKey(source);
+    const current = byKey.get(key);
+    if (!current || (source.similarity || 0) > (current.similarity || 0)) {
+      byKey.set(key, source);
+    }
+  }
+  return [...byKey.values()]
+    .sort((a, b) => (b.similarity || 0) - (a.similarity || 0))
+    .slice(0, 5);
 }
 
 function assetImageMarkdown(asset: KnowledgeAsset, index: number): string {
   if (!asset.id) return '';
-  const alt = (asset.title || `图片资产${index}`).replace(/[\[\]()]/g, '');
+  const alt = (displayAssetTitle(asset) || `图片资产${index}`).replace(/[\[\]()]/g, '');
   return `\n\n![${alt}](/api/knowledge/assets/${asset.id}/file?variant=thumb)\n\n`;
 }
 
@@ -225,21 +361,6 @@ function buildFollowupQuestions(question: string, answer: string, assets?: Knowl
   return uniqueQuestions(candidates);
 }
 
-function scopeLabel(scope: KnowledgeScope): string {
-  return scope.label || [scope.province, scope.batch_no, scope.package_code, scope.material_category].filter(Boolean).join(' / ') || '客户资料';
-}
-
-function scopeMetadata(scope?: KnowledgeScope | null): Record<string, string> | undefined {
-  if (!scope) return undefined;
-  const metadata: Record<string, string> = {
-    seed_corpus: scope.seed_corpus || 'power_grid_customer_corpus',
-  };
-  if (scope.ingestion_batch_id) metadata.ingestion_batch_id = scope.ingestion_batch_id;
-  if (scope.province) metadata.province = scope.province;
-  if (scope.package_code) metadata.package_code = scope.package_code;
-  return metadata;
-}
-
 export function KnowledgeSearchDrawer({
   visible,
   onClose,
@@ -250,30 +371,14 @@ export function KnowledgeSearchDrawer({
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
-  const [scenario, setScenario] = useState<ScenarioValue>('qa');
-  const [scopeKey, setScopeKey] = useState('auto');
-  const [scopes, setScopes] = useState<KnowledgeScope[]>([]);
-
-  useEffect(() => {
-    if (!visible) return;
-    fetch('/api/knowledge/scopes')
-      .then((res) => (res.ok ? res.json() : Promise.reject(new Error('加载知识库范围失败'))))
-      .then((data) => setScopes(Array.isArray(data.customer_scopes) ? data.customer_scopes : []))
-      .catch(() => setScopes([]));
-  }, [visible]);
-
-  const selectedScope = useMemo(() => {
-    if (scopeKey === 'auto') return null;
-    return scopes[Number(scopeKey)] || null;
-  }, [scopeKey, scopes]);
 
   const guideQuestions = [
-    '电网设备采购项目投标文件需要重点准备哪些资格材料？',
-    '技术规范书响应和技术偏差表应该如何组织？',
-    '根据现有知识库，电网投标最容易出现哪些废标或否决风险？',
+    '泰昌的营业执照材料能证明哪些企业基础信息？',
+    '泰昌有哪些资质证书和体系认证材料可用于资信响应？',
+    '泰昌有哪些产品、生产和检测能力资料可以用于技术响应？',
   ];
 
-  const handleSearch = async (presetQuery?: string, overrideScope?: KnowledgeScope | null) => {
+  const handleSearch = async (presetQuery?: string) => {
     const currentQuery = (presetQuery || query).trim();
     if (!currentQuery) return;
 
@@ -290,14 +395,13 @@ export function KnowledgeSearchDrawer({
     setLoading(true);
 
     try {
+      const token = getAuthToken();
+      const authHeaders: Record<string, string> = token ? { Authorization: `Bearer ${token}` } : {};
       const res = await fetch('/api/knowledge/search/stream', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...authHeaders },
         body: JSON.stringify({
           query: userMessage.content,
-          scenario,
-          return_parent: scenario === 'writing',
-          metadata_filter: scopeMetadata(overrideScope === undefined ? selectedScope : overrideScope),
         }),
       });
 
@@ -335,13 +439,13 @@ export function KnowledgeSearchDrawer({
           updateAssistant((msg) => ({
             ...msg,
             status: '',
-            clarification: event.clarification,
+            content: event.clarification?.message || msg.content,
           }));
           return;
         }
         if (event.type === 'retrieved') {
           retrievedAssets = event.assets || [];
-          retrievedSources = event.raw_contexts || [];
+          retrievedSources = displaySources(event.raw_contexts || []);
           updateAssistant((msg) => ({
             ...msg,
             status: `已召回 ${event.contexts_count || 0} 条资料、${event.assets_count || 0} 个图片资产，正在生成回答...`,
@@ -402,7 +506,7 @@ export function KnowledgeSearchDrawer({
         try {
           const followupRes = await fetch('/api/knowledge/followups', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', ...authHeaders },
             body: JSON.stringify({
               question: userMessage.content,
               answer: streamedAnswer,
@@ -457,41 +561,14 @@ export function KnowledgeSearchDrawer({
       width={720}
       onClose={onClose}
       open={visible}
-      bodyStyle={{ display: 'flex', flexDirection: 'column', padding: 0 }}
+      styles={{ body: { display: 'flex', flexDirection: 'column', padding: 0 } }}
     >
-      <div className="border-b border-slate-100 bg-white px-4 py-3">
-        <Space wrap size={[8, 8]}>
-          <Select
-            value={scopeKey}
-            style={{ width: 260 }}
-            onChange={setScopeKey}
-            options={[
-              { label: '自动判断资料范围', value: 'auto' },
-              ...scopes.map((scope, index) => ({
-                label: scopeLabel(scope),
-                value: String(index),
-              })),
-            ]}
-          />
-          <Select
-            value={scenario}
-            style={{ width: 132 }}
-            onChange={setScenario}
-            options={scenarioOptions.map((item) => ({ label: item.label, value: item.value }))}
-          />
-          {selectedScope && (
-            <Tag color="blue" className="m-0 max-w-[280px] truncate py-1">
-              {scopeLabel(selectedScope)}
-            </Tag>
-          )}
-        </Space>
-      </div>
       <div className="flex-1 overflow-y-auto bg-slate-50 p-4">
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-slate-400">
             <SearchOutlined style={{ fontSize: 48, marginBottom: 16 }} />
-            <Text type="secondary">试着问我关于电网招标文件、技术规范书、标准话术和投标章节的问题</Text>
-            <Text type="secondary" className="mt-2 text-xs">可检索企业资料、产品图片、资质样张和电网行业知识</Text>
+            <Text type="secondary">试着问我关于泰昌企业资信、产品资料和标书材料的问题</Text>
+            <Text type="secondary" className="mt-2 text-xs">默认以河北泰昌电力器材科技有限公司为试点企业</Text>
             <div className="mt-6 w-full space-y-3">
               {guideQuestions.map((question) => (
                 <button
@@ -536,7 +613,7 @@ export function KnowledgeSearchDrawer({
                             <h3 className="mb-2 mt-3 text-sm font-bold text-slate-800">{children}</h3>
                           ),
                           p: ({ children }) => (
-                            <p className="my-2 whitespace-pre-wrap text-[15px] leading-7">{children}</p>
+                            <div className="my-2 whitespace-pre-wrap text-[15px] leading-7">{children}</div>
                           ),
                           ul: ({ children }) => (
                             <ul className="my-2 space-y-1 pl-5">{children}</ul>
@@ -564,11 +641,10 @@ export function KnowledgeSearchDrawer({
                           ),
                           img: ({ alt, src }) => (
                             <span className="my-3 block">
-                              <Image
+                              <AuthenticatedImage
                                 src={src || ''}
                                 alt={alt || '知识库图片'}
                                 className="max-h-64 rounded-xl border border-slate-200 object-contain"
-                                preview={{ src }}
                               />
                               {alt && (
                                 <span className="mt-1 block text-center text-xs font-semibold text-slate-400">
@@ -579,39 +655,13 @@ export function KnowledgeSearchDrawer({
                           ),
                         }}
                       >
-                        {msg.role === 'assistant' ? withInlineAssetImages(msg.content, msg.assets) : msg.content}
+                        {msg.role === 'assistant'
+                          ? withInlineAssetImages(sanitizeVisibleText(msg.content), msg.assets)
+                          : msg.content}
                       </ReactMarkdown>
                     ) : null}
                     {msg.streaming && msg.content && <span className="ml-1 inline-block h-4 w-1 animate-pulse rounded bg-blue-500 align-middle" />}
                   </div>
-
-                  {msg.role === 'assistant' && msg.clarification?.scopes?.length ? (
-                    <div className="mt-4 rounded-xl border border-amber-100 bg-amber-50 p-3">
-                      <div className="mb-2 text-xs font-bold text-amber-800">请选择要查询的资料范围</div>
-                      <div className="grid gap-2">
-                        {msg.clarification.scopes.slice(0, 6).map((scope) => (
-                          <button
-                            key={`${scope.ingestion_batch_id}-${scope.province}-${scope.package_code}-${scope.material_category}`}
-                            type="button"
-                            disabled={loading}
-                            onClick={() => {
-                              const matchedIndex = scopes.findIndex((item) =>
-                                item.ingestion_batch_id === scope.ingestion_batch_id
-                                && item.province === scope.province
-                                && item.package_code === scope.package_code
-                                && item.material_category === scope.material_category
-                              );
-                              if (matchedIndex >= 0) setScopeKey(String(matchedIndex));
-                              handleSearch(msg.sourceQuery || '', scope);
-                            }}
-                            className="rounded-lg border border-amber-200 bg-white px-3 py-2 text-left text-xs font-bold text-amber-900 hover:border-amber-400 hover:bg-amber-100 disabled:cursor-not-allowed disabled:opacity-60"
-                          >
-                            {scopeLabel(scope)}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  ) : null}
 
                   {msg.role === 'assistant' && !msg.streaming && msg.followups && msg.followups.length > 0 && (
                     <div className="mt-4 border-t border-slate-100 pt-4">
@@ -643,7 +693,7 @@ export function KnowledgeSearchDrawer({
                     <div className="mt-4 border-t border-slate-100 pt-4">
                       <div className="mb-2 text-xs font-bold text-slate-500">参考资料来源</div>
                       <div className="space-y-2">
-                        {msg.sources.slice(0, 5).map((source, sourceIndex) => {
+                        {displaySources(msg.sources).map((source, sourceIndex) => {
                           const meta = source.metadata || {};
                           return (
                             <div key={`${sourceTitle(source)}-${sourceIndex}`} className="rounded-xl border border-slate-100 bg-slate-50 p-3">
@@ -654,12 +704,6 @@ export function KnowledgeSearchDrawer({
                                   </div>
                                   <div className="mt-1 text-xs font-semibold text-slate-400">
                                     {sourceDescription(source)}
-                                  </div>
-                                  <div className="mt-2 flex flex-wrap gap-1">
-                                    {meta.doc_role && <Tag className="m-0" color="geekblue">{docRoleLabel[meta.doc_role] || meta.doc_role}</Tag>}
-                                    {meta.province && <Tag className="m-0" color="cyan">{meta.province}</Tag>}
-                                    {meta.package_code && <Tag className="m-0" color="purple">{meta.package_code}</Tag>}
-                                    {meta.material_category && <Tag className="m-0" color="green">{meta.material_category}</Tag>}
                                   </div>
                                 </div>
                                 {typeof source.similarity === 'number' && (

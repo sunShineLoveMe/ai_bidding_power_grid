@@ -1,0 +1,1439 @@
+[
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "设备采购合同"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                379,
+                104,
+                645,
+                142
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "购货单位：河北泰昌电力器材科技有限公司 以下简称“甲方”"
+                    }
+                ]
+            },
+            "bbox": [
+                201,
+                174,
+                781,
+                193
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "供货单位：江苏欣荣科技发展有限公司以下简称“乙方”"
+                    }
+                ]
+            },
+            "bbox": [
+                201,
+                222,
+                712,
+                241
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "甲方拟从乙方购买产品，乙方同意出售该产品。为了增强甲乙双方的责任感，确保双方实现各自的经济目的，经甲乙双方充分协商，特订立本合同，以便共同遵守。"
+                    }
+                ]
+            },
+            "bbox": [
+                161,
+                269,
+                863,
+                335
+            ]
+        },
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/8b56187a3b907e7d5719be9c4749c0b4b57a88a4d64e101a620b40eee764200b.jpg"
+                },
+                "table_caption": [
+                    {
+                        "type": "text",
+                        "content": "第一条、产品的描述及价款："
+                    }
+                ],
+                "table_footnote": [],
+                "html": "<table><tr><td>产品名称</td><td>规格型号</td><td>单位</td><td>数量</td><td>单价(元)</td><td>总金额</td><td>备注</td></tr><tr><td>Cpvc63 三层复合管材挤出生产线</td><td>CPVC63</td><td>条</td><td>1</td><td>218000</td><td>218000</td><td></td></tr><tr><td>Cpvc110 三层复合管材挤出生产线</td><td>CPVC110</td><td>条</td><td>1</td><td>356000</td><td>356000</td><td></td></tr><tr><td colspan=\"3\">合计金额:574000.00</td><td colspan=\"4\">大写:伍拾柒万肆仟元整</td></tr></table>",
+                "table_type": "complex_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                161,
+                359,
+                951,
+                524
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第二条、交货："
+                    }
+                ]
+            },
+            "bbox": [
+                201,
+                527,
+                334,
+                546
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "乙方应当按照以下约定交货："
+                    }
+                ]
+            },
+            "bbox": [
+                201,
+                552,
+                457,
+                570
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "1、交货期限（或时间）：合同签订并收到80%定金后的3个工作日内。"
+                    }
+                ]
+            },
+            "bbox": [
+                200,
+                576,
+                823,
+                592
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2、交货地点：甲方需求地点"
+                    }
+                ]
+            },
+            "bbox": [
+                200,
+                600,
+                458,
+                615
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "3、交货单位：河北泰昌电力器材科技有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                200,
+                624,
+                598,
+                640
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "4、由乙方办理运输，运输方式：汽运；运输费用由乙方承担。"
+                    }
+                ]
+            },
+            "bbox": [
+                200,
+                646,
+                749,
+                664
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "5、产品由乙方按适合于本合同项下的正当交付的标准包装；包装费用由乙方承担；包装物不回收。"
+                    }
+                ]
+            },
+            "bbox": [
+                161,
+                670,
+                860,
+                712
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "第三条、质量条款"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                201,
+                718,
+                369,
+                736
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "1、质量和技术标准：以德国华达工业标准为准，若甲方想请国内计量局或其它第三方检测机构做标定，则所产生的费用由甲方承担。"
+                    }
+                ]
+            },
+            "bbox": [
+                161,
+                741,
+                860,
+                783
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2、乙方应当按照本合同的规定提供附产品合格证和原产地证（如为进口产品）及各种随产品一并供应得附件、配件、软件、工具等附随产品。在三包期内，如产品或其零部件损坏，乙方应保证零部件的供应，费用由责任方承担。"
+                    }
+                ]
+            },
+            "bbox": [
+                161,
+                789,
+                860,
+                854
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第四条、安装、调试和培训"
+                    }
+                ]
+            },
+            "bbox": [
+                201,
+                860,
+                453,
+                879
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "1、乙方负责产品的安装和调试。"
+                    }
+                ]
+            },
+            "bbox": [
+                203,
+                885,
+                489,
+                903
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2、甲方应向乙方现场调试技术人员及维修人员提供方便条件，有关费用由乙方负责。甲方如邀请乙方提供非质量问题的其它技术服务，其费用另定。"
+                    }
+                ]
+            },
+            "bbox": [
+                156,
+                95,
+                855,
+                162
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "3、安装调试完毕提请甲方代表共同进行终验收。"
+                    }
+                ]
+            },
+            "bbox": [
+                196,
+                167,
+                623,
+                186
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "4、乙方应当就产品的操作和注意事项对甲方操作人员进行培训，培训地点在甲方公司内，时间为1天。各方各自承担因培训本方支出的费用。"
+                    }
+                ]
+            },
+            "bbox": [
+                154,
+                191,
+                853,
+                256
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "第五条、验收和交付"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                194,
+                262,
+                384,
+                281
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "1、双方确定，在交货后1天内由乙方组织产品的安装调试并调试完毕，安装调试完毕后乙方应立即提请甲方终验收。产品终验收在安徽柳工起重机有限公司进行，由甲乙双方派代表参加。如一方未派代表，另一方有权自行验收。验收后由双方代表在验收记录上签字或（如一方未派代表）由见证人员签字。"
+                    }
+                ]
+            },
+            "bbox": [
+                152,
+                287,
+                855,
+                378
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2、产品验收合格并经甲方确认后视为交付，乙方承担交付之前产品上存在的所有风险。"
+                    }
+                ]
+            },
+            "bbox": [
+                152,
+                382,
+                853,
+                420
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "3、产品验收包含以下标准：本合同、产品说明书、及其它双方同意的标准。"
+                    }
+                ]
+            },
+            "bbox": [
+                189,
+                429,
+                840,
+                449
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "第六条、验收异议和索赔"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                189,
+                451,
+                423,
+                470
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "1、甲方在验收中，如发现产品的品名、品牌、生产厂家、规格型号、合格证和质量不符合验收标准的，可在1工作日内向乙方提出书面异议并应妥为保管，保管期限从到达交货地点时开始计算。保管期限超过三个月的，甲方将不再承担保管的义务。"
+                    }
+                ]
+            },
+            "bbox": [
+                149,
+                476,
+                858,
+                563
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2、乙方在接到甲方书面异议后，应在2工作日内负责处理，否则，即视为默认甲方提出的异议和处理意见。"
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                571,
+                847,
+                612
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "3、双方对于验收事项存在异议的，应当友好协商，在预验收或终验收（视具体情况而定）开始协商后30日内无法达成一致意见的，如为质量问题，则任何一方均有权提交质量管理部门进行质量鉴定，费用由责任方承担。任何问题均可在协商开始后15日后依照本合同第十四条提起诉讼。"
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                619,
+                848,
+                708
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "第七条、售后服务"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                186,
+                713,
+                351,
+                731
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "乙方提供以下售后服务"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                186,
+                736,
+                391,
+                755
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "1、质量保障期为一年，质保期自甲乙双方在终验收单上签字之日起开始计算。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                760,
+                843,
+                799
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2、当设备发生故障时，乙方应在接到甲方通知后24小时内到达需方现场排除故障，如果24小时内不能排除故障恢复正常运行，乙方应给甲方提供与故障设备同样生产能力的替代设备使用，直至故障排除为止。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                808,
+                843,
+                876
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "3、乙方保证零部件、配件长期供应。"
+                    }
+                ]
+            },
+            "bbox": [
+                183,
+                879,
+                509,
+                898
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "第八条、保证条款"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                196,
+                101,
+                364,
+                118
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "1、权利保证：乙方保证供应的是全新产品并且没有侵犯任何第三方知识产权，在交付之前不存在任何权利瑕疵，没有违反中国法律法规规定，否则因此引起的第三方主张由乙方自行解决并保证甲方不因此而遭受任何损害"
+                    }
+                ]
+            },
+            "bbox": [
+                157,
+                124,
+                858,
+                190
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2、质量保证：乙方对本合同中项下的产品及其配件、附件等物品的质量承担一年的质量保修义务。但由于甲方人为、操作不当及交付后的不可抗力造成的故障服务时收取成本费。乙方对产品提供终生售后服务。"
+                    }
+                ]
+            },
+            "bbox": [
+                157,
+                196,
+                858,
+                262
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "第九条、设备软件许可"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                196,
+                268,
+                406,
+                286
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "基于本合同的签订，若设备配置中含有软件，乙方在向甲方交付相关设备硬件时，亦应同时向甲方交付相应的设备软件，许可并保证甲方在设备使用期限内无偿地、完整地使用该软件，双方不再另行签订许可协议。若设备配置中不含软件，则乙方无需提供。"
+                    }
+                ]
+            },
+            "bbox": [
+                157,
+                292,
+                858,
+                381
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第十条、价款和结算"
+                    }
+                ]
+            },
+            "bbox": [
+                196,
+                387,
+                386,
+                404
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "合同生效后一次性付清。"
+                    }
+                ]
+            },
+            "bbox": [
+                196,
+                412,
+                408,
+                429
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第十一条、其它约定事项："
+                    }
+                ]
+            },
+            "bbox": [
+                196,
+                436,
+                430,
+                453
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "本合同一式两份，供购双方各执一份。本合同未尽事宜，双方协商解决。"
+                    }
+                ]
+            },
+            "bbox": [
+                196,
+                458,
+                833,
+                476
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "供方单位：江苏欣荣科技发展有限公司地址：张家港市锦丰镇郁桥村科技创业园东侧 有"
+                    }
+                ]
+            },
+            "bbox": [
+                164,
+                506,
+                542,
+                571
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "法人代表："
+                    }
+                ]
+            },
+            "bbox": [
+                164,
+                577,
+                257,
+                595
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "委托代理人："
+                    }
+                ]
+            },
+            "bbox": [
+                164,
+                601,
+                277,
+                619
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "电话：0512-58532000"
+                    }
+                ]
+            },
+            "bbox": [
+                166,
+                625,
+                359,
+                642
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "传真："
+                    }
+                ]
+            },
+            "bbox": [
+                164,
+                649,
+                216,
+                665
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "税号：320582774680302"
+                    }
+                ]
+            },
+            "bbox": [
+                164,
+                671,
+                381,
+                689
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "开户行：市农行三兴支行"
+                    }
+                ]
+            },
+            "bbox": [
+                164,
+                696,
+                389,
+                714
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "账号：526001040003496"
+                    }
+                ]
+            },
+            "bbox": [
+                164,
+                720,
+                381,
+                737
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "邮编："
+                    }
+                ]
+            },
+            "bbox": [
+                166,
+                741,
+                216,
+                758
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "日期：2012年12月23日需方单位：河北泰昌电力器材科技有限公司单位地址：河北省保定市满城区陉阳驿工业区"
+                    }
+                ]
+            },
+            "bbox": [
+                166,
+                762,
+                393,
+                778
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                557,
+                506,
+                937,
+                571
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "法定代表人："
+                    }
+                ]
+            },
+            "bbox": [
+                557,
+                577,
+                668,
+                595
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "委托代理人："
+                    }
+                ]
+            },
+            "bbox": [
+                557,
+                601,
+                668,
+                619
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "电话：0312-7083333"
+                    }
+                ]
+            },
+            "bbox": [
+                557,
+                625,
+                742,
+                642
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "传真："
+                    }
+                ]
+            },
+            "bbox": [
+                557,
+                649,
+                608,
+                665
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "税号：130621056539515"
+                    }
+                ]
+            },
+            "bbox": [
+                557,
+                671,
+                773,
+                689
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "开户银行：中国银行满城支行"
+                    }
+                ]
+            },
+            "bbox": [
+                557,
+                696,
+                821,
+                714
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "账号：100222840234"
+                    }
+                ]
+            },
+            "bbox": [
+                557,
+                720,
+                742,
+                737
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "邮政编码："
+                    }
+                ]
+            },
+            "bbox": [
+                557,
+                744,
+                648,
+                760
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "日期：2012年12月23日"
+                    }
+                ]
+            },
+            "bbox": [
+                559,
+                768,
+                786,
+                785
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "3200121140"
+                    }
+                ]
+            },
+            "bbox": [
+                248,
+                163,
+                369,
+                193
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "江苏增镇税专用发票"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                419,
+                144,
+                613,
+                177
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/2fc8c76097baf5e7d64f6f9c081a046980ce68b7a0da87997d0eeea6fc170258.jpg"
+                },
+                "content": "增值税专用\n全国统一发票监制\n江苏\n国家税务局监制\n发票联",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                462,
+                145,
+                567,
+                247
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "No"
+                    }
+                ]
+            },
+            "bbox": [
+                647,
+                173,
+                671,
+                202
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "05280000"
+                    }
+                ]
+            },
+            "bbox": [
+                679,
+                170,
+                783,
+                200
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "05280000开票日期：2012年12月23日"
+                    }
+                ]
+            },
+            "bbox": [
+                678,
+                213,
+                850,
+                247
+            ]
+        },
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/39e6939320d32bae0812cb81aa7cb8c03635701593caf779c959c88d7004c244.jpg"
+                },
+                "table_caption": [
+                    {
+                        "type": "text",
+                        "content": "国税函[20.12] ]579号南京造币有限公司"
+                    }
+                ],
+                "table_footnote": [],
+                "html": "<table><tr><td>购货单位</td><td colspan=\"4\">名称:河北泰昌电力器材科技有限公司纳税人识别号:130621056539515地址、电话:保定市满城县方顺桥乡陉阳驿村7180808开户行及帐号:中国银行满城县支行100222840234</td><td>密码区</td><td colspan=\"3\">68/6415&lt;1+&lt;97*7/8&lt;5-509/862/2567216434-+8397&lt;5*3&lt;8070104-5*66..2*&lt;&gt;95355&lt;8&lt;&gt;9&gt;607*4/058501/7*: /6*3813694-*83**2*25/-4642</td></tr><tr><td colspan=\"2\">货物或应税劳务名称cpvc63三层复合管材挤出生产线cpvc110三层复合管材挤出生产线合计</td><td>规格型号</td><td>单位条</td><td>数量1</td><td>单价218000.00356000.00</td><td>金额180940.00295480.00¥476420.00</td><td>税率17%17%</td><td>税额37060.0060520.00¥97580.00</td></tr><tr><td colspan=\"2\">价税合计(大写)</td><td colspan=\"7\">伍拾柒万肆仟圆整(小写)¥574000.00</td></tr><tr><td>销货单位</td><td colspan=\"4\">名称:江苏欣荣科技发展有限公司纳税人识别号:320582774680302地址、电话:张家港市锦丰镇郁桥村科技创业园东侧0512-58532000开户行及帐号:市农行三兴支行526001040003496</td><td>备注</td><td colspan=\"3\"></td></tr></table>",
+                "table_type": "complex_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                177,
+                253,
+                861,
+                712
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "收款人："
+                    }
+                ]
+            },
+            "bbox": [
+                189,
+                718,
+                240,
+                738
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "复核："
+                    }
+                ]
+            },
+            "bbox": [
+                382,
+                717,
+                418,
+                737
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "开票人晁猛"
+                    }
+                ]
+            },
+            "bbox": [
+                528,
+                718,
+                591,
+                743
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/32f06090f4cfe0183a7c98edb655fb7124b585773133eb86afeb2d0563ce185c.jpg"
+                },
+                "content": "券依荣科技发展有限公司\n320582774680302\n发票专用章\n供货单位：（章）",
+                "image_caption": [
+                    {
+                        "type": "text",
+                        "content": "第三联： 发票联购货方记帐凭证"
+                    }
+                ],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                650,
+                607,
+                787,
+                747
+            ]
+        },
+        {
+            "type": "page_aside_text",
+            "content": {
+                "page_aside_text_content": [
+                    {
+                        "type": "text",
+                        "content": "。"
+                    }
+                ]
+            },
+            "bbox": [
+                118,
+                120,
+                146,
+                763
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "生产、试验设备发票查验说明文件"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                319,
+                92,
+                678,
+                114
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "致：国家电网有限公司及其所属各省公司"
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                125,
+                500,
+                144
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "鉴于国家税务总局全国增值税发票查验平台https:/inv-veri.chinatax.gov.cn/index.html查询年限5年，故我公司部分生产、试验设备发票超出查询年限而无法查询。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                153,
+                852,
+                228
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "我公司承诺所提供所有设备发票信息真实有效，无任何虚假。如有虚假愿意承担一切法律责任，特此证明。"
+                    }
+                ]
+            },
+            "bbox": [
+                146,
+                237,
+                850,
+                283
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "承诺人：河北泰昌电力器材科技有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                482,
+                315,
+                850,
+                334
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/8bd6738cf1bf07215b3e797f8053224c0bf559b34230737f612eefeff8dde5cf.jpg"
+                },
+                "content": "北泰昌电力器材科技\n1309210005674\n北泰昌电力器材科技",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                579,
+                264,
+                757,
+                393
+            ]
+        }
+    ],
+    [
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/008f1e1bbf30f9d37bbca2a73ae45fcc7e53612327ec8929ed7527c2212be7e9.jpg"
+                },
+                "content": "Interior view of a large industrial facility with heavy machinery and structural beams (no visible text or symbols)",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "natural_image",
+            "bbox": [
+                0,
+                0,
+                998,
+                998
+            ]
+        }
+    ],
+    [
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/c71111698acf6279818dd7293c59fd4f731233c64699e9abbaebf3eecdd6e17f.jpg"
+                },
+                "content": "Industrial processing facility with conveyor belt, motor, and hoses in a warehouse (no visible text or symbols)",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "natural_image",
+            "bbox": [
+                0,
+                0,
+                998,
+                998
+            ]
+        }
+    ]
+]

@@ -47,6 +47,10 @@ const workflowSteps = [
     description: '技术 / 商务 / 资格 / 报价',
   },
   {
+    title: '投标信息确认',
+    description: '项目变量 / 客户字段',
+  },
+  {
     title: '进入标书编制',
     description: '编辑并导出 Word',
   },
@@ -129,6 +133,13 @@ export function BidWorkflow({ onReady, onTaskChanged }: BidWorkflowProps): JSX.E
 
   function finishStep(index: number): void {
     setStatuses(prev => prev.map((item, itemIndex) => (itemIndex === index ? 'finish' : item)));
+  }
+
+  function updateInterpretationTaskDetail(task: { progress?: number; message?: string; metadata?: { segment_done?: number; segment_total?: number } }): void {
+    const done = task.metadata?.segment_done;
+    const total = task.metadata?.segment_total;
+    const segmentText = done !== undefined && total ? ` 分段 ${done}/${total}` : '';
+    setDetail(`${task.message || 'AI 深度解读生成中。'}${segmentText}，进度 ${task.progress ?? 0}%。`);
   }
 
   async function waitForParseIndexed(fileId: string, token: number, options?: { projectId?: string | null; supabaseFileId?: string | null }): Promise<void> {
@@ -220,8 +231,12 @@ export function BidWorkflow({ onReady, onTaskChanged }: BidWorkflowProps): JSX.E
       if (runTokenRef.current !== token) return;
       finishStep(1);
 
-      updateStep(2, 'process', '正在生成招标解读...', '正在提取项目概况、资格要求、评分标准、废标风险和关键时间节点。');
-      await generateAIInterpretation(uploadResult.projectId);
+      updateStep(2, 'process', '正在生成招标解读...', '已创建后台任务，正在提取项目概况、资格要求、评分标准、废标风险和关键时间节点。');
+      await generateAIInterpretation(uploadResult.projectId, {
+        onStatus: task => {
+          if (runTokenRef.current === token) updateInterpretationTaskDetail(task);
+        },
+      });
       if (runTokenRef.current !== token) return;
       finishStep(2);
 
@@ -232,10 +247,12 @@ export function BidWorkflow({ onReady, onTaskChanged }: BidWorkflowProps): JSX.E
       if (runTokenRef.current !== token) return;
       finishStep(3);
 
-      updateStep(4, 'finish', '分册大纲已生成，可以进入标书编制。', '后续可在标书编制工作台中按分册编辑正文、引用资料并导出 Word。');
+      finishStep(4);
+      updateStep(5, 'finish', '分册大纲已生成，请先确认投标关键信息。', '系统将进入投标信息确认页，客户确认报价、保证金、授权签章等字段后再进入正文编辑。');
       clearActiveWorkflow();
       message.success('招标解读和分册大纲已生成');
       onTaskChanged?.();
+      navigate(`/prefill?projectId=${uploadResult.projectId}&fromWorkflow=1`);
     } catch (error) {
       const reason = error instanceof Error ? error.message : String(error);
       setCurrent(activeStepRef.current);
@@ -256,7 +273,7 @@ export function BidWorkflow({ onReady, onTaskChanged }: BidWorkflowProps): JSX.E
     setBusy(true);
     setCurrent(1);
     activeStepRef.current = 1;
-    setStatuses(['finish', 'process', 'wait', 'wait', 'wait']);
+    setStatuses(['finish', 'process', 'wait', 'wait', 'wait', 'wait']);
     setSummary('正在恢复未完成的招标文件流程...');
     setDetail(`检测到未完成任务：${active.fileName}。系统将继续解析、解读和生成分册大纲。`);
 
@@ -299,7 +316,7 @@ export function BidWorkflow({ onReady, onTaskChanged }: BidWorkflowProps): JSX.E
         finishStep(1);
         finishStep(2);
         finishStep(3);
-        updateStep(4, 'finish', '检测到已完成的标书项目，可直接进入编制。', '点击右侧「进入标书编制」继续完善内容并导出 Word。');
+        updateStep(4, 'finish', '检测到已完成的分册大纲，请确认投标关键信息。', '点击右侧「进入投标确认」收口客户字段后进入正文编辑。');
         clearActiveWorkflow();
         onTaskChanged?.();
         setBusy(false);
@@ -320,8 +337,12 @@ export function BidWorkflow({ onReady, onTaskChanged }: BidWorkflowProps): JSX.E
       finishStep(1);
 
       if (!hasInterpretation) {
-        updateStep(2, 'process', '正在生成招标解读...', '解析已完成，继续提取项目概况、资格要求、评分标准和风险项。');
-        await generateAIInterpretation(active.projectId);
+        updateStep(2, 'process', '正在生成招标解读...', '已创建后台任务，继续提取项目概况、资格要求、评分标准和风险项。');
+        await generateAIInterpretation(active.projectId, {
+          onStatus: task => {
+            if (runTokenRef.current === token) updateInterpretationTaskDetail(task);
+          },
+        });
         if (runTokenRef.current !== token) return;
       }
       finishStep(2);
@@ -335,10 +356,12 @@ export function BidWorkflow({ onReady, onTaskChanged }: BidWorkflowProps): JSX.E
       }
       finishStep(3);
 
-      updateStep(4, 'finish', '分册大纲已生成，可以进入标书编制。', '后续可继续按分册编辑章节正文并导出 Word。');
+      finishStep(4);
+      updateStep(5, 'finish', '分册大纲已生成，请先确认投标关键信息。', '系统将进入投标信息确认页，客户确认报价、保证金、授权签章等字段后再进入正文编辑。');
       clearActiveWorkflow();
       onTaskChanged?.();
       message.success('已恢复并完成招标解读和分册大纲生成');
+      navigate(`/prefill?projectId=${active.projectId}&fromWorkflow=1`);
     } catch (error) {
       const reason = error instanceof Error ? error.message : String(error);
       // 如果是"项目不存在"或"分析数据不存在"类错误，说明 localStorage 数据已失效
@@ -375,14 +398,15 @@ export function BidWorkflow({ onReady, onTaskChanged }: BidWorkflowProps): JSX.E
 
   const completedCount = statuses.filter(status => status === 'finish').length;
   const progressPercent = Math.round((completedCount / workflowSteps.length) * 100);
-  const outlineReady = statuses[3] === 'finish' || progressPercent === 100;
+  const outlineReady = statuses[3] === 'finish' || statuses[4] === 'finish' || progressPercent === 100;
+  const confirmationReady = !!projectId && outlineReady;
   const interpretationLabel = current <= 1
     ? '查看解析结果'
     : busy && current === 2
       ? '查看生成中的解读'
       : '查看招标解读';
   const interpretationDisabled = !projectId;
-  const editorDisabled = !projectId || !outlineReady;
+  const editorDisabled = !projectId || statuses[5] !== 'finish';
 
   return (
     <section className="panel-card">
@@ -452,8 +476,16 @@ export function BidWorkflow({ onReady, onTaskChanged }: BidWorkflowProps): JSX.E
 
         <div className="flex flex-col justify-center gap-3 rounded-2xl border border-blue-100 bg-blue-50 px-4 py-4">
           <Button
-            type={editorDisabled ? 'default' : 'primary'}
+            type={confirmationReady ? 'primary' : 'default'}
             icon={<SquarePen size={16} />}
+            disabled={!confirmationReady}
+            onClick={() => {
+              if (projectId) navigate(`/prefill?projectId=${projectId}&fromWorkflow=1`);
+            }}
+          >
+            进入投标确认
+          </Button>
+          <Button
             disabled={editorDisabled}
             onClick={() => {
               if (projectId) window.location.href = `/bid-editor?projectId=${projectId}`;

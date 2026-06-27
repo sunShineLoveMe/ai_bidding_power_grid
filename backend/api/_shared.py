@@ -61,7 +61,7 @@ DOCX_VOLUME_IMAGE_LIMITS: dict[str, int] = {
     "other": int(os.getenv("DOCX_OTHER_SECTION_IMAGE_LIMIT", "1")),
     "price": 0,
 }
-DOCX_TOTAL_ASSET_IMAGE_LIMIT: int = int(os.getenv("DOCX_TOTAL_ASSET_IMAGE_LIMIT", "36"))
+DOCX_TOTAL_ASSET_IMAGE_LIMIT: int = int(os.getenv("DOCX_TOTAL_ASSET_IMAGE_LIMIT", "24"))
 
 
 __all__ = [

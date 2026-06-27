@@ -1,0 +1,82 @@
+{
+  "run_id": "run_20260626_aliyun_cert_negative_filter_hotfix",
+  "generated_at": "2026-06-26T02:52:03.647245+00:00",
+  "status": "pass",
+  "steps": [
+    {
+      "name": "api_ready",
+      "status": "pass",
+      "duration_ms": 2223,
+      "detail": "http=200; status=ok; failed_checks=[]",
+      "artifact": null
+    },
+    {
+      "name": "rag_unit_tests",
+      "status": "pass",
+      "duration_ms": 912,
+      "detail": "exit_code=0",
+      "artifact": "docs/rag/runs/run_20260626_aliyun_cert_negative_filter_hotfix_pytest.log"
+    },
+    {
+      "name": "incremental_regression_gate",
+      "status": "pass",
+      "duration_ms": 60637,
+      "detail": "exit_code=0",
+      "artifact": "docs/rag/runs/run_20260626_aliyun_cert_negative_filter_hotfix_incremental_gate.log"
+    },
+    {
+      "name": "stream_sample",
+      "status": "pass",
+      "duration_ms": 17224,
+      "detail": "done=True; contexts=3; assets=6; images=6; error=None",
+      "artifact": "docs/rag/runs/run_20260626_aliyun_cert_negative_filter_hotfix_stream.jsonl"
+    }
+  ],
+  "ready": {
+    "checks": {
+      "celery": {
+        "status": "ok",
+        "workers": 2
+      },
+      "database": {
+        "checks": {
+          "match_knowledge_assets": true,
+          "match_knowledge_chunks": true,
+          "vector": true
+        },
+        "status": "ok"
+      },
+      "model_config": {
+        "optional": {
+          "mineru_api_token": true
+        },
+        "required": {
+          "dashscope_api_key": true,
+          "deepseek_api_key": true
+        },
+        "status": "ok"
+      },
+      "redis": {
+        "host": "127.0.0.1",
+        "port": 16379,
+        "status": "ok"
+      },
+      "storage": {
+        "provider": "local",
+        "root": "storage",
+        "status": "ok"
+      }
+    },
+    "duration_ms": 2209,
+    "status": "ok"
+  },
+  "stream_summary": {
+    "done": true,
+    "error": null,
+    "contexts_count": 3,
+    "assets_count": 6,
+    "images_count": 6,
+    "chunks": 535
+  },
+  "gate_summary_path": "docs/rag/runs/run_20260626_aliyun_cert_negative_filter_hotfix_incremental_summary.md"
+}

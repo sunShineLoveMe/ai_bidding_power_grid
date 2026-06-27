@@ -1,0 +1,167 @@
+[
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "中标通知书"
+                    }
+                ],
+                "level": 2
+            },
+            "bbox": [
+                433,
+                89,
+                563,
+                110
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "河北泰昌电力器材科技有限公司："
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                168,
+                450,
+                186
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "经依法招标，确定你公司为国网天津市电力公司2022年第二次配网物资协议库存招标采购（招标编号：0322AB），157-保护管（CPVC和MPP）包2_电缆保护管MPP和CPVC下表所列事项采购货物中标人。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                196,
+                848,
+                248
+            ]
+        },
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/fb9c27c83ee8795a5ca1bc660c247e6238e6f36e13b7e6e9817720f0b9ee114b.jpg"
+                },
+                "table_caption": [
+                    {
+                        "type": "text",
+                        "content": "中标事项表"
+                    }
+                ],
+                "table_footnote": [],
+                "html": "<table><tr><td>项目单位</td><td>项目名称</td><td>货物名称</td><td>单位</td><td>数量</td><td>含税总价(万元)</td><td>总部采购申请号</td></tr><tr><td>国网天津市电力公司</td><td></td><td>电缆保护管</td><td>米</td><td>6749.0</td><td>8.053447</td><td>400208312800050</td></tr><tr><td>国网天津市电力公司</td><td></td><td>电缆保护管</td><td>米</td><td>1125.0</td><td>21.250215</td><td>400208312800090</td></tr><tr><td>国网天津市电力公司</td><td></td><td>电缆保护管</td><td>米</td><td>900.0</td><td>21.371238</td><td>400208312800080</td></tr><tr><td>国网天津市电力公司</td><td></td><td>电缆保护管</td><td>米</td><td>11248.0</td><td>144.235804</td><td>400208312800070</td></tr><tr><td>国网天津市电力公司</td><td></td><td>电缆保护管</td><td>米</td><td>1249.0</td><td>7.381465</td><td>400208312800010</td></tr><tr><td>国网天津市电力公司</td><td></td><td>电缆保护管</td><td>米</td><td>17097.0</td><td>259.829435</td><td>400208312800020</td></tr><tr><td>国网天津市电力公司</td><td></td><td>电缆保护管</td><td>米</td><td>6749.0</td><td>25.639856</td><td>400208312800060</td></tr><tr><td>国网天津市电力公司</td><td></td><td>电缆保护管</td><td>米</td><td>5062.0</td><td>136.429151</td><td>400208312800030</td></tr><tr><td>国网天津市电力公司</td><td></td><td>电缆保护管</td><td>米</td><td>4499.0</td><td>13.050294</td><td>400208312800040</td></tr></table>",
+                "table_type": "simple_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                40,
+                286,
+                957,
+                464
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "请贵公司登录招标人招投标交易平台信息系统（https://ecp.sgcc.com.cn/ecp2.0/portal/）完成电子合同确认签署或回函确认，在《中标通知书》发出之日30天内，携带相关资料签订合同；并按照招标文件要求向招标代理机构交纳招标代理服务费。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                492,
+                848,
+                562
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "特此函告。"
+                    }
+                ]
+            },
+            "bbox": [
+                181,
+                596,
+                275,
+                614
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "招标人：国网天津市电力公司"
+                    }
+                ]
+            },
+            "bbox": [
+                616,
+                772,
+                848,
+                787
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "招标代理机构：国网天津招标有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                549,
+                137,
+                848,
+                151
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2022年11月21日"
+                    }
+                ]
+            },
+            "bbox": [
+                658,
+                237,
+                779,
+                250
+            ]
+        }
+    ]
+]

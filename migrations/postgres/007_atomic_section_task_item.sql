@@ -29,7 +29,7 @@ declare
   v_now text := to_char(now() at time zone 'utc', 'YYYY-MM-DD"T"HH24:MI:SS.US');
   v_allowed text[] := array['section_id','status','percent','chars','message','error',
                             'target_words','saved_section_id','generated_content',
-                            'chunk_seq','chunk_events','last_chunk','title'];
+                            'chunk_seq','chunk_events','last_chunk','title','metadata'];
   v_key text;
   v_next_status text;
   v_prev_status text;
@@ -80,7 +80,8 @@ begin
       'error', p_patch->>'error',
       'generated_content', coalesce(p_patch->>'generated_content', ''),
       'chunk_seq', coalesce((p_patch->>'chunk_seq')::int, 0),
-      'chunk_events', coalesce(p_patch->'chunk_events', '[]'::jsonb)
+      'chunk_events', coalesce(p_patch->'chunk_events', '[]'::jsonb),
+      'metadata', coalesce(p_patch->'metadata', '{}'::jsonb)
     );
   end if;
 

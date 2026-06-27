@@ -1,0 +1,583 @@
+[
+    [
+        {
+            "type": "header",
+            "bbox": [
+                0.045,
+                0.08,
+                0.165,
+                0.134
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "header",
+            "bbox": [
+                0.047,
+                0.134,
+                0.31,
+                0.148
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "header",
+            "bbox": [
+                0.805,
+                0.087,
+                0.921,
+                0.169
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "header",
+            "bbox": [
+                0.786,
+                0.17,
+                0.938,
+                0.18
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.359,
+                0.185,
+                0.629,
+                0.207
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.046,
+                0.209,
+                0.248,
+                0.224
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.784,
+                0.21,
+                0.938,
+                0.224
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.047,
+                0.23,
+                0.098,
+                0.244
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.047,
+                0.254,
+                0.369,
+                0.269
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.049,
+                0.277,
+                0.262,
+                0.291
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.049,
+                0.301,
+                0.282,
+                0.315
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.049,
+                0.326,
+                0.187,
+                0.339
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.049,
+                0.349,
+                0.192,
+                0.362
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.491,
+                0.254,
+                0.754,
+                0.268
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.492,
+                0.277,
+                0.661,
+                0.291
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.492,
+                0.301,
+                0.676,
+                0.315
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.492,
+                0.326,
+                0.768,
+                0.34
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.492,
+                0.349,
+                0.646,
+                0.363
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.373,
+                0.408,
+                0.606,
+                0.422
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.045,
+                0.427,
+                0.945,
+                0.515
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>序号</td><td>姓名</td><td>社会保障号码</td><td>本单位参保日期</td><td>缴费状态</td><td>个人缴费基数</td><td>本单位缴费起止年月</td></tr><tr><td>1</td><td>陈仙瑞</td><td>130602197408170641</td><td>2017-06-01</td><td>缴费</td><td>4007.00</td><td>201706至202605</td></tr><tr><td>2</td><td>晁坤琳</td><td>13060219980525061X</td><td>2017-06-01</td><td>缴费</td><td>4007.00</td><td>201706至202605</td></tr></table>"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.047,
+                0.552,
+                0.145,
+                0.567
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.095,
+                0.52,
+                0.309,
+                0.621
+            ],
+            "angle": 0,
+            "content": "深圳市满城区人力资源社会保障\n业务专用章\n1208070828576",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.67,
+                0.552,
+                0.863,
+                0.566
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.037,
+                0.75,
+                0.696,
+                0.765
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.037,
+                0.774,
+                0.562,
+                0.789
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "list",
+            "bbox": [
+                0.037,
+                0.75,
+                0.696,
+                0.789
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.711,
+                0.859,
+                0.805,
+                0.926
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "image_caption",
+            "bbox": [
+                0.585,
+                0.935,
+                0.807,
+                0.949
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.049,
+                0.134,
+                0.309,
+                0.148
+            ],
+            "text": "河北省人力资源和社会保障厅统一制式",
+            "score": 0.995
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.358,
+                0.184,
+                0.63,
+                0.208
+            ],
+            "text": "社会保险单位参保证明",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.491,
+                0.254,
+                0.598,
+                0.269
+            ],
+            "text": "社会信用代码：",
+            "score": 0.992
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.612,
+                0.256,
+                0.754,
+                0.268
+            ],
+            "text": "91130607056539515C",
+            "score": 0.975
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.492,
+                0.325,
+                0.769,
+                0.34
+            ],
+            "text": "单位参保险种：企业职工基本养老保险",
+            "score": 0.976
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.785,
+                0.169,
+                0.94,
+                0.181
+            ],
+            "text": "13062120260528028510",
+            "score": 0.994
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.048,
+                0.208,
+                0.25,
+                0.224
+            ],
+            "text": "险种：企业职工基本养老保险",
+            "score": 0.942
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.491,
+                0.299,
+                0.679,
+                0.316
+            ],
+            "text": "单位参保状态：参保缴费",
+            "score": 0.968
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.669,
+                0.55,
+                0.866,
+                0.567
+            ],
+            "text": "证明日期：2026年05月28日",
+            "score": 0.976
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.783,
+                0.207,
+                0.941,
+                0.225
+            ],
+            "text": "经办机构代码：130621",
+            "score": 0.936
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.047,
+                0.324,
+                0.191,
+                0.342
+            ],
+            "text": "参保缴费人数：2",
+            "score": 0.944
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.047,
+                0.346,
+                0.198,
+                0.365
+            ],
+            "text": "单位有无欠费：无",
+            "score": 0.969
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.49,
+                0.275,
+                0.663,
+                0.293
+            ],
+            "text": "经办机构名称：满城区",
+            "score": 0.986
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.491,
+                0.346,
+                0.649,
+                0.364
+            ],
+            "text": "单位参保类型：企业",
+            "score": 0.944
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.047,
+                0.227,
+                0.102,
+                0.246
+            ],
+            "text": "兹证明",
+            "score": 0.914
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.049,
+                0.255,
+                0.369,
+                0.268
+            ],
+            "text": "参保单位名称：河北泰昌电力器材科技有限公司",
+            "score": 0.989
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.047,
+                0.275,
+                0.265,
+                0.293
+            ],
+            "text": "单位社保编号：13052100680",
+            "score": 0.979
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.047,
+                0.298,
+                0.286,
+                0.317
+            ],
+            "text": "单位参保日期：2017年05月01日",
+            "score": 0.967
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.371,
+                0.405,
+                0.607,
+                0.423
+            ],
+            "text": "该单位参保人员明细（部分/全部）",
+            "score": 0.981
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.584,
+                0.934,
+                0.808,
+                0.949
+            ],
+            "text": "验证码：0-20116039771596801",
+            "score": 0.966
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.045,
+                0.549,
+                0.147,
+                0.568
+            ],
+            "text": "证明机",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.039,
+                0.749,
+                0.698,
+                0.765
+            ],
+            "text": "1.证明开具后6个月内有效。本证明加盖印章为电子签章，黑色签章与红色签章效力相同。",
+            "score": 0.99
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.037,
+                0.772,
+                0.565,
+                0.79
+            ],
+            "text": "2.对上述信息有疑义的，可向查询地经办机构咨询，服务电话：12333。",
+            "score": 0.975
+        }
+    ]
+]

@@ -1,0 +1,37 @@
+{
+  "parse_id": "taichang_certification_20260606_112746_0fc7c694",
+  "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色发展规划报告.pdf",
+  "evidence_type": "certification",
+  "started_at": "2026-06-06T03:27:46.334920+00:00",
+  "parser": "mineru",
+  "privacy_level": "private",
+  "target_library": "qualification_library",
+  "page_count": 18,
+  "batch_id": "725501b1-27ab-4803-a7a7-661234aead37",
+  "data_id": "taichang_certification_20260606_112746_0fc7c694",
+  "submitted_at": "2026-06-06T03:27:46.665092+00:00",
+  "parse_status": "mineru_done",
+  "mineru_result": {
+    "data_id": "taichang_certification_20260606_112746_0fc7c694",
+    "file_name": "绿色发展规划报告.pdf",
+    "state": "done",
+    "err_msg": ""
+  },
+  "artifacts": {
+    "zip_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/绿色发展规划报告_0fc7c6/mineru_result.zip",
+    "extract_dir": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/绿色发展规划报告_0fc7c6/extract",
+    "markdown_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/绿色发展规划报告_0fc7c6/extract/full.md",
+    "content_list_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/绿色发展规划报告_0fc7c6/extract/a74dae87-4d66-4613-bca4-976f8a2ef278_content_list.json",
+    "model_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/绿色发展规划报告_0fc7c6/extract/a74dae87-4d66-4613-bca4-976f8a2ef278_model.json",
+    "middle_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/绿色发展规划报告_0fc7c6/extract/layout.json",
+    "download_info": {
+      "url_host": "cdn-mineru.openxlab.org.cn",
+      "resume_enabled": true,
+      "used_curl_fallback": true,
+      "resumed_from_bytes": 0,
+      "downloaded_bytes": 0,
+      "zip_size": 1173274
+    }
+  },
+  "finished_at": "2026-06-06T03:28:03.938010+00:00"
+}

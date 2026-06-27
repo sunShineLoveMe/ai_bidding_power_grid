@@ -5,6 +5,8 @@
 > 当前推荐路线：Docker Compose 一键启动 PostgreSQL + pgvector + Redis + gunicorn 后端 + Nginx 前端，本地文件存储 + DeepSeek 写作模型 + DashScope Embedding/Rerank。
 >
 > 注意：`sql/` 目录里有部分 Supabase 历史脚本，不要直接整目录执行。新环境初始化优先使用 `migrations/postgres/` 下的 PostgreSQL schema。
+>
+> RAG 注意：早期 `rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py` 仅作为历史参考。正式电网资料、客户标书和企业资料入库必须走 `scripts/rag/ingest_power_grid_v2.py`、客户批次 manifest、父子分块、metadata 过滤和 `scripts/rag/eval_recall.py` 回归评测。
 
 ## 1. 环境要求
 
@@ -669,13 +671,23 @@ venv\Scripts\activate
 
 ### 9.1 电网 RAG 基础知识库
 
-执行电网种子库入库：
+历史入口，仅供理解早期流程，不作为正式入库命令：
 
 ```bash
 python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py
 ```
 
-脚本默认只导入 Markdown/网页型资料和自建标准话术，PDF 会跳过。原因是标准、法规、蓝皮书等 PDF 直接粗切会带来噪声和版权边界问题；如需补充 PDF，请先用 MinerU/OCR 抽取、人工确认摘要和引用边界，再显式执行：
+正式入口应使用：
+
+```bash
+python scripts/rag/ingest_power_grid_v2.py --dry-run
+python scripts/rag/ingest_power_grid_v2.py
+python scripts/rag/eval_recall.py --k 5 --save docs/rag/runs/<run>_filtered.json
+```
+
+早期脚本默认只导入 Markdown/网页型资料和自建标准话术，PDF 会跳过。原因是标准、法规、蓝皮书等 PDF 直接粗切会带来噪声和版权边界问题；如需补充 PDF，请先用 MinerU/OCR 抽取、人工确认摘要和引用边界，并在 manifest、metadata、评测记录中显式登记。
+
+以下命令仅保留为历史参考，不建议用于新批次正式入库：
 
 ```bash
 python rag_seed/power_grid_resources/_scripts/ingest_power_grid_rag_seed.py --include-pdf --category 02_policy_regulations

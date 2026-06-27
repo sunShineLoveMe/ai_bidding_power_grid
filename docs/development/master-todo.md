@@ -1,0 +1,152 @@
+# 项目任务总账
+
+更新日期：2026-06-27
+
+本文档是 AI 标书系统当前唯一的项目级任务优先级入口。其他 TODO、roadmap、专项清单和 run 记录只作为详情来源、验收记录或历史上下文，不再单独定义更高优先级。
+
+## 使用规则
+
+1. 新增 P0/P1/P2 任务必须先进入本文档，再链接到专项文档或验证记录。
+2. 专项文档可以保留细节、执行记录和领域 SOP，但任务优先级以本文档为准。
+3. 每个 P0 任务必须写清楚验收口径、关联文档和最近验证记录。
+4. 已完成任务不从本文档删除，移入“已完成关键任务”，避免后续重复发现。
+5. 涉及客户正式交付、数据安全、资料边界、正式投标文件质量的问题，默认不得低于 P0/P1。
+
+## 状态标记
+
+| 状态 | 含义 |
+| --- | --- |
+| 未开始 | 已确认要做，但尚未动手 |
+| 进行中 | 已有实现或文档，但未完全通过验收 |
+| 阻塞 | 依赖客户资料、外部环境、账号权限或人工确认 |
+| 已完成 | 已实现并有可追溯验证记录 |
+| 延后 | 暂不进入当前迭代，但保留任务 |
+
+## 合同 MVP 功能清单覆盖映射
+
+本节根据合同截图《系统功能清单 1》整理。判断口径：合同中标为 MVP 的能力，若尚未形成可演示、可验收、可追踪的最小闭环，应进入当前 P0 或 P1，不得长期沉在普通 roadmap。
+
+| 合同 MVP 功能 | 合同描述摘要 | 当前覆盖判断 | 总账处理 |
+| --- | --- | --- | --- |
+| 招标文件智能解析 | 支持 PDF/DOCX/TXT、OCR/MinerU、原生解析、抽取关键字段 | 基本覆盖，仍需按正式检查口径持续验收关键字段抽取质量 | 纳入 P0“正式检查与导出门禁收口”和 P1“企业资料与 RAG 持续门禁” |
+| 国网招标文件样本分析 | 基于甲方提供 5-10 份样本做字段、评分、资格、否决项分析 | 部分覆盖；已有辽宁、江西、山西样本链路，但需要形成合同验收报告 | 新增 P0“合同 MVP 功能覆盖验收与缺口关闭” |
+| 电力行业术语与知识库 | 建设基础版电力知识库 | 基本覆盖；已有电网种子库、RAG、召回评测 | 纳入 P1“企业资料与 RAG 持续门禁” |
+| 电力分册结构配置 | 支持技术标、商务标、资格标、报价/货物清单、附件结构 | 基本覆盖；分册基础模型完成，分册格式和分册进度仍需增强 | 纳入 P1“分册格式增强” |
+| 企业资信库 | 支持企业资质、检测报告、业绩、授权、体系认证上传管理 | 基本覆盖；云上展示与来源收敛仍在进行 | 纳入 P0“阿里云企业库展示与来源收敛” |
+| 产品库 | 支持电缆、开关柜、变压器、互感器、保护装置、通信设备等资料管理 | 部分覆盖；当前泰昌 MVP 重点是电缆保护管，通用产品分类和多品类演示需补齐 | 新增 P1“产品库多品类 MVP 展示收口” |
+| OCR 信息提取 | 支持投标人、项目概况、评分标准、资质要求、废标条款等抽取 | 基本覆盖；仍需以正式检查和样本分析报告证明 | 纳入 P0“合同 MVP 功能覆盖验收与缺口关闭” |
+| 章节大纲生成 | 生成电网投标分册大纲 | 已覆盖；仍需保持真实项目回归 | 归入已完成关键任务，后续由 P1“分册格式增强”延续 |
+| 标书正文生成 | 生成商务标、技术标、服务方案、实施计划等初稿 | 基本覆盖；正式交付仍受客户关键字段和 DOCX 观感影响 | 纳入 P0“正式投标关键字段确认闭环”和 P0“DOCX 正式交付排版升级” |
+| 合规覆盖检查 | 条款响应检查、评分项覆盖、重点风险提示 | 基本覆盖；统一到正式检查门禁，避免只看条款覆盖率 | 纳入 P0“正式检查与导出门禁收口” |
+| AI 辅助编辑 | 支持扩写、缩写、润色、风格调整 | 缺口；合同 MVP 项，当前总账不能继续放在 P2 | 新增 P0“AI 辅助编辑 MVP 最小闭环” |
+| RAG（检索增强生成） | 解读、大纲、正文、补写、问答接入企业知识库 | 基本覆盖；补写/编辑侧 RAG 与 AI 辅助编辑需打通 | 纳入 P1“企业资料与 RAG 持续门禁”和 P0“AI 辅助编辑 MVP 最小闭环” |
+| 排版调优 | 支持基础 Word 格式、目录、页码、标题层级、表格、图片 | 部分覆盖；客户反馈观感像草稿，已重新提升为 P0 | 纳入 P0“DOCX 正式交付排版升级” |
+| 多格式导出 | Word 必做；PDF 可作为转换能力，不保证复杂格式完全一致 | Word 基本覆盖，PDF 转换能力已有验证但需产品口径收口 | 新增 P1“多格式导出与 PDF 口径收口” |
+| 阿里云部署 | 单企业部署 | 进行中；单 ECS 测试部署和云上试用已开展，入口和交接仍需收口 | 纳入 P1“阿里云单 ECS 测试部署收口” |
+| 智能助手 | 悬浮智能问答助手 | 基本覆盖；需与企业库来源收敛一起验收 | 纳入 P0“阿里云企业库展示与来源收敛” |
+| 使用范围 | 单体范围，只支持一个企业标书 | 已按泰昌单企业 MVP 执行 | 归入已完成关键任务，后续不扩多租户 |
+
+## 当前 P0
+
+| 状态 | 任务 | 所属模块 | 为什么是 P0 | 验收口径 | 关联文档 |
+| --- | --- | --- | --- | --- | --- |
+| 已完成 | 合同 MVP 功能覆盖验收与缺口关闭 | 产品验收 / 项目管理 | 合同截图中的所有功能均标为 MVP；必须有统一覆盖判断和缺口关闭记录，不能只按内部技术路线图验收 | 已完成 17 项真实链路矩阵：14 项 MVP 通过、产品库多品类和 PDF 口径进入 P1、阿里云部署交接进入 P1；本轮关闭“内部模拟客户字段误通过正式导出门禁”P0，真实项目现有 8 个阻断项并仅允许草稿版导出 | `docs/development/runs/run_20260625_contract_mvp_real_acceptance.md`、`docs/development/runs/run_20260625_contract_mvp_full_http_smoke.md`、`docs/rag/runs/run_20260625_contract_mvp_acceptance_summary.md` |
+| 已完成 | 批量章节生成可靠性与 Prompt 分级瘦身 | 标书正文生成 / AI 调度 | 客户线上真实测试已出现后半段大量 `MODEL_STREAM_WALL_TIMEOUT`，体感为全文编写卡死；这是合同 MVP“标书正文生成”和客户试用转化的核心风险 | 已完成 SG-UX-001/002：完成状态与偏长/偏短质量提示拆分，新增“压缩到目标”；已完成 SG-AI-001：自定义编写要求持久化，并进入生成任务 item metadata 快照；已完成 SG-DATA-001/002/003：新增/删除章节数据一致性与撤销兜底；已完成 SG-PROMPT-001：prompt profile 分级、输入预算、真实任务 metadata 与完整 DOCX 链路回归；已完成 SG-SLOW-001：慢流提前保护、partial 草稿保存、生成槽释放和真实强制慢流/正常阈值回归；已完成 SG-CONCURRENCY-001：任务级自适应并发、慢流窗口降档和调度 metadata 可观测；已完成 SG-PARTIAL-001：partial 自动续写上限、复核态、批量续写入口和真实模型续写回归；已完成 SG-PROGRESS-001：客户视角进度、下载前草稿版确认和真实浏览器回归 | `docs/development/section-generation-adaptive-writing-plan.md`、`docs/development/runs/run_20260625_aliyun_section_generation_timeout_diagnosis.md`、`docs/development/runs/run_20260625_local_bid_editor_length_status_regression.md`、`docs/development/runs/run_20260625_local_custom_writing_persistence_regression.md`、`docs/development/runs/run_20260625_local_child_section_volume_inheritance_regression.md`、`docs/development/runs/run_20260625_local_leaf_to_container_confirmation_regression.md`、`docs/development/runs/run_20260625_local_delete_subtree_undo_regression.md`、`docs/development/runs/run_20260625_sg_prompt_001_prompt_profile_budget.md`、`docs/development/runs/run_20260625_sg_slow_001_slow_stream_protection.md`、`docs/development/runs/run_20260625_sg_concurrency_001_adaptive_scheduler.md`、`docs/development/runs/run_20260625_sg_partial_001_partial_resume.md`、`docs/development/runs/run_20260625_sg_progress_001_user_readiness.md` |
+| 已完成 | DOCX 正式交付排版升级 | DOCX / 产品交付 | Word 是客户第一眼看到的正式交付物；当前导出观感被客户认为像草稿，会直接影响信任和试用转化 | 默认 `formal_bid_standard` 的正文、标题、表格、页眉页脚、目录、封面及第六章常见表单已通过真实链路验收；签章行、偏差表语义列宽、禁止跨页拆分和字段刷新均可追溯 | `docs/development/docx-bid-export-quality-todo.md`、`docs/development/runs/run_20260625_docx_sixth_chapter_form_fidelity.md`、`AGENTS.md` |
+| 已完成 | AI 辅助编辑 MVP 最小闭环 | 编辑器 / AI 伴写 | 合同 MVP 明确要求扩写、缩写、润色、风格调整；当前若只支持人工编辑和整章生成，会被认为缺少合同功能 | 正文编辑器已支持选中文本扩写、缩写、润色、正式化；调用真实模型；结果可预览、采纳、撤销；已用真实章节完成 API 与浏览器验收 | `docs/development/runs/run_20260625_ai_edit_mvp_real_api_acceptance.md`、`docs/development/runs/run_20260625_ai_edit_mvp_ui_acceptance.md` |
+| 已完成 | 正式检查与导出门禁收口 | 正式检查 / 导出前门禁 | 不能把可下载草稿误导成正式投标文件；必须区分草稿版和正式版 | 阻断项为 0 才允许正式版导出；阻断项存在时只允许草稿版；检查项覆盖客户确认字段、条款覆盖、资料边界、正文占位、DOCX 成品质量；模拟值真实回归形成 8 个阻断项并仅创建草稿版，完整 DOCX 链路仍正常完成 | `docs/development/formal-check-todo.md`、`docs/development/runs/run_20260625_docx_sixth_chapter_form_fidelity.md`、`docs/development/runs/run_20260625_placeholder_cleanup_docx_acceptance.md`、`rules/power_grid/formal_bid_check_rules.v1.json` |
+| 已完成 | 阿里云企业库展示与来源收敛 | 企业知识库 / 云环境 | 客户正在真实试用；来源混入、分类不准、入口不稳定会直接影响可信度 | 已举一反三完成企业资料来源误解读专项收敛：查询侧按证据类型桶收敛资质证书、企业证明材料、绿色低碳、人员社保、检验报告、生产制造能力；展示层保留具体中文分类；本地修复 221 条绿色/低碳资产和 1205 条 chunk metadata。阿里云线上 `ac01c14` 后端/API 核心回归 PASS，`cfd1e4e03dd5` 前端标题补丁发布后 Chrome 页面复验 PASS；资质证书问答污染已消除，绿色低碳参考来源标题已收敛 | `docs/rag/todo.md` P1C-15、`docs/rag/runs/run_20260626_taichang_enterprise_source_scope_final_review.md`、`docs/rag/runs/run_20260626_aliyun_online_source_scope_regression.md`、`docs/rag/runs/run_20260626_taichang_enterprise_source_audit_final_summary.json` |
+| 已完成 | 正式投标关键字段确认闭环 | 投标确认 / 正式交付 | 报价、保证金、授权代表、签署日期等字段不能由模型编造，但缺失会阻断正式交付 | 前导确认页、正式检查、导出提示使用同一缺口来源；模拟占位可用于测试正文，但带“内部测试”等标记的值会重新进入正式缺口并阻断正式版 | `docs/rag/todo.md` P4-11、`docs/development/formal-check-todo.md`、`docs/development/docx-bid-export-quality-todo.md`、`docs/development/runs/run_20260625_docx_sixth_chapter_form_fidelity.md` |
+| 已完成 | 项目任务总账收口 | 项目管理 / 工程治理 | 多个 TODO 分散导致优先级遗忘和重复建清单 | 新增本文档并将主要散落任务映射到统一 P0/P1/P2；后续优先级以本文档为准 | 本文档 |
+| 已完成 | 新疆技术/商务参考模板族落地 | DOCX / 模板化 / 正式交付 | 客户已提供新疆 10kV 架空绝缘导线中标技术标和商务标正式成稿；系统需要继承正式标书的版式、目录组织和分册结构，同时禁止复用参考稿企业事实 | 已完成参考稿审阅、`technical_bid_standard` 与 `business_bid_standard` 模板 profile、真实技术标/商务标 API 导出、LibreOffice 字段刷新、DOCX XML 审计和完整标书回归；该能力按参考模板族抽取版式和结构，不直接套打参考稿正文 | `docs/development/runs/run_20260626_reference_bid_templates_review.md`、`docs/development/runs/run_20260626_reference_template_implementation.md`、`docs/development/runs/run_20260626_reference_template_full_acceptance.md` |
+
+## 当前 P1
+
+| 状态 | 任务 | 所属模块 | 验收口径 | 关联文档 |
+| --- | --- | --- | --- | --- |
+| 已完成 | 分册格式增强 | 标书分册 / DOCX | 当前 MVP 按真实国网投标上传口径保留技术标、商务标两个交付包，资格文件、报价文件、附件材料归入商务标内部资料类型；技术标/商务标单独 DOCX 导出的封面、目录、页眉、页脚字段和 metadata 已通过真实链路回归；P1-3 已补“导出投标文件”下拉入口和导出完成明确下载按钮，技术标/商务标均通过真实浏览器导出与下载回归 | `docs/技术标商务标分册整改TODO.md`、`docs/development/docx-bid-export-quality-todo.md`、`docs/development/runs/run_20260626_p1_volume_docx_export.md`、`docs/development/runs/run_20260627_p1_3_volume_export_download_completion.md` |
+| 已完成 | 第六章格式表单保真 | DOCX / 正式检查 | 投标函、授权委托书、商务偏差表、技术偏差表、承诺函已支持结构识别、签章行右对齐、语义列宽和禁止跨页拆分；客户原始 Word 像素级套表归入 `template_docx` | `docs/development/runs/run_20260625_docx_sixth_chapter_form_fidelity.md`、`docs/development/docx-bid-export-quality-todo.md` |
+| 已完成 | 产品库多品类 MVP 展示收口 | 产品库 / 企业资料 | 产品库已收口为一个“上传/新增产品资料”入口，保留电缆与附件、开关柜与成套设备、变压器与箱变、互感器、继电保护与自动化、通信与调度设备等中文分类；无资料品类显示空状态，不把泰昌现有电缆保护管资料扩展成其他品类事实；上传资料默认写入泰昌企业事实 metadata，并可被知识问答 stream 命中 | `docs/development/runs/run_20260626_product_qualification_upload_index_regression.md`、`docs/rag/runs/run_20260626_product_qualification_upload_index_regression_summary.md`、`frontend/src/pages/ProductBase/index.tsx` |
+| 已完成 | 首页/历史记录/编辑器正文进度口径与基础体验收口 | 首页 / 历史记录 / 编辑器 / 产品库 / 资信库 | 历史接口按当前真实章节统一返回叶子章节总数、已生成叶子章节和字数；首页、历史记录、编辑器口径一致；产品库/资信库加载态不再误显示空状态；前后端版本可追踪；导出任务时间字段顺序一致；受保护缩略图重复打开不重复请求 | `docs/development/runs/run_20260627_p1_4_progress_and_p2_experience_regression.md` |
+| 延后 | 多格式导出与 PDF 口径收口 | DOCX / PDF / 导出 | 新疆技术/商务参考模板族已落地；当前客户试用主交付仍以可编辑 Word 为准，PDF 只作为预览/转换能力，优先级低于阿里云部署交接和持续门禁 | 导出页面和 metadata 明确 Word 为正式主交付；PDF 为预览/转换能力；PDF 生成失败不冒充正式交付；至少一次真实 DOCX -> PDF 验证记录 | `docs/development/docx-bid-export-quality-todo.md` |
+| 已完成 | 正式检查页面处理路径增强 | 正式检查 / 前端 | 检查项已支持分类/状态/等级筛选、展开证据链、跳转到投标确认页/章节编辑页/企业资信库/企业产品库；投标确认字段和正文章节可通过 URL 参数定位，已通过本机 Chrome 真实页面回归 | `docs/development/formal-check-todo.md`、`docs/development/runs/run_20260626_formal_check_processing_path.md` |
+| 已完成 | 全流程项目状态同步与投标确认入口收口 | 上传解析 / 投标确认 / 历史任务 | 首页/历史记录已按后端统一 `next_step` 展示待投标确认、正文生成中、草稿待续写、正文初稿完成；旧本地解析错误不再覆盖已结构化项目；投标确认页从工作流进入时短轮询加载报告；真实 Chrome 验证最新项目 `4d632dbe-f6e6-4066-8fe2-929ecb54ba1d` 显示正文 75/75 并跳转正式检查 | `docs/development/runs/run_20260626_real_browser_full_bid_body_flow.md`、`docs/development/runs/run_20260626_project_status_prefill_entry_regression.md` |
+| 进行中 | 企业资料与 RAG 持续门禁 | RAG / 数据工程 | 新增客户资料后严格执行 inventory、metadata、入库、Base + 泰昌专项回归和真实 stream 抽样 | `docs/rag/todo.md`、`docs/rag/evaluation-records.md` |
+| 进行中 | 阿里云单 ECS 测试部署收口 | 部署 / 运维 | 安全组、HTTP/HTTPS 入口、Docker Compose、LibreOffice 字段刷新、备份与交接文档完整 | `docs/deployment/aliyun-ubuntu-single-ecs-deploy-checklist-20260622.md` |
+| 延后 | DOCX 格式方案选择产品化 | DOCX / 前端 | 当前阶段不提供导出格式选择；导出固定使用面向泰昌的正式投标文件默认模板。若后续出现非泰昌/非正式交付场景，再重新评估 | `docs/development/docx-bid-export-quality-todo.md` |
+
+## 当前 P2
+
+| 状态 | 任务 | 所属模块 | 验收口径 | 关联文档 |
+| --- | --- | --- | --- | --- |
+| 未开始 | 高级 DOCX 自定义格式面板 | DOCX / 前端 | 支持编号、正文、页面、图表等设置，并可恢复默认模板 | `docs/development/docx-bid-export-quality-todo.md` |
+| 未开始 | 企业模板保存与复用 | DOCX / 企业配置 | 用户可另存企业模板并在后续项目复用 | `docs/development/docx-bid-export-quality-todo.md` |
+| 未开始 | 招标文件格式约束自动抽取 | 解析 / DOCX | 自动抽取第六章、前附表、否决项中的格式要求，并提示用户确认 | `docs/development/docx-bid-export-quality-todo.md` |
+| 未开始 | 后端大路由继续拆分 | 工程结构 | `backend/api/routes.py` 按项目、解析、解读、章节、知识库、导出等模块拆分 | `docs/development/roadmap.md` |
+| 未开始 | 前端标书编辑器拆分 | 工程结构 / 前端 | `frontend/src/pages/BidEditor/index.tsx` 拆为章节树、正文编辑、批量生成、下载、状态 hooks | `docs/development/roadmap.md` |
+| 未开始 | 章节版本管理 | 产品能力 / 数据 | 支持单章生成版本、人工编辑版本、导出版本和回滚 | `docs/development/roadmap.md` |
+| 未开始 | 混合检索与引用来源标注 | RAG | 支持 BM25/全文检索 + pgvector 混合检索，并能追溯章节正文来源 | `docs/rag/todo.md`、`docs/development/roadmap.md` |
+| 未开始 | Ant Design 全局 message context warning 清理 | 前端工程质量 | 页面真实回归控制台不再出现 `Static function can not consume context like dynamic theme` 警告 | `docs/development/runs/run_20260626_real_browser_full_bid_body_flow.md` |
+
+## 已完成关键任务
+
+| 完成时间 | 任务 | 说明 | 关联文档 |
+| --- | --- | --- | --- |
+| 2026-06 | DOCX 基础正式目录和字段刷新 | 目录独立成页、点引导线、页码域、页脚页码和总页数字段刷新已完成 | `docs/development/docx-bid-export-quality-todo.md` |
+| 2026-06 | DOCX 表格和图片基础正式化 | 表格全宽、固定布局、表头加粗、图片只用泰昌企业事实资产、内部检索字段不进入正式 DOCX | `docs/development/docx-bid-export-quality-todo.md` |
+| 2026-06 | DOCX 国网正式通用排版默认模板 | 默认模板切换为 `formal_bid_standard`，已按 A4、页边距、仿宋四号正文、22 磅行距、标题层级、表格小四、页眉页脚和字段刷新跑通真实导出验收 | `docs/development/runs/run_20260625_docx_formal_standard_local_acceptance.md` |
+| 2026-06 | DOCX 第六章格式表单保真基础版 | 投标函、授权委托书、商务/技术偏差表和承诺函已支持结构识别、签章行右对齐、语义列宽、行禁止跨页拆分及 metadata 追踪 | `docs/development/runs/run_20260625_docx_sixth_chapter_form_fidelity.md` |
+| 2026-06 | AI 辅助编辑 MVP 最小闭环 | 正文编辑器支持选区扩写、缩写、润色、正式化，真实模型返回后可预览、采纳、撤销并触发保存状态 | `docs/development/runs/run_20260625_ai_edit_mvp_ui_acceptance.md` |
+| 2026-06 | 正式检查与导出门禁收口 | 正式版要求阻断项 0；模拟客户字段真实回归会形成 8 个阻断项并仅允许草稿版导出；完整 DOCX 主链路可正常完成 | `docs/development/runs/run_20260625_placeholder_cleanup_docx_acceptance.md` |
+| 2026-06 | 章节任务状态与批量生成可靠性基础版 | 任务表、章节 item、lease、超时、失败保稿、刷新恢复等基础能力已完成 | `docs/section-generation-production-remediation-todo.md` |
+| 2026-06 | 技术标/商务标分册基础模型 | `volume_type`、分册 Tabs、分册生成和分册导出基础能力已完成 | `docs/技术标商务标分册整改TODO.md` |
+| 2026-06 | 条款覆盖率命名和下载前风险提示 | “合规覆盖度”已收口为条款覆盖率/条款响应，下载前有风险提示 | `docs/合规覆盖度整改TODO.md` |
+| 2026-06 | 泰昌/辽宁/河北豪乾资料边界 | 泰昌企业事实、辽宁招标要求、河北豪乾参考稿边界和 metadata 规则已建立 | `docs/rag/todo.md`、`AGENTS.md` |
+| 2026-06 | 泰昌产品参数与项目业绩结构化 | CPVC/MPP 检验报告参数、项目业绩合同/中标通知书结构化抽取与真实问答链路已完成 | `docs/rag/todo.md` |
+| 2026-06 | 企业库中文展示和人员证书归库 | 资信库/产品库中文展示名、人员证书归库和云上修复已完成主体闭环 | `docs/rag/todo.md` |
+| 2026-06 | 单企业使用范围收口 | 当前 MVP 默认投标主体为河北泰昌电力器材科技有限公司，按单企业标书范围执行，不扩展多租户 | `AGENTS.md` |
+
+## 散落文档归档规则
+
+| 文档 | 现定位 | 是否继续维护 |
+| --- | --- | --- |
+| `docs/development/docx-bid-export-quality-todo.md` | DOCX 正式导出专项详情和验证记录 | 是，但优先级同步到本文档 |
+| `docs/section-generation-production-remediation-todo.md` | 章节生成和 DOCX 历史整改详情 | 是，作为历史和专项执行记录 |
+| `docs/rag/todo.md` | RAG、客户资料、泰昌数据工程专项详情 | 是，作为 RAG 专项总账 |
+| `docs/development/formal-check-todo.md` | 正式检查模块专项详情 | 是，作为正式检查执行清单 |
+| `docs/development/roadmap.md` | 中长期路线图 | 是，但不再作为当前优先级唯一来源 |
+| `docs/合规覆盖度整改TODO.md` | 条款覆盖率历史整改记录 | 只归档，新增任务迁入本文档或正式检查专项 |
+| `docs/技术标商务标分册整改TODO.md` | 分册化历史整改记录 | 只保留分册细节，新增任务迁入本文档 |
+| `docs/deployment/aliyun-ubuntu-single-ecs-deploy-checklist-20260622.md` | 阿里云部署执行清单 | 是，作为部署操作记录 |
+
+## 最近决策记录
+
+| 日期 | 决策 | 影响 |
+| --- | --- | --- |
+| 2026-06-25 | 将 DOCX 正式交付排版升级重新提升为 P0 | 当前客户反馈的 Word 观感问题不再作为 P1/P2 延后处理 |
+| 2026-06-25 | DOCX 正式交付排版 P0 关闭 | 默认正式模板与第六章常见表单已通过真实 DOCX、下载 API 和浏览器草稿门禁回归；客户原始 Word 像素级套表继续由 P1 `template_docx` 承接 |
+| 2026-06-25 | 建立项目任务总账 | 后续所有新任务和优先级变更必须先写入本文档 |
+| 2026-06-25 | 将合同 MVP 功能清单纳入总账 | AI 辅助编辑由 P2 提升为 P0；产品库多品类展示、多格式导出口径进入 P1 |
+| 2026-06-25 | 完成合同 MVP 17 项真实链路验收 | 关闭内部模拟值误通过正式导出门禁的 P0；剩余产品多品类、PDF 口径和阿里云交接按 P1/外部条件跟踪 |
+| 2026-06-25 | DOCX 默认模板切换为 `formal_bid_standard` | 用户认可的国网正式通用排版口径已进入代码、验收脚本和文档；历史 `sgcc_taichang_bid` 不再作为默认 |
+| 2026-06-26 | DOCX 格式方案选择从当前 P1 延后 | 当前 MVP 导出固定为面向泰昌的正式投标文件默认格式，不提供普通用户格式方案选择；P1 优先转向分册格式、产品库多品类、PDF 口径和正式检查处理路径 |
+| 2026-06-26 | 分册格式增强 P1 收口 | 真实项目技术标/商务标单独 DOCX 导出通过完整链路回归；封面和页眉分别显示“技术投标文件 / 商务投标文件”，字段刷新成功，资格/报价/附件继续归入商务标内部资料类型 |
+| 2026-06-26 | 完成真实浏览器上传到全文正文生成回归 | 新项目 `4d632dbe-f6e6-4066-8fe2-929ecb54ba1d` 从上传辽宁真实招标文件到 75/75 叶子正文完成；新增 P1“全流程项目状态同步与投标确认入口收口”和 P2 AntD message warning 清理 |
+| 2026-06-26 | 新疆技术/商务参考模板族 P0 关闭 | 客户已提供新疆 10kV 架空绝缘导线中标技术标和商务标正式成稿；系统已抽取形成 `technical_bid_standard`、`business_bid_standard`，真实技术标/商务标 API 导出、字段刷新、DOCX XML 审计和完整标书回归均通过 |
+| 2026-06-26 | 产品库多品类 MVP 展示收口完成 | 产品库和资信库上传入口统一为“上传/新增资料”；产品上传后默认进入泰昌企业事实 metadata，并通过真实浏览器上传、真实 `/api/knowledge/search/stream` 和本地 RAG 门禁回归 |
+| 2026-06-26 | 多格式导出与 PDF 口径收口延后 | 新疆参考模板族已完成，当前客户试用主交付仍以可编辑 Word 为准；PDF/多格式边界不是当前客户试用主阻塞，继续按延后项跟踪 |
+| 2026-06-26 | 正式检查页面处理路径增强完成 | 检查项已具备证据链和明确处理按钮，可跳转到投标确认、正文编辑、企业资信库或企业产品库；真实 Chrome 回归通过 |
+| 2026-06-26 | 全流程项目状态同步与投标确认入口收口完成 | 首页/历史记录不再把已完成正文的项目显示为解析中或旧解析错误；投标确认入口可加载真实报告；草稿待续写项目具备主操作和 `action=resume-partial` 路由 |
+| 2026-06-27 | P1-3 分册导出完成下载按钮收口 | 标书编制页“导出投标文件”下拉入口已支持技术标、商务标、完整投标文件；导出完成后显示文件名、大小、字段刷新、图片统计和明确下载按钮，技术标/商务标真实浏览器导出与下载均通过 |
+| 2026-06-27 | P1-4 与 P2 基础体验收口 | 首页/历史/编辑器正文进度统一为真实叶子章节口径；产品库/资信库加载态、前后端版本追踪、导出任务时间字段和缩略图请求去重均通过真实回归 |
+| 2026-06-25 | AI 辅助编辑 MVP 最小闭环完成 | 合同 MVP 中“扩写、缩写、润色、风格调整”已有真实模型与页面验收记录 |
+| 2026-06-25 | 全文/分册 DOCX 导出接入正式检查门禁 | 阻断项存在时导出任务和前端提示均降级为草稿版，`formal_export_gate` metadata 可追溯 |
+| 2026-06-25 | 正式检查与投标关键字段闭环完成 | 当前演示项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d` 已收口到阻断项 0、正文占位 0、正式必填缺口 0；完整 DOCX 真实链路验收 PASS |
+| 2026-06-25 | 自定义编写要求持久化完成 | 单章“自定义编写”已从前端内存态改为章节 `writing_notes` + `metadata.custom_writing` 持久化，并作为生成任务 item metadata 快照进入后台链路 |
+| 2026-06-25 | 新增子章节分册继承完成 | 技术/商务筛选下新增章节会写入对应分册 metadata；子章节默认继承父章节分册，后端也有父章节 metadata 继承兜底 |
+| 2026-06-25 | 叶子章节转结构容器确认完成 | 对已有正文或目标字数的叶子章节新增子章节前会二次确认；支持保留父章节概述或迁移正文到首个子章节，并记录父子章节转换 metadata |
+| 2026-06-25 | Prompt profile 分级瘦身完成 | 章节生成已按 profile 控制 RAG/企业资料/事实包/prompt 字符预算，并把 profile 指标写入任务 metadata；下一步进入慢流提前保护 |
+| 2026-06-25 | 删除章节真实提示与撤销兜底完成 | 删除章节会明确提示同步删除后端数据；后端按章节子树删除；页面内保留最近一次删除的撤销恢复入口 |
+| 2026-06-25 | 慢流提前保护完成 | 章节生成低吞吐时会提前触发 `MODEL_STREAM_SLOW_TIMEOUT`，保存 partial 草稿并释放生成槽；下一步进入自适应并发调度 |
+| 2026-06-25 | 自适应并发调度完成 | 批量章节生成按任务最近窗口动态输出 `current_concurrency`；连续慢流自动降为单路补位，稳定后具备恢复并发的策略基础 |
+| 2026-06-25 | 章节生成可靠性 P0 主链路完成 | SG-PROGRESS-001 已把下载前提示收口为客户视角“草稿版/待完成/需复核”，不向客户暴露慢流、并发等技术词；批量章节生成可靠性系列进入维护和回归阶段 |

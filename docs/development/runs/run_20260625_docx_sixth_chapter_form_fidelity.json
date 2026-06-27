@@ -1,0 +1,273 @@
+{
+  "run_id": "run_20260625_docx_sixth_chapter_form_fidelity",
+  "generated_at": "2026-06-25T21:53:04",
+  "project_id": "a1d853bc-ca4e-43b4-bbea-256f561c8a3d",
+  "project_name": "国网辽宁电力2025年第三次物资协议库存招标采购投标文件",
+  "markdown_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司.md",
+  "docx_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司.docx",
+  "status": "PASS",
+  "checks": {
+    "bid_letter_detected": true,
+    "authorization_detected": true,
+    "business_deviation_detected": true,
+    "technical_deviation_detected": true,
+    "commitment_detected": true,
+    "signature_lines_formatted": true,
+    "business_deviation_custom_widths": true,
+    "technical_deviation_custom_widths": true,
+    "deviation_rows_cant_split": true,
+    "xml_has_cant_split": true,
+    "field_refresh_success": true,
+    "formal_readiness_rejects_simulated_values": true,
+    "formal_template_id_correct": true
+  },
+  "formal_forms": {
+    "detected_types": [
+      "bid_letter",
+      "authorization",
+      "business_deviation",
+      "commitment",
+      "technical_deviation"
+    ],
+    "tables": 38,
+    "subheadings": 38,
+    "signature_lines": 76,
+    "non_split_rows": 244
+  },
+  "expected_formatted_signature_lines": 76,
+  "right_aligned_paragraph_count_after_refresh": 76,
+  "deviation_tables": [
+    {
+      "headers": [
+        "序号",
+        "招标文件商务条款要求",
+        "投标响应情况",
+        "偏离说明"
+      ],
+      "rows": 11,
+      "cell_widths": [
+        720,
+        3381,
+        3026,
+        1775
+      ],
+      "grid_widths": [
+        720,
+        3381,
+        3026,
+        1775
+      ],
+      "cant_split_rows": 11,
+      "custom_widths": true
+    },
+    {
+      "headers": [
+        "序号",
+        "招标文件商务条款要求",
+        "投标人响应",
+        "偏离说明"
+      ],
+      "rows": 16,
+      "cell_widths": [
+        720,
+        3381,
+        3026,
+        1775
+      ],
+      "grid_widths": [
+        720,
+        3381,
+        3026,
+        1775
+      ],
+      "cant_split_rows": 16,
+      "custom_widths": true
+    },
+    {
+      "headers": [
+        "序号",
+        "招标文件章节号",
+        "条款内容",
+        "投标人偏离说明"
+      ],
+      "rows": 4,
+      "cell_widths": [
+        720,
+        3381,
+        3026,
+        1775
+      ],
+      "grid_widths": [
+        720,
+        3381,
+        3026,
+        1775
+      ],
+      "cant_split_rows": 4,
+      "custom_widths": true
+    },
+    {
+      "headers": [
+        "序号",
+        "招标文件条款号",
+        "招标文件条款内容摘要",
+        "投标人响应内容",
+        "偏离说明",
+        "备注"
+      ],
+      "rows": 11,
+      "cell_widths": [
+        1483,
+        1483,
+        1483,
+        1483,
+        1483,
+        1487
+      ],
+      "grid_widths": [
+        1483,
+        1483,
+        1483,
+        1483,
+        1483,
+        1487
+      ],
+      "cant_split_rows": 11,
+      "custom_widths": true
+    },
+    {
+      "headers": [
+        "序号",
+        "技术规范条目",
+        "标准值（技术要求）",
+        "保证值（我公司承诺）",
+        "偏差说明"
+      ],
+      "rows": 17,
+      "cell_widths": [
+        720,
+        1601,
+        2136,
+        2848,
+        1597
+      ],
+      "grid_widths": [
+        720,
+        1601,
+        2136,
+        2848,
+        1597
+      ],
+      "cant_split_rows": 17,
+      "custom_widths": true
+    }
+  ],
+  "field_refresh": {
+    "enabled": true,
+    "status": "refreshed",
+    "tool": "libreoffice",
+    "soffice_bin": "/opt/homebrew/bin/soffice",
+    "input_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司.docx",
+    "timeout_seconds": 180,
+    "returncode": 0,
+    "stdout": "convert /var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-azwrweiv/input/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司.docx as a Writer document -> /private/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-azwrweiv/output/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司.docx using filter : Office Open XML Text\n",
+    "stderr": "2026-06-25 21:53:00.716 soffice[79507:37912783] Task policy set failed: 4 ((os/kern) invalid argument)\n",
+    "manual_refresh_required": false,
+    "user_message": "DOCX 已完成自动刷新，目录页码、页脚页码和总页数字段已重新保存。",
+    "output_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司.docx",
+    "size": 1210645,
+    "table_header_repeat": {
+      "table_count": 166,
+      "updated": 0,
+      "failed": false
+    },
+    "marker_cleanup": {
+      "enabled": true,
+      "status": "cleaned",
+      "counts_before": {
+        "keepLines": 0,
+        "keepNext": 1,
+        "pageBreakBefore": 0
+      },
+      "counts_after": {
+        "keepLines": 0,
+        "keepNext": 0,
+        "pageBreakBefore": 0
+      }
+    }
+  },
+  "export_formal_readiness": {
+    "template_id": "formal_bid_standard",
+    "reference_template_policy": "tender_format_then_customer_reference_then_system_default",
+    "bidder": "河北泰昌电力器材科技有限公司",
+    "empty_section_count": 0,
+    "placeholder_count": 0,
+    "missing_formal_required_fields": [
+      {
+        "key": "package_name",
+        "label": "包名称",
+        "reason": "仍需确认或补充（需按目标包确认）"
+      },
+      {
+        "key": "total_bid_price",
+        "label": "投标总价",
+        "reason": "包含非正式标记“内部测试”"
+      },
+      {
+        "key": "total_bid_price_upper",
+        "label": "投标总价大写",
+        "reason": "包含非正式标记“内部测试”"
+      },
+      {
+        "key": "tax_rate",
+        "label": "税率",
+        "reason": "包含非正式标记“内部测试”"
+      },
+      {
+        "key": "bid_bond_amount",
+        "label": "投标保证金金额",
+        "reason": "包含非正式标记“内部测试”"
+      },
+      {
+        "key": "bid_bond_form",
+        "label": "投标保证金形式",
+        "reason": "包含非正式标记“内部测试”"
+      },
+      {
+        "key": "delivery_period",
+        "label": "交货期承诺",
+        "reason": "包含非正式标记“内部测试”"
+      },
+      {
+        "key": "warranty_period",
+        "label": "质保期承诺",
+        "reason": "包含非正式标记“内部测试”"
+      },
+      {
+        "key": "authorized_representative",
+        "label": "授权代表",
+        "reason": "包含非正式标记“内部测试”"
+      },
+      {
+        "key": "authorized_representative_id",
+        "label": "授权代表身份证号",
+        "reason": "包含非正式标记“内部测试”"
+      },
+      {
+        "key": "signature_date",
+        "label": "签署日期",
+        "reason": "包含非正式标记“内部测试”"
+      },
+      {
+        "key": "technical_deviation_candidates",
+        "label": "技术偏差表候选",
+        "reason": "仍需确认或补充（需客户确认）"
+      }
+    ],
+    "ready": false
+  },
+  "export_warnings": [
+    "仍有 12 个正式必填字段未确认，请返回投标信息确认步骤补齐。"
+  ],
+  "formal_readiness_note": "当前项目客户决策字段为明确模拟数据，真实导出仍按草稿口径阻断正式版；表单结构验收不改变该边界。"
+}

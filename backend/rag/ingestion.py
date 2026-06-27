@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any, List, Dict
 
 from backend.db.supabase_client import get_supabase_client, reset_supabase_client, upload_file_to_storage, get_bucket_name
+from backend.rag.retrieval import invalidate_chunk_keyword_cache
 from backend.rag.vector_store import init_ali_client, get_embeddings, split_text
 
 
@@ -167,6 +168,7 @@ def ingest_knowledge_document(
         
     if not documents_to_insert:
         update_knowledge_document_status(document_id, "failed")
+        invalidate_chunk_keyword_cache("knowledge_ingestion_failed_empty")
         return {"status": "error", "message": "无有效内容提取"}
 
     # 4. 批量生成 Embedding 并写入数据库
@@ -187,7 +189,9 @@ def ingest_knowledge_document(
         
     # 重入同一文档时先清理旧分片，避免刷新/重试导致检索结果重复。
     client.table("document_chunks").delete().eq("document_id", document_id).execute()
+    invalidate_chunk_keyword_cache("knowledge_ingestion_deleted_old_chunks")
     inserted_count = _write_chunks_with_retry(client, rows_to_insert)
+    invalidate_chunk_keyword_cache("knowledge_ingestion_inserted_chunks")
             
     update_knowledge_document_status(document_id, "indexed")
             

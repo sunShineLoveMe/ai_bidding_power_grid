@@ -81,12 +81,76 @@ export async function generateComplianceSupplement(
   return response.data;
 }
 
-export async function generateAIInterpretation(projectId: string): Promise<unknown> {
-  const response = await apiClient.post(`/api/bidding/interpretations/${projectId}/ai-report`, undefined, {
+export type AIInterpretationTask = {
+  id: string;
+  project_id: string;
+  status: 'queued' | 'running' | 'completed' | 'failed';
+  progress: number;
+  message?: string;
+  error_message?: string;
+  metadata?: {
+    stage?: string;
+    segment_total?: number;
+    segment_done?: number;
+    segment_index?: number;
+    failure_count?: number;
+    cached?: boolean;
+    [key: string]: unknown;
+  };
+  started_at?: string;
+  finished_at?: string;
+  created_at?: string;
+  updated_at?: string;
+};
+
+export async function createAIInterpretationTask(projectId: string): Promise<{ task: AIInterpretationTask; taskId: string; cached?: boolean }> {
+  const response = await apiClient.post(`/api/bidding/interpretations/${projectId}/ai-report-tasks`, undefined, {
     skipGlobalLoading: true,
-    timeout: 360000,
   });
   return response.data;
+}
+
+export async function getAIInterpretationTask(projectId: string, taskId: string): Promise<AIInterpretationTask> {
+  const response = await apiClient.get(`/api/bidding/interpretations/${projectId}/ai-report-tasks/${taskId}`, {
+    skipGlobalLoading: true,
+  });
+  return response.data.task;
+}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => window.setTimeout(resolve, ms));
+}
+
+export async function generateAIInterpretation(
+  projectId: string,
+  options?: {
+    onStatus?: (task: AIInterpretationTask) => void;
+    pollIntervalMs?: number;
+    timeoutMs?: number;
+  },
+): Promise<{ task: AIInterpretationTask; taskId: string; cached?: boolean }> {
+  const created = await createAIInterpretationTask(projectId);
+  let task = created.task;
+  options?.onStatus?.(task);
+  if (task.status === 'completed') {
+    return { ...created, task };
+  }
+  const startedAt = Date.now();
+  const timeoutMs = options?.timeoutMs ?? 900000;
+  const pollIntervalMs = options?.pollIntervalMs ?? 2500;
+
+  while (Date.now() - startedAt < timeoutMs) {
+    await sleep(pollIntervalMs);
+    task = await getAIInterpretationTask(projectId, created.taskId);
+    options?.onStatus?.(task);
+    if (task.status === 'completed') {
+      return { ...created, task };
+    }
+    if (task.status === 'failed') {
+      throw new Error(task.error_message || task.message || 'AI 深度解读生成失败');
+    }
+  }
+  throw new Error('AI 深度解读任务等待超时，请稍后在招标解读页查看结果。');
 }
 
 export async function generateBidOutline(projectId: string): Promise<unknown> {
@@ -162,6 +226,34 @@ export async function saveBidSection(projectId: string, section: Partial<BidSect
   return response.data.section;
 }
 
+export type BidAiEditAction = 'expand' | 'shorten' | 'polish' | 'formalize';
+
+export type BidAiEditRequest = {
+  action: BidAiEditAction;
+  selectedText: string;
+  sectionId?: string;
+  sectionTitle?: string;
+  sectionContext?: string;
+  fullContent?: string;
+};
+
+export type BidAiEditResponse = {
+  action: BidAiEditAction;
+  actionLabel: string;
+  originalText: string;
+  revisedText: string;
+  summary?: string;
+  warnings?: string[];
+};
+
+export async function editBidSectionText(projectId: string, payload: BidAiEditRequest): Promise<BidAiEditResponse> {
+  const response = await apiClient.post(`/api/bidding/interpretations/${projectId}/sections/ai-edit`, payload, {
+    skipGlobalLoading: true,
+    timeout: 180000,
+  });
+  return response.data;
+}
+
 export async function saveBidLengthSettings(projectId: string, settings: BidLengthSettings): Promise<{
   settings: BidLengthSettings;
   feasibility: BidLengthFeasibility;
@@ -215,6 +307,7 @@ export type SectionGenerationTaskItem = {
     content: string;
     created_at?: string;
   }>;
+  metadata?: Record<string, unknown>;
 };
 
 export type SectionGenerationTask = {
@@ -229,6 +322,7 @@ export type SectionGenerationTask = {
   done_count: number;
   failed_count: number;
   stopped_count: number;
+  metadata?: Record<string, unknown>;
   items: SectionGenerationTaskItem[];
   created_at?: string;
   updated_at?: string;
@@ -262,6 +356,7 @@ export async function createSectionGenerationTask(
       order_index?: number;
       volume_type?: string;
       target_words?: number;
+      metadata?: Record<string, unknown>;
     }>;
   },
 ): Promise<SectionGenerationTask> {
@@ -309,7 +404,7 @@ export async function retrySectionGenerationTaskItem(
 export async function resumeSectionGenerationTask(
   projectId: string,
   taskId: string,
-  options?: { autoStart?: boolean; preserveDraft?: boolean; statuses?: string[] },
+  options?: { autoStart?: boolean; preserveDraft?: boolean; statuses?: string[]; reason?: string },
 ): Promise<SectionGenerationTask> {
   const response = await apiClient.post(
     `/api/bidding/interpretations/${projectId}/section-generation-tasks/${taskId}/resume`,
@@ -336,11 +431,18 @@ export type BidExportTask = {
   download_url?: string;
   error_message?: string;
   metadata?: {
+    formal_export_gate?: BidFormalExportGate;
     image_selection?: {
       selected?: number;
       asset_candidates?: number;
       warnings?: string[];
       manifest?: Array<Record<string, unknown>>;
+      formal_readiness?: {
+        ready?: boolean;
+        empty_section_count?: number;
+        placeholder_count?: number;
+        missing_formal_required_fields?: Array<{ key?: string; label?: string }>;
+      };
     };
     image_conversion?: {
       found?: number;
@@ -366,6 +468,36 @@ export type BidExportTask = {
   finished_at?: string;
 };
 
+export type BidFormalExportGate = {
+  checked?: boolean;
+  scope?: 'full' | 'volume' | 'section' | string;
+  export_mode?: 'formal' | 'draft' | 'section' | string;
+  can_formal_export?: boolean;
+  draft_export_allowed?: boolean;
+  reason?: string;
+  formal_export_label?: string;
+  blocked_count?: number;
+  warning_count?: number;
+  manual_confirm_count?: number;
+  formal_required_gaps?: number;
+  unresolved_placeholder_count?: number;
+  compliance_percent?: number;
+  high_risk_missing?: number;
+  rule_set_version?: string;
+  checked_at?: string;
+  top_blockers?: Array<{
+    id?: string;
+    category?: string;
+    severity?: string;
+    title?: string;
+    status?: string;
+    evidence?: string;
+    suggestion?: string;
+    target?: string;
+  }>;
+  [key: string]: unknown;
+};
+
 export async function generateOnlyOfficeConfig(projectId: string, sectionId?: string): Promise<OnlyOfficeConfigResponse> {
   const response = await apiClient.post(`/api/bidding/interpretations/${projectId}/onlyoffice-config`, sectionId ? { sectionId } : undefined, {
     skipGlobalLoading: true,
@@ -377,7 +509,7 @@ export async function generateOnlyOfficeConfig(projectId: string, sectionId?: st
 export async function generateBidDocxDownload(
   projectId: string,
   options?: { sectionId?: string; withImages?: boolean; volumeType?: string; sectionsSnapshot?: Partial<BidSection>[] },
-): Promise<{ task: BidExportTask; taskId: string }> {
+): Promise<{ task: BidExportTask; taskId: string; exportMode?: string; formalExportGate?: BidFormalExportGate }> {
   const response = await apiClient.post(`/api/bidding/interpretations/${projectId}/download-docx`, options || undefined, {
     skipGlobalLoading: true,
   });
@@ -389,6 +521,230 @@ export async function getBidExportTask(projectId: string, taskId: string): Promi
     skipGlobalLoading: true,
   });
   return response.data.task;
+}
+
+export type BidPrefillStatus = 'system_recognized' | 'enterprise_library' | 'customer_required' | 'manual_confirm';
+
+export type BidPrefillField = {
+  key: string;
+  label: string;
+  group: string;
+  valueType: string;
+  requiredLevel: string;
+  riskLevel: string;
+  sourcePolicy: string;
+  editable: boolean;
+  customerDecision: boolean;
+  status: BidPrefillStatus;
+  statusLabel: string;
+  value?: unknown;
+  confirmedValue?: unknown;
+  confidence?: number;
+  evidence?: {
+    sourceType?: string;
+    sourceLabel?: string;
+    sourceDomain?: string;
+    factSourceAllowedForEnterprise?: boolean;
+    snippet?: string;
+    assetCount?: number;
+    assets?: Array<{
+      id?: string;
+      title?: string;
+      category?: string;
+      assetType?: string;
+    }>;
+  };
+  mapsTo?: string[];
+};
+
+export type BidPrefillSectionCandidate = {
+  sectionId?: string;
+  sectionTitle: string;
+  orderIndex?: number;
+  virtual?: boolean;
+  fieldCount: number;
+  gapCount: number;
+  statusCounts: Partial<Record<BidPrefillStatus, number>>;
+  sourceDomains: string[];
+  boundaryWarnings: string[];
+  fields: Array<{
+    key: string;
+    label: string;
+    group: string;
+    status: BidPrefillStatus;
+    statusLabel: string;
+    requiredLevel: string;
+    riskLevel: string;
+    valuePreview?: string;
+    sourceLabel?: string;
+    sourceType?: string;
+    sourceDomain?: string;
+    factSourceAllowedForEnterprise?: boolean;
+  }>;
+};
+
+export type BidPrefillReport = {
+  schemaVersion: string;
+  generatedAt: string;
+  project?: {
+    id?: string;
+    project_name?: string | null;
+    project_no?: string | null;
+    tender_unit?: string | null;
+  };
+  summary: {
+    totalFields: number;
+    systemRecognized: number;
+    enterpriseLibrary: number;
+    customerRequired: number;
+    manualConfirm: number;
+    formalRequiredGaps: number;
+    readonlyFirst: boolean;
+    affectsSectionsSnapshotExport: boolean;
+    readyForFormalExport: boolean;
+    unresolvedPlaceholderCount: number;
+  };
+  groups: Array<{
+    name: string;
+    fields: BidPrefillField[];
+  }>;
+  fields: BidPrefillField[];
+  sectionCandidates?: BidPrefillSectionCandidate[];
+  gapReport: {
+    title: string;
+    formalRequiredGaps: BidPrefillField[];
+    customerRequiredFields: BidPrefillField[];
+    manualConfirmFields: BidPrefillField[];
+  };
+  sourceRules: string[];
+  confirmation?: BidPrefillApplication;
+};
+
+export type BidPrefillApplication = {
+  schema_version: string;
+  confirmed_at: string;
+  applied_at: string;
+  confirmed_values: Record<string, string>;
+  changed_section_count: number;
+  replacement_count: number;
+  unresolved_placeholder_count: number;
+  unresolved_placeholders?: Array<{ section_id?: string; section_title?: string; placeholder: string }>;
+  missing_formal_required_fields: Array<{ key: string; label: string }>;
+  section_application_summary?: Array<{
+    sectionId?: string;
+    sectionTitle: string;
+    fieldCount: number;
+    confirmedFieldCount: number;
+    missingFormalRequiredCount: number;
+    missingFormalRequiredFields: Array<{ key?: string; label?: string; status?: string }>;
+    boundaryWarnings: string[];
+  }>;
+  export_gate?: {
+    ready: boolean;
+    sectionCount: number;
+    confirmedSectionCount: number;
+    unresolvedPlaceholderCount: number;
+    unresolvedPlaceholders: Array<{ section_id?: string; section_title?: string; placeholder: string }>;
+    missingFormalRequiredFields: Array<{ key: string; label: string }>;
+  };
+  ready_for_formal_export: boolean;
+};
+
+export async function getBidPrefillReport(projectId: string): Promise<BidPrefillReport> {
+  const response = await apiClient.get(`/api/bidding/projects/${projectId}/prefill-report`, {
+    skipGlobalLoading: true,
+  });
+  return response.data;
+}
+
+export async function applyBidPrefillConfirmation(
+  projectId: string,
+  confirmedValues: Record<string, string>,
+): Promise<BidPrefillApplication> {
+  const response = await apiClient.post(`/api/bidding/projects/${projectId}/prefill-confirmation/apply`, {
+    confirmed: true,
+    confirmedValues,
+  });
+  return response.data.application;
+}
+
+export type FormalCheckStatus = 'passed' | 'blocked' | 'warning' | 'manual_confirm' | 'not_applicable';
+
+export type FormalCheckItem = {
+  id: string;
+  category: string;
+  severity: 'blocker' | 'high' | 'medium' | 'low';
+  title: string;
+  description: string;
+  status: FormalCheckStatus;
+  statusLabel: string;
+  blocksFormalExport: boolean;
+  draftExportAllowed: boolean;
+  sourceLevel: string;
+  sourceRef: string;
+  evidence: string;
+  suggestion: string;
+  target?: string;
+  checkType?: string;
+  fieldKeys?: string[];
+  evidenceChain?: Array<{ label: string; value: string }>;
+  action?: {
+    type: 'prefill' | 'bid_editor' | 'qualification_library' | 'product_library';
+    label: string;
+    target?: string | null;
+    description?: string;
+  };
+};
+
+export type FormalCheckReport = {
+  schemaVersion: string;
+  ruleSetVersion: string;
+  ruleSetName: string;
+  generatedAt: string;
+  projectId: string;
+  project?: {
+    id?: string;
+    project_name?: string | null;
+    project_no?: string | null;
+    tender_unit?: string | null;
+  };
+  summary: {
+    totalRules: number;
+    passed: number;
+    blocked: number;
+    warnings: number;
+    manualConfirm: number;
+    notApplicable: number;
+    canFormalExport: boolean;
+    draftExportAllowed: boolean;
+    formalExportLabel: string;
+    compliancePercent: number;
+    complianceMissing: number;
+    highRiskMissing: number;
+    formalRequiredGaps: number;
+    unresolvedPlaceholderCount: number;
+  };
+  statusCounts: Partial<Record<FormalCheckStatus, number>>;
+  severityCounts: Partial<Record<FormalCheckItem['severity'], number>>;
+  categorySummaries: Array<{
+    category: string;
+    total: number;
+    blocked: number;
+    warning: number;
+    manual_confirm: number;
+    passed: number;
+  }>;
+  items: FormalCheckItem[];
+  sourceNotes: string[];
+  recommendations: string[];
+};
+
+export async function getFormalCheckReport(projectId: string, options?: { exportTaskId?: string }): Promise<FormalCheckReport> {
+  const response = await apiClient.get(`/api/bidding/projects/${projectId}/formal-check`, {
+    params: options?.exportTaskId ? { exportTaskId: options.exportTaskId } : undefined,
+    skipGlobalLoading: true,
+  });
+  return response.data;
 }
 
 export async function preAnalyzeBid(biddingId: number): Promise<unknown> {

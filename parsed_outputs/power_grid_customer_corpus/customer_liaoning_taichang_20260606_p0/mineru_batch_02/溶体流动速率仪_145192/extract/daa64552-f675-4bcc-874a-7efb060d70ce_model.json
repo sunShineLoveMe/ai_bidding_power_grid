@@ -1,0 +1,3390 @@
+[
+    [
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.419,
+                0.09,
+                0.604,
+                0.114
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.102,
+                0.177,
+                0.443,
+                0.193
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.102,
+                0.196,
+                0.443,
+                0.212
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.102,
+                0.215,
+                0.284,
+                0.229
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.092,
+                0.23,
+                0.942,
+                0.436
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>标的名称</td><td>规格型号</td><td>单位</td><td>数量</td><td>单价(元)</td><td>总价(元)</td><td>备注</td></tr><tr><td>液体流动速率仪</td><td>XNR-400AM</td><td>台</td><td>1</td><td>11000.00</td><td>11000.00</td><td>含税</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan=\"7\">合计(含税):11000.00</td></tr><tr><td colspan=\"7\">合计人民币金额(大写):壹万壹仟元整</td></tr></table>"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.099,
+                0.437,
+                0.781,
+                0.452
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.101,
+                0.455,
+                0.446,
+                0.47
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.101,
+                0.474,
+                0.521,
+                0.489
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.101,
+                0.492,
+                0.388,
+                0.507
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.101,
+                0.511,
+                0.471,
+                0.526
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.101,
+                0.529,
+                0.552,
+                0.544
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.101,
+                0.548,
+                0.521,
+                0.562
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.101,
+                0.566,
+                0.741,
+                0.581
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.101,
+                0.585,
+                0.571,
+                0.599
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.101,
+                0.603,
+                0.32,
+                0.618
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.101,
+                0.621,
+                0.404,
+                0.636
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.101,
+                0.64,
+                0.421,
+                0.655
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.092,
+                0.693,
+                0.932,
+                0.921
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>出卖人</td><td>买受人</td></tr><tr><td>出卖人:(章)承德衡通试验检测仪器有限公司住址:承德市双桥区石洞子沟路北20号法定代表人:委托代表人:电话:0314-7668758传真:0314-7668758开户:中国农业银行承德桥东支行账号:502701040015986签订日期:2010年9月18日</td><td>买受人(章):河北泰昌电力器材科技有限公司住址:满城县陉阳驿村法定代表人:委托代理人:电话:0312-7083333传真:0312-7084444开户银行:中国银行满城支行账号:100222840234签订日期:2010年9月18日</td></tr></table>"
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.417,
+                0.087,
+                0.607,
+                0.117
+            ],
+            "text": "产品销售合同",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.103,
+                0.214,
+                0.285,
+                0.229
+            ],
+            "text": "第一条产品清单及价格",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.104,
+                0.177,
+                0.419,
+                0.192
+            ],
+            "text": "出卖人：承德衡通试验检测仪器有限公司",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.102,
+                0.195,
+                0.419,
+                0.211
+            ],
+            "text": "买受人：河北泰昌电力器材科技有限公司",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.102,
+                0.455,
+                0.447,
+                0.47
+            ],
+            "text": "第三条交（提）货地点、方式需方指定地点",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.102,
+                0.436,
+                0.782,
+                0.453
+            ],
+            "text": "第二条质量要求技术标准、供方对质量负责的条件和期限：按国家标准执行，质量保一年。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.101,
+                0.473,
+                0.522,
+                0.489
+            ],
+            "text": "第四条运输方式及到达站（港）和费用负担：供方负担",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.1,
+                0.547,
+                0.522,
+                0.562
+            ],
+            "text": "第八条随机的必备品、配件、工具数量及供应办法：无",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.1,
+                0.492,
+                0.389,
+                0.507
+            ],
+            "text": "第五条合理耗损标准及计算方法：无",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.1,
+                0.509,
+                0.473,
+                0.527
+            ],
+            "text": "第六条包装标准、包装物的供应与回收：不回收",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.099,
+                0.528,
+                0.554,
+                0.545
+            ],
+            "text": "第七条验收标准、方法及提出异议期限：国标、期限1个月",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.1,
+                0.584,
+                0.572,
+                0.6
+            ],
+            "text": "第十条如需提供担保，另立合同担保书，作为本合同附加：无",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.099,
+                0.564,
+                0.743,
+                0.582
+            ],
+            "text": "第九条结算方式及期限：货到验收合格后付90%，10%质保金1年后无质量问题付清。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.099,
+                0.602,
+                0.174,
+                0.618
+            ],
+            "text": "第十一条",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.198,
+                0.602,
+                0.322,
+                0.618
+            ],
+            "text": "违约责任：协商",
+            "score": 0.996
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.099,
+                0.62,
+                0.175,
+                0.637
+            ],
+            "text": "第十二条",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.199,
+                0.622,
+                0.406,
+                0.636
+            ],
+            "text": "解决合同纠纷的方式：法院",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.1,
+                0.64,
+                0.172,
+                0.654
+            ],
+            "text": "第十三条",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.198,
+                0.639,
+                0.423,
+                0.655
+            ],
+            "text": "其他约定事项：竞价文件执行",
+            "score": 1.0
+        }
+    ],
+    [
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.084,
+                0.136,
+                0.101,
+                0.188
+            ],
+            "angle": 0,
+            "content": "C\n↑"
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.089,
+                0.256,
+                0.108,
+                0.283
+            ],
+            "angle": 0,
+            "content": "0"
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.091,
+                0.315,
+                0.11,
+                0.343
+            ],
+            "angle": 0,
+            "content": "O"
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.091,
+                0.435,
+                0.11,
+                0.462
+            ],
+            "angle": 0,
+            "content": "O"
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.091,
+                0.494,
+                0.11,
+                0.522
+            ],
+            "angle": 0,
+            "content": "[NO TEXT]"
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.091,
+                0.555,
+                0.11,
+                0.583
+            ],
+            "angle": 0,
+            "content": "O"
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.091,
+                0.615,
+                0.11,
+                0.643
+            ],
+            "angle": 0,
+            "content": "C"
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.091,
+                0.676,
+                0.11,
+                0.704
+            ],
+            "angle": 0,
+            "content": "C"
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.091,
+                0.735,
+                0.11,
+                0.762
+            ],
+            "angle": 0,
+            "content": "C"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.218,
+                0.17,
+                0.339,
+                0.2
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.382,
+                0.135,
+                0.58,
+                0.169
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.434,
+                0.136,
+                0.537,
+                0.236
+            ],
+            "angle": 0,
+            "content": "增值税专用\n全国统一发票监制\n河北\n国家税务总局监制\n抵扣联",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.623,
+                0.146,
+                0.753,
+                0.177
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.645,
+                0.206,
+                0.793,
+                0.225
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.13,
+                0.322,
+                0.147,
+                0.649
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.148,
+                0.237,
+                0.828,
+                0.71
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>购买方</td><td colspan=\"5\">名称:河北泰昌电力器材科技有限公司纳税人识别号:130621056539515地址、电话:满城县方顺桥乡陉阳驿村7180808开户行及账号:中国银行满城县支行100222840234</td><td>密码区</td><td colspan=\"3\">9*+/1/3-/&lt;3&lt;*1/44/&lt;1&lt;加密版本:01&lt;09-657&gt;/057*9008&gt;91&gt;380&gt;198+-7+22&lt;4+48*-792/-3*&gt;92&gt;//8&lt;-/224&lt;300360729</td></tr><tr><td rowspan=\"2\" colspan=\"2\">货物或应税劳务、服务名称溶体流动速率仪合计</td><td rowspan=\"2\">规格型号XNR-400AM</td><td rowspan=\"2\">单位台</td><td rowspan=\"2\">数量1</td><td rowspan=\"2\" colspan=\"2\">单价9401.7094017</td><td>金额9401.71</td><td>税率17%</td><td>税额1598.29</td></tr><tr><td>¥9401.71</td><td></td><td>¥1598.29</td></tr><tr><td colspan=\"2\">价税合计(大写)</td><td colspan=\"8\">壹万壹仟圆整(小写) ¥11000.00</td></tr><tr><td>销售方</td><td colspan=\"5\">名称:承德衡通试验检测仪器有限公司纳税人识别号:130802112590827地址、电话:承德双桥区石洞子沟路北20号0314-7668758开户行及账号:中国农业银行承德桥东支行502701040015986</td><td>备注</td><td colspan=\"3\"></td></tr></table>"
+        },
+        {
+            "type": "table_footnote",
+            "bbox": [
+                0.165,
+                0.711,
+                0.256,
+                0.731
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table_footnote",
+            "bbox": [
+                0.355,
+                0.707,
+                0.43,
+                0.726
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table_footnote",
+            "bbox": [
+                0.501,
+                0.703,
+                0.591,
+                0.721
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.614,
+                0.592,
+                0.75,
+                0.737
+            ],
+            "angle": 0,
+            "content": "德衡通试验检测仪器有限公司\n130802112590827\n发票专用章（章）\n销售方：（章）",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.83,
+                0.339,
+                0.845,
+                0.584
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.859,
+                0.108,
+                0.886,
+                0.737
+            ],
+            "angle": 0,
+            "content": "○\n↑\n○\n○\n○\n○\n○"
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.164,
+                0.71,
+                0.257,
+                0.731
+            ],
+            "text": "收款人：刘达华",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.501,
+                0.7,
+                0.592,
+                0.722
+            ],
+            "text": "开票人：刘达华",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.378,
+                0.134,
+                0.584,
+                0.174
+            ],
+            "text": "河北增值模专用发票",
+            "score": 0.829
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.217,
+                0.17,
+                0.341,
+                0.202
+            ],
+            "text": "1300102140",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.621,
+                0.144,
+                0.754,
+                0.181
+            ],
+            "text": "No 00360729",
+            "score": 0.974
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.645,
+                0.206,
+                0.794,
+                0.224
+            ],
+            "text": "开票日期：2010年09月18日",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.128,
+                0.318,
+                0.149,
+                0.653
+            ],
+            "text": "税总函［2015]341号北京印钞有限公司",
+            "score": 0.948
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.354,
+                0.706,
+                0.431,
+                0.725
+            ],
+            "text": "复核：刘达华",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.827,
+                0.338,
+                0.845,
+                0.586
+            ],
+            "text": "第二联：抵扣联 购买方扣税凭证",
+            "score": 0.964
+        }
+    ],
+    [
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.32,
+                0.093,
+                0.68,
+                0.115
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.148,
+                0.127,
+                0.502,
+                0.145
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.146,
+                0.154,
+                0.853,
+                0.229
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.147,
+                0.238,
+                0.851,
+                0.285
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.483,
+                0.316,
+                0.851,
+                0.335
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.581,
+                0.265,
+                0.758,
+                0.394
+            ],
+            "angle": 0,
+            "content": "北泰昌电力器材科技\n1309210005674\n北泰昌电力器材科技",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.321,
+                0.091,
+                0.68,
+                0.115
+            ],
+            "text": "生产、试验设备发票查验说明文件",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.148,
+                0.127,
+                0.503,
+                0.145
+            ],
+            "text": "致：国家电网有限公司及其所属各省公司",
+            "score": 0.992
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.482,
+                0.312,
+                0.852,
+                0.336
+            ],
+            "text": "承诺人：河北泰昌电力器材科技有限公司",
+            "score": 0.989
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.188,
+                0.154,
+                0.852,
+                0.174
+            ],
+            "text": "鉴于国家税务总局全国增值税发票查验平台",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.147,
+                0.183,
+                0.853,
+                0.2
+            ],
+            "text": "https://inv-veri.chinatax.gov.cn/index.html查询年限5年，故我公司部分生产、试",
+            "score": 0.963
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.149,
+                0.212,
+                0.486,
+                0.229
+            ],
+            "text": "验设备发票超出查询年限而无法查询。",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.184,
+                0.238,
+                0.851,
+                0.256
+            ],
+            "text": "我公司承诺所提供所有设备发票信息真实有效，无任何虚假。如有虚假愿意",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.15,
+                0.266,
+                0.424,
+                0.283
+            ],
+            "text": "承担一切法律责任，特此证明。",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.615,
+                0.271,
+                0.726,
+                0.286
+            ],
+            "text": "",
+            "score": 1.0
+        }
+    ],
+    [
+        {
+            "type": "image",
+            "bbox": [
+                0.0,
+                0.0,
+                0.999,
+                0.999
+            ],
+            "angle": 0,
+            "content": "XMR-402AM 纺货流动速率仪\n15 15 15 15\n20 20 20 20\n25 25 25 25\n30 30 30 30\n35 35 35 35\n40 40 40 40\n45 45 45 45\n50 50 50 50\n55 55 55 55\n60 60 60 60\n65 65 65 65\n70 70 70 70\n75 75 75 75\n80 80 80 80\n85 85 85 85\n90 90 90 90\n95 95 95 95\n100 100 100\n105 105 105\n110 110 110\n115 115 115\n120 120 120\n125 125 125\n130 130 130\n135 135 135\n140 140 140\n145 145 145\n150 150 150\n155 155 155\n160 160 160\n165 165 165\n170 170 170\n175 175 175\n180 180 180\n185 185 185\n190 190 190\n195 195 195\n200 200 200\n205 205 205\n210 210 210\n215 215 215\n220 220 220\n225 225 225\n230 230 230\n235 235 235\n240 240 240\n245 245 245\n250 250 250\n255 255 255\n260 260 260\n265 265 265\n270 270 270\n275 275 275\n280 280 280\n285 285 285\n290 290 290\n295 295 295\n300 300 300\n305 305 305\n310 310 310\n315 315 315\n320 320 320\n325 325 325\n330 330 330\n335 335 335\n340 340 340\n345 345 345\n350 350 350\n355 355 355\n360 360 360\n365 365 365\n370 370 370\n375 375 375\n380 380 380\n385 385 385\n390 390 390\n395 395 395\n400 400 400\n405 405 405\n410 410 410\n415 415 415\n420 420 420\n425 425 425\n430 430 430\n435 435 435\n440 440 440\n445 445 445\n450 450 450\n455 455 455\n460 460 460\n465 465 465\n470 470 470\n475 475 475\n480 480 480\n485 485 485\n490 490 490\n495 495 495\n500 498.78",
+            "sub_type": "text_image"
+        }
+    ],
+    [
+        {
+            "type": "header",
+            "bbox": [
+                0.078,
+                0.027,
+                0.188,
+                0.103
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "header",
+            "bbox": [
+                0.217,
+                0.042,
+                0.892,
+                0.078
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "header",
+            "bbox": [
+                0.216,
+                0.079,
+                0.896,
+                0.097
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "doc_title",
+            "bbox": [
+                0.402,
+                0.158,
+                0.621,
+                0.2
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.658,
+                0.15,
+                0.728,
+                0.205
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.729,
+                0.155,
+                0.805,
+                0.204
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.806,
+                0.156,
+                0.875,
+                0.203
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.326,
+                0.213,
+                0.655,
+                0.232
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.039,
+                0.245,
+                0.358,
+                0.267
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.039,
+                0.273,
+                0.163,
+                0.287
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.662,
+                0.245,
+                0.861,
+                0.263
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.671,
+                0.271,
+                0.875,
+                0.289
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.039,
+                0.308,
+                0.497,
+                0.327
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.041,
+                0.329,
+                0.107,
+                0.34
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.04,
+                0.36,
+                0.417,
+                0.377
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.04,
+                0.379,
+                0.099,
+                0.39
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.04,
+                0.41,
+                0.356,
+                0.427
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.041,
+                0.429,
+                0.117,
+                0.441
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.04,
+                0.459,
+                0.328,
+                0.476
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.041,
+                0.479,
+                0.085,
+                0.49
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.04,
+                0.509,
+                0.275,
+                0.527
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.041,
+                0.529,
+                0.107,
+                0.54
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.551,
+                0.51,
+                0.635,
+                0.528
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.544,
+                0.529,
+                0.643,
+                0.542
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.659,
+                0.509,
+                0.717,
+                0.523
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.04,
+                0.559,
+                0.497,
+                0.577
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.041,
+                0.579,
+                0.135,
+                0.59
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.188,
+                0.605,
+                0.38,
+                0.745
+            ],
+            "angle": 0,
+            "content": "证书专用章\nIssued by(Stamp)\n证书专用章",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.531,
+                0.62,
+                0.818,
+                0.656
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.531,
+                0.671,
+                0.816,
+                0.706
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.531,
+                0.721,
+                0.822,
+                0.757
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.04,
+                0.76,
+                0.441,
+                0.784
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.041,
+                0.782,
+                0.137,
+                0.795
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.041,
+                0.801,
+                0.132,
+                0.817
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.041,
+                0.82,
+                0.167,
+                0.832
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.041,
+                0.839,
+                0.131,
+                0.855
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.041,
+                0.858,
+                0.139,
+                0.87
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.297,
+                0.844,
+                0.44,
+                0.861
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.662,
+                0.796,
+                0.743,
+                0.859
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.04,
+                0.885,
+                0.227,
+                0.898
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.595,
+                0.885,
+                0.79,
+                0.898
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.04,
+                0.904,
+                0.52,
+                0.918
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.595,
+                0.904,
+                0.796,
+                0.918
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.041,
+                0.919,
+                0.127,
+                0.931
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.039,
+                0.933,
+                0.843,
+                0.947
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.041,
+                0.948,
+                0.595,
+                0.959
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.659,
+                0.242,
+                0.864,
+                0.265
+            ],
+            "text": "第1页，共3页",
+            "score": 0.984
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.667,
+                0.268,
+                0.878,
+                0.291
+            ],
+            "text": "Page 1of3 Pages",
+            "score": 0.977
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.039,
+                0.884,
+                0.229,
+                0.899
+            ],
+            "text": "电话(Te1):0755-27407284",
+            "score": 0.958
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.593,
+                0.883,
+                0.793,
+                0.9
+            ],
+            "text": "邮箱(Mail) :szgljl@126.com",
+            "score": 0.979
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.593,
+                0.903,
+                0.798,
+                0.92
+            ],
+            "text": "邮政编码(Post No.）:518107",
+            "score": 0.972
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.322,
+                0.21,
+                0.66,
+                0.235
+            ],
+            "text": "Calibration Certificate",
+            "score": 0.971
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.213,
+                0.038,
+                0.898,
+                0.082
+            ],
+            "text": "广量计量检测技术（深圳）有限公司",
+            "score": 0.97
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.212,
+                0.076,
+                0.899,
+                0.1
+            ],
+            "text": "GuangLiang Measurement and Testing Technology (Shenzhen) Co.,Ltd.",
+            "score": 0.99
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.037,
+                0.457,
+                0.331,
+                0.478
+            ],
+            "text": "型号/规格：XNR-400AM",
+            "score": 0.982
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.528,
+                0.617,
+                0.606,
+                0.64
+            ],
+            "text": "批准人：",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.697,
+                0.615,
+                0.825,
+                0.655
+            ],
+            "text": "张绍安",
+            "score": 0.881
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.528,
+                0.637,
+                0.65,
+                0.657
+            ],
+            "text": "Approved by",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.528,
+                0.668,
+                0.61,
+                0.691
+            ],
+            "text": "核验员：",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.692,
+                0.665,
+                0.823,
+                0.708
+            ],
+            "text": "梁俊雄",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.528,
+                0.686,
+                0.64,
+                0.708
+            ],
+            "text": "Checked by",
+            "score": 0.996
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.037,
+                0.359,
+                0.186,
+                0.379
+            ],
+            "text": "客户地址：",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.21,
+                0.358,
+                0.419,
+                0.377
+            ],
+            "text": "保定市满城区陉阳驿村",
+            "score": 0.994
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.037,
+                0.757,
+                0.209,
+                0.782
+            ],
+            "text": "接收日期：",
+            "score": 0.996
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.234,
+                0.76,
+                0.444,
+                0.786
+            ],
+            "text": "2026年05月25日",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.035,
+                0.307,
+                0.501,
+                0.327
+            ],
+            "text": "客户名称：河北泰昌电力器材科技有限公司",
+            "score": 0.994
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.037,
+                0.557,
+                0.201,
+                0.579
+            ],
+            "text": "制造单位：",
+            "score": 0.993
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.208,
+                0.557,
+                0.5,
+                0.577
+            ],
+            "text": "承德衡通试验检测仪器有限公司",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.039,
+                0.903,
+                0.522,
+                0.919
+            ],
+            "text": "地址：深圳市光明区公明街道兴发路170号华澳时光全球美酒星链云仓产",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.037,
+                0.507,
+                0.174,
+                0.529
+            ],
+            "text": "出厂编号：",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.207,
+                0.507,
+                0.278,
+                0.526
+            ],
+            "text": "017346",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.037,
+                0.243,
+                0.138,
+                0.265
+            ],
+            "text": "证书编号：",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.209,
+                0.251,
+                0.36,
+                0.268
+            ],
+            "text": "GL2605LH00753",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.036,
+                0.407,
+                0.359,
+                0.428
+            ],
+            "text": "器具名称：溶体流动速率仪",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.528,
+                0.718,
+                0.608,
+                0.742
+            ],
+            "text": "校准员：",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.729,
+                0.717,
+                0.825,
+                0.758
+            ],
+            "text": "刚",
+            "score": 0.843
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.53,
+                0.738,
+                0.656,
+                0.758
+            ],
+            "text": "Calibrated by",
+            "score": 0.996
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.294,
+                0.842,
+                0.443,
+                0.862
+            ],
+            "text": "2026年05月26日",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.395,
+                0.154,
+                0.626,
+                0.203
+            ],
+            "text": "校准证书",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.803,
+                0.154,
+                0.852,
+                0.168
+            ],
+            "text": "中国认可",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.803,
+                0.163,
+                0.852,
+                0.177
+            ],
+            "text": "国际互认",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.803,
+                0.173,
+                0.833,
+                0.187
+            ],
+            "text": "校准",
+            "score": 0.993
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.803,
+                0.182,
+                0.878,
+                0.196
+            ],
+            "text": "CALIBRATION",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.803,
+                0.192,
+                0.878,
+                0.205
+            ],
+            "text": "CNAS L14602",
+            "score": 0.972
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.037,
+                0.271,
+                0.166,
+                0.289
+            ],
+            "text": "Certificate No.",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.541,
+                0.527,
+                0.646,
+                0.543
+            ],
+            "text": " Equipment No.",
+            "score": 0.974
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.038,
+                0.78,
+                0.14,
+                0.796
+            ],
+            "text": "Receipt date:",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.037,
+                0.817,
+                0.17,
+                0.834
+            ],
+            "text": "Calibration date:",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.038,
+                0.326,
+                0.11,
+                0.342
+            ],
+            "text": "Customer",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.037,
+                0.376,
+                0.102,
+                0.392
+            ],
+            "text": "Address",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.037,
+                0.426,
+                0.12,
+                0.443
+            ],
+            "text": "Description",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.038,
+                0.527,
+                0.109,
+                0.541
+            ],
+            "text": "Serial No.",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.037,
+                0.576,
+                0.138,
+                0.592
+            ],
+            "text": "Manufacturer",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.037,
+                0.916,
+                0.13,
+                0.932
+            ],
+            "text": "业园B栋C302",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.038,
+                0.477,
+                0.088,
+                0.491
+            ],
+            "text": "Model",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.547,
+                0.507,
+                0.64,
+                0.531
+            ],
+            "text": "管理编号",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.655,
+                0.506,
+                0.72,
+                0.525
+            ],
+            "text": "TC-12",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.037,
+                0.798,
+                0.135,
+                0.818
+            ],
+            "text": "校准日期：",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.037,
+                0.837,
+                0.134,
+                0.856
+            ],
+            "text": "签发日期：",
+            "score": 0.994
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.038,
+                0.855,
+                0.141,
+                0.872
+            ],
+            "text": "Date of issue:",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.034,
+                0.929,
+                0.846,
+                0.95
+            ],
+            "text": "Address: No.170 Xingfa Road, Gongming Sub-district， Guangming District， Shenzhen City， China, Building B,",
+            "score": 0.982
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.039,
+                0.947,
+                0.597,
+                0.96
+            ],
+            "text": "C02, Huao Time Global Fine Wine Starlink Cloud Warehouse Industrial Park",
+            "score": 0.99
+        }
+    ],
+    [
+        {
+            "type": "header",
+            "bbox": [
+                0.077,
+                0.027,
+                0.188,
+                0.103
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "header",
+            "bbox": [
+                0.216,
+                0.042,
+                0.892,
+                0.078
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "header",
+            "bbox": [
+                0.216,
+                0.079,
+                0.896,
+                0.097
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.393,
+                0.157,
+                0.603,
+                0.196
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "doc_title",
+            "bbox": [
+                0.367,
+                0.202,
+                0.623,
+                0.222
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.031,
+                0.23,
+                0.292,
+                0.248
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.028,
+                0.251,
+                0.139,
+                0.265
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.784,
+                0.228,
+                0.93,
+                0.246
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.794,
+                0.251,
+                0.957,
+                0.268
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.027,
+                0.272,
+                0.44,
+                0.288
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.064,
+                0.29,
+                0.771,
+                0.307
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.027,
+                0.309,
+                0.654,
+                0.325
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.064,
+                0.327,
+                0.911,
+                0.342
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.027,
+                0.346,
+                0.364,
+                0.363
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.072,
+                0.365,
+                0.408,
+                0.38
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.027,
+                0.383,
+                0.367,
+                0.399
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.064,
+                0.402,
+                0.465,
+                0.417
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.027,
+                0.42,
+                0.434,
+                0.436
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.064,
+                0.439,
+                0.674,
+                0.455
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.027,
+                0.457,
+                0.238,
+                0.472
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.064,
+                0.476,
+                0.383,
+                0.491
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.027,
+                0.493,
+                0.588,
+                0.508
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.027,
+                0.541,
+                0.321,
+                0.558
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.027,
+                0.56,
+                0.312,
+                0.573
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.048,
+                0.578,
+                0.936,
+                0.692
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>设备名称/技术指标Equipment Name/Characteristics</td><td>设备编号Equipment No.</td><td>证书编号/溯源单位Certificate No/Traceability to</td><td>有效日期Validity date</td></tr><tr><td>秒表/<eq>\\pm 0.10s</eq></td><td>605Q11R</td><td>JL2392976051/深圳计量院</td><td>2026-12-9</td></tr><tr><td>电子天平/I级</td><td>166990672</td><td>JL2402060238/深圳计量院</td><td>2027-1-2</td></tr><tr><td>聚乙烯熔体流动速率标准物质/U=0.35g/10min</td><td>2205</td><td>GBW(E)130098/中国计量院</td><td>2026-5-29</td></tr></table>"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.451,
+                0.722,
+                0.546,
+                0.741
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.399,
+                0.743,
+                0.6,
+                0.761
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.027,
+                0.763,
+                0.475,
+                0.78
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.027,
+                0.782,
+                0.163,
+                0.798
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.027,
+                0.8,
+                0.438,
+                0.817
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.027,
+                0.819,
+                0.186,
+                0.835
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.027,
+                0.837,
+                0.789,
+                0.854
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.027,
+                0.856,
+                0.219,
+                0.872
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.027,
+                0.874,
+                0.457,
+                0.891
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.027,
+                0.893,
+                0.321,
+                0.909
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.386,
+                0.152,
+                0.61,
+                0.201
+            ],
+            "text": "证书说明",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.397,
+                0.741,
+                0.603,
+                0.762
+            ],
+            "text": "Appended Directions",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.025,
+                0.855,
+                0.221,
+                0.873
+            ],
+            "text": "Operation Environment",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.026,
+                0.346,
+                0.365,
+                0.363
+            ],
+            "text": "三、本证书校准结果只与受校准仪器有关.",
+            "score": 0.996
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.071,
+                0.365,
+                0.409,
+                0.381
+            ],
+            "text": "The results relate only to the items calibrated.",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.025,
+                0.381,
+                0.368,
+                0.4
+            ],
+            "text": "四、我司对本证书的内容拥有最终解释权。",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.213,
+                0.038,
+                0.897,
+                0.08
+            ],
+            "text": "广量计量检测技术（深圳）有限公司",
+            "score": 0.966
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.212,
+                0.076,
+                0.899,
+                0.1
+            ],
+            "text": "GuangLiang Measurement and Testing Technology (Shenzhen) Co., Ltd.",
+            "score": 0.989
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.062,
+                0.287,
+                0.773,
+                0.309
+            ],
+            "text": "\"#\"represents the capacity of the laboratory,which is beyond the scope of accreditation of CNAS.",
+            "score": 0.986
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.025,
+                0.271,
+                0.441,
+                0.289
+            ],
+            "text": "一、“#”项目为实验室具备能力，非CNAS认可能力。",
+            "score": 0.988
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.026,
+                0.419,
+                0.433,
+                0.436
+            ],
+            "text": "五、我司出具的数据均可溯源到国际单位制（SI）.",
+            "score": 0.971
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.024,
+                0.798,
+                0.158,
+                0.818
+            ],
+            "text": "校准地点：",
+            "score": 0.996
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.331,
+                0.798,
+                0.441,
+                0.819
+            ],
+            "text": "委托方现场",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.025,
+                0.873,
+                0.235,
+                0.892
+            ],
+            "text": "相关使用说明：",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.336,
+                0.873,
+                0.459,
+                0.891
+            ],
+            "text": "参见结果使用",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.365,
+                0.2,
+                0.625,
+                0.224
+            ],
+            "text": "Certificate Statement",
+            "score": 0.977
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.029,
+                0.228,
+                0.295,
+                0.248
+            ],
+            "text": "证书编号： GL2605LH00753",
+            "score": 0.986
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.024,
+                0.558,
+                0.314,
+                0.575
+            ],
+            "text": " Main Standards of Measurement Used",
+            "score": 0.982
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.061,
+                0.401,
+                0.467,
+                0.419
+            ],
+            "text": "This certificate of content with our final interpretation.",
+            "score": 0.994
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.025,
+                0.761,
+                0.146,
+                0.782
+            ],
+            "text": "复校日期：",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.334,
+                0.761,
+                0.478,
+                0.781
+            ],
+            "text": "2027年05月25日",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.024,
+                0.455,
+                0.239,
+                0.472
+            ],
+            "text": "六、本次校准的技术依据：",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.061,
+                0.475,
+                0.385,
+                0.493
+            ],
+            "text": "Reference Documents for the Verification :",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.027,
+                0.541,
+                0.323,
+                0.558
+            ],
+            "text": "七、本次校准使用主要计量标准器具",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.025,
+                0.892,
+                0.324,
+                0.911
+            ],
+            "text": " Statement of Compliance Limitation",
+            "score": 0.972
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.781,
+                0.225,
+                0.933,
+                0.248
+            ],
+            "text": "第2页，共3页",
+            "score": 0.936
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.791,
+                0.249,
+                0.959,
+                0.269
+            ],
+            "text": "Page 2 of 3 Pages",
+            "score": 0.988
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.025,
+                0.781,
+                0.165,
+                0.799
+            ],
+            "text": " Application date",
+            "score": 0.98
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.024,
+                0.818,
+                0.189,
+                0.837
+            ],
+            "text": "Operation Location",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.059,
+                0.015,
+                0.204,
+                0.115
+            ],
+            "text": "",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.025,
+                0.25,
+                0.141,
+                0.266
+            ],
+            "text": "Certificate No.",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.447,
+                0.719,
+                0.551,
+                0.744
+            ],
+            "text": "附加说明",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.025,
+                0.307,
+                0.656,
+                0.327
+            ],
+            "text": "二、此证书无本公司盖章无效。未经本公司书面批准，不得部分复制校准证书.",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.061,
+                0.438,
+                0.676,
+                0.457
+            ],
+            "text": "All data issued by the laboratory are traceable to International System of Units(SI).",
+            "score": 0.989
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.059,
+                0.324,
+                0.915,
+                0.345
+            ],
+            "text": "The certificate shall not be valid without stamp of DN. This certificate shall not be copied partly without the written",
+            "score": 0.985
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.024,
+                0.491,
+                0.589,
+                0.51
+            ],
+            "text": "参照JG 878-1994 《熔体流动速率仪检定规程》《V.R.of Extrusion Plastometer》",
+            "score": 0.985
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.023,
+                0.834,
+                0.124,
+                0.857
+            ],
+            "text": "环境条件：",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.4,
+                0.835,
+                0.531,
+                0.855
+            ],
+            "text": "温度：21.2℃",
+            "score": 0.987
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.649,
+                0.835,
+                0.793,
+                0.855
+            ],
+            "text": "相对湿度：51%",
+            "score": 0.999
+        }
+    ],
+    [
+        {
+            "type": "header",
+            "bbox": [
+                0.078,
+                0.027,
+                0.188,
+                0.103
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "header",
+            "bbox": [
+                0.217,
+                0.042,
+                0.892,
+                0.078
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "header",
+            "bbox": [
+                0.216,
+                0.08,
+                0.896,
+                0.097
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "doc_title",
+            "bbox": [
+                0.393,
+                0.157,
+                0.636,
+                0.19
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.43,
+                0.193,
+                0.601,
+                0.206
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.092,
+                0.201,
+                0.401,
+                0.218
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.095,
+                0.221,
+                0.2,
+                0.234
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.773,
+                0.202,
+                0.938,
+                0.219
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.791,
+                0.221,
+                0.938,
+                0.235
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.09,
+                0.259,
+                0.237,
+                0.273
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.459,
+                0.259,
+                0.491,
+                0.272
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.091,
+                0.281,
+                0.192,
+                0.295
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.088,
+                0.297,
+                0.875,
+                0.615
+            ],
+            "angle": 0,
+            "content": "<table><tr><td rowspan=\"2\">测量条件</td><td colspan=\"2\">标准物质标准值(g/10min)</td><td>负荷质量(kg)</td><td>口模内径(mm)</td><td>测定温度(°C)</td><td>时间(s)</td><td>标准物质量(g)</td></tr><tr><td colspan=\"2\">1.94</td><td>2.161</td><td>2.095</td><td>190.1</td><td>30</td><td>3.5</td></tr><tr><td rowspan=\"8\">※温度</td><td rowspan=\"4\" colspan=\"2\">温度波动</td><td>设定值</td><td>实测值</td><td>温度波动</td><td colspan=\"2\">允差</td></tr><tr><td>190</td><td>190.2</td><td>-0.2</td><td colspan=\"2\">±0.5</td></tr><tr><td>210</td><td>210.0</td><td>0.0</td><td colspan=\"2\">±0.5</td></tr><tr><td>230</td><td>230.3</td><td>-0.3</td><td colspan=\"2\">±0.5</td></tr><tr><td rowspan=\"4\" colspan=\"2\">温度漂移</td><td>设定值</td><td>实测值</td><td>温度波动</td><td colspan=\"2\">允差</td></tr><tr><td>190</td><td>190.1</td><td>-0.1</td><td colspan=\"2\">±0.5</td></tr><tr><td>210</td><td>210.1</td><td>-0.1</td><td colspan=\"2\">±0.5</td></tr><tr><td>230</td><td>230.1</td><td>-0.1</td><td colspan=\"2\">±0.5</td></tr><tr><td colspan=\"3\">温度梯度</td><td colspan=\"2\">0.1</td><td>允许误差(%)</td><td colspan=\"2\">±1</td></tr><tr><td colspan=\"3\">※内膜口径(mm)</td><td colspan=\"2\">2.095</td><td>允许误差(%)</td><td colspan=\"2\">2.095±0.005</td></tr><tr><td rowspan=\"2\" colspan=\"2\">熔体流动速率</td><td>时间间隔</td><td>切段质量</td><td>精密度(%)</td><td>准确度(%)</td><td colspan=\"2\">允许误差(%)</td></tr><tr><td>30.0%</td><td>0.0952</td><td>0.53</td><td>-1.55</td><td colspan=\"2\">±10</td></tr></table>"
+        },
+        {
+            "type": "table_footnote",
+            "bbox": [
+                0.09,
+                0.706,
+                0.177,
+                0.72
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table_footnote",
+            "bbox": [
+                0.116,
+                0.725,
+                0.733,
+                0.739
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table_footnote",
+            "bbox": [
+                0.133,
+                0.745,
+                0.278,
+                0.758
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table_footnote",
+            "bbox": [
+                0.138,
+                0.761,
+                0.781,
+                0.775
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table_footnote",
+            "bbox": [
+                0.139,
+                0.781,
+                0.416,
+                0.794
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.437,
+                0.827,
+                0.5,
+                0.84
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.429,
+                0.842,
+                0.509,
+                0.854
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.213,
+                0.039,
+                0.897,
+                0.081
+            ],
+            "text": "广量计量检测技术（深圳）有限公司",
+            "score": 0.971
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.214,
+                0.078,
+                0.897,
+                0.098
+            ],
+            "text": "GuangLiang Measurement and Testing Technology (Shenzhen) Co., Ltd.",
+            "score": 0.993
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.137,
+                0.78,
+                0.418,
+                0.795
+            ],
+            "text": " Expanded uncertainty of measurement:",
+            "score": 0.981
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.136,
+                0.76,
+                0.782,
+                0.776
+            ],
+            "text": "According to JJF1059.1-2012 Evaluation and Expression of Uncertainty in Measurement.",
+            "score": 0.988
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.388,
+                0.153,
+                0.641,
+                0.193
+            ],
+            "text": "校准结果",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.088,
+                0.198,
+                0.404,
+                0.22
+            ],
+            "text": "证书编号：GL2605LH00753",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.427,
+                0.191,
+                0.604,
+                0.208
+            ],
+            "text": " Result of Calibration",
+            "score": 0.98
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.77,
+                0.199,
+                0.941,
+                0.221
+            ],
+            "text": "第3页共3页",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.787,
+                0.218,
+                0.941,
+                0.237
+            ],
+            "text": "Page З of 3 Pages",
+            "score": 0.952
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.088,
+                0.257,
+                0.238,
+                0.274
+            ],
+            "text": "一、外观及性能检查：",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.129,
+                0.742,
+                0.281,
+                0.76
+            ],
+            "text": "U=0.16g/10min k=2",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.093,
+                0.219,
+                0.203,
+                0.236
+            ],
+            "text": "Certificate No.",
+            "score": 0.977
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.088,
+                0.279,
+                0.195,
+                0.297
+            ],
+            "text": "二、校准结果：",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.426,
+                0.839,
+                0.513,
+                0.857
+            ],
+            "text": "Blank below",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.086,
+                0.702,
+                0.18,
+                0.723
+            ],
+            "text": "注：(Notes):",
+            "score": 0.971
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.433,
+                0.825,
+                0.503,
+                0.842
+            ],
+            "text": "以下空白",
+            "score": 0.984
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.114,
+                0.724,
+                0.735,
+                0.74
+            ],
+            "text": "1．依据JJF1059.1—2012《测量不确定度评定与表示》方法评定测量结果的扩展不确定度为：",
+            "score": 0.996
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.456,
+                0.256,
+                0.495,
+                0.274
+            ],
+            "text": "正常",
+            "score": 1.0
+        }
+    ]
+]

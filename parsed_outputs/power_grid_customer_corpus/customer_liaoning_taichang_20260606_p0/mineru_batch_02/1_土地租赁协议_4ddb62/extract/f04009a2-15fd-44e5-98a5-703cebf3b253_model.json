@@ -1,0 +1,1374 @@
+[
+    [
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.364,
+                0.168,
+                0.574,
+                0.192
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.129,
+                0.222,
+                0.565,
+                0.242
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.128,
+                0.275,
+                0.518,
+                0.294
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.125,
+                0.326,
+                0.806,
+                0.381
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.125,
+                0.414,
+                0.372,
+                0.433
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.123,
+                0.466,
+                0.804,
+                0.522
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.124,
+                0.553,
+                0.638,
+                0.574
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "list",
+            "bbox": [
+                0.123,
+                0.466,
+                0.804,
+                0.574
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.124,
+                0.604,
+                0.301,
+                0.624
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.121,
+                0.657,
+                0.805,
+                0.711
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.121,
+                0.744,
+                0.367,
+                0.764
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.12,
+                0.797,
+                0.794,
+                0.853
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.12,
+                0.885,
+                0.297,
+                0.905
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.366,
+                0.167,
+                0.573,
+                0.192
+            ],
+            "text": "场地租赁协议书",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.124,
+                0.603,
+                0.3,
+                0.625
+            ],
+            "text": "第二条租赁期限",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.121,
+                0.884,
+                0.299,
+                0.906
+            ],
+            "text": "第四条保证条款",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.221,
+                0.566,
+                0.243
+            ],
+            "text": "甲方：满城县方顺桥镇陉阳驿村村民委员会",
+            "score": 0.996
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.13,
+                0.273,
+                0.518,
+                0.295
+            ],
+            "text": "乙方：河北泰昌电力器材科技有限公司",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.127,
+                0.324,
+                0.806,
+                0.349
+            ],
+            "text": "根据有关法律法规，甲、乙双方经友好协商一致达成如下条款，以期",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.126,
+                0.36,
+                0.235,
+                0.382
+            ],
+            "text": "共同遵守：",
+            "score": 0.992
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.126,
+                0.464,
+                0.804,
+                0.488
+            ],
+            "text": "1.1甲方将于满城县方顺桥镇陉阳驿村北的场地租赁于乙方使用，租",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.126,
+                0.5,
+                0.55,
+                0.522
+            ],
+            "text": "赁面积甲、乙双方认可确定为18000平米；",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.121,
+                0.654,
+                0.808,
+                0.679
+            ],
+            "text": "2.1租期限为五十年，即从2011年4月5日起至2061年4月5",
+            "score": 0.994
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.122,
+                0.689,
+                0.189,
+                0.714
+            ],
+            "text": "日止。",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.126,
+                0.412,
+                0.371,
+                0.435
+            ],
+            "text": "第一条租赁位置、面积",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.123,
+                0.743,
+                0.367,
+                0.765
+            ],
+            "text": "第三条租赁费用及支付",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.125,
+                0.551,
+                0.641,
+                0.575
+            ],
+            "text": "1.2本场地采取包租的方式，由乙方自行经营管理。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.122,
+                0.796,
+                0.793,
+                0.818
+            ],
+            "text": "3.1租赁费用为每年18万元，租赁期限内不得涨价，租金以一年",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.126,
+                0.829,
+                0.302,
+                0.854
+            ],
+            "text": "一付的方式交清。",
+            "score": 1.0
+        }
+    ],
+    [
+        {
+            "type": "text",
+            "bbox": [
+                0.148,
+                0.109,
+                0.857,
+                0.244
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.148,
+                0.274,
+                0.839,
+                0.33
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.148,
+                0.366,
+                0.851,
+                0.48
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.144,
+                0.509,
+                0.63,
+                0.533
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.144,
+                0.563,
+                0.77,
+                0.588
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.142,
+                0.617,
+                0.846,
+                0.675
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.141,
+                0.707,
+                0.846,
+                0.803
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.141,
+                0.835,
+                0.828,
+                0.892
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.924,
+                0.317,
+                0.999,
+                0.414
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.146,
+                0.308,
+                0.193,
+                0.334
+            ],
+            "text": "生；",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.149,
+                0.275,
+                0.838,
+                0.297
+            ],
+            "text": "4.2甲方保证出入场地的道路畅通无阻，不存在阻碍交通的情况发",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.144,
+                0.618,
+                0.847,
+                0.638
+            ],
+            "text": "4.6甲方保证乙方承租经营期间地方关系的协调，保证乙方不受当地",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.144,
+                0.654,
+                0.488,
+                0.674
+            ],
+            "text": "村民或地方恶势力的阻挠和刁难；",
+            "score": 0.985
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.138,
+                0.87,
+                0.181,
+                0.894
+            ],
+            "text": "任；",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.14,
+                0.837,
+                0.826,
+                0.857
+            ],
+            "text": "4.8乙方保证及时足额支付租金，逾期不支付愿承担相应的违约责",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.145,
+                0.509,
+                0.631,
+                0.531
+            ],
+            "text": "4.4 甲方在乙方进驻前，应路通、水通、电通；",
+            "score": 0.975
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.151,
+                0.111,
+                0.856,
+                0.131
+            ],
+            "text": "4.1甲方保证有权利签署本协议，保证本协议下出租给乙方的场地使",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.152,
+                0.148,
+                0.855,
+                0.169
+            ],
+            "text": "用的合法性及无争议性，同时保证在履行本合同的权利与义务时不存",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.152,
+                0.185,
+                0.853,
+                0.206
+            ],
+            "text": "在任何法律的障碍；如因此问题而给乙方的生产经营造成损失，甲方",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.152,
+                0.221,
+                0.543,
+                0.242
+            ],
+            "text": "应向乙方支付相应的直接和间接损失；",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.148,
+                0.367,
+                0.85,
+                0.388
+            ],
+            "text": "4.3除租金外，甲方不得向乙方收取其他任何费用，诸如：治安联防",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.148,
+                0.42,
+                0.851,
+                0.441
+            ],
+            "text": "费、绿化费、村道路硬化费、管理费、土地使用费等一切与乙方生产",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.147,
+                0.457,
+                0.678,
+                0.477
+            ],
+            "text": "经营无关的费用，若发生均由甲方负责缴纳或解决；",
+            "score": 0.989
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.143,
+                0.78,
+                0.44,
+                0.803
+            ],
+            "text": "有权提出，甲方应负责赔偿；",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.143,
+                0.709,
+                0.843,
+                0.728
+            ],
+            "text": "4.7甲方承租给乙方的场地应承担风险，确保该场地不因任何第三人",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.144,
+                0.746,
+                0.844,
+                0.766
+            ],
+            "text": "的权利主张或其他因素而使乙方受到使用上的障碍或其他损失，乙方",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.144,
+                0.565,
+                0.77,
+                0.585
+            ],
+            "text": "4.5甲方保证不干涉乙方在所租赁场地有效面积内自由支配；",
+            "score": 0.992
+        }
+    ],
+    [
+        {
+            "type": "text",
+            "bbox": [
+                0.151,
+                0.108,
+                0.449,
+                0.129
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.151,
+                0.162,
+                0.851,
+                0.22
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.151,
+                0.253,
+                0.851,
+                0.311
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.151,
+                0.343,
+                0.331,
+                0.364
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.149,
+                0.397,
+                0.851,
+                0.454
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.149,
+                0.488,
+                0.798,
+                0.51
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.149,
+                0.542,
+                0.798,
+                0.563
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.16,
+                0.594,
+                0.411,
+                0.62
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.574,
+                0.594,
+                0.814,
+                0.62
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.148,
+                0.648,
+                0.331,
+                0.668
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.589,
+                0.65,
+                0.814,
+                0.67
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.15,
+                0.343,
+                0.332,
+                0.364
+            ],
+            "text": "第五条 其他条款",
+            "score": 0.954
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.146,
+                0.645,
+                0.334,
+                0.67
+            ],
+            "text": "2011年4月日",
+            "score": 0.973
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.152,
+                0.198,
+                0.473,
+                0.22
+            ],
+            "text": "利益的前提下，可转让第三人。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.151,
+                0.162,
+                0.849,
+                0.182
+            ],
+            "text": "4.10因乙方原因无法继续经营，且承租期限未满，乙方在保证甲方",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.151,
+                0.252,
+                0.848,
+                0.275
+            ],
+            "text": "4.11 如若在承租期内由于当地政府拆迁，乙方将承担实际租期内的",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.152,
+                0.289,
+                0.636,
+                0.312
+            ],
+            "text": "租金，甲方需偿还乙方因搬迁造成的全部损失。",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.149,
+                0.395,
+                0.851,
+                0.42
+            ],
+            "text": "5.1 本合同生效后，除甲、乙双方一致同意或不可抗力外，双方应认",
+            "score": 0.986
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.15,
+                0.432,
+                0.352,
+                0.456
+            ],
+            "text": "真履行，不得违约；",
+            "score": 0.979
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.568,
+                0.586,
+                0.819,
+                0.625
+            ],
+            "text": "乙方（签字辉",
+            "score": 0.841
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.588,
+                0.647,
+                0.817,
+                0.672
+            ],
+            "text": "2011年4月日",
+            "score": 0.93
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.151,
+                0.107,
+                0.449,
+                0.129
+            ],
+            "text": "4.9乙方保证经营的合法性；",
+            "score": 0.982
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.148,
+                0.488,
+                0.798,
+                0.51
+            ],
+            "text": "5.2本协议未尽事宜，双方另行协商，同意后可另签补充协议；",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.147,
+                0.541,
+                0.797,
+                0.564
+            ],
+            "text": "5.3 本协议一式两份，甲、乙双方各执一份，具同等法律效力；",
+            "score": 0.987
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.155,
+                0.589,
+                0.416,
+                0.624
+            ],
+            "text": "甲方（签金",
+            "score": 0.852
+        }
+    ],
+    [
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.02,
+                0.128,
+                0.043,
+                0.431
+            ],
+            "angle": 0,
+            "content": "此收据不得作为经营性业务收支结算凭证使用"
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.051,
+                0.114,
+                0.197,
+                0.439
+            ],
+            "angle": 0,
+            "content": "收据",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.222,
+                0.104,
+                0.898,
+                0.144
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.214,
+                0.148,
+                0.893,
+                0.19
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.22,
+                0.205,
+                0.893,
+                0.237
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.214,
+                0.242,
+                0.895,
+                0.283
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.667,
+                0.294,
+                0.895,
+                0.331
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.218,
+                0.367,
+                0.339,
+                0.424
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.564,
+                0.345,
+                0.596,
+                0.413
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.744,
+                0.345,
+                0.773,
+                0.413
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.786,
+                0.359,
+                0.89,
+                0.404
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.014,
+                0.578,
+                0.036,
+                0.893
+            ],
+            "angle": 0,
+            "content": "此收据不得作为经营性业务收支结算凭证使用"
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.045,
+                0.566,
+                0.197,
+                0.907
+            ],
+            "angle": 0,
+            "content": "收据",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.222,
+                0.568,
+                0.91,
+                0.6
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.214,
+                0.615,
+                0.908,
+                0.663
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.22,
+                0.668,
+                0.908,
+                0.71
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.214,
+                0.714,
+                0.909,
+                0.763
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.676,
+                0.778,
+                0.852,
+                0.813
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.216,
+                0.835,
+                0.339,
+                0.893
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.318,
+                0.748,
+                0.532,
+                0.94
+            ],
+            "angle": 0,
+            "content": "方圆桥\n五国界\n财务专用章",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.564,
+                0.818,
+                0.732,
+                0.904
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>收款人</td><td></td></tr></table>"
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.745,
+                0.825,
+                0.916,
+                0.912
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>交款人</td><td></td></tr></table>"
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.918,
+                0.162,
+                0.932,
+                0.411
+            ],
+            "angle": 0,
+            "content": "二美文居（分）"
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.918,
+                0.648,
+                0.946,
+                0.903
+            ],
+            "angle": 0,
+            "content": "一联存根（白）二联收据（粉）"
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.216,
+                0.097,
+                0.905,
+                0.148
+            ],
+            "text": "2025年4月3日N0054579",
+            "score": 0.932
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.2,
+                0.137,
+                0.696,
+                0.196
+            ],
+            "text": "今收到河北泰昌勃器材科技有限公",
+            "score": 0.819
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.212,
+                0.201,
+                0.475,
+                0.238
+            ],
+            "text": "交来2025租金",
+            "score": 0.801
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.202,
+                0.231,
+                0.642,
+                0.286
+            ],
+            "text": "人民币（大写)壹拾捌万",
+            "score": 0.784
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.216,
+                0.562,
+                0.917,
+                0.607
+            ],
+            "text": "2026年4月5日N6007A500",
+            "score": 0.847
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.211,
+                0.662,
+                0.576,
+                0.711
+            ],
+            "text": "交来2026年金",
+            "score": 0.972
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.66,
+                0.287,
+                0.896,
+                0.336
+            ],
+            "text": "￥18000",
+            "score": 0.845
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.205,
+                0.352,
+                0.355,
+                0.438
+            ],
+            "text": "收款单位",
+            "score": 0.84
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.205,
+                0.823,
+                0.35,
+                0.903
+            ],
+            "text": "收款单",
+            "score": 0.906
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.558,
+                0.339,
+                0.602,
+                0.418
+            ],
+            "text": "收款人",
+            "score": 0.983
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.739,
+                0.34,
+                0.778,
+                0.417
+            ],
+            "text": "交款人",
+            "score": 0.994
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.778,
+                0.352,
+                0.897,
+                0.41
+            ],
+            "text": "晁地琳",
+            "score": 0.708
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.207,
+                0.611,
+                0.688,
+                0.662
+            ],
+            "text": "今收到河北泰昌出力驾材科技有公司",
+            "score": 0.737
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.208,
+                0.708,
+                0.719,
+                0.758
+            ],
+            "text": "人民币（大写）抗捌万趣",
+            "score": 0.833
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.67,
+                0.772,
+                0.857,
+                0.816
+            ],
+            "text": "￥180000、00",
+            "score": 0.755
+        }
+    ]
+]

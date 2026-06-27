@@ -1,0 +1,1779 @@
+event: start
+data: {"title": "泰昌生产制造与试验检测能力"}
+
+event: chunk
+data: {"content": "#"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "泰"}
+
+event: chunk
+data: {"content": "昌"}
+
+event: chunk
+data: {"content": "生产"}
+
+event: chunk
+data: {"content": "制造"}
+
+event: chunk
+data: {"content": "与"}
+
+event: chunk
+data: {"content": "试验"}
+
+event: chunk
+data: {"content": "检测"}
+
+event: chunk
+data: {"content": "能力"}
+
+event: chunk
+data: {"content": "\n\n"}
+
+event: chunk
+data: {"content": "##"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "一"}
+
+event: chunk
+data: {"content": "、"}
+
+event: chunk
+data: {"content": "生产"}
+
+event: chunk
+data: {"content": "制造"}
+
+event: chunk
+data: {"content": "能力"}
+
+event: chunk
+data: {"content": "\n\n"}
+
+event: chunk
+data: {"content": "河北"}
+
+event: chunk
+data: {"content": "泰"}
+
+event: chunk
+data: {"content": "昌"}
+
+event: chunk
+data: {"content": "电力"}
+
+event: chunk
+data: {"content": "器材"}
+
+event: chunk
+data: {"content": "科技有限公司"}
+
+event: chunk
+data: {"content": "（"}
+
+event: chunk
+data: {"content": "以下简称"}
+
+event: chunk
+data: {"content": "“"}
+
+event: chunk
+data: {"content": "泰"}
+
+event: chunk
+data: {"content": "昌"}
+
+event: chunk
+data: {"content": "公司"}
+
+event: chunk
+data: {"content": "”）"}
+
+event: chunk
+data: {"content": "作为"}
+
+event: chunk
+data: {"content": "专业"}
+
+event: chunk
+data: {"content": "电缆"}
+
+event: chunk
+data: {"content": "保护"}
+
+event: chunk
+data: {"content": "管"}
+
+event: chunk
+data: {"content": "生产企业"}
+
+event: chunk
+data: {"content": "，"}
+
+event: chunk
+data: {"content": "建有"}
+
+event: chunk
+data: {"content": "完善的"}
+
+event: chunk
+data: {"content": "MP"}
+
+event: chunk
+data: {"content": "P"}
+
+event: chunk
+data: {"content": "和"}
+
+event: chunk
+data: {"content": "CP"}
+
+event: chunk
+data: {"content": "VC"}
+
+event: chunk
+data: {"content": "电缆"}
+
+event: chunk
+data: {"content": "保护"}
+
+event: chunk
+data: {"content": "管"}
+
+event: chunk
+data: {"content": "生产线"}
+
+event: chunk
+data: {"content": "，"}
+
+event: chunk
+data: {"content": "具备"}
+
+event: chunk
+data: {"content": "规模化"}
+
+event: chunk
+data: {"content": "、"}
+
+event: chunk
+data: {"content": "连续"}
+
+event: chunk
+data: {"content": "化"}
+
+event: chunk
+data: {"content": "生产能力"}
+
+event: chunk
+data: {"content": "。\n\n"}
+
+event: chunk
+data: {"content": "**"}
+
+event: chunk
+data: {"content": "1"}
+
+event: chunk
+data: {"content": "."}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "生产线"}
+
+event: chunk
+data: {"content": "配置"}
+
+event: chunk
+data: {"content": "**\n\n"}
+
+event: chunk
+data: {"content": "泰"}
+
+event: chunk
+data: {"content": "昌"}
+
+event: chunk
+data: {"content": "公司"}
+
+event: chunk
+data: {"content": "配备"}
+
+event: chunk
+data: {"content": "MP"}
+
+event: chunk
+data: {"content": "P"}
+
+event: chunk
+data: {"content": "电缆"}
+
+event: chunk
+data: {"content": "保护"}
+
+event: chunk
+data: {"content": "管"}
+
+event: chunk
+data: {"content": "生产线"}
+
+event: chunk
+data: {"content": "【"}
+
+event: chunk
+data: {"content": "待"}
+
+event: chunk
+data: {"content": "补充"}
+
+event: chunk
+data: {"content": "："}
+
+event: chunk
+data: {"content": "生产线"}
+
+event: chunk
+data: {"content": "数量"}
+
+event: chunk
+data: {"content": "及"}
+
+event: chunk
+data: {"content": "型号"}
+
+event: chunk
+data: {"content": "】，"}
+
+event: chunk
+data: {"content": "以及"}
+
+event: chunk
+data: {"content": "CP"}
+
+event: chunk
+data: {"content": "VC"}
+
+event: chunk
+data: {"content": "电缆"}
+
+event: chunk
+data: {"content": "保护"}
+
+event: chunk
+data: {"content": "管"}
+
+event: chunk
+data: {"content": "生产线"}
+
+event: chunk
+data: {"content": "【"}
+
+event: chunk
+data: {"content": "待"}
+
+event: chunk
+data: {"content": "补充"}
+
+event: chunk
+data: {"content": "："}
+
+event: chunk
+data: {"content": "生产线"}
+
+event: chunk
+data: {"content": "数量"}
+
+event: chunk
+data: {"content": "及"}
+
+event: chunk
+data: {"content": "型号"}
+
+event: chunk
+data: {"content": "】"}
+
+event: chunk
+data: {"content": "。"}
+
+event: chunk
+data: {"content": "生产线"}
+
+event: chunk
+data: {"content": "采用"}
+
+event: chunk
+data: {"content": "【"}
+
+event: chunk
+data: {"content": "待"}
+
+event: chunk
+data: {"content": "补充"}
+
+event: chunk
+data: {"content": "："}
+
+event: chunk
+data: {"content": "生产工艺"}
+
+event: chunk
+data: {"content": "类型"}
+
+event: chunk
+data: {"content": "，"}
+
+event: chunk
+data: {"content": "如"}
+
+event: chunk
+data: {"content": "螺杆"}
+
+event: chunk
+data: {"content": "挤出"}
+
+event: chunk
+data: {"content": "、"}
+
+event: chunk
+data: {"content": "真空"}
+
+event: chunk
+data: {"content": "定型"}
+
+event: chunk
+data: {"content": "等"}
+
+event: chunk
+data: {"content": "】"}
+
+event: chunk
+data: {"content": "工艺"}
+
+event: chunk
+data: {"content": "，"}
+
+event: chunk
+data: {"content": "可"}
+
+event: chunk
+data: {"content": "生产"}
+
+event: chunk
+data: {"content": "满足"}
+
+event: chunk
+data: {"content": "DL"}
+
+event: chunk
+data: {"content": "/T"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "802"}
+
+event: chunk
+data: {"content": "."}
+
+event: chunk
+data: {"content": "4"}
+
+event: chunk
+data: {"content": "-"}
+
+event: chunk
+data: {"content": "201"}
+
+event: chunk
+data: {"content": "7"}
+
+event: chunk
+data: {"content": "《"}
+
+event: chunk
+data: {"content": "电力"}
+
+event: chunk
+data: {"content": "电缆"}
+
+event: chunk
+data: {"content": "用"}
+
+event: chunk
+data: {"content": "导管"}
+
+event: chunk
+data: {"content": "技术"}
+
+event: chunk
+data: {"content": "条件"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "第"}
+
+event: chunk
+data: {"content": "4"}
+
+event: chunk
+data: {"content": "部分"}
+
+event: chunk
+data: {"content": "："}
+
+event: chunk
+data: {"content": "MP"}
+
+event: chunk
+data: {"content": "P"}
+
+event: chunk
+data: {"content": "和"}
+
+event: chunk
+data: {"content": "CP"}
+
+event: chunk
+data: {"content": "VC"}
+
+event: chunk
+data: {"content": "保护"}
+
+event: chunk
+data: {"content": "管"}
+
+event: chunk
+data: {"content": "》"}
+
+event: chunk
+data: {"content": "标准"}
+
+event: chunk
+data: {"content": "要求的"}
+
+event: chunk
+data: {"content": "各类"}
+
+event: chunk
+data: {"content": "规格"}
+
+event: chunk
+data: {"content": "产品"}
+
+event: chunk
+data: {"content": "。"}
+
+event: chunk
+data: {"content": "生产线"}
+
+event: chunk
+data: {"content": "具备"}
+
+event: chunk
+data: {"content": "连续"}
+
+event: chunk
+data: {"content": "挤出"}
+
+event: chunk
+data: {"content": "、"}
+
+event: chunk
+data: {"content": "冷却"}
+
+event: chunk
+data: {"content": "定型"}
+
+event: chunk
+data: {"content": "、"}
+
+event: chunk
+data: {"content": "牵引"}
+
+event: chunk
+data: {"content": "切割"}
+
+event: chunk
+data: {"content": "、"}
+
+event: chunk
+data: {"content": "在线"}
+
+event: chunk
+data: {"content": "检测"}
+
+event: chunk
+data: {"content": "等功能"}
+
+event: chunk
+data: {"content": "模块"}
+
+event: chunk
+data: {"content": "，"}
+
+event: chunk
+data: {"content": "确保"}
+
+event: chunk
+data: {"content": "产品"}
+
+event: chunk
+data: {"content": "几何"}
+
+event: chunk
+data: {"content": "尺寸"}
+
+event: chunk
+data: {"content": "、"}
+
+event: chunk
+data: {"content": "壁"}
+
+event: chunk
+data: {"content": "厚"}
+
+event: chunk
+data: {"content": "均匀"}
+
+event: chunk
+data: {"content": "度和"}
+
+event: chunk
+data: {"content": "表面"}
+
+event: chunk
+data: {"content": "质量的"}
+
+event: chunk
+data: {"content": "稳定性"}
+
+event: chunk
+data: {"content": "。\n\n"}
+
+event: chunk
+data: {"content": "生产线"}
+
+event: chunk
+data: {"content": "关键"}
+
+event: chunk
+data: {"content": "工艺"}
+
+event: chunk
+data: {"content": "参数"}
+
+event: chunk
+data: {"content": "及"}
+
+event: chunk
+data: {"content": "产品"}
+
+event: chunk
+data: {"content": "规格"}
+
+event: chunk
+data: {"content": "详见"}
+
+event: chunk
+data: {"content": "下表"}
+
+event: chunk
+data: {"content": "：\n\n"}
+
+event: chunk
+data: {"content": "|"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "设备"}
+
+event: chunk
+data: {"content": "名称"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "型号"}
+
+event: chunk
+data: {"content": "/"}
+
+event: chunk
+data: {"content": "规格"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "可"}
+
+event: chunk
+data: {"content": "生产"}
+
+event: chunk
+data: {"content": "管"}
+
+event: chunk
+data: {"content": "材"}
+
+event: chunk
+data: {"content": "规格"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "关键"}
+
+event: chunk
+data: {"content": "工艺"}
+
+event: chunk
+data: {"content": "参数"}
+
+event: chunk
+data: {"content": " |\n"}
+
+event: chunk
+data: {"content": "|"}
+
+event: chunk
+data: {"content": "----------"}
+
+event: chunk
+data: {"content": "|"}
+
+event: chunk
+data: {"content": "-----------"}
+
+event: chunk
+data: {"content": "|"}
+
+event: chunk
+data: {"content": "----------------"}
+
+event: chunk
+data: {"content": "|"}
+
+event: chunk
+data: {"content": "--------------"}
+
+event: chunk
+data: {"content": "|\n"}
+
+event: chunk
+data: {"content": "|"}
+
+event: chunk
+data: {"content": " M"}
+
+event: chunk
+data: {"content": "PP"}
+
+event: chunk
+data: {"content": "保护"}
+
+event: chunk
+data: {"content": "管"}
+
+event: chunk
+data: {"content": "生产线"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " 【"}
+
+event: chunk
+data: {"content": "待"}
+
+event: chunk
+data: {"content": "补充"}
+
+event: chunk
+data: {"content": "】"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " 【"}
+
+event: chunk
+data: {"content": "待"}
+
+event: chunk
+data: {"content": "补充"}
+
+event: chunk
+data: {"content": "："}
+
+event: chunk
+data: {"content": "公"}
+
+event: chunk
+data: {"content": "称"}
+
+event: chunk
+data: {"content": "内"}
+
+event: chunk
+data: {"content": "径"}
+
+event: chunk
+data: {"content": "范围"}
+
+event: chunk
+data: {"content": "】"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " 【"}
+
+event: chunk
+data: {"content": "待"}
+
+event: chunk
+data: {"content": "补充"}
+
+event: chunk
+data: {"content": "："}
+
+event: chunk
+data: {"content": "挤出"}
+
+event: chunk
+data: {"content": "温度"}
+
+event: chunk
+data: {"content": "、"}
+
+event: chunk
+data: {"content": "牵引"}
+
+event: chunk
+data: {"content": "速度"}
+
+event: chunk
+data: {"content": "等"}
+
+event: chunk
+data: {"content": "】"}
+
+event: chunk
+data: {"content": " |\n"}
+
+event: chunk
+data: {"content": "|"}
+
+event: chunk
+data: {"content": " CP"}
+
+event: chunk
+data: {"content": "VC"}
+
+event: chunk
+data: {"content": "保护"}
+
+event: chunk
+data: {"content": "管"}
+
+event: chunk
+data: {"content": "生产线"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " 【"}
+
+event: chunk
+data: {"content": "待"}
+
+event: chunk
+data: {"content": "补充"}
+
+event: chunk
+data: {"content": "】"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " 【"}
+
+event: chunk
+data: {"content": "待"}
+
+event: chunk
+data: {"content": "补充"}
+
+event: chunk
+data: {"content": "："}
+
+event: chunk
+data: {"content": "公"}
+
+event: chunk
+data: {"content": "称"}
+
+event: chunk
+data: {"content": "内"}
+
+event: chunk
+data: {"content": "径"}
+
+event: chunk
+data: {"content": "范围"}
+
+event: chunk
+data: {"content": "】"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " 【"}
+
+event: chunk
+data: {"content": "待"}
+
+event: chunk
+data: {"content": "补充"}
+
+event: chunk
+data: {"content": "："}
+
+event: chunk
+data: {"content": "挤出"}
+
+event: chunk
+data: {"content": "温度"}
+
+event: chunk
+data: {"content": "、"}
+
+event: chunk
+data: {"content": "牵引"}
+
+event: chunk
+data: {"content": "速度"}
+
+event: chunk
+data: {"content": "等"}
+
+event: chunk
+data: {"content": "】"}
+
+event: chunk
+data: {"content": " |\n\n"}
+
+event: chunk
+data: {"content": "**"}
+
+event: chunk
+data: {"content": "2"}
+
+event: chunk
+data: {"content": "."}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "生产能力"}
+
+event: chunk
+data: {"content": "保障"}
+
+event: chunk
+data: {"content": "**\n\n"}
+
+event: chunk
+data: {"content": "泰"}
+
+event: chunk
+data: {"content": "昌"}
+
+event: chunk
+data: {"content": "公司"}
+
+event: chunk
+data: {"content": "通过"}
+
+event: chunk
+data: {"content": "优化"}
+
+event: chunk
+data: {"content": "生产"}
+
+event: chunk
+data: {"content": "排"}
+
+event: chunk
+data: {"content": "程"}
+
+event: chunk
+data: {"content": "和"}
+
+event: chunk
+data: {"content": "工艺"}
+
+event: chunk
+data: {"content": "参数"}
+
+event: chunk
+data: {"content": "，"}
+
+event: chunk
+data: {"content": "实现"}
+
+event: chunk
+data: {"content": "满"}
+
+event: chunk
+data: {"content": "负荷"}
+
+event: chunk
+data: {"content": "产能"}
+
+event: chunk
+data: {"content": "【"}
+
+event: chunk
+data: {"content": "待"}
+
+event: chunk
+data: {"content": "补充"}
+
+event: chunk
+data: {"content": "："}
+
+event: chunk
+data: {"content": "日产"}
+
+event: chunk
+data: {"content": "/"}
+
+event: chunk
+data: {"content": "月"}
+
+event: chunk
+data: {"content": "产"}
+
+event: chunk
+data: {"content": "数据"}
+
+event: chunk
+data: {"content": "】"}
+
+event: chunk
+data: {"content": "。"}
+
+event: chunk
+data: {"content": "公司"}
+
+event: chunk
+data: {"content": "已"}
+
+event: chunk
+data: {"content": "通过"}
+
+event: chunk
+data: {"content": "ISO"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "900"}
+
+event: chunk
+data: {"content": "1"}
+
+event: chunk
+data: {"content": "质量管理"}
+
+event: chunk
+data: {"content": "体系"}
+
+event: chunk
+data: {"content": "认证"}
+
+event: chunk
+data: {"content": "，"}
+
+event: chunk
+data: {"content": "生产过程"}
+
+event: chunk
+data: {"content": "严格执行"}
+
+event: chunk
+data: {"content": "工艺"}
+
+event: chunk
+data: {"content": "文件和"}
+
+event: chunk
+data: {"content": "操作规程"}
+
+event: chunk
+data: {"content": "，"}
+
+event: chunk
+data: {"content": "关键"}
+
+event: chunk
+data: {"content": "工序"}
+
+event: chunk
+data: {"content": "设置"}
+
+event: chunk
+data: {"content": "质量控制"}
+
+event: chunk
+data: {"content": "点"}
+
+event: chunk
+data: {"content": "，"}
+
+event: chunk
+data: {"content": "确保"}
+
+event: chunk
+data: {"content": "每"}
+
+event: chunk
+data: {"content": "道"}
+
+event: chunk
+data: {"content": "工序"}
+
+event: chunk
+data: {"content": "处于"}
+
+event: chunk
+data: {"content": "受"}
+
+event: chunk
+data: {"content": "控"}
+
+event: chunk
+data: {"content": "状态"}
+
+event: chunk
+data: {"content": "。\n\n"}
+
+event: chunk
+data: {"content": "【"}
+
+event: chunk
+data: {"content": "图片"}
+
+event: chunk
+data: {"content": "："}
+
+event: chunk
+data: {"content": "待"}
+
+event: chunk
+data: {"content": "补充"}
+
+event: chunk
+data: {"content": "："}
+
+event: chunk
+data: {"content": "泰"}
+
+event: chunk
+data: {"content": "昌"}
+
+event: chunk
+data: {"content": "公司"}
+
+event: chunk
+data: {"content": "MP"}
+
+event: chunk
+data: {"content": "P"}
+
+event: chunk
+data: {"content": "/"}
+
+event: chunk
+data: {"content": "CP"}
+
+event: chunk
+data: {"content": "VC"}
+
+event: chunk
+data: {"content": "电缆"}
+
+event: chunk
+data: {"content": "保护"}
+
+event: chunk
+data: {"content": "管"}
+
+event: chunk
+data: {"content": "生产线"}
+
+event: chunk
+data: {"content": "实"}
+
+event: chunk
+data: {"content": "景"}
+
+event: chunk
+data: {"content": "照片"}
+
+event: chunk
+data: {"content": "】\n\n"}
+
+event: chunk
+data: {"content": "##"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "二"}
+
+event: chunk
+data: {"content": "、"}
+
+event: chunk
+data: {"content": "试验"}
+
+event: chunk
+data: {"content": "检测"}
+
+event: chunk
+data: {"content": "能力"}
+
+event: chunk
+data: {"content": "\n\n"}
+
+event: chunk
+data: {"content": "泰"}
+
+event: chunk
+data: {"content": "昌"}
+
+event: chunk
+data: {"content": "公司"}
+
+event: chunk
+data: {"content": "设有"}
+
+event: chunk
+data: {"content": "独立的"}
+
+event: chunk
+data: {"content": "试验"}
+
+event: chunk
+data: {"content": "检测"}
+
+event: chunk
+data: {"content": "中心"}
+
+event: chunk
+data: {"content": "，"}
+
+event: chunk
+data: {"content": "配备"}
+
+event: chunk
+data: {"content": "用于"}
+
+event: chunk
+data: {"content": "电缆"}
+
+event: chunk
+data: {"content": "保护"}
+
+event: chunk
+data: {"content": "管"}
+
+event: chunk
+data: {"content": "理化"}
+
+event: chunk
+data: {"content": "性能"}
+
+event: chunk
+data: {"content": "检测"}
+
+event: chunk
+data: {"content": "的"}
+
+event: chunk
+data: {"content": "专用"}
+
+event: chunk
+data: {"content": "设备"}
+
+event: chunk
+data: {"content": "，"}
+
+event: chunk
+data: {"content": "具备"}
+
+event: chunk
+data: {"content": "原材料"}
+
+event: chunk
+data: {"content": "入"}
+
+event: chunk
+data: {"content": "厂"}
+
+event: chunk
+data: {"content": "检验"}
+
+event: chunk
+data: {"content": "、"}
+
+event: chunk
+data: {"content": "过程"}
+
+event: chunk
+data: {"content": "控制"}
+
+event: chunk
+data: {"content": "检验"}
+
+event: chunk
+data: {"content": "和"}
+
+event: chunk
+data: {"content": "成品"}
+
+event: chunk
+data: {"content": "出厂"}
+
+event: chunk
+data: {"content": "检验"}
+
+event: chunk
+data: {"content": "能力"}
+
+event: chunk
+data: {"content": "。\n\n"}
+
+event: chunk
+data: {"content": "**"}
+
+event: chunk
+data: {"content": "1"}
+
+event: chunk
+data: {"content": "."}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "关键"}
+
+event: chunk
+data: {"content": "试验"}
+
+event: chunk
+data: {"content": "检测"}
+
+event: chunk
+data: {"content": "设备"}
+
+event: chunk
+data: {"content": "**\n\n"}
+
+event: chunk
+data: {"content": "|"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "设备"}
+
+event: chunk
+data: {"content": "名称"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "型号"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "检测"}
+
+event: chunk
+data: {"content": "项目"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "检测"}
+
+event: chunk
+data: {"content": "标准"}
+
+event: chunk
+data: {"content": " |\n"}
+
+event: chunk
+data: {"content": "|"}
+
+event: chunk
+data: {"content": "----------"}
+
+event: chunk
+data: {"content": "|"}
+
+event: chunk
+data: {"content": "------"}
+
+event: chunk
+data: {"content": "|"}
+
+event: chunk
+data: {"content": "----------"}
+
+event: chunk
+data: {"content": "|"}
+
+event: chunk
+data: {"content": "----------"}
+
+event: chunk
+data: {"content": "|\n"}
+
+event: chunk
+data: {"content": "|"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "电子"}
+
+event: chunk
+data: {"content": "天平"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " X"}
+
+event: chunk
+data: {"content": "402"}
+
+event: chunk
+data: {"content": "410"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "称"}
+
+event: chunk
+data: {"content": "重"}
+
+event: chunk
+data: {"content": "、"}
+
+event: chunk
+data: {"content": "密度"}
+
+event: chunk
+data: {"content": "测定"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " GB"}
+
+event: chunk
+data: {"content": "/T"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "103"}
+
+event: chunk
+data: {"content": "3"}
+
+event: chunk
+data: {"content": "-"}
+
+event: chunk
+data: {"content": "198"}
+
+event: chunk
+data: {"content": "6"}
+
+event: chunk
+data: {"content": " |\n"}
+
+event: chunk
+data: {"content": "|"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "万能"}
+
+event: chunk
+data: {"content": "试验"}
+
+event: chunk
+data: {"content": "机"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " 【"}
+
+event: chunk
+data: {"content": "待"}
+
+event: chunk
+data: {"content": "补充"}
+
+event: chunk
+data: {"content": "】"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "抗"}
+
+event: chunk
+data: {"content": "压"}
+
+event: chunk
+data: {"content": "强度"}
+
+event: chunk
+data: {"content": "、"}
+
+event: chunk
+data: {"content": "抗"}
+
+event: chunk
+data: {"content": "弯"}
+
+event: chunk
+data: {"content": "强度"}
+
+event: chunk
+data: {"content": "、"}
+
+event: chunk
+data: {"content": "环"}
+
+event: chunk
+data: {"content": "刚度"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " DL"}
+
+event: chunk
+data: {"content": "/T"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "802"}
+
+event: chunk
+data: {"content": "."}
+
+event: chunk
+data: {"content": "4"}
+
+event: chunk
+data: {"content": "-"}
+
+event: chunk
+data: {"content": "201"}
+
+event: chunk
+data: {"content": "7"}
+
+event: chunk
+data: {"content": " |\n"}
+
+event: chunk
+data: {"content": "|"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "维"}
+
+event: chunk
+data: {"content": "卡"}
+
+event: chunk
+data: {"content": "软化"}
+
+event: chunk
+data: {"content": "温度"}
+
+event: chunk
+data: {"content": "测定"}
+
+event: chunk
+data: {"content": "仪"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " 【"}
+
+event: chunk
+data: {"content": "待"}
+
+event: chunk
+data: {"content": "补充"}
+
+event: chunk
+data: {"content": "】"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "维"}
+
+event: chunk
+data: {"content": "卡"}
+
+event: chunk
+data: {"content": "软化"}
+
+event: chunk
+data: {"content": "温度"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " GB"}
+
+event: chunk
+data: {"content": "/T"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "163"}
+
+event: chunk
+data: {"content": "3"}
+
+event: chunk
+data: {"content": "-"}
+
+event: chunk
+data: {"content": "200"}
+
+event: chunk
+data: {"content": "0"}
+
+event: chunk
+data: {"content": " |\n"}
+
+event: chunk
+data: {"content": "|"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "落"}
+
+event: chunk
+data: {"content": "锤"}
+
+event: chunk
+data: {"content": "冲击"}
+
+event: chunk
+data: {"content": "试验"}
+
+event: chunk
+data: {"content": "机"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " 【"}
+
+event: chunk
+data: {"content": "待"}
+
+event: chunk
+data: {"content": "补充"}
+
+event: chunk
+data: {"content": "】"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "耐"}
+
+event: chunk
+data: {"content": "冲击"}
+
+event: chunk
+data: {"content": "性能"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " DL"}
+
+event: chunk
+data: {"content": "/T"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "802"}
+
+event: chunk
+data: {"content": "."}
+
+event: chunk
+data: {"content": "4"}
+
+event: chunk
+data: {"content": "-"}
+
+event: chunk
+data: {"content": "201"}
+
+event: chunk
+data: {"content": "7"}
+
+event: chunk
+data: {"content": " |\n"}
+
+event: chunk
+data: {"content": "|"}
+
+event: chunk
+data: {"content": " "}
+
+event: chunk
+data: {"content": "热"}
+
+event: chunk
+data: {"content": "变形"}
+
+event: chunk
+data: {"content": "温度"}
+
+event: chunk
+data: {"content": "测定"}
+
+event: chunk
+data: {"content": "仪"}
+
+event: chunk
+data: {"content": " |"}
+
+event: chunk
+data: {"content": " 【"}
+
+event: chunk
+data: {"content": "待"}
+
+event: length_cap_reached
+data: {"target_words": 520, "max_words": 640, "actual_words": 640}
+
+event: chunk
+data: {"content": "\n\n![泰昌 testing_capacity 第4页图片 taichang_testing_capacity_p4_039_3dc19173](/api/bidding/knowledge/assets/17b86695-57c6-4e99-be74-7ba38592b95d/file?variant=original)\n\n图示：泰昌 testing_capacity 第4页图片 taichang_testing_capacity_p4_039_3dc19173（泰昌产品能力图片；来源：企业知识资产库；匹配依据：匹配章节证据类型：试验检测能力；章节与资产同时命中“产品”；章节与资产同时命中“设备”）\n\n\n\n![泰昌 testing_capacity 第6页图片 taichang_testing_capacity_p6_062_b7520cd8](/api/bidding/knowledge/assets/28d0b265-2c35-4c75-9116-019230859bbd/file?variant=original)\n\n图示：泰昌 testing_capacity 第6页图片 taichang_testing_capacity_p6_062_b7520cd8（泰昌产品能力图片；来源：企业知识资产库；匹配依据：匹配章节证据类型：试验检测能力；章节与资产同时命中“产品”；章节与资产同时命中“设备”）\n\n"}
+
+event: done
+data: {}
+

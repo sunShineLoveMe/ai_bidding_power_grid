@@ -1,0 +1,588 @@
+[
+    [
+        {
+            "type": "image",
+            "bbox": [
+                0.361,
+                0.094,
+                0.631,
+                0.206
+            ],
+            "angle": 0,
+            "content": "SHQC",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.285,
+                0.217,
+                0.713,
+                0.244
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.38,
+                0.255,
+                0.619,
+                0.271
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.468,
+                0.279,
+                0.529,
+                0.295
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.302,
+                0.302,
+                0.728,
+                0.327
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.333,
+                0.336,
+                0.659,
+                0.352
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.298,
+                0.364,
+                0.576,
+                0.38
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.298,
+                0.39,
+                0.576,
+                0.407
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.298,
+                0.416,
+                0.576,
+                0.433
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.305,
+                0.46,
+                0.68,
+                0.481
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.354,
+                0.488,
+                0.643,
+                0.509
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.41,
+                0.519,
+                0.577,
+                0.537
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.145,
+                0.553,
+                0.855,
+                0.64
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.363,
+                0.644,
+                0.637,
+                0.667
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.164,
+                0.674,
+                0.432,
+                0.69
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.512,
+                0.673,
+                0.778,
+                0.689
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.146,
+                0.7,
+                0.855,
+                0.729
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.162,
+                0.74,
+                0.281,
+                0.824
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.338,
+                0.738,
+                0.457,
+                0.824
+            ],
+            "angle": 0,
+            "content": "SHQC\nR-2017-303",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.483,
+                0.731,
+                0.677,
+                0.784
+            ],
+            "angle": 0,
+            "content": "刘多文",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.512,
+                0.793,
+                0.633,
+                0.81
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.668,
+                0.726,
+                0.864,
+                0.856
+            ],
+            "angle": 0,
+            "content": "北京全惠认证服务有限公司\n本次发证日期：\n2025年10月15日",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.331,
+                0.839,
+                0.665,
+                0.862
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.258,
+                0.876,
+                0.724,
+                0.893
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.308,
+                0.899,
+                0.451,
+                0.913
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.515,
+                0.899,
+                0.674,
+                0.914
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.282,
+                0.214,
+                0.716,
+                0.246
+            ],
+            "text": "绿色供应链认证证书",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.298,
+                0.3,
+                0.729,
+                0.328
+            ],
+            "text": "河北泰昌电力器材科技有限公司",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.378,
+                0.254,
+                0.622,
+                0.272
+            ],
+            "text": "证书编号：30325L22617R0S",
+            "score": 0.995
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.464,
+                0.276,
+                0.534,
+                0.297
+            ],
+            "text": "兹证明",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.331,
+                0.334,
+                0.662,
+                0.353
+            ],
+            "text": "统一社会信用代码：91130607056539515C",
+            "score": 0.996
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.351,
+                0.487,
+                0.645,
+                0.51
+            ],
+            "text": "GB/T39257-2020标准要求",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.297,
+                0.362,
+                0.578,
+                0.381
+            ],
+            "text": "注册地址：保定市满城区陉阳驿村",
+            "score": 0.996
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.296,
+                0.389,
+                0.579,
+                0.409
+            ],
+            "text": "办公地址：保定市满城区陉阳驿村",
+            "score": 0.995
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.296,
+                0.414,
+                0.578,
+                0.434
+            ],
+            "text": "生产地址：保定市满城区陉阳驿村",
+            "score": 0.996
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.358,
+                0.64,
+                0.641,
+                0.67
+            ],
+            "text": "评价级别：★★★★★",
+            "score": 0.95
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.162,
+                0.673,
+                0.434,
+                0.691
+            ],
+            "text": "证书发证日期：2025年10月15日",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.51,
+                0.672,
+                0.779,
+                0.69
+            ],
+            "text": "证书有效期至：2028年10月14日",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.302,
+                0.458,
+                0.683,
+                0.482
+            ],
+            "text": "经评审，组织的供应链管理体系符合：",
+            "score": 0.995
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.408,
+                0.519,
+                0.579,
+                0.537
+            ],
+            "text": "该证书覆盖的范围：",
+            "score": 0.996
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.306,
+                0.897,
+                0.453,
+                0.914
+            ],
+            "text": "电话：010-83602260",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.512,
+                0.896,
+                0.677,
+                0.916
+            ],
+            "text": "网址：www.b.jshrz.com",
+            "score": 0.99
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.146,
+                0.553,
+                0.854,
+                0.573
+            ],
+            "text": "资质范围内电表箱及低压无功补偿配电柜的生产；非标电力金具（横",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.156,
+                0.575,
+                0.842,
+                0.595
+            ],
+            "text": "担、抱箍、拉线棒）、高压隔离开关、高压熔断器、电缆保护管的",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.24,
+                0.598,
+                0.759,
+                0.617
+            ],
+            "text": "生产；管状母线、电缆分支箱及柱上断路器的销售",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.347,
+                0.62,
+                0.653,
+                0.638
+            ],
+            "text": "所涉及的绿色供应链管理活动",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.144,
+                0.698,
+                0.857,
+                0.716
+            ],
+            "text": "注：获证组织在此证书有效期内需按期接受监督审核，监督审核后此证书与保持通知书一起使用方为继续有效。",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.173,
+                0.711,
+                0.843,
+                0.732
+            ],
+            "text": "本证书信息可在国家认证认可监督委员会网站（www.cnca.gov.cn）及公司网站（www.bjsz.com上查询。",
+            "score": 0.967
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.509,
+                0.791,
+                0.636,
+                0.811
+            ],
+            "text": "证书签发人",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.327,
+                0.837,
+                0.668,
+                0.864
+            ],
+            "text": "北京圣慧认证服务有限公司",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.256,
+                0.875,
+                0.726,
+                0.894
+            ],
+            "text": "地址：北京市丰台区北宫镇园博园南路渡业大厦6层618B室",
+            "score": 1.0
+        }
+    ]
+]

@@ -25,11 +25,26 @@ class NativeParseIngestionTest(unittest.TestCase):
 
             with (
                 patch("backend.parsing.document_parser.has_mineru_token", return_value=False),
-                patch("backend.parsing.document_parser.ensure_extractable_text", return_value=["招标编号：0526AB\n资格要求：投标人应具备相关资质。"]),
+                patch("backend.parsing.document_parser.PARSED_OUTPUT_ROOT", Path(tmp) / "parsed_outputs"),
+                patch("backend.parsing.document_parser.ensure_extractable_text", return_value=[
+                    "\n".join([
+                        "# 国网辽宁电力2025年第三次物资协议库存招标采购招标文件",
+                        "招标编号：0526AB",
+                        "分标编号：102-CPVC",
+                        "分标名称：电缆保护管",
+                        "包号：包1",
+                        "包名称：CPVC电缆保护管包1",
+                        "招标人：国网辽宁省电力有限公司",
+                        "招标代理机构：国网辽宁招标有限公司",
+                        "资格要求：投标人应具备相关资质。",
+                    ])
+                ]),
                 patch("backend.parsing.document_parser.read_parse_status", return_value={"project_id": project_id, "supabase_file_id": file_id}),
                 patch("backend.parsing.document_parser.write_parse_status") as write_status,
                 patch("backend.parsing.document_parser._update_supabase_status") as update_status,
-                patch("backend.parsing.document_parser.ingest_mineru_artifacts_to_supabase", return_value={"chunks": 1}) as ingest,
+                patch("backend.parsing.bid_interpreter.replace_bid_analysis") as replace_analysis,
+                patch("backend.parsing.bid_interpreter.replace_project_rows", return_value=[]),
+                patch("backend.parsing.bid_interpreter.update_bid_project_metadata_fields") as update_project,
             ):
                 document_parser.parse_and_index_tender_file(
                     file_path=str(doc_path),
@@ -38,11 +53,15 @@ class NativeParseIngestionTest(unittest.TestCase):
                     supabase_file_id=file_id,
                 )
 
-        ingest.assert_called_once()
-        kwargs = ingest.call_args.kwargs
-        self.assertEqual(kwargs["project_id"], project_id)
-        self.assertEqual(kwargs["bid_file_id"], file_id)
-        self.assertTrue(kwargs["artifacts"]["markdown_path"].endswith("full.md"))
+        replace_analysis.assert_called_once()
+        saved_analysis = replace_analysis.call_args.args[1]
+        saved_meta = saved_analysis["project_meta"]
+        self.assertEqual(saved_meta["cover_fields"]["招标编号"], "0526AB")
+        self.assertEqual(saved_meta["cover_fields"]["分标编号"], "102-CPVC")
+        self.assertEqual(saved_meta["cover_fields"]["包名称"], "CPVC电缆保护管包1")
+        update_project.assert_called_once()
+        self.assertEqual(update_project.call_args.args[0], project_id)
+        self.assertEqual(update_project.call_args.args[1]["project_no"], "0526AB")
         update_status.assert_called_with(file_id, "indexed")
         indexed_payloads = [call.args[1] for call in write_status.call_args_list if call.args[1].get("parse_status") == "indexed"]
         self.assertTrue(indexed_payloads)

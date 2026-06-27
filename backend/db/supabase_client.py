@@ -15,6 +15,15 @@ class SupabaseConfigError(RuntimeError):
     pass
 
 
+DEFAULT_STORAGE_BUCKETS = {
+    "tender": "tender-files",
+    "generated": "generated-docx",
+    "knowledge": "knowledge-files",
+    "qualification": "qualification-files",
+    "product": "product-files",
+}
+
+
 @lru_cache(maxsize=1)
 def get_supabase_client() -> Client:
     """Return a backend Supabase client.
@@ -63,7 +72,7 @@ def get_bucket_name(kind: str) -> str:
             raise SupabaseConfigError(f"{oss_env_key} or OSS_BUCKET is required when STORAGE_PROVIDER=oss")
         return bucket
 
-    bucket = os.getenv(env_key)
+    bucket = os.getenv(env_key) or DEFAULT_STORAGE_BUCKETS.get(kind)
     if not bucket:
         raise SupabaseConfigError(f"{env_key} is required")
     return bucket

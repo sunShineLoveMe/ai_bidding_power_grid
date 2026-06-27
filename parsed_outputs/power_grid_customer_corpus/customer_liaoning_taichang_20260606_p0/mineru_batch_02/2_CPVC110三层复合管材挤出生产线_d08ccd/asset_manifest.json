@@ -1,0 +1,304 @@
+{
+  "assets": [
+    {
+      "asset_id": "taichang_production_capacity_p4_064_42c16b99",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/2.CPVC110三层复合管材挤出生产线/2.CPVC110三层复合管材挤出生产线.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "production_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/2_CPVC110三层复合管材挤出生产线_d08ccd/extract/images/2fc8c76097baf5e7d64f6f9c081a046980ce68b7a0da87997d0eeea6fc170258.jpg",
+      "asset_sha256": "c8f6f00918958dcd529e194eab5fe8fea31452647526855d7e9b9324eed4a364",
+      "page_idx": 3,
+      "page_no": 4,
+      "bbox": [
+        462,
+        145,
+        567,
+        247
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_production_capacity_20260606_110856_d08ccdd1",
+      "batch_id": "2cbb7561-e257-4d86-8a6d-d17e50a7dc0e",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "3200121140 江苏增镇税专用发票 No 05280000 05280000开票日期：2012年12月23日",
+      "ocr_context": "3200121140 江苏增镇税专用发票 No 05280000 05280000开票日期：2012年12月23日",
+      "retrieval_text": "泰昌 production_capacity 第4页图片。3200121140 江苏增镇税专用发票 No 05280000 05280000开票日期：2012年12月23日",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "production_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:4",
+        "bbox_anchor": [
+          462,
+          145,
+          567,
+          247
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_production_capacity_p4_072_6448693f",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/2.CPVC110三层复合管材挤出生产线/2.CPVC110三层复合管材挤出生产线.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "production_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/2_CPVC110三层复合管材挤出生产线_d08ccd/extract/images/26485797168fb6e615d4a2f83da25c05312e2a04bef8033883c902442e44c2c6.jpg",
+      "asset_sha256": "c69a7d9079031a54dd7acdf4ace91c6fe6f3d4ae337eaa5df250023f6a4fb2c7",
+      "page_idx": 3,
+      "page_no": 4,
+      "bbox": [
+        650,
+        606,
+        787,
+        747
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_production_capacity_20260606_110856_d08ccdd1",
+      "batch_id": "2cbb7561-e257-4d86-8a6d-d17e50a7dc0e",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "收款人： 复核： 开票人晁猛",
+      "ocr_context": "收款人： 复核： 开票人晁猛",
+      "retrieval_text": "泰昌 production_capacity 第4页图片。收款人： 复核： 开票人晁猛",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "production_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:4",
+        "bbox_anchor": [
+          650,
+          606,
+          787,
+          747
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_production_capacity_p5_079_0f275f67",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/2.CPVC110三层复合管材挤出生产线/2.CPVC110三层复合管材挤出生产线.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "production_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/2_CPVC110三层复合管材挤出生产线_d08ccd/extract/images/8bd6738cf1bf07215b3e797f8053224c0bf559b34230737f612eefeff8dde5cf.jpg",
+      "asset_sha256": "5849cc764734199feaaf8e53fac7fc9b1b2d38b60fb3990f1940029e38646479",
+      "page_idx": 4,
+      "page_no": 5,
+      "bbox": [
+        579,
+        264,
+        757,
+        393
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_production_capacity_20260606_110856_d08ccdd1",
+      "batch_id": "2cbb7561-e257-4d86-8a6d-d17e50a7dc0e",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "鉴于国家税务总局全国增值税发票查验平台https://inv-veri.chinatax.gov.cn/index.html查询年限5年，故我公司部分生产、试验设备发票超出查询年限而无法查询。 我公司承诺所提供所有设备发票信息真实有效，无任何虚假。如有虚假愿意承担一切法律责任，特此证明。 承诺人：河北泰昌电力器材科技有限公司",
+      "ocr_context": "鉴于国家税务总局全国增值税发票查验平台https://inv-veri.chinatax.gov.cn/index.html查询年限5年，故我公司部分生产、试验设备发票超出查询年限而无法查询。 我公司承诺所提供所有设备发票信息真实有效，无任何虚假。如有虚假愿意承担一切法律责任，特此证明。 承诺人：河北泰昌电力器材科技有限公司",
+      "retrieval_text": "泰昌 production_capacity 第5页图片。鉴于国家税务总局全国增值税发票查验平台https://inv-veri.chinatax.gov.cn/index.html查询年限5年，故我公司部分生产、试验设备发票超出查询年限而无法查询。 我公司承诺所提供所有设备发票信息真实有效，无任何虚假。如有虚假愿意承担一切法律责任，特此证明。 承诺人：河北泰昌电力器材科技有限公司",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "production_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:5",
+        "bbox_anchor": [
+          579,
+          264,
+          757,
+          393
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_production_capacity_p6_080_178c9ea2",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/2.CPVC110三层复合管材挤出生产线/2.CPVC110三层复合管材挤出生产线.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "production_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/2_CPVC110三层复合管材挤出生产线_d08ccd/extract/images/e58641cd657e4dba80f43aea7f406384b539db884677beffb63fb8515a53172b.jpg",
+      "asset_sha256": "500e6c2c938d705b7a51753db9ef88f9b0bdf9166f80c6a5ab0d9313662842f7",
+      "page_idx": 5,
+      "page_no": 6,
+      "bbox": [
+        0,
+        0,
+        998,
+        998
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_production_capacity_20260606_110856_d08ccdd1",
+      "batch_id": "2cbb7561-e257-4d86-8a6d-d17e50a7dc0e",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "",
+      "ocr_context": "",
+      "retrieval_text": "泰昌 production_capacity 第6页图片。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "production_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:6",
+        "bbox_anchor": [
+          0,
+          0,
+          998,
+          998
+        ]
+      }
+    },
+    {
+      "asset_id": "taichang_production_capacity_p7_081_a99652d1",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/2.CPVC110三层复合管材挤出生产线/2.CPVC110三层复合管材挤出生产线.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "production_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/2_CPVC110三层复合管材挤出生产线_d08ccd/extract/images/785c0e514742b6d69f8181afa935e2f538646d4dc22916be6106cf8f3c44ccbd.jpg",
+      "asset_sha256": "d546cca9b273d03e32e272becb38950f8dcb991002e8ad7b43ad2c525e08525d",
+      "page_idx": 6,
+      "page_no": 7,
+      "bbox": [
+        0,
+        0,
+        998,
+        998
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_production_capacity_20260606_110856_d08ccdd1",
+      "batch_id": "2cbb7561-e257-4d86-8a6d-d17e50a7dc0e",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "caption_candidate": "",
+      "ocr_context": "",
+      "retrieval_text": "泰昌 production_capacity 第7页图片。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "production_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:7",
+        "bbox_anchor": [
+          0,
+          0,
+          998,
+          998
+        ]
+      }
+    }
+  ]
+}

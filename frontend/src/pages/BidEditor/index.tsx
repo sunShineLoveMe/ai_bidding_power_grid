@@ -6,11 +6,13 @@ import {
   CheckCircle2,
   ChevronDown,
   ChevronRight,
+  ClipboardCheck,
   Download,
   FileText,
   MoreVertical,
   Plus,
   Search,
+  Scissors,
   Sparkles,
   Square,
   ArrowUp,
@@ -31,6 +33,7 @@ import {
   cancelSectionGenerationTask,
   createSectionGenerationTask,
   deleteBidSection,
+  editBidSectionText,
   generateBidDocxDownload,
   getBidExportTask,
   generateComplianceSupplement,
@@ -41,6 +44,7 @@ import {
   getSectionGenerationTask,
   reorderBidSections,
   resetBidSectionsGeneration,
+  resumeSectionGenerationTask,
   retrySectionGenerationTaskItem,
   runSemanticComplianceCheck,
   saveBidSection,
@@ -51,6 +55,7 @@ import type { SectionGenerationTask } from '../../api/bidProject';
 import type { BidExportTask } from '../../api/bidProject';
 import { BrandMark } from '../../components/common/BrandMark';
 import { TiptapBidEditor } from '../../components/editor/TiptapBidEditor';
+import type { BidAiEditEditorRequest, BidAiEditEditorResult } from '../../components/editor/TiptapBidEditor';
 import type { BidLengthFeasibility, BidLengthSettings, BidOutline, BidOutlineChapter, BidSection, ChapterWritingPlan, ComplianceReport, ComplianceRow, InterpretationResponse, SemanticComplianceReport, SemanticComplianceReview } from '../../types/interpretation';
 
 type EditorMode = '正文模式' | '目录模式';
@@ -67,6 +72,20 @@ type AddChapterOptions = {
   parent?: ChapterDraft | null;
 };
 
+type LeafToContainerConversionMode = 'keep_parent_summary' | 'move_content_to_child';
+
+type AddChapterPersistOptions = AddChapterOptions & {
+  conversionMode?: LeafToContainerConversionMode;
+};
+
+type DeletedChapterSnapshot = {
+  title: string;
+  count: number;
+  selectedId: string;
+  deletedAt: string;
+  chapters: ChapterDraft[];
+};
+
 type StreamingChildPlaceholder = {
   id: string;
   parentOrder: string;
@@ -81,11 +100,25 @@ type BatchTask = {
   chars: number;
   targetWords: number;
   message?: string;
+  metadata?: Record<string, unknown>;
+};
+
+type ChapterWordMeta = {
+  label: string;
+  tooltip: string;
+  generated: boolean;
+  failed: boolean;
+  quality?: 'short' | 'long';
+  qualityLabel?: string;
+  qualityTooltip?: string;
+  actualWords?: number;
+  targetWords?: number;
 };
 
 type PersistedBatchTask = {
   id: string;
   status: SectionGenerationTask['status'];
+  metadata?: Record<string, unknown>;
 };
 
 type SectionGenerationPollResult = {
@@ -329,6 +362,16 @@ function internalVolumeLabel(volumeType: InternalVolumeType): string {
   return internalVolumeOptions.find(item => item.value === volumeType)?.label || '其他';
 }
 
+function activeVolumeToInternal(volumeType: VolumeType): InternalVolumeType | null {
+  if (volumeType === 'technical') {
+    return 'technical';
+  }
+  if (volumeType === 'business') {
+    return 'business';
+  }
+  return null;
+}
+
 function deliveryVolumeType(chapter: Pick<ChapterDraft, 'title' | 'purpose' | 'required_materials' | 'response_points' | 'metadata'>): VolumeType {
   return inferVolumeType(chapter) === 'technical' ? 'technical' : 'business';
 }
@@ -338,6 +381,32 @@ function matchesActiveVolume(chapter: ChapterDraft, activeVolume: VolumeType): b
     return true;
   }
   return deliveryVolumeType(chapter) === activeVolume;
+}
+
+function exportPackageLabel(volumeType: VolumeType, scope: 'full' | 'section' = 'full'): string {
+  if (scope === 'section') {
+    return '本章';
+  }
+  if (volumeType === 'technical') {
+    return '技术标';
+  }
+  if (volumeType === 'business') {
+    return '商务标';
+  }
+  return '完整投标文件';
+}
+
+function formatFileSize(size?: number): string {
+  if (!size || size <= 0) {
+    return '-';
+  }
+  if (size >= 1024 * 1024) {
+    return `${(size / 1024 / 1024).toFixed(2)} MB`;
+  }
+  if (size >= 1024) {
+    return `${Math.round(size / 1024)} KB`;
+  }
+  return `${size} B`;
 }
 
 function safeParentIdForSave(parentId: string | null | undefined, chapters: ChapterDraft[]): string | null {
@@ -360,6 +429,18 @@ export function BidEditorPage(): JSX.Element {
   const [loading, setLoading] = useState(true);
   const [streaming, setStreaming] = useState(false);
   const [sectionStreaming, setSectionStreaming] = useState(false);
+  const [compressingChapterId, setCompressingChapterId] = useState('');
+  const [compressConfirmChapter, setCompressConfirmChapter] = useState<ChapterDraft | null>(null);
+  const [customWriteTarget, setCustomWriteTarget] = useState<ChapterDraft | null>(null);
+  const [customWriteInstruction, setCustomWriteInstruction] = useState('');
+  const [customWriteSaving, setCustomWriteSaving] = useState(false);
+  const [leafToContainerTarget, setLeafToContainerTarget] = useState<ChapterDraft | null>(null);
+  const [leafToContainerMode, setLeafToContainerMode] = useState<LeafToContainerConversionMode>('keep_parent_summary');
+  const [leafToContainerSaving, setLeafToContainerSaving] = useState(false);
+  const [recentDeletedChapter, setRecentDeletedChapter] = useState<DeletedChapterSnapshot | null>(null);
+  const [restoringDeletedChapter, setRestoringDeletedChapter] = useState(false);
+  const [deleteTarget, setDeleteTarget] = useState<ChapterDraft | null>(null);
+  const [deletingChapter, setDeletingChapter] = useState(false);
   const [streamText, setStreamText] = useState('');
   const [streamingChildPlaceholders, setStreamingChildPlaceholders] = useState<StreamingChildPlaceholder[]>([]);
   const [downloadUrl, setDownloadUrl] = useState('');
@@ -378,7 +459,7 @@ export function BidEditorPage(): JSX.Element {
   const [contentDirty, setContentDirty] = useState(false);
   const [batchGenerating, setBatchGenerating] = useState(false);
   const [batchTasks, setBatchTasks] = useState<Record<string, BatchTask>>({});
-  const [withImages, setWithImages] = useState(false);
+  const withImages = true;
   const [resetModalOpen, setResetModalOpen] = useState(false);
   const [resetClearContent, setResetClearContent] = useState(false);
   const [resettingGeneration, setResettingGeneration] = useState(false);
@@ -392,6 +473,7 @@ export function BidEditorPage(): JSX.Element {
   const batchAbortControllersRef = useRef<Map<string, AbortController>>(new Map());
   const persistedBatchTaskIdRef = useRef('');
   const batchTaskSyncAtRef = useRef<Map<string, number>>(new Map());
+  const autoResumePartialRef = useRef(false);
 
   function applyTaskGeneratedContent(task: SectionGenerationTask | null): void {
     if (!task?.items?.length) {
@@ -445,8 +527,9 @@ export function BidEditorPage(): JSX.Element {
       chars: item.chars || 0,
       targetWords: item.target_words || 800,
       message: generatedIds.has(item.section_id) ? '已完成' : item.message || item.error || batchStatusLabel(item.status),
+      metadata: item.metadata || {},
     } satisfies BatchTask]));
-    setPersistedBatchTask({ id: task.id, status: task.status });
+    setPersistedBatchTask({ id: task.id, status: task.status, metadata: task.metadata || {} });
     persistedBatchTaskIdRef.current = task.id;
     setBatchTasks(nextTasks);
     const runningItem = task.items.find(item => ACTIVE_BATCH_TASK_STATUSES.has(item.status));
@@ -595,6 +678,7 @@ export function BidEditorPage(): JSX.Element {
     setDownloadUrl('');
     try {
       const projectId = searchParams.get('projectId');
+      const sectionIdParam = searchParams.get('sectionId');
       const result = projectId ? await getInterpretation(projectId) : await getLatestInterpretation();
       setData(result);
       setLengthFeasibility(asBidLengthFeasibility(result.analysis?.project_meta));
@@ -609,7 +693,12 @@ export function BidEditorPage(): JSX.Element {
         const drafts = sectionDrafts.length ? sectionDrafts : flattenChapters(outline);
         loadedDrafts = drafts;
         setChapters(drafts);
-        setSelectedId(current => current || drafts[0]?.id || '');
+        setSelectedId(current => {
+          if (sectionIdParam && drafts.some(chapter => chapter.id === sectionIdParam)) {
+            return sectionIdParam;
+          }
+          return current || drafts[0]?.id || '';
+        });
       }
       if (result.project?.id) {
         void refreshComplianceReport(result.project.id, { silent: true });
@@ -789,6 +878,24 @@ export function BidEditorPage(): JSX.Element {
   const selectedChapter = filteredChapters.find(chapter => chapter.id === selectedId)
     || filteredChapters[0]
     || (activeVolume === 'all' ? chapters.find(chapter => chapter.id === selectedId) || chapters[0] : undefined);
+  const handleAiEdit = useCallback(async (request: BidAiEditEditorRequest): Promise<BidAiEditEditorResult> => {
+    if (!data?.project?.id || !selectedChapter) {
+      throw new Error('请先选择需要编辑的章节');
+    }
+    const result = await editBidSectionText(data.project.id, {
+      action: request.action,
+      selectedText: request.selectedText,
+      sectionId: selectedChapter.id,
+      sectionTitle: chapterDisplayTitle(selectedChapter),
+      sectionContext: selectedChapter.purpose || '',
+      fullContent: request.fullContent,
+    });
+    return {
+      revisedText: result.revisedText,
+      summary: result.summary,
+      warnings: result.warnings || [],
+    };
+  }, [data?.project?.id, selectedChapter]);
   const visibleChapters = useMemo(
     () => filteredChapters.filter(chapter => isVisibleChapter(chapter, filteredChapters)),
     [filteredChapters],
@@ -823,8 +930,8 @@ export function BidEditorPage(): JSX.Element {
   const generationProgress = scopedLeafChapters.length ? Math.round((generatedCount / scopedLeafChapters.length) * 10000) / 100 : 0;
   const lengthProgress = lengthGoalChars ? Math.min(100, Math.round((actualChars / lengthGoalChars) * 10000) / 100) : 0;
   const complianceSummary = complianceReport?.summary || {
-    metricName: '条款响应覆盖率',
-    scopeNote: '基于招标条款、评分项、风险项与当前章节映射/正文片段的响应追踪结果，不等同于最终 Word 标书合规结论。',
+    metricName: '条款覆盖率',
+    scopeNote: '仅统计招标条款、评分项、风险项在当前章节正文中的覆盖证据；投标信息确认页字段不计入该指标，也不等同于最终 Word 标书合规结论。',
     total: 0,
     covered: 0,
     partial: 0,
@@ -833,7 +940,7 @@ export function BidEditorPage(): JSX.Element {
     highRiskMissing: 0,
   };
   const complianceStatus = complianceSummary.highRiskMissing
-    ? { label: '高风险未响应', color: 'red' as const }
+    ? { label: '高风险待覆盖', color: 'red' as const }
     : complianceSummary.missing || complianceSummary.partial
       ? { label: '有待补强', color: 'orange' as const }
       : complianceSummary.total
@@ -843,6 +950,7 @@ export function BidEditorPage(): JSX.Element {
     ? complianceLastCheckedAt.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
     : '尚未检查';
   const pendingComplianceRows = (complianceReport?.rows || []).filter(row => row.status !== 'covered');
+  const pendingCoverageCount = complianceSummary.missing + complianceSummary.partial;
   const complianceVolumeSummaries = (complianceReport?.volumeSummaries || []).filter(item => item.total > 0 || item.highRiskMissing || item.missing);
 
   function jumpToComplianceRow(row: ComplianceRow): void {
@@ -911,7 +1019,7 @@ export function BidEditorPage(): JSX.Element {
         width={760}
         onOk={() => void saveLengthSettings()}
         onCancel={() => setLengthSettingsOpen(false)}
-        destroyOnClose
+        destroyOnHidden
       >
         <Alert
           className="mb-4"
@@ -1035,6 +1143,226 @@ export function BidEditorPage(): JSX.Element {
     );
   }
 
+  function CompressionConfirmModal(): JSX.Element {
+    const chapter = compressConfirmChapter
+      ? chapters.find(item => item.id === compressConfirmChapter.id) || compressConfirmChapter
+      : null;
+    const actualWords = chapter ? chapterActualWords(chapter) : 0;
+    const targetWords = chapter ? targetChapterWords(chapter) : 0;
+    const isCompressing = Boolean(compressingChapterId);
+    return (
+      <Modal
+        title="压缩到目标篇幅"
+        open={!!chapter}
+        okText="开始压缩"
+        cancelText="取消"
+        confirmLoading={isCompressing}
+        okButtonProps={{ disabled: !chapter }}
+        cancelButtonProps={{ disabled: isCompressing }}
+        maskClosable={!isCompressing}
+        width={560}
+        onOk={() => void confirmCompressChapterToTarget()}
+        onCancel={() => {
+          if (!isCompressing) {
+            setCompressConfirmChapter(null);
+          }
+        }}
+        destroyOnHidden
+      >
+        <div className="space-y-3 text-sm">
+          <Alert
+            type="info"
+            showIcon
+            message={chapter ? `当前 ${actualWords} 字，目标约 ${targetWords} 字` : '请选择需要压缩的章节'}
+            description="系统会基于当前正文做缩写，尽量保留事实、数值、承诺、小标题和必要响应点。不会重新生成整章。"
+          />
+          <p className="text-slate-600">
+            压缩完成后将覆盖当前章节正文。若章节属于核心技术响应且客户认可当前篇幅，也可以直接保留现状。
+          </p>
+        </div>
+      </Modal>
+    );
+  }
+
+  function CustomWritingModal(): JSX.Element {
+    const chapter = customWriteTarget
+      ? chapters.find(item => item.id === customWriteTarget.id) || customWriteTarget
+      : null;
+    return (
+      <Modal
+        title={`自定义编写：${chapter?.title || '未命名章节'}`}
+        open={!!chapter}
+        okText="保存写作要求"
+        cancelText="取消"
+        confirmLoading={customWriteSaving}
+        okButtonProps={{ disabled: !chapter }}
+        cancelButtonProps={{ disabled: customWriteSaving }}
+        maskClosable={!customWriteSaving}
+        width={560}
+        onOk={() => void saveCustomWritingRequirement()}
+        onCancel={() => {
+          if (!customWriteSaving) {
+            setCustomWriteTarget(null);
+            setCustomWriteInstruction('');
+          }
+        }}
+        destroyOnHidden
+      >
+        <Space direction="vertical" size={12} className="w-full">
+          <Input.TextArea
+            rows={5}
+            value={customWriteInstruction}
+            placeholder={chapter ? customWritingPlaceholder(chapter) : '请输入本章补充要求。'}
+            onChange={event => setCustomWriteInstruction(event.target.value)}
+          />
+          <Alert
+            type="info"
+            showIcon
+            message="保存后会进入章节写作注意事项"
+            description="本要求会持久化到当前章节，并在单章生成或批量生成任务中作为写作要求快照记录。"
+          />
+        </Space>
+      </Modal>
+    );
+  }
+
+  function LeafToContainerConfirmModal(): JSX.Element {
+    const chapter = leafToContainerTarget
+      ? chapters.find(item => item.id === leafToContainerTarget.id) || leafToContainerTarget
+      : null;
+    const actualWords = chapter ? meaningfulChapterWords(chapter) : 0;
+    const targetWords = chapter ? targetChapterWords(chapter) : 0;
+    const canMoveContent = actualWords > 0;
+    return (
+      <Modal
+        title="新增子章节前确认"
+        open={!!chapter}
+        okText="确认新增"
+        cancelText="取消"
+        confirmLoading={leafToContainerSaving}
+        okButtonProps={{ disabled: !chapter }}
+        cancelButtonProps={{ disabled: leafToContainerSaving }}
+        maskClosable={!leafToContainerSaving}
+        width={620}
+        onOk={() => void confirmLeafToContainerAdd()}
+        onCancel={() => {
+          if (!leafToContainerSaving) {
+            setLeafToContainerTarget(null);
+            setLeafToContainerMode('keep_parent_summary');
+          }
+        }}
+        destroyOnHidden
+      >
+        <Space direction="vertical" size={12} className="w-full">
+          <Alert
+            type="warning"
+            showIcon
+            message={chapter ? `“${chapter.title || '未命名章节'}”将从正文叶子章节变为结构容器` : '当前章节将变为结构容器'}
+            description={`新增子章节后，批量生成会优先生成下级叶子章节。当前章节正文约 ${actualWords} 字，计划目标约 ${targetWords} 字，请先选择原正文处理方式。`}
+          />
+          <Radio.Group
+            value={leafToContainerMode}
+            onChange={event => setLeafToContainerMode(event.target.value as LeafToContainerConversionMode)}
+          >
+            <Space direction="vertical" size={10}>
+              <Radio value="keep_parent_summary">
+                保留本章正文作为父章节概述
+                <span className="ml-2 text-xs text-slate-500">适合已有正文可作为章节导语或汇总说明</span>
+              </Radio>
+              <Radio value="move_content_to_child" disabled={!canMoveContent}>
+                将本章正文迁移到新子章节
+                <span className="ml-2 text-xs text-slate-500">适合原正文应继续作为可生成、可编辑的小节内容</span>
+              </Radio>
+            </Space>
+          </Radio.Group>
+          {!canMoveContent ? (
+            <Alert
+              type="info"
+              showIcon
+              message="当前章节暂无可迁移正文"
+              description="系统仍会保留原章节作为结构容器，并创建一个空白子章节。"
+            />
+          ) : null}
+        </Space>
+      </Modal>
+    );
+  }
+
+  function RecentlyDeletedChapterBanner(): JSX.Element | null {
+    if (!recentDeletedChapter) {
+      return null;
+    }
+    return (
+      <Alert
+        className="chapter-delete-undo-alert"
+        type="warning"
+        showIcon
+        message={`已删除“${recentDeletedChapter.title}”`}
+        description={`共删除 ${recentDeletedChapter.count} 个章节，该操作已同步到当前项目。可在本页面停留期间撤销恢复。`}
+        action={(
+          <Space>
+            <Button
+              size="small"
+              type="primary"
+              loading={restoringDeletedChapter}
+              onClick={() => void restoreRecentlyDeletedChapter()}
+            >
+              撤销删除
+            </Button>
+            <Button
+              size="small"
+              disabled={restoringDeletedChapter}
+              onClick={() => setRecentDeletedChapter(null)}
+            >
+              关闭
+            </Button>
+          </Space>
+        )}
+      />
+    );
+  }
+
+  function DeleteChapterConfirmModal(): JSX.Element {
+    const chapter = deleteTarget
+      ? chapters.find(item => item.id === deleteTarget.id) || deleteTarget
+      : null;
+    const deletedChapters = chapter ? collectChapterSubtree(chapter) : [];
+    const childCount = Math.max(0, deletedChapters.length - 1);
+    return (
+      <Modal
+        title="删除章节"
+        open={!!chapter}
+        okText="确认删除"
+        cancelText="取消"
+        confirmLoading={deletingChapter}
+        okButtonProps={{ danger: true, disabled: !chapter }}
+        cancelButtonProps={{ disabled: deletingChapter }}
+        maskClosable={!deletingChapter}
+        width={560}
+        onOk={() => void confirmDeleteChapter()}
+        onCancel={() => {
+          if (!deletingChapter) {
+            setDeleteTarget(null);
+          }
+        }}
+        destroyOnHidden
+      >
+        <Space direction="vertical" size={12}>
+          <span>
+            确认从当前项目中删除“{chapter?.title || '未命名章节'}”？
+            {childCount > 0 ? ` 其下 ${childCount} 个子章节也会一并删除。` : ''}
+          </span>
+          <Alert
+            type="warning"
+            showIcon
+            message="该操作会同步删除后端章节数据"
+            description="删除成功后，本页面会保留一次临时撤销入口；离开或刷新页面后将不能从前端直接撤销。"
+          />
+        </Space>
+      </Modal>
+    );
+  }
+
   function QualityDashboard(): JSX.Element {
     if (qualityCollapsed) {
       return (
@@ -1065,7 +1393,7 @@ export function BidEditorPage(): JSX.Element {
             <strong>{complianceSummary.volumeName || volumeLabel(activeVolume)}</strong>
           </div>
           <Space size={8} wrap>
-            {contentDirty ? <Tag color="gold">正文已修改，保存后更新响应率</Tag> : null}
+            {contentDirty ? <Tag color="gold">正文已修改，保存后更新覆盖率</Tag> : null}
             {complianceRefreshing ? <Tag color="processing">检查中...</Tag> : null}
             {complianceError ? <Tag color="red">检查失败</Tag> : <Tag color={complianceStatus.color}>{complianceStatus.label}</Tag>}
             <Button size="small" onClick={() => setQualityCollapsed(true)}>
@@ -1078,10 +1406,10 @@ export function BidEditorPage(): JSX.Element {
               disabled={!data?.project?.id}
               onClick={() => data?.project?.id && void refreshComplianceReport(data.project.id)}
             >
-              刷新响应率
+              刷新覆盖率
             </Button>
             <Button size="small" icon={<Eye size={14} />} disabled={!pendingComplianceRows.length} onClick={() => setComplianceDrawerOpen(true)}>
-              查看未响应
+              查看待处理
             </Button>
             <Button
               size="small"
@@ -1097,14 +1425,14 @@ export function BidEditorPage(): JSX.Element {
           </Space>
         </div>
         <div className="quality-dashboard-grid">
-          <Tooltip title="当前视图下已生成正文的叶子小节数。父级结构容器不计入正文生成进度。">
+          <Tooltip title="当前视图下已生成正文的叶子小节数。父级结构容器和投标信息确认页不计入正文生成进度。">
             <article>
               <CheckCircle2 size={18} />
-              <span>已生成小节</span>
+              <span>已生成正文小节</span>
               <strong>{generatedCount}/{scopedLeafChapters.length}</strong>
             </article>
           </Tooltip>
-          <Tooltip title="按当前视图下已生成章节正文去除空白后的字符数估算，用于判断标书厚度和扩写需求。">
+          <Tooltip title="按当前视图下已生成章节正文去除空白后的字符数估算，用于判断标书厚度和扩写需求；不包含投标信息确认页字段。">
             <article>
               <FileText size={18} />
               <span>正文字数</span>
@@ -1114,21 +1442,21 @@ export function BidEditorPage(): JSX.Element {
           <Tooltip title={complianceSummary.scopeNote}>
             <article>
               <Gauge size={18} />
-              <span>条款响应率</span>
+              <span>条款覆盖率</span>
               <strong>{complianceSummary.percent}%</strong>
             </article>
           </Tooltip>
-          <Tooltip title="仍未在当前章节映射或正文中找到响应证据的要求条款、评分项和风险项。">
+          <Tooltip title="仍未覆盖或仅部分覆盖的要求条款、评分项和风险项。该数值用于提示正文补强，不代表前导确认页缺口。">
             <article>
               <AlertTriangle size={18} />
-              <span>未响应项</span>
-              <strong>{complianceSummary.missing}</strong>
+              <span>待处理覆盖项</span>
+              <strong>{pendingCoverageCount}</strong>
             </article>
           </Tooltip>
-          <Tooltip title="风险项、否决项、废标项或高优先级条款中仍未找到响应证据的数量。">
+          <Tooltip title="风险项、否决项、废标项或高优先级条款中仍未找到正文覆盖证据的数量。">
             <article>
               <ShieldAlert size={18} />
-              <span>高风险未响应</span>
+              <span>高风险待覆盖</span>
               <strong>{complianceSummary.highRiskMissing || 0}</strong>
             </article>
           </Tooltip>
@@ -1145,7 +1473,7 @@ export function BidEditorPage(): JSX.Element {
             {complianceVolumeSummaries.map(item => (
               <Tooltip
                 key={item.volumeType}
-                title={`${item.volumeName}：共 ${item.total} 项，已响应 ${item.covered} 项，待补强 ${item.partial} 项，未响应 ${item.missing} 项。`}
+                title={`${item.volumeName}：共 ${item.total} 项，已覆盖 ${item.covered} 项，待补强 ${item.partial} 项，待覆盖 ${item.missing} 项。`}
               >
                 <button
                   type="button"
@@ -1156,7 +1484,7 @@ export function BidEditorPage(): JSX.Element {
                 >
                   <span className="font-semibold text-slate-700">{item.volumeName}</span>
                   <span className="text-slate-500">{item.percent}%</span>
-                  {item.highRiskMissing ? <Tag color="red">{item.highRiskMissing} 高风险</Tag> : item.missing ? <Tag color="orange">{item.missing} 未响应</Tag> : <Tag color="green">正常</Tag>}
+                  {item.highRiskMissing ? <Tag color="red">{item.highRiskMissing} 高风险</Tag> : item.missing || item.partial ? <Tag color="orange">{(item.missing || 0) + (item.partial || 0)} 待处理</Tag> : <Tag color="green">正常</Tag>}
                 </button>
               </Tooltip>
             ))}
@@ -1169,7 +1497,7 @@ export function BidEditorPage(): JSX.Element {
   function ComplianceDrawer(): JSX.Element {
     return (
       <Drawer
-        title={`未响应与待补强项 - ${complianceSummary.volumeName || volumeLabel(activeVolume)}`}
+        title={`待覆盖与待补强项 - ${complianceSummary.volumeName || volumeLabel(activeVolume)}`}
         width={680}
         open={complianceDrawerOpen}
         onClose={() => setComplianceDrawerOpen(false)}
@@ -1179,11 +1507,11 @@ export function BidEditorPage(): JSX.Element {
           showIcon
           className="mb-3"
           message="点击“定位章节”可跳转到建议补强位置。"
-          description="建议章节由系统根据条款关键词、章节标题、章节目标和正文内容推断；若无建议章节，通常需要新增补强章节或段落。"
+          description="本列表只跟踪招标条款、评分项、风险项在章节正文中的覆盖证据；投标信息确认页的客户确认字段不计入这里。建议章节由系统根据条款关键词、章节标题、章节目标和正文内容推断。"
         />
         <List
           dataSource={pendingComplianceRows}
-          locale={{ emptyText: '当前范围暂无未响应或待补强项' }}
+          locale={{ emptyText: '当前范围暂无待覆盖或待补强项' }}
           renderItem={row => (
             <List.Item
               actions={[
@@ -1212,7 +1540,7 @@ export function BidEditorPage(): JSX.Element {
                 title={(
                   <Space size={6} wrap>
                     <Tag color={row.category === '风险项' ? 'red' : row.category === '评分项' ? 'green' : 'blue'}>{row.category}</Tag>
-                    <Tag color={row.status === 'missing' ? 'red' : 'orange'}>{row.status === 'missing' ? '未响应' : '待补强'}</Tag>
+                    <Tag color={row.status === 'missing' ? 'red' : 'orange'}>{row.status === 'missing' ? '待覆盖' : '待补强'}</Tag>
                     <span>{row.content}</span>
                   </Space>
                 )}
@@ -1351,7 +1679,36 @@ export function BidEditorPage(): JSX.Element {
     return batchTasks[chapter.id]?.status === 'partial_generated';
   }
 
-  function chapterWordMeta(chapter: ChapterDraft): { label: string; tooltip: string; generated: boolean; failed: boolean } {
+  function batchTaskMetadata(task?: BatchTask): Record<string, unknown> {
+    return task?.metadata && typeof task.metadata === 'object' ? task.metadata : {};
+  }
+
+  function isPartialReviewRequired(task?: BatchTask): boolean {
+    return batchTaskMetadata(task).partial_review_required === true;
+  }
+
+  function batchTaskLabel(task: BatchTask): string {
+    if (task.status === 'partial_generated') {
+      return isPartialReviewRequired(task) ? '草稿需复核' : '草稿可续写';
+    }
+    return batchStatusLabel(task.status);
+  }
+
+  function batchTaskTooltip(task: BatchTask): string {
+    if (task.status !== 'partial_generated') {
+      return task.message || batchStatusLabel(task.status);
+    }
+    const metadata = batchTaskMetadata(task);
+    if (isPartialReviewRequired(task)) {
+      return String(task.message || '本章草稿已保存，但还需要人工复核后再决定是否继续编写。');
+    }
+    if (metadata.partial_auto_resume_allowed === true) {
+      return '系统会基于已保存草稿继续编写，不会丢失已有内容。';
+    }
+    return task.message || '草稿已保存，可单章续写或批量续写草稿。';
+  }
+
+  function chapterWordMeta(chapter: ChapterDraft): ChapterWordMeta {
     if (!isLeafChapter(chapter)) {
       return {
         label: '结构容器',
@@ -1361,9 +1718,15 @@ export function BidEditorPage(): JSX.Element {
       };
     }
     if (isChapterPartialGenerated(chapter)) {
+      const task = batchTasks[chapter.id];
       return {
-        label: '草稿待续写',
-        tooltip: '模型输出超时，系统已保存草稿。可点击“重试”继续生成。',
+        label: isPartialReviewRequired(task) ? '草稿需复核' : '草稿待续写',
+        tooltip: batchTaskTooltip(task || {
+          status: 'partial_generated',
+          percent: 100,
+          chars: 0,
+          targetWords: targetChapterWords(chapter),
+        }),
         generated: false,
         failed: false,
       };
@@ -1371,7 +1734,7 @@ export function BidEditorPage(): JSX.Element {
     if (isChapterFailed(chapter)) {
       return {
         label: '生成失败',
-        tooltip: '本章节正文生成失败，请点击“重写正文”重新生成。',
+        tooltip: '本章节正文生成失败，请点击“重新生成”再次生成。',
         generated: false,
         failed: true,
       };
@@ -1382,18 +1745,28 @@ export function BidEditorPage(): JSX.Element {
       const targetWords = targetChapterWords(chapter);
       if (actualWords < targetWords * 0.75) {
         return {
-          label: `建议扩写 ${actualWords}/${targetWords}字`,
-          tooltip: `当前正文低于目标字数 75%。建议结合评分点、风险项和企业资料补充，不要用重复或无关内容凑字数。`,
+          label: `已完成 ${actualWords}字`,
+          tooltip: `已完成字数：按当前章节正文去除空白后统计。计划目标：${targetWords}字。`,
           generated: true,
           failed: false,
+          quality: 'short',
+          qualityLabel: `偏短 ${actualWords}/${targetWords}字`,
+          qualityTooltip: '当前正文低于目标字数 75%。建议结合评分点、风险项和企业资料补充，不要用重复或无关内容凑字数。',
+          actualWords,
+          targetWords,
         };
       }
       if (actualWords > targetWords * 1.35) {
         return {
-          label: `篇幅偏长 ${actualWords}/${targetWords}字`,
-          tooltip: `当前正文明显超过目标字数。建议复核是否存在重复段落、无关内容或格式性材料过度展开。`,
+          label: `已完成 ${actualWords}字`,
+          tooltip: `已完成字数：按当前章节正文去除空白后统计。计划目标：${targetWords}字。`,
           generated: true,
           failed: false,
+          quality: 'long',
+          qualityLabel: `偏长 ${actualWords}/${targetWords}字`,
+          qualityTooltip: '当前正文明显超过目标字数。可接受当前篇幅，也可点击“压缩到目标”在保留事实和小标题的前提下收敛篇幅。',
+          actualWords,
+          targetWords,
         };
       }
       return {
@@ -1401,6 +1774,8 @@ export function BidEditorPage(): JSX.Element {
         tooltip: `已完成字数：按当前章节正文去除空白后统计。计划目标：${targetWords}字。`,
         generated: true,
         failed: false,
+        actualWords,
+        targetWords,
       };
     }
     return {
@@ -1410,6 +1785,17 @@ export function BidEditorPage(): JSX.Element {
         : '目标字数：来自章节写作计划；如当前项目尚未保存计划，则按章节标题、层级和用途临时推导。',
       generated: false,
       failed: false,
+    };
+  }
+
+  function generationTaskItemMetadata(chapter: ChapterDraft): Record<string, unknown> {
+    const metadata = chapter.metadata && typeof chapter.metadata === 'object' ? chapter.metadata : {};
+    const writingNotes = (chapter.writing_notes || []).filter(note => String(note || '').trim());
+    return {
+      source: 'bid_editor_task_item_snapshot',
+      writing_notes: writingNotes,
+      writing_notes_count: writingNotes.length,
+      custom_writing: metadata.custom_writing || null,
     };
   }
 
@@ -1476,6 +1862,135 @@ export function BidEditorPage(): JSX.Element {
 
   function needsBatchWriting(chapter: ChapterDraft): boolean {
     return isLeafChapter(chapter) && (!isChapterGenerated(chapter) || isChapterUnderTarget(chapter));
+  }
+
+  function contentWithoutMarkdownHeading(content: string | undefined): string {
+    return (content || '').replace(/^#{1,6}\s+.*$/gm, '').trim();
+  }
+
+  function meaningfulChapterWords(chapter: ChapterDraft): number {
+    return contentWithoutMarkdownHeading(chapter.content)
+      .replace(/请在此编写章节内容。?/g, '')
+      .replace(/待进一步生成正文。?/g, '')
+      .replace(/\s+/g, '')
+      .length;
+  }
+
+  function hasMeaningfulChapterContent(chapter: ChapterDraft): boolean {
+    return meaningfulChapterWords(chapter) > 20;
+  }
+
+  function hasExplicitWritingTarget(chapter: ChapterDraft): boolean {
+    const plan = chapter.metadata?.writing_plan;
+    return !!plan && typeof plan === 'object' && Number((plan as ChapterWritingPlan).target_words || 0) > 0;
+  }
+
+  function shouldConfirmLeafToContainer(parent: ChapterDraft | null): boolean {
+    if (!parent || !isLeafChapter(parent) || hasChildChapters(parent)) {
+      return false;
+    }
+    return (
+      hasMeaningfulChapterContent(parent)
+      || isChapterGenerated(parent)
+      || isChapterPartialGenerated(parent)
+      || hasExplicitWritingTarget(parent)
+    );
+  }
+
+  function contentWithChapterHeading(content: string | undefined, title: string): string {
+    const trimmed = (content || '').trim();
+    if (!trimmed) {
+      return `## ${title}\n\n请在此编写章节内容。`;
+    }
+    if (/^#{1,6}\s+.*$/m.test(trimmed)) {
+      return trimmed.replace(/^#{1,6}\s+.*$/m, `## ${title}`);
+    }
+    return `## ${title}\n\n${trimmed}`;
+  }
+
+  function buildContainerParent(
+    parent: ChapterDraft,
+    mode: LeafToContainerConversionMode,
+    childTitle: string,
+    convertedAt: string,
+  ): ChapterDraft {
+    const metadata = parent.metadata && typeof parent.metadata === 'object' ? parent.metadata : {};
+    const parentTitle = parent.title || '未命名章节';
+    const movedContent = mode === 'move_content_to_child';
+    return {
+      ...parent,
+      content: movedContent
+        ? `## ${parentTitle}\n\n本章已拆分为下级子章节，原正文已迁移至“${childTitle}”。`
+        : parent.content,
+      expanded: true,
+      status: parent.status || 'edited',
+      metadata: {
+        ...metadata,
+        section_role: 'container',
+        leaf_generation: false,
+        converted_to_container_at: convertedAt,
+        container_conversion_mode: mode,
+        container_conversion_source: 'bid_editor_add_child',
+        container_content_policy: movedContent ? 'original_content_moved_to_first_child' : 'parent_content_kept_as_overview',
+      },
+    };
+  }
+
+  function cloneChapterDraft(chapter: ChapterDraft): ChapterDraft {
+    return JSON.parse(JSON.stringify(chapter)) as ChapterDraft;
+  }
+
+  function collectChapterSubtree(root: ChapterDraft, source = chapters): ChapterDraft[] {
+    const descendants = new Set<string>([root.id]);
+    let changed = true;
+    while (changed) {
+      changed = false;
+      source.forEach(item => {
+        if (item.parent_id && descendants.has(item.parent_id) && !descendants.has(item.id)) {
+          descendants.add(item.id);
+          changed = true;
+        }
+      });
+    }
+    return source.filter(item => descendants.has(item.id)).map(cloneChapterDraft);
+  }
+
+  async function restoreRecentlyDeletedChapter(): Promise<void> {
+    if (!data?.project?.id || !recentDeletedChapter || restoringDeletedChapter) {
+      return;
+    }
+    const snapshot = recentDeletedChapter;
+    const restoreSource = normalizeChapterHierarchy([
+      ...chapters,
+      ...snapshot.chapters.map(cloneChapterDraft),
+    ]);
+    const restoreOrder = [...snapshot.chapters].sort((left, right) => {
+      const levelDiff = (left.level || 1) - (right.level || 1);
+      if (levelDiff !== 0) {
+        return levelDiff;
+      }
+      return (left.order_index || 0) - (right.order_index || 0);
+    });
+
+    setRestoringDeletedChapter(true);
+    try {
+      for (const chapter of restoreOrder) {
+        await saveBidSection(data.project.id, {
+          ...chapter,
+          parent_id: safeParentIdForSave(chapter.parent_id, restoreSource),
+          level: chapter.level || 1,
+          order_index: chapter.order_index || restoreSource.findIndex(item => item.id === chapter.id) + 1,
+          status: chapter.status || 'draft',
+        });
+      }
+      await reloadProject(data.project.id);
+      setSelectedId(snapshot.selectedId || snapshot.chapters[0]?.id || '');
+      setRecentDeletedChapter(null);
+    } catch (error) {
+      message.error(error instanceof Error ? error.message : String(error));
+    } finally {
+      setRestoringDeletedChapter(false);
+    }
   }
 
   function hasChildChapters(chapter: ChapterDraft, source = chapters): boolean {
@@ -1639,7 +2154,21 @@ export function BidEditorPage(): JSX.Element {
     }
   }
 
+  function resolveNewChapterVolume(parent?: ChapterDraft | null): InternalVolumeType {
+    const activeInternalVolume = activeVolumeToInternal(activeVolume);
+    if (parent) {
+      const parentVolume = inferVolumeType(parent);
+      return parentVolume === 'other' && activeInternalVolume ? activeInternalVolume : parentVolume;
+    }
+    return activeInternalVolume || 'other';
+  }
+
   function createBlankChapter(order: number, title = '新增章节', parent?: ChapterDraft | null): ChapterDraft {
+    const volumeType = resolveNewChapterVolume(parent);
+    const volumeName = internalVolumeLabel(volumeType);
+    const parentWritingPlan = parent?.metadata?.writing_plan && typeof parent.metadata.writing_plan === 'object'
+      ? parent.metadata.writing_plan as Record<string, unknown>
+      : null;
     return {
       id: `${order}-${title}-${Date.now()}`,
       order,
@@ -1647,8 +2176,8 @@ export function BidEditorPage(): JSX.Element {
       parent_id: parent?.id || null,
       level: Math.min((parent?.level || 0) + 1 || 1, 4),
       title,
-      priority: 'medium',
-      purpose: '请补充本章编写目标。',
+      priority: parent?.priority || 'medium',
+      purpose: parent ? `请补充“${parent.title || '父章节'}”下的子章节编写目标。` : '请补充本章编写目标。',
       response_points: ['请补充响应要点。'],
       mapped_requirements: [],
       mapped_scoring_items: [],
@@ -1657,6 +2186,20 @@ export function BidEditorPage(): JSX.Element {
       required_materials: [],
       writing_notes: ['新增章节后建议先关联招标要求，再生成正文。'],
       content: `## ${title}\n\n请在此编写章节内容。`,
+      metadata: {
+        volume_type: volumeType,
+        volume_name: volumeName,
+        export_group: `${volumeName}文件`,
+        document_role: '正文',
+        created_from_active_volume: activeVolume,
+        ...(parent?.id ? { inherited_from_parent_id: parent.id } : {}),
+        ...(parentWritingPlan ? {
+          writing_plan: {
+            ...parentWritingPlan,
+            inherited_from_parent_id: parent?.id,
+          },
+        } : {}),
+      },
       expanded: true,
     };
   }
@@ -1685,13 +2228,69 @@ export function BidEditorPage(): JSX.Element {
 
   async function addChapter(options?: AddChapterOptions): Promise<void> {
     const parent = options?.parent || null;
-    const chapter = createBlankChapter(chapters.length + 1, '新增章节', parent);
-    const nextChapters = (() => {
-      if (!parent) {
-        return normalizeChapterHierarchy([...chapters, chapter]);
+    if (parent && shouldConfirmLeafToContainer(parent)) {
+      setLeafToContainerTarget(parent);
+      setLeafToContainerMode('keep_parent_summary');
+      return;
+    }
+    await persistAddedChapter({ parent });
+  }
+
+  async function confirmLeafToContainerAdd(): Promise<void> {
+    if (!leafToContainerTarget) {
+      return;
+    }
+    const latestParent = chapters.find(item => item.id === leafToContainerTarget.id) || leafToContainerTarget;
+    setLeafToContainerSaving(true);
+    try {
+      const added = await persistAddedChapter({ parent: latestParent, conversionMode: leafToContainerMode });
+      if (added) {
+        setLeafToContainerTarget(null);
+        setLeafToContainerMode('keep_parent_summary');
       }
-      const insertAfter = lastDescendantIndex(chapters, parent.id);
-      const nextItems = [...chapters];
+    } finally {
+      setLeafToContainerSaving(false);
+    }
+  }
+
+  async function persistAddedChapter(options?: AddChapterPersistOptions): Promise<boolean> {
+    const parent = options?.parent || null;
+    const conversionMode = options?.conversionMode;
+    const convertedAt = new Date().toISOString();
+    let chapter = createBlankChapter(chapters.length + 1, '新增章节', parent);
+    const convertedParent = parent && conversionMode
+      ? buildContainerParent(parent, conversionMode, chapter.title || '新增章节', convertedAt)
+      : null;
+
+    if (parent && conversionMode === 'move_content_to_child' && hasMeaningfulChapterContent(parent)) {
+      const childMetadata = chapter.metadata && typeof chapter.metadata === 'object' ? chapter.metadata : {};
+      chapter = {
+        ...chapter,
+        content: contentWithChapterHeading(parent.content, chapter.title || '新增章节'),
+        status: 'edited',
+        writing_notes: [
+          ...(chapter.writing_notes || []),
+          '本章节正文由父章节拆分迁移而来，建议先修改标题并复核正文结构。',
+        ],
+        metadata: {
+          ...childMetadata,
+          migrated_from_parent_id: parent.id,
+          migrated_from_parent_title: parent.title || '未命名章节',
+          migrated_at: convertedAt,
+          migration_source: 'leaf_to_container_conversion',
+        },
+      };
+    }
+
+    const nextChapters = (() => {
+      const sourceChapters = convertedParent
+        ? chapters.map(item => item.id === convertedParent.id ? convertedParent : item)
+        : chapters;
+      if (!parent) {
+        return normalizeChapterHierarchy([...sourceChapters, chapter]);
+      }
+      const insertAfter = lastDescendantIndex(sourceChapters, parent.id);
+      const nextItems = [...sourceChapters];
       nextItems.splice(insertAfter + 1, 0, chapter);
       return normalizeChapterHierarchy(nextItems);
     })();
@@ -1705,12 +2304,34 @@ export function BidEditorPage(): JSX.Element {
           level: chapter.level || 1,
           order_index: nextChapters.findIndex(item => item.id === chapter.id) + 1,
         });
-        setChapters(items => normalizeChapterHierarchy(items.map(item => item.id === chapter.id ? { ...item, ...saved } : item)));
+        let savedParent: BidSection | null = null;
+        if (convertedParent) {
+          savedParent = await saveBidSection(data.project.id, {
+            ...convertedParent,
+            parent_id: safeParentIdForSave(convertedParent.parent_id, chapters),
+            level: convertedParent.level || 1,
+            order_index: nextChapters.findIndex(item => item.id === convertedParent.id) + 1,
+            status: convertedParent.status || 'edited',
+          });
+        }
+        setChapters(items => normalizeChapterHierarchy(items.map(item => {
+          if (item.id === chapter.id) {
+            return { ...item, ...saved };
+          }
+          if (savedParent && item.id === convertedParent?.id) {
+            return { ...item, ...savedParent, expanded: true };
+          }
+          return item;
+        })));
         setSelectedId(saved.id);
+        return true;
       } catch (error) {
         message.error(error instanceof Error ? error.message : String(error));
+        void reloadProject(data.project.id);
+        return false;
       }
     }
+    return true;
   }
 
   function toggleChapter(id: string): void {
@@ -1793,6 +2414,88 @@ export function BidEditorPage(): JSX.Element {
     }
   }
 
+  async function compressChapterToTarget(chapter: ChapterDraft): Promise<void> {
+    if (!data?.project?.id) {
+      message.warning('当前项目不存在，无法压缩章节');
+      return;
+    }
+    if (!isChapterGenerated(chapter)) {
+      message.warning('只有已完成正文的章节才支持压缩到目标篇幅');
+      return;
+    }
+    const content = (chapter.content || '').trim();
+    if (!content) {
+      message.warning('当前章节没有可压缩的正文');
+      return;
+    }
+    const actualWords = chapterActualWords(chapter);
+    const targetWords = targetChapterWords(chapter);
+    if (actualWords <= targetWords * 1.05) {
+      message.info('当前章节已接近目标篇幅，无需压缩');
+      return;
+    }
+    setSelectedId(chapter.id);
+    setCompressConfirmChapter(chapter);
+  }
+
+  async function confirmCompressChapterToTarget(): Promise<void> {
+    if (!data?.project?.id || !compressConfirmChapter) {
+      message.warning('请先选择需要压缩的章节');
+      return;
+    }
+    const projectId = data.project.id;
+    const chapter = chapters.find(item => item.id === compressConfirmChapter.id) || compressConfirmChapter;
+    const content = (chapter.content || '').trim();
+    if (!content) {
+      message.warning('当前章节没有可压缩的正文');
+      return;
+    }
+    const actualWords = chapterActualWords(chapter);
+    const targetWords = targetChapterWords(chapter);
+    setCompressingChapterId(chapter.id);
+    try {
+      const result = await editBidSectionText(projectId, {
+        action: 'shorten',
+        selectedText: content,
+        sectionId: chapter.id,
+        sectionTitle: chapterDisplayTitle(chapter),
+        sectionContext: [
+          chapter.purpose || '',
+          `压缩目标：从当前约 ${actualWords} 字压缩到约 ${targetWords} 字。`,
+          '压缩要求：保留事实、数值、承诺、小标题、表格 Markdown 和必要响应点；删除重复铺垫和空泛表述。',
+        ].filter(Boolean).join('\n'),
+        fullContent: '',
+      });
+      const revisedText = (result.revisedText || '').trim();
+      if (!revisedText) {
+        throw new Error('AI 压缩未返回有效正文');
+      }
+      const saved = await saveBidSection(projectId, {
+        ...chapter,
+        content: revisedText,
+        parent_id: safeParentIdForSave(chapter.parent_id, chapters),
+        level: chapter.level || 1,
+        order_index: chapters.findIndex(item => item.id === chapter.id) + 1,
+        status: 'edited',
+      });
+      setChapters(items => normalizeChapterHierarchy(items.map(item => item.id === chapter.id ? { ...item, ...saved, status: 'edited' } : item)));
+      setSelectedId(saved.id || chapter.id);
+      setContentDirty(false);
+      setDownloadUrl('');
+      setCompressConfirmChapter(null);
+      const nextWords = revisedText.replace(/\s+/g, '').length;
+      message.success(`章节已压缩并保存：${nextWords}/${targetWords}字`);
+      if (result.warnings?.length) {
+        message.warning(result.warnings.join('；'));
+      }
+      void refreshComplianceReport(projectId, { silent: true, volumeType: deliveryVolumeType(chapter) });
+    } catch (error) {
+      message.error(error instanceof Error ? error.message : String(error));
+    } finally {
+      setCompressingChapterId('');
+    }
+  }
+
   async function confirmDownloadWithCompliance(projectId: string, volumeType?: VolumeType): Promise<boolean> {
     let report: ComplianceReport;
     try {
@@ -1820,17 +2523,17 @@ export function BidEditorPage(): JSX.Element {
             <Alert
               type="warning"
               showIcon
-              message={`${summary.metricName || '条款响应覆盖率'} ${summary.percent}%`}
-              description={summary.scopeNote || '该指标用于追踪招标条款与当前章节/正文的响应关系，不等同于最终 Word 标书合规结论。'}
+              message={`${summary.metricName || '条款覆盖率'} ${summary.percent}%`}
+              description={summary.scopeNote || '该指标用于追踪招标条款与当前章节正文的覆盖关系，不统计投标信息确认页字段，也不等同于最终 Word 标书合规结论。'}
             />
             <div className="grid grid-cols-2 gap-2">
               <Tag color="blue">共检查 {summary.total} 项</Tag>
               <Tag color="green">已响应 {summary.covered} 项</Tag>
               <Tag color="orange">待补强 {summary.partial} 项</Tag>
-              <Tag color="red">未响应 {summary.missing} 项</Tag>
+              <Tag color="red">待覆盖 {summary.missing} 项</Tag>
             </div>
             <p className="text-slate-600">
-              当前仍有 {summary.highRiskMissing || 0} 项高风险未响应。建议优先补齐资格要求、否决风险和高分评分项后再提交正式投标文件。
+              当前仍有 {summary.highRiskMissing || 0} 项高风险待覆盖。建议优先补齐资格要求、否决风险和高分评分项后再提交正式投标文件。
             </p>
           </div>
         ),
@@ -1840,13 +2543,99 @@ export function BidEditorPage(): JSX.Element {
     });
   }
 
-  async function downloadDocx(sectionId?: string): Promise<void> {
+  function pendingGenerationSummary(): {
+    leafTotal: number;
+    generated: number;
+    incomplete: number;
+    writing: number;
+    queued: number;
+    savedDrafts: number;
+    reviewRequired: number;
+  } {
+    return pendingGenerationSummaryForVolume(activeVolume);
+  }
+
+  function pendingGenerationSummaryForVolume(volumeType: VolumeType): {
+    leafTotal: number;
+    generated: number;
+    incomplete: number;
+    writing: number;
+    queued: number;
+    savedDrafts: number;
+    reviewRequired: number;
+  } {
+    const leafChapters = (volumeType === 'all' ? chapters : chapters.filter(chapter => matchesActiveVolume(chapter, volumeType)))
+      .filter(chapter => isLeafChapter(chapter, chapters));
+    const generated = leafChapters.filter(isChapterGenerated).length;
+    const taskValues = Object.values(batchTasks);
+    const writing = taskValues.filter(task => ACTIVE_BATCH_TASK_STATUSES.has(task.status)).length;
+    const queued = taskValues.filter(task => task.status === 'queued').length;
+    const savedDrafts = taskValues.filter(task => task.status === 'partial_generated').length;
+    const reviewRequired = taskValues.filter(task => task.status === 'partial_generated' && isPartialReviewRequired(task)).length;
+    return {
+      leafTotal: leafChapters.length,
+      generated,
+      incomplete: Math.max(0, leafChapters.length - generated),
+      writing,
+      queued,
+      savedDrafts,
+      reviewRequired,
+    };
+  }
+
+  async function confirmDownloadWithGenerationReadiness(volumeType: VolumeType): Promise<boolean> {
+    const summary = pendingGenerationSummaryForVolume(volumeType);
+    const hasPendingWork = summary.incomplete > 0 || summary.writing > 0 || summary.queued > 0 || summary.savedDrafts > 0 || summary.reviewRequired > 0;
+    if (!hasPendingWork) {
+      return true;
+    }
+
+    return new Promise(resolve => {
+      Modal.confirm({
+        title: `下载前确认：${exportPackageLabel(volumeType)}仍是草稿版`,
+        okText: '下载草稿版',
+        cancelText: '返回继续编写',
+        width: 600,
+        icon: <AlertTriangle size={20} />,
+        content: (
+          <div className="space-y-3 text-sm">
+            <Alert
+              type="warning"
+              showIcon
+              message="当前标书正文尚未全部完成"
+              description="可以先下载草稿版用于内部查看，但不能作为正式投标文件提交。全部章节完成并通过正式检查后，再导出正式版。"
+            />
+            <div className="grid grid-cols-2 gap-2">
+              <Tag color="blue">正文章节 {summary.leafTotal} 个</Tag>
+              <Tag color="green">已完成 {summary.generated} 个</Tag>
+              <Tag color={summary.incomplete ? 'orange' : 'green'}>待完成 {summary.incomplete} 个</Tag>
+              {summary.savedDrafts ? <Tag color="gold">已保存草稿 {summary.savedDrafts} 个</Tag> : <Tag color="green">无待续写草稿</Tag>}
+              {summary.reviewRequired ? <Tag color="red">需人工复核 {summary.reviewRequired} 个</Tag> : <Tag color="green">无复核项</Tag>}
+              {summary.writing || summary.queued ? <Tag color="processing">仍在编写 {summary.writing + summary.queued} 个</Tag> : <Tag color="green">无后台编写任务</Tag>}
+            </div>
+            <p className="text-slate-600">
+              建议先点击“批量续写草稿”或逐章处理待完成章节；确需下载，请将本次文件作为草稿版流转。
+            </p>
+          </div>
+        ),
+        onOk: () => resolve(true),
+        onCancel: () => resolve(false),
+      });
+    });
+  }
+
+  async function downloadDocx(sectionId?: string, targetVolume: VolumeType = activeVolume): Promise<void> {
     if (!data?.project?.id) {
       message.warning('当前项目不存在，无法下载');
       return;
     }
     if (!sectionId) {
-      const confirmed = await confirmDownloadWithCompliance(data.project.id, activeVolume);
+      const generationConfirmed = await confirmDownloadWithGenerationReadiness(targetVolume);
+      if (!generationConfirmed) {
+        message.info('已取消下载，请先完成剩余章节或复核草稿。');
+        return;
+      }
+      const confirmed = await confirmDownloadWithCompliance(data.project.id, targetVolume);
       if (!confirmed) {
         message.info('已取消下载，请先处理条款响应补强项。');
         return;
@@ -1865,12 +2654,20 @@ export function BidEditorPage(): JSX.Element {
       const result = await generateBidDocxDownload(data.project.id, {
         sectionId,
         withImages: !sectionId && withImages,
-        volumeType: !sectionId && activeVolume !== 'all' ? activeVolume : undefined,
+        volumeType: !sectionId && targetVolume !== 'all' ? targetVolume : undefined,
         sectionsSnapshot,
       });
       setExportTask(result.task);
-      message.info(sectionId ? '本章 DOCX 导出任务已创建' : `${activeVolume === 'all' ? '全文' : volumeLabel(activeVolume)} DOCX 导出任务已创建`);
-      await pollBidExportTask(data.project.id, result.taskId, sectionId ? 'section' : 'full');
+      const formalGate = result.formalExportGate;
+      if (!sectionId && formalGate?.export_mode === 'draft') {
+        message.warning(
+          `正式检查仍有 ${Number(formalGate.blocked_count || 0)} 个阻断项，本次仅创建草稿版 DOCX 导出任务。`,
+          10,
+        );
+      } else {
+        message.info(sectionId ? '本章 DOCX 导出任务已创建' : `${exportPackageLabel(targetVolume)} DOCX 导出任务已创建`);
+      }
+      await pollBidExportTask(data.project.id, result.taskId, sectionId ? 'section' : 'full', targetVolume);
     } catch (error) {
       message.error(error instanceof Error ? error.message : String(error));
     } finally {
@@ -1878,7 +2675,77 @@ export function BidEditorPage(): JSX.Element {
     }
   }
 
-  async function pollBidExportTask(projectId: string, taskId: string, scope: 'full' | 'section'): Promise<void> {
+  function showExportCompletedModal(task: BidExportTask, scope: 'full' | 'section', volumeType: VolumeType): void {
+    const downloadUrlValue = task.download_url || '';
+    const imageConversion = task.metadata?.image_conversion;
+    const fieldRefresh = task.metadata?.field_refresh;
+    const formalGate = task.metadata?.formal_export_gate;
+    const packageLabel = exportPackageLabel(volumeType, scope);
+    const isDraft = scope !== 'section' && formalGate?.export_mode === 'draft';
+    const insertedImages = Number(imageConversion?.inserted || 0);
+    const failedImages = Number(imageConversion?.failed || 0);
+    const skippedImages = Number(imageConversion?.skipped || 0);
+    Modal.info({
+      title: `${packageLabel} DOCX 已生成`,
+      width: 620,
+      icon: isDraft ? <AlertTriangle size={20} className="text-orange-500" /> : <CheckCircle2 size={20} className="text-emerald-500" />,
+      okText: '关闭',
+      content: (
+        <div className="space-y-3 text-sm">
+          {isDraft ? (
+            <Alert
+              type="warning"
+              showIcon
+              message="当前文件为草稿版"
+              description={`正式检查仍有 ${Number(formalGate?.blocked_count || 0)} 个阻断项，本文件仅建议用于内部查看和补强，不建议作为正式投标文件提交。`}
+            />
+          ) : (
+            <Alert
+              type="success"
+              showIcon
+              message={`${packageLabel}已完成导出`}
+              description={fieldRefresh?.user_message || 'DOCX 文件已生成，请下载后用 Word/WPS 进行提交前复核。'}
+            />
+          )}
+          <div className="grid gap-2">
+            <div className="flex items-center justify-between gap-3">
+              <span className="font-semibold text-slate-500">交付包</span>
+              <Tag color={volumeType === 'technical' ? 'blue' : volumeType === 'business' ? 'purple' : 'geekblue'}>{packageLabel}</Tag>
+            </div>
+            <div className="flex items-start justify-between gap-3">
+              <span className="shrink-0 font-semibold text-slate-500">文件名</span>
+              <span className="text-right font-semibold text-slate-700">{task.file_name || '投标文件.docx'}</span>
+            </div>
+            <div className="flex items-center justify-between gap-3">
+              <span className="font-semibold text-slate-500">文件大小</span>
+              <span className="font-semibold text-slate-700">{formatFileSize(fieldRefresh?.size)}</span>
+            </div>
+            <div className="flex items-center justify-between gap-3">
+              <span className="font-semibold text-slate-500">字段刷新</span>
+              <Tag color={fieldRefresh?.status === 'refreshed' ? 'green' : fieldRefresh?.manual_refresh_required ? 'orange' : 'default'}>
+                {fieldRefresh?.status === 'refreshed' ? '已刷新目录和页码' : fieldRefresh?.manual_refresh_required ? '需手动刷新' : '未返回刷新状态'}
+              </Tag>
+            </div>
+            <div className="flex items-center justify-between gap-3">
+              <span className="font-semibold text-slate-500">图片插入</span>
+              <span className="font-semibold text-slate-700">插入 {insertedImages} 张，跳过 {skippedImages} 张，失败 {failedImages} 张</span>
+            </div>
+          </div>
+          <Button
+            type="primary"
+            icon={<Download size={16} />}
+            disabled={!downloadUrlValue}
+            onClick={() => downloadUrlValue && window.open(downloadUrlValue, '_blank')}
+            block
+          >
+            下载{packageLabel} DOCX
+          </Button>
+        </div>
+      ),
+    });
+  }
+
+  async function pollBidExportTask(projectId: string, taskId: string, scope: 'full' | 'section', volumeType: VolumeType): Promise<void> {
     const maxAttempts = 180;
     for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
       const task = await getBidExportTask(projectId, taskId);
@@ -1888,23 +2755,35 @@ export function BidEditorPage(): JSX.Element {
           throw new Error('DOCX 导出完成但未返回下载地址');
         }
         setDownloadUrl(task.download_url);
-        window.open(task.download_url, '_blank');
         const imageConversion = task.metadata?.image_conversion;
         const imageSelection = task.metadata?.image_selection;
         const fieldRefresh = task.metadata?.field_refresh;
+        const formalGate = task.metadata?.formal_export_gate;
         const failedImages = Number(imageConversion?.failed || 0);
         const skippedImages = Number(imageConversion?.skipped || 0);
         const insertedImages = Number(imageConversion?.inserted || 0);
         const selectionWarnings = imageSelection?.warnings || [];
-        if (fieldRefresh?.manual_refresh_required) {
+        const formalReadiness = imageSelection?.formal_readiness;
+        if (scope !== 'section' && formalGate?.export_mode === 'draft') {
+          message.warning(
+            `DOCX 草稿版已生成：正式检查仍有 ${Number(formalGate.blocked_count || 0)} 个阻断项，不能作为正式投标文件提交。`,
+            10,
+          );
+        } else if (formalReadiness && formalReadiness.ready === false) {
+          message.warning(
+            `DOCX 已生成但仍是草稿：空章节 ${Number(formalReadiness.empty_section_count || 0)} 个，占位 ${Number(formalReadiness.placeholder_count || 0)} 处，正式必填缺口 ${formalReadiness.missing_formal_required_fields?.length || 0} 个。`,
+            10,
+          );
+        } else if (fieldRefresh?.manual_refresh_required) {
           message.warning(fieldRefresh.user_message || 'DOCX 已生成，但目录页码可能需要打开 Word/WPS 后手动刷新。', 8);
         } else if (fieldRefresh?.status === 'refreshed') {
-          message.success(fieldRefresh.user_message || (scope === 'section' ? '本章 DOCX 已生成，目录页码已刷新' : `${activeVolume === 'all' ? '全文' : volumeLabel(activeVolume)} DOCX 已生成，目录页码已刷新`), 5);
+          message.success(fieldRefresh.user_message || `${exportPackageLabel(volumeType, scope)} DOCX 已生成，目录页码已刷新`, 5);
         } else if (failedImages > 0 || skippedImages > 0 || selectionWarnings.length > 0) {
           message.warning(`DOCX 已生成，图片插入 ${insertedImages} 张，跳过 ${skippedImages} 张，失败 ${failedImages} 张，请下载后复核图文位置。`, 7);
         } else {
-          message.success(scope === 'section' ? '本章 DOCX 已生成' : `${activeVolume === 'all' ? '全文' : volumeLabel(activeVolume)} DOCX 已生成`);
+          message.success(`${exportPackageLabel(volumeType, scope)} DOCX 已生成`);
         }
+        showExportCompletedModal(task, scope, volumeType);
         return;
       }
       if (task.status === 'failed') {
@@ -2032,37 +2911,44 @@ export function BidEditorPage(): JSX.Element {
     });
   }
 
-  function deleteChapter(chapter: ChapterDraft): void {
-    Modal.confirm({
-      title: '删除章节',
-      content: `确认删除“${chapter.title || '未命名章节'}”？此操作只影响当前页面草稿。`,
-      okText: '删除',
-      cancelText: '取消',
-      okButtonProps: { danger: true },
-      onOk: async () => {
-        if (data?.project?.id && chapter.id && isUuid(chapter.id)) {
-          await deleteBidSection(data.project.id, chapter.id);
+  async function confirmDeleteChapter(): Promise<void> {
+    if (!deleteTarget) {
+      return;
+    }
+    const chapter = chapters.find(item => item.id === deleteTarget.id) || deleteTarget;
+    const deletedChapters = collectChapterSubtree(chapter);
+    const deletedIds = new Set(deletedChapters.map(item => item.id));
+    const restoredSelectedId = selectedId && deletedIds.has(selectedId) ? selectedId : chapter.id;
+
+    setDeletingChapter(true);
+    try {
+      if (data?.project?.id && chapter.id && isUuid(chapter.id)) {
+        await deleteBidSection(data.project.id, chapter.id);
+      }
+      setRecentDeletedChapter({
+        title: chapter.title || '未命名章节',
+        count: deletedChapters.length,
+        selectedId: restoredSelectedId,
+        deletedAt: new Date().toISOString(),
+        chapters: deletedChapters,
+      });
+      setChapters(items => {
+        const nextItems = normalizeChapterHierarchy(items.filter(item => !deletedIds.has(item.id)));
+        if (selectedId && deletedIds.has(selectedId)) {
+          setSelectedId(nextItems[0]?.id || '');
         }
-        setChapters(items => {
-          const descendants = new Set<string>([chapter.id]);
-          let changed = true;
-          while (changed) {
-            changed = false;
-            items.forEach(item => {
-              if (item.parent_id && descendants.has(item.parent_id) && !descendants.has(item.id)) {
-                descendants.add(item.id);
-                changed = true;
-              }
-            });
-          }
-          const nextItems = normalizeChapterHierarchy(items.filter(item => !descendants.has(item.id)));
-          if (selectedId === chapter.id) {
-            setSelectedId(nextItems[0]?.id || '');
-          }
-          return nextItems;
-        });
-      },
-    });
+        return nextItems;
+      });
+      setDeleteTarget(null);
+    } catch (error) {
+      message.error(error instanceof Error ? error.message : String(error));
+    } finally {
+      setDeletingChapter(false);
+    }
+  }
+
+  function deleteChapter(chapter: ChapterDraft): void {
+    setDeleteTarget(chapter);
   }
 
   function customWritingPlaceholder(chapter: ChapterDraft): string {
@@ -2123,30 +3009,60 @@ export function BidEditorPage(): JSX.Element {
   }
 
   function customWriteChapter(chapter: ChapterDraft): void {
-    let instruction = '';
-    const placeholder = customWritingPlaceholder(chapter);
-    Modal.confirm({
-      title: `自定义编写：${chapter.title || '未命名章节'}`,
-      content: (
-        <Input.TextArea
-          rows={5}
-          placeholder={placeholder}
-          onChange={event => {
-            instruction = event.target.value;
-          }}
-        />
-      ),
-      okText: '加入写作要求',
-      cancelText: '取消',
-      onOk: () => {
-        setChapters(items => items.map(item => item.id === chapter.id ? {
-          ...item,
-          writing_notes: [...(item.writing_notes || []), instruction.trim() || '按用户自定义要求编写。'],
-        } : item));
-        setSelectedId(chapter.id);
-        message.success('已加入自定义写作要求，可点击生成本章正文');
+    setSelectedId(chapter.id);
+    setCustomWriteTarget(chapter);
+    setCustomWriteInstruction('');
+  }
+
+  async function saveCustomWritingRequirement(): Promise<void> {
+    if (!data?.project?.id || !customWriteTarget) {
+      message.warning('请先选择需要自定义编写的章节');
+      return;
+    }
+    const latestChapter = chapters.find(item => item.id === customWriteTarget.id) || customWriteTarget;
+    const instruction = customWriteInstruction.trim() || '按用户自定义要求编写。';
+    const nextNotes = [...(latestChapter.writing_notes || []), instruction];
+    const currentMetadata = latestChapter.metadata && typeof latestChapter.metadata === 'object'
+      ? latestChapter.metadata
+      : {};
+    const previousCustomWriting = currentMetadata.custom_writing && typeof currentMetadata.custom_writing === 'object'
+      ? currentMetadata.custom_writing as Record<string, unknown>
+      : {};
+    const nextChapter: ChapterDraft = {
+      ...latestChapter,
+      writing_notes: nextNotes,
+      metadata: {
+        ...currentMetadata,
+        custom_writing: {
+          ...previousCustomWriting,
+          enabled: true,
+          last_instruction: instruction,
+          last_updated_at: new Date().toISOString(),
+          source: 'bid_editor_custom_write',
+          instruction_count: nextNotes.length,
+        },
       },
-    });
+    };
+
+    setCustomWriteSaving(true);
+    try {
+      const saved = await saveBidSection(data.project.id, {
+        ...nextChapter,
+        parent_id: safeParentIdForSave(nextChapter.parent_id, chapters),
+        level: nextChapter.level || 1,
+        order_index: chapters.findIndex(item => item.id === nextChapter.id) + 1,
+        status: nextChapter.status || 'draft',
+      });
+      setChapters(items => normalizeChapterHierarchy(items.map(item => item.id === nextChapter.id ? { ...item, ...saved } : item)));
+      setSelectedId(saved.id || nextChapter.id);
+      setCustomWriteTarget(null);
+      setCustomWriteInstruction('');
+      message.success('自定义写作要求已保存，生成本章正文时会自动采用');
+    } catch (error) {
+      message.error(error instanceof Error ? error.message : String(error));
+    } finally {
+      setCustomWriteSaving(false);
+    }
   }
 
   function chapterMenuItems(chapter: ChapterDraft): MenuProps['items'] {
@@ -2336,6 +3252,7 @@ export function BidEditorPage(): JSX.Element {
           order_index: targetChapter.order_index || chapters.findIndex(item => item.id === targetChapter.id) + 1,
           volume_type: deliveryVolumeType(targetChapter),
           target_words: targetChapterWords(targetChapter),
+          metadata: generationTaskItemMetadata(targetChapter),
         }],
       });
       setPersistedBatchTask({ id: task.id, status: task.status });
@@ -2512,7 +3429,7 @@ export function BidEditorPage(): JSX.Element {
         setPersistedBatchTask(null);
         persistedBatchTaskIdRef.current = '';
       }
-      message.info(`当前${volumeLabel(activeVolume)}章节都已生成，如需重写请点击单章重写正文`);
+      message.info(`当前${volumeLabel(activeVolume)}章节都已生成，如需重新生成请点击单章重新生成`);
       return;
     }
 
@@ -2541,6 +3458,7 @@ export function BidEditorPage(): JSX.Element {
           order_index: chapter.order_index || index + 1,
           volume_type: deliveryVolumeType(chapter),
           target_words: targetChapterWords(chapter),
+          metadata: generationTaskItemMetadata(chapter),
         })),
       });
       setPersistedBatchTask({ id: task.id, status: task.status });
@@ -2668,6 +3586,66 @@ export function BidEditorPage(): JSX.Element {
     }
   }
 
+  async function resumePartialDraftsInBatch(): Promise<void> {
+    const taskId = persistedBatchTaskIdRef.current || persistedBatchTask?.id;
+    if (!data?.project?.id || !taskId) {
+      message.warning('当前没有可恢复的批量章节任务');
+      return;
+    }
+    const partialIds = Object.entries(batchTasks)
+      .filter(([, task]) => task.status === 'partial_generated')
+      .map(([id]) => id);
+    if (!partialIds.length) {
+      message.info('当前没有待续写的草稿章节');
+      return;
+    }
+    setMode('目录模式');
+    setBatchGenerating(true);
+    batchCancelRequestedRef.current = false;
+    setBatchTasks(tasks => Object.fromEntries(Object.entries(tasks).map(([id, task]) => [
+      id,
+      partialIds.includes(id)
+        ? { ...task, status: 'queued' as BatchTaskStatus, percent: 0, message: '已加入批量续写队列' }
+        : task,
+    ])));
+    try {
+      const task = await resumeSectionGenerationTask(data.project.id, taskId, {
+        autoStart: true,
+        preserveDraft: true,
+        statuses: ['partial_generated'],
+        reason: 'batch_resume_partial',
+      });
+      setPersistedBatchTask({ id: task.id, status: task.status, metadata: task.metadata || {} });
+      persistedBatchTaskIdRef.current = task.id;
+      applyPersistedBatchTask(task);
+      const pollResult = await pollSectionGenerationTask(data.project.id, task.id);
+      const finalTask = pollResult.task;
+      if (pollResult.background) {
+        applyPersistedBatchTask(finalTask);
+        message.info('批量续写仍在后台执行，可稍后刷新恢复进度');
+        return;
+      }
+      await reloadProject(data.project.id);
+      applyPersistedBatchTask(finalTask);
+      if (finalTask.status === 'completed') {
+        message.success('草稿续写已完成');
+      } else if (finalTask.status === 'partial_failed') {
+        message.warning('仍有草稿需要人工复核或再次续写');
+      } else {
+        message.error('批量续写未全部完成，请查看章节状态');
+      }
+    } catch (error) {
+      const reason = error instanceof Error ? error.message : String(error);
+      setBatchTasks(tasks => Object.fromEntries(Object.entries(tasks).map(([id, task]) => [
+        id,
+        partialIds.includes(id) ? { ...task, status: 'partial_generated' as BatchTaskStatus, message: '批量续写启动失败' } : task,
+      ])));
+      message.error(`批量续写草稿失败：${reason}`);
+    } finally {
+      setBatchGenerating(false);
+    }
+  }
+
   function stopCurrentSectionGeneration(): void {
     if (!sectionStreaming) {
       return;
@@ -2699,6 +3677,67 @@ export function BidEditorPage(): JSX.Element {
     }
   }
 
+  const batchTaskValues = Object.values(batchTasks);
+  const partialDraftCount = batchTaskValues.filter(task => task.status === 'partial_generated').length;
+  const partialReviewCount = batchTaskValues.filter(task => task.status === 'partial_generated' && isPartialReviewRequired(task)).length;
+  const activeTaskCount = batchTaskValues.filter(task => ACTIVE_BATCH_TASK_STATUSES.has(task.status)).length;
+  const queuedTaskCount = batchTaskValues.filter(task => task.status === 'queued').length;
+  const incompleteLeafCount = Math.max(0, scopedLeafChapters.length - generatedCount);
+  const exportMenuItems: MenuProps['items'] = [
+    {
+      key: 'technical',
+      label: '下载技术标 DOCX',
+      icon: <Download size={14} />,
+      disabled: !volumeCounts.technical || !!downloadGenerating,
+    },
+    {
+      key: 'business',
+      label: '下载商务标 DOCX',
+      icon: <Download size={14} />,
+      disabled: !volumeCounts.business || !!downloadGenerating,
+    },
+    {
+      key: 'all',
+      label: '下载完整投标文件 DOCX',
+      icon: <Download size={14} />,
+      disabled: !volumeCounts.all || !!downloadGenerating,
+    },
+  ];
+
+  function ExportDownloadButton(): JSX.Element {
+    return (
+      <Dropdown
+        trigger={['click']}
+        menu={{
+          items: exportMenuItems,
+          onClick: ({ key }) => void downloadDocx(undefined, key as VolumeType),
+        }}
+        disabled={!chapters.length || !!downloadGenerating}
+      >
+        <Button
+          type="primary"
+          icon={<Download size={17} />}
+          loading={downloadGenerating === 'full'}
+          disabled={!chapters.length || !!downloadGenerating}
+        >
+          导出投标文件
+          <ChevronDown size={15} />
+        </Button>
+      </Dropdown>
+    );
+  }
+
+  useEffect(() => {
+    if (searchParams.get('action') !== 'resume-partial') return;
+    if (autoResumePartialRef.current || loading || batchGenerating || sectionStreaming) return;
+    if (!data?.project?.id || !persistedBatchTaskIdRef.current || partialDraftCount <= 0) return;
+    autoResumePartialRef.current = true;
+    setMode('目录模式');
+    void resumePartialDraftsInBatch();
+    // resumePartialDraftsInBatch intentionally reads the latest component state.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [batchGenerating, data?.project?.id, loading, partialDraftCount, searchParams, sectionStreaming]);
+
   if (loading) {
     return (
       <div className="bid-editor-loading">
@@ -2729,16 +3768,14 @@ export function BidEditorPage(): JSX.Element {
           </div>
           <Space size={10} wrap>
             <Button onClick={() => navigate('/interpretation')}>返回解读</Button>
-            <Button icon={<BookOpen size={16} />}>关联资料</Button>
             <Button
-              type="primary"
-              icon={<Download size={17} />}
-              loading={downloadGenerating === 'full'}
-            disabled={!scopedChapters.length || !!downloadGenerating}
-            onClick={() => void downloadDocx()}
-          >
-            {activeVolume === 'all' ? '标书下载' : `下载${volumeLabel(activeVolume)}`}
-          </Button>
+              icon={<ClipboardCheck size={16} />}
+              disabled={!data?.project?.id}
+              onClick={() => data?.project?.id && navigate(`/formal-check?projectId=${data.project.id}`)}
+            >
+              正式检查
+            </Button>
+            <ExportDownloadButton />
             {exportTask && downloadGenerating === 'full' ? (
               <Tooltip title={exportTask.message || '正在导出 DOCX'}>
                 <Progress type="circle" size={34} percent={exportTask.progress || 0} />
@@ -2748,7 +3785,8 @@ export function BidEditorPage(): JSX.Element {
         </header>
 
         <main className="outline-workbench">
-          <section className="outline-topbar">
+          <section className="outline-topbar-stack">
+            <div className="outline-topbar">
             <Segmented<EditorMode>
               value={mode}
               onChange={value => setMode(value)}
@@ -2774,8 +3812,15 @@ export function BidEditorPage(): JSX.Element {
               <span>章节计划：{estimatedTotalChars.toLocaleString()} 字（约{estimatedPages}页）</span>
               <span>篇幅进度：{lengthProgress}%</span>
               <span>进度：{generationProgress}%</span>
+              {incompleteLeafCount ? <span>待完成章节：{incompleteLeafCount}</span> : null}
+              {activeTaskCount ? <span>正在写：{activeTaskCount}</span> : null}
+              {queuedTaskCount ? <span>排队：{queuedTaskCount}</span> : null}
+              {partialDraftCount ? <span>草稿待续写：{partialDraftCount}</span> : null}
+              {partialReviewCount ? <span>需复核：{partialReviewCount}</span> : null}
               {batchGenerating ? <span>后台章节任务执行中</span> : null}
             </div>
+            </div>
+            <RecentlyDeletedChapterBanner />
           </section>
           <section className="outline-panel">
             <div className="outline-panel-header">
@@ -2784,14 +3829,6 @@ export function BidEditorPage(): JSX.Element {
                 <strong>标书目录</strong>
               </div>
               <Space size={10} wrap className="outline-toolbar-actions">
-                <label className="outline-switch">
-                  <input
-                    type="checkbox"
-                    checked={withImages}
-                    onChange={event => setWithImages(event.target.checked)}
-                  />
-                  <span>全篇图文并茂</span>
-                </label>
                 <Tooltip title="设置目标页数、目标字数、技术标/商务标篇幅和生成策略">
                   <Button size="small" icon={<SlidersHorizontal size={14} />} onClick={openLengthSettings}>全文设置</Button>
                 </Tooltip>
@@ -2807,6 +3844,18 @@ export function BidEditorPage(): JSX.Element {
                 >
                   重置生成状态
                 </Button>
+                {partialDraftCount ? (
+                  <Tooltip title="继续编写已保存的草稿章节，保留已有内容">
+                    <Button
+                      size="small"
+                      icon={<RefreshCw size={14} />}
+                      disabled={batchGenerating || sectionStreaming}
+                      onClick={() => void resumePartialDraftsInBatch()}
+                    >
+                      批量续写草稿
+                    </Button>
+                  </Tooltip>
+                ) : null}
                 <Button size="small" icon={<Download size={14} />} onClick={downloadOutlineMarkdown}>下载目录</Button>
               </Space>
             </div>
@@ -2847,10 +3896,19 @@ export function BidEditorPage(): JSX.Element {
                       </div>
                     </Tooltip>
                     <div className="outline-plan-tags">
+                      {wordMeta.quality ? (
+                        <Tooltip title={wordMeta.qualityTooltip}>
+                          <div className={`outline-quality-pill ${wordMeta.quality}`}>
+                            {wordMeta.qualityLabel}
+                          </div>
+                        </Tooltip>
+                      ) : null}
                       <div className="outline-task-progress">
                         {task ? (
                           <>
-                            <Tag color={batchStatusColor(task.status)}>{batchStatusLabel(task.status)}</Tag>
+                            <Tooltip title={batchTaskTooltip(task)}>
+                              <Tag color={batchStatusColor(task.status)}>{batchTaskLabel(task)}</Tag>
+                            </Tooltip>
                             <Progress percent={task.percent} size="small" showInfo={false} status={task.status === 'failed' ? 'exception' : undefined} />
                           </>
                         ) : null}
@@ -2879,11 +3937,23 @@ export function BidEditorPage(): JSX.Element {
                         size="small"
                         icon={<Sparkles size={14} />}
                         loading={(sectionStreaming && selectedId === chapter.id) || Boolean(task?.status && ACTIVE_BATCH_TASK_STATUSES.has(task.status))}
-                        disabled={batchGenerating}
+                        disabled={batchGenerating || Boolean(compressingChapterId)}
                         onClick={() => void generateCurrentSection(chapter)}
                       >
-                        {wordMeta.generated ? '重写正文' : '生成正文'}
+                        {wordMeta.generated ? '重新生成' : '生成正文'}
                       </Button>
+                      {wordMeta.quality === 'long' ? (
+                        <Button
+                          type="link"
+                          size="small"
+                          icon={<Scissors size={14} />}
+                          loading={compressingChapterId === chapter.id}
+                          disabled={batchGenerating || sectionStreaming || Boolean(compressingChapterId)}
+                          onClick={() => void compressChapterToTarget(chapter)}
+                        >
+                          压缩到目标
+                        </Button>
+                      ) : null}
                       <Button type="link" size="small" icon={<Eye size={14} />} onClick={() => previewChapter(chapter)}>预览</Button>
                       <Dropdown
                         trigger={['click']}
@@ -2944,7 +4014,7 @@ export function BidEditorPage(): JSX.Element {
           okButtonProps={{ danger: resetClearContent, loading: resettingGeneration }}
           onOk={() => void resetGenerationStatus()}
           onCancel={() => setResetModalOpen(false)}
-          destroyOnClose
+          destroyOnHidden
         >
           <Alert
             type="warning"
@@ -2962,6 +4032,10 @@ export function BidEditorPage(): JSX.Element {
           </label>
         </Modal>
         <LengthSettingsModal />
+        <CustomWritingModal />
+        <LeafToContainerConfirmModal />
+        <DeleteChapterConfirmModal />
+        <CompressionConfirmModal />
         <ComplianceDrawer />
         <SemanticComplianceDrawer />
       </div>
@@ -2977,16 +4051,14 @@ export function BidEditorPage(): JSX.Element {
         </div>
         <Space size={10} wrap>
           <Button onClick={() => navigate('/interpretation')}>返回解读</Button>
-          <Button icon={<BookOpen size={16} />}>关联资料</Button>
           <Button
-            type="primary"
-            icon={<Download size={17} />}
-            loading={downloadGenerating === 'full'}
-            disabled={!scopedChapters.length || !!downloadGenerating}
-            onClick={() => void downloadDocx()}
+            icon={<ClipboardCheck size={16} />}
+            disabled={!data?.project?.id}
+            onClick={() => data?.project?.id && navigate(`/formal-check?projectId=${data.project.id}`)}
           >
-            {activeVolume === 'all' ? '标书下载' : `下载${volumeLabel(activeVolume)}`}
+            正式检查
           </Button>
+          <ExportDownloadButton />
           {exportTask && downloadGenerating === 'full' ? (
             <Tooltip title={exportTask.message || '正在导出 DOCX'}>
               <Progress type="circle" size={34} percent={exportTask.progress || 0} />
@@ -3112,35 +4184,38 @@ export function BidEditorPage(): JSX.Element {
       </aside>
 
       <main className="bid-editor-main">
-        <section className="editor-title-row">
-          <div>
-            <h1>{selectedChapter ? chapterDisplayTitle(selectedChapter) : '未选择章节'}</h1>
-            <p>{streaming ? streamText : selectedChapter?.purpose || '使用 AI 编辑器编写章节正文，支持标题、列表、表格和 Markdown 存储。'}</p>
+        <section className="editor-title-stack">
+          <div className="editor-title-row">
+            <div>
+              <h1>{selectedChapter ? chapterDisplayTitle(selectedChapter) : '未选择章节'}</h1>
+              <p>{streaming ? streamText : selectedChapter?.purpose || '使用 AI 编辑器编写章节正文，支持标题、列表、表格和 Markdown 存储。'}</p>
+            </div>
+            <Space>
+              {streaming ? <Tag color="processing">大纲生成中</Tag> : null}
+              {sectionStreaming ? <Tag color="processing">正文生成中</Tag> : null}
+              {selectedChapter ? <Tag color="blue">{volumeLabel(deliveryVolumeType(selectedChapter))}</Tag> : null}
+              {selectedChapter ? <Tag color="default">{internalVolumeLabel(inferVolumeType(selectedChapter))}</Tag> : null}
+              <Button icon={<Save size={16} />} disabled={!selectedChapter || !contentDirty} onClick={() => void saveDraft()}>保存章节</Button>
+              <Button icon={<Sparkles size={16} />} loading={sectionStreaming} disabled={!selectedChapter || streaming} onClick={() => void generateCurrentSection()}>生成本章正文</Button>
+              {sectionStreaming ? (
+                <Button danger icon={<Square size={16} />} onClick={stopCurrentSectionGeneration}>停止生成</Button>
+              ) : null}
+              <Button
+                icon={<Download size={16} />}
+                loading={downloadGenerating === 'section'}
+                disabled={!selectedChapter || !!downloadGenerating}
+                onClick={() => selectedChapter && void downloadDocx(selectedChapter.id)}
+              >
+                下载本章
+              </Button>
+              {exportTask && downloadGenerating === 'section' ? (
+                <Tooltip title={exportTask.message || '正在导出 DOCX'}>
+                  <Progress type="circle" size={30} percent={exportTask.progress || 0} />
+                </Tooltip>
+              ) : null}
+            </Space>
           </div>
-          <Space>
-            {streaming ? <Tag color="processing">大纲生成中</Tag> : null}
-            {sectionStreaming ? <Tag color="processing">正文生成中</Tag> : null}
-            {selectedChapter ? <Tag color="blue">{volumeLabel(deliveryVolumeType(selectedChapter))}</Tag> : null}
-            {selectedChapter ? <Tag color="default">{internalVolumeLabel(inferVolumeType(selectedChapter))}</Tag> : null}
-            <Button icon={<Save size={16} />} disabled={!selectedChapter || !contentDirty} onClick={() => void saveDraft()}>保存章节</Button>
-            <Button icon={<Sparkles size={16} />} loading={sectionStreaming} disabled={!selectedChapter || streaming} onClick={() => void generateCurrentSection()}>生成本章正文</Button>
-            {sectionStreaming ? (
-              <Button danger icon={<Square size={16} />} onClick={stopCurrentSectionGeneration}>停止生成</Button>
-            ) : null}
-            <Button
-              icon={<Download size={16} />}
-              loading={downloadGenerating === 'section'}
-              disabled={!selectedChapter || !!downloadGenerating}
-              onClick={() => selectedChapter && void downloadDocx(selectedChapter.id)}
-            >
-              下载本章
-            </Button>
-            {exportTask && downloadGenerating === 'section' ? (
-              <Tooltip title={exportTask.message || '正在导出 DOCX'}>
-                <Progress type="circle" size={30} percent={exportTask.progress || 0} />
-              </Tooltip>
-            ) : null}
-          </Space>
+          <RecentlyDeletedChapterBanner />
         </section>
 
         <section className="editor-workspace">
@@ -3148,6 +4223,7 @@ export function BidEditorPage(): JSX.Element {
             <TiptapBidEditor
               content={selectedChapter.content || ''}
               onChange={handleEditorChange}
+              onAiEdit={handleAiEdit}
               placeholder="开始编写标书章节内容..."
             />
           ) : (
@@ -3164,6 +4240,10 @@ export function BidEditorPage(): JSX.Element {
         </footer>
       </main>
       <QualityDashboard />
+      <CustomWritingModal />
+      <LeafToContainerConfirmModal />
+      <DeleteChapterConfirmModal />
+      <CompressionConfirmModal />
       <ComplianceDrawer />
       <SemanticComplianceDrawer />
     </div>

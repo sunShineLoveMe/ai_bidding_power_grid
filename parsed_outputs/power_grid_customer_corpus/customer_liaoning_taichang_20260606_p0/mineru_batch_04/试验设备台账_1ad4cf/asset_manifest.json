@@ -1,0 +1,66 @@
+{
+  "assets": [
+    {
+      "asset_id": "taichang_production_capacity_p1_002_0d22e1ba",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/试验设备台账.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "production_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/试验设备台账_1ad4cf/extract/images/2db8d57086b5182325cd211518c8c87757f7c5ddddaf2bbcda42a03e5d670afb.jpg",
+      "asset_sha256": "c30583253ad76a8089e59f39979a74ee5978e0caf10f624f90d24b7869d2db2a",
+      "page_idx": 0,
+      "page_no": 1,
+      "bbox": [
+        265,
+        310,
+        445,
+        439
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_production_capacity_20260606_112538_1ad4cfaa",
+      "batch_id": "dd906d81-4089-4360-92c3-2e4fb6b8bf65",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "河北泰昌电力器材科技有限公司",
+      "ocr_context": "河北泰昌电力器材科技有限公司",
+      "retrieval_text": "泰昌 production_capacity 第1页图片。河北泰昌电力器材科技有限公司",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "production_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:1",
+        "bbox_anchor": [
+          265,
+          310,
+          445,
+          439
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    }
+  ]
+}

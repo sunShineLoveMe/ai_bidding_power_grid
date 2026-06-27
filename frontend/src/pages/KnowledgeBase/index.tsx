@@ -7,6 +7,7 @@ import { MetricCards } from '../../components/common/MetricCards';
 import { ModuleHeader } from '../../components/common/ModuleHeader';
 import dayjs from 'dayjs';
 import { apiClient } from '../../api/client';
+import { getAuthToken } from '../../stores/authStore';
 
 interface KnowledgeFile {
   id: string;
@@ -15,6 +16,7 @@ interface KnowledgeFile {
   source_type: string;
   status: 'indexed' | 'processing' | 'failed';
   created_at: string;
+  metadata?: Record<string, unknown>;
 }
 
 interface KnowledgeChunk {
@@ -49,6 +51,26 @@ const categoryLabel: Record<string, string> = {
   water_upload_workflow: '上传流程样例',
 };
 
+const docRoleLabel: Record<string, string> = {
+  enterprise_evidence: '企业证明材料',
+  technical_spec: '技术规范书',
+  contract_special_terms: '专用合同条款',
+  contract_general_terms: '通用合同条款',
+  tender_notice: '招标公告',
+  main_tender_file: '主招标文件',
+  goods_list: '货物清单',
+  technical_response_reference: '技术响应参考',
+  winning_bid_reference: '中标参考资料',
+};
+
+const sourceCategoryLabel: Record<string, string> = {
+  '01_tender_documents': '招标文件资料',
+  '02_policy_regulations': '政策法规资料',
+  '03_standards_specs': '标准规范资料',
+  '04_standard_phrases': '标准话术资料',
+  '05_enterprise_documents': '泰昌企业资料',
+};
+
 const statusColor: Record<string, string> = {
   indexed: 'green',
   processing: 'blue',
@@ -60,6 +82,24 @@ const statusLabel: Record<string, string> = {
   processing: '解析中',
   failed: '解析失败',
 };
+
+function readMetaString(file: KnowledgeFile, key: string): string {
+  const value = file.metadata?.[key];
+  return typeof value === 'string' ? value.trim() : '';
+}
+
+function displayDocumentCategory(file: KnowledgeFile): string {
+  const categoryLabelFromMeta = readMetaString(file, 'category_label');
+  if (categoryLabelFromMeta) return categoryLabelFromMeta;
+
+  const docRole = readMetaString(file, 'doc_role');
+  if (docRole) return docRoleLabel[docRole] || docRole;
+
+  const sourceCategory = readMetaString(file, 'source_category');
+  if (sourceCategory) return sourceCategoryLabel[sourceCategory] || sourceCategory;
+
+  return categoryLabel[file.category] || file.category || '其他资料';
+}
 
 export function KnowledgeBasePage(): JSX.Element {
   const [activeCategory, setActiveCategory] = useState('全部资料');
@@ -104,8 +144,10 @@ export function KnowledgeBasePage(): JSX.Element {
     formData.append('file', file);
 
     try {
+      const token = getAuthToken();
       const res = await fetch('/api/knowledge/upload', {
         method: 'POST',
+        headers: token ? { Authorization: `Bearer ${token}` } : undefined,
         body: formData,
       });
       if (!res.ok) throw new Error('上传失败');
@@ -120,22 +162,25 @@ export function KnowledgeBasePage(): JSX.Element {
 
   const categories = useMemo(() => {
     const counts = files.reduce<Record<string, number>>((acc, file) => {
-      acc[file.category] = (acc[file.category] || 0) + 1;
+      const category = displayDocumentCategory(file);
+      acc[category] = (acc[category] || 0) + 1;
       return acc;
     }, {});
     return [
       { name: '全部资料', count: files.length },
       ...Object.entries(counts)
-        .sort(([a], [b]) => (categoryLabel[a] || a).localeCompare(categoryLabel[b] || b, 'zh-CN'))
+        .sort(([a], [b]) => a.localeCompare(b, 'zh-CN'))
         .map(([category, count]) => ({
           name: category,
-          label: categoryLabel[category] || category,
+          label: category,
           count,
         })),
     ];
   }, [files]);
 
-  const dataSource = activeCategory === '全部资料' ? files : files.filter(file => file.category === activeCategory);
+  const dataSource = activeCategory === '全部资料'
+    ? files
+    : files.filter(file => displayDocumentCategory(file) === activeCategory);
 
   const handleView = async (record: KnowledgeFile) => {
     try {
@@ -156,13 +201,14 @@ export function KnowledgeBasePage(): JSX.Element {
 
   const columns: ColumnsType<KnowledgeFile> = [
     { title: '文件名称', dataIndex: 'title', ellipsis: true },
-    { title: '分类', dataIndex: 'category', width: 140, render: value => <Tag color="blue">{categoryLabel[value] || value}</Tag> },
+    { title: '分类', dataIndex: 'category', width: 140, render: (_, record) => <Tag color="blue">{displayDocumentCategory(record)}</Tag> },
     { title: '类型', dataIndex: 'source_type', width: 88, render: value => value?.toUpperCase() },
     { title: '索引状态', dataIndex: 'status', width: 100, render: status => <Tag color={statusColor[status] || 'default'}>{statusLabel[status] || status}</Tag> },
     { title: '更新时间', dataIndex: 'created_at', width: 160, render: val => dayjs(val).format('YYYY-MM-DD HH:mm') },
     {
       title: '操作',
       width: 130,
+      fixed: 'right',
       render: (_, record) => (
         <Space size={4}>
           <Button type="link" size="small" onClick={() => handleView(record)}>查看</Button>
@@ -211,18 +257,20 @@ export function KnowledgeBasePage(): JSX.Element {
               上传资质扫描件、产品图片或图文混排资料后，可继续扩展图片召回和标书自动配图能力。
             </div>
           </div>
-          <Table
-            rowKey="id"
-            size="small"
-            pagination={{ pageSize: 10, showSizeChanger: true, pageSizeOptions: [10, 20, 50], showTotal: total => `共 ${total} 条` }}
-            columns={columns}
-            dataSource={dataSource}
-            loading={loading}
-            className="compact-table"
-            tableLayout="fixed"
-            scroll={{ y: 'calc(100vh - 500px)' }}
-            locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无知识库资料，请上传真实企业资料" /> }}
-          />
+          <div className="bounded-table min-h-0 flex-1">
+            <Table
+              rowKey="id"
+              size="small"
+              pagination={{ pageSize: 10, showSizeChanger: true, pageSizeOptions: [10, 20, 50], showTotal: total => `共 ${total} 条` }}
+              columns={columns}
+              dataSource={dataSource}
+              loading={loading}
+              className="compact-table knowledge-list-table"
+              tableLayout="fixed"
+              scroll={{ x: 860, y: 'max(160px, calc(100vh - 670px))' }}
+              locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无知识库资料，请上传真实企业资料" /> }}
+            />
+          </div>
         </section>
       </div>
       <Modal
@@ -238,7 +286,7 @@ export function KnowledgeBasePage(): JSX.Element {
             <Descriptions size="small" bordered column={2}>
               <Descriptions.Item label="文件名称" span={2}>{detail.document.title}</Descriptions.Item>
               <Descriptions.Item label="分类">
-                <Tag color="blue">{categoryLabel[detail.document.category] || detail.document.category}</Tag>
+                <Tag color="blue">{displayDocumentCategory(detail.document)}</Tag>
               </Descriptions.Item>
               <Descriptions.Item label="类型">{detail.document.source_type?.toUpperCase()}</Descriptions.Item>
               <Descriptions.Item label="索引状态">

@@ -1,0 +1,105 @@
+{
+  "batch_id": "customer_liaoning_taichang_20260606_p0",
+  "generated_at": "2026-06-08T21:52:52",
+  "dry_run": false,
+  "documents": 2,
+  "parsed_documents": 2,
+  "parameter_rows": 36,
+  "by_product_family": {
+    "CPVC电缆保护管": 19,
+    "MPP电缆保护管": 17
+  },
+  "qa_reference": {
+    "scope": "qa_only_not_coverage_judgement",
+    "reference_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/technical_parameters/technical_parameter_rows.json",
+    "by_product_family": {
+      "CPVC电缆保护管": {
+        "extracted_parameter_names": [
+          "不圆度",
+          "压扁试验",
+          "壁厚",
+          "外观",
+          "密度",
+          "平均内径",
+          "弯曲度",
+          "承口壁厚",
+          "承口平均内径",
+          "承口最小深度",
+          "接头密封性能",
+          "散热性能",
+          "环刚度",
+          "纵向回缩率",
+          "维卡软化温度",
+          "落锤冲击",
+          "长度",
+          "静摩擦系数",
+          "颜色"
+        ],
+        "liaoning_reference_overlap": [
+          "压扁试验",
+          "密度",
+          "纵向回缩率",
+          "维卡软化温度",
+          "落锤冲击"
+        ],
+        "note": "辽宁参数仅用于抽取 QA/异常校验，不构成泰昌覆盖辽宁需求的结论。"
+      },
+      "MPP电缆保护管": {
+        "extracted_parameter_names": [
+          "不圆度",
+          "压扁试验",
+          "壁厚",
+          "外观",
+          "密度",
+          "平均内径",
+          "弯曲度",
+          "拉伸强度",
+          "散热性能",
+          "断裂伸长率",
+          "焊接强度",
+          "环刚度",
+          "纵向回缩率",
+          "维卡软化温度",
+          "落锤冲击",
+          "长度",
+          "静摩擦系数"
+        ],
+        "liaoning_reference_overlap": [
+          "压扁试验",
+          "散热性能",
+          "断裂伸长率",
+          "落锤冲击",
+          "静摩擦系数"
+        ],
+        "note": "辽宁参数仅用于抽取 QA/异常校验，不构成泰昌覆盖辽宁需求的结论。"
+      }
+    }
+  },
+  "details": [
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/CPVC电缆保护管检验报告内径250.pdf",
+      "markdown_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/CPVC电缆保护管检验报告内径250_ff3b09/extract/full.md",
+      "status": "parsed",
+      "tables": 3,
+      "parameter_rows": 19,
+      "report_no": "2024100312005501713",
+      "sample_name": "CPVC电缆保护管",
+      "specification_model": "DS 250×15×6000 SN16 PVC-C"
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+      "markdown_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/MPP电缆保护管检验报告内径250_676152/extract/full.md",
+      "status": "parsed",
+      "tables": 3,
+      "parameter_rows": 17,
+      "report_no": "2024100312005501712",
+      "sample_name": "MPP电缆保护管",
+      "specification_model": "DF 250×22×9000 SN40 MPP"
+    }
+  ],
+  "outputs": {
+    "json": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/taichang_product_parameters/taichang_product_parameter_rows.json",
+    "csv": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/taichang_product_parameters/taichang_product_parameter_rows.csv",
+    "summary": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/taichang_product_parameters/taichang_product_parameter_summary.md"
+  }
+}

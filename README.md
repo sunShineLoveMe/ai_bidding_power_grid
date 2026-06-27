@@ -6,7 +6,7 @@
 
 [![Python](https://img.shields.io/badge/Python-3.12-blue)](https://python.org)
 [![React](https://img.shields.io/badge/React-18-blue)](https://react.dev)
-[![License](https://img.shields.io/badge/License-TBD-lightgrey)](#license)
+[![Use](https://img.shields.io/badge/Use-Internal-lightgrey)](#使用范围)
 
 ---
 
@@ -158,7 +158,16 @@ cd frontend && npm run dev
 
 > 三端缺一不可：只启 Web + 前端时 HTTP 能响应，但解析、章节正文生成、DOCX 导出等后台任务不会推进——它们都跑在 Celery worker 里。详见下方「本地三端启动」。
 
-→ [完整部署文档](docs/deployment/quickstart.md) · [安全配置](docs/deployment/security.md) · [本地 Docker PostgreSQL](docs/deployment/local-postgres-docker.md) · [阿里云目标架构](docs/deployment/aliyun-target-architecture.md)
+→ [完整部署文档](docs/deployment/quickstart.md) · [安全配置](docs/deployment/security.md) · [本地 Docker PostgreSQL](docs/deployment/local-postgres-docker.md) · [阿里云单 ECS 部署清单](docs/deployment/aliyun-ubuntu-single-ecs-deploy-checklist-20260622.md) · [阿里云运维交接手册](docs/deployment/aliyun-single-ecs-developer-operations-guide.md)
+
+### 阿里云测试环境部署
+
+阿里云单企业测试环境采用 Ubuntu 22.04 + Docker Compose + 单 ECS 形态，当前约定代码来源为 Gitee `feat/aliyun-test-readiness` 分支。开发人员或运维人员接手部署时，优先阅读：
+
+- [阿里云 Ubuntu 单 ECS 测试部署操作清单](docs/deployment/aliyun-ubuntu-single-ecs-deploy-checklist-20260622.md)：从 ECS 初始化、Git 拉取、`.env`、Docker Compose、数据库初始化到真实验收的逐步执行清单。
+- [阿里云单 ECS 部署与运维交接手册](docs/deployment/aliyun-single-ecs-developer-operations-guide.md)：面向日常发布、客户验收前强制干净发布、版本校验、缓存排障、备份和回滚。
+
+客户验收或前端缓存异常时，必须按交接手册中的“强制干净发布”流程执行，确认 Git HEAD、`/api/health` 的后端 commit、`/build-info.json` 的前端 commit 三者一致。任何场景都不要执行 `docker compose down -v` 或删除业务数据 volume。
 
 ### 后端启动方式（团队统一规范）
 
@@ -440,6 +449,8 @@ Mac M1/M2 使用 Homebrew 安装通常是 `/opt/homebrew/bin/soffice`；Linux �
 | 功能 | [DOCX 导出](docs/features/docx-export.md) | 正式目录、页码域、章节快照、Word 标题层级 |
 | 部署 | [快速开始](docs/deployment/quickstart.md) | 安装、配置、启动 |
 | 部署 | [本地 Docker PostgreSQL](docs/deployment/local-postgres-docker.md) | 本地数据库、pgvector、Docker 资源建议 |
+| 部署 | [阿里云单 ECS 测试部署操作清单](docs/deployment/aliyun-ubuntu-single-ecs-deploy-checklist-20260622.md) | ECS 初始化、代码拉取、Docker Compose 构建、清缓存发布、验收记录 |
+| 部署 | [阿里云单 ECS 部署与运维交接手册](docs/deployment/aliyun-single-ecs-developer-operations-guide.md) | 开发/运维交接、强制干净发布、版本校验、备份与回滚 |
 | 部署 | [Supabase 到 PostgreSQL 迁移](docs/deployment/supabase-to-postgres-migration.md) | 真实迁移流程、校验脚本、迁移记录 |
 | 部署 | [阿里云目标架构](docs/deployment/aliyun-target-architecture.md) | RDS PostgreSQL + OSS 生产部署路线 |
 | 部署 | [安全配置](docs/deployment/security.md) | CORS、认证、生产部署 |
@@ -458,10 +469,10 @@ Mac M1/M2 使用 Homebrew 安装通常是 `/opt/homebrew/bin/soffice`；Linux �
 - 部分公开法规/规章种子文件存在来源页噪声或采集为占位页，需复核与重采，不应直接作为权威依据。
 - 企业资质、人员、业绩、产品、设备、试验报告、运维案例等私有资料需用户自行入库。
 - 数据访问层正在从 Supabase SDK 迁移到标准 PostgreSQL + 本地/OSS 存储抽象（通过 `DB_PROVIDER` / `STORAGE_PROVIDER` 切换）。
-- 当前定位为单机版 / 私有化 MVP，尚未达到公网生产部署标准。
+- 当前定位为单企业私有化 MVP。阿里云单 ECS 可用于测试和客户试用；正式公网生产需继续补齐 HTTPS、域名、备份演练、监控告警和权限审计。
 
 ---
 
-## License
+## 使用范围
 
-请根据实际开源计划补充许可证。若暂未确定，建议先不要公开发布为可商用许可证。
+本项目为企业内部使用项目，暂不按开源项目发布，也不提供公开商用许可证。对外交付、客户试用、源码分发或第三方部署前，应先确认授权范围、客户数据边界和密钥脱敏要求。

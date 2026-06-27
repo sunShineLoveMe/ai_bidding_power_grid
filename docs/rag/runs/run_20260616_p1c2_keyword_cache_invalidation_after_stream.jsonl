@@ -1,0 +1,494 @@
+data: {"type": "start"}
+data: {"type": "status", "message": "正在检索企业知识库和图片资产..."}
+data: {"type": "status", "message": "已召回 2 条资料、8 个图片资产，正在生成回答..."}
+data: {"type": "retrieved", "contexts_count": 2, "assets_count": 8, "images": [{"url": "/api/knowledge/assets/f31ca9d0-bcca-4970-900c-0b7dcec3bfd4/file", "alt": "泰昌2025-05-21原图"}, {"url": "/api/knowledge/assets/e70951a8-38ca-4ac9-8caa-3ad06d4ca015/file", "alt": "泰昌泰昌宣传彩页第33页"}, {"url": "/api/knowledge/assets/97beb91e-22d9-4dfe-9197-ecad3ae45c63/file", "alt": "泰昌1.陈仙瑞第1页"}, {"url": "/api/knowledge/assets/15ab9122-dbc6-4b9b-bc7c-5caa4718bb74/file", "alt": "泰昌泰昌宣传彩页第31页"}, {"url": "/api/knowledge/assets/2288316a-1918-4d61-ba66-8f61ed2ccbc4/file", "alt": "泰昌泰昌宣传彩页第23页"}, {"url": "/api/knowledge/assets/4ee914a8-66e1-4d4d-890f-dc9a39fca475/file", "alt": "泰昌泰昌宣传彩页第32页"}, {"url": "/api/knowledge/assets/e76b73b3-b380-4d96-b5bd-d7ee0cdbf3a3/file", "alt": "泰昌泰昌宣传彩页第38页"}, {"url": "/api/knowledge/assets/2ea56ed1-8f56-45e0-9892-54a37d828f5a/file", "alt": "泰昌泰昌宣传彩页第3页"}], "raw_contexts": [{"id": "a2db6e55-4b2b-4cf0-a431-7a14a75a3229", "document_id": "25558e9d-45bc-40c0-8ca4-16d5025d9a97", "project_id": null, "content": "泰昌 企业知识库 新增资料 缓存失效 验收口令 蓝桥缓存命中c2ca31。这条资料用于验证 document_chunks 新增后，Web 进程无需重启即可通过关键词兜底读取最新 chunk。", "source_page": null, "source_section": null, "metadata": {"doc_role": "enterprise_evidence", "doc_owner": "泰昌", "enterprise": "泰昌", "chunk_layer": "child", "test_run_id": "run_20260616_p1c2_keyword_cache_invalidation", "access_scope": "taichang_tenant_internal", "source_domain": "enterprise_fact", "category_label": "泰昌企业资料", "reference_only": false, "authority_level": "enterprise_fact", "citation_policy": "enterprise_fact_citable", "tenant_visibility": "taichang_only", "source_display_name": "P1C2关键词缓存失效真实回归资料", "fact_source_allowed_for_enterprise": true}, "similarity": 0.9062708187811506, "rerank_score": 0.9723797289388738}, {"id": "53e3c42b-f755-49e3-92af-29a8e75c12bf", "document_id": "f4ab12a9-421c-4f2d-acae-4b94d5581242", "project_id": null, "content": "- asset_path: parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/2024年审计报告_1db0b0/extract/images/bb1012184a50f1810b93041d0a2991baffc5e4662528ab17c1bd2e9835f7f5d9.jpg\n- source_file: rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf\n- page_no: 28\n- bbox: [601, 369, 806, 488]\n- display_contexts: bid_writing, knowledge_chat, asset_search\n- requires_authorization=false\n- access_scope: taichang_tenant_internal\n- tenant_visibility: taichang_only\n- target_library: qualification_library", "source_page": null, "source_section": "taichang_finance_p28_346_c500027b", "metadata": {"type": "text", "parser": "asset_index_catalog", "status": "staging_indexed", "chunker": "parent_child_v2", "batch_no": "taichang_mvp_20260606", "doc_role": "enterprise_evidence", "province": "河北", "doc_owner": "泰昌", "block_type": "paragraph", "enterprise": "泰昌", "package_no": "", "chunk_layer": "child", "doc_version": 1, "output_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/taichang_finance_taichang_internal_private.md", "seed_corpus": "power_grid_customer_corpus", "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌财务资料内部专用图片资产目录.md", "source_type": "asset_metadata_catalog", "access_scope": "taichang_tenant_internal", "package_code": "2225AC", "parent_index": 108, "parse_status": "parsed", "evidence_type": "finance", "privacy_level": "taichang_internal_private", "source_domain": "enterprise_fact", "category_label": "泰昌企业资料", "content_sha256": "f8d3e6e4eaa9c4a10e270dd5d596ce46313304f2e699748c2e224abe9ce8e881", "reference_only": false, "target_library": "qualification_library", "authority_level": "tender_file", "citation_policy": "internal_reference_only", "do_not_mix_with": ["河北豪乾参考稿"], "source_category": "05_enterprise_documents", "display_contexts": ["bid_writing", "knowledge_chat", "asset_search"], "is_asset_catalog": true, "material_category": "电缆保护管CPVC/MPP", "tenant_visibility": "taichang_only", "ingestion_batch_id": "customer_liaoning_taichang_20260606_p0", "sensitive_handling": "taichang_internal_use_no_redaction_required", "evidence_type_label": "财务资料", "source_display_name": "泰昌财务资料", "target_library_label": "资信库资料", "source_category_label": "泰昌企业资料", "requires_authorization": false, "fact_source_allowed_for_enterprise": true}, "similarity": 0.5754003181815459, "rerank_score": 0.6563685385458955}], "assets": [{"id": "f31ca9d0-bcca-4970-900c-0b7dcec3bfd4", "title": "泰昌2025-05-21原图", "description": "河北泰昌电力器材科技有限公司财务资料资料，来源于客户补充文件《2025-05-21.jpg》原图。", "category": "财务资料", "asset_type": "qualification_image", "file_name": "2025-05-21.jpg", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 288193, "storage_bucket": "knowledge-files", "storage_path": "qualification/231c8b6405fe4c129c3adc278492ca4f.jpg", "public_url": "/local-storage/knowledge-files/qualification/231c8b6405fe4c129c3adc278492ca4f.jpg", "width": 1216, "height": 1729, "source_type": "customer_original_image", "source_url": null, "license": "客户自有资料", "attribution": "河北泰昌电力器材科技有限公司", "is_synthetic": false, "is_sensitive": true, "anonymized": false, "industry": "电力行业", "applicable_sections": ["财务资料"], "applicable_volumes": ["qualification", "business"], "tags": ["泰昌", "泰昌企业事实", "财务资料"], "specs": {"page_no": null, "display_name": "泰昌2025-05-21原图", "evidence_type": "finance", "target_library": "qualification_library", "asset_visual_type": "customer_original_image"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司财务资料资料，来源于客户补充文件《2025-05-21.jpg》原图。", "searchable_text": "泰昌2025-05-21原图\n河北泰昌电力器材科技有限公司财务资料资料，来源于客户补充文件《2025-05-21.jpg》原图。\n财务资料\n泰昌 泰昌企业事实 财务资料\nrag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/36银行资信证明授信证明整页扫描件/2025-05-21.jpg", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": null, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/36银行资信证明授信证明整页扫描件/2025-05-21.jpg", "access_scope": "taichang_tenant_internal", "evidence_type": "finance", "source_domain": "enterprise_fact", "reference_only": false, "target_library": "qualification_library", "thumbnail_size": 29526, "ui_name_policy": "domestic_chinese_friendly", "allowed_for_bid": true, "do_not_mix_with": ["河北豪乾参考稿", "辽宁招标资料"], "source_batch_id": "customer_taichang_supplement_20260611", "display_language": "zh-CN", "source_file_name": "2025-05-21.jpg", "asset_visual_type": "customer_original_image", "rendered_from_pdf": false, "tenant_visibility": "taichang_only", "evidence_type_label": "财务资料", "source_display_name": "泰昌2025-05-21原图", "thumbnail_mime_type": "image/webp", "target_library_label": "资信库", "thumbnail_storage_path": "qualification/thumbnails/ab3885fd125b4b4daa4fa27886728bb9.webp", "thumbnail_storage_bucket": "knowledge-files", "fact_source_allowed_for_enterprise": true}, "created_at": "2026-06-11T17:31:33.025109+08:00", "updated_at": "2026-06-11T17:31:33.025109+08:00", "similarity": 0.5299389922691932, "rerank_score": 0.5466521995046487}, {"id": "e70951a8-38ca-4ac9-8caa-3ad06d4ca015", "title": "泰昌泰昌宣传彩页第33页", "description": "河北泰昌电力器材科技有限公司企业宣传资料资料，来源于客户补充文件《泰昌宣传彩页.pdf》第33页。", "category": "企业宣传资料", "asset_type": "product_image", "file_name": "泰昌宣传彩页_d870bff9_第033页.jpg", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 257863, "storage_bucket": "knowledge-files", "storage_path": "product/735ad46bdae341ac8e5cb6f145053b3e.jpg", "public_url": "/local-storage/knowledge-files/product/735ad46bdae341ac8e5cb6f145053b3e.jpg", "width": 1190, "height": 1684, "source_type": "customer_pdf_full_page_render", "source_url": null, "license": "客户自有资料", "attribution": "河北泰昌电力器材科技有限公司", "is_synthetic": false, "is_sensitive": false, "anonymized": false, "industry": "电力行业", "applicable_sections": ["企业宣传资料"], "applicable_volumes": ["technical"], "tags": ["泰昌", "泰昌企业事实", "企业宣传资料"], "specs": {"page_no": 33, "display_name": "泰昌泰昌宣传彩页第33页", "evidence_type": "enterprise_profile", "target_library": "knowledge_library", "asset_visual_type": "full_page_render"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司企业宣传资料资料，来源于客户补充文件《泰昌宣传彩页.pdf》第33页。", "searchable_text": "泰昌泰昌宣传彩页第33页\n河北泰昌电力器材科技有限公司企业宣传资料资料，来源于客户补充文件《泰昌宣传彩页.pdf》第33页。\n企业宣传资料\n泰昌 泰昌企业事实 企业宣传资料\nrag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/47PDF 整页渲染图/泰昌宣传彩页.pdf", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 33, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/47PDF 整页渲染图/泰昌宣传彩页.pdf", "access_scope": "taichang_tenant_internal", "evidence_type": "enterprise_profile", "source_domain": "enterprise_fact", "reference_only": false, "target_library": "knowledge_library", "thumbnail_size": 39302, "ui_name_policy": "domestic_chinese_friendly", "allowed_for_bid": true, "do_not_mix_with": ["河北豪乾参考稿", "辽宁招标资料"], "source_batch_id": "customer_taichang_supplement_20260611", "display_language": "zh-CN", "source_file_name": "泰昌宣传彩页.pdf", "asset_visual_type": "full_page_render", "rendered_from_pdf": true, "tenant_visibility": "taichang_only", "evidence_type_label": "企业宣传资料", "source_display_name": "泰昌泰昌宣传彩页第33页", "thumbnail_mime_type": "image/webp", "target_library_label": "产品库", "thumbnail_storage_path": "product/thumbnails/feadf87bfd2948f39b8696f236d6b634.webp", "thumbnail_storage_bucket": "knowledge-files", "fact_source_allowed_for_enterprise": true}, "created_at": "2026-06-11T17:31:42.467238+08:00", "updated_at": "2026-06-11T17:31:42.467238+08:00", "similarity": 0.5095406736586106, "rerank_score": 0.5389678576447472}, {"id": "97beb91e-22d9-4dfe-9197-ecad3ae45c63", "title": "泰昌1.陈仙瑞第1页", "description": "河北泰昌电力器材科技有限公司试验检测能力资料，来源于客户已提供文件《1.陈仙瑞.pdf》第1页。该图片为正式整页/原图资产，不是 MinerU 局部切图。", "category": "人员证书", "asset_type": "product_image", "file_name": "1.陈仙瑞_第001页.jpg", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 40718, "storage_bucket": "knowledge-files", "storage_path": "product/9980c9e5e95c4e64915c967194036c87.jpg", "public_url": "/local-storage/knowledge-files/product/9980c9e5e95c4e64915c967194036c87.jpg", "width": 475, "height": 292, "source_type": "customer_pdf_full_page_render", "source_url": null, "license": "客户自有资料", "attribution": "河北泰昌电力器材科技有限公司", "is_synthetic": false, "is_sensitive": true, "anonymized": false, "industry": "电力行业", "applicable_sections": ["技术响应文件", "人员证书"], "applicable_volumes": ["technical"], "tags": ["泰昌", "泰昌企业事实", "试验检测能力", "人员证书", "产品库"], "specs": {"page_no": 1, "full_page": true, "page_index": 0, "display_name": "泰昌1.陈仙瑞第1页", "evidence_type": "testing_capacity", "target_library": "product_library", "asset_visual_type": "full_page_render"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司试验检测能力资料，来源于客户已提供文件《1.陈仙瑞.pdf》第1页。该图片为正式整页/原图资产，不是 MinerU 局部切图。", "searchable_text": "泰昌1.陈仙瑞第1页\n河北泰昌电力器材科技有限公司试验检测能力资料，来源于客户已提供文件《1.陈仙瑞.pdf》第1页。该图片为正式整页/原图资产，不是 MinerU 局部切图。\n人员证书\n泰昌 泰昌企业事实 试验检测能力 人员证书 产品库\n1.陈仙瑞\n试验检测能力\n泰昌\n河北泰昌电力器材科技有限公司", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 1, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "page_index": 0, "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/1.试验检测人员证书/1.陈仙瑞.pdf", "access_scope": "taichang_tenant_internal", "evidence_type": "testing_capacity", "quality_flags": ["taichang_internal_private_allowed_for_tenant_use"], "source_domain": "enterprise_fact", "category_label": "泰昌企业资料", "reference_only": false, "target_library": "product_library", "thumbnail_size": 16316, "ui_name_policy": "domestic_chinese_friendly", "do_not_mix_with": ["河北豪乾参考稿", "辽宁招标资料"], "embedding_model": "qwen3-embedding:0.6b", "source_batch_id": "customer_liaoning_taichang_20260606_p0_formal_full_page_assets_v1", "display_language": "zh-CN", "embedding_source": "knowledge_asset_embedding_backfill", "extracted_region": false, "source_file_name": "1.陈仙瑞.pdf", "asset_visual_type": "full_page_render", "rendered_from_pdf": true, "tenant_visibility": "taichang_only", "evidence_type_label": "试验检测能力", "source_display_name": "陈仙瑞", "thumbnail_mime_type": "image/webp", "embedding_dimensions": 1024, "target_library_label": "产品库资料", "formal_source_batch_id": "customer_liaoning_taichang_20260606_p0_formal_full_page_assets_v1", "thumbnail_storage_path": "product/thumbnails/1bb60d3f3eba4e88a7295b2e31e0bd8f.webp", "embedding_backfilled_at": "2026-06-16T07:24:14+00:00", "replaces_source_batch_id": "customer_liaoning_taichang_20260606_p0", "thumbnail_storage_bucket": "knowledge-files", "embedding_backfill_run_id": "run_20260616_taichang_asset_embedding_backfill", "fact_source_allowed_for_enterprise": true}, "created_at": "2026-06-07T11:34:21.512936+08:00", "updated_at": "2026-06-16T15:24:14.172713+08:00", "similarity": 0.5035947411181613, "rerank_score": 0.5412568256898524}, {"id": "15ab9122-dbc6-4b9b-bc7c-5caa4718bb74", "title": "泰昌泰昌宣传彩页第31页", "description": "河北泰昌电力器材科技有限公司企业宣传资料资料，来源于客户补充文件《泰昌宣传彩页.pdf》第31页。", "category": "企业宣传资料", "asset_type": "product_image", "file_name": "泰昌宣传彩页_d870bff9_第031页.jpg", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 236509, "storage_bucket": "knowledge-files", "storage_path": "product/20e2ab75877a46c4a3167fd8040c28d2.jpg", "public_url": "/local-storage/knowledge-files/product/20e2ab75877a46c4a3167fd8040c28d2.jpg", "width": 1190, "height": 1684, "source_type": "customer_pdf_full_page_render", "source_url": null, "license": "客户自有资料", "attribution": "河北泰昌电力器材科技有限公司", "is_synthetic": false, "is_sensitive": false, "anonymized": false, "industry": "电力行业", "applicable_sections": ["企业宣传资料"], "applicable_volumes": ["technical"], "tags": ["泰昌", "泰昌企业事实", "企业宣传资料"], "specs": {"page_no": 31, "display_name": "泰昌泰昌宣传彩页第31页", "evidence_type": "enterprise_profile", "target_library": "knowledge_library", "asset_visual_type": "full_page_render"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司企业宣传资料资料，来源于客户补充文件《泰昌宣传彩页.pdf》第31页。", "searchable_text": "泰昌泰昌宣传彩页第31页\n河北泰昌电力器材科技有限公司企业宣传资料资料，来源于客户补充文件《泰昌宣传彩页.pdf》第31页。\n企业宣传资料\n泰昌 泰昌企业事实 企业宣传资料\nrag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/47PDF 整页渲染图/泰昌宣传彩页.pdf", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 31, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/47PDF 整页渲染图/泰昌宣传彩页.pdf", "access_scope": "taichang_tenant_internal", "evidence_type": "enterprise_profile", "source_domain": "enterprise_fact", "reference_only": false, "target_library": "knowledge_library", "thumbnail_size": 37534, "ui_name_policy": "domestic_chinese_friendly", "allowed_for_bid": true, "do_not_mix_with": ["河北豪乾参考稿", "辽宁招标资料"], "source_batch_id": "customer_taichang_supplement_20260611", "display_language": "zh-CN", "source_file_name": "泰昌宣传彩页.pdf", "asset_visual_type": "full_page_render", "rendered_from_pdf": true, "tenant_visibility": "taichang_only", "evidence_type_label": "企业宣传资料", "source_display_name": "泰昌泰昌宣传彩页第31页", "thumbnail_mime_type": "image/webp", "target_library_label": "产品库", "thumbnail_storage_path": "product/thumbnails/3167db8e361c40e6af6bd39027a1332e.webp", "thumbnail_storage_bucket": "knowledge-files", "fact_source_allowed_for_enterprise": true}, "created_at": "2026-06-11T17:31:42.280514+08:00", "updated_at": "2026-06-11T17:31:42.280514+08:00", "similarity": 0.5029861320306819, "rerank_score": 0.6091519586443419}, {"id": "2288316a-1918-4d61-ba66-8f61ed2ccbc4", "title": "泰昌泰昌宣传彩页第23页", "description": "河北泰昌电力器材科技有限公司企业宣传资料资料，来源于客户补充文件《泰昌宣传彩页.pdf》第23页。", "category": "企业宣传资料", "asset_type": "product_image", "file_name": "泰昌宣传彩页_d870bff9_第023页.jpg", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 405737, "storage_bucket": "knowledge-files", "storage_path": "product/932ab571168548a28f9c8ea53a918dcf.jpg", "public_url": "/local-storage/knowledge-files/product/932ab571168548a28f9c8ea53a918dcf.jpg", "width": 1190, "height": 1684, "source_type": "customer_pdf_full_page_render", "source_url": null, "license": "客户自有资料", "attribution": "河北泰昌电力器材科技有限公司", "is_synthetic": false, "is_sensitive": false, "anonymized": false, "industry": "电力行业", "applicable_sections": ["企业宣传资料"], "applicable_volumes": ["technical"], "tags": ["泰昌", "泰昌企业事实", "企业宣传资料"], "specs": {"page_no": 23, "display_name": "泰昌泰昌宣传彩页第23页", "evidence_type": "enterprise_profile", "target_library": "knowledge_library", "asset_visual_type": "full_page_render"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司企业宣传资料资料，来源于客户补充文件《泰昌宣传彩页.pdf》第23页。", "searchable_text": "泰昌泰昌宣传彩页第23页\n河北泰昌电力器材科技有限公司企业宣传资料资料，来源于客户补充文件《泰昌宣传彩页.pdf》第23页。\n企业宣传资料\n泰昌 泰昌企业事实 企业宣传资料\nrag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/47PDF 整页渲染图/泰昌宣传彩页.pdf", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 23, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/47PDF 整页渲染图/泰昌宣传彩页.pdf", "access_scope": "taichang_tenant_internal", "evidence_type": "enterprise_profile", "source_domain": "enterprise_fact", "reference_only": false, "target_library": "knowledge_library", "thumbnail_size": 81382, "ui_name_policy": "domestic_chinese_friendly", "allowed_for_bid": true, "do_not_mix_with": ["河北豪乾参考稿", "辽宁招标资料"], "source_batch_id": "customer_taichang_supplement_20260611", "display_language": "zh-CN", "source_file_name": "泰昌宣传彩页.pdf", "asset_visual_type": "full_page_render", "rendered_from_pdf": true, "tenant_visibility": "taichang_only", "evidence_type_label": "企业宣传资料", "source_display_name": "泰昌泰昌宣传彩页第23页", "thumbnail_mime_type": "image/webp", "target_library_label": "产品库", "thumbnail_storage_path": "product/thumbnails/a936f7b990664b138605358daf7cafe1.webp", "thumbnail_storage_bucket": "knowledge-files", "fact_source_allowed_for_enterprise": true}, "created_at": "2026-06-11T17:31:41.604939+08:00", "updated_at": "2026-06-11T17:31:41.604939+08:00", "similarity": 0.5026372065649521, "rerank_score": 0.5446261569223758}, {"id": "4ee914a8-66e1-4d4d-890f-dc9a39fca475", "title": "泰昌泰昌宣传彩页第32页", "description": "河北泰昌电力器材科技有限公司企业宣传资料资料，来源于客户补充文件《泰昌宣传彩页.pdf》第32页。", "category": "企业宣传资料", "asset_type": "product_image", "file_name": "泰昌宣传彩页_d870bff9_第032页.jpg", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 270851, "storage_bucket": "knowledge-files", "storage_path": "product/87e7c62172a04989b0ae20b4118cf861.jpg", "public_url": "/local-storage/knowledge-files/product/87e7c62172a04989b0ae20b4118cf861.jpg", "width": 1190, "height": 1684, "source_type": "customer_pdf_full_page_render", "source_url": null, "license": "客户自有资料", "attribution": "河北泰昌电力器材科技有限公司", "is_synthetic": false, "is_sensitive": false, "anonymized": false, "industry": "电力行业", "applicable_sections": ["企业宣传资料"], "applicable_volumes": ["technical"], "tags": ["泰昌", "泰昌企业事实", "企业宣传资料"], "specs": {"page_no": 32, "display_name": "泰昌泰昌宣传彩页第32页", "evidence_type": "enterprise_profile", "target_library": "knowledge_library", "asset_visual_type": "full_page_render"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司企业宣传资料资料，来源于客户补充文件《泰昌宣传彩页.pdf》第32页。", "searchable_text": "泰昌泰昌宣传彩页第32页\n河北泰昌电力器材科技有限公司企业宣传资料资料，来源于客户补充文件《泰昌宣传彩页.pdf》第32页。\n企业宣传资料\n泰昌 泰昌企业事实 企业宣传资料\nrag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/47PDF 整页渲染图/泰昌宣传彩页.pdf", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 32, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/47PDF 整页渲染图/泰昌宣传彩页.pdf", "access_scope": "taichang_tenant_internal", "evidence_type": "enterprise_profile", "source_domain": "enterprise_fact", "reference_only": false, "target_library": "knowledge_library", "thumbnail_size": 44126, "ui_name_policy": "domestic_chinese_friendly", "allowed_for_bid": true, "do_not_mix_with": ["河北豪乾参考稿", "辽宁招标资料"], "source_batch_id": "customer_taichang_supplement_20260611", "display_language": "zh-CN", "source_file_name": "泰昌宣传彩页.pdf", "asset_visual_type": "full_page_render", "rendered_from_pdf": true, "tenant_visibility": "taichang_only", "evidence_type_label": "企业宣传资料", "source_display_name": "泰昌泰昌宣传彩页第32页", "thumbnail_mime_type": "image/webp", "target_library_label": "产品库", "thumbnail_storage_path": "product/thumbnails/a9a867b4ca324859af0449159f67d5e1.webp", "thumbnail_storage_bucket": "knowledge-files", "fact_source_allowed_for_enterprise": true}, "created_at": "2026-06-11T17:31:42.375300+08:00", "updated_at": "2026-06-11T17:31:42.375300+08:00", "similarity": 0.500571757520972, "rerank_score": 0.543065489862039}, {"id": "e76b73b3-b380-4d96-b5bd-d7ee0cdbf3a3", "title": "泰昌泰昌宣传彩页第38页", "description": "河北泰昌电力器材科技有限公司企业宣传资料资料，来源于客户补充文件《泰昌宣传彩页.pdf》第38页。", "category": "企业宣传资料", "asset_type": "product_image", "file_name": "泰昌宣传彩页_d870bff9_第038页.jpg", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 167423, "storage_bucket": "knowledge-files", "storage_path": "product/2334f04b04374f04abde0f149c1a8dc9.jpg", "public_url": "/local-storage/knowledge-files/product/2334f04b04374f04abde0f149c1a8dc9.jpg", "width": 1190, "height": 1684, "source_type": "customer_pdf_full_page_render", "source_url": null, "license": "客户自有资料", "attribution": "河北泰昌电力器材科技有限公司", "is_synthetic": false, "is_sensitive": false, "anonymized": false, "industry": "电力行业", "applicable_sections": ["企业宣传资料"], "applicable_volumes": ["technical"], "tags": ["泰昌", "泰昌企业事实", "企业宣传资料"], "specs": {"page_no": 38, "display_name": "泰昌泰昌宣传彩页第38页", "evidence_type": "enterprise_profile", "target_library": "knowledge_library", "asset_visual_type": "full_page_render"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司企业宣传资料资料，来源于客户补充文件《泰昌宣传彩页.pdf》第38页。", "searchable_text": "泰昌泰昌宣传彩页第38页\n河北泰昌电力器材科技有限公司企业宣传资料资料，来源于客户补充文件《泰昌宣传彩页.pdf》第38页。\n企业宣传资料\n泰昌 泰昌企业事实 企业宣传资料\nrag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/47PDF 整页渲染图/泰昌宣传彩页.pdf", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 38, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/47PDF 整页渲染图/泰昌宣传彩页.pdf", "access_scope": "taichang_tenant_internal", "evidence_type": "enterprise_profile", "source_domain": "enterprise_fact", "reference_only": false, "target_library": "knowledge_library", "thumbnail_size": 27750, "ui_name_policy": "domestic_chinese_friendly", "allowed_for_bid": true, "do_not_mix_with": ["河北豪乾参考稿", "辽宁招标资料"], "source_batch_id": "customer_taichang_supplement_20260611", "display_language": "zh-CN", "source_file_name": "泰昌宣传彩页.pdf", "asset_visual_type": "full_page_render", "rendered_from_pdf": true, "tenant_visibility": "taichang_only", "evidence_type_label": "企业宣传资料", "source_display_name": "泰昌泰昌宣传彩页第38页", "thumbnail_mime_type": "image/webp", "target_library_label": "产品库", "thumbnail_storage_path": "product/thumbnails/6bd0f40037e64c71ac2068e86739ea39.webp", "thumbnail_storage_bucket": "knowledge-files", "fact_source_allowed_for_enterprise": true}, "created_at": "2026-06-11T17:31:42.908571+08:00", "updated_at": "2026-06-11T17:31:42.908571+08:00", "similarity": 0.4994758219308195, "rerank_score": 0.5376736731477971}, {"id": "2ea56ed1-8f56-45e0-9892-54a37d828f5a", "title": "泰昌泰昌宣传彩页第3页", "description": "河北泰昌电力器材科技有限公司企业宣传资料资料，来源于客户补充文件《泰昌宣传彩页.pdf》第3页。", "category": "企业宣传资料", "asset_type": "product_image", "file_name": "泰昌宣传彩页_d870bff9_第003页.jpg", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 283148, "storage_bucket": "knowledge-files", "storage_path": "product/7e6ddf078533434691afd7b9991ffeba.jpg", "public_url": "/local-storage/knowledge-files/product/7e6ddf078533434691afd7b9991ffeba.jpg", "width": 1190, "height": 1684, "source_type": "customer_pdf_full_page_render", "source_url": null, "license": "客户自有资料", "attribution": "河北泰昌电力器材科技有限公司", "is_synthetic": false, "is_sensitive": false, "anonymized": false, "industry": "电力行业", "applicable_sections": ["企业宣传资料"], "applicable_volumes": ["technical"], "tags": ["泰昌", "泰昌企业事实", "企业宣传资料"], "specs": {"page_no": 3, "display_name": "泰昌泰昌宣传彩页第3页", "evidence_type": "enterprise_profile", "target_library": "knowledge_library", "asset_visual_type": "full_page_render"}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司企业宣传资料资料，来源于客户补充文件《泰昌宣传彩页.pdf》第3页。", "searchable_text": "泰昌泰昌宣传彩页第3页\n河北泰昌电力器材科技有限公司企业宣传资料资料，来源于客户补充文件《泰昌宣传彩页.pdf》第3页。\n企业宣传资料\n泰昌 泰昌企业事实 企业宣传资料\nrag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/47PDF 整页渲染图/泰昌宣传彩页.pdf", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 3, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/47PDF 整页渲染图/泰昌宣传彩页.pdf", "access_scope": "taichang_tenant_internal", "evidence_type": "enterprise_profile", "source_domain": "enterprise_fact", "reference_only": false, "target_library": "knowledge_library", "thumbnail_size": 40478, "ui_name_policy": "domestic_chinese_friendly", "allowed_for_bid": true, "do_not_mix_with": ["河北豪乾参考稿", "辽宁招标资料"], "source_batch_id": "customer_taichang_supplement_20260611", "display_language": "zh-CN", "source_file_name": "泰昌宣传彩页.pdf", "asset_visual_type": "full_page_render", "rendered_from_pdf": true, "tenant_visibility": "taichang_only", "evidence_type_label": "企业宣传资料", "source_display_name": "泰昌泰昌宣传彩页第3页", "thumbnail_mime_type": "image/webp", "target_library_label": "产品库", "thumbnail_storage_path": "product/thumbnails/0dc1158c932949dea36c94110586ac1e.webp", "thumbnail_storage_bucket": "knowledge-files", "fact_source_allowed_for_enterprise": true}, "created_at": "2026-06-11T17:31:39.898891+08:00", "updated_at": "2026-06-11T17:31:39.898891+08:00", "similarity": 0.4993695321705187, "rerank_score": 0.5356799673765648}]}
+data: {"type": "chunk", "content": "##"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "结论"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "根据"}
+data: {"type": "chunk", "content": "现有"}
+data: {"type": "chunk", "content": "知识"}
+data: {"type": "chunk", "content": "库"}
+data: {"type": "chunk", "content": "检索"}
+data: {"type": "chunk", "content": "片段"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "已"}
+data: {"type": "chunk", "content": "识别"}
+data: {"type": "chunk", "content": "到"}
+data: {"type": "chunk", "content": "一条"}
+data: {"type": "chunk", "content": "与"}
+data: {"type": "chunk", "content": "“"}
+data: {"type": "chunk", "content": "泰"}
+data: {"type": "chunk", "content": "昌"}
+data: {"type": "chunk", "content": "企业"}
+data: {"type": "chunk", "content": "知识"}
+data: {"type": "chunk", "content": "库"}
+data: {"type": "chunk", "content": "新增"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "缓存"}
+data: {"type": "chunk", "content": "失效"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "验收"}
+data: {"type": "chunk", "content": "口令"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "蓝"}
+data: {"type": "chunk", "content": "桥"}
+data: {"type": "chunk", "content": "缓存"}
+data: {"type": "chunk", "content": "命中"}
+data: {"type": "chunk", "content": "c"}
+data: {"type": "chunk", "content": "2"}
+data: {"type": "chunk", "content": "ca"}
+data: {"type": "chunk", "content": "31"}
+data: {"type": "chunk", "content": "”"}
+data: {"type": "chunk", "content": "直接"}
+data: {"type": "chunk", "content": "相关的"}
+data: {"type": "chunk", "content": "测试"}
+data: {"type": "chunk", "content": "记录"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "该"}
+data: {"type": "chunk", "content": "记录"}
+data: {"type": "chunk", "content": "属于"}
+data: {"type": "chunk", "content": "技术"}
+data: {"type": "chunk", "content": "验证"}
+data: {"type": "chunk", "content": "用途"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "但"}
+data: {"type": "chunk", "content": "未"}
+data: {"type": "chunk", "content": "提供"}
+data: {"type": "chunk", "content": "具体的"}
+data: {"type": "chunk", "content": "验收"}
+data: {"type": "chunk", "content": "口令"}
+data: {"type": "chunk", "content": "内容"}
+data: {"type": "chunk", "content": "或"}
+data: {"type": "chunk", "content": "缓存"}
+data: {"type": "chunk", "content": "命中"}
+data: {"type": "chunk", "content": "/"}
+data: {"type": "chunk", "content": "未"}
+data: {"type": "chunk", "content": "命"}
+data: {"type": "chunk", "content": "中的"}
+data: {"type": "chunk", "content": "调试"}
+data: {"type": "chunk", "content": "细节"}
+data: {"type": "chunk", "content": "。\n\n"}
+data: {"type": "chunk", "content": "##"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "关键"}
+data: {"type": "chunk", "content": "信息"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "来源"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "知识"}
+data: {"type": "chunk", "content": "库"}
+data: {"type": "chunk", "content": "检索"}
+data: {"type": "chunk", "content": "片段"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "相关"}
+data: {"type": "chunk", "content": "度"}
+data: {"type": "chunk", "content": "0"}
+data: {"type": "chunk", "content": "."}
+data: {"type": "chunk", "content": "91"}
+data: {"type": "chunk", "content": "）"}
+data: {"type": "chunk", "content": "明确"}
+data: {"type": "chunk", "content": "标记"}
+data: {"type": "chunk", "content": "了"}
+data: {"type": "chunk", "content": "“"}
+data: {"type": "chunk", "content": "泰"}
+data: {"type": "chunk", "content": "昌"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "企业"}
+data: {"type": "chunk", "content": "知识"}
+data: {"type": "chunk", "content": "库"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "新增"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "缓存"}
+data: {"type": "chunk", "content": "失效"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "验收"}
+data: {"type": "chunk", "content": "口令"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "蓝"}
+data: {"type": "chunk", "content": "桥"}
+data: {"type": "chunk", "content": "缓存"}
+data: {"type": "chunk", "content": "命中"}
+data: {"type": "chunk", "content": "c"}
+data: {"type": "chunk", "content": "2"}
+data: {"type": "chunk", "content": "ca"}
+data: {"type": "chunk", "content": "31"}
+data: {"type": "chunk", "content": "”。"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "性质"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "用于"}
+data: {"type": "chunk", "content": "验证"}
+data: {"type": "chunk", "content": "当"}
+data: {"type": "chunk", "content": " `"}
+data: {"type": "chunk", "content": "document"}
+data: {"type": "chunk", "content": "_ch"}
+data: {"type": "chunk", "content": "unks"}
+data: {"type": "chunk", "content": "`"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "新增"}
+data: {"type": "chunk", "content": "后"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "Web"}
+data: {"type": "chunk", "content": "进程"}
+data: {"type": "chunk", "content": "无需"}
+data: {"type": "chunk", "content": "重启"}
+data: {"type": "chunk", "content": "即可"}
+data: {"type": "chunk", "content": "通过"}
+data: {"type": "chunk", "content": "关键词"}
+data: {"type": "chunk", "content": "兜"}
+data: {"type": "chunk", "content": "底"}
+data: {"type": "chunk", "content": "读取"}
+data: {"type": "chunk", "content": "最新"}
+data: {"type": "chunk", "content": "ch"}
+data: {"type": "chunk", "content": "unk"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "当前"}
+data: {"type": "chunk", "content": "状况"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "该"}
+data: {"type": "chunk", "content": "片段"}
+data: {"type": "chunk", "content": "仅"}
+data: {"type": "chunk", "content": "为一个"}
+data: {"type": "chunk", "content": "描述"}
+data: {"type": "chunk", "content": "性"}
+data: {"type": "chunk", "content": "标题"}
+data: {"type": "chunk", "content": "/"}
+data: {"type": "chunk", "content": "标签"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "未"}
+data: {"type": "chunk", "content": "附带"}
+data: {"type": "chunk", "content": "任何"}
+data: {"type": "chunk", "content": "实际"}
+data: {"type": "chunk", "content": "验收"}
+data: {"type": "chunk", "content": "口令"}
+data: {"type": "chunk", "content": "文本"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "缓存"}
+data: {"type": "chunk", "content": "命中"}
+data: {"type": "chunk", "content": "结果"}
+data: {"type": "chunk", "content": "或"}
+data: {"type": "chunk", "content": "验证"}
+data: {"type": "chunk", "content": "步骤"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "  \n\n"}
+data: {"type": "chunk", "content": "##"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "操作"}
+data: {"type": "chunk", "content": "建议"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "."}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "若"}
+data: {"type": "chunk", "content": "您"}
+data: {"type": "chunk", "content": "正在"}
+data: {"type": "chunk", "content": "执行"}
+data: {"type": "chunk", "content": "缓存"}
+data: {"type": "chunk", "content": "失效"}
+data: {"type": "chunk", "content": "验收"}
+data: {"type": "chunk", "content": "测试"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "  "}
+data: {"type": "chunk", "content": " -"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "请"}
+data: {"type": "chunk", "content": "直接在"}
+data: {"type": "chunk", "content": "您"}
+data: {"type": "chunk", "content": "搭建"}
+data: {"type": "chunk", "content": "的"}
+data: {"type": "chunk", "content": "测试"}
+data: {"type": "chunk", "content": "环境中"}
+data: {"type": "chunk", "content": "执行"}
+data: {"type": "chunk", "content": "新增"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "操作"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "观察"}
+data: {"type": "chunk", "content": "Web"}
+data: {"type": "chunk", "content": "进程"}
+data: {"type": "chunk", "content": "是否"}
+data: {"type": "chunk", "content": "自动"}
+data: {"type": "chunk", "content": "加载"}
+data: {"type": "chunk", "content": "新"}
+data: {"type": "chunk", "content": "ch"}
+data: {"type": "chunk", "content": "unk"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "  "}
+data: {"type": "chunk", "content": " -"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "使用"}
+data: {"type": "chunk", "content": "调试"}
+data: {"type": "chunk", "content": "日志"}
+data: {"type": "chunk", "content": "或"}
+data: {"type": "chunk", "content": "缓存"}
+data: {"type": "chunk", "content": "监控"}
+data: {"type": "chunk", "content": "工具"}
+data: {"type": "chunk", "content": "确认"}
+data: {"type": "chunk", "content": "“"}
+data: {"type": "chunk", "content": "蓝"}
+data: {"type": "chunk", "content": "桥"}
+data: {"type": "chunk", "content": "缓存"}
+data: {"type": "chunk", "content": "命中"}
+data: {"type": "chunk", "content": "c"}
+data: {"type": "chunk", "content": "2"}
+data: {"type": "chunk", "content": "ca"}
+data: {"type": "chunk", "content": "31"}
+data: {"type": "chunk", "content": "”"}
+data: {"type": "chunk", "content": "是否"}
+data: {"type": "chunk", "content": "真实"}
+data: {"type": "chunk", "content": "发生"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "2"}
+data: {"type": "chunk", "content": "."}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "若"}
+data: {"type": "chunk", "content": "您"}
+data: {"type": "chunk", "content": "需要"}
+data: {"type": "chunk", "content": "该"}
+data: {"type": "chunk", "content": "验收"}
+data: {"type": "chunk", "content": "口令"}
+data: {"type": "chunk", "content": "的具体"}
+data: {"type": "chunk", "content": "值"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "  "}
+data: {"type": "chunk", "content": " -"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "当前"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "未"}
+data: {"type": "chunk", "content": "提供"}
+data: {"type": "chunk", "content": "口令"}
+data: {"type": "chunk", "content": "内容"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "建议"}
+data: {"type": "chunk", "content": "联系"}
+data: {"type": "chunk", "content": "知识"}
+data: {"type": "chunk", "content": "库"}
+data: {"type": "chunk", "content": "管理员"}
+data: {"type": "chunk", "content": "或"}
+data: {"type": "chunk", "content": "查阅"}
+data: {"type": "chunk", "content": "相关"}
+data: {"type": "chunk", "content": "测试"}
+data: {"type": "chunk", "content": "文档"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "  \n\n"}
+data: {"type": "chunk", "content": "##"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "需要"}
+data: {"type": "chunk", "content": "确认"}
+data: {"type": "chunk", "content": "或"}
+data: {"type": "chunk", "content": "补充"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "中"}
+data: {"type": "chunk", "content": "未"}
+data: {"type": "chunk", "content": "给出"}
+data: {"type": "chunk", "content": "“"}
+data: {"type": "chunk", "content": "验收"}
+data: {"type": "chunk", "content": "口令"}
+data: {"type": "chunk", "content": "”"}
+data: {"type": "chunk", "content": "的具体"}
+data: {"type": "chunk", "content": "字符串"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "无法"}
+data: {"type": "chunk", "content": "直接"}
+data: {"type": "chunk", "content": "复用"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "未"}
+data: {"type": "chunk", "content": "说明"}
+data: {"type": "chunk", "content": "“"}
+data: {"type": "chunk", "content": "c"}
+data: {"type": "chunk", "content": "2"}
+data: {"type": "chunk", "content": "ca"}
+data: {"type": "chunk", "content": "31"}
+data: {"type": "chunk", "content": "”"}
+data: {"type": "chunk", "content": "是"}
+data: {"type": "chunk", "content": "缓存"}
+data: {"type": "chunk", "content": "键"}
+data: {"type": "chunk", "content": "值"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "Hash"}
+data: {"type": "chunk", "content": "值"}
+data: {"type": "chunk", "content": "还是"}
+data: {"type": "chunk", "content": "其他"}
+data: {"type": "chunk", "content": "标识"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "需"}
+data: {"type": "chunk", "content": "补充"}
+data: {"type": "chunk", "content": "技术"}
+data: {"type": "chunk", "content": "文档"}
+data: {"type": "chunk", "content": "或"}
+data: {"type": "chunk", "content": "测试"}
+data: {"type": "chunk", "content": "人员"}
+data: {"type": "chunk", "content": "说明"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "无"}
+data: {"type": "chunk", "content": "相关"}
+data: {"type": "chunk", "content": "图片"}
+data: {"type": "chunk", "content": "/"}
+data: {"type": "chunk", "content": "资质"}
+data: {"type": "chunk", "content": "资产"}
+data: {"type": "chunk", "content": "可"}
+data: {"type": "chunk", "content": "辅助"}
+data: {"type": "chunk", "content": "本"}
+data: {"type": "chunk", "content": "问题"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "图片"}
+data: {"type": "chunk", "content": "均为"}
+data: {"type": "chunk", "content": "企业"}
+data: {"type": "chunk", "content": "宣传"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "财务"}
+data: {"type": "chunk", "content": "及"}
+data: {"type": "chunk", "content": "人员"}
+data: {"type": "chunk", "content": "证书"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "不"}
+data: {"type": "chunk", "content": "涉及"}
+data: {"type": "chunk", "content": "缓存"}
+data: {"type": "chunk", "content": "验证"}
+data: {"type": "chunk", "content": "）。"}
+data: {"type": "chunk", "content": "  \n\n"}
+data: {"type": "chunk", "content": "##"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "参考"}
+data: {"type": "chunk", "content": "依据"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "相关"}
+data: {"type": "chunk", "content": "度"}
+data: {"type": "chunk", "content": "0"}
+data: {"type": "chunk", "content": "."}
+data: {"type": "chunk", "content": "91"}
+data: {"type": "chunk", "content": "）："}
+data: {"type": "chunk", "content": "来源"}
+data: {"type": "chunk", "content": "P"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "C"}
+data: {"type": "chunk", "content": "2"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "内容"}
+data: {"type": "chunk", "content": "为"}
+data: {"type": "chunk", "content": "“"}
+data: {"type": "chunk", "content": "泰"}
+data: {"type": "chunk", "content": "昌"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "企业"}
+data: {"type": "chunk", "content": "知识"}
+data: {"type": "chunk", "content": "库"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "新增"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "缓存"}
+data: {"type": "chunk", "content": "失效"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "验收"}
+data: {"type": "chunk", "content": "口令"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "蓝"}
+data: {"type": "chunk", "content": "桥"}
+data: {"type": "chunk", "content": "缓存"}
+data: {"type": "chunk", "content": "命中"}
+data: {"type": "chunk", "content": "c"}
+data: {"type": "chunk", "content": "2"}
+data: {"type": "chunk", "content": "ca"}
+data: {"type": "chunk", "content": "31"}
+data: {"type": "chunk", "content": "”，"}
+data: {"type": "chunk", "content": "并"}
+data: {"type": "chunk", "content": "说明"}
+data: {"type": "chunk", "content": "该"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "用于"}
+data: {"type": "chunk", "content": "验证"}
+data: {"type": "chunk", "content": "新增"}
+data: {"type": "chunk", "content": "ch"}
+data: {"type": "chunk", "content": "unk"}
+data: {"type": "chunk", "content": "后"}
+data: {"type": "chunk", "content": "Web"}
+data: {"type": "chunk", "content": "进程"}
+data: {"type": "chunk", "content": "无需"}
+data: {"type": "chunk", "content": "重启"}
+data: {"type": "chunk", "content": "即可"}
+data: {"type": "chunk", "content": "通过"}
+data: {"type": "chunk", "content": "关键词"}
+data: {"type": "chunk", "content": "兜"}
+data: {"type": "chunk", "content": "底"}
+data: {"type": "chunk", "content": "读取"}
+data: {"type": "chunk", "content": "最新"}
+data: {"type": "chunk", "content": "ch"}
+data: {"type": "chunk", "content": "unk"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "其余"}
+data: {"type": "chunk", "content": "图片"}
+data: {"type": "chunk", "content": "资产"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "资产"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "~"}
+data: {"type": "chunk", "content": "8"}
+data: {"type": "chunk", "content": "）"}
+data: {"type": "chunk", "content": "均"}
+data: {"type": "chunk", "content": "属于"}
+data: {"type": "chunk", "content": "财务"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "宣传"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "人员"}
+data: {"type": "chunk", "content": "证书"}
+data: {"type": "chunk", "content": "类别"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "与"}
+data: {"type": "chunk", "content": "缓存"}
+data: {"type": "chunk", "content": "验证"}
+data: {"type": "chunk", "content": "问题"}
+data: {"type": "chunk", "content": "无关"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "未"}
+data: {"type": "chunk", "content": "作为"}
+data: {"type": "chunk", "content": "依据"}
+data: {"type": "chunk", "content": "使用"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "done"}

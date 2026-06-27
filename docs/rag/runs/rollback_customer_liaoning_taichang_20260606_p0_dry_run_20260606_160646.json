@@ -1,0 +1,105 @@
+{
+  "generated_at": "2026-06-06T16:06:46",
+  "batch_id": "customer_liaoning_taichang_20260606_p0",
+  "execute": false,
+  "before_counts": {
+    "knowledge_documents": 24,
+    "document_chunks": 8668,
+    "goods_list_rows": 0
+  },
+  "deleted_counts": null,
+  "role_counts": [
+    {
+      "doc_role": "main_tender_file",
+      "count": 4042
+    },
+    {
+      "doc_role": "technical_spec",
+      "count": 3474
+    },
+    {
+      "doc_role": "contract_general_terms",
+      "count": 822
+    },
+    {
+      "doc_role": "tender_notice",
+      "count": 256
+    },
+    {
+      "doc_role": "contract_special_terms",
+      "count": 74
+    }
+  ],
+  "sample_documents": [
+    {
+      "id": "2c0d0367-c274-4e24-bcae-66a436577c44",
+      "title": "5.120 10kV及以下协议库存货物采购合同（材料类）（2024版）",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "contract_special_terms"
+    },
+    {
+      "id": "4df0b079-5e38-46b2-8851-4d49ec9670e6",
+      "title": "5.120 10kV及以下协议库存货物采购合同（材料类）（2024版）",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "contract_special_terms"
+    },
+    {
+      "id": "e23ea2ce-5d54-415d-b074-9e3cb4b196ed",
+      "title": "5.120 10kV及以下协议库存货物采购合同通用条款（材料类）（2024版）",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "contract_general_terms"
+    },
+    {
+      "id": "6f7c6faa-68c4-4a36-821d-1fce80aa1e9c",
+      "title": "5.120 10kV及以下协议库存货物采购合同通用条款（材料类）（2024版）",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "contract_general_terms"
+    },
+    {
+      "id": "9493b671-e0a9-467c-810c-9be6de7f84b6",
+      "title": "5.120 10kV及以下协议库存货物采购合同通用条款（材料类）（2024版）",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "contract_general_terms"
+    },
+    {
+      "id": "a46e86c9-80d0-48eb-a4fa-75ce54b26e57",
+      "title": "A171-500021527-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 CPVC",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "technical_spec"
+    },
+    {
+      "id": "ec8dd6ad-77f1-4895-9bf6-9411c063376f",
+      "title": "A171-500021541-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "technical_spec"
+    },
+    {
+      "id": "f2bf07b7-384e-48c0-bc03-06801efa79a9",
+      "title": "A171-500021541-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "technical_spec"
+    },
+    {
+      "id": "b292eb86-91fb-4375-b40b-eccd6809f645",
+      "title": "A171-500047131-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "technical_spec"
+    },
+    {
+      "id": "e9b95804-acd3-40cf-8e37-c81b6e1aa339",
+      "title": "A171-500047131-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用",
+      "province": "辽宁",
+      "package_code": "2225AC",
+      "doc_role": "technical_spec"
+    }
+  ]
+}

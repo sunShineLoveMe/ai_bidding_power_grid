@@ -1,0 +1,142 @@
+{
+  "markdown_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou_Zhao_Biao_Wen_Jian/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.md",
+  "docx_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou_Zhao_Biao_Wen_Jian/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.docx",
+  "title": "国网辽宁电力2025年第三次物资协议库存招标采购投标文件",
+  "image_selection": {
+    "enabled": true,
+    "asset_candidates": 242,
+    "selected": 24,
+    "max_total": 24,
+    "warnings": [
+      "已达到整份文档自动插图上限 24 张。"
+    ]
+  },
+  "unique_selected_assets": 24,
+  "image_manifest_first": [
+    {
+      "asset_id": "064a4c70-c208-49d1-8905-ebf5298f62aa",
+      "asset_title": "泰昌 certification 第1页图片 taichang_certification_p1_016_3f87e933",
+      "asset_category": "泰昌资信图片",
+      "asset_type": "qualification_image",
+      "library": "企业知识资产库",
+      "section_id": "99ff1a60-c824-41fc-bcb9-05c389f1180d",
+      "section_title": "投标函及投标函附录 - 编制依据",
+      "volume_type": "qualification",
+      "volume_name": "资格文件",
+      "score": 104,
+      "reason": "匹配章节证据类型：资信/认证证书；章节与资产同时命中“资质”；章节与资产同时命中“证书”",
+      "image_ref": "/api/bidding/knowledge/assets/064a4c70-c208-49d1-8905-ebf5298f62aa/file?variant=original",
+      "caption": "图示：泰昌 certification 第1页图片 taichang_certification_p1_016_3f87e933（泰昌资信图片；来源：企业知识资产库；匹配依据：匹配章节证据类型：资信/认证证书；章节与资产同时命中“资质”；章节与资产同时命中“证书”）",
+      "sensitive": false,
+      "anonymized": false
+    },
+    {
+      "asset_id": "5816b7c6-b5e4-4b70-af50-cc976499f597",
+      "asset_title": "泰昌 certification 第2页图片 taichang_certification_p2_054",
+      "asset_category": "泰昌资信图片",
+      "asset_type": "qualification_image",
+      "library": "企业知识资产库",
+      "section_id": "99ff1a60-c824-41fc-bcb9-05c389f1180d",
+      "section_title": "投标函及投标函附录 - 编制依据",
+      "volume_type": "qualification",
+      "volume_name": "资格文件",
+      "score": 92,
+      "reason": "匹配章节证据类型：资信/认证证书；章节与资产同时命中“证书”",
+      "image_ref": "/api/bidding/knowledge/assets/5816b7c6-b5e4-4b70-af50-cc976499f597/file?variant=original",
+      "caption": "图示：泰昌 certification 第2页图片 taichang_certification_p2_054（泰昌资信图片；来源：企业知识资产库；匹配依据：匹配章节证据类型：资信/认证证书；章节与资产同时命中“证书”）",
+      "sensitive": false,
+      "anonymized": false
+    },
+    {
+      "asset_id": "a6e74b8e-6444-4955-abb7-f36dc5172a1d",
+      "asset_title": "泰昌 certification 第3页图片 taichang_certification_p3_068",
+      "asset_category": "泰昌资信图片",
+      "asset_type": "qualification_image",
+      "library": "企业知识资产库",
+      "section_id": "64bd7883-793a-4bfb-9d0b-1a9211e7eec6",
+      "section_title": "投标函及投标函附录 - 工程概况",
+      "volume_type": "qualification",
+      "volume_name": "资格文件",
+      "score": 94,
+      "reason": "匹配章节证据类型：资信/认证证书；章节与资产同时命中“证书”",
+      "image_ref": "/api/bidding/knowledge/assets/a6e74b8e-6444-4955-abb7-f36dc5172a1d/file?variant=original",
+      "caption": "图示：泰昌 certification 第3页图片 taichang_certification_p3_068（泰昌资信图片；来源：企业知识资产库；匹配依据：匹配章节证据类型：资信/认证证书；章节与资产同时命中“证书”）",
+      "sensitive": false,
+      "anonymized": false
+    },
+    {
+      "asset_id": "5711288e-2485-475c-a8b2-0233f5decc3c",
+      "asset_title": "泰昌 certification 第2页图片 taichang_certification_p2_052",
+      "asset_category": "泰昌资信图片",
+      "asset_type": "qualification_image",
+      "library": "企业知识资产库",
+      "section_id": "64bd7883-793a-4bfb-9d0b-1a9211e7eec6",
+      "section_title": "投标函及投标函附录 - 工程概况",
+      "volume_type": "qualification",
+      "volume_name": "资格文件",
+      "score": 94,
+      "reason": "匹配章节证据类型：资信/认证证书；章节与资产同时命中“证书”",
+      "image_ref": "/api/bidding/knowledge/assets/5711288e-2485-475c-a8b2-0233f5decc3c/file?variant=original",
+      "caption": "图示：泰昌 certification 第2页图片 taichang_certification_p2_052（泰昌资信图片；来源：企业知识资产库；匹配依据：匹配章节证据类型：资信/认证证书；章节与资产同时命中“证书”）",
+      "sensitive": false,
+      "anonymized": false
+    },
+    {
+      "asset_id": "08355325-2ccd-4ff3-aeb5-c8736d22a368",
+      "asset_title": "泰昌 certification 第1页图片 taichang_certification_p1_000_ebee4736",
+      "asset_category": "泰昌资信图片",
+      "asset_type": "qualification_image",
+      "library": "企业知识资产库",
+      "section_id": "89d1399e-2d1e-4e29-a039-784fe5901737",
+      "section_title": "投标函及投标函附录 - 总体部署",
+      "volume_type": "qualification",
+      "volume_name": "资格文件",
+      "score": 98,
+      "reason": "匹配章节证据类型：资信/认证证书；章节与资产同时命中“证书”",
+      "image_ref": "/api/bidding/knowledge/assets/08355325-2ccd-4ff3-aeb5-c8736d22a368/file?variant=original",
+      "caption": "图示：泰昌 certification 第1页图片 taichang_certification_p1_000_ebee4736（泰昌资信图片；来源：企业知识资产库；匹配依据：匹配章节证据类型：资信/认证证书；章节与资产同时命中“证书”）",
+      "sensitive": false,
+      "anonymized": false
+    }
+  ],
+  "image_conversion": {
+    "found": 24,
+    "inserted": 24,
+    "skipped": 0,
+    "failed": 0
+  },
+  "field_refresh": {
+    "status": "refreshed",
+    "manual_refresh_required": false,
+    "reason": null,
+    "user_message": "DOCX 已完成自动刷新，目录页码、页脚页码和总页数字段已重新保存。"
+  },
+  "first_non_empty_paragraphs": [
+    "国网辽宁电力2025年第三次物资协议库存招标采购投标文件",
+    "投标人：河北泰昌电力器材科技有限公司",
+    "2026年06月06日",
+    "目  录",
+    "1. 投标函及投标函附录\t4",
+    "1.1 投标函及投标函附录 - 编制依据\t4",
+    "1.2 投标函及投标函附录 - 工程概况\t7",
+    "1.3 投标函及投标函附录 - 总体部署\t10",
+    "2. 资格审查资料\t14",
+    "2.1 企业基本资格资料\t15",
+    "2.1.1 企业基本资格资料 - 响应要求\t16",
+    "2.1.2 企业基本资格资料 - 资料清单\t20"
+  ],
+  "page_cm": [
+    21.0,
+    29.7
+  ],
+  "margins_cm": [
+    2.0,
+    2.0,
+    3.18,
+    3.18
+  ],
+  "header": "河北泰昌电力器材科技有限公司投标文件",
+  "normal_font": "宋体",
+  "normal_size_pt": 10.5,
+  "docx_size": 461450
+}

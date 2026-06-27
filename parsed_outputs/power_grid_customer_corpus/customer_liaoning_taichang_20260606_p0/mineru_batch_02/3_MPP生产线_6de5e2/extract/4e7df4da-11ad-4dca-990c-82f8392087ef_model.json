@@ -1,0 +1,1454 @@
+[
+    [
+        {
+            "type": "doc_title",
+            "bbox": [
+                0.386,
+                0.092,
+                0.606,
+                0.121
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.085,
+                0.161,
+                0.564,
+                0.198
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.085,
+                0.204,
+                0.574,
+                0.243
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.077,
+                0.25,
+                0.349,
+                0.271
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.024,
+                0.277,
+                0.962,
+                0.688
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>序号</td><td>物品名称</td><td>产号型号</td><td>单位</td><td>数量</td><td>单价(元)</td><td>总价(元)</td><td>备注</td></tr><tr><td></td><td>MPP生产线</td><td>SJMPP-90型</td><td>套</td><td>2</td><td>423000.</td><td>846000.</td><td>含税</td></tr><tr><td>1</td><td>塑料挤出机</td><td></td><td>台</td><td>2</td><td>234500.</td><td>469000.</td><td></td></tr><tr><td>2</td><td>漏料机</td><td></td><td>台</td><td>2</td><td>25000.</td><td>50000.</td><td></td></tr><tr><td>3</td><td>定型水箱</td><td></td><td>台</td><td>2</td><td>58000.</td><td>116000.</td><td></td></tr><tr><td>4</td><td>三瓜牵引机</td><td></td><td>台</td><td>2</td><td>37000.</td><td>74000.</td><td></td></tr><tr><td>5</td><td>无屑切割机</td><td></td><td>台</td><td>2</td><td>20000.</td><td>40000.</td><td></td></tr><tr><td>6</td><td>自动翻管机</td><td></td><td>台</td><td>2</td><td>8000.</td><td>16000.</td><td></td></tr><tr><td colspan=\"8\">合计(含税): 846000.</td></tr><tr><td colspan=\"8\">合计人民币金额(大写):捌拾肆万陆仟元整.</td></tr></table>"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.05,
+                0.692,
+                0.845,
+                0.75
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.076,
+                0.766,
+                0.844,
+                0.79
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.076,
+                0.803,
+                0.844,
+                0.827
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.076,
+                0.84,
+                0.844,
+                0.864
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.076,
+                0.878,
+                0.844,
+                0.902
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.076,
+                0.906,
+                0.844,
+                0.939
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.386,
+                0.09,
+                0.608,
+                0.124
+            ],
+            "text": "产品销售合同",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.076,
+                0.157,
+                0.57,
+                0.203
+            ],
+            "text": "出卖人：雄县顺达塑料机械F",
+            "score": 0.938
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.077,
+                0.195,
+                0.581,
+                0.248
+            ],
+            "text": "买受人：河北泰昌电力材科技有限公司",
+            "score": 0.957
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.077,
+                0.248,
+                0.35,
+                0.272
+            ],
+            "text": "第一条产品清单及价格",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.082,
+                0.69,
+                0.843,
+                0.716
+            ],
+            "text": "第二条质量要求技术标准、供方对质量负责的条件和期限：按国家标准",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.053,
+                0.727,
+                0.2,
+                0.749
+            ],
+            "text": "执行，质量保",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.227,
+                0.711,
+                0.278,
+                0.746
+            ],
+            "text": "壹",
+            "score": 0.981
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.324,
+                0.726,
+                0.381,
+                0.753
+            ],
+            "text": "年。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.08,
+                0.765,
+                0.793,
+                0.789
+            ],
+            "text": "第三条交（提）货地点、方式需方指定地点：河北省保定市满城区",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.08,
+                0.802,
+                0.673,
+                0.825
+            ],
+            "text": "第四条运输方式及到达站（港）和费用负担：供方负担",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.079,
+                0.838,
+                0.45,
+                0.862
+            ],
+            "text": "第五条合理耗损标准及计算方法：",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.079,
+                0.876,
+                0.602,
+                0.899
+            ],
+            "text": "第六条包装标准、包装物的供应与回收：不回收",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.076,
+                0.902,
+                0.773,
+                0.941
+            ],
+            "text": "第七条验收标准、方法及提出异议期限：国标、期限壹个月",
+            "score": 0.984
+        }
+    ],
+    [
+        {
+            "type": "text",
+            "bbox": [
+                0.094,
+                0.09,
+                0.859,
+                0.113
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.068,
+                0.127,
+                0.861,
+                0.187
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.094,
+                0.202,
+                0.859,
+                0.224
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.095,
+                0.239,
+                0.859,
+                0.261
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.095,
+                0.276,
+                0.859,
+                0.298
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.095,
+                0.313,
+                0.859,
+                0.335
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.255,
+                0.387,
+                0.334,
+                0.409
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.672,
+                0.387,
+                0.75,
+                0.408
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.09,
+                0.451,
+                0.506,
+                0.598
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.091,
+                0.607,
+                0.358,
+                0.636
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.091,
+                0.645,
+                0.35,
+                0.672
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.091,
+                0.68,
+                0.382,
+                0.716
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.091,
+                0.72,
+                0.337,
+                0.749
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.091,
+                0.757,
+                0.383,
+                0.789
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.508,
+                0.451,
+                0.99,
+                0.527
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.508,
+                0.53,
+                0.744,
+                0.563
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.508,
+                0.564,
+                0.744,
+                0.597
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.509,
+                0.598,
+                0.809,
+                0.632
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.509,
+                0.638,
+                0.83,
+                0.668
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.509,
+                0.672,
+                0.923,
+                0.712
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.509,
+                0.716,
+                0.781,
+                0.745
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.509,
+                0.748,
+                0.834,
+                0.788
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.089,
+                0.716,
+                0.339,
+                0.749
+            ],
+            "text": "账号：100257058205",
+            "score": 0.974
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.498,
+                0.523,
+                0.752,
+                0.57
+            ],
+            "text": "法定代美杨",
+            "score": 0.751
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.496,
+                0.554,
+                0.749,
+                0.603
+            ],
+            "text": "委托代理人：物贺",
+            "score": 0.819
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.089,
+                0.601,
+                0.36,
+                0.64
+            ],
+            "text": "电话：0312-5717555",
+            "score": 0.98
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.088,
+                0.639,
+                0.354,
+                0.674
+            ],
+            "text": "传真：0312-5717556",
+            "score": 0.914
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.502,
+                0.714,
+                0.784,
+                0.746
+            ],
+            "text": "账号：100222840234",
+            "score": 0.995
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.098,
+                0.127,
+                0.859,
+                0.148
+            ],
+            "text": "第九条结算方式及期限：货到验收合格后付90%，10%质保金1年后无质",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.07,
+                0.165,
+                0.206,
+                0.185
+            ],
+            "text": "量问题付清。",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.096,
+                0.089,
+                0.657,
+                0.111
+            ],
+            "text": "第八条随机的必备品、配件、工具数量及供应办法：",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.097,
+                0.202,
+                0.763,
+                0.223
+            ],
+            "text": "第十条如需提供担保，另立合同担保书，作为本合同附加：无",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.097,
+                0.239,
+                0.397,
+                0.26
+            ],
+            "text": "第十一条违约责任：协商",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.097,
+                0.275,
+                0.515,
+                0.297
+            ],
+            "text": "第十二条解决合同纠纷的方式：法院",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.097,
+                0.313,
+                0.538,
+                0.335
+            ],
+            "text": "第十三条其他约定事项：竞价文件执行",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.255,
+                0.386,
+                0.335,
+                0.411
+            ],
+            "text": "出卖人",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.671,
+                0.387,
+                0.752,
+                0.41
+            ],
+            "text": "买受人",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.083,
+                0.451,
+                0.51,
+                0.492
+            ],
+            "text": "出卖人：（章）温顺达塑料机械",
+            "score": 0.811
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.093,
+                0.573,
+                0.231,
+                0.594
+            ],
+            "text": "委托代表人：",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.085,
+                0.49,
+                0.481,
+                0.53
+            ],
+            "text": "住址：国约镇关使大道212号",
+            "score": 0.831
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.088,
+                0.675,
+                0.388,
+                0.717
+            ],
+            "text": "开户：中国银行雄县支行",
+            "score": 0.932
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.088,
+                0.754,
+                0.386,
+                0.788
+            ],
+            "text": "签订日期：2015年5月20日",
+            "score": 0.985
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.499,
+                0.598,
+                0.815,
+                0.635
+            ],
+            "text": "电话：0312-7083333",
+            "score": 0.977
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.5,
+                0.635,
+                0.834,
+                0.671
+            ],
+            "text": "传真：0312-7084444",
+            "score": 0.989
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.505,
+                0.495,
+                0.576,
+                0.522
+            ],
+            "text": "住址：",
+            "score": 0.992
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.593,
+                0.485,
+                0.854,
+                0.529
+            ],
+            "text": "城星祥村",
+            "score": 0.687
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.494,
+                0.444,
+                0.998,
+                0.501
+            ],
+            "text": "买受人电力器材科技有限列",
+            "score": 0.791
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.499,
+                0.669,
+                0.927,
+                0.714
+            ],
+            "text": "开户银行：中国银行满城支行、",
+            "score": 0.933
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.498,
+                0.745,
+                0.843,
+                0.789
+            ],
+            "text": "签订日期：2015年5月20日。",
+            "score": 0.963
+        }
+    ],
+    [
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.175,
+                0.165,
+                0.201,
+                0.252
+            ],
+            "angle": 0,
+            "content": "↑"
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.175,
+                0.344,
+                0.201,
+                0.371
+            ],
+            "angle": 0,
+            "content": "C"
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.175,
+                0.404,
+                0.201,
+                0.431
+            ],
+            "angle": 0,
+            "content": "O"
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.175,
+                0.464,
+                0.201,
+                0.491
+            ],
+            "angle": 0,
+            "content": "O"
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.175,
+                0.524,
+                0.201,
+                0.551
+            ],
+            "angle": 0,
+            "content": "O"
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.175,
+                0.584,
+                0.201,
+                0.611
+            ],
+            "angle": 0,
+            "content": "C"
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.175,
+                0.644,
+                0.201,
+                0.671
+            ],
+            "angle": 0,
+            "content": "O"
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.175,
+                0.704,
+                0.201,
+                0.731
+            ],
+            "angle": 0,
+            "content": "C"
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.175,
+                0.764,
+                0.201,
+                0.792
+            ],
+            "angle": 0,
+            "content": "O"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.31,
+                0.201,
+                0.432,
+                0.23
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.474,
+                0.175,
+                0.674,
+                0.277
+            ],
+            "angle": 0,
+            "content": "河北增值税专用发票\n全国统一发票监制牌\n河北\n国家税务总局监制\n发票联",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.716,
+                0.189,
+                0.74,
+                0.22
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.747,
+                0.189,
+                0.846,
+                0.221
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.854,
+                0.207,
+                0.914,
+                0.223
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.846,
+                0.228,
+                0.912,
+                0.248
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.738,
+                0.25,
+                0.882,
+                0.274
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "table_caption",
+            "bbox": [
+                0.218,
+                0.352,
+                0.236,
+                0.681
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.237,
+                0.285,
+                0.92,
+                0.742
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>购\n买\n方</td><td colspan=\"5\">名称:河北泰昌电力器材科技有限公司\n纳税人识别号:130621056539515\n地址、电话:满城县方顺桥乡陉阳驿村7180808\n开户行及账号:中国银行满城县支行100222840234</td><td>密\n码\n区</td><td colspan=\"3\">5&lt;5&lt;449-9-5&lt;7097&lt;4/368&lt;8748\n33-+-67849-/0*7+8*0//73-323\n681/7-&lt;1+&lt;4467-0486+&lt;7+-8--7044677996-&lt;83&lt;*52&lt;81185&gt;84</td></tr><tr><td colspan=\"2\">货物或应税劳务、服务名称</td><td>规格型号</td><td>单位</td><td>数量</td><td colspan=\"2\">单价</td><td>金额</td><td>税率</td><td>税额</td></tr><tr><td colspan=\"2\">塑料挤出机</td><td>SJMPP-90型</td><td>台</td><td>2</td><td colspan=\"2\">230769.23076</td><td>461538.46</td><td>17%</td><td>78461.54</td></tr><tr><td colspan=\"2\">混料机</td><td></td><td>台</td><td>2</td><td colspan=\"2\">21367.521367</td><td>42735.04</td><td>17%</td><td>7264.96</td></tr><tr><td colspan=\"2\">真空定型水箱</td><td></td><td>台</td><td>2</td><td colspan=\"2\">49572.649572</td><td>99145.30</td><td>17%</td><td>16854.70</td></tr><tr><td colspan=\"2\">三爪牵引机</td><td></td><td>台</td><td>2</td><td colspan=\"2\">35897.435897</td><td>71794.87</td><td>17%</td><td>12205.13</td></tr><tr><td colspan=\"2\">无屑切割机</td><td></td><td>台</td><td>2</td><td colspan=\"2\">17094.017094</td><td>34188.03</td><td>17%</td><td>5811.97</td></tr><tr><td colspan=\"2\">自动翻管架</td><td></td><td>台</td><td>2</td><td colspan=\"2\">6837.6068376</td><td>13675.21</td><td>17%</td><td>2324.79</td></tr><tr><td colspan=\"2\">合 计</td><td></td><td></td><td></td><td colspan=\"2\"></td><td>¥723076.91</td><td></td><td>¥122923.09</td></tr><tr><td colspan=\"2\">价税合计(大写)</td><td colspan=\"8\">⊗捌拾肆万陆仟圆整 (小写) ¥846000.00</td></tr><tr><td>销\n售\n方</td><td colspan=\"5\">名称:雄县顺达塑料机械厂\n纳税人识别号:130638523900172\n地址、电话:雄县督岗镇天使大道212号0312-5717555\n开户行及账号:中国银行雄县支行100257058205</td><td>备\n注</td><td colspan=\"3\">130638523900172</td></tr></table>"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.25,
+                0.744,
+                0.343,
+                0.764
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.442,
+                0.742,
+                0.512,
+                0.762
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.588,
+                0.741,
+                0.677,
+                0.761
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.718,
+                0.64,
+                0.854,
+                0.784
+            ],
+            "angle": 0,
+            "content": "顺达塑料机\n130638523900172\n发票专用章\n销售专用章）",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.921,
+                0.387,
+                0.936,
+                0.632
+            ],
+            "angle": 0,
+            "content": "第三联：发票联 购买方记账凭证"
+        },
+        {
+            "type": "aside_text",
+            "bbox": [
+                0.954,
+                0.156,
+                0.975,
+                0.786
+            ],
+            "angle": 0,
+            "content": "○\n○\n○\n○\n○\n○\n○\n○\n○"
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.308,
+                0.198,
+                0.434,
+                0.234
+            ],
+            "text": "1300151170",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.738,
+                0.25,
+                0.884,
+                0.274
+            ],
+            "text": "开票日期：2015年05月26日",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.713,
+                0.186,
+                0.743,
+                0.225
+            ],
+            "text": "No",
+            "score": 0.781
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.747,
+                0.19,
+                0.847,
+                0.222
+            ],
+            "text": "02115079",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.249,
+                0.741,
+                0.345,
+                0.765
+            ],
+            "text": "收款人：姚书平",
+            "score": 0.995
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.587,
+                0.738,
+                0.679,
+                0.763
+            ],
+            "text": "开票人：姚书平",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.855,
+                0.204,
+                0.917,
+                0.226
+            ],
+            "text": "1300151170",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.845,
+                0.224,
+                0.915,
+                0.252
+            ],
+            "text": "02115079",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.44,
+                0.739,
+                0.514,
+                0.763
+            ],
+            "text": "复核：姚书平",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.217,
+                0.35,
+                0.237,
+                0.684
+            ],
+            "text": "税总函[2015]341号北京印钞有限公司",
+            "score": 0.949
+        }
+    ],
+    [
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.32,
+                0.093,
+                0.68,
+                0.115
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.148,
+                0.127,
+                0.502,
+                0.145
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.146,
+                0.154,
+                0.853,
+                0.229
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.147,
+                0.238,
+                0.851,
+                0.285
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.483,
+                0.316,
+                0.851,
+                0.335
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.581,
+                0.265,
+                0.758,
+                0.394
+            ],
+            "angle": 0,
+            "content": "北泰昌电力器材科技\n1309210005674\n北泰昌电力器材科技",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.321,
+                0.091,
+                0.68,
+                0.115
+            ],
+            "text": "生产、试验设备发票查验说明文件",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.148,
+                0.127,
+                0.503,
+                0.145
+            ],
+            "text": "致：国家电网有限公司及其所属各省公司",
+            "score": 0.991
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.188,
+                0.154,
+                0.852,
+                0.174
+            ],
+            "text": "鉴于国家税务总局全国增值税发票查验平台",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.147,
+                0.183,
+                0.853,
+                0.2
+            ],
+            "text": "https:/inv-veri.chinatax.gov.cn/index.html查询年限5年，故我公司部分生产、试",
+            "score": 0.953
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.149,
+                0.212,
+                0.486,
+                0.229
+            ],
+            "text": "验设备发票超出查询年限而无法查询。",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.184,
+                0.238,
+                0.851,
+                0.256
+            ],
+            "text": "我公司承诺所提供所有设备发票信息真实有效，无任何虚假。如有虚假愿意",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.15,
+                0.266,
+                0.424,
+                0.283
+            ],
+            "text": "承担一切法律责任，特此证明。",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.615,
+                0.271,
+                0.726,
+                0.286
+            ],
+            "text": "",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.482,
+                0.312,
+                0.852,
+                0.336
+            ],
+            "text": "承诺人：河北泰昌电力器材科技有限公司",
+            "score": 0.988
+        }
+    ],
+    [
+        {
+            "type": "image",
+            "bbox": [
+                0.0,
+                0.0,
+                0.999,
+                0.999
+            ],
+            "angle": 0,
+            "content": "大定万丰管业有限公司 保定万丰\n限公司\n2017年\n2018年\n2019年\n2020年\n2021年\n2022年\n2023年\n2024年\n2025年\n2026年\n2027年\n2028年\n2029年\n2030年\n2031年\n2032年\n2033年\n2034年\n2035年\n2036年\n2037年\n2038年\n2039年\n2040年\n2041年\n2042年\n2043年\n2044年\n2045年\n2046年\n2047年\n2048年\n2049年\n2050年\n2051年\n2052年\n2053年\n2054年\n2055年\n2056年\n2057年\n2058年\n2059年\n2060年\n2061年\n2062年\n2063年\n2064年\n2065年\n2066年\n2067年\n2068年\n2069年\n2070年\n2071年\n2072年\n2073年\n2074年\n2075年\n2076年\n2077年\n2078年\n2079年\n2080年\n2081年\n2082年\n2083年\n2084年\n2085年\n2086年\n2087年\n2088年\n2089年\n2090年\n2091年\n2092年\n2093年\n2094年\n2095年\n2096年\n2097年\n2098年\n2099年\n31.1.1.1",
+            "sub_type": "text_image"
+        }
+    ],
+    [
+        {
+            "type": "image",
+            "bbox": [
+                0.0,
+                0.0,
+                0.999,
+                0.999
+            ],
+            "angle": 0,
+            "content": "Industrial machine setup in a factory setting, no visible text or symbols on the machinery or background",
+            "sub_type": "natural_image"
+        }
+    ],
+    [
+        {
+            "type": "image",
+            "bbox": [
+                0.0,
+                0.0,
+                0.999,
+                0.999
+            ],
+            "angle": 0,
+            "content": "科学管理 专业创新\n闻",
+            "sub_type": "text_image"
+        }
+    ],
+    [
+        {
+            "type": "image",
+            "bbox": [
+                0.0,
+                0.0,
+                0.999,
+                0.999
+            ],
+            "angle": 0,
+            "content": "Industrial machine setup in a workshop, no visible text or symbols on the equipment or background",
+            "sub_type": "natural_image"
+        }
+    ]
+]

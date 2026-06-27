@@ -1,0 +1,37 @@
+{
+  "parse_id": "taichang_green_low_carbon_20260606_112728_7392f75c",
+  "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/5其他绿色低碳证书一览表/碳足迹报告.pdf",
+  "evidence_type": "green_low_carbon",
+  "started_at": "2026-06-06T03:27:28.244991+00:00",
+  "parser": "mineru",
+  "privacy_level": "private",
+  "target_library": "product_library",
+  "page_count": 17,
+  "batch_id": "338bebae-3872-46f3-b62d-30c0b6474dd8",
+  "data_id": "taichang_green_low_carbon_20260606_112728_7392f75c",
+  "submitted_at": "2026-06-06T03:27:28.663813+00:00",
+  "parse_status": "mineru_done",
+  "mineru_result": {
+    "data_id": "taichang_green_low_carbon_20260606_112728_7392f75c",
+    "file_name": "碳足迹报告.pdf",
+    "state": "done",
+    "err_msg": ""
+  },
+  "artifacts": {
+    "zip_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/碳足迹报告_7392f7/mineru_result.zip",
+    "extract_dir": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/碳足迹报告_7392f7/extract",
+    "markdown_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/碳足迹报告_7392f7/extract/full.md",
+    "content_list_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/碳足迹报告_7392f7/extract/1d4e298e-ad8c-4e7e-b4c0-cbaaf1f364d2_content_list.json",
+    "model_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/碳足迹报告_7392f7/extract/1d4e298e-ad8c-4e7e-b4c0-cbaaf1f364d2_model.json",
+    "middle_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/碳足迹报告_7392f7/extract/layout.json",
+    "download_info": {
+      "url_host": "cdn-mineru.openxlab.org.cn",
+      "resume_enabled": true,
+      "used_curl_fallback": true,
+      "resumed_from_bytes": 0,
+      "downloaded_bytes": 0,
+      "zip_size": 2039932
+    }
+  },
+  "finished_at": "2026-06-06T03:27:46.333552+00:00"
+}

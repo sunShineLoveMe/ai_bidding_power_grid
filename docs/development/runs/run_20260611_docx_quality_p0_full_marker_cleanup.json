@@ -1,0 +1,406 @@
+{
+  "run_id": "run_20260611_docx_quality_p0_full_marker_cleanup",
+  "project_id": "4bc3ee73-9ec5-4184-aafd-eaede9f90798",
+  "markdown_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou_Zhao_Biao_Wen_Jian/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.md",
+  "docx_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou_Zhao_Biao_Wen_Jian/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.docx",
+  "title": "国网辽宁电力2025年第三次物资协议库存招标采购投标文件",
+  "docx_size": 8664343,
+  "image_conversion": {
+    "found": 24,
+    "inserted": 24,
+    "skipped": 0,
+    "failed": 0,
+    "mermaid": {
+      "found": 1,
+      "inserted": 0,
+      "skipped": 1
+    }
+  },
+  "docx_template": {
+    "template_id": "sgcc_taichang_bid",
+    "bidder_full_name": "河北泰昌电力器材科技有限公司",
+    "body_font": "宋体",
+    "body_latin_font": "Times New Roman",
+    "body_font_size_pt": 10.5,
+    "body_line_spacing_pt": 20.0,
+    "body_first_line_indent_pt": 21.0,
+    "list_left_indent_pt": 21.0,
+    "list_hanging_indent_pt": 10.5,
+    "heading_keep_with_next": false,
+    "cover_title_font_size_pt": 22.0,
+    "toc_title_font_size_pt": 22.0,
+    "toc_entry_font_size_pt": 10.5,
+    "toc_entry_line_spacing_pt": 18.0,
+    "table_font": "宋体",
+    "table_font_size_pt": 10.5,
+    "table_line_spacing_pt": 16.0,
+    "table_cell_margin_twips": 100,
+    "page_size": "A4",
+    "margins_cm": {
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 3.18,
+      "right": 3.18
+    },
+    "header_footer": {
+      "header_font": "宋体",
+      "header_font_size_pt": 9,
+      "footer_font": "宋体",
+      "footer_font_size_pt": 9,
+      "page_number_format": "第 X 页，共 Y 页",
+      "header_text": "河北泰昌电力器材科技有限公司投标文件",
+      "header_max_chars": 42
+    },
+    "cover_fields": {
+      "招标编号": "2225AC",
+      "文件类型": "投标文件"
+    }
+  },
+  "field_refresh": {
+    "enabled": true,
+    "status": "refreshed",
+    "tool": "libreoffice",
+    "soffice_bin": "/opt/homebrew/bin/soffice",
+    "input_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou_Zhao_Biao_Wen_Jian/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.docx",
+    "timeout_seconds": 180,
+    "returncode": 0,
+    "stdout": "convert /var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-hype681h/input/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.docx as a Writer document -> /private/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-hype681h/output/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.docx using filter : Office Open XML Text\n",
+    "stderr": "2026-06-11 15:17:42.933 soffice[91530:21256476] Task policy set failed: 4 ((os/kern) invalid argument)\n",
+    "manual_refresh_required": false,
+    "user_message": "DOCX 已完成自动刷新，目录页码、页脚页码和总页数字段已重新保存。",
+    "output_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou_Zhao_Biao_Wen_Jian/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.docx",
+    "size": 8664343,
+    "marker_cleanup": {
+      "enabled": true,
+      "status": "cleaned",
+      "counts_before": {
+        "keepLines": 0,
+        "keepNext": 1,
+        "pageBreakBefore": 0
+      },
+      "counts_after": {
+        "keepLines": 0,
+        "keepNext": 0,
+        "pageBreakBefore": 0
+      }
+    }
+  },
+  "marker_counts": {
+    "document_keepLines": 0,
+    "document_keepNext": 0,
+    "document_pageBreakBefore": 0,
+    "styles_keepLines": 0,
+    "styles_keepNext": 0,
+    "styles_pageBreakBefore": 0
+  },
+  "full_marker_cleanup_checks": {
+    "no_keep_lines_in_document_xml": true,
+    "no_keep_next_in_document_xml": true,
+    "no_page_break_before_in_document_xml": true,
+    "no_keep_lines_in_styles_xml": true,
+    "no_keep_next_in_styles_xml": true,
+    "no_page_break_before_in_styles_xml": true,
+    "all_body_samples_line_spacing_20pt": true,
+    "all_body_samples_first_line_indent_21pt": true,
+    "all_heading_samples_no_first_line_indent": true,
+    "all_list_samples_line_spacing_20pt": true,
+    "all_list_samples_left_or_start_indent_21pt": true,
+    "all_list_samples_hanging_indent_10_5pt": true,
+    "max_consecutive_empty_paragraphs_in_body": 1
+  },
+  "toc_samples": [
+    {
+      "text": "1. 投标函及投标函附录\t4",
+      "style": "Normal",
+      "line_spacing_pt": 18.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "2. 资格审查资料\t15",
+      "style": "Normal",
+      "line_spacing_pt": 18.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "3. 投标函及格式文件\t55",
+      "style": "Normal",
+      "line_spacing_pt": 18.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "4. 商务响应文件\t58",
+      "style": "Normal",
+      "line_spacing_pt": 18.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "5. 报价文件及工程量清单\t68",
+      "style": "Normal",
+      "line_spacing_pt": 18.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "6. 其他响应资料\t71",
+      "style": "Normal",
+      "line_spacing_pt": 18.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "7. 技术响应文件\t73",
+      "style": "Normal",
+      "line_spacing_pt": 18.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    }
+  ],
+  "body_samples": [
+    {
+      "text": "待补充章节正文。",
+      "style": "Normal",
+      "line_spacing_pt": 20.0,
+      "first_line_indent_pt": 21.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "【投标函及投标函附录 — 编制依据】",
+      "style": "Normal",
+      "line_spacing_pt": 20.0,
+      "first_line_indent_pt": 21.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "【1 招标文件依据】",
+      "style": "Normal",
+      "line_spacing_pt": 20.0,
+      "first_line_indent_pt": 21.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "本投标函及投标函附录严格依据以下招标文件编制：",
+      "style": "Normal",
+      "line_spacing_pt": 20.0,
+      "first_line_indent_pt": 21.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "以上文件已在招标文件发布后由招标代理机构（国网辽宁招标有限公司）提供，我司已逐条阅读、理解并承诺响应全部条款。",
+      "style": "Normal",
+      "line_spacing_pt": 20.0,
+      "first_line_indent_pt": 21.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "【2 国家及行业技术标准与规范规程】",
+      "style": "Normal",
+      "line_spacing_pt": 20.0,
+      "first_line_indent_pt": 21.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "本投标文件中涉及的电力设备供货、安装调试、试验检测、运维检修等环节，均依据以下现行有效标准编制（包括但不限于）：",
+      "style": "Normal",
+      "line_spacing_pt": 20.0,
+      "first_line_indent_pt": 21.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "具体适用的标准号及版本号以技术规范书载明为准；当不同标准存在不一致时，以最严格者执行。",
+      "style": "Normal",
+      "line_spacing_pt": 20.0,
+      "first_line_indent_pt": 21.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    }
+  ],
+  "heading_samples": [
+    {
+      "text": "1. 投标函及投标函附录",
+      "style": "Heading 1",
+      "line_spacing_pt": 20.0,
+      "first_line_indent_pt": 0.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "1.1 编制依据",
+      "style": "Heading 2",
+      "line_spacing_pt": 20.0,
+      "first_line_indent_pt": 0.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "1.2 工程概况",
+      "style": "Heading 2",
+      "line_spacing_pt": 20.0,
+      "first_line_indent_pt": 0.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "1.3 总体部署",
+      "style": "Heading 2",
+      "line_spacing_pt": 20.0,
+      "first_line_indent_pt": 0.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "2. 资格审查资料",
+      "style": "Heading 1",
+      "line_spacing_pt": 20.0,
+      "first_line_indent_pt": 0.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "2.1 企业基本资格资料",
+      "style": "Heading 2",
+      "line_spacing_pt": 20.0,
+      "first_line_indent_pt": 0.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "2.1.1 响应要求",
+      "style": "Heading 3",
+      "line_spacing_pt": 20.0,
+      "first_line_indent_pt": 0.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "2.1.2 资料清单",
+      "style": "Heading 3",
+      "line_spacing_pt": 20.0,
+      "first_line_indent_pt": 0.0,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    }
+  ],
+  "list_samples": [
+    {
+      "text": "GB/T 标准系列：涉及电力电缆保护管、电工材料、电力金具、电气装置安装工程等通用技术要求。",
+      "style": "List Bullet",
+      "line_spacing_pt": 20.0,
+      "left_indent_pt": 21.0,
+      "hanging_indent_pt": 10.5,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "DL/T 标准系列：涉及输变电工程、配网工程、设备试验规程、继电保护、自动化装置等电力行业标准。",
+      "style": "List Bullet",
+      "line_spacing_pt": 20.0,
+      "left_indent_pt": 21.0,
+      "hanging_indent_pt": 10.5,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "国家电网企业标准（Q/GDW系列）：包括但不限于物资采购标准、设备质量监督标准、现场安装及验收规范。",
+      "style": "List Bullet",
+      "line_spacing_pt": 20.0,
+      "left_indent_pt": 21.0,
+      "hanging_indent_pt": 10.5,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "安全规程：GB 26860-2011《电力安全工作规程》、DL 5009系列《电力建设安全工作规程》。",
+      "style": "List Bullet",
+      "line_spacing_pt": 20.0,
+      "left_indent_pt": 21.0,
+      "hanging_indent_pt": 10.5,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "质量验收标准：GB 50300《建筑工程施工质量验收统一标准》、DL/T 5210系列《电力建设施工质量验收及评价规程》。",
+      "style": "List Bullet",
+      "line_spacing_pt": 20.0,
+      "left_indent_pt": 21.0,
+      "hanging_indent_pt": 10.5,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "环境保护与绿色低碳标准：依据国家和地方环保法律法规，以及招标文件绿色采购相关要求。",
+      "style": "List Bullet",
+      "line_spacing_pt": 20.0,
+      "left_indent_pt": 21.0,
+      "hanging_indent_pt": 10.5,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "完全响应招标文件规定的交货期、交货地点、付款方式、质保期、售后服务等商务条件。",
+      "style": "List Bullet",
+      "line_spacing_pt": 20.0,
+      "left_indent_pt": 21.0,
+      "hanging_indent_pt": 10.5,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    },
+    {
+      "text": "完全响应技术规范书中规定的技术参数、试验项目、出厂检验、第三方检测、现场验收等要求。",
+      "style": "List Bullet",
+      "line_spacing_pt": 20.0,
+      "left_indent_pt": 21.0,
+      "hanging_indent_pt": 10.5,
+      "has_keep_lines": false,
+      "has_keep_next": false
+    }
+  ],
+  "cleanup_checks": {
+    "contains_mermaid_fence": false,
+    "contains_internal_image_source": false,
+    "contains_repeated_parent_title_pattern": false
+  },
+  "first_non_empty_paragraphs": [
+    "国网辽宁电力2025年第三次物资协议库存招标采购投标文件",
+    "文件类型：投标文件",
+    "招标编号：2225AC",
+    "投标人：河北泰昌电力器材科技有限公司",
+    "2026年06月11日",
+    "目  录",
+    "1. 投标函及投标函附录\t4",
+    "1.1 编制依据\t4",
+    "1.2 工程概况\t7",
+    "1.3 总体部署\t10",
+    "2. 资格审查资料\t15",
+    "2.1 企业基本资格资料\t16",
+    "2.1.1 响应要求\t18",
+    "2.1.2 资料清单\t22",
+    "2.1.3 有效性说明\t25",
+    "2.2 信誉与合规承诺\t28",
+    "2.2.1 条款响应\t28",
+    "2.2.2 承诺事项\t32",
+    "2.2.3 偏离说明\t35",
+    "2.3 类似项目业绩\t39"
+  ],
+  "page_cm": [
+    21.0,
+    29.7
+  ],
+  "margins_cm": [
+    2.0,
+    2.0,
+    3.18,
+    3.18
+  ],
+  "header": "河北泰昌电力器材科技有限公司投标文件"
+}

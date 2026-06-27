@@ -1,0 +1,36 @@
+{
+  "parse_id": "taichang_certification_20260606_105134_3e8a3170",
+  "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/2.环境管理体系认证证书.pdf",
+  "evidence_type": "certification",
+  "started_at": "2026-06-06T02:51:34.607649+00:00",
+  "parser": "mineru",
+  "privacy_level": "private",
+  "target_library": "qualification_library",
+  "batch_id": "de8f6591-93a2-4734-bde7-2541ae50affb",
+  "data_id": "taichang_certification_20260606_105134_3e8a3170",
+  "submitted_at": "2026-06-06T02:51:35.071253+00:00",
+  "parse_status": "mineru_done",
+  "mineru_result": {
+    "data_id": "taichang_certification_20260606_105134_3e8a3170",
+    "file_name": "2.环境管理体系认证证书.pdf",
+    "state": "done",
+    "err_msg": ""
+  },
+  "artifacts": {
+    "zip_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/2_环境管理体系认证证书/mineru_result.zip",
+    "extract_dir": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/2_环境管理体系认证证书/extract",
+    "markdown_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/2_环境管理体系认证证书/extract/full.md",
+    "content_list_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/2_环境管理体系认证证书/extract/25b169d8-b496-44ea-9809-d17c34891089_content_list.json",
+    "model_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/2_环境管理体系认证证书/extract/25b169d8-b496-44ea-9809-d17c34891089_model.json",
+    "middle_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/2_环境管理体系认证证书/extract/layout.json",
+    "download_info": {
+      "url_host": "cdn-mineru.openxlab.org.cn",
+      "resume_enabled": true,
+      "used_curl_fallback": true,
+      "resumed_from_bytes": 0,
+      "downloaded_bytes": 0,
+      "zip_size": 1040617
+    }
+  },
+  "finished_at": "2026-06-06T02:51:44.643308+00:00"
+}

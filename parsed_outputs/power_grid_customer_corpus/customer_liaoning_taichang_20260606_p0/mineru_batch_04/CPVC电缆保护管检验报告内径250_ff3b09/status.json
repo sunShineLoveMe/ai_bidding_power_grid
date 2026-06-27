@@ -1,0 +1,37 @@
+{
+  "parse_id": "taichang_inspection_report_20260606_112653_ff3b0953",
+  "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/CPVC电缆保护管检验报告内径250.pdf",
+  "evidence_type": "inspection_report",
+  "started_at": "2026-06-06T03:26:53.269593+00:00",
+  "parser": "mineru",
+  "privacy_level": "private",
+  "target_library": "product_library",
+  "page_count": 5,
+  "batch_id": "9595165c-0e6c-422f-bb0e-aff91508f76f",
+  "data_id": "taichang_inspection_report_20260606_112653_ff3b0953",
+  "submitted_at": "2026-06-06T03:26:53.606444+00:00",
+  "parse_status": "mineru_done",
+  "mineru_result": {
+    "data_id": "taichang_inspection_report_20260606_112653_ff3b0953",
+    "file_name": "CPVC电缆保护管检验报告内径250.pdf",
+    "state": "done",
+    "err_msg": ""
+  },
+  "artifacts": {
+    "zip_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/CPVC电缆保护管检验报告内径250_ff3b09/mineru_result.zip",
+    "extract_dir": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/CPVC电缆保护管检验报告内径250_ff3b09/extract",
+    "markdown_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/CPVC电缆保护管检验报告内径250_ff3b09/extract/full.md",
+    "content_list_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/CPVC电缆保护管检验报告内径250_ff3b09/extract/0a6be591-278e-46dd-afba-ed68590c59aa_content_list.json",
+    "model_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/CPVC电缆保护管检验报告内径250_ff3b09/extract/0a6be591-278e-46dd-afba-ed68590c59aa_model.json",
+    "middle_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_04/CPVC电缆保护管检验报告内径250_ff3b09/extract/layout.json",
+    "download_info": {
+      "url_host": "cdn-mineru.openxlab.org.cn",
+      "resume_enabled": true,
+      "used_curl_fallback": true,
+      "resumed_from_bytes": 0,
+      "downloaded_bytes": 0,
+      "zip_size": 833393
+    }
+  },
+  "finished_at": "2026-06-06T03:27:10.690059+00:00"
+}

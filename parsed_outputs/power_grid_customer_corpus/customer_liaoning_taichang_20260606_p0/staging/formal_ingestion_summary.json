@@ -1,0 +1,58 @@
+{
+  "batch_id": "customer_liaoning_taichang_20260606_p0",
+  "counts": {
+    "docs": 124,
+    "chunks": 29683,
+    "goods_rows": 87,
+    "assets": 242,
+    "asset_embeddings": 242
+  },
+  "chunk_role_counts": [
+    {
+      "doc_role": "main_tender_file",
+      "count": 12126
+    },
+    {
+      "doc_role": "technical_spec",
+      "count": 9563
+    },
+    {
+      "doc_role": "enterprise_evidence",
+      "count": 4377
+    },
+    {
+      "doc_role": "contract_general_terms",
+      "count": 2466
+    },
+    {
+      "doc_role": "tender_notice",
+      "count": 768
+    },
+    {
+      "doc_role": "contract_special_terms",
+      "count": 222
+    },
+    {
+      "doc_role": "goods_list",
+      "count": 91
+    },
+    {
+      "doc_role": "technical_response_reference",
+      "count": 38
+    },
+    {
+      "doc_role": "winning_bid_reference",
+      "count": 32
+    }
+  ],
+  "asset_library_counts": [
+    {
+      "target_library": "product_library",
+      "count": 137
+    },
+    {
+      "target_library": "qualification_library",
+      "count": 105
+    }
+  ]
+}

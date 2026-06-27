@@ -1,0 +1,37 @@
+{
+  "parse_id": "taichang_production_capacity_20260606_110743_4ddb6282",
+  "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.生产厂房一览表/1.土地租赁协议.pdf",
+  "evidence_type": "production_capacity",
+  "started_at": "2026-06-06T03:07:43.510596+00:00",
+  "parser": "mineru",
+  "privacy_level": "private",
+  "target_library": "product_library",
+  "page_count": 4,
+  "batch_id": "0e0f790a-4683-4253-a8a7-9f7d497bde6b",
+  "data_id": "taichang_production_capacity_20260606_110743_4ddb6282",
+  "submitted_at": "2026-06-06T03:07:43.928671+00:00",
+  "parse_status": "mineru_done",
+  "mineru_result": {
+    "data_id": "taichang_production_capacity_20260606_110743_4ddb6282",
+    "file_name": "1.土地租赁协议.pdf",
+    "state": "done",
+    "err_msg": ""
+  },
+  "artifacts": {
+    "zip_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/1_土地租赁协议_4ddb62/mineru_result.zip",
+    "extract_dir": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/1_土地租赁协议_4ddb62/extract",
+    "markdown_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/1_土地租赁协议_4ddb62/extract/full.md",
+    "content_list_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/1_土地租赁协议_4ddb62/extract/f04009a2-15fd-44e5-98a5-703cebf3b253_content_list.json",
+    "model_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/1_土地租赁协议_4ddb62/extract/f04009a2-15fd-44e5-98a5-703cebf3b253_model.json",
+    "middle_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_02/1_土地租赁协议_4ddb62/extract/layout.json",
+    "download_info": {
+      "url_host": "cdn-mineru.openxlab.org.cn",
+      "resume_enabled": true,
+      "used_curl_fallback": true,
+      "resumed_from_bytes": 0,
+      "downloaded_bytes": 0,
+      "zip_size": 844678
+    }
+  },
+  "finished_at": "2026-06-06T03:08:01.504489+00:00"
+}

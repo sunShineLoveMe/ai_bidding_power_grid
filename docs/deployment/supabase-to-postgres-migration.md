@@ -1,5 +1,8 @@
 # Supabase 到 PostgreSQL 迁移
 
+> 历史/迁移参考：本文用于理解旧 Supabase 数据如何迁移到 PostgreSQL/本地 Storage/OSS，不是新环境初始化 SOP。
+> 新环境应从 `migrations/postgres/` 正式迁移链初始化；客户资料和电网 RAG 新批次入库应走 `scripts/rag/ingest_power_grid_v2.py`、`scripts/rag/ingest_customer_corpus.py` 及对应评测流程。
+
 本文记录当前电力/电网项目从 Supabase 迁移到本地 Docker PostgreSQL，并为后续阿里云 RDS PostgreSQL + OSS 交付做准备的标准流程。
 
 ## 迁移目标

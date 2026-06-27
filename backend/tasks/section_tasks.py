@@ -8,7 +8,8 @@ generate and save section content in the background.
 - 协调任务 `run_bid_section_generation` 不再逐章串行，而是把每个章节派成独立子任务
   `generate_one_section`，用 Celery `group` 并发执行。
 - 真实并行度由 Celery worker 并发度（`CELERY_WORKER_CONCURRENCY`，默认 4）与本文件的
-  `SECTION_GEN_CONCURRENCY`（默认 3，对齐历史"3 路 DeepSeek 并行"）共同决定。
+  `SECTION_GEN_CONCURRENCY`（默认最大 3 路）共同决定；实际补位窗口由
+  `section_generation_policy.resolve_section_generation_concurrency()` 自适应输出。
 - 子任务各自独立：可独立重试、独立失败、独立取消，互不阻塞。
 - eager 模式（测试）下 group 同步顺序执行，行为可预测。
 """
@@ -38,7 +39,7 @@ class SectionGenerationSuperseded(Exception):
 
 
 def _section_gen_concurrency() -> int:
-    """单个批量任务期望的并行编写章节数。默认 3，对齐历史 3 路 DeepSeek 并行。"""
+    """单个批量任务允许的最大并行编写章节数。默认 3，对齐历史 3 路 DeepSeek 并行。"""
     try:
         value = int(os.getenv("SECTION_GEN_CONCURRENCY", "3"))
     except (TypeError, ValueError):
@@ -87,21 +88,15 @@ def _section_chunk_event_limit() -> int:
 
 
 def _auto_resume_partial_enabled(task: dict[str, Any]) -> bool:
-    metadata = _task_metadata(task)
-    raw = metadata.get("autoResumePartial", metadata.get("auto_resume_partial", True))
-    if isinstance(raw, str):
-        return raw.lower() not in {"0", "false", "no", "off"}
-    return bool(raw)
+    from backend.services.section_generation_policy import partial_auto_resume_enabled
+
+    return partial_auto_resume_enabled(task)
 
 
 def _max_auto_resume_attempts(task: dict[str, Any]) -> int:
-    metadata = _task_metadata(task)
-    raw = metadata.get("maxAutoResumeAttempts", metadata.get("max_auto_resume_attempts", os.getenv("BID_SECTION_MAX_AUTO_RESUME_ATTEMPTS", "3")))
-    try:
-        value = int(raw)
-    except (TypeError, ValueError):
-        value = 3
-    return max(1, min(value, 6))
+    from backend.services.section_generation_policy import max_partial_auto_resume_attempts
+
+    return max_partial_auto_resume_attempts(task)
 
 
 def _worker_id() -> str:
@@ -160,7 +155,13 @@ def _dispatch_next_sections(project_id: str, task_id: str) -> dict:
         expire_bid_generation_task_items,
         get_bid_generation_task,
         lease_bid_generation_task_items,
+        patch_bid_generation_task_metadata,
         requeue_bid_generation_task_item,
+        update_bid_generation_task_item,
+    )
+    from backend.services.section_generation_policy import (
+        resolve_partial_resume_policy,
+        resolve_section_generation_concurrency,
     )
 
     task = get_bid_generation_task(project_id, task_id)
@@ -177,37 +178,96 @@ def _dispatch_next_sections(project_id: str, task_id: str) -> dict:
     running_count = sum(1 for item in items if item.get("status") in ACTIVE_ITEM_STATUSES)
     queued_count = sum(1 for item in items if item.get("status") == "queued")
 
-    if (
-        queued_count == 0
-        and running_count == 0
-        and _auto_resume_partial_enabled(task)
-    ):
-        max_attempts = _max_auto_resume_attempts(task)
-        resumable = [
-            item
-            for item in items
-            if item.get("status") == "partial_generated"
-            and int(item.get("attempt") or 0) < max_attempts
-        ]
-        if resumable:
-            for item in resumable:
+    if queued_count == 0 and running_count == 0:
+        partial_items = [item for item in items if item.get("status") == "partial_generated"]
+        if partial_items:
+            auto_resumed = 0
+            review_required = 0
+            manual_waiting = 0
+            for item in partial_items:
                 section_id = str(item.get("section_id") or "")
                 if not section_id:
                     continue
-                requeue_bid_generation_task_item(
-                    project_id,
-                    task_id,
-                    section_id,
-                    reason="auto_resume_partial",
-                    preserve_draft=True,
-                )
+                resume_policy = resolve_partial_resume_policy(task, item)
+                if resume_policy.get("action") == "auto_resume":
+                    requeue_bid_generation_task_item(
+                        project_id,
+                        task_id,
+                        section_id,
+                        reason=str(resume_policy.get("requeue_reason") or "auto_resume_partial"),
+                        preserve_draft=True,
+                        metadata_patch=resume_policy.get("metadata") or {},
+                    )
+                    auto_resumed += 1
+                    continue
+
+                if resume_policy.get("review_required"):
+                    review_required += 1
+                else:
+                    manual_waiting += 1
+                try:
+                    update_bid_generation_task_item(
+                        project_id,
+                        task_id,
+                        section_id,
+                        {
+                            "_event_type": "partial_review_required" if resume_policy.get("review_required") else "partial_manual_resume_waiting",
+                            "status": "partial_generated",
+                            "percent": 100,
+                            "message": str(resume_policy.get("message") or "草稿已保存，待人工复核或续写。"),
+                            "metadata": {
+                                **(item.get("metadata") if isinstance(item.get("metadata"), dict) else {}),
+                                **(resume_policy.get("metadata") or {}),
+                            },
+                        },
+                    )
+                except Exception:
+                    logger.exception("partial 续写策略 metadata 更新失败", extra={"task_id": task_id, "section_id": section_id})
+            if auto_resumed or review_required or manual_waiting:
+                try:
+                    patch_bid_generation_task_metadata(
+                        project_id,
+                        task_id,
+                        {
+                            "partial_resume_policy": "partial_resume_v1",
+                            "partial_auto_resumed_count": auto_resumed,
+                            "partial_review_required_count": review_required,
+                            "partial_manual_waiting_count": manual_waiting,
+                            "partial_policy_message": (
+                                f"partial 草稿处理：自动续写 {auto_resumed} 个，需复核 {review_required} 个，待手动续写 {manual_waiting} 个"
+                            ),
+                            "partial_policy_evaluated_at": _now_iso(),
+                        },
+                    )
+                except Exception:
+                    logger.exception("partial 续写任务 metadata 更新失败", extra={"task_id": task_id})
             task = get_bid_generation_task(project_id, task_id) or task
             items = list(task.get("items") or [])
+            running_count = sum(1 for item in items if item.get("status") in ACTIVE_ITEM_STATUSES)
             queued_count = sum(1 for item in items if item.get("status") == "queued")
 
-    slots = max(0, _section_gen_concurrency() - running_count)
+    max_concurrency = _section_gen_concurrency()
+    policy = resolve_section_generation_concurrency(task, max_concurrency=max_concurrency)
+    current_concurrency = int(policy.get("current_concurrency") or max_concurrency)
+    try:
+        patched_task = patch_bid_generation_task_metadata(project_id, task_id, policy.get("metadata") or {})
+        if patched_task:
+            task = patched_task
+            items = list(task.get("items") or items)
+            running_count = sum(1 for item in items if item.get("status") in ACTIVE_ITEM_STATUSES)
+            queued_count = sum(1 for item in items if item.get("status") == "queued")
+    except Exception:
+        logger.exception("章节生成调度策略 metadata 更新失败，继续按当前策略派发", extra={"task_id": task_id})
+
+    slots = max(0, current_concurrency - running_count)
     if slots <= 0:
-        return {"task_id": task_id, "dispatched": 0, "running": running_count}
+        return {
+            "task_id": task_id,
+            "dispatched": 0,
+            "running": running_count,
+            "concurrency": current_concurrency,
+            "policy": policy.get("slots_policy"),
+        }
 
     leased_items = lease_bid_generation_task_items(
         project_id,
@@ -237,10 +297,19 @@ def _dispatch_next_sections(project_id: str, task_id: str) -> dict:
             "task_id": task_id,
             "dispatched": len(leased_items),
             "running_before": running_count,
-            "concurrency": _section_gen_concurrency(),
+            "concurrency": current_concurrency,
+            "max_concurrency": max_concurrency,
+            "policy": policy.get("slots_policy"),
         },
     )
-    return {"task_id": task_id, "dispatched": len(leased_items), "running": running_count + len(leased_items)}
+    return {
+        "task_id": task_id,
+        "dispatched": len(leased_items),
+        "running": running_count + len(leased_items),
+        "concurrency": current_concurrency,
+        "max_concurrency": max_concurrency,
+        "policy": policy.get("slots_policy"),
+    }
 
 
 @celery_app.task(name="bid.sections.generate_one", bind=True, max_retries=0)
@@ -343,12 +412,33 @@ def generate_one_section(
         generated_content = str(item.get("draft_content") or item.get("generated_content") or "").strip()
         if not generated_content:
             generated_content = f"## {chapter.get('title') or '未命名章节'}\n\n"
+        item_metadata = dict(item.get("metadata") if isinstance(item.get("metadata"), dict) else {})
+        prompt_metadata: dict[str, Any] = {}
         pending_chunk = ""
         chunk_seq = 0
         chunk_events: list[dict] = []
         last_flush_at = 0.0
         last_heartbeat_at = 0.0
         first_token_at: str | None = None
+
+        def _clean_stream_metadata(source: dict[str, Any]) -> dict[str, Any]:
+            metadata = source.get("metadata") if isinstance(source.get("metadata"), dict) else source
+            allowed = [
+                "first_token_latency_ms",
+                "first_token_slow",
+                "chars_at_60s",
+                "chars_at_90s",
+                "chars_per_minute",
+                "stream_elapsed_ms",
+                "stream_chars",
+                "slow_check_seconds",
+                "min_chars_at_slow_check",
+                "slow_stream",
+                "slow_stream_reason",
+                "timeout_code",
+                "timeout_message",
+            ]
+            return {key: metadata.get(key) for key in allowed if metadata.get(key) is not None}
 
         def assert_owner() -> None:
             if not attempt_id or not worker_id:
@@ -412,6 +502,7 @@ def generate_one_section(
                 "chunk_events": chunk_events,
                 "first_token_at": first_token_at,
                 "last_token_at": _now_iso(),
+                "metadata": {**item_metadata, **prompt_metadata},
                 "attempt_id": attempt_id,
                 "worker_id": worker_id,
             })
@@ -419,8 +510,54 @@ def generate_one_section(
             last_flush_at = now
 
         def on_event(event: dict) -> None:
-            nonlocal generated_content, pending_chunk, chunk_seq, first_token_at
-            if event.get("type") != "chunk":
+            nonlocal generated_content, pending_chunk, chunk_seq, first_token_at, prompt_metadata
+            event_type = event.get("type")
+            if event_type == "start":
+                prompt_metadata = {
+                    "prompt_profile": event.get("prompt_profile"),
+                    "prompt_profile_label": event.get("prompt_profile_label"),
+                    "prompt_chars": event.get("prompt_chars"),
+                    "max_prompt_chars": event.get("max_prompt_chars"),
+                    "rag_limit": event.get("rag_limit"),
+                    "asset_limit": event.get("asset_limit"),
+                    "fact_pack_mode": event.get("fact_pack_mode"),
+                    "prompt_profile_event_at": _now_iso(),
+                }
+                prompt_metadata = {key: value for key, value in prompt_metadata.items() if value is not None}
+                update_bid_generation_task_item(project_id, task_id, section_id, {
+                    "status": "generating",
+                    "percent": 3,
+                    "message": f"正在按{prompt_metadata.get('prompt_profile_label') or '默认'} profile 编写",
+                    "metadata": {**item_metadata, **prompt_metadata},
+                    "attempt_id": attempt_id,
+                    "worker_id": worker_id,
+                })
+                return
+            if event_type == "stream_metric":
+                prompt_metadata = {**prompt_metadata, **_clean_stream_metadata(event)}
+                update_bid_generation_task_item(project_id, task_id, section_id, {
+                    "status": "generating",
+                    "percent": min(98, max(3, int((len(generated_content.replace("\n", "")) / max(int(item.get("target_words") or 800), 1)) * 100))),
+                    "chars": len(generated_content.replace("\n", "")),
+                    "message": "模型输出较慢，正在保护当前草稿" if prompt_metadata.get("slow_stream") else "正在编写",
+                    "metadata": {**item_metadata, **prompt_metadata},
+                    "attempt_id": attempt_id,
+                    "worker_id": worker_id,
+                })
+                return
+            if event_type == "timeout":
+                prompt_metadata = {
+                    **prompt_metadata,
+                    **_clean_stream_metadata(event),
+                    "timeout_code": event.get("code") or prompt_metadata.get("timeout_code"),
+                    "timeout_message": event.get("message") or prompt_metadata.get("timeout_message"),
+                    "timeout_at": _now_iso(),
+                    "partial_chars": event.get("chars"),
+                    "partial_words": event.get("words"),
+                }
+                prompt_metadata = {key: value for key, value in prompt_metadata.items() if value is not None}
+                return
+            if event_type != "chunk":
                 return
             content = str(event.get("content") or "")
             if not content:
@@ -446,6 +583,7 @@ def generate_one_section(
                 "generated_content": generated_content,
                 "chunk_seq": chunk_seq,
                 "chunk_events": chunk_events,
+                "metadata": {**item_metadata, **prompt_metadata},
                 "attempt_id": attempt_id,
                 "worker_id": worker_id,
             })
@@ -463,6 +601,23 @@ def generate_one_section(
                 "first_token_at": first_token_at,
                 "last_token_at": _now_iso(),
                 "final_saved_at": _now_iso(),
+                "metadata": {
+                    **item_metadata,
+                    **prompt_metadata,
+                    **{
+                        key: result.get(key)
+                        for key in [
+                            "prompt_profile",
+                            "prompt_profile_label",
+                            "prompt_chars",
+                            "max_prompt_chars",
+                            "rag_limit",
+                            "asset_limit",
+                            "fact_pack_mode",
+                        ]
+                        if result.get(key) is not None
+                    },
+                },
                 "attempt_id": attempt_id,
                 "worker_id": worker_id,
             })
@@ -495,11 +650,29 @@ def generate_one_section(
                 _dispatch_next_sections(project_id, task_id)
                 return {"section_id": section_id, "status": "superseded"}
             partial_content = exc.partial_content or generated_content
+            timeout_metadata = getattr(exc, "metadata", {}) if isinstance(getattr(exc, "metadata", {}), dict) else {}
+            merged_metadata = {
+                **item_metadata,
+                **prompt_metadata,
+                **timeout_metadata,
+                "timeout_code": exc.code,
+                "timeout_message": str(exc),
+            }
+            if exc.code == "MODEL_STREAM_SLOW_TIMEOUT":
+                merged_metadata["slow_stream"] = True
+                merged_metadata.setdefault("slow_stream_reason", timeout_metadata.get("slow_stream_reason") or "slow_stream_timeout")
+                merged_metadata["partial_reason"] = "slow_stream"
+                merged_metadata["next_action"] = "auto_resume_with_slim_prompt"
+                merged_metadata["retry_policy"] = {
+                    "attempt": int(item.get("attempt") or 0),
+                    "max_attempts": _max_auto_resume_attempts(task),
+                    "next_profile": "continuation_slim",
+                }
             update_bid_generation_task_item(project_id, task_id, section_id, {
                 "status": "partial_generated",
                 "percent": 100,
                 "chars": len(partial_content.replace("\n", "")),
-                "message": "模型输出超时，已保存草稿，待续写或人工复核。",
+                "message": "模型输出较慢，已提前保存草稿，待续写或人工复核。" if exc.code == "MODEL_STREAM_SLOW_TIMEOUT" else "模型输出超时，已保存草稿，待续写或人工复核。",
                 "error": f"{exc.code}: {str(exc)}",
                 "generated_content": partial_content,
                 "draft_content": partial_content,
@@ -508,6 +681,7 @@ def generate_one_section(
                 "first_token_at": first_token_at,
                 "last_token_at": _now_iso(),
                 "draft_saved_at": _now_iso(),
+                "metadata": merged_metadata,
                 "attempt_id": attempt_id,
                 "worker_id": worker_id,
             })
@@ -561,6 +735,12 @@ def run_bid_section_generation(self, project_id: str, task_id: str) -> dict:
                 if str(item.get("section_id") or "")
                 and item.get("status") == "queued"
             ]
+            partial_ids = [
+                str(item.get("section_id"))
+                for item in items
+                if str(item.get("section_id") or "")
+                and item.get("status") == "partial_generated"
+            ]
             logger.info(
                 "section_generation_task_started",
                 extra={
@@ -571,7 +751,7 @@ def run_bid_section_generation(self, project_id: str, task_id: str) -> dict:
                     "concurrency": _section_gen_concurrency(),
                 },
             )
-            if not pending_ids:
+            if not pending_ids and not partial_ids:
                 return {"task_id": task_id, "dispatched": 0}
 
             return _dispatch_next_sections(project_id, task_id)

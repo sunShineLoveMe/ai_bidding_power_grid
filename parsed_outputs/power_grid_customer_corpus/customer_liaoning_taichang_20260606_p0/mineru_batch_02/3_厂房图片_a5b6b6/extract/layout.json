@@ -1,0 +1,940 @@
+{
+    "pdf_info": [
+        {
+            "preproc_blocks": [
+                {
+                    "type": "table",
+                    "bbox": [
+                        91,
+                        132,
+                        487,
+                        747
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                93,
+                                86,
+                                493,
+                                115
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        92,
+                                        87,
+                                        495,
+                                        114
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                92,
+                                                87,
+                                                495,
+                                                114
+                                            ],
+                                            "type": "text",
+                                            "content": "河北泰昌电力器材科技有限公司平面图",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                91,
+                                132,
+                                487,
+                                747
+                            ],
+                            "type": "table_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        91,
+                                        132,
+                                        487,
+                                        747
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                91,
+                                                132,
+                                                487,
+                                                747
+                                            ],
+                                            "type": "table",
+                                            "html": "<table><tr><td colspan=\"3\">生产车间</td></tr><tr><td>组装车间</td><td></td><td>库房</td></tr><tr><td>车库</td><td></td><td>办公楼3F</td></tr><tr><td></td><td></td><td>其它</td></tr><tr><td>厨房</td><td>警卫室</td><td></td></tr><tr><td colspan=\"3\"></td></tr><tr><td colspan=\"3\">乡间公路</td></tr></table>",
+                                            "image_path": "e3922ffeec123653ba323b68922ad1916b8a661288af7e422ba86f3edb57ab2a.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 1
+                }
+            ],
+            "discarded_blocks": [],
+            "page_size": [
+                595,
+                841
+            ],
+            "page_idx": 0,
+            "para_blocks": [
+                {
+                    "type": "table",
+                    "bbox": [
+                        91,
+                        132,
+                        487,
+                        747
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                93,
+                                86,
+                                493,
+                                115
+                            ],
+                            "type": "table_caption",
+                            "angle": 0,
+                            "index": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        92,
+                                        87,
+                                        495,
+                                        114
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                92,
+                                                87,
+                                                495,
+                                                114
+                                            ],
+                                            "type": "text",
+                                            "content": "河北泰昌电力器材科技有限公司平面图",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                91,
+                                132,
+                                487,
+                                747
+                            ],
+                            "type": "table_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        91,
+                                        132,
+                                        487,
+                                        747
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                91,
+                                                132,
+                                                487,
+                                                747
+                                            ],
+                                            "type": "table",
+                                            "html": "<table><tr><td colspan=\"3\">生产车间</td></tr><tr><td>组装车间</td><td></td><td>库房</td></tr><tr><td>车库</td><td></td><td>办公楼3F</td></tr><tr><td></td><td></td><td>其它</td></tr><tr><td>厨房</td><td>警卫室</td><td></td></tr><tr><td colspan=\"3\"></td></tr><tr><td colspan=\"3\">乡间公路</td></tr></table>",
+                                            "image_path": "e3922ffeec123653ba323b68922ad1916b8a661288af7e422ba86f3edb57ab2a.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 1
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "type": "image",
+                    "bbox": [
+                        92,
+                        83,
+                        499,
+                        770
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                92,
+                                83,
+                                499,
+                                770
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        92,
+                                        83,
+                                        499,
+                                        770
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                92,
+                                                83,
+                                                499,
+                                                770
+                                            ],
+                                            "type": "image",
+                                            "content": "Exterior view of a building with windows and a sloped corner, no visible text or symbols",
+                                            "image_path": "d211b1622a89602638d6a934b9c1de1ad56176f34832b097dc20db47649c30dc.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0,
+                    "sub_type": "natural_image"
+                }
+            ],
+            "discarded_blocks": [],
+            "page_size": [
+                595,
+                841
+            ],
+            "page_idx": 1,
+            "para_blocks": [
+                {
+                    "type": "image",
+                    "bbox": [
+                        92,
+                        83,
+                        499,
+                        770
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                92,
+                                83,
+                                499,
+                                770
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        92,
+                                        83,
+                                        499,
+                                        770
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                92,
+                                                83,
+                                                499,
+                                                770
+                                            ],
+                                            "type": "image",
+                                            "content": "Exterior view of a building with windows and a sloped corner, no visible text or symbols",
+                                            "image_path": "d211b1622a89602638d6a934b9c1de1ad56176f34832b097dc20db47649c30dc.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0,
+                    "sub_type": "natural_image"
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "type": "image",
+                    "bbox": [
+                        123,
+                        82,
+                        512,
+                        767
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                123,
+                                82,
+                                512,
+                                767
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        123,
+                                        82,
+                                        512,
+                                        767
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                123,
+                                                82,
+                                                512,
+                                                767
+                                            ],
+                                            "type": "image",
+                                            "content": "Exterior view of a two-story building with windows and a parked car, no visible text or signage",
+                                            "image_path": "0a80ac7e67c7ca58b11952aa07b76e97d42ab6b26bbaf5edafcc13f03cb51bfd.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0,
+                    "sub_type": "natural_image"
+                }
+            ],
+            "discarded_blocks": [],
+            "page_size": [
+                595,
+                841
+            ],
+            "page_idx": 2,
+            "para_blocks": [
+                {
+                    "type": "image",
+                    "bbox": [
+                        123,
+                        82,
+                        512,
+                        767
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                123,
+                                82,
+                                512,
+                                767
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        123,
+                                        82,
+                                        512,
+                                        767
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                123,
+                                                82,
+                                                512,
+                                                767
+                                            ],
+                                            "type": "image",
+                                            "content": "Exterior view of a two-story building with windows and a parked car, no visible text or signage",
+                                            "image_path": "0a80ac7e67c7ca58b11952aa07b76e97d42ab6b26bbaf5edafcc13f03cb51bfd.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0,
+                    "sub_type": "natural_image"
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "type": "image",
+                    "bbox": [
+                        92,
+                        69,
+                        499,
+                        767
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                92,
+                                69,
+                                499,
+                                767
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        92,
+                                        69,
+                                        499,
+                                        767
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                92,
+                                                69,
+                                                499,
+                                                767
+                                            ],
+                                            "type": "image",
+                                            "content": "Exterior view of a multi-story building with brick facade and green windows, adjacent to a tower (no visible text or signage)",
+                                            "image_path": "0b791d2cd73595fda9edf428032e7dbd8ac9e564e47b79e009d32221a31f2e45.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0,
+                    "sub_type": "natural_image"
+                }
+            ],
+            "discarded_blocks": [],
+            "page_size": [
+                595,
+                841
+            ],
+            "page_idx": 3,
+            "para_blocks": [
+                {
+                    "type": "image",
+                    "bbox": [
+                        92,
+                        69,
+                        499,
+                        767
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                92,
+                                69,
+                                499,
+                                767
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        92,
+                                        69,
+                                        499,
+                                        767
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                92,
+                                                69,
+                                                499,
+                                                767
+                                            ],
+                                            "type": "image",
+                                            "content": "Exterior view of a multi-story building with brick facade and green windows, adjacent to a tower (no visible text or signage)",
+                                            "image_path": "0b791d2cd73595fda9edf428032e7dbd8ac9e564e47b79e009d32221a31f2e45.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0,
+                    "sub_type": "natural_image"
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "type": "image",
+                    "bbox": [
+                        94,
+                        89,
+                        483,
+                        770
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                94,
+                                89,
+                                483,
+                                770
+                            ],
+                            "type": "image_body",
+                            "angle": 90,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        94,
+                                        89,
+                                        483,
+                                        770
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                94,
+                                                89,
+                                                483,
+                                                770
+                                            ],
+                                            "type": "image",
+                                            "content": "河北秦皇岛电力器材有限公司\nHebei Taitianang D'analisei Kei Co.,Ltd.",
+                                            "image_path": "740797c7b55354c0bcdf53f7f14a78adc6239c285f77d1e5eefa11aa016b95fc.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0,
+                    "sub_type": "text_image"
+                }
+            ],
+            "discarded_blocks": [],
+            "page_size": [
+                595,
+                841
+            ],
+            "page_idx": 4,
+            "para_blocks": [
+                {
+                    "type": "image",
+                    "bbox": [
+                        94,
+                        89,
+                        483,
+                        770
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                94,
+                                89,
+                                483,
+                                770
+                            ],
+                            "type": "image_body",
+                            "angle": 90,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        94,
+                                        89,
+                                        483,
+                                        770
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                94,
+                                                89,
+                                                483,
+                                                770
+                                            ],
+                                            "type": "image",
+                                            "content": "河北秦皇岛电力器材有限公司\nHebei Taitianang D'analisei Kei Co.,Ltd.",
+                                            "image_path": "740797c7b55354c0bcdf53f7f14a78adc6239c285f77d1e5eefa11aa016b95fc.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0,
+                    "sub_type": "text_image"
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "type": "image",
+                    "bbox": [
+                        100,
+                        74,
+                        442,
+                        352
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                100,
+                                74,
+                                442,
+                                352
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        100,
+                                        74,
+                                        442,
+                                        352
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                100,
+                                                74,
+                                                442,
+                                                352
+                                            ],
+                                            "type": "image",
+                                            "content": "北\n才良村\n东郊屯村\n正隆村\n韩村\n五家屯村\n郑屯村\n梅潭屯村\n东移屯村\n东阳村\n西郊村\n秦河屯村\n刘家屯村\n江城乡\n望周一村\n西郊屯村\n南郊屯村\n罗岗村\n西源村\n姜河屯村\n吴村\n小王店\n小虎村\n东赵家庄村\n东建北村\n东至草村\n汤村\n彭家庄\n罗村\n万丰镇村\n都庄村\n湘泾村\n东乐庄\n东安屯村\n子鸡村\n南固营村\n通义村\n方顺桥乡\n小鹰村\n秦王支村\n南昌屯村\n高升屯村\n魏村镇\n白团乡\n苏平屯村\n约图村\n高千港\n高于铺镇\n高介屯村\n秦汉屯村\n福兴屯村\n小山\n北调村\n杨溪屯村\n北白园村\n北泰昌屯村\n秦庄屯村\n高介屯村\n秦汉屯村\n魏城镇\n白石街道公园\n2公里\n附图1 工程处理流程图 2 公里",
+                                            "image_path": "7e907998f115eca1ef770fc433fb3ff49aaf0a04a279f407de4259d00d7782cf.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 0
+                        },
+                        {
+                            "bbox": [
+                                189,
+                                345,
+                                337,
+                                364
+                            ],
+                            "type": "image_caption",
+                            "angle": 0,
+                            "index": 1,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        190,
+                                        347,
+                                        337,
+                                        360
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                190,
+                                                347,
+                                                337,
+                                                360
+                                            ],
+                                            "type": "text",
+                                            "content": "附图1工程地理位置示意图",
+                                            "score": 0.998
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 0,
+                    "sub_type": "text_image"
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        111,
+                        376,
+                        433,
+                        620
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                111,
+                                376,
+                                433,
+                                620
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        111,
+                                        376,
+                                        433,
+                                        620
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                111,
+                                                376,
+                                                433,
+                                                620
+                                            ],
+                                            "type": "image",
+                                            "content": "南屯社区\n大同乡\n万顺镇粮食合作社\n方顺桥镇\n商贸公司\n企业集牛区\n满于西线\n东高所\n平岛镇力园\n978\n北\n10.10.12",
+                                            "image_path": "089ac6a664dd604b1c91b840a2db5aa43ee46ccb98a01d9ff9f02dc344b25464.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 2
+                        },
+                        {
+                            "bbox": [
+                                214,
+                                620,
+                                327,
+                                633
+                            ],
+                            "type": "image_caption",
+                            "angle": 0,
+                            "index": 3,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        215,
+                                        618,
+                                        327,
+                                        633
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                215,
+                                                618,
+                                                327,
+                                                633
+                                            ],
+                                            "type": "text",
+                                            "content": "附图2周边关系示意图",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 2,
+                    "sub_type": "text_image"
+                }
+            ],
+            "discarded_blocks": [],
+            "page_size": [
+                595,
+                841
+            ],
+            "page_idx": 5,
+            "para_blocks": [
+                {
+                    "type": "image",
+                    "bbox": [
+                        100,
+                        74,
+                        442,
+                        352
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                100,
+                                74,
+                                442,
+                                352
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        100,
+                                        74,
+                                        442,
+                                        352
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                100,
+                                                74,
+                                                442,
+                                                352
+                                            ],
+                                            "type": "image",
+                                            "content": "北\n才良村\n东郊屯村\n正隆村\n韩村\n五家屯村\n郑屯村\n梅潭屯村\n东移屯村\n东阳村\n西郊村\n秦河屯村\n刘家屯村\n江城乡\n望周一村\n西郊屯村\n南郊屯村\n罗岗村\n西源村\n姜河屯村\n吴村\n小王店\n小虎村\n东赵家庄村\n东建北村\n东至草村\n汤村\n彭家庄\n罗村\n万丰镇村\n都庄村\n湘泾村\n东乐庄\n东安屯村\n子鸡村\n南固营村\n通义村\n方顺桥乡\n小鹰村\n秦王支村\n南昌屯村\n高升屯村\n魏村镇\n白团乡\n苏平屯村\n约图村\n高千港\n高于铺镇\n高介屯村\n秦汉屯村\n福兴屯村\n小山\n北调村\n杨溪屯村\n北白园村\n北泰昌屯村\n秦庄屯村\n高介屯村\n秦汉屯村\n魏城镇\n白石街道公园\n2公里\n附图1 工程处理流程图 2 公里",
+                                            "image_path": "7e907998f115eca1ef770fc433fb3ff49aaf0a04a279f407de4259d00d7782cf.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 0
+                        },
+                        {
+                            "bbox": [
+                                189,
+                                345,
+                                337,
+                                364
+                            ],
+                            "type": "image_caption",
+                            "angle": 0,
+                            "index": 1,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        190,
+                                        347,
+                                        337,
+                                        360
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                190,
+                                                347,
+                                                337,
+                                                360
+                                            ],
+                                            "type": "text",
+                                            "content": "附图1工程地理位置示意图",
+                                            "score": 0.998
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 0,
+                    "sub_type": "text_image"
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        111,
+                        376,
+                        433,
+                        620
+                    ],
+                    "blocks": [
+                        {
+                            "bbox": [
+                                111,
+                                376,
+                                433,
+                                620
+                            ],
+                            "type": "image_body",
+                            "angle": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        111,
+                                        376,
+                                        433,
+                                        620
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                111,
+                                                376,
+                                                433,
+                                                620
+                                            ],
+                                            "type": "image",
+                                            "content": "南屯社区\n大同乡\n万顺镇粮食合作社\n方顺桥镇\n商贸公司\n企业集牛区\n满于西线\n东高所\n平岛镇力园\n978\n北\n10.10.12",
+                                            "image_path": "089ac6a664dd604b1c91b840a2db5aa43ee46ccb98a01d9ff9f02dc344b25464.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 2
+                        },
+                        {
+                            "bbox": [
+                                214,
+                                620,
+                                327,
+                                633
+                            ],
+                            "type": "image_caption",
+                            "angle": 0,
+                            "index": 3,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        215,
+                                        618,
+                                        327,
+                                        633
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                215,
+                                                618,
+                                                327,
+                                                633
+                                            ],
+                                            "type": "text",
+                                            "content": "附图2周边关系示意图",
+                                            "score": 1.0
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 2,
+                    "sub_type": "text_image"
+                }
+            ]
+        }
+    ],
+    "_backend": "hybrid",
+    "_ocr_enable": true,
+    "_vlm_ocr_enable": false,
+    "_version_name": "3.2.1"
+}

@@ -48,13 +48,30 @@ migration_reports/
 
 # Project specific local directories (Large files, user uploads, generative outputs)
 outputs/
-parsed_outputs/
 uploads/
 tender_references/
+
+# Large binary files, archives, and media (ignored globally)
+*.zip
+*.rar
+*.7z
+*.pdf
+*.docx
+*.doc
+*.xlsx
+*.xls
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.mp4
+*.mov
+*.sign
 
 # Logs
 *.log
 .antigravitycli/
+.playwright-cli/
 
 #skills
 .agents/
@@ -67,4 +84,5 @@ tender_references/
 
 # Backups and database exports
 backups/
+*.tar.gz
 

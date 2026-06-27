@@ -1,0 +1,1411 @@
+[
+    [
+        {
+            "type": "doc_title",
+            "bbox": [
+                0.304,
+                0.073,
+                0.703,
+                0.18
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.665,
+                0.218,
+                0.892,
+                0.234
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.46,
+                0.256,
+                0.565,
+                0.276
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.298,
+                0.293,
+                0.723,
+                0.316
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.327,
+                0.33,
+                0.7,
+                0.348
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.329,
+                0.354,
+                0.697,
+                0.372
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.33,
+                0.376,
+                0.697,
+                0.393
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.304,
+                0.397,
+                0.723,
+                0.415
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.429,
+                0.452,
+                0.596,
+                0.47
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.247,
+                0.489,
+                0.78,
+                0.507
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.4,
+                0.526,
+                0.627,
+                0.544
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.25,
+                0.592,
+                0.781,
+                0.629
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.141,
+                0.694,
+                0.731,
+                0.755
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>第一次监审</td><td>贴标处</td><td>第二次监审</td><td>贴标处</td><td>第三次监审</td><td>贴标处</td></tr></table>"
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.81,
+                0.7,
+                0.887,
+                0.755
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.139,
+                0.756,
+                0.71,
+                0.794
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.119,
+                0.8,
+                0.225,
+                0.867
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "image_caption",
+            "bbox": [
+                0.129,
+                0.867,
+                0.215,
+                0.88
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.254,
+                0.807,
+                0.41,
+                0.876
+            ],
+            "angle": 0,
+            "content": "MEMBER OF MULTILATERAL\nRECOGNITION ARRANGEMENT",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.428,
+                0.806,
+                0.558,
+                0.877
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.58,
+                0.817,
+                0.625,
+                0.826
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.58,
+                0.826,
+                0.624,
+                0.834
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.58,
+                0.834,
+                0.624,
+                0.843
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.58,
+                0.844,
+                0.705,
+                0.852
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.58,
+                0.853,
+                0.656,
+                0.862
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.715,
+                0.793,
+                0.886,
+                0.887
+            ],
+            "angle": 0,
+            "content": "Beijing Certification Center\n证书专用章\n北京认证中心\n证书专用章",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.152,
+                0.896,
+                0.395,
+                0.91
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.431,
+                0.896,
+                0.636,
+                0.91
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.67,
+                0.896,
+                0.874,
+                0.91
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.216,
+                0.912,
+                0.546,
+                0.925
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.58,
+                0.914,
+                0.684,
+                0.925
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.718,
+                0.913,
+                0.813,
+                0.924
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.775,
+                0.947,
+                0.95,
+                0.969
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.297,
+                0.067,
+                0.711,
+                0.133
+            ],
+            "text": "环境管理体系",
+            "score": 0.995
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.3,
+                0.117,
+                0.65,
+                0.191
+            ],
+            "text": "认证证书",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.665,
+                0.217,
+                0.894,
+                0.234
+            ],
+            "text": "证书号：17424E20980R0M",
+            "score": 0.995
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.4,
+                0.524,
+                0.628,
+                0.545
+            ],
+            "text": "该体系认证所覆盖的范围",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.153,
+                0.895,
+                0.397,
+                0.91
+            ],
+            "text": "初次获证日期：2024年10月21日",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.456,
+                0.252,
+                0.57,
+                0.28
+            ],
+            "text": "兹证明",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.295,
+                0.29,
+                0.726,
+                0.318
+            ],
+            "text": "河北泰昌电力器材科技有限公司",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.302,
+                0.395,
+                0.724,
+                0.416
+            ],
+            "text": "生产/经营地址：河北省保定市满城区陉阳驿村",
+            "score": 0.97
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.324,
+                0.327,
+                0.703,
+                0.35
+            ],
+            "text": "统一社会信用代码：91130607056539515C",
+            "score": 0.996
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.327,
+                0.352,
+                0.7,
+                0.373
+            ],
+            "text": "注册地址：河北省保定市满城区陉阳驿村",
+            "score": 0.981
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.327,
+                0.374,
+                0.7,
+                0.394
+            ],
+            "text": "办公地址：河北省保定市满城区陉阳驿村",
+            "score": 0.975
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.426,
+                0.45,
+                0.598,
+                0.472
+            ],
+            "text": "环境管理体系符合",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.246,
+                0.487,
+                0.781,
+                0.507
+            ],
+            "text": "GB/T24001-2016/IS014001:2015标准条款的要求",
+            "score": 0.99
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.25,
+                0.59,
+                0.782,
+                0.61
+            ],
+            "text": "低压配电箱的生产，电力金具、铁附件、电缆保护管的销售",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.413,
+                0.61,
+                0.623,
+                0.629
+            ],
+            "text": "所涉及的环境管理活动",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.14,
+                0.755,
+                0.71,
+                0.769
+            ],
+            "text": "证书有效期内，获证组织须每年至少接受一次监督审核并加贴合格标志，证书方为有效。",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.14,
+                0.767,
+                0.656,
+                0.783
+            ],
+            "text": "本证书信息可在国家认证认可监督管理委员会官方网站：www.cnca.gov.cn查询",
+            "score": 0.984
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.141,
+                0.781,
+                0.403,
+                0.794
+            ],
+            "text": "证书有效性以右侧二维码扫描内容为准。",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.127,
+                0.865,
+                0.218,
+                0.882
+            ],
+            "text": "华信创认证",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.579,
+                0.816,
+                0.627,
+                0.827
+            ],
+            "text": "中国认可",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.579,
+                0.824,
+                0.626,
+                0.836
+            ],
+            "text": "国际互认",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.579,
+                0.833,
+                0.627,
+                0.845
+            ],
+            "text": "管理体系",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.579,
+                0.843,
+                0.706,
+                0.853
+            ],
+            "text": "MANAGEMENTSYSTEM",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.578,
+                0.911,
+                0.686,
+                0.927
+            ],
+            "text": "www.hxccc.org",
+            "score": 0.993
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.716,
+                0.911,
+                0.814,
+                0.925
+            ],
+            "text": "010-57146599",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.579,
+                0.852,
+                0.657,
+                0.863
+            ],
+            "text": "CNASC174-M",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.431,
+                0.895,
+                0.636,
+                0.91
+            ],
+            "text": "签发日期：2024年10月21日",
+            "score": 0.998
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.669,
+                0.894,
+                0.875,
+                0.911
+            ],
+            "text": "有效日期：2027年10月20日",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.77,
+                0.944,
+                0.952,
+                0.97
+            ],
+            "text": "No.0011169",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.217,
+                0.912,
+                0.547,
+                0.925
+            ],
+            "text": "北京市昌平区科技园区振兴路28号2号楼228室",
+            "score": 0.999
+        }
+    ],
+    [
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.267,
+                0.07,
+                0.732,
+                0.177
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.628,
+                0.22,
+                0.926,
+                0.235
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "doc_title",
+            "bbox": [
+                0.435,
+                0.246,
+                0.59,
+                0.267
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "paragraph_title",
+            "bbox": [
+                0.135,
+                0.281,
+                0.89,
+                0.302
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.312,
+                0.322,
+                0.713,
+                0.339
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.242,
+                0.343,
+                0.782,
+                0.378
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.266,
+                0.38,
+                0.758,
+                0.414
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.194,
+                0.415,
+                0.83,
+                0.45
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.183,
+                0.472,
+                0.842,
+                0.531
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.32,
+                0.547,
+                0.706,
+                0.564
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.32,
+                0.589,
+                0.705,
+                0.606
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.18,
+                0.625,
+                0.842,
+                0.679
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "table",
+            "bbox": [
+                0.139,
+                0.694,
+                0.728,
+                0.755
+            ],
+            "angle": 0,
+            "content": "<table><tr><td>First S.A.</td><td>Labelling</td><td>Second S.A.</td><td>Labelling</td><td>Third S.A.</td><td>Labelling</td></tr></table>"
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.816,
+                0.713,
+                0.893,
+                0.768
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.136,
+                0.757,
+                0.728,
+                0.798
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.111,
+                0.801,
+                0.216,
+                0.868
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "image_caption",
+            "bbox": [
+                0.123,
+                0.868,
+                0.208,
+                0.882
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.247,
+                0.808,
+                0.404,
+                0.875
+            ],
+            "angle": 0,
+            "content": "MEMBER OF MULTILATERAL\nIAF\nRECOGNITION ARRANGEMENT",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.422,
+                0.807,
+                0.551,
+                0.877
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.573,
+                0.819,
+                0.618,
+                0.828
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.573,
+                0.828,
+                0.617,
+                0.837
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.573,
+                0.837,
+                0.617,
+                0.846
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.573,
+                0.846,
+                0.697,
+                0.855
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "text",
+            "bbox": [
+                0.573,
+                0.855,
+                0.648,
+                0.864
+            ],
+            "angle": 0,
+            "content": null,
+            "merge_prev": false
+        },
+        {
+            "type": "image",
+            "bbox": [
+                0.715,
+                0.794,
+                0.886,
+                0.888
+            ],
+            "angle": 0,
+            "content": "C:\\Bottling\\Certification Center (Co.\\Ltd.)\n北京市(北京)认证中心有限公司\n证书专用章",
+            "sub_type": "text_image"
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.193,
+                0.907,
+                0.834,
+                0.921
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.14,
+                0.925,
+                0.888,
+                0.939
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "footer",
+            "bbox": [
+                0.771,
+                0.947,
+                0.95,
+                0.969
+            ],
+            "angle": 0,
+            "content": null
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.309,
+                0.321,
+                0.717,
+                0.34
+            ],
+            "text": "Organization Code:91130607056539515C",
+            "score": 0.977
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.317,
+                0.545,
+                0.709,
+                0.564
+            ],
+            "text": "GB/T24001-2016/ISO 14001:2015",
+            "score": 0.974
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.317,
+                0.587,
+                0.708,
+                0.606
+            ],
+            "text": "Scope of this management Certification",
+            "score": 0.986
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.434,
+                0.244,
+                0.592,
+                0.27
+            ],
+            "text": "Awarded to",
+            "score": 0.992
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.239,
+                0.341,
+                0.785,
+                0.364
+            ],
+            "text": "Registered Add.:Xingyangyi Village,Mancheng District,",
+            "score": 0.967
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.368,
+                0.359,
+                0.659,
+                0.38
+            ],
+            "text": "Baoding City,Hebei Province",
+            "score": 0.936
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.121,
+                0.864,
+                0.211,
+                0.884
+            ],
+            "text": "华信创认证",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.573,
+                0.818,
+                0.62,
+                0.83
+            ],
+            "text": "中国认可",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.572,
+                0.827,
+                0.619,
+                0.838
+            ],
+            "text": "国际互认",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.573,
+                0.836,
+                0.62,
+                0.847
+            ],
+            "text": "管理体系",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.572,
+                0.845,
+                0.699,
+                0.856
+            ],
+            "text": "MANAGEMENTSYSTEM",
+            "score": 0.997
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.572,
+                0.853,
+                0.651,
+                0.865
+            ],
+            "text": "CNASC174-M",
+            "score": 0.999
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.767,
+                0.944,
+                0.953,
+                0.971
+            ],
+            "text": "No.0011169",
+            "score": 1.0
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.312,
+                0.068,
+                0.695,
+                0.106
+            ],
+            "text": "ENVIRONMENTAL",
+            "score": 0.991
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.267,
+                0.106,
+                0.734,
+                0.144
+            ],
+            "text": "MANAGEMENT SYSTEM",
+            "score": 0.978
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.27,
+                0.131,
+                0.725,
+                0.188
+            ],
+            "text": "GHCEECERTIFICATEEUING",
+            "score": 0.679
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.628,
+                0.219,
+                0.927,
+                0.235
+            ],
+            "text": "CertificateNo.：17424E20980R0M",
+            "score": 0.982
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.131,
+                0.279,
+                0.891,
+                0.303
+            ],
+            "text": "Hebei Taichang Electric Power Equipment Technology Co.,Ltd",
+            "score": 0.972
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.265,
+                0.377,
+                0.76,
+                0.398
+            ],
+            "text": "Office Add.: Xingyangyi Village,Mancheng District,",
+            "score": 0.969
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.369,
+                0.395,
+                0.661,
+                0.415
+            ],
+            "text": "Baoding City，Hebei Province",
+            "score": 0.951
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.19,
+                0.411,
+                0.834,
+                0.434
+            ],
+            "text": "Production/Business Add.:Xingyangyi Village,Mancheng District,",
+            "score": 0.965
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.369,
+                0.43,
+                0.658,
+                0.452
+            ],
+            "text": "Baoding City,Hebei Province",
+            "score": 0.956
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.254,
+                0.469,
+                0.772,
+                0.489
+            ],
+            "text": "The Environmental Management System of the above",
+            "score": 0.992
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.181,
+                0.491,
+                0.844,
+                0.512
+            ],
+            "text": "organization has been assessed and found to be in accordance with",
+            "score": 0.983
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.347,
+                0.513,
+                0.677,
+                0.533
+            ],
+            "text": "the requirements of the standard:",
+            "score": 0.97
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.178,
+                0.621,
+                0.846,
+                0.645
+            ],
+            "text": "Production of low-voltage distribution boxes,sales of power fittings,",
+            "score": 0.974
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.301,
+                0.642,
+                0.735,
+                0.662
+            ],
+            "text": "ironaccessories,and cable protection pipes",
+            "score": 0.98
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.256,
+                0.66,
+                0.77,
+                0.68
+            ],
+            "text": "involved in the environmental management activities",
+            "score": 0.958
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.136,
+                0.756,
+                0.729,
+                0.768
+            ],
+            "text": "Thecertified organizationmustacceptat leastone surveillanceauditannuallyandaqualifiedmark shallbeattached",
+            "score": 0.981
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.136,
+                0.767,
+                0.651,
+                0.778
+            ],
+            "text": "ontothecertificate，withinvalidityperiod of thecertificate，thenthecertificatecanbemaintained valid.",
+            "score": 0.976
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.135,
+                0.777,
+                0.569,
+                0.789
+            ],
+            "text": "Formoredetailsof thiscertificate,please login CNCA'swebsite:www.cnca.gov.cn.",
+            "score": 0.963
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.135,
+                0.786,
+                0.648,
+                0.799
+            ],
+            "text": "Forthevalidityof thecertificate,pleasescantheQRcodesontherightrideforaccurateinformation.",
+            "score": 0.988
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.192,
+                0.904,
+                0.835,
+                0.921
+            ],
+            "text": "Date ofOriginal lssued:21Oct.2024 Valid from:21 Oct.2024 Valid until:20 Oct.2027",
+            "score": 0.952
+        },
+        {
+            "type": "ocr_text",
+            "bbox": [
+                0.139,
+                0.921,
+                0.891,
+                0.941
+            ],
+            "text": "Room228,ilding2，No.28ZheningRoad,iencePark,ChangpingDistrictBejing0-574599",
+            "score": 0.82
+        }
+    ]
+]

@@ -1,0 +1,609 @@
+{
+  "run_id": "run_20260619_p1c13_template_format_audit",
+  "generated_at": "2026-06-19T23:12:48",
+  "reference_business": {
+    "path": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/商务投标文件-中标，按投标人制作.pdf",
+    "page_count": 362,
+    "page_size_pt": [
+      595.32,
+      841.92
+    ],
+    "cover_font_size_counts": [
+      [
+        14.04,
+        72
+      ],
+      [
+        18.0,
+        4
+      ],
+      [
+        36.0,
+        2
+      ],
+      [
+        9.0,
+        1
+      ]
+    ],
+    "sample_pages": [
+      {
+        "page": 1,
+        "font_size_counts": [
+          [
+            14.04,
+            72
+          ],
+          [
+            18.0,
+            4
+          ],
+          [
+            36.0,
+            2
+          ]
+        ],
+        "font_counts": [
+          [
+            "/ABCDEE+宋体",
+            78
+          ],
+          [
+            "/Times New Roman",
+            1
+          ]
+        ],
+        "sample_text": [
+          "1",
+          "国网辽宁电力",
+          "2025",
+          "年第三次物资协议",
+          "库存招标采购",
+          "商务投标",
+          "文件",
+          "招标编号：",
+          "2225AC",
+          "分标",
+          "编号",
+          "："
+        ]
+      },
+      {
+        "page": 2,
+        "font_size_counts": [
+          [
+            10.56,
+            289
+          ]
+        ],
+        "font_counts": [
+          [
+            "/Times New Roman",
+            195
+          ],
+          [
+            "/ABCDEE+宋体",
+            79
+          ],
+          [
+            "/Times New Roman,Bold",
+            15
+          ],
+          [
+            "/ABCDEE+黑体",
+            1
+          ]
+        ],
+        "sample_text": [
+          "2",
+          "（一）商务偏差表",
+          "................................",
+          "................................",
+          "................................",
+          "........................",
+          "5",
+          "（二）投标保证保险",
+          "................................",
+          "................................",
+          "................................",
+          "...................."
+        ]
+      },
+      {
+        "page": 5,
+        "font_size_counts": [
+          [
+            10.56,
+            108
+          ],
+          [
+            14.04,
+            6
+          ]
+        ],
+        "font_counts": [
+          [
+            "/ABCDEE+宋体",
+            114
+          ],
+          [
+            "/Times New Roman",
+            1
+          ]
+        ],
+        "sample_text": [
+          "5",
+          "（",
+          "一",
+          "）",
+          "商务偏差表",
+          "商务偏差表",
+          "项目名称",
+          "：",
+          "国网辽宁电力",
+          "2025",
+          "年第三次物资协议库存招标采购",
+          "招标"
+        ]
+      },
+      {
+        "page": 6,
+        "font_size_counts": [
+          [
+            10.56,
+            47
+          ],
+          [
+            14.04,
+            1
+          ]
+        ],
+        "font_counts": [
+          [
+            "/ABCDEE+宋体",
+            48
+          ],
+          [
+            "/Times New Roman",
+            1
+          ]
+        ],
+        "sample_text": [
+          "6",
+          "商务偏差表",
+          "项目名称：",
+          "国网辽宁电力",
+          "2025",
+          "年第三次物资协议库存招标采购",
+          "招标",
+          "编号：",
+          "2225AC",
+          "分标名称：",
+          "电缆保护管",
+          "NHAP"
+        ]
+      },
+      {
+        "page": 11,
+        "font_size_counts": [],
+        "font_counts": [
+          [
+            "/Times New Roman",
+            1
+          ]
+        ],
+        "sample_text": [
+          "11"
+        ]
+      },
+      {
+        "page": 51,
+        "font_size_counts": [],
+        "font_counts": [
+          [
+            "/Times New Roman",
+            1
+          ]
+        ],
+        "sample_text": [
+          "51"
+        ]
+      },
+      {
+        "page": 101,
+        "font_size_counts": [],
+        "font_counts": [
+          [
+            "/Times New Roman",
+            1
+          ]
+        ],
+        "sample_text": [
+          "101"
+        ]
+      }
+    ],
+    "body_font_size_median": 10.56,
+    "body_font_counts": [
+      [
+        "/ABCDEE+宋体",
+        234
+      ],
+      [
+        "/Times New Roman",
+        194
+      ],
+      [
+        "/Times New Roman,Bold",
+        15
+      ],
+      [
+        "/ABCDEE+黑体",
+        1
+      ]
+    ],
+    "cover_has_logo": false
+  },
+  "reference_technical": {
+    "path": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/技术补充文件_电缆保护管CPVC.pdf",
+    "page_count": 468,
+    "page_size_pt": [
+      595.32,
+      841.92
+    ],
+    "cover_font_size_counts": [
+      [
+        14.04,
+        37
+      ],
+      [
+        18.0,
+        4
+      ],
+      [
+        36.0,
+        2
+      ],
+      [
+        9.0,
+        1
+      ]
+    ],
+    "sample_pages": [
+      {
+        "page": 1,
+        "font_size_counts": [
+          [
+            14.04,
+            37
+          ],
+          [
+            18.0,
+            4
+          ],
+          [
+            36.0,
+            2
+          ]
+        ],
+        "font_counts": [
+          [
+            "/ABCDEE+宋体",
+            43
+          ],
+          [
+            "/Times New Roman",
+            1
+          ]
+        ],
+        "sample_text": [
+          "1",
+          "国网辽宁电力",
+          "2025",
+          "年第三次物资协议",
+          "库存招标采购",
+          "技术补充",
+          "文件",
+          "招标编号：",
+          "2225AC",
+          "分标",
+          "编号",
+          "："
+        ]
+      },
+      {
+        "page": 2,
+        "font_size_counts": [
+          [
+            10.56,
+            302
+          ]
+        ],
+        "font_counts": [
+          [
+            "/Times New Roman",
+            196
+          ],
+          [
+            "/ABCDEE+宋体",
+            97
+          ],
+          [
+            "/Times New Roman,Bold",
+            10
+          ]
+        ],
+        "sample_text": [
+          "2",
+          "目录",
+          "（一）技术偏差表",
+          "................................",
+          "................................",
+          "................................",
+          "..........................",
+          "5",
+          "（二）专项投标文件",
+          "................................",
+          "................................",
+          "................................"
+        ]
+      },
+      {
+        "page": 5,
+        "font_size_counts": [
+          [
+            10.56,
+            52
+          ],
+          [
+            14.04,
+            2
+          ]
+        ],
+        "font_counts": [
+          [
+            "/ABCDEE+宋体",
+            54
+          ],
+          [
+            "/Times New Roman",
+            1
+          ]
+        ],
+        "sample_text": [
+          "5",
+          "（一）",
+          "技术偏差表",
+          "项目名称：",
+          "国网辽宁电力",
+          "2025",
+          "年第三次物资协议库存招标采购",
+          "招标",
+          "编号：",
+          "2225AC",
+          "分标名称：",
+          "电缆保护管"
+        ]
+      },
+      {
+        "page": 6,
+        "font_size_counts": [
+          [
+            14.04,
+            6
+          ]
+        ],
+        "font_counts": [
+          [
+            "/ABCDEE+宋体",
+            6
+          ],
+          [
+            "/Times New Roman",
+            1
+          ]
+        ],
+        "sample_text": [
+          "6",
+          "（二）专项投标文件",
+          "1",
+          ".",
+          "业绩文件",
+          "1.1.  2.0",
+          "平台业绩汇总查询截图"
+        ]
+      },
+      {
+        "page": 11,
+        "font_size_counts": [],
+        "font_counts": [
+          [
+            "/Times New Roman",
+            1
+          ]
+        ],
+        "sample_text": [
+          "11"
+        ]
+      },
+      {
+        "page": 101,
+        "font_size_counts": [
+          [
+            10.56,
+            1
+          ]
+        ],
+        "font_counts": [
+          [
+            "/Times New Roman",
+            1
+          ],
+          [
+            "/ABCDEE+宋体",
+            1
+          ]
+        ],
+        "sample_text": [
+          "101",
+          "S"
+        ]
+      }
+    ],
+    "body_font_size_median": 10.56,
+    "body_font_counts": [
+      [
+        "/Times New Roman",
+        195
+      ],
+      [
+        "/ABCDEE+宋体",
+        150
+      ],
+      [
+        "/Times New Roman,Bold",
+        10
+      ]
+    ],
+    "cover_has_logo": false
+  },
+  "generated_docx": {
+    "path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-图文.docx",
+    "paragraph_count": 4930,
+    "non_empty_paragraph_count": 4899,
+    "cover_text": [
+      "国网辽宁电力2025年第三次物资协议",
+      "库存招标采购",
+      "投标文件",
+      "招标编号：2225AC",
+      "分标编号：客户最终确认后填写（依据招标文件填写）",
+      "包号：包1",
+      "包名称：电缆保护管CPVC、电缆保护管MPP（需按目标包确认）",
+      "投标人：河北泰昌电力器材科技有限公司",
+      "法定代表人或其委托代理人：        （签名）",
+      "2026年06月19日",
+      "目  录",
+      "1. 投标函及法定格式文件\t5"
+    ],
+    "page_size_cm": [
+      21.0,
+      29.7
+    ],
+    "margins_cm": {
+      "top": 2.0,
+      "bottom": 2.0,
+      "left": 3.18,
+      "right": 3.18
+    },
+    "section_start": "NEW_PAGE (2)",
+    "body_font_size_median": 10.5,
+    "body_font_counts": [
+      [
+        "SimSun",
+        8392
+      ],
+      [
+        "Arial Unicode MS",
+        5
+      ]
+    ],
+    "heading_font_size_medians": {
+      "Heading 1": 14.0,
+      "Heading 2": 14.0,
+      "Heading 3": 12.0,
+      "Heading 4": 10.5
+    },
+    "toc_font_size_median": 10.5,
+    "table_count": 166,
+    "first_table_font_size_median": 10.5
+  },
+  "comparison": [
+    {
+      "item": "页面尺寸",
+      "reference": "A4 595.32x841.92 pt",
+      "generated": "21.0 x 29.7 cm",
+      "status": "PASS",
+      "note": "参考稿为 A4；当前 DOCX 为 A4。"
+    },
+    {
+      "item": "页边距",
+      "reference": "左/右约 3.18cm；上下约 2.0cm 作为当前模板基线",
+      "generated": {
+        "top": 2.0,
+        "bottom": 2.0,
+        "left": 3.18,
+        "right": 3.18
+      },
+      "status": "PASS",
+      "note": "参考 PDF 无直接 margin 元数据，按当前已验收国网/泰昌模板保留。"
+    },
+    {
+      "item": "封面 Logo",
+      "reference": "参考稿首页无 Logo",
+      "generated": "封面默认不插入 Logo",
+      "status": "PASS",
+      "note": "页眉仍保留泰昌 Logo；封面 Logo 需显式开启。"
+    },
+    {
+      "item": "封面主标题字号",
+      "reference": "36pt",
+      "generated": "36pt",
+      "status": "PASS",
+      "note": "参考稿大标题“商务投标文件”为 36pt。"
+    },
+    {
+      "item": "封面字段字号",
+      "reference": "14.04pt",
+      "generated": "14.04pt",
+      "status": "PASS",
+      "note": "招标编号、分标编号、包号等字段按参考稿字号。"
+    },
+    {
+      "item": "目录字号",
+      "reference": "10.56pt",
+      "generated": 10.5,
+      "status": "PASS",
+      "note": "参考稿目录条目为约 10.56pt；当前目录标题和条目收敛到 10.5pt。"
+    },
+    {
+      "item": "正文主字号",
+      "reference": 10.56,
+      "generated": 10.5,
+      "status": "PASS",
+      "note": "参考稿正文抽样约 10.56pt，当前 DOCX 约 10.5pt。"
+    },
+    {
+      "item": "正文字体",
+      "reference": "宋体",
+      "generated": [
+        [
+          "SimSun",
+          8392
+        ],
+        [
+          "Arial Unicode MS",
+          5
+        ]
+      ],
+      "status": "PASS",
+      "note": "DOCX 使用 SimSun，PDF 参考稿字体显示为宋体子集。"
+    },
+    {
+      "item": "一级/二级标题字号",
+      "reference": "14.04pt 左右",
+      "generated": {
+        "Heading 1": 14.0,
+        "Heading 2": 14.0
+      },
+      "status": "PASS",
+      "note": "参考稿正文标题抽样约 14.04pt；当前 Heading 1/2 已收敛到 14pt。"
+    },
+    {
+      "item": "表格字号",
+      "reference": "约 10.56pt 或随扫描页保留",
+      "generated": 10.5,
+      "status": "PASS",
+      "note": "当前 Word 表格字体 10.5pt，边框/表头/重复表头由 DOCX 验收脚本覆盖。"
+    }
+  ]
+}

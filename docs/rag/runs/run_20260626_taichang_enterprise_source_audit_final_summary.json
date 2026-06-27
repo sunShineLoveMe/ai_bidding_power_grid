@@ -1,0 +1,212 @@
+[
+  {
+    "key": "cert",
+    "query": "泰昌有哪些资质证书？",
+    "contexts": 3,
+    "assets": 6,
+    "sources": [
+      {
+        "source": "泰昌1.质量管理体系认证证书第1页",
+        "evidence_type": "certification",
+        "category_label": "资质证书",
+        "retrieval_source": "knowledge_asset"
+      },
+      {
+        "source": "泰昌3.职业健康安全管理体系认证证书第1页",
+        "evidence_type": "certification",
+        "category_label": "资质证书",
+        "retrieval_source": "knowledge_asset"
+      },
+      {
+        "source": "泰昌2.环境管理体系认证证书第1页",
+        "evidence_type": "certification",
+        "category_label": "资质证书",
+        "retrieval_source": "knowledge_asset"
+      }
+    ],
+    "bad_terms": [],
+    "done": true
+  },
+  {
+    "key": "enterprise_proof",
+    "query": "泰昌有哪些企业证明材料？",
+    "contexts": 5,
+    "assets": 8,
+    "sources": [
+      {
+        "source": "环境管理体系认证证书",
+        "evidence_type": "certification",
+        "category_label": "资质证书",
+        "retrieval_source": "knowledge_asset"
+      },
+      {
+        "source": "质量管理体系认证证书",
+        "evidence_type": "certification",
+        "category_label": "资质证书",
+        "retrieval_source": "knowledge_asset"
+      },
+      {
+        "source": "职业健康安全管理体系认证证书",
+        "evidence_type": "certification",
+        "category_label": "资质证书",
+        "retrieval_source": "knowledge_asset"
+      },
+      {
+        "source": "泰昌营业执照副本原图",
+        "evidence_type": "business_license",
+        "category_label": "基础证照",
+        "retrieval_source": "knowledge_asset"
+      },
+      {
+        "source": "泰昌社保证明（第1页）",
+        "evidence_type": "personnel_certificate",
+        "category_label": "人员证书",
+        "retrieval_source": "knowledge_asset"
+      }
+    ],
+    "bad_terms": [],
+    "done": true
+  },
+  {
+    "key": "green",
+    "query": "泰昌有哪些绿色低碳资料？",
+    "contexts": 4,
+    "assets": 8,
+    "sources": [
+      {
+        "source": "泰昌ESG环境社会公司治理报告第7页",
+        "evidence_type": "green_low_carbon",
+        "category_label": "绿色低碳资料",
+        "retrieval_source": "knowledge_asset"
+      },
+      {
+        "source": "泰昌绿色供应链认证证书第1页",
+        "evidence_type": "green_low_carbon",
+        "category_label": "绿色低碳资料",
+        "retrieval_source": "knowledge_asset"
+      },
+      {
+        "source": "碳足迹报告",
+        "evidence_type": "green_low_carbon",
+        "category_label": "绿色低碳资料",
+        "retrieval_source": null
+      },
+      {
+        "source": "绿色发展规划报告",
+        "evidence_type": "green_low_carbon",
+        "category_label": "绿色低碳资料",
+        "retrieval_source": null
+      }
+    ],
+    "bad_terms": [],
+    "done": true
+  },
+  {
+    "key": "personnel",
+    "query": "泰昌有哪些人员证书或社保证明？",
+    "contexts": 3,
+    "assets": 4,
+    "sources": [
+      {
+        "source": "泰昌社保证明（第1页）",
+        "evidence_type": "personnel_certificate",
+        "category_label": "人员证书",
+        "retrieval_source": "knowledge_asset"
+      },
+      {
+        "source": "泰昌公司人员花名册（第2页）",
+        "evidence_type": "personnel_certificate",
+        "category_label": "人员证书",
+        "retrieval_source": "knowledge_asset"
+      },
+      {
+        "source": "陈仙瑞人员证书（第1页）",
+        "evidence_type": "personnel_certificate",
+        "category_label": "人员证书",
+        "retrieval_source": "knowledge_asset"
+      }
+    ],
+    "bad_terms": [],
+    "done": true
+  },
+  {
+    "key": "inspection",
+    "query": "泰昌 CPVC 电缆保护管有哪些检验报告？",
+    "contexts": 5,
+    "assets": 6,
+    "sources": [
+      {
+        "source": "CPVC电缆保护管检验报告内径250.pdf",
+        "evidence_type": "inspection_report",
+        "category_label": "泰昌产品结构化参数",
+        "retrieval_source": "structured_product_parameter_json"
+      },
+      {
+        "source": "泰昌CPVC电缆保护管检验报告内径250_页面_4原图",
+        "evidence_type": "inspection_report",
+        "category_label": "检验报告",
+        "retrieval_source": "knowledge_asset"
+      },
+      {
+        "source": "泰昌CPVC电缆保护管检验报告内径250_页面_3原图",
+        "evidence_type": "inspection_report",
+        "category_label": "检验报告",
+        "retrieval_source": "knowledge_asset"
+      },
+      {
+        "source": "泰昌CPVC电缆保护管检验报告内径250_页面_2原图",
+        "evidence_type": "inspection_report",
+        "category_label": "检验报告",
+        "retrieval_source": "knowledge_asset"
+      },
+      {
+        "source": "泰昌CPVC电缆保护管检验报告内径250第4页",
+        "evidence_type": "inspection_report",
+        "category_label": "检验报告",
+        "retrieval_source": "knowledge_asset"
+      }
+    ],
+    "bad_terms": [],
+    "done": true
+  },
+  {
+    "key": "production",
+    "query": "泰昌有哪些生产制造能力资料？",
+    "contexts": 5,
+    "assets": 4,
+    "sources": [
+      {
+        "source": "厂房图片",
+        "evidence_type": "production_capacity",
+        "category_label": "生产制造能力",
+        "retrieval_source": "knowledge_asset"
+      },
+      {
+        "source": "泰昌d3e8f52a-a21b-4ecb-89b4-7ccccd80134e原图",
+        "evidence_type": "production_capacity",
+        "category_label": "生产制造能力",
+        "retrieval_source": "knowledge_asset"
+      },
+      {
+        "source": "泰昌aa787a1c-d48d-46f6-bcbd-4806003b8428原图",
+        "evidence_type": "production_capacity",
+        "category_label": "生产制造能力",
+        "retrieval_source": "knowledge_asset"
+      },
+      {
+        "source": "MPP生产线",
+        "evidence_type": "production_capacity",
+        "category_label": "生产制造能力",
+        "retrieval_source": "knowledge_asset"
+      },
+      {
+        "source": "泰昌生产制造能力资料",
+        "evidence_type": "production_capacity",
+        "category_label": "生产制造能力",
+        "retrieval_source": null
+      }
+    ],
+    "bad_terms": [],
+    "done": true
+  }
+]

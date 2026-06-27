@@ -1,0 +1,4904 @@
+{
+  "dry_run": true,
+  "assets_scanned": 597,
+  "assets_updated": 544,
+  "personnel_assets_moved": 0,
+  "updates": [
+    {
+      "id": "bd4adb9b-54a9-4adf-80c3-d9afc8cdadd6",
+      "old_title": "泰昌CPVC电缆保护管检验报告内径250第1页",
+      "new_title": "泰昌CPVC电缆保护管检验报告内径250（第1页）",
+      "old_category": "检验报告",
+      "new_category": "检验报告",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "fd4b37f3-e341-4d8b-a753-a97590aa6846",
+      "old_title": "泰昌CPVC电缆保护管检验报告内径250第2页",
+      "new_title": "泰昌CPVC电缆保护管检验报告内径250（第2页）",
+      "old_category": "检验报告",
+      "new_category": "检验报告",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "f51ebb4b-0931-4e5d-ad75-53a222edbc99",
+      "old_title": "泰昌CPVC电缆保护管检验报告内径250第3页",
+      "new_title": "泰昌CPVC电缆保护管检验报告内径250（第3页）",
+      "old_category": "检验报告",
+      "new_category": "检验报告",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "c2ac0ca2-69b1-4dcc-aac3-329b5888534e",
+      "old_title": "泰昌CPVC电缆保护管检验报告内径250第4页",
+      "new_title": "泰昌CPVC电缆保护管检验报告内径250（第4页）",
+      "old_category": "检验报告",
+      "new_category": "检验报告",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "40ea0a3c-e4e2-498c-a4be-974ab813ee8e",
+      "old_title": "泰昌CPVC电缆保护管检验报告内径250第5页",
+      "new_title": "泰昌CPVC电缆保护管检验报告内径250（第5页）",
+      "old_category": "检验报告",
+      "new_category": "检验报告",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "b2f2559f-d392-4797-a36c-2e8e829688f0",
+      "old_title": "泰昌MPP电缆保护管检验报告内径250第1页",
+      "new_title": "泰昌MPP电缆保护管检验报告内径250（第1页）",
+      "old_category": "检验报告",
+      "new_category": "检验报告",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "4d76e62b-f08c-4380-b85b-ac610652f6a3",
+      "old_title": "泰昌MPP电缆保护管检验报告内径250第2页",
+      "new_title": "泰昌MPP电缆保护管检验报告内径250（第2页）",
+      "old_category": "检验报告",
+      "new_category": "检验报告",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "d709174c-e056-4fae-aafb-9866935b763d",
+      "old_title": "泰昌MPP电缆保护管检验报告内径250第3页",
+      "new_title": "泰昌MPP电缆保护管检验报告内径250（第3页）",
+      "old_category": "检验报告",
+      "new_category": "检验报告",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "9875a5ac-17ca-46ea-b110-fbf2374ec836",
+      "old_title": "泰昌MPP电缆保护管检验报告内径250第4页",
+      "new_title": "泰昌MPP电缆保护管检验报告内径250（第4页）",
+      "old_category": "检验报告",
+      "new_category": "检验报告",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "f4f3d2de-1bfd-41af-9e48-31dcdcdacdfd",
+      "old_title": "泰昌MPP电缆保护管检验报告内径250第5页",
+      "new_title": "泰昌MPP电缆保护管检验报告内径250（第5页）",
+      "old_category": "检验报告",
+      "new_category": "检验报告",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "e82aabed-6dd3-4520-83fd-a797196a1489",
+      "old_title": "泰昌3.MPP生产线_页面_5原图",
+      "new_title": "MPP生产线_页面_5原图",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "c4713ddc-517a-4aae-b009-6be16c64e47f",
+      "old_title": "泰昌3.MPP生产线_页面_6原图",
+      "new_title": "MPP生产线_页面_6原图",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "f0d8a934-f195-49f9-94ac-5c7ca02f93df",
+      "old_title": "泰昌3.MPP生产线_页面_7原图",
+      "new_title": "MPP生产线_页面_7原图",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "c51da46b-7aa8-4284-9c97-7d4ef175c138",
+      "old_title": "泰昌3.MPP生产线_页面_8原图",
+      "new_title": "MPP生产线_页面_8原图",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "d302c298-1c3f-4b5f-ac8f-a3274f73305a",
+      "old_title": "泰昌1.土地租赁协议第1页",
+      "new_title": "土地租赁协议（第1页）",
+      "old_category": "企业证明材料",
+      "new_category": "企业证明材料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "3a367774-f20c-4d4d-8af9-c68330f9771a",
+      "old_title": "泰昌1.土地租赁协议第2页",
+      "new_title": "土地租赁协议（第2页）",
+      "old_category": "企业证明材料",
+      "new_category": "企业证明材料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "55ffc7c8-d5cc-4d06-87e4-2d10f4bd5fde",
+      "old_title": "泰昌1.土地租赁协议第3页",
+      "new_title": "土地租赁协议（第3页）",
+      "old_category": "企业证明材料",
+      "new_category": "企业证明材料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "95f69076-9985-4c97-ac3d-92221c495e1d",
+      "old_title": "泰昌1.土地租赁协议第4页",
+      "new_title": "土地租赁协议（第4页）",
+      "old_category": "企业证明材料",
+      "new_category": "企业证明材料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "0027af0a-5d83-4d57-bb82-aba74ff227ba",
+      "old_title": "泰昌2.土地使用证明第1页",
+      "new_title": "土地使用证明（第1页）",
+      "old_category": "企业证明材料",
+      "new_category": "企业证明材料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "50244478-9c95-4ddc-9b1f-c3172068b421",
+      "old_title": "泰昌2023年审计报告_页面_04原图",
+      "new_title": "年审计报告_页面_04原图",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "62b16b89-d960-456e-a373-beee85b5e367",
+      "old_title": "泰昌2023年审计报告_页面_05原图",
+      "new_title": "年审计报告_页面_05原图",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "f1282d76-85a9-44ea-a73f-f23957277785",
+      "old_title": "泰昌2023年审计报告_页面_06原图",
+      "new_title": "年审计报告_页面_06原图",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "98d970a8-ea30-4d21-a910-79602499247c",
+      "old_title": "泰昌2024年审计报告_页面_06原图",
+      "new_title": "年审计报告_页面_06原图",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "953ec5cf-5259-4c77-af0f-8f00d6f73017",
+      "old_title": "泰昌2024年审计报告_页面_07原图",
+      "new_title": "年审计报告_页面_07原图",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "b2b3d468-1f59-421e-9c69-e01954984841",
+      "old_title": "泰昌2024年审计报告_页面_08原图",
+      "new_title": "年审计报告_页面_08原图",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "d623c1ae-4919-42ac-a3b3-939b6535239a",
+      "old_title": "泰昌2025年审计报告_页面_04原图",
+      "new_title": "年审计报告_页面_04原图",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "de3a1f21-92db-47fd-9733-f00476262388",
+      "old_title": "泰昌2025年审计报告_页面_05原图",
+      "new_title": "年审计报告_页面_05原图",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "dbdf76ea-8923-40d2-a05d-12f51690933a",
+      "old_title": "泰昌2025年审计报告_页面_06原图",
+      "new_title": "年审计报告_页面_06原图",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "f31ca9d0-bcca-4970-900c-0b7dcec3bfd4",
+      "old_title": "泰昌2025-05-21原图",
+      "new_title": "05-21原图",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "53fe3267-f655-45cf-98b3-50cb2a065af6",
+      "old_title": "泰昌TJ20220002363合同协议书（双方已签章）第1页",
+      "new_title": "泰昌TJ20220002363合同协议书（双方已签章）（第1页）",
+      "old_category": "项目业绩",
+      "new_category": "项目业绩",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "1934e0a2-9328-42eb-b983-6f9ac6df0ac2",
+      "old_title": "泰昌TJ20220002363合同协议书（双方已签章）第2页",
+      "new_title": "泰昌TJ20220002363合同协议书（双方已签章）（第2页）",
+      "old_category": "项目业绩",
+      "new_category": "项目业绩",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "be020f97-fe2f-4ada-86c3-1784eff92365",
+      "old_title": "泰昌TJ20220002363合同协议书（双方已签章）第3页",
+      "new_title": "泰昌TJ20220002363合同协议书（双方已签章）（第3页）",
+      "old_category": "项目业绩",
+      "new_category": "项目业绩",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "3db01174-ea08-44e9-a32d-4a219daec403",
+      "old_title": "泰昌TJ20220002363合同协议书（双方已签章）第4页",
+      "new_title": "泰昌TJ20220002363合同协议书（双方已签章）（第4页）",
+      "old_category": "项目业绩",
+      "new_category": "项目业绩",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "76637719-343c-42bc-9bfa-e20f50bb7441",
+      "old_title": "泰昌TJ20220002363合同协议书（双方已签章）第5页",
+      "new_title": "泰昌TJ20220002363合同协议书（双方已签章）（第5页）",
+      "old_category": "项目业绩",
+      "new_category": "项目业绩",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "d917bbd3-63d6-4bd9-832c-761823baf7e4",
+      "old_title": "泰昌TJ20220002363合同协议书（双方已签章）第6页",
+      "new_title": "泰昌TJ20220002363合同协议书（双方已签章）（第6页）",
+      "old_category": "项目业绩",
+      "new_category": "项目业绩",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "97e2716b-f3db-48e7-8885-f5b35505352a",
+      "old_title": "泰昌TJ20220002363合同协议书（双方已签章）第7页",
+      "new_title": "泰昌TJ20220002363合同协议书（双方已签章）（第7页）",
+      "old_category": "项目业绩",
+      "new_category": "项目业绩",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "ac382931-3e2f-4d77-9306-024c8262e9d3",
+      "old_title": "泰昌TJ20220002363合同协议书（双方已签章）第8页",
+      "new_title": "泰昌TJ20220002363合同协议书（双方已签章）（第8页）",
+      "old_category": "项目业绩",
+      "new_category": "项目业绩",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "0101599f-c7ab-44bd-9e2d-7024a2f8acc0",
+      "old_title": "泰昌TJ20220002363合同协议书（双方已签章）第9页",
+      "new_title": "泰昌TJ20220002363合同协议书（双方已签章）（第9页）",
+      "old_category": "项目业绩",
+      "new_category": "项目业绩",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "70f8c8d6-de6f-447b-91ee-1f192f958fb8",
+      "old_title": "泰昌TJ20220002363合同协议书（双方已签章）第10页",
+      "new_title": "泰昌TJ20220002363合同协议书（双方已签章）（第10页）",
+      "old_category": "项目业绩",
+      "new_category": "项目业绩",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "fff62a89-d252-4ebd-9ffa-8e6223a1c0fc",
+      "old_title": "泰昌TJ20220002363合同协议书（双方已签章）第11页",
+      "new_title": "泰昌TJ20220002363合同协议书（双方已签章）（第11页）",
+      "old_category": "项目业绩",
+      "new_category": "项目业绩",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "84f7a1b2-05d3-4f7b-bf0e-e6fc0dabea51",
+      "old_title": "泰昌TJ20220002363合同协议书（双方已签章）第12页",
+      "new_title": "泰昌TJ20220002363合同协议书（双方已签章）（第12页）",
+      "old_category": "项目业绩",
+      "new_category": "项目业绩",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "f340d05f-4f6d-494a-ba0e-d33e0d8b6692",
+      "old_title": "泰昌TJ20220002363合同协议书（双方已签章）第13页",
+      "new_title": "泰昌TJ20220002363合同协议书（双方已签章）（第13页）",
+      "old_category": "项目业绩",
+      "new_category": "项目业绩",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "8e8b12f5-c3d5-401e-920c-c84a262a7a5b",
+      "old_title": "泰昌TJ20220002363合同协议书（双方已签章）第14页",
+      "new_title": "泰昌TJ20220002363合同协议书（双方已签章）（第14页）",
+      "old_category": "项目业绩",
+      "new_category": "项目业绩",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "2c918f6d-aa3a-4ed0-88b7-a490f554eb54",
+      "old_title": "泰昌TJ20220002363合同协议书（双方已签章）第15页",
+      "new_title": "泰昌TJ20220002363合同协议书（双方已签章）（第15页）",
+      "old_category": "项目业绩",
+      "new_category": "项目业绩",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "6bde9fe2-ce32-4e2c-9cbc-9fd4696de3d2",
+      "old_title": "泰昌157-保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书第1页",
+      "new_title": "保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书（第1页）",
+      "old_category": "项目业绩",
+      "new_category": "项目业绩",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "ee3b0a64-4152-4bc1-9643-62c3873c4979",
+      "old_title": "泰昌157-保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书第2页",
+      "new_title": "保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书（第2页）",
+      "old_category": "项目业绩",
+      "new_category": "项目业绩",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "c3835978-c432-4d59-b79f-524ea67721ec",
+      "old_title": "泰昌泰昌-投标第1页",
+      "new_title": "泰昌-投标（第1页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "04fee70a-24de-4d1c-b24c-a41fa147a8bd",
+      "old_title": "泰昌ESG环境社会公司治理报告第1页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第1页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "6d2fb5c6-440f-4eea-a1b9-faf7a2fcde48",
+      "old_title": "泰昌ESG环境社会公司治理报告第2页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第2页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "4b2ae438-c919-4ac0-996a-ec981b206a1a",
+      "old_title": "泰昌ESG环境社会公司治理报告第3页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第3页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "0d71fa45-e9eb-40dd-91da-5130950d1ece",
+      "old_title": "泰昌ESG环境社会公司治理报告第4页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第4页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "9401bbe3-b4d7-47b2-ab64-8088023f42fc",
+      "old_title": "泰昌ESG环境社会公司治理报告第5页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第5页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "242aa3d6-d122-47af-9173-88df838e99c4",
+      "old_title": "泰昌ESG环境社会公司治理报告第6页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第6页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "5af50a3f-48c8-4618-acc8-3b9827819a85",
+      "old_title": "泰昌ESG环境社会公司治理报告第7页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第7页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "ccf5ac44-e4f4-47d1-af45-9611e82080a5",
+      "old_title": "泰昌ESG环境社会公司治理报告第8页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第8页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "0ee9919d-f804-4449-a312-2a8ce5f5072e",
+      "old_title": "泰昌ESG环境社会公司治理报告第9页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第9页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "ce52e7bb-4794-46f2-8944-365f9323d713",
+      "old_title": "泰昌ESG环境社会公司治理报告第10页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第10页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "65d3bbcb-55cb-4bfa-b231-457c177a7075",
+      "old_title": "泰昌ESG环境社会公司治理报告第11页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第11页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "f007483c-5845-42ca-b942-6ee75ede5b4e",
+      "old_title": "泰昌ESG环境社会公司治理报告第12页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第12页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "5ccedd8f-e36f-4621-a945-a920dd3d8cfc",
+      "old_title": "泰昌ESG环境社会公司治理报告第13页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第13页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "ffd8b53a-962c-47eb-9ca2-45fc695bd4ed",
+      "old_title": "泰昌ESG环境社会公司治理报告第14页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第14页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "06b3f434-203a-4cb9-80a3-86fb0e262b86",
+      "old_title": "泰昌ESG环境社会公司治理报告第15页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第15页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "c4a7a32b-4c23-4562-a795-9b01d2822c90",
+      "old_title": "泰昌ESG环境社会公司治理报告第16页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第16页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "30e1c078-4d8a-4f8c-bebc-1dfc5eabcc63",
+      "old_title": "泰昌ESG环境社会公司治理报告第17页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第17页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "ec1bab5a-e4a6-4037-9d81-7a668f28d20c",
+      "old_title": "泰昌ESG环境社会公司治理报告第18页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第18页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "dd863bbc-1df7-4b33-8aae-532e480b9b14",
+      "old_title": "泰昌ESG环境社会公司治理报告第19页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第19页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "75479d87-b116-46b7-99fa-71c3b011a2a3",
+      "old_title": "泰昌ESG环境社会公司治理报告第20页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第20页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "34609586-812b-4494-8306-54cd8b4d366e",
+      "old_title": "泰昌ESG环境社会公司治理报告第21页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第21页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "1baab407-a010-43b3-96cc-641be080051b",
+      "old_title": "泰昌ESG环境社会公司治理报告第22页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第22页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "8c0536d0-0178-4754-83c0-e49f166139ec",
+      "old_title": "泰昌ESG环境社会公司治理报告第23页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第23页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "d92e05f2-fa21-443f-ac34-e1bae3d1521c",
+      "old_title": "泰昌ESG环境社会公司治理报告第24页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第24页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "44b64ee9-dd0b-4bb7-9b08-2a882c6478bd",
+      "old_title": "泰昌ESG环境社会公司治理报告第25页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第25页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "bc1994ab-56cc-4188-a2ab-f8ef6608982f",
+      "old_title": "泰昌ESG环境社会公司治理报告第26页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第26页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "2451250a-761b-4165-a29f-0cd981a408c2",
+      "old_title": "泰昌ESG环境社会公司治理报告第27页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第27页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "6ee890a2-8a93-493b-9ddf-845f42f9c7b2",
+      "old_title": "泰昌ESG环境社会公司治理报告第28页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第28页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "67221296-5b84-4403-bda5-af5c2d9647af",
+      "old_title": "泰昌ESG环境社会公司治理报告第29页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第29页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "233be940-59d0-4e7b-a4cc-4b769c7d3983",
+      "old_title": "泰昌ESG环境社会公司治理报告第30页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第30页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "378fb388-6a12-4ce4-8cde-b780f334a2be",
+      "old_title": "泰昌ESG环境社会公司治理报告第31页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第31页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "a0e295ae-bdbd-482e-b6a1-01b533b0bdc8",
+      "old_title": "泰昌ESG环境社会公司治理报告第32页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第32页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "efdccd6a-5515-401c-be5c-cca3db226593",
+      "old_title": "泰昌ESG环境社会公司治理报告第33页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第33页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "5fc386e8-c8d0-413c-b2d4-a457ddfdcef1",
+      "old_title": "泰昌ESG环境社会公司治理报告第34页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第34页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "13bf12a2-4a7d-42de-babd-9680fae3502c",
+      "old_title": "泰昌ESG环境社会公司治理报告第35页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第35页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "9083b415-3da5-4d6d-8027-a9945f3dbd08",
+      "old_title": "泰昌ESG环境社会公司治理报告第36页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第36页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "235ef865-9426-4e70-92bd-d0ca8c59f66a",
+      "old_title": "泰昌ESG环境社会公司治理报告第37页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第37页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "6a4fa846-1dba-4654-9484-544d872b99ed",
+      "old_title": "泰昌ESG环境社会公司治理报告第38页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第38页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "a5fe4cb4-1de0-4e1c-9340-4a5732df0b5c",
+      "old_title": "泰昌ESG环境社会公司治理报告第39页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第39页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "764a90c7-22d3-41bc-88a8-5e6ca6c18c7a",
+      "old_title": "泰昌碳足迹报告第1页",
+      "new_title": "泰昌碳足迹报告（第1页）",
+      "old_category": "试验检测能力",
+      "new_category": "试验检测能力",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "0088d2ea-c09d-47a5-a4b8-74d74afbe775",
+      "old_title": "泰昌碳足迹报告第2页",
+      "new_title": "泰昌碳足迹报告（第2页）",
+      "old_category": "试验检测能力",
+      "new_category": "试验检测能力",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "9740ec57-6722-47a0-a0f9-b1431c4926f8",
+      "old_title": "泰昌碳足迹报告第3页",
+      "new_title": "泰昌碳足迹报告（第3页）",
+      "old_category": "试验检测能力",
+      "new_category": "试验检测能力",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "0472a8e8-6cf7-46e8-b1f6-7ee9afe3f2a9",
+      "old_title": "泰昌碳足迹报告第4页",
+      "new_title": "泰昌碳足迹报告（第4页）",
+      "old_category": "试验检测能力",
+      "new_category": "试验检测能力",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "290d794c-df68-4ebe-bb0e-809f2061ec8d",
+      "old_title": "泰昌碳足迹报告第5页",
+      "new_title": "泰昌碳足迹报告（第5页）",
+      "old_category": "试验检测能力",
+      "new_category": "试验检测能力",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "8619ddd5-a38c-489c-b133-a49183d0e400",
+      "old_title": "泰昌碳足迹报告第6页",
+      "new_title": "泰昌碳足迹报告（第6页）",
+      "old_category": "试验检测能力",
+      "new_category": "试验检测能力",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "cff6409b-bbab-4cb2-a60a-143fb503f392",
+      "old_title": "泰昌碳足迹报告第7页",
+      "new_title": "泰昌碳足迹报告（第7页）",
+      "old_category": "试验检测能力",
+      "new_category": "试验检测能力",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "e1c6e555-7c83-46fc-9443-35793d31e477",
+      "old_title": "泰昌碳足迹报告第8页",
+      "new_title": "泰昌碳足迹报告（第8页）",
+      "old_category": "试验检测能力",
+      "new_category": "试验检测能力",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "400d93a5-a68b-410a-a918-7f9b1339d0a6",
+      "old_title": "泰昌碳足迹报告第9页",
+      "new_title": "泰昌碳足迹报告（第9页）",
+      "old_category": "试验检测能力",
+      "new_category": "试验检测能力",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "b9c4ac84-e14b-4b7b-b8f0-2a2727eb12e0",
+      "old_title": "泰昌碳足迹报告第10页",
+      "new_title": "泰昌碳足迹报告（第10页）",
+      "old_category": "试验检测能力",
+      "new_category": "试验检测能力",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "0e474b65-b63f-429d-a861-6c5d0f8dd38f",
+      "old_title": "泰昌碳足迹报告第11页",
+      "new_title": "泰昌碳足迹报告（第11页）",
+      "old_category": "试验检测能力",
+      "new_category": "试验检测能力",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "f5035ef7-bf8e-46b2-b42e-7445f9c9b1fb",
+      "old_title": "泰昌碳足迹报告第12页",
+      "new_title": "泰昌碳足迹报告（第12页）",
+      "old_category": "试验检测能力",
+      "new_category": "试验检测能力",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "249419dd-3919-439e-af36-1c6ecb972bc7",
+      "old_title": "泰昌碳足迹报告第13页",
+      "new_title": "泰昌碳足迹报告（第13页）",
+      "old_category": "试验检测能力",
+      "new_category": "试验检测能力",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "78c8c900-d2f6-43a5-b1e2-e8c93ff2f4b5",
+      "old_title": "泰昌碳足迹报告第14页",
+      "new_title": "泰昌碳足迹报告（第14页）",
+      "old_category": "试验检测能力",
+      "new_category": "试验检测能力",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "30bc6905-52ff-4779-825c-8dbf50965a71",
+      "old_title": "泰昌碳足迹报告第15页",
+      "new_title": "泰昌碳足迹报告（第15页）",
+      "old_category": "试验检测能力",
+      "new_category": "试验检测能力",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "5fdf58b5-7733-4c92-9c2e-3a6564108946",
+      "old_title": "泰昌碳足迹报告第16页",
+      "new_title": "泰昌碳足迹报告（第16页）",
+      "old_category": "试验检测能力",
+      "new_category": "试验检测能力",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "4b0ce054-0e07-4277-9366-324bb137d489",
+      "old_title": "泰昌碳足迹报告第17页",
+      "new_title": "泰昌碳足迹报告（第17页）",
+      "old_category": "试验检测能力",
+      "new_category": "试验检测能力",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "0cab5a2c-dd01-436c-bf4b-6e8b5d84f28a",
+      "old_title": "泰昌泰昌宣传彩页第1页",
+      "new_title": "泰昌宣传彩页（第1页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "e71a6d5a-9f73-4b2e-a67f-ee465695a518",
+      "old_title": "泰昌泰昌宣传彩页第2页",
+      "new_title": "泰昌宣传彩页（第2页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "2ea56ed1-8f56-45e0-9892-54a37d828f5a",
+      "old_title": "泰昌泰昌宣传彩页第3页",
+      "new_title": "泰昌宣传彩页（第3页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "4a18fbcc-16e1-42f7-87fb-a04df1c0a59a",
+      "old_title": "泰昌泰昌宣传彩页第4页",
+      "new_title": "泰昌宣传彩页（第4页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "25e13e0b-57ec-4a10-a523-48a040f5cc74",
+      "old_title": "泰昌泰昌宣传彩页第5页",
+      "new_title": "泰昌宣传彩页（第5页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "00ecddf9-82d9-4950-b271-183f0dbcc36a",
+      "old_title": "泰昌泰昌宣传彩页第6页",
+      "new_title": "泰昌宣传彩页（第6页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "6ce57cf5-3209-4bfc-bd0d-1f5095ad7fa9",
+      "old_title": "泰昌泰昌宣传彩页第7页",
+      "new_title": "泰昌宣传彩页（第7页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "3a143bff-8f19-44f7-b3a5-13bc30d1d785",
+      "old_title": "泰昌泰昌宣传彩页第8页",
+      "new_title": "泰昌宣传彩页（第8页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "a22692ef-8061-475e-8e1e-d336e3e04cd4",
+      "old_title": "泰昌泰昌宣传彩页第9页",
+      "new_title": "泰昌宣传彩页（第9页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "7a316acf-92c5-434e-97a8-0e6e993116bc",
+      "old_title": "泰昌泰昌宣传彩页第10页",
+      "new_title": "泰昌宣传彩页（第10页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "2c0e1a82-349e-4185-b17f-048f61ada603",
+      "old_title": "泰昌泰昌宣传彩页第11页",
+      "new_title": "泰昌宣传彩页（第11页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "fbb0d4b1-14b1-4eb7-bb94-98a38323dfcc",
+      "old_title": "泰昌泰昌宣传彩页第12页",
+      "new_title": "泰昌宣传彩页（第12页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "a510a59c-bbd4-42b9-9394-d580f0cdd44e",
+      "old_title": "泰昌泰昌宣传彩页第13页",
+      "new_title": "泰昌宣传彩页（第13页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "a161d1ae-b27d-4a5f-ae07-2aceec6cbdbd",
+      "old_title": "泰昌泰昌宣传彩页第14页",
+      "new_title": "泰昌宣传彩页（第14页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "a3ff26f7-bbd9-4178-bd77-d08207562e73",
+      "old_title": "泰昌泰昌宣传彩页第15页",
+      "new_title": "泰昌宣传彩页（第15页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "d4587511-67cb-45a8-a8bc-378439705981",
+      "old_title": "泰昌泰昌宣传彩页第16页",
+      "new_title": "泰昌宣传彩页（第16页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "848f6ab4-7713-44dc-84fa-62f117ad7c9d",
+      "old_title": "泰昌泰昌宣传彩页第17页",
+      "new_title": "泰昌宣传彩页（第17页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "3a5ba705-4523-4c18-948e-5cf152b2b081",
+      "old_title": "泰昌泰昌宣传彩页第18页",
+      "new_title": "泰昌宣传彩页（第18页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "0f7074d1-f619-432e-9eb1-5d8b9c31fb10",
+      "old_title": "泰昌泰昌宣传彩页第19页",
+      "new_title": "泰昌宣传彩页（第19页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "19434a03-4392-450e-8318-e6f5bc8dcef3",
+      "old_title": "泰昌泰昌宣传彩页第20页",
+      "new_title": "泰昌宣传彩页（第20页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "3809fd29-82f1-40ae-a094-5359067008da",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司第4页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司（第4页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "cd2493da-1561-4631-838f-7af71407aa1a",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司第5页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司（第5页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "8b167e5b-8473-437d-bc3e-3da510a1f950",
+      "old_title": "泰昌泰昌宣传彩页第21页",
+      "new_title": "泰昌宣传彩页（第21页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "ac5cd8cb-2fdc-49fa-a472-c7f8da9d04fa",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司第6页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司（第6页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "15a15c12-9771-42eb-be75-43fe0a815835",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司第7页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司（第7页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "39174f96-d007-445d-bf1f-14a6b64c16a9",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第1页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第1页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "e70bccd6-3f2c-4151-9c47-42f28ad4ad1a",
+      "old_title": "泰昌泰昌宣传彩页第22页",
+      "new_title": "泰昌宣传彩页（第22页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "2288316a-1918-4d61-ba66-8f61ed2ccbc4",
+      "old_title": "泰昌泰昌宣传彩页第23页",
+      "new_title": "泰昌宣传彩页（第23页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "5b06311e-5057-4d26-8a0a-38fc7acd836b",
+      "old_title": "泰昌泰昌宣传彩页第24页",
+      "new_title": "泰昌宣传彩页（第24页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "ba0b71a0-8780-4bd2-87c9-0513b7a4baa9",
+      "old_title": "泰昌泰昌宣传彩页第25页",
+      "new_title": "泰昌宣传彩页（第25页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "7d216e70-f659-47df-af19-a01405f776e5",
+      "old_title": "泰昌泰昌宣传彩页第26页",
+      "new_title": "泰昌宣传彩页（第26页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "a9c319e0-bf8d-43f4-b442-dd11a6e481b5",
+      "old_title": "泰昌泰昌宣传彩页第27页",
+      "new_title": "泰昌宣传彩页（第27页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "c0b9e3ed-9ec1-4d15-828d-5a9e4b865c1f",
+      "old_title": "泰昌泰昌宣传彩页第28页",
+      "new_title": "泰昌宣传彩页（第28页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "00da4d8a-e2f9-4ffc-981a-efcb96192b5b",
+      "old_title": "泰昌泰昌宣传彩页第29页",
+      "new_title": "泰昌宣传彩页（第29页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "9307ef62-2927-4d09-ad44-9ef3cb99cd86",
+      "old_title": "泰昌泰昌宣传彩页第30页",
+      "new_title": "泰昌宣传彩页（第30页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "15ab9122-dbc6-4b9b-bc7c-5caa4718bb74",
+      "old_title": "泰昌泰昌宣传彩页第31页",
+      "new_title": "泰昌宣传彩页（第31页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "4ee914a8-66e1-4d4d-890f-dc9a39fca475",
+      "old_title": "泰昌泰昌宣传彩页第32页",
+      "new_title": "泰昌宣传彩页（第32页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "e70951a8-38ca-4ac9-8caa-3ad06d4ca015",
+      "old_title": "泰昌泰昌宣传彩页第33页",
+      "new_title": "泰昌宣传彩页（第33页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "6cadc9ec-671b-4f69-b697-4ab5a75007d4",
+      "old_title": "泰昌泰昌宣传彩页第34页",
+      "new_title": "泰昌宣传彩页（第34页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "4a0952e8-0ff3-4144-a72c-af75239f1983",
+      "old_title": "泰昌泰昌宣传彩页第35页",
+      "new_title": "泰昌宣传彩页（第35页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "d6d15361-f638-4358-a6d6-9c8fc007b26a",
+      "old_title": "泰昌泰昌宣传彩页第36页",
+      "new_title": "泰昌宣传彩页（第36页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "35a6cf8d-b352-4409-9c06-473bb826a134",
+      "old_title": "泰昌泰昌宣传彩页第37页",
+      "new_title": "泰昌宣传彩页（第37页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "e76b73b3-b380-4d96-b5bd-d7ee0cdbf3a3",
+      "old_title": "泰昌泰昌宣传彩页第38页",
+      "new_title": "泰昌宣传彩页（第38页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "2cf17be8-b7c1-4e4a-a8dd-d599efc3a73d",
+      "old_title": "泰昌泰昌宣传彩页第39页",
+      "new_title": "泰昌宣传彩页（第39页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "71f0f25d-3a95-4114-a6c3-0c3c03a41011",
+      "old_title": "泰昌泰昌宣传彩页第40页",
+      "new_title": "泰昌宣传彩页（第40页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "000dd06f-9aca-49a0-b4fb-4a54d652c58d",
+      "old_title": "泰昌泰昌宣传彩页第41页",
+      "new_title": "泰昌宣传彩页（第41页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "4cf160f9-55bb-4200-be90-501f708d62ea",
+      "old_title": "泰昌泰昌宣传彩页第42页",
+      "new_title": "泰昌宣传彩页（第42页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "883a10f7-a341-4ab9-a89b-971f3e7f0d9e",
+      "old_title": "泰昌泰昌宣传彩页第43页",
+      "new_title": "泰昌宣传彩页（第43页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "15ad8a08-1511-4fcc-b5a0-875c16057514",
+      "old_title": "泰昌泰昌宣传彩页第44页",
+      "new_title": "泰昌宣传彩页（第44页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "30f750fd-b333-4634-ae05-aaa0a235b7db",
+      "old_title": "泰昌泰昌宣传彩页第45页",
+      "new_title": "泰昌宣传彩页（第45页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "b76efb75-ccc4-4590-95b3-07c3e2617f9f",
+      "old_title": "泰昌泰昌宣传彩页第46页",
+      "new_title": "泰昌宣传彩页（第46页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "e68ae46b-b6b7-4691-ae34-60300c9b064d",
+      "old_title": "泰昌泰昌宣传彩页第47页",
+      "new_title": "泰昌宣传彩页（第47页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "cbc73e4e-c4df-404d-ab44-03f99efb9bd1",
+      "old_title": "泰昌泰昌宣传彩页第48页",
+      "new_title": "泰昌宣传彩页（第48页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "08a243b9-e878-49db-b453-ab8802f2daa4",
+      "old_title": "泰昌泰昌宣传彩页第49页",
+      "new_title": "泰昌宣传彩页（第49页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "5c5b39ed-7367-44b7-b19f-7e913e81653f",
+      "old_title": "泰昌泰昌宣传彩页第50页",
+      "new_title": "泰昌宣传彩页（第50页）",
+      "old_category": "企业宣传资料",
+      "new_category": "企业宣传资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "a276d00f-f0f7-47d3-87c6-ae09614b67b9",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司第1页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司（第1页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "39e276cc-5e58-463c-bf8e-a3f211c3b5ac",
+      "old_title": "泰昌2023年审计报告第4页",
+      "new_title": "年审计报告（第4页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "753cc122-2431-428c-a41f-8777d1344f7a",
+      "old_title": "泰昌2023年审计报告第6页",
+      "new_title": "年审计报告（第6页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "a3c9cfb2-cd3b-4dd4-8cbb-c87d6f872759",
+      "old_title": "泰昌2023年审计报告第7页",
+      "new_title": "年审计报告（第7页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "f5c8f472-83a9-4a29-8ee5-f91fc0120b74",
+      "old_title": "泰昌2023年审计报告第8页",
+      "new_title": "年审计报告（第8页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "1f17aa09-4e6f-4b86-a6cd-2e98c55994fe",
+      "old_title": "泰昌2023年审计报告第10页",
+      "new_title": "年审计报告（第10页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "f52d4793-a7db-4c48-ac97-0a40afc1205f",
+      "old_title": "泰昌2023年审计报告第11页",
+      "new_title": "年审计报告（第11页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "1b93e8ce-5e09-4bf2-8ffe-5fece4049542",
+      "old_title": "泰昌2023年审计报告第12页",
+      "new_title": "年审计报告（第12页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "4db3fb31-0ae6-4c91-b241-999bd3342b05",
+      "old_title": "泰昌2023年审计报告第14页",
+      "new_title": "年审计报告（第14页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "c6407b66-aa5f-4157-ab06-cb35732cc14a",
+      "old_title": "泰昌2023年审计报告第15页",
+      "new_title": "年审计报告（第15页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "65c343a9-4e74-4ca9-af26-a2d4fab5e92a",
+      "old_title": "泰昌2023年审计报告第16页",
+      "new_title": "年审计报告（第16页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "e8d4c3fd-b0ab-4b8a-8ad3-e6f443e9dcb0",
+      "old_title": "泰昌2023年审计报告第18页",
+      "new_title": "年审计报告（第18页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "32c9bd0e-2f68-4a6d-aaff-4e6f864d0ddc",
+      "old_title": "泰昌2023年审计报告第19页",
+      "new_title": "年审计报告（第19页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "fb1840f1-7b52-42c6-97ae-09cd8f2bed4b",
+      "old_title": "泰昌2024年审计报告第1页",
+      "new_title": "年审计报告（第1页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "eaaabad3-f539-4323-b900-55a6e93d6e16",
+      "old_title": "泰昌2024年审计报告第3页",
+      "new_title": "年审计报告（第3页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "e761588e-d6bf-4327-a964-84cb3fcb6a13",
+      "old_title": "泰昌2024年审计报告第4页",
+      "new_title": "年审计报告（第4页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "6b1d3d4d-2e64-4110-9384-06d8b6ebab13",
+      "old_title": "泰昌2024年审计报告第5页",
+      "new_title": "年审计报告（第5页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "5ab77fae-3472-47bf-97d1-9f1ed8959ec1",
+      "old_title": "泰昌2024年审计报告第7页",
+      "new_title": "年审计报告（第7页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "5cf50668-34a1-41e6-ba15-58232c55bf5d",
+      "old_title": "泰昌2024年审计报告第8页",
+      "new_title": "年审计报告（第8页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "0b013587-6efe-4150-ba5c-037263fca5d0",
+      "old_title": "泰昌2024年审计报告第9页",
+      "new_title": "年审计报告（第9页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "839df7ac-6e93-4a3b-b588-053db9cf148e",
+      "old_title": "泰昌2024年审计报告第11页",
+      "new_title": "年审计报告（第11页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "ad16fdce-0a3a-473d-938c-92160988379f",
+      "old_title": "泰昌2024年审计报告第12页",
+      "new_title": "年审计报告（第12页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "12fbfbb4-af92-4f76-b0d2-b275d303cc39",
+      "old_title": "泰昌2024年审计报告第13页",
+      "new_title": "年审计报告（第13页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "1d58778e-3a76-490c-a9ad-b7de35884b17",
+      "old_title": "泰昌2024年审计报告第15页",
+      "new_title": "年审计报告（第15页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "96e5a57e-c6d3-4df9-8cfb-11589f058bc8",
+      "old_title": "泰昌2024年审计报告第16页",
+      "new_title": "年审计报告（第16页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "74a8aa0b-9a62-4da1-8ab3-7b676154cab8",
+      "old_title": "泰昌2024年审计报告第17页",
+      "new_title": "年审计报告（第17页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "3c00e918-3c06-4b43-9ab4-b5a844a4b817",
+      "old_title": "泰昌2024年审计报告第19页",
+      "new_title": "年审计报告（第19页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "859a973a-baee-4907-b0cd-4bf0d6c7628e",
+      "old_title": "泰昌2024年审计报告第20页",
+      "new_title": "年审计报告（第20页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "617f48b2-d4d2-48a5-9c4f-e1c849e37b7f",
+      "old_title": "泰昌2024年审计报告第21页",
+      "new_title": "年审计报告（第21页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "0e669ee9-4d26-4f70-892a-907f27b32f9a",
+      "old_title": "泰昌泰昌社保证明（第1页）",
+      "new_title": "泰昌社保证明（第1页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "c1e7063b-209e-445c-8c5c-a4b7ffecaade",
+      "old_title": "泰昌2024年审计报告第23页",
+      "new_title": "年审计报告（第23页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "d94714a1-b03e-4d7a-b6d4-6837bdfbcc1b",
+      "old_title": "泰昌2024年审计报告第24页",
+      "new_title": "年审计报告（第24页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "eb61130c-0045-4c22-b62e-da0002773a66",
+      "old_title": "泰昌2024年审计报告第25页",
+      "new_title": "年审计报告（第25页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "ac1c0417-7090-4bd1-9e10-85a785b25dfc",
+      "old_title": "泰昌2024年审计报告第27页",
+      "new_title": "年审计报告（第27页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "56178d71-cd10-4c09-9e29-ad8e6a7642b7",
+      "old_title": "泰昌2024年审计报告第28页",
+      "new_title": "年审计报告（第28页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "0d8d7708-13b9-4f00-af4f-bcea9500974c",
+      "old_title": "泰昌2024年审计报告第29页",
+      "new_title": "年审计报告（第29页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "15bdc6cb-60b2-4989-8dce-4a9a61846d13",
+      "old_title": "泰昌2025年审计报告第2页",
+      "new_title": "年审计报告（第2页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "7be06f33-9d92-4580-af34-b67e58cb2e32",
+      "old_title": "泰昌2025年审计报告第3页",
+      "new_title": "年审计报告（第3页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "48619de5-3cbb-460d-a409-aa70ad622cdd",
+      "old_title": "泰昌2025年审计报告第4页",
+      "new_title": "年审计报告（第4页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "18e0361b-190e-4615-b686-299d0180ba71",
+      "old_title": "泰昌2025年审计报告第6页",
+      "new_title": "年审计报告（第6页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "56c05670-544b-4e02-9bdb-d2da7b6ef08c",
+      "old_title": "泰昌2025年审计报告第7页",
+      "new_title": "年审计报告（第7页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "042cd8c0-9f97-46e8-944a-e0908969358c",
+      "old_title": "泰昌2025年审计报告第8页",
+      "new_title": "年审计报告（第8页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "b939af2a-ddd2-4b9b-8b61-bb36e450c057",
+      "old_title": "泰昌2025年审计报告第10页",
+      "new_title": "年审计报告（第10页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "0325036d-f3af-4875-8389-e2200383b554",
+      "old_title": "泰昌2025年审计报告第11页",
+      "new_title": "年审计报告（第11页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "7dbc82c7-26bb-4265-952c-87a21cdf9847",
+      "old_title": "泰昌2025年审计报告第12页",
+      "new_title": "年审计报告（第12页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "0dd74940-cb4a-41bb-8635-197ab9a710e3",
+      "old_title": "泰昌2025年审计报告第14页",
+      "new_title": "年审计报告（第14页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "f368e0b0-2ffd-472d-a791-84df59ca3b8f",
+      "old_title": "泰昌2025年审计报告第15页",
+      "new_title": "年审计报告（第15页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "6e5c4dcf-1beb-4a47-a2bd-9c81a9dadeb9",
+      "old_title": "泰昌2025年审计报告第16页",
+      "new_title": "年审计报告（第16页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "4ee9d634-afec-4517-b867-9c3a8ffb9cbd",
+      "old_title": "泰昌2025年审计报告第18页",
+      "new_title": "年审计报告（第18页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "5a7f8dbd-40c0-430e-8a10-44bd5bda8ed5",
+      "old_title": "泰昌2025年审计报告第19页",
+      "new_title": "年审计报告（第19页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "3e36b7f3-3a10-4c58-9cb8-56c59a21ebfc",
+      "old_title": "泰昌1.质量管理体系认证证书第1页",
+      "new_title": "质量管理体系认证证书（第1页）",
+      "old_category": "资质证书",
+      "new_category": "资质证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "e3ffa072-d458-41d8-9714-74953f735593",
+      "old_title": "泰昌1.质量管理体系认证证书第3页",
+      "new_title": "质量管理体系认证证书（第3页）",
+      "old_category": "资质证书",
+      "new_category": "资质证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "643e1f3b-9280-4a78-bcc1-d74b8c0d6621",
+      "old_title": "泰昌2.环境管理体系认证证书第1页",
+      "new_title": "环境管理体系认证证书（第1页）",
+      "old_category": "资质证书",
+      "new_category": "资质证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "37819959-e15a-4958-8503-70697b0c1d90",
+      "old_title": "泰昌2.环境管理体系认证证书第2页",
+      "new_title": "环境管理体系认证证书（第2页）",
+      "old_category": "资质证书",
+      "new_category": "资质证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "611602d0-36e3-4513-aef8-df25744da7a5",
+      "old_title": "泰昌3.职业健康安全管理体系认证证书第2页",
+      "new_title": "职业健康安全管理体系认证证书（第2页）",
+      "old_category": "资质证书",
+      "new_category": "资质证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "9784a2d3-ad13-467e-acc8-c5848109a797",
+      "old_title": "泰昌CPVC电缆保护管检验报告内径250第1页",
+      "new_title": "泰昌CPVC电缆保护管检验报告内径250（第1页）",
+      "old_category": "检验报告",
+      "new_category": "检验报告",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "7dc74695-2594-4888-b845-af5bd3130ae6",
+      "old_title": "泰昌CPVC电缆保护管检验报告内径250第3页",
+      "new_title": "泰昌CPVC电缆保护管检验报告内径250（第3页）",
+      "old_category": "检验报告",
+      "new_category": "检验报告",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "f7a3c80a-1dbe-4227-a778-2f9c0d503c6e",
+      "old_title": "泰昌CPVC电缆保护管检验报告内径250第4页",
+      "new_title": "泰昌CPVC电缆保护管检验报告内径250（第4页）",
+      "old_category": "检验报告",
+      "new_category": "检验报告",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "53f279bf-a9e7-49ee-afbb-350185ecbf60",
+      "old_title": "泰昌CPVC电缆保护管检验报告内径250第5页",
+      "new_title": "泰昌CPVC电缆保护管检验报告内径250（第5页）",
+      "old_category": "检验报告",
+      "new_category": "检验报告",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "25dcd2c9-f919-4321-b71f-18a357e45c02",
+      "old_title": "泰昌MPP电缆保护管检验报告内径250第2页",
+      "new_title": "泰昌MPP电缆保护管检验报告内径250（第2页）",
+      "old_category": "检验报告",
+      "new_category": "检验报告",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "048b1963-fb91-49f4-99e0-ee282ca1eb7d",
+      "old_title": "泰昌MPP电缆保护管检验报告内径250第3页",
+      "new_title": "泰昌MPP电缆保护管检验报告内径250（第3页）",
+      "old_category": "检验报告",
+      "new_category": "检验报告",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "e78d53b1-d2f3-471f-90e9-b7bd9c11c128",
+      "old_title": "泰昌MPP电缆保护管检验报告内径250第4页",
+      "new_title": "泰昌MPP电缆保护管检验报告内径250（第4页）",
+      "old_category": "检验报告",
+      "new_category": "检验报告",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "676b8b28-1531-459e-9112-3b4784e96b0d",
+      "old_title": "泰昌泰昌社保证明（第1页）",
+      "new_title": "泰昌社保证明（第1页）",
+      "old_category": "人员证书",
+      "new_category": "人员证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "e9615f9b-922c-489d-ba5d-61ad4933aa95",
+      "old_title": "泰昌1.CPVC63三层复合管材挤出生产线第1页",
+      "new_title": "CPVC63三层复合管材挤出生产线（第1页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "53cb16dc-e3d1-4052-9187-c25dd2d62c47",
+      "old_title": "泰昌1.CPVC63三层复合管材挤出生产线第2页",
+      "new_title": "CPVC63三层复合管材挤出生产线（第2页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "2e6a598d-15db-4d1f-9e65-8aebf54ca682",
+      "old_title": "泰昌1.CPVC63三层复合管材挤出生产线第4页",
+      "new_title": "CPVC63三层复合管材挤出生产线（第4页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "15b4e69b-f3b3-474c-ade8-6b121611d1a4",
+      "old_title": "泰昌1.CPVC63三层复合管材挤出生产线第5页",
+      "new_title": "CPVC63三层复合管材挤出生产线（第5页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "3a877e8a-84b0-4633-bddf-8e031f5d2099",
+      "old_title": "泰昌1.CPVC63三层复合管材挤出生产线第6页",
+      "new_title": "CPVC63三层复合管材挤出生产线（第6页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "44e324bf-18a9-4d6d-b866-1c0bb4e9986f",
+      "old_title": "泰昌2.CPVC110三层复合管材挤出生产线第1页",
+      "new_title": "CPVC110三层复合管材挤出生产线（第1页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "16518a20-dbee-4bbd-8f5b-68265216ed39",
+      "old_title": "泰昌2.CPVC110三层复合管材挤出生产线第2页",
+      "new_title": "CPVC110三层复合管材挤出生产线（第2页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "559c5647-5537-4607-8e9a-c3b817188f64",
+      "old_title": "泰昌2.CPVC110三层复合管材挤出生产线第3页",
+      "new_title": "CPVC110三层复合管材挤出生产线（第3页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "0f583c93-c362-412c-b8e8-bd5547db3d33",
+      "old_title": "泰昌2.CPVC110三层复合管材挤出生产线第5页",
+      "new_title": "CPVC110三层复合管材挤出生产线（第5页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "16c7511c-8d4a-415a-9504-629a26a6de69",
+      "old_title": "泰昌2.CPVC110三层复合管材挤出生产线第6页",
+      "new_title": "CPVC110三层复合管材挤出生产线（第6页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "9b13395b-7177-406b-992b-3bd07e989479",
+      "old_title": "泰昌2.CPVC110三层复合管材挤出生产线第7页",
+      "new_title": "CPVC110三层复合管材挤出生产线（第7页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "a3b1e709-8795-4e59-a1cb-e35a96ad3a47",
+      "old_title": "泰昌3.MPP生产线第2页",
+      "new_title": "MPP生产线（第2页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "0648a7b1-dc41-4ac7-942b-64d06c888d50",
+      "old_title": "泰昌3.MPP生产线第4页",
+      "new_title": "MPP生产线（第4页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "b5e9dd3a-2e27-47bf-93bc-937b58e0e991",
+      "old_title": "泰昌3.MPP生产线第6页",
+      "new_title": "MPP生产线（第6页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "0d45b57e-77d7-491b-88f6-4b9c06f73940",
+      "old_title": "泰昌3.MPP生产线第8页",
+      "new_title": "MPP生产线（第8页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "68dcb6cd-2c3f-438e-a71b-405e0a365bf1",
+      "old_title": "泰昌1.土地租赁协议第1页",
+      "new_title": "土地租赁协议（第1页）",
+      "old_category": "厂房仓储资料",
+      "new_category": "厂房仓储资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "757391c6-89a3-49bd-a605-997ff43033ad",
+      "old_title": "泰昌1.土地租赁协议第2页",
+      "new_title": "土地租赁协议（第2页）",
+      "old_category": "厂房仓储资料",
+      "new_category": "厂房仓储资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "038cbcc9-ebcb-4074-9aef-81c095344827",
+      "old_title": "泰昌1.土地租赁协议第3页",
+      "new_title": "土地租赁协议（第3页）",
+      "old_category": "厂房仓储资料",
+      "new_category": "厂房仓储资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "3cf202cb-b99f-4406-9ac1-f1828ee74eef",
+      "old_title": "泰昌2.土地使用证明第1页",
+      "new_title": "土地使用证明（第1页）",
+      "old_category": "厂房仓储资料",
+      "new_category": "厂房仓储资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "10265009-d411-458d-9397-e7557bf9c0d9",
+      "old_title": "泰昌3.厂房图片第1页",
+      "new_title": "厂房图片（第1页）",
+      "old_category": "厂房仓储资料",
+      "new_category": "厂房仓储资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "72da01aa-d843-4e64-83e1-a445ddfdaa4b",
+      "old_title": "泰昌3.厂房图片第2页",
+      "new_title": "厂房图片（第2页）",
+      "old_category": "厂房仓储资料",
+      "new_category": "厂房仓储资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "4d1998e8-f90a-4232-b200-c0b03866164c",
+      "old_title": "泰昌3.厂房图片第4页",
+      "new_title": "厂房图片（第4页）",
+      "old_category": "厂房仓储资料",
+      "new_category": "厂房仓储资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "f3dac1ea-7b8a-4230-861b-8fa92b48a923",
+      "old_title": "泰昌3.厂房图片第6页",
+      "new_title": "厂房图片（第6页）",
+      "old_category": "厂房仓储资料",
+      "new_category": "厂房仓储资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "087b0e07-273f-4f55-8525-f0ffe5888aae",
+      "old_title": "泰昌4.电费发票第2页",
+      "new_title": "电费发票（第2页）",
+      "old_category": "厂房仓储资料",
+      "new_category": "厂房仓储资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "01f13ce1-125b-477b-8f4b-44a1806f710e",
+      "old_title": "泰昌4.电费发票第3页",
+      "new_title": "电费发票（第3页）",
+      "old_category": "厂房仓储资料",
+      "new_category": "厂房仓储资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "13d070a7-663a-40d8-b716-38aaf517906d",
+      "old_title": "泰昌微机控制电子万能试验机第1页",
+      "new_title": "泰昌微机控制电子万能试验机（第1页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "6ebd3ffc-3f9c-42cf-a377-d53ecb00a574",
+      "old_title": "泰昌微机控制电子万能试验机第3页",
+      "new_title": "泰昌微机控制电子万能试验机（第3页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "4454c4ec-3976-473a-81f2-4cec2bd66f04",
+      "old_title": "泰昌微机控制电子万能试验机第4页",
+      "new_title": "泰昌微机控制电子万能试验机（第4页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "aefb3637-7dea-4544-90a4-c0079b41167d",
+      "old_title": "泰昌微机控制电子万能试验机第5页",
+      "new_title": "泰昌微机控制电子万能试验机（第5页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "4b288070-f008-48ef-b987-5c75c456e3cb",
+      "old_title": "泰昌微机控制电子万能试验机第7页",
+      "new_title": "泰昌微机控制电子万能试验机（第7页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "7ff51ff0-8ce0-46c2-91dd-f25d2c36aeb1",
+      "old_title": "泰昌微机控制电子万能试验机第8页",
+      "new_title": "泰昌微机控制电子万能试验机（第8页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "055f3321-bd76-43af-b550-ff59d616f73e",
+      "old_title": "泰昌热变型、维卡软化点温度测定仪第1页",
+      "new_title": "泰昌热变型、维卡软化点温度测定仪（第1页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "6a25db9a-3771-4d30-a6b2-89ccd225fdae",
+      "old_title": "泰昌热变型、维卡软化点温度测定仪第3页",
+      "new_title": "泰昌热变型、维卡软化点温度测定仪（第3页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "63079c8a-f15d-4425-9b4f-8832485e6279",
+      "old_title": "泰昌热变型、维卡软化点温度测定仪第4页",
+      "new_title": "泰昌热变型、维卡软化点温度测定仪（第4页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "163d49f1-3db7-4c0b-8f6a-a9265b2ba5a9",
+      "old_title": "泰昌热变型、维卡软化点温度测定仪第5页",
+      "new_title": "泰昌热变型、维卡软化点温度测定仪（第5页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "7a34667d-0a39-417f-9bb6-2da1443b8260",
+      "old_title": "泰昌热变型、维卡软化点温度测定仪第7页",
+      "new_title": "泰昌热变型、维卡软化点温度测定仪（第7页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "1373f162-cc94-497f-abba-b84a083e151c",
+      "old_title": "泰昌热变型、维卡软化点温度测定仪第8页",
+      "new_title": "泰昌热变型、维卡软化点温度测定仪（第8页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "53814ca8-6e0d-4c5a-9e8c-b3c9c2d1e867",
+      "old_title": "泰昌热变型、维卡软化点温度测定仪第9页",
+      "new_title": "泰昌热变型、维卡软化点温度测定仪（第9页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "59222ca7-8321-4a09-b955-c2f4af14d0af",
+      "old_title": "泰昌电子天平第2页",
+      "new_title": "泰昌电子天平（第2页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "4c8e0c13-0f46-49b0-aef3-6b3883bde22e",
+      "old_title": "泰昌电子天平第4页",
+      "new_title": "泰昌电子天平（第4页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "85b728df-d209-45b5-ad31-56b2eba17362",
+      "old_title": "泰昌电子天平第6页",
+      "new_title": "泰昌电子天平（第6页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "bca54cc5-14af-477f-b88e-97832b51e615",
+      "old_title": "泰昌锤击试验装置第2页",
+      "new_title": "泰昌锤击试验装置（第2页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "f10b839b-85db-4f06-9b04-5c0b485fc4a8",
+      "old_title": "泰昌锤击试验装置第4页",
+      "new_title": "泰昌锤击试验装置（第4页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "e7eec5ff-6d29-4e8f-a35e-82bae35b29f9",
+      "old_title": "泰昌锤击试验装置第6页",
+      "new_title": "泰昌锤击试验装置（第6页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "aa621b14-530f-4120-b25e-683242588b41",
+      "old_title": "泰昌锤击试验装置第8页",
+      "new_title": "泰昌锤击试验装置（第8页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "9fd709b3-d342-4b73-951d-c7b46b254a8e",
+      "old_title": "泰昌溶体流动速率仪第1页",
+      "new_title": "泰昌溶体流动速率仪（第1页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "d9968d14-5c9f-48ab-88ae-72683fb07705",
+      "old_title": "泰昌溶体流动速率仪第2页",
+      "new_title": "泰昌溶体流动速率仪（第2页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "189ce7bf-6c9a-411c-a642-bea71cd29d51",
+      "old_title": "泰昌溶体流动速率仪第4页",
+      "new_title": "泰昌溶体流动速率仪（第4页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "8f8d30d3-1dbf-43ef-9a1b-58f22d7ff501",
+      "old_title": "泰昌溶体流动速率仪第5页",
+      "new_title": "泰昌溶体流动速率仪（第5页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "a8cff3b7-a98c-46a1-a3e6-670dfde66d4b",
+      "old_title": "泰昌溶体流动速率仪第6页",
+      "new_title": "泰昌溶体流动速率仪（第6页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "e9156fac-7431-4cab-b80d-4d9259234ccc",
+      "old_title": "泰昌电子拉力试验机第1页",
+      "new_title": "泰昌电子拉力试验机（第1页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "10c59a5f-d87f-4077-9776-70b45dede0ca",
+      "old_title": "泰昌电子拉力试验机第2页",
+      "new_title": "泰昌电子拉力试验机（第2页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "a9b16fff-190c-48f1-9148-b2f4131c1865",
+      "old_title": "泰昌电子拉力试验机第3页",
+      "new_title": "泰昌电子拉力试验机（第3页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "bf144d68-8bae-417b-81d2-3b9593d6ae84",
+      "old_title": "泰昌电子拉力试验机第5页",
+      "new_title": "泰昌电子拉力试验机（第5页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "a2c9b254-8ef7-4b8b-a2ea-a11e0cea77f1",
+      "old_title": "泰昌电子拉力试验机第6页",
+      "new_title": "泰昌电子拉力试验机（第6页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "c739b596-0d4d-40db-accf-c92875bfa6e0",
+      "old_title": "泰昌电子拉力试验机第7页",
+      "new_title": "泰昌电子拉力试验机（第7页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "97cd6c6f-f779-414a-9776-0e8784a9d4e0",
+      "old_title": "泰昌试验设备台账第1页",
+      "new_title": "泰昌试验设备台账（第1页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "e4f554ab-b411-4049-9cdf-b7c5fe17bd97",
+      "old_title": "泰昌绿色供应链认证证书第1页",
+      "new_title": "泰昌绿色供应链认证证书（第1页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "547b4a09-ca54-4980-93cd-95c5c6630ecf",
+      "old_title": "泰昌废水废气废固报告第2页",
+      "new_title": "泰昌废水废气废固报告（第2页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "f919573c-76ec-4c5d-9918-2deba616d6e9",
+      "old_title": "泰昌废水废气废固报告第3页",
+      "new_title": "泰昌废水废气废固报告（第3页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "8eca584d-06f9-4ea0-95d8-a474d7ac9da5",
+      "old_title": "泰昌废水废气废固报告第4页",
+      "new_title": "泰昌废水废气废固报告（第4页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "5f0829f5-c64a-4b3b-b125-50a4ac46689a",
+      "old_title": "泰昌2023年审计报告第2页",
+      "new_title": "年审计报告（第2页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "c322b7f2-18f0-4c9b-bc71-c66ea5857f4d",
+      "old_title": "泰昌废水废气废固报告第5页",
+      "new_title": "泰昌废水废气废固报告（第5页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "ac0f2cfd-436a-4769-8817-2dce3fd905bf",
+      "old_title": "泰昌废水废气废固报告第6页",
+      "new_title": "泰昌废水废气废固报告（第6页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "a7e9f037-cb4c-4192-91c7-41d711b3b04d",
+      "old_title": "泰昌废水废气废固报告第10页",
+      "new_title": "泰昌废水废气废固报告（第10页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "5fe249ee-020a-4c7c-8443-c901f7504401",
+      "old_title": "泰昌废水废气废固报告第11页",
+      "new_title": "泰昌废水废气废固报告（第11页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "b60ee521-770b-45f9-9c39-fdceb5c1fa57",
+      "old_title": "泰昌废水废气废固报告第12页",
+      "new_title": "泰昌废水废气废固报告（第12页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "fddeef24-f131-4795-aa44-c3566a6947e6",
+      "old_title": "泰昌废水废气废固报告第14页",
+      "new_title": "泰昌废水废气废固报告（第14页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "44d42606-81f5-4342-8042-e6110ea4c14d",
+      "old_title": "泰昌废水废气废固报告第15页",
+      "new_title": "泰昌废水废气废固报告（第15页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "ed21f14c-57be-4c6d-8182-3474325436a2",
+      "old_title": "泰昌废水废气废固报告第16页",
+      "new_title": "泰昌废水废气废固报告（第16页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "97925b21-e1af-4fe3-a0b9-66504032c4c2",
+      "old_title": "泰昌废水废气废固报告第18页",
+      "new_title": "泰昌废水废气废固报告（第18页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "ee402349-4cfc-46a6-9941-a34b1dd5ef61",
+      "old_title": "泰昌废水废气废固报告第19页",
+      "new_title": "泰昌废水废气废固报告（第19页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "f83a3458-15dc-4145-94fa-63c911925796",
+      "old_title": "泰昌废水废气废固报告第20页",
+      "new_title": "泰昌废水废气废固报告（第20页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "18f27c2c-f6bc-470a-a23b-fb42c4b32bcb",
+      "old_title": "泰昌废水废气废固报告第22页",
+      "new_title": "泰昌废水废气废固报告（第22页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "2866d09f-25d9-416c-a25e-7a3a6f56bb88",
+      "old_title": "泰昌废水废气废固报告第23页",
+      "new_title": "泰昌废水废气废固报告（第23页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "1eada0c3-50ab-460e-a02b-18610ac36533",
+      "old_title": "泰昌废水废气废固报告第24页",
+      "new_title": "泰昌废水废气废固报告（第24页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "fc31ea1e-486e-47be-b28e-f935d6497298",
+      "old_title": "泰昌废水废气废固报告第26页",
+      "new_title": "泰昌废水废气废固报告（第26页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "d02967fe-37f6-4589-91ac-5f6c0f3bf4c3",
+      "old_title": "泰昌废水废气废固报告第27页",
+      "new_title": "泰昌废水废气废固报告（第27页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "87a9d4ae-3099-4d13-a7eb-8451fdeed4f0",
+      "old_title": "泰昌废水废气废固报告第28页",
+      "new_title": "泰昌废水废气废固报告（第28页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "73d08e7a-2c3b-4baf-b132-4abf9bed79bf",
+      "old_title": "泰昌废水废气废固报告第30页",
+      "new_title": "泰昌废水废气废固报告（第30页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "8f2e5b5c-4ae1-4f26-b286-10eaa9544873",
+      "old_title": "泰昌废水废气废固报告第31页",
+      "new_title": "泰昌废水废气废固报告（第31页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "c64b868b-d062-4056-bde2-aa9effd1aff9",
+      "old_title": "泰昌废水废气废固报告第32页",
+      "new_title": "泰昌废水废气废固报告（第32页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "0bc46329-f996-4cf4-8bca-a6e620d247c2",
+      "old_title": "泰昌废水废气废固报告第34页",
+      "new_title": "泰昌废水废气废固报告（第34页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "ad558f81-a0f9-43b3-a5e7-39ea6d6622d9",
+      "old_title": "泰昌废水废气废固报告第35页",
+      "new_title": "泰昌废水废气废固报告（第35页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "2a55c5b1-b31e-4ea0-97a6-d3de1376c28d",
+      "old_title": "泰昌绿色发展规划报告第1页",
+      "new_title": "泰昌绿色发展规划报告（第1页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "ac753b6b-ff93-4a24-b5b7-7ef52f2a790e",
+      "old_title": "泰昌绿色发展规划报告第3页",
+      "new_title": "泰昌绿色发展规划报告（第3页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "ce4d0d64-477f-42a9-9e49-7eaeb3a215a1",
+      "old_title": "泰昌绿色发展规划报告第4页",
+      "new_title": "泰昌绿色发展规划报告（第4页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "97b9360f-9c14-4e70-b981-6b3205d89979",
+      "old_title": "泰昌绿色发展规划报告第5页",
+      "new_title": "泰昌绿色发展规划报告（第5页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "96dc11c9-857d-429f-b8ad-ec194bff5542",
+      "old_title": "泰昌绿色发展规划报告第7页",
+      "new_title": "泰昌绿色发展规划报告（第7页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "b5d9b4dc-ba35-4bbe-b24a-728a00b3489f",
+      "old_title": "泰昌绿色发展规划报告第8页",
+      "new_title": "泰昌绿色发展规划报告（第8页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "444a1a93-935d-447b-8eff-55bd9a697ea6",
+      "old_title": "泰昌绿色发展规划报告第9页",
+      "new_title": "泰昌绿色发展规划报告（第9页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "c12db59c-3da5-4d6e-b37e-11b87234d53e",
+      "old_title": "泰昌绿色发展规划报告第11页",
+      "new_title": "泰昌绿色发展规划报告（第11页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "0553df31-fe54-4ca3-bdf1-ec3fc220db77",
+      "old_title": "泰昌绿色发展规划报告第12页",
+      "new_title": "泰昌绿色发展规划报告（第12页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "430ddc3b-a728-44be-b151-9ea3de59cd27",
+      "old_title": "泰昌绿色发展规划报告第13页",
+      "new_title": "泰昌绿色发展规划报告（第13页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "a485732e-27cc-4ffd-9e78-b24f70214c50",
+      "old_title": "泰昌绿色发展规划报告第15页",
+      "new_title": "泰昌绿色发展规划报告（第15页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "d737d5f0-49cc-40db-88d1-1c498557bd6c",
+      "old_title": "泰昌绿色发展规划报告第16页",
+      "new_title": "泰昌绿色发展规划报告（第16页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "1f4dc22c-4424-414c-a388-02b8fc67c756",
+      "old_title": "泰昌绿色发展规划报告第17页",
+      "new_title": "泰昌绿色发展规划报告（第17页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "9d704be5-3aee-427a-ae44-656312767412",
+      "old_title": "泰昌绿色电力认证证书第1页",
+      "new_title": "泰昌绿色电力认证证书（第1页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "bb0e412b-92ce-40bf-8ecf-8d947c5ce5f5",
+      "old_title": "泰昌ESG环境社会公司治理报告第1页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第1页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "354b1569-9fdf-43e5-a0a5-7de8b21e9822",
+      "old_title": "泰昌ESG环境社会公司治理报告第2页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第2页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "843e724d-4000-4f30-aefc-8bbaa205c358",
+      "old_title": "泰昌ESG环境社会公司治理报告第4页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第4页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "97518e6f-1dcf-46e8-9ff9-6ce66843d53a",
+      "old_title": "泰昌ESG环境社会公司治理报告第5页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第5页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "c31bbe74-7060-45e4-a190-72f32f69e6c8",
+      "old_title": "泰昌ESG环境社会公司治理报告第6页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第6页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "2919ebfd-4ffc-49b9-af05-eabddc080247",
+      "old_title": "泰昌ESG环境社会公司治理报告第8页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第8页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "73bd3dcd-eb58-405b-a1a5-5edb175dc7a2",
+      "old_title": "泰昌ESG环境社会公司治理报告第9页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第9页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "c148d407-d627-46de-a090-38859656fc93",
+      "old_title": "泰昌ESG环境社会公司治理报告第10页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第10页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "5a3f2f3d-92c3-4357-905c-760086cf577e",
+      "old_title": "泰昌ESG环境社会公司治理报告第12页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第12页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "3c043789-4ef8-4120-8fe2-96b10c9fb430",
+      "old_title": "泰昌ESG环境社会公司治理报告第13页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第13页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "cda5e452-8b99-430a-a73d-b9e3520ec066",
+      "old_title": "泰昌ESG环境社会公司治理报告第14页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第14页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "5c356061-c2e6-4e46-8585-04a615720612",
+      "old_title": "泰昌ESG环境社会公司治理报告第16页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第16页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "01204750-6211-4aba-80a6-b8959260abae",
+      "old_title": "泰昌ESG环境社会公司治理报告第17页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第17页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "fb24cddf-38f5-4b2e-9de5-caacd780bcef",
+      "old_title": "泰昌ESG环境社会公司治理报告第18页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第18页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "0a0b3501-685f-4f94-afcb-a52a8a0dab40",
+      "old_title": "泰昌ESG环境社会公司治理报告第20页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第20页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "ccb2fd3d-c0a4-4aa0-8198-69f78ed7ab35",
+      "old_title": "泰昌ESG环境社会公司治理报告第21页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第21页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "f5ffa6b2-f670-4240-91c8-79db0adf8808",
+      "old_title": "泰昌ESG环境社会公司治理报告第22页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第22页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "73d340c3-e812-41c2-93ff-79b7a9456d1a",
+      "old_title": "泰昌ESG环境社会公司治理报告第24页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第24页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "b7e893bb-8f1a-496c-adf0-9b74b86c6fb4",
+      "old_title": "泰昌ESG环境社会公司治理报告第25页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第25页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "125d2583-5e5a-4997-9434-b27b3200e700",
+      "old_title": "泰昌ESG环境社会公司治理报告第26页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第26页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "2e44ca78-a44d-46e2-9e75-973de938e274",
+      "old_title": "泰昌ESG环境社会公司治理报告第28页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第28页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "6dec701b-5646-4bd4-878c-a9b48ce93c27",
+      "old_title": "泰昌ESG环境社会公司治理报告第29页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第29页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "5f1c5dab-ca6a-4e18-958b-cefab067afdd",
+      "old_title": "泰昌ESG环境社会公司治理报告第30页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第30页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "cc683960-9b1a-4108-b365-7674f23405bf",
+      "old_title": "泰昌ESG环境社会公司治理报告第32页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第32页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "b4335342-9f0e-4b7d-a045-56cbc90c4697",
+      "old_title": "泰昌ESG环境社会公司治理报告第33页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第33页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "29f7debe-1c01-44f3-81a8-211dfb7c43b5",
+      "old_title": "泰昌ESG环境社会公司治理报告第34页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第34页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "5715e991-3552-479c-b8d4-ac785bacff3f",
+      "old_title": "泰昌ESG环境社会公司治理报告第36页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第36页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "95fe27f1-2206-4be3-b438-970f2f76c281",
+      "old_title": "泰昌ESG环境社会公司治理报告第37页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第37页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "1fc9caf2-4d6a-4276-bc5e-166088483c68",
+      "old_title": "泰昌ESG环境社会公司治理报告第38页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第38页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "66a21f6d-9921-4df7-92cb-16e288c71811",
+      "old_title": "泰昌碳足迹报告第1页",
+      "new_title": "泰昌碳足迹报告（第1页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "feb7f63a-c573-441b-b61c-799e27f17e00",
+      "old_title": "泰昌碳足迹报告第3页",
+      "new_title": "泰昌碳足迹报告（第3页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "cc4c9fc6-9559-4394-b418-a8bfa6f07883",
+      "old_title": "泰昌碳足迹报告第5页",
+      "new_title": "泰昌碳足迹报告（第5页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "d6641c87-b533-41cb-bd5d-ca04585e4a5d",
+      "old_title": "泰昌碳足迹报告第7页",
+      "new_title": "泰昌碳足迹报告（第7页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "503dc3e1-141c-40f0-94d6-bdde3a1c644d",
+      "old_title": "泰昌碳足迹报告第9页",
+      "new_title": "泰昌碳足迹报告（第9页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "7989dde1-4fa8-4cf7-97e7-4a2e17a291f8",
+      "old_title": "泰昌碳足迹报告第11页",
+      "new_title": "泰昌碳足迹报告（第11页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "93033484-ff6f-4d5a-9a64-e562d98b6753",
+      "old_title": "泰昌碳足迹报告第13页",
+      "new_title": "泰昌碳足迹报告（第13页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "c02a887d-2ad1-4e1f-b5d1-8f8c437479e8",
+      "old_title": "泰昌碳足迹报告第15页",
+      "new_title": "泰昌碳足迹报告（第15页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "a9a4b40e-60b8-428f-9bac-b47604dcda37",
+      "old_title": "泰昌碳足迹报告第17页",
+      "new_title": "泰昌碳足迹报告（第17页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "f9912c4b-1572-48f1-aede-b06179171629",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司第2页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司（第2页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "dabe44c6-217b-4d38-937e-1bc9aa51db39",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司第3页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司（第3页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "a1185984-c86a-4f26-bb84-cbf8648cf472",
+      "old_title": "泰昌废水废气废固报告第8页",
+      "new_title": "泰昌废水废气废固报告（第8页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "a12bf967-e616-411f-a4a5-4d80461ca056",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第2页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第2页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "67c8bc38-817c-46da-bcda-450ab095f299",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第3页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第3页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "b888bfe6-1782-48e0-be1c-a9fce8088dae",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第4页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第4页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "07ec0661-6468-4a90-b0ee-1fc78486986f",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第5页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第5页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "324b77d0-2589-4adc-9451-1116b5680fbb",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第6页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第6页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "cd222ee6-449e-4908-add0-35815caa27ba",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第7页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第7页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "041bb7bc-ae70-4bdc-ac64-e9c24bbe0e19",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第8页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第8页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "d86ec59a-988e-466d-a446-4d1c212bf3a7",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第9页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第9页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "9c6f343c-159f-410b-a447-eaedca2f9742",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第10页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第10页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "fc73fa3e-ff35-4802-b505-e3a27c2f334e",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第11页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第11页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "01be3e9e-8a96-4c6d-a005-3209609a2ec5",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第12页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第12页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "ac2f5928-26de-4a7e-b996-4d639615d8f4",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第13页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第13页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "e14266db-317d-4481-b9c2-ad7b1feeb620",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第14页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第14页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "7660067b-f8f6-4a89-a05f-40e2a4cb640a",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第15页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第15页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "e73c4bdb-2721-47fb-ba14-3c1982cf8109",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第16页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第16页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "4a54847b-6b05-4771-ab40-2b08f495ea11",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第17页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第17页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "abacaddd-d23c-42e4-b63a-7c59d0eab6d3",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第18页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第18页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "920e1f1d-cefc-4d03-b7bc-98ea6fad8fd7",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第19页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第19页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "cb0d57bd-fb84-49d1-934e-f58cb490d48e",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第20页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第20页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "6f629ac2-7016-4659-8f30-d29959a82106",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第21页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第21页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "9753d9f6-c89b-4187-bee1-b4ee9a95b78d",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第22页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第22页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "4744499e-b404-498c-8421-028bb6c0cdff",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第23页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第23页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "c7b7f6f6-0975-482b-a891-7714708ad9da",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第24页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第24页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "0c9ba61c-fb2e-4ebe-a8f2-49b25cf662bf",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第25页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第25页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "9ffd2b53-0db8-434a-8d13-1eb48aa73213",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第26页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第26页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "5de00208-cd7b-44e1-bb9f-fb4c527c497e",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第27页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第27页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "f87f1811-b4dd-441a-b884-43b5721541e4",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第28页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第28页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "4d8fb092-376c-4203-b457-ea95edf29722",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第29页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第29页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "0536ce7d-7cc5-483c-b8a8-eea970cc0048",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第30页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第30页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "723243a3-24dd-4e2f-b7dc-a0d6e7224047",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第31页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第31页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "389e8895-320e-4c91-8ea0-9f3925ed2b97",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第32页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第32页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "67db7c86-f5f4-4f19-8529-cb6aae2d19dc",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第33页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第33页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "862735e9-8009-4b91-823d-fd714c8c4b2a",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第34页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第34页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "7bd81ada-bd05-46cb-8ae7-6b53eaee66b7",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第35页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第35页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "56a2059d-656a-450b-a555-6fe6c109599e",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第36页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第36页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "2431531d-7d64-40e6-bbd1-c9b10cbac798",
+      "old_title": "泰昌河北泰昌电力器材科技有限公司报告第37页",
+      "new_title": "泰昌河北泰昌电力器材科技有限公司报告（第37页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "72b88f23-1a9e-4400-bb0c-71cfa12758fd",
+      "old_title": "泰昌1.质量管理体系认证证书第1页",
+      "new_title": "质量管理体系认证证书（第1页）",
+      "old_category": "资质证书",
+      "new_category": "资质证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "c64f8436-a9ba-499e-8d56-5fb4902f8e0f",
+      "old_title": "泰昌1.质量管理体系认证证书第2页",
+      "new_title": "质量管理体系认证证书（第2页）",
+      "old_category": "资质证书",
+      "new_category": "资质证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "a6807d69-7cb6-4b98-8614-072a7592d580",
+      "old_title": "泰昌1.质量管理体系认证证书第3页",
+      "new_title": "质量管理体系认证证书（第3页）",
+      "old_category": "资质证书",
+      "new_category": "资质证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "bc952636-fe33-454b-b96e-edfba096a7bb",
+      "old_title": "泰昌2.环境管理体系认证证书第1页",
+      "new_title": "环境管理体系认证证书（第1页）",
+      "old_category": "资质证书",
+      "new_category": "资质证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "323dde3a-7d52-4d18-b3d0-4b32b59062e6",
+      "old_title": "泰昌2.环境管理体系认证证书第2页",
+      "new_title": "环境管理体系认证证书（第2页）",
+      "old_category": "资质证书",
+      "new_category": "资质证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "254fbb2b-02c0-40b3-bf8d-b7b231868810",
+      "old_title": "泰昌3.职业健康安全管理体系认证证书第1页",
+      "new_title": "职业健康安全管理体系认证证书（第1页）",
+      "old_category": "资质证书",
+      "new_category": "资质证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "9a97717b-bb16-490f-8d9f-7d324c4ad84b",
+      "old_title": "泰昌3.职业健康安全管理体系认证证书第2页",
+      "new_title": "职业健康安全管理体系认证证书（第2页）",
+      "old_category": "资质证书",
+      "new_category": "资质证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "e6ddb1a5-df93-408d-9ff3-7b8199f38c18",
+      "old_title": "泰昌3.职业健康安全管理体系认证证书第3页",
+      "new_title": "职业健康安全管理体系认证证书（第3页）",
+      "old_category": "资质证书",
+      "new_category": "资质证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "79dacb4d-c9a6-49a7-8ab3-8d24ebbae63f",
+      "old_title": "泰昌废水废气废固报告第1页",
+      "new_title": "泰昌废水废气废固报告（第1页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "1120692f-3386-4401-aac7-65f8ebe5b110",
+      "old_title": "泰昌废水废气废固报告第2页",
+      "new_title": "泰昌废水废气废固报告（第2页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "0e22d32d-1908-4fac-8973-03996e821801",
+      "old_title": "泰昌废水废气废固报告第3页",
+      "new_title": "泰昌废水废气废固报告（第3页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "d2729d03-956e-407c-9c5d-43b8d8c55c69",
+      "old_title": "泰昌废水废气废固报告第4页",
+      "new_title": "泰昌废水废气废固报告（第4页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "8aa8ec3f-7e9a-4816-9a25-e540691726f6",
+      "old_title": "泰昌废水废气废固报告第5页",
+      "new_title": "泰昌废水废气废固报告（第5页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "44aab31b-93c8-4d19-a8dc-e79faa7227ed",
+      "old_title": "泰昌废水废气废固报告第6页",
+      "new_title": "泰昌废水废气废固报告（第6页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "f1ec7d8b-1fa9-455c-bd1b-29be592265d9",
+      "old_title": "泰昌废水废气废固报告第7页",
+      "new_title": "泰昌废水废气废固报告（第7页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "4dae1682-7180-4dad-ba14-ce0a95c51d4e",
+      "old_title": "泰昌废水废气废固报告第8页",
+      "new_title": "泰昌废水废气废固报告（第8页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "7d6fa368-2738-4a1d-bebb-ed0eb1caa506",
+      "old_title": "泰昌废水废气废固报告第9页",
+      "new_title": "泰昌废水废气废固报告（第9页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "8bbc6123-6381-482f-a879-da1d625568d7",
+      "old_title": "泰昌废水废气废固报告第10页",
+      "new_title": "泰昌废水废气废固报告（第10页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "8eca5364-9461-4647-9557-37beafabcc08",
+      "old_title": "泰昌废水废气废固报告第11页",
+      "new_title": "泰昌废水废气废固报告（第11页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "b4024e16-1580-47c8-a2e1-60d0af8abbec",
+      "old_title": "泰昌废水废气废固报告第12页",
+      "new_title": "泰昌废水废气废固报告（第12页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "667ee292-4a25-4a1e-af92-d994593b7f48",
+      "old_title": "泰昌废水废气废固报告第13页",
+      "new_title": "泰昌废水废气废固报告（第13页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "6b798a95-6b1d-4d49-b559-02982cd67f6c",
+      "old_title": "泰昌废水废气废固报告第14页",
+      "new_title": "泰昌废水废气废固报告（第14页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "1de14d23-e944-4470-b352-0ef72527a4f1",
+      "old_title": "泰昌废水废气废固报告第15页",
+      "new_title": "泰昌废水废气废固报告（第15页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "ca7d1c2a-559d-425a-8143-71c348c75eca",
+      "old_title": "泰昌废水废气废固报告第16页",
+      "new_title": "泰昌废水废气废固报告（第16页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "f381e172-0d35-4d8a-9ffb-f98a2e0c6765",
+      "old_title": "泰昌废水废气废固报告第17页",
+      "new_title": "泰昌废水废气废固报告（第17页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "7043e238-2401-4680-b56a-cd76a1b83b00",
+      "old_title": "泰昌废水废气废固报告第18页",
+      "new_title": "泰昌废水废气废固报告（第18页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "2fb51296-e1a3-4c43-9e66-9623ccfef381",
+      "old_title": "泰昌废水废气废固报告第19页",
+      "new_title": "泰昌废水废气废固报告（第19页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "5a6fbcb0-1057-449a-874d-02c9108bb4bf",
+      "old_title": "泰昌废水废气废固报告第20页",
+      "new_title": "泰昌废水废气废固报告（第20页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "212ab3dd-0803-47c9-9b8a-2eaa0bf9be06",
+      "old_title": "泰昌废水废气废固报告第21页",
+      "new_title": "泰昌废水废气废固报告（第21页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "ed023136-6d5f-4617-a3cb-adf74b99c611",
+      "old_title": "泰昌废水废气废固报告第22页",
+      "new_title": "泰昌废水废气废固报告（第22页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "d233edf0-88b3-4776-8d43-da32d9d8d870",
+      "old_title": "泰昌废水废气废固报告第23页",
+      "new_title": "泰昌废水废气废固报告（第23页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "7671e067-32d5-40f7-b3ce-71186c7d485b",
+      "old_title": "泰昌废水废气废固报告第24页",
+      "new_title": "泰昌废水废气废固报告（第24页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "eb415262-023d-46e1-95be-04b5bd39f854",
+      "old_title": "泰昌废水废气废固报告第25页",
+      "new_title": "泰昌废水废气废固报告（第25页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "1856d76a-56f4-47a4-b0e2-d41f59e4347d",
+      "old_title": "泰昌废水废气废固报告第26页",
+      "new_title": "泰昌废水废气废固报告（第26页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "f2187aa3-8815-4be1-90af-fd241632e228",
+      "old_title": "泰昌废水废气废固报告第27页",
+      "new_title": "泰昌废水废气废固报告（第27页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "fffaf575-88d3-4e97-849c-46c8a6da28c2",
+      "old_title": "泰昌废水废气废固报告第28页",
+      "new_title": "泰昌废水废气废固报告（第28页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "c8f18ac3-f976-4ae1-bd71-a4f81ea5e288",
+      "old_title": "泰昌废水废气废固报告第29页",
+      "new_title": "泰昌废水废气废固报告（第29页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "48af9c19-097b-40d3-98ab-71fe58170843",
+      "old_title": "泰昌废水废气废固报告第30页",
+      "new_title": "泰昌废水废气废固报告（第30页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "8f0d3fc2-4a47-45a0-a464-fd58d97230c2",
+      "old_title": "泰昌废水废气废固报告第31页",
+      "new_title": "泰昌废水废气废固报告（第31页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "59bad1fb-a8be-4b8e-a7fd-fab25556ae0e",
+      "old_title": "泰昌废水废气废固报告第32页",
+      "new_title": "泰昌废水废气废固报告（第32页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "6eefe20b-54cf-4707-86b0-32024ddaa758",
+      "old_title": "泰昌废水废气废固报告第33页",
+      "new_title": "泰昌废水废气废固报告（第33页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "c679f957-3318-404f-b188-5ad8c48b7a00",
+      "old_title": "泰昌废水废气废固报告第34页",
+      "new_title": "泰昌废水废气废固报告（第34页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "e942e1b7-b486-4d4b-8391-5f01fb6ffff7",
+      "old_title": "泰昌废水废气废固报告第35页",
+      "new_title": "泰昌废水废气废固报告（第35页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "012bcbb3-9adf-4315-8329-1e0ea8006967",
+      "old_title": "泰昌绿色供应链认证证书第1页",
+      "new_title": "泰昌绿色供应链认证证书（第1页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "5de0a7ae-6e21-4673-8478-117ed3f03172",
+      "old_title": "泰昌绿色发展规划报告第1页",
+      "new_title": "泰昌绿色发展规划报告（第1页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "a5088a35-9b3a-4c06-8eca-cffec13f1e80",
+      "old_title": "泰昌绿色发展规划报告第2页",
+      "new_title": "泰昌绿色发展规划报告（第2页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "6b586bb5-a330-4472-8c63-3a84b4a240a5",
+      "old_title": "泰昌绿色发展规划报告第3页",
+      "new_title": "泰昌绿色发展规划报告（第3页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "79767ad8-478b-4019-826e-f505cbec7d95",
+      "old_title": "泰昌绿色发展规划报告第4页",
+      "new_title": "泰昌绿色发展规划报告（第4页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "728cb5fd-e163-44f4-adf6-b09fa4bf94d6",
+      "old_title": "泰昌绿色发展规划报告第5页",
+      "new_title": "泰昌绿色发展规划报告（第5页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "c1619246-846b-4ab6-83e6-e3e390e5fba1",
+      "old_title": "泰昌绿色发展规划报告第6页",
+      "new_title": "泰昌绿色发展规划报告（第6页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "44868c77-37e9-45e7-85ce-ee6d7cf3da0d",
+      "old_title": "泰昌绿色发展规划报告第7页",
+      "new_title": "泰昌绿色发展规划报告（第7页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "8a27067f-0eec-4d6c-bc19-b75f55368137",
+      "old_title": "泰昌绿色发展规划报告第8页",
+      "new_title": "泰昌绿色发展规划报告（第8页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "37b0389d-d778-4413-ada7-93f81295e109",
+      "old_title": "泰昌绿色发展规划报告第9页",
+      "new_title": "泰昌绿色发展规划报告（第9页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "4c8725b0-d3d9-4900-b863-d7cc1031b6d3",
+      "old_title": "泰昌绿色发展规划报告第10页",
+      "new_title": "泰昌绿色发展规划报告（第10页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "b3f5cbbc-ab58-41f9-8d5e-c92a5977d5ca",
+      "old_title": "泰昌绿色发展规划报告第11页",
+      "new_title": "泰昌绿色发展规划报告（第11页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "d2282a28-42b6-42a2-8c29-9eb41295fb14",
+      "old_title": "泰昌绿色发展规划报告第12页",
+      "new_title": "泰昌绿色发展规划报告（第12页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "02f0da52-f5c6-422f-9834-fc4fb415e0f9",
+      "old_title": "泰昌绿色发展规划报告第13页",
+      "new_title": "泰昌绿色发展规划报告（第13页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "d2d5fadc-1b8b-4d9a-8648-86999b660b5a",
+      "old_title": "泰昌绿色发展规划报告第14页",
+      "new_title": "泰昌绿色发展规划报告（第14页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "e261aca2-6303-441e-9605-a29ccf3a1968",
+      "old_title": "泰昌绿色发展规划报告第15页",
+      "new_title": "泰昌绿色发展规划报告（第15页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "04cc9646-61a5-4c33-aea6-a6b16ed6a27a",
+      "old_title": "泰昌绿色发展规划报告第16页",
+      "new_title": "泰昌绿色发展规划报告（第16页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "45762eaf-de3e-4ce7-bfe0-aedd90dbfa28",
+      "old_title": "泰昌绿色发展规划报告第17页",
+      "new_title": "泰昌绿色发展规划报告（第17页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "96dffe93-5d4c-4b26-b025-2f9013e52658",
+      "old_title": "泰昌绿色发展规划报告第18页",
+      "new_title": "泰昌绿色发展规划报告（第18页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "7e1feea3-277f-4656-888c-ed166c055aa6",
+      "old_title": "泰昌绿色电力认证证书第1页",
+      "new_title": "泰昌绿色电力认证证书（第1页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "8f25824f-47fe-466d-83df-1c960a9f506b",
+      "old_title": "泰昌官方Logo",
+      "new_title": "泰昌官方 Logo",
+      "old_category": "品牌标识",
+      "new_category": "品牌标识",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "ff3447bd-bede-493d-bb51-d7eb4d1b3acb",
+      "old_title": "泰昌2023年审计报告第1页",
+      "new_title": "年审计报告（第1页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "c08a6a60-9a9f-48c3-9b01-ca38bcc6661e",
+      "old_title": "泰昌2023年审计报告第3页",
+      "new_title": "年审计报告（第3页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "495b6f71-53e1-4624-9f10-29d7590b93c4",
+      "old_title": "泰昌2023年审计报告第5页",
+      "new_title": "年审计报告（第5页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "956112bc-65c3-441b-8d70-ac4d65d3b24f",
+      "old_title": "泰昌2023年审计报告第9页",
+      "new_title": "年审计报告（第9页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "c5d8c48a-290d-493a-a8a3-fc4832d4cf4f",
+      "old_title": "泰昌2023年审计报告第13页",
+      "new_title": "年审计报告（第13页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "55e8a849-d27b-46fa-a169-40d626f8522c",
+      "old_title": "泰昌2023年审计报告第17页",
+      "new_title": "年审计报告（第17页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "79a5a9af-4191-4a93-8fdb-7afdb066024e",
+      "old_title": "泰昌2024年审计报告第2页",
+      "new_title": "年审计报告（第2页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "b038dfaf-b671-42d3-a396-31be98554fbc",
+      "old_title": "泰昌2024年审计报告第6页",
+      "new_title": "年审计报告（第6页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "b6cdd3e4-f47e-4a50-8be5-574c74b88813",
+      "old_title": "泰昌2024年审计报告第10页",
+      "new_title": "年审计报告（第10页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "e341c506-c8f9-4b96-a83a-b29191c506e5",
+      "old_title": "泰昌2024年审计报告第14页",
+      "new_title": "年审计报告（第14页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "5244a1e5-7329-4a6d-be75-6e047c30ca77",
+      "old_title": "泰昌2024年审计报告第18页",
+      "new_title": "年审计报告（第18页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "35d7e546-64cf-4104-848f-2f6bac871a6d",
+      "old_title": "泰昌2024年审计报告第22页",
+      "new_title": "年审计报告（第22页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "287d4b3d-3ab2-465b-9ad5-44bcc6c9eb81",
+      "old_title": "泰昌2024年审计报告第26页",
+      "new_title": "年审计报告（第26页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "ba758f69-9be6-4714-87c6-7d06a3d536db",
+      "old_title": "泰昌2025年审计报告第1页",
+      "new_title": "年审计报告（第1页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "03cb8100-1fe9-4d6b-9c37-0eeac8655356",
+      "old_title": "泰昌2025年审计报告第5页",
+      "new_title": "年审计报告（第5页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "d425cdb3-45e6-47e9-bd12-d0ec0da0ce1e",
+      "old_title": "泰昌2025年审计报告第9页",
+      "new_title": "年审计报告（第9页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "4deeff14-1667-4304-baf2-f27876ff25c7",
+      "old_title": "泰昌2025年审计报告第13页",
+      "new_title": "年审计报告（第13页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "4712d48b-ec93-4181-8542-d3b703f16823",
+      "old_title": "泰昌2025年审计报告第17页",
+      "new_title": "年审计报告（第17页）",
+      "old_category": "财务资料",
+      "new_category": "财务资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "e014f9df-2d49-4415-a8cc-dde768690a2b",
+      "old_title": "泰昌1.质量管理体系认证证书第2页",
+      "new_title": "质量管理体系认证证书（第2页）",
+      "old_category": "资质证书",
+      "new_category": "资质证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "9fa04255-0511-407e-b5f5-9f356e1386f2",
+      "old_title": "泰昌3.职业健康安全管理体系认证证书第1页",
+      "new_title": "职业健康安全管理体系认证证书（第1页）",
+      "old_category": "资质证书",
+      "new_category": "资质证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "f49aba7e-2ab6-4bf7-8f9d-f4985c064692",
+      "old_title": "泰昌3.职业健康安全管理体系认证证书第3页",
+      "new_title": "职业健康安全管理体系认证证书（第3页）",
+      "old_category": "资质证书",
+      "new_category": "资质证书",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "f0fd8c37-1d9c-49f7-86f4-78d24302b5a0",
+      "old_title": "泰昌CPVC电缆保护管检验报告内径250第2页",
+      "new_title": "泰昌CPVC电缆保护管检验报告内径250（第2页）",
+      "old_category": "检验报告",
+      "new_category": "检验报告",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "39eed227-992a-4e19-a09b-27bcb926e665",
+      "old_title": "泰昌MPP电缆保护管检验报告内径250第1页",
+      "new_title": "泰昌MPP电缆保护管检验报告内径250（第1页）",
+      "old_category": "检验报告",
+      "new_category": "检验报告",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "25c462a6-1085-4f6d-8703-b39aa573575d",
+      "old_title": "泰昌MPP电缆保护管检验报告内径250第5页",
+      "new_title": "泰昌MPP电缆保护管检验报告内径250（第5页）",
+      "old_category": "检验报告",
+      "new_category": "检验报告",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "7082910f-7d6f-4cc4-925d-245a3d33beb5",
+      "old_title": "泰昌1.CPVC63三层复合管材挤出生产线第3页",
+      "new_title": "CPVC63三层复合管材挤出生产线（第3页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "32499ebc-7c3f-455d-a892-1df303ed8b33",
+      "old_title": "泰昌1.CPVC63三层复合管材挤出生产线第7页",
+      "new_title": "CPVC63三层复合管材挤出生产线（第7页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "d0bfa858-7b1b-4a80-a9b8-48d9e9321b86",
+      "old_title": "泰昌2.CPVC110三层复合管材挤出生产线第4页",
+      "new_title": "CPVC110三层复合管材挤出生产线（第4页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "9388d458-b187-4f5a-84b6-c6f98b9c50e2",
+      "old_title": "泰昌3.MPP生产线第1页",
+      "new_title": "MPP生产线（第1页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "c285e9dc-fde2-433f-b6fa-05f058caf963",
+      "old_title": "泰昌3.MPP生产线第3页",
+      "new_title": "MPP生产线（第3页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "c52e2e9a-d628-439e-9a6f-fe33e64616b8",
+      "old_title": "泰昌3.MPP生产线第5页",
+      "new_title": "MPP生产线（第5页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "0fb5a385-158d-4ed3-91db-aff733ece39a",
+      "old_title": "泰昌3.MPP生产线第7页",
+      "new_title": "MPP生产线（第7页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "724ce607-0b0e-4c7f-9f4e-ebe420a57867",
+      "old_title": "泰昌生产设备台账第1页",
+      "new_title": "泰昌生产设备台账（第1页）",
+      "old_category": "生产制造能力",
+      "new_category": "生产制造能力",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "37493094-c1cc-4fdd-b887-84575208ffbb",
+      "old_title": "泰昌1.土地租赁协议第4页",
+      "new_title": "土地租赁协议（第4页）",
+      "old_category": "厂房仓储资料",
+      "new_category": "厂房仓储资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "aebfc3f5-335c-4dd8-97b5-3d77fab7bc45",
+      "old_title": "泰昌3.厂房图片第3页",
+      "new_title": "厂房图片（第3页）",
+      "old_category": "厂房仓储资料",
+      "new_category": "厂房仓储资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "ecf63402-8dfe-4459-94c9-55ad4cd0f9dc",
+      "old_title": "泰昌3.厂房图片第5页",
+      "new_title": "厂房图片（第5页）",
+      "old_category": "厂房仓储资料",
+      "new_category": "厂房仓储资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "fc819889-4664-4f8d-8f19-e40fbda5d515",
+      "old_title": "泰昌4.电费发票第1页",
+      "new_title": "电费发票（第1页）",
+      "old_category": "厂房仓储资料",
+      "new_category": "厂房仓储资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "77b1007a-1106-4b84-b5a7-563c0d78e8dc",
+      "old_title": "泰昌微机控制电子万能试验机第2页",
+      "new_title": "泰昌微机控制电子万能试验机（第2页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "1cfd8a3f-b402-4a84-8f4b-e9bf2294f35b",
+      "old_title": "泰昌微机控制电子万能试验机第6页",
+      "new_title": "泰昌微机控制电子万能试验机（第6页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "1ca820ce-dfa1-4c4d-ad0c-c85f3ca11c98",
+      "old_title": "泰昌热变型、维卡软化点温度测定仪第2页",
+      "new_title": "泰昌热变型、维卡软化点温度测定仪（第2页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "579dd315-9a7a-4f95-a3c8-1a2a5ac9c217",
+      "old_title": "泰昌热变型、维卡软化点温度测定仪第6页",
+      "new_title": "泰昌热变型、维卡软化点温度测定仪（第6页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "29f3feff-babe-4a64-b20e-a93bdc6bd5fb",
+      "old_title": "泰昌电子天平第1页",
+      "new_title": "泰昌电子天平（第1页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "04e064b8-a41f-4f0d-a8a7-44c1ed545585",
+      "old_title": "泰昌电子天平第3页",
+      "new_title": "泰昌电子天平（第3页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "5c875dcd-e440-41d1-b0c1-4f152b5ed345",
+      "old_title": "泰昌电子天平第5页",
+      "new_title": "泰昌电子天平（第5页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "a137ead8-a37a-4421-bb69-32ee4a781d99",
+      "old_title": "泰昌锤击试验装置第1页",
+      "new_title": "泰昌锤击试验装置（第1页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "661c1e8b-7b37-4557-928e-86f92ddac57b",
+      "old_title": "泰昌锤击试验装置第3页",
+      "new_title": "泰昌锤击试验装置（第3页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "c6dd8d55-a7ea-478a-949b-78e041f44120",
+      "old_title": "泰昌锤击试验装置第5页",
+      "new_title": "泰昌锤击试验装置（第5页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "e58ae78c-e53a-411f-84a5-a29f0bc2dcc1",
+      "old_title": "泰昌锤击试验装置第7页",
+      "new_title": "泰昌锤击试验装置（第7页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "8c10929b-73dd-4eb6-978e-31a07295fdf7",
+      "old_title": "泰昌溶体流动速率仪第3页",
+      "new_title": "泰昌溶体流动速率仪（第3页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "0fc45d3e-bddf-47eb-8a6a-1124bf62169c",
+      "old_title": "泰昌溶体流动速率仪第7页",
+      "new_title": "泰昌溶体流动速率仪（第7页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "9552f744-1f6d-450f-8f6c-2c929f30cf10",
+      "old_title": "泰昌电子拉力试验机第4页",
+      "new_title": "泰昌电子拉力试验机（第4页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "8dfb4f43-153b-4205-9583-4ca3770d83c7",
+      "old_title": "泰昌电子拉力试验机第8页",
+      "new_title": "泰昌电子拉力试验机（第8页）",
+      "old_category": "试验检测设备",
+      "new_category": "试验检测设备",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "2d0e2a1e-6f50-4174-964a-739454126423",
+      "old_title": "泰昌废水废气废固报告第1页",
+      "new_title": "泰昌废水废气废固报告（第1页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "9bab8829-aada-4857-a0d2-b3e34d173ee3",
+      "old_title": "泰昌废水废气废固报告第7页",
+      "new_title": "泰昌废水废气废固报告（第7页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "de2f9284-e830-437c-93fb-bf841ba4fbe5",
+      "old_title": "泰昌废水废气废固报告第9页",
+      "new_title": "泰昌废水废气废固报告（第9页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "a02567cf-bf17-4b12-a8b0-9284ffc7847b",
+      "old_title": "泰昌废水废气废固报告第13页",
+      "new_title": "泰昌废水废气废固报告（第13页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "272cb87d-5518-4704-a3df-ba45583cc11c",
+      "old_title": "泰昌废水废气废固报告第17页",
+      "new_title": "泰昌废水废气废固报告（第17页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "d3f5a14e-4845-4c06-996c-1801669cc513",
+      "old_title": "泰昌废水废气废固报告第21页",
+      "new_title": "泰昌废水废气废固报告（第21页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "e00f47e3-07e7-4442-a3c7-81dd13627547",
+      "old_title": "泰昌废水废气废固报告第25页",
+      "new_title": "泰昌废水废气废固报告（第25页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "05b7c2ea-c1ec-402f-b754-4ddd3bb44312",
+      "old_title": "泰昌废水废气废固报告第29页",
+      "new_title": "泰昌废水废气废固报告（第29页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "e20c9d89-544c-4135-8f93-b17ea09fa3bc",
+      "old_title": "泰昌废水废气废固报告第33页",
+      "new_title": "泰昌废水废气废固报告（第33页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "a7188e0d-d334-4ded-9a5a-e428f5fd4334",
+      "old_title": "泰昌绿色发展规划报告第2页",
+      "new_title": "泰昌绿色发展规划报告（第2页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "88767a15-b040-4c84-af3e-ea87a5829661",
+      "old_title": "泰昌绿色发展规划报告第6页",
+      "new_title": "泰昌绿色发展规划报告（第6页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "5d826630-f671-45d6-b340-16726fe55dc4",
+      "old_title": "泰昌绿色发展规划报告第10页",
+      "new_title": "泰昌绿色发展规划报告（第10页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "0de47b93-0ba5-402a-ace8-a293b1413fff",
+      "old_title": "泰昌绿色发展规划报告第14页",
+      "new_title": "泰昌绿色发展规划报告（第14页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "1acf84aa-17d2-4460-a007-27f103994a62",
+      "old_title": "泰昌绿色发展规划报告第18页",
+      "new_title": "泰昌绿色发展规划报告（第18页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    },
+    {
+      "id": "ce51628f-149f-492e-b518-00426ea4e3e1",
+      "old_title": "泰昌ESG环境社会公司治理报告第3页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第3页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "14eec353-cff1-4b45-881b-9486f2e83b9e",
+      "old_title": "泰昌ESG环境社会公司治理报告第7页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第7页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "2af47074-6e0b-43f0-b3ad-e6c980030caf",
+      "old_title": "泰昌ESG环境社会公司治理报告第11页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第11页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "6c63b933-0267-433d-bd53-1200a97b2185",
+      "old_title": "泰昌ESG环境社会公司治理报告第15页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第15页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "a36626e4-f4e9-4877-9473-10ffd74efb93",
+      "old_title": "泰昌ESG环境社会公司治理报告第19页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第19页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "7ffb77bc-f6be-44e2-8276-f46093c8afab",
+      "old_title": "泰昌ESG环境社会公司治理报告第23页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第23页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "85f993f3-3b7c-4642-84aa-5ee5b0e47353",
+      "old_title": "泰昌ESG环境社会公司治理报告第27页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第27页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "26ede6ce-c142-44fa-809b-0c8a92b15dd6",
+      "old_title": "泰昌ESG环境社会公司治理报告第31页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第31页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "dbc931b2-479f-4ae5-bd23-724ef5291e1b",
+      "old_title": "泰昌ESG环境社会公司治理报告第35页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第35页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "686eb209-0085-4430-a544-3b3ea00207e8",
+      "old_title": "泰昌ESG环境社会公司治理报告第39页",
+      "new_title": "泰昌ESG环境社会公司治理报告（第39页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "42467d2d-a4db-4b21-b9b9-c5fb48a4fd6d",
+      "old_title": "泰昌碳足迹报告第2页",
+      "new_title": "泰昌碳足迹报告（第2页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "787db103-566b-49bf-866a-5229fa8c18e0",
+      "old_title": "泰昌碳足迹报告第4页",
+      "new_title": "泰昌碳足迹报告（第4页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "60c41046-1087-4b0d-a963-6ccb36065f4d",
+      "old_title": "泰昌碳足迹报告第6页",
+      "new_title": "泰昌碳足迹报告（第6页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "6e3cc006-1cb4-4dbf-bc58-1a1f81ee80a8",
+      "old_title": "泰昌碳足迹报告第8页",
+      "new_title": "泰昌碳足迹报告（第8页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "f91bce65-bc70-4859-ae85-0ab9a922bdbc",
+      "old_title": "泰昌碳足迹报告第10页",
+      "new_title": "泰昌碳足迹报告（第10页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "d7328364-fc81-45d7-9760-2b3143800559",
+      "old_title": "泰昌碳足迹报告第12页",
+      "new_title": "泰昌碳足迹报告（第12页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "1e0380c1-7653-4960-9512-7a33cef19775",
+      "old_title": "泰昌碳足迹报告第14页",
+      "new_title": "泰昌碳足迹报告（第14页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "ab43e330-adda-4233-8945-b88d9ccf7518",
+      "old_title": "泰昌碳足迹报告第16页",
+      "new_title": "泰昌碳足迹报告（第16页）",
+      "old_category": "绿色低碳资料",
+      "new_category": "绿色低碳资料",
+      "old_asset_type": "product_image",
+      "new_asset_type": "product_image"
+    },
+    {
+      "id": "12bcb4c3-2dd9-45e7-abb3-5a6be1bf6f3d",
+      "old_title": "泰昌营业执照副本第1页",
+      "new_title": "泰昌营业执照副本（第1页）",
+      "old_category": "基础证照",
+      "new_category": "基础证照",
+      "old_asset_type": "qualification_image",
+      "new_asset_type": "qualification_image"
+    }
+  ]
+}

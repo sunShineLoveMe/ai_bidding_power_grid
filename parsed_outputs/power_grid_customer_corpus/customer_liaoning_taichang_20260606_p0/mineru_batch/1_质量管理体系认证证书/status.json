@@ -1,0 +1,36 @@
+{
+  "parse_id": "taichang_certification_20260606_105144_ec74855a",
+  "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/1.质量管理体系认证证书.pdf",
+  "evidence_type": "certification",
+  "started_at": "2026-06-06T02:51:44.644571+00:00",
+  "parser": "mineru",
+  "privacy_level": "private",
+  "target_library": "qualification_library",
+  "batch_id": "821fc3c5-ff24-47bc-8cac-3259c85cfca7",
+  "data_id": "taichang_certification_20260606_105144_ec74855a",
+  "submitted_at": "2026-06-06T02:51:45.007404+00:00",
+  "parse_status": "mineru_done",
+  "mineru_result": {
+    "data_id": "taichang_certification_20260606_105144_ec74855a",
+    "file_name": "1.质量管理体系认证证书.pdf",
+    "state": "done",
+    "err_msg": ""
+  },
+  "artifacts": {
+    "zip_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/1_质量管理体系认证证书/mineru_result.zip",
+    "extract_dir": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/1_质量管理体系认证证书/extract",
+    "markdown_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/1_质量管理体系认证证书/extract/full.md",
+    "content_list_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/1_质量管理体系认证证书/extract/56aecc02-99f4-48d2-a4ba-a7cb917561a6_content_list.json",
+    "model_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/1_质量管理体系认证证书/extract/56aecc02-99f4-48d2-a4ba-a7cb917561a6_model.json",
+    "middle_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch/1_质量管理体系认证证书/extract/layout.json",
+    "download_info": {
+      "url_host": "cdn-mineru.openxlab.org.cn",
+      "resume_enabled": true,
+      "used_curl_fallback": true,
+      "resumed_from_bytes": 0,
+      "downloaded_bytes": 0,
+      "zip_size": 1049808
+    }
+  },
+  "finished_at": "2026-06-06T02:52:02.704797+00:00"
+}

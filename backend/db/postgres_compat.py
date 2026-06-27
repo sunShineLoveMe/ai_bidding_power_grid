@@ -47,6 +47,7 @@ JSONB_COLUMNS = {
     ("bid_generation_task_items", "metadata"),
     ("bid_generation_task_events", "payload"),
     ("bid_export_tasks", "metadata"),
+    ("bid_interpretation_tasks", "metadata"),
 }
 
 VECTOR_COLUMNS = {

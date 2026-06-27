@@ -8,6 +8,8 @@ import { InterpretationPage } from './pages/Interpretation';
 import { KnowledgeBasePage } from './pages/KnowledgeBase';
 import { ProductBasePage } from './pages/ProductBase';
 import { QualificationBasePage } from './pages/QualificationBase';
+import { BidPrefillPage } from './pages/BidPrefill';
+import { FormalCheckPage } from './pages/FormalCheck';
 import { SettingsPage } from './pages/Settings';
 import { HistoryPage } from './pages/History';
 import { UsageCostPage } from './pages/UsageCost';
@@ -37,6 +39,8 @@ export function App(): JSX.Element {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/bidding" element={<HomePage />} />
                 <Route path="/interpretation" element={<InterpretationPage />} />
+                <Route path="/prefill" element={<BidPrefillPage />} />
+                <Route path="/formal-check" element={<FormalCheckPage />} />
                 <Route path="/knowledge" element={<KnowledgeBasePage />} />
                 <Route path="/qualification" element={<QualificationBasePage />} />
                 <Route path="/products" element={<ProductBasePage />} />

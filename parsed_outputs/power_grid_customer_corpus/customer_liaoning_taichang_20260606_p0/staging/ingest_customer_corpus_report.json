@@ -1,0 +1,1135 @@
+{
+  "summary": {
+    "generated_at": "2026-06-07T19:52:20",
+    "manifest": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/staging_manifest.json",
+    "batch_id": "customer_liaoning_taichang_20260606_p0",
+    "dry_run": true,
+    "refresh": false,
+    "documents": 124,
+    "indexed": 0,
+    "skipped": 0,
+    "blocked_metadata": 0,
+    "superseded_documents": 0,
+    "parents": 2023,
+    "children": 27660,
+    "embedding_count": 27660
+  },
+  "results": [
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包1_完整招标文件_53488484541066181/包1_技术规范书_53488481987137315/国家电网有限公司_电缆保护管 - 设备部(A171-500021527-00001)714025/国家电网有限公司_电缆保护管 - 设备部(A171-500021527-00001)/A171-500021527-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 CPVC.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 278,
+      "embedding_count": 278,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包1_完整招标文件_53488484541066181/包1_技术规范书_53488481987137315/国网辽宁省电力有限公司_2025年辽宁公司省招采购非结构化固化ID编制（G00J-500032536-00005）/电缆保护管-CPVC（φ150）.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 321,
+      "embedding_count": 321,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包1_完整招标文件_53488484541066181/包1_技术规范书_53488481987137315/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500038391-00004）/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500038391-00004）.docx",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 1,
+      "children": 16,
+      "embedding_count": 16,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包1_完整招标文件_53488484541066181/包1_技术规范书_53488481987137315/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500038391-00004）/电缆保护管-CPVC（φ200）.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 289,
+      "embedding_count": 289,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包1_完整招标文件_53488484541066181/包1_技术规范书_53488481987137315/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500021532-00004）/电缆保护管-CPVC（φ100）.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 326,
+      "embedding_count": 326,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包1_完整招标文件_53488484541066181/包1_技术规范书_53488481987137315/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500038391-00003）/电缆保护管-CPVC（φ200）.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 326,
+      "embedding_count": 326,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包1_完整招标文件_53488484541066181/合同文件/5.120 10kV及以下协议库存货物采购合同通用条款（材料类）（2024版）.docx",
+      "status": "dry_run",
+      "doc_role": "contract_general_terms",
+      "parents": 53,
+      "children": 358,
+      "embedding_count": 358,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包1_完整招标文件_53488484541066181/合同文件/5.120 10kV及以下协议库存货物采购合同（材料类）（2024版）.docx",
+      "status": "dry_run",
+      "doc_role": "contract_special_terms",
+      "parents": 2,
+      "children": 9,
+      "embedding_count": 9,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包1_完整招标文件_53488484541066181/合同文件/合同专用条款文件/合同专用条款其他文件202512261654177.docx",
+      "status": "dry_run",
+      "doc_role": "contract_special_terms",
+      "parents": 3,
+      "children": 23,
+      "embedding_count": 23,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包1_完整招标文件_53488484541066181/国网辽宁电力2025年第三次物资协议库存招标采购投标邀请书及招标公告/国网辽宁电力2025年第三次物资协议库存招标采购投标邀请书及招标公告.docx",
+      "status": "dry_run",
+      "doc_role": "tender_notice",
+      "parents": 14,
+      "children": 114,
+      "embedding_count": 114,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包1_完整招标文件_53488484541066181/国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx",
+      "status": "dry_run",
+      "doc_role": "main_tender_file",
+      "parents": 116,
+      "children": 1905,
+      "embedding_count": 1905,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包2_完整招标文件_53488483999455372/包2_技术规范书_53488482466628243/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500021532-00004）/电缆保护管-CPVC（φ100）.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 326,
+      "embedding_count": 326,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包2_完整招标文件_53488483999455372/包2_技术规范书_53488482466628243/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500038391-00003）/电缆保护管-CPVC（φ200）.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 326,
+      "embedding_count": 326,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包2_完整招标文件_53488483999455372/合同文件/5.120 10kV及以下协议库存货物采购合同通用条款（材料类）（2024版）.docx",
+      "status": "dry_run",
+      "doc_role": "contract_general_terms",
+      "parents": 53,
+      "children": 358,
+      "embedding_count": 358,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包2_完整招标文件_53488483999455372/合同文件/5.120 10kV及以下协议库存货物采购合同（材料类）（2024版）.docx",
+      "status": "dry_run",
+      "doc_role": "contract_special_terms",
+      "parents": 2,
+      "children": 9,
+      "embedding_count": 9,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包2_完整招标文件_53488483999455372/合同文件/合同专用条款文件/合同专用条款其他文件202512261654177.docx",
+      "status": "dry_run",
+      "doc_role": "contract_special_terms",
+      "parents": 3,
+      "children": 23,
+      "embedding_count": 23,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包2_完整招标文件_53488483999455372/国网辽宁电力2025年第三次物资协议库存招标采购投标邀请书及招标公告/国网辽宁电力2025年第三次物资协议库存招标采购投标邀请书及招标公告.docx",
+      "status": "dry_run",
+      "doc_role": "tender_notice",
+      "parents": 14,
+      "children": 114,
+      "embedding_count": 114,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管CPVC/包2_完整招标文件_53488483999455372/国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx",
+      "status": "dry_run",
+      "doc_role": "main_tender_file",
+      "parents": 116,
+      "children": 1905,
+      "embedding_count": 1905,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包1_完整招标文件_53488483495666502/包1_技术规范书_53488482948183136/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00001)713595/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00001)/A171-500021541-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 237,
+      "embedding_count": 237,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包1_完整招标文件_53488483495666502/包1_技术规范书_53488482948183136/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00002)713768/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00002)/A171-500021541-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 239,
+      "embedding_count": 239,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包1_完整招标文件_53488483495666502/包1_技术规范书_53488482948183136/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00001)713537/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00001)/A171-500047131-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 237,
+      "embedding_count": 237,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包1_完整招标文件_53488483495666502/包1_技术规范书_53488482948183136/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00002)713828/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00002)/A171-500047131-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 239,
+      "embedding_count": 239,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包1_完整招标文件_53488483495666502/包1_技术规范书_53488482948183136/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500021520-00007）/电缆保护管-MPP非开挖（φ200）.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 289,
+      "embedding_count": 289,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包1_完整招标文件_53488483495666502/合同文件/5.120 10kV及以下协议库存货物采购合同通用条款（材料类）（2024版）.docx",
+      "status": "dry_run",
+      "doc_role": "contract_general_terms",
+      "parents": 53,
+      "children": 358,
+      "embedding_count": 358,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包1_完整招标文件_53488483495666502/合同文件/5.120 10kV及以下协议库存货物采购合同（材料类）（2024版）.docx",
+      "status": "dry_run",
+      "doc_role": "contract_special_terms",
+      "parents": 2,
+      "children": 9,
+      "embedding_count": 9,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包1_完整招标文件_53488483495666502/合同文件/合同专用条款文件/合同专用条款其他文件202512261654177.docx",
+      "status": "dry_run",
+      "doc_role": "contract_special_terms",
+      "parents": 3,
+      "children": 23,
+      "embedding_count": 23,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包1_完整招标文件_53488483495666502/国网辽宁电力2025年第三次物资协议库存招标采购投标邀请书及招标公告/国网辽宁电力2025年第三次物资协议库存招标采购投标邀请书及招标公告.docx",
+      "status": "dry_run",
+      "doc_role": "tender_notice",
+      "parents": 14,
+      "children": 114,
+      "embedding_count": 114,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包1_完整招标文件_53488483495666502/国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx",
+      "status": "dry_run",
+      "doc_role": "main_tender_file",
+      "parents": 116,
+      "children": 1905,
+      "embedding_count": 1905,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包2_完整招标文件_53488487936896812/包2_技术规范书_53488483512605679/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00001)713595/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00001)/A171-500021541-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 237,
+      "embedding_count": 237,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包2_完整招标文件_53488487936896812/包2_技术规范书_53488483512605679/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00002)713768/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00002)/A171-500021541-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 239,
+      "embedding_count": 239,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包2_完整招标文件_53488487936896812/包2_技术规范书_53488483512605679/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00001)713537/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00001)/A171-500047131-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 237,
+      "embedding_count": 237,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包2_完整招标文件_53488487936896812/包2_技术规范书_53488483512605679/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00002)713828/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00002)/A171-500047131-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 239,
+      "embedding_count": 239,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包2_完整招标文件_53488487936896812/包2_技术规范书_53488483512605679/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500021520-00007）/电缆保护管-MPP非开挖（φ200）.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 289,
+      "embedding_count": 289,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包2_完整招标文件_53488487936896812/合同文件/5.120 10kV及以下协议库存货物采购合同通用条款（材料类）（2024版）.docx",
+      "status": "dry_run",
+      "doc_role": "contract_general_terms",
+      "parents": 53,
+      "children": 358,
+      "embedding_count": 358,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包2_完整招标文件_53488487936896812/合同文件/5.120 10kV及以下协议库存货物采购合同（材料类）（2024版）.docx",
+      "status": "dry_run",
+      "doc_role": "contract_special_terms",
+      "parents": 2,
+      "children": 9,
+      "embedding_count": 9,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包2_完整招标文件_53488487936896812/合同文件/合同专用条款文件/合同专用条款其他文件202512261654177.docx",
+      "status": "dry_run",
+      "doc_role": "contract_special_terms",
+      "parents": 3,
+      "children": 23,
+      "embedding_count": 23,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包2_完整招标文件_53488487936896812/国网辽宁电力2025年第三次物资协议库存招标采购投标邀请书及招标公告/国网辽宁电力2025年第三次物资协议库存招标采购投标邀请书及招标公告.docx",
+      "status": "dry_run",
+      "doc_role": "tender_notice",
+      "parents": 14,
+      "children": 114,
+      "embedding_count": 114,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包2_完整招标文件_53488487936896812/国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx",
+      "status": "dry_run",
+      "doc_role": "main_tender_file",
+      "parents": 116,
+      "children": 1905,
+      "embedding_count": 1905,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/包3_技术规范书_53488484020778719/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00002)713768/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00002)/A171-500021541-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 239,
+      "embedding_count": 239,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/包3_技术规范书_53488484020778719/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00001)713537/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00001)/A171-500047131-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 237,
+      "embedding_count": 237,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/包3_技术规范书_53488484020778719/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00002)713828/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00002)/A171-500047131-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 239,
+      "embedding_count": 239,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/包3_技术规范书_53488484020778719/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021546-00006）/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021546-00006）.docx",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 1,
+      "children": 16,
+      "embedding_count": 16,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/包3_技术规范书_53488484020778719/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021546-00006）/电缆保护管-MPP地埋用（φ175）.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 288,
+      "embedding_count": 288,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/包3_技术规范书_53488484020778719/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021546-00007）/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021546-00007）.docx",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 1,
+      "children": 16,
+      "embedding_count": 16,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/包3_技术规范书_53488484020778719/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021546-00007）/电缆保护管-MPP非开挖（φ175）.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 285,
+      "embedding_count": 285,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/包3_技术规范书_53488484020778719/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500021520-00006）/电缆保护管-MPP地埋用（φ200）.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 293,
+      "embedding_count": 293,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/包3_技术规范书_53488484020778719/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500021520-00007）/电缆保护管-MPP非开挖（φ200）.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 289,
+      "embedding_count": 289,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/合同文件/5.120 10kV及以下协议库存货物采购合同通用条款（材料类）（2024版）.docx",
+      "status": "dry_run",
+      "doc_role": "contract_general_terms",
+      "parents": 53,
+      "children": 358,
+      "embedding_count": 358,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/合同文件/5.120 10kV及以下协议库存货物采购合同（材料类）（2024版）.docx",
+      "status": "dry_run",
+      "doc_role": "contract_special_terms",
+      "parents": 2,
+      "children": 9,
+      "embedding_count": 9,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/合同文件/合同专用条款文件/合同专用条款其他文件202512261654177.docx",
+      "status": "dry_run",
+      "doc_role": "contract_special_terms",
+      "parents": 3,
+      "children": 23,
+      "embedding_count": 23,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/国网辽宁电力2025年第三次物资协议库存招标采购投标邀请书及招标公告/国网辽宁电力2025年第三次物资协议库存招标采购投标邀请书及招标公告.docx",
+      "status": "dry_run",
+      "doc_role": "tender_notice",
+      "parents": 14,
+      "children": 114,
+      "embedding_count": 114,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包3_完整招标文件_53488487342213219/国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx",
+      "status": "dry_run",
+      "doc_role": "main_tender_file",
+      "parents": 116,
+      "children": 1905,
+      "embedding_count": 1905,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国家电网有限公司_电缆保护管 - 设备部(A171-500021520-00002)713962/国家电网有限公司_电缆保护管 - 设备部(A171-500021520-00002)/A171-500021520-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 239,
+      "embedding_count": 239,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00001)713595/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00001)/A171-500021541-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 237,
+      "embedding_count": 237,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00002)713768/国家电网有限公司_电缆保护管 - 设备部(A171-500021541-00002)/A171-500021541-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 239,
+      "embedding_count": 239,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国家电网有限公司_电缆保护管 - 设备部(A171-500021546-00002)713903/国家电网有限公司_电缆保护管 - 设备部(A171-500021546-00002)/A171-500021546-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 239,
+      "embedding_count": 239,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00001)713537/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00001)/A171-500047131-00001 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP 非开挖.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 237,
+      "embedding_count": 237,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00002)713828/国家电网有限公司_电缆保护管 - 设备部(A171-500047131-00002)/A171-500047131-00002 国家电网公司总部-配网标准化物资固化技术规范书-电缆保护管 MPP埋地用.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 239,
+      "embedding_count": 239,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021520-00008）/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021520-00008）.docx",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 1,
+      "children": 16,
+      "embedding_count": 16,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国网辽宁省电力有限公司_2025年辽宁公司配农网批次采购结构化技术规范编制（G00J-500021520-00008）/电缆保护管-MPP非开挖（φ200）.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 287,
+      "embedding_count": 287,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500021520-00006）/电缆保护管-MPP地埋用（φ200）.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 293,
+      "embedding_count": 293,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500021520-00007）/电缆保护管-MPP非开挖（φ200）.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 289,
+      "embedding_count": 289,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500021546-00004）/电缆保护管-MPP地埋用（φ175）.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 293,
+      "embedding_count": 293,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/包4_技术规范书_53488484565315667/国网辽宁省电力有限公司_辽宁公司二级采购非结构化固化ID编制（G00J-500021546-00005）/电缆保护管-MPP非开挖（φ175）.doc",
+      "status": "dry_run",
+      "doc_role": "technical_spec",
+      "parents": 2,
+      "children": 289,
+      "embedding_count": 289,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/合同文件/5.120 10kV及以下协议库存货物采购合同通用条款（材料类）（2024版）.docx",
+      "status": "dry_run",
+      "doc_role": "contract_general_terms",
+      "parents": 53,
+      "children": 358,
+      "embedding_count": 358,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/合同文件/5.120 10kV及以下协议库存货物采购合同（材料类）（2024版）.docx",
+      "status": "dry_run",
+      "doc_role": "contract_special_terms",
+      "parents": 2,
+      "children": 9,
+      "embedding_count": 9,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/合同文件/合同专用条款文件/合同专用条款其他文件202512261654177.docx",
+      "status": "dry_run",
+      "doc_role": "contract_special_terms",
+      "parents": 3,
+      "children": 23,
+      "embedding_count": 23,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/国网辽宁电力2025年第三次物资协议库存招标采购投标邀请书及招标公告/国网辽宁电力2025年第三次物资协议库存招标采购投标邀请书及招标公告.docx",
+      "status": "dry_run",
+      "doc_role": "tender_notice",
+      "parents": 14,
+      "children": 114,
+      "embedding_count": 114,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/extracted/电缆保护管MPP/包4_完整招标文件_53488486837695864/国网辽宁电力2025年第三次物资协议库存招标采购招标文件.docx",
+      "status": "dry_run",
+      "doc_role": "main_tender_file",
+      "parents": 116,
+      "children": 1905,
+      "embedding_count": 1905,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "customer_liaoning_taichang_20260606_p0/goods_tables/goods_rows.json#CPVC",
+      "status": "dry_run",
+      "doc_role": "goods_list",
+      "parents": 1,
+      "children": 36,
+      "embedding_count": 36,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "customer_liaoning_taichang_20260606_p0/goods_tables/goods_rows.json#MPP",
+      "status": "dry_run",
+      "doc_role": "goods_list",
+      "parents": 1,
+      "children": 53,
+      "embedding_count": 53,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 49,
+      "children": 216,
+      "embedding_count": 216,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 77,
+      "children": 321,
+      "embedding_count": 321,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 50,
+      "children": 209,
+      "embedding_count": 209,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/1.质量管理体系认证证书.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 10,
+      "children": 76,
+      "embedding_count": 76,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/2.环境管理体系认证证书.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 5,
+      "children": 57,
+      "embedding_count": 57,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/3.职业健康安全管理体系认证证书.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 10,
+      "children": 60,
+      "embedding_count": 60,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/CPVC电缆保护管检验报告内径250.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 9,
+      "children": 32,
+      "embedding_count": 32,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 9,
+      "children": 33,
+      "embedding_count": 33,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/1.人员情况一览表/1.试验检测人员证书/1.陈仙瑞.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 1,
+      "children": 11,
+      "embedding_count": 11,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/1.人员情况一览表/1.试验检测人员证书/2.晁坤琳.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 1,
+      "children": 16,
+      "embedding_count": 16,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/1.人员情况一览表/2.人员花名册/公司人员花名册.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 2,
+      "children": 2,
+      "embedding_count": 2,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/1.人员情况一览表/3.劳动合同/1.陈仙瑞.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 10,
+      "children": 25,
+      "embedding_count": 25,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/1.人员情况一览表/3.劳动合同/2.晁坤琳.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 10,
+      "children": 25,
+      "embedding_count": 25,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/1.人员情况一览表/4.参保证明/泰昌社保证明.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 1,
+      "children": 22,
+      "embedding_count": 22,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/1.CPVC63三层复合管材挤出生产线/1.CPVC63三层复合管材挤出生产线.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 10,
+      "children": 83,
+      "embedding_count": 83,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/2.CPVC110三层复合管材挤出生产线/2.CPVC110三层复合管材挤出生产线.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 10,
+      "children": 83,
+      "embedding_count": 83,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/3.MPP生产线/3.MPP生产线.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 2,
+      "children": 69,
+      "embedding_count": 69,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.主要生产装备一览表/生产设备台账.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 1,
+      "children": 5,
+      "embedding_count": 5,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.生产厂房一览表/1.土地租赁协议.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 5,
+      "children": 52,
+      "embedding_count": 52,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.生产厂房一览表/2.土地使用证明.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 1,
+      "children": 7,
+      "embedding_count": 7,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.生产厂房一览表/3.厂房图片.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 1,
+      "children": 22,
+      "embedding_count": 22,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/4生产制造/2.生产厂房一览表/4.电费发票.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 1,
+      "children": 6,
+      "embedding_count": 6,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/1.微机控制电子万能试验机/微机控制电子万能试验机.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 13,
+      "children": 140,
+      "embedding_count": 140,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 15,
+      "children": 163,
+      "embedding_count": 163,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/3.电子天平/电子天平.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 13,
+      "children": 118,
+      "embedding_count": 118,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/4.锤击试验装置/锤击试验装置.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 15,
+      "children": 127,
+      "embedding_count": 127,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/5.溶体流动速率仪/溶体流动速率仪.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 11,
+      "children": 122,
+      "embedding_count": 122,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 16,
+      "children": 146,
+      "embedding_count": 146,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/试验设备台账.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 1,
+      "children": 5,
+      "embedding_count": 5,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/1.试验检测人员证书/1.陈仙瑞.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 1,
+      "children": 11,
+      "embedding_count": 11,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/1.试验检测人员证书/2.晁坤琳.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 1,
+      "children": 16,
+      "embedding_count": 16,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/2.人员花名册/公司人员花名册.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 2,
+      "children": 2,
+      "embedding_count": 2,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/3.劳动合同/1.陈仙瑞.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 10,
+      "children": 25,
+      "embedding_count": 25,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/3.劳动合同/2.晁坤琳.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 10,
+      "children": 25,
+      "embedding_count": 25,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/2.主要试验检测人员相关信息/4.参保证明/泰昌社保证明.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 1,
+      "children": 22,
+      "embedding_count": 22,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/1绿色工厂、绿色供应链管理企业评价/绿色供应链认证证书.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 3,
+      "children": 32,
+      "embedding_count": 32,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/2废水.废气废固监(检)测报告一览表/废水废气废固报告.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 38,
+      "children": 202,
+      "embedding_count": 202,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色发展规划报告.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 40,
+      "children": 86,
+      "embedding_count": 86,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/3绿色管理体系文件一览表/绿色电力认证证书.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 3,
+      "children": 29,
+      "embedding_count": 29,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/4环境.社会.公司治理(ESG)报告一览表/ESG环境社会公司治理报告.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 56,
+      "children": 234,
+      "embedding_count": 234,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/6绿色低碳/5其他绿色低碳证书一览表/碳足迹报告.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 30,
+      "children": 105,
+      "embedding_count": 105,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/营业执照副本.pdf",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 3,
+      "children": 15,
+      "embedding_count": 15,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌基础证照内部专用图片资产目录.md",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 2,
+      "children": 3,
+      "embedding_count": 3,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌资质证书图片资产目录.md",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 42,
+      "children": 83,
+      "embedding_count": 83,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌财务资料内部专用图片资产目录.md",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 64,
+      "children": 130,
+      "embedding_count": 130,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌绿色低碳资料图片资产目录.md",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 39,
+      "children": 93,
+      "embedding_count": 93,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌检验报告图片资产目录.md",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 3,
+      "children": 5,
+      "embedding_count": 5,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌生产制造能力图片资产目录.md",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 31,
+      "children": 61,
+      "embedding_count": 61,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌生产制造能力内部专用图片资产目录.md",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 8,
+      "children": 15,
+      "embedding_count": 15,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌试验检测能力图片资产目录.md",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 54,
+      "children": 107,
+      "embedding_count": 107,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/texts/asset_catalogs/泰昌试验检测能力内部专用图片资产目录.md",
+      "status": "dry_run",
+      "doc_role": "enterprise_evidence",
+      "parents": 8,
+      "children": 15,
+      "embedding_count": 15,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/01_tender_documents/22_国网辽宁电力2025年第三次物资协议库存招标采购/技术补充文件_电缆保护管CPVC.pdf",
+      "status": "dry_run",
+      "doc_role": "technical_response_reference",
+      "parents": 6,
+      "children": 32,
+      "embedding_count": 32,
+      "metadata_warnings": []
+    },
+    {
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/商务投标文件-中标，按投标人制作.pdf",
+      "status": "dry_run",
+      "doc_role": "winning_bid_reference",
+      "parents": 5,
+      "children": 27,
+      "embedding_count": 27,
+      "metadata_warnings": []
+    }
+  ]
+}

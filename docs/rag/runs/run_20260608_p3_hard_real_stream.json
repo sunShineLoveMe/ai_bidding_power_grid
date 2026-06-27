@@ -1,0 +1,94 @@
+{
+  "hard_cpvc_report_isolation_stream": {
+    "query": "泰昌CPVC电缆保护管内径250平均内径和壁厚，应从CPVC检验报告找依据，不要把MPP环刚度当成CPVC参数。",
+    "done": true,
+    "errors": [],
+    "event_count": 706,
+    "context_count": 5,
+    "bad_visible_source": false,
+    "source_names": [
+      {
+        "source_display_name": "MPP电缆保护管检验报告内径250.pdf",
+        "category_label": "泰昌产品结构化参数",
+        "evidence_type_label": "检验报告",
+        "target_library_label": "产品库资料",
+        "retrieval_source": "structured_product_parameter_json"
+      },
+      {
+        "source_display_name": "MPP电缆保护管检验报告内径250.pdf",
+        "category_label": "泰昌产品结构化参数",
+        "evidence_type_label": "检验报告",
+        "target_library_label": "产品库资料",
+        "retrieval_source": "structured_product_parameter_json"
+      },
+      {
+        "source_display_name": "MPP电缆保护管检验报告内径250.pdf",
+        "category_label": "泰昌产品结构化参数",
+        "evidence_type_label": "检验报告",
+        "target_library_label": "产品库资料",
+        "retrieval_source": "structured_product_parameter_json"
+      },
+      {
+        "source_display_name": "CPVC电缆保护管检验报告内径250.pdf",
+        "category_label": "泰昌产品结构化参数",
+        "evidence_type_label": "检验报告",
+        "target_library_label": "产品库资料",
+        "retrieval_source": "structured_product_parameter_json"
+      },
+      {
+        "source_display_name": "CPVC电缆保护管检验报告内径250.pdf",
+        "category_label": "泰昌产品结构化参数",
+        "evidence_type_label": "检验报告",
+        "target_library_label": "产品库资料",
+        "retrieval_source": "structured_product_parameter_json"
+      }
+    ],
+    "answer_preview": "## 结论\n\n根据河北泰昌电力器材科技有限公司提供的CPVC电缆保护管检验报告，您所询问的CPVC电缆保护管（规格型号：DS 250×15×6000 SN16 PVC-C，公称内径：250）的**承口平均内径**检验结果为**280.5mm**，符合标准要求。当前资料中**未包含该产品的壁厚参数**。\n\n## 关键信息\n\n*   **产品**：泰昌 CPVC电缆保护管\n*   **企业**：河北泰昌电力器材科技有限公司\n*   **规格型号**：DS 250×15×6000 SN16 PVC-C\n*   **公称内径**：250 mm\n*   **承口平均内径**：280.5 mm（标准要求：280.0~281.5 mm，检验结果：合格）\n*   **壁厚**：当前资料未提供CPVC型号的壁厚数据，无法确认。\n\n## 操作建议\n\n1.  **参数确认**：您提到的“平均内径”可能指“承口平均内径”，参数已确认；但**壁厚参数**在当前提供的CPVC检验报告中缺失。\n2.  **资料补充**：为保证标书参数的完整性，建议您从完整的《CPVC电缆保护管检验报告内径250.pdf》中查找壁厚数据，或联系厂家获取该产品的壁厚规格。\n3.  **标书编制建议**：CPVC检验报告可直接作为技术响应文件的证明材料。建议将检验报告首页及包含关键参数（如承口内径）的页面插入标书。\n\n根据当前资料，CPVC检验报告可作为证明材料插入标书，建议选用包含报告编号、产品名称及主要参数的第1页和关键尺寸数据的页面。\n\n![泰昌CPVC电缆保护管检验报告内径250第1页](/api/knowledge/assets/9784a2d3-ad13-467e-acc8-c5848109a797/file)\n\n![泰昌CPVC电缆保护管检验报告内径250第2页](/api/knowledge/assets/f0fd8c37-1d9c-49f7-86f4-78d24302b5a0/file)\n\n![泰昌CPVC电缆保护管检验报告内径250第3页](/api/knowledge/assets/7dc74695-2594-4888-b845-af5bd3130ae6/file)\n\n## 需要确认或补充\n\n*   当前资料**不足以确认**泰昌CPVC电缆保护管内径250规格的 **壁厚** 具体数值。\n*   需要补充该型号CPVC产品的完整检验报告或产品规格书以获取壁厚信息。\n*   请注意：MPP产品的壁厚（22.0~22.1mm）及环刚度数据不能作为CPVC产品的参数。\n\n## 参考依据\n\n*   **资料4**、**资料5**：提供了泰昌CPVC产品的“承口平均内径”（280.5mm）及环刚度（80°C）等参数，确认了检验合格结论。\n*   **图片资产1**、**图片资产2**、**图片资产3**：为泰昌CPVC检验报告第1、2、3页的整页图片，作为证明材料插入本回答。"
+  },
+  "hard_production_capacity_stream": {
+    "query": "写泰昌生产制造能力时，应优先引用泰昌CPVC、MPP生产线和厂房资料，不要引用河北豪乾模板或辽宁招标要求。",
+    "done": true,
+    "errors": [],
+    "event_count": 714,
+    "context_count": 5,
+    "bad_visible_source": false,
+    "source_names": [
+      {
+        "source_display_name": "MPP电缆保护管检验报告内径250.pdf",
+        "category_label": "泰昌产品结构化参数",
+        "evidence_type_label": "检验报告",
+        "target_library_label": "产品库资料",
+        "retrieval_source": "structured_product_parameter_json"
+      },
+      {
+        "source_display_name": "MPP电缆保护管检验报告内径250.pdf",
+        "category_label": "泰昌产品结构化参数",
+        "evidence_type_label": "检验报告",
+        "target_library_label": "产品库资料",
+        "retrieval_source": "structured_product_parameter_json"
+      },
+      {
+        "source_display_name": "MPP电缆保护管检验报告内径250.pdf",
+        "category_label": "泰昌产品结构化参数",
+        "evidence_type_label": "检验报告",
+        "target_library_label": "产品库资料",
+        "retrieval_source": "structured_product_parameter_json"
+      },
+      {
+        "source_display_name": "MPP电缆保护管检验报告内径250.pdf",
+        "category_label": "泰昌产品结构化参数",
+        "evidence_type_label": "检验报告",
+        "target_library_label": "产品库资料",
+        "retrieval_source": "structured_product_parameter_json"
+      },
+      {
+        "source_display_name": "MPP电缆保护管检验报告内径250.pdf",
+        "category_label": "泰昌产品结构化参数",
+        "evidence_type_label": "检验报告",
+        "target_library_label": "产品库资料",
+        "retrieval_source": "structured_product_parameter_json"
+      }
+    ],
+    "answer_preview": "## 结论\n河北泰昌电力器材科技有限公司拥有明确的 MPP 电缆保护管产品检验合格记录，以及 CPVC 三层复合管材挤出生产线相关的生产制造能力资料。这些资料可以作为撰写其生产制造能力章节的优先依据。\n\n## 关键信息\n- **企业名称**：河北泰昌电力器材科技有限公司。\n- **产品证明**：MPP 电缆保护管（规格型号 DF 250×22×9000 SN40 MPP）的多项关键参数，如静摩擦系数、维卡软化温度、纵向回缩率、落锤冲击等，均通过检验并获得“合格”结论（报告编号：2024100312005501712）。\n- **生产设备凭证**：企业提供了“CPVC63 三层复合管材挤出生产线”和“CPVC110 三层复合管材挤出生产线”的图片资料，展示了其具备生产相关管材的能力。例如，下图是CPVC63三层复合管材挤出生产线的资料示意。\n\n![泰昌1.CPVC63三层复合管材挤出生产线第1页](/api/knowledge/assets/e9615f9b-922c-489d-ba5d-61ad4933aa95/file)\n\n## 操作建议\n在标书“生产制造能力”章节中，可按以下步骤组合使用资料：\n1.  **产品参数证明**：叙述 MPP 电缆保护管产品的检验报告数据（如维卡软化温度 152°C，纵向回缩率 1.4% 等），证明产品生产过程受控。\n2.  **设备能力证明**：插入 CPVC 生产线图片，并说明企业配备了专业的管材挤出生产线，具备规模化、专业化生产条件。\n3.  **图片插入建议**：建议将最清晰的1-2张CPVC生产线整页图（如第1页和第3页）插入到“生产设备与能力”段落。例如：\n    > 河北泰昌配备了专业的 CPVC 三层复合管材挤出生产线（见下图），具备批量生产高精度管材的硬件基础。\n    >\n    > ![泰昌1.CPVC63三层复合管材挤出生产线第3页](/api/knowledge/assets/7082910f-7d6f-4cc4-925d-245a3d33beb5/file)\n\n## 需要确认或补充\n- 当前资料中仅提供了 CPVC 生产线的图片，缺少 **MPP 管材生产线** 的图片或具体参数。建议补充 MPP 生产线（如：MPP 电力管材挤出生产线）的相关彩页或技术参数，使 CPVC 和 MPP 两大核心产品线均能展示。\n- 未提供 **厂房、车间实景** 及 **质量检测实验室** 的图片，若标书要求展示厂区全貌或检测环境，需企业进一步提供。\n\n## 参考依据\n- **资料 1-5**：来自《MPP电缆保护管检验报告内径250.pdf》，提供了泰昌 MPP 产品的 5 项核心参数及合格结论。\n- **图片资产 1-8**：来自《1.CPVC63三层复合管材挤出生产线.pdf》及《2.CPVC110三层复合管材挤出生产线.pdf》，共 8 页，展示了泰昌的 CPVC 管材生产设备资产。"
+  }
+}

@@ -1,0 +1,1357 @@
+{
+  "generated_at": "2026-06-25T13:34:16.151416+00:00",
+  "ok": true,
+  "base_url": "http://127.0.0.1:3012",
+  "timeout": 600,
+  "error": null,
+  "artifacts": {
+    "ready": {
+      "checks": {
+        "celery": {
+          "status": "ok",
+          "workers": 2
+        },
+        "database": {
+          "checks": {
+            "match_knowledge_assets": true,
+            "match_knowledge_chunks": true,
+            "vector": true
+          },
+          "status": "ok"
+        },
+        "model_config": {
+          "optional": {
+            "mineru_api_token": true
+          },
+          "required": {
+            "dashscope_api_key": true,
+            "deepseek_api_key": true
+          },
+          "status": "ok"
+        },
+        "redis": {
+          "host": "127.0.0.1",
+          "port": 16379,
+          "status": "ok"
+        },
+        "storage": {
+          "provider": "local",
+          "root": "storage",
+          "status": "ok"
+        }
+      },
+      "duration_ms": 2095,
+      "status": "ok"
+    },
+    "project_id": "5ea0b61e-4e1c-46b7-9749-0d86fe28c7fa",
+    "file_id": "dc11e66d-2d33-44c0-afcc-e04146f49b91",
+    "supabase_file_id": "fbc4e459-635a-43ef-9afc-8d7d3a1ce525",
+    "sample_file": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/ai-bidding-smoke-fs0zr7s3/power-grid-smoke-tender.md",
+    "parse_status": {
+      "downloadRetryCount": 0,
+      "error": null,
+      "errorType": null,
+      "failureStage": null,
+      "fileId": "dc11e66d-2d33-44c0-afcc-e04146f49b91",
+      "mineru": {
+        "artifacts": {
+          "content_list_path": "parsed_outputs/dc11e66d-2d33-44c0-afcc-e04146f49b91/native_text/native_content_list.json",
+          "extract_dir": "parsed_outputs/dc11e66d-2d33-44c0-afcc-e04146f49b91/native_text",
+          "markdown_path": "parsed_outputs/dc11e66d-2d33-44c0-afcc-e04146f49b91/native_text/full.md",
+          "middle_path": null,
+          "model_path": null,
+          "parser": "native_text",
+          "source_file": "uploads/8612fdd4-e1c1-4f3d-8955-4e953657d89a-power-grid-smoke-tender.md",
+          "zip_path": null
+        },
+        "file_name": "power-grid-smoke-tender.md",
+        "indexed_source": "parsed_outputs/dc11e66d-2d33-44c0-afcc-e04146f49b91/native_text/full.md",
+        "parse_recovery_started_at": "2026-06-25T13:32:13Z",
+        "parse_status": "indexed",
+        "parser": "native_text",
+        "project_id": "5ea0b61e-4e1c-46b7-9749-0d86fe28c7fa",
+        "retryable": true,
+        "source_file": "uploads/8612fdd4-e1c1-4f3d-8955-4e953657d89a-power-grid-smoke-tender.md",
+        "supabase_file_id": "fbc4e459-635a-43ef-9afc-8d7d3a1ce525",
+        "supabase_ingest_result": {
+          "bid_file_id": "fbc4e459-635a-43ef-9afc-8d7d3a1ce525",
+          "chapter_suggestions": 1,
+          "chunks": 1,
+          "content_blocks": 1,
+          "markdown_chars": 191,
+          "project_id": "5ea0b61e-4e1c-46b7-9749-0d86fe28c7fa",
+          "requirements": 4,
+          "risks": 0,
+          "scoring_items": 1
+        },
+        "supabase_ingest_status": "done",
+        "updated_at": "2026-06-25T13:32:14Z",
+        "user_message": "后台解析任务未继续推进，系统正在自动恢复解析。"
+      },
+      "parseCompleted": true,
+      "parseStatus": "indexed",
+      "retryable": false,
+      "supabaseFile": {
+        "bucket": "tender-files",
+        "created_at": "2026-06-25T21:32:13.916445+08:00",
+        "file_hash": "1358af2e6a183675c847f3c0199fd5bb7f79fad47a562d1d15b347faff01a4cd",
+        "file_name": "power-grid-smoke-tender.md",
+        "file_size": 440,
+        "file_type": "md",
+        "id": "fbc4e459-635a-43ef-9afc-8d7d3a1ce525",
+        "object_path": "5ea0b61e-4e1c-46b7-9749-0d86fe28c7fa/d383ce3d7fa84bfb90fd2a0419d3d84d.md",
+        "parse_status": "indexed",
+        "project_id": "5ea0b61e-4e1c-46b7-9749-0d86fe28c7fa"
+      },
+      "userMessage": null
+    },
+    "outline_chapters": 102,
+    "section_id": "11cd7975-4769-483e-a7bd-6fd9f2fdacd2",
+    "section_count": 1,
+    "section_generation_task_id": "d4e46ffa-6f9c-4351-9314-508b88dcd931",
+    "compliance_rows": 5,
+    "compliance_summary": {
+      "covered": 3,
+      "highRiskMissing": 0,
+      "metricName": "条款覆盖率",
+      "missing": 1,
+      "partial": 1,
+      "percent": 70,
+      "scopeNote": "当前按完整投标文件统计；仅追踪招标条款、评分项、风险项在章节正文中的覆盖证据，投标信息确认页字段不计入该指标，也不等同于最终 Word 标书合规结论。",
+      "total": 5,
+      "volumeName": "完整投标文件",
+      "volumeType": "all"
+    },
+    "docx_task_id": "8c288ea9-4e24-4c59-9d89-84933e939527",
+    "docx_export": {
+      "created_at": "2026-06-25T21:34:10.088057+08:00",
+      "download_url": "/api/outputs/Guo_Wang_Pei_Dian_Zi_Dong_Hua_Zhong_Duan_Cai_Gou_Xiang_Mu/%E5%9B%BD%E7%BD%91%E9%85%8D%E7%94%B5%E8%87%AA%E5%8A%A8%E5%8C%96%E7%BB%88%E7%AB%AF%E9%87%87%E8%B4%AD%E9%A1%B9%E7%9B%AE%E6%8A%95%E6%A0%87%E6%96%87%E4%BB%B6-%E6%B2%B3%E5%8C%97%E6%B3%B0%E6%98%8C%E7%94%B5%E5%8A%9B%E5%99%A8%E6%9D%90%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-%E5%9B%BE%E6%96%87.docx",
+      "error_message": null,
+      "export_type": "docx",
+      "file_name": "国网配电自动化终端采购项目投标文件-河北泰昌电力器材科技有限公司-图文.docx",
+      "file_path": "outputs/Guo_Wang_Pei_Dian_Zi_Dong_Hua_Zhong_Duan_Cai_Gou_Xiang_Mu/国网配电自动化终端采购项目投标文件-河北泰昌电力器材科技有限公司-图文.docx",
+      "finished_at": "2026-06-25T13:34:14.997676+08:00",
+      "id": "8c288ea9-4e24-4c59-9d89-84933e939527",
+      "message": "DOCX 已完成自动刷新，目录页码、页脚页码和总页数字段已重新保存。",
+      "metadata": {
+        "docx_template": {
+          "bidder_full_name": "河北泰昌电力器材科技有限公司",
+          "body_first_line_indent_pt": 28.0,
+          "body_font": "FangSong_GB2312",
+          "body_font_size_pt": 14.0,
+          "body_latin_font": "Times New Roman",
+          "body_line_spacing_pt": 22.0,
+          "cover_fields": {
+            "文件类型": "投标文件",
+            "项目名称": "国网配电自动化终端采购项目"
+          },
+          "cover_title_font_size_pt": 36.0,
+          "header_footer": {
+            "footer_font": "FangSong_GB2312",
+            "footer_font_size_pt": 9,
+            "header_font": "FangSong_GB2312",
+            "header_font_size_pt": 9,
+            "header_max_chars": 42,
+            "header_text": "左侧项目名称，右侧投标文件",
+            "page_number_format": "第 X 页 共 Y 页"
+          },
+          "heading_font": "SimHei",
+          "heading_keep_with_next": false,
+          "heading_level3_font": "KaiTi_GB2312",
+          "list_hanging_indent_pt": 14.0,
+          "list_left_indent_pt": 28.0,
+          "margins_cm": {
+            "bottom": 2.5,
+            "left": 2.8,
+            "right": 2.5,
+            "top": 2.5
+          },
+          "page_size": "A4",
+          "table_cell_margin_twips": 100,
+          "table_font": "FangSong_GB2312",
+          "table_font_size_pt": 12.0,
+          "table_line_spacing_pt": 18.0,
+          "template_id": "formal_bid_standard",
+          "toc_entry_font_size_pt": 12.0,
+          "toc_entry_line_spacing_pt": 18.0,
+          "toc_title_font_size_pt": 16.0
+        },
+        "field_refresh": {
+          "enabled": true,
+          "input_path": "outputs/Guo_Wang_Pei_Dian_Zi_Dong_Hua_Zhong_Duan_Cai_Gou_Xiang_Mu/国网配电自动化终端采购项目投标文件-河北泰昌电力器材科技有限公司-图文.docx",
+          "manual_refresh_required": false,
+          "marker_cleanup": {
+            "counts_after": {
+              "keepLines": 0,
+              "keepNext": 0,
+              "pageBreakBefore": 0
+            },
+            "counts_before": {
+              "keepLines": 0,
+              "keepNext": 1,
+              "pageBreakBefore": 0
+            },
+            "enabled": true,
+            "status": "cleaned"
+          },
+          "output_path": "outputs/Guo_Wang_Pei_Dian_Zi_Dong_Hua_Zhong_Duan_Cai_Gou_Xiang_Mu/国网配电自动化终端采购项目投标文件-河北泰昌电力器材科技有限公司-图文.docx",
+          "returncode": 0,
+          "size": 6740045,
+          "soffice_bin": "/opt/homebrew/bin/soffice",
+          "status": "refreshed",
+          "stderr": "2026-06-25 21:34:13.499 soffice[98404:37797764] Task policy set failed: 4 ((os/kern) invalid argument)\n",
+          "stdout": "convert /var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-_fgji6n0/input/国网配电自动化终端采购项目投标文件-河北泰昌电力器材科技有限公司-图文.docx as a Writer document -> /private/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-_fgji6n0/output/国网配电自动化终端采购项目投标文件-河北泰昌电力器材科技有限公司-图文.docx using filter : Office Open XML Text\n",
+          "table_header_repeat": {
+            "failed": false,
+            "table_count": 2,
+            "updated": 0
+          },
+          "timeout_seconds": 180,
+          "tool": "libreoffice",
+          "user_message": "DOCX 已完成自动刷新，目录页码、页脚页码和总页数字段已重新保存。"
+        },
+        "formal_export_gate": {
+          "blocked_count": 11,
+          "can_formal_export": false,
+          "checked": true,
+          "checked_at": "2026-06-25T13:34:10.088262+00:00",
+          "compliance_percent": 70,
+          "draft_export_allowed": true,
+          "export_mode": "draft",
+          "formal_export_label": "仅允许草稿版导出",
+          "formal_required_gaps": 17,
+          "high_risk_missing": 0,
+          "manual_confirm_count": 4,
+          "rule_set_version": "formal_bid_check_rules.v1",
+          "scope": "full",
+          "top_blockers": [
+            {
+              "category": "商务响应",
+              "evidence": "未确认字段：total_bid_price",
+              "id": "B-002",
+              "severity": "blocker",
+              "status": "blocked",
+              "suggestion": "在投标信息确认页填写投标总价。",
+              "target": null,
+              "title": "投标总价必须客户确认"
+            },
+            {
+              "category": "商务响应",
+              "evidence": "未确认字段：bid_bond_amount",
+              "id": "B-003",
+              "severity": "blocker",
+              "status": "blocked",
+              "suggestion": "确认保证金金额、形式或明确本项目不适用。",
+              "target": null,
+              "title": "投标保证金金额或方式必须客户确认"
+            },
+            {
+              "category": "商务响应",
+              "evidence": "未确认字段：authorized_representative",
+              "id": "B-004",
+              "severity": "blocker",
+              "status": "blocked",
+              "suggestion": "确认授权代表姓名。",
+              "target": null,
+              "title": "授权代表必须客户确认"
+            },
+            {
+              "category": "商务响应",
+              "evidence": "未确认字段：authorized_representative_id",
+              "id": "B-005",
+              "severity": "blocker",
+              "status": "blocked",
+              "suggestion": "确认授权代表身份证号或标记不适用。",
+              "target": null,
+              "title": "授权代表身份证号必须客户确认"
+            },
+            {
+              "category": "商务响应",
+              "evidence": "未确认字段：signature_date",
+              "id": "B-006",
+              "severity": "blocker",
+              "status": "blocked",
+              "suggestion": "确认正式签署日期。",
+              "target": null,
+              "title": "签署日期必须客户确认"
+            },
+            {
+              "category": "商务响应",
+              "evidence": "未确认字段：delivery_period",
+              "id": "B-007",
+              "severity": "blocker",
+              "status": "blocked",
+              "suggestion": "确认交货期或引用招标文件要求。",
+              "target": null,
+              "title": "交货期必须客户确认"
+            },
+            {
+              "category": "商务响应",
+              "evidence": "未确认字段：warranty_period",
+              "id": "B-008",
+              "severity": "blocker",
+              "status": "blocked",
+              "suggestion": "确认质保期或标记按招标文件执行。",
+              "target": null,
+              "title": "质保期必须客户确认"
+            },
+            {
+              "category": "商务响应",
+              "evidence": "未确认字段：bid_validity_days",
+              "id": "B-009",
+              "severity": "blocker",
+              "status": "blocked",
+              "suggestion": "确认投标有效期。",
+              "target": null,
+              "title": "投标有效期必须客户确认"
+            }
+          ],
+          "unresolved_placeholder_count": 0,
+          "warning_count": 3
+        },
+        "image_conversion": {
+          "events": [
+            {
+              "alt": "泰昌碳足迹报告第17页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2008,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1191
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/4b0ce054-0e07-4277-9366-324bb137d489/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpzo31bssf.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌3.职业健康安全管理体系认证证书第3页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2008,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1191
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/e6ddb1a5-df93-408d-9ff3-7b8199f38c18/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmp35rjo9as.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌3.职业健康安全管理体系认证证书第2页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2008,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1191
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/9a97717b-bb16-490f-8d9f-7d324c4ad84b/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpz9rpqx32.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌泰昌-投标第1页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2077,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1190
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/c3835978-c432-4d59-b79f-524ea67721ec/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmp892dm4yb.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌3.职业健康安全管理体系认证证书第1页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2008,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1191
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/254fbb2b-02c0-40b3-bf8d-b7b231868810/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpqsli6m9j.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌2.环境管理体系认证证书第2页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2057,
+                "display_width_in": 5.8,
+                "pixel_height": 1685,
+                "pixel_width": 1191
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/323dde3a-7d52-4d18-b3d0-4b32b59062e6/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpidzp0dbq.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌157-保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书第2页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2008,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1191
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/ee3b0a64-4152-4bc1-9643-62c3873c4979/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpbq2c5vx2.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌MPP电缆保护管检验报告内径250第5页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2008,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1191
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/f4f3d2de-1bfd-41af-9e48-31dcdcdacdfd/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpn1a1wu4a.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌MPP电缆保护管检验报告内径250第4页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2008,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1191
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/9875a5ac-17ca-46ea-b110-fbf2374ec836/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpqe5yes1n.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌MPP电缆保护管检验报告内径250第3页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2008,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1191
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/d709174c-e056-4fae-aafb-9866935b763d/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpm2ptavwr.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌MPP电缆保护管检验报告内径250第2页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2008,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1191
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/4d76e62b-f08c-4380-b85b-ac610652f6a3/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmp1xzh16qf.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌MPP电缆保护管检验报告内径250第1页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2008,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1191
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/b2f2559f-d392-4797-a36c-2e8e829688f0/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpexk3x2tv.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌CPVC电缆保护管检验报告内径250第5页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2008,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1191
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/40ea0a3c-e4e2-498c-a4be-974ab813ee8e/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpgl068_o_.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌绿色电力认证证书第1页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.1911,
+                "display_width_in": 5.8,
+                "pixel_height": 1682,
+                "pixel_width": 1191
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/7e1feea3-277f-4656-888c-ed166c055aa6/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmp5vbof6y2.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌绿色发展规划报告第18页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2008,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1191
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/96dffe93-5d4c-4b26-b025-2f9013e52658/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmph7eonmgb.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌绿色发展规划报告第17页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2008,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1191
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/45762eaf-de3e-4ce7-bfe0-aedd90dbfa28/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpzg_5d5p5.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌绿色发展规划报告第16页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2008,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1191
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/04cc9646-61a5-4c33-aea6-a6b16ed6a27a/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmptzbd_h0d.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌泰昌宣传彩页第50页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2077,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1190
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/5c5b39ed-7367-44b7-b19f-7e913e81653f/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmprhrclw7t.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌泰昌宣传彩页第49页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2077,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1190
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/08a243b9-e878-49db-b453-ab8802f2daa4/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpba2cwmvj.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌泰昌宣传彩页第48页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2077,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1190
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/cbc73e4e-c4df-404d-ab44-03f99efb9bd1/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmp_zr656_4.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌泰昌宣传彩页第47页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2077,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1190
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/e68ae46b-b6b7-4691-ae34-60300c9b064d/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpnj4akzxe.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌泰昌宣传彩页第46页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2077,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1190
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/b76efb75-ccc4-4590-95b3-07c3e2617f9f/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpj6pcztr6.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌泰昌宣传彩页第45页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2077,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1190
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/30f750fd-b333-4634-ae05-aaa0a235b7db/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpqj4ese26.jpg",
+              "status": "inserted"
+            },
+            {
+              "alt": "泰昌157-保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书第1页",
+              "fit": {
+                "aspect_ratio_preserved": true,
+                "display_height_in": 8.2008,
+                "display_width_in": 5.8,
+                "pixel_height": 1684,
+                "pixel_width": 1191
+              },
+              "prepared": false,
+              "ref": "/api/bidding/knowledge/assets/6bde9fe2-ce32-4e2c-9cbc-9fd4696de3d2/file?variant=original",
+              "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpmi661r3d.jpg",
+              "status": "inserted"
+            }
+          ],
+          "failed": 0,
+          "found": 24,
+          "inserted": 24,
+          "logo": {
+            "cover": {
+              "inserted": false,
+              "reason": "reference_template_cover_has_no_logo"
+            },
+            "header": {
+              "aspect_ratio_preserved": true,
+              "auto_cropped": true,
+              "display_height_in": 0.3229,
+              "display_width_in": 0.55,
+              "inserted": true,
+              "path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/assets/icons/taichang_logo.png",
+              "pixel_height": 1339,
+              "pixel_width": 2281
+            }
+          },
+          "marker_cleanup": {
+            "counts_after": {
+              "keepLines": 0,
+              "keepNext": 0,
+              "pageBreakBefore": 0
+            },
+            "counts_before": {
+              "keepLines": 0,
+              "keepNext": 0,
+              "pageBreakBefore": 0
+            },
+            "enabled": true,
+            "status": "unchanged"
+          },
+          "max_images": 24,
+          "mermaid": {
+            "found": 0,
+            "inserted": 0,
+            "skipped": 0
+          },
+          "skipped": 0,
+          "template": {
+            "bidder_full_name": "河北泰昌电力器材科技有限公司",
+            "body_first_line_indent_pt": 28.0,
+            "body_font": "FangSong_GB2312",
+            "body_font_size_pt": 14.0,
+            "body_latin_font": "Times New Roman",
+            "body_line_spacing_pt": 22.0,
+            "cover_fields": {
+              "文件类型": "投标文件",
+              "项目名称": "国网配电自动化终端采购项目"
+            },
+            "cover_title_font_size_pt": 36.0,
+            "header_footer": {
+              "footer_font": "FangSong_GB2312",
+              "footer_font_size_pt": 9,
+              "header_font": "FangSong_GB2312",
+              "header_font_size_pt": 9,
+              "header_max_chars": 42,
+              "header_text": "左侧项目名称，右侧投标文件",
+              "page_number_format": "第 X 页 共 Y 页"
+            },
+            "heading_font": "SimHei",
+            "heading_keep_with_next": false,
+            "heading_level3_font": "KaiTi_GB2312",
+            "list_hanging_indent_pt": 14.0,
+            "list_left_indent_pt": 28.0,
+            "margins_cm": {
+              "bottom": 2.5,
+              "left": 2.8,
+              "right": 2.5,
+              "top": 2.5
+            },
+            "page_size": "A4",
+            "table_cell_margin_twips": 100,
+            "table_font": "FangSong_GB2312",
+            "table_font_size_pt": 12.0,
+            "table_line_spacing_pt": 18.0,
+            "template_id": "formal_bid_standard",
+            "toc_entry_font_size_pt": 12.0,
+            "toc_entry_line_spacing_pt": 18.0,
+            "toc_title_font_size_pt": 16.0
+          }
+        },
+        "image_selection": {
+          "asset_candidates": 597,
+          "cover_field_missing": [
+            "招标编号",
+            "分标编号",
+            "分标名称",
+            "包号",
+            "包名称"
+          ],
+          "cover_field_source": "uploaded_tender_structured_extract",
+          "cover_field_sources": {
+            "文件类型": {
+              "matched_label": "默认投标文件",
+              "source": "default_bid_document_type"
+            },
+            "项目名称": {
+              "matched_label": "标题",
+              "snippet": "国网配电自动化终端采购项目招标文件",
+              "source": "tender_file_title_extract",
+              "source_page": null
+            }
+          },
+          "cover_fields": {
+            "文件类型": "投标文件",
+            "项目名称": "国网配电自动化终端采购项目"
+          },
+          "enabled": true,
+          "formal_readiness": {
+            "bidder": "河北泰昌电力器材科技有限公司",
+            "empty_section_count": 74,
+            "missing_formal_required_fields": [],
+            "placeholder_count": 1,
+            "ready": false,
+            "reference_template_policy": "tender_format_then_customer_reference_then_system_default",
+            "template_id": "sgcc_taichang_bid"
+          },
+          "manifest": [
+            {
+              "anonymized": false,
+              "asset_category": "试验检测能力",
+              "asset_id": "4b0ce054-0e07-4277-9366-324bb137d489",
+              "asset_title": "泰昌碳足迹报告第17页",
+              "asset_type": "qualification_image",
+              "caption": "图示：泰昌碳足迹报告第17页",
+              "evidence_type": "testing_capacity",
+              "image_ref": "/api/bidding/knowledge/assets/4b0ce054-0e07-4277-9366-324bb137d489/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "商务文件仅插入证明或附件类资料；匹配章节证据类型：试验检测能力；章节与资产同时命中“资质”",
+              "score": 102,
+              "section_id": "11cd7975-4769-483e-a7bd-6fd9f2fdacd2",
+              "section_title": "投标函及投标函附录",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "qualification_library",
+              "volume_name": "商务标",
+              "volume_type": "business"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "资质证书",
+              "asset_id": "e6ddb1a5-df93-408d-9ff3-7b8199f38c18",
+              "asset_title": "泰昌3.职业健康安全管理体系认证证书第3页",
+              "asset_type": "qualification_image",
+              "caption": "图示：泰昌3.职业健康安全管理体系认证证书第3页",
+              "evidence_type": "certification",
+              "image_ref": "/api/bidding/knowledge/assets/e6ddb1a5-df93-408d-9ff3-7b8199f38c18/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "商务文件仅插入证明或附件类资料",
+              "score": 10,
+              "section_id": "f91988e5-36ba-4276-b63f-1a0741030b96",
+              "section_title": "法定代表人身份证明及授权委托书",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "qualification_library",
+              "volume_name": "商务标",
+              "volume_type": "business"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "资质证书",
+              "asset_id": "9a97717b-bb16-490f-8d9f-7d324c4ad84b",
+              "asset_title": "泰昌3.职业健康安全管理体系认证证书第2页",
+              "asset_type": "qualification_image",
+              "caption": "图示：泰昌3.职业健康安全管理体系认证证书第2页",
+              "evidence_type": "certification",
+              "image_ref": "/api/bidding/knowledge/assets/9a97717b-bb16-490f-8d9f-7d324c4ad84b/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "商务文件仅插入证明或附件类资料",
+              "score": 10,
+              "section_id": "d9c4ca70-a721-460e-9fda-646bbdb442ae",
+              "section_title": "投标保证金及基本账户资料",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "qualification_library",
+              "volume_name": "商务标",
+              "volume_type": "business"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "基础证照",
+              "asset_id": "c3835978-c432-4d59-b79f-524ea67721ec",
+              "asset_title": "泰昌泰昌-投标第1页",
+              "asset_type": "qualification_image",
+              "caption": "图示：泰昌泰昌-投标第1页（脱敏示意图）",
+              "evidence_type": "business_license",
+              "image_ref": "/api/bidding/knowledge/assets/c3835978-c432-4d59-b79f-524ea67721ec/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "商务文件仅插入证明或附件类资料；章节与资产同时命中“保证金”",
+              "score": 14,
+              "section_id": "4b7c9637-c14b-4145-b1ca-1c72f4951629",
+              "section_title": "投标保证金",
+              "sensitive": true,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "qualification_library",
+              "volume_name": "商务标",
+              "volume_type": "business"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "资质证书",
+              "asset_id": "254fbb2b-02c0-40b3-bf8d-b7b231868810",
+              "asset_title": "泰昌3.职业健康安全管理体系认证证书第1页",
+              "asset_type": "qualification_image",
+              "caption": "图示：泰昌3.职业健康安全管理体系认证证书第1页",
+              "evidence_type": "certification",
+              "image_ref": "/api/bidding/knowledge/assets/254fbb2b-02c0-40b3-bf8d-b7b231868810/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "商务文件仅插入证明或附件类资料",
+              "score": 10,
+              "section_id": "2ff4a25f-4cf2-447f-a225-952533f691a7",
+              "section_title": "银行基本账户证明扫描件",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "qualification_library",
+              "volume_name": "商务标",
+              "volume_type": "business"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "资质证书",
+              "asset_id": "323dde3a-7d52-4d18-b3d0-4b32b59062e6",
+              "asset_title": "泰昌2.环境管理体系认证证书第2页",
+              "asset_type": "qualification_image",
+              "caption": "图示：泰昌2.环境管理体系认证证书第2页",
+              "evidence_type": "certification",
+              "image_ref": "/api/bidding/knowledge/assets/323dde3a-7d52-4d18-b3d0-4b32b59062e6/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "商务文件仅插入证明或附件类资料",
+              "score": 10,
+              "section_id": "ecd084f0-17b6-4df7-8db4-2f1ab97bde9d",
+              "section_title": "投标保证金明细表",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "qualification_library",
+              "volume_name": "商务标",
+              "volume_type": "business"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "项目业绩",
+              "asset_id": "ee3b0a64-4152-4bc1-9643-62c3873c4979",
+              "asset_title": "泰昌157-保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书第2页",
+              "asset_type": "qualification_image",
+              "caption": "图示：泰昌157-保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书第2页",
+              "evidence_type": "project_performance",
+              "image_ref": "/api/bidding/knowledge/assets/ee3b0a64-4152-4bc1-9643-62c3873c4979/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "商务文件仅插入证明或附件类资料",
+              "score": 24,
+              "section_id": "8795b486-6aa3-4cc1-884c-31b2e85c3ac3",
+              "section_title": "财务信息、股权结构说明书及支持证明材料",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "qualification_library",
+              "volume_name": "商务标",
+              "volume_type": "business"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "检验报告",
+              "asset_id": "f4f3d2de-1bfd-41af-9e48-31dcdcdacdfd",
+              "asset_title": "泰昌MPP电缆保护管检验报告内径250第5页",
+              "asset_type": "product_image",
+              "caption": "图示：泰昌MPP电缆保护管检验报告内径250第5页",
+              "evidence_type": "inspection_report",
+              "image_ref": "/api/bidding/knowledge/assets/f4f3d2de-1bfd-41af-9e48-31dcdcdacdfd/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "匹配章节证据类型：检验/检测报告；章节与资产同时命中“产品”",
+              "score": 115,
+              "section_id": "1ff41ad6-e041-488f-b99c-b26c1b3f56eb",
+              "section_title": "技术评分支撑材料",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "product_library",
+              "volume_name": "技术标",
+              "volume_type": "technical"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "检验报告",
+              "asset_id": "9875a5ac-17ca-46ea-b110-fbf2374ec836",
+              "asset_title": "泰昌MPP电缆保护管检验报告内径250第4页",
+              "asset_type": "product_image",
+              "caption": "图示：泰昌MPP电缆保护管检验报告内径250第4页",
+              "evidence_type": "inspection_report",
+              "image_ref": "/api/bidding/knowledge/assets/9875a5ac-17ca-46ea-b110-fbf2374ec836/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "匹配章节证据类型：检验/检测报告；章节与资产同时命中“产品”",
+              "score": 115,
+              "section_id": "1ff41ad6-e041-488f-b99c-b26c1b3f56eb",
+              "section_title": "技术评分支撑材料",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "product_library",
+              "volume_name": "技术标",
+              "volume_type": "technical"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "检验报告",
+              "asset_id": "d709174c-e056-4fae-aafb-9866935b763d",
+              "asset_title": "泰昌MPP电缆保护管检验报告内径250第3页",
+              "asset_type": "product_image",
+              "caption": "图示：泰昌MPP电缆保护管检验报告内径250第3页",
+              "evidence_type": "inspection_report",
+              "image_ref": "/api/bidding/knowledge/assets/d709174c-e056-4fae-aafb-9866935b763d/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "匹配章节证据类型：检验/检测报告",
+              "score": 114,
+              "section_id": "906f4578-ce61-4087-a0ca-31aed5eaba2f",
+              "section_title": "技术响应文件",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "product_library",
+              "volume_name": "技术标",
+              "volume_type": "technical"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "检验报告",
+              "asset_id": "4d76e62b-f08c-4380-b85b-ac610652f6a3",
+              "asset_title": "泰昌MPP电缆保护管检验报告内径250第2页",
+              "asset_type": "product_image",
+              "caption": "图示：泰昌MPP电缆保护管检验报告内径250第2页",
+              "evidence_type": "inspection_report",
+              "image_ref": "/api/bidding/knowledge/assets/4d76e62b-f08c-4380-b85b-ac610652f6a3/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "匹配章节证据类型：检验/检测报告",
+              "score": 114,
+              "section_id": "906f4578-ce61-4087-a0ca-31aed5eaba2f",
+              "section_title": "技术响应文件",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "product_library",
+              "volume_name": "技术标",
+              "volume_type": "technical"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "检验报告",
+              "asset_id": "b2f2559f-d392-4797-a36c-2e8e829688f0",
+              "asset_title": "泰昌MPP电缆保护管检验报告内径250第1页",
+              "asset_type": "product_image",
+              "caption": "图示：泰昌MPP电缆保护管检验报告内径250第1页",
+              "evidence_type": "inspection_report",
+              "image_ref": "/api/bidding/knowledge/assets/b2f2559f-d392-4797-a36c-2e8e829688f0/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "匹配章节证据类型：检验/检测报告",
+              "score": 114,
+              "section_id": "ac53c3d0-359c-4393-8a88-13021ba418ee",
+              "section_title": "技术偏差表",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "product_library",
+              "volume_name": "技术标",
+              "volume_type": "technical"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "检验报告",
+              "asset_id": "40ea0a3c-e4e2-498c-a4be-974ab813ee8e",
+              "asset_title": "泰昌CPVC电缆保护管检验报告内径250第5页",
+              "asset_type": "product_image",
+              "caption": "图示：泰昌CPVC电缆保护管检验报告内径250第5页",
+              "evidence_type": "inspection_report",
+              "image_ref": "/api/bidding/knowledge/assets/40ea0a3c-e4e2-498c-a4be-974ab813ee8e/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "匹配章节证据类型：检验/检测报告",
+              "score": 114,
+              "section_id": "ac53c3d0-359c-4393-8a88-13021ba418ee",
+              "section_title": "技术偏差表",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "product_library",
+              "volume_name": "技术标",
+              "volume_type": "technical"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "绿色低碳资料",
+              "asset_id": "7e1feea3-277f-4656-888c-ed166c055aa6",
+              "asset_title": "泰昌绿色电力认证证书第1页",
+              "asset_type": "product_image",
+              "caption": "图示：泰昌绿色电力认证证书第1页",
+              "evidence_type": "green_low_carbon",
+              "image_ref": "/api/bidding/knowledge/assets/7e1feea3-277f-4656-888c-ed166c055aa6/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "综合匹配分 22",
+              "score": 22,
+              "section_id": "6c506768-bca3-40cd-a8b7-7dec6bed867a",
+              "section_title": "专项投标文件",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "product_library",
+              "volume_name": "技术标",
+              "volume_type": "technical"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "绿色低碳资料",
+              "asset_id": "96dffe93-5d4c-4b26-b025-2f9013e52658",
+              "asset_title": "泰昌绿色发展规划报告第18页",
+              "asset_type": "product_image",
+              "caption": "图示：泰昌绿色发展规划报告第18页",
+              "evidence_type": "green_low_carbon",
+              "image_ref": "/api/bidding/knowledge/assets/96dffe93-5d4c-4b26-b025-2f9013e52658/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "综合匹配分 22",
+              "score": 22,
+              "section_id": "6c506768-bca3-40cd-a8b7-7dec6bed867a",
+              "section_title": "专项投标文件",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "product_library",
+              "volume_name": "技术标",
+              "volume_type": "technical"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "绿色低碳资料",
+              "asset_id": "45762eaf-de3e-4ce7-bfe0-aedd90dbfa28",
+              "asset_title": "泰昌绿色发展规划报告第17页",
+              "asset_type": "product_image",
+              "caption": "图示：泰昌绿色发展规划报告第17页",
+              "evidence_type": "green_low_carbon",
+              "image_ref": "/api/bidding/knowledge/assets/45762eaf-de3e-4ce7-bfe0-aedd90dbfa28/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "综合匹配分 22",
+              "score": 22,
+              "section_id": "aaa8a1a4-29a0-445f-898f-8f1b7f5861ca",
+              "section_title": "2.0 平台业绩汇总查询截图",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "product_library",
+              "volume_name": "技术标",
+              "volume_type": "technical"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "绿色低碳资料",
+              "asset_id": "04cc9646-61a5-4c33-aea6-a6b16ed6a27a",
+              "asset_title": "泰昌绿色发展规划报告第16页",
+              "asset_type": "product_image",
+              "caption": "图示：泰昌绿色发展规划报告第16页",
+              "evidence_type": "green_low_carbon",
+              "image_ref": "/api/bidding/knowledge/assets/04cc9646-61a5-4c33-aea6-a6b16ed6a27a/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "综合匹配分 22",
+              "score": 22,
+              "section_id": "aaa8a1a4-29a0-445f-898f-8f1b7f5861ca",
+              "section_title": "2.0 平台业绩汇总查询截图",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "product_library",
+              "volume_name": "技术标",
+              "volume_type": "technical"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "企业宣传资料",
+              "asset_id": "5c5b39ed-7367-44b7-b19f-7e913e81653f",
+              "asset_title": "泰昌泰昌宣传彩页第50页",
+              "asset_type": "product_image",
+              "caption": "图示：泰昌泰昌宣传彩页第50页",
+              "evidence_type": "enterprise_profile",
+              "image_ref": "/api/bidding/knowledge/assets/5c5b39ed-7367-44b7-b19f-7e913e81653f/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "综合匹配分 36",
+              "score": 36,
+              "section_id": "04c111f3-da15-47bd-a58c-b0150cc9dca0",
+              "section_title": "货物组件材料配置表",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "knowledge_library",
+              "volume_name": "技术标",
+              "volume_type": "technical"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "企业宣传资料",
+              "asset_id": "08a243b9-e878-49db-b453-ab8802f2daa4",
+              "asset_title": "泰昌泰昌宣传彩页第49页",
+              "asset_type": "product_image",
+              "caption": "图示：泰昌泰昌宣传彩页第49页",
+              "evidence_type": "enterprise_profile",
+              "image_ref": "/api/bidding/knowledge/assets/08a243b9-e878-49db-b453-ab8802f2daa4/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "综合匹配分 36",
+              "score": 36,
+              "section_id": "04c111f3-da15-47bd-a58c-b0150cc9dca0",
+              "section_title": "货物组件材料配置表",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "knowledge_library",
+              "volume_name": "技术标",
+              "volume_type": "technical"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "企业宣传资料",
+              "asset_id": "cbc73e4e-c4df-404d-ab44-03f99efb9bd1",
+              "asset_title": "泰昌泰昌宣传彩页第48页",
+              "asset_type": "product_image",
+              "caption": "图示：泰昌泰昌宣传彩页第48页",
+              "evidence_type": "enterprise_profile",
+              "image_ref": "/api/bidding/knowledge/assets/cbc73e4e-c4df-404d-ab44-03f99efb9bd1/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "综合匹配分 22",
+              "score": 22,
+              "section_id": "f84da85b-1fd0-4936-839d-17bd67fe514f",
+              "section_title": "符合招标文件投标人资格要求的证明文件",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "knowledge_library",
+              "volume_name": "技术标",
+              "volume_type": "technical"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "企业宣传资料",
+              "asset_id": "e68ae46b-b6b7-4691-ae34-60300c9b064d",
+              "asset_title": "泰昌泰昌宣传彩页第47页",
+              "asset_type": "product_image",
+              "caption": "图示：泰昌泰昌宣传彩页第47页",
+              "evidence_type": "enterprise_profile",
+              "image_ref": "/api/bidding/knowledge/assets/e68ae46b-b6b7-4691-ae34-60300c9b064d/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "综合匹配分 22",
+              "score": 22,
+              "section_id": "f84da85b-1fd0-4936-839d-17bd67fe514f",
+              "section_title": "符合招标文件投标人资格要求的证明文件",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "knowledge_library",
+              "volume_name": "技术标",
+              "volume_type": "technical"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "企业宣传资料",
+              "asset_id": "b76efb75-ccc4-4590-95b3-07c3e2617f9f",
+              "asset_title": "泰昌泰昌宣传彩页第46页",
+              "asset_type": "product_image",
+              "caption": "图示：泰昌泰昌宣传彩页第46页",
+              "evidence_type": "enterprise_profile",
+              "image_ref": "/api/bidding/knowledge/assets/b76efb75-ccc4-4590-95b3-07c3e2617f9f/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "综合匹配分 22",
+              "score": 22,
+              "section_id": "31812e88-0ec3-4fb0-be22-72c2e6f6376d",
+              "section_title": "资格预审结果通知书",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "knowledge_library",
+              "volume_name": "技术标",
+              "volume_type": "technical"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "企业宣传资料",
+              "asset_id": "30f750fd-b333-4634-ae05-aaa0a235b7db",
+              "asset_title": "泰昌泰昌宣传彩页第45页",
+              "asset_type": "product_image",
+              "caption": "图示：泰昌泰昌宣传彩页第45页",
+              "evidence_type": "enterprise_profile",
+              "image_ref": "/api/bidding/knowledge/assets/30f750fd-b333-4634-ae05-aaa0a235b7db/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "综合匹配分 22",
+              "score": 22,
+              "section_id": "31812e88-0ec3-4fb0-be22-72c2e6f6376d",
+              "section_title": "资格预审结果通知书",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "knowledge_library",
+              "volume_name": "技术标",
+              "volume_type": "technical"
+            },
+            {
+              "anonymized": false,
+              "asset_category": "项目业绩",
+              "asset_id": "6bde9fe2-ce32-4e2c-9cbc-9fd4696de3d2",
+              "asset_title": "泰昌157-保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书第1页",
+              "asset_type": "qualification_image",
+              "caption": "图示：泰昌157-保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书第1页",
+              "evidence_type": "project_performance",
+              "image_ref": "/api/bidding/knowledge/assets/6bde9fe2-ce32-4e2c-9cbc-9fd4696de3d2/file?variant=original",
+              "library": "企业知识资产库",
+              "reason": "正式投标文件业绩证明最低配图要求",
+              "score": 52,
+              "section_id": null,
+              "section_title": "同类项目业绩证明补充附件",
+              "sensitive": false,
+              "source_batch_id": "customer_taichang_supplement_20260611",
+              "target_library": "qualification_library",
+              "volume_name": "附件材料",
+              "volume_type": "attachment"
+            }
+          ],
+          "max_total": 24,
+          "selected": 24,
+          "warnings": [
+            "仍有 74 个章节没有正文，当前文件只能作为草稿。",
+            "仍有 1 处待补充/待确认占位，当前文件尚未达到正式投标文件标准。",
+            "已达到整份文档自动插图上限 24 张。"
+          ]
+        },
+        "requested_from": "bid_editor",
+        "snapshot_section_count": 0,
+        "used_editor_snapshot": false,
+        "with_images": true
+      },
+      "progress": 100,
+      "project_id": "5ea0b61e-4e1c-46b7-9749-0d86fe28c7fa",
+      "project_name": "国网配电自动化终端采购项目投标文件",
+      "scope": "full",
+      "section_id": null,
+      "started_at": "2026-06-25T13:34:10.095724+08:00",
+      "status": "completed",
+      "updated_at": "2026-06-25T21:34:15.000875+08:00",
+      "volume_type": null,
+      "with_images": true
+    }
+  },
+  "steps": [
+    {
+      "name": "check_ready",
+      "ok": true,
+      "detail": "status=ok checks=5",
+      "elapsed_ms": 2102
+    },
+    {
+      "name": "login",
+      "ok": true,
+      "detail": "user=contract_mvp_213205",
+      "elapsed_ms": 77
+    },
+    {
+      "name": "identify_user",
+      "ok": true,
+      "detail": "userId=7fdf256c-37d7-4d41-849f-f1cb859da5ca",
+      "elapsed_ms": 6
+    },
+    {
+      "name": "upload_tender",
+      "ok": true,
+      "detail": "projectId=5ea0b61e-4e1c-46b7-9749-0d86fe28c7fa fileId=dc11e66d-2d33-44c0-afcc-e04146f49b91 supabaseFileId=fbc4e459-635a-43ef-9afc-8d7d3a1ce525",
+      "elapsed_ms": 24
+    },
+    {
+      "name": "wait_parse_completed",
+      "ok": true,
+      "detail": "parseStatus=indexed parser=native_text",
+      "elapsed_ms": 2027
+    },
+    {
+      "name": "query_interpretation",
+      "ok": true,
+      "detail": "hasAnalysis=True",
+      "elapsed_ms": 46
+    },
+    {
+      "name": "generate_ai_report",
+      "ok": true,
+      "detail": "ok",
+      "elapsed_ms": 75367
+    },
+    {
+      "name": "generate_outline",
+      "ok": true,
+      "detail": "chapters=102",
+      "elapsed_ms": 5321
+    },
+    {
+      "name": "list_sections",
+      "ok": true,
+      "detail": "sections=102",
+      "elapsed_ms": 14
+    },
+    {
+      "name": "generate_sections",
+      "ok": true,
+      "detail": "sections=1 done=1 taskId=d4e46ffa-6f9c-4351-9314-508b88dcd931",
+      "elapsed_ms": 32311
+    },
+    {
+      "name": "run_compliance_check",
+      "ok": true,
+      "detail": "rows=5 coverage=None",
+      "elapsed_ms": 57
+    },
+    {
+      "name": "create_docx_export",
+      "ok": true,
+      "detail": "taskId=8c288ea9-4e24-4c59-9d89-84933e939527",
+      "elapsed_ms": 1017
+    },
+    {
+      "name": "wait_docx_export",
+      "ok": true,
+      "detail": "status=completed path=outputs/Guo_Wang_Pei_Dian_Zi_Dong_Hua_Zhong_Duan_Cai_Gou_Xiang_Mu/国网配电自动化终端采购项目投标文件-河北泰昌电力器材科技有限公司-图文.docx",
+      "elapsed_ms": 6051
+    }
+  ]
+}

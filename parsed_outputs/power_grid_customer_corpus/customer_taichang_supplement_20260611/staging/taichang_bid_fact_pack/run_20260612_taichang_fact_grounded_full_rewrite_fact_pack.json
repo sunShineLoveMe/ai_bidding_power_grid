@@ -1,0 +1,128 @@
+{
+  "generated_at": "2026-06-12T22:21:20",
+  "enterprise": {
+    "full_name": "河北泰昌电力器材科技有限公司",
+    "unified_social_credit_code": "91130607056539515C",
+    "legal_representative": "晁坤琳",
+    "company_type": "有限责任公司（自然人投资或控股）",
+    "registered_capital": "10000万元人民币",
+    "established_date": "2012年11月14日",
+    "registered_address": "河北省保定市满城区陉阳驿村",
+    "evidence": "泰昌营业执照副本及企业信用报告"
+  },
+  "certifications": [
+    {
+      "name": "质量管理体系认证证书",
+      "certificate_no": "06925Q10172R4",
+      "standard": "GB/T 19001-2016/ISO 9001:2015",
+      "valid_until": "2028年2月15日",
+      "issuer": "凯新认证（北京）有限公司"
+    },
+    {
+      "name": "环境管理体系认证证书",
+      "certificate_no": "17424E20980R0M",
+      "standard": "GB/T 24001-2016/ISO 14001:2015",
+      "valid_until": "需结合证书监督审核页人工确认",
+      "issuer": "华信创认证"
+    },
+    {
+      "name": "职业健康安全管理体系认证证书",
+      "certificate_no": "626023S10219R0",
+      "standard": "GB/T 45001-2020/ISO 45001:2018",
+      "valid_until": "2026年6月18日",
+      "issuer": "凯新认证（北京）有限公司"
+    }
+  ],
+  "personnel_evidence": {
+    "roster_count": 65,
+    "candidates": [
+      "晁坤琳：董事长、试验员",
+      "杨贺：总经理",
+      "晁猛：项目经理（厂长）",
+      "陈仙瑞：高压试验员",
+      "赵称心：技术总监",
+      "王强、陈国华、黄文清、林乌金：技术售后",
+      "赵伟、刘合钦、杨华、巩超、于诗兰、莫文清：质检员"
+    ],
+    "boundary": "花名册证明人员在册情况，但本项目具体岗位指派仍须客户确认。"
+  },
+  "product_inspection": {
+    "CPVC电缆保护管": {
+      "report_no": "2024100312005501713",
+      "specification_model": "DS 250×15×6000 SN16 PVC-C",
+      "parameters": [
+        {
+          "parameter": "尺寸-平均内径",
+          "standard_requirement": "250.0~251.5",
+          "inspection_result": "250.2~250.4",
+          "unit": "mm"
+        },
+        {
+          "parameter": "尺寸-壁厚",
+          "standard_requirement": "15_0^+1.8",
+          "inspection_result": "15.2~15.3",
+          "unit": "mm"
+        }
+      ]
+    },
+    "MPP电缆保护管": {
+      "report_no": "2024100312005501712",
+      "specification_model": "DF 250×22×9000 SN40 MPP",
+      "parameters": [
+        {
+          "parameter": "环刚度",
+          "standard_requirement": "≥ 40",
+          "inspection_result": "66.40",
+          "unit": "kN/m2"
+        }
+      ]
+    }
+  },
+  "project_performance": {
+    "project_name": "国网天津市电力公司2022年第二次配网物资协议库存招标采购",
+    "tender_no": "0322AB",
+    "package_no": "包2",
+    "product_summary": "电缆保护管MPP和CPVC",
+    "total_quantity": "54,678米",
+    "amount_tax_included": "6,372,409.05元",
+    "buyer": "国网天津市电力公司",
+    "award_date": "2022-11-21",
+    "contract_no": "SGTJWZ00HTMM2210273",
+    "contract_sign_date": "原件为空，不得推断"
+  },
+  "equipment_evidence": [
+    "CPVC生产线、MPP生产线现场资料",
+    "微机控制电子万能试验机",
+    "热变形/维卡软化点温度测定仪",
+    "电子天平、锤击试验装置、熔体流动速率仪、电子拉力试验机",
+    "设备型号、数量、精度和检定周期仍须按设备台账人工复核"
+  ],
+  "known_not_applicable": [
+    "水利施工",
+    "桩基",
+    "防渗墙",
+    "BIM",
+    "建造师",
+    "安全生产许可证",
+    "电力工程施工总承包",
+    "输变电工程专业承包",
+    "承装（修、试）电力设施许可证"
+  ],
+  "unresolved_for_current_tender": [
+    "本次实际投标的分标、包号、包名称和物资范围",
+    "最终投标总价、分项单价、数量和税率",
+    "交货期、备货周期、质保期和投标有效期",
+    "本项目投标保证金和履约保证金信息",
+    "授权代理人、签署人、投标日期、签章和装订页码",
+    "本项目履约负责人及各岗位的最终指派",
+    "售后响应、到场时间、服务网点和量化产能承诺"
+  ],
+  "source_files": [
+    "泰昌营业执照副本及企业信用报告",
+    "质量/环境/职业健康安全管理体系认证证书",
+    "公司人员花名册及人员证书",
+    "CPVC/MPP电缆保护管检验报告",
+    "TJ20220002363合同协议书及0322AB中标通知书",
+    "生产线、生产设备和试验设备原始资料"
+  ]
+}

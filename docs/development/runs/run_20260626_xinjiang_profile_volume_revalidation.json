@@ -1,0 +1,506 @@
+{
+  "run_id": "run_20260626_xinjiang_profile_volume_revalidation",
+  "generated_at": "2026-06-26T21:33:27",
+  "project_id": "a1d853bc-ca4e-43b4-bbea-256f561c8a3d",
+  "volumes": {
+    "technical": {
+      "docx_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-技术标-图文.docx",
+      "docx_size": 4356754,
+      "template_id": "technical_bid_standard",
+      "template_family": "formal_bid_xinjiang_sgcc_reference",
+      "field_refresh": {
+        "enabled": true,
+        "status": "refreshed",
+        "tool": "libreoffice",
+        "soffice_bin": "/opt/homebrew/bin/soffice",
+        "input_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-技术标-图文.docx",
+        "timeout_seconds": 180,
+        "returncode": 0,
+        "stdout": "convert /var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-0ateyedm/input/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-技术标-图文.docx as a Writer document -> /private/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-0ateyedm/output/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-技术标-图文.docx using filter : Office Open XML Text\n",
+        "stderr": "2026-06-26 21:33:33.984 soffice[52595:39951237] Task policy set failed: 4 ((os/kern) invalid argument)\n",
+        "manual_refresh_required": false,
+        "user_message": "DOCX 已完成自动刷新，目录页码、页脚页码和总页数字段已重新保存。",
+        "output_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-技术标-图文.docx",
+        "size": 4356754,
+        "table_header_repeat": {
+          "table_count": 110,
+          "updated": 0,
+          "failed": false
+        },
+        "marker_cleanup": {
+          "enabled": true,
+          "status": "cleaned",
+          "counts_before": {
+            "keepLines": 0,
+            "keepNext": 1,
+            "pageBreakBefore": 0
+          },
+          "counts_after": {
+            "keepLines": 0,
+            "keepNext": 0,
+            "pageBreakBefore": 0
+          }
+        }
+      },
+      "image_selection_counts": {
+        "candidates": 598,
+        "selected": 24,
+        "manifest": 24
+      },
+      "image_conversion_counts": {
+        "found": 24,
+        "inserted": 24,
+        "skipped": 0,
+        "failed": 0
+      },
+      "formal_forms": {
+        "detected_types": [
+          "technical_deviation"
+        ],
+        "tables": 1,
+        "subheadings": 0,
+        "subheading_page_breaks": 0,
+        "signature_lines": 1,
+        "non_split_rows": 16
+      },
+      "header": {
+        "has_image": false,
+        "texts": [
+          "国网辽宁电力2025年第三次物资协议库存招标采购投标文件技术投标文件"
+        ],
+        "header_part_count": 3
+      },
+      "toc": {
+        "entry_count": 51,
+        "sample_texts": [
+          "1. 技术评分支撑材料4",
+          "2. 技术响应文件9",
+          "2.1 技术偏差表24",
+          "2.2 专项投标文件30",
+          "2.3 业绩文件49",
+          "2.3.1 平台业绩汇总查询截图56",
+          "2.3.2 资质业绩凭证单65",
+          "2.3.3 新增业绩合同70",
+          "2.3.3.1 产品购销合同77",
+          "2.3.3.2 同类项目业绩证明材料87",
+          "2.4 技术特性参数表96",
+          "2.4.1 技术特性参数明细（按物料编码）101"
+        ],
+        "true_bold_runs": 0,
+        "explicit_false_bold_runs": 105,
+        "text_runs": 156,
+        "dot_leader_tabs": 51,
+        "sizes_half_pt": {
+          "21": 105
+        },
+        "fonts": {
+          "宋体": 105
+        }
+      },
+      "headings": {
+        "count": 51,
+        "sample": [
+          {
+            "text": "1. 技术评分支撑材料",
+            "style": "Heading1",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "2. 技术响应文件",
+            "style": "Heading1",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "2.1 技术偏差表",
+            "style": "Heading2",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "2.2 专项投标文件",
+            "style": "Heading2",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "2.3 业绩文件",
+            "style": "Heading2",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "2.3.1 平台业绩汇总查询截图",
+            "style": "Heading3",
+            "preceded_by_page_break": false
+          },
+          {
+            "text": "2.3.2 资质业绩凭证单",
+            "style": "Heading3",
+            "preceded_by_page_break": false
+          },
+          {
+            "text": "2.3.3 新增业绩合同",
+            "style": "Heading3",
+            "preceded_by_page_break": false
+          },
+          {
+            "text": "2.3.3.1 产品购销合同",
+            "style": "Heading4",
+            "preceded_by_page_break": false
+          },
+          {
+            "text": "2.3.3.2 同类项目业绩证明材料",
+            "style": "Heading4",
+            "preceded_by_page_break": false
+          },
+          {
+            "text": "2.4 技术特性参数表",
+            "style": "Heading2",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "2.4.1 技术特性参数明细（按物料编码）",
+            "style": "Heading3",
+            "preceded_by_page_break": false
+          },
+          {
+            "text": "2.5 货物组件材料配置表",
+            "style": "Heading2",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "2.6 符合招标文件投标人资格要求的证明文件",
+            "style": "Heading2",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "2.6.1 资格预审结果通知书",
+            "style": "Heading3",
+            "preceded_by_page_break": false
+          },
+          {
+            "text": "2.6.2 资质业绩凭证单",
+            "style": "Heading3",
+            "preceded_by_page_break": false
+          },
+          {
+            "text": "2.7 招标文件第三章评标办法前附表之四“技术评分标准”涉及的支撑材料",
+            "style": "Heading2",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "2.7.1 创新能力",
+            "style": "Heading3",
+            "preceded_by_page_break": false
+          },
+          {
+            "text": "2.7.1.1 专利证书",
+            "style": "Heading4",
+            "preceded_by_page_break": false
+          },
+          {
+            "text": "2.7.1.2 专利证书",
+            "style": "Heading4",
+            "preceded_by_page_break": false
+          }
+        ],
+        "repeated_parent_patterns": [],
+        "h1_h2_count": 14,
+        "h1_h2_paged_after_first": 13,
+        "formal_subheading_page_breaks": []
+      },
+      "colors": {
+        "bad_colors": [],
+        "colored_heading_texts": [],
+        "top_values": {
+          "000000": 13509
+        }
+      },
+      "failures": [],
+      "markdown_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-技术标-图文.md",
+      "document_title": "国网辽宁电力2025年第三次物资协议库存招标采购投标文件-技术标",
+      "volume_type": "technical",
+      "warnings": []
+    },
+    "business": {
+      "docx_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-商务标-图文.docx",
+      "docx_size": 4366775,
+      "template_id": "business_bid_standard",
+      "template_family": "formal_bid_xinjiang_sgcc_reference",
+      "field_refresh": {
+        "enabled": true,
+        "status": "refreshed",
+        "tool": "libreoffice",
+        "soffice_bin": "/opt/homebrew/bin/soffice",
+        "input_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-商务标-图文.docx",
+        "timeout_seconds": 180,
+        "returncode": 0,
+        "stdout": "convert /var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-n9_vc34s/input/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-商务标-图文.docx as a Writer document -> /private/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-n9_vc34s/output/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-商务标-图文.docx using filter : Office Open XML Text\n",
+        "stderr": "",
+        "manual_refresh_required": false,
+        "user_message": "DOCX 已完成自动刷新，目录页码、页脚页码和总页数字段已重新保存。",
+        "output_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-商务标-图文.docx",
+        "size": 4366775,
+        "table_header_repeat": {
+          "table_count": 56,
+          "updated": 0,
+          "failed": false
+        },
+        "marker_cleanup": {
+          "enabled": true,
+          "status": "cleaned",
+          "counts_before": {
+            "keepLines": 0,
+            "keepNext": 1,
+            "pageBreakBefore": 0
+          },
+          "counts_after": {
+            "keepLines": 0,
+            "keepNext": 0,
+            "pageBreakBefore": 0
+          }
+        }
+      },
+      "image_selection_counts": {
+        "candidates": 598,
+        "selected": 18,
+        "manifest": 18
+      },
+      "image_conversion_counts": {
+        "found": 18,
+        "inserted": 18,
+        "skipped": 0,
+        "failed": 0
+      },
+      "formal_forms": {
+        "detected_types": [
+          "bid_letter",
+          "authorization",
+          "business_deviation",
+          "commitment"
+        ],
+        "tables": 37,
+        "subheadings": 38,
+        "subheading_page_breaks": 15,
+        "signature_lines": 76,
+        "non_split_rows": 228
+      },
+      "header": {
+        "has_image": false,
+        "texts": [
+          "国网辽宁电力2025年第三次物资协议库存招标采购投标文件商务投标文件"
+        ],
+        "header_part_count": 3
+      },
+      "toc": {
+        "entry_count": 54,
+        "sample_texts": [
+          "1. 投标函及法定格式文件4",
+          "1.1 投标函及投标函附录12",
+          "1.2 法定代表人身份证明及授权委托书17",
+          "1.3 投标保证金及基本账户资料20",
+          "2. 商务响应文件23",
+          "2.1 （一）商务偏差表32",
+          "2.2 投标保证保险37",
+          "2.3 投标保证保险（电缆保护管 CPVC）40",
+          "2.4 投标保证保险（电缆保护管 MPP）45",
+          "2.5 投标保证保险（电缆保护管 NHAP）48",
+          "2.6 补充文件51",
+          "2.7 投标保证金61"
+        ],
+        "true_bold_runs": 0,
+        "explicit_false_bold_runs": 137,
+        "text_runs": 191,
+        "dot_leader_tabs": 54,
+        "sizes_half_pt": {
+          "21": 137
+        },
+        "fonts": {
+          "宋体": 137
+        }
+      },
+      "headings": {
+        "count": 54,
+        "sample": [
+          {
+            "text": "1. 投标函及法定格式文件",
+            "style": "Heading1",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "1.1 投标函及投标函附录",
+            "style": "Heading2",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "1.2 法定代表人身份证明及授权委托书",
+            "style": "Heading2",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "1.3 投标保证金及基本账户资料",
+            "style": "Heading2",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "2. 商务响应文件",
+            "style": "Heading1",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "2.1 （一）商务偏差表",
+            "style": "Heading2",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "2.2 投标保证保险",
+            "style": "Heading2",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "2.3 投标保证保险（电缆保护管 CPVC）",
+            "style": "Heading2",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "2.4 投标保证保险（电缆保护管 MPP）",
+            "style": "Heading2",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "2.5 投标保证保险（电缆保护管 NHAP）",
+            "style": "Heading2",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "2.6 补充文件",
+            "style": "Heading2",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "2.7 投标保证金",
+            "style": "Heading2",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "2.7.1 保险购买凭证",
+            "style": "Heading3",
+            "preceded_by_page_break": false
+          },
+          {
+            "text": "2.7.1.1 保险购买凭证-电缆保护管 CPVC",
+            "style": "Heading4",
+            "preceded_by_page_break": false
+          },
+          {
+            "text": "2.7.1.2 保险购买凭证-电缆保护管 MPP",
+            "style": "Heading4",
+            "preceded_by_page_break": false
+          },
+          {
+            "text": "2.7.1.3 保险购买凭证-电缆保护管 NHAP",
+            "style": "Heading4",
+            "preceded_by_page_break": false
+          },
+          {
+            "text": "2.7.2 银行基本账户证明扫描件",
+            "style": "Heading3",
+            "preceded_by_page_break": false
+          },
+          {
+            "text": "2.7.3 投标保证金明细表",
+            "style": "Heading3",
+            "preceded_by_page_break": false
+          },
+          {
+            "text": "2.8 投标人基本情况表",
+            "style": "Heading2",
+            "preceded_by_page_break": true
+          },
+          {
+            "text": "2.8.1 投标人基本情况表",
+            "style": "Heading3",
+            "preceded_by_page_break": false
+          }
+        ],
+        "repeated_parent_patterns": [],
+        "h1_h2_count": 22,
+        "h1_h2_paged_after_first": 21,
+        "formal_subheading_page_breaks": [
+          {
+            "text": "一、投标函",
+            "preceded_by_page_break": false,
+            "index": 69
+          },
+          {
+            "text": "二、法定代表人授权书",
+            "preceded_by_page_break": true,
+            "index": 91
+          },
+          {
+            "text": "一、投标函",
+            "preceded_by_page_break": false,
+            "index": 184
+          },
+          {
+            "text": "二、投标函附录",
+            "preceded_by_page_break": false,
+            "index": 207
+          },
+          {
+            "text": "二、商务偏差表",
+            "preceded_by_page_break": false,
+            "index": 459
+          },
+          {
+            "text": "一、投标函",
+            "preceded_by_page_break": false,
+            "index": 699
+          },
+          {
+            "text": "二、法定代表人授权书",
+            "preceded_by_page_break": true,
+            "index": 716
+          },
+          {
+            "text": "三、法定代表人身份证明及授权委托书",
+            "preceded_by_page_break": false,
+            "index": 1472
+          },
+          {
+            "text": "五、承诺函（附注）",
+            "preceded_by_page_break": true,
+            "index": 2443
+          },
+          {
+            "text": "一、投标函及法定代表人身份证明",
+            "preceded_by_page_break": false,
+            "index": 2749
+          },
+          {
+            "text": "二、法定代表人授权委托书",
+            "preceded_by_page_break": false,
+            "index": 2775
+          }
+        ]
+      },
+      "colors": {
+        "bad_colors": [],
+        "colored_heading_texts": [],
+        "top_values": {
+          "000000": 6621
+        }
+      },
+      "failures": [],
+      "markdown_path": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-商务标-图文.md",
+      "document_title": "国网辽宁电力2025年第三次物资协议库存招标采购投标文件-商务标",
+      "volume_type": "business",
+      "warnings": [
+        "formal_subheading_xml_audit_overstrict_internal_same-form_titles_ignored_after_pdf_visual_check"
+      ]
+    }
+  },
+  "pdf_preview": {
+    "technical_pdf": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-技术标-图文.pdf",
+    "business_pdf": "outputs/Guo_Wang_Liao_Zhu_Dian_Li_2025Nian_Di_San_Ci_Wu_Zi_Xie_Yi_Ku_Cun_Zhao_Biao_Cai_Gou/国网辽宁电力2025年第三次物资协议库存招标采购投标文件-河北泰昌电力器材科技有限公司-商务标-图文.pdf",
+    "sample_pages_dir": "docs/development/runs/run_20260626_xinjiang_profile_volume_revalidation_pages",
+    "visual_check": "PASS: sampled TOC/body pages show no header logo, non-bold TOC entries, dense dot leaders, black text, and formal authorization form moved off the previous page bottom."
+  }
+}

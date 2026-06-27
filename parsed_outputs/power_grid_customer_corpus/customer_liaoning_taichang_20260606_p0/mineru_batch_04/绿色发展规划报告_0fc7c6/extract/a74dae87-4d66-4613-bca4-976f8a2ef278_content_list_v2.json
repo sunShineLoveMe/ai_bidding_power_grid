@@ -1,0 +1,3215 @@
+[
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "绿色发展规划报告"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                275,
+                225,
+                763,
+                273
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业名称：河北泰昌电力器材科技有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                758,
+                662,
+                782
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "报告编号：ZRCC-FZGH2025044 "
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                795,
+                542,
+                818
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "第三方服务机构：广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                832,
+                687,
+                856
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "查询网址：www.zrlhrz.com"
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                870,
+                473,
+                892
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2025年10月"
+                    }
+                ]
+            },
+            "bbox": [
+                418,
+                906,
+                574,
+                928
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/d5c727444c45682b0a46eda816df00262aa860abcbbc0a295acf7c80f9bb706d.jpg"
+                },
+                "content": "正有限公司\n报告专用章",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                561,
+                795,
+                768,
+                942
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "联 合 G ★ "
+                    }
+                ]
+            },
+            "bbox": [
+                97,
+                34,
+                248,
+                143
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                715,
+                71,
+                803,
+                134
+            ]
+        }
+    ],
+    [
+        {
+            "type": "table",
+            "content": {
+                "image_source": {
+                    "path": "images/26e7b0ff5863e7aec3b7eb8d1b28d9026c9f320808a097d43d05d69427611a38.jpg"
+                },
+                "table_caption": [
+                    {
+                        "type": "text",
+                        "content": "基本信息表"
+                    }
+                ],
+                "table_footnote": [],
+                "html": "<table><tr><td colspan=\"4\">一、企业基本信息</td></tr><tr><td>企业名称</td><td colspan=\"3\">河北泰昌电力器材科技有限公司</td></tr><tr><td>企业地址</td><td colspan=\"3\">保定市满城区陉阳驿村</td></tr><tr><td>统一社会信用代码</td><td>91130607056539515C</td><td>企业性质</td><td>有限责任公司(自然人投资或控股)</td></tr><tr><td>企业法定代表人</td><td>晁坤琳</td><td>法人代表电话</td><td>0312-7083333</td></tr><tr><td>企业联系人</td><td>晁坤琳</td><td>联系人电话</td><td>0312-7083333</td></tr><tr><td>电子邮件</td><td>taichangdianli@126.com</td><td>传真</td><td>/</td></tr><tr><td colspan=\"4\">二、第三方机构信息</td></tr><tr><td>第三方机构名称</td><td colspan=\"3\">广东中认联合认证有限公司</td></tr><tr><td>第三方机构地址</td><td colspan=\"3\">广东省佛山市顺德区容桂朝桂南路1号科技创新中心4座2305号</td></tr><tr><td>机构法定代表人</td><td>赵金华</td><td>法定代表电话</td><td>0757-22191191</td></tr><tr><td>机构联系人</td><td>赵金华</td><td>联系人电话</td><td>0757-22191191</td></tr><tr><td>报告编制负责人</td><td>李嘉仪</td><td>负责人电话</td><td>0757-22191191</td></tr><tr><td>报告审核人</td><td>李春芳</td><td>审核人电话</td><td>0757-22191191</td></tr><tr><td colspan=\"4\">三、绿色发展规划评价结果</td></tr><tr><td>一般要求</td><td colspan=\"3\">☑符合 ☐不符合</td></tr><tr><td colspan=\"4\">本机构承诺,已对申请单位材料进行了全面审核,材料真实有效,第三方评价程序规范完整,结论客观公正。评价报告若存在弄虚作假,本机构愿承担责任。负责人签字:</td></tr></table>",
+                "table_type": "complex_table",
+                "table_nest_level": 1
+            },
+            "bbox": [
+                137,
+                120,
+                858,
+                890
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "1 "
+                    }
+                ]
+            },
+            "bbox": [
+                494,
+                928,
+                502,
+                939
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "目录"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                470,
+                139,
+                527,
+                161
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "基本信息表..."
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                147,
+                177,
+                848,
+                197
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "一、概述... 4"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                147,
+                214,
+                850,
+                234
+            ]
+        },
+        {
+            "type": "list",
+            "content": {
+                "list_type": "text_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "1.1 研究背景.."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "1.2研究目标.. 5"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "1.3 研究方法.. 5"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "1.4 核算边界. 5 "
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "1.5 编制依据.. 6 "
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                184,
+                252,
+                850,
+                420
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "二、企业概况... 6"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                147,
+                437,
+                850,
+                456
+            ]
+        },
+        {
+            "type": "list",
+            "content": {
+                "list_type": "text_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "2.1 企业简介."
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "2.2 组织架构图"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                181,
+                474,
+                848,
+                530
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "三、评价内容.... 8"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                147,
+                548,
+                850,
+                567
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "3.1 企业发展规划主要任务..... 8"
+                    }
+                ]
+            },
+            "bbox": [
+                181,
+                585,
+                848,
+                605
+            ]
+        },
+        {
+            "type": "list",
+            "content": {
+                "list_type": "text_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "3.1.1 评价要求：实施企业生产碳达峰行动 8"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "3.1.2评价要求：加快能源消费低碳化转型． 8"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "3.1.3评价要求：促进资源利用循环化转型.. 9"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                216,
+                621,
+                848,
+                715
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "3.1.4评价要求：推动生产过程清洁化转型.. 10"
+                    }
+                ]
+            },
+            "bbox": [
+                216,
+                733,
+                848,
+                753
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "3.1.5评价要求：加速生产方式数字化转型.. 11"
+                    }
+                ]
+            },
+            "bbox": [
+                216,
+                770,
+                848,
+                790
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "3.1.6评价要求：构建绿色低碳技术体系．.. 11"
+                    }
+                ]
+            },
+            "bbox": [
+                216,
+                807,
+                848,
+                827
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "3.1.7评价要求：完善绿色制造支撑体系．.. 12"
+                    }
+                ]
+            },
+            "bbox": [
+                216,
+                844,
+                848,
+                864
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "四、评价结论.. 13"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                147,
+                882,
+                848,
+                901
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                151,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                36,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                74
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": []
+            },
+            "bbox": [
+                492,
+                928,
+                502,
+                938
+            ]
+        }
+    ],
+    [
+        {
+            "type": "list",
+            "content": {
+                "list_type": "text_list",
+                "list_items": [
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "4.1规划目标评价结论.. 13 "
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "4.2政策措施评价结论... 13"
+                            }
+                        ]
+                    },
+                    {
+                        "item_type": "text",
+                        "item_content": [
+                            {
+                                "type": "text",
+                                "content": "4.3实施效果评价结论．.. 13 "
+                            }
+                        ]
+                    }
+                ]
+            },
+            "bbox": [
+                179,
+                93,
+                850,
+                187
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "五、建议... 14"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                146,
+                205,
+                850,
+                224
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "六、结语... 15"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                146,
+                242,
+                850,
+                261
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/a21223a39800eb83f37a466f71351c28989b05bb91d9f690938634f65878eda6.jpg"
+                },
+                "content": "CHONG REN LIAN HE REN ZHIENG\n认联合认证",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                250,
+                330,
+                746,
+                680
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                151,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                36,
+                470,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co.,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                76
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "3 "
+                    }
+                ]
+            },
+            "bbox": [
+                492,
+                928,
+                502,
+                939
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "一、概述"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                147,
+                89,
+                299,
+                118
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "1.1研究背景"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                147,
+                148,
+                312,
+                168
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "碳达峰碳中和战略目标是习近平总书记和党中央国务院在统筹国际国内两个大局下作出的重大决策，事关中华民族永续发展大局。十八大以来，党中央国务院就高度重视绿色低碳发展，把积极应对气候变化作为生态文明建设体系的重要组成。“十四五”期间，以碳排放总量控制为着力点的宏观政策引导方向已经明确，碳排放将成为生态文明建设、产业转型升级、能源结构调整等多个领域的重要抓手，并作为约束性指标纳入考核体系。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                196,
+                852,
+                439
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "实现“碳达峰、碳中和”是国家战略、全球共识，正在影响中国和全球经济社会发展的进程。在实现“双碳”目标的征途中，数智技术正在与政府治理、能源生产、工业制造等领域深度融合，数字经济产业发展不断落地生根。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                455,
+                848,
+                586
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "中共中央总书记习近平在主持中共中央政治局第三十六次集体学习时指出，“要紧紧抓住新一轮科技革命和产业变革的机遇，推动互联网、大数据、人工智能、第五代移动通信（5G）等新兴技术与绿色低碳产业深度融合，建设绿色制造体系和服务体系，提高绿色低碳产业在经济总量中的比重”。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                602,
+                848,
+                772
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "2023 年9月，习近平总书记在黑龙江考察调研时首次提出新质生产力。此后，新质生产力被正式写入中央文件。打造新质生产力需要以前沿技术创新为驱动，推动生产要素优化重组、生产关系创新重构，进而实现产业创新升级、开辟新产业新赛道。当前，以人工智能为核心的新一轮科技革命加速拓展，推动各行业由“数字化\"迈入“数智化”，成为产业深度转型不可或缺的关键引擎。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                788,
+                850,
+                920
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                36,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co.,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                76
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "4 "
+                    }
+                ]
+            },
+            "bbox": [
+                492,
+                928,
+                502,
+                939
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                144,
+                93,
+                850,
+                151
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "1.2研究目标"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                146,
+                175,
+                315,
+                197
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "本报告通过科学严谨的研究方法，依据国内外主流分析评价方法，全方位评价企业在绿色发展规划方面的工作开展情况、取得的成效，为企业进一步实现绿色低碳发展提供借鉴，同时向企业产业链上的其他企业提供本企业的相关工作进展，以促进全产业链的协同减碳和绿色发展。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                223,
+                857,
+                391
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "1.3研究方法"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                146,
+                417,
+                315,
+                439
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "本报告涉及到的研究方法包括文献与资料调研、现场调研、内部研讨、内部审核等。其中文献与资料调研包括收集企业相关数据资料，并检索与企业所属行业相关的公开研究成果；现场调研指的是前往企业现场进行数据资料的审核及确认，并查看企业实际生产经营状况；内部研讨指的是组织开展内部讨论会，针对报告进行分工和问题讨论；内部审核指的是报告在提交前经过内部人员的独立技术复核。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                464,
+                858,
+                671
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "1.4 核算边界 "
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                146,
+                695,
+                315,
+                715
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "本报告评价对象为河北泰昌电力器材科技有限公司（以下简称“受评价方”或“企业”）。评价组确认受评价方为独立法人，核算边界为受评价方控制的所有生产系统、辅助生产系统以及直接为生产服务的附属生产系统。经现场确认，受评价方企业边界为保定市满城区陉阳驿村。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                741,
+                853,
+                910
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                36,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                74
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "5 "
+                    }
+                ]
+            },
+            "bbox": [
+                492,
+                928,
+                505,
+                939
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "1.5 编制依据 "
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                147,
+                93,
+                312,
+                115
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "本报告的编制和评价依据主要包括："
+                    }
+                ]
+            },
+            "bbox": [
+                193,
+                140,
+                559,
+                160
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "《“十四五”工业绿色发展规划》（2021年11月15日工业和信息化部）"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                177,
+                848,
+                234
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "其他与节能、低碳、环保、绿色制造、数字化、智能化相关的政策文件、法律法规、标准规范等，不再一一列出。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                250,
+                850,
+                307
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "二、企业概况"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                146,
+                395,
+                374,
+                424
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "2.1 企业简介"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                454,
+                312,
+                476
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "河北泰昌电力器材科技有限公司创建于2010年，2012年改组为企业有限公司。公司注册资本10000万元。占地面积约6800平方米，办公面积约1200平方米。公司主要产品有“泰昌”牌电力器材产品符合国家及行业标准及相关技术条件，均获得国家颁发的生产许可证。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                501,
+                860,
+                633
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "公司主要经营水泥制品、电线、电缆、低压电表计量箱、电力金具、玛钢件、配电箱、复合材料绝缘横担、开关柜、避雷器、隔离开关、熔断器、绝缘子、电缆保护管研发、制造、加工；高低压开关、安全工具、通信设备、变压器及配件、仪器、仪表、互感器、电缆分支箱、电缆接头、工具瓷件、电力线材、铁塔、交通安全设施、箱式开闭所、环网柜、紧锁连接头、智能电能质量矫正装置批发、零售。公司拥有多台全自动注塑成型机、压接机、捏合机、开炼机、芯棒打磨机、激光打标机等先进的生产设备；同事拥有工频试验装置、冲击试验成套检测设备、拉力试验机等专业的检测设备。公司全体员工坚持“用户第一、质量第一、服务第一、信誉第一”的宗旨，恪守质量承诺，用更好的质量和服务回报广大客户的厚爱。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                649,
+                853,
+                892
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                36,
+                470,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co.,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                76
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "6 "
+                    }
+                ]
+            },
+            "bbox": [
+                492,
+                928,
+                505,
+                939
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                144,
+                93,
+                852,
+                225
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "2.2组织架构图"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                287,
+                339,
+                309
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/8476ab77f9ff0bdb0de92eba4077f3206b59b0edb68bb100f9d59bf722844153.jpg"
+                },
+                "content": "```mermaid\ngraph TD\n    A[\"总经理\"] --> B[\"管理者代表\"]\n    A --> C[\"副总经理\"]\n    A --> D[\"供销部\"]\n    C --> E[\"质量管理办公\"]\n    C --> F[\"生产技术部\"]\n    D --> G[\"原材料库\"]\n    D --> H[\"成品库\"]\n    F --> I[\"车间\"]\n```",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "flowchart",
+            "bbox": [
+                208,
+                335,
+                800,
+                829
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                38,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co.,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                76
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "7 "
+                    }
+                ]
+            },
+            "bbox": [
+                492,
+                928,
+                502,
+                938
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "三、评价内容"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                89,
+                374,
+                118
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "3.1 企业发展规划主要任务"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                148,
+                475,
+                170
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "3.1.1 评价要求：实施企业生产碳达峰行动"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                203,
+                600,
+                223
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "评价过程："
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                256,
+                253,
+                277
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业加强公司内部碳达峰顶层设计，提出公司内部碳达峰路线图、时间表，明确实施路径，推进各部门落实碳达峰目标任务、实行梯次达峰。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                294,
+                858,
+                388
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业深入落实《2030 年前碳达峰行动方案》，制定内部碳达峰实施方案，统筹谋划碳达峰路线图和时间表。强化标准、统计、核算和信息系统建设，提升降碳基础能力，力争早日实现碳达峰。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                405,
+                850,
+                501
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业基于自身生产特点，提出降碳和碳达峰实施路径。推动化石能源清洁高效利用，提高可再生能源应用比重。通过流程降碳、工艺降碳、原料替代，实现生产过程降碳。发展绿色低碳材料，推动产品全生命周期减碳。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                516,
+                853,
+                646
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "评价结果：符合评价要求 "
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                664,
+                411,
+                684
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "3.1.2评价要求：加快能源消费低碳化转型"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                718,
+                601,
+                739
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "评价过程："
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                772,
+                255,
+                791
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业着力提高能源利用效率，构建清洁高效低碳的生产用能结构，将节能降碳增效作为控制企业二氧化碳排放的关键措施，持续提升能源消费低碳化水平。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                809,
+                857,
+                904
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                151,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                36,
+                470,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co.,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                76
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "8 "
+                    }
+                ]
+            },
+            "bbox": [
+                492,
+                928,
+                505,
+                939
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业通过生产设备节能改造降低单位能耗。严格控制生产过程中的煤炭消费，对耗能大的生产环节进行新建、改扩建，以减少耗能。企业还计划近期开展工业绿色低碳微电网建设，发展屋顶光伏、分散式风电、多元储能、高效热泵等，推进多能高效互补利用。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                93,
+                850,
+                225
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业加快重点节能技术和装备的创新应用，持续推进典型流程工业能量系统优化，推动重点用能设备系统的节能改造。"
+                    }
+                ]
+            },
+            "bbox": [
+                146,
+                242,
+                850,
+                300
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "评价结果：符合评价要求 "
+                    }
+                ]
+            },
+            "bbox": [
+                146,
+                316,
+                410,
+                336
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "3.1.3评价要求：促进资源利用循环化转型"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                370,
+                600,
+                390
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "评价过程："
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                146,
+                423,
+                257,
+                444
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业坚持总量控制、科学配置、全面节约、循环利用原则，强化资源在生产过程的高效利用，削减工业固废、废水产生量，加强工业资源综合利用，促进生产与生活系统绿色循环链接，大幅提高资源利用效率。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                460,
+                852,
+                590
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业依托互联网、大数据等信息化技术，使用信息化管理系统对供应链及生产管理、财务管理、日常办公管理，推动资源高值化利用，构建线上线下并行的资源供应链，推进工业固废规模化综合利用。实施工业固体废物资源综合利用评价，通过以评促用，推动实现新增工业固废能用尽用、存量工业固废有序减少。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                609,
+                853,
+                778
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业按照以水定产的原则，加强对高耗水生产环节的定额管理，开展水效对标达标。推进企业用水系统集成优化，实现串联用水、分质用水、一水多用和梯级利用。企业计划加大对市政污水及再生水、海水、雨水、矿井水等非常规水的利用，减少新水取用量。推动企业建立完善节水管理制度，建立智慧用水管理平台，实现水资源高效利用。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                794,
+                850,
+                925
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                36,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                74
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "9 "
+                    }
+                ]
+            },
+            "bbox": [
+                492,
+                928,
+                504,
+                939
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                144,
+                93,
+                850,
+                149
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "评价结果：符合评价要求 "
+                    }
+                ]
+            },
+            "bbox": [
+                146,
+                168,
+                408,
+                187
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "3.1.4评价要求：推动生产过程清洁化转型"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                221,
+                600,
+                241
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "评价过程："
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                146,
+                275,
+                253,
+                294
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业强化全生命周期理念，全方位全过程推行工业产品绿色设计。探索行业绿色设计路径，带动产业链、供应链绿色协同提升。聚焦绿色属性突出、消费量大的工业产品，制定绿色设计评价标准，完善标准采信机制。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                312,
+                860,
+                444
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业严格落实产品有害物质限制使用管控要求，研究制定产品有害物质限制使用管理办法，更新产品管控范围的目录，制修订产品有害物质含量限值强制性标准，编制产品有害物质清单及检验指南，持续推进有害物质管控要求与国际接轨。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                460,
+                848,
+                590
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业针对重点污染物排放量大的工艺环节，研发推广过程减污工艺和设备，开展应用示范。严格履行国际环境公约和有关标准要求，推动重点生产环节减少持久性有机污染物、有毒有害化学物质等新污染物产生和排放。制定限期淘汰产生严重环境污染的工业固体废物的落后生产工艺设备名录。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                609,
+                848,
+                778
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业在重点生产环节推广先进适用环保治理装备，推动形成稳定、高效的治理能力。加快推进有机废气（VOCs）回收和处理，鼓励选取低耗高效组合工艺进行治理。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                794,
+                857,
+                888
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "评价结果：符合评价要求 "
+                    }
+                ]
+            },
+            "bbox": [
+                146,
+                904,
+                408,
+                923
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                36,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                74
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": []
+            },
+            "bbox": [
+                490,
+                928,
+                507,
+                938
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "3.1.5评价要求：加速生产方式数字化转型"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                93,
+                600,
+                112
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "评价过程："
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                147,
+                253,
+                166
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业正通过数字化转型来革新生产方式，利用工业互联网、大数据等前沿信息技术来提升能源和资源的管理效率，同时深化生产过程的数字化应用，以推动绿色制造的实施。企业正在加快制定一套全面的绿色低碳基础数据标准，涵盖能源、资源、碳排放和污染物排放等关键数据，并建立产品全生命周期的绿色低碳数据平台，实现数据的集中管理和共享，以促进数据的汇聚、共享和应用。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                185,
+                853,
+                391
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业深化产品研发设计、生产制造、应用服役、回收利用等环节的数字化应用，加快人工智能、物联网、云计算等信息技术在绿色制造领域的应用，提高绿色转型发展效率和效益。推动制造过程的关键工艺装备智能感知和控制系统、过程多目标优化、经营决策优化等，实现生产过程物质流、能量流等信息采集监控、智能分析和精细管理。打造面向产品全生命周期的数字孪生系统，以数据为驱动提升行业绿色低碳技术创新、绿色制造和运维服务水平。推进绿色技术软件化封装，推动成熟绿色制造技术的创新应用。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                407,
+                853,
+                688
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "评价结果：符合评价要求 "
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                703,
+                410,
+                722
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "3.1.6评价要求：构建绿色低碳技术体系"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                757,
+                578,
+                778
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "评价过程："
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                810,
+                253,
+                829
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业推动新技术快速大规模应用和迭代升级，抓紧部署前沿技术研究，完善产业技术创新体系，强化科技创新对工业绿色低碳转型的"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                848,
+                852,
+                904
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                38,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                74
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "11 "
+                    }
+                ]
+            },
+            "bbox": [
+                490,
+                928,
+                507,
+                939
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "支撑作用。"
+                    }
+                ]
+            },
+            "bbox": [
+                147,
+                93,
+                255,
+                112
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业定期编制发布低碳、节能、节水、清洁生产和资源综合利用等绿色技术、产品目录，加强设备更新和新产品规模化应用。重点推广余热高效回收利用、多污染物协同治理超低排放等工艺装备技术。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                131,
+                848,
+                225
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "评价结果：符合评价要求 "
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                242,
+                410,
+                261
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "3.1.7评价要求：完善绿色制造支撑体系"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                294,
+                576,
+                315
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "评级过程："
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                146,
+                350,
+                253,
+                369
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业构建绿色低碳标准体系，完善绿色评价体系，强化绿色服务保障，构建完整贯通的绿色供应链，全面提升绿色发展基础能力。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                386,
+                847,
+                444
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业立足自身产业结构和绿色低碳技术的发展需求，完善绿色产品、绿色工厂和绿色供应链评价标准体系，制修订一批低碳、节能、节水、资源综合利用等重点领域标准及关键工艺技术装备标准。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                460,
+                848,
+                556
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业开展绿色制造承诺机制，倡导供应商生产绿色产品，创建绿色工厂，打造绿色制造工艺、推行绿色包装、开展绿色运输、做好废弃产品回收处理，形成绿色供应链。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                571,
+                848,
+                665
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业建立多元化人才评价和激励机制。推动公司内部人才发展重大项目对绿色低碳人才队伍建设支持。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                683,
+                848,
+                740
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "评价结果：符合评价要求 "
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                757,
+                410,
+                777
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                36,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                74
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "12 "
+                    }
+                ]
+            },
+            "bbox": [
+                490,
+                928,
+                507,
+                939
+            ]
+        }
+    ],
+    [
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "四、评价结论"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                147,
+                89,
+                374,
+                118
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "4.1规划目标评价结论 "
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                148,
+                421,
+                170
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业的绿色发展规划旨在与国家发展战略和国际环境协议相一致，以实现可持续发展。然而，在实际操作中，企业在设定具体指标和量化目标方面可能存在不足。为了更好地实现绿色发展，企业需要进一步完善指标体系，确保其能够反映企业的真实环保绩效，同时也与国际标准和行业最佳实践保持一致。此外，企业应该定期对指标进行审查和更新，以适应不断变化的环境挑战和技术进步。通过这样的努力，企业不仅能更好地履行社会责任，还能提高自身在绿色市场中的竞争力，实现经济效益与环境效益的双重提升。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                196,
+                853,
+                476
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "4.2 政策措施评价结论"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                501,
+                421,
+                524
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业在制定绿色发展规划时，已经建立了相对完善的政策措施体系，这些措施旨在支持企业向绿色、低碳、循环经济转型。这些政策措施包括税收减免、财政补贴、金融支持等激励措施，以及对环保违法行为的严格监管和处罚。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                548,
+                850,
+                678
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "4.3实施效果评价结论"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                705,
+                421,
+                727
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业的绿色发展规划通过实施一系列环保措施和资源管理策略，已经在环境质量改善和资源利用效率提升方面取得了显著成效。这些成就不仅体现在企业的经济效益上，更重要的是对环境的积极影响和社会责任的履行。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                752,
+                850,
+                883
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "综上所述，河北泰昌电力器材科技有限公司满足企业的绿色发展"
+                    }
+                ]
+            },
+            "bbox": [
+                191,
+                900,
+                850,
+                920
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                36,
+                470,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co.,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                76
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": []
+            },
+            "bbox": [
+                490,
+                928,
+                507,
+                939
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "规划，建立了科学合理的绿色发展规划并执行较好。"
+                    }
+                ]
+            },
+            "bbox": [
+                146,
+                93,
+                678,
+                112
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "五、建议"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                147,
+                181,
+                300,
+                210
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "企业进一步完善绿色发展规划的目标体系，首先要明确短期和长期目标的关系，确保目标既有紧迫性又具有前瞻性。短期目标应聚焦于当前能够迅速实现的环保改进和资源效率提升，而长期目标则应着眼于实现绿色转型的深层次变革。例如，短期内可以设定减少特定污染物排放量的具体目标，长期则可以规划构建循环经济产业链。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                242,
+                853,
+                411
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "在指标设置方面，企业应结合自身业务特点和行业标准，选择能够全面反映绿色发展水平的关键性能指标（KPIs）。这些指标不仅包括直接的环境影响指标，如碳排放量、水耗、能源使用效率等，还应涵盖间接影响指标，如供应链的环境表现、产品的全生命周期环境影响等。量化指标时，应尽可能采用可验证、可比较的数据，如通过ISO 14064标准进行温室气体排放核算。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                426,
+                853,
+                632
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "加强绿色发展政策的执行力度，需要企业高层领导的坚定支持和全员参与。领导层应确保政策执行的优先权，并在资源分配上给予足够的支持。同时，企业应建立跨部门的协调机制，确保政策在不同部门之间的无缝对接和有效执行。例如，财务部门可以提供必要的资金支持，人力资源部门可以负责相关培训和能力建设。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                649,
+                850,
+                819
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "建立健全的监测评估机制是确保绿色发展规划顺利实施的关键。企业应定期对各项指标进行监测，收集数据，分析趋势。监测频率可以根据指标的重要性和变化速度来确定，关键指标可以实行实时监测。评估过程中，应采用定性和定量相结合的方法，不仅考察指标的完成情况，还要分析其背后的原因和影响因素。"
+                    }
+                ]
+            },
+            "bbox": [
+                146,
+                835,
+                850,
+                892
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                36,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co.,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                74
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": []
+            },
+            "bbox": [
+                490,
+                928,
+                507,
+                939
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": []
+            },
+            "bbox": [
+                144,
+                93,
+                857,
+                187
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "通过定期评估，企业可以及时发现规划实施过程中的问题和不足，如某些措施未能达到预期效果，或者新出现的环境挑战。对于评估中发现的问题，企业应制定具体的改进措施，并明确责任人和完成时限。例如，如果发现某个生产环节的能源消耗高于预期，企业应立即分析原因，并采取措施优化工艺或升级设备。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                205,
+                857,
+                373
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "总之，企业在进一步完善绿色发展规划的目标体系、加强政策执行力度、建立监测评估机制的过程中，应注重目标的科学性和可操作性，确保政策的针对性和协调性，以及通过持续的监测和评估，不断优化和改进规划，从而实现绿色发展的长远目标。这不仅有助于提升企业的环境绩效和市场竞争力，还能为社会的可持续发展作出积极贡献。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                390,
+                850,
+                595
+            ]
+        },
+        {
+            "type": "title",
+            "content": {
+                "title_content": [
+                    {
+                        "type": "text",
+                        "content": "六、结语"
+                    }
+                ],
+                "level": 1
+            },
+            "bbox": [
+                144,
+                627,
+                299,
+                655
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "绿色发展规划是指导未来经济社会发展的重要依据，它不仅为企业的长期战略提供了框架，而且为政府的政策制定和社会的整体行动指明了方向。评价绿色发展规划的科学性和实施效果对于推动绿色发展具有至关重要的意义，因为这不仅关系到规划目标的实现程度，而且直接影响到经济增长与环境保护是否能够实现良性循环，进而决定了可持续发展进程的顺利与否。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                686,
+                852,
+                892
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                36,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                74
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": [
+                    {
+                        "type": "text",
+                        "content": "15 "
+                    }
+                ]
+            },
+            "bbox": [
+                490,
+                928,
+                507,
+                939
+            ]
+        }
+    ],
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "本报告的撰写基于对当前全球绿色发展趋势的深刻理解和对国内外成功案例的研究分析。我们旨在为未来绿色发展提供科学、实用的参考依据，帮助企业和政策制定者识别关键领域和潜在风险，制定出更加符合实际、更加有效的绿色发展策略。通过提出具体的行动计划和创新的解决方案，致力于激发社会各界对绿色发展的热情和参与，共同推动经济增长与环境保护的和谐共生，为实现可持续发展目标贡献力量。"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                93,
+                855,
+                336
+            ]
+        },
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/d5b85750e4580a3498a80256bad122bc0da0858dae05ae9c871fac4fff74fbd4.jpg"
+                },
+                "content": "华认联合\nZHONG REN LIAN HENG ZHEENG",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "text_image",
+            "bbox": [
+                250,
+                336,
+                744,
+                680
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": []
+            },
+            "bbox": [
+                152,
+                35,
+                213,
+                80
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证有限公司"
+                    }
+                ]
+            },
+            "bbox": [
+                213,
+                38,
+                468,
+                55
+            ]
+        },
+        {
+            "type": "page_header",
+            "content": {
+                "page_header_content": [
+                    {
+                        "type": "text",
+                        "content": "Guangdong ZhongRenLianHe Certification Co,Ltd. "
+                    }
+                ]
+            },
+            "bbox": [
+                211,
+                63,
+                500,
+                74
+            ]
+        },
+        {
+            "type": "page_number",
+            "content": {
+                "page_number_content": []
+            },
+            "bbox": [
+                490,
+                928,
+                507,
+                938
+            ]
+        }
+    ],
+    [
+        {
+            "type": "image",
+            "content": {
+                "image_source": {
+                    "path": "images/5ae757775176b038994da75b84f5d3204e063a00840641d2877df2088f359d87.jpg"
+                },
+                "content": "Abstract wave design with green and blue gradients, no text or symbols present",
+                "image_caption": [],
+                "image_footnote": []
+            },
+            "sub_type": "natural_image",
+            "bbox": [
+                0,
+                0,
+                998,
+                832
+            ]
+        },
+        {
+            "type": "page_footer",
+            "content": {
+                "page_footer_content": [
+                    {
+                        "type": "text",
+                        "content": "联 合 ★ "
+                    }
+                ]
+            },
+            "bbox": [
+                80,
+                852,
+                164,
+                910
+            ]
+        },
+        {
+            "type": "page_footer",
+            "content": {
+                "page_footer_content": [
+                    {
+                        "type": "text",
+                        "content": "广东中认联合认证"
+                    }
+                ]
+            },
+            "bbox": [
+                191,
+                854,
+                559,
+                881
+            ]
+        },
+        {
+            "type": "page_footer",
+            "content": {
+                "page_footer_content": [
+                    {
+                        "type": "text",
+                        "content": "ZhongRenLianHe Certification Co.,Ltd "
+                    }
+                ]
+            },
+            "bbox": [
+                194,
+                889,
+                559,
+                904
+            ]
+        },
+        {
+            "type": "page_footer",
+            "content": {
+                "page_footer_content": [
+                    {
+                        "type": "text",
+                        "content": "地址：广东省佛山市顺德区容桂朝桂南路1号科技创新中心4座2305号"
+                    }
+                ]
+            },
+            "bbox": [
+                82,
+                922,
+                566,
+                936
+            ]
+        }
+    ]
+]

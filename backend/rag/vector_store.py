@@ -1,5 +1,6 @@
 import os
 from openai import OpenAI
+import requests
 import time
 from pathlib import Path
 from backend.core.config import get_setting
@@ -132,6 +133,18 @@ def _openai_usage_to_dict(response):
     }
 
 
+def _request_openai_compatible_embeddings(base_url, model, batch_texts, timeout=120):
+    response = requests.post(
+        f"{base_url.rstrip('/')}/embeddings",
+        json={"model": model, "input": batch_texts},
+        timeout=timeout,
+    )
+    response.raise_for_status()
+    payload = response.json()
+    data = payload.get("data") or []
+    return [item["embedding"] for item in data], payload
+
+
 def get_embeddings(client, texts, batch_size=10, usage_context=None):
     """
     批量生成向量，处理分片后的文本
@@ -155,11 +168,24 @@ def get_embeddings(client, texts, batch_size=10, usage_context=None):
         if dimensions and is_dashscope:
             kwargs["dimensions"] = int(dimensions)
         started_at = time.time()
-        response = client.embeddings.create(**kwargs)
-        # 提取当前批次的向量并添加到结果列表
-        batch_embeddings = [item.embedding for item in response.data]
+        if is_dashscope:
+            response = client.embeddings.create(**kwargs)
+            # 提取当前批次的向量并添加到结果列表
+            batch_embeddings = [item.embedding for item in response.data]
+            model_name = getattr(response, "model", None) or kwargs["model"]
+            raw_usage = _openai_usage_to_dict(response)
+        else:
+            # Ollama 的 OpenAI 兼容 embeddings 在部分版本下会对 OpenAI SDK/httpx
+            # 返回 502，直接请求同一真实接口更稳定，且不影响 DashScope 生产链路。
+            batch_embeddings, payload = _request_openai_compatible_embeddings(
+                base_url,
+                kwargs["model"],
+                batch_texts,
+                timeout=int(get_setting("request_timeout_seconds", 120) or 120),
+            )
+            model_name = payload.get("model") or kwargs["model"]
+            raw_usage = payload.get("usage") or {}
         all_embeddings.extend(batch_embeddings)
-        model_name = getattr(response, "model", None) or kwargs["model"]
         record_ai_usage_log(
             provider=provider,
             region="cn-beijing" if is_dashscope else "local",
@@ -173,7 +199,7 @@ def get_embeddings(client, texts, batch_size=10, usage_context=None):
             section_id=context.get("section_id"),
             batch_id=context.get("batch_id"),
             latency_ms=int((time.time() - started_at) * 1000),
-            raw_usage=_openai_usage_to_dict(response),
+            raw_usage=raw_usage,
             input_text="\n".join(str(item) for item in batch_texts),
             document_count=len(batch_texts),
             character_count=sum(len(str(item)) for item in batch_texts),

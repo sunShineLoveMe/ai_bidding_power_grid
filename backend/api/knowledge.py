@@ -17,6 +17,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import re
 import uuid
 from pathlib import Path
 from typing import Any
@@ -31,6 +32,7 @@ from backend.core.llm_json_utils import strip_llm_json
 from backend.core.security import UploadValidationError, safe_upload_filename, validate_uploaded_file
 from backend.db.supabase_client import get_supabase_client
 from backend.db.supabase_repo import (
+    get_knowledge_overview_stats,
     get_knowledge_document_detail,
     list_knowledge_documents,
 )
@@ -40,15 +42,25 @@ from backend.rag.ingestion import (
     ingest_knowledge_document,
     update_knowledge_document_status,
 )
+from backend.rag.display_names import sanitize_knowledge_assets, sanitize_source_contexts
 from backend.rag.retrieval import (
     generate_knowledge_answer,
     search_knowledge_assets,
     search_knowledge_base,
     stream_knowledge_answer,
 )
+from backend.rag.product_parameters import search_taichang_product_parameter_contexts
+from backend.rag.project_performance import search_taichang_project_performance_contexts
 
 
 CUSTOMER_SEED_CORPUS = "power_grid_customer_corpus"
+PILOT_ENTERPRISE = "泰昌"
+PILOT_ENTERPRISE_FILTER = {
+    "enterprise": PILOT_ENTERPRISE,
+    "source_domain": "enterprise_fact",
+    "fact_source_allowed_for_enterprise": True,
+    "reference_only": False,
+}
 CUSTOMER_SCOPE_TERMS = [
     "货物清单", "技术规范编码", "物料编码", "交货方式", "交货地点", "主招标文件",
     "招标编号", "资格预审", "评标办法", "专用资格", "包号", "包件", "分标编号",
@@ -187,6 +199,302 @@ def _infer_customer_filter(query: str, explicit_filter: dict[str, Any] | None = 
     return None, None
 
 
+def _pilot_enterprise_metadata_filter(explicit_filter: dict[str, Any] | None = None) -> dict[str, Any]:
+    metadata_filter = dict(PILOT_ENTERPRISE_FILTER)
+    for key, value in (explicit_filter or {}).items():
+        if value not in (None, "", "all"):
+            metadata_filter[key] = value
+    return metadata_filter
+
+
+def _metadata_bool(value: Any) -> bool | None:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        normalized = value.strip().lower()
+        if normalized in {"true", "1", "yes", "y"}:
+            return True
+        if normalized in {"false", "0", "no", "n"}:
+            return False
+    return None
+
+
+def _is_pilot_enterprise_context(context: dict[str, Any]) -> bool:
+    meta = _safe_meta(context)
+    has_enterprise_signal = (
+        str(meta.get("enterprise") or "") == PILOT_ENTERPRISE
+        or meta.get("source_domain") == "enterprise_fact"
+        or _metadata_bool(meta.get("fact_source_allowed_for_enterprise")) is True
+    )
+    if not has_enterprise_signal:
+        return False
+    if meta.get("enterprise") and str(meta.get("enterprise")) != PILOT_ENTERPRISE:
+        return False
+    if meta.get("source_domain") and meta.get("source_domain") != "enterprise_fact":
+        return False
+    fact_allowed = _metadata_bool(meta.get("fact_source_allowed_for_enterprise"))
+    if fact_allowed is False:
+        return False
+    reference_only = _metadata_bool(meta.get("reference_only"))
+    if reference_only is True:
+        return False
+    return True
+
+
+def _source_group_key(context: dict[str, Any]) -> str:
+    meta = _safe_meta(context)
+    if (
+        context.get("retrieval_source") == "structured_product_parameter_json"
+        or meta.get("retrieval_source") == "structured_product_parameter_json"
+    ):
+        return "|".join(
+            str(part or "")
+            for part in [
+                meta.get("source_display_name") or meta.get("source_file"),
+                meta.get("report_no"),
+                meta.get("specification_model"),
+            ]
+        )
+    return "|".join(
+        str(part or "")
+        for part in [
+            meta.get("source_document_name")
+            or meta.get("source_display_name")
+            or meta.get("source_file")
+            or meta.get("source_org")
+            or meta.get("category_label")
+            or meta.get("category"),
+        ]
+    )
+
+
+def _enterprise_context_intent_bonus(query: str, context: dict[str, Any]) -> float:
+    meta = _safe_meta(context)
+    text = " ".join(
+        str(value or "")
+        for value in [
+            meta.get("source_display_name"),
+            meta.get("source_file"),
+            meta.get("evidence_type"),
+            meta.get("evidence_type_label"),
+            context.get("content"),
+        ]
+    )
+    bonus = 0.0
+    if any(keyword in query for keyword in ["资质证书", "体系认证", "认证证书"]):
+        if any(name in text for name in ["质量管理体系认证证书", "环境管理体系认证证书", "职业健康安全管理体系认证证书"]):
+            bonus += 0.65
+        elif "认证证书" in text or meta.get("evidence_type") == "certification":
+            bonus += 0.3
+        if any(name in text for name in ["ESG", "绿色发展规划"]):
+            bonus -= 0.25
+    if any(keyword in query for keyword in ["企业证明材料", "企业资信", "基础证照"]):
+        if any(name in text for name in ["营业执照", "质量管理体系认证证书", "环境管理体系认证证书", "职业健康安全管理体系认证证书", "社保证明", "参保证明"]):
+            bonus += 0.45
+    if "社保" in query or "参保" in query:
+        if "社保" in text or "参保" in text:
+            bonus += 0.6
+        if meta.get("evidence_type") in {"production_capacity", "testing_capacity"}:
+            bonus -= 0.4
+    if meta.get("is_asset_catalog"):
+        bonus -= 0.15
+    return bonus
+
+
+def _is_certification_query(query: str) -> bool:
+    return any(keyword in (query or "") for keyword in ["资质证书", "体系认证", "认证证书"])
+
+
+def _query_evidence_scope(query: str) -> str | None:
+    text = query or ""
+    if _is_certification_query(text):
+        return "formal_certification"
+    if any(keyword in text for keyword in ["绿色低碳", "绿色发展", "绿色供应链", "ESG", "碳足迹", "废水废气", "废水废气废固"]):
+        return "green_low_carbon"
+    if any(keyword in text for keyword in ["人员证书", "社保证明", "参保证明", "劳动合同", "人员花名册"]):
+        return "personnel_certificate"
+    if any(keyword in text for keyword in ["检验报告", "检测报告", "型式试验报告"]):
+        return "inspection_report"
+    if any(keyword in text for keyword in ["生产制造能力", "生产能力", "生产线", "厂房", "车间"]):
+        return "production_capacity"
+    if any(keyword in text for keyword in ["试验检测设备", "检测设备", "试验设备"]):
+        return "testing_capacity"
+    if any(keyword in text for keyword in ["营业执照", "基础证照"]):
+        return "business_license"
+    return None
+
+
+def _context_text_for_scope(context: dict[str, Any]) -> str:
+    meta = _safe_meta(context)
+    return " ".join(
+        str(value or "")
+        for value in [
+            meta.get("source_display_name"),
+            meta.get("source_document_name"),
+            meta.get("source_file"),
+            meta.get("evidence_type"),
+            meta.get("evidence_type_label"),
+            meta.get("category_label"),
+            context.get("content"),
+        ]
+    )
+
+
+def _context_matches_query_scope(context: dict[str, Any], scope: str | None) -> bool:
+    if not scope:
+        return True
+    meta = _safe_meta(context)
+    evidence_type = str(meta.get("evidence_type") or "")
+    text = _context_text_for_scope(context)
+    if scope == "formal_certification":
+        return _is_formal_certification_context(context)
+    if scope == "green_low_carbon":
+        return evidence_type == "green_low_carbon" or any(
+            keyword in text for keyword in ["绿色低碳", "绿色发展", "绿色供应链", "ESG", "碳足迹", "废水废气", "废水废气废固"]
+        )
+    if scope == "personnel_certificate":
+        return evidence_type == "personnel_certificate" or any(keyword in text for keyword in ["人员证书", "社保证明", "参保证明", "劳动合同", "人员花名册"])
+    if scope == "inspection_report":
+        return evidence_type == "inspection_report" or any(keyword in text for keyword in ["检验报告", "检测报告", "型式试验"])
+    if scope == "production_capacity":
+        return evidence_type == "production_capacity" or any(keyword in text for keyword in ["生产制造能力", "生产线", "厂房", "车间"])
+    if scope == "testing_capacity":
+        return evidence_type == "testing_capacity" or any(keyword in text for keyword in ["试验检测设备", "检测设备", "试验设备"])
+    if scope == "business_license":
+        return evidence_type == "business_license" or "营业执照" in text
+    return True
+
+
+def _is_formal_certification_context(context: dict[str, Any]) -> bool:
+    meta = _safe_meta(context)
+    text = _context_text_for_scope(context)
+
+    # 负向企业宣传/环保资料必须先拦截。线上存在被误标为 certification 的绿色发展、
+    # ESG、废水废气废固资料，不能因为正文中出现泛化“认证证书”就进入资质证书回答。
+    if any(name in text for name in ["ESG", "绿色发展规划", "绿色供应链", "碳足迹", "废水废气", "废水废气废固"]):
+        return False
+
+    formal_certificate_names = ["质量管理体系认证证书", "环境管理体系认证证书", "职业健康安全管理体系认证证书"]
+    if any(name in text for name in formal_certificate_names):
+        return True
+    if meta.get("evidence_type") == "certification":
+        return True
+    return False
+
+
+def _asset_as_source_context(asset: dict[str, Any]) -> dict[str, Any]:
+    metadata = asset.get("metadata") if isinstance(asset.get("metadata"), dict) else {}
+    return {
+        "content": " ".join(
+            str(value or "")
+            for value in [
+                asset.get("title"),
+                asset.get("description"),
+                asset.get("searchable_text"),
+                asset.get("category"),
+                asset.get("file_name"),
+            ]
+        ),
+        "metadata": {
+            **metadata,
+            "source_display_name": metadata.get("source_display_name") or asset.get("title"),
+            "evidence_type": metadata.get("evidence_type") or asset.get("evidence_type"),
+            "evidence_type_label": metadata.get("evidence_type_label") or asset.get("category"),
+            "source_file": metadata.get("source_file") or asset.get("file_name"),
+        },
+    }
+
+
+def _is_formal_certification_asset(asset: dict[str, Any]) -> bool:
+    return _is_formal_certification_context(_asset_as_source_context(asset))
+
+
+def _asset_matches_query_scope(asset: dict[str, Any], scope: str | None) -> bool:
+    return _context_matches_query_scope(_asset_as_source_context(asset), scope)
+
+
+def _filter_assets_for_query_scope(assets: list[dict[str, Any]], query: str) -> list[dict[str, Any]]:
+    scope = _query_evidence_scope(query)
+    if not scope:
+        return assets
+    filtered = [asset for asset in assets if _asset_matches_query_scope(asset, scope)]
+    if filtered or scope == "formal_certification":
+        return filtered
+    return assets
+    return _is_formal_certification_context(context)
+
+
+def _curate_pilot_enterprise_contexts(
+    contexts: list[dict[str, Any]],
+    limit: int = 5,
+    query: str = "",
+) -> list[dict[str, Any]]:
+    curated: dict[str, dict[str, Any]] = {}
+    for context in contexts or []:
+        if not _is_pilot_enterprise_context(context):
+            continue
+        key = _source_group_key(context)
+        if not key.strip("|"):
+            key = str(context.get("id") or len(curated))
+        current = curated.get(key)
+        if current is None or float(context.get("similarity") or 0) > float(current.get("similarity") or 0):
+            curated[key] = context
+
+    ranked = sorted(
+        curated.values(),
+        key=lambda item: float(item.get("similarity") or 0) + _enterprise_context_intent_bonus(query, item),
+        reverse=True,
+    )
+    scope = _query_evidence_scope(query)
+    if scope:
+        scoped_contexts = [item for item in ranked if _context_matches_query_scope(item, scope)]
+        if scoped_contexts or scope == "formal_certification":
+            return scoped_contexts[:limit]
+    return ranked[:limit]
+
+
+def _asset_metadata_filter_from_query(query: str, metadata_filter: dict[str, Any] | None, explicit_asset_filter: dict[str, Any] | None = None) -> dict[str, Any] | None:
+    asset_filter = {key: value for key, value in (explicit_asset_filter or {}).items() if value not in (None, "", "all")}
+    if metadata_filter:
+        for key in ("enterprise", "doc_owner", "source_domain", "target_library", "evidence_type", "source_batch_id", "ingestion_batch_id"):
+            value = metadata_filter.get(key)
+            if value not in (None, "", "all"):
+                asset_filter.setdefault(key, value)
+
+    query_text = query or ""
+    if "泰昌" in query_text:
+        asset_filter.setdefault("enterprise", "泰昌")
+        asset_filter.setdefault("source_domain", "enterprise_fact")
+        asset_filter.setdefault("reference_only", False)
+    return asset_filter or None
+
+
+def _merge_asset_source_contexts(
+    contexts: list[dict[str, Any]],
+    assets: list[dict[str, Any]],
+    limit: int = 5,
+    query: str = "",
+) -> list[dict[str, Any]]:
+    merged = list(contexts or [])
+    for asset in assets or []:
+        metadata = asset.get("metadata") if isinstance(asset.get("metadata"), dict) else {}
+        merged.append(
+            {
+                "id": f"asset:{asset.get('id')}",
+                "content": asset.get("description") or asset.get("title") or "",
+                "similarity": float(asset.get("similarity") or 0),
+                "retrieval_source": "knowledge_asset",
+                "metadata": {
+                    **metadata,
+                    "source_display_name": metadata.get("source_display_name") or asset.get("title"),
+                    "category_label": asset.get("category") or metadata.get("category_label"),
+                    "retrieval_source": "knowledge_asset",
+                },
+            }
+        )
+    return _curate_pilot_enterprise_contexts(merged, limit=limit, query=query)
+
+
 @knowledge_bp.route('/scopes', methods=['GET'])
 @bp.route('/knowledge/scopes', methods=['GET'])
 def get_knowledge_scopes():
@@ -293,27 +601,32 @@ def search_knowledge():
         return jsonify({'error': '缺少检索问题 query'}), 400
         
     try:
-        metadata_filter, clarification = _infer_customer_filter(query, data.get("metadata_filter") or None)
-        if clarification:
-            return jsonify({
-                "answer": clarification["message"],
-                "needs_clarification": True,
-                "clarification": clarification,
-                "images": [],
-                "assets": [],
-                "raw_contexts": [],
-            }), 200
+        metadata_filter = _pilot_enterprise_metadata_filter(data.get("metadata_filter") or None)
         # 1. 向量化并检索 Supabase
         contexts = search_knowledge_base(
             query,
             match_threshold=0.3,
-            match_count=8,
-            scenario=data.get("scenario") or "qa",
+            match_count=15,
+            scenario="qa",
             metadata_filter=metadata_filter,
             project_id=data.get("project_id") or None,
-            return_parent=data.get("return_parent"),
+            return_parent=False,
         )
-        assets = search_knowledge_assets(query, match_count=8)
+        parameter_contexts = search_taichang_product_parameter_contexts(query, limit=5)
+        performance_contexts = search_taichang_project_performance_contexts(query, limit=3)
+        contexts = _curate_pilot_enterprise_contexts(contexts, limit=5, query=query)
+        contexts = (performance_contexts + parameter_contexts + contexts)[:5]
+        contexts = sanitize_source_contexts(contexts)
+        asset_metadata_filter = _asset_metadata_filter_from_query(
+            query,
+            metadata_filter,
+            data.get("asset_metadata_filter") or None,
+        )
+        assets = sanitize_knowledge_assets(
+            search_knowledge_assets(query, match_count=12, metadata_filter=asset_metadata_filter)[:8]
+        )
+        assets = _filter_assets_for_query_scope(assets, query)
+        contexts = _merge_asset_source_contexts(contexts, assets, limit=5, query=query)
         
         # 2. RAG 生成回答
         result = generate_knowledge_answer(query, contexts, assets)
@@ -357,23 +670,32 @@ def stream_search_knowledge():
     def generate():
         yield emit({"type": "start"})
         try:
-            metadata_filter, clarification = _infer_customer_filter(query, data.get("metadata_filter") or None)
-            if clarification:
-                yield emit({"type": "clarification", "clarification": clarification})
-                yield emit({"type": "chunk", "content": clarification["message"]})
-                yield emit({"type": "done"})
-                return
+            metadata_filter = _pilot_enterprise_metadata_filter(data.get("metadata_filter") or None)
             yield emit({"type": "status", "message": "正在检索企业知识库和图片资产..."})
             contexts = search_knowledge_base(
                 query,
                 match_threshold=0.3,
-                match_count=8,
-                scenario=data.get("scenario") or "qa",
+                match_count=15,
+                scenario="qa",
                 metadata_filter=metadata_filter,
                 project_id=data.get("project_id") or None,
-                return_parent=data.get("return_parent"),
+                return_parent=False,
             )
-            assets = search_knowledge_assets(query, match_count=8)
+            parameter_contexts = search_taichang_product_parameter_contexts(query, limit=5)
+            performance_contexts = search_taichang_project_performance_contexts(query, limit=3)
+            contexts = _curate_pilot_enterprise_contexts(contexts, limit=5, query=query)
+            contexts = (performance_contexts + parameter_contexts + contexts)[:5]
+            contexts = sanitize_source_contexts(contexts)
+            asset_metadata_filter = _asset_metadata_filter_from_query(
+                query,
+                metadata_filter,
+                data.get("asset_metadata_filter") or None,
+            )
+            assets = sanitize_knowledge_assets(
+                search_knowledge_assets(query, match_count=12, metadata_filter=asset_metadata_filter)[:8]
+            )
+            assets = _filter_assets_for_query_scope(assets, query)
+            contexts = _merge_asset_source_contexts(contexts, assets, limit=5, query=query)
             if not contexts and not assets and not is_relevant_knowledge_query(query):
                 yield emit({
                     "type": "chunk",
@@ -435,6 +757,8 @@ def _normalize_followups(payload: dict) -> dict:
         text = str(item or "").strip()
         if not text or text in seen:
             continue
+        if re.search(r"(?:目前|当前|泰昌).{0,12}(?:缺少|缺失|未提供|尚未提供)", text):
+            continue
         if len(text) > 80:
             text = text[:80].rstrip("，。；;,. ") + "？"
         if not text.endswith(("?", "？")):
@@ -485,7 +809,8 @@ def generate_knowledge_followups():
 3. 如果回答涉及图片资产，要优先引导"图片适合放在哪个章节""哪些能插入正文/附件""还缺哪些原件或证明"。
 4. 如果回答涉及资质、人员、社保、营业执照、许可证，要优先引导材料完整性和废标风险核查。
 5. 如果回答涉及产品、设备、参数，要优先引导技术响应配图和参数匹配。
-6. 只输出 JSON，不要输出 Markdown，不要解释。
+6. 只有当助手回答已经明确确认某项材料缺失时，后续问题才能复述该缺失；否则必须使用“是否具备”“能否检索到”等中性问法，不得写“目前缺少”“当前缺失”“未提供”等未经证实的结论。
+7. 只输出 JSON，不要输出 Markdown，不要解释。
 
 JSON 格式：
 {{
@@ -530,6 +855,16 @@ def get_knowledge_documents():
         return jsonify(docs), 200
     except Exception as e:
         logging.exception("查询知识库文档列表失败")
+        return jsonify({'error': f'查询失败: {str(e)}'}), 500
+
+
+@knowledge_bp.route('/stats', methods=['GET'])
+@bp.route('/knowledge/stats', methods=['GET'])
+def get_knowledge_stats():
+    try:
+        return jsonify(get_knowledge_overview_stats()), 200
+    except Exception as e:
+        logging.exception("查询知识库统计失败")
         return jsonify({'error': f'查询失败: {str(e)}'}), 500
 
 

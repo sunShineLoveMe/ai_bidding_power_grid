@@ -92,6 +92,49 @@ class DashScopeRerankClientTest(unittest.TestCase):
         self.assertEqual(payload["input"]["documents"], ["资格审查", "无关内容"])
         self.assertEqual(payload["parameters"]["top_n"], 1)
 
+    @patch.dict(os.environ, {"DASHSCOPE_API_KEY": "test-key"}, clear=False)
+    @patch("backend.ai.rerank_client.requests.post")
+    def test_explicit_disabled_rerank_skips_api_call(self, post_mock):
+        from backend.ai import rerank_client
+
+        rows = [{"content": "资格审查"}, {"content": "技术规范书响应"}]
+        result = rerank_client.rerank_documents("电网投标", rows, text_key="content", enabled=False)
+
+        self.assertEqual(result, rows)
+        post_mock.assert_not_called()
+
+    @patch.dict(os.environ, {"DASHSCOPE_API_KEY": "test-key"}, clear=False)
+    @patch("backend.ai.rerank_client.record_ai_usage_log")
+    @patch("backend.ai.rerank_client.requests.post")
+    @patch("backend.ai.rerank_client.get_setting")
+    def test_explicit_model_override_is_used(self, get_setting_mock, post_mock, _usage):
+        from backend.ai import rerank_client
+
+        get_setting_mock.side_effect = lambda name, default=None: {
+            "rerank_enabled": False,
+            "request_timeout_seconds": 30,
+        }.get(name, default)
+        post_mock.return_value = self._mock_response(
+            {
+                "results": [
+                    {"index": 0, "relevance_score": 0.88},
+                    {"index": 1, "relevance_score": 0.62},
+                ]
+            }
+        )
+
+        rows = [{"content": "资格审查"}, {"content": "技术规范书响应"}]
+        result = rerank_client.rerank_documents(
+            "电网投标",
+            rows,
+            text_key="content",
+            enabled=True,
+            model="qwen3-rerank",
+        )
+
+        self.assertEqual(result[0]["rerank_score"], 0.88)
+        self.assertEqual(post_mock.call_args.kwargs["json"]["model"], "qwen3-rerank")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,872 @@
+{
+  "assets": [
+    {
+      "asset_id": "taichang_testing_capacity_p2_018_7a2b0ca4",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81/extract/images/c8372a56b9cb4a8c3f191a516794a3c0036888259b648b417c56a2a9a6180f59.jpg",
+      "asset_sha256": "d3a58ad340bf5109a47f6ab9c187cd9b1fc74b7547a8785962a239f3bd89de63",
+      "page_idx": 1,
+      "page_no": 2,
+      "bbox": [
+        440,
+        238,
+        543,
+        340
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111710_21ab818b",
+      "batch_id": "8ebd8b62-bbe4-43c6-8e86-9e2250943652",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "1300154130 No 25001255 1300154130",
+      "ocr_context": "1300154130 No 25001255 1300154130",
+      "retrieval_text": "泰昌 testing_capacity 第2页图片。1300154130 No 25001255 1300154130",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:2",
+        "bbox_anchor": [
+          440,
+          238,
+          543,
+          340
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p2_028_255156cc",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81/extract/images/27a7e0e3c055808ce0b40a7efc82cc193322b0671e289ae8d72edab7b96743dc.jpg",
+      "asset_sha256": "ddc902ffb5ec9eef4408b789fba3bef636ec79122f9460602dd450faa3640752",
+      "page_idx": 1,
+      "page_no": 2,
+      "bbox": [
+        628,
+        710,
+        765,
+        856
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111710_21ab818b",
+      "batch_id": "8ebd8b62-bbe4-43c6-8e86-9e2250943652",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "收款人：赵凡凡 复核：张老七 开票人：杜玉桢",
+      "ocr_context": "收款人：赵凡凡 复核：张老七 开票人：杜玉桢",
+      "retrieval_text": "泰昌 testing_capacity 第2页图片。收款人：赵凡凡 复核：张老七 开票人：杜玉桢",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:2",
+        "bbox_anchor": [
+          628,
+          710,
+          765,
+          856
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p3_036_1c2a9a69",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81/extract/images/0c116754b151ff014c68074329bd965b3d1dae020dbe9f2de1518ad4160bd0fa.jpg",
+      "asset_sha256": "5849cc764734199feaaf8e53fac7fc9b1b2d38b60fb3990f1940029e38646479",
+      "page_idx": 2,
+      "page_no": 3,
+      "bbox": [
+        579,
+        264,
+        757,
+        393
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111710_21ab818b",
+      "batch_id": "8ebd8b62-bbe4-43c6-8e86-9e2250943652",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "鉴于国家税务总局全国增值税发票查验平台https://inv-veri.chinatax.gov.cn/index.html查询年限5年，故我公司部分生产、试验设备发票超出查询年限而无法查询。 我公司承诺所提供所有设备发票信息真实有效，无任何虚假。如有虚假愿意承担一切法律责任，特此证明。 承诺人：河北泰昌电力器材科技有限公司",
+      "ocr_context": "鉴于国家税务总局全国增值税发票查验平台https://inv-veri.chinatax.gov.cn/index.html查询年限5年，故我公司部分生产、试验设备发票超出查询年限而无法查询。 我公司承诺所提供所有设备发票信息真实有效，无任何虚假。如有虚假愿意承担一切法律责任，特此证明。 承诺人：河北泰昌电力器材科技有限公司",
+      "retrieval_text": "泰昌 testing_capacity 第3页图片。鉴于国家税务总局全国增值税发票查验平台https://inv-veri.chinatax.gov.cn/index.html查询年限5年，故我公司部分生产、试验设备发票超出查询年限而无法查询。 我公司承诺所提供所有设备发票信息真实有效，无任何虚假。如有虚假愿意承担一切法律责任，特此证明。 承诺人：河北泰昌电力器材科技有限公司",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:3",
+        "bbox_anchor": [
+          579,
+          264,
+          757,
+          393
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p4_037_1c766e39",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81/extract/images/062de878d5108831a726b6e6ddf225308c60cef2be6511b065a02839227c4a38.jpg",
+      "asset_sha256": "43c3af09aba4d58adba7fdf8e272da936f229562bc957968ccbfc5fd8b23b2d3",
+      "page_idx": 3,
+      "page_no": 4,
+      "bbox": [
+        0,
+        0,
+        998,
+        998
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111710_21ab818b",
+      "batch_id": "8ebd8b62-bbe4-43c6-8e86-9e2250943652",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "上升 UP",
+      "ocr_context": "上升 UP",
+      "retrieval_text": "泰昌 testing_capacity 第4页图片。上升 UP",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:4",
+        "bbox_anchor": [
+          0,
+          0,
+          998,
+          998
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p4_038_eb677d4c",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81/extract/images/61e2f85efbfc2787c5a30ab9ec59d0c5bcf892dd137e4fa04fd15ae82e7222f3.jpg",
+      "asset_sha256": "2795479c053dadae53295f01cc22b94a85944eb9cc2e8511f2f5ab0ae58fa1e7",
+      "page_idx": 3,
+      "page_no": 4,
+      "bbox": [
+        91,
+        352,
+        237,
+        435
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111710_21ab818b",
+      "batch_id": "8ebd8b62-bbe4-43c6-8e86-9e2250943652",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "上升 UP",
+      "ocr_context": "上升 UP",
+      "retrieval_text": "泰昌 testing_capacity 第4页图片。上升 UP",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:4",
+        "bbox_anchor": [
+          91,
+          352,
+          237,
+          435
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p4_041_c5705d3a",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81/extract/images/99fdac0a710709eccdc5919e719ed307e36feae94b2c24acf53a7fbacf2e34fe.jpg",
+      "asset_sha256": "9d155cabdf7db649d9801bfa3e42d001505be87b1bfff84fa00dae4eea24f793",
+      "page_idx": 3,
+      "page_no": 4,
+      "bbox": [
+        578,
+        415,
+        604,
+        433
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111710_21ab818b",
+      "batch_id": "8ebd8b62-bbe4-43c6-8e86-9e2250943652",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "上升 UP 下降 DOWN",
+      "ocr_context": "上升 UP 下降 DOWN",
+      "retrieval_text": "泰昌 testing_capacity 第4页图片。上升 UP 下降 DOWN",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:4",
+        "bbox_anchor": [
+          578,
+          415,
+          604,
+          433
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p4_044_958987e5",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81/extract/images/c140d9debdd8178a0a39cf056d51fd09e80bb1f9c4a0e8b52af91d6a181a8056.jpg",
+      "asset_sha256": "8d10f536c883d4a6101298913edc2dd6a99f0b1460de248b2ecee24402796aab",
+      "page_idx": 3,
+      "page_no": 4,
+      "bbox": [
+        575,
+        450,
+        600,
+        468
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111710_21ab818b",
+      "batch_id": "8ebd8b62-bbe4-43c6-8e86-9e2250943652",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "下降 DOWN 排烟 discharge smoke",
+      "ocr_context": "下降 DOWN 排烟 discharge smoke",
+      "retrieval_text": "泰昌 testing_capacity 第4页图片。下降 DOWN 排烟 discharge smoke",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:4",
+        "bbox_anchor": [
+          575,
+          450,
+          600,
+          468
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p4_047_96f7108d",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81/extract/images/967d05b3f80172a46f05dea4421071ab5097866355392af9df408bbd68320ecf.jpg",
+      "asset_sha256": "ccf67a8bfc360e7c8e7a6a5526af01bafe01be60f37c1bbb19957a283c6a621c",
+      "page_idx": 3,
+      "page_no": 4,
+      "bbox": [
+        570,
+        482,
+        596,
+        501
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111710_21ab818b",
+      "batch_id": "8ebd8b62-bbe4-43c6-8e86-9e2250943652",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "排烟 discharge smoke XRW-300系列 热变形系列 WTD &Vicat softening point temper 准卡软化点温度测定仪",
+      "ocr_context": "排烟 discharge smoke XRW-300系列 热变形系列 WTD &Vicat softening point temper 准卡软化点温度测定仪",
+      "retrieval_text": "泰昌 testing_capacity 第4页图片。排烟 discharge smoke XRW-300系列 热变形系列 WTD &Vicat softening point temper 准卡软化点温度测定仪",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:4",
+        "bbox_anchor": [
+          570,
+          482,
+          596,
+          501
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p4_053_a1e4af10",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81/extract/images/79c4c21b79833809cbf652f905809649338647f2f9e2e8f326be944209459b23.jpg",
+      "asset_sha256": "c17059428313ee47907c3ad79921b0162b5d895bb558761cb9161870938e5c2f",
+      "page_idx": 3,
+      "page_no": 4,
+      "bbox": [
+        743,
+        375,
+        963,
+        540
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111710_21ab818b",
+      "batch_id": "8ebd8b62-bbe4-43c6-8e86-9e2250943652",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "WTD &Vicat softening point temper 准卡软化点温度测定仪 erature instrument s shi Teting cine o 全测设备有限公司 注意事员",
+      "ocr_context": "WTD &Vicat softening point temper 准卡软化点温度测定仪 erature instrument s shi Teting cine o 全测设备有限公司 注意事员",
+      "retrieval_text": "泰昌 testing_capacity 第4页图片。WTD &Vicat softening point temper 准卡软化点温度测定仪 erature instrument s shi Teting cine o 全测设备有限公司 注意事员",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:4",
+        "bbox_anchor": [
+          743,
+          375,
+          963,
+          540
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p4_065_833895a4",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81/extract/images/c3b6d9c6587c617846872c7bff0237db7e0337e38d4d02bc10ef948340e328e0.jpg",
+      "asset_sha256": "931b74d8c98266fa43d204e932ab8e1a9ab04ebad817b77c5ea16794e0f3f4a5",
+      "page_idx": 3,
+      "page_no": 4,
+      "bbox": [
+        614,
+        598,
+        998,
+        998
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111710_21ab818b",
+      "batch_id": "8ebd8b62-bbe4-43c6-8e86-9e2250943652",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "",
+      "ocr_context": "",
+      "retrieval_text": "泰昌 testing_capacity 第4页图片。",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:4",
+        "bbox_anchor": [
+          614,
+          598,
+          998,
+          998
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p5_067_1aee93a8",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81/extract/images/4bd15965177e37ad681058df4709d9e323bdd6294e7ebf2f964b3e432c7ff2d6.jpg",
+      "asset_sha256": "3f66c03ba34b581565417339f7a22ba9c2edabd367e7e53c027ce18e7d896753",
+      "page_idx": 4,
+      "page_no": 5,
+      "bbox": [
+        657,
+        149,
+        727,
+        204
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111710_21ab818b",
+      "batch_id": "8ebd8b62-bbe4-43c6-8e86-9e2250943652",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate",
+      "ocr_context": "校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate",
+      "retrieval_text": "泰昌 testing_capacity 第5页图片。校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:5",
+        "bbox_anchor": [
+          657,
+          149,
+          727,
+          204
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p5_068_8e40080a",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81/extract/images/3223573b7901b7e551d708e3a298dc969928390f0c85c8dae41c9e7754258ac6.jpg",
+      "asset_sha256": "5683d0ab1b127fa44930934f64ebe4d2618f71e6c7884dad515b72b230613756",
+      "page_idx": 4,
+      "page_no": 5,
+      "bbox": [
+        727,
+        154,
+        803,
+        203
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111710_21ab818b",
+      "batch_id": "8ebd8b62-bbe4-43c6-8e86-9e2250943652",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate 证书编号： GL2605RG01074",
+      "ocr_context": "校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate 证书编号： GL2605RG01074",
+      "retrieval_text": "泰昌 testing_capacity 第5页图片。校准证书 中国认可国际互认校准CALIBRATIONCNAS L14602 Calibration Certificate 证书编号： GL2605RG01074",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:5",
+        "bbox_anchor": [
+          727,
+          154,
+          803,
+          203
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p5_089_beeff89d",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81/extract/images/232e1fdeb774d8497fa2b44f5f81dad0f470169501f889bf6c8c678babe1436d.jpg",
+      "asset_sha256": "a8a87b5bf075b180249f702b47b2c4e2e43f674ff2a1bb60bd2a455e4ccceb3c",
+      "page_idx": 4,
+      "page_no": 5,
+      "bbox": [
+        186,
+        604,
+        379,
+        744
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111710_21ab818b",
+      "batch_id": "8ebd8b62-bbe4-43c6-8e86-9e2250943652",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "Equipment No. 制造单位： 石家庄开发区中实检测设备有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "ocr_context": "Equipment No. 制造单位： 石家庄开发区中实检测设备有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "retrieval_text": "泰昌 testing_capacity 第5页图片。Equipment No. 制造单位： 石家庄开发区中实检测设备有限公司 Manufacturer 批准人： 张绍安 Approved by 核验员： 赵华聪 Checked by 校准员： 刘浩 Calibrated by",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:5",
+        "bbox_anchor": [
+          186,
+          604,
+          379,
+          744
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    },
+    {
+      "asset_id": "taichang_testing_capacity_p5_100_cd56298a",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "source_domain": "enterprise_fact",
+      "doc_owner": "泰昌",
+      "enterprise": "泰昌",
+      "doc_role": "enterprise_evidence",
+      "evidence_type": "testing_capacity",
+      "target_library": "product_library",
+      "privacy_level": "private",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "asset_type": "image",
+      "asset_path": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/热变型_维卡软化点温度测定仪_21ab81/extract/images/ee9fc06b77e1fff59b80665bc2c8d8da0a21b3e753a455d71d289589d4d8878c.jpg",
+      "asset_sha256": "04a0ac11bd78e5bbb5b77c8cc1399ee19288ca5c24ba0ef32aa329e66762ba88",
+      "page_idx": 4,
+      "page_no": 5,
+      "bbox": [
+        660,
+        795,
+        742,
+        858
+      ],
+      "parser": "mineru",
+      "parse_id": "taichang_testing_capacity_20260606_111710_21ab818b",
+      "batch_id": "8ebd8b62-bbe4-43c6-8e86-9e2250943652",
+      "usage_policy": "enterprise_fact_evidence",
+      "requires_human_review": true,
+      "requires_authorization": false,
+      "caption_candidate": "签发日期： Date of issue: 2026年05月26日 电话(Te1): 0755-27407284 邮箱(Mail) :szgljl@126.com 地址：深圳市光明区公明街道兴发路170号华澳时光全球美酒星链云仓产",
+      "ocr_context": "签发日期： Date of issue: 2026年05月26日 电话(Te1): 0755-27407284 邮箱(Mail) :szgljl@126.com 地址：深圳市光明区公明街道兴发路170号华澳时光全球美酒星链云仓产",
+      "retrieval_text": "泰昌 testing_capacity 第5页图片。签发日期： Date of issue: 2026年05月26日 电话(Te1): 0755-27407284 邮箱(Mail) :szgljl@126.com 地址：深圳市光明区公明街道兴发路170号华澳时光全球美酒星链云仓产",
+      "metadata": {
+        "source_batch_id": "customer_liaoning_taichang_20260606_p0",
+        "applicable_volumes": [
+          "technical",
+          "product"
+        ],
+        "tags": [
+          "泰昌",
+          "testing_capacity",
+          "MVP试点企业",
+          "图片资产"
+        ],
+        "display_contexts": [
+          "bid_writing",
+          "knowledge_chat",
+          "asset_search"
+        ],
+        "do_not_mix_with": [
+          "河北豪乾参考稿"
+        ],
+        "page_anchor": "page:5",
+        "bbox_anchor": [
+          660,
+          795,
+          742,
+          858
+        ],
+        "sensitive_handling": "normal_enterprise_evidence"
+      }
+    }
+  ]
+}

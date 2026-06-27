@@ -1,0 +1,37 @@
+{
+  "parse_id": "taichang_testing_capacity_20260606_111652_e82a9b18",
+  "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+  "evidence_type": "testing_capacity",
+  "started_at": "2026-06-06T03:16:52.527776+00:00",
+  "parser": "mineru",
+  "privacy_level": "private",
+  "target_library": "product_library",
+  "page_count": 8,
+  "batch_id": "3fbd04d6-077e-4225-9f94-a971d3ab27a7",
+  "data_id": "taichang_testing_capacity_20260606_111652_e82a9b18",
+  "submitted_at": "2026-06-06T03:16:53.292134+00:00",
+  "parse_status": "mineru_done",
+  "mineru_result": {
+    "data_id": "taichang_testing_capacity_20260606_111652_e82a9b18",
+    "file_name": "电子拉力试验机.pdf",
+    "state": "done",
+    "err_msg": ""
+  },
+  "artifacts": {
+    "zip_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/电子拉力试验机_e82a9b/mineru_result.zip",
+    "extract_dir": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/电子拉力试验机_e82a9b/extract",
+    "markdown_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/电子拉力试验机_e82a9b/extract/full.md",
+    "content_list_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/电子拉力试验机_e82a9b/extract/94b6761a-6018-425c-818b-eda0ba141f29_content_list.json",
+    "model_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/电子拉力试验机_e82a9b/extract/94b6761a-6018-425c-818b-eda0ba141f29_model.json",
+    "middle_path": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/mineru_batch_03/电子拉力试验机_e82a9b/extract/layout.json",
+    "download_info": {
+      "url_host": "cdn-mineru.openxlab.org.cn",
+      "resume_enabled": true,
+      "used_curl_fallback": true,
+      "resumed_from_bytes": 0,
+      "downloaded_bytes": 0,
+      "zip_size": 3200775
+    }
+  },
+  "finished_at": "2026-06-06T03:17:10.729007+00:00"
+}

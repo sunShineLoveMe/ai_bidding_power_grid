@@ -1,0 +1,609 @@
+data: {"type": "start"}
+data: {"type": "status", "message": "正在检索企业知识库和图片资产..."}
+data: {"type": "status", "message": "已召回 3 条资料、4 个图片资产，正在生成回答..."}
+data: {"type": "retrieved", "contexts_count": 3, "assets_count": 4, "images": [{"url": "/api/knowledge/assets/0e669ee9-4d26-4f70-892a-907f27b32f9a/file", "alt": "泰昌社保证明（第1页）"}, {"url": "/api/knowledge/assets/a4927387-35de-4576-bf8b-785e84a84d63/file", "alt": "泰昌公司人员花名册（第2页）"}, {"url": "/api/knowledge/assets/91c22424-7db8-43cc-aedc-3e52fef6dd0c/file", "alt": "泰昌公司人员花名册（第1页）"}, {"url": "/api/knowledge/assets/97beb91e-22d9-4dfe-9197-ecad3ae45c63/file", "alt": "陈仙瑞人员证书（第1页）"}], "raw_contexts": [{"id": "asset:0e669ee9-4d26-4f70-892a-907f27b32f9a", "content": "河北泰昌电力器材科技有限公司人员证书及社保证明资料，来源于客户已提供文件《泰昌社保证明.pdf》第1页。", "similarity": 0.7569454844214747, "retrieval_source": "knowledge_asset", "metadata": {"page_no": 1, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "page_index": 0, "evidence_type": "personnel_certificate", "source_domain": "enterprise_fact", "category_label": "人员证书", "target_library": "qualification_library", "asset_visual_type": "full_page_render", "evidence_type_label": "人员证书", "source_display_name": "泰昌社保证明（第1页）", "target_library_label": "资信库资料", "source_document_name": "泰昌社保证明", "retrieval_source": "knowledge_asset"}}, {"id": "asset:a4927387-35de-4576-bf8b-785e84a84d63", "content": "河北泰昌电力器材科技有限公司人员证书及社保证明资料，来源于客户已提供文件《公司人员花名册.pdf》第2页。", "similarity": 0.7401322745961961, "retrieval_source": "knowledge_asset", "metadata": {"page_no": 2, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "page_index": 1, "evidence_type": "personnel_certificate", "source_domain": "enterprise_fact", "category_label": "人员证书", "target_library": "qualification_library", "asset_visual_type": "full_page_render", "evidence_type_label": "人员证书", "source_display_name": "泰昌公司人员花名册（第2页）", "target_library_label": "资信库资料", "source_document_name": "公司人员花名册", "retrieval_source": "knowledge_asset"}}, {"id": "asset:97beb91e-22d9-4dfe-9197-ecad3ae45c63", "content": "河北泰昌电力器材科技有限公司人员证书及社保证明资料，来源于客户已提供文件《1.陈仙瑞.pdf》第1页。", "similarity": 0.7124900940779183, "retrieval_source": "knowledge_asset", "metadata": {"page_no": 1, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "page_index": 0, "evidence_type": "personnel_certificate", "source_domain": "enterprise_fact", "category_label": "人员证书", "target_library": "qualification_library", "asset_visual_type": "full_page_render", "evidence_type_label": "人员证书", "source_display_name": "陈仙瑞人员证书（第1页）", "target_library_label": "资信库资料", "source_document_name": "陈仙瑞", "retrieval_source": "knowledge_asset"}}], "assets": [{"id": "0e669ee9-4d26-4f70-892a-907f27b32f9a", "title": "泰昌社保证明（第1页）", "description": "河北泰昌电力器材科技有限公司人员证书及社保证明资料，来源于客户已提供文件《泰昌社保证明.pdf》第1页。", "category": "人员证书", "asset_type": "qualification_image", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 188374, "storage_bucket": "knowledge-files", "width": 1191, "height": 1683, "source_type": "customer_pdf_full_page_render", "license": "客户自有资料", "is_synthetic": false, "is_sensitive": true, "anonymized": false, "industry": "电力行业", "applicable_sections": ["技术响应文件", "人员证书"], "applicable_volumes": ["qualification", "business", "attachment"], "tags": ["泰昌", "泰昌企业事实", "试验检测能力", "社保证明", "产品库"], "specs": {"page_no": 1, "full_page": true, "page_index": 0, "display_name": "泰昌泰昌社保证明第1页", "library_type": "qualification", "evidence_type": "testing_capacity", "target_library": "product_library", "asset_visual_type": "full_page_render", "applicable_volumes": ["qualification", "business", "attachment"]}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司试验检测能力资料，来源于客户已提供文件《泰昌社保证明.pdf》第1页。该图片为正式整页/原图资产，不是 MinerU 局部切图。", "searchable_text": "泰昌社保证明（第1页）\n河北泰昌电力器材科技有限公司人员证书及社保证明资料，来源于客户已提供文件《泰昌社保证明.pdf》第1页。\n人员证书\nqualification_image\n[\"泰昌\", \"泰昌企业事实\", \"试验检测能力\", \"社保证明\", \"产品库\"]\n{\"applicable_volumes\": [\"qualification\", \"business\", \"attachment\"], \"asset_visual_type\": \"full_page_render\", \"display_name\": \"泰昌泰昌社保证明第1页\", \"evidence_type\": \"试验检测能力\", \"full_page\": true, \"library_type\": \"qualification\", \"page_index\": 0, \"page_no\": 1, \"target_library\": \"product_library\"}", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 1, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "page_index": 0, "evidence_type": "personnel_certificate", "source_domain": "enterprise_fact", "category_label": "人员证书", "target_library": "qualification_library", "asset_visual_type": "full_page_render", "evidence_type_label": "人员证书", "source_display_name": "泰昌社保证明（第1页）", "target_library_label": "资信库资料", "source_document_name": "泰昌社保证明"}, "created_at": "2026-06-07T11:34:22.398329+08:00", "updated_at": "2026-06-24T09:07:23.205654+08:00", "similarity": 0.7569454844214747, "rerank_score": 0.9191166632213754}, {"id": "a4927387-35de-4576-bf8b-785e84a84d63", "title": "泰昌公司人员花名册（第2页）", "description": "河北泰昌电力器材科技有限公司人员证书及社保证明资料，来源于客户已提供文件《公司人员花名册.pdf》第2页。", "category": "人员证书", "asset_type": "qualification_image", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 306110, "storage_bucket": "knowledge-files", "width": 1191, "height": 1684, "source_type": "customer_pdf_full_page_render", "license": "客户自有资料", "is_synthetic": false, "is_sensitive": true, "anonymized": false, "industry": "电力行业", "applicable_sections": ["技术响应文件", "人员证书"], "applicable_volumes": ["qualification", "business", "attachment"], "tags": ["泰昌", "泰昌企业事实", "试验检测能力", "产品库"], "specs": {"page_no": 2, "full_page": true, "page_index": 1, "display_name": "泰昌公司人员花名册第2页", "library_type": "qualification", "evidence_type": "testing_capacity", "target_library": "product_library", "asset_visual_type": "full_page_render", "applicable_volumes": ["qualification", "business", "attachment"]}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司试验检测能力资料，来源于客户已提供文件《公司人员花名册.pdf》第2页。该图片为正式整页/原图资产，不是 MinerU 局部切图。", "searchable_text": "泰昌公司人员花名册（第2页）\n河北泰昌电力器材科技有限公司人员证书及社保证明资料，来源于客户已提供文件《公司人员花名册.pdf》第2页。\n人员证书\nqualification_image\n[\"泰昌\", \"泰昌企业事实\", \"试验检测能力\", \"产品库\"]\n{\"applicable_volumes\": [\"qualification\", \"business\", \"attachment\"], \"asset_visual_type\": \"full_page_render\", \"display_name\": \"泰昌公司人员花名册第2页\", \"evidence_type\": \"试验检测能力\", \"full_page\": true, \"library_type\": \"qualification\", \"page_index\": 1, \"page_no\": 2, \"target_library\": \"product_library\"}", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 2, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "page_index": 1, "evidence_type": "personnel_certificate", "source_domain": "enterprise_fact", "category_label": "人员证书", "target_library": "qualification_library", "asset_visual_type": "full_page_render", "evidence_type_label": "人员证书", "source_display_name": "泰昌公司人员花名册（第2页）", "target_library_label": "资信库资料", "source_document_name": "公司人员花名册"}, "created_at": "2026-06-07T11:34:21.855644+08:00", "updated_at": "2026-06-21T11:10:02.827605+08:00", "similarity": 0.7401322745961961, "rerank_score": 0.7509796285674722}, {"id": "91c22424-7db8-43cc-aedc-3e52fef6dd0c", "title": "泰昌公司人员花名册（第1页）", "description": "河北泰昌电力器材科技有限公司人员证书及社保证明资料，来源于客户已提供文件《公司人员花名册.pdf》第1页。", "category": "人员证书", "asset_type": "qualification_image", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 335568, "storage_bucket": "knowledge-files", "width": 1191, "height": 1684, "source_type": "customer_pdf_full_page_render", "license": "客户自有资料", "is_synthetic": false, "is_sensitive": true, "anonymized": false, "industry": "电力行业", "applicable_sections": ["技术响应文件", "人员证书"], "applicable_volumes": ["qualification", "business", "attachment"], "tags": ["泰昌", "泰昌企业事实", "试验检测能力", "产品库"], "specs": {"page_no": 1, "full_page": true, "page_index": 0, "display_name": "泰昌公司人员花名册第1页", "library_type": "qualification", "evidence_type": "testing_capacity", "target_library": "product_library", "asset_visual_type": "full_page_render", "applicable_volumes": ["qualification", "business", "attachment"]}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司试验检测能力资料，来源于客户已提供文件《公司人员花名册.pdf》第1页。该图片为正式整页/原图资产，不是 MinerU 局部切图。", "searchable_text": "泰昌公司人员花名册（第1页）\n河北泰昌电力器材科技有限公司人员证书及社保证明资料，来源于客户已提供文件《公司人员花名册.pdf》第1页。\n人员证书\nqualification_image\n[\"泰昌\", \"泰昌企业事实\", \"试验检测能力\", \"产品库\"]\n{\"applicable_volumes\": [\"qualification\", \"business\", \"attachment\"], \"asset_visual_type\": \"full_page_render\", \"display_name\": \"泰昌公司人员花名册第1页\", \"evidence_type\": \"试验检测能力\", \"full_page\": true, \"library_type\": \"qualification\", \"page_index\": 0, \"page_no\": 1, \"target_library\": \"product_library\"}", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 1, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "page_index": 0, "evidence_type": "personnel_certificate", "source_domain": "enterprise_fact", "category_label": "人员证书", "target_library": "qualification_library", "asset_visual_type": "full_page_render", "evidence_type_label": "人员证书", "source_display_name": "泰昌公司人员花名册（第1页）", "target_library_label": "资信库资料", "source_document_name": "公司人员花名册"}, "created_at": "2026-06-07T11:34:21.776916+08:00", "updated_at": "2026-06-21T11:10:02.827605+08:00", "similarity": 0.7389365590252661, "rerank_score": 0.751934034817116}, {"id": "97beb91e-22d9-4dfe-9197-ecad3ae45c63", "title": "陈仙瑞人员证书（第1页）", "description": "河北泰昌电力器材科技有限公司人员证书及社保证明资料，来源于客户已提供文件《1.陈仙瑞.pdf》第1页。", "category": "人员证书", "asset_type": "qualification_image", "file_ext": "jpg", "mime_type": "image/jpeg", "file_size": 40718, "storage_bucket": "knowledge-files", "width": 475, "height": 292, "source_type": "customer_pdf_full_page_render", "license": "客户自有资料", "is_synthetic": false, "is_sensitive": true, "anonymized": false, "industry": "电力行业", "applicable_sections": ["技术响应文件", "人员证书"], "applicable_volumes": ["qualification", "business", "attachment"], "tags": ["泰昌", "泰昌企业事实", "试验检测能力", "人员证书", "产品库"], "specs": {"page_no": 1, "full_page": true, "page_index": 0, "display_name": "泰昌1.陈仙瑞第1页", "library_type": "qualification", "evidence_type": "testing_capacity", "target_library": "product_library", "asset_visual_type": "full_page_render", "applicable_volumes": ["qualification", "business", "attachment"]}, "ocr_text": "", "ai_caption": "河北泰昌电力器材科技有限公司试验检测能力资料，来源于客户已提供文件《1.陈仙瑞.pdf》第1页。该图片为正式整页/原图资产，不是 MinerU 局部切图。", "searchable_text": "陈仙瑞人员证书（第1页）\n河北泰昌电力器材科技有限公司人员证书及社保证明资料，来源于客户已提供文件《1.陈仙瑞.pdf》第1页。\n人员证书\nqualification_image\n[\"泰昌\", \"泰昌企业事实\", \"试验检测能力\", \"人员证书\", \"产品库\"]\n{\"applicable_volumes\": [\"qualification\", \"business\", \"attachment\"], \"asset_visual_type\": \"full_page_render\", \"display_name\": \"泰昌1.陈仙瑞第1页\", \"evidence_type\": \"试验检测能力\", \"full_page\": true, \"library_type\": \"qualification\", \"page_index\": 0, \"page_no\": 1, \"target_library\": \"product_library\"}", "knowledge_document_id": null, "status": "indexed", "metadata": {"page_no": 1, "doc_owner": "泰昌", "full_page": true, "enterprise": "泰昌", "page_index": 0, "evidence_type": "personnel_certificate", "source_domain": "enterprise_fact", "category_label": "人员证书", "target_library": "qualification_library", "asset_visual_type": "full_page_render", "evidence_type_label": "人员证书", "source_display_name": "陈仙瑞人员证书（第1页）", "target_library_label": "资信库资料", "source_document_name": "陈仙瑞"}, "created_at": "2026-06-07T11:34:21.512936+08:00", "updated_at": "2026-06-21T11:10:02.827605+08:00", "similarity": 0.7124900940779183, "rerank_score": 0.7345209403243347}]}
+data: {"type": "chunk", "content": "##"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "结论"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "根据"}
+data: {"type": "chunk", "content": "现有"}
+data: {"type": "chunk", "content": "企业"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "河北"}
+data: {"type": "chunk", "content": "泰"}
+data: {"type": "chunk", "content": "昌"}
+data: {"type": "chunk", "content": "电力"}
+data: {"type": "chunk", "content": "器材"}
+data: {"type": "chunk", "content": "科技有限公司"}
+data: {"type": "chunk", "content": "可"}
+data: {"type": "chunk", "content": "提供"}
+data: {"type": "chunk", "content": "以下"}
+data: {"type": "chunk", "content": "人员"}
+data: {"type": "chunk", "content": "证书"}
+data: {"type": "chunk", "content": "和"}
+data: {"type": "chunk", "content": "社"}
+data: {"type": "chunk", "content": "保证"}
+data: {"type": "chunk", "content": "明"}
+data: {"type": "chunk", "content": "文件"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "社"}
+data: {"type": "chunk", "content": "保证"}
+data: {"type": "chunk", "content": "明"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "一份"}
+data: {"type": "chunk", "content": "《"}
+data: {"type": "chunk", "content": "泰"}
+data: {"type": "chunk", "content": "昌"}
+data: {"type": "chunk", "content": "社"}
+data: {"type": "chunk", "content": "保证"}
+data: {"type": "chunk", "content": "明"}
+data: {"type": "chunk", "content": "》（"}
+data: {"type": "chunk", "content": "第"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "页"}
+data: {"type": "chunk", "content": "）。"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "人员"}
+data: {"type": "chunk", "content": "花"}
+data: {"type": "chunk", "content": "名"}
+data: {"type": "chunk", "content": "册"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "一份"}
+data: {"type": "chunk", "content": "《"}
+data: {"type": "chunk", "content": "公司"}
+data: {"type": "chunk", "content": "人员"}
+data: {"type": "chunk", "content": "花"}
+data: {"type": "chunk", "content": "名"}
+data: {"type": "chunk", "content": "册"}
+data: {"type": "chunk", "content": "》（"}
+data: {"type": "chunk", "content": "包含"}
+data: {"type": "chunk", "content": "第"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "页"}
+data: {"type": "chunk", "content": "和第"}
+data: {"type": "chunk", "content": "2"}
+data: {"type": "chunk", "content": "页"}
+data: {"type": "chunk", "content": "），"}
+data: {"type": "chunk", "content": "用于"}
+data: {"type": "chunk", "content": "展示"}
+data: {"type": "chunk", "content": "公司"}
+data: {"type": "chunk", "content": "人员"}
+data: {"type": "chunk", "content": "清单"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "个人"}
+data: {"type": "chunk", "content": "人员"}
+data: {"type": "chunk", "content": "证书"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "一份"}
+data: {"type": "chunk", "content": "陈"}
+data: {"type": "chunk", "content": "仙"}
+data: {"type": "chunk", "content": "瑞"}
+data: {"type": "chunk", "content": "的人员"}
+data: {"type": "chunk", "content": "证书"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "第"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "页"}
+data: {"type": "chunk", "content": "）。"}
+data: {"type": "chunk", "content": "  \n\n"}
+data: {"type": "chunk", "content": "需要注意的是"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "当前"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "仅"}
+data: {"type": "chunk", "content": "明确"}
+data: {"type": "chunk", "content": "显示了"}
+data: {"type": "chunk", "content": "陈"}
+data: {"type": "chunk", "content": "仙"}
+data: {"type": "chunk", "content": "瑞"}
+data: {"type": "chunk", "content": "一"}
+data: {"type": "chunk", "content": "人的"}
+data: {"type": "chunk", "content": "证书"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "其他"}
+data: {"type": "chunk", "content": "人员"}
+data: {"type": "chunk", "content": "证书"}
+data: {"type": "chunk", "content": "信息"}
+data: {"type": "chunk", "content": "未"}
+data: {"type": "chunk", "content": "在"}
+data: {"type": "chunk", "content": "检索"}
+data: {"type": "chunk", "content": "结果"}
+data: {"type": "chunk", "content": "中出现"}
+data: {"type": "chunk", "content": "。\n\n"}
+data: {"type": "chunk", "content": "##"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "关键"}
+data: {"type": "chunk", "content": "信息"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "社"}
+data: {"type": "chunk", "content": "保证"}
+data: {"type": "chunk", "content": "明"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": " -"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "文件"}
+data: {"type": "chunk", "content": "：《"}
+data: {"type": "chunk", "content": "泰"}
+data: {"type": "chunk", "content": "昌"}
+data: {"type": "chunk", "content": "社"}
+data: {"type": "chunk", "content": "保证"}
+data: {"type": "chunk", "content": "明"}
+data: {"type": "chunk", "content": ".pdf"}
+data: {"type": "chunk", "content": "》"}
+data: {"type": "chunk", "content": "第"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "页"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "为客户"}
+data: {"type": "chunk", "content": "原始"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "图片"}
+data: {"type": "chunk", "content": "资产"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "）。"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "人员"}
+data: {"type": "chunk", "content": "花"}
+data: {"type": "chunk", "content": "名"}
+data: {"type": "chunk", "content": "册"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": " -"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "文件"}
+data: {"type": "chunk", "content": "：《"}
+data: {"type": "chunk", "content": "公司"}
+data: {"type": "chunk", "content": "人员"}
+data: {"type": "chunk", "content": "花"}
+data: {"type": "chunk", "content": "名"}
+data: {"type": "chunk", "content": "册"}
+data: {"type": "chunk", "content": ".pdf"}
+data: {"type": "chunk", "content": "》"}
+data: {"type": "chunk", "content": "第"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "页"}
+data: {"type": "chunk", "content": "和第"}
+data: {"type": "chunk", "content": "2"}
+data: {"type": "chunk", "content": "页"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "为客户"}
+data: {"type": "chunk", "content": "原始"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "图片"}
+data: {"type": "chunk", "content": "资产"}
+data: {"type": "chunk", "content": "2"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "图片"}
+data: {"type": "chunk", "content": "资产"}
+data: {"type": "chunk", "content": "3"}
+data: {"type": "chunk", "content": "）。"}
+data: {"type": "chunk", "content": "花"}
+data: {"type": "chunk", "content": "名"}
+data: {"type": "chunk", "content": "册"}
+data: {"type": "chunk", "content": "可作为"}
+data: {"type": "chunk", "content": "公司"}
+data: {"type": "chunk", "content": "人员"}
+data: {"type": "chunk", "content": "构成"}
+data: {"type": "chunk", "content": "参考"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " **"}
+data: {"type": "chunk", "content": "个人"}
+data: {"type": "chunk", "content": "证书"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": " -"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "文件"}
+data: {"type": "chunk", "content": "：《"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "."}
+data: {"type": "chunk", "content": "陈"}
+data: {"type": "chunk", "content": "仙"}
+data: {"type": "chunk", "content": "瑞"}
+data: {"type": "chunk", "content": ".pdf"}
+data: {"type": "chunk", "content": "》"}
+data: {"type": "chunk", "content": "第"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "页"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "为"}
+data: {"type": "chunk", "content": "陈"}
+data: {"type": "chunk", "content": "仙"}
+data: {"type": "chunk", "content": "瑞"}
+data: {"type": "chunk", "content": "的人员"}
+data: {"type": "chunk", "content": "证书"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "图片"}
+data: {"type": "chunk", "content": "资产"}
+data: {"type": "chunk", "content": "4"}
+data: {"type": "chunk", "content": "），"}
+data: {"type": "chunk", "content": "客户"}
+data: {"type": "chunk", "content": "原始"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "  \n\n"}
+data: {"type": "chunk", "content": "以上"}
+data: {"type": "chunk", "content": "文件"}
+data: {"type": "chunk", "content": "均"}
+data: {"type": "chunk", "content": "属于"}
+data: {"type": "chunk", "content": "“"}
+data: {"type": "chunk", "content": "技术"}
+data: {"type": "chunk", "content": "响应"}
+data: {"type": "chunk", "content": "文件"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "人员"}
+data: {"type": "chunk", "content": "证书"}
+data: {"type": "chunk", "content": "”"}
+data: {"type": "chunk", "content": "适用"}
+data: {"type": "chunk", "content": "章节"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "可在"}
+data: {"type": "chunk", "content": "投标"}
+data: {"type": "chunk", "content": "或"}
+data: {"type": "chunk", "content": "资质"}
+data: {"type": "chunk", "content": "审核"}
+data: {"type": "chunk", "content": "中"}
+data: {"type": "chunk", "content": "直接"}
+data: {"type": "chunk", "content": "展示"}
+data: {"type": "chunk", "content": "或"}
+data: {"type": "chunk", "content": "引用"}
+data: {"type": "chunk", "content": "。\n\n"}
+data: {"type": "chunk", "content": "##"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "操作"}
+data: {"type": "chunk", "content": "建议"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "如果您"}
+data: {"type": "chunk", "content": "需要"}
+data: {"type": "chunk", "content": "整理"}
+data: {"type": "chunk", "content": "投标"}
+data: {"type": "chunk", "content": "材料"}
+data: {"type": "chunk", "content": "中"}
+data: {"type": "chunk", "content": "的人员"}
+data: {"type": "chunk", "content": "证书"}
+data: {"type": "chunk", "content": "部分"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "请"}
+data: {"type": "chunk", "content": "将"}
+data: {"type": "chunk", "content": "上述"}
+data: {"type": "chunk", "content": "社"}
+data: {"type": "chunk", "content": "保证"}
+data: {"type": "chunk", "content": "明"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "人员"}
+data: {"type": "chunk", "content": "花"}
+data: {"type": "chunk", "content": "名"}
+data: {"type": "chunk", "content": "册"}
+data: {"type": "chunk", "content": "和陈"}
+data: {"type": "chunk", "content": "仙"}
+data: {"type": "chunk", "content": "瑞"}
+data: {"type": "chunk", "content": "证书"}
+data: {"type": "chunk", "content": "作为"}
+data: {"type": "chunk", "content": "基础"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "插入"}
+data: {"type": "chunk", "content": "对应"}
+data: {"type": "chunk", "content": "章节"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "若"}
+data: {"type": "chunk", "content": "需"}
+data: {"type": "chunk", "content": "展示"}
+data: {"type": "chunk", "content": "其他"}
+data: {"type": "chunk", "content": "人员的"}
+data: {"type": "chunk", "content": "证书"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "如"}
+data: {"type": "chunk", "content": "项目经理"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "技术"}
+data: {"type": "chunk", "content": "负责人"}
+data: {"type": "chunk", "content": "等"}
+data: {"type": "chunk", "content": "），"}
+data: {"type": "chunk", "content": "请"}
+data: {"type": "chunk", "content": "补充"}
+data: {"type": "chunk", "content": "提供"}
+data: {"type": "chunk", "content": "相关人员"}
+data: {"type": "chunk", "content": "证书"}
+data: {"type": "chunk", "content": "原件"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "如"}
+data: {"type": "chunk", "content": "身份证"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "职称"}
+data: {"type": "chunk", "content": "证"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "注册"}
+data: {"type": "chunk", "content": "证"}
+data: {"type": "chunk", "content": "等"}
+data: {"type": "chunk", "content": "），"}
+data: {"type": "chunk", "content": "以便"}
+data: {"type": "chunk", "content": "完善"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "集"}
+data: {"type": "chunk", "content": "。\n\n"}
+data: {"type": "chunk", "content": "##"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "需要"}
+data: {"type": "chunk", "content": "确认"}
+data: {"type": "chunk", "content": "或"}
+data: {"type": "chunk", "content": "补充"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "当前"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "只"}
+data: {"type": "chunk", "content": "显示了"}
+data: {"type": "chunk", "content": "陈"}
+data: {"type": "chunk", "content": "仙"}
+data: {"type": "chunk", "content": "瑞"}
+data: {"type": "chunk", "content": "一"}
+data: {"type": "chunk", "content": "人的"}
+data: {"type": "chunk", "content": "具体"}
+data: {"type": "chunk", "content": "证书"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "未"}
+data: {"type": "chunk", "content": "明确"}
+data: {"type": "chunk", "content": "列出"}
+data: {"type": "chunk", "content": "其他"}
+data: {"type": "chunk", "content": "人员的"}
+data: {"type": "chunk", "content": "证书"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "社"}
+data: {"type": "chunk", "content": "保证"}
+data: {"type": "chunk", "content": "明"}
+data: {"type": "chunk", "content": "仅"}
+data: {"type": "chunk", "content": "提供"}
+data: {"type": "chunk", "content": "第"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "页"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "缺少"}
+data: {"type": "chunk", "content": "完整"}
+data: {"type": "chunk", "content": "社保"}
+data: {"type": "chunk", "content": "明细"}
+data: {"type": "chunk", "content": "**"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "如"}
+data: {"type": "chunk", "content": "缴费"}
+data: {"type": "chunk", "content": "人数"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "缴费"}
+data: {"type": "chunk", "content": "月份"}
+data: {"type": "chunk", "content": "等"}
+data: {"type": "chunk", "content": "），"}
+data: {"type": "chunk", "content": "如需"}
+data: {"type": "chunk", "content": "完整"}
+data: {"type": "chunk", "content": "社"}
+data: {"type": "chunk", "content": "保证"}
+data: {"type": "chunk", "content": "明"}
+data: {"type": "chunk", "content": "请"}
+data: {"type": "chunk", "content": "补充"}
+data: {"type": "chunk", "content": "文件"}
+data: {"type": "chunk", "content": "后续"}
+data: {"type": "chunk", "content": "页面"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "人员"}
+data: {"type": "chunk", "content": "花"}
+data: {"type": "chunk", "content": "名"}
+data: {"type": "chunk", "content": "册"}
+data: {"type": "chunk", "content": "中"}
+data: {"type": "chunk", "content": "的人员"}
+data: {"type": "chunk", "content": "姓名"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "岗位"}
+data: {"type": "chunk", "content": "等信息"}
+data: {"type": "chunk", "content": "无法"}
+data: {"type": "chunk", "content": "从"}
+data: {"type": "chunk", "content": "片段"}
+data: {"type": "chunk", "content": "中"}
+data: {"type": "chunk", "content": "提取"}
+data: {"type": "chunk", "content": "具体"}
+data: {"type": "chunk", "content": "内容"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "如需"}
+data: {"type": "chunk", "content": "核对"}
+data: {"type": "chunk", "content": "具体"}
+data: {"type": "chunk", "content": "人员"}
+data: {"type": "chunk", "content": "是否"}
+data: {"type": "chunk", "content": "满足"}
+data: {"type": "chunk", "content": "招标"}
+data: {"type": "chunk", "content": "要求"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "建议"}
+data: {"type": "chunk", "content": "提供"}
+data: {"type": "chunk", "content": "花"}
+data: {"type": "chunk", "content": "名"}
+data: {"type": "chunk", "content": "册"}
+data: {"type": "chunk", "content": "全文"}
+data: {"type": "chunk", "content": "或"}
+data: {"type": "chunk", "content": "直接"}
+data: {"type": "chunk", "content": "查阅"}
+data: {"type": "chunk", "content": "原始"}
+data: {"type": "chunk", "content": "文件"}
+data: {"type": "chunk", "content": "。"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "若"}
+data: {"type": "chunk", "content": "问题"}
+data: {"type": "chunk", "content": "涉及"}
+data: {"type": "chunk", "content": "“"}
+data: {"type": "chunk", "content": "人员"}
+data: {"type": "chunk", "content": "证书"}
+data: {"type": "chunk", "content": "”"}
+data: {"type": "chunk", "content": "的"}
+data: {"type": "chunk", "content": "完整"}
+data: {"type": "chunk", "content": "列表"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "如"}
+data: {"type": "chunk", "content": "建造"}
+data: {"type": "chunk", "content": "师"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "安全"}
+data: {"type": "chunk", "content": "员"}
+data: {"type": "chunk", "content": "、"}
+data: {"type": "chunk", "content": "质检"}
+data: {"type": "chunk", "content": "员"}
+data: {"type": "chunk", "content": "等"}
+data: {"type": "chunk", "content": "），"}
+data: {"type": "chunk", "content": "目前"}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "不足以"}
+data: {"type": "chunk", "content": "完整"}
+data: {"type": "chunk", "content": "回答"}
+data: {"type": "chunk", "content": "，"}
+data: {"type": "chunk", "content": "需"}
+data: {"type": "chunk", "content": "用户"}
+data: {"type": "chunk", "content": "进一步"}
+data: {"type": "chunk", "content": "提供"}
+data: {"type": "chunk", "content": "或"}
+data: {"type": "chunk", "content": "确认"}
+data: {"type": "chunk", "content": "。\n\n"}
+data: {"type": "chunk", "content": "##"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "参考"}
+data: {"type": "chunk", "content": "依据"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "泰"}
+data: {"type": "chunk", "content": "昌"}
+data: {"type": "chunk", "content": "社"}
+data: {"type": "chunk", "content": "保证"}
+data: {"type": "chunk", "content": "明"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "第"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "页"}
+data: {"type": "chunk", "content": "）"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "2"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "泰"}
+data: {"type": "chunk", "content": "昌"}
+data: {"type": "chunk", "content": "公司"}
+data: {"type": "chunk", "content": "人员"}
+data: {"type": "chunk", "content": "花"}
+data: {"type": "chunk", "content": "名"}
+data: {"type": "chunk", "content": "册"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "第"}
+data: {"type": "chunk", "content": "2"}
+data: {"type": "chunk", "content": "页"}
+data: {"type": "chunk", "content": "）"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "资料"}
+data: {"type": "chunk", "content": "3"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "陈"}
+data: {"type": "chunk", "content": "仙"}
+data: {"type": "chunk", "content": "瑞"}
+data: {"type": "chunk", "content": "人员"}
+data: {"type": "chunk", "content": "证书"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "第"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "页"}
+data: {"type": "chunk", "content": "）"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "图片"}
+data: {"type": "chunk", "content": "资产"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "泰"}
+data: {"type": "chunk", "content": "昌"}
+data: {"type": "chunk", "content": "社"}
+data: {"type": "chunk", "content": "保证"}
+data: {"type": "chunk", "content": "明"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "第"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "页"}
+data: {"type": "chunk", "content": "）"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "图片"}
+data: {"type": "chunk", "content": "资产"}
+data: {"type": "chunk", "content": "2"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "泰"}
+data: {"type": "chunk", "content": "昌"}
+data: {"type": "chunk", "content": "公司"}
+data: {"type": "chunk", "content": "人员"}
+data: {"type": "chunk", "content": "花"}
+data: {"type": "chunk", "content": "名"}
+data: {"type": "chunk", "content": "册"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "第"}
+data: {"type": "chunk", "content": "2"}
+data: {"type": "chunk", "content": "页"}
+data: {"type": "chunk", "content": "）"}
+data: {"type": "chunk", "content": "  \n"}
+data: {"type": "chunk", "content": "-"}
+data: {"type": "chunk", "content": " "}
+data: {"type": "chunk", "content": "图片"}
+data: {"type": "chunk", "content": "资产"}
+data: {"type": "chunk", "content": "4"}
+data: {"type": "chunk", "content": "："}
+data: {"type": "chunk", "content": "陈"}
+data: {"type": "chunk", "content": "仙"}
+data: {"type": "chunk", "content": "瑞"}
+data: {"type": "chunk", "content": "人员"}
+data: {"type": "chunk", "content": "证书"}
+data: {"type": "chunk", "content": "（"}
+data: {"type": "chunk", "content": "第"}
+data: {"type": "chunk", "content": "1"}
+data: {"type": "chunk", "content": "页"}
+data: {"type": "chunk", "content": "）"}
+data: {"type": "done"}
