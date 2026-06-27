@@ -124,6 +124,8 @@ class FormalBidCheckTest(unittest.TestCase):
         by_id = {item["id"]: item for item in report["items"]}
         self.assertEqual(by_id["B-002"]["status"], "blocked")
         self.assertTrue(by_id["B-002"]["blocksFormalExport"])
+        self.assertIn("投标总价", by_id["B-002"]["evidence"])
+        self.assertNotIn("total_bid_price", by_id["B-002"]["evidence"])
 
     def test_enterprise_logo_do_not_mix_metadata_is_not_forbidden_source(self):
         from backend.services.formal_bid_check import build_formal_bid_check_report
@@ -164,6 +166,7 @@ class FormalBidCheckTest(unittest.TestCase):
         by_id = {item["id"]: item for item in report["items"]}
         self.assertEqual(by_id["B-002"]["action"]["type"], "prefill")
         self.assertEqual(by_id["B-002"]["action"]["target"], "total_bid_price")
+        self.assertEqual(by_id["B-002"]["fieldLabels"], ["投标总价"])
         self.assertEqual(by_id["Q-001"]["action"]["type"], "qualification_library")
         self.assertEqual(by_id["T-001"]["action"]["type"], "bid_editor")
         self.assertGreaterEqual(len(by_id["B-002"]["evidenceChain"]), 3)

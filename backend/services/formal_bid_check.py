@@ -14,7 +14,7 @@ from backend.services.bid_compatibility import (
     build_bid_product_compatibility_report,
     is_product_compatibility_blocking,
 )
-from backend.services.bid_prefill import build_bid_prefill_report, formal_confirmation_issue
+from backend.services.bid_prefill import PREFILL_FIELD_SPECS, build_bid_prefill_report, formal_confirmation_issue
 from backend.services.formal_placeholders import collect_formal_placeholders
 
 RULES_PATH = Path(__file__).resolve().parents[2] / "rules" / "power_grid" / "formal_bid_check_rules.v1.json"
@@ -28,6 +28,8 @@ STATUS_LABELS = {
 }
 
 SEVERITY_ORDER = {"blocker": 0, "high": 1, "medium": 2, "low": 3}
+
+PREFILL_FIELD_LABELS = {spec.key: spec.label for spec in PREFILL_FIELD_SPECS}
 
 
 def _primary_action_for_rule(rule: dict[str, Any], target: str | None = None) -> dict[str, Any]:
@@ -105,6 +107,25 @@ def _format_value(value: Any) -> str:
                 return _format_value(value.get(key))
         return json.dumps(value, ensure_ascii=False)
     return str(value).strip()
+
+
+def _field_label(key: str, fields: dict[str, dict[str, Any]] | None = None) -> str:
+    field = (fields or {}).get(key) or {}
+    label = str(field.get("label") or "").strip()
+    if label and label != key:
+        return label
+    return PREFILL_FIELD_LABELS.get(key, key)
+
+
+def _field_labels(keys: list[str], fields: dict[str, dict[str, Any]] | None = None) -> list[str]:
+    return [_field_label(str(key), fields) for key in keys if key]
+
+
+def _localize_internal_tokens(value: str) -> str:
+    text = _text(value)
+    for key, label in sorted(PREFILL_FIELD_LABELS.items(), key=lambda item: len(item[0]), reverse=True):
+        text = re.sub(rf"(?<![A-Za-z0-9_]){re.escape(key)}(?![A-Za-z0-9_])", label, text)
+    return text
 
 
 def _section_volume(section: dict[str, Any]) -> str:
@@ -204,10 +225,12 @@ def _make_result(
     resolved_suggestion = suggestion or rule.get("remediation") or ""
     source_ref = rule.get("source_ref") or ""
     source_level = rule.get("source_level") or ""
+    localized_evidence = _localize_internal_tokens(evidence)
+    localized_suggestion = _localize_internal_tokens(resolved_suggestion)
     evidence_chain = [
         {"label": "规则依据", "value": " / ".join(part for part in [source_level, source_ref] if part) or "-"},
-        {"label": "当前证据", "value": evidence or "-"},
-        {"label": "处理建议", "value": resolved_suggestion or "-"},
+        {"label": "当前证据", "value": localized_evidence or "-"},
+        {"label": "处理建议", "value": localized_suggestion or "-"},
     ]
     return {
         "id": rule["id"],
@@ -221,11 +244,12 @@ def _make_result(
         "draftExportAllowed": status in {"blocked", "warning", "manual_confirm"},
         "sourceLevel": source_level,
         "sourceRef": source_ref,
-        "evidence": evidence,
-        "suggestion": resolved_suggestion,
+        "evidence": localized_evidence,
+        "suggestion": localized_suggestion,
         "target": target,
         "checkType": rule.get("check_type") or "",
         "fieldKeys": [str(key) for key in rule.get("field_keys") or [] if key],
+        "fieldLabels": _field_labels([str(key) for key in rule.get("field_keys") or [] if key]),
         "evidenceChain": evidence_chain,
         "action": _primary_action_for_rule(rule, target),
     }
@@ -297,18 +321,18 @@ def _evaluate_rule(
             if not _field_confirmed(fields.get(key))
         }
         if not invalid:
-            values = [f"{key}={_field_value(fields.get(key))}" for key in rule.get("field_keys") or []]
+            values = [f"{_field_label(str(key), fields)}：{_field_value(fields.get(key))}" for key in rule.get("field_keys") or []]
             return _make_result(rule, status="passed", evidence="；".join(values))
-        details = "；".join(f"{key}：{reason}" for key, reason in invalid.items())
+        details = "；".join(f"{_field_label(str(key), fields)}：{reason}" for key, reason in invalid.items())
         return _make_result(rule, status="blocked", evidence=f"未形成正式客户确认：{details}")
 
     if check_type == "prefill_confirmed_any":
         invalid: dict[str, str] = {}
         for key in rule.get("field_keys") or []:
             if _field_confirmed(fields.get(key)):
-                return _make_result(rule, status="passed", evidence=f"{key}={_field_value(fields.get(key))}")
-            invalid[key] = formal_confirmation_issue(_field_value(fields.get(key))) or "未填写"
-        details = "；".join(f"{key}：{reason}" for key, reason in invalid.items())
+                return _make_result(rule, status="passed", evidence=f"{_field_label(str(key), fields)}：{_field_value(fields.get(key))}")
+            invalid[str(key)] = formal_confirmation_issue(_field_value(fields.get(key))) or "未填写"
+        details = "；".join(f"{_field_label(key, fields)}：{reason}" for key, reason in invalid.items())
         return _make_result(
             rule,
             status="blocked" if rule.get("blocks_formal_export") else "manual_confirm",
@@ -318,8 +342,9 @@ def _evaluate_rule(
     if check_type == "prefill_candidate_present":
         for key in rule.get("field_keys") or []:
             if _candidate_present(fields.get(key)):
-                return _make_result(rule, status="passed", evidence=f"存在候选：{key}")
-        return _make_result(rule, status="blocked" if rule.get("blocks_formal_export") else "manual_confirm", evidence=f"未找到候选字段：{'、'.join(rule.get('field_keys') or [])}")
+                return _make_result(rule, status="passed", evidence=f"存在候选：{_field_label(str(key), fields)}")
+        missing_labels = "、".join(_field_labels([str(key) for key in rule.get("field_keys") or []], fields))
+        return _make_result(rule, status="blocked" if rule.get("blocks_formal_export") else "manual_confirm", evidence=f"未找到候选字段：{missing_labels}")
 
     if check_type == "sections_min_count":
         count = len(sections)

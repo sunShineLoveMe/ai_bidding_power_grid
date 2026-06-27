@@ -127,7 +127,8 @@ textarea {
 
 .bounded-table .ant-table-content,
 .bounded-table .ant-table-body {
-  overscroll-behavior: contain;
+  overscroll-behavior-x: contain;
+  overscroll-behavior-y: auto;
 }
 
 .bounded-table .ant-table-cell {
@@ -333,7 +334,23 @@ textarea {
 
 .formal-check-action-cell .ant-btn {
   width: fit-content;
+  min-width: 108px;
   max-width: 100%;
+  justify-content: center;
+  font-weight: 900;
+}
+
+.formal-check-action-cell .ant-btn-primary:not(:disabled) {
+  border-color: #1d4ed8;
+  background: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.22);
+}
+
+.formal-check-action-cell .ant-btn-primary:not(:disabled):hover {
+  border-color: #1e40af;
+  background: #1d4ed8;
+  color: #ffffff;
 }
 
 .formal-check-action-cell span {
@@ -377,6 +394,14 @@ textarea {
   font-size: 12px;
   font-weight: 650;
   line-height: 1.55;
+}
+
+.formal-check-loading-card {
+  min-height: 220px;
+}
+
+.formal-check-table .ant-table-content {
+  overscroll-behavior-y: auto;
 }
 
 .prefill-confirm-textarea {
