@@ -1835,6 +1835,17 @@ export function BidEditorPage(): JSX.Element {
 
   function chapterStatusClass(chapter: ChapterDraft): string {
     if (isChapterGenerated(chapter)) return 'done';
+    if (!isLeafChapter(chapter)) {
+      const leaves = leafDescendants(chapter);
+      if (leaves.some(isChapterFailed)) return 'failed';
+      if (leaves.some(item => {
+        const taskStatus = batchTasks[item.id]?.status;
+        return item.status === 'generating' || Boolean(taskStatus && ACTIVE_BATCH_TASK_STATUSES.has(taskStatus));
+      })) {
+        return 'running';
+      }
+      return 'pending';
+    }
     const task = batchTasks[chapter.id];
     if (chapter.status === 'generating') return 'running';
     if (task?.status && ACTIVE_BATCH_TASK_STATUSES.has(task.status)) return 'running';
@@ -1845,7 +1856,10 @@ export function BidEditorPage(): JSX.Element {
   }
 
   function isChapterGenerated(chapter: ChapterDraft): boolean {
-    if (!isLeafChapter(chapter)) return false;
+    if (!isLeafChapter(chapter)) {
+      const leaves = leafDescendants(chapter);
+      return leaves.length > 0 && leaves.every(isChapterGenerated);
+    }
     if (isChapterFailed(chapter)) return false;
     const status = chapter.status || '';
     if (!['generated', 'edited', 'completed'].includes(status)) return false;
@@ -2003,6 +2017,19 @@ export function BidEditorPage(): JSX.Element {
       return false;
     }
     return !hasChildChapters(chapter, source);
+  }
+
+  function leafDescendants(chapter: ChapterDraft, source = chapters): ChapterDraft[] {
+    const children = source.filter(item => item.parent_id === chapter.id);
+    const leaves: ChapterDraft[] = [];
+    for (const child of children) {
+      if (isLeafChapter(child, source)) {
+        leaves.push(child);
+      } else {
+        leaves.push(...leafDescendants(child, source));
+      }
+    }
+    return leaves;
   }
 
   function firstLeafDescendant(chapter: ChapterDraft, source = chapters): ChapterDraft | undefined {

@@ -383,7 +383,7 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
   const [imageAssetsLoading, setImageAssetsLoading] = useState(false);
   const [imageAssetKeyword, setImageAssetKeyword] = useState('');
   const [imageAssetCategory, setImageAssetCategory] = useState('all');
-  const [selectedImageAsset, setSelectedImageAsset] = useState<KnowledgeAsset | null>(null);
+  const [selectedImageAssetIds, setSelectedImageAssetIds] = useState<string[]>([]);
   const [imageUploadFile, setImageUploadFile] = useState<File | null>(null);
   const [imageTitle, setImageTitle] = useState('');
   const [imageUploading, setImageUploading] = useState(false);
@@ -580,7 +580,7 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
   useEffect(() => {
     setImageAssetCategory('all');
     setImageAssetKeyword('');
-    setSelectedImageAsset(null);
+    setSelectedImageAssetIds([]);
   }, [imageLibraryType]);
 
   const imageAssetCategories = useMemo(() => {
@@ -606,42 +606,65 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
   }, [imageAssetCategory, imageAssetKeyword, imageAssets]);
 
   useEffect(() => {
-    if (selectedImageAsset && !filteredImageAssets.some(asset => asset.id === selectedImageAsset.id)) {
-      setSelectedImageAsset(null);
-    }
-  }, [filteredImageAssets, selectedImageAsset]);
+    setSelectedImageAssetIds(ids => ids.filter(id => imageAssets.some(asset => asset.id === id)));
+  }, [imageAssets]);
 
-  const insertImageAsset = async (asset: KnowledgeAsset) => {
+  const selectedImageAssets = useMemo(
+    () => selectedImageAssetIds
+      .map(id => imageAssets.find(asset => asset.id === id))
+      .filter((asset): asset is KnowledgeAsset => Boolean(asset)),
+    [imageAssets, selectedImageAssetIds],
+  );
+
+  const toggleSelectedImageAsset = (asset: KnowledgeAsset) => {
+    setImageUploadFile(null);
+    setSelectedImageAssetIds(ids => (
+      ids.includes(asset.id)
+        ? ids.filter(id => id !== asset.id)
+        : [...ids, asset.id]
+    ));
+  };
+
+  const insertImageAssets = async (assets: KnowledgeAsset[]) => {
     if (!editor) return;
-    const title = String(asset.metadata?.formal_caption || asset.metadata?.source_display_name || asset.title || '标书配图').trim();
-    const canonicalSrc = assetImageUrl(asset);
-    let displaySrc = canonicalSrc;
-    let releaseDisplay: (() => void) | null = null;
-    try {
-      const urls = await getKnowledgeAssetSignedUrls([asset.id], 3600);
-      const candidate = urls[asset.id] || canonicalSrc;
-      signedUrlCache.current[asset.id] = candidate;
-      const displayHandle = resolveAuthenticatedDisplayUrl(candidate);
-      displaySrc = await displayHandle.promise;
-      releaseDisplay = displayHandle.release;
-    } catch {
-      displaySrc = canonicalSrc;
+    const normalizedAssets = assets.filter(isImageAsset);
+    if (!normalizedAssets.length) return;
+    const signedUrls = await getKnowledgeAssetSignedUrls(normalizedAssets.map(asset => asset.id), 3600).catch(() => ({} as Record<string, string>));
+    const nodes = normalizedAssets.map(asset => ({
+      asset,
+      title: String(asset.metadata?.formal_caption || asset.metadata?.source_display_name || asset.title || '标书配图').trim(),
+      canonicalSrc: assetImageUrl(asset),
+    }));
+    const contentNodes = [];
+    for (const item of nodes) {
+      const candidate = signedUrls[item.asset.id] || item.canonicalSrc;
+      signedUrlCache.current[item.asset.id] = candidate;
+      let displaySrc = item.canonicalSrc;
+      let releaseDisplay: (() => void) | null = null;
+      try {
+        const displayHandle = resolveAuthenticatedDisplayUrl(candidate);
+        displaySrc = await displayHandle.promise;
+        releaseDisplay = displayHandle.release;
+      } catch {
+        displaySrc = item.canonicalSrc;
+      }
+      if (releaseDisplay) {
+        imageDisplayReleases.current.push(releaseDisplay);
+      }
+      contentNodes.push({
+        type: 'bidImage',
+        attrs: {
+          src: displaySrc,
+          canonicalSrc: item.canonicalSrc,
+          alt: item.title,
+          title: item.title,
+        },
+      });
     }
-    if (releaseDisplay) {
-      imageDisplayReleases.current.push(releaseDisplay);
-    }
-    editor.chain().focus().insertContent({
-      type: 'bidImage',
-      attrs: {
-        src: displaySrc,
-        canonicalSrc,
-        alt: title,
-        title,
-      },
-    }).run();
+    editor.chain().focus().insertContent(contentNodes).run();
     setImageModalOpen(false);
-    setSelectedImageAsset(null);
-    messageApi.success('图片已插入正文，保存章节后将进入 DOCX 导出');
+    setSelectedImageAssetIds([]);
+    messageApi.success(`${contentNodes.length} 张图片已插入正文，保存章节后将进入 DOCX 导出`);
   };
 
   const imageUploadProps: UploadProps = {
@@ -653,7 +676,7 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
         return Upload.LIST_IGNORE;
       }
       setImageUploadFile(file);
-      setSelectedImageAsset(null);
+      setSelectedImageAssetIds([]);
       setImageTitle(current => current || cleanUploadTitle(file.name));
       return false;
     },
@@ -668,8 +691,8 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
       await uploadAndInsertImage();
       return;
     }
-    if (selectedImageAsset) {
-      await insertImageAsset(selectedImageAsset);
+    if (selectedImageAssets.length) {
+      await insertImageAssets(selectedImageAssets);
       return;
     }
     messageApi.warning('请先选择资产库图片或本地图片');
@@ -698,7 +721,7 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
       formData.append('is_sensitive', 'false');
       formData.append('anonymized', 'true');
       const asset = await uploadKnowledgeAsset(formData);
-      await insertImageAsset(asset);
+      await insertImageAssets([asset]);
       setImageUploadFile(null);
       setImageTitle('');
       void fetchImageAssets();
@@ -816,13 +839,13 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
         title="插入标书图片"
         open={imageModalOpen}
         width={920}
-        okText={imageUploadFile ? '保存到资产库并插入' : '插入选中图片'}
+        okText={imageUploadFile ? '保存到资产库并插入' : selectedImageAssets.length ? `插入已选 ${selectedImageAssets.length} 张图片` : '插入选中图片'}
         cancelText="关闭"
-        okButtonProps={{ loading: imageUploading, disabled: !imageUploadFile && !selectedImageAsset }}
+        okButtonProps={{ loading: imageUploading, disabled: !imageUploadFile && !selectedImageAssets.length }}
         onOk={() => void confirmImageInsert()}
         onCancel={() => {
           setImageModalOpen(false);
-          setSelectedImageAsset(null);
+          setSelectedImageAssetIds([]);
         }}
         destroyOnHidden
       >
@@ -836,7 +859,7 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
                 { label: '资信库图片', value: 'qualification' },
               ]}
             />
-            <span>人工选择可插入正文；自动配图仍按正式标书可用性规则复核。</span>
+            <span>资产库图片可多选插入正文；自动配图仍按正式标书可用性规则复核。</span>
           </div>
           <div className="editor-image-upload">
             <Upload {...imageUploadProps} fileList={imageUploadFile ? [{
@@ -861,7 +884,10 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
           </div>
           <div className="editor-image-library">
             <div className="editor-image-library-title">
-              <strong>从资产库插入</strong>
+              <Space size={8}>
+                <strong>从资产库插入</strong>
+                {selectedImageAssets.length ? <Tag color="blue">已选 {selectedImageAssets.length} 张</Tag> : null}
+              </Space>
               <Space size={8}>
                 <Select
                   size="small"
@@ -886,7 +912,7 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
                 <div className="editor-image-grid">
                   {filteredImageAssets.map(asset => {
                     const usage = assetUsageLabel(asset);
-                    const selected = selectedImageAsset?.id === asset.id;
+                    const selected = selectedImageAssetIds.includes(asset.id);
                     return (
                       <div
                         key={asset.id}
@@ -894,11 +920,11 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
                         tabIndex={0}
                         aria-pressed={selected}
                         className={`editor-image-option ${selected ? 'selected' : ''}`}
-                        onClick={() => setSelectedImageAsset(asset)}
+                        onClick={() => toggleSelectedImageAsset(asset)}
                         onKeyDown={event => {
                           if (event.key === 'Enter' || event.key === ' ') {
                             event.preventDefault();
-                            setSelectedImageAsset(asset);
+                            toggleSelectedImageAsset(asset);
                           }
                         }}
                       >
@@ -915,10 +941,10 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
                           type={selected ? 'primary' : 'default'}
                           onClick={event => {
                             event.stopPropagation();
-                            setSelectedImageAsset(asset);
+                            toggleSelectedImageAsset(asset);
                           }}
                         >
-                          {selected ? '已选择' : '选择'}
+                          {selected ? '取消选择' : '选择'}
                         </Button>
                       </div>
                     );
