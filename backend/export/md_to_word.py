@@ -350,6 +350,8 @@ def apply_run_font(run, *, east_asia=DOCX_BODY_EAST_ASIA, latin=DOCX_BODY_LATIN,
         run.font.size = Pt(size)
     if bold is not None:
         run.font.bold = bold
+    run.font.italic = False
+    run.font.underline = False
     run.font.color.rgb = RGBColor(0, 0, 0)
 
 
@@ -1845,6 +1847,8 @@ def set_document_styles(doc):
         style._element.rPr.rFonts.set(qn('w:cs'), east_asia)
         style.font.size = Pt(size)
         style.font.bold = bold
+        style.font.italic = False
+        style.font.underline = False
         style.font.color.rgb = RGBColor(0, 0, 0)
         apply_body_line_spacing(style.paragraph_format)
         style.paragraph_format.first_line_indent = Pt(0)

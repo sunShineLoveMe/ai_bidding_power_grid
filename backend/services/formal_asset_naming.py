@@ -95,6 +95,7 @@ def clean_formal_asset_title(value: Any, fallback: str = "企业资料") -> str:
     title = re.sub(r"(报告){2,}$", "报告", title)
     title = re.sub(r"\bcodex[-_\w]*\b", "", title, flags=re.I)
     title = re.sub(r"\b(?:taichang|power_grid|production_capacity|green_low_carbon|business_license|certification)\b", "", title, flags=re.I)
+    title = title.replace("_", "")
     title = re.sub(r"[，,。；;：:\-_\s]+$", "", title)
     title = re.sub(r"^[，,。；;：:\-_\s]+", "", title)
     title = re.sub(r"\s+", "", title)

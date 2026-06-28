@@ -1,0 +1,313 @@
+{
+  "run_id": "run_20260627_taichang_formal_asset_repair_caption_recalc",
+  "dry_run": false,
+  "rewrite_title": true,
+  "generated_at": "2026-06-27T08:56:51.297878+00:00",
+  "assets_scanned": 599,
+  "assets_changed": 48,
+  "titles_rewritten": 0,
+  "formal_bid_excluded": 0,
+  "caption_suppressed": 46,
+  "samples": [
+    {
+      "id": "13d070a7-663a-40d8-b716-38aaf517906d",
+      "old_title": "微机控制电子万能试验机",
+      "new_title": "微机控制电子万能试验机",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "77b1007a-1106-4b84-b5a7-563c0d78e8dc",
+      "old_title": "微机控制电子万能试验机",
+      "new_title": "微机控制电子万能试验机",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "6ebd3ffc-3f9c-42cf-a377-d53ecb00a574",
+      "old_title": "微机控制电子万能试验机",
+      "new_title": "微机控制电子万能试验机",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "4454c4ec-3976-473a-81f2-4cec2bd66f04",
+      "old_title": "微机控制电子万能试验机",
+      "new_title": "微机控制电子万能试验机",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "aefb3637-7dea-4544-90a4-c0079b41167d",
+      "old_title": "微机控制电子万能试验机",
+      "new_title": "微机控制电子万能试验机",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "1cfd8a3f-b402-4a84-8f4b-e9bf2294f35b",
+      "old_title": "微机控制电子万能试验机",
+      "new_title": "微机控制电子万能试验机",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "4b288070-f008-48ef-b987-5c75c456e3cb",
+      "old_title": "微机控制电子万能试验机",
+      "new_title": "微机控制电子万能试验机",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "7ff51ff0-8ce0-46c2-91dd-f25d2c36aeb1",
+      "old_title": "微机控制电子万能试验机",
+      "new_title": "微机控制电子万能试验机",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "055f3321-bd76-43af-b550-ff59d616f73e",
+      "old_title": "热变型、维卡软化点温度测定仪",
+      "new_title": "热变型、维卡软化点温度测定仪",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "1ca820ce-dfa1-4c4d-ad0c-c85f3ca11c98",
+      "old_title": "热变型、维卡软化点温度测定仪",
+      "new_title": "热变型、维卡软化点温度测定仪",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "6a25db9a-3771-4d30-a6b2-89ccd225fdae",
+      "old_title": "热变型、维卡软化点温度测定仪",
+      "new_title": "热变型、维卡软化点温度测定仪",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "63079c8a-f15d-4425-9b4f-8832485e6279",
+      "old_title": "热变型、维卡软化点温度测定仪",
+      "new_title": "热变型、维卡软化点温度测定仪",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "163d49f1-3db7-4c0b-8f6a-a9265b2ba5a9",
+      "old_title": "热变型、维卡软化点温度测定仪",
+      "new_title": "热变型、维卡软化点温度测定仪",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "579dd315-9a7a-4f95-a3c8-1a2a5ac9c217",
+      "old_title": "热变型、维卡软化点温度测定仪",
+      "new_title": "热变型、维卡软化点温度测定仪",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "7a34667d-0a39-417f-9bb6-2da1443b8260",
+      "old_title": "热变型、维卡软化点温度测定仪",
+      "new_title": "热变型、维卡软化点温度测定仪",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "1373f162-cc94-497f-abba-b84a083e151c",
+      "old_title": "热变型、维卡软化点温度测定仪",
+      "new_title": "热变型、维卡软化点温度测定仪",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "53814ca8-6e0d-4c5a-9e8c-b3c9c2d1e867",
+      "old_title": "热变型、维卡软化点温度测定仪",
+      "new_title": "热变型、维卡软化点温度测定仪",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "29f3feff-babe-4a64-b20e-a93bdc6bd5fb",
+      "old_title": "电子天平",
+      "new_title": "电子天平",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "59222ca7-8321-4a09-b955-c2f4af14d0af",
+      "old_title": "电子天平",
+      "new_title": "电子天平",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "04e064b8-a41f-4f0d-a8a7-44c1ed545585",
+      "old_title": "电子天平",
+      "new_title": "电子天平",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "4c8e0c13-0f46-49b0-aef3-6b3883bde22e",
+      "old_title": "电子天平",
+      "new_title": "电子天平",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "5c875dcd-e440-41d1-b0c1-4f152b5ed345",
+      "old_title": "电子天平",
+      "new_title": "电子天平",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "85b728df-d209-45b5-ad31-56b2eba17362",
+      "old_title": "电子天平",
+      "new_title": "电子天平",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "a137ead8-a37a-4421-bb69-32ee4a781d99",
+      "old_title": "锤击试验装置",
+      "new_title": "锤击试验装置",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "bca54cc5-14af-477f-b88e-97832b51e615",
+      "old_title": "锤击试验装置",
+      "new_title": "锤击试验装置",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "661c1e8b-7b37-4557-928e-86f92ddac57b",
+      "old_title": "锤击试验装置",
+      "new_title": "锤击试验装置",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "f10b839b-85db-4f06-9b04-5c0b485fc4a8",
+      "old_title": "锤击试验装置",
+      "new_title": "锤击试验装置",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "c6dd8d55-a7ea-478a-949b-78e041f44120",
+      "old_title": "锤击试验装置",
+      "new_title": "锤击试验装置",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "e7eec5ff-6d29-4e8f-a35e-82bae35b29f9",
+      "old_title": "锤击试验装置",
+      "new_title": "锤击试验装置",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "e58ae78c-e53a-411f-84a5-a29f0bc2dcc1",
+      "old_title": "锤击试验装置",
+      "new_title": "锤击试验装置",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    }
+  ]
+}

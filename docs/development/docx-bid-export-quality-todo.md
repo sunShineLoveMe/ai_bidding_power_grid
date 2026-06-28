@@ -20,6 +20,7 @@
 - 若未来客户重新提供可编辑 Word 模板，再进入 `template_docx` 模式；当前 MVP 不等待该资料。
 - 真实验证必须走项目导出链路：`build_project_bid_markdown` -> `convert_md_to_word` -> `refresh_docx_fields_with_soffice`，不得只用 mock 替代。
 - 2026-06-27 阿里云新疆 10kV 真实浏览器验收发现：客户真实长项目名会导致技术标 DOCX 导出任务因 `[Errno 36] File name too long` 失败；已将物理输出目录和文件名短名化。
+- 2026-06-27 本地辽宁 CPVC 包 1 完整真实回归已产出完整 DOCX，但 formal gate 判定为 `draft`：正式必填缺口 `16`、高风险缺口 `48`、正文残留 `待补充/需人工复核`，且封面包号未读取已确认值。记录见 `docs/development/runs/run_20260627_local_liaoning_full_e2e.md`。
 
 ## P0 必须完成
 
@@ -47,12 +48,12 @@
 | 延后 | 格式方案选择 | 当前 MVP 不做；导出固定使用面向泰昌的正式投标文件默认格式，后续有非泰昌/非正式交付场景再评估 |
 | 脚本版已完成 | 格式预检报告 | `scripts/rag/verify_taichang_full_bid_acceptance.py` 已检查目录缺失、页码字段、表格格式、图片失败/裁剪/比例、内部字段泄露、重复父章节标题和补充包资产选中；后续再接入页面/导出任务 metadata |
 | 已完成 | 分册格式 | 技术标/商务标两个交付包支持不同封面文件类型、目录、页眉文案和导出 metadata；资格文件、报价文件、附件材料归入商务标内部资料类型 |
-| 已完成（本地真实回归通过，待阿里云复验） | 分册导出完成后明确下载按钮 | 标书编制页顶部改为“导出投标文件”下拉入口，支持下载技术标 DOCX、商务标 DOCX、完整投标文件 DOCX；导出任务完成后不再依赖自动弹窗打开文件，而是在完成弹窗中展示文件名、大小、字段刷新、图片插入统计和明确下载按钮 |
+| 回归发现需复查 | 分册导出完成后明确下载按钮 | 标书编制页顶部改为“导出投标文件”下拉入口，支持下载技术标 DOCX、商务标 DOCX、完整投标文件 DOCX；2026-06-27 本地辽宁完整回归中，Dropdown DOM 已渲染三项但 Chrome 点击/悬停后仍保持 hidden，需复查真实点击触发与下载体验 |
 | 已完成基础版 | 第六章格式表单保真 | 已识别投标函、授权委托书、商务/技术偏差表和承诺函；签章行右对齐、语义列宽和表格行禁止跨页拆分通过真实 DOCX 回归 |
 | 已完成 | DOCX 图片统一长宽 | Markdown 图片和 Mermaid 转图均进入统一正文图片框；默认 `5.8in x 8.2in`，白底 contain，不裁剪、不拉伸；技术标/商务标真实导出中正文图片尺寸均一致 |
 | 待办 | 导出任务 metadata 扩充 | 记录模板 ID、封面字段、目录层级、图表题注、格式告警 |
 | 待办 | 阿里云下载体验收口 | 线上 DOCX 下载不得被浏览器弹窗/不安全下载策略阻断；优先启用 HTTPS，并改为同页下载或 blob 下载 |
-| 已完成 | 正式缺口口径统一 | 导出完成提示、投标信息确认页、formal readiness metadata 使用同一占位符与正式字段口径；当前演示项目正式必填缺口 0、正文占位符 0 |
+| 回归发现需重开 | 正式缺口口径统一 | 导出完成提示、投标信息确认页、formal readiness metadata 使用同一占位符与正式字段口径；2026-06-27 本地辽宁完整回归中，投标确认测试值已应用，但完整导出 formal gate 仍报正式必填缺口 16、正文占位符残留，需补充项目级回归 |
 | 待办 | 章节图片与候选证据映射收口 | 项目业绩不得映射人员证书；法定格式章节默认不自动插图；生产能力图片不得泛化使用碳足迹等弱相关资料 |
 
 ## P2 后续增强
@@ -591,3 +592,21 @@
   - 技术标任务 metadata 中保留旧 `source` 作为后台追溯，实际题注已正式化为 `资料：MPP电缆保护管检验报告`、`资料：试验设备台账`、`资料：生产制造能力` 等中文表达；正式 DOCX 正文未暴露旧题注。
 - 当前导出模式：`draft`。正式检查仍有 12 个阻断项，其中包含客户确认字段缺失和产品适配 `T-000`；该阻断符合真实投标场景，不应绕过。
 - 运行记录：`docs/development/runs/run_20260627_aliyun_browser_full_regression.md`、`docs/development/runs/run_20260627_aliyun_browser_full_regression/export_tasks.json`。
+
+### 2026-06-27 辽宁本地正式标书图片绑定与占位符清理复验记录
+
+- 背景：用户反馈本地辽宁项目成品中存在正文待补充/需人工复核、图片与章节正文不匹配、图片无题注、标题斜体字号异常等正式交付阻断问题。
+- 根因结论：属于导出功能缺陷和资产选择规则过宽共同导致；历史章节正文中的合法图片 Markdown 穿透到 DOCX，同时正式资产选择器又追加图片，且商务标允许用宽泛资信资产匹配表单/保险章节。
+- 本轮实现：
+  - 导出时剥离章节正文所有历史图片 Markdown，正式 DOCX 只保留经资产选择器筛选的图片。
+  - 表单、投标保证金/保险、保险购买凭证、银行基本账户、泛认证章节不自动插图。
+  - 营业执照、三体系证书、业绩证明按具体证据类型和资产标题/文本强匹配；没有精确证据时不使用相近图片替代。
+  - 正文最终化清理覆盖 `待补充`、`需人工核对`、`请确认`、`请提供`、`[ ]`、`XXX`、下划线空值、身份证号、签字日期等草稿痕迹。
+  - DOCX 标题/正文 run 强制关闭 italic/underline，图片题注 fallback 统一为 `资料：<正式资产标题>`。
+- 输出文件：
+  - 技术标：`output/playwright/run_20260627_local_liaoning_full_e2e_fixed/technical_泰昌_2225AC_包1_技术投标文件_20260627_图文.docx`
+  - 商务标：`output/playwright/run_20260627_local_liaoning_full_e2e_fixed/business_泰昌_2225AC_包1_商务投标文件_20260627_图文.docx`
+  - 完整标书：`output/playwright/run_20260627_local_liaoning_full_e2e_fixed/full_泰昌_2225AC_包1_投标文件_20260627_图文.docx`
+- 审计结果：技术标 `8/8/8`、商务标 `5/5/5`、完整标书 `12/12/12`，分别代表 manifest 选中图片 / Word 内图片 / 正式题注；三份文件图片失败 `0`、无题注图片 `0`、禁用文本命中 `0`、斜体标题 `0`、字段刷新均 `refreshed`。
+- 运行记录：`docs/development/runs/run_20260627_liaoning_formal_bid_image_binding_rework.md`。
+- 自动化回归：`.venv/bin/python -m pytest tests/test_formal_placeholders.py tests/test_rag_asset_scoring.py tests/test_docx_export.py -q`，结果 `60 passed, 1 warning`。

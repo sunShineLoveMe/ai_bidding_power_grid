@@ -216,25 +216,25 @@ class RagAssetScoringQualityTest(unittest.TestCase):
 
         self.assertEqual(markdown, "")
 
-    def test_docx_image_selection_allows_business_attachment_when_explicitly_required(self):
+    def test_docx_image_selection_allows_business_certificate_when_explicitly_required(self):
         from backend.api.routes import _build_section_image_markdown
 
         business = _section(
-            "商务响应证明材料",
+            "质量管理体系认证证书",
             "business",
-            response_points=["付款承诺证明材料", "合同管理承诺附件", "保密义务"],
+            response_points=["质量管理体系认证证书扫描件", "资质证明材料"],
         )
         manifest = []
 
         markdown = _build_section_image_markdown(
             business,
-            [PRODUCT_ASSET, BUSINESS_ASSET],
+            [PRODUCT_ASSET, QUALIFICATION_ASSET],
             used_asset_ids=set(),
             image_manifest=manifest,
             remaining_limit=2,
         )
 
-        self.assertIn("商务承诺函模板", markdown)
+        self.assertIn("脱敏质量管理体系认证证书样张", markdown)
         self.assertNotIn("高压旋喷桩设备产品图", markdown)
         self.assertEqual(manifest[0]["volume_type"], "business")
 
@@ -349,8 +349,8 @@ class RagAssetScoringQualityTest(unittest.TestCase):
         self.assertIn("![CPVC电缆保护管检验报告]", markdown)
         self.assertNotIn("图示", markdown)
         self.assertNotIn("第1页", markdown)
-        self.assertEqual("", manifest[0]["caption"])
-        self.assertEqual("suppressed_document_page_caption", manifest[0]["caption_policy"])
+        self.assertEqual("资料：CPVC电缆保护管检验报告", manifest[0]["caption"])
+        self.assertEqual("formal_material_caption", manifest[0]["caption_policy"])
 
     def test_formal_docx_photo_caption_uses_chinese_material_name(self):
         from backend.api.routes import _build_section_image_markdown

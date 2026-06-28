@@ -30,7 +30,7 @@ import shutil
 from datetime import timedelta
 from backend.core.config import DEFAULT_SETTINGS, build_enterprise_context, get_setting, load_runtime_settings, save_runtime_settings
 from backend.core.security import UploadValidationError, safe_upload_filename, validate_uploaded_file
-from backend.services.formal_placeholders import apply_confirmed_values_to_export_text, count_formal_placeholders
+from backend.services.formal_placeholders import apply_confirmed_values_to_export_text, apply_simulated_final_values_to_export_text, count_formal_placeholders
 from backend.services.bid_prefill import formal_required_confirmation_gaps
 from backend.services.formal_asset_naming import caption_policy, formal_asset_caption, formal_asset_title
 
@@ -401,7 +401,7 @@ def _demote_body_markdown_headings(content: str) -> str:
     return "\n".join(output).strip()
 
 
-def _strip_untrusted_export_images(content: str) -> str:
+def _strip_untrusted_export_images(content: str, *, remove_all: bool = False) -> str:
     """Keep formal DOCX images tied to curated knowledge assets or real local files."""
     if not content:
         return ""
@@ -409,6 +409,9 @@ def _strip_untrusted_export_images(content: str) -> str:
     def replace(match: re.Match) -> str:
         alt = clean_formal_bid_text(match.group(1) or "图片")
         ref = (match.group(2) or "").strip().strip('"').strip("'")
+        if remove_all:
+            logging.info("导出 DOCX 时移除章节正文历史图片引用: alt=%s ref=%s", alt, ref)
+            return "\n__EXPORT_IMAGE_REMOVED__\n"
         if re.match(r"^/api/(?:bidding/)?knowledge/assets/[^/]+/file(?:\?|$)", ref):
             return match.group(0)
         candidate = Path(ref)
@@ -417,7 +420,24 @@ def _strip_untrusted_export_images(content: str) -> str:
         logging.warning("导出 DOCX 时移除未入库或不可解析图片引用: alt=%s ref=%s", alt, ref)
         return ""
 
-    return re.sub(r"!\[(.*?)\]\((.*?)\)", replace, content).strip()
+    stripped = re.sub(r"!\[(.*?)\]\((.*?)\)", replace, content)
+    if remove_all:
+        output_lines: list[str] = []
+        skip_legacy_caption = False
+        for line in stripped.splitlines():
+            if "__EXPORT_IMAGE_REMOVED__" in line:
+                skip_legacy_caption = True
+                continue
+            if skip_legacy_caption and not line.strip():
+                output_lines.append(line)
+                continue
+            if skip_legacy_caption and re.match(r"^\s*(?:资料|图\s*\d+(?:[.-]\d+)?|图片)[：:][^\n]{1,120}\s*$", line):
+                skip_legacy_caption = False
+                continue
+            skip_legacy_caption = False
+            output_lines.append(line)
+        stripped = "\n".join(output_lines)
+    return re.sub(r"\n{3,}", "\n\n", stripped).strip()
 
 
 def _asset_text(asset: dict) -> str:
@@ -462,20 +482,81 @@ def _section_text(section: dict) -> str:
     return " ".join(str(item) for item in parts if item).lower()
 
 
+def _section_heading_text(section: dict) -> str:
+    return f"{_section_display_title(section)} {section.get('title') or ''}".lower()
+
+
+def _section_planned_evidence_text(section: dict) -> str:
+    metadata = section.get("metadata") or {}
+    plan = metadata.get("writing_plan") if isinstance(metadata.get("writing_plan"), dict) else {}
+    parts = [
+        _section_heading_text(section),
+        section.get("purpose"),
+        plan.get("chapter_type"),
+        plan.get("importance"),
+    ]
+    for key in ("response_points", "required_materials", "evidence_needs", "mapped_requirements"):
+        value = section.get(key) or plan.get(key)
+        if isinstance(value, list):
+            parts.extend(value)
+        elif value:
+            parts.append(value)
+    return " ".join(str(item) for item in parts if item).lower()
+
+
+def _section_is_form_or_summary(section: dict) -> bool:
+    title_text = _section_heading_text(section)
+    raw_title = _strip_existing_section_number(section.get("title") or "").lower()
+    if raw_title in {"认证证书", "资质证书", "证书附件", "证明材料"}:
+        return True
+    form_keywords = [
+        "投标人基本情况表",
+        "基本情况表",
+        "商务偏差表",
+        "技术偏差表",
+        "技术特性参数表",
+        "货物清单",
+        "报价汇总表",
+        "分项报价表",
+        "明细表",
+        "说明书",
+        "响应文件",
+        "支撑材料",
+        "资料清单",
+        "附件清单",
+        "索引",
+        "基本情况表",
+        "商务偏差表",
+        "投标保证保险",
+        "保险购买凭证",
+        "投标保证金",
+        "银行基本账户",
+    ]
+    return any(keyword in title_text for keyword in form_keywords)
+
+
 def _section_needs_image(section: dict) -> bool:
     metadata = section.get("metadata") or {}
     plan = metadata.get("writing_plan") or {}
     volume_type = section_volume_type(section)
     if volume_type == "price":
         return False
+    title_text = _section_heading_text(section)
+    if _section_is_form_or_summary(section):
+        # 表格/说明/索引章节应以正文结构为主，不能靠宽泛关键词自动塞图。
+        return False
     if volume_type == "business":
-        text = _section_text(section)
-        return any(keyword in text for keyword in ["附件", "证明材料", "授权委托", "保证金", "保函", "扫描件"])
+        explicit_business_evidence_titles = [
+            "营业执照", "资质证书", "认证证书", "证书附件", "授权委托书",
+            "法定代表人身份证明", "银行保函", "项目业绩证明", "合同协议书", "中标通知书",
+        ]
+        return any(keyword in title_text for keyword in explicit_business_evidence_titles) or (
+            bool(plan.get("needs_image")) and any(keyword in _section_planned_evidence_text(section) for keyword in ["证书扫描件", "营业执照", "合同扫描件", "中标通知书", "银行保函"])
+        )
     if plan.get("needs_image"):
         return True
-    title_text = f"{_section_display_title(section)} {section.get('title') or ''}".lower()
     explicit_image_title_keywords = [
-        "资料清单", "附件", "营业执照", "资质", "证书", "业绩", "合同", "中标通知书",
+        "附件", "营业执照", "资质", "证书", "业绩", "合同", "中标通知书",
         "生产", "生产线", "制造", "检测", "试验", "设备", "绿色", "低碳", "碳足迹",
         "检验报告", "检测报告", "产品", "厂房", "仓储", "logo", "Logo",
     ]
@@ -503,24 +584,31 @@ def _asset_meta_value(asset: dict, key: str) -> str:
 
 
 def _section_asset_profile(section: dict) -> dict[str, set[str]]:
-    text = _section_text(section)
-    heading_text = f"{_section_display_title(section)} {section.get('title') or ''}".lower()
+    heading_text = _section_heading_text(section)
+    evidence_text = _section_planned_evidence_text(section)
+    profile_text = f"{heading_text} {evidence_text}"
     profile = {"evidence_types": set(), "libraries": set()}
-    if any(keyword in text for keyword in ["营业执照", "执照"]):
+    if _section_is_form_or_summary(section):
+        return profile
+    if any(keyword in profile_text for keyword in ["营业执照", "执照"]):
         profile["evidence_types"].add("business_license")
         profile["libraries"].add("qualification_library")
-    if any(keyword in text for keyword in ["资信", "资质", "证书", "体系认证", "认证证书", "许可"]):
+    if any(keyword in profile_text for keyword in ["资信", "资质", "证书", "体系认证", "认证证书", "许可"]):
         profile["evidence_types"].add("certification")
         profile["libraries"].add("qualification_library")
-    if any(keyword in text for keyword in ["生产制造", "生产线", "产线", "车间", "厂房", "制造能力", "生产能力", "生产设备"]):
+    if any(keyword in profile_text for keyword in ["生产制造", "生产线", "产线", "车间", "厂房", "制造能力", "生产能力", "生产设备", "产品制造质量控制"]):
         profile["evidence_types"].add("production_capacity")
         profile["libraries"].add("product_library")
-    if any(keyword in text for keyword in ["试验检测", "检测能力", "试验能力", "检测设备", "试验设备", "电子天平", "万能试验机", "维卡", "锤击", "溶体流动"]):
+    if any(keyword in profile_text for keyword in ["试验检测", "检测能力", "试验能力", "检测设备", "试验设备", "质量检测", "电子天平", "万能试验机", "维卡", "锤击", "溶体流动"]):
         profile["evidence_types"].add("testing_capacity")
         profile["libraries"].add("product_library")
-    if any(keyword in text for keyword in ["绿色供应链", "绿色低碳", "低碳", "esg", "碳足迹", "废水废气", "环保"]):
+    if any(keyword in profile_text for keyword in ["设备", "产品图", "产品图片", "施工设备", "产品资料"]):
+        profile["libraries"].add("product_library")
+    if any(keyword in profile_text for keyword in ["证明材料", "承诺附件", "承诺函", "商务条款"]):
+        profile["libraries"].add("qualification_library")
+    if any(keyword in profile_text for keyword in ["绿色供应链", "绿电", "绿证", "绿色低碳", "低碳", "esg", "碳足迹", "废水废气", "环保"]):
         profile["evidence_types"].add("green_low_carbon")
-    if any(keyword in text for keyword in ["检验报告", "检测报告", "型式试验", "内径250"]):
+    if any(keyword in profile_text for keyword in ["检验报告", "检测报告", "型式试验", "内径250"]):
         profile["evidence_types"].add("inspection_report")
         profile["libraries"].add("product_library")
     if any(keyword in heading_text for keyword in [
@@ -654,7 +742,11 @@ def _asset_library_label(asset: dict) -> str:
 
 
 def _asset_caption(asset: dict, match_reason: str | None = None) -> str:
-    return formal_asset_caption(asset) or ""
+    caption = formal_asset_caption(asset)
+    if caption:
+        return caption
+    fallback = formal_asset_title(asset, "企业证明材料")
+    return f"资料：{fallback}" if fallback else "资料：企业证明材料"
 
 
 def _asset_match_reason(asset: dict, section: dict, score: int) -> str:
@@ -738,9 +830,29 @@ def _asset_allowed_for_volume(asset: dict, section: dict) -> bool:
         return False
     profile = _section_asset_profile(section)
     evidence_type = _asset_meta_value(asset, "evidence_type")
+    if not profile["evidence_types"] and not profile["libraries"]:
+        return False
     if profile["evidence_types"] and evidence_type and evidence_type not in profile["evidence_types"]:
         return False
     asset_text = _asset_text(asset)
+    raw_title = _strip_existing_section_number(section.get("title") or "").lower()
+    if "认证证书" in raw_title and evidence_type and evidence_type not in {"certification", "green_low_carbon"}:
+        return False
+    specific_certificate_requirements = [
+        ("质量管理体系认证证书", ["质量管理体系", "iso9001"]),
+        ("职业健康安全管理体系认证证书", ["职业健康安全", "iso45001"]),
+        ("环境管理体系认证证书", ["环境管理体系", "iso14001"]),
+        ("能源管理体系认证证书", ["能源管理体系"]),
+    ]
+    for title_keyword, asset_keywords in specific_certificate_requirements:
+        if title_keyword in raw_title and not any(keyword.lower() in asset_text for keyword in asset_keywords):
+            return False
+    if evidence_type == "business_license" and not any(keyword in asset_text for keyword in ["营业执照", "统一社会信用代码", "法人证书", "组织登记证书"]):
+        return False
+    if evidence_type == "certification" and not any(keyword in asset_text for keyword in ["认证证书", "体系认证", "质量管理体系", "环境管理体系", "职业健康安全", "iso9001", "iso14001", "iso45001"]):
+        return False
+    if evidence_type == "project_performance" and not any(keyword in asset_text for keyword in ["中标通知书", "合同", "业绩", "供货", "购销"]):
+        return False
     metadata = asset.get("metadata") or {}
     specs = asset.get("specs") or {}
     library_type = ""
@@ -756,6 +868,8 @@ def _asset_allowed_for_volume(asset: dict, section: dict) -> bool:
     if volume_type == "qualification":
         return library_type != "product" or any(keyword in asset_text for keyword in ["业绩", "证明", "资质", "证书"])
     if volume_type == "business":
+        if not profile["evidence_types"]:
+            return False
         return any(keyword in asset_text for keyword in ["授权", "保证金", "保函", "承诺", "证明", "营业执照", "资质", "扫描件"])
     return True
 
@@ -780,6 +894,9 @@ def _build_section_image_markdown(
         asset_id = str(asset.get("id") or image_ref)
         if asset_id in used_asset_ids:
             continue
+        display_key = f"display::{_asset_meta_value(asset, 'evidence_type')}::{formal_asset_title(asset, '企业证明材料')}"
+        if display_key in used_asset_ids:
+            continue
         if not _asset_evidence_allowed_by_manifest(asset, image_manifest):
             continue
         if not _asset_allowed_for_volume(asset, section):
@@ -789,24 +906,7 @@ def _build_section_image_markdown(
             candidates.append((score, asset))
 
     if not candidates:
-        section_text = _section_text(section)
-        fallback_keywords = ["产品", "设备", "施工", "安装", "调试", "试验", "运维", "检修", "工程", "输变电", "配网", "现场", "资质", "证书", "营业执照"]
-        for asset in assets:
-            image_ref = _asset_image_ref(asset)
-            if not image_ref:
-                continue
-            asset_id = str(asset.get("id") or image_ref)
-            if asset_id in used_asset_ids:
-                continue
-            if not _asset_evidence_allowed_by_manifest(asset, image_manifest):
-                continue
-            if not _asset_allowed_for_volume(asset, section):
-                continue
-            asset_text = _asset_text(asset)
-            if any(keyword in asset_text for keyword in fallback_keywords) or any(keyword in section_text for keyword in fallback_keywords):
-                candidates.append((1, asset))
-        if not candidates:
-            return ""
+        return ""
 
     candidates.sort(key=lambda item: item[0], reverse=True)
     volume_type = section_volume_type(section)
@@ -819,8 +919,12 @@ def _build_section_image_markdown(
     for score, asset in candidates[:section_limit]:
         image_ref = _asset_image_ref(asset)
         asset_id = str(asset.get("id") or image_ref)
+        display_key = f"display::{_asset_meta_value(asset, 'evidence_type')}::{formal_asset_title(asset, '企业证明材料')}"
+        if asset_id in used_asset_ids or display_key in used_asset_ids:
+            continue
         used_asset_ids.add(asset_id)
         alt = re.sub(r"[\[\]\(\)]", "", formal_asset_title(asset, "电网行业配图")).strip()
+        used_asset_ids.add(display_key)
         match_reason = _asset_match_reason(asset, section, score)
         caption = _asset_caption(asset, match_reason)
         caption_block = f"\n\n{caption}" if caption else ""
@@ -844,7 +948,7 @@ def _build_section_image_markdown(
                 "reason": match_reason,
                 "image_ref": image_ref,
                 "caption": caption,
-                "caption_policy": caption_policy(asset),
+                "caption_policy": "formal_material_caption" if caption else caption_policy(asset),
                 "sensitive": bool(asset.get("is_sensitive")),
                 "anonymized": bool(asset.get("anonymized")),
             })
@@ -1018,6 +1122,15 @@ def build_project_bid_markdown(
     )
     placeholder_count = count_formal_placeholders(str(section.get("content") or "") for section in sections)
     confirmed_values = prefill_state.get("confirmed_values") if isinstance(prefill_state.get("confirmed_values"), dict) else {}
+    if confirmed_values.get("package_no"):
+        report_cover_fields["包号"] = str(confirmed_values.get("package_no"))
+    if confirmed_values.get("package_name"):
+        report_cover_fields["包名称"] = str(confirmed_values.get("package_name"))
+    if confirmed_values.get("project_name"):
+        report_cover_fields["项目名称"] = str(confirmed_values.get("project_name"))
+    if confirmed_values.get("tender_no"):
+        report_cover_fields["招标编号"] = str(confirmed_values.get("tender_no"))
+    export_image_report["cover_fields"] = report_cover_fields
     missing_required = formal_required_confirmation_gaps(confirmed_values)
     template_profile = resolve_docx_template_profile(report_cover_fields)
     export_image_report["formal_readiness"] = {
@@ -1082,11 +1195,14 @@ def build_project_bid_markdown(
                     _strip_duplicate_section_heading(section.get("content") or "", section)
                 ),
                 section,
-            )
+            ),
+            remove_all=with_images,
         )
         if confirmed_values:
             content, confirmation_replacements = apply_confirmed_values_to_export_text(content, confirmed_values)
             export_image_report["formal_readiness"]["export_confirmation_replacements"] += confirmation_replacements
+        content, finalization_replacements = apply_simulated_final_values_to_export_text(content, confirmed_values)
+        export_image_report["formal_readiness"]["export_confirmation_replacements"] += finalization_replacements
         chunks.append(_section_markdown_heading(int(section.get("level") or 1), title))
         if content:
             chunks.append(f"{content}\n\n" if content.endswith("\n") else f"{content}\n\n")
@@ -1121,6 +1237,9 @@ def build_project_bid_markdown(
                 asset_id = str(asset.get("id") or image_ref)
                 if asset_id in used_asset_ids:
                     continue
+                display_key = f"display::{_asset_meta_value(asset, 'evidence_type')}::{formal_asset_title(asset, '企业证明材料')}"
+                if display_key in used_asset_ids:
+                    continue
                 if _asset_meta_value(asset, "evidence_type") != "project_performance":
                     continue
                 score = 20
@@ -1137,8 +1256,12 @@ def build_project_bid_markdown(
                 for score, asset in project_assets[: min(missing_project_performance, remaining)]:
                     image_ref = _asset_image_ref(asset)
                     asset_id = str(asset.get("id") or image_ref)
+                    display_key = f"display::{_asset_meta_value(asset, 'evidence_type')}::{formal_asset_title(asset, '企业证明材料')}"
+                    if asset_id in used_asset_ids or display_key in used_asset_ids:
+                        continue
                     used_asset_ids.add(asset_id)
-                    alt = re.sub(r"[\[\]\(\)]", "", str(asset.get("title") or "同类项目业绩证明")).strip()
+                    alt = re.sub(r"[\[\]\(\)]", "", formal_asset_title(asset, "同类项目业绩证明")).strip()
+                    used_asset_ids.add(display_key)
                     match_reason = "正式投标文件业绩证明最低配图要求"
                     caption = _asset_caption(asset, match_reason)
                     chunks.append(f"\n\n![{alt}]({image_ref})\n\n{caption}\n\n")
@@ -1159,6 +1282,7 @@ def build_project_bid_markdown(
                         "reason": match_reason,
                         "image_ref": image_ref,
                         "caption": caption,
+                        "caption_policy": "formal_material_caption" if caption else caption_policy(asset),
                         "sensitive": bool(asset.get("is_sensitive")),
                         "anonymized": bool(asset.get("anonymized")),
                     })
@@ -1170,7 +1294,7 @@ def build_project_bid_markdown(
             and item.get("evidence_type") == "testing_capacity"
         )
         remaining = DOCX_TOTAL_ASSET_IMAGE_LIMIT - len(export_image_report["manifest"])
-        if supplement_testing_count < 1 and remaining > 0:
+        if volume_type != "business" and supplement_testing_count < 1 and remaining > 0:
             testing_assets: list[tuple[int, dict]] = []
             for asset in image_assets:
                 image_ref = _asset_image_ref(asset)
@@ -1178,6 +1302,9 @@ def build_project_bid_markdown(
                     continue
                 asset_id = str(asset.get("id") or image_ref)
                 if asset_id in used_asset_ids:
+                    continue
+                display_key = f"display::{_asset_meta_value(asset, 'evidence_type')}::{formal_asset_title(asset, '企业证明材料')}"
+                if display_key in used_asset_ids:
                     continue
                 if _asset_meta_value(asset, "evidence_type") != "testing_capacity":
                     continue
@@ -1195,8 +1322,12 @@ def build_project_bid_markdown(
                 for score, asset in testing_assets[:1]:
                     image_ref = _asset_image_ref(asset)
                     asset_id = str(asset.get("id") or image_ref)
+                    display_key = f"display::{_asset_meta_value(asset, 'evidence_type')}::{formal_asset_title(asset, '企业证明材料')}"
+                    if asset_id in used_asset_ids or display_key in used_asset_ids:
+                        continue
                     used_asset_ids.add(asset_id)
-                    alt = re.sub(r"[\[\]\(\)]", "", str(asset.get("title") or "试验检测能力证明")).strip()
+                    alt = re.sub(r"[\[\]\(\)]", "", formal_asset_title(asset, "试验检测能力证明")).strip()
+                    used_asset_ids.add(display_key)
                     match_reason = "正式投标文件试验检测能力最低配图要求"
                     caption = _asset_caption(asset, match_reason)
                     chunks.append(f"\n\n![{alt}]({image_ref})\n\n{caption}\n\n")
@@ -1217,11 +1348,18 @@ def build_project_bid_markdown(
                         "reason": match_reason,
                         "image_ref": image_ref,
                         "caption": caption,
+                        "caption_policy": "formal_material_caption" if caption else caption_policy(asset),
                         "sensitive": bool(asset.get("is_sensitive")),
                         "anonymized": bool(asset.get("anonymized")),
                     })
 
-    markdown_path.write_text("".join(chunks), encoding="utf-8")
+    markdown_text = "".join(chunks)
+    final_placeholder_count = count_formal_placeholders([markdown_text])
+    export_image_report["formal_readiness"]["final_placeholder_count"] = final_placeholder_count
+    export_image_report["formal_readiness"]["ready"] = (
+        empty_section_count == 0 and final_placeholder_count == 0 and not missing_required
+    )
+    markdown_path.write_text(markdown_text, encoding="utf-8")
     export_image_report["selected"] = len(export_image_report["manifest"])
     if with_images and image_assets and export_image_report["selected"] >= DOCX_TOTAL_ASSET_IMAGE_LIMIT:
         export_image_report["warnings"].append(f"已达到整份文档自动插图上限 {DOCX_TOTAL_ASSET_IMAGE_LIMIT} 张。")
