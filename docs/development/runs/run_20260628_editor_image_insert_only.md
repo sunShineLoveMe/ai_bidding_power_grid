@@ -69,3 +69,38 @@
 - `npm run build`：通过；仅保留既有 Vite chunk 体积和混合 import 警告。
 - `.venv/bin/python -m pytest tests/test_docx_export.py::DocxExportRegressionTest::test_formal_asset_title_removes_empty_brackets tests/test_docx_export.py::DocxExportRegressionTest::test_plain_paragraph_after_image_prefix_is_not_caption tests/test_docx_export.py::DocxExportRegressionTest::test_manual_asset_image_survives_formal_export_image_cleanup -q`：`3 passed, 1 warning`。
 - `python3 -m py_compile backend/services/formal_asset_naming.py backend/export/md_to_word.py backend/api/routes.py`：通过。
+
+## 2026-06-28 滚动容器与本地上传语义复查
+
+### 问题
+
+- 入口新增 AntD `App` provider 后，`.ant-app` 根容器未继承 `#root` 高度，被编辑器内容撑到 4330px，导致左侧章节目录和正文编辑区内部滚动容器失效。
+- 本地上传图片的产品语义不够明确，用户无法判断图片是仅用于当前标书，还是进入企业图片数字资产库后续复用。
+
+### 修复
+
+- 给 AntD 根容器补充 `app-root` 类，并设置 `height: 100%`、`min-height: 0`，恢复编辑器内部 grid/flex 滚动边界。
+- 本地上传按钮确认文案从“上传并插入”改为“保存到资产库并插入”。
+- 上传区域新增说明：本地图片会保存到当前选择的产品库或资信库，作为企业图片资产后续复用，并同时插入当前章节正文。
+
+### 真实回归
+
+- 服务：使用用户已启动的本地 `5173` 前端和 `3012` 后端。
+- 页面：`http://127.0.0.1:5173/bid-editor?projectId=5d064d0a-29ba-41bb-ab07-9d51e6c9e084`。
+- 修复前 Playwright 尺寸采集：
+  - `#root` 高度 `874px`，`scrollHeight=4330`。
+  - `.ant-app` 高度 `4330px`。
+  - `.chapter-tree` 高度 `4076px`，`scrollHeight=4076`，无法形成内部滚动。
+  - `.tiptap-page-scroll` 高度 `4114px`，`scrollHeight=4114`，无法形成内部滚动。
+- 修复后 Playwright 尺寸采集：
+  - `#root` 高度 `874px`，`scrollHeight=874`。
+  - `.ant-app` 高度 `874px`。
+  - `.chapter-tree` 高度 `620px`，`scrollHeight=4076`，`overflowY=auto`。
+  - `.tiptap-page-scroll` 高度 `658px`，`scrollHeight=1044`，`overflowY=auto`。
+- 真实滚动验证：
+  - 设置 `.chapter-tree.scrollTop=360` 后保持为 `360`，可滚动。
+  - 设置 `.tiptap-page-scroll.scrollTop=320` 后保持为 `320`，可滚动。
+- 本地图片上传语义验证：
+  - 选择本地图片后，底部主按钮显示“保存到资产库并插入”。
+  - 图片标题自动清洗为中文标题。
+  - 弹窗显示“作为企业图片资产后续复用”的说明。

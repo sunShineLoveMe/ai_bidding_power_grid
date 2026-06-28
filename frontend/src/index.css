@@ -8,6 +8,11 @@ body,
   height: 100%;
 }
 
+.app-root {
+  height: 100%;
+  min-height: 0;
+}
+
 body {
   margin: 0;
   min-width: 1280px;
@@ -1893,6 +1898,15 @@ textarea {
   border-radius: 8px;
   background: #f8fafc;
   padding: 12px;
+}
+
+.editor-image-upload-note {
+  grid-column: 1 / -1;
+  margin: -2px 0 0;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
 }
 
 .editor-image-title-field {

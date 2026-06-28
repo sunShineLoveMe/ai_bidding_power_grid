@@ -31,7 +31,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         },
       }}
     >
-      <AntdApp>
+      <AntdApp className="app-root">
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
             <App />

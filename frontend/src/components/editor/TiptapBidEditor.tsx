@@ -816,7 +816,7 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
         title="插入标书图片"
         open={imageModalOpen}
         width={920}
-        okText={imageUploadFile ? '上传并插入' : '插入选中图片'}
+        okText={imageUploadFile ? '保存到资产库并插入' : '插入选中图片'}
         cancelText="关闭"
         okButtonProps={{ loading: imageUploading, disabled: !imageUploadFile && !selectedImageAsset }}
         onOk={() => void confirmImageInsert()}
@@ -855,6 +855,9 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
                 maxLength={80}
               />
             </div>
+            <p className="editor-image-upload-note">
+              本地图片会保存到当前选择的产品库或资信库，作为企业图片资产后续复用，并同时插入当前章节正文。
+            </p>
           </div>
           <div className="editor-image-library">
             <div className="editor-image-library-title">

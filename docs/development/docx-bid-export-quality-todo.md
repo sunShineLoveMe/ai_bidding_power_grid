@@ -1,6 +1,6 @@
 # 标书文档编写与正式导出质量待办清单
 
-更新日期：2026-06-27
+更新日期：2026-06-28
 
 > 项目级优先级以 `docs/development/master-todo.md` 为准。本文档保留 DOCX 正式导出专项详情、验收口径和历史验证记录。
 
@@ -21,6 +21,7 @@
 - 真实验证必须走项目导出链路：`build_project_bid_markdown` -> `convert_md_to_word` -> `refresh_docx_fields_with_soffice`，不得只用 mock 替代。
 - 2026-06-27 阿里云新疆 10kV 真实浏览器验收发现：客户真实长项目名会导致技术标 DOCX 导出任务因 `[Errno 36] File name too long` 失败；已将物理输出目录和文件名短名化。
 - 2026-06-27 本地辽宁 CPVC 包 1 完整真实回归已产出完整 DOCX，但 formal gate 判定为 `draft`：正式必填缺口 `16`、高风险缺口 `48`、正文残留 `待补充/需人工复核`，且封面包号未读取已确认值。记录见 `docs/development/runs/run_20260627_local_liaoning_full_e2e.md`。
+- 2026-06-28 在线编辑器图片插入专项继续收口：修复 AntD `App` 根容器高度导致的章节目录和正文编辑区不可滚动问题；本地上传图片明确为“保存到当前产品库/资信库，作为企业图片资产后续复用，并插入当前章节正文”。记录见 `docs/development/runs/run_20260628_editor_image_insert_only.md`。
 
 ## P0 必须完成
 
