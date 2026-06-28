@@ -224,6 +224,54 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertNotIn("资格审查资料封面及目录", markdown)
             self.assertNotIn("待补充章节正文", markdown)
 
+    def test_bid_markdown_export_uses_short_physical_path_for_long_project_name(self):
+        project_id = "580b8c82-42c2-4a51-a0d2-17b60afa22b9"
+        long_project_name = "国家电网有限公司2026年西北、西藏区域第一次联合采购10kV架空绝缘导线新疆技术标商务标超长项目名称用于回归路径长度问题"
+        with tempfile.TemporaryDirectory() as tmpdir:
+            app = Flask(__name__)
+            app.config["GENERATED_FOLDER"] = tmpdir
+            sections = [
+                {
+                    "id": "tech-1",
+                    "order_index": 1,
+                    "level": 1,
+                    "title": "技术规范响应",
+                    "content": "技术标正文。",
+                    "metadata": {"volume_type": "technical"},
+                },
+                {
+                    "id": "biz-1",
+                    "order_index": 2,
+                    "level": 1,
+                    "title": "商务响应",
+                    "content": "商务标正文。",
+                    "metadata": {"volume_type": "business"},
+                },
+            ]
+            cover_fields = {
+                "项目名称": long_project_name,
+                "招标编号": "SL265A",
+                "包号": "包1",
+                "包名称": "10kV架空绝缘导线-新疆",
+            }
+
+            with (
+                app.app_context(),
+                patch("backend.api.routes.get_project_interpretation", return_value={
+                    "project": {"id": project_id, "project_name": long_project_name},
+                    "analysis": {"project_meta": {"project_name": long_project_name, "cover_fields": cover_fields}},
+                }),
+                patch("backend.api.routes.list_bid_sections", return_value=sections),
+            ):
+                markdown_path, _, report = build_project_bid_markdown(project_id, volume_type="technical")
+
+        self.assertEqual(markdown_path.parent.name, project_id[:8])
+        self.assertLess(len(markdown_path.name), 80)
+        self.assertTrue(markdown_path.name.startswith("泰昌_SL265A_包1_技术投标文件_"))
+        self.assertNotIn(long_project_name, str(markdown_path))
+        self.assertEqual(report["download_file_name"], markdown_path.with_suffix(".docx").name)
+        self.assertEqual(report["output_naming"]["scheme"], "short_bidder_tender_package_volume_date.v1")
+
     def test_tender_metadata_extracts_cover_fields_from_uploaded_tender_text(self):
         markdown = "\n".join(
             [
@@ -745,6 +793,8 @@ class DocxExportRegressionTest(unittest.TestCase):
                         "资料：3.职业健康安全管理体系认证证书第1页",
                         "",
                         "图示：晁坤琳2原图（脱敏示意图）",
+                        "",
+                        "图示：泰昌试验设备台账原图",
                     ]
                 ),
                 encoding="utf-8",
@@ -755,9 +805,10 @@ class DocxExportRegressionTest(unittest.TestCase):
             captions = [p for p in document.paragraphs if p.text.startswith("资料：")]
 
             self.assertEqual([
-                "资料：CPVC电缆保护管检验报告首页",
-                "资料：职业健康安全管理体系认证证书首页",
+                "资料：CPVC电缆保护管检验报告",
+                "资料：职业健康安全管理体系认证证书",
                 "资料：身份证明文件",
+                "资料：试验设备台账",
             ], [p.text for p in captions])
             for caption in captions:
                 self.assertEqual(WD_ALIGN_PARAGRAPH.CENTER, caption.alignment)
@@ -766,7 +817,7 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertNotIn("图示", "\n".join(p.text for p in document.paragraphs))
             self.assertNotIn("内径250", "\n".join(p.text for p in document.paragraphs))
             self.assertNotIn("原图", "\n".join(p.text for p in document.paragraphs))
-            self.assertEqual(3, report["captions"]["formalized"])
+            self.assertEqual(4, report["captions"]["formalized"])
 
     def test_formal_bid_text_is_black_and_level_two_headings_start_new_page(self):
         with tempfile.TemporaryDirectory() as tmpdir:

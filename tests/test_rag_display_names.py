@@ -85,6 +85,7 @@ class RagDisplayNamesTest(unittest.TestCase):
         assets = sanitize_knowledge_assets([
             {
                 "title": "泰昌照片1原图",
+                "asset_type": "product_image",
                 "description": "客户已提供文件。该图片为正式整页/原图资产，不是 MinerU 局部切图。",
                 "metadata": {"source_display_name": "泰昌照片1原图"},
             },
@@ -98,6 +99,7 @@ class RagDisplayNamesTest(unittest.TestCase):
         self.assertEqual(len(assets), 1)
         self.assertNotIn("MinerU", assets[0]["description"])
         self.assertEqual(assets[0]["description"], "客户已提供文件。")
+        self.assertEqual(assets[0]["asset_type"], "产品图片")
 
 
 if __name__ == "__main__":

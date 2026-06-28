@@ -120,6 +120,7 @@ def _row_match_score(query: str, row: dict[str, Any]) -> int:
 
 
 def _content_for_row(row: dict[str, Any]) -> str:
+    source_name = Path(str(row.get("source_file") or "")).stem or "泰昌产品检验报告"
     return "\n".join(
         [
             "【泰昌产品结构化参数｜优先依据】",
@@ -133,7 +134,7 @@ def _content_for_row(row: dict[str, Any]) -> str:
             f"检验结果：{row.get('inspection_result') or '-'}",
             f"单项结论：{row.get('single_conclusion') or '-'}",
             f"报告编号：{row.get('report_no') or '-'}",
-            f"资料来源：{row.get('source_file') or '-'}",
+            f"资料来源：{source_name}",
             "边界：本参数来自泰昌原始检验报告，只能作为泰昌企业事实；辽宁资料仅可作QA/异常校验参照，不构成覆盖辽宁全部规格的结论。",
         ]
     )
@@ -182,7 +183,7 @@ def search_taichang_product_parameter_contexts(query: str, limit: int = 5) -> li
                     "fact_source_allowed_for_enterprise": True,
                     "reference_only": False,
                     "doc_type": "泰昌产品结构化参数",
-                    "source_display_name": Path(str(row.get("source_file") or "")).name or "泰昌产品检验报告",
+                    "source_display_name": Path(str(row.get("source_file") or "")).stem or "泰昌产品检验报告",
                     "category_label": "泰昌产品结构化参数",
                     "source_file": row.get("source_file"),
                     "source_section": parameter_name,

@@ -1,4 +1,4 @@
-import { Button, Descriptions, Empty, Form, Input, Modal, Select, Space, Switch, Table, Tag, Upload, message } from 'antd';
+import { Alert, Button, Descriptions, Empty, Form, Input, Modal, Select, Space, Switch, Table, Tag, Upload, message } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Box, Cpu, FileStack, Tags, UploadCloud } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
@@ -8,6 +8,15 @@ import { MetricCards } from '../../components/common/MetricCards';
 import { ModuleHeader } from '../../components/common/ModuleHeader';
 import { apiClient } from '../../api/client';
 import { displayAssetCategory, displayAssetTags, displayAssetTitle } from '../../utils/assetDisplay';
+import {
+  assetQualityLabel,
+  evidenceLabel,
+  evidenceValueFromLabel,
+  inspectUploadFile,
+  optionForEvidence,
+  productEvidenceOptions,
+  type UploadQualityPreview,
+} from '../../utils/assetUploadGuidance';
 
 interface KnowledgeAsset {
   id: string;
@@ -107,8 +116,29 @@ function isImageAsset(asset: KnowledgeAsset): boolean {
   return (asset.mime_type || '').startsWith('image/');
 }
 
+function metadataText(asset: KnowledgeAsset, key: string): string {
+  const value = asset.metadata?.[key] ?? asset.specs?.[key];
+  return typeof value === 'string' ? value : '';
+}
+
+function metadataList(asset: KnowledgeAsset, key: string): string[] {
+  const value = asset.metadata?.[key] ?? asset.specs?.[key];
+  if (Array.isArray(value)) return value.map(item => String(item)).filter(Boolean);
+  if (typeof value === 'string' && value.trim()) return [value.trim()];
+  return [];
+}
+
+function assetQuality(asset: KnowledgeAsset) {
+  return assetQualityLabel(metadataText(asset, 'quality_tier'));
+}
+
+function assetEvidenceType(asset: KnowledgeAsset): string {
+  return metadataText(asset, 'evidence_type') || evidenceValueFromLabel(displayAssetCategory(asset)) || 'product_image';
+}
+
 export function ProductBasePage(): JSX.Element {
   const [form] = Form.useForm();
+  const selectedEvidenceType = Form.useWatch('evidence_type', form);
   const [activeCategory, setActiveCategory] = useState('全部产品');
   const [assets, setAssets] = useState<KnowledgeAsset[]>([]);
   const [stats, setStats] = useState<KnowledgeAssetStats | null>(null);
@@ -116,6 +146,7 @@ export function ProductBasePage(): JSX.Element {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [assetFile, setAssetFile] = useState<File | null>(null);
+  const [uploadReview, setUploadReview] = useState<UploadQualityPreview | null>(null);
   const [formOpen, setFormOpen] = useState(false);
   const [editingAsset, setEditingAsset] = useState<KnowledgeAsset | null>(null);
   const [detail, setDetail] = useState<KnowledgeAsset | null>(null);
@@ -156,6 +187,22 @@ export function ProductBasePage(): JSX.Element {
     fetchAssets(1, pagination.pageSize, activeCategory);
   }, [activeCategory]);
 
+  useEffect(() => {
+    let cancelled = false;
+    if (!assetFile) {
+      setUploadReview(null);
+      return () => {
+        cancelled = true;
+      };
+    }
+    inspectUploadFile(assetFile, selectedEvidenceType).then(result => {
+      if (!cancelled) setUploadReview(result);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [assetFile, selectedEvidenceType]);
+
   const categories = useMemo(() => {
     const counts = stats?.category_counts || {};
     const ordered = [
@@ -173,10 +220,12 @@ export function ProductBasePage(): JSX.Element {
   const materialCount = stats?.total || pagination.total;
   const customerAssetCount = stats?.customer_asset_count || 0;
   const metricValue = (value: number) => (loading && pagination.total === 0 ? '...' : value);
+  const selectedEvidenceOption = optionForEvidence(selectedEvidenceType);
 
   const columns: ColumnsType<KnowledgeAsset> = [
     { title: '资料名称', dataIndex: 'title', ellipsis: true, render: (_, record) => displayAssetTitle(record) },
     { title: '类型', dataIndex: 'category', width: 150, render: (_, record) => <Tag color="blue">{displayAssetCategory(record) || '产品资料'}</Tag> },
+    { title: '使用范围', width: 130, render: (_, record) => <Tag color={assetQuality(record).color}>{assetQuality(record).label}</Tag> },
     { title: '版本', width: 90, render: (_, record) => versionLabel(record) },
     { title: '适用场景', width: 180, ellipsis: true, render: (_, record) => scenario(record) },
     {
@@ -206,16 +255,19 @@ export function ProductBasePage(): JSX.Element {
   const openCreateForm = () => {
     setEditingAsset(null);
     form.resetFields();
+    form.setFieldsValue({ evidence_type: 'product_image', applicable_volumes: ['technical'], allowed_for_bid: true });
     setAssetFile(null);
+    setUploadReview(null);
     setFormOpen(true);
   };
 
   const openEditForm = (asset: KnowledgeAsset) => {
     setEditingAsset(asset);
     setAssetFile(null);
+    setUploadReview(null);
     form.setFieldsValue({
       title: asset.title,
-      category: displayAssetCategory(asset),
+      evidence_type: assetEvidenceType(asset),
       description: asset.description,
       product_model: asset.specs?.product_model,
       applicable_volumes: applicableVolumes(asset).length ? applicableVolumes(asset) : ['technical'],
@@ -242,7 +294,8 @@ export function ProductBasePage(): JSX.Element {
       formData.append('library_type', 'product');
       formData.append('asset_type', 'product_image');
       formData.append('title', values.title);
-      formData.append('category', values.category);
+      formData.append('evidence_type', values.evidence_type);
+      formData.append('category', evidenceLabel(values.evidence_type) || '产品资料');
       formData.append('description', values.description || '');
       formData.append('product_model', values.product_model || '');
       formData.append('applicable_volumes', JSON.stringify(values.applicable_volumes || ['technical']));
@@ -260,6 +313,7 @@ export function ProductBasePage(): JSX.Element {
       message.success(editingAsset ? '产品资料已更新并刷新检索信息' : '产品资料已保存并接入检索');
       form.resetFields();
       setAssetFile(null);
+      setUploadReview(null);
       setEditingAsset(null);
       setFormOpen(false);
       await fetchAssets();
@@ -338,6 +392,7 @@ export function ProductBasePage(): JSX.Element {
           setFormOpen(false);
           setEditingAsset(null);
           setAssetFile(null);
+          setUploadReview(null);
         }}
         width={920}
         destroyOnHidden={false}
@@ -346,6 +401,7 @@ export function ProductBasePage(): JSX.Element {
             setFormOpen(false);
             setEditingAsset(null);
             setAssetFile(null);
+            setUploadReview(null);
           }}>取消</Button>,
           <Button key="save" type="primary" loading={saving} onClick={saveProductAsset}>{editingAsset ? '保存修改' : '保存并接入检索'}</Button>,
         ]}
@@ -369,6 +425,7 @@ export function ProductBasePage(): JSX.Element {
               <Descriptions size="small" column={1}>
                 <Descriptions.Item label="当前资料">{displayAssetTitle(editingAsset)}</Descriptions.Item>
                 <Descriptions.Item label="当前分类">{displayAssetCategory(editingAsset)}</Descriptions.Item>
+                <Descriptions.Item label="使用范围"><Tag color={assetQuality(editingAsset).color}>{assetQuality(editingAsset).label}</Tag></Descriptions.Item>
                 <Descriptions.Item label="原始文件">{editingAsset.file_name || '-'}</Descriptions.Item>
                 <Descriptions.Item label="替换说明">如需替换，请选择新的图片或附件；不选择文件时仅更新名称、分类和标签。</Descriptions.Item>
               </Descriptions>
@@ -378,13 +435,22 @@ export function ProductBasePage(): JSX.Element {
             <Form.Item label="资料名称" name="title" rules={[{ required: true, message: '请输入资料名称' }]}>
               <Input placeholder="例如：CPVC电缆保护管检验报告（第1页）" />
             </Form.Item>
-            <Form.Item label="资料分类" name="category" rules={[{ required: true, message: '请选择资料分类' }]}>
-              <Select options={categories.slice(1).map(item => ({ label: item.name, value: item.name }))} placeholder="选择类型" />
+            <Form.Item label="资料类型" name="evidence_type" rules={[{ required: true, message: '请选择资料类型' }]}>
+              <Select options={productEvidenceOptions.map(item => ({ label: item.label, value: item.value }))} placeholder="选择资料类型" />
             </Form.Item>
             <Form.Item label="规格型号" name="product_model">
               <Input placeholder="例如：DN800、Q235B、定制加工件" />
             </Form.Item>
           </div>
+            {selectedEvidenceOption ? (
+              <Alert
+                className="mb-4"
+                type={selectedEvidenceOption.warning ? 'warning' : 'info'}
+                showIcon
+                message={`${selectedEvidenceOption.label}：推荐 ${selectedEvidenceOption.recommendedFormats}`}
+                description={selectedEvidenceOption.warning ? `${selectedEvidenceOption.guidance} ${selectedEvidenceOption.warning}` : selectedEvidenceOption.guidance}
+              />
+            ) : null}
             <Form.Item label="适用分册" name="applicable_volumes" initialValue={['technical']} rules={[{ required: true, message: '请选择至少一个适用分册' }]}>
               <Select mode="multiple" options={volumeOptions} placeholder="用于控制 RAG 召回和自动插图范围" />
             </Form.Item>
@@ -405,12 +471,24 @@ export function ProductBasePage(): JSX.Element {
                   setAssetFile(file);
                   return false;
                 }}
-                onRemove={() => setAssetFile(null)}
-                accept="image/*,.pdf,.doc,.docx"
+                onRemove={() => {
+                  setAssetFile(null);
+                  setUploadReview(null);
+                }}
+                accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.csv"
               >
                 <Button icon={<UploadCloud size={16} />}>{editingAsset ? '替换产品图片或附件' : '选择产品图片或附件'}</Button>
               </Upload>
             </Form.Item>
+            {uploadReview ? (
+              <Alert
+                className="mb-4"
+                type={uploadReview.tier === 'formal_bid_ready' ? 'success' : uploadReview.tier === 'knowledge_only' ? 'info' : 'warning'}
+                showIcon
+                message={`资料预检：${uploadReview.label}`}
+                description={uploadReview.notes.join('；')}
+              />
+            ) : null}
             <Form.Item label="允许自动插入标书" name="allowed_for_bid" valuePropName="checked" initialValue>
               <Switch checkedChildren="允许" unCheckedChildren="仅检索" />
             </Form.Item>
@@ -445,6 +523,8 @@ export function ProductBasePage(): JSX.Element {
             <Descriptions size="small" bordered column={1}>
               <Descriptions.Item label="资料名称">{displayAssetTitle(detail)}</Descriptions.Item>
               <Descriptions.Item label="资料分类">{displayAssetCategory(detail) || '-'}</Descriptions.Item>
+              <Descriptions.Item label="使用范围"><Tag color={assetQuality(detail).color}>{assetQuality(detail).label}</Tag></Descriptions.Item>
+              <Descriptions.Item label="质量提示">{metadataList(detail, 'quality_notes').join('；') || '-'}</Descriptions.Item>
               <Descriptions.Item label="适用场景">{scenario(detail)}</Descriptions.Item>
               <Descriptions.Item label="适用分册">{applicableVolumes(detail).map(value => volumeLabelMap[value] || value).join('、') || '-'}</Descriptions.Item>
               <Descriptions.Item label="能力标签">{displayAssetTags(detail, 8).join('、') || '-'}</Descriptions.Item>

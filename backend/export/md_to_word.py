@@ -22,6 +22,7 @@ from datetime import datetime
 from urllib.parse import parse_qs, urlparse, unquote
 from zipfile import BadZipFile, ZipFile, ZIP_DEFLATED
 import xml.etree.ElementTree as ET
+from backend.services.formal_asset_naming import clean_formal_asset_title, formalize_legacy_image_caption
 
 try:
     from PIL import Image, ImageOps
@@ -299,6 +300,20 @@ def clean_formal_bid_text(text):
     if text is None:
         return ""
     cleaned = FORMAL_BID_GENERATION_NOTE_RE.sub("", str(text))
+    cleaned = re.sub(r"(?m)^\s*\[?\s*建议插入图片[：:][^\n]*(?:\]|\n|$)", "", cleaned)
+    cleaned = re.sub(r"(?m)^\s*[（(]\s*此处插入[^）)\n]*(?:[）)]|\n|$)", "", cleaned)
+    cleaned = re.sub(r"(?m)^\s*[（(]\s*本章节附图为[：:][^）)\n]*(?:[）)]|\n|$)", "", cleaned)
+    cleaned = re.sub(r"泰昌\s*\d+[.．]\s*MPP生产线[_\-\s]*(?:页面|页码|page)[_\-\s]*\d+(?:[/、，,]\s*\d+)*(?:原图)?", "MPP生产线资料", cleaned, flags=re.I)
+    cleaned = re.sub(r"泰昌试验设备台账原图", "试验设备台账", cleaned)
+    cleaned = re.sub(r"泰昌绿色发展规划报告第\s*\d+\s*(?:页|–|-|至)\s*第?\s*\d*\s*页?", "绿色发展规划报告", cleaned)
+    cleaned = re.sub(r"泰昌绿色电力认证证书第\s*\d+\s*页", "绿色电力认证证书", cleaned)
+    cleaned = re.sub(r"泰昌\d+[.．]\s*职业健康安全管理体系认证证书第\s*\d+\s*页", "职业健康安全管理体系认证证书", cleaned)
+    cleaned = re.sub(r"泰昌\d+[.．]\s*质量管理体系认证证书第\s*\d+\s*页", "质量管理体系认证证书", cleaned)
+    cleaned = re.sub(r"泰昌\d+[.．]\s*环境管理体系认证证书第\s*\d+\s*页", "环境管理体系认证证书", cleaned)
+    cleaned = re.sub(r"源自《[^》]*(?:页面|原图|\.jpg|\.png)[^》]*》", "源自客户原始资料", cleaned, flags=re.I)
+    cleaned = re.sub(r"(?:页面|页码|page)[_\-\s]*\d+", "", cleaned, flags=re.I)
+    cleaned = re.sub(r"原图", "", cleaned)
+    cleaned = re.sub(r"第\s*\d+\s*页\s*(?:至|到|[-–])\s*第?\s*\d+\s*页", "相关章节", cleaned)
     cleaned = FORMAL_TEXT_CONTROL_RE.sub("", cleaned)
     cleaned = FORMAL_TEXT_SYMBOL_RE.sub("", cleaned)
     cleaned = re.sub(r"(?<=[\u4e00-\u9fff])[ \t]+(?=[\u4e00-\u9fff])", "", cleaned)
@@ -335,6 +350,8 @@ def apply_run_font(run, *, east_asia=DOCX_BODY_EAST_ASIA, latin=DOCX_BODY_LATIN,
         run.font.size = Pt(size)
     if bold is not None:
         run.font.bold = bold
+    run.font.italic = False
+    run.font.underline = False
     run.font.color.rgb = RGBColor(0, 0, 0)
 
 
@@ -759,27 +776,7 @@ def apply_image_paragraph_format(paragraph):
 
 def _formal_image_caption_text(text: str) -> str | None:
     value = clean_formal_bid_text(re.sub(r"\*\*(.*?)\*\*", r"\1", text or "")).strip()
-    match = re.match(r"^(?:图示|图片|资料|图\s*\d+(?:[.\-—]\d+)*)\s*[：:、.\s]*(.+)$", value)
-    if not match:
-        return None
-
-    caption = match.group(1).strip()
-    caption = re.sub(r"^(?:河北)?泰昌(?:电力器材科技有限公司)?", "", caption).strip()
-    caption = caption.replace("河北泰昌电力器材科技有限公司", "").replace("泰昌", "")
-    caption = re.sub(r"^\d+(?:\.\d+)*[、.．]\s*", "", caption)
-    caption = re.sub(r"(?:内径|外径|壁厚|环刚度|管径)\s*[：:]?\s*[φΦ]?\s*\d+(?:\.\d+)?(?:\s*(?:mm|毫米|MPa|kN/m2|kN/m²))?", "", caption)
-    if "身份证" in caption or "脱敏" in caption or "原图" in caption:
-        caption = "身份证明文件"
-    caption = re.sub(r"[（(]\s*脱敏示意图\s*[）)]", "", caption)
-    caption = caption.replace("原图", "")
-    caption = re.sub(r"第\s*1\s*页", "首页", caption)
-    caption = re.sub(r"\s+", "", caption)
-    caption = re.sub(r"[，,。；;：:\-_\s]+$", "", caption)
-    if not caption:
-        return None
-    if caption.startswith("资料："):
-        return caption
-    return f"资料：{caption}"
+    return formalize_legacy_image_caption(value)
 
 
 def _add_formal_image_caption(doc, caption_text: str) -> None:
@@ -1769,7 +1766,7 @@ def process_markdown_image(doc, alt_text, image_ref, image_cache=None, image_rep
     prepared_cleanup = False
     frame_path = None
     frame_cleanup = False
-    clean_alt = clean_formal_bid_text(alt_text) or "未命名图片"
+    clean_alt = clean_formal_asset_title(clean_formal_bid_text(alt_text), "未命名图片")
     try:
         image_path, cleanup = _resolve_markdown_image(image_ref, image_cache=image_cache)
         if not image_path:
@@ -1850,6 +1847,8 @@ def set_document_styles(doc):
         style._element.rPr.rFonts.set(qn('w:cs'), east_asia)
         style.font.size = Pt(size)
         style.font.bold = bold
+        style.font.italic = False
+        style.font.underline = False
         style.font.color.rgb = RGBColor(0, 0, 0)
         apply_body_line_spacing(style.paragraph_format)
         style.paragraph_format.first_line_indent = Pt(0)

@@ -1,0 +1,293 @@
+{
+  "run_id": "run_20260627_taichang_formal_asset_repair_description_page_marker",
+  "dry_run": false,
+  "rewrite_title": true,
+  "generated_at": "2026-06-27T08:59:45.674205+00:00",
+  "assets_scanned": 599,
+  "assets_changed": 28,
+  "titles_rewritten": 0,
+  "formal_bid_excluded": 0,
+  "caption_suppressed": 15,
+  "samples": [
+    {
+      "id": "71332414-3fe1-4c72-b8d6-1cb3d84a5390",
+      "old_title": "CPVC电缆保护管检验报告",
+      "new_title": "CPVC电缆保护管检验报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "检验报告",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "5c3734ad-4311-45e9-83a8-e9dc079eac3f",
+      "old_title": "CPVC电缆保护管检验报告",
+      "new_title": "CPVC电缆保护管检验报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "检验报告",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "b79c421d-1941-489f-b499-da5fb63f6835",
+      "old_title": "CPVC电缆保护管检验报告",
+      "new_title": "CPVC电缆保护管检验报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "检验报告",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "e958d531-b6b0-4e5a-8151-e8be3a334d32",
+      "old_title": "MPP电缆保护管检验报告",
+      "new_title": "MPP电缆保护管检验报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "检验报告",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "ad8f8290-484a-468e-ba67-806e12188f8c",
+      "old_title": "MPP电缆保护管检验报告",
+      "new_title": "MPP电缆保护管检验报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "检验报告",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "764cb3a2-58c5-4fc3-8909-ff6016a8bb90",
+      "old_title": "MPP电缆保护管检验报告",
+      "new_title": "MPP电缆保护管检验报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "检验报告",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "e82aabed-6dd3-4520-83fd-a797196a1489",
+      "old_title": "MPP生产线",
+      "new_title": "MPP生产线",
+      "formal_caption": "资料：MPP生产线",
+      "caption_policy": "formal_material_caption",
+      "category": "生产制造能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "c4713ddc-517a-4aae-b009-6be16c64e47f",
+      "old_title": "MPP生产线",
+      "new_title": "MPP生产线",
+      "formal_caption": "资料：MPP生产线",
+      "caption_policy": "formal_material_caption",
+      "category": "生产制造能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "f0d8a934-f195-49f9-94ac-5c7ca02f93df",
+      "old_title": "MPP生产线",
+      "new_title": "MPP生产线",
+      "formal_caption": "资料：MPP生产线",
+      "caption_policy": "formal_material_caption",
+      "category": "生产制造能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "c51da46b-7aa8-4284-9c97-7d4ef175c138",
+      "old_title": "MPP生产线",
+      "new_title": "MPP生产线",
+      "formal_caption": "资料：MPP生产线",
+      "caption_policy": "formal_material_caption",
+      "category": "生产制造能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "605c9275-948b-4434-97a1-a87d7eb36ccf",
+      "old_title": "微机控制电子万能试验机",
+      "new_title": "微机控制电子万能试验机",
+      "formal_caption": "资料：微机控制电子万能试验机",
+      "caption_policy": "formal_material_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "86142311-77f5-4b71-b1a9-0d73a560f8bf",
+      "old_title": "微机控制电子万能试验机",
+      "new_title": "微机控制电子万能试验机",
+      "formal_caption": "资料：微机控制电子万能试验机",
+      "caption_policy": "formal_material_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "a4fa9579-96bf-4af1-91af-148bb371f192",
+      "old_title": "热变型、维卡软化点温度测定仪",
+      "new_title": "热变型、维卡软化点温度测定仪",
+      "formal_caption": "资料：热变型、维卡软化点温度测定仪",
+      "caption_policy": "formal_material_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "086ceb2e-8297-4108-81d9-acd63ac5f291",
+      "old_title": "电子天平",
+      "new_title": "电子天平",
+      "formal_caption": "资料：电子天平",
+      "caption_policy": "formal_material_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "a69635cd-941d-4915-bb84-def6e611b7f4",
+      "old_title": "电子天平",
+      "new_title": "电子天平",
+      "formal_caption": "资料：电子天平",
+      "caption_policy": "formal_material_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "3c393845-ba50-40f0-8a8b-5ea058f5d412",
+      "old_title": "锤击试验装置",
+      "new_title": "锤击试验装置",
+      "formal_caption": "资料：锤击试验装置",
+      "caption_policy": "formal_material_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "845fc19b-39fa-414e-a08c-bbd99b7ce56d",
+      "old_title": "锤击试验装置",
+      "new_title": "锤击试验装置",
+      "formal_caption": "资料：锤击试验装置",
+      "caption_policy": "formal_material_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "ef7ac2f1-1a39-4b3b-8a50-ef76b7d022f3",
+      "old_title": "溶体流动速率仪",
+      "new_title": "溶体流动速率仪",
+      "formal_caption": "资料：溶体流动速率仪",
+      "caption_policy": "formal_material_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "0ca750ca-2e8a-46c1-94f7-7a7d4d343677",
+      "old_title": "电子拉力试验机",
+      "new_title": "电子拉力试验机",
+      "formal_caption": "资料：电子拉力试验机",
+      "caption_policy": "formal_material_caption",
+      "category": "试验检测能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "50244478-9c95-4ddc-9b1f-c3172068b421",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "62b16b89-d960-456e-a373-beee85b5e367",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "f1282d76-85a9-44ea-a73f-f23957277785",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "98d970a8-ea30-4d21-a910-79602499247c",
+      "old_title": "2024年审计报告",
+      "new_title": "2024年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "953ec5cf-5259-4c77-af0f-8f00d6f73017",
+      "old_title": "2024年审计报告",
+      "new_title": "2024年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "b2b3d468-1f59-421e-9c69-e01954984841",
+      "old_title": "2024年审计报告",
+      "new_title": "2024年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "d623c1ae-4919-42ac-a3b3-939b6535239a",
+      "old_title": "2025年审计报告",
+      "new_title": "2025年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "de3a1f21-92db-47fd-9733-f00476262388",
+      "old_title": "2025年审计报告",
+      "new_title": "2025年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "dbdf76ea-8923-40d2-a05d-12f51690933a",
+      "old_title": "2025年审计报告",
+      "new_title": "2025年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    }
+  ]
+}

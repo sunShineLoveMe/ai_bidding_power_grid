@@ -1,0 +1,90 @@
+{
+  "run_id": "run_20260627_upload_entry_formal_asset_regression",
+  "date": "2026-06-27",
+  "status": "PASS",
+  "scope": "产品库/资信库上传入口新资产正式中文展示规则回归",
+  "code_changes": [
+    "backend/api/assets.py: 上传/更新资产入库前推断 evidence_type，生成正式中文 title/category/tags/description/source_display_name/formal_caption，并从 searchable_text 排除内部枚举字段",
+    "backend/rag/display_names.py: 补充证据类型中文标签，并把用户侧 asset_type 的 product_image/qualification_image 映射为中文",
+    "tests/test_knowledge_asset_upload_payload.py: 覆盖产品库生产线上传和资信库基础证照上传 payload 清洗"
+  ],
+  "real_api_validation": {
+    "login": {
+      "endpoint": "POST /api/users/login",
+      "username": "admin",
+      "result": "PASS"
+    },
+    "upload": {
+      "endpoint": "POST /api/knowledge/assets/upload",
+      "sample_file": "/tmp/泰昌MPP生产线_页面_9原图.png",
+      "uploaded_asset_id": "b522d9fb-5011-43e7-840f-f9b85710b14e",
+      "returned_title": "泰昌MPP生产线资料",
+      "returned_category": "生产制造能力",
+      "returned_tags": [
+        "泰昌",
+        "生产制造能力"
+      ],
+      "metadata": {
+        "source_display_name": "泰昌MPP生产线资料",
+        "source_document_name": "MPP生产线资料",
+        "evidence_type": "production_capacity",
+        "evidence_type_label": "生产制造能力",
+        "target_library_label": "产品库资料",
+        "caption_policy": "formal_material_caption",
+        "formal_caption": "资料：MPP生产线资料",
+        "asset_visual_type": "customer_original_image",
+        "ui_name_policy": "domestic_chinese_friendly",
+        "display_language": "zh-CN"
+      },
+      "visible_forbidden_hits": []
+    },
+    "detail_and_list": {
+      "endpoints": [
+        "GET /api/knowledge/assets/<asset_id>",
+        "GET /api/knowledge/assets?library_type=product&page=1&page_size=5"
+      ],
+      "result": "PASS",
+      "visible_forbidden_hits": []
+    },
+    "stream": {
+      "endpoint": "POST /api/knowledge/search/stream",
+      "query": "泰昌MPP生产线资料可以作为技术标生产制造能力配图吗？请说明可引用资料。",
+      "retrieved_contexts": 4,
+      "retrieved_assets": 4,
+      "retrieved_images": 4,
+      "new_asset_retrieved": true,
+      "asset_types_returned": [
+        "产品图片"
+      ],
+      "sse_forbidden_hits_without_allowed_asset_urls": [],
+      "answer_forbidden_hits": []
+    },
+    "cleanup": {
+      "database_asset_deleted": true,
+      "deleted_rows": 1,
+      "detail_after_cleanup": "知识资产不存在",
+      "storage_cleanup": "本地 LocalStorageBucket 无 remove 接口，孤立对象不再有 DB 索引，不参与 RAG 或标书选图"
+    }
+  },
+  "tests": {
+    "pytest": "tests/test_knowledge_asset_upload_payload.py tests/test_rag_display_names.py tests/test_rag_retrieval.py",
+    "result": "40 passed, 1 warning",
+    "py_compile": "backend/api/assets.py backend/rag/display_names.py PASS"
+  },
+  "incremental_gate": {
+    "summary": "docs/rag/runs/run_20260627_upload_entry_formal_asset_gate_summary.md",
+    "status": "PASS",
+    "base_qwen3": {
+      "recall_at_5": "96.7%",
+      "top1_accuracy": "100.0%",
+      "forbidden_keyword_rate": "0.0%",
+      "cross_doc_role_interference": "0.0%"
+    },
+    "customer_qwen3": {
+      "recall_at_5": "100.0%",
+      "top1_accuracy": "100.0%",
+      "forbidden_keyword_rate": "0.0%",
+      "cross_doc_role_interference": "0.0%"
+    }
+  }
+}

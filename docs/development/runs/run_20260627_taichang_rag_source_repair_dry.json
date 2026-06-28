@@ -1,0 +1,272 @@
+{
+  "run_id": "run_20260627_taichang_rag_source_repair_dry",
+  "dry_run": true,
+  "generated_at": "2026-06-27T09:03:56.815889+00:00",
+  "documents_scanned": 77,
+  "documents_updated": 77,
+  "chunks_scanned": 6347,
+  "chunks_updated": 6347,
+  "chunks_isolated": 484,
+  "samples": [
+    {
+      "type": "document",
+      "id": "8626b054-5ab4-4f3b-8e3a-cbd7db3e5434",
+      "old_title": "泰昌基础证照资料",
+      "new_title": "基础证照资料",
+      "category": "泰昌企业资料"
+    },
+    {
+      "type": "document",
+      "id": "f269a269-30c8-429a-bf0e-54cb887901ef",
+      "old_title": "CPVC电缆保护管检验报告内径250",
+      "new_title": "CPVC电缆保护管检验报告",
+      "category": "检验报告"
+    },
+    {
+      "type": "document",
+      "id": "6b70c790-1b68-4cf2-b24b-bb586fb3f646",
+      "old_title": "MPP电缆保护管检验报告内径250",
+      "new_title": "MPP电缆保护管检验报告",
+      "category": "检验报告"
+    },
+    {
+      "type": "document",
+      "id": "9cf50029-c0d0-4aa8-9970-532cedd51ace",
+      "old_title": "TJ20220002363合同协议书（双方已签章）",
+      "new_title": "TJ20220002363合同协议书（双方已签章）",
+      "category": "项目业绩"
+    },
+    {
+      "type": "document",
+      "id": "08448491-ea28-48a2-902c-0a3f1bfab0a4",
+      "old_title": "157-保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书",
+      "new_title": "保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC__中标通知书",
+      "category": "项目业绩"
+    },
+    {
+      "type": "document",
+      "id": "6810dff1-54ab-4151-9700-82cd50f74a6e",
+      "old_title": "ESG环境社会公司治理报告",
+      "new_title": "ESG环境社会公司治理报告",
+      "category": "绿色低碳资料"
+    },
+    {
+      "type": "document",
+      "id": "8c43f021-d949-45c0-a624-bff1180f6f77",
+      "old_title": "碳足迹报告",
+      "new_title": "碳足迹报告",
+      "category": "试验检测能力"
+    },
+    {
+      "type": "document",
+      "id": "9224beed-cc67-435c-bf5d-a1bd8a89dee9",
+      "old_title": "河北泰昌电力器材科技有限公司",
+      "new_title": "河北泰昌电力器材科技有限公司",
+      "category": "基础证照"
+    },
+    {
+      "type": "document",
+      "id": "0d7ea6b4-d294-4142-8c80-3ea6c9ddc43b",
+      "old_title": "废水废气废固报告",
+      "new_title": "废水废气废固报告",
+      "category": "绿色低碳资料"
+    },
+    {
+      "type": "document",
+      "id": "b9223917-89bf-4538-8ba2-a4c114a83b69",
+      "old_title": "绿色发展规划报告",
+      "new_title": "绿色发展规划报告",
+      "category": "绿色低碳资料"
+    },
+    {
+      "type": "document",
+      "id": "b96ae648-2d43-49d1-b341-f35d862e12da",
+      "old_title": "绿色电力认证证书",
+      "new_title": "绿色电力认证证书",
+      "category": "绿色低碳资料"
+    },
+    {
+      "type": "document",
+      "id": "04f96648-aada-4fa5-b58d-d0fe17ff2024",
+      "old_title": "泰昌宣传彩页",
+      "new_title": "宣传彩页",
+      "category": "企业宣传资料"
+    },
+    {
+      "type": "document",
+      "id": "a9bfa696-3b62-48d3-8b50-fad2542bec38",
+      "old_title": "河北泰昌电力器材科技有限公司报告",
+      "new_title": "报告",
+      "category": "基础证照"
+    },
+    {
+      "type": "document",
+      "id": "91c8eca3-7609-48c3-b864-1a1fd085d7c9",
+      "old_title": "绿色供应链认证证书",
+      "new_title": "绿色供应链认证证书",
+      "category": "绿色低碳资料"
+    },
+    {
+      "type": "document",
+      "id": "b6b221ba-ba2f-40d9-8a74-d39d22e6e225",
+      "old_title": "2.土地使用证明",
+      "new_title": "土地使用证明",
+      "category": "企业证明材料"
+    },
+    {
+      "type": "document",
+      "id": "1ae35641-1c72-47c4-b044-a4e87c2a5973",
+      "old_title": "1.陈仙瑞",
+      "new_title": "陈仙瑞",
+      "category": "试验检测能力"
+    },
+    {
+      "type": "document",
+      "id": "d6ed8711-bf97-4511-bc3f-b8e0a223915d",
+      "old_title": "年审计报告",
+      "new_title": "年审计报告",
+      "category": "泰昌企业资料"
+    },
+    {
+      "type": "document",
+      "id": "b5aa6e99-c1a7-46b2-aa5a-5ce9f0f1d483",
+      "old_title": "2.晁坤琳",
+      "new_title": "晁坤琳",
+      "category": "试验检测能力"
+    },
+    {
+      "type": "document",
+      "id": "e8f99921-a674-48ed-8ce3-9d26e6770d16",
+      "old_title": "泰昌-投标",
+      "new_title": "投标",
+      "category": "基础证照"
+    },
+    {
+      "type": "document",
+      "id": "9dfe9890-ecca-408d-b909-16fe4371c465",
+      "old_title": "公司人员花名册",
+      "new_title": "公司人员花名册",
+      "category": "试验检测能力"
+    },
+    {
+      "type": "chunk",
+      "id": "eabcc5d0-e1dc-4a33-9ca0-1312060e020a",
+      "source_display_name": "泰昌图片资产解析索引（内部）",
+      "isolated": true
+    },
+    {
+      "type": "chunk",
+      "id": "739b8292-23ff-4018-bb58-df4d1da8cd3a",
+      "source_display_name": "泰昌图片资产解析索引（内部）",
+      "isolated": true
+    },
+    {
+      "type": "chunk",
+      "id": "dd6fbc4a-4a4b-4cf0-b219-39fdada74b12",
+      "source_display_name": "泰昌图片资产解析索引（内部）",
+      "isolated": true
+    },
+    {
+      "type": "chunk",
+      "id": "59135e03-5453-4a89-8a33-15af21ab7f86",
+      "source_display_name": "泰昌图片资产解析索引（内部）",
+      "isolated": true
+    },
+    {
+      "type": "chunk",
+      "id": "6c6c8fda-6cf1-40b2-aca4-d096a9aaf27a",
+      "source_display_name": "泰昌图片资产解析索引（内部）",
+      "isolated": true
+    },
+    {
+      "type": "chunk",
+      "id": "2c08ab95-7245-41f9-b2d3-f13a3d4ee8c5",
+      "source_display_name": "泰昌图片资产解析索引（内部）",
+      "isolated": true
+    },
+    {
+      "type": "chunk",
+      "id": "62aaaea5-2f2b-4bdd-aa34-1c1b861a2222",
+      "source_display_name": "泰昌图片资产解析索引（内部）",
+      "isolated": true
+    },
+    {
+      "type": "chunk",
+      "id": "86964fdf-8161-4b2e-9ef5-d11a241de118",
+      "source_display_name": "泰昌图片资产解析索引（内部）",
+      "isolated": true
+    },
+    {
+      "type": "chunk",
+      "id": "9bf3febd-e304-4193-b53d-f980f80855d1",
+      "source_display_name": "泰昌图片资产解析索引（内部）",
+      "isolated": true
+    },
+    {
+      "type": "chunk",
+      "id": "5bace953-431e-42fc-9c59-f31d5878f6e2",
+      "source_display_name": "绿色低碳资料",
+      "isolated": false
+    },
+    {
+      "type": "chunk",
+      "id": "822080de-1995-4ab4-b195-82baa3cef9ec",
+      "source_display_name": "泰昌图片资产解析索引（内部）",
+      "isolated": true
+    },
+    {
+      "type": "chunk",
+      "id": "3a18fcd3-5962-48bb-a39e-c774d3e288d2",
+      "source_display_name": "泰昌图片资产解析索引（内部）",
+      "isolated": true
+    },
+    {
+      "type": "chunk",
+      "id": "03dbdcb8-9d05-4eb5-9754-e10c2bfa6f79",
+      "source_display_name": "泰昌图片资产解析索引（内部）",
+      "isolated": true
+    },
+    {
+      "type": "chunk",
+      "id": "014ac173-f634-49ca-b91e-d282898bc1b3",
+      "source_display_name": "泰昌图片资产解析索引（内部）",
+      "isolated": true
+    },
+    {
+      "type": "chunk",
+      "id": "972d3da6-3d96-4fa8-aafa-7712ef113d20",
+      "source_display_name": "泰昌图片资产解析索引（内部）",
+      "isolated": true
+    },
+    {
+      "type": "chunk",
+      "id": "cb32d992-0c8d-4a6d-8251-58bdde3cdaf5",
+      "source_display_name": "泰昌图片资产解析索引（内部）",
+      "isolated": true
+    },
+    {
+      "type": "chunk",
+      "id": "b83293d9-ead5-4f5a-a1a6-95d96c4cea79",
+      "source_display_name": "试验检测能力资料",
+      "isolated": false
+    },
+    {
+      "type": "chunk",
+      "id": "951577bf-0513-42a9-a6bc-fe5a5f39a946",
+      "source_display_name": "泰昌图片资产解析索引（内部）",
+      "isolated": true
+    },
+    {
+      "type": "chunk",
+      "id": "fa060cf9-6930-4a41-b569-61fe844aa276",
+      "source_display_name": "泰昌图片资产解析索引（内部）",
+      "isolated": true
+    },
+    {
+      "type": "chunk",
+      "id": "9118fb60-4c88-4446-8aec-0b7636aa13a8",
+      "source_display_name": "泰昌图片资产解析索引（内部）",
+      "isolated": true
+    }
+  ]
+}

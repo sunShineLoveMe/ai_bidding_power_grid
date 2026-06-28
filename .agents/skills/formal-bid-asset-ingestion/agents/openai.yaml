@@ -1,0 +1,4 @@
+interface:
+  display_name: "正式投标资产入库"
+  short_description: "客户上传图片和文档资料的正式投标资产清洗、准入、入库和回归 SOP。"
+  default_prompt: "按国内正式投标场景处理客户上传的图片、PDF、Word、Excel 等资料，完成资产分类、中文命名、metadata、RAG/DOCX 准入和真实回归记录。"

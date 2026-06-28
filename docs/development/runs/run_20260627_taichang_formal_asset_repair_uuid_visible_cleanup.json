@@ -1,0 +1,43 @@
+{
+  "run_id": "run_20260627_taichang_formal_asset_repair_uuid_visible_cleanup",
+  "dry_run": false,
+  "rewrite_title": true,
+  "generated_at": "2026-06-27T08:56:19.656078+00:00",
+  "assets_scanned": 599,
+  "assets_changed": 3,
+  "titles_rewritten": 3,
+  "formal_bid_excluded": 0,
+  "caption_suppressed": 1,
+  "samples": [
+    {
+      "id": "f4ad1957-e130-4f80-b93f-8ba00fd9ec96",
+      "old_title": "企业资料",
+      "new_title": "生产制造能力资料",
+      "formal_caption": "资料：企业资料",
+      "caption_policy": "formal_material_caption",
+      "category": "生产制造能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "d0584437-839b-4698-9691-00f0e299f3af",
+      "old_title": "企业资料",
+      "new_title": "生产制造能力资料",
+      "formal_caption": "资料：企业资料",
+      "caption_policy": "formal_material_caption",
+      "category": "生产制造能力",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "f31ca9d0-bcca-4970-900c-0b7dcec3bfd4",
+      "old_title": "企业资料",
+      "new_title": "财务资料资料",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    }
+  ]
+}

@@ -21,7 +21,7 @@ DEFAULT_ALLOWED_CORS_ORIGINS = {
 
 DEFAULT_TENDER_EXTENSIONS = {"pdf", "doc", "docx", "txt", "md"}
 DEFAULT_KNOWLEDGE_EXTENSIONS = {"pdf", "doc", "docx", "txt", "md", "xls", "xlsx", "csv", "png", "jpg", "jpeg", "webp"}
-DEFAULT_ASSET_EXTENSIONS = {"png", "jpg", "jpeg", "webp", "pdf", "doc", "docx"}
+DEFAULT_ASSET_EXTENSIONS = {"png", "jpg", "jpeg", "webp", "pdf", "doc", "docx", "xls", "xlsx", "csv"}
 DEFAULT_ZIP_EXTENSIONS = {"zip"}
 
 DEFAULT_MIME_PREFIXES = {

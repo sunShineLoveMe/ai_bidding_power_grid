@@ -1,0 +1,110 @@
+[
+  {
+    "volume": "technical",
+    "markdown": "outputs/4d632dbe/泰昌_2225AC_技术投标文件_20260627_图文.md",
+    "docx": "docs/development/runs/run_20260627_formal_docx_asset_cleanup_v2/technical_泰昌_2225AC_技术投标文件_20260627_图文.docx",
+    "selected": 16,
+    "asset_candidates": 597,
+    "warnings": [
+      "仍有 59 处待补充/待确认占位，当前文件尚未达到正式投标文件标准。",
+      "仍有 11 个正式必填字段未确认，请返回投标信息确认步骤补齐。"
+    ],
+    "images": {},
+    "captions": {
+      "detected": 77,
+      "formalized": 77,
+      "samples": [
+        {
+          "source": "图示：泰昌CPVC电缆保护管检验报告内径250第1页",
+          "caption": "资料：CPVC电缆保护管检验报告"
+        },
+        {
+          "source": "图示：泰昌CPVC电缆保护管检验报告内径250第3页",
+          "caption": "资料：CPVC电缆保护管检验报告"
+        },
+        {
+          "source": "图示：泰昌MPP电缆保护管检验报告内径250第5页",
+          "caption": "资料：MPP电缆保护管检验报告"
+        },
+        {
+          "source": "图示：泰昌CPVC电缆保护管检验报告内径250第3页",
+          "caption": "资料：CPVC电缆保护管检验报告"
+        },
+        {
+          "source": "图示：泰昌CPVC电缆保护管检验报告内径250第1页",
+          "caption": "资料：CPVC电缆保护管检验报告"
+        },
+        {
+          "source": "图示：泰昌CPVC电缆保护管检验报告内径250第5页",
+          "caption": "资料：CPVC电缆保护管检验报告"
+        },
+        {
+          "source": "图示：泰昌MPP电缆保护管检验报告内径250第5页",
+          "caption": "资料：MPP电缆保护管检验报告"
+        },
+        {
+          "source": "图示：泰昌MPP电缆保护管检验报告内径250第4页",
+          "caption": "资料：MPP电缆保护管检验报告"
+        }
+      ]
+    },
+    "field_refresh_status": "refreshed",
+    "forbidden_hits": [],
+    "caption_page_hits": [],
+    "paragraphs": 2528
+  },
+  {
+    "volume": "business",
+    "markdown": "outputs/4d632dbe/泰昌_2225AC_商务投标文件_20260627_图文.md",
+    "docx": "docs/development/runs/run_20260627_formal_docx_asset_cleanup_v2/business_泰昌_2225AC_商务投标文件_20260627_图文.docx",
+    "selected": 5,
+    "asset_candidates": 597,
+    "warnings": [
+      "仍有 92 处待补充/待确认占位，当前文件尚未达到正式投标文件标准。",
+      "仍有 11 个正式必填字段未确认，请返回投标信息确认步骤补齐。"
+    ],
+    "images": {},
+    "captions": {
+      "detected": 35,
+      "formalized": 35,
+      "samples": [
+        {
+          "source": "图示：职业健康安全管理体系认证证书",
+          "caption": "资料：职业健康安全管理体系认证证书"
+        },
+        {
+          "source": "图示：泰昌晁坤琳2（脱敏示意图）",
+          "caption": "资料：身份证明文件"
+        },
+        {
+          "source": "图示：职业健康安全管理体系认证证书",
+          "caption": "资料：职业健康安全管理体系认证证书"
+        },
+        {
+          "source": "图示：绿色电力认证证书",
+          "caption": "资料：绿色电力认证证书"
+        },
+        {
+          "source": "图示：职业健康安全管理体系认证证书",
+          "caption": "资料：职业健康安全管理体系认证证书"
+        },
+        {
+          "source": "图示：职业健康安全管理体系认证证书",
+          "caption": "资料：职业健康安全管理体系认证证书"
+        },
+        {
+          "source": "图示：职业健康安全管理体系认证证书",
+          "caption": "资料：职业健康安全管理体系认证证书"
+        },
+        {
+          "source": "图示：职业健康安全管理体系认证证书",
+          "caption": "资料：职业健康安全管理体系认证证书"
+        }
+      ]
+    },
+    "field_refresh_status": "refreshed",
+    "forbidden_hits": [],
+    "caption_page_hits": [],
+    "paragraphs": 1937
+  }
+]

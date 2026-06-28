@@ -1,0 +1,291 @@
+{
+  "run_id": "run_20260627_haoqian_reference_metadata_repair",
+  "dry_run": false,
+  "generated_at": "2026-06-27T11:30:45.645231+00:00",
+  "documents_scanned": 2,
+  "documents_updated": 2,
+  "chunks_scanned": 70,
+  "chunks_updated": 70,
+  "samples": [
+    {
+      "type": "document",
+      "id": "8eec5253-43d0-4e1e-b4bc-2760fdf4d6f9",
+      "title": "商务投标文件-中标，按投标人制作",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true
+    },
+    {
+      "type": "document",
+      "id": "5cca1df4-c540-46bd-8838-cca6da313376",
+      "title": "技术补充文件电缆保护管CPVC",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true
+    },
+    {
+      "type": "chunk",
+      "id": "b0af8a77-92dd-4afc-91e0-249b91b85230",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "doc_role: `technical_response_reference`"
+    },
+    {
+      "type": "chunk",
+      "id": "1fa3cecf-c131-45ef-b1a0-5656edf9e7ac",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "doc_owner: 河北豪乾电气设备科技有限公司"
+    },
+    {
+      "type": "chunk",
+      "id": "54cf5c0b-8f8d-4826-9313-97881689b77a",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "reference_only: true"
+    },
+    {
+      "type": "chunk",
+      "id": "ddfb56f5-5f28-4901-aa70-81640cd5e781",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "允许抽取字段：cover_fields、toc_structure、chapter_titles、format_style、table_and_signature_placeholders、response_material_checklist"
+    },
+    {
+      "type": "chunk",
+      "id": "cc3e89f4-add0-480b-a087-600b02957c9c",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "## 封面字段\n\n```json\n{\n \"bid_no\": \"2225AC\",\n \"bidder_from_document\": \"河北豪乾电气设备科技有限公司\",\n \"date_candidates\": [\n \"2026年01月19日\"\n ],\n \"sections\": [\n {\n \"section_name\": \"电缆保护管 CPVC\",\n \"packa"
+    },
+    {
+      "type": "chunk",
+      "id": "360ef374-0a9d-4aae-8cc8-49cfda8d2652",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "```json\n{\n \"bid_no\": \"2225AC\",\n \"bidder_from_document\": \"河北豪乾电气设备科技有限公司\",\n \"date_candidates\": [\n \"2026年01月19日\"\n ],\n \"sections\": [\n {\n \"section_name\": \"电缆保护管 CPVC\",\n \"package_no\": \""
+    },
+    {
+      "type": "chunk",
+      "id": "0008c224-8084-4f0b-8d90-aca2638286a4",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "## 目录/章节结构\n\n- 2 目录\n- （一）技术偏差表 ................................ ................................ ................................ .......................... 5\n- （二）专项投标文件 .........."
+    },
+    {
+      "type": "chunk",
+      "id": "4c41ace8-9b11-42d3-8d06-9d61905f6c03",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 2 目录\n- （一）技术偏差表 ................................ ................................ ................................ .......................... 5\n- （二）专项投标文件 ......................"
+    },
+    {
+      "type": "chunk",
+      "id": "5bdec922-08e4-444f-8c39-f03a57fa03d1",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 11.调试试验场所、试验检测设备 ................................ ................................ ..................... 358\n- 11.1.校准证书（ 更新） ................................ ..................."
+    },
+    {
+      "type": "chunk",
+      "id": "a2d55a06-af65-4728-bb4a-1f79e32c6ced",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 1.2.资质业绩凭证 单 ................................ ................................ ................................ ....... 7\n- 1.3.新增业绩合同 ................................ .........."
+    },
+    {
+      "type": "chunk",
+      "id": "3f9d847b-0d54-40f4-8ddd-63f682dbd0e0",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 2.技术特性参数表 ................................ ................................ ................................ ............... 115\n- （A171 -500021527 -00001） ......................"
+    },
+    {
+      "type": "chunk",
+      "id": "6a7b0c00-767d-43bc-85f6-0932f2d6fe3e",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 11.1.9.电子天平 MTQ200D ................................ ................................ .................. 382\n- 11.1.10. 钢卷尺0-30m ................................ ................"
+    },
+    {
+      "type": "chunk",
+      "id": "c4e00f6f-2b56-43af-a927-fa2a1acffca0",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- （G00J -500038391 -00003） ................................ ................................ ........................ 137\n- （G00J -500038391 -00004） ..............................."
+    },
+    {
+      "type": "chunk",
+      "id": "f665fc39-69cd-4e66-9627-364dd3042ce4",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 4.2.资质业绩凭证单 ................................ ................................ ................................ ... 153\n- 5.招标文件第三章评标办法前附表 之四“技术评分标准”涉及的支撑材料 ................ 154\n-"
+    },
+    {
+      "type": "chunk",
+      "id": "4f224f62-ee73-4232-b1e8-f79f95a26237",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 5.1.1.3.一种 cpvc电缆保护管衔接架 _实用新型专利证书 ........................ 160\n- 5.1.1.4.一种用于电缆保护管的密封堵头 _实用新型专利证书 ................. 163\n- 5.1.1.5.一种 MPP电力管加工用码垛设备 ..............................."
+    },
+    {
+      "type": "chunk",
+      "id": "7fe6cc1f-034b-40b8-965d-fbbe0c45306f",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 5.2.原材料组部件改进 ................................ ................................ ............................... 172\n- 5.2.1.陕西云天创石化有限公司资质文件 ................................ ......"
+    },
+    {
+      "type": "chunk",
+      "id": "429b1f9c-1b40-49f1-bf43-3a300706ebb9",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 5.3.1.企业标准 -MPP电缆保护管 ................................ ................................ ...... 199\n- 5.3.2.企业标准 -UPVC电缆保护管 ................................ ......................."
+    },
+    {
+      "type": "chunk",
+      "id": "eff42b71-6dd9-4332-8a07-d44181cd7d7d",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- （三）资格预审结果通知书 ................................ ................................ ................................ ....... 465\n- （四）其他 ................................ ............."
+    },
+    {
+      "type": "chunk",
+      "id": "00ae9844-812d-4810-ac0b-b8f5d1050faf",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 5.4.人力资源 ................................ ................................ ................................ ............... 214\n- 5.5.产品制造质量控制 ................................ .."
+    },
+    {
+      "type": "chunk",
+      "id": "de231398-e7e6-46d3-89a7-a232539e8e4e",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 5.5.4.制度及体系建设 报告 ................................ ................................ ............... 223\n- 5.6.绿电绿证 ................................ ..............................."
+    },
+    {
+      "type": "chunk",
+      "id": "9d61ed26-9227-471c-85eb-89b869661b04",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 5.6.4.绿色电力证书交易凭证 ................................ ................................ ........... 240\n- 5.7.绿色低碳生产 ................................ ................................ "
+    },
+    {
+      "type": "chunk",
+      "id": "e03d6d53-f438-4e77-8518-ff133025c349",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 5.7.4.绿色运输报告 ................................ ................................ ........................... 303\n- 5.7.5.绿色环保改造升级报告 ................................ ..............."
+    },
+    {
+      "type": "chunk",
+      "id": "8ad7d43b-95e2-4ada-ad90-3476e6d137d2",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 6.1.供应商关于配合开展资质能力信息核实的承诺函 ................................ ............. 335\n- 6.2.投标人与国家电网公司系统人员关系说明 ................................ ......................... 336\n- 7.技术服务，包括培训"
+    },
+    {
+      "type": "chunk",
+      "id": "be6af540-61ac-48a0-8410-87b701003c75",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 8.售后服务保障及承诺 ................................ ................................ ................................ ....... 340\n- 8.1.售后服务保障方案 ................................ ......."
+    },
+    {
+      "type": "chunk",
+      "id": "9014431c-2030-46e3-837c-d14a0995b360",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 9.质量保证措施方案 ................................ ................................ ................................ ........... 345\n- 9.1.质量承诺书 ................................ ......."
+    },
+    {
+      "type": "chunk",
+      "id": "f4225a8f-72da-4ad6-a371-9ae300284517",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 10.2.生产能力报告 ................................ ................................ ................................ ..... 356\n- 10.3.剩余产能列表 ................................ .........."
+    },
+    {
+      "type": "chunk",
+      "id": "2bf4f0ee-0706-44dc-8782-de9eb101701f",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 11.调试试验场所、试验检测设备 ................................ ................................ ..................... 358\n- 11.1.校准证书（ 更新） ................................ ..................."
+    },
+    {
+      "type": "chunk",
+      "id": "a59b58b3-f31a-4b84-891b-973f4dbd2682",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 11.1.4. 微机控制电子万能试验机 WDW-20 ................................ ...................... 367\n- 11.1.5.维卡软化点温度测定仪 ................................ ................................ ....."
+    },
+    {
+      "type": "chunk",
+      "id": "1aef8327-627f-4a08-be39-358a4d3d6d3f",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 12.1.监督审核合格通知书 ................................ ................................ ......................... 397\n- 12.2.质量管理体系认证证书 ................................ ................"
+    },
+    {
+      "type": "chunk",
+      "id": "66c753d5-1bff-45e4-8586-f3d4267238a2",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 13.主要技术人员、项目经理及其相关证书 ................................ ................................ ..... 408\n- 附：人员证书 ................................ ................................ ......"
+    },
+    {
+      "type": "chunk",
+      "id": "d98ccf92-9ffc-499a-a864-14223c0de171",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 14.2.MPP 电缆保护 管 ................................ ................................ ................................ .. 423\n- 14.3.N-HAP热浸塑电缆保护管 ................................ .."
+    },
+    {
+      "type": "chunk",
+      "id": "0d292f79-bf06-4efc-8867-c55977dddbe2",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 15.资质业绩凭证单（如有） ，按分标提供 ................................ ................................ ........ 447\n- 16.生产许可证或检测合格证 (入网许可证 )或检测合格证 (入网许可证 ) ......................... 448\n- 16.1"
+    },
+    {
+      "type": "chunk",
+      "id": "147e0996-feb8-4057-bc9a-b9edae46a3d6",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 18.外购外协供应商情况表（仅存在外购外协情况的投标人提供） .............................. 464"
+    },
+    {
+      "type": "chunk",
+      "id": "c65ba369-0da7-49de-9e5f-a2206594edfc",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- （三）资格预审结果通知书 ................................ ................................ ................................ ....... 465\n- （四）其他 ................................ ............."
+    },
+    {
+      "type": "chunk",
+      "id": "651a6a25-7555-44f9-bf88-85cedfc3eefd",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 3.河北省科技型中小企业 ................................ ................................ ................................ .... 468\n- 5 （一）技术偏差表\n- 6 （二）专项投标文件\n- 1.业绩文件\n- 1.1. 2.0 平台业绩汇总查询截图"
+    },
+    {
+      "type": "chunk",
+      "id": "2792581d-c10f-45ea-9343-6d11f79ba928",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- （6）股东及出资信息 ................................ ................................ ................... 96\n- （7） “国家企业信用信息公示系统” ................................ ........................"
+    },
+    {
+      "type": "chunk",
+      "id": "aa8828b0-f559-446a-99cc-a769e6b7909e",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- （6）质量承诺书 ................................ ................................ ......................... 187\n- （7）质量保障措施 ................................ ............................"
+    },
+    {
+      "type": "chunk",
+      "id": "12def8e2-2faf-49c0-a4c9-8286865399a8",
+      "old_reference_only": false,
+      "old_fact_source_allowed_for_enterprise": true,
+      "content_sample": "- 7.2.4.2. 绿色工厂评价认证证书 ................................ ............................... 226\n- 7.2.4.3. 绿色供应链管理体系认证证书 ................................ ................... 227\n- 7.2.4"
+    }
+  ]
+}

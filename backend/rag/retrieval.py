@@ -240,6 +240,16 @@ def _metadata_matches_filter(metadata: dict[str, Any], metadata_filter: dict[str
     return True
 
 
+def _metadata_excluded_from_retrieval(metadata: dict[str, Any]) -> bool:
+    if metadata.get("exclude_from_rag") is True:
+        return True
+    if str(metadata.get("rag_visibility") or "").lower() in {"internal_only", "audit_only", "disabled"}:
+        return True
+    if str(metadata.get("status") or "").lower() in {"superseded", "disabled", "archived"}:
+        return True
+    return False
+
+
 def _row_text(row: dict[str, Any]) -> str:
     metadata = row.get("metadata") if isinstance(row.get("metadata"), dict) else {}
     parts = [
@@ -463,9 +473,9 @@ def _keyword_search_knowledge_chunks(
     scored: list[tuple[float, dict[str, Any]]] = []
     for row in rows:
         metadata = row.get("metadata") if isinstance(row.get("metadata"), dict) else {}
-        if not _metadata_matches_filter(metadata, metadata_filter):
+        if _metadata_excluded_from_retrieval(metadata):
             continue
-        if metadata.get("status") == "superseded":
+        if not _metadata_matches_filter(metadata, metadata_filter):
             continue
         score = _keyword_score(query, row)
         if score <= 0:
@@ -603,6 +613,11 @@ def search_knowledge_base(
         )
         seen_ids = {str(row.get("id")) for row in rows if row.get("id")}
         rows.extend(row for row in fallback_rows if not row.get("id") or str(row.get("id")) not in seen_ids)
+
+    rows = [
+        row for row in rows
+        if not _metadata_excluded_from_retrieval(row.get("metadata") if isinstance(row.get("metadata"), dict) else {})
+    ]
 
     if _needs_keyword_supplement(query, rows, match_count):
         rows = _merge_rows(
@@ -946,6 +961,51 @@ def _asset_matches_metadata_filter(asset: dict[str, Any], metadata_filter: dict[
             return False
     return True
 
+
+PUBLIC_METADATA_KEYS = {
+    "source_display_name",
+    "source_document_name",
+    "category_label",
+    "evidence_type_label",
+    "doc_type",
+    "report_no",
+    "specification_model",
+    "source_section",
+}
+
+
+def _public_metadata(metadata: dict[str, Any] | None) -> dict[str, Any]:
+    safe = sanitize_source_metadata(metadata or {})
+    return {key: safe.get(key) for key in PUBLIC_METADATA_KEYS if safe.get(key) not in (None, "")}
+
+
+def _public_context_payload(context: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "id": context.get("id"),
+        "content": sanitize_visible_text(context.get("content") or ""),
+        "similarity": context.get("similarity"),
+        "retrieval_source": context.get("retrieval_source"),
+        "metadata": _public_metadata(context.get("metadata") if isinstance(context.get("metadata"), dict) else {}),
+    }
+
+
+def _public_asset_payload(asset: dict[str, Any]) -> dict[str, Any]:
+    safe_assets = sanitize_knowledge_assets([asset])
+    safe = safe_assets[0] if safe_assets else dict(asset)
+    return {
+        "id": safe.get("id"),
+        "title": safe.get("title"),
+        "description": sanitize_visible_text(safe.get("description") or ""),
+        "category": safe.get("category"),
+        "asset_type": safe.get("asset_type"),
+        "mime_type": safe.get("mime_type"),
+        "width": safe.get("width"),
+        "height": safe.get("height"),
+        "similarity": safe.get("similarity"),
+        "url": f"/api/knowledge/assets/{safe.get('id')}/file" if safe.get("id") else safe.get("public_url"),
+        "metadata": _public_metadata(safe.get("metadata") if isinstance(safe.get("metadata"), dict) else {}),
+    }
+
 def generate_knowledge_answer(
     query: str,
     contexts: List[Dict[str, Any]],
@@ -979,8 +1039,8 @@ def generate_knowledge_answer(
     return {
         "answer": answer,
         "images": images,
-        "assets": assets or [],
-        "raw_contexts": contexts
+        "assets": [_public_asset_payload(asset) for asset in (assets or [])],
+        "raw_contexts": [_public_context_payload(context) for context in contexts],
     }
 
 
@@ -1122,8 +1182,8 @@ def stream_knowledge_answer(
         "contexts_count": len(contexts),
         "assets_count": len(assets or []),
         "images": images,
-        "raw_contexts": contexts,
-        "assets": assets or [],
+        "raw_contexts": [_public_context_payload(context) for context in contexts],
+        "assets": [_public_asset_payload(asset) for asset in (assets or [])],
     }
 
     emitted = False

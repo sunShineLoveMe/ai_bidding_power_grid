@@ -1,0 +1,313 @@
+{
+  "run_id": "run_20260627_taichang_formal_asset_repair_specs_display_name",
+  "dry_run": false,
+  "rewrite_title": true,
+  "generated_at": "2026-06-27T08:59:11.673400+00:00",
+  "assets_scanned": 599,
+  "assets_changed": 599,
+  "titles_rewritten": 0,
+  "formal_bid_excluded": 2,
+  "caption_suppressed": 551,
+  "samples": [
+    {
+      "id": "ff3447bd-bede-493d-bb51-d7eb4d1b3acb",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "5f0829f5-c64a-4b3b-b125-50a4ac46689a",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "c08a6a60-9a9f-48c3-9b01-ca38bcc6661e",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "39e276cc-5e58-463c-bf8e-a3f211c3b5ac",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "495b6f71-53e1-4624-9f10-29d7590b93c4",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "753cc122-2431-428c-a41f-8777d1344f7a",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "a3c9cfb2-cd3b-4dd4-8cbb-c87d6f872759",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "f5c8f472-83a9-4a29-8ee5-f91fc0120b74",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "956112bc-65c3-441b-8d70-ac4d65d3b24f",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "1f17aa09-4e6f-4b86-a6cd-2e98c55994fe",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "f52d4793-a7db-4c48-ac97-0a40afc1205f",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "1b93e8ce-5e09-4bf2-8ffe-5fece4049542",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "c5d8c48a-290d-493a-a8a3-fc4832d4cf4f",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "4db3fb31-0ae6-4c91-b241-999bd3342b05",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "c6407b66-aa5f-4157-ab06-cb35732cc14a",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "65c343a9-4e74-4ca9-af26-a2d4fab5e92a",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "55e8a849-d27b-46fa-a169-40d626f8522c",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "e8d4c3fd-b0ab-4b8a-8ad3-e6f443e9dcb0",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "32c9bd0e-2f68-4a6d-aaff-4e6f864d0ddc",
+      "old_title": "2023年审计报告",
+      "new_title": "2023年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "fb1840f1-7b52-42c6-97ae-09cd8f2bed4b",
+      "old_title": "2024年审计报告",
+      "new_title": "2024年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "79a5a9af-4191-4a93-8fdb-7afdb066024e",
+      "old_title": "2024年审计报告",
+      "new_title": "2024年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "eaaabad3-f539-4323-b900-55a6e93d6e16",
+      "old_title": "2024年审计报告",
+      "new_title": "2024年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "e761588e-d6bf-4327-a964-84cb3fcb6a13",
+      "old_title": "2024年审计报告",
+      "new_title": "2024年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "6b1d3d4d-2e64-4110-9384-06d8b6ebab13",
+      "old_title": "2024年审计报告",
+      "new_title": "2024年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "b038dfaf-b671-42d3-a396-31be98554fbc",
+      "old_title": "2024年审计报告",
+      "new_title": "2024年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "5ab77fae-3472-47bf-97d1-9f1ed8959ec1",
+      "old_title": "2024年审计报告",
+      "new_title": "2024年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "5cf50668-34a1-41e6-ba15-58232c55bf5d",
+      "old_title": "2024年审计报告",
+      "new_title": "2024年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "0b013587-6efe-4150-ba5c-037263fca5d0",
+      "old_title": "2024年审计报告",
+      "new_title": "2024年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "b6cdd3e4-f47e-4a50-8be5-574c74b88813",
+      "old_title": "2024年审计报告",
+      "new_title": "2024年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    },
+    {
+      "id": "839df7ac-6e93-4a3b-b588-053db9cf148e",
+      "old_title": "2024年审计报告",
+      "new_title": "2024年审计报告",
+      "formal_caption": "",
+      "caption_policy": "suppressed_document_page_caption",
+      "category": "财务资料",
+      "excluded": false,
+      "exclusion_reason": ""
+    }
+  ]
+}

@@ -39,6 +39,8 @@ from backend.db.supabase_repo import (
     update_knowledge_asset,
     upload_knowledge_asset_file,
 )
+from backend.rag.display_names import category_display_name, sanitize_visible_text
+from backend.services.formal_asset_naming import caption_policy, clean_formal_asset_title, formal_asset_caption
 
 # ---------------------------------------------------------------------------
 # 进程内图片缓存（LRU，最多 200 条，缓解 Supabase Storage 串行下载瓶颈）
@@ -47,6 +49,54 @@ from backend.db.supabase_repo import (
 _ASSET_FILE_CACHE_MAX = 200
 _asset_file_cache: OrderedDict[tuple, tuple] = OrderedDict()
 _asset_file_cache_lock = threading.Lock()
+
+_VOLUME_LABELS = {
+    "technical": "技术标",
+    "qualification": "资格文件",
+    "business": "商务标",
+    "attachment": "附件",
+}
+
+_UPLOAD_EVIDENCE_FALLBACKS = {
+    "authorization": "授权文件",
+    "bid_award_notice": "中标通知书",
+    "business_license": "基础证照资料",
+    "certification": "资质证书资料",
+    "contract": "合同证明",
+    "enterprise_evidence": "企业证明材料",
+    "finance": "财务资料",
+    "green_low_carbon": "绿色低碳资料",
+    "inspection_report": "检验报告资料",
+    "personnel_certificate": "人员证书资料",
+    "product_image": "产品实物图片",
+    "production_capacity": "生产制造能力资料",
+    "project_performance": "项目业绩资料",
+    "product_parameter_table": "产品参数表",
+    "social_security": "社保证明",
+    "technical_response": "技术响应资料",
+    "testing_capacity": "试验检测能力资料",
+    "warehouse_capacity": "厂房仓储资料",
+}
+
+_SEARCHABLE_SPEC_KEYS = {
+    "usage_note",
+    "certificate_no",
+    "issuer",
+    "product_model",
+    "formal_display_title",
+    "formal_caption",
+}
+
+_QUALITY_TIER_LABELS = {
+    "formal_bid_ready": "可用于正式标书",
+    "knowledge_only": "仅用于知识库",
+    "review_only": "需人工复核",
+    "restricted": "禁止使用",
+}
+
+_IMAGE_FILE_EXTENSIONS = {"png", "jpg", "jpeg", "webp"}
+_STRUCTURED_FILE_EXTENSIONS = {"xls", "xlsx", "csv"}
+_DOCUMENT_FILE_EXTENSIONS = {"pdf", "doc", "docx"}
 
 
 def _get_cached_asset_file(asset_id: str, variant: str):
@@ -79,21 +129,239 @@ def _split_form_list(value: str | None) -> list[str]:
     return [item.strip() for item in re.split(r"[,，\n]", value) if item.strip()]
 
 
+def _contains_chinese(value: str) -> bool:
+    return bool(re.search(r"[\u4e00-\u9fff]", value or ""))
+
+
+def _has_internal_display_trace(value: str) -> bool:
+    return bool(
+        re.search(
+            r"页面[_\-\s]*\d+|原图|parsed_outputs|rag_seed|/api/knowledge/assets|"
+            r"\btaichang_|[a-zA-Z]+_[a-zA-Z_]+|\b[a-f0-9]{8}-[a-f0-9-]{27,}\b",
+            value or "",
+            flags=re.I,
+        )
+    )
+
+
+def _infer_upload_evidence_type(
+    library_type: str,
+    category: str,
+    title: str,
+    description: str,
+    existing: dict | None = None,
+) -> str:
+    existing = existing or {}
+    existing_meta = existing.get("metadata") if isinstance(existing.get("metadata"), dict) else {}
+    existing_specs = existing.get("specs") if isinstance(existing.get("specs"), dict) else {}
+    explicit = (
+        request.form.get("evidence_type")
+        or existing_meta.get("evidence_type")
+        or existing_specs.get("evidence_type")
+        or ""
+    )
+    if explicit:
+        return str(explicit).strip()
+
+    category_key = str(category or "").strip()
+    if category_key in _UPLOAD_EVIDENCE_FALLBACKS:
+        return category_key
+
+    haystack = f"{category} {title} {description}"
+    rules = [
+        ("business_license", ("营业执照", "基础证照", "统一社会信用代码")),
+        ("inspection_report", ("检验报告", "检测报告", "型式试验", "试验报告")),
+        ("testing_capacity", ("试验检测", "检测设备", "试验设备", "电子天平", "万能试验机", "维卡")),
+        ("production_capacity", ("生产制造", "制造能力", "生产线", "车间", "厂房", "仓储")),
+        ("green_low_carbon", ("绿色", "低碳", "环保", "碳足迹", "排污", "废水", "废气")),
+        ("project_performance", ("项目业绩", "合同", "中标", "成交通知", "订单", "验收")),
+        ("finance", ("财务", "审计", "资产负债", "利润表")),
+        ("personnel_certificate", ("人员", "社保", "身份证", "授权委托", "法定代表人")),
+        ("certification", ("资质证书", "认证证书", "体系认证", "证书")),
+        ("product_image", ("产品实物", "产品图片", "管材", "保护管")),
+    ]
+    for evidence_type, keywords in rules:
+        if any(keyword in haystack for keyword in keywords):
+            return evidence_type
+    return "enterprise_evidence" if library_type == "qualification" else "product_image"
+
+
+def _upload_title_fallback(evidence_type: str) -> str:
+    return _UPLOAD_EVIDENCE_FALLBACKS.get(evidence_type) or category_display_name(evidence_type) or "企业资料"
+
+
+def _normalize_uploaded_title(raw_title: str, evidence_type: str) -> str:
+    fallback = _upload_title_fallback(evidence_type)
+    title = clean_formal_asset_title(raw_title, "")
+    title = re.sub(r"(?:上传回归|回归测试|测试样张|测试图片|测试资料|P\d+(?:-\d+)?)", "", title)
+    title = re.sub(r"[，,。；;：:\-_\s]+$", "", title).strip()
+    if not title or not _contains_chinese(title):
+        title = fallback
+
+    if evidence_type in {"production_capacity", "testing_capacity", "green_low_carbon", "product_image"}:
+        if not title.endswith(("资料", "照片", "图片")):
+            title = f"{title}资料"
+    elif evidence_type == "certification" and "证书" not in title:
+        title = f"{title}证书"
+    elif evidence_type == "inspection_report" and "报告" not in title:
+        title = f"{title}检验报告"
+
+    if not title.startswith("泰昌"):
+        title = f"泰昌{title}"
+    return re.sub(r"\s+", "", title)
+
+
+def _normalize_upload_category(category: str, evidence_type: str) -> str:
+    clean_category = category_display_name(category)
+    if not clean_category or clean_category in {"企业资信", "产品资料", "泰昌企业资料"} or _has_internal_display_trace(clean_category):
+        clean_category = category_display_name(evidence_type) or _upload_title_fallback(evidence_type)
+    return clean_category
+
+
+def _sanitize_upload_tags(tags: list[str], category: str, evidence_type: str) -> list[str]:
+    normalized: list[str] = []
+    for tag in tags or []:
+        value = category_display_name(str(tag).strip())
+        if not value:
+            continue
+        if value.lower() == "taichang":
+            value = "泰昌"
+        if _has_internal_display_trace(value) and not _contains_chinese(value):
+            continue
+        if re.fullmatch(r"[a-zA-Z_]+", value) and not _contains_chinese(value):
+            continue
+        normalized.append(value)
+    normalized.extend(["泰昌", category, category_display_name(evidence_type)])
+    deduped: list[str] = []
+    seen: set[str] = set()
+    for tag in normalized:
+        if tag and tag not in seen:
+            seen.add(tag)
+            deduped.append(tag)
+    return deduped
+
+
+def _build_upload_description(title: str, category: str, description: str) -> str:
+    if description:
+        cleaned = sanitize_visible_text(description)
+        if cleaned and not _has_internal_display_trace(cleaned):
+            return cleaned
+    return f"河北泰昌电力器材科技有限公司{category}，用于企业知识库展示和正式投标文件引用。"
+
+
 def _build_asset_searchable_text(payload: dict) -> str:
     parts = [
         payload.get("title"),
         payload.get("description"),
         payload.get("category"),
-        payload.get("asset_type"),
         payload.get("ai_caption"),
     ]
     parts.extend(payload.get("tags") or [])
     parts.extend(payload.get("applicable_sections") or [])
-    parts.extend(payload.get("applicable_volumes") or [])
+    parts.extend(_VOLUME_LABELS.get(str(volume), str(volume)) for volume in payload.get("applicable_volumes") or [])
     specs = payload.get("specs") or {}
     if isinstance(specs, dict):
-        parts.extend(str(value) for value in specs.values() if value)
-    return "\n".join(str(part).strip() for part in parts if str(part or "").strip())
+        parts.extend(str(specs.get(key)) for key in _SEARCHABLE_SPEC_KEYS if specs.get(key))
+    cleaned_parts = [sanitize_visible_text(part) for part in parts if str(part or "").strip()]
+    return "\n".join(part.strip() for part in cleaned_parts if part.strip())
+
+
+def _asset_file_ext(storage_info: dict | None = None, existing: dict | None = None) -> str:
+    storage_info = storage_info or {}
+    existing = existing or {}
+    candidates = [
+        storage_info.get("file_ext"),
+        storage_info.get("file_name"),
+        existing.get("file_ext"),
+        existing.get("file_name"),
+        existing.get("storage_path"),
+        existing.get("public_url"),
+    ]
+    for value in candidates:
+        text = str(value or "").strip().lower()
+        if not text:
+            continue
+        suffix = Path(text).suffix.lower().lstrip(".")
+        if suffix:
+            return suffix
+        if re.fullmatch(r"[a-z0-9]+", text):
+            return text.lstrip(".")
+    return ""
+
+
+def _quality_tier_label(tier: str) -> str:
+    return _QUALITY_TIER_LABELS.get(tier, "仅用于知识库")
+
+
+def _downgrade_quality(current: str, candidate: str) -> str:
+    order = {
+        "formal_bid_ready": 0,
+        "knowledge_only": 1,
+        "review_only": 2,
+        "restricted": 3,
+    }
+    return candidate if order.get(candidate, 1) > order.get(current, 1) else current
+
+
+def _assess_upload_quality(
+    *,
+    storage_info: dict | None,
+    existing: dict | None,
+    evidence_type: str,
+    title: str,
+    raw_title: str,
+    description: str,
+    requested_allowed_for_bid: bool,
+) -> tuple[str, list[str]]:
+    storage_info = storage_info or {}
+    existing = existing or {}
+    ext = _asset_file_ext(storage_info, existing)
+    mime_type = str(storage_info.get("mime_type") or existing.get("mime_type") or "").lower()
+    file_size = storage_info.get("file_size") or existing.get("file_size")
+    file_name = str(storage_info.get("file_name") or existing.get("file_name") or "")
+    source_text = f"{file_name} {raw_title} {title} {description}"
+    tier = "formal_bid_ready"
+    notes: list[str] = []
+
+    if not requested_allowed_for_bid:
+        tier = _downgrade_quality(tier, "knowledge_only")
+        notes.append("用户设置为仅检索，不自动插入正式标书。")
+
+    if ext in _STRUCTURED_FILE_EXTENSIONS:
+        tier = _downgrade_quality(tier, "knowledge_only")
+        notes.append("表格资料用于结构化抽取和知识问答，不作为正式标书图片自动插入。")
+
+    if evidence_type == "product_parameter_table" and ext not in _STRUCTURED_FILE_EXTENSIONS:
+        tier = _downgrade_quality(tier, "review_only")
+        notes.append("产品参数表建议上传原始 Excel 或 CSV，当前文件需人工复核后再用于参数抽取。")
+
+    if ext in {"doc", "docx"}:
+        tier = _downgrade_quality(tier, "knowledge_only")
+        notes.append("可编辑文档优先用于知识库和结构化抽取，不自动作为标书配图。")
+
+    if ext and ext not in (_IMAGE_FILE_EXTENSIONS | _DOCUMENT_FILE_EXTENSIONS | _STRUCTURED_FILE_EXTENSIONS):
+        tier = _downgrade_quality(tier, "review_only")
+        notes.append("文件格式不在正式投标资料推荐范围内，需人工确认用途。")
+
+    is_image = mime_type.startswith("image/") or ext in _IMAGE_FILE_EXTENSIONS
+    if is_image:
+        try:
+            if file_size is not None and int(file_size) < 30 * 1024:
+                tier = _downgrade_quality(tier, "review_only")
+                notes.append("图片文件较小，可能是二维码、截图或局部裁剪图，不自动进入正式标书。")
+        except (TypeError, ValueError):
+            pass
+
+    if re.search(r"二维码|印章|签名|页脚|截图|局部|裁剪", source_text):
+        tier = _downgrade_quality(tier, "review_only")
+        notes.append("文件名或说明疑似局部截图、签章或无关切图，需人工复核。")
+
+    if _has_internal_display_trace(source_text) and not _contains_chinese(source_text):
+        notes.append("原始文件名缺少中文业务含义，系统已生成正式中文展示字段。")
+
+    if not notes:
+        notes.append("资料格式和命名符合正式入库要求，可作为正式标书候选素材。")
+    return tier, notes
 
 
 def _asset_library_type(asset: dict) -> str:
@@ -122,6 +390,18 @@ def _asset_matches_library_type(asset: dict, library_type: str | None) -> bool:
     return _asset_library_type(asset) == library_type
 
 
+def _asset_response_payload(asset: dict | None) -> dict:
+    item = dict(asset or {})
+    item.pop("embedding", None)
+    if item.get("searchable_text"):
+        item["searchable_text"] = re.sub(r"\s*\n\s*", "；", sanitize_visible_text(item.get("searchable_text")))
+    return item
+
+
+def _asset_response_list(assets: list[dict] | None) -> list[dict]:
+    return [_asset_response_payload(asset) for asset in assets or []]
+
+
 def _parse_positive_int_arg(name: str, default: int, max_value: int | None = None) -> int:
     raw = request.args.get(name)
     if raw in (None, ""):
@@ -144,9 +424,18 @@ def _asset_payload_from_form(storage_info: dict | None = None, existing: dict | 
         raise ValueError('library_type 仅支持 qualification 或 product')
 
     asset_type = request.form.get('asset_type') or existing.get("asset_type") or ('qualification_image' if library_type == 'qualification' else 'product_image')
-    category = request.form.get('category') or existing.get("category") or ('企业资信' if library_type == 'qualification' else '产品资料')
-    title = (request.form.get('title') or existing.get("title") or '').strip()
-    description = (request.form.get('description') or existing.get("description") or '').strip()
+    raw_category = request.form.get('category') or existing.get("category") or ('企业资信' if library_type == 'qualification' else '产品资料')
+    raw_title = (
+        request.form.get('title')
+        or existing.get("title")
+        or storage_info.get("file_name")
+        or ''
+    ).strip()
+    raw_description = (request.form.get('description') or existing.get("description") or '').strip()
+    evidence_type = _infer_upload_evidence_type(library_type, raw_category, raw_title, raw_description, existing=existing)
+    category = _normalize_upload_category(raw_category, evidence_type)
+    title = _normalize_uploaded_title(raw_title, evidence_type)
+    description = _build_upload_description(title, category, raw_description)
     tags = _split_form_list(request.form.get('tags')) if 'tags' in request.form else (existing.get("tags") or [])
     applicable_sections = _split_form_list(request.form.get('applicable_sections')) if 'applicable_sections' in request.form else (existing.get("applicable_sections") or [])
     fallback_volumes = (
@@ -160,23 +449,44 @@ def _asset_payload_from_form(storage_info: dict | None = None, existing: dict | 
         if 'applicable_volumes' in request.form
         else normalize_volume_list(fallback_volumes)
     )
-    allowed_for_bid = request.form.get('allowed_for_bid', str((existing.get("specs") or {}).get("allowed_for_bid", True))).lower() in {'1', 'true', 'yes', 'on'}
+    requested_allowed_for_bid = request.form.get('allowed_for_bid', str((existing.get("specs") or {}).get("user_requested_bid_usage", (existing.get("specs") or {}).get("allowed_for_bid", True)))).lower() in {'1', 'true', 'yes', 'on'}
+    quality_tier, quality_notes = _assess_upload_quality(
+        storage_info=storage_info,
+        existing=existing,
+        evidence_type=evidence_type,
+        title=title,
+        raw_title=raw_title,
+        description=description,
+        requested_allowed_for_bid=requested_allowed_for_bid,
+    )
+    allowed_for_bid = requested_allowed_for_bid and quality_tier == "formal_bid_ready"
     is_sensitive = request.form.get('is_sensitive', str(existing.get("is_sensitive", False))).lower() in {'1', 'true', 'yes', 'on'}
     anonymized = request.form.get('anonymized', str(existing.get("anonymized", True))).lower() in {'1', 'true', 'yes', 'on'}
     specs = {
         **(existing.get("specs") or {}),
         "library_type": library_type,
         "allowed_for_bid": allowed_for_bid,
+        "user_requested_bid_usage": requested_allowed_for_bid,
         "applicable_volumes": applicable_volumes,
         "usage_note": request.form.get('usage_note') or (existing.get("specs") or {}).get("usage_note") or '',
         "certificate_no": request.form.get('certificate_no') or (existing.get("specs") or {}).get("certificate_no") or '',
         "issuer": request.form.get('issuer') or (existing.get("specs") or {}).get("issuer") or '',
         "product_model": request.form.get('product_model') or (existing.get("specs") or {}).get("product_model") or '',
+        "evidence_type": evidence_type,
+        "evidence_type_label": category_display_name(evidence_type),
+        "quality_tier": quality_tier,
+        "quality_tier_label": _quality_tier_label(quality_tier),
+        "quality_notes": quality_notes,
+        "target_library": "qualification_library" if library_type == "qualification" else "product_library",
+        "target_library_label": "资信库资料" if library_type == "qualification" else "产品库资料",
+        "category_label": category,
+        "formal_display_title": title,
     }
     metadata = {
         **(existing.get("metadata") or {}),
         "library_type": library_type,
         "allowed_for_bid": allowed_for_bid,
+        "user_requested_bid_usage": requested_allowed_for_bid,
         "applicable_volumes": applicable_volumes,
         "upload_source": "enterprise_library_page",
     }
@@ -187,18 +497,24 @@ def _asset_payload_from_form(storage_info: dict | None = None, existing: dict | 
     metadata.setdefault("fact_source_allowed_for_enterprise", True)
     metadata.setdefault("tenant_visibility", "taichang_only")
     metadata.setdefault("access_scope", "taichang_tenant_internal")
-    metadata.setdefault(
-        "target_library",
-        "qualification_library" if library_type == "qualification" else "product_library",
+    metadata["target_library"] = "qualification_library" if library_type == "qualification" else "product_library"
+    metadata["target_library_label"] = "资信库资料" if library_type == "qualification" else "产品库资料"
+    metadata["evidence_type"] = evidence_type
+    metadata["evidence_type_label"] = category_display_name(evidence_type)
+    metadata["category_label"] = category
+    metadata["quality_tier"] = quality_tier
+    metadata["quality_tier_label"] = _quality_tier_label(quality_tier)
+    metadata["quality_notes"] = quality_notes
+    metadata["source_display_name"] = title
+    metadata["source_document_name"] = title.removeprefix("泰昌")
+    metadata["asset_visual_type"] = (
+        "customer_original_image"
+        if str(storage_info.get("mime_type") or existing.get("mime_type") or "").startswith("image/")
+        else "customer_uploaded_document"
     )
-    metadata.setdefault(
-        "target_library_label",
-        "资信库资料" if library_type == "qualification" else "产品库资料",
-    )
-    metadata.setdefault(
-        "category_label",
-        category,
-    )
+    metadata["ui_name_policy"] = "domestic_chinese_friendly"
+    metadata["display_language"] = "zh-CN"
+    metadata["caption_policy"] = "formal_bid_clean"
     if storage_info:
         metadata.update({
             "thumbnail_storage_bucket": storage_info.get("thumbnail_bucket"),
@@ -221,7 +537,7 @@ def _asset_payload_from_form(storage_info: dict | None = None, existing: dict | 
         "industry": existing.get("industry") or "电网行业",
         "applicable_sections": applicable_sections,
         "applicable_volumes": applicable_volumes,
-        "tags": tags,
+        "tags": _sanitize_upload_tags(tags, category, evidence_type),
         "specs": specs,
         "ai_caption": description,
         "status": "indexed",
@@ -237,6 +553,11 @@ def _asset_payload_from_form(storage_info: dict | None = None, existing: dict | 
             "storage_path": storage_info.get("object_path"),
             "public_url": storage_info.get("public_url"),
         })
+    formal_caption = formal_asset_caption(payload)
+    if formal_caption:
+        payload["metadata"]["formal_caption"] = formal_caption
+        payload["specs"]["formal_caption"] = formal_caption
+    payload["metadata"]["caption_policy"] = caption_policy(payload)
     payload["searchable_text"] = _build_asset_searchable_text(payload)
     return payload
 
@@ -281,11 +602,12 @@ def get_knowledge_assets():
             )
             if library_type:
                 page_result["stats"] = get_knowledge_asset_stats(library_type)
+            page_result["items"] = _asset_response_list(page_result.get("items") or [])
             return jsonify(page_result), 200
         assets = list_knowledge_assets(asset_type=asset_type, category=category)
         if library_type:
             assets = [asset for asset in assets if _asset_matches_library_type(asset, library_type)]
-        return jsonify(assets), 200
+        return jsonify(_asset_response_list(assets)), 200
     except Exception as e:
         logging.exception("查询知识资产列表失败")
         return jsonify({'error': f'查询失败: {str(e)}'}), 500
@@ -311,7 +633,7 @@ def get_knowledge_asset(asset_id):
         asset = get_knowledge_asset_detail(asset_id)
         if not asset:
             return jsonify({'error': '知识资产不存在'}), 404
-        return jsonify(asset), 200
+        return jsonify(_asset_response_payload(asset)), 200
     except Exception as e:
         logging.exception("查询知识资产详情失败")
         return jsonify({'error': f'查询失败: {str(e)}'}), 500
@@ -424,7 +746,7 @@ def upload_knowledge_asset():
         _maybe_attach_asset_embedding(payload)
 
         asset = create_knowledge_asset(payload)
-        return jsonify(asset), 201
+        return jsonify(_asset_response_payload(asset)), 201
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
     except Exception as e:
@@ -464,7 +786,7 @@ def update_knowledge_asset_api(asset_id):
         payload = _asset_payload_from_form(storage_info=storage_info, existing=existing)
         _maybe_attach_asset_embedding(payload)
         asset = update_knowledge_asset(asset_id, payload)
-        return jsonify(asset), 200
+        return jsonify(_asset_response_payload(asset)), 200
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
     except Exception as e:

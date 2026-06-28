@@ -8,6 +8,129 @@
 
 ---
 
+## Run 20260627 — 产品库/资信库上传表单资料规范产品化（2026-06-27）
+
+> 总记录：`docs/development/runs/run_20260627_asset_upload_form_productization.md`
+> 增量门禁：`docs/rag/runs/run_20260627_asset_upload_form_productization_gate_summary.md`
+
+### 触发原因
+
+客户后续会自行上传大量图片、PDF、Word、Excel、CSV 等资料。上传入口如果不做资料类型引导、文件质量预检和正式标书使用门禁，二维码、印章、局部截图、表格截图、内部文件名等低质量资料会进入 RAG 和正式 DOCX 候选，影响正式投标文件质量。
+
+### 结果
+
+- 产品库/资信库上传表单新增正式中文资料类型、推荐格式提示和文件质量预检。
+- 资产上传支持 `.xls/.xlsx/.csv`，表格资料默认 `knowledge_only`，不自动作为正式标书图片插入。
+- 后端上传入库写入 `quality_tier`、`quality_tier_label`、`quality_notes`、`user_requested_bid_usage`；DOCX 自动选图只允许 `formal_bid_ready`。
+- 真实 API 上传 `泰昌上传表单回归产品参数表.csv`，返回 `quality_tier=knowledge_only`、`allowed_for_bid=false`，测试资产已删除。
+- Chrome 页面回归：产品库 CSV 预检为“仅用于知识库”；资信库低质量局部截图预检为“需人工复核”。
+- 定向测试：上传 payload `5 passed, 2 subtests passed`；DOCX/RAG/display `95 passed, 1 warning`；前端 build PASS。
+
+### 增量门禁
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% |
+| 泰昌专项 | off | 93.3% | 100.0% | 0.917 | 3.3% | 0.0% |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 0.973 | 0.0% | 0.0% |
+
+门禁状态：PASS。Rerank 正式路径无召回、来源排序、禁用关键词或跨资料域串扰退化。
+
+### 结论
+
+产品库/资信库上传入口已具备面向用户的正式资料准入体验，后端同步执行质量等级和正式 DOCX 配图门禁，后续客户随意上传资料时不会直接污染正式标书正文。
+
+---
+
+## Run 20260627 — 泰昌正式资产治理本地真实回归（2026-06-27）
+
+> 总记录：`docs/development/runs/run_20260627_local_formal_asset_regression.md`
+> 资产审计：`docs/development/runs/run_20260627_local_formal_asset_regression_audit.md`
+> 真实 stream：`docs/rag/runs/run_20260627_local_formal_asset_stream_regression.json`
+> 增量门禁：`docs/rag/runs/run_20260627_local_formal_asset_regression_gate_summary.md`
+
+### 触发原因
+
+本地泰昌数据资产已完成正式中文化和图片题注治理，需要在推送阿里云测试环境前，用真实服务确认资产、RAG、页面和 DOCX 导出均不再暴露内部字段或旧式图片题注。
+
+### 结果
+
+- 资产审计：真实图片资产 599、知识文档 77、文档分块 6347，正式可见/RAG 可见问题均为 0；历史 staging payload 仍为解析中间产物，不参与正式展示。
+- 真实 `/api/knowledge/search/stream`：覆盖 CPVC 检验报告参数、MPP 检验报告、生产制造能力、试验检测设备、资质证书、绿色低碳资料 6 类，HTTP 200，禁用字段命中 0。
+- Chrome 页面：企业知识库列表和知识库助手 CPVC 参数问答页面渲染后禁用字段命中 0。
+- DOCX 真实链路：技术标选中图片 16、商务标选中图片 5，字段刷新均 `refreshed`，禁用表达命中 0、页码型题注命中 0。
+- 定向测试：`12 passed, 1 warning`。
+
+### 增量门禁
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% |
+| 泰昌专项 | off | 50.0% | 63.3% | 0.500 | 3.3% | 0.0% |
+| 泰昌专项 | qwen3-rerank | 53.3% | 63.3% | 0.533 | 0.0% | 0.0% |
+
+门禁状态为 FAIL。Base 未退化；泰昌专项失败仍是旧评测集与本轮治理目标不一致导致，旧用例要求召回已被隔离的资产索引/解析中间 chunk。下一步需要更新泰昌专项评测集，改为检验正式资产、中文来源、结构化参数和页面同源回答。
+
+### 结论
+
+本地正式资产治理回归通过，可以进入阿里云测试环境发布与线上复验。剩余 P1 问题：更新泰昌专项评测集；试验检测设备问答中仍可能引用碳足迹报告里的设备描述，来源精度可继续收敛。
+
+---
+
+## Run 20260627 — 泰昌正式资料资产中文化与 RAG 可见字段治理（2026-06-27）
+
+> 资产审计：`docs/development/runs/run_20260627_taichang_formal_asset_audit_visible_and_rag_zero.md`
+> 增量门禁：`docs/rag/runs/run_20260627_taichang_formal_asset_cleanup_gate_summary.md`
+> DOCX 真实导出：`docs/development/runs/run_20260627_formal_docx_asset_cleanup_v2/summary.json`
+
+### 触发原因
+
+真实技术标 DOCX 中出现 `图示：泰昌CPVC电缆保护管检验报告内径250第1页`、`图示：泰昌试验设备台账原图` 等不适合正式投标文件的图片说明。该问题会把内部追溯信息、解析命名和页码型说明暴露到正式投标正文，存在废标风险。
+
+### 修复范围
+
+- 新增正式资产命名与题注策略，区分正式标题、正式题注和追溯 metadata。
+- RAG 选图和 DOCX 导出不再直接使用内部标题、解析目录名、`原图`、`页面_`、UUID、API 路径或页码型追溯说明。
+- 批量回填泰昌真实图片资产、知识文档和文档分块的中文正式展示字段。
+- 将 mock/test 资产、MinerU 局部切图、资产索引中间 chunk、解析路径类 chunk 隔离出正式 RAG 和标书选图。
+- 知识问答公开返回字段做脱敏，避免把 `source_domain`、`target_library`、`specs`、`file_name`、`asset_path`、`parsed_outputs`、embedding/searchable_text 等内部字段返回到页面同源 stream。
+
+### 本地审计结果
+
+| 范围 | 扫描数 | 正式可见/RAG 可见问题数 |
+| --- | ---: | ---: |
+| 真实图片资产 | 599 | 0 |
+| 知识文档 | 77 | 0 |
+| 文档分块 | 6347 | 0 |
+| staging 图片 payload | 539 | 539 |
+
+staging 图片 payload 是历史解析中间产物，保留用于追溯和复核，不作为正式展示、RAG 问答或 DOCX 配图来源。后续新增客户资料必须按 SOP 重新生成整页正式资产，不能把 staging 局部切图直接入正式库。
+
+### 增量门禁结果
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 286 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 634 ms |
+| 泰昌专项 | off | 53.3% | 63.3% | 0.533 | 3.3% | 0.0% | 354 ms |
+| 泰昌专项 | qwen3-rerank | 56.7% | 63.3% | 0.567 | 0.0% | 0.0% | 612 ms |
+
+门禁状态为 FAIL。Base 未退化；泰昌专项失败的主要原因是旧专项用例仍期待历史资产索引/解析中间 chunk 被召回，而这些 chunk 本轮已按正式投标要求隔离为 `internal_only` / `exclude_from_rag`。处理结论是更新泰昌专项评测集，改为校验正式资产、结构化参数和中文参考来源，不应为通过旧门禁重新放开内部 chunk。
+
+### 真实链路验证
+
+- 本地真实 `/api/knowledge/search/stream` 抽样：未再暴露 `图示：`、`原图`、`页面_`、解析路径、内部枚举、向量字段或 API 资产路径。
+- 本地真实技术标/商务标 DOCX：走 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice`。技术标选图 16、商务标选图 5，字段刷新均为 `refreshed`，DOCX XML 审计 `forbidden_hits=[]`、`caption_page_hits=[]`。
+- 尚未完成：阿里云线上数据库修复脚本执行、线上真实浏览器知识问答/标书导出复验。
+
+### 结论
+
+本地正式资产可见字段、RAG 返回字段和 DOCX 图片题注问题已收口；线上发布与专项评测集更新仍为后续阻塞项。
+
+---
+
 ## Run 20260626 — 产品库/资信库上传入口收口与新资产索引回归（2026-06-26）
 
 > 汇总：`docs/rag/runs/run_20260626_product_qualification_upload_index_regression_summary.md`
@@ -3061,3 +3184,115 @@ SG-PARTIAL-001 已让 partial 草稿可自动续写、转复核和批量续写�
 - 阿里云线上 `ac01c14` 的后端来源收敛、metadata 修复和核心问答链路已通过真实 API + Chrome 页面验证。
 - 前端标题补丁 `cfd1e4e03dd5` 发布后，Chrome 页面复验通过。
 - 资质证书问答参考来源污染问题已消除，绿色低碳参考来源标题已收敛，`P1C-15` 按严格 P0 口径关闭。
+
+---
+
+## Run 47 — 阿里云线上泰昌正式资产中文化与图文导出全流程回归（2026-06-27）
+
+> 运行记录：`docs/development/runs/run_20260627_aliyun_browser_full_regression.md`
+
+### 触发原因
+
+用户已将泰昌正式资料资产中文化、RAG 来源显示修复和 DOCX 图片题注清洗同步到阿里云测试环境，需要按真实正式投标场景做线上全流程验证，确认企业知识库、产品库、资信库、问答和技术/商务标图文导出不再暴露 `图示：XX第X页`、内部枚举、解析路径或 API 资产路径。
+
+### 测试与回归
+
+| 验证项 | 结果 |
+| --- | --- |
+| 线上服务 | PASS，`http://8.160.187.226` 可访问，`/api/health` 返回 `status=ok` |
+| Chrome 登录 | PASS，`admin` 登录成功 |
+| 企业知识库页面 | PASS，禁用字段命中 0 |
+| 企业产品库页面 | PASS，禁用字段命中 0 |
+| 企业资信库页面 | PASS，禁用字段命中 0 |
+| 知识库助手 CPVC 参数问答 | PASS，禁用字段命中 0 |
+| 6 类真实 stream | PASS，CPVC、MPP、生产制造能力、试验检测设备、资质证书、绿色低碳资料均 HTTP 200，禁用字段命中 0 |
+| 技术标 DOCX 导出 | PASS，任务 completed，图片候选/插入/失败/跳过为 26/24/0/2，字段刷新 `refreshed` |
+| 商务标 DOCX 导出 | PASS，任务 completed，图片候选/插入/失败/跳过为 24/24/0/0，字段刷新 `refreshed` |
+| DOCX 文件级 XML 审计 | PASS，技术标/商务标 `word/*.xml` 中禁用表达命中 0 |
+| 正式导出门禁 | PASS，当前新疆 10kV 导线项目仍因客户确认字段和产品适配 `T-000` 被阻断正式导出，仅允许草稿导出 |
+
+### 发现与边界
+
+- 技术标任务 metadata 的 `image_conversion.captions.samples.source` 保留旧原始题注作为后台追溯；实际写入 DOCX 的题注已正式化为 `资料：MPP电缆保护管检验报告` 等中文表达，下载文件 XML 审计确认旧题注未进入正文。
+- `/api/health` 的 `branch/commit` 仍为 `unknown`，不影响本轮功能验收；线上版本以服务器 `git log`、容器重建和真实行为为准。
+- 当前招标包物料为 10kV 导线类，泰昌现有已核验产品资料主要覆盖 CPVC/MPP 电缆保护管，因此 `T-000` 继续阻断正式投标文件导出，符合真实投标风险控制。
+
+### 结论
+
+阿里云测试环境泰昌正式资料资产中文化、RAG 问答展示、产品库/资信库页面展示和技术/商务分册 DOCX 图文导出主链路已通过真实浏览器回归。本轮 P0/P1 线上验收关闭；后续仍需更新泰昌专项旧评测集，避免继续要求召回已被正式隔离的解析中间 chunk。
+
+---
+
+## Run 48 — 泰昌专项评测集正式资料口径更新与增量门禁闭环（2026-06-27）
+
+> 门禁记录：`docs/rag/runs/run_20260627_taichang_formal_asset_cleanup_gate_v2_summary.md`
+> 豪乾 metadata 修复：`docs/rag/runs/run_20260627_haoqian_reference_metadata_repair.md`
+
+### 触发原因
+
+泰昌正式资料资产治理后，旧专项评测集仍要求召回历史图片资产索引、`asset_path`、`bbox`、`display_contexts`、`parsed_outputs` 等解析内部字段。按正式投标场景，这些内容已被隔离且不得进入用户可见问答或标书正文，因此需要更新评测集口径并重新跑标准门禁。
+
+### 修复内容
+
+- 修复河北豪乾参考稿 metadata：2 个参考文档、70 个 chunk 已统一为 `source_domain=reference_template`、`reference_only=true`、`fact_source_allowed_for_enterprise=false`、`citation_policy=reference_style_only`。
+- 更新 `tests/rag/customer_liaoning_taichang_testset.jsonl`：
+  - 企业事实用例显式增加 `doc_role=enterprise_evidence`，避免“响应”等字样被自动推断为 `self_phrase`；
+  - 资产用例不再以内部字段为成功条件，改为验证正式中文资料、泰昌企业事实和禁用内部字段；
+  - 河北豪乾参考稿用例只验证格式/目录/章节结构参考，不再允许作为泰昌事实来源；
+  - 绿色低碳、生产制造、试验检测等 hard case 问题改为贴近当前正式资料标题和用户真实问法。
+
+### 门禁结果
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 269 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 620 ms |
+| 泰昌专项 | off | 93.3% | 100.0% | 0.917 | 3.3% | 0.0% | 351 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 0.973 | 0.0% | 0.0% | 714 ms |
+
+### 结论
+
+标准增量回归门禁 PASS。泰昌专项已从旧口径失败恢复为正式资料治理口径下的 100% 召回，且禁用关键词命中率和跨资料域串扰均为 0。本轮不新增客户资料、不重入库；仅修复河北豪乾参考稿 metadata 和评测集口径。
+
+---
+
+## Run 49 — 产品库/资信库上传入口正式资产回归（2026-06-27）
+
+> 真实链路记录：`docs/rag/runs/run_20260627_upload_entry_formal_asset_regression.md`  
+> 门禁记录：`docs/rag/runs/run_20260627_upload_entry_formal_asset_gate_summary.md`
+
+### 触发原因
+
+泰昌正式资产治理完成后，需要验证后续客户从产品库/资信库页面新增上传图片或附件时，不会再次把 `页面_`、`原图`、`taichang_*`、`production_capacity`、`product_image`、`technical` 等内部字段带入用户侧展示、RAG 问答或正式标书配图链路。
+
+### 修复内容
+
+- `backend/api/assets.py` 在上传/更新资产入库前生成正式中文标题、分类、标签、说明、`source_display_name` 和正式题注策略。
+- 新增证据类型推断，覆盖营业执照、资质证书、检验报告、生产制造能力、试验检测能力、绿色低碳、项目业绩、财务、人员证书和产品图片。
+- `searchable_text` 排除内部枚举字段，并把卷册字段写为“技术标/资格文件/商务标”等中文词。
+- `backend/rag/display_names.py` 将用户侧资产返回中的 `product_image/qualification_image` 映射为“产品图片/资信图片”。
+
+### 真实验证
+
+| 验证项 | 结果 |
+| --- | --- |
+| 真实登录 | PASS，`POST /api/users/login` 使用 `admin` 登录成功 |
+| 真实上传 | PASS，`POST /api/knowledge/assets/upload` 上传测试图 `泰昌MPP生产线_页面_9原图.png` |
+| 上传返回 | PASS，标题 `泰昌MPP生产线资料`、分类 `生产制造能力`、标签 `泰昌/生产制造能力` |
+| 列表/详情 | PASS，用户侧禁用字段命中 0 |
+| 真实 stream | PASS，问题 `泰昌MPP生产线资料可以作为技术标生产制造能力配图吗？` 召回新上传资产，回答正文禁用字段命中 0 |
+| 测试资产清理 | PASS，测试资产已从数据库删除，详情接口返回“知识资产不存在” |
+| 自动化测试 | PASS，`tests/test_knowledge_asset_upload_payload.py tests/test_rag_display_names.py tests/test_rag_retrieval.py` 为 40 passed |
+
+### 门禁结果
+
+| 测试集 | 模式 | Recall@5 | Top1 来源准确率 | MRR | 禁用关键词命中率 | 跨 doc_role 串扰 | 平均耗时 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | off | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 246 ms |
+| Base | qwen3-rerank | 96.7% | 100.0% | 0.944 | 0.0% | 0.0% | 567 ms |
+| 泰昌专项 | off | 90.0% | 100.0% | 0.867 | 3.3% | 0.0% | 327 ms |
+| 泰昌专项 | qwen3-rerank | 100.0% | 100.0% | 0.973 | 0.0% | 0.0% | 691 ms |
+
+### 结论
+
+P1-5 上传入口新资产规则回归通过。后续新上传资产默认以正式中文字段入库，RAG 主链路和用户侧 SSE 不再暴露内部枚举或解析追溯痕迹。本轮只删除回归测试资产，不修改泰昌正式资产数据。

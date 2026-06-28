@@ -687,6 +687,7 @@ export type FormalCheckItem = {
   target?: string;
   checkType?: string;
   fieldKeys?: string[];
+  fieldLabels?: string[];
   evidenceChain?: Array<{ label: string; value: string }>;
   action?: {
     type: 'prefill' | 'bid_editor' | 'qualification_library' | 'product_library';

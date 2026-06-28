@@ -1,0 +1,239 @@
+{
+  "runId": "run_20260627_aliyun_browser_full_regression",
+  "base": "http://8.160.187.226",
+  "startedAt": "2026-06-27T10:45:59.500Z",
+  "steps": [
+    {
+      "label": "open_login",
+      "url": "http://8.160.187.226/login",
+      "screenshot": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/docs/development/runs/run_20260627_aliyun_browser_full_regression/01_login.png"
+    },
+    {
+      "label": "knowledge_page_text",
+      "forbiddenHits": [],
+      "textPreview": "AI标书系统\nadmin\n系统设置\n退出\n主页\n招标项目\n正式检查\n企业知识库\n企业资信库\n企业产品库\n用量与成本\n历史记录\n企业知识库\n\n管理企业介绍、历史标书、项目案例、标准话术和行业资料，为 RAG 标书生成提供可检索知识来源。\n\n刷新状态\n上传资料\n资料总数\n148\n已上传文档\n已索引文件\n148\n可用于检索\n解析中任务\n0\nMinerU后台提取中\n处理失败\n0\n需重新上传\n资料分类\n全部资料\n99+\n财务资料\n4\n参考模板资料\n2\n货物清单\n2\n基础证照\n5\n技术规范书\n39\n检验报告\n5\n绿色低碳资料\n9\n企业宣传资料\n1\n企业证明材料\n2\n人员证书\n17\n生产制造能力\n11\n试验检测能力\n9\n通用合同条款\n6\n项目业绩\n2\n招标公告\n6\n主招标文件\n6\n专用合同条款\n12\n资质证书\n10\n文件列表\n索引完成率 100%\nPostgreSQL + pgvector 持久化存储，支持电网招标文件、技术规范书、标准话术和企业资料检索。\n上传资质扫描件、产品图片或图文混排资料后，可继续扩展图片召回和标书自动配图能力。\n文件名称\t分类\t类型\t索引状态\t更新时间\t操作\n文件名称\n\t\n分类\n\t\n类型\n\t\n索引状态\n\t\n更新时间\n\t\n操作\n\n土地租赁协议\t企业证明材料\tPDF\t已索引\t2026-06-23 17:05\t\n查看\n\n职业健康安全管理体系认证证书\t资质证书\tPDF\t已索引\t2026-06-23 17:05\t\n查看\n\n质量管理体系认证证书\t资质证书\tPDF\t已索引\t2026-06-23 17:05\t\n查看\n\n环境管理体系认证证书\t资质证书\tPDF\t已索引\t2026-06-23 17:05\t\n查看\n\n晁坤琳\t人员证书\tPDF\t已索引\t2026-06-23 17:05\t\n查看\n\n陈仙瑞\t人员证书\tPDF\t已索引\t2026-06-23 17:05\t\n查看\n\n公司人员花名册\t人员证书\tPDF\t已索引\t2026-06-23 17:05\t\n查看\n\n基础证照资料\t基础证照\tPDF\t已索引\t2026-06-23 17:05\t\n查看\n\n晁坤琳\t人员证书\tPDF\t已索引\t2026-06-23 17:05\t\n查看\n\n陈仙瑞\t人员证书\tPDF\t已索引\t2026-06-23 17:05\t\n查看\n共 148 条\n1\n2\n3\n4\n5\n•••\n15\n10 条/页\n国家电网投标智能工作台 · 招标解析 · 标书编制 · 正式检查\n企业资料本地可控 · 支持内网部署 · 面向真实投标交付"
+    }
+  ],
+  "forbiddenTerms": [
+    "图示：",
+    "原图",
+    "页面_",
+    "asset_path",
+    "parsed_outputs",
+    "source_domain",
+    "target_library",
+    "embedding",
+    "searchable_text",
+    "file_name",
+    "specs",
+    "taichang_",
+    "product_library",
+    "qualification_library",
+    "/api/bidding/knowledge/assets"
+  ],
+  "login": {
+    "method": "fetch",
+    "status": 200,
+    "user": {
+      "companyName": "",
+      "displayName": "admin",
+      "id": "d2ba49ab-726f-4228-81db-3c307ca48e81",
+      "role": "admin",
+      "status": "active",
+      "username": "admin"
+    },
+    "tokenLength": 264
+  },
+  "health": {
+    "status": "ok",
+    "version": {
+      "app": "ai-bidding-backend",
+      "branch": "unknown",
+      "builtAt": "",
+      "commit": "unknown"
+    }
+  },
+  "knowledgePage": {
+    "url": "http://8.160.187.226/knowledge",
+    "screenshot": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/docs/development/runs/run_20260627_aliyun_browser_full_regression/02_knowledge_page.png",
+    "forbiddenHits": []
+  },
+  "product_page": {
+    "route": "/products",
+    "url": "http://8.160.187.226/products",
+    "screenshot": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/docs/development/runs/run_20260627_aliyun_browser_full_regression/product_page.png",
+    "forbiddenHits": [],
+    "textPreview": "AI标书系统\nadmin\n系统设置\n退出\n主页\n招标项目\n正式检查\n企业知识库\n企业资信库\n企业产品库\n用量与成本\n历史记录\n企业产品库\n\n沉淀产品参数、图片、检验报告、制造能力和适用场景，上传后用于知识问答、技术标正文和标书配图。\n\n上传/新增产品资料\n产品资料数\n407\n已接入产品资产\n能力标签\n23\n来自产品资料标签\n参数/图片素材\n407\n检验报告、产品图片和参数素材\n客户资料\n407\n泰昌已提供素材\n产品分类\n全部产品\n99+\n电缆与附件\n0\n开关柜与成套设备\n0\n变压器与箱变\n0\n互感器\n0\n继电保护与自动化\n0\n通信与调度设备\n0\n产品实物图片\n0\n生产制造能力\n44\n试验检测设备\n0\n检验报告\n26\n绿色低碳资料\n99+\n厂房仓储资料\n0\n输变电设备\n0\n配网设备\n0\n检测与试验设备\n0\n安装调试服务\n0\n运维检修服务\n0\n安全工器具\n0\n企业宣传资料\n50\n企业证明材料\n10\n试验检测能力\n56\n产品与服务列表\n资料保存后自动接入检索索引\n资料名称\t类型\t版本\t适用场景\t能力标签\t资料数\t操作\n资料名称\n\t\n类型\n\t\n版本\n\t\n适用场景\n\t\n能力标签\n\t\n资料数\n\t\n操作\n\n碳足迹报告\t绿色低碳资料\t泰昌资料\t技术标、商务标\t\n泰昌\n企业自有资料\n绿色低碳资料\n\t1\t\n详情\n编辑\n\n碳足迹报告\t绿色低碳资料\t泰昌资料\t技术标、商务标\t\n泰昌\n企业自有资料\n绿色低碳资料\n\t1\t\n详情\n编辑\n\n碳足迹报告\t绿色低碳资料\t泰昌资料\t技术标、商务标\t\n泰昌\n企业自有资料\n绿色低碳资料\n\t1\t\n详情\n编辑\n\n碳足迹报告\t绿色低碳资料\t泰昌资料\t技术标、商务标\t\n泰昌\n企业自有资料\n绿色低碳资料\n\t1\t\n详情\n编辑\n\n碳足迹报告\t绿色低碳资料\t泰昌资料\t技术标、商务标\t\n泰昌\n企业自有资料\n绿色低碳资料\n\t1\t\n详情\n编辑\n\n碳足迹报告\t绿色低碳资料\t泰昌资料\t技术标"
+  },
+  "qualification_page": {
+    "route": "/qualification",
+    "url": "http://8.160.187.226/qualification",
+    "screenshot": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/docs/development/runs/run_20260627_aliyun_browser_full_regression/qualification_page.png",
+    "forbiddenHits": [],
+    "textPreview": "AI标书系统\nadmin\n系统设置\n退出\n主页\n招标项目\n正式检查\n企业知识库\n企业资信库\n企业产品库\n用量与成本\n历史记录\n企业资信库\n\n维护营业执照、资质证书、人员证书、财务资料、项目业绩和授权模板，上传后用于知识问答、商务标和资格文件。\n\n上传/新增资信资料\n资信文件数\n189\n已接入资信资产\n有效证照\n189\n可用于检索\n临期提醒\n0\n待接入到期字段\n待核验资料\n0\n需人工复核\n资信分类\n全部资信\n99+\n基础证照\n52\n资质证书\n17\n人员证书\n26\n财务资料\n77\n绿色低碳资料\n0\n项目业绩\n17\n授权模板\n0\n资信文件列表\n资料保存后自动接入检索索引\n资信文件\t分类\t发证/出具机构\t编号\t有效期\t状态\t操作\n资信文件\n\t\n分类\n\t\n发证/出具机构\n\t\n编号\n\t\n有效期\n\t\n状态\n\t\n操作\n\n开户许可证\t基础证照\t河北泰昌电力器材科技有限公司\t-\t待维护\t有效\t\n查看\n编辑\n\n营业执照副本\t基础证照\t河北泰昌电力器材科技有限公司\t-\t待维护\t有效\t\n查看\n编辑\n\n绿色电力认证证书\t资质证书\t河北泰昌电力器材科技有限公司\t-\t待维护\t有效\t\n查看\n编辑\n\n社保证明（）\t人员证书\t河北泰昌电力器材科技有限公司\t-\t待维护\t有效\t\n查看\n编辑\n\n晁坤琳人员证书（）\t人员证书\t河北泰昌电力器材科技有限公司\t-\t待维护\t有效\t\n查看\n编辑\n\n晁坤琳人员证书（）\t人员证书\t河北泰昌电力器材科技有限公司\t-\t待维护\t有效\t\n查看\n编辑\n\n陈仙瑞人员证书（）\t人员证书\t河北泰昌电力器材科技有限公司\t-\t待维护\t有效\t\n查看\n编辑\n\n陈仙瑞人员证书（）\t人员证书\t河北泰昌电力器材科技有限公司\t-\t待维护\t有效\t\n查看\n编辑\n\n公司人员花名册（）\t人员证书\t河北泰昌电力器材科技有限公司\t-\t待维护\t有效\t\n查看\n编辑\n\n公司人员花名册（）\t人员证书\t河北泰昌电力器材科技有限公司\t-"
+  },
+  "product_base_page": {
+    "route": "/product-base",
+    "url": "http://8.160.187.226/",
+    "screenshot": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/docs/development/runs/run_20260627_aliyun_browser_full_regression/product_base_page.png",
+    "forbiddenHits": [],
+    "textPreview": "AI标书系统\nadmin\n系统设置\n退出\n主页\n招标项目\n正式检查\n企业知识库\n企业资信库\n企业产品库\n用量与成本\n历史记录\nAI 标书工作台\n企业单机部署版\n·\n本地知识库驱动\n·\n分章节生成\n·\nWord 导出\n\n帮助企业快速完成资料入库、招标解析、标书生成与导出，适合非技术人员直接使用。\n\n一站式标书编制流程\n从招标文件到可编辑初稿\n上传招标文件\nPDF / Word\nAI 解读要求\n评分点 / 废标项\n生成标书初稿\n章节大纲 / Word\nAI\n智能标书\n\n上传招标文件后，系统会解析招标要求，并按技术标、商务标、资格文件和报价文件生成可编辑初稿。\n\n上传招标文件生成标书\n继续历史标书\n管理知识资料\n标书分册工作区\n\n上传一次招标文件后，系统按真实投标习惯组织为技术标和商务标；资格、报价、附件作为商务标内部资料管理。\n\n进入分册编制\n技术标\n编写中\n\n施工组织设计、技术响应、质量安全环保\n\n章节 64\n完成 1\n商务标\n编写中\n\n投标函、资格资料、报价文件、承诺函和附件材料\n\n章节 74\n完成 0\n常用功能\n\n围绕一次投标任务，按“解读、检查、导出”逐步处理。\n\n招标文件解读\n提取项目基础信息、技术要求、商务要求、评分标准\n进入解读\n评分项检查\n识别评分标准，检查内容覆盖情况\n查看评分\n废标项检查\n提示强制项与潜在废标风险\n查看风险\nWord 导出\n按固定模板导出可编辑 Word 文档\n查看任务\n最近任务\n查看全部 >\n项目名称\t招标单位\t创建时间\t当前状态\t操作\n国家电网有限公司2026年西北、西藏区域第一次联合采购10kV电力电缆、架空绝缘导线协议库存公开招标采购项目\t国网新疆电力有限公司（牵头实施单位）、国网甘肃省电力公司、国网宁夏电力有限公司、国网青海省电力公司、国网陕西省电力公司、国网西藏电力有限公司\t06/27 10:59\t\n标书编制\n正文 1/109 ·"
+  },
+  "qualification_base_page": {
+    "route": "/qualification-base",
+    "url": "http://8.160.187.226/",
+    "screenshot": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/docs/development/runs/run_20260627_aliyun_browser_full_regression/qualification_base_page.png",
+    "forbiddenHits": [],
+    "textPreview": "AI标书系统\nadmin\n系统设置\n退出\n主页\n招标项目\n正式检查\n企业知识库\n企业资信库\n企业产品库\n用量与成本\n历史记录\nAI 标书工作台\n企业单机部署版\n·\n本地知识库驱动\n·\n分章节生成\n·\nWord 导出\n\n帮助企业快速完成资料入库、招标解析、标书生成与导出，适合非技术人员直接使用。\n\n一站式标书编制流程\n从招标文件到可编辑初稿\n上传招标文件\nPDF / Word\nAI 解读要求\n评分点 / 废标项\n生成标书初稿\n章节大纲 / Word\nAI\n智能标书\n\n上传招标文件后，系统会解析招标要求，并按技术标、商务标、资格文件和报价文件生成可编辑初稿。\n\n上传招标文件生成标书\n继续历史标书\n管理知识资料\n标书分册工作区\n\n上传一次招标文件后，系统按真实投标习惯组织为技术标和商务标；资格、报价、附件作为商务标内部资料管理。\n\n进入分册编制\n技术标\n编写中\n\n施工组织设计、技术响应、质量安全环保\n\n章节 64\n完成 1\n商务标\n编写中\n\n投标函、资格资料、报价文件、承诺函和附件材料\n\n章节 74\n完成 0\n常用功能\n\n围绕一次投标任务，按“解读、检查、导出”逐步处理。\n\n招标文件解读\n提取项目基础信息、技术要求、商务要求、评分标准\n进入解读\n评分项检查\n识别评分标准，检查内容覆盖情况\n查看评分\n废标项检查\n提示强制项与潜在废标风险\n查看风险\nWord 导出\n按固定模板导出可编辑 Word 文档\n查看任务\n最近任务\n查看全部 >\n项目名称\t招标单位\t创建时间\t当前状态\t操作\n国家电网有限公司2026年西北、西藏区域第一次联合采购10kV电力电缆、架空绝缘导线协议库存公开招标采购项目\t国网新疆电力有限公司（牵头实施单位）、国网甘肃省电力公司、国网宁夏电力有限公司、国网青海省电力公司、国网陕西省电力公司、国网西藏电力有限公司\t06/27 10:59\t\n标书编制\n正文 1/109 ·"
+  },
+  "assistantCpvc": {
+    "screenshot": "/Users/chris/Documents/项目/AI标书项目/ai_bidding_power_grid/docs/development/runs/run_20260627_aliyun_browser_full_regression/03_assistant_cpvc.png",
+    "forbiddenHits": [],
+    "textTail": "AI标书系统\nadmin\n系统设置\n退出\n主页\n招标项目\n正式检查\n企业知识库\n企业资信库\n企业产品库\n用量与成本\n历史记录\n企业知识库\n\n管理企业介绍、历史标书、项目案例、标准话术和行业资料，为 RAG 标书生成提供可检索知识来源。\n\n刷新状态\n上传资料\n资料总数\n148\n已上传文档\n已索引文件\n148\n可用于检索\n解析中任务\n0\nMinerU后台提取中\n处理失败\n0\n需重新上传\n资料分类\n全部资料\n99+\n财务资料\n4\n参考模板资料\n2\n货物清单\n2\n基础证照\n5\n技术规范书\n39\n检验报告\n5\n绿色低碳资料\n9\n企业宣传资料\n1\n企业证明材料\n2\n人员证书\n17\n生产制造能力\n11\n试验检测能力\n9\n通用合同条款\n6\n项目业绩\n2\n招标公告\n6\n主招标文件\n6\n专用合同条款\n12\n资质证书\n10\n文件列表\n索引完成率 100%\nPostgreSQL + pgvector 持久化存储，支持电网招标文件、技术规范书、标准话术和企业资料检索。\n上传资质扫描件、产品图片或图文混排资料后，可继续扩展图片召回和标书自动配图能力。\n文件名称\t分类\t类型\t索引状态\t更新时间\t操作\n文件名称\n\t\n分类\n\t\n类型\n\t\n索引状态\n\t\n更新时间\n\t\n操作\n\n土地租赁协议\t企业证明材料\tPDF\t已索引\t2026-06-23 17:05\t\n查看\n\n职业健康安全管理体系认证证书\t资质证书\tPDF\t已索引\t2026-06-23 17:05\t\n查看\n\n质量管理体系认证证书\t资质证书\tPDF\t已索引\t2026-06-23 17:05\t\n查看\n\n环境管理体系认证证书\t资质证书\tPDF\t已索引\t2026-06-23 17:05\t\n查看\n\n晁坤琳\t人员证书\tPDF\t已索引\t2026-06-23 17:05\t\n查看\n\n陈仙瑞\t人员证书\tPDF\t已索引\t2026-06-23 17:05\t\n查看\n\n公司人员花名册\t人员证书\tPDF\t已索引\t2026-06-23 17:05\t\n查看\n\n基础证照资料\t基础证照\tPDF\t已索引\t2026-06-23 17:05\t\n查看\n\n晁坤琳\t人员证书\tPDF\t已索引\t2026-06-23 17:05\t\n查看\n\n陈仙瑞\t人员证书\tPDF\t已索引\t2026-06-23 17:05\t\n查看\n共 148 条\n1\n2\n3\n4\n5\n•••\n15\n10 条/页\n国家电网投标智能工作台 · 招标解析 · 标书编制 · 正式检查\n企业资料本地可控 · 支持内网部署 · 面向真实投标交付\n企业知识库助手\n请查询泰昌CPVC电缆保护管检验报告中平均内径和壁厚的关键参数，并给出资料来源。\n结论\n泰昌 CPVC 电缆保护管（规格 DS 250×15×6000 SN16 PVC-C）的检验报告中，承口平均内径检验结果为 280.5 mm，单项结论合格。壁厚参数在提供的文本片段中未直接给出检验数值，需以完整检验报告原件为准。\n关键信息\n企业：河北泰昌电力器材科技有限公司\n产品/规格：CPVC电缆保护管 / DS 250×15×6000 SN16 PVC-C\n报告编号：2024100312005501713\n平均内径（承口）：\n标准要求：280.0～281.5 mm\n检验结果：280.5 mm\n结论：合格\n壁厚：规格型号中“15”表示公称壁厚（15 mm），但检验报告中的实际检验数值未在提供的文本片段中列出。\n操作建议\n如需获取壁厚的具体检验数据，请直接查阅 图片资产1（CPVC电缆保护管检验报告原件整页），该图片为客户原始资料，可提供完整参数。\n预览\nCPVC电缆保护管检验报告\n该报告仅覆盖本规格（内径250 mm / 型号 DS 250×15×6000 SN16 PVC-C），其他规格（如不同内径或壁厚）需另行提供对应规格的检验报告。\n需要确认或补充\n壁厚检验结果：文本片段中未包含此项数据，请参考原始检验报告图片或联系客户确认。\n其他规格覆盖：若招标或资质审查涉及其他规格，需补充对应规格的检验报告。\n参考依据\n资料1：《泰昌产品结构化参数》（来源：CPVC电缆保护管检验报告内径250）——明确给出承口平均内径检验结果。\n资料2：《CPVC电缆保护管检验报告》（知识片段）——说明该图片为客户原始资料整页渲染件。\n图片资产1：CPVC电缆保护管检验报告（客户原始资料）——可提供完整参数，包括壁厚等未在文本中列出的信息。\n你可以继续问\n壁厚数据在图片资产1中是否完整？能否提取出具体数值，并确认是否满足招标文件的技术参数要求？\n您是否还需要泰昌其他规格（如内径200或315）CPVC电缆保护管的检验报告？若需要，请提供对应报告。？\n该检验报告图片资产适合放入标书的技术响应章节（如“技术参数响应表”或“产品检验证明”）中，是否需要系统自动为其标注适用章节？\n参考资料来源\n资料1：CPVC电缆保护管检验报告内径250\n泰昌 · 检验报告 · 泰昌产品结构化参数\n99%\n【泰昌产品结构化参数｜优先依据】 企业：河北泰昌电力器材科技有限公司 产品：CPVC电缆保护管 规格型号：DS 250×15×6000 SN16 PVC-C 公称内径：250 参数名称：尺寸-承口平均内径 单位：mm 标准要求：280.0~\n资料2：CPVC电缆保护管检验报告\n泰昌 · 检验报告\n99%\n河北泰昌电力器材科技有限公司检验报告，来源于客户已提供文件《CPVC电缆保护管检验报告内径250》。该图片为客户原始资料整页渲染件。\n资料3：MPP电缆保护管检验报告\n泰昌 · 检验报告\n99%\n河北泰昌电力器材科技有限公司检验报告，来源于客户已提供文件《MPP电缆保护管检验报告内径250》。该图片为客户原始资料整页渲染件。"
+  },
+  "streamCases": [
+    {
+      "caseId": "cpvc_params",
+      "status": 200,
+      "elapsedMs": 12902,
+      "forbiddenHits": [],
+      "eventTypesTail": [
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "done"
+      ],
+      "answerPreview": "## 结论\n根据河北泰昌电力器材科技有限公司提供的CPVC电缆保护管检验报告（内径250规格），已确认该规格的承口平均内径参数及合格结论。但报告中未直接提供壁厚数据。\n\n## 关键信息\n- **企业名称**：河北泰昌电力器材科技有限公司\n- **产品型号**：DS 250×15×6000 SN16 PVC-C\n- **公称内径**：250 mm\n- **承口平均内径（检验结果）**：280.5 mm （标准要求：280.0~281.5 mm，结论：合格）\n- **报告编号**：2024100312005501713\n- **资料来源**：《CPVC电缆保护管检验报告内径250》（客户原始资料，含结构化检验参数）\n\n## 需要确认或补充\n- **壁厚参数**：当前资料（涵盖承口平均内径、公称内径等）未明确列出壁厚的具体检验结果或标准要求。如需该数据，建议查阅报告原件“尺寸”章节的完整项目，或向客户/企业确认。\n- **覆盖范围**：该报告仅覆盖内径250/规格 `DS 250×15×6000 SN16 PVC-C`。其他CPVC规格需另行提供对应报告或由客户确认其覆盖方式。\n\n## 操作建议\n- 若用于投标或资质申报，建议以报告原件为准，并确认内径、壁厚等所有关键项是否在报告正文中完整列明。\n- 如需壁厚数据，可联系河北泰昌电力器材科技有限公司补充提供或查阅报告完整扫描件。\n\n## "
+    },
+    {
+      "caseId": "mpp_report",
+      "status": 200,
+      "elapsedMs": 8778,
+      "forbiddenHits": [],
+      "eventTypesTail": [
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "done"
+      ],
+      "answerPreview": "## 结论\n\n依据《MPP电缆保护管检验报告内径250》及关联结构化参数，泰昌MPP电缆保护管（规格 DF 250×22×9000 SN40 MPP）的外观项目检验结论为“合格”，报告编号为 **2024100312005501712**。该报告仅覆盖上述规格，不可泛化至其他规格。\n\n## 关键信息\n\n- **检验项目**：颜色和外观  \n  - 标准要求：导管颜色应均匀一致，无气泡、裂口、明显痕纹、凹陷、杂质、分解变色线及色泽不均，内壁光滑平整，端面切割平整并与轴线垂直。  \n  - 检验结果：符合要求  \n  - 单项结论：合格  \n- **报告编号**：2024100312005501712  \n- **来源文件**：《MPP电缆保护管检验报告内径250》（客户原始资料）\n\n## 操作建议\n\n- 该报告可作为泰昌MPP电缆保护管内径250规格（DF 250×22×9000 SN40 MPP）的检验依据，用于招投标或资质核验。  \n- 如需其他规格（如不同内径、壁厚或型号），建议补充对应规格的检验报告或由客户确认覆盖范围。\n\n## 需要确认或补充\n\n- 当前资料仅覆盖内径250的一种规格（DF 250×22×9000 SN40 MPP），其他规格（如其他内径、SN等级）未包含。若用户需求涉及多种规格，需另行提供或确认。\n\n## 参考依据\n\n- 资料1：MPP电缆保护管检验报告（"
+    },
+    {
+      "caseId": "production_line",
+      "status": 200,
+      "elapsedMs": 9465,
+      "forbiddenHits": [],
+      "eventTypesTail": [
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "done"
+      ],
+      "answerPreview": "## 结论\n\n泰昌（河北泰昌电力器材科技有限公司）可用于技术标的生产制造能力资料包括：整页渲染的生产制造能力总体资料，以及CPVC63三层复合管材挤出生产线和MPP生产线的专项图片。这些资料均来源于客户提供的原始文件，可直接用于技术响应文件或生产制造能力章节的展示。\n\n## 关键信息\n\n- **生产制造能力总体资料**：一份客户原始资料整页渲染件，对应图片资产1，展示企业整体生产制造实力，可插入技术标的生产制造能力章节。\n- **CPVC63三层复合管材挤出生产线**：客户原始资料整页渲染件，对应图片资产2，展示该规格管材的专用生产线，适用于技术响应文件或生产制造能力章节。\n- **MPP生产线**：客户原始资料整页渲染件，对应图片资产3，展示MPP管材生产线，适用于生产制造能力章节。\n\n以上资料均已标注为“客户原始资料”，内容不可替代或修改，可直接作为技术标书附件或配图使用。\n\n## 操作建议\n\n在技术标书编写中，建议将以下三项资料分别插入对应章节：\n1. 在“生产制造能力”小节插入图片资产1，作为企业总体制造实力的佐证。\n2. 在“技术响应文件”或“设备配置”小节，针对CPVC63管材选用图片资产2，针对MPP管材选用图片资产3。\n3. 如标书另有更细分的生产线要求（如其他口径或类型），可咨询企业是否可提供对应图片。\n\n## 参考依据\n\n- 资料1：《生产制造能力》整页渲染件（"
+    },
+    {
+      "caseId": "testing_equipment",
+      "status": 200,
+      "elapsedMs": 10583,
+      "forbiddenHits": [],
+      "eventTypesTail": [
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "done"
+      ],
+      "answerPreview": "## 结论\n根据您企业知识库中的资料，河北泰昌电力器材科技有限公司目前有两项试验检测设备的完整原始资料，可直接用于技术响应文件：**微机控制电子万能试验机**和**热变型、维卡软化点温度测定仪**。\n\n## 关键信息\n- **微机控制电子万能试验机**：资料属性为“客户原始资料”，来自文件《微机控制电子万能试验机》，属于试验检测能力范畴，适用于技术响应文件中的“试验检测设备”章节。\n- **热变型、维卡软化点温度测定仪**：同样为“客户原始资料”，来自文件《热变型、维卡软化点温度测定仪》，同样适用于技术响应文件的试验检测设备部分。\n- 两项资料均以原始整页渲染件形式提供，可以作为企业试验检测能力的直接佐证材料。\n\n## 操作建议\n1. 在编写技术响应文件（如“试验检测设备”章节）时，可以插入上述两项设备的图片资料（图片资产1、图片资产2），以直观展示企业所具备的检测能力。\n2. 建议结合企业已有的其他检测设备（如工频试验装置、冲击试验成套检测设备、拉力试验机等，参考资料3的文本描述），进一步丰富试验检测能力清单，但注意目前仅有上述两项设备具备原始资料文件。\n\n## 需要确认或补充\n当前资料中未提供除上述两项设备以外的其他试验检测设备的原始图片或证书文件。如需要补充更多设备的证明材料（如拉力试验机、工频试验装置等），建议联系相关人员获取对应原始资料。\n\n## 参考依据\n- 资料1（来"
+    },
+    {
+      "caseId": "certificates",
+      "status": 200,
+      "elapsedMs": 8783,
+      "forbiddenHits": [],
+      "eventTypesTail": [
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "done"
+      ],
+      "answerPreview": "## 结论\n河北泰昌电力器材科技有限公司已确认命中以下三项资质证书（均为客户原始资料整页渲染件）：\n- 质量管理体系认证证书  \n- 环境管理体系认证证书  \n- 职业健康安全管理体系认证证书  \n\n## 关键信息\n- **质量管理体系认证证书**：依据《1.质量管理体系认证证书》图片资产（图片资产1）及知识片段资料1、资料4。资料4宣传彩页提及证书编号及有效期，但以正式证书原件（图片资产）为准，不自行推断具体文字内容。  \n- **环境管理体系认证证书**：依据《2.环境管理体系认证证书》图片资产（图片资产2）及知识片段资料2。  \n- **职业健康安全管理体系认证证书**：依据《3.职业健康安全管理体系认证证书》图片资产（图片资产3）及知识片段资料3。  \n\n上述三项证书均属于正式资质证书，非宣传册或替代材料。\n\n## 操作建议\n- 如需查看证书具体内容（如编号、有效期、发证机构等），可直接参考页面展示的对应图片资产（图片资产1、2、3）。  \n- 若用于招标材料或资格审查，建议以原始图片文件或原件扫描件为准。\n\n## 参考依据\n- 知识片段：资料1（质量管理体系认证证书）、资料2（环境管理体系认证证书）、资料3（职业健康安全管理体系认证证书）、资料4（宣传彩页，仅作辅助参考）。  \n- 图片资产：图片资产1（质量管理体系认证证书）、图片资产2（环境管理体系认证证书）、图片资产"
+    },
+    {
+      "caseId": "green_low_carbon",
+      "status": 200,
+      "elapsedMs": 9683,
+      "forbiddenHits": [],
+      "eventTypesTail": [
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "chunk",
+        "done"
+      ],
+      "answerPreview": "## 结论\n根据现有检索结果，河北泰昌电力器材科技有限公司已提供的绿色低碳资料为一份《ESG环境社会公司治理报告》。该报告属于客户原始资料，可在企业标书或绿色低碳章节中作为参考材料使用。\n\n## 关键信息\n- **已发现的具体资料**：图片资产1（ESG环境社会公司治理报告），分类为“绿色低碳资料”，说明中提到该图片为原始资料整页渲染件。\n- **其他相关文本片段**：\n  - 资料2提及“满足企业的绿色发展”，但未指向具体文件名或文件内容。\n  - 资料3为绿色低碳资料图片资产目录，仅说明资产为泰昌企业事实，未列出其他具体资料名称。\n\n## 操作建议\n- 在投标或企业内部编制绿色低碳章节时，可直接插入图片资产1（ESG环境社会公司治理报告）作为支撑材料。\n- 如需更完整的绿色低碳证明材料组合（如绿色产品认证证书、环保体系认证、碳中和承诺函等），建议进一步补充。\n\n## 需要确认或补充\n当前信息不足以覆盖全部可能的绿色低碳资料。请确认泰昌是否还拥有以下类型的资料（如有，可提供检索或文件名称）：\n- 绿色产品认证证书\n- 环境管理体系认证证书（如ISO 14001）\n- 碳足迹核算报告或碳中和声明\n- 其他节能环保相关荣誉或证明材料\n\n## 参考依据\n- 资料1（来源ESG环境社会公司治理报告）、资料2（来源绿色发展规划报告）、资料3（来源绿色低碳资料图片资产目录）\n- 图片资产1（"
+    }
+  ],
+  "projectsProbe": [
+    {
+      "url": "/api/bidding/projects",
+      "status": 404,
+      "preview": "<!doctype html>\n<html lang=en>\n<title>404 Not Found</title>\n<h1>Not Found</h1>\n<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>\n"
+    },
+    {
+      "url": "/api/bidding/history",
+      "status": 200,
+      "preview": "{\n  \"items\": [\n    {\n      \"action\": \"\\u7ee7\\u7eed\\u7f16\\u5236\",\n      \"agency\": null,\n      \"analysis_count\": 1,\n      \"chunk_count\": 2,\n      \"created_at\": \"2026-06-27T10:59:31.743603+08:00\",\n      \"file_count\": 1,\n      \"generated_leaf_count\": 1,\n      \"generated_section_count\": 1,\n      \"id\": \"580b8c82-42c2-4a51-a0d2-17b60afa22b9\",\n      \"latest_file_id\": \"9be7effa-f0a4-4c7b-9576-9094b5a07319\",\n      \"latest_file_name\": \"\\u56fd\\u5bb6\\u7535\\u7f512026\\u897f\\u5317\\u897f\\u85cf10kV\\u67b6\\u7a7a\\u7edd\\u7f18\\u5bfc\\u7ebf\\u65b0\\u7586\\u53051_\\u4e3b\\u62db\\u6807\\u6587\\u4ef6.docx\",\n      \"leaf_section_count\": 109,\n      \"next_action\": \"\\u7ee7\\u7eed\\u7f16\\u5236\",\n      \"next_step\": \"editor\",\n      \"parse_download_retry_count\": 0,\n      \"parse_error\": null,\n      \"parse_error_type\": null,\n      \"parse_failure_stage\": null,\n      \"parse_raw_error\": null,\n      \"parse_retryable\": false,\n      \"parse_status\": \"indexed\",\n      \"parse_updated_at\": \"2026-06-27T02:59:33Z\",\n      \"prefill_applied\": true,\n"
+    },
+    {
+      "url": "/api/bidding/interpretations",
+      "status": 404,
+      "preview": "<!doctype html>\n<html lang=en>\n<title>404 Not Found</title>\n<h1>Not Found</h1>\n<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>\n"
+    },
+    {
+      "url": "/api/bidding/projects?limit=10",
+      "status": 404,
+      "preview": "<!doctype html>\n<html lang=en>\n<title>404 Not Found</title>\n<h1>Not Found</h1>\n<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>\n"
+    }
+  ],
+  "export": {
+    "candidates": [
+      {
+        "projectId": "580b8c82-42c2-4a51-a0d2-17b60afa22b9",
+        "status": 201,
+        "text": "{\n  \"exportMode\": \"draft\",\n  \"formalExportGate\": {\n    \"blocked_count\": 12,\n    \"can_formal_export\": false,\n    \"checked\": true,\n    \"checked_at\": \"2026-06-27T10:47:45.538482+00:00\",\n    \"compliance_percent\": 12,\n    \"draft_export_allowed\": true,\n    \"export_mode\": \"draft\",\n    \"formal_export_label\": \"\\u4ec5\\u5141\\u8bb8\\u8349\\u7a3f\\u7248\\u5bfc\\u51fa\",\n    \"formal_required_gaps\": 12,\n    \"high_risk_missing\": 30,\n    \"manual_confirm_count\": 4,\n    \"rule_set_version\": \"formal_bid_check_rules.v1\",\n    \"scope\": \"volume\",\n    \"top_blockers\": [\n      {\n        \"category\": \"\\u5546\\u52a1\\u54cd\\u5e94\",\n        \"evidence\": \"\\u672a\\u5f62\\u6210\\u6b63\\u5f0f\\u5ba2\\u6237\\u786e\\u8ba4\\uff1a\\u6295\\u6807\\u603b\\u4ef7\\uff1a\\u672a\\u586b\\u5199\",\n        \"id\": \"B-002\",\n        \"severity\": \"blocker\",\n        \"status\": \"blocked\",\n        \"suggestion\": \"\\u5728\\u6295\\u6807\\u4fe1\\u606f\\u786e\\u8ba4\\u9875\\u586b\\u5199\\u6295\\u6807\\u603b\\u4ef7\\u3002\",\n        \"target\": null,\n        \"title\": \"\\u6295\\u6807\\u603b\\u4ef7\\u5"
+      }
+    ],
+    "selected": {
+      "projectId": "580b8c82-42c2-4a51-a0d2-17b60afa22b9",
+      "initial": {
+        "projectId": "580b8c82-42c2-4a51-a0d2-17b60afa22b9",
+        "status": 201,
+        "text": "{\n  \"exportMode\": \"draft\",\n  \"formalExportGate\": {\n    \"blocked_count\": 12,\n    \"can_formal_export\": false,\n    \"checked\": true,\n    \"checked_at\": \"2026-06-27T10:47:45.538482+00:00\",\n    \"compliance_percent\": 12,\n    \"draft_export_allowed\": true,\n    \"export_mode\": \"draft\",\n    \"formal_export_label\": \"\\u4ec5\\u5141\\u8bb8\\u8349\\u7a3f\\u7248\\u5bfc\\u51fa\",\n    \"formal_required_gaps\": 12,\n    \"high_risk_missing\": 30,\n    \"manual_confirm_count\": 4,\n    \"rule_set_version\": \"formal_bid_check_rules.v1\",\n    \"scope\": \"volume\",\n    \"top_blockers\": [\n      {\n        \"category\": \"\\u5546\\u52a1\\u54cd\\u5e94\",\n        \"evidence\": \"\\u672a\\u5f62\\u6210\\u6b63\\u5f0f\\u5ba2\\u6237\\u786e\\u8ba4\\uff1a\\u6295\\u6807\\u603b\\u4ef7\\uff1a\\u672a\\u586b\\u5199\",\n        \"id\": \"B-002\",\n        \"severity\": \"blocker\",\n        \"status\": \"blocked\",\n        \"suggestion\": \"\\u5728\\u6295\\u6807\\u4fe1\\u606f\\u786e\\u8ba4\\u9875\\u586b\\u5199\\u6295\\u6807\\u603b\\u4ef7\\u3002\",\n        \"target\": null,\n        \"title\": \"\\u6295\\u6807\\u603b\\u4ef7\\u5"
+      },
+      "payload": {}
+    }
+  },
+  "finishedAt": "2026-06-27T10:47:45.544Z"
+}

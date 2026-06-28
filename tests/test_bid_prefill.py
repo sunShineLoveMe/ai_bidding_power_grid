@@ -283,6 +283,72 @@ class BidPrefillReportTest(unittest.TestCase):
         self.assertIn("tender_requirement", section_by_title["4.1 技术偏差表"]["sourceDomains"])
         self.assertTrue(section_by_title["4.1 技术偏差表"]["boundaryWarnings"])
 
+    def test_xinjiang_overhead_wire_package_blocks_taichang_cpvc_mpp_prefill(self):
+        from backend.services.bid_prefill import build_bid_prefill_report
+
+        goods_rows = [
+            {
+                "分标编号": "2225AC-1408006-3401",
+                "包名称": "包2",
+                "物资名称": "电缆保护管,CPVC,φ200",
+                "数量": "30000",
+                "_package_code": "2225AC",
+                "_material_family": "CPVC",
+                "_spec": "φ200",
+            }
+        ]
+        technical_rows = [
+            {
+                "package_code": "2225AC",
+                "package_no": "包2",
+                "material_category": "电缆保护管CPVC",
+                "parameter_name": "环刚度",
+                "project_required_value": "SN16",
+            }
+        ]
+        product_rows = [
+            {
+                "product_family": "CPVC电缆保护管",
+                "specification_model": "DS 250×15×6000 SN16 PVC-C",
+                "parameter_name": "尺寸-平均内径",
+                "inspection_result": "250.2~250.4",
+                "report_no": "2024100312005501713",
+            }
+        ]
+        assets = [
+            {"id": "a2", "title": "泰昌CPVC电缆保护管检验报告第3页", "asset_type": "product_image", "category": "检验报告"},
+            {"id": "a3", "title": "泰昌MPP生产线资料第2页", "asset_type": "product_image", "category": "生产制造能力"},
+        ]
+        interpretation = {
+            "project": {
+                "id": "11111111-1111-1111-1111-111111111111",
+                "project_name": "国家电网有限公司2026年西北、西藏区域第一次联合采购10kV架空绝缘导线",
+                "project_no": "SL265A",
+            },
+            "analysis": {"project_meta": {"cover_fields": {"包号": "包1", "包名称": "10kV架空绝缘导线-新疆", "物料类别": "架空绝缘导线"}}},
+            "requirements": [{"content": "本包采购物资为10kV架空绝缘导线。"}],
+            "risks": [],
+            "documentChunks": [{"content": "货物清单：10kV架空绝缘导线，包1。"}],
+        }
+
+        with patch("backend.services.bid_prefill.get_project_interpretation", return_value=interpretation), \
+             patch("backend.services.bid_prefill.list_knowledge_assets", return_value=assets), \
+             patch("backend.services.bid_prefill.build_taichang_prefill_values", return_value={}), \
+             patch("backend.services.bid_prefill._load_liaoning_goods_rows", return_value=goods_rows), \
+             patch("backend.services.bid_prefill._load_liaoning_technical_parameter_rows", return_value=technical_rows), \
+             patch("backend.services.bid_prefill._load_liaoning_technical_deviation_rows", return_value=[]), \
+             patch("backend.services.bid_prefill._load_taichang_product_parameter_rows", return_value=product_rows):
+            report = build_bid_prefill_report("11111111-1111-1111-1111-111111111111")
+
+        self.assertEqual(report["productCompatibility"]["status"], "mismatch")
+        self.assertTrue(report["summary"]["productCompatibilityBlocking"])
+        by_key = {field["key"]: field for field in report["fields"]}
+        self.assertIn("架空绝缘导线", by_key["material_category"]["value"])
+        self.assertIn("不得直接生成无偏差技术响应", by_key["technical_parameter_summary"]["value"])
+        self.assertNotIn("辽宁 2025-03 2225AC", by_key["technical_parameter_summary"]["value"])
+        self.assertNotIsInstance(by_key["inspection_reports"]["value"], list)
+        self.assertIn("泰昌现有已核验产品资料主要覆盖", by_key["inspection_reports"]["value"])
+
     def test_placeholder_replacement_is_explicit_and_preserves_ordinary_text(self):
         from backend.services.bid_prefill import apply_confirmed_values_to_text
 
