@@ -1903,7 +1903,16 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
   margin-bottom: 10px;
+}
+
+.editor-image-category-select {
+  width: 132px;
+}
+
+.editor-image-search {
+  width: 210px;
 }
 
 .editor-image-grid {
@@ -1917,7 +1926,7 @@ textarea {
 
 .editor-image-option {
   display: grid;
-  grid-template-rows: 108px auto;
+  grid-template-rows: 108px auto auto;
   gap: 8px;
   min-width: 0;
   border: 1px solid #e2e8f0;
@@ -1956,6 +1965,20 @@ textarea {
   line-height: 1.4;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.editor-image-option-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 0;
+}
+
+.editor-image-option-meta .ant-tag {
+  max-width: 100%;
+  margin-inline-end: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .ai-edit-preview {

@@ -154,11 +154,48 @@ export const qualificationEvidenceOptions: AssetEvidenceOption[] = [
 ];
 
 const qualityLabels: Record<AssetQualityTier, { label: string; color: string }> = {
-  formal_bid_ready: { label: '可用于正式标书', color: 'green' },
-  knowledge_only: { label: '仅用于知识库', color: 'blue' },
+  formal_bid_ready: { label: '可用于标书正文', color: 'green' },
+  knowledge_only: { label: '知识库/需复核', color: 'blue' },
   review_only: { label: '需人工复核', color: 'orange' },
   restricted: { label: '禁止使用', color: 'red' },
 };
+
+type AssetUsageSource = {
+  metadata?: Record<string, unknown>;
+  specs?: Record<string, unknown>;
+};
+
+function metadataValue(asset: AssetUsageSource, key: string): unknown {
+  return asset.metadata?.[key] ?? asset.specs?.[key];
+}
+
+function truthyFlag(value: unknown): boolean {
+  return value === true || value === 'true' || value === '1' || value === 1;
+}
+
+function falseFlag(value: unknown): boolean {
+  return value === false || value === 'false' || value === '0' || value === 0;
+}
+
+export function assetUsageLabel(asset: AssetUsageSource): { label: string; color: string; tier: AssetQualityTier } {
+  const qualityTier = metadataValue(asset, 'quality_tier');
+  const explicit = typeof qualityTier === 'string' && qualityTier in qualityLabels
+    ? assetQualityLabel(qualityTier)
+    : null;
+  if (explicit?.tier === 'restricted' || explicit?.tier === 'review_only') {
+    return explicit;
+  }
+
+  const allowedForBid = metadataValue(asset, 'allowed_for_bid');
+  const formalExcluded = metadataValue(asset, 'formal_bid_excluded');
+  if (truthyFlag(formalExcluded) || falseFlag(allowedForBid)) {
+    return { ...qualityLabels.knowledge_only, tier: 'knowledge_only' };
+  }
+  if (explicit) {
+    return explicit;
+  }
+  return { ...qualityLabels.formal_bid_ready, tier: 'formal_bid_ready' };
+}
 
 const evidenceOptionMap = new Map(
   [...productEvidenceOptions, ...qualificationEvidenceOptions].map(option => [option.value, option]),

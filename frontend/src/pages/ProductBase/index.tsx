@@ -9,7 +9,7 @@ import { ModuleHeader } from '../../components/common/ModuleHeader';
 import { apiClient } from '../../api/client';
 import { displayAssetCategory, displayAssetTags, displayAssetTitle } from '../../utils/assetDisplay';
 import {
-  assetQualityLabel,
+  assetUsageLabel,
   evidenceLabel,
   evidenceValueFromLabel,
   inspectUploadFile,
@@ -129,7 +129,7 @@ function metadataList(asset: KnowledgeAsset, key: string): string[] {
 }
 
 function assetQuality(asset: KnowledgeAsset) {
-  return assetQualityLabel(metadataText(asset, 'quality_tier'));
+  return assetUsageLabel(asset);
 }
 
 function assetEvidenceType(asset: KnowledgeAsset): string {

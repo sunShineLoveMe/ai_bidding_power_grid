@@ -1,4 +1,4 @@
-import { Button, Empty, Input, Modal, Select, Space, Spin, Tooltip, Typography, Upload, message } from 'antd';
+import { Button, Empty, Input, Modal, Select, Space, Spin, Tag, Tooltip, Typography, Upload, message } from 'antd';
 import type { UploadProps } from 'antd';
 import {
   Bold,
@@ -33,6 +33,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { getKnowledgeAssetSignedUrls, listKnowledgeAssets, uploadKnowledgeAsset } from '../../api/bidProject';
 import type { KnowledgeAsset, KnowledgeAssetLibraryType } from '../../api/bidProject';
 import { AuthenticatedImage, resolveAuthenticatedDisplayUrl } from '../common/AuthenticatedImage';
+import { assetUsageLabel } from '../../utils/assetUploadGuidance';
 
 interface TiptapBidEditorProps {
   content: string;
@@ -71,6 +72,9 @@ type ResolvedImageDisplayUrls = {
   urls: ImageDisplayUrlMap;
   releases: Array<() => void>;
 };
+
+const IMAGE_ASSET_PAGE_SIZE = 100;
+const IMAGE_ASSET_MAX_COUNT = 500;
 
 const AI_EDIT_ACTIONS: Array<{
   action: BidAiEditEditorAction;
@@ -133,6 +137,24 @@ function assetImageUrl(asset: KnowledgeAsset): string {
 
 function isImageAsset(asset: KnowledgeAsset): boolean {
   return Boolean(asset.id) && (asset.mime_type || '').startsWith('image/');
+}
+
+function assetDisplayTitle(asset: KnowledgeAsset): string {
+  return String(asset.metadata?.source_display_name || asset.metadata?.formal_display_title || asset.title || '未命名图片');
+}
+
+function assetDisplayCategory(asset: KnowledgeAsset): string {
+  return String(asset.metadata?.category_label || asset.category || asset.metadata?.evidence_type_label || '未分类');
+}
+
+function assetSearchText(asset: KnowledgeAsset): string {
+  return [
+    assetDisplayTitle(asset),
+    assetDisplayCategory(asset),
+    asset.description,
+    asset.file_name,
+    asset.tags?.join(' '),
+  ].filter(Boolean).join(' ').toLowerCase();
 }
 
 function cleanUploadTitle(fileName: string): string {
@@ -357,6 +379,8 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
   const [imageLibraryType, setImageLibraryType] = useState<KnowledgeAssetLibraryType>('product');
   const [imageAssets, setImageAssets] = useState<KnowledgeAsset[]>([]);
   const [imageAssetsLoading, setImageAssetsLoading] = useState(false);
+  const [imageAssetKeyword, setImageAssetKeyword] = useState('');
+  const [imageAssetCategory, setImageAssetCategory] = useState('all');
   const [imageUploadFile, setImageUploadFile] = useState<File | null>(null);
   const [imageTitle, setImageTitle] = useState('');
   const [imageUploading, setImageUploading] = useState(false);
@@ -523,12 +547,20 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
   const fetchImageAssets = useCallback(async () => {
     setImageAssetsLoading(true);
     try {
-      const result = await listKnowledgeAssets({
-        libraryType: imageLibraryType,
-        page: 1,
-        pageSize: 48,
-      });
-      setImageAssets((result.items || []).filter(isImageAsset));
+      const allItems: KnowledgeAsset[] = [];
+      for (let page = 1; allItems.length < IMAGE_ASSET_MAX_COUNT; page += 1) {
+        const result = await listKnowledgeAssets({
+          libraryType: imageLibraryType,
+          page,
+          pageSize: IMAGE_ASSET_PAGE_SIZE,
+        });
+        allItems.push(...(result.items || []));
+        const total = Number(result.total || 0);
+        if (!result.items?.length || allItems.length >= total || result.items.length < IMAGE_ASSET_PAGE_SIZE) {
+          break;
+        }
+      }
+      setImageAssets(allItems.filter(isImageAsset));
     } catch (error) {
       message.error(error instanceof Error ? error.message : String(error));
     } finally {
@@ -541,6 +573,33 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
       void fetchImageAssets();
     }
   }, [fetchImageAssets, imageModalOpen]);
+
+  useEffect(() => {
+    setImageAssetCategory('all');
+    setImageAssetKeyword('');
+  }, [imageLibraryType]);
+
+  const imageAssetCategories = useMemo(() => {
+    const categories = [...new Set(imageAssets.map(assetDisplayCategory).filter(Boolean))]
+      .sort((left, right) => left.localeCompare(right, 'zh-CN'));
+    return [
+      { label: '全部分类', value: 'all' },
+      ...categories.map(category => ({ label: category, value: category })),
+    ];
+  }, [imageAssets]);
+
+  const filteredImageAssets = useMemo(() => {
+    const keyword = imageAssetKeyword.trim().toLowerCase();
+    return imageAssets.filter(asset => {
+      if (imageAssetCategory !== 'all' && assetDisplayCategory(asset) !== imageAssetCategory) {
+        return false;
+      }
+      if (keyword && !assetSearchText(asset).includes(keyword)) {
+        return false;
+      }
+      return true;
+    });
+  }, [imageAssetCategory, imageAssetKeyword, imageAssets]);
 
   const insertImageAsset = async (asset: KnowledgeAsset) => {
     if (!editor) return;
@@ -750,7 +809,7 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
                 { label: '资信库图片', value: 'qualification' },
               ]}
             />
-            <span>优先使用已入库、可追溯的泰昌企业事实图片。</span>
+            <span>人工选择可插入正文；自动配图仍按正式标书可用性规则复核。</span>
           </div>
           <div className="editor-image-upload">
             <Upload {...imageUploadProps} fileList={imageUploadFile ? [{
@@ -770,25 +829,49 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
           <div className="editor-image-library">
             <div className="editor-image-library-title">
               <strong>从资产库插入</strong>
-              <Button size="small" onClick={() => void fetchImageAssets()} loading={imageAssetsLoading}>刷新</Button>
+              <Space size={8}>
+                <Select
+                  size="small"
+                  className="editor-image-category-select"
+                  value={imageAssetCategory}
+                  onChange={setImageAssetCategory}
+                  options={imageAssetCategories}
+                />
+                <Input
+                  size="small"
+                  allowClear
+                  className="editor-image-search"
+                  value={imageAssetKeyword}
+                  onChange={event => setImageAssetKeyword(event.target.value)}
+                  placeholder="搜索名称、分类、标签"
+                />
+                <Button size="small" onClick={() => void fetchImageAssets()} loading={imageAssetsLoading}>刷新</Button>
+              </Space>
             </div>
             <Spin spinning={imageAssetsLoading}>
-              {imageAssets.length ? (
+              {filteredImageAssets.length ? (
                 <div className="editor-image-grid">
-                  {imageAssets.map(asset => (
-                    <button
-                      type="button"
-                      key={asset.id}
-                      className="editor-image-option"
-                      onClick={() => void insertImageAsset(asset)}
-                    >
-                      <AuthenticatedImage src={assetImageUrl(asset)} alt={asset.title || '标书配图'} />
-                      <span>{String(asset.metadata?.source_display_name || asset.title || '未命名图片')}</span>
-                    </button>
-                  ))}
+                  {filteredImageAssets.map(asset => {
+                    const usage = assetUsageLabel(asset);
+                    return (
+                      <button
+                        type="button"
+                        key={asset.id}
+                        className="editor-image-option"
+                        onClick={() => void insertImageAsset(asset)}
+                      >
+                        <AuthenticatedImage src={assetImageUrl(asset)} alt={asset.title || '标书配图'} />
+                        <span>{assetDisplayTitle(asset)}</span>
+                        <div className="editor-image-option-meta">
+                          <Tag color="default">{assetDisplayCategory(asset)}</Tag>
+                          <Tag color={usage.color}>{usage.label}</Tag>
+                        </div>
+                      </button>
+                    );
+                  })}
                 </div>
               ) : (
-                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无可插入图片，可先上传本地图片" />
+                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={imageAssets.length ? '未找到匹配图片，可换个关键词或分类' : '暂无可插入图片，可先上传本地图片'} />
               )}
             </Spin>
           </div>
