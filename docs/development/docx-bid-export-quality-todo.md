@@ -24,6 +24,7 @@
 - 2026-06-28 在线编辑器图片插入专项继续收口：修复 AntD `App` 根容器高度导致的章节目录和正文编辑区不可滚动问题；本地上传图片明确为“保存到当前产品库/资信库，作为企业图片资产后续复用，并插入当前章节正文”。记录见 `docs/development/runs/run_20260628_editor_image_insert_only.md`。
 - 2026-06-28 在线编辑器资产库图片支持多选批量插入；父级章节状态改为汇总下级叶子章节，子章节全完成时父章节显示绿色完成状态。记录见 `docs/development/runs/run_20260628_editor_image_insert_only.md`。
 - 2026-06-28 修复目录模式“预览”后正文空白问题；前端正文展示和 DOCX/Markdown 分册导出会把模型生成的旧正文标题编号重写到当前章节编号之下，避免技术标/商务标目录与正文编号不一致。记录见 `docs/development/runs/run_20260628_editor_image_insert_only.md`。
+- 2026-06-28 继续治理章节正文脏标题和旧模板编号：删除重复章节标题、泛化卷标题，并按正文内相对数字/Markdown 层级重写标题，修复 `4.3.3.1.1 产品购销合同`、`2.7.1.1.1.1 投标函` 等过深编号。记录见 `docs/development/runs/run_20260628_editor_image_insert_only.md`。
 
 ## P0 必须完成
 

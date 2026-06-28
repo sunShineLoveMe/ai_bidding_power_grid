@@ -345,7 +345,20 @@ function stripDisplayHeadingNumber(value: string): string {
     .replace(/^#{1,6}\s*/, '')
     .replace(/^\s*\d+(?:\.\d+)*[\.、]?\s*/, '')
     .replace(/^\s*[一二三四五六七八九十百]+[、.．]\s*/, '')
+    .replace(/^\s*第[一二三四五六七八九十百]+[章节篇部分][、:：.\s]*/, '')
     .trim();
+}
+
+function headingNumberDepth(value: string): number | null {
+  const match = (value || '').trim().match(/^(\d+(?:\.\d+)*)[\.、]?\s+/);
+  if (!match) return null;
+  return match[1].split('.').filter(Boolean).length || null;
+}
+
+function shouldSkipBodyHeading(cleanHeading: string, chapterTitle: string): boolean {
+  if (!cleanHeading) return false;
+  if (cleanHeading === chapterTitle) return true;
+  return ['商务文件', '技术文件', '投标文件', '商务响应文件', '技术响应文件'].includes(cleanHeading);
 }
 
 function normalizeEditorChapterContent(chapter: ChapterDraft): string {
@@ -355,8 +368,36 @@ function normalizeEditorChapterContent(chapter: ChapterDraft): string {
     return content;
   }
   const chapterTitle = stripDisplayHeadingNumber(chapter.title || '');
+  const headingLevels: number[] = [];
+  const explicitDepths: number[] = [];
+  let scanInFence = false;
+  content.split(/\r?\n/).forEach(rawLine => {
+    const stripped = rawLine.trim();
+    if (stripped.startsWith('```') || stripped.startsWith('~~~')) {
+      scanInFence = !scanInFence;
+      return;
+    }
+    if (scanInFence) {
+      return;
+    }
+    const headingMatch = rawLine.match(/^(\s{0,3})(#{1,6})\s+(.+?)\s*#*\s*$/);
+    if (!headingMatch) {
+      return;
+    }
+    const headingText = headingMatch[3].replace(/\*\*(.*?)\*\*/g, '$1').trim();
+    const cleanHeading = stripDisplayHeadingNumber(headingText);
+    if (shouldSkipBodyHeading(cleanHeading, chapterTitle)) {
+      return;
+    }
+    headingLevels.push(Math.max(1, Math.min(6, headingMatch[2].length)));
+    const explicitDepth = headingNumberDepth(headingText);
+    if (explicitDepth) {
+      explicitDepths.push(explicitDepth);
+    }
+  });
+  const minHeadingLevel = headingLevels.length ? Math.min(...headingLevels) : 1;
+  const minExplicitDepth = explicitDepths.length ? Math.min(...explicitDepths) : null;
   const counters: number[] = [];
-  let removedDuplicateHeading = false;
   let inFence = false;
   const output: string[] = [];
 
@@ -378,12 +419,15 @@ function normalizeEditorChapterContent(chapter: ChapterDraft): string {
     }
     const headingText = headingMatch[3].replace(/\*\*(.*?)\*\*/g, '$1').trim();
     const cleanHeading = stripDisplayHeadingNumber(headingText);
-    if (!removedDuplicateHeading && cleanHeading && cleanHeading === chapterTitle) {
-      removedDuplicateHeading = true;
+    if (shouldSkipBodyHeading(cleanHeading, chapterTitle)) {
       return;
     }
     const headingLevel = Math.max(1, Math.min(6, headingMatch[2].length));
-    const relativeDepth = Math.max(1, Math.min(4, headingLevel));
+    const explicitDepth = headingNumberDepth(headingText);
+    const relativeDepth = Math.max(
+      1,
+      Math.min(4, explicitDepth ? explicitDepth - (minExplicitDepth || explicitDepth) + 1 : headingLevel - minHeadingLevel + 1),
+    );
     while (counters.length < relativeDepth) counters.push(0);
     counters.splice(relativeDepth);
     for (let index = 0; index < relativeDepth - 1; index += 1) {

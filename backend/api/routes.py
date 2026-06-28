@@ -373,6 +373,46 @@ def _renumber_body_markdown_headings(content: str, section: dict) -> str:
     if not base_order:
         return content.strip()
 
+    section_title = _strip_existing_section_number(section.get("title") or section.get("_export_title") or "")
+
+    def heading_number_depth(value: str) -> int | None:
+        match = re.match(r"^(\d+(?:\.\d+)*)[\.、]?\s+", (value or "").strip())
+        if not match:
+            return None
+        return len([part for part in match.group(1).split(".") if part])
+
+    def should_skip_body_heading(clean_title: str) -> bool:
+        if not clean_title:
+            return False
+        if section_title and clean_title == section_title:
+            return True
+        return clean_title in {"商务文件", "技术文件", "投标文件", "商务响应文件", "技术响应文件"}
+
+    heading_levels: list[int] = []
+    explicit_depths: list[int] = []
+    scan_in_fence = False
+    for raw_line in content.splitlines():
+        stripped = raw_line.strip()
+        if stripped.startswith("```") or stripped.startswith("~~~"):
+            scan_in_fence = not scan_in_fence
+            continue
+        if scan_in_fence:
+            continue
+        heading_match = re.match(r"^(\s{0,3})(#{1,6})\s+(.+?)\s*#*\s*$", raw_line)
+        if not heading_match:
+            continue
+        _, marks, title_text = heading_match.groups()
+        clean_title = clean_formal_bid_text(re.sub(r"\*\*(.*?)\*\*", r"\1", title_text)).strip()
+        clean_title = _strip_existing_section_number(clean_title)
+        if should_skip_body_heading(clean_title):
+            continue
+        heading_levels.append(max(1, min(len(marks), 6)))
+        explicit_depth = heading_number_depth(title_text)
+        if explicit_depth:
+            explicit_depths.append(explicit_depth)
+    min_heading_level = min(heading_levels) if heading_levels else 1
+    min_explicit_depth = min(explicit_depths) if explicit_depths else None
+
     output: list[str] = []
     counters: list[int] = []
     in_fence = False
@@ -394,7 +434,15 @@ def _renumber_body_markdown_headings(content: str, section: dict) -> str:
         prefix, marks, title_text = heading_match.groups()
         clean_title = clean_formal_bid_text(re.sub(r"\*\*(.*?)\*\*", r"\1", title_text)).strip()
         clean_title = _strip_existing_section_number(clean_title)
-        relative_depth = max(1, min(len(marks), 4))
+        if should_skip_body_heading(clean_title):
+            continue
+        explicit_depth = heading_number_depth(title_text)
+        relative_depth = (
+            explicit_depth - (min_explicit_depth or explicit_depth) + 1
+            if explicit_depth
+            else len(marks) - min_heading_level + 1
+        )
+        relative_depth = max(1, min(relative_depth, 4))
         while len(counters) < relative_depth:
             counters.append(0)
         counters = counters[:relative_depth]

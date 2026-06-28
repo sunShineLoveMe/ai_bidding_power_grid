@@ -145,8 +145,91 @@ class DocxExportRegressionTest(unittest.TestCase):
 
         normalized = _renumber_body_markdown_headings(content, {"_export_order": "1.3"})
 
-        self.assertIn("1.3.1.1.1.1", normalized)
+        self.assertIn("1.3.1", normalized)
         self.assertNotIn(".0", normalized)
+
+    def test_body_heading_rewrite_removes_duplicate_section_title_headings(self):
+        content = "\n".join([
+            "## 产品购销合同",
+            "",
+            "# 产品购销合同",
+            "",
+            "## 1. 合同标的与供货范围",
+            "",
+            "### 1.1 供货产品清单",
+        ])
+
+        normalized = _renumber_body_markdown_headings(content, {
+            "_export_order": "4.3.3.1",
+            "title": "产品购销合同",
+        })
+
+        self.assertNotIn("4.3.3.1.1 产品购销合同", normalized)
+        self.assertNotIn("产品购销合同\n", normalized)
+        self.assertIn("## 4.3.3.1.1 合同标的与供货范围", normalized)
+        self.assertIn("### 4.3.3.1.1.1 供货产品清单", normalized)
+
+    def test_body_heading_rewrite_uses_relative_markdown_depth_for_unnumbered_headings(self):
+        content = "\n".join([
+            "## 资质业绩凭证 单",
+            "",
+            "### 资质业绩凭证单",
+            "",
+            "#### 一、本章说明",
+            "",
+            "#### 二、资格预审基本情况",
+        ])
+
+        normalized = _renumber_body_markdown_headings(content, {
+            "_export_order": "2.3.2",
+            "title": "资质业绩凭证 单",
+        })
+
+        self.assertNotIn("2.3.2.1 资质业绩凭证单", normalized)
+        self.assertIn("#### 2.3.2.1 本章说明", normalized)
+        self.assertIn("#### 2.3.2.2 资格预审基本情况", normalized)
+        self.assertNotIn("2.3.2.1.1.1.1", normalized)
+
+    def test_body_heading_rewrite_uses_relative_explicit_number_depth(self):
+        content = "\n".join([
+            "## 资格预审结果通知书",
+            "",
+            "### 1. 资格预审结果通知书",
+            "",
+            "#### 1.1 总则",
+            "",
+            "#### 1.2 资格预审结果确认",
+        ])
+
+        normalized = _renumber_body_markdown_headings(content, {
+            "_export_order": "2.11.1.1",
+            "title": "资格预审结果通知书",
+        })
+
+        self.assertIn("#### 2.11.1.1.1 总则", normalized)
+        self.assertIn("#### 2.11.1.1.2 资格预审结果确认", normalized)
+        self.assertNotIn("2.11.1.1.1.1", normalized)
+
+    def test_body_heading_rewrite_skips_generic_volume_headings(self):
+        content = "\n".join([
+            "## 保险购买凭证-电缆保护管 CPVC",
+            "",
+            "### 第五章 商务文件",
+            "",
+            "#### 5.1 投标函",
+            "",
+            "#### 5.2 合同条款响应与商务偏离表",
+        ])
+
+        normalized = _renumber_body_markdown_headings(content, {
+            "_export_order": "2.7.1.1",
+            "title": "保险购买凭证-电缆保护管 CPVC",
+        })
+
+        self.assertNotIn("商务文件", normalized)
+        self.assertIn("#### 2.7.1.1.1 投标函", normalized)
+        self.assertIn("#### 2.7.1.1.2 合同条款响应与商务偏离表", normalized)
+        self.assertNotIn("2.7.1.1.1.1", normalized)
 
     def test_export_sections_are_numbered_for_word_outline(self):
         sections = [

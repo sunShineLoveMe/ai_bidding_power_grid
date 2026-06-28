@@ -184,3 +184,48 @@
 ### 命令回归
 
 - `npm run build`：通过；仅保留既有 Vite chunk 体积和混合 import 警告。
+
+## 2026-06-28 章节正文脏标题与分册编号治理
+
+### 问题
+
+- 真实章节 `4.3.3.1 产品购销合同` 的数据库正文开头存在重复脏标题：
+  - `## 产品购销合同`
+  - `# 产品购销合同`
+  - `## 1. 合同标的与供货范围`
+- 旧归一化逻辑按 Markdown 标题绝对层级推导正文编号，导致重复章节标题被重写成 `4.3.3.1.1 产品购销合同`，下级标题继续膨胀。
+- 扩大扫描后发现另一类旧模板脏数据：叶子章节正文中带 `第五章 商务文件`、`5.1 投标函`、`1.1 总则` 等旧模板章号，技术标/商务标导出时会被带成过深编号。
+
+### 修复
+
+- 前端编辑器展示和后端导出统一使用章节正文标题归一化：
+  - 删除所有与当前章节标题等价的重复 Markdown 标题，不再只删第一条。
+  - 删除 `商务文件`、`技术文件`、`投标文件`、`商务响应文件`、`技术响应文件` 等泛化卷标题，避免旧模板标题进入叶子章节正文。
+  - 显式数字标题按本章节正文内最小数字深度重新起算，例如 `5.1 投标函` 在叶子章节下变为 `2.7.1.1.1 投标函`，不再变成 `2.7.1.1.1.1 投标函`。
+  - 无显式数字标题按本章节正文内最小 Markdown 标题层级相对计算，避免 `#### 一、本章说明` 直接膨胀为多级目录号。
+- 保留正式章节标题仍以 `bid_sections` 目录树为准；正文内部标题只作为当前章节下的普通正文层级，不再污染 DOCX 导航目录。
+
+### 真实回归
+
+- 数据核查：
+  - 项目：`5d064d0a-29ba-41bb-ab07-9d51e6c9e084`。
+  - 原始章节 `产品购销合同` 确认存在重复标题脏数据。
+  - 后端归一化后输出为 `4.3.3.1.1 合同标的与供货范围`、`4.3.3.1.1.1 供货产品清单`，未再输出 `4.3.3.1.1 产品购销合同`。
+- Playwright 真实浏览器：
+  - 页面：`http://127.0.0.1:5173/bid-editor?projectId=5d064d0a-29ba-41bb-ab07-9d51e6c9e084`。
+  - 点击左侧 `4.3.3.1 产品购销合同` 后，active 章节正确。
+  - 编辑器正文开头为 `4.3.3.1.1 合同标的与供货范围`，包含 `4.3.3.1.1.1 供货产品清单`。
+  - 未命中 `4.3.3.1.1 产品购销合同` 或 `4.3.3.1.1.1 产品购销合同`。
+  - 控制台仅有 React DevTools 和 build info，无新增错误或警告。
+- 真实分册导出 Markdown：
+  - 技术标：`output/regression_export_numbering/5d064d0a/泰昌_2225AC_包1_技术投标文件_20260628.md`。
+  - 商务标：`output/regression_export_numbering/5d064d0a/泰昌_2225AC_包1_商务投标文件_20260628.md`。
+  - 技术标分册内该章重新编号为 `2.3.3.1 产品购销合同`，正文内部为 `2.3.3.1.1 合同标的与供货范围`、`2.3.3.1.1.1 供货产品清单`。
+  - 商务标抽样 `保险购买凭证-电缆保护管 CPVC` 中，旧 `第五章 商务文件` 已剔除，`投标函` 回落为 `2.7.1.1.1 投标函`。
+  - 技术标/商务标标题行均未发现 `.0` 编号段；未发现旧 `4. 投标保证金`、`4.1 基本情况说明` 残留。
+
+### 命令回归
+
+- `npm run build`：通过；仅保留既有 Vite chunk 体积和混合 import 警告。
+- `.venv/bin/python -m pytest tests/test_docx_export.py::DocxExportRegressionTest::test_body_heading_numbers_are_rewritten_under_export_section_order tests/test_docx_export.py::DocxExportRegressionTest::test_body_heading_number_rewrite_never_emits_zero_segments tests/test_docx_export.py::DocxExportRegressionTest::test_body_heading_rewrite_removes_duplicate_section_title_headings tests/test_docx_export.py::DocxExportRegressionTest::test_body_heading_rewrite_uses_relative_markdown_depth_for_unnumbered_headings tests/test_docx_export.py::DocxExportRegressionTest::test_body_heading_rewrite_uses_relative_explicit_number_depth tests/test_docx_export.py::DocxExportRegressionTest::test_body_heading_rewrite_skips_generic_volume_headings tests/test_docx_export.py::DocxExportRegressionTest::test_docx_navigation_headings_remain_official_section_headings_only -q`：`7 passed, 1 warning`。
+- `python3 -m py_compile backend/api/routes.py`：通过。
