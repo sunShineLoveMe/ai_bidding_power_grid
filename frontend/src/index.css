@@ -2501,6 +2501,14 @@ textarea {
   .project-switcher {
     width: 100%;
   }
+
+  .report-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-card-list {
+    grid-template-columns: 1fr;
+  }
 }
 
 .interpretation-main {
@@ -2509,6 +2517,12 @@ textarea {
 
 .interpretation-main .ant-tabs-content-holder {
   min-height: 0;
+}
+
+.interpretation-main .ant-tabs-tabpane {
+  max-height: min(720px, calc(100vh - 330px));
+  overflow: auto;
+  padding-right: 4px;
 }
 
 .interpretation-note {
@@ -2551,11 +2565,17 @@ textarea {
 }
 
 .report-section {
-  min-height: 170px;
+  min-height: 0;
+  max-height: 360px;
+  overflow: auto;
   border: 1px solid #e8edf7;
   border-radius: 14px;
   background: #fbfcff;
   padding: 14px;
+}
+
+.report-section-expanded {
+  max-height: none;
 }
 
 .report-wide {
@@ -2579,6 +2599,19 @@ textarea {
   line-height: 1.65;
 }
 
+.report-section:not(.report-section-expanded) li {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.report-section-toggle {
+  margin-top: 8px;
+  padding-left: 0;
+  font-weight: 800;
+}
+
 .brief-list {
   display: grid;
   gap: 10px;
@@ -2600,6 +2633,7 @@ textarea {
 
 .ai-card-list {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   gap: 10px;
 }
 
@@ -2638,15 +2672,42 @@ textarea {
   line-height: 1.65;
 }
 
+.ai-evidence-card p {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
 .ai-evidence-card footer span {
   color: #2563eb;
   font-size: 12px;
   font-weight: 900;
 }
 
+@media (max-width: 900px) {
+  .report-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-card-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cell-text-strong {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  color: #111827;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .source-drawer {
   display: grid;
-  gap: 18px;
+  gap: 14px;
 }
 
 .source-drawer h3 {
@@ -2674,6 +2735,8 @@ textarea {
 .source-drawer section > p,
 .chunk-preview p {
   margin: 0;
+  max-height: 132px;
+  overflow: auto;
   white-space: pre-wrap;
   color: #334155;
   font-size: 13px;

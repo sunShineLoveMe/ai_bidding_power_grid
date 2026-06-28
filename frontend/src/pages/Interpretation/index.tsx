@@ -47,6 +47,64 @@ const riskColor: Record<string, string> = {
   low: 'blue',
 };
 
+const priorityLabel: Record<string, string> = {
+  high: '高',
+  medium: '中',
+  low: '低',
+};
+
+const riskLabel: Record<string, string> = {
+  high: '高风险',
+  medium: '中风险',
+  low: '低风险',
+  critical: '严重风险',
+  blocker: '阻断风险',
+};
+
+const requirementTypeLabel: Record<string, string> = {
+  technical: '技术要求',
+  business: '商务要求',
+  qualification: '资格要求',
+  document: '文件要求',
+  price: '报价要求',
+  format: '格式要求',
+};
+
+const qualityTypeLabel: Record<string, string> = {
+  text: '正文',
+  title: '标题',
+  table: '表格',
+  image: '图片',
+  formula: '公式',
+  header: '页眉',
+  footer: '页脚',
+  list: '列表',
+};
+
+const projectStatusLabel: Record<string, string> = {
+  uploaded: '已上传',
+  parsed: '已解析',
+  interpreted: '已解读',
+  draft_ready: '正文初稿完成',
+  completed: '已完成',
+  failed: '处理失败',
+};
+
+function enumLabel(value?: string | null, labels: Record<string, string> = priorityLabel): string {
+  const key = String(value || '').trim();
+  if (!key) return '-';
+  return labels[key] || key;
+}
+
+function businessSummary(value?: string | null): string {
+  const raw = String(value || '').trim();
+  if (!raw) return '-';
+  if (/MinerU|Markdown|结构块|块类型|content_blocks|markdown_chars/i.test(raw)) {
+    return '招标文件已完成解析和结构化整理，可查看下方要求条款、风险检查、评分办法和章节建议。';
+  }
+  return raw;
+}
+
 type SourceTrace = {
   title: string;
   category: string;
@@ -117,6 +175,10 @@ function formatListItem(item: unknown): string {
   return String(item);
 }
 
+function CompactText({ value, empty = '-' }: { value?: string | null; empty?: string }): JSX.Element {
+  return <span className="cell-text-strong">{value || empty}</span>;
+}
+
 function flattenOutlineChapters(outline: BidOutline | null): ChapterSuggestion[] {
   if (!outline) return [];
   const direct = outline.chapters || [];
@@ -140,19 +202,27 @@ function sectionChapterSuggestions(sections?: InterpretationResponse['sections']
 
 function TextList({ title, items }: { title: string; items?: unknown[] }): JSX.Element {
   const normalizedItems = (items || []).map(formatListItem).filter(Boolean);
+  const [expanded, setExpanded] = useState(false);
+  const visibleItems = expanded ? normalizedItems : normalizedItems.slice(0, 4);
+  const hasMore = normalizedItems.length > visibleItems.length || normalizedItems.some(item => item.length > 150);
 
   return (
-    <section className="report-section">
+    <section className={`report-section ${expanded ? 'report-section-expanded' : ''}`}>
       <h3>{title}</h3>
       {normalizedItems.length ? (
         <ul>
-          {normalizedItems.map((item, index) => (
+          {visibleItems.map((item, index) => (
             <li key={`${title}-${index}`}>{item}</li>
           ))}
         </ul>
       ) : (
         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无内容" />
       )}
+      {hasMore ? (
+        <Button type="link" size="small" className="report-section-toggle" onClick={() => setExpanded(value => !value)}>
+          {expanded ? '收起' : `展开全部 ${normalizedItems.length} 条`}
+        </Button>
+      ) : null}
     </section>
   );
 }
@@ -253,8 +323,8 @@ export function InterpretationPage(): JSX.Element {
 
   const complianceColumns: ColumnsType<ComplianceRow> = [
     { title: '类别', dataIndex: 'category', width: 92, render: value => <Tag color={value === '风险项' ? 'red' : value === '评分项' ? 'green' : 'blue'}>{value}</Tag> },
-    { title: '重要性', dataIndex: 'importance', width: 92, render: value => <Tag color={riskColor[String(value)] || priorityColor[String(value)] || 'default'}>{value || '-'}</Tag> },
-    { title: '检查内容', dataIndex: 'content', ellipsis: true },
+    { title: '重要性', dataIndex: 'importance', width: 92, render: value => <Tag color={riskColor[String(value)] || priorityColor[String(value)] || 'default'}>{enumLabel(value as string, priorityLabel)}</Tag> },
+    { title: '检查内容', dataIndex: 'content', ellipsis: true, render: value => <CompactText value={value} /> },
     {
       title: '覆盖状态',
       dataIndex: 'status',
@@ -289,9 +359,9 @@ export function InterpretationPage(): JSX.Element {
   }
 
   const requirementColumns: ColumnsType<RequirementItem> = [
-    { title: '类型', dataIndex: 'requirement_type', width: 98, render: value => <Tag color="blue">{value || '要求'}</Tag> },
-    { title: '优先级', dataIndex: 'priority', width: 82, render: value => <Tag color={priorityColor[String(value)] || 'default'}>{value || '-'}</Tag> },
-    { title: '内容', dataIndex: 'content', ellipsis: true },
+    { title: '类型', dataIndex: 'requirement_type', width: 98, render: value => <Tag color="blue">{value ? enumLabel(value as string, requirementTypeLabel) : '要求'}</Tag> },
+    { title: '优先级', dataIndex: 'priority', width: 82, render: value => <Tag color={priorityColor[String(value)] || 'default'}>{enumLabel(value as string, priorityLabel)}</Tag> },
+    { title: '内容', dataIndex: 'content', ellipsis: true, render: value => <CompactText value={value} /> },
     { title: '章节', dataIndex: 'source_section', width: 160, ellipsis: true },
     { title: '页码', dataIndex: 'source_page', width: 78, render: pageText },
     {
@@ -312,9 +382,9 @@ export function InterpretationPage(): JSX.Element {
   ];
 
   const riskColumns: ColumnsType<RiskItem> = [
-    { title: '等级', dataIndex: 'risk_level', width: 82, render: value => <Tag color={riskColor[String(value)] || 'default'}>{value || '-'}</Tag> },
+    { title: '等级', dataIndex: 'risk_level', width: 82, render: value => <Tag color={riskColor[String(value)] || 'default'}>{enumLabel(value as string, riskLabel)}</Tag> },
     { title: '类型', dataIndex: 'risk_type', width: 120, ellipsis: true },
-    { title: '风险内容', dataIndex: 'content', ellipsis: true },
+    { title: '风险内容', dataIndex: 'content', ellipsis: true, render: value => <CompactText value={value} /> },
     { title: '处理建议', dataIndex: 'action', width: 220, ellipsis: true },
     { title: '页码', dataIndex: 'source_page', width: 78, render: pageText },
     {
@@ -359,7 +429,7 @@ export function InterpretationPage(): JSX.Element {
 
   const chapterColumns: ColumnsType<ChapterSuggestion> = [
     { title: '建议章节', dataIndex: 'chapter_title', ellipsis: true },
-    { title: '优先级', dataIndex: 'priority', width: 88, render: value => <Tag color={priorityColor[String(value)] || 'default'}>{value || '-'}</Tag> },
+    { title: '优先级', dataIndex: 'priority', width: 88, render: value => <Tag color={priorityColor[String(value)] || 'default'}>{enumLabel(value as string, priorityLabel)}</Tag> },
     { title: '建议原因', dataIndex: 'reason', width: 360, ellipsis: true },
   ];
 
@@ -367,15 +437,15 @@ export function InterpretationPage(): JSX.Element {
     { title: '序号', dataIndex: 'chunk_index', width: 76 },
     { title: '章节', dataIndex: 'source_section', width: 180, ellipsis: true },
     { title: '页码', dataIndex: 'source_page', width: 78, render: pageText },
-    { title: '内容片段', dataIndex: 'content', ellipsis: true },
+    { title: '原文摘录', dataIndex: 'content', ellipsis: true },
     {
       title: '查看',
       width: 78,
       render: (_, record) => (
         <SourceButton
           onClick={() => openSourceTrace({
-            title: `原文分片 #${record.chunk_index}`,
-            category: '原文分片',
+            title: `原文摘录 #${record.chunk_index}`,
+            category: '原文摘录',
             sourcePage: record.source_page,
             sourceSection: record.source_section,
             sourceText: record.content,
@@ -387,9 +457,9 @@ export function InterpretationPage(): JSX.Element {
 
   const suspiciousColumns: ColumnsType<NonNullable<MinerUQuality['suspicious_blocks']>[number]> = [
     { title: '页码', dataIndex: 'page', width: 76, render: pageText },
-    { title: '类型', dataIndex: 'type', width: 90 },
-    { title: '原因', dataIndex: 'reason', width: 120 },
-    { title: '片段', dataIndex: 'text', ellipsis: true },
+    { title: '内容类型', dataIndex: 'type', width: 100, render: value => value ? enumLabel(value as string, qualityTypeLabel) : '-' },
+    { title: '复核原因', dataIndex: 'reason', width: 150, render: value => value || '建议人工复核' },
+    { title: '原文摘录', dataIndex: 'text', ellipsis: true },
   ];
 
   async function generateAIReport(): Promise<void> {
@@ -446,7 +516,7 @@ export function InterpretationPage(): JSX.Element {
           columns={chunkColumns}
           dataSource={data?.documentChunks || []}
           className="compact-table"
-          locale={{ emptyText: emptyText('暂无原文分片') }}
+          locale={{ emptyText: emptyText('暂无原文摘录') }}
         />
       );
     }
@@ -458,19 +528,19 @@ export function InterpretationPage(): JSX.Element {
             <div className="quality-score">
               <Progress type="circle" percent={mineruQuality.quality_score ?? 0} size={92} />
               <div>
-                <h3>解析质量分</h3>
-                <p>用于快速判断 OCR、分片、页码和结构识别是否需要人工复核。</p>
+                <h3>文件解析质量</h3>
+                <p>用于判断招标文件是否识别完整，是否需要人工复核页码、表格或正文内容。</p>
               </div>
             </div>
             <Descriptions size="small" column={2} bordered>
-              <Descriptions.Item label="Markdown 字符">{mineruQuality.markdown_chars ?? 0}</Descriptions.Item>
-              <Descriptions.Item label="内容块">{mineruQuality.content_blocks ?? 0}</Descriptions.Item>
+              <Descriptions.Item label="已识别文字量">{mineruQuality.markdown_chars ?? 0}</Descriptions.Item>
+              <Descriptions.Item label="原文摘录数">{mineruQuality.content_blocks ?? 0}</Descriptions.Item>
               <Descriptions.Item label="页数">{mineruQuality.page_count ?? 0}</Descriptions.Item>
-              <Descriptions.Item label="平均块长">{mineruQuality.avg_text_block_length ?? 0}</Descriptions.Item>
+              <Descriptions.Item label="平均摘录长度">{mineruQuality.avg_text_block_length ?? 0}</Descriptions.Item>
             </Descriptions>
           </section>
           <section className="quality-card">
-            <h3>校验清单</h3>
+            <h3>解析检查结果</h3>
             <List
               size="small"
               dataSource={mineruQuality.checklist || []}
@@ -485,26 +555,15 @@ export function InterpretationPage(): JSX.Element {
             />
           </section>
           <section className="quality-card">
-            <h3>内容块类型</h3>
+            <h3>识别内容类型</h3>
             <div className="quality-tags">
               {Object.entries(mineruQuality.block_type_counts || {}).map(([name, count]) => (
-                <Tag key={name} color="blue">{name}: {count}</Tag>
-              ))}
-            </div>
-          </section>
-          <section className="quality-card">
-            <h3>解析产物路径</h3>
-            <div className="artifact-list">
-              {Object.entries(mineruQuality.artifacts || {}).map(([name, value]) => (
-                <div key={name}>
-                  <strong>{name}</strong>
-                  <span>{value || '-'}</span>
-                </div>
+                <Tag key={name} color="blue">{enumLabel(name, qualityTypeLabel)}：{count}</Tag>
               ))}
             </div>
           </section>
           <section className="quality-card quality-wide">
-            <h3>可疑解析片段</h3>
+            <h3>建议人工复核的原文</h3>
             <Table
               rowKey={(_, index) => String(index)}
               size="small"
@@ -512,7 +571,7 @@ export function InterpretationPage(): JSX.Element {
               columns={suspiciousColumns}
               dataSource={mineruQuality.suspicious_blocks || []}
               className="compact-table"
-              locale={{ emptyText: emptyText('未发现明显可疑片段') }}
+              locale={{ emptyText: emptyText('暂未发现需要重点复核的原文') }}
             />
           </section>
         </div>
@@ -546,13 +605,13 @@ export function InterpretationPage(): JSX.Element {
               disabled={!data?.analysis}
               menu={{
                 items: [
-                  { key: 'chunks', label: '查看原文分片', icon: <Database size={14} /> },
-                  { key: 'mineru', label: 'MinerU 解析校验', icon: <FileSearch size={14} /> },
+                  { key: 'chunks', label: '查看原文摘录', icon: <Database size={14} /> },
+                  { key: 'mineru', label: '解析质量检查', icon: <FileSearch size={14} /> },
                 ],
                 onClick: info => setAdvancedPanel(info.key as 'chunks' | 'mineru'),
               }}
             >
-              <Button icon={<MoreHorizontal size={16} />}>高级信息</Button>
+              <Button icon={<MoreHorizontal size={16} />}>解析详情</Button>
             </Dropdown>
             <Button type="primary" icon={<RefreshCw size={16} />} onClick={() => void load()}>
               刷新解读
@@ -567,9 +626,9 @@ export function InterpretationPage(): JSX.Element {
             <h2>{String(projectMeta.project_name || data?.project?.project_name || '暂无招标项目')}</h2>
           </div>
           <div className="project-context-meta">
-            <span>项目ID：{data?.project?.id || '-'}</span>
             <span>创建时间：{formatDateTime(data?.project?.created_at)}</span>
             <span>招标编号：{String(projectMeta.tender_no || data?.project?.project_no || '-')}</span>
+            <span>处理状态：{enumLabel(data?.project?.status, projectStatusLabel)}</span>
             <span>招标文件：{projectFileName || '可在历史记录查看文件名'}</span>
           </div>
         </div>
@@ -611,7 +670,7 @@ export function InterpretationPage(): JSX.Element {
             showIcon
             icon={<FileSearch size={18} />}
             message="暂无可展示的招标解读"
-            description="请先上传招标文件并等待 MinerU 解析、结构化落库完成。"
+            description="请先上传招标文件，并等待文件解析和结构化整理完成。"
           />
         </section>
       ) : (
@@ -620,7 +679,7 @@ export function InterpretationPage(): JSX.Element {
             <div className="mb-3 flex items-center justify-between gap-3">
               <h2 className="panel-title mb-0">项目概况</h2>
               <Space size={6}>
-                <Tag color="blue">{data.project?.status || '已解析'}</Tag>
+                <Tag color="blue">{enumLabel(data.project?.status, projectStatusLabel)}</Tag>
                 <Tag color="purple">{String(projectMeta.tender_no || data.project?.project_no || '暂无编号')}</Tag>
               </Space>
             </div>
@@ -634,7 +693,7 @@ export function InterpretationPage(): JSX.Element {
               <Descriptions.Item label="代理机构">{data.project?.agency || '-'}</Descriptions.Item>
               <Descriptions.Item label="创建时间" span={2}>{formatDateTime(data.project?.created_at)}</Descriptions.Item>
               <Descriptions.Item label="解读摘要" span={4}>
-                {data.analysis.summary || '-'}
+                {businessSummary(data.analysis.summary)}
               </Descriptions.Item>
             </Descriptions>
           </section>
@@ -652,7 +711,7 @@ export function InterpretationPage(): JSX.Element {
                         <div>
                           <span>{aiReport ? '大模型深度解读' : '规则版解读报告'}</span>
                           <h2>{aiReport?.project_brief?.project_name || report.title || String(projectMeta.project_name || data.project?.project_name || '招标文件')}</h2>
-                          <p>{aiReport ? aiReport.project_brief?.core_conclusion || 'AI 已基于结构化条款生成业务解读。' : '当前报告基于 MinerU 解析结果和规则抽取生成，点击“生成AI深度解读”可获得更连贯的业务报告。'}</p>
+                          <p>{aiReport ? aiReport.project_brief?.core_conclusion || 'AI 已基于结构化条款生成业务解读。' : '当前报告基于招标文件解析结果和规则抽取生成，点击“生成AI解读”可获得更连贯的业务报告。'}</p>
                         </div>
                       </section>
                       {aiReport ? (
@@ -694,9 +753,9 @@ export function InterpretationPage(): JSX.Element {
                                       icon={<Eye size={14} />}
                                       onClick={() => openSourceTrace({
                                         title: item.requirement || '资格符合性核查',
-                                        category: 'AI资格核查',
+                                        category: '资格核查',
                                         sourcePage: item.source_page,
-                                        sourceSection: 'AI 解读引用',
+                                        sourceSection: '系统解读依据',
                                         sourceText: item.evidence || item.action || item.requirement,
                                       })}
                                     >
@@ -726,9 +785,9 @@ export function InterpretationPage(): JSX.Element {
                                       icon={<Eye size={14} />}
                                       onClick={() => openSourceTrace({
                                         title: item.scoring_point || '评分高分策略',
-                                        category: 'AI评分策略',
+                                        category: '评分策略',
                                         sourcePage: item.source_page,
-                                        sourceSection: 'AI 解读引用',
+                                        sourceSection: '系统解读依据',
                                         sourceText: item.evidence || item.strategy || item.scoring_point,
                                       })}
                                     >
@@ -745,7 +804,7 @@ export function InterpretationPage(): JSX.Element {
                               {(aiReport.risk_warnings || []).map((item, index) => (
                                 <article key={`risk-${index}`} className="ai-evidence-card">
                                   <div>
-                                    <Tag color={riskColor[item.risk_level || 'medium'] || 'orange'}>{item.risk_level || 'medium'}</Tag>
+                                    <Tag color={riskColor[item.risk_level || 'medium'] || 'orange'}>{enumLabel(item.risk_level || 'medium', riskLabel)}</Tag>
                                     <strong>{item.risk || '风险项'}</strong>
                                   </div>
                                   <p>影响：{item.impact || '-'}</p>
@@ -757,9 +816,9 @@ export function InterpretationPage(): JSX.Element {
                                       icon={<Eye size={14} />}
                                       onClick={() => openSourceTrace({
                                         title: item.risk || '废标/否决风险',
-                                        category: 'AI风险提示',
+                                        category: '风险提示',
                                         sourcePage: item.source_page,
-                                        sourceSection: 'AI 解读引用',
+                                        sourceSection: '系统解读依据',
                                         sourceText: item.evidence || item.impact || item.mitigation || item.risk,
                                       })}
                                     >
@@ -876,13 +935,13 @@ export function InterpretationPage(): JSX.Element {
           <section className="panel-card interpretation-note">
             <Typography.Text strong>当前说明</Typography.Text>
             <Typography.Text type="secondary">
-              当前解读已支持原文溯源。业务人员可从资格要求、风险检查、评分办法和解读总览中打开依据；原文分片与 MinerU 校验已收纳到右上角“高级信息”。
+              当前解读支持原文溯源。业务人员可从资格要求、风险检查、评分办法和解读总览中查看依据；原文摘录和解析质量检查可在右上角“解析详情”中查看。
             </Typography.Text>
           </section>
         </>
       )}
       <Drawer
-        title={advancedPanel === 'chunks' ? '原文分片' : 'MinerU 解析校验'}
+        title={advancedPanel === 'chunks' ? '原文摘录' : '解析质量检查'}
         width={advancedPanel === 'mineru' ? 980 : 820}
         open={Boolean(advancedPanel)}
         onClose={() => setAdvancedPanel(null)}
@@ -891,12 +950,18 @@ export function InterpretationPage(): JSX.Element {
       </Drawer>
       <Drawer
         title="原文依据"
-        width={640}
+        width={720}
         open={Boolean(sourceTrace)}
         onClose={() => setSourceTrace(null)}
       >
         {sourceTrace ? (
           <div className="source-drawer">
+            <Alert
+              type="info"
+              showIcon
+              message="这里展示本条结论对应的招标文件原文，便于人工复核。"
+              description="上方是系统保存的直接依据；下方是同一页的其他原文摘录，可用于确认上下文。"
+            />
             <Space size={8} wrap>
               <Tag color="blue">{sourceTrace.category}</Tag>
               <Tag>{pageText(sourceTrace.sourcePage)}</Tag>
@@ -904,11 +969,11 @@ export function InterpretationPage(): JSX.Element {
             </Space>
             <h3>{sourceTrace.title}</h3>
             <section>
-              <h4>直接依据</h4>
-              <p>{sourceTrace.sourceText || '当前条目没有保存独立原文片段，请结合下方同页分片复核。'}</p>
+              <h4>本条依据摘录</h4>
+              <p>{sourceTrace.sourceText || '当前条目暂无独立摘录，请结合下方同页原文复核。'}</p>
             </section>
             <section>
-              <h4>同页 MinerU 分片</h4>
+              <h4>同页原文摘录</h4>
               {relatedChunks.length ? (
                 <List
                   size="small"
@@ -926,7 +991,7 @@ export function InterpretationPage(): JSX.Element {
                   )}
                 />
               ) : (
-                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无同页分片" />
+                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无同页原文摘录" />
               )}
             </section>
           </div>
