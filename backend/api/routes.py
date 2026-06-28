@@ -365,6 +365,78 @@ def _strip_redundant_section_label(content: str, section: dict) -> str:
     return "\n".join(output).strip()
 
 
+BODY_SUBHEADING_COMMENT_PREFIX = "BID_BODY_SUBHEADING:"
+EXPORT_GUIDANCE_LABELS = {
+    "编写要点",
+    "需准备资料",
+    "风险与复核",
+    "投标确认清单",
+    "投标确认清单：",
+}
+
+
+def _body_subheading_comment(title: str) -> str:
+    clean_title = clean_formal_bid_text(title or "").replace("--", " ").strip(" ：:、，,。")
+    clean_title = clean_title.replace("【", "").replace("】", "").strip(" ：:、，,。")
+    return f"<!-- {BODY_SUBHEADING_COMMENT_PREFIX} {clean_title} -->" if clean_title else ""
+
+
+def _strip_export_guidance_blocks(content: str) -> str:
+    if not content:
+        return ""
+    output: list[str] = []
+    skip_next = 0
+    for raw_line in content.splitlines():
+        stripped = raw_line.strip()
+        visible = re.sub(r"\*\*(.*?)\*\*", r"\1", stripped).strip()
+        visible = visible.strip("【】[]（）() ：:、，,。")
+        if skip_next > 0 and (
+            stripped.startswith(("#", "<!--"))
+            or BODY_SUBHEADING_COMMENT_PREFIX in stripped
+        ):
+            skip_next = 0
+        if skip_next > 0:
+            if (
+                not stripped
+                or stripped.startswith(("（需", "需人工", "暂无明确风险", "以下信息需", "1. 产品实测参数"))
+                or stripped.startswith(("以下信息已", "为完善本节内容", "为确保本节内容"))
+                or re.match(r"^[-*+]\s+", stripped)
+                or re.match(r"^\d+[\.、]\s+", stripped)
+            ):
+                continue
+            skip_next = 0
+        bracket_match = re.match(r"^【\s*(.+?)\s*】$", stripped)
+        label = bracket_match.group(1).strip() if bracket_match else ""
+        normalized_label = label.strip(" ：:、，,。")
+        if normalized_label in EXPORT_GUIDANCE_LABELS or visible in EXPORT_GUIDANCE_LABELS or "投标确认清单" in visible or visible == "已确认事项清单":
+            skip_next = 99
+            continue
+        output.append(raw_line)
+    return "\n".join(output).strip()
+
+
+def _sanitize_export_visible_markup(content: str) -> str:
+    if not content:
+        return ""
+    output: list[str] = []
+    for raw_line in content.splitlines():
+        stripped = raw_line.strip()
+        if BODY_SUBHEADING_COMMENT_PREFIX in stripped:
+            output.append(raw_line.replace("【", "").replace("】", ""))
+            continue
+        visible = re.sub(r"\*\*(.*?)\*\*", r"\1", stripped).strip()
+        visible_no_brackets = visible.strip("【】[]（）() ：:、，,。")
+        if visible_no_brackets.startswith(("插入：", "图：", "建议附图：")):
+            continue
+        line = raw_line
+        line = re.sub(r"【\s*(已确认|已完成|待确认|需确认)\s*】", "", line)
+        line = re.sub(r"\*\*（建议附图：.*?）\*\*", "", line)
+        line = re.sub(r"（建议附图：.*?）", "", line)
+        line = line.replace("【", "").replace("】", "")
+        output.append(line)
+    return "\n".join(output).strip()
+
+
 def _renumber_body_markdown_headings(content: str, section: dict) -> str:
     """Rewrite model-emitted body heading numbers under the official export section number."""
     if not content:
@@ -478,17 +550,107 @@ def _demote_body_markdown_headings(content: str) -> str:
         if heading_match:
             title = clean_formal_bid_text(re.sub(r"\*\*(.*?)\*\*", r"\1", heading_match.group(1))).strip()
             if title:
-                output.append(f"【{title}】")
+                output.append(_body_subheading_comment(title))
             continue
 
         next_line = lines[index + 1].strip() if index + 1 < len(lines) else ""
         if stripped and re.match(r"^(=+|-+)$", next_line):
-            output.append(f"【{clean_formal_bid_text(stripped)}】")
+            output.append(_body_subheading_comment(stripped))
             continue
-        if re.match(r"^(=+|-+)$", stripped) and output and output[-1].startswith("【"):
+        if re.match(r"^(=+|-+)$", stripped) and output and BODY_SUBHEADING_COMMENT_PREFIX in output[-1]:
             continue
         output.append(raw_line)
 
+    return "\n".join(output).strip()
+
+
+def _extract_body_heading_candidate(stripped: str) -> tuple[str, int | None] | None:
+    if not stripped or stripped.startswith("<!--"):
+        return None
+    stripped = re.sub(r"\*\*(.*?)\*\*", r"\1", stripped).strip()
+    bracket_match = re.match(r"^【\s*(.+?)\s*】$", stripped)
+    heading = bracket_match.group(1).strip() if bracket_match else stripped
+    if not heading or len(heading) > 48:
+        return None
+    if heading.strip(" ：:、，,。") in EXPORT_GUIDANCE_LABELS:
+        return None
+    numeric_match = re.match(r"^(\d+(?:\.\d+)*)(?:[\.、])?\s+(.+?)\s*$", heading)
+    if numeric_match:
+        body = numeric_match.group(2).strip().strip("【】[]（）() ：:、，,。")
+        if "：" in body[:16] or ":" in body[:16] or body.endswith(("。", "；", ";")):
+            return None
+        return (body or _strip_existing_section_number(heading), len(numeric_match.group(1).split(".")))
+    chinese_match = re.match(r"^[一二三四五六七八九十百]+[、.．]\s*(.+?)\s*$", heading)
+    if chinese_match:
+        return (_strip_existing_section_number(heading), 1)
+    chapter_match = re.match(r"^第[一二三四五六七八九十百]+[章节篇部分]\s*(.+?)\s*$", heading)
+    if chapter_match:
+        clean = _strip_existing_section_number(heading)
+        if clean in {"商务文件", "技术文件", "投标文件", "商务响应文件", "技术响应文件"}:
+            return None
+        return (clean, 1)
+    if bracket_match and len(heading) <= 24 and not heading.endswith(("。", "；", ";")):
+        return (_strip_existing_section_number(heading), None)
+    return None
+
+
+def _normalize_body_outline_lines(content: str, section: dict) -> str:
+    """Convert stale model/template body headings into clean non-TOC subheadings."""
+    if not content:
+        return ""
+    base_order = str(section.get("_export_order") or section.get("order") or "").strip()
+    if not base_order:
+        return content.strip()
+
+    candidates: list[tuple[int, int | None]] = []
+    in_fence = False
+    lines = content.splitlines()
+    for index, raw_line in enumerate(lines):
+        stripped = raw_line.strip()
+        if stripped.startswith("```") or stripped.startswith("~~~"):
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            continue
+        candidate = _extract_body_heading_candidate(stripped)
+        if candidate:
+            _, depth = candidate
+            candidates.append((index, depth))
+    numeric_depths = [depth for _, depth in candidates if depth]
+    min_numeric_depth = min(numeric_depths) if numeric_depths else None
+
+    output: list[str] = []
+    counters: list[int] = []
+    in_fence = False
+    for raw_line in lines:
+        stripped = raw_line.strip()
+        if stripped.startswith("```") or stripped.startswith("~~~"):
+            in_fence = not in_fence
+            output.append(raw_line)
+            continue
+        if in_fence:
+            output.append(raw_line)
+            continue
+        candidate = _extract_body_heading_candidate(stripped)
+        if not candidate:
+            output.append(raw_line)
+            continue
+        clean_title, explicit_depth = candidate
+        relative_depth = (
+            explicit_depth - (min_numeric_depth or explicit_depth) + 1
+            if explicit_depth
+            else 1
+        )
+        relative_depth = max(1, min(relative_depth, 4))
+        while len(counters) < relative_depth:
+            counters.append(0)
+        counters = counters[:relative_depth]
+        for index in range(relative_depth - 1):
+            if counters[index] == 0:
+                counters[index] = 1
+        counters[relative_depth - 1] += 1
+        next_order = ".".join([base_order, *[str(value) for value in counters]])
+        output.append(_body_subheading_comment(f"{next_order} {clean_title}"))
     return "\n".join(output).strip()
 
 
@@ -1282,11 +1444,18 @@ def build_project_bid_markdown(
         title = section.get("_export_title") or _section_display_title(section)
         content = _strip_untrusted_export_images(
             _strip_redundant_section_label(
-                _demote_body_markdown_headings(
-                    _renumber_body_markdown_headings(
-                        _strip_duplicate_section_heading(section.get("content") or "", section),
+                _sanitize_export_visible_markup(
+                    _normalize_body_outline_lines(
+                        _strip_export_guidance_blocks(
+                            _demote_body_markdown_headings(
+                                _renumber_body_markdown_headings(
+                                    _strip_duplicate_section_heading(section.get("content") or "", section),
+                                    section,
+                                )
+                            )
+                        ),
                         section,
-                    )
+                    ),
                 ),
                 section,
             ),
