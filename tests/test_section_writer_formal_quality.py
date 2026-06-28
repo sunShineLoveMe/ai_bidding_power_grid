@@ -1,4 +1,4 @@
-from backend.ai.section_writer import compact_formal_placeholders
+from backend.ai.section_writer import compact_formal_placeholders, strip_generated_section_heading_noise
 
 
 def test_compact_formal_placeholders_collapses_generic_repetition():
@@ -38,3 +38,26 @@ def test_compact_formal_placeholders_keeps_specific_confirmations():
     assert report["placeholders"] == 3
     assert "客户确认后填写（授权代表姓名）" in rewritten
     assert "客户确认后填写" in rewritten
+
+
+def test_strip_generated_section_heading_noise_removes_duplicate_heading_and_normalizes_brackets():
+    content = "\n".join(
+        [
+            "## 技术评分支撑材料",
+            "",
+            "【5.1 概述】",
+            "本章旨在响应技术评分要求。",
+            "",
+            "【5.2 技术方案与产品性能响应】",
+            "投标人按招标文件要求提供电缆保护管产品。",
+        ]
+    )
+
+    cleaned, report = strip_generated_section_heading_noise(content, {"title": "技术评分支撑材料"})
+
+    assert "## 技术评分支撑材料" not in cleaned
+    assert "【5.1 概述】" not in cleaned
+    assert "5.1 概述" in cleaned
+    assert "5.2 技术方案与产品性能响应" in cleaned
+    assert report["heading_noise_removed"] == 1
+    assert report["heading_brackets_normalized"] == 2

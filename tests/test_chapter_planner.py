@@ -1,10 +1,13 @@
 import unittest
+import json
 from unittest.mock import patch
 
 from backend.ai.chapter_planner import (
     _build_prompt,
     _build_rule_outline,
     _build_split_child,
+    _generate_outline_from_ai_or_rule,
+    _refine_bid_outline_in_background,
     _reference_template_chapters_from_files,
     stream_bid_outline,
 )
@@ -52,6 +55,72 @@ class ChapterPlannerRegressionTest(unittest.TestCase):
         self.assertFalse(any("陕西云天创石化有限公司" in title for title in titles))
         self.assertFalse(any("电气施工用电线保护管道连接装置" in title for title in titles))
         self.assertLessEqual(max(int(item.get("level") or 1) for item in outline.get("chapters") or []), 4)
+
+    def test_supply_ai_outline_over_cap_falls_back_to_reference_outline(self):
+        payload = {
+            "project": {"id": "project-1", "project_name": "电缆保护管采购"},
+            "analysis": {"summary": "CPVC、MPP电缆保护管物资采购", "project_meta": {}},
+            "requirements": [{"content": "提交技术偏差表、商务偏差表和投标文件格式"}],
+            "scoringItems": [],
+            "risks": [],
+        }
+        oversized_outline = {
+            "version": "ai-volume-v1",
+            "volumes": [
+                {
+                    "type": "technical",
+                    "name": "技术标",
+                    "chapters": [
+                        {"title": f"技术响应章节 {index}", "purpose": "响应技术要求"}
+                        for index in range(160)
+                    ],
+                }
+            ],
+            "chapters": [],
+        }
+
+        with (
+            patch("backend.ai.chapter_planner._fetch_knowledge_context", return_value={
+                "rag_snippets": [],
+                "assets_summary": [],
+                "has_qualification_assets": False,
+                "has_product_assets": False,
+                "has_case_assets": False,
+                "qualification_titles": [],
+                "product_titles": [],
+            }),
+            patch("backend.ai.chapter_planner.call_dashscope_api", return_value={
+                "model": "test-model",
+                "output": {"choices": [{"message": {"content": json.dumps(oversized_outline, ensure_ascii=False)}}]},
+            }),
+        ):
+            outline = _generate_outline_from_ai_or_rule(payload)
+
+        self.assertEqual("rule-v1-supply-guardrail", outline["version"])
+        self.assertTrue(outline["preserve_reference_structure"])
+        self.assertLessEqual(len(outline.get("chapters") or []), 140)
+        self.assertIn("超过上限", outline["fallback_reason"])
+
+    def test_supply_background_refinement_rejects_outline_growth(self):
+        payload = {
+            "project": {"id": "project-1", "project_name": "电缆保护管采购"},
+            "analysis": {"summary": "CPVC、MPP电缆保护管物资采购", "project_meta": {}},
+        }
+        quick_chapters = [{"order": str(index), "title": f"快速章节 {index}", "level": 1} for index in range(1, 21)]
+        analysis = {"project_meta": {"bid_outline": {"chapters": quick_chapters}}}
+        ai_outline = {
+            "chapters": [{"order": str(index), "title": f"精修章节 {index}", "level": 1} for index in range(1, 81)]
+        }
+
+        with (
+            patch("backend.ai.chapter_planner._generate_outline_from_ai_or_rule", return_value=ai_outline),
+            patch("backend.ai.chapter_planner.save_bid_outline") as save_mock,
+            patch("backend.ai.chapter_planner.replace_bid_sections_from_outline") as replace_mock,
+        ):
+            _refine_bid_outline_in_background("project-1", payload, analysis)
+
+        save_mock.assert_not_called()
+        replace_mock.assert_not_called()
 
     def test_reference_template_parser_returns_expanded_structure(self):
         chapters = _reference_template_chapters_from_files()

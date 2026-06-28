@@ -1013,17 +1013,58 @@ def compact_formal_placeholders(
     }
 
 
+def _canonical_heading_text(text: str) -> str:
+    value = str(text or "").strip()
+    value = re.sub(r"^#{1,6}\s*", "", value)
+    value = value.strip("【】[]（）() ：:、，,。")
+    value = re.sub(r"^\d+(?:\.\d+)*[、.．]?\s*", "", value)
+    return re.sub(r"\s+", "", value)
+
+
+def strip_generated_section_heading_noise(content: str, chapter: dict[str, Any]) -> tuple[str, dict[str, Any]]:
+    """Remove model-generated heading wrappers before saving formal bid text."""
+    if not content:
+        return "", {"heading_noise_removed": 0, "heading_brackets_normalized": 0}
+    title = str(chapter.get("title") or "")
+    canonical_title = _canonical_heading_text(title)
+    output: list[str] = []
+    removed = 0
+    normalized = 0
+    for index, raw_line in enumerate(str(content).strip().splitlines()):
+        stripped = raw_line.strip()
+        canonical_line = _canonical_heading_text(stripped)
+        is_first_markdown_heading = index == 0 and stripped.startswith("#")
+        is_duplicate_title = index <= 2 and canonical_title and canonical_line == canonical_title
+        if is_first_markdown_heading or is_duplicate_title:
+            removed += 1
+            continue
+        bracketed_number_heading = re.match(
+            r"^【\s*((?:\d+(?:\.\d+)*|[一二三四五六七八九十]+)[、.．]?\s*[^】]{1,60})\s*】\s*$",
+            stripped,
+        )
+        if bracketed_number_heading:
+            output.append(bracketed_number_heading.group(1).strip())
+            normalized += 1
+            continue
+        output.append(raw_line)
+    return "\n".join(output).strip(), {
+        "heading_noise_removed": removed,
+        "heading_brackets_normalized": normalized,
+    }
+
+
 def rewrite_generated_section_for_formal_quality(
     project_id: str,
     chapter: dict[str, Any],
     content: str,
 ) -> tuple[str, dict[str, Any]]:
+    content, heading_cleanup = strip_generated_section_heading_noise(content, chapter)
     content, compaction_report = compact_formal_placeholders(chapter, content)
     placeholder_count = len(re.findall(r"【\s*待(?:补充|填写|确认|核对)", content or ""))
     forbidden_topics = ["施工组织", "建造师", "安全生产许可证", "BIM", "水利施工", "安装总承包"]
     forbidden_hits = [topic for topic in forbidden_topics if topic in (content or "")]
     if placeholder_count <= 3 and not forbidden_hits:
-        return content, {"rewritten": False, "placeholders": placeholder_count, "forbidden_hits": [], **compaction_report}
+        return content, {"rewritten": False, "placeholders": placeholder_count, "forbidden_hits": [], **compaction_report, **heading_cleanup}
 
     payload = get_project_interpretation(project_id)
     analysis = payload.get("analysis") or {}
@@ -1041,6 +1082,7 @@ def rewrite_generated_section_for_formal_quality(
 4. 删除施工组织、建造师、安全生产许可证、BIM、水利施工、安装总承包等与本次电缆保护管物资供货无关内容。
 5. 河北豪乾资料只参考目录和表式，不得引用其企业事实、专利、供应商、人员、证书或业绩。
 6. 只输出重写后的完整章节正文，不要解释。
+7. 不要输出章节标题、目录编号或【5.1 概述】这类括号式小标题；如确需小标题，使用普通正文小标题，不加【】。
 
 章节标题：{title}
 
@@ -1066,17 +1108,20 @@ def rewrite_generated_section_for_formal_quality(
     )
     rewritten = str(response["output"]["choices"][0]["message"]["content"] or "").strip()
     if not rewritten:
-        return content, {"rewritten": False, "placeholders": placeholder_count, "forbidden_hits": forbidden_hits, **compaction_report}
+        return content, {"rewritten": False, "placeholders": placeholder_count, "forbidden_hits": forbidden_hits, **compaction_report, **heading_cleanup}
+    rewritten, rewritten_heading_cleanup = strip_generated_section_heading_noise(rewritten, chapter)
     after_placeholders = len(re.findall(r"【\s*待(?:补充|填写|确认|核对)", rewritten))
     after_forbidden = [topic for topic in forbidden_topics if topic in rewritten]
     if after_placeholders > placeholder_count or len(after_forbidden) > len(forbidden_hits):
-        return content, {"rewritten": False, "placeholders": placeholder_count, "forbidden_hits": forbidden_hits, **compaction_report}
+        return content, {"rewritten": False, "placeholders": placeholder_count, "forbidden_hits": forbidden_hits, **compaction_report, **heading_cleanup}
     return rewritten, {
         "rewritten": True,
         "before_placeholders": placeholder_count,
         "placeholders": after_placeholders,
         "forbidden_hits": after_forbidden,
         "placeholder_compaction": compaction_report,
+        **heading_cleanup,
+        "rewrite_heading_cleanup": rewritten_heading_cleanup,
     }
 
 
