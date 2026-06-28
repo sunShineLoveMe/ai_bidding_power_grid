@@ -15,7 +15,8 @@ from backend.services.bid_compatibility import (
     is_product_compatibility_blocking,
 )
 from backend.services.bid_prefill import PREFILL_FIELD_SPECS, build_bid_prefill_report, formal_confirmation_issue
-from backend.services.formal_placeholders import collect_formal_placeholders
+from backend.services.bid_material_scope import filter_sections_by_material_scope, material_scope_from_context
+from backend.services.formal_placeholders import collect_formal_placeholders, finalize_confirmed_formal_export_text
 
 RULES_PATH = Path(__file__).resolve().parents[2] / "rules" / "power_grid" / "formal_bid_check_rules.v1.json"
 
@@ -152,6 +153,18 @@ def _section_blob(sections: list[dict[str, Any]]) -> str:
     )
 
 
+def _export_visible_section_blob(sections: list[dict[str, Any]], confirmed_values: dict[str, str]) -> str:
+    """Return the section text as it should be visible in the formal DOCX body."""
+    text = _section_blob(sections)
+    # Markdown image URLs are an export intermediate. The formal exporter either
+    # inserts trusted images with formal captions or strips untrusted refs.
+    text = re.sub(r"!\[([^\]]*)\]\((?:[^)]*)\)", r"\1", text)
+    text = re.sub(r"/api/bidding/knowledge/assets/[^\s)\]]+", "", text)
+    text = re.sub(r"assets/[A-Za-z0-9_./-]+\.(?:png|jpe?g|webp|gif)", "", text, flags=re.I)
+    text, _ = finalize_confirmed_formal_export_text(text, confirmed_values)
+    return text
+
+
 def _asset_blob(asset: dict[str, Any]) -> str:
     return " ".join([
         _text(asset.get("title")),
@@ -161,6 +174,16 @@ def _asset_blob(asset: dict[str, Any]) -> str:
         _text(asset.get("applicable_sections")),
         _text(asset.get("metadata")),
         _text(asset.get("source_file")),
+    ])
+
+
+def _asset_visible_blob(asset: dict[str, Any]) -> str:
+    return " ".join([
+        _text(asset.get("title")),
+        _text(asset.get("category")),
+        _text(asset.get("description")),
+        _text(asset.get("tags")),
+        _text(asset.get("applicable_sections")),
     ])
 
 
@@ -195,6 +218,18 @@ def _asset_is_enterprise_fact(asset: dict[str, Any]) -> bool:
 
 def _field_by_key(prefill_report: dict[str, Any]) -> dict[str, dict[str, Any]]:
     return {str(field.get("key")): field for field in prefill_report.get("fields") or [] if field.get("key")}
+
+
+def _confirmed_values(prefill_report: dict[str, Any]) -> dict[str, str]:
+    values: dict[str, str] = {}
+    for field in prefill_report.get("fields") or []:
+        key = str(field.get("key") or "")
+        if not key:
+            continue
+        value = field.get("confirmedValue") if field.get("confirmedValue") not in (None, "") else field.get("value")
+        if value not in (None, ""):
+            values[key] = _format_value(value)
+    return values
 
 
 def _field_value(field: dict[str, Any] | None) -> str:
@@ -265,9 +300,12 @@ def _evaluate_rule(
     export_task: dict[str, Any] | None,
 ) -> dict[str, Any]:
     check_type = rule.get("check_type")
-    sections = payload.get("sections") or []
     fields = _field_by_key(prefill_report)
-    content_blob = _section_blob(sections)
+    confirmed_values = _confirmed_values(prefill_report)
+    project_meta = ((payload.get("analysis") or {}).get("project_meta") or {}) if isinstance(payload.get("analysis"), dict) else {}
+    material_scope = material_scope_from_context(project_meta, confirmed_values)
+    sections = filter_sections_by_material_scope(payload.get("sections") or [], material_scope)
+    content_blob = _export_visible_section_blob(sections, confirmed_values)
     asset_blobs = [_asset_blob(asset) for asset in assets]
 
     if check_type == "asset_present":
@@ -279,8 +317,8 @@ def _evaluate_rule(
     if check_type == "asset_boundary_no_wrong_category":
         wrong = [
             asset for asset in assets
-            if _contains_any(_asset_blob(asset), rule.get("keywords"))
-            and _contains_any(_asset_blob(asset), rule.get("forbidden_keywords"))
+            if _contains_any(_asset_visible_blob(asset), rule.get("keywords"))
+            and _contains_any(_asset_visible_blob(asset), rule.get("forbidden_keywords"))
         ]
         if wrong:
             return _make_result(rule, status="warning", evidence=f"发现疑似错误归类资产 {len(wrong)} 条：{wrong[0].get('title') or wrong[0].get('id')}")
@@ -383,10 +421,10 @@ def _evaluate_rule(
             section for section in sections
             if _contains_any(" ".join([_text(section.get("title")), _text(section.get("content"))]), rule.get("keywords"))
         ]
-        target_blob = _section_blob(target_sections)
-        placeholders = collect_formal_placeholders(target_blob)
         if not target_sections:
             return _make_result(rule, status="warning", evidence="未找到目标章节。")
+        target_blob = _export_visible_section_blob(target_sections, confirmed_values)
+        placeholders = collect_formal_placeholders(target_blob)
         if placeholders:
             return _make_result(rule, status="warning", evidence=f"目标章节发现占位符 {len(placeholders)} 处。")
         return _make_result(rule, status="passed", evidence=f"已检查目标章节 {len(target_sections)} 个。")
@@ -404,14 +442,14 @@ def _evaluate_rule(
     if check_type == "asset_titles_chinese":
         bad = [
             asset for asset in assets
-            if re.search(r"taichang_|power_grid_|production_capacity|green_low_carbon|business_license|certification", _asset_blob(asset), re.I)
+            if re.search(r"taichang_|power_grid_|production_capacity|green_low_carbon|business_license|certification", _asset_visible_blob(asset), re.I)
         ]
         if bad:
             return _make_result(rule, status="warning", evidence=f"发现疑似内部命名资产 {len(bad)} 条：{bad[0].get('title') or bad[0].get('id')}")
         return _make_result(rule, status="passed", evidence="资产标题/分类未发现常见内部命名。")
 
     if check_type == "product_compatibility_precheck":
-        report = build_bid_product_compatibility_report(payload)
+        report = build_bid_product_compatibility_report(payload, extra_context=confirmed_values)
         if is_product_compatibility_blocking(report):
             return _make_result(
                 rule,

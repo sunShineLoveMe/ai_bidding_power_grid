@@ -842,7 +842,7 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
     taichang_facts = _section_taichang_fact_digest(profile.fact_pack_mode, compatibility_report, chapter, volume_type)
 
     prompt = f"""
-你是资深投标文件撰写专家，熟悉电网/电力工程、设备供货、安装调试、试验检测、运维检修、质量安全管理和招投标文件格式要求。
+你是资深投标文件撰写专家，熟悉国家电网物资采购、设备供货、产品技术响应、试验检测、质量管理、供货交付和招投标文件格式要求。
 企业画像：
 {enterprise_context}
 
@@ -857,7 +857,7 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
 6. 正文字数按章节写作计划控制。本次生成尽量覆盖完整章节；若目标字数较长，可先输出结构完整的第一版，并保留可续写的小标题。
 7. 必须遵守当前分册策略，尤其是金额、证书、人员、日期、签章、保证金和报价信息的禁编造约束。
 8. 正式标书正文不得使用 emoji、图标符号或装饰性提示符；“关键提醒”“风险提示”等内容必须使用纯文字标题。
-9. 不得为了凑页数重复同义段落、塞入无关内容或虚构资料；未知客户决策不得展开成大面积空表，每章最多保留 3 个合并后的“【待补充：...】”，其余集中写入简短人工确认清单。
+9. 不得为了凑页数重复同义段落、塞入无关内容或虚构资料；未知客户决策不得展开成大面积空表，不得输出“待补充、人工复核、占位符、用户确认”等系统工作流语言。
 10. 必须优先依据“章节级 RAG 写作依据”和“关联要求/评分项/风险提醒”写作；RAG 未覆盖的企业事实不得编造。
 11. 下列用户确认变量必须直接使用，不得再次输出为【待补充】；未确认字段不得推断。
 
@@ -907,7 +907,7 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
 - 硬性篇幅上限：{_hard_length_cap_words(chapter) or "按目标字数合理控制"} 字，超过后系统会截流保存
 - 建议篇幅：{writing_plan.get("suggested_pages") or "需人工复核"} 页
 - 生成方式：{writing_plan.get("generation_mode") or "single_pass"}
-- 资料不足策略：{"允许围绕评分点和可验证措施扩写" if _allow_auto_expand(chapter) else "稳健生成，缺失处使用待补充占位"}
+- 资料不足策略：{"允许围绕评分点和可验证措施适度扩写" if _allow_auto_expand(chapter) else "稳健生成，缺失处使用正式说明收口，不输出待补充占位"}
 - 是否需要表格：{"是" if writing_plan.get("needs_table") else "否"}
 - 是否需要图片/流程图：{"是" if writing_plan.get("needs_image") else "否"}
 - 是否需要资质材料：{"是" if writing_plan.get("needs_qualification") else "否"}
@@ -1013,17 +1013,58 @@ def compact_formal_placeholders(
     }
 
 
+def _canonical_heading_text(text: str) -> str:
+    value = str(text or "").strip()
+    value = re.sub(r"^#{1,6}\s*", "", value)
+    value = value.strip("【】[]（）() ：:、，,。")
+    value = re.sub(r"^\d+(?:\.\d+)*[、.．]?\s*", "", value)
+    return re.sub(r"\s+", "", value)
+
+
+def strip_generated_section_heading_noise(content: str, chapter: dict[str, Any]) -> tuple[str, dict[str, Any]]:
+    """Remove model-generated heading wrappers before saving formal bid text."""
+    if not content:
+        return "", {"heading_noise_removed": 0, "heading_brackets_normalized": 0}
+    title = str(chapter.get("title") or "")
+    canonical_title = _canonical_heading_text(title)
+    output: list[str] = []
+    removed = 0
+    normalized = 0
+    for index, raw_line in enumerate(str(content).strip().splitlines()):
+        stripped = raw_line.strip()
+        canonical_line = _canonical_heading_text(stripped)
+        is_first_markdown_heading = index == 0 and stripped.startswith("#")
+        is_duplicate_title = index <= 2 and canonical_title and canonical_line == canonical_title
+        if is_first_markdown_heading or is_duplicate_title:
+            removed += 1
+            continue
+        bracketed_number_heading = re.match(
+            r"^【\s*((?:\d+(?:\.\d+)*|[一二三四五六七八九十]+)[、.．]?\s*[^】]{1,60})\s*】\s*$",
+            stripped,
+        )
+        if bracketed_number_heading:
+            output.append(bracketed_number_heading.group(1).strip())
+            normalized += 1
+            continue
+        output.append(raw_line)
+    return "\n".join(output).strip(), {
+        "heading_noise_removed": removed,
+        "heading_brackets_normalized": normalized,
+    }
+
+
 def rewrite_generated_section_for_formal_quality(
     project_id: str,
     chapter: dict[str, Any],
     content: str,
 ) -> tuple[str, dict[str, Any]]:
+    content, heading_cleanup = strip_generated_section_heading_noise(content, chapter)
     content, compaction_report = compact_formal_placeholders(chapter, content)
     placeholder_count = len(re.findall(r"【\s*待(?:补充|填写|确认|核对)", content or ""))
     forbidden_topics = ["施工组织", "建造师", "安全生产许可证", "BIM", "水利施工", "安装总承包"]
     forbidden_hits = [topic for topic in forbidden_topics if topic in (content or "")]
     if placeholder_count <= 3 and not forbidden_hits:
-        return content, {"rewritten": False, "placeholders": placeholder_count, "forbidden_hits": [], **compaction_report}
+        return content, {"rewritten": False, "placeholders": placeholder_count, "forbidden_hits": [], **compaction_report, **heading_cleanup}
 
     payload = get_project_interpretation(project_id)
     analysis = payload.get("analysis") or {}
@@ -1041,6 +1082,7 @@ def rewrite_generated_section_for_formal_quality(
 4. 删除施工组织、建造师、安全生产许可证、BIM、水利施工、安装总承包等与本次电缆保护管物资供货无关内容。
 5. 河北豪乾资料只参考目录和表式，不得引用其企业事实、专利、供应商、人员、证书或业绩。
 6. 只输出重写后的完整章节正文，不要解释。
+7. 不要输出章节标题、目录编号或【5.1 概述】这类括号式小标题；如确需小标题，使用普通正文小标题，不加【】。
 
 章节标题：{title}
 
@@ -1066,17 +1108,20 @@ def rewrite_generated_section_for_formal_quality(
     )
     rewritten = str(response["output"]["choices"][0]["message"]["content"] or "").strip()
     if not rewritten:
-        return content, {"rewritten": False, "placeholders": placeholder_count, "forbidden_hits": forbidden_hits, **compaction_report}
+        return content, {"rewritten": False, "placeholders": placeholder_count, "forbidden_hits": forbidden_hits, **compaction_report, **heading_cleanup}
+    rewritten, rewritten_heading_cleanup = strip_generated_section_heading_noise(rewritten, chapter)
     after_placeholders = len(re.findall(r"【\s*待(?:补充|填写|确认|核对)", rewritten))
     after_forbidden = [topic for topic in forbidden_topics if topic in rewritten]
     if after_placeholders > placeholder_count or len(after_forbidden) > len(forbidden_hits):
-        return content, {"rewritten": False, "placeholders": placeholder_count, "forbidden_hits": forbidden_hits, **compaction_report}
+        return content, {"rewritten": False, "placeholders": placeholder_count, "forbidden_hits": forbidden_hits, **compaction_report, **heading_cleanup}
     return rewritten, {
         "rewritten": True,
         "before_placeholders": placeholder_count,
         "placeholders": after_placeholders,
         "forbidden_hits": after_forbidden,
         "placeholder_compaction": compaction_report,
+        **heading_cleanup,
+        "rewrite_heading_cleanup": rewritten_heading_cleanup,
     }
 
 

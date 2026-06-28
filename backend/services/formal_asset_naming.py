@@ -88,6 +88,8 @@ def clean_formal_asset_title(value: Any, fallback: str = "企业资料") -> str:
     title = re.sub(r"_?第\s*0+\d+\s*页", "", title)
     title = re.sub(r"内径\s*[：:]?\s*[φΦ]?\s*\d+(?:\.\d+)?", "", title)
     title = re.sub(r"(?:外径|壁厚|环刚度|管径)\s*[：:]?\s*[φΦ]?\s*\d+(?:\.\d+)?(?:\s*(?:mm|毫米|MPa|kN/m2|kN/m²))?", "", title)
+    title = re.sub(r"[（(]\s*[）)]", "", title)
+    title = re.sub(r"[（(][\s,，、;；:：.．_\-—]*[）)]", "", title)
     title = title.replace("原图", "")
     title = title.replace("模拟产品图片", "产品实物资料")
     title = re.sub(r"(资料){2,}$", "资料", title)
@@ -104,12 +106,18 @@ def clean_formal_asset_title(value: Any, fallback: str = "企业资料") -> str:
     return title or fallback
 
 
+LEGACY_IMAGE_CAPTION_PREFIX_RE = re.compile(
+    r"^(?:图示|图片|资料)\s*[：:、.．\s]+"
+    r"|^图\s*\d+(?:[.\-—]\d+)*\s*[：:、.．\s]+"
+)
+
+
 def formalize_legacy_image_caption(text: str) -> str | None:
     value = _text(text).strip()
-    if not re.match(r"^(?:图示|图片|资料|图\s*\d+(?:[.\-—]\d+)*)\s*[：:、.\s]*", value):
+    if not LEGACY_IMAGE_CAPTION_PREFIX_RE.match(value):
         return None
 
-    raw = re.sub(r"^(?:图示|图片|资料|图\s*\d+(?:[.\-—]\d+)*)\s*[：:、.\s]*", "", value).strip()
+    raw = LEGACY_IMAGE_CAPTION_PREFIX_RE.sub("", value, count=1).strip()
     if _looks_like_person_identity(raw):
         return "资料：身份证明文件"
 

@@ -53,6 +53,16 @@ function hasPersonnelSignal(asset: AssetDisplayInput): boolean {
   return /人员证书|人员花名册|劳动合同|社保|参保证明/.test(text);
 }
 
+function removeMeaninglessBrackets(value: string): string {
+  return value
+    .replace(/[（(]\s*[）)]/g, '')
+    .replace(/[（(][\s,，、;；:：.．_\-—]*[）)]/g, '')
+    .replace(/\s+[）)]/g, '')
+    .replace(/[（(]\s+/g, '')
+    .replace(/[，,。；;：:、.．_\-—\s]+$/g, '')
+    .trim();
+}
+
 function normalizeTitle(rawTitle: string, asset: AssetDisplayInput): string {
   let title = rawTitle.trim();
   if (!title) return '';
@@ -71,6 +81,7 @@ function normalizeTitle(rawTitle: string, asset: AssetDisplayInput): string {
   if (hasPersonnelSignal(asset) && !/人员证书|花名册|劳动合同|社保|参保证明/.test(title)) {
     title = title.replace(/（第([0-9一二三四五六七八九十百]+)页）$/, '人员证书（第$1页）');
   }
+  title = removeMeaninglessBrackets(title);
   return title || rawTitle;
 }
 

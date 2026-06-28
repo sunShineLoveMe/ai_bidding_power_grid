@@ -118,7 +118,7 @@ class FormalBidCheckTest(unittest.TestCase):
              patch("backend.services.formal_bid_check.list_knowledge_assets", return_value=self._assets()):
             report = build_formal_bid_check_report("11111111-1111-1111-1111-111111111111")
 
-        self.assertEqual(report["summary"]["totalRules"], 61)
+        self.assertEqual(report["summary"]["totalRules"], 62)
         self.assertFalse(report["summary"]["canFormalExport"])
         self.assertTrue(report["summary"]["draftExportAllowed"])
         by_id = {item["id"]: item for item in report["items"]}
@@ -192,17 +192,44 @@ class FormalBidCheckTest(unittest.TestCase):
         self.assertFalse(report["summary"]["canFormalExport"])
         self.assertIn("架空绝缘导线", by_id["T-000"]["evidence"])
 
-    def test_rule_inventory_has_sixty_one_objective_rules(self):
+    def test_rule_inventory_has_sixty_two_objective_rules(self):
         from backend.services.formal_bid_check import load_formal_check_rules
 
         rule_set = load_formal_check_rules()
         rules = rule_set["rules"]
-        self.assertEqual(len(rules), 61)
+        self.assertEqual(len(rules), 62)
         self.assertEqual(sum(1 for rule in rules if rule["category"] == "资格资料"), 10)
         self.assertEqual(sum(1 for rule in rules if rule["category"] == "商务响应"), 12)
         self.assertEqual(sum(1 for rule in rules if rule["category"] == "技术响应"), 13)
         self.assertTrue(all(rule.get("source_level") and rule.get("source_ref") for rule in rules))
         self.assertTrue(all(rule.get("remediation") for rule in rules))
+
+    def test_formal_check_uses_cleaned_visible_text_and_material_scope(self):
+        from backend.services.formal_bid_check import build_formal_bid_check_report
+
+        payload = self._payload()
+        payload["sections"] = [
+            {"id": "1", "title": "投标保证保险（电缆保护管 CPVC）", "content": "授权代表：客户确认后填写（授权代表姓名）"},
+            {"id": "2", "title": "投标保证保险（电缆保护管 NHAP）", "content": "图片：/api/bidding/knowledge/assets/internal/file"},
+        ]
+        prefill = self._prefill_report()
+        for field in prefill["fields"]:
+            if field["key"] == "package_name":
+                field["value"] = field["confirmedValue"] = "电缆保护管CPVC、电缆保护管MPP包1"
+            if field["key"] == "material_category":
+                field["value"] = field["confirmedValue"] = "电缆保护管CPVC、电缆保护管MPP"
+            if field["key"] == "authorized_representative":
+                field["value"] = field["confirmedValue"] = "晁坤琳"
+
+        with patch("backend.services.formal_bid_check.get_project_interpretation", return_value=payload), \
+             patch("backend.services.formal_bid_check.build_bid_prefill_report", return_value=prefill), \
+             patch("backend.services.formal_bid_check.build_compliance_report", return_value={"summary": {"percent": 80, "missing": 1, "highRiskMissing": 1}}), \
+             patch("backend.services.formal_bid_check.list_knowledge_assets", return_value=self._assets()):
+            report = build_formal_bid_check_report("11111111-1111-1111-1111-111111111111")
+
+        by_id = {item["id"]: item for item in report["items"]}
+        self.assertEqual(by_id["F-005"]["status"], "passed")
+        self.assertEqual(by_id["D-007"]["status"], "passed")
 
     def test_api_rejects_invalid_project_id(self):
         from main import app

@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any, Iterator
 
 from backend.db.supabase_repo import get_project_interpretation, get_supabase_client, replace_bid_sections_from_outline
+from backend.services.bid_material_scope import material_scope_from_context, prune_outline_by_material_scope
 from backend.core.llm_json_utils import strip_llm_json
 from backend.ai.qwen_client import call_dashscope_api
 from backend.ai.bid_writing_plan import build_chapter_writing_plan
@@ -249,6 +250,17 @@ def _normalize_outline_chapters(
 LEAF_SPLIT_TARGET_WORDS = 1200
 LEAF_SPLIT_THRESHOLD_WORDS = 1800
 LEAF_SPLIT_MAX_CHILDREN = 8
+SUPPLY_ONLY_MAX_OUTLINE_NODES = 140
+SUPPLY_ONLY_AI_REFINEMENT_MAX_GROWTH = 1.25
+SUPPLY_ONLY_FORBIDDEN_OUTLINE_TERMS = (
+    "施工组织设计",
+    "施工部署",
+    "建造师",
+    "安全生产许可证",
+    "BIM",
+    "水利施工",
+    "安装总承包",
+)
 
 
 def _writing_plan_target_words(chapter: dict[str, Any]) -> int:
@@ -774,6 +786,61 @@ def _count_outline_nodes(node: dict[str, Any]) -> int:
     return 1 + sum(_count_outline_nodes(child) for child in node.get("children") or [])
 
 
+def _outline_total_nodes(outline: dict[str, Any]) -> int:
+    chapters = outline.get("chapters") if isinstance(outline.get("chapters"), list) else []
+    if chapters:
+        return len(chapters)
+    volumes = outline.get("volumes") if isinstance(outline.get("volumes"), list) else []
+    return sum(
+        _count_outline_nodes(chapter)
+        for volume in volumes
+        if isinstance(volume, dict)
+        for chapter in (volume.get("chapters") or [])
+        if isinstance(chapter, dict)
+    )
+
+
+def _outline_forbidden_terms(outline: dict[str, Any]) -> list[str]:
+    titles = " ".join(str(chapter.get("title") or "") for chapter in outline.get("chapters") or [])
+    return [term for term in SUPPLY_ONLY_FORBIDDEN_OUTLINE_TERMS if term in titles]
+
+
+def _supply_outline_reject_reason(
+    outline: dict[str, Any],
+    *,
+    quick_chapters_count: int | None = None,
+) -> str | None:
+    node_count = _outline_total_nodes(outline)
+    forbidden_terms = _outline_forbidden_terms(outline)
+    if forbidden_terms:
+        return "供货类大纲包含工程施工类章节：" + "、".join(forbidden_terms)
+    if node_count > SUPPLY_ONLY_MAX_OUTLINE_NODES:
+        return f"供货类大纲章节数 {node_count} 超过上限 {SUPPLY_ONLY_MAX_OUTLINE_NODES}"
+    if quick_chapters_count and node_count > max(
+        quick_chapters_count + 12,
+        int(quick_chapters_count * SUPPLY_ONLY_AI_REFINEMENT_MAX_GROWTH),
+    ):
+        return f"后台精修章节数 {node_count} 相比快速大纲 {quick_chapters_count} 膨胀过多"
+    return None
+
+
+def _use_supply_fallback_outline(
+    fallback_outline: dict[str, Any],
+    reason: str,
+    *,
+    source_version: str | None = None,
+) -> dict[str, Any]:
+    guarded = {
+        **fallback_outline,
+        "version": "rule-v1-supply-guardrail",
+        "preserve_reference_structure": True,
+        "fallback_reason": reason,
+        "rejected_ai_outline_version": source_version,
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+    }
+    return _normalize_outline_structure(guarded)
+
+
 def _supply_reference_base_chapters() -> list[dict[str, Any]]:
     chapters = [
         {
@@ -1093,8 +1160,11 @@ def _build_prompt(payload: dict[str, Any]) -> str:
             "企业资产库中有业绩/案例材料，资格文件分册应设置类似项目业绩章节，技术标中应设置类似工程经验章节。"
         )
 
-    min_chapters_hint = max(25, scoring_count * 2, requirement_count // 3)
-    min_chapters_hint = min(min_chapters_hint, 80)
+    if supply_only:
+        min_chapters_hint = min(max(24, scoring_count, requirement_count // 8), 45)
+    else:
+        min_chapters_hint = max(25, scoring_count * 2, requirement_count // 3)
+        min_chapters_hint = min(min_chapters_hint, 80)
 
     context = {
         "project": {
@@ -1145,11 +1215,16 @@ def _build_prompt(payload: dict[str, Any]) -> str:
         "",
         f"章节数量规则（严格执行）：",
         f"- 本次招标共有 {scoring_count} 个评分项、{requirement_count} 个要求条款、{risk_count} 个风险项。",
-        f"- 建议生成章节总数不少于 {min_chapters_hint} 个（含各级子章节）。",
+        (
+            f"- 当前为物资供货类投标，章节总数建议控制在 {min_chapters_hint} 个左右；"
+            f"如参考模板章节较多，总数也不得超过 {SUPPLY_ONLY_MAX_OUTLINE_NODES} 个（含各级子章节）。"
+            if supply_only
+            else f"- 建议生成章节总数不少于 {min_chapters_hint} 个（含各级子章节）。"
+        ),
         "- 每个评分项必须有至少一个对应章节或子章节明确响应，不得合并到笼统章节里。",
         "- 每个高风险/废标项必须有专项章节或子章节响应。",
         ("- 当前为电缆保护管物资供货项目，禁止生成施工组织设计、建造师、安全生产许可证、BIM、水利施工等工程承包内容；技术部分应展开产品参数、生产检验、供货交付、质量保证和售后服务。" if supply_only else "- 技术标中施工组织设计必须展开到三级，至少包含：总体部署、进度计划、质量控制、安全管理、环保文明施工、资源配置、关键工序专项方案等子章节。"),
-        "- 资格文件分册必须为每类资质/证书/人员/业绩单独设置章节，不得合并为一个资格材料章节。",
+        ("- 资格/商务/技术资料应按正式物资投标文件表式归类，不得把每个附件、证明截图或材料清单项都扩张成独立正文章节。" if supply_only else "- 资格文件分册必须为每类资质/证书/人员/业绩单独设置章节，不得合并为一个资格材料章节。"),
         "- 如果企业知识库中有产品/设备资产，技术标中必须为主要产品/设备设置专项技术参数响应章节。",
         "- 目录层级灵活：简单章节保留一级，复杂章节展开到二级、三级，必要时四级。",
         "- 不要编造招标文件没有的信息；无法确认的写需人工复核。",
@@ -1184,7 +1259,7 @@ def _build_prompt(payload: dict[str, Any]) -> str:
         '      "type": "technical",',
         '      "name": "技术标",',
         '      "required": true,',
-        '      "basis": "招标文件要求提交施工组织设计和技术响应文件",',
+        '      "basis": "招标文件要求提交物资供货技术响应文件",',
         '      "chapters": [',
         '        {',
         '          "title": "...",',
@@ -1215,6 +1290,16 @@ def _build_prompt(payload: dict[str, Any]) -> str:
 
 def _generate_outline_from_ai_or_rule(payload: dict[str, Any]) -> dict[str, Any]:
     fallback_outline = _build_rule_outline(payload)
+    supply_only = _is_supply_only_bid(payload)
+    material_scope = material_scope_from_context((payload.get("analysis") or {}).get("project_meta") or {}, payload.get("project") or {})
+
+    def finalize_outline(outline: dict[str, Any]) -> dict[str, Any]:
+        outline = prune_outline_by_material_scope(outline, material_scope)
+        if material_scope:
+            outline["material_scope"] = sorted(material_scope)
+        outline["generated_at"] = datetime.now(timezone.utc).isoformat()
+        return outline
+
     try:
         prompt = _build_prompt(payload)
         project = payload.get("project") or {}
@@ -1233,7 +1318,7 @@ def _generate_outline_from_ai_or_rule(payload: dict[str, Any]) -> dict[str, Any]
         ai_outline = fallback_outline
         ai_outline["version"] = "rule-v1-fallback"
         ai_outline["fallback_reason"] = f"AI 章节大纲生成失败，已使用规则版大纲: {exc}"
-        return ai_outline
+        return finalize_outline(ai_outline)
 
     has_volumes = isinstance(ai_outline.get("volumes"), list) and any(
         isinstance(volume, dict) and isinstance(volume.get("chapters"), list) and volume.get("chapters")
@@ -1244,11 +1329,21 @@ def _generate_outline_from_ai_or_rule(payload: dict[str, Any]) -> dict[str, Any]
         ai_outline = fallback_outline
         ai_outline["version"] = "rule-v1-fallback"
         ai_outline["fallback_reason"] = "AI 返回结果缺少 volumes[].chapters 或 chapters，已使用规则版分册大纲。"
-        return ai_outline
+        return finalize_outline(ai_outline)
 
+    if supply_only:
+        ai_outline["preserve_reference_structure"] = True
     ai_outline = _normalize_outline_structure(ai_outline)
+    if supply_only:
+        reject_reason = _supply_outline_reject_reason(ai_outline)
+        if reject_reason:
+            return finalize_outline(_use_supply_fallback_outline(
+                fallback_outline,
+                f"{reject_reason}，已保留客户范本/规则版供货类大纲。",
+                source_version=str(ai_outline.get("version") or "ai-v1"),
+            ))
     ai_outline["version"] = ai_outline.get("version") or "ai-v1"
-    ai_outline["generated_at"] = datetime.now(timezone.utc).isoformat()
+    ai_outline = finalize_outline(ai_outline)
     if "model" not in ai_outline:
         ai_outline["model"] = locals().get("response", {}).get("model") or "dashscope"
     return ai_outline
@@ -1341,6 +1436,14 @@ def _refine_bid_outline_in_background(project_id: str, payload: dict[str, Any], 
         )
         ai_outline = _generate_outline_from_ai_or_rule(payload)
         ai_chapters = ai_outline.get("chapters") or []
+        if _is_supply_only_bid(payload):
+            reject_reason = _supply_outline_reject_reason(ai_outline, quick_chapters_count=quick_chapters_count)
+            if reject_reason:
+                logging.warning(
+                    "后台 AI 供货类大纲被门禁拒绝，保留快速大纲: %s project=%s",
+                    reject_reason, project_id,
+                )
+                return
         # 只有 AI 版章节数量不少于规则版时才替换，防止 AI 退化
         if len(ai_chapters) >= max(quick_chapters_count, 1):
             save_bid_outline(project_id, ai_outline, analysis)

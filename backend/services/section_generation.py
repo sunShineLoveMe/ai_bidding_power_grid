@@ -15,6 +15,7 @@ from backend.ai.section_writer import (
     compact_formal_placeholders,
     estimate_bid_content_words,
     rewrite_generated_section_for_formal_quality,
+    strip_generated_section_heading_noise,
     stream_bid_section,
 )
 from backend.db.supabase_repo import (
@@ -67,8 +68,11 @@ def save_generated_section(
     full_content: str,
     quality_report: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
+    full_content, heading_cleanup = strip_generated_section_heading_noise(full_content, chapter)
     full_content, compaction_report = compact_formal_placeholders(chapter, full_content)
     quality = {**(quality_report or {})}
+    if heading_cleanup.get("heading_noise_removed") or heading_cleanup.get("heading_brackets_normalized"):
+        quality["heading_cleanup"] = heading_cleanup
     if compaction_report.get("compacted"):
         quality["placeholder_compaction"] = compaction_report
     actual_words = estimate_bid_content_words(full_content)
@@ -267,6 +271,7 @@ def generate_and_save_bid_section(
         "words": estimate_bid_content_words(full_content),
         "chunks": chunk_count,
         "content_length": len(full_content),
+        "generated_content": full_content,
         **prompt_metadata,
     }
 

@@ -1,6 +1,6 @@
 # 标书文档编写与正式导出质量待办清单
 
-更新日期：2026-06-27
+更新日期：2026-06-28
 
 > 项目级优先级以 `docs/development/master-todo.md` 为准。本文档保留 DOCX 正式导出专项详情、验收口径和历史验证记录。
 
@@ -21,6 +21,14 @@
 - 真实验证必须走项目导出链路：`build_project_bid_markdown` -> `convert_md_to_word` -> `refresh_docx_fields_with_soffice`，不得只用 mock 替代。
 - 2026-06-27 阿里云新疆 10kV 真实浏览器验收发现：客户真实长项目名会导致技术标 DOCX 导出任务因 `[Errno 36] File name too long` 失败；已将物理输出目录和文件名短名化。
 - 2026-06-27 本地辽宁 CPVC 包 1 完整真实回归已产出完整 DOCX，但 formal gate 判定为 `draft`：正式必填缺口 `16`、高风险缺口 `48`、正文残留 `待补充/需人工复核`，且封面包号未读取已确认值。记录见 `docs/development/runs/run_20260627_local_liaoning_full_e2e.md`。
+- 2026-06-28 在线编辑器图片插入专项继续收口：修复 AntD `App` 根容器高度导致的章节目录和正文编辑区不可滚动问题；本地上传图片明确为“保存到当前产品库/资信库，作为企业图片资产后续复用，并插入当前章节正文”。记录见 `docs/development/runs/run_20260628_editor_image_insert_only.md`。
+- 2026-06-28 在线编辑器资产库图片支持多选批量插入；父级章节状态改为汇总下级叶子章节，子章节全完成时父章节显示绿色完成状态。记录见 `docs/development/runs/run_20260628_editor_image_insert_only.md`。
+- 2026-06-28 修复目录模式“预览”后正文空白问题；前端正文展示和 DOCX/Markdown 分册导出会把模型生成的旧正文标题编号重写到当前章节编号之下，避免技术标/商务标目录与正文编号不一致。记录见 `docs/development/runs/run_20260628_editor_image_insert_only.md`。
+- 2026-06-28 继续治理章节正文脏标题和旧模板编号：删除重复章节标题、泛化卷标题，并按正文内相对数字/Markdown 层级重写标题，修复 `4.3.3.1.1 产品购销合同`、`2.7.1.1.1.1 投标函` 等过深编号。记录见 `docs/development/runs/run_20260628_editor_image_insert_only.md`。
+- 2026-06-28 按新疆技术/商务参考分册继续收口 DOCX 导出观感：技术标/商务标封面改为 `投标文件 + 文件类别：技术/商务`，签章行使用 `盖单位章/签字` 口径；导出层兜底移除旧模板 `【5.1】` 标题、全角 `【】`、编写要点、需准备资料、风险复核、投标确认清单和插图建议；分册正文标题收敛为宋体 `12pt`。真实技术标/商务标链路均通过，记录见 `docs/development/runs/run_20260628_xinjiang_docx_format_stabilization.md`。
+- 2026-06-28 针对辽宁 CPVC 真实流程大纲膨胀到 278 节问题增加供货类大纲门禁：供货类 AI 大纲强制保留参考结构、总章节上限 `140`、后台精修不得相对快速大纲明显膨胀，并在章节保存前清理模型生成的重复标题和 `【5.1 概述】` 式括号编号。记录见 `docs/development/runs/run_20260628_supply_outline_guardrails.md`。
+- 2026-06-28 服务重启后重新跑辽宁 CPVC/MPP 正式投标全流程：上传、解析、AI 解读、人工确认、75 个叶子章节正文生成、技术标/商务标/整体标书 DOCX 导出均真实完成；大纲稳定为 `102` 节，未复现 `278` 节膨胀。但导出仍降级为草稿版，整体标书 PDF 约 `499` 页，目录混入 `NHAP`，正文仍残留“待补充/人工复核”与 1 处施工类语义。记录见 `docs/development/runs/run_20260628_liaoning_formal_e2e_after_service_restart.md`。
+- 2026-06-28 辽宁 CPVC/MPP 正式导出 P0 修复后复测：技术标、商务标、完整标书均走真实导出链路，字段刷新 `refreshed`、图片插入失败 `0`、formal readiness `ready=true`。DOCX 文本/XML 审计确认 `待补充/人工复核/客户确认后填写/用户确认/占位符`、内部图片路径、`NHAP`、施工类口径和 `【5.1】` 类括号编号标题均为 `0`；正式检查 `62` 条规则中 `61` 通过、`0` 阻断、`0` 人工确认，仅保留 `Q-007` 人员证书资产误带“试验检测能力”标签的资料治理 warning。记录见 `docs/development/runs/run_20260628_liaoning_formal_e2e_p0_fixes_retained.md`。
 
 ## P0 必须完成
 
@@ -40,6 +48,7 @@
 | 已完成 | 图片资产正式化 | 只允许泰昌企业事实资产，禁止虚假图片路径，正式 DOCX 不展示内部来源库、匹配依据或得分，记录图片候选/选中/插入/失败数 |
 | 已完成 | 真实导出验收记录 | 用真实项目导出 DOCX，记录封面、目录、正文、表格、图片、页眉页脚、字段刷新状态 |
 | 已完成 | 长项目名物理路径短名化 | 阿里云新疆 10kV 项目技术标导出不得因项目全名过长失败；输出目录使用 `project_id[:8]`，文件名使用 `泰昌_<招标编号>_<包号>_<分册>_<日期>.docx`；真实链路已生成 `泰昌_SL265A_包1_技术投标文件_20260627.docx`，LibreOffice 字段刷新成功 |
+| 已完成 | 辽宁 CPVC/MPP 正式导出 P0 收口 | 真实导出技术标、商务标、完整标书；正式检查 `0` 阻断、`0` 人工确认；成品 DOCX 审计 `待补充/人工复核/内部路径/NHAP/施工类口径/括号编号标题` 均为 `0` |
 
 ## P1 应该完成
 
@@ -610,3 +619,39 @@
 - 审计结果：技术标 `8/8/8`、商务标 `5/5/5`、完整标书 `12/12/12`，分别代表 manifest 选中图片 / Word 内图片 / 正式题注；三份文件图片失败 `0`、无题注图片 `0`、禁用文本命中 `0`、斜体标题 `0`、字段刷新均 `refreshed`。
 - 运行记录：`docs/development/runs/run_20260627_liaoning_formal_bid_image_binding_rework.md`。
 - 自动化回归：`.venv/bin/python -m pytest tests/test_formal_placeholders.py tests/test_rag_asset_scoring.py tests/test_docx_export.py -q`，结果 `60 passed, 1 warning`。
+
+### 2026-06-28 在线编辑器图片插入功能回归记录
+
+- 背景：客户反馈类 Word 编辑器不能插入图片，并要求编辑器中插入图片、修改文字、保存之后，导出的 Word 能保持对应内容。本分支仅处理图片插入能力，连续滚动需求延后到下期。
+- 本轮实现：
+  - Tiptap 工具栏新增“插入图片”按钮。
+  - 图片弹窗支持从产品库/资信库选择已入库图片，也支持上传本地图片。
+  - 编辑器预览使用授权 object URL，保存正文使用 `/api/knowledge/assets/<id>/file?variant=original`，避免 blob URL 进入数据库或正式 DOCX。
+  - DOCX 导出图片清理规则保留可信手工插入资产图片。
+  - 修复旧题注识别过宽导致“图片之后继续编辑文字...”被误判为图片题注的问题。
+- 回归记录：
+  - `python3 -m py_compile backend/api/routes.py backend/services/formal_asset_naming.py backend/export/md_to_word.py`，通过。
+  - `npm run build`，通过；仅保留既有 Vite chunk 体积和混合 import 警告。
+  - `.venv/bin/python -m pytest tests/test_docx_export.py::DocxExportRegressionTest::test_plain_paragraph_after_image_prefix_is_not_caption tests/test_docx_export.py::DocxExportRegressionTest::test_formal_image_caption_is_sanitized_centered_and_small tests/test_docx_export.py::DocxExportRegressionTest::test_manual_asset_image_survives_formal_export_image_cleanup -q`，通过。
+- 运行记录：`docs/development/runs/run_20260628_editor_image_insert_only.md`。
+
+### 2026-06-28 在线编辑器图片预览确认与名称清洗复验记录
+
+- 背景：用户复测发现图片卡片点击“预览”会直接插入正文，缺少确认；部分资信图片标题出现 `社保证明（）` 空括号；本地上传图片标题输入框含义不清。
+- 本轮实现：
+  - 资产库图片改为“预览/选择/确认插入”，预览不再修改正文。
+  - 底部按钮改为 `插入选中图片`，只有选择资产后才可用；本地图片则继续走 `上传并插入`。
+  - 本地上传输入框显式标为 `图片标题`，说明它是正文图片标题/替代文字，不是标签。
+  - 前端展示标题与后端正式资产标题均清理空括号、空白括号和只有标点的括号。
+  - Tiptap 编辑器消息提示切换为 AntD App 上下文，消除本轮交互控制台警告。
+- 真实浏览器回归：
+  - 页面：`/bid-editor?projectId=5d064d0a-29ba-41bb-ab07-9d51e6c9e084`。
+  - 点击图片预览后正文图片数保持 `0 -> 0`，预览层正常打开。
+  - 选择图片后 `插入选中图片` 可用，确认后正文图片数 `0 -> 1`。
+  - 弹窗文本无空括号命中，本地上传区域显示 `图片标题`。
+  - 干净 Playwright 会话控制台错误 `0`、警告 `0`。
+- 自动化回归：
+  - `npm run build`，通过；仅保留既有 Vite chunk 体积和混合 import 警告。
+  - `.venv/bin/python -m pytest tests/test_docx_export.py::DocxExportRegressionTest::test_formal_asset_title_removes_empty_brackets tests/test_docx_export.py::DocxExportRegressionTest::test_plain_paragraph_after_image_prefix_is_not_caption tests/test_docx_export.py::DocxExportRegressionTest::test_manual_asset_image_survives_formal_export_image_cleanup -q`，结果 `3 passed, 1 warning`。
+  - `python3 -m py_compile backend/services/formal_asset_naming.py backend/export/md_to_word.py backend/api/routes.py`，通过。
+- 运行记录：`docs/development/runs/run_20260628_editor_image_insert_only.md`。

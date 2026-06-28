@@ -575,6 +575,8 @@ def generate_one_section(
         try:
             heartbeat(force=True)
             result = generate_and_save_bid_section(project_id, chapter, with_images=with_images, on_event=on_event)
+            final_generated_content = str(result.get("generated_content") or generated_content)
+            generated_content = final_generated_content
             assert_owner()
             update_bid_generation_task_item(project_id, task_id, section_id, {
                 "status": "saving",

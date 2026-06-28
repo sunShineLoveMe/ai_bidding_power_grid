@@ -45,17 +45,24 @@ MATERIAL_KEY_ALIASES = (
 )
 
 
-def build_bid_product_compatibility_report(interpretation: dict[str, Any] | None) -> dict[str, Any]:
-    text = _compatibility_source_text(interpretation or {})
+def build_bid_product_compatibility_report(
+    interpretation: dict[str, Any] | None,
+    extra_context: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    source_text = _compatibility_source_text(interpretation or {})
+    extra_text = _compatibility_extra_context_text(extra_context or {})
+    text = "\n".join(part for part in [source_text, extra_text] if part.strip())
+    source_supported = _matched_terms(source_text, SUPPORTED_TERMS)
+    source_unsupported = _matched_terms(source_text, UNSUPPORTED_TENDER_MATERIALS)
     detected_supported = _matched_terms(text, SUPPORTED_TERMS)
     detected_unsupported = _matched_terms(text, UNSUPPORTED_TENDER_MATERIALS)
 
-    if detected_unsupported and not detected_supported:
+    if source_unsupported and not source_supported:
         status = "mismatch"
         blocking = True
         message = (
             "当前招标包物料疑似为"
-            f"{'、'.join(detected_unsupported[:4])}，泰昌现有已核验产品资料主要覆盖"
+            f"{'、'.join(source_unsupported[:4])}，泰昌现有已核验产品资料主要覆盖"
             f"{'、'.join(TAICHANG_SUPPORTED_PRODUCT_FAMILIES[:2])}；不得直接生成无偏差技术响应。"
         )
     elif detected_supported:
@@ -106,7 +113,6 @@ def _compatibility_source_text(interpretation: dict[str, Any]) -> str:
         key_text = str(key)
         if key_text in MATERIAL_KEY_ALIASES or any(alias in key_text for alias in MATERIAL_KEY_ALIASES):
             focused_values.append(value)
-
     for bucket in ("requirements", "risks", "documentChunks"):
         for item in interpretation.get(bucket) or []:
             if not isinstance(item, dict):
@@ -115,6 +121,15 @@ def _compatibility_source_text(interpretation: dict[str, Any]) -> str:
             focused_values.append(item.get("content") or item.get("source_text"))
 
     return "\n".join(_stringify(value) for value in focused_values if _stringify(value).strip())[:12000]
+
+
+def _compatibility_extra_context_text(extra_context: dict[str, Any]) -> str:
+    focused_values: list[Any] = []
+    for key, value in extra_context.items():
+        key_text = str(key)
+        if key_text in MATERIAL_KEY_ALIASES or any(alias in key_text for alias in MATERIAL_KEY_ALIASES):
+            focused_values.append(value)
+    return "\n".join(_stringify(value) for value in focused_values if _stringify(value).strip())[:4000]
 
 
 def _matched_terms(text: str, terms: tuple[str, ...]) -> list[str]:

@@ -13,10 +13,10 @@ WORDS_PER_PAGE = {
 
 DEFAULT_LENGTH_SETTINGS = {
     "mode": "pages",
-    "technicalPages": 80,
-    "businessPages": 40,
-    "technicalWords": 56000,
-    "businessWords": 22000,
+    "technicalPages": 35,
+    "businessPages": 25,
+    "technicalWords": 24500,
+    "businessWords": 13750,
     "allowAutoExpand": False,
 }
 

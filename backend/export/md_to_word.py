@@ -237,6 +237,8 @@ DOCX_TEMPLATE_PROFILES = {
     },
 }
 
+BODY_SUBHEADING_COMMENT_RE = re.compile(r"^<!--\s*BID_BODY_SUBHEADING:\s*(.+?)\s*-->\s*$")
+
 COVER_FIELD_LABELS = (
     "项目名称",
     "文件类型",
@@ -277,6 +279,20 @@ def resolve_docx_template_profile(cover_fields: dict | None = None) -> dict:
     if "商务" in file_type:
         return _copy_template_profile("business_bid_standard")
     return _copy_template_profile("formal_bid_standard")
+
+
+def _is_xinjiang_reference_profile(profile: dict | None) -> bool:
+    return (profile or {}).get("template_family") == "formal_bid_xinjiang_sgcc_reference"
+
+
+def _heading_run_spec_for_profile(profile: dict | None, level: int) -> tuple[str, float, bool]:
+    if _is_xinjiang_reference_profile(profile):
+        return ("宋体", 12, True)
+    if level == 1:
+        return (DOCX_HEADING_EAST_ASIA, 22, True)
+    if level == 2:
+        return (DOCX_HEADING_EAST_ASIA, 15, True)
+    return (DOCX_LEVEL3_EAST_ASIA, 14, True)
 
 
 def _template_profile_value(profile: dict | None, key: str, default):
@@ -322,11 +338,11 @@ def clean_formal_bid_text(text):
 
 
 def should_start_heading_on_new_page(level: int, text: str, heading_count: int) -> bool:
-    """Formal bid exports should start major volumes/chapters on a fresh page."""
+    """Formal bid exports should start only major chapters on a fresh page."""
     if heading_count <= 0:
         return False
     clean_text = clean_formal_bid_text(text)
-    if level <= 2:
+    if level == 1:
         return True
     if FORMAL_VOLUME_HEADING_RE.match(clean_text):
         return True
@@ -1230,6 +1246,17 @@ def _add_formal_subheading(doc, text: str) -> None:
     apply_run_font(run, east_asia=DOCX_LEVEL3_EAST_ASIA, size=14, bold=True)
 
 
+def _add_body_subheading(doc, text: str, template_profile: dict | None = None) -> None:
+    paragraph = doc.add_paragraph()
+    paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    apply_heading_paragraph_format(paragraph, 4)
+    paragraph.paragraph_format.space_before = Pt(6)
+    paragraph.paragraph_format.space_after = Pt(3)
+    run = paragraph.add_run(clean_formal_bid_text(text))
+    east_asia, size, bold = _heading_run_spec_for_profile(template_profile, 4)
+    apply_run_font(run, east_asia=east_asia, size=size, bold=bold)
+
+
 def _formal_table_widths(header_cells: list[str], page_text_width: int, form_type: str | None) -> list[int]:
     headers = [clean_formal_bid_text(cell) for cell in header_cells]
     col_count = len(headers)
@@ -1360,7 +1387,13 @@ def _split_cover_title_lines(project_title: str) -> list[str]:
     return [title[:split_at].strip(), title[split_at:].strip()]
 
 
-def _add_cover_page(doc, project_name: str, cover_fields: dict | None = None, image_report: dict | None = None) -> None:
+def _add_cover_page(
+    doc,
+    project_name: str,
+    cover_fields: dict | None = None,
+    image_report: dict | None = None,
+    template_profile: dict | None = None,
+) -> None:
     bid_title = taichang_bid_document_title((cover_fields or {}).get("项目名称") or project_name)
     if DOCX_COVER_SHOW_LOGO:
         logo_para = doc.add_paragraph()
@@ -1410,15 +1443,25 @@ def _add_cover_page(doc, project_name: str, cover_fields: dict | None = None, im
     display_file_type = clean_formal_bid_text((cover_fields or {}).get("文件类型") if cover_fields else "") or "投标文件"
     if display_file_type == "投标文件" and "商务" in bid_title:
         display_file_type = "商务投标文件"
+    if _is_xinjiang_reference_profile(template_profile):
+        display_file_type = "投标文件"
     title_run = title.add_run(display_file_type)
     apply_run_font(title_run, east_asia=DOCX_HEADING_EAST_ASIA, size=DOCX_COVER_TITLE_FONT_SIZE, bold=True)
 
+    file_category = ""
+    if _is_xinjiang_reference_profile(template_profile):
+        raw_type = clean_formal_bid_text((cover_fields or {}).get("文件类型") if cover_fields else "")
+        if "技术" in raw_type:
+            file_category = "技术"
+        elif "商务" in raw_type:
+            file_category = "商务"
     formal_fields = {
         "招标编号": cover_fields.get("招标编号") if cover_fields else "",
         "分标编号": cover_fields.get("分标编号") if cover_fields else "",
         "分标名称": cover_fields.get("分标名称") if cover_fields else "",
         "包号": cover_fields.get("包号") if cover_fields else "",
         "包名称": cover_fields.get("包名称") if cover_fields else "",
+        "文件类别": file_category,
         "招标人": cover_fields.get("招标人") if cover_fields else "",
         "招标代理机构": cover_fields.get("招标代理机构") if cover_fields else "",
     }
@@ -1439,9 +1482,10 @@ def _add_cover_page(doc, project_name: str, cover_fields: dict | None = None, im
     bidder.paragraph_format.first_line_indent = Pt(0)
     bidder.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
     bidder.paragraph_format.line_spacing = Pt(26)
-    bidder.paragraph_format.space_before = Pt(max(105, min(205, 285 - len(visible_formal_fields) * 20)))
+    bidder.paragraph_format.space_before = Pt(16 if _is_xinjiang_reference_profile(template_profile) else max(105, min(205, 285 - len(visible_formal_fields) * 20)))
     bidder.paragraph_format.space_after = Pt(0)
-    bidder_run = bidder.add_run(f"投标人：{DOCX_BIDDER_FULL_NAME}")
+    bidder_suffix = "（盖单位章）" if _is_xinjiang_reference_profile(template_profile) else ""
+    bidder_run = bidder.add_run(f"投标人：{DOCX_BIDDER_FULL_NAME}{bidder_suffix}")
     apply_run_font(bidder_run, east_asia=DOCX_BODY_EAST_ASIA, size=12)
 
     signer_para = doc.add_paragraph()
@@ -1451,7 +1495,8 @@ def _add_cover_page(doc, project_name: str, cover_fields: dict | None = None, im
     signer_para.paragraph_format.line_spacing = Pt(26)
     signer_para.paragraph_format.space_before = Pt(0)
     signer_para.paragraph_format.space_after = Pt(0)
-    signer_run = signer_para.add_run("法定代表人或其委托代理人：        （签名）")
+    signer_text = "法定代表人（单位负责人）或其授权代表人：       （签字）" if _is_xinjiang_reference_profile(template_profile) else "法定代表人或其委托代理人：        （签名）"
+    signer_run = signer_para.add_run(signer_text)
     apply_run_font(signer_run, east_asia=DOCX_BODY_EAST_ASIA, size=12)
 
     date_para = doc.add_paragraph()
@@ -1467,7 +1512,7 @@ def _add_cover_page(doc, project_name: str, cover_fields: dict | None = None, im
 
 
 def _add_toc_page(doc, project_name: str, heading_entries: list[dict], cover_fields: dict | None = None, image_report: dict | None = None, template_profile: dict | None = None) -> None:
-    _add_cover_page(doc, project_name, cover_fields=cover_fields, image_report=image_report)
+    _add_cover_page(doc, project_name, cover_fields=cover_fields, image_report=image_report, template_profile=template_profile)
 
     toc_title = doc.add_paragraph()
     toc_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -2283,6 +2328,26 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
             i += 1
             continue
 
+        body_subheading_match = BODY_SUBHEADING_COMMENT_RE.match(line)
+        if body_subheading_match:
+            heading_text = clean_formal_bid_text(body_subheading_match.group(1)).strip()
+            detected_form_type = _formal_form_type(heading_text)
+            if detected_form_type:
+                previous_form_type = current_form_type
+                current_form_type = detected_form_type
+                detected_types = image_report["formal_forms"]["detected_types"]
+                if detected_form_type not in detected_types:
+                    detected_types.append(detected_form_type)
+                if previous_form_type and previous_form_type != detected_form_type:
+                    doc.add_page_break()
+                    image_report["formal_forms"]["subheading_page_breaks"] += 1
+                _add_formal_subheading(doc, heading_text)
+                image_report["formal_forms"]["subheadings"] += 1
+            elif heading_text:
+                _add_body_subheading(doc, heading_text, template_profile=template_profile)
+            i += 1
+            continue
+
         fence_match = re.match(r"^(```|~~~)\s*([A-Za-z0-9_-]+)?\s*$", line)
         if fence_match:
             fence = fence_match.group(1)
@@ -2375,20 +2440,10 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
             word_heading_level = min(level, 4)
             p = doc.add_heading(text, level=word_heading_level)
             apply_heading_paragraph_format(p, word_heading_level)
-            if level == 1:
-                p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-                for run in p.runs:
-                    apply_run_font(run, east_asia=DOCX_HEADING_EAST_ASIA, size=22, bold=True)
-            elif level == 2:
-                p.alignment = WD_ALIGN_PARAGRAPH.LEFT
-                for run in p.runs:
-                    apply_run_font(run, east_asia=DOCX_HEADING_EAST_ASIA, size=15, bold=True)
-            elif level == 3:
-                for run in p.runs:
-                    apply_run_font(run, east_asia=DOCX_LEVEL3_EAST_ASIA, size=14, bold=True)
-            else:
-                for run in p.runs:
-                    apply_run_font(run, east_asia=DOCX_LEVEL3_EAST_ASIA, size=14, bold=True)
+            p.alignment = WD_ALIGN_PARAGRAPH.LEFT if _is_xinjiang_reference_profile(template_profile) else (WD_ALIGN_PARAGRAPH.CENTER if level == 1 else WD_ALIGN_PARAGRAPH.LEFT)
+            east_asia, size, bold = _heading_run_spec_for_profile(template_profile, level)
+            for run in p.runs:
+                apply_run_font(run, east_asia=east_asia, size=size, bold=bold)
             if i in heading_entry_by_line:
                 entry = heading_entry_by_line[i]
                 _add_bookmark(p, entry["anchor"], int(entry["bookmark_id"]))

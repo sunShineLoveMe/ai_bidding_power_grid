@@ -15,8 +15,12 @@ from backend.api.routes import (
     build_project_bid_markdown,
     _asset_allowed_for_bid,
     _demote_body_markdown_headings,
+    _normalize_body_outline_lines,
     _numbered_export_sections,
+    _renumber_body_markdown_headings,
+    _strip_export_guidance_blocks,
     _strip_duplicate_section_heading,
+    _strip_untrusted_export_images,
 )
 from backend.export.md_to_word import (
     DOCX_BIDDER_FULL_NAME,
@@ -40,6 +44,7 @@ from backend.export.md_to_word import (
     taichang_bid_document_title,
 )
 from backend.parsing.tender_metadata import extract_tender_project_metadata
+from backend.services.formal_asset_naming import clean_formal_asset_title
 
 
 class DocxExportRegressionTest(unittest.TestCase):
@@ -65,10 +70,54 @@ class DocxExportRegressionTest(unittest.TestCase):
 
         self.assertNotIn("## 噪声与振动控制措施", normalized)
         self.assertNotIn("### 主要控制措施", normalized)
-        self.assertIn("【噪声与振动控制措施】", normalized)
-        self.assertIn("【主要控制措施】", normalized)
-        self.assertIn("【监测与记录】", normalized)
+        self.assertIn("<!-- BID_BODY_SUBHEADING: 噪声与振动控制措施 -->", normalized)
+        self.assertIn("<!-- BID_BODY_SUBHEADING: 主要控制措施 -->", normalized)
+        self.assertIn("<!-- BID_BODY_SUBHEADING: 监测与记录 -->", normalized)
         self.assertIn("| 项目 | 内容 |", normalized)
+
+    def test_stale_bracket_body_headings_are_renumbered_for_formal_export(self):
+        content = "\n".join(
+            [
+                "【5.1 概述】",
+                "正文。",
+                "【5.2 技术方案与产品性能响应】",
+                "【5.2.1 产品执行标准与技术要求】",
+                "5.2.2 产品关键技术参数",
+                "1. 投标意愿与范围：这仍然是正文列表。",
+            ]
+        )
+
+        normalized = _normalize_body_outline_lines(content, {"_export_order": "1"})
+
+        self.assertIn("<!-- BID_BODY_SUBHEADING: 1.1 概述 -->", normalized)
+        self.assertIn("<!-- BID_BODY_SUBHEADING: 1.2 技术方案与产品性能响应 -->", normalized)
+        self.assertIn("<!-- BID_BODY_SUBHEADING: 1.2.1 产品执行标准与技术要求 -->", normalized)
+        self.assertIn("<!-- BID_BODY_SUBHEADING: 1.2.2 产品关键技术参数 -->", normalized)
+        self.assertIn("1. 投标意愿与范围：这仍然是正文列表。", normalized)
+        self.assertNotIn("【", normalized)
+        self.assertNotIn("】", normalized)
+
+    def test_export_guidance_blocks_are_removed_from_formal_docx_content(self):
+        content = "\n".join(
+            [
+                "正式正文。",
+                "【编写要点】",
+                "（需结合招标文件条款逐项响应，避免遗漏实质性要求。）",
+                "【需准备资料】",
+                "需人工补充企业资料、资信文件和证明材料",
+                "【风险与复核】",
+                "暂无明确风险，仍需结合招标文件复核。",
+                "后续正文。",
+            ]
+        )
+
+        cleaned = _strip_export_guidance_blocks(content)
+
+        self.assertIn("正式正文。", cleaned)
+        self.assertIn("后续正文。", cleaned)
+        self.assertNotIn("编写要点", cleaned)
+        self.assertNotIn("需准备资料", cleaned)
+        self.assertNotIn("风险与复核", cleaned)
 
     def test_docx_navigation_headings_remain_official_section_headings_only(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -119,6 +168,114 @@ class DocxExportRegressionTest(unittest.TestCase):
         cleaned = _strip_duplicate_section_heading(content, {"title": "企业营业执照", "level": 1})
 
         self.assertEqual(cleaned, "正文内容。")
+
+    def test_body_heading_numbers_are_rewritten_under_export_section_order(self):
+        content = "\n".join([
+            "# 4. 投标保证金",
+            "",
+            "## 4.1 基本情况说明",
+            "",
+            "### 4.1.1 保证金提交形式",
+        ])
+
+        normalized = _renumber_body_markdown_headings(content, {"_export_order": "1.4"})
+
+        self.assertIn("# 1.4.1 投标保证金", normalized)
+        self.assertIn("## 1.4.1.1 基本情况说明", normalized)
+        self.assertIn("### 1.4.1.1.1 保证金提交形式", normalized)
+        self.assertNotIn("4. 投标保证金", normalized)
+        self.assertNotIn("4.1 基本情况说明", normalized)
+
+    def test_body_heading_number_rewrite_never_emits_zero_segments(self):
+        content = "##### 4. 投标保证金"
+
+        normalized = _renumber_body_markdown_headings(content, {"_export_order": "1.3"})
+
+        self.assertIn("1.3.1", normalized)
+        self.assertNotIn(".0", normalized)
+
+    def test_body_heading_rewrite_removes_duplicate_section_title_headings(self):
+        content = "\n".join([
+            "## 产品购销合同",
+            "",
+            "# 产品购销合同",
+            "",
+            "## 1. 合同标的与供货范围",
+            "",
+            "### 1.1 供货产品清单",
+        ])
+
+        normalized = _renumber_body_markdown_headings(content, {
+            "_export_order": "4.3.3.1",
+            "title": "产品购销合同",
+        })
+
+        self.assertNotIn("4.3.3.1.1 产品购销合同", normalized)
+        self.assertNotIn("产品购销合同\n", normalized)
+        self.assertIn("## 4.3.3.1.1 合同标的与供货范围", normalized)
+        self.assertIn("### 4.3.3.1.1.1 供货产品清单", normalized)
+
+    def test_body_heading_rewrite_uses_relative_markdown_depth_for_unnumbered_headings(self):
+        content = "\n".join([
+            "## 资质业绩凭证 单",
+            "",
+            "### 资质业绩凭证单",
+            "",
+            "#### 一、本章说明",
+            "",
+            "#### 二、资格预审基本情况",
+        ])
+
+        normalized = _renumber_body_markdown_headings(content, {
+            "_export_order": "2.3.2",
+            "title": "资质业绩凭证 单",
+        })
+
+        self.assertNotIn("2.3.2.1 资质业绩凭证单", normalized)
+        self.assertIn("#### 2.3.2.1 本章说明", normalized)
+        self.assertIn("#### 2.3.2.2 资格预审基本情况", normalized)
+        self.assertNotIn("2.3.2.1.1.1.1", normalized)
+
+    def test_body_heading_rewrite_uses_relative_explicit_number_depth(self):
+        content = "\n".join([
+            "## 资格预审结果通知书",
+            "",
+            "### 1. 资格预审结果通知书",
+            "",
+            "#### 1.1 总则",
+            "",
+            "#### 1.2 资格预审结果确认",
+        ])
+
+        normalized = _renumber_body_markdown_headings(content, {
+            "_export_order": "2.11.1.1",
+            "title": "资格预审结果通知书",
+        })
+
+        self.assertIn("#### 2.11.1.1.1 总则", normalized)
+        self.assertIn("#### 2.11.1.1.2 资格预审结果确认", normalized)
+        self.assertNotIn("2.11.1.1.1.1", normalized)
+
+    def test_body_heading_rewrite_skips_generic_volume_headings(self):
+        content = "\n".join([
+            "## 保险购买凭证-电缆保护管 CPVC",
+            "",
+            "### 第五章 商务文件",
+            "",
+            "#### 5.1 投标函",
+            "",
+            "#### 5.2 合同条款响应与商务偏离表",
+        ])
+
+        normalized = _renumber_body_markdown_headings(content, {
+            "_export_order": "2.7.1.1",
+            "title": "保险购买凭证-电缆保护管 CPVC",
+        })
+
+        self.assertNotIn("商务文件", normalized)
+        self.assertIn("#### 2.7.1.1.1 投标函", normalized)
+        self.assertIn("#### 2.7.1.1.2 合同条款响应与商务偏离表", normalized)
+        self.assertNotIn("2.7.1.1.1.1", normalized)
 
     def test_export_sections_are_numbered_for_word_outline(self):
         sections = [
@@ -513,6 +670,23 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertEqual(1, report["selected"])
             self.assertIn("/api/bidding/knowledge/assets/asset-1/file?variant=original", markdown)
 
+    def test_manual_asset_image_survives_formal_export_image_cleanup(self):
+        content = (
+            "泰昌产品资料如下。\n\n"
+            "![泰昌MPP生产线资料](/api/knowledge/assets/11111111-1111-1111-1111-111111111111/file?variant=original)\n\n"
+            "![临时截图](https://example.com/temp.png)\n"
+        )
+
+        cleaned = _strip_untrusted_export_images(content, remove_all=True)
+
+        self.assertIn("![泰昌MPP生产线资料](/api/knowledge/assets/11111111-1111-1111-1111-111111111111/file?variant=original)", cleaned)
+        self.assertNotIn("https://example.com/temp.png", cleaned)
+
+    def test_formal_asset_title_removes_empty_brackets(self):
+        self.assertEqual("社保证明", clean_formal_asset_title("社保证明（）"))
+        self.assertEqual("社保证明", clean_formal_asset_title("社保证明（ ）"))
+        self.assertEqual("社保证明", clean_formal_asset_title("社保证明（-）"))
+
     def test_bid_markdown_with_images_does_not_repeat_same_asset(self):
         project_id = "11111111-1111-1111-1111-111111111111"
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -818,6 +992,30 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertNotIn("内径250", "\n".join(p.text for p in document.paragraphs))
             self.assertNotIn("原图", "\n".join(p.text for p in document.paragraphs))
             self.assertEqual(4, report["captions"]["formalized"])
+
+    def test_plain_paragraph_after_image_prefix_is_not_caption(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            markdown_path = Path(tmpdir) / "plain_image_word.md"
+            markdown_path.write_text(
+                "\n".join(
+                    [
+                        "# 图片后续正文测试投标文件",
+                        "",
+                        "# 1. 手工插图章节",
+                        "",
+                        "图片之后继续编辑文字，导出 Word 应保持文字和图片顺序。",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            output_path, report = convert_md_to_word(markdown_path, return_report=True)
+            document = Document(str(output_path))
+            paragraph_text = "\n".join(p.text for p in document.paragraphs)
+
+            self.assertIn("图片之后继续编辑文字，导出 Word 应保持文字和图片顺序。", paragraph_text)
+            self.assertFalse(any(p.text.startswith("资料：之后继续编辑文字") for p in document.paragraphs))
+            self.assertEqual(0, report["captions"]["formalized"])
 
     def test_formal_bid_text_is_black_and_level_two_headings_start_new_page(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1336,7 +1534,8 @@ class DocxExportRegressionTest(unittest.TestCase):
             document = Document(str(output_path))
             non_empty_paragraphs = [p.text for p in document.paragraphs if p.text.strip()]
 
-            self.assertIn("商务投标文件", non_empty_paragraphs[:10])
+            self.assertIn("投标文件", non_empty_paragraphs[:10])
+            self.assertIn("文件类别：商务", non_empty_paragraphs[:10])
             self.assertNotIn("文件类型：商务投标文件", non_empty_paragraphs[:10])
             self.assertIn("招标编号：2225AC", non_empty_paragraphs[:10])
             self.assertIn("分标编号：2225AC-1408006-3401", non_empty_paragraphs[:10])
@@ -1418,7 +1617,8 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertEqual(report["template"]["cover_fields"]["招标编号"], "2225AC")
         self.assertIn("国网辽宁电力2025年第三次物资协议", text)
         self.assertIn("库存招标采购", text)
-        self.assertIn("技术投标文件", text)
+        self.assertIn("投标文件", text)
+        self.assertIn("文件类别：技术", text)
         self.assertNotIn("文件类型：技术投标文件", text)
         self.assertIn("招标编号：2225AC", text)
         self.assertIn("分标编号：102-CPVC", text)
@@ -1463,6 +1663,8 @@ class DocxExportRegressionTest(unittest.TestCase):
             section = document.sections[0]
             toc_entries = [p.text.split("\t")[0] for p in document.paragraphs if "\t" in p.text and p.text.strip()]
             full_text = "\n".join(p.text for p in document.paragraphs)
+            cover_paragraphs = [p.text for p in document.paragraphs[:12] if p.text.strip()]
+            first_heading = next(p for p in document.paragraphs if p.text == "（一）技术偏差表")
 
         self.assertEqual("technical_bid_standard", report["template"]["template_id"])
         self.assertEqual("formal_bid_xinjiang_sgcc_reference", report["template"]["template_family"])
@@ -1475,6 +1677,13 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertEqual(3.17, round(section.left_margin.cm, 2))
         self.assertEqual(3.17, round(section.right_margin.cm, 2))
         self.assertEqual(1.5, round(section.header_distance.cm, 1))
+        self.assertIn("投标文件", cover_paragraphs)
+        self.assertIn("文件类别：技术", cover_paragraphs)
+        self.assertIn(f"投标人：{DOCX_BIDDER_FULL_NAME}（盖单位章）", full_text)
+        self.assertIn("法定代表人（单位负责人）或其授权代表人：       （签字）", full_text)
+        self.assertEqual(WD_ALIGN_PARAGRAPH.LEFT, first_heading.alignment)
+        self.assertEqual("宋体", first_heading.runs[0]._element.rPr.rFonts.get(qn("w:eastAsia")))
+        self.assertEqual(12, first_heading.runs[0].font.size.pt)
         self.assertIn("附:技术规范点对点应答", toc_entries)
         self.assertNotIn("保定铠蒂电力器材有限公司", full_text)
         self.assertNotIn("SL265A-1402005-0001", full_text)
