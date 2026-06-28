@@ -41,6 +41,7 @@ from backend.export.md_to_word import (
     taichang_bid_document_title,
 )
 from backend.parsing.tender_metadata import extract_tender_project_metadata
+from backend.services.formal_asset_naming import clean_formal_asset_title
 
 
 class DocxExportRegressionTest(unittest.TestCase):
@@ -525,6 +526,11 @@ class DocxExportRegressionTest(unittest.TestCase):
 
         self.assertIn("![泰昌MPP生产线资料](/api/knowledge/assets/11111111-1111-1111-1111-111111111111/file?variant=original)", cleaned)
         self.assertNotIn("https://example.com/temp.png", cleaned)
+
+    def test_formal_asset_title_removes_empty_brackets(self):
+        self.assertEqual("社保证明", clean_formal_asset_title("社保证明（）"))
+        self.assertEqual("社保证明", clean_formal_asset_title("社保证明（ ）"))
+        self.assertEqual("社保证明", clean_formal_asset_title("社保证明（-）"))
 
     def test_bid_markdown_with_images_does_not_repeat_same_asset(self):
         project_id = "11111111-1111-1111-1111-111111111111"

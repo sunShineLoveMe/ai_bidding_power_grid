@@ -1,4 +1,4 @@
-import { Button, Empty, Input, Modal, Select, Space, Spin, Tag, Tooltip, Typography, Upload, message } from 'antd';
+import { App as AntdApp, Button, Empty, Input, Modal, Select, Space, Spin, Tag, Tooltip, Typography, Upload } from 'antd';
 import type { UploadProps } from 'antd';
 import {
   Bold,
@@ -34,6 +34,7 @@ import { getKnowledgeAssetSignedUrls, listKnowledgeAssets, uploadKnowledgeAsset 
 import type { KnowledgeAsset, KnowledgeAssetLibraryType } from '../../api/bidProject';
 import { AuthenticatedImage, resolveAuthenticatedDisplayUrl } from '../common/AuthenticatedImage';
 import { assetUsageLabel } from '../../utils/assetUploadGuidance';
+import { displayAssetCategory, displayAssetTitle } from '../../utils/assetDisplay';
 
 interface TiptapBidEditorProps {
   content: string;
@@ -140,11 +141,11 @@ function isImageAsset(asset: KnowledgeAsset): boolean {
 }
 
 function assetDisplayTitle(asset: KnowledgeAsset): string {
-  return String(asset.metadata?.source_display_name || asset.metadata?.formal_display_title || asset.title || '未命名图片');
+  return displayAssetTitle(asset);
 }
 
 function assetDisplayCategory(asset: KnowledgeAsset): string {
-  return String(asset.metadata?.category_label || asset.category || asset.metadata?.evidence_type_label || '未分类');
+  return displayAssetCategory(asset);
 }
 
 function assetSearchText(asset: KnowledgeAsset): string {
@@ -369,6 +370,7 @@ function docToMarkdown(doc: JSONContent): string {
 }
 
 export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: TiptapBidEditorProps): JSX.Element {
+  const { message: messageApi } = AntdApp.useApp();
   const lastExternalContent = useRef('');
   const lastEmittedContent = useRef('');
   const signedUrlCache = useRef<Record<string, string>>({});
@@ -381,6 +383,7 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
   const [imageAssetsLoading, setImageAssetsLoading] = useState(false);
   const [imageAssetKeyword, setImageAssetKeyword] = useState('');
   const [imageAssetCategory, setImageAssetCategory] = useState('all');
+  const [selectedImageAsset, setSelectedImageAsset] = useState<KnowledgeAsset | null>(null);
   const [imageUploadFile, setImageUploadFile] = useState<File | null>(null);
   const [imageTitle, setImageTitle] = useState('');
   const [imageUploading, setImageUploading] = useState(false);
@@ -500,12 +503,12 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
     if (!editor || !onAiEdit) return;
     const { from, to, empty } = editor.state.selection;
     if (empty || from === to) {
-      message.warning('请先选中需要 AI 编辑的正文');
+      messageApi.warning('请先选中需要 AI 编辑的正文');
       return;
     }
     const selectedText = editor.state.doc.textBetween(from, to, '\n').trim();
     if (!selectedText) {
-      message.warning('选区内没有可编辑文本');
+      messageApi.warning('选区内没有可编辑文本');
       return;
     }
     const actionLabel = AI_EDIT_ACTIONS.find(item => item.action === action)?.label.replace('选区', '') || 'AI 编辑';
@@ -526,7 +529,7 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
         range: { from, to },
       });
     } catch (error) {
-      message.error(error instanceof Error ? error.message : String(error));
+      messageApi.error(error instanceof Error ? error.message : String(error));
     } finally {
       setAiEditingAction(null);
     }
@@ -541,7 +544,7 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
       .insertContent(markdownToHtml(aiPreview.revisedText))
       .run();
     setAiPreview(null);
-    message.success('已采纳 AI 编辑结果，可用撤销按钮恢复');
+    messageApi.success('已采纳 AI 编辑结果，可用撤销按钮恢复');
   };
 
   const fetchImageAssets = useCallback(async () => {
@@ -562,11 +565,11 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
       }
       setImageAssets(allItems.filter(isImageAsset));
     } catch (error) {
-      message.error(error instanceof Error ? error.message : String(error));
+      messageApi.error(error instanceof Error ? error.message : String(error));
     } finally {
       setImageAssetsLoading(false);
     }
-  }, [imageLibraryType]);
+  }, [imageLibraryType, messageApi]);
 
   useEffect(() => {
     if (imageModalOpen) {
@@ -577,6 +580,7 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
   useEffect(() => {
     setImageAssetCategory('all');
     setImageAssetKeyword('');
+    setSelectedImageAsset(null);
   }, [imageLibraryType]);
 
   const imageAssetCategories = useMemo(() => {
@@ -600,6 +604,12 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
       return true;
     });
   }, [imageAssetCategory, imageAssetKeyword, imageAssets]);
+
+  useEffect(() => {
+    if (selectedImageAsset && !filteredImageAssets.some(asset => asset.id === selectedImageAsset.id)) {
+      setSelectedImageAsset(null);
+    }
+  }, [filteredImageAssets, selectedImageAsset]);
 
   const insertImageAsset = async (asset: KnowledgeAsset) => {
     if (!editor) return;
@@ -630,7 +640,8 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
       },
     }).run();
     setImageModalOpen(false);
-    message.success('图片已插入正文，保存章节后将进入 DOCX 导出');
+    setSelectedImageAsset(null);
+    messageApi.success('图片已插入正文，保存章节后将进入 DOCX 导出');
   };
 
   const imageUploadProps: UploadProps = {
@@ -638,10 +649,11 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
     maxCount: 1,
     beforeUpload(file) {
       if (!file.type.startsWith('image/')) {
-        message.warning('请选择 PNG、JPG 或 WebP 图片');
+        messageApi.warning('请选择 PNG、JPG 或 WebP 图片');
         return Upload.LIST_IGNORE;
       }
       setImageUploadFile(file);
+      setSelectedImageAsset(null);
       setImageTitle(current => current || cleanUploadTitle(file.name));
       return false;
     },
@@ -651,9 +663,21 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
     },
   };
 
+  const confirmImageInsert = async () => {
+    if (imageUploadFile) {
+      await uploadAndInsertImage();
+      return;
+    }
+    if (selectedImageAsset) {
+      await insertImageAsset(selectedImageAsset);
+      return;
+    }
+    messageApi.warning('请先选择资产库图片或本地图片');
+  };
+
   const uploadAndInsertImage = async () => {
     if (!imageUploadFile) {
-      message.warning('请先选择需要插入的图片');
+      messageApi.warning('请先选择需要插入的图片');
       return;
     }
     if (!editor) return;
@@ -679,7 +703,7 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
       setImageTitle('');
       void fetchImageAssets();
     } catch (error) {
-      message.error(error instanceof Error ? error.message : String(error));
+      messageApi.error(error instanceof Error ? error.message : String(error));
     } finally {
       setImageUploading(false);
     }
@@ -792,11 +816,14 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
         title="插入标书图片"
         open={imageModalOpen}
         width={920}
-        okText="上传并插入"
+        okText={imageUploadFile ? '上传并插入' : '插入选中图片'}
         cancelText="关闭"
-        okButtonProps={{ loading: imageUploading, disabled: !imageUploadFile }}
-        onOk={() => void uploadAndInsertImage()}
-        onCancel={() => setImageModalOpen(false)}
+        okButtonProps={{ loading: imageUploading, disabled: !imageUploadFile && !selectedImageAsset }}
+        onOk={() => void confirmImageInsert()}
+        onCancel={() => {
+          setImageModalOpen(false);
+          setSelectedImageAsset(null);
+        }}
         destroyOnHidden
       >
         <div className="editor-image-dialog">
@@ -819,12 +846,15 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
             }] : []}>
               <Button icon={<UploadCloud size={15} />}>选择本地图片</Button>
             </Upload>
-            <Input
-              value={imageTitle}
-              onChange={event => setImageTitle(event.target.value)}
-              placeholder="图片中文标题，例如：泰昌MPP生产线资料"
-              maxLength={80}
-            />
+            <div className="editor-image-title-field">
+              <span>图片标题</span>
+              <Input
+                value={imageTitle}
+                onChange={event => setImageTitle(event.target.value)}
+                placeholder="用于正文图片替代文字，例如：泰昌MPP生产线资料"
+                maxLength={80}
+              />
+            </div>
           </div>
           <div className="editor-image-library">
             <div className="editor-image-library-title">
@@ -853,20 +883,41 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
                 <div className="editor-image-grid">
                   {filteredImageAssets.map(asset => {
                     const usage = assetUsageLabel(asset);
+                    const selected = selectedImageAsset?.id === asset.id;
                     return (
-                      <button
-                        type="button"
+                      <div
                         key={asset.id}
-                        className="editor-image-option"
-                        onClick={() => void insertImageAsset(asset)}
+                        role="button"
+                        tabIndex={0}
+                        aria-pressed={selected}
+                        className={`editor-image-option ${selected ? 'selected' : ''}`}
+                        onClick={() => setSelectedImageAsset(asset)}
+                        onKeyDown={event => {
+                          if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            setSelectedImageAsset(asset);
+                          }
+                        }}
                       >
-                        <AuthenticatedImage src={assetImageUrl(asset)} alt={asset.title || '标书配图'} />
+                        <div className="editor-image-preview" onClick={event => event.stopPropagation()}>
+                          <AuthenticatedImage src={assetImageUrl(asset)} alt={assetDisplayTitle(asset)} />
+                        </div>
                         <span>{assetDisplayTitle(asset)}</span>
                         <div className="editor-image-option-meta">
                           <Tag color="default">{assetDisplayCategory(asset)}</Tag>
                           <Tag color={usage.color}>{usage.label}</Tag>
                         </div>
-                      </button>
+                        <Button
+                          size="small"
+                          type={selected ? 'primary' : 'default'}
+                          onClick={event => {
+                            event.stopPropagation();
+                            setSelectedImageAsset(asset);
+                          }}
+                        >
+                          {selected ? '已选择' : '选择'}
+                        </Button>
+                      </div>
                     );
                   })}
                 </div>

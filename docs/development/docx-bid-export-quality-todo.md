@@ -625,3 +625,24 @@
   - `npm run build`，通过；仅保留既有 Vite chunk 体积和混合 import 警告。
   - `.venv/bin/python -m pytest tests/test_docx_export.py::DocxExportRegressionTest::test_plain_paragraph_after_image_prefix_is_not_caption tests/test_docx_export.py::DocxExportRegressionTest::test_formal_image_caption_is_sanitized_centered_and_small tests/test_docx_export.py::DocxExportRegressionTest::test_manual_asset_image_survives_formal_export_image_cleanup -q`，通过。
 - 运行记录：`docs/development/runs/run_20260628_editor_image_insert_only.md`。
+
+### 2026-06-28 在线编辑器图片预览确认与名称清洗复验记录
+
+- 背景：用户复测发现图片卡片点击“预览”会直接插入正文，缺少确认；部分资信图片标题出现 `社保证明（）` 空括号；本地上传图片标题输入框含义不清。
+- 本轮实现：
+  - 资产库图片改为“预览/选择/确认插入”，预览不再修改正文。
+  - 底部按钮改为 `插入选中图片`，只有选择资产后才可用；本地图片则继续走 `上传并插入`。
+  - 本地上传输入框显式标为 `图片标题`，说明它是正文图片标题/替代文字，不是标签。
+  - 前端展示标题与后端正式资产标题均清理空括号、空白括号和只有标点的括号。
+  - Tiptap 编辑器消息提示切换为 AntD App 上下文，消除本轮交互控制台警告。
+- 真实浏览器回归：
+  - 页面：`/bid-editor?projectId=5d064d0a-29ba-41bb-ab07-9d51e6c9e084`。
+  - 点击图片预览后正文图片数保持 `0 -> 0`，预览层正常打开。
+  - 选择图片后 `插入选中图片` 可用，确认后正文图片数 `0 -> 1`。
+  - 弹窗文本无空括号命中，本地上传区域显示 `图片标题`。
+  - 干净 Playwright 会话控制台错误 `0`、警告 `0`。
+- 自动化回归：
+  - `npm run build`，通过；仅保留既有 Vite chunk 体积和混合 import 警告。
+  - `.venv/bin/python -m pytest tests/test_docx_export.py::DocxExportRegressionTest::test_formal_asset_title_removes_empty_brackets tests/test_docx_export.py::DocxExportRegressionTest::test_plain_paragraph_after_image_prefix_is_not_caption tests/test_docx_export.py::DocxExportRegressionTest::test_manual_asset_image_survives_formal_export_image_cleanup -q`，结果 `3 passed, 1 warning`。
+  - `python3 -m py_compile backend/services/formal_asset_naming.py backend/export/md_to_word.py backend/api/routes.py`，通过。
+- 运行记录：`docs/development/runs/run_20260628_editor_image_insert_only.md`。

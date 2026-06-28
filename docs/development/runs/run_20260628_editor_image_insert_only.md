@@ -30,3 +30,42 @@
 
 - 本分支不包含正文连续滚动、章节流预览、多章节 dirty 保存等下期体验优化。
 - 本分支不提交 `output/` 和 `parsed_outputs/` 本地运行产物。
+
+## 2026-06-28 交互与命名复查
+
+### 问题
+
+- 用户点击资产图片上的“预览”原本只是想查看图片，但旧交互会直接插入正文，缺少确认动作。
+- 部分图片名称出现 `社保证明（）` 这类空括号，属于无意义符号，不能展示给客户。
+- 本地上传图片后的输入框含义不清，用户不确定它是标题还是标签。
+
+### 修复
+
+- 资产库图片改为“预览/选择/确认插入”：
+  - 点击图片预览只打开 AntD 图片预览，不改正文。
+  - 点击卡片或“选择”按钮只选中资产。
+  - 底部“插入选中图片”才真正写入编辑器正文。
+- 本地上传输入框改为显式标签 `图片标题`，占位文案改为“用于正文图片替代文字”，不再像标签输入。
+- 前端统一清洗图片展示名称中的空括号和只有标点/空白的括号。
+- 后端 `clean_formal_asset_title` 同步清洗空括号，避免正式题注或 DOCX 兜底标题再次出现类似符号。
+- Tiptap 编辑器消息提示切换为 AntD `App.useApp()`，并在入口补 `AntdApp` provider，避免插入图片时控制台出现 AntD static message 警告。
+
+### 真实回归
+
+- 服务：使用用户已启动的本地 `5173` 前端和 `3012` 后端。
+- 页面：`http://127.0.0.1:5173/bid-editor?projectId=5d064d0a-29ba-41bb-ab07-9d51e6c9e084`。
+- Playwright 结果：
+  - 点击图片预览后，正文图片数 `0 -> 0`，`previewDidNotInsert=true`。
+  - 预览层正常打开，`previewVisible=true`。
+  - 选择图片后底部按钮可用，`selectedClass=true`，`okDisabledAfterSelect=false`。
+  - 点击“插入选中图片”后，正文图片数 `0 -> 1`，`insertedAfterConfirm=true`。
+  - 弹窗内未发现空括号，`hasEmptyBracketsBeforeInsert=false`。
+  - 本地上传区域显示 `图片标题`，`titleLabelVisible=true`。
+  - 干净会话控制台错误 `0`，警告 `0`。
+- 截图：`.playwright-cli/page-2026-06-28T08-35-51-134Z.png`。
+
+### 命令回归
+
+- `npm run build`：通过；仅保留既有 Vite chunk 体积和混合 import 警告。
+- `.venv/bin/python -m pytest tests/test_docx_export.py::DocxExportRegressionTest::test_formal_asset_title_removes_empty_brackets tests/test_docx_export.py::DocxExportRegressionTest::test_plain_paragraph_after_image_prefix_is_not_caption tests/test_docx_export.py::DocxExportRegressionTest::test_manual_asset_image_survives_formal_export_image_cleanup -q`：`3 passed, 1 warning`。
+- `python3 -m py_compile backend/services/formal_asset_naming.py backend/export/md_to_word.py backend/api/routes.py`：通过。

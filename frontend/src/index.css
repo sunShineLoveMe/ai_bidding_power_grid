@@ -1895,6 +1895,20 @@ textarea {
   padding: 12px;
 }
 
+.editor-image-title-field {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+}
+
+.editor-image-title-field span {
+  color: #475569;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
 .editor-image-library {
   min-height: 260px;
 }
@@ -1926,7 +1940,7 @@ textarea {
 
 .editor-image-option {
   display: grid;
-  grid-template-rows: 108px auto auto;
+  grid-template-rows: 108px auto auto auto;
   gap: 8px;
   min-width: 0;
   border: 1px solid #e2e8f0;
@@ -1940,6 +1954,15 @@ textarea {
 .editor-image-option:hover {
   border-color: #2f66ff;
   box-shadow: 0 8px 22px rgba(47, 102, 255, 0.12);
+}
+
+.editor-image-option.selected {
+  border-color: #2f66ff;
+  box-shadow: 0 0 0 2px rgba(47, 102, 255, 0.16);
+}
+
+.editor-image-preview {
+  cursor: zoom-in;
 }
 
 .editor-image-option .ant-image {
