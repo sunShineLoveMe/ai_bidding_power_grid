@@ -338,11 +338,11 @@ def clean_formal_bid_text(text):
 
 
 def should_start_heading_on_new_page(level: int, text: str, heading_count: int) -> bool:
-    """Formal bid exports should start major volumes/chapters on a fresh page."""
+    """Formal bid exports should start only major chapters on a fresh page."""
     if heading_count <= 0:
         return False
     clean_text = clean_formal_bid_text(text)
-    if level <= 2:
+    if level == 1:
         return True
     if FORMAL_VOLUME_HEADING_RE.match(clean_text):
         return True

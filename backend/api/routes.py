@@ -30,7 +30,8 @@ import shutil
 from datetime import timedelta
 from backend.core.config import DEFAULT_SETTINGS, build_enterprise_context, get_setting, load_runtime_settings, save_runtime_settings
 from backend.core.security import UploadValidationError, safe_upload_filename, validate_uploaded_file
-from backend.services.formal_placeholders import apply_confirmed_values_to_export_text, apply_simulated_final_values_to_export_text, count_formal_placeholders
+from backend.services.bid_material_scope import filter_sections_by_material_scope, material_scope_from_context
+from backend.services.formal_placeholders import apply_confirmed_values_to_export_text, count_formal_placeholders, finalize_confirmed_formal_export_text
 from backend.services.bid_prefill import formal_required_confirmation_gaps
 from backend.services.formal_asset_naming import caption_policy, formal_asset_caption, formal_asset_title
 
@@ -1359,6 +1360,21 @@ def build_project_bid_markdown(
         "cover_field_source": "uploaded_tender_structured_extract" if isinstance(project_meta.get("cover_fields"), dict) and project_meta.get("cover_fields") else "markdown_fallback",
     }
     prefill_state = project_meta.get("bid_prefill") if isinstance(project_meta.get("bid_prefill"), dict) else {}
+    confirmed_values = prefill_state.get("confirmed_values") if isinstance(prefill_state.get("confirmed_values"), dict) else {}
+    material_scope = material_scope_from_context(project_meta, report_cover_fields, confirmed_values)
+    if material_scope:
+        before_count = len(sections)
+        sections = filter_sections_by_material_scope(sections, material_scope)
+        if len(sections) != before_count:
+            export_image_report["warnings"].append(
+                f"已按本包物料范围（{'、'.join(sorted(material_scope))}）过滤非本包物料章节 {before_count - len(sections)} 个。"
+            )
+            export_image_report["material_scope_filter"] = {
+                "allowed_families": sorted(material_scope),
+                "before": before_count,
+                "after": len(sections),
+                "removed": before_count - len(sections),
+            }
     parent_section_ids = {str(section.get("parent_id")) for section in sections if section.get("parent_id")}
 
     def is_container_section(section: dict) -> bool:
@@ -1374,7 +1390,6 @@ def build_project_bid_markdown(
         if not is_container_section(section) and not str(section.get("content") or "").strip()
     )
     placeholder_count = count_formal_placeholders(str(section.get("content") or "") for section in sections)
-    confirmed_values = prefill_state.get("confirmed_values") if isinstance(prefill_state.get("confirmed_values"), dict) else {}
     if confirmed_values.get("package_no"):
         report_cover_fields["包号"] = str(confirmed_values.get("package_no"))
     if confirmed_values.get("package_name"):
@@ -1464,7 +1479,7 @@ def build_project_bid_markdown(
         if confirmed_values:
             content, confirmation_replacements = apply_confirmed_values_to_export_text(content, confirmed_values)
             export_image_report["formal_readiness"]["export_confirmation_replacements"] += confirmation_replacements
-        content, finalization_replacements = apply_simulated_final_values_to_export_text(content, confirmed_values)
+        content, finalization_replacements = finalize_confirmed_formal_export_text(content, confirmed_values)
         export_image_report["formal_readiness"]["export_confirmation_replacements"] += finalization_replacements
         chunks.append(_section_markdown_heading(int(section.get("level") or 1), title))
         if content:

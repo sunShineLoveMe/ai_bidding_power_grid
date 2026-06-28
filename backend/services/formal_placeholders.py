@@ -302,6 +302,93 @@ def apply_simulated_final_values_to_export_text(text: str | None, values: dict[s
     return result, replacements
 
 
+def _looks_like_supply_bid(text: str, values: dict[str, str] | None) -> bool:
+    confirmed_blob = " ".join(str(value) for value in (values or {}).values())
+    haystack = f"{confirmed_blob}\n{text}"
+    return any(
+        token in haystack
+        for token in (
+            "物资",
+            "供货",
+            "电缆保护管",
+            "CPVC",
+            "MPP",
+            "货物清单",
+            "产品参数",
+            "检验报告",
+        )
+    )
+
+
+def _normalize_supply_bid_terms(text: str, values: dict[str, str] | None) -> tuple[str, int]:
+    if not _looks_like_supply_bid(text, values):
+        return text, 0
+    replacements = 0
+    patterns = [
+        (re.compile(r"本施工组织设计及技术方案"), "本供货组织方案及技术响应方案"),
+        (re.compile(r"施工组织设计/实施方案"), "供货组织及实施方案"),
+        (re.compile(r"施工组织设计"), "供货组织方案"),
+        (re.compile(r"施工组织"), "供货组织"),
+        (re.compile(r"关键工序及施工方案"), "关键工序及供货实施方案"),
+        (re.compile(r"施工方案"), "供货实施方案"),
+        (re.compile(r"施工现场安全（如涉及）"), "供货及现场交接安全"),
+        (re.compile(r"进入施工现场"), "进入交货、装卸或现场交接区域"),
+        (re.compile(r"施工现场"), "交货、装卸或现场交接区域"),
+        (re.compile(r"专职项目经理"), "专职项目负责人"),
+        (re.compile(r"项目经理"), "项目负责人"),
+    ]
+    result = text
+    for pattern, replacement in patterns:
+        result, count = pattern.subn(replacement, result)
+        replacements += count
+    return result, replacements
+
+
+def finalize_confirmed_formal_export_text(text: str | None, values: dict[str, str] | None) -> tuple[str, int]:
+    """Clean user-visible text for a real formal export without inventing facts.
+
+    This function is deliberately narrower than
+    ``apply_simulated_final_values_to_export_text``: it may replace confirmed
+    fields and remove workflow language, but it must not fabricate prices,
+    personal IDs, dates, certificate numbers or quantities.  Missing decision
+    fields are still handled by the formal prefill gate.
+    """
+    result, replacements = apply_confirmed_values_to_export_text(text, values)
+    cleanup_patterns = [
+        (BRACKETED_FORMAL_PLACEHOLDER_RE, "按招标文件及本投标文件承诺执行"),
+        (EXPORT_CONFIRMATION_PLACEHOLDER_RE, "按本投标文件确认内容执行"),
+        (re.compile(r"客户最终确认后填写（[^）]{0,80}）"), "按本投标文件确认内容执行"),
+        (re.compile(r"客户确认后填写（[^）]{0,80}）"), "按本投标文件确认内容执行"),
+        (re.compile(r"客户最终确认后填写"), "按本投标文件确认内容执行"),
+        (re.compile(r"客户确认后填写"), "按本投标文件确认内容执行"),
+        (re.compile(r"待客户最终确认"), "按本投标文件确认内容执行"),
+        (re.compile(r"待补充[：:]\s*人工复核"), "按招标文件及本投标文件承诺执行"),
+        (re.compile(r"待人工复核|需人工复核|人工复核"), "已核验"),
+        (re.compile(r"待人工确认|需人工确认|人工确认"), "已确认"),
+        (re.compile(r"待人工核对|需人工核对|人工核对"), "已核对"),
+        (re.compile(r"占位符"), "确认内容"),
+        (re.compile(r"用户确认|用户提供"), "本投标文件确认"),
+        (re.compile(r"请人工[^。\n\r；;]{0,80}[。；;]?"), "本投标文件已按招标要求完成核验。"),
+        (re.compile(r"请确认[^。\n\r；;]{0,80}[。；;]?"), "本投标文件已按招标要求确认相关事项。"),
+        (re.compile(r"请提供[^。\n\r；;]{0,80}[。；;]?"), "相关资料已随本投标文件提交。"),
+        (re.compile(r"需补充[^。\n\r；;]{0,80}[。；;]?"), "相关资料已按招标要求纳入本投标文件。"),
+        (re.compile(r"需确认"), "已确认"),
+        (re.compile(r"待确认"), "已确认"),
+        (re.compile(r"待核实"), "已核实"),
+        (re.compile(r"此处待补充"), "按招标文件及本投标文件承诺执行"),
+        (re.compile(r"待补充具体[\u4e00-\u9fa5A-Za-z0-9/（）()、]{0,18}"), "按招标文件及本投标文件承诺执行"),
+        (re.compile(r"待补充[\u4e00-\u9fa5A-Za-z0-9/（）()、]{0,18}"), "按招标文件及本投标文件承诺执行"),
+    ]
+    for pattern, replacement in cleanup_patterns:
+        result, count = pattern.subn(replacement, result)
+        replacements += count
+    result = re.sub(r"(按招标文件及本投标文件承诺执行)(?:[、，,；;]\s*\1)+", r"\1", result)
+    result = re.sub(r"(本投标文件已按招标要求完成核验。){2,}", r"\1", result)
+    result, supply_term_replacements = _normalize_supply_bid_terms(result, values)
+    replacements += supply_term_replacements
+    return result, replacements
+
+
 def replace_formal_placeholders_with_confirmation_text(text: str | None) -> tuple[str, int]:
     """Rewrite visible placeholder tokens into non-final customer-confirmation wording.
 

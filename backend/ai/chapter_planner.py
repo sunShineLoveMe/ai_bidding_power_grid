@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any, Iterator
 
 from backend.db.supabase_repo import get_project_interpretation, get_supabase_client, replace_bid_sections_from_outline
+from backend.services.bid_material_scope import material_scope_from_context, prune_outline_by_material_scope
 from backend.core.llm_json_utils import strip_llm_json
 from backend.ai.qwen_client import call_dashscope_api
 from backend.ai.bid_writing_plan import build_chapter_writing_plan
@@ -1258,7 +1259,7 @@ def _build_prompt(payload: dict[str, Any]) -> str:
         '      "type": "technical",',
         '      "name": "技术标",',
         '      "required": true,',
-        '      "basis": "招标文件要求提交施工组织设计和技术响应文件",',
+        '      "basis": "招标文件要求提交物资供货技术响应文件",',
         '      "chapters": [',
         '        {',
         '          "title": "...",',
@@ -1290,6 +1291,15 @@ def _build_prompt(payload: dict[str, Any]) -> str:
 def _generate_outline_from_ai_or_rule(payload: dict[str, Any]) -> dict[str, Any]:
     fallback_outline = _build_rule_outline(payload)
     supply_only = _is_supply_only_bid(payload)
+    material_scope = material_scope_from_context((payload.get("analysis") or {}).get("project_meta") or {}, payload.get("project") or {})
+
+    def finalize_outline(outline: dict[str, Any]) -> dict[str, Any]:
+        outline = prune_outline_by_material_scope(outline, material_scope)
+        if material_scope:
+            outline["material_scope"] = sorted(material_scope)
+        outline["generated_at"] = datetime.now(timezone.utc).isoformat()
+        return outline
+
     try:
         prompt = _build_prompt(payload)
         project = payload.get("project") or {}
@@ -1308,7 +1318,7 @@ def _generate_outline_from_ai_or_rule(payload: dict[str, Any]) -> dict[str, Any]
         ai_outline = fallback_outline
         ai_outline["version"] = "rule-v1-fallback"
         ai_outline["fallback_reason"] = f"AI 章节大纲生成失败，已使用规则版大纲: {exc}"
-        return ai_outline
+        return finalize_outline(ai_outline)
 
     has_volumes = isinstance(ai_outline.get("volumes"), list) and any(
         isinstance(volume, dict) and isinstance(volume.get("chapters"), list) and volume.get("chapters")
@@ -1319,7 +1329,7 @@ def _generate_outline_from_ai_or_rule(payload: dict[str, Any]) -> dict[str, Any]
         ai_outline = fallback_outline
         ai_outline["version"] = "rule-v1-fallback"
         ai_outline["fallback_reason"] = "AI 返回结果缺少 volumes[].chapters 或 chapters，已使用规则版分册大纲。"
-        return ai_outline
+        return finalize_outline(ai_outline)
 
     if supply_only:
         ai_outline["preserve_reference_structure"] = True
@@ -1327,13 +1337,13 @@ def _generate_outline_from_ai_or_rule(payload: dict[str, Any]) -> dict[str, Any]
     if supply_only:
         reject_reason = _supply_outline_reject_reason(ai_outline)
         if reject_reason:
-            return _use_supply_fallback_outline(
+            return finalize_outline(_use_supply_fallback_outline(
                 fallback_outline,
                 f"{reject_reason}，已保留客户范本/规则版供货类大纲。",
                 source_version=str(ai_outline.get("version") or "ai-v1"),
-            )
+            ))
     ai_outline["version"] = ai_outline.get("version") or "ai-v1"
-    ai_outline["generated_at"] = datetime.now(timezone.utc).isoformat()
+    ai_outline = finalize_outline(ai_outline)
     if "model" not in ai_outline:
         ai_outline["model"] = locals().get("response", {}).get("model") or "dashscope"
     return ai_outline

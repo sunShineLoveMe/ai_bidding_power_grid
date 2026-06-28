@@ -1,6 +1,7 @@
 from backend.services.formal_placeholders import (
     apply_confirmed_values_to_export_text,
     collect_formal_placeholders,
+    finalize_confirmed_formal_export_text,
     replace_formal_placeholders_with_confirmation_text,
 )
 
@@ -66,3 +67,31 @@ def test_apply_confirmed_values_to_export_text_renders_legacy_customer_placehold
     assert "授权代表：李明" in rewritten
     assert "日期：2026年06月26日" in rewritten
     assert "设备型号：按招标文件、本投标文件及附件资料执行" in rewritten
+
+
+def test_finalize_confirmed_formal_export_text_removes_workflow_language_without_fake_values():
+    text = "投标保证金：【待补充：人工复核】\n授权代表：客户确认后填写（授权代表姓名）\n本节用户确认后提交。"
+    rewritten, count = finalize_confirmed_formal_export_text(text, {"authorized_representative": "晁坤琳"})
+
+    assert count >= 3
+    assert "晁坤琳" in rewritten
+    for forbidden in ("待补充", "人工复核", "客户确认后填写", "用户确认", "占位符"):
+        assert forbidden not in rewritten
+    assert "1280000" not in rewritten
+    assert "内部测试模拟" not in rewritten
+
+
+def test_finalize_confirmed_formal_export_text_normalizes_supply_bid_terms_only_for_supply_context():
+    text = "本施工组织设计及技术方案依据招标文件编制。专职项目经理负责关键工序及施工方案。"
+    rewritten, count = finalize_confirmed_formal_export_text(text, {"package_name": "电缆保护管CPVC包1"})
+
+    assert count >= 3
+    assert "施工组织" not in rewritten
+    assert "施工方案" not in rewritten
+    assert "项目经理" not in rewritten
+    assert "供货组织方案" in rewritten
+    assert "项目负责人" in rewritten
+
+    construction_text, construction_count = finalize_confirmed_formal_export_text(text, {"package_name": "土建施工项目"})
+    assert construction_count == 0
+    assert "施工组织设计" in construction_text

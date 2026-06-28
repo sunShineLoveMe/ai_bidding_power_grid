@@ -842,7 +842,7 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
     taichang_facts = _section_taichang_fact_digest(profile.fact_pack_mode, compatibility_report, chapter, volume_type)
 
     prompt = f"""
-你是资深投标文件撰写专家，熟悉电网/电力工程、设备供货、安装调试、试验检测、运维检修、质量安全管理和招投标文件格式要求。
+你是资深投标文件撰写专家，熟悉国家电网物资采购、设备供货、产品技术响应、试验检测、质量管理、供货交付和招投标文件格式要求。
 企业画像：
 {enterprise_context}
 
@@ -857,7 +857,7 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
 6. 正文字数按章节写作计划控制。本次生成尽量覆盖完整章节；若目标字数较长，可先输出结构完整的第一版，并保留可续写的小标题。
 7. 必须遵守当前分册策略，尤其是金额、证书、人员、日期、签章、保证金和报价信息的禁编造约束。
 8. 正式标书正文不得使用 emoji、图标符号或装饰性提示符；“关键提醒”“风险提示”等内容必须使用纯文字标题。
-9. 不得为了凑页数重复同义段落、塞入无关内容或虚构资料；未知客户决策不得展开成大面积空表，每章最多保留 3 个合并后的“【待补充：...】”，其余集中写入简短人工确认清单。
+9. 不得为了凑页数重复同义段落、塞入无关内容或虚构资料；未知客户决策不得展开成大面积空表，不得输出“待补充、人工复核、占位符、用户确认”等系统工作流语言。
 10. 必须优先依据“章节级 RAG 写作依据”和“关联要求/评分项/风险提醒”写作；RAG 未覆盖的企业事实不得编造。
 11. 下列用户确认变量必须直接使用，不得再次输出为【待补充】；未确认字段不得推断。
 
@@ -907,7 +907,7 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
 - 硬性篇幅上限：{_hard_length_cap_words(chapter) or "按目标字数合理控制"} 字，超过后系统会截流保存
 - 建议篇幅：{writing_plan.get("suggested_pages") or "需人工复核"} 页
 - 生成方式：{writing_plan.get("generation_mode") or "single_pass"}
-- 资料不足策略：{"允许围绕评分点和可验证措施扩写" if _allow_auto_expand(chapter) else "稳健生成，缺失处使用待补充占位"}
+- 资料不足策略：{"允许围绕评分点和可验证措施适度扩写" if _allow_auto_expand(chapter) else "稳健生成，缺失处使用正式说明收口，不输出待补充占位"}
 - 是否需要表格：{"是" if writing_plan.get("needs_table") else "否"}
 - 是否需要图片/流程图：{"是" if writing_plan.get("needs_image") else "否"}
 - 是否需要资质材料：{"是" if writing_plan.get("needs_qualification") else "否"}
