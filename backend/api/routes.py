@@ -409,14 +409,14 @@ def _strip_untrusted_export_images(content: str, *, remove_all: bool = False) ->
     def replace(match: re.Match) -> str:
         alt = clean_formal_bid_text(match.group(1) or "图片")
         ref = (match.group(2) or "").strip().strip('"').strip("'")
-        if remove_all:
-            logging.info("导出 DOCX 时移除章节正文历史图片引用: alt=%s ref=%s", alt, ref)
-            return "\n__EXPORT_IMAGE_REMOVED__\n"
         if re.match(r"^/api/(?:bidding/)?knowledge/assets/[^/]+/file(?:\?|$)", ref):
             return match.group(0)
         candidate = Path(ref)
         if candidate.is_absolute() and candidate.exists() and candidate.is_file():
             return match.group(0)
+        if remove_all:
+            logging.info("导出 DOCX 时移除章节正文历史图片引用: alt=%s ref=%s", alt, ref)
+            return "\n__EXPORT_IMAGE_REMOVED__\n"
         logging.warning("导出 DOCX 时移除未入库或不可解析图片引用: alt=%s ref=%s", alt, ref)
         return ""
 

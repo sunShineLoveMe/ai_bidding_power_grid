@@ -226,6 +226,56 @@ export async function saveBidSection(projectId: string, section: Partial<BidSect
   return response.data.section;
 }
 
+export type KnowledgeAssetLibraryType = 'qualification' | 'product';
+
+export type KnowledgeAsset = {
+  id: string;
+  title: string;
+  description?: string;
+  category?: string;
+  asset_type?: string;
+  file_name?: string;
+  mime_type?: string;
+  applicable_volumes?: string[];
+  applicable_sections?: string[];
+  tags?: string[];
+  specs?: Record<string, unknown>;
+  metadata?: Record<string, unknown>;
+  status?: string;
+  created_at?: string;
+};
+
+export async function listKnowledgeAssets(options?: {
+  libraryType?: KnowledgeAssetLibraryType;
+  page?: number;
+  pageSize?: number;
+}): Promise<{ items: KnowledgeAsset[]; total: number; page: number; page_size: number }> {
+  const params = new URLSearchParams({
+    page: String(options?.page || 1),
+    page_size: String(options?.pageSize || 30),
+  });
+  if (options?.libraryType) {
+    params.set('library_type', options.libraryType);
+  }
+  const response = await apiClient.get(`/api/knowledge/assets?${params.toString()}`, {
+    skipGlobalLoading: true,
+  });
+  return {
+    items: response.data.items || [],
+    total: response.data.total || 0,
+    page: response.data.page || options?.page || 1,
+    page_size: response.data.page_size || options?.pageSize || 30,
+  };
+}
+
+export async function uploadKnowledgeAsset(formData: FormData): Promise<KnowledgeAsset> {
+  const response = await apiClient.post('/api/knowledge/assets/upload', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+    skipGlobalLoading: true,
+  });
+  return response.data;
+}
+
 export type BidAiEditAction = 'expand' | 'shorten' | 'polish' | 'formalize';
 
 export type BidAiEditRequest = {

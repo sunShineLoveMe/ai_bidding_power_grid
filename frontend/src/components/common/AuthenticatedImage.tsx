@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { getAuthToken } from '../../stores/authStore';
 
 function isProtectedAssetUrl(src?: string): boolean {
-  return Boolean(src && /\/api\/knowledge\/assets\/[A-Za-z0-9-]+\/file/.test(src));
+  return Boolean(src && /\/api\/(?:bidding\/)?knowledge\/assets\/[A-Za-z0-9-]+\/file/.test(src));
 }
 
 async function fetchProtectedObjectUrl(src: string): Promise<string> {
@@ -70,7 +70,7 @@ function acquireProtectedObjectUrl(src: string): { promise: Promise<string>; rel
   };
 }
 
-function resolveDisplayUrl(src: string): { promise: Promise<string>; release: () => void } {
+export function resolveAuthenticatedDisplayUrl(src: string): { promise: Promise<string>; release: () => void } {
   if (isProtectedAssetUrl(src)) {
     return acquireProtectedObjectUrl(src);
   }
@@ -97,6 +97,7 @@ interface AuthenticatedImageProps {
   className?: string;
   fallback?: string;
   previewSrc?: string;
+  plain?: boolean;
 }
 
 export function AuthenticatedImage({
@@ -105,6 +106,7 @@ export function AuthenticatedImage({
   className,
   fallback,
   previewSrc,
+  plain = false,
 }: AuthenticatedImageProps): JSX.Element {
   const [objectUrl, setObjectUrl] = useState('');
   const [previewObjectUrl, setPreviewObjectUrl] = useState('');
@@ -125,7 +127,7 @@ export function AuthenticatedImage({
           return;
         }
 
-        const displayHandle = resolveDisplayUrl(src);
+        const displayHandle = resolveAuthenticatedDisplayUrl(src);
         releases.push(displayHandle.release);
         const displayUrl = await displayHandle.promise;
         if (cancelled) {
@@ -135,7 +137,7 @@ export function AuthenticatedImage({
         const fullUrl = previewSrc || src;
         let resolvedPreviewUrl = displayUrl;
         if (fullUrl !== src) {
-          const previewHandle = resolveDisplayUrl(fullUrl);
+          const previewHandle = resolveAuthenticatedDisplayUrl(fullUrl);
           releases.push(previewHandle.release);
           resolvedPreviewUrl = await previewHandle.promise;
         }
@@ -178,6 +180,10 @@ export function AuthenticatedImage({
         图片加载中...
       </span>
     );
+  }
+
+  if (plain) {
+    return <img src={objectUrl} alt={alt || '图片'} className={className} />;
   }
 
   return (

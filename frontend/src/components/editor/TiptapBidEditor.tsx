@@ -1,10 +1,12 @@
-import { Button, Modal, Select, Space, Tooltip, Typography, message } from 'antd';
+import { Button, Empty, Input, Modal, Select, Space, Spin, Tooltip, Typography, Upload, message } from 'antd';
+import type { UploadProps } from 'antd';
 import {
   Bold,
   ChevronsDown,
   ChevronsUp,
   Heading1,
   Heading2,
+  Image as ImageIcon,
   Heading3,
   Italic,
   List,
@@ -15,6 +17,7 @@ import {
   Table2,
   Underline as UnderlineIcon,
   Undo2,
+  UploadCloud,
   WandSparkles,
 } from 'lucide-react';
 import { EditorContent, JSONContent, useEditor } from '@tiptap/react';
@@ -27,7 +30,9 @@ import TableRow from '@tiptap/extension-table-row';
 import TableCell from '@tiptap/extension-table-cell';
 import TableHeader from '@tiptap/extension-table-header';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { getKnowledgeAssetSignedUrls } from '../../api/bidProject';
+import { getKnowledgeAssetSignedUrls, listKnowledgeAssets, uploadKnowledgeAsset } from '../../api/bidProject';
+import type { KnowledgeAsset, KnowledgeAssetLibraryType } from '../../api/bidProject';
+import { AuthenticatedImage, resolveAuthenticatedDisplayUrl } from '../common/AuthenticatedImage';
 
 interface TiptapBidEditorProps {
   content: string;
@@ -58,6 +63,13 @@ type AiPreviewState = {
   summary?: string;
   warnings?: string[];
   range: { from: number; to: number };
+};
+
+type ImageDisplayUrlMap = Record<string, string>;
+
+type ResolvedImageDisplayUrls = {
+  urls: ImageDisplayUrlMap;
+  releases: Array<() => void>;
 };
 
 const AI_EDIT_ACTIONS: Array<{
@@ -115,6 +127,23 @@ function normalizeImageSrc(value: string): string {
   return raw;
 }
 
+function assetImageUrl(asset: KnowledgeAsset): string {
+  return `/api/knowledge/assets/${asset.id}/file?variant=original`;
+}
+
+function isImageAsset(asset: KnowledgeAsset): boolean {
+  return Boolean(asset.id) && (asset.mime_type || '').startsWith('image/');
+}
+
+function cleanUploadTitle(fileName: string): string {
+  const stem = (fileName || '标书配图')
+    .replace(/\.[^.]+$/, '')
+    .replace(/[_-]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return stem ? `泰昌${stem.replace(/^泰昌/, '')}` : '泰昌标书配图资料';
+}
+
 const BidImage = Node.create({
   name: 'bidImage',
   group: 'block',
@@ -131,6 +160,11 @@ const BidImage = Node.create({
       title: {
         default: null,
       },
+      canonicalSrc: {
+        default: null,
+        parseHTML: element => element.getAttribute('data-canonical-src') || element.getAttribute('src'),
+        renderHTML: attributes => attributes.canonicalSrc ? { 'data-canonical-src': attributes.canonicalSrc } : {},
+      },
     };
   },
   parseHTML() {
@@ -141,7 +175,7 @@ const BidImage = Node.create({
   },
 });
 
-function markdownToHtml(markdown: string): string {
+function markdownToHtml(markdown: string, imageDisplayUrls: ImageDisplayUrlMap = {}): string {
   const lines = (markdown || '').replace(/\r\n/g, '\n').split('\n');
   const html: string[] = [];
   let i = 0;
@@ -193,7 +227,9 @@ function markdownToHtml(markdown: string): string {
     const image = /^!\[(.*?)\]\((.*?)\)\s*$/.exec(trimmed);
     if (image) {
       closeParagraph(paragraph);
-      html.push(`<img data-bid-image="true" src="${escapeHtml(normalizeImageSrc(image[2]))}" alt="${escapeHtml(image[1] || '标书配图')}" />`);
+      const canonicalSrc = normalizeImageSrc(image[2]);
+      const displaySrc = imageDisplayUrls[canonicalSrc] || canonicalSrc;
+      html.push(`<img data-bid-image="true" data-canonical-src="${escapeHtml(canonicalSrc)}" src="${escapeHtml(displaySrc)}" alt="${escapeHtml(image[1] || '标书配图')}" />`);
       i += 1;
       continue;
     }
@@ -272,7 +308,7 @@ function nodeToMarkdown(node: JSONContent): string {
     return nodeText(node);
   }
   if (node.type === 'bidImage') {
-    const src = normalizeImageSrc(String(node.attrs?.src || ''));
+    const src = normalizeImageSrc(String(node.attrs?.canonicalSrc || node.attrs?.src || ''));
     const alt = String(node.attrs?.alt || '标书配图').trim();
     return src ? `![${alt}](${src})` : '';
   }
@@ -311,10 +347,19 @@ function docToMarkdown(doc: JSONContent): string {
 }
 
 export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: TiptapBidEditorProps): JSX.Element {
-  const lastExternalContent = useRef(content || '');
-  const lastEmittedContent = useRef(content || '');
+  const lastExternalContent = useRef('');
+  const lastEmittedContent = useRef('');
+  const signedUrlCache = useRef<Record<string, string>>({});
+  const imageDisplayReleases = useRef<Array<() => void>>([]);
   const [aiEditingAction, setAiEditingAction] = useState<BidAiEditEditorAction | null>(null);
   const [aiPreview, setAiPreview] = useState<AiPreviewState | null>(null);
+  const [imageModalOpen, setImageModalOpen] = useState(false);
+  const [imageLibraryType, setImageLibraryType] = useState<KnowledgeAssetLibraryType>('product');
+  const [imageAssets, setImageAssets] = useState<KnowledgeAsset[]>([]);
+  const [imageAssetsLoading, setImageAssetsLoading] = useState(false);
+  const [imageUploadFile, setImageUploadFile] = useState<File | null>(null);
+  const [imageTitle, setImageTitle] = useState('');
+  const [imageUploading, setImageUploading] = useState(false);
   const extensions = useMemo(() => [
     StarterKit.configure({
       heading: { levels: [1, 2, 3, 4, 5, 6] },
@@ -330,7 +375,7 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
 
   const editor = useEditor({
     extensions,
-    content: markdownToHtml(content || ''),
+    content: '<p></p>',
     editorProps: {
       attributes: {
         class: 'tiptap-bid-content',
@@ -343,36 +388,40 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
     },
   });
 
-  // 资产 URL 缓存：key = asset_id，value = 云端签名 URL 或本地文件接口 URL。
-  const signedUrlCache = useRef<Record<string, string>>({});
+  const releaseCurrentImageDisplays = useCallback(() => {
+    imageDisplayReleases.current.forEach(release => release());
+    imageDisplayReleases.current = [];
+  }, []);
 
-  /**
-   * 从 markdown 内容中提取所有 /api/bidding/knowledge/assets/<id>/file 格式的图片 URL，
-   * 批量换成后端返回的可访问 URL；云端存储直连对象存储，本地 storage 继续走后端文件接口。
-   */
-  const resolveSignedUrls = useCallback(async (markdown: string): Promise<string> => {
+  const resolveImageDisplayUrls = useCallback(async (markdown: string): Promise<ResolvedImageDisplayUrls> => {
     const ASSET_URL_RE = /\/api\/(?:bidding\/)?knowledge\/assets\/([0-9a-f-]{36})\/file[^\s)"]*/gi;
-    const matches = [...markdown.matchAll(ASSET_URL_RE)];
-    if (!matches.length) return markdown;
-
-    // 找出尚未缓存的 asset_id
-    const uncachedIds = [...new Set(matches.map(m => m[1]))].filter(
-      id => !signedUrlCache.current[id],
-    );
-
-    if (uncachedIds.length) {
+    const matches = [...(markdown || '').matchAll(ASSET_URL_RE)];
+    if (!matches.length) return { urls: {}, releases: [] };
+    const ids = [...new Set(matches.map(match => match[1]))];
+    const uncached = ids.filter(id => !signedUrlCache.current[id]);
+    if (uncached.length) {
       try {
-        const fresh = await getKnowledgeAssetSignedUrls(uncachedIds, 3600);
+        const fresh = await getKnowledgeAssetSignedUrls(uncached, 3600);
         Object.assign(signedUrlCache.current, fresh);
       } catch {
-        // 签名 URL 获取失败时降级：保留原 /api/ 路径，不影响渲染
+        // 预览签名失败时保留 canonical URL；保存和 DOCX 导出不受影响。
       }
     }
-
-    // 替换 markdown 中的图片 URL
-    return markdown.replace(ASSET_URL_RE, (original, assetId: string) => {
-      return signedUrlCache.current[assetId] || original;
-    });
+    const displayUrls: ImageDisplayUrlMap = {};
+    const releases: Array<() => void> = [];
+    await Promise.all(matches.map(async match => {
+      const canonical = normalizeImageSrc(match[0]);
+      const candidate = signedUrlCache.current[match[1]] || canonical;
+      const displayHandle = resolveAuthenticatedDisplayUrl(candidate);
+      releases.push(displayHandle.release);
+      try {
+        displayUrls[canonical] = await displayHandle.promise;
+      } catch {
+        displayHandle.release();
+        displayUrls[canonical] = canonical;
+      }
+    }));
+    return { urls: displayUrls, releases };
   }, []);
 
   useEffect(() => {
@@ -380,17 +429,38 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
     const incoming = content || '';
     if (incoming === lastExternalContent.current || incoming === lastEmittedContent.current) return;
     lastExternalContent.current = incoming;
-
-    // 先尝试替换签名 URL，再渲染到编辑器
-    resolveSignedUrls(incoming).then(resolved => {
-      // 如果在异步期间 content 已经变化，放弃本次更新
-      if (incoming !== lastExternalContent.current) return;
-      editor.commands.setContent(markdownToHtml(resolved), false);
+    let cancelled = false;
+    let timer: number | undefined;
+    resolveImageDisplayUrls(incoming).then(({ urls, releases }) => {
+      if (incoming !== lastExternalContent.current) {
+        releases.forEach(release => release());
+        return;
+      }
+      timer = window.setTimeout(() => {
+        if (cancelled) {
+          releases.forEach(release => release());
+          return;
+        }
+        releaseCurrentImageDisplays();
+        imageDisplayReleases.current = releases;
+        editor.commands.setContent(markdownToHtml(incoming, urls), false);
+      }, 0);
     }).catch(() => {
-      // 降级：直接用原始 markdown 渲染
-      editor.commands.setContent(markdownToHtml(incoming), false);
+      timer = window.setTimeout(() => {
+        if (!cancelled) {
+          editor.commands.setContent(markdownToHtml(incoming), false);
+        }
+      }, 0);
     });
-  }, [content, editor, resolveSignedUrls]);
+    return () => {
+      cancelled = true;
+      if (timer) window.clearTimeout(timer);
+    };
+  }, [content, editor, releaseCurrentImageDisplays, resolveImageDisplayUrls]);
+
+  useEffect(() => () => {
+    releaseCurrentImageDisplays();
+  }, [releaseCurrentImageDisplays]);
 
   const applyHeading = (value: string) => {
     if (!editor) return;
@@ -450,6 +520,112 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
     message.success('已采纳 AI 编辑结果，可用撤销按钮恢复');
   };
 
+  const fetchImageAssets = useCallback(async () => {
+    setImageAssetsLoading(true);
+    try {
+      const result = await listKnowledgeAssets({
+        libraryType: imageLibraryType,
+        page: 1,
+        pageSize: 48,
+      });
+      setImageAssets((result.items || []).filter(isImageAsset));
+    } catch (error) {
+      message.error(error instanceof Error ? error.message : String(error));
+    } finally {
+      setImageAssetsLoading(false);
+    }
+  }, [imageLibraryType]);
+
+  useEffect(() => {
+    if (imageModalOpen) {
+      void fetchImageAssets();
+    }
+  }, [fetchImageAssets, imageModalOpen]);
+
+  const insertImageAsset = async (asset: KnowledgeAsset) => {
+    if (!editor) return;
+    const title = String(asset.metadata?.formal_caption || asset.metadata?.source_display_name || asset.title || '标书配图').trim();
+    const canonicalSrc = assetImageUrl(asset);
+    let displaySrc = canonicalSrc;
+    let releaseDisplay: (() => void) | null = null;
+    try {
+      const urls = await getKnowledgeAssetSignedUrls([asset.id], 3600);
+      const candidate = urls[asset.id] || canonicalSrc;
+      signedUrlCache.current[asset.id] = candidate;
+      const displayHandle = resolveAuthenticatedDisplayUrl(candidate);
+      displaySrc = await displayHandle.promise;
+      releaseDisplay = displayHandle.release;
+    } catch {
+      displaySrc = canonicalSrc;
+    }
+    if (releaseDisplay) {
+      imageDisplayReleases.current.push(releaseDisplay);
+    }
+    editor.chain().focus().insertContent({
+      type: 'bidImage',
+      attrs: {
+        src: displaySrc,
+        canonicalSrc,
+        alt: title,
+        title,
+      },
+    }).run();
+    setImageModalOpen(false);
+    message.success('图片已插入正文，保存章节后将进入 DOCX 导出');
+  };
+
+  const imageUploadProps: UploadProps = {
+    accept: 'image/png,image/jpeg,image/jpg,image/webp',
+    maxCount: 1,
+    beforeUpload(file) {
+      if (!file.type.startsWith('image/')) {
+        message.warning('请选择 PNG、JPG 或 WebP 图片');
+        return Upload.LIST_IGNORE;
+      }
+      setImageUploadFile(file);
+      setImageTitle(current => current || cleanUploadTitle(file.name));
+      return false;
+    },
+    onRemove() {
+      setImageUploadFile(null);
+      return true;
+    },
+  };
+
+  const uploadAndInsertImage = async () => {
+    if (!imageUploadFile) {
+      message.warning('请先选择需要插入的图片');
+      return;
+    }
+    if (!editor) return;
+    setImageUploading(true);
+    try {
+      const title = (imageTitle || cleanUploadTitle(imageUploadFile.name)).trim();
+      const formData = new FormData();
+      formData.append('file', imageUploadFile);
+      formData.append('library_type', imageLibraryType);
+      formData.append('asset_type', imageLibraryType === 'product' ? 'product_image' : 'qualification_image');
+      formData.append('title', title);
+      formData.append('category', imageLibraryType === 'product' ? '产品实物图片' : '企业证明材料');
+      formData.append('evidence_type', imageLibraryType === 'product' ? 'product_image' : 'enterprise_evidence');
+      formData.append('description', `${title}，用于投标文件正文配图。`);
+      formData.append('tags', JSON.stringify(['标书配图']));
+      formData.append('applicable_volumes', JSON.stringify(imageLibraryType === 'product' ? ['technical'] : ['business', 'qualification', 'attachment']));
+      formData.append('allowed_for_bid', 'true');
+      formData.append('is_sensitive', 'false');
+      formData.append('anonymized', 'true');
+      const asset = await uploadKnowledgeAsset(formData);
+      await insertImageAsset(asset);
+      setImageUploadFile(null);
+      setImageTitle('');
+      void fetchImageAssets();
+    } catch (error) {
+      message.error(error instanceof Error ? error.message : String(error));
+    } finally {
+      setImageUploading(false);
+    }
+  };
+
   return (
     <div className="tiptap-bid-editor">
       <div className="tiptap-toolbar">
@@ -485,6 +661,14 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
             size="small"
             icon={<Table2 size={15} />}
             onClick={() => (editor?.chain().focus() as any).insertTable({ rows: 3, cols: 4, withHeaderRow: true }).run()}
+          />
+        </Tooltip>
+        <Tooltip title="插入图片">
+          <Button
+            size="small"
+            aria-label="插入图片"
+            icon={<ImageIcon size={15} />}
+            onClick={() => setImageModalOpen(true)}
           />
         </Tooltip>
         {onAiEdit ? (
@@ -544,6 +728,71 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
             </Space>
           </div>
         ) : null}
+      </Modal>
+      <Modal
+        title="插入标书图片"
+        open={imageModalOpen}
+        width={920}
+        okText="上传并插入"
+        cancelText="关闭"
+        okButtonProps={{ loading: imageUploading, disabled: !imageUploadFile }}
+        onOk={() => void uploadAndInsertImage()}
+        onCancel={() => setImageModalOpen(false)}
+        destroyOnHidden
+      >
+        <div className="editor-image-dialog">
+          <div className="editor-image-dialog-head">
+            <Select<KnowledgeAssetLibraryType>
+              value={imageLibraryType}
+              onChange={setImageLibraryType}
+              options={[
+                { label: '产品库图片', value: 'product' },
+                { label: '资信库图片', value: 'qualification' },
+              ]}
+            />
+            <span>优先使用已入库、可追溯的泰昌企业事实图片。</span>
+          </div>
+          <div className="editor-image-upload">
+            <Upload {...imageUploadProps} fileList={imageUploadFile ? [{
+              uid: imageUploadFile.name,
+              name: imageUploadFile.name,
+              status: 'done',
+            }] : []}>
+              <Button icon={<UploadCloud size={15} />}>选择本地图片</Button>
+            </Upload>
+            <Input
+              value={imageTitle}
+              onChange={event => setImageTitle(event.target.value)}
+              placeholder="图片中文标题，例如：泰昌MPP生产线资料"
+              maxLength={80}
+            />
+          </div>
+          <div className="editor-image-library">
+            <div className="editor-image-library-title">
+              <strong>从资产库插入</strong>
+              <Button size="small" onClick={() => void fetchImageAssets()} loading={imageAssetsLoading}>刷新</Button>
+            </div>
+            <Spin spinning={imageAssetsLoading}>
+              {imageAssets.length ? (
+                <div className="editor-image-grid">
+                  {imageAssets.map(asset => (
+                    <button
+                      type="button"
+                      key={asset.id}
+                      className="editor-image-option"
+                      onClick={() => void insertImageAsset(asset)}
+                    >
+                      <AuthenticatedImage src={assetImageUrl(asset)} alt={asset.title || '标书配图'} />
+                      <span>{String(asset.metadata?.source_display_name || asset.title || '未命名图片')}</span>
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无可插入图片，可先上传本地图片" />
+              )}
+            </Spin>
+          </div>
+        </div>
       </Modal>
     </div>
   );

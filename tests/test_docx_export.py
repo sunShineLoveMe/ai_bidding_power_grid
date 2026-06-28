@@ -17,6 +17,7 @@ from backend.api.routes import (
     _demote_body_markdown_headings,
     _numbered_export_sections,
     _strip_duplicate_section_heading,
+    _strip_untrusted_export_images,
 )
 from backend.export.md_to_word import (
     DOCX_BIDDER_FULL_NAME,
@@ -513,6 +514,18 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertEqual(1, report["selected"])
             self.assertIn("/api/bidding/knowledge/assets/asset-1/file?variant=original", markdown)
 
+    def test_manual_asset_image_survives_formal_export_image_cleanup(self):
+        content = (
+            "泰昌产品资料如下。\n\n"
+            "![泰昌MPP生产线资料](/api/knowledge/assets/11111111-1111-1111-1111-111111111111/file?variant=original)\n\n"
+            "![临时截图](https://example.com/temp.png)\n"
+        )
+
+        cleaned = _strip_untrusted_export_images(content, remove_all=True)
+
+        self.assertIn("![泰昌MPP生产线资料](/api/knowledge/assets/11111111-1111-1111-1111-111111111111/file?variant=original)", cleaned)
+        self.assertNotIn("https://example.com/temp.png", cleaned)
+
     def test_bid_markdown_with_images_does_not_repeat_same_asset(self):
         project_id = "11111111-1111-1111-1111-111111111111"
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -818,6 +831,30 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertNotIn("内径250", "\n".join(p.text for p in document.paragraphs))
             self.assertNotIn("原图", "\n".join(p.text for p in document.paragraphs))
             self.assertEqual(4, report["captions"]["formalized"])
+
+    def test_plain_paragraph_after_image_prefix_is_not_caption(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            markdown_path = Path(tmpdir) / "plain_image_word.md"
+            markdown_path.write_text(
+                "\n".join(
+                    [
+                        "# 图片后续正文测试投标文件",
+                        "",
+                        "# 1. 手工插图章节",
+                        "",
+                        "图片之后继续编辑文字，导出 Word 应保持文字和图片顺序。",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            output_path, report = convert_md_to_word(markdown_path, return_report=True)
+            document = Document(str(output_path))
+            paragraph_text = "\n".join(p.text for p in document.paragraphs)
+
+            self.assertIn("图片之后继续编辑文字，导出 Word 应保持文字和图片顺序。", paragraph_text)
+            self.assertFalse(any(p.text.startswith("资料：之后继续编辑文字") for p in document.paragraphs))
+            self.assertEqual(0, report["captions"]["formalized"])
 
     def test_formal_bid_text_is_black_and_level_two_headings_start_new_page(self):
         with tempfile.TemporaryDirectory() as tmpdir:

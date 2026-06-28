@@ -610,3 +610,18 @@
 - 审计结果：技术标 `8/8/8`、商务标 `5/5/5`、完整标书 `12/12/12`，分别代表 manifest 选中图片 / Word 内图片 / 正式题注；三份文件图片失败 `0`、无题注图片 `0`、禁用文本命中 `0`、斜体标题 `0`、字段刷新均 `refreshed`。
 - 运行记录：`docs/development/runs/run_20260627_liaoning_formal_bid_image_binding_rework.md`。
 - 自动化回归：`.venv/bin/python -m pytest tests/test_formal_placeholders.py tests/test_rag_asset_scoring.py tests/test_docx_export.py -q`，结果 `60 passed, 1 warning`。
+
+### 2026-06-28 在线编辑器图片插入功能回归记录
+
+- 背景：客户反馈类 Word 编辑器不能插入图片，并要求编辑器中插入图片、修改文字、保存之后，导出的 Word 能保持对应内容。本分支仅处理图片插入能力，连续滚动需求延后到下期。
+- 本轮实现：
+  - Tiptap 工具栏新增“插入图片”按钮。
+  - 图片弹窗支持从产品库/资信库选择已入库图片，也支持上传本地图片。
+  - 编辑器预览使用授权 object URL，保存正文使用 `/api/knowledge/assets/<id>/file?variant=original`，避免 blob URL 进入数据库或正式 DOCX。
+  - DOCX 导出图片清理规则保留可信手工插入资产图片。
+  - 修复旧题注识别过宽导致“图片之后继续编辑文字...”被误判为图片题注的问题。
+- 回归记录：
+  - `python3 -m py_compile backend/api/routes.py backend/services/formal_asset_naming.py backend/export/md_to_word.py`，通过。
+  - `npm run build`，通过；仅保留既有 Vite chunk 体积和混合 import 警告。
+  - `.venv/bin/python -m pytest tests/test_docx_export.py::DocxExportRegressionTest::test_plain_paragraph_after_image_prefix_is_not_caption tests/test_docx_export.py::DocxExportRegressionTest::test_formal_image_caption_is_sanitized_centered_and_small tests/test_docx_export.py::DocxExportRegressionTest::test_manual_asset_image_survives_formal_export_image_cleanup -q`，通过。
+- 运行记录：`docs/development/runs/run_20260628_editor_image_insert_only.md`。
