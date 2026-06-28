@@ -365,6 +365,49 @@ def _strip_redundant_section_label(content: str, section: dict) -> str:
     return "\n".join(output).strip()
 
 
+def _renumber_body_markdown_headings(content: str, section: dict) -> str:
+    """Rewrite model-emitted body heading numbers under the official export section number."""
+    if not content:
+        return ""
+    base_order = str(section.get("_export_order") or section.get("order") or "").strip()
+    if not base_order:
+        return content.strip()
+
+    output: list[str] = []
+    counters: list[int] = []
+    in_fence = False
+    for raw_line in content.splitlines():
+        stripped = raw_line.strip()
+        if stripped.startswith("```") or stripped.startswith("~~~"):
+            in_fence = not in_fence
+            output.append(raw_line)
+            continue
+        if in_fence:
+            output.append(raw_line)
+            continue
+
+        heading_match = re.match(r"^(\s{0,3})(#{1,6})\s+(.+?)\s*#*\s*$", raw_line)
+        if not heading_match:
+            output.append(raw_line)
+            continue
+
+        prefix, marks, title_text = heading_match.groups()
+        clean_title = clean_formal_bid_text(re.sub(r"\*\*(.*?)\*\*", r"\1", title_text)).strip()
+        clean_title = _strip_existing_section_number(clean_title)
+        relative_depth = max(1, min(len(marks), 4))
+        while len(counters) < relative_depth:
+            counters.append(0)
+        counters = counters[:relative_depth]
+        for index in range(relative_depth - 1):
+            if counters[index] == 0:
+                counters[index] = 1
+        counters[relative_depth - 1] += 1
+        next_order = ".".join([base_order, *[str(value) for value in counters]])
+        output.append(f"{prefix}{marks} {next_order} {clean_title}")
+
+    return "\n".join(output).strip()
+
+
 def _demote_body_markdown_headings(content: str) -> str:
     """Keep DOCX navigation tied to bid_sections, not headings emitted inside body text."""
     lines = (content or "").splitlines()
@@ -1192,7 +1235,10 @@ def build_project_bid_markdown(
         content = _strip_untrusted_export_images(
             _strip_redundant_section_label(
                 _demote_body_markdown_headings(
-                    _strip_duplicate_section_heading(section.get("content") or "", section)
+                    _renumber_body_markdown_headings(
+                        _strip_duplicate_section_heading(section.get("content") or "", section),
+                        section,
+                    )
                 ),
                 section,
             ),

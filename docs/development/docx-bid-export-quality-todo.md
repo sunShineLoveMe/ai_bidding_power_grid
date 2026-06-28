@@ -23,6 +23,7 @@
 - 2026-06-27 本地辽宁 CPVC 包 1 完整真实回归已产出完整 DOCX，但 formal gate 判定为 `draft`：正式必填缺口 `16`、高风险缺口 `48`、正文残留 `待补充/需人工复核`，且封面包号未读取已确认值。记录见 `docs/development/runs/run_20260627_local_liaoning_full_e2e.md`。
 - 2026-06-28 在线编辑器图片插入专项继续收口：修复 AntD `App` 根容器高度导致的章节目录和正文编辑区不可滚动问题；本地上传图片明确为“保存到当前产品库/资信库，作为企业图片资产后续复用，并插入当前章节正文”。记录见 `docs/development/runs/run_20260628_editor_image_insert_only.md`。
 - 2026-06-28 在线编辑器资产库图片支持多选批量插入；父级章节状态改为汇总下级叶子章节，子章节全完成时父章节显示绿色完成状态。记录见 `docs/development/runs/run_20260628_editor_image_insert_only.md`。
+- 2026-06-28 修复目录模式“预览”后正文空白问题；前端正文展示和 DOCX/Markdown 分册导出会把模型生成的旧正文标题编号重写到当前章节编号之下，避免技术标/商务标目录与正文编号不一致。记录见 `docs/development/runs/run_20260628_editor_image_insert_only.md`。
 
 ## P0 必须完成
 

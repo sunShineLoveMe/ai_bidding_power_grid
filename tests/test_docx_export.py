@@ -16,6 +16,7 @@ from backend.api.routes import (
     _asset_allowed_for_bid,
     _demote_body_markdown_headings,
     _numbered_export_sections,
+    _renumber_body_markdown_headings,
     _strip_duplicate_section_heading,
     _strip_untrusted_export_images,
 )
@@ -121,6 +122,31 @@ class DocxExportRegressionTest(unittest.TestCase):
         cleaned = _strip_duplicate_section_heading(content, {"title": "企业营业执照", "level": 1})
 
         self.assertEqual(cleaned, "正文内容。")
+
+    def test_body_heading_numbers_are_rewritten_under_export_section_order(self):
+        content = "\n".join([
+            "# 4. 投标保证金",
+            "",
+            "## 4.1 基本情况说明",
+            "",
+            "### 4.1.1 保证金提交形式",
+        ])
+
+        normalized = _renumber_body_markdown_headings(content, {"_export_order": "1.4"})
+
+        self.assertIn("# 1.4.1 投标保证金", normalized)
+        self.assertIn("## 1.4.1.1 基本情况说明", normalized)
+        self.assertIn("### 1.4.1.1.1 保证金提交形式", normalized)
+        self.assertNotIn("4. 投标保证金", normalized)
+        self.assertNotIn("4.1 基本情况说明", normalized)
+
+    def test_body_heading_number_rewrite_never_emits_zero_segments(self):
+        content = "##### 4. 投标保证金"
+
+        normalized = _renumber_body_markdown_headings(content, {"_export_order": "1.3"})
+
+        self.assertIn("1.3.1.1.1.1", normalized)
+        self.assertNotIn(".0", normalized)
 
     def test_export_sections_are_numbered_for_word_outline(self):
         sections = [

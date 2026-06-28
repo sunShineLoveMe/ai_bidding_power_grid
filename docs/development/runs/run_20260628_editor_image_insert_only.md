@@ -67,6 +67,47 @@
 ### 命令回归
 
 - `npm run build`：通过；仅保留既有 Vite chunk 体积和混合 import 警告。
+
+## 2026-06-28 目录预览空白与分册正文编号修复
+
+### 问题
+
+- 目录模式点击章节“预览”后，页面切到正文模式并选中了目标章节，但编辑器正文可能显示为空白。
+- 章节正文中保留了模型生成时的旧整体编号，例如 `4. 投标保证金`、`4.1 基本情况说明`，与左侧目录和分册导出目录不一致。
+- 商务标/技术标分册导出时，正式章节标题会按分册重新编号，但正文内部 Markdown 标题没有同步重写，导致 Word 正文观感仍像整体标书旧编号。
+
+### 修复
+
+- `TiptapBidEditor` 创建 editor 实例时直接使用当前章节 `content` 初始化，不再先创建空文档再等待异步 effect 灌入。
+- 外部正文 hydrate 完成前禁止空编辑器向父组件回写；hydrate 后短窗口内忽略“外部正文非空但编辑器上报空文档”的竞态更新。
+- 正文模式下按章节 id 重新挂载 Tiptap，避免切换章节时复用旧 editor 状态。
+- 目录预览兜底：当本地章节正文为空时，从真实 `getBidSections` API 拉取最新章节正文，并按 id/标题双重匹配回填当前章节。
+- 前端展示时清理重复章节标题，并将正文内部 Markdown 标题重写到当前左侧目录编号之下，例如 `4. 投标保证金` 展示为 `2.4.1 投标保证金`。
+- 后端导出时在 `_numbered_export_sections` 之后，用当前 `_export_order` 重写正文内部 Markdown 标题，再降级为普通正文标签，避免 DOCX 目录以正式章节为准但正文残留旧编号。
+- 跳级 Markdown 标题重写时补齐父级计数，避免生成 `1.3.0.0.1` 这类编号。
+
+### 真实回归
+
+- 服务：使用用户已启动的本地 `5173` 前端和 `3012` 后端。
+- 页面：`http://127.0.0.1:5173/bid-editor?projectId=5d064d0a-29ba-41bb-ab07-9d51e6c9e084`。
+- 目录模式点击 `2.4 投标保证保险（电缆保护管 MPP）` 的“预览”：
+  - 成功切换到正文模式，左侧 active 章节为 `2.4 投标保证保险（电缆保护管 MPP）`。
+  - 编辑器正文长度 `1114`，不再空白。
+  - 正文开头包含 `2.4.1 投标保证金`。
+  - 未命中旧编号 `4. 投标保证金`、`4.1 基本情况说明`。
+- 真实导出 Markdown 抽样：
+  - `build_project_bid_markdown(project_id, volume_type="business", with_images=False)` 生成 `output/regression_export_numbering/5d064d0a/泰昌_2225AC_包1_商务投标文件_20260628.md`。
+  - `build_project_bid_markdown(project_id, volume_type="technical", with_images=False)` 生成 `output/regression_export_numbering/5d064d0a/泰昌_2225AC_包1_技术投标文件_20260628.md`。
+  - 商务标抽样中 `2.4 投标保证保险（电缆保护管 MPP）` 下的正文内部标题已变为 `【2.4.1 投标保证金】`。
+  - 技术标/商务标抽样均未命中旧编号 `4. 投标保证金`、`4.1 基本情况说明`。
+  - 技术标/商务标标题行均未发现 `.0` 编号段。
+- 控制台：未发现新增错误或警告；仅有 React DevTools 与 build info。
+
+### 命令回归
+
+- `npm run build`：通过；仅保留既有 Vite chunk 体积和混合 import 警告。
+- `.venv/bin/python -m pytest tests/test_docx_export.py::DocxExportRegressionTest::test_body_heading_numbers_are_rewritten_under_export_section_order tests/test_docx_export.py::DocxExportRegressionTest::test_body_heading_number_rewrite_never_emits_zero_segments tests/test_docx_export.py::DocxExportRegressionTest::test_docx_navigation_headings_remain_official_section_headings_only -q`：`3 passed, 1 warning`。
+- `python3 -m py_compile backend/api/routes.py`：通过。
 - `.venv/bin/python -m pytest tests/test_docx_export.py::DocxExportRegressionTest::test_formal_asset_title_removes_empty_brackets tests/test_docx_export.py::DocxExportRegressionTest::test_plain_paragraph_after_image_prefix_is_not_caption tests/test_docx_export.py::DocxExportRegressionTest::test_manual_asset_image_survives_formal_export_image_cleanup -q`：`3 passed, 1 warning`。
 - `python3 -m py_compile backend/services/formal_asset_naming.py backend/export/md_to_word.py backend/api/routes.py`：通过。
 

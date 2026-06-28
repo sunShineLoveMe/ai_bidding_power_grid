@@ -38,6 +38,7 @@ import {
   getBidExportTask,
   generateComplianceSupplement,
   getComplianceCheck,
+  getBidSections,
   getInterpretation,
   getLatestInterpretation,
   getLatestSectionGenerationTask,
@@ -337,6 +338,62 @@ function chapterDisplayTitle(chapter: Pick<ChapterDraft, 'order' | 'title'>): st
   const cleanTitle = title.replace(duplicateOrder, '').trim() || title;
   const orderPrefix = order.includes('.') ? `${order} ` : `${order}. `;
   return `${orderPrefix}${cleanTitle}`;
+}
+
+function stripDisplayHeadingNumber(value: string): string {
+  return (value || '')
+    .replace(/^#{1,6}\s*/, '')
+    .replace(/^\s*\d+(?:\.\d+)*[\.、]?\s*/, '')
+    .replace(/^\s*[一二三四五六七八九十百]+[、.．]\s*/, '')
+    .trim();
+}
+
+function normalizeEditorChapterContent(chapter: ChapterDraft): string {
+  const content = chapter.content || '';
+  const baseOrder = String(chapter.order || '').trim();
+  if (!content.trim() || !baseOrder) {
+    return content;
+  }
+  const chapterTitle = stripDisplayHeadingNumber(chapter.title || '');
+  const counters: number[] = [];
+  let removedDuplicateHeading = false;
+  let inFence = false;
+  const output: string[] = [];
+
+  content.split(/\r?\n/).forEach(rawLine => {
+    const stripped = rawLine.trim();
+    if (stripped.startsWith('```') || stripped.startsWith('~~~')) {
+      inFence = !inFence;
+      output.push(rawLine);
+      return;
+    }
+    if (inFence) {
+      output.push(rawLine);
+      return;
+    }
+    const headingMatch = rawLine.match(/^(\s{0,3})(#{1,6})\s+(.+?)\s*#*\s*$/);
+    if (!headingMatch) {
+      output.push(rawLine);
+      return;
+    }
+    const headingText = headingMatch[3].replace(/\*\*(.*?)\*\*/g, '$1').trim();
+    const cleanHeading = stripDisplayHeadingNumber(headingText);
+    if (!removedDuplicateHeading && cleanHeading && cleanHeading === chapterTitle) {
+      removedDuplicateHeading = true;
+      return;
+    }
+    const headingLevel = Math.max(1, Math.min(6, headingMatch[2].length));
+    const relativeDepth = Math.max(1, Math.min(4, headingLevel));
+    while (counters.length < relativeDepth) counters.push(0);
+    counters.splice(relativeDepth);
+    for (let index = 0; index < relativeDepth - 1; index += 1) {
+      if (!counters[index]) counters[index] = 1;
+    }
+    counters[relativeDepth - 1] += 1;
+    const nextNumber = `${baseOrder}.${counters.join('.')}`;
+    output.push(`${headingMatch[1]}${headingMatch[2]} ${nextNumber} ${cleanHeading || headingText}`);
+  });
+  return output.join('\n').trim();
 }
 
 function inferVolumeType(chapter: Pick<ChapterDraft, 'title' | 'purpose' | 'required_materials' | 'response_points' | 'metadata'>): InternalVolumeType {
@@ -2369,7 +2426,26 @@ export function BidEditorPage(): JSX.Element {
     setChapters(items => items.map(item => ({ ...item, expanded })));
   }
 
-  function previewChapter(chapter: ChapterDraft): void {
+  async function previewChapter(chapter: ChapterDraft): Promise<void> {
+    let latestContent = chapter.content || '';
+    if (!latestContent.trim() && data?.project?.id) {
+      try {
+        const latestSections = await getBidSections(data.project.id);
+        const targetTitle = stripDisplayHeadingNumber(chapter.title || '');
+        const latest = latestSections.find(item => item.id === chapter.id)
+          || latestSections.find(item => stripDisplayHeadingNumber(item.title || '') === targetTitle);
+        latestContent = latest?.content || '';
+      } catch (error) {
+        message.warning(`加载章节正文失败：${error instanceof Error ? error.message : String(error)}`);
+      }
+    }
+    if (latestContent.trim()) {
+      setChapters(items => items.map(item => (
+        item.id === chapter.id
+          ? { ...item, content: latestContent }
+          : item
+      )));
+    }
     setSelectedId(chapter.id);
     setMode('正文模式');
   }
@@ -3981,7 +4057,7 @@ export function BidEditorPage(): JSX.Element {
                           压缩到目标
                         </Button>
                       ) : null}
-                      <Button type="link" size="small" icon={<Eye size={14} />} onClick={() => previewChapter(chapter)}>预览</Button>
+                      <Button type="link" size="small" icon={<Eye size={14} />} onClick={() => void previewChapter(chapter)}>预览</Button>
                       <Dropdown
                         trigger={['click']}
                         menu={{
@@ -4248,7 +4324,8 @@ export function BidEditorPage(): JSX.Element {
         <section className="editor-workspace">
           {selectedChapter ? (
             <TiptapBidEditor
-              content={selectedChapter.content || ''}
+              key={selectedChapter.id}
+              content={normalizeEditorChapterContent(selectedChapter)}
               onChange={handleEditorChange}
               onAiEdit={handleAiEdit}
               placeholder="开始编写标书章节内容..."

@@ -373,6 +373,8 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
   const { message: messageApi } = AntdApp.useApp();
   const lastExternalContent = useRef('');
   const lastEmittedContent = useRef('');
+  const externalContentApplied = useRef(false);
+  const suppressEmptyUpdateUntil = useRef(0);
   const signedUrlCache = useRef<Record<string, string>>({});
   const imageDisplayReleases = useRef<Array<() => void>>([]);
   const [aiEditingAction, setAiEditingAction] = useState<BidAiEditEditorAction | null>(null);
@@ -402,14 +404,18 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
 
   const editor = useEditor({
     extensions,
-    content: '<p></p>',
+    content: content ? markdownToHtml(content) : '<p></p>',
     editorProps: {
       attributes: {
         class: 'tiptap-bid-content',
       },
     },
     onUpdate({ editor: instance }) {
+      if (!externalContentApplied.current) return;
       const markdown = docToMarkdown(instance.getJSON());
+      if (!markdown.trim() && lastExternalContent.current.trim() && Date.now() < suppressEmptyUpdateUntil.current) {
+        return;
+      }
       lastEmittedContent.current = markdown;
       onChange?.(markdown);
     },
@@ -454,7 +460,11 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
   useEffect(() => {
     if (!editor) return;
     const incoming = content || '';
-    if (incoming === lastExternalContent.current || incoming === lastEmittedContent.current) return;
+    if (incoming === lastExternalContent.current || incoming === lastEmittedContent.current) {
+      externalContentApplied.current = true;
+      return;
+    }
+    externalContentApplied.current = false;
     lastExternalContent.current = incoming;
     let cancelled = false;
     let timer: number | undefined;
@@ -471,11 +481,15 @@ export function TiptapBidEditor({ content, onChange, placeholder, onAiEdit }: Ti
         releaseCurrentImageDisplays();
         imageDisplayReleases.current = releases;
         editor.commands.setContent(markdownToHtml(incoming, urls), false);
+        suppressEmptyUpdateUntil.current = incoming.trim() ? Date.now() + 800 : 0;
+        externalContentApplied.current = true;
       }, 0);
     }).catch(() => {
       timer = window.setTimeout(() => {
         if (!cancelled) {
           editor.commands.setContent(markdownToHtml(incoming), false);
+          suppressEmptyUpdateUntil.current = incoming.trim() ? Date.now() + 800 : 0;
+          externalContentApplied.current = true;
         }
       }, 0);
     });
