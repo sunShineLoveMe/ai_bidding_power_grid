@@ -1,8 +1,9 @@
 # 标书文档编写与正式导出质量待办清单
 
-更新日期：2026-06-28
+更新日期：2026-06-29
 
 > 项目级优先级以 `docs/development/master-todo.md` 为准。本文档保留 DOCX 正式导出专项详情、验收口径和历史验证记录。
+> 格式评审后续整改的优先级、状态和验收记录入口见：[DOCX 正式导出格式评审整改优先级清单](docx-export-format-priority-todo.md)。
 
 范围：标书正文编写、封面/目录/页眉页脚、图表与表格、DOCX 字段刷新、真实导出验收、后续 PDF/模板化能力。本文档用于管理客户最终交付物质量，优先级高于普通导出功能优化。
 
@@ -18,6 +19,7 @@
 - 若招标文件明确第六章格式、前附表或否决项要求，优先按招标文件要求。
 - 2026-06-26 客户新增的 `国家电网有限公司2026年西北、西藏区域第一次联合采购...招标文件包` 已审阅；该批资料定位为招标要求来源和技术参数/货物清单来源，不作为泰昌企业事实，也不作为投标正文视觉主模板直接套用。
 - 若未来客户重新提供可编辑 Word 模板，再进入 `template_docx` 模式；当前 MVP 不等待该资料。
+- 2026-06-29 专家评审输入已形成 `docs/development/docx-export-vs-customer-reference-review.md`；新疆技术/商务中标稿仅作为版式、目录组织、分册结构和交付观感参考，不作为唯一模板，也不复用其中企业事实、产品参数、证书、附件内容。后续整改按 `docs/development/docx-export-format-priority-todo.md` 跟踪。
 - 真实验证必须走项目导出链路：`build_project_bid_markdown` -> `convert_md_to_word` -> `refresh_docx_fields_with_soffice`，不得只用 mock 替代。
 - 2026-06-27 阿里云新疆 10kV 真实浏览器验收发现：客户真实长项目名会导致技术标 DOCX 导出任务因 `[Errno 36] File name too long` 失败；已将物理输出目录和文件名短名化。
 - 2026-06-27 本地辽宁 CPVC 包 1 完整真实回归已产出完整 DOCX，但 formal gate 判定为 `draft`：正式必填缺口 `16`、高风险缺口 `48`、正文残留 `待补充/需人工复核`，且封面包号未读取已确认值。记录见 `docs/development/runs/run_20260627_local_liaoning_full_e2e.md`。
@@ -29,6 +31,7 @@
 - 2026-06-28 针对辽宁 CPVC 真实流程大纲膨胀到 278 节问题增加供货类大纲门禁：供货类 AI 大纲强制保留参考结构、总章节上限 `140`、后台精修不得相对快速大纲明显膨胀，并在章节保存前清理模型生成的重复标题和 `【5.1 概述】` 式括号编号。记录见 `docs/development/runs/run_20260628_supply_outline_guardrails.md`。
 - 2026-06-28 服务重启后重新跑辽宁 CPVC/MPP 正式投标全流程：上传、解析、AI 解读、人工确认、75 个叶子章节正文生成、技术标/商务标/整体标书 DOCX 导出均真实完成；大纲稳定为 `102` 节，未复现 `278` 节膨胀。但导出仍降级为草稿版，整体标书 PDF 约 `499` 页，目录混入 `NHAP`，正文仍残留“待补充/人工复核”与 1 处施工类语义。记录见 `docs/development/runs/run_20260628_liaoning_formal_e2e_after_service_restart.md`。
 - 2026-06-28 辽宁 CPVC/MPP 正式导出 P0 修复后复测：技术标、商务标、完整标书均走真实导出链路，字段刷新 `refreshed`、图片插入失败 `0`、formal readiness `ready=true`。DOCX 文本/XML 审计确认 `待补充/人工复核/客户确认后填写/用户确认/占位符`、内部图片路径、`NHAP`、施工类口径和 `【5.1】` 类括号编号标题均为 `0`；正式检查 `62` 条规则中 `61` 通过、`0` 阻断、`0` 人工确认，仅保留 `Q-007` 人员证书资产误带“试验检测能力”标签的资料治理 warning。记录见 `docs/development/runs/run_20260628_liaoning_formal_e2e_p0_fixes_retained.md`。
+- 2026-06-29 DOCX 格式评审 P0 整改完成：技术标/商务标 profile 独立配置空页眉、纯 `PAGE` 页脚、`different_first_page_header_footer=false`、正文/表格/封面宋体；`formal_bid_standard` 通用模板不受影响。真实项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d` 技术标/商务标均完成 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice -> PDF export`，字段刷新 `refreshed`，DOCX XML 审计页眉无文本、无 `NUMPAGES`、无 `w:titlePg`、正文/表格字体样本为宋体。记录见 `docs/development/runs/run_20260629_docx_p0_format_regression.md`。
 
 ## P0 必须完成
 

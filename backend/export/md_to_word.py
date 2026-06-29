@@ -166,7 +166,13 @@ DOCX_TEMPLATE_PROFILES = {
         "toc_entry_font_size_pt": DOCX_TOC_ENTRY_FONT_SIZE,
         "toc_entry_line_spacing_pt": DOCX_TOC_ENTRY_LINE_SPACING,
         "toc_font": DOCX_BODY_EAST_ASIA,
+        "body_font": DOCX_BODY_EAST_ASIA,
+        "table_font": DOCX_TABLE_EAST_ASIA,
+        "cover_font": DOCX_BODY_EAST_ASIA,
         "header_footer_font": DOCX_BODY_EAST_ASIA,
+        "header_text_policy": "project_and_file_type",
+        "page_number_format": "page_x_of_y",
+        "different_first_page_header_footer": True,
         "toc_entry_bold_all": DOCX_TOC_ENTRY_BOLD_ALL,
         "table_header_fill": "EDEDED",
         "reference_outline": [],
@@ -190,7 +196,13 @@ DOCX_TEMPLATE_PROFILES = {
         "toc_entry_font_size_pt": 10.5,
         "toc_entry_line_spacing_pt": 15,
         "toc_font": "宋体",
+        "body_font": "宋体",
+        "table_font": "宋体",
+        "cover_font": "宋体",
         "header_footer_font": "宋体",
+        "header_text_policy": "blank",
+        "page_number_format": "plain_decimal",
+        "different_first_page_header_footer": False,
         "toc_entry_bold_all": False,
         "table_header_fill": "EDEDED",
         "reference_outline": [
@@ -222,7 +234,13 @@ DOCX_TEMPLATE_PROFILES = {
         "toc_entry_font_size_pt": 10.5,
         "toc_entry_line_spacing_pt": 15,
         "toc_font": "宋体",
+        "body_font": "宋体",
+        "table_font": "宋体",
+        "cover_font": "宋体",
         "header_footer_font": "宋体",
+        "header_text_policy": "blank",
+        "page_number_format": "plain_decimal",
+        "different_first_page_header_footer": False,
         "toc_entry_bold_all": False,
         "table_header_fill": "EDEDED",
         "reference_outline": [
@@ -309,6 +327,18 @@ def _template_profile_margins(profile: dict | None) -> dict:
         "left": float(margins.get("left", DOCX_PAGE_MARGIN_LEFT_CM)),
         "right": float(margins.get("right", DOCX_PAGE_MARGIN_RIGHT_CM)),
     }
+
+
+def _profile_body_font(profile: dict | None) -> str:
+    return str(_template_profile_value(profile, "body_font", DOCX_BODY_EAST_ASIA))
+
+
+def _profile_table_font(profile: dict | None) -> str:
+    return str(_template_profile_value(profile, "table_font", DOCX_TABLE_EAST_ASIA))
+
+
+def _profile_cover_font(profile: dict | None) -> str:
+    return str(_template_profile_value(profile, "cover_font", DOCX_BODY_EAST_ASIA))
 
 
 def clean_formal_bid_text(text):
@@ -713,6 +743,8 @@ def merge_bid_cover_fields(markdown_fields: dict | None, structured_fields: dict
 def docx_template_report(cover_fields: dict | None = None) -> dict:
     profile = resolve_docx_template_profile(cover_fields)
     header_file_type = clean_formal_bid_text((cover_fields or {}).get("文件类型") or "投标文件") or "投标文件"
+    header_text_policy = str(profile.get("header_text_policy") or "project_and_file_type")
+    page_number_format = str(profile.get("page_number_format") or "page_x_of_y")
     return {
         "template_id": profile.get("template_id") or DOCX_TEMPLATE_ID,
         "template_family": profile.get("template_family"),
@@ -722,7 +754,7 @@ def docx_template_report(cover_fields: dict | None = None) -> dict:
         "runtime_policy": profile.get("runtime_policy"),
         "reference_outline": profile.get("reference_outline") or [],
         "bidder_full_name": DOCX_BIDDER_FULL_NAME,
-        "body_font": DOCX_BODY_EAST_ASIA,
+        "body_font": _profile_body_font(profile),
         "body_latin_font": DOCX_BODY_LATIN,
         "body_font_size_pt": DOCX_BODY_FONT_SIZE,
         "body_line_spacing_rule": DOCX_BODY_LINE_SPACING_RULE,
@@ -739,7 +771,7 @@ def docx_template_report(cover_fields: dict | None = None) -> dict:
         "toc_entry_font_size_pt": float(profile.get("toc_entry_font_size_pt") or DOCX_TOC_ENTRY_FONT_SIZE),
         "toc_page_number_font_size_pt": DOCX_TOC_PAGE_NUMBER_FONT_SIZE,
         "toc_entry_line_spacing_pt": float(profile.get("toc_entry_line_spacing_pt") or DOCX_TOC_ENTRY_LINE_SPACING),
-        "table_font": DOCX_TABLE_EAST_ASIA,
+        "table_font": _profile_table_font(profile),
         "table_font_size_pt": DOCX_TABLE_FONT_SIZE,
         "table_line_spacing_pt": DOCX_TABLE_LINE_SPACING,
         "table_cell_margin_twips": DOCX_TABLE_CELL_MARGIN_TWIPS,
@@ -766,8 +798,11 @@ def docx_template_report(cover_fields: dict | None = None) -> dict:
             "footer_font_size_pt": DOCX_FOOTER_PAGE_NUMBER_FONT_SIZE,
             "header_logo": False,
             "text_color": "000000",
-            "page_number_format": "第 X 页 共 Y 页",
-            "header_text": f"左侧项目名称，右侧{header_file_type}",
+            "page_number_format": "纯数字页码" if page_number_format == "plain_decimal" else "第 X 页 共 Y 页",
+            "page_number_field": "PAGE" if page_number_format == "plain_decimal" else "PAGE + NUMPAGES",
+            "different_first_page_header_footer": bool(profile.get("different_first_page_header_footer", True)),
+            "header_text_policy": header_text_policy,
+            "header_text": "" if header_text_policy == "blank" else f"左侧项目名称，右侧{header_file_type}",
             "header_max_chars": DOCX_HEADER_MAX_CHARS,
         },
         "cover_fields": cover_fields or {},
@@ -795,7 +830,7 @@ def _formal_image_caption_text(text: str) -> str | None:
     return formalize_legacy_image_caption(value)
 
 
-def _add_formal_image_caption(doc, caption_text: str) -> None:
+def _add_formal_image_caption(doc, caption_text: str, template_profile: dict | None = None) -> None:
     paragraph = doc.add_paragraph()
     paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
     fmt = paragraph.paragraph_format
@@ -807,7 +842,7 @@ def _add_formal_image_caption(doc, caption_text: str) -> None:
     fmt.space_before = Pt(2)
     fmt.space_after = Pt(8)
     run = paragraph.add_run(caption_text)
-    apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_IMAGE_CAPTION_FONT_SIZE, bold=False)
+    apply_run_font(run, east_asia=_profile_body_font(template_profile), size=DOCX_IMAGE_CAPTION_FONT_SIZE, bold=False)
 
 
 def _markdown_heading_lines(md_content: str) -> tuple[int | None, list[dict]]:
@@ -1238,12 +1273,13 @@ def _formal_bracket_heading(text: str) -> tuple[str, str] | None:
     return (form_type, heading) if form_type else None
 
 
-def _add_formal_subheading(doc, text: str) -> None:
+def _add_formal_subheading(doc, text: str, template_profile: dict | None = None) -> None:
     paragraph = doc.add_paragraph()
     paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
     apply_heading_paragraph_format(paragraph, 3)
     run = paragraph.add_run(text)
-    apply_run_font(run, east_asia=DOCX_LEVEL3_EAST_ASIA, size=14, bold=True)
+    east_asia = _profile_body_font(template_profile) if _is_xinjiang_reference_profile(template_profile) else DOCX_LEVEL3_EAST_ASIA
+    apply_run_font(run, east_asia=east_asia, size=14, bold=True)
 
 
 def _add_body_subheading(doc, text: str, template_profile: dict | None = None) -> None:
@@ -1274,7 +1310,7 @@ def _formal_table_widths(header_cells: list[str], page_text_width: int, form_typ
     return widths
 
 
-def _add_formal_signature_paragraph(doc, text: str) -> None:
+def _add_formal_signature_paragraph(doc, text: str, template_profile: dict | None = None) -> None:
     paragraph = doc.add_paragraph()
     paragraph.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     fmt = paragraph.paragraph_format
@@ -1285,7 +1321,7 @@ def _add_formal_signature_paragraph(doc, text: str) -> None:
     fmt.space_before = Pt(0)
     fmt.space_after = Pt(0)
     run = paragraph.add_run(text)
-    apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_BODY_FONT_SIZE)
+    apply_run_font(run, east_asia=_profile_body_font(template_profile), size=DOCX_BODY_FONT_SIZE)
 
 
 def _set_paragraph_right_dot_leader_tab(paragraph, *, position_twips: int) -> None:
@@ -1328,6 +1364,33 @@ def _add_pageref_field(paragraph, bookmark_name: str, *, placeholder: str = "1",
 
     result = paragraph.add_run(placeholder)
     apply_run_font(result, east_asia=east_asia, size=size, bold=bold)
+
+    end = paragraph.add_run()
+    fld_end = OxmlElement("w:fldChar")
+    fld_end.set(qn("w:fldCharType"), "end")
+    end._r.append(fld_end)
+
+
+def _add_page_number_field(paragraph, *, placeholder: str = "1", size: float = DOCX_FOOTER_PAGE_NUMBER_FONT_SIZE, east_asia: str = DOCX_BODY_EAST_ASIA) -> None:
+    begin = paragraph.add_run()
+    fld_begin = OxmlElement("w:fldChar")
+    fld_begin.set(qn("w:fldCharType"), "begin")
+    _mark_field_dirty(fld_begin)
+    begin._r.append(fld_begin)
+
+    instr = paragraph.add_run()
+    instr_text = OxmlElement("w:instrText")
+    instr_text.set(qn("xml:space"), "preserve")
+    instr_text.text = " PAGE  \\* MERGEFORMAT "
+    instr._r.append(instr_text)
+
+    separate = paragraph.add_run()
+    fld_separate = OxmlElement("w:fldChar")
+    fld_separate.set(qn("w:fldCharType"), "separate")
+    separate._r.append(fld_separate)
+
+    result = paragraph.add_run(placeholder)
+    apply_run_font(result, east_asia=east_asia, size=size, bold=False)
 
     end = paragraph.add_run()
     fld_end = OxmlElement("w:fldChar")
@@ -1395,6 +1458,7 @@ def _add_cover_page(
     template_profile: dict | None = None,
 ) -> None:
     bid_title = taichang_bid_document_title((cover_fields or {}).get("项目名称") or project_name)
+    cover_font = _profile_cover_font(template_profile)
     if DOCX_COVER_SHOW_LOGO:
         logo_para = doc.add_paragraph()
         logo_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -1431,7 +1495,7 @@ def _add_cover_page(
         para.paragraph_format.space_before = Pt(0)
         para.paragraph_format.space_after = Pt(0)
         run = para.add_run(line)
-        apply_run_font(run, east_asia=DOCX_HEADING_EAST_ASIA, size=18, bold=True)
+        apply_run_font(run, east_asia=cover_font if _is_xinjiang_reference_profile(template_profile) else DOCX_HEADING_EAST_ASIA, size=18, bold=True)
 
     title = doc.add_paragraph()
     title.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -1446,7 +1510,7 @@ def _add_cover_page(
     if _is_xinjiang_reference_profile(template_profile):
         display_file_type = "投标文件"
     title_run = title.add_run(display_file_type)
-    apply_run_font(title_run, east_asia=DOCX_HEADING_EAST_ASIA, size=DOCX_COVER_TITLE_FONT_SIZE, bold=True)
+    apply_run_font(title_run, east_asia=cover_font if _is_xinjiang_reference_profile(template_profile) else DOCX_HEADING_EAST_ASIA, size=DOCX_COVER_TITLE_FONT_SIZE, bold=True)
 
     file_category = ""
     if _is_xinjiang_reference_profile(template_profile):
@@ -1475,7 +1539,7 @@ def _add_cover_page(
         para.paragraph_format.space_before = Pt(0)
         para.paragraph_format.space_after = Pt(0)
         run = para.add_run(f"{label}：{value}")
-        apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=14.04)
+        apply_run_font(run, east_asia=cover_font, size=14.04)
 
     bidder = doc.add_paragraph()
     bidder.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -1486,7 +1550,7 @@ def _add_cover_page(
     bidder.paragraph_format.space_after = Pt(0)
     bidder_suffix = "（盖单位章）" if _is_xinjiang_reference_profile(template_profile) else ""
     bidder_run = bidder.add_run(f"投标人：{DOCX_BIDDER_FULL_NAME}{bidder_suffix}")
-    apply_run_font(bidder_run, east_asia=DOCX_BODY_EAST_ASIA, size=12)
+    apply_run_font(bidder_run, east_asia=cover_font, size=12)
 
     signer_para = doc.add_paragraph()
     signer_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -1497,7 +1561,7 @@ def _add_cover_page(
     signer_para.paragraph_format.space_after = Pt(0)
     signer_text = "法定代表人（单位负责人）或其授权代表人：       （签字）" if _is_xinjiang_reference_profile(template_profile) else "法定代表人或其委托代理人：        （签名）"
     signer_run = signer_para.add_run(signer_text)
-    apply_run_font(signer_run, east_asia=DOCX_BODY_EAST_ASIA, size=12)
+    apply_run_font(signer_run, east_asia=cover_font, size=12)
 
     date_para = doc.add_paragraph()
     date_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -1507,7 +1571,7 @@ def _add_cover_page(
     date_para.paragraph_format.space_before = Pt(0)
     date_para.paragraph_format.space_after = Pt(0)
     date_run = date_para.add_run(datetime.today().strftime("%Y年%m月%d日"))
-    apply_run_font(date_run, east_asia=DOCX_BODY_EAST_ASIA, size=12)
+    apply_run_font(date_run, east_asia=cover_font, size=12)
     doc.add_page_break()
 
 
@@ -1531,7 +1595,7 @@ def _add_toc_page(doc, project_name: str, heading_entries: list[dict], cover_fie
         empty = doc.add_paragraph()
         empty.paragraph_format.first_line_indent = Pt(0)
         empty_run = empty.add_run("暂无章节目录，请先生成章节大纲。")
-        apply_run_font(empty_run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_BODY_FONT_SIZE)
+        apply_run_font(empty_run, east_asia=_profile_body_font(template_profile), size=DOCX_BODY_FONT_SIZE)
     tab_position_twips = _page_text_width_twips(doc)
     for entry in formal_entries:
         _add_formal_toc_entry(doc, entry, tab_position_twips=tab_position_twips, template_profile=template_profile)
@@ -1860,15 +1924,16 @@ def process_markdown_image(doc, alt_text, image_ref, image_cache=None, image_rep
         if prepared_cleanup and prepared_path and os.path.exists(prepared_path):
             os.unlink(prepared_path)
 
-def set_document_styles(doc):
+def set_document_styles(doc, template_profile: dict | None = None):
     """设置文档样式"""
+    body_font = _profile_body_font(template_profile)
     styles = doc.styles
     normal = styles['Normal']
-    normal.font.name = DOCX_BODY_EAST_ASIA
-    normal._element.rPr.rFonts.set(qn('w:ascii'), DOCX_BODY_EAST_ASIA)
-    normal._element.rPr.rFonts.set(qn('w:hAnsi'), DOCX_BODY_EAST_ASIA)
-    normal._element.rPr.rFonts.set(qn('w:eastAsia'), DOCX_BODY_EAST_ASIA)
-    normal._element.rPr.rFonts.set(qn('w:cs'), DOCX_BODY_EAST_ASIA)
+    normal.font.name = body_font
+    normal._element.rPr.rFonts.set(qn('w:ascii'), body_font)
+    normal._element.rPr.rFonts.set(qn('w:hAnsi'), body_font)
+    normal._element.rPr.rFonts.set(qn('w:eastAsia'), body_font)
+    normal._element.rPr.rFonts.set(qn('w:cs'), body_font)
     normal.font.size = Pt(DOCX_BODY_FONT_SIZE)
     normal.font.color.rgb = RGBColor(0, 0, 0)
     apply_body_line_spacing(normal.paragraph_format)
@@ -1902,11 +1967,11 @@ def set_document_styles(doc):
 
     for style_name in ['List Bullet', 'List Number']:
         style = styles[style_name]
-        style.font.name = DOCX_BODY_EAST_ASIA
-        style._element.rPr.rFonts.set(qn('w:ascii'), DOCX_BODY_EAST_ASIA)
-        style._element.rPr.rFonts.set(qn('w:hAnsi'), DOCX_BODY_EAST_ASIA)
-        style._element.rPr.rFonts.set(qn('w:eastAsia'), DOCX_BODY_EAST_ASIA)
-        style._element.rPr.rFonts.set(qn('w:cs'), DOCX_BODY_EAST_ASIA)
+        style.font.name = body_font
+        style._element.rPr.rFonts.set(qn('w:ascii'), body_font)
+        style._element.rPr.rFonts.set(qn('w:hAnsi'), body_font)
+        style._element.rPr.rFonts.set(qn('w:eastAsia'), body_font)
+        style._element.rPr.rFonts.set(qn('w:cs'), body_font)
         style.font.size = Pt(DOCX_BODY_FONT_SIZE)
         style.font.color.rgb = RGBColor(0, 0, 0)
         apply_body_line_spacing(style.paragraph_format)
@@ -1924,8 +1989,9 @@ def _set_rpr_language(rpr):
     lang.set(qn('w:eastAsia'), 'zh-CN')
     lang.set(qn('w:bidi'), 'zh-CN')
 
-def set_document_language(doc):
+def set_document_language(doc, template_profile: dict | None = None):
     """设置 DOCX 默认校对语言为简体中文，避免 ONLYOFFICE 状态栏显示 English - United States。"""
+    body_font = _profile_body_font(template_profile)
     styles_element = doc.styles.element
     doc_defaults = styles_element.find(qn('w:docDefaults'))
     if doc_defaults is None:
@@ -1941,7 +2007,7 @@ def set_document_language(doc):
     if rpr is None:
         rpr = OxmlElement('w:rPr')
         rpr_default.append(rpr)
-    _set_rfonts(rpr, east_asia=DOCX_BODY_EAST_ASIA)
+    _set_rfonts(rpr, east_asia=body_font)
     _set_font_size(rpr, DOCX_BODY_FONT_SIZE)
     _set_rpr_color(rpr)
     _set_rpr_language(rpr)
@@ -1950,7 +2016,7 @@ def set_document_language(doc):
         if style.type in {WD_STYLE_TYPE.PARAGRAPH, WD_STYLE_TYPE.CHARACTER, WD_STYLE_TYPE.TABLE}:
             rpr = style._element.get_or_add_rPr()
             if style.type in {WD_STYLE_TYPE.PARAGRAPH, WD_STYLE_TYPE.CHARACTER} and style.name in {"Normal", "Body Text", "List Bullet", "List Number"}:
-                _set_rfonts(rpr, east_asia=DOCX_BODY_EAST_ASIA)
+                _set_rfonts(rpr, east_asia=body_font)
                 _set_font_size(rpr, DOCX_BODY_FONT_SIZE)
             _set_rpr_color(rpr)
             _set_rpr_language(rpr)
@@ -1979,6 +2045,9 @@ def set_document_format(doc, project_name, image_report: dict | None = None, fil
     header_distance_cm = float(_template_profile_value(template_profile, "header_distance_cm", DOCX_HEADER_DISTANCE_CM))
     footer_distance_cm = float(_template_profile_value(template_profile, "footer_distance_cm", DOCX_FOOTER_DISTANCE_CM))
     header_footer_font = str(_template_profile_value(template_profile, "header_footer_font", DOCX_BODY_EAST_ASIA))
+    header_text_policy = str(_template_profile_value(template_profile, "header_text_policy", "project_and_file_type"))
+    page_number_format = str(_template_profile_value(template_profile, "page_number_format", "page_x_of_y"))
+    different_first_page = bool(_template_profile_value(template_profile, "different_first_page_header_footer", True))
     # 设置页面边距
     sections = doc.sections
     for section in sections:
@@ -1990,7 +2059,7 @@ def set_document_format(doc, project_name, image_report: dict | None = None, fil
         section.right_margin = Cm(margins["right"])
         section.header_distance = Cm(header_distance_cm)
         section.footer_distance = Cm(footer_distance_cm)
-        section.different_first_page_header_footer = True
+        section.different_first_page_header_footer = different_first_page
         first_header = section.first_page_header
         if first_header.paragraphs:
             first_header.paragraphs[0].text = ""
@@ -2014,44 +2083,54 @@ def set_document_format(doc, project_name, image_report: dict | None = None, fil
                 "inserted": False,
                 "reason": "formal_header_has_no_logo",
             }
-        header_left = _truncate_header_text(project_name, max_chars=DOCX_HEADER_MAX_CHARS)
-        header_file_type = clean_formal_bid_text(file_type or "投标文件") or "投标文件"
-        text_run = header_para.add_run(f"{header_left}\t{header_file_type}")
-        apply_run_font(text_run, east_asia=header_footer_font, size=9)
-        for run in header_para.runs:
-            apply_run_font(run, east_asia=header_footer_font, size=9)
+        if header_text_policy != "blank":
+            header_left = _truncate_header_text(project_name, max_chars=DOCX_HEADER_MAX_CHARS)
+            header_file_type = clean_formal_bid_text(file_type or "投标文件") or "投标文件"
+            text_run = header_para.add_run(f"{header_left}\t{header_file_type}")
+            apply_run_font(text_run, east_asia=header_footer_font, size=9)
+            for run in header_para.runs:
+                apply_run_font(run, east_asia=header_footer_font, size=9)
         
         # 添加页脚
         footer = section.footer
         footer_para = footer.paragraphs[0]
-        footer_para.text = "第 "
-        # 当前页码
-        run = footer_para.add_run()
-        fldChar1 = OxmlElement('w:fldChar')
-        fldChar1.set(qn('w:fldCharType'), 'begin')
-        _mark_field_dirty(fldChar1)
-        run._r.append(fldChar1)
-        instrText = OxmlElement('w:instrText')
-        instrText.text = 'PAGE'
-        run._r.append(instrText)
-        fldChar2 = OxmlElement('w:fldChar')
-        fldChar2.set(qn('w:fldCharType'), 'end')
-        run._r.append(fldChar2)
-        footer_para.add_run(" 页 共 ")
-        # 总页数
-        run = footer_para.add_run()
-        fldChar1 = OxmlElement('w:fldChar')
-        fldChar1.set(qn('w:fldCharType'), 'begin')
-        _mark_field_dirty(fldChar1)
-        run._r.append(fldChar1)
-        instrText = OxmlElement('w:instrText')
-        instrText.text = 'NUMPAGES'
-        run._r.append(instrText)
-        fldChar2 = OxmlElement('w:fldChar')
-        fldChar2.set(qn('w:fldCharType'), 'end')
-        run._r.append(fldChar2)
-        footer_para.add_run(" 页")
+        footer_para.text = ""
         footer_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        if page_number_format == "plain_decimal":
+            _add_page_number_field(
+                footer_para,
+                placeholder="1",
+                size=DOCX_FOOTER_PAGE_NUMBER_FONT_SIZE,
+                east_asia=header_footer_font,
+            )
+        else:
+            footer_para.add_run("第 ")
+            # 当前页码
+            run = footer_para.add_run()
+            fldChar1 = OxmlElement('w:fldChar')
+            fldChar1.set(qn('w:fldCharType'), 'begin')
+            _mark_field_dirty(fldChar1)
+            run._r.append(fldChar1)
+            instrText = OxmlElement('w:instrText')
+            instrText.text = 'PAGE'
+            run._r.append(instrText)
+            fldChar2 = OxmlElement('w:fldChar')
+            fldChar2.set(qn('w:fldCharType'), 'end')
+            run._r.append(fldChar2)
+            footer_para.add_run(" 页 共 ")
+            # 总页数
+            run = footer_para.add_run()
+            fldChar1 = OxmlElement('w:fldChar')
+            fldChar1.set(qn('w:fldCharType'), 'begin')
+            _mark_field_dirty(fldChar1)
+            run._r.append(fldChar1)
+            instrText = OxmlElement('w:instrText')
+            instrText.text = 'NUMPAGES'
+            run._r.append(instrText)
+            fldChar2 = OxmlElement('w:fldChar')
+            fldChar2.set(qn('w:fldCharType'), 'end')
+            run._r.append(fldChar2)
+            footer_para.add_run(" 页")
         for run in footer_para.runs:
             apply_run_font(run, east_asia=header_footer_font, size=9)
 
@@ -2067,6 +2146,7 @@ def process_table(md_table, doc, *, form_type: str | None = None, form_report: d
     
     # 创建表格
     table = doc.add_table(rows=1, cols=col_count)
+    table_font = _profile_table_font(template_profile)
     table.style = 'Table Grid'
     table.alignment = WD_TABLE_ALIGNMENT.CENTER
     table.autofit = False
@@ -2097,7 +2177,7 @@ def process_table(md_table, doc, *, form_type: str | None = None, form_report: d
             apply_table_paragraph_format(paragraph, alignment=WD_ALIGN_PARAGRAPH.CENTER)
             for run in paragraph.runs:
                 run.bold = True
-                apply_run_font(run, east_asia=DOCX_TABLE_EAST_ASIA, size=DOCX_TABLE_FONT_SIZE, bold=True)
+                apply_run_font(run, east_asia=table_font, size=DOCX_TABLE_FONT_SIZE, bold=True)
     
     # 添加数据行
     for line in lines[2:]:  # 跳过表头和分隔行
@@ -2119,7 +2199,7 @@ def process_table(md_table, doc, *, form_type: str | None = None, form_report: d
                 for paragraph in row.cells[i].paragraphs:
                     apply_table_paragraph_format(paragraph, alignment=alignment)
                     for run in paragraph.runs:
-                        apply_run_font(run, east_asia=DOCX_TABLE_EAST_ASIA, size=DOCX_TABLE_FONT_SIZE)
+                        apply_run_font(run, east_asia=table_font, size=DOCX_TABLE_FONT_SIZE)
 
 
 def _bool_env(name: str, default: bool = False) -> bool:
@@ -2266,8 +2346,9 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
 
     # 创建Word文档
     doc = Document()
-    set_document_styles(doc)
-    set_document_language(doc)
+    set_document_styles(doc, template_profile=template_profile)
+    set_document_language(doc, template_profile=template_profile)
+    body_font = _profile_body_font(template_profile)
     image_report = {
         "max_images": MARKDOWN_IMAGE_MAX_COUNT,
         "found": 0,
@@ -2341,7 +2422,7 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
                 if previous_form_type and previous_form_type != detected_form_type:
                     doc.add_page_break()
                     image_report["formal_forms"]["subheading_page_breaks"] += 1
-                _add_formal_subheading(doc, heading_text)
+                _add_formal_subheading(doc, heading_text, template_profile=template_profile)
                 image_report["formal_forms"]["subheadings"] += 1
             elif heading_text:
                 _add_body_subheading(doc, heading_text, template_profile=template_profile)
@@ -2376,7 +2457,7 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
                 if text:
                     p = doc.add_paragraph()
                     run = p.add_run(text)
-                    apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_BODY_FONT_SIZE)
+                    apply_run_font(run, east_asia=body_font, size=DOCX_BODY_FONT_SIZE)
                     apply_paragraph_format(p)
             continue
 
@@ -2457,7 +2538,7 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
             text = clean_formal_bid_text(re.sub(r'\*\*(.*?)\*\*', r'\1', text))
             p = doc.add_paragraph(style='List Bullet')
             run = p.add_run(text)
-            apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_BODY_FONT_SIZE)
+            apply_run_font(run, east_asia=body_font, size=DOCX_BODY_FONT_SIZE)
             apply_list_paragraph_format(p)
         
         # 处理数字列表。保留 Markdown 原始序号，避免 Word/LibreOffice 将全文
@@ -2471,7 +2552,7 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
             text = clean_formal_bid_text(re.sub(r'\*\*(.*?)\*\*', r'\1', text))
             p = doc.add_paragraph()
             run = p.add_run(f"{marker} {text}".strip())
-            apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_BODY_FONT_SIZE)
+            apply_run_font(run, east_asia=body_font, size=DOCX_BODY_FONT_SIZE)
             apply_list_paragraph_format(p)
         
         # 处理普通段落
@@ -2481,7 +2562,7 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
             bracket_heading = _formal_bracket_heading(text)
             caption_text = _formal_image_caption_text(text)
             if caption_text:
-                _add_formal_image_caption(doc, caption_text)
+                _add_formal_image_caption(doc, caption_text, template_profile=template_profile)
                 image_report["captions"]["detected"] += 1
                 image_report["captions"]["formalized"] += 1
                 if len(image_report["captions"]["samples"]) < 8:
@@ -2498,15 +2579,15 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
                 if previous_form_type and previous_form_type != current_form_type:
                     doc.add_page_break()
                     image_report["formal_forms"]["subheading_page_breaks"] += 1
-                _add_formal_subheading(doc, heading_text)
+                _add_formal_subheading(doc, heading_text, template_profile=template_profile)
                 image_report["formal_forms"]["subheadings"] += 1
             elif current_form_type and FORMAL_SIGNATURE_LINE_RE.match(text):
-                _add_formal_signature_paragraph(doc, text)
+                _add_formal_signature_paragraph(doc, text, template_profile=template_profile)
                 image_report["formal_forms"]["signature_lines"] += 1
             else:
                 p = doc.add_paragraph()
                 run = p.add_run(text)
-                apply_run_font(run, east_asia=DOCX_BODY_EAST_ASIA, size=DOCX_BODY_FONT_SIZE)
+                apply_run_font(run, east_asia=body_font, size=DOCX_BODY_FONT_SIZE)
                 apply_paragraph_format(p)
         
         i += 1

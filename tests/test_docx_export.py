@@ -1017,7 +1017,7 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertFalse(any(p.text.startswith("资料：之后继续编辑文字") for p in document.paragraphs))
             self.assertEqual(0, report["captions"]["formalized"])
 
-    def test_formal_bid_text_is_black_and_level_two_headings_start_new_page(self):
+    def test_formal_bid_text_is_black_and_major_headings_start_new_page(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             markdown_path = Path(tmpdir) / "black-pagination.md"
             markdown_path.write_text(
@@ -1026,7 +1026,8 @@ class DocxExportRegressionTest(unittest.TestCase):
             )
 
             output_path = convert_md_to_word(markdown_path)
-            self.assertTrue(should_start_heading_on_new_page(2, "1.1 投标函", 1))
+            self.assertFalse(should_start_heading_on_new_page(2, "1.1 投标函", 1))
+            self.assertTrue(should_start_heading_on_new_page(1, "2. 商务响应", 1))
             with ZipFile(output_path) as archive:
                 document_xml = archive.read("word/document.xml").decode("utf-8")
                 styles_xml = archive.read("word/styles.xml").decode("utf-8")
@@ -1613,6 +1614,12 @@ class DocxExportRegressionTest(unittest.TestCase):
                 for section in document.sections
                 for paragraph in section.header.paragraphs
             )
+            with ZipFile(output_path) as archive:
+                footer_xml = "\n".join(
+                    archive.read(name).decode("utf-8", errors="ignore")
+                    for name in archive.namelist()
+                    if name.startswith("word/footer")
+                )
 
         self.assertEqual(report["template"]["cover_fields"]["招标编号"], "2225AC")
         self.assertIn("国网辽宁电力2025年第三次物资协议", text)
@@ -1625,8 +1632,12 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertIn("包号：包1", text)
         self.assertIn("招标人：国网辽宁省电力有限公司", text)
         self.assertNotIn("招标编号：OLD-NO", cover_text)
-        self.assertIn("技术投标文件", header_text)
-        self.assertEqual(report["template"]["header_footer"]["header_text"], "左侧项目名称，右侧技术投标文件")
+        self.assertEqual("", header_text.strip())
+        self.assertEqual(report["template"]["header_footer"]["header_text"], "")
+        self.assertEqual(report["template"]["header_footer"]["header_text_policy"], "blank")
+        self.assertEqual(report["template"]["header_footer"]["page_number_field"], "PAGE")
+        self.assertIn("PAGE", footer_xml)
+        self.assertNotIn("NUMPAGES", footer_xml)
 
     def test_technical_bid_reference_profile_uses_volume_template_layout_and_toc_depth(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1645,6 +1656,10 @@ class DocxExportRegressionTest(unittest.TestCase):
                         "#### 附:技术规范点对点应答",
                         "",
                         "正文内容。",
+                        "",
+                        "| 参数 | 响应 |",
+                        "| --- | --- |",
+                        "| 额定电压 | 满足 |",
                     ]
                 ),
                 encoding="utf-8",
@@ -1665,6 +1680,20 @@ class DocxExportRegressionTest(unittest.TestCase):
             full_text = "\n".join(p.text for p in document.paragraphs)
             cover_paragraphs = [p.text for p in document.paragraphs[:12] if p.text.strip()]
             first_heading = next(p for p in document.paragraphs if p.text == "（一）技术偏差表")
+            body_paragraph = next(p for p in document.paragraphs if p.text == "正文内容。")
+            table_run = document.tables[0].cell(1, 1).paragraphs[0].runs[0]
+            header_text = "\n".join(
+                paragraph.text
+                for doc_section in document.sections
+                for paragraph in doc_section.header.paragraphs
+            )
+            with ZipFile(output_path) as archive:
+                document_xml = archive.read("word/document.xml").decode("utf-8", errors="ignore")
+                footer_xml = "\n".join(
+                    archive.read(name).decode("utf-8", errors="ignore")
+                    for name in archive.namelist()
+                    if name.startswith("word/footer")
+                )
 
         self.assertEqual("technical_bid_standard", report["template"]["template_id"])
         self.assertEqual("formal_bid_xinjiang_sgcc_reference", report["template"]["template_family"])
@@ -1672,11 +1701,27 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertIn("技术规范点对点应答", report["template"]["reference_outline"])
         self.assertEqual(4, report["template"]["toc_max_level"])
         self.assertEqual("宋体", report["template"]["toc_font"])
+        self.assertEqual("宋体", report["template"]["body_font"])
+        self.assertEqual("宋体", report["template"]["table_font"])
         self.assertEqual("宋体", report["template"]["header_footer"]["header_font"])
+        self.assertEqual("", report["template"]["header_footer"]["header_text"])
+        self.assertEqual("blank", report["template"]["header_footer"]["header_text_policy"])
+        self.assertEqual("纯数字页码", report["template"]["header_footer"]["page_number_format"])
+        self.assertEqual("PAGE", report["template"]["header_footer"]["page_number_field"])
+        self.assertFalse(report["template"]["header_footer"]["different_first_page_header_footer"])
         self.assertEqual(3.17, report["template"]["margins_cm"]["left"])
         self.assertEqual(3.17, round(section.left_margin.cm, 2))
         self.assertEqual(3.17, round(section.right_margin.cm, 2))
         self.assertEqual(1.5, round(section.header_distance.cm, 1))
+        self.assertFalse(section.different_first_page_header_footer)
+        self.assertEqual("", header_text.strip())
+        self.assertNotIn("w:titlePg", document_xml)
+        self.assertIn("PAGE", footer_xml)
+        self.assertNotIn("NUMPAGES", footer_xml)
+        self.assertNotIn(">第<", footer_xml)
+        self.assertNotIn(">共<", footer_xml)
+        self.assertEqual("宋体", body_paragraph.runs[0]._element.rPr.rFonts.get(qn("w:eastAsia")))
+        self.assertEqual("宋体", table_run._element.rPr.rFonts.get(qn("w:eastAsia")))
         self.assertIn("投标文件", cover_paragraphs)
         self.assertIn("文件类别：技术", cover_paragraphs)
         self.assertIn(f"投标人：{DOCX_BIDDER_FULL_NAME}（盖单位章）", full_text)
@@ -1724,6 +1769,10 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertIn("商务偏差表", report["template"]["reference_outline"])
         self.assertIn("查询报告及截图", report["template"]["reference_outline"])
         self.assertEqual("宋体", report["template"]["toc_font"])
+        self.assertEqual("宋体", report["template"]["body_font"])
+        self.assertEqual("宋体", report["template"]["table_font"])
+        self.assertEqual("", report["template"]["header_footer"]["header_text"])
+        self.assertEqual("PAGE", report["template"]["header_footer"]["page_number_field"])
         self.assertIn("禁止复用参考稿企业事实", report["template"]["runtime_policy"])
 
     def test_formal_form_subheading_switch_starts_on_new_page(self):
