@@ -2687,7 +2687,8 @@ def convert_md_to_word(md_file, return_report: bool = False, cover_fields: dict 
         body_subheading_match = BODY_SUBHEADING_COMMENT_RE.match(line)
         if body_subheading_match:
             heading_text = clean_formal_bid_text(body_subheading_match.group(1)).strip()
-            detected_form_type = _formal_form_type(heading_text)
+            has_explicit_outline_number = bool(re.match(r"^\d+(?:\.\d+)*[\.、]?\s+", heading_text))
+            detected_form_type = None if has_explicit_outline_number else _formal_form_type(heading_text)
             if detected_form_type:
                 previous_form_type = current_form_type
                 current_form_type = detected_form_type

@@ -409,12 +409,24 @@ def _strip_redundant_section_label(content: str, section: dict) -> str:
 
 
 BODY_SUBHEADING_COMMENT_PREFIX = "BID_BODY_SUBHEADING:"
+BODY_SUBHEADING_COMMENT_RE = re.compile(r"^<!--\s*BID_BODY_SUBHEADING:\s*(.+?)\s*-->\s*$")
 EXPORT_GUIDANCE_LABELS = {
     "编写要点",
     "需准备资料",
     "风险与复核",
     "投标确认清单",
     "投标确认清单：",
+}
+GENERIC_BODY_OUTLINE_HEADINGS = {
+    "商务文件",
+    "技术文件",
+    "投标文件",
+    "商务响应文件",
+    "技术响应文件",
+    "商务投标文件",
+    "技术投标文件",
+    "商务分册",
+    "技术分册",
 }
 
 
@@ -622,8 +634,14 @@ def _demote_body_markdown_headings(content: str) -> str:
     return "\n".join(output).strip()
 
 
-def _extract_body_heading_candidate(stripped: str) -> tuple[str, int | None] | None:
-    if not stripped or stripped.startswith("<!--"):
+def _extract_body_heading_candidate(stripped: str) -> tuple[str, int | None, bool] | None:
+    if not stripped:
+        return None
+    comment_match = BODY_SUBHEADING_COMMENT_RE.match(stripped)
+    from_comment = bool(comment_match)
+    if comment_match:
+        stripped = comment_match.group(1).strip()
+    elif stripped.startswith("<!--"):
         return None
     stripped = re.sub(r"\*\*(.*?)\*\*", r"\1", stripped).strip()
     bracket_match = re.match(r"^【\s*(.+?)\s*】$", stripped)
@@ -637,18 +655,18 @@ def _extract_body_heading_candidate(stripped: str) -> tuple[str, int | None] | N
         body = numeric_match.group(2).strip().strip("【】[]（）() ：:、，,。")
         if "：" in body[:16] or ":" in body[:16] or body.endswith(("。", "；", ";")):
             return None
-        return (body or _strip_existing_section_number(heading), len(numeric_match.group(1).split(".")))
+        return (body or _strip_existing_section_number(heading), len(numeric_match.group(1).split(".")), from_comment)
     chinese_match = re.match(r"^[一二三四五六七八九十百]+[、.．]\s*(.+?)\s*$", heading)
     if chinese_match:
-        return (_strip_existing_section_number(heading), 1)
+        return (_strip_existing_section_number(heading), 1, from_comment)
     chapter_match = re.match(r"^第[一二三四五六七八九十百]+[章节篇部分]\s*(.+?)\s*$", heading)
     if chapter_match:
         clean = _strip_existing_section_number(heading)
-        if clean in {"商务文件", "技术文件", "投标文件", "商务响应文件", "技术响应文件"}:
+        if clean in GENERIC_BODY_OUTLINE_HEADINGS:
             return None
-        return (clean, 1)
+        return (clean, 1, from_comment)
     if bracket_match and len(heading) <= 24 and not heading.endswith(("。", "；", ";")):
-        return (_strip_existing_section_number(heading), None)
+        return (_strip_existing_section_number(heading), None, from_comment)
     return None
 
 
@@ -659,6 +677,14 @@ def _normalize_body_outline_lines(content: str, section: dict) -> str:
     base_order = str(section.get("_export_order") or section.get("order") or "").strip()
     if not base_order:
         return content.strip()
+    section_title = _strip_existing_section_number(section.get("title") or section.get("_export_title") or "")
+
+    def should_skip_body_heading(clean_title: str) -> bool:
+        if not clean_title:
+            return False
+        if section_title and clean_title == section_title:
+            return True
+        return clean_title in GENERIC_BODY_OUTLINE_HEADINGS
 
     candidates: list[tuple[int, int | None]] = []
     in_fence = False
@@ -672,7 +698,9 @@ def _normalize_body_outline_lines(content: str, section: dict) -> str:
             continue
         candidate = _extract_body_heading_candidate(stripped)
         if candidate:
-            _, depth = candidate
+            clean_title, depth, _ = candidate
+            if should_skip_body_heading(clean_title):
+                continue
             candidates.append((index, depth))
     numeric_depths = [depth for _, depth in candidates if depth]
     min_numeric_depth = min(numeric_depths) if numeric_depths else None
@@ -693,13 +721,13 @@ def _normalize_body_outline_lines(content: str, section: dict) -> str:
         if not candidate:
             output.append(raw_line)
             continue
-        clean_title, explicit_depth = candidate
-        relative_depth = (
-            explicit_depth - (min_numeric_depth or explicit_depth) + 1
-            if explicit_depth
-            else 1
-        )
-        relative_depth = max(1, min(relative_depth, 4))
+        clean_title, explicit_depth, from_comment = candidate
+        if should_skip_body_heading(clean_title):
+            continue
+        # 正式目录层级只来自 bid_sections。正文里的 Markdown 标题、加粗伪标题、
+        # 旧模板编号和 `BID_BODY_SUBHEADING` 都只能作为当前章节下一级正文小标题，
+        # 否则商务标/完整投标文件会叠出 2.10.1.1.2、6.1.2.1.1.1.1 等深层串号。
+        relative_depth = 1
         while len(counters) < relative_depth:
             counters.append(0)
         counters = counters[:relative_depth]
@@ -710,6 +738,11 @@ def _normalize_body_outline_lines(content: str, section: dict) -> str:
         next_order = ".".join([base_order, *[str(value) for value in counters]])
         output.append(_body_subheading_comment(f"{next_order} {clean_title}"))
     return "\n".join(output).strip()
+
+
+def _full_export_should_use_sgcc_mixed_numbering(sections: list[dict]) -> bool:
+    delivery_volumes = {delivery_volume_type(section) for section in sections}
+    return {"business", "technical"}.issubset(delivery_volumes)
 
 
 def _strip_untrusted_export_images(content: str, *, remove_all: bool = False) -> str:
@@ -1458,11 +1491,14 @@ def build_project_bid_markdown(
     export_image_report["cover_fields"] = report_cover_fields
     missing_required = formal_required_confirmation_gaps(confirmed_values)
     template_profile = resolve_docx_template_profile(report_cover_fields)
+    numbering_style = str(template_profile.get("section_numbering_style") or "decimal_outline")
+    if not focus_section_id and not volume_type and _full_export_should_use_sgcc_mixed_numbering(sections):
+        numbering_style = "sgcc_mixed"
     export_image_report["formal_readiness"] = {
         "template_id": template_profile.get("template_id") or "formal_bid_standard",
         "template_family": template_profile.get("template_family"),
         "reference_path": template_profile.get("reference_path"),
-        "section_numbering_style": template_profile.get("section_numbering_style") or "decimal_outline",
+        "section_numbering_style": numbering_style,
         "reference_template_policy": "tender_format_then_customer_reference_then_system_default",
         "bidder": DOCX_BIDDER_FULL_NAME,
         "empty_section_count": empty_section_count,
@@ -1513,7 +1549,6 @@ def build_project_bid_markdown(
     }
     chunks: list[str] = [f"# {document_title}\n\n"]
     used_asset_ids: set[str] = set()
-    numbering_style = str(template_profile.get("section_numbering_style") or "decimal_outline")
     for section in _numbered_export_sections(sections, numbering_style=numbering_style):
         title = section.get("_export_title") or _section_display_title(section)
         container_section = is_container_section(section)

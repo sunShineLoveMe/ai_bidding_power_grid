@@ -15,6 +15,7 @@ from backend.api.routes import (
     build_project_bid_markdown,
     _asset_allowed_for_bid,
     _demote_body_markdown_headings,
+    _full_export_should_use_sgcc_mixed_numbering,
     _normalize_body_outline_lines,
     _numbered_export_sections,
     _renumber_body_markdown_headings,
@@ -91,11 +92,30 @@ class DocxExportRegressionTest(unittest.TestCase):
 
         self.assertIn("<!-- BID_BODY_SUBHEADING: 1.1 概述 -->", normalized)
         self.assertIn("<!-- BID_BODY_SUBHEADING: 1.2 技术方案与产品性能响应 -->", normalized)
-        self.assertIn("<!-- BID_BODY_SUBHEADING: 1.2.1 产品执行标准与技术要求 -->", normalized)
-        self.assertIn("<!-- BID_BODY_SUBHEADING: 1.2.2 产品关键技术参数 -->", normalized)
+        self.assertIn("<!-- BID_BODY_SUBHEADING: 1.3 产品执行标准与技术要求 -->", normalized)
+        self.assertIn("<!-- BID_BODY_SUBHEADING: 1.4 产品关键技术参数 -->", normalized)
         self.assertIn("1. 投标意愿与范围：这仍然是正文列表。", normalized)
         self.assertNotIn("【", normalized)
         self.assertNotIn("】", normalized)
+
+    def test_stale_body_subheading_comments_are_renumbered_and_generic_volume_titles_removed(self):
+        content = "\n".join(
+            [
+                "<!-- BID_BODY_SUBHEADING: 6.1.1 商务投标文件 -->",
+                "<!-- BID_BODY_SUBHEADING: 6.1.1.1 投标函 -->",
+                "致：国网辽宁省电力有限公司",
+                "<!-- BID_BODY_SUBHEADING: 6.1.1.2 商务条款响应 -->",
+                "正文。",
+            ]
+        )
+
+        normalized = _normalize_body_outline_lines(content, {"_export_order": "10.1", "title": "资格预审结果通知书"})
+
+        self.assertNotIn("商务投标文件", normalized)
+        self.assertNotIn("6.1.1", normalized)
+        self.assertIn("<!-- BID_BODY_SUBHEADING: 10.1.1 投标函 -->", normalized)
+        self.assertIn("<!-- BID_BODY_SUBHEADING: 10.1.2 商务条款响应 -->", normalized)
+        self.assertIn("致：国网辽宁省电力有限公司", normalized)
 
     def test_export_guidance_blocks_are_removed_from_formal_docx_content(self):
         content = "\n".join(
@@ -437,6 +457,23 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertIn("## 1.1.1 供货范围", normalized)
         self.assertIn("### 1.1.1.1 技术响应说明", normalized)
         self.assertNotIn("2.1", normalized)
+
+    def test_full_export_uses_sgcc_mixed_numbering_when_business_and_technical_volumes_exist(self):
+        sections = [
+            {"id": "biz-root", "level": 1, "title": "商务响应文件", "metadata": {"volume_type": "business"}},
+            {"id": "biz-leaf", "level": 2, "title": "符合招标文件投标人资格要求的证明文件", "metadata": {"volume_type": "qualification"}},
+            {"id": "tech-root", "level": 1, "title": "技术响应文件", "metadata": {"volume_type": "technical"}},
+            {"id": "tech-leaf", "level": 2, "title": "技术偏差表", "metadata": {"volume_type": "technical"}},
+        ]
+
+        self.assertTrue(_full_export_should_use_sgcc_mixed_numbering(sections))
+        numbered = _numbered_export_sections(sections, numbering_style="sgcc_mixed")
+
+        self.assertEqual("（一）商务响应文件", numbered[0]["_export_title"])
+        self.assertEqual("1. 符合招标文件投标人资格要求的证明文件", numbered[1]["_export_title"])
+        self.assertEqual("（二）技术响应文件", numbered[2]["_export_title"])
+        self.assertEqual("1. 技术偏差表", numbered[3]["_export_title"])
+        self.assertNotIn("1.2", numbered[1]["_export_title"])
 
     def test_bid_markdown_export_prefers_editor_snapshot_over_stale_database_sections(self):
         project_id = "11111111-1111-1111-1111-111111111111"
