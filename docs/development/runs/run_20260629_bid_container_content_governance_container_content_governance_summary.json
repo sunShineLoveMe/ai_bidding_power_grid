@@ -1,0 +1,694 @@
+{
+  "run_id": "run_20260629_bid_container_content_governance",
+  "project_id": "a1d853bc-ca4e-43b4-bbea-256f561c8a3d",
+  "timestamp": "2026-06-29T09:31:16Z",
+  "apply": true,
+  "clear_content": true,
+  "backup_path": "docs/development/runs/run_20260629_bid_container_content_governance_container_content_backup.json",
+  "container_count": 27,
+  "nonempty_container_count": 27,
+  "internal_guidance_count": 0,
+  "formal_overview_candidate_count": 27,
+  "updated_count": 27,
+  "updated": [
+    {
+      "id": "264e9dd1-3cc7-4ee4-9251-ef973c629c27",
+      "title": "投标函及法定格式文件",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 3014,
+      "content_cleared": true
+    },
+    {
+      "id": "94f534f8-3bf8-4bad-8de6-26da222af6a4",
+      "title": "商务响应文件",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 3033,
+      "content_cleared": true
+    },
+    {
+      "id": "b3e4594b-c107-47f0-8587-dc79bc4bbcaa",
+      "title": "投标保证金",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 1695,
+      "content_cleared": true
+    },
+    {
+      "id": "546994ab-ea64-41e7-866a-4e2289aa1457",
+      "title": "保险购买凭证",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 1299,
+      "content_cleared": true
+    },
+    {
+      "id": "5bd48484-85ab-4799-85e0-60f6925596df",
+      "title": "投标人基本情况表",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 1098,
+      "content_cleared": true
+    },
+    {
+      "id": "6966a5d3-43b3-4df0-ad2c-a1d020329027",
+      "title": "符合招标文件投标人资格要求的证明文件",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 3519,
+      "content_cleared": true
+    },
+    {
+      "id": "911dbffb-d8d1-4fc4-8604-e401a60cd1d2",
+      "title": "符合投标邀请书投标人资格要求的证明文件（更新或补充）",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 3723,
+      "content_cleared": true
+    },
+    {
+      "id": "52fda0c1-3c11-474e-9e50-73f093ecc133",
+      "title": "认证证书",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 2441,
+      "content_cleared": true
+    },
+    {
+      "id": "31fcb4b3-1344-499e-a52e-6a37a68e8ea1",
+      "title": "查询报告及截图",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 2266,
+      "content_cleared": true
+    },
+    {
+      "id": "5278e8cf-7210-49e3-8f5a-0fc5392817b9",
+      "title": "（7） “国家企业信用信息公示系统”",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 1321,
+      "content_cleared": true
+    },
+    {
+      "id": "62b6b9b0-4c52-433f-9ce9-6cf45e55f5fc",
+      "title": "财务信息、股权结构说明书及支持证明材料",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 2087,
+      "content_cleared": true
+    },
+    {
+      "id": "d83551bc-696d-4719-a35f-632bd6c2bf48",
+      "title": "招标文件第三章评标办法前附表之三“商务评分标准”涉及的支撑材料",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 3624,
+      "content_cleared": true
+    },
+    {
+      "id": "86d7644d-14c8-43ee-94ff-3be3d62e971a",
+      "title": "履约能力评价",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 2973,
+      "content_cleared": true
+    },
+    {
+      "id": "490b2695-be74-4d05-abc7-a106276b0e0a",
+      "title": "技术响应文件",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 6966,
+      "content_cleared": true
+    },
+    {
+      "id": "c4f8afc5-3127-430a-9d49-5d651e9d3dc2",
+      "title": "业绩文件",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 3407,
+      "content_cleared": true
+    },
+    {
+      "id": "d49ad687-5441-4b31-96d6-55b4d2f3e5a0",
+      "title": "新增业绩合同",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 2760,
+      "content_cleared": true
+    },
+    {
+      "id": "d4d9161f-3d00-4a84-bd74-cf5d80bc3c56",
+      "title": "技术特性参数表",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 2395,
+      "content_cleared": true
+    },
+    {
+      "id": "2718baaf-f4c6-4222-a800-d21d5b67c8f7",
+      "title": "符合招标文件投标人资格要求的证明文件",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 4896,
+      "content_cleared": true
+    },
+    {
+      "id": "23c9f1c1-fef5-46b2-a43c-9e5d8a488a95",
+      "title": "招标文件第三章评标办法前附表 之四“技术评分标准”涉及的支撑材料",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 11489,
+      "content_cleared": true
+    },
+    {
+      "id": "6c82c50e-2ed8-4cfd-9eb6-323aa9957f7e",
+      "title": "创新能力",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 4189,
+      "content_cleared": true
+    },
+    {
+      "id": "c043f900-235a-4130-b678-d1cbe9137f4c",
+      "title": "专利证书",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 606,
+      "content_cleared": true
+    },
+    {
+      "id": "f7d52433-ff0a-4e6d-8c08-d02f2915c406",
+      "title": "中华人民共和国国家版权局计算机软件著作权登记证书",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 2286,
+      "content_cleared": true
+    },
+    {
+      "id": "8f6656f9-6705-498d-9212-42ff7078ace1",
+      "title": "原材料组部件改进",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 4505,
+      "content_cleared": true
+    },
+    {
+      "id": "90206fc7-01e5-46c5-be39-bf4ddf3c3257",
+      "title": "自主可控水平",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 4959,
+      "content_cleared": true
+    },
+    {
+      "id": "9553d884-ba50-43a5-9329-6fbbfaa6c020",
+      "title": "产品制造质量控制",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 4195,
+      "content_cleared": true
+    },
+    {
+      "id": "f489b073-6387-4c13-840e-78e95100df26",
+      "title": "绿电绿证",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 2454,
+      "content_cleared": true
+    },
+    {
+      "id": "17088251-842c-46a8-8cdc-374ecdb105b9",
+      "title": "绿色低碳生产",
+      "classification": "formal_overview_candidate",
+      "content_chars_before": 4493,
+      "content_cleared": true
+    }
+  ],
+  "formal_overview_candidates": [
+    {
+      "id": "264e9dd1-3cc7-4ee4-9251-ef973c629c27",
+      "order_index": 1,
+      "level": 1,
+      "title": "投标函及法定格式文件",
+      "content_chars": 3014,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "94f534f8-3bf8-4bad-8de6-26da222af6a4",
+      "order_index": 5,
+      "level": 1,
+      "title": "商务响应文件",
+      "content_chars": 3033,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "b3e4594b-c107-47f0-8587-dc79bc4bbcaa",
+      "order_index": 12,
+      "level": 2,
+      "title": "投标保证金",
+      "content_chars": 1695,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "546994ab-ea64-41e7-866a-4e2289aa1457",
+      "order_index": 13,
+      "level": 3,
+      "title": "保险购买凭证",
+      "content_chars": 1299,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "5bd48484-85ab-4799-85e0-60f6925596df",
+      "order_index": 19,
+      "level": 2,
+      "title": "投标人基本情况表",
+      "content_chars": 1098,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "6966a5d3-43b3-4df0-ad2c-a1d020329027",
+      "order_index": 23,
+      "level": 2,
+      "title": "符合招标文件投标人资格要求的证明文件",
+      "content_chars": 3519,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "911dbffb-d8d1-4fc4-8604-e401a60cd1d2",
+      "order_index": 24,
+      "level": 3,
+      "title": "符合投标邀请书投标人资格要求的证明文件（更新或补充）",
+      "content_chars": 3723,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "52fda0c1-3c11-474e-9e50-73f093ecc133",
+      "order_index": 27,
+      "level": 4,
+      "title": "认证证书",
+      "content_chars": 2441,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "31fcb4b3-1344-499e-a52e-6a37a68e8ea1",
+      "order_index": 35,
+      "level": 3,
+      "title": "查询报告及截图",
+      "content_chars": 2266,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "5278e8cf-7210-49e3-8f5a-0fc5392817b9",
+      "order_index": 43,
+      "level": 3,
+      "title": "（7） “国家企业信用信息公示系统”",
+      "content_chars": 1321,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "62b6b9b0-4c52-433f-9ce9-6cf45e55f5fc",
+      "order_index": 45,
+      "level": 2,
+      "title": "财务信息、股权结构说明书及支持证明材料",
+      "content_chars": 2087,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "d83551bc-696d-4719-a35f-632bd6c2bf48",
+      "order_index": 48,
+      "level": 2,
+      "title": "招标文件第三章评标办法前附表之三“商务评分标准”涉及的支撑材料",
+      "content_chars": 3624,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "86d7644d-14c8-43ee-94ff-3be3d62e971a",
+      "order_index": 49,
+      "level": 3,
+      "title": "履约能力评价",
+      "content_chars": 2973,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "490b2695-be74-4d05-abc7-a106276b0e0a",
+      "order_index": 52,
+      "level": 1,
+      "title": "技术响应文件",
+      "content_chars": 6966,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "c4f8afc5-3127-430a-9d49-5d651e9d3dc2",
+      "order_index": 55,
+      "level": 2,
+      "title": "业绩文件",
+      "content_chars": 3407,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "d49ad687-5441-4b31-96d6-55b4d2f3e5a0",
+      "order_index": 58,
+      "level": 3,
+      "title": "新增业绩合同",
+      "content_chars": 2760,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "d4d9161f-3d00-4a84-bd74-cf5d80bc3c56",
+      "order_index": 61,
+      "level": 2,
+      "title": "技术特性参数表",
+      "content_chars": 2395,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "2718baaf-f4c6-4222-a800-d21d5b67c8f7",
+      "order_index": 64,
+      "level": 2,
+      "title": "符合招标文件投标人资格要求的证明文件",
+      "content_chars": 4896,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "23c9f1c1-fef5-46b2-a43c-9e5d8a488a95",
+      "order_index": 67,
+      "level": 2,
+      "title": "招标文件第三章评标办法前附表 之四“技术评分标准”涉及的支撑材料",
+      "content_chars": 11489,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "6c82c50e-2ed8-4cfd-9eb6-323aa9957f7e",
+      "order_index": 68,
+      "level": 3,
+      "title": "创新能力",
+      "content_chars": 4189,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "c043f900-235a-4130-b678-d1cbe9137f4c",
+      "order_index": 69,
+      "level": 4,
+      "title": "专利证书",
+      "content_chars": 606,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "f7d52433-ff0a-4e6d-8c08-d02f2915c406",
+      "order_index": 71,
+      "level": 4,
+      "title": "中华人民共和国国家版权局计算机软件著作权登记证书",
+      "content_chars": 2286,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "8f6656f9-6705-498d-9212-42ff7078ace1",
+      "order_index": 73,
+      "level": 3,
+      "title": "原材料组部件改进",
+      "content_chars": 4505,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "90206fc7-01e5-46c5-be39-bf4ddf3c3257",
+      "order_index": 75,
+      "level": 3,
+      "title": "自主可控水平",
+      "content_chars": 4959,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "9553d884-ba50-43a5-9329-6fbbfaa6c020",
+      "order_index": 79,
+      "level": 3,
+      "title": "产品制造质量控制",
+      "content_chars": 4195,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "f489b073-6387-4c13-840e-78e95100df26",
+      "order_index": 84,
+      "level": 3,
+      "title": "绿电绿证",
+      "content_chars": 2454,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "17088251-842c-46a8-8cdc-374ecdb105b9",
+      "order_index": 89,
+      "level": 3,
+      "title": "绿色低碳生产",
+      "content_chars": 4493,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    }
+  ],
+  "containers": [
+    {
+      "id": "264e9dd1-3cc7-4ee4-9251-ef973c629c27",
+      "order_index": 1,
+      "level": 1,
+      "title": "投标函及法定格式文件",
+      "content_chars": 3014,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "94f534f8-3bf8-4bad-8de6-26da222af6a4",
+      "order_index": 5,
+      "level": 1,
+      "title": "商务响应文件",
+      "content_chars": 3033,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "b3e4594b-c107-47f0-8587-dc79bc4bbcaa",
+      "order_index": 12,
+      "level": 2,
+      "title": "投标保证金",
+      "content_chars": 1695,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "546994ab-ea64-41e7-866a-4e2289aa1457",
+      "order_index": 13,
+      "level": 3,
+      "title": "保险购买凭证",
+      "content_chars": 1299,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "5bd48484-85ab-4799-85e0-60f6925596df",
+      "order_index": 19,
+      "level": 2,
+      "title": "投标人基本情况表",
+      "content_chars": 1098,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "6966a5d3-43b3-4df0-ad2c-a1d020329027",
+      "order_index": 23,
+      "level": 2,
+      "title": "符合招标文件投标人资格要求的证明文件",
+      "content_chars": 3519,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "911dbffb-d8d1-4fc4-8604-e401a60cd1d2",
+      "order_index": 24,
+      "level": 3,
+      "title": "符合投标邀请书投标人资格要求的证明文件（更新或补充）",
+      "content_chars": 3723,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "52fda0c1-3c11-474e-9e50-73f093ecc133",
+      "order_index": 27,
+      "level": 4,
+      "title": "认证证书",
+      "content_chars": 2441,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "31fcb4b3-1344-499e-a52e-6a37a68e8ea1",
+      "order_index": 35,
+      "level": 3,
+      "title": "查询报告及截图",
+      "content_chars": 2266,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "5278e8cf-7210-49e3-8f5a-0fc5392817b9",
+      "order_index": 43,
+      "level": 3,
+      "title": "（7） “国家企业信用信息公示系统”",
+      "content_chars": 1321,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "62b6b9b0-4c52-433f-9ce9-6cf45e55f5fc",
+      "order_index": 45,
+      "level": 2,
+      "title": "财务信息、股权结构说明书及支持证明材料",
+      "content_chars": 2087,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "d83551bc-696d-4719-a35f-632bd6c2bf48",
+      "order_index": 48,
+      "level": 2,
+      "title": "招标文件第三章评标办法前附表之三“商务评分标准”涉及的支撑材料",
+      "content_chars": 3624,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "86d7644d-14c8-43ee-94ff-3be3d62e971a",
+      "order_index": 49,
+      "level": 3,
+      "title": "履约能力评价",
+      "content_chars": 2973,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "490b2695-be74-4d05-abc7-a106276b0e0a",
+      "order_index": 52,
+      "level": 1,
+      "title": "技术响应文件",
+      "content_chars": 6966,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "c4f8afc5-3127-430a-9d49-5d651e9d3dc2",
+      "order_index": 55,
+      "level": 2,
+      "title": "业绩文件",
+      "content_chars": 3407,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "d49ad687-5441-4b31-96d6-55b4d2f3e5a0",
+      "order_index": 58,
+      "level": 3,
+      "title": "新增业绩合同",
+      "content_chars": 2760,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "d4d9161f-3d00-4a84-bd74-cf5d80bc3c56",
+      "order_index": 61,
+      "level": 2,
+      "title": "技术特性参数表",
+      "content_chars": 2395,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "2718baaf-f4c6-4222-a800-d21d5b67c8f7",
+      "order_index": 64,
+      "level": 2,
+      "title": "符合招标文件投标人资格要求的证明文件",
+      "content_chars": 4896,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "23c9f1c1-fef5-46b2-a43c-9e5d8a488a95",
+      "order_index": 67,
+      "level": 2,
+      "title": "招标文件第三章评标办法前附表 之四“技术评分标准”涉及的支撑材料",
+      "content_chars": 11489,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "6c82c50e-2ed8-4cfd-9eb6-323aa9957f7e",
+      "order_index": 68,
+      "level": 3,
+      "title": "创新能力",
+      "content_chars": 4189,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "c043f900-235a-4130-b678-d1cbe9137f4c",
+      "order_index": 69,
+      "level": 4,
+      "title": "专利证书",
+      "content_chars": 606,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "f7d52433-ff0a-4e6d-8c08-d02f2915c406",
+      "order_index": 71,
+      "level": 4,
+      "title": "中华人民共和国国家版权局计算机软件著作权登记证书",
+      "content_chars": 2286,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "8f6656f9-6705-498d-9212-42ff7078ace1",
+      "order_index": 73,
+      "level": 3,
+      "title": "原材料组部件改进",
+      "content_chars": 4505,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "90206fc7-01e5-46c5-be39-bf4ddf3c3257",
+      "order_index": 75,
+      "level": 3,
+      "title": "自主可控水平",
+      "content_chars": 4959,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "9553d884-ba50-43a5-9329-6fbbfaa6c020",
+      "order_index": 79,
+      "level": 3,
+      "title": "产品制造质量控制",
+      "content_chars": 4195,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "f489b073-6387-4c13-840e-78e95100df26",
+      "order_index": 84,
+      "level": 3,
+      "title": "绿电绿证",
+      "content_chars": 2454,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    },
+    {
+      "id": "17088251-842c-46a8-8cdc-374ecdb105b9",
+      "order_index": 89,
+      "level": 3,
+      "title": "绿色低碳生产",
+      "content_chars": 4493,
+      "classification": "formal_overview_candidate",
+      "guidance_hits": []
+    }
+  ]
+}
