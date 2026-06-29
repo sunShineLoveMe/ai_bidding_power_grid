@@ -42,8 +42,8 @@
 | 部署目录 | `/opt/ai-bidding/ai_bidding_power_grid` |
 | Git 来源 | `git@gitee.com:mainiutech/ai-bid.git` |
 | 测试分支 | `feat/aliyun-test-readiness` |
-| 测试入口 | `http://8.160.187.226:8080` |
-| 正式演示入口 | 设置 `FRONTEND_HTTP_PORT=80` 后使用 `http://8.160.187.226` |
+| 当前公网入口 | `http://8.160.187.226`（80 端口） |
+| 历史测试入口 | `http://8.160.187.226:8080`，仅作为旧记录或临时排障备用 |
 | 时区 | `Asia/Shanghai` |
 
 > 公网 IP、分支和端口是当前测试环境基线。环境迁移后，应先更新本节，再执行本文命令。
@@ -53,7 +53,7 @@
 ```text
 外部浏览器
     |
-    | TCP 8080（测试）/ TCP 80（正式演示）
+    | TCP 80（当前公网入口）
     v
 Frontend / Nginx
     |
@@ -77,7 +77,7 @@ Celery Worker ---------------------+
 | `redis` | `ai-bidding-redis` | `16379 -> 6379` | Celery 队列和运行态 | 部分 |
 | `backend` | `ai-bidding-backend` | `3012 -> 8000` | API、解析、检索、导出 | 否 |
 | `celery-worker` | `ai-bidding-celery-worker` | 无公网端口 | 异步解析、生成任务 | 否 |
-| `frontend` | `ai-bidding-frontend` | `${FRONTEND_HTTP_PORT:-8080} -> 80` | Web 静态文件和 API 反代 | 否 |
+| `frontend` | `ai-bidding-frontend` | `${FRONTEND_HTTP_PORT:-80} -> 80` | Web 静态文件和 API 反代 | 否 |
 
 持久化数据位于 Docker volumes：
 
@@ -162,7 +162,7 @@ systemctl is-active docker
 
 - 公网只开放业务入口和受控 SSH；
 - `15432`、`16379`、`3012` 不得通过阿里云安全组对公网开放；
-- 测试期入口为 `8080`，正式环境应迁移到域名、HTTPS 和 `80/443`；
+- 当前阿里云测试环境统一使用 80 端口入口 `http://8.160.187.226`；`8080` 仅作为历史测试口径或临时排障备用，不再作为默认客户入口；
 - SSH `22` 应限制为办公出口 IP 或临时白名单。
 
 ### 5.2 密钥与配置
@@ -181,7 +181,7 @@ STORAGE_PROVIDER=local
 CONTAINER_SOFFICE_BIN=/usr/bin/soffice
 ```
 
-当前使用 HTTP 测试入口，因此 `APP_COOKIE_SECURE=false`。启用 HTTPS 后应改为：
+当前使用 HTTP 80 入口，因此 `APP_COOKIE_SECURE=false`。启用 HTTPS 后应改为：
 
 ```text
 APP_COOKIE_SECURE=true
@@ -276,7 +276,7 @@ git log -1 --oneline
 git status --short
 docker compose ps
 df -h
-curl -fsS http://127.0.0.1:8080/api/health
+curl -fsS http://127.0.0.1/api/health
 ```
 
 记录发布前 commit：
@@ -333,8 +333,8 @@ docker compose ps frontend
 验证：
 
 ```bash
-curl -fsS -I http://127.0.0.1:8080/
-curl -fsS http://127.0.0.1:8080/build-info.json
+curl -fsS -I http://127.0.0.1/
+curl -fsS http://127.0.0.1/build-info.json
 docker compose exec frontend sh -lc 'cat /usr/share/nginx/html/build-info.json'
 docker compose logs --tail=100 frontend
 ```
@@ -434,8 +434,8 @@ docker compose ps backend celery-worker
 
 ```bash
 curl -fsS http://127.0.0.1:3012/api/health
-curl -fsS http://127.0.0.1:8080/api/health
-curl -fsS http://127.0.0.1:8080/api/ready
+curl -fsS http://127.0.0.1/api/health
+curl -fsS http://127.0.0.1/api/ready
 docker compose logs --tail=100 backend
 docker compose logs --tail=100 celery-worker
 ```
@@ -460,10 +460,10 @@ docker compose ps
 
 ```bash
 curl -fsS http://127.0.0.1:3012/api/health
-curl -fsS http://127.0.0.1:8080/api/health
-curl -fsS http://127.0.0.1:8080/api/ready
-curl -fsS http://127.0.0.1:8080/build-info.json
-curl -fsS -I http://127.0.0.1:8080/
+curl -fsS http://127.0.0.1/api/health
+curl -fsS http://127.0.0.1/api/ready
+curl -fsS http://127.0.0.1/build-info.json
+curl -fsS -I http://127.0.0.1/
 ```
 
 ### 7.6 客户验收前强制干净发布
@@ -532,7 +532,7 @@ echo "target=${TARGET_COMMIT}"
 
 curl -fsS http://127.0.0.1:3012/api/health
 curl -fsS http://127.0.0.1:3012/api/ready
-curl -fsS http://127.0.0.1:${FRONTEND_HTTP_PORT:-80}/build-info.json || curl -fsS http://127.0.0.1:8080/build-info.json
+curl -fsS http://127.0.0.1:${FRONTEND_HTTP_PORT:-80}/build-info.json || curl -fsS http://127.0.0.1/build-info.json
 docker compose exec frontend sh -lc 'cat /usr/share/nginx/html/build-info.json'
 ```
 
@@ -555,7 +555,7 @@ git clean -fdx
 
 ### 7.7 公网 80 入口切换
 
-正式演示入口需要使用 `http://8.160.187.226` 时，先确认阿里云安全组放通 TCP `80`，再执行：
+当前阿里云入口统一使用 `http://8.160.187.226`。发布前先确认阿里云安全组放通 TCP `80`，并确保 `.env` 中固定以下配置：
 
 ```bash
 cd /opt/ai-bidding/ai_bidding_power_grid
@@ -566,7 +566,7 @@ curl -fsS http://127.0.0.1/api/health
 curl -fsS -I http://127.0.0.1/
 ```
 
-若继续使用测试端口，保持 `FRONTEND_HTTP_PORT=8080` 或不设置该变量，并告知客户入口为 `http://8.160.187.226:8080`。
+除非临时排障，不再使用 `http://8.160.187.226:8080` 作为客户入口；如临时启用 8080，必须同步说明访问口径并在排障后恢复 80。
 
 ### 7.8 数据库迁移发布
 
@@ -757,9 +757,9 @@ docker compose restart backend celery-worker frontend
 
 ```bash
 curl -fsS http://127.0.0.1:3012/api/health
-curl -fsS http://127.0.0.1:8080/api/health
-curl -fsS http://127.0.0.1:8080/api/ready
-curl -fsS -I http://127.0.0.1:8080/
+curl -fsS http://127.0.0.1/api/health
+curl -fsS http://127.0.0.1/api/ready
+curl -fsS -I http://127.0.0.1/
 docker compose exec backend soffice --version
 ```
 
@@ -837,7 +837,7 @@ cat <备份文件.dump> | docker compose exec -T postgres pg_restore \
 
 ```bash
 docker compose start backend celery-worker frontend
-curl -fsS http://127.0.0.1:8080/api/ready
+curl -fsS http://127.0.0.1/api/ready
 ```
 
 ## 11. 版本回滚
@@ -887,9 +887,9 @@ docker compose up -d --force-recreate backend celery-worker
 ```bash
 docker compose ps
 curl -fsS http://127.0.0.1:3012/api/health
-curl -fsS http://127.0.0.1:8080/api/health
-curl -fsS http://127.0.0.1:8080/api/ready
-curl -fsS -I http://127.0.0.1:8080/
+curl -fsS http://127.0.0.1/api/health
+curl -fsS http://127.0.0.1/api/ready
+curl -fsS -I http://127.0.0.1/
 ```
 
 成功标准：
@@ -923,7 +923,7 @@ curl -fsS -I http://127.0.0.1:8080/
 ```bash
 cd /opt/ai-bidding/ai_bidding_power_grid
 docker compose ps
-curl -fsS http://127.0.0.1:8080/api/ready
+curl -fsS http://127.0.0.1/api/ready
 df -h
 docker system df
 ```
@@ -984,7 +984,7 @@ docker volume prune
 ```bash
 git log -1 --oneline
 git status --short
-curl -fsS http://127.0.0.1:8080/build-info.json
+curl -fsS http://127.0.0.1/build-info.json
 docker compose exec frontend sh -lc 'ls -lh /usr/share/nginx/html/assets | head'
 ```
 
@@ -995,7 +995,7 @@ docker compose exec frontend sh -lc 'ls -lh /usr/share/nginx/html/assets | head'
 检查就绪接口：
 
 ```bash
-curl -i http://127.0.0.1:8080/api/ready
+curl -i http://127.0.0.1/api/ready
 ```
 
 根据返回的 `checks` 排查 PostgreSQL、Redis、存储、模型 Key 或 pgvector RPC。

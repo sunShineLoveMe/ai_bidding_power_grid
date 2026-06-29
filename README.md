@@ -205,7 +205,7 @@ cd frontend && npm run dev
 
 ### 阿里云测试环境部署
 
-阿里云单企业测试环境采用 Ubuntu 22.04 + Docker Compose + 单 ECS 形态，当前约定代码来源为 Gitee `feat/aliyun-test-readiness` 分支。开发人员或运维人员接手部署时，优先阅读：
+阿里云单企业测试环境采用 Ubuntu 22.04 + Docker Compose + 单 ECS 形态，当前约定代码来源为 Gitee `feat/aliyun-test-readiness` 分支，公网入口为 `http://8.160.187.226`（80 端口）。开发人员或运维人员接手部署时，优先阅读：
 
 - [阿里云 Ubuntu 单 ECS 测试部署操作清单](docs/deployment/aliyun-ubuntu-single-ecs-deploy-checklist-20260622.md)：从 ECS 初始化、Git 拉取、`.env`、Docker Compose、数据库初始化到真实验收的逐步执行清单。
 - [阿里云单 ECS 部署与运维交接手册](docs/deployment/aliyun-single-ecs-developer-operations-guide.md)：面向日常发布、客户验收前强制干净发布、版本校验、缓存排障、备份和回滚。
@@ -335,7 +335,7 @@ Docker 镜像（`Dockerfile.backend`）已默认用 gunicorn 启动，无需手�
 CMD ["gunicorn", "-c", "gunicorn.conf.py", "main:app"]
 ```
 
-容器内监听 8000，由 `docker-compose.yml` 映射到宿主机 `3012`（直连后端）或经 Nginx（前端入口 `8080`）反代。生产环境必须启用一种访问控制（登录 / 静态令牌 / 仅本地），否则后端会拒绝启动，详见 [安全配置](docs/deployment/security.md)。
+容器内监听 8000，由 `docker-compose.yml` 映射到宿主机 `3012`（直连后端）或经 Nginx（当前阿里云入口为 80 端口）反代。生产环境必须启用一种访问控制（登录 / 静态令牌 / 仅本地），否则后端会拒绝启动，详见 [安全配置](docs/deployment/security.md)。
 
 #### 关于 `python main.py`
 

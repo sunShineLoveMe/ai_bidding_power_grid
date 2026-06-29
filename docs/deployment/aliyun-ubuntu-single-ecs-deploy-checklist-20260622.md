@@ -1,6 +1,6 @@
 # 阿里云 Ubuntu 单 ECS 测试部署操作清单
 
-更新日期：2026-06-27
+更新日期：2026-06-29
 适用环境：阿里云 ECS 单企业测试环境  
 当前实例：`launch-advisor-20260604`  
 公网 IP：`8.160.187.226`  
@@ -8,6 +8,7 @@
 规格：`8 vCPU / 16 GiB / 200 GiB ESSD Entry / 5 Mbps`
 代码来源：Gitee `git@gitee.com:mainiutech/ai-bid.git`  
 部署分支：`feat/aliyun-test-readiness`
+当前公网入口：`http://8.160.187.226`（80 端口）
 
 ## 目标
 
@@ -360,7 +361,7 @@ docker compose up -d --force-recreate frontend
 docker compose exec frontend sh -lc 'ls -lh /usr/share/nginx/html/assets | head'
 docker compose exec frontend sh -lc 'grep -R "<关键字符串>" -n /usr/share/nginx/html/assets | head'
 docker compose exec frontend sh -lc 'cat /usr/share/nginx/html/build-info.json'
-curl -fsS http://127.0.0.1/build-info.json || curl -fsS http://127.0.0.1:8080/build-info.json
+curl -fsS http://127.0.0.1/build-info.json
 curl -fsS http://8.160.187.226/build-info.json
 ```
 
@@ -421,7 +422,7 @@ docker compose ps
 
 ```bash
 curl -fsS http://127.0.0.1:3012/api/health
-curl -fsS http://127.0.0.1:8080/api/health
+curl -fsS http://127.0.0.1/api/health
 docker compose logs --tail=100 backend
 docker compose logs --tail=100 celery-worker
 ```
@@ -460,10 +461,10 @@ docker compose ps
 
 ```bash
 curl -fsS http://127.0.0.1:3012/api/health
-curl -fsS http://127.0.0.1:8080/api/health
-curl -fsS http://127.0.0.1:8080/api/ready
-curl -fsS http://127.0.0.1:8080/build-info.json
-curl -fsS -I http://127.0.0.1:8080/
+curl -fsS http://127.0.0.1/api/health
+curl -fsS http://127.0.0.1/api/ready
+curl -fsS http://127.0.0.1/build-info.json
+curl -fsS -I http://127.0.0.1/
 ```
 
 #### 4.1.6 客户验收或缓存排障强制干净发布 SOP
@@ -541,7 +542,7 @@ echo "target=${TARGET_COMMIT}"
 
 curl -fsS http://127.0.0.1:3012/api/health
 curl -fsS http://127.0.0.1:3012/api/ready
-curl -fsS http://127.0.0.1:${FRONTEND_HTTP_PORT:-80}/build-info.json || curl -fsS http://127.0.0.1:8080/build-info.json
+curl -fsS http://127.0.0.1:${FRONTEND_HTTP_PORT:-80}/build-info.json || curl -fsS http://127.0.0.1/build-info.json
 docker compose exec frontend sh -lc 'cat /usr/share/nginx/html/build-info.json'
 ```
 
@@ -669,8 +670,8 @@ openssl rand -hex 32
 | --- | --- | --- | --- |
 | [ ] | 复制 `.env.example` | `.env` 存在 | |
 | [ ] | 设置生产测试基础项 | `APP_ENV=production` | 测试也按生产启动约束 |
-| [ ] | 配置公网访问地址 | `APP_PUBLIC_BASE_URL=http://8.160.187.226` | 后续有域名再改；若继续使用测试端口则临时写 `http://8.160.187.226:8080` |
-| [ ] | 配置前端公网端口 | 正式演示入口设置 `FRONTEND_HTTP_PORT=80`；测试端口可保持默认 `8080` | `docker-compose.yml` 已支持 `${FRONTEND_HTTP_PORT:-8080}:80` |
+| [ ] | 配置公网访问地址 | `APP_PUBLIC_BASE_URL=http://8.160.187.226` | 当前阿里云统一使用 80 端口；后续有域名再改 |
+| [ ] | 配置前端公网端口 | `FRONTEND_HTTP_PORT=80` | 80 是当前客户访问入口；8080 仅作为历史测试或临时排障备用 |
 | [ ] | 配置数据库密码 | `POSTGRES_PASSWORD` 非默认弱口令 | 不提交 Git |
 | [ ] | 配置登录/会话密钥 | `APP_SESSION_SECRET` 已生成随机值 | |
 | [x] | 配置 DeepSeek Key | 模型调用可用 | 本地使用云上 `.env.aliyun.local` 验证 `chat/completions` 返回正常 |
@@ -706,7 +707,7 @@ docker compose ps
 | [x] | Redis 启动 | `redis` 状态 healthy | 端口映射 `16379->6379` |
 | [x] | Backend 启动 | `backend` 状态 healthy | 端口映射 `3012->8000` |
 | [x] | Celery Worker 启动 | `celery-worker` 状态 healthy | 已启动并 healthy |
-| [x] | Frontend 启动 | `frontend` 状态 healthy | 本机 `8080` 首页返回 200；`compose ps` 截图时仍在 health starting，需后续复查一次 |
+| [x] | Frontend 启动 | `frontend` 状态 healthy | 当前公网入口使用 80；历史 `8080` 仅作为早期测试记录 |
 
 ## 7. 基础健康检查
 
@@ -714,8 +715,8 @@ docker compose ps
 
 ```bash
 curl -fsS http://127.0.0.1:3012/api/health
-curl -fsS http://127.0.0.1:${FRONTEND_HTTP_PORT:-8080}/api/health
-curl -fsS -I http://127.0.0.1:${FRONTEND_HTTP_PORT:-8080}/
+curl -fsS http://127.0.0.1/api/health
+curl -fsS -I http://127.0.0.1/
 ```
 
 外部本机浏览器访问：
@@ -724,13 +725,13 @@ curl -fsS -I http://127.0.0.1:${FRONTEND_HTTP_PORT:-8080}/
 http://8.160.187.226
 ```
 
-公网 80 作为客户演示入口时，在服务器 `.env` 中设置：
+公网 80 是当前客户访问入口，在服务器 `.env` 中固定设置：
 
 ```bash
 FRONTEND_HTTP_PORT=80
 APP_PUBLIC_BASE_URL=http://8.160.187.226
 APP_HOST=8.160.187.226
-APP_CORS_ORIGINS=http://8.160.187.226,http://8.160.187.226:8080
+APP_CORS_ORIGINS=http://8.160.187.226,http://localhost,http://127.0.0.1
 docker compose up -d frontend backend celery-worker
 ```
 
@@ -742,20 +743,14 @@ curl -fsS -I http://127.0.0.1/
 curl -fsS -I http://8.160.187.226/
 ```
 
-如果暂时不调整 80 入口，测试期可继续访问：
-
-```text
-http://8.160.187.226:8080
-```
-
-但若使用 `8080`，必须临时开放安全组 `8080`，并明确告知客户测试入口包含端口号。`80` 和 `8080` 不建议长期同时作为正式入口，避免客户访问口径混乱。
+`8080` 不再作为默认客户入口。只有临时排障时才可启用，并且必须同步说明访问口径，排障后恢复 80。
 
 | 状态 | 任务 | 验收口径 | 备注 |
 | --- | --- | --- | --- |
 | [x] | 后端本机健康检查 | `/api/health` 返回 200 | `127.0.0.1:3012` 返回 `{"status":"ok"}` |
-| [x] | 前端反代健康检查 | `/api/health` 返回 200 | `127.0.0.1:8080` 返回 `{"status":"ok"}` |
+| [x] | 前端反代健康检查 | `/api/health` 返回 200 | 当前按 `127.0.0.1/api/health` 验证 80 入口 |
 | [x] | 前端首页本机访问 | `curl -I` 返回 200 | `HTTP/1.1 200 OK`，Nginx `1.27.5` |
-| [x] | 公网浏览器访问 | 能打开登录页/首页 | `http://8.160.187.226:8080` 已能打开登录页；当前仍是测试端口 |
+| [x] | 公网浏览器访问 | 能打开登录页/首页 | 当前入口为 `http://8.160.187.226` |
 
 ## 8. 数据库扩展与初始化检查
 
