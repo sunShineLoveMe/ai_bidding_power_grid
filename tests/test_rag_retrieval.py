@@ -61,6 +61,21 @@ class _RpcClient:
 
 
 class RagRetrievalQualityTest(unittest.TestCase):
+    def test_legal_representative_query_requires_business_license_evidence(self):
+        from backend.rag import retrieval
+
+        self.assertIn("business_license", retrieval._required_evidence_intents("这家公司的法人代表是谁？"))
+        self.assertIn("business_license", retrieval._required_evidence_intents("法定代表人是谁？"))
+
+    def test_business_license_intent_detects_enterprise_basic_info_text(self):
+        from backend.rag import retrieval
+
+        intents = retrieval._evidence_intents_from_text(
+            "企业名称河北泰昌电力器材科技有限公司 统一社会信用代码91130607056539515C 法定代表人晁坤琳"
+        )
+
+        self.assertIn("business_license", intents)
+
     def test_invalidate_chunk_keyword_cache_clears_rows_and_fingerprint(self):
         from backend.rag import retrieval
 

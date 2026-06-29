@@ -49,6 +49,10 @@ from backend.rag.retrieval import (
     search_knowledge_base,
     stream_knowledge_answer,
 )
+from backend.rag.enterprise_facts import (
+    is_enterprise_basic_info_query,
+    search_taichang_enterprise_fact_contexts,
+)
 from backend.rag.product_parameters import search_taichang_product_parameter_contexts
 from backend.rag.project_performance import search_taichang_project_performance_contexts
 
@@ -281,6 +285,17 @@ def _enterprise_context_intent_bonus(query: str, context: dict[str, Any]) -> flo
         ]
     )
     bonus = 0.0
+    if is_enterprise_basic_info_query(query):
+        if meta.get("source_category") == "structured_enterprise_fact_pack":
+            bonus += 1.0
+        if meta.get("evidence_type") == "business_license" or "营业执照" in text:
+            bonus += 0.75
+        if any(keyword in text for keyword in ["企业信用报告", "公共信用信息报告", "工商基础信息"]):
+            bonus += 0.45
+        if meta.get("evidence_type") == "enterprise_profile" or any(keyword in text for keyword in ["宣传彩页", "宣传册"]):
+            bonus -= 0.55
+        if any(keyword in text for keyword in ["人员花名册", "劳动合同", "委托代表人"]):
+            bonus -= 0.35
     if any(keyword in query for keyword in ["资质证书", "体系认证", "认证证书"]):
         if any(name in text for name in ["质量管理体系认证证书", "环境管理体系认证证书", "职业健康安全管理体系认证证书"]):
             bonus += 0.65
@@ -309,6 +324,8 @@ def _query_evidence_scope(query: str) -> str | None:
     text = query or ""
     if _is_certification_query(text):
         return "formal_certification"
+    if is_enterprise_basic_info_query(text):
+        return "enterprise_basic_info"
     if any(keyword in text for keyword in ["绿色低碳", "绿色发展", "绿色供应链", "ESG", "碳足迹", "废水废气", "废水废气废固"]):
         return "green_low_carbon"
     if any(keyword in text for keyword in ["人员证书", "社保证明", "参保证明", "劳动合同", "人员花名册"]):
@@ -361,7 +378,23 @@ def _context_matches_query_scope(context: dict[str, Any], scope: str | None) -> 
     if scope == "testing_capacity":
         return evidence_type == "testing_capacity" or any(keyword in text for keyword in ["试验检测设备", "检测设备", "试验设备"])
     if scope == "business_license":
-        return evidence_type == "business_license" or "营业执照" in text
+        return (
+            evidence_type == "business_license"
+            or meta.get("source_category") == "structured_enterprise_fact_pack"
+            or "营业执照" in text
+            or "工商基础信息" in text
+        )
+    if scope == "enterprise_basic_info":
+        if meta.get("source_category") == "structured_enterprise_fact_pack":
+            return True
+        if evidence_type == "business_license":
+            return True
+        if any(keyword in text for keyword in ["企业信用报告", "公共信用信息报告", "工商基础信息"]):
+            return True
+        return "营业执照" in text and any(
+            keyword in text
+            for keyword in ["法定代表人", "法人代表", "统一社会信用代码", "注册资本", "成立日期", "注册地址"]
+        )
     return True
 
 
@@ -418,7 +451,7 @@ def _filter_assets_for_query_scope(assets: list[dict[str, Any]], query: str) -> 
     if not scope:
         return assets
     filtered = [asset for asset in assets if _asset_matches_query_scope(asset, scope)]
-    if filtered or scope == "formal_certification":
+    if filtered or scope in {"formal_certification", "business_license", "enterprise_basic_info"}:
         return filtered
     return assets
     return _is_formal_certification_context(context)
@@ -448,7 +481,7 @@ def _curate_pilot_enterprise_contexts(
     scope = _query_evidence_scope(query)
     if scope:
         scoped_contexts = [item for item in ranked if _context_matches_query_scope(item, scope)]
-        if scoped_contexts or scope == "formal_certification":
+        if scoped_contexts or scope in {"formal_certification", "business_license", "enterprise_basic_info"}:
             return scoped_contexts[:limit]
     return ranked[:limit]
 
@@ -614,8 +647,9 @@ def search_knowledge():
         )
         parameter_contexts = search_taichang_product_parameter_contexts(query, limit=5)
         performance_contexts = search_taichang_project_performance_contexts(query, limit=3)
+        enterprise_fact_contexts = search_taichang_enterprise_fact_contexts(query, limit=2)
         contexts = _curate_pilot_enterprise_contexts(contexts, limit=5, query=query)
-        contexts = (performance_contexts + parameter_contexts + contexts)[:5]
+        contexts = (enterprise_fact_contexts + performance_contexts + parameter_contexts + contexts)[:5]
         contexts = sanitize_source_contexts(contexts)
         asset_metadata_filter = _asset_metadata_filter_from_query(
             query,
@@ -626,7 +660,7 @@ def search_knowledge():
             search_knowledge_assets(query, match_count=12, metadata_filter=asset_metadata_filter)[:8]
         )
         assets = _filter_assets_for_query_scope(assets, query)
-        contexts = _merge_asset_source_contexts(contexts, assets, limit=5, query=query)
+        contexts = _merge_asset_source_contexts(contexts, assets, limit=3, query=query)
         
         # 2. RAG 生成回答
         result = generate_knowledge_answer(query, contexts, assets)
@@ -683,8 +717,9 @@ def stream_search_knowledge():
             )
             parameter_contexts = search_taichang_product_parameter_contexts(query, limit=5)
             performance_contexts = search_taichang_project_performance_contexts(query, limit=3)
+            enterprise_fact_contexts = search_taichang_enterprise_fact_contexts(query, limit=2)
             contexts = _curate_pilot_enterprise_contexts(contexts, limit=5, query=query)
-            contexts = (performance_contexts + parameter_contexts + contexts)[:5]
+            contexts = (enterprise_fact_contexts + performance_contexts + parameter_contexts + contexts)[:5]
             contexts = sanitize_source_contexts(contexts)
             asset_metadata_filter = _asset_metadata_filter_from_query(
                 query,
@@ -695,7 +730,7 @@ def stream_search_knowledge():
                 search_knowledge_assets(query, match_count=12, metadata_filter=asset_metadata_filter)[:8]
             )
             assets = _filter_assets_for_query_scope(assets, query)
-            contexts = _merge_asset_source_contexts(contexts, assets, limit=5, query=query)
+            contexts = _merge_asset_source_contexts(contexts, assets, limit=3, query=query)
             if not contexts and not assets and not is_relevant_knowledge_query(query):
                 yield emit({
                     "type": "chunk",

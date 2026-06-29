@@ -49,6 +49,7 @@ EVIDENCE_TYPE_LABELS = {
     "certification": "资质证书",
     "contract": "合同证明",
     "enterprise_evidence": "企业证明材料",
+    "enterprise_profile": "企业宣传资料",
     "finance": "财务资料",
     "green_low_carbon": "绿色低碳资料",
     "inspection_report": "检验报告",
@@ -112,7 +113,15 @@ def _basename(value: str) -> str:
         name = re.sub(r"\.(md|pdf|docx?|xlsx?|csv|txt|png|jpe?g|webp)$", "", name, flags=re.I)
     name = re.sub(r"_[0-9a-f]{6,}$", "", name, flags=re.I)
     name = re.sub(r"^\d+[._-]?", "", name).strip()
+    name = _clean_display_label(name)
     return name
+
+
+def _clean_display_label(value: Any) -> str:
+    text = str(value or "").strip()
+    text = re.sub(r"[（(][\s,，、;；:：.．_\-—]*[）)]", "", text)
+    text = re.sub(r"\s+", " ", text)
+    return text.strip()
 
 
 def _contains_chinese(value: str) -> bool:
@@ -124,7 +133,7 @@ def _is_internal_name(value: str) -> bool:
 
 
 def category_display_name(value: Any) -> str:
-    raw = str(value or "").strip()
+    raw = _clean_display_label(value)
     if not raw:
         return ""
     return CATEGORY_LABELS.get(raw) or EVIDENCE_TYPE_LABELS.get(raw) or TARGET_LIBRARY_LABELS.get(raw) or raw
@@ -141,8 +150,10 @@ def sanitize_visible_text(value: Any) -> str:
     text = re.sub(r"\bproduction_capacity\b", "生产制造能力", text)
     text = re.sub(r"\btesting_capacity\b", "试验检测能力", text)
     text = re.sub(r"\bcertification\b", "资质证书", text)
+    text = re.sub(r"\benterprise_profile\b", "企业宣传资料", text)
     text = re.sub(r"\bproduct_image\b", "产品图片", text)
     text = re.sub(r"\bqualification_image\b", "资信图片", text)
+    text = re.sub(r"[（(][\s,，、;；:：.．_\-—]*[）)]", "", text)
     text = re.sub(r"[，。；;]?\s*该图片为正式整页/原图资产，不是\s*MinerU\s*局部切图[。.]?", "。", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
@@ -150,32 +161,32 @@ def sanitize_visible_text(value: Any) -> str:
 
 def source_display_name(metadata: dict[str, Any] | None, fallback_title: str | None = None) -> str:
     meta = metadata or {}
-    explicit = str(meta.get("source_display_name") or "").strip()
+    explicit = _clean_display_label(meta.get("source_display_name"))
     if explicit:
         return explicit
 
     for key in ("source_file", "source_org", "category_label", "category", "source_category", "target_library", "evidence_type"):
-        value = str(meta.get(key) or "").strip()
+        value = _clean_display_label(meta.get(key))
         if not value:
             continue
         base = _basename(value)
         lowered = base.lower()
         if lowered in INTERNAL_NAME_LABELS:
-            return INTERNAL_NAME_LABELS[lowered]
+            return _clean_display_label(INTERNAL_NAME_LABELS[lowered])
         if base in CATEGORY_LABELS:
-            return CATEGORY_LABELS[base]
+            return _clean_display_label(CATEGORY_LABELS[base])
         if base in EVIDENCE_TYPE_LABELS:
-            return f"泰昌{EVIDENCE_TYPE_LABELS[base]}"
+            return _clean_display_label(f"泰昌{EVIDENCE_TYPE_LABELS[base]}")
         if base in TARGET_LIBRARY_LABELS:
-            return TARGET_LIBRARY_LABELS[base]
+            return _clean_display_label(TARGET_LIBRARY_LABELS[base])
         if _contains_chinese(base) and not _is_internal_name(base):
-            return base
+            return _clean_display_label(base)
 
     title = _basename(str(fallback_title or ""))
     if title.lower() in INTERNAL_NAME_LABELS:
-        return INTERNAL_NAME_LABELS[title.lower()]
+        return _clean_display_label(INTERNAL_NAME_LABELS[title.lower()])
     if _contains_chinese(title) and not _is_internal_name(title):
-        return title
+        return _clean_display_label(title)
     return "企业知识库资料"
 
 

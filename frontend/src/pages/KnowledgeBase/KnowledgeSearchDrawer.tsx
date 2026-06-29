@@ -101,6 +101,10 @@ const evidenceTypeLabel: Record<string, string> = {
   testing_capacity: '试验检测能力',
   green_low_carbon: '绿色低碳资料',
   enterprise_evidence: '企业证明材料',
+  enterprise_profile: '企业宣传资料',
+  finance: '财务资料',
+  personnel_certificate: '人员证书',
+  social_security: '社保证明',
 };
 
 const categoryLabel: Record<string, string> = {
@@ -113,6 +117,7 @@ const categoryLabel: Record<string, string> = {
   '04_standard_phrases': '标准话术资料',
   '05_enterprise_documents': '泰昌企业资料',
   structured_product_parameter_json: '泰昌产品结构化参数',
+  structured_enterprise_fact_pack: '泰昌企业工商基础信息',
 };
 
 const targetLibraryLabel: Record<string, string> = {
@@ -145,11 +150,18 @@ const internalNameLabel: Record<string, string> = {
 
 function basenameWithoutExt(value?: string): string {
   const name = (value || '').split('/').pop() || value || '';
-  return name
+  return cleanDisplayLabel(name
     .replace(/\.url\.md$/i, '')
     .replace(/\.(md|pdf|docx?|xlsx?|csv|txt)$/i, '')
     .replace(/_[0-9a-f]{6,}$/i, '')
     .replace(/^\d+[._-]?/, '')
+    .trim());
+}
+
+function cleanDisplayLabel(value?: string): string {
+  return (value || '')
+    .replace(/[（(][\s,，、;；:：.．_\-—]*[）)]/g, '')
+    .replace(/\s+/g, ' ')
     .trim();
 }
 
@@ -162,7 +174,7 @@ function isInternalName(value?: string): boolean {
 }
 
 function displayLabel(value?: string): string {
-  const raw = value || '';
+  const raw = cleanDisplayLabel(value);
   const base = basenameWithoutExt(raw);
   const lowered = base.toLowerCase();
   if (internalNameLabel[lowered]) return internalNameLabel[lowered];
@@ -219,7 +231,9 @@ function sanitizeVisibleText(content?: string): string {
     .replace(/taichang_testing_capacity_[A-Za-z0-9_]+/gi, '泰昌试验检测能力资料')
     .replace(/\bproduction_capacity\b/g, '生产制造能力')
     .replace(/\btesting_capacity\b/g, '试验检测能力')
-    .replace(/\bcertification\b/g, '资质证书');
+    .replace(/\benterprise_profile\b/g, '企业宣传资料')
+    .replace(/\bcertification\b/g, '资质证书')
+    .replace(/[（(][\s,，、;；:：.．_\-—]*[）)]/g, '');
 }
 
 function sourceKey(source: SourceContext): string {
@@ -260,7 +274,7 @@ function displaySources(sources?: SourceContext[]): SourceContext[] {
   }
   return [...byKey.values()]
     .sort((a, b) => (b.similarity || 0) - (a.similarity || 0))
-    .slice(0, 5);
+    .slice(0, 3);
 }
 
 function assetImageMarkdown(asset: KnowledgeAsset, index: number): string {

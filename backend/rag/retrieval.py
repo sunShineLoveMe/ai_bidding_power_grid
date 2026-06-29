@@ -129,6 +129,16 @@ def _query_terms(query: str) -> list[str]:
         "中标通知书",
         "招标编号",
         "中标单位",
+        "营业执照",
+        "基础证照",
+        "法定代表人",
+        "法人代表",
+        "统一社会信用代码",
+        "注册资本",
+        "成立日期",
+        "注册地址",
+        "企业信用报告",
+        "工商登记",
     ]
     for term in domain_terms:
         if term in text:
@@ -156,6 +166,13 @@ def _query_terms(query: str) -> list[str]:
         "合同协议书": ["合同协议书", "供货合同", "合同", "甲方", "乙方"],
         "中标通知书": ["中标通知书", "中标", "招标编号", "包号", "中标单位"],
         "中标": ["中标", "中标通知书", "招标编号", "包号", "中标单位"],
+        "法定代表人": ["法定代表人", "法人代表", "法人", "营业执照", "统一社会信用代码", "企业信用报告", "工商登记", "基础证照"],
+        "法人代表": ["法定代表人", "法人代表", "法人", "营业执照", "统一社会信用代码", "企业信用报告", "工商登记", "基础证照"],
+        "法人": ["法定代表人", "法人代表", "法人", "营业执照", "统一社会信用代码", "企业信用报告", "工商登记", "基础证照"],
+        "统一社会信用代码": ["统一社会信用代码", "营业执照", "企业信用报告", "工商登记", "基础证照"],
+        "注册资本": ["注册资本", "营业执照", "企业信用报告", "工商登记", "基础证照"],
+        "成立日期": ["成立日期", "营业执照", "企业信用报告", "工商登记", "基础证照"],
+        "注册地址": ["注册地址", "公司地址", "营业执照", "企业信用报告", "工商登记", "基础证照"],
     }
     for key, values in synonym_map.items():
         if key in text:
@@ -300,6 +317,10 @@ def _authority_bonus(row: dict[str, Any]) -> float:
     bonus = AUTHORITY_SCORE.get(authority, 0.0)
     if citation in {"law_or_standard_citable", "tender_requirement_citable", "enterprise_fact_citable"}:
         bonus += 0.03
+    if metadata.get("evidence_type") == "business_license":
+        bonus += 0.08
+    if metadata.get("source_category") == "structured_enterprise_fact_pack":
+        bonus += 0.12
     if citation == "reference_style_only":
         bonus -= 0.12
     if metadata.get("status") == "superseded":
@@ -340,7 +361,7 @@ def _required_evidence_intents(query: str) -> set[str]:
             "ohs_certification",
             "personnel_social_security",
         })
-    if "营业执照" in text:
+    if any(keyword in text for keyword in ["营业执照", "法定代表人", "法人代表", "法人是谁", "统一社会信用代码", "注册资本", "成立日期", "注册地址"]):
         required.add("business_license")
     if any(keyword in text for keyword in ["社保", "参保"]):
         required.add("personnel_social_security")
@@ -368,7 +389,9 @@ def _evidence_intents_from_text(text: str) -> set[str]:
         intents.update({"environment_certification", "certification"})
     if "职业健康安全管理体系认证证书" in text:
         intents.update({"ohs_certification", "certification"})
-    if "营业执照" in text:
+    if any(keyword in text for keyword in ["营业执照", "统一社会信用代码", "企业信用报告", "工商基础信息", "工商登记"]):
+        intents.add("business_license")
+    if "法定代表人" in text and any(keyword in text for keyword in ["企业名称", "统一社会信用代码", "注册资本", "成立日期", "注册地址"]):
         intents.add("business_license")
     if any(keyword in text for keyword in ["社保证明", "参保证明", "社保缴纳"]):
         intents.add("personnel_social_security")
@@ -1157,7 +1180,7 @@ def build_knowledge_prompt(
 6. 如果相关图片/资质资产适合展示，只需在对应说明中引用“图片资产1、图片资产2”等编号；不要自行输出图片地址、Markdown 图片链接或占位地址，页面会自动展示对应原图。
 7. 最多引用 3 张最相关图片。只有“资料属性”明确为“脱敏样张”时，才说明其不能替代正式法定文件；标记为“客户原始资料”的文件不得描述成脱敏样例、占位图或待替换材料。
 8. 不要输出 Markdown 表格，图片建议用自然段和项目符号描述，避免表格在聊天窗口中换行错乱。
-9. `## 参考依据` 小节必须用“资料1、资料2...”和“图片资产1、图片资产2...”说明依据来自哪些检索片段或资产；图片资产只作为配图/材料建议，不要把它当成法规依据。
+9. `## 参考依据` 小节最多引用相关度最高的 3 条资料来源，用“资料1、资料2...”和“图片资产1、图片资产2...”说明依据；图片资产只作为配图/材料建议，不要把它当成法规依据。
 10. 当用户一次询问多个资料类型、证据类型或事项（例如“合同或中标通知书”“Logo和生产线图片”）时，必须逐项核对并分别回答；只要检索片段、来源文件名、图片资产名称或说明中出现某一项，就不得笼统回答“未发现”。
 11. 禁止输出或复述任何内部技术字段、英文枚举、服务器路径、文件哈希、资产内部编号和 API 路径，只能使用中文业务名称。
 12. 判断“缺少某项材料”前，必须同时核对知识片段和图片资产；只要任一处存在营业执照、体系认证、社保或其他原始材料，就不得声称该材料缺失。

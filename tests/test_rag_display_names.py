@@ -101,6 +101,23 @@ class RagDisplayNamesTest(unittest.TestCase):
         self.assertEqual(assets[0]["description"], "客户已提供文件。")
         self.assertEqual(assets[0]["asset_type"], "产品图片")
 
+    def test_source_display_removes_empty_brackets_and_internal_evidence_label(self):
+        from backend.rag.display_names import sanitize_source_contexts
+
+        contexts = sanitize_source_contexts([{
+            "content": "公司人员花名册（） enterprise_profile",
+            "metadata": {
+                "source_display_name": "公司人员花名册（）",
+                "evidence_type": "enterprise_profile",
+                "source_category": "05_enterprise_documents",
+            },
+        }])
+
+        self.assertEqual(contexts[0]["metadata"]["source_display_name"], "公司人员花名册")
+        self.assertEqual(contexts[0]["metadata"]["evidence_type_label"], "企业宣传资料")
+        self.assertNotIn("（）", contexts[0]["content"])
+        self.assertNotIn("enterprise_profile", contexts[0]["content"])
+
 
 if __name__ == "__main__":
     unittest.main()
