@@ -1510,9 +1510,9 @@ export function BidEditorPage(): JSX.Element {
             {contentDirty ? <Tag color="gold">正文已修改，保存后更新覆盖率</Tag> : null}
             {complianceRefreshing ? <Tag color="processing">检查中...</Tag> : null}
             {complianceError ? <Tag color="red">检查失败</Tag> : <Tag color={complianceStatus.color}>{complianceStatus.label}</Tag>}
-            <Button size="small" onClick={() => setQualityCollapsed(true)}>
-              收起
-            </Button>
+            <Tooltip title="收起实时质量仪表盘">
+              <Button size="small" icon={<ChevronRight size={14} />} aria-label="收起实时质量仪表盘" onClick={() => setQualityCollapsed(true)} />
+            </Tooltip>
             <Button
               size="small"
               icon={<RefreshCw size={14} />}
@@ -1520,7 +1520,7 @@ export function BidEditorPage(): JSX.Element {
               disabled={!data?.project?.id}
               onClick={() => data?.project?.id && void refreshComplianceReport(data.project.id)}
             >
-              刷新覆盖率
+              刷新
             </Button>
             <Button size="small" icon={<Eye size={14} />} disabled={!pendingComplianceRows.length} onClick={() => setComplianceDrawerOpen(true)}>
               查看待处理
@@ -1549,7 +1549,7 @@ export function BidEditorPage(): JSX.Element {
           <Tooltip title="按当前视图下已生成章节正文去除空白后的字符数估算，用于判断标书厚度和扩写需求；不包含投标信息确认页字段。">
             <article>
               <FileText size={18} />
-              <span>正文字数</span>
+              <span>正文字符数</span>
               <strong>{actualChars}</strong>
             </article>
           </Tooltip>
@@ -3290,7 +3290,29 @@ export function BidEditorPage(): JSX.Element {
 
   function outlineMoreMenuItems(chapter: ChapterDraft): MenuProps['items'] {
     const isLeaf = isLeafChapter(chapter);
+    const wordMeta = chapterWordMeta(chapter);
+    const task = visibleBatchTask(chapter);
     const items: MenuProps['items'] = [
+      ...(isLeaf && task?.status && RETRIABLE_BATCH_TASK_STATUSES.has(task.status) ? [{
+        key: 'retry-task',
+        label: task.status === 'partial_generated' ? '续写草稿' : '重试生成',
+        icon: <RefreshCw size={14} />,
+        disabled: batchGenerating,
+      }] : []),
+      ...(isLeaf ? [{
+        key: 'write',
+        label: wordMeta.generated ? '重新生成正文' : '生成正文',
+        icon: <Sparkles size={14} />,
+        disabled: batchGenerating || Boolean(compressingChapterId) || Boolean(task?.status && ACTIVE_BATCH_TASK_STATUSES.has(task.status)),
+      }] : []),
+      ...(isLeaf && wordMeta.quality === 'long' ? [{
+        key: 'compress',
+        label: '压缩到目标',
+        icon: <Scissors size={14} />,
+        disabled: batchGenerating || sectionStreaming || Boolean(compressingChapterId),
+      }] : []),
+      ...(isLeaf ? [{ key: 'preview', label: '预览正文', icon: <Eye size={14} /> }] : []),
+      ...(isLeaf ? [{ type: 'divider' as const }] : []),
       ...(isLeaf ? [{ key: 'custom', label: '自定义编写' }] : []),
       { key: 'add', label: '新增子章节', icon: <Plus size={14} /> },
       { key: 'rename', label: '修改标题' },
@@ -3315,6 +3337,15 @@ export function BidEditorPage(): JSX.Element {
     }
     if (key === 'write') {
       void generateCurrentSection(chapter);
+    }
+    if (key === 'retry-task') {
+      void retryBatchTaskItem(chapter);
+    }
+    if (key === 'compress') {
+      void compressChapterToTarget(chapter);
+    }
+    if (key === 'preview') {
+      void previewChapter(chapter);
     }
     if (key === 'custom') {
       customWriteChapter(chapter);
@@ -4126,16 +4157,16 @@ export function BidEditorPage(): JSX.Element {
                           </div>
                         </Tooltip>
                       ) : null}
-                      <div className="outline-task-progress">
-                        {task ? (
+                      {task ? (
+                        <div className="outline-task-progress">
                           <>
                             <Tooltip title={batchTaskTooltip(task)}>
                               <Tag color={batchStatusColor(task.status)}>{batchTaskLabel(task)}</Tag>
                             </Tooltip>
                             <Progress percent={task.percent} size="small" showInfo={false} status={task.status === 'failed' ? 'exception' : undefined} />
                           </>
-                        ) : null}
-                      </div>
+                        </div>
+                      ) : null}
                       <Tag color={plan.importance === 'high' ? 'red' : plan.importance === 'low' ? 'default' : 'blue'}>{chapterImportanceLabel(plan)}</Tag>
                       {leaf ? <Tag color="geekblue">建议 {plan.suggested_pages || '1-2'} 页</Tag> : <Tag>目录汇总</Tag>}
                       {leaf && plan.needs_table ? <Tag color="cyan">需表格</Tag> : null}
@@ -4144,42 +4175,7 @@ export function BidEditorPage(): JSX.Element {
                       {leaf && plan.needs_case ? <Tag color="green">需业绩</Tag> : null}
                     </div>
                     <div className="outline-row-actions">
-                      {leaf && task?.status && RETRIABLE_BATCH_TASK_STATUSES.has(task.status) ? (
-                        <Button
-                          type="link"
-                          size="small"
-                          icon={<RefreshCw size={14} />}
-                          disabled={batchGenerating}
-                          onClick={() => void retryBatchTaskItem(chapter)}
-                        >
-                          {task.status === 'partial_generated' ? '续写' : '重试'}
-                        </Button>
-                      ) : null}
-                      {leaf ? (
-                        <Button
-                          type="link"
-                          size="small"
-                          icon={<Sparkles size={14} />}
-                          loading={(sectionStreaming && selectedId === chapter.id) || Boolean(task?.status && ACTIVE_BATCH_TASK_STATUSES.has(task.status))}
-                          disabled={batchGenerating || Boolean(compressingChapterId)}
-                          onClick={() => void generateCurrentSection(chapter)}
-                        >
-                          {wordMeta.generated ? '重新生成' : '生成正文'}
-                        </Button>
-                      ) : null}
-                      {leaf && wordMeta.quality === 'long' ? (
-                        <Button
-                          type="link"
-                          size="small"
-                          icon={<Scissors size={14} />}
-                          loading={compressingChapterId === chapter.id}
-                          disabled={batchGenerating || sectionStreaming || Boolean(compressingChapterId)}
-                          onClick={() => void compressChapterToTarget(chapter)}
-                        >
-                          压缩到目标
-                        </Button>
-                      ) : null}
-                      {leaf ? <Button type="link" size="small" icon={<Eye size={14} />} onClick={() => void previewChapter(chapter)}>预览</Button> : null}
+                      {leaf ? <Button className="outline-action-primary" type="link" size="small" icon={<Eye size={14} />} onClick={() => void previewChapter(chapter)}>预览</Button> : null}
                       <Dropdown
                         trigger={['click']}
                         menu={{
@@ -4187,7 +4183,7 @@ export function BidEditorPage(): JSX.Element {
                           onClick: info => handleChapterMenu(info.key, chapter),
                         }}
                       >
-                        <Button type="link" size="small" icon={<MoreVertical size={14} />}>更多</Button>
+                        <Button className="outline-action-primary" type="link" size="small" icon={<MoreVertical size={14} />}>更多</Button>
                       </Dropdown>
                     </div>
                   </div>

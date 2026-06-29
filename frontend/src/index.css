@@ -778,6 +778,7 @@ textarea {
   display: grid;
   min-height: 0;
   min-width: 0;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto minmax(0, 1fr) 62px;
   background: #f7f9fc;
   overflow: hidden;
@@ -785,12 +786,14 @@ textarea {
 
 .outline-topbar-stack {
   display: grid;
+  min-width: 0;
   background: #ffffff;
   border-bottom: 1px solid #e2e8f0;
 }
 
 .outline-topbar {
   display: flex;
+  min-width: 0;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
@@ -833,6 +836,7 @@ textarea {
 
 .outline-panel {
   min-height: 0;
+  min-width: 0;
   margin: 16px 18px;
   display: grid;
   grid-template-rows: 54px minmax(0, 1fr);
@@ -947,7 +951,7 @@ textarea {
 
 .outline-row {
   display: grid;
-  grid-template-columns: 24px minmax(180px, 1fr) 132px minmax(220px, 0.9fr) 300px;
+  grid-template-columns: 24px minmax(180px, 1fr) 132px minmax(260px, 1fr) 124px;
   align-items: center;
   gap: 10px;
   min-height: 44px;
@@ -1094,9 +1098,9 @@ textarea {
   align-items: center;
   justify-content: flex-end;
   gap: 6px;
-  width: 300px;
+  width: 124px;
   min-width: 0;
-  opacity: 0;
+  opacity: 0.72;
   transition: 0.16s ease;
 }
 
@@ -1115,6 +1119,7 @@ textarea {
 
 .outline-footer {
   display: grid;
+  min-width: 0;
   grid-template-columns: 1fr auto auto 1fr;
   align-items: center;
   gap: 18px;
@@ -1464,6 +1469,11 @@ textarea {
   overflow-y: hidden;
 }
 
+.outline-mode-shell .outline-topbar {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+}
+
 .outline-mode-shell .outline-summary span {
   flex: 0 0 auto;
 }
@@ -1578,20 +1588,35 @@ textarea {
   }
 
   .outline-row {
-    grid-template-columns: 24px minmax(150px, 1fr) 120px minmax(180px, 0.8fr) 184px;
+    grid-template-columns: 24px minmax(150px, 1.1fr) 120px minmax(170px, 0.9fr) 80px;
     gap: 8px;
   }
 
   .outline-row-actions {
-    width: 184px;
+    width: 80px;
     gap: 4px;
+    opacity: 1;
   }
 
   .outline-row-actions .ant-btn {
     padding-inline: 2px;
   }
 
-  .outline-mode-shell:not(.quality-collapsed) .outline-row-actions .ant-btn > span {
+  .outline-plan-tags {
+    gap: 4px;
+  }
+
+  .outline-mode-shell:not(.quality-collapsed) .outline-row-actions .outline-action-secondary {
+    display: none;
+  }
+
+  .outline-mode-shell:not(.quality-collapsed) .outline-row-actions .outline-action-primary {
+    width: 32px;
+    min-width: 32px;
+    justify-content: center;
+  }
+
+  .outline-mode-shell:not(.quality-collapsed) .outline-row-actions .outline-action-primary > span:not(.ant-btn-icon) {
     display: none;
   }
 
