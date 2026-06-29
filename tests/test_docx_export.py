@@ -1759,6 +1759,7 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertEqual("宋体", report["template"]["table_font"])
         self.assertEqual("sgcc_reference_volume_cover", report["template"]["cover_layout"]["style"])
         self.assertEqual("after_project_title", report["template"]["cover_layout"]["tender_no_position"])
+        self.assertEqual(96, report["template"]["cover_layout"]["signature_block_space_before_pt"])
         self.assertEqual("1.0", report["template"]["reference_outline_rules"]["schema_version"])
         self.assertEqual("technical_bid_volume", report["template"]["reference_outline_rules"]["scope"])
         self.assertEqual("guarded_planner_hint", report["template"]["reference_outline_rules"]["planner_integration"])
@@ -1795,6 +1796,12 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertEqual((18.0, True, "宋体"), cover_run_specs["招标编号：SL265A"])
         self.assertEqual((36.0, True, "宋体"), cover_run_specs["投标文件"])
         self.assertEqual((14.0, True, "宋体"), cover_run_specs["分标编号：TC-TECH-001"])
+        bidder_paragraph = next(
+            paragraph
+            for paragraph in document.paragraphs
+            if paragraph.text == f"投标人：{DOCX_BIDDER_FULL_NAME}（盖单位章）"
+        )
+        self.assertEqual(96.0, bidder_paragraph.paragraph_format.space_before.pt)
         self.assertEqual((16.0, True, "宋体"), cover_run_specs[f"投标人：{DOCX_BIDDER_FULL_NAME}（盖单位章）"])
         self.assertEqual((15.0, True, "宋体"), cover_run_specs["法定代表人（单位负责人）或其授权代表人：       （签字）"])
         self.assertIn(f"投标人：{DOCX_BIDDER_FULL_NAME}（盖单位章）", full_text)

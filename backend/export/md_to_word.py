@@ -219,6 +219,7 @@ DOCX_TEMPLATE_PROFILES = {
             "formal_field_bold": True,
             "bidder_font_size_pt": 16,
             "bidder_bold": True,
+            "signature_block_space_before_pt": 96,
             "signer_font_size_pt": 15,
             "signer_bold": True,
             "date_font_size_pt": 16,
@@ -377,6 +378,7 @@ DOCX_TEMPLATE_PROFILES = {
             "formal_field_bold": True,
             "bidder_font_size_pt": 16,
             "bidder_bold": True,
+            "signature_block_space_before_pt": 96,
             "signer_font_size_pt": 15,
             "signer_bold": True,
             "date_font_size_pt": 16,
@@ -1701,6 +1703,7 @@ def _add_cover_page(
     formal_field_bold = bool(cover_layout.get("formal_field_bold", False))
     bidder_size = float(cover_layout.get("bidder_font_size_pt") or 12)
     bidder_bold = bool(cover_layout.get("bidder_bold", False))
+    signature_block_space_before = float(cover_layout.get("signature_block_space_before_pt") or 16)
     signer_size = float(cover_layout.get("signer_font_size_pt") or 12)
     signer_bold = bool(cover_layout.get("signer_bold", False))
     date_size = float(cover_layout.get("date_font_size_pt") or 12)
@@ -1818,7 +1821,7 @@ def _add_cover_page(
     bidder.paragraph_format.first_line_indent = Pt(0)
     bidder.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
     bidder.paragraph_format.line_spacing = Pt(26)
-    bidder.paragraph_format.space_before = Pt(16 if _is_xinjiang_reference_profile(template_profile) else max(105, min(205, 285 - len(visible_formal_fields) * 20)))
+    bidder.paragraph_format.space_before = Pt(signature_block_space_before if _is_xinjiang_reference_profile(template_profile) else max(105, min(205, 285 - len(visible_formal_fields) * 20)))
     bidder.paragraph_format.space_after = Pt(0)
     bidder_suffix = "（盖单位章）" if _is_xinjiang_reference_profile(template_profile) else ""
     bidder_run = bidder.add_run(f"投标人：{DOCX_BIDDER_FULL_NAME}{bidder_suffix}")
