@@ -6,6 +6,7 @@ import { applyBidPrefillConfirmation, getBidPrefillReport, getLatestInterpretati
 import type { BidPrefillField, BidPrefillReport, BidPrefillSectionCandidate, BidPrefillStatus } from '../../api/bidProject';
 import { MetricCards } from '../../components/common/MetricCards';
 import { ModuleHeader } from '../../components/common/ModuleHeader';
+import { formatDateTime } from '../../utils/time';
 
 const statusColor: Record<BidPrefillStatus, string> = {
   system_recognized: 'blue',
@@ -431,6 +432,33 @@ export function BidPrefillPage(): JSX.Element {
         </section>
       ) : null}
 
+      {report ? (
+        <>
+          <MetricCards items={metrics} />
+
+          <section className="panel-card">
+            <div className="grid gap-3 text-sm font-semibold text-slate-600 lg:grid-cols-[minmax(0,2fr)_minmax(150px,0.7fr)_minmax(190px,0.9fr)_minmax(150px,0.7fr)]">
+              <div className="prefill-meta-item">
+                <span className="prefill-meta-label">项目</span>
+                <strong>{report.project?.project_name || '未命名项目'}</strong>
+              </div>
+              <div className="prefill-meta-item">
+                <span className="prefill-meta-label">招标编号</span>
+                <strong>{report.project?.project_no || '-'}</strong>
+              </div>
+              <div className="prefill-meta-item">
+                <span className="prefill-meta-label">生成时间</span>
+                <strong>{formatDateTime(report.generatedAt, { second: '2-digit' })}</strong>
+              </div>
+              <div className="prefill-meta-item">
+                <span className="prefill-meta-label">确认方式</span>
+                <strong>客户人工确认</strong>
+              </div>
+            </div>
+          </section>
+        </>
+      ) : null}
+
       <Alert
         className="prefill-alert"
         type={fromWorkflow ? 'warning' : 'info'}
@@ -491,29 +519,6 @@ export function BidPrefillPage(): JSX.Element {
               </div>
             </section>
           </div>
-
-          <MetricCards items={metrics} />
-
-          <section className="panel-card">
-            <div className="grid gap-3 text-sm font-semibold text-slate-600 lg:grid-cols-[minmax(0,2fr)_minmax(150px,0.7fr)_minmax(190px,0.9fr)_minmax(150px,0.7fr)]">
-              <div className="prefill-meta-item">
-                <span className="prefill-meta-label">项目</span>
-                <strong>{report.project?.project_name || '未命名项目'}</strong>
-              </div>
-              <div className="prefill-meta-item">
-                <span className="prefill-meta-label">招标编号</span>
-                <strong>{report.project?.project_no || '-'}</strong>
-              </div>
-              <div className="prefill-meta-item">
-                <span className="prefill-meta-label">生成时间</span>
-                <strong>{report.generatedAt}</strong>
-              </div>
-              <div className="prefill-meta-item">
-                <span className="prefill-meta-label">确认方式</span>
-                <strong>客户人工确认</strong>
-              </div>
-            </div>
-          </section>
 
           <section className="panel-card prefill-section-review">
             <div className="mb-3 grid gap-3 md:grid-cols-[minmax(0,1fr)_auto]">
