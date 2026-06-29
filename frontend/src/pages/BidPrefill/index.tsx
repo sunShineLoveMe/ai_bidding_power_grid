@@ -74,8 +74,9 @@ export function BidPrefillPage(): JSX.Element {
   const [loading, setLoading] = useState(false);
   const [autoRetrying, setAutoRetrying] = useState(false);
   const [applying, setApplying] = useState(false);
-  const [activeGroup, setActiveGroup] = useState('全部字段');
+  const [activeGroup, setActiveGroup] = useState('客户确认项');
   const [onlyGaps, setOnlyGaps] = useState(false);
+  const [sectionsExpanded, setSectionsExpanded] = useState(false);
 
   async function resolveProjectId(): Promise<string | null> {
     if (projectIdParam) return projectIdParam;
@@ -210,6 +211,9 @@ export function BidPrefillPage(): JSX.Element {
     { title: '客户需填写', value: report?.summary.customerRequired || 0, desc: '报价/保证金/授权等', icon: ShieldAlert, colorClass: 'bg-rose-50 text-rose-600' },
     { title: '正式必填缺口', value: report?.summary.formalRequiredGaps || 0, desc: '导出前应收口', icon: FileWarning, colorClass: 'bg-amber-50 text-amber-600' },
   ];
+
+  const sectionCandidateCount = report?.sectionCandidates?.length || 0;
+  const sectionGapCount = (report?.sectionCandidates || []).reduce((total, item) => total + (item.gapCount || 0), 0);
 
   function updateDraftValue(key: string, value: string): void {
     setDraftValues(prev => ({ ...prev, [key]: value }));
@@ -398,15 +402,62 @@ export function BidPrefillPage(): JSX.Element {
         className="prefill-alert"
         type={fromWorkflow ? 'warning' : 'info'}
         showIcon
-        message={fromWorkflow ? '请先确认关键投标字段，再应用到正文占位符' : '投标确认只替换明确占位符'}
+        message={fromWorkflow ? '请先确认关键投标字段，再应用到正文占位符' : '优先确认客户需填写和待人工确认字段'}
         description={autoRetrying
           ? '正在等待分册大纲和投标确认字段同步完成，请稍候。'
-          : '报价、保证金、授权签章、税率等客户决策字段必须人工填写或确认；系统不会覆盖用户已编辑的普通正文，未确认字段会继续列为正式导出缺口。'}
+          : '报价、保证金、授权签章、税率等字段确认后再进入正文编辑；章节候选和缺口清单已收起，可作为辅助核对。'}
       />
 
       {report ? (
         <>
-          <MetricCards items={metrics} />
+          <div className="prefill-workspace">
+            <section className="panel-card prefill-sidebar">
+              <h2 className="panel-title">字段分组</h2>
+              <div className="prefill-group-list">
+                {groups.map(group => (
+                  <button
+                    key={group.name}
+                    type="button"
+                    className={`flex min-h-11 w-full min-w-0 items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-sm font-bold ${
+                      activeGroup === group.name ? 'bg-blue-50 text-blue-600' : 'bg-slate-50 text-slate-600 hover:bg-slate-100'
+                    }`}
+                    onClick={() => setActiveGroup(group.name)}
+                  >
+                    <span className="prefill-group-name">{group.name}</span>
+                    <Tag className="m-0 shrink-0">{group.count}</Tag>
+                  </button>
+                ))}
+              </div>
+              <Button
+                className="mt-4 w-full"
+                type={onlyGaps ? 'primary' : 'default'}
+                onClick={() => setOnlyGaps(value => !value)}
+              >
+                {onlyGaps ? '显示全部字段' : '只看需确认'}
+              </Button>
+            </section>
+
+            <section className="prefill-main">
+              <div className="mb-3 grid gap-3 md:grid-cols-[minmax(0,1fr)_auto]">
+                <div className="min-w-0">
+                  <h2 className="panel-title mb-1">变量确认</h2>
+                  <p className="m-0 text-sm font-semibold leading-6 text-slate-500">
+                    先确认会影响投标文件生成和正式导出的字段；系统候选值仅作参考，客户确认值会用于后续正文占位替换。
+                  </p>
+                </div>
+                <Space className="justify-start md:justify-end" wrap>
+                  <Tag color="red">客户需填写 {report.gapReport.customerRequiredFields.length}</Tag>
+                  <Tag color="orange">待人工确认 {report.gapReport.manualConfirmFields.length}</Tag>
+                  <Tag>当前 {fields.length} 个字段</Tag>
+                </Space>
+              </div>
+              <div className="grid gap-3">
+                {fields.length ? fields.map(renderFieldCard) : (
+                  <section className="panel-card">{emptyText('当前分组暂无字段')}</section>
+                )}
+              </div>
+            </section>
+          </div>
 
           <section className="panel-card prefill-export-gate">
             <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto]">
@@ -439,6 +490,8 @@ export function BidPrefillPage(): JSX.Element {
             )}
           </section>
 
+          <MetricCards items={metrics} />
+
           <section className="panel-card">
             <div className="grid gap-3 text-sm font-semibold text-slate-600 lg:grid-cols-[minmax(0,2fr)_minmax(150px,0.7fr)_minmax(190px,0.9fr)_minmax(150px,0.7fr)]">
               <div className="prefill-meta-item">
@@ -460,7 +513,7 @@ export function BidPrefillPage(): JSX.Element {
             </div>
           </section>
 
-          <section className="panel-card">
+          <section className="panel-card prefill-section-review">
             <div className="mb-3 grid gap-3 md:grid-cols-[minmax(0,1fr)_auto]">
               <div className="min-w-0">
                 <h2 className="panel-title mb-1 flex items-center gap-2">
@@ -472,62 +525,23 @@ export function BidPrefillPage(): JSX.Element {
                 </p>
               </div>
               <Space className="justify-start md:justify-end" wrap>
-                <Tag color="blue">章节 {report.sectionCandidates?.length || 0}</Tag>
-                <Tag color="orange">
-                  缺口 {(report.sectionCandidates || []).reduce((total, item) => total + (item.gapCount || 0), 0)}
-                </Tag>
+                <Tag color="blue">章节 {sectionCandidateCount}</Tag>
+                <Tag color="orange">缺口 {sectionGapCount}</Tag>
+                <Button size="small" onClick={() => setSectionsExpanded(value => !value)}>
+                  {sectionsExpanded ? '收起辅助清单' : '展开辅助清单'}
+                </Button>
               </Space>
             </div>
-            {report.sectionCandidates?.length ? (
+            {!sectionsExpanded ? (
+              <div className="prefill-section-collapsed">
+                章节候选和缺口清单已作为辅助核对项收起。需要追溯字段归属、采纳章节候选或查看边界告警时，可展开查看。
+              </div>
+            ) : report.sectionCandidates?.length ? (
               <div className="prefill-section-grid">
                 {report.sectionCandidates.map(renderSectionCandidate)}
               </div>
             ) : emptyText('暂无章节级候选，请先生成分册大纲或补充结构化资料')}
           </section>
-
-          <div className="prefill-workspace">
-            <section className="panel-card prefill-sidebar">
-              <h2 className="panel-title">字段分组</h2>
-              <div className="prefill-group-list">
-                {groups.map(group => (
-                  <button
-                    key={group.name}
-                    type="button"
-                    className={`flex min-h-11 w-full min-w-0 items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-sm font-bold ${
-                      activeGroup === group.name ? 'bg-blue-50 text-blue-600' : 'bg-slate-50 text-slate-600 hover:bg-slate-100'
-                    }`}
-                    onClick={() => setActiveGroup(group.name)}
-                  >
-                    <span className="prefill-group-name">{group.name}</span>
-                    <Tag className="m-0 shrink-0">{group.count}</Tag>
-                  </button>
-                ))}
-              </div>
-              <Button
-                className="mt-4 w-full"
-                type={onlyGaps ? 'primary' : 'default'}
-                onClick={() => setOnlyGaps(value => !value)}
-              >
-                {onlyGaps ? '显示全部字段' : '只看需确认'}
-              </Button>
-            </section>
-
-            <section className="prefill-main">
-              <div className="mb-3 grid gap-3 md:grid-cols-[minmax(0,1fr)_auto]">
-                <h2 className="panel-title mb-0">变量确认</h2>
-                <Space className="justify-start md:justify-end" wrap>
-                  <Tag color="red">客户需填写 {report.gapReport.customerRequiredFields.length}</Tag>
-                  <Tag color="orange">待人工确认 {report.gapReport.manualConfirmFields.length}</Tag>
-                  <Tag>当前 {fields.length} 个字段</Tag>
-                </Space>
-              </div>
-              <div className="grid gap-3">
-                {fields.length ? fields.map(renderFieldCard) : (
-                  <section className="panel-card">{emptyText('当前分组暂无字段')}</section>
-                )}
-              </div>
-            </section>
-          </div>
 
           <section className="panel-card mt-4">
             <h2 className="panel-title">预填来源规则</h2>

@@ -477,6 +477,22 @@ textarea {
   gap: 12px;
 }
 
+.prefill-section-review {
+  border-color: #eef2f7;
+}
+
+.prefill-section-collapsed {
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  padding: 10px 12px;
+}
+
 .prefill-section-candidate {
   min-width: 0;
   overflow: hidden;
@@ -598,6 +614,7 @@ textarea {
   }
 
   .prefill-sidebar {
+    order: 2;
     position: static;
     max-height: none;
   }
@@ -611,6 +628,7 @@ textarea {
   }
 
   .prefill-main {
+    order: 1;
     padding-right: 0;
     padding-bottom: 88px;
   }
