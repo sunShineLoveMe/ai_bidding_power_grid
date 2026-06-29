@@ -16,6 +16,8 @@ P0 已经保证父级容器不进入正文编辑态，正式 DOCX 导出也会�
 能力：
 
 - 识别父级容器：`section_role=container`、`leaf_generation=false` 或存在子章节的节点。
+- 容器数量按 `bid_sections` 当前项目目录树动态计算，不固定为 27，也不限制具体标书类型。
+- `--project-id` 为必填参数，避免误把当前辽宁项目当成全局默认项目。
 - 默认 dry-run：盘点容器、分类内容、写备份和 summary，不改数据库。
 - `--apply --clear-content`：写入 metadata 审计，并清空父级 `content`。
 - 不把历史全文写入 metadata，只保存 `content_sha256`、字数、分类、备份路径和治理动作。
@@ -49,7 +51,7 @@ set -a; source .env; set +a; .venv/bin/python scripts/rag/govern_bid_container_c
 
 ## 治理结果
 
-执行前 dry-run：
+执行前 dry-run。本次数值只代表项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d` 的真实目录树，不是系统规则：
 
 - 父级容器：`27`
 - 有历史正文的父级容器：`27`

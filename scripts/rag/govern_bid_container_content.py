@@ -21,7 +21,6 @@ from dotenv import load_dotenv
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 RUNS_DIR = PROJECT_ROOT / "docs" / "development" / "runs"
-DEFAULT_PROJECT_ID = "a1d853bc-ca4e-43b4-bbea-256f561c8a3d"
 
 sys.path.insert(0, str(PROJECT_ROOT))
 load_dotenv(PROJECT_ROOT / ".env")
@@ -250,7 +249,7 @@ def _summary_payload(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="治理 bid_sections 父级容器历史正文")
-    parser.add_argument("--project-id", default=DEFAULT_PROJECT_ID, help="项目 ID")
+    parser.add_argument("--project-id", required=True, help="项目 ID；不同标书项目的父级容器数量会按项目目录树动态计算")
     parser.add_argument("--run-id", default="", help="运行编号；默认按时间生成")
     parser.add_argument("--apply", action="store_true", help="实际写回 metadata/content；默认只备份和输出计划")
     parser.add_argument("--clear-content", action="store_true", help="将父级容器 content 清空，仅保留备份和 metadata 审计")
