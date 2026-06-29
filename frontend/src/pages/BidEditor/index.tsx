@@ -763,7 +763,7 @@ export function BidEditorPage(): JSX.Element {
       setLengthSettingsOpen(false);
       const allocatedWords = (result.allocations || []).reduce((sum, item) => sum + (Number(item.targetWords) || 0), 0);
       const targetWords = settings.technicalWords + settings.businessWords;
-      message.success(`全文篇幅设置已保存，章节计划 ${allocatedWords.toLocaleString()} / 用户目标 ${targetWords.toLocaleString()} 字`);
+      message.success(`全文篇幅设置已保存，叶子计划 ${allocatedWords.toLocaleString()} / 用户目标 ${targetWords.toLocaleString()} 字`);
     } catch (error) {
       if (error && typeof error === 'object' && 'errorFields' in error) {
         return;
@@ -976,9 +976,12 @@ export function BidEditorPage(): JSX.Element {
     });
     return volumeFiltered.filter(chapter => matchedIds.has(chapter.id));
   }, [activeVolume, chapters, keyword]);
-  const selectedChapter = filteredChapters.find(chapter => chapter.id === selectedId)
+  const selectedCandidate = filteredChapters.find(chapter => chapter.id === selectedId)
     || filteredChapters[0]
     || (activeVolume === 'all' ? chapters.find(chapter => chapter.id === selectedId) || chapters[0] : undefined);
+  const selectedChapter = selectedCandidate
+    ? (isLeafChapter(selectedCandidate, chapters) ? selectedCandidate : firstLeafDescendant(selectedCandidate, chapters))
+    : undefined;
   const handleAiEdit = useCallback(async (request: BidAiEditEditorRequest): Promise<BidAiEditEditorResult> => {
     if (!data?.project?.id || !selectedChapter) {
       throw new Error('请先选择需要编辑的章节');
@@ -1006,7 +1009,8 @@ export function BidEditorPage(): JSX.Element {
   const allLeafChapters = chapters.filter(chapter => isLeafChapter(chapter, chapters));
   const matchText = keyword ? `${filteredChapters.length} / ${scopedChapters.length}` : `0 / ${scopedChapters.length}`;
   const actualChars = scopedLeafChapters.reduce((sum, chapter) => sum + (isChapterGenerated(chapter) ? chapterActualWords(chapter) : 0), 0);
-  const estimatedTotalChars = scopedLeafChapters.reduce((sum, chapter) => (
+  const plannedTargetChars = scopedLeafChapters.reduce((sum, chapter) => sum + targetChapterWords(chapter), 0);
+  const projectedTotalChars = scopedLeafChapters.reduce((sum, chapter) => (
     sum + (isChapterGenerated(chapter) ? chapterActualWords(chapter) : targetChapterWords(chapter))
   ), 0);
   const technicalActualChars = allLeafChapters.filter(chapter => deliveryVolumeType(chapter) === 'technical').reduce((sum, chapter) => sum + (isChapterGenerated(chapter) ? chapterActualWords(chapter) : 0), 0);
@@ -1026,7 +1030,16 @@ export function BidEditorPage(): JSX.Element {
     : activeVolume === 'business'
       ? Math.max(0, Math.ceil(actualChars / WORDS_PER_PAGE.business))
       : Math.max(0, Math.ceil(technicalActualChars / WORDS_PER_PAGE.technical) + Math.ceil(businessActualChars / WORDS_PER_PAGE.business));
-  const estimatedPages = Math.max(1, Math.ceil(estimatedTotalChars / 700));
+  const plannedTargetPages = activeVolume === 'technical'
+    ? Math.max(0, Math.ceil(plannedTargetChars / WORDS_PER_PAGE.technical))
+    : activeVolume === 'business'
+      ? Math.max(0, Math.ceil(plannedTargetChars / WORDS_PER_PAGE.business))
+      : Math.max(0, Math.ceil(
+        allLeafChapters.filter(chapter => deliveryVolumeType(chapter) === 'technical').reduce((sum, chapter) => sum + targetChapterWords(chapter), 0) / WORDS_PER_PAGE.technical,
+      ) + Math.ceil(
+        allLeafChapters.filter(chapter => deliveryVolumeType(chapter) === 'business').reduce((sum, chapter) => sum + targetChapterWords(chapter), 0) / WORDS_PER_PAGE.business,
+      ));
+  const projectedPages = Math.max(1, Math.ceil(projectedTotalChars / 700));
   const generatedCount = scopedLeafChapters.filter(isChapterGenerated).length;
   const generationProgress = scopedLeafChapters.length ? Math.round((generatedCount / scopedLeafChapters.length) * 10000) / 100 : 0;
   const lengthProgress = lengthGoalChars ? Math.min(100, Math.round((actualChars / lengthGoalChars) * 10000) / 100) : 0;
@@ -2466,11 +2479,39 @@ export function BidEditorPage(): JSX.Element {
     setChapters(items => items.map(item => item.id === id ? { ...item, expanded: !item.expanded } : item));
   }
 
+  function selectChapterForEditing(chapter: ChapterDraft, options?: { switchToEditor?: boolean; silent?: boolean }): void {
+    if (isLeafChapter(chapter)) {
+      setSelectedId(chapter.id);
+      if (options?.switchToEditor) {
+        setMode('正文模式');
+      }
+      return;
+    }
+    const leaf = firstLeafDescendant(chapter);
+    if (!leaf) {
+      if (!options?.silent) {
+        message.warning('当前父级章节是结构容器，暂无可编辑的叶子小节。');
+      }
+      return;
+    }
+    setSelectedId(leaf.id);
+    if (options?.switchToEditor) {
+      setMode('正文模式');
+    }
+    if (!options?.silent) {
+      message.info('父级章节只作为目录结构，已定位到第一个可编辑小节。');
+    }
+  }
+
   function setAllExpanded(expanded: boolean): void {
     setChapters(items => items.map(item => ({ ...item, expanded })));
   }
 
   async function previewChapter(chapter: ChapterDraft): Promise<void> {
+    if (!isLeafChapter(chapter)) {
+      selectChapterForEditing(chapter, { switchToEditor: true });
+      return;
+    }
     let latestContent = chapter.content || '';
     if (!latestContent.trim() && data?.project?.id) {
       try {
@@ -2497,6 +2538,10 @@ export function BidEditorPage(): JSX.Element {
   async function saveDraft(): Promise<void> {
     if (!data?.project?.id || !selectedChapter) {
       message.warning('请先选择需要保存的章节');
+      return;
+    }
+    if (!isLeafChapter(selectedChapter)) {
+      message.warning('父级章节是结构容器，不直接保存正文。请编辑下级叶子小节。');
       return;
     }
     try {
@@ -2564,6 +2609,10 @@ export function BidEditorPage(): JSX.Element {
   async function compressChapterToTarget(chapter: ChapterDraft): Promise<void> {
     if (!data?.project?.id) {
       message.warning('当前项目不存在，无法压缩章节');
+      return;
+    }
+    if (!isLeafChapter(chapter)) {
+      selectChapterForEditing(chapter, { switchToEditor: true });
       return;
     }
     if (!isChapterGenerated(chapter)) {
@@ -2775,6 +2824,13 @@ export function BidEditorPage(): JSX.Element {
     if (!data?.project?.id) {
       message.warning('当前项目不存在，无法下载');
       return;
+    }
+    if (sectionId) {
+      const target = chapters.find(chapter => chapter.id === sectionId);
+      if (target && !isLeafChapter(target)) {
+        message.warning('父级章节只作为目录结构，不支持按本章导出。请导出下级叶子小节或完整分册。');
+        return;
+      }
     }
     if (!sectionId) {
       const generationConfirmed = await confirmDownloadWithGenerationReadiness(targetVolume);
@@ -3156,6 +3212,10 @@ export function BidEditorPage(): JSX.Element {
   }
 
   function customWriteChapter(chapter: ChapterDraft): void {
+    if (!isLeafChapter(chapter)) {
+      selectChapterForEditing(chapter, { switchToEditor: true });
+      return;
+    }
     setSelectedId(chapter.id);
     setCustomWriteTarget(chapter);
     setCustomWriteInstruction('');
@@ -3213,9 +3273,12 @@ export function BidEditorPage(): JSX.Element {
   }
 
   function chapterMenuItems(chapter: ChapterDraft): MenuProps['items'] {
+    const isLeaf = isLeafChapter(chapter);
     return [
-      { key: 'write', label: '编写章节' },
-      { key: 'custom', label: '自定义编写' },
+      ...(isLeaf ? [
+        { key: 'write', label: '编写章节' },
+        { key: 'custom', label: '自定义编写' },
+      ] : []),
       { key: 'add', label: '添加章节' },
       { key: 'move-up', label: '上移章节', icon: <ArrowUp size={14} />, disabled: !canMoveChapter(chapter, 'up') },
       { key: 'move-down', label: '下移章节', icon: <ArrowDown size={14} />, disabled: !canMoveChapter(chapter, 'down') },
@@ -3226,8 +3289,9 @@ export function BidEditorPage(): JSX.Element {
   }
 
   function outlineMoreMenuItems(chapter: ChapterDraft): MenuProps['items'] {
+    const isLeaf = isLeafChapter(chapter);
     const items: MenuProps['items'] = [
-      { key: 'custom', label: '自定义编写' },
+      ...(isLeaf ? [{ key: 'custom', label: '自定义编写' }] : []),
       { key: 'add', label: '新增子章节', icon: <Plus size={14} /> },
       { key: 'rename', label: '修改标题' },
       { key: 'move-up', label: '上移章节', icon: <ArrowUp size={14} />, disabled: !canMoveChapter(chapter, 'up') },
@@ -3235,14 +3299,20 @@ export function BidEditorPage(): JSX.Element {
       { type: 'divider' },
       { key: 'delete', label: '删除章节', icon: <Trash2 size={14} />, danger: true },
     ];
-    if (isChapterPartialGenerated(chapter)) {
+    if (isLeaf && isChapterPartialGenerated(chapter)) {
       items.splice(1, 0, { key: 'accept-draft', label: '采纳草稿为正文', icon: <Save size={14} /> });
     }
     return items;
   }
 
   function handleChapterMenu(key: string, chapter: ChapterDraft): void {
-    setSelectedId(chapter.id);
+    if (['write', 'custom', 'accept-draft'].includes(key) && !isLeafChapter(chapter)) {
+      selectChapterForEditing(chapter, { switchToEditor: key === 'write' });
+      return;
+    }
+    if (['write', 'custom', 'accept-draft'].includes(key)) {
+      setSelectedId(chapter.id);
+    }
     if (key === 'write') {
       void generateCurrentSection(chapter);
     }
@@ -3955,8 +4025,9 @@ export function BidEditorPage(): JSX.Element {
               <span>{volumeLabel(activeVolume)}章节：{scopedChapters.length}</span>
               <span>已生成章节：{generatedCount}</span>
               <span>用户目标：{lengthGoalPages} 页 / {lengthGoalChars.toLocaleString()} 字</span>
+              <span>叶子计划：{plannedTargetPages} 页 / {plannedTargetChars.toLocaleString()} 字</span>
               <span>已生成：{currentEstimatedPages} 页 / {actualChars.toLocaleString()} 字</span>
-              <span>章节计划：{estimatedTotalChars.toLocaleString()} 字（约{estimatedPages}页）</span>
+              <span>预计成稿：{projectedTotalChars.toLocaleString()} 字（约{projectedPages}页）</span>
               <span>篇幅进度：{lengthProgress}%</span>
               <span>进度：{generationProgress}%</span>
               {incompleteLeafCount ? <span>待完成章节：{incompleteLeafCount}</span> : null}
@@ -4012,6 +4083,7 @@ export function BidEditorPage(): JSX.Element {
                 const wordMeta = chapterWordMeta(chapter);
                 const plan = chapterWritingPlan(chapter);
                 const task = visibleBatchTask(chapter);
+                const leaf = isLeafChapter(chapter);
                 const active = chapter.id === selectedChapter?.id;
                 return (
                   <div
@@ -4031,7 +4103,11 @@ export function BidEditorPage(): JSX.Element {
                       type="button"
                       className="outline-row-title"
                       onClick={() => {
-                        setSelectedId(chapter.id);
+                        if (leaf) {
+                          setSelectedId(chapter.id);
+                          return;
+                        }
+                        toggleChapter(chapter.id);
                       }}
                     >
                       <span>{chapterDisplayTitle(chapter)}</span>
@@ -4061,14 +4137,14 @@ export function BidEditorPage(): JSX.Element {
                         ) : null}
                       </div>
                       <Tag color={plan.importance === 'high' ? 'red' : plan.importance === 'low' ? 'default' : 'blue'}>{chapterImportanceLabel(plan)}</Tag>
-                      <Tag color="geekblue">建议 {plan.suggested_pages || '1-2'} 页</Tag>
-                      {plan.needs_table ? <Tag color="cyan">需表格</Tag> : null}
-                      {plan.needs_image ? <Tag color="purple">需图文</Tag> : null}
-                      {plan.needs_qualification ? <Tag color="orange">需资质</Tag> : null}
-                      {plan.needs_case ? <Tag color="green">需业绩</Tag> : null}
+                      {leaf ? <Tag color="geekblue">建议 {plan.suggested_pages || '1-2'} 页</Tag> : <Tag>目录汇总</Tag>}
+                      {leaf && plan.needs_table ? <Tag color="cyan">需表格</Tag> : null}
+                      {leaf && plan.needs_image ? <Tag color="purple">需图文</Tag> : null}
+                      {leaf && plan.needs_qualification ? <Tag color="orange">需资质</Tag> : null}
+                      {leaf && plan.needs_case ? <Tag color="green">需业绩</Tag> : null}
                     </div>
                     <div className="outline-row-actions">
-                      {task?.status && RETRIABLE_BATCH_TASK_STATUSES.has(task.status) ? (
+                      {leaf && task?.status && RETRIABLE_BATCH_TASK_STATUSES.has(task.status) ? (
                         <Button
                           type="link"
                           size="small"
@@ -4079,17 +4155,19 @@ export function BidEditorPage(): JSX.Element {
                           {task.status === 'partial_generated' ? '续写' : '重试'}
                         </Button>
                       ) : null}
-                      <Button
-                        type="link"
-                        size="small"
-                        icon={<Sparkles size={14} />}
-                        loading={(sectionStreaming && selectedId === chapter.id) || Boolean(task?.status && ACTIVE_BATCH_TASK_STATUSES.has(task.status))}
-                        disabled={batchGenerating || Boolean(compressingChapterId)}
-                        onClick={() => void generateCurrentSection(chapter)}
-                      >
-                        {wordMeta.generated ? '重新生成' : '生成正文'}
-                      </Button>
-                      {wordMeta.quality === 'long' ? (
+                      {leaf ? (
+                        <Button
+                          type="link"
+                          size="small"
+                          icon={<Sparkles size={14} />}
+                          loading={(sectionStreaming && selectedId === chapter.id) || Boolean(task?.status && ACTIVE_BATCH_TASK_STATUSES.has(task.status))}
+                          disabled={batchGenerating || Boolean(compressingChapterId)}
+                          onClick={() => void generateCurrentSection(chapter)}
+                        >
+                          {wordMeta.generated ? '重新生成' : '生成正文'}
+                        </Button>
+                      ) : null}
+                      {leaf && wordMeta.quality === 'long' ? (
                         <Button
                           type="link"
                           size="small"
@@ -4101,7 +4179,7 @@ export function BidEditorPage(): JSX.Element {
                           压缩到目标
                         </Button>
                       ) : null}
-                      <Button type="link" size="small" icon={<Eye size={14} />} onClick={() => void previewChapter(chapter)}>预览</Button>
+                      {leaf ? <Button type="link" size="small" icon={<Eye size={14} />} onClick={() => void previewChapter(chapter)}>预览</Button> : null}
                       <Dropdown
                         trigger={['click']}
                         menu={{
@@ -4260,6 +4338,7 @@ export function BidEditorPage(): JSX.Element {
           ) : null}
           {visibleChapters.map(chapter => {
             const active = chapter.id === selectedChapter?.id;
+            const leaf = isLeafChapter(chapter);
             const childPlaceholder = (chapter.level || 1) === 1
               ? streamingChildPlaceholders.find(item => item.parentOrder === String(chapter.order || ''))
               : null;
@@ -4270,10 +4349,20 @@ export function BidEditorPage(): JSX.Element {
                   style={{ paddingLeft: `${chapterIndent(chapter.level)}px` }}
                   role="button"
                   tabIndex={0}
-                  onClick={() => setSelectedId(chapter.id)}
+                  onClick={() => {
+                    if (leaf) {
+                      setSelectedId(chapter.id);
+                      return;
+                    }
+                    toggleChapter(chapter.id);
+                  }}
                   onKeyDown={event => {
                     if (event.key === 'Enter' || event.key === ' ') {
-                      setSelectedId(chapter.id);
+                      if (leaf) {
+                        setSelectedId(chapter.id);
+                        return;
+                      }
+                      toggleChapter(chapter.id);
                     }
                   }}
                 >
@@ -4326,7 +4415,7 @@ export function BidEditorPage(): JSX.Element {
           <span>总章节：{chapters.length}</span>
           <span>当前分册：{volumeLabel(activeVolume)}</span>
           <span>已完成字数：{actualChars}</span>
-          <span>约{estimatedPages}页</span>
+          <span>预计约{projectedPages}页</span>
         </footer>
       </aside>
 
@@ -4335,7 +4424,7 @@ export function BidEditorPage(): JSX.Element {
           <div className="editor-title-row">
             <div>
               <h1>{selectedChapter ? chapterDisplayTitle(selectedChapter) : '未选择章节'}</h1>
-              <p>{streaming ? streamText : selectedChapter?.purpose || '使用 AI 编辑器编写章节正文，支持标题、列表、表格和 Markdown 存储。'}</p>
+              <p>{streaming ? streamText : selectedChapter?.purpose || '请选择叶子小节编写正文；父级章节只作为目录结构和导出标题。'}</p>
             </div>
             <Space>
               {streaming ? <Tag color="processing">大纲生成中</Tag> : null}
@@ -4376,7 +4465,7 @@ export function BidEditorPage(): JSX.Element {
             />
           ) : (
             <div className="editor-empty">
-              <Empty description="请选择一个章节开始编辑" />
+              <Empty description="请选择一个叶子小节开始编辑，父级章节不直接编写正文" />
             </div>
           )}
         </section>

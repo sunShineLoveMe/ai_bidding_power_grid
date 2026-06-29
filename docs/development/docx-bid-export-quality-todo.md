@@ -37,6 +37,8 @@
 - 2026-06-29 DOCX 格式评审 P1-4 report-only 阶段完成：`reference_outline` 已保留为兼容字段，同时技术标/商务标 profile 新增 `reference_outline_rules` 结构化规则，包含章节类型、分册范围、推荐层级、目录/分页/表格/附件属性、推荐证据类型和 `planner_integration=report_only`。本轮未接入 `backend/ai/chapter_planner.py`，未修改 `SUPPLY_ONLY_MAX_OUTLINE_NODES`、`_supply_outline_reject_reason` 或客户范本/规则版回退。真实导出确认技术标/商务标标题数量与 P1-3 基线一致，未出现章节膨胀；`tests/test_chapter_planner.py`、`tests/test_docx_export.py`、`tests/test_celery_export_tasks.py` 均通过。设计见 `docs/development/docx-reference-outline-structured-rules-design.md`，回归记录见 `docs/development/runs/run_20260629_docx_p1_reference_outline_rules_regression.md`。
 - 2026-06-29 DOCX 格式评审 P1-4C 生成层接入完成：`reference_outline_rules.planner_integration` 升级为 `guarded_planner_hint`，`chapter_planner.py` 在供货类物资投标场景读取规则，用于 prompt 低优先级提示、章节 metadata 标注和表格/结构化数据写作提示；不强插章节，不提高 `SUPPLY_ONLY_MAX_OUTLINE_NODES=140`，不绕过 `_supply_outline_reject_reason()`。真实项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d` 改前快稿为错误通用大纲 `64` 节且命中施工类禁用标题；改后识别为物资协议库存供货类，快稿 `102` 节、禁用标题 `0`、拒绝原因 `null`，真实 AI 精修不落库返回 `38` 节。技术标/商务标真实 DOCX 导出标题数仍为 `52/51`，图片插入 `9/9`、`5/5`，字段刷新 `refreshed`。记录见 `docs/development/runs/run_20260629_docx_p1_4c_planner_rules_regression.md`。
 - 2026-06-29 DOCX 封面签章区留白修复完成：技术标/商务标 `sgcc_reference_volume_cover` 增加 `signature_block_space_before_pt=96`，使 `文件类别` 与 `投标人/法定代表人` 签章区之间保留明显空白，贴近客户参考封面。真实导出技术标/商务标并转 PDF 首页截图，字段刷新 `refreshed`，图片插入分别 `9/9`、`5/5`，失败 `0`，签章区段前距均为 `96pt`。记录见 `docs/development/runs/run_20260629_docx_cover_signature_spacing_regression.md`。
+- 2026-06-29 编制页父级目录与全文篇幅设置复测发现新 P0 边界问题：父级容器仍可进入正文编辑态，后端全文篇幅分配会给容器节点分配目标字数，目录模式将实际已生成字数显示为“章节计划”，且导出清洗对带编号的内部提示注释仍有缺口。专项清单见 `docs/development/bid-editor-outline-container-length-settings-todo.md`，复测记录见 `docs/development/runs/run_20260629_bid_editor_outline_length_settings_review.md`。
+- 2026-06-29 编制页父级目录与全文篇幅设置 P0 修复完成：父级容器不再进入正文编辑态，正式导出只输出父级标题并忽略历史父级 `content`，全文篇幅设置只分配到 75 个叶子小节，容器 allocations 为 `0`。真实浏览器复测确认目录模式展示 `用户目标 120 页 / 78,000 字`、`叶子计划 120 页 / 77,300 字`、`已生成 205,517 字`；真实 DOCX 导出字段刷新 `refreshed`，内部提示词 Markdown/DOCX XML 命中均为 `0`。记录见 `docs/development/runs/run_20260629_bid_editor_outline_length_settings_fix.md`。
 
 ## P0 必须完成
 
@@ -57,6 +59,7 @@
 | 已完成 | 真实导出验收记录 | 用真实项目导出 DOCX，记录封面、目录、正文、表格、图片、页眉页脚、字段刷新状态 |
 | 已完成 | 长项目名物理路径短名化 | 阿里云新疆 10kV 项目技术标导出不得因项目全名过长失败；输出目录使用 `project_id[:8]`，文件名使用 `泰昌_<招标编号>_<包号>_<分册>_<日期>.docx`；真实链路已生成 `泰昌_SL265A_包1_技术投标文件_20260627.docx`，LibreOffice 字段刷新成功 |
 | 已完成 | 辽宁 CPVC/MPP 正式导出 P0 收口 | 真实导出技术标、商务标、完整标书；正式检查 `0` 阻断、`0` 人工确认；成品 DOCX 审计 `待补充/人工复核/内部路径/NHAP/施工类口径/括号编号标题` 均为 `0` |
+| 已完成 | 父级目录容器与全文篇幅边界收口 | 父级容器不可进入正文编辑态；正式导出只输出父级标题，不输出父级内容或内部提示；全文篇幅设置只分配叶子章节；目录模式区分用户目标、计划目标和实际已生成。详见 `docs/development/bid-editor-outline-container-length-settings-todo.md`，回归记录见 `docs/development/runs/run_20260629_bid_editor_outline_length_settings_fix.md` |
 
 ## P1 应该完成
 

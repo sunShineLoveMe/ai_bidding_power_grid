@@ -119,6 +119,51 @@ class LengthSettingsTest(unittest.TestCase):
         self.assertIn("allow_auto_expand", updated[0]["metadata"]["writing_plan"])
         self.assertIn("allowAutoExpand", updated[0]["metadata"]["length_settings"])
 
+    def test_length_allocations_skip_container_sections(self):
+        sections = [
+            {
+                "id": "parent",
+                "title": "商务响应文件",
+                "level": 1,
+                "metadata": {
+                    "volume_type": "business",
+                    "section_role": "container",
+                    "leaf_generation": False,
+                    "writing_plan": {
+                        "target_words": 350,
+                        "suggested_pages": "1",
+                        "length_settings_source": "project_length_settings",
+                    },
+                    "length_settings": {"mode": "pages"},
+                },
+            },
+            {
+                "id": "leaf-1",
+                "parent_id": "parent",
+                "title": "投标函",
+                "level": 2,
+                "metadata": {"volume_type": "business"},
+            },
+            {
+                "id": "leaf-2",
+                "parent_id": "parent",
+                "title": "授权委托书",
+                "level": 2,
+                "metadata": {"volume_type": "business"},
+            },
+        ]
+        settings = normalize_length_settings({"mode": "pages", "technicalPages": 1, "businessPages": 10})
+
+        allocations = allocate_chapter_length_targets(sections, settings)
+        allocation_ids = {item["sectionId"] for item in allocations}
+        updated = apply_length_allocations_to_sections(sections, allocations, settings)
+
+        self.assertNotIn("parent", allocation_ids)
+        self.assertEqual(allocation_ids, {"leaf-1", "leaf-2"})
+        self.assertNotIn("length_settings", updated[0]["metadata"])
+        self.assertNotEqual(updated[0]["metadata"]["writing_plan"].get("length_settings_source"), "project_length_settings")
+        self.assertIn("target_words", updated[1]["metadata"]["writing_plan"])
+
     def test_section_prompt_includes_target_words_and_no_padding_rule(self):
         from backend.ai.section_writer import build_section_prompt
 

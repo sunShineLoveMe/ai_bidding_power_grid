@@ -81,9 +81,47 @@ def _chapter_weight(chapter: dict[str, Any]) -> float:
     return max(weight, 0.5)
 
 
+def _container_section_ids(sections: list[dict[str, Any]]) -> set[str]:
+    return {str(section.get("parent_id")) for section in sections if section.get("parent_id")}
+
+
+def _is_container_section(section: dict[str, Any], parent_ids: set[str]) -> bool:
+    metadata = section.get("metadata") if isinstance(section.get("metadata"), dict) else {}
+    return (
+        metadata.get("section_role") == "container"
+        or metadata.get("leaf_generation") is False
+        or str(section.get("id") or "") in parent_ids
+    )
+
+
+def _leaf_sections(sections: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    parent_ids = _container_section_ids(sections)
+    return [section for section in sections if not _is_container_section(section, parent_ids)]
+
+
+def _clear_container_length_metadata(section: dict[str, Any]) -> dict[str, Any]:
+    metadata = section.get("metadata") if isinstance(section.get("metadata"), dict) else {}
+    if not metadata:
+        return section
+    plan = metadata.get("writing_plan") if isinstance(metadata.get("writing_plan"), dict) else None
+    next_metadata = {**metadata}
+    next_metadata.pop("length_settings", None)
+    if plan and plan.get("length_settings_source") == "project_length_settings":
+        next_plan = {**plan}
+        for key in ("target_words", "suggested_pages", "length_settings_source", "allow_auto_expand"):
+            next_plan.pop(key, None)
+        next_plan["strategy"] = "结构容器只负责目录层级和下级章节汇总，不参与全文篇幅分配。"
+        next_metadata["writing_plan"] = next_plan
+    return {
+        **section,
+        "metadata": next_metadata,
+    }
+
+
 def evaluate_length_feasibility(settings: dict[str, Any], sections: list[dict[str, Any]]) -> dict[str, Any]:
-    technical_sections = [section for section in sections if delivery_volume_type(section) == "technical"]
-    business_sections = [section for section in sections if delivery_volume_type(section) == "business"]
+    leaves = _leaf_sections(sections)
+    technical_sections = [section for section in leaves if delivery_volume_type(section) == "technical"]
+    business_sections = [section for section in leaves if delivery_volume_type(section) == "business"]
 
     recommended_technical_pages = max(20, min(180, len(technical_sections) * 7))
     recommended_business_pages = max(12, min(120, len(business_sections) * 3))
@@ -109,9 +147,10 @@ def evaluate_length_feasibility(settings: dict[str, Any], sections: list[dict[st
 
 
 def allocate_chapter_length_targets(sections: list[dict[str, Any]], settings: dict[str, Any]) -> list[dict[str, Any]]:
+    leaves = _leaf_sections(sections)
     grouped = {
-        "technical": [section for section in sections if delivery_volume_type(section) == "technical"],
-        "business": [section for section in sections if delivery_volume_type(section) == "business"],
+        "technical": [section for section in leaves if delivery_volume_type(section) == "technical"],
+        "business": [section for section in leaves if delivery_volume_type(section) == "business"],
     }
     target_totals = {
         "technical": settings["technicalWords"],
@@ -149,8 +188,12 @@ def apply_length_allocations_to_sections(
     settings: dict[str, Any],
 ) -> list[dict[str, Any]]:
     by_id = {item["sectionId"]: int(item["targetWords"]) for item in allocations}
+    parent_ids = _container_section_ids(sections)
     next_sections: list[dict[str, Any]] = []
     for section in sections:
+        if _is_container_section(section, parent_ids):
+            next_sections.append(_clear_container_length_metadata(section))
+            continue
         section_id = section.get("id")
         target_words = by_id.get(section_id)
         if not target_words:

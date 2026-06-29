@@ -119,6 +119,70 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertNotIn("需准备资料", cleaned)
         self.assertNotIn("风险与复核", cleaned)
 
+    def test_numbered_guidance_comment_blocks_are_removed_from_formal_docx_content(self):
+        content = "\n".join(
+            [
+                "正式正文。",
+                "<!-- BID_BODY_SUBHEADING: 1.1 编写要点 -->",
+                "（需结合招标文件条款逐项响应，避免遗漏实质性要求。）",
+                "<!-- BID_BODY_SUBHEADING: 1.2 需准备资料 -->",
+                "需人工补充企业资料、资信文件和证明材料",
+                "<!-- BID_BODY_SUBHEADING: 1.3 风险与复核 -->",
+                "暂无明确风险，仍需结合招标文件复核。",
+                "后续正文。",
+            ]
+        )
+
+        cleaned = _strip_export_guidance_blocks(content)
+
+        self.assertIn("正式正文。", cleaned)
+        self.assertIn("后续正文。", cleaned)
+        self.assertNotIn("编写要点", cleaned)
+        self.assertNotIn("需准备资料", cleaned)
+        self.assertNotIn("风险与复核", cleaned)
+
+    def test_container_section_content_is_not_exported_to_formal_markdown(self):
+        project_id = "11111111-1111-1111-1111-111111111111"
+        with tempfile.TemporaryDirectory() as tmpdir:
+            app = Flask(__name__)
+            app.config["GENERATED_FOLDER"] = tmpdir
+            snapshot = [
+                {
+                    "id": "parent",
+                    "order_index": 1,
+                    "level": 1,
+                    "title": "商务响应文件",
+                    "content": "参考客户同类标书目录组织本节。\n\n### 编写要点\n内部提示不应导出。",
+                    "metadata": {"section_role": "container", "leaf_generation": False, "volume_type": "business"},
+                },
+                {
+                    "id": "leaf",
+                    "parent_id": "parent",
+                    "order_index": 2,
+                    "level": 2,
+                    "title": "投标函",
+                    "content": "这是正式投标函正文。",
+                    "metadata": {"volume_type": "business"},
+                },
+            ]
+
+            with (
+                app.app_context(),
+                patch("backend.api.routes.get_project_interpretation", return_value={
+                    "project": {"id": project_id, "project_name": "测试项目"},
+                    "analysis": {"project_meta": {"project_name": "测试投标文件"}},
+                }),
+            ):
+                markdown_path, _, _ = build_project_bid_markdown(project_id, sections_snapshot=snapshot)
+
+            markdown = markdown_path.read_text(encoding="utf-8")
+            self.assertIn("# 1. 商务响应文件", markdown)
+            self.assertIn("## 1.1 投标函", markdown)
+            self.assertIn("这是正式投标函正文。", markdown)
+            self.assertNotIn("参考客户同类标书目录组织本节", markdown)
+            self.assertNotIn("内部提示不应导出", markdown)
+            self.assertNotIn("编写要点", markdown)
+
     def test_docx_navigation_headings_remain_official_section_headings_only(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             markdown_path = Path(tmpdir) / "outline-lock.md"

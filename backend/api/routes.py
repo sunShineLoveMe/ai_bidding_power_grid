@@ -418,6 +418,15 @@ EXPORT_GUIDANCE_LABELS = {
 }
 
 
+def _normalize_export_guidance_label(text: str) -> str:
+    label = re.sub(r"<!--\s*BID_BODY_SUBHEADING:\s*(.*?)\s*-->", r"\1", text or "").strip()
+    label = re.sub(r"\*\*(.*?)\*\*", r"\1", label).strip()
+    label = label.strip("【】[]（）()# ：:、，,。")
+    label = _strip_existing_section_number(label)
+    label = re.sub(r"^\d+(?:[.．]\d+)*\s*", "", label).strip(" ：:、，,。")
+    return label
+
+
 def _body_subheading_comment(title: str) -> str:
     clean_title = clean_formal_bid_text(title or "").replace("--", " ").strip(" ：:、，,。")
     clean_title = clean_title.replace("【", "").replace("】", "").strip(" ：:、，,。")
@@ -433,6 +442,7 @@ def _strip_export_guidance_blocks(content: str) -> str:
         stripped = raw_line.strip()
         visible = re.sub(r"\*\*(.*?)\*\*", r"\1", stripped).strip()
         visible = visible.strip("【】[]（）() ：:、，,。")
+        normalized_visible = _normalize_export_guidance_label(visible)
         if skip_next > 0 and (
             stripped.startswith(("#", "<!--"))
             or BODY_SUBHEADING_COMMENT_PREFIX in stripped
@@ -450,8 +460,13 @@ def _strip_export_guidance_blocks(content: str) -> str:
             skip_next = 0
         bracket_match = re.match(r"^【\s*(.+?)\s*】$", stripped)
         label = bracket_match.group(1).strip() if bracket_match else ""
-        normalized_label = label.strip(" ：:、，,。")
-        if normalized_label in EXPORT_GUIDANCE_LABELS or visible in EXPORT_GUIDANCE_LABELS or "投标确认清单" in visible or visible == "已确认事项清单":
+        normalized_label = _normalize_export_guidance_label(label)
+        if (
+            normalized_label in EXPORT_GUIDANCE_LABELS
+            or normalized_visible in EXPORT_GUIDANCE_LABELS
+            or "投标确认清单" in normalized_visible
+            or normalized_visible == "已确认事项清单"
+        ):
             skip_next = 99
             continue
         output.append(raw_line)
@@ -1501,7 +1516,8 @@ def build_project_bid_markdown(
     numbering_style = str(template_profile.get("section_numbering_style") or "decimal_outline")
     for section in _numbered_export_sections(sections, numbering_style=numbering_style):
         title = section.get("_export_title") or _section_display_title(section)
-        content = _strip_untrusted_export_images(
+        container_section = is_container_section(section)
+        content = "" if container_section else _strip_untrusted_export_images(
             _strip_redundant_section_label(
                 _sanitize_export_visible_markup(
                     _normalize_body_outline_lines(
@@ -1528,9 +1544,9 @@ def build_project_bid_markdown(
         chunks.append(_section_markdown_heading(int(section.get("level") or 1), title))
         if content:
             chunks.append(f"{content}\n\n" if content.endswith("\n") else f"{content}\n\n")
-        elif not is_container_section(section):
+        elif not container_section:
             chunks.append("待补充章节正文。\n\n")
-        if with_images and "![" not in content:
+        if with_images and not container_section and "![" not in content:
             remaining = DOCX_TOTAL_ASSET_IMAGE_LIMIT - len(export_image_report["manifest"])
             snippet = _build_section_image_markdown(
                 section,
