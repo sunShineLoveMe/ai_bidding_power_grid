@@ -7,8 +7,10 @@ from backend.ai.chapter_planner import (
     _build_rule_outline,
     _build_split_child,
     _generate_outline_from_ai_or_rule,
+    _outline_total_nodes,
     _refine_bid_outline_in_background,
     _reference_template_chapters_from_files,
+    _supply_outline_reject_reason,
     stream_bid_outline,
 )
 from backend.db.supabase_repo import replace_bid_sections_from_outline
@@ -54,7 +56,54 @@ class ChapterPlannerRegressionTest(unittest.TestCase):
         self.assertTrue(any("售后服务" in title for title in titles))
         self.assertFalse(any("陕西云天创石化有限公司" in title for title in titles))
         self.assertFalse(any("电气施工用电线保护管道连接装置" in title for title in titles))
+        self.assertFalse(any("施工组织设计" in title for title in titles))
+        self.assertFalse(any("施工部署" in title for title in titles))
+        self.assertIsNone(_supply_outline_reject_reason(outline))
         self.assertLessEqual(max(int(item.get("level") or 1) for item in outline.get("chapters") or []), 4)
+
+    def test_supply_bid_uses_guarded_reference_outline_rules(self):
+        payload = {
+            "project": {"id": "project-1", "project_name": "电缆保护管采购"},
+            "analysis": {"summary": "CPVC、MPP电缆保护管物资采购", "project_meta": {}},
+            "requirements": [{"content": "提交技术偏差表、商务偏差表、技术特性参数表"}],
+            "scoringItems": [],
+            "risks": [],
+        }
+
+        outline = _build_rule_outline(payload)
+        prompt = _build_prompt(payload)
+        integration = outline.get("reference_outline_rules_integration") or {}
+        annotated = [
+            chapter for chapter in outline.get("chapters") or []
+            if (chapter.get("metadata") or {}).get("reference_outline_rule_id")
+        ]
+
+        self.assertEqual("guarded_planner_hint", integration.get("mode"))
+        self.assertGreaterEqual(integration.get("section_count"), 10)
+        self.assertIn("结构化参考模板规则 reference_outline_rules", prompt)
+        self.assertIn("不得覆盖招标文件、客户确认章节或供货类门禁", prompt)
+        self.assertTrue(any((item.get("metadata") or {}).get("reference_outline_rule_id") == "technical_parameter_table" for item in annotated))
+        self.assertTrue(any((item.get("metadata") or {}).get("reference_outline_rule_id") == "business_deviation_table" for item in annotated))
+        self.assertLessEqual(_outline_total_nodes(outline), 140)
+        self.assertIsNone(_supply_outline_reject_reason(outline))
+
+    def test_overhead_insulated_conductor_bid_is_supply_only(self):
+        payload = {
+            "project": {"id": "project-1", "project_name": "10kV架空绝缘导线采购"},
+            "analysis": {"summary": "国家电网10kV架空绝缘导线协议库存物资采购", "project_meta": {}},
+            "requirements": [{"content": "提交技术偏差表、技术特性参数表和货物清单"}],
+            "scoringItems": [],
+            "risks": [],
+        }
+
+        outline = _build_rule_outline(payload)
+        prompt = _build_prompt(payload)
+        titles = [str(item.get("title") or "") for item in outline.get("chapters") or []]
+
+        self.assertTrue(outline.get("preserve_reference_structure"))
+        self.assertIn("结构化参考模板规则 reference_outline_rules", prompt)
+        self.assertFalse(any("施工组织设计" in title or "施工部署" in title for title in titles))
+        self.assertIsNone(_supply_outline_reject_reason(outline))
 
     def test_supply_ai_outline_over_cap_falls_back_to_reference_outline(self):
         payload = {

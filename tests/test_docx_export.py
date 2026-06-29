@@ -1761,7 +1761,7 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertEqual("after_project_title", report["template"]["cover_layout"]["tender_no_position"])
         self.assertEqual("1.0", report["template"]["reference_outline_rules"]["schema_version"])
         self.assertEqual("technical_bid_volume", report["template"]["reference_outline_rules"]["scope"])
-        self.assertEqual("report_only", report["template"]["reference_outline_rules"]["planner_integration"])
+        self.assertEqual("guarded_planner_hint", report["template"]["reference_outline_rules"]["planner_integration"])
         self.assertTrue(report["template"]["reference_outline_rules"]["constraints"]["respect_supply_outline_guardrails"])
         self.assertIn(
             "technical_parameter_table",
@@ -1846,7 +1846,7 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertEqual("宋体", report["template"]["table_font"])
         self.assertEqual("sgcc_reference_volume_cover", report["template"]["cover_layout"]["style"])
         self.assertEqual("business_bid_volume", report["template"]["reference_outline_rules"]["scope"])
-        self.assertEqual("report_only", report["template"]["reference_outline_rules"]["planner_integration"])
+        self.assertEqual("guarded_planner_hint", report["template"]["reference_outline_rules"]["planner_integration"])
         self.assertTrue(report["template"]["reference_outline_rules"]["constraints"]["do_not_override_customer_confirmed_outline"])
         self.assertIn(
             "business_deviation_table",

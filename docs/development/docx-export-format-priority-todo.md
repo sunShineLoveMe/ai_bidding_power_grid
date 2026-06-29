@@ -52,7 +52,8 @@
 | P1-1 | 已完成 | 技术标/商务标封面字号校准 | 版式修复 | 项目名、招标编号、投标人、签字、日期更接近客户正式稿视觉重量 | 技术/商务 profile 启用 `sgcc_reference_volume_cover`：项目名 `18pt` 加粗，招标编号 `18pt` 加粗，`投标文件` `36pt` 加粗，字段 `14pt` 加粗，投标人 `16pt` 加粗，签字行 `15pt` 加粗，日期 `16pt` 加粗；真实导出 PDF 首页截图人工确认通过 | 2026-06-29 完成 | `docs/development/runs/run_20260629_docx_p1_cover_regression.md` |
 | P1-2 | 已完成 | 招标编号封面位置优化 | 版式修复 | 将招标编号从普通字段提升为项目名下方重点行 | 封面结构已调整为“项目名称 -> 招标编号 -> 投标文件 -> 分标/包号/文件类别 -> 投标人/签字/日期”；DOCX XML 与 PDF 首页截图均确认招标编号在 `投标文件` 之前 | 2026-06-29 完成 | `docs/development/runs/run_20260629_docx_p1_cover_regression.md` |
 | P1-3 | 已完成 | 国网混合编号模板设计 | 结构修复 | 支持一级 `（一）`、二级 `1.`、三级 `1.1`、四级 `1.1.1`、五级 `1）` 等混合编号 | 技术标/商务标启用 `section_numbering_style=sgcc_mixed`；真实导出确认目录和正文标题出现 `（一）/（二）`、`1.`、`3.1`、`3.3.1` 等混合编号，未出现 `.0`、旧 `(1)`/`（1）` 叠加编号或物料编码截断 | 2026-06-29 完成 | `docs/development/runs/run_20260629_docx_p1_numbering_regression.md` |
-| P1-4 | 已完成 | `reference_outline` 升级为结构化模板规则 | 架构优化/高风险 | 已将纯文本章节提示升级为可报告、可校验的结构化模板规则元数据，明确章节类型、分册范围、编号层级、标题样式、是否进目录、是否分页、是否表单/附件；本阶段为 `report_only`，不直接接入 `chapter_planner.py` 生成层 | 设计文档和 `report_only` 元数据已落地；真实导出确认未改变真实项目章节数，未绕过 `SUPPLY_ONLY_MAX_OUTLINE_NODES` 和 `_supply_outline_reject_reason`；技术标/商务标标题数量与 P1-3 基线一致。若后续接入生成层，另开 P1-4C 子任务 | 2026-06-29 完成 | `docs/development/docx-reference-outline-structured-rules-design.md`；`docs/development/runs/run_20260629_docx_p1_reference_outline_rules_regression.md` |
+| P1-4 | 已完成 | `reference_outline` 升级为结构化模板规则 | 架构优化/高风险 | 已将纯文本章节提示升级为可报告、可校验的结构化模板规则元数据，明确章节类型、分册范围、编号层级、标题样式、是否进目录、是否分页、是否表单/附件；本项对应 P1-4A/B，先以 `report_only` 验证规则结构，不直接接入 `chapter_planner.py` 生成层 | 设计文档和 `report_only` 元数据已落地；真实导出确认未改变真实项目章节数，未绕过 `SUPPLY_ONLY_MAX_OUTLINE_NODES` 和 `_supply_outline_reject_reason`；技术标/商务标标题数量与 P1-3 基线一致。生成层接入已拆到 P1-4C 单独验收 | 2026-06-29 完成 | `docs/development/docx-reference-outline-structured-rules-design.md`；`docs/development/runs/run_20260629_docx_p1_reference_outline_rules_regression.md` |
+| P1-4C | 已完成 | `reference_outline_rules` 接入大纲生成层 | 架构优化/高风险 | 让 `chapter_planner.py` 以受控低优先级方式读取结构化模板规则，用于供货类章节类型、表单属性、证据准备和 prompt 约束；同时修正真实物资协议库存项目被误判为通用施工类大纲的问题 | `planner_integration=guarded_planner_hint`；规则只作为提示和 metadata 标注，不覆盖招标文件/客户确认章节/供货类门禁；真实项目快稿从错误通用大纲 `64` 节切换为供货类参考结构 `102` 节，低于 `140` 上限且无施工类禁用标题；真实 AI 精修不落库结果 `38` 节、无拒绝原因；技术标/商务标真实 DOCX 导出标题数仍为 `52/51`、图片 `9/9` 与 `5/5`、字段刷新 `refreshed` | 2026-06-29 完成 | `docs/development/runs/run_20260629_docx_p1_4c_planner_rules_regression.md` |
 | P1-5 | 已完成 | 补充说明两层图片上限常量 | 文档修正 | 明确 DOCX 自动插图存在两层限制：`DOCX_TOTAL_ASSET_IMAGE_LIMIT` 控制知识库自动选图总量，`DOCX_MAX_IMAGES` / `MARKDOWN_IMAGE_MAX_COUNT` 控制 Markdown 转 Word 时实际插图总量 | `docx-export-vs-customer-reference-review.md` 和相关 todo 中不再把两层图片上限混为同一配置，也不误判 `DOCX_TOTAL_ASSET_IMAGE_LIMIT` 不存在 | 2026-06-29 完成 | `docs/development/runs/run_20260629_docx_p0_format_regression.md` |
 
 ## 5. P2 后续增强
@@ -70,7 +71,7 @@
 1. 先完成 `P0-1`、`P0-2`、`P0-7`：先把适用范围、证据和交付边界钉住。
 2. 再完成 `P0-3` 到 `P0-6`：这些是最明显、风险较低、收益较高的版式和字体修复。其中 `P0-3`、`P0-4`、`P0-5` 都集中在 `set_document_format` 页眉页脚/首页页码策略，建议同一批代码修改、一次真实导出统一验收，避免分三次回归互相覆盖。
 3. 接着完成 `P1-1`、`P1-2`：封面观感收益高，改动范围相对可控。
-4. `P1-4` 按高风险生成层关联任务处理：先完成设计评审和 `report_only` 元数据落地，不直接改 `chapter_planner.py`；后续如需接入生成层，单独设子任务和真实项目回归门禁。
+4. `P1-4` 按高风险生成层关联任务处理：先完成设计评审和 `report_only` 元数据落地，再以 `P1-4C` 单独接入 `chapter_planner.py`，必须保留供货类章节上限、禁用施工类章节和真实项目改前/改后对比。
 5. `P2` 单独立项，不混入本轮格式修复，避免范围失控。
 
 ## 7. 验证门禁

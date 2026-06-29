@@ -2,6 +2,7 @@ import json
 import logging
 import re
 import time
+import copy
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterator
@@ -255,12 +256,16 @@ SUPPLY_ONLY_AI_REFINEMENT_MAX_GROWTH = 1.25
 SUPPLY_ONLY_FORBIDDEN_OUTLINE_TERMS = (
     "施工组织设计",
     "施工部署",
+    "施工方案",
+    "工程概况",
+    "总体部署",
     "建造师",
     "安全生产许可证",
     "BIM",
     "水利施工",
     "安装总承包",
 )
+REFERENCE_OUTLINE_RULES_PLANNER_MODE = "guarded_planner_hint"
 
 
 def _writing_plan_target_words(chapter: dict[str, Any]) -> int:
@@ -332,6 +337,168 @@ def _leaf_split_topics(title: str, count: int) -> list[tuple[str, str]]:
         else:
             topics.append((f"专项响应 {index + 1}", f"围绕「{normalized_title}」补充专项响应内容，避免大段一次性生成。"))
     return topics
+
+
+def _reference_outline_rule_sets_for_supply_bid() -> list[dict[str, Any]]:
+    """Load DOCX profile reference rules for guarded supply-bid outline planning."""
+    try:
+        from backend.export.md_to_word import docx_template_report
+    except Exception:
+        logging.warning("chapter_planner: DOCX reference outline rules unavailable")
+        return []
+
+    rule_sets: list[dict[str, Any]] = []
+    for file_type in ("技术投标文件", "商务投标文件"):
+        try:
+            rules = (docx_template_report({"文件类型": file_type}).get("reference_outline_rules") or {})
+        except Exception:
+            logging.warning("chapter_planner: failed to load DOCX reference outline rules for %s", file_type)
+            continue
+        if not isinstance(rules, dict):
+            continue
+        if rules.get("planner_integration") != REFERENCE_OUTLINE_RULES_PLANNER_MODE:
+            continue
+        rule_sets.append(copy.deepcopy(rules))
+    return rule_sets
+
+
+def _reference_outline_rules_summary(rule_sets: list[dict[str, Any]]) -> dict[str, Any]:
+    sections: list[dict[str, Any]] = []
+    for rules in rule_sets:
+        for section in rules.get("sections") or []:
+            if not isinstance(section, dict):
+                continue
+            sections.append({
+                "id": section.get("id"),
+                "title": section.get("title"),
+                "volume_type": section.get("volume_type"),
+                "section_type": section.get("section_type"),
+                "generation_policy": section.get("generation_policy"),
+                "requires_table": bool(section.get("requires_table")),
+                "structured_data_required": bool(section.get("structured_data_required")),
+            })
+    return {
+        "mode": REFERENCE_OUTLINE_RULES_PLANNER_MODE,
+        "source": "DOCX_TEMPLATE_PROFILES.reference_outline_rules",
+        "rule_set_count": len(rule_sets),
+        "section_count": len(sections),
+        "sections": sections,
+        "priority": (
+            "招标文件明确要求 > 客户确认章节 > 供货类大纲门禁和章节数上限 > "
+            "客户范本/规则版回退 > reference_outline_rules 结构化提示 > AI自由生成"
+        ),
+    }
+
+
+def _normalize_rule_match_text(value: Any) -> str:
+    return re.sub(r"[\s：:、,，;；|（）()\\-_.]+", "", str(value or "")).lower()
+
+
+def _match_reference_outline_rule(
+    title: str,
+    volume_type: str | None,
+    rule_sets: list[dict[str, Any]],
+) -> dict[str, Any] | None:
+    normalized_title = _normalize_rule_match_text(title)
+    normalized_volume = normalize_volume_type(volume_type) if volume_type else None
+    for rules in rule_sets:
+        for section in rules.get("sections") or []:
+            if not isinstance(section, dict):
+                continue
+            section_volume = normalize_volume_type(section.get("volume_type"))
+            if normalized_volume and section_volume != normalized_volume:
+                continue
+            tokens = [section.get("title"), *(section.get("aliases") or [])]
+            for token in tokens:
+                normalized_token = _normalize_rule_match_text(token)
+                if normalized_token and (
+                    normalized_token in normalized_title or normalized_title in normalized_token
+                ):
+                    return section
+    return None
+
+
+def _annotate_reference_outline_rule(
+    node: dict[str, Any],
+    rule_sets: list[dict[str, Any]],
+) -> dict[str, Any]:
+    if not rule_sets:
+        return node
+    metadata = node.get("metadata") if isinstance(node.get("metadata"), dict) else {}
+    rule = _match_reference_outline_rule(str(node.get("title") or ""), metadata.get("volume_type"), rule_sets)
+    if not rule:
+        return node
+    annotated_metadata = {
+        **metadata,
+        "reference_outline_rule_id": rule.get("id"),
+        "reference_outline_section_type": rule.get("section_type"),
+        "reference_outline_generation_policy": rule.get("generation_policy"),
+        "reference_outline_requires_table": bool(rule.get("requires_table")),
+        "reference_outline_structured_data_required": bool(rule.get("structured_data_required")),
+        "reference_outline_preferred_asset_evidence_types": list(rule.get("preferred_asset_evidence_types") or []),
+    }
+    notes = list(node.get("writing_notes") or [])
+    if rule.get("requires_table"):
+        notes.append("本节命中结构化参考模板规则，优先按招标文件原表式或结构化表格输出；缺失数据不得编造。")
+    if rule.get("structured_data_required"):
+        notes.append("本节需要结构化参数或证据数据支撑，正文生成前必须核对泰昌真实资料来源。")
+    return {
+        **node,
+        "metadata": annotated_metadata,
+        "writing_notes": notes,
+    }
+
+
+def _sanitize_supply_reference_chapters(chapters: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    sanitized: list[dict[str, Any]] = []
+
+    def sanitize(node: dict[str, Any]) -> dict[str, Any] | None:
+        title = str(node.get("title") or "")
+        if any(term in title for term in SUPPLY_ONLY_FORBIDDEN_OUTLINE_TERMS):
+            return None
+        clean_node = {key: copy.deepcopy(value) for key, value in node.items() if key != "children"}
+        children = [
+            child
+            for child in (sanitize(child) for child in node.get("children") or [] if isinstance(child, dict))
+            if child
+        ]
+        if children:
+            clean_node["children"] = children
+        return clean_node
+
+    for chapter in chapters:
+        if not isinstance(chapter, dict):
+            continue
+        clean_chapter = sanitize(chapter)
+        if clean_chapter:
+            sanitized.append(clean_chapter)
+    return sanitized
+
+
+def _reference_outline_rules_prompt(rule_sets: list[dict[str, Any]]) -> str:
+    if not rule_sets:
+        return ""
+    lines = [
+        "结构化参考模板规则 reference_outline_rules（受控低优先级提示，不得覆盖招标文件、客户确认章节或供货类门禁）：",
+        "- 只可用于章节类型、表单/附件属性、目录层级和证据准备提示；不得从参考稿生成企业事实。",
+        "- 不得新增超出本项目要求的大量附件章节；不得绕过供货类章节上限和禁用工程施工类章节规则。",
+    ]
+    for rules in rule_sets:
+        scope = rules.get("scope") or "unknown_scope"
+        section_titles: list[str] = []
+        for section in rules.get("sections") or []:
+            if not isinstance(section, dict):
+                continue
+            flags = []
+            if section.get("requires_table"):
+                flags.append("表格")
+            if section.get("structured_data_required"):
+                flags.append("需结构化数据")
+            suffix = f"（{'、'.join(flags)}）" if flags else ""
+            section_titles.append(f"{section.get('title')}{suffix}")
+        if section_titles:
+            lines.append(f"- {scope}：{'；'.join(section_titles)}。")
+    return "\n".join(lines)
 
 
 def _mark_container_chapter(chapter: dict[str, Any], child_count: int) -> dict[str, Any]:
@@ -563,9 +730,38 @@ def _normalize_outline_structure(outline: dict[str, Any]) -> dict[str, Any]:
 
 
 def _is_supply_only_bid(payload: dict[str, Any]) -> bool:
+    project = payload.get("project") if isinstance(payload.get("project"), dict) else {}
+    analysis = payload.get("analysis") if isinstance(payload.get("analysis"), dict) else {}
+    project_meta = analysis.get("project_meta") if isinstance(analysis.get("project_meta"), dict) else {}
+    high_confidence_text = " ".join(
+        str(value or "")
+        for value in (
+            project.get("project_name"),
+            project.get("project_type"),
+            project.get("project_no"),
+            project_meta.get("project_name"),
+            project_meta.get("document_type"),
+            project_meta.get("tender_no"),
+            analysis.get("summary"),
+        )
+    )
     text = json.dumps(payload, ensure_ascii=False)
-    supply_terms = ("电缆保护管", "CPVC", "MPP", "物资采购", "协议库存", "货物清单")
+    supply_terms = (
+        "电缆保护管",
+        "CPVC",
+        "MPP",
+        "架空绝缘导线",
+        "绝缘导线",
+        "导线",
+        "物资采购",
+        "物资协议库存",
+        "协议库存",
+        "货物清单",
+        "供货要求",
+    )
     construction_terms = ("施工总承包", "安装工程", "土建工程", "工程施工招标")
+    if any(term in high_confidence_text for term in supply_terms):
+        return not any(term in high_confidence_text for term in construction_terms)
     return any(term in text for term in supply_terms) and not any(term in text for term in construction_terms)
 
 
@@ -667,7 +863,7 @@ def _make_reference_node(title: str, volume_type: str, *, children: list[dict[st
             "reference_template_source": "haoqian_toc_structure_only",
             "writing_plan": writing_plan,
             "generation_options": {
-                "required_scope": "河北泰昌电力器材科技有限公司电缆保护管物资供货投标，范围为生产、检验、包装、运输、交付和售后服务。",
+                "required_scope": "河北泰昌电力器材科技有限公司国家电网物资供货投标，范围为生产、检验、包装、运输、交付和售后服务。",
                 "forbidden_topics": ["施工组织", "建造师", "安全生产许可证", "BIM", "水利施工", "安装总承包"],
                 "allowed_placeholders": ["本次包号及包名称", "最终报价及税率", "投标保证金", "授权代表及签署日期", "最终交货期及质保期"],
             },
@@ -934,7 +1130,7 @@ def _supply_reference_base_chapters() -> list[dict[str, Any]]:
                 "leaf_generation": not bool(children),
                 "writing_plan": writing_plan,
                 "generation_options": {
-                    "required_scope": "河北泰昌电力器材科技有限公司电缆保护管物资供货投标，范围为生产、检验、包装、运输、交付和售后服务。",
+                    "required_scope": "河北泰昌电力器材科技有限公司国家电网物资供货投标，范围为生产、检验、包装、运输、交付和售后服务。",
                     "forbidden_topics": ["施工组织", "建造师", "安全生产许可证", "BIM", "水利施工", "安装总承包"],
                     "allowed_placeholders": ["本次包号及包名称", "最终报价及税率", "投标保证金", "授权代表及签署日期", "最终交货期及质保期"],
                 },
@@ -948,6 +1144,8 @@ def _build_rule_outline(payload: dict[str, Any]) -> dict[str, Any]:
     analysis = payload.get("analysis") or {}
     project_meta = analysis.get("project_meta") or {}
     ai_report = project_meta.get("ai_report") or {}
+    supply_only = _is_supply_only_bid(payload)
+    reference_rule_sets = _reference_outline_rule_sets_for_supply_bid() if supply_only else []
 
     base_chapters = [
         {
@@ -1030,8 +1228,10 @@ def _build_rule_outline(payload: dict[str, Any]) -> dict[str, Any]:
             ],
         },
     ]
-    if _is_supply_only_bid(payload):
-        base_chapters = _reference_template_chapters_from_files() or _supply_reference_base_chapters()
+    if supply_only:
+        base_chapters = _sanitize_supply_reference_chapters(
+            _reference_template_chapters_from_files() or _supply_reference_base_chapters()
+        )
 
     requirements = _dict_items(payload.get("requirements") or [])
     scoring_items = _dict_items(payload.get("scoringItems") or [])
@@ -1079,18 +1279,19 @@ def _build_rule_outline(payload: dict[str, Any]) -> dict[str, Any]:
             "metadata": dict(node.get("metadata") or {}),
             "children": [enrich_node(child, min(level + 1, 4)) for child in node.get("children") or []],
         }
-        return enriched
+        return _annotate_reference_outline_rule(enriched, reference_rule_sets)
 
     chapters = _normalize_outline_chapters([enrich_node(node, 1) for node in base_chapters])
 
     return _normalize_outline_structure({
         "version": "rule-volume-v1",
-        "preserve_reference_structure": _is_supply_only_bid(payload),
+        "preserve_reference_structure": supply_only,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "project_name": project_meta.get("project_name") or project.get("project_name"),
         "tender_no": project_meta.get("tender_no") or project.get("project_no"),
         "summary": "基于招标解读结果生成的分册化投标文件章节大纲，可作为后续正文生成和 Word 排版输入。",
         "chapters": chapters,
+        "reference_outline_rules_integration": _reference_outline_rules_summary(reference_rule_sets) if reference_rule_sets else None,
         "next_steps": [
             "先人工确认章节是否覆盖招标文件格式和实质性条款。",
             "补齐企业资信、人员证书、业绩和产品资料后，再进入单章节正文生成。",
@@ -1105,6 +1306,7 @@ def _build_prompt(payload: dict[str, Any]) -> str:
     project_meta = analysis.get("project_meta") or {}
     ai_report = project_meta.get("ai_report") or {}
     supply_only = _is_supply_only_bid(payload)
+    reference_rule_sets = _reference_outline_rule_sets_for_supply_bid() if supply_only else []
 
     requirements = payload.get("requirements") or []
     scoring_items = payload.get("scoringItems") or []
@@ -1223,7 +1425,7 @@ def _build_prompt(payload: dict[str, Any]) -> str:
         ),
         "- 每个评分项必须有至少一个对应章节或子章节明确响应，不得合并到笼统章节里。",
         "- 每个高风险/废标项必须有专项章节或子章节响应。",
-        ("- 当前为电缆保护管物资供货项目，禁止生成施工组织设计、建造师、安全生产许可证、BIM、水利施工等工程承包内容；技术部分应展开产品参数、生产检验、供货交付、质量保证和售后服务。" if supply_only else "- 技术标中施工组织设计必须展开到三级，至少包含：总体部署、进度计划、质量控制、安全管理、环保文明施工、资源配置、关键工序专项方案等子章节。"),
+        ("- 当前为国家电网物资供货项目，禁止生成施工组织设计、建造师、安全生产许可证、BIM、水利施工等工程承包内容；技术部分应展开产品参数、生产检验、供货交付、质量保证和售后服务。" if supply_only else "- 技术标中施工组织设计必须展开到三级，至少包含：总体部署、进度计划、质量控制、安全管理、环保文明施工、资源配置、关键工序专项方案等子章节。"),
         ("- 资格/商务/技术资料应按正式物资投标文件表式归类，不得把每个附件、证明截图或材料清单项都扩张成独立正文章节。" if supply_only else "- 资格文件分册必须为每类资质/证书/人员/业绩单独设置章节，不得合并为一个资格材料章节。"),
         "- 如果企业知识库中有产品/设备资产，技术标中必须为主要产品/设备设置专项技术参数响应章节。",
         "- 目录层级灵活：简单章节保留一级，复杂章节展开到二级、三级，必要时四级。",
@@ -1236,6 +1438,9 @@ def _build_prompt(payload: dict[str, Any]) -> str:
             "客户同类标书范本约束（只借目录/格式/写法，不借企业事实）：",
             _taichang_reference_template_hint(),
         ]
+        rules_prompt = _reference_outline_rules_prompt(reference_rule_sets)
+        if rules_prompt:
+            prompt_parts += ["", rules_prompt]
 
     if knowledge_section:
         prompt_parts += ["", "企业私有知识库上下文（必须结合以下信息生成章节）：", knowledge_section]

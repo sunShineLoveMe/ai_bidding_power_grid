@@ -238,7 +238,7 @@ DOCX_TEMPLATE_PROFILES = {
         "reference_outline_rules": {
             "schema_version": "1.0",
             "scope": "technical_bid_volume",
-            "planner_integration": "report_only",
+            "planner_integration": "guarded_planner_hint",
             "numbering_style": "sgcc_mixed",
             "toc_max_level": 4,
             "constraints": {
@@ -396,7 +396,7 @@ DOCX_TEMPLATE_PROFILES = {
         "reference_outline_rules": {
             "schema_version": "1.0",
             "scope": "business_bid_volume",
-            "planner_integration": "report_only",
+            "planner_integration": "guarded_planner_hint",
             "numbering_style": "sgcc_mixed",
             "toc_max_level": 4,
             "constraints": {
