@@ -1,4 +1,5 @@
 from pathlib import Path
+import copy
 import logging
 import markdown
 from docx import Document
@@ -234,6 +235,107 @@ DOCX_TEMPLATE_PROFILES = {
             "检测检验报告",
             "其他技术附件",
         ],
+        "reference_outline_rules": {
+            "schema_version": "1.0",
+            "scope": "technical_bid_volume",
+            "planner_integration": "report_only",
+            "numbering_style": "sgcc_mixed",
+            "toc_max_level": 4,
+            "constraints": {
+                "do_not_generate_enterprise_facts_from_reference": True,
+                "respect_supply_outline_guardrails": True,
+                "do_not_override_customer_confirmed_outline": True,
+            },
+            "sections": [
+                {
+                    "id": "technical_deviation_table",
+                    "title": "技术偏差表",
+                    "aliases": ["技术偏离表"],
+                    "section_type": "deviation_table",
+                    "volume_type": "technical",
+                    "recommended_level": 2,
+                    "include_in_toc": True,
+                    "start_on_new_page": False,
+                    "heading_style": "reference_volume_heading",
+                    "requires_table": True,
+                    "preferred_asset_evidence_types": [],
+                    "generation_policy": "required_if_tender_requires",
+                },
+                {
+                    "id": "technical_parameter_table",
+                    "title": "技术特性参数表",
+                    "aliases": ["技术参数表", "技术特性参数明细"],
+                    "section_type": "technical_parameter_table",
+                    "volume_type": "technical",
+                    "recommended_level": 2,
+                    "include_in_toc": True,
+                    "start_on_new_page": False,
+                    "heading_style": "reference_volume_heading",
+                    "requires_table": True,
+                    "structured_data_required": True,
+                    "preferred_asset_evidence_types": ["inspection_report"],
+                    "generation_policy": "required_if_tender_requires",
+                },
+                {
+                    "id": "point_to_point_response",
+                    "title": "技术规范点对点应答",
+                    "aliases": ["点对点应答", "技术规范逐条响应"],
+                    "section_type": "point_to_point_response",
+                    "volume_type": "technical",
+                    "recommended_level": 4,
+                    "include_in_toc": True,
+                    "start_on_new_page": False,
+                    "heading_style": "reference_volume_heading",
+                    "requires_table": True,
+                    "structured_data_required": True,
+                    "preferred_asset_evidence_types": ["inspection_report"],
+                    "generation_policy": "p2_or_required_if_tender_requires",
+                },
+                {
+                    "id": "component_material_configuration",
+                    "title": "货物组件材料配置表",
+                    "aliases": ["组件材料配置表", "货物组件配置表"],
+                    "section_type": "material_configuration_table",
+                    "volume_type": "technical",
+                    "recommended_level": 2,
+                    "include_in_toc": True,
+                    "start_on_new_page": False,
+                    "heading_style": "reference_volume_heading",
+                    "requires_table": True,
+                    "structured_data_required": True,
+                    "preferred_asset_evidence_types": ["product_image", "inspection_report"],
+                    "generation_policy": "required_if_tender_requires",
+                },
+                {
+                    "id": "technical_evaluation_support",
+                    "title": "评审要素补充技术文件",
+                    "aliases": ["技术评分支撑材料", "技术评审支撑材料"],
+                    "section_type": "evaluation_support",
+                    "volume_type": "technical",
+                    "recommended_level": 2,
+                    "include_in_toc": True,
+                    "start_on_new_page": False,
+                    "heading_style": "reference_volume_heading",
+                    "requires_table": False,
+                    "preferred_asset_evidence_types": ["production_capacity", "testing_capacity", "green_low_carbon", "certification"],
+                    "generation_policy": "optional",
+                },
+                {
+                    "id": "inspection_reports",
+                    "title": "检测检验报告",
+                    "aliases": ["检验报告", "型式试验报告"],
+                    "section_type": "attachment_evidence",
+                    "volume_type": "technical",
+                    "recommended_level": 2,
+                    "include_in_toc": True,
+                    "start_on_new_page": True,
+                    "heading_style": "reference_volume_heading",
+                    "requires_table": False,
+                    "preferred_asset_evidence_types": ["inspection_report"],
+                    "generation_policy": "p2_attachment_level",
+                },
+            ],
+        },
     },
     "business_bid_standard": {
         "template_id": "business_bid_standard",
@@ -291,6 +393,90 @@ DOCX_TEMPLATE_PROFILES = {
             "授权委托书",
             "其他商务附件",
         ],
+        "reference_outline_rules": {
+            "schema_version": "1.0",
+            "scope": "business_bid_volume",
+            "planner_integration": "report_only",
+            "numbering_style": "sgcc_mixed",
+            "toc_max_level": 4,
+            "constraints": {
+                "do_not_generate_enterprise_facts_from_reference": True,
+                "respect_supply_outline_guardrails": True,
+                "do_not_override_customer_confirmed_outline": True,
+            },
+            "sections": [
+                {
+                    "id": "business_deviation_table",
+                    "title": "商务偏差表",
+                    "aliases": ["商务偏离表"],
+                    "section_type": "deviation_table",
+                    "volume_type": "business",
+                    "recommended_level": 2,
+                    "include_in_toc": True,
+                    "start_on_new_page": False,
+                    "heading_style": "reference_volume_heading",
+                    "requires_table": True,
+                    "preferred_asset_evidence_types": [],
+                    "generation_policy": "required_if_tender_requires",
+                },
+                {
+                    "id": "legal_forms",
+                    "title": "投标函及法定格式文件",
+                    "aliases": ["投标函及投标函附录", "授权委托书"],
+                    "section_type": "formal_form",
+                    "volume_type": "business",
+                    "recommended_level": 1,
+                    "include_in_toc": True,
+                    "start_on_new_page": True,
+                    "heading_style": "reference_volume_heading",
+                    "requires_table": False,
+                    "preferred_asset_evidence_types": ["authorization"],
+                    "generation_policy": "required_if_tender_requires",
+                },
+                {
+                    "id": "enterprise_credit_query",
+                    "title": "查询报告及截图",
+                    "aliases": ["信用中国查询截图", "国家企业信用信息公示系统查询报告"],
+                    "section_type": "credit_query_evidence",
+                    "volume_type": "business",
+                    "recommended_level": 2,
+                    "include_in_toc": True,
+                    "start_on_new_page": False,
+                    "heading_style": "reference_volume_heading",
+                    "requires_table": False,
+                    "preferred_asset_evidence_types": ["enterprise_evidence", "certification"],
+                    "generation_policy": "required_if_tender_requires",
+                },
+                {
+                    "id": "financial_status",
+                    "title": "财务状况",
+                    "aliases": ["审计报告", "财务报表"],
+                    "section_type": "financial_evidence",
+                    "volume_type": "business",
+                    "recommended_level": 2,
+                    "include_in_toc": True,
+                    "start_on_new_page": False,
+                    "heading_style": "reference_volume_heading",
+                    "requires_table": False,
+                    "preferred_asset_evidence_types": ["finance"],
+                    "generation_policy": "required_if_tender_requires",
+                },
+                {
+                    "id": "qualification_proofs",
+                    "title": "符合招标文件投标人资格要求的证明文件",
+                    "aliases": ["资格证明文件", "资质业绩凭证单"],
+                    "section_type": "qualification_evidence",
+                    "volume_type": "business",
+                    "recommended_level": 2,
+                    "include_in_toc": True,
+                    "start_on_new_page": False,
+                    "heading_style": "reference_volume_heading",
+                    "requires_table": False,
+                    "preferred_asset_evidence_types": ["business_license", "certification", "project_performance"],
+                    "generation_policy": "required_if_tender_requires",
+                },
+            ],
+        },
     },
 }
 
@@ -317,15 +503,7 @@ def _is_invalid_cover_field_value(value: str) -> bool:
 
 def _copy_template_profile(profile_id: str) -> dict:
     source = DOCX_TEMPLATE_PROFILES.get(profile_id) or DOCX_TEMPLATE_PROFILES["formal_bid_standard"]
-    profile: dict = {}
-    for key, value in source.items():
-        if isinstance(value, dict):
-            profile[key] = dict(value)
-        elif isinstance(value, list):
-            profile[key] = list(value)
-        else:
-            profile[key] = value
-    return profile
+    return copy.deepcopy(source)
 
 
 def resolve_docx_template_profile(cover_fields: dict | None = None) -> dict:
@@ -383,6 +561,11 @@ def _profile_cover_font(profile: dict | None) -> str:
 def _profile_cover_layout(profile: dict | None) -> dict:
     layout = _template_profile_value(profile, "cover_layout", {}) or {}
     return dict(layout) if isinstance(layout, dict) else {}
+
+
+def _profile_reference_outline_rules(profile: dict | None) -> dict:
+    rules = _template_profile_value(profile, "reference_outline_rules", {}) or {}
+    return copy.deepcopy(rules) if isinstance(rules, dict) else {}
 
 
 def clean_formal_bid_text(text):
@@ -797,6 +980,7 @@ def docx_template_report(cover_fields: dict | None = None) -> dict:
         "reference_path": profile.get("reference_path"),
         "runtime_policy": profile.get("runtime_policy"),
         "reference_outline": profile.get("reference_outline") or [],
+        "reference_outline_rules": _profile_reference_outline_rules(profile),
         "bidder_full_name": DOCX_BIDDER_FULL_NAME,
         "body_font": _profile_body_font(profile),
         "body_latin_font": DOCX_BODY_LATIN,
