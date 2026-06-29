@@ -1541,7 +1541,7 @@ class DocxExportRegressionTest(unittest.TestCase):
             self.assertIn("招标编号：2225AC", non_empty_paragraphs[:10])
             self.assertIn("分标编号：2225AC-1408006-3401", non_empty_paragraphs[:10])
             self.assertIn("分标名称：电缆保护管CPVC", non_empty_paragraphs[:10])
-            self.assertIn("包号：包1-包2", non_empty_paragraphs[:10])
+            self.assertIn("包    号：包1-包2", non_empty_paragraphs[:10])
             self.assertEqual("2225AC", report["template"]["cover_fields"]["招标编号"])
 
     def test_extract_bid_cover_fields_from_markdown_table(self):
@@ -1629,7 +1629,7 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertNotIn("文件类型：技术投标文件", text)
         self.assertIn("招标编号：2225AC", text)
         self.assertIn("分标编号：102-CPVC", text)
-        self.assertIn("包号：包1", text)
+        self.assertIn("包    号：包1", text)
         self.assertIn("招标人：国网辽宁省电力有限公司", text)
         self.assertNotIn("招标编号：OLD-NO", cover_text)
         self.assertEqual("", header_text.strip())
@@ -1672,6 +1672,9 @@ class DocxExportRegressionTest(unittest.TestCase):
                     "项目名称": "国网新疆10kV架空绝缘导线采购",
                     "文件类型": "技术投标文件",
                     "招标编号": "SL265A",
+                    "分标编号": "TC-TECH-001",
+                    "分标名称": "10kV架空绝缘导线测试分标",
+                    "包号": "包1-13",
                 },
             )
             document = Document(str(output_path))
@@ -1679,6 +1682,15 @@ class DocxExportRegressionTest(unittest.TestCase):
             toc_entries = [p.text.split("\t")[0] for p in document.paragraphs if "\t" in p.text and p.text.strip()]
             full_text = "\n".join(p.text for p in document.paragraphs)
             cover_paragraphs = [p.text for p in document.paragraphs[:12] if p.text.strip()]
+            cover_run_specs = {
+                p.text: (
+                    p.runs[0].font.size.pt if p.runs and p.runs[0].font.size else None,
+                    p.runs[0].bold if p.runs else None,
+                    p.runs[0]._element.rPr.rFonts.get(qn("w:eastAsia")) if p.runs and p.runs[0]._element.rPr is not None else None,
+                )
+                for p in document.paragraphs[:12]
+                if p.text.strip()
+            }
             first_heading = next(p for p in document.paragraphs if p.text == "（一）技术偏差表")
             body_paragraph = next(p for p in document.paragraphs if p.text == "正文内容。")
             table_run = document.tables[0].cell(1, 1).paragraphs[0].runs[0]
@@ -1703,6 +1715,8 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertEqual("宋体", report["template"]["toc_font"])
         self.assertEqual("宋体", report["template"]["body_font"])
         self.assertEqual("宋体", report["template"]["table_font"])
+        self.assertEqual("sgcc_reference_volume_cover", report["template"]["cover_layout"]["style"])
+        self.assertEqual("after_project_title", report["template"]["cover_layout"]["tender_no_position"])
         self.assertEqual("宋体", report["template"]["header_footer"]["header_font"])
         self.assertEqual("", report["template"]["header_footer"]["header_text"])
         self.assertEqual("blank", report["template"]["header_footer"]["header_text_policy"])
@@ -1722,8 +1736,17 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertNotIn(">共<", footer_xml)
         self.assertEqual("宋体", body_paragraph.runs[0]._element.rPr.rFonts.get(qn("w:eastAsia")))
         self.assertEqual("宋体", table_run._element.rPr.rFonts.get(qn("w:eastAsia")))
+        self.assertLess(cover_paragraphs.index("招标编号：SL265A"), cover_paragraphs.index("投标文件"))
         self.assertIn("投标文件", cover_paragraphs)
+        self.assertIn("分标编号：TC-TECH-001", cover_paragraphs)
+        self.assertIn("分标名称：10kV架空绝缘导线测试分标", cover_paragraphs)
+        self.assertIn("包    号：包1-13", cover_paragraphs)
         self.assertIn("文件类别：技术", cover_paragraphs)
+        self.assertEqual((18.0, True, "宋体"), cover_run_specs["招标编号：SL265A"])
+        self.assertEqual((36.0, True, "宋体"), cover_run_specs["投标文件"])
+        self.assertEqual((14.0, True, "宋体"), cover_run_specs["分标编号：TC-TECH-001"])
+        self.assertEqual((16.0, True, "宋体"), cover_run_specs[f"投标人：{DOCX_BIDDER_FULL_NAME}（盖单位章）"])
+        self.assertEqual((15.0, True, "宋体"), cover_run_specs["法定代表人（单位负责人）或其授权代表人：       （签字）"])
         self.assertIn(f"投标人：{DOCX_BIDDER_FULL_NAME}（盖单位章）", full_text)
         self.assertIn("法定代表人（单位负责人）或其授权代表人：       （签字）", full_text)
         self.assertEqual(WD_ALIGN_PARAGRAPH.LEFT, first_heading.alignment)
@@ -1771,6 +1794,7 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertEqual("宋体", report["template"]["toc_font"])
         self.assertEqual("宋体", report["template"]["body_font"])
         self.assertEqual("宋体", report["template"]["table_font"])
+        self.assertEqual("sgcc_reference_volume_cover", report["template"]["cover_layout"]["style"])
         self.assertEqual("", report["template"]["header_footer"]["header_text"])
         self.assertEqual("PAGE", report["template"]["header_footer"]["page_number_field"])
         self.assertIn("禁止复用参考稿企业事实", report["template"]["runtime_policy"])

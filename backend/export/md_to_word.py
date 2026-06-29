@@ -203,6 +203,24 @@ DOCX_TEMPLATE_PROFILES = {
         "header_text_policy": "blank",
         "page_number_format": "plain_decimal",
         "different_first_page_header_footer": False,
+        "cover_layout": {
+            "style": "sgcc_reference_volume_cover",
+            "project_title_font_size_pt": 18,
+            "project_title_bold": True,
+            "tender_no_position": "after_project_title",
+            "tender_no_font_size_pt": 18,
+            "tender_no_bold": True,
+            "document_title_font_size_pt": 36,
+            "document_title_bold": True,
+            "formal_field_font_size_pt": 14,
+            "formal_field_bold": True,
+            "bidder_font_size_pt": 16,
+            "bidder_bold": True,
+            "signer_font_size_pt": 15,
+            "signer_bold": True,
+            "date_font_size_pt": 16,
+            "date_bold": True,
+        },
         "toc_entry_bold_all": False,
         "table_header_fill": "EDEDED",
         "reference_outline": [
@@ -241,6 +259,24 @@ DOCX_TEMPLATE_PROFILES = {
         "header_text_policy": "blank",
         "page_number_format": "plain_decimal",
         "different_first_page_header_footer": False,
+        "cover_layout": {
+            "style": "sgcc_reference_volume_cover",
+            "project_title_font_size_pt": 18,
+            "project_title_bold": True,
+            "tender_no_position": "after_project_title",
+            "tender_no_font_size_pt": 18,
+            "tender_no_bold": True,
+            "document_title_font_size_pt": 36,
+            "document_title_bold": True,
+            "formal_field_font_size_pt": 14,
+            "formal_field_bold": True,
+            "bidder_font_size_pt": 16,
+            "bidder_bold": True,
+            "signer_font_size_pt": 15,
+            "signer_bold": True,
+            "date_font_size_pt": 16,
+            "date_bold": True,
+        },
         "toc_entry_bold_all": False,
         "table_header_fill": "EDEDED",
         "reference_outline": [
@@ -339,6 +375,11 @@ def _profile_table_font(profile: dict | None) -> str:
 
 def _profile_cover_font(profile: dict | None) -> str:
     return str(_template_profile_value(profile, "cover_font", DOCX_BODY_EAST_ASIA))
+
+
+def _profile_cover_layout(profile: dict | None) -> dict:
+    layout = _template_profile_value(profile, "cover_layout", {}) or {}
+    return dict(layout) if isinstance(layout, dict) else {}
 
 
 def clean_formal_bid_text(text):
@@ -776,6 +817,7 @@ def docx_template_report(cover_fields: dict | None = None) -> dict:
         "table_line_spacing_pt": DOCX_TABLE_LINE_SPACING,
         "table_cell_margin_twips": DOCX_TABLE_CELL_MARGIN_TWIPS,
         "table_header_fill": profile.get("table_header_fill") or "EDEDED",
+        "cover_layout": _profile_cover_layout(profile),
         "toc_entry_bold_all": bool(profile.get("toc_entry_bold_all", DOCX_TOC_ENTRY_BOLD_ALL)),
         "reference_templates": list(DOCX_REFERENCE_TEMPLATE_SOURCES),
         "reference_template_policy": "assets/template_words 仅作为格式参考源，按文件类型选择 technical_bid_standard / business_bid_standard / formal_bid_standard，不直接套用参考稿事实内容。",
@@ -1459,6 +1501,22 @@ def _add_cover_page(
 ) -> None:
     bid_title = taichang_bid_document_title((cover_fields or {}).get("项目名称") or project_name)
     cover_font = _profile_cover_font(template_profile)
+    cover_layout = _profile_cover_layout(template_profile)
+    reference_cover = cover_layout.get("style") == "sgcc_reference_volume_cover"
+    project_title_size = float(cover_layout.get("project_title_font_size_pt") or 18)
+    project_title_bold = bool(cover_layout.get("project_title_bold", True))
+    tender_no_size = float(cover_layout.get("tender_no_font_size_pt") or 14.04)
+    tender_no_bold = bool(cover_layout.get("tender_no_bold", False))
+    document_title_size = float(cover_layout.get("document_title_font_size_pt") or DOCX_COVER_TITLE_FONT_SIZE)
+    document_title_bold = bool(cover_layout.get("document_title_bold", True))
+    formal_field_size = float(cover_layout.get("formal_field_font_size_pt") or 14.04)
+    formal_field_bold = bool(cover_layout.get("formal_field_bold", False))
+    bidder_size = float(cover_layout.get("bidder_font_size_pt") or 12)
+    bidder_bold = bool(cover_layout.get("bidder_bold", False))
+    signer_size = float(cover_layout.get("signer_font_size_pt") or 12)
+    signer_bold = bool(cover_layout.get("signer_bold", False))
+    date_size = float(cover_layout.get("date_font_size_pt") or 12)
+    date_bold = bool(cover_layout.get("date_bold", False))
     if DOCX_COVER_SHOW_LOGO:
         logo_para = doc.add_paragraph()
         logo_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -1495,7 +1553,24 @@ def _add_cover_page(
         para.paragraph_format.space_before = Pt(0)
         para.paragraph_format.space_after = Pt(0)
         run = para.add_run(line)
-        apply_run_font(run, east_asia=cover_font if _is_xinjiang_reference_profile(template_profile) else DOCX_HEADING_EAST_ASIA, size=18, bold=True)
+        apply_run_font(
+            run,
+            east_asia=cover_font if _is_xinjiang_reference_profile(template_profile) else DOCX_HEADING_EAST_ASIA,
+            size=project_title_size,
+            bold=project_title_bold,
+        )
+
+    tender_no = clean_formal_bid_text((cover_fields or {}).get("招标编号") if cover_fields else "")
+    if reference_cover and tender_no:
+        tender_para = doc.add_paragraph()
+        tender_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        tender_para.paragraph_format.first_line_indent = Pt(0)
+        tender_para.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
+        tender_para.paragraph_format.line_spacing = Pt(28)
+        tender_para.paragraph_format.space_before = Pt(0)
+        tender_para.paragraph_format.space_after = Pt(0)
+        tender_run = tender_para.add_run(f"招标编号：{tender_no}")
+        apply_run_font(tender_run, east_asia=cover_font, size=tender_no_size, bold=tender_no_bold)
 
     title = doc.add_paragraph()
     title.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -1510,7 +1585,12 @@ def _add_cover_page(
     if _is_xinjiang_reference_profile(template_profile):
         display_file_type = "投标文件"
     title_run = title.add_run(display_file_type)
-    apply_run_font(title_run, east_asia=cover_font if _is_xinjiang_reference_profile(template_profile) else DOCX_HEADING_EAST_ASIA, size=DOCX_COVER_TITLE_FONT_SIZE, bold=True)
+    apply_run_font(
+        title_run,
+        east_asia=cover_font if _is_xinjiang_reference_profile(template_profile) else DOCX_HEADING_EAST_ASIA,
+        size=document_title_size,
+        bold=document_title_bold,
+    )
 
     file_category = ""
     if _is_xinjiang_reference_profile(template_profile):
@@ -1519,17 +1599,21 @@ def _add_cover_page(
             file_category = "技术"
         elif "商务" in raw_type:
             file_category = "商务"
-    formal_fields = {
-        "招标编号": cover_fields.get("招标编号") if cover_fields else "",
-        "分标编号": cover_fields.get("分标编号") if cover_fields else "",
-        "分标名称": cover_fields.get("分标名称") if cover_fields else "",
-        "包号": cover_fields.get("包号") if cover_fields else "",
-        "包名称": cover_fields.get("包名称") if cover_fields else "",
-        "文件类别": file_category,
-        "招标人": cover_fields.get("招标人") if cover_fields else "",
-        "招标代理机构": cover_fields.get("招标代理机构") if cover_fields else "",
-    }
-    visible_formal_fields = [(label, value) for label, value in formal_fields.items() if value]
+    formal_field_items = [
+        ("招标编号", "招标编号", cover_fields.get("招标编号") if cover_fields else ""),
+        ("分标编号", "分标编号", cover_fields.get("分标编号") if cover_fields else ""),
+        ("分标名称", "分标名称", cover_fields.get("分标名称") if cover_fields else ""),
+        ("包号", "包    号" if reference_cover else "包号", cover_fields.get("包号") if cover_fields else ""),
+        ("包名称", "包名称", cover_fields.get("包名称") if cover_fields else ""),
+        ("文件类别", "文件类别", file_category),
+        ("招标人", "招标人", cover_fields.get("招标人") if cover_fields else ""),
+        ("招标代理机构", "招标代理机构", cover_fields.get("招标代理机构") if cover_fields else ""),
+    ]
+    visible_formal_fields = [
+        (display_label, value)
+        for field_key, display_label, value in formal_field_items
+        if value and not (reference_cover and field_key == "招标编号")
+    ]
     for label, value in visible_formal_fields:
         para = doc.add_paragraph()
         para.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -1539,7 +1623,7 @@ def _add_cover_page(
         para.paragraph_format.space_before = Pt(0)
         para.paragraph_format.space_after = Pt(0)
         run = para.add_run(f"{label}：{value}")
-        apply_run_font(run, east_asia=cover_font, size=14.04)
+        apply_run_font(run, east_asia=cover_font, size=formal_field_size, bold=formal_field_bold)
 
     bidder = doc.add_paragraph()
     bidder.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -1550,7 +1634,7 @@ def _add_cover_page(
     bidder.paragraph_format.space_after = Pt(0)
     bidder_suffix = "（盖单位章）" if _is_xinjiang_reference_profile(template_profile) else ""
     bidder_run = bidder.add_run(f"投标人：{DOCX_BIDDER_FULL_NAME}{bidder_suffix}")
-    apply_run_font(bidder_run, east_asia=cover_font, size=12)
+    apply_run_font(bidder_run, east_asia=cover_font, size=bidder_size, bold=bidder_bold)
 
     signer_para = doc.add_paragraph()
     signer_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -1561,7 +1645,7 @@ def _add_cover_page(
     signer_para.paragraph_format.space_after = Pt(0)
     signer_text = "法定代表人（单位负责人）或其授权代表人：       （签字）" if _is_xinjiang_reference_profile(template_profile) else "法定代表人或其委托代理人：        （签名）"
     signer_run = signer_para.add_run(signer_text)
-    apply_run_font(signer_run, east_asia=cover_font, size=12)
+    apply_run_font(signer_run, east_asia=cover_font, size=signer_size, bold=signer_bold)
 
     date_para = doc.add_paragraph()
     date_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -1571,7 +1655,7 @@ def _add_cover_page(
     date_para.paragraph_format.space_before = Pt(0)
     date_para.paragraph_format.space_after = Pt(0)
     date_run = date_para.add_run(datetime.today().strftime("%Y年%m月%d日"))
-    apply_run_font(date_run, east_asia=cover_font, size=12)
+    apply_run_font(date_run, east_asia=cover_font, size=date_size, bold=date_bold)
     doc.add_page_break()
 
 
