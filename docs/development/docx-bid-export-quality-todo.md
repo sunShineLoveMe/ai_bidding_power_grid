@@ -33,6 +33,7 @@
 - 2026-06-28 辽宁 CPVC/MPP 正式导出 P0 修复后复测：技术标、商务标、完整标书均走真实导出链路，字段刷新 `refreshed`、图片插入失败 `0`、formal readiness `ready=true`。DOCX 文本/XML 审计确认 `待补充/人工复核/客户确认后填写/用户确认/占位符`、内部图片路径、`NHAP`、施工类口径和 `【5.1】` 类括号编号标题均为 `0`；正式检查 `62` 条规则中 `61` 通过、`0` 阻断、`0` 人工确认，仅保留 `Q-007` 人员证书资产误带“试验检测能力”标签的资料治理 warning。记录见 `docs/development/runs/run_20260628_liaoning_formal_e2e_p0_fixes_retained.md`。
 - 2026-06-29 DOCX 格式评审 P0 整改完成：技术标/商务标 profile 独立配置空页眉、纯 `PAGE` 页脚、`different_first_page_header_footer=false`、正文/表格/封面宋体；`formal_bid_standard` 通用模板不受影响。真实项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d` 技术标/商务标均完成 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice -> PDF export`，字段刷新 `refreshed`，DOCX XML 审计页眉无文本、无 `NUMPAGES`、无 `w:titlePg`、正文/表格字体样本为宋体。记录见 `docs/development/runs/run_20260629_docx_p0_format_regression.md`。
 - 2026-06-29 DOCX 格式评审 P1 封面观感整改完成：技术标/商务标 profile 新增 `sgcc_reference_volume_cover` 封面布局，招标编号提升到项目名下方、`投标文件` 上方，封面字段整体按新疆正式分册参考稿加粗并校准字号；真实项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d` 技术标/商务标均完成真实导出、字段刷新、PDF 转换和首页截图审阅，封面未发现字段重叠、溢出或明显排版失衡。记录见 `docs/development/runs/run_20260629_docx_p1_cover_regression.md`。
+- 2026-06-29 DOCX 格式评审 P1 混合编号整改完成：技术标/商务标 profile 启用 `section_numbering_style=sgcc_mixed`，真实导出确认目录和正文标题支持一级 `（一）/（二）`、二级 `1.`、三级/四级点号编号；同时修复旧 `(1)`/`（1）` 叠加编号和 `9985-...` 物料编码误截断风险。技术标/商务标均完成字段刷新、PDF 转换和目录页截图审阅。当前图片 `9/9`、`5/5` 均成功插入，但图片密度偏低，后续应通过泰昌正式资产补充/标签治理和 P2 附件级整页插入解决，不建议放宽正式资产门禁。记录见 `docs/development/runs/run_20260629_docx_p1_numbering_regression.md`。
 
 ## P0 必须完成
 

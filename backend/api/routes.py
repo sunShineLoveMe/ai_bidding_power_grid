@@ -260,7 +260,10 @@ def _section_display_title(section: dict) -> str:
 
 def _strip_existing_section_number(title: str) -> str:
     value = clean_formal_bid_text(title or "未命名章节").strip()
-    value = re.sub(r"^\s*\d+(?:\.\d+)*[\.、]?\s*", "", value)
+    value = re.sub(r"^\s*[（(][一二三四五六七八九十百]+[）)]\s*", "", value)
+    value = re.sub(r"^\s*[（(]\d+[）)]\s*", "", value)
+    value = re.sub(r"^\s*\d+[）)]\s*", "", value)
+    value = re.sub(r"^\s*\d+(?:\.\d+)*(?:[\.、]\s*|\s+)", "", value)
     value = re.sub(r"^\s*[一二三四五六七八九十百]+[、.．]\s*", "", value)
     value = re.sub(r"^\s*第[一二三四五六七八九十百]+[章节篇部分][、:：.\s]*", "", value)
     return value.strip() or clean_formal_bid_text(title or "未命名章节").strip() or "未命名章节"
@@ -279,7 +282,45 @@ def _strip_repeated_parent_title_prefix(title: str) -> str:
     return value
 
 
-def _numbered_export_sections(sections: list[dict]) -> list[dict]:
+def _chinese_ordinal(value: int) -> str:
+    numerals = "零一二三四五六七八九"
+    if value <= 0:
+        return str(value)
+    if value < 10:
+        return numerals[value]
+    if value == 10:
+        return "十"
+    if value < 20:
+        return f"十{numerals[value % 10]}"
+    if value < 100:
+        tens, ones = divmod(value, 10)
+        return f"{numerals[tens]}十{numerals[ones] if ones else ''}"
+    return str(value)
+
+
+def _export_order_for_style(counters: list[int], level: int, numbering_style: str) -> str:
+    if numbering_style != "sgcc_mixed":
+        return ".".join(str(value) for value in counters)
+    if level == 1:
+        return str(counters[0])
+    numeric_parts = counters[1:level]
+    return ".".join(str(value) for value in numeric_parts) if numeric_parts else str(counters[0])
+
+
+def _export_title_prefix_for_style(counters: list[int], level: int, numbering_style: str) -> str:
+    if numbering_style != "sgcc_mixed":
+        number = ".".join(str(value) for value in counters)
+        return f"{number}. " if "." not in number else f"{number} "
+    if level == 1:
+        return f"（{_chinese_ordinal(counters[0])}）"
+    if level == 5:
+        return f"{counters[4]}） "
+    numeric_parts = counters[1:level]
+    number = ".".join(str(value) for value in numeric_parts) if numeric_parts else str(counters[0])
+    return f"{number}. " if level == 2 else f"{number} "
+
+
+def _numbered_export_sections(sections: list[dict], numbering_style: str = "decimal_outline") -> list[dict]:
     raw_levels = [max(1, min(int(section.get("level") or 1), 6)) for section in sections]
     counters: list[int] = []
     numbered: list[dict] = []
@@ -306,15 +347,16 @@ def _numbered_export_sections(sections: list[dict]) -> list[dict]:
             counters.append(0)
         counters = counters[:level]
         counters[level - 1] += 1
-        number = ".".join(str(value) for value in counters)
+        number = _export_order_for_style(counters, level, numbering_style)
         raw_title = _strip_existing_section_number(section.get("title") or "未命名章节")
         clean_title = _strip_repeated_parent_title_prefix(raw_title) if level > 1 else raw_title
-        title_prefix = f"{number}. " if "." not in number else f"{number} "
+        title_prefix = _export_title_prefix_for_style(counters, level, numbering_style)
         numbered.append({
             **section,
             "_export_original_level": raw_level,
             "level": level,
             "_export_order": number,
+            "_export_numbering_style": numbering_style,
             "_export_title": f"{title_prefix}{clean_title}",
         })
     return numbered
@@ -1405,6 +1447,7 @@ def build_project_bid_markdown(
         "template_id": template_profile.get("template_id") or "formal_bid_standard",
         "template_family": template_profile.get("template_family"),
         "reference_path": template_profile.get("reference_path"),
+        "section_numbering_style": template_profile.get("section_numbering_style") or "decimal_outline",
         "reference_template_policy": "tender_format_then_customer_reference_then_system_default",
         "bidder": DOCX_BIDDER_FULL_NAME,
         "empty_section_count": empty_section_count,
@@ -1455,7 +1498,8 @@ def build_project_bid_markdown(
     }
     chunks: list[str] = [f"# {document_title}\n\n"]
     used_asset_ids: set[str] = set()
-    for section in _numbered_export_sections(sections):
+    numbering_style = str(template_profile.get("section_numbering_style") or "decimal_outline")
+    for section in _numbered_export_sections(sections, numbering_style=numbering_style):
         title = section.get("_export_title") or _section_display_title(section)
         content = _strip_untrusted_export_images(
             _strip_redundant_section_label(

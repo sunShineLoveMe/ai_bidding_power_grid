@@ -173,6 +173,7 @@ DOCX_TEMPLATE_PROFILES = {
         "header_text_policy": "project_and_file_type",
         "page_number_format": "page_x_of_y",
         "different_first_page_header_footer": True,
+        "section_numbering_style": "decimal_outline",
         "toc_entry_bold_all": DOCX_TOC_ENTRY_BOLD_ALL,
         "table_header_fill": "EDEDED",
         "reference_outline": [],
@@ -203,6 +204,7 @@ DOCX_TEMPLATE_PROFILES = {
         "header_text_policy": "blank",
         "page_number_format": "plain_decimal",
         "different_first_page_header_footer": False,
+        "section_numbering_style": "sgcc_mixed",
         "cover_layout": {
             "style": "sgcc_reference_volume_cover",
             "project_title_font_size_pt": 18,
@@ -259,6 +261,7 @@ DOCX_TEMPLATE_PROFILES = {
         "header_text_policy": "blank",
         "page_number_format": "plain_decimal",
         "different_first_page_header_footer": False,
+        "section_numbering_style": "sgcc_mixed",
         "cover_layout": {
             "style": "sgcc_reference_volume_cover",
             "project_title_font_size_pt": 18,
@@ -808,6 +811,7 @@ def docx_template_report(cover_fields: dict | None = None) -> dict:
         "cover_title_font_size_pt": DOCX_COVER_TITLE_FONT_SIZE,
         "toc_title_font_size_pt": DOCX_TOC_TITLE_FONT_SIZE,
         "toc_max_level": int(profile.get("toc_max_level") or DOCX_TOC_MAX_LEVEL),
+        "section_numbering_style": profile.get("section_numbering_style") or "decimal_outline",
         "toc_font": profile.get("toc_font") or DOCX_BODY_EAST_ASIA,
         "toc_entry_font_size_pt": float(profile.get("toc_entry_font_size_pt") or DOCX_TOC_ENTRY_FONT_SIZE),
         "toc_page_number_font_size_pt": DOCX_TOC_PAGE_NUMBER_FONT_SIZE,

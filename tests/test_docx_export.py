@@ -332,6 +332,48 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertEqual(numbered[2]["_export_title"], "1.1.1 响应要求")
         self.assertEqual(numbered[3]["_export_title"], "1.1.2 资料清单")
 
+    def test_sgcc_mixed_export_section_numbering_matches_reference_volume_style(self):
+        sections = [
+            {"id": "a", "level": 1, "title": "技术偏差表"},
+            {"id": "b", "level": 2, "title": "1. 技术偏差表"},
+            {"id": "c", "level": 1, "title": "专项投标文件"},
+            {"id": "d", "level": 2, "title": "技术特性参数表"},
+            {"id": "e", "level": 3, "title": "9985-500143417-00001"},
+            {"id": "f", "level": 4, "title": "技术规范点对点应答"},
+            {"id": "g", "level": 5, "title": "（1）主要技术参数响应"},
+        ]
+
+        numbered = _numbered_export_sections(sections, numbering_style="sgcc_mixed")
+
+        self.assertEqual("（一）技术偏差表", numbered[0]["_export_title"])
+        self.assertEqual("1. 技术偏差表", numbered[1]["_export_title"])
+        self.assertEqual("（二）专项投标文件", numbered[2]["_export_title"])
+        self.assertEqual("1. 技术特性参数表", numbered[3]["_export_title"])
+        self.assertEqual("1.1 9985-500143417-00001", numbered[4]["_export_title"])
+        self.assertEqual("1.1.1 技术规范点对点应答", numbered[5]["_export_title"])
+        self.assertEqual("1） 主要技术参数响应", numbered[6]["_export_title"])
+        self.assertEqual("1.1.1", numbered[5]["_export_order"])
+        self.assertEqual("sgcc_mixed", numbered[6]["_export_numbering_style"])
+
+    def test_sgcc_mixed_body_heading_rewrite_uses_display_numeric_order(self):
+        sections = [
+            {"id": "a", "level": 1, "title": "专项投标文件"},
+            {"id": "b", "level": 2, "title": "技术特性参数表"},
+            {"id": "c", "level": 3, "title": "9985-500143417-00001"},
+        ]
+        numbered = _numbered_export_sections(sections, numbering_style="sgcc_mixed")
+        content = "\n".join([
+            "## 5.1 供货范围",
+            "",
+            "### 5.1.1 技术响应说明",
+        ])
+
+        normalized = _renumber_body_markdown_headings(content, numbered[2])
+
+        self.assertIn("## 1.1.1 供货范围", normalized)
+        self.assertIn("### 1.1.1.1 技术响应说明", normalized)
+        self.assertNotIn("2.1", normalized)
+
     def test_bid_markdown_export_prefers_editor_snapshot_over_stale_database_sections(self):
         project_id = "11111111-1111-1111-1111-111111111111"
         with tempfile.TemporaryDirectory() as tmpdir:
