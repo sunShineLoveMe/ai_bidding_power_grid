@@ -398,6 +398,39 @@ export function BidPrefillPage(): JSX.Element {
         }
       />
 
+      {report ? (
+        <section className="panel-card prefill-export-gate">
+          <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto]">
+            <div className="min-w-0">
+              <h2 className="panel-title mb-1">导出前门禁</h2>
+              <p className="m-0 text-sm font-semibold leading-6 text-slate-500">
+                只检查客户确认值和明确占位符，不生成正文；未通过时仍可保存确认值，但不应作为正式标书导出。
+              </p>
+            </div>
+            <Space className="justify-start lg:justify-end" wrap>
+              <Tag color={exportGate.ready ? 'green' : 'red'}>{exportGate.ready ? '可进入正式导出' : '仍需收口'}</Tag>
+              <Tag color={exportGate.missingRequired.length ? 'red' : 'green'}>必填缺口 {exportGate.missingRequired.length}</Tag>
+              <Tag color={exportGate.unresolvedPlaceholderCount ? 'orange' : 'green'}>正文占位 {exportGate.unresolvedPlaceholderCount}</Tag>
+            </Space>
+          </div>
+          {exportGate.missingRequired.length || exportGate.sectionGaps.length ? (
+            <div className="prefill-gate-list mt-3">
+              {exportGate.missingRequired.slice(0, 8).map(field => (
+                <button key={field.key} type="button" className="prefill-gate-item" onClick={() => focusField(field.key)}>
+                  <strong>{field.label}</strong>
+                  <span>{field.group} · {field.statusLabel}</span>
+                </button>
+              ))}
+              {exportGate.missingRequired.length > 8 ? (
+                <div className="prefill-section-warning">还有 {exportGate.missingRequired.length - 8} 个必填缺口未展示，请切换“只看需确认”。</div>
+              ) : null}
+            </div>
+          ) : (
+            <div className="prefill-gate-pass mt-3">当前确认值已覆盖正式必填字段；仍需以应用后的占位符扫描结果为最终门禁。</div>
+          )}
+        </section>
+      ) : null}
+
       <Alert
         className="prefill-alert"
         type={fromWorkflow ? 'warning' : 'info'}
@@ -458,37 +491,6 @@ export function BidPrefillPage(): JSX.Element {
               </div>
             </section>
           </div>
-
-          <section className="panel-card prefill-export-gate">
-            <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto]">
-              <div className="min-w-0">
-                <h2 className="panel-title mb-1">导出前门禁</h2>
-                <p className="m-0 text-sm font-semibold leading-6 text-slate-500">
-                  只检查客户确认值和明确占位符，不生成正文；未通过时仍可保存确认值，但不应作为正式标书导出。
-                </p>
-              </div>
-              <Space className="justify-start lg:justify-end" wrap>
-                <Tag color={exportGate.ready ? 'green' : 'red'}>{exportGate.ready ? '可进入正式导出' : '仍需收口'}</Tag>
-                <Tag color={exportGate.missingRequired.length ? 'red' : 'green'}>必填缺口 {exportGate.missingRequired.length}</Tag>
-                <Tag color={exportGate.unresolvedPlaceholderCount ? 'orange' : 'green'}>正文占位 {exportGate.unresolvedPlaceholderCount}</Tag>
-              </Space>
-            </div>
-            {exportGate.missingRequired.length || exportGate.sectionGaps.length ? (
-              <div className="prefill-gate-list mt-3">
-                {exportGate.missingRequired.slice(0, 8).map(field => (
-                  <button key={field.key} type="button" className="prefill-gate-item" onClick={() => focusField(field.key)}>
-                    <strong>{field.label}</strong>
-                    <span>{field.group} · {field.statusLabel}</span>
-                  </button>
-                ))}
-                {exportGate.missingRequired.length > 8 ? (
-                  <div className="prefill-section-warning">还有 {exportGate.missingRequired.length - 8} 个必填缺口未展示，请切换“只看需确认”。</div>
-                ) : null}
-              </div>
-            ) : (
-              <div className="prefill-gate-pass mt-3">当前确认值已覆盖正式必填字段；仍需以应用后的占位符扫描结果为最终门禁。</div>
-            )}
-          </section>
 
           <MetricCards items={metrics} />
 
