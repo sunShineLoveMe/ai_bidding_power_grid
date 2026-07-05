@@ -1,6 +1,6 @@
 # 标书文档编写与正式导出质量待办清单
 
-更新日期：2026-06-29
+更新日期：2026-07-03
 
 > 项目级优先级以 `docs/development/master-todo.md` 为准。本文档保留 DOCX 正式导出专项详情、验收口径和历史验证记录。
 > 格式评审后续整改的优先级、状态和验收记录入口见：[DOCX 正式导出格式评审整改优先级清单](docx-export-format-priority-todo.md)。
@@ -34,6 +34,7 @@
 - 2026-06-29 DOCX 格式评审 P0 整改完成：技术标/商务标 profile 独立配置空页眉、纯 `PAGE` 页脚、`different_first_page_header_footer=false`、正文/表格/封面宋体；`formal_bid_standard` 通用模板不受影响。真实项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d` 技术标/商务标均完成 `build_project_bid_markdown -> convert_md_to_word -> refresh_docx_fields_with_soffice -> PDF export`，字段刷新 `refreshed`，DOCX XML 审计页眉无文本、无 `NUMPAGES`、无 `w:titlePg`、正文/表格字体样本为宋体。记录见 `docs/development/runs/run_20260629_docx_p0_format_regression.md`。
 - 2026-06-29 DOCX 格式评审 P1 封面观感整改完成：技术标/商务标 profile 新增 `sgcc_reference_volume_cover` 封面布局，招标编号提升到项目名下方、`投标文件` 上方，封面字段整体按新疆正式分册参考稿加粗并校准字号；真实项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d` 技术标/商务标均完成真实导出、字段刷新、PDF 转换和首页截图审阅，封面未发现字段重叠、溢出或明显排版失衡。记录见 `docs/development/runs/run_20260629_docx_p1_cover_regression.md`。
 - 2026-06-29 DOCX 格式评审 P1 混合编号整改完成：技术标/商务标 profile 启用 `section_numbering_style=sgcc_mixed`，真实导出确认目录和正文标题支持一级 `（一）/（二）`、二级 `1.`、三级/四级点号编号；同时修复旧 `(1)`/`（1）` 叠加编号和 `9985-...` 物料编码误截断风险。技术标/商务标均完成字段刷新、PDF 转换和目录页截图审阅。当前图片 `9/9`、`5/5` 均成功插入，但图片密度偏低，后续应通过泰昌正式资产补充/标签治理和 P2 附件级整页插入解决，不建议放宽正式资产门禁。记录见 `docs/development/runs/run_20260629_docx_p1_numbering_regression.md`。
+- 2026-07-03 客户关注新疆参考稿“正文大部分为图片”的交付形态；经本地真实链路复核，当前系统具备企业图片资产入库、编辑器插图和 DOCX 图文导出底座，但默认仍是“正文 + 少量配图”，不是一键批量生成“图片型技术标/商务标”。该能力作为 P2 后续增强记录，需在泰昌正式图片/PDF 资料充足时专项设计和真实导出回归。
 - 2026-06-29 DOCX 格式评审 P1-4 report-only 阶段完成：`reference_outline` 已保留为兼容字段，同时技术标/商务标 profile 新增 `reference_outline_rules` 结构化规则，包含章节类型、分册范围、推荐层级、目录/分页/表格/附件属性、推荐证据类型和 `planner_integration=report_only`。本轮未接入 `backend/ai/chapter_planner.py`，未修改 `SUPPLY_ONLY_MAX_OUTLINE_NODES`、`_supply_outline_reject_reason` 或客户范本/规则版回退。真实导出确认技术标/商务标标题数量与 P1-3 基线一致，未出现章节膨胀；`tests/test_chapter_planner.py`、`tests/test_docx_export.py`、`tests/test_celery_export_tasks.py` 均通过。设计见 `docs/development/docx-reference-outline-structured-rules-design.md`，回归记录见 `docs/development/runs/run_20260629_docx_p1_reference_outline_rules_regression.md`。
 - 2026-06-29 DOCX 格式评审 P1-4C 生成层接入完成：`reference_outline_rules.planner_integration` 升级为 `guarded_planner_hint`，`chapter_planner.py` 在供货类物资投标场景读取规则，用于 prompt 低优先级提示、章节 metadata 标注和表格/结构化数据写作提示；不强插章节，不提高 `SUPPLY_ONLY_MAX_OUTLINE_NODES=140`，不绕过 `_supply_outline_reject_reason()`。真实项目 `a1d853bc-ca4e-43b4-bbea-256f561c8a3d` 改前快稿为错误通用大纲 `64` 节且命中施工类禁用标题；改后识别为物资协议库存供货类，快稿 `102` 节、禁用标题 `0`、拒绝原因 `null`，真实 AI 精修不落库返回 `38` 节。技术标/商务标真实 DOCX 导出标题数仍为 `52/51`，图片插入 `9/9`、`5/5`，字段刷新 `refreshed`。记录见 `docs/development/runs/run_20260629_docx_p1_4c_planner_rules_regression.md`。
 - 2026-06-29 DOCX 封面签章区留白修复完成：技术标/商务标 `sgcc_reference_volume_cover` 增加 `signature_block_space_before_pt=96`，使 `文件类别` 与 `投标人/法定代表人` 签章区之间保留明显空白，贴近客户参考封面。真实导出技术标/商务标并转 PDF 首页截图，字段刷新 `refreshed`，图片插入分别 `9/9`、`5/5`，失败 `0`，签章区段前距均为 `96pt`。记录见 `docs/development/runs/run_20260629_docx_cover_signature_spacing_regression.md`。
@@ -86,6 +87,8 @@
 | 待办 | 企业模板保存 | 用户可另存企业模板，并在后续项目复用 |
 | 待办 | PDF 预览与导出 | DOCX 刷新后可转 PDF 预览，便于提交前检查 |
 | 待办 | 招标文件格式约束抽取 | 自动抽取第六章/前附表格式要求，并提示用户确认 |
+| 后置 | 图片型技术标/商务标编排模式 | 客户提供大量泰昌正式图片、证书、检验报告、业绩证明或 PDF 扫描页后，支持按技术标/商务标/附件图片包批量入库、排序、章节绑定和整页插入；导出结果可形成“少量文字说明 + 大量整页图片资料”的交付形态。验收必须覆盖只使用泰昌企业事实资产、图片数量上限调整、DOCX 文件大小/打开性能、插入/跳过/失败统计、字段刷新和 DOCX XML 禁用字段审计 |
+| 后置 | 正文/参数表图片化导出 | 将技术参数表、点对点应答、检验报告摘要或客户确认的固定版式内容渲染为整页图片后插入 DOCX；需要先明确哪些内容保留可编辑文字、哪些内容图片化，避免牺牲关键响应内容的可检索、可编辑和可审查性 |
 
 ## P0 第一阶段执行记录
 

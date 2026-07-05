@@ -1,0 +1,1101 @@
+{
+  "run_id": "run_20260703_image_capability_check",
+  "generated_at": "2026-07-03T21:30:31",
+  "project_id": "a1d853bc-ca4e-43b4-bbea-256f561c8a3d",
+  "project_name": "国网辽宁电力2025年第三次物资协议库存招标采购",
+  "document_title": "国网辽宁电力2025年第三次物资协议库存招标采购投标文件",
+  "expected_min_sections": 30,
+  "expected_min_non_empty_sections": 30,
+  "markdown_path": "outputs/a1d853bc/泰昌_2225AC_包1_投标文件_20260703_图文.md",
+  "docx_path": "outputs/a1d853bc/泰昌_2225AC_包1_投标文件_20260703_图文.docx",
+  "docx_size": 3068588,
+  "source_sections": {
+    "total": 102,
+    "non_empty": 75,
+    "total_content_chars": 190109,
+    "empty_titles": [
+      "投标函及法定格式文件",
+      "商务响应文件",
+      "投标保证金",
+      "保险购买凭证",
+      "投标人基本情况表",
+      "符合招标文件投标人资格要求的证明文件",
+      "符合投标邀请书投标人资格要求的证明文件（更新或补充）",
+      "认证证书",
+      "查询报告及截图",
+      "（7） “国家企业信用信息公示系统”",
+      "财务信息、股权结构说明书及支持证明材料",
+      "招标文件第三章评标办法前附表之三“商务评分标准”涉及的支撑材料",
+      "履约能力评价",
+      "技术响应文件",
+      "业绩文件",
+      "新增业绩合同",
+      "技术特性参数表",
+      "符合招标文件投标人资格要求的证明文件",
+      "招标文件第三章评标办法前附表 之四“技术评分标准”涉及的支撑材料",
+      "创新能力",
+      "专利证书",
+      "中华人民共和国国家版权局计算机软件著作权登记证书",
+      "原材料组部件改进",
+      "自主可控水平",
+      "产品制造质量控制",
+      "绿电绿证",
+      "绿色低碳生产"
+    ]
+  },
+  "markdown_audit": {
+    "chars": 213803,
+    "heading_count": 103,
+    "image_refs": 10,
+    "table_blocks": 746
+  },
+  "image_selection": {
+    "enabled": true,
+    "scope": "full",
+    "volume_type": null,
+    "volume_name": "完整投标文件",
+    "delivery_file_type": "投标文件",
+    "section_count": 102,
+    "asset_candidates": 597,
+    "selected": 10,
+    "max_total": 24,
+    "manifest": [
+      {
+        "asset_id": "2b1e3b4a-5959-4fa3-949d-894a366a9963",
+        "asset_title": "营业执照副本",
+        "asset_formal_title": "营业执照副本",
+        "asset_category": "基础证照",
+        "asset_type": "qualification_image",
+        "evidence_type": "business_license",
+        "target_library": "qualification_library",
+        "source_batch_id": "customer_taichang_supplement_20260611",
+        "library": "企业知识资产库",
+        "section_id": "c6363be8-7c0f-4742-8ec6-89fce723c0fa",
+        "section_title": "企业营业执照（或事业单位法人证书或其他组织登记证书）",
+        "volume_type": "business",
+        "volume_name": "商务标",
+        "score": 95,
+        "reason": "商务文件仅插入证明或附件类资料；匹配章节证据类型：营业执照；章节与资产同时命中“资质”",
+        "image_ref": "/api/bidding/knowledge/assets/2b1e3b4a-5959-4fa3-949d-894a366a9963/file?variant=original",
+        "caption": "资料：营业执照副本",
+        "caption_policy": "formal_material_caption",
+        "sensitive": false,
+        "anonymized": false
+      },
+      {
+        "asset_id": "a6807d69-7cb6-4b98-8614-072a7592d580",
+        "asset_title": "质量管理体系认证证书",
+        "asset_formal_title": "质量管理体系认证证书",
+        "asset_category": "资质证书",
+        "asset_type": "qualification_image",
+        "evidence_type": "certification",
+        "target_library": "qualification_library",
+        "source_batch_id": "customer_taichang_supplement_20260611",
+        "library": "企业知识资产库",
+        "section_id": "c38669e9-1d3f-4906-9cbd-46be6734fad1",
+        "section_title": "质量管理体系认证证书",
+        "volume_type": "business",
+        "volume_name": "商务标",
+        "score": 93,
+        "reason": "商务文件仅插入证明或附件类资料；匹配章节证据类型：资信/认证证书；章节与资产同时命中“证书”",
+        "image_ref": "/api/bidding/knowledge/assets/a6807d69-7cb6-4b98-8614-072a7592d580/file?variant=original",
+        "caption": "资料：质量管理体系认证证书",
+        "caption_policy": "formal_material_caption",
+        "sensitive": false,
+        "anonymized": false
+      },
+      {
+        "asset_id": "e6ddb1a5-df93-408d-9ff3-7b8199f38c18",
+        "asset_title": "职业健康安全管理体系认证证书",
+        "asset_formal_title": "职业健康安全管理体系认证证书",
+        "asset_category": "资质证书",
+        "asset_type": "qualification_image",
+        "evidence_type": "certification",
+        "target_library": "qualification_library",
+        "source_batch_id": "customer_taichang_supplement_20260611",
+        "library": "企业知识资产库",
+        "section_id": "a83f00bb-a353-4158-86fb-952743ec6baa",
+        "section_title": "职业健康安全管理体系认证证书",
+        "volume_type": "business",
+        "volume_name": "商务标",
+        "score": 93,
+        "reason": "商务文件仅插入证明或附件类资料；匹配章节证据类型：资信/认证证书；章节与资产同时命中“资质”",
+        "image_ref": "/api/bidding/knowledge/assets/e6ddb1a5-df93-408d-9ff3-7b8199f38c18/file?variant=original",
+        "caption": "资料：职业健康安全管理体系认证证书",
+        "caption_policy": "formal_material_caption",
+        "sensitive": false,
+        "anonymized": false
+      },
+      {
+        "asset_id": "323dde3a-7d52-4d18-b3d0-4b32b59062e6",
+        "asset_title": "环境管理体系认证证书",
+        "asset_formal_title": "环境管理体系认证证书",
+        "asset_category": "资质证书",
+        "asset_type": "qualification_image",
+        "evidence_type": "certification",
+        "target_library": "qualification_library",
+        "source_batch_id": "customer_taichang_supplement_20260611",
+        "library": "企业知识资产库",
+        "section_id": "86582cf8-4891-4b41-981a-8b4302a58228",
+        "section_title": "环境管理体系认证证书",
+        "volume_type": "business",
+        "volume_name": "商务标",
+        "score": 93,
+        "reason": "商务文件仅插入证明或附件类资料；匹配章节证据类型：资信/认证证书；章节与资产同时命中“资质”",
+        "image_ref": "/api/bidding/knowledge/assets/323dde3a-7d52-4d18-b3d0-4b32b59062e6/file?variant=original",
+        "caption": "资料：环境管理体系认证证书",
+        "caption_policy": "formal_material_caption",
+        "sensitive": false,
+        "anonymized": false
+      },
+      {
+        "asset_id": "30bc6905-52ff-4779-825c-8dbf50965a71",
+        "asset_title": "碳足迹报告",
+        "asset_formal_title": "碳足迹报告",
+        "asset_category": "绿色低碳资料",
+        "asset_type": "product_image",
+        "evidence_type": "green_low_carbon",
+        "target_library": "product_library",
+        "source_batch_id": "customer_taichang_supplement_20260611",
+        "library": "企业知识资产库",
+        "section_id": "0624bc8c-9dbd-4272-90f2-727818abcfc5",
+        "section_title": "绿色环保企业体系认证证书",
+        "volume_type": "technical",
+        "volume_name": "技术标",
+        "score": 110,
+        "reason": "匹配章节证据类型：绿色低碳资料；章节与资产同时命中“产品”；章节与资产同时命中“资质”",
+        "image_ref": "/api/bidding/knowledge/assets/30bc6905-52ff-4779-825c-8dbf50965a71/file?variant=original",
+        "caption": "资料：碳足迹报告",
+        "caption_policy": "formal_material_caption",
+        "sensitive": false,
+        "anonymized": false
+      },
+      {
+        "asset_id": "7e1feea3-277f-4656-888c-ed166c055aa6",
+        "asset_title": "绿色电力认证证书",
+        "asset_formal_title": "绿色电力认证证书",
+        "asset_category": "绿色低碳资料",
+        "asset_type": "product_image",
+        "evidence_type": "green_low_carbon",
+        "target_library": "product_library",
+        "source_batch_id": "customer_taichang_supplement_20260611",
+        "library": "企业知识资产库",
+        "section_id": "542f9f4f-1fe6-4666-b8b3-5b2cc30c99a9",
+        "section_title": "绿色供应链管理体系认证证书",
+        "volume_type": "technical",
+        "volume_name": "技术标",
+        "score": 99,
+        "reason": "匹配章节证据类型：绿色低碳资料；章节与资产同时命中“产品”；章节与资产同时命中“证书”",
+        "image_ref": "/api/bidding/knowledge/assets/7e1feea3-277f-4656-888c-ed166c055aa6/file?variant=original",
+        "caption": "资料：绿色电力认证证书",
+        "caption_policy": "formal_material_caption",
+        "sensitive": false,
+        "anonymized": false
+      },
+      {
+        "asset_id": "96dffe93-5d4c-4b26-b025-2f9013e52658",
+        "asset_title": "绿色发展规划报告",
+        "asset_formal_title": "绿色发展规划报告",
+        "asset_category": "绿色低碳资料",
+        "asset_type": "product_image",
+        "evidence_type": "green_low_carbon",
+        "target_library": "product_library",
+        "source_batch_id": "customer_taichang_supplement_20260611",
+        "library": "企业知识资产库",
+        "section_id": "542f9f4f-1fe6-4666-b8b3-5b2cc30c99a9",
+        "section_title": "绿色供应链管理体系认证证书",
+        "volume_type": "technical",
+        "volume_name": "技术标",
+        "score": 99,
+        "reason": "匹配章节证据类型：绿色低碳资料；章节与资产同时命中“产品”；章节与资产同时命中“证书”",
+        "image_ref": "/api/bidding/knowledge/assets/96dffe93-5d4c-4b26-b025-2f9013e52658/file?variant=original",
+        "caption": "资料：绿色发展规划报告",
+        "caption_policy": "formal_material_caption",
+        "sensitive": false,
+        "anonymized": false
+      },
+      {
+        "asset_id": "8f0d3fc2-4a47-45a0-a464-fd58d97230c2",
+        "asset_title": "废水废气废固报告",
+        "asset_formal_title": "废水废气废固报告",
+        "asset_category": "绿色低碳资料",
+        "asset_type": "product_image",
+        "evidence_type": "green_low_carbon",
+        "target_library": "product_library",
+        "source_batch_id": "customer_taichang_supplement_20260611",
+        "library": "企业知识资产库",
+        "section_id": "eecf9291-0405-4b94-a3d5-78159a661ef9",
+        "section_title": "数智化绿色低碳体系建设综合评价报告",
+        "volume_type": "technical",
+        "volume_name": "技术标",
+        "score": 95,
+        "reason": "匹配章节证据类型：绿色低碳资料；章节与资产同时命中“产品”；章节与资产同时命中“资质”",
+        "image_ref": "/api/bidding/knowledge/assets/8f0d3fc2-4a47-45a0-a464-fd58d97230c2/file?variant=original",
+        "caption": "资料：废水废气废固报告",
+        "caption_policy": "formal_material_caption",
+        "sensitive": false,
+        "anonymized": false
+      },
+      {
+        "asset_id": "ee3b0a64-4152-4bc1-9643-62c3873c4979",
+        "asset_title": "保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC__中标通知书",
+        "asset_category": "项目业绩",
+        "asset_type": "qualification_image",
+        "evidence_type": "project_performance",
+        "target_library": "qualification_library",
+        "source_batch_id": "customer_taichang_supplement_20260611",
+        "library": "企业知识资产库",
+        "section_id": null,
+        "section_title": "同类项目业绩证明补充附件",
+        "volume_type": "attachment",
+        "volume_name": "附件材料",
+        "score": 52,
+        "reason": "正式投标文件业绩证明最低配图要求",
+        "image_ref": "/api/bidding/knowledge/assets/ee3b0a64-4152-4bc1-9643-62c3873c4979/file?variant=original",
+        "caption": "资料：保护管（CPVC和MPP）包2电缆保护管MPP和CPVC中标通知书",
+        "caption_policy": "formal_material_caption",
+        "sensitive": false,
+        "anonymized": false
+      },
+      {
+        "asset_id": "f32ab172-5a24-4176-8a85-f5a647a0965e",
+        "asset_title": "试验设备台账",
+        "asset_category": "试验检测能力",
+        "asset_type": "product_image",
+        "evidence_type": "testing_capacity",
+        "target_library": "product_library",
+        "source_batch_id": "customer_taichang_supplement_20260611",
+        "library": "企业知识资产库",
+        "section_id": null,
+        "section_title": "试验检测能力证明补充附件",
+        "volume_type": "attachment",
+        "volume_name": "附件材料",
+        "score": 40,
+        "reason": "正式投标文件试验检测能力最低配图要求",
+        "image_ref": "/api/bidding/knowledge/assets/f32ab172-5a24-4176-8a85-f5a647a0965e/file?variant=original",
+        "caption": "资料：试验设备台账",
+        "caption_policy": "formal_material_caption",
+        "sensitive": false,
+        "anonymized": false
+      }
+    ],
+    "warnings": [
+      "已按本包物料范围（CPVC、MPP）过滤非本包物料章节 2 个。",
+      "仍有 20 处待补充/待确认占位，当前文件尚未达到正式投标文件标准。"
+    ],
+    "cover_fields": {
+      "招标编号": "2225AC",
+      "文件类型": "投标文件",
+      "项目名称": "国网辽宁电力2025年第三次物资协议库存招标采购",
+      "包号": "包1",
+      "包名称": "包1：电缆保护管CPVC、电缆保护管MPP"
+    },
+    "cover_field_sources": {
+      "招标编号": {
+        "source": "tender_file_structured_extract",
+        "snippet": "招标编号：2225AC",
+        "source_page": null,
+        "matched_label": "招标编号"
+      },
+      "文件类型": {
+        "source": "default_bid_document_type",
+        "matched_label": "默认投标文件"
+      },
+      "项目名称": {
+        "source": "tender_file_title_extract",
+        "snippet": "国网辽宁电力2025年第三次物资协议库存招标采购招标文件",
+        "source_page": null,
+        "matched_label": "标题"
+      }
+    },
+    "cover_field_missing": [
+      "分标编号",
+      "分标名称",
+      "包号",
+      "包名称"
+    ],
+    "cover_field_source": "uploaded_tender_structured_extract",
+    "material_scope_filter": {
+      "allowed_families": [
+        "CPVC",
+        "MPP"
+      ],
+      "before": 102,
+      "after": 100,
+      "removed": 2
+    },
+    "formal_readiness": {
+      "template_id": "formal_bid_standard",
+      "template_family": "formal_bid_standard",
+      "reference_path": null,
+      "section_numbering_style": "sgcc_mixed",
+      "reference_template_policy": "tender_format_then_customer_reference_then_system_default",
+      "bidder": "河北泰昌电力器材科技有限公司",
+      "empty_section_count": 0,
+      "placeholder_count": 20,
+      "missing_formal_required_fields": [],
+      "export_confirmation_replacements": 542,
+      "ready": true,
+      "final_placeholder_count": 0
+    },
+    "download_file_name": "泰昌_2225AC_包1_投标文件_20260703_图文.docx",
+    "download_markdown_name": "泰昌_2225AC_包1_投标文件_20260703_图文.md",
+    "output_naming": {
+      "scheme": "short_bidder_tender_package_volume_date.v1",
+      "physicalFolder": "a1d853bc",
+      "fileStem": "泰昌_2225AC_包1_投标文件_20260703_图文",
+      "legacyDisplaySuffix": "-图文"
+    }
+  },
+  "image_conversion": {
+    "max_images": 24,
+    "found": 10,
+    "inserted": 10,
+    "skipped": 0,
+    "failed": 0,
+    "events": [
+      {
+        "status": "inserted",
+        "alt": "营业执照副本",
+        "ref": "/api/bidding/knowledge/assets/2b1e3b4a-5959-4fa3-949d-894a366a9963/file?variant=original",
+        "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpqd6p3ie9.jpg",
+        "prepared": true,
+        "fit": {
+          "uniform_frame_enabled": true,
+          "source_pixel_width": 2400,
+          "source_pixel_height": 1697,
+          "source_aspect_ratio": 1.41426,
+          "pixel_width": 1276,
+          "pixel_height": 1804,
+          "display_width_in": 5.8,
+          "display_height_in": 8.2,
+          "frame_aspect_ratio": 0.707317,
+          "content_pixel_width": 1276,
+          "content_pixel_height": 902,
+          "content_display_width_in": 5.8,
+          "content_display_height_in": 4.1,
+          "content_offset_x_px": 0,
+          "content_offset_y_px": 451,
+          "aspect_ratio_preserved": true,
+          "content_aspect_ratio_preserved": true,
+          "frame_background": "FFFFFF"
+        }
+      },
+      {
+        "status": "inserted",
+        "alt": "质量管理体系认证证书",
+        "ref": "/api/bidding/knowledge/assets/a6807d69-7cb6-4b98-8614-072a7592d580/file?variant=original",
+        "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmphtw6y06u.jpg",
+        "prepared": false,
+        "fit": {
+          "uniform_frame_enabled": true,
+          "source_pixel_width": 1191,
+          "source_pixel_height": 1685,
+          "source_aspect_ratio": 0.706825,
+          "pixel_width": 1276,
+          "pixel_height": 1804,
+          "display_width_in": 5.8,
+          "display_height_in": 8.2,
+          "frame_aspect_ratio": 0.707317,
+          "content_pixel_width": 1275,
+          "content_pixel_height": 1804,
+          "content_display_width_in": 5.7955,
+          "content_display_height_in": 8.2,
+          "content_offset_x_px": 0,
+          "content_offset_y_px": 0,
+          "aspect_ratio_preserved": true,
+          "content_aspect_ratio_preserved": true,
+          "frame_background": "FFFFFF"
+        }
+      },
+      {
+        "status": "inserted",
+        "alt": "职业健康安全管理体系认证证书",
+        "ref": "/api/bidding/knowledge/assets/e6ddb1a5-df93-408d-9ff3-7b8199f38c18/file?variant=original",
+        "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmp255fvudl.jpg",
+        "prepared": false,
+        "fit": {
+          "uniform_frame_enabled": true,
+          "source_pixel_width": 1191,
+          "source_pixel_height": 1684,
+          "source_aspect_ratio": 0.707245,
+          "pixel_width": 1276,
+          "pixel_height": 1804,
+          "display_width_in": 5.8,
+          "display_height_in": 8.2,
+          "frame_aspect_ratio": 0.707317,
+          "content_pixel_width": 1276,
+          "content_pixel_height": 1804,
+          "content_display_width_in": 5.8,
+          "content_display_height_in": 8.2,
+          "content_offset_x_px": 0,
+          "content_offset_y_px": 0,
+          "aspect_ratio_preserved": true,
+          "content_aspect_ratio_preserved": true,
+          "frame_background": "FFFFFF"
+        }
+      },
+      {
+        "status": "inserted",
+        "alt": "环境管理体系认证证书",
+        "ref": "/api/bidding/knowledge/assets/323dde3a-7d52-4d18-b3d0-4b32b59062e6/file?variant=original",
+        "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpy2jof0xi.jpg",
+        "prepared": false,
+        "fit": {
+          "uniform_frame_enabled": true,
+          "source_pixel_width": 1191,
+          "source_pixel_height": 1685,
+          "source_aspect_ratio": 0.706825,
+          "pixel_width": 1276,
+          "pixel_height": 1804,
+          "display_width_in": 5.8,
+          "display_height_in": 8.2,
+          "frame_aspect_ratio": 0.707317,
+          "content_pixel_width": 1275,
+          "content_pixel_height": 1804,
+          "content_display_width_in": 5.7955,
+          "content_display_height_in": 8.2,
+          "content_offset_x_px": 0,
+          "content_offset_y_px": 0,
+          "aspect_ratio_preserved": true,
+          "content_aspect_ratio_preserved": true,
+          "frame_background": "FFFFFF"
+        }
+      },
+      {
+        "status": "inserted",
+        "alt": "碳足迹报告",
+        "ref": "/api/bidding/knowledge/assets/30bc6905-52ff-4779-825c-8dbf50965a71/file?variant=original",
+        "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmp5s8is3xs.jpg",
+        "prepared": false,
+        "fit": {
+          "uniform_frame_enabled": true,
+          "source_pixel_width": 1191,
+          "source_pixel_height": 1684,
+          "source_aspect_ratio": 0.707245,
+          "pixel_width": 1276,
+          "pixel_height": 1804,
+          "display_width_in": 5.8,
+          "display_height_in": 8.2,
+          "frame_aspect_ratio": 0.707317,
+          "content_pixel_width": 1276,
+          "content_pixel_height": 1804,
+          "content_display_width_in": 5.8,
+          "content_display_height_in": 8.2,
+          "content_offset_x_px": 0,
+          "content_offset_y_px": 0,
+          "aspect_ratio_preserved": true,
+          "content_aspect_ratio_preserved": true,
+          "frame_background": "FFFFFF"
+        }
+      },
+      {
+        "status": "inserted",
+        "alt": "绿色电力认证证书",
+        "ref": "/api/bidding/knowledge/assets/7e1feea3-277f-4656-888c-ed166c055aa6/file?variant=original",
+        "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpjalq_i69.jpg",
+        "prepared": false,
+        "fit": {
+          "uniform_frame_enabled": true,
+          "source_pixel_width": 1191,
+          "source_pixel_height": 1682,
+          "source_aspect_ratio": 0.708086,
+          "pixel_width": 1276,
+          "pixel_height": 1804,
+          "display_width_in": 5.8,
+          "display_height_in": 8.2,
+          "frame_aspect_ratio": 0.707317,
+          "content_pixel_width": 1276,
+          "content_pixel_height": 1802,
+          "content_display_width_in": 5.8,
+          "content_display_height_in": 8.1909,
+          "content_offset_x_px": 0,
+          "content_offset_y_px": 1,
+          "aspect_ratio_preserved": true,
+          "content_aspect_ratio_preserved": true,
+          "frame_background": "FFFFFF"
+        }
+      },
+      {
+        "status": "inserted",
+        "alt": "绿色发展规划报告",
+        "ref": "/api/bidding/knowledge/assets/96dffe93-5d4c-4b26-b025-2f9013e52658/file?variant=original",
+        "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpsuezm874.jpg",
+        "prepared": false,
+        "fit": {
+          "uniform_frame_enabled": true,
+          "source_pixel_width": 1191,
+          "source_pixel_height": 1684,
+          "source_aspect_ratio": 0.707245,
+          "pixel_width": 1276,
+          "pixel_height": 1804,
+          "display_width_in": 5.8,
+          "display_height_in": 8.2,
+          "frame_aspect_ratio": 0.707317,
+          "content_pixel_width": 1276,
+          "content_pixel_height": 1804,
+          "content_display_width_in": 5.8,
+          "content_display_height_in": 8.2,
+          "content_offset_x_px": 0,
+          "content_offset_y_px": 0,
+          "aspect_ratio_preserved": true,
+          "content_aspect_ratio_preserved": true,
+          "frame_background": "FFFFFF"
+        }
+      },
+      {
+        "status": "inserted",
+        "alt": "废水废气废固报告",
+        "ref": "/api/bidding/knowledge/assets/8f0d3fc2-4a47-45a0-a464-fd58d97230c2/file?variant=original",
+        "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpfu680nby.jpg",
+        "prepared": false,
+        "fit": {
+          "uniform_frame_enabled": true,
+          "source_pixel_width": 1191,
+          "source_pixel_height": 1684,
+          "source_aspect_ratio": 0.707245,
+          "pixel_width": 1276,
+          "pixel_height": 1804,
+          "display_width_in": 5.8,
+          "display_height_in": 8.2,
+          "frame_aspect_ratio": 0.707317,
+          "content_pixel_width": 1276,
+          "content_pixel_height": 1804,
+          "content_display_width_in": 5.8,
+          "content_display_height_in": 8.2,
+          "content_offset_x_px": 0,
+          "content_offset_y_px": 0,
+          "aspect_ratio_preserved": true,
+          "content_aspect_ratio_preserved": true,
+          "frame_background": "FFFFFF"
+        }
+      },
+      {
+        "status": "inserted",
+        "alt": "保护管（CPVC和MPP）包2电缆保护管MPP和CPVC中标通知书",
+        "ref": "/api/bidding/knowledge/assets/ee3b0a64-4152-4bc1-9643-62c3873c4979/file?variant=original",
+        "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmprn420rz6.jpg",
+        "prepared": false,
+        "fit": {
+          "uniform_frame_enabled": true,
+          "source_pixel_width": 1191,
+          "source_pixel_height": 1684,
+          "source_aspect_ratio": 0.707245,
+          "pixel_width": 1276,
+          "pixel_height": 1804,
+          "display_width_in": 5.8,
+          "display_height_in": 8.2,
+          "frame_aspect_ratio": 0.707317,
+          "content_pixel_width": 1276,
+          "content_pixel_height": 1804,
+          "content_display_width_in": 5.8,
+          "content_display_height_in": 8.2,
+          "content_offset_x_px": 0,
+          "content_offset_y_px": 0,
+          "aspect_ratio_preserved": true,
+          "content_aspect_ratio_preserved": true,
+          "frame_background": "FFFFFF"
+        }
+      },
+      {
+        "status": "inserted",
+        "alt": "试验设备台账",
+        "ref": "/api/bidding/knowledge/assets/f32ab172-5a24-4176-8a85-f5a647a0965e/file?variant=original",
+        "source_path": "/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/tmpjo5lj3e_.jpg",
+        "prepared": true,
+        "fit": {
+          "uniform_frame_enabled": true,
+          "source_pixel_width": 1698,
+          "source_pixel_height": 2400,
+          "source_aspect_ratio": 0.7075,
+          "pixel_width": 1276,
+          "pixel_height": 1804,
+          "display_width_in": 5.8,
+          "display_height_in": 8.2,
+          "frame_aspect_ratio": 0.707317,
+          "content_pixel_width": 1276,
+          "content_pixel_height": 1804,
+          "content_display_width_in": 5.8,
+          "content_display_height_in": 8.2,
+          "content_offset_x_px": 0,
+          "content_offset_y_px": 0,
+          "aspect_ratio_preserved": true,
+          "content_aspect_ratio_preserved": true,
+          "frame_background": "FFFFFF"
+        }
+      }
+    ],
+    "logo": {
+      "header": {
+        "inserted": false,
+        "reason": "formal_header_has_no_logo"
+      },
+      "cover": {
+        "inserted": false,
+        "reason": "reference_template_cover_has_no_logo"
+      }
+    },
+    "mermaid": {
+      "found": 0,
+      "inserted": 0,
+      "skipped": 0
+    },
+    "captions": {
+      "detected": 10,
+      "formalized": 10,
+      "samples": [
+        {
+          "source": "资料：营业执照副本",
+          "caption": "资料：营业执照"
+        },
+        {
+          "source": "资料：质量管理体系认证证书",
+          "caption": "资料：质量管理体系认证证书"
+        },
+        {
+          "source": "资料：职业健康安全管理体系认证证书",
+          "caption": "资料：职业健康安全管理体系认证证书"
+        },
+        {
+          "source": "资料：环境管理体系认证证书",
+          "caption": "资料：环境管理体系认证证书"
+        },
+        {
+          "source": "资料：碳足迹报告",
+          "caption": "资料：碳足迹报告"
+        },
+        {
+          "source": "资料：绿色电力认证证书",
+          "caption": "资料：绿色电力认证证书"
+        },
+        {
+          "source": "资料：绿色发展规划报告",
+          "caption": "资料：绿色发展规划报告"
+        },
+        {
+          "source": "资料：废水废气废固报告",
+          "caption": "资料：废水废气废固报告"
+        }
+      ]
+    },
+    "formal_forms": {
+      "detected_types": [
+        "bid_letter",
+        "authorization",
+        "business_deviation",
+        "technical_deviation"
+      ],
+      "tables": 3,
+      "subheadings": 0,
+      "subheading_page_breaks": 0,
+      "signature_lines": 13,
+      "non_split_rows": 39
+    },
+    "marker_cleanup": {
+      "enabled": true,
+      "status": "unchanged",
+      "counts_before": {
+        "keepLines": 0,
+        "keepNext": 0,
+        "pageBreakBefore": 0
+      },
+      "counts_after": {
+        "keepLines": 0,
+        "keepNext": 0,
+        "pageBreakBefore": 0
+      }
+    },
+    "field_font_normalization": {
+      "enabled": true,
+      "status": "normalized",
+      "toc_page_number_font_size_pt": 9.0,
+      "footer_page_number_font_size_pt": 9.0,
+      "toc_page_number_runs": 34,
+      "footer_runs": 6
+    },
+    "template": {
+      "template_id": "formal_bid_standard",
+      "template_family": "formal_bid_standard",
+      "applies_to": "full_or_generic_bid",
+      "reference_source": "system_default_plus_reference_templates",
+      "reference_path": null,
+      "runtime_policy": "内置稳定模板生成，不直接套用客户/兄弟公司成稿。",
+      "reference_outline": [],
+      "reference_outline_rules": {},
+      "bidder_full_name": "河北泰昌电力器材科技有限公司",
+      "body_font": "FangSong_GB2312",
+      "body_latin_font": "Times New Roman",
+      "body_font_size_pt": 12.0,
+      "body_line_spacing_rule": "multiple",
+      "body_line_spacing": 1.5,
+      "body_line_spacing_pt": null,
+      "body_first_line_indent_pt": 24.0,
+      "list_left_indent_pt": 24.0,
+      "list_hanging_indent_pt": 12.0,
+      "heading_keep_with_next": false,
+      "cover_title_font_size_pt": 36.0,
+      "toc_title_font_size_pt": 16.0,
+      "toc_max_level": 2,
+      "section_numbering_style": "decimal_outline",
+      "toc_font": "FangSong_GB2312",
+      "toc_entry_font_size_pt": 10.5,
+      "toc_page_number_font_size_pt": 9.0,
+      "toc_entry_line_spacing_pt": 15.0,
+      "table_font": "FangSong_GB2312",
+      "table_font_size_pt": 12.0,
+      "table_line_spacing_pt": 18.0,
+      "table_cell_margin_twips": 100,
+      "table_header_fill": "EDEDED",
+      "cover_layout": {},
+      "toc_entry_bold_all": false,
+      "reference_templates": [
+        {
+          "path": "assets/template_words/5d2a2c833dad4bb3b3ccc0856f755b54.docx",
+          "role": "primary_reference_style",
+          "usage": "抽取目录、页边距、封面字段、表格和签章位风格，作为 formal_bid_standard 的参考规则，不直接套打正文。"
+        },
+        {
+          "path": "assets/template_words/1523993.doc",
+          "role": "secondary_legacy_reference",
+          "usage": "旧版二进制 Word 参考稿，仅用于补充格式项比对，不作为运行时模板依赖。"
+        }
+      ],
+      "reference_template_policy": "assets/template_words 仅作为格式参考源，按文件类型选择 technical_bid_standard / business_bid_standard / formal_bid_standard，不直接套用参考稿事实内容。",
+      "image_layout": {
+        "uniform_frame_enabled": true,
+        "frame_width_in": 5.8,
+        "frame_height_in": 8.2,
+        "frame_dpi": 220,
+        "frame_background": "FFFFFF",
+        "content_policy": "contain_no_crop_no_distortion"
+      },
+      "page_size": "A4",
+      "margins_cm": {
+        "top": 2.5,
+        "bottom": 2.5,
+        "left": 2.8,
+        "right": 2.5
+      },
+      "heading_font": "SimHei",
+      "heading_level3_font": "KaiTi_GB2312",
+      "header_footer": {
+        "header_font": "FangSong_GB2312",
+        "header_font_size_pt": 9,
+        "footer_font": "FangSong_GB2312",
+        "footer_font_size_pt": 9.0,
+        "header_logo": false,
+        "text_color": "000000",
+        "page_number_format": "第 X 页 共 Y 页",
+        "page_number_field": "PAGE + NUMPAGES",
+        "different_first_page_header_footer": true,
+        "header_text_policy": "project_and_file_type",
+        "header_text": "左侧项目名称，右侧投标文件",
+        "header_max_chars": 42
+      },
+      "cover_fields": {
+        "项目名称": "国网辽宁电力2025年第三次物资协议库存招标采购",
+        "文件类型": "投标文件",
+        "招标编号": "2225AC",
+        "分标编号": "包号及包名称",
+        "包号": "包1",
+        "包名称": "包1：电缆保护管CPVC、电缆保护管MPP"
+      },
+      "image_caption": {
+        "font_size_pt": 9.0,
+        "alignment": "center",
+        "prefix": "资料：",
+        "policy": "清洗图片资产检索标题，仅保留正式材料说明，不展示内部参数命名或检索来源字段。"
+      }
+    }
+  },
+  "field_refresh": {
+    "enabled": true,
+    "status": "refreshed",
+    "tool": "libreoffice",
+    "soffice_bin": "/opt/homebrew/bin/soffice",
+    "input_path": "outputs/a1d853bc/泰昌_2225AC_包1_投标文件_20260703_图文.docx",
+    "timeout_seconds": 180,
+    "returncode": 0,
+    "stdout": "convert /var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-dy_i0n4c/input/泰昌_2225AC_包1_投标文件_20260703_图文.docx as a Writer document -> /private/var/folders/8w/h36d1fcn6ml5s55b2r3c918h0000gn/T/docx-refresh-dy_i0n4c/output/泰昌_2225AC_包1_投标文件_20260703_图文.docx using filter : Office Open XML Text\n",
+    "stderr": "2026-07-03 21:30:30.319 soffice[11530:50524539] Task policy set failed: 4 ((os/kern) invalid argument)\n",
+    "manual_refresh_required": false,
+    "user_message": "DOCX 已完成自动刷新，目录页码、页脚页码和总页数字段已重新保存。",
+    "output_path": "outputs/a1d853bc/泰昌_2225AC_包1_投标文件_20260703_图文.docx",
+    "size": 3068588,
+    "table_header_repeat": {
+      "table_count": 105,
+      "updated": 0,
+      "failed": false
+    },
+    "marker_cleanup": {
+      "enabled": true,
+      "status": "cleaned",
+      "counts_before": {
+        "keepLines": 0,
+        "keepNext": 1,
+        "pageBreakBefore": 0
+      },
+      "counts_after": {
+        "keepLines": 0,
+        "keepNext": 0,
+        "pageBreakBefore": 0
+      }
+    },
+    "field_font_normalization": {
+      "enabled": true,
+      "status": "normalized",
+      "toc_page_number_font_size_pt": 9.0,
+      "footer_page_number_font_size_pt": 9.0,
+      "toc_page_number_runs": 34,
+      "footer_runs": 12
+    }
+  },
+  "manifest_counts": {
+    "by_batch": {
+      "customer_taichang_supplement_20260611": 10
+    },
+    "by_evidence": {
+      "business_license": 1,
+      "certification": 3,
+      "green_low_carbon": 4,
+      "project_performance": 1,
+      "testing_capacity": 1
+    },
+    "by_batch_evidence": {
+      "customer_taichang_supplement_20260611|business_license": 1,
+      "customer_taichang_supplement_20260611|certification": 3,
+      "customer_taichang_supplement_20260611|green_low_carbon": 4,
+      "customer_taichang_supplement_20260611|project_performance": 1,
+      "customer_taichang_supplement_20260611|testing_capacity": 1
+    }
+  },
+  "pdf_preview": {
+    "enabled": false,
+    "status": "skipped"
+  },
+  "docx_audit": {
+    "configured_fonts": {
+      "body_east_asia": "FangSong_GB2312",
+      "heading_east_asia": "SimHei",
+      "level3_east_asia": "KaiTi_GB2312"
+    },
+    "format": {
+      "margins": {
+        "top_cm": 2.5,
+        "bottom_cm": 2.5,
+        "left_cm": 2.8,
+        "right_cm": 2.5,
+        "header_distance_cm": 0.8,
+        "footer_distance_cm": 1.48
+      },
+      "normal_style": {
+        "font_size_pt": 12.0,
+        "line_spacing_rule": "ONE_POINT_FIVE",
+        "line_spacing": 1.5,
+        "line_spacing_pt": null,
+        "first_line_indent_pt": 24.0
+      },
+      "checks": {
+        "page_margins_match_formal_standard": true,
+        "body_style_matches_formal_standard": true
+      }
+    },
+    "paragraphs": {
+      "paragraph_count": 3180,
+      "non_empty_paragraph_count": 3162,
+      "heading_count": 102,
+      "toc_entry_count": 26,
+      "first_non_empty": [
+        "国网辽宁电力2025年第三次物资协议",
+        "库存招标采购",
+        "投标文件",
+        "招标编号：2225AC",
+        "分标编号：包号及包名称",
+        "包号：包1",
+        "包名称：包1：电缆保护管CPVC、电缆保护管MPP",
+        "投标人：河北泰昌电力器材科技有限公司",
+        "法定代表人或其委托代理人：        （签名）",
+        "2026年07月03日",
+        "目  录",
+        "（一）投标函及法定格式文件\t3",
+        "1. 投标函及投标函附录\t3",
+        "2. 法定代表人身份证明及授权委托书\t6",
+        "3. 投标保证金及基本账户资料\t8",
+        "（二）商务响应文件\t10"
+      ],
+      "heading_samples": [
+        "（一）投标函及法定格式文件",
+        "1. 投标函及投标函附录",
+        "2. 法定代表人身份证明及授权委托书",
+        "3. 投标保证金及基本账户资料",
+        "（二）商务响应文件",
+        "1. 商务偏差表",
+        "2. 投标保证保险",
+        "3. 投标保证保险（电缆保护管 CPVC）",
+        "4. 投标保证保险（电缆保护管 MPP）",
+        "5. 补充文件",
+        "6. 投标保证金",
+        "6.1 保险购买凭证",
+        "6.1.1 保险购买凭证-电缆保护管 CPVC",
+        "6.1.2 保险购买凭证-电缆保护管 MPP",
+        "6.2 银行基本账户证明扫描件",
+        "6.3 投标保证金明细表",
+        "7. 投标人基本情况表",
+        "7.1 投标人基本情况表",
+        "8. 企业营业执照（或事业单位法人证书或其他组织登记证书）",
+        "9. 有效的税务登记证明"
+      ],
+      "toc_samples": [
+        "1. 投标函及投标函附录\t3",
+        "2. 法定代表人身份证明及授权委托书\t6",
+        "3. 投标保证金及基本账户资料\t8",
+        "1. 商务偏差表\t10",
+        "2. 投标保证保险\t12",
+        "3. 投标保证保险（电缆保护管 CPVC）\t14",
+        "4. 投标保证保险（电缆保护管 MPP）\t18",
+        "5. 补充文件\t20",
+        "6. 投标保证金\t26",
+        "7. 投标人基本情况表\t42",
+        "8. 企业营业执照（或事业单位法人证书或其他组织登记证书）\t44",
+        "9. 有效的税务登记证明\t48",
+        "10. 符合招标文件投标人资格要求的证明文件\t52",
+        "11. 财务信息、股权结构说明书及支持证明材料\t104",
+        "12. 招标文件第三章评标办法前附表之三“商务评分标准”涉及的支撑材料\t107",
+        "1. 技术偏差表\t116",
+        "2. 专项投标文件\t119",
+        "3. 业绩文件\t136",
+        "4. 技术特性参数表\t159",
+        "5. 货物组件材料配置表\t172"
+      ]
+    },
+    "tables": {
+      "table_count": 105,
+      "full_width_count": 105,
+      "fixed_layout_count": 105,
+      "repeat_header_count": 105,
+      "cell_margin_count": 105,
+      "all_tables_full_width": true,
+      "all_tables_fixed_layout": true,
+      "all_tables_repeat_header": true,
+      "all_tables_have_cell_margins": true,
+      "samples": [
+        {
+          "rows": 9,
+          "cols": 6,
+          "full_width": true,
+          "fixed_layout": true,
+          "repeat_header": true,
+          "cell_margins": true
+        },
+        {
+          "rows": 2,
+          "cols": 3,
+          "full_width": true,
+          "fixed_layout": true,
+          "repeat_header": true,
+          "cell_margins": true
+        },
+        {
+          "rows": 16,
+          "cols": 4,
+          "full_width": true,
+          "fixed_layout": true,
+          "repeat_header": true,
+          "cell_margins": true
+        },
+        {
+          "rows": 8,
+          "cols": 2,
+          "full_width": true,
+          "fixed_layout": true,
+          "repeat_header": true,
+          "cell_margins": true
+        },
+        {
+          "rows": 5,
+          "cols": 2,
+          "full_width": true,
+          "fixed_layout": true,
+          "repeat_header": true,
+          "cell_margins": true
+        },
+        {
+          "rows": 7,
+          "cols": 2,
+          "full_width": true,
+          "fixed_layout": true,
+          "repeat_header": true,
+          "cell_margins": true
+        },
+        {
+          "rows": 13,
+          "cols": 4,
+          "full_width": true,
+          "fixed_layout": true,
+          "repeat_header": true,
+          "cell_margins": true
+        },
+        {
+          "rows": 4,
+          "cols": 6,
+          "full_width": true,
+          "fixed_layout": true,
+          "repeat_header": true,
+          "cell_margins": true
+        }
+      ]
+    },
+    "images": {
+      "media_count": 10,
+      "checked_inline_images": 10,
+      "crop_marker_count": 0,
+      "max_ratio_delta": 0.0,
+      "bad_ratio": [],
+      "body_display_size_counts": {
+        "5.8x8.2": 10
+      },
+      "body_images_uniform_display_size": true
+    },
+    "field_counts": {
+      "instrText": 36,
+      "PAGEREF": 34,
+      "PAGE": 1,
+      "NUMPAGES": 1
+    },
+    "checks": {
+      "docx_opens_with_python_docx": true,
+      "cover_has_bid_title": true,
+      "cover_has_bidder": true,
+      "cover_has_project_name": true,
+      "cover_has_tender_no": true,
+      "cover_first_page_header_empty": true,
+      "toc_title_exists": true,
+      "toc_has_entries": true,
+      "toc_has_dot_leader": true,
+      "toc_has_pageref": true,
+      "toc_max_level_lte_2": true,
+      "header_has_project_name_and_file_type": true,
+      "header_has_no_logo_image": true,
+      "footer_has_page_text": true,
+      "footer_has_page_fields": true,
+      "uses_configured_cjk_fonts": true,
+      "no_blue_text_or_table_shading": true,
+      "no_forbidden_internal_tokens": true,
+      "no_repeated_parent_title_pattern": true,
+      "no_black_square_markers": true,
+      "no_image_crop_or_distortion": true,
+      "body_images_use_uniform_display_size": true,
+      "has_supplement_project_performance_assets": false,
+      "has_supplement_testing_assets": true,
+      "has_supplement_inspection_report_asset": false
+    },
+    "forbidden_hits": [],
+    "repeated_title_pattern_samples": []
+  },
+  "failures": [
+    "正式图片选中数量不足：10",
+    "DOCX 成品检查失败：has_supplement_project_performance_assets",
+    "DOCX 成品检查失败：has_supplement_inspection_report_asset"
+  ],
+  "warnings": []
+}
