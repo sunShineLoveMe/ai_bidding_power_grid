@@ -1,6 +1,6 @@
 # 项目任务总账
 
-更新日期：2026-06-27
+更新日期：2026-07-07
 
 本文档是 AI 标书系统当前唯一的项目级任务优先级入口。其他 TODO、roadmap、专项清单和 run 记录只作为详情来源、验收记录或历史上下文，不再单独定义更高优先级。
 
@@ -50,6 +50,7 @@
 
 | 状态 | 任务 | 所属模块 | 为什么是 P0 | 验收口径 | 关联文档 |
 | --- | --- | --- | --- | --- | --- |
+| 阻塞（待 2026-07-08 客户会后定方案） | 历史标书模板复用 `template_docx` MVP | DOCX / 模板化 / 投标确认 | 客户试用反馈“章节和格式与以往成果完全不一样”，这是正式交付信任问题；历史中标标书模板复用能贴合标书员真实工作流，降低 AI 自由生成导致的结构和版式漂移 | 会后先确认客户是否能提供可编辑 Word 技术标/商务标历史成果；若确认推进，MVP 至少包含：上传历史技术标/商务标 DOCX、解析章节/表格/页眉页脚/签章位、自动识别可变字段、生成变量确认表单、用户填写后原版式替换导出、LibreOffice 刷新目录页码、输出变量替换报告和未填字段清单；必须保留泰昌/辽宁/河北豪乾资料边界，不把历史模板企业事实自动作为泰昌事实 | `docs/development/docx-export-format-priority-todo.md`、`docs/development/docx-bid-export-quality-todo.md` |
 | 已完成 | 合同 MVP 功能覆盖验收与缺口关闭 | 产品验收 / 项目管理 | 合同截图中的所有功能均标为 MVP；必须有统一覆盖判断和缺口关闭记录，不能只按内部技术路线图验收 | 已完成 17 项真实链路矩阵：14 项 MVP 通过、产品库多品类和 PDF 口径进入 P1、阿里云部署交接进入 P1；本轮关闭“内部模拟客户字段误通过正式导出门禁”P0，真实项目现有 8 个阻断项并仅允许草稿版导出 | `docs/development/runs/run_20260625_contract_mvp_real_acceptance.md`、`docs/development/runs/run_20260625_contract_mvp_full_http_smoke.md`、`docs/rag/runs/run_20260625_contract_mvp_acceptance_summary.md` |
 | 已完成 | 批量章节生成可靠性与 Prompt 分级瘦身 | 标书正文生成 / AI 调度 | 客户线上真实测试已出现后半段大量 `MODEL_STREAM_WALL_TIMEOUT`，体感为全文编写卡死；这是合同 MVP“标书正文生成”和客户试用转化的核心风险 | 已完成 SG-UX-001/002：完成状态与偏长/偏短质量提示拆分，新增“压缩到目标”；已完成 SG-AI-001：自定义编写要求持久化，并进入生成任务 item metadata 快照；已完成 SG-DATA-001/002/003：新增/删除章节数据一致性与撤销兜底；已完成 SG-PROMPT-001：prompt profile 分级、输入预算、真实任务 metadata 与完整 DOCX 链路回归；已完成 SG-SLOW-001：慢流提前保护、partial 草稿保存、生成槽释放和真实强制慢流/正常阈值回归；已完成 SG-CONCURRENCY-001：任务级自适应并发、慢流窗口降档和调度 metadata 可观测；已完成 SG-PARTIAL-001：partial 自动续写上限、复核态、批量续写入口和真实模型续写回归；已完成 SG-PROGRESS-001：客户视角进度、下载前草稿版确认和真实浏览器回归 | `docs/development/section-generation-adaptive-writing-plan.md`、`docs/development/runs/run_20260625_aliyun_section_generation_timeout_diagnosis.md`、`docs/development/runs/run_20260625_local_bid_editor_length_status_regression.md`、`docs/development/runs/run_20260625_local_custom_writing_persistence_regression.md`、`docs/development/runs/run_20260625_local_child_section_volume_inheritance_regression.md`、`docs/development/runs/run_20260625_local_leaf_to_container_confirmation_regression.md`、`docs/development/runs/run_20260625_local_delete_subtree_undo_regression.md`、`docs/development/runs/run_20260625_sg_prompt_001_prompt_profile_budget.md`、`docs/development/runs/run_20260625_sg_slow_001_slow_stream_protection.md`、`docs/development/runs/run_20260625_sg_concurrency_001_adaptive_scheduler.md`、`docs/development/runs/run_20260625_sg_partial_001_partial_resume.md`、`docs/development/runs/run_20260625_sg_progress_001_user_readiness.md` |
 | 已完成 | DOCX 正式交付排版升级 | DOCX / 产品交付 | Word 是客户第一眼看到的正式交付物；当前导出观感被客户认为像草稿，会直接影响信任和试用转化 | 默认 `formal_bid_standard` 的正文、标题、表格、页眉页脚、目录、封面及第六章常见表单已通过真实链路验收；签章行、偏差表语义列宽、禁止跨页拆分和字段刷新均可追溯 | `docs/development/docx-bid-export-quality-todo.md`、`docs/development/runs/run_20260625_docx_sixth_chapter_form_fidelity.md`、`AGENTS.md` |
@@ -128,6 +129,7 @@
 
 | 日期 | 决策 | 影响 |
 | --- | --- | --- |
+| 2026-07-07 | 将历史标书模板复用 `template_docx` MVP 提升为当前 P0 待决策任务 | 客户反馈章节和格式与历史成果不一致后，优先按“上传历史技术标/商务标 DOCX -> 自动抽取变量 -> 表单确认 -> 原版式替换导出”的产品路径评估；2026-07-08 客户会后确认资料可得性、MVP 范围和是否进入实现 |
 | 2026-06-25 | 将 DOCX 正式交付排版升级重新提升为 P0 | 当前客户反馈的 Word 观感问题不再作为 P1/P2 延后处理 |
 | 2026-06-25 | DOCX 正式交付排版 P0 关闭 | 默认正式模板与第六章常见表单已通过真实 DOCX、下载 API 和浏览器草稿门禁回归；客户原始 Word 像素级套表继续由 P1 `template_docx` 承接 |
 | 2026-06-25 | 建立项目任务总账 | 后续所有新任务和优先级变更必须先写入本文档 |

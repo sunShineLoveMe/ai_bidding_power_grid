@@ -1,6 +1,6 @@
 # 标书文档编写与正式导出质量待办清单
 
-更新日期：2026-07-03
+更新日期：2026-07-07
 
 > 项目级优先级以 `docs/development/master-todo.md` 为准。本文档保留 DOCX 正式导出专项详情、验收口径和历史验证记录。
 > 格式评审后续整改的优先级、状态和验收记录入口见：[DOCX 正式导出格式评审整改优先级清单](docx-export-format-priority-todo.md)。
@@ -11,15 +11,16 @@
 
 - MVP 默认采用 `formal_bid_standard`，即面向泰昌的正式投标文件默认格式；当前阶段不向普通用户提供格式方案选择。
 - 历史 `sgcc_taichang_bid` 只作为客户参考稿紧凑版式记录，不再作为默认。
-- 客户已确认当前无法提供原版 Word 正文标书模板；`template_docx` 像素级套版不再作为当前 P0 阻塞项。
+- 历史阶段客户曾无法提供原版 Word 正文标书模板，因此 `template_docx` 未作为当时 P0 阻塞项；2026-07-07 因客户反馈历史成果章节/格式不一致，已重新提升为 P0 待决策任务，等待 2026-07-08 客户会确认资料可得性和范围。
 - 当前可用参考为 `assets/template_words/5d2a2c833dad4bb3b3ccc0856f755b54.docx` 和 `assets/template_words/1523993.doc`，其中 `5d2a...docx` 作为主参考样式源，抽取目录域、封面字段、表格、签章位和页边距参考后扩展 `formal_bid_standard`，不直接套打正文。
 - `assets/template_words/~$2a2c833dad4bb3b3ccc0856f755b54.docx` 是 Word/WPS 临时锁文件，不作为模板来源。
 - 当前正式正文默认样式为仿宋_GB2312 小四 `12pt`、`1.5` 倍行距、首行缩进 `2` 字符；表格仍保持仿宋_GB2312 `12pt`、固定 `18pt` 行距。
 - 普通用户默认不直接进入全量自定义格式；自定义能力作为后续高级功能。
 - 若招标文件明确第六章格式、前附表或否决项要求，优先按招标文件要求。
 - 2026-06-26 客户新增的 `国家电网有限公司2026年西北、西藏区域第一次联合采购...招标文件包` 已审阅；该批资料定位为招标要求来源和技术参数/货物清单来源，不作为泰昌企业事实，也不作为投标正文视觉主模板直接套用。
-- 若未来客户重新提供可编辑 Word 模板，再进入 `template_docx` 模式；当前 MVP 不等待该资料。
+- 若 2026-07-08 客户会确认可提供可编辑 Word 技术标/商务标历史成果，则进入 `template_docx` MVP 方案设计；现有 AI 生成与 Markdown 转 DOCX 链路继续保留，不因待决策任务中断。
 - 2026-06-29 专家评审输入已形成 `docs/development/docx-export-vs-customer-reference-review.md`；新疆技术/商务中标稿仅作为版式、目录组织、分册结构和交付观感参考，不作为唯一模板，也不复用其中企业事实、产品参数、证书、附件内容。后续整改按 `docs/development/docx-export-format-priority-todo.md` 跟踪。
+- 2026-07-07 客户试用反馈生成结果与历史成果标书章节和格式差异较大；“历史标书模板复用 `template_docx` MVP”已提升为项目 P0 待决策任务。2026-07-08 客户会后确认是否按“上传历史技术标/商务标 DOCX -> 自动识别变量 -> 变量确认表单 -> 原版式替换导出”的路径进入实现。
 - 真实验证必须走项目导出链路：`build_project_bid_markdown` -> `convert_md_to_word` -> `refresh_docx_fields_with_soffice`，不得只用 mock 替代。
 - 2026-06-27 阿里云新疆 10kV 真实浏览器验收发现：客户真实长项目名会导致技术标 DOCX 导出任务因 `[Errno 36] File name too long` 失败；已将物理输出目录和文件名短名化。
 - 2026-06-27 本地辽宁 CPVC 包 1 完整真实回归已产出完整 DOCX，但 formal gate 判定为 `draft`：正式必填缺口 `16`、高风险缺口 `48`、正文残留 `待补充/需人工复核`，且封面包号未读取已确认值。记录见 `docs/development/runs/run_20260627_local_liaoning_full_e2e.md`。
@@ -49,7 +50,7 @@
 | --- | --- | --- |
 | 进行中（本地真实链路已通过，待阿里云复验） | 泰昌正式资料资产中文化与图片题注治理 | 见 `docs/development/taichang-formal-asset-cleanup-todo.md`；本地真实技术标/商务标导出 `run_20260627_formal_docx_asset_cleanup_v2` 已确认 `forbidden_hits=[]`、`caption_page_hits=[]`、字段刷新 `refreshed`。阿里云线上修复执行和真实浏览器导出复验未完成前，不关闭线上验收 |
 | 已完成 | 参考 Word 模板规则落地 | 完成 `assets/template_words` 下两份参考模板 inventory；`5d2a...docx` 作为主参考样式源，规则写入 `formal_bid_standard` metadata；技术标/商务标真实导出均通过字段刷新、目录、表格、图片统一尺寸回归 |
-| 后置（客户暂无原版模板） | 可编辑 Word 模板导入 `template_docx` | 仅当客户后续重新提供可编辑 Word 版正式模板时启动；当前不阻塞 MVP 导出质量收口 |
+| 阻塞（待 2026-07-08 客户会后定方案） | 历史标书模板复用 `template_docx` MVP | 已提升为项目 P0 待决策任务；会后确认客户是否能提供可编辑 Word 技术标/商务标历史成果。若推进，第一版聚焦 DOCX 模板上传、变量抽取、表单确认、原版式替换导出和字段刷新，不复用历史模板中的旧投标人企业事实 |
 | 已完成 | 默认正式模板固定为 `formal_bid_standard` | metadata 记录模板 ID、正文/目录/页边距、页眉页脚设置 |
 | 已完成 | 封面正式字段补齐第一阶段 | 封面包含标题、投标人、日期，并在正文可提取时自动加入招标编号、分标编号、分标名称、包号/包名称、文件类型 |
 | 已完成 | 封面字段结构化来源补齐 | 从项目解析 metadata 或招标文件结构化结果稳定补齐分标编号、分标名称、包号/包名称，不依赖正文猜测 |
