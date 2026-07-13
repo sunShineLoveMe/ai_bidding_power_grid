@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "schema_version": "taichang_asset_classification_v1",
+    "generated_at": "2026-07-13T17:54:38.522310+08:00",
+    "enterprise": "河北泰昌电力器材科技有限公司",
+    "pilot_only": true,
+    "read_only": true,
+    "database_written": false,
+    "rag_updated": false,
+    "docx_selection_updated": false,
+    "candidate_count": 896,
+    "review_queue_count": 461,
+    "approved_candidate_id_count": 0,
+    "ingestion_candidate_count": 0,
+    "evidence_type_counts": {
+      "authorization": 1,
+      "business_license": 2,
+      "certification": 18,
+      "enterprise_evidence": 152,
+      "finance": 31,
+      "green_low_carbon": 440,
+      "historical_form_reference": 10,
+      "historical_structure_reference": 134,
+      "inspection_report": 14,
+      "personnel_certificate": 5,
+      "product_parameter_table": 21,
+      "production_capacity": 22,
+      "project_context": 15,
+      "project_performance": 5,
+      "technical_response": 2,
+      "testing_capacity": 24
+    },
+    "quality_tier_counts": {
+      "restricted": 58,
+      "review_only": 838
+    },
+    "review_status_counts": {
+      "needs_customer_confirmation": 314,
+      "needs_manual_review": 149,
+      "not_asset_reference": 148,
+      "rejected_conflict": 15,
+      "rejected_duplicate": 270
+    },
+    "gate_checks": {
+      "all_candidates_classified": true,
+      "all_required_metadata_present": true,
+      "all_visible_fields_clean": true,
+      "duplicates_excluded_from_review_queue": true,
+      "conflicts_excluded_from_review_queue": true,
+      "ingestion_requires_explicit_approval": true,
+      "no_unapproved_ingestion_candidate": true,
+      "product_fact_requires_product_family": true
+    },
+    "input_sha256": {
+      "docs/development/taichang-bid-v1-data/asset_dedup_matrix.json": "0675054ee14d10714fffaf942c574a5832b73666c6f7d6218ea50c8f121ddfdb",
+      "docs/development/taichang-bid-v1-data/taichang_technical_bid_candidate_inventory.json": "b9d836843aab012c381659812136ea3d5c42f4f6560b6b678a338f207fde8b40",
+      "docs/development/taichang-bid-v1-data/taichang_business_bid_candidate_inventory.json": "076d540a7165bbd7d09db0989be885e0fdfd6bcf99d78649e3d72c53adbf26a3"
+    },
+    "artifact_role": "approved_ingestion_candidates_only",
+    "record_count": 0
+  },
+  "records": []
+}

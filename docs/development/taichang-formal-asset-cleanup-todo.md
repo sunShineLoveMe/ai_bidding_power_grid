@@ -1,6 +1,6 @@
 # 泰昌正式资料资产中文化与标书配图质量治理待办
 
-> 状态日期：2026-06-27
+> 状态日期：2026-07-13
 > 适用范围：泰昌企业事实资料、企业知识库、产品库、资信库、图片资产、RAG 问答、正式 DOCX 导出、阿里云线上环境。
 
 ## 背景与目标
@@ -30,6 +30,13 @@
 | `[~]` | 进行中 |
 | `[ ]` | 未开始 |
 | `[!]` | 阻塞或需业务确认 |
+
+## 泰昌历史标书复用专项记录
+
+| 状态 | 任务 | 交付物 | 验收口径 |
+| --- | --- | --- | --- |
+| [x] | 历史标书候选标签、分类与质量分级 | `scripts/rag/classify_taichang_historical_bid_candidates.py`、`docs/development/taichang-bid-v1-data/tag_dictionary.json`、分类矩阵和人工复核队列、`docs/rag/runs/run_20260713_taichang_p0_05_tag_classification_summary.md` | 896 条候选全部分类；838 条为仅限人工复核、58 条为受限资料；461 条进入 P0-06 人工复核，未经批准的正式增量入库候选为 0；用户可见字段禁用表达命中 0；27 项回归通过 |
+| [~] | P0-06 人工复核与增量入库批准 | `scripts/rag/prepare_taichang_p0_06_asset_review.py`、`docs/development/taichang-bid-v1-data/p0_06_review/泰昌历史标书资产增量入库审批表.xlsx`、分组/候选/阻断/批准清单、`docs/rag/runs/run_20260713_taichang_p0_06_asset_review_preparation_summary.md` | 技术准备已完成：896 条全部分流，461 条按 65 个证据组进入人工复核，435 条自动阻断或仅参考；默认批准和可入库均为 0；审批篡改、敏感资料、过期证书、产品/时效/原件缺口均有阻断门禁，37 项回归及 LibreOffice 回读通过。等待泰昌资料管理人员填写审批表；实际入库或 metadata 变更后执行 Base + 泰昌专项增量门禁、真实 stream 和必要的 DOCX 审计 |
 
 ## P0：正式投标文件阻断项
 

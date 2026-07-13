@@ -1,0 +1,1603 @@
+{
+  "metadata": {
+    "schema_version": "taichang_p0_06_review_v1",
+    "generated_at": "2026-07-13T18:02:54.646788+08:00",
+    "enterprise": "河北泰昌电力器材科技有限公司",
+    "pilot_only": true,
+    "read_only": true,
+    "database_written": false,
+    "rag_updated": false,
+    "docx_selection_updated": false,
+    "candidate_count": 896,
+    "review_candidate_count": 461,
+    "review_group_count": 65,
+    "auto_blocked_or_reference_count": 435,
+    "approved_decision_count": 0,
+    "ready_for_ingestion_count": 0,
+    "validation_error_count": 0,
+    "decision_counts": {},
+    "input_sha256": {
+      "docs/development/taichang-bid-v1-data/asset_classification_matrix.json": "4d1f3485049f4d7c17366dd13183a51aa6b290b3ecf707d7dcccd4c71abf632d",
+      "docs/development/taichang-bid-v1-data/asset_review_queue.json": "ac33f25a99fa61fceb2df59ebd5635caf537fffbace35b3bc3c37aa85e3b39aa"
+    },
+    "artifact_role": "grouped_manual_review_overview",
+    "record_count": 65
+  },
+  "records": [
+    {
+      "review_group_id": "P006-G001",
+      "source_document_name": "泰昌商务补充文件",
+      "source_section": "(三)补充文件/12.其他/12.1.发明专利证书",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G002",
+      "source_document_name": "泰昌商务补充文件",
+      "source_section": "(三)补充文件/12.其他/12.3.河北省守合同重信用企业",
+      "evidence_type": "project_performance",
+      "evidence_type_label": "项目业绩",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G003",
+      "source_document_name": "泰昌商务补充文件",
+      "source_section": "(三)补充文件/12.其他/12.4.中国裁判文书网查询截图",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 2,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G004",
+      "source_document_name": "泰昌商务补充文件",
+      "source_section": "(三)补充文件/12.其他/12.5.中国执行信息公开网查询截图",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 2,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G005",
+      "source_document_name": "泰昌商务补充文件",
+      "source_section": "(三)补充文件/12.其他/12.6.一般纳税人查询截图",
+      "evidence_type": "finance",
+      "evidence_type_label": "财务资料",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 2,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G006",
+      "source_document_name": "泰昌商务补充文件",
+      "source_section": "(三)补充文件/2.投标人情况/附：国家企业信用信息公示系统（http://www.gsxt.gov.cn）查询的股东（企业或自然人）名称及详细出资情况截图",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "敏感资料"
+      ],
+      "machine_recommendations": [
+        "延后授权"
+      ],
+      "required_checks": [
+        "身份、银行、财务、社保、股权或授权资料必须确认权限和使用范围"
+      ]
+    },
+    {
+      "review_group_id": "P006-G007",
+      "source_document_name": "泰昌商务补充文件",
+      "source_section": "(三)补充文件/2.投标人情况/附：股权证明材料",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G008",
+      "source_document_name": "泰昌商务补充文件",
+      "source_section": "(三)补充文件/3.企业法人营业执照",
+      "evidence_type": "business_license",
+      "evidence_type_label": "基础证照",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G009",
+      "source_document_name": "泰昌商务补充文件",
+      "source_section": "(三)补充文件/5.符合招标文件投标人资格要求的证明文件/5.2查询报告及截图/5.2.1.国家企业信用信息公示系统查询结果/（1）营业执照信息查询截图",
+      "evidence_type": "business_license",
+      "evidence_type_label": "基础证照",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G010",
+      "source_document_name": "泰昌商务补充文件",
+      "source_section": "(三)补充文件/5.符合招标文件投标人资格要求的证明文件/5.2查询报告及截图/5.2.1.国家企业信用信息公示系统查询结果/（2）清算信息查询截图",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G011",
+      "source_document_name": "泰昌商务补充文件",
+      "source_section": "(三)补充文件/5.符合招标文件投标人资格要求的证明文件/5.2查询报告及截图/5.2.1.国家企业信用信息公示系统查询结果/（3）行政处罚信息查询截图",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G012",
+      "source_document_name": "泰昌商务补充文件",
+      "source_section": "(三)补充文件/5.符合招标文件投标人资格要求的证明文件/5.2查询报告及截图/5.2.1.国家企业信用信息公示系统查询结果/（4）纳入经营异常名录信息查询截图",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G013",
+      "source_document_name": "泰昌商务补充文件",
+      "source_section": "(三)补充文件/5.符合招标文件投标人资格要求的证明文件/5.2查询报告及截图/5.2.1.国家企业信用信息公示系统查询结果/（5）纳入严重违反失信企业名单（黑名单）信息查询截图",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G014",
+      "source_document_name": "泰昌商务补充文件",
+      "source_section": "(三)补充文件/5.符合招标文件投标人资格要求的证明文件/5.2查询报告及截图/5.2.1.国家企业信用信息公示系统查询结果/（6）股东及出资信息查询截图",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 3,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "敏感资料"
+      ],
+      "machine_recommendations": [
+        "延后授权"
+      ],
+      "required_checks": [
+        "身份、银行、财务、社保、股权或授权资料必须确认权限和使用范围"
+      ]
+    },
+    {
+      "review_group_id": "P006-G015",
+      "source_document_name": "泰昌商务补充文件",
+      "source_section": "(三)补充文件/5.符合招标文件投标人资格要求的证明文件/5.2查询报告及截图/5.2.1.国家企业信用信息公示系统查询结果/（7）国家企业信用信息公示系统查询截图",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 37,
+      "dedup_statuses": [
+        "未发现重复，仍需审核",
+        "视觉疑似重复"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核重",
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体",
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G016",
+      "source_document_name": "泰昌商务补充文件",
+      "source_section": "(三)补充文件/5.符合招标文件投标人资格要求的证明文件/5.2查询报告及截图/5.2.2.信用中国”（www.creditchina.gov.cn）中的查询结果",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 7,
+      "dedup_statuses": [
+        "未发现重复，仍需审核",
+        "视觉疑似重复"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核重",
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体",
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G017",
+      "source_document_name": "泰昌商务补充文件",
+      "source_section": "(三)补充文件/6.财务状况/6.1.新增2024年审计报告",
+      "evidence_type": "finance",
+      "evidence_type_label": "财务资料",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 28,
+      "dedup_statuses": [
+        "未发现重复，仍需审核",
+        "视觉疑似重复"
+      ],
+      "sensitivity_labels": [
+        "敏感资料"
+      ],
+      "machine_recommendations": [
+        "优先核重",
+        "延后授权"
+      ],
+      "required_checks": [
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体",
+        "身份、银行、财务、社保、股权或授权资料必须确认权限和使用范围"
+      ]
+    },
+    {
+      "review_group_id": "P006-G018",
+      "source_document_name": "泰昌商务补充文件",
+      "source_section": "（四）法定代表人（单位负责人）权委托书",
+      "evidence_type": "authorization",
+      "evidence_type_label": "授权文件",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "受限资料"
+      ],
+      "machine_recommendations": [
+        "延后授权"
+      ],
+      "required_checks": [
+        "身份、银行、财务、社保、股权或授权资料必须确认权限和使用范围"
+      ]
+    },
+    {
+      "review_group_id": "P006-G019",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "未归入章节",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "视觉疑似重复"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核重"
+      ],
+      "required_checks": [
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体"
+      ]
+    },
+    {
+      "review_group_id": "P006-G020",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（一）技术偏差表/1.技术偏差表",
+      "evidence_type": "product_parameter_table",
+      "evidence_type_label": "产品参数表",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [
+        "电缆保护管通用"
+      ],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先结构化核验"
+      ],
+      "required_checks": [
+        "核对产品族、规格型号、参数值和原始表格，批准后仍须走结构化抽取"
+      ]
+    },
+    {
+      "review_group_id": "P006-G021",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/1.业绩文件/1.1.资格预审通知书",
+      "evidence_type": "project_performance",
+      "evidence_type_label": "项目业绩",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G022",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/10.认证证书/10.1.质量管理体系认证证书",
+      "evidence_type": "certification",
+      "evidence_type_label": "资质证书",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 2,
+      "dedup_statuses": [
+        "视觉疑似重复"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核重"
+      ],
+      "required_checks": [
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体"
+      ]
+    },
+    {
+      "review_group_id": "P006-G023",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/10.认证证书/10.2.职业健康安全管理体系认证证书",
+      "evidence_type": "certification",
+      "evidence_type_label": "资质证书",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 3,
+      "dedup_statuses": [
+        "视觉疑似重复"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "延后补证"
+      ],
+      "required_checks": [
+        "历史证书已于2026年6月18日到期，必须提供有效续证，禁止正式引用旧证"
+      ]
+    },
+    {
+      "review_group_id": "P006-G024",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/10.认证证书/10.3.环境管理体系认证证书",
+      "evidence_type": "certification",
+      "evidence_type_label": "资质证书",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 2,
+      "dedup_statuses": [
+        "视觉疑似重复"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核重"
+      ],
+      "required_checks": [
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体"
+      ]
+    },
+    {
+      "review_group_id": "P006-G025",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/11.主要技术人员、项目经理及其相关证书/附：试验人员证书",
+      "evidence_type": "personnel_certificate",
+      "evidence_type_label": "人员证书",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 5,
+      "dedup_statuses": [
+        "未发现重复，仍需审核",
+        "视觉疑似重复"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核重",
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体",
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G026",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/12.检测检验报告（包括型式试验报告、检测报告、鉴定报告、检定报告、校准证书或报告、检测试验报告等相关报告）/12.1.检测报告",
+      "evidence_type": "inspection_report",
+      "evidence_type_label": "检验报告",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [],
+      "candidate_count": 4,
+      "dedup_statuses": [
+        "同一证据的不同载体",
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核验原始报告",
+        "核验证据包"
+      ],
+      "required_checks": [
+        "不得新建重复业务主记录，仅可在确认后关联为同一证据的不同载体",
+        "核对报告编号、产品、规格、检验值、日期和完整原始报告"
+      ]
+    },
+    {
+      "review_group_id": "P006-G027",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/12.检测检验报告（包括型式试验报告、检测报告、鉴定报告、检定报告、校准证书或报告、检测试验报告等相关报告）/12.1.检测报告",
+      "evidence_type": "product_parameter_table",
+      "evidence_type_label": "产品参数表",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [
+        "CPVC电缆保护管"
+      ],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先结构化核验"
+      ],
+      "required_checks": [
+        "核对产品族、规格型号、参数值和原始表格，批准后仍须走结构化抽取"
+      ]
+    },
+    {
+      "review_group_id": "P006-G028",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/12.检测检验报告（包括型式试验报告、检测报告、鉴定报告、检定报告、校准证书或报告、检测试验报告等相关报告）/12.1.检测报告",
+      "evidence_type": "product_parameter_table",
+      "evidence_type_label": "产品参数表",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [
+        "MPP电缆保护管"
+      ],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先结构化核验"
+      ],
+      "required_checks": [
+        "核对产品族、规格型号、参数值和原始表格，批准后仍须走结构化抽取"
+      ]
+    },
+    {
+      "review_group_id": "P006-G029",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/12.检测检验报告（包括型式试验报告、检测报告、鉴定报告、检定报告、校准证书或报告、检测试验报告等相关报告）/12.1.检测报告",
+      "evidence_type": "product_parameter_table",
+      "evidence_type_label": "产品参数表",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [
+        "UPVC电缆保护管"
+      ],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先结构化核验"
+      ],
+      "required_checks": [
+        "核对产品族、规格型号、参数值和原始表格，批准后仍须走结构化抽取"
+      ]
+    },
+    {
+      "review_group_id": "P006-G030",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/12.检测检验报告（包括型式试验报告、检测报告、鉴定报告、检定报告、校准证书或报告、检测试验报告等相关报告）/12.1.检测报告/12.1.1.CPVC电缆保护管检验报告",
+      "evidence_type": "inspection_report",
+      "evidence_type_label": "检验报告",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [
+        "CPVC电缆保护管"
+      ],
+      "candidate_count": 3,
+      "dedup_statuses": [
+        "视觉疑似重复"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核重"
+      ],
+      "required_checks": [
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体"
+      ]
+    },
+    {
+      "review_group_id": "P006-G031",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/12.检测检验报告（包括型式试验报告、检测报告、鉴定报告、检定报告、校准证书或报告、检测试验报告等相关报告）/12.1.检测报告/12.1.2.MPP电缆保护管检验报告",
+      "evidence_type": "inspection_report",
+      "evidence_type_label": "检验报告",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [
+        "MPP电缆保护管"
+      ],
+      "candidate_count": 3,
+      "dedup_statuses": [
+        "视觉疑似重复"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核重"
+      ],
+      "required_checks": [
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体"
+      ]
+    },
+    {
+      "review_group_id": "P006-G032",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/12.检测检验报告（包括型式试验报告、检测报告、鉴定报告、检定报告、校准证书或报告、检测试验报告等相关报告）/12.1.检测报告/12.1.3.N-HAP电缆保护管",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [
+        "N-HAP电缆保护管"
+      ],
+      "candidate_count": 5,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G033",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/12.检测检验报告（包括型式试验报告、检测报告、鉴定报告、检定报告、校准证书或报告、检测试验报告等相关报告）/12.1.检测报告/12.1.4.硬聚氯乙烯塑料(UPVC)电力电缆导管",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [
+        "UPVC电缆保护管"
+      ],
+      "candidate_count": 4,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G034",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/12.检测检验报告（包括型式试验报告、检测报告、鉴定报告、检定报告、校准证书或报告、检测试验报告等相关报告）/12.2.更新校准证书",
+      "evidence_type": "testing_capacity",
+      "evidence_type_label": "试验检测能力",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [
+        "电缆保护管通用"
+      ],
+      "candidate_count": 4,
+      "dedup_statuses": [
+        "文本疑似重复"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核重"
+      ],
+      "required_checks": [
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体"
+      ]
+    },
+    {
+      "review_group_id": "P006-G035",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/12.检测检验报告（包括型式试验报告、检测报告、鉴定报告、检定报告、校准证书或报告、检测试验报告等相关报告）/12.2.更新校准证书/12.2.1.电子拉力试验机",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [],
+      "candidate_count": 3,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G036",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/12.检测检验报告（包括型式试验报告、检测报告、鉴定报告、检定报告、校准证书或报告、检测试验报告等相关报告）/12.2.更新校准证书/12.2.2.微机控制电子万能试验机",
+      "evidence_type": "testing_capacity",
+      "evidence_type_label": "试验检测能力",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [
+        "电缆保护管通用"
+      ],
+      "candidate_count": 3,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验最新校准证书"
+      ],
+      "required_checks": [
+        "以可追溯的较新原始校准证书为准，不采用历史台账旧日期"
+      ]
+    },
+    {
+      "review_group_id": "P006-G037",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/12.检测检验报告（包括型式试验报告、检测报告、鉴定报告、检定报告、校准证书或报告、检测试验报告等相关报告）/12.2.更新校准证书/12.2.3.熔体流动速率仪",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [],
+      "candidate_count": 3,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G038",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/12.检测检验报告（包括型式试验报告、检测报告、鉴定报告、检定报告、校准证书或报告、检测试验报告等相关报告）/12.2.更新校准证书/12.2.4.热变型、维卡软化点温度测定仪",
+      "evidence_type": "testing_capacity",
+      "evidence_type_label": "试验检测能力",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [
+        "电缆保护管通用"
+      ],
+      "candidate_count": 4,
+      "dedup_statuses": [
+        "文本疑似重复",
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核重",
+        "核验最新校准证书"
+      ],
+      "required_checks": [
+        "以可追溯的较新原始校准证书为准，不采用历史台账旧日期",
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体"
+      ]
+    },
+    {
+      "review_group_id": "P006-G039",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/12.检测检验报告（包括型式试验报告、检测报告、鉴定报告、检定报告、校准证书或报告、检测试验报告等相关报告）/12.2.更新校准证书/12.2.5.锤击试验装置",
+      "evidence_type": "testing_capacity",
+      "evidence_type_label": "试验检测能力",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [
+        "电缆保护管通用"
+      ],
+      "candidate_count": 3,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验最新校准证书"
+      ],
+      "required_checks": [
+        "以可追溯的较新原始校准证书为准，不采用历史台账旧日期"
+      ]
+    },
+    {
+      "review_group_id": "P006-G040",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/12.检测检验报告（包括型式试验报告、检测报告、鉴定报告、检定报告、校准证书或报告、检测试验报告等相关报告）/12.2.更新校准证书/12.2.6.电子天平",
+      "evidence_type": "testing_capacity",
+      "evidence_type_label": "试验检测能力",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [
+        "电缆保护管通用"
+      ],
+      "candidate_count": 3,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验最新校准证书"
+      ],
+      "required_checks": [
+        "以可追溯的较新原始校准证书为准，不采用历史台账旧日期"
+      ]
+    },
+    {
+      "review_group_id": "P006-G041",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/4.符合招标文件投标人资格要求的证明文件/4.2、资质业绩凭证单",
+      "evidence_type": "project_performance",
+      "evidence_type_label": "项目业绩",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G042",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/5.针对评审要素，需要补充的其他文件/5.1.产品制造质量控制/5.1.1.原材料组部件进厂检验检测措施",
+      "evidence_type": "product_parameter_table",
+      "evidence_type_label": "产品参数表",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [
+        "MPP电缆保护管"
+      ],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先结构化核验"
+      ],
+      "required_checks": [
+        "核对产品族、规格型号、参数值和原始表格，批准后仍须走结构化抽取"
+      ]
+    },
+    {
+      "review_group_id": "P006-G043",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/5.针对评审要素，需要补充的其他文件/5.1.产品制造质量控制/5.1.1.原材料组部件进厂检验检测措施",
+      "evidence_type": "product_parameter_table",
+      "evidence_type_label": "产品参数表",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [
+        "MPP电缆保护管",
+        "UPVC电缆保护管"
+      ],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先结构化核验"
+      ],
+      "required_checks": [
+        "核对产品族、规格型号、参数值和原始表格，批准后仍须走结构化抽取"
+      ]
+    },
+    {
+      "review_group_id": "P006-G044",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/5.针对评审要素，需要补充的其他文件/5.1.产品制造质量控制/5.1.1.原材料组部件进厂检验检测措施",
+      "evidence_type": "testing_capacity",
+      "evidence_type_label": "试验检测能力",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [
+        "电缆保护管通用"
+      ],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验最新校准证书"
+      ],
+      "required_checks": [
+        "以可追溯的较新原始校准证书为准，不采用历史台账旧日期"
+      ]
+    },
+    {
+      "review_group_id": "P006-G045",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/5.针对评审要素，需要补充的其他文件/5.1.产品制造质量控制/5.1.2.生产工艺/质量管控体系/5.1.2.1.电缆保护管MPP工艺流程",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [
+        "MPP电缆保护管"
+      ],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G046",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/5.针对评审要素，需要补充的其他文件/5.1.产品制造质量控制/5.1.2.生产工艺/质量管控体系/5.1.2.2.电缆保护管CPVC工艺流程",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [
+        "CPVC电缆保护管"
+      ],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G047",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/5.针对评审要素，需要补充的其他文件/5.1.产品制造质量控制/5.1.2.生产工艺/质量管控体系/5.1.2.5.各工序控制点工艺文件",
+      "evidence_type": "production_capacity",
+      "evidence_type_label": "生产制造能力",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [
+        "电缆保护管通用"
+      ],
+      "candidate_count": 22,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验整份原始资料"
+      ],
+      "required_checks": [
+        "连续内嵌页应按完整报告或证据包审核，不逐页新建业务资产"
+      ]
+    },
+    {
+      "review_group_id": "P006-G048",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/5.针对评审要素，需要补充的其他文件/5.1.产品制造质量控制/5.1.3.生产制造环境",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G049",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/5.针对评审要素，需要补充的其他文件/5.1.产品制造质量控制/5.1.4.试组装环境",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G050",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/5.针对评审要素，需要补充的其他文件/5.2.履约风险/5.2.2.绩效评价",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [],
+      "candidate_count": 7,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G051",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/5.针对评审要素，需要补充的其他文件/5.3.绿色低碳生产及绿色回收/5.3.1.建立了绿色生产/5.3.1.1.ESG(环境、社会、公司治理)报告",
+      "evidence_type": "green_low_carbon",
+      "evidence_type_label": "绿色低碳资料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [],
+      "candidate_count": 39,
+      "dedup_statuses": [
+        "未发现重复，仍需审核",
+        "视觉疑似重复"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核重",
+        "核验整份原始资料"
+      ],
+      "required_checks": [
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体",
+        "连续内嵌页应按完整报告或证据包审核，不逐页新建业务资产"
+      ]
+    },
+    {
+      "review_group_id": "P006-G052",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/5.针对评审要素，需要补充的其他文件/5.3.绿色低碳生产及绿色回收/5.3.1.建立了绿色生产/5.3.1.10.智能制造优秀场景报告",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [],
+      "candidate_count": 12,
+      "dedup_statuses": [
+        "未发现重复，仍需审核",
+        "视觉疑似重复"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核重",
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体",
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G053",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/5.针对评审要素，需要补充的其他文件/5.3.绿色低碳生产及绿色回收/5.3.1.建立了绿色生产/5.3.1.11.数字领航企业评价报告",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [],
+      "candidate_count": 17,
+      "dedup_statuses": [
+        "未发现重复，仍需审核",
+        "视觉疑似重复"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核重",
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体",
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G054",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/5.针对评审要素，需要补充的其他文件/5.3.绿色低碳生产及绿色回收/5.3.1.建立了绿色生产/5.3.1.2废水、废气、废固报告",
+      "evidence_type": "green_low_carbon",
+      "evidence_type_label": "绿色低碳资料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [],
+      "candidate_count": 35,
+      "dedup_statuses": [
+        "未发现重复，仍需审核",
+        "视觉疑似重复"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核重",
+        "核验整份原始资料"
+      ],
+      "required_checks": [
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体",
+        "连续内嵌页应按完整报告或证据包审核，不逐页新建业务资产"
+      ]
+    },
+    {
+      "review_group_id": "P006-G055",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/5.针对评审要素，需要补充的其他文件/5.3.绿色低碳生产及绿色回收/5.3.1.建立了绿色生产/5.3.1.3.现状环境影响评估报告",
+      "evidence_type": "green_low_carbon",
+      "evidence_type_label": "绿色低碳资料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [],
+      "candidate_count": 108,
+      "dedup_statuses": [
+        "未发现重复，仍需审核",
+        "视觉疑似重复"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核重",
+        "核验整份原始资料"
+      ],
+      "required_checks": [
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体",
+        "连续内嵌页应按完整报告或证据包审核，不逐页新建业务资产"
+      ]
+    },
+    {
+      "review_group_id": "P006-G056",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/5.针对评审要素，需要补充的其他文件/5.3.绿色低碳生产及绿色回收/5.3.1.建立了绿色生产/5.3.1.4.绿色发展规划报告",
+      "evidence_type": "green_low_carbon",
+      "evidence_type_label": "绿色低碳资料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [],
+      "candidate_count": 18,
+      "dedup_statuses": [
+        "未发现重复，仍需审核",
+        "视觉疑似重复"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核重",
+        "核验整份原始资料"
+      ],
+      "required_checks": [
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体",
+        "连续内嵌页应按完整报告或证据包审核，不逐页新建业务资产"
+      ]
+    },
+    {
+      "review_group_id": "P006-G057",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/5.针对评审要素，需要补充的其他文件/5.3.绿色低碳生产及绿色回收/5.3.1.建立了绿色生产/5.3.1.5.碳足迹报告",
+      "evidence_type": "green_low_carbon",
+      "evidence_type_label": "绿色低碳资料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [],
+      "candidate_count": 17,
+      "dedup_statuses": [
+        "视觉疑似重复"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核重"
+      ],
+      "required_checks": [
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体"
+      ]
+    },
+    {
+      "review_group_id": "P006-G058",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/5.针对评审要素，需要补充的其他文件/5.3.绿色低碳生产及绿色回收/5.3.1.建立了绿色生产/5.3.1.6.绿色电力认证证书",
+      "evidence_type": "certification",
+      "evidence_type_label": "资质证书",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "视觉疑似重复"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核重"
+      ],
+      "required_checks": [
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体"
+      ]
+    },
+    {
+      "review_group_id": "P006-G059",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/5.针对评审要素，需要补充的其他文件/5.3.绿色低碳生产及绿色回收/5.3.1.建立了绿色生产/5.3.1.7.绿色供应链认证证书",
+      "evidence_type": "certification",
+      "evidence_type_label": "资质证书",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库资料",
+      "product_families": [],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "视觉疑似重复"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核重"
+      ],
+      "required_checks": [
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体"
+      ]
+    },
+    {
+      "review_group_id": "P006-G060",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/5.针对评审要素，需要补充的其他文件/5.3.绿色低碳生产及绿色回收/5.3.1.建立了绿色生产/5.3.1.8.绿色电力证书交易凭证",
+      "evidence_type": "green_low_carbon",
+      "evidence_type_label": "绿色低碳资料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [],
+      "candidate_count": 3,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验整份原始资料"
+      ],
+      "required_checks": [
+        "连续内嵌页应按完整报告或证据包审核，不逐页新建业务资产"
+      ]
+    },
+    {
+      "review_group_id": "P006-G061",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/5.针对评审要素，需要补充的其他文件/5.3.绿色低碳生产及绿色回收/5.3.1.建立了绿色生产/5.3.1.9.创新激励机制评价报告",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [],
+      "candidate_count": 12,
+      "dedup_statuses": [
+        "未发现重复，仍需审核",
+        "视觉疑似重复"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核重",
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体",
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G062",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/6.招标文件规定的其他应提交的技术文件/6.1.发明专利证书",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G063",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/6.招标文件规定的其他应提交的技术文件/6.2.中华人民共和国国家版权局计算机软件著作权登记证书",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "核验原始证据"
+      ],
+      "required_checks": [
+        "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
+      ]
+    },
+    {
+      "review_group_id": "P006-G064",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/7.技术服务，包括培训、安装指导等/7.1.技术服务及培训方案",
+      "evidence_type": "enterprise_evidence",
+      "evidence_type_label": "企业证明材料",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [],
+      "candidate_count": 1,
+      "dedup_statuses": [
+        "视觉疑似重复"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先核重"
+      ],
+      "required_checks": [
+        "查看原件并确认是新资产、重复资产或同一证据的不同载体"
+      ]
+    },
+    {
+      "review_group_id": "P006-G065",
+      "source_document_name": "泰昌技术补充文件",
+      "source_section": "（二）专项投标文件/7.技术服务，包括培训、安装指导等/7.3.备品备件",
+      "evidence_type": "product_parameter_table",
+      "evidence_type_label": "产品参数表",
+      "target_library": "product_library",
+      "target_library_label": "产品库资料",
+      "product_families": [
+        "MPP电缆保护管"
+      ],
+      "candidate_count": 6,
+      "dedup_statuses": [
+        "未发现重复，仍需审核"
+      ],
+      "sensitivity_labels": [
+        "企业内部资料"
+      ],
+      "machine_recommendations": [
+        "优先结构化核验"
+      ],
+      "required_checks": [
+        "核对产品族、规格型号、参数值和原始表格，批准后仍须走结构化抽取"
+      ]
+    }
+  ]
+}

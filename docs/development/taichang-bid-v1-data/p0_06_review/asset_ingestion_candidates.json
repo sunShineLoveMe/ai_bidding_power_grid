@@ -1,0 +1,27 @@
+{
+  "metadata": {
+    "schema_version": "taichang_p0_06_review_v1",
+    "generated_at": "2026-07-13T18:02:54.646788+08:00",
+    "enterprise": "河北泰昌电力器材科技有限公司",
+    "pilot_only": true,
+    "read_only": true,
+    "database_written": false,
+    "rag_updated": false,
+    "docx_selection_updated": false,
+    "candidate_count": 896,
+    "review_candidate_count": 461,
+    "review_group_count": 65,
+    "auto_blocked_or_reference_count": 435,
+    "approved_decision_count": 0,
+    "ready_for_ingestion_count": 0,
+    "validation_error_count": 0,
+    "decision_counts": {},
+    "input_sha256": {
+      "docs/development/taichang-bid-v1-data/asset_classification_matrix.json": "4d1f3485049f4d7c17366dd13183a51aa6b290b3ecf707d7dcccd4c71abf632d",
+      "docs/development/taichang-bid-v1-data/asset_review_queue.json": "ac33f25a99fa61fceb2df59ebd5635caf537fffbace35b3bc3c37aa85e3b39aa"
+    },
+    "artifact_role": "validated_ready_for_ingestion",
+    "record_count": 0
+  },
+  "records": []
+}

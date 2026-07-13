@@ -299,6 +299,14 @@ created_at/updated_at/ingestion_batch_id/doc_version/status
 
 ### P0-05 标签、分类与质量分级
 
+**执行状态（2026-07-13）：`[x]` 已完成只读分类与 P0-06 待复核队列生成**
+
+- 896 条候选已全部补齐主体、来源、目标库、证据类型、产品族、分册/章节、敏感级别、质量等级、审核状态、去重状态和中文展示字段。
+- 已生成 461 条 P0-06 人工复核队列；270 条精确重复、15 条事实冲突被阻断，148 条章节/表单只作为非资产结构参考。
+- 当前质量等级为 `review_only` 838 条、`restricted` 58 条；尚无人工批准，因此正式增量入库候选为 0 条。
+- 本轮未写数据库、未修改 RAG/metadata、未改变 DOCX 选图；批准 ID 不能绕过质量、产品、敏感性和去重门禁。
+- 27 项分类、去重、解析和基线回归通过，第二次执行结果一致，三份冻结输入哈希未变化。
+
 **任务**
 
 标签不使用一组无结构关键词，而是按维度管理。
@@ -342,9 +350,12 @@ caption_policy/formal_caption
 
 **交付物**
 
-- 《泰昌专版 V1 标签与分类字典》。
-- `tag_dictionary.json`。
-- `asset_ingestion_candidates.json/csv`（仅包含已去重、已审核候选）。
+- [《泰昌专版 V1 标签与分类字典》](./taichang-v1-tag-classification-dictionary-20260713.md)。
+- [`tag_dictionary.json`](./taichang-bid-v1-data/tag_dictionary.json)。
+- [`asset_classification_matrix.json`](./taichang-bid-v1-data/asset_classification_matrix.json) / [`csv`](./taichang-bid-v1-data/asset_classification_matrix.csv)。
+- [`asset_review_queue.json`](./taichang-bid-v1-data/asset_review_queue.json) / [`csv`](./taichang-bid-v1-data/asset_review_queue.csv)。
+- [`asset_ingestion_candidates.json`](./taichang-bid-v1-data/asset_ingestion_candidates.json) / [`csv`](./taichang-bid-v1-data/asset_ingestion_candidates.csv)（当前 0 条；仅 P0-06 已批准且通过门禁的候选可进入）。
+- [分类与质量分级报告](./taichang-v1-tag-classification-report-20260713.md)及 [验证记录](../rag/runs/run_20260713_taichang_p0_05_tag_classification_summary.md)。
 
 **P0 门禁**
 
@@ -353,6 +364,15 @@ caption_policy/formal_caption
 - 页面和 DOCX 不得显示英文枚举、解析路径、页面划线、“页面_”、“原图”、UUID 或 API URL。
 
 ### P0-06 人工复核与增量入库批准
+
+**执行状态（2026-07-13）：`[~]` 审批工具与复核材料已完成，等待泰昌资料管理人员审批**
+
+- 896 条候选已全部分流：461 条进入人工复核，435 条进入自动阻断或仅参考清单。
+- 461 条候选按完整报告/证据包归并为 65 个证据组，并生成四工作表中文 Excel 审批表。
+- 自动处理结果：精确重复 270 条禁止新增、事实冲突 15 条禁止复用、结构/表单 148 条仅保留历史参考、通用响应 2 条禁止独立入库。
+- 32 条敏感和 1 条受限候选不能通过普通审批直接入库；3 条已过期职业健康安全管理体系证书候选强制延后补证。
+- 当前审批结论全部为空，已批准清单 0 条、可执行增量入库清单 0 条；未写数据库、未修改 RAG/metadata 或 DOCX 选图。
+- 审批完整性、去重、产品、有效性、敏感性、独立原始证据、中文展示和结构化参数门禁已实现；37 项定向及前序回归通过，LibreOffice 转存回读通过。
 
 **重点复核项**
 
@@ -368,8 +388,12 @@ caption_policy/formal_caption
 
 **交付物**
 
-- 《泰昌历史标书资产增量入库审批表》。
-- 已批准增量清单与禁止/延后清单。
+- [《泰昌历史标书资产增量入库审批表》](./taichang-bid-v1-data/p0_06_review/泰昌历史标书资产增量入库审批表.xlsx)。
+- [P0-06 复核与入库批准准备报告](./taichang-p0-06-asset-review-report-20260713.md)。
+- [`asset_review_groups.json/csv`](./taichang-bid-v1-data/p0_06_review/asset_review_groups.json)、[`asset_review_candidates.json/csv`](./taichang-bid-v1-data/p0_06_review/asset_review_candidates.json)。
+- [`asset_auto_blocked_or_reference.json/csv`](./taichang-bid-v1-data/p0_06_review/asset_auto_blocked_or_reference.json)。
+- [`asset_approved_decisions.json/csv`](./taichang-bid-v1-data/p0_06_review/asset_approved_decisions.json) 与 [`asset_ingestion_candidates.json/csv`](./taichang-bid-v1-data/p0_06_review/asset_ingestion_candidates.json)（当前均为 0 条，等待人工审批）。
+- [P0-06 验证记录](../rag/runs/run_20260713_taichang_p0_06_asset_review_preparation_summary.md)。
 
 **P0 总门禁**
 

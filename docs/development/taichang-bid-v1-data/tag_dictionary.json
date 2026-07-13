@@ -1,0 +1,128 @@
+{
+  "schema_version": "taichang_tag_dictionary_v1",
+  "enterprise_scope": "河北泰昌电力器材科技有限公司",
+  "pilot_only": true,
+  "source_domains": {
+    "enterprise_fact": "泰昌企业事实",
+    "tender_requirement": "招标要求",
+    "reference_template": "历史参考资料",
+    "mixed_historical_bid": "泰昌历史标书混合资料"
+  },
+  "target_libraries": {
+    "knowledge_library": "知识库资料",
+    "product_library": "产品库资料",
+    "qualification_library": "资信库资料",
+    "reference_template_library": "历史参考资料"
+  },
+  "evidence_types": {
+    "historical_structure_reference": "历史目录结构参考",
+    "historical_form_reference": "历史表单结构参考",
+    "project_context": "历史项目上下文",
+    "product_parameter_table": "产品参数表",
+    "technical_response": "技术响应资料",
+    "business_license": "基础证照",
+    "certification": "资质证书",
+    "finance": "财务资料",
+    "personnel_certificate": "人员证书",
+    "project_performance": "项目业绩",
+    "authorization": "授权文件",
+    "inspection_report": "检验报告",
+    "production_capacity": "生产制造能力",
+    "testing_capacity": "试验检测能力",
+    "green_low_carbon": "绿色低碳资料",
+    "product_image": "产品实物图片",
+    "enterprise_evidence": "企业证明材料"
+  },
+  "product_families": {
+    "CPVC": "CPVC电缆保护管",
+    "MPP": "MPP电缆保护管",
+    "N-HAP": "N-HAP电缆保护管",
+    "UPVC": "UPVC电缆保护管",
+    "cable_conduit_general": "电缆保护管通用",
+    "unknown": "产品族待确认"
+  },
+  "applicable_volumes": {
+    "technical": "技术标",
+    "business": "商务标"
+  },
+  "quality_tiers": {
+    "formal_bid_ready": "正式标书可用",
+    "knowledge_only": "仅用于知识检索",
+    "review_only": "仅限人工复核",
+    "restricted": "受限资料"
+  },
+  "review_statuses": {
+    "not_asset_reference": "非资产结构参考",
+    "rejected_duplicate": "精确重复，不新增",
+    "rejected_conflict": "事实冲突，禁止复用",
+    "needs_manual_review": "需要人工复核",
+    "needs_customer_confirmation": "需要客户确认",
+    "approved": "已批准",
+    "rejected": "已驳回"
+  },
+  "sensitivity_levels": {
+    "internal": "企业内部资料",
+    "sensitive": "敏感资料",
+    "restricted": "受限资料"
+  },
+  "dedup_statuses": {
+    "new": "未发现重复，仍需审核",
+    "duplicate_exact": "精确重复，不新增",
+    "possible_visual_duplicate": "视觉疑似重复",
+    "possible_text_duplicate": "文本疑似重复",
+    "same_evidence_new_rendition": "同一证据的不同载体",
+    "fact_conflict": "事实冲突"
+  },
+  "origin_types": {
+    "tender_mandated": "招标强制要求",
+    "tender_conditional": "招标条件性要求",
+    "tender_scoring_derived": "评分要素展开",
+    "taichang_habitual_addition": "泰昌历史习惯补充",
+    "reference_layout_only": "仅参考版式",
+    "uncertain": "来源待确认"
+  },
+  "caption_policies": {
+    "suppressed_document_page_caption": "证书、报告、合同等整页证据默认不显示题注",
+    "formal_material_caption": "生产、检测、绿色低碳和产品实物资料使用正式中文题注"
+  },
+  "visible_field_policy": {
+    "required": [
+      "title",
+      "source_display_name",
+      "source_document_name",
+      "category_label",
+      "evidence_type_label",
+      "target_library_label",
+      "dedup_status_label",
+      "description",
+      "formal_caption"
+    ],
+    "forbidden_patterns": [
+      "taichang_",
+      "power_grid_",
+      "production_capacity",
+      "testing_capacity",
+      "green_low_carbon",
+      "business_license",
+      "certification",
+      "product_image",
+      "technical",
+      "页面_",
+      "原图",
+      "parsed_outputs",
+      "rag_seed",
+      "/api/",
+      "UUID",
+      "长哈希"
+    ],
+    "rule": "内部枚举和解析路径仅保留在 metadata，页面和正式文件只展示中文字段"
+  },
+  "promotion_policy": {
+    "default_quality_tier": "review_only",
+    "requires_p0_06_approval": true,
+    "new_is_not_approved": true,
+    "possible_match_auto_merge_allowed": false,
+    "formal_bid_ready_requires_original_evidence": true
+  },
+  "generated_at": "2026-07-13T17:54:38.522310+08:00"
+}
