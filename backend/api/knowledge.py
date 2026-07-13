@@ -470,7 +470,34 @@ def _curate_pilot_enterprise_contexts(
         if not key.strip("|"):
             key = str(context.get("id") or len(curated))
         current = curated.get(key)
-        if current is None or float(context.get("similarity") or 0) > float(current.get("similarity") or 0):
+        current_meta = _safe_meta(current) if current else {}
+        context_meta = _safe_meta(context)
+        is_structured_parameter_pair = bool(
+            current
+            and current.get("retrieval_source") == "structured_product_parameter_json"
+            and context.get("retrieval_source") == "structured_product_parameter_json"
+            and current_meta.get("report_no") == context_meta.get("report_no")
+            and current_meta.get("specification_model") == context_meta.get("specification_model")
+        )
+        if is_structured_parameter_pair:
+            current_content = str(current.get("content") or "")
+            next_content = str(context.get("content") or "")
+            if next_content and next_content not in current_content:
+                current["content"] = f"{current_content}\n\n{next_content}".strip()
+            parameter_names = [
+                value
+                for value in [current_meta.get("parameter_name"), context_meta.get("parameter_name")]
+                if value
+            ]
+            if parameter_names:
+                current_meta["parameter_name"] = "；".join(dict.fromkeys(map(str, parameter_names)))
+                current_meta["source_section"] = current_meta["parameter_name"]
+                current["metadata"] = current_meta
+            current["similarity"] = max(
+                float(current.get("similarity") or 0),
+                float(context.get("similarity") or 0),
+            )
+        elif current is None or float(context.get("similarity") or 0) > float(current.get("similarity") or 0):
             curated[key] = context
 
     ranked = sorted(

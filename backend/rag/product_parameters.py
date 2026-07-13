@@ -79,6 +79,19 @@ def _parameter_match_score(query: str, row: dict[str, Any]) -> int:
     parameter_name = str(row.get("parameter_name") or "")
     normalized_name = _normalize(parameter_name)
     score = 0
+
+    # “平均内径/壁厚”与“承口平均内径/承口壁厚”在同一报告中同时存在。
+    # 用户未明确提到“承口”时，不能用承口尺寸替代管体尺寸。
+    if "承口" in parameter_name and "承口" not in normalized_query and any(
+        term in normalized_query for term in ("平均内径", "内径", "壁厚", "管壁厚度")
+    ):
+        return 0
+
+    explicit_parameter_query = any(
+        _normalize(synonym) in normalized_query
+        for synonyms in PARAMETER_SYNONYMS.values()
+        for synonym in synonyms
+    )
     if normalized_name and normalized_name in normalized_query:
         score += 8
     for canonical, synonyms in PARAMETER_SYNONYMS.items():
@@ -89,7 +102,7 @@ def _parameter_match_score(query: str, row: dict[str, Any]) -> int:
             if _normalize(synonym) in normalized_query:
                 score += 6
                 break
-    if score == 0:
+    if score == 0 and not explicit_parameter_query:
         # For broad product-parameter questions, allow core inspection rows but keep
         # them below explicitly requested parameter names.
         if any(term in normalized_query for term in ["参数", "检验结果", "检测结果", "标准要求"]):
@@ -97,18 +110,30 @@ def _parameter_match_score(query: str, row: dict[str, Any]) -> int:
     return score
 
 
+def _has_explicit_parameter_request(query: str) -> bool:
+    normalized_query = _normalize(query)
+    return any(
+        _normalize(synonym) in normalized_query
+        for synonyms in PARAMETER_SYNONYMS.values()
+        for synonym in synonyms
+    )
+
+
 def _row_match_score(query: str, row: dict[str, Any]) -> int:
     parameter_score = _parameter_match_score(query, row)
     score = parameter_score
     families = _query_product_families(query)
     diameters = _query_nominal_inner_diameters(query)
+    if parameter_score <= 0 and _has_explicit_parameter_request(query):
+        return 0
     if parameter_score <= 0 and not families and not diameters:
         return 0
     if families:
         if row.get("product_family") in families:
             score += 5
         else:
-            score -= 8
+            # 产品族已明确时采用硬过滤，避免把 MPP 的同名参数混入 CPVC，反之亦然。
+            return 0
     if diameters:
         if str(row.get("nominal_inner_diameter") or "") in diameters:
             score += 4
