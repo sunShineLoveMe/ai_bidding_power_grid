@@ -1,0 +1,67 @@
+{
+  "version": "2026-07-13",
+  "enterprise": "河北泰昌电力器材科技有限公司",
+  "scope": "国家电网物资供货类技术标、商务标",
+  "status": "pending_external_confirmation",
+  "projects": [
+    {
+      "case_id": "TC-P0-01-POSITIVE",
+      "case_type": "final_positive",
+      "project_name": null,
+      "status": "blocked_missing_exact_match",
+      "release_gate": "blocked",
+      "required_match_dimensions": [
+        "material_family",
+        "specification_model",
+        "qualification_mode",
+        "inspection_report",
+        "enterprise_qualification",
+        "performance_evidence"
+      ],
+      "note": "现有28份物资清单未发现与泰昌MPP 250×22或CPVC 250×15检验报告精确匹配的招标项目。"
+    },
+    {
+      "case_id": "TC-P0-01-SL2655",
+      "case_type": "rule_positive_data_gap",
+      "project_name": "SL2655新疆MPP包",
+      "status": "locked",
+      "release_gate": "blocked",
+      "tender_requirements": {
+        "product_family": "MPP电缆导管",
+        "nominal_inner_diameter_mm": 200,
+        "nominal_wall_thickness_mm": 14.0,
+        "elongation_min_percent": 200,
+        "ring_stiffness_min_kn_m2": 24
+      },
+      "taichang_evidence": {
+        "report_no": "2024100312005501712",
+        "specification_model": "DF 250×22×9000 SN40 MPP",
+        "nominal_inner_diameter_mm": 250,
+        "nominal_wall_thickness_mm": 22.0,
+        "elongation_measured_percent": 176,
+        "ring_stiffness_measured_kn_m2": 66.40
+      },
+      "coverage": {
+        "product_family": "matched",
+        "nominal_inner_diameter": "not_covered",
+        "nominal_wall_thickness": "not_covered",
+        "elongation": "not_covered",
+        "ring_stiffness": "value_meets_threshold_but_wrong_specification"
+      }
+    },
+    {
+      "case_id": "TC-P0-01-SL265A",
+      "case_type": "cross_product_block",
+      "project_name": "SL265A 10kV架空绝缘导线-新疆包1",
+      "status": "locked",
+      "release_gate": "blocked",
+      "forbidden_enterprise_fact_families": [
+        "MPP电缆保护管",
+        "CPVC电缆保护管",
+        "N-HAP电缆保护管",
+        "UPVC电缆保护管"
+      ],
+      "expected_result": "允许读取招标目录、表单和规则，但不得生成泰昌具备架空绝缘导线参数、报告或业绩的结论。"
+    }
+  ]
+}

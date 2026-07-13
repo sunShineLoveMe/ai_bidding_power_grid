@@ -166,6 +166,7 @@
 
 ## 当前最近任务
 
+0. **泰昌历史标书复用 P0-01 三类验收口径正在收口。** 已锁定 SL2655 新疆 MPP 包为“规则正向/资料缺口”样本、SL265A 10kV 架空绝缘导线包为“跨产品阻断”样本；真实 stream 已正确判定泰昌 MPP `250×22 / 176%` 不覆盖 SL2655 `200×14 / ≥200%`，并拒绝用 MPP/CPVC 资料证明架空绝缘导线能力。现有 28 份货物清单未发现与泰昌两份 φ250 检验报告精确匹配的最终成稿正向项目，待客户补充项目或对应规格证据。复合参数查询存在组合提问漏召回伸长率的问题，后续修复时必须重跑 Base + 泰昌专项门禁。详见 `docs/development/taichang-bid-v1-acceptance-scope-20260713.md`。
 0. **泰昌企业工商基础事实通用防护已完成。** 已确认历史错误答案“王伟杰”来自低可信宣传彩页/OCR片段被误作为泰昌企业事实召回；现已改为“低可信来源字段抽取 + 核验事实包比对”的通用冲突检测，不再按具体错误姓名枚举。真实库本轮隔离 6 个高置信冲突 chunk，覆盖错误法定代表人、错误注册资本和错误统一社会信用代码；企业基础工商事实问题统一进入 `enterprise_basic_info` 严格范围。知识库助手参考来源已收敛为 Top 3，空括号和 `enterprise_profile` 等内部枚举已清理；法人代表与统一社会信用代码真实 stream 均 PASS，定向测试 47 passed，前端 build PASS，标准增量回归门禁 `run_20260629_taichang_enterprise_basic_fact_guard` PASS。
 0. **正式投标资产入库 SOP 已 Skill 化。** 新增 `.agents/skills/formal-bid-asset-ingestion/` 并在 `AGENTS.md` 接入触发规则；后续客户上传图片、PDF、Word、Excel、CSV、产品库/资信库/企业知识库资料、RAG 图片资产或 DOCX 配图时，必须先使用该 Skill。资产准入策略已固化 `formal_bid_ready / knowledge_only / review_only / restricted`，验证门禁覆盖真实上传、列表/详情、`/api/knowledge/search/stream`、Base+泰昌专项增量门禁和 DOCX XML 审计。Skill 校验通过。
 0. **产品库/资信库上传表单资料规范产品化已完成。** 已将正式投标资产 SOP 落到用户上传表单：产品库/资信库均使用中文资料类型、推荐格式提示和文件质量预检；`.xls/.xlsx/.csv` 已支持；后端入库写入 `quality_tier/quality_notes`，表格默认仅用于知识库，小图/二维码/印章/签名/局部截图默认需人工复核，DOCX 自动选图只允许 `formal_bid_ready`。真实 API 上传 CSV 返回 `knowledge_only + allowed_for_bid=false` 并已清理测试资产；Chrome 页面回归截图已保存；定向测试 95 passed，`run_20260627_asset_upload_form_productization_gate` 标准增量门禁 PASS。

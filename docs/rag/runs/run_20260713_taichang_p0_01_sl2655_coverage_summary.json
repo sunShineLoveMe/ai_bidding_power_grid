@@ -1,0 +1,74 @@
+{
+  "run_id": "run_20260713_taichang_p0_01_sl2655_coverage",
+  "generated_at": "2026-07-13T08:12:53.295888+00:00",
+  "status": "pass",
+  "steps": [
+    {
+      "name": "api_ready",
+      "status": "pass",
+      "duration_ms": 2170,
+      "detail": "http=200; status=ok; failed_checks=[]",
+      "artifact": null
+    },
+    {
+      "name": "stream_sample",
+      "status": "pass",
+      "duration_ms": 16078,
+      "detail": "done=True; contexts=3; assets=2; images=2; error=None",
+      "artifact": "docs/rag/runs/run_20260713_taichang_p0_01_sl2655_coverage_stream.jsonl"
+    }
+  ],
+  "ready": {
+    "checks": {
+      "celery": {
+        "status": "ok",
+        "workers": 1
+      },
+      "database": {
+        "checks": {
+          "match_knowledge_assets": true,
+          "match_knowledge_chunks": true,
+          "vector": true
+        },
+        "status": "ok"
+      },
+      "model_config": {
+        "optional": {
+          "mineru_api_token": true
+        },
+        "required": {
+          "dashscope_api_key": true,
+          "deepseek_api_key": true
+        },
+        "status": "ok"
+      },
+      "redis": {
+        "host": "127.0.0.1",
+        "port": 16379,
+        "status": "ok"
+      },
+      "storage": {
+        "provider": "local",
+        "root": "storage",
+        "status": "ok"
+      }
+    },
+    "duration_ms": 2162,
+    "status": "ok",
+    "version": {
+      "app": "ai-bidding-backend",
+      "branch": "codex/taichang-bid-reuse-v1",
+      "builtAt": "",
+      "commit": "ff55c71d5ef6"
+    }
+  },
+  "stream_summary": {
+    "done": true,
+    "error": null,
+    "contexts_count": 3,
+    "assets_count": 2,
+    "images_count": 2,
+    "chunks": 588
+  },
+  "gate_summary_path": null
+}
