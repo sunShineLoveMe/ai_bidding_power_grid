@@ -198,3 +198,20 @@ build_project_bid_markdown(volume_type=technical/business, with_images=true)
 4. P1-1/P1-2/P1-3 确认 RAG 问答、召回、选图不退化。
 5. P0-9/P0-10 本地和阿里云正式导出复验。
 6. P2 SOP 固化，防止新增资料再次引入同类问题。
+
+### 2026-07-13 泰昌历史标书媒体候选隔离记录
+
+- P0-03 已只读解析《技术补充文件》《商务补充文件》，识别 691 个媒体文件、698 次媒体出现。
+- 所有 Word 内嵌媒体仅记录关系、页序、尺寸和哈希，统一为 `review_only + allowed_for_bid=false`；没有解包到产品库/资信库，也没有自动进入 RAG 或正式 DOCX。
+- 图片内部证书有效期、签章、个人信息、报告参数和表格数值未做 OCR，不作为事实候选；后续 P0-04 必须与客户原始文件和当前 599 个数据库资产进行四层去重后，才能决定是否建立证据包映射。
+- 运行记录：`docs/rag/runs/run_20260713_taichang_p0_03_historical_bid_inventory_summary.md`。
+
+### 2026-07-13 泰昌历史标书四层去重安全审计
+
+- 已对 896 条历史标书候选执行文件、视觉、文本和业务主键四层只读比对；结果为精确重复 270、视觉疑似 142、文本疑似 5、同证据不同载体 2、事实冲突 15、新候选 462。
+- staging 的 `content_sha256` 是记录指纹，不等于图片文件哈希；本轮已从真实 `local_path` 重新计算 543 个视觉文件，避免错误精确匹配。
+- 所有视觉疑似项均为 `manual_review_required=true`，空白/近空白页和小图/印章风险图不得基于感知哈希自动合并。
+- 所有候选继续保持 `review_only + allowed_for_bid=false + promotion_eligible=false`；未写数据库、未改 metadata、未执行自动合并或正式入库。
+- 两个既有检验报告编号已归入同一证据包候选；历史项目号、固化 ID 按事实冲突阻断；缺原始证据的报告仍不得提升。
+- 定向与 P0-02/P0-03 回归共 18 项通过，重复执行结果一致，冻结输入哈希未变化。
+- 产物：`docs/development/taichang-bid-v1-data/asset_dedup_matrix.json/csv`；运行记录：`docs/rag/runs/run_20260713_taichang_p0_04_asset_dedup_summary.md`。
