@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apiClient } from '../../api/client';
 import { formatShortDateTime } from '../../utils/time';
+import type { BidProjectMode } from '../../types/bid';
 
 interface HistoryItem {
   id: string;
@@ -23,6 +24,7 @@ interface HistoryItem {
   writing_done_count?: number;
   writing_partial_count?: number;
   parse_status?: string | null;
+  project_mode?: BidProjectMode;
 }
 
 const statusColor: Record<string, string> = {

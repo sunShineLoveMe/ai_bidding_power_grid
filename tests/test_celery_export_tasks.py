@@ -86,6 +86,7 @@ class DocxExportCeleryMigrationTest(unittest.TestCase):
 
         with (
             patch("backend.api.export.create_bid_export_task", return_value=created_task) as create_mock,
+            patch("backend.api.export.build_project_task_metadata", side_effect=lambda _, metadata: {**metadata, "project_mode": "general"}),
             patch("backend.api.export.build_formal_bid_check_report", return_value=_formal_check_report(blocked=0)),
             patch("backend.tasks.export_tasks.run_bid_docx_export.delay") as delay_mock,
         ):
@@ -112,6 +113,7 @@ class DocxExportCeleryMigrationTest(unittest.TestCase):
 
         with (
             patch("backend.api.export.create_bid_export_task", return_value=created_task) as create_mock,
+            patch("backend.api.export.build_project_task_metadata", side_effect=lambda _, metadata: {**metadata, "project_mode": "general"}),
             patch("backend.api.export.build_formal_bid_check_report", return_value=_formal_check_report(blocked=0)),
             patch("backend.tasks.export_tasks.run_bid_docx_export.delay") as delay_mock,
         ):
@@ -130,6 +132,7 @@ class DocxExportCeleryMigrationTest(unittest.TestCase):
 
         with (
             patch("backend.api.export.create_bid_export_task", return_value=created_task) as create_mock,
+            patch("backend.api.export.build_project_task_metadata", side_effect=lambda _, metadata: {**metadata, "project_mode": "general"}),
             patch("backend.api.export.build_formal_bid_check_report", return_value=_formal_check_report(blocked=1)),
             patch("backend.tasks.export_tasks.run_bid_docx_export.delay") as delay_mock,
         ):
@@ -152,6 +155,7 @@ class DocxExportCeleryMigrationTest(unittest.TestCase):
 
         with (
             patch("backend.api.export.create_bid_export_task", return_value=created_task) as create_mock,
+            patch("backend.api.export.build_project_task_metadata", side_effect=lambda _, metadata: {**metadata, "project_mode": "general"}),
             patch("backend.api.export.build_formal_bid_check_report") as formal_check_mock,
             patch("backend.tasks.export_tasks.run_bid_docx_export.delay") as delay_mock,
         ):

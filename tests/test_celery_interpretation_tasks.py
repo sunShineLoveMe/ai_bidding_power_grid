@@ -39,6 +39,8 @@ class InterpretationCeleryTaskTest(unittest.TestCase):
         self.assertEqual(body["taskId"], VALID_TASK_ID)
         self.assertFalse(body["cached"])
         create_mock.assert_called_once()
+        self.assertEqual(create_mock.call_args.kwargs["metadata"]["project_mode"], "general")
+        self.assertFalse(create_mock.call_args.kwargs["metadata"]["historical_bid_reuse_enabled"])
         delay_mock.assert_called_once_with(VALID_PROJECT_ID, VALID_TASK_ID)
 
     def test_create_ai_report_task_returns_completed_when_cached(self):
@@ -56,6 +58,7 @@ class InterpretationCeleryTaskTest(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.get_json()["cached"])
         create_mock.assert_called_once()
+        self.assertEqual(create_mock.call_args.kwargs["metadata"]["project_mode"], "general")
         delay_mock.assert_not_called()
 
     def test_get_ai_report_task_returns_task(self):

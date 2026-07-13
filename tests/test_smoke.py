@@ -31,7 +31,10 @@ class BackendSmokeTest(unittest.TestCase):
         response = self.client.get("/api/health")
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.get_json(), {"status": "ok"})
+        payload = response.get_json()
+        self.assertEqual(payload["status"], "ok")
+        self.assertEqual(payload["version"]["app"], "ai-bidding-backend")
+        self.assertIn("commit", payload["version"])
         self.assertRegex(response.headers.get("X-Request-Id", ""), r"^req_\d{14}_[a-f0-9]{10}$")
 
     def test_ready_reports_dependency_status(self):

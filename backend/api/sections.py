@@ -45,6 +45,7 @@ from backend.db.supabase_repo import (
     upsert_bid_section,
 )
 from backend.services.section_generation import stream_generate_bid_section_events
+from backend.services.project_mode_context import build_project_task_metadata
 
 
 def dispatch_section_generation_task(project_id: str, task_id: str) -> None:
@@ -224,12 +225,13 @@ def create_section_generation_task_api(project_id):
         items = payload.get("items") or []
         if not isinstance(items, list) or not items:
             return jsonify({'error': '缺少待生成章节列表。'}), 400
+        client_metadata = payload.get("metadata") if isinstance(payload.get("metadata"), dict) else {}
         task = create_bid_generation_task(
             project_id,
             items,
             volume_type=payload.get("volumeType") or "all",
             with_images=bool(payload.get("withImages")),
-            metadata=payload.get("metadata") if isinstance(payload.get("metadata"), dict) else {},
+            metadata=build_project_task_metadata(project_id, client_metadata),
         )
         # 进入全文编写即锁定大纲：之后任何 AI 精修/重生成都不得覆盖目录。
         try:

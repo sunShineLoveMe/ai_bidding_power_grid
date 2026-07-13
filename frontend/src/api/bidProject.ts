@@ -1,5 +1,5 @@
 import { apiClient } from './client';
-import type { GenerateBidDocumentResponse, OnlyOfficeConfigResponse, ParseStatusResponse, UploadResponse } from '../types/bid';
+import type { BidProjectMode, GenerateBidDocumentResponse, OnlyOfficeConfigResponse, ParseStatusResponse, UploadResponse } from '../types/bid';
 import type { BidLengthFeasibility, BidLengthSettings, BidSection, ComplianceReport, InterpretationResponse, SemanticComplianceReport } from '../types/interpretation';
 
 export async function identifyUser(fingerprintId: string): Promise<{ userId: string | number; isNew: boolean; storage?: string }> {
@@ -7,10 +7,15 @@ export async function identifyUser(fingerprintId: string): Promise<{ userId: str
   return response.data;
 }
 
-export async function uploadTenderFile(file: File, userId: string | number): Promise<UploadResponse> {
+export async function uploadTenderFile(
+  file: File,
+  userId: string | number,
+  projectMode: BidProjectMode = 'general',
+): Promise<UploadResponse> {
   const form = new FormData();
   form.append('file', file);
   form.append('userId', String(userId));
+  form.append('projectMode', projectMode);
   const response = await apiClient.post('/api/bidding/upload', form);
   return response.data;
 }

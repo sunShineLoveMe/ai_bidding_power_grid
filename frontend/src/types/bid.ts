@@ -1,8 +1,11 @@
+export type BidProjectMode = 'general' | 'taichang_reuse';
+
 export interface UploadResponse {
   message: string;
   biddingId?: number | null;
   originalFilename: string;
   projectId?: string | null;
+  projectMode?: BidProjectMode;
   fileId?: string | null;
   supabaseFileId?: string | null;
   supabaseSynced?: boolean;
@@ -46,4 +49,5 @@ export interface RecentTask {
   createdAt: string;
   status: '待编辑' | '生成中' | '已导出' | '解析完成' | '已上传';
   action: '查看' | '继续' | '生成';
+  projectMode?: BidProjectMode;
 }

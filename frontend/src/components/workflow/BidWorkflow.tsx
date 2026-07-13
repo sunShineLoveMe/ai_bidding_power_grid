@@ -12,6 +12,7 @@ import {
 } from '../../api/bidProject';
 import { BrandMark } from '../common/BrandMark';
 import { useBidProjectStore } from '../../stores/bidProjectStore';
+import type { BidProjectMode } from '../../types/bid';
 
 type StepStatus = 'wait' | 'process' | 'finish' | 'error';
 const ACTIVE_WORKFLOW_KEY = 'aiBiddingActiveWorkflow';
@@ -22,11 +23,13 @@ interface ActiveWorkflow {
   projectId: string;
   supabaseFileId?: string | null;
   startedAt: number;
+  projectMode: BidProjectMode;
 }
 
 interface BidWorkflowProps {
   onReady?: (openFilePicker: () => void) => void;
   onTaskChanged?: () => void;
+  projectMode?: BidProjectMode;
 }
 
 const workflowSteps = [
@@ -72,7 +75,7 @@ function readActiveWorkflow(): ActiveWorkflow | null {
     if (!raw) return null;
     const parsed = JSON.parse(raw) as ActiveWorkflow;
     if (!parsed.fileId || !parsed.projectId) return null;
-    return parsed;
+    return { ...parsed, projectMode: parsed.projectMode || 'general' };
   } catch {
     return null;
   }
@@ -86,7 +89,7 @@ function clearActiveWorkflow(): void {
   localStorage.removeItem(ACTIVE_WORKFLOW_KEY);
 }
 
-export function BidWorkflow({ onReady, onTaskChanged }: BidWorkflowProps): JSX.Element {
+export function BidWorkflow({ onReady, onTaskChanged, projectMode = 'general' }: BidWorkflowProps): JSX.Element {
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const runTokenRef = useRef(0);
@@ -195,7 +198,7 @@ export function BidWorkflow({ onReady, onTaskChanged }: BidWorkflowProps): JSX.E
     try {
       updateStep(0, 'process', '正在上传招标文件...', '系统正在创建项目任务并同步文件到知识库。');
       const resolvedUserId = await getUserId();
-      const uploadResult = await uploadTenderFile(selectedFile, resolvedUserId);
+      const uploadResult = await uploadTenderFile(selectedFile, resolvedUserId, projectMode);
       if (runTokenRef.current !== token) return;
 
       addTask({
@@ -203,6 +206,7 @@ export function BidWorkflow({ onReady, onTaskChanged }: BidWorkflowProps): JSX.E
         tenderUnit: '本地上传',
         status: '已上传',
         action: '查看',
+        projectMode,
       });
       onTaskChanged?.();
       finishStep(0);
@@ -218,6 +222,7 @@ export function BidWorkflow({ onReady, onTaskChanged }: BidWorkflowProps): JSX.E
           projectId: uploadResult.projectId,
           supabaseFileId: uploadResult.supabaseFileId,
           startedAt: Date.now(),
+          projectMode: uploadResult.projectMode || projectMode,
         });
       }
 

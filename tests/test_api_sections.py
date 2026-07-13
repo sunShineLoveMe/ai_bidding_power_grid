@@ -61,10 +61,16 @@ class SectionApiTest(unittest.TestCase):
 
     @patch("backend.api.sections.dispatch_section_generation_task")
     @patch("backend.api.sections.create_bid_generation_task")
-    def test_create_section_generation_task_dispatches_celery(self, create_mock, dispatch_mock):
+    @patch("backend.api.sections.build_project_task_metadata")
+    def test_create_section_generation_task_dispatches_celery(self, metadata_mock, create_mock, dispatch_mock):
         project_id = "11111111-1111-1111-1111-111111111111"
         task_id = "22222222-2222-2222-2222-222222222222"
         create_mock.return_value = {"id": task_id, "project_id": project_id, "status": "queued", "items": []}
+        metadata_mock.return_value = {
+            "project_mode": "general",
+            "orchestration_profile": "general_v1",
+            "historical_bid_reuse_enabled": False,
+        }
 
         response = self.client.post(
             f"/api/bidding/interpretations/{project_id}/section-generation-tasks",
@@ -78,6 +84,7 @@ class SectionApiTest(unittest.TestCase):
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.get_json()["task"]["id"], task_id)
         create_mock.assert_called_once()
+        self.assertEqual(create_mock.call_args.kwargs["metadata"]["project_mode"], "general")
         dispatch_mock.assert_called_once_with(project_id, task_id)
 
     @patch("backend.api.sections.get_bid_generation_task")

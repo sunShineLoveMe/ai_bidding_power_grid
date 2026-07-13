@@ -22,6 +22,7 @@ from backend.db.supabase_repo import (
     get_bid_interpretation_task,
     get_project_interpretation,
 )
+from backend.services.project_mode_context import build_project_task_metadata_from_project
 
 
 @bp.route('/interpretations/<project_id>', methods=['GET'])
@@ -70,6 +71,7 @@ def create_interpretation_ai_report_task(project_id):
             return jsonify({'error': '当前项目尚无结构化解读数据，请先完成招标文件解析和落库。'}), 400
 
         project_meta = analysis.get("project_meta") or {}
+        project = payload.get("project")
         existing_report = project_meta.get("ai_report")
         if isinstance(existing_report, dict) and existing_report:
             task = create_bid_interpretation_task(
@@ -77,7 +79,10 @@ def create_interpretation_ai_report_task(project_id):
                 status="completed",
                 progress=100,
                 message="AI 深度解读报告已存在，直接使用缓存结果。",
-                metadata={"cached": True, "report_keys": sorted(existing_report.keys())},
+                metadata=build_project_task_metadata_from_project(
+                    project,
+                    {"cached": True, "report_keys": sorted(existing_report.keys())},
+                ),
             )
             return jsonify({
                 'message': 'AI 深度解读报告已存在。',
@@ -89,7 +94,10 @@ def create_interpretation_ai_report_task(project_id):
 
         task = create_bid_interpretation_task(
             project_id,
-            metadata={"requested_from": "interpretation_page", "cached": False},
+            metadata=build_project_task_metadata_from_project(
+                project,
+                {"requested_from": "interpretation_page", "cached": False},
+            ),
         )
 
         from backend.tasks.interpretation_tasks import run_ai_interpretation_report

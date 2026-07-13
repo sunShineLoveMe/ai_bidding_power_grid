@@ -23,9 +23,17 @@ from flask import current_app, jsonify, request
 
 from backend.api._shared import bp, temp_analysis_store, _temp_store_lock  # noqa: F401
 from backend.core.security import UploadValidationError, safe_upload_filename, validate_uploaded_file
+from backend.core.project_modes import (
+    GENERAL_PROJECT_MODE,
+    InvalidProjectModeError,
+    ProjectModeUnavailableError,
+    ensure_project_mode_available,
+    normalize_project_mode,
+)
 from backend.db.supabase_repo import (
     delete_bid_project,
     download_bid_file_to_local,
+    get_bid_project,
     get_latest_bid_file_for_project,
     get_project_interpretation,
     list_bid_history,
@@ -55,7 +63,13 @@ def _find_local_parse_status_for_supabase_file(supabase_file_id):
     return find_parse_status_by_supabase_file(supabase_file_id)
 
 
-def _sync_and_parse_tender_in_background(file_path, original_filename, parse_id, supabase_sync=None):
+def _sync_and_parse_tender_in_background(
+    file_path,
+    original_filename,
+    parse_id,
+    supabase_sync=None,
+    project_mode=GENERAL_PROJECT_MODE,
+):
     """后台线程：同步 Supabase 并触发 MinerU/OCR 解析。"""
     supabase_file_id = supabase_sync.get('file', {}).get('id') if supabase_sync else None
     try:
@@ -66,12 +80,17 @@ def _sync_and_parse_tender_in_background(file_path, original_filename, parse_id,
                 "source_file": file_path,
                 "file_name": original_filename,
             })
-            supabase_sync = sync_uploaded_tender_to_supabase(file_path, original_filename)
+            supabase_sync = sync_uploaded_tender_to_supabase(
+                file_path,
+                original_filename,
+                project_mode=project_mode,
+            )
             supabase_file_id = supabase_sync.get('file', {}).get('id') if supabase_sync else None
             write_parse_status(parse_id, {
                 "parse_status": "supabase_synced",
                 "project_id": supabase_sync.get('project', {}).get('id') if supabase_sync else None,
                 "supabase_file_id": supabase_file_id,
+                "project_mode": project_mode,
             })
     except Exception as e:
         logging.exception("Supabase 招标文件后台同步失败，继续走本地 MinerU 解析: %s", file_path)
@@ -111,6 +130,14 @@ def upload_bidding():
         return jsonify({'error': '未获取到当前操作人员身份，请刷新页面后重试。'}), 400
 
     try:
+        project_mode = normalize_project_mode(request.form.get("projectMode"), strict=True)
+        ensure_project_mode_available(project_mode)
+    except InvalidProjectModeError as exc:
+        return jsonify({'error': str(exc)}), 400
+    except ProjectModeUnavailableError as exc:
+        return jsonify({'error': str(exc)}), 503
+
+    try:
         original_filename = file.filename
         safe_filename = safe_upload_filename(original_filename, "tender")
         unique_filename = f"{uuid.uuid4()}-{safe_filename}"
@@ -124,9 +151,14 @@ def upload_bidding():
             "parser": "mineru",
             "source_file": file_path,
             "file_name": original_filename,
+            "project_mode": project_mode,
         })
 
-        supabase_sync = sync_uploaded_tender_to_supabase(file_path, original_filename)
+        supabase_sync = sync_uploaded_tender_to_supabase(
+            file_path,
+            original_filename,
+            project_mode=project_mode,
+        )
         project_id = supabase_sync.get('project', {}).get('id')
         supabase_file_id = supabase_sync.get('file', {}).get('id')
         if not project_id or not supabase_file_id:
@@ -139,6 +171,7 @@ def upload_bidding():
             "file_name": original_filename,
             "project_id": project_id,
             "supabase_file_id": supabase_file_id,
+            "project_mode": project_mode,
         })
 
         # 投递给 Celery worker：进程重启后任务由 broker 重投递，不再无痕丢失。
@@ -151,6 +184,7 @@ def upload_bidding():
             'biddingId': None,
             'originalFilename': original_filename,
             'projectId': project_id,
+            'projectMode': project_mode,
             'fileId': parse_id,
             'supabaseFileId': supabase_file_id,
             'supabaseSynced': True,
@@ -271,6 +305,10 @@ def get_bid_history():
 def retry_bid_history_parse(project_id):
     try:
         uuid.UUID(project_id)
+        project = get_bid_project(project_id)
+        if not project:
+            return jsonify({'error': '未找到该投标项目，无法重试解析。'}), 404
+        project_mode = normalize_project_mode(project.get("project_mode"))
         file_record = get_latest_bid_file_for_project(project_id)
         if not file_record:
             return jsonify({'error': '未找到该项目的招标文件记录，无法重试解析。'}), 404
@@ -292,6 +330,7 @@ def retry_bid_history_parse(project_id):
             "file_name": original_filename,
             "project_id": project_id,
             "supabase_file_id": file_record["id"],
+            "project_mode": project_mode,
             "retry_from": local_status.get("_parse_id"),
         })
         from backend.tasks.parse_tasks import parse_and_index_tender
@@ -305,6 +344,7 @@ def retry_bid_history_parse(project_id):
         return jsonify({
             "message": "解析重试任务已启动",
             "projectId": project_id,
+            "projectMode": project_mode,
             "fileId": parse_id,
             "supabaseFileId": file_record["id"],
         }), 202

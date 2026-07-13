@@ -71,14 +71,91 @@ class TenderParseDispatchTest(unittest.TestCase):
         payload = response.get_json()
         self.assertEqual(response.status_code, 201)
         self.assertEqual(payload["projectId"], VALID_PROJECT_ID)
+        self.assertEqual(payload["projectMode"], "general")
         self.assertEqual(payload["supabaseFileId"], VALID_FILE_ID)
         self.assertIn("fileId", payload)
         self.assertIsNone(payload["biddingId"])
         delay_mock.assert_called_once()
 
+    def test_upload_accepts_explicit_taichang_reuse_mode(self):
+        from io import BytesIO
+
+        sync_result = {
+            "project": {"id": VALID_PROJECT_ID, "project_mode": "taichang_reuse"},
+            "file": {"id": VALID_FILE_ID},
+        }
+        with (
+            patch.dict(os.environ, {"TAICHANG_REUSE_ENABLED": "true"}),
+            patch("backend.api.projects.sync_uploaded_tender_to_supabase", return_value=sync_result) as sync_mock,
+            patch("backend.api.projects.write_parse_status"),
+            patch("backend.tasks.parse_tasks.sync_and_parse_tender.delay"),
+        ):
+            response = self.client.post(
+                "/api/bidding/upload",
+                data={
+                    "userId": "tester",
+                    "projectMode": "taichang_reuse",
+                    "file": (BytesIO(b"%PDF-1.4 fake"), "tender.pdf"),
+                },
+                content_type="multipart/form-data",
+            )
+
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.get_json()["projectMode"], "taichang_reuse")
+        self.assertEqual(sync_mock.call_args.kwargs["project_mode"], "taichang_reuse")
+
+    def test_disabled_taichang_mode_does_not_block_general_upload(self):
+        from io import BytesIO
+
+        sync_result = {
+            "project": {"id": VALID_PROJECT_ID, "project_mode": "general"},
+            "file": {"id": VALID_FILE_ID},
+        }
+        with (
+            patch.dict(os.environ, {"TAICHANG_REUSE_ENABLED": "false"}),
+            patch("backend.api.projects.sync_uploaded_tender_to_supabase", return_value=sync_result),
+            patch("backend.api.projects.write_parse_status"),
+            patch("backend.tasks.parse_tasks.sync_and_parse_tender.delay"),
+        ):
+            response = self.client.post(
+                "/api/bidding/upload",
+                data={"userId": "tester", "file": (BytesIO(b"%PDF-1.4 fake"), "tender.pdf")},
+                content_type="multipart/form-data",
+            )
+
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.get_json()["projectMode"], "general")
+
+    def test_upload_rejects_disabled_or_invalid_project_mode(self):
+        from io import BytesIO
+
+        with patch.dict(os.environ, {"TAICHANG_REUSE_ENABLED": "false"}):
+            disabled = self.client.post(
+                "/api/bidding/upload",
+                data={
+                    "userId": "tester",
+                    "projectMode": "taichang_reuse",
+                    "file": (BytesIO(b"%PDF-1.4 fake"), "tender.pdf"),
+                },
+                content_type="multipart/form-data",
+            )
+        invalid = self.client.post(
+            "/api/bidding/upload",
+            data={
+                "userId": "tester",
+                "projectMode": "unknown_mode",
+                "file": (BytesIO(b"%PDF-1.4 fake"), "tender.pdf"),
+            },
+            content_type="multipart/form-data",
+        )
+
+        self.assertEqual(disabled.status_code, 503)
+        self.assertEqual(invalid.status_code, 400)
+
     def test_retry_parse_dispatches_celery(self):
         file_record = {"id": VALID_FILE_ID, "file_name": "tender.pdf"}
         with (
+            patch("backend.api.projects.get_bid_project", return_value={"id": VALID_PROJECT_ID}),
             patch("backend.api.projects.get_latest_bid_file_for_project", return_value=file_record),
             patch("backend.api.projects._find_local_parse_status_for_supabase_file", return_value={}),
             patch("backend.api.projects.download_bid_file_to_local") as dl_mock,

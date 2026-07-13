@@ -31,6 +31,7 @@ run_sql_file "sql/20260603_create_bid_generation_task_items.sql"
 run_sql_file "sql/20260603_add_bid_generation_task_item_lease.sql"
 run_sql_file "migrations/postgres/007_atomic_section_task_item.sql"
 run_sql_file "migrations/postgres/008_bid_interpretation_tasks.sql"
+run_sql_file "migrations/postgres/009_bid_project_modes.sql"
 run_sql_file "sql/20260603_update_bid_generation_task_status_model.sql"
 
 echo "verifying core tables" 

@@ -14,6 +14,7 @@ def test_init_postgres_schema_includes_section_generation_migrations():
         "sql/20260603_add_bid_generation_task_item_lease.sql",
         "migrations/postgres/007_atomic_section_task_item.sql",
         "migrations/postgres/008_bid_interpretation_tasks.sql",
+        "migrations/postgres/009_bid_project_modes.sql",
         "sql/20260603_update_bid_generation_task_status_model.sql",
     ]
     for file_path in required_files:
@@ -27,6 +28,7 @@ def test_init_postgres_schema_includes_section_generation_migrations():
         "expire_bid_generation_task_items",
         "update_bid_generation_task_item_atomic",
         "bid_interpretation_tasks",
+        "project_mode",
     ]
     for object_name in required_objects:
         assert object_name in script
@@ -38,3 +40,12 @@ def test_section_task_atomic_update_allows_item_metadata_patch():
 
     assert "'metadata'" in status_model_sql
     assert "'metadata'" in atomic_sql
+
+
+def test_bid_project_mode_migration_defaults_legacy_projects_to_general():
+    migration = (ROOT / "migrations" / "postgres" / "009_bid_project_modes.sql").read_text()
+
+    assert "add column if not exists project_mode" in migration
+    assert "default 'general'" in migration
+    assert "project_mode in ('general', 'taichang_reuse')" in migration
+    assert "bid_projects_project_mode_check" in migration

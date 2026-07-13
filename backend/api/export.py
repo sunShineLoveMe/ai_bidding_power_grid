@@ -21,6 +21,7 @@ from flask import jsonify, request
 from backend.api._shared import bp
 from backend.db.supabase_repo import create_bid_export_task, get_bid_export_task
 from backend.services.formal_bid_check import build_formal_bid_check_report
+from backend.services.project_mode_context import build_project_task_metadata
 
 
 FORMAL_GATE_TOP_BLOCKER_LIMIT = 8
@@ -141,10 +142,10 @@ def download_bid_docx(project_id):
                 section_id = None
         scope = "section" if section_id else ("volume" if volume_type else "full")
         formal_export_gate = _build_formal_export_gate(project_id, scope=scope)
-        task_metadata = {
+        task_metadata = build_project_task_metadata(project_id, {
             "requested_from": "bid_editor",
             "formal_export_gate": formal_export_gate,
-        }
+        })
         task = create_bid_export_task(
             project_id,
             scope=scope,

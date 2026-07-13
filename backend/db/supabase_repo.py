@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from backend.core.bid_volumes import ensure_section_volume, volume_name
+from backend.core.project_modes import GENERAL_PROJECT_MODE, normalize_project_mode
 
 from backend.db.supabase_client import get_bucket_name, get_supabase_client, reset_supabase_client, upload_file_to_storage
 
@@ -42,16 +43,48 @@ def _knowledge_asset_bucket() -> str:
     return get_bucket_name("knowledge")
 
 
-def create_bid_project_for_upload(original_filename: str) -> dict[str, Any]:
+def _normalize_bid_project_row(project: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not project:
+        return None
+    return {
+        **project,
+        "project_mode": normalize_project_mode(project.get("project_mode")),
+    }
+
+
+def _is_missing_project_mode_column_error(exc: Exception) -> bool:
+    message = str(exc).lower()
+    return "project_mode" in message and any(
+        token in message for token in ("column", "schema cache", "pgrst", "does not exist")
+    )
+
+
+def create_bid_project_for_upload(
+    original_filename: str,
+    *,
+    project_mode: str = GENERAL_PROJECT_MODE,
+) -> dict[str, Any]:
     client = get_supabase_client()
+    normalized_mode = normalize_project_mode(project_mode, strict=True)
     payload = {
         "project_name": _project_name_from_filename(original_filename),
         "status": "uploaded",
+        "project_mode": normalized_mode,
     }
-    response = client.table("bid_projects").insert(payload).execute()
+    try:
+        response = client.table("bid_projects").insert(payload).execute()
+    except Exception as exc:
+        # 部署窗口内数据库迁移可能晚于代码。通用项目允许按旧表结构继续创建；
+        # 泰昌模式不能丢失模式后降级创建，避免后续串用通用规则。
+        if not _is_missing_project_mode_column_error(exc):
+            raise
+        if normalized_mode != GENERAL_PROJECT_MODE:
+            raise RuntimeError("数据库尚未执行项目模式迁移，不能创建泰昌历史标书复用项目。") from exc
+        fallback_payload = {key: value for key, value in payload.items() if key != "project_mode"}
+        response = client.table("bid_projects").insert(fallback_payload).execute()
     if not response.data:
         raise RuntimeError("Supabase bid_projects insert returned no data")
-    return response.data[0]
+    return _normalize_bid_project_row(response.data[0]) or {}
 
 
 def upload_tender_file_and_create_record(
@@ -85,8 +118,13 @@ def upload_tender_file_and_create_record(
     return response.data[0]
 
 
-def sync_uploaded_tender_to_supabase(local_file_path: str | Path, original_filename: str) -> dict[str, Any]:
-    project = create_bid_project_for_upload(original_filename)
+def sync_uploaded_tender_to_supabase(
+    local_file_path: str | Path,
+    original_filename: str,
+    *,
+    project_mode: str = GENERAL_PROJECT_MODE,
+) -> dict[str, Any]:
+    project = create_bid_project_for_upload(original_filename, project_mode=project_mode)
     try:
         file_record = upload_tender_file_and_create_record(
             project_id=project["id"],
@@ -100,6 +138,19 @@ def sync_uploaded_tender_to_supabase(local_file_path: str | Path, original_filen
         "project": project,
         "file": file_record,
     }
+
+
+def get_bid_project(project_id: str) -> dict[str, Any] | None:
+    response = (
+        get_supabase_client()
+        .table("bid_projects")
+        .select("*")
+        .eq("id", project_id)
+        .limit(1)
+        .execute()
+    )
+    project = response.data[0] if response.data else None
+    return _normalize_bid_project_row(project)
 
 
 def update_bid_project_metadata_fields(project_id: str, project_meta: dict[str, Any]) -> dict[str, Any] | None:
@@ -2581,12 +2632,16 @@ def list_recent_bid_projects(limit: int = 20) -> list[dict[str, Any]]:
         .limit(limit)
         .execute()
     )
-    return response.data or []
+    return [
+        normalized
+        for row in (response.data or [])
+        if (normalized := _normalize_bid_project_row(row)) is not None
+    ]
 
 
 def list_bid_history(limit: int = 100) -> list[dict[str, Any]]:
     client = get_supabase_client()
-    projects = (
+    raw_projects = (
         client.table("bid_projects")
         .select("*")
         .order("created_at", desc=True)
@@ -2595,6 +2650,11 @@ def list_bid_history(limit: int = 100) -> list[dict[str, Any]]:
         .data
         or []
     )
+    projects = [
+        normalized
+        for row in raw_projects
+        if (normalized := _normalize_bid_project_row(row)) is not None
+    ]
     if not projects:
         return []
 
@@ -2737,7 +2797,7 @@ def get_project_interpretation(project_id: str) -> dict[str, Any]:
     client = get_supabase_client()
 
     project_response = client.table("bid_projects").select("*").eq("id", project_id).limit(1).execute()
-    project = project_response.data[0] if project_response.data else None
+    project = _normalize_bid_project_row(project_response.data[0] if project_response.data else None)
 
     analysis_response = client.table("bid_analysis").select("*").eq("project_id", project_id).limit(1).execute()
     analysis = analysis_response.data[0] if analysis_response.data else None
