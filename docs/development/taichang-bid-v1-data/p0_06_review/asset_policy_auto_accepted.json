@@ -27,7 +27,7 @@
       "docs/development/taichang-bid-v1-data/asset_classification_matrix.json": "4d1f3485049f4d7c17366dd13183a51aa6b290b3ecf707d7dcccd4c71abf632d",
       "docs/development/taichang-bid-v1-data/asset_review_queue.json": "ac33f25a99fa61fceb2df59ebd5635caf537fffbace35b3bc3c37aa85e3b39aa"
     },
-    "artifact_role": "ready_for_extraction_and_ingestion_validation",
+    "artifact_role": "policy_auto_accepted_knowledge_only",
     "record_count": 169
   },
   "records": [

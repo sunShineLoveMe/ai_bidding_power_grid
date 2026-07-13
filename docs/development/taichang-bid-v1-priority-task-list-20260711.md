@@ -363,16 +363,18 @@ caption_policy/formal_caption
 - 产品事实必须有产品族；无法确定产品族的资产不得标记 `formal_bid_ready`。
 - 页面和 DOCX 不得显示英文枚举、解析路径、页面划线、“页面_”、“原图”、UUID 或 API URL。
 
-### P0-06 人工复核与增量入库批准
+### P0-06 分级自动接收、异常复核与增量入库批准
 
-**执行状态（2026-07-13）：`[~]` 审批工具与复核材料已完成，等待泰昌资料管理人员审批**
+**执行状态（2026-07-13）：`[~]` 客户来源授权已落实为分级策略；169 条低风险知识资料自动接收，290 条异常项保留人工复核**
 
-- 896 条候选已全部分流：461 条进入人工复核，435 条进入自动阻断或仅参考清单。
-- 461 条候选按完整报告/证据包归并为 65 个证据组，并生成四工作表中文 Excel 审批表。
-- 自动处理结果：精确重复 270 条禁止新增、事实冲突 15 条禁止复用、结构/表单 148 条仅保留历史参考、通用响应 2 条禁止独立入库。
+- 泰昌主动提供两份历史标书用于系统整理和复用，视为对来源文件的处理授权；不再要求资料管理人员逐页批准来源。
+- 896 条候选已全部分流：169 条低风险资料自动接收为 `knowledge_only`，290 条异常项进入人工复核，437 条自动关联、阻断或仅参考。
+- 169 条自动接收项为绿色低碳 112、企业能力 35、生产制造能力 22；全部保持 `allowed_for_bid=false + formal_bid_ready=false`，仅可进入 Word 媒体提取和质量校验。
+- 290 条异常候选按完整报告/证据包归并为 60 个证据组，并生成五工作表中文 Excel 工作簿。
+- 自动处理结果：精确重复 270 条关联已有资产、同证据不同载体 2 条关联同一证据包、事实冲突 15 条禁止复用、结构/表单 148 条仅保留历史参考、通用响应 2 条禁止独立入库。
 - 32 条敏感和 1 条受限候选不能通过普通审批直接入库；3 条已过期职业健康安全管理体系证书候选强制延后补证。
-- 当前审批结论全部为空，已批准清单 0 条、可执行增量入库清单 0 条；未写数据库、未修改 RAG/metadata 或 DOCX 选图。
-- 审批完整性、去重、产品、有效性、敏感性、独立原始证据、中文展示和结构化参数门禁已实现；37 项定向及前序回归通过，LibreOffice 转存回读通过。
+- 当前策略批准 169 条、可进入提取与入库校验流程 169 条，人工批准仍为 0；尚未写数据库、未修改 RAG/metadata 或 DOCX 选图。
+- 审批完整性、去重、产品、有效性、敏感性、独立原始证据、中文展示和结构化参数门禁继续有效。
 
 **重点复核项**
 
@@ -389,11 +391,12 @@ caption_policy/formal_caption
 **交付物**
 
 - [《泰昌历史标书资产增量入库审批表》](./taichang-bid-v1-data/p0_06_review/泰昌历史标书资产增量入库审批表.xlsx)。
-- [P0-06 复核与入库批准准备报告](./taichang-p0-06-asset-review-report-20260713.md)。
+- [P0-06 分级接收与异常复核报告](./taichang-p0-06-asset-review-report-20260713.md)。
 - [`asset_review_groups.json/csv`](./taichang-bid-v1-data/p0_06_review/asset_review_groups.json)、[`asset_review_candidates.json/csv`](./taichang-bid-v1-data/p0_06_review/asset_review_candidates.json)。
+- [`asset_policy_auto_accepted.json/csv`](./taichang-bid-v1-data/p0_06_review/asset_policy_auto_accepted.json)（169 条低风险知识资料）。
 - [`asset_auto_blocked_or_reference.json/csv`](./taichang-bid-v1-data/p0_06_review/asset_auto_blocked_or_reference.json)。
-- [`asset_approved_decisions.json/csv`](./taichang-bid-v1-data/p0_06_review/asset_approved_decisions.json) 与 [`asset_ingestion_candidates.json/csv`](./taichang-bid-v1-data/p0_06_review/asset_ingestion_candidates.json)（当前均为 0 条，等待人工审批）。
-- [P0-06 验证记录](../rag/runs/run_20260713_taichang_p0_06_asset_review_preparation_summary.md)。
+- [`asset_approved_decisions.json/csv`](./taichang-bid-v1-data/p0_06_review/asset_approved_decisions.json) 与 [`asset_ingestion_candidates.json/csv`](./taichang-bid-v1-data/p0_06_review/asset_ingestion_candidates.json)（当前均为 169 条，表示可进入提取和入库校验，不表示已写数据库）。
+- [P0-06 v1 审批准备记录](../rag/runs/run_20260713_taichang_p0_06_asset_review_preparation_summary.md)与 [P0-06 v2 分级接收记录](../rag/runs/run_20260713_taichang_p0_06_tiered_acceptance_summary.md)。
 
 **P0 总门禁**
 
@@ -457,6 +460,12 @@ P0 结束时必须同时满足：
 
 ### P1-01 仅接入已批准的增量资产
 
+**执行状态（2026-07-13）：`[~]` 已获得 169 条策略自动接收候选，下一步执行 Word 媒体提取、质量校验和 `knowledge_only` 增量入库；尚未写数据库**
+
+- 169 条候选的来源授权和低风险分级已完成，但 Word 内嵌媒体尚未提取为独立文件，因此当前只处于 `ready_for_extraction_and_validation`。
+- P1-01 不等待客户逐页审批低风险资料；仅对剩余 290 条异常候选按需人工确认。
+- 自动接收项不得直接提升为正式图片资产，不得进入正式标书自动选图；如需正式使用，必须补充独立原始图片或整页 PDF 并重新过质量门禁。
+
 **资产来源优先级**
 
 ```text
@@ -487,6 +496,23 @@ P0 结束时必须同时满足：
 - 新增资产可从页面和 API 回溯原始文件。
 
 ### P1-02 建立文件级证据包
+
+**执行状态（2026-07-13）：`[x]` 已基于现有已入库泰昌企业事实资产完成只读证据包重建和页序审计**
+
+- 已建立 16 个稳定 `evidence_bundle_id`，覆盖 2 份检验报告、6 组主要试验设备及校准资料、3 份管理体系证书、1 份营业执照、3 个审计年度和 1 组“合同 + 中标通知书”项目业绩。
+- 16 个证据包共 149 页，原始文件、数据库整页资产和页序全部一致，缺页 0、重页 0；合同与中标通知书合并为同一个用户可见业绩对象。
+- 21 个重复 PDF/关键页 JPG 已降为 rendition，不作为正式页源，也不建立第二个业务主记录。
+- CPVC/MPP 报告分别关联报告编号 `2024100312005501713`、`2024100312005501712` 和既有 19/17 行结构化参数；项目业绩关联既有 2 条结构化证据。
+- 职业健康安全管理体系证书因 2026-06-18 到期被阻断；6 组设备校准资料和其余体系证书保留有效期复核门禁；3 个审计年度必须按当次招标要求选择。
+- 当前未发现可独立回溯的资格预审结果原件，已记录为资料缺口；历史 Word 页面不得替代原件。
+- P0-06 自动接收的 169 条历史 Word 候选尚未完成媒体提取和入库，因此未进入本轮证据包；辽宁招标资料、河北豪乾参考稿也均未进入。本轮未写数据库、未修改 RAG metadata/召回或 DOCX 选图。
+
+**交付物**
+
+- `scripts/rag/build_taichang_evidence_bundles.py`。
+- `docs/development/taichang-bid-v1-data/p1_02_evidence_bundles/taichang_evidence_bundles.json/csv`。
+- `docs/development/taichang-bid-v1-data/p1_02_evidence_bundles/taichang_evidence_bundle_pages.csv`。
+- [P1-02 证据包审计报告](./taichang-bid-v1-data/p1_02_evidence_bundles/taichang_evidence_bundle_report.md)与[回归记录](../rag/runs/run_20260713_taichang_p1_02_evidence_bundles_summary.md)。
 
 **P0 证据包范围**
 

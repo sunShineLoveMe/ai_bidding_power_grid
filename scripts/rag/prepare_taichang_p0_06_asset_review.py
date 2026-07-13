@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""生成并校验泰昌历史标书 P0-06 人工复核审批包。
+"""生成并校验泰昌历史标书 P0-06 分级接收与异常复核包。
 
 本脚本只生成离线审批材料，不连接数据库、不修改 RAG、不改变 DOCX 选图。
-默认审批结论为空；只有资料管理人员填写审批表并通过严格校验后，才会输出
-``ready_for_ingestion=true`` 的增量入库候选。
+客户主动提供两份历史标书即视为授权系统处理来源文件。低风险、来源明确且不含
+精确时效事实的资料可按策略自动接收为 ``knowledge_only``；只有异常项需要人工
+确认。自动接收不等于 ``formal_bid_ready``，也不允许直接进入正式标书。
 """
 
 from __future__ import annotations
@@ -38,6 +39,34 @@ YES_NO_NA = ("是", "否", "不适用")
 DEDUP_CONFIRMATIONS = ("确认新资产", "确认重复", "同证据不同载体", "待进一步核验")
 TARGET_LIBRARY_LABELS = ("知识库资料", "产品库资料", "资信库资料")
 SENSITIVE_LEVELS = {"sensitive", "restricted"}
+AUTO_KNOWLEDGE_EVIDENCE_TYPES = {"enterprise_evidence", "production_capacity", "green_low_carbon"}
+AUTO_KNOWLEDGE_SECTION_KEYWORDS = (
+    "工艺流程",
+    "各工序控制点工艺文件",
+    "生产制造环境",
+    "试组装环境",
+    "绿色低碳生产及绿色回收",
+    "ESG",
+    "废水、废气、废固",
+    "现状环境影响评估报告",
+    "绿色发展规划报告",
+    "数字领航企业评价报告",
+    "智能制造优秀场景报告",
+    "创新激励机制评价报告",
+)
+AUTO_KNOWLEDGE_BLOCKED_SECTION_KEYWORDS = (
+    "证书",
+    "凭证",
+    "查询",
+    "绩效评价",
+    "股权",
+    "合同",
+    "中标",
+    "授权",
+    "人员",
+    "审计",
+    "保证金",
+)
 TIMELINESS_EVIDENCE_TYPES = {
     "business_license",
     "certification",
@@ -119,6 +148,18 @@ BLOCKED_FIELDS = [
     "处理原因",
 ]
 
+AUTO_ACCEPTED_FIELDS = [
+    "候选编号",
+    "来源标书",
+    "历史章节",
+    "资料名称",
+    "证据类型",
+    "目标库",
+    "质量等级",
+    "处理结论",
+    "使用限制",
+]
+
 
 def _text(value: Any) -> str:
     if value is None:
@@ -174,11 +215,79 @@ def _review_guidance(row: dict[str, Any]) -> tuple[str, str]:
     return "核验原始证据", "确认资料归属泰昌、内容真实、时效有效、中文展示合规且目标库正确"
 
 
+def _auto_accept_knowledge_candidate(row: dict[str, Any]) -> bool:
+    """只自动接收明确的低风险知识资料，精确事实和正式证据继续人工复核。"""
+    section = _text(row.get("source_section"))
+    return all((
+        _text(row.get("record_type")) == "media",
+        _text(row.get("dedup_status")) == "new",
+        _text(row.get("sensitivity")) not in SENSITIVE_LEVELS,
+        _text(row.get("evidence_type")) in AUTO_KNOWLEDGE_EVIDENCE_TYPES,
+        any(keyword in section for keyword in AUTO_KNOWLEDGE_SECTION_KEYWORDS),
+        not any(keyword in section for keyword in AUTO_KNOWLEDGE_BLOCKED_SECTION_KEYWORDS),
+        not _is_expired_ohs_certificate(row),
+    ))
+
+
+def _knowledge_title(row: dict[str, Any], sequence: int) -> str:
+    leaf = _text(row.get("source_section")).split("/")[-1].strip()
+    leaf = re.sub(r"^[（(]?\d+(?:\.\d+)*[）).、]?\s*", "", leaf).strip()
+    label = leaf or _text(row.get("evidence_type_label")) or "企业资料"
+    return f"泰昌{label}知识资料第{sequence:03d}项"
+
+
+def _page_sort_value(value: Any) -> int:
+    try:
+        return int(value or 0)
+    except (TypeError, ValueError):
+        return 0
+
+
+def _auto_accepted_knowledge_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    accepted: list[dict[str, Any]] = []
+    section_sequences: Counter[str] = Counter()
+    for row in sorted(
+        rows,
+        key=lambda item: (
+            _text(item.get("source_document_name")),
+            _page_sort_value(item.get("source_page")),
+            item["candidate_id"],
+        ),
+    ):
+        section = _text(row.get("source_section"))
+        section_sequences[section] += 1
+        accepted.append({
+            **row,
+            "origin_source_domain": row.get("source_domain"),
+            "source_domain": "enterprise_fact",
+            "source_authorized": True,
+            "source_authorization_basis": "客户主动提供历史技术标/商务标用于系统整理与复用",
+            "fact_source_allowed_for_enterprise": True,
+            "quality_tier_after_review": "knowledge_only",
+            "review_status_after_review": "policy_auto_accepted",
+            "decision": "系统自动接收为知识资料",
+            "reviewed_title": _knowledge_title(row, section_sequences[section]),
+            "reviewed_target_library_label": row.get("target_library_label", "知识库资料"),
+            "allowed_for_bid": False,
+            "formal_bid_ready": False,
+            "ingestion_action": "extract_word_media_as_knowledge_only",
+            "ingestion_readiness": "ready_for_extraction_and_validation",
+            "ready_for_ingestion": True,
+            "requires_fact_cross_check_for_precise_values": True,
+            "usage_restriction": "仅作泰昌内部知识资料；不得作为精确参数、有效证书或正式投标附件直接引用",
+            "reviewer": "系统分级策略",
+            "reviewed_at": date.today().isoformat(),
+        })
+    return accepted
+
+
 def _auto_blocked_row(row: dict[str, Any], in_review_queue: bool) -> dict[str, Any] | None:
     status = _text(row.get("dedup_status"))
     review_status = _text(row.get("review_status"))
     if status == "duplicate_exact":
-        conclusion, reason = "禁止新增", "与现有数字资产精确重复"
+        conclusion, reason = "关联已有资产", "与现有数字资产精确重复，无需再次入库"
+    elif status == "same_evidence_new_rendition":
+        conclusion, reason = "关联同一证据包", "已确认属于既有报告的不同载体，不建立第二个业务主记录"
     elif status == "fact_conflict":
         conclusion, reason = "禁止复用", "历史项目字段或事实值与当前基线冲突"
     elif review_status == "not_asset_reference":
@@ -202,8 +311,19 @@ def _auto_blocked_row(row: dict[str, Any], in_review_queue: bool) -> dict[str, A
 
 
 def build_review_package(matrix: dict[str, Any], review_queue: dict[str, Any]) -> dict[str, Any]:
-    review_records = review_queue.get("records") or []
-    review_ids = {_text(row.get("candidate_id")) for row in review_records}
+    original_review_records = review_queue.get("records") or []
+    review_ids = {_text(row.get("candidate_id")) for row in original_review_records}
+    auto_accepted_source_rows = [row for row in original_review_records if _auto_accept_knowledge_candidate(row)]
+    auto_accepted_ids = {row["candidate_id"] for row in auto_accepted_source_rows}
+    auto_linked_ids = {
+        row["candidate_id"] for row in original_review_records
+        if _text(row.get("dedup_status")) == "same_evidence_new_rendition"
+    }
+    review_records = [
+        row for row in original_review_records
+        if row["candidate_id"] not in auto_accepted_ids | auto_linked_ids
+    ]
+    auto_accepted = _auto_accepted_knowledge_rows(auto_accepted_source_rows)
     blocked = [
         blocked_row
         for row in (matrix.get("records") or [])
@@ -274,19 +394,27 @@ def build_review_package(matrix: dict[str, Any], review_queue: dict[str, Any]) -
             "required_checks": checks,
         })
 
+    auto_linked_existing_count = sum(
+        row["disposition"] in {"关联已有资产", "关联同一证据包"} for row in blocked
+    )
     counts = {
         "candidate_count": len(matrix.get("records") or []),
+        "source_authorized_count": len(matrix.get("records") or []),
+        "original_review_queue_count": len(original_review_records),
+        "policy_auto_accepted_count": len(auto_accepted),
         "review_candidate_count": len(candidate_rows),
         "review_group_count": len(groups),
         "auto_blocked_or_reference_count": len(blocked),
-        "approved_decision_count": 0,
-        "ready_for_ingestion_count": 0,
+        "auto_linked_existing_count": auto_linked_existing_count,
+        "human_approved_decision_count": 0,
+        "approved_decision_count": len(auto_accepted),
+        "ready_for_ingestion_count": len(auto_accepted),
         "validation_error_count": 0,
-        "decision_counts": {},
+        "decision_counts": {"系统自动接收为知识资料": len(auto_accepted)} if auto_accepted else {},
     }
     return {
         "metadata": {
-            "schema_version": "taichang_p0_06_review_v1",
+            "schema_version": "taichang_p0_06_review_v2",
             "generated_at": datetime.now(timezone.utc).astimezone().isoformat(),
             "enterprise": ENTERPRISE,
             "pilot_only": True,
@@ -299,8 +427,9 @@ def build_review_package(matrix: dict[str, Any], review_queue: dict[str, Any]) -
         "groups": groups,
         "review_candidates": sorted(candidate_rows, key=lambda row: (row["review_group_id"], row["candidate_id"])),
         "auto_blocked_or_reference": sorted(blocked, key=lambda row: row["candidate_id"]),
-        "approved_decisions": [],
-        "ready_for_ingestion": [],
+        "policy_auto_accepted": auto_accepted,
+        "approved_decisions": list(auto_accepted),
+        "ready_for_ingestion": list(auto_accepted),
         "validation_errors": [],
     }
 
@@ -385,10 +514,11 @@ def _approval_errors(row: dict[str, Any]) -> list[str]:
 
 
 def apply_review_decisions(package: dict[str, Any], decisions: dict[str, dict[str, Any]]) -> dict[str, Any]:
-    approved: list[dict[str, Any]] = []
-    ready: list[dict[str, Any]] = []
+    approved: list[dict[str, Any]] = list(package.get("policy_auto_accepted") or [])
+    ready: list[dict[str, Any]] = list(package.get("policy_auto_accepted") or [])
     errors: list[dict[str, Any]] = []
-    decision_counts: Counter[str] = Counter()
+    decision_counts: Counter[str] = Counter({"系统自动接收为知识资料": len(approved)})
+    human_approved_count = 0
     expected_ids = {row["candidate_id"] for row in package["review_candidates"]}
     actual_ids = set(decisions)
     missing_ids = sorted(expected_ids - actual_ids)
@@ -425,6 +555,7 @@ def apply_review_decisions(package: dict[str, Any], decisions: dict[str, dict[st
         }
         if integrity_ok:
             approved.append(reviewed)
+            human_approved_count += 1
             if reviewed["ready_for_ingestion"]:
                 ready.append(reviewed)
 
@@ -435,6 +566,7 @@ def apply_review_decisions(package: dict[str, Any], decisions: dict[str, dict[st
     result["metadata"] = {
         **package["metadata"],
         "approved_decision_count": len(approved),
+        "human_approved_decision_count": human_approved_count,
         "ready_for_ingestion_count": len(ready),
         "validation_error_count": len(errors),
         "decision_counts": dict(sorted(decision_counts.items())),
@@ -489,14 +621,16 @@ def write_workbook(path: Path, package: dict[str, Any]) -> None:
     ws["A1"].alignment = Alignment(horizontal="center")
     instructions = [
         ("适用企业", ENTERPRISE),
-        ("复核候选", package["metadata"]["review_candidate_count"]),
+        ("来源授权候选", package["metadata"]["source_authorized_count"]),
+        ("系统自动接收", package["metadata"]["policy_auto_accepted_count"]),
+        ("异常复核候选", package["metadata"]["review_candidate_count"]),
         ("证据分组", package["metadata"]["review_group_count"]),
         ("自动阻断/仅参考", package["metadata"]["auto_blocked_or_reference_count"]),
-        ("当前批准数量", package["metadata"]["approved_decision_count"]),
-        ("填写顺序", "先看“证据分组”，再在“候选审批”逐项或批量填写黄色审批列"),
-        ("批准前提", "必须核验原始证据、去重、产品边界、有效性、中文展示和复核责任人"),
+        ("当前可进入处理流程", package["metadata"]["ready_for_ingestion_count"]),
+        ("填写顺序", "“系统自动接收”无需逐项审批；只需在“异常候选复核”处理证照、财务、人员、合同、参数值等风险项"),
+        ("人工批准前提", "必须核验原始证据、去重、产品边界、有效性、中文展示和复核责任人"),
         ("严格限制", "受限/敏感资料、已过期证书、未确认疑似重复、产品不明项不得批准"),
-        ("数据边界", "本表不会写数据库；通过脚本校验后才会生成增量入库候选"),
+        ("数据边界", "本表不会直接写数据库；自动接收项仅可进入媒体提取和质量校验，不等于正式投标可用资产"),
     ]
     for index, (label, value) in enumerate(instructions, start=3):
         ws.cell(index, 1, label).font = Font(bold=True)
@@ -521,7 +655,19 @@ def write_workbook(path: Path, package: dict[str, Any]) -> None:
         ])
     _style_sheet(group_ws, {1: 14, 2: 18, 3: 55, 4: 18, 5: 16, 6: 22, 7: 12, 8: 26, 9: 16, 10: 22, 11: 55})
 
-    candidate_ws = wb.create_sheet("候选审批")
+    auto_ws = wb.create_sheet("系统自动接收")
+    auto_ws.append(AUTO_ACCEPTED_FIELDS)
+    for row in package["policy_auto_accepted"]:
+        auto_ws.append([
+            row["candidate_id"], row["source_document_name"], row["source_section"], row["reviewed_title"],
+            row["evidence_type_label"], row["reviewed_target_library_label"],
+            row["quality_tier_after_review"], row["decision"], row["usage_restriction"],
+        ])
+    _style_sheet(auto_ws, {1: 24, 2: 18, 3: 55, 4: 38, 5: 18, 6: 16, 7: 18, 8: 24, 9: 60})
+    for cell in auto_ws["A"][1:]:
+        cell.number_format = "@"
+
+    candidate_ws = wb.create_sheet("异常候选复核")
     candidate_ws.append(CANDIDATE_FIELDS)
     for row in package["review_candidates"]:
         candidate_ws.append([
@@ -576,9 +722,10 @@ def write_workbook(path: Path, package: dict[str, Any]) -> None:
 
 def read_workbook_decisions(path: Path) -> dict[str, dict[str, Any]]:
     wb = load_workbook(path, data_only=False, read_only=False)
-    if "候选审批" not in wb.sheetnames:
-        raise ValueError("审批表缺少“候选审批”工作表")
-    ws = wb["候选审批"]
+    sheet_name = "异常候选复核" if "异常候选复核" in wb.sheetnames else "候选审批"
+    if sheet_name not in wb.sheetnames:
+        raise ValueError("审批表缺少“异常候选复核”工作表")
+    ws = wb[sheet_name]
     headers = {_text(cell.value): index for index, cell in enumerate(ws[1], start=1)}
     missing = [field for field in CANDIDATE_FIELDS if field not in headers]
     if missing:
@@ -638,9 +785,10 @@ def write_artifacts(output_dir: Path, package: dict[str, Any]) -> None:
     artifact_specs = (
         ("asset_review_groups", package["groups"], "grouped_manual_review_overview"),
         ("asset_review_candidates", package["review_candidates"], "candidate_level_manual_review"),
+        ("asset_policy_auto_accepted", package["policy_auto_accepted"], "policy_auto_accepted_knowledge_only"),
         ("asset_auto_blocked_or_reference", package["auto_blocked_or_reference"], "automatic_block_or_reference"),
-        ("asset_approved_decisions", package["approved_decisions"], "validated_human_approved_decisions"),
-        ("asset_ingestion_candidates", package["ready_for_ingestion"], "validated_ready_for_ingestion"),
+        ("asset_approved_decisions", package["approved_decisions"], "validated_policy_or_human_approved_decisions"),
+        ("asset_ingestion_candidates", package["ready_for_ingestion"], "ready_for_extraction_and_ingestion_validation"),
     )
     for name, records, role in artifact_specs:
         _write_json(output_dir / f"{name}.json", metadata, records, role)

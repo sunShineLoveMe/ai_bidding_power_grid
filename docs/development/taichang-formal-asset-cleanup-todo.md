@@ -35,8 +35,9 @@
 
 | 状态 | 任务 | 交付物 | 验收口径 |
 | --- | --- | --- | --- |
-| [x] | 历史标书候选标签、分类与质量分级 | `scripts/rag/classify_taichang_historical_bid_candidates.py`、`docs/development/taichang-bid-v1-data/tag_dictionary.json`、分类矩阵和人工复核队列、`docs/rag/runs/run_20260713_taichang_p0_05_tag_classification_summary.md` | 896 条候选全部分类；838 条为仅限人工复核、58 条为受限资料；461 条进入 P0-06 人工复核，未经批准的正式增量入库候选为 0；用户可见字段禁用表达命中 0；27 项回归通过 |
-| [~] | P0-06 人工复核与增量入库批准 | `scripts/rag/prepare_taichang_p0_06_asset_review.py`、`docs/development/taichang-bid-v1-data/p0_06_review/泰昌历史标书资产增量入库审批表.xlsx`、分组/候选/阻断/批准清单、`docs/rag/runs/run_20260713_taichang_p0_06_asset_review_preparation_summary.md` | 技术准备已完成：896 条全部分流，461 条按 65 个证据组进入人工复核，435 条自动阻断或仅参考；默认批准和可入库均为 0；审批篡改、敏感资料、过期证书、产品/时效/原件缺口均有阻断门禁，37 项回归及 LibreOffice 回读通过。等待泰昌资料管理人员填写审批表；实际入库或 metadata 变更后执行 Base + 泰昌专项增量门禁、真实 stream 和必要的 DOCX 审计 |
+| [x] | 历史标书候选标签、分类与质量分级 | `scripts/rag/classify_taichang_historical_bid_candidates.py`、`docs/development/taichang-bid-v1-data/tag_dictionary.json`、分类矩阵和人工复核队列、`docs/rag/runs/run_20260713_taichang_p0_05_tag_classification_summary.md` | 896 条候选全部分类；P0-05 原始分类保持 838 条 `review_only`、58 条 `restricted`，后续 P0-06 v2 已基于客户来源授权将其中 169 条低风险资料自动接收为 `knowledge_only`；用户可见字段禁用表达命中 0 |
+| [~] | P0-06 分级自动接收、异常复核与增量入库批准 | `scripts/rag/prepare_taichang_p0_06_asset_review.py`、`docs/development/taichang-bid-v1-data/p0_06_review/泰昌历史标书资产增量入库审批表.xlsx`、自动接收/异常复核/关联阻断/批准清单、`docs/rag/runs/run_20260713_taichang_p0_06_tiered_acceptance_summary.md` | 客户主动提供两份历史标书视为来源处理授权：896 条分流为低风险知识资料自动接收 169、异常复核 290（60 个证据组）、自动关联/阻断/仅参考 437；策略批准和可进入提取校验流程均为 169，人工批准为 0。自动接收项保持 `knowledge_only + allowed_for_bid=false + formal_bid_ready=false`；实际数据库/RAG 入库仍由 P1-01 执行，完成后必须跑 Base + 泰昌专项门禁、真实 stream，涉及正式配图时做 DOCX 审计 |
+| [x] | P1-02 文件级证据包 | `scripts/rag/build_taichang_evidence_bundles.py`、`docs/development/taichang-bid-v1-data/p1_02_evidence_bundles/`、`docs/rag/runs/run_20260713_taichang_p1_02_evidence_bundles_summary.md` | 基于真实 PostgreSQL 599 个现有资产重建 16 个业务证据包、149 页，页序完整、缺页 0、重页 0；21 个重复 PDF/关键页图仅作 rendition；过期证书、校准有效期、审计年度和资格预审原件缺口均有门禁；P0-06 自动接收但尚未提取/入库的 169 条候选和跨资料域来源均未进入；专项 30 项、后端全量 400 项及 2 个子测试通过 |
 
 ## P0：正式投标文件阻断项
 

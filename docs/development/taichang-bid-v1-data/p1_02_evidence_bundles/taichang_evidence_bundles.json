@@ -1,0 +1,2927 @@
+{
+  "schema_version": "taichang-evidence-bundle-v1",
+  "generated_at": "2026-07-13T13:52:41.996918+00:00",
+  "write_policy": "read_only_no_database_write",
+  "scope": "taichang_materials_bid_pilot",
+  "summary": {
+    "bundle_count": 16,
+    "page_count": 149,
+    "complete_bundle_count": 16,
+    "allowed_for_bid_count": 4,
+    "blocked_or_conditional_count": 12,
+    "rendition_count": 21,
+    "by_kind": {
+      "audit_report": 3,
+      "business_license": 1,
+      "calibration_certificate": 6,
+      "inspection_report": 2,
+      "management_system_certificate": 3,
+      "project_performance": 1
+    },
+    "present_kinds": [
+      "audit_report",
+      "business_license",
+      "calibration_certificate",
+      "inspection_report",
+      "management_system_certificate",
+      "project_performance"
+    ],
+    "gap_count": 1,
+    "excluded_non_p0_source_count": 73,
+    "p0_06_approved_candidate_count": 169,
+    "p0_06_candidates_included_count": 0
+  },
+  "bundles": [
+    {
+      "evidence_bundle_id": "taichang-evidence-8c0003b8a585e22b7525",
+      "bundle_title": "泰昌2023年审计报告",
+      "enterprise": "泰昌",
+      "doc_owner": "河北泰昌电力器材科技有限公司",
+      "source_domain": "enterprise_fact",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "tenant_visibility": "taichang_only",
+      "access_scope": "taichang_tenant_internal",
+      "bundle_kind": "audit_report",
+      "business_key": "audit-year:2023",
+      "evidence_type": "finance",
+      "evidence_type_label": "审计报告",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库",
+      "product_families": [],
+      "applicable_sections": [
+        "商务标/财务状况"
+      ],
+      "structured_summary": {
+        "audit_year": "2023",
+        "selection_policy": "仅当本次招标文件要求该年度时选用"
+      },
+      "primary_sources": [
+        {
+          "component": "2023",
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+          "source_display_name": "2023年审计报告.pdf",
+          "source_sha256": "986f1d8bf5c6d428b31e24dbe376fdc1751840b5b9b14b372f58c12fee05e529",
+          "asset_ids": [
+            "ff3447bd-bede-493d-bb51-d7eb4d1b3acb",
+            "5f0829f5-c64a-4b3b-b125-50a4ac46689a",
+            "c08a6a60-9a9f-48c3-9b01-ca38bcc6661e",
+            "39e276cc-5e58-463c-bf8e-a3f211c3b5ac",
+            "495b6f71-53e1-4624-9f10-29d7590b93c4",
+            "753cc122-2431-428c-a41f-8777d1344f7a",
+            "a3c9cfb2-cd3b-4dd4-8cbb-c87d6f872759",
+            "f5c8f472-83a9-4a29-8ee5-f91fc0120b74",
+            "956112bc-65c3-441b-8d70-ac4d65d3b24f",
+            "1f17aa09-4e6f-4b86-a6cd-2e98c55994fe",
+            "f52d4793-a7db-4c48-ac97-0a40afc1205f",
+            "1b93e8ce-5e09-4bf2-8ffe-5fece4049542",
+            "c5d8c48a-290d-493a-a8a3-fc4832d4cf4f",
+            "4db3fb31-0ae6-4c91-b241-999bd3342b05",
+            "c6407b66-aa5f-4157-ab06-cb35732cc14a",
+            "65c343a9-4e74-4ca9-af26-a2d4fab5e92a",
+            "55e8a849-d27b-46fa-a169-40d626f8522c",
+            "e8d4c3fd-b0ab-4b8a-8ad3-e6f443e9dcb0",
+            "32c9bd0e-2f68-4a6d-aaff-4e6f864d0ddc"
+          ],
+          "original_file_exists": true,
+          "expected_page_count": 19,
+          "asset_page_count": 19,
+          "asset_unique_page_count": 19,
+          "asset_page_sequence": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "missing_pages": [],
+          "duplicate_pages": [],
+          "page_order_valid": true,
+          "complete": true
+        }
+      ],
+      "renditions": [
+        {
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/33.2023 年审计报告完整 PDF关键页整页图/2023年审计报告_页面_04.jpg",
+          "source_display_name": "2023年审计报告_页面_04.jpg",
+          "source_sha256": "374d0f548722592ad317c5b7bd4d2ebf13a2bdcad47418f0e8df63eb98e64919",
+          "rendition_type": "reference_page_image",
+          "formal_page_source": false
+        },
+        {
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/33.2023 年审计报告完整 PDF关键页整页图/2023年审计报告_页面_05.jpg",
+          "source_display_name": "2023年审计报告_页面_05.jpg",
+          "source_sha256": "64cec79bd748862c25f95e25fd93b0d61944347b71836a4594523db52273e983",
+          "rendition_type": "reference_page_image",
+          "formal_page_source": false
+        },
+        {
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/33.2023 年审计报告完整 PDF关键页整页图/2023年审计报告_页面_06.jpg",
+          "source_display_name": "2023年审计报告_页面_06.jpg",
+          "source_sha256": "0cf88598a17684e9038e79128ad0975679468d4b931dd8bb59b8c81417dbfeb5",
+          "rendition_type": "reference_page_image",
+          "formal_page_source": false
+        }
+      ],
+      "page_count": 19,
+      "page_sequence_complete": true,
+      "missing_pages": [],
+      "duplicate_pages": [],
+      "allowed_for_bid": false,
+      "usage_status": "conditional_tender_year",
+      "warnings": [
+        "须按本次招标文件要求的审计年度选择，不得默认全部插入"
+      ],
+      "provenance_policy": "仅使用泰昌企业事实原始文件；辽宁招标资料和河北豪乾参考稿禁止作为事实来源"
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "enterprise": "泰昌",
+      "doc_owner": "河北泰昌电力器材科技有限公司",
+      "source_domain": "enterprise_fact",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "tenant_visibility": "taichang_only",
+      "access_scope": "taichang_tenant_internal",
+      "bundle_kind": "audit_report",
+      "business_key": "audit-year:2024",
+      "evidence_type": "finance",
+      "evidence_type_label": "审计报告",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库",
+      "product_families": [],
+      "applicable_sections": [
+        "商务标/财务状况"
+      ],
+      "structured_summary": {
+        "audit_year": "2024",
+        "selection_policy": "仅当本次招标文件要求该年度时选用"
+      },
+      "primary_sources": [
+        {
+          "component": "2024",
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+          "source_display_name": "2024年审计报告.pdf",
+          "source_sha256": "cea0266ea67f00ed4ded6bdda85d1c066950f22d0d7550c8444a83605425e17a",
+          "asset_ids": [
+            "fb1840f1-7b52-42c6-97ae-09cd8f2bed4b",
+            "79a5a9af-4191-4a93-8fdb-7afdb066024e",
+            "eaaabad3-f539-4323-b900-55a6e93d6e16",
+            "e761588e-d6bf-4327-a964-84cb3fcb6a13",
+            "6b1d3d4d-2e64-4110-9384-06d8b6ebab13",
+            "b038dfaf-b671-42d3-a396-31be98554fbc",
+            "5ab77fae-3472-47bf-97d1-9f1ed8959ec1",
+            "5cf50668-34a1-41e6-ba15-58232c55bf5d",
+            "0b013587-6efe-4150-ba5c-037263fca5d0",
+            "b6cdd3e4-f47e-4a50-8be5-574c74b88813",
+            "839df7ac-6e93-4a3b-b588-053db9cf148e",
+            "ad16fdce-0a3a-473d-938c-92160988379f",
+            "12fbfbb4-af92-4f76-b0d2-b275d303cc39",
+            "e341c506-c8f9-4b96-a83a-b29191c506e5",
+            "1d58778e-3a76-490c-a9ad-b7de35884b17",
+            "96e5a57e-c6d3-4df9-8cfb-11589f058bc8",
+            "74a8aa0b-9a62-4da1-8ab3-7b676154cab8",
+            "5244a1e5-7329-4a6d-be75-6e047c30ca77",
+            "3c00e918-3c06-4b43-9ab4-b5a844a4b817",
+            "859a973a-baee-4907-b0cd-4bf0d6c7628e",
+            "617f48b2-d4d2-48a5-9c4f-e1c849e37b7f",
+            "35d7e546-64cf-4104-848f-2f6bac871a6d",
+            "c1e7063b-209e-445c-8c5c-a4b7ffecaade",
+            "d94714a1-b03e-4d7a-b6d4-6837bdfbcc1b",
+            "eb61130c-0045-4c22-b62e-da0002773a66",
+            "287d4b3d-3ab2-465b-9ad5-44bcc6c9eb81",
+            "ac1c0417-7090-4bd1-9e10-85a785b25dfc",
+            "56178d71-cd10-4c09-9e29-ad8e6a7642b7",
+            "0d8d7708-13b9-4f00-af4f-bcea9500974c"
+          ],
+          "original_file_exists": true,
+          "expected_page_count": 29,
+          "asset_page_count": 29,
+          "asset_unique_page_count": 29,
+          "asset_page_sequence": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29
+          ],
+          "missing_pages": [],
+          "duplicate_pages": [],
+          "page_order_valid": true,
+          "complete": true
+        }
+      ],
+      "renditions": [
+        {
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/34.2024 年审计报告完整 PDF关键页整页图/2024年审计报告_页面_06.jpg",
+          "source_display_name": "2024年审计报告_页面_06.jpg",
+          "source_sha256": "48cdc3cfbf314d07defd8a354d9fc3abf4c1249064b9679172b3991ad69f3077",
+          "rendition_type": "reference_page_image",
+          "formal_page_source": false
+        },
+        {
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/34.2024 年审计报告完整 PDF关键页整页图/2024年审计报告_页面_07.jpg",
+          "source_display_name": "2024年审计报告_页面_07.jpg",
+          "source_sha256": "3fb764eb49f0aa931f6d9b3605e9985a18d95cfe2827de26d1fe341c53f99173",
+          "rendition_type": "reference_page_image",
+          "formal_page_source": false
+        },
+        {
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/34.2024 年审计报告完整 PDF关键页整页图/2024年审计报告_页面_08.jpg",
+          "source_display_name": "2024年审计报告_页面_08.jpg",
+          "source_sha256": "7f03051639fc64440ac806fb277e4fbe03e72a90374b1689a548bce28f56ff58",
+          "rendition_type": "reference_page_image",
+          "formal_page_source": false
+        }
+      ],
+      "page_count": 29,
+      "page_sequence_complete": true,
+      "missing_pages": [],
+      "duplicate_pages": [],
+      "allowed_for_bid": false,
+      "usage_status": "conditional_tender_year",
+      "warnings": [
+        "须按本次招标文件要求的审计年度选择，不得默认全部插入"
+      ],
+      "provenance_policy": "仅使用泰昌企业事实原始文件；辽宁招标资料和河北豪乾参考稿禁止作为事实来源"
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5238d1459fcfe2a13ced",
+      "bundle_title": "泰昌2025年审计报告",
+      "enterprise": "泰昌",
+      "doc_owner": "河北泰昌电力器材科技有限公司",
+      "source_domain": "enterprise_fact",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "tenant_visibility": "taichang_only",
+      "access_scope": "taichang_tenant_internal",
+      "bundle_kind": "audit_report",
+      "business_key": "audit-year:2025",
+      "evidence_type": "finance",
+      "evidence_type_label": "审计报告",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库",
+      "product_families": [],
+      "applicable_sections": [
+        "商务标/财务状况"
+      ],
+      "structured_summary": {
+        "audit_year": "2025",
+        "selection_policy": "仅当本次招标文件要求该年度时选用"
+      },
+      "primary_sources": [
+        {
+          "component": "2025",
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+          "source_display_name": "2025年审计报告.pdf",
+          "source_sha256": "a63f58bc7c80157f5f64cce8fd5290b484edf3d86ad9d2c06e4e8b1fe3dbfe12",
+          "asset_ids": [
+            "ba758f69-9be6-4714-87c6-7d06a3d536db",
+            "15bdc6cb-60b2-4989-8dce-4a9a61846d13",
+            "7be06f33-9d92-4580-af34-b67e58cb2e32",
+            "48619de5-3cbb-460d-a409-aa70ad622cdd",
+            "03cb8100-1fe9-4d6b-9c37-0eeac8655356",
+            "18e0361b-190e-4615-b686-299d0180ba71",
+            "56c05670-544b-4e02-9bdb-d2da7b6ef08c",
+            "042cd8c0-9f97-46e8-944a-e0908969358c",
+            "d425cdb3-45e6-47e9-bd12-d0ec0da0ce1e",
+            "b939af2a-ddd2-4b9b-8b61-bb36e450c057",
+            "0325036d-f3af-4875-8389-e2200383b554",
+            "7dbc82c7-26bb-4265-952c-87a21cdf9847",
+            "4deeff14-1667-4304-baf2-f27876ff25c7",
+            "0dd74940-cb4a-41bb-8635-197ab9a710e3",
+            "f368e0b0-2ffd-472d-a791-84df59ca3b8f",
+            "6e5c4dcf-1beb-4a47-a2bd-9c81a9dadeb9",
+            "4712d48b-ec93-4181-8542-d3b703f16823",
+            "4ee9d634-afec-4517-b867-9c3a8ffb9cbd",
+            "5a7f8dbd-40c0-430e-8a10-44bd5bda8ed5"
+          ],
+          "original_file_exists": true,
+          "expected_page_count": 19,
+          "asset_page_count": 19,
+          "asset_unique_page_count": 19,
+          "asset_page_sequence": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "missing_pages": [],
+          "duplicate_pages": [],
+          "page_order_valid": true,
+          "complete": true
+        }
+      ],
+      "renditions": [
+        {
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/35.2025 年审计报告完整 PDF关键页整页图/2025年审计报告_页面_04.jpg",
+          "source_display_name": "2025年审计报告_页面_04.jpg",
+          "source_sha256": "6c51672c4e83132e6fcda840ad4dc737c18ea8469abd9bca55be04add78823e2",
+          "rendition_type": "reference_page_image",
+          "formal_page_source": false
+        },
+        {
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/35.2025 年审计报告完整 PDF关键页整页图/2025年审计报告_页面_05.jpg",
+          "source_display_name": "2025年审计报告_页面_05.jpg",
+          "source_sha256": "2f0dbec1823a0840430655a804f45b9d5d3b4b919193cf24c3733ccab7dbf5fb",
+          "rendition_type": "reference_page_image",
+          "formal_page_source": false
+        },
+        {
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/35.2025 年审计报告完整 PDF关键页整页图/2025年审计报告_页面_06.jpg",
+          "source_display_name": "2025年审计报告_页面_06.jpg",
+          "source_sha256": "010a62b8e09bc3586320be7fa31887805c5999e95cc591fe7602bcedec2136a1",
+          "rendition_type": "reference_page_image",
+          "formal_page_source": false
+        }
+      ],
+      "page_count": 19,
+      "page_sequence_complete": true,
+      "missing_pages": [],
+      "duplicate_pages": [],
+      "allowed_for_bid": false,
+      "usage_status": "conditional_tender_year",
+      "warnings": [
+        "须按本次招标文件要求的审计年度选择，不得默认全部插入"
+      ],
+      "provenance_policy": "仅使用泰昌企业事实原始文件；辽宁招标资料和河北豪乾参考稿禁止作为事实来源"
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-76ac5c6984a28811742d",
+      "bundle_title": "泰昌营业执照",
+      "enterprise": "泰昌",
+      "doc_owner": "河北泰昌电力器材科技有限公司",
+      "source_domain": "enterprise_fact",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "tenant_visibility": "taichang_only",
+      "access_scope": "taichang_tenant_internal",
+      "bundle_kind": "business_license",
+      "business_key": "uscc:91130607056539515C",
+      "evidence_type": "business_license",
+      "evidence_type_label": "营业执照",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库",
+      "product_families": [],
+      "applicable_sections": [
+        "商务标/投标人基本情况",
+        "商务标/资格证明"
+      ],
+      "structured_summary": {
+        "unified_social_credit_code": "91130607056539515C",
+        "enterprise_name": "河北泰昌电力器材科技有限公司"
+      },
+      "primary_sources": [
+        {
+          "component": "primary",
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/营业执照副本.pdf",
+          "source_display_name": "营业执照副本.pdf",
+          "source_sha256": "409757b9858167bedf8c0df1b9652e8ba2168d04e9921f1d73c1fed1d49e47a9",
+          "asset_ids": [
+            "12bcb4c3-2dd9-45e7-abb3-5a6be1bf6f3d"
+          ],
+          "original_file_exists": true,
+          "expected_page_count": 1,
+          "asset_page_count": 1,
+          "asset_unique_page_count": 1,
+          "asset_page_sequence": [
+            1
+          ],
+          "missing_pages": [],
+          "duplicate_pages": [],
+          "page_order_valid": true,
+          "complete": true
+        }
+      ],
+      "renditions": [
+        {
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/1企业资信-基础证照/营业执照副本.jpg",
+          "source_display_name": "营业执照副本.jpg",
+          "source_sha256": "b4147a0f9fb036836e7cb818d1a143489317d113913001bf4a4c47bd5cd5e9c0",
+          "rendition_type": "reference_page_image",
+          "formal_page_source": false
+        }
+      ],
+      "page_count": 1,
+      "page_sequence_complete": true,
+      "missing_pages": [],
+      "duplicate_pages": [],
+      "allowed_for_bid": true,
+      "usage_status": "eligible_from_existing_asset_policy",
+      "warnings": [],
+      "provenance_policy": "仅使用泰昌企业事实原始文件；辽宁招标资料和河北豪乾参考稿禁止作为事实来源"
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-9fdd36654ca483e6a069",
+      "bundle_title": "泰昌微机控制电子万能试验机试验设备及校准资料",
+      "enterprise": "泰昌",
+      "doc_owner": "河北泰昌电力器材科技有限公司",
+      "source_domain": "enterprise_fact",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "tenant_visibility": "taichang_only",
+      "access_scope": "taichang_tenant_internal",
+      "bundle_kind": "calibration_certificate",
+      "business_key": "equipment:微机控制电子万能试验机",
+      "evidence_type": "calibration_certificate",
+      "evidence_type_label": "试验设备校准资料",
+      "target_library": "product_library",
+      "target_library_label": "产品库",
+      "product_families": [],
+      "applicable_sections": [
+        "技术标/试验检测能力",
+        "商务标/补充证明"
+      ],
+      "structured_summary": {
+        "equipment_name": "微机控制电子万能试验机",
+        "validity_policy": "正式投标前核验校准证书有效期"
+      },
+      "primary_sources": [
+        {
+          "component": "微机控制电子万能试验机",
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/1.微机控制电子万能试验机/微机控制电子万能试验机.pdf",
+          "source_display_name": "微机控制电子万能试验机.pdf",
+          "source_sha256": "fdf9bc1c95f5faaebffde0a37bbce29682804bdc07ed0e12d3ead4032a471d27",
+          "asset_ids": [
+            "13d070a7-663a-40d8-b716-38aaf517906d",
+            "77b1007a-1106-4b84-b5a7-563c0d78e8dc",
+            "6ebd3ffc-3f9c-42cf-a377-d53ecb00a574",
+            "4454c4ec-3976-473a-81f2-4cec2bd66f04",
+            "aefb3637-7dea-4544-90a4-c0079b41167d",
+            "1cfd8a3f-b402-4a84-8f4b-e9bf2294f35b",
+            "4b288070-f008-48ef-b987-5c75c456e3cb",
+            "7ff51ff0-8ce0-46c2-91dd-f25d2c36aeb1"
+          ],
+          "original_file_exists": true,
+          "expected_page_count": 8,
+          "asset_page_count": 8,
+          "asset_unique_page_count": 8,
+          "asset_page_sequence": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "missing_pages": [],
+          "duplicate_pages": [],
+          "page_order_valid": true,
+          "complete": true
+        }
+      ],
+      "renditions": [],
+      "page_count": 8,
+      "page_sequence_complete": true,
+      "missing_pages": [],
+      "duplicate_pages": [],
+      "allowed_for_bid": false,
+      "usage_status": "review_required_validity",
+      "warnings": [
+        "校准/检定有效期尚未结构化，正式投标前必须复核"
+      ],
+      "provenance_policy": "仅使用泰昌企业事实原始文件；辽宁招标资料和河北豪乾参考稿禁止作为事实来源"
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-508e8e613ca60ada061b",
+      "bundle_title": "泰昌热变形、维卡软化点温度测定仪试验设备及校准资料",
+      "enterprise": "泰昌",
+      "doc_owner": "河北泰昌电力器材科技有限公司",
+      "source_domain": "enterprise_fact",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "tenant_visibility": "taichang_only",
+      "access_scope": "taichang_tenant_internal",
+      "bundle_kind": "calibration_certificate",
+      "business_key": "equipment:热变形、维卡软化点温度测定仪",
+      "evidence_type": "calibration_certificate",
+      "evidence_type_label": "试验设备校准资料",
+      "target_library": "product_library",
+      "target_library_label": "产品库",
+      "product_families": [],
+      "applicable_sections": [
+        "技术标/试验检测能力",
+        "商务标/补充证明"
+      ],
+      "structured_summary": {
+        "equipment_name": "热变形、维卡软化点温度测定仪",
+        "validity_policy": "正式投标前核验校准证书有效期"
+      },
+      "primary_sources": [
+        {
+          "component": "热变形、维卡软化点温度测定仪",
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+          "source_display_name": "热变型、维卡软化点温度测定仪.pdf",
+          "source_sha256": "93c07fd1126ee635e9ad554eff7b13cbdf8f3d2e515882acb4a8e8749fe38258",
+          "asset_ids": [
+            "055f3321-bd76-43af-b550-ff59d616f73e",
+            "1ca820ce-dfa1-4c4d-ad0c-c85f3ca11c98",
+            "6a25db9a-3771-4d30-a6b2-89ccd225fdae",
+            "63079c8a-f15d-4425-9b4f-8832485e6279",
+            "163d49f1-3db7-4c0b-8f6a-a9265b2ba5a9",
+            "579dd315-9a7a-4f95-a3c8-1a2a5ac9c217",
+            "7a34667d-0a39-417f-9bb6-2da1443b8260",
+            "1373f162-cc94-497f-abba-b84a083e151c",
+            "53814ca8-6e0d-4c5a-9e8c-b3c9c2d1e867"
+          ],
+          "original_file_exists": true,
+          "expected_page_count": 9,
+          "asset_page_count": 9,
+          "asset_unique_page_count": 9,
+          "asset_page_sequence": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "missing_pages": [],
+          "duplicate_pages": [],
+          "page_order_valid": true,
+          "complete": true
+        }
+      ],
+      "renditions": [],
+      "page_count": 9,
+      "page_sequence_complete": true,
+      "missing_pages": [],
+      "duplicate_pages": [],
+      "allowed_for_bid": false,
+      "usage_status": "review_required_validity",
+      "warnings": [
+        "校准/检定有效期尚未结构化，正式投标前必须复核"
+      ],
+      "provenance_policy": "仅使用泰昌企业事实原始文件；辽宁招标资料和河北豪乾参考稿禁止作为事实来源"
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8eabd69844ab6ab91f02",
+      "bundle_title": "泰昌熔体流动速率仪试验设备及校准资料",
+      "enterprise": "泰昌",
+      "doc_owner": "河北泰昌电力器材科技有限公司",
+      "source_domain": "enterprise_fact",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "tenant_visibility": "taichang_only",
+      "access_scope": "taichang_tenant_internal",
+      "bundle_kind": "calibration_certificate",
+      "business_key": "equipment:熔体流动速率仪",
+      "evidence_type": "calibration_certificate",
+      "evidence_type_label": "试验设备校准资料",
+      "target_library": "product_library",
+      "target_library_label": "产品库",
+      "product_families": [],
+      "applicable_sections": [
+        "技术标/试验检测能力",
+        "商务标/补充证明"
+      ],
+      "structured_summary": {
+        "equipment_name": "熔体流动速率仪",
+        "validity_policy": "正式投标前核验校准证书有效期"
+      },
+      "primary_sources": [
+        {
+          "component": "熔体流动速率仪",
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/5.溶体流动速率仪/溶体流动速率仪.pdf",
+          "source_display_name": "溶体流动速率仪.pdf",
+          "source_sha256": "3f3d481bb69a9dbfe8644930fb0a81524b67bc15b4a8ab749484667c9c464ad2",
+          "asset_ids": [
+            "9fd709b3-d342-4b73-951d-c7b46b254a8e",
+            "d9968d14-5c9f-48ab-88ae-72683fb07705",
+            "8c10929b-73dd-4eb6-978e-31a07295fdf7",
+            "189ce7bf-6c9a-411c-a642-bea71cd29d51",
+            "8f8d30d3-1dbf-43ef-9a1b-58f22d7ff501",
+            "a8cff3b7-a98c-46a1-a3e6-670dfde66d4b",
+            "0fc45d3e-bddf-47eb-8a6a-1124bf62169c"
+          ],
+          "original_file_exists": true,
+          "expected_page_count": 7,
+          "asset_page_count": 7,
+          "asset_unique_page_count": 7,
+          "asset_page_sequence": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "missing_pages": [],
+          "duplicate_pages": [],
+          "page_order_valid": true,
+          "complete": true
+        }
+      ],
+      "renditions": [],
+      "page_count": 7,
+      "page_sequence_complete": true,
+      "missing_pages": [],
+      "duplicate_pages": [],
+      "allowed_for_bid": false,
+      "usage_status": "review_required_validity",
+      "warnings": [
+        "校准/检定有效期尚未结构化，正式投标前必须复核"
+      ],
+      "provenance_policy": "仅使用泰昌企业事实原始文件；辽宁招标资料和河北豪乾参考稿禁止作为事实来源"
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-f0f800fd3a615899dbfd",
+      "bundle_title": "泰昌电子天平试验设备及校准资料",
+      "enterprise": "泰昌",
+      "doc_owner": "河北泰昌电力器材科技有限公司",
+      "source_domain": "enterprise_fact",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "tenant_visibility": "taichang_only",
+      "access_scope": "taichang_tenant_internal",
+      "bundle_kind": "calibration_certificate",
+      "business_key": "equipment:电子天平",
+      "evidence_type": "calibration_certificate",
+      "evidence_type_label": "试验设备校准资料",
+      "target_library": "product_library",
+      "target_library_label": "产品库",
+      "product_families": [],
+      "applicable_sections": [
+        "技术标/试验检测能力",
+        "商务标/补充证明"
+      ],
+      "structured_summary": {
+        "equipment_name": "电子天平",
+        "validity_policy": "正式投标前核验校准证书有效期"
+      },
+      "primary_sources": [
+        {
+          "component": "电子天平",
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/3.电子天平/电子天平.pdf",
+          "source_display_name": "电子天平.pdf",
+          "source_sha256": "c4a4dc1074c7ed4b36166ddaff9f82485e61b1535b08c59135f865aac62790b8",
+          "asset_ids": [
+            "29f3feff-babe-4a64-b20e-a93bdc6bd5fb",
+            "59222ca7-8321-4a09-b955-c2f4af14d0af",
+            "04e064b8-a41f-4f0d-a8a7-44c1ed545585",
+            "4c8e0c13-0f46-49b0-aef3-6b3883bde22e",
+            "5c875dcd-e440-41d1-b0c1-4f152b5ed345",
+            "85b728df-d209-45b5-ad31-56b2eba17362"
+          ],
+          "original_file_exists": true,
+          "expected_page_count": 6,
+          "asset_page_count": 6,
+          "asset_unique_page_count": 6,
+          "asset_page_sequence": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "missing_pages": [],
+          "duplicate_pages": [],
+          "page_order_valid": true,
+          "complete": true
+        }
+      ],
+      "renditions": [],
+      "page_count": 6,
+      "page_sequence_complete": true,
+      "missing_pages": [],
+      "duplicate_pages": [],
+      "allowed_for_bid": false,
+      "usage_status": "review_required_validity",
+      "warnings": [
+        "校准/检定有效期尚未结构化，正式投标前必须复核"
+      ],
+      "provenance_policy": "仅使用泰昌企业事实原始文件；辽宁招标资料和河北豪乾参考稿禁止作为事实来源"
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-96036c84ed4ce31e0ad4",
+      "bundle_title": "泰昌电子拉力试验机试验设备及校准资料",
+      "enterprise": "泰昌",
+      "doc_owner": "河北泰昌电力器材科技有限公司",
+      "source_domain": "enterprise_fact",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "tenant_visibility": "taichang_only",
+      "access_scope": "taichang_tenant_internal",
+      "bundle_kind": "calibration_certificate",
+      "business_key": "equipment:电子拉力试验机",
+      "evidence_type": "calibration_certificate",
+      "evidence_type_label": "试验设备校准资料",
+      "target_library": "product_library",
+      "target_library_label": "产品库",
+      "product_families": [],
+      "applicable_sections": [
+        "技术标/试验检测能力",
+        "商务标/补充证明"
+      ],
+      "structured_summary": {
+        "equipment_name": "电子拉力试验机",
+        "validity_policy": "正式投标前核验校准证书有效期"
+      },
+      "primary_sources": [
+        {
+          "component": "电子拉力试验机",
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+          "source_display_name": "电子拉力试验机.pdf",
+          "source_sha256": "0d85f296ee04331fd334ef3b6b6d22e7535201d3953560d53da6720c1aeb7eaf",
+          "asset_ids": [
+            "e9156fac-7431-4cab-b80d-4d9259234ccc",
+            "10c59a5f-d87f-4077-9776-70b45dede0ca",
+            "a9b16fff-190c-48f1-9148-b2f4131c1865",
+            "9552f744-1f6d-450f-8f6c-2c929f30cf10",
+            "bf144d68-8bae-417b-81d2-3b9593d6ae84",
+            "a2c9b254-8ef7-4b8b-a2ea-a11e0cea77f1",
+            "c739b596-0d4d-40db-accf-c92875bfa6e0",
+            "8dfb4f43-153b-4205-9583-4ca3770d83c7"
+          ],
+          "original_file_exists": true,
+          "expected_page_count": 8,
+          "asset_page_count": 8,
+          "asset_unique_page_count": 8,
+          "asset_page_sequence": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "missing_pages": [],
+          "duplicate_pages": [],
+          "page_order_valid": true,
+          "complete": true
+        }
+      ],
+      "renditions": [],
+      "page_count": 8,
+      "page_sequence_complete": true,
+      "missing_pages": [],
+      "duplicate_pages": [],
+      "allowed_for_bid": false,
+      "usage_status": "review_required_validity",
+      "warnings": [
+        "校准/检定有效期尚未结构化，正式投标前必须复核"
+      ],
+      "provenance_policy": "仅使用泰昌企业事实原始文件；辽宁招标资料和河北豪乾参考稿禁止作为事实来源"
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-2bf8bf27b27d8ce407cc",
+      "bundle_title": "泰昌锤击试验装置试验设备及校准资料",
+      "enterprise": "泰昌",
+      "doc_owner": "河北泰昌电力器材科技有限公司",
+      "source_domain": "enterprise_fact",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "tenant_visibility": "taichang_only",
+      "access_scope": "taichang_tenant_internal",
+      "bundle_kind": "calibration_certificate",
+      "business_key": "equipment:锤击试验装置",
+      "evidence_type": "calibration_certificate",
+      "evidence_type_label": "试验设备校准资料",
+      "target_library": "product_library",
+      "target_library_label": "产品库",
+      "product_families": [],
+      "applicable_sections": [
+        "技术标/试验检测能力",
+        "商务标/补充证明"
+      ],
+      "structured_summary": {
+        "equipment_name": "锤击试验装置",
+        "validity_policy": "正式投标前核验校准证书有效期"
+      },
+      "primary_sources": [
+        {
+          "component": "锤击试验装置",
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/4.锤击试验装置/锤击试验装置.pdf",
+          "source_display_name": "锤击试验装置.pdf",
+          "source_sha256": "3a07adf405340f9f0a2a545821edc3fc3eae61f96b184bc374a1cbf6c8a47f3e",
+          "asset_ids": [
+            "a137ead8-a37a-4421-bb69-32ee4a781d99",
+            "bca54cc5-14af-477f-b88e-97832b51e615",
+            "661c1e8b-7b37-4557-928e-86f92ddac57b",
+            "f10b839b-85db-4f06-9b04-5c0b485fc4a8",
+            "c6dd8d55-a7ea-478a-949b-78e041f44120",
+            "e7eec5ff-6d29-4e8f-a35e-82bae35b29f9",
+            "e58ae78c-e53a-411f-84a5-a29f0bc2dcc1",
+            "aa621b14-530f-4120-b25e-683242588b41"
+          ],
+          "original_file_exists": true,
+          "expected_page_count": 8,
+          "asset_page_count": 8,
+          "asset_unique_page_count": 8,
+          "asset_page_sequence": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "missing_pages": [],
+          "duplicate_pages": [],
+          "page_order_valid": true,
+          "complete": true
+        }
+      ],
+      "renditions": [],
+      "page_count": 8,
+      "page_sequence_complete": true,
+      "missing_pages": [],
+      "duplicate_pages": [],
+      "allowed_for_bid": false,
+      "usage_status": "review_required_validity",
+      "warnings": [
+        "校准/检定有效期尚未结构化，正式投标前必须复核"
+      ],
+      "provenance_policy": "仅使用泰昌企业事实原始文件；辽宁招标资料和河北豪乾参考稿禁止作为事实来源"
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5233af6e2133a8e25641",
+      "bundle_title": "泰昌MPP电缆保护管检验报告",
+      "enterprise": "泰昌",
+      "doc_owner": "河北泰昌电力器材科技有限公司",
+      "source_domain": "enterprise_fact",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "tenant_visibility": "taichang_only",
+      "access_scope": "taichang_tenant_internal",
+      "bundle_kind": "inspection_report",
+      "business_key": "report:2024100312005501712",
+      "evidence_type": "inspection_report",
+      "evidence_type_label": "检验报告",
+      "target_library": "product_library",
+      "target_library_label": "产品库",
+      "product_families": [
+        "MPP电缆保护管"
+      ],
+      "applicable_sections": [
+        "技术标/技术响应",
+        "商务标/资格证明"
+      ],
+      "structured_summary": {
+        "report_no": "2024100312005501712",
+        "parameter_row_count": 17,
+        "products": [
+          "MPP电缆保护管"
+        ],
+        "spec_models": [
+          "DF 250×22×9000 SN40 MPP"
+        ]
+      },
+      "primary_sources": [
+        {
+          "component": "primary",
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+          "source_display_name": "MPP电缆保护管检验报告内径250.pdf",
+          "source_sha256": "e32eb639c4af77e455745ff844766f42352941e7664eb1c8fd4a119956d70394",
+          "asset_ids": [
+            "39eed227-992a-4e19-a09b-27bcb926e665",
+            "25dcd2c9-f919-4321-b71f-18a357e45c02",
+            "048b1963-fb91-49f4-99e0-ee282ca1eb7d",
+            "e78d53b1-d2f3-471f-90e9-b7bd9c11c128",
+            "25c462a6-1085-4f6d-8703-b39aa573575d"
+          ],
+          "original_file_exists": true,
+          "expected_page_count": 5,
+          "asset_page_count": 5,
+          "asset_unique_page_count": 5,
+          "asset_page_sequence": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "missing_pages": [],
+          "duplicate_pages": [],
+          "page_order_valid": true,
+          "complete": true
+        }
+      ],
+      "renditions": [
+        {
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/13型式试验报告第三方检测报告完整扫描件/MPP电缆保护管检验报告内径250.pdf",
+          "source_display_name": "MPP电缆保护管检验报告内径250.pdf",
+          "source_sha256": "e32eb639c4af77e455745ff844766f42352941e7664eb1c8fd4a119956d70394",
+          "rendition_type": "duplicate_original_file",
+          "formal_page_source": false
+        },
+        {
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/12MPP 电缆保护管检验报告完整 PDF关键页整页图/MPP电缆保护管检验报告内径250_页面_2.jpg",
+          "source_display_name": "MPP电缆保护管检验报告内径250_页面_2.jpg",
+          "source_sha256": "fe9998d53907b72baaebadb457b8ad0632babf5d3bca7abfa628b810db40c405",
+          "rendition_type": "reference_page_image",
+          "formal_page_source": false
+        },
+        {
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/12MPP 电缆保护管检验报告完整 PDF关键页整页图/MPP电缆保护管检验报告内径250_页面_3.jpg",
+          "source_display_name": "MPP电缆保护管检验报告内径250_页面_3.jpg",
+          "source_sha256": "dc2a3d0688080a44859620a98c125b1bc1567322e8969d246b08647c185de136",
+          "rendition_type": "reference_page_image",
+          "formal_page_source": false
+        },
+        {
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/12MPP 电缆保护管检验报告完整 PDF关键页整页图/MPP电缆保护管检验报告内径250_页面_4.jpg",
+          "source_display_name": "MPP电缆保护管检验报告内径250_页面_4.jpg",
+          "source_sha256": "c6f3e230a759cf655f2a23c376927764f8a3a6a94266ac224145f4fb91280332",
+          "rendition_type": "reference_page_image",
+          "formal_page_source": false
+        }
+      ],
+      "page_count": 5,
+      "page_sequence_complete": true,
+      "missing_pages": [],
+      "duplicate_pages": [],
+      "allowed_for_bid": true,
+      "usage_status": "eligible_from_existing_asset_policy",
+      "warnings": [],
+      "provenance_policy": "仅使用泰昌企业事实原始文件；辽宁招标资料和河北豪乾参考稿禁止作为事实来源"
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-4c9d64c00d89cb7b78f2",
+      "bundle_title": "泰昌CPVC电缆保护管检验报告",
+      "enterprise": "泰昌",
+      "doc_owner": "河北泰昌电力器材科技有限公司",
+      "source_domain": "enterprise_fact",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "tenant_visibility": "taichang_only",
+      "access_scope": "taichang_tenant_internal",
+      "bundle_kind": "inspection_report",
+      "business_key": "report:2024100312005501713",
+      "evidence_type": "inspection_report",
+      "evidence_type_label": "检验报告",
+      "target_library": "product_library",
+      "target_library_label": "产品库",
+      "product_families": [
+        "CPVC电缆保护管"
+      ],
+      "applicable_sections": [
+        "技术标/技术响应",
+        "商务标/资格证明"
+      ],
+      "structured_summary": {
+        "report_no": "2024100312005501713",
+        "parameter_row_count": 19,
+        "products": [
+          "CPVC电缆保护管"
+        ],
+        "spec_models": [
+          "DS 250×15×6000 SN16 PVC-C"
+        ]
+      },
+      "primary_sources": [
+        {
+          "component": "primary",
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/CPVC电缆保护管检验报告内径250.pdf",
+          "source_display_name": "CPVC电缆保护管检验报告内径250.pdf",
+          "source_sha256": "c7c9c961208c00d4dc8eb724611f0547155fc4e6f9fa33f97a55dc854e78c4ad",
+          "asset_ids": [
+            "9784a2d3-ad13-467e-acc8-c5848109a797",
+            "f0fd8c37-1d9c-49f7-86f4-78d24302b5a0",
+            "7dc74695-2594-4888-b845-af5bd3130ae6",
+            "f7a3c80a-1dbe-4227-a778-2f9c0d503c6e",
+            "53f279bf-a9e7-49ee-afbb-350185ecbf60"
+          ],
+          "original_file_exists": true,
+          "expected_page_count": 5,
+          "asset_page_count": 5,
+          "asset_unique_page_count": 5,
+          "asset_page_sequence": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "missing_pages": [],
+          "duplicate_pages": [],
+          "page_order_valid": true,
+          "complete": true
+        }
+      ],
+      "renditions": [
+        {
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/13型式试验报告第三方检测报告完整扫描件/CPVC电缆保护管检验报告内径250.pdf",
+          "source_display_name": "CPVC电缆保护管检验报告内径250.pdf",
+          "source_sha256": "c7c9c961208c00d4dc8eb724611f0547155fc4e6f9fa33f97a55dc854e78c4ad",
+          "rendition_type": "duplicate_original_file",
+          "formal_page_source": false
+        },
+        {
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/11CPVC 电缆保护管检验报告完整 PDF关键页整页图/CPVC电缆保护管检验报告内径250_页面_2.jpg",
+          "source_display_name": "CPVC电缆保护管检验报告内径250_页面_2.jpg",
+          "source_sha256": "e24409efff873fd7e4bf5e8b72e6a2da3087695737d8898781e5d3ab192ac7bb",
+          "rendition_type": "reference_page_image",
+          "formal_page_source": false
+        },
+        {
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/11CPVC 电缆保护管检验报告完整 PDF关键页整页图/CPVC电缆保护管检验报告内径250_页面_3.jpg",
+          "source_display_name": "CPVC电缆保护管检验报告内径250_页面_3.jpg",
+          "source_sha256": "009648ce09525ef14c3d6fa456ffe695d45f33878a53958c1d22a4777be6cdd4",
+          "rendition_type": "reference_page_image",
+          "formal_page_source": false
+        },
+        {
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/11CPVC 电缆保护管检验报告完整 PDF关键页整页图/CPVC电缆保护管检验报告内径250_页面_4.jpg",
+          "source_display_name": "CPVC电缆保护管检验报告内径250_页面_4.jpg",
+          "source_sha256": "a244040622f239318bdabfc47e543761f167df2ab44ddc8b89e432ab535acf3c",
+          "rendition_type": "reference_page_image",
+          "formal_page_source": false
+        }
+      ],
+      "page_count": 5,
+      "page_sequence_complete": true,
+      "missing_pages": [],
+      "duplicate_pages": [],
+      "allowed_for_bid": true,
+      "usage_status": "eligible_from_existing_asset_policy",
+      "warnings": [],
+      "provenance_policy": "仅使用泰昌企业事实原始文件；辽宁招标资料和河北豪乾参考稿禁止作为事实来源"
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-792812eabf8d9567854f",
+      "bundle_title": "泰昌环境管理体系认证证书",
+      "enterprise": "泰昌",
+      "doc_owner": "河北泰昌电力器材科技有限公司",
+      "source_domain": "enterprise_fact",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "tenant_visibility": "taichang_only",
+      "access_scope": "taichang_tenant_internal",
+      "bundle_kind": "management_system_certificate",
+      "business_key": "management-system:environment",
+      "evidence_type": "certification",
+      "evidence_type_label": "管理体系认证证书",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库",
+      "product_families": [],
+      "applicable_sections": [
+        "商务标/管理体系认证",
+        "技术标/质量管理"
+      ],
+      "structured_summary": {},
+      "primary_sources": [
+        {
+          "component": "primary",
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/2.环境管理体系认证证书.pdf",
+          "source_display_name": "2.环境管理体系认证证书.pdf",
+          "source_sha256": "1a3fc7254bcd39e9d2fdd7d3eb05095c0f254d8dbbec574421eb493eb0395173",
+          "asset_ids": [
+            "643e1f3b-9280-4a78-bcc1-d74b8c0d6621",
+            "37819959-e15a-4958-8503-70697b0c1d90"
+          ],
+          "original_file_exists": true,
+          "expected_page_count": 2,
+          "asset_page_count": 2,
+          "asset_unique_page_count": 2,
+          "asset_page_sequence": [
+            1,
+            2
+          ],
+          "missing_pages": [],
+          "duplicate_pages": [],
+          "page_order_valid": true,
+          "complete": true
+        }
+      ],
+      "renditions": [
+        {
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/6环境管理体系认证证书整页扫描件/2.环境管理体系认证证书.pdf",
+          "source_display_name": "2.环境管理体系认证证书.pdf",
+          "source_sha256": "1a3fc7254bcd39e9d2fdd7d3eb05095c0f254d8dbbec574421eb493eb0395173",
+          "rendition_type": "duplicate_original_file",
+          "formal_page_source": false
+        }
+      ],
+      "page_count": 2,
+      "page_sequence_complete": true,
+      "missing_pages": [],
+      "duplicate_pages": [],
+      "allowed_for_bid": false,
+      "usage_status": "review_required_validity",
+      "warnings": [
+        "证书有效期尚未进入结构化台账，正式投标前必须复核"
+      ],
+      "provenance_policy": "仅使用泰昌企业事实原始文件；辽宁招标资料和河北豪乾参考稿禁止作为事实来源"
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68219d67c5feb3ed96a4",
+      "bundle_title": "泰昌职业健康安全管理体系认证证书",
+      "enterprise": "泰昌",
+      "doc_owner": "河北泰昌电力器材科技有限公司",
+      "source_domain": "enterprise_fact",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "tenant_visibility": "taichang_only",
+      "access_scope": "taichang_tenant_internal",
+      "bundle_kind": "management_system_certificate",
+      "business_key": "management-system:ohs",
+      "evidence_type": "certification",
+      "evidence_type_label": "管理体系认证证书",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库",
+      "product_families": [],
+      "applicable_sections": [
+        "商务标/管理体系认证",
+        "技术标/质量管理"
+      ],
+      "structured_summary": {
+        "validity_status": "expired",
+        "valid_until": "2026-06-18",
+        "replacement_required": true
+      },
+      "primary_sources": [
+        {
+          "component": "primary",
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/3.职业健康安全管理体系认证证书.pdf",
+          "source_display_name": "3.职业健康安全管理体系认证证书.pdf",
+          "source_sha256": "22326f1035094fb9318771996b49074503a57158c3737942cbdfe8ae104bf859",
+          "asset_ids": [
+            "9fa04255-0511-407e-b5f5-9f356e1386f2",
+            "611602d0-36e3-4513-aef8-df25744da7a5",
+            "f49aba7e-2ab6-4bf7-8f9d-f4985c064692"
+          ],
+          "original_file_exists": true,
+          "expected_page_count": 3,
+          "asset_page_count": 3,
+          "asset_unique_page_count": 3,
+          "asset_page_sequence": [
+            1,
+            2,
+            3
+          ],
+          "missing_pages": [],
+          "duplicate_pages": [],
+          "page_order_valid": true,
+          "complete": true
+        }
+      ],
+      "renditions": [
+        {
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/7职业健康安全管理体系认证证书整页扫描件/3.职业健康安全管理体系认证证书.pdf",
+          "source_display_name": "3.职业健康安全管理体系认证证书.pdf",
+          "source_sha256": "22326f1035094fb9318771996b49074503a57158c3737942cbdfe8ae104bf859",
+          "rendition_type": "duplicate_original_file",
+          "formal_page_source": false
+        }
+      ],
+      "page_count": 3,
+      "page_sequence_complete": true,
+      "missing_pages": [],
+      "duplicate_pages": [],
+      "allowed_for_bid": false,
+      "usage_status": "blocked_expired",
+      "warnings": [
+        "职业健康安全管理体系证书已于2026-06-18到期，须补充有效证书"
+      ],
+      "provenance_policy": "仅使用泰昌企业事实原始文件；辽宁招标资料和河北豪乾参考稿禁止作为事实来源"
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-c37bef6d5bdbe4f32cb1",
+      "bundle_title": "泰昌质量管理体系认证证书",
+      "enterprise": "泰昌",
+      "doc_owner": "河北泰昌电力器材科技有限公司",
+      "source_domain": "enterprise_fact",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "tenant_visibility": "taichang_only",
+      "access_scope": "taichang_tenant_internal",
+      "bundle_kind": "management_system_certificate",
+      "business_key": "management-system:quality",
+      "evidence_type": "certification",
+      "evidence_type_label": "管理体系认证证书",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库",
+      "product_families": [],
+      "applicable_sections": [
+        "商务标/管理体系认证",
+        "技术标/质量管理"
+      ],
+      "structured_summary": {},
+      "primary_sources": [
+        {
+          "component": "primary",
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/1.质量管理体系认证证书.pdf",
+          "source_display_name": "1.质量管理体系认证证书.pdf",
+          "source_sha256": "c8b96d8484c7fc4f26b1b15faf5b7a89fba6fbb66e59b0aa9076cf0025d36d61",
+          "asset_ids": [
+            "3e36b7f3-3a10-4c58-9cb8-56c59a21ebfc",
+            "e014f9df-2d49-4415-a8cc-dde768690a2b",
+            "e3ffa072-d458-41d8-9714-74953f735593"
+          ],
+          "original_file_exists": true,
+          "expected_page_count": 3,
+          "asset_page_count": 3,
+          "asset_unique_page_count": 3,
+          "asset_page_sequence": [
+            1,
+            2,
+            3
+          ],
+          "missing_pages": [],
+          "duplicate_pages": [],
+          "page_order_valid": true,
+          "complete": true
+        }
+      ],
+      "renditions": [
+        {
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/5质量管理体系认证证书整页扫描件/1.质量管理体系认证证书.pdf",
+          "source_display_name": "1.质量管理体系认证证书.pdf",
+          "source_sha256": "c8b96d8484c7fc4f26b1b15faf5b7a89fba6fbb66e59b0aa9076cf0025d36d61",
+          "rendition_type": "duplicate_original_file",
+          "formal_page_source": false
+        }
+      ],
+      "page_count": 3,
+      "page_sequence_complete": true,
+      "missing_pages": [],
+      "duplicate_pages": [],
+      "allowed_for_bid": false,
+      "usage_status": "review_required_validity",
+      "warnings": [
+        "证书有效期尚未进入结构化台账，正式投标前必须复核"
+      ],
+      "provenance_policy": "仅使用泰昌企业事实原始文件；辽宁招标资料和河北豪乾参考稿禁止作为事实来源"
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68f40342eb06721cacc8",
+      "bundle_title": "泰昌国网天津2022年电缆保护管项目业绩",
+      "enterprise": "泰昌",
+      "doc_owner": "河北泰昌电力器材科技有限公司",
+      "source_domain": "enterprise_fact",
+      "reference_only": false,
+      "fact_source_allowed_for_enterprise": true,
+      "tenant_visibility": "taichang_only",
+      "access_scope": "taichang_tenant_internal",
+      "bundle_kind": "project_performance",
+      "business_key": "project:taichang-tianjin-2022-0322AB-package-2",
+      "evidence_type": "project_performance",
+      "evidence_type_label": "项目业绩",
+      "target_library": "qualification_library",
+      "target_library_label": "资信库",
+      "product_families": [
+        "CPVC电缆保护管",
+        "MPP电缆保护管"
+      ],
+      "applicable_sections": [
+        "商务标/项目业绩",
+        "技术标/供货业绩"
+      ],
+      "structured_summary": {
+        "project_name": "国网天津市电力公司2022年第二次配网物资协 议库存招标采购",
+        "tender_no": "0322AB",
+        "package_no": "包2",
+        "quantity_m": 54678.0,
+        "amount_yuan": 6372409.05,
+        "structured_evidence_count": 2
+      },
+      "primary_sources": [
+        {
+          "component": "中标通知书",
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/38中标通知书整页扫描件/157-保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书.pdf",
+          "source_display_name": "157-保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书.pdf",
+          "source_sha256": "e5269fb71d99d62c342b3c2ceeba680d5f27bca39755b1c2413d0c82231e55c7",
+          "asset_ids": [
+            "6bde9fe2-ce32-4e2c-9cbc-9fd4696de3d2",
+            "ee3b0a64-4152-4bc1-9643-62c3873c4979"
+          ],
+          "original_file_exists": true,
+          "expected_page_count": 2,
+          "asset_page_count": 2,
+          "asset_unique_page_count": 2,
+          "asset_page_sequence": [
+            1,
+            2
+          ],
+          "missing_pages": [],
+          "duplicate_pages": [],
+          "page_order_valid": true,
+          "complete": true
+        },
+        {
+          "component": "供货合同",
+          "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/37同类产品供货合同关键页整页扫描件/TJ20220002363合同协议书（双方已签章）.pdf",
+          "source_display_name": "TJ20220002363合同协议书（双方已签章）.pdf",
+          "source_sha256": "6a9f5f3c4a2f509a2a86608b309c8b4bb7d69788d980235d3a89e55abfafe089",
+          "asset_ids": [
+            "53fe3267-f655-45cf-98b3-50cb2a065af6",
+            "1934e0a2-9328-42eb-b983-6f9ac6df0ac2",
+            "be020f97-fe2f-4ada-86c3-1784eff92365",
+            "3db01174-ea08-44e9-a32d-4a219daec403",
+            "76637719-343c-42bc-9bfa-e20f50bb7441",
+            "d917bbd3-63d6-4bd9-832c-761823baf7e4",
+            "97e2716b-f3db-48e7-8885-f5b35505352a",
+            "ac382931-3e2f-4d77-9306-024c8262e9d3",
+            "0101599f-c7ab-44bd-9e2d-7024a2f8acc0",
+            "70f8c8d6-de6f-447b-91ee-1f192f958fb8",
+            "fff62a89-d252-4ebd-9ffa-8e6223a1c0fc",
+            "84f7a1b2-05d3-4f7b-bf0e-e6fc0dabea51",
+            "f340d05f-4f6d-494a-ba0e-d33e0d8b6692",
+            "8e8b12f5-c3d5-401e-920c-c84a262a7a5b",
+            "2c918f6d-aa3a-4ed0-88b7-a490f554eb54"
+          ],
+          "original_file_exists": true,
+          "expected_page_count": 15,
+          "asset_page_count": 15,
+          "asset_unique_page_count": 15,
+          "asset_page_sequence": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "missing_pages": [],
+          "duplicate_pages": [],
+          "page_order_valid": true,
+          "complete": true
+        }
+      ],
+      "renditions": [],
+      "page_count": 17,
+      "page_sequence_complete": true,
+      "missing_pages": [],
+      "duplicate_pages": [],
+      "allowed_for_bid": true,
+      "usage_status": "eligible_from_existing_asset_policy",
+      "warnings": [],
+      "provenance_policy": "仅使用泰昌企业事实原始文件；辽宁招标资料和河北豪乾参考稿禁止作为事实来源"
+    }
+  ],
+  "pages": [
+    {
+      "evidence_bundle_id": "taichang-evidence-8c0003b8a585e22b7525",
+      "bundle_title": "泰昌2023年审计报告",
+      "component": "2023",
+      "global_order": 1,
+      "page_no": 1,
+      "asset_id": "ff3447bd-bede-493d-bb51-d7eb4d1b3acb",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8c0003b8a585e22b7525",
+      "bundle_title": "泰昌2023年审计报告",
+      "component": "2023",
+      "global_order": 2,
+      "page_no": 2,
+      "asset_id": "5f0829f5-c64a-4b3b-b125-50a4ac46689a",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8c0003b8a585e22b7525",
+      "bundle_title": "泰昌2023年审计报告",
+      "component": "2023",
+      "global_order": 3,
+      "page_no": 3,
+      "asset_id": "c08a6a60-9a9f-48c3-9b01-ca38bcc6661e",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8c0003b8a585e22b7525",
+      "bundle_title": "泰昌2023年审计报告",
+      "component": "2023",
+      "global_order": 4,
+      "page_no": 4,
+      "asset_id": "39e276cc-5e58-463c-bf8e-a3f211c3b5ac",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8c0003b8a585e22b7525",
+      "bundle_title": "泰昌2023年审计报告",
+      "component": "2023",
+      "global_order": 5,
+      "page_no": 5,
+      "asset_id": "495b6f71-53e1-4624-9f10-29d7590b93c4",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8c0003b8a585e22b7525",
+      "bundle_title": "泰昌2023年审计报告",
+      "component": "2023",
+      "global_order": 6,
+      "page_no": 6,
+      "asset_id": "753cc122-2431-428c-a41f-8777d1344f7a",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8c0003b8a585e22b7525",
+      "bundle_title": "泰昌2023年审计报告",
+      "component": "2023",
+      "global_order": 7,
+      "page_no": 7,
+      "asset_id": "a3c9cfb2-cd3b-4dd4-8cbb-c87d6f872759",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8c0003b8a585e22b7525",
+      "bundle_title": "泰昌2023年审计报告",
+      "component": "2023",
+      "global_order": 8,
+      "page_no": 8,
+      "asset_id": "f5c8f472-83a9-4a29-8ee5-f91fc0120b74",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8c0003b8a585e22b7525",
+      "bundle_title": "泰昌2023年审计报告",
+      "component": "2023",
+      "global_order": 9,
+      "page_no": 9,
+      "asset_id": "956112bc-65c3-441b-8d70-ac4d65d3b24f",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8c0003b8a585e22b7525",
+      "bundle_title": "泰昌2023年审计报告",
+      "component": "2023",
+      "global_order": 10,
+      "page_no": 10,
+      "asset_id": "1f17aa09-4e6f-4b86-a6cd-2e98c55994fe",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8c0003b8a585e22b7525",
+      "bundle_title": "泰昌2023年审计报告",
+      "component": "2023",
+      "global_order": 11,
+      "page_no": 11,
+      "asset_id": "f52d4793-a7db-4c48-ac97-0a40afc1205f",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8c0003b8a585e22b7525",
+      "bundle_title": "泰昌2023年审计报告",
+      "component": "2023",
+      "global_order": 12,
+      "page_no": 12,
+      "asset_id": "1b93e8ce-5e09-4bf2-8ffe-5fece4049542",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8c0003b8a585e22b7525",
+      "bundle_title": "泰昌2023年审计报告",
+      "component": "2023",
+      "global_order": 13,
+      "page_no": 13,
+      "asset_id": "c5d8c48a-290d-493a-a8a3-fc4832d4cf4f",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8c0003b8a585e22b7525",
+      "bundle_title": "泰昌2023年审计报告",
+      "component": "2023",
+      "global_order": 14,
+      "page_no": 14,
+      "asset_id": "4db3fb31-0ae6-4c91-b241-999bd3342b05",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8c0003b8a585e22b7525",
+      "bundle_title": "泰昌2023年审计报告",
+      "component": "2023",
+      "global_order": 15,
+      "page_no": 15,
+      "asset_id": "c6407b66-aa5f-4157-ab06-cb35732cc14a",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8c0003b8a585e22b7525",
+      "bundle_title": "泰昌2023年审计报告",
+      "component": "2023",
+      "global_order": 16,
+      "page_no": 16,
+      "asset_id": "65c343a9-4e74-4ca9-af26-a2d4fab5e92a",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8c0003b8a585e22b7525",
+      "bundle_title": "泰昌2023年审计报告",
+      "component": "2023",
+      "global_order": 17,
+      "page_no": 17,
+      "asset_id": "55e8a849-d27b-46fa-a169-40d626f8522c",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8c0003b8a585e22b7525",
+      "bundle_title": "泰昌2023年审计报告",
+      "component": "2023",
+      "global_order": 18,
+      "page_no": 18,
+      "asset_id": "e8d4c3fd-b0ab-4b8a-8ad3-e6f443e9dcb0",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8c0003b8a585e22b7525",
+      "bundle_title": "泰昌2023年审计报告",
+      "component": "2023",
+      "global_order": 19,
+      "page_no": 19,
+      "asset_id": "32c9bd0e-2f68-4a6d-aaff-4e6f864d0ddc",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2023年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 1,
+      "page_no": 1,
+      "asset_id": "fb1840f1-7b52-42c6-97ae-09cd8f2bed4b",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 2,
+      "page_no": 2,
+      "asset_id": "79a5a9af-4191-4a93-8fdb-7afdb066024e",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 3,
+      "page_no": 3,
+      "asset_id": "eaaabad3-f539-4323-b900-55a6e93d6e16",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 4,
+      "page_no": 4,
+      "asset_id": "e761588e-d6bf-4327-a964-84cb3fcb6a13",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 5,
+      "page_no": 5,
+      "asset_id": "6b1d3d4d-2e64-4110-9384-06d8b6ebab13",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 6,
+      "page_no": 6,
+      "asset_id": "b038dfaf-b671-42d3-a396-31be98554fbc",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 7,
+      "page_no": 7,
+      "asset_id": "5ab77fae-3472-47bf-97d1-9f1ed8959ec1",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 8,
+      "page_no": 8,
+      "asset_id": "5cf50668-34a1-41e6-ba15-58232c55bf5d",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 9,
+      "page_no": 9,
+      "asset_id": "0b013587-6efe-4150-ba5c-037263fca5d0",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 10,
+      "page_no": 10,
+      "asset_id": "b6cdd3e4-f47e-4a50-8be5-574c74b88813",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 11,
+      "page_no": 11,
+      "asset_id": "839df7ac-6e93-4a3b-b588-053db9cf148e",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 12,
+      "page_no": 12,
+      "asset_id": "ad16fdce-0a3a-473d-938c-92160988379f",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 13,
+      "page_no": 13,
+      "asset_id": "12fbfbb4-af92-4f76-b0d2-b275d303cc39",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 14,
+      "page_no": 14,
+      "asset_id": "e341c506-c8f9-4b96-a83a-b29191c506e5",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 15,
+      "page_no": 15,
+      "asset_id": "1d58778e-3a76-490c-a9ad-b7de35884b17",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 16,
+      "page_no": 16,
+      "asset_id": "96e5a57e-c6d3-4df9-8cfb-11589f058bc8",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 17,
+      "page_no": 17,
+      "asset_id": "74a8aa0b-9a62-4da1-8ab3-7b676154cab8",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 18,
+      "page_no": 18,
+      "asset_id": "5244a1e5-7329-4a6d-be75-6e047c30ca77",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 19,
+      "page_no": 19,
+      "asset_id": "3c00e918-3c06-4b43-9ab4-b5a844a4b817",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 20,
+      "page_no": 20,
+      "asset_id": "859a973a-baee-4907-b0cd-4bf0d6c7628e",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 21,
+      "page_no": 21,
+      "asset_id": "617f48b2-d4d2-48a5-9c4f-e1c849e37b7f",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 22,
+      "page_no": 22,
+      "asset_id": "35d7e546-64cf-4104-848f-2f6bac871a6d",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 23,
+      "page_no": 23,
+      "asset_id": "c1e7063b-209e-445c-8c5c-a4b7ffecaade",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 24,
+      "page_no": 24,
+      "asset_id": "d94714a1-b03e-4d7a-b6d4-6837bdfbcc1b",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 25,
+      "page_no": 25,
+      "asset_id": "eb61130c-0045-4c22-b62e-da0002773a66",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 26,
+      "page_no": 26,
+      "asset_id": "287d4b3d-3ab2-465b-9ad5-44bcc6c9eb81",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 27,
+      "page_no": 27,
+      "asset_id": "ac1c0417-7090-4bd1-9e10-85a785b25dfc",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 28,
+      "page_no": 28,
+      "asset_id": "56178d71-cd10-4c09-9e29-ad8e6a7642b7",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-355a5e62909cf7b6be51",
+      "bundle_title": "泰昌2024年审计报告",
+      "component": "2024",
+      "global_order": 29,
+      "page_no": 29,
+      "asset_id": "0d8d7708-13b9-4f00-af4f-bcea9500974c",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2024年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5238d1459fcfe2a13ced",
+      "bundle_title": "泰昌2025年审计报告",
+      "component": "2025",
+      "global_order": 1,
+      "page_no": 1,
+      "asset_id": "ba758f69-9be6-4714-87c6-7d06a3d536db",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5238d1459fcfe2a13ced",
+      "bundle_title": "泰昌2025年审计报告",
+      "component": "2025",
+      "global_order": 2,
+      "page_no": 2,
+      "asset_id": "15bdc6cb-60b2-4989-8dce-4a9a61846d13",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5238d1459fcfe2a13ced",
+      "bundle_title": "泰昌2025年审计报告",
+      "component": "2025",
+      "global_order": 3,
+      "page_no": 3,
+      "asset_id": "7be06f33-9d92-4580-af34-b67e58cb2e32",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5238d1459fcfe2a13ced",
+      "bundle_title": "泰昌2025年审计报告",
+      "component": "2025",
+      "global_order": 4,
+      "page_no": 4,
+      "asset_id": "48619de5-3cbb-460d-a409-aa70ad622cdd",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5238d1459fcfe2a13ced",
+      "bundle_title": "泰昌2025年审计报告",
+      "component": "2025",
+      "global_order": 5,
+      "page_no": 5,
+      "asset_id": "03cb8100-1fe9-4d6b-9c37-0eeac8655356",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5238d1459fcfe2a13ced",
+      "bundle_title": "泰昌2025年审计报告",
+      "component": "2025",
+      "global_order": 6,
+      "page_no": 6,
+      "asset_id": "18e0361b-190e-4615-b686-299d0180ba71",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5238d1459fcfe2a13ced",
+      "bundle_title": "泰昌2025年审计报告",
+      "component": "2025",
+      "global_order": 7,
+      "page_no": 7,
+      "asset_id": "56c05670-544b-4e02-9bdb-d2da7b6ef08c",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5238d1459fcfe2a13ced",
+      "bundle_title": "泰昌2025年审计报告",
+      "component": "2025",
+      "global_order": 8,
+      "page_no": 8,
+      "asset_id": "042cd8c0-9f97-46e8-944a-e0908969358c",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5238d1459fcfe2a13ced",
+      "bundle_title": "泰昌2025年审计报告",
+      "component": "2025",
+      "global_order": 9,
+      "page_no": 9,
+      "asset_id": "d425cdb3-45e6-47e9-bd12-d0ec0da0ce1e",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5238d1459fcfe2a13ced",
+      "bundle_title": "泰昌2025年审计报告",
+      "component": "2025",
+      "global_order": 10,
+      "page_no": 10,
+      "asset_id": "b939af2a-ddd2-4b9b-8b61-bb36e450c057",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5238d1459fcfe2a13ced",
+      "bundle_title": "泰昌2025年审计报告",
+      "component": "2025",
+      "global_order": 11,
+      "page_no": 11,
+      "asset_id": "0325036d-f3af-4875-8389-e2200383b554",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5238d1459fcfe2a13ced",
+      "bundle_title": "泰昌2025年审计报告",
+      "component": "2025",
+      "global_order": 12,
+      "page_no": 12,
+      "asset_id": "7dbc82c7-26bb-4265-952c-87a21cdf9847",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5238d1459fcfe2a13ced",
+      "bundle_title": "泰昌2025年审计报告",
+      "component": "2025",
+      "global_order": 13,
+      "page_no": 13,
+      "asset_id": "4deeff14-1667-4304-baf2-f27876ff25c7",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5238d1459fcfe2a13ced",
+      "bundle_title": "泰昌2025年审计报告",
+      "component": "2025",
+      "global_order": 14,
+      "page_no": 14,
+      "asset_id": "0dd74940-cb4a-41bb-8635-197ab9a710e3",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5238d1459fcfe2a13ced",
+      "bundle_title": "泰昌2025年审计报告",
+      "component": "2025",
+      "global_order": 15,
+      "page_no": 15,
+      "asset_id": "f368e0b0-2ffd-472d-a791-84df59ca3b8f",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5238d1459fcfe2a13ced",
+      "bundle_title": "泰昌2025年审计报告",
+      "component": "2025",
+      "global_order": 16,
+      "page_no": 16,
+      "asset_id": "6e5c4dcf-1beb-4a47-a2bd-9c81a9dadeb9",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5238d1459fcfe2a13ced",
+      "bundle_title": "泰昌2025年审计报告",
+      "component": "2025",
+      "global_order": 17,
+      "page_no": 17,
+      "asset_id": "4712d48b-ec93-4181-8542-d3b703f16823",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5238d1459fcfe2a13ced",
+      "bundle_title": "泰昌2025年审计报告",
+      "component": "2025",
+      "global_order": 18,
+      "page_no": 18,
+      "asset_id": "4ee9d634-afec-4517-b867-9c3a8ffb9cbd",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5238d1459fcfe2a13ced",
+      "bundle_title": "泰昌2025年审计报告",
+      "component": "2025",
+      "global_order": 19,
+      "page_no": 19,
+      "asset_id": "5a7f8dbd-40c0-430e-8a10-44bd5bda8ed5",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/1财务状况/2025年审计报告.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-76ac5c6984a28811742d",
+      "bundle_title": "泰昌营业执照",
+      "component": "primary",
+      "global_order": 1,
+      "page_no": 1,
+      "asset_id": "12bcb4c3-2dd9-45e7-abb3-5a6be1bf6f3d",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/营业执照副本.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-9fdd36654ca483e6a069",
+      "bundle_title": "泰昌微机控制电子万能试验机试验设备及校准资料",
+      "component": "微机控制电子万能试验机",
+      "global_order": 1,
+      "page_no": 1,
+      "asset_id": "13d070a7-663a-40d8-b716-38aaf517906d",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/1.微机控制电子万能试验机/微机控制电子万能试验机.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-9fdd36654ca483e6a069",
+      "bundle_title": "泰昌微机控制电子万能试验机试验设备及校准资料",
+      "component": "微机控制电子万能试验机",
+      "global_order": 2,
+      "page_no": 2,
+      "asset_id": "77b1007a-1106-4b84-b5a7-563c0d78e8dc",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/1.微机控制电子万能试验机/微机控制电子万能试验机.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-9fdd36654ca483e6a069",
+      "bundle_title": "泰昌微机控制电子万能试验机试验设备及校准资料",
+      "component": "微机控制电子万能试验机",
+      "global_order": 3,
+      "page_no": 3,
+      "asset_id": "6ebd3ffc-3f9c-42cf-a377-d53ecb00a574",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/1.微机控制电子万能试验机/微机控制电子万能试验机.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-9fdd36654ca483e6a069",
+      "bundle_title": "泰昌微机控制电子万能试验机试验设备及校准资料",
+      "component": "微机控制电子万能试验机",
+      "global_order": 4,
+      "page_no": 4,
+      "asset_id": "4454c4ec-3976-473a-81f2-4cec2bd66f04",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/1.微机控制电子万能试验机/微机控制电子万能试验机.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-9fdd36654ca483e6a069",
+      "bundle_title": "泰昌微机控制电子万能试验机试验设备及校准资料",
+      "component": "微机控制电子万能试验机",
+      "global_order": 5,
+      "page_no": 5,
+      "asset_id": "aefb3637-7dea-4544-90a4-c0079b41167d",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/1.微机控制电子万能试验机/微机控制电子万能试验机.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-9fdd36654ca483e6a069",
+      "bundle_title": "泰昌微机控制电子万能试验机试验设备及校准资料",
+      "component": "微机控制电子万能试验机",
+      "global_order": 6,
+      "page_no": 6,
+      "asset_id": "1cfd8a3f-b402-4a84-8f4b-e9bf2294f35b",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/1.微机控制电子万能试验机/微机控制电子万能试验机.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-9fdd36654ca483e6a069",
+      "bundle_title": "泰昌微机控制电子万能试验机试验设备及校准资料",
+      "component": "微机控制电子万能试验机",
+      "global_order": 7,
+      "page_no": 7,
+      "asset_id": "4b288070-f008-48ef-b987-5c75c456e3cb",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/1.微机控制电子万能试验机/微机控制电子万能试验机.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-9fdd36654ca483e6a069",
+      "bundle_title": "泰昌微机控制电子万能试验机试验设备及校准资料",
+      "component": "微机控制电子万能试验机",
+      "global_order": 8,
+      "page_no": 8,
+      "asset_id": "7ff51ff0-8ce0-46c2-91dd-f25d2c36aeb1",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/1.微机控制电子万能试验机/微机控制电子万能试验机.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-508e8e613ca60ada061b",
+      "bundle_title": "泰昌热变形、维卡软化点温度测定仪试验设备及校准资料",
+      "component": "热变形、维卡软化点温度测定仪",
+      "global_order": 1,
+      "page_no": 1,
+      "asset_id": "055f3321-bd76-43af-b550-ff59d616f73e",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-508e8e613ca60ada061b",
+      "bundle_title": "泰昌热变形、维卡软化点温度测定仪试验设备及校准资料",
+      "component": "热变形、维卡软化点温度测定仪",
+      "global_order": 2,
+      "page_no": 2,
+      "asset_id": "1ca820ce-dfa1-4c4d-ad0c-c85f3ca11c98",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-508e8e613ca60ada061b",
+      "bundle_title": "泰昌热变形、维卡软化点温度测定仪试验设备及校准资料",
+      "component": "热变形、维卡软化点温度测定仪",
+      "global_order": 3,
+      "page_no": 3,
+      "asset_id": "6a25db9a-3771-4d30-a6b2-89ccd225fdae",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-508e8e613ca60ada061b",
+      "bundle_title": "泰昌热变形、维卡软化点温度测定仪试验设备及校准资料",
+      "component": "热变形、维卡软化点温度测定仪",
+      "global_order": 4,
+      "page_no": 4,
+      "asset_id": "63079c8a-f15d-4425-9b4f-8832485e6279",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-508e8e613ca60ada061b",
+      "bundle_title": "泰昌热变形、维卡软化点温度测定仪试验设备及校准资料",
+      "component": "热变形、维卡软化点温度测定仪",
+      "global_order": 5,
+      "page_no": 5,
+      "asset_id": "163d49f1-3db7-4c0b-8f6a-a9265b2ba5a9",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-508e8e613ca60ada061b",
+      "bundle_title": "泰昌热变形、维卡软化点温度测定仪试验设备及校准资料",
+      "component": "热变形、维卡软化点温度测定仪",
+      "global_order": 6,
+      "page_no": 6,
+      "asset_id": "579dd315-9a7a-4f95-a3c8-1a2a5ac9c217",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-508e8e613ca60ada061b",
+      "bundle_title": "泰昌热变形、维卡软化点温度测定仪试验设备及校准资料",
+      "component": "热变形、维卡软化点温度测定仪",
+      "global_order": 7,
+      "page_no": 7,
+      "asset_id": "7a34667d-0a39-417f-9bb6-2da1443b8260",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-508e8e613ca60ada061b",
+      "bundle_title": "泰昌热变形、维卡软化点温度测定仪试验设备及校准资料",
+      "component": "热变形、维卡软化点温度测定仪",
+      "global_order": 8,
+      "page_no": 8,
+      "asset_id": "1373f162-cc94-497f-abba-b84a083e151c",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-508e8e613ca60ada061b",
+      "bundle_title": "泰昌热变形、维卡软化点温度测定仪试验设备及校准资料",
+      "component": "热变形、维卡软化点温度测定仪",
+      "global_order": 9,
+      "page_no": 9,
+      "asset_id": "53814ca8-6e0d-4c5a-9e8c-b3c9c2d1e867",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/2.热变型、维卡软化点温度测定仪/热变型、维卡软化点温度测定仪.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8eabd69844ab6ab91f02",
+      "bundle_title": "泰昌熔体流动速率仪试验设备及校准资料",
+      "component": "熔体流动速率仪",
+      "global_order": 1,
+      "page_no": 1,
+      "asset_id": "9fd709b3-d342-4b73-951d-c7b46b254a8e",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/5.溶体流动速率仪/溶体流动速率仪.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8eabd69844ab6ab91f02",
+      "bundle_title": "泰昌熔体流动速率仪试验设备及校准资料",
+      "component": "熔体流动速率仪",
+      "global_order": 2,
+      "page_no": 2,
+      "asset_id": "d9968d14-5c9f-48ab-88ae-72683fb07705",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/5.溶体流动速率仪/溶体流动速率仪.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8eabd69844ab6ab91f02",
+      "bundle_title": "泰昌熔体流动速率仪试验设备及校准资料",
+      "component": "熔体流动速率仪",
+      "global_order": 3,
+      "page_no": 3,
+      "asset_id": "8c10929b-73dd-4eb6-978e-31a07295fdf7",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/5.溶体流动速率仪/溶体流动速率仪.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8eabd69844ab6ab91f02",
+      "bundle_title": "泰昌熔体流动速率仪试验设备及校准资料",
+      "component": "熔体流动速率仪",
+      "global_order": 4,
+      "page_no": 4,
+      "asset_id": "189ce7bf-6c9a-411c-a642-bea71cd29d51",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/5.溶体流动速率仪/溶体流动速率仪.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8eabd69844ab6ab91f02",
+      "bundle_title": "泰昌熔体流动速率仪试验设备及校准资料",
+      "component": "熔体流动速率仪",
+      "global_order": 5,
+      "page_no": 5,
+      "asset_id": "8f8d30d3-1dbf-43ef-9a1b-58f22d7ff501",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/5.溶体流动速率仪/溶体流动速率仪.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8eabd69844ab6ab91f02",
+      "bundle_title": "泰昌熔体流动速率仪试验设备及校准资料",
+      "component": "熔体流动速率仪",
+      "global_order": 6,
+      "page_no": 6,
+      "asset_id": "a8cff3b7-a98c-46a1-a3e6-670dfde66d4b",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/5.溶体流动速率仪/溶体流动速率仪.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-8eabd69844ab6ab91f02",
+      "bundle_title": "泰昌熔体流动速率仪试验设备及校准资料",
+      "component": "熔体流动速率仪",
+      "global_order": 7,
+      "page_no": 7,
+      "asset_id": "0fc45d3e-bddf-47eb-8a6a-1124bf62169c",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/5.溶体流动速率仪/溶体流动速率仪.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-f0f800fd3a615899dbfd",
+      "bundle_title": "泰昌电子天平试验设备及校准资料",
+      "component": "电子天平",
+      "global_order": 1,
+      "page_no": 1,
+      "asset_id": "29f3feff-babe-4a64-b20e-a93bdc6bd5fb",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/3.电子天平/电子天平.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-f0f800fd3a615899dbfd",
+      "bundle_title": "泰昌电子天平试验设备及校准资料",
+      "component": "电子天平",
+      "global_order": 2,
+      "page_no": 2,
+      "asset_id": "59222ca7-8321-4a09-b955-c2f4af14d0af",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/3.电子天平/电子天平.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-f0f800fd3a615899dbfd",
+      "bundle_title": "泰昌电子天平试验设备及校准资料",
+      "component": "电子天平",
+      "global_order": 3,
+      "page_no": 3,
+      "asset_id": "04e064b8-a41f-4f0d-a8a7-44c1ed545585",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/3.电子天平/电子天平.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-f0f800fd3a615899dbfd",
+      "bundle_title": "泰昌电子天平试验设备及校准资料",
+      "component": "电子天平",
+      "global_order": 4,
+      "page_no": 4,
+      "asset_id": "4c8e0c13-0f46-49b0-aef3-6b3883bde22e",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/3.电子天平/电子天平.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-f0f800fd3a615899dbfd",
+      "bundle_title": "泰昌电子天平试验设备及校准资料",
+      "component": "电子天平",
+      "global_order": 5,
+      "page_no": 5,
+      "asset_id": "5c875dcd-e440-41d1-b0c1-4f152b5ed345",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/3.电子天平/电子天平.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-f0f800fd3a615899dbfd",
+      "bundle_title": "泰昌电子天平试验设备及校准资料",
+      "component": "电子天平",
+      "global_order": 6,
+      "page_no": 6,
+      "asset_id": "85b728df-d209-45b5-ad31-56b2eba17362",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/3.电子天平/电子天平.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-96036c84ed4ce31e0ad4",
+      "bundle_title": "泰昌电子拉力试验机试验设备及校准资料",
+      "component": "电子拉力试验机",
+      "global_order": 1,
+      "page_no": 1,
+      "asset_id": "e9156fac-7431-4cab-b80d-4d9259234ccc",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-96036c84ed4ce31e0ad4",
+      "bundle_title": "泰昌电子拉力试验机试验设备及校准资料",
+      "component": "电子拉力试验机",
+      "global_order": 2,
+      "page_no": 2,
+      "asset_id": "10c59a5f-d87f-4077-9776-70b45dede0ca",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-96036c84ed4ce31e0ad4",
+      "bundle_title": "泰昌电子拉力试验机试验设备及校准资料",
+      "component": "电子拉力试验机",
+      "global_order": 3,
+      "page_no": 3,
+      "asset_id": "a9b16fff-190c-48f1-9148-b2f4131c1865",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-96036c84ed4ce31e0ad4",
+      "bundle_title": "泰昌电子拉力试验机试验设备及校准资料",
+      "component": "电子拉力试验机",
+      "global_order": 4,
+      "page_no": 4,
+      "asset_id": "9552f744-1f6d-450f-8f6c-2c929f30cf10",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-96036c84ed4ce31e0ad4",
+      "bundle_title": "泰昌电子拉力试验机试验设备及校准资料",
+      "component": "电子拉力试验机",
+      "global_order": 5,
+      "page_no": 5,
+      "asset_id": "bf144d68-8bae-417b-81d2-3b9593d6ae84",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-96036c84ed4ce31e0ad4",
+      "bundle_title": "泰昌电子拉力试验机试验设备及校准资料",
+      "component": "电子拉力试验机",
+      "global_order": 6,
+      "page_no": 6,
+      "asset_id": "a2c9b254-8ef7-4b8b-a2ea-a11e0cea77f1",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-96036c84ed4ce31e0ad4",
+      "bundle_title": "泰昌电子拉力试验机试验设备及校准资料",
+      "component": "电子拉力试验机",
+      "global_order": 7,
+      "page_no": 7,
+      "asset_id": "c739b596-0d4d-40db-accf-c92875bfa6e0",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-96036c84ed4ce31e0ad4",
+      "bundle_title": "泰昌电子拉力试验机试验设备及校准资料",
+      "component": "电子拉力试验机",
+      "global_order": 8,
+      "page_no": 8,
+      "asset_id": "8dfb4f43-153b-4205-9583-4ca3770d83c7",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/6.电子拉力试验机/电子拉力试验机.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-2bf8bf27b27d8ce407cc",
+      "bundle_title": "泰昌锤击试验装置试验设备及校准资料",
+      "component": "锤击试验装置",
+      "global_order": 1,
+      "page_no": 1,
+      "asset_id": "a137ead8-a37a-4421-bb69-32ee4a781d99",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/4.锤击试验装置/锤击试验装置.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-2bf8bf27b27d8ce407cc",
+      "bundle_title": "泰昌锤击试验装置试验设备及校准资料",
+      "component": "锤击试验装置",
+      "global_order": 2,
+      "page_no": 2,
+      "asset_id": "bca54cc5-14af-477f-b88e-97832b51e615",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/4.锤击试验装置/锤击试验装置.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-2bf8bf27b27d8ce407cc",
+      "bundle_title": "泰昌锤击试验装置试验设备及校准资料",
+      "component": "锤击试验装置",
+      "global_order": 3,
+      "page_no": 3,
+      "asset_id": "661c1e8b-7b37-4557-928e-86f92ddac57b",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/4.锤击试验装置/锤击试验装置.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-2bf8bf27b27d8ce407cc",
+      "bundle_title": "泰昌锤击试验装置试验设备及校准资料",
+      "component": "锤击试验装置",
+      "global_order": 4,
+      "page_no": 4,
+      "asset_id": "f10b839b-85db-4f06-9b04-5c0b485fc4a8",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/4.锤击试验装置/锤击试验装置.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-2bf8bf27b27d8ce407cc",
+      "bundle_title": "泰昌锤击试验装置试验设备及校准资料",
+      "component": "锤击试验装置",
+      "global_order": 5,
+      "page_no": 5,
+      "asset_id": "c6dd8d55-a7ea-478a-949b-78e041f44120",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/4.锤击试验装置/锤击试验装置.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-2bf8bf27b27d8ce407cc",
+      "bundle_title": "泰昌锤击试验装置试验设备及校准资料",
+      "component": "锤击试验装置",
+      "global_order": 6,
+      "page_no": 6,
+      "asset_id": "e7eec5ff-6d29-4e8f-a35e-82bae35b29f9",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/4.锤击试验装置/锤击试验装置.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-2bf8bf27b27d8ce407cc",
+      "bundle_title": "泰昌锤击试验装置试验设备及校准资料",
+      "component": "锤击试验装置",
+      "global_order": 7,
+      "page_no": 7,
+      "asset_id": "e58ae78c-e53a-411f-84a5-a29f0bc2dcc1",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/4.锤击试验装置/锤击试验装置.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-2bf8bf27b27d8ce407cc",
+      "bundle_title": "泰昌锤击试验装置试验设备及校准资料",
+      "component": "锤击试验装置",
+      "global_order": 8,
+      "page_no": 8,
+      "asset_id": "aa621b14-530f-4120-b25e-683242588b41",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/5试验检测/1.试验检测设备一览表/4.锤击试验装置/锤击试验装置.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5233af6e2133a8e25641",
+      "bundle_title": "泰昌MPP电缆保护管检验报告",
+      "component": "primary",
+      "global_order": 1,
+      "page_no": 1,
+      "asset_id": "39eed227-992a-4e19-a09b-27bcb926e665",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5233af6e2133a8e25641",
+      "bundle_title": "泰昌MPP电缆保护管检验报告",
+      "component": "primary",
+      "global_order": 2,
+      "page_no": 2,
+      "asset_id": "25dcd2c9-f919-4321-b71f-18a357e45c02",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5233af6e2133a8e25641",
+      "bundle_title": "泰昌MPP电缆保护管检验报告",
+      "component": "primary",
+      "global_order": 3,
+      "page_no": 3,
+      "asset_id": "048b1963-fb91-49f4-99e0-ee282ca1eb7d",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5233af6e2133a8e25641",
+      "bundle_title": "泰昌MPP电缆保护管检验报告",
+      "component": "primary",
+      "global_order": 4,
+      "page_no": 4,
+      "asset_id": "e78d53b1-d2f3-471f-90e9-b7bd9c11c128",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-5233af6e2133a8e25641",
+      "bundle_title": "泰昌MPP电缆保护管检验报告",
+      "component": "primary",
+      "global_order": 5,
+      "page_no": 5,
+      "asset_id": "25c462a6-1085-4f6d-8703-b39aa573575d",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-4c9d64c00d89cb7b78f2",
+      "bundle_title": "泰昌CPVC电缆保护管检验报告",
+      "component": "primary",
+      "global_order": 1,
+      "page_no": 1,
+      "asset_id": "9784a2d3-ad13-467e-acc8-c5848109a797",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/CPVC电缆保护管检验报告内径250.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-4c9d64c00d89cb7b78f2",
+      "bundle_title": "泰昌CPVC电缆保护管检验报告",
+      "component": "primary",
+      "global_order": 2,
+      "page_no": 2,
+      "asset_id": "f0fd8c37-1d9c-49f7-86f4-78d24302b5a0",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/CPVC电缆保护管检验报告内径250.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-4c9d64c00d89cb7b78f2",
+      "bundle_title": "泰昌CPVC电缆保护管检验报告",
+      "component": "primary",
+      "global_order": 3,
+      "page_no": 3,
+      "asset_id": "7dc74695-2594-4888-b845-af5bd3130ae6",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/CPVC电缆保护管检验报告内径250.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-4c9d64c00d89cb7b78f2",
+      "bundle_title": "泰昌CPVC电缆保护管检验报告",
+      "component": "primary",
+      "global_order": 4,
+      "page_no": 4,
+      "asset_id": "f7a3c80a-1dbe-4227-a778-2f9c0d503c6e",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/CPVC电缆保护管检验报告内径250.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-4c9d64c00d89cb7b78f2",
+      "bundle_title": "泰昌CPVC电缆保护管检验报告",
+      "component": "primary",
+      "global_order": 5,
+      "page_no": 5,
+      "asset_id": "53f279bf-a9e7-49ee-afbb-350185ecbf60",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/CPVC电缆保护管检验报告内径250.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-792812eabf8d9567854f",
+      "bundle_title": "泰昌环境管理体系认证证书",
+      "component": "primary",
+      "global_order": 1,
+      "page_no": 1,
+      "asset_id": "643e1f3b-9280-4a78-bcc1-d74b8c0d6621",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/2.环境管理体系认证证书.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-792812eabf8d9567854f",
+      "bundle_title": "泰昌环境管理体系认证证书",
+      "component": "primary",
+      "global_order": 2,
+      "page_no": 2,
+      "asset_id": "37819959-e15a-4958-8503-70697b0c1d90",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/2.环境管理体系认证证书.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68219d67c5feb3ed96a4",
+      "bundle_title": "泰昌职业健康安全管理体系认证证书",
+      "component": "primary",
+      "global_order": 1,
+      "page_no": 1,
+      "asset_id": "9fa04255-0511-407e-b5f5-9f356e1386f2",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/3.职业健康安全管理体系认证证书.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68219d67c5feb3ed96a4",
+      "bundle_title": "泰昌职业健康安全管理体系认证证书",
+      "component": "primary",
+      "global_order": 2,
+      "page_no": 2,
+      "asset_id": "611602d0-36e3-4513-aef8-df25744da7a5",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/3.职业健康安全管理体系认证证书.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68219d67c5feb3ed96a4",
+      "bundle_title": "泰昌职业健康安全管理体系认证证书",
+      "component": "primary",
+      "global_order": 3,
+      "page_no": 3,
+      "asset_id": "f49aba7e-2ab6-4bf7-8f9d-f4985c064692",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/3.职业健康安全管理体系认证证书.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-c37bef6d5bdbe4f32cb1",
+      "bundle_title": "泰昌质量管理体系认证证书",
+      "component": "primary",
+      "global_order": 1,
+      "page_no": 1,
+      "asset_id": "3e36b7f3-3a10-4c58-9cb8-56c59a21ebfc",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/1.质量管理体系认证证书.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-c37bef6d5bdbe4f32cb1",
+      "bundle_title": "泰昌质量管理体系认证证书",
+      "component": "primary",
+      "global_order": 2,
+      "page_no": 2,
+      "asset_id": "e014f9df-2d49-4415-a8cc-dde768690a2b",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/1.质量管理体系认证证书.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-c37bef6d5bdbe4f32cb1",
+      "bundle_title": "泰昌质量管理体系认证证书",
+      "component": "primary",
+      "global_order": 3,
+      "page_no": 3,
+      "asset_id": "e3ffa072-d458-41d8-9714-74953f735593",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/1.质量管理体系认证证书.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68f40342eb06721cacc8",
+      "bundle_title": "泰昌国网天津2022年电缆保护管项目业绩",
+      "component": "中标通知书",
+      "global_order": 1,
+      "page_no": 1,
+      "asset_id": "6bde9fe2-ce32-4e2c-9cbc-9fd4696de3d2",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/38中标通知书整页扫描件/157-保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68f40342eb06721cacc8",
+      "bundle_title": "泰昌国网天津2022年电缆保护管项目业绩",
+      "component": "中标通知书",
+      "global_order": 2,
+      "page_no": 2,
+      "asset_id": "ee3b0a64-4152-4bc1-9643-62c3873c4979",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/38中标通知书整页扫描件/157-保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68f40342eb06721cacc8",
+      "bundle_title": "泰昌国网天津2022年电缆保护管项目业绩",
+      "component": "供货合同",
+      "global_order": 3,
+      "page_no": 1,
+      "asset_id": "53fe3267-f655-45cf-98b3-50cb2a065af6",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/37同类产品供货合同关键页整页扫描件/TJ20220002363合同协议书（双方已签章）.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68f40342eb06721cacc8",
+      "bundle_title": "泰昌国网天津2022年电缆保护管项目业绩",
+      "component": "供货合同",
+      "global_order": 4,
+      "page_no": 2,
+      "asset_id": "1934e0a2-9328-42eb-b983-6f9ac6df0ac2",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/37同类产品供货合同关键页整页扫描件/TJ20220002363合同协议书（双方已签章）.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68f40342eb06721cacc8",
+      "bundle_title": "泰昌国网天津2022年电缆保护管项目业绩",
+      "component": "供货合同",
+      "global_order": 5,
+      "page_no": 3,
+      "asset_id": "be020f97-fe2f-4ada-86c3-1784eff92365",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/37同类产品供货合同关键页整页扫描件/TJ20220002363合同协议书（双方已签章）.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68f40342eb06721cacc8",
+      "bundle_title": "泰昌国网天津2022年电缆保护管项目业绩",
+      "component": "供货合同",
+      "global_order": 6,
+      "page_no": 4,
+      "asset_id": "3db01174-ea08-44e9-a32d-4a219daec403",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/37同类产品供货合同关键页整页扫描件/TJ20220002363合同协议书（双方已签章）.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68f40342eb06721cacc8",
+      "bundle_title": "泰昌国网天津2022年电缆保护管项目业绩",
+      "component": "供货合同",
+      "global_order": 7,
+      "page_no": 5,
+      "asset_id": "76637719-343c-42bc-9bfa-e20f50bb7441",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/37同类产品供货合同关键页整页扫描件/TJ20220002363合同协议书（双方已签章）.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68f40342eb06721cacc8",
+      "bundle_title": "泰昌国网天津2022年电缆保护管项目业绩",
+      "component": "供货合同",
+      "global_order": 8,
+      "page_no": 6,
+      "asset_id": "d917bbd3-63d6-4bd9-832c-761823baf7e4",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/37同类产品供货合同关键页整页扫描件/TJ20220002363合同协议书（双方已签章）.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68f40342eb06721cacc8",
+      "bundle_title": "泰昌国网天津2022年电缆保护管项目业绩",
+      "component": "供货合同",
+      "global_order": 9,
+      "page_no": 7,
+      "asset_id": "97e2716b-f3db-48e7-8885-f5b35505352a",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/37同类产品供货合同关键页整页扫描件/TJ20220002363合同协议书（双方已签章）.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68f40342eb06721cacc8",
+      "bundle_title": "泰昌国网天津2022年电缆保护管项目业绩",
+      "component": "供货合同",
+      "global_order": 10,
+      "page_no": 8,
+      "asset_id": "ac382931-3e2f-4d77-9306-024c8262e9d3",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/37同类产品供货合同关键页整页扫描件/TJ20220002363合同协议书（双方已签章）.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68f40342eb06721cacc8",
+      "bundle_title": "泰昌国网天津2022年电缆保护管项目业绩",
+      "component": "供货合同",
+      "global_order": 11,
+      "page_no": 9,
+      "asset_id": "0101599f-c7ab-44bd-9e2d-7024a2f8acc0",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/37同类产品供货合同关键页整页扫描件/TJ20220002363合同协议书（双方已签章）.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68f40342eb06721cacc8",
+      "bundle_title": "泰昌国网天津2022年电缆保护管项目业绩",
+      "component": "供货合同",
+      "global_order": 12,
+      "page_no": 10,
+      "asset_id": "70f8c8d6-de6f-447b-91ee-1f192f958fb8",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/37同类产品供货合同关键页整页扫描件/TJ20220002363合同协议书（双方已签章）.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68f40342eb06721cacc8",
+      "bundle_title": "泰昌国网天津2022年电缆保护管项目业绩",
+      "component": "供货合同",
+      "global_order": 13,
+      "page_no": 11,
+      "asset_id": "fff62a89-d252-4ebd-9ffa-8e6223a1c0fc",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/37同类产品供货合同关键页整页扫描件/TJ20220002363合同协议书（双方已签章）.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68f40342eb06721cacc8",
+      "bundle_title": "泰昌国网天津2022年电缆保护管项目业绩",
+      "component": "供货合同",
+      "global_order": 14,
+      "page_no": 12,
+      "asset_id": "84f7a1b2-05d3-4f7b-bf0e-e6fc0dabea51",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/37同类产品供货合同关键页整页扫描件/TJ20220002363合同协议书（双方已签章）.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68f40342eb06721cacc8",
+      "bundle_title": "泰昌国网天津2022年电缆保护管项目业绩",
+      "component": "供货合同",
+      "global_order": 15,
+      "page_no": 13,
+      "asset_id": "f340d05f-4f6d-494a-ba0e-d33e0d8b6692",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/37同类产品供货合同关键页整页扫描件/TJ20220002363合同协议书（双方已签章）.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68f40342eb06721cacc8",
+      "bundle_title": "泰昌国网天津2022年电缆保护管项目业绩",
+      "component": "供货合同",
+      "global_order": 16,
+      "page_no": 14,
+      "asset_id": "8e8b12f5-c3d5-401e-920c-c84a262a7a5b",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/37同类产品供货合同关键页整页扫描件/TJ20220002363合同协议书（双方已签章）.pdf",
+      "page_available": true
+    },
+    {
+      "evidence_bundle_id": "taichang-evidence-68f40342eb06721cacc8",
+      "bundle_title": "泰昌国网天津2022年电缆保护管项目业绩",
+      "component": "供货合同",
+      "global_order": 17,
+      "page_no": 15,
+      "asset_id": "2c918f6d-aa3a-4ed0-88b7-a490f554eb54",
+      "source_file": "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/37同类产品供货合同关键页整页扫描件/TJ20220002363合同协议书（双方已签章）.pdf",
+      "page_available": true
+    }
+  ],
+  "gaps": [
+    {
+      "evidence_type": "prequalification_result",
+      "evidence_type_label": "资格预审结果",
+      "status": "missing_original_evidence",
+      "action": "待客户提供原始资格预审结果文件后再建证据包；历史 Word 页面不得替代原始证据"
+    }
+  ]
+}

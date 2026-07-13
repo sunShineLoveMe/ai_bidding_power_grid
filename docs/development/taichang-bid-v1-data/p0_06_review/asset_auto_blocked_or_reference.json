@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "schema_version": "taichang_p0_06_review_v1",
-    "generated_at": "2026-07-13T18:02:54.646788+08:00",
+    "schema_version": "taichang_p0_06_review_v2",
+    "generated_at": "2026-07-13T21:41:27.569673+08:00",
     "enterprise": "河北泰昌电力器材科技有限公司",
     "pilot_only": true,
     "read_only": true,
@@ -9,19 +9,26 @@
     "rag_updated": false,
     "docx_selection_updated": false,
     "candidate_count": 896,
-    "review_candidate_count": 461,
-    "review_group_count": 65,
-    "auto_blocked_or_reference_count": 435,
-    "approved_decision_count": 0,
-    "ready_for_ingestion_count": 0,
+    "source_authorized_count": 896,
+    "original_review_queue_count": 461,
+    "policy_auto_accepted_count": 169,
+    "review_candidate_count": 290,
+    "review_group_count": 60,
+    "auto_blocked_or_reference_count": 437,
+    "auto_linked_existing_count": 272,
+    "human_approved_decision_count": 0,
+    "approved_decision_count": 169,
+    "ready_for_ingestion_count": 169,
     "validation_error_count": 0,
-    "decision_counts": {},
+    "decision_counts": {
+      "系统自动接收为知识资料": 169
+    },
     "input_sha256": {
       "docs/development/taichang-bid-v1-data/asset_classification_matrix.json": "4d1f3485049f4d7c17366dd13183a51aa6b290b3ecf707d7dcccd4c71abf632d",
       "docs/development/taichang-bid-v1-data/asset_review_queue.json": "ac33f25a99fa61fceb2df59ebd5635caf537fffbace35b3bc3c37aa85e3b39aa"
     },
     "artifact_role": "automatic_block_or_reference",
-    "record_count": 435
+    "record_count": 437
   },
   "records": [
     {
@@ -800,8 +807,8 @@
       "title": "泰昌产品参数表历史候选第4页",
       "evidence_type_label": "产品参数表",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -812,8 +819,8 @@
       "title": "泰昌企业证明材料历史候选第1页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -824,8 +831,8 @@
       "title": "泰昌企业证明材料历史候选第7页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -836,8 +843,8 @@
       "title": "泰昌企业证明材料历史候选第13页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -848,8 +855,8 @@
       "title": "泰昌企业证明材料历史候选第13页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -860,8 +867,8 @@
       "title": "泰昌项目业绩历史候选第15页",
       "evidence_type_label": "项目业绩",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -872,8 +879,8 @@
       "title": "泰昌财务资料历史候选第65页",
       "evidence_type_label": "财务资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -884,8 +891,8 @@
       "title": "泰昌绿色低碳资料历史候选第92页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -896,8 +903,8 @@
       "title": "泰昌绿色低碳资料历史候选第92页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -908,8 +915,8 @@
       "title": "泰昌绿色低碳资料历史候选第92页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -920,8 +927,8 @@
       "title": "泰昌绿色低碳资料历史候选第92页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -932,8 +939,8 @@
       "title": "泰昌绿色低碳资料历史候选第92页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -944,8 +951,8 @@
       "title": "泰昌绿色低碳资料历史候选第92页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -956,8 +963,8 @@
       "title": "泰昌绿色低碳资料历史候选第92页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -968,8 +975,8 @@
       "title": "泰昌绿色低碳资料历史候选第92页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -980,8 +987,8 @@
       "title": "泰昌绿色低碳资料历史候选第92页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -992,8 +999,8 @@
       "title": "泰昌绿色低碳资料历史候选第92页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1004,8 +1011,8 @@
       "title": "泰昌绿色低碳资料历史候选第92页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1016,8 +1023,8 @@
       "title": "泰昌绿色低碳资料历史候选第92页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1028,8 +1035,8 @@
       "title": "泰昌绿色低碳资料历史候选第92页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1040,8 +1047,8 @@
       "title": "泰昌绿色低碳资料历史候选第92页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1052,8 +1059,8 @@
       "title": "泰昌绿色低碳资料历史候选第92页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1064,8 +1071,8 @@
       "title": "泰昌绿色低碳资料历史候选第92页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1076,8 +1083,8 @@
       "title": "泰昌绿色低碳资料历史候选第92页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1088,8 +1095,8 @@
       "title": "泰昌绿色低碳资料历史候选第92页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1100,8 +1107,8 @@
       "title": "泰昌资质证书历史候选第110页",
       "evidence_type_label": "资质证书",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1112,8 +1119,8 @@
       "title": "泰昌资质证书历史候选第110页",
       "evidence_type_label": "资质证书",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1124,8 +1131,8 @@
       "title": "泰昌资质证书历史候选第113页",
       "evidence_type_label": "资质证书",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1136,8 +1143,8 @@
       "title": "泰昌资质证书历史候选第113页",
       "evidence_type_label": "资质证书",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1148,8 +1155,8 @@
       "title": "泰昌资质证书历史候选第113页",
       "evidence_type_label": "资质证书",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1160,8 +1167,8 @@
       "title": "泰昌资质证书历史候选第116页",
       "evidence_type_label": "资质证书",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1172,8 +1179,8 @@
       "title": "泰昌资质证书历史候选第116页",
       "evidence_type_label": "资质证书",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1184,8 +1191,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1196,8 +1203,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1208,8 +1215,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1220,8 +1227,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1232,8 +1239,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1244,8 +1251,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1256,8 +1263,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1268,8 +1275,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1280,8 +1287,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1292,8 +1299,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1304,8 +1311,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1316,8 +1323,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1328,8 +1335,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1340,8 +1347,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1352,8 +1359,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1364,8 +1371,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1376,8 +1383,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1388,8 +1395,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1400,8 +1407,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1412,8 +1419,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1424,8 +1431,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1436,8 +1443,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1448,8 +1455,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1460,8 +1467,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1472,8 +1479,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1484,8 +1491,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1496,8 +1503,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1508,8 +1515,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1520,8 +1527,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1532,8 +1539,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1544,8 +1551,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1556,8 +1563,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1568,8 +1575,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1580,8 +1587,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1592,8 +1599,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1604,8 +1611,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1616,8 +1623,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1628,8 +1635,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1640,8 +1647,8 @@
       "title": "泰昌绿色低碳资料历史候选第117页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1652,8 +1659,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1664,8 +1671,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1676,8 +1683,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1688,8 +1695,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1700,8 +1707,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1712,8 +1719,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1724,8 +1731,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1736,8 +1743,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1748,8 +1755,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1760,8 +1767,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1772,8 +1779,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1784,8 +1791,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1796,8 +1803,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1808,8 +1815,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1820,8 +1827,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1832,8 +1839,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1844,8 +1851,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1856,8 +1863,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1868,8 +1875,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1880,8 +1887,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1892,8 +1899,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1904,8 +1911,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1916,8 +1923,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1928,8 +1935,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1940,8 +1947,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1952,8 +1959,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1964,8 +1971,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1976,8 +1983,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -1988,8 +1995,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2000,8 +2007,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2012,8 +2019,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2024,8 +2031,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2036,8 +2043,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2048,8 +2055,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2060,8 +2067,8 @@
       "title": "泰昌绿色低碳资料历史候选第157页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2072,8 +2079,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2084,8 +2091,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2096,8 +2103,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2108,8 +2115,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2120,8 +2127,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2132,8 +2139,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2144,8 +2151,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2156,8 +2163,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2168,8 +2175,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2180,8 +2187,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2192,8 +2199,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2204,8 +2211,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2216,8 +2223,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2228,8 +2235,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2240,8 +2247,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2252,8 +2259,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2264,8 +2271,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2276,8 +2283,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2288,8 +2295,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2300,8 +2307,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2312,8 +2319,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2324,8 +2331,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2336,8 +2343,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2348,8 +2355,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2360,8 +2367,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2372,8 +2379,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2384,8 +2391,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2396,8 +2403,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2408,8 +2415,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2420,8 +2427,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2432,8 +2439,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2444,8 +2451,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2456,8 +2463,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2468,8 +2475,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2480,8 +2487,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2492,8 +2499,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2504,8 +2511,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2516,8 +2523,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2528,8 +2535,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2540,8 +2547,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2552,8 +2559,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2564,8 +2571,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2576,8 +2583,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2588,8 +2595,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2600,8 +2607,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2612,8 +2619,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2624,8 +2631,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2636,8 +2643,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2648,8 +2655,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2660,8 +2667,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2672,8 +2679,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2684,8 +2691,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2696,8 +2703,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2708,8 +2715,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2720,8 +2727,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2732,8 +2739,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2744,8 +2751,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2756,8 +2763,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2768,8 +2775,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2780,8 +2787,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2792,8 +2799,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2804,8 +2811,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2816,8 +2823,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2828,8 +2835,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2840,8 +2847,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2852,8 +2859,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2864,8 +2871,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2876,8 +2883,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2888,8 +2895,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2900,8 +2907,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2912,8 +2919,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2924,8 +2931,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2936,8 +2943,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2948,8 +2955,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2960,8 +2967,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2972,8 +2979,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2984,8 +2991,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -2996,8 +3003,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3008,8 +3015,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3020,8 +3027,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3032,8 +3039,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3044,8 +3051,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3056,8 +3063,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3068,8 +3075,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3080,8 +3087,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3092,8 +3099,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3104,8 +3111,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3116,8 +3123,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3128,8 +3135,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3140,8 +3147,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3152,8 +3159,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3164,8 +3171,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3176,8 +3183,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3188,8 +3195,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3200,8 +3207,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3212,8 +3219,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3224,8 +3231,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3236,8 +3243,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3248,8 +3255,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3260,8 +3267,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3272,8 +3279,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3284,8 +3291,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3296,8 +3303,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3308,8 +3315,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3320,8 +3327,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3332,8 +3339,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3344,8 +3351,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3356,8 +3363,8 @@
       "title": "泰昌绿色低碳资料历史候选第191页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3368,8 +3375,8 @@
       "title": "泰昌资质证书历史候选第281页",
       "evidence_type_label": "资质证书",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3380,8 +3387,8 @@
       "title": "泰昌资质证书历史候选第283页",
       "evidence_type_label": "资质证书",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3392,8 +3399,8 @@
       "title": "泰昌绿色低碳资料历史候选第284页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3404,8 +3411,8 @@
       "title": "泰昌绿色低碳资料历史候选第284页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3416,8 +3423,8 @@
       "title": "泰昌绿色低碳资料历史候选第284页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3428,8 +3435,8 @@
       "title": "泰昌绿色低碳资料历史候选第286页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3440,8 +3447,8 @@
       "title": "泰昌绿色低碳资料历史候选第286页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3452,8 +3459,8 @@
       "title": "泰昌绿色低碳资料历史候选第286页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3464,8 +3471,8 @@
       "title": "泰昌绿色低碳资料历史候选第286页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3476,8 +3483,8 @@
       "title": "泰昌绿色低碳资料历史候选第286页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3488,8 +3495,8 @@
       "title": "泰昌绿色低碳资料历史候选第286页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3500,8 +3507,8 @@
       "title": "泰昌绿色低碳资料历史候选第286页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3512,8 +3519,8 @@
       "title": "泰昌绿色低碳资料历史候选第286页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3524,8 +3531,8 @@
       "title": "泰昌绿色低碳资料历史候选第286页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3536,8 +3543,8 @@
       "title": "泰昌绿色低碳资料历史候选第286页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3548,8 +3555,8 @@
       "title": "泰昌绿色低碳资料历史候选第286页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3560,8 +3567,8 @@
       "title": "泰昌绿色低碳资料历史候选第286页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3572,8 +3579,8 @@
       "title": "泰昌绿色低碳资料历史候选第286页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3584,8 +3591,8 @@
       "title": "泰昌绿色低碳资料历史候选第286页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3596,8 +3603,8 @@
       "title": "泰昌绿色低碳资料历史候选第286页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3608,8 +3615,8 @@
       "title": "泰昌绿色低碳资料历史候选第286页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3620,8 +3627,8 @@
       "title": "泰昌绿色低碳资料历史候选第286页",
       "evidence_type_label": "绿色低碳资料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3632,8 +3639,8 @@
       "title": "泰昌企业证明材料历史候选第303页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3644,8 +3651,8 @@
       "title": "泰昌企业证明材料历史候选第303页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3656,8 +3663,8 @@
       "title": "泰昌企业证明材料历史候选第303页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3668,8 +3675,8 @@
       "title": "泰昌企业证明材料历史候选第303页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3680,8 +3687,8 @@
       "title": "泰昌企业证明材料历史候选第303页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3692,8 +3699,8 @@
       "title": "泰昌企业证明材料历史候选第303页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3704,8 +3711,8 @@
       "title": "泰昌企业证明材料历史候选第303页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3716,8 +3723,8 @@
       "title": "泰昌企业证明材料历史候选第303页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3728,8 +3735,8 @@
       "title": "泰昌企业证明材料历史候选第303页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3740,8 +3747,8 @@
       "title": "泰昌企业证明材料历史候选第303页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3752,8 +3759,8 @@
       "title": "泰昌企业证明材料历史候选第303页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3764,8 +3771,8 @@
       "title": "泰昌企业证明材料历史候选第303页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3776,8 +3783,8 @@
       "title": "泰昌企业证明材料历史候选第318页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -3788,8 +3795,8 @@
       "title": "泰昌企业证明材料历史候选第321页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -4784,8 +4791,8 @@
       "title": "泰昌产品参数表历史候选第7页",
       "evidence_type_label": "产品参数表",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -4856,8 +4863,8 @@
       "title": "泰昌产品参数表历史候选第13页",
       "evidence_type_label": "产品参数表",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -4892,8 +4899,8 @@
       "title": "泰昌产品参数表历史候选第318页",
       "evidence_type_label": "产品参数表",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -4928,8 +4935,32 @@
       "title": "泰昌产品参数表历史候选第327页",
       "evidence_type_label": "产品参数表",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
+      "ready_for_ingestion": false
+    },
+    {
+      "candidate_id": "technical-fact-0029",
+      "source_document_name": "泰昌技术补充文件",
+      "source_page": 329,
+      "source_section": "（二）专项投标文件/12.检测检验报告（包括型式试验报告、检测报告、鉴定报告、检定报告、校准证书或报告、检测试验报告等相关报告）/12.1.检测报告",
+      "title": "泰昌检验报告历史候选第329页",
+      "evidence_type_label": "检验报告",
+      "dedup_status_label": "同一证据的不同载体",
+      "disposition": "关联同一证据包",
+      "reason": "已确认属于既有报告的不同载体，不建立第二个业务主记录",
+      "ready_for_ingestion": false
+    },
+    {
+      "candidate_id": "technical-fact-0031",
+      "source_document_name": "泰昌技术补充文件",
+      "source_page": 329,
+      "source_section": "（二）专项投标文件/12.检测检验报告（包括型式试验报告、检测报告、鉴定报告、检定报告、校准证书或报告、检测试验报告等相关报告）/12.1.检测报告",
+      "title": "泰昌检验报告历史候选第329页",
+      "evidence_type_label": "检验报告",
+      "dedup_status_label": "同一证据的不同载体",
+      "disposition": "关联同一证据包",
+      "reason": "已确认属于既有报告的不同载体，不建立第二个业务主记录",
       "ready_for_ingestion": false
     },
     {
@@ -4940,8 +4971,8 @@
       "title": "泰昌试验检测能力历史候选第350页",
       "evidence_type_label": "试验检测能力",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -4952,8 +4983,8 @@
       "title": "泰昌试验检测能力历史候选第350页",
       "evidence_type_label": "试验检测能力",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -4964,8 +4995,8 @@
       "title": "泰昌试验检测能力历史候选第353页",
       "evidence_type_label": "试验检测能力",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -4976,8 +5007,8 @@
       "title": "泰昌试验检测能力历史候选第356页",
       "evidence_type_label": "试验检测能力",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -4988,8 +5019,8 @@
       "title": "泰昌试验检测能力历史候选第362页",
       "evidence_type_label": "试验检测能力",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -5000,8 +5031,8 @@
       "title": "泰昌试验检测能力历史候选第365页",
       "evidence_type_label": "试验检测能力",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -5012,8 +5043,8 @@
       "title": "泰昌项目业绩历史候选第13页",
       "evidence_type_label": "项目业绩",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -5024,8 +5055,8 @@
       "title": "泰昌企业证明材料历史候选第50页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -5036,8 +5067,8 @@
       "title": "泰昌企业证明材料历史候选第308页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -5048,8 +5079,8 @@
       "title": "泰昌企业证明材料历史候选第314页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -5060,8 +5091,8 @@
       "title": "泰昌企业证明材料历史候选第316页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -5072,8 +5103,8 @@
       "title": "泰昌企业证明材料历史候选第317页",
       "evidence_type_label": "企业证明材料",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -5084,8 +5115,8 @@
       "title": "泰昌检验报告历史候选第331页",
       "evidence_type_label": "检验报告",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -5096,8 +5127,8 @@
       "title": "泰昌检验报告历史候选第331页",
       "evidence_type_label": "检验报告",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -5108,8 +5139,8 @@
       "title": "泰昌检验报告历史候选第336页",
       "evidence_type_label": "检验报告",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
@@ -5120,8 +5151,8 @@
       "title": "泰昌检验报告历史候选第336页",
       "evidence_type_label": "检验报告",
       "dedup_status_label": "精确重复，不新增",
-      "disposition": "禁止新增",
-      "reason": "与现有数字资产精确重复",
+      "disposition": "关联已有资产",
+      "reason": "与现有数字资产精确重复，无需再次入库",
       "ready_for_ingestion": false
     },
     {
