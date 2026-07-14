@@ -1,6 +1,6 @@
 # 泰昌正式资料资产中文化与标书配图质量治理待办
 
-> 状态日期：2026-07-13
+> 状态日期：2026-07-14
 > 适用范围：泰昌企业事实资料、企业知识库、产品库、资信库、图片资产、RAG 问答、正式 DOCX 导出、阿里云线上环境。
 
 ## 背景与目标
@@ -39,6 +39,7 @@
 | [~] | P0-06 分级自动接收、异常复核与增量入库批准 | `scripts/rag/prepare_taichang_p0_06_asset_review.py`、`docs/development/taichang-bid-v1-data/p0_06_review/泰昌历史标书资产增量入库审批表.xlsx`、自动接收/异常复核/关联阻断/批准清单、`docs/rag/runs/run_20260713_taichang_p0_06_tiered_acceptance_summary.md` | 客户主动提供两份历史标书视为来源处理授权：896 条分流为低风险知识资料自动接收 169、异常复核 290（60 个证据组）、自动关联/阻断/仅参考 437；策略批准和可进入提取校验流程均为 169，人工批准为 0。P1-01 已进一步以真实库重去重和质量校验，实际新增 133 条 `knowledge_only`，36 条因已有证据、视觉重复/疑似重复或低质量未入库；剩余 290 条异常项继续人工复核 |
 | [x] | P1-01 历史标书低风险资产实际提取、去重与增量入库 | `scripts/rag/ingest_taichang_historical_bid_assets.py`、`scripts/rag/extract_taichang_historical_bid_tables.py`、`docs/development/taichang-bid-v1-data/p1_01_ingestion/`、`docs/rag/runs/run_20260713_taichang_p1_01_historical_bid_ingestion_summary.md` | 169 个媒体全部提取；133 个真实写库并有 embedding，5 个同证据、2 个视觉重复、24 个视觉疑似、5 个低质量未入库；第二次执行新增 0；全部排除正式标书和参数事实层；技术表 20 行单位保真，Base+泰昌最终门禁、真实 stream、后端 413 项测试通过 |
 | [x] | P1-02 文件级证据包 | `scripts/rag/build_taichang_evidence_bundles.py`、`docs/development/taichang-bid-v1-data/p1_02_evidence_bundles/`、`docs/rag/runs/run_20260713_taichang_p1_02_evidence_bundles_summary.md` | 基于真实 PostgreSQL 599 个现有资产重建 16 个业务证据包、149 页，页序完整、缺页 0、重页 0；21 个重复 PDF/关键页图仅作 rendition；过期证书、校准有效期、审计年度和资格预审原件缺口均有门禁；P0-06 自动接收但尚未提取/入库的 169 条候选和跨资料域来源均未进入；专项 30 项、后端全量 400 项及 2 个子测试通过 |
+| [x] | P1-03 结构化参数和业务台账 | `scripts/rag/build_taichang_business_ledgers.py`、`backend/rag/business_ledgers.py`、`docs/development/taichang-bid-v1-data/p1_03_business_ledgers/`、`docs/rag/runs/run_20260714_taichang_p1_03_business_ledgers_summary.md` | 生成 84 行统一台账并复用 36 行产品参数、2 行项目业绩证据和 16 个证据包；版本库只保存 17 行安全投影，67 行人员明细仅保留在本地受限 staging；过期证书阻断、缺原件报告不生成参数；真实 stream 7/7、Base+泰昌门禁、后端全量 423 项及 2 个子测试通过；数据库写入、资产提升和 DOCX 选图变更均为 0 |
 
 ## P0：正式投标文件阻断项
 

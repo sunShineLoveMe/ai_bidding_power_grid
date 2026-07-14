@@ -73,6 +73,16 @@ class TaichangProductParameterQueryTest(unittest.TestCase):
 
         self.assertEqual(contexts, [])
 
+    def test_upvc_missing_original_query_does_not_reuse_cpvc_parameters(self):
+        from backend.rag.product_parameters import search_taichang_product_parameter_contexts
+
+        contexts = search_taichang_product_parameter_contexts(
+            "泰昌N-HAP和UPVC检验报告是否有原始报告，能否生成正式参数？",
+            limit=5,
+        )
+
+        self.assertEqual(contexts, [])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -55,6 +55,7 @@ from backend.rag.enterprise_facts import (
 )
 from backend.rag.product_parameters import search_taichang_product_parameter_contexts
 from backend.rag.project_performance import search_taichang_project_performance_contexts
+from backend.rag.business_ledgers import search_taichang_business_ledger_contexts
 
 
 CUSTOMER_SEED_CORPUS = "power_grid_customer_corpus"
@@ -225,6 +226,10 @@ def _metadata_bool(value: Any) -> bool | None:
 
 def _is_pilot_enterprise_context(context: dict[str, Any]) -> bool:
     meta = _safe_meta(context)
+    # “缺少原件/禁止推断”是必须保留的负向事实边界；只允许作为缺口
+    # 上下文参与回答，不能转成正向企业事实。
+    if _metadata_bool(meta.get("is_fact_gap")) is True:
+        return str(meta.get("enterprise") or "") == PILOT_ENTERPRISE
     has_enterprise_signal = (
         str(meta.get("enterprise") or "") == PILOT_ENTERPRISE
         or meta.get("source_domain") == "enterprise_fact"
@@ -259,6 +264,11 @@ def _source_group_key(context: dict[str, Any]) -> str:
                 meta.get("specification_model"),
             ]
         )
+    if (
+        context.get("retrieval_source") == "structured_business_ledger_json"
+        or meta.get("retrieval_source") == "structured_business_ledger_json"
+    ):
+        return str(context.get("id") or meta.get("source_display_name") or meta.get("source_section") or "")
     return "|".join(
         str(part or "")
         for part in [
@@ -398,6 +408,19 @@ def _context_matches_query_scope(context: dict[str, Any], scope: str | None) -> 
     return True
 
 
+def _inspection_products_from_query(query: str) -> set[str]:
+    normalized = (query or "").upper().replace("-", "")
+    return {product for product in ("CPVC", "MPP", "UPVC", "NHAP") if product in normalized}
+
+
+def _matches_explicit_inspection_product(context: dict[str, Any], query: str) -> bool:
+    products = _inspection_products_from_query(query)
+    if not products:
+        return True
+    text = _context_text_for_scope(context).upper().replace("-", "")
+    return any(product in text for product in products)
+
+
 def _is_formal_certification_context(context: dict[str, Any]) -> bool:
     meta = _safe_meta(context)
     text = _context_text_for_scope(context)
@@ -450,7 +473,15 @@ def _filter_assets_for_query_scope(assets: list[dict[str, Any]], query: str) -> 
     scope = _query_evidence_scope(query)
     if not scope:
         return assets
-    filtered = [asset for asset in assets if _asset_matches_query_scope(asset, scope)]
+    filtered = [
+        asset
+        for asset in assets
+        if _asset_matches_query_scope(asset, scope)
+        and (
+            scope != "inspection_report"
+            or _matches_explicit_inspection_product(_asset_as_source_context(asset), query)
+        )
+    ]
     if filtered or scope in {"formal_certification", "business_license", "enterprise_basic_info"}:
         return filtered
     return assets
@@ -507,7 +538,12 @@ def _curate_pilot_enterprise_contexts(
     )
     scope = _query_evidence_scope(query)
     if scope:
-        scoped_contexts = [item for item in ranked if _context_matches_query_scope(item, scope)]
+        scoped_contexts = [
+            item
+            for item in ranked
+            if _context_matches_query_scope(item, scope)
+            and (scope != "inspection_report" or _matches_explicit_inspection_product(item, query))
+        ]
         if scoped_contexts or scope in {"formal_certification", "business_license", "enterprise_basic_info"}:
             return scoped_contexts[:limit]
     return ranked[:limit]
@@ -675,8 +711,15 @@ def search_knowledge():
         parameter_contexts = search_taichang_product_parameter_contexts(query, limit=5)
         performance_contexts = search_taichang_project_performance_contexts(query, limit=3)
         enterprise_fact_contexts = search_taichang_enterprise_fact_contexts(query, limit=2)
+        business_ledger_contexts = search_taichang_business_ledger_contexts(query, limit=5)
         contexts = _curate_pilot_enterprise_contexts(contexts, limit=5, query=query)
-        contexts = (enterprise_fact_contexts + performance_contexts + parameter_contexts + contexts)[:5]
+        contexts = (
+            enterprise_fact_contexts
+            + performance_contexts
+            + parameter_contexts
+            + business_ledger_contexts
+            + contexts
+        )[:5]
         contexts = sanitize_source_contexts(contexts)
         asset_metadata_filter = _asset_metadata_filter_from_query(
             query,
@@ -745,8 +788,15 @@ def stream_search_knowledge():
             parameter_contexts = search_taichang_product_parameter_contexts(query, limit=5)
             performance_contexts = search_taichang_project_performance_contexts(query, limit=3)
             enterprise_fact_contexts = search_taichang_enterprise_fact_contexts(query, limit=2)
+            business_ledger_contexts = search_taichang_business_ledger_contexts(query, limit=5)
             contexts = _curate_pilot_enterprise_contexts(contexts, limit=5, query=query)
-            contexts = (enterprise_fact_contexts + performance_contexts + parameter_contexts + contexts)[:5]
+            contexts = (
+                enterprise_fact_contexts
+                + performance_contexts
+                + parameter_contexts
+                + business_ledger_contexts
+                + contexts
+            )[:5]
             contexts = sanitize_source_contexts(contexts)
             asset_metadata_filter = _asset_metadata_filter_from_query(
                 query,

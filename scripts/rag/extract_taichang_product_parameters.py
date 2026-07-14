@@ -43,6 +43,7 @@ OUTPUT_COLUMNS = [
     "inspection_basis",
     "inspection_conclusion",
     "table_index",
+    "source_page",
     "row_number",
     "sequence_no",
     "parameter_category",
@@ -279,6 +280,28 @@ def _records_from_quality_report(report: dict[str, Any]) -> list[dict[str, Any]]
     ]
 
 
+def _table_source_pages(markdown_path: Path) -> list[int | None]:
+    """Return original PDF page numbers for MinerU tables in document order.
+
+    MinerU stores zero-based ``page_idx`` values in ``*_content_list.json``.
+    Keeping this mapping next to each structured row closes the provenance gap
+    without relying on OCR text or a guessed report-page offset.
+    """
+    candidates = sorted(markdown_path.parent.glob("*_content_list.json"))
+    if not candidates:
+        return []
+    payload = json.loads(candidates[0].read_text(encoding="utf-8"))
+    if not isinstance(payload, list):
+        return []
+    pages: list[int | None] = []
+    for item in payload:
+        if not isinstance(item, dict) or item.get("type") != "table":
+            continue
+        page_idx = item.get("page_idx")
+        pages.append(int(page_idx) + 1 if isinstance(page_idx, int) else None)
+    return pages
+
+
 def _extract_record(record: dict[str, Any], batch_id: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     markdown_path = PROJECT_ROOT / record["markdown_path"]
     detail = {
@@ -292,6 +315,7 @@ def _extract_record(record: dict[str, Any], batch_id: str) -> tuple[list[dict[st
         return [], detail
     markdown = markdown_path.read_text(encoding="utf-8")
     tables = _extract_html_tables(markdown)
+    table_source_pages = _table_source_pages(markdown_path)
     metadata = _metadata_from_tables(tables, markdown)
     rows: list[dict[str, Any]] = []
     for table_index, table in enumerate(tables):
@@ -316,6 +340,11 @@ def _extract_record(record: dict[str, Any], batch_id: str) -> tuple[list[dict[st
                     "inspection_basis": metadata.get("inspection_basis", ""),
                     "inspection_conclusion": metadata.get("inspection_conclusion", ""),
                     "table_index": table_index,
+                    "source_page": (
+                        table_source_pages[table_index]
+                        if table_index < len(table_source_pages)
+                        else None
+                    ),
                 }
             )
     detail.update(
@@ -323,6 +352,9 @@ def _extract_record(record: dict[str, Any], batch_id: str) -> tuple[list[dict[st
             "status": "parsed" if rows else "no_parameter_table",
             "tables": len(tables),
             "parameter_rows": len(rows),
+            "parameter_rows_with_source_page": sum(
+                1 for row in rows if row.get("source_page")
+            ),
             "report_no": metadata.get("report_no"),
             "sample_name": metadata.get("sample_name"),
             "specification_model": metadata.get("specification_model"),
@@ -392,7 +424,7 @@ def _write_outputs(
 
     json_path.write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8")
     with csv_path.open("w", encoding="utf-8-sig", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=OUTPUT_COLUMNS)
+        writer = csv.DictWriter(f, fieldnames=OUTPUT_COLUMNS, lineterminator="\n")
         writer.writeheader()
         for row in rows:
             csv_row = dict(row)

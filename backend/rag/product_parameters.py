@@ -62,6 +62,12 @@ def _query_product_families(query: str) -> set[str]:
     normalized = _normalize(query)
     families: set[str] = set()
     for family, terms in PRODUCT_TERMS.items():
+        # UPVC 是独立产品族，当前又只有历史报告编号、没有原始报告；不能因
+        # “pvc”子串把 CPVC 的正式参数错误注入 UPVC 问答。
+        if family == "CPVC电缆保护管" and "upvc" in normalized and not any(
+            term in normalized for term in ("cpvc", "pvc-c")
+        ):
+            continue
         if any(_normalize(term) in normalized for term in terms):
             families.add(family)
     return families
@@ -160,6 +166,7 @@ def _content_for_row(row: dict[str, Any]) -> str:
             f"单项结论：{row.get('single_conclusion') or '-'}",
             f"报告编号：{row.get('report_no') or '-'}",
             f"资料来源：{source_name}",
+            f"来源页码：第{row.get('source_page') or '-'}页",
             "边界：本参数来自泰昌原始检验报告，只能作为泰昌企业事实；辽宁资料仅可作QA/异常校验参照，不构成覆盖辽宁全部规格的结论。",
         ]
     )
@@ -168,6 +175,11 @@ def _content_for_row(row: dict[str, Any]) -> str:
 def search_taichang_product_parameter_contexts(query: str, limit: int = 5) -> list[dict[str, Any]]:
     """Return structured parameter rows as RAG contexts for Taichang questions."""
     if not query or "泰昌" not in query and not any(_normalize(term) in _normalize(query) for terms in PRODUCT_TERMS.values() for term in terms):
+        return []
+    normalized_query = _normalize(query)
+    if any(term in normalized_query for term in ("upvc", "n-hap", "nhap")) and not any(
+        term in normalized_query for term in ("cpvc", "pvc-c", "mpp")
+    ):
         return []
     scored: list[tuple[int, dict[str, Any]]] = []
     for row in _load_parameter_rows():
@@ -211,6 +223,7 @@ def search_taichang_product_parameter_contexts(query: str, limit: int = 5) -> li
                     "source_display_name": Path(str(row.get("source_file") or "")).stem or "泰昌产品检验报告",
                     "category_label": "泰昌产品结构化参数",
                     "source_file": row.get("source_file"),
+                    "source_page": row.get("source_page"),
                     "source_section": parameter_name,
                     "evidence_type": row.get("evidence_type") or "inspection_report",
                     "target_library": row.get("target_library") or "product_library",

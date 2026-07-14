@@ -80,6 +80,8 @@ SAFE_METADATA_KEYS = {
     "enterprise",
     "doc_owner",
     "source_domain",
+    "fact_source_allowed_for_enterprise",
+    "is_fact_gap",
     "source_display_name",
     "source_document_name",
     "source_category_label",
