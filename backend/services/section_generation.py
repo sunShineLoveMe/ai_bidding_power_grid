@@ -79,6 +79,7 @@ def save_generated_section(
     target_words = None
     metadata = chapter.get("metadata") if isinstance(chapter.get("metadata"), dict) else {}
     writing_plan = metadata.get("writing_plan") if isinstance(metadata.get("writing_plan"), dict) else {}
+    chapter_content_manifest = metadata.get("chapter_content_manifest") if isinstance(metadata.get("chapter_content_manifest"), dict) else None
     try:
         target_words = int(float(writing_plan.get("target_words") or 0)) or None
     except (TypeError, ValueError):
@@ -97,6 +98,7 @@ def save_generated_section(
             "target_words": target_words,
             "length_completion_ratio": round(actual_words / target_words, 3) if target_words else None,
             "formal_quality": quality,
+            "chapter_content_manifest": chapter_content_manifest,
         },
     )
 

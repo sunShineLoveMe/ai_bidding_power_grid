@@ -1,0 +1,130 @@
+{
+  "schema_version": "taichang-p2-02-real-generation-samples-v1",
+  "generated_at": "2026-07-14T04:39:35.415806+00:00",
+  "sample_role": "capability_validation_only_not_current_sl2655_outline",
+  "all_passed": true,
+  "knowledge_only_docx_insertions": 0,
+  "samples": [
+    {
+      "section_id": "capability-business-performance",
+      "section_title": "项目业绩",
+      "semantic_key": "performance.project_evidence",
+      "model": "deepseek-v4-flash",
+      "model_called": true,
+      "model_draft_chars": 391,
+      "model_draft_accepted": false,
+      "model_rejection_reason": "高精度章节统一使用结构化正式渲染；模型稿仅用于写作能力与越界审计",
+      "formal_renderer": "taichang_structured_grounded_renderer_v1",
+      "content": "### 项目业绩\n\n| 项目名称 | 招标编号 | 分标/包号 | 产品 | 数量 | 含税金额 | 买方 | 卖方 | 中标日期 | 合同签署日期 |\n| --- | --- | --- | --- | ---: | ---: | --- | --- | --- | --- |\n| 国网天津市电力公司2022年第二次配网物资协议库存招标采购 | 0322AB | 157-保护管（CPVC和MPP） / 包2 | 电缆保护管MPP和CPVC | 54678.0 米 | 6372409.05 元 | 国网天津市电力公司 | 河北泰昌电力器材科技有限公司 | 2022-11-21 | — |\n\n本项业绩由中标通知书和供货合同两类原始证据共同支持。合同签署日期在现有原件中为空，因此保持为空，不以中标日期、交货日期或其他日期推断。正文仅陈述证据已明确的项目、产品、数量、金额、双方和中标日期，不对履约验收或当前项目适配性作无依据结论。",
+      "content_chars": 347,
+      "structured_row_count": 2,
+      "chunk_count": 2,
+      "knowledge_asset_count": 0,
+      "evidence_bundle_count": 1,
+      "blockers": [
+        "合同签署日期原件为空，不得用中标时间或交货日期推断。"
+      ],
+      "unsupported_fact_hits": [],
+      "generation_attempts": 1,
+      "source_files": [
+        "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/37同类产品供货合同关键页整页扫描件/TJ20220002363合同协议书（双方已签章）.pdf",
+        "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/38中标通知书整页扫描件/157-保护管（CPVC和MPP）_包2_电缆保护管MPP和CPVC_河北泰昌电力器材科技有限公司_中标通知书.pdf"
+      ],
+      "source_pages": []
+    },
+    {
+      "section_id": "capability-business-personnel",
+      "section_title": "人员组织与人员证书",
+      "semantic_key": "qualification.personnel_roster_and_certificates",
+      "model": "deepseek-v4-flash",
+      "model_called": true,
+      "model_draft_chars": 959,
+      "model_draft_accepted": false,
+      "model_rejection_reason": "高精度章节统一使用结构化正式渲染；模型稿仅用于写作能力与越界审计",
+      "formal_renderer": "taichang_structured_grounded_renderer_v1",
+      "content": "### 人员组织与人员证书\n\n泰昌现有人员花名册共 65 行。以下列示前 10 行用于正文样式与事实引用验证，完整人员范围以原始花名册为准。\n\n| 序号 | 姓名 | 在册岗位 | 学历 | 社保记录 | 劳动合同记录 | 来源页 |\n| ---: | --- | --- | --- | --- | --- | ---: |\n| 1 | 晁坤琳 | 董事长、试验员 | 本科 | 有 | 有 | 1 |\n| 2 | 杨贺 | 总经理 | 本科 | 有 | 有 | 1 |\n| 3 | 晁猛 | 项目经理(厂长) | 大专 | 有 | 有 | 1 |\n| 4 | 陈仙瑞 | 高压试验员 | 大专 | 有 | 有 | 1 |\n| 5 | 王赛 | 会计 | 大专 | 有 | 有 | 1 |\n| 6 | 马园 | 资料员 | 大专 | 有 | 有 | 1 |\n| 7 | 赵称心 | 技术总监 | 大专 | 有 | 有 | 1 |\n| 8 | 曲艳霞 | 后勤经理 | 大专 | 有 | 有 | 1 |\n| 9 | 王强 | 技术售后 | 大专 | 有 | 有 | 1 |\n| 10 | 陈国华 | 技术售后 | 大专 | 有 | 有 | 1 |\n\n现有两行人员证书结构化记录如下：\n\n| 姓名 | 证书编号 | 准操项目 | 复审日期 | 有效期至 | 来源页 |\n| --- | --- | --- | --- | --- | ---: |\n| 陈仙瑞 | T130602197408170641 | 高压电工作业 | 2027-05-23 | 2030-05-22 | 1 |\n| 晁坤琳 | T13060219980525061X | 电气试验作业 | 2027-10-29 | 2030-10-29 | 1 |\n\n花名册中的在册岗位不等同于本项目岗位任命。正式投标时必须按当次招标岗位要求、实际分工和证书有效期选择人员，并以项目任命和原始证书复核结果为准。",
+      "content_chars": 588,
+      "structured_row_count": 68,
+      "chunk_count": 68,
+      "knowledge_asset_count": 0,
+      "evidence_bundle_count": 0,
+      "blockers": [
+        "正式投标时仍需按当前项目岗位要求、证书有效期和实际项目分工复核，不得把花名册自动等同于项目任命。"
+      ],
+      "unsupported_fact_hits": [],
+      "generation_attempts": 1,
+      "source_files": [
+        "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/30试验检测人员证书整页扫描件/1.陈仙瑞.pdf",
+        "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/30试验检测人员证书整页扫描件/2.晁坤琳.pdf",
+        "rag_seed/power_grid_resources/05_enterprise_documents/02_泰昌资质文件补充_20260611/extracted/泰昌资质文件/31人员花名册整页扫描件表格文件/公司人员花名册.pdf"
+      ],
+      "source_pages": [
+        1
+      ]
+    },
+    {
+      "section_id": "capability-tech-mpp-process",
+      "section_title": "MPP生产工艺",
+      "semantic_key": "manufacturing.process.mpp",
+      "model": "deepseek-v4-flash",
+      "model_called": true,
+      "model_draft_chars": 677,
+      "model_draft_accepted": false,
+      "model_rejection_reason": "高精度章节统一使用结构化正式渲染；模型稿仅用于写作能力与越界审计",
+      "formal_renderer": "taichang_structured_grounded_renderer_v1",
+      "content": "### MPP生产工艺资料与检验事实\n\n现有可核验事实来自泰昌 MPP 电缆保护管检验报告，报告编号为 2024100312005501712，规格型号为 DF 250×22×9000 SN40 MPP。报告中的结构化检验结果如下：\n\n| 检验项目 | 标准要求 | 检验结果 | 单位 | 单项结论 | 来源页 |\n| --- | --- | --- | --- | --- | ---: |\n| 颜色和外观 | 导管颜色应均匀一致;导管内外壁不应有气泡、裂口和明显的痕纹、凹陷、杂质、分解变色线及色泽不均等缺陷;导管内壁应光滑、平整;导管端面应切割平整并与轴线垂直。 | 符合要求 | — | 合格 | 3 |\n| 尺寸-长度 | ≥ 9000 | 9002 | mm | 合格 | 3 |\n| 尺寸-平均内径 | 250.0~251.5 | 250.0~250.2 | mm | 合格 | 3 |\n| 尺寸-壁厚 | 22_0^+2.0 | 22.0~22.1 | mm | 合格 | 3 |\n| 尺寸-不圆度 | ≤ 4.2 | 0.2~0.4 | mm | 合格 | 3 |\n| 尺寸-弯曲度 | ≤ 0.5 | 0.2 | % | 合格 | 3 |\n| 密度 | 0.89~0.93 | 0.903 | g/cm3 | 合格 | 3 |\n| 环刚度 | ≥ 40 | 66.40 | kN/m2 | 合格 | 3 |\n| 压扁试验 | 加载负荷至试样两内壁相碰,试样不应出现破裂。 | 符合要求 | — | 合格 | 3 |\n| 拉伸强度 | ≥ 25 | 25.4 | MPa | 合格 | 3 |\n| 焊接强度 | ≥ 22.5 | 22.9 | MPa | 合格 | 4 |\n| 断裂伸长率 | ≥ 150 | 176 | % | 合格 | 4 |\n| 落锤冲击 | 落锤质量15.0kg,冲击高度1200mm,取10个试样,每个试样冲击一次,冲击后10个试样中至少有9个不破裂。 | 10个试样均未破裂 | — | 合格 | 4 |\n| 静摩擦系数 | ≤ 0.35 | 0.30 | — | 合格 | 4 |\n| 维卡软化温度 | ≥ 150 | 152 | °C | 合格 | 4 |\n| 纵向回缩率 | ≤ 3 | 1.4 | % | 合格 | 4 |\n| 散热性能 | 常温下放置规定的时间,导管内、外壁温度均 ≤ 30^°C 。 | 内壁:26.2;26.2;25.9内壁平均:26.1外壁:25.3;25.5;25.3外壁平均:25.4 | °C | 合格 | 4 |\n\n上述检验结果只证明该报告对应规格送检样品的产品检验事实，不能替代 MPP 专属生产工艺文件，也不能推导其他规格或本项目需求规格已经覆盖。现有工序控制类历史资料仍为知识线索，正式成稿如需描述生产步骤、过程参数或质量控制点，必须取得并核验相应原始工艺文件。",
+      "content_chars": 953,
+      "structured_row_count": 17,
+      "chunk_count": 19,
+      "knowledge_asset_count": 15,
+      "evidence_bundle_count": 1,
+      "blockers": [
+        "现有可入库历史工艺资料为电缆保护管通用资料，缺少经核验的 MPP 专属完整工艺文件。"
+      ],
+      "unsupported_fact_hits": [],
+      "generation_attempts": 1,
+      "source_files": [
+        "assets/template_words/技术补充文件.docx",
+        "docs/development/taichang-bid-v1-data/p1_02_evidence_bundles/taichang_evidence_bundles.json",
+        "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf"
+      ],
+      "source_pages": [
+        1,
+        3,
+        4,
+        26
+      ]
+    },
+    {
+      "section_id": "capability-tech-quality",
+      "section_title": "产品制造质量控制",
+      "semantic_key": "manufacturing.quality_control",
+      "model": "deepseek-v4-flash",
+      "model_called": true,
+      "model_draft_chars": 554,
+      "model_draft_accepted": false,
+      "model_rejection_reason": "高精度章节统一使用结构化正式渲染；模型稿仅用于写作能力与越界审计",
+      "formal_renderer": "taichang_structured_grounded_renderer_v1",
+      "content": "### 产品制造质量控制\n\n河北泰昌电力器材科技有限公司现有两项与本章相关、仍在有效期内的管理体系认证事实如下。证书有效期和适用范围在正式投标前仍应按项目日期复核。\n\n| 证书名称 | 证书编号 | 有效期至 | 当前状态 | 来源页 |\n| --- | --- | --- | --- | ---: |\n| 环境管理体系认证证书 | 17424E20980R0M | 2027-10-20 | 有效 | 1 |\n| 质量管理体系认证证书 | 06925Q10172R4 | 2028-02-15 | 有效 | 1 |\n\n现有历史资料中另有 15 项工序控制类知识资料。这些资料的当前等级为知识资料，只能作为正文组织和人工复核线索；其图片不得直接插入正式 DOCX，其内容也不能单独证明本项目的质量目标、质量保证期、具体工艺参数或过程控制措施。\n\n本章当前可正式落笔的范围仅包括上述证书事实及资料边界。项目质量目标、质量保证期和适用标准必须以当次招标文件与客户确认结果为准，未确认前不形成承诺性结论。",
+      "content_chars": 395,
+      "structured_row_count": 2,
+      "chunk_count": 2,
+      "knowledge_asset_count": 15,
+      "evidence_bundle_count": 2,
+      "blockers": [
+        "历史 Word 工艺资料仅为 knowledge_only，不能单独证明当前项目正式质量承诺。"
+      ],
+      "unsupported_fact_hits": [],
+      "generation_attempts": 1,
+      "source_files": [
+        "assets/template_words/技术补充文件.docx",
+        "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/1.质量管理体系认证证书.pdf",
+        "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/2管理体系认证证书/2.环境管理体系认证证书.pdf"
+      ],
+      "source_pages": [
+        1,
+        26
+      ]
+    }
+  ]
+}

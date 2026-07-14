@@ -22,6 +22,11 @@ from backend.services.bid_compatibility import (
 )
 from backend.services.bid_prefill import confirmed_prefill_context
 from backend.services.taichang_bid_context import build_taichang_verified_fact_context, load_taichang_verified_fact_pack
+from backend.core.project_modes import TAICHANG_REUSE_PROJECT_MODE, normalize_project_mode
+from backend.services.taichang_chapter_content import (
+    build_chapter_content_manifest,
+    chapter_content_prompt_context,
+)
 
 FORMAL_PLACEHOLDER_RE = re.compile(r"【\s*待(?:补充|填写|确认|核对)[^】]*】|\{\{[^}]+}}|\$\{[^}]+}")
 GENERIC_PLACEHOLDER_LABELS = {
@@ -48,6 +53,29 @@ def _confirmed_prefill_text(project_meta: dict[str, Any]) -> str:
     if not values:
         return "- 暂无用户确认变量；缺失事实仍须明确标注人工确认。"
     return "\n".join(f"- {key}: {value}" for key, value in values.items())
+
+
+def _taichang_content_reuse_context(
+    project: dict[str, Any],
+    chapter: dict[str, Any],
+    compatibility_report: dict[str, Any] | None = None,
+) -> str:
+    """只在泰昌专版项目中装配章节级确定性资料，不污染通用模式。"""
+    if normalize_project_mode(project.get("project_mode")) != TAICHANG_REUSE_PROJECT_MODE:
+        return "- 当前为通用项目模式，不加载泰昌专版章节资料。"
+    metadata = chapter.get("metadata") if isinstance(chapter.get("metadata"), dict) else {}
+    if not metadata.get("product_families"):
+        matched_terms = (compatibility_report or {}).get("matchedSupportedTerms") or []
+        product_families = []
+        if "MPP" in matched_terms:
+            product_families.append("MPP电缆保护管")
+        if "CPVC" in matched_terms:
+            product_families.append("CPVC电缆保护管")
+        metadata = {**metadata, "product_families": product_families}
+        chapter["metadata"] = metadata
+    manifest = build_chapter_content_manifest(chapter)
+    chapter["metadata"] = {**metadata, "chapter_content_manifest": manifest}
+    return chapter_content_prompt_context(manifest)
 
 
 def _taichang_fact_digest(mode: str) -> str:
@@ -587,6 +615,7 @@ def build_section_supplement_prompt(project_id: str, chapter: dict[str, Any], cu
     grounding_instructions = _grounding_instructions(chapter)
     confirmed_variables = _confirmed_prefill_text(project_meta)
     taichang_facts = _section_taichang_fact_digest(profile.fact_pack_mode, compatibility_report, chapter, volume_type)
+    taichang_content_reuse = _taichang_content_reuse_context(project, chapter, compatibility_report)
     current_excerpt = (current_content or "").strip()
     if len(current_excerpt) > 4200:
         current_excerpt = current_excerpt[-4200:]
@@ -623,6 +652,9 @@ def build_section_supplement_prompt(project_id: str, chapter: dict[str, Any], cu
 
 泰昌已核验企业事实：
 {taichang_facts}
+
+泰昌专版本章资料使用清单（仅当前项目命中时加载）：
+{taichang_content_reuse}
 
 项目信息：
 - 项目名称：{project_meta.get("project_name") or project.get("project_name") or "需人工复核"}
@@ -722,6 +754,7 @@ def build_section_continuation_prompt(project_id: str, chapter: dict[str, Any], 
     grounding_instructions = _grounding_instructions(chapter)
     confirmed_variables = _confirmed_prefill_text(project_meta)
     taichang_facts = _section_taichang_fact_digest(profile.fact_pack_mode, compatibility_report, chapter, volume_type)
+    taichang_content_reuse = _taichang_content_reuse_context(project, chapter, compatibility_report)
     draft_excerpt = (draft_content or "").strip()
     if len(draft_excerpt) > 2600:
         draft_excerpt = draft_excerpt[-2600:]
@@ -752,6 +785,9 @@ def build_section_continuation_prompt(project_id: str, chapter: dict[str, Any], 
 
 泰昌已核验企业事实：
 {taichang_facts}
+
+泰昌专版本章资料使用清单（仅当前项目命中时加载）：
+{taichang_content_reuse}
 
 项目信息：
 - 项目名称：{project_meta.get("project_name") or project.get("project_name") or "需人工复核"}
@@ -840,6 +876,7 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
     grounding_instructions = _grounding_instructions(chapter)
     confirmed_variables = _confirmed_prefill_text(project_meta)
     taichang_facts = _section_taichang_fact_digest(profile.fact_pack_mode, compatibility_report, chapter, volume_type)
+    taichang_content_reuse = _taichang_content_reuse_context(project, chapter, compatibility_report)
 
     prompt = f"""
 你是资深投标文件撰写专家，熟悉国家电网物资采购、设备供货、产品技术响应、试验检测、质量管理、供货交付和招投标文件格式要求。
@@ -866,6 +903,9 @@ def build_section_prompt(project_id: str, chapter: dict[str, Any]) -> str:
 
 泰昌已核验企业事实（必须优先直接使用）：
 {taichang_facts}
+
+泰昌专版本章资料使用清单（必须按清单使用，不得全库随机拼装）：
+{taichang_content_reuse}
 
 项目信息：
 - 项目名称：{context["project_name"] or "需人工复核"}
