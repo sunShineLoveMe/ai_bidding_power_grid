@@ -23,6 +23,7 @@
 - 2026-07-07 客户试用反馈生成结果与历史成果标书章节和格式差异较大；“历史标书模板复用 `template_docx` MVP”已提升为项目 P0 待决策任务。2026-07-08 客户会后确认是否按“上传历史技术标/商务标 DOCX -> 自动识别变量 -> 变量确认表单 -> 原版式替换导出”的路径进入实现。
 - 2026-07-14 P2-03 固定表单原表导出完成：商务偏差表、人员关系说明、技术偏差表和技术特性参数表直接克隆当次招标 DOCX OOXML，不经过 Markdown 重建。四份真实章节 DOCX 均完成 Celery 导出和 LibreOffice 字段刷新；技术参数表刷新后仍为两张原表、22 行、6 列，合并结构、源文字和列宽审计 PASS，保证值保持 0。记录见 `docs/development/runs/run_20260714_taichang_p2_03_fixed_form_completion.md`。
 - 2026-07-14 P2-04 完整证据包和整本源表导出完成：当前 SL2655 只按章节 manifest 选中泰昌营业执照 1 页与 MPP 报告 5 页，真实浏览器导出选中/插入/失败为 `6/6/0`，不随机抽页。整本 DOCX 在字段刷新后四类固定表单均通过原文、合并关系和列宽审计；人员关系表跨文档复制的 LibreOffice 表头丢失问题已通过自包含 OOXML 文字规范化修复。DOCX 包内媒体 6 个，河北豪乾、辽宁、CPVC、内部路径和禁用题注命中 0。记录见 `docs/development/runs/run_20260714_taichang_p2_04_evidence_bundle_export.md`。
+- 2026-07-14 P2-05 二阶段正式交付门禁完成：导出前业务检查和导出后成品检查必须同时通过才显示正式版。真实 SL2655 成品检查覆盖正文就绪、证据包完整页序、正式资产来源、图片插入、字段刷新、固定表单和 DOCX XML 共 7 项；6 项通过，仅 26 个正式必填字段未齐阻断，因此连同导出前 9 个业务阻断继续显示为草稿版。记录见 `docs/development/runs/run_20260714_taichang_p2_05_formal_delivery_gate.md`。
 - 真实验证必须走项目导出链路：`build_project_bid_markdown` -> `convert_md_to_word` -> `refresh_docx_fields_with_soffice`，不得只用 mock 替代。
 - 2026-06-27 阿里云新疆 10kV 真实浏览器验收发现：客户真实长项目名会导致技术标 DOCX 导出任务因 `[Errno 36] File name too long` 失败；已将物理输出目录和文件名短名化。
 - 2026-06-27 本地辽宁 CPVC 包 1 完整真实回归已产出完整 DOCX，但 formal gate 判定为 `draft`：正式必填缺口 `16`、高风险缺口 `48`、正文残留 `待补充/需人工复核`，且封面包号未读取已确认值。记录见 `docs/development/runs/run_20260627_local_liaoning_full_e2e.md`。

@@ -928,6 +928,19 @@ def _asset_meta_value(asset: dict, key: str) -> str:
     return ""
 
 
+def _asset_meta_bool(asset: dict, key: str, *, default: bool = False) -> bool:
+    metadata = asset.get("metadata") or {}
+    specs = asset.get("specs") or {}
+    for container in (metadata, specs, asset):
+        if not isinstance(container, dict) or container.get(key) in (None, ""):
+            continue
+        value = container.get(key)
+        if isinstance(value, bool):
+            return value
+        return str(value).strip().lower() in {"1", "true", "yes", "y"}
+    return default
+
+
 def _section_asset_profile(section: dict) -> dict[str, set[str]]:
     heading_text = _section_heading_text(section)
     evidence_text = _section_planned_evidence_text(section)
@@ -1349,6 +1362,20 @@ def _build_taichang_evidence_bundle_markdown(
                 "bundle_global_order": page.get("global_order"),
                 "bundle_component": page.get("component"),
                 "selection_policy": "chapter_to_evidence_bundle_to_original_page_sequence",
+                "asset_policy": {
+                    "enterprise": _asset_meta_value(asset, "enterprise") or asset.get("enterprise"),
+                    "doc_owner": _asset_meta_value(asset, "doc_owner"),
+                    "source_domain": _asset_meta_value(asset, "source_domain"),
+                    "quality_tier": _asset_meta_value(asset, "quality_tier"),
+                    "formal_bid_ready": _asset_meta_bool(asset, "formal_bid_ready"),
+                    "bundle_allowed_for_bid": bool(bundle.get("allowed_for_bid")),
+                    "bundle_usage_status": bundle.get("usage_status"),
+                    "allowed_for_bid": _asset_meta_bool(asset, "allowed_for_bid"),
+                    "reference_only": _asset_meta_bool(asset, "reference_only"),
+                    "exclude_from_docx": _asset_meta_bool(asset, "exclude_from_docx"),
+                    "full_page": _asset_meta_bool(asset, "full_page"),
+                    "asset_visual_type": _asset_meta_value(asset, "asset_visual_type"),
+                },
                 "sensitive": bool(asset.get("is_sensitive")),
                 "anonymized": bool(asset.get("anonymized")),
             })

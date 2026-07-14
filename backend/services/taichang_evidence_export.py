@@ -134,6 +134,8 @@ def build_taichang_evidence_export_plan(
                 "bundle_title": bundle.get("bundle_title"),
                 "bundle_kind": bundle.get("bundle_kind"),
                 "evidence_type": bundle.get("evidence_type"),
+                "allowed_for_bid": bool(bundle.get("allowed_for_bid")),
+                "usage_status": bundle.get("usage_status"),
                 "section_id": section.get("id"),
                 "section_title": section.get("title"),
                 "volume_type": metadata.get("volume_type"),

@@ -52,6 +52,7 @@ def run_bid_docx_export(
     from backend.api.routes import build_project_bid_markdown, _output_url_for_path
     from backend.db.supabase_repo import update_bid_export_task
     from backend.export.md_to_word import convert_md_to_word, refresh_docx_fields_with_soffice
+    from backend.services.formal_export_delivery_gate import build_formal_export_delivery_gate
     from backend.services.taichang_fixed_forms import (
         audit_fixed_form_docx,
         audit_full_document_fixed_forms,
@@ -78,6 +79,7 @@ def run_bid_docx_export(
                 audit_fixed_form_docx,
                 replace_fixed_form_tables_in_docx,
                 audit_full_document_fixed_forms,
+                build_formal_export_delivery_gate,
             )
         except Exception as exc:
             logger.exception("后台 DOCX 导出任务失败")
@@ -111,6 +113,7 @@ def _run_bid_docx_export(
     audit_fixed_form_docx,
     replace_fixed_form_tables_in_docx,
     audit_full_document_fixed_forms,
+    build_formal_export_delivery_gate,
 ) -> dict:
     try:
         update_bid_export_task(project_id, task_id, {
@@ -177,8 +180,29 @@ def _run_bid_docx_export(
             if not post_refresh_audit.get("passed"):
                 raise RuntimeError("完整投标文件固定表单在 Word 字段刷新后发生结构漂移，已阻止交付。")
         base_metadata = initial_metadata if isinstance(initial_metadata, dict) else {}
+        scope = "section" if section_id else ("volume" if volume_type else "full")
+        delivery_gate = build_formal_export_delivery_gate(
+            output_path=generated_docx_path,
+            scope=scope,
+            pre_export_gate=base_metadata.get("formal_export_gate"),
+            image_selection=image_selection_report,
+            image_conversion=image_conversion_report,
+            field_refresh=field_refresh_report,
+        )
+        pre_gate = base_metadata.get("formal_export_gate") if isinstance(base_metadata.get("formal_export_gate"), dict) else {}
+        effective_gate = {
+            **pre_gate,
+            "pre_export_mode": pre_gate.get("export_mode"),
+            "post_export_checked": bool(delivery_gate.get("checked")),
+            "artifact_ready": bool(delivery_gate.get("artifact_ready")),
+            "can_formal_export": bool(delivery_gate.get("can_formal_deliver")),
+            "export_mode": delivery_gate.get("export_mode") or pre_gate.get("export_mode") or "draft",
+            "formal_export_label": "允许正式版交付" if delivery_gate.get("can_formal_deliver") else "仅允许草稿版导出",
+        }
         export_metadata = {
             **base_metadata,
+            "formal_export_gate": effective_gate,
+            "formal_delivery_gate": delivery_gate,
             "requested_from": base_metadata.get("requested_from") or "bid_editor",
             "with_images": bool(with_images),
             "used_editor_snapshot": bool(sections_snapshot),

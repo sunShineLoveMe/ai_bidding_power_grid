@@ -2885,6 +2885,7 @@ export function BidEditorPage(): JSX.Element {
     const imageConversion = task.metadata?.image_conversion;
     const fieldRefresh = task.metadata?.field_refresh;
     const formalGate = task.metadata?.formal_export_gate;
+    const deliveryGate = task.metadata?.formal_delivery_gate;
     const packageLabel = exportPackageLabel(volumeType, scope);
     const isDraft = scope !== 'section' && formalGate?.export_mode === 'draft';
     const insertedImages = Number(imageConversion?.inserted || 0);
@@ -2935,6 +2936,14 @@ export function BidEditorPage(): JSX.Element {
               <span className="font-semibold text-slate-500">图片插入</span>
               <span className="font-semibold text-slate-700">插入 {insertedImages} 张，跳过 {skippedImages} 张，失败 {failedImages} 张</span>
             </div>
+            {scope !== 'section' && deliveryGate?.checked ? (
+              <div className="flex items-center justify-between gap-3">
+                <span className="font-semibold text-slate-500">成品门禁</span>
+                <Tag color={deliveryGate.artifact_ready ? 'green' : 'red'}>
+                  {deliveryGate.artifact_ready ? '成品审计通过' : `${Number(deliveryGate.blocked_count || 0)} 项未通过`}
+                </Tag>
+              </div>
+            ) : null}
           </div>
           <Button
             type="primary"

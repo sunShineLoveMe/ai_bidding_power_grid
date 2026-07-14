@@ -487,6 +487,7 @@ export type BidExportTask = {
   error_message?: string;
   metadata?: {
     formal_export_gate?: BidFormalExportGate;
+    formal_delivery_gate?: BidFormalDeliveryGate;
     image_selection?: {
       selected?: number;
       asset_candidates?: number;
@@ -549,6 +550,23 @@ export type BidFormalExportGate = {
     evidence?: string;
     suggestion?: string;
     target?: string;
+  }>;
+  [key: string]: unknown;
+};
+
+export type BidFormalDeliveryGate = {
+  checked?: boolean;
+  scope?: 'full' | 'volume' | 'section' | string;
+  source_ready?: boolean;
+  artifact_ready?: boolean;
+  can_formal_deliver?: boolean;
+  export_mode?: 'formal' | 'draft' | 'section' | string;
+  blocked_count?: number;
+  items?: Array<{
+    id?: string;
+    title?: string;
+    status?: 'passed' | 'blocked' | string;
+    evidence?: string;
   }>;
   [key: string]: unknown;
 };
