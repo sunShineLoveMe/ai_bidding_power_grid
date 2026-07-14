@@ -22,11 +22,6 @@ from pypdf import PdfReader
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 OUTPUT_DIR = PROJECT_ROOT / "docs/development/taichang-bid-v1-data/p1_03_business_ledgers"
-RESTRICTED_OUTPUT_DIR = (
-    PROJECT_ROOT
-    / "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611"
-    / "staging/taichang_business_ledgers"
-)
 EVIDENCE_BUNDLES_PATH = (
     PROJECT_ROOT
     / "docs/development/taichang-bid-v1-data/p1_02_evidence_bundles/taichang_evidence_bundles.json"
@@ -377,10 +372,10 @@ def _extract_roster_rows() -> tuple[list[dict[str, Any]], dict[str, Any]]:
                 "social_insurance_recorded": _clean(raw.get("购买社保")) == "√",
                 "labor_contract_recorded": _clean(raw.get("签订劳动合同")) == "√",
                 "employment_start_year": _clean(raw.get("入职时间")),
-                "review_status": "restricted_structured",
-                "quality_tier": "restricted",
-                "usage_status": "manual_authorization_required",
-                "rag_visibility": "internal_only",
+                "review_status": "structured_extracted",
+                "quality_tier": "knowledge_only",
+                "usage_status": "eligible_for_private_project_reuse",
+                "rag_visibility": "taichang_private_project",
                 "source_file": record.get("source_file"),
                 "source_display_name": "泰昌公司人员花名册",
                 "source_page": 1,
@@ -393,20 +388,15 @@ def _extract_roster_rows() -> tuple[list[dict[str, Any]], dict[str, Any]]:
         "personnel_count": len(rows),
         "certificate_record_count": 2,
         "professional_title_filled_count": sum(1 for row in rows if row.get("professional_title")),
-        "review_status": "knowledge_summary_only",
+        "review_status": "structured_summary",
         "quality_tier": "knowledge_only",
-        "usage_status": "individual_details_require_authorization",
+        "usage_status": "private_project_summary",
+        "rag_visibility": "taichang_private_project",
         "source_file": record.get("source_file"),
         "source_display_name": "泰昌人员资料摘要",
         "source_page": 1,
     }
     return rows, summary
-
-
-def _mask_certificate_no(value: str) -> str:
-    if len(value) <= 8:
-        return "****"
-    return f"{value[:1]}{'*' * (len(value) - 5)}{value[-4:]}"
 
 
 def _extract_personnel_certificate_rows(roster_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -419,7 +409,7 @@ def _extract_personnel_certificate_rows(roster_rows: list[dict[str, Any]]) -> li
         and str(record.get("source_file") or "").lower().endswith(".pdf")
     ]
     if len(certificate_records) != 2:
-        raise RuntimeError(f"expected 2 restricted personnel certificates, found {len(certificate_records)}")
+        raise RuntimeError(f"expected 2 personnel certificates, found {len(certificate_records)}")
     for record in certificate_records:
         markdown_path = PROJECT_ROOT / str(record.get("output_file") or "")
         text = markdown_path.read_text(encoding="utf-8")
@@ -446,17 +436,17 @@ def _extract_personnel_certificate_rows(roster_rows: list[dict[str, Any]]) -> li
                 "person_name": person_name,
                 "project_role": roles.get(person_name) or "",
                 "certificate_no": certificate_no,
-                "certificate_no_display": _mask_certificate_no(certificate_no),
+                "certificate_no_display": certificate_no,
                 "operation_category": operation_category,
                 "permitted_operation": permitted_operation,
                 "initial_issue_date": issue_date,
                 "valid_until": valid_until,
                 "review_date": review_date,
                 "validity_status": _validity_status(valid_until),
-                "review_status": "restricted_structured",
-                "quality_tier": "restricted",
-                "usage_status": "manual_authorization_required",
-                "rag_visibility": "internal_only",
+                "review_status": "structured_verified",
+                "quality_tier": "knowledge_only",
+                "usage_status": "eligible_after_project_validity_check",
+                "rag_visibility": "taichang_private_project",
                 "source_file": record.get("source_file"),
                 "source_display_name": f"泰昌{person_name}特种作业操作证",
                 "source_page": 1,
@@ -583,15 +573,14 @@ def build_payload() -> dict[str, Any]:
             "note": "原始PDF封面未显示报告编号，保持为空，不从相邻年度推断。",
         },
     ]
-    restricted_rows = [row for row in all_rows if row.get("rag_visibility") == "internal_only"]
-    published_rows = [row for row in all_rows if row.get("rag_visibility") != "internal_only"]
     counts = Counter(row["ledger_type"] for row in all_rows)
     return {
-        "schema_version": "taichang-p1-03-business-ledger-v1",
+        "schema_version": "taichang-p1-03-business-ledger-v2-private-project-full-data",
         "generated_at": datetime.now().astimezone().isoformat(timespec="seconds"),
         "as_of_date": AS_OF_DATE.isoformat(),
         "enterprise": ENTERPRISE,
-        "write_policy": "offline_staging_only_no_database_write_no_asset_promotion",
+        "write_policy": "offline_staging_only_no_database_write_no_asset_promotion_private_project_full_rows",
+        "privacy_policy": "customer_confirmed_private_project_full_personnel_data_allowed",
         "canonical_sources": {
             "verified_product_parameters": {
                 "path": _rel(PRODUCT_PARAMETER_ROWS_PATH),
@@ -616,8 +605,9 @@ def build_payload() -> dict[str, Any]:
         },
         "summary": {
             "business_ledger_rows": len(all_rows),
-            "published_safe_rows": len(published_rows),
-            "restricted_local_rows": len(restricted_rows),
+            "published_rows": len(all_rows),
+            "private_project_visible_rows": len(all_rows),
+            "privacy_blocked_rows": 0,
             "by_ledger_type": dict(sorted(counts.items())),
             "verified_product_parameter_rows": len(product_rows),
             "historical_technical_parameter_candidates": len(historical_parameter_rows),
@@ -627,10 +617,9 @@ def build_payload() -> dict[str, Any]:
             "database_writes": 0,
             "asset_promotions": 0,
         },
-        # 版本库和普通 RAG 只保存安全投影；受限人员明细仅写本地 staging。
-        "rows": published_rows,
+        # 私有项目已取得客户确认，完整人员台账与其他企业事实一并进入版本化数据集。
+        "rows": all_rows,
         "gaps": gaps,
-        "_restricted_rows": restricted_rows,
     }
 
 
@@ -640,13 +629,6 @@ def write_outputs(payload: dict[str, Any]) -> None:
     csv_path = OUTPUT_DIR / "taichang_business_ledger_rows.csv"
     report_path = OUTPUT_DIR / "taichang_business_ledger_report.md"
     manifest_path = OUTPUT_DIR / "taichang_p1_03_manifest.json"
-    restricted_rows = payload.pop("_restricted_rows", [])
-    RESTRICTED_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    restricted_json_path = RESTRICTED_OUTPUT_DIR / "restricted_personnel_rows.json"
-    restricted_csv_path = RESTRICTED_OUTPUT_DIR / "restricted_personnel_rows.csv"
-    restricted_json_path.write_text(json.dumps(restricted_rows, ensure_ascii=False, indent=2), encoding="utf-8")
-    _write_csv(restricted_csv_path, restricted_rows)
-
     json_path.write_text(json.dumps(payload["rows"], ensure_ascii=False, indent=2), encoding="utf-8")
     _write_csv(csv_path, payload["rows"])
     manifest_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -663,7 +645,7 @@ def write_outputs(payload: dict[str, Any]) -> None:
         f"- 复用既有产品参数：{summary['verified_product_parameter_rows']} 行，不重复写入。",
         f"- 历史技术参数候选：{summary['historical_technical_parameter_candidates']} 行，继续禁止转为正式参数事实。",
         f"- 业务台账：{summary['business_ledger_rows']} 行，稳定业务键无重复。",
-        f"- 版本库安全投影：{summary['published_safe_rows']} 行；受限人员明细 {summary['restricted_local_rows']} 行仅保留在本地 staging，不进入 Git、普通 RAG 或 DOCX。",
+        f"- 私有项目完整发布：{summary['published_rows']} 行；人员花名册和人员证书不再因隐私策略被排除。",
         f"- 项目业绩证据：{summary['project_performance_evidence_rows']} 条，复用既有结构化记录。",
         f"- 文件级证据包：{summary['evidence_bundles']} 个，全部按 `evidence_bundle_id` 关联。",
         "- 数据库写入：0；资产质量等级提升：0。",
@@ -677,9 +659,9 @@ def write_outputs(payload: dict[str, Any]) -> None:
         "equipment_calibration": "设备与校准证书",
         "management_certificate": "管理体系证书",
         "audit_report": "审计报告",
-        "personnel_roster": "人员花名册（受限）",
-        "personnel_summary": "人员资料安全摘要",
-        "personnel_certificate": "人员证书（受限）",
+        "personnel_roster": "人员花名册",
+        "personnel_summary": "人员资料摘要",
+        "personnel_certificate": "人员证书",
         "inspection_report_registry": "检验报告登记",
     }
     for key, count in summary["by_ledger_type"].items():
@@ -693,7 +675,7 @@ def write_outputs(payload: dict[str, Any]) -> None:
             "- N-HAP/UPVC 只有历史报告编号，保持 `needs_original_evidence`，不生成正式参数。",
             "- 6 台设备以 2026 年原始校准证书为准，历史 Word 中 2025 年日期只保留来源映射。",
             "- 职业健康安全管理体系证书已于 2026-06-18 到期，继续阻断正式引用。",
-            "- 65 条人员花名册与 2 条人员证书标记 `restricted + internal_only`；普通 RAG 只使用不含个人证号的安全摘要。",
+            "- 65 条人员花名册与 2 条人员证书按客户确认纳入私有项目完整台账和知识库查询；保留原始姓名、岗位、证书编号、有效期及来源页。",
             "- 当前无泰昌专利/软著原始证据；辽宁招标评分字段不得转换为泰昌企业事实。",
             "",
             "## 待补与人工复核",

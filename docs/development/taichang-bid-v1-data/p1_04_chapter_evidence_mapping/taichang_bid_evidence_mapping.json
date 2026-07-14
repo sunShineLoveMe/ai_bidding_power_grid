@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-14T03:10:41.928927+00:00",
+  "generated_at": "2026-07-14T03:20:40.356755+00:00",
   "enterprise": "河北泰昌电力器材科技有限公司",
   "mapping_mode": "semantic_dynamic_project_skeleton",
   "fixed_chapter_numbers": false,
@@ -11,21 +11,23 @@
     "tender_requirement": "仅用于当前项目要求、评分项、年度和格式",
     "reference_template": "仅用于结构和写法，不得生成泰昌事实",
     "asset_reuse": "只复用事实/证据/资产 ID，不创建副本",
-    "restricted_personnel": "不进入本映射及普通问答，授权委托只生成确认占位"
+    "private_project_personnel": "客户已确认可在私有项目内使用完整人员花名册和证书信息；保留来源、有效期和项目适用性校验"
   },
+  "privacy_override_basis": "客户已确认该项目为私有项目，人员及证书完整数据可进入版本化台账、私有知识库问答和章节映射",
   "source_snapshot": {
     "p1_01_ready_knowledge_assets": 133,
     "p1_02_evidence_bundles": 16,
     "p1_03_business_ledger_rows": 84,
-    "p1_03_published_safe_rows": 17,
-    "p1_03_restricted_rows_included": 0,
+    "p1_03_published_rows": 84,
+    "p1_03_personnel_rows": 67,
+    "p1_03_privacy_blocked_rows": 0,
     "verified_parameter_rows": 36
   },
   "summary": {
-    "mapping_count": 19,
+    "mapping_count": 20,
     "technical_mapping_count": 12,
-    "business_mapping_count": 7,
-    "existing_count": 5,
+    "business_mapping_count": 8,
+    "existing_count": 6,
     "partial_count": 10,
     "missing_evidence_count": 3,
     "manual_confirmation_count": 1,
@@ -1110,6 +1112,60 @@
       }
     },
     {
+      "mapping_id": "BUS-PERSONNEL",
+      "bid_volume": "business",
+      "semantic_chapter_key": "qualification.personnel_roster_and_certificates",
+      "chapter_display_name": "人员组织与人员证书",
+      "chapter_match": {
+        "mode": "semantic_title_keywords",
+        "aliases": [
+          "人员组织",
+          "人员配置",
+          "人员花名册",
+          "项目人员",
+          "试验检测人员",
+          "人员证书",
+          "社保证明",
+          "劳动合同"
+        ],
+        "exclude_keywords": [
+          "招标人",
+          "其他投标人",
+          "河北豪乾"
+        ],
+        "fixed_chapter_number": null
+      },
+      "material_status": "existing",
+      "material_status_label": "已有资料",
+      "existing_material": true,
+      "fact_refs": [
+        {
+          "source": "docs/development/taichang-bid-v1-data/p1_03_business_ledgers/taichang_p1_03_manifest.json",
+          "selector": {
+            "ledger_types": [
+              "personnel_roster",
+              "personnel_certificate",
+              "personnel_summary"
+            ]
+          },
+          "usage": "私有项目完整人员台账，包含姓名、岗位、学历、社保/劳动合同记录、证书编号、准操项目、有效期和来源页"
+        }
+      ],
+      "evidence_bundle_ids": [],
+      "knowledge_asset_selector": null,
+      "resolved_knowledge_asset_candidate_ids": [],
+      "blockers": [
+        "正式投标时仍需按当前项目岗位要求、证书有效期和实际项目分工复核，不得把花名册自动等同于项目任命。"
+      ],
+      "customer_confirmation_fields": [],
+      "generation_policy": "可引用客户确认的完整人员台账；按当前招标岗位要求筛选，不复制人员记录，不虚构项目任命。",
+      "source_boundary": {
+        "enterprise_fact_owner": "河北泰昌电力器材科技有限公司",
+        "tender_requirement_role": "仅用于确定本项目要求、年度、评分项和格式，不作为泰昌企业事实",
+        "reference_template_role": "仅参考写法和结构，不作为泰昌企业事实"
+      }
+    },
+    {
       "mapping_id": "BUS-AUTHORIZATION-SIGNATURE",
       "bid_volume": "business",
       "semantic_chapter_key": "authorization.signature_and_seal",
@@ -1138,7 +1194,7 @@
       "knowledge_asset_selector": null,
       "resolved_knowledge_asset_candidate_ids": [],
       "blockers": [
-        "不得自动插入印章、签名、身份证件或人员受限明细。",
+        "不得自动生成或执行签字盖章。",
         "授权范围、被授权人和签署日期必须由客户确认。"
       ],
       "customer_confirmation_fields": [
@@ -1149,7 +1205,7 @@
         "盖章位置",
         "签署日期"
       ],
-      "generation_policy": "仅生成模板占位和确认清单；不得自动签字、盖章或插入受限人员资料。",
+      "generation_policy": "可从完整人员台账预填候选人信息，但只生成模板占位和确认清单；不得自动签字、盖章。",
       "source_boundary": {
         "enterprise_fact_owner": "河北泰昌电力器材科技有限公司",
         "tender_requirement_role": "仅用于确定本项目要求、年度、评分项和格式，不作为泰昌企业事实",

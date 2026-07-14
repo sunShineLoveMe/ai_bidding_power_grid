@@ -1,7 +1,7 @@
 """泰昌 P1-03 业务台账的结构化查询入口。
 
-普通知识库问答只暴露可引用的企业事实和人员汇总；花名册、人员证件号等
-``restricted`` 行不会进入模型上下文。
+该项目为客户确认的私有项目，完整人员花名册和人员证书可进入泰昌租户内查询；
+所有结果仍须保留来源、有效期和项目适用性边界。
 """
 
 from __future__ import annotations
@@ -20,7 +20,7 @@ MANIFEST_PATH = (
 EQUIPMENT_TERMS = ["设备", "仪器", "校准", "检定", "复校", "万能试验机", "维卡", "电子天平", "锤击", "熔体流动", "拉力试验机"]
 CERTIFICATE_TERMS = ["管理体系", "体系认证", "质量管理", "环境管理", "职业健康", "认证证书"]
 AUDIT_TERMS = ["审计", "财务报告", "财务审计"]
-PERSONNEL_TERMS = ["人员", "花名册", "员工", "社保", "劳动合同", "试验检测人员"]
+PERSONNEL_TERMS = ["人员", "花名册", "员工", "姓名", "岗位", "社保", "劳动合同", "试验检测人员", "特种作业证", "人员证书", "证件号"]
 REPORT_TERMS = ["检验报告", "检测报告", "型式试验报告", "N-HAP", "NHAP", "UPVC", "CPVC", "MPP"]
 IP_TERMS = ["知识产权", "专利", "软件著作权", "软著"]
 
@@ -81,11 +81,47 @@ def _audit_content(row: dict[str, Any]) -> str:
 
 def _personnel_summary_content(row: dict[str, Any]) -> str:
     return "\n".join([
-        "【泰昌人员资料摘要｜脱敏】",
+        "【泰昌人员资料摘要｜私有项目完整台账】",
         f"花名册记录：{row.get('personnel_count') or 0}条；特种作业证记录：{row.get('certificate_record_count') or 0}条",
         f"已填写职称记录：{row.get('professional_title_filled_count') or 0}条",
         _source_line(row),
-        "权限边界：人员花名册、姓名、证件号和个人证书明细属于受限数据，普通知识库问答不展示；正式使用须经人工授权和项目适用性复核。",
+        "使用边界：人员信息已获客户确认，可用于本私有项目；正式投标仍需按岗位要求、证书有效期和项目角色复核。",
+    ])
+
+
+def _personnel_roster_content(row: dict[str, Any]) -> str:
+    return "\n".join([
+        "【泰昌人员花名册｜私有项目企业事实】",
+        f"姓名：{row.get('person_name') or '-'}；岗位：{row.get('project_role') or '-'}",
+        f"学历：{row.get('education') or '-'}；职称：{row.get('professional_title') or '-'}；入职年份：{row.get('employment_start_year') or '-'}",
+        f"社保记录：{'有' if row.get('social_insurance_recorded') else '未记录'}；劳动合同记录：{'有' if row.get('labor_contract_recorded') else '未记录'}",
+        _source_line(row),
+    ])
+
+
+def _personnel_roster_overview_content(rows: list[dict[str, Any]]) -> str:
+    lines = ["【泰昌人员花名册明细｜私有项目企业事实】", f"共 {len(rows)} 条："]
+    for row in sorted(rows, key=lambda item: int(item.get("roster_row_no") or 0)):
+        lines.append(
+            f"{row.get('roster_row_no')}. {row.get('person_name') or '-'}｜{row.get('project_role') or '-'}｜"
+            f"学历 {row.get('education') or '-'}｜职称 {row.get('professional_title') or '-'}｜"
+            f"社保 {'有' if row.get('social_insurance_recorded') else '未记录'}｜"
+            f"劳动合同 {'有' if row.get('labor_contract_recorded') else '未记录'}｜"
+            f"入职 {row.get('employment_start_year') or '-'}"
+        )
+    if rows:
+        lines.append(_source_line(rows[0]))
+    return "\n".join(lines)
+
+
+def _personnel_certificate_content(row: dict[str, Any]) -> str:
+    status = "当前有效，正式投标前仍需按开标日期复核" if row.get("validity_status") == "valid" else str(row.get("validity_status") or "待复核")
+    return "\n".join([
+        "【泰昌人员证书｜私有项目企业事实】",
+        f"姓名：{row.get('person_name') or '-'}；岗位：{row.get('project_role') or '-'}",
+        f"证书编号：{row.get('certificate_no') or '-'}；作业类别：{row.get('operation_category') or '-'}；准操项目：{row.get('permitted_operation') or '-'}",
+        f"初领日期：{row.get('initial_issue_date') or '-'}；复审日期：{row.get('review_date') or '-'}；有效期至：{row.get('valid_until') or '-'}；状态：{status}",
+        _source_line(row),
     ])
 
 
@@ -132,12 +168,12 @@ def _context(row: dict[str, Any], content: str, similarity: float) -> dict[str, 
             "category_label": row.get("evidence_type_label") or "企业事实",
             "source_file": source_file,
             "source_page": row.get("source_page"),
-            "source_section": row.get("equipment_name") or row.get("certificate_name") or row.get("audit_year") or row.get("product_name"),
+            "source_section": row.get("equipment_name") or row.get("certificate_name") or row.get("person_name") or row.get("audit_year") or row.get("product_name"),
             "evidence_type": row.get("evidence_type"),
             "target_library": row.get("target_library"),
             "quality_tier": row.get("quality_tier"),
             "validity_status": row.get("validity_status"),
-            "citation_policy": "enterprise_fact_citable_with_validity_check",
+            "citation_policy": "private_project_enterprise_fact_citable_with_validity_check",
             "source_category": "structured_business_ledger_json",
         },
     }
@@ -169,7 +205,7 @@ def _gap_context(gap: dict[str, Any]) -> dict[str, Any]:
 
 
 def search_taichang_business_ledger_contexts(query: str, limit: int = 5) -> list[dict[str, Any]]:
-    """按台账类别返回结构化上下文，并严格排除 ``internal_only`` 人员明细。"""
+    """按台账类别返回结构化上下文，包含客户确认可用的私有项目人员明细。"""
     text = str(query or "").strip()
     if not text or "泰昌" not in text:
         return []
@@ -203,10 +239,33 @@ def search_taichang_business_ledger_contexts(query: str, limit: int = 5) -> list
                 continue
             selected.append((0.99 if years else 0.94, row, _audit_content(row)))
 
-    if _contains_any(text, PERSONNEL_TERMS):
+    roster_rows = [row for row in rows if row.get("ledger_type") == "personnel_roster"]
+    personnel_certificate_rows = [row for row in rows if row.get("ledger_type") == "personnel_certificate"]
+    explicit_person_names = {
+        str(row.get("person_name") or "")
+        for row in [*roster_rows, *personnel_certificate_rows]
+        if row.get("person_name") and str(row.get("person_name")) in text
+    }
+    if _contains_any(text, PERSONNEL_TERMS) or explicit_person_names:
         for row in rows:
-            if row.get("ledger_type") == "personnel_summary" and row.get("rag_visibility") != "internal_only":
-                selected.append((0.98, row, _personnel_summary_content(row)))
+            if row.get("ledger_type") == "personnel_summary":
+                selected.append((0.94 if explicit_person_names else 0.98, row, _personnel_summary_content(row)))
+        if explicit_person_names:
+            for row in roster_rows:
+                if row.get("person_name") in explicit_person_names:
+                    selected.append((0.995, row, _personnel_roster_content(row)))
+            for row in personnel_certificate_rows:
+                if row.get("person_name") in explicit_person_names:
+                    selected.append((1.0, row, _personnel_certificate_content(row)))
+        else:
+            if roster_rows and _contains_any(text, ["花名册", "名单", "姓名", "岗位", "明细", "全部"]):
+                overview = dict(roster_rows[0])
+                overview["business_key"] = "personnel-roster:all"
+                overview["source_display_name"] = "泰昌公司人员花名册"
+                selected.append((0.99, overview, _personnel_roster_overview_content(roster_rows)))
+            if _contains_any(text, ["证书", "证件号", "特种作业", "试验检测人员"]):
+                for row in personnel_certificate_rows:
+                    selected.append((0.99, row, _personnel_certificate_content(row)))
 
     if _contains_any(text, REPORT_TERMS):
         normalized = text.upper().replace("-", "")
@@ -227,8 +286,6 @@ def search_taichang_business_ledger_contexts(query: str, limit: int = 5) -> list
         if gap:
             return [_gap_context(gap)][:limit]
 
-    # 受限人员行即使误入选择集也在这里做最后一道硬过滤。
-    selected = [item for item in selected if item[1].get("rag_visibility") != "internal_only"]
     selected.sort(key=lambda item: (item[0], str(item[1].get("business_key") or "")), reverse=True)
     contexts: list[dict[str, Any]] = []
     seen: set[str] = set()

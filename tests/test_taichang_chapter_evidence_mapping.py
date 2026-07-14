@@ -28,10 +28,10 @@ class TaichangChapterEvidenceMappingTest(unittest.TestCase):
 
     def test_summary_and_required_volumes(self):
         summary = self.payload["summary"]
-        self.assertEqual(summary["mapping_count"], 19)
+        self.assertEqual(summary["mapping_count"], 20)
         self.assertEqual(summary["technical_mapping_count"], 12)
-        self.assertEqual(summary["business_mapping_count"], 7)
-        self.assertEqual(summary["existing_count"], 5)
+        self.assertEqual(summary["business_mapping_count"], 8)
+        self.assertEqual(summary["existing_count"], 6)
         self.assertEqual(summary["database_writes"], 0)
         self.assertEqual(summary["asset_copies"], 0)
 
@@ -68,12 +68,20 @@ class TaichangChapterEvidenceMappingTest(unittest.TestCase):
             self.assertEqual(row["evidence_bundle_ids"], [])
             self.assertIn("不得生成正式参数", "".join(row["fact_refs"][0]["usage"]))
 
-    def test_expired_certificate_and_restricted_personnel_are_excluded(self):
+    def test_expired_management_certificate_is_excluded(self):
         serialized = json.dumps(self.payload, ensure_ascii=False)
         self.assertNotIn("management-system:ohs", serialized)
         self.assertNotIn("taichang-evidence-68219d67c5feb3ed96a4", serialized)
-        self.assertNotRegex(serialized, r"T[0-9X]{16,20}")
-        self.assertEqual(self.payload["source_snapshot"]["p1_03_restricted_rows_included"], 0)
+
+    def test_private_project_personnel_mapping_is_included(self):
+        row = self.mapping["BUS-PERSONNEL"]
+        self.assertEqual(row["material_status"], "existing")
+        self.assertTrue(row["existing_material"])
+        self.assertEqual(row["fact_refs"][0]["selector"]["ledger_types"], ["personnel_roster", "personnel_certificate", "personnel_summary"])
+        self.assertEqual(self.payload["source_snapshot"]["p1_03_published_rows"], 84)
+        self.assertEqual(self.payload["source_snapshot"]["p1_03_personnel_rows"], 67)
+        self.assertEqual(self.payload["source_snapshot"]["p1_03_privacy_blocked_rows"], 0)
+        self.assertIn("客户已确认", self.payload["privacy_override_basis"])
 
     def test_authorization_is_manual_placeholder_only(self):
         row = self.mapping["BUS-AUTHORIZATION-SIGNATURE"]
@@ -82,6 +90,7 @@ class TaichangChapterEvidenceMappingTest(unittest.TestCase):
         self.assertEqual(row["fact_refs"], [])
         self.assertEqual(row["evidence_bundle_ids"], [])
         self.assertIn("不得自动签字、盖章", row["generation_policy"])
+        self.assertIn("可从完整人员台账预填候选人信息", row["generation_policy"])
 
     def test_service_commitments_are_not_invented(self):
         row = self.mapping["TECH-SERVICE-AFTERSALES"]

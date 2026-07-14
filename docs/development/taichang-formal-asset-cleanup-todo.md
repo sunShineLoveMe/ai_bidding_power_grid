@@ -39,7 +39,7 @@
 | [~] | P0-06 分级自动接收、异常复核与增量入库批准 | `scripts/rag/prepare_taichang_p0_06_asset_review.py`、`docs/development/taichang-bid-v1-data/p0_06_review/泰昌历史标书资产增量入库审批表.xlsx`、自动接收/异常复核/关联阻断/批准清单、`docs/rag/runs/run_20260713_taichang_p0_06_tiered_acceptance_summary.md` | 客户主动提供两份历史标书视为来源处理授权：896 条分流为低风险知识资料自动接收 169、异常复核 290（60 个证据组）、自动关联/阻断/仅参考 437；策略批准和可进入提取校验流程均为 169，人工批准为 0。P1-01 已进一步以真实库重去重和质量校验，实际新增 133 条 `knowledge_only`，36 条因已有证据、视觉重复/疑似重复或低质量未入库；剩余 290 条异常项继续人工复核 |
 | [x] | P1-01 历史标书低风险资产实际提取、去重与增量入库 | `scripts/rag/ingest_taichang_historical_bid_assets.py`、`scripts/rag/extract_taichang_historical_bid_tables.py`、`docs/development/taichang-bid-v1-data/p1_01_ingestion/`、`docs/rag/runs/run_20260713_taichang_p1_01_historical_bid_ingestion_summary.md` | 169 个媒体全部提取；133 个真实写库并有 embedding，5 个同证据、2 个视觉重复、24 个视觉疑似、5 个低质量未入库；第二次执行新增 0；全部排除正式标书和参数事实层；技术表 20 行单位保真，Base+泰昌最终门禁、真实 stream、后端 413 项测试通过 |
 | [x] | P1-02 文件级证据包 | `scripts/rag/build_taichang_evidence_bundles.py`、`docs/development/taichang-bid-v1-data/p1_02_evidence_bundles/`、`docs/rag/runs/run_20260713_taichang_p1_02_evidence_bundles_summary.md` | 基于真实 PostgreSQL 599 个现有资产重建 16 个业务证据包、149 页，页序完整、缺页 0、重页 0；21 个重复 PDF/关键页图仅作 rendition；过期证书、校准有效期、审计年度和资格预审原件缺口均有门禁；P0-06 自动接收但尚未提取/入库的 169 条候选和跨资料域来源均未进入；专项 30 项、后端全量 400 项及 2 个子测试通过 |
-| [x] | P1-03 结构化参数和业务台账 | `scripts/rag/build_taichang_business_ledgers.py`、`backend/rag/business_ledgers.py`、`docs/development/taichang-bid-v1-data/p1_03_business_ledgers/`、`docs/rag/runs/run_20260714_taichang_p1_03_business_ledgers_summary.md` | 生成 84 行统一台账并复用 36 行产品参数、2 行项目业绩证据和 16 个证据包；版本库只保存 17 行安全投影，67 行人员明细仅保留在本地受限 staging；过期证书阻断、缺原件报告不生成参数；真实 stream 7/7、Base+泰昌门禁、后端全量 423 项及 2 个子测试通过；数据库写入、资产提升和 DOCX 选图变更均为 0 |
+| [x] | P1-03 结构化参数和业务台账 | `scripts/rag/build_taichang_business_ledgers.py`、`backend/rag/business_ledgers.py`、`docs/development/taichang-bid-v1-data/p1_03_business_ledgers/`、`docs/rag/runs/run_20260714_taichang_p1_03_business_ledgers_summary.md` | 生成并版本化 84 行完整台账，包含 65 行人员花名册和 2 行人员证书；复用 36 行产品参数、2 行项目业绩证据和 16 个证据包；客户确认私有项目内可查询完整人员信息；过期证书阻断、缺原件报告不生成参数；真实 stream 7/7、Base+泰昌门禁、后端全量 433 项及 2 个子测试通过；数据库写入、资产提升和 DOCX 选图变更均为 0 |
 
 ## P0：正式投标文件阻断项
 
@@ -228,9 +228,9 @@ build_project_bid_markdown(volume_type=technical/business, with_images=true)
 
 ### 2026-07-14 泰昌 P1-04 章节—事实—证据映射收口
 
-- 已建立 19 个动态语义章节映射，按技术标/商务标分表输出，不绑定历史章节号。
-- 只有 5 个“已有资料”章节可进入自动引用候选；10 个“部分可用”、3 个“缺原件”和 1 个“人工确认”章节均保留正式投标门禁。
+- 已建立 20 个动态语义章节映射（技术标 12、商务标 8），新增“人员组织与人员证书”，不绑定历史章节号。
+- 6 个“已有资料”章节可进入自动引用候选；10 个“部分可用”、3 个“缺原件”和 1 个“人工确认”章节均保留正式投标门禁。
 - 15 个唯一证据包只按 ID 跨章节复用，不复制资产；历史 Word 知识资产继续保持 `knowledge_only`，不提升为正式配图或正式附件。
 - N-HAP/UPVC 缺原件、职业健康安全证书过期、资格预审无独立原件、2024 审计编号待复核、授权委托与签章人工确认等边界均已固化。
-- 人员受限明细纳入映射 0；辽宁招标资料和河北豪乾参考稿进入泰昌事实引用 0。
-- 专项 `29 passed`、后端全量 `432 passed、2 subtests passed`；本轮数据库写入、metadata 改写、资产复制/提升和 DOCX 选图变更均为 0。
+- 65 行花名册和 2 行人员证书已纳入私有项目映射；辽宁招标资料和河北豪乾参考稿进入泰昌事实引用 0。
+- 专项 `30 passed`、后端全量 `433 passed、2 subtests passed`、真实人员 stream 和标准增量门禁 PASS；本轮数据库写入、资产复制/提升和 DOCX 选图变更均为 0。

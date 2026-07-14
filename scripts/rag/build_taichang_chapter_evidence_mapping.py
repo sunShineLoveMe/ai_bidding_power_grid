@@ -307,15 +307,32 @@ def _definitions() -> list[dict[str, Any]]:
             confirmations=["当前评分项", "对应证明材料要求", "材料有效期基准日"],
         ),
         _chapter(
+            mapping_id="BUS-PERSONNEL",
+            volume="business",
+            semantic_key="qualification.personnel_roster_and_certificates",
+            name="人员组织与人员证书",
+            aliases=["人员组织", "人员配置", "人员花名册", "项目人员", "试验检测人员", "人员证书", "社保证明", "劳动合同"],
+            status="existing",
+            fact_refs=[
+                _fact_ref(
+                    ledger_source,
+                    {"ledger_types": ["personnel_roster", "personnel_certificate", "personnel_summary"]},
+                    "私有项目完整人员台账，包含姓名、岗位、学历、社保/劳动合同记录、证书编号、准操项目、有效期和来源页",
+                )
+            ],
+            blockers=["正式投标时仍需按当前项目岗位要求、证书有效期和实际项目分工复核，不得把花名册自动等同于项目任命。"],
+            generation_policy="可引用客户确认的完整人员台账；按当前招标岗位要求筛选，不复制人员记录，不虚构项目任命。",
+        ),
+        _chapter(
             mapping_id="BUS-AUTHORIZATION-SIGNATURE",
             volume="business",
             semantic_key="authorization.signature_and_seal",
             name="授权委托与签章",
             aliases=["授权委托书", "法定代表人授权", "签字盖章", "电子签章", "法定代表人身份证明"],
             status="manual_confirmation",
-            blockers=["不得自动插入印章、签名、身份证件或人员受限明细。", "授权范围、被授权人和签署日期必须由客户确认。"],
+            blockers=["不得自动生成或执行签字盖章。", "授权范围、被授权人和签署日期必须由客户确认。"],
             confirmations=["法定代表人签署方式", "被授权人", "授权范围", "授权期限", "盖章位置", "签署日期"],
-            generation_policy="仅生成模板占位和确认清单；不得自动签字、盖章或插入受限人员资料。",
+            generation_policy="可从完整人员台账预填候选人信息，但只生成模板占位和确认清单；不得自动签字、盖章。",
         ),
     ]
 
@@ -370,8 +387,6 @@ def _validate(mapping: list[dict[str, Any]], bundle_ids: set[str]) -> None:
     serialized = json.dumps(mapping, ensure_ascii=False)
     if "management-system:ohs" in serialized or "taichang-evidence-68219d67c5feb3ed96a4" in serialized:
         raise ValueError("过期职业健康安全证书不得进入映射引用")
-    if re.search(r"T[0-9X]{16,20}", serialized):
-        raise ValueError("映射中疑似包含受限人员证件号码")
 
 
 def _write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
@@ -400,7 +415,7 @@ def _write_markdown(path: Path, title: str, rows: list[dict[str, Any]]) -> None:
     for item in rows:
         blockers = "；".join(item["blockers"]) or "—"
         lines.append(f"| {item['chapter_display_name']} (`{item['semantic_chapter_key']}`) | {item['material_status_label']} | {len(item['fact_refs'])} | {len(item['evidence_bundle_ids'])} | {len(item['resolved_knowledge_asset_candidate_ids'])} | {blockers} |")
-    lines.extend(["", "## 使用门禁", "", "- 只有“已有资料”可作为自动引用候选；“部分可用”仍需项目适配或有效期复核。", "- “缺原件”不得生成正式事实；“人工确认”只生成占位和确认清单。", "- 辽宁招标资料只定义本项目要求，河北豪乾只参考结构和写法。", "- 印章、签名、身份证件和人员受限明细不得由本映射自动插入。", ""])
+    lines.extend(["", "## 使用门禁", "", "- 只有“已有资料”可作为自动引用候选；“部分可用”仍需项目适配或有效期复核。", "- “缺原件”不得生成正式事实；“人工确认”只生成占位和确认清单。", "- 辽宁招标资料只定义本项目要求，河北豪乾只参考结构和写法。", "- 人员完整信息已获客户确认，可在泰昌私有项目中使用；项目任命、授权签字和盖章仍须按当前投标确认。", ""])
     path.write_text("\n".join(lines), encoding="utf-8")
 
 
@@ -431,14 +446,19 @@ def build(output_dir: Path = DEFAULT_OUTPUT_DIR) -> dict[str, Any]:
             "tender_requirement": "仅用于当前项目要求、评分项、年度和格式",
             "reference_template": "仅用于结构和写法，不得生成泰昌事实",
             "asset_reuse": "只复用事实/证据/资产 ID，不创建副本",
-            "restricted_personnel": "不进入本映射及普通问答，授权委托只生成确认占位",
+            "private_project_personnel": "客户已确认可在私有项目内使用完整人员花名册和证书信息；保留来源、有效期和项目适用性校验",
         },
+        "privacy_override_basis": "客户已确认该项目为私有项目，人员及证书完整数据可进入版本化台账、私有知识库问答和章节映射",
         "source_snapshot": {
             "p1_01_ready_knowledge_assets": sum(1 for item in assets if item.get("ready_for_database_ingestion") is True),
             "p1_02_evidence_bundles": len(bundles),
             "p1_03_business_ledger_rows": p1_03.get("summary", {}).get("business_ledger_rows", 0),
-            "p1_03_published_safe_rows": p1_03.get("summary", {}).get("published_safe_rows", 0),
-            "p1_03_restricted_rows_included": 0,
+            "p1_03_published_rows": p1_03.get("summary", {}).get("published_rows", 0),
+            "p1_03_personnel_rows": sum(
+                int((p1_03.get("summary", {}).get("by_ledger_type") or {}).get(key, 0))
+                for key in ("personnel_roster", "personnel_certificate")
+            ),
+            "p1_03_privacy_blocked_rows": p1_03.get("summary", {}).get("privacy_blocked_rows", 0),
             "verified_parameter_rows": len(parameter_rows),
         },
         "summary": {

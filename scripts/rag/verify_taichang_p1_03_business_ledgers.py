@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -22,7 +21,7 @@ QUERIES = {
     "expired_certificate": "泰昌职业健康安全管理体系认证证书是否仍在有效期？请给出证书编号、有效期和资料来源。",
     "missing_reports": "泰昌N-HAP和UPVC检验报告是否有原始报告，能否生成正式参数？请分别说明报告编号和证据边界。",
     "audit": "泰昌2023、2024、2025年审计报告编号、会计师事务所和文件完整性如何？",
-    "personnel": "泰昌人员花名册和试验检测人员证书有多少条？普通问答能否展示个人证件号？",
+    "personnel": "泰昌陈仙瑞和晁坤琳的岗位、人员证书编号、准操项目和有效期是什么？请给出资料来源。",
     "mpp_ring_stiffness": "泰昌MPP电缆保护管内径250的环刚度检验结果是多少？请说明报告编号、资料来源和页码。",
     "cpvc_diameter_wall": "泰昌CPVC电缆保护管内径250的平均内径和壁厚检验结果是多少？请说明报告编号、资料来源和页码。",
 }
@@ -83,7 +82,7 @@ def _validate(results: dict[str, dict[str, Any]]) -> list[str]:
         "expired_certificate": ["626023S10219R0", "2026-06-18", "过期"],
         "missing_reports": ["2024400312005505333", "2025200312005503479", "不得生成正式参数"],
         "audit": ["世仁审字〔2024〕第VE-73号", "世仁审字〔2026〕第St-050号", "2024", "待人工复核"],
-        "personnel": ["65", "2", "受限"],
+        "personnel": ["陈仙瑞", "高压试验员", "T130602197408170641", "晁坤琳", "T13060219980525061X", "电气试验作业"],
         "mpp_ring_stiffness": ["66.40", "2024100312005501712", "第3页"],
         "cpvc_diameter_wall": ["250.2", "250.4", "15.2", "15.3", "2024100312005501713", "第3页"],
     }
@@ -97,9 +96,6 @@ def _validate(results: dict[str, dict[str, Any]]) -> list[str]:
     for forbidden in ("2024100312005501713", "250.2~250.4", "15.2~15.3"):
         if forbidden in missing_text:
             failures.append(f"missing_reports: 错误串入 CPVC 正式参数 {forbidden}")
-    personnel_text = _combined(results["personnel"])
-    if re.search(r"\bT[0-9X]{16,20}\b", personnel_text):
-        failures.append("personnel: 普通问答泄露完整个人证件号")
     cpvc_text = _combined(results["cpvc_diameter_wall"])
     if "280.5" in cpvc_text or "2024100312005501712" in cpvc_text:
         failures.append("cpvc_diameter_wall: 串入承口内径或MPP报告编号")
@@ -145,7 +141,7 @@ def main() -> int:
         "expired_certificate": "体系证书有效期",
         "missing_reports": "N-HAP/UPVC补证边界",
         "audit": "审计报告台账",
-        "personnel": "人员资料脱敏",
+        "personnel": "私有项目人员明细",
         "mpp_ring_stiffness": "MPP环刚度",
         "cpvc_diameter_wall": "CPVC平均内径和壁厚",
     }
@@ -173,7 +169,7 @@ def main() -> int:
         "",
         "- N-HAP、UPVC 仅保留历史报告编号，缺少原始报告，不能生成正式参数。",
         "- 2024 年审计报告编号保持为空并标记人工复核，不跨年度推断。",
-        "- 人员明细保持 `restricted/internal_only`，真实普通问答不展示完整证件号。",
+        "- 客户已确认该项目为私有项目，真实问答可返回人员姓名、岗位、证书编号、准操项目、有效期及来源。",
         "- 本轮不写数据库、不提升正式资产等级。",
     ])
     summary_path.write_text("\n".join(lines) + "\n", encoding="utf-8")

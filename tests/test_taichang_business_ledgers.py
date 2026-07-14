@@ -6,7 +6,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "docs/development/taichang-bid-v1-data/p1_03_business_ledgers/taichang_p1_03_manifest.json"
-RESTRICTED_ROWS = ROOT / "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/staging/taichang_business_ledgers/restricted_personnel_rows.json"
 PARAMETERS = ROOT / "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/taichang_product_parameters/taichang_product_parameter_rows.json"
 
 
@@ -26,8 +25,9 @@ class TaichangBusinessLedgersTest(unittest.TestCase):
     def test_counts_and_business_keys_are_stable(self):
         summary = self.payload["summary"]
         self.assertEqual(summary["business_ledger_rows"], 84)
-        self.assertEqual(summary["published_safe_rows"], 17)
-        self.assertEqual(summary["restricted_local_rows"], 67)
+        self.assertEqual(summary["published_rows"], 84)
+        self.assertEqual(summary["private_project_visible_rows"], 84)
+        self.assertEqual(summary["privacy_blocked_rows"], 0)
         self.assertEqual(summary["verified_product_parameter_rows"], 36)
         self.assertEqual(summary["project_performance_evidence_rows"], 2)
         self.assertEqual(summary["evidence_bundles"], 16)
@@ -56,20 +56,31 @@ class TaichangBusinessLedgersTest(unittest.TestCase):
         self.assertEqual(audit["2024"]["report_no_status"], "needs_manual_review")
         self.assertEqual(audit["2025"]["report_no"], "世仁审字〔2026〕第St-050号")
 
-    def test_personnel_details_are_restricted_and_normal_query_is_aggregate_only(self):
-        self.assertFalse(any(row.get("ledger_type") in {"personnel_roster", "personnel_certificate"} for row in self.rows))
-        detail_rows = json.loads(RESTRICTED_ROWS.read_text(encoding="utf-8"))
-        self.assertEqual(len(detail_rows), 67)
-        self.assertTrue(all(row.get("quality_tier") == "restricted" for row in detail_rows))
-        self.assertTrue(all(row.get("rag_visibility") == "internal_only" for row in detail_rows))
+    def test_personnel_details_are_included_for_private_project_queries(self):
+        roster = [row for row in self.rows if row.get("ledger_type") == "personnel_roster"]
+        certificates = [row for row in self.rows if row.get("ledger_type") == "personnel_certificate"]
+        self.assertEqual(len(roster), 65)
+        self.assertEqual(len(certificates), 2)
+        self.assertTrue(all(row.get("quality_tier") == "knowledge_only" for row in [*roster, *certificates]))
+        self.assertTrue(all(row.get("rag_visibility") == "taichang_private_project" for row in [*roster, *certificates]))
+        certificate_by_name = {row["person_name"]: row for row in certificates}
+        self.assertEqual(certificate_by_name["陈仙瑞"]["certificate_no"], "T130602197408170641")
+        self.assertEqual(certificate_by_name["晁坤琳"]["certificate_no"], "T13060219980525061X")
 
         from backend.rag.business_ledgers import search_taichang_business_ledger_contexts
 
-        contexts = search_taichang_business_ledger_contexts("泰昌有多少人员和试验检测人员证书？")
+        contexts = search_taichang_business_ledger_contexts("泰昌陈仙瑞和晁坤琳的岗位、人员证书编号、准操项目和有效期是什么？")
         content = "\n".join(item["content"] for item in contexts)
-        self.assertIn("花名册记录：65条", content)
-        self.assertIn("特种作业证记录：2条", content)
-        self.assertNotRegex(content, r"\bT[0-9X]{16,20}\b")
+        self.assertIn("陈仙瑞", content)
+        self.assertIn("高压试验员", content)
+        self.assertIn("T130602197408170641", content)
+        self.assertIn("晁坤琳", content)
+        self.assertIn("T13060219980525061X", content)
+
+        roster_contexts = search_taichang_business_ledger_contexts("请列出泰昌公司人员花名册全部姓名、岗位、社保和劳动合同记录。")
+        roster_content = "\n".join(item["content"] for item in roster_contexts)
+        self.assertIn("共 65 条", roster_content)
+        self.assertIn("晁坤琳｜董事长、试验员", roster_content)
 
     def test_missing_report_and_intellectual_property_are_explicitly_blocked(self):
         from backend.rag.business_ledgers import search_taichang_business_ledger_contexts
