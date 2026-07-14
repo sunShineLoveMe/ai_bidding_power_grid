@@ -18,6 +18,7 @@ from typing import Any
 from docx import Document
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
+from docx.table import Table
 from lxml import etree
 
 
@@ -57,6 +58,55 @@ def _xml_sha(element: Any) -> str:
 
 def _cell_text(cell: Any) -> str:
     return _clean("".join(node.text or "" for node in cell._tc.xpath(".//w:t")))
+
+
+def _normalize_cross_package_table_text(source_table: Any, inserted_table: Any) -> None:
+    """把跨 DOCX package 复制的单元格文字改写为自包含 OOXML。
+
+    LibreOffice 在整本标书刷新字段时会丢弃人员关系表中依赖源文档样式的 run
+    文字；表格网格、合并关系和 tcPr 均正常。这里只重建单元格的段落/run，保留
+    原始文字和表结构，避免正式导出出现空表头。
+    """
+    source_rows = source_table._tbl.xpath("./w:tr")
+    inserted_rows = inserted_table._tbl.xpath("./w:tr")
+    if len(source_rows) != len(inserted_rows):
+        raise RuntimeError("跨文档表格行数不一致，无法安全规范化单元格文字。")
+
+    for source_row, inserted_row in zip(source_rows, inserted_rows, strict=True):
+        source_cells = source_row.xpath("./w:tc")
+        inserted_cells = inserted_row.xpath("./w:tc")
+        if len(source_cells) != len(inserted_cells):
+            raise RuntimeError("跨文档表格物理单元格数量不一致，无法安全规范化文字。")
+        for source_cell, inserted_cell in zip(source_cells, inserted_cells, strict=True):
+            text = _clean("".join(node.text or "" for node in source_cell.xpath(".//w:t")))
+            for child in list(inserted_cell):
+                if child.tag != qn("w:tcPr"):
+                    inserted_cell.remove(child)
+
+            paragraph = OxmlElement("w:p")
+            paragraph_properties = OxmlElement("w:pPr")
+            justification = OxmlElement("w:jc")
+            justification.set(qn("w:val"), "center")
+            paragraph_properties.append(justification)
+            paragraph.append(paragraph_properties)
+            if text:
+                run = OxmlElement("w:r")
+                run_properties = OxmlElement("w:rPr")
+                fonts = OxmlElement("w:rFonts")
+                for attribute in ("ascii", "hAnsi", "eastAsia"):
+                    fonts.set(qn(f"w:{attribute}"), "FangSong_GB2312")
+                size = OxmlElement("w:sz")
+                size.set(qn("w:val"), "24")
+                size_cs = OxmlElement("w:szCs")
+                size_cs.set(qn("w:val"), "24")
+                run_properties.extend((fonts, size, size_cs))
+                run.append(run_properties)
+                text_node = OxmlElement("w:t")
+                text_node.set(qn("xml:space"), "preserve")
+                text_node.text = text
+                run.append(text_node)
+                paragraph.append(run)
+            inserted_cell.append(paragraph)
 
 
 def _table_record(table: Any, table_index: int, source: Path) -> dict[str, Any]:
@@ -447,6 +497,47 @@ def _selected_source_tables(manifest: dict[str, Any]) -> tuple[Path, list[int]]:
     return Path(source_file).resolve(), [int(table_index)]
 
 
+def _form_table_matches(table: Any, form_key: str) -> bool:
+    text = " ".join(_clean(cell.text) for row in table.rows[:2] for cell in row.cells)
+    if form_key == "business_deviation":
+        return all(token in text for token in ("招标文件条目号", "投标文件条款", "偏差说明"))
+    if form_key == "technical_deviation":
+        return all(token in text for token in ("偏差事项", "招标文件要求", "投标文件响应", "偏差说明"))
+    if form_key == "personnel_relationship":
+        return "身份证号" in text and "离职/退休时间" in text and any(
+            token in text for token in ("本企业人员基本信息", "本企业人员姓名")
+        )
+    if form_key == "technical_characteristics":
+        return "投标人保证值" in text and any(token in text for token in ("项目需求值", "招标人要求值"))
+    return False
+
+
+def _apply_manifest_guarantees(
+    manifest: dict[str, Any],
+    table_indexes: list[int],
+    tables: list[Any],
+) -> int:
+    if str(manifest.get("form_key") or "") != "technical_characteristics":
+        return 0
+    guaranteed_values = {
+        (int(row.get("source_table_index") or 0), int(row.get("source_row_number") or 0)): str(row.get("bidder_guaranteed_value") or "")
+        for row in manifest.get("response_rows") or []
+        if isinstance(row, dict) and row.get("formal_value_allowed") is True
+    }
+    filled_count = 0
+    for table_index, table in zip(table_indexes, tables, strict=True):
+        for row_number, row in enumerate(table.rows[1:], 2):
+            if len(row.cells) < 5:
+                continue
+            value = guaranteed_values.get((table_index, row_number), "")
+            if value:
+                row.cells[4].text = value
+                filled_count += 1
+            elif row.cells[4].text.strip():
+                row.cells[4].text = ""
+    return filled_count
+
+
 def _clear_header_footer(document: Any) -> None:
     """移除招标文件原页码等页眉页脚，避免把招标方版记带入投标文件草稿。"""
     for section in document.sections:
@@ -504,23 +595,7 @@ def export_fixed_form_manifest_to_docx(
         if position < len(copied_tables) - 1:
             body.insert(len(body) - 1, OxmlElement("w:p"))
 
-    guaranteed_values = {
-        (int(row.get("source_table_index") or 0), int(row.get("source_row_number") or 0)): str(row.get("bidder_guaranteed_value") or "")
-        for row in manifest.get("response_rows") or []
-        if isinstance(row, dict) and row.get("formal_value_allowed") is True
-    }
-    filled_count = 0
-    if str(manifest.get("form_key") or "") == "technical_characteristics":
-        for table_index, output_table in zip(table_indexes, source_document.tables, strict=True):
-            for row_number, row in enumerate(output_table.rows[1:], 2):
-                if len(row.cells) < 5:
-                    continue
-                value = guaranteed_values.get((table_index, row_number), "")
-                if value:
-                    row.cells[4].text = value
-                    filled_count += 1
-                elif row.cells[4].text.strip():
-                    row.cells[4].text = ""
+    filled_count = _apply_manifest_guarantees(manifest, table_indexes, list(source_document.tables))
 
     output = Path(output_path).resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -669,6 +744,148 @@ def audit_fixed_form_docx(
         "guarantee_values_preserved": guarantees_preserved,
         "guarantee_value_filled_count": sum(bool(value) for value in actual_guarantees),
     }
+
+
+def replace_fixed_form_tables_in_docx(
+    output_path: str | Path,
+    manifests: list[dict[str, Any]],
+) -> tuple[Path, dict[str, Any]]:
+    """把完整投标文件中 Markdown 重建表替换为当次招标源表 OOXML。"""
+    output = Path(output_path).resolve()
+    document = Document(str(output))
+    replacements: list[dict[str, Any]] = []
+    for manifest in manifests:
+        form_key = str(manifest.get("form_key") or "")
+        candidates = [table for table in document.tables if _form_table_matches(table, form_key)]
+        if not candidates:
+            raise RuntimeError(f"完整投标文件未找到待替换的{FORM_TITLES.get(form_key, '固定表单')}。")
+        target = candidates[0]
+        source_path, table_indexes = _selected_source_tables(manifest)
+        source_document = Document(str(source_path))
+        source_tables = [source_document.tables[index - 1] for index in table_indexes]
+        copied_xml = [deepcopy(table._tbl) for table in source_tables]
+        parent = target._tbl.getparent()
+        position = parent.index(target._tbl)
+        parent.remove(target._tbl)
+        inserted_tables: list[Table] = []
+        for offset, table_xml in enumerate(copied_xml):
+            parent.insert(position + offset * 2, table_xml)
+            inserted_tables.append(Table(table_xml, document._body))
+            if offset < len(copied_xml) - 1:
+                parent.insert(position + offset * 2 + 1, OxmlElement("w:p"))
+        text_normalization = None
+        if form_key == "personnel_relationship":
+            for source_table, inserted_table in zip(source_tables, inserted_tables, strict=True):
+                _normalize_cross_package_table_text(source_table, inserted_table)
+            text_normalization = "plain_ooxml_for_cross_package_libreoffice_compatibility"
+        filled_count = _apply_manifest_guarantees(manifest, table_indexes, inserted_tables)
+        replacements.append({
+            "form_key": form_key,
+            "form_title": FORM_TITLES.get(form_key),
+            "source_file": str(source_path),
+            "source_table_indexes": table_indexes,
+            "source_table_xml_sha256": [_xml_sha(table._tbl) for table in source_tables],
+            "inserted_table_xml_sha256": [_xml_sha(table._tbl) for table in inserted_tables],
+            "inserted_table_count": len(inserted_tables),
+            "guarantee_value_filled_count": filled_count,
+            "text_normalization": text_normalization,
+            "source_structure_preserved": all(
+                _table_merge_signature(source) == _table_merge_signature(inserted)
+                and _table_grid_widths(source) == _table_grid_widths(inserted)
+                and [[_clean(cell.text) for cell in row.cells] for row in source.rows]
+                == [[_clean(cell.text) for cell in row.cells] for row in inserted.rows]
+                for source, inserted in zip(source_tables, inserted_tables, strict=True)
+            ),
+        })
+    document.save(str(output))
+    return output, {
+        "renderer": "full_docx_source_table_replacement",
+        "replacement_count": len(replacements),
+        "model_invoked": False,
+        "mineru_invoked": False,
+        "replacements": replacements,
+        # 跨 DOCX package 插入时命名空间声明可能重排，字节哈希不稳定；验收以
+        # 表格网格、合并结构和单元格原文一致为准，哈希保留作来源追溯。
+        "all_source_xml_preserved": all(row["source_structure_preserved"] for row in replacements),
+    }
+
+
+def audit_full_document_fixed_forms(
+    output_path: str | Path,
+    manifests: list[dict[str, Any]],
+    *,
+    width_tolerance_twips: int = 1,
+) -> dict[str, Any]:
+    """审计完整投标文件字段刷新后的四类固定表单。"""
+    output = Path(output_path).resolve()
+    document = Document(str(output))
+    forms: list[dict[str, Any]] = []
+    for manifest in manifests:
+        form_key = str(manifest.get("form_key") or "")
+        source_path, table_indexes = _selected_source_tables(manifest)
+        source_document = Document(str(source_path))
+        source_tables = [source_document.tables[index - 1] for index in table_indexes]
+        rendered_tables = [table for table in document.tables if _form_table_matches(table, form_key)]
+        if len(rendered_tables) != len(source_tables):
+            forms.append({
+                "form_key": form_key,
+                "status": "failed",
+                "reason": f"预期 {len(source_tables)} 张源表，实际识别 {len(rendered_tables)} 张。",
+            })
+            continue
+
+        same_shapes = all(
+            (len(source.rows), len(source.columns)) == (len(rendered.rows), len(rendered.columns))
+            for source, rendered in zip(source_tables, rendered_tables, strict=True)
+        )
+        merge_preserved = all(
+            _table_merge_signature(source) == _table_merge_signature(rendered)
+            for source, rendered in zip(source_tables, rendered_tables, strict=True)
+        )
+        width_deltas: list[int] = []
+        widths_preserved = True
+        for source, rendered in zip(source_tables, rendered_tables, strict=True):
+            source_widths = _table_grid_widths(source)
+            rendered_widths = _table_grid_widths(rendered)
+            if len(source_widths) != len(rendered_widths):
+                widths_preserved = False
+                continue
+            for left, right in zip(source_widths, rendered_widths, strict=True):
+                if left is None or right is None:
+                    widths_preserved = widths_preserved and left == right
+                    continue
+                width_deltas.append(abs(left - right))
+                widths_preserved = widths_preserved and abs(left - right) <= width_tolerance_twips
+
+        source_text = [[_clean(cell.text) for cell in row.cells] for table in source_tables for row in table.rows]
+        rendered_text = [[_clean(cell.text) for cell in row.cells] for table in rendered_tables for row in table.rows]
+        expected_guarantees: list[str] = []
+        actual_guarantees: list[str] = []
+        if form_key == "technical_characteristics":
+            expected_guarantees = [str(row.get("bidder_guaranteed_value") or "") for row in manifest.get("response_rows") or []]
+            actual_guarantees = [_clean(row.cells[4].text) for table in rendered_tables for row in table.rows[1:] if len(row.cells) >= 5]
+            for rows in (source_text, rendered_text):
+                for row in rows:
+                    if len(row) >= 5:
+                        row[4] = ""
+        text_preserved = source_text == rendered_text
+        guarantees_preserved = expected_guarantees == actual_guarantees if form_key == "technical_characteristics" else True
+        passed = all((same_shapes, merge_preserved, widths_preserved, text_preserved, guarantees_preserved))
+        forms.append({
+            "form_key": form_key,
+            "form_title": FORM_TITLES.get(form_key),
+            "status": "passed" if passed else "failed",
+            "same_shapes": same_shapes,
+            "merge_structure_preserved": merge_preserved,
+            "column_widths_preserved": widths_preserved,
+            "max_width_delta_twips": max(width_deltas or [0]),
+            "source_cell_text_preserved": text_preserved,
+            "guarantee_values_preserved": guarantees_preserved,
+            "guarantee_value_filled_count": sum(bool(value) for value in actual_guarantees),
+            "table_shapes": [{"rows": len(table.rows), "columns": len(table.columns)} for table in rendered_tables],
+        })
+    passed = len(forms) == len(manifests) and all(row.get("status") == "passed" for row in forms)
+    return {"status": "passed" if passed else "failed", "passed": passed, "form_count": len(forms), "forms": forms}
 
 
 def load_parameter_rows(path: str | Path, *, product_family: str = "MPP电缆保护管") -> list[dict[str, Any]]:

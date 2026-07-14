@@ -34,6 +34,7 @@ from backend.services.bid_material_scope import filter_sections_by_material_scop
 from backend.services.formal_placeholders import apply_confirmed_values_to_export_text, count_formal_placeholders, finalize_confirmed_formal_export_text
 from backend.services.bid_prefill import formal_required_confirmation_gaps
 from backend.services.formal_asset_naming import caption_policy, formal_asset_caption, formal_asset_title
+from backend.services.taichang_evidence_export import build_taichang_evidence_export_plan, evidence_pages_by_section
 
 # 操作向量数据库的函数
 from backend.parsing.document_parser import ingest_artifacts as ingest_mineru_artifacts_to_supabase, import_mineru_result_zip, parse_and_index_tender_file, read_parse_status, retry_mineru_result_download, write_parse_status
@@ -1299,6 +1300,61 @@ def _build_section_image_markdown(
     return "".join(snippets)
 
 
+def _build_taichang_evidence_bundle_markdown(
+    section: dict,
+    bundles: list[dict],
+    assets_by_id: dict[str, dict],
+    used_asset_ids: set[str],
+    image_manifest: list[dict],
+) -> str:
+    """按证据包原页序插入整页证据，不显示内部检索信息或调试题注。"""
+    chunks: list[str] = []
+    for bundle in bundles:
+        chunks.append(f"### {clean_formal_bid_text(bundle.get('bundle_title') or '企业证明材料')}\n\n")
+        for page in bundle.get("pages") or []:
+            asset_id = str(page.get("asset_id") or "")
+            asset = assets_by_id.get(asset_id)
+            if not asset or asset_id in used_asset_ids:
+                continue
+            image_ref = _asset_image_ref(asset)
+            if not image_ref:
+                continue
+            used_asset_ids.add(asset_id)
+            alt = clean_formal_bid_text(
+                f"{bundle.get('bundle_title') or '企业证明材料'}第{page.get('global_order') or page.get('page_no')}页"
+            )
+            chunks.append(f"![{alt}]({image_ref})\n\n")
+            image_manifest.append({
+                "asset_id": asset_id,
+                "asset_title": asset.get("title"),
+                "asset_formal_title": alt,
+                "asset_category": asset.get("category"),
+                "asset_type": asset.get("asset_type"),
+                "evidence_type": bundle.get("evidence_type"),
+                "target_library": _asset_meta_value(asset, "target_library"),
+                "source_batch_id": _asset_meta_value(asset, "source_batch_id") or _asset_meta_value(asset, "ingestion_batch_id"),
+                "library": _asset_library_label(asset),
+                "section_id": section.get("id"),
+                "section_title": _section_display_title(section),
+                "volume_type": section_volume_type(section),
+                "volume_name": volume_name(section_volume_type(section)),
+                "score": None,
+                "reason": "章节—证据包确定性映射",
+                "image_ref": image_ref,
+                "caption": "",
+                "caption_policy": "suppressed_document_page_caption",
+                "evidence_bundle_id": bundle.get("evidence_bundle_id"),
+                "evidence_bundle_title": bundle.get("bundle_title"),
+                "bundle_page_no": page.get("page_no"),
+                "bundle_global_order": page.get("global_order"),
+                "bundle_component": page.get("component"),
+                "selection_policy": "chapter_to_evidence_bundle_to_original_page_sequence",
+                "sensitive": bool(asset.get("is_sensitive")),
+                "anonymized": bool(asset.get("anonymized")),
+            })
+    return "".join(chunks)
+
+
 def _asset_allowed_for_bid(asset: dict) -> bool:
     metadata = asset.get("metadata") or {}
     specs = asset.get("specs") or {}
@@ -1432,6 +1488,9 @@ def build_project_bid_markdown(
         report_cover_fields["文件类型"] = delivery_file_type
 
     image_assets: list[dict] = []
+    deterministic_bundle_export = False
+    evidence_bundle_plan: dict = {}
+    evidence_bundle_sections: dict[str, list[dict]] = {}
     export_image_report: dict = {
         "enabled": bool(with_images),
         "scope": "section" if focus_section_id else ("volume" if volume_type else "full"),
@@ -1476,6 +1535,14 @@ def build_project_bid_markdown(
                 "after": len(sections),
                 "removed": before_count - len(sections),
             }
+    fixed_form_manifests = [
+        metadata["fixed_form_manifest"]
+        for section in sections
+        if isinstance((metadata := section.get("metadata")), dict)
+        and isinstance(metadata.get("fixed_form_manifest"), dict)
+    ]
+    if fixed_form_manifests:
+        export_image_report["fixed_form_manifests"] = fixed_form_manifests
     parent_section_ids = {str(section.get("parent_id")) for section in sections if section.get("parent_id")}
 
     def is_container_section(section: dict) -> bool:
@@ -1538,6 +1605,23 @@ def build_project_bid_markdown(
             image_assets = []
             export_image_report["warnings"].append("加载知识库图片资产失败，已降级为无配图导出。")
 
+    if with_images and str(project.get("project_mode") or "") == "taichang_reuse":
+        deterministic_bundle_export = True
+        evidence_bundle_plan = build_taichang_evidence_export_plan(
+            sections,
+            image_assets,
+            material_scope=material_scope,
+            max_pages=DOCX_TOTAL_ASSET_IMAGE_LIMIT,
+            asset_allowed=_asset_allowed_for_bid,
+        )
+        evidence_bundle_sections = evidence_pages_by_section(evidence_bundle_plan)
+        export_image_report["evidence_bundle_selection"] = evidence_bundle_plan
+        export_image_report["selection_policy"] = evidence_bundle_plan.get("selection_policy")
+        if evidence_bundle_plan.get("skipped_bundle_count"):
+            export_image_report["warnings"].append(
+                f"有 {evidence_bundle_plan['skipped_bundle_count']} 个证据包因页序、适用范围或正式门禁未通过而整包跳过。"
+            )
+
     base_document_title = taichang_bid_document_title(project_name)
     document_title = f"{base_document_title}-{volume_name(volume_type)}" if volume_type and not focus_section else base_document_title
     file_stem = _export_download_stem(
@@ -1592,7 +1676,17 @@ def build_project_bid_markdown(
             chunks.append(f"{content}\n\n" if content.endswith("\n") else f"{content}\n\n")
         elif not container_section:
             chunks.append("待补充章节正文。\n\n")
-        if with_images and not container_section and "![" not in content:
+        if with_images and deterministic_bundle_export and not container_section:
+            snippet = _build_taichang_evidence_bundle_markdown(
+                section,
+                evidence_bundle_sections.get(str(section.get("id") or ""), []),
+                {str(asset.get("id")): asset for asset in image_assets if asset.get("id")},
+                used_asset_ids,
+                export_image_report["manifest"],
+            )
+            if snippet:
+                chunks.append(snippet)
+        elif with_images and not container_section and "![" not in content:
             remaining = DOCX_TOTAL_ASSET_IMAGE_LIMIT - len(export_image_report["manifest"])
             snippet = _build_section_image_markdown(
                 section,
@@ -1604,7 +1698,7 @@ def build_project_bid_markdown(
             if snippet:
                 chunks.append(snippet)
 
-    if with_images and image_assets:
+    if with_images and image_assets and not deterministic_bundle_export:
         evidence_counts = _manifest_evidence_counts(export_image_report["manifest"])
         required_project_performance = 2
         missing_project_performance = max(

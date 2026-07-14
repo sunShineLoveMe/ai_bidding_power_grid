@@ -5,11 +5,13 @@ from unittest.mock import patch
 
 from backend.services.taichang_fixed_forms import (
     audit_fixed_form_docx,
+    audit_full_document_fixed_forms,
     build_p2_03_fixed_form_payload,
     export_fixed_form_manifest_to_docx,
     extract_fixed_form_inventory,
     load_parameter_rows,
     render_fixed_form_draft,
+    replace_fixed_form_tables_in_docx,
 )
 
 
@@ -124,3 +126,33 @@ def test_personnel_form_docx_preserves_two_level_merged_header(tmp_path: Path) -
     assert report["source_table_indexes"] == [19]
     assert report["table_shapes"] == [{"rows": 3, "columns": 13}]
     assert report["exact_table_xml_preserved"] is True
+
+
+def test_full_docx_replaces_four_markdown_tables_with_source_ooxml(tmp_path: Path) -> None:
+    from docx import Document
+
+    payload = _payload()
+    manifests = list(payload["section_manifests"].values())
+    document = Document()
+    headers = [
+        ["序号", "招标文件条目号", "招标文件条款", "投标文件条款", "偏差说明"],
+        ["本企业人员姓名", "性别", "身份证号", "职务", "任职时间", "与国网人员关系", "国网人员姓名", "性别", "身份证号", "任职单位", "职务", "任职状态", "离职/退休时间"],
+        ["序号", "偏差事项", "招标文件要求", "投标文件响应", "偏差说明"],
+        ["序号", "参数名称", "单位", "项目需求值或表述", "投标人保证值", "备注"],
+    ]
+    for columns in headers:
+        table = document.add_table(rows=2, cols=len(columns))
+        for index, value in enumerate(columns):
+            table.rows[0].cells[index].text = value
+        document.add_paragraph()
+    output = tmp_path / "完整投标文件.docx"
+    document.save(output)
+
+    _, replacement = replace_fixed_form_tables_in_docx(output, manifests)
+    assert replacement["replacement_count"] == 4
+    assert replacement["all_source_xml_preserved"] is True
+    personnel = next(row for row in replacement["replacements"] if row["form_key"] == "personnel_relationship")
+    assert personnel["text_normalization"] == "plain_ooxml_for_cross_package_libreoffice_compatibility"
+    assert len(Document(output).tables) == 5
+    audit = audit_full_document_fixed_forms(output, manifests, width_tolerance_twips=0)
+    assert audit["passed"] is True

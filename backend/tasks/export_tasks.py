@@ -52,7 +52,12 @@ def run_bid_docx_export(
     from backend.api.routes import build_project_bid_markdown, _output_url_for_path
     from backend.db.supabase_repo import update_bid_export_task
     from backend.export.md_to_word import convert_md_to_word, refresh_docx_fields_with_soffice
-    from backend.services.taichang_fixed_forms import audit_fixed_form_docx, export_fixed_form_manifest_to_docx
+    from backend.services.taichang_fixed_forms import (
+        audit_fixed_form_docx,
+        audit_full_document_fixed_forms,
+        export_fixed_form_manifest_to_docx,
+        replace_fixed_form_tables_in_docx,
+    )
 
     with log_context(project_id=project_id, task_id=task_id):
         try:
@@ -71,6 +76,8 @@ def run_bid_docx_export(
                 refresh_docx_fields_with_soffice,
                 export_fixed_form_manifest_to_docx,
                 audit_fixed_form_docx,
+                replace_fixed_form_tables_in_docx,
+                audit_full_document_fixed_forms,
             )
         except Exception as exc:
             logger.exception("后台 DOCX 导出任务失败")
@@ -102,6 +109,8 @@ def _run_bid_docx_export(
     refresh_docx_fields_with_soffice,
     export_fixed_form_manifest_to_docx,
     audit_fixed_form_docx,
+    replace_fixed_form_tables_in_docx,
+    audit_full_document_fixed_forms,
 ) -> dict:
     try:
         update_bid_export_task(project_id, task_id, {
@@ -123,6 +132,7 @@ def _run_bid_docx_export(
             "project_name": project_name,
         })
         fixed_form_manifest = (image_selection_report or {}).get("fixed_form_manifest")
+        fixed_form_manifests = (image_selection_report or {}).get("fixed_form_manifests") or []
         if section_id and isinstance(fixed_form_manifest, dict):
             generated_docx_path, fixed_form_report = export_fixed_form_manifest_to_docx(
                 fixed_form_manifest,
@@ -142,6 +152,12 @@ def _run_bid_docx_export(
                 return_report=True,
                 cover_fields=(image_selection_report or {}).get("cover_fields") or None,
             )
+            if fixed_form_manifests:
+                generated_docx_path, replacement_report = replace_fixed_form_tables_in_docx(
+                    generated_docx_path,
+                    fixed_form_manifests,
+                )
+                image_conversion_report["fixed_form_ooxml"] = replacement_report
         if not generated_docx_path or not Path(generated_docx_path).exists():
             raise RuntimeError("DOCX 生成失败，未找到输出文件。")
         generated_docx_path = Path(generated_docx_path)
@@ -155,6 +171,11 @@ def _run_bid_docx_export(
             image_conversion_report["fixed_form_ooxml"]["post_refresh_audit"] = post_refresh_audit
             if not post_refresh_audit.get("passed"):
                 raise RuntimeError("固定表单在 Word 字段刷新后发生结构漂移，已阻止交付。")
+        elif fixed_form_manifests:
+            post_refresh_audit = audit_full_document_fixed_forms(generated_docx_path, fixed_form_manifests)
+            image_conversion_report["fixed_form_ooxml"]["post_refresh_audit"] = post_refresh_audit
+            if not post_refresh_audit.get("passed"):
+                raise RuntimeError("完整投标文件固定表单在 Word 字段刷新后发生结构漂移，已阻止交付。")
         base_metadata = initial_metadata if isinstance(initial_metadata, dict) else {}
         export_metadata = {
             **base_metadata,
