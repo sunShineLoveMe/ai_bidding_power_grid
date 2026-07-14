@@ -380,6 +380,7 @@ def build_analysis_summary(
     scoring_items: list[dict[str, Any]],
     risks: list[dict[str, Any]],
     chapter_suggestions: list[dict[str, Any]],
+    project_rule_inputs: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     type_counter = Counter(str(item.get("type") or "unknown") for item in content_list)
     project_meta = extract_tender_project_metadata(markdown, content_list)
@@ -400,6 +401,7 @@ def build_analysis_summary(
             **project_meta,
             "interpretation_report": interpretation_report,
             "mineru_quality": mineru_quality,
+            **({"project_rule_inputs": project_rule_inputs} if project_rule_inputs else {}),
         },
         "qualification_requirements": [item for item in requirements if item["requirement_type"] == "资格要求"][:30],
         "document_checklist": [item for item in requirements if item["requirement_type"] == "文件要求"][:30],
@@ -430,6 +432,9 @@ def ingest_mineru_artifacts_to_supabase(
     risks = extract_risks(markdown, content_list)
     scoring_items = extract_scoring_items(markdown, content_list)
     chapter_suggestions = extract_chapter_suggestions(markdown)
+    project_rule_inputs = _read_json(artifacts.get("project_rule_inputs_path"))
+    if not isinstance(project_rule_inputs, dict):
+        project_rule_inputs = None
     analysis = build_analysis_summary(
         markdown=markdown,
         content_list=content_list,
@@ -438,6 +443,7 @@ def ingest_mineru_artifacts_to_supabase(
         scoring_items=scoring_items,
         risks=risks,
         chapter_suggestions=chapter_suggestions,
+        project_rule_inputs=project_rule_inputs,
     )
 
     replace_bid_analysis(project_id, {

@@ -1,0 +1,901 @@
+{
+  "comparison_method": "normalized_exact_then_deterministic_alias_no_fuzzy_similarity",
+  "historical_role": "reference_only",
+  "current_tender_precedence": true,
+  "summary": {
+    "added": 8,
+    "deleted": 123,
+    "name_changed": 4,
+    "order_changed": 11,
+    "condition_changed": 0
+  },
+  "added": [
+    {
+      "rule_id": "FORMAT-001",
+      "title": "投标函及附件",
+      "volume_type": "price",
+      "status": "required"
+    },
+    {
+      "rule_id": "FORMAT-002",
+      "title": "已标价货物清单行报价暨投标报价汇总表",
+      "volume_type": "price",
+      "status": "required"
+    },
+    {
+      "rule_id": "FORMAT-003",
+      "title": "货物清单单价分析表（如有）",
+      "volume_type": "price",
+      "status": "conditional"
+    },
+    {
+      "rule_id": "FORMAT-011",
+      "title": "符合投标文件投标人资格要求的证明文件",
+      "volume_type": "business",
+      "status": "required"
+    },
+    {
+      "rule_id": "FORMAT-012",
+      "title": "查询报告及截图",
+      "volume_type": "business",
+      "status": "required"
+    },
+    {
+      "rule_id": "FORMAT-014",
+      "title": "针对评审要素、需要补充的其他文件（详见投标邀请书附件4）",
+      "volume_type": "business",
+      "status": "required"
+    },
+    {
+      "rule_id": "FORMAT-027",
+      "title": "针对评审要素，需要补充的其他文件（详见投标邀请书附件4）",
+      "volume_type": "technical",
+      "status": "required"
+    },
+    {
+      "rule_id": "PREQUAL-UPDATE",
+      "title": "到期资质证书和试验报告更新材料",
+      "volume_type": "business",
+      "status": "update_required"
+    }
+  ],
+  "deleted": [
+    {
+      "historical_id": "technical-chapter-002",
+      "title": "1.技术偏差表",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "technical-chapter-003",
+      "title": "（二）专项投标文件",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "technical-chapter-004",
+      "title": "1.业绩文件",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "technical-chapter-005",
+      "title": "1.1.资格预审通知书",
+      "volume_type": "technical",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "technical-chapter-007",
+      "title": "（G004-500013634-00006）",
+      "volume_type": "technical",
+      "historical_origin_type": "uncertain"
+    },
+    {
+      "historical_id": "technical-chapter-010",
+      "title": "4.1、资格预审通知书",
+      "volume_type": "technical",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "technical-chapter-011",
+      "title": "4.2、资质业绩凭证单",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "technical-chapter-012",
+      "title": "5.针对评审要素，需要补充的其他文件",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "technical-chapter-013",
+      "title": "5.1.产品制造质量控制",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-014",
+      "title": "5.1.1.原材料组部件进厂检验检测措施",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-015",
+      "title": "5.1.2.生产工艺/质量管控体系",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-016",
+      "title": "5.1.2.1. 电缆保护管MPP工艺流程",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-017",
+      "title": "5.1.2.2.电缆保护管CPVC工艺流程",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-018",
+      "title": "5.1.2.3.N-HAP电缆保护管工艺流程",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-019",
+      "title": "5.1.2.4.电缆保护管PE工艺流程",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-020",
+      "title": "5.1.2.5.各工序控制点工艺文件",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-021",
+      "title": "5.1.3.生产制造环境",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-022",
+      "title": "5.1.4.试组装环境",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-023",
+      "title": "5.1.5.资质核实",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-024",
+      "title": "5.2.履约风险",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-025",
+      "title": "5.2.1.履约风险",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-026",
+      "title": "5.2.2.绩效评价",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-027",
+      "title": "5.3.绿色低碳生产及绿色回收",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-028",
+      "title": "5.3.1.建立了绿色生产",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-029",
+      "title": "5.3.1.1.ESG(环境、社会、公司治理)报告",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-030",
+      "title": "5.3.1.2废水、废气、废固报告",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-031",
+      "title": "5.3.1.3.现状环境影响评估报告",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-032",
+      "title": "5.3.1.4.绿色发展规划报告",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-033",
+      "title": "5.3.1.5.碳足迹报告",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-034",
+      "title": "5.3.1.6.绿色电力认证证书",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-035",
+      "title": "5.3.1.7.绿色供应链认证证书",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-036",
+      "title": "5.3.1.8.绿色电力证书交易凭证",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-037",
+      "title": "5.3.1.9.创新激励机制评价报告",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-038",
+      "title": "5.3.1.10.智能制造优秀场景报告",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-039",
+      "title": "5.3.1.11.数字领航企业评价报告",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-040",
+      "title": "5.3.2.绿色回收制度的证明材料",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "technical-chapter-041",
+      "title": "6.招标文件规定的其他应提交的技术文件",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "technical-chapter-042",
+      "title": "6.1.发明专利证书",
+      "volume_type": "technical",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "technical-chapter-043",
+      "title": "6.2.中华人民共和国国家版权局计算机软件著作权登记证书",
+      "volume_type": "technical",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "technical-chapter-044",
+      "title": "7.技术服务，包括培训、安装指导等",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "technical-chapter-045",
+      "title": "7.1.技术服务及培训方案",
+      "volume_type": "technical",
+      "historical_origin_type": "taichang_habitual_addition"
+    },
+    {
+      "historical_id": "technical-chapter-046",
+      "title": "7.2.安装指导方案",
+      "volume_type": "technical",
+      "historical_origin_type": "taichang_habitual_addition"
+    },
+    {
+      "historical_id": "technical-chapter-047",
+      "title": "7.3.备品备件",
+      "volume_type": "technical",
+      "historical_origin_type": "taichang_habitual_addition"
+    },
+    {
+      "historical_id": "technical-chapter-048",
+      "title": "7.4.故障响应处理方案",
+      "volume_type": "technical",
+      "historical_origin_type": "taichang_habitual_addition"
+    },
+    {
+      "historical_id": "technical-chapter-049",
+      "title": "8.售后服务保障及承诺",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "technical-chapter-050",
+      "title": "8.1.售后服务保障",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "technical-chapter-051",
+      "title": "8.2.服务承诺",
+      "volume_type": "technical",
+      "historical_origin_type": "taichang_habitual_addition"
+    },
+    {
+      "historical_id": "technical-chapter-052",
+      "title": "9.质量保证措施方案",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "technical-chapter-053",
+      "title": "10.认证证书",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "technical-chapter-054",
+      "title": "10.1.质量管理体系认证证书",
+      "volume_type": "technical",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "technical-chapter-055",
+      "title": "10.2.职业健康安全管理体系认证证书",
+      "volume_type": "technical",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "technical-chapter-056",
+      "title": "10.3.环境管理体系认证证书",
+      "volume_type": "technical",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "technical-chapter-057",
+      "title": "11.主要技术人员、项目经理及其相关证书",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "technical-chapter-058",
+      "title": "附：试验人员证书",
+      "volume_type": "technical",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "technical-chapter-059",
+      "title": "12.检测检验报告（包括型式试验报告、检测报告、鉴定报告、检定报告、校准证书或报告、检测试验报告等相关报告）",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "technical-chapter-060",
+      "title": "12.1.检测报告",
+      "volume_type": "technical",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "technical-chapter-061",
+      "title": "12.1.1.CPVC电缆保护管检验报告",
+      "volume_type": "technical",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "technical-chapter-062",
+      "title": "12.1.2.MPP电缆保护管检验报告",
+      "volume_type": "technical",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "technical-chapter-063",
+      "title": "12.1.3.N-HAP电缆保护管",
+      "volume_type": "technical",
+      "historical_origin_type": "uncertain"
+    },
+    {
+      "historical_id": "technical-chapter-064",
+      "title": "12.1.4.硬聚氯乙烯塑料(UPVC)电力电缆导管",
+      "volume_type": "technical",
+      "historical_origin_type": "uncertain"
+    },
+    {
+      "historical_id": "technical-chapter-065",
+      "title": "12.2.更新校准证书",
+      "volume_type": "technical",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "technical-chapter-066",
+      "title": "12.2.1.电子拉力试验机",
+      "volume_type": "technical",
+      "historical_origin_type": "uncertain"
+    },
+    {
+      "historical_id": "technical-chapter-067",
+      "title": "12.2.2.微机控制电子万能试验机",
+      "volume_type": "technical",
+      "historical_origin_type": "uncertain"
+    },
+    {
+      "historical_id": "technical-chapter-068",
+      "title": "12.2.3.熔体流动速率仪",
+      "volume_type": "technical",
+      "historical_origin_type": "uncertain"
+    },
+    {
+      "historical_id": "technical-chapter-069",
+      "title": "12.2.4.热变型、维卡软化点温度测定仪",
+      "volume_type": "technical",
+      "historical_origin_type": "uncertain"
+    },
+    {
+      "historical_id": "technical-chapter-070",
+      "title": "12.2.5.锤击试验装置",
+      "volume_type": "technical",
+      "historical_origin_type": "uncertain"
+    },
+    {
+      "historical_id": "technical-chapter-071",
+      "title": "12.2.6.电子天平",
+      "volume_type": "technical",
+      "historical_origin_type": "uncertain"
+    },
+    {
+      "historical_id": "technical-chapter-072",
+      "title": "13.其他",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "technical-chapter-073",
+      "title": "13.1.投标人自述的企业名称变更原因说明、市场监督管理部门出具的‘名称变更证明’相关证明材料、有权机构出具的‘资格资质变更证明’等相关证明材料。（如有）",
+      "volume_type": "technical",
+      "historical_origin_type": "tender_conditional"
+    },
+    {
+      "historical_id": "business-chapter-002",
+      "title": "1.商务偏差表",
+      "volume_type": "business",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "business-chapter-003",
+      "title": "（二）投标保证保险",
+      "volume_type": "business",
+      "historical_origin_type": "tender_conditional"
+    },
+    {
+      "historical_id": "business-chapter-004",
+      "title": "(三)补充文件",
+      "volume_type": "business",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "business-chapter-005",
+      "title": "1. 投标保证金",
+      "volume_type": "business",
+      "historical_origin_type": "uncertain"
+    },
+    {
+      "historical_id": "business-chapter-006",
+      "title": "2.投标人情况",
+      "volume_type": "business",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "business-chapter-009",
+      "title": "附：国家企业信用信息公示系统（http://www.gsxt.gov.cn）查询的股东（企业或自然人）名称及详细出资情况截图",
+      "volume_type": "business",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "business-chapter-010",
+      "title": "附：股权证明材料",
+      "volume_type": "business",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "business-chapter-011",
+      "title": "3.企业法人营业执照",
+      "volume_type": "business",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "business-chapter-012",
+      "title": "4.有效的税务登记证明",
+      "volume_type": "business",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "business-chapter-014",
+      "title": "5.1.符合投标邀请书投标人资格要求的证明文件（更新或补充）",
+      "volume_type": "business",
+      "historical_origin_type": "tender_conditional"
+    },
+    {
+      "historical_id": "business-chapter-015",
+      "title": "5.1.1.资格预审结果通知书",
+      "volume_type": "business",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "business-chapter-016",
+      "title": "5.1.2.资质业绩凭证单",
+      "volume_type": "business",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "business-chapter-017",
+      "title": "5.2查询报告及截图",
+      "volume_type": "business",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "business-chapter-018",
+      "title": "5.2.1.国家企业信用信息公示系统查询结果",
+      "volume_type": "business",
+      "historical_origin_type": "uncertain"
+    },
+    {
+      "historical_id": "business-chapter-019",
+      "title": "（1）营业执照信息查询截图",
+      "volume_type": "business",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "business-chapter-020",
+      "title": "（2）清算信息查询截图",
+      "volume_type": "business",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "business-chapter-021",
+      "title": "（3）行政处罚信息查询截图",
+      "volume_type": "business",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "business-chapter-022",
+      "title": "（4）纳入经营异常名录信息查询截图",
+      "volume_type": "business",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "business-chapter-023",
+      "title": "（5）纳入严重违反失信企业名单（黑名单）信息查询截图",
+      "volume_type": "business",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "business-chapter-024",
+      "title": "（6）股东及出资信息查询截图",
+      "volume_type": "business",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "business-chapter-025",
+      "title": "（7）国家企业信用信息公示系统查询截图",
+      "volume_type": "business",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "business-chapter-026",
+      "title": "5.2.2.信用中国”（www.creditchina.gov.cn）中的查询结果",
+      "volume_type": "business",
+      "historical_origin_type": "uncertain"
+    },
+    {
+      "historical_id": "business-chapter-027",
+      "title": "6.财务状况",
+      "volume_type": "business",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "business-chapter-028",
+      "title": "6.1.新增2024年审计报告",
+      "volume_type": "business",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "business-chapter-029",
+      "title": "7.针对评审要素，需要补充的其他文件",
+      "volume_type": "business",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "business-chapter-030",
+      "title": "7.1.应急保供",
+      "volume_type": "business",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "business-chapter-031",
+      "title": "7.2.绿色发展规划及管理体系认证",
+      "volume_type": "business",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "business-chapter-032",
+      "title": "7.2.1.绿色发展规划响应情况",
+      "volume_type": "business",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "business-chapter-033",
+      "title": "（1）绿色发展规划报告",
+      "volume_type": "business",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "business-chapter-034",
+      "title": "7.2.2.绿色管理体系认证情况",
+      "volume_type": "business",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "business-chapter-035",
+      "title": "（1）质量管理体系认证证书",
+      "volume_type": "business",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "business-chapter-036",
+      "title": "（2）职业健康安全管理体系认证证书",
+      "volume_type": "business",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "business-chapter-037",
+      "title": "（3）环境管理体系认证证书",
+      "volume_type": "business",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "business-chapter-038",
+      "title": "7.2.3.环境影响评价情况",
+      "volume_type": "business",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "business-chapter-039",
+      "title": "（1）ESG(环境、社会、公司治理)报告",
+      "volume_type": "business",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "business-chapter-040",
+      "title": "（2）废水、废气、废固报告",
+      "volume_type": "business",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "business-chapter-041",
+      "title": "（3）现状环境影响评估报告",
+      "volume_type": "business",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "business-chapter-042",
+      "title": "7.2.4.绿电绿证情况",
+      "volume_type": "business",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "business-chapter-043",
+      "title": "（1）绿色电力认证证书",
+      "volume_type": "business",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "business-chapter-044",
+      "title": "（2）绿色供应链认证证书",
+      "volume_type": "business",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "business-chapter-045",
+      "title": "（3）绿色电力证书交易凭证",
+      "volume_type": "business",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "business-chapter-046",
+      "title": "7.2.5.绿色低碳响应情况",
+      "volume_type": "business",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "business-chapter-047",
+      "title": "（1）碳足迹报告",
+      "volume_type": "business",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "business-chapter-048",
+      "title": "7.3.创新激励机制、供应链保障措施",
+      "volume_type": "business",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "business-chapter-049",
+      "title": "（1）创新激励机制评价报告",
+      "volume_type": "business",
+      "historical_origin_type": "tender_scoring_derived"
+    },
+    {
+      "historical_id": "business-chapter-051",
+      "title": "9.制造商授权委托书（本批次不适用）",
+      "volume_type": "business",
+      "historical_origin_type": "tender_conditional"
+    },
+    {
+      "historical_id": "business-chapter-054",
+      "title": "12.其他",
+      "volume_type": "business",
+      "historical_origin_type": "tender_mandated"
+    },
+    {
+      "historical_id": "business-chapter-055",
+      "title": "12.1.发明专利证书",
+      "volume_type": "business",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "business-chapter-056",
+      "title": "12.2.中华人民共和国国家版权局计算机软件著作权登记证书",
+      "volume_type": "business",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "business-chapter-057",
+      "title": "12.3.河北省守合同重信用企业",
+      "volume_type": "business",
+      "historical_origin_type": "uncertain"
+    },
+    {
+      "historical_id": "business-chapter-058",
+      "title": "12.4.中国裁判文书网查询截图",
+      "volume_type": "business",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "business-chapter-059",
+      "title": "12.5.中国执行信息公开网查询截图",
+      "volume_type": "business",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "business-chapter-060",
+      "title": "12.6.一般纳税人查询截图",
+      "volume_type": "business",
+      "historical_origin_type": "reference_layout_only"
+    },
+    {
+      "historical_id": "business-chapter-061",
+      "title": "（四）法定代表人（单位负责人）权委托书",
+      "volume_type": "business",
+      "historical_origin_type": "tender_mandated"
+    }
+  ],
+  "name_changes": [
+    {
+      "rule_id": "FORMAT-006",
+      "historical_id": "business-chapter-007",
+      "historical_title": "2.1.投标人与国家电网公司系统人员关系说明",
+      "current_title": "投标人与国家电网公司系统人员关系说明",
+      "match_method": "deterministic_alias"
+    },
+    {
+      "rule_id": "FORMAT-007",
+      "historical_id": "business-chapter-008",
+      "historical_title": "2.2投标人基本情况表",
+      "current_title": "投标人基本情况表",
+      "match_method": "deterministic_alias"
+    },
+    {
+      "rule_id": "FORMAT-010",
+      "historical_id": "business-chapter-013",
+      "historical_title": "5. 符合招标文件投标人资格要求的证明文件",
+      "current_title": "符合招标文件投标人资格要求的证明文件（详见投标邀请书附件4）",
+      "match_method": "deterministic_alias"
+    },
+    {
+      "rule_id": "FORMAT-026",
+      "historical_id": "technical-chapter-009",
+      "historical_title": "4.符合招标文件投标人资格要求的证明文件",
+      "current_title": "符合招标文件投标人资格要求的证明文件（详见投标邀请书附件4）",
+      "match_method": "deterministic_alias"
+    }
+  ],
+  "order_changes": [
+    {
+      "rule_id": "FORMAT-004",
+      "historical_id": "business-chapter-001",
+      "historical_order": 1,
+      "current_order": 4
+    },
+    {
+      "rule_id": "FORMAT-006",
+      "historical_id": "business-chapter-007",
+      "historical_order": 7,
+      "current_order": 5
+    },
+    {
+      "rule_id": "FORMAT-007",
+      "historical_id": "business-chapter-008",
+      "historical_order": 8,
+      "current_order": 6
+    },
+    {
+      "rule_id": "FORMAT-010",
+      "historical_id": "business-chapter-013",
+      "historical_order": 13,
+      "current_order": 7
+    },
+    {
+      "rule_id": "FORMAT-015",
+      "historical_id": "business-chapter-050",
+      "historical_order": 50,
+      "current_order": 11
+    },
+    {
+      "rule_id": "FORMAT-017",
+      "historical_id": "business-chapter-053",
+      "historical_order": 53,
+      "current_order": 12
+    },
+    {
+      "rule_id": "FORMAT-018",
+      "historical_id": "business-chapter-052",
+      "historical_order": 52,
+      "current_order": 13
+    },
+    {
+      "rule_id": "FORMAT-021",
+      "historical_id": "technical-chapter-001",
+      "historical_order": 1,
+      "current_order": 14
+    },
+    {
+      "rule_id": "FORMAT-024",
+      "historical_id": "technical-chapter-006",
+      "historical_order": 6,
+      "current_order": 15
+    },
+    {
+      "rule_id": "FORMAT-025",
+      "historical_id": "technical-chapter-008",
+      "historical_order": 8,
+      "current_order": 16
+    },
+    {
+      "rule_id": "FORMAT-026",
+      "historical_id": "technical-chapter-009",
+      "historical_order": 9,
+      "current_order": 17
+    }
+  ],
+  "condition_changes": []
+}

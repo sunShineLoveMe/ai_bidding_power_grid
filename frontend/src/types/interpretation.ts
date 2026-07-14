@@ -114,6 +114,9 @@ export interface BidSection extends BidOutlineChapter {
 
 export interface BidOutline {
   version?: string;
+  artifact_role?: string;
+  current_tender_precedence?: boolean;
+  historical_skeleton_role?: string;
   generated_at?: string;
   model?: string;
   project_name?: string;
@@ -122,6 +125,23 @@ export interface BidOutline {
   volumes?: BidOutlineVolume[];
   chapters?: BidOutlineChapter[];
   next_steps?: string[];
+  project_rule_summary?: {
+    total?: number;
+    included?: number;
+    excluded?: number;
+    status_counts?: Record<string, number>;
+    source_basis?: string;
+    requires_manual_review?: boolean;
+  };
+  historical_difference?: {
+    summary?: {
+      added?: number;
+      deleted?: number;
+      name_changed?: number;
+      order_changed?: number;
+      condition_changed?: number;
+    };
+  };
 }
 
 export interface AIInterpretationReport {

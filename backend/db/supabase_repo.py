@@ -2820,9 +2820,21 @@ def get_project_interpretation(project_id: str) -> dict[str, Any]:
         logging.warning("bid_sections 查询失败，可能尚未执行建表 SQL: %s", exc)
         sections = []
 
+    files = (
+        client.table("bid_files")
+        .select("id,project_id,file_name,file_type,file_hash,parse_status,created_at")
+        .eq("project_id", project_id)
+        .order("created_at", desc=True)
+        .limit(50)
+        .execute()
+        .data
+        or []
+    )
+
     return {
         "project": project,
         "analysis": analysis,
+        "files": files,
         "requirements": select_many("bid_requirements"),
         "risks": select_many("bid_risks"),
         "scoringItems": select_many("bid_scoring_items"),

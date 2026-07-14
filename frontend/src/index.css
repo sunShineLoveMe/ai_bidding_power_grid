@@ -791,6 +791,41 @@ textarea {
   border-bottom: 1px solid #e2e8f0;
 }
 
+.project-skeleton-basis {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid #e8eef6;
+  background: #f0f9f5;
+  padding: 10px 22px;
+}
+
+.project-skeleton-basis-copy {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  gap: 10px;
+  color: #166534;
+}
+
+.project-skeleton-basis-copy > div {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+}
+
+.project-skeleton-basis-copy strong {
+  font-size: 13px;
+}
+
+.project-skeleton-basis-copy span {
+  color: #4b6472;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
 .outline-topbar {
   display: flex;
   min-width: 0;
@@ -1623,6 +1658,14 @@ textarea {
   .outline-task-progress {
     width: 104px;
     min-width: 104px;
+  }
+}
+
+@media (max-width: 900px) {
+  .project-skeleton-basis {
+    align-items: flex-start;
+    flex-direction: column;
+    padding-inline: 14px;
   }
 }
 

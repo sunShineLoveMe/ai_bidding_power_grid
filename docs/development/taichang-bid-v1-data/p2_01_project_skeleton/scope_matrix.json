@@ -1,0 +1,26 @@
+[
+  {
+    "volume_type": "price",
+    "volume_label": "价格文件",
+    "rule_scope": "package",
+    "submission_scope": "by_package",
+    "included_rule_count": 3,
+    "excluded_rule_count": 0
+  },
+  {
+    "volume_type": "business",
+    "volume_label": "商务文件",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "included_rule_count": 11,
+    "excluded_rule_count": 10
+  },
+  {
+    "volume_type": "technical",
+    "volume_label": "技术文件",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "included_rule_count": 5,
+    "excluded_rule_count": 14
+  }
+]

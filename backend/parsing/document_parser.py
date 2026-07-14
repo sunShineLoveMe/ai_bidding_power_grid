@@ -8,6 +8,7 @@ from typing import Any
 from PyPDF2 import PdfReader, PdfWriter
 
 from backend.parsing.bid_interpreter import ingest_mineru_artifacts_to_supabase
+from backend.parsing.tender_format_rules import extract_docx_format_rule_inputs
 from backend.db.supabase_repo import update_bid_file_parse_status
 from backend.rag.vector_store import EmptyDocumentContentError, ensure_extractable_text
 from backend.parsing.parse_status_store import (
@@ -151,6 +152,24 @@ def _native_text_artifacts(
     markdown_path.write_text("\n\n".join(markdown_parts).strip() + "\n", encoding="utf-8")
     content_list_path.write_text(json.dumps(content_list, ensure_ascii=False, indent=2), encoding="utf-8")
 
+    project_rule_inputs_path: Path | None = None
+    if Path(file_path).suffix.lower() == ".docx":
+        try:
+            project_rule_inputs = extract_docx_format_rule_inputs(
+                file_path,
+                source_display_name=original_filename,
+            )
+            if project_rule_inputs.get("format_rows"):
+                # 全文已进入 document_chunks，不在 project_meta 重复保存大文本。
+                project_rule_inputs.pop("document_text", None)
+                project_rule_inputs_path = output_dir / "project_rule_inputs.json"
+                project_rule_inputs_path.write_text(
+                    json.dumps(project_rule_inputs, ensure_ascii=False, indent=2),
+                    encoding="utf-8",
+                )
+        except Exception:
+            logging.exception("DOCX 投标文件格式表结构化提取失败（不阻断正文解析）: %s", file_path)
+
     return {
         "extract_dir": str(output_dir),
         "markdown_path": str(markdown_path),
@@ -160,6 +179,7 @@ def _native_text_artifacts(
         "zip_path": None,
         "parser": "native_text",
         "source_file": file_path,
+        "project_rule_inputs_path": str(project_rule_inputs_path) if project_rule_inputs_path else None,
     }
 
 

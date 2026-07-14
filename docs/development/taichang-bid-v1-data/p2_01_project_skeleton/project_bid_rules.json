@@ -1,0 +1,1138 @@
+[
+  {
+    "rule_id": "FORMAT-001",
+    "semantic_key": "price.投标函及附件",
+    "title": "投标函及附件",
+    "canonical_title": "投标函及附件",
+    "volume_type": "price",
+    "status": "required",
+    "status_reason": "招标文件格式清单标记为须提供",
+    "rule_scope": "package",
+    "submission_scope": "by_package",
+    "sequence": "1",
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "1"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 1
+  },
+  {
+    "rule_id": "FORMAT-002",
+    "semantic_key": "price.货物清单报价汇总表",
+    "title": "已标价货物清单行报价暨投标报价汇总表",
+    "canonical_title": "货物清单报价汇总表",
+    "volume_type": "price",
+    "status": "required",
+    "status_reason": "招标文件格式清单标记为须提供",
+    "rule_scope": "package",
+    "submission_scope": "by_package",
+    "sequence": "附表1",
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "附表1"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 2
+  },
+  {
+    "rule_id": "FORMAT-003",
+    "semantic_key": "price.货物清单单价分析表（如有）",
+    "title": "货物清单单价分析表（如有）",
+    "canonical_title": "货物清单单价分析表（如有）",
+    "volume_type": "price",
+    "status": "conditional",
+    "status_reason": "招标文件将本项列为条件适用",
+    "rule_scope": "package",
+    "submission_scope": "by_package",
+    "sequence": "2",
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 3
+  },
+  {
+    "rule_id": "FORMAT-004",
+    "semantic_key": "business.商务偏差表",
+    "title": "商务偏差表",
+    "canonical_title": "商务偏差表",
+    "volume_type": "business",
+    "status": "required",
+    "status_reason": "招标文件格式清单标记为须提供",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "1",
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "1"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 4
+  },
+  {
+    "rule_id": "FORMAT-005",
+    "semantic_key": "business.补充文件",
+    "title": "补充文件",
+    "canonical_title": "补充文件",
+    "volume_type": "business",
+    "status": "not_applicable",
+    "status_reason": "格式清单声明仅标记项须提供，本行未标记",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2",
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 5
+  },
+  {
+    "rule_id": "FORMAT-006",
+    "semantic_key": "business.人员关系说明",
+    "title": "投标人与国家电网公司系统人员关系说明",
+    "canonical_title": "人员关系说明",
+    "volume_type": "business",
+    "status": "required",
+    "status_reason": "招标文件格式清单标记为须提供",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.2.1",
+    "parent_key": "business.2",
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.2.1"
+      },
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标人须知/投标文件组成",
+        "source_page": null,
+        "document_role": "main_tender_file",
+        "detection_method": "semantic_clause_detection",
+        "confidence": 0.96,
+        "chapter_number": null
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 6
+  },
+  {
+    "rule_id": "FORMAT-007",
+    "semantic_key": "business.投标人基本情况表",
+    "title": "投标人基本情况表",
+    "canonical_title": "投标人基本情况表",
+    "volume_type": "business",
+    "status": "required",
+    "status_reason": "招标文件格式清单标记为须提供",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.2.2",
+    "parent_key": "business.2",
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.2.2"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 7
+  },
+  {
+    "rule_id": "FORMAT-008",
+    "semantic_key": "business.营业执照",
+    "title": "企业法人营业执照（或事业单位法人证书）（扫描件）",
+    "canonical_title": "营业执照",
+    "volume_type": "business",
+    "status": "not_applicable",
+    "status_reason": "格式清单声明仅标记项须提供，本行未标记",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.3",
+    "parent_key": "business.2",
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.3"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 8
+  },
+  {
+    "rule_id": "FORMAT-009",
+    "semantic_key": "business.有效的税务登记证明（扫描件）",
+    "title": "有效的税务登记证明（扫描件）",
+    "canonical_title": "有效的税务登记证明（扫描件）",
+    "volume_type": "business",
+    "status": "not_applicable",
+    "status_reason": "格式清单声明仅标记项须提供，本行未标记",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.4",
+    "parent_key": "business.2",
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.4"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 9
+  },
+  {
+    "rule_id": "FORMAT-010",
+    "semantic_key": "business.资格证明文件",
+    "title": "符合招标文件投标人资格要求的证明文件（详见投标邀请书附件4）",
+    "canonical_title": "资格证明文件",
+    "volume_type": "business",
+    "status": "required",
+    "status_reason": "招标文件格式清单标记为须提供",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.5",
+    "parent_key": "business.2",
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.5"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 10
+  },
+  {
+    "rule_id": "FORMAT-011",
+    "semantic_key": "business.符合投标文件投标人资格要求的证明文件",
+    "title": "符合投标文件投标人资格要求的证明文件",
+    "canonical_title": "符合投标文件投标人资格要求的证明文件",
+    "volume_type": "business",
+    "status": "required",
+    "status_reason": "招标文件格式清单标记为须提供",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.5.1",
+    "parent_key": "business.2",
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.5.1"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 11
+  },
+  {
+    "rule_id": "FORMAT-012",
+    "semantic_key": "business.查询报告及截图",
+    "title": "查询报告及截图",
+    "canonical_title": "查询报告及截图",
+    "volume_type": "business",
+    "status": "required",
+    "status_reason": "招标文件格式清单标记为须提供",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.5.2",
+    "parent_key": "business.2",
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.5.2"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 12
+  },
+  {
+    "rule_id": "FORMAT-013",
+    "semantic_key": "business.财务状况",
+    "title": "财务状况",
+    "canonical_title": "财务状况",
+    "volume_type": "business",
+    "status": "not_applicable",
+    "status_reason": "格式清单声明仅标记项须提供，本行未标记",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.6",
+    "parent_key": "business.2",
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.6"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 13
+  },
+  {
+    "rule_id": "FORMAT-014",
+    "semantic_key": "business.针对评审要素、需要补充的其他文件（详见投标邀请书附件4）",
+    "title": "针对评审要素、需要补充的其他文件（详见投标邀请书附件4）",
+    "canonical_title": "针对评审要素、需要补充的其他文件（详见投标邀请书附件4）",
+    "volume_type": "business",
+    "status": "required",
+    "status_reason": "招标文件格式清单标记为须提供",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.7",
+    "parent_key": "business.2",
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.7"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 14
+  },
+  {
+    "rule_id": "FORMAT-015",
+    "semantic_key": "business.投标人自述的企业名称变更原因说明、市场监督管理部门出具的‘名称变更证明’相关证明材料、有权机构出具的‘资格资质变更证明’等相关证明材料。（如有）",
+    "title": "投标人自述的企业名称变更原因说明、市场监督管理部门出具的‘名称变更证明’相关证明材料、有权机构出具的‘资格资质变更证明’等相关证明材料。（如有）",
+    "canonical_title": "投标人自述的企业名称变更原因说明、市场监督管理部门出具的‘名称变更证明’相关证明材料、有权机构出具的‘资格资质变更证明’等相关证明材料。（如有）",
+    "volume_type": "business",
+    "status": "conditional",
+    "status_reason": "招标文件将本项列为条件适用",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.8",
+    "parent_key": "business.2",
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.8"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 15
+  },
+  {
+    "rule_id": "FORMAT-016",
+    "semantic_key": "business.授权委托书",
+    "title": "制造商授权委托书",
+    "canonical_title": "授权委托书",
+    "volume_type": "business",
+    "status": "not_applicable",
+    "status_reason": "格式清单声明仅标记项须提供，本行未标记",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.9",
+    "parent_key": "business.2",
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.9"
+      },
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "3.14"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 16
+  },
+  {
+    "rule_id": "FORMAT-017",
+    "semantic_key": "business.公章对投标专用章授权书（格式）",
+    "title": "公章对投标专用章授权书（格式）",
+    "canonical_title": "公章对投标专用章授权书（格式）",
+    "volume_type": "business",
+    "status": "required",
+    "status_reason": "招标文件格式清单标记为须提供",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "3.11",
+    "parent_key": "business.2",
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "3.11"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 17
+  },
+  {
+    "rule_id": "FORMAT-018",
+    "semantic_key": "business.供应商关于配合开展资质能力信息核实的承诺函",
+    "title": "供应商关于配合开展资质能力信息核实的承诺函",
+    "canonical_title": "供应商关于配合开展资质能力信息核实的承诺函",
+    "volume_type": "business",
+    "status": "required",
+    "status_reason": "招标文件格式清单标记为须提供",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "3.12",
+    "parent_key": "business.2",
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "3.12"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 18
+  },
+  {
+    "rule_id": "FORMAT-019",
+    "semantic_key": "business.其他（若无不需提供）",
+    "title": "其他（若无不需提供）",
+    "canonical_title": "其他（若无不需提供）",
+    "volume_type": "business",
+    "status": "not_applicable",
+    "status_reason": "招标文件明确本项目不适用或无需提供",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "3.13",
+    "parent_key": "business.2",
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "3.13"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 19
+  },
+  {
+    "rule_id": "FORMAT-021",
+    "semantic_key": "technical.技术偏差表",
+    "title": "技术偏差表",
+    "canonical_title": "技术偏差表",
+    "volume_type": "technical",
+    "status": "required",
+    "status_reason": "招标文件格式清单标记为须提供",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "1",
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "1"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 20
+  },
+  {
+    "rule_id": "FORMAT-022",
+    "semantic_key": "technical.专项投标文件",
+    "title": "专项投标文件",
+    "canonical_title": "专项投标文件",
+    "volume_type": "technical",
+    "status": "not_applicable",
+    "status_reason": "格式清单声明仅标记项须提供，本行未标记",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2",
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 21
+  },
+  {
+    "rule_id": "FORMAT-023",
+    "semantic_key": "technical.业绩文件",
+    "title": "业绩文件",
+    "canonical_title": "业绩文件",
+    "volume_type": "technical",
+    "status": "not_applicable",
+    "status_reason": "格式清单声明仅标记项须提供，本行未标记",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.1",
+    "parent_key": "technical.2",
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.1"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 22
+  },
+  {
+    "rule_id": "FORMAT-024",
+    "semantic_key": "technical.技术特性参数表",
+    "title": "技术特性参数表",
+    "canonical_title": "技术特性参数表",
+    "volume_type": "technical",
+    "status": "required",
+    "status_reason": "招标文件格式清单标记为须提供",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.2",
+    "parent_key": "technical.2",
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.2"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 23
+  },
+  {
+    "rule_id": "FORMAT-025",
+    "semantic_key": "technical.货物组件材料配置表",
+    "title": "货物组件材料配置表",
+    "canonical_title": "货物组件材料配置表",
+    "volume_type": "technical",
+    "status": "required",
+    "status_reason": "招标文件格式清单标记为须提供",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.3",
+    "parent_key": "technical.2",
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.3"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 24
+  },
+  {
+    "rule_id": "FORMAT-026",
+    "semantic_key": "technical.资格证明文件",
+    "title": "符合招标文件投标人资格要求的证明文件（详见投标邀请书附件4）",
+    "canonical_title": "资格证明文件",
+    "volume_type": "technical",
+    "status": "required",
+    "status_reason": "招标文件格式清单标记为须提供",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.4",
+    "parent_key": "technical.2",
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.4"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 25
+  },
+  {
+    "rule_id": "FORMAT-027",
+    "semantic_key": "technical.针对评审要素，需要补充的其他文件（详见投标邀请书附件4）",
+    "title": "针对评审要素，需要补充的其他文件（详见投标邀请书附件4）",
+    "canonical_title": "针对评审要素，需要补充的其他文件（详见投标邀请书附件4）",
+    "volume_type": "technical",
+    "status": "required",
+    "status_reason": "招标文件格式清单标记为须提供",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.5",
+    "parent_key": "technical.2",
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.5"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 26
+  },
+  {
+    "rule_id": "FORMAT-028",
+    "semantic_key": "technical.技术服务，包括培训、安装指导等",
+    "title": "技术服务，包括培训、安装指导等",
+    "canonical_title": "技术服务，包括培训、安装指导等",
+    "volume_type": "technical",
+    "status": "not_applicable",
+    "status_reason": "格式清单声明仅标记项须提供，本行未标记",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.7",
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.7"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 27
+  },
+  {
+    "rule_id": "FORMAT-029",
+    "semantic_key": "technical.售后服务保障及承诺",
+    "title": "售后服务保障及承诺",
+    "canonical_title": "售后服务保障及承诺",
+    "volume_type": "technical",
+    "status": "not_applicable",
+    "status_reason": "格式清单声明仅标记项须提供，本行未标记",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.8",
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.8"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 28
+  },
+  {
+    "rule_id": "FORMAT-030",
+    "semantic_key": "technical.质量保证措施方案",
+    "title": "质量保证措施方案",
+    "canonical_title": "质量保证措施方案",
+    "volume_type": "technical",
+    "status": "not_applicable",
+    "status_reason": "格式清单声明仅标记项须提供，本行未标记",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.9",
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.9"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 29
+  },
+  {
+    "rule_id": "FORMAT-031",
+    "semantic_key": "technical.生产场地、生产能力及剩余产能列表、厂房面积",
+    "title": "生产场地、生产能力及剩余产能列表、厂房面积",
+    "canonical_title": "生产场地、生产能力及剩余产能列表、厂房面积",
+    "volume_type": "technical",
+    "status": "not_applicable",
+    "status_reason": "格式清单声明仅标记项须提供，本行未标记",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.1",
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.1"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 30
+  },
+  {
+    "rule_id": "FORMAT-032",
+    "semantic_key": "technical.生产装备",
+    "title": "生产装备",
+    "canonical_title": "生产装备",
+    "volume_type": "technical",
+    "status": "not_applicable",
+    "status_reason": "格式清单声明仅标记项须提供，本行未标记",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.11",
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.11"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 31
+  },
+  {
+    "rule_id": "FORMAT-033",
+    "semantic_key": "technical.试验检测设备",
+    "title": "调试试验场所、试验检测设备",
+    "canonical_title": "试验检测设备",
+    "volume_type": "technical",
+    "status": "not_applicable",
+    "status_reason": "格式清单声明仅标记项须提供，本行未标记",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.12",
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.12"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 32
+  },
+  {
+    "rule_id": "FORMAT-034",
+    "semantic_key": "technical.制造工艺",
+    "title": "制造工艺",
+    "canonical_title": "制造工艺",
+    "volume_type": "technical",
+    "status": "not_applicable",
+    "status_reason": "格式清单声明仅标记项须提供，本行未标记",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.13",
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.13"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 33
+  },
+  {
+    "rule_id": "FORMAT-035",
+    "semantic_key": "technical.认证证书",
+    "title": "认证证书",
+    "canonical_title": "认证证书",
+    "volume_type": "technical",
+    "status": "not_applicable",
+    "status_reason": "格式清单声明仅标记项须提供，本行未标记",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.14",
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.14"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 34
+  },
+  {
+    "rule_id": "FORMAT-036",
+    "semantic_key": "technical.主要技术人员、项目经理及其相关证书",
+    "title": "主要技术人员、项目经理及其相关证书",
+    "canonical_title": "主要技术人员、项目经理及其相关证书",
+    "volume_type": "technical",
+    "status": "not_applicable",
+    "status_reason": "格式清单声明仅标记项须提供，本行未标记",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.15",
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.15"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 35
+  },
+  {
+    "rule_id": "FORMAT-037",
+    "semantic_key": "technical.检测检验报告",
+    "title": "检测检验报告（包括型式试验报告、检测报告、鉴定报告、检定报告、校准证书或报告、检测试验报告等相关报告）",
+    "canonical_title": "检测检验报告",
+    "volume_type": "technical",
+    "status": "not_applicable",
+    "status_reason": "格式清单声明仅标记项须提供，本行未标记",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.16",
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.16"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 36
+  },
+  {
+    "rule_id": "FORMAT-038",
+    "semantic_key": "technical.资质业绩凭证单",
+    "title": "资质业绩凭证单",
+    "canonical_title": "资质业绩凭证单",
+    "volume_type": "technical",
+    "status": "not_applicable",
+    "status_reason": "格式清单声明仅标记项须提供，本行未标记",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.17",
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.17"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 37
+  },
+  {
+    "rule_id": "FORMAT-039",
+    "semantic_key": "technical.其他（若无不需提供）",
+    "title": "其他（若无不需提供）",
+    "canonical_title": "其他（若无不需提供）",
+    "volume_type": "technical",
+    "status": "not_applicable",
+    "status_reason": "招标文件明确本项目不适用或无需提供",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": "2.18",
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标文件格式/投标文件组成清单",
+        "source_page": 17,
+        "document_role": "main_tender_file",
+        "detection_method": "native_docx_format_table_marker",
+        "confidence": 0.99,
+        "chapter_number": "2.18"
+      }
+    ],
+    "confidence": 0.99,
+    "order_index": 38
+  },
+  {
+    "rule_id": "PREQUAL-INHERIT",
+    "semantic_key": "business.资格预审申请文件",
+    "title": "资格预审申请文件",
+    "canonical_title": "资格预审申请文件",
+    "volume_type": "business",
+    "status": "inherited_from_prequalification",
+    "status_reason": "资格预审申请文件由招标规则继承，不重复编制整套资料",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": null,
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标人须知/投标文件组成",
+        "source_page": null,
+        "document_role": "main_tender_file",
+        "detection_method": "semantic_clause_detection",
+        "confidence": 0.96,
+        "chapter_number": null
+      }
+    ],
+    "confidence": 0.96,
+    "order_index": 39
+  },
+  {
+    "rule_id": "PREQUAL-SUPPLEMENT",
+    "semantic_key": "business.资格预审支持证明补充材料",
+    "title": "资格预审支持证明补充材料",
+    "canonical_title": "资格预审支持证明补充材料",
+    "volume_type": "business",
+    "status": "supplement_allowed",
+    "status_reason": "仅在招标文件明确范围内允许补充，不扩大为整套资格资料重报",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": null,
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标人须知/投标文件组成",
+        "source_page": null,
+        "document_role": "main_tender_file",
+        "detection_method": "semantic_clause_detection",
+        "confidence": 0.96,
+        "chapter_number": null
+      }
+    ],
+    "confidence": 0.96,
+    "order_index": 40
+  },
+  {
+    "rule_id": "PREQUAL-UPDATE",
+    "semantic_key": "business.到期资质证书和试验报告更新材料",
+    "title": "到期资质证书和试验报告更新材料",
+    "canonical_title": "到期资质证书和试验报告更新材料",
+    "volume_type": "business",
+    "status": "update_required",
+    "status_reason": "预审材料在投标截止前到期时必须提交新的有效材料",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": null,
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标人须知/投标文件组成",
+        "source_page": null,
+        "document_role": "main_tender_file",
+        "detection_method": "semantic_clause_detection",
+        "confidence": 0.96,
+        "chapter_number": null
+      }
+    ],
+    "confidence": 0.96,
+    "order_index": 41
+  },
+  {
+    "rule_id": "FORBID-PAPER",
+    "semantic_key": "business.纸质投标文件",
+    "title": "纸质投标文件",
+    "canonical_title": "纸质投标文件",
+    "volume_type": "business",
+    "status": "forbidden",
+    "status_reason": "当前项目明确不接收纸质投标文件",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": null,
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标人须知/投标文件组成",
+        "source_page": null,
+        "document_role": "main_tender_file",
+        "detection_method": "semantic_clause_detection",
+        "confidence": 0.96,
+        "chapter_number": null
+      }
+    ],
+    "confidence": 0.96,
+    "order_index": 42
+  },
+  {
+    "rule_id": "GUARANTEE-NA",
+    "semantic_key": "business.投标保证金",
+    "title": "投标保证金",
+    "canonical_title": "投标保证金",
+    "volume_type": "business",
+    "status": "not_applicable",
+    "status_reason": "当前项目明确免收投标保证金",
+    "rule_scope": "lot",
+    "submission_scope": "by_lot",
+    "sequence": null,
+    "parent_key": null,
+    "sources": [
+      {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_section": "投标人须知/投标文件组成",
+        "source_page": null,
+        "document_role": "main_tender_file",
+        "detection_method": "semantic_clause_detection",
+        "confidence": 0.96,
+        "chapter_number": null
+      }
+    ],
+    "confidence": 0.96,
+    "order_index": 43
+  }
+]

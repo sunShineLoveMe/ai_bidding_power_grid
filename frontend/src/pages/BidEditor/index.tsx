@@ -948,6 +948,8 @@ export function BidEditorPage(): JSX.Element {
 
   const savedOutline = asBidOutline(data?.analysis?.project_meta);
   const outline = outlineMeta || savedOutline;
+  const projectRuleSummary = outline?.project_rule_summary;
+  const skeletonDifferenceSummary = outline?.historical_difference?.summary;
   const lengthSettings = useMemo(() => asBidLengthSettings(data?.analysis?.project_meta), [data?.analysis?.project_meta]);
   const volumeCounts = useMemo(() => {
     const counts = Object.fromEntries(volumeOptions.map(item => [item.value, 0])) as Record<VolumeType, number>;
@@ -4069,6 +4071,24 @@ export function BidEditorPage(): JSX.Element {
               {batchGenerating ? <span>后台章节任务执行中</span> : null}
             </div>
             </div>
+            {outline?.artifact_role === 'current_tender_project_skeleton' ? (
+              <div className="project-skeleton-basis">
+                <div className="project-skeleton-basis-copy">
+                  <CheckCircle2 size={18} />
+                  <div>
+                    <strong>目录已按本次招标文件核定</strong>
+                    <span>历史标书仅作差异对照，不会覆盖本项目的必选、条件适用、不适用和提交范围。</span>
+                  </div>
+                </div>
+                <Space size={[6, 6]} wrap>
+                  <Tag color="green">纳入 {projectRuleSummary?.included || 0} 项</Tag>
+                  <Tag>排除 {projectRuleSummary?.excluded || 0} 项</Tag>
+                  <Tag color="blue">新增 {skeletonDifferenceSummary?.added || 0} 项</Tag>
+                  <Tag color="orange">条件变化 {skeletonDifferenceSummary?.condition_changed || 0} 项</Tag>
+                  {projectRuleSummary?.requires_manual_review ? <Tag color="red">存在低置信度项待复核</Tag> : null}
+                </Space>
+              </div>
+            ) : null}
             <RecentlyDeletedChapterBanner />
           </section>
           <section className="outline-panel">

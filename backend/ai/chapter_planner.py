@@ -9,6 +9,10 @@ from typing import Any, Iterator
 
 from backend.db.supabase_repo import get_project_interpretation, get_supabase_client, replace_bid_sections_from_outline
 from backend.services.bid_material_scope import material_scope_from_context, prune_outline_by_material_scope
+from backend.services.project_bid_skeleton import (
+    build_project_bid_skeleton,
+    has_current_tender_skeleton_inputs,
+)
 from backend.core.llm_json_utils import strip_llm_json
 from backend.ai.qwen_client import call_dashscope_api
 from backend.ai.bid_writing_plan import build_chapter_writing_plan
@@ -715,7 +719,7 @@ def _normalize_outline_structure(outline: dict[str, Any]) -> dict[str, Any]:
         ]
         flat_chapters = _outline_chapters_from_volumes(normalized_volumes)
 
-    if not outline.get("preserve_reference_structure"):
+    if not outline.get("preserve_reference_structure") and outline.get("artifact_role") != "current_tender_project_skeleton":
         flat_chapters = _expand_large_leaf_sections(flat_chapters)
 
     for index, chapter in enumerate(flat_chapters, start=1):
@@ -1147,6 +1151,11 @@ def _build_rule_outline(payload: dict[str, Any]) -> dict[str, Any]:
     supply_only = _is_supply_only_bid(payload)
     reference_rule_sets = _reference_outline_rule_sets_for_supply_bid() if supply_only else []
 
+    # 供货类项目只要已经具备当次招标文件结构化内容，就必须由当前项目规则
+    # 决定目录。历史参考稿不再作为快速骨架来源，也不能因章节更多而覆盖它。
+    if supply_only and has_current_tender_skeleton_inputs(payload):
+        return _normalize_outline_structure(build_project_bid_skeleton(payload))
+
     base_chapters = [
         {
             "title": "投标函及格式文件",
@@ -1505,6 +1514,12 @@ def _generate_outline_from_ai_or_rule(payload: dict[str, Any]) -> dict[str, Any]
         outline["generated_at"] = datetime.now(timezone.utc).isoformat()
         return outline
 
+    # P2-01 项目动态骨架是招标规则产物。AI 精修只能服务后续正文写作，不能
+    # 增删或改写分册、条件状态和提交范围，因此此处直接返回确定性骨架。
+    if fallback_outline.get("artifact_role") == "current_tender_project_skeleton":
+        fallback_outline["model"] = "deterministic-current-tender-rules"
+        return finalize_outline(fallback_outline)
+
     try:
         prompt = _build_prompt(payload)
         project = payload.get("project") or {}
@@ -1681,7 +1696,7 @@ def stream_bid_outline(project_id: str) -> Iterator[dict[str, Any]]:
 
     yield {
         "type": "start",
-        "message": "AI 正在结合招标解读结果生成章节大纲。",
+        "message": "正在依据当次招标文件核定分册、提交范围和章节状态。",
     }
 
     # ── 第一阶段：规则版快速骨架（秒级，立即展示）──────────────────────────
@@ -1700,7 +1715,7 @@ def stream_bid_outline(project_id: str) -> Iterator[dict[str, Any]]:
     yield {
         "type": "stage",
         "stage": "roots",
-        "message": f"已生成快速一级目录框架，共 {quick_root_count} 个一级章节，正在逐章展开。",
+        "message": f"已生成当次招标项目目录，共 {quick_root_count} 个一级章节，正在逐章展开。",
     }
 
     yielded = 0
