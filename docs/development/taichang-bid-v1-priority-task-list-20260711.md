@@ -641,6 +641,24 @@ P0 结束时必须同时满足：
 
 ### P1-05 RAG 入库与回归门禁
 
+**执行状态（2026-07-14）：`[x]` 已完成结构化事实父子分块入库、产品范围预过滤和跨产品回归**
+
+- 新增幂等批次 `customer_taichang_p1_05_structured_rag_baseline_v1`，数据库文档 ID 为 `032856ff-883e-45c6-8e24-3aa04c0ab3ec`。
+- 结构化基线包含 27 个父块、139 个子块，共 166 块；139 个子块 embedding 完整。第二次执行复用同一文档并以 166 块替换 166 块，没有重复累加。
+- 子块统一补齐 `enterprise/source_domain/product_family/material_category/evidence_type`，覆盖 36 行原始检验参数、84 行完整业务台账、16 个证据包和 2 行项目业绩证据；结构化参数、业绩和业务台账直查入口继续保留。
+- 写作场景已真实验证 `child recall -> parent backtrace`；MPP 环刚度子块能回溯至报告父块及证据包父块。
+- 知识库 API 在向量召回前按企业、来源域、产品族、物料类别和证据类型预过滤；图片资产同步按产品族过滤。
+- 新增架空绝缘导线范围守卫，并修复结构化参数层因“参数”泛词误召回 MPP 的漏洞。真实 stream 中该问题只返回范围缺口，不含 CPVC/MPP/N-HAP/UPVC 事实。
+- 标准 Base 30 + 泰昌专项 30 双模式门禁 PASS；qwen3 模式下泰昌专项 Recall@5、Top1 均 100%，禁用关键词和跨角色串扰均为 0。真实 stream 3/3 PASS，后端全量 438 passed、2 subtests passed。
+- 本轮资产等级提升 0、DOCX 选图变更 0；普通项目创建不会触发本批次重入库或全量 embedding。
+
+**交付物（已完成）**
+
+- `scripts/rag/ingest_taichang_p1_05_rag_baseline.py`。
+- `backend/rag/taichang_scope.py`。
+- `docs/development/taichang-bid-v1-data/p1_05_rag_baseline/`。
+- [执行总结](../rag/runs/run_20260714_taichang_p1_05_structured_rag_summary.md)、[真实 stream](../rag/runs/20260714_taichang_p1_05_structured_rag_stream_summary.md)和[标准增量门禁](../rag/runs/20260714_taichang_p1_05_structured_rag_summary.md)。
+
 **任务**
 
 - 对已批准文本事实做父子分块；证据包和结构化行不仅依赖普通向量文本。

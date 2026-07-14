@@ -267,7 +267,7 @@ def search_taichang_business_ledger_contexts(query: str, limit: int = 5) -> list
                 for row in personnel_certificate_rows:
                     selected.append((0.99, row, _personnel_certificate_content(row)))
 
-    if _contains_any(text, REPORT_TERMS):
+    if _contains_any(text, REPORT_TERMS) and not _contains_any(text, ["架空绝缘导线", "绝缘导线"]):
         normalized = text.upper().replace("-", "")
         for row in rows:
             if row.get("ledger_type") != "inspection_report_registry":

@@ -966,6 +966,15 @@ def _asset_matches_metadata_filter(asset: dict[str, Any], metadata_filter: dict[
                 specs.get("source_batch_id"),
                 asset.get("ingestion_batch_id"),
             ]
+        if key == "product_family":
+            return [
+                metadata.get("product_family"),
+                metadata.get("product_families"),
+                specs.get("product_family"),
+                specs.get("product_families"),
+                asset.get("product_family"),
+                asset.get("product_families"),
+            ]
         return [metadata.get(key), specs.get(key), asset.get(key)]
 
     ignored = {"chunk_layer", "doc_role", "package_code", "province", "batch_no", "material_category"}

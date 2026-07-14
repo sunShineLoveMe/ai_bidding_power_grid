@@ -1,0 +1,38 @@
+{
+  "summary": {
+    "schema_version": "taichang-p1-05-structured-rag-baseline-v1",
+    "generated_at": "2026-07-14T11:31:22+08:00",
+    "status": "indexed",
+    "batch_id": "customer_taichang_p1_05_structured_rag_baseline_v1",
+    "document_id": "032856ff-883e-45c6-8e24-3aa04c0ab3ec",
+    "dataset_sha256": "2828e25343184c9e8892d121c67448a594565d76a7e40f1f268a69f1b43d716c",
+    "parent_chunks": 27,
+    "child_chunks": 139,
+    "total_chunks": 166,
+    "embedding_count": 139,
+    "previous_chunks": 166,
+    "inserted_chunks": 166,
+    "child_metadata_complete": true,
+    "by_evidence_type": {
+      "business_license": 1,
+      "calibration_certificate": 6,
+      "certification": 6,
+      "finance": 6,
+      "inspection_report": 42,
+      "personnel_certificate": 2,
+      "personnel_roster": 66,
+      "project_performance": 3,
+      "scope_guard": 1,
+      "testing_capacity": 6
+    },
+    "database_writes": 166,
+    "asset_promotions": 0,
+    "docx_selection_changes": 0
+  },
+  "sources": [
+    "docs/development/taichang-bid-v1-data/p1_03_business_ledgers/taichang_p1_03_manifest.json",
+    "docs/development/taichang-bid-v1-data/p1_02_evidence_bundles/taichang_evidence_bundles.json",
+    "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/taichang_product_parameters/taichang_product_parameter_rows.json",
+    "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/staging/taichang_project_performance/taichang_project_performance_rows.json"
+  ]
+}

@@ -7,6 +7,8 @@ import re
 from pathlib import Path
 from typing import Any
 
+from backend.rag.taichang_scope import infer_taichang_product_scope
+
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 TAICHANG_PARAMETER_ROWS_PATH = (
@@ -175,6 +177,11 @@ def _content_for_row(row: dict[str, Any]) -> str:
 def search_taichang_product_parameter_contexts(query: str, limit: int = 5) -> list[dict[str, Any]]:
     """Return structured parameter rows as RAG contexts for Taichang questions."""
     if not query or "泰昌" not in query and not any(_normalize(term) in _normalize(query) for terms in PRODUCT_TERMS.values() for term in terms):
+        return []
+    product_scope = infer_taichang_product_scope(query)
+    if product_scope and product_scope.get("product_family") not in PRODUCT_TERMS:
+        # 问题已明确为当前结构化参数层未覆盖的其他产品时，禁止让“参数/检验报告”
+        # 等泛词触发 CPVC/MPP 的宽泛兜底召回。
         return []
     normalized_query = _normalize(query)
     if any(term in normalized_query for term in ("upvc", "n-hap", "nhap")) and not any(

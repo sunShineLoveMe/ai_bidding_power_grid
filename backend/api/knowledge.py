@@ -56,16 +56,11 @@ from backend.rag.enterprise_facts import (
 from backend.rag.product_parameters import search_taichang_product_parameter_contexts
 from backend.rag.project_performance import search_taichang_project_performance_contexts
 from backend.rag.business_ledgers import search_taichang_business_ledger_contexts
+from backend.rag.taichang_scope import build_taichang_scope_filter
 
 
 CUSTOMER_SEED_CORPUS = "power_grid_customer_corpus"
 PILOT_ENTERPRISE = "泰昌"
-PILOT_ENTERPRISE_FILTER = {
-    "enterprise": PILOT_ENTERPRISE,
-    "source_domain": "enterprise_fact",
-    "fact_source_allowed_for_enterprise": True,
-    "reference_only": False,
-}
 CUSTOMER_SCOPE_TERMS = [
     "货物清单", "技术规范编码", "物料编码", "交货方式", "交货地点", "主招标文件",
     "招标编号", "资格预审", "评标办法", "专用资格", "包号", "包件", "分标编号",
@@ -204,12 +199,8 @@ def _infer_customer_filter(query: str, explicit_filter: dict[str, Any] | None = 
     return None, None
 
 
-def _pilot_enterprise_metadata_filter(explicit_filter: dict[str, Any] | None = None) -> dict[str, Any]:
-    metadata_filter = dict(PILOT_ENTERPRISE_FILTER)
-    for key, value in (explicit_filter or {}).items():
-        if value not in (None, "", "all"):
-            metadata_filter[key] = value
-    return metadata_filter
+def _pilot_enterprise_metadata_filter(query: str, explicit_filter: dict[str, Any] | None = None) -> dict[str, Any]:
+    return build_taichang_scope_filter(query, explicit_filter)
 
 
 def _metadata_bool(value: Any) -> bool | None:
@@ -552,7 +543,7 @@ def _curate_pilot_enterprise_contexts(
 def _asset_metadata_filter_from_query(query: str, metadata_filter: dict[str, Any] | None, explicit_asset_filter: dict[str, Any] | None = None) -> dict[str, Any] | None:
     asset_filter = {key: value for key, value in (explicit_asset_filter or {}).items() if value not in (None, "", "all")}
     if metadata_filter:
-        for key in ("enterprise", "doc_owner", "source_domain", "target_library", "evidence_type", "source_batch_id", "ingestion_batch_id"):
+        for key in ("enterprise", "doc_owner", "source_domain", "target_library", "evidence_type", "product_family", "source_batch_id", "ingestion_batch_id"):
             value = metadata_filter.get(key)
             if value not in (None, "", "all"):
                 asset_filter.setdefault(key, value)
@@ -697,7 +688,7 @@ def search_knowledge():
         return jsonify({'error': '缺少检索问题 query'}), 400
         
     try:
-        metadata_filter = _pilot_enterprise_metadata_filter(data.get("metadata_filter") or None)
+        metadata_filter = _pilot_enterprise_metadata_filter(query, data.get("metadata_filter") or None)
         # 1. 向量化并检索 Supabase
         contexts = search_knowledge_base(
             query,
@@ -774,7 +765,7 @@ def stream_search_knowledge():
     def generate():
         yield emit({"type": "start"})
         try:
-            metadata_filter = _pilot_enterprise_metadata_filter(data.get("metadata_filter") or None)
+            metadata_filter = _pilot_enterprise_metadata_filter(query, data.get("metadata_filter") or None)
             yield emit({"type": "status", "message": "正在检索企业知识库和图片资产..."})
             contexts = search_knowledge_base(
                 query,
