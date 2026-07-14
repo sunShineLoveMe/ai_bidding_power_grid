@@ -30,7 +30,7 @@ export function SmartBidCard({ onPrimaryAction, onTechnicalAction, onBusinessAct
           icon={<ClipboardList size={18} />}
           onClick={onTechnicalAction}
         >
-          继续历史标书
+          继续已有任务
         </Button>
         <Button
           size="large"

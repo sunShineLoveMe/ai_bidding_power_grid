@@ -27,7 +27,7 @@ interface ActiveWorkflow {
 }
 
 interface BidWorkflowProps {
-  onReady?: (openFilePicker: () => void) => void;
+  onReady?: (openFilePicker: (projectMode?: BidProjectMode) => void) => void;
   onTaskChanged?: () => void;
   projectMode?: BidProjectMode;
 }
@@ -94,6 +94,7 @@ export function BidWorkflow({ onReady, onTaskChanged, projectMode = 'general' }:
   const inputRef = useRef<HTMLInputElement | null>(null);
   const runTokenRef = useRef(0);
   const activeStepRef = useRef(0);
+  const requestedProjectModeRef = useRef<BidProjectMode>(projectMode);
   const [file, setFile] = useState<File | null>(null);
   const [userId, setUserId] = useState<string | number | null>(null);
   const [projectId, setProjectId] = useState<string | null>(null);
@@ -102,9 +103,14 @@ export function BidWorkflow({ onReady, onTaskChanged, projectMode = 'general' }:
   const [statuses, setStatuses] = useState<StepStatus[]>(initialStatuses);
   const [summary, setSummary] = useState('请选择招标文件。上传后系统会自动完成解析、招标解读和分册大纲生成。');
   const [detail, setDetail] = useState('支持 Word、PDF、TXT。扫描版 PDF 会自动进入 MinerU/OCR 解析流程。');
+  const [activeProjectMode, setActiveProjectMode] = useState<BidProjectMode>(projectMode);
   const addTask = useBidProjectStore(state => state.addTask);
 
-  const openFilePicker = useCallback(() => inputRef.current?.click(), []);
+  const openFilePicker = useCallback((requestedProjectMode: BidProjectMode = projectMode) => {
+    requestedProjectModeRef.current = requestedProjectMode;
+    setActiveProjectMode(requestedProjectMode);
+    inputRef.current?.click();
+  }, [projectMode]);
 
   useEffect(() => {
     onReady?.(openFilePicker);
@@ -178,7 +184,10 @@ export function BidWorkflow({ onReady, onTaskChanged, projectMode = 'general' }:
     throw new Error('招标文件解析等待超时，请到招标解读页查看后台解析状态。');
   }
 
-  async function runWorkflow(selectedFile: File): Promise<void> {
+  async function runWorkflow(
+    selectedFile: File,
+    workflowProjectMode: BidProjectMode = requestedProjectModeRef.current,
+  ): Promise<void> {
     if (busy) {
       message.info('当前任务正在处理中，请等待完成后再上传新文件。');
       return;
@@ -188,6 +197,8 @@ export function BidWorkflow({ onReady, onTaskChanged, projectMode = 'general' }:
     runTokenRef.current = token;
     setFile(selectedFile);
     setProjectId(null);
+    requestedProjectModeRef.current = workflowProjectMode;
+    setActiveProjectMode(workflowProjectMode);
     setBusy(true);
     setCurrent(0);
     activeStepRef.current = 0;
@@ -198,7 +209,7 @@ export function BidWorkflow({ onReady, onTaskChanged, projectMode = 'general' }:
     try {
       updateStep(0, 'process', '正在上传招标文件...', '系统正在创建项目任务并同步文件到知识库。');
       const resolvedUserId = await getUserId();
-      const uploadResult = await uploadTenderFile(selectedFile, resolvedUserId, projectMode);
+      const uploadResult = await uploadTenderFile(selectedFile, resolvedUserId, workflowProjectMode);
       if (runTokenRef.current !== token) return;
 
       addTask({
@@ -206,7 +217,7 @@ export function BidWorkflow({ onReady, onTaskChanged, projectMode = 'general' }:
         tenderUnit: '本地上传',
         status: '已上传',
         action: '查看',
-        projectMode,
+        projectMode: workflowProjectMode,
       });
       onTaskChanged?.();
       finishStep(0);
@@ -222,7 +233,7 @@ export function BidWorkflow({ onReady, onTaskChanged, projectMode = 'general' }:
           projectId: uploadResult.projectId,
           supabaseFileId: uploadResult.supabaseFileId,
           startedAt: Date.now(),
-          projectMode: uploadResult.projectMode || projectMode,
+          projectMode: uploadResult.projectMode || workflowProjectMode,
         });
       }
 
@@ -275,6 +286,8 @@ export function BidWorkflow({ onReady, onTaskChanged, projectMode = 'general' }:
     runTokenRef.current = token;
     setFile(null);
     setProjectId(active.projectId);
+    requestedProjectModeRef.current = active.projectMode;
+    setActiveProjectMode(active.projectMode);
     setBusy(true);
     setCurrent(1);
     activeStepRef.current = 1;
@@ -396,7 +409,7 @@ export function BidWorkflow({ onReady, onTaskChanged, projectMode = 'general' }:
     showUploadList: false,
     disabled: busy,
     beforeUpload: selectedFile => {
-      void runWorkflow(selectedFile);
+      void runWorkflow(selectedFile, requestedProjectModeRef.current);
       return false;
     },
   };
@@ -417,9 +430,16 @@ export function BidWorkflow({ onReady, onTaskChanged, projectMode = 'general' }:
     <section className="panel-card">
       <div className="mb-4 flex items-start justify-between gap-4">
         <div>
-          <h2 className="panel-title mb-1">标书生成流程</h2>
+          <div className="mb-1 flex flex-wrap items-center gap-2">
+            <h2 className="panel-title mb-0">
+              {activeProjectMode === 'taichang_reuse' ? '泰昌专版标书生成流程' : '标书生成流程'}
+            </h2>
+            {activeProjectMode === 'taichang_reuse' ? <Tag color="purple">泰昌专版</Tag> : null}
+          </div>
           <p className="m-0 text-sm font-semibold text-slate-500">
-            上传一次招标文件，系统自动完成解析、解读和分册大纲生成，减少重复点击。
+            {activeProjectMode === 'taichang_reuse'
+              ? '上传本次招标文件，系统按当前要求生成目录并自动匹配泰昌已审核资料。'
+              : '上传一次招标文件，系统自动完成解析、解读和分册大纲生成，减少重复点击。'}
           </p>
         </div>
         <Tag color={busy ? 'processing' : progressPercent === 100 ? 'success' : 'default'}>
@@ -442,7 +462,7 @@ export function BidWorkflow({ onReady, onTaskChanged, projectMode = 'general' }:
         onChange={event => {
           const selectedFile = event.target.files?.[0];
           if (selectedFile) {
-            void runWorkflow(selectedFile);
+            void runWorkflow(selectedFile, requestedProjectModeRef.current);
           }
           event.target.value = '';
         }}
@@ -511,7 +531,7 @@ export function BidWorkflow({ onReady, onTaskChanged, projectMode = 'general' }:
             icon={<RotateCcw size={16} />}
             disabled={!file || busy}
             onClick={() => {
-              if (file) void runWorkflow(file);
+              if (file) void runWorkflow(file, activeProjectMode);
             }}
           >
             重新执行流程

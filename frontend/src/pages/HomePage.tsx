@@ -5,15 +5,17 @@ import { HeroBanner } from '../components/home/HeroBanner';
 import { KnowledgeStats } from '../components/home/KnowledgeStats';
 import { RecentTasks } from '../components/home/RecentTasks';
 import { SmartBidCard } from '../components/home/SmartBidCard';
+import { TaichangReuseCard } from '../components/home/TaichangReuseCard';
 import { BidVolumeOverview } from '../components/home/BidVolumeOverview';
 import { BidWorkflow } from '../components/workflow/BidWorkflow';
+import type { BidProjectMode } from '../types/bid';
 
 export function HomePage(): JSX.Element {
   const navigate = useNavigate();
-  const openFilePickerRef = useRef<() => void>(() => undefined);
+  const openFilePickerRef = useRef<(projectMode?: BidProjectMode) => void>(() => undefined);
   const [recentRefreshKey, setRecentRefreshKey] = useState(0);
 
-  const registerFilePicker = useCallback((openFilePicker: () => void) => {
+  const registerFilePicker = useCallback((openFilePicker: (projectMode?: BidProjectMode) => void) => {
     openFilePickerRef.current = openFilePicker;
   }, []);
 
@@ -21,10 +23,11 @@ export function HomePage(): JSX.Element {
     <div className="home-shell">
       <HeroBanner />
       <SmartBidCard
-        onPrimaryAction={() => openFilePickerRef.current()}
+        onPrimaryAction={() => openFilePickerRef.current('general')}
         onTechnicalAction={() => navigate('/history')}
         onBusinessAction={() => navigate('/knowledge')}
       />
+      <TaichangReuseCard onCreate={() => openFilePickerRef.current('taichang_reuse')} />
       <BidVolumeOverview />
       <div className="grid grid-cols-[1fr_1.08fr] gap-4 max-[1500px]:grid-cols-1">
         <BasicTools />
