@@ -619,6 +619,15 @@ class DocxExportRegressionTest(unittest.TestCase):
         self.assertNotEqual(meta.get("tender_unit"), "招标代理机构：")
         self.assertEqual(meta["cover_fields"]["招标编号"], "2225AC")
 
+    def test_tender_metadata_prefers_real_title_over_xx_placeholder_and_infers_title_code(self):
+        meta = extract_tender_project_metadata(
+            "# SL2655招标文件-预审\n\n招标项目名称：XX项目招标采购\n"
+        )
+
+        self.assertEqual(meta["project_name"], "SL2655招标文件-预审")
+        self.assertEqual(meta["tender_no"], "SL2655")
+        self.assertEqual(meta["cover_fields"]["招标编号"], "SL2655")
+
     def test_bid_markdown_report_carries_structured_cover_fields_from_project_meta(self):
         project_id = "11111111-1111-1111-1111-111111111111"
         with tempfile.TemporaryDirectory() as tmpdir:

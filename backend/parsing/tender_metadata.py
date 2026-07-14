@@ -54,6 +54,18 @@ def _looks_like_field_label(value: str) -> bool:
     return bool(re.search(r"(?:招标编号|采购编号|项目编号|分标编号|分标名称|包名称|包号|招标人|采购人|招标代理机构|代理机构)\s*[:：]", value))
 
 
+def _looks_like_placeholder_value(value: str) -> bool:
+    compact = _compact_text(value).lower()
+    return bool(
+        compact
+        and (
+            compact.startswith(("xx", "xxx", "某某", "某项目"))
+            or "项目名称）" in compact
+            or "见投标邀请书" in compact
+        )
+    )
+
+
 def _compact_text(text: str) -> str:
     return re.sub(r"\s+", "", text or "")
 
@@ -89,7 +101,7 @@ def _extract_direct_field(markdown: str, canonical_label: str, content_list: lis
                 continue
             raw_value = match.group(1)
             value = clean_metadata_value(raw_value)
-            if not value or _looks_like_field_label(value):
+            if not value or _looks_like_field_label(value) or _looks_like_placeholder_value(value):
                 continue
             snippet = match.group(0)
             return value, {
@@ -103,6 +115,7 @@ def _extract_direct_field(markdown: str, canonical_label: str, content_list: lis
 
 def _infer_project_name(markdown: str, content_list: list[dict[str, Any]]) -> tuple[str, dict[str, Any] | None]:
     candidates = [
+        r"^\s*#\s*([^\n]{3,100})\s*$",
         r"#\s*(.+?（项目名称）.+?)(?:\n|$)",
         r"^\s*(.+?招标采购(?:项目)?)(?:招标文件|采购文件)?\s*$",
         r"^\s*(.+?)(?:招标文件|采购文件)\s*$",
@@ -114,7 +127,7 @@ def _infer_project_name(markdown: str, content_list: list[dict[str, Any]]) -> tu
         value = clean_metadata_value(match.group(1))
         value = value.replace("（项目名称）", "").strip()
         value = re.sub(r"(招标文件|采购文件)$", "", value).strip()
-        if value and not _looks_like_field_label(value):
+        if value and not _looks_like_field_label(value) and not _looks_like_placeholder_value(value):
             return value, {
                 "source": "tender_file_title_extract",
                 "matched_label": "标题",
@@ -122,6 +135,21 @@ def _infer_project_name(markdown: str, content_list: list[dict[str, Any]]) -> tu
                 "snippet": clean_metadata_value(match.group(0), max_chars=180),
             }
     return "", None
+
+
+def _infer_tender_no(markdown: str, content_list: list[dict[str, Any]]) -> tuple[str, dict[str, Any] | None]:
+    title_match = re.search(r"^\s*#\s*([^\n]{3,100})\s*$", markdown, flags=re.MULTILINE)
+    title = clean_metadata_value(title_match.group(1) if title_match else "")
+    code_match = re.search(r"(?<![A-Z0-9])(?:[A-Z]{2}\d{4}|\d{4}[A-Z]{2})(?![A-Z0-9])", title, flags=re.I)
+    if not code_match:
+        return "", None
+    value = code_match.group(0).upper()
+    return value, {
+        "source": "tender_file_title_extract",
+        "matched_label": "标题编号",
+        "source_page": _source_page_by_snippet(content_list, title),
+        "snippet": title,
+    }
 
 
 def _infer_file_type(markdown: str) -> str:
@@ -155,6 +183,13 @@ def extract_tender_project_metadata(markdown: str, content_list: list[dict[str, 
             cover_fields["项目名称"] = value
             if source:
                 field_sources["项目名称"] = source
+
+    if not cover_fields.get("招标编号"):
+        value, source = _infer_tender_no(markdown, content_items)
+        if value:
+            cover_fields["招标编号"] = value
+            if source:
+                field_sources["招标编号"] = source
 
     if not cover_fields.get("文件类型"):
         cover_fields["文件类型"] = _infer_file_type(markdown)

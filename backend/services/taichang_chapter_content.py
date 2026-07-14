@@ -31,6 +31,16 @@ TAICHANG_CONTENT_PROFILE = {
     "formal_evidence_policy": "bundle_must_pass_current_project_validity_and_scope_checks",
 }
 
+GROUNDED_RENDERER_SEMANTIC_KEYS = {
+    "enterprise.basic_profile",
+    "technical_characteristics.cpvc",
+    "technical_characteristics.mpp",
+    "manufacturing.quality_control",
+    "manufacturing.process.mpp",
+    "qualification.personnel_roster_and_certificates",
+    "performance.project_evidence",
+}
+
 
 def _read_json(path: Path) -> Any:
     with path.open("r", encoding="utf-8") as handle:
@@ -383,6 +393,46 @@ def render_grounded_chapter_draft(manifest: dict[str, Any]) -> str:
     semantic_key = str(manifest.get("semantic_key") or "")
     rows = [item.get("raw") or {} for item in manifest.get("structured_rows") or []]
 
+    if semantic_key == "enterprise.basic_profile":
+        profile = rows[0] if rows else {}
+        return "\n".join([
+            "### 投标人基本情况表",
+            "",
+            "| 项目 | 核验信息 |",
+            "| --- | --- |",
+            f"| 投标人全称 | {_md(profile.get('full_name'))} |",
+            f"| 统一社会信用代码 | {_md(profile.get('unified_social_credit_code'))} |",
+            f"| 法定代表人 | {_md(profile.get('legal_representative'))} |",
+            f"| 公司类型 | {_md(profile.get('company_type'))} |",
+            f"| 注册资本 | {_md(profile.get('registered_capital'))} |",
+            f"| 成立日期 | {_md(profile.get('established_date'))} |",
+            f"| 注册地址 | {_md(profile.get('registered_address'))} |",
+            "",
+            "上述信息来自泰昌营业执照副本及企业信用资料的已核验工商基础事实。本表不自动扩展资质证书、财务结论、人员、业绩或关联关系声明；这些内容应在当次招标指定章节中依据对应原始证据分别编制。",
+        ])
+
+    if semantic_key in {"technical_characteristics.cpvc", "technical_characteristics.mpp"}:
+        parameter_rows = [row for row in rows if row.get("parameter_name")]
+        first = parameter_rows[0] if parameter_rows else {}
+        table = [
+            "| 检验项目 | 检验报告标准要求 | 检验结果 | 单位 | 单项结论 | 来源页 |",
+            "| --- | --- | --- | --- | --- | ---: |",
+            *[
+                f"| {_md(row.get('parameter_name'))} | {_md(row.get('standard_requirement'))} | {_md(row.get('inspection_result'))} | {_md(row.get('unit'))} | {_md(row.get('single_conclusion') or row.get('inspection_conclusion'))} | {_md(row.get('source_page'))} |"
+                for row in parameter_rows
+            ],
+        ]
+        product_name = "CPVC电缆保护管" if semantic_key.endswith(".cpvc") else "MPP电缆保护管"
+        return "\n".join([
+            f"### {product_name}现有检验参数事实",
+            "",
+            f"河北泰昌电力器材科技有限公司现有{product_name}检验报告，报告编号为 {_md(first.get('report_no'))}，规格型号为 {_md(first.get('specification_model'))}。报告中已结构化核验的参数如下：",
+            "",
+            *table,
+            "",
+            "本表仅陈述现有检验报告对应规格的可核验事实，不自动转写为当次项目的“投标人保证值”，也不推导其覆盖其他规格。当次项目需求值、保证值和偏差结论必须在后续技术参数原表回填阶段逐行对齐；规格或指标不一致时不得作为正式响应值。",
+        ])
+
     if semantic_key == "manufacturing.quality_control":
         certificate_rows = [row for row in rows if row.get("ledger_type") == "management_certificate"]
         table = [
@@ -473,3 +523,7 @@ def render_grounded_chapter_draft(manifest: dict[str, Any]) -> str:
         ])
 
     raise ValueError(f"暂不支持的泰昌高精度章节：{semantic_key}")
+
+
+def can_render_grounded_chapter(manifest: dict[str, Any] | None) -> bool:
+    return bool(manifest and str(manifest.get("semantic_key") or "") in GROUNDED_RENDERER_SEMANTIC_KEYS)

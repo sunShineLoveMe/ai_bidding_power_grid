@@ -75,6 +75,37 @@ def test_grounded_renderer_uses_only_visible_facts_and_no_internal_ids() -> None
     assert all(term not in "\n".join(contents) for term in ("taichang-", "technical-media-", "row-"))
 
 
+def test_current_project_grounded_renderers_do_not_expand_unverified_facts() -> None:
+    enterprise = render_grounded_chapter_draft(build_chapter_content_manifest(_chapter("投标人基本情况表")))
+    mpp = render_grounded_chapter_draft(
+        build_chapter_content_manifest(_chapter("技术特性参数表", product_families=["MPP电缆保护管"]))
+    )
+
+    assert "10000万元人民币" in enterprise
+    assert "2012年11月14日" in enterprise
+    assert "全国工业产品生产许可证" not in enterprise
+    assert "近三年财务" not in enterprise
+    assert "2024100312005501712" in mpp
+    assert "66.40" in mpp
+    assert "不自动转写为当次项目的“投标人保证值”" in mpp
+
+
+def test_stream_uses_grounded_renderer_instead_of_llm_for_exact_fact_chapter() -> None:
+    from backend.ai import section_writer
+
+    chapter = _chapter("投标人基本情况表")
+    payload = {"project": {"project_mode": "taichang_reuse"}, "analysis": {"project_meta": {}}}
+    with patch("backend.ai.section_writer.get_project_interpretation", return_value=payload), \
+         patch("backend.ai.section_writer._compact_section_rag_context", return_value="-无"), \
+         patch("backend.ai.section_writer._compact_supporting_assets", return_value="-无"), \
+         patch("backend.ai.section_writer.stream_dashscope_api") as stream_model:
+        events = list(section_writer.stream_bid_section("project-id", chapter))
+
+    assert any(event["type"] == "grounded_renderer" for event in events)
+    assert "10000万元人民币" in "".join(event.get("content", "") for event in events)
+    stream_model.assert_not_called()
+
+
 def test_general_project_never_loads_taichang_chapter_manifest() -> None:
     chapter = _chapter("人员组织与人员证书")
     context = _taichang_content_reuse_context({"project_mode": "general"}, chapter, {})

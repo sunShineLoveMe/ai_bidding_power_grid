@@ -25,7 +25,9 @@ from backend.services.taichang_bid_context import build_taichang_verified_fact_c
 from backend.core.project_modes import TAICHANG_REUSE_PROJECT_MODE, normalize_project_mode
 from backend.services.taichang_chapter_content import (
     build_chapter_content_manifest,
+    can_render_grounded_chapter,
     chapter_content_prompt_context,
+    render_grounded_chapter_draft,
 )
 
 FORMAL_PLACEHOLDER_RE = re.compile(r"【\s*待(?:补充|填写|确认|核对)[^】]*】|\{\{[^}]+}}|\$\{[^}]+}")
@@ -1184,6 +1186,22 @@ def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dic
         "asset_limit": profile.asset_limit,
         "fact_pack_mode": profile.fact_pack_mode,
     }
+
+    metadata = chapter.get("metadata") if isinstance(chapter.get("metadata"), dict) else {}
+    manifest = metadata.get("chapter_content_manifest") if isinstance(metadata.get("chapter_content_manifest"), dict) else None
+    if not continuation_draft and can_render_grounded_chapter(manifest):
+        grounded_content = render_grounded_chapter_draft(manifest)
+        yield {
+            "type": "grounded_renderer",
+            "renderer": "taichang_structured_grounded_renderer_v1",
+            "semantic_key": manifest.get("semantic_key"),
+            "model_bypassed": True,
+            "reason": "高精度事实章节禁止模型改写结构化数值与证据字段",
+        }
+        for chunk in _chunk_text(grounded_content):
+            yield {"type": "chunk", "content": chunk}
+        yield {"type": "done"}
+        return
 
     emitted = False
     generated_content = continuation_draft
