@@ -52,6 +52,7 @@ def run_bid_docx_export(
     from backend.api.routes import build_project_bid_markdown, _output_url_for_path
     from backend.db.supabase_repo import update_bid_export_task
     from backend.export.md_to_word import convert_md_to_word, refresh_docx_fields_with_soffice
+    from backend.services.taichang_fixed_forms import audit_fixed_form_docx, export_fixed_form_manifest_to_docx
 
     with log_context(project_id=project_id, task_id=task_id):
         try:
@@ -68,6 +69,8 @@ def run_bid_docx_export(
                 update_bid_export_task,
                 convert_md_to_word,
                 refresh_docx_fields_with_soffice,
+                export_fixed_form_manifest_to_docx,
+                audit_fixed_form_docx,
             )
         except Exception as exc:
             logger.exception("后台 DOCX 导出任务失败")
@@ -97,6 +100,8 @@ def _run_bid_docx_export(
     update_bid_export_task,
     convert_md_to_word,
     refresh_docx_fields_with_soffice,
+    export_fixed_form_manifest_to_docx,
+    audit_fixed_form_docx,
 ) -> dict:
     try:
         update_bid_export_task(project_id, task_id, {
@@ -117,11 +122,26 @@ def _run_bid_docx_export(
             "message": "正在转换 Word 文档。",
             "project_name": project_name,
         })
-        generated_docx_path, image_conversion_report = convert_md_to_word(
-            markdown_path,
-            return_report=True,
-            cover_fields=(image_selection_report or {}).get("cover_fields") or None,
-        )
+        fixed_form_manifest = (image_selection_report or {}).get("fixed_form_manifest")
+        if section_id and isinstance(fixed_form_manifest, dict):
+            generated_docx_path, fixed_form_report = export_fixed_form_manifest_to_docx(
+                fixed_form_manifest,
+                Path(markdown_path).with_suffix(".docx"),
+                document_title=project_name,
+            )
+            image_conversion_report = {
+                "template": fixed_form_report.get("template") or {},
+                "fixed_form_ooxml": fixed_form_report,
+                "inserted": 0,
+                "failed": 0,
+                "warnings": [],
+            }
+        else:
+            generated_docx_path, image_conversion_report = convert_md_to_word(
+                markdown_path,
+                return_report=True,
+                cover_fields=(image_selection_report or {}).get("cover_fields") or None,
+            )
         if not generated_docx_path or not Path(generated_docx_path).exists():
             raise RuntimeError("DOCX 生成失败，未找到输出文件。")
         generated_docx_path = Path(generated_docx_path)
@@ -130,6 +150,11 @@ def _run_bid_docx_export(
             "message": "正在刷新 Word 目录页码和页脚页码。",
         })
         generated_docx_path, field_refresh_report = refresh_docx_fields_with_soffice(generated_docx_path)
+        if section_id and isinstance(fixed_form_manifest, dict):
+            post_refresh_audit = audit_fixed_form_docx(fixed_form_manifest, generated_docx_path)
+            image_conversion_report["fixed_form_ooxml"]["post_refresh_audit"] = post_refresh_audit
+            if not post_refresh_audit.get("passed"):
+                raise RuntimeError("固定表单在 Word 字段刷新后发生结构漂移，已阻止交付。")
         base_metadata = initial_metadata if isinstance(initial_metadata, dict) else {}
         export_metadata = {
             **base_metadata,

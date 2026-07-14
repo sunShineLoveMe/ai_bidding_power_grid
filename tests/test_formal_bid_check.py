@@ -118,7 +118,7 @@ class FormalBidCheckTest(unittest.TestCase):
              patch("backend.services.formal_bid_check.list_knowledge_assets", return_value=self._assets()):
             report = build_formal_bid_check_report("11111111-1111-1111-1111-111111111111")
 
-        self.assertEqual(report["summary"]["totalRules"], 62)
+        self.assertEqual(report["summary"]["totalRules"], 63)
         self.assertFalse(report["summary"]["canFormalExport"])
         self.assertTrue(report["summary"]["draftExportAllowed"])
         by_id = {item["id"]: item for item in report["items"]}
@@ -126,6 +126,28 @@ class FormalBidCheckTest(unittest.TestCase):
         self.assertTrue(by_id["B-002"]["blocksFormalExport"])
         self.assertIn("投标总价", by_id["B-002"]["evidence"])
         self.assertNotIn("total_bid_price", by_id["B-002"]["evidence"])
+
+    def test_fixed_form_manifest_blocks_formal_export_when_guarantees_are_blank(self):
+        from backend.services.formal_bid_check import build_formal_bid_check_report
+
+        payload = self._payload()
+        payload["sections"][2]["metadata"]["fixed_form_manifest"] = {
+            "form_key": "technical_characteristics",
+            "formal_ready": False,
+            "row_count": 22,
+            "filled_guarantee_count": 0,
+            "blockers": [{"parameter_name": "断裂伸长率"}] * 22,
+        }
+        with patch("backend.services.formal_bid_check.get_project_interpretation", return_value=payload), \
+             patch("backend.services.formal_bid_check.build_bid_prefill_report", return_value=self._prefill_report()), \
+             patch("backend.services.formal_bid_check.build_compliance_report", return_value={"summary": {"percent": 80, "missing": 1, "highRiskMissing": 1}}), \
+             patch("backend.services.formal_bid_check.list_knowledge_assets", return_value=self._assets()):
+            report = build_formal_bid_check_report("11111111-1111-1111-1111-111111111111")
+
+        by_id = {item["id"]: item for item in report["items"]}
+        self.assertEqual(by_id["T-013"]["status"], "blocked")
+        self.assertTrue(by_id["T-013"]["blocksFormalExport"])
+        self.assertIn("参数行 22，已填保证值 0", by_id["T-013"]["evidence"])
 
     def test_enterprise_logo_do_not_mix_metadata_is_not_forbidden_source(self):
         from backend.services.formal_bid_check import build_formal_bid_check_report
@@ -192,15 +214,15 @@ class FormalBidCheckTest(unittest.TestCase):
         self.assertFalse(report["summary"]["canFormalExport"])
         self.assertIn("架空绝缘导线", by_id["T-000"]["evidence"])
 
-    def test_rule_inventory_has_sixty_two_objective_rules(self):
+    def test_rule_inventory_has_sixty_three_objective_rules(self):
         from backend.services.formal_bid_check import load_formal_check_rules
 
         rule_set = load_formal_check_rules()
         rules = rule_set["rules"]
-        self.assertEqual(len(rules), 62)
+        self.assertEqual(len(rules), 63)
         self.assertEqual(sum(1 for rule in rules if rule["category"] == "资格资料"), 10)
         self.assertEqual(sum(1 for rule in rules if rule["category"] == "商务响应"), 12)
-        self.assertEqual(sum(1 for rule in rules if rule["category"] == "技术响应"), 13)
+        self.assertEqual(sum(1 for rule in rules if rule["category"] == "技术响应"), 14)
         self.assertTrue(all(rule.get("source_level") and rule.get("source_ref") for rule in rules))
         self.assertTrue(all(rule.get("remediation") for rule in rules))
 

@@ -1,0 +1,5277 @@
+{
+  "schema_version": "taichang_p2_03_fixed_forms.v1",
+  "inventory": {
+    "schema_version": "taichang_fixed_form_inventory.v1",
+    "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+    "source_file_sha256": "94ca5c08984ce386d5e0b226445780b303195e83a0af0e2cbb88165e319f9831",
+    "forms": {
+      "business_deviation": {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_file_sha256": "94ca5c08984ce386d5e0b226445780b303195e83a0af0e2cbb88165e319f9831",
+        "table_index": 18,
+        "row_count": 10,
+        "column_count": 5,
+        "grid_widths": [
+          454025,
+          1144905,
+          1350010,
+          1380490,
+          1082040
+        ],
+        "table_xml_sha256": "47e850d01b44707b0fe69d18656f5f24397d7be827780665ac97e45df36cc112",
+        "rows": [
+          [
+            {
+              "row": 1,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "序号",
+              "xml_sha256": "98f28f5ed1c6eb00be3163c57ef1037caf2ce3814997ae5fd2240a209c6b5a2d"
+            },
+            {
+              "row": 1,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "招标文件条目号",
+              "xml_sha256": "c557c0d54268f0f02412d7c0783ff255e4db386f896cede4e22a1cdabdd3bba6"
+            },
+            {
+              "row": 1,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "招标文件条款",
+              "xml_sha256": "0109f2563de95c8f3b3ea0ccf98f4f8a9559199e4f23550c1888e28d489ae3b5"
+            },
+            {
+              "row": 1,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "投标文件条款",
+              "xml_sha256": "29be8268fd949c9d1932c9c9f82a7f5dfb16b70b7b91007d9ad6c94232b202c9"
+            },
+            {
+              "row": 1,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "偏差说明",
+              "xml_sha256": "009cd14ed3d616977ad00469d88b49268bce6a9f755232d07b8bbddf33f7d4ce"
+            }
+          ],
+          [
+            {
+              "row": 2,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "fac595698ded6bfde613f8d7150216ccca28af8ebdd4ef43a5a5b32b3ff6ee9a"
+            },
+            {
+              "row": 2,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "bdc834285f8355a699433bf871d0d324fbb2c21610728203d2d1fe301429a0f0"
+            },
+            {
+              "row": 2,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "66cfad903bee082413db6a778cc361f93995091d509ed362d57b819525c86ee9"
+            },
+            {
+              "row": 2,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "cc264b78b8821bc5cae1089436490160fec820148830635d21bb7c6e432558db"
+            },
+            {
+              "row": 2,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "db5a13ea460ed7dbbe51363a69c9a1a97f93ea0d5f4874cf4c712ed46af1f493"
+            }
+          ],
+          [
+            {
+              "row": 3,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "fac595698ded6bfde613f8d7150216ccca28af8ebdd4ef43a5a5b32b3ff6ee9a"
+            },
+            {
+              "row": 3,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "bdc834285f8355a699433bf871d0d324fbb2c21610728203d2d1fe301429a0f0"
+            },
+            {
+              "row": 3,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "66cfad903bee082413db6a778cc361f93995091d509ed362d57b819525c86ee9"
+            },
+            {
+              "row": 3,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "cc264b78b8821bc5cae1089436490160fec820148830635d21bb7c6e432558db"
+            },
+            {
+              "row": 3,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "db5a13ea460ed7dbbe51363a69c9a1a97f93ea0d5f4874cf4c712ed46af1f493"
+            }
+          ],
+          [
+            {
+              "row": 4,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "fac595698ded6bfde613f8d7150216ccca28af8ebdd4ef43a5a5b32b3ff6ee9a"
+            },
+            {
+              "row": 4,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "bdc834285f8355a699433bf871d0d324fbb2c21610728203d2d1fe301429a0f0"
+            },
+            {
+              "row": 4,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "66cfad903bee082413db6a778cc361f93995091d509ed362d57b819525c86ee9"
+            },
+            {
+              "row": 4,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "cc264b78b8821bc5cae1089436490160fec820148830635d21bb7c6e432558db"
+            },
+            {
+              "row": 4,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "db5a13ea460ed7dbbe51363a69c9a1a97f93ea0d5f4874cf4c712ed46af1f493"
+            }
+          ],
+          [
+            {
+              "row": 5,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "fac595698ded6bfde613f8d7150216ccca28af8ebdd4ef43a5a5b32b3ff6ee9a"
+            },
+            {
+              "row": 5,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "bdc834285f8355a699433bf871d0d324fbb2c21610728203d2d1fe301429a0f0"
+            },
+            {
+              "row": 5,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "66cfad903bee082413db6a778cc361f93995091d509ed362d57b819525c86ee9"
+            },
+            {
+              "row": 5,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "cc264b78b8821bc5cae1089436490160fec820148830635d21bb7c6e432558db"
+            },
+            {
+              "row": 5,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "db5a13ea460ed7dbbe51363a69c9a1a97f93ea0d5f4874cf4c712ed46af1f493"
+            }
+          ],
+          [
+            {
+              "row": 6,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "fac595698ded6bfde613f8d7150216ccca28af8ebdd4ef43a5a5b32b3ff6ee9a"
+            },
+            {
+              "row": 6,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "bdc834285f8355a699433bf871d0d324fbb2c21610728203d2d1fe301429a0f0"
+            },
+            {
+              "row": 6,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "66cfad903bee082413db6a778cc361f93995091d509ed362d57b819525c86ee9"
+            },
+            {
+              "row": 6,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "cc264b78b8821bc5cae1089436490160fec820148830635d21bb7c6e432558db"
+            },
+            {
+              "row": 6,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "db5a13ea460ed7dbbe51363a69c9a1a97f93ea0d5f4874cf4c712ed46af1f493"
+            }
+          ],
+          [
+            {
+              "row": 7,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "fac595698ded6bfde613f8d7150216ccca28af8ebdd4ef43a5a5b32b3ff6ee9a"
+            },
+            {
+              "row": 7,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "bdc834285f8355a699433bf871d0d324fbb2c21610728203d2d1fe301429a0f0"
+            },
+            {
+              "row": 7,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "66cfad903bee082413db6a778cc361f93995091d509ed362d57b819525c86ee9"
+            },
+            {
+              "row": 7,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "cc264b78b8821bc5cae1089436490160fec820148830635d21bb7c6e432558db"
+            },
+            {
+              "row": 7,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "db5a13ea460ed7dbbe51363a69c9a1a97f93ea0d5f4874cf4c712ed46af1f493"
+            }
+          ],
+          [
+            {
+              "row": 8,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "fac595698ded6bfde613f8d7150216ccca28af8ebdd4ef43a5a5b32b3ff6ee9a"
+            },
+            {
+              "row": 8,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "bdc834285f8355a699433bf871d0d324fbb2c21610728203d2d1fe301429a0f0"
+            },
+            {
+              "row": 8,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "66cfad903bee082413db6a778cc361f93995091d509ed362d57b819525c86ee9"
+            },
+            {
+              "row": 8,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "cc264b78b8821bc5cae1089436490160fec820148830635d21bb7c6e432558db"
+            },
+            {
+              "row": 8,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "db5a13ea460ed7dbbe51363a69c9a1a97f93ea0d5f4874cf4c712ed46af1f493"
+            }
+          ],
+          [
+            {
+              "row": 9,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "fac595698ded6bfde613f8d7150216ccca28af8ebdd4ef43a5a5b32b3ff6ee9a"
+            },
+            {
+              "row": 9,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "bdc834285f8355a699433bf871d0d324fbb2c21610728203d2d1fe301429a0f0"
+            },
+            {
+              "row": 9,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "66cfad903bee082413db6a778cc361f93995091d509ed362d57b819525c86ee9"
+            },
+            {
+              "row": 9,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "cc264b78b8821bc5cae1089436490160fec820148830635d21bb7c6e432558db"
+            },
+            {
+              "row": 9,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "db5a13ea460ed7dbbe51363a69c9a1a97f93ea0d5f4874cf4c712ed46af1f493"
+            }
+          ],
+          [
+            {
+              "row": 10,
+              "column": 1,
+              "grid_span": 5,
+              "vertical_merge": null,
+              "text": "投标人声明：针对本招标标的，除本表已列明偏差外，我们接受招标文件规定的其余全部商务条件，并承诺按照招标文件规定的商务条件提供对应服务。",
+              "xml_sha256": "8f59c6cae23cdf305773c63c985b84d302d8af029485cbfebb49858c3f255788"
+            }
+          ]
+        ],
+        "parser": "native_docx_ooxml",
+        "mineru_invoked": false,
+        "form_key": "business_deviation",
+        "title": "商务偏差表"
+      },
+      "personnel_relationship": {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_file_sha256": "94ca5c08984ce386d5e0b226445780b303195e83a0af0e2cbb88165e319f9831",
+        "table_index": 19,
+        "row_count": 3,
+        "column_count": 13,
+        "grid_widths": [
+          380365,
+          306705,
+          380365,
+          307340,
+          381000,
+          638175,
+          381000,
+          307340,
+          381000,
+          757555,
+          307340,
+          753110,
+          472440
+        ],
+        "table_xml_sha256": "60e2eb2f179d106e2676e6adb7e23d7466f89209108c91330569f72d9e9ed210",
+        "rows": [
+          [
+            {
+              "row": 1,
+              "column": 1,
+              "grid_span": 6,
+              "vertical_merge": null,
+              "text": "本企业人员基本信息",
+              "xml_sha256": "8659bea9adcf0d948c592825a93d9299572a2363a8060a9575e89cbf31d24945"
+            },
+            {
+              "row": 1,
+              "column": 7,
+              "grid_span": 7,
+              "vertical_merge": null,
+              "text": "国家电网公司系统人员基本信息",
+              "xml_sha256": "c3eab07fd50da5edcfbdf14469d1238fc5727e387e1c93d3236c8da608215ff3"
+            }
+          ],
+          [
+            {
+              "row": 2,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "人员姓名",
+              "xml_sha256": "3b26012ea6586ce2a6e00a8148a72d0c9b20ac35d2a621f027fa1435aeed1cdb"
+            },
+            {
+              "row": 2,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "性别",
+              "xml_sha256": "9bef7d02bac93315454d493ef5abd90fc1cfb00db4126ebef6c0d9da07190c4f"
+            },
+            {
+              "row": 2,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "身份证号",
+              "xml_sha256": "6428a90acb243ee8c92ea40f66af9f504d97e7bd20eee57d39052c0690b2aa60"
+            },
+            {
+              "row": 2,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "职务",
+              "xml_sha256": "f6d2576ca561fd62d5d8fabb6a0037ad23d945eb68bb08ad6f0ae67e6bd0204c"
+            },
+            {
+              "row": 2,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "任职时间",
+              "xml_sha256": "befa30eed926ae6a8306cf82e5ee1d17209d2d925b89cc28e36df83f24c24056"
+            },
+            {
+              "row": 2,
+              "column": 6,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "与国网公司系统人员关系",
+              "xml_sha256": "aa037d43d2729099a8e6c5a52183fd1a1905a434f4da68d23fa5ebefc1fd4f30"
+            },
+            {
+              "row": 2,
+              "column": 7,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "人员姓名",
+              "xml_sha256": "20b3432d6a3b44935c4f6e0a363e6326c15a9bb1be0c82b6114ab375d514f6c9"
+            },
+            {
+              "row": 2,
+              "column": 8,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "性别",
+              "xml_sha256": "e4c1f29c19435b7f8b8689ae358af8e14d42f3c54dcf932b3db27309d6123291"
+            },
+            {
+              "row": 2,
+              "column": 9,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "身份证号",
+              "xml_sha256": "d8fd72ff8d7c202841a8b2d2315cf4eabc04cda7b04a67fd798339a5b09044e0"
+            },
+            {
+              "row": 2,
+              "column": 10,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "（曾）任职单位名称",
+              "xml_sha256": "4361db74436de81e8e0003cbd8130b59d3fea8c92b0a55d7cd8edd8f2c40e4ea"
+            },
+            {
+              "row": 2,
+              "column": 11,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "职务",
+              "xml_sha256": "ac86d50af62b19fcfb1eb0b94e930110b60a5bb282f0844626670decc35fcaa6"
+            },
+            {
+              "row": 2,
+              "column": 12,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "任职状态（在职/非在职）",
+              "xml_sha256": "2f6dd16cebd5d4bc6c145cc696381bef33fab7b12cc4af4a85742639912a3b75"
+            },
+            {
+              "row": 2,
+              "column": 13,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "离职/退休时间",
+              "xml_sha256": "defb429a890ef72c973d294121e8ff8fb0a8c790b64ba6e85c404d083f80dfa3"
+            }
+          ],
+          [
+            {
+              "row": 3,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f94ff76e916e018c581b1b1f3e5b35334e4ec0ae3c11cf259e104a36019d801"
+            },
+            {
+              "row": 3,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "1d10d6816753062cff4509a14170c5c9889d0a331be028cb40779d96a30d985f"
+            },
+            {
+              "row": 3,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f94ff76e916e018c581b1b1f3e5b35334e4ec0ae3c11cf259e104a36019d801"
+            },
+            {
+              "row": 3,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "43a2b291ada8b4655e8816e320ad963c7085c9a2f954361850c461d72df2f70c"
+            },
+            {
+              "row": 3,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "45e9aa77b5d770ddac36699e72de9562d05ff0e726b08847cb1b94d191f74911"
+            },
+            {
+              "row": 3,
+              "column": 6,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "c7dc88e59fdb4f0aa54cd39044e0227ee737e4d661fda8a4b602287381f94932"
+            },
+            {
+              "row": 3,
+              "column": 7,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "45e9aa77b5d770ddac36699e72de9562d05ff0e726b08847cb1b94d191f74911"
+            },
+            {
+              "row": 3,
+              "column": 8,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "e3fafffaf6f6bdca8da2eea587d0e7db40d9b1869c10c74043e7c513f85b3025"
+            },
+            {
+              "row": 3,
+              "column": 9,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "78ce65dbb116486be92fcfe0d06c0aa0b14488b260dcb1f0c43bf6c1d39dbc23"
+            },
+            {
+              "row": 3,
+              "column": 10,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "ef80ec38d72b1f16cba98b60b2957bf974709bfb419533cd013313958d8ff8d2"
+            },
+            {
+              "row": 3,
+              "column": 11,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "43a2b291ada8b4655e8816e320ad963c7085c9a2f954361850c461d72df2f70c"
+            },
+            {
+              "row": 3,
+              "column": 12,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "707fdbc0be67d9d49d7fca3460cba6ffe06cf997cc71313b0f6b19154f415347"
+            },
+            {
+              "row": 3,
+              "column": 13,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "84a5ed179c36df73aff30e961f31afb5118e9b62d27d8317cc930f66f8a0e2d1"
+            }
+          ]
+        ],
+        "parser": "native_docx_ooxml",
+        "mineru_invoked": false,
+        "form_key": "personnel_relationship",
+        "title": "投标人与国家电网公司系统人员关系说明"
+      },
+      "technical_deviation": {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_file_sha256": "94ca5c08984ce386d5e0b226445780b303195e83a0af0e2cbb88165e319f9831",
+        "table_index": 23,
+        "row_count": 9,
+        "column_count": 5,
+        "grid_widths": [
+          452755,
+          943610,
+          1436370,
+          1619885,
+          958850
+        ],
+        "table_xml_sha256": "4ed3975354015ef2130462373bc5a6b1865c943e9894b06a6895ab73cbccec6a",
+        "rows": [
+          [
+            {
+              "row": 1,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "序号",
+              "xml_sha256": "4ec7180b620c23e469ae95d708fe3ff632324a43f8044ad7236ad64ba35268b9"
+            },
+            {
+              "row": 1,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "偏差事项",
+              "xml_sha256": "38199babf2a23ee5fd398aacfd9cec295ca1d93561c346a54b10e765f2d1edeb"
+            },
+            {
+              "row": 1,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "招标文件要求",
+              "xml_sha256": "75b988046ef1adc03a5a8397ccc1f593703da53ca7d42edc62d14bde24aef3db"
+            },
+            {
+              "row": 1,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "投标文件响应",
+              "xml_sha256": "a6dc014e5b833443bd7ad5c1bbd558df4f91b8b3da8651e8d4103b91bcedb678"
+            },
+            {
+              "row": 1,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "偏差说明",
+              "xml_sha256": "528358028e972b12057a7baa03b0fec7e5bb204ae437a3803b8570febcba3031"
+            }
+          ],
+          [
+            {
+              "row": 2,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "5a509babca53a94e7f487edf67e5a98cf19a3bb3cd05f48a92d268e901be4644"
+            },
+            {
+              "row": 2,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "0183866612c70733f9959738bb4972ad45523a6d0cb7d43608ca95d54339de2c"
+            },
+            {
+              "row": 2,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "3d4ca5c403944ca77eeb24e4120a3b085188e7e38fad8d2656c92b3cbafa7f86"
+            },
+            {
+              "row": 2,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "61f70ec51f807492e5a68cb7891ef5febae915898af028ed856554156d684e2b"
+            },
+            {
+              "row": 2,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "84fb5f5d48ced710c6cf9f8eee9e1c2e7db4e1418c20592e078e3db4d8f785d3"
+            }
+          ],
+          [
+            {
+              "row": 3,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "5a509babca53a94e7f487edf67e5a98cf19a3bb3cd05f48a92d268e901be4644"
+            },
+            {
+              "row": 3,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "0183866612c70733f9959738bb4972ad45523a6d0cb7d43608ca95d54339de2c"
+            },
+            {
+              "row": 3,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "3d4ca5c403944ca77eeb24e4120a3b085188e7e38fad8d2656c92b3cbafa7f86"
+            },
+            {
+              "row": 3,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "61f70ec51f807492e5a68cb7891ef5febae915898af028ed856554156d684e2b"
+            },
+            {
+              "row": 3,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "84fb5f5d48ced710c6cf9f8eee9e1c2e7db4e1418c20592e078e3db4d8f785d3"
+            }
+          ],
+          [
+            {
+              "row": 4,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "5a509babca53a94e7f487edf67e5a98cf19a3bb3cd05f48a92d268e901be4644"
+            },
+            {
+              "row": 4,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "0183866612c70733f9959738bb4972ad45523a6d0cb7d43608ca95d54339de2c"
+            },
+            {
+              "row": 4,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "3d4ca5c403944ca77eeb24e4120a3b085188e7e38fad8d2656c92b3cbafa7f86"
+            },
+            {
+              "row": 4,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "61f70ec51f807492e5a68cb7891ef5febae915898af028ed856554156d684e2b"
+            },
+            {
+              "row": 4,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "84fb5f5d48ced710c6cf9f8eee9e1c2e7db4e1418c20592e078e3db4d8f785d3"
+            }
+          ],
+          [
+            {
+              "row": 5,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "5a509babca53a94e7f487edf67e5a98cf19a3bb3cd05f48a92d268e901be4644"
+            },
+            {
+              "row": 5,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "0183866612c70733f9959738bb4972ad45523a6d0cb7d43608ca95d54339de2c"
+            },
+            {
+              "row": 5,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "3d4ca5c403944ca77eeb24e4120a3b085188e7e38fad8d2656c92b3cbafa7f86"
+            },
+            {
+              "row": 5,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "61f70ec51f807492e5a68cb7891ef5febae915898af028ed856554156d684e2b"
+            },
+            {
+              "row": 5,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "84fb5f5d48ced710c6cf9f8eee9e1c2e7db4e1418c20592e078e3db4d8f785d3"
+            }
+          ],
+          [
+            {
+              "row": 6,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "5a509babca53a94e7f487edf67e5a98cf19a3bb3cd05f48a92d268e901be4644"
+            },
+            {
+              "row": 6,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "0183866612c70733f9959738bb4972ad45523a6d0cb7d43608ca95d54339de2c"
+            },
+            {
+              "row": 6,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "3d4ca5c403944ca77eeb24e4120a3b085188e7e38fad8d2656c92b3cbafa7f86"
+            },
+            {
+              "row": 6,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "61f70ec51f807492e5a68cb7891ef5febae915898af028ed856554156d684e2b"
+            },
+            {
+              "row": 6,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "84fb5f5d48ced710c6cf9f8eee9e1c2e7db4e1418c20592e078e3db4d8f785d3"
+            }
+          ],
+          [
+            {
+              "row": 7,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "5a509babca53a94e7f487edf67e5a98cf19a3bb3cd05f48a92d268e901be4644"
+            },
+            {
+              "row": 7,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "0183866612c70733f9959738bb4972ad45523a6d0cb7d43608ca95d54339de2c"
+            },
+            {
+              "row": 7,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "3d4ca5c403944ca77eeb24e4120a3b085188e7e38fad8d2656c92b3cbafa7f86"
+            },
+            {
+              "row": 7,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "61f70ec51f807492e5a68cb7891ef5febae915898af028ed856554156d684e2b"
+            },
+            {
+              "row": 7,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "84fb5f5d48ced710c6cf9f8eee9e1c2e7db4e1418c20592e078e3db4d8f785d3"
+            }
+          ],
+          [
+            {
+              "row": 8,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "5a509babca53a94e7f487edf67e5a98cf19a3bb3cd05f48a92d268e901be4644"
+            },
+            {
+              "row": 8,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "其他",
+              "xml_sha256": "313ead3e23debe81b41a70f0204b174de261925427d7df8711dd35fcb2fc1be9"
+            },
+            {
+              "row": 8,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "3d4ca5c403944ca77eeb24e4120a3b085188e7e38fad8d2656c92b3cbafa7f86"
+            },
+            {
+              "row": 8,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "61f70ec51f807492e5a68cb7891ef5febae915898af028ed856554156d684e2b"
+            },
+            {
+              "row": 8,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "84fb5f5d48ced710c6cf9f8eee9e1c2e7db4e1418c20592e078e3db4d8f785d3"
+            }
+          ],
+          [
+            {
+              "row": 9,
+              "column": 1,
+              "grid_span": 5,
+              "vertical_merge": null,
+              "text": "投标人声明：针对本招标标的，除本表已列明偏差外，我们接受招标文件规定的其余全部技术条件，并承诺按照招标文件规定的技术条件提供对应服务。",
+              "xml_sha256": "9fe9febfa760579badfd1b0833088f10f113f0b230741265b9fec112dd9996fb"
+            }
+          ]
+        ],
+        "parser": "native_docx_ooxml",
+        "mineru_invoked": false,
+        "form_key": "technical_deviation",
+        "title": "技术偏差表"
+      },
+      "technical_characteristics": {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_file_sha256": "94ca5c08984ce386d5e0b226445780b303195e83a0af0e2cbb88165e319f9831",
+        "table_index": 25,
+        "row_count": 18,
+        "column_count": 5,
+        "grid_widths": [
+          428625,
+          1573530,
+          424180,
+          1758315,
+          1758950
+        ],
+        "table_xml_sha256": "24905052e1aa950e8a970633e73a93cd71f2b80416cfa1d2408bf42f3542010a",
+        "rows": [
+          [
+            {
+              "row": 1,
+              "column": 1,
+              "grid_span": 5,
+              "vertical_merge": null,
+              "text": "技术特性参数表（格式）项目名称： 项目编号： 分标名称： 分标编号：",
+              "xml_sha256": "bdc7c8f02320692051d8ce459e3e03a7e6550b091242cb55c8e9e676fd406276"
+            }
+          ],
+          [
+            {
+              "row": 2,
+              "column": 1,
+              "grid_span": 3,
+              "vertical_merge": null,
+              "text": "项目单位：",
+              "xml_sha256": "e1fbed6f87393737579f03ededaeeb0c2028cee89b0302c08565da0113b67e6b"
+            },
+            {
+              "row": 2,
+              "column": 4,
+              "grid_span": 2,
+              "vertical_merge": null,
+              "text": "项目名称：",
+              "xml_sha256": "07a914072961561670bae79feaa0bc1774fca1082528bece15202c1f7b48a9d6"
+            }
+          ],
+          [
+            {
+              "row": 3,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "序号",
+              "xml_sha256": "d4b6cbdccab2712eee73d13b1faed86d07ea0fa06f1e28a064f00ed9beabc857"
+            },
+            {
+              "row": 3,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "名称",
+              "xml_sha256": "4f6fef3f9e0f7ff8bf847f60b18fd7a7f8e9fc489288b748aa9bb172236758da"
+            },
+            {
+              "row": 3,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "单位",
+              "xml_sha256": "b8c311a67726bf85adad03d3a1dd5b14e01e024a25fbf46d048090fa90a9853b"
+            },
+            {
+              "row": 3,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "招标人要求值",
+              "xml_sha256": "38e22d95d3be136dfb55671898ae5ed9090a0c0de6c8a4887f1720bbbd3679a7"
+            },
+            {
+              "row": 3,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "投标人保证值",
+              "xml_sha256": "1d94175a2785bd1e7d091290ba9bb8d34e9a87526ca331f745978898320f9bc1"
+            }
+          ],
+          [
+            {
+              "row": 4,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "1",
+              "xml_sha256": "5ec48c10b6d720501b94febfc0730c4fd3dad48194d10e03101769b53fa2ec89"
+            },
+            {
+              "row": 4,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 4,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 4,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 4,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 5,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "2",
+              "xml_sha256": "eef80a99f591bdf1cac545b0cd651245ddbd000fc3ff5c9d1fa928fd645e318b"
+            },
+            {
+              "row": 5,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 5,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 5,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 5,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 6,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "…",
+              "xml_sha256": "59a9072b0d7bd43ed4b2f0cc3257af1d6c2f3c5539e34ebd9cb3954cb1b51ec0"
+            },
+            {
+              "row": 6,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 6,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 6,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 6,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 7,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f58425a4dc85ddba971ae7c26ba28aa0f59dfb8e493224bf8f3a308ee2ce5fa"
+            },
+            {
+              "row": 7,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 7,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 7,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 7,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 8,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f58425a4dc85ddba971ae7c26ba28aa0f59dfb8e493224bf8f3a308ee2ce5fa"
+            },
+            {
+              "row": 8,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 8,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 8,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 8,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 9,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f58425a4dc85ddba971ae7c26ba28aa0f59dfb8e493224bf8f3a308ee2ce5fa"
+            },
+            {
+              "row": 9,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 9,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 9,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 9,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 10,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f58425a4dc85ddba971ae7c26ba28aa0f59dfb8e493224bf8f3a308ee2ce5fa"
+            },
+            {
+              "row": 10,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 10,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 10,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 10,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 11,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f58425a4dc85ddba971ae7c26ba28aa0f59dfb8e493224bf8f3a308ee2ce5fa"
+            },
+            {
+              "row": 11,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 11,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 11,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 11,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 12,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f58425a4dc85ddba971ae7c26ba28aa0f59dfb8e493224bf8f3a308ee2ce5fa"
+            },
+            {
+              "row": 12,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 12,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 12,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 12,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 13,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "…",
+              "xml_sha256": "59a9072b0d7bd43ed4b2f0cc3257af1d6c2f3c5539e34ebd9cb3954cb1b51ec0"
+            },
+            {
+              "row": 13,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 13,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 13,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 13,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 14,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f58425a4dc85ddba971ae7c26ba28aa0f59dfb8e493224bf8f3a308ee2ce5fa"
+            },
+            {
+              "row": 14,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 14,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 14,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 14,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 15,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f58425a4dc85ddba971ae7c26ba28aa0f59dfb8e493224bf8f3a308ee2ce5fa"
+            },
+            {
+              "row": 15,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 15,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 15,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 15,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 16,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f58425a4dc85ddba971ae7c26ba28aa0f59dfb8e493224bf8f3a308ee2ce5fa"
+            },
+            {
+              "row": 16,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 16,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 16,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 16,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 17,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "dc038e6ebf3e011ff1298c34905154d07fb33addddb83dc25ab69c02be2d31ca"
+            },
+            {
+              "row": 17,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "f1ffb61b439314ae3e8a917a6b5a6232fd055969ddf8c11281cc6a44c827f21f"
+            },
+            {
+              "row": 17,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b7d6f2309b84fa6bd313666f6f935f2e89116811f6ee0280d042f8eaf3622a25"
+            },
+            {
+              "row": 17,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "cb9598067268db65041bc2de40d0e46321377d78c3009cd8d0ad1cf1ef8e05eb"
+            },
+            {
+              "row": 17,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "cd6e2c435c90856091a88561566327d70bad921281c82e9ed8a59ac879413ef0"
+            }
+          ],
+          [
+            {
+              "row": 18,
+              "column": 1,
+              "grid_span": 5,
+              "vertical_merge": null,
+              "text": "编制说明：1、请抄录已获取招标文件技术规范书《技术特性参数表》的数据、信息或表述，填写本表对应条目“项目需求值或表述“栏，并在规定位置逐条逐项对应作出投标。",
+              "xml_sha256": "72343b0832193cb97fb387adb5cf778be64388c797937e732c363e7244fd7f7c"
+            }
+          ]
+        ],
+        "parser": "native_docx_ooxml",
+        "mineru_invoked": false,
+        "form_key": "technical_characteristics",
+        "title": "技术特性参数表"
+      }
+    },
+    "missing_forms": [],
+    "complete": true
+  },
+  "technical_parameter_response": {
+    "schema_version": "taichang_technical_parameter_response.v1",
+    "form_key": "technical_characteristics",
+    "title": "技术特性参数表",
+    "tender_scope": {
+      "product_family": "MPP电缆保护管",
+      "nominal_inner_diameter": "200",
+      "wall_thickness": "14.0",
+      "scope_source": "current_tender_technical_spec_filename"
+    },
+    "response_rows": [
+      {
+        "requirement_id": "spec-34391edb1c57-1-2",
+        "sequence": "1.1",
+        "parameter_name": "密度",
+        "unit": "g/cm3",
+        "project_requirement": "0.89~0.93",
+        "bidder_guaranteed_value": "",
+        "remark": "",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 1,
+        "source_row_number": 2,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "partial_match",
+        "coverage_reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。",
+        "numeric_compliance": true,
+        "candidate_inspection_result": "0.903",
+        "candidate_report_no": "2024100312005501712",
+        "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+        "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+        "candidate_source_page": 3,
+        "candidate_scope": {
+          "product_family": "MPP电缆保护管",
+          "nominal_inner_diameter": "250",
+          "wall_thickness": "22"
+        },
+        "formal_value_allowed": false
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-3",
+        "sequence": "1.2",
+        "parameter_name": "环刚度",
+        "unit": "kN/m2",
+        "project_requirement": "大于等于24",
+        "bidder_guaranteed_value": "",
+        "remark": "",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 1,
+        "source_row_number": 3,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "partial_match",
+        "coverage_reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。",
+        "numeric_compliance": true,
+        "candidate_inspection_result": "66.40",
+        "candidate_report_no": "2024100312005501712",
+        "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+        "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+        "candidate_source_page": 3,
+        "candidate_scope": {
+          "product_family": "MPP电缆保护管",
+          "nominal_inner_diameter": "250",
+          "wall_thickness": "22"
+        },
+        "formal_value_allowed": false
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-4",
+        "sequence": "1.3",
+        "parameter_name": "压扁试验(公称内径不小于225 mm或公称壁厚不小于20 mm 的导管，加载负荷至试样垂直方向变形量为原内径的50%时；公称内径小于225mm 和公称壁厚小于20 mm 的导管，加载负荷至试样两内壁相接触时)",
+        "unit": "/",
+        "project_requirement": "试样无破裂",
+        "bidder_guaranteed_value": "",
+        "remark": "GB/T 9647 热塑性塑料管材 压扁试验",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 1,
+        "source_row_number": 4,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "partial_match",
+        "coverage_reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。",
+        "numeric_compliance": null,
+        "candidate_inspection_result": "符合要求",
+        "candidate_report_no": "2024100312005501712",
+        "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+        "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+        "candidate_source_page": 3,
+        "candidate_scope": {
+          "product_family": "MPP电缆保护管",
+          "nominal_inner_diameter": "250",
+          "wall_thickness": "22"
+        },
+        "formal_value_allowed": false
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-5",
+        "sequence": "1.4",
+        "parameter_name": "落锤冲击",
+        "unit": "/",
+        "project_requirement": "9/10个不破裂",
+        "bidder_guaranteed_value": "",
+        "remark": "GB/T 14152 热塑性塑料管材耐外冲击性能试验方法时针旋转法",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 1,
+        "source_row_number": 5,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "partial_match",
+        "coverage_reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。",
+        "numeric_compliance": true,
+        "candidate_inspection_result": "10个试样均未破裂",
+        "candidate_report_no": "2024100312005501712",
+        "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+        "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+        "candidate_source_page": 4,
+        "candidate_scope": {
+          "product_family": "MPP电缆保护管",
+          "nominal_inner_diameter": "250",
+          "wall_thickness": "22"
+        },
+        "formal_value_allowed": false
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-6",
+        "sequence": "1.5",
+        "parameter_name": "维卡软化温度",
+        "unit": "℃",
+        "project_requirement": "大于等于150",
+        "bidder_guaranteed_value": "",
+        "remark": "GB/T 1633 热塑性塑料维卡软化温度（VST）的测定（A50法）",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 1,
+        "source_row_number": 6,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "partial_match",
+        "coverage_reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。",
+        "numeric_compliance": true,
+        "candidate_inspection_result": "152",
+        "candidate_report_no": "2024100312005501712",
+        "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+        "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+        "candidate_source_page": 4,
+        "candidate_scope": {
+          "product_family": "MPP电缆保护管",
+          "nominal_inner_diameter": "250",
+          "wall_thickness": "22"
+        },
+        "formal_value_allowed": false
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-7",
+        "sequence": "1.6",
+        "parameter_name": "拉伸强度",
+        "unit": "MPa",
+        "project_requirement": "大于等于25",
+        "bidder_guaranteed_value": "",
+        "remark": "",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 1,
+        "source_row_number": 7,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "partial_match",
+        "coverage_reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。",
+        "numeric_compliance": true,
+        "candidate_inspection_result": "25.4",
+        "candidate_report_no": "2024100312005501712",
+        "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+        "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+        "candidate_source_page": 3,
+        "candidate_scope": {
+          "product_family": "MPP电缆保护管",
+          "nominal_inner_diameter": "250",
+          "wall_thickness": "22"
+        },
+        "formal_value_allowed": false
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-8",
+        "sequence": "1.7",
+        "parameter_name": "焊接强度",
+        "unit": "MPa",
+        "project_requirement": "大于等于22.5",
+        "bidder_guaranteed_value": "",
+        "remark": "",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 1,
+        "source_row_number": 8,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "partial_match",
+        "coverage_reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。",
+        "numeric_compliance": true,
+        "candidate_inspection_result": "22.9",
+        "candidate_report_no": "2024100312005501712",
+        "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+        "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+        "candidate_source_page": 4,
+        "candidate_scope": {
+          "product_family": "MPP电缆保护管",
+          "nominal_inner_diameter": "250",
+          "wall_thickness": "22"
+        },
+        "formal_value_allowed": false
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-9",
+        "sequence": "1.8",
+        "parameter_name": "断裂伸长率",
+        "unit": "/",
+        "project_requirement": "大于等于200",
+        "bidder_guaranteed_value": "",
+        "remark": "",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 1,
+        "source_row_number": 9,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "mismatch",
+        "coverage_reason": "现有报告规格与项目规格不一致，且实测值不满足项目需求值。",
+        "numeric_compliance": false,
+        "candidate_inspection_result": "176",
+        "candidate_report_no": "2024100312005501712",
+        "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+        "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+        "candidate_source_page": 4,
+        "candidate_scope": {
+          "product_family": "MPP电缆保护管",
+          "nominal_inner_diameter": "250",
+          "wall_thickness": "22"
+        },
+        "formal_value_allowed": false
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-10",
+        "sequence": "1.9",
+        "parameter_name": "静摩擦系数",
+        "unit": "/",
+        "project_requirement": "小于等于0.35",
+        "bidder_guaranteed_value": "",
+        "remark": "",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 1,
+        "source_row_number": 10,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "partial_match",
+        "coverage_reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。",
+        "numeric_compliance": true,
+        "candidate_inspection_result": "0.30",
+        "candidate_report_no": "2024100312005501712",
+        "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+        "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+        "candidate_source_page": 4,
+        "candidate_scope": {
+          "product_family": "MPP电缆保护管",
+          "nominal_inner_diameter": "250",
+          "wall_thickness": "22"
+        },
+        "formal_value_allowed": false
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-11",
+        "sequence": "1.10",
+        "parameter_name": "纵向回缩率",
+        "unit": "/",
+        "project_requirement": "小于等于3%",
+        "bidder_guaranteed_value": "",
+        "remark": "",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 1,
+        "source_row_number": 11,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "partial_match",
+        "coverage_reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。",
+        "numeric_compliance": true,
+        "candidate_inspection_result": "1.4",
+        "candidate_report_no": "2024100312005501712",
+        "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+        "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+        "candidate_source_page": 4,
+        "candidate_scope": {
+          "product_family": "MPP电缆保护管",
+          "nominal_inner_diameter": "250",
+          "wall_thickness": "22"
+        },
+        "formal_value_allowed": false
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-12",
+        "sequence": "1.11",
+        "parameter_name": "散热性能",
+        "unit": "/",
+        "project_requirement": "常温下放置规定的时间，导管内、外壁温度均不大于 30 ℃",
+        "bidder_guaranteed_value": "",
+        "remark": "",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 1,
+        "source_row_number": 12,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "partial_match",
+        "coverage_reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。",
+        "numeric_compliance": true,
+        "candidate_inspection_result": "内壁:26.2;26.2;25.9内壁平均:26.1外壁:25.3;25.5;25.3外壁平均:25.4",
+        "candidate_report_no": "2024100312005501712",
+        "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+        "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+        "candidate_source_page": 4,
+        "candidate_scope": {
+          "product_family": "MPP电缆保护管",
+          "nominal_inner_diameter": "250",
+          "wall_thickness": "22"
+        },
+        "formal_value_allowed": false
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-13",
+        "sequence": "1.12",
+        "parameter_name": "公称内径",
+        "unit": "mm",
+        "project_requirement": "200",
+        "bidder_guaranteed_value": "",
+        "remark": "",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 1,
+        "source_row_number": 13,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "mismatch",
+        "coverage_reason": "现有报告规格与项目规格不一致，且实测值不满足项目需求值。",
+        "numeric_compliance": false,
+        "candidate_inspection_result": "250.0~250.2",
+        "candidate_report_no": "2024100312005501712",
+        "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+        "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+        "candidate_source_page": 3,
+        "candidate_scope": {
+          "product_family": "MPP电缆保护管",
+          "nominal_inner_diameter": "250",
+          "wall_thickness": "22"
+        },
+        "formal_value_allowed": false
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-14",
+        "sequence": "1.12",
+        "parameter_name": "公称壁厚",
+        "unit": "mm",
+        "project_requirement": "14.0",
+        "bidder_guaranteed_value": "",
+        "remark": "",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 1,
+        "source_row_number": 14,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "mismatch",
+        "coverage_reason": "现有报告规格与项目规格不一致，且实测值不满足项目需求值。",
+        "numeric_compliance": false,
+        "candidate_inspection_result": "22.0~22.1",
+        "candidate_report_no": "2024100312005501712",
+        "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+        "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+        "candidate_source_page": 3,
+        "candidate_scope": {
+          "product_family": "MPP电缆保护管",
+          "nominal_inner_diameter": "250",
+          "wall_thickness": "22"
+        },
+        "formal_value_allowed": false
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-2-2",
+        "sequence": "2.1",
+        "parameter_name": "海拔高度",
+        "unit": "m",
+        "project_requirement": "小于等于4500",
+        "bidder_guaranteed_value": "",
+        "remark": "",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 2,
+        "source_row_number": 2,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "unknown",
+        "coverage_reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。",
+        "numeric_compliance": null,
+        "candidate_inspection_result": null,
+        "candidate_report_no": null,
+        "candidate_specification_model": null,
+        "candidate_source_file": null,
+        "candidate_source_page": null,
+        "candidate_scope": null,
+        "formal_value_allowed": false
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-2-3",
+        "sequence": "2.2",
+        "parameter_name": "最高气温",
+        "unit": "℃",
+        "project_requirement": "40",
+        "bidder_guaranteed_value": "",
+        "remark": "",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 2,
+        "source_row_number": 3,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "unknown",
+        "coverage_reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。",
+        "numeric_compliance": null,
+        "candidate_inspection_result": null,
+        "candidate_report_no": null,
+        "candidate_specification_model": null,
+        "candidate_source_file": null,
+        "candidate_source_page": null,
+        "candidate_scope": null,
+        "formal_value_allowed": false
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-2-4",
+        "sequence": "2.3",
+        "parameter_name": "户外最低低温",
+        "unit": "℃",
+        "project_requirement": "-40",
+        "bidder_guaranteed_value": "",
+        "remark": "",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 2,
+        "source_row_number": 4,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "unknown",
+        "coverage_reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。",
+        "numeric_compliance": null,
+        "candidate_inspection_result": null,
+        "candidate_report_no": null,
+        "candidate_specification_model": null,
+        "candidate_source_file": null,
+        "candidate_source_page": null,
+        "candidate_scope": null,
+        "formal_value_allowed": false
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-2-5",
+        "sequence": "2.4",
+        "parameter_name": "地面水平加速度",
+        "unit": "m/s2",
+        "project_requirement": "0.2g",
+        "bidder_guaranteed_value": "",
+        "remark": "",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 2,
+        "source_row_number": 5,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "unknown",
+        "coverage_reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。",
+        "numeric_compliance": null,
+        "candidate_inspection_result": null,
+        "candidate_report_no": null,
+        "candidate_specification_model": null,
+        "candidate_source_file": null,
+        "candidate_source_page": null,
+        "candidate_scope": null,
+        "formal_value_allowed": false
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-2-6",
+        "sequence": "2.5",
+        "parameter_name": "地面垂直加速度（同时作用持续三个正弦波，安全系数≥1.67，）",
+        "unit": "m/s2",
+        "project_requirement": "0.1g",
+        "bidder_guaranteed_value": "",
+        "remark": "",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 2,
+        "source_row_number": 6,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "unknown",
+        "coverage_reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。",
+        "numeric_compliance": null,
+        "candidate_inspection_result": null,
+        "candidate_report_no": null,
+        "candidate_specification_model": null,
+        "candidate_source_file": null,
+        "candidate_source_page": null,
+        "candidate_scope": null,
+        "formal_value_allowed": false
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-2-7",
+        "sequence": "2.6",
+        "parameter_name": "风速（离地面高10m处，维持10min的平均最大风速）",
+        "unit": "m/s",
+        "project_requirement": "35",
+        "bidder_guaranteed_value": "",
+        "remark": "",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 2,
+        "source_row_number": 7,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "unknown",
+        "coverage_reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。",
+        "numeric_compliance": null,
+        "candidate_inspection_result": null,
+        "candidate_report_no": null,
+        "candidate_specification_model": null,
+        "candidate_source_file": null,
+        "candidate_source_page": null,
+        "candidate_scope": null,
+        "formal_value_allowed": false
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-2-8",
+        "sequence": "2.7",
+        "parameter_name": "日照强度",
+        "unit": "W/cm2",
+        "project_requirement": "0.11",
+        "bidder_guaranteed_value": "",
+        "remark": "",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 2,
+        "source_row_number": 8,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "unknown",
+        "coverage_reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。",
+        "numeric_compliance": null,
+        "candidate_inspection_result": null,
+        "candidate_report_no": null,
+        "candidate_specification_model": null,
+        "candidate_source_file": null,
+        "candidate_source_page": null,
+        "candidate_scope": null,
+        "formal_value_allowed": false
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-2-9",
+        "sequence": "2.8",
+        "parameter_name": "覆冰厚度",
+        "unit": "mm",
+        "project_requirement": "10",
+        "bidder_guaranteed_value": "",
+        "remark": "",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 2,
+        "source_row_number": 9,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "unknown",
+        "coverage_reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。",
+        "numeric_compliance": null,
+        "candidate_inspection_result": null,
+        "candidate_report_no": null,
+        "candidate_specification_model": null,
+        "candidate_source_file": null,
+        "candidate_source_page": null,
+        "candidate_scope": null,
+        "formal_value_allowed": false
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-2-10",
+        "sequence": "2.9",
+        "parameter_name": "污秽等级",
+        "unit": "无",
+        "project_requirement": "d级",
+        "bidder_guaranteed_value": "",
+        "remark": "",
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+        "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+        "source_table_index": 2,
+        "source_row_number": 10,
+        "headers": [
+          "序号",
+          "参数名称",
+          "单位",
+          "项目需求值或表述",
+          "投标人保证值",
+          "备注"
+        ],
+        "coverage_status": "unknown",
+        "coverage_reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。",
+        "numeric_compliance": null,
+        "candidate_inspection_result": null,
+        "candidate_report_no": null,
+        "candidate_specification_model": null,
+        "candidate_source_file": null,
+        "candidate_source_page": null,
+        "candidate_scope": null,
+        "formal_value_allowed": false
+      }
+    ],
+    "row_count": 22,
+    "coverage_counts": {
+      "partial_match": 10,
+      "mismatch": 3,
+      "unknown": 9
+    },
+    "filled_guarantee_count": 0,
+    "blockers": [
+      {
+        "requirement_id": "spec-34391edb1c57-1-2",
+        "parameter_name": "密度",
+        "coverage_status": "partial_match",
+        "reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。"
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-3",
+        "parameter_name": "环刚度",
+        "coverage_status": "partial_match",
+        "reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。"
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-4",
+        "parameter_name": "压扁试验(公称内径不小于225 mm或公称壁厚不小于20 mm 的导管，加载负荷至试样垂直方向变形量为原内径的50%时；公称内径小于225mm 和公称壁厚小于20 mm 的导管，加载负荷至试样两内壁相接触时)",
+        "coverage_status": "partial_match",
+        "reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。"
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-5",
+        "parameter_name": "落锤冲击",
+        "coverage_status": "partial_match",
+        "reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。"
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-6",
+        "parameter_name": "维卡软化温度",
+        "coverage_status": "partial_match",
+        "reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。"
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-7",
+        "parameter_name": "拉伸强度",
+        "coverage_status": "partial_match",
+        "reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。"
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-8",
+        "parameter_name": "焊接强度",
+        "coverage_status": "partial_match",
+        "reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。"
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-9",
+        "parameter_name": "断裂伸长率",
+        "coverage_status": "mismatch",
+        "reason": "现有报告规格与项目规格不一致，且实测值不满足项目需求值。"
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-10",
+        "parameter_name": "静摩擦系数",
+        "coverage_status": "partial_match",
+        "reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。"
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-11",
+        "parameter_name": "纵向回缩率",
+        "coverage_status": "partial_match",
+        "reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。"
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-12",
+        "parameter_name": "散热性能",
+        "coverage_status": "partial_match",
+        "reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。"
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-13",
+        "parameter_name": "公称内径",
+        "coverage_status": "mismatch",
+        "reason": "现有报告规格与项目规格不一致，且实测值不满足项目需求值。"
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-1-14",
+        "parameter_name": "公称壁厚",
+        "coverage_status": "mismatch",
+        "reason": "现有报告规格与项目规格不一致，且实测值不满足项目需求值。"
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-2-2",
+        "parameter_name": "海拔高度",
+        "coverage_status": "unknown",
+        "reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。"
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-2-3",
+        "parameter_name": "最高气温",
+        "coverage_status": "unknown",
+        "reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。"
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-2-4",
+        "parameter_name": "户外最低低温",
+        "coverage_status": "unknown",
+        "reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。"
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-2-5",
+        "parameter_name": "地面水平加速度",
+        "coverage_status": "unknown",
+        "reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。"
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-2-6",
+        "parameter_name": "地面垂直加速度（同时作用持续三个正弦波，安全系数≥1.67，）",
+        "coverage_status": "unknown",
+        "reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。"
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-2-7",
+        "parameter_name": "风速（离地面高10m处，维持10min的平均最大风速）",
+        "coverage_status": "unknown",
+        "reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。"
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-2-8",
+        "parameter_name": "日照强度",
+        "coverage_status": "unknown",
+        "reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。"
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-2-9",
+        "parameter_name": "覆冰厚度",
+        "coverage_status": "unknown",
+        "reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。"
+      },
+      {
+        "requirement_id": "spec-34391edb1c57-2-10",
+        "parameter_name": "污秽等级",
+        "coverage_status": "unknown",
+        "reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。"
+      }
+    ],
+    "formal_ready": false,
+    "generation_policy": "original_tender_rows_only_no_llm_rewrite"
+  },
+  "section_manifests": {
+    "商务偏差表": {
+      "schema_version": "taichang_fixed_form_section.v1",
+      "form_key": "business_deviation",
+      "title": "商务偏差表",
+      "source_form": {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_file_sha256": "94ca5c08984ce386d5e0b226445780b303195e83a0af0e2cbb88165e319f9831",
+        "table_index": 18,
+        "row_count": 10,
+        "column_count": 5,
+        "grid_widths": [
+          454025,
+          1144905,
+          1350010,
+          1380490,
+          1082040
+        ],
+        "table_xml_sha256": "47e850d01b44707b0fe69d18656f5f24397d7be827780665ac97e45df36cc112",
+        "rows": [
+          [
+            {
+              "row": 1,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "序号",
+              "xml_sha256": "98f28f5ed1c6eb00be3163c57ef1037caf2ce3814997ae5fd2240a209c6b5a2d"
+            },
+            {
+              "row": 1,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "招标文件条目号",
+              "xml_sha256": "c557c0d54268f0f02412d7c0783ff255e4db386f896cede4e22a1cdabdd3bba6"
+            },
+            {
+              "row": 1,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "招标文件条款",
+              "xml_sha256": "0109f2563de95c8f3b3ea0ccf98f4f8a9559199e4f23550c1888e28d489ae3b5"
+            },
+            {
+              "row": 1,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "投标文件条款",
+              "xml_sha256": "29be8268fd949c9d1932c9c9f82a7f5dfb16b70b7b91007d9ad6c94232b202c9"
+            },
+            {
+              "row": 1,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "偏差说明",
+              "xml_sha256": "009cd14ed3d616977ad00469d88b49268bce6a9f755232d07b8bbddf33f7d4ce"
+            }
+          ],
+          [
+            {
+              "row": 2,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "fac595698ded6bfde613f8d7150216ccca28af8ebdd4ef43a5a5b32b3ff6ee9a"
+            },
+            {
+              "row": 2,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "bdc834285f8355a699433bf871d0d324fbb2c21610728203d2d1fe301429a0f0"
+            },
+            {
+              "row": 2,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "66cfad903bee082413db6a778cc361f93995091d509ed362d57b819525c86ee9"
+            },
+            {
+              "row": 2,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "cc264b78b8821bc5cae1089436490160fec820148830635d21bb7c6e432558db"
+            },
+            {
+              "row": 2,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "db5a13ea460ed7dbbe51363a69c9a1a97f93ea0d5f4874cf4c712ed46af1f493"
+            }
+          ],
+          [
+            {
+              "row": 3,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "fac595698ded6bfde613f8d7150216ccca28af8ebdd4ef43a5a5b32b3ff6ee9a"
+            },
+            {
+              "row": 3,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "bdc834285f8355a699433bf871d0d324fbb2c21610728203d2d1fe301429a0f0"
+            },
+            {
+              "row": 3,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "66cfad903bee082413db6a778cc361f93995091d509ed362d57b819525c86ee9"
+            },
+            {
+              "row": 3,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "cc264b78b8821bc5cae1089436490160fec820148830635d21bb7c6e432558db"
+            },
+            {
+              "row": 3,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "db5a13ea460ed7dbbe51363a69c9a1a97f93ea0d5f4874cf4c712ed46af1f493"
+            }
+          ],
+          [
+            {
+              "row": 4,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "fac595698ded6bfde613f8d7150216ccca28af8ebdd4ef43a5a5b32b3ff6ee9a"
+            },
+            {
+              "row": 4,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "bdc834285f8355a699433bf871d0d324fbb2c21610728203d2d1fe301429a0f0"
+            },
+            {
+              "row": 4,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "66cfad903bee082413db6a778cc361f93995091d509ed362d57b819525c86ee9"
+            },
+            {
+              "row": 4,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "cc264b78b8821bc5cae1089436490160fec820148830635d21bb7c6e432558db"
+            },
+            {
+              "row": 4,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "db5a13ea460ed7dbbe51363a69c9a1a97f93ea0d5f4874cf4c712ed46af1f493"
+            }
+          ],
+          [
+            {
+              "row": 5,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "fac595698ded6bfde613f8d7150216ccca28af8ebdd4ef43a5a5b32b3ff6ee9a"
+            },
+            {
+              "row": 5,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "bdc834285f8355a699433bf871d0d324fbb2c21610728203d2d1fe301429a0f0"
+            },
+            {
+              "row": 5,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "66cfad903bee082413db6a778cc361f93995091d509ed362d57b819525c86ee9"
+            },
+            {
+              "row": 5,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "cc264b78b8821bc5cae1089436490160fec820148830635d21bb7c6e432558db"
+            },
+            {
+              "row": 5,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "db5a13ea460ed7dbbe51363a69c9a1a97f93ea0d5f4874cf4c712ed46af1f493"
+            }
+          ],
+          [
+            {
+              "row": 6,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "fac595698ded6bfde613f8d7150216ccca28af8ebdd4ef43a5a5b32b3ff6ee9a"
+            },
+            {
+              "row": 6,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "bdc834285f8355a699433bf871d0d324fbb2c21610728203d2d1fe301429a0f0"
+            },
+            {
+              "row": 6,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "66cfad903bee082413db6a778cc361f93995091d509ed362d57b819525c86ee9"
+            },
+            {
+              "row": 6,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "cc264b78b8821bc5cae1089436490160fec820148830635d21bb7c6e432558db"
+            },
+            {
+              "row": 6,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "db5a13ea460ed7dbbe51363a69c9a1a97f93ea0d5f4874cf4c712ed46af1f493"
+            }
+          ],
+          [
+            {
+              "row": 7,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "fac595698ded6bfde613f8d7150216ccca28af8ebdd4ef43a5a5b32b3ff6ee9a"
+            },
+            {
+              "row": 7,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "bdc834285f8355a699433bf871d0d324fbb2c21610728203d2d1fe301429a0f0"
+            },
+            {
+              "row": 7,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "66cfad903bee082413db6a778cc361f93995091d509ed362d57b819525c86ee9"
+            },
+            {
+              "row": 7,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "cc264b78b8821bc5cae1089436490160fec820148830635d21bb7c6e432558db"
+            },
+            {
+              "row": 7,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "db5a13ea460ed7dbbe51363a69c9a1a97f93ea0d5f4874cf4c712ed46af1f493"
+            }
+          ],
+          [
+            {
+              "row": 8,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "fac595698ded6bfde613f8d7150216ccca28af8ebdd4ef43a5a5b32b3ff6ee9a"
+            },
+            {
+              "row": 8,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "bdc834285f8355a699433bf871d0d324fbb2c21610728203d2d1fe301429a0f0"
+            },
+            {
+              "row": 8,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "66cfad903bee082413db6a778cc361f93995091d509ed362d57b819525c86ee9"
+            },
+            {
+              "row": 8,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "cc264b78b8821bc5cae1089436490160fec820148830635d21bb7c6e432558db"
+            },
+            {
+              "row": 8,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "db5a13ea460ed7dbbe51363a69c9a1a97f93ea0d5f4874cf4c712ed46af1f493"
+            }
+          ],
+          [
+            {
+              "row": 9,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "fac595698ded6bfde613f8d7150216ccca28af8ebdd4ef43a5a5b32b3ff6ee9a"
+            },
+            {
+              "row": 9,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "bdc834285f8355a699433bf871d0d324fbb2c21610728203d2d1fe301429a0f0"
+            },
+            {
+              "row": 9,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "66cfad903bee082413db6a778cc361f93995091d509ed362d57b819525c86ee9"
+            },
+            {
+              "row": 9,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "cc264b78b8821bc5cae1089436490160fec820148830635d21bb7c6e432558db"
+            },
+            {
+              "row": 9,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "db5a13ea460ed7dbbe51363a69c9a1a97f93ea0d5f4874cf4c712ed46af1f493"
+            }
+          ],
+          [
+            {
+              "row": 10,
+              "column": 1,
+              "grid_span": 5,
+              "vertical_merge": null,
+              "text": "投标人声明：针对本招标标的，除本表已列明偏差外，我们接受招标文件规定的其余全部商务条件，并承诺按照招标文件规定的商务条件提供对应服务。",
+              "xml_sha256": "8f59c6cae23cdf305773c63c985b84d302d8af029485cbfebb49858c3f255788"
+            }
+          ]
+        ],
+        "parser": "native_docx_ooxml",
+        "mineru_invoked": false,
+        "form_key": "business_deviation",
+        "title": "商务偏差表"
+      },
+      "model_bypassed": true,
+      "render_policy": "preserve_original_headers_and_decisions",
+      "formal_ready": false,
+      "blockers": [
+        "偏差表有/无偏差结论必须由客户确认，系统不得自动代选。"
+      ]
+    },
+    "投标人与国家电网公司系统人员关系说明": {
+      "schema_version": "taichang_fixed_form_section.v1",
+      "form_key": "personnel_relationship",
+      "title": "投标人与国家电网公司系统人员关系说明",
+      "source_form": {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_file_sha256": "94ca5c08984ce386d5e0b226445780b303195e83a0af0e2cbb88165e319f9831",
+        "table_index": 19,
+        "row_count": 3,
+        "column_count": 13,
+        "grid_widths": [
+          380365,
+          306705,
+          380365,
+          307340,
+          381000,
+          638175,
+          381000,
+          307340,
+          381000,
+          757555,
+          307340,
+          753110,
+          472440
+        ],
+        "table_xml_sha256": "60e2eb2f179d106e2676e6adb7e23d7466f89209108c91330569f72d9e9ed210",
+        "rows": [
+          [
+            {
+              "row": 1,
+              "column": 1,
+              "grid_span": 6,
+              "vertical_merge": null,
+              "text": "本企业人员基本信息",
+              "xml_sha256": "8659bea9adcf0d948c592825a93d9299572a2363a8060a9575e89cbf31d24945"
+            },
+            {
+              "row": 1,
+              "column": 7,
+              "grid_span": 7,
+              "vertical_merge": null,
+              "text": "国家电网公司系统人员基本信息",
+              "xml_sha256": "c3eab07fd50da5edcfbdf14469d1238fc5727e387e1c93d3236c8da608215ff3"
+            }
+          ],
+          [
+            {
+              "row": 2,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "人员姓名",
+              "xml_sha256": "3b26012ea6586ce2a6e00a8148a72d0c9b20ac35d2a621f027fa1435aeed1cdb"
+            },
+            {
+              "row": 2,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "性别",
+              "xml_sha256": "9bef7d02bac93315454d493ef5abd90fc1cfb00db4126ebef6c0d9da07190c4f"
+            },
+            {
+              "row": 2,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "身份证号",
+              "xml_sha256": "6428a90acb243ee8c92ea40f66af9f504d97e7bd20eee57d39052c0690b2aa60"
+            },
+            {
+              "row": 2,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "职务",
+              "xml_sha256": "f6d2576ca561fd62d5d8fabb6a0037ad23d945eb68bb08ad6f0ae67e6bd0204c"
+            },
+            {
+              "row": 2,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "任职时间",
+              "xml_sha256": "befa30eed926ae6a8306cf82e5ee1d17209d2d925b89cc28e36df83f24c24056"
+            },
+            {
+              "row": 2,
+              "column": 6,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "与国网公司系统人员关系",
+              "xml_sha256": "aa037d43d2729099a8e6c5a52183fd1a1905a434f4da68d23fa5ebefc1fd4f30"
+            },
+            {
+              "row": 2,
+              "column": 7,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "人员姓名",
+              "xml_sha256": "20b3432d6a3b44935c4f6e0a363e6326c15a9bb1be0c82b6114ab375d514f6c9"
+            },
+            {
+              "row": 2,
+              "column": 8,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "性别",
+              "xml_sha256": "e4c1f29c19435b7f8b8689ae358af8e14d42f3c54dcf932b3db27309d6123291"
+            },
+            {
+              "row": 2,
+              "column": 9,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "身份证号",
+              "xml_sha256": "d8fd72ff8d7c202841a8b2d2315cf4eabc04cda7b04a67fd798339a5b09044e0"
+            },
+            {
+              "row": 2,
+              "column": 10,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "（曾）任职单位名称",
+              "xml_sha256": "4361db74436de81e8e0003cbd8130b59d3fea8c92b0a55d7cd8edd8f2c40e4ea"
+            },
+            {
+              "row": 2,
+              "column": 11,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "职务",
+              "xml_sha256": "ac86d50af62b19fcfb1eb0b94e930110b60a5bb282f0844626670decc35fcaa6"
+            },
+            {
+              "row": 2,
+              "column": 12,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "任职状态（在职/非在职）",
+              "xml_sha256": "2f6dd16cebd5d4bc6c145cc696381bef33fab7b12cc4af4a85742639912a3b75"
+            },
+            {
+              "row": 2,
+              "column": 13,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "离职/退休时间",
+              "xml_sha256": "defb429a890ef72c973d294121e8ff8fb0a8c790b64ba6e85c404d083f80dfa3"
+            }
+          ],
+          [
+            {
+              "row": 3,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f94ff76e916e018c581b1b1f3e5b35334e4ec0ae3c11cf259e104a36019d801"
+            },
+            {
+              "row": 3,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "1d10d6816753062cff4509a14170c5c9889d0a331be028cb40779d96a30d985f"
+            },
+            {
+              "row": 3,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f94ff76e916e018c581b1b1f3e5b35334e4ec0ae3c11cf259e104a36019d801"
+            },
+            {
+              "row": 3,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "43a2b291ada8b4655e8816e320ad963c7085c9a2f954361850c461d72df2f70c"
+            },
+            {
+              "row": 3,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "45e9aa77b5d770ddac36699e72de9562d05ff0e726b08847cb1b94d191f74911"
+            },
+            {
+              "row": 3,
+              "column": 6,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "c7dc88e59fdb4f0aa54cd39044e0227ee737e4d661fda8a4b602287381f94932"
+            },
+            {
+              "row": 3,
+              "column": 7,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "45e9aa77b5d770ddac36699e72de9562d05ff0e726b08847cb1b94d191f74911"
+            },
+            {
+              "row": 3,
+              "column": 8,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "e3fafffaf6f6bdca8da2eea587d0e7db40d9b1869c10c74043e7c513f85b3025"
+            },
+            {
+              "row": 3,
+              "column": 9,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "78ce65dbb116486be92fcfe0d06c0aa0b14488b260dcb1f0c43bf6c1d39dbc23"
+            },
+            {
+              "row": 3,
+              "column": 10,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "ef80ec38d72b1f16cba98b60b2957bf974709bfb419533cd013313958d8ff8d2"
+            },
+            {
+              "row": 3,
+              "column": 11,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "43a2b291ada8b4655e8816e320ad963c7085c9a2f954361850c461d72df2f70c"
+            },
+            {
+              "row": 3,
+              "column": 12,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "707fdbc0be67d9d49d7fca3460cba6ffe06cf997cc71313b0f6b19154f415347"
+            },
+            {
+              "row": 3,
+              "column": 13,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "84a5ed179c36df73aff30e961f31afb5118e9b62d27d8317cc930f66f8a0e2d1"
+            }
+          ]
+        ],
+        "parser": "native_docx_ooxml",
+        "mineru_invoked": false,
+        "form_key": "personnel_relationship",
+        "title": "投标人与国家电网公司系统人员关系说明"
+      },
+      "model_bypassed": true,
+      "render_policy": "preserve_original_headers_and_decisions",
+      "formal_ready": false,
+      "blockers": [
+        "人员关系存在/不存在情形必须由客户确认，系统不得自动代选。"
+      ]
+    },
+    "技术偏差表": {
+      "schema_version": "taichang_fixed_form_section.v1",
+      "form_key": "technical_deviation",
+      "title": "技术偏差表",
+      "source_form": {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_file_sha256": "94ca5c08984ce386d5e0b226445780b303195e83a0af0e2cbb88165e319f9831",
+        "table_index": 23,
+        "row_count": 9,
+        "column_count": 5,
+        "grid_widths": [
+          452755,
+          943610,
+          1436370,
+          1619885,
+          958850
+        ],
+        "table_xml_sha256": "4ed3975354015ef2130462373bc5a6b1865c943e9894b06a6895ab73cbccec6a",
+        "rows": [
+          [
+            {
+              "row": 1,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "序号",
+              "xml_sha256": "4ec7180b620c23e469ae95d708fe3ff632324a43f8044ad7236ad64ba35268b9"
+            },
+            {
+              "row": 1,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "偏差事项",
+              "xml_sha256": "38199babf2a23ee5fd398aacfd9cec295ca1d93561c346a54b10e765f2d1edeb"
+            },
+            {
+              "row": 1,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "招标文件要求",
+              "xml_sha256": "75b988046ef1adc03a5a8397ccc1f593703da53ca7d42edc62d14bde24aef3db"
+            },
+            {
+              "row": 1,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "投标文件响应",
+              "xml_sha256": "a6dc014e5b833443bd7ad5c1bbd558df4f91b8b3da8651e8d4103b91bcedb678"
+            },
+            {
+              "row": 1,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "偏差说明",
+              "xml_sha256": "528358028e972b12057a7baa03b0fec7e5bb204ae437a3803b8570febcba3031"
+            }
+          ],
+          [
+            {
+              "row": 2,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "5a509babca53a94e7f487edf67e5a98cf19a3bb3cd05f48a92d268e901be4644"
+            },
+            {
+              "row": 2,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "0183866612c70733f9959738bb4972ad45523a6d0cb7d43608ca95d54339de2c"
+            },
+            {
+              "row": 2,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "3d4ca5c403944ca77eeb24e4120a3b085188e7e38fad8d2656c92b3cbafa7f86"
+            },
+            {
+              "row": 2,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "61f70ec51f807492e5a68cb7891ef5febae915898af028ed856554156d684e2b"
+            },
+            {
+              "row": 2,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "84fb5f5d48ced710c6cf9f8eee9e1c2e7db4e1418c20592e078e3db4d8f785d3"
+            }
+          ],
+          [
+            {
+              "row": 3,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "5a509babca53a94e7f487edf67e5a98cf19a3bb3cd05f48a92d268e901be4644"
+            },
+            {
+              "row": 3,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "0183866612c70733f9959738bb4972ad45523a6d0cb7d43608ca95d54339de2c"
+            },
+            {
+              "row": 3,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "3d4ca5c403944ca77eeb24e4120a3b085188e7e38fad8d2656c92b3cbafa7f86"
+            },
+            {
+              "row": 3,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "61f70ec51f807492e5a68cb7891ef5febae915898af028ed856554156d684e2b"
+            },
+            {
+              "row": 3,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "84fb5f5d48ced710c6cf9f8eee9e1c2e7db4e1418c20592e078e3db4d8f785d3"
+            }
+          ],
+          [
+            {
+              "row": 4,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "5a509babca53a94e7f487edf67e5a98cf19a3bb3cd05f48a92d268e901be4644"
+            },
+            {
+              "row": 4,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "0183866612c70733f9959738bb4972ad45523a6d0cb7d43608ca95d54339de2c"
+            },
+            {
+              "row": 4,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "3d4ca5c403944ca77eeb24e4120a3b085188e7e38fad8d2656c92b3cbafa7f86"
+            },
+            {
+              "row": 4,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "61f70ec51f807492e5a68cb7891ef5febae915898af028ed856554156d684e2b"
+            },
+            {
+              "row": 4,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "84fb5f5d48ced710c6cf9f8eee9e1c2e7db4e1418c20592e078e3db4d8f785d3"
+            }
+          ],
+          [
+            {
+              "row": 5,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "5a509babca53a94e7f487edf67e5a98cf19a3bb3cd05f48a92d268e901be4644"
+            },
+            {
+              "row": 5,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "0183866612c70733f9959738bb4972ad45523a6d0cb7d43608ca95d54339de2c"
+            },
+            {
+              "row": 5,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "3d4ca5c403944ca77eeb24e4120a3b085188e7e38fad8d2656c92b3cbafa7f86"
+            },
+            {
+              "row": 5,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "61f70ec51f807492e5a68cb7891ef5febae915898af028ed856554156d684e2b"
+            },
+            {
+              "row": 5,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "84fb5f5d48ced710c6cf9f8eee9e1c2e7db4e1418c20592e078e3db4d8f785d3"
+            }
+          ],
+          [
+            {
+              "row": 6,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "5a509babca53a94e7f487edf67e5a98cf19a3bb3cd05f48a92d268e901be4644"
+            },
+            {
+              "row": 6,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "0183866612c70733f9959738bb4972ad45523a6d0cb7d43608ca95d54339de2c"
+            },
+            {
+              "row": 6,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "3d4ca5c403944ca77eeb24e4120a3b085188e7e38fad8d2656c92b3cbafa7f86"
+            },
+            {
+              "row": 6,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "61f70ec51f807492e5a68cb7891ef5febae915898af028ed856554156d684e2b"
+            },
+            {
+              "row": 6,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "84fb5f5d48ced710c6cf9f8eee9e1c2e7db4e1418c20592e078e3db4d8f785d3"
+            }
+          ],
+          [
+            {
+              "row": 7,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "5a509babca53a94e7f487edf67e5a98cf19a3bb3cd05f48a92d268e901be4644"
+            },
+            {
+              "row": 7,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "0183866612c70733f9959738bb4972ad45523a6d0cb7d43608ca95d54339de2c"
+            },
+            {
+              "row": 7,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "3d4ca5c403944ca77eeb24e4120a3b085188e7e38fad8d2656c92b3cbafa7f86"
+            },
+            {
+              "row": 7,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "61f70ec51f807492e5a68cb7891ef5febae915898af028ed856554156d684e2b"
+            },
+            {
+              "row": 7,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "84fb5f5d48ced710c6cf9f8eee9e1c2e7db4e1418c20592e078e3db4d8f785d3"
+            }
+          ],
+          [
+            {
+              "row": 8,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "5a509babca53a94e7f487edf67e5a98cf19a3bb3cd05f48a92d268e901be4644"
+            },
+            {
+              "row": 8,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "其他",
+              "xml_sha256": "313ead3e23debe81b41a70f0204b174de261925427d7df8711dd35fcb2fc1be9"
+            },
+            {
+              "row": 8,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "3d4ca5c403944ca77eeb24e4120a3b085188e7e38fad8d2656c92b3cbafa7f86"
+            },
+            {
+              "row": 8,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "61f70ec51f807492e5a68cb7891ef5febae915898af028ed856554156d684e2b"
+            },
+            {
+              "row": 8,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "84fb5f5d48ced710c6cf9f8eee9e1c2e7db4e1418c20592e078e3db4d8f785d3"
+            }
+          ],
+          [
+            {
+              "row": 9,
+              "column": 1,
+              "grid_span": 5,
+              "vertical_merge": null,
+              "text": "投标人声明：针对本招标标的，除本表已列明偏差外，我们接受招标文件规定的其余全部技术条件，并承诺按照招标文件规定的技术条件提供对应服务。",
+              "xml_sha256": "9fe9febfa760579badfd1b0833088f10f113f0b230741265b9fec112dd9996fb"
+            }
+          ]
+        ],
+        "parser": "native_docx_ooxml",
+        "mineru_invoked": false,
+        "form_key": "technical_deviation",
+        "title": "技术偏差表"
+      },
+      "model_bypassed": true,
+      "render_policy": "preserve_original_headers_and_decisions",
+      "formal_ready": false,
+      "blockers": [
+        "偏差表有/无偏差结论必须由客户确认，系统不得自动代选。"
+      ]
+    },
+    "技术特性参数表": {
+      "schema_version": "taichang_technical_parameter_response.v1",
+      "form_key": "technical_characteristics",
+      "title": "技术特性参数表",
+      "source_form": {
+        "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/SL2655招标文件-预审.docx",
+        "source_file_sha256": "94ca5c08984ce386d5e0b226445780b303195e83a0af0e2cbb88165e319f9831",
+        "table_index": 25,
+        "row_count": 18,
+        "column_count": 5,
+        "grid_widths": [
+          428625,
+          1573530,
+          424180,
+          1758315,
+          1758950
+        ],
+        "table_xml_sha256": "24905052e1aa950e8a970633e73a93cd71f2b80416cfa1d2408bf42f3542010a",
+        "rows": [
+          [
+            {
+              "row": 1,
+              "column": 1,
+              "grid_span": 5,
+              "vertical_merge": null,
+              "text": "技术特性参数表（格式）项目名称： 项目编号： 分标名称： 分标编号：",
+              "xml_sha256": "bdc7c8f02320692051d8ce459e3e03a7e6550b091242cb55c8e9e676fd406276"
+            }
+          ],
+          [
+            {
+              "row": 2,
+              "column": 1,
+              "grid_span": 3,
+              "vertical_merge": null,
+              "text": "项目单位：",
+              "xml_sha256": "e1fbed6f87393737579f03ededaeeb0c2028cee89b0302c08565da0113b67e6b"
+            },
+            {
+              "row": 2,
+              "column": 4,
+              "grid_span": 2,
+              "vertical_merge": null,
+              "text": "项目名称：",
+              "xml_sha256": "07a914072961561670bae79feaa0bc1774fca1082528bece15202c1f7b48a9d6"
+            }
+          ],
+          [
+            {
+              "row": 3,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "序号",
+              "xml_sha256": "d4b6cbdccab2712eee73d13b1faed86d07ea0fa06f1e28a064f00ed9beabc857"
+            },
+            {
+              "row": 3,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "名称",
+              "xml_sha256": "4f6fef3f9e0f7ff8bf847f60b18fd7a7f8e9fc489288b748aa9bb172236758da"
+            },
+            {
+              "row": 3,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "单位",
+              "xml_sha256": "b8c311a67726bf85adad03d3a1dd5b14e01e024a25fbf46d048090fa90a9853b"
+            },
+            {
+              "row": 3,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "招标人要求值",
+              "xml_sha256": "38e22d95d3be136dfb55671898ae5ed9090a0c0de6c8a4887f1720bbbd3679a7"
+            },
+            {
+              "row": 3,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "投标人保证值",
+              "xml_sha256": "1d94175a2785bd1e7d091290ba9bb8d34e9a87526ca331f745978898320f9bc1"
+            }
+          ],
+          [
+            {
+              "row": 4,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "1",
+              "xml_sha256": "5ec48c10b6d720501b94febfc0730c4fd3dad48194d10e03101769b53fa2ec89"
+            },
+            {
+              "row": 4,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 4,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 4,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 4,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 5,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "2",
+              "xml_sha256": "eef80a99f591bdf1cac545b0cd651245ddbd000fc3ff5c9d1fa928fd645e318b"
+            },
+            {
+              "row": 5,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 5,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 5,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 5,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 6,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "…",
+              "xml_sha256": "59a9072b0d7bd43ed4b2f0cc3257af1d6c2f3c5539e34ebd9cb3954cb1b51ec0"
+            },
+            {
+              "row": 6,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 6,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 6,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 6,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 7,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f58425a4dc85ddba971ae7c26ba28aa0f59dfb8e493224bf8f3a308ee2ce5fa"
+            },
+            {
+              "row": 7,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 7,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 7,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 7,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 8,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f58425a4dc85ddba971ae7c26ba28aa0f59dfb8e493224bf8f3a308ee2ce5fa"
+            },
+            {
+              "row": 8,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 8,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 8,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 8,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 9,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f58425a4dc85ddba971ae7c26ba28aa0f59dfb8e493224bf8f3a308ee2ce5fa"
+            },
+            {
+              "row": 9,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 9,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 9,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 9,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 10,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f58425a4dc85ddba971ae7c26ba28aa0f59dfb8e493224bf8f3a308ee2ce5fa"
+            },
+            {
+              "row": 10,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 10,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 10,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 10,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 11,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f58425a4dc85ddba971ae7c26ba28aa0f59dfb8e493224bf8f3a308ee2ce5fa"
+            },
+            {
+              "row": 11,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 11,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 11,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 11,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 12,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f58425a4dc85ddba971ae7c26ba28aa0f59dfb8e493224bf8f3a308ee2ce5fa"
+            },
+            {
+              "row": 12,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 12,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 12,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 12,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 13,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "…",
+              "xml_sha256": "59a9072b0d7bd43ed4b2f0cc3257af1d6c2f3c5539e34ebd9cb3954cb1b51ec0"
+            },
+            {
+              "row": 13,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 13,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 13,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 13,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 14,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f58425a4dc85ddba971ae7c26ba28aa0f59dfb8e493224bf8f3a308ee2ce5fa"
+            },
+            {
+              "row": 14,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 14,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 14,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 14,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 15,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f58425a4dc85ddba971ae7c26ba28aa0f59dfb8e493224bf8f3a308ee2ce5fa"
+            },
+            {
+              "row": 15,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 15,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 15,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 15,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 16,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "2f58425a4dc85ddba971ae7c26ba28aa0f59dfb8e493224bf8f3a308ee2ce5fa"
+            },
+            {
+              "row": 16,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b17a614ce27c3a15300cae5a127760fd8099dad38c5e4f77b974eeba4640ed26"
+            },
+            {
+              "row": 16,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "342d838ae37c11491113e8982e0153b33316b08866004f1b7a46dfd1ae4719c7"
+            },
+            {
+              "row": 16,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "8ec5965ff0dfec0a2ebb514b44ffe9e6333eb994f488fc74fddbfb3f439836ce"
+            },
+            {
+              "row": 16,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "105f2804004ff383a352fbdb5da4bf6f07ec6d88643455b8e81a68403ac1c350"
+            }
+          ],
+          [
+            {
+              "row": 17,
+              "column": 1,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "dc038e6ebf3e011ff1298c34905154d07fb33addddb83dc25ab69c02be2d31ca"
+            },
+            {
+              "row": 17,
+              "column": 2,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "f1ffb61b439314ae3e8a917a6b5a6232fd055969ddf8c11281cc6a44c827f21f"
+            },
+            {
+              "row": 17,
+              "column": 3,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "b7d6f2309b84fa6bd313666f6f935f2e89116811f6ee0280d042f8eaf3622a25"
+            },
+            {
+              "row": 17,
+              "column": 4,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "cb9598067268db65041bc2de40d0e46321377d78c3009cd8d0ad1cf1ef8e05eb"
+            },
+            {
+              "row": 17,
+              "column": 5,
+              "grid_span": 1,
+              "vertical_merge": null,
+              "text": "",
+              "xml_sha256": "cd6e2c435c90856091a88561566327d70bad921281c82e9ed8a59ac879413ef0"
+            }
+          ],
+          [
+            {
+              "row": 18,
+              "column": 1,
+              "grid_span": 5,
+              "vertical_merge": null,
+              "text": "编制说明：1、请抄录已获取招标文件技术规范书《技术特性参数表》的数据、信息或表述，填写本表对应条目“项目需求值或表述“栏，并在规定位置逐条逐项对应作出投标。",
+              "xml_sha256": "72343b0832193cb97fb387adb5cf778be64388c797937e732c363e7244fd7f7c"
+            }
+          ]
+        ],
+        "parser": "native_docx_ooxml",
+        "mineru_invoked": false,
+        "form_key": "technical_characteristics",
+        "title": "技术特性参数表"
+      },
+      "model_bypassed": true,
+      "render_policy": "preserve_original_headers_and_decisions",
+      "formal_ready": false,
+      "blockers": [
+        {
+          "requirement_id": "spec-34391edb1c57-1-2",
+          "parameter_name": "密度",
+          "coverage_status": "partial_match",
+          "reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。"
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-3",
+          "parameter_name": "环刚度",
+          "coverage_status": "partial_match",
+          "reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。"
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-4",
+          "parameter_name": "压扁试验(公称内径不小于225 mm或公称壁厚不小于20 mm 的导管，加载负荷至试样垂直方向变形量为原内径的50%时；公称内径小于225mm 和公称壁厚小于20 mm 的导管，加载负荷至试样两内壁相接触时)",
+          "coverage_status": "partial_match",
+          "reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。"
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-5",
+          "parameter_name": "落锤冲击",
+          "coverage_status": "partial_match",
+          "reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。"
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-6",
+          "parameter_name": "维卡软化温度",
+          "coverage_status": "partial_match",
+          "reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。"
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-7",
+          "parameter_name": "拉伸强度",
+          "coverage_status": "partial_match",
+          "reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。"
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-8",
+          "parameter_name": "焊接强度",
+          "coverage_status": "partial_match",
+          "reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。"
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-9",
+          "parameter_name": "断裂伸长率",
+          "coverage_status": "mismatch",
+          "reason": "现有报告规格与项目规格不一致，且实测值不满足项目需求值。"
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-10",
+          "parameter_name": "静摩擦系数",
+          "coverage_status": "partial_match",
+          "reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。"
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-11",
+          "parameter_name": "纵向回缩率",
+          "coverage_status": "partial_match",
+          "reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。"
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-12",
+          "parameter_name": "散热性能",
+          "coverage_status": "partial_match",
+          "reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。"
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-13",
+          "parameter_name": "公称内径",
+          "coverage_status": "mismatch",
+          "reason": "现有报告规格与项目规格不一致，且实测值不满足项目需求值。"
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-14",
+          "parameter_name": "公称壁厚",
+          "coverage_status": "mismatch",
+          "reason": "现有报告规格与项目规格不一致，且实测值不满足项目需求值。"
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-2-2",
+          "parameter_name": "海拔高度",
+          "coverage_status": "unknown",
+          "reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。"
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-2-3",
+          "parameter_name": "最高气温",
+          "coverage_status": "unknown",
+          "reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。"
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-2-4",
+          "parameter_name": "户外最低低温",
+          "coverage_status": "unknown",
+          "reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。"
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-2-5",
+          "parameter_name": "地面水平加速度",
+          "coverage_status": "unknown",
+          "reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。"
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-2-6",
+          "parameter_name": "地面垂直加速度（同时作用持续三个正弦波，安全系数≥1.67，）",
+          "coverage_status": "unknown",
+          "reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。"
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-2-7",
+          "parameter_name": "风速（离地面高10m处，维持10min的平均最大风速）",
+          "coverage_status": "unknown",
+          "reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。"
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-2-8",
+          "parameter_name": "日照强度",
+          "coverage_status": "unknown",
+          "reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。"
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-2-9",
+          "parameter_name": "覆冰厚度",
+          "coverage_status": "unknown",
+          "reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。"
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-2-10",
+          "parameter_name": "污秽等级",
+          "coverage_status": "unknown",
+          "reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。"
+        }
+      ],
+      "tender_scope": {
+        "product_family": "MPP电缆保护管",
+        "nominal_inner_diameter": "200",
+        "wall_thickness": "14.0",
+        "scope_source": "current_tender_technical_spec_filename"
+      },
+      "response_rows": [
+        {
+          "requirement_id": "spec-34391edb1c57-1-2",
+          "sequence": "1.1",
+          "parameter_name": "密度",
+          "unit": "g/cm3",
+          "project_requirement": "0.89~0.93",
+          "bidder_guaranteed_value": "",
+          "remark": "",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 1,
+          "source_row_number": 2,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "partial_match",
+          "coverage_reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。",
+          "numeric_compliance": true,
+          "candidate_inspection_result": "0.903",
+          "candidate_report_no": "2024100312005501712",
+          "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+          "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+          "candidate_source_page": 3,
+          "candidate_scope": {
+            "product_family": "MPP电缆保护管",
+            "nominal_inner_diameter": "250",
+            "wall_thickness": "22"
+          },
+          "formal_value_allowed": false
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-3",
+          "sequence": "1.2",
+          "parameter_name": "环刚度",
+          "unit": "kN/m2",
+          "project_requirement": "大于等于24",
+          "bidder_guaranteed_value": "",
+          "remark": "",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 1,
+          "source_row_number": 3,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "partial_match",
+          "coverage_reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。",
+          "numeric_compliance": true,
+          "candidate_inspection_result": "66.40",
+          "candidate_report_no": "2024100312005501712",
+          "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+          "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+          "candidate_source_page": 3,
+          "candidate_scope": {
+            "product_family": "MPP电缆保护管",
+            "nominal_inner_diameter": "250",
+            "wall_thickness": "22"
+          },
+          "formal_value_allowed": false
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-4",
+          "sequence": "1.3",
+          "parameter_name": "压扁试验(公称内径不小于225 mm或公称壁厚不小于20 mm 的导管，加载负荷至试样垂直方向变形量为原内径的50%时；公称内径小于225mm 和公称壁厚小于20 mm 的导管，加载负荷至试样两内壁相接触时)",
+          "unit": "/",
+          "project_requirement": "试样无破裂",
+          "bidder_guaranteed_value": "",
+          "remark": "GB/T 9647 热塑性塑料管材 压扁试验",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 1,
+          "source_row_number": 4,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "partial_match",
+          "coverage_reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。",
+          "numeric_compliance": null,
+          "candidate_inspection_result": "符合要求",
+          "candidate_report_no": "2024100312005501712",
+          "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+          "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+          "candidate_source_page": 3,
+          "candidate_scope": {
+            "product_family": "MPP电缆保护管",
+            "nominal_inner_diameter": "250",
+            "wall_thickness": "22"
+          },
+          "formal_value_allowed": false
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-5",
+          "sequence": "1.4",
+          "parameter_name": "落锤冲击",
+          "unit": "/",
+          "project_requirement": "9/10个不破裂",
+          "bidder_guaranteed_value": "",
+          "remark": "GB/T 14152 热塑性塑料管材耐外冲击性能试验方法时针旋转法",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 1,
+          "source_row_number": 5,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "partial_match",
+          "coverage_reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。",
+          "numeric_compliance": true,
+          "candidate_inspection_result": "10个试样均未破裂",
+          "candidate_report_no": "2024100312005501712",
+          "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+          "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+          "candidate_source_page": 4,
+          "candidate_scope": {
+            "product_family": "MPP电缆保护管",
+            "nominal_inner_diameter": "250",
+            "wall_thickness": "22"
+          },
+          "formal_value_allowed": false
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-6",
+          "sequence": "1.5",
+          "parameter_name": "维卡软化温度",
+          "unit": "℃",
+          "project_requirement": "大于等于150",
+          "bidder_guaranteed_value": "",
+          "remark": "GB/T 1633 热塑性塑料维卡软化温度（VST）的测定（A50法）",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 1,
+          "source_row_number": 6,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "partial_match",
+          "coverage_reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。",
+          "numeric_compliance": true,
+          "candidate_inspection_result": "152",
+          "candidate_report_no": "2024100312005501712",
+          "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+          "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+          "candidate_source_page": 4,
+          "candidate_scope": {
+            "product_family": "MPP电缆保护管",
+            "nominal_inner_diameter": "250",
+            "wall_thickness": "22"
+          },
+          "formal_value_allowed": false
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-7",
+          "sequence": "1.6",
+          "parameter_name": "拉伸强度",
+          "unit": "MPa",
+          "project_requirement": "大于等于25",
+          "bidder_guaranteed_value": "",
+          "remark": "",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 1,
+          "source_row_number": 7,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "partial_match",
+          "coverage_reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。",
+          "numeric_compliance": true,
+          "candidate_inspection_result": "25.4",
+          "candidate_report_no": "2024100312005501712",
+          "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+          "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+          "candidate_source_page": 3,
+          "candidate_scope": {
+            "product_family": "MPP电缆保护管",
+            "nominal_inner_diameter": "250",
+            "wall_thickness": "22"
+          },
+          "formal_value_allowed": false
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-8",
+          "sequence": "1.7",
+          "parameter_name": "焊接强度",
+          "unit": "MPa",
+          "project_requirement": "大于等于22.5",
+          "bidder_guaranteed_value": "",
+          "remark": "",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 1,
+          "source_row_number": 8,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "partial_match",
+          "coverage_reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。",
+          "numeric_compliance": true,
+          "candidate_inspection_result": "22.9",
+          "candidate_report_no": "2024100312005501712",
+          "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+          "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+          "candidate_source_page": 4,
+          "candidate_scope": {
+            "product_family": "MPP电缆保护管",
+            "nominal_inner_diameter": "250",
+            "wall_thickness": "22"
+          },
+          "formal_value_allowed": false
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-9",
+          "sequence": "1.8",
+          "parameter_name": "断裂伸长率",
+          "unit": "/",
+          "project_requirement": "大于等于200",
+          "bidder_guaranteed_value": "",
+          "remark": "",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 1,
+          "source_row_number": 9,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "mismatch",
+          "coverage_reason": "现有报告规格与项目规格不一致，且实测值不满足项目需求值。",
+          "numeric_compliance": false,
+          "candidate_inspection_result": "176",
+          "candidate_report_no": "2024100312005501712",
+          "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+          "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+          "candidate_source_page": 4,
+          "candidate_scope": {
+            "product_family": "MPP电缆保护管",
+            "nominal_inner_diameter": "250",
+            "wall_thickness": "22"
+          },
+          "formal_value_allowed": false
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-10",
+          "sequence": "1.9",
+          "parameter_name": "静摩擦系数",
+          "unit": "/",
+          "project_requirement": "小于等于0.35",
+          "bidder_guaranteed_value": "",
+          "remark": "",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 1,
+          "source_row_number": 10,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "partial_match",
+          "coverage_reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。",
+          "numeric_compliance": true,
+          "candidate_inspection_result": "0.30",
+          "candidate_report_no": "2024100312005501712",
+          "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+          "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+          "candidate_source_page": 4,
+          "candidate_scope": {
+            "product_family": "MPP电缆保护管",
+            "nominal_inner_diameter": "250",
+            "wall_thickness": "22"
+          },
+          "formal_value_allowed": false
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-11",
+          "sequence": "1.10",
+          "parameter_name": "纵向回缩率",
+          "unit": "/",
+          "project_requirement": "小于等于3%",
+          "bidder_guaranteed_value": "",
+          "remark": "",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 1,
+          "source_row_number": 11,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "partial_match",
+          "coverage_reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。",
+          "numeric_compliance": true,
+          "candidate_inspection_result": "1.4",
+          "candidate_report_no": "2024100312005501712",
+          "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+          "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+          "candidate_source_page": 4,
+          "candidate_scope": {
+            "product_family": "MPP电缆保护管",
+            "nominal_inner_diameter": "250",
+            "wall_thickness": "22"
+          },
+          "formal_value_allowed": false
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-12",
+          "sequence": "1.11",
+          "parameter_name": "散热性能",
+          "unit": "/",
+          "project_requirement": "常温下放置规定的时间，导管内、外壁温度均不大于 30 ℃",
+          "bidder_guaranteed_value": "",
+          "remark": "",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 1,
+          "source_row_number": 12,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "partial_match",
+          "coverage_reason": "同产品族存在同名参数，但报告规格与项目规格不一致，只能作相邻规格参考。",
+          "numeric_compliance": true,
+          "candidate_inspection_result": "内壁:26.2;26.2;25.9内壁平均:26.1外壁:25.3;25.5;25.3外壁平均:25.4",
+          "candidate_report_no": "2024100312005501712",
+          "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+          "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+          "candidate_source_page": 4,
+          "candidate_scope": {
+            "product_family": "MPP电缆保护管",
+            "nominal_inner_diameter": "250",
+            "wall_thickness": "22"
+          },
+          "formal_value_allowed": false
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-13",
+          "sequence": "1.12",
+          "parameter_name": "公称内径",
+          "unit": "mm",
+          "project_requirement": "200",
+          "bidder_guaranteed_value": "",
+          "remark": "",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 1,
+          "source_row_number": 13,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "mismatch",
+          "coverage_reason": "现有报告规格与项目规格不一致，且实测值不满足项目需求值。",
+          "numeric_compliance": false,
+          "candidate_inspection_result": "250.0~250.2",
+          "candidate_report_no": "2024100312005501712",
+          "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+          "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+          "candidate_source_page": 3,
+          "candidate_scope": {
+            "product_family": "MPP电缆保护管",
+            "nominal_inner_diameter": "250",
+            "wall_thickness": "22"
+          },
+          "formal_value_allowed": false
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-1-14",
+          "sequence": "1.12",
+          "parameter_name": "公称壁厚",
+          "unit": "mm",
+          "project_requirement": "14.0",
+          "bidder_guaranteed_value": "",
+          "remark": "",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 1,
+          "source_row_number": 14,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "mismatch",
+          "coverage_reason": "现有报告规格与项目规格不一致，且实测值不满足项目需求值。",
+          "numeric_compliance": false,
+          "candidate_inspection_result": "22.0~22.1",
+          "candidate_report_no": "2024100312005501712",
+          "candidate_specification_model": "DF 250×22×9000 SN40 MPP",
+          "candidate_source_file": "rag_seed/power_grid_resources/05_enterprise_documents/01_泰昌MVP试点企业资料/extracted/泰昌资料/3检验报告/MPP电缆保护管检验报告内径250.pdf",
+          "candidate_source_page": 3,
+          "candidate_scope": {
+            "product_family": "MPP电缆保护管",
+            "nominal_inner_diameter": "250",
+            "wall_thickness": "22"
+          },
+          "formal_value_allowed": false
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-2-2",
+          "sequence": "2.1",
+          "parameter_name": "海拔高度",
+          "unit": "m",
+          "project_requirement": "小于等于4500",
+          "bidder_guaranteed_value": "",
+          "remark": "",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 2,
+          "source_row_number": 2,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "unknown",
+          "coverage_reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。",
+          "numeric_compliance": null,
+          "candidate_inspection_result": null,
+          "candidate_report_no": null,
+          "candidate_specification_model": null,
+          "candidate_source_file": null,
+          "candidate_source_page": null,
+          "candidate_scope": null,
+          "formal_value_allowed": false
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-2-3",
+          "sequence": "2.2",
+          "parameter_name": "最高气温",
+          "unit": "℃",
+          "project_requirement": "40",
+          "bidder_guaranteed_value": "",
+          "remark": "",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 2,
+          "source_row_number": 3,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "unknown",
+          "coverage_reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。",
+          "numeric_compliance": null,
+          "candidate_inspection_result": null,
+          "candidate_report_no": null,
+          "candidate_specification_model": null,
+          "candidate_source_file": null,
+          "candidate_source_page": null,
+          "candidate_scope": null,
+          "formal_value_allowed": false
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-2-4",
+          "sequence": "2.3",
+          "parameter_name": "户外最低低温",
+          "unit": "℃",
+          "project_requirement": "-40",
+          "bidder_guaranteed_value": "",
+          "remark": "",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 2,
+          "source_row_number": 4,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "unknown",
+          "coverage_reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。",
+          "numeric_compliance": null,
+          "candidate_inspection_result": null,
+          "candidate_report_no": null,
+          "candidate_specification_model": null,
+          "candidate_source_file": null,
+          "candidate_source_page": null,
+          "candidate_scope": null,
+          "formal_value_allowed": false
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-2-5",
+          "sequence": "2.4",
+          "parameter_name": "地面水平加速度",
+          "unit": "m/s2",
+          "project_requirement": "0.2g",
+          "bidder_guaranteed_value": "",
+          "remark": "",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 2,
+          "source_row_number": 5,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "unknown",
+          "coverage_reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。",
+          "numeric_compliance": null,
+          "candidate_inspection_result": null,
+          "candidate_report_no": null,
+          "candidate_specification_model": null,
+          "candidate_source_file": null,
+          "candidate_source_page": null,
+          "candidate_scope": null,
+          "formal_value_allowed": false
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-2-6",
+          "sequence": "2.5",
+          "parameter_name": "地面垂直加速度（同时作用持续三个正弦波，安全系数≥1.67，）",
+          "unit": "m/s2",
+          "project_requirement": "0.1g",
+          "bidder_guaranteed_value": "",
+          "remark": "",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 2,
+          "source_row_number": 6,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "unknown",
+          "coverage_reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。",
+          "numeric_compliance": null,
+          "candidate_inspection_result": null,
+          "candidate_report_no": null,
+          "candidate_specification_model": null,
+          "candidate_source_file": null,
+          "candidate_source_page": null,
+          "candidate_scope": null,
+          "formal_value_allowed": false
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-2-7",
+          "sequence": "2.6",
+          "parameter_name": "风速（离地面高10m处，维持10min的平均最大风速）",
+          "unit": "m/s",
+          "project_requirement": "35",
+          "bidder_guaranteed_value": "",
+          "remark": "",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 2,
+          "source_row_number": 7,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "unknown",
+          "coverage_reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。",
+          "numeric_compliance": null,
+          "candidate_inspection_result": null,
+          "candidate_report_no": null,
+          "candidate_specification_model": null,
+          "candidate_source_file": null,
+          "candidate_source_page": null,
+          "candidate_scope": null,
+          "formal_value_allowed": false
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-2-8",
+          "sequence": "2.7",
+          "parameter_name": "日照强度",
+          "unit": "W/cm2",
+          "project_requirement": "0.11",
+          "bidder_guaranteed_value": "",
+          "remark": "",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 2,
+          "source_row_number": 8,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "unknown",
+          "coverage_reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。",
+          "numeric_compliance": null,
+          "candidate_inspection_result": null,
+          "candidate_report_no": null,
+          "candidate_specification_model": null,
+          "candidate_source_file": null,
+          "candidate_source_page": null,
+          "candidate_scope": null,
+          "formal_value_allowed": false
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-2-9",
+          "sequence": "2.8",
+          "parameter_name": "覆冰厚度",
+          "unit": "mm",
+          "project_requirement": "10",
+          "bidder_guaranteed_value": "",
+          "remark": "",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 2,
+          "source_row_number": 9,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "unknown",
+          "coverage_reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。",
+          "numeric_compliance": null,
+          "candidate_inspection_result": null,
+          "candidate_report_no": null,
+          "candidate_specification_model": null,
+          "candidate_source_file": null,
+          "candidate_source_page": null,
+          "candidate_scope": null,
+          "formal_value_allowed": false
+        },
+        {
+          "requirement_id": "spec-34391edb1c57-2-10",
+          "sequence": "2.9",
+          "parameter_name": "污秽等级",
+          "unit": "无",
+          "project_requirement": "d级",
+          "bidder_guaranteed_value": "",
+          "remark": "",
+          "source_file": "assets/template_words/包1_完整招标文件_92475576192439826/国家电网公司总部_一级省公司固化ID修编（9111-500021520-00001）/改性聚丙烯（MPP）电缆导管专用技术规范（内径200mm，壁厚14.0，断裂延伸率≥200%）.docx",
+          "source_file_sha256": "34391edb1c574ae7bab05d59bc65061984c5d0d5f191412d02bb3e319e8ecf54",
+          "source_table_index": 2,
+          "source_row_number": 10,
+          "headers": [
+            "序号",
+            "参数名称",
+            "单位",
+            "项目需求值或表述",
+            "投标人保证值",
+            "备注"
+          ],
+          "coverage_status": "unknown",
+          "coverage_reason": "未找到同名泰昌结构化检验参数，投标人保证值保持空白。",
+          "numeric_compliance": null,
+          "candidate_inspection_result": null,
+          "candidate_report_no": null,
+          "candidate_specification_model": null,
+          "candidate_source_file": null,
+          "candidate_source_page": null,
+          "candidate_scope": null,
+          "formal_value_allowed": false
+        }
+      ],
+      "row_count": 22,
+      "coverage_counts": {
+        "partial_match": 10,
+        "mismatch": 3,
+        "unknown": 9
+      },
+      "filled_guarantee_count": 0,
+      "generation_policy": "original_tender_rows_only_no_llm_rewrite"
+    }
+  }
+}

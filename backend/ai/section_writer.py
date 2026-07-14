@@ -29,6 +29,7 @@ from backend.services.taichang_chapter_content import (
     chapter_content_prompt_context,
     render_grounded_chapter_draft,
 )
+from backend.services.taichang_fixed_forms import can_render_fixed_form, render_fixed_form_draft
 
 FORMAL_PLACEHOLDER_RE = re.compile(r"【\s*待(?:补充|填写|确认|核对)[^】]*】|\{\{[^}]+}}|\$\{[^}]+}")
 GENERIC_PLACEHOLDER_LABELS = {
@@ -1169,6 +1170,35 @@ def rewrite_generated_section_for_formal_quality(
 
 def stream_bid_section(project_id: str, chapter: dict[str, Any]) -> Iterator[dict[str, Any]]:
     continuation_draft = _continuation_draft(chapter)
+    metadata = chapter.get("metadata") if isinstance(chapter.get("metadata"), dict) else {}
+    fixed_form_manifest = metadata.get("fixed_form_manifest") if isinstance(metadata.get("fixed_form_manifest"), dict) else None
+    if not continuation_draft and can_render_fixed_form(fixed_form_manifest):
+        fixed_content = render_fixed_form_draft(fixed_form_manifest)
+        yield {
+            "type": "start",
+            "title": chapter.get("title") or "未命名章节",
+            "prompt_profile": "fixed_form_original",
+            "prompt_profile_label": "招标原表确定性回填",
+            "prompt_chars": 0,
+            "max_prompt_chars": 0,
+            "rag_limit": 0,
+            "asset_limit": 0,
+            "fact_pack_mode": "fixed_form_manifest",
+        }
+        yield {
+            "type": "fixed_form_renderer",
+            "renderer": "taichang_fixed_form_renderer_v1",
+            "form_key": fixed_form_manifest.get("form_key"),
+            "model_bypassed": True,
+            "formal_ready": bool(fixed_form_manifest.get("formal_ready")),
+            "blocker_count": len(fixed_form_manifest.get("blockers") or []),
+            "reason": "招标原表、投标人保证值和客户决策字段禁止模型改写",
+        }
+        for chunk in _chunk_text(fixed_content):
+            yield {"type": "chunk", "content": chunk}
+        yield {"type": "done"}
+        return
+
     profile = classify_section_prompt_profile(chapter, continuation=bool(continuation_draft))
     prompt = (
         build_section_continuation_prompt(project_id, chapter, continuation_draft)

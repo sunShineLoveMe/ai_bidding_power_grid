@@ -429,6 +429,32 @@ def _evaluate_rule(
             return _make_result(rule, status="warning", evidence=f"目标章节发现占位符 {len(placeholders)} 处。")
         return _make_result(rule, status="passed", evidence=f"已检查目标章节 {len(target_sections)} 个。")
 
+    if check_type == "fixed_form_manifests_ready":
+        fixed_sections = []
+        for section in sections:
+            metadata = section.get("metadata") if isinstance(section.get("metadata"), dict) else {}
+            manifest = metadata.get("fixed_form_manifest") if isinstance(metadata.get("fixed_form_manifest"), dict) else None
+            if manifest:
+                fixed_sections.append((section, manifest))
+        if not fixed_sections:
+            return _make_result(rule, status="not_applicable", evidence="当前项目尚未启用固定表单 manifest。")
+        blocked = [(section, manifest) for section, manifest in fixed_sections if not bool(manifest.get("formal_ready"))]
+        if not blocked:
+            return _make_result(rule, status="passed", evidence=f"固定表单 {len(fixed_sections)} 个均已通过原表与证据门禁。")
+        section, manifest = max(blocked, key=lambda item: int(item[1].get("row_count") or 0))
+        blocker_count = len(manifest.get("blockers") or [])
+        filled = manifest.get("filled_guarantee_count")
+        row_count = manifest.get("row_count")
+        detail = f"{section.get('title') or section.get('id')} 未达正式状态，阻断项 {blocker_count}"
+        if row_count is not None:
+            detail += f"，参数行 {row_count}，已填保证值 {filled or 0}"
+        return _make_result(
+            rule,
+            status="blocked",
+            evidence=f"{detail}；未通过表单共 {len(blocked)} 个。",
+            target=section.get("id"),
+        )
+
     if check_type == "asset_no_forbidden_owner":
         wrong = [
             asset for asset in assets

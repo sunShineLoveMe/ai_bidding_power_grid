@@ -80,6 +80,9 @@ def save_generated_section(
     metadata = chapter.get("metadata") if isinstance(chapter.get("metadata"), dict) else {}
     writing_plan = metadata.get("writing_plan") if isinstance(metadata.get("writing_plan"), dict) else {}
     chapter_content_manifest = metadata.get("chapter_content_manifest") if isinstance(metadata.get("chapter_content_manifest"), dict) else None
+    fixed_form_manifest = metadata.get("fixed_form_manifest") if isinstance(metadata.get("fixed_form_manifest"), dict) else None
+    formal_ready = bool(fixed_form_manifest.get("formal_ready")) if fixed_form_manifest else True
+    saved_status = "generated" if formal_ready else "partial_generated"
     try:
         target_words = int(float(writing_plan.get("target_words") or 0)) or None
     except (TypeError, ValueError):
@@ -88,17 +91,20 @@ def save_generated_section(
         project_id,
         chapter["id"],
         full_content,
-        "generated",
+        saved_status,
         chapter,
         metadata_patch={
-            "generation_status": "generated",
-            "writing_status": "generated",
-            "writing_error": None,
+            "generation_status": saved_status,
+            "writing_status": saved_status,
+            "writing_error": None if formal_ready else "固定表单仍有未确认或证据不匹配项，禁止作为正式投标响应。",
             "actual_words": actual_words,
             "target_words": target_words,
             "length_completion_ratio": round(actual_words / target_words, 3) if target_words else None,
             "formal_quality": quality,
             "chapter_content_manifest": chapter_content_manifest,
+            "fixed_form_manifest": fixed_form_manifest,
+            "fixed_form_formal_ready": formal_ready if fixed_form_manifest else None,
+            "fixed_form_blocker_count": len(fixed_form_manifest.get("blockers") or []) if fixed_form_manifest else 0,
         },
     )
 

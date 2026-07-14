@@ -1449,6 +1449,17 @@ def build_project_bid_markdown(
         "cover_field_missing": project_meta.get("cover_field_missing") if isinstance(project_meta.get("cover_field_missing"), list) else [],
         "cover_field_source": "uploaded_tender_structured_extract" if isinstance(project_meta.get("cover_fields"), dict) and project_meta.get("cover_fields") else "markdown_fallback",
     }
+    if focus_section:
+        focus_metadata = focus_section.get("metadata") if isinstance(focus_section.get("metadata"), dict) else {}
+        fixed_form_manifest = focus_metadata.get("fixed_form_manifest") if isinstance(focus_metadata.get("fixed_form_manifest"), dict) else None
+        if fixed_form_manifest:
+            export_image_report["fixed_form_manifest"] = fixed_form_manifest
+            export_image_report["fixed_form_export"] = {
+                "enabled": True,
+                "renderer": "native_docx_ooxml_clone",
+                "model_bypassed": True,
+                "source_form_key": fixed_form_manifest.get("form_key"),
+            }
     prefill_state = project_meta.get("bid_prefill") if isinstance(project_meta.get("bid_prefill"), dict) else {}
     confirmed_values = prefill_state.get("confirmed_values") if isinstance(prefill_state.get("confirmed_values"), dict) else {}
     material_scope = material_scope_from_context(project_meta, report_cover_fields, confirmed_values)

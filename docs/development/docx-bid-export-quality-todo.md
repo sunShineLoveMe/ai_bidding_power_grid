@@ -21,6 +21,7 @@
 - 若 2026-07-08 客户会确认可提供可编辑 Word 技术标/商务标历史成果，则进入 `template_docx` MVP 方案设计；现有 AI 生成与 Markdown 转 DOCX 链路继续保留，不因待决策任务中断。
 - 2026-06-29 专家评审输入已形成 `docs/development/docx-export-vs-customer-reference-review.md`；新疆技术/商务中标稿仅作为版式、目录组织、分册结构和交付观感参考，不作为唯一模板，也不复用其中企业事实、产品参数、证书、附件内容。后续整改按 `docs/development/docx-export-format-priority-todo.md` 跟踪。
 - 2026-07-07 客户试用反馈生成结果与历史成果标书章节和格式差异较大；“历史标书模板复用 `template_docx` MVP”已提升为项目 P0 待决策任务。2026-07-08 客户会后确认是否按“上传历史技术标/商务标 DOCX -> 自动识别变量 -> 变量确认表单 -> 原版式替换导出”的路径进入实现。
+- 2026-07-14 P2-03 固定表单原表导出完成：商务偏差表、人员关系说明、技术偏差表和技术特性参数表直接克隆当次招标 DOCX OOXML，不经过 Markdown 重建。四份真实章节 DOCX 均完成 Celery 导出和 LibreOffice 字段刷新；技术参数表刷新后仍为两张原表、22 行、6 列，合并结构、源文字和列宽审计 PASS，保证值保持 0。记录见 `docs/development/runs/run_20260714_taichang_p2_03_fixed_form_completion.md`。
 - 真实验证必须走项目导出链路：`build_project_bid_markdown` -> `convert_md_to_word` -> `refresh_docx_fields_with_soffice`，不得只用 mock 替代。
 - 2026-06-27 阿里云新疆 10kV 真实浏览器验收发现：客户真实长项目名会导致技术标 DOCX 导出任务因 `[Errno 36] File name too long` 失败；已将物理输出目录和文件名短名化。
 - 2026-06-27 本地辽宁 CPVC 包 1 完整真实回归已产出完整 DOCX，但 formal gate 判定为 `draft`：正式必填缺口 `16`、高风险缺口 `48`、正文残留 `待补充/需人工复核`，且封面包号未读取已确认值。记录见 `docs/development/runs/run_20260627_local_liaoning_full_e2e.md`。
