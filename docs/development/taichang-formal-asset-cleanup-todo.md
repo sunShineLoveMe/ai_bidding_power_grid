@@ -40,6 +40,7 @@
 | [x] | P1-01 历史标书低风险资产实际提取、去重与增量入库 | `scripts/rag/ingest_taichang_historical_bid_assets.py`、`scripts/rag/extract_taichang_historical_bid_tables.py`、`docs/development/taichang-bid-v1-data/p1_01_ingestion/`、`docs/rag/runs/run_20260713_taichang_p1_01_historical_bid_ingestion_summary.md` | 169 个媒体全部提取；133 个真实写库并有 embedding，5 个同证据、2 个视觉重复、24 个视觉疑似、5 个低质量未入库；第二次执行新增 0；全部排除正式标书和参数事实层；技术表 20 行单位保真，Base+泰昌最终门禁、真实 stream、后端 413 项测试通过 |
 | [x] | P1-02 文件级证据包 | `scripts/rag/build_taichang_evidence_bundles.py`、`docs/development/taichang-bid-v1-data/p1_02_evidence_bundles/`、`docs/rag/runs/run_20260713_taichang_p1_02_evidence_bundles_summary.md` | 基于真实 PostgreSQL 599 个现有资产重建 16 个业务证据包、149 页，页序完整、缺页 0、重页 0；21 个重复 PDF/关键页图仅作 rendition；过期证书、校准有效期、审计年度和资格预审原件缺口均有门禁；P0-06 自动接收但尚未提取/入库的 169 条候选和跨资料域来源均未进入；专项 30 项、后端全量 400 项及 2 个子测试通过 |
 | [x] | P1-03 结构化参数和业务台账 | `scripts/rag/build_taichang_business_ledgers.py`、`backend/rag/business_ledgers.py`、`docs/development/taichang-bid-v1-data/p1_03_business_ledgers/`、`docs/rag/runs/run_20260714_taichang_p1_03_business_ledgers_summary.md` | 生成并版本化 84 行完整台账，包含 65 行人员花名册和 2 行人员证书；复用 36 行产品参数、2 行项目业绩证据和 16 个证据包；客户确认私有项目内可查询完整人员信息；过期证书阻断、缺原件报告不生成参数；真实 stream 7/7、Base+泰昌门禁、后端全量 433 项及 2 个子测试通过；数据库写入、资产提升和 DOCX 选图变更均为 0 |
+| [ ] | P2 正文内容复用与正式证据编排 | `taichang_bid_evidence_mapping.json`、P1-05 结构化 RAG 基线、待生成 `chapter_content_manifest.json`、技术标/商务标 DOCX/PDF | 将结构化事实和 133 条历史知识资产定向用于章节正文，将 16 个完整证据包按页序用于正式附件；`knowledge_only` 可作为写作线索但不得直接配图。以正文/表格实际使用率、来源追溯、证据包插入结果和真实 DOCX/PDF 审计作为完成标准 |
 
 ## P0：正式投标文件阻断项
 
