@@ -592,6 +592,23 @@ P0 结束时必须同时满足：
 
 ### P1-04 建立章节—事实—证据映射
 
+**执行状态（2026-07-14）：`[x]` 已完成动态语义章节映射、证据定位和门禁校验**
+
+- 已建立 19 个语义章节映射：技术标 12 个、商务标 7 个；全部使用 `semantic_chapter_key + title aliases` 匹配当次 `project_bid_skeleton.json`，未绑定历史章节号。
+- 资料状态为“已有资料”5 个、“部分可用”10 个、“缺原件”3 个、“人工确认”1 个。只有“已有资料”进入自动引用候选，其余均保留项目适配、有效期、补原件或客户确认门禁。
+- 只读关联 15 个唯一 `evidence_bundle_id`、36 行原始检验报告参数、17 行 P1-03 安全台账投影和 P1-01 `knowledge_only` 资产；同一证据可跨章节复用但不复制资产记录。
+- CPVC/MPP 参数和完整检验报告可定位；N-HAP/UPVC 仅有历史编号且缺原件，保持 `missing_evidence`；过期职业健康安全证书未进入任何证据引用。
+- 资格预审因无独立原件保持缺口；审计报告按当前招标年度选择且 2024 年报告编号待复核；评审补充材料必须先命中当前评分项；授权委托/签章只生成模板占位和确认清单，不自动插章、签字或盖章。
+- 人员受限明细纳入数为 0；辽宁招标资料只定义本项目要求，河北豪乾只参考结构和写法，均不得成为泰昌企业事实。
+- 验证：P1-04 + P1-02 + P1-03 专项 `29 passed`；后端全量 `432 passed、2 subtests passed`。本轮数据库写入 0、metadata 改写 0、资产复制/提升 0、召回策略变更 0、DOCX 选图变更 0，因此不触发 Base+泰昌召回、真实 stream 或 DOCX XML 门禁。详见[执行总结](../rag/runs/run_20260714_taichang_p1_04_chapter_evidence_mapping_summary.md)。
+
+**交付物（已完成）**
+
+- `scripts/rag/build_taichang_chapter_evidence_mapping.py`。
+- `docs/development/taichang-bid-v1-data/p1_04_chapter_evidence_mapping/taichang_bid_evidence_mapping.json`。
+- [泰昌资料—技术标章节映射表](./taichang-bid-v1-data/p1_04_chapter_evidence_mapping/泰昌资料—技术标章节映射表.md)。
+- [泰昌资料—商务标章节映射表](./taichang-bid-v1-data/p1_04_chapter_evidence_mapping/泰昌资料—商务标章节映射表.md)。
+
 **任务**
 
 技术标至少建立：

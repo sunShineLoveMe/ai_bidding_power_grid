@@ -225,3 +225,12 @@ build_project_bid_markdown(volume_type=technical/business, with_images=true)
 - 两个既有检验报告编号已归入同一证据包候选；历史项目号、固化 ID 按事实冲突阻断；缺原始证据的报告仍不得提升。
 - 定向与 P0-02/P0-03 回归共 18 项通过，重复执行结果一致，冻结输入哈希未变化。
 - 产物：`docs/development/taichang-bid-v1-data/asset_dedup_matrix.json/csv`；运行记录：`docs/rag/runs/run_20260713_taichang_p0_04_asset_dedup_summary.md`。
+
+### 2026-07-14 泰昌 P1-04 章节—事实—证据映射收口
+
+- 已建立 19 个动态语义章节映射，按技术标/商务标分表输出，不绑定历史章节号。
+- 只有 5 个“已有资料”章节可进入自动引用候选；10 个“部分可用”、3 个“缺原件”和 1 个“人工确认”章节均保留正式投标门禁。
+- 15 个唯一证据包只按 ID 跨章节复用，不复制资产；历史 Word 知识资产继续保持 `knowledge_only`，不提升为正式配图或正式附件。
+- N-HAP/UPVC 缺原件、职业健康安全证书过期、资格预审无独立原件、2024 审计编号待复核、授权委托与签章人工确认等边界均已固化。
+- 人员受限明细纳入映射 0；辽宁招标资料和河北豪乾参考稿进入泰昌事实引用 0。
+- 专项 `29 passed`、后端全量 `432 passed、2 subtests passed`；本轮数据库写入、metadata 改写、资产复制/提升和 DOCX 选图变更均为 0。

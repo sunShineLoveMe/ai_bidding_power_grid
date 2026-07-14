@@ -1,0 +1,1160 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-07-14T03:10:41.928927+00:00",
+  "enterprise": "河北泰昌电力器材科技有限公司",
+  "mapping_mode": "semantic_dynamic_project_skeleton",
+  "fixed_chapter_numbers": false,
+  "project_skeleton_contract": "project_bid_skeleton.json",
+  "historical_skeleton_role": "reference_only",
+  "source_policy": {
+    "enterprise_fact": "仅泰昌原始资料、核验事实、结构化台账和证据包",
+    "tender_requirement": "仅用于当前项目要求、评分项、年度和格式",
+    "reference_template": "仅用于结构和写法，不得生成泰昌事实",
+    "asset_reuse": "只复用事实/证据/资产 ID，不创建副本",
+    "restricted_personnel": "不进入本映射及普通问答，授权委托只生成确认占位"
+  },
+  "source_snapshot": {
+    "p1_01_ready_knowledge_assets": 133,
+    "p1_02_evidence_bundles": 16,
+    "p1_03_business_ledger_rows": 84,
+    "p1_03_published_safe_rows": 17,
+    "p1_03_restricted_rows_included": 0,
+    "verified_parameter_rows": 36
+  },
+  "summary": {
+    "mapping_count": 19,
+    "technical_mapping_count": 12,
+    "business_mapping_count": 7,
+    "existing_count": 5,
+    "partial_count": 10,
+    "missing_evidence_count": 3,
+    "manual_confirmation_count": 1,
+    "unique_evidence_bundle_count": 15,
+    "database_writes": 0,
+    "asset_copies": 0
+  },
+  "mappings": [
+    {
+      "mapping_id": "TECH-PARAM-CPVC",
+      "bid_volume": "technical",
+      "semantic_chapter_key": "technical_characteristics.cpvc",
+      "chapter_display_name": "CPVC技术特性参数表",
+      "chapter_match": {
+        "mode": "semantic_title_keywords",
+        "aliases": [
+          "CPVC技术特性",
+          "CPVC技术参数",
+          "PVC-C技术参数",
+          "CPVC技术响应"
+        ],
+        "exclude_keywords": [
+          "招标人",
+          "其他投标人",
+          "河北豪乾"
+        ],
+        "fixed_chapter_number": null
+      },
+      "material_status": "existing",
+      "material_status_label": "已有资料",
+      "existing_material": true,
+      "fact_refs": [
+        {
+          "source": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/taichang_product_parameters/taichang_product_parameter_rows.json",
+          "selector": {
+            "product_family": "CPVC电缆保护管",
+            "report_no": "2024100312005501713"
+          },
+          "usage": "逐行参数及来源页码"
+        }
+      ],
+      "evidence_bundle_ids": [
+        "taichang-evidence-4c9d64c00d89cb7b78f2"
+      ],
+      "knowledge_asset_selector": null,
+      "resolved_knowledge_asset_candidate_ids": [],
+      "blockers": [],
+      "customer_confirmation_fields": [],
+      "generation_policy": "仅在当前招标动态骨架命中后按来源引用，不复制资产记录。",
+      "source_boundary": {
+        "enterprise_fact_owner": "河北泰昌电力器材科技有限公司",
+        "tender_requirement_role": "仅用于确定本项目要求、年度、评分项和格式，不作为泰昌企业事实",
+        "reference_template_role": "仅参考写法和结构，不作为泰昌企业事实"
+      }
+    },
+    {
+      "mapping_id": "TECH-PARAM-MPP",
+      "bid_volume": "technical",
+      "semantic_chapter_key": "technical_characteristics.mpp",
+      "chapter_display_name": "MPP技术特性参数表",
+      "chapter_match": {
+        "mode": "semantic_title_keywords",
+        "aliases": [
+          "MPP技术特性",
+          "MPP技术参数",
+          "改性聚丙烯技术参数",
+          "MPP技术响应"
+        ],
+        "exclude_keywords": [
+          "招标人",
+          "其他投标人",
+          "河北豪乾"
+        ],
+        "fixed_chapter_number": null
+      },
+      "material_status": "existing",
+      "material_status_label": "已有资料",
+      "existing_material": true,
+      "fact_refs": [
+        {
+          "source": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/taichang_product_parameters/taichang_product_parameter_rows.json",
+          "selector": {
+            "product_family": "MPP电缆保护管",
+            "report_no": "2024100312005501712"
+          },
+          "usage": "逐行参数及来源页码"
+        }
+      ],
+      "evidence_bundle_ids": [
+        "taichang-evidence-5233af6e2133a8e25641"
+      ],
+      "knowledge_asset_selector": null,
+      "resolved_knowledge_asset_candidate_ids": [],
+      "blockers": [],
+      "customer_confirmation_fields": [],
+      "generation_policy": "仅在当前招标动态骨架命中后按来源引用，不复制资产记录。",
+      "source_boundary": {
+        "enterprise_fact_owner": "河北泰昌电力器材科技有限公司",
+        "tender_requirement_role": "仅用于确定本项目要求、年度、评分项和格式，不作为泰昌企业事实",
+        "reference_template_role": "仅参考写法和结构，不作为泰昌企业事实"
+      }
+    },
+    {
+      "mapping_id": "TECH-QUALITY-CONTROL",
+      "bid_volume": "technical",
+      "semantic_chapter_key": "manufacturing.quality_control",
+      "chapter_display_name": "产品制造质量控制",
+      "chapter_match": {
+        "mode": "semantic_title_keywords",
+        "aliases": [
+          "产品制造质量控制",
+          "质量管控体系",
+          "工序质量控制",
+          "制造质量保证"
+        ],
+        "exclude_keywords": [
+          "招标人",
+          "其他投标人",
+          "河北豪乾"
+        ],
+        "fixed_chapter_number": null
+      },
+      "material_status": "partial",
+      "material_status_label": "部分可用",
+      "existing_material": false,
+      "fact_refs": [
+        {
+          "source": "docs/development/taichang-bid-v1-data/p1_03_business_ledgers/taichang_p1_03_manifest.json",
+          "selector": {
+            "ledger_type": "management_certificate",
+            "validity_status": "valid"
+          },
+          "usage": "有效质量/环境体系事实"
+        }
+      ],
+      "evidence_bundle_ids": [
+        "taichang-evidence-792812eabf8d9567854f",
+        "taichang-evidence-c37bef6d5bdbe4f32cb1"
+      ],
+      "knowledge_asset_selector": {
+        "source": "docs/development/taichang-bid-v1-data/p1_01_ingestion/taichang_historical_bid_asset_ingestion.json",
+        "ready_for_database_ingestion": true,
+        "evidence_types": [
+          "production_capacity"
+        ],
+        "source_group_keywords": [
+          "工序控制点工艺文件"
+        ],
+        "required_quality_tier": "knowledge_only",
+        "formal_evidence": false
+      },
+      "resolved_knowledge_asset_candidate_ids": [
+        "technical-media-0008",
+        "technical-media-0009",
+        "technical-media-0010",
+        "technical-media-0011",
+        "technical-media-0012",
+        "technical-media-0013",
+        "technical-media-0014",
+        "technical-media-0015",
+        "technical-media-0018",
+        "technical-media-0021",
+        "technical-media-0022",
+        "technical-media-0023",
+        "technical-media-0025",
+        "technical-media-0027",
+        "technical-media-0028"
+      ],
+      "blockers": [
+        "历史 Word 工艺资料仅为 knowledge_only，不能单独证明当前项目正式质量承诺。"
+      ],
+      "customer_confirmation_fields": [
+        "项目质量目标",
+        "质量保证期",
+        "当前招标适用标准"
+      ],
+      "generation_policy": "仅在当前招标动态骨架命中后按来源引用，不复制资产记录。",
+      "source_boundary": {
+        "enterprise_fact_owner": "河北泰昌电力器材科技有限公司",
+        "tender_requirement_role": "仅用于确定本项目要求、年度、评分项和格式，不作为泰昌企业事实",
+        "reference_template_role": "仅参考写法和结构，不作为泰昌企业事实"
+      }
+    },
+    {
+      "mapping_id": "TECH-PROCESS-CPVC",
+      "bid_volume": "technical",
+      "semantic_chapter_key": "manufacturing.process.cpvc",
+      "chapter_display_name": "CPVC生产工艺",
+      "chapter_match": {
+        "mode": "semantic_title_keywords",
+        "aliases": [
+          "CPVC生产工艺",
+          "PVC-C工艺流程",
+          "CPVC制造工艺"
+        ],
+        "exclude_keywords": [
+          "招标人",
+          "其他投标人",
+          "河北豪乾"
+        ],
+        "fixed_chapter_number": null
+      },
+      "material_status": "partial",
+      "material_status_label": "部分可用",
+      "existing_material": false,
+      "fact_refs": [
+        {
+          "source": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/taichang_product_parameters/taichang_product_parameter_rows.json",
+          "selector": {
+            "product_family": "CPVC电缆保护管"
+          },
+          "usage": "检验结果仅用于验证成品特性"
+        }
+      ],
+      "evidence_bundle_ids": [
+        "taichang-evidence-4c9d64c00d89cb7b78f2"
+      ],
+      "knowledge_asset_selector": {
+        "source": "docs/development/taichang-bid-v1-data/p1_01_ingestion/taichang_historical_bid_asset_ingestion.json",
+        "ready_for_database_ingestion": true,
+        "evidence_types": [
+          "production_capacity"
+        ],
+        "source_group_keywords": [
+          "工序控制点工艺文件"
+        ],
+        "required_quality_tier": "knowledge_only",
+        "formal_evidence": false
+      },
+      "resolved_knowledge_asset_candidate_ids": [
+        "technical-media-0008",
+        "technical-media-0009",
+        "technical-media-0010",
+        "technical-media-0011",
+        "technical-media-0012",
+        "technical-media-0013",
+        "technical-media-0014",
+        "technical-media-0015",
+        "technical-media-0018",
+        "technical-media-0021",
+        "technical-media-0022",
+        "technical-media-0023",
+        "technical-media-0025",
+        "technical-media-0027",
+        "technical-media-0028"
+      ],
+      "blockers": [
+        "现有可入库历史工艺资料为电缆保护管通用资料，缺少经核验的 CPVC 专属完整工艺文件。"
+      ],
+      "customer_confirmation_fields": [],
+      "generation_policy": "仅在当前招标动态骨架命中后按来源引用，不复制资产记录。",
+      "source_boundary": {
+        "enterprise_fact_owner": "河北泰昌电力器材科技有限公司",
+        "tender_requirement_role": "仅用于确定本项目要求、年度、评分项和格式，不作为泰昌企业事实",
+        "reference_template_role": "仅参考写法和结构，不作为泰昌企业事实"
+      }
+    },
+    {
+      "mapping_id": "TECH-PROCESS-MPP",
+      "bid_volume": "technical",
+      "semantic_chapter_key": "manufacturing.process.mpp",
+      "chapter_display_name": "MPP生产工艺",
+      "chapter_match": {
+        "mode": "semantic_title_keywords",
+        "aliases": [
+          "MPP生产工艺",
+          "改性聚丙烯工艺流程",
+          "MPP制造工艺"
+        ],
+        "exclude_keywords": [
+          "招标人",
+          "其他投标人",
+          "河北豪乾"
+        ],
+        "fixed_chapter_number": null
+      },
+      "material_status": "partial",
+      "material_status_label": "部分可用",
+      "existing_material": false,
+      "fact_refs": [
+        {
+          "source": "parsed_outputs/power_grid_customer_corpus/customer_liaoning_taichang_20260606_p0/staging/taichang_product_parameters/taichang_product_parameter_rows.json",
+          "selector": {
+            "product_family": "MPP电缆保护管"
+          },
+          "usage": "检验结果仅用于验证成品特性"
+        }
+      ],
+      "evidence_bundle_ids": [
+        "taichang-evidence-5233af6e2133a8e25641"
+      ],
+      "knowledge_asset_selector": {
+        "source": "docs/development/taichang-bid-v1-data/p1_01_ingestion/taichang_historical_bid_asset_ingestion.json",
+        "ready_for_database_ingestion": true,
+        "evidence_types": [
+          "production_capacity"
+        ],
+        "source_group_keywords": [
+          "工序控制点工艺文件"
+        ],
+        "required_quality_tier": "knowledge_only",
+        "formal_evidence": false
+      },
+      "resolved_knowledge_asset_candidate_ids": [
+        "technical-media-0008",
+        "technical-media-0009",
+        "technical-media-0010",
+        "technical-media-0011",
+        "technical-media-0012",
+        "technical-media-0013",
+        "technical-media-0014",
+        "technical-media-0015",
+        "technical-media-0018",
+        "technical-media-0021",
+        "technical-media-0022",
+        "technical-media-0023",
+        "technical-media-0025",
+        "technical-media-0027",
+        "technical-media-0028"
+      ],
+      "blockers": [
+        "现有可入库历史工艺资料为电缆保护管通用资料，缺少经核验的 MPP 专属完整工艺文件。"
+      ],
+      "customer_confirmation_fields": [],
+      "generation_policy": "仅在当前招标动态骨架命中后按来源引用，不复制资产记录。",
+      "source_boundary": {
+        "enterprise_fact_owner": "河北泰昌电力器材科技有限公司",
+        "tender_requirement_role": "仅用于确定本项目要求、年度、评分项和格式，不作为泰昌企业事实",
+        "reference_template_role": "仅参考写法和结构，不作为泰昌企业事实"
+      }
+    },
+    {
+      "mapping_id": "TECH-PROCESS-NHAP",
+      "bid_volume": "technical",
+      "semantic_chapter_key": "manufacturing.process.nhap",
+      "chapter_display_name": "N-HAP生产工艺",
+      "chapter_match": {
+        "mode": "semantic_title_keywords",
+        "aliases": [
+          "N-HAP生产工艺",
+          "涂塑钢制电缆导管工艺",
+          "涂塑钢管制造工艺"
+        ],
+        "exclude_keywords": [
+          "招标人",
+          "其他投标人",
+          "河北豪乾"
+        ],
+        "fixed_chapter_number": null
+      },
+      "material_status": "missing_evidence",
+      "material_status_label": "缺原件",
+      "existing_material": false,
+      "fact_refs": [
+        {
+          "source": "docs/development/taichang-bid-v1-data/p1_03_business_ledgers/taichang_p1_03_manifest.json",
+          "selector": {
+            "business_key": "report:2024400312005505333"
+          },
+          "usage": "仅作待补原件登记，不得生成正式参数或能力结论"
+        }
+      ],
+      "evidence_bundle_ids": [],
+      "knowledge_asset_selector": null,
+      "resolved_knowledge_asset_candidate_ids": [],
+      "blockers": [
+        "仅有历史报告编号，无原始检验报告；不得生成正式参数或覆盖结论。",
+        "缺少经核验的 N-HAP 专属工艺文件。"
+      ],
+      "customer_confirmation_fields": [],
+      "generation_policy": "仅在当前招标动态骨架命中后按来源引用，不复制资产记录。",
+      "source_boundary": {
+        "enterprise_fact_owner": "河北泰昌电力器材科技有限公司",
+        "tender_requirement_role": "仅用于确定本项目要求、年度、评分项和格式，不作为泰昌企业事实",
+        "reference_template_role": "仅参考写法和结构，不作为泰昌企业事实"
+      }
+    },
+    {
+      "mapping_id": "TECH-PROCESS-UPVC",
+      "bid_volume": "technical",
+      "semantic_chapter_key": "manufacturing.process.upvc",
+      "chapter_display_name": "UPVC生产工艺",
+      "chapter_match": {
+        "mode": "semantic_title_keywords",
+        "aliases": [
+          "UPVC生产工艺",
+          "硬聚氯乙烯电缆导管工艺",
+          "UPVC制造工艺"
+        ],
+        "exclude_keywords": [
+          "招标人",
+          "其他投标人",
+          "河北豪乾"
+        ],
+        "fixed_chapter_number": null
+      },
+      "material_status": "missing_evidence",
+      "material_status_label": "缺原件",
+      "existing_material": false,
+      "fact_refs": [
+        {
+          "source": "docs/development/taichang-bid-v1-data/p1_03_business_ledgers/taichang_p1_03_manifest.json",
+          "selector": {
+            "business_key": "report:2025200312005503479"
+          },
+          "usage": "仅作待补原件登记，不得生成正式参数或能力结论"
+        }
+      ],
+      "evidence_bundle_ids": [],
+      "knowledge_asset_selector": null,
+      "resolved_knowledge_asset_candidate_ids": [],
+      "blockers": [
+        "仅有历史报告编号，无原始检验报告；不得生成正式参数或覆盖结论。",
+        "缺少经核验的 UPVC 专属工艺文件。"
+      ],
+      "customer_confirmation_fields": [],
+      "generation_policy": "仅在当前招标动态骨架命中后按来源引用，不复制资产记录。",
+      "source_boundary": {
+        "enterprise_fact_owner": "河北泰昌电力器材科技有限公司",
+        "tender_requirement_role": "仅用于确定本项目要求、年度、评分项和格式，不作为泰昌企业事实",
+        "reference_template_role": "仅参考写法和结构，不作为泰昌企业事实"
+      }
+    },
+    {
+      "mapping_id": "TECH-TEST-EQUIPMENT",
+      "bid_volume": "technical",
+      "semantic_chapter_key": "testing.equipment_and_calibration",
+      "chapter_display_name": "试验检测设备及校准资料",
+      "chapter_match": {
+        "mode": "semantic_title_keywords",
+        "aliases": [
+          "试验检测设备",
+          "检测设备一览表",
+          "计量校准",
+          "检验设备"
+        ],
+        "exclude_keywords": [
+          "招标人",
+          "其他投标人",
+          "河北豪乾"
+        ],
+        "fixed_chapter_number": null
+      },
+      "material_status": "partial",
+      "material_status_label": "部分可用",
+      "existing_material": false,
+      "fact_refs": [
+        {
+          "source": "docs/development/taichang-bid-v1-data/p1_03_business_ledgers/taichang_p1_03_manifest.json",
+          "selector": {
+            "ledger_type": "equipment_calibration",
+            "validity_status": "valid"
+          },
+          "usage": "设备台账、校准编号、有效期和来源页"
+        }
+      ],
+      "evidence_bundle_ids": [
+        "taichang-evidence-2bf8bf27b27d8ce407cc",
+        "taichang-evidence-508e8e613ca60ada061b",
+        "taichang-evidence-8eabd69844ab6ab91f02",
+        "taichang-evidence-96036c84ed4ce31e0ad4",
+        "taichang-evidence-9fdd36654ca483e6a069",
+        "taichang-evidence-f0f800fd3a615899dbfd"
+      ],
+      "knowledge_asset_selector": null,
+      "resolved_knowledge_asset_candidate_ids": [],
+      "blockers": [
+        "证据包需按投标日复核校准有效期；不得随机抽取单页替代完整设备证据包。"
+      ],
+      "customer_confirmation_fields": [],
+      "generation_policy": "仅在当前招标动态骨架命中后按来源引用，不复制资产记录。",
+      "source_boundary": {
+        "enterprise_fact_owner": "河北泰昌电力器材科技有限公司",
+        "tender_requirement_role": "仅用于确定本项目要求、年度、评分项和格式，不作为泰昌企业事实",
+        "reference_template_role": "仅参考写法和结构，不作为泰昌企业事实"
+      }
+    },
+    {
+      "mapping_id": "TECH-INSPECTION-REPORTS",
+      "bid_volume": "technical",
+      "semantic_chapter_key": "testing.inspection_reports",
+      "chapter_display_name": "产品检验报告",
+      "chapter_match": {
+        "mode": "semantic_title_keywords",
+        "aliases": [
+          "检验报告",
+          "型式试验报告",
+          "检测报告",
+          "产品检验"
+        ],
+        "exclude_keywords": [
+          "招标人",
+          "其他投标人",
+          "河北豪乾"
+        ],
+        "fixed_chapter_number": null
+      },
+      "material_status": "existing",
+      "material_status_label": "已有资料",
+      "existing_material": true,
+      "fact_refs": [
+        {
+          "source": "docs/development/taichang-bid-v1-data/p1_03_business_ledgers/taichang_p1_03_manifest.json",
+          "selector": {
+            "ledger_type": "inspection_report_registry",
+            "fact_status": "verified_existing_report"
+          },
+          "usage": "报告登记、产品和规格"
+        }
+      ],
+      "evidence_bundle_ids": [
+        "taichang-evidence-4c9d64c00d89cb7b78f2",
+        "taichang-evidence-5233af6e2133a8e25641"
+      ],
+      "knowledge_asset_selector": null,
+      "resolved_knowledge_asset_candidate_ids": [],
+      "blockers": [],
+      "customer_confirmation_fields": [],
+      "generation_policy": "只引用 CPVC/MPP 完整 evidence_bundle_id；N-HAP/UPVC 待补原件，不得随机插入单页。",
+      "source_boundary": {
+        "enterprise_fact_owner": "河北泰昌电力器材科技有限公司",
+        "tender_requirement_role": "仅用于确定本项目要求、年度、评分项和格式，不作为泰昌企业事实",
+        "reference_template_role": "仅参考写法和结构，不作为泰昌企业事实"
+      }
+    },
+    {
+      "mapping_id": "TECH-SERVICE-AFTERSALES",
+      "bid_volume": "technical",
+      "semantic_chapter_key": "service.after_sales_and_quality_plan",
+      "chapter_display_name": "技术服务、售后服务与质量方案",
+      "chapter_match": {
+        "mode": "semantic_title_keywords",
+        "aliases": [
+          "技术服务",
+          "售后服务",
+          "质量保证方案",
+          "服务承诺",
+          "质量承诺"
+        ],
+        "exclude_keywords": [
+          "招标人",
+          "其他投标人",
+          "河北豪乾"
+        ],
+        "fixed_chapter_number": null
+      },
+      "material_status": "partial",
+      "material_status_label": "部分可用",
+      "existing_material": false,
+      "fact_refs": [],
+      "evidence_bundle_ids": [],
+      "knowledge_asset_selector": null,
+      "resolved_knowledge_asset_candidate_ids": [],
+      "blockers": [
+        "尚无独立核验的泰昌技术服务/售后制度事实；P1-05 只能接入经批准的企业知识。",
+        "交货响应、到场时限、质保期限、违约责任等承诺值必须以当前招标要求和客户确认为准。"
+      ],
+      "customer_confirmation_fields": [
+        "质保期限",
+        "售后响应时限",
+        "现场服务范围",
+        "备品备件承诺",
+        "违约责任"
+      ],
+      "generation_policy": "仅在当前招标动态骨架命中后按来源引用，不复制资产记录。",
+      "source_boundary": {
+        "enterprise_fact_owner": "河北泰昌电力器材科技有限公司",
+        "tender_requirement_role": "仅用于确定本项目要求、年度、评分项和格式，不作为泰昌企业事实",
+        "reference_template_role": "仅参考写法和结构，不作为泰昌企业事实"
+      }
+    },
+    {
+      "mapping_id": "TECH-GREEN-LOW-CARBON",
+      "bid_volume": "technical",
+      "semantic_chapter_key": "enterprise.green_low_carbon",
+      "chapter_display_name": "绿色低碳与环境管理",
+      "chapter_match": {
+        "mode": "semantic_title_keywords",
+        "aliases": [
+          "绿色低碳",
+          "绿色工厂",
+          "环境保护",
+          "碳足迹",
+          "绿色制造"
+        ],
+        "exclude_keywords": [
+          "招标人",
+          "其他投标人",
+          "河北豪乾"
+        ],
+        "fixed_chapter_number": null
+      },
+      "material_status": "partial",
+      "material_status_label": "部分可用",
+      "existing_material": false,
+      "fact_refs": [
+        {
+          "source": "docs/development/taichang-bid-v1-data/p1_03_business_ledgers/taichang_p1_03_manifest.json",
+          "selector": {
+            "ledger_type": "management_certificate",
+            "business_key": "certificate:17424E20980R0M"
+          },
+          "usage": "环境管理体系有效事实"
+        }
+      ],
+      "evidence_bundle_ids": [
+        "taichang-evidence-792812eabf8d9567854f"
+      ],
+      "knowledge_asset_selector": {
+        "source": "docs/development/taichang-bid-v1-data/p1_01_ingestion/taichang_historical_bid_asset_ingestion.json",
+        "ready_for_database_ingestion": true,
+        "evidence_types": [
+          "green_low_carbon"
+        ],
+        "source_group_keywords": [
+          "环境影响评估报告"
+        ],
+        "required_quality_tier": "knowledge_only",
+        "formal_evidence": false
+      },
+      "resolved_knowledge_asset_candidate_ids": [
+        "technical-media-0113",
+        "technical-media-0114",
+        "technical-media-0115",
+        "technical-media-0116",
+        "technical-media-0117",
+        "technical-media-0118",
+        "technical-media-0119",
+        "technical-media-0120",
+        "technical-media-0121",
+        "technical-media-0122",
+        "technical-media-0123",
+        "technical-media-0124",
+        "technical-media-0125",
+        "technical-media-0126",
+        "technical-media-0127",
+        "technical-media-0128",
+        "technical-media-0129",
+        "technical-media-0130",
+        "technical-media-0131",
+        "technical-media-0132",
+        "technical-media-0133",
+        "technical-media-0134",
+        "technical-media-0135",
+        "technical-media-0136",
+        "technical-media-0137",
+        "technical-media-0138",
+        "technical-media-0139",
+        "technical-media-0140",
+        "technical-media-0141",
+        "technical-media-0142",
+        "technical-media-0143",
+        "technical-media-0144",
+        "technical-media-0145",
+        "technical-media-0146",
+        "technical-media-0147",
+        "technical-media-0148",
+        "technical-media-0149",
+        "technical-media-0150",
+        "technical-media-0152",
+        "technical-media-0153",
+        "technical-media-0154",
+        "technical-media-0155",
+        "technical-media-0157",
+        "technical-media-0158",
+        "technical-media-0159",
+        "technical-media-0160",
+        "technical-media-0161",
+        "technical-media-0162",
+        "technical-media-0163",
+        "technical-media-0164",
+        "technical-media-0165",
+        "technical-media-0166",
+        "technical-media-0167",
+        "technical-media-0168",
+        "technical-media-0169",
+        "technical-media-0170",
+        "technical-media-0171",
+        "technical-media-0172",
+        "technical-media-0173",
+        "technical-media-0174",
+        "technical-media-0175",
+        "technical-media-0176",
+        "technical-media-0177",
+        "technical-media-0178",
+        "technical-media-0179",
+        "technical-media-0180",
+        "technical-media-0181",
+        "technical-media-0182",
+        "technical-media-0183",
+        "technical-media-0184",
+        "technical-media-0185",
+        "technical-media-0186",
+        "technical-media-0187",
+        "technical-media-0188",
+        "technical-media-0189",
+        "technical-media-0190",
+        "technical-media-0191",
+        "technical-media-0192",
+        "technical-media-0193",
+        "technical-media-0194",
+        "technical-media-0195",
+        "technical-media-0196",
+        "technical-media-0197",
+        "technical-media-0198",
+        "technical-media-0199",
+        "technical-media-0200",
+        "technical-media-0201",
+        "technical-media-0202",
+        "technical-media-0203",
+        "technical-media-0204",
+        "technical-media-0205",
+        "technical-media-0206",
+        "technical-media-0207",
+        "technical-media-0208",
+        "technical-media-0209",
+        "technical-media-0210",
+        "technical-media-0211",
+        "technical-media-0212",
+        "technical-media-0213",
+        "technical-media-0214",
+        "technical-media-0215",
+        "technical-media-0216",
+        "technical-media-0217",
+        "technical-media-0218",
+        "technical-media-0219",
+        "technical-media-0220"
+      ],
+      "blockers": [
+        "历史绿色低碳图片为 knowledge_only，正式评分材料须按当前评分项核验。"
+      ],
+      "customer_confirmation_fields": [],
+      "generation_policy": "仅在当前招标动态骨架命中后按来源引用，不复制资产记录。",
+      "source_boundary": {
+        "enterprise_fact_owner": "河北泰昌电力器材科技有限公司",
+        "tender_requirement_role": "仅用于确定本项目要求、年度、评分项和格式，不作为泰昌企业事实",
+        "reference_template_role": "仅参考写法和结构，不作为泰昌企业事实"
+      }
+    },
+    {
+      "mapping_id": "TECH-MANUFACTURING-CAPACITY",
+      "bid_volume": "technical",
+      "semantic_chapter_key": "manufacturing.capacity",
+      "chapter_display_name": "生产制造能力",
+      "chapter_match": {
+        "mode": "semantic_title_keywords",
+        "aliases": [
+          "生产制造能力",
+          "生产设备",
+          "生产线",
+          "厂房及生产环境"
+        ],
+        "exclude_keywords": [
+          "招标人",
+          "其他投标人",
+          "河北豪乾"
+        ],
+        "fixed_chapter_number": null
+      },
+      "material_status": "partial",
+      "material_status_label": "部分可用",
+      "existing_material": false,
+      "fact_refs": [],
+      "evidence_bundle_ids": [],
+      "knowledge_asset_selector": {
+        "source": "docs/development/taichang-bid-v1-data/p1_01_ingestion/taichang_historical_bid_asset_ingestion.json",
+        "ready_for_database_ingestion": true,
+        "evidence_types": [
+          "enterprise_evidence"
+        ],
+        "source_group_keywords": [
+          "生产制造环境",
+          "试组装环境"
+        ],
+        "required_quality_tier": "knowledge_only",
+        "formal_evidence": false
+      },
+      "resolved_knowledge_asset_candidate_ids": [
+        "technical-media-0029",
+        "technical-media-0030"
+      ],
+      "blockers": [
+        "历史环境图片只作知识资料；正式配图必须另行通过 formal_bid_ready 门禁。"
+      ],
+      "customer_confirmation_fields": [],
+      "generation_policy": "仅在当前招标动态骨架命中后按来源引用，不复制资产记录。",
+      "source_boundary": {
+        "enterprise_fact_owner": "河北泰昌电力器材科技有限公司",
+        "tender_requirement_role": "仅用于确定本项目要求、年度、评分项和格式，不作为泰昌企业事实",
+        "reference_template_role": "仅参考写法和结构，不作为泰昌企业事实"
+      }
+    },
+    {
+      "mapping_id": "BUS-ENTERPRISE-PROFILE",
+      "bid_volume": "business",
+      "semantic_chapter_key": "enterprise.basic_profile",
+      "chapter_display_name": "企业基本情况",
+      "chapter_match": {
+        "mode": "semantic_title_keywords",
+        "aliases": [
+          "企业基本情况",
+          "投标人基本信息",
+          "法人营业执照",
+          "企业概况"
+        ],
+        "exclude_keywords": [
+          "招标人",
+          "其他投标人",
+          "河北豪乾"
+        ],
+        "fixed_chapter_number": null
+      },
+      "material_status": "existing",
+      "material_status_label": "已有资料",
+      "existing_material": true,
+      "fact_refs": [
+        {
+          "source": "backend/rag/enterprise_facts.py",
+          "selector": {
+            "profile": "taichang_verified_enterprise_profile"
+          },
+          "usage": "核验后的企业工商基础事实"
+        }
+      ],
+      "evidence_bundle_ids": [
+        "taichang-evidence-76ac5c6984a28811742d"
+      ],
+      "knowledge_asset_selector": null,
+      "resolved_knowledge_asset_candidate_ids": [],
+      "blockers": [],
+      "customer_confirmation_fields": [],
+      "generation_policy": "仅在当前招标动态骨架命中后按来源引用，不复制资产记录。",
+      "source_boundary": {
+        "enterprise_fact_owner": "河北泰昌电力器材科技有限公司",
+        "tender_requirement_role": "仅用于确定本项目要求、年度、评分项和格式，不作为泰昌企业事实",
+        "reference_template_role": "仅参考写法和结构，不作为泰昌企业事实"
+      }
+    },
+    {
+      "mapping_id": "BUS-PREQUALIFICATION",
+      "bid_volume": "business",
+      "semantic_chapter_key": "qualification.prequalification_result",
+      "chapter_display_name": "资格预审结果",
+      "chapter_match": {
+        "mode": "semantic_title_keywords",
+        "aliases": [
+          "资格预审",
+          "资格预审结果通知书",
+          "预审合格通知",
+          "资格能力核实"
+        ],
+        "exclude_keywords": [
+          "招标人",
+          "其他投标人",
+          "河北豪乾"
+        ],
+        "fixed_chapter_number": null
+      },
+      "material_status": "missing_evidence",
+      "material_status_label": "缺原件",
+      "existing_material": false,
+      "fact_refs": [],
+      "evidence_bundle_ids": [],
+      "knowledge_asset_selector": null,
+      "resolved_knowledge_asset_candidate_ids": [],
+      "blockers": [
+        "当前无独立资格预审结果通知书原件。",
+        "适用批次、物料类别和有效范围必须从原件及当前招标要求确认。"
+      ],
+      "customer_confirmation_fields": [
+        "适用批次",
+        "适用物料",
+        "有效期"
+      ],
+      "generation_policy": "仅在当前招标动态骨架命中后按来源引用，不复制资产记录。",
+      "source_boundary": {
+        "enterprise_fact_owner": "河北泰昌电力器材科技有限公司",
+        "tender_requirement_role": "仅用于确定本项目要求、年度、评分项和格式，不作为泰昌企业事实",
+        "reference_template_role": "仅参考写法和结构，不作为泰昌企业事实"
+      }
+    },
+    {
+      "mapping_id": "BUS-MANAGEMENT-CERTS",
+      "bid_volume": "business",
+      "semantic_chapter_key": "qualification.management_system_certificates",
+      "chapter_display_name": "管理体系认证证书",
+      "chapter_match": {
+        "mode": "semantic_title_keywords",
+        "aliases": [
+          "管理体系认证",
+          "质量体系证书",
+          "环境体系证书",
+          "职业健康安全体系"
+        ],
+        "exclude_keywords": [
+          "招标人",
+          "其他投标人",
+          "河北豪乾"
+        ],
+        "fixed_chapter_number": null
+      },
+      "material_status": "partial",
+      "material_status_label": "部分可用",
+      "existing_material": false,
+      "fact_refs": [
+        {
+          "source": "docs/development/taichang-bid-v1-data/p1_03_business_ledgers/taichang_p1_03_manifest.json",
+          "selector": {
+            "ledger_type": "management_certificate",
+            "validity_status": "valid"
+          },
+          "usage": "仅引用当前有效证书"
+        }
+      ],
+      "evidence_bundle_ids": [
+        "taichang-evidence-792812eabf8d9567854f",
+        "taichang-evidence-c37bef6d5bdbe4f32cb1"
+      ],
+      "knowledge_asset_selector": null,
+      "resolved_knowledge_asset_candidate_ids": [],
+      "blockers": [
+        "职业健康安全管理体系认证证书已于 2026-06-18 到期，禁止进入正式材料。"
+      ],
+      "customer_confirmation_fields": [],
+      "generation_policy": "仅在当前招标动态骨架命中后按来源引用，不复制资产记录。",
+      "source_boundary": {
+        "enterprise_fact_owner": "河北泰昌电力器材科技有限公司",
+        "tender_requirement_role": "仅用于确定本项目要求、年度、评分项和格式，不作为泰昌企业事实",
+        "reference_template_role": "仅参考写法和结构，不作为泰昌企业事实"
+      }
+    },
+    {
+      "mapping_id": "BUS-FINANCIAL",
+      "bid_volume": "business",
+      "semantic_chapter_key": "finance.audit_reports",
+      "chapter_display_name": "财务状况与审计报告",
+      "chapter_match": {
+        "mode": "semantic_title_keywords",
+        "aliases": [
+          "财务状况",
+          "审计报告",
+          "财务报表",
+          "经审计财务资料"
+        ],
+        "exclude_keywords": [
+          "招标人",
+          "其他投标人",
+          "河北豪乾"
+        ],
+        "fixed_chapter_number": null
+      },
+      "material_status": "partial",
+      "material_status_label": "部分可用",
+      "existing_material": false,
+      "fact_refs": [
+        {
+          "source": "docs/development/taichang-bid-v1-data/p1_03_business_ledgers/taichang_p1_03_manifest.json",
+          "selector": {
+            "ledger_type": "audit_report"
+          },
+          "usage": "按当前招标要求年度选择完整报告"
+        }
+      ],
+      "evidence_bundle_ids": [
+        "taichang-evidence-355a5e62909cf7b6be51",
+        "taichang-evidence-5238d1459fcfe2a13ced",
+        "taichang-evidence-8c0003b8a585e22b7525"
+      ],
+      "knowledge_asset_selector": null,
+      "resolved_knowledge_asset_candidate_ids": [],
+      "blockers": [
+        "必须先解析当前招标要求年度；不得默认堆叠全部年度。",
+        "2024 年审计报告编号未在原件封面确认，保持人工复核。"
+      ],
+      "customer_confirmation_fields": [
+        "当前招标要求的审计年度范围"
+      ],
+      "generation_policy": "仅在当前招标动态骨架命中后按来源引用，不复制资产记录。",
+      "source_boundary": {
+        "enterprise_fact_owner": "河北泰昌电力器材科技有限公司",
+        "tender_requirement_role": "仅用于确定本项目要求、年度、评分项和格式，不作为泰昌企业事实",
+        "reference_template_role": "仅参考写法和结构，不作为泰昌企业事实"
+      }
+    },
+    {
+      "mapping_id": "BUS-PERFORMANCE",
+      "bid_volume": "business",
+      "semantic_chapter_key": "performance.project_evidence",
+      "chapter_display_name": "项目业绩",
+      "chapter_match": {
+        "mode": "semantic_title_keywords",
+        "aliases": [
+          "项目业绩",
+          "供货业绩",
+          "合同业绩",
+          "中标业绩"
+        ],
+        "exclude_keywords": [
+          "招标人",
+          "其他投标人",
+          "河北豪乾"
+        ],
+        "fixed_chapter_number": null
+      },
+      "material_status": "existing",
+      "material_status_label": "已有资料",
+      "existing_material": true,
+      "fact_refs": [
+        {
+          "source": "parsed_outputs/power_grid_customer_corpus/customer_taichang_supplement_20260611/staging/taichang_project_performance/taichang_project_performance_rows.json",
+          "selector": {
+            "project_id": "taichang-tianjin-2022-0322AB-package-2"
+          },
+          "usage": "合同与中标通知书分别保留来源"
+        }
+      ],
+      "evidence_bundle_ids": [
+        "taichang-evidence-68f40342eb06721cacc8"
+      ],
+      "knowledge_asset_selector": null,
+      "resolved_knowledge_asset_candidate_ids": [],
+      "blockers": [
+        "合同签署日期原件为空，不得用中标时间或交货日期推断。"
+      ],
+      "customer_confirmation_fields": [],
+      "generation_policy": "仅在当前招标动态骨架命中后按来源引用，不复制资产记录。",
+      "source_boundary": {
+        "enterprise_fact_owner": "河北泰昌电力器材科技有限公司",
+        "tender_requirement_role": "仅用于确定本项目要求、年度、评分项和格式，不作为泰昌企业事实",
+        "reference_template_role": "仅参考写法和结构，不作为泰昌企业事实"
+      }
+    },
+    {
+      "mapping_id": "BUS-REVIEW-SUPPLEMENT",
+      "bid_volume": "business",
+      "semantic_chapter_key": "qualification.review_supplement",
+      "chapter_display_name": "评审补充材料",
+      "chapter_match": {
+        "mode": "semantic_title_keywords",
+        "aliases": [
+          "评审补充材料",
+          "评分证明材料",
+          "综合实力证明",
+          "技术商务评分"
+        ],
+        "exclude_keywords": [
+          "招标人",
+          "其他投标人",
+          "河北豪乾"
+        ],
+        "fixed_chapter_number": null
+      },
+      "material_status": "partial",
+      "material_status_label": "部分可用",
+      "existing_material": false,
+      "fact_refs": [
+        {
+          "source": "docs/development/taichang-bid-v1-data/p1_02_evidence_bundles/taichang_evidence_bundles.json",
+          "selector": {
+            "selection": "current_scoring_item_only"
+          },
+          "usage": "按当前评分项选择证书或报告"
+        }
+      ],
+      "evidence_bundle_ids": [],
+      "knowledge_asset_selector": null,
+      "resolved_knowledge_asset_candidate_ids": [],
+      "blockers": [
+        "未解析当前评分项前不得堆叠全部证书、报告或历史材料。",
+        "知识产权资料无可信原件，不得生成相关得分证明。"
+      ],
+      "customer_confirmation_fields": [
+        "当前评分项",
+        "对应证明材料要求",
+        "材料有效期基准日"
+      ],
+      "generation_policy": "仅在当前招标动态骨架命中后按来源引用，不复制资产记录。",
+      "source_boundary": {
+        "enterprise_fact_owner": "河北泰昌电力器材科技有限公司",
+        "tender_requirement_role": "仅用于确定本项目要求、年度、评分项和格式，不作为泰昌企业事实",
+        "reference_template_role": "仅参考写法和结构，不作为泰昌企业事实"
+      }
+    },
+    {
+      "mapping_id": "BUS-AUTHORIZATION-SIGNATURE",
+      "bid_volume": "business",
+      "semantic_chapter_key": "authorization.signature_and_seal",
+      "chapter_display_name": "授权委托与签章",
+      "chapter_match": {
+        "mode": "semantic_title_keywords",
+        "aliases": [
+          "授权委托书",
+          "法定代表人授权",
+          "签字盖章",
+          "电子签章",
+          "法定代表人身份证明"
+        ],
+        "exclude_keywords": [
+          "招标人",
+          "其他投标人",
+          "河北豪乾"
+        ],
+        "fixed_chapter_number": null
+      },
+      "material_status": "manual_confirmation",
+      "material_status_label": "人工确认",
+      "existing_material": false,
+      "fact_refs": [],
+      "evidence_bundle_ids": [],
+      "knowledge_asset_selector": null,
+      "resolved_knowledge_asset_candidate_ids": [],
+      "blockers": [
+        "不得自动插入印章、签名、身份证件或人员受限明细。",
+        "授权范围、被授权人和签署日期必须由客户确认。"
+      ],
+      "customer_confirmation_fields": [
+        "法定代表人签署方式",
+        "被授权人",
+        "授权范围",
+        "授权期限",
+        "盖章位置",
+        "签署日期"
+      ],
+      "generation_policy": "仅生成模板占位和确认清单；不得自动签字、盖章或插入受限人员资料。",
+      "source_boundary": {
+        "enterprise_fact_owner": "河北泰昌电力器材科技有限公司",
+        "tender_requirement_role": "仅用于确定本项目要求、年度、评分项和格式，不作为泰昌企业事实",
+        "reference_template_role": "仅参考写法和结构，不作为泰昌企业事实"
+      }
+    }
+  ]
+}

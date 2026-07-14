@@ -1,0 +1,13 @@
+﻿映射ID,语义章节键,章节名称,材料状态,匹配别名,事实引用数,证据包数,知识资产数,证据包ID,缺口或门禁,客户确认项
+TECH-PARAM-CPVC,technical_characteristics.cpvc,CPVC技术特性参数表,已有资料,CPVC技术特性；CPVC技术参数；PVC-C技术参数；CPVC技术响应,1,1,0,taichang-evidence-4c9d64c00d89cb7b78f2,,
+TECH-PARAM-MPP,technical_characteristics.mpp,MPP技术特性参数表,已有资料,MPP技术特性；MPP技术参数；改性聚丙烯技术参数；MPP技术响应,1,1,0,taichang-evidence-5233af6e2133a8e25641,,
+TECH-QUALITY-CONTROL,manufacturing.quality_control,产品制造质量控制,部分可用,产品制造质量控制；质量管控体系；工序质量控制；制造质量保证,1,2,15,taichang-evidence-792812eabf8d9567854f；taichang-evidence-c37bef6d5bdbe4f32cb1,历史 Word 工艺资料仅为 knowledge_only，不能单独证明当前项目正式质量承诺。,项目质量目标；质量保证期；当前招标适用标准
+TECH-PROCESS-CPVC,manufacturing.process.cpvc,CPVC生产工艺,部分可用,CPVC生产工艺；PVC-C工艺流程；CPVC制造工艺,1,1,15,taichang-evidence-4c9d64c00d89cb7b78f2,现有可入库历史工艺资料为电缆保护管通用资料，缺少经核验的 CPVC 专属完整工艺文件。,
+TECH-PROCESS-MPP,manufacturing.process.mpp,MPP生产工艺,部分可用,MPP生产工艺；改性聚丙烯工艺流程；MPP制造工艺,1,1,15,taichang-evidence-5233af6e2133a8e25641,现有可入库历史工艺资料为电缆保护管通用资料，缺少经核验的 MPP 专属完整工艺文件。,
+TECH-PROCESS-NHAP,manufacturing.process.nhap,N-HAP生产工艺,缺原件,N-HAP生产工艺；涂塑钢制电缆导管工艺；涂塑钢管制造工艺,1,0,0,,仅有历史报告编号，无原始检验报告；不得生成正式参数或覆盖结论。；缺少经核验的 N-HAP 专属工艺文件。,
+TECH-PROCESS-UPVC,manufacturing.process.upvc,UPVC生产工艺,缺原件,UPVC生产工艺；硬聚氯乙烯电缆导管工艺；UPVC制造工艺,1,0,0,,仅有历史报告编号，无原始检验报告；不得生成正式参数或覆盖结论。；缺少经核验的 UPVC 专属工艺文件。,
+TECH-TEST-EQUIPMENT,testing.equipment_and_calibration,试验检测设备及校准资料,部分可用,试验检测设备；检测设备一览表；计量校准；检验设备,1,6,0,taichang-evidence-2bf8bf27b27d8ce407cc；taichang-evidence-508e8e613ca60ada061b；taichang-evidence-8eabd69844ab6ab91f02；taichang-evidence-96036c84ed4ce31e0ad4；taichang-evidence-9fdd36654ca483e6a069；taichang-evidence-f0f800fd3a615899dbfd,证据包需按投标日复核校准有效期；不得随机抽取单页替代完整设备证据包。,
+TECH-INSPECTION-REPORTS,testing.inspection_reports,产品检验报告,已有资料,检验报告；型式试验报告；检测报告；产品检验,1,2,0,taichang-evidence-4c9d64c00d89cb7b78f2；taichang-evidence-5233af6e2133a8e25641,,
+TECH-SERVICE-AFTERSALES,service.after_sales_and_quality_plan,技术服务、售后服务与质量方案,部分可用,技术服务；售后服务；质量保证方案；服务承诺；质量承诺,0,0,0,,尚无独立核验的泰昌技术服务/售后制度事实；P1-05 只能接入经批准的企业知识。；交货响应、到场时限、质保期限、违约责任等承诺值必须以当前招标要求和客户确认为准。,质保期限；售后响应时限；现场服务范围；备品备件承诺；违约责任
+TECH-GREEN-LOW-CARBON,enterprise.green_low_carbon,绿色低碳与环境管理,部分可用,绿色低碳；绿色工厂；环境保护；碳足迹；绿色制造,1,1,106,taichang-evidence-792812eabf8d9567854f,历史绿色低碳图片为 knowledge_only，正式评分材料须按当前评分项核验。,
+TECH-MANUFACTURING-CAPACITY,manufacturing.capacity,生产制造能力,部分可用,生产制造能力；生产设备；生产线；厂房及生产环境,0,0,2,,历史环境图片只作知识资料；正式配图必须另行通过 formal_bid_ready 门禁。,
