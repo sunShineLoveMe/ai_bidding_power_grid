@@ -2,11 +2,14 @@
 
 > 面向电力/电网企业的 AI 标书编制工作台，支持本地开发、私有化部署和阿里云交付。
 
+**AI Bidding Workbench for Power Grid Projects** — an open-source, end-to-end AI document intelligence platform for power-grid bidding workflows. It combines OCR/document parsing, RAG with pgvector and reranking, LLM-assisted drafting and compliance checks, structured DOCX export, and private/cloud deployment.
+
+
 招标文件上传 → OCR 解析 → 结构化解读 → 分册大纲 → 章节正文 → 合规检查 → DOCX 导出，全流程 AI 辅助，企业知识库驱动，数据本地可控。
 
 [![Python](https://img.shields.io/badge/Python-3.9+-blue)](https://python.org)
 [![React](https://img.shields.io/badge/React-18-blue)](https://react.dev)
-[![License](https://img.shields.io/badge/License-TBD-lightgrey)](#license)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
@@ -276,4 +279,6 @@ Mac M1/M2 使用 Homebrew 安装通常是 `/opt/homebrew/bin/soffice`；Linux �
 
 ## License
 
-请根据实际开源计划补充许可证。若暂未确定，建议先不要公开发布为可商用许可证。
+本项目采用 [MIT License](LICENSE) 开源。欢迎在遵守许可证条款的前提下使用、修改和分发。
+
+Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
