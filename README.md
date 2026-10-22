@@ -1,284 +1,160 @@
 # 电力 AI 标书系统
+**AI Bidding Workbench for Power Grid Projects**
 
-> 面向电力/电网企业的 AI 标书编制工作台，支持本地开发、私有化部署和阿里云交付。
+把招标文件、企业知识库和标书编写放进同一个工作台：解析要求、规划分册、辅助写作、检查响应覆盖，最后导出可编辑的 Word 标书。
 
-**AI Bidding Workbench for Power Grid Projects** — an open-source, end-to-end AI document intelligence platform for power-grid bidding workflows. It combines OCR/document parsing, RAG with pgvector and reranking, LLM-assisted drafting and compliance checks, structured DOCX export, and private/cloud deployment.
+适合电力工程、设备供货和运维服务企业的投标资料编制，也可作为企业文档智能应用的工程参考。当前默认采用 **PostgreSQL + pgvector + 本地文件存储**；Supabase 相关配置属于兼容与迁移路径。
 
+[快速开始](#快速开始) · [功能与架构](#功能与架构) · [部署文档](docs/deployment/quickstart.md) · [文档索引](docs/README.md)
 
-招标文件上传 → OCR 解析 → 结构化解读 → 分册大纲 → 章节正文 → 合规检查 → DOCX 导出，全流程 AI 辅助，企业知识库驱动，数据本地可控。
+## 能做什么
 
-[![Python](https://img.shields.io/badge/Python-3.9+-blue)](https://python.org)
-[![React](https://img.shields.io/badge/React-18-blue)](https://react.dev)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+| 环节 | 具体能力 |
+| --- | --- |
+| 文件解读 | 上传招标文件，提取要求、评分项与风险；可选 MinerU OCR |
+| 企业知识库 | 检索资信、产品和历史资料，使用向量召回、Rerank 与关键词兜底 |
+| 编写工作台 | 按技术、商务、资格等分册规划大纲，流式生成和编辑章节 |
+| 合规辅助 | 规则检查与 LLM 语义复核，定位响应缺失并给出补强建议 |
+| 交付与追踪 | DOCX 导出、任务记录、模型调用用量与成本记录 |
 
----
-
-## 核心亮点
-
-### 1. 两阶段 AI 章节大纲生成
-规则版骨架秒级展示，AI 精细化版在 SSE 流内同步完成后实时刷新。大纲生成前自动检索企业知识库，根据评分项数量动态计算最小章节数（`max(25, 评分项×2)`），确保每个评分项都有对应章节响应。
-
-→ [详细说明](docs/features/outline-generation.md)
-
-### 2. 企业知识库驱动的正文生成
-章节正文生成时自动从企业资信库、产品库、历史标书中召回相关资料，注入企业画像（7 字段）和分册写作策略（技术标/商务标/资格/报价/附件各有不同约束），生成内容贴合企业实际。
-
-→ [章节写作计划](docs/features/section-writing.md) · [分册设计](docs/features/volume-design.md)
-
-### 3. 全文篇幅精细控制
-用户设置目标页数后，系统按章节重要性、评分项数量、风险项数量动态分配每章目标字数。首轮生成不足 75% 时自动触发补写。
-
-→ [详细说明](docs/features/length-settings.md)
-
-### 4. 规则 + LLM 双轨合规检查
-三维度覆盖率（要求条款/评分项/风险项）实时仪表盘，下载前拦截高风险缺失项，支持 LLM 语义复核输出证据摘录和补强建议。
-
-→ [详细说明](docs/features/compliance.md)
-
-### 5. 企业私有 RAG 知识库
-pgvector 向量检索 + DashScope Rerank 重排 + 关键词兜底，支持图片资产内联、来源引用和模型追问建议。当前项目默认面向电力/电网场景建设企业知识库，历史水利种子库仅作为迁移参考。
-
-→ [详细说明](docs/features/rag-knowledge-base.md)
-
-### 6. AI 用量与成本透明
-每次 LLM / Embedding / Rerank / OCR 调用均记录 Token 和人民币费用，按项目/阶段/模型汇总，支持多模型厂商适配。
-
-→ [详细说明](docs/features/cost-tracking.md)
-
-### 7. 正式 DOCX 标书导出
-下载 Word 时优先使用在线工作台当前章节快照，避免数据库旧章节导致目录和正文不一致。导出目录采用正式 Word 目录样式，包含层级缩进、点线前导符和右侧页码。后端支持在导出最后一步调用 LibreOffice headless 重新保存 DOCX，自动刷新目录页码、页脚页码和总页数，用户下载的仍然是 `.docx` 文件。
-
-→ [详细说明](docs/features/docx-export.md)
-
----
-
-## 系统架构
-
-```mermaid
-flowchart LR
-    U[用户浏览器] --> FE[Vite React 前端]
-    FE --> API[Flask API]
-
-    API --> Storage[本地 Storage / 阿里云 OSS]
-    API --> DB[(PostgreSQL / 阿里云 RDS)]
-    DB --> Vec[(pgvector)]
-
-    API --> Parser[文档解析层]
-    Parser --> Native[原生文本抽取]
-    Parser --> MinerU[MinerU OCR/版面解析]
-
-    API --> LLM[大语言模型]
-    API --> Docx[python-docx 生成 DOCX]
-    Docx --> LO[LibreOffice 刷新目录页码]
-    FE --> Tiptap[Tiptap AI 章节编辑器]
-    FE --> Office[ONLYOFFICE / 终稿编辑，可选]
-
-    Storage --> Parser
-    Parser --> DB
-    Parser --> Vec
-    Vec --> LLM
-    LLM --> API
-```
-
-**技术栈**：Flask · React 18 · TypeScript · Ant Design 5 · Tiptap · PostgreSQL + pgvector · 本地 Storage / 阿里云 OSS · DeepSeek / DashScope · MinerU
-
-→ [文档中心](docs/README.md) · [完整架构说明](docs/architecture/overview.md)
-
----
+AI 输出需要结合原始招标文件和企业材料复核；检查结果用于辅助编制，不保证中标，也不替代投标人的最终审核。
 
 ## 快速开始
 
-> 当前默认路线：本地 Docker PostgreSQL + pgvector，后续生产平移到阿里云 RDS PostgreSQL + OSS。Supabase 文档仅作为历史环境和迁移参考。
+以下为 **macOS / Linux 本地开发路径**。准备 Python 3.11 / 3.12、Node.js 22 和 Docker Compose。Windows 操作及完整配置见[部署指南](docs/deployment/quickstart.md)。
 
-```bash
-# 1. 创建并激活项目专属虚拟环境（不要复用 marker/MinerU 等其他环境，避免依赖冲突）
+### 1. 获取代码和配置
+
+~~~bash
+git clone https://github.com/sunShineLoveMe/ai_bidding_power_grid.git
+cd ai_bidding_power_grid
+
 python3 -m venv .venv
 source .venv/bin/activate
-
-# 2. 安装后端依赖
-pip install -r requirements.txt
-
-# 3. 安装并构建前端
-cd frontend && npm install && npm run build && cd ..
-
-# 4. 配置环境变量
+python -m pip install -r requirements.txt
 cp .env.example .env
-# 编辑 .env，填写 DEEPSEEK_API_KEY、DASHSCOPE_API_KEY，并确认 DATABASE_URL
-# 如需下载 DOCX 后目录页码直接准确，安装 LibreOffice 并确认 SOFFICE_BIN 路径
+~~~
 
-# 5. 启动本地 PostgreSQL
+编辑项目根目录的 .env，至少确认：
+
+| 变量 | 本地用途 |
+| --- | --- |
+| AI_PROVIDER | 默认 deepseek，选择写作模型提供方 |
+| DEEPSEEK_API_KEY | 章节写作、文件解读等模型调用 |
+| DASHSCOPE_API_KEY | 默认知识库 Embedding / Rerank；使用 DeepSeek 时仍需配置 |
+| DB_PROVIDER / DATABASE_URL | 默认 postgres，连接本地 15432 端口 |
+| STORAGE_PROVIDER | 本地运行保持 local |
+| APP_SESSION_SECRET | 替换示例值，设置至少 24 字符的随机会话密钥 |
+
+各阶段模型名称以 [.env.example](.env.example) 为准，不需要把密钥写进前端代码。系统设置页用于调整模型与企业画像等非敏感配置。
+
+### 2. 初始化本地数据库
+
+~~~bash
 docker compose up -d postgres
+docker compose ps postgres
+~~~
 
-# 6. 启动后端（统一使用 gunicorn，详见下方“后端启动方式”）
-gunicorn -c gunicorn.conf.py main:app
-# 默认监听 http://127.0.0.1:8000
-```
+等待 PostgreSQL 显示 healthy，再初始化表结构与基础定价：
 
-→ [完整部署文档](docs/deployment/quickstart.md) · [安全配置](docs/deployment/security.md) · [本地 Docker PostgreSQL](docs/deployment/local-postgres-docker.md) · [阿里云目标架构](docs/deployment/aliyun-target-architecture.md)
+~~~bash
+bash scripts/init_postgres_schema.sh
+~~~
 
-### 后端启动方式（团队统一规范）
+默认数据库连接：
 
-> 本项目为多人协作开发。为保证本地、测试、生产环境行为一致，**统一使用 gunicorn 启动后端**，不再推荐 `python main.py`（Flask 开发服务器）。
-> 原因：系统大量使用 SSE 流式响应（招标解读、大纲、正文、知识库问答都是长连接），Flask 自带的开发服务器是单进程、同步模型，多个流式连接会互相阻塞，且明确标注“不可用于生产”。gunicorn 的 gevent worker 才是和生产一致的运行模型。
-
-#### 1. 标准启动（推荐，所有人默认用这个）
-
-```bash
-source .venv/bin/activate
-gunicorn -c gunicorn.conf.py main:app
-```
-
-- 配置文件：`gunicorn.conf.py`
-- 默认监听：`http://0.0.0.0:8000`（本机访问用 `http://127.0.0.1:8000`）
-- 默认 worker：4 个 `gevent` worker，单请求超时 300 秒（适配长章节生成）
-- 启动成功会看到日志：`Starting gunicorn`、`Using worker: gevent`、`Booting worker ...`
-- 健康检查：`curl http://127.0.0.1:8000/api/health` 返回 `{"status": "ok"}`
-
-> 注意端口差异：gunicorn 默认走 **8000** 端口；旧的 `python main.py` 走的是 3012。改用 gunicorn 后，本地访问地址是 `http://127.0.0.1:8000`。如果前端 dev server 或调试脚本里写死了 3012，请同步改成 8000，或用下面的环境变量把 gunicorn 端口调成 3012。
-
-#### 2. 本地调试：开启热重载
-
-开发时希望改完代码自动重启，加 `--reload`：
-
-```bash
-source .venv/bin/activate
-gunicorn -c gunicorn.conf.py --reload main:app
-```
-
-`--reload` 仅用于本地开发，生产环境不要开启。
-
-#### 3. 通过环境变量调整启动参数
-
-`gunicorn.conf.py` 的关键参数都支持环境变量覆盖，无需改代码：
-
-| 环境变量 | 作用 | 默认值 |
-| --- | --- | --- |
-| `PORT` | 监听端口 | `8000` |
-| `WEB_CONCURRENCY` / `GUNICORN_WORKERS` | worker 数量 | `4` |
-| `GUNICORN_WORKER_CLASS` | worker 类型 | `gevent` |
-| `GUNICORN_TIMEOUT` | 单请求超时（秒） | `300` |
-| `GUNICORN_GRACEFUL_TIMEOUT` | 优雅退出超时（秒） | `30` |
-| `LOG_LEVEL` | 日志级别 | `info` |
-
-例如，想让本地 gunicorn 仍然监听 3012、只起 2 个 worker：
-
-```bash
-PORT=3012 WEB_CONCURRENCY=2 gunicorn -c gunicorn.conf.py main:app
-```
-
-#### 4. 容器 / 生产环境
-
-Docker 镜像（`Dockerfile.backend`）已默认用 gunicorn 启动，无需手动操作：
-
-```dockerfile
-CMD ["gunicorn", "-c", "gunicorn.conf.py", "main:app"]
-```
-
-容器内监听 8000，由 `docker-compose.yml` 映射到宿主机 `3012`（直连后端）或经 Nginx（前端入口 `8080`）反代。生产环境必须启用一种访问控制（登录 / 静态令牌 / 仅本地），否则后端会拒绝启动，详见 [安全配置](docs/deployment/security.md)。
-
-#### 关于 `python main.py`
-
-`main.py` 末尾仍保留 `app.run(...)`，仅用于个别需要 Flask 原生调试器的临时场景；**团队协作和提交代码时一律以 gunicorn 为准**。两种方式加载的是同一个 `main:app` 对象，业务逻辑完全一致，区别只是启动器和默认端口（dev server 3012 / gunicorn 8000）。
-
-#### 常见报错
-
-- `ModuleNotFoundError: No module named 'psycopg'`（或其他包）：说明当前 Python 环境没装本项目依赖，通常是误用了其它虚拟环境（如 marker/MinerU 环境）。请激活项目的 `.venv` 后重新 `pip install -r requirements.txt`。
-
-### 本地 Docker PostgreSQL
-
-国内企业交付路线建议先在本机用 Docker PostgreSQL + pgvector 开发验证，后续平移到阿里云 RDS PostgreSQL + OSS。
-
-```bash
-docker compose up -d postgres
-```
-
-默认连接串：
-
-```env
+~~~dotenv
+DB_PROVIDER=postgres
 DATABASE_URL=postgresql://bidding:bidding_local_dev@127.0.0.1:15432/bidding
-```
+STORAGE_PROVIDER=local
+~~~
 
-### DeepSeek 写作模型
+这里的数据库口令仅对应 Compose 中的本地开发默认值。自定义账号或端口时，同步调整 .env。更多说明见[本地 PostgreSQL](docs/deployment/local-postgres-docker.md)。
 
-标书系统按业务阶段使用 DeepSeek 模型，通过 OpenAI-compatible 协议访问 `https://api.deepseek.com/chat/completions`。招标解读、分册大纲和 LLM 语义合规复核默认使用 `deepseek-v4-pro`，用于结构判断、风险识别和复杂推理；章节正文、章节补写、知识库问答和追问建议默认使用 `deepseek-v4-flash`，用于降低批量生成成本和提升响应速度。知识库向量化和 Rerank 默认仍使用 DashScope，因此本地和生产环境需要同时配置：
+### 3. 构建页面并启动
 
-```env
-AI_PROVIDER=deepseek
-DEEPSEEK_API_KEY=your_deepseek_api_key
-DEEPSEEK_BASE_URL=https://api.deepseek.com
-DEEPSEEK_MODEL=deepseek-v4-flash
-DEEPSEEK_INTERPRETATION_MODEL=deepseek-v4-pro
-DEEPSEEK_INTERPRETATION_SEGMENT_MODEL=deepseek-v4-flash
-DEEPSEEK_OUTLINE_MODEL=deepseek-v4-pro
-DEEPSEEK_COMPLIANCE_MODEL=deepseek-v4-pro
-DEEPSEEK_SECTION_WRITING_MODEL=deepseek-v4-flash
-DEEPSEEK_SECTION_SUPPLEMENT_MODEL=deepseek-v4-flash
-DEEPSEEK_KNOWLEDGE_MODEL=deepseek-v4-flash
-DEEPSEEK_KNOWLEDGE_FOLLOWUP_MODEL=deepseek-v4-flash
-REASONING_REQUEST_TIMEOUT_SECONDS=300
-INTERPRETATION_SEGMENT_MAX_CHARS=24000
-INTERPRETATION_SEGMENT_MAX_GROUPS=24
-DASHSCOPE_API_KEY=your_dashscope_api_key
-```
+~~~bash
+cd frontend
+npm ci
+npm run build
+cd ..
 
-系统设置 - 模型配置中会展示每个业务模块当前使用的模型；解读、大纲和语义复核等 Pro 推理阶段默认允许 300 秒服务端超时，前端对应请求允许 360 秒，避免大文件解读时前端先报 `timeout of 120000ms exceeded`。招标文件正文分片数量较多或正文超过约 8 万字时，系统会自动启用“大文件分段解读”：先用 `DEEPSEEK_INTERPRETATION_SEGMENT_MODEL` 对文档分段抽取资格、评分、风险和材料要点，再用 `DEEPSEEK_INTERPRETATION_MODEL` 做最终融合去重；分段大小和最大段数由 `INTERPRETATION_SEGMENT_MAX_CHARS`、`INTERPRETATION_SEGMENT_MAX_GROUPS` 控制。用量与成本中心会按 `provider`、`model`、`stage` 记录历史调用。DeepSeek V4 Flash 成本种子脚本按客户提供的价格口径写入：输入缓存命中 0.02 元 / 百万 tokens、输入缓存未命中 1 元 / 百万 tokens、输出 2 元 / 百万 tokens；DeepSeek V4 Pro 按输入缓存命中 0.025 元 / 百万 tokens、输入缓存未命中 3 元 / 百万 tokens、输出 6 元 / 百万 tokens 写入。当前系统按缓存未命中输入价保守估算，最终仍以 DeepSeek 账单为准。
+python main.py
+~~~
 
-分册大纲落库采用“同项目串行锁 + 预生成章节 UUID + 批量写入 + 写入重试”的可靠性策略。规则版大纲、AI 精修大纲和前端重复流式请求都必须通过 `replace_bid_sections_from_outline()` 统一替换 `bid_sections`，避免网络抖动或并发 SSE 连接造成章节目录写入一半、被二次删除或 Word 导出目录错乱。当前实现仍处于从 Supabase SDK 向标准 PostgreSQL 数据访问层迁移的过程中，详细机制见 [章节大纲生成](docs/features/outline-generation.md)。
+打开 **http://127.0.0.1:3012**，从注册页创建本地账号后登录。后端同时托管 frontend/dist 中的页面。
 
-### DOCX 目录页码刷新
+另开终端检查：
 
-`python-docx` 只能写入 Word 字段，不能计算真实页码。系统导出流程已集成 LibreOffice headless：`Markdown -> python-docx DOCX -> soffice DOCX 重新保存 -> 返回 DOCX`。开启后，目录 `PAGEREF`、页脚 `PAGE/NUMPAGES` 会在服务端刷新，避免下载后目录页码全部显示为 `1`。
+~~~bash
+curl -fsS http://127.0.0.1:3012/api/health
+~~~
 
-```env
-DOCX_REFRESH_FIELDS=true
-SOFFICE_BIN=/opt/homebrew/bin/soffice
-DOCX_REFRESH_TIMEOUT_SECONDS=180
-```
+返回 status 为 ok 只说明 Web 服务启动成功；模型调用、数据库与文件导出仍需按下面的业务流程验证。
 
-Mac M1/M2 使用 Homebrew 安装通常是 `/opt/homebrew/bin/soffice`；Linux 服务器通常是 `/usr/bin/soffice`。如果服务器未安装 LibreOffice 或刷新失败，导出任务不会阻断，系统会保留 `w:updateFields=true` 和 `w:dirty=true`，由用户打开 Word 时刷新字段，同时在导出任务 metadata 中记录 `field_refresh` 报告。
+前端热更新开发时，在保持后端运行的同时，另开终端执行：
 
----
+~~~bash
+cd frontend
+npm run dev
+~~~
 
-## 文档导航
+开发页面位于 **http://localhost:5173**，Vite 将 /api 请求代理到 3012 端口。
 
-| 分类 | 文档 | 说明 |
-| --- | --- | --- |
-| 入口 | [文档中心](docs/README.md) | 新成员阅读顺序、文档分层、维护要求 |
-| 架构 | [系统架构总览](docs/architecture/overview.md) | 技术栈、架构图、业务流程 |
-| 架构 | [数据模型](docs/architecture/data-model.md) | 核心表、ER 图、对象存储目录/Bucket |
-| 功能 | [章节大纲生成](docs/features/outline-generation.md) | 两阶段流式、知识库注入、章节数量规则 |
-| 功能 | [全文篇幅设置](docs/features/length-settings.md) | 字数分配、权重计算、补写机制 |
-| 功能 | [章节写作计划](docs/features/section-writing.md) | writing_plan 字段、生成时机 |
-| 功能 | [合规检查](docs/features/compliance.md) | 规则覆盖率、LLM 语义复核 |
-| 功能 | [RAG 知识库](docs/features/rag-knowledge-base.md) | 检索链路、分片策略、种子库 |
-| 功能 | [分册设计](docs/features/volume-design.md) | 分册类型、正文生成策略 |
-| 功能 | [成本统计](docs/features/cost-tracking.md) | Token 用量、多模型兼容 |
-| 功能 | [DOCX 导出](docs/features/docx-export.md) | 正式目录、页码域、章节快照、Word 标题层级 |
-| 部署 | [快速开始](docs/deployment/quickstart.md) | 安装、配置、启动 |
-| 部署 | [本地 Docker PostgreSQL](docs/deployment/local-postgres-docker.md) | 本地数据库、pgvector、Docker 资源建议 |
-| 部署 | [Supabase 到 PostgreSQL 迁移](docs/deployment/supabase-to-postgres-migration.md) | 真实迁移流程、校验脚本、迁移记录 |
-| 部署 | [阿里云目标架构](docs/deployment/aliyun-target-architecture.md) | RDS PostgreSQL + OSS 生产部署路线 |
-| 部署 | [安全配置](docs/deployment/security.md) | CORS、认证、生产部署 |
-| 部署 | [Supabase 初始化](docs/deployment/supabase-setup.md) | 历史环境和迁移参考 |
-| 开发 | [API 接口参考](docs/development/api-reference.md) | 主要接口列表 |
-| 开发 | [项目目录结构](docs/development/project-structure.md) | 代码组织说明 |
-| 开发 | [文档制度](docs/development/documentation-standards.md) | 文档分层、维护时机、提交检查 |
-| 开发 | [路线图](docs/development/roadmap.md) | P0-P5 规划、已完成任务 |
+## 第一次体验
 
----
+1. 在「系统设置」填写企业画像，导入脱敏资信或产品材料。
+2. 上传一份招标文件，检查解析出的要求、评分项与风险。
+3. 生成分册大纲，选择一个章节生成正文并在 Tiptap 编辑器中修改。
+4. 查看响应覆盖情况和 AI 用量记录，再导出 DOCX。
 
-## 当前限制
+扫描件识别可配置 MinerU；默认 Tiptap 编辑和 Word 下载不要求部署 ONLYOFFICE。LibreOffice 用于刷新导出文件中的目录和页码，缺失时需要在 Word 中手动更新。具体安装和选项见[部署指南](docs/deployment/quickstart.md)。
 
-- PDF 解析质量取决于文件类型，扫描版建议走 MinerU/OCR
-- 历史水利行业种子库只适合迁移参考，电力/电网知识库需要重新建设
-- 企业资质、人员、业绩、产品、设备、试验报告、运维案例等私有资料需用户自行入库
-- 数据访问层正在从 Supabase SDK 迁移到标准 PostgreSQL + 本地/OSS 存储抽象
-- 当前定位为单机版 / 私有化 MVP，尚未达到公网生产部署标准
+## 功能与架构
 
----
+~~~mermaid
+flowchart LR
+    A["招标文件 / 企业资料"] --> B["Flask API / 解析与任务"]
+    B <--> C["PostgreSQL + pgvector"]
+    B <--> D["LLM / Embedding / Rerank"]
+    B --> E["React 编写工作台"]
+    E --> F["合规辅助 / DOCX 导出"]
+~~~
 
-## License
+- **前端**：React 18、TypeScript、Vite、Ant Design、Tiptap。
+- **后端**：Flask、Python、模型接口适配、文档解析与导出模块。
+- **数据**：PostgreSQL、pgvector、本地文件存储；可选 OSS。
 
-本项目采用 [MIT License](LICENSE) 开源。欢迎在遵守许可证条款的前提下使用、修改和分发。
+| 路径 | 内容 |
+| --- | --- |
+| frontend/ | 编写、知识库、资信、产品与用量页面 |
+| backend/ai/ | 大纲、章节写作、解读与合规逻辑 |
+| backend/rag/ | 入库、检索和向量存储 |
+| backend/export/ | Markdown 到 DOCX 的转换 |
+| migrations/postgres/ | PostgreSQL 表结构与迁移 |
+| tests/ | 后端回归测试 |
 
-Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+## 开发验证与常见问题
+
+~~~bash
+# 项目根目录，已激活 Python 环境
+python -m unittest discover -s tests
+
+# 前端构建与 TypeScript 检查
+cd frontend
+npm run build
+~~~
+
+| 现象 | 先检查 |
+| --- | --- |
+| 首页提示缺少 Vite 产物 | 是否执行 frontend 下的 npm run build |
+| 注册或项目列表报表不存在 | 是否执行数据库初始化脚本，DATABASE_URL 是否指向同一实例 |
+| 写作可用、知识库失败 | 是否同时配置 DASHSCOPE_API_KEY |
+| 容器部署端口和本地不同 | 完整 Compose 的前端是 8080；本节本地方案是 3012 / 5173 |
+| 导出页码未刷新 | LibreOffice / SOFFICE_BIN 配置及 Word 域更新 |
+
+## 延伸阅读与许可
+
+[部署与配置](docs/deployment/quickstart.md) · [安全与访问控制](docs/deployment/security.md) · [架构](docs/architecture/overview.md) · [API](docs/development/api-reference.md) · [功能文档](docs/README.md)
+
+代码按 [MIT License](LICENSE) 分发。示例资料的来源和使用说明见对应目录；实际业务请使用有权处理的企业材料。
